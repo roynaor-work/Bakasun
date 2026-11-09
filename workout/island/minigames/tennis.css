@@ -123,3 +123,6 @@
 .game-screen[data-game=tennis] .tennis-rating.pop{animation:tennis-rating-pop .75s ease-out both}
 @keyframes tennis-rating-pop{0%{transform:translateY(8px) scale(.4);opacity:0}18%{transform:translateY(0) scale(1.25);opacity:1}40%{transform:scale(1)}100%{transform:translateY(-16px) scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .tennis-rating.pop{animation:none;opacity:1}}
+
+/* v13: the hit bar waits for the child while the ball is on its way: a soft glow, the needle climbs while the button is held */
+.game-screen[data-game=tennis] .tennis-serve-meter[data-mode=hit][data-incoming=true]{box-shadow:0 0 12px #67d398aa}

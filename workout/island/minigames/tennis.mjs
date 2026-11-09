@@ -79,7 +79,9 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       const score=1-q.timingWeight*Math.abs(timing)-(1-q.timingWeight)*(1-quality);grade=score>=q.good?'good':score>=q.medium?'medium':'weak';
     }
     const dev=state.charge-guide.need,green=guide.tol,yellow=green+(config.v9.meter.yellow??.2);
-    return {active:Boolean(preparing)&&state.phase==='rally'&&!(H&&state.charge<config.v9.hold.tapSeconds/config.v9.hold.seconds),value:clamp(.5+dev,0,1),zone:Math.abs(dev)<=green?'green':Math.abs(dev)<=yellow?'yellow':'red',grade,greenHalf:green,yellowHalf:yellow};
+    // v13: the bar is up from the moment the opponent's ball is on its way (not only while the button is held), so the child sees the target and the needle before pressing.
+    const incoming=state.phase==='rally'&&state.shot?.side===1&&state.ball.lastHitter===1&&state.contact?.side===0;
+    return {active:state.phase==='rally'&&(Boolean(preparing)||incoming),incoming:incoming&&!preparing,value:clamp(.5+dev,0,1),zone:Math.abs(dev)<=green?'green':Math.abs(dev)<=yellow?'yellow':'red',grade,greenHalf:green,yellowHalf:yellow};
   }
   function emit(type, details = {}) { state.event = { id: state.event.id + 1, type, ...details };state.feedback={kind:type,age:0,...details}; }
   function prepareServe() {
@@ -108,10 +110,12 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   function aiMinHeight(){return V9?v9c.opponent.lowMinHeight:contactConfig.minHeight;}
   function aiReaction(z){return level.reaction+(V9&&z>-v9c.opponent.shortZ?v9d('shortDelay',0):0);}
   function aiSpeed(z){const base=Math.max(level.speed,p.speedByRank[0]*config.opponent.minimumSpeedRatio);if(!V9||z<=-v9c.opponent.shortZ)return base;const r=v9d('shortRun',null);return r?clamp(base*r.mul,r.min,r.max):base;}
+  // A drop that is played TO the child must be returnable: it lands a few metres behind the net, and after the bounce it rises to at least `minApex` metres.
+  function dropBounce(downSpeed,g){const d=config.drop;return clamp(Math.max(d.bounce,Math.sqrt(2*g*Math.max(0,(d.minApex||0)-c.radius))/Math.max(.1,Math.abs(downSpeed))),d.bounce,d.maxBounce||.85);}
   function planContact() {
     const b = state.ball, landing = predictLanding(b, config);
     const gravity=c.gravity+(b.spin||0)*(c.topspinGravity||.45),downSpeed = b.vy - gravity * landing.seconds;
-    const upSpeed = -downSpeed * (state.shot?.drop ? config.drop.bounce : c.bounce);
+    const upSpeed = -downSpeed * (state.shot?.drop ? (state.shot.side===1?dropBounce(downSpeed,gravity):config.drop.bounce) : c.bounce);
     const apex=c.radius+upSpeed**2/(2*gravity),height=Math.min(c.hitHeight,apex);
     const discriminant = upSpeed ** 2 - 2 * gravity * (height - c.radius);
     const afterBounce = (upSpeed - Math.sqrt(Math.max(0, discriminant))) / gravity;
@@ -161,7 +165,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       targetX += (rng() - 0.5) * (1 - level.accuracy) * c.spread;
     }
     const direction = side === 0 ? -1 : 1;
-    let targetZ=direction*(serving?court.serviceLength-c.outMargin:isDrop?config.drop.depth:isLob?config.lob.depth:(side===1?(level.shotDepth||c.depth):c.depth)+charge*config.shotPower.depthBonus);
+    let targetZ=direction*(serving?court.serviceLength-c.outMargin:isDrop?(side===1?(config.drop.aiDepth||config.drop.depth):config.drop.depth):isLob?config.lob.depth:(side===1?(level.shotDepth||c.depth):c.depth)+charge*config.shotPower.depthBonus);
     if(!serving&&side===0&&!isDrop&&!lob&&aim?.manual)targetZ-=direction*clamp(aim.z||0,-1,1)*1.5;
     let serveFault=null,forceNet=false,v9info=null;
     const serviceSign=serving?Math.sign(state.players[side].x):0;
@@ -198,6 +202,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     // Keep the physical contact point continuous; only velocity changes on return.
     // Serving also retains its current toss position.
     if(!serving)flight/=level.rallyPace||1;
+    if(isDrop&&side===1)flight=Math.max(flight,config.drop.aiFlightMin||0);
     // Solve clearance at the net for short balls, including a drop from the baseline.
     const fraction=-b.z/(targetZ-b.z);
     if(fraction>0&&fraction<1){
@@ -320,7 +325,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
         const serviceSign=state.shot.serviceSign??Math.sign(state.players[b.lastHitter].x);
         const serveOut = state.shot.serving && (Math.abs(b.z)>court.serviceLength+court.lineTolerance||b.x*serviceSign>court.lineTolerance);
         if (Math.abs(b.x) > court.halfWidth + court.lineTolerance || Math.abs(b.z) > court.halfLength + court.lineTolerance || wrongSide || serveOut) { faultOrPoint('out'); return; }
-        b.vy = -b.vy * (state.shot.drop?config.drop.bounce:c.bounce);
+        b.vy = -b.vy * (state.shot.drop?(state.shot.side===1?dropBounce(b.vy,gravity):config.drop.bounce):c.bounce);
         if(state.shot.drop){b.vx*=config.drop.horizontalBounce;b.vz*=config.drop.horizontalBounce;}else{b.vx*=1+(b.spin||0)*.045;b.vz*=1+(b.spin||0)*.045;}
         emit('bounce');
       } else { point(b.lastHitter, 'doubleBounce'); return; }

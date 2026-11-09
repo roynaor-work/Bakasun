@@ -19,13 +19,17 @@ export const PLACEMENTS=[
 export function fitZ(z,halfLength){const missing=11.885-halfLength;return Math.abs(z)>=5?Math.sign(z)*(Math.abs(z)-missing):z;}
 /** Seats (row, column) on a stand in its local frame, 5 rows x 12 columns = 60 fans per stand. */
 export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=0;col<12;col++)out.push({x:col<6?-4.5+col*.7:.95+(col-6)*.7,y:.28+row*.42-.025,z:.48+row*.88-.06,row,col});return out;}
-export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base}){
- const flag=params?.get?.('tennisStadium');
- if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
+/** v13: the package's files, fetched without needing the scene, so they download while the v7 venue is still loading. */
+export function loadStadiumAssets({T,GLTFLoader,base}){
  const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-7`,base);
- const [models,atlas,city]=await Promise.all([
+ return Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
   new T.TextureLoader().loadAsync(url('crowd-atlas.webp').href),new T.TextureLoader().loadAsync(url('evening-city.png').href)]);
+}
+export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,assets=null}){
+ const flag=params?.get?.('tennisStadium');
+ if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
+ const [models,atlas,city]=(await assets)||await loadStadiumAssets({T,GLTFLoader,base});
  const library=new Map(models),halfLength=config.court.halfLength,group=new T.Group();group.name='tennis-v12-stadium';
  const disposables=[atlas,city],track=o=>{disposables.push(o);return o;};
  atlas.colorSpace=city.colorSpace=T.SRGBColorSpace;atlas.generateMipmaps=false;atlas.minFilter=atlas.magFilter=T.LinearFilter;
@@ -37,7 +41,8 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
   model.traverse(o=>{if(!o.isMesh)return;const mesh=new T.InstancedMesh(o.geometry,o.material,holders.length),m=new T.Matrix4();
    holders.forEach((h,k)=>{m.multiplyMatrices(h.matrixWorld,o.matrixWorld);mesh.setMatrixAt(k,m);});mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;mesh.name=name;group.add(mesh);disposables.push(o.geometry);});}
  // 600 fans in one InstancedMesh: cell = variant, phase = when the hands go up.
- const plane=track(new T.PlaneGeometry(.88,1.76));plane.translate(0,.88,0);
+ const FAN=1.3; // v13: bigger fans, so the stands read as people and not as thin dotted lines from the camera
+ const plane=track(new T.PlaneGeometry(.88*FAN,1.76*FAN));plane.translate(0,.88*FAN,0);
  const count=stands.length*60,cells=new Float32Array(count*2),shades=new Float32Array(count);
  plane.setAttribute('cell',new T.InstancedBufferAttribute(cells,2));plane.setAttribute('shade',new T.InstancedBufferAttribute(shades,1));
  const cheer={value:0},material=track(new T.MeshBasicMaterial({map:atlas,side:T.DoubleSide,alphaTest:.5,color:'#b0c0cf'}));

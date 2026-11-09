@@ -40,7 +40,7 @@ export function startTennis(ctx){
    view.observeFrame(frameMs);if(view.metrics().quality>=balance.render.fallbackQuality)fallback();
   }
   audio.sync();view.render(model.getState(),paused?0:dt*(stopLeft>0?.12:1));stopLeft=Math.max(0,stopLeft-dt);
-  const s=model.getState(),ready=s.server===0&&['serve','toss'].includes(s.phase);const hm=s.hitMeter,hitOn=Boolean(hm?.active);meter.hidden=s.phase!=='toss'&&!hitOn;meter.dataset.zone=hitOn?hm.zone:s.serveZone;meter.dataset.grade=hitOn?hm.grade:'';meter.dataset.mode=hitOn?'hit':'serve';perfectBand.hidden=hitOn;if(hitOn&&meter.getAttribute('aria-label')!==t('tennis.hitMeter'))meter.setAttribute('aria-label',t('tennis.hitMeter'));else if(!hitOn&&meter.getAttribute('aria-label')!==t('tennis.accuracy'))meter.setAttribute('aria-label',t('tennis.accuracy'));
+  const s=model.getState(),ready=s.server===0&&['serve','toss'].includes(s.phase);const hm=s.hitMeter,hitOn=Boolean(hm?.active);meter.hidden=s.phase!=='toss'&&!hitOn;meter.dataset.zone=hitOn?hm.zone:s.serveZone;meter.dataset.grade=hitOn?hm.grade:'';meter.dataset.mode=hitOn?'hit':'serve';meter.dataset.incoming=String(Boolean(hitOn&&hm.incoming));perfectBand.hidden=hitOn;if(hitOn&&meter.getAttribute('aria-label')!==t('tennis.hitMeter'))meter.setAttribute('aria-label',t('tennis.hitMeter'));else if(!hitOn&&meter.getAttribute('aria-label')!==t('tennis.accuracy'))meter.setAttribute('aria-label',t('tennis.accuracy'));
   controls.dataset.tennisPhase=s.phase;
   const incoming=s.phase==='rally'&&s.contact?.side===0,near=incoming&&(s.contactWindow?.eligible??(s.contact.eta>=-s.timingWindow/2&&s.contact.eta<=s.timingWindow/2));
   controls.querySelector('#shoot').classList.toggle('hit-ready',Boolean(near));

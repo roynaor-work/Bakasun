@@ -155,7 +155,7 @@ test('the view only touches v7 through the guarded dynamic import: lazy, failure
 test('offline: tennis has its own group on the list (v7 files, the Draco decoder, the previous assets the fallback needs, audio), the shell has the new code',async()=>{
  const list=offline.games.tennis;assert.ok(Array.isArray(list));
  for(const f of [...Object.values(V7_FILES.courts),V7_FILES.venue,V7_FILES.net,V7_FILES.ball,V7_FILES.crowd,V7_FILES.crew,V7_FILES.layout])assert.ok(list.includes(env.v7.base+f),f+' is on the tennis list');
- for(const f of ['vendor/draco/draco_decoder.wasm','vendor/draco/draco_wasm_wrapper.js','assets/kid-full.glb',...env.models,...Object.values(tennis.audio.samples)])assert.ok(list.includes(f),f+' is on the tennis list');
+ for(const f of ['vendor/draco/draco_decoder.wasm','vendor/draco/draco_wasm_wrapper.js','assets/tennis-kid.glb',...env.models,...Object.values(tennis.audio.samples)])assert.ok(list.includes(f),f+' is on the tennis list');
  assert.equal(new Set(list).size,list.length);
  for(const p of list)await stat(path.join(island,p));
  assert.ok(!list.some(p=>/design\/tennis-v7/.test(p)),'the design package is not downloaded');
