@@ -1,21 +1,22 @@
-import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-5';
-import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-5';
-import './view/learning-buildings.mjs?v=island-v2-20261107-5';
-import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-5';
-import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-5';
-import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-5';
-import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-5';
-import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-5';
-import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-5';
-import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-5';
-import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-5';
-import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-5';
-import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-5';
-import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-5';
-import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-5';
-import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-5';
-import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-5';
-import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-5';
+import {splash} from './ui/boot-splash-start.mjs?v=island-v2-20261107-6';
+import {watchRelease} from './ui/release-watch.mjs?v=island-v2-20261107-6';
+import './view/learning-buildings.mjs?v=island-v2-20261107-6';
+import {LearningInterface} from './learning/interface.mjs?v=island-v2-20261107-6';
+import {DATA_VERSION,dataURL} from './release.mjs?v=island-v2-20261107-6';
+import {createTranslator} from './ui/translate.mjs?v=island-v2-20261107-6';
+import { loadData } from './engine/load-data.mjs?v=island-v2-20261107-6';
+import { createEngine } from './engine/engine.mjs?v=island-v2-20261107-6';
+import { IslandView } from './view/island-view.mjs?v=island-v2-20261107-6';
+import { IslandInterface } from './ui/interface.mjs?v=island-v2-20261107-6';
+import {createActivity} from './activity/runtime.mjs?v=island-v2-20261107-6';
+import {ActivityInterface} from './ui/activity.mjs?v=island-v2-20261107-6';
+import {installPressFeedback} from './ui/press.mjs?v=island-v2-20261107-6';
+import {installGameShell} from './ui/game-shell.mjs?v=island-v2-20261107-6';
+import {CityAccess} from './ui/city-access.mjs?v=island-v2-20261107-6';
+import {navigationActive} from './view/city-navigation.mjs?v=island-v2-20261107-6';
+import {previewMode,readOnlyStorage,installCityPreview} from './ui/city-preview.mjs?v=island-v2-20261107-6';
+import {registerOfflineWorker,startAutoDownload,prefetchRelease} from './ui/offline.mjs?v=island-v2-20261107-6';
+import {startFpsProbe,isLowQuality,resetMeasured} from './ui/device-tier.mjs?v=island-v2-20261107-6';
 
 const strings = await fetch(dataURL('./data/strings.he.json')).then(r => {
   if (!r.ok) throw new Error('strings');
@@ -62,7 +63,10 @@ try {
   // Every open: look for a newer release at once, keep the asset worker registered and
   // fill the device cache in the background (skipped on a data saver, paused during a game).
   releaseWatch.poll();if(!cityPreview)registerOfflineWorker();
-  const stopAutoDownload=cityPreview?()=>{}:startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length,onState:state=>{window.__offlineState=state;}});
+  // The frame-rate probe samples the first 10 seconds in the city (not during a game); a weak device downloads only by the button.
+  if(new URLSearchParams(location.search).get('quality')==='auto')resetMeasured();
+  if(!cityPreview)startFpsProbe({busy:()=>engine.isMinigameActive()||Boolean(ui.modalRoot.children.length)});
+  const stopAutoDownload=cityPreview?()=>{}:startAutoDownload({canRun:()=>!engine.isMinigameActive()&&!ui.modalRoot.children.length&&!document.hidden,allowed:()=>!isLowQuality(),idleMs:Number(new URLSearchParams(location.search).get('autoIdleMs'))>=0&&new URLSearchParams(location.search).has('autoIdleMs')?Number(new URLSearchParams(location.search).get('autoIdleMs')):60000,onState:state=>{window.__offlineState=state;}});
   let openedGames=false;
   const requestedGames=new URLSearchParams(location.search).get('games')==='1';
   const openRequestedGames=()=>{

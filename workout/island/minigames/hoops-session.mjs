@@ -2,18 +2,18 @@
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261107-5';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-5';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-5';
+import {gameContext} from './context.mjs?v=island-v2-20261107-6';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-6';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-6';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-5';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-5';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-5';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-5';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-5';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-5';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-5';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-6';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-6';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-6';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-6';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-6';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-6';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-6';
 
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
@@ -50,7 +50,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-5',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-6',import.meta.url).href;screenEl.append(css);
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -102,7 +102,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-5');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-6');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}

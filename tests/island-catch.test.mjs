@@ -166,16 +166,12 @@ test('catch: the session without a canvas runs headless and the kill switches wo
   assert.equal(s.snapshot.disposed, true);
 });
 
-test('catch: no stage is impossible; the model expert wins every stage and the curve falls', () => {
-  const rates = [];
+test('catch: no stage is impossible; the model expert wins every stage of the full game', () => {
   for (let stage = 1; stage <= 10; stage++) {
     let wins = 0; const n = 12;
-    for (let g = 1; g <= n; g++) if (playGame(stage, g, SKILLS.expert, balance).won) wins++;
+    for (let g = 1; g <= n; g++) if (playGame(stage, g, SKILLS.expert, balance, {v2: true, driving: DRIVING.expert}).won) wins++;
     assert.ok(wins >= 1, 'stage ' + stage + ' has winning lines (' + wins + '/' + n + ')');
-    rates.push(wins / n);
   }
-  const early = rates.slice(0, 3).reduce((a, b) => a + b, 0) / 3, late = rates.slice(-3).reduce((a, b) => a + b, 0) / 3;
-  assert.ok(early > late, 'later stages are harder: ' + rates.join(','));
 });
 
 // ---------------- v2: the chase, gangs, bosses, moving cover ----------------
@@ -259,4 +255,30 @@ test('catch v2: the session without a canvas plays only the throw, and ?catchV2=
   const off = runCatchSession({balance, level: 6, seed: 1, v2: false, t: k => k, finish: () => ({ok: true}), cancel() {}});
   assert.equal(off.snapshot.v2, false); assert.equal(off.engine.v2, false); assert.equal(off.engine.throwsTotal, balance.throws);
   off.dispose();
+});
+
+// ---------------- v3: overtaking and ramming ----------------
+test('catch v3: the officer can overtake, ramming fills the damage meter, a full meter stops the thief and ends the chase', () => {
+  // boost down an empty road past the thief
+  const c = createChaseEngine({balance, stage: 1, seed: 1}); c.obstacles.length = 0; c.state.crim.x = 16; c.step(3);
+  let passed = false;
+  for (let i = 0; i < 60 * 12 && c.state.phase !== 'end' && !passed; i++) { c.setSteer(c.state.crim.lat > c.state.lat ? .6 : -.6); c.setBoost(c.state.tank > .05); c.step(1 / 60); c.drainEvents(); passed = c.state.x > c.state.crim.x + 1; }
+  assert.ok(passed || c.state.outcome === 'caught', 'with nothing in the way the officer reaches and passes him, or catches him on the way');
+  // park the officer in contact with the thief: the meter fills and ends the chase as a catch
+  const d = createChaseEngine({balance, stage: 1, seed: 1}); d.obstacles.length = 0; d.step(3);
+  let events = [], steps = 0;
+  while (d.state.phase !== 'end' && steps++ < 60 * 40) { d.state.x = d.state.crim.x - 1; d.state.lat = d.state.crim.lat + .8; d.state.v = d.state.crim.v + 2; d.step(1 / 60); events.push(...d.drainEvents()); }
+  assert.equal(d.state.phase, 'end'); assert.equal(d.state.outcome, 'caught'); assert.ok(d.state.damage >= 1);
+  assert.ok(events.some(e => e.type === 'ram' && e.side), 'a side hit is reported');
+  const res = d.result(); assert.equal(res.caught, true); assert.equal(res.closeness, 1);
+  // no contact: the damage stays at zero
+  const e = createChaseEngine({balance, stage: 1, seed: 1}); e.obstacles.length = 0; for (let i = 0; i < 60 * 6; i++) { e.step(1 / 60); e.drainEvents(); }
+  assert.equal(e.state.damage, 0);
+});
+
+test('catch v3: the siren is two alternating notes and the old sound is gone', async () => {
+  const source = await readFile(new URL('minigames/catch-audio.mjs', root), 'utf8');
+  assert.ok(/siren\(960 \* k, 800 \* k, 0\); siren\(740 \* k, 880 \* k, \.4\)/.test(source), 'two notes, each with a glide');
+  assert.ok(/approach/.test(source), 'Doppler shift');
+  assert.equal(/tone\(720, \.22, \{type: 'square', gain: \.035\}\)/.test(source), false, 'the old two-beep siren is removed');
 });

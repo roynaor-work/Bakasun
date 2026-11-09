@@ -1,30 +1,31 @@
 import * as T from '../vendor/three.module.js';
-import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-5';
-import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-5';
-import { Avatar } from './avatar.mjs?v=island-v2-20261107-5';
-import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-5';
-import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-5';
-import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-5';
-import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-5';
-import {CityModels,cityModelsEnabled,carSpec,CITY_CARS} from './city-models.mjs?v=island-v2-20261107-5';
-import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-5';
-import { LocalModels } from './local-models.mjs?v=island-v2-20261107-5';
-import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-5';
-import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-5';
-import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-5';
-import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-5';
-import {batchMeshes} from './batch.mjs?v=island-v2-20261107-5';
-import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-5';
-import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-5';
-import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-5';
-import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-5';
-import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-5';
-import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-5';
-import {CitySites} from './city-sites.mjs?v=island-v2-20261107-5';
-import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-5';
-import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-5';
-import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-5';
-import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-5';
+import {CityDepthView} from './city-depth.mjs?v=island-v2-20261107-6';
+import { Environment, GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-6';
+import { Avatar } from './avatar.mjs?v=island-v2-20261107-6';
+import { Citizens } from './city-citizens.mjs?v=island-v2-20261107-6';
+import {cityLighting} from './city-lighting.mjs?v=island-v2-20261107-6';
+import {CityOcclusion} from './city-occlusion.mjs?v=island-v2-20261107-6';
+import { createBuilding, disposeBuilding } from './buildings.mjs?v=island-v2-20261107-6';
+import {CityModels,cityModelsEnabled,carSpec,CITY_CARS} from './city-models.mjs?v=island-v2-20261107-6';
+import { levelValue } from '../engine/metrics.mjs?v=island-v2-20261107-6';
+import { LocalModels } from './local-models.mjs?v=island-v2-20261107-6';
+import {MeshyPilot} from './meshy-pilot.mjs?v=island-v2-20261107-6';
+import {cityPaths} from '../engine/paths.mjs?v=island-v2-20261107-6';
+import {shoreDirection} from '../engine/placement-help.mjs?v=island-v2-20261107-6';
+import {pathMesh,beachDetails,disposePath} from './city-life.mjs?v=island-v2-20261107-6';
+import {batchMeshes} from './batch.mjs?v=island-v2-20261107-6';
+import {IslandRoadBatch} from './ultra-island-roads.mjs?v=island-v2-20261107-6';
+import {CityStreets} from './city-streets.mjs?v=island-v2-20261107-6';
+import {CityTraffic} from './city-traffic.mjs?v=island-v2-20261107-6';
+import {CityOverlay} from './city-overlay.mjs?v=island-v2-20261107-6';
+import {CityGrowth} from './city-growth.mjs?v=island-v2-20261107-6';
+import {planningFrame} from './planning-frame.mjs?v=island-v2-20261107-6';
+import {CitySites} from './city-sites.mjs?v=island-v2-20261107-6';
+import {ReadyPlotsView} from './ready-plots.mjs?v=island-v2-20261107-6';
+import {streetFacing} from '../engine/city-sites.mjs?v=island-v2-20261107-6';
+import {cityRoadNetwork,citySidewalkPoint} from './city-traffic-model.mjs?v=island-v2-20261107-6';
+import {walkingRoute,cityCenter} from './city-navigation.mjs?v=island-v2-20261107-6';
+import {isLowQuality,qualityOverride} from '../ui/device-tier.mjs?v=island-v2-20261107-6';
 
 // View contains geometry and pointer interpretation only. Placement rules,
 // resources, saves and all strings are owned by the engine and the UI.
@@ -280,11 +281,13 @@ export class IslandView {
       else if(this.touring){if(this.following){this.followTarget??=new T.Vector3();this.followTarget.copy(this.avatar.holder.position);this.followTarget.y=.4;this.target.lerp(this.followTarget,1-Math.exp(-delta*4));}if(this.tourMarker){this.tourMarker.position.copy(this.avatar.holder.position);this.tourMarker.position.y+=.035;}this.updateCamera();if(!this.route.length)this.clearTourPath();}
       if(!this.preview||now-(this.lastWorldRender||0)>500){this.renderWorld();this.lastWorldRender=now;}
       this.renderAvatarPreview();this.samples.push(now);while(this.samples[0]<now-1000)this.samples.shift();
-      if(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000){
+      // A device already known to be weak (device facts or an earlier measurement) goes light at the first frames; ?quality=high keeps full quality whatever the frame rate.
+      const knownLow=this.quality==='high'&&!this.preview&&isLowQuality()&&now-this.started>1200;
+      if(knownLow||(!this.preview&&now-this.started>5000&&now-this.qualityCheckedAt>2000&&qualityOverride()!=='high')){
         this.qualityCheckedAt=now;
-        if(this.quality==='high'&&this.samples.length<27){
+        if(this.quality==='high'&&(knownLow||this.samples.length<27)){
           if(this.occlusion?.enabled){this.occlusion.enabled=false;this.occlusion.dispose();this.samples=[];}
-          else{this.quality='low';this.renderer.shadowMap.enabled=false;this.sun.castShadow=false;this.environment.setQuality?.('low');this.resize();this.refreshWalkers(this.state.buildings);this.syncCity(this.state.buildings,true);}
+          else{this.quality='low';this.cityModels.enabled=false;this.renderer.shadowMap.enabled=false;this.sun.castShadow=false;this.environment.setQuality?.('low');this.resize();this.refreshWalkers(this.state.buildings);this.syncCity(this.state.buildings,true);}
         }
       }
     }

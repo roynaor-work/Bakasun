@@ -1,4 +1,4 @@
-import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-v2-20261107-5';
+import {fireRoadRoute,projectFireRoad} from './fire-roads.mjs?v=island-v2-20261107-6';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 

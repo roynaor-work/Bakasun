@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {soccerCodexMotionEnabled,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,soccerCodexHeld,SOCCER_CODEX_IDLES} from '../workout/island/minigames/soccer-codex-motion.mjs';
+import {soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,soccerCodexHeld,SOCCER_CODEX_IDLES} from '../workout/island/minigames/soccer-codex-motion.mjs';
 
 const root=new URL('../workout/island/',import.meta.url);
 const read=async f=>JSON.parse(await readFile(new URL(f,root),'utf8'));
@@ -13,13 +13,18 @@ test('flag: soccerMotionV9=0 and config.codexMotion=false switch the Codex clips
   assert.equal(soccerCodexMotionEnabled(null,'?soccerMotion=0'),true,'the arm/slide flag is a different switch');
 });
 
-test('clips.json: 15 states, prefixed, with speed, contacts and a valid shape',async()=>{
+test('run flag: soccerRunV9=0 and config.codexRun=false keep the v7 runs',()=>{
+  assert.equal(soccerCodexRunEnabled(null,''),true);assert.equal(soccerCodexRunEnabled(null,'?soccerRunV9=0'),false);assert.equal(soccerCodexRunEnabled({codexRun:false},''),false);assert.equal(soccerCodexRunEnabled(null,'?soccerMotionV9=0'),true);
+  const r=s=>soccerLadderRung(SOCCER_CODEX_RUN_LADDER,s,-1,SOCCER_CODEX_RUN_BOUNDS);assert.deepEqual([1,1.6,3,3.6,5.3,5.9,6.1,8].map(r),[0,1,1,2,2,2,3,3]);
+});
+
+test('clips.json: 17 states, prefixed, with speed, contacts and a valid shape',async()=>{
   const json=await read('assets/soccer-v9/clips.json'),states=soccerCodexStates(json);
-  assert.equal(Object.keys(states).length,15);
+  assert.equal(Object.keys(states).length,17);
   assert.ok(Object.keys(states).every(n=>n.startsWith('v9_')));
   assert.throws(()=>soccerCodexStates({schemaVersion:2}),/unexpected file/);
   for(const [name,s] of Object.entries(states)){
-    assert.ok(s.keyframes.length>=20,name);assert.equal(s.keyframes[0].time,0);assert.equal(s.keyframes.at(-1).time,1);
+    assert.ok(s.keyframes.length>=17,name);assert.equal(s.keyframes[0].time,0);assert.equal(s.keyframes.at(-1).time,1);
     assert.equal(Object.keys(s.keyframes[0].rotations).length,18);
     for(const k of s.keyframes)for(const q of Object.values(k.rotations))assert.ok(Math.abs(Math.hypot(...q)-1)<.01,`${name} unit quaternion`);
   }
@@ -68,17 +73,17 @@ const S=(extra={})=>({ball:{owner:null,flight:null,y:.11},mode:'attack',event:nu
 function steps(rt,p,s,mode,n,speed){for(let i=0;i<n;i++){if(speed!==undefined){p.vx=0;p.vz=speed;}rt.motion.update(p,s,{mode},dt);}return rt.motion.state;}
 
 test('controller: walk, jog and run rungs, brake after a run, idle after the brake; off = the previous v7 ladder',async()=>{
-  for(const [speed,want,wantOff] of [[1,'v9_walk','run_1'],[2.2,'v9_jog','run_2'],[4.5,'run_4','run_4'],[6.5,'sprint','sprint']]){
+  for(const [speed,want,wantOff] of [[1,'v9_walk','run_1'],[2.2,'v9_jog','run_2'],[4.5,'v9_run','run_4'],[6.5,'v9_sprint','sprint']]){
     assert.equal(steps(await rig(true),mk(),S(),'run',90,speed),want,`on ${speed}`);assert.equal(steps(await rig(false),mk(),S(),'run',90,speed),wantOff,`off ${speed}`);
   }
   const rt=await rig(true),p=mk(),s=S();
-  steps(rt,p,s,'run',120,4.5);assert.equal(rt.motion.state,'run_4');
+  steps(rt,p,s,'run',120,4.5);assert.equal(rt.motion.state,'v9_run');
   p.vz=0;assert.equal(steps(rt,p,s,'idle',6,0),'v9_run_brake');
   steps(rt,p,s,'idle',30,0);assert.equal(rt.motion.state,'v9_run_brake','the brake plays on while standing');
   steps(rt,p,s,'idle',120,0);assert.ok(SOCCER_CODEX_IDLES.includes(rt.motion.state),`idle after the brake: ${rt.motion.state}`);
   // Setting off again during the brake interrupts it after its first 0.2 s.
   const rt2=await rig(true),p2=mk(),s2=S();steps(rt2,p2,s2,'run',120,4.5);steps(rt2,p2,s2,'idle',6,0);steps(rt2,p2,s2,'run',40,4.5);
-  assert.ok(['run_4','v9_jog'].includes(rt2.motion.state),`running again: ${rt2.motion.state}`);
+  assert.ok(['v9_run','v9_jog'].includes(rt2.motion.state),`running again: ${rt2.motion.state}`);
 });
 
 test('controller: a walk from a standstill has no pose pop above 30 degrees (v7 stood up to 54 at the stop)',async()=>{

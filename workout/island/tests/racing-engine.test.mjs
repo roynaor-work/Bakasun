@@ -5,7 +5,7 @@ import {createRacingAudio} from '../minigames/racing-audio.mjs';
 
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function launch(config={},equipment={}){
-  const race=createRacing({stage:1,seed:3,config:{countdown:0,walls:false,equipment,stage:{opponents:0,grid:1},...config}}),tr=race.track,p=race.state.player,top=race.stage.playerSpeed*Math.min(1.16,equipment.engine||1);
+  const race=createRacing({stage:1,seed:3,config:{countdown:0,walls:false,scrub:false,equipment,stage:{opponents:0,grid:1},...config}}),tr=race.track,p=race.state.player,top=race.stage.playerSpeed*Math.min(1.16,equipment.engine||1);
   const out={t100:null,t98:null,gears:new Set(),shifts:0,rpmMin:1,rpmMax:0};let g=p.gear;
   for(let t=0;t<60*60&&out.t98===null;t++){
     const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);
@@ -61,4 +61,18 @@ test('rival engines: at most three live voices plus one shared background voice,
   const g=f.gains.slice(-4).map(n=>n.gain.value);assert.ok(g[0]>g[1]&&g[1]>g[2],'nearer rivals are louder: '+g.join(','));assert.ok(g.every(v=>v>=0&&v<=.008),'rival gain stays small');
   assert.equal(f.pans.length,4);assert.ok(f.pans[0].pan.value<0&&f.pans[1].pan.value>0);
   audio.setOpponents([]);audio.dispose();
+});
+
+test('top speed is alive: over 10 s at the rev limit the pitch hunts, drops at the limiter and the level rattles; off with topVar:false',()=>{
+  // clock-controlled fixture
+  const make=()=>{const f=audioFixture();const original=f.AudioContext;let clock=2;f.AudioContext=class extends original{get currentTime(){return clock;}set currentTime(v){}};f.setClock=v=>{clock=v;};return f;};
+  const collect=topVar=>{const f=make(),audio=createRacingAudio(f);audio.unlock();const pitches=[],levels=[];
+    for(let step=0;step<200;step++){f.setClock(2+step*.05);audio.sync(40,false,{rpm:.98,gear:7,throttle:1,topVar});pitches.push(f.oscillators[0].frequency.value);levels.push(f.gains[0].gain.value);}
+    audio.dispose();return {pitches:pitches.slice(10),levels:levels.slice(10)};};  // the first half second holds the gear-change dip
+  const range=a=>Math.max(...a)-Math.min(...a);
+  const on=collect(true),off=collect(false);
+  assert.ok(range(on.pitches)>8,'pitch range with variation: '+range(on.pitches).toFixed(2)+' Hz');
+  assert.ok(range(off.pitches)<2.5,'static without it: '+range(off.pitches).toFixed(2)+' Hz');
+  assert.ok(range(on.levels)>range(off.levels)*3+1e-6,'level varies (limiter cut + rattle)');
+  assert.ok(new Set(on.pitches.map(v=>Math.round(v*4))).size>25,'many distinct pitches over 10 s');
 });

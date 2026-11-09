@@ -1,13 +1,13 @@
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-5';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-6';
 import {sprintMeterStep} from './soccer-sprint.mjs';
-import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-5';
-import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-5';
-import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-5';
-import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-5';
-import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-5';
-import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-5';
-import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-5';
-import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-5';
+import {inPenaltyArea,keeperSaveChance,rollBall,stealApproach} from './soccer-physics.mjs?v=island-v2-20261107-6';
+import {cardEffects} from '../activity/soccer-card.mjs?v=island-v2-20261107-6';
+import {pitchCrossing,goalFrameContact} from './soccer-boundary.mjs?v=island-v2-20261107-6';
+import {fieldTarget,separatePlayers,selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-tactics.mjs?v=island-v2-20261107-6';
+import {aiPassLaneOpen,rivalPassBudget} from './soccer-teamplay.mjs?v=island-v2-20261107-6';
+import {shotLift,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-6';
+import {campaignConfig,createCampaignStats,recordCampaignEvent,leagueMatch} from './soccer-campaign.mjs?v=island-v2-20261107-6';
+import {autoSwitchDwell,assistedPassDestination,groundPassSeconds,passExecutionError,selectControlledPlayer,canContactBall,receiveBallMotion,followDribbleBall} from './soccer-assistance.mjs?v=island-v2-20261107-6';
 import {loftDestination,safeLoftPoint,createLoftFlight,stepLoftBall,loftReceptionTarget} from './soccer-loft.mjs';
 import {expandSoccerConfig,soccerMatchCards,SOCCER_EXTRAS} from './soccer-squad.mjs';
 import {compileSoccerTactics} from './soccer-design-tactics.mjs';
@@ -348,6 +348,8 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     const mayHandle=p.role==='keeper'&&inPenaltyArea(p,p,s,config)&&inPenaltyArea(p,b,s,config)&&b.lastTeam!==p.team;
     const received=s.passTarget?.player===p.id&&b.lastTeam===p.team;
     const reception=received?receiveBallMotion(p,b,config):null;
+    // v2 presentation hint (never read by the simulation): a pass has just reached him; the view plays the short first touch for the ball's height.
+    if(aiV2&&received&&p.role!=='keeper'){p.receiveTime=.5;p.receiveHeight=b.y;p.receiveSpeed=Math.hypot(p.vx,p.vz);}
     b.thrower=null;Object.assign(b,{flight:null,owner:p.id,lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace,vx:0,vz:0,vy:0,curve:0});
     if(reception)Object.assign(p,reception);
     p.hands=mayHandle;p.hold=0;
@@ -655,7 +657,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     if(consumedKick){held=false;pendingKick=pendingSlide=pendingRelease=false;}
     if(consumedPass)pendingPass=pendingPassStart=pendingPassRelease=false;
     if(consumedKick&&input.kickHeld||consumedPass&&input.passHeld)input={...input,kickHeld:consumedKick?false:input.kickHeld,passHeld:consumedPass?false:input.passHeld};
-    for(const p of players){p.cooldown=Math.max(0,p.cooldown-step);p.kickTime=Math.max(0,p.kickTime-step);p.stealTime=Math.max(0,p.stealTime-step);p.headerTime=Math.max(0,p.headerTime-step);p.diveTime=Math.max(0,p.diveTime-step);p.diveCooldown=Math.max(0,(p.diveCooldown||0)-step);p.throwTime=Math.max(0,p.throwTime-step);p.catchTime=Math.max(0,p.catchTime-step);p.think-=step;p.slideCooldown=Math.max(0,p.slideCooldown-step);p.stealCooldown=Math.max(0,p.stealCooldown-step);p.recover=Math.max(0,p.recover-step);}
+    for(const p of players){p.cooldown=Math.max(0,p.cooldown-step);if(p.receiveTime>0)p.receiveTime=Math.max(0,p.receiveTime-step);p.kickTime=Math.max(0,p.kickTime-step);p.stealTime=Math.max(0,p.stealTime-step);p.headerTime=Math.max(0,p.headerTime-step);p.diveTime=Math.max(0,p.diveTime-step);p.diveCooldown=Math.max(0,(p.diveCooldown||0)-step);p.throwTime=Math.max(0,p.throwTime-step);p.catchTime=Math.max(0,p.catchTime-step);p.think-=step;p.slideCooldown=Math.max(0,p.slideCooldown-step);p.stealCooldown=Math.max(0,p.stealCooldown-step);p.recover=Math.max(0,p.recover-step);}
     for(const p of players)if(p.restartMotion&&!p.distribution&&!(s.restart?.player===p.id)){
       sampleRestartAction(p.restartMotion.kind,p.restartMotion.elapsed+step,p.restartMotion);
       if(p.restartMotion.stage==='complete')p.restartMotion=null;

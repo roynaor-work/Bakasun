@@ -1,0 +1,36 @@
+{
+ "before": {
+  "pitchHz": {
+   "mean": 187.0012,
+   "sd": 0.405,
+   "min": 186.4286,
+   "max": 187.5714,
+   "distinct": 190
+  },
+  "level": {
+   "mean": 0.0224,
+   "sd": 0,
+   "min": 0.0224,
+   "max": 0.0224,
+   "distinct": 1
+  },
+  "limiterCuts": 0
+ },
+ "after": {
+  "pitchHz": {
+   "mean": 186.374,
+   "sd": 4.6095,
+   "min": 174.4782,
+   "max": 195.7659,
+   "distinct": 190
+  },
+  "level": {
+   "mean": 0.0219,
+   "sd": 0.0029,
+   "min": 0.0092,
+   "max": 0.0244,
+   "distinct": 10
+  },
+  "limiterCuts": 4
+ }
+}

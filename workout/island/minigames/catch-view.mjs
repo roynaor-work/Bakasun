@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createActor} from './catch-actors.mjs?v=island-v2-20261107-5';
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-5';
+import {createActor} from './catch-actors.mjs?v=island-v2-20261107-6';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-6';
 
 /** Three.js side of "תפוס את הפושע". One street from the island's city models
  * (assets/game-catch/models: quantized, WebP-textured copies of the city-lab Meshy models; no WebAssembly because the island's CSP has no exception for it),
@@ -374,8 +374,12 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
     const px = st.x - chaseShift, cx = st.crim.x - chaseShift;
     sirenPhase += dt * 9;
     playerCar.position.set(px, 0, laneZ(st.lat)); playerCar.rotation.y = -st.steer * .28; playerCar.rotation.z = -(st.boosting ? .03 : 0);
-    const brake = st.phase === 'end' ? (crimBrake = Math.max(0, crimBrake - dt * 1.4)) : 1;
-    crimCar.position.set(cx + (1 - brake) * 3, 0, laneZ(st.crim.lat)); crimCar.rotation.y = -clamp((st.crim.targetLat - st.crim.lat) * .5, -.3, .3);
+    const brake = st.phase === 'end' ? (crimBrake = Math.max(0, crimBrake - dt * 1.4)) : 1, caught = st.outcome === 'caught';
+    crimCar.position.set(cx + (1 - brake) * 3, 0, laneZ(st.crim.lat));
+    const skid = caught ? (1 - brake) * 1.1 : 0;
+    crimCar.rotation.y = -clamp((st.crim.targetLat - st.crim.lat) * .5, -.3, .3) - skid; crimCar.rotation.z = Math.sin(sirenPhase * 2.3) * st.damage * .03;
+    // a battered car smokes, more the more it has taken
+    if (st.damage > .2 && Math.random() < st.damage * .7) dust.emit(cx + 1.2, 1.0, laneZ(st.crim.lat), 1, {speed: 1, up: 1.6, color: [.5, .5, .5], gravity: -1.2, life: .9});
     flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(sirenPhase * 3) * .4); flameC.visible = st.crim.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(sirenPhase * 3) * .35);
     const red = Math.sin(sirenPhase) > 0; redLight.visible = red; blueLight.visible = !red;
     // obstacles inside the window around the officer
@@ -400,6 +404,7 @@ export async function createCatchView({canvas, engine: initialEngine = null, bal
       for (const e of events) {
         if (e.type === 'crash') { cam.shake += .7; sparks.emit(playerCar.position.x + 2, .8, playerCar.position.z, 18, {speed: 4, up: 3, color: [1, .8, .4], life: .6}); dust.emit(playerCar.position.x + 2, .3, playerCar.position.z, 8, {speed: 3, up: 1.5, color: [.7, .65, .55], gravity: 1}); }
         else if (e.type === 'crimCrash') { cam.shake += .3; sparks.emit(crimCar.position.x, .8, crimCar.position.z, 14, {speed: 4, up: 3, color: [.8, .9, 1], life: .5}); }
+        else if (e.type === 'ram') { cam.shake += .35; sparks.emit((playerCar.position.x + crimCar.position.x) / 2, .9, (playerCar.position.z + crimCar.position.z) / 2, e.side ? 22 : 12, {speed: 4, up: 2.5, color: [1, .85, .5], life: .5}); }
         else if (e.type === 'pad') sparks.emit(playerCar.position.x, .3, playerCar.position.z, 12, {speed: 2.5, up: 2.5, color: [.5, 1, .7], life: .6});
       }
     },
