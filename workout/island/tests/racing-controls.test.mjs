@@ -22,7 +22,7 @@ const fire=(target,type,values={})=>{const event=new Event(type,{cancelable:true
 function controlsFixture(t){
   const doc=new EventTarget();doc.defaultView=new EventTarget();doc.hidden=false;
   doc.createElement=tag=>new Element(tag,doc);doc.createElementNS=(_,tag)=>new Element(tag,doc);
-  const root=doc.createElement('div'),canvas=doc.createElement('canvas'),controls=createRacingControls({root,canvas,t:key=>key});
+  const root=doc.createElement('div'),canvas=doc.createElement('canvas'),controls=createRacingControls({root,canvas,t:key=>key,automatic:true});
   t.after(()=>controls.dispose());
   const walk=element=>[element,...element.children.flatMap(walk)],elements=walk(root);
   const slider=elements.find(element=>element.className==='racing-steer'),wheel=elements.find(element=>element.className==='racing-wheel');
