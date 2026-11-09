@@ -99,3 +99,26 @@ test('Naval v9 bases: every cannon shows its landing point first, fires it exact
  assert.ok(tele.length>10,'base shells were fired');assert.ok(Math.min(...tele)>=1.9,`warning is shown at least ~2 s before the shell flies: ${Math.min(...tele)}`);
  assert.ok(dodge<still*.5,`dodging cuts the damage (${dodge} vs ${still})`);
 });
+
+import {navalWideYaw} from '../workout/island/minigames/naval-aim-flag.mjs';
+test('Naval v20: far-off-bow aiming is reachable: smooth, monotone, reversible, fine near the start, 40 degrees within a thumb',()=>{
+ let last=-1;for(let d=0;d<=260;d+=5){const y=navalWideYaw(d,nb)*180/Math.PI;assert.ok(y>last,`monotone at ${d}`);last=y;assert.ok(Math.abs(navalWideYaw(-d,nb)+navalWideYaw(d,nb))<1e-12,'symmetric and reversible');}
+ assert.ok(Math.abs(navalWideYaw(10,nb)*180/Math.PI-1.29)<.1,'fine control near the start (about 0.13 deg/px)');
+ const px=target=>{let d=0;while(navalWideYaw(d,nb)*180/Math.PI<target&&d<1000)d++;return d;};
+ assert.ok(px(40)<=160,`40 degrees in ${px(40)} px`);assert.ok(px(60)<=200,`60 degrees in ${px(60)} px`);
+ const old=target=>Math.ceil(target/nb.aimControls.follow.yawFixed);assert.ok(old(40)>300&&px(40)<old(40)/2,'at least twice as little thumb travel as the v9 fixed gain');
+});
+
+test('Naval v20 air: aircraft arrive on stages 12, 20 and 27, every shot is telegraphed, and the Vulcan brings them down in bursts (heat-limited)',()=>{
+ for(const stage of [12,20,27]){
+  const m=createNavalModel({config,balance:nb,level:stage,seed:5,random:seededRandom(5)});let seenAir=0,tele=[],maxHeat=0,overheated=false;const marks=new Map();
+  for(let i=0;i<9000&&!m.result;i++){m.update(.02,{});seenAir=Math.max(seenAir,m.air.length);
+   for(const a of m.air)if(a.attack&&!marks.has(a.attack))marks.set(a.attack,{first:m.time,fire:a.attack.fireTime});
+   const v=m.vulcan;maxHeat=Math.max(maxHeat,v.heat);overheated=overheated||v.overheated;}
+  const v=m.vulcan;
+  assert.ok(v.spawned>=2,`stage ${stage}: aircraft spawned ${v.spawned}`);assert.ok(v.kills>=1,`stage ${stage}: Vulcan kills ${v.kills}`);assert.ok(v.shots>20&&v.hits>0&&v.hits<v.shots,'it fires bursts and does not always hit');
+  for(const mk of marks.values())assert.ok(mk.fire-mk.first>=1.29,`warning at least 1.3 s (${mk.fire-mk.first})`);
+  assert.ok(maxHeat<=1+1e-9);
+ }
+ for(const stage of [1,5,11])assert.equal(createNavalModel({config,balance:nb,level:stage,seed:1,random:seededRandom(1)}).vulcan,null,'no aircraft on other stages');
+});

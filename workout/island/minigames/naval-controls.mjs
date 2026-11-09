@@ -1,5 +1,5 @@
 import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-7';
-import {navalAimLegacy,navalReleaseSample} from './naval-aim-flag.mjs';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample} from './naval-aim-flag.mjs';
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-7';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
@@ -91,6 +91,7 @@ export function createNavalInput(ctx,getModel,getView){
  const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
   if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,reachConfig);}
   else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,reachConfig);
+  if(g.engaged&&navalAimWide())g.aim={...g.aim,yaw:g.start.yaw+navalWideYaw(g.dx,balance.aimControls?{aimControls:balance.aimControls}:{})};
   g.lastX=x;g.lastY=y;g.lastT=t??performance.now();if(g.aim)(g.hist||(g.hist=[])).push({t:g.lastT,yaw:g.aim.yaw,elevation:g.aim.elevation});if(g.hist?.length>40)g.hist.shift();};
  const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
  const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance,m?.ammoIndex),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};

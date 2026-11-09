@@ -7,6 +7,7 @@ import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-7';
 import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-7';
 import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-7';
 import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-7';
+import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-7';
 import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-7';
 import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-7';
 import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
@@ -188,7 +189,7 @@ export function createNavalView(ctx,model,adapters={}) {
   const player=createVessel(THREE,r,model.equipment,{player:true},balance.playerModel,v7opt(NAVAL_V7.kinds.player,'tide'));player.root.scale.setScalar(r.playerScale);scene.add(player.root);
   const vessels=model.enemies.map(e=>{const type=balance.shipTypes[e.kind],variant=e.boss?balance.boss:type,scale=type.scale*(e.boss?balance.boss.scale:1),spec=variant.modelSpec||(balance.enemyModel&&{...balance.enemyModel,length:(balance.playerModel?.length??balance.enemyModel.length)*r.playerScale/scale});const v=type.submarine?createSubmarine(r,r.effects):createVessel(THREE,{...r,hull:variant.hull},{},variant,spec,v7opt(NAVAL_V7.kinds[e.boss?'boss':e.kind],'ember'));v.root.rotation.y=Math.PI;v.root.scale.setScalar(scale);scene.add(v.root);return v;});
   const scenery=createNavalEffects(scene,seaMaterial,model,balance),adventure=createNavalScenery(scene,model,balance,adapters);
-  const projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
+  const airView=createNavalAirView(scene,model,balance),projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
   const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);aimLine.userData.noReflect=true;scene.add(aimLine);
   const arc=createNavalAimArc(scene,model,balance),dressing=createNavalDressing(scene,balance,{maxShips:model.enemies.length+1});
   const projected=new THREE.Vector3(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),intersection=new THREE.Vector3();camera.updateMatrixWorld();const positions=seaGeometry.attributes.position;
@@ -216,7 +217,7 @@ export function createNavalView(ctx,model,adapters={}) {
     v.flag.visible=false;v.flag.rotation.y=Math.sin(model.time*4)*.2;v.shield.visible=e.shield>0;v.smoke.visible=e.hp<e.maxHp;v.flame.visible=e.hp<e.maxHp;
     v.smoke.position.y=3+(model.time%2);v.smoke.scale.setScalar(.6+(model.time%2)*.5);v.flame.position.set(.95,e.hp<e.maxHp?2.6:.85,1.35);v.flame.quaternion.copy(v.root.quaternion).invert().multiply(camera.quaternion);v.flame.scale.set(.6+Math.sin(model.time*17)*.05,1.6+Math.sin(model.time*12)*.18,1);v.foam.visible=false;
   }
-  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);arc.dispose();dressing.dispose();v7api?.dispose();environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
+  function dispose(){if(disposed)return;disposed=true;canvas.removeEventListener('webglcontextlost',onLost);arc.dispose();dressing.dispose();v7api?.dispose();environment.dispose();adventure.dispose();player.dispose();for(const v of vessels)v.dispose();projectiles.dispose();airView.dispose();impacts.dispose();scenery.dispose();smokeTexture.dispose();smokeMaterial.dispose();flashMaterial.dispose();gatlingMaterial.dispose();for(const g of [seaGeometry,sunGeometry,aimGeometry,flashGeometry,gatlingGeometry,salvoGeometry,muzzleSmokeGeometry])g.dispose();for(const m of [seaMaterial,sunMaterial,aimMaterial])m.dispose();renderer.dispose();renderer.forceContextLoss();canvas.width=canvas.height=0;}
   /** Share of the screen height the player's hull occupies (aim framing target). */
   const frameBox=new THREE.Box3(),corner=new THREE.Vector3();
   // Measured from the hull's actual vertices (every 4th), not its bounding box.
@@ -242,7 +243,7 @@ export function createNavalView(ctx,model,adapters={}) {
         const hulls=[{x:player.root.position.x,z:player.root.position.z,yaw:player.root.rotation.y,length:player.modelLength||11,speed:(model.playerShip.speed||0)*r.worldScale,visible:true}];
         for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];hulls.push({x:v.root.position.x,z:v.root.position.z,yaw:v.root.rotation.y,length:v.modelLength||9*(e.hullScale||1),speed:Math.hypot(e.vx||0,e.vz||0)*r.worldScale,visible:e.active&&e.hp>0&&!(balance.shipTypes[e.kind].submarine&&e.depth>0)});}
         const b=model.blast;dressing.update(hulls,model.time,{life:b.life,critical:b.critical,wx:b.z*r.enemySpacing/balance.combat.laneSpacing,wz:-(b.x-balance.shipX)*r.worldScale},config.visuals.blastSeconds);
-        projectiles.update(camera);impacts.update(camera);arc.update(camera);
+        projectiles.update(camera);airView.update();impacts.update(camera);arc.update(camera);
         aimLine.visible=false;
         renderer.info.reset();renderer.render(scene,camera);peakTriangles=Math.max(peakTriangles,renderer.info.render.triangles);peakDrawCalls=Math.max(peakDrawCalls,renderer.info.render.calls);p.drawImage(canvas,0,0,config.width,config.height);
         return true;

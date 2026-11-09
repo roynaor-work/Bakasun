@@ -1,4 +1,4 @@
-import {polishLegacy,polishValue} from './polish-flag.mjs';
+import {polishLegacy,polishValue,fireV20} from './polish-flag.mjs';
 /** Deterministic street graph for lane assistance and optional point navigation.
  * Coordinates and tuning come from fireRescue.city. */
 const EPS=1e-7;
@@ -113,7 +113,7 @@ export function slideFireTruck(truck,dx,dz,buildings,vehicle){
   return Math.hypot(truck.x-start.x,truck.z-start.z);
 }
 export function createFireDriver(truck,balance){
-  const legacyFeel=polishLegacy('fireTruck'),noPivot=legacyFeel||polishValue('fireTruck')==='v8';
+  const legacyFeel=polishLegacy('fireTruck'),drawFollow=fireV20('fireDraw'),noPivot=legacyFeel||polishValue('fireTruck')==='v8';
   const route=createRouteDriver(truck,balance),roads=route.roads,v=balance.vehicle,city=balance.city;
   let routed=false,blockedSeconds=0,assistedUntil=0,clock=0;
   return {roads,update(dt,input={}){
@@ -175,6 +175,9 @@ export function createFireDriver(truck,balance){
     const moved=Math.hypot(truck.x-oldX,truck.z-oldZ);
     if(input.assisted){blockedSeconds=throttle&&travel>.01&&moved<travel*.2?blockedSeconds+dt:Math.max(0,blockedSeconds-dt*2);if(!throttle){blockedSeconds=0;assistedUntil=0;}}
     truck.velocityX=(truck.x-oldX)/dt;truck.velocityZ=(truck.z-oldZ)/dt;
+    // 09/11/2026: the picture follows the real motion. Sliding along a wall or being pulled into a lane never shows the truck sideways.
+    {const sp=Math.hypot(truck.velocityX,truck.velocityZ);if(truck.drawYaw===undefined)truck.drawYaw=truck.yaw;
+     const goal=sp>1.5&&drawFollow?Math.atan2(-truck.velocityX,-truck.velocityZ):truck.yaw,d=angleTo(truck.drawYaw,goal);truck.drawYaw+=clamp(d*(1-Math.exp(-14*dt)),-7*dt,7*dt);}
     truck.targetX=truck.x+dx;truck.targetZ=truck.z+dz;
     truck.driving=input.assisted?moved/dt>.06:truck.speed>EPS;truck.blocked=Boolean(input.assisted&&blockedSeconds>.12);truck.wheelRotation+=moved/v.wheelRadius;
     return moved;

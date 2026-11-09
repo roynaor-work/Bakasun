@@ -5800,6 +5800,16 @@
      "drift": 17.35,
      "concurrent": 3,
      "seconds": 218,
+     "air": {
+      "from": 25,
+      "every": 34,
+      "count": 2,
+      "kinds": [
+       "plane",
+       "heli"
+      ],
+      "hpScale": 1
+     },
      "feature": "feature.naval.12",
      "ammunition": [
       40,
@@ -6241,6 +6251,16 @@
      "drift": 20.15,
      "concurrent": 3,
      "seconds": 254,
+     "air": {
+      "from": 22,
+      "every": 30,
+      "count": 2,
+      "kinds": [
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.2
+     },
      "feature": "feature.naval.20",
      "ammunition": [
       48,
@@ -6663,6 +6683,17 @@
      "drift": 22.6,
      "concurrent": 3,
      "seconds": 282,
+     "air": {
+      "from": 20,
+      "every": 28,
+      "count": 3,
+      "kinds": [
+       "plane",
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.4
+     },
      "feature": "feature.naval.27",
      "ammunition": [
       56,
@@ -7474,6 +7505,10 @@
      "lowAngle": 10,
      "powerSpan": 14
     },
+    "wide": {
+     "fine": 0.12,
+     "grow": 0.001
+    },
     "assist": {
      "yawRangeDeg": 4,
      "yawPull": 0.45,
@@ -7484,7 +7519,7 @@
     },
     "follow": {
      "yawFixed": 0.12,
-     "maxLeadDegrees": 14,
+     "maxLeadDegrees": 34,
      "rate": 3.5
     }
    },

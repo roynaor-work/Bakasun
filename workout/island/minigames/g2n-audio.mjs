@@ -1,14 +1,16 @@
 const VERSION='island-v2-20261107-7';
 export const G2N_SAMPLES=Object.freeze(['engine','fire','ladder','rescue']);
 /** Fire-only mix: CC0 samples, filtered noise and harmonic envelopes. */
+import {fireV20} from './polish-flag.mjs';
 export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
-  let context,master,noise,disposed=false,paused=false,siren=false,muted=false;
+  const newSound=fireV20('fireSound');
+  let context,master,noise,white,lastPop=0,disposed=false,paused=false,siren=false,muted=false;
   const buffers=new Map(),loops=new Map(),voices=new Set(),last=new Map(),played=new Set();let generation=0;
   function readMute(){try{return (storage??globalThis.localStorage)?.getItem('island.sound')==='off';}catch{return false;}}
   async function load(){const id=++generation;await Promise.all(G2N_SAMPLES.map(async name=>{try{const response=await fetcher(new URL(`../assets/audio/g2n/${name}.ogg?v=${VERSION}`,import.meta.url));if(!response.ok)return;const buffer=await context.decodeAudioData(await response.arrayBuffer());if(!disposed&&id===generation)buffers.set(name,buffer);}catch{/* Layered synthesis also covers unavailable codecs. */}}));}
   function unlock(){
     if(disposed||paused||!AudioContext)return;
-    try{if(!context){context=new AudioContext();master=context.createGain();master.connect(context.destination);noise=context.createBuffer(1,context.sampleRate*2,context.sampleRate);const a=noise.getChannelData(0);let brown=0;for(let i=0;i<a.length;i++){brown=(brown+(Math.random()*2-1)*.04)/1.02;a[i]=brown*3+(Math.random()*2-1)*.18;}void load();}
+    try{if(!context){context=new AudioContext();master=context.createGain();master.connect(context.destination);noise=context.createBuffer(1,context.sampleRate*2,context.sampleRate);const a=noise.getChannelData(0);let brown=0;for(let i=0;i<a.length;i++){brown=(brown+(Math.random()*2-1)*.04)/1.02;a[i]=brown*3+(Math.random()*2-1)*.18;}white=context.createBuffer(1,context.sampleRate*2,context.sampleRate);{const w=white.getChannelData(0);for(let i=0;i<w.length;i++)w[i]=Math.random()*2-1;}void load();}
       muted=readMute();master.gain.value=muted?0:.16;if(context.state==='suspended')void context.resume().catch(()=>{});
     }catch{/* Unsupported audio cannot stop the mission. */}
   }
@@ -32,6 +34,20 @@ export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||gl
     if(event==='timeout'){tone(240,140,.35,.1);tone(180,95,.4,.06);hiss(.15,.07,600);played.add(event);}
     if(event==='siren'){tone(580,920,.7,.17);tone(870,1380,.7,.07);hiss(.2,.05,1200);played.add(event);}
   }
+
+  /** 09/11/2026 better water and fire: the jet is band-passed white noise with a slow flutter plus a low body that grows with pressure;
+   * the fire is a low roar with random crackle pops (more flames, more pops). `?fireSound=v19` keeps the old loops. */
+  function jet(amount,pressure){
+    let node=loops.get('jet');
+    if(!node&&amount>0){const hi=context.createBufferSource(),lo=context.createBufferSource(),bp=context.createBiquadFilter(),lp=context.createBiquadFilter(),gain=context.createGain(),lfo=context.createOscillator(),lfoGain=context.createGain();
+     hi.buffer=white;hi.loop=true;lo.buffer=noise;lo.loop=true;bp.type='bandpass';bp.frequency.value=2900;bp.Q.value=.6;lp.type='lowpass';lp.frequency.value=260;lfo.frequency.value=9;lfoGain.gain.value=520;lfo.connect(lfoGain);lfoGain.connect(bp.frequency);
+     hi.connect(bp);bp.connect(gain);lo.connect(lp);lp.connect(gain);gain.connect(master);gain.gain.value=0;hi.start();lo.start();lfo.start();node={source:hi,filter:bp,gain,sampled:false,extra:[lo,lp,lfo,lfoGain]};loops.set('jet',node);}
+    if(node){node.gain.gain.setTargetAtTime(amount,context.currentTime,.06);node.filter.frequency.setTargetAtTime(2300+pressure*1500,context.currentTime,.1);}
+  }
+  function pops(model){
+    const flames=model.flames.filter(f=>f.active&&f.heat>0).length;if(!flames)return;const now=context.currentTime,gap=.32/(1+flames*.7);
+    if(now-lastPop<gap*(.5+Math.random()))return;lastPop=now;hiss(.03+Math.random()*.05,.05+Math.random()*.09,900+Math.random()*3200);if(Math.random()<.3)hiss(.09,.05,300+Math.random()*300);
+  }
   function loop(name,amount,rate=1){
     let node=loops.get(name);const sampled=buffers.has(name==='spray'?'fire':name);
     if(node&&sampled&&!node.sampled){node.source.stop();node.source.disconnect();node.filter.disconnect();node.gain.disconnect();loops.delete(name);node=null;}
@@ -42,11 +58,11 @@ export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||gl
     update(model,balance){if(disposed)return;muted=readMute();if(master)master.gain.setTargetAtTime(paused||muted?0:.16,context.currentTime,.02);if(paused||muted||context?.state!=='running')return;
       if(!siren){play('siren');siren=true;}
       const speed=Math.min(1,(model.truck.speed||0)/balance.vehicle.speed);
-      loop('engine',speed*.55,.6+speed*.9);loop('spray',model.spraying?.3:0,1.5);loop('fire',model.flames.some(f=>f.active&&f.heat>0)?.11:0,.72);loop('refill',model.refilling&&model.water<model.maxWater?.3:0,.85);loop('ladder',model.rescuing&&model.ladder.extension>0&&model.ladder.extension<1?.16:0,1.1);
+      loop('engine',speed*.55,.6+speed*.9);if(newSound){jet(model.spraying?.2+.12*Math.max(0,Math.min(1,model.pressure??1)):0,model.pressure??1);pops(model);}else loop('spray',model.spraying?.3:0,1.5);loop('fire',model.flames.some(f=>f.active&&f.heat>0)?(newSound?.16:.11):0,newSound?.55:.72);loop('refill',model.refilling&&model.water<model.maxWater?.3:0,.85);loop('ladder',model.rescuing&&model.ladder.extension>0&&model.ladder.extension<1?.16:0,1.1);
       if(speed)played.add('engine');if(model.spraying)played.add('spray');if(model.refilling)played.add('refill');played.add('crackle');
     },
     setPaused(value){paused=Boolean(value);if(master)master.gain.value=paused||readMute()?0:.16;if(!paused)unlock();},
     snapshot(){return {unlocked:Boolean(context),state:context?.state||'locked',muted,paused,disposed,samples:[...buffers.keys()],played:[...played],loops:Object.fromEntries([...loops].map(([k,n])=>[k,{gain:n.gain.gain.value,rate:n.source.playbackRate.value}]))};},
-    dispose(){if(disposed)return;disposed=true;generation++;for(const n of loops.values()){n.source.stop();n.source.disconnect();n.filter.disconnect();n.gain.disconnect();}loops.clear();for(const s of voices){try{s.stop();}catch{}s.disconnect();}voices.clear();buffers.clear();master?.disconnect();if(context)void context.close().catch(()=>{});}
+    dispose(){if(disposed)return;disposed=true;generation++;for(const n of loops.values()){for(const x of n.extra||[])try{x.stop?.();x.disconnect();}catch{}n.source.stop();n.source.disconnect();n.filter.disconnect();n.gain.disconnect();}loops.clear();for(const s of voices){try{s.stop();}catch{}s.disconnect();}voices.clear();buffers.clear();master?.disconnect();if(context)void context.close().catch(()=>{});}
   };
 }
