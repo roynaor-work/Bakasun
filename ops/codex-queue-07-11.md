@@ -1,6 +1,6 @@
 # הנחיות Codex להדבקה (07/11/2026, רועי: "תכין הכל, אני אעלה לשם")
 
-שש עשרה משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
+שבע עשרה משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
 
 ## 1. סביבת מירוצים בסגנון פורמולה 1 (רמה: ultra למודלים, extra high למרקמים)
 ```
@@ -153,4 +153,11 @@ preview.html שמנגן כל צליל עם בקרת עוצמה.
 כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/motion-qa-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/motion-qa-v1/
 הרקע: רועי ממשיך להרגיש שהתנועה "לא קרובה". אין כלי מדידה אחיד שמראה אובייקטיבית למה. לבנות כלי Node (בלי תלות ב-WebAssembly, three.js מקומי) שטוען כל ספריית קליפים (v8, v9, v10 של כדורגל וכדורסל, ודמויות hoops-tall) ומפיק דוח JSON ו-HTML לכל קליפ: החלקת רגליים, חדירה לרצפה, קפיצות פוזה בין פריימים סמוכים (pops), חריגות אנטומיות במפרקים, מרחק כדור מכף היד או הרגל בפריים המגע, רציפות כניסה ויציאה מול קליפי idle, מהירות שורש מול קצב צעד (מדד "החלקה של הגוף"), ובדיקת סימטריה. סף ירוק/צהוב/אדום לכל מדד, וציון תחושה מ-0 עד 100 לכל קליפ, וטבלת סיכום לכל ספרייה. בנוסף: מצב השוואה בין שתי גרסאות (v9 מול v10) וגיליון פריימים (8 פריימים לכל קליפ) כתמונות.
 מוכן כש: הכלי מריץ את כל הספריות בפקודה אחת, מפיק report.html עם מיון לפי ציון, ו-REPORT מציג את 20 הקליפים הגרועים ביותר ואת הסיבה לכל אחד. בדיקות לכלי עצמו כלולות.
+```
+
+## 17. תיקון הקליפים האדומים לפי כלי ה-QA (רמה: ultra)
+```
+המאגר: https://github.com/roynaor-work/Bakasun (ציבורי), ענף main. כדי לא להוריד הכול: git clone --depth 1 --filter=blob:none --sparse https://github.com/roynaor-work/Bakasun.git ; cd Bakasun ; git sparse-checkout set workout/island/design/motion2 ; for b in codex/motion-qa-v1 codex/soccer-motion-v9 codex/soccer-motion-v10 codex/soccer-motion-v11 codex/hoops-motion-v9 codex/hoops-motion-v10 codex/hoops-motion-v11 codex/hoops-tall-v1 codex/tennis-motion-v1; do git fetch origin $b ; done ; git checkout FETCH_HEAD -- workout/island/design/tennis-motion-v1 ; git checkout origin/codex/motion-qa-v1 -- workout/island/design/motion-qa-v1
+כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/motion-fix-v12 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/motion-fix-v12/
+הרקע: כלי ה-QA שלך (motion-qa-v1) מדד ממוצעי ציון: soccer-v8 93.3, soccer-v9 91.2, soccer-v10 84.9, hoops-v8 88.2, hoops-v9 87.6, hoops-v10 77.8, hoops-tall-v1 69.9 (347 מדדים אדומים). כלומר הספריות החדשות גרועות מהישנות, ולכן רועי לא מרגיש שיפור ("זה אפילו לא קרוב"). הגרועים: v9/cut_*_ball ו-brake_ball על דמויות hoops-tall (החלקת רגליים עד 0.30 מ', קפיצות פוזה 10-22 מעלות, פער יציאה מול idle). המשימה: לתקן, לא להוסיף: 1) להריץ את הכלי על כל הספריות כולל tennis-motion-v1, soccer-v11 ו-hoops-v11; 2) לכל קליפ עם ציון מתחת ל-80: לתקן את הסיבה (נעילת רגל/IK, החלקת ביניים, מיסוך קפיצות פוזה, מעבר רציף אל idle ומתוכו, ריטרגטינג מחדש לדמויות הגבוהות), ולהפיק גרסה מתוקנת תחת runtime/ באותו שם קליפ + חותמת גרסה; 3) לדווח ציון לפני ואחרי לכל קליפ. יעד: אפס מדדים אדומים, ממוצע ספרייה לפחות 88, ולא יותר מ-5% קליפים בצהוב. לא למחוק קליפים: אם אי אפשר לתקן, לסמן אותם בקובץ blocklist.json עם הסיבה. מוכן כש: report.html לפני/אחרי, טבלת סיכום, וכל הקליפים המתוקנים נטענים ב-preview.html על שלוש דמויות או על הדמות המתאימה.
 ```
