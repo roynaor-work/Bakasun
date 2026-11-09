@@ -1,5 +1,6 @@
 import {drawAlienFeedback} from './ultra-alien-feedback.mjs';
 export {drawAlienFallbackFeedback} from './ultra-alien-feedback.mjs';
+import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons,drawV12Tracer} from './alien-v12-draw.mjs';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
@@ -49,7 +50,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  }
  for(const s of m.sparks){const alpha=Math.max(0,s.life/balance.sparkSeconds);glow(p,s.x,s.y,9,'#ffb56e',pixelAspect,alpha*.55);p.save();p.globalAlpha=alpha;p.strokeStyle=alpha>.65?'#fff0c4':'#ee9b59';p.lineWidth=1.2;p.beginPath();p.moveTo(s.x,s.y);p.lineTo(s.x-s.vx*.024/pixelAspect,s.y-s.vy*.024);p.stroke();p.restore();}
  const n=m.nova;
- if(m.v12){p.save();p.globalCompositeOperation='source-over';drawV12Cannons(p,m,pixelAspect,screenScale);p.restore();}
+ if(m.v12){p.save();p.globalCompositeOperation='source-over';drawV12Cannons(p,m,pixelAspect,screenScale);drawV14Heat(p,m,pixelAspect,screenScale);p.restore();}
  if(m.v11){p.save();p.globalCompositeOperation='source-over';drawV11Blasts(p,m,pixelAspect,screenScale);drawV11BonusTimer(p,m,pixelAspect,screenScale);p.restore();}
  if(m.v10){p.save();p.globalCompositeOperation='source-over';drawV10Missile(p,m,pixelAspect,screenScale);drawV10WingTimer(p,m,pixelAspect,screenScale,m.v10Blink);p.restore();}
  else if(n.flight>0){
