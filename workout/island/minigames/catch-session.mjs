@@ -1,6 +1,6 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-6';
-import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-6';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-6';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-7';
+import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-7';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-7';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const ICONS = {
@@ -33,7 +33,8 @@ export function runCatchSession(ctx) {
   const policeLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'police').reduce((n, b) => n + (b.level || 1), 0);
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
-  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods});
+  const feel = params.get('catchV4') !== '0'; // ?catchV4=0 brings back the v3 aiming (no help ring, no drag easing, v3 balance)
+  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods, feel});
   const withChase = v2 && Boolean(ctx.canvas);
   const chase = withChase ? createChaseEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
@@ -57,7 +58,7 @@ export function runCatchSession(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-6', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-7', import.meta.url).href; stageEl.append(css);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
   // ----- HUD shared by both parts -----
@@ -153,7 +154,7 @@ export function runCatchSession(ctx) {
       if (e.type === 'launch') audio?.cue('whoosh');
       else if (e.type === 'catch') { audio?.cue(e.perfect ? 'perfect' : 'catch'); say(e.perfect ? 'catch.pop.perfect' : 'catch.pop.catch', e.perfect ? 'perfect' : 'good'); slow = .9; }
       else if (e.type === 'bossHit') { audio?.cue('bossHit'); say('catch.pop.bossHit', 'good', {hp: e.hp}); slow = .6; }
-      else if (e.type === 'crew') { audio?.cue('siren'); say('catch.pop.crew', 'warn', {left: engine.state.crewLeft + 1}); }
+      else if (e.type === 'crew') { audio?.cue('siren', {crew: true}); say('catch.pop.crew', 'warn', {left: engine.state.crewLeft + 1}); }
       else if (e.type === 'blocked') { audio?.cue('thud'); say('catch.pop.blocked', 'bad'); }
       else if (e.type === 'miss') { if (e.near) { audio?.cue('near'); say('catch.pop.near', 'warn'); slow = .5; } else { audio?.cue('miss'); say('catch.pop.miss', 'bad'); } }
       else if (e.type === 'hidden') { audio?.cue('miss'); say('catch.pop.hidden', 'bad'); }
@@ -205,12 +206,12 @@ export function runCatchSession(ctx) {
     if (steerDrag && e.pointerId === steerDrag.id) { const dy = e.clientY - steerDrag.y; chase.setSteer(clamp(dy / 46, -1, 1)); ringLine.style.width = Math.abs(dy) + 'px'; ringLine.style.transform = `rotate(${dy >= 0 ? Math.PI / 2 : -Math.PI / 2}rad)`; return; }
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    engine.setAim({angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx});
+    drag.to = {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; if (!feel) engine.setAim(drag.to); // with the feel on, the frame loop eases the line after the finger
     const len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx); ringLine.style.width = len + 'px'; ringLine.style.transform = `rotate(${ang}rad)`;
   }, {signal: abort.signal});
   const endDrag = e => {
     if (steerDrag && e.pointerId === steerDrag.id) { steerDrag = null; chase?.setSteer(0); ring.hidden = true; }
-    if (drag && e.pointerId === drag.id) { drag = null; ring.hidden = true; }
+    if (drag && e.pointerId === drag.id) { if (drag.to) engine?.setAim(drag.to); drag = null; ring.hidden = true; }
   };
   stageEl.addEventListener('pointerup', endDrag, {signal: abort.signal}); stageEl.addEventListener('pointercancel', endDrag, {signal: abort.signal});
   throwButton.addEventListener('click', release, {signal: abort.signal});
@@ -292,13 +293,14 @@ export function runCatchSession(ctx) {
     dt *= scale;
     const keyAngle = ((keys.has('ArrowUp') ? -1 : 0) + (keys.has('ArrowDown') ? 1 : 0)) * P.keyAngle * dt * 60, keyPower = ((keys.has('ArrowLeft') ? 1 : 0) + (keys.has('ArrowRight') ? -1 : 0)) * P.keyPower * dt * 60;
     if (engine.state.phase === 'aim' && (keyAngle || keyPower)) engine.setAim({angle: engine.aim.angle - keyAngle, power: engine.aim.power + keyPower});
+    if (feel && drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: engine.aim.power + (drag.to.power - engine.aim.power) * k}); }
     acc += dt;
     while (acc >= STEP) { acc -= STEP; stepThrow(STEP); }
     view.update(dt, {});
     refreshHud();
   }
 
-  import('./catch-view.mjs?v=island-v2-20261107-6').then(async ({createCatchView}) => {
+  import('./catch-view.mjs?v=island-v2-20261107-7').then(async ({createCatchView}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView({canvas, engine, balance, stage, v2, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }

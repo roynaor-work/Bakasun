@@ -17,18 +17,20 @@ export function fanSlots(spectators,{maxGap=1.25,minGap=.55}={}){
  return slots;
 }
 const SPONSORS=['CITY CUP','NORTH BANK','TENNIS ISLAND','SUN & SEA','ISLAND OPEN','GRAND COURT'];
-export async function createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config}){
+export async function createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,surroundOnly=false}){
  if(params?.get?.('tennisStadium')==='0'||!v7?.spectators||typeof document==='undefined')return null;
- const group=new T.Group();group.name='tennis-v11-stadium';const disposables=[];
+ let fanCount=0;const group=new T.Group();group.name='tennis-v11-stadium';const disposables=[];
  const track=o=>{disposables.push(o);return o;};
  const canvas=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
  const r=seededRandom(config.seed||4107);
+ if(!surroundOnly){
  // 1. Evening sky and soft warm light.
  const sky=canvas(8,256),sg=sky.getContext('2d'),grad=sg.createLinearGradient(0,0,0,256);
  grad.addColorStop(0,'#26366a');grad.addColorStop(.45,'#6b78b0');grad.addColorStop(.75,'#e8a98a');grad.addColorStop(1,'#f6d6a8');sg.fillStyle=grad;sg.fillRect(0,0,8,256);
  const skyTexture=track(new T.CanvasTexture(sky));skyTexture.colorSpace=T.SRGBColorSpace;scene.background=skyTexture;
  scene.fog?.color.set('#d9c0b0');
  hemi.color.set('#d6def2');hemi.groundColor.set('#8c7457');hemi.intensity=1.25;sun.color.set('#ffd7a6');sun.intensity=2.35;sun.position.set(-13,15,9);renderer.toneMappingExposure=1.05;
+ }
  // 2. City blocks and trees on the ground beyond the stands (the camera looks down, so a sky-high backdrop would never be seen).
  const wt=canvas(64,128),wg=wt.getContext('2d');wg.fillStyle='#39425f';wg.fillRect(0,0,64,128);
  for(let y=6;y<124;y+=12)for(let x=5;x<60;x+=11){wg.fillStyle=r()<.34?(r()<.8?'#ffd98a':'#fff1c4'):'#2b324d';wg.fillRect(x,y,6,7);}
@@ -41,6 +43,7 @@ export async function createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,
  for(let i=0;i<treeCount;i++){const a=r()*Math.PI*2,rad=36+r()*12,x=Math.sin(a)*rad*1.2,z=-Math.cos(a)*rad,sc=.55+r()*.5;
   m4.compose(new T.Vector3(x,1*sc,z),q.identity(),new T.Vector3(sc,sc,sc));trunks.setMatrixAt(i,m4);m4.compose(new T.Vector3(x,(2+2.5)*sc,z),q.identity(),new T.Vector3(sc,sc,sc));crowns.setMatrixAt(i,m4);crowns.setColorAt(i,col.setHSL(.36+r()*.05,.4,.22+r()*.12));}
  trunks.frustumCulled=crowns.frustumCulled=false;group.add(trunks,crowns);
+ if(!surroundOnly){
  // 3. Sponsor boards: invented names only.
  const bt=canvas(1024,128),bg=bt.getContext('2d');bg.fillStyle='#143d41';bg.fillRect(0,0,1024,128);bg.font='700 64px sans-serif';bg.textAlign='center';bg.textBaseline='middle';
  SPONSORS.forEach((name,i)=>{const x=i*170+85;bg.fillStyle=i%2?'#ffd16f':'#f3f4dc';bg.fillText(name.length>10?name.slice(0,10):name,x,66,160);bg.fillStyle='#ffffff40';bg.fillRect(i*170+168,12,3,104);});
@@ -54,7 +57,7 @@ export async function createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,
  const glowTexture=track(new T.CanvasTexture(gl)),glowMaterial=track(new T.SpriteMaterial({map:glowTexture,transparent:true,depthWrite:false,blending:T.AdditiveBlending,fog:false}));
  for(const [x,z] of [[-12,-14],[12,-14],[-12,13],[12,13]]){const s=new T.Sprite(glowMaterial);s.position.set(x,17,z);s.scale.setScalar(9);group.add(s);}
  // 5. Billboard fans between the 3D spectators.
- const slots=fanSlots(v7.spectators),floor=v7.floorOffset??.08;
+ const slots=fanSlots(v7.spectators),floor=v7.floorOffset??.08;fanCount=slots.length;
  if(slots.length){
   const atlas=canvas(512,128),ag=atlas.getContext('2d'),shirts=['#d9534f','#f0b429','#3b8fd1','#5aa87a','#9b6fb5','#f3f1e4','#e07b39','#2f7d7a'];
   shirts.forEach((shirt,i)=>{const cx=i*64+32,up=i%3===0;
@@ -72,7 +75,8 @@ export async function createTennisV11Stadium({T,scene,renderer,hemi,sun,keep,v7,
   const material=track(new T.MeshLambertMaterial({map:atlasTexture,transparent:true,alphaTest:.4,side:T.DoubleSide}));
   const fans=new T.Mesh(geometry,material);fans.frustumCulled=false;fans.name='Fans_v11';group.add(fans);
  }
+ }
  scene.add(group);
- const metrics={fans:slots.length,triangles:slots.length*2+blockCount*12+treeCount*(8+10)};
+ const metrics={fans:fanCount,triangles:fanCount*2+blockCount*12+treeCount*(8+10),surroundOnly};
  return {group,metrics,dispose(){scene.remove(group);for(const d of disposables)d.dispose?.();}};
 }

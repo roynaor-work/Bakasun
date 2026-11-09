@@ -1,5 +1,5 @@
 // Pure helpers for human control. Coordinates are metres in the pitch X/Z plane.
-import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-6';
+import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-7';
 // They never change a player, ball, input, save, RNG or wall clock.
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const finite=(n,fallback=0)=>Number.isFinite(n)?n:fallback;
@@ -134,7 +134,30 @@ export function assistedPassDestination(state,c,power=0){
 
 /** Short prediction scores who can actually meet the moving ball. The candidate
  * never acquires possession here; normal local contact must still occur. */
-export function selectControlledPlayer(state,c,{moveX=0,moveZ=0,manual=false,path=manual}={}){
+/** Pointer-style switch (eFootball/EA reference): with the stick held, the nearest teammate inside a
+ * cone around the stick direction. Returns null when the stick is neutral or nobody is in the cone. */
+export function directionalSwitchTarget(state,{moveX=0,moveZ=0},{cone=.82,minStick=.45}={}){
+  const len=Math.hypot(finite(moveX),finite(moveZ));if(len<minStick)return null;
+  const current=state.players.find(p=>p.id===state.controlled);if(!current)return null;
+  const ux=moveX/len,uz=moveZ/len;
+  // Narrow cone first (about 35 degrees), then a wide one (about 70 degrees) before giving up.
+  for(const limit of [cone,.34]){const id=pick(state,current,ux,uz,limit);if(id!==null)return id;}
+  return null;
+}
+function pick(state,current,ux,uz,cone){
+  let best=null,bestScore=Infinity;
+  {for(const p of state.players){
+    if(p.team!==current.team||p.id===current.id||p.role==='keeper'||finite(p.recover)>0||finite(p.slideTime)>0)continue;
+    const dx=p.x-current.x,dz=p.z-current.z,d=Math.hypot(dx,dz);if(d<.5)continue;
+    const dot=(dx*ux+dz*uz)/d;if(dot<cone)continue;
+    // Closer along the stick wins; a sideways offset costs more than a few metres of range.
+    const score=d*(1+(1-dot)*3);if(score<bestScore){bestScore=score;best=p;}
+  }}
+  return best?best.id:null;
+}
+
+export function selectControlledPlayer(state,c,{moveX=0,moveZ=0,manual=false,path=manual,directional=false}={}){
+  if(manual&&directional){const id=directionalSwitchTarget(state,{moveX,moveZ});if(id!==null)return id;}
   const players=state.players,b=state.ball,current=players.find(p=>p.id===state.controlled),team=current?.team??0;
   const eligible=p=>p.team===team&&p.role!=='keeper'&&finite(p.recover)<=0&&finite(p.slideTime)<=0&&(!manual||p.id!==state.controlled);
   const owner=b.owner==null?null:players.find(p=>p.id===b.owner);

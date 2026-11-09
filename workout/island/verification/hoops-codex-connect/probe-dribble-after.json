@@ -1,0 +1,40 @@
+{
+ "mode": "dribble",
+ "segments": {
+  "stand": {
+   "frames": 70,
+   "corrBallHand": 0.53,
+   "meanPalmBallWhenHigh": 0.348,
+   "minBall": 0.179,
+   "maxBall": 0.795,
+   "meanSpeed": 0,
+   "motions": [
+    "dribble:dribble_right"
+   ]
+  },
+  "walk": {
+   "frames": 80,
+   "corrBallHand": 0.63,
+   "meanPalmBallWhenHigh": 0.343,
+   "minBall": 0.132,
+   "maxBall": 0.816,
+   "meanSpeed": 1.92,
+   "motions": [
+    "dribble:dribble_walk_right",
+    "dribble:jog_ball"
+   ]
+  },
+  "run": {
+   "frames": 110,
+   "corrBallHand": 0.69,
+   "meanPalmBallWhenHigh": 0.348,
+   "minBall": 0.12,
+   "maxBall": 0.809,
+   "meanSpeed": 4.33,
+   "motions": [
+    "dribble:jog_ball",
+    "dribble:run_ball"
+   ]
+  }
+ }
+}

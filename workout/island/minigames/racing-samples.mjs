@@ -30,9 +30,15 @@ export function createRacingSamples({context,destination=context?.destination,ba
     }
     ready=true;
   }
+  let lastGearbox=-9;const GEARBOX=new Set(['shift-up','shift-down','exhaust-pop-1','exhaust-pop-2','exhaust-pop-3','turbo-blowoff']);
   function shot(id,gain=.1,rate=1,minGap=.12){
-    if(!ready||disposed)return;const now=context.currentTime;if(now-(lastShot.get(id)||-9)<minGap)return;lastShot.set(id,now);
-    const source=context.createBufferSource(),g=context.createGain();source.buffer=buffers.get(id);source.playbackRate.value=rate;g.gain.value=gain;source.connect(g);g.connect(bus);source.start();
+    if(!ready||disposed)return;const now=context.currentTime;if(now-(lastShot.get(id)||-9)<minGap)return;
+    // one gearbox/exhaust sound per 0.45 s: a shift never stacks a shift sound, a pop and a blow-off on top of each other
+    if(GEARBOX.has(id)){if(now-lastGearbox<.45)return;lastGearbox=now;}lastShot.set(id,now);
+    // 12 ms attack ramp: the samples start at full scale and a hard onset is a click (measured by tools/racing-shift-audio.mjs).
+    const source=context.createBufferSource(),g=context.createGain();source.buffer=buffers.get(id);source.playbackRate.value=rate;
+    if(g.gain.setValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(gain,now+.012);}else g.gain.value=gain;
+    source.connect(g);g.connect(bus);source.start(now);
     source.onended=()=>{try{source.disconnect();g.disconnect();}catch{}};
   }
   /** rpm 0..1 (the physics rpm); level is the overall sample level (0 when muted or paused). */
@@ -54,8 +60,8 @@ export function createRacingSamples({context,destination=context?.destination,ba
   }
   return {
     load,get ready(){return ready;},update,
-    shiftUp(){shot('shift-up',.1,1,.25);},shiftDown(){shot('shift-down',.1,1,.25);shot(`exhaust-pop-${1+(pop++%3)}`,.09,1,.15);},
-    backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.1,1,.3);},blowoff(){shot('turbo-blowoff',.09,1,.6);},pass(){shot('pass-whoosh',.12,1,1.2);},
+    shiftUp(){shot('shift-up',.035,1,.45);},shiftDown(){shot('shift-down',.03,1,.45);},
+    backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
     dispose(){if(disposed)return;disposed=true;for(const n of nodes){try{n.stop?.();}catch{}try{n.disconnect();}catch{}}}
   };
 }

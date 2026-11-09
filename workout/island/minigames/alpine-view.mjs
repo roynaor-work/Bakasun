@@ -1,7 +1,7 @@
 import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-6';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-6';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-7';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-7';
 import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
@@ -11,7 +11,7 @@ import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {bodyTarget,followBody,carvePose} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-6';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-7';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.

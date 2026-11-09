@@ -42,8 +42,8 @@ test('G4f hold charges power; exceeding the difficulty threshold physically goes
  }
 });
 test('G4f release samples the latest joystick direction and keeps early-shot power and aim',()=>{
- const m=incoming(),s=m.getState();charge(m,.65,{aim:{x:1,z:0,manual:true}});const held=s.charge;s.contact.at=s.elapsed+.1;press(m,'swing',{aim:{x:-1,z:-.5,manual:true}});advance(m,.11,{aim:{x:1,z:1,manual:true}});assert.equal(s.shot.side,0);assert.ok(s.shot.targetX<0);assert.ok(s.shot.charge===held);assert.ok(Math.abs(s.shot.targetZ)>config.ball.depth);
- const cancelled=incoming();charge(cancelled,.8);cancelled.update(0,{cancelCharge:true});assert.equal(cancelled.getState().charge,0);press(cancelled,'swing');assert.equal(cancelled.getState().shot.charge,0);
+ const m=incoming('normal',6,false),s=m.getState();charge(m,.65,{aim:{x:1,z:0,manual:true}});const held=s.charge;s.contact.at=s.elapsed+.1;press(m,'swing',{aim:{x:-1,z:-.5,manual:true}});advance(m,.11,{aim:{x:1,z:1,manual:true}});assert.equal(s.shot.side,0);assert.ok(s.shot.targetX<0);assert.ok(s.shot.charge===held);assert.ok(Math.abs(s.shot.targetZ)>config.ball.depth);
+ const cancelled=incoming('normal',6,false);charge(cancelled,.8);cancelled.update(0,{cancelCharge:true});assert.equal(cancelled.getState().charge,0);press(cancelled,'swing');assert.equal(cancelled.getState().shot.charge,0);
 });
 test('G4f centre band gives a faster, accurate serve; all outer green releases stay legal on either meter direction',()=>{
  for(const difficulty of ['easy','normal','hard'])for(const rank of [1,5]){

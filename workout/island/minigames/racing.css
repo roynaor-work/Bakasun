@@ -347,3 +347,11 @@
 .game-screen[data-game=islandRacing] .racing-rev{display:block;width:34px;height:4px;border-radius:2px;background:#d7e6f330;overflow:hidden}
 .game-screen[data-game=islandRacing] .racing-rev i{display:block;height:100%;background:#e9f3f8;transform-origin:0 50%;transform:scaleX(0)}
 .game-screen[data-game=islandRacing] .racing-rev i.red{background:#ff5a4a}
+
+/* racing-ers-v1: the energy meter charges while driving; the tag and a moving sheen show it */
+.game-screen[data-game=islandRacing] .racing-energy{overflow:visible}
+.game-screen[data-game=islandRacing] .racing-energy-tag{position:absolute;left:0;top:-14px;font-size:10px;font-weight:800;letter-spacing:.6px;color:#d6e8f2;text-shadow:0 1px 3px #000;pointer-events:none}
+.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-tag{color:#8dffb0}
+.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{background:linear-gradient(90deg,#44d17a,#b8ffd0,#44d17a);background-size:60px 100%;animation:racing-ers-flow .7s linear infinite}
+@keyframes racing-ers-flow{to{background-position:60px 0}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{animation:none}}
