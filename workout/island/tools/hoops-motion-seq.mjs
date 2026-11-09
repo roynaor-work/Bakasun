@@ -91,8 +91,8 @@ try{
   await page.evaluate(k=>{window.__seq.script=null;window.__seq.start(k);},kind);report[kind]=[];
   for(let i=0;i<frames;i++){
    const f=await page.evaluate(()=>window.__seq.frame());report[kind].push(f);
-   const cx=f.x+Math.sin(f.face+1.25)*3.6,cz=f.z+Math.cos(f.face+1.25)*3.6;
-   await page.evaluate(([pos,look])=>{const v=window.__session.debug.view;v.setCameraOverride(pos,look,34);v.snapCamera();window.__session.debug.render();},[{x:cx,y:1.5,z:cz},{x:f.x,y:1.05,z:f.z}]);
+   const R=Number(args.radius||3.6),cx=f.x+Math.sin(f.face+1.25)*R,cz=f.z+Math.cos(f.face+1.25)*R,camY=Number(args.camY||1.5),lookY=Number(args.lookY||1.05),camFov=Number(args.fov||34);
+   await page.evaluate(([pos,look,fv])=>{const v=window.__session.debug.view;v.setCameraOverride(pos,look,fv);v.snapCamera();window.__session.debug.render();},[{x:cx,y:camY,z:cz},{x:f.x,y:lookY,z:f.z},camFov]);
    await page.waitForTimeout(80);
    await page.screenshot({path:path.join(out,`${kind}-${String(i).padStart(2,'0')}.jpg`),type:'jpeg',quality:80,timeout:120000,animations:'disabled'});
    // foot slide: a foot inside its authored support window in two consecutive frames (same clip)
