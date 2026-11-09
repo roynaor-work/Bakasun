@@ -13,6 +13,7 @@ import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
+import {polishEnabled,visualLift} from './hoops-polish.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -37,7 +38,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const {root:arena,dyn}=buildArena(court,{home:looks[0],away:looks[1],quality,anisotropy:Math.min(8,renderer.capabilities.getMaxAnisotropy())});
  scene.add(arena);mark('arena');
  // v4 assets (02/11) are an upgrade, never a requirement: any load failure falls back to the v3 venue and bodies
- const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[];
+ const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[],polish=polishEnabled(params);
  const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
  const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
  let models=null;
@@ -198,7 +199,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const pp of s.players){
    const p=state.replay?pp:interp.get(pp,alpha);
    const av=avatars.get(p.id)||ensureAvatar(p.id);if(!av)continue;seen.add(p.id);
-   av.root.visible=true;av.root.position.set(p.x,p.y*0.85,p.z);av.root.rotation.y=p.face;
+   av.root.visible=true;av.root.position.set(p.x,p.y*visualLift(p.act==='shoot'?p.shotType:null,polish),p.z);av.root.rotation.y=p.face;
    const defending=s.possession!==p.team&&s.ball.state==='held';
    const contest=handler&&handler.team!==p.team&&handler.act==='shoot'&&Math.hypot(handler.x-p.x,handler.z-p.z)<1.8?1:0;
    const catching=s.ball.state==='pass'&&s.ball.passTo===p.id;
@@ -207,7 +208,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    let passDist,eta;
    if(p.act==='pass'&&p.passTo){const q=s.players.find(o=>o.id===p.passTo);if(q)passDist=Math.hypot(q.x-p.x,q.z-p.z);}
    if(catching)eta=Math.hypot(s.ball.x-p.x,s.ball.z-p.z)/passFlightSpeed(s.ball.passKind,config.pass?.speed);
-   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,polish,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
