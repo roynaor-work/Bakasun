@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
 import { GLTFLoader } from '../vendor/GLTFLoader.js';
-import { GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-6';
+import { GROUND, primitive, material } from './environment.mjs?v=island-v2-20261107-7';
 
 const MODEL_URL=new URL('../assets/kid-full.glb',import.meta.url).href;
 // The authored child is 2.66 model units tall; the original adult rigs are

@@ -1,10 +1,10 @@
 import * as T from '../vendor/three.module.js';
-import {batchMeshes} from './batch.mjs?v=island-v2-20261107-6';
-import {groundTexture,islandTerrain,releaseTerrain} from './ultra-island-terrain.mjs?v=island-v2-20261107-6';
-import {createIslandWater} from './ultra-island-water.mjs?v=island-v2-20261107-6';
-import {IslandFlora} from './ultra-island-flora.mjs?v=island-v2-20261107-6';
-import {createCoastalDetails,createNeighborScenery} from './ultra-island-scenery.mjs?v=island-v2-20261107-6';
-import {loadCoastalSurfaces} from './coastal-surfaces.mjs?v=island-v2-20261107-6';
+import {batchMeshes} from './batch.mjs?v=island-v2-20261107-7';
+import {groundTexture,islandTerrain,releaseTerrain} from './ultra-island-terrain.mjs?v=island-v2-20261107-7';
+import {createIslandWater} from './ultra-island-water.mjs?v=island-v2-20261107-7';
+import {IslandFlora} from './ultra-island-flora.mjs?v=island-v2-20261107-7';
+import {createCoastalDetails,createNeighborScenery} from './ultra-island-scenery.mjs?v=island-v2-20261107-7';
+import {loadCoastalSurfaces} from './coastal-surfaces.mjs?v=island-v2-20261107-7';
 
 // All placement, walking and building code shares this unchanged ground plane.
 export const GROUND=.34;
