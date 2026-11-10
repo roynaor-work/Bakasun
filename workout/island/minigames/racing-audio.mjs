@@ -150,7 +150,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
+  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}
