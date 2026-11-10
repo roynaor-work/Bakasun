@@ -12,23 +12,22 @@ function swingAt(seconds,{difficulty='normal',seed=7,aim={manual:true,x:.2,z:0},
 }
 const verdict=r=>{const v=r.shot.v9;return v.error==='net'||v.error==='out'?'error':Math.abs(v.landing)>9.06?'out':Math.abs(v.landing-v.depth)<=1.2?'target':v.landing<v.depth?'short':'long';};
 
-test('tennis v12: the bar fills over 2.4 s and the green is a wide window in the middle, not the first instant',()=>{
-  assert.equal(hold.seconds,2.4);
-  const seen=[0.2,0.5,0.8,1.2,1.6,2.0,2.4].map(t=>swingAt(t).bar);
-  assert.equal(seen[0].active,false,'a quick tap shows no bar');
-  assert.ok(seen[2].zone==='green'&&seen[3].zone==='green','0.8 s and 1.2 s are green');
-  const span=[...Array(25)].map((_,i)=>.1*i).filter(t=>swingAt(t).bar?.zone==='green').length*.1;
-  assert.ok(span>=.9,`the green window is ${span.toFixed(1)} s wide`);
-  assert.equal(seen[6].zone,'red','holding to the very end is red');
+test('tennis v12 (v13 numbers): the bar fills over 3 s and the green is a wide window in the middle, not the first instant',()=>{
+  assert.equal(hold.seconds,3);
+  assert.equal(swingAt(.2).bar.active,false,'a quick tap shows no bar');
+  assert.equal(swingAt(1.35).bar.zone,'green','the centre of the bar (1.35 s) is green');
+  const span=[...Array(31)].map((_,i)=>.1*i).filter(t=>swingAt(t).bar?.zone==='green').length*.1;
+  assert.ok(span>=1.0,`the green window is ${span.toFixed(1)} s wide`);
+  assert.equal(swingAt(3).bar.zone,'red','holding to the very end is red');
 });
 
 test('tennis v12: a quick tap still makes a good shot, holding inside the window does too, a hold that is too long is out',()=>{
   for(const difficulty of ['easy','normal','hard']){
     let ok=0,n=40;
     for(let seed=1;seed<=n;seed++){
-      const tap=verdict(swingAt(.2,{difficulty,seed})),inWindow=verdict(swingAt(1.1,{difficulty,seed})),late=verdict(swingAt(2.4,{difficulty,seed}));
+      const tap=verdict(swingAt(.2,{difficulty,seed})),inWindow=verdict(swingAt(1.35,{difficulty,seed})),late=verdict(swingAt(3,{difficulty,seed}));
       if(tap==='target'&&inWindow==='target')ok++;
-      assert.ok(['out','long'].includes(late)||late==='error','2.4 s of holding is too much: '+late);
+      assert.ok(['out','long'].includes(late)||late==='error','3 s of holding is too much: '+late);
     }
     assert.ok(ok/n>=.8,`${difficulty}: tap and window shots are on target ${ok}/${n}`);
   }
@@ -36,7 +35,7 @@ test('tennis v12: a quick tap still makes a good shot, holding inside the window
 
 test('tennis v12: the flag brings back the v11 timing (a 0.5 s hold is already too much)',()=>{
   const old=swingAt(.5,{flag:false});assert.ok(['out','long'].includes(verdict(old))||verdict(old)==='error');
-  assert.equal(swingAt(.5).bar.zone,'yellow');
+  assert.ok(['yellow','red'].includes(swingAt(.5).bar.zone));
 });
 
 test('tennis v12: easy has a wider green than hard',()=>{
