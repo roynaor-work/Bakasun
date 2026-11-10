@@ -1,5 +1,5 @@
 // Probes for the rim-attack and defence work: `dunk`/`layup` = hand-with-ball height over the rim and step timing; `defense` = knee bend, hip height and hand heights of the defenders during autoplay.
-// Usage: node tools/hoops-v8-probe.mjs mode=dunk|layup|defense|dribble [dist=3.4] [speed=4.5] [out=file.json] [extra=hoopsV8=0]
+// Usage: node tools/hoops-v8-probe.mjs mode=dunk|layup|defense|dribble|sideways [dist=3.4] [speed=4.5] [out=file.json] [extra=hoopsV8=0]
 // slides over the floor (m/s) per phase of a scripted run. Software WebGL is fine here: poses are exact, only speed is not. Usage: node tools/hoops-v8-feet.mjs [out=file.json] [extra=hoopsV8=0] [ball=1]
 // engine's debug api (dunk, layup, jump shot, block, chest pass, run that turns into a sprint and
 // stops), then steps the simulation N ticks at a time and photographs the athlete from a chase
@@ -91,6 +91,17 @@ try{
    for(const [name] of segs){const r=rows.filter(x=>x.seg===name);if(r.length<10){out.segments[name]=null;continue;}
     const hi=r.filter(x=>x.ballY>0.6);
     out.segments[name]={frames:r.length,corrBallHand:+corr(r.map(x=>x.ballY),r.map(x=>x.handY)).toFixed(2),meanPalmBallWhenHigh:+(hi.reduce((x,y)=>x+y.dist,0)/Math.max(1,hi.length)).toFixed(3),minBall:+Math.min(...r.map(x=>x.ballY)).toFixed(3),maxBall:+Math.max(...r.map(x=>x.ballY)).toFixed(3),meanSpeed:+(r.reduce((x,y)=>x+y.speed,0)/r.length).toFixed(2),motions:[...new Set(r.map(x=>x.motion))]};}
+  } else if(mode==='sideways'){
+   // autoplay: how often a player moves sideways or backwards relative to where he faces (|lateral| or backward component bigger than the forward one at speed > 0.8 m/s)
+   // while a forward gait (walk / jog / run / sprint / dribble gait) is playing: the "walks sideways" look
+   S.autopilot=true;const cnt={frames:0,moving:0,sideways:0,backward:0,sidewaysForwardGait:0,backwardForwardGait:0,states:{}};
+   for(let t=0;t<2400;t++){d.step(1,{...neutral()});if(t%4)continue;d.render();const s=e.snapshot();
+    for(const q of s.players){const av=d.view.avatars.get(q.id);if(!av||!av.root.visible)continue;const sp=Math.hypot(q.vx,q.vz);cnt.frames++;if(sp<.8)continue;cnt.moving++;
+     const fwd=q.vx*Math.sin(q.face)+q.vz*Math.cos(q.face),lat=q.vx*Math.cos(q.face)-q.vz*Math.sin(q.face),st=av.motionState||'';
+     const forwardGait=/^(walk|jog|run|sprint|dribble:|walk_ball|run_ball|jog_ball|sprint_ball|dribble_)/.test(st)||/^(run|walk)$/.test(st);
+     if(Math.abs(lat)>Math.abs(fwd)&&Math.abs(lat)>.6){cnt.sideways++;if(forwardGait){cnt.sidewaysForwardGait++;cnt.states[st]=(cnt.states[st]||0)+1;}}
+     else if(fwd<-.6){cnt.backward++;if(forwardGait)cnt.backwardForwardGait++;}}}
+   Object.assign(out,cnt);
   } else {
    // defence: ten seconds of live autoplay, the defenders' knee bend (hip height / standing hip height), hand height and hand spread
    S.autopilot=true;const rows=[],stand={};

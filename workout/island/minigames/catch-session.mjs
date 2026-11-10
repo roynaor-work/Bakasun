@@ -1,6 +1,6 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-7';
-import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-7';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-7';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-8';
+import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-8';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-8';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const ICONS = {
@@ -33,13 +33,14 @@ export function runCatchSession(ctx) {
   const policeLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'police').reduce((n, b) => n + (b.level || 1), 0);
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
+  const arch5 = v2 && params.get('catchV5') !== '0' && Boolean(balance.levels[stage - 1]?.zmove); // ?catchV5=0: the v4 side-view throw
   const feel = params.get('catchV4') !== '0'; // ?catchV4=0 brings back the v3 aiming (no help ring, no drag easing, v3 balance)
-  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods, feel});
+  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2, mods, feel, arch: arch5});
   const withChase = v2 && Boolean(ctx.canvas);
-  const chase = withChase ? createChaseEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
+  const chase = withChase ? createChaseEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, bends: arch5}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let ramSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0;
+  let scrapeSaid = false, ramSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
@@ -58,11 +59,11 @@ export function runCatchSession(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-7', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-8', import.meta.url).href; stageEl.append(css);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
   // ----- HUD shared by both parts -----
-  hud = node('div', 'catch-hud'); hud.dir = 'rtl'; hud.dataset.mode = mode; stageEl.append(hud);
+  hud = node('div', 'catch-hud'); hud.dir = 'rtl'; hud.dataset.mode = mode; if (arch5) hud.dataset.arch = '1'; stageEl.append(hud);
   const top = node('div', 'catch-top');
   const wind = node('div', 'catch-wind'); wind.setAttribute('role', 'img');
   const windArrow = document.createElementNS(SVG, 'svg'); windArrow.setAttribute('viewBox', '0 0 24 24'); windArrow.setAttribute('width', 22); windArrow.setAttribute('height', 22); windArrow.innerHTML = '<path d="M3 12h16M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>';
@@ -73,8 +74,13 @@ export function runCatchSession(ctx) {
   top.append(wind, pips, crewChip); hud.append(top);
   const readout = node('div', 'catch-readout'); const angleText = node('bdi'), powerText = node('bdi'); readout.append(angleText, powerText); hud.append(readout);
   const power = node('div', 'catch-power'), powerFill = node('span'); power.append(powerFill); hud.append(power);
+  // arch: the power meter is a bow-string you pull: drag it up and down with the other hand
+  const setPowerAt = e => { const r = power.getBoundingClientRect(); engine?.setAim({power: 1 - (e.clientY - r.top) / Math.max(1, r.height)}); };
+  power.addEventListener('pointerdown', e => { if (!arch5) return; e.stopPropagation(); e.preventDefault(); power.setPointerCapture?.(e.pointerId); power.dataset.drag = '1'; setPowerAt(e); });
+  power.addEventListener('pointermove', e => { if (power.dataset.drag) { e.stopPropagation(); setPowerAt(e); } });
+  for (const type of ['pointerup', 'pointercancel']) power.addEventListener(type, e => { delete power.dataset.drag; e.stopPropagation(); });
   const ring = node('div', 'catch-ring'); ring.hidden = true; const ringLine = node('i'); ring.append(ringLine); hud.append(ring);
-  const dragHint = node('div', 'catch-drag-hint', t('catch.dragHint')); hud.append(dragHint);
+  const dragHint = node('div', 'catch-drag-hint', t(arch5 ? 'catch.dragHintArch' : 'catch.dragHint')); hud.append(dragHint);
   const toolBar = node('div', 'catch-tools'); toolBar.setAttribute('role', 'group'); toolBar.setAttribute('aria-label', t('catch.tools')); let toolButtons = [];
   hud.append(toolBar);
   const throwButton = node('button', 'catch-throw'); throwButton.type = 'button'; throwButton.setAttribute('aria-label', t('catch.throwHint'));
@@ -82,7 +88,7 @@ export function runCatchSession(ctx) {
   const popup = node('div', 'catch-popup'); popup.setAttribute('role', 'status'); popup.setAttribute('aria-live', 'polite'); hud.append(popup);
   const loading = node('div', 'catch-loading', t('catch.loading')); hud.append(loading);
   const help = node('div', 'catch-help'); help.hidden = true;
-  { const card = node('div', 'catch-help-card'); for (const k of [1, 2, 3, 4]) card.append(node('p', '', t('minigame.catchCriminal.help.' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help2', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
+  { const card = node('div', 'catch-help-card'); for (const k of [1, 2, 3, 4]) card.append(node('p', '', t(arch5 && k > 1 ? 'catch.arch.help.' + k : 'minigame.catchCriminal.help.' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help2', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
   const seenHelp = (() => { try { return localStorage.getItem('island.catch.help2') === '1'; } catch { return true; } })();
   const stars = node('div', 'catch-stars'); stars.hidden = true; hud.append(stars);
 
@@ -130,6 +136,7 @@ export function runCatchSession(ctx) {
       else if (e.type === 'crash') { audio?.cue('crash'); say(e.kind === 'cone' ? 'catch.pop.cone' : 'catch.pop.crash', 'bad'); }
       else if (e.type === 'crimCrash') { audio?.cue('crimCrash'); say('catch.pop.crimCrash', 'good'); }
       else if (e.type === 'pad') { audio?.cue('pad'); }
+      else if (e.type === 'scrape') { audio?.cue('scrape'); if (!scrapeSaid) { scrapeSaid = true; say('catch.pop.scrape', 'warn'); } }
       else if (e.type === 'ram') { audio?.cue('ram'); if (!ramSaid) { ramSaid = true; say('catch.pop.ram', 'good'); } }
       else if (e.type === 'crimBoost') { audio?.cue('nitro'); say('catch.pop.crimBoost', 'warn'); }
       else if (e.type === 'end') endChase();
@@ -153,7 +160,7 @@ export function runCatchSession(ctx) {
     for (const e of events) {
       if (e.type === 'launch') audio?.cue('whoosh');
       else if (e.type === 'catch') { audio?.cue(e.perfect ? 'perfect' : 'catch'); say(e.perfect ? 'catch.pop.perfect' : 'catch.pop.catch', e.perfect ? 'perfect' : 'good'); slow = .9; }
-      else if (e.type === 'bossHit') { audio?.cue('bossHit'); say('catch.pop.bossHit', 'good', {hp: e.hp}); slow = .6; }
+      else if (e.type === 'bossHit') { audio?.cue('bossHit'); say(engine.isArch ? 'catch.pop.hit' : 'catch.pop.bossHit', 'good', {hp: e.hp}); slow = .6; }
       else if (e.type === 'crew') { audio?.cue('siren', {crew: true}); say('catch.pop.crew', 'warn', {left: engine.state.crewLeft + 1}); }
       else if (e.type === 'blocked') { audio?.cue('thud'); say('catch.pop.blocked', 'bad'); }
       else if (e.type === 'miss') { if (e.near) { audio?.cue('near'); say('catch.pop.near', 'warn'); slow = .5; } else { audio?.cue('miss'); say('catch.pop.miss', 'bad'); } }
@@ -198,7 +205,7 @@ export function runCatchSession(ctx) {
       ring.hidden = false; ring.style.left = (e.clientX - r.left) + 'px'; ring.style.top = (e.clientY - r.top) + 'px'; ringLine.style.width = '0px'; return;
     }
     if (mode !== 'throw' || engine.state.phase !== 'aim') return;
-    drag = {id: e.pointerId, x: e.clientX, y: e.clientY, angle: engine.aim.angle, power: engine.aim.power};
+    drag = {id: e.pointerId, x: e.clientX, y: e.clientY, angle: engine.aim.angle, power: engine.aim.power, yaw: engine.aim.yaw || 0};
     stageEl.setPointerCapture?.(e.pointerId);
     ring.hidden = false; ring.style.left = (e.clientX - r.left) + 'px'; ring.style.top = (e.clientY - r.top) + 'px'; ringLine.style.width = '0px'; dragHint.hidden = true;
   }, {signal: abort.signal});
@@ -206,7 +213,7 @@ export function runCatchSession(ctx) {
     if (steerDrag && e.pointerId === steerDrag.id) { const dy = e.clientY - steerDrag.y; chase.setSteer(clamp(dy / 46, -1, 1)); ringLine.style.width = Math.abs(dy) + 'px'; ringLine.style.transform = `rotate(${dy >= 0 ? Math.PI / 2 : -Math.PI / 2}rad)`; return; }
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-    drag.to = {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; if (!feel) engine.setAim(drag.to); // with the feel on, the frame loop eases the line after the finger
+    drag.to = engine.isArch ? {angle: drag.angle + dy * P.anglePerPx, yaw: drag.yaw + dx * (P.yawPerPx || .1)} : {angle: drag.angle + dy * P.anglePerPx, power: drag.power - dx * P.powerPerPx}; if (!feel) engine.setAim(drag.to); // with the feel on, the frame loop eases the line after the finger
     const len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx); ringLine.style.width = len + 'px'; ringLine.style.transform = `rotate(${ang}rad)`;
   }, {signal: abort.signal});
   const endDrag = e => {
@@ -261,10 +268,12 @@ export function runCatchSession(ctx) {
     pipNodes.forEach((p, i) => { p.dataset.state = i < s.throwsLeft ? 'ready' : 'used'; });
     pips.setAttribute('aria-label', t('catch.throws', {count: s.throwsLeft}));
     const crew = engine.level.crew || 1, boss = engine.v2 && engine.level.boss;
-    crewChip.hidden = !(crew > 1 || boss);
-    if (crew > 1) crewChip.textContent = t('catch.crew', {caught: s.caught.length, total: crew});
+    const need = engine.hitsNeeded || 1;
+    crewChip.hidden = !(crew > 1 || boss || need > 1);
+    if (engine.isArch) crewChip.textContent = [need > 1 ? t('catch.hits', {hit: need - s.bossHp, need}) : '', crew > 1 ? t('catch.crew', {caught: s.caught.length, total: crew}) : ''].filter(Boolean).join(' · ');
+    else if (crew > 1) crewChip.textContent = t('catch.crew', {caught: s.caught.length, total: crew});
     else if (boss) crewChip.textContent = t('catch.boss', {hp: s.bossHp});
-    angleText.textContent = t('catch.angle', {value: Math.round(a.angle)}); powerText.textContent = t('catch.power', {value: Math.round(a.power * 100)});
+    angleText.textContent = engine.isArch ? t('catch.yaw', {value: Math.round(a.yaw || 0)}) + ' · ' + t('catch.angle', {value: Math.round(a.angle)}) : t('catch.angle', {value: Math.round(a.angle)}); powerText.textContent = t('catch.power', {value: Math.round(a.power * 100)});
     powerFill.style.height = Math.round(a.power * 100) + '%';
     hud.dataset.phase = s.phase; throwButton.disabled = s.phase !== 'aim' || finished || !view; refreshTools();
     dragHint.hidden = !(s.phase === 'aim' && s.thrown === 0 && !drag && !(crew > 1 && s.crimIndex > 0));
@@ -292,17 +301,17 @@ export function runCatchSession(ctx) {
     if (slow > 0) { slow -= dt; scale = Math.min(scale, .45); }
     dt *= scale;
     const keyAngle = ((keys.has('ArrowUp') ? -1 : 0) + (keys.has('ArrowDown') ? 1 : 0)) * P.keyAngle * dt * 60, keyPower = ((keys.has('ArrowLeft') ? 1 : 0) + (keys.has('ArrowRight') ? -1 : 0)) * P.keyPower * dt * 60;
-    if (engine.state.phase === 'aim' && (keyAngle || keyPower)) engine.setAim({angle: engine.aim.angle - keyAngle, power: engine.aim.power + keyPower});
-    if (feel && drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: engine.aim.power + (drag.to.power - engine.aim.power) * k}); }
+    if (engine.state.phase === 'aim' && (keyAngle || keyPower)) { if (engine.isArch) engine.setAim({angle: engine.aim.angle - keyAngle, yaw: engine.aim.yaw - keyPower * 20}); else engine.setAim({angle: engine.aim.angle - keyAngle, power: engine.aim.power + keyPower}); }
+    if (feel && drag?.to && engine.state.phase === 'aim') { const k = 1 - Math.exp(-dt * 26); engine.setAim({angle: engine.aim.angle + (drag.to.angle - engine.aim.angle) * k, power: drag.to.power === undefined ? engine.aim.power : engine.aim.power + (drag.to.power - engine.aim.power) * k, yaw: drag.to.yaw === undefined ? undefined : engine.aim.yaw + (drag.to.yaw - engine.aim.yaw) * k}); }
     acc += dt;
     while (acc >= STEP) { acc -= STEP; stepThrow(STEP); }
     view.update(dt, {});
     refreshHud();
   }
 
-  import('./catch-view.mjs?v=island-v2-20261107-7').then(async ({createCatchView}) => {
+  import('./catch-view.mjs?v=island-v2-20261107-8').then(async ({createCatchView}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
-    view = await createCatchView({canvas, engine, balance, stage, v2, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
+    view = await createCatchView({canvas, arch: arch5, engine, balance, stage, v2, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
     loading.hidden = true;
     if (withChase) startChase();

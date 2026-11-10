@@ -1,8 +1,9 @@
-import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-7';
-import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-7';
-import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-7';
-import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-7';
-import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-7';
+import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-8';
+import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-8';
+import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-8';
+import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-8';
+import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-8';
+import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-8';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
 function leagueOrder(cars){
@@ -12,14 +13,14 @@ function leagueOrder(cars){
 }
 
 export function runRacingSession(ctx){
- const engineOn=new URLSearchParams(globalThis.location?.search||'').get('racingEngine')!=='0',topSoundOn=new URLSearchParams(globalThis.location?.search||'').get('racingTopSound')!=='0',samplesOn=new URLSearchParams(globalThis.location?.search||'').get('racingSamples')!=='0';
+ const engineOn=new URLSearchParams(globalThis.location?.search||'').get('racingEngine')!=='0',topSoundOn=new URLSearchParams(globalThis.location?.search||'').get('racingTopSound')!=='0',samplesOn=new URLSearchParams(globalThis.location?.search||'').get('racingSamples')!=='0',soundStartOn=new URLSearchParams(globalThis.location?.search||'').get('racingSoundStart')!=='0';
  let lastRank=0;
  const model=createRacing({stage:ctx.level||1,seed:ctx.seed,difficulty:typeof ctx.difficulty==='string'?ctx.difficulty:'easy',config:{equipment:ctx.equipment,...(ctx.league?{drivers:ctx.league.drivers,stage:ctx.league.stageOverride}:{}),walls:new URLSearchParams(globalThis.location?.search||'').get('racingWalls')!=='0',feel:new URLSearchParams(globalThis.location?.search||'').get('racingFeel')!=='0',engine:engineOn,ers:new URLSearchParams(globalThis.location?.search||'').get('racingErs')!=='0'}});
  const {canvas,controls,status,t}=ctx;let lastInput={},frame,view,input,last=0,paused=false,disposed=false,finished=false,messageUntil=0,toastText='',renderError=null;
  const abort=new AbortController();let audio;try{audio=createRacingAudio({samples:engineOn&&samplesOn});}catch{audio=createRacingAudio({storage:null});}
  const session={get ready(){return Boolean(view)&&renderError!=='webgl-context-lost';},get loadFailed(){return renderError&&renderError!=='webgl-context-lost'?String(renderError):null;},setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
  if(!canvas)return session;
- const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-7',import.meta.url).href;screen.append(css);
+ const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-8',import.meta.url).href;screen.append(css);
  const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const hud=node('div','racing-hud'),rank=node('bdi','racing-rank','3'),of=node('small','racing-of','/ 5'),lap=node('span','racing-lap'),clock=node('bdi','racing-clock','0:00'),trackName=node('strong','racing-track',model.track.name);rank.append(of);const position=node('div','racing-position');position.append(rank,node('span','racing-position-label','מקום'));const info=node('div','racing-race-info');info.append(trackName,lap,clock);const lapInfo=node('span','racing-lapinfo');lapInfo.style.direction='rtl';info.append(lapInfo);hud.append(position,info);stage.append(hud);
  const draftBadge=node('div','racing-draft','סלפה');draftBadge.hidden=true;stage.append(draftBadge);
@@ -30,13 +31,13 @@ export function runRacingSession(ctx){
  const speedometer=createRacingSpeedometer({parent:stage,document:canvas.ownerDocument});
  const energy=node('div','racing-energy'),energyFill=node('span','racing-energy-fill');energy.setAttribute('role','meter');energy.setAttribute('aria-label',t('racing.energy'));energy.setAttribute('aria-valuemin','0');energy.setAttribute('aria-valuemax','100');const energyTag=node('span','racing-energy-tag','ERS');energy.append(energyFill,energyTag);stage.append(energy);
  const drift=node('div','racing-drift-meter'),driftFill=node('span','racing-drift-fill');drift.append(driftFill);stage.append(drift);
- const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','גררו אגודל בצד שמאל להיגוי · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
+ const countdown=node('div','racing-countdown'),toast=node('div','racing-toast'),hint=node('p','racing-hint','גררו אגודל בצד שמאל להיגוי · לחצו על הגז (או הפעילו האצה אוטומטית) · החזיקו דריפט בפנייה ושחררו לבוסט · ניטרו מימין');stage.append(countdown,toast,hint);
  const loading=node('div','racing-loading','מכינים את מסלול המרוץ…');stage.append(loading);
  const credit=node('a','racing-credit','קרדיט לדגם');credit.href=new URL('../assets/racing/credits.html',import.meta.url).href;credit.target='_blank';credit.rel='noopener';credit.setAttribute('aria-label','קרדיט ורישיון דגם המכונית');controls.append(credit);
  input=createRacingControls({root:controls,canvas,t});input.setEnabled(!paused);
- screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});canvas.addEventListener('keydown',()=>audio.unlock(),{signal:abort.signal});
+ if(soundStartOn)bindAudioUnlock({screen,canvas,audio,signal:abort.signal});else{screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});canvas.addEventListener('keydown',()=>audio.unlock(),{signal:abort.signal});}
  canvas.addEventListener('webglcontextlost',e=>{if(disposed)return;e.preventDefault();renderError='webgl-context-lost';session.setPaused(true);loading.hidden=false;loading.textContent='התצוגה נעצרה. חזרו לעיר ונסו שוב.';const back=node('button','secondary-button','חזרה לעיר');back.onclick=()=>ctx.cancel();loading.append(back);stage.append(loading);},{signal:abort.signal});
- const dev=new URLSearchParams(location.search).get('dev')==='1';if(dev)session.debug={model,input,qualitySample:ms=>view?.observeFrame(ms),render:()=>view?.render(model.state,0)};
+ const dev=new URLSearchParams(location.search).get('dev')==='1';if(dev)session.debug={model,input,audio,qualitySample:ms=>view?.observeFrame(ms),render:()=>view?.render(model.state,0)};
  createRacingView(canvas,model.track,{stage:model.stage,seed:ctx.seed,v7:ctx.balance?.v7,lite:Boolean(ctx.lite)}).then(loaded=>{if(disposed||renderError==='webgl-context-lost'){loaded.dispose();return;}view=loaded;loading.remove();last=0;frame=requestAnimationFrame(tick);}).catch(error=>{if(disposed)return;renderError=String(error?.message||error);loading.textContent='לא ניתן להפעיל תלת־ממד במכשיר כרגע.';const back=node('button','secondary-button','חזרה לעיר');back.onclick=()=>ctx.cancel();loading.append(back);ctx.onError?.('racing.unavailable');});
  const bounds=model.track.points.reduce((b,p)=>({minX:Math.min(b.minX,p.x),maxX:Math.max(b.maxX,p.x),minZ:Math.min(b.minZ,p.z),maxZ:Math.max(b.maxZ,p.z)}),{minX:Infinity,maxX:-Infinity,minZ:Infinity,maxZ:-Infinity});
  function mapPoint(p){const k=Math.min(152/(bounds.maxX-bounds.minX),95/(bounds.maxZ-bounds.minZ));return [90+(p.x-(bounds.minX+bounds.maxX)/2)*k,60+(p.z-(bounds.minZ+bounds.maxZ)/2)*k];}

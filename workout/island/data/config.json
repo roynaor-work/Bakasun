@@ -1253,6 +1253,7 @@
    }
   },
   "alienDefense": {
+   "v14": {"rateMult": 0.28, "damageTrim": 1.45, "minInterval": 0.055, "heatSeconds": 3.5, "coolSeconds": 1.6, "resumeHeat": 0.25, "shieldGap": 0.26, "gearExp": 1.0},
    "v13": {"shipScale": 1.3, "cannonOffset": 11.3, "muzzleForward": 28, "loopGain": 1.5, "spinGain": 1.2, "flashGain": 0.6, "spinUpOverlap": 0.15},
    "v12": {"rateMult": 0.15, "damageTrim": 0.9, "cannonOffset": 11, "sparkCool": 0.1, "hitSoundGap": 0.12, "pulseHz": 66, "maxShotsMult": 3, "spinRate": 70, "flashSeconds": 0.045},
    "v11": {"shotSecondsMult": 0.72, "laserEvery": [5, 6], "laserShots": [2, 4], "laserGap": 0.1, "laserDamage": 1.5, "laserPierce": 2, "blastHp": 3, "blastEvery": 5, "blastCooldown": 1.0, "earlyBolt": [0.66, 0.9, 0.95], "boltSpeed": [0.8, 0.85, 0.9], "bulletCap": [6, 5, 5], "volleyChance": [0.2, 0.05, 0.05], "bonusSeconds": 10, "pityKills": 28, "pitySeconds": 40},
@@ -5800,6 +5801,16 @@
      "drift": 17.35,
      "concurrent": 3,
      "seconds": 218,
+     "air": {
+      "from": 25,
+      "every": 34,
+      "count": 2,
+      "kinds": [
+       "plane",
+       "heli"
+      ],
+      "hpScale": 1
+     },
      "feature": "feature.naval.12",
      "ammunition": [
       40,
@@ -6241,6 +6252,16 @@
      "drift": 20.15,
      "concurrent": 3,
      "seconds": 254,
+     "air": {
+      "from": 22,
+      "every": 30,
+      "count": 2,
+      "kinds": [
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.2
+     },
      "feature": "feature.naval.20",
      "ammunition": [
       48,
@@ -6663,6 +6684,17 @@
      "drift": 22.6,
      "concurrent": 3,
      "seconds": 282,
+     "air": {
+      "from": 20,
+      "every": 28,
+      "count": 3,
+      "kinds": [
+       "plane",
+       "heli",
+       "plane"
+      ],
+      "hpScale": 1.4
+     },
      "feature": "feature.naval.27",
      "ammunition": [
       56,
@@ -7474,6 +7506,10 @@
      "lowAngle": 10,
      "powerSpan": 14
     },
+    "wide": {
+     "fine": 0.12,
+     "grow": 0.001
+    },
     "assist": {
      "yawRangeDeg": 4,
      "yawPull": 0.45,
@@ -7484,7 +7520,7 @@
     },
     "follow": {
      "yawFixed": 0.12,
-     "maxLeadDegrees": 14,
+     "maxLeadDegrees": 34,
      "rate": 3.5
     }
    },
@@ -11189,7 +11225,7 @@
     "deep": {"enabled": true, "errorScale": {"easy": 0.35, "normal": 0.7, "hard": 1.1}, "buffer": {"easy": 0.5, "normal": 0.38, "hard": 0.24}, "aiMissScale": {"easy": 0.55, "normal": 1, "hard": 1},
      "assist": {"easy": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "normal": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "hard": {"radius": 2.05, "step": 0.55, "speed": 1.65, "lead": 0.7}},
      "rating": {"perfect": 0.25, "good": 0.6}},
-    "hold": {"enabled": true, "seconds": 2.4, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.24, "normal": 0.2, "hard": 0.15}},
+    "hold": {"enabled": true, "carry": {"enabled": true, "releaseWait": 1.6, "needleWeight": 0.7, "needlePower": 0.3}, "seconds": 3, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.28, "normal": 0.24, "hard": 0.18}},
     "meter": {"enabled": true, "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
@@ -12344,6 +12380,7 @@
      "base": "design/hoops-v5/models/"
     },
     "tall": {
+     "athletes": {"enabled": true, "donor": "assets/athletes-v1/gait-donor.json"},
      "enabled": true,
      "minQuality": 1,
      "base": "assets/hoops-tall/",
@@ -13184,7 +13221,8 @@
     "throwSeconds": 0.26,
     "impactSeconds": 0.9,
     "caughtSeconds": 2.2,
-    "rearmSeconds": 1.4
+    "rearmSeconds": 1.4,
+    "yawMax": 24
    },
    "tools": {
     "narrow": {
@@ -13265,7 +13303,7 @@
      "difficulty": 1,
      "winMoney": 30,
      "winParts": 0,
-     "radiusScale": 0.505,
+     "radiusScale": 2.359,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13291,7 +13329,8 @@
       "density": 0.35,
       "crimBoost": 999,
       "skill": 0.55,
-      "gap": 34.4
+      "gap": 34.4,
+      "curve": 0.3
      },
      "crew": 1,
      "gust": 0,
@@ -13299,6 +13338,15 @@
      "v3": {
       "radiusScale": 0.703,
       "preview": 0.54
+     },
+     "zmove": {
+      "kind": "stand"
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.505,
+      "preview": 0.4
      }
     },
     {
@@ -13307,7 +13355,7 @@
      "difficulty": 2,
      "winMoney": 38,
      "winParts": 0,
-     "radiusScale": 0.504,
+     "radiusScale": 2.558,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13340,7 +13388,8 @@
       "density": 0.45,
       "crimBoost": 999,
       "skill": 0.6,
-      "gap": 35.3
+      "gap": 35.3,
+      "curve": 0.4
      },
      "crew": 1,
      "gust": 0,
@@ -13348,6 +13397,17 @@
      "v3": {
       "radiusScale": 0.649,
       "preview": 0.5
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.0,
+      "period": 5.0
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.504,
+      "preview": 0.4
      }
     },
     {
@@ -13356,7 +13416,7 @@
      "difficulty": 3,
      "winMoney": 46,
      "winParts": 0,
-     "radiusScale": 0.547,
+     "radiusScale": 2.855,
      "wobble": {
       "angle": 0.25,
       "power": 0.005
@@ -13390,7 +13450,8 @@
       "density": 0.55,
       "crimBoost": 10,
       "skill": 0.65,
-      "gap": 28.9
+      "gap": 28.9,
+      "curve": 0.5
      },
      "crew": 1,
      "gust": 0,
@@ -13398,6 +13459,17 @@
      "v3": {
       "radiusScale": 0.946,
       "preview": 0.7
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.4,
+      "period": 4.6
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.547,
+      "preview": 0.43
      }
     },
     {
@@ -13406,7 +13478,7 @@
      "difficulty": 4,
      "winMoney": 54,
      "winParts": 0,
-     "radiusScale": 0.85,
+     "radiusScale": 2.673,
      "wobble": {
       "angle": 0.35,
       "power": 0.007
@@ -13442,7 +13514,8 @@
       "density": 0.65,
       "crimBoost": 9,
       "skill": 0.7,
-      "gap": 28.3
+      "gap": 28.3,
+      "curve": 0.6
      },
      "crew": 1,
      "gust": 0.3,
@@ -13450,6 +13523,17 @@
      "v3": {
       "radiusScale": 0.97,
       "preview": 0.71
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.0,
+      "period": 4.2
+     },
+     "hits": 2,
+     "throws": 5,
+     "v4": {
+      "radiusScale": 0.85,
+      "preview": 0.63
      }
     },
     {
@@ -13458,7 +13542,7 @@
      "difficulty": 5,
      "winMoney": 64,
      "winParts": 0,
-     "radiusScale": 0.757,
+     "radiusScale": 3.97,
      "wobble": {
       "angle": 0.5,
       "power": 0.01
@@ -13494,7 +13578,8 @@
       "density": 0.75,
       "crimBoost": 8,
       "skill": 0.72,
-      "gap": 28
+      "gap": 28,
+      "curve": 0.7
      },
      "crew": 1,
      "boss": {
@@ -13505,6 +13590,17 @@
      "v3": {
       "radiusScale": 0.941,
       "preview": 0.69
+     },
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.4,
+      "period": 3.8
+     },
+     "hits": 3,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 0.757,
+      "preview": 0.57
      }
     },
     {
@@ -13513,7 +13609,7 @@
      "difficulty": 6,
      "winMoney": 76,
      "winParts": 0,
-     "radiusScale": 0.876,
+     "radiusScale": 2.667,
      "wobble": {
       "angle": 0.6,
       "power": 0.012
@@ -13556,7 +13652,8 @@
       "density": 0.85,
       "crimBoost": 7.5,
       "skill": 0.75,
-      "gap": 28
+      "gap": 28,
+      "curve": 0.8
      },
      "crew": 2,
      "crewGap": 5.5,
@@ -13576,6 +13673,18 @@
      "v3": {
       "radiusScale": 0.946,
       "preview": 0.7
+     },
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.4,
+      "speed": 3.0,
+      "pause": 0.8
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 0.876,
+      "preview": 0.65
      }
     },
     {
@@ -13584,7 +13693,7 @@
      "difficulty": 7,
      "winMoney": 90,
      "winParts": 0,
-     "radiusScale": 1.17,
+     "radiusScale": 2.394,
      "wobble": {
       "angle": 0.75,
       "power": 0.014
@@ -13633,11 +13742,23 @@
       "density": 0.95,
       "crimBoost": 7,
       "skill": 0.78,
-      "gap": 28
+      "gap": 28,
+      "curve": 0.9
      },
      "crew": 2,
      "crewGap": 5.5,
-     "gust": 0.6
+     "gust": 0.6,
+     "zmove": {
+      "kind": "pace",
+      "amp": 1.6,
+      "period": 3.8
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.17,
+      "preview": 0.85
+     }
     },
     {
      "stage": 8,
@@ -13645,7 +13766,7 @@
      "difficulty": 8,
      "winMoney": 106,
      "winParts": 0,
-     "radiusScale": 1.379,
+     "radiusScale": 2.342,
      "wobble": {
       "angle": 0.9,
       "power": 0.016
@@ -13703,7 +13824,8 @@
       "density": 1.05,
       "crimBoost": 6.5,
       "skill": 0.8,
-      "gap": 28.3
+      "gap": 28.3,
+      "curve": 1.0
      },
      "crew": 2,
      "crewGap": 5.5,
@@ -13718,7 +13840,18 @@
        "min": 4,
        "max": 11
       }
-     ]
+     ],
+     "zmove": {
+      "kind": "pace",
+      "amp": 2.4,
+      "period": 3.4
+     },
+     "hits": 1,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.379,
+      "preview": 0.99
+     }
     },
     {
      "stage": 9,
@@ -13726,7 +13859,7 @@
      "difficulty": 9,
      "winMoney": 124,
      "winParts": 0,
-     "radiusScale": 1.396,
+     "radiusScale": 2.502,
      "wobble": {
       "angle": 1.0,
       "power": 0.018
@@ -13782,7 +13915,8 @@
       "density": 1.15,
       "crimBoost": 6,
       "skill": 0.82,
-      "gap": 24
+      "gap": 24,
+      "curve": 1.0
      },
      "crew": 3,
      "crewGap": 3.2,
@@ -13797,7 +13931,19 @@
        "min": 4,
        "max": 11
       }
-     ]
+     ],
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.6,
+      "speed": 3.2,
+      "pause": 0.7
+     },
+     "hits": 1,
+     "throws": 7,
+     "v4": {
+      "radiusScale": 1.396,
+      "preview": 1
+     }
     },
     {
      "stage": 10,
@@ -13805,7 +13951,7 @@
      "difficulty": 10,
      "winMoney": 150,
      "winParts": 0,
-     "radiusScale": 1.153,
+     "radiusScale": 4.628,
      "wobble": {
       "angle": 1.1,
       "power": 0.02
@@ -13864,7 +14010,8 @@
       "density": 1.25,
       "crimBoost": 5.5,
       "skill": 0.85,
-      "gap": 32.6
+      "gap": 32.6,
+      "curve": 1.0
      },
      "crew": 1,
      "boss": {
@@ -13890,7 +14037,19 @@
        "min": 7,
        "max": 14
       }
-     ]
+     ],
+     "zmove": {
+      "kind": "dash",
+      "amp": 2.8,
+      "speed": 3.6,
+      "pause": 0.6
+     },
+     "hits": 3,
+     "throws": 6,
+     "v4": {
+      "radiusScale": 1.153,
+      "preview": 0.84
+     }
     }
    ],
    "equipment": {
@@ -13982,7 +14141,10 @@
     "bonusThrowAt": 0.85,
     "policeCar": "policeCar",
     "getaway": "getawayCar",
-    "period": 66
+    "period": 66,
+    "curveDrift": 1.4,
+    "scrapeDrag": 2.2,
+    "laneLimit": 1.35
    }
   },
   "boarDefense": {

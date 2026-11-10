@@ -192,7 +192,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     if(mode==='slide'){t=Math.max(t,(1-clamp((p.slideTime||0)/slide.slideSeconds,0,1))*slideDur);}
     else if(mode==='recover'){
       if(slide.recoverSeconds===null){slide.recoverSeconds=Math.max(.05,p.recover||config.slide?.recoverSeconds||.6);slide.rate=Math.max(1,(total-slideDur)/(slide.recoverSeconds+(config.view.slideGraceSeconds??.35)));}
-      const v9=soccerMotionV9Enabled()?slideRecoverTime(clip.parts,slide.recoverSeconds,1-clamp((p.recover||0)/slide.recoverSeconds,0,1)):null;
+      // The simulation's 0.6 s recovery used to play the whole fall and get-up (2.5 s of clip) at up to 2.7x: measured pops of 53-57 degrees per
+      // frame. The v9 timeline is now stretched over recovery + SLIDE_SLOW_SECONDS; once the simulation lets go, a standing player finishes the
+      // get-up at the rate it had (a moving player interrupts it into the run, as before). `?soccerSlideSlow=1` turns this on (default off).
+      const stretch=soccerSlideSlowEnabled()?SLIDE_SLOW_SECONDS:0,span=slide.recoverSeconds+stretch;
+      const v9=soccerMotionV9Enabled()?slideRecoverTime(clip.parts,span,clamp((slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))/span,0,1),stretch?{fallMaxSpeed:SLIDE_FALL_MAX_SPEED}:{}):null;
+      if(v9!==null&&clip.parts?.length>=3){const rise=clip.parts[2];slide.rate=Math.max(1,rise.durationSeconds*.78/(Math.max(.05,span)*(1-clamp(clip.parts[1].durationSeconds/((stretch?SLIDE_FALL_MAX_SPEED:3)*span),.15,.45))));}
       t=v9!==null?Math.max(t,v9):Math.max(t,slideDur+(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
     }
     else{
@@ -264,7 +269,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         // (anatomical left is (cos yaw, -sin yaw) in x,z), the high clip from the ball height.
         const left=-Math.sin(yaw)*(p.diveZ||1)>0,high=(s.ball.y||0)>1.1&&left;
         const v8=soccerV8DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])),plan=v8&&soccerV8DivePlan(data.states[v8]);
-        if(plan){dive={name:v8,contact:plan.contact,settleRate:plan.settleRate,rate:plan.rate};change(v8,'fall_confirmed',true,{at:plan.at,rate:plan.rate,fadeSeconds:.06});}
+        if(plan){dive={name:v8,contact:plan.contact,settleRate:plan.settleRate,rate:plan.rate};change(v8,'fall_confirmed',true,{at:plan.at,rate:plan.rate,fadeSeconds:soccerSlideSlowEnabled()?.12:.06});}
         else{
           const chosen=actions.keeper_dive_left?(high?'keeper_dive_high':left?'keeper_dive_left':'keeper_dive_right'):'fall';
           change(chosen,'fall_confirmed',true,{rate:chosen==='fall'?1:data.states[chosen].durationSeconds/1.05});
@@ -356,6 +361,9 @@ let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,la
 let lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
 /** One line for the load report / debug: which motion packs are in this match, and why one was skipped. */
+export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5;
+/** Opt-in (`?soccerSlideSlow=1`): the get-up is not finished when the simulation returns control, so it needs phone testing and, to be the default, a longer simulated recovery. */
+export const soccerSlideSlowEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerSlideSlow')==='1';
 export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error].filter(Boolean));}
 /** Why the v8 motion clips were skipped (null when loaded or not asked for). */
 export function soccerV8MotionError(){return lastV8Error;}

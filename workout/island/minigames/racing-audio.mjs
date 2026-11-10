@@ -51,7 +51,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();
     createNoise();lastTime=context.currentTime;
     // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
-    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-7').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
+    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-8').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}
@@ -150,7 +150,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
+  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}

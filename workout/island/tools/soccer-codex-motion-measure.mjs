@@ -5,7 +5,7 @@
  * Usage: node tools/soccer-codex-motion-measure.mjs [off|v7run|v9]   ("off" = without the Codex clips; "v7run" = Codex walk/jog/idle/brake but the v7 runs) */
 import {readFile} from 'node:fs/promises';
 const off=process.argv[2]==='off',v7run=process.argv[2]==='v7run',v9only=process.argv[2]==='v9';
-globalThis.location={search:v7run?'?soccerRunV9=0':''};
+globalThis.location={search:(v7run?'?soccerRunV9=0':'')+(process.argv.includes('--slow')?(v7run?'&':'?')+'soccerSlideSlow=1':'')};
 const T=await import('../vendor/three.module.js');
 const {composeSoccerRestartMotion}=await import('../minigames/soccer-restart-motion.mjs');
 const {compileSoccerDesignClips,createSoccerDesignMotion}=await import('../minigames/soccer-design-character.mjs');
@@ -16,6 +16,7 @@ const config=JSON.parse(await readFile(new URL('../data/config.json',import.meta
 const v7=await readFile(new URL('../assets/soccer-v7/clips.json',import.meta.url),'utf8').then(JSON.parse),v8=await readFile(new URL('../assets/soccer-v8/clips.json',import.meta.url),'utf8').then(JSON.parse),v9=await readFile(new URL('../assets/soccer-v9/clips.json',import.meta.url),'utf8').then(JSON.parse);
 const {soccerV8States}=await import('../minigames/soccer-v8.mjs'),{soccerCodexStates,soccerV10States}=await import('../minigames/soccer-codex-motion.mjs');
 const v10=await readFile(new URL('../assets/soccer-v10/clips.json',import.meta.url),'utf8').then(JSON.parse);
+{const g=process.argv.indexOf('--grace');if(g>0)config.view.slideGraceSeconds=Number(process.argv[g+1]);}
 const library=composeSoccerRestartMotion(base,...packs);
 const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...(off?{}:soccerCodexStates(v9)),...(off||v7run||v9only?{}:soccerV10States(v10))}},clips=compileSoccerDesignClips(data,rig,map);
 const deg=r=>r*180/Math.PI,dt=1/60;
@@ -76,6 +77,29 @@ function runPose(speed){
   const state=rt.motion.state,clip=data.states[state],rate=rt.motion.actions[state]?.getEffectiveTimeScale?.()??1;
   return {speed,state,rate:r2(rate),stepsPerSecond:r2(2/(clip.durationSeconds/rate)),leanDeg:r2(rows.reduce((a,r)=>a+r.lean,0)/rows.length),elbowFlexMinDeg:r2(Math.min(...rows.map(r=>r.flexMin))),elbowFlexMaxDeg:r2(Math.max(...rows.map(r=>r.flexMax))),hipsBobCm:r2((Math.max(...rows.map(r=>r.hipsY))-Math.min(...rows.map(r=>r.hipsY)))*100)};
 }
+/** `--glitch`: slides and keeper dives, the moments that looked "funny" on the phone. Scripted p fields follow the simulation: slideTime counts down
+ * from 0.35, recover counts down from 0.6, a dive sets diveZ. Prints the largest per-frame bone rotation and hips step of each sequence. */
+function glitch(){
+  const out={};
+  const run=(name,steps,opts={})=>{const rt=make(),p=mk(opts),s=S(),rows=[];let prev=null;
+    for(const [seconds,mode,fn] of steps)for(let i=0;i<Math.round(seconds/dt);i++){fn?.(p,i*dt,seconds);rt.motion.update(p,s,{mode},dt);rt.group.updateMatrixWorld(true);
+      const q=Object.fromEntries(Object.keys(rt.bones).map(n=>[n,rt.bones[n].quaternion.clone()])),hips=world(rt.bones,'Hips').y;
+      const pop=prev?Math.max(...Object.keys(q).map(n=>deg(prev.q[n].angleTo(q[n])))):0,step=prev?Math.abs(hips-prev.hips):0,worst=prev?Object.keys(q).map(n=>[n,deg(prev.q[n].angleTo(q[n]))]).sort((a,b)=>b[1]-a[1])[0][0]:'';
+      rows.push({state:rt.motion.state,mode,pop,step,worst,t:rt.motion.actions[rt.motion.state]?.time});prev={q,hips};}
+    if(process.argv.includes('--times'))console.error(name,rows.map((r,i)=>`${i}:${r.state.slice(-8)}@${(r.t??0).toFixed(2)}/${r.pop.toFixed(0)}`).filter((_,i)=>i>=50&&i<95).join(' '));
+    if(process.argv.includes('--series'))console.error(name,rows.map((r,i)=>i%3?'':`${r.state.slice(0,18)}:${r.pop.toFixed(0)}`).filter(Boolean).join(' '));
+    const top=[...rows].sort((a,b)=>b.pop-a.pop)[0],states=[];for(const r of rows)if(!states.length||states.at(-1)!==r.state)states.push(r.state);
+    out[name]={popMaxDeg:r2(top.pop),at:top.state+'/'+top.worst,hipsStepMaxCm:r2(Math.max(...rows.map(r=>r.step))*100),p99:r2(pct(rows.map(r=>r.pop),.99)),states};};
+  for(const kind of ['straight','side','left','right']){
+    run('slide-'+kind,[[.8,'run',p=>{p.vz=5;p.fz=1;}],[.35,'slide',(p,t,sec)=>{p.slideKind=kind;p.slideTime=Math.max(.01,.35-t);p.vz=5;}],[.6,'recover',(p,t,sec)=>{p.slideKind=kind;p.slideTime=0;p.recover=Math.max(0,.6-t);p.vz=0;}],[1,'idle',p=>{p.vz=0;p.recover=0;}]]);
+  }
+  for(const [name,dz,by] of [['dive-left',1,.3],['dive-right',-1,.3],['dive-high-left',1,1.7]]){
+    run(name,[[1,'idle',p=>{p.vz=0;}],[1.2,'dive',p=>{p.diveZ=dz;p.fx=-0;p.fz=1;}],[.6,'recover',(p,t)=>{p.recover=Math.max(0,.6-t);}],[1,'idle',p=>{p.recover=0;}]],{slideKind:null,diveZ:dz});
+    void by;
+  }
+  return out;
+}
+if(process.argv.includes('--glitch')){console.log(JSON.stringify(glitch(),null,1));process.exit(0);}
 const SEQ=[[1.5,0],[2,1],[2,2.6],[2,4.5],[2,6.5],[1.2,0],[1.5,2.6],[1.2,0]];
 const seq=play(SEQ),pops=seq.map(r=>r.pop),steps=seq.map(r=>r.hipsStep);
 const states=[];for(const r of seq)if(!states.length||states.at(-1)!==r.state)states.push(r.state);

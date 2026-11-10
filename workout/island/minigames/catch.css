@@ -83,3 +83,6 @@
 .catch-damage i{display:block;width:110px;height:8px;border-radius:5px;background:#ffffff22;overflow:hidden}
 .catch-damage span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb35c,#ff4d3d);transition:width .15s linear}
 .catch-damage[data-hot=true]{border-color:#ff4d3d;box-shadow:0 0 12px #ff4d3d88}
+
+/* v5: archery view. The power meter becomes a bow-string you pull with the other hand. */
+.catch-hud[data-arch] .catch-power{left:max(16px,calc(env(safe-area-inset-left) + 16px));bottom:max(86px,calc(env(safe-area-inset-bottom) + 86px));width:38px;height:128px;border-radius:12px;border:2px solid #ffffff66;pointer-events:auto;touch-action:none;cursor:ns-resize}

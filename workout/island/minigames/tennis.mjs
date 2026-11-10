@@ -39,7 +39,7 @@ export function predictLanding(ball, config) {
   const t = Math.max(0, (ball.vy + Math.sqrt(Math.max(0, ball.vy ** 2 + 2 * g * (ball.y - c.radius)))) / g);
   return { x: ball.x + ball.vx * t, z: ball.z + ball.vz * t, seconds: t };
 }
-export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false } = {}) {
+export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false } = {}) {
   stage = clamp(Math.trunc(Number(stage) || 1), 1, config.levels.length);
   seed = Number(seed) >>> 0;
   const rng = seededRandom(seed), selected=config.levels[stage-1],d=config.difficulties?.[difficulty]||{speed:1,timing:1,miss:0},level={...selected,speed:selected.speed*d.speed,timingWindow:selected.timingWindow*d.timing,missChance:clamp(selected.missChance+d.miss,0,config.opponent.maximumMissChance)}, p = config.player, c = config.ball, court = config.court, rules = config.rules;
@@ -47,7 +47,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   const contactConfig={bufferSeconds:.24,minHeight:.32,maxHeight:2.25,assistRadius:2.05,assistSpeed:1.65,assistMaxStep:.55,edgePowerPenalty:.22,edgeSpread:.3,...p.contact};
   const attributes = { speed: p.speedByRank[safeRanks.speed - 1], hitPower: p.hitPowerByRank[safeRanks.hit - 1], servePower: p.servePowerByRank[safeRanks.serve - 1], reach: p.reach * (d.reach || 1) };
   const score = createScore();
-  const V9=Boolean(v9&&config.v9),M=Boolean(V9&&meter&&config.v9.meter),H=Boolean(M&&hold&&config.v9.hold),D=Boolean(V9&&deep&&config.v9.deep),v9c=config.v9||{},v9d=(k,fallback)=>v9c[k]?.[difficulty]??fallback;
+  const V9=Boolean(v9&&config.v9),M=Boolean(V9&&meter&&config.v9.meter),H=Boolean(M&&hold&&config.v9.hold),D=Boolean(V9&&deep&&config.v9.deep),K=Boolean(H&&carry&&config.v9.hold.carry),v9c=config.v9||{},v9d=(k,fallback)=>v9c[k]?.[difficulty]??fallback;
   // v-deep: the computer misses less in the early stages (so there are rallies) and the player's racket walks to the ball for them.
   if(D)level.missChance=clamp(level.missChance*(config.v9.deep.aiMissScale[difficulty]??1),0,config.opponent.maximumMissChance);
   const assistCfg=D?(config.v9.deep.assist[difficulty]||config.v9.deep.assist.normal):{radius:contactConfig.assistRadius,step:contactConfig.assistMaxStep,speed:contactConfig.assistSpeed,idle:false};
@@ -145,13 +145,15 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   function shoot(side, timing = 0, charge = 0) {
     const b = state.ball, serving = ['serve','toss'].includes(state.phase);
     if(side===0&&pendingShot){({lob,drop,aim,charge}=pendingShot);pendingShot=null;}
-    let tapped=false;if(H&&side===0&&!serving&&!lob&&!drop&&charge<config.v9.hold.tapSeconds/config.v9.hold.seconds){charge=Math.min(powerGuide(aim).need,config.v9.hold.needDefault);tapped=true;}
+    let tapped=false,needleAcc=1,held=false;if(H&&side===0&&!serving&&!lob&&!drop&&charge<config.v9.hold.tapSeconds/config.v9.hold.seconds){charge=Math.min(powerGuide(aim).need,config.v9.hold.needDefault);tapped=true;}
+    // v13: a held shot is judged by the needle (how close to the centre the button was released) and fired at the ball's arrival, so its timing is perfect by construction.
+    if(K&&side===0&&!serving&&!tapped){const g=powerGuide(aim);needleAcc=1-clamp(Math.abs(charge-g.need)/(g.tol+(config.v9.meter.yellow??.2)),0,1);held=true;timing=0;}
     const serveZone=side===0?state.serveZone:'green';
     const perfect=serving&&side===0&&serveZone==='green'&&Math.abs(state.serveMeter-.5)<=config.serve.perfectWidth/2+1e-9;
     const aiDrop=!serving&&side===1&&rng()<(level.dropChance||0),aiLob=!serving&&side===1&&!aiDrop&&rng()<(level.lobChance||0);
     const isDrop=!serving&&(side===0?drop:aiDrop),isLob=!serving&&(side===0?lob:aiLob),quality=serving?1:(side===0?contactQuality():1);
     const overpowered=!V9&&!serving&&side===0&&charge>config.shotPower.safeMax[difficulty];
-    const power = (side === 0 ? (serving ? attributes.servePower + (perfect?config.serve.centerPowerBonus:0) : attributes.hitPower + (tapped?0:charge)*p.chargeBonus - Math.abs(timing) * p.timingPowerPenalty) : level.power)*(1-(1-quality)*contactConfig.edgePowerPenalty);
+    const power = (side === 0 ? (serving ? attributes.servePower + (perfect?config.serve.centerPowerBonus:0) : (attributes.hitPower + (tapped?0:charge)*p.chargeBonus - Math.abs(timing) * p.timingPowerPenalty)*(held?1+(needleAcc-.5)*config.v9.hold.carry.needlePower:1)) : level.power)*(1-(1-quality)*contactConfig.edgePowerPenalty);
     let targetX = 0;
     if (side === 0) {
       targetX=aim?.manual?clamp(aim.x,-1,1)*c.spread:(state.players[1].x>=0?-1:1)*c.spread;targetX+=timing*c.spread*p.timingPowerPenalty+(rng()-.5)*(1-quality)*contactConfig.edgeSpread;
@@ -180,7 +182,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     }
     if(V9&&!serving&&side===0&&!isDrop&&!isLob){
       const pw=v9c.power,q=v9c.quality,guide=powerGuide(aim),dev=charge-guide.need,timeAbs=Math.min(1,Math.abs(timing));
-      const score=1-q.timingWeight*timeAbs-(1-q.timingWeight)*(1-quality),grade=score>=q.good?'good':score>=q.medium?'medium':'weak';
+      const baseScore=1-q.timingWeight*timeAbs-(1-q.timingWeight)*(1-quality),score=held?baseScore*(1-config.v9.hold.carry.needleWeight)+needleAcc*config.v9.hold.carry.needleWeight:baseScore,grade=score>=q.good?'good':score>=q.medium?'medium':'weak';
       const rank=1-q.rankRelief*(safeRanks.hit-1),dm=D?(config.v9.deep.errorScale?.[difficulty]??v9d('errorScale',1)):v9d('errorScale',1),sigma=q.sigma[grade]*dm*rank,tri=()=>(rng()+rng()-1);
       let landing=guide.depth,error=null;
       if(Math.abs(dev)>guide.tol)landing+=guide.mpc*(dev-Math.sign(dev)*guide.tol);
@@ -223,7 +225,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     state.players[1-side].assistTravel=0;
     state.shot = { v9:v9info, side, serving, power, quality, spin, charge, overpowered, drop:isDrop, serviceSign, serveFault, perfect, targetX, targetZ, flight, timing, lob:isLob&&!isDrop,serveZone };
     state.charge=0;
-    planContact(); emit('hit', { side, serving, timing, power,quality,edge:quality<.55,grade:v9info?.grade,error:v9info?.error,rating:(D&&side===0&&!serving)?(Math.abs(timing)<config.v9.deep.rating.perfect?'perfect':Math.abs(timing)<config.v9.deep.rating.good?'good':timing<0?'early':'late'):undefined }); pendingTap = null;
+    planContact(); emit('hit', { side, serving, timing, power,quality,edge:quality<.55,grade:v9info?.grade,error:v9info?.error,rating:(D&&side===0&&!serving)?(held?(needleAcc>=.8?'perfect':needleAcc>=.5?'good':(charge<powerGuide(aim).need?'early':'late')):(Math.abs(timing)<config.v9.deep.rating.perfect?'perfect':Math.abs(timing)<config.v9.deep.rating.good?'good':timing<0?'early':'late')):undefined }); pendingTap = null;
   }
   function faultOrPoint(reason){const mark={x:state.ball.x,z:state.ball.z,reason};if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);state.faultMark=mark;return;}state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
   function serve(){if(state.server!==0)return;if(state.phase==='serve'){state.phase='toss';state.phaseTime=0;emit('toss');}else if(state.phase==='toss')shoot(0);}
@@ -245,7 +247,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     cooldown=p.swingCooldown;
     if(state.ball.lastHitter!==1||state.shot?.side===0||!state.contact){miss('turn');return;}
     const half=Math.max(.1,level.timingWindow/2),difference=state.elapsed-state.contact.at;
-    pendingTap=clamp(difference/half,-1,1);pendingUntil=state.elapsed+(D?(config.v9.deep.buffer[difficulty]??contactConfig.bufferSeconds):contactConfig.bufferSeconds);
+    pendingTap=clamp(difference/half,-1,1);pendingUntil=state.elapsed+(K&&state.charge>=config.v9.hold.tapSeconds/config.v9.hold.seconds?config.v9.hold.carry.releaseWait:D?(config.v9.deep.buffer[difficulty]??contactConfig.bufferSeconds):contactConfig.bufferSeconds);
     pendingShot={lob,drop,aim:aim?{...aim}:null,charge:state.charge};state.charge=0;state.players[0].preparing=true;
     tryHumanHit();
   }
@@ -326,6 +328,8 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
       } else { point(b.lastHitter, 'doubleBounce'); return; }
     }
     state.contactWindow=contactStatus();if(pendingTap!==null)tryHumanHit();
+    // v13: still holding when the ball arrives = the shot fires by itself with the charge held so far (press when the ball leaves the opponent, release in the green).
+    else if(K&&input.prepare&&state.phase==='rally'&&state.contact?.side===0&&state.ball.lastHitter===1&&state.charge>=config.v9.hold.tapSeconds/config.v9.hold.seconds&&state.contactWindow.eligible&&state.contact.eta<=0){pendingShot={lob,drop,aim:aim?{...aim}:null,charge:state.charge};state.charge=0;shoot(0,0);}
     if (state.contact?.side === 1 && shotTime>=level.reaction && contactStatus(1).eligible) {
       if (!aiMiss && contactStatus(1).eligible && !(V9&&b.bounces===0&&state.landing&&!state.landing.valid)) shoot(1);
     }

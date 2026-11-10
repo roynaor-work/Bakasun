@@ -8,7 +8,7 @@ export function alienV13Enabled(search=globalThis.location?.search||'',flag=glob
  if(flag===false)return false;
  return new URLSearchParams(search).get('alienV13')!=='0';
 }
-const TAG='island-v2-20261107-7';
+const TAG='island-v2-20261107-8';
 export const V13_SHIP_URL=new URL(`../assets/alien-v13/player-ship.glb?v=${TAG}`,import.meta.url).href;
 export const V13_SHIP_PATH='assets/alien-v13/player-ship.glb';
 export const V13_AUDIO=Object.freeze(Object.fromEntries(['vulcan-fire-loop','vulcan-spin-up','vulcan-spin-down','vulcan-flash'].map(id=>[id,new URL(`../assets/audio/alien-v13/${id}.ogg?v=${TAG}`,import.meta.url).href])));

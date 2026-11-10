@@ -1,6 +1,6 @@
 // Screenshots (844x390) of "תפוס את הפושע" v2 for the verification report.
 //   node workout/island/tools/catch-shots.mjs <outDir> [baseUrl=http://127.0.0.1:8765/workout/island/]
-// CATCH_ONLY=chase,ram,throw,gang,boss,v1,escape,help limits the groups. Needs a static server on the repo
+// CATCH_ONLY=chase,ram,bend,throw,gang,boss,v1,escape,help limits the groups. Needs a static server on the repo
 // root and Playwright (ISLAND_PLAYWRIGHT=/path/to/playwright/index.mjs). Throws are solved by brute force on
 // the real engine and released through the session's own release(), so what is captured is the shipped
 // HUD, view and effects.
@@ -11,11 +11,13 @@ const [,,outDir='catch-shots',base='http://127.0.0.1:8765/workout/island/']=proc
 const {chromium}=await import(process.env.ISLAND_PLAYWRIGHT?pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href:'playwright');
 await mkdir(outDir,{recursive:true});
 const browser=await chromium.launch({args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--ignore-gpu-blocklist','--no-proxy-server']});
-const only=(process.env.CATCH_ONLY||'chase,ram,throw,gang,boss,v1,escape,help').split(','),on=k=>only.includes(k);
-const SOLVE=`(()=>{const s=session,e=s.engine,P=e.balance.physics;let best=null;
- for(const tool of e.tools.map(t=>t.id)){for(let a=(tool==='rope'?4:26);a<=74&&!best;a+=.5)for(let p=.2;p<=1&&!best;p+=.004){const f=e.trajectory(a,p,tool,{resolve:true,t0:e.clock+P.throwSeconds});if(f.kind==='catch')best=[a,p,tool];}if(best)break;}
- if(!best)return null;const w=e.wobbleAt(e.clock);e.setTool(best[2]);e.setAim({angle:best[0]-w.angle,power:best[1]-w.power});s.debug.release();return best;})()`;
-const open=async(stage,extra='')=>{
+const only=(process.env.CATCH_ONLY||'chase,ram,bend,throw,gang,boss,v1,escape,help').split(','),on=k=>only.includes(k);
+const SOLVE=`(()=>{const s=session,e=s.engine,P=e.balance.physics,t0=e.clock+P.throwSeconds;let best=null;
+ for(const tool of e.tools.map(t=>t.id)){for(let a=(tool==='rope'?4:26);a<=74&&!best;a+=.5)for(let p=.2;p<=1&&!best;p+=.004){
+  const f0=e.trajectory(a,p,tool,{yaw:0,withWind:false}),c=e.criminalAt(t0+f0.duration),yaw=e.isArch?Math.atan2(c.z,c.x-P.release.x)*180/Math.PI:0;
+  const f=e.trajectory(a,p,tool,{resolve:true,t0,yaw});if(f.kind==='catch')best=[a,p,tool,yaw];}if(best)break;}
+ if(!best)return null;const w=e.wobbleAt(e.clock);e.setTool(best[2]);e.setAim({angle:best[0]-w.angle,power:best[1]-w.power,yaw:best[3]-w.yaw});s.debug.release();return best;})()`;
+const open=async(stage,extra='')=>{ // extra: '&catchV5=0' = the v4 side view
   const page=await browser.newPage({viewport:{width:844,height:390},deviceScaleFactor:1});
   page.on('pageerror',e=>console.log('pageerror',e.message.slice(0,300)));
   await page.goto(`${base}tools/catch-harness.html?stage=${stage}&seed=3&dev=1${extra}`);
@@ -56,6 +58,11 @@ if(on('ram')){ // v3: overtake, ram from the side, the damage meter fills and th
   await page.waitForFunction(()=>session.snapshot.mode==='throw',null,{timeout:60000});await page.waitForTimeout(900);await shot(page,'ram-5-throw');
   await page.close();
 }
+if(on('bend'))for(const stage of [3,8]){ // v5: the road bends; frames a few seconds apart
+  const page=await open(stage);await stepChase(page,4);
+  for(let k=0;k<3;k++){await page.evaluate(()=>{for(let i=0;i<8;i++){for(let j=0;j<25;j++)session.debug.stepChase(1/60);session.debug.view().update(25/60,{});}});await page.waitForTimeout(400);await shot(page,`bend${n2(stage)}-${k+1}`);}
+  await page.close();
+}
 if(on('throw'))for(const stage of [1,3,6,8]){
   const page=await open(stage);await toThrow(page);
   await shot(page,`throw${n2(stage)}-1-aim`);
@@ -75,7 +82,8 @@ if(on('gang')){ // stage 6: two thieves
 if(on('boss')){ // stage 5: armoured van boss needs two hits
   const page=await open(5);await toThrow(page);await shot(page,'boss-1-aim');
   await page.evaluate(SOLVE);await phase(page,['flee','escape'],60000);await page.waitForTimeout(250);await shot(page,'boss-2-first-hit');
-  await phase(page,['aim']);await page.evaluate(SOLVE);await phase(page,['caught','done'],60000);await page.waitForTimeout(1300);await shot(page,'boss-3-caught');
+  await phase(page,['aim']);await page.evaluate(SOLVE);await phase(page,['flee','escape'],60000);await page.waitForTimeout(250);await shot(page,'boss-3-second-hit');
+  await phase(page,['aim']);await page.evaluate(SOLVE);await phase(page,['caught','done'],60000);await page.waitForTimeout(1300);await shot(page,'boss-4-caught');
   await page.close();
 }
 if(on('v1')){ // the off switch: v1 look of the same stage

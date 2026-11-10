@@ -2,13 +2,13 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-7';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-7';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-8';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-8';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-7';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-8';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
@@ -223,7 +223,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const r=av.hands.r,l=av.hands.l;
    if((handler.act==='shoot'||handler.act==='fake')||handler.dribbling===false||!s.phase||s.phase!=='live'||Math.hypot(handler.vx,handler.vz)<0.05&&!handler.act&&false){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);
-    const fx=Math.sin(handler.face),fz=Math.cos(handler.face);bx=v.x+fx*0.1;by=v.y+0.02;bz=v.z+fz*0.1;
+    const hf=av.visualFace??handler.face,fx=Math.sin(hf),fz=Math.cos(hf);bx=v.x+fx*0.1;by=v.y+0.02;bz=v.z+fz*0.1;
    } else if(handler.act==='pass'){
     r.getWorldPosition(v);l.getWorldPosition(v2);v.add(v2).multiplyScalar(0.5);bx=v.x;by=v.y;bz=v.z;
    } else {
@@ -232,7 +232,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
     // that bounces the ball low across the body to the other hand and back
     r.getWorldPosition(v);const speed=Math.hypot(handler.vx,handler.vz),fast=clamp((speed-0.6)/4.5,0,1);
     const period=V.dribblePeriod/Math.max(0.6,Math.min(1.6,speed/2.2+0.7)),pump=av.dribblePump||0;
-    const fx=Math.sin(handler.face),fz=Math.cos(handler.face);
+    const hf=av.visualFace??handler.face,fx=Math.sin(hf),fz=Math.cos(hf);
     let u=(Number.isFinite(av.motionPhase)&&/dribble|sprint_ball/.test(av.motionState)?av.motionPhase:((b.dribbleT/period)%1)),top=Math.max(court.ballR+0.1,v.y+pump-0.05-0.14*fast);
     if(handler.act==='cross'){
      const c=clamp(handler.actT/.55,0,1),swing=c<.5?c/.5:1-(c-.5)/.5;l.getWorldPosition(v2);v.lerp(v2,swing*swing*(3-2*swing));
