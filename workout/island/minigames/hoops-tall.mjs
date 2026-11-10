@@ -12,6 +12,7 @@ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
 import {loadV8Motion,buildV8Clips,chooseV8Motion,createDribbleGuard,v8MotionEnabled} from './hoops-v8-motion.mjs';
 import {splitClip} from './hoops-v7.mjs';
+import {athletesEnabled,unifyTallPack,createHeading,stepHeading} from './athletes-gait.mjs';
 
 export const TALL_PROFILES=Object.freeze(['guard','wing','center']);
 export const TALL_BONES=Object.freeze(['Root','Hips','Spine','Chest','Neck','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand','LeftUpLeg','LeftLeg','LeftFoot','RightUpLeg','RightLeg','RightFoot']);
@@ -211,10 +212,16 @@ export async function loadTall(cfg,base,onProgress,{params,onFallback}={}){
  for(const n of TALL_REQUIRED)if(!pack.clips[n])throw Error('Basketball tall clip missing: '+n);
  const results=await Promise.allSettled(TALL_PROFILES.map(async p=>{const g=await loadHoopsGLTF(loader,new URL(dir+t.profiles[p],base).href);bodies[p]=mergeTallBody(g.scene);tick();}));
  const failed=results.find(r=>r.status==='rejected');if(failed){for(const b of Object.values(bodies))releaseTall(b);throw failed.reason;}
+ // unified athletes (09/11): the soccer gait arms and lean on every walk, jog, run and sprint, and the arm cap on idles, braking and cuts. ?athletes=0 skips it.
+ let unified=null;
+ if(t.athletes&&athletesEnabled(t,params||'')){
+  try{const dr=await fetch(new URL(t.athletes.donor,base));if(!dr.ok)throw Error('Gait donor '+dr.status);unified=unifyTallPack(pack,await dr.json());}
+  catch(error){unified=null;onFallback?.('athletes',error);}
+ }
  let v8=null;
  if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
  const clips={};for(const p of TALL_PROFILES){clips[p]=buildTallClips(pack,p);if(v8)for(const [n,c] of buildV8Clips(THREE,v8,pack.profiles[p].hips))clips[p].set(n,c);}
- return {tall:true,pack,v8,bodies,clips:new Map(),clipSets:clips,baseHeights:t.baseHeights,posProfile:t.posProfile,
+ return {tall:true,pack,v8,unified,bodies,clips:new Map(),clipSets:clips,baseHeights:t.baseHeights,posProfile:t.posProfile,
   dispose(){for(const b of Object.values(bodies))releaseTall(b);}};
 }
 
@@ -248,6 +255,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
  }
  const times={},st={gait:null,dribbleGait:null,cross:false,spin:false,celebrate:0,celebrateClip:'celebrate_fist',stumbleT:0,guardLocked:false,dunkOne:(card.number||0)%2===0};
  const guard=createDribbleGuard(),v8s={releasedAt:null,passClip:null,recvClip:null,recvSince:null};
+ const heading=createHeading(0);let headingReady=false;
  let gaitPhase=0,state='idle',statePhase=0,lastAct=null,dribbleSrc=null,ownsJump=false;
  const dur=name=>clipSet.get(name)?.duration||1;
  function easeWeights(map,name,tau,dt){const k=1-Math.exp(-dt/tau);let sum=0;for(const n of new Set([...Object.keys(map),...(name?[name]:[])])){const g=n===name?1:0,v=(map[n]||0)+(g-(map[n]||0))*k;if(v<.004&&g===0)delete map[n];else{map[n]=v;sum+=v;}}return sum;}
@@ -300,6 +308,8 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
    }else if(data?.loop){a.time=data.kind==='gait'&&GAITS.some(g=>g[0]===base)?gaitPhase*d:advance(n,1);}
   }
   mixer.update(0);
+  // unified athletes: the visible body runs where he is going (the simulation's face is untouched)
+  if(assets.unified){if(!headingReady){heading.yaw=p.face||0;headingReady=true;}root.rotation.y=av.visualFace=stepHeading(heading,p,{defending:ctx.defending,hasBall:p.hasBall},dt);}
   // the clip owns the jump during shots, blocks and rebounds: the engine's own height (the old 0.85 lift) is replaced by the authored hips
   ownsJump=!!plan.ownsJump;if(ownsJump)root.position.y=0;
   // lean into acceleration, back into braking (a few hundredths of a radian)
