@@ -11164,10 +11164,14 @@
      "bounce": "assets/audio/g4e/bounce.ogg",
      "net": "assets/audio/g4e/net.ogg",
      "applause": "assets/audio/g4e/applause.ogg",
-     "applauseSoft": "assets/audio/g4e/applause-soft.ogg",
-     "applauseBig": "assets/audio/g4e/applause-big.ogg",
-     "crowdBed": "assets/audio/g4e/crowd-murmur.ogg",
-     "crowdOoh": "assets/audio/g4e/crowd-ooh.ogg"
+     "applauseShort": "assets/audio/g4e/applause-short.ogg",
+     "applauseMedium": "assets/audio/g4e/applause-medium.ogg",
+     "applauseLarge": "assets/audio/g4e/applause-large.ogg",
+     "crowdBed": "assets/audio/g4e/stadium-bed.ogg",
+     "crowdOoh": "assets/audio/g4e/near-point-oh.ogg",
+     "crowdAw": "assets/audio/g4e/mistake-aw.ogg",
+     "crowdHush": "assets/audio/g4e/pre-serve-hush.ogg",
+     "matchCheer": "assets/audio/g4e/match-cheer.ogg"
     }
    },
    "opponent": {
@@ -11182,6 +11186,10 @@
    "maximumSeconds": 3600,
    "v9": {
     "enabled": true,
+    "deep": {"enabled": true, "errorScale": {"easy": 0.35, "normal": 0.7, "hard": 1.1}, "buffer": {"easy": 0.5, "normal": 0.38, "hard": 0.24}, "aiMissScale": {"easy": 0.55, "normal": 1, "hard": 1},
+     "assist": {"easy": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "normal": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "hard": {"radius": 2.05, "step": 0.55, "speed": 1.65, "lead": 0.7}},
+     "rating": {"perfect": 0.25, "good": 0.6}},
+    "hold": {"enabled": true, "seconds": 2.4, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.24, "normal": 0.2, "hard": 0.15}},
     "meter": {"enabled": true, "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
@@ -13257,7 +13265,7 @@
      "difficulty": 1,
      "winMoney": 30,
      "winParts": 0,
-     "radiusScale": 0.703,
+     "radiusScale": 0.505,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13269,7 +13277,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.54,
+     "preview": 0.4,
      "tools": [
       "narrow",
       "wide"
@@ -13286,7 +13294,12 @@
       "gap": 34.4
      },
      "crew": 1,
-     "gust": 0
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.703,
+      "preview": 0.54
+     }
     },
     {
      "stage": 2,
@@ -13294,7 +13307,7 @@
      "difficulty": 2,
      "winMoney": 38,
      "winParts": 0,
-     "radiusScale": 0.649,
+     "radiusScale": 0.504,
      "wobble": {
       "angle": 0,
       "power": 0
@@ -13306,7 +13319,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.5,
+     "preview": 0.4,
      "tools": [
       "narrow",
       "wide"
@@ -13330,7 +13343,12 @@
       "gap": 35.3
      },
      "crew": 1,
-     "gust": 0
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.649,
+      "preview": 0.5
+     }
     },
     {
      "stage": 3,
@@ -13338,7 +13356,7 @@
      "difficulty": 3,
      "winMoney": 46,
      "winParts": 0,
-     "radiusScale": 0.946,
+     "radiusScale": 0.547,
      "wobble": {
       "angle": 0.25,
       "power": 0.005
@@ -13350,7 +13368,7 @@
       "kind": "stand"
      },
      "pop": null,
-     "preview": 0.7,
+     "preview": 0.43,
      "tools": [
       "narrow",
       "wide",
@@ -13375,7 +13393,12 @@
       "gap": 28.9
      },
      "crew": 1,
-     "gust": 0
+     "gust": 0,
+     "aimHelp": 2,
+     "v3": {
+      "radiusScale": 0.946,
+      "preview": 0.7
+     }
     },
     {
      "stage": 4,
@@ -13383,7 +13406,7 @@
      "difficulty": 4,
      "winMoney": 54,
      "winParts": 0,
-     "radiusScale": 0.97,
+     "radiusScale": 0.85,
      "wobble": {
       "angle": 0.35,
       "power": 0.007
@@ -13397,7 +13420,7 @@
       "period": 4.0
      },
      "pop": null,
-     "preview": 0.71,
+     "preview": 0.63,
      "tools": [
       "narrow",
       "wide",
@@ -13422,7 +13445,12 @@
       "gap": 28.3
      },
      "crew": 1,
-     "gust": 0.3
+     "gust": 0.3,
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.97,
+      "preview": 0.71
+     }
     },
     {
      "stage": 5,
@@ -13430,7 +13458,7 @@
      "difficulty": 5,
      "winMoney": 64,
      "winParts": 0,
-     "radiusScale": 0.941,
+     "radiusScale": 0.757,
      "wobble": {
       "angle": 0.5,
       "power": 0.01
@@ -13444,7 +13472,7 @@
       "period": 3.4
      },
      "pop": null,
-     "preview": 0.69,
+     "preview": 0.57,
      "tools": [
       "narrow",
       "wide",
@@ -13472,7 +13500,12 @@
      "boss": {
       "hits": 2
      },
-     "gust": 0.4
+     "gust": 0.4,
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.941,
+      "preview": 0.69
+     }
     },
     {
      "stage": 6,
@@ -13480,7 +13513,7 @@
      "difficulty": 6,
      "winMoney": 76,
      "winParts": 0,
-     "radiusScale": 0.946,
+     "radiusScale": 0.876,
      "wobble": {
       "angle": 0.6,
       "power": 0.012
@@ -13495,7 +13528,7 @@
       "pause": 0.8
      },
      "pop": null,
-     "preview": 0.7,
+     "preview": 0.65,
      "tools": [
       "narrow",
       "wide",
@@ -13538,7 +13571,12 @@
        "min": 4,
        "max": 11
       }
-     ]
+     ],
+     "aimHelp": 1,
+     "v3": {
+      "radiusScale": 0.946,
+      "preview": 0.7
+     }
     },
     {
      "stage": 7,

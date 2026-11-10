@@ -4,8 +4,8 @@
  * (singles lines on the rules' lines, net at z = 0, floor at the height the players already stand on). */
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {TennisDRACOLoader,loadTennisGLTF} from './tennis-draco.mjs?v=island-v2-20261107-6';
-import {V7_FILES,V7_REQUIRED,REAL,courtWarpZ,sceneWarpZ,crowdKeeps,cheerRole,crowdStartLevel,createCrowdGovernor} from './tennis-v7.mjs?v=island-v2-20261107-6';
+import {TennisDRACOLoader,loadTennisGLTF} from './tennis-draco.mjs?v=island-v2-20261107-7';
+import {V7_FILES,V7_REQUIRED,REAL,courtWarpZ,sceneWarpZ,crowdKeeps,cheerRole,crowdStartLevel,createCrowdGovernor} from './tennis-v7.mjs?v=island-v2-20261107-7';
 
 const FLOOR=0.08;            // the court surface sits at y 0.01 in the package; the view's players, ball and shadows are calibrated to 0.09
 const CROWD_SCALE=0.91;      // the package's own preview scale
@@ -217,7 +217,8 @@ export async function createTennisV7({scene,config,keep,params,surface,quality=0
  /** The lighting the package was designed under (its preview), applied by the view after a successful load. */
  const look={background:'#E7E5D7',fog:'#E7E5D7',hemi:['#EEF4E9','#9E9A77',1.35],sun:['#FFF0D4',2.7,[-13,22,9]],exposure:1.1};
  setQuality(quality);
- return {root,ball,look,spectators,floorOffset:FLOOR,setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
+ const venueParts=[loaded.venue,meshes.lod1,meshes.lod0,meshes.cheer,seats];
+ return {root,ball,look,spectators,floorOffset:FLOOR,hideVenue(){for(const p of venueParts)p.visible=false;ground.material.color.set('#2b3a3e');},showVenue(){for(const p of venueParts)p.visible=true;ground.material.color.set('#DBDDC8');},setQuality,setCrowdLevel,observe,render,metrics,courtMetrics:()=>({courtSurface:'tennis-v7-'+surface,courtTexture:[1024,1024],courtPlanar:true,netSag:.914,staticCourtBatches:3}),
   get level(){return level;},get governor(){return governor;},
   dispose(){for(const m of [meshes.lod1,meshes.lod0,meshes.cheer,seats])m.dispose?.();}};
 }

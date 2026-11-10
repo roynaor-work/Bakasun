@@ -78,3 +78,16 @@ test('telemetry: possession, shots, goals and frame times are summarised and sav
   assert.equal(tel.save({getItem(){throw Error('blocked');},setItem(){}},sum),0,'a blocked storage never throws');
   store.set(SOCCER_TELEMETRY_KEY,'not json');assert.equal(tel.save(storage,sum),0);
 });
+
+test('telemetry: defending duels (engaged, won, beaten) follow the same definition as the simulation tool',()=>{
+  const tel=createSoccerTelemetry({teams:'6'});
+  const players=(dx)=>[{team:0,x:0,z:0,role:'support'},{team:1,x:dx,z:0,role:'striker'}];
+  const st=(dx,owner=1)=>({phase:'playing',ball:{owner,lastTeam:owner===null?1:owner},players:players(dx),controlled:0});
+  // Engaged at 1.5 m, the carrier gets to 5 m inside 1.5 s: beaten.
+  tel.frame(st(1.5),1/60);for(let i=0;i<30;i++)tel.frame(st(5),1/60);
+  // Engaged again, then the home team takes the ball within 1.5 s: won.
+  tel.frame(st(1.5),1/60);tel.frame({phase:'playing',ball:{owner:0,lastTeam:0},players:players(1.5),controlled:0},1/60);
+  // Engaged, nothing happens for 2 s: counted as engaged only.
+  tel.frame(st(1.5),1/60);for(let i=0;i<120;i++)tel.frame(st(2.5),1/60);
+  assert.deepEqual(tel.summary().duels,{engaged:3,won:1,beaten:1});
+});
