@@ -19,11 +19,12 @@ export async function loadEnvV2({T,GLTFLoader,anisotropy=4,version=''}){
 
 /** Bake one model: plain materials -> one vertex-coloured geometry; textured/emissive/transparent materials stay as their own parts (original materials). */
 function bake(T,scene,keep){
- scene.updateMatrixWorld(true);const plain=[],parts=[];
+ scene.updateMatrixWorld(true);const plain=[],parts=[],specials=new Map();
  scene.traverse(o=>{if(!o.isMesh)return;const g=o.geometry.clone();g.applyMatrix4(o.matrixWorld);const m=o.material,special=m.map||m.emissiveIntensity>0&&(m.emissive?.getHex?.()||0)>0||m.transparent;
-  if(special){parts.push({geometry:keep(g),material:keep(m)});return;}
+  if(special){const key=m.name+'|'+(m.map?.uuid||'');let e=specials.get(key);if(!e){e={material:keep(m),geos:[]};specials.set(key,e);}for(const k of Object.keys(g.attributes))if(!['position','normal','uv'].includes(k))g.deleteAttribute(k);e.geos.push(g.index?g.toNonIndexed():g);return;}
   const n=g.attributes.position.count,col=new Float32Array(n*3),c=m.color;for(let i=0;i<n;i++){col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;}
   g.setAttribute('color',new T.BufferAttribute(col,3));g.deleteAttribute('uv');if(g.attributes.uv1)g.deleteAttribute('uv1');plain.push(g);});
+ for(const e of specials.values())parts.push({geometry:keep(e.geos.length>1?mergeGeometries(e.geos):e.geos[0]),material:e.material});
  if(plain.length){const merged=mergeGeometries(plain.map(g=>{const x=g.index?g.toNonIndexed():g;for(const k of Object.keys(x.attributes))if(!['position','normal','color'].includes(k))x.deleteAttribute(k);return x;}));
   parts.push({geometry:keep(merged),material:keep(new T.MeshStandardMaterial({vertexColors:true,roughness:.78,metalness:.12}))});}
  return parts;
@@ -54,5 +55,5 @@ export function buildEnvV2({T,scene,track,keep,f1,kit,night=false}){
  // textures on the run-off / gravel / pit-lane ribbons (seamless 256 px tiles, 4 m repeat)
  for(const [key,ribbon] of [['runoff',f1.ribbons.runoff],['gravel',f1.ribbons.gravel],['pit',f1.ribbons.pit]]){const t=kit.textures[key];if(!t||!ribbon)continue;ribbon.material.map=t;ribbon.material.color.set('#ffffff');ribbon.material.needsUpdate=true;keep(t);}
  f1.useModels();
- return {root,metrics:()=>({triangles:Math.round(triangles),draws}),dispose(){root.removeFromParent();}};
+ return {root,metrics:()=>({triangles:Math.round(triangles),draws,perModel:Object.fromEntries(Object.entries(baked).map(([k,v])=>[k,v.length]))}),dispose(){root.removeFromParent();}};
 }

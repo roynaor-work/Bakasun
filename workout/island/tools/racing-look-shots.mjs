@@ -14,7 +14,8 @@ await page.goto(`http://127.0.0.1:${server.address().port}/island/tools/perf-rac
 await page.waitForFunction(()=>window.__session?.snapshot?.renderMetrics?.frames>1,null,{timeout:240000});if(/at=/.test(extra))await page.waitForFunction(()=>window.__perf?.shot,null,{timeout:600000});
 await page.waitForTimeout(1500);
 await page.screenshot({path:path.join(out,process.env.SHOT_NAME||'idle.png')});
-if(process.env.PROBE)console.log('PROBE',JSON.stringify(await page.evaluate(()=>{const m=window.__session.debug.model,p=m.state.player,t=m.track,q=t.project(p.x,p.z);return {s:p.s,x:p.x,y:p.y,z:p.z,lateral:p.lateral,offroad:p.offroad,speed:p.speed,roadY:q.y,dist:q.distance,width:t.width,len:t.length};})));
+if(process.env.PROBE==='metrics')console.log('METRICS',JSON.stringify(await page.evaluate(()=>{const m=window.__session.snapshot.renderMetrics;return {draws:m.drawCalls,tris:m.triangles,f1:m.f1,env:m.envV2,scenery:m.scenery,effects:m.effects?.capacity};})));
+if(process.env.PROBE==="1")console.log('PROBE',JSON.stringify(await page.evaluate(()=>{const m=window.__session.debug.model,p=m.state.player,t=m.track,q=t.project(p.x,p.z);return {s:p.s,x:p.x,y:p.y,z:p.z,lateral:p.lateral,offroad:p.offroad,speed:p.speed,roadY:q.y,dist:q.distance,width:t.width,len:t.length};})));
 if(touch.length===2){
  const cdp=await ctx.newCDPSession(page);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:touch[0],y:touch[1],id:1}]});
