@@ -1,6 +1,8 @@
 // Headless league season simulation: three seasons with a casual or pro bot and a greedy upgrade policy. Usage: node tools/racing-league-sim.mjs [out.json]
-import {createRacing} from '../minigames/racing-physics.mjs';
-import {createLeague,raceSetup,applyRace,nextSeason,buyUpgrade,standings,SEASONS,UPGRADES} from '../minigames/racing-league.mjs';
+if(process.env.RACING_TRACKS)globalThis.location={search:'?racingTracks='+process.env.RACING_TRACKS+(process.env.V2Q||'')};
+const {createRacing}=await import('../minigames/racing-physics.mjs');
+//import {createRacing} from '../minigames/racing-physics.mjs';
+const {createLeague,raceSetup,applyRace,nextSeason,buyUpgrade,standings,SEASONS,UPGRADES}=await import('../minigames/racing-league.mjs');
 import {writeFile} from 'node:fs/promises';import {fileURLToPath} from 'node:url';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
 function race(setup,bot,seed){

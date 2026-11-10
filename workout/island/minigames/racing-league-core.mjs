@@ -14,10 +14,10 @@ export const DRIVERS = Object.freeze([
 /** Season k uses the circuits of stage tiers 0, 2 and 4 (laps 4, 5, 5 on the longer racing-v10 circuits: about 3.5 to 4.5 minutes a race). */
 // racing-look-v1: the circuits now force braking (laps about 8% slower), so a season is 3, 4, 4 laps to stay under the 295 s race cap (?racingLook=0: 4, 5, 5).
 const LOOK = new URLSearchParams(globalThis.location?.search || '').get('racingLook') !== '0';
-// ?racingTracks=v2 (Codex circuits, 70-90 s laps): 2, 3, 3 laps
+// ?racingTracks=v2 (Codex circuits, 70-95 s laps): 3, 3, 3 laps
 const V2 = new URLSearchParams(globalThis.location?.search || '').get('racingTracks') === 'v2';
 export const SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: V2 ? 2 : LOOK ? 4 : 5, minRank: 0, rating: 0.02 }),
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: V2 ? 3 : LOOK ? 4 : 5, minRank: 0, rating: 0.02 }),
   Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: V2 ? 3 : LOOK ? 5 : 6, minRank: 3, rating: 0.045 }),
   Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: V2 ? 3 : LOOK ? 5 : 6, minRank: 3, rating: 0.045 })
 ]);
