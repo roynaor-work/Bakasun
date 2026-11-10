@@ -1,3 +1,4 @@
+globalThis.__alienV14=false; // v13 behaviour; v14 is covered in island-alien-v14.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';

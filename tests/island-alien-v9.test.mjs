@@ -1,4 +1,4 @@
-globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false; // v9 behaviour; v10 is covered in island-alien-v10.test.mjs
+globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // v9 behaviour; v10 is covered in island-alien-v10.test.mjs
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
