@@ -1,6 +1,6 @@
-import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-v2-20261107-7';
-import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-v2-20261107-7';
-import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-7';
+import {buildingCenter,levelFactor,levelValue,population} from './metrics.mjs?v=island-v2-20261107-8';
+import {cellsFor,placementAvailability,validatePlacement} from './rules.mjs?v=island-v2-20261107-8';
+import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-8';
 export {cityConnections};
 
 export const CITY_DEPARTMENTS=['water','health','education','safety'];

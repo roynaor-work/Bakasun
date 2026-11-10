@@ -1,4 +1,4 @@
-import {runBoarSession} from '../minigames/boar-session.mjs?v=island-v2-20261107-7';
+import {runBoarSession} from '../minigames/boar-session.mjs?v=island-v2-20261107-8';
 
 /** The original Boar Island campaign owns its waves, garage and saved wallet.
  * Enter/leave through the island lifecycle without inventing duplicate rewards. */

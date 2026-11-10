@@ -1,6 +1,6 @@
-import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-7';
+import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-8';
 import {drawUltraAlienEffects,drawAlienFallbackFeedback} from './ultra-alien-effects.mjs';
-import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-7';
+import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-8';
 import {runAlienSession} from './alien-session.mjs';
 import {createAlienModel} from './alien-flight-model.mjs';
 import './alien-ui.mjs';
@@ -8,7 +8,7 @@ import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons} from './alien-v12-draw.mjs';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer,wingVisible} from './alien-v10-draw.mjs';
-import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-7';
+import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-8';
 export {createAlienModel};
 export {createAlienEntity,separateAliens,alienStack} from './alien-flight-combat.mjs';
 const TAU=Math.PI*2;

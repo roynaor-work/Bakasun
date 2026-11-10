@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-7';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-8';
 /** Placeholder aircraft: simple solids (plane = fuselage + wings + tail, helicopter = body + tail boom + spinning rotor) and Vulcan tracers.
  * A Codex model/animation set replaces `build` later; the model contract (`model.air`, `model.vulcan`) stays. */
 export function createNavalAirView(scene,model,balance){

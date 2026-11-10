@@ -1,8 +1,8 @@
 /** Island racing league (racing-v9, option B chosen by Roy). The rules, validation and merge live in racing-league-core.mjs (loaded at boot);
  * this file adds the race setup that needs the track list and re-exports everything, so tests and tools keep one import. */
-import {RACING_STAGES} from './racing-tracks.mjs?v=island-v2-20261107-7';
-import {SEASONS,DRIVERS,seasonStages,equipmentFor} from './racing-league-core.mjs?v=island-v2-20261107-7';
-export * from './racing-league-core.mjs?v=island-v2-20261107-7';
+import {RACING_STAGES} from './racing-tracks.mjs?v=island-v2-20261107-8';
+import {SEASONS,DRIVERS,seasonStages,equipmentFor} from './racing-league-core.mjs?v=island-v2-20261107-8';
+export * from './racing-league-core.mjs?v=island-v2-20261107-8';
 
 /** The next race of the league as the session needs it. Null when the season is over. */
 export function raceSetup(state) {
