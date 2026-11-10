@@ -48,6 +48,13 @@ test('shot timing: the step-and-a-half lines the clip\'s takeoff, release and la
  assert.ok(Math.abs(warp(a,1.03)-clip.events.release[0])<1e-9);assert.equal(warp(a,0),a[0][1]);assert.ok(warp(a,99)<clip.duration);
  const ft=shotAnchors(pack.clips.free_throw,'ft',{release:1.1,duration:2,shotAir:0});assert.ok(Math.abs(warp(ft,1.1)-pack.clips.free_throw.events.release[0])<1e-9);
 });
+test('sideways movement plays a sideways clip, forward movement a forward gait',()=>{
+ const st={gait:null,dribbleGait:null,cross:false,spin:false,celebrate:0,stumbleT:0,guardLocked:false},base={face:0,vx:0,vz:0,hasBall:false,dribbling:false,act:null,actT:0};
+ assert.match(chooseTallMotion(pack,{...base,vx:2.2,vz:0.2},{},st).clip,/^defensive_slide_(left|right)$/,'an off-ball sideways move');
+ assert.equal(chooseTallMotion(pack,{...base,vz:3},{},st).clip,'jog','a forward move keeps the gait');
+ assert.match(chooseTallMotion(pack,{...base,hasBall:true,dribbling:true,vx:-2,vz:.2},{},st).clip,/^dribble_(left|right)$/);
+ assert.ok(!/^defensive_slide/.test(chooseTallMotion(pack,{...base,vx:6.3},{},st).clip||''),'a sprint across is not a slide');
+});
 test('layup hand follows the side of the basket the shooter comes from',()=>{
  // facing +x (face = pi/2) at the rim line: from z>0 the rim is to his right-front... the sign is symmetric
  assert.notEqual(layupSide(Math.PI/2,5,1),layupSide(Math.PI/2,5,-1));
