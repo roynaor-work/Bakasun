@@ -135,6 +135,12 @@ export function chooseTallMotion(pack,p,ctx,st){
   if(Math.abs(lat)>Math.abs(fwd)*.8&&speed<4.2)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,1.7),group:'def'};
   if(fwd>2&&speed<4.5&&ctx.nearHandler)return {kind:'loop',clip:'closeout',rate:clamp(speed/.9,.8,1.6),group:'def',closeout:true};
  }
+ // moving sideways relative to where he faces: the sideways clips (a forward gait played over a sideways move is the "walks sideways" look;
+ // measured: about half of the moving frames of a game have the sideways component bigger than the forward one)
+ if(speed>.8&&speed<5&&Math.abs(lat)>Math.abs(fwd)*1.1){
+  if(!p.hasBall)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,1.7),group:'def',sideways:true};
+  if(p.dribbling!==false&&!st.guardLocked&&speed<3.5)return {kind:'loop',clip:'dribble_'+(lat>0?'left':'right'),rate:clamp(speed/1.05,.6,1.4),group:'dribble',dribble:true,sideways:true};
+ }
  if(p.hasBall){
   if(p.dribbling!==false&&!st.guardLocked){
    if(speed<.3)return {kind:'layer',upper:'dribble_right',lower:'idle_ready_ball',rate:1,group:'dribble'};
