@@ -123,3 +123,7 @@
 .game-screen[data-game=tennis] .tennis-rating.pop{animation:tennis-rating-pop .75s ease-out both}
 @keyframes tennis-rating-pop{0%{transform:translateY(8px) scale(.4);opacity:0}18%{transform:translateY(0) scale(1.25);opacity:1}40%{transform:scale(1)}100%{transform:translateY(-16px) scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .tennis-rating.pop{animation:none;opacity:1}}
+
+/* v14: the hit bar is big, next to the player, and up for every incoming ball (serve-style bar, same colours) */
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-mode=hit]{position:absolute;width:18px;height:128px;border-width:2px;box-shadow:0 3px 14px #102e2980}
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-mode=hit] .tennis-serve-needle{left:-7px;width:30px;height:5px}
