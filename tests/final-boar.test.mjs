@@ -65,19 +65,24 @@ test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboa
 test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, smoothing, immediate stop, precision finger, sensitivity setting)', async()=>{
   const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
   assert.match(src,/const STICK_V21=AIMSTICK&&new URLSearchParams\(location\.search\)\.get\('boarStick'\)!=='v20'/);
-  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_CURVE=1\.8,STICK_TAU=\.045,STICK_PRECISE=\.35/);
+  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_LIN=\.2,STICK_TAU=\.045,STICK_PRECISE=\.35/);
   assert.match(session,/get\('boarStick'\)==='v20'\)url\.searchParams\.set\('boarStick','v20'\)/);
   assert.match(css,/#aim-ring\.v21\{width:168px;height:168px/);
   assert.match(css,/#crosshair\.moving u\{opacity:1\}/);
   // the curve as written in game.js
-  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?Math.pow(mag,1.8):mag;};
+  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?mag*(.2+.8*mag):mag;};
   assert.equal(stickMag(.05,true),0,'inside the dead zone');
-  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.3,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
+  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.5,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
+  // linear start: just past the dead zone the response is proportional (slope 0.2), no jump and no flat spot
+  assert.ok(stickMag(.081,true)>0&&stickMag(.081,true)<.001);const ratio=stickMag(.18,true)/stickMag(.13,true);assert.ok(ratio>1.9&&ratio<2.6,'response about doubles when the tilt past the dead zone doubles (linear start, gentle growth): '+ratio);
   assert.equal(stickMag(1,true),1,'full tilt keeps the full speed');
   assert.ok(stickMag(.6,true)>stickMag(.3,true)*2,'speed grows with the tilt');
   // smoothing: after one 16 ms frame the smoothed value is a third of the way; after 150 ms it is at 96%
   const k=dt=>1-Math.exp(-dt/.045);assert.ok(k(.016)>.28&&k(.016)<.36);assert.ok(1-Math.exp(-.15/.045)>.95);
   assert.match(src,/aimStick=null;ring\.classList\.remove\('on','precise'\)/,'release drops the stick object: the aim stops at once');
+  assert.match(src,/if\(STICK_V21&&aimStick\)\{adaptMs=0;adaptN=0;return;\}/,'no renderer re-size while the stick is held');
+  assert.match(src,/if\(STICK_V21\)\$\(id\)\.style\.transform=`translate3d/,'crosshair moves with a compositor transform');
+  assert.match(css,/#game\.stickv21 #crosshair,#game\.stickv21 #hit-marker\{left:0;top:0;will-change:transform\}/);
   assert.match(src,/const g=AIM_SENS\[aimSens\]\*\(aimStick\.precise!==null\?STICK_PRECISE:1\)/);
   assert.match(src,/localStorage\.setItem\('boar-island-aim',aimSens\)/,'the sensitivity setting is not part of the save');
 });

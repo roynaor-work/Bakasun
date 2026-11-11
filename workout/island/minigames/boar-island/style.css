@@ -204,3 +204,4 @@
 #aim-ring.v21.precise:after{content:'דיוק';position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:12px;color:#ffd06b}
 #crosshair u{position:absolute;left:50%;top:50%;width:0;height:0;border:6px solid transparent;border-bottom:11px solid #ffd06b;transform-origin:50% 100%;transform:translate(-50%,-100%) rotate(var(--dir,0deg)) translateY(-18px);opacity:0;transition:opacity .1s;filter:drop-shadow(0 0 2px #000)}
 #crosshair.moving u{opacity:1}
+#game.stickv21 #crosshair,#game.stickv21 #hit-marker{left:0;top:0;will-change:transform}

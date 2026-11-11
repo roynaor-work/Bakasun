@@ -6,6 +6,8 @@ import {readFile} from 'node:fs/promises';
 import {createAlienModel} from '../workout/island/minigames/aliens.mjs';
 import {alienV15Enabled,V15_DEFAULTS,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from '../workout/island/minigames/alien-v15.mjs';
 import {createV15ShotAudio} from '../workout/island/minigames/alien-v15-audio.mjs';
+import {alienMoveEnabled,MOVE_DEFAULTS,moveConfig,alienMoveStep,recoilOffset} from '../workout/island/minigames/alien-move.mjs';
+import {moveAlienPlayer} from '../workout/island/minigames/g2m-motion.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {stage} from '../workout/island/verification/aliens-v14/sim.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.alienDefense,cfg=v15Config(balance);
@@ -15,7 +17,7 @@ const maxed={equipment:{weapon:2,rate:1.5,damage:1.8,shield:3},permanentUpgrades
 
 test('v15 flag: on by default, ?alienV15=0 and the global switch restore v14; config carries the numbers',()=>{
  assert.equal(alienV15Enabled('',undefined),true);assert.equal(alienV15Enabled('?alienV15=0',undefined),false);assert.equal(alienV15Enabled('',false),false);
- assert.ok(balance.v15&&balance.v15.normalInterval>=.2&&balance.v15.burstSeconds<=1.5&&balance.v15.coolSeconds>=1.5);
+ assert.ok(balance.v15&&balance.v15.normalInterval>=.15&&balance.v15.normalInterval<=.25&&balance.v15.burstSeconds<=1.5&&balance.v15.coolSeconds>=1.5);
  assert.deepEqual(Object.keys(v15Config({})).sort(),Object.keys(V15_DEFAULTS).sort());
 });
 test('v15 stage clock: 1.5x the v14 stage time, so fewer bullets never lose a round to the clock',()=>{
@@ -37,7 +39,7 @@ test('fireInterval and shotDamage: floors hold for any gear, rapid bonus has its
  assert.equal(fireInterval('normal',1e6,false,cfg),cfg.minInterval);assert.equal(fireInterval('normal',1e6,true,cfg),cfg.rapidMinInterval);
  assert.equal(fireInterval('normal',.2,false,cfg),cfg.normalInterval,'weak gear never slows below the base');
  assert.equal(fireInterval('burst',1e6,true,cfg),cfg.burstInterval);
- assert.ok(1/cfg.normalInterval>=3&&1/cfg.normalInterval<=5,'normal fire is 3-5 shots per second');assert.ok(1/cfg.minInterval<=5.5);
+ assert.ok(1/cfg.normalInterval>=4.5&&1/cfg.normalInterval<=6.5,'normal fire is about 5-6 shots per second (Roy, 11/11 evening)');assert.ok(1/cfg.minInterval<=6.5,'gear floor stays at or under 6.5/s');
  assert.ok(shotDamage('normal',cfg)>shotDamage('burst',cfg));assert.equal(v15RateCap(cfg),cfg.normalInterval/cfg.minInterval);
 });
 test('createSpawnCap: a token bucket bounds projectiles per second whatever the demand',()=>{
@@ -45,12 +47,12 @@ test('createSpawnCap: a token bucket bounds projectiles per second whatever the 
  assert.ok(ok<=cfg.capPerSecond*10+cfg.capBurst,`${ok} in 10 s`);assert.ok(ok>=cfg.capPerSecond*10-1);assert.ok(cap.dropped>0);
  const slow=createSpawnCap(cfg);let passed=0;for(let f=0;f<240;f++)if(slow.allow(f/4))passed++;assert.equal(passed,240,'4 per second always passes');
 });
-test('model, fresh save, real input shape: 6 s hold = one burst, one cool-down, then about 4/s; v14 fired about twice as much',()=>{
+test('model, fresh save, real input shape: 6 s hold = one burst, one cool-down, then a steady 5-6/s; v14 fired far more',()=>{
  const m=make();const marks=[];for(let i=0;i<60*6;i++){m.update(1/60,{moveX:0,firing:true,nova:false,flight:true});marks.push(m.snapshot().fired);}
  const s=m.snapshot();assert.equal(s.v15,true);assert.equal(s.overheats,1);
- const steady=(marks[359]-marks[239])/2;assert.ok(steady>=3&&steady<=5,`steady ${steady}/s`);
- assert.ok(s.burstShots>=10&&s.burstShots<=13,`burst shots ${s.burstShots}`);assert.ok(s.fired/6<=6,`overall ${s.fired/6}/s`);
- const old=make({},true);run(old,6,{firing:true});assert.ok(old.snapshot().fired>=s.fired*1.7,`v14 ${old.snapshot().fired} vs v15 ${s.fired}`);
+ const steady=(marks[359]-marks[239])/2;assert.ok(steady>=1/cfg.normalInterval*.85&&steady<=1/cfg.normalInterval*1.1,`steady ${steady}/s`);
+ assert.ok(s.burstShots>=10&&s.burstShots<=13,`burst shots ${s.burstShots}`);assert.ok(s.fired/6<=6.5,`overall ${s.fired/6}/s`);
+ const old=make({},true);run(old,6,{firing:true});assert.ok(old.snapshot().fired>=s.fired*1.5,`v14 ${old.snapshot().fired} vs v15 ${s.fired}`);
  const idle=make();run(idle,4,{});assert.equal(idle.snapshot().fired,0);
 });
 test('model, every multiplier maxed (equipment, upgrades, hangar 20, power 1.45, fireRate bonus, rapid pickup, spread, wings): the cap holds',()=>{
@@ -73,7 +75,7 @@ test('model: a burst sounds like the Vulcan (shot), steady fire is a single-shot
 });
 test('stage 1 lasts 85-135 s for base, upgraded and heavy gear (headless bot holding fire)',()=>{
  const profiles=[{},{equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}},{equipment:{weapon:2,rate:1.5,damage:1.8,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3},hangar:{rapid:20},power:1.45}];
- for(const profile of profiles){const rs=[1,2,3].map(s=>stage(1,s,{profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=85&&avg<=135,`avg ${avg} for ${JSON.stringify(profile)}`);assert.ok(rs.every(r=>r.shotsPerSec<=7),rs.map(r=>r.shotsPerSec).join());}
+ for(const profile of profiles){const rs=[1,2,3].map(s=>stage(1,s,{profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=85&&avg<=135,`avg ${avg} for ${JSON.stringify(profile)}`);assert.ok(rs.every(r=>r.shotsPerSec<=8),rs.map(r=>r.shotsPerSec).join());}
 });
 test('v15 cannon convergence: at the phone aspect (844x390) straight wing shots miss an alien centred on the ship, converging shots hit it',()=>{
  const phone=(844/390)/(360/480);
@@ -99,4 +101,31 @@ test('v15 single-shot audio: plays the boar rifle layers on its own context, res
  store.set('island.sound','off');const b=createV15ShotAudio({storage,AudioContext:FakeContext});assert.equal(b.play(),false);
  a.setPaused(true);assert.equal(a.play(),false);a.dispose();
  const none=createV15ShotAudio({storage:{getItem:()=>null},AudioContext:undefined});assert.equal(none.play(),false);
+});
+
+const mcfg=moveConfig(balance);
+test('alienMove flag: on by default, ?alienMove=v20 and the global switch restore the v20 step; config carries the numbers',()=>{
+ assert.equal(alienMoveEnabled('',undefined),true);assert.equal(alienMoveEnabled('?alienMove=v20',undefined),false);assert.equal(alienMoveEnabled('',false),false);
+ assert.deepEqual(Object.keys(mcfg).sort(),Object.keys(MOVE_DEFAULTS).sort());assert.ok(mcfg.maxSpeed>balance.playerSpeed);
+ const on=make(),off=make();globalThis.__alienMove=false;const legacy=make();globalThis.__alienMove=undefined;assert.equal(on.moveV15,true);assert.equal(legacy.moveV15,false);void off;
+});
+test('alienMove: eases to full speed in about 0.25 s, leans with the velocity, glides after release, never jumps',()=>{
+ const b={playerRadius:balance.playerRadius},p={x:180,vx:0,bank:0,recoil:0};let t=0,t90=null,maxStep=0,peakBank=0;
+ for(let i=0;i<60;i++){const x0=p.x;alienMoveStep(p,{moveX:1,flight:true},1/60,b,360,mcfg);t+=1/60;maxStep=Math.max(maxStep,Math.abs(p.x-x0));peakBank=Math.max(peakBank,Math.abs(p.bank));if(t90===null&&p.vx>=.9*mcfg.maxSpeed)t90=t;}
+ assert.ok(t90!==null&&t90>=.12&&t90<=.35,`90% of top speed after ${t90} s`);assert.ok(maxStep<=mcfg.maxSpeed/60+.01,'no jumps: a frame never moves more than top speed allows');assert.ok(peakBank>=.8,`lean ${peakBank}`);
+ const q={x:100,vx:mcfg.maxSpeed,bank:1,recoil:0};let glide=0;for(let i=0;i<60;i++){const x0=q.x;alienMoveStep(q,{},1/60,b,360,mcfg);glide+=q.x-x0;}
+ assert.ok(glide>8&&glide<120,`glide ${glide}`);assert.equal(q.vx,0);assert.ok(Math.abs(q.bank)<.05,'the lean settles when the ship stops');
+ // v20 for comparison: constant velocity after a 0.15 s ramp, no lean at all.
+ const o={x:180,vx:0,bank:0};let lean=0;for(let i=0;i<60;i++){moveAlienPlayer(o,{moveX:1,flight:true},1/60,balance,360);lean=Math.max(lean,Math.abs(o.bank||0));}assert.equal(lean,0);
+});
+test('alienMove: a drag target is reached smoothly (critically damped, no overshoot beyond a few units) and bounds hold',()=>{
+ const b={playerRadius:balance.playerRadius},p={x:100,vx:0,bank:0,recoil:0};let over=0;for(let i=0;i<90;i++){alienMoveStep(p,{x:220,flight:true},1/60,b,360,mcfg);over=Math.max(over,p.x-220);}
+ assert.ok(Math.abs(p.x-220)<.5,`reached ${p.x}`);assert.ok(over<4,`overshoot ${over}`);
+ const w={x:300,vx:0,bank:0,recoil:0};for(let i=0;i<120;i++)alienMoveStep(w,{moveX:1},1/60,b,360,mcfg);assert.equal(w.x,360-balance.playerRadius);assert.equal(w.vx,0);
+});
+test('alienMove: recoil nudges the drawn ship on each steady shot and decays; the hit model is untouched',()=>{
+ const m=make();run(m,cfg.burstSeconds+cfg.coolSeconds+.4,{firing:true});
+ let seen=0;for(let i=0;i<60;i++){m.update(1/60,{firing:true});if(m.recoilOffset>1)seen++;}assert.ok(seen>5,'recoil visible on steady shots');
+ run(m,1,{});assert.equal(m.recoilOffset,0);assert.equal(recoilOffset({recoil:1},mcfg),mcfg.recoilPixels);
+ const a=make(),bb=make();globalThis.__alienMove=false;const legacy=make();globalThis.__alienMove=undefined;assert.equal(a.aliens[0].radius,legacy.aliens[0].radius);assert.equal(a.player.y,legacy.player.y);void bb;
 });

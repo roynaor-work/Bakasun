@@ -17,15 +17,15 @@ export function alienV15Enabled(search=globalThis.location?.search||'',flag=glob
  return new URLSearchParams(search).get('alienV15')!=='0';
 }
 export const V15_DEFAULTS=Object.freeze({
- normalInterval:.25,   // steady cannon: 4 shots per second
- minInterval:.2,       // floor with all gear multipliers: 5 shots per second
- rapidMinInterval:.15, // floor while the rapid bonus is active: about 6.7 shots per second
+ normalInterval:.18,   // steady cannon: about 5.6 shots per second (Roy, 11/11 evening: 'a little more fire', between the old 10 and 4)
+ minInterval:.167,     // floor with all gear multipliers: 6 shots per second
+ rapidMinInterval:.13, // floor while the rapid bonus is active: about 7.7 shots per second
  burstInterval:.1,     // Vulcan burst: 10 shots per second
  burstSeconds:1.2,     // how long a burst can run before the guns overheat
  coolSeconds:2,        // forced silence after a burst
  rechargeSeconds:1.5,  // time without firing until a new burst is available
  warmHeat:.35,         // gauge level shown while the cannon fires steadily after a burst
- normalDamage:1,       // damage of a steady shot (v14 bullets were 0.406)
+ normalDamage:.75,     // damage of a steady shot (v14 bullets were 0.406): 5.6/s x .75 = 4.2 damage per second
  burstDamage:.5,       // damage of a burst bullet (10/s x .5 = 5 damage per second)
  capPerSecond:15,      // hard cap on projectiles per second at the spawn point
  capBurst:6,           // bucket size: one spread round (3) plus two wing shots pass, a stream does not

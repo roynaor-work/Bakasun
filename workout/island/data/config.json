@@ -1253,7 +1253,8 @@
    }
   },
   "alienDefense": {
-   "v15": {"normalInterval": 0.25, "minInterval": 0.2, "rapidMinInterval": 0.15, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "warmHeat": 0.35, "normalDamage": 1, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
+   "v15": {"normalInterval": 0.18, "minInterval": 0.167, "rapidMinInterval": 0.13, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "warmHeat": 0.35, "normalDamage": 0.75, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
+   "move": {"maxSpeed": 265, "accelSeconds": 0.11, "reverseSeconds": 0.05, "driftSeconds": 0.2, "dragSpring": 24, "bankSeconds": 0.08, "bankMax": 1, "recoilSeconds": 0.14, "recoilPixels": 3},
    "v14": {"rateMult": 0.28, "damageTrim": 1.45, "minInterval": 0.055, "heatSeconds": 3.5, "coolSeconds": 1.6, "resumeHeat": 0.25, "shieldGap": 0.26, "gearExp": 1.0},
    "v13": {"shipScale": 1.3, "cannonOffset": 11.3, "muzzleForward": 28, "loopGain": 1.5, "spinGain": 1.2, "flashGain": 0.6, "spinUpOverlap": 0.15},
    "v12": {"rateMult": 0.15, "damageTrim": 0.9, "cannonOffset": 11, "sparkCool": 0.1, "hitSoundGap": 0.12, "pulseHz": 66, "maxShotsMult": 3, "spinRate": 70, "flashSeconds": 0.045},
