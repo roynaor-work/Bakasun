@@ -381,7 +381,7 @@ export function runCatchSession6(ctx) {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView6({canvas, balance, stage, chase, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
-    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-8'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
+    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-8'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
     loading.hidden = true;
     startChase();
     ctx.onReady?.();
