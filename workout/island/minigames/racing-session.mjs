@@ -8,7 +8,7 @@ import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-2026
 import {createBroadcast, broadcastEnabled} from './racing-broadcast.mjs?v=island-v2-20261107-8';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
-function leagueOrder(cars){
+export function leagueOrder(cars){
  const order=[...cars].filter(c=>c.scoring!==false).sort((a,b)=>a.rank-b.rank).map(c=>c.id);let fastest=null,best=Infinity;
  for(const c of cars)if(c.scoring!==false)for(const lap of c.lapTimes)if(lap>0&&lap<best){best=lap;fastest=c.id;}
  return {order,fastestLapId:fastest};
@@ -73,7 +73,12 @@ export function runRacingSession(ctx){
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='crash'){audio.event?.('crash',e);view.kick?.(1);try{navigator.vibrate?.(60);}catch{}}else if(e.type==='wall'){audio.event?.('wall',e);view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='bump'){audio.event?.('bump',e);}else if(e.type==='crashRecover'){audio.event?.('crashRecover',e);}else if(e.type==='ersFull'){toastText='ERS מלא';messageUntil=s.time+1.2;try{navigator.vibrate?.(14);}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;
   if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
-   const done=()=>ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result,...(ctx.league?{league:leagueOrder(s.cars)}:{})});
+   // racing-deep-fable (Roy, v21 phone: "finished track 2, it froze with engine noise after showing first place"): the engine falls silent at the finish,
+   // and a result the engine refuses (ok:false) no longer leaves a frozen screen: a message and a way back to the city.
+   audio.sync(0,false,{throttle:0});
+   const done=()=>{const r=ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result,...(ctx.league?{league:leagueOrder(s.cars)}:{})});
+    if(r&&r.ok===false&&!disposed){audio.setPaused(true);loading.hidden=false;loading.textContent='המרוץ נגמר אבל התוצאה לא נשמרה. חזרו לעיר ונסו שוב.';const back=node('button','secondary-button','חזרה לעיר');back.onclick=()=>ctx.cancel();loading.append(back);stage.append(loading);}
+    return r;};
    // racing-v11 podium: the top three of the finished race for 4 s (tap to skip), then the normal result. ?racingPodium=0 skips it.
    if(podiumOn){if(bc)bc.podium(s,done);else showPodium(s,done);return;}
    done();return;}frame=requestAnimationFrame(tick);
