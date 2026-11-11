@@ -29,7 +29,7 @@ function runCatchSession6Lazy(ctx){
     get engine(){return inner?.engine||null;},get chase(){return inner?.chase||null;},
     get debug(){return inner?.debug;},get city(){return inner?.city;},get v2(){return true;},get v6(){return Boolean(inner?.v6);},
   };
-  import('../minigames/catch-session6.mjs?v=island-v2-20261107-8').then(({runCatchSession6})=>{
+  import('../minigames/catch-session6.mjs?v=island-v2-20261107-9').then(({runCatchSession6})=>{
     if(disposed)return;inner=runCatchSession6(ctx);if(paused)inner.setPaused(true);
   }).catch(()=>{if(disposed)return;inner=runCatchSession(ctx);if(paused)inner.setPaused(true);});
   return proxy;
