@@ -49,6 +49,8 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
  // Air stage: stage 3 names helicopters and planes; bring the first one forward so the run stays short. The player sits still (the ship still sails on the stick).
  await page.evaluate(()=>{const l=window.__island.data.config.minigames.navalDuel.levels[2];l.air={...l.air,from:2,every:22};});
  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
+ // One tap on the sea (a target pick, no shot) unlocks the audio contexts the way a finger would.
+ await touch('touchStart',[{x:300,y:150}]);await tick(40);await touch('touchEnd');await tick(200);
  const air={aircraftSeen:0,tracersSeen:0,hudTarget:0,peakDrawCalls:0,peakTriangles:0,kills:0,shots:0,hits:0,splashes:0,frames:[]};let framed=false,killed=false;
  // The model advances half a second per step through the session's own update (no input), then one real frame is rendered and read: 45 s of game time in about 90 frames.
  const advance=()=>page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<25;i++)s.debug.drive(.02,{});});
@@ -61,6 +63,7 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
  assert.ok(air.aircraftSeen>=1,'aircraft appear on stage 3');assert.ok(air.tracersSeen>=3,'the Vulcan fires visible tracers');assert.ok(air.kills>=1,'the Vulcan brings an aircraft down');assert.ok(air.splashes>=1,'the aircraft falls into the sea');assert.ok(air.hudTarget>0,'the HUD rings the gun target');
  assert.ok(air.peakDrawCalls<=70&&air.peakTriangles<=90000,`render budget with aircraft (${air.peakDrawCalls} calls, ${air.peakTriangles} triangles)`);
  assert.ok((report.sounds.vulcanStart||0)>=1&&(report.sounds.vulcanStop||0)>=1,'Vulcan start and stop sounds are requested');
+ assert.ok(report.airAudio&&report.airAudio.loaded.length===3,`the three Vulcan samples decode (${JSON.stringify(report.airAudio)})`);
  await exit();
  return report;
 });

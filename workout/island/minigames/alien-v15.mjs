@@ -29,7 +29,8 @@ export const V15_DEFAULTS=Object.freeze({
  burstDamage:.5,       // damage of a burst bullet (10/s x .5 = 5 damage per second)
  capPerSecond:15,      // hard cap on projectiles per second at the spawn point
  capBurst:6,           // bucket size: one spread round (3) plus two wing shots pass, a stream does not
- gearExp:1
+ gearExp:1,
+ secondsMult:1.5         // stage clock: fewer bullets need more time, a slow child must not lose to the clock
 });
 export function v15Config(balance){return {...V15_DEFAULTS,...(balance?.v15||{})};}
 /** Fire gate state machine. state={heat,cool,spent}. Returns the next state plus mode and firing.

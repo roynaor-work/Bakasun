@@ -50,7 +50,8 @@ for(const variant of variants){
   const maxSlipStraight=Math.max(...straight.map(x=>x.slipDeg)),ladderOpen=moving.filter(x=>x.turretDeg>10).length/Math.max(1,moving.length),boxLadderSeen=samples.some(x=>x.boxLadder);
   rec.drive={samples,maxSlipStraight,ladderOpenShare:+ladderOpen.toFixed(3),boxLadderSeen};
   checks.noseFollowsMotion={pass:straight.length>=10&&maxSlipStraight<=20,maxSlipStraight,straightSamples:straight.length};
-  checks.roofLadderStowedWhileDriving={pass:ladderOpen<=.02,ladderOpenShare:ladderOpen,applies:s.renderMetrics.truck.cannonFaces>1};
+  const hasRoofLadder=s.renderMetrics.truck.cannonFaces>1; // the v7 pumper carries no roof ladder piece: its empty aim pivot is not a ladder
+  checks.roofLadderStowedWhileDriving={pass:!hasRoofLadder||ladderOpen<=.02,ladderOpenShare:ladderOpen,applies:hasRoofLadder};
   checks.boxLadderHiddenWhileDriving={pass:!boxLadderSeen};
   // ---- 2. sound: water jet while spraying, fire roar while flames burn (synthesized; by ear only on the phone) ---------------------
   const spray=await center('#shoot');await touch('touchStart',spray);await tick(700);s=await snap();await touch('touchEnd');await tick(32);
@@ -66,10 +67,11 @@ for(const variant of variants){
   await shot('rescue-arrived');
   const ladderButton=await center('#pass');await tapAt(ladderButton.x,ladderButton.y,80); // a short tap, not a hold
   const during=[];let rescued=false,opened=false;for(let i=0;i<40;i++){await tick(100);s=await snap();const t=await truckPose();during.push({time:+s.time.toFixed(2),rescuing:s.rescuing,progress:+s.rescueProgress.toFixed(2),extension:+s.ladder.extension.toFixed(2),turretDeg:+deg(fold(t.turretYaw)).toFixed(1),armScale:t.arm?+t.arm.scale.toFixed(2):null,armPitchDeg:t.arm?+deg(t.arm.pitch).toFixed(1):null,boxLadder:s.renderMetrics.truck.boxLadderVisible});if(s.ladder.extension>0&&(t.arm?t.arm.scale>1.05||Math.abs(t.arm.pitch)>.05:s.renderMetrics.truck.boxLadderVisible))opened=true;if(i===8)await shot('rescue-ladder');if(s.rescues[0].rescued){rescued=true;break;}}
-  for(let i=0;i<15;i++)await tick(100);const after=await truckPose(),afterSnap=await snap();
+  const descent=[];for(let i=0;i<60;i++){await tick(100);const d=await snap();descent.push({time:+d.time.toFixed(2),descent:+(d.rescues[0].descent??0).toFixed(2),extension:+d.ladder.extension.toFixed(2),boxLadder:d.renderMetrics.truck.boxLadderVisible});if(d.rescues[0].descent>=1&&i>=8)break;} // the person climbs down for descentSeconds, then the ladder folds back
+  const after=await truckPose(),afterSnap=await snap();rec.descent=descent;
   rec.rescue={during,rescued,opened,afterTurretDeg:+deg(fold(after.turretYaw)).toFixed(1),afterArmScale:after.arm?+after.arm.scale.toFixed(2):null,afterBoxLadder:afterSnap.renderMetrics.truck.boxLadderVisible};
   checks.singleTapRescues={pass:rescued,seconds:rescued?+(s.time-during[0].time).toFixed(2):null};
-  checks.ladderOpensOnlyDuringRescue={pass:opened&&rec.rescue.afterTurretDeg<=3&&(after.arm?after.arm.scale<=1.01:true)&&!afterSnap.renderMetrics.truck.boxLadderVisible,opened,after:{turretDeg:rec.rescue.afterTurretDeg,armScale:rec.rescue.afterArmScale,boxLadder:rec.rescue.afterBoxLadder}};
+  checks.ladderOpensOnlyDuringRescue={pass:opened&&(after.arm?rec.rescue.afterTurretDeg<=3&&after.arm.scale<=1.01:true)&&!afterSnap.renderMetrics.truck.boxLadderVisible,opened,after:{turretDeg:rec.rescue.afterTurretDeg,armScale:rec.rescue.afterArmScale,boxLadder:rec.rescue.afterBoxLadder}};
   await shot('rescue-done');await exit();
  }catch(e){rec.error=e.stack||String(e);checks.suite={pass:false,error:String(e)};}
  finally{await context.close();}

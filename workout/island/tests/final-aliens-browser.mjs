@@ -38,7 +38,9 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
   if(keyboard){await page.keyboard.up('Space');await page.keyboard.up('ArrowLeft');await page.keyboard.up('ArrowRight');}else await touch('touchEnd');
   return out;
  };
+ const botOnly=process.env.FINAL_ALIENS_BOT_ONLY==='1'; // iteration aid only; the acceptance run covers everything
  // 1. Fresh save, stage 1: hold the real fire button for 6 s. v15: burst 1.2 s, cool 2 s, then a steady 4/s.
+ if(!botOnly){
  await fresh();
  {const s0=await snap();const [burst,cooling,s4,s6]=await hold(6000,[900,2200,4000,6000],{onMark:async i=>{if(i===0)await capture('1-burst');if(i===1)await capture('2-cooling');if(i===3)await capture('3-steady');}});
   if(!s6){check(false,'the round ended during the fresh hold');}else{
@@ -75,20 +77,23 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
     check(sp.projectilesPerSec<=16.5,`spread + wings + maxed gear: ${sp.projectilesPerSec} projectiles/s (hard cap 15/s plus the bucket)`);}}
  }
  await leave();
+ }
  // 5. A good player (bot) through the real stick and fire button, fresh save: stage 1 should take 85-135 s.
  await page.evaluate(()=>{const {engine:e}=window.__island;Object.assign(e.state.minigameEquipment.alienDefense,{damage:0,rate:0,shield:0,weapon:0});for(const k of Object.keys(e.state.alienUpgrades))e.state.alienUpgrades[k]=0;e.state.hangar.rapid=0;e.state.minigameLevels.alienDefense=1;e.state.minigameWins.alienDefense=0;});
  await fresh();await page.evaluate(()=>{window.__island.games.current.session.debug.view?.degrade(true);});await tick(200);
- {const fire=await center('#shoot'),stick=await center('#joystick');let s=await snap();const t0=s.time;let last=s,steps=0,fireHeld=true;
-  await touch('touchStart',[{...stick,id:1}]);await touch('touchStart',[{...stick,id:1},{...fire,id:2}]);
+ // Movement through the relative flight surface (a finger on the canvas outside the stick): the ship's target moves
+ // by the finger's displacement times modelWidth/cssWidth, so a wanted model x maps to one finger x. Fire with the other thumb.
+ {const fire=await center('#shoot');let s=await snap();const t0=s.time;let last=s,steps=0,fireHeld=true;const ship0=s.player.x,perPx=s.viewport.modelWidth/844,startX=422,fingerY=150,finger=x=>({x:Math.max(2,Math.min(842,Math.round(startX+(x-ship0)/perPx))),y:fingerY,id:1});
+  await touch('touchStart',[finger(ship0)]);await touch('touchStart',[finger(ship0),{...fire,id:2}]);
   while(s&&!s.result&&s.time-t0<BOT_CAP_SECONDS){
-   const plan=await page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}for(const a of m.aliens)if(a.diveAge>=0&&a.y<py)cross.push(a.x);let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>36);if(!safe(want)){out:for(let d=0;d<=844;d+=8)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>20&&x<824&&safe(x)){want=x;break out;}}}return {dx:want-m.player.x,aim:t?Math.abs(t.x-m.player.x):999};});
+   const plan=await page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}for(const a of m.aliens)if(a.diveAge>=0&&a.y<py)cross.push(a.x);let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>36);if(!safe(want)){out:for(let d=0;d<=844;d+=8)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>20&&x<824&&safe(x)){want=x;break out;}}}return {dx:want-m.player.x,px:m.player.x,aim:t?Math.abs(t.x-m.player.x):999};});
    if(!plan)break;
-   const ax=Math.max(-1,Math.min(1,plan.dx/30));
+   const f=finger(plan.px+plan.dx);
    // A good player lifts the finger when far from any target, and lets the Vulcan recharge for the next column.
-   const wantFire=plan.aim<70;
-   if(wantFire!==fireHeld){fireHeld=wantFire;if(wantFire)await touch('touchStart',[{x:stick.x+ax*40,y:stick.y,id:1},{...fire,id:2}]);else await touch('touchEnd',[{x:stick.x+ax*40,y:stick.y,id:1}]);}
-   const pts=[{x:stick.x+ax*40,y:stick.y,id:1}];if(fireHeld)pts.push({...fire,id:2});await touch('touchMove',pts);
-   await tick(120);last=s;s=await snap();steps++;
+   const wantFire=plan.aim<60;
+   if(wantFire!==fireHeld){fireHeld=wantFire;if(wantFire)await touch('touchStart',[f,{...fire,id:2}]);else await touch('touchEnd',[f]);}
+   const pts=[f];if(fireHeld)pts.push({...fire,id:2});await touch('touchMove',pts);
+   await tick(100);last=s;s=await snap();steps++;
   }
   await touch('touchEnd');const end=s||last;const r={stageSeconds:+((end.time)-t0).toFixed(1),outcome:end.result?.outcome||(s?'running':'ended'),fired:end.fired,kills:end.kills,livesLeft:end.lives,maxLives:end.maxLives,wave:end.wave,overheats:end.overheats,steps};report.botStage1=r;console.log('bot-stage1',JSON.stringify(r));
   check(r.outcome==='win',`bot wins stage 1 (${r.outcome})`);check(r.stageSeconds>=85&&r.stageSeconds<=135,`stage 1 lasts ${r.stageSeconds} s (target 85-135)`);

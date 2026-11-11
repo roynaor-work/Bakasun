@@ -18,7 +18,7 @@ import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 export function createFireScene(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render,colors=config.visuals.palette;
   const scene=new T.Scene(),geometries=new Set(),materials=new Set(),textures=new Set();
-  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false,truckArm=null,armLength=1;const cityVisuals=[],citizenVisuals=[],pivotWorld=new T.Vector3();
+  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false,truckArm=null,armLength=1;const cityVisuals=[],citizenVisuals=[],pivotWorld=new T.Vector3(),armState={yaw:0,pitch:0,scale:1};
   const models=new LocalModels(adapters),loader=models.loader;
   models.loader={async loadAsync(url){const asset=await loader.loadAsync(url);asset.scene.animations=asset.animations||[];return asset;}};
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
@@ -142,7 +142,8 @@ export function createFireScene(ctx,model,adapters={}) {
       if(truckArm){ // 11/11/2026: the engine's own roof ladder stays stowed along the body; during a rescue it turns, lifts and stretches to the window, then folds back.
         const target=model.ladder.target,ext=model.ladder.extension;truckVisual.root.updateMatrixWorld(true);truckVisual.turret.getWorldPosition(pivotWorld);
         const pose=target&&ext>0?ladderArmPose({dx:target.world[0]+model.ladder.sway*2-pivotWorld.x,dz:target.world[2]-pivotWorld.z,dy:target.world[1]+.85-pivotWorld.y,rootYaw:truckVisual.root.rotation.y,extension:ext,length:armLength,sway:model.ladder.sway,tip:-1}):{yaw:0,pitch:0,scale:1};
-        truckVisual.turret.rotation.y=pose.yaw;truckArm.rotation.x=pose.pitch;truckArm.scale.z=pose.scale;}
+        const k=1-Math.exp(-8*elapsed);armState.yaw+=(pose.yaw-armState.yaw)*k;armState.pitch+=(pose.pitch-armState.pitch)*k;armState.scale+=(pose.scale-armState.scale)*k; // eases out and folds back instead of snapping
+        truckVisual.turret.rotation.y=armState.yaw;truckArm.rotation.x=armState.pitch;truckArm.scale.z=armState.scale;}
       else truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
     else{cannon.updateMatrixWorld(true);cannonMuzzle.getWorldPosition(nozzle);}
     for(let i=0;i<model.rescues.length;i++){

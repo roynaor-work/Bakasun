@@ -10,5 +10,5 @@
  "touch": "CDP Input.dispatchTouchEvent",
  "checks": {},
  "frames": [],
- "error": "locator.tap: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('[data-action=avatar-start]')\u001b[22m\n\n    at tap (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:27:62)\n    at /home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:30:153"
+ "error": "page.waitForFunction: Target page, context or browser has been closed\n    at /home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:30:13"
 }

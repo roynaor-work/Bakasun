@@ -662,7 +662,7 @@ function beginWave(){
   perk=selectedPerk;selectedPerk='';plan=wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
   $('battle-hint').hidden=wave>2;
-  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
+  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?(FIRE_V21?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי':'גררו משמאל כדי לכוון · לחצו על ירי')+' <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
   weatherKind=waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
   announce(`גל ${String(wave).padStart(2,'0')}`,plan.some(p=>isBoss(p.kind))?'פלישת בוס · החזיקו את קו ההגנה':waveHint(wave));sfx.play('start');
   const wk=weatherKind;if(wk!=='clear')later(3.4,()=>{if(mode==='battle'&&weatherKind===wk)toast(`${WEATHER[wk].name} · ${WEATHER[wk].rule}`);});
@@ -905,7 +905,7 @@ async function runBench(){
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,LEGACY},mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,LEGACY},overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},weapon(k){switchWeapon(k);},

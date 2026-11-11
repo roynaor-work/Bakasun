@@ -18,6 +18,9 @@ test('v15 flag: on by default, ?alienV15=0 and the global switch restore v14; co
  assert.ok(balance.v15&&balance.v15.normalInterval>=.2&&balance.v15.burstSeconds<=1.5&&balance.v15.coolSeconds>=1.5);
  assert.deepEqual(Object.keys(v15Config({})).sort(),Object.keys(V15_DEFAULTS).sort());
 });
+test('v15 stage clock: 1.5x the v14 stage time, so fewer bullets never lose a round to the clock',()=>{
+ const on=make(),off=make({},true);assert.equal(on.settings.seconds,Math.round(off.settings.seconds*cfg.secondsMult));assert.ok(on.settings.seconds>=240);
+});
 test('fireGate: burst for burstSeconds, forced cool for coolSeconds, then steady fire; a rest brings the burst back',()=>{
  let s={heat:0,cool:0,spent:false};const modes=[];
  for(let i=0;i<60*8;i++){s=fireGate(s,true,1/60,cfg);modes.push(s.mode);}
