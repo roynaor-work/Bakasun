@@ -1,0 +1,86 @@
+# חקירת השריקה: "שריקה מוזרה עדין בזמן המשחק" (11/11/2026)
+
+רועי שמע בגרסה 21 שריקה בזמן משחק פעיל, אחרי שכללי השופט (`sports-audio-rules.mjs`) כבר נכנסו. הכלל של הסבב: לא לנחש, למדוד. נבנה כלי פורנזי (`tools/audio-forensics.mjs`) שמריץ כל משחק ב-Chromium עם רישום של כל צומת Web Audio (אוסצילטורים, דגימות עם הקובץ שממנו פוענחו, מסננים, נתיב הגיין) ומנתח ספקטרום של היציאה 20 פעמים בשנייה. המסווג הטהור (`minigames/audio-guard.mjs`) מסמן שלוש צורות של "שריקה": קו צר יציב ב-1.5-5 קילוהרץ מעל 0.6 שניות (`tone`), קו צר שגולש בגובה הצליל (`glide`, כמו צווחה או סירנה), ורקע בהיר ויציב שבו 1.5-5 קילוהרץ נמצאים עד 6 דציבל מהשיא ונושאים לפחות 20% מהאנרגיה במשך 2 שניות ומעלה (`hum`). כל משחק רץ 3 דקות עם בוט, העיר 30 שניות בטלה.
+
+## התשובה הקצרה
+
+דגימת השופט אינה המקור. במשחק פעיל נשמעו שלושה צלילים אחרים שכל אחד מהם "שריקה" לאוזן של ילד:
+
+1. **כדורסל: צווחת נעליים בכל כדרור מהיר.** `basketball/shoes.ogg` היא גלישה 1.7 קילוהרץ שצונחת לטון טהור של 1.08 קילוהרץ (בולטות 37-43 דציבל מעל הסביבה, הצליל החזק ביותר בפריים). `hoops-audio.mjs` ניגן אותה בכל מחזור כדרור (0.52 שניות) כשהשחקן רץ מעל 3 מטר לשנייה: 34 פעמים ב-3 דקות, 25 מהן זוהו כ-`glide` בפאזה `live`. **תוקן**: ברירת המחדל בלי צווחה בכדרור, `?hoopsSqueak=1` מחזיר. אחרי התיקון: 0 מקטעים, 0 ניגונים של הדגימה ב-40 שניות (`streetSlam-after-fix.json`).
+2. **כדורגל: רקע הקהל הסינתטי.** `soccer/ambience-loop.ogg` מתנגן ברצף כל המשחק (`startBed` ב-`soccer-design-audio.mjs`). המתכון (`design/audio/tools/generate.py`, פונקציה `crowd`) הוא 28 "קולות" של הרמוניות עד 18×f0 עם מעטפות שמתנפחות לאט. התוצאה: 26% מהאנרגיה ב-2-5 קילוהרץ (קהל אמיתי, `g4e/stadium-bed.ogg` של הטניס: 0.6%), והחלק הגבוה 3 דציבל בלבד מהשיא. בזמן משחק זה `hum` רציף (101 שניות מתוך 99 שניות של `playing`), ומדי פעם הרמוניה בודדת מתנפחת מעל השאר ונותנת שריקה קצרה ב-2.3-2.8 קילוהרץ, בדיוק גובה שריקת השופט (2.75 קילוהרץ): בשניות 7.9, 47.9, 79.9, 143.9 ו-167.9, כשהמקור היחיד שמתנגן הוא הלופ. אותו קובץ לבד, דרך המסננים של mix.json, נותן למסווג 3 גלישות ו-18 שניות `hum` מתוך 24. כדורסל כבר כיבה את הלופ שלו מאותה סיבה ("read as a constant whistle/hiss"). במצב `soccerShow=v1` החדש הבד גם מתנפח עד ×1.7 עם ההתרגשות (שורה 126), כלומר חזק יותר דווקא כשהמשחק מתלהט. **תוכנית תיקון** למטה (הקובץ בבעלות סוכן M4 כדורגל).
+3. **מרוצים: יללת מנוע.** לכל אחד מחמשת לופי המנוע של חבילת Codex `racing-audio-v2` קו הרמוני חזק ב-1.6-2.4 קילוהרץ (idle 1798 הרץ +26 דציבל, mid +35, high +38, redline 2250 הרץ +40, הצליל החזק ביותר בקובץ). `playbackRate` 0.82-1.2 לפי הסל"ד גולש את הקו: `glide` של 33 שניות רצופות ועוד 63 מקטעים ב-3 דקות. בדיקת A/B: עם `?racingSamples=0` אפס מקטעים (המנוע הפרוצדורלי נקי), עם `?racingEngine=0` אפס. **תוקן**: לופי המנוע מהחבילה כבויים (המנוע הפרוצדורלי נושא את המוטור; תיבת ההילוכים, המפלט, האבן, הצמיגים והרוח נשארים מהחבילה), `?racingEngineLoops=1` מחזיר. ניסיון ביניים של lowpass 1.3 קילוהרץ השאיר 34 מקטעים (הקווים בולטים 26-40 דציבל מעל סביבתם, מסנן רק מוריד אותם יחד עם הסביבה). אחרי התיקון: 0 מקטעים ב-60 שניות (`islandRacing-after-fix.json`).
+
+## הטבלה
+
+| משחק | צליל | מקור בקוד | מתי | תוקן / תוכנית תיקון |
+|---|---|---|---|---|
+| כדורסל | צווחת נעליים: גלישה 1.7→1.08 קילוהרץ, 0.3-0.35 שניות, 25 פעמים ב-3 דקות | `minigames/hoops-audio.mjs` `dribble()` (`play('shoes')` כש-`speed>3`), דגימה `design/audio/basketball/shoes.ogg` (מתכון `shoes` ב-`generate.py`: סוויפ `1080+650·sin` וטון 630 הרץ) | כל 0.52 שניות בכדרור מהיר, בפאזה `live` | **תוקן**: `dribbleSqueak` כבוי כברירת מחדל, `?hoopsSqueak=1` מחזיר, נחשף ב-`metrics()`. גניבה, חטיפה ורמזי feel (`fall`, `perfect_landing`) שומרים את הדגימה (נדירים, אירוע אמיתי). אימות: 0 מקטעים אחרי התיקון |
+| כדורסל | שריקת שופט `assets/audio/g3h/whistle.ogg` (2.34 קילוהרץ, 0.37 שניות) | `hoops-audio.mjs` `whistle()` דרך `hoopsWhistleGain` | עבירה, הפרה, פסק זמן, כדור ביניים ראשון | ב-3 דקות של בוט לא נשמעה כלל; בריצת האימות פעם אחת, בכדור הביניים הפותח. הכללים עובדים |
+| כדורסל | פתיחה `scenes/opening.ogg` (סוויפ אוויר, שיא 2.6 קילוהרץ, 0.9 שניות) | `hoops-audio.mjs` `ensureBed()` → `layer('opening')` | פעם אחת, ב-`jumpball` | לא בזמן משחק. בלי שינוי |
+| כדורגל | רקע קהל סינתטי: `hum` רציף, 30% אנרגיה ב-2-5 קילוהרץ, הקו הגבוה 3 דציבל מהשיא | `minigames/soccer-design-audio.mjs` `startBed()` (שורות 37-38, קריאות בשורות 54 ו-58), דגימה `design/audio/soccer/ambience-loop.ogg`, מתכון `crowd(... periodic=True)` ב-`generate.py` שורות 69-95 | מהשנייה הראשונה עד הסוף, גם ב-`playing`; ב-`soccerShow` מתנפח עם ההתרגשות | **תוכנית**: לכבות את הלופ כמו בכדורסל, מאחורי `?soccerBed=1` (למטה) |
+| כדורגל | שריקות קצרות 2.3-2.8 קילוהרץ מתוך הלופ עצמו (0.25-0.3 שניות, 5 פעמים ב-3 דקות, המקור היחיד הפעיל) | אותו לופ: הרמוניה בודדת של `crowd()` שמתנפחת (מעטפת `(.5+.5·sin)²`, הרמוניות עד 18·f0 ≈ 4.8 קילוהרץ) | אקראי, כל 30-60 שניות, בזמן `playing` | אותה תוכנית. לטווח ארוך: לקצץ את ההרמוניות ב-`crowd()` ולהפיק מחדש (נכס, Codex) |
+| כדורגל | `soccer/crowd-calm.ogg` (1.8 שניות, 31% ב-2-5 קילוהרץ, אותו מתכון) | `soccer-design-audio.mjs` `update()` שורה 127: `now-lastCrowd>8` → `play('crowd' או 'excited')` | כל 8 שניות ב-`playing` (15 פעמים ב-3 דקות) | **תוכנית**: לרווח ל-20 שניות ולהשאיר רק `excited` כשיש סכנה (למטה) |
+| כדורגל | שריקת שופט `soccer/whistle.ogg` (2.75 קילוהרץ, 0.55 שניות) | `soccer-design-audio.mjs` `whistle()`, `whistleFor` | 9 פעמים ב-3 דקות: פתיחה, 6 חידושים אחרי שער, מחצית, חידוש אחרי מחצית | לפי הכללים. לא המקור |
+| טניס | אין | רקע `g4e/stadium-bed.ogg` אמיתי (0.6% ב-2-5 קילוהרץ), מחבט, הקפצה, מחיאות כפיים | 3 דקות, 0 מקטעים, 0.9% אנרגיה ב-2-5 קילוהרץ ברלי | נקי. בלי שינוי |
+| סקי | 4 גלישות קצרות 1.0-1.5 קילוהרץ (0.25-0.36 שניות) מהגירוד והרוח; 18% אנרגיה ב-2-5 קילוהרץ בנסיעה | `alpine-design-audio.mjs` `sync()`: `ski/scrape-fast` (55% ב-2-5 קילוהרץ, רעש) ו-`ski/wind`; טונים `TONES` (משולש 660→1320 לטריק, 1320→1980 למטבע, 24 ב-3 דקות) | רציף בנסיעה; טונים באירועים | שוליים: קצר, רעש ולא קו. בלי שינוי |
+| מרוצים | יללת מנוע: `glide` של 33 שניות ב-1.75-2.1 קילוהרץ ועוד 63 מקטעים | `minigames/racing-samples.mjs`: לופי המנוע `assets/racing-audio-v2/engine-*.ogg` (קווים הרמוניים 1.6-2.4 קילוהרץ, +26 עד +40 דציבל) עם `playbackRate` לפי סל"ד | כל המרוץ | **תוקן**: לופי המנוע כבויים, `?racingEngineLoops=1` מחזיר; A/B: `racingSamples=0` → 0, אחרי התיקון → 0 |
+| עיר (מעטפת) | אין | `sound.mjs` רק צפצוף כפתור (580→740 הרץ, 45 אלפיות) | 30 שניות בטלה, 0 פריימים נשמעים | נקי |
+
+## עדויות
+
+- לוגים גולמיים: `soccer.json`, `streetSlam.json`, `tennis.json`, `alpineRush.json`, `islandRacing.json`, `city.json` (צמתים, דגימות שפוענחו, פריימי ספקטרום, מקטעים, ציר זמן), `summary.json` (מסווג מחדש על כל השישה).
+- A/B ואימות: `islandRacing-racingSamples0.json`, `islandRacing-racingEngine0.json`, `islandRacing-after-fix.json`, `streetSlam-after-fix.json`.
+- `sample-spectra.json`: ניתוח לא מקוון של 67 הדגימות (ffmpeg → STFT): משך, חלק האנרגיה ב-1-2 ו-2-5 קילוהרץ, שיאים, קווים צרים יציבים, שטיחות ספקטרלית. הטסט `tests/island-audio-whistle-guard.test.mjs` קורא אותו ומוודא ששום רמז של משחק פעיל בכדורגל, כדורסל וטניס אינו שריקת שופט או טון גבוה ארוך.
+- כל הדגימות של כדורגל וכדורסל הן סינתזה פרוצדורלית (`design/audio/tools/generate.py`), לא הקלטות. זה מסביר למה "קהל" נשמע כזמזום: הרמוניות טהורות במקום רעש.
+- פאזות נשמעות: כדורסל `live` 65 שניות מתוך 180 (השאר `dead`/`inbound`, שקט), כדורגל `playing` 99 שניות ו-`goal` 73 (הבוט כבש 7).
+
+## מה נבדק ונפסל
+
+- דגימת השופט: בכדורסל לא נשמעה ב-3 דקות; בכדורגל כל 9 הפעמים לפי הכללים (פתיחה, חידוש אחרי שער, מחצית).
+- אוסצילטורים בזמן משחק: אין בכדורגל ובכדורסל (רק צפצוף הכפתור של המעטפת, לפני המשחק). בסקי 24 טונים משולשים קצרים; במרוצים המנוע הפרוצדורלי (sawtooth דרך lowpass 380-2300 הרץ) ורעש bandpass 760-2280 הרץ Q .62, שניהם נקיים במסווג.
+- בדי רקע: טניס אמיתי ונקי; כדורסל ללא בד; כדורגל עם הבד הסינתטי (הבעיה); סקי בד הרים נמוך (1.8% ב-2-5 קילוהרץ).
+
+## תוכנית תיקון לקבצים שאינם שלי (כדורגל, סוכן M4)
+
+**`workout/island/minigames/soccer-design-audio.mjs`** (מספרי שורות לפי 43f531a9)
+
+1. אחרי שורה 5 (`aliases`): להוסיף
+   ```js
+   // The synthetic stadium loop reads as a steady 2 kHz hiss with whistle-pitched swells
+   // (verification/sports-deep-fable/audio-forensics, 11/11/2026); off like basketball's, ?soccerBed=1 restores.
+   const bedOn=()=>{try{return new URLSearchParams(globalThis.location?.search||'').get('soccerBed')==='1';}catch{return false;}};
+   ```
+2. שורה 10, חתימת `createSoccerDesignAudio`: להוסיף `,bedEnabled=bedOn()` לפני `}={}`.
+3. שורה 38, תחילת `startBed()`: `if(!bedEnabled||disposed||bed||!context||!mix)return;` (שורה 126 של ה-show מוגנת ב-`show&&bed`, לכן אינה זקוקה לשינוי).
+4. שורה 127: להחליף
+   ```js
+   if(!paused&&!muted&&state.phase==='playing'&&now-lastCrowd>8){lastCrowd=now;play(excitement>.65?'excited':'crowd');}
+   ```
+   ב-
+   ```js
+   // Crowd swells only when the ball is dangerous and at most every 20 s: crowd-calm
+   // carries 31% of its energy above 2 kHz and read as part of the whistle.
+   if(!paused&&!muted&&state.phase==='playing'&&excitement>.65&&now-lastCrowd>20){lastCrowd=now;play('excited');}
+   ```
+5. שורה 132 (`snapshot`): להוסיף `bed:bedEnabled,` ליד `crowd:Boolean(bed)`.
+
+**`workout/island/minigames/soccer-session.mjs`**: אין שינוי (היצירה בשורה 66 מקבלת את ברירת המחדל מה-URL).
+
+**`workout/island/design/audio/tools/generate.py`** (נכס, משימת Codex): ב-`crowd()` לקצץ `for h in range(1, 18)` ל-`range(1, 9)` ולהוסיף הנחתה `amp *= math.exp(-freq / 1800)`, להפיק מחדש את שמונה דגימות הקהל של כדורגל וכדורסל ולעדכן `mix.json`. עד אז הלופ כבוי.
+
+**בדיקה אחרי ההחלה**: `node tools/audio-forensics.mjs <out> --games=soccer --seconds=120 --assert` צריך לעבור (אפס `hum`/`tone` ב-`playing`), ו-`snapshot.whistle` נשאר כמו היום.
+
+## התיקונים שבוצעו בסבב הזה
+
+- `minigames/hoops-audio.mjs`: `dribbleSqueak` (ברירת מחדל כבוי, `?hoopsSqueak=1`), נחשף ב-`metrics()`.
+- `minigames/racing-samples.mjs`: `engineLoops` (ברירת מחדל כבוי, `?racingEngineLoops=1`), נחשף כ-`engineLoops` על השכבה.
+- חדש: `minigames/audio-guard.mjs` (מסווג טהור `whistleLike`, `summarizeFrames`, טבלת רמזי משחק פעיל `LIVE_CUES`, `liveCueProblems`), `tools/audio-forensics.mjs` (כלי הדפדפן, `--assert`, `--from` לסיווג מחדש), `tests/island-audio-whistle-guard.test.mjs` (10 בדיקות).
+
+## הרצה
+
+```
+ISLAND_PLAYWRIGHT=/opt/node-tools/node_modules/playwright/index.mjs node tools/audio-forensics.mjs verification/sports-deep-fable/audio-forensics --seconds=180 --assert
+node --test tests/island-audio-whistle-guard.test.mjs
+```
+
+`--assert` נכשל כשיש `tone` או `hum` בפאזה פעילה, או 3 גלישות ומעלה (חזרה היא תבנית, אחת יכולה להיות מקרית). היום הוא נכשל רק על כדורגל, עד שתוכנית התיקון תוחל.

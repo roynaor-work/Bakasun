@@ -2,12 +2,15 @@ import {whistleFor,whistleAllowedInPhase,createWhistleGate,WHISTLE_SPACING} from
 const mixURL=new URL('../design/audio/mix.json',import.meta.url);
 const linear=db=>Math.pow(10,db/20);
 const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
+// The synthetic ambience loop (28 harmonics up to 18 x f0) reads as a 2 kHz hum with whistle-pitched swells: this is the "strange whistle during
+// play" Roy heard (audio-forensics 11/11). Off like basketball's bed; `?soccerBed=1` brings it back until Codex regenerates the crowd samples.
+const bedOn=()=>{try{return new URLSearchParams(globalThis.location?.search||'').get('soccerBed')==='1';}catch{return false;}};
 const aliases={kick:'soccer/kick',pass:'soccer/pass',whistle:'soccer/whistle',net:'soccer/net',cheer:'soccer/crowd-goal',crowd:'soccer/crowd-calm',excited:'soccer/crowd-excited',opening:'scenes/opening',victory:'scenes/victory',defeat:'scenes/defeat'};
 
 /** Soccer's asset mixer. The shell remains the owner of island.sound. */
 /** `show` (soccerShow v1): the goal cheer is a little louder for the child's team and muffled and quiet for a rival goal (the groan the bank has no
  * sample for), and the ambience bed swells with the excitement variable (ball in the box, a goal) instead of staying flat. Same cooldowns, same whistle rules. */
-export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0}={}){
+export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0,bedEnabled=bedOn()}={}){
   let context,master,bedBus,eventBus,bed,loading,disposed=false,paused=false,muted=false,mix=null,excitement=0,lastCrowd=-20,duckUntil=0,duckGain=1,resultPlayed=false,phase=null,bedSwell=1,mood=null;
   // The whistle gate runs on the wall clock, not context.currentTime: the context
   // is created on the first pointer, after kickoff may already have asked.
@@ -35,7 +38,7 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
     const task=(async()=>{try{const response=await fetcher(new URL(asset.file,mixURL),{signal:controller.signal});if(!response.ok)throw Error('missing soccer sound');const bytes=await response.arrayBuffer(),buffer=await context.decodeAudioData(bytes);if(disposed)return false;buffers.set(key,buffer);return true;}catch{failed.add(key);return false;}finally{inflight.delete(key);}})();inflight.set(key,task);return task;
   }
   function startBed(){
-    if(disposed||bed||!context||!mix)return;
+    if(!bedEnabled||disposed||bed||!context||!mix)return;
     const key=mix.layers.soccer_play.bed,asset=mix.assets[key],buffer=buffers.get(key);if(!buffer)return;
     const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffer;source.loop=true;
     // Full decoded loop, without trimming or synthetic padding at the seam.
@@ -124,12 +127,13 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
       excitement=state.phase==='goal'?1:Math.min(1,danger*.8+(Math.hypot(ball.vx,ball.vz)>10?.2:0));
       // soccerShow v1: the bed swells up to +4.6 dB with the excitement (ball in the box, the cheer after a home goal); a rival goal keeps it flat.
       if(show&&bed){mood=crowdMood;const swell=1+.7*Math.max(excitement,crowdMood?.excitement||0)*(1-.5*(crowdMood?.groan||0))+.3*(crowdMood?.cheer||0);if(Math.abs(swell-bedSwell)>.03){bedSwell=swell;fade(bed.gain.gain,mix.assets[mix.layers.soccer_play.bed].recommended_gain_linear*swell,now,.4);}}
-      if(!paused&&!muted&&state.phase==='playing'&&now-lastCrowd>8){lastCrowd=now;play(excitement>.65?'excited':'crowd');}
+      // crowd-calm every 8 s carried the same 2-5 kHz energy as the bed; only the excited crowd on real excitement, at most every 20 s
+      if(!paused&&!muted&&state.phase==='playing'&&excitement>.65&&now-lastCrowd>20){lastCrowd=now;play('excited');}
       if(!resultPlayed&&state.phase==='finished'){resultPlayed=true;const cue=state.score[0]>state.score[1]?'victory':state.score[0]<state.score[1]?'defeat':null;if(cue){duck(mix.layers[cue]);const excluded=mix.layers[cue].exclude||[];for(const old of voices)if(excluded.includes(old.key))stopVoice(old);play(cue);}}
       if(state.phase==='playing')resultPlayed=false;
     },
     setPaused(value){paused=Boolean(value);pending.length=0;sync(true);if(paused){for(const item of voices)stopVoice(item,0);if(context?.state==='running')void context.suspend().catch(()=>{});}else void unlock();},
-    get snapshot(){return {bank:'design/audio/mix.json',muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
+    get snapshot(){return {bank:'design/audio/mix.json',muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),bed:bedEnabled,excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
     get ready(){return loading||manifest;},
     dispose({finish=false}={}){
       if(disposed)return;disposed=true;controller.abort();pending.length=0;

@@ -1,7 +1,2448 @@
 {
- "generatedAt": "2026-11-11T22:54:51.863Z",
- "seconds": 180,
+ "generatedAt": "2026-11-11T23:14:45.731Z",
+ "reclassifiedFrom": "verification/sports-deep-fable/audio-forensics",
  "games": {
+  "soccer": {
+   "game": "soccer",
+   "seconds": 180,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 5424,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 11542,
+     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:41693/workout/island/minigames/soccer-design-audio.mjs:48:17) < Object.setPaused (http://127.0.0.1:41693/workout/island/minigames/soccer-design-audio.mjs:131:204)"
+    }
+   ],
+   "frames": 3520,
+   "phases": {
+    "playing": {
+     "frames": 1974,
+     "s25": 0.305,
+     "s12": 0.258,
+     "maxDb": -28.2,
+     "audible": 1972
+    },
+    "goal": {
+     "frames": 1468,
+     "s25": 0.286,
+     "s12": 0.266,
+     "maxDb": -37.4,
+     "audible": 1468
+    },
+    "halftime": {
+     "frames": 78,
+     "s25": 0.376,
+     "s12": 0.251,
+     "maxDb": -52.2,
+     "audible": 78
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "design/audio/soccer/whistle.ogg": {
+     "count": 9,
+     "live": 8,
+     "loop": 0,
+     "phases": {
+      "playing": 8,
+      "halftime": 1
+     }
+    },
+    "design/audio/soccer/crowd-calm.ogg": {
+     "count": 15,
+     "live": 15,
+     "loop": 0,
+     "phases": {
+      "playing": 15
+     }
+    },
+    "design/audio/soccer/ambience-loop.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 1,
+     "phases": {
+      "playing": 1
+     }
+    },
+    "design/audio/soccer/kick.ogg": {
+     "count": 8,
+     "live": 8,
+     "loop": 0,
+     "phases": {
+      "playing": 8
+     }
+    },
+    "design/audio/soccer/pass.ogg": {
+     "count": 20,
+     "live": 20,
+     "loop": 0,
+     "phases": {
+      "playing": 20
+     }
+    },
+    "design/audio/soccer/net.ogg": {
+     "count": 7,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "goal": 7
+     }
+    },
+    "design/audio/soccer/crowd-goal.ogg": {
+     "count": 7,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "goal": 7
+     }
+    },
+    "design/audio/soccer/crowd-excited.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "playing": 2
+     }
+    }
+   },
+   "oscillators": 1,
+   "filters": 138,
+   "segments": [
+    {
+     "kind": "glide",
+     "start": 0,
+     "end": 0.352,
+     "seconds": 0.352,
+     "hz": 2756,
+     "fromHz": 2896,
+     "toHz": 2724,
+     "maxDb": -52,
+     "frames": 7,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 0,
+     "end": 6.457,
+     "seconds": 6.457,
+     "hz": 1596,
+     "share": 0.341,
+     "maxDb": -52,
+     "frames": 109,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/kick.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 0.65,
+     "end": 1.05,
+     "seconds": 0.4,
+     "hz": 1475,
+     "fromHz": 1766,
+     "toHz": 1044,
+     "maxDb": -61.2,
+     "frames": 5,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 6.85,
+     "end": 12.15,
+     "seconds": 5.3,
+     "hz": 1542,
+     "share": 0.3,
+     "maxDb": -59.3,
+     "frames": 107,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/kick.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 7.9,
+     "end": 8.2,
+     "seconds": 0.3,
+     "hz": 1733,
+     "fromHz": 2304,
+     "toHz": 1249,
+     "maxDb": -67.9,
+     "frames": 6,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 16.6,
+     "end": 19.522,
+     "seconds": 2.922,
+     "hz": 1545,
+     "share": 0.297,
+     "maxDb": -57.1,
+     "frames": 58,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 19.8,
+     "end": 23.75,
+     "seconds": 3.95,
+     "hz": 1589,
+     "share": 0.304,
+     "maxDb": -61.6,
+     "frames": 79,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 24.75,
+     "end": 27.564,
+     "seconds": 2.814,
+     "hz": 1432,
+     "share": 0.299,
+     "maxDb": -60.2,
+     "frames": 56,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/kick.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 27.9,
+     "end": 30.451,
+     "seconds": 2.551,
+     "hz": 1604,
+     "share": 0.303,
+     "maxDb": -58.7,
+     "frames": 52,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/kick.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 34,
+     "end": 39.509,
+     "seconds": 5.509,
+     "hz": 1460,
+     "share": 0.306,
+     "maxDb": -59.7,
+     "frames": 110,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 41.55,
+     "end": 43.95,
+     "seconds": 2.4,
+     "hz": 1482,
+     "share": 0.277,
+     "maxDb": -59.2,
+     "frames": 49,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.9,
+     "end": 48.159,
+     "seconds": 0.259,
+     "hz": 2649,
+     "fromHz": 2649,
+     "toHz": 2422,
+     "maxDb": -70,
+     "frames": 4,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 48.8,
+     "end": 53.05,
+     "seconds": 4.25,
+     "hz": 1393,
+     "share": 0.285,
+     "maxDb": -64,
+     "frames": 86,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 55.3,
+     "end": 55.558,
+     "seconds": 0.258,
+     "hz": 3198,
+     "fromHz": 2745,
+     "toHz": 3198,
+     "maxDb": -56.9,
+     "frames": 2,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 56.4,
+     "end": 63.5,
+     "seconds": 7.1,
+     "hz": 1467,
+     "share": 0.301,
+     "maxDb": -59.2,
+     "frames": 140,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 65.55,
+     "end": 67.95,
+     "seconds": 2.4,
+     "hz": 1767,
+     "share": 0.387,
+     "maxDb": -51.7,
+     "frames": 49,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 73.854,
+     "end": 84.8,
+     "seconds": 10.946,
+     "hz": 1561,
+     "share": 0.322,
+     "maxDb": -51.5,
+     "frames": 220,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 79.9,
+     "end": 80.158,
+     "seconds": 0.258,
+     "hz": 1464,
+     "fromHz": 2315,
+     "toHz": 1464,
+     "maxDb": -63.2,
+     "frames": 5,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 85.1,
+     "end": 87.5,
+     "seconds": 2.4,
+     "hz": 1528,
+     "share": 0.313,
+     "maxDb": -68.4,
+     "frames": 49,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 90.15,
+     "end": 92.401,
+     "seconds": 2.251,
+     "hz": 1605,
+     "share": 0.308,
+     "maxDb": -57.6,
+     "frames": 46,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/crowd-calm.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 96.1,
+     "end": 105.85,
+     "seconds": 9.75,
+     "hz": 1486,
+     "share": 0.322,
+     "maxDb": -52.3,
+     "frames": 196,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 106.1,
+     "end": 110.956,
+     "seconds": 4.856,
+     "hz": 1455,
+     "share": 0.302,
+     "maxDb": -63.2,
+     "frames": 98,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 118.65,
+     "end": 125.4,
+     "seconds": 6.75,
+     "hz": 1511,
+     "share": 0.329,
+     "maxDb": -52,
+     "frames": 136,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 125.65,
+     "end": 127.7,
+     "seconds": 2.05,
+     "hz": 1628,
+     "share": 0.324,
+     "maxDb": -64.7,
+     "frames": 42,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 128.007,
+     "end": 133.101,
+     "seconds": 5.094,
+     "hz": 1422,
+     "share": 0.295,
+     "maxDb": -60,
+     "frames": 103,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/crowd-calm.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 133.35,
+     "end": 135.5,
+     "seconds": 2.15,
+     "hz": 1662,
+     "share": 0.315,
+     "maxDb": -61.3,
+     "frames": 44,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 142.457,
+     "end": 153.2,
+     "seconds": 10.743,
+     "hz": 1506,
+     "share": 0.304,
+     "maxDb": -51.5,
+     "frames": 213,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 143.9,
+     "end": 144.15,
+     "seconds": 0.25,
+     "hz": 2649,
+     "fromHz": 2649,
+     "toHz": 2778,
+     "maxDb": -66.2,
+     "frames": 4,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 153.4,
+     "end": 157.455,
+     "seconds": 4.055,
+     "hz": 1490,
+     "share": 0.31,
+     "maxDb": -52.8,
+     "frames": 82,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 161.75,
+     "end": 163.95,
+     "seconds": 2.2,
+     "hz": 1833,
+     "share": 0.416,
+     "maxDb": -52.2,
+     "frames": 45,
+     "phases": [
+      "playing",
+      "halftime"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 162.803,
+     "end": 163.25,
+     "seconds": 0.447,
+     "hz": 2745,
+     "fromHz": 2573,
+     "toHz": 2842,
+     "maxDb": -52.2,
+     "frames": 8,
+     "phases": [
+      "playing",
+      "halftime"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 166.1,
+     "end": 169.9,
+     "seconds": 3.8,
+     "hz": 1744,
+     "share": 0.387,
+     "maxDb": -52.4,
+     "frames": 77,
+     "phases": [
+      "halftime",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 167.9,
+     "end": 168.156,
+     "seconds": 0.256,
+     "hz": 2649,
+     "fromHz": 2649,
+     "toHz": 2422,
+     "maxDb": -71.1,
+     "frames": 4,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 170.101,
+     "end": 173.518,
+     "seconds": 3.417,
+     "hz": 1509,
+     "share": 0.299,
+     "maxDb": -58.9,
+     "frames": 69,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/kick.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 176.6,
+     "end": 179.4,
+     "seconds": 2.8,
+     "hz": 1460,
+     "share": 0.293,
+     "maxDb": -58.5,
+     "frames": 57,
+     "phases": [
+      "goal"
+     ],
+     "live": false,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg"
+     ]
+    }
+   ],
+   "liveTones": [],
+   "liveGlides": [
+    {
+     "kind": "glide",
+     "start": 0,
+     "end": 0.352,
+     "seconds": 0.352,
+     "hz": 2756,
+     "fromHz": 2896,
+     "toHz": 2724,
+     "maxDb": -52,
+     "frames": 7,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 0.65,
+     "end": 1.05,
+     "seconds": 0.4,
+     "hz": 1475,
+     "fromHz": 1766,
+     "toHz": 1044,
+     "maxDb": -61.2,
+     "frames": 5,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 7.9,
+     "end": 8.2,
+     "seconds": 0.3,
+     "hz": 1733,
+     "fromHz": 2304,
+     "toHz": 1249,
+     "maxDb": -67.9,
+     "frames": 6,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.9,
+     "end": 48.159,
+     "seconds": 0.259,
+     "hz": 2649,
+     "fromHz": 2649,
+     "toHz": 2422,
+     "maxDb": -70,
+     "frames": 4,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 162.803,
+     "end": 163.25,
+     "seconds": 0.447,
+     "hz": 2745,
+     "fromHz": 2573,
+     "toHz": 2842,
+     "maxDb": -52.2,
+     "frames": 8,
+     "phases": [
+      "playing",
+      "halftime"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 167.9,
+     "end": 168.156,
+     "seconds": 0.256,
+     "hz": 2649,
+     "fromHz": 2649,
+     "toHz": 2422,
+     "maxDb": -71.1,
+     "frames": 4,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop"
+     ]
+    }
+   ],
+   "liveHums": [
+    {
+     "kind": "hum",
+     "start": 0,
+     "end": 6.457,
+     "seconds": 6.457,
+     "hz": 1596,
+     "share": 0.341,
+     "maxDb": -52,
+     "frames": 109,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/kick.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 6.85,
+     "end": 12.15,
+     "seconds": 5.3,
+     "hz": 1542,
+     "share": 0.3,
+     "maxDb": -59.3,
+     "frames": 107,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/kick.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 16.6,
+     "end": 19.522,
+     "seconds": 2.922,
+     "hz": 1545,
+     "share": 0.297,
+     "maxDb": -57.1,
+     "frames": 58,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 19.8,
+     "end": 23.75,
+     "seconds": 3.95,
+     "hz": 1589,
+     "share": 0.304,
+     "maxDb": -61.6,
+     "frames": 79,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 24.75,
+     "end": 27.564,
+     "seconds": 2.814,
+     "hz": 1432,
+     "share": 0.299,
+     "maxDb": -60.2,
+     "frames": 56,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/kick.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 27.9,
+     "end": 30.451,
+     "seconds": 2.551,
+     "hz": 1604,
+     "share": 0.303,
+     "maxDb": -58.7,
+     "frames": 52,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/kick.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 48.8,
+     "end": 53.05,
+     "seconds": 4.25,
+     "hz": 1393,
+     "share": 0.285,
+     "maxDb": -64,
+     "frames": 86,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 65.55,
+     "end": 67.95,
+     "seconds": 2.4,
+     "hz": 1767,
+     "share": 0.387,
+     "maxDb": -51.7,
+     "frames": 49,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 73.854,
+     "end": 84.8,
+     "seconds": 10.946,
+     "hz": 1561,
+     "share": 0.322,
+     "maxDb": -51.5,
+     "frames": 220,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 85.1,
+     "end": 87.5,
+     "seconds": 2.4,
+     "hz": 1528,
+     "share": 0.313,
+     "maxDb": -68.4,
+     "frames": 49,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 90.15,
+     "end": 92.401,
+     "seconds": 2.251,
+     "hz": 1605,
+     "share": 0.308,
+     "maxDb": -57.6,
+     "frames": 46,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/crowd-calm.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 96.1,
+     "end": 105.85,
+     "seconds": 9.75,
+     "hz": 1486,
+     "share": 0.322,
+     "maxDb": -52.3,
+     "frames": 196,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 106.1,
+     "end": 110.956,
+     "seconds": 4.856,
+     "hz": 1455,
+     "share": 0.302,
+     "maxDb": -63.2,
+     "frames": 98,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 118.65,
+     "end": 125.4,
+     "seconds": 6.75,
+     "hz": 1511,
+     "share": 0.329,
+     "maxDb": -52,
+     "frames": 136,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 125.65,
+     "end": 127.7,
+     "seconds": 2.05,
+     "hz": 1628,
+     "share": 0.324,
+     "maxDb": -64.7,
+     "frames": 42,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 128.007,
+     "end": 133.101,
+     "seconds": 5.094,
+     "hz": 1422,
+     "share": 0.295,
+     "maxDb": -60,
+     "frames": 103,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/crowd-calm.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 133.35,
+     "end": 135.5,
+     "seconds": 2.15,
+     "hz": 1662,
+     "share": 0.315,
+     "maxDb": -61.3,
+     "frames": 44,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 142.457,
+     "end": 153.2,
+     "seconds": 10.743,
+     "hz": 1506,
+     "share": 0.304,
+     "maxDb": -51.5,
+     "frames": 213,
+     "phases": [
+      "goal",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-goal.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 153.4,
+     "end": 157.455,
+     "seconds": 4.055,
+     "hz": 1490,
+     "share": 0.31,
+     "maxDb": -52.8,
+     "frames": 82,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 161.75,
+     "end": 163.95,
+     "seconds": 2.2,
+     "hz": 1833,
+     "share": 0.416,
+     "maxDb": -52.2,
+     "frames": 45,
+     "phases": [
+      "playing",
+      "halftime"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/whistle.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 166.1,
+     "end": 169.9,
+     "seconds": 3.8,
+     "hz": 1744,
+     "share": 0.387,
+     "maxDb": -52.4,
+     "frames": 77,
+     "phases": [
+      "halftime",
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/whistle.ogg",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg"
+     ]
+    },
+    {
+     "kind": "hum",
+     "start": 170.101,
+     "end": 173.518,
+     "seconds": 3.417,
+     "hz": 1509,
+     "share": 0.299,
+     "maxDb": -58.9,
+     "frames": 69,
+     "phases": [
+      "playing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/soccer/ambience-loop.ogg loop",
+      "design/audio/soccer/crowd-calm.ogg",
+      "design/audio/soccer/pass.ogg",
+      "design/audio/soccer/kick.ogg"
+     ]
+    }
+   ],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 10.5,
+     "what": "ready"
+    },
+    {
+     "at": 10.6,
+     "what": "bot running"
+    },
+    {
+     "at": 191.2,
+     "what": "done"
+    }
+   ]
+  },
+  "streetSlam": {
+   "game": "streetSlam",
+   "seconds": 180,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 4496,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 6835,
+     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:41693/workout/island/minigames/hoops-audio.mjs:70:13) < Object.setPaused (http://127.0.0.1:41693/workout/island/minigames/hoops-audio.mjs:136:53)"
+    }
+   ],
+   "frames": 1301,
+   "phases": {
+    "jumpball": {
+     "frames": 4,
+     "s25": 0.543,
+     "s12": 0.171,
+     "maxDb": -67.1,
+     "audible": 3
+    },
+    "live": {
+     "frames": 1297,
+     "s25": 0.015,
+     "s12": 0.068,
+     "maxDb": -45.3,
+     "audible": 927
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "design/audio/scenes/opening.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "jumpball": 1
+     }
+    },
+    "design/audio/basketball/bounce.ogg": {
+     "count": 111,
+     "live": 111,
+     "loop": 0,
+     "phases": {
+      "live": 111
+     }
+    },
+    "design/audio/basketball/shoes.ogg": {
+     "count": 34,
+     "live": 34,
+     "loop": 0,
+     "phases": {
+      "live": 34
+     }
+    },
+    "assets/audio/g3h/pass.ogg": {
+     "count": 7,
+     "live": 7,
+     "loop": 0,
+     "phases": {
+      "live": 7
+     }
+    },
+    "design/audio/basketball/swish.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "dead": 1
+     }
+    },
+    "design/audio/basketball/crowd-calm.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "dead": 1
+     }
+    },
+    "design/audio/basketball/crowd-excited.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "dead": 1
+     }
+    }
+   },
+   "oscillators": 1,
+   "filters": 298,
+   "segments": [
+    {
+     "kind": "glide",
+     "start": 2.95,
+     "end": 3.25,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 4.304,
+     "end": 4.604,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 6,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 6.25,
+     "end": 6.6,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 7.25,
+     "end": 7.6,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 9.95,
+     "end": 10.306,
+     "seconds": 0.356,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 36.303,
+     "end": 36.65,
+     "seconds": 0.347,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.1,
+     "end": 37.4,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.85,
+     "end": 38.2,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 39.356,
+     "end": 39.652,
+     "seconds": 0.296,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 40.1,
+     "end": 40.4,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 40.9,
+     "end": 41.2,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 65.5,
+     "end": 65.8,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 67.6,
+     "end": 67.95,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 68.7,
+     "end": 69,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.9,
+     "end": 71.2,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 154.003,
+     "end": 154.355,
+     "seconds": 0.352,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 156.451,
+     "end": 156.75,
+     "seconds": 0.299,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 157.15,
+     "end": 157.45,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 161,
+     "end": 161.35,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 162.4,
+     "end": 162.7,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 163.2,
+     "end": 163.55,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 164.75,
+     "end": 165.05,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 165.402,
+     "end": 165.703,
+     "seconds": 0.301,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 166.25,
+     "end": 166.55,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 6,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 166.9,
+     "end": 167.25,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    }
+   ],
+   "liveTones": [],
+   "liveGlides": [
+    {
+     "kind": "glide",
+     "start": 2.95,
+     "end": 3.25,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 4.304,
+     "end": 4.604,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 6,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 6.25,
+     "end": 6.6,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 7.25,
+     "end": 7.6,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 9.95,
+     "end": 10.306,
+     "seconds": 0.356,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 36.303,
+     "end": 36.65,
+     "seconds": 0.347,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.1,
+     "end": 37.4,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.85,
+     "end": 38.2,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 39.356,
+     "end": 39.652,
+     "seconds": 0.296,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 40.1,
+     "end": 40.4,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 40.9,
+     "end": 41.2,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 65.5,
+     "end": 65.8,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 67.6,
+     "end": 67.95,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 68.7,
+     "end": 69,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.9,
+     "end": 71.2,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 154.003,
+     "end": 154.355,
+     "seconds": 0.352,
+     "hz": 1087,
+     "fromHz": 1690,
+     "toHz": 1077,
+     "maxDb": -59,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 156.451,
+     "end": 156.75,
+     "seconds": 0.299,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 157.15,
+     "end": 157.45,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.8,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 161,
+     "end": 161.35,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 162.4,
+     "end": 162.7,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 163.2,
+     "end": 163.55,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 164.75,
+     "end": 165.05,
+     "seconds": 0.3,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 165.402,
+     "end": 165.703,
+     "seconds": 0.301,
+     "hz": 1077,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.5,
+     "frames": 7,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 166.25,
+     "end": 166.55,
+     "seconds": 0.3,
+     "hz": 1087,
+     "fromHz": 1723,
+     "toHz": 1077,
+     "maxDb": -57.1,
+     "frames": 6,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 166.9,
+     "end": 167.25,
+     "seconds": 0.35,
+     "hz": 1087,
+     "fromHz": 1712,
+     "toHz": 1077,
+     "maxDb": -59.6,
+     "frames": 8,
+     "phases": [
+      "live"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/basketball/bounce.ogg",
+      "design/audio/basketball/shoes.ogg"
+     ]
+    }
+   ],
+   "liveHums": [],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 7,
+     "what": "ready"
+    },
+    {
+     "at": 9,
+     "what": "bot running"
+    },
+    {
+     "at": 189.5,
+     "what": "done"
+    }
+   ]
+  },
   "tennis": {
    "game": "tennis",
    "seconds": 180,
@@ -3881,6 +6322,39 @@
     },
     {
      "at": 188.4,
+     "what": "done"
+    }
+   ]
+  },
+  "city": {
+   "game": "city",
+   "seconds": 30,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 4419,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
+    }
+   ],
+   "frames": 0,
+   "phases": {},
+   "sources": {},
+   "oscillators": 0,
+   "filters": 0,
+   "segments": [],
+   "liveTones": [],
+   "liveGlides": [],
+   "liveHums": [],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 4.4,
+     "what": "city idle"
+    },
+    {
+     "at": 34.6,
      "what": "done"
     }
    ]
