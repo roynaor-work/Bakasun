@@ -25,7 +25,7 @@ export const V15_DEFAULTS=Object.freeze({
  coolSeconds:2,        // forced silence after a burst
  rechargeSeconds:1.5,  // time without firing until a new burst is available
  warmHeat:.35,         // gauge level shown while the cannon fires steadily after a burst
- normalDamage:.75,     // damage of a steady shot (v14 bullets were 0.406): 5.6/s x .75 = 4.2 damage per second
+ normalDamage:.8,      // damage of a steady shot (v14 bullets were 0.406): 5.6/s x .8 = 4.4 damage per second
  burstDamage:.5,       // damage of a burst bullet (10/s x .5 = 5 damage per second)
  capPerSecond:15,      // hard cap on projectiles per second at the spawn point
  capBurst:6,           // bucket size: one spread round (3) plus two wing shots pass, a stream does not
