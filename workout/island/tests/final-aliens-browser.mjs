@@ -89,8 +89,8 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
    const plan=await page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}for(const a of m.aliens)if(a.diveAge>=0&&a.y<py)cross.push(a.x);let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>36);if(!safe(want)){out:for(let d=0;d<=844;d+=8)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>20&&x<824&&safe(x)){want=x;break out;}}}return {dx:want-m.player.x,px:m.player.x,aim:t?Math.abs(t.x-m.player.x):999};});
    if(!plan)break;
    const f=finger(plan.px+plan.dx);
-   // A good player lifts the finger when far from any target, and lets the Vulcan recharge for the next column.
-   const wantFire=plan.aim<60;
+   // A good player keeps the button down (like the headless bot) and only steers; lifting it between columns cost about 10 s.
+   const wantFire=true;void plan.aim;
    if(wantFire!==fireHeld){fireHeld=wantFire;if(wantFire)await touch('touchStart',[f,{...fire,id:2}]);else await touch('touchEnd',[{...fire,id:2}]);} // touchEnd lists the released point; the drag finger keeps its anchor
    const pts=[f];if(fireHeld)pts.push({...fire,id:2});await touch('touchMove',pts);
    await tick(100);last=s;s=await snap();steps++;
