@@ -5,10 +5,10 @@ export const towerEnabled=(search=globalThis.location?.search||'')=>new URLSearc
 
 export function createRacingTower(parent){
  const root=document.createElement('div');root.className='racing-tower';root.setAttribute('aria-hidden','true');
- Object.assign(root.style,{position:'absolute',left:'10px',top:'104px',zIndex:'4',display:'grid',gap:'1px',font:'600 11px/1.15 system-ui,sans-serif',color:'#fff',direction:'rtl',pointerEvents:'none',textShadow:'0 1px 2px #000a'});
+ Object.assign(root.style,{position:'absolute',left:'10px',top:'128px',zIndex:'4',display:'grid',gap:'1px',font:'600 11px/1.15 system-ui,sans-serif',color:'#fff',direction:'rtl',pointerEvents:'none',textShadow:'0 1px 2px #000a'});
  parent.append(root);let age=1;
  const rows=[];
- for(let i=0;i<6;i++){const row=document.createElement('div');Object.assign(row.style,{display:'grid',gridTemplateColumns:'16px 6px 54px 42px',alignItems:'center',gap:'4px',padding:'1px 6px 1px 3px',background:'#0b1624c8',borderInlineStart:'3px solid transparent',borderRadius:'2px'});
+ for(let i=0;i<6;i++){const row=document.createElement('div');Object.assign(row.style,{display:'grid',gridTemplateColumns:'16px 6px 62px 38px',alignItems:'center',gap:'4px',padding:'1px 6px 1px 3px',background:'#0b1624c8',borderInlineStart:'3px solid transparent',borderRadius:'2px'});
   const pos=document.createElement('b'),dot=document.createElement('i'),name=document.createElement('span'),gap=document.createElement('small');
   Object.assign(dot.style,{width:'6px',height:'12px',borderRadius:'1px'});Object.assign(name.style,{overflow:'hidden',whiteSpace:'nowrap',textOverflow:'clip'});Object.assign(gap.style,{opacity:'.8',textAlign:'end',direction:'ltr',fontVariantNumeric:'tabular-nums'});
   row.append(pos,dot,name,gap);root.append(row);rows.push({row,pos,dot,name,gap});}
