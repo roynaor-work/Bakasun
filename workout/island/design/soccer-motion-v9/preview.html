@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; worker-src 'self'; connect-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark">
+<title>תנועה טבעית · ספריית כדורגל 09</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./preview.css">
+<script type="module" src="./preview.mjs"></script>
+</head>
+<body>
+<header><a href="./preview.html" class="brand">תנועה<span>כדורגל / ספרייה 09</span></a><span class="edition">48 תנועות מקוריות <b dir="ltr">V.09</b></span><nav><a href="./REPORT.md">דוח מדידות</a><a href="./LICENSES.md">רישיונות</a></nav></header>
+<main>
+<aside>
+ <div class="eyebrow">ספריית תנועה לכדורגל</div><h1>תנועה.<br><em>עם משקל.</em></h1>
+ <label for="category">קבוצת תנועה</label><select id="category"><option value="all">כל התנועות</option><option value="free">תנועה חופשית</option><option value="ball">עם הכדור</option><option value="slide">גלישה וקימה</option><option value="keeper">שוער</option><option value="celebration">חגיגות וכללי משחק</option></select>
+ <label for="clip">בחירת קליפ <span id="index" dir="ltr"></span></label><select id="clip"></select>
+ <p id="note"></p>
+ <div class="facts"><span><b id="duration">—</b> שניות</span><span id="kind">—</span><span>30Hz</span></div>
+ <div class="checks"><label><input id="travel" type="checkbox" checked> הצגת התקדמות במגרש</label><label><input id="markers" type="checkbox" checked> סמני מגע ותמיכה</label><label><input id="autoplay" type="checkbox"> ניגון כל הספרייה ברצף</label></div>
+ <button id="brakeDemo" class="brake-demo">ריצה ← בלימה רציפה</button>
+ <a id="sheet" class="sheet" href="./verification/contact-sheets/idle_relaxed.png">גיליון צילומים ↗</a>
+ <details><summary>מפת מעברים · בחירת קליפ</summary><ul id="edges"></ul></details>
+</aside>
+<section class="workspace">
+ <div id="stage" tabindex="0" aria-label="תצוגת תלת ממד; גרירה לסיבוב וגלילה לקירוב">
+  <div class="stage-head"><span>תצוגת תנועה / <b id="title"></b></span><button id="camera" title="איפוס מצלמה">איפוס מבט ↻</button></div>
+  <div id="loading" role="status">טוען את הדמות…</div>
+  <div class="stage-foot"><span id="event" aria-live="polite"></span><span dir="ltr" class="axis">+Y ↑ &nbsp; +Z ↗</span></div>
+ </div>
+ <div class="controls">
+  <div class="control-line"><button id="play" class="primary">השהיה</button><button id="restart" aria-label="מהתחלה">↺</button><label for="speed">קצב</label><select id="speed"><option value=".25">×0.25</option><option value=".5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select><span id="time" dir="ltr">0.00 / 0.00</span><button id="previous" aria-label="קליפ קודם">→</button><button id="next" aria-label="קליפ הבא">←</button></div>
+  <label class="sr-only" for="timeline">מיקום בקליפ</label><input id="timeline" type="range" min="0" max="1" value="0" step=".0001" dir="ltr"><div id="events" class="events"></div>
+ </div>
+</section>
+</main>
+<footer><span id="status" role="status">מכינים את הספרייה…</span><span>תנועה מקורית · שלד קנוני · מגע מתוזמן</span></footer>
+</body>
+</html>

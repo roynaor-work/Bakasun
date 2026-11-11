@@ -1,0 +1,20 @@
+/** Independent audit of public actor-local ball keys and decoded cue markers.
+ * No authoring function or calibration result is trusted by this audit. */
+import fs from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+const dist=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
+function at(keys,t){if(t<=keys[0].time)return keys[0].position;for(let i=1;i<keys.length;i++)if(t<=keys[i].time){const a=keys[i-1],b=keys[i],u=(t-a.time)/(b.time-a.time);return a.position.map((v,j)=>v+(b.position[j]-v)*u);}return keys.at(-1).position;}
+export function auditBall(clips){const rows=clips.map(c=>{const failures=[],keys=c.ball.keys,R=c.ball.radius,events=c.events.filter(e=>['contact','release'].includes(e.type));let maxCueError=0,maxWorldSpeed=0,maxWorldStep=0;
+ for(const e of events){const side=/^first_touch_inside_/.test(c.id)?1:/^first_touch_outside_/.test(c.id)?-1:0;if(side&&e.local[0]*side<.02)failures.push({code:'first-touch-foot-side',event:e,expected:side>0?'medial +X':'lateral -X'});const error=Math.abs(dist(at(keys,e.time),e.position)-R);maxCueError=Math.max(maxCueError,error);if(error>.003)failures.push({code:'ball-cue-surface',event:e,error});}
+ for(let i=1;i<keys.length;i++){const a=keys[i-1],b=keys[i],dt=b.time-a.time;if(!(dt>0)){failures.push({code:'ball-key-order',index:i});continue;}const ta=at(c.travel,a.time),tb=at(c.travel,b.time),pa=a.position.map((v,j)=>v+ta[j]),pb=b.position.map((v,j)=>v+tb[j]),step=dist(pa,pb);maxWorldStep=Math.max(maxWorldStep,step);maxWorldSpeed=Math.max(maxWorldSpeed,step/dt);}
+ if(keys.some(k=>k.position[1]<R-.000001))failures.push({code:'ball-below-floor'});
+ if(c.loop&&dist(keys[0].position,keys.at(-1).position)>.000001)failures.push({code:'ball-loop-endpoint'});
+ const maximum=/dribble/.test(c.id)||c.id==='throw_in'?12:32;if(maxWorldSpeed>maximum)failures.push({code:'ball-speed',maximum,actual:maxWorldSpeed});
+ return {id:c.id,events:events.length,maxCueErrorM:maxCueError,maxWorldSpeedMps:maxWorldSpeed,maxWorldStepM:maxWorldStep,pass:!failures.length,failures};});return {method:'Public ball path interpolated independently, exact cue-to-sphere distances and actor-travel world velocities',clips:rows,pass:rows.every(r=>r.pass)};}
+/** Numeric physical evidence, bound to source and GLB hashes by integrity.test. */
+export function auditSkinEvidence(manifest,clips){const rows=manifest.ballPathAudit||[],expected=clips.filter(c=>c.events.some(e=>e.type==='contact')).map(c=>c.id).sort(),actual=rows.map(r=>r.id).sort(),failures=[];
+ if(JSON.stringify(expected)!==JSON.stringify(actual))failures.push({code:'skin-audit-coverage',expected,actual});
+ for(const row of rows){if(row.id==='throw_in'&&row.maximumNativeSpeedMps>12)failures.push({id:row.id,code:'held-throw-continuity',actual:row.maximumNativeSpeedMps});if(row.rateHz!==120||row.samples<2)failures.push({id:row.id,code:'skin-audit-sampling'});if(!(Number.isFinite(row.maximumSkinPenetrationM)&&row.maximumSkinPenetrationM<=.0021))failures.push({id:row.id,code:'ball-skin-penetration',actual:row.maximumSkinPenetrationM});if(!(Number.isFinite(row.maximumHeldSurfaceErrorM)&&row.maximumHeldSurfaceErrorM<=.003))failures.push({id:row.id,code:'held-ball-skin-gap',actual:row.maximumHeldSurfaceErrorM});}
+ return {method:'Actual decoded skinned triangles at120Hz with Float32 native quaternion SLERP, exact ball spheres, signed body exterior checks',clips:rows,failures,pass:!failures.length};}
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){const {clips}=await import('../runtime/catalog.mjs'),report=auditBall(clips),manifest=JSON.parse(await fs.readFile(new URL('./build.json',import.meta.url),'utf8'));report.skin=auditSkinEvidence(manifest,clips);report.pass=report.pass&&report.skin.pass;await fs.writeFile(new URL('./ball-metrics.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(`Ball audit ${report.pass?'PASS':'FAIL'}`,report.clips.filter(r=>!r.pass));if(!report.pass)process.exitCode=1;}

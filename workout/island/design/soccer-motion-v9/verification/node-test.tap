@@ -1,0 +1,763 @@
+
+> @bakasun/soccer-motion-v9@9.0.0 test
+> node --test --test-reporter=tap verification/*.test.mjs
+
+TAP version 13
+# Subtest: idle_relaxed: unchanged geometry, materials, textures, skin and bind matrices
+ok 1 - idle_relaxed: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 14.823586
+  type: 'test'
+  ...
+# Subtest: idle_scan: unchanged geometry, materials, textures, skin and bind matrices
+ok 2 - idle_scan: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.884125
+  type: 'test'
+  ...
+# Subtest: idle_weight_shift: unchanged geometry, materials, textures, skin and bind matrices
+ok 3 - idle_weight_shift: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.178439
+  type: 'test'
+  ...
+# Subtest: walk: unchanged geometry, materials, textures, skin and bind matrices
+ok 4 - walk: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.889562
+  type: 'test'
+  ...
+# Subtest: jog: unchanged geometry, materials, textures, skin and bind matrices
+ok 5 - jog: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.283105
+  type: 'test'
+  ...
+# Subtest: run: unchanged geometry, materials, textures, skin and bind matrices
+ok 6 - run: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.761223
+  type: 'test'
+  ...
+# Subtest: sprint: unchanged geometry, materials, textures, skin and bind matrices
+ok 7 - sprint: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.433212
+  type: 'test'
+  ...
+# Subtest: run_backward: unchanged geometry, materials, textures, skin and bind matrices
+ok 8 - run_backward: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.984737
+  type: 'test'
+  ...
+# Subtest: run_lateral: unchanged geometry, materials, textures, skin and bind matrices
+ok 9 - run_lateral: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.240405
+  type: 'test'
+  ...
+# Subtest: run_brake: unchanged geometry, materials, textures, skin and bind matrices
+ok 10 - run_brake: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.240595
+  type: 'test'
+  ...
+# Subtest: turn_in_place: unchanged geometry, materials, textures, skin and bind matrices
+ok 11 - turn_in_place: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.527616
+  type: 'test'
+  ...
+# Subtest: cut_45: unchanged geometry, materials, textures, skin and bind matrices
+ok 12 - cut_45: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.395166
+  type: 'test'
+  ...
+# Subtest: cut_90: unchanged geometry, materials, textures, skin and bind matrices
+ok 13 - cut_90: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.610968
+  type: 'test'
+  ...
+# Subtest: cut_135: unchanged geometry, materials, textures, skin and bind matrices
+ok 14 - cut_135: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 5.055589
+  type: 'test'
+  ...
+# Subtest: cut_180: unchanged geometry, materials, textures, skin and bind matrices
+ok 15 - cut_180: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.420289
+  type: 'test'
+  ...
+# Subtest: first_touch_chest_standing: unchanged geometry, materials, textures, skin and bind matrices
+ok 16 - first_touch_chest_standing: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 15.936923
+  type: 'test'
+  ...
+# Subtest: first_touch_chest_running: unchanged geometry, materials, textures, skin and bind matrices
+ok 17 - first_touch_chest_running: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 6.151447
+  type: 'test'
+  ...
+# Subtest: first_touch_thigh_standing: unchanged geometry, materials, textures, skin and bind matrices
+ok 18 - first_touch_thigh_standing: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 4.32416
+  type: 'test'
+  ...
+# Subtest: first_touch_thigh_running: unchanged geometry, materials, textures, skin and bind matrices
+ok 19 - first_touch_thigh_running: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.743708
+  type: 'test'
+  ...
+# Subtest: first_touch_inside_standing: unchanged geometry, materials, textures, skin and bind matrices
+ok 20 - first_touch_inside_standing: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.987122
+  type: 'test'
+  ...
+# Subtest: first_touch_inside_running: unchanged geometry, materials, textures, skin and bind matrices
+ok 21 - first_touch_inside_running: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.403705
+  type: 'test'
+  ...
+# Subtest: first_touch_outside_standing: unchanged geometry, materials, textures, skin and bind matrices
+ok 22 - first_touch_outside_standing: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 7.143927
+  type: 'test'
+  ...
+# Subtest: first_touch_outside_running: unchanged geometry, materials, textures, skin and bind matrices
+ok 23 - first_touch_outside_running: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.590072
+  type: 'test'
+  ...
+# Subtest: dribble_fast: unchanged geometry, materials, textures, skin and bind matrices
+ok 24 - dribble_fast: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 6.067342
+  type: 'test'
+  ...
+# Subtest: dribble_cut: unchanged geometry, materials, textures, skin and bind matrices
+ok 25 - dribble_cut: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 4.384697
+  type: 'test'
+  ...
+# Subtest: body_feint: unchanged geometry, materials, textures, skin and bind matrices
+ok 26 - body_feint: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 1.762386
+  type: 'test'
+  ...
+# Subtest: spin_kick: unchanged geometry, materials, textures, skin and bind matrices
+ok 27 - spin_kick: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.541632
+  type: 'test'
+  ...
+# Subtest: volley_kick: unchanged geometry, materials, textures, skin and bind matrices
+ok 28 - volley_kick: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 1.615742
+  type: 'test'
+  ...
+# Subtest: long_shot: unchanged geometry, materials, textures, skin and bind matrices
+ok 29 - long_shot: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 1.891736
+  type: 'test'
+  ...
+# Subtest: through_pass: unchanged geometry, materials, textures, skin and bind matrices
+ok 30 - through_pass: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 1.847334
+  type: 'test'
+  ...
+# Subtest: running_pass: unchanged geometry, materials, textures, skin and bind matrices
+ok 31 - running_pass: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.819618
+  type: 'test'
+  ...
+# Subtest: jump_header: unchanged geometry, materials, textures, skin and bind matrices
+ok 32 - jump_header: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.073561
+  type: 'test'
+  ...
+# Subtest: slide_miss: unchanged geometry, materials, textures, skin and bind matrices
+ok 33 - slide_miss: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.072831
+  type: 'test'
+  ...
+# Subtest: quick_getup: unchanged geometry, materials, textures, skin and bind matrices
+ok 34 - quick_getup: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.25521
+  type: 'test'
+  ...
+# Subtest: goalkeeper_ready: unchanged geometry, materials, textures, skin and bind matrices
+ok 35 - goalkeeper_ready: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.681798
+  type: 'test'
+  ...
+# Subtest: goalkeeper_roll: unchanged geometry, materials, textures, skin and bind matrices
+ok 36 - goalkeeper_roll: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.059201
+  type: 'test'
+  ...
+# Subtest: goalkeeper_short_pass: unchanged geometry, materials, textures, skin and bind matrices
+ok 37 - goalkeeper_short_pass: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.685402
+  type: 'test'
+  ...
+# Subtest: goalkeeper_overarm_throw: unchanged geometry, materials, textures, skin and bind matrices
+ok 38 - goalkeeper_overarm_throw: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.009877
+  type: 'test'
+  ...
+# Subtest: goalkeeper_catch_high: unchanged geometry, materials, textures, skin and bind matrices
+ok 39 - goalkeeper_catch_high: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.91924
+  type: 'test'
+  ...
+# Subtest: goalkeeper_punch: unchanged geometry, materials, textures, skin and bind matrices
+ok 40 - goalkeeper_punch: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.1985
+  type: 'test'
+  ...
+# Subtest: goalkeeper_catch_low: unchanged geometry, materials, textures, skin and bind matrices
+ok 41 - goalkeeper_catch_low: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 3.083514
+  type: 'test'
+  ...
+# Subtest: goalkeeper_getup: unchanged geometry, materials, textures, skin and bind matrices
+ok 42 - goalkeeper_getup: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.03447
+  type: 'test'
+  ...
+# Subtest: celebrate_hop: unchanged geometry, materials, textures, skin and bind matrices
+ok 43 - celebrate_hop: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.065953
+  type: 'test'
+  ...
+# Subtest: celebrate_clap: unchanged geometry, materials, textures, skin and bind matrices
+ok 44 - celebrate_clap: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.610918
+  type: 'test'
+  ...
+# Subtest: celebrate_pump: unchanged geometry, materials, textures, skin and bind matrices
+ok 45 - celebrate_pump: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 2.24141
+  type: 'test'
+  ...
+# Subtest: celebrate_turn: unchanged geometry, materials, textures, skin and bind matrices
+ok 46 - celebrate_turn: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 4.381276
+  type: 'test'
+  ...
+# Subtest: disappointed: unchanged geometry, materials, textures, skin and bind matrices
+ok 47 - disappointed: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 5.278605
+  type: 'test'
+  ...
+# Subtest: throw_in: unchanged geometry, materials, textures, skin and bind matrices
+ok 48 - throw_in: unchanged geometry, materials, textures, skin and bind matrices
+  ---
+  duration_ms: 1.908044
+  type: 'test'
+  ...
+# Subtest: calibration binds all contact cues to real skin with one common sphere per moment
+ok 49 - calibration binds all contact cues to real skin with one common sphere per moment
+  ---
+  duration_ms: 1.245771
+  type: 'test'
+  ...
+# Subtest: authoring source matches the delivered build manifest
+ok 50 - authoring source matches the delivered build manifest
+  ---
+  duration_ms: 1.711569
+  type: 'test'
+  ...
+# Subtest: 48 original actions cover every requested category exactly once
+ok 51 - 48 original actions cover every requested category exactly once
+  ---
+  duration_ms: 3.258276
+  type: 'test'
+  ...
+# idle_relaxed: PASS
+# idle_scan: PASS
+# idle_weight_shift: PASS
+# walk: PASS
+# jog: PASS
+# run: PASS
+# sprint: PASS
+# run_backward: PASS
+# run_lateral: PASS
+# run_brake: PASS
+# turn_in_place: PASS
+# cut_45: PASS
+# cut_90: PASS
+# cut_135: PASS
+# cut_180: PASS
+# first_touch_chest_standing: PASS
+# first_touch_chest_running: PASS
+# first_touch_thigh_standing: PASS
+# first_touch_thigh_running: PASS
+# first_touch_inside_standing: PASS
+# first_touch_inside_running: PASS
+# first_touch_outside_standing: PASS
+# first_touch_outside_running: PASS
+# dribble_fast: PASS
+# dribble_cut: PASS
+# body_feint: PASS
+# spin_kick: PASS
+# volley_kick: PASS
+# long_shot: PASS
+# through_pass: PASS
+# running_pass: PASS
+# jump_header: PASS
+# slide_miss: PASS
+# quick_getup: PASS
+# goalkeeper_ready: PASS
+# goalkeeper_roll: PASS
+# goalkeeper_short_pass: PASS
+# goalkeeper_overarm_throw: PASS
+# goalkeeper_catch_high: PASS
+# goalkeeper_punch: PASS
+# goalkeeper_catch_low: PASS
+# goalkeeper_getup: PASS
+# celebrate_hop: PASS
+# celebrate_clap: PASS
+# celebrate_pump: PASS
+# celebrate_turn: PASS
+# disappointed: PASS
+# throw_in: PASS
+# Subtest: every shipped GLB decodes through the real local GLTFLoader and Draco WASM
+ok 52 - every shipped GLB decodes through the real local GLTFLoader and Draco WASM
+  ---
+  duration_ms: 1.978112
+  type: 'test'
+  ...
+# Subtest: idle_relaxed: independent native motion acceptance
+ok 53 - idle_relaxed: independent native motion acceptance
+  ---
+  duration_ms: 0.193467
+  type: 'test'
+  ...
+# Subtest: idle_scan: independent native motion acceptance
+ok 54 - idle_scan: independent native motion acceptance
+  ---
+  duration_ms: 0.088304
+  type: 'test'
+  ...
+# Subtest: idle_weight_shift: independent native motion acceptance
+ok 55 - idle_weight_shift: independent native motion acceptance
+  ---
+  duration_ms: 0.074731
+  type: 'test'
+  ...
+# Subtest: walk: independent native motion acceptance
+ok 56 - walk: independent native motion acceptance
+  ---
+  duration_ms: 0.059154
+  type: 'test'
+  ...
+# Subtest: jog: independent native motion acceptance
+ok 57 - jog: independent native motion acceptance
+  ---
+  duration_ms: 0.053155
+  type: 'test'
+  ...
+# Subtest: run: independent native motion acceptance
+ok 58 - run: independent native motion acceptance
+  ---
+  duration_ms: 0.145164
+  type: 'test'
+  ...
+# Subtest: sprint: independent native motion acceptance
+ok 59 - sprint: independent native motion acceptance
+  ---
+  duration_ms: 0.391638
+  type: 'test'
+  ...
+# Subtest: run_backward: independent native motion acceptance
+ok 60 - run_backward: independent native motion acceptance
+  ---
+  duration_ms: 0.186796
+  type: 'test'
+  ...
+# Subtest: run_lateral: independent native motion acceptance
+ok 61 - run_lateral: independent native motion acceptance
+  ---
+  duration_ms: 0.489731
+  type: 'test'
+  ...
+# Subtest: run_brake: independent native motion acceptance
+ok 62 - run_brake: independent native motion acceptance
+  ---
+  duration_ms: 0.052148
+  type: 'test'
+  ...
+# Subtest: turn_in_place: independent native motion acceptance
+ok 63 - turn_in_place: independent native motion acceptance
+  ---
+  duration_ms: 0.031028
+  type: 'test'
+  ...
+# Subtest: cut_45: independent native motion acceptance
+ok 64 - cut_45: independent native motion acceptance
+  ---
+  duration_ms: 0.024739
+  type: 'test'
+  ...
+# Subtest: cut_90: independent native motion acceptance
+ok 65 - cut_90: independent native motion acceptance
+  ---
+  duration_ms: 0.019845
+  type: 'test'
+  ...
+# Subtest: cut_135: independent native motion acceptance
+ok 66 - cut_135: independent native motion acceptance
+  ---
+  duration_ms: 0.020451
+  type: 'test'
+  ...
+# Subtest: cut_180: independent native motion acceptance
+ok 67 - cut_180: independent native motion acceptance
+  ---
+  duration_ms: 0.020311
+  type: 'test'
+  ...
+# Subtest: first_touch_chest_standing: independent native motion acceptance
+ok 68 - first_touch_chest_standing: independent native motion acceptance
+  ---
+  duration_ms: 0.019812
+  type: 'test'
+  ...
+# Subtest: first_touch_chest_running: independent native motion acceptance
+ok 69 - first_touch_chest_running: independent native motion acceptance
+  ---
+  duration_ms: 0.019769
+  type: 'test'
+  ...
+# Subtest: first_touch_thigh_standing: independent native motion acceptance
+ok 70 - first_touch_thigh_standing: independent native motion acceptance
+  ---
+  duration_ms: 0.020712
+  type: 'test'
+  ...
+# Subtest: first_touch_thigh_running: independent native motion acceptance
+ok 71 - first_touch_thigh_running: independent native motion acceptance
+  ---
+  duration_ms: 0.019374
+  type: 'test'
+  ...
+# Subtest: first_touch_inside_standing: independent native motion acceptance
+ok 72 - first_touch_inside_standing: independent native motion acceptance
+  ---
+  duration_ms: 0.020273
+  type: 'test'
+  ...
+# Subtest: first_touch_inside_running: independent native motion acceptance
+ok 73 - first_touch_inside_running: independent native motion acceptance
+  ---
+  duration_ms: 0.291005
+  type: 'test'
+  ...
+# Subtest: first_touch_outside_standing: independent native motion acceptance
+ok 74 - first_touch_outside_standing: independent native motion acceptance
+  ---
+  duration_ms: 0.074861
+  type: 'test'
+  ...
+# Subtest: first_touch_outside_running: independent native motion acceptance
+ok 75 - first_touch_outside_running: independent native motion acceptance
+  ---
+  duration_ms: 0.025473
+  type: 'test'
+  ...
+# Subtest: dribble_fast: independent native motion acceptance
+ok 76 - dribble_fast: independent native motion acceptance
+  ---
+  duration_ms: 0.021137
+  type: 'test'
+  ...
+# Subtest: dribble_cut: independent native motion acceptance
+ok 77 - dribble_cut: independent native motion acceptance
+  ---
+  duration_ms: 0.019854
+  type: 'test'
+  ...
+# Subtest: body_feint: independent native motion acceptance
+ok 78 - body_feint: independent native motion acceptance
+  ---
+  duration_ms: 0.019137
+  type: 'test'
+  ...
+# Subtest: spin_kick: independent native motion acceptance
+ok 79 - spin_kick: independent native motion acceptance
+  ---
+  duration_ms: 0.022084
+  type: 'test'
+  ...
+# Subtest: volley_kick: independent native motion acceptance
+ok 80 - volley_kick: independent native motion acceptance
+  ---
+  duration_ms: 0.019671
+  type: 'test'
+  ...
+# Subtest: long_shot: independent native motion acceptance
+ok 81 - long_shot: independent native motion acceptance
+  ---
+  duration_ms: 0.020028
+  type: 'test'
+  ...
+# Subtest: through_pass: independent native motion acceptance
+ok 82 - through_pass: independent native motion acceptance
+  ---
+  duration_ms: 0.019969
+  type: 'test'
+  ...
+# Subtest: running_pass: independent native motion acceptance
+ok 83 - running_pass: independent native motion acceptance
+  ---
+  duration_ms: 0.020317
+  type: 'test'
+  ...
+# Subtest: jump_header: independent native motion acceptance
+ok 84 - jump_header: independent native motion acceptance
+  ---
+  duration_ms: 0.020366
+  type: 'test'
+  ...
+# Subtest: slide_miss: independent native motion acceptance
+ok 85 - slide_miss: independent native motion acceptance
+  ---
+  duration_ms: 0.02041
+  type: 'test'
+  ...
+# Subtest: quick_getup: independent native motion acceptance
+ok 86 - quick_getup: independent native motion acceptance
+  ---
+  duration_ms: 0.019314
+  type: 'test'
+  ...
+# Subtest: goalkeeper_ready: independent native motion acceptance
+ok 87 - goalkeeper_ready: independent native motion acceptance
+  ---
+  duration_ms: 0.020544
+  type: 'test'
+  ...
+# Subtest: goalkeeper_roll: independent native motion acceptance
+ok 88 - goalkeeper_roll: independent native motion acceptance
+  ---
+  duration_ms: 0.018443
+  type: 'test'
+  ...
+# Subtest: goalkeeper_short_pass: independent native motion acceptance
+ok 89 - goalkeeper_short_pass: independent native motion acceptance
+  ---
+  duration_ms: 0.020178
+  type: 'test'
+  ...
+# Subtest: goalkeeper_overarm_throw: independent native motion acceptance
+ok 90 - goalkeeper_overarm_throw: independent native motion acceptance
+  ---
+  duration_ms: 0.018538
+  type: 'test'
+  ...
+# Subtest: goalkeeper_catch_high: independent native motion acceptance
+ok 91 - goalkeeper_catch_high: independent native motion acceptance
+  ---
+  duration_ms: 0.018851
+  type: 'test'
+  ...
+# Subtest: goalkeeper_punch: independent native motion acceptance
+ok 92 - goalkeeper_punch: independent native motion acceptance
+  ---
+  duration_ms: 0.018509
+  type: 'test'
+  ...
+# Subtest: goalkeeper_catch_low: independent native motion acceptance
+ok 93 - goalkeeper_catch_low: independent native motion acceptance
+  ---
+  duration_ms: 0.019325
+  type: 'test'
+  ...
+# Subtest: goalkeeper_getup: independent native motion acceptance
+ok 94 - goalkeeper_getup: independent native motion acceptance
+  ---
+  duration_ms: 0.021925
+  type: 'test'
+  ...
+# Subtest: celebrate_hop: independent native motion acceptance
+ok 95 - celebrate_hop: independent native motion acceptance
+  ---
+  duration_ms: 0.020375
+  type: 'test'
+  ...
+# Subtest: celebrate_clap: independent native motion acceptance
+ok 96 - celebrate_clap: independent native motion acceptance
+  ---
+  duration_ms: 0.018888
+  type: 'test'
+  ...
+# Subtest: celebrate_pump: independent native motion acceptance
+ok 97 - celebrate_pump: independent native motion acceptance
+  ---
+  duration_ms: 0.019757
+  type: 'test'
+  ...
+# Subtest: celebrate_turn: independent native motion acceptance
+ok 98 - celebrate_turn: independent native motion acceptance
+  ---
+  duration_ms: 0.069567
+  type: 'test'
+  ...
+# Subtest: disappointed: independent native motion acceptance
+ok 99 - disappointed: independent native motion acceptance
+  ---
+  duration_ms: 0.031193
+  type: 'test'
+  ...
+# Subtest: throw_in: independent native motion acceptance
+ok 100 - throw_in: independent native motion acceptance
+  ---
+  duration_ms: 0.019924
+  type: 'test'
+  ...
+# Subtest: slide_miss never crosses either hand or elbow over the pelvis midsagittal plane
+ok 101 - slide_miss never crosses either hand or elbow over the pelvis midsagittal plane
+  ---
+  duration_ms: 0.12376
+  type: 'test'
+  ...
+# Subtest: the supported run-to-brake entry has continuous pose and velocity without an airborne frame
+ok 102 - the supported run-to-brake entry has continuous pose and velocity without an airborne frame
+  ---
+  duration_ms: 0.047512
+  type: 'test'
+  ...
+# Subtest: slide_miss ends in the exact authored quick_getup entry pose, with travel carried by the host
+ok 103 - slide_miss ends in the exact authored quick_getup entry pose, with travel carried by the host
+  ---
+  duration_ms: 0.03618
+  type: 'test'
+  ...
+# Subtest: no two v9 animations are identical, and no v8 animation has been copied
+ok 104 - no two v9 animations are identical, and no v8 animation has been copied
+  ---
+  duration_ms: 0.036768
+  type: 'test'
+  ...
+# Subtest: all 48 clips have an actual 844 × 390 PNG contact sheet
+ok 105 - all 48 clips have an actual 844 × 390 PNG contact sheet
+  ---
+  duration_ms: 0.382673
+  type: 'test'
+  ...
+# Subtest: every contact/release marker retains the v8 event shape and a canonical target
+ok 106 - every contact/release marker retains the v8 event shape and a canonical target
+  ---
+  duration_ms: 1.274216
+  type: 'test'
+  ...
+# Subtest: public ball paths stay on the floor, meet every physical cue and have bounded continuous speed
+ok 107 - public ball paths stay on the floor, meet every physical cue and have bounded continuous speed
+  ---
+  duration_ms: 4.61918
+  type: 'test'
+  ...
+# Subtest: every contact action includes dense actual skinned-surface evidence for the ball
+ok 108 - every contact action includes dense actual skinned-surface evidence for the ball
+  ---
+  duration_ms: 20.791628
+  type: 'test'
+  ...
+# Subtest: transition map names real clips and has the run/brake and slide/get-up recovery edges
+ok 109 - transition map names real clips and has the run/brake and slide/get-up recovery edges
+  ---
+  duration_ms: 1.256396
+  type: 'test'
+  ...
+# Subtest: a stop requested between contacts waits for the matching left plant and enters the brake at phase zero
+ok 110 - a stop requested between contacts waits for the matching left plant and enters the brake at phase zero
+  ---
+  duration_ms: 0.796925
+  type: 'test'
+  ...
+# Subtest: stop aliases choose the brake, and a wrapped playback clock preserves the queued phase and overshoot
+ok 111 - stop aliases choose the brake, and a wrapped playback clock preserves the queued phase and overshoot
+  ---
+  duration_ms: 0.582641
+  type: 'test'
+  ...
+# Subtest: invalid transitions and playback times do not silently alter presentation state
+ok 112 - invalid transitions and playback times do not silently alter presentation state
+  ---
+  duration_ms: 0.443489
+  type: 'test'
+  ...
+# Subtest: a missed slide must use the authored get-up rather than blending directly to standing
+ok 113 - a missed slide must use the authored get-up rather than blending directly to standing
+  ---
+  duration_ms: 0.468267
+  type: 'test'
+  ...
+# Subtest: each clip has an original-source and CC0 license entry
+ok 114 - each clip has an original-source and CC0 license entry
+  ---
+  duration_ms: 3.012858
+  type: 'test'
+  ...
+# Subtest: browser evidence loaded every native clip with the original images
+ok 115 - browser evidence loaded every native clip with the original images
+  ---
+  duration_ms: 88.794506
+  type: 'test'
+  ...
+# Subtest: the browser demonstrates a native contact-aligned run-to-brake transition
+ok 116 - the browser demonstrates a native contact-aligned run-to-brake transition
+  ---
+  duration_ms: 3.374156
+  type: 'test'
+  ...
+1..116
+# tests 116
+# suites 0
+# pass 116
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1633.235731
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

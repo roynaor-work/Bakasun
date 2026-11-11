@@ -1,0 +1,675 @@
+{
+  "method": "Public ball path interpolated independently, exact cue-to-sphere distances and actor-travel world velocities",
+  "clips": [
+    {
+      "id": "idle_relaxed",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "idle_scan",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "idle_weight_shift",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "walk",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 1.0000000000000067,
+      "maxWorldStepM": 0.03333333333333366,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "jog",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 2.600000000000007,
+      "maxWorldStepM": 0.08666666666666689,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "run",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 4.5000000000000115,
+      "maxWorldStepM": 0.15000000000000036,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "sprint",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 7.200000000000009,
+      "maxWorldStepM": 0.24000000000000066,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "run_backward",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 2.2000000000000046,
+      "maxWorldStepM": 0.07333333333333358,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "run_lateral",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 2,
+      "maxWorldStepM": 0.06666666666666687,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "run_brake",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 4.500000000000001,
+      "maxWorldStepM": 0.15000000000000002,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "turn_in_place",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "cut_45",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 1.7981336907098977,
+      "maxWorldStepM": 0.05993778969032992,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "cut_90",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 1.7981336907098977,
+      "maxWorldStepM": 0.05993778969032992,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "cut_135",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 1.7981336907098977,
+      "maxWorldStepM": 0.05993778969032992,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "cut_180",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 1.7981336907098977,
+      "maxWorldStepM": 0.05993778969032992,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_chest_standing",
+      "events": 2,
+      "maxCueErrorM": 2.165214951777017e-10,
+      "maxWorldSpeedMps": 4.348385936183673,
+      "maxWorldStepM": 0.03623654946819804,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_chest_running",
+      "events": 2,
+      "maxCueErrorM": 1.9606342938072174e-10,
+      "maxWorldSpeedMps": 6.173757432994135,
+      "maxWorldStepM": 0.051447978608284275,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_thigh_standing",
+      "events": 2,
+      "maxCueErrorM": 9.253953159316097e-11,
+      "maxWorldSpeedMps": 3.7092061482209364,
+      "maxWorldStepM": 0.030910051235175137,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_thigh_running",
+      "events": 2,
+      "maxCueErrorM": 2.1257820503883806e-10,
+      "maxWorldSpeedMps": 5.769376937763791,
+      "maxWorldStepM": 0.048078141148031425,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_inside_standing",
+      "events": 2,
+      "maxCueErrorM": 1.0466429112288012e-10,
+      "maxWorldSpeedMps": 2.9654066019494874,
+      "maxWorldStepM": 0.024711721682912614,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_inside_running",
+      "events": 2,
+      "maxCueErrorM": 1.4835517536671006e-10,
+      "maxWorldSpeedMps": 4.512863863446386,
+      "maxWorldStepM": 0.03760719886205308,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_outside_standing",
+      "events": 2,
+      "maxCueErrorM": 1.540651772824475e-10,
+      "maxWorldSpeedMps": 2.965406601949482,
+      "maxWorldStepM": 0.02471172168291258,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "first_touch_outside_running",
+      "events": 2,
+      "maxCueErrorM": 2.0665977262801505e-10,
+      "maxWorldSpeedMps": 4.512863863446386,
+      "maxWorldStepM": 0.03760719886205308,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "dribble_fast",
+      "events": 4,
+      "maxCueErrorM": 1.8850486449561998e-10,
+      "maxWorldSpeedMps": 6.219287257641508,
+      "maxWorldStepM": 0.05182739381367922,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "dribble_cut",
+      "events": 4,
+      "maxCueErrorM": 1.7508257343923361e-10,
+      "maxWorldSpeedMps": 2.4427199786765983,
+      "maxWorldStepM": 0.02035599982230505,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "body_feint",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "spin_kick",
+      "events": 2,
+      "maxCueErrorM": 3.7908468031311315e-11,
+      "maxWorldSpeedMps": 13.008503093061838,
+      "maxWorldStepM": 0.10840419244218302,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "volley_kick",
+      "events": 2,
+      "maxCueErrorM": 3.2162342233910124e-11,
+      "maxWorldSpeedMps": 15.143458001724719,
+      "maxWorldStepM": 0.12619548334770722,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "long_shot",
+      "events": 2,
+      "maxCueErrorM": 1.2979510521926585e-10,
+      "maxWorldSpeedMps": 21.025563781256075,
+      "maxWorldStepM": 0.175213031510469,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "through_pass",
+      "events": 2,
+      "maxCueErrorM": 7.08865882659282e-11,
+      "maxWorldSpeedMps": 9.981686757796732,
+      "maxWorldStepM": 0.08318072298164024,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "running_pass",
+      "events": 2,
+      "maxCueErrorM": 1.1386452891670729e-10,
+      "maxWorldSpeedMps": 9.007543762275285,
+      "maxWorldStepM": 0.07506286468562799,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "jump_header",
+      "events": 2,
+      "maxCueErrorM": 1.9104909321221442e-10,
+      "maxWorldSpeedMps": 10.507307278746588,
+      "maxWorldStepM": 0.08756089398955672,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "slide_miss",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "quick_getup",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_ready",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_roll",
+      "events": 2,
+      "maxCueErrorM": 1.5201156999822274e-10,
+      "maxWorldSpeedMps": 5.8518375105602525,
+      "maxWorldStepM": 0.04876531258800312,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_short_pass",
+      "events": 2,
+      "maxCueErrorM": 2.0615596729722796e-10,
+      "maxWorldSpeedMps": 6.020015801474279,
+      "maxWorldStepM": 0.05016679834561948,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_overarm_throw",
+      "events": 2,
+      "maxCueErrorM": 1.1095901975011202e-10,
+      "maxWorldSpeedMps": 8.231235037951517,
+      "maxWorldStepM": 0.0685936253162624,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_catch_high",
+      "events": 2,
+      "maxCueErrorM": 0.000002713588749592155,
+      "maxWorldSpeedMps": 9.381913431877438,
+      "maxWorldStepM": 0.0781826119323117,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_punch",
+      "events": 2,
+      "maxCueErrorM": 1.4258848268777768e-10,
+      "maxWorldSpeedMps": 11.854379796012347,
+      "maxWorldStepM": 0.09878649830010386,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_catch_low",
+      "events": 2,
+      "maxCueErrorM": 0.000006695728570760284,
+      "maxWorldSpeedMps": 6.51632670688771,
+      "maxWorldStepM": 0.0543027225573974,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "goalkeeper_getup",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "celebrate_hop",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "celebrate_clap",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "celebrate_pump",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "celebrate_turn",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "disappointed",
+      "events": 0,
+      "maxCueErrorM": 0,
+      "maxWorldSpeedMps": 0,
+      "maxWorldStepM": 0,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": "throw_in",
+      "events": 4,
+      "maxCueErrorM": 0.000008047168144884043,
+      "maxWorldSpeedMps": 8.78703774033096,
+      "maxWorldStepM": 0.0732253145027592,
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "pass": true,
+  "skin": {
+    "method": "Actual decoded skinned triangles at120Hz with Float32 native quaternion SLERP, exact ball spheres, signed body exterior checks",
+    "clips": [
+      {
+        "id": "first_touch_chest_standing",
+        "samples": 157,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 2.165215090554895e-10,
+        "maximumNativeSpeedMps": 4.348385936183673,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_chest_running",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 1.9606341550293394e-10,
+        "maximumNativeSpeedMps": 4.8119940474362854,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_thigh_standing",
+        "samples": 157,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 1.4901113676302202e-10,
+        "maximumNativeSpeedMps": 3.709206148220936,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_thigh_running",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 2.1257820503883806e-10,
+        "maximumNativeSpeedMps": 4.28085391598453,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_inside_standing",
+        "samples": 157,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 1.490111090074464e-10,
+        "maximumNativeSpeedMps": 2.9654066019494874,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_inside_running",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 2.1762999735663868e-10,
+        "maximumNativeSpeedMps": 4.26794294979219,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_outside_standing",
+        "samples": 157,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0.0003277026706970665,
+        "maximumHeldSurfaceErrorM": 1.6911645694950295e-10,
+        "maximumNativeSpeedMps": 2.965406601949482,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "first_touch_outside_running",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 2.2072592364974497e-10,
+        "maximumNativeSpeedMps": 3.5104719679271774,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "dribble_fast",
+        "samples": 73,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 3.1070946904968273,
+        "clearanceVelocityBoundMps": 3,
+        "maxForwardCorrectionM": 0.12166815638542164
+      },
+      {
+        "id": "dribble_cut",
+        "samples": 217,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 1.944128543186767,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0.03401386618614188
+      },
+      {
+        "id": "spin_kick",
+        "samples": 217,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 13.008503093061838,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "volley_kick",
+        "samples": 181,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 15.143458001724715,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "long_shot",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 21.02556378125608,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "through_pass",
+        "samples": 157,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 9.981686757796732,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "running_pass",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 7.808788130535115,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "jump_header",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 10.507307278746586,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "goalkeeper_roll",
+        "samples": 193,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 1.6998528973299898e-10,
+        "maximumNativeSpeedMps": 5.851837510560252,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "goalkeeper_short_pass",
+        "samples": 145,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 6.020015801474279,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "goalkeeper_overarm_throw",
+        "samples": 205,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 1.9971738152158025e-10,
+        "maximumNativeSpeedMps": 8.231235037951517,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "goalkeeper_catch_high",
+        "samples": 181,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0.001977499323586304,
+        "maximumHeldSurfaceErrorM": 0.000009887528019961178,
+        "maximumNativeSpeedMps": 9.381913431877436,
+        "clearanceVelocityBoundMps": 3,
+        "maxForwardCorrectionM": 0.04308176040649406
+      },
+      {
+        "id": "goalkeeper_punch",
+        "samples": 181,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0,
+        "maximumHeldSurfaceErrorM": 0,
+        "maximumNativeSpeedMps": 11.85437979601235,
+        "clearanceVelocityBoundMps": 8,
+        "maxForwardCorrectionM": 0.05967619776725759
+      },
+      {
+        "id": "goalkeeper_catch_low",
+        "samples": 181,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0.0018642188881393962,
+        "maximumHeldSurfaceErrorM": 0.00000989268661377718,
+        "maximumNativeSpeedMps": 6.5163267068877095,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      },
+      {
+        "id": "throw_in",
+        "samples": 217,
+        "rateHz": 120,
+        "maximumSkinPenetrationM": 0.000009965985841478564,
+        "maximumHeldSurfaceErrorM": 0.000009965985841478564,
+        "maximumNativeSpeedMps": 8.78703774033096,
+        "clearanceVelocityBoundMps": 2,
+        "maxForwardCorrectionM": 0
+      }
+    ],
+    "failures": [],
+    "pass": true
+  }
+}
