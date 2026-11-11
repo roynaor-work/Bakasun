@@ -1,3 +1,5 @@
+// Pins hold-to-rescue (`?fireLatch=v20`); the one-tap ladder is covered by island-fire-v22.test.mjs.
+globalThis.location={search:'?fireLatch=v20'};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';

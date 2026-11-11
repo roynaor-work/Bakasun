@@ -26,12 +26,23 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   const ladderControl=createFireLadder(settings,rescues,flames,balance);
   const navigator=createFireNavigation({balance,truck,flames,rescues,roads:driver.roads}),requiredRescues=settings.mission?.requiredRescues||0;
   function activeCount(){let n=0;for(const f of flames)if(f.active)n++;return n;}
+  // 11/11/2026 (Roy): one tap on the ladder button opens the ladder to the person, it works by itself, and it folds when finished, when the truck moves, or on a second tap.
+  // Wind stages keep the hold-and-balance control. `?fireLatch=v20` restores hold-to-rescue.
+  const ladderTap=polishValue('fireLatch')!=='v20'&&!polishLegacy('fireTruck'),lat={prev:false,on:false};
+  function rescueLatch(inp){
+   const held=Boolean(inp.rescue),rising=held&&!lat.prev;lat.prev=held;
+   if((settings.ladderMode||'simple')==='wind'){lat.on=false;ladderControl.state.latched=false;return held;}
+   if(rising){if(lat.on)lat.on=false;else if(ladderControl.state.available)lat.on=true;}
+   if(lat.on){const t=ladderControl.state.target;if(!t||truck.driving||t.rescued||t.accessed||t.expired||Math.hypot(truck.x-t.world[0],truck.z-t.world[2])>balance.rescue.truckRadius*1.2)lat.on=false;}
+   ladderControl.state.latched=lat.on;return lat.on||held;
+  }
   const model={balance,navigation:navigator.state,get selectedObjective(){return navigator.selected;},cancelNavigation(){navigator.cancel();},get guidance(){return fireGuidance(model,balance,navigator);},coolingTarget:null,coolingPower:0,get requiredRescues(){return requiredRescues;},get canFinish(){return fireDoneAt!==null&&rescues.filter(r=>r.rescued).length>=requiredRescues;},ladder:ladderControl.state,settings,flames,aim,impact,truck,camera,nozzle,firefighter,hose,roads:driver.roads,rescue,rescues,maxWater,maxPressure,range,aimRadius,extraHose,equipment,get rescueProgress(){return rescue?.progress||0;},statusId:'minigame.fireStatus',atHydrant:false,inRange:true,spraying:false,refilling:false,charging:false,rescuing:false,
     get graceRemaining(){return Math.max(0,balance.startGrace-time);},get connection(){return connection;},get firesOut(){return fireDoneAt!==null;},
     get hintId(){if(model.atHydrant&&connection<balance.hydrant.connectSeconds)return 'fire.connecting';if(model.rescuing){const r=rescues.find(r=>!r.rescued&&!r.expired&&Math.hypot(aim.x-r.x,aim.y-r.y)<=r.radius);if(r&&!r.near)return 'fire.driveToRescue';if(r&&!r.safe)return 'fire.rescueBlocked';}return model.spraying&&!model.inRange?'minigame.tooFar':null;},get hintCount(){return model.hintId?1:0;},
     get warningIds(){return [water<=0?'minigame.noWater':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null,pressureEmpty?'minigame.noPressure':null].filter(Boolean);},get warningId(){return water<=0?'minigame.noWater':pressureEmpty?'minigame.noPressure':water/maxWater<=balance.hydrant.lowWaterRatio?'minigame.lowWater':null;},get pressureEmpty(){return pressureEmpty;},get score(){return score;},get lives(){return Math.ceil(remaining);},get wave(){return 1;},get result(){return result;},get water(){return water;},get pressure(){return pressure;},get remaining(){return remaining;},get reserve(){return reserve;},get time(){return time;},get charge(){return charge;},
     statusValues(){status.seconds=Math.ceil(remaining);status.reserve=Math.floor(reserve);status.out=out;status.total=activeCount();status.rescued=0;for(const r of rescues)status.rescued+=Number(r.rescued);return status;},
     update(dt,input=EMPTY){
+      input=ladderTap?{...input,rescue:rescueLatch(input)}:input;
       if(result||dt<=0)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;remaining=Math.max(0,remaining-dt);
       const stabilizing=ladderControl.prepare(dt,time,input,truck);
       const steering=navigator.update({...input,stabilizing});

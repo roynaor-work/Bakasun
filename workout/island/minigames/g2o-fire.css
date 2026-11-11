@@ -20,3 +20,4 @@
 .game-screen.fire-play.fire-v9 #fire-finish{right:calc(max(20px,env(safe-area-inset-right)) + 110px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 104px);width:84px;height:84px;min-width:84px;min-height:84px}
 .game-screen.fire-play.fire-v9 #pass.idle{opacity:.55}
 .game-screen.fire-play.fire-v9 .soccer-stick-zone .soccer-joystick{left:calc(max(20px,env(safe-area-inset-left)) + 70px);top:calc(100% - max(20px,env(safe-area-inset-bottom)) - 70px)}
+.game-screen.fire-play #pass.latched{color:#e3f1de;border-color:#afccab;background:linear-gradient(150deg,#385246ed,#1c3029ed);box-shadow:0 0 0 4px #afccab33}

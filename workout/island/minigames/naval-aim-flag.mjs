@@ -23,7 +23,16 @@ export function navalReleaseSample(g,lagMs){
  * (0.12 deg/px), progressively wider (0.001 deg/px per px), so about 140 px reach 36 degrees and 250 px reach 87.
  * `?navalAim=v19` restores the v9 fixed gain, `?navalAim=v1` the original. */
 export const navalAimWide=search=>!polishLegacy('navalAim',search)&&polishValue('navalAim',search)!=='v19';
-export function navalWideYaw(dx,config){
- const w=config.aimControls?.wide||{},a=w.fine??.12,b=w.grow??.001,d=Math.abs(dx);
- return Math.sign(dx)*(a*d+b*d*d)*Math.PI/180;
+export function navalWideYaw(dx,config,avail=Infinity){
+ const w=config.aimControls?.wide||{},a=w.fine??.12,b=w.grow??.001,d0=w.keepPixels??60,full=w.fullReach??380,d=Math.abs(dx);
+ // 11/11/2026: the aim pad sits at the screen edge, so the drag toward the edge had 4x less room than away from it (144 px vs 700 px on a phone).
+ // Beyond `keepPixels` the remaining room is stretched so that reaching the screen edge always means `fullReach` virtual pixels (about 190 degrees).
+ let e=Math.min(d,full);if(Number.isFinite(avail)&&avail>d0&&avail<full&&d>d0)e=Math.min(full,d0+(d-d0)*(full-d0)/(avail-d0));
+ return Math.sign(dx)*(a*e+b*e*e)*Math.PI/180;
 }
+/** Yaw range reachable from a thumb-down point: degrees to each side for a drag to the screen edge. */
+export function navalPadReach(startX,width,config){
+ const w=config.aimControls?.wide||{};return {right:navalWideYaw(width-startX,config,width-startX)*180/Math.PI,left:navalWideYaw(-startX,config,startX)*180/Math.PI,full:w.fullReach??380};
+}
+export const navalTapAim=search=>!polishLegacy('navalAim',search)&&polishValue('navalAim',search)!=='v19'&&polishValue('navalAim',search)!=='v20';
+export const navalEdgeReach=search=>!polishLegacy('navalAim',search)&&polishValue('navalAim',search)!=='v19'&&polishValue('navalAim',search)!=='v20';

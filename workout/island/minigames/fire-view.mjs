@@ -147,8 +147,10 @@ export function createFireScene(ctx,model,adapters={}) {
       if(rescue.rescued){citizen.position.lerp(ladder.position,rescue.descent);citizen.position.y-=.8*rescue.descent;}
 
     }
-    ladder.visible=!ladderOnlyOnRescue||Boolean(model.ladder.target&&model.ladder.extension>0);
-    const target=model.ladder.target,extension=model.ladder.extension;
+    // 11/11/2026: the ladder opens and folds smoothly (about 0.4 s) instead of jumping; stowed means invisible (the truck's own rack is the only thing on the roof).
+    ladderAnim.ext+=((model.ladder.target&&model.ladder.extension>0?model.ladder.extension:0)-ladderAnim.ext)*(1-Math.exp(-(legacyLadderAnim?60:7)*dtLean2()));
+    ladder.visible=!ladderOnlyOnRescue||ladderAnim.ext>.02;
+    const target=model.ladder.target,extension=legacyLadderAnim?model.ladder.extension:Math.max(.02,ladderAnim.ext);
     if(target&&extension>0){direction.set(target.world[0]+model.ladder.sway*2,target.world[1]+.85,target.world[2]).sub(ladder.position);const length=direction.length();ladder.quaternion.setFromUnitVectors(up,direction.normalize());ladder.scale.set(1,length*extension,1);}
     else{ladder.rotation.set(-Math.PI/2,0,model.truck.yaw);ladder.scale.set(1,3.7,1);}
 
@@ -206,7 +208,8 @@ export function createFireScene(ctx,model,adapters={}) {
 }
 
 /** Same two-stage degradation contract as naval-view; the model never changes. */
-const legacyTruck=polishLegacy('fireTruck'),drawYawOn=fireV20('fireDraw'),ladderOnlyOnRescue=fireV20('fireLadder'),crewV9Flag=()=>!legacyTruck&&polishValue('fireCrew')!=='v8',clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
+const legacyTruck=polishLegacy('fireTruck'),legacyLadderAnim=polishLegacy('fireTruck')||polishValue('fireLatch')==='v20',ladderAnim={ext:0,t:0},drawYawOn=fireV20('fireDraw'),ladderOnlyOnRescue=fireV20('fireLadder'),crewV9Flag=()=>!legacyTruck&&polishValue('fireCrew')!=='v8',clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
+function dtLean2(){const now=globalThis.performance?.now?.()??0,dt=ladderAnim.t?Math.min(.1,Math.max(.001,(now-ladderAnim.t)/1000)):.016;ladderAnim.t=now;return dt;}
 function dtLean(){const now=globalThis.performance?.now?.()??0,dt=lean.t?Math.min(.1,Math.max(.001,(now-lean.t)/1000)):.016;lean.t=now;return dt;}
 export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRenderer(options)) {
   const r=ctx.balance.render,canvas=globalThis.document?.createElement('canvas');
