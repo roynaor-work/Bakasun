@@ -97,16 +97,15 @@ export function createCards(){
  return {push,current,clear(){q.length=0;cur=null;}};
 }
 
-/** Broadcast events from one model step: lap cards for the player, a purple card for a new fastest lap of the race, a position card on a change. */
-export function broadcastEvents(state,{changes=[],prevFastest=null}={}){
- const out=[],fast=fastestLap(state.cars);
- for(const e of state.events){
-  if(e.type==='lap'&&e.car==='player'&&!state.player.finished){const last=e.lap>=state.laps;
-   out.push({kind:'lap',title:last?'הקפה אחרונה':`הקפה ${e.lap} / ${state.laps}`,sub:`אחרונה ${fmtTime(e.lapTime)}`});}
- }
+/** Broadcast cards from the state between two frames (state based, so frames the page skipped lose nothing): a lap card when the player's lap
+ * count grew, a purple card for a new fastest lap of the race, a position card on a change. Returns what the next call must remember. */
+export function broadcastEvents(state,{changes=[],prevFastest=null,prevLaps=null}={}){
+ const out=[],fast=fastestLap(state.cars),p=state.player,laps=p?.lapTimes?.length||0;
+ if(p&&prevLaps!==null&&laps>prevLaps&&!p.finished){const last=p.lap>=state.laps;
+  out.push({kind:'lap',title:last?'הקפה אחרונה':`הקפה ${p.lap} / ${state.laps}`,sub:`אחרונה ${fmtTime(p.lapTimes[laps-1])}`});}
  if(fast&&prevFastest&&fast.time<prevFastest.time-1e-9){const car=state.cars.find(c=>c.id===fast.id);out.push({kind:'fastest',title:'הקפה מהירה ביותר',sub:`${car?.isPlayer?'אתם':car?.name||''} · ${fmtTime(fast.time)}`,duration:2.2});}
  if(state.phase==='racing'&&state.time>START_QUIET)for(const c of changes)if(c.id==='player')out.push({kind:c.delta>0?'up':'down',title:`מקום ${c.to}`,sub:c.delta>0?'עקיפה':'נעקפתם',urgent:true,duration:1.3});
- return {cards:out,fastest:fast};
+ return {cards:out,fastest:fast,laps};
 }
 
 /* ---------- DOM layer ---------- */
@@ -118,7 +117,7 @@ function chip(row,withName=true){const c=node('span','rb-chip');c.style.setPrope
  * (the session does not step the model then); podium(state, done) replaces the plain podium. */
 export function createBroadcast({stage,model,league=false,signal=null}){
  const track=model.track,trackLength=track.length,tracker=createGapTracker(),watch=createRankWatch(),cards=createCards();
- let introT=0,introDone=false,fastest=null,disposed=false,prevLights=-1;
+ let introT=0,introDone=false,fastest=null,lapsSeen=0,disposed=false,prevLights=-1;
  const lights=node('div','racing-lights');lights.setAttribute('role','img');lights.setAttribute('aria-label','רמזורי זינוק');
  const lamps=[];for(let i=0;i<LIGHTS;i++){const l=node('i','rb-lamp');lights.append(l);lamps.push(l);}
  const lightLabel=node('span','rb-lights-label','מוכנים');lights.append(lightLabel);const early=node('span','rb-early','חכו שהאורות ייכבו');early.hidden=true;lights.append(early);
@@ -132,7 +131,7 @@ export function createBroadcast({stage,model,league=false,signal=null}){
   const side=node('div','rb-intro-side');side.append(head,you,go);intro.append(side,grid);}
  stage.append(lights,card,intro);
  const closeIntro=()=>{if(introDone)return;introDone=true;intro.remove();};
- intro.addEventListener('pointerdown',e=>{e.stopPropagation();closeIntro();},{signal});
+ intro.addEventListener('pointerdown',e=>{e.stopPropagation();closeIntro();},signal?{signal}:{});
  function renderLights(state){const l=startLights(state);lights.hidden=!l.show;if(!l.show)return;
   lights.dataset.out=String(l.out);lamps.forEach((lamp,i)=>lamp.classList.toggle('on',!l.out&&i<l.lit));lightLabel.textContent=l.go?'זינוק':l.lit>=LIGHTS?'':'מוכנים';
   if(l.lit!==prevLights){prevLights=l.lit;lights.dataset.lit=String(l.lit);}}
@@ -144,7 +143,7 @@ export function createBroadcast({stage,model,league=false,signal=null}){
   if(state.phase==='countdown'){early.hidden=!(!input.autoAccelerate&&Number(input.throttle)>0);}else early.hidden=true;
   renderLights(state);
   if(state.phase==='racing'||state.phase==='finished'){tracker.record(state);
-   const changes=watch.update(state,now),ev=broadcastEvents(state,{changes,prevFastest:fastest});fastest=ev.fastest;for(const c of ev.cards)cards.push(c,now);}
+   const changes=watch.update(state,now),ev=broadcastEvents(state,{changes,prevFastest:fastest,prevLaps:lapsSeen});fastest=ev.fastest;lapsSeen=ev.laps;for(const c of ev.cards)cards.push(c,now);}
   const c=cards.current(now);card.hidden=!c;if(c){if(card.dataset.kind!==c.kind||cardTitle.textContent!==c.title){card.dataset.kind=c.kind;cardTitle.textContent=c.title;}cardSub.textContent=c.sub||'';}
  }
  /** The full result page: three steps and the whole classification; tap or the button continues, or PODIUM_SECONDS pass. */
@@ -161,7 +160,7 @@ export function createBroadcast({stage,model,league=false,signal=null}){
   const left=node('div','rp-left'),note=node('small','racing-podium-note',me&&me.rank>3?`סיימתם במקום ${me.rank} מתוך ${rows.length}`:'לחצו להמשך'),go=node('button','rp-go','המשך');go.type='button';go.dataset.action='racing-podium-go';
   left.append(title,steps,note,go);root.append(left,table);stage.append(root);
   let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);root.remove();done();};
-  const timer=setTimeout(close,PODIUM_SECONDS*1000);root.addEventListener('pointerdown',close,{signal});signal?.addEventListener('abort',()=>clearTimeout(timer),{once:true});
+  const timer=setTimeout(close,PODIUM_SECONDS*1000);root.addEventListener('pointerdown',close,signal?{signal}:{});signal?.addEventListener('abort',()=>clearTimeout(timer),{once:true});
   return root;
  }
  return {update,holding:()=>!introDone,podium,tracker,watch,fastest:()=>fastest,trackLength,dispose(){disposed=true;lights.remove();card.remove();intro.remove();}};

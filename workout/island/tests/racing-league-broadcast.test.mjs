@@ -90,18 +90,20 @@ test('the grid of twelve is fixed: the four league drivers, then the extra rival
   const L=createLeague();assert.deepEqual(Object.keys(L.table),['player',...DRIVERS.map(d=>d.id)]);assert.equal(standings(L).length,5);
 });
 test('cards: lap for the player with "הקפה אחרונה", a purple fastest lap for any car, a position card after the start, urgent cards replace',()=>{
-  const p=car('player',0,{rank:3,lap:2}),a=car('ai-1',0,{rank:1,lapTimes:[50]});
-  let state={time:60,laps:3,phase:'racing',player:p,cars:[p,a],events:[{type:'lap',car:'player',lap:2,lapTime:52.3}]};
-  let ev=broadcastEvents(state,{changes:[],prevFastest:null});assert.equal(ev.cards.length,1);assert.equal(ev.cards[0].kind,'lap');assert.equal(ev.cards[0].title,'הקפה 2 / 3');assert.equal(ev.cards[0].sub,'אחרונה 0:52.30');
-  assert.equal(ev.fastest.id,'ai-1');
-  state.events=[{type:'lap',car:'player',lap:3,lapTime:51}];ev=broadcastEvents(state,{changes:[],prevFastest:ev.fastest});assert.equal(ev.cards[0].title,'הקפה אחרונה');
-  p.finished=true;state.events=[{type:'lap',car:'player',lap:3,lapTime:50}];assert.equal(broadcastEvents(state,{changes:[],prevFastest:ev.fastest}).cards.length,0,'no lap card for the finish: the podium comes');
-  p.finished=false;state.events=[];a.lapTimes.push(47.2);ev=broadcastEvents(state,{changes:[],prevFastest:{id:'ai-1',time:50}});
+  const p=car('player',0,{rank:3,lap:2,lapTimes:[52.3]}),a=car('ai-1',0,{rank:1,lapTimes:[50]});
+  let state={time:60,laps:3,phase:'racing',player:p,cars:[p,a]};
+  // state based (a skipped frame loses nothing): the player's lap count grew from 0 to 1
+  let ev=broadcastEvents(state,{changes:[],prevFastest:null,prevLaps:0});assert.equal(ev.cards.length,1);assert.equal(ev.cards[0].kind,'lap');assert.equal(ev.cards[0].title,'הקפה 2 / 3');assert.equal(ev.cards[0].sub,'אחרונה 0:52.30');
+  assert.equal(ev.fastest.id,'ai-1');assert.equal(ev.laps,1);
+  assert.equal(broadcastEvents(state,{changes:[],prevFastest:ev.fastest,prevLaps:1}).cards.length,0,'same lap count, no card');
+  p.lap=3;p.lapTimes.push(51);ev=broadcastEvents(state,{changes:[],prevFastest:ev.fastest,prevLaps:1});assert.equal(ev.cards[0].title,'הקפה אחרונה');
+  p.finished=true;p.lapTimes.push(50);assert.equal(broadcastEvents(state,{changes:[],prevFastest:ev.fastest,prevLaps:2}).cards.length,0,'no lap card for the finish: the podium comes');
+  p.finished=false;a.lapTimes.push(47.2);ev=broadcastEvents(state,{changes:[],prevFastest:{id:'ai-1',time:50},prevLaps:3});
   assert.equal(ev.cards.length,1);assert.equal(ev.cards[0].kind,'fastest');assert.equal(ev.cards[0].sub,'ai-1 · 0:47.20');
-  assert.equal(broadcastEvents({...state,events:[]},{changes:[],prevFastest:null}).cards.length,0,'the very first lap of the race is not a fastest-lap card');
-  const up=broadcastEvents({...state,events:[]},{changes:[{id:'player',from:4,to:3,delta:1}],prevFastest:ev.fastest}).cards;assert.equal(up[0].kind,'up');assert.equal(up[0].title,'מקום 3');assert.equal(up[0].urgent,true);
-  assert.equal(broadcastEvents({...state,events:[],time:START_QUIET-.5},{changes:[{id:'player',from:4,to:3,delta:1}],prevFastest:ev.fastest}).cards.length,0,'the start shuffle is quiet');
-  assert.equal(broadcastEvents({...state,events:[]},{changes:[{id:'ai-1',from:1,to:2,delta:-1}],prevFastest:ev.fastest}).cards.length,0,'only the player gets a position card');
+  assert.equal(broadcastEvents(state,{changes:[],prevFastest:null,prevLaps:3}).cards.length,0,'the very first lap of the race is not a fastest-lap card');
+  const up=broadcastEvents(state,{changes:[{id:'player',from:4,to:3,delta:1}],prevFastest:ev.fastest,prevLaps:3}).cards;assert.equal(up[0].kind,'up');assert.equal(up[0].title,'מקום 3');assert.equal(up[0].urgent,true);
+  assert.equal(broadcastEvents({...state,time:START_QUIET-.5},{changes:[{id:'player',from:4,to:3,delta:1}],prevFastest:ev.fastest,prevLaps:3}).cards.length,0,'the start shuffle is quiet');
+  assert.equal(broadcastEvents(state,{changes:[{id:'ai-1',from:1,to:2,delta:-1}],prevFastest:ev.fastest,prevLaps:3}).cards.length,0,'only the player gets a position card');
   const q=createCards();q.push({kind:'lap',title:'a'},0);q.push({kind:'fastest',title:'b'},0);assert.equal(q.current(0).title,'a');assert.equal(q.current(1).title,'a');assert.equal(q.current(2).title,'b');
   q.push({kind:'up',title:'c',urgent:true,duration:1},2.5);assert.equal(q.current(2.5).title,'c');assert.equal(q.current(3.6),null);
   for(const c of [...up,...ev.cards])assert.ok(!/!/.test(c.title+c.sub));
