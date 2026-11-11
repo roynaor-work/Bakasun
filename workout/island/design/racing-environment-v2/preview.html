@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="color-scheme" content="light">
+  <title>סביבת מסלול — חבילת נכסים 02</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <a href="preview.html" class="identity" aria-label="תצוגת סביבת המסלול"><span class="mark" aria-hidden="true">Ⅱ</span><span>סביבת מסלול<small>חבילת נכסים מקורית · מהדורה 02</small></span></a>
+    <div class="edition" dir="ltr"><span class="status-dot"></span> RACE / ENVIRONMENT 02</div>
+    <a class="report-link" href="REPORT.md">דוח מדידות <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">מהפיטס עד קו הזינוק</p><h1>מקום למרוץ.</h1><p class="lead">שבעה דגמים, משטחים חוזרים ותאורה אחת משותפת.<br>סביבה מקורית שנבנתה במטרים, מוכנה לבדיקה מקרוב.</p></div><div class="package-facts"><div><b>07</b><span>דגמי סביבה</span></div><div><b>+Z</b><span>כיוון חזית</span></div><div><b>CC0</b><span>נכסים מקוריים</span></div></div></section>
+    <section class="stage-shell" aria-label="תצוגת תלת ממד אינטראקטיבית">
+      <div class="stage-toolbar"><div class="view-tabs" role="group" aria-label="מצב תצוגה"><button class="active" id="overview" type="button">המסלול</button><button id="seams" type="button">בדיקת חזרתיות</button></div><div class="light-tabs" role="group" aria-label="תאורה"><button class="active" id="day" type="button">יום</button><button id="dusk" type="button">ערב</button></div></div>
+      <div id="viewport"><canvas id="scene" aria-label="סביבת המרוץ, גררו לסיבוב וגללו להתקרבות"></canvas><div class="canvas-caption"><span id="scene-label">כל הסביבה</span><small id="scene-detail">יחידות מטרים · חזית +Z</small></div><div class="camera-tools"><button id="reset-camera" title="איפוס המצלמה" aria-label="איפוס המצלמה" type="button">↺</button><button id="rotate" title="סיבוב אוטומטי" aria-label="סיבוב אוטומטי" aria-pressed="false" type="button">⟳</button></div><div id="loading" role="status"><span class="spinner"></span><b>מכינים את המסלול</b><small id="progress">טוענים דגמים ומרקמים</small></div></div>
+      <div class="stage-footer"><p><span aria-hidden="true">↔</span> גרירה לסיבוב <span class="divider">/</span> גלילה להתקרבות <span class="divider">/</span> לחיצה על דגם לבדיקה</p><span id="load-status" role="status">בטעינה</span></div>
+    </section>
+    <section class="asset-section"><div class="section-heading"><h2>החלקים של המסלול</h2><span>בחרו דגם לצפייה נפרדת</span></div><div class="model-grid" id="models"></div></section>
+    <section class="asset-section surface-section"><div class="section-heading"><h2>משטחים וחומרים</h2><span>לחיצה על מרקם פותחת משטח בחזרתיות 3×3</span></div><div class="texture-grid" id="textures"></div></section>
+    <section class="notes"><p><b>נבנה להרכבה.</b> כל דגם עומד בפני עצמו; יציע באורך 20 מטר, חלקים מודולריים וחמישה אורות זינוק בעלי צמתים נפרדים.</p><div><a href="REPORT.md">מדידות וקבצים ↗</a><a href="LICENSES.md">מקורות ורישיונות ↗</a></div></section>
+  </main>
+  <footer class="page-footer"><span>סביבת מסלול · 02</span><span>מקורי. ללא מותגים. ללא דמויות אמיתיות.</span></footer>
+  <noscript>התצוגה דורשת JavaScript ודפדפן התומך ב־WebGL.</noscript>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
