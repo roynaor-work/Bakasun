@@ -60,3 +60,44 @@ test('sound start: every activation-capable event is bound on the screen, and au
   for(const type of ['pointerdown','pointerup','touchend','click','keydown'])assert.ok(seen.includes(type),type);
   assert.equal(audio.engine().contextState,'running','the Play tap that opened the race is still an activation');audio.dispose();
 });
+
+/** racing-deep-m3: the shell pauses the session while its start countdown runs (bind → applyPause → setPaused(true)) in the same task as the launch tap,
+ * and unpauses from a timer. A browser that lets resume() work only inside a tap (Safari/iOS) then never got the context back: the context must stay
+ * running through that pause (silence by gain), and a touch during the pause must still be allowed to create or resume it. ?racingAudioHold=0 restores the old suspend. */
+function gestureOnlyAudio(options={}){
+  const flags={activation:false};const param=()=>({value:0,setTargetAtTime(v){this.value=v;}});
+  const node=()=>({frequency:param(),gain:param(),Q:{value:0},connect(){},disconnect(){},start(){},stop(){}});
+  const log=[];
+  class Ctx{constructor(){this.state=flags.activation?'running':'suspended';this.currentTime=1;this.destination={};this.sampleRate=44100;}
+    createOscillator(){return node();}createBiquadFilter(){return node();}createGain(){return node();}createBuffer(){return {getChannelData:()=>new Float32Array(16)};}createBufferSource(){return Object.assign(node(),{playbackRate:{value:1}});}
+    resume(){log.push('resume');if(flags.activation)this.state='running';return Promise.resolve();}suspend(){log.push('suspend');this.state='suspended';return Promise.resolve();}close(){return Promise.resolve();}}
+  return {flags,log,audio:createRacingAudio({AudioContext:Ctx,storage:{getItem:()=>'on'},...options})};
+}
+test('sound start: the shell start pause no longer suspends the context; silent by gain, audible again after the timer unpause (holdContext:false restores the suspend)',()=>{
+  const {flags,log,audio}=gestureOnlyAudio();flags.activation=true;audio.unlock();flags.activation=false;
+  audio.setPaused(true);assert.equal(audio.engine().contextState,'running','pause keeps the context running');assert.ok(!log.includes('suspend'));
+  audio.sync(0,false,{rpm:.2,gear:1,throttle:0});assert.equal(audio.metrics().gain,0,'silent while paused');
+  audio.setPaused(false);audio.sync(0,false,{rpm:.2,gear:1,throttle:0});assert.equal(audio.engine().contextState,'running');assert.ok(audio.metrics().gain>0,'audible again without any tap');
+  audio.dispose();
+  const old=gestureOnlyAudio({holdContext:false});old.flags.activation=true;old.audio.unlock();old.flags.activation=false;
+  old.audio.setPaused(true);assert.equal(old.audio.engine().contextState,'suspended','the previous behaviour suspends');old.audio.setPaused(false);assert.equal(old.audio.engine().contextState,'suspended','and a timer unpause cannot bring it back on a gesture-only browser');
+  old.audio.dispose();
+});
+test('sound start: a tap during the start pause creates or resumes the context (unlock is not blocked by pause), still silent until unpaused',()=>{
+  const {flags,audio}=gestureOnlyAudio();audio.setPaused(true);
+  flags.activation=true;audio.unlock();assert.equal(audio.engine().contextState,'running','created and running from the tap even while paused');
+  audio.sync(0,false,{rpm:.2,gear:1,throttle:0});assert.equal(audio.metrics().gain,0);
+  audio.setPaused(false);audio.sync(0,false,{rpm:.2,gear:1,throttle:0});assert.ok(audio.metrics().gain>0);audio.dispose();
+});
+test('collision and overtake sounds: bump, wall, crash, crashRecover and pass each play one short cue from the racing audio; nothing while muted',()=>{
+  const param=()=>({value:0,setTargetAtTime(v){this.value=v;},setValueAtTime(v){this.value=v;},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){}});
+  const sources=[];const node=()=>({frequency:param(),gain:param(),playbackRate:param(),Q:{value:0},connect(){},disconnect(){},start(){},stop(){}});
+  let mute='on';
+  class Ctx{constructor(){this.state='running';this.currentTime=2;this.destination={};this.sampleRate=44100;}createOscillator(){return node();}createBiquadFilter(){return node();}createGain(){return node();}createBuffer(){return {getChannelData:()=>new Float32Array(16)};}createBufferSource(){const n=node();sources.push(n);return n;}resume(){return Promise.resolve();}close(){return Promise.resolve();}}
+  const audio=createRacingAudio({AudioContext:Ctx,storage:{getItem:()=>mute}});audio.unlock();audio.sync(20,false,{rpm:.5,gear:3,throttle:1});
+  const base=sources.length;
+  for(const [name,details] of [['bump',{}],['wall',{intensity:.5}],['crash',{}],['crashRecover',{}]]){const before=sources.length;audio.event(name,details);assert.equal(sources.length-before,1,name+' plays one cue');}
+  assert.ok(sources.slice(base).every(s=>s.gainValue===undefined||s.gainValue<=.03));
+  mute='off';audio.sync(20,false,{rpm:.5,gear:3,throttle:1});const muted=sources.length;for(const name of ['bump','wall','crash','crashRecover','pass'])audio.event(name,{intensity:1});
+  assert.equal(sources.length,muted,'muted: no cue at all');audio.dispose();
+});

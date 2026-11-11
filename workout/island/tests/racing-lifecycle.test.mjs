@@ -96,8 +96,9 @@ test('racing audio waits for a user unlock, builds one voice and follows speed w
   assert.ok(f.storageReads.every(key=>key==='island.sound'));audio.dispose();
 });
 
-test('racing audio cannot unlock while paused and resumes its existing context after pause',()=>{
-  const f=audioFixture(),audio=createRacingAudio(f);
+// racing-deep-m3: the default keeps the context running through a pause (silence by gain, see racing-sound-start.test.mjs); holdContext:false is the previous suspend path
+test('racing audio (holdContext:false) cannot unlock while paused and resumes its existing context after pause',()=>{
+  const f=audioFixture(),audio=createRacingAudio({...f,holdContext:false});
   audio.setPaused(true);audio.unlock();assert.equal(f.contexts.length,0);
   audio.setPaused(false);assert.equal(f.contexts.length,0);audio.unlock();audio.sync(30);
   const ctx=f.contexts[0];assert.equal(ctx.state,'running');assert.ok(ctx.gain.gain.value>0);
@@ -109,8 +110,8 @@ test('racing audio cannot unlock while paused and resumes its existing context a
   assert.equal(audio.metrics().paused,false);audio.dispose();
 });
 
-test('racing audio obeys the shared mute preference immediately, including while paused',()=>{
-  const f=audioFixture(),audio=createRacingAudio(f);audio.unlock();audio.sync(30);
+test('racing audio obeys the shared mute preference immediately, including while paused (holdContext:false)',()=>{
+  const f=audioFixture(),audio=createRacingAudio({...f,holdContext:false});audio.unlock();audio.sync(30);
   const ctx=f.contexts[0];assert.ok(ctx.gain.gain.value>0);
   f.mute(true);audio.sync(30,true);assert.equal(ctx.gain.gain.value,0);assert.equal(audio.metrics().muted,true);
   audio.setPaused(true);f.mute(false);audio.sync(30);assert.equal(ctx.gain.gain.value,0);
@@ -126,11 +127,11 @@ test('racing audio disposal stops and disconnects each node once and prevents fu
   assert.equal(ctx.gain.disconnects,1);assert.equal(ctx.closes,1);assert.equal(ctx.state,'closed');
   const resumes=ctx.resumes;audio.unlock();audio.setPaused(false);audio.sync(40,true);
   assert.equal(ctx.resumes,resumes);assert.equal(f.contexts.length,1);assert.equal(ctx.gain.gain.value,0);
-  assert.deepEqual(audio.metrics(),{unlocked:true,paused:false,muted:false,disposed:true});
+  assert.deepEqual(audio.metrics(),{unlocked:true,paused:false,muted:false,disposed:true,contextState:'closed',gain:0});
 });
 
 test('racing audio can pause, mute and dispose without an available audio context',()=>{
   const audio=createRacingAudio({AudioContext:null,storage:{getItem:()=> 'off'}});
   assert.doesNotThrow(()=>{audio.sync(30);audio.unlock();audio.setPaused(true);audio.setPaused(false);audio.dispose();audio.dispose();});
-  assert.deepEqual(audio.metrics(),{unlocked:false,paused:false,muted:true,disposed:true});
+  assert.deepEqual(audio.metrics(),{unlocked:false,paused:false,muted:true,disposed:true,contextState:undefined,gain:undefined});
 });
