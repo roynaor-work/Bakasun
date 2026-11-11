@@ -113,8 +113,8 @@ export function createCatchAudio({muted = () => false} = {}) {
     o1.frequency.value = 60; o2.frequency.value = 60; sub.frequency.value = 30; whine.frequency.value = 900; lfo.frequency.value = 9;
     lp.type = 'lowpass'; lp.frequency.value = 520; lp.Q.value = 1.1;
     // pulse: gain = 1 + lfoAmt * sin(); depth shrinks with speed so the idle chugs and the top end is smooth
-    pulse.gain.value = 1; lfoAmt.gain.value = .35; lfo.connect(lfoAmt).connect(pulse.gain);
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.045, t + .4); gSub.gain.value = .5; gw.gain.value = 0;
+    pulse.gain.value = 1; lfoAmt.gain.value = .25; lfo.connect(lfoAmt).connect(pulse.gain);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.032, t + .4); gSub.gain.value = .5; gw.gain.value = 0;
     // rumble: looped brown-ish noise, low-passed hard
     const buf = a.createBuffer(1, a.sampleRate, a.sampleRate), d = buf.getChannelData(0); let acc = 0;
     for (let i = 0; i < d.length; i++) { acc = acc * .985 + (Math.random() * 2 - 1) * .08; d[i] = acc; }
@@ -137,8 +137,8 @@ export function createCatchAudio({muted = () => false} = {}) {
     const t = ac.currentTime, k = clamp((Number(v) || 0) / 31, 0, 1), f = 52 + k * 98;
     eng.o1.frequency.setTargetAtTime(f, t, .08); eng.o2.frequency.setTargetAtTime(f, t, .08); eng.sub.frequency.setTargetAtTime(f / 2, t, .08);
     eng.lp.frequency.setTargetAtTime(400 + k * 950, t, .1);
-    eng.g.gain.setTargetAtTime(.036 + k * .022, t, .1);
-    eng.lfo.frequency.setTargetAtTime(7 + k * 18, t, .1); eng.lfoAmt.gain.setTargetAtTime(.35 * (1 - k) * (1 - k), t, .15);
+    eng.g.gain.setTargetAtTime(.027 + k * .019, t, .1);
+    eng.lfo.frequency.setTargetAtTime(7 + k * 18, t, .1); eng.lfoAmt.gain.setTargetAtTime(.25 * (1 - k) * (1 - k), t, .15);
     const on = Boolean(boosting);
     if (on !== eng.boosting) {
       eng.boosting = on;
@@ -161,8 +161,8 @@ export function createCatchAudio({muted = () => false} = {}) {
     }
     const t = a.currentTime;
     drawOsc.o.frequency.setTargetAtTime(120 + kk * 220, t, .05); drawOsc.bp.frequency.setTargetAtTime(450 + kk * 900, t, .05);
-    drawOsc.g.gain.setTargetAtTime(.03 + kk * .035, t, .05);
-    drawOsc.s.frequency.setTargetAtTime(620 + kk * 520, t, .05); drawOsc.gs.gain.setTargetAtTime(.004 + kk * .009, t, .05);
+    drawOsc.g.gain.setTargetAtTime(.09 + kk * .1, t, .05);
+    drawOsc.s.frequency.setTargetAtTime(620 + kk * 520, t, .05); drawOsc.gs.gain.setTargetAtTime(.006 + kk * .012, t, .05);
     clearTimeout(lastDraw); lastDraw = setTimeout(() => drawStop(false), 260);
   };
 
@@ -178,26 +178,26 @@ export function createCatchAudio({muted = () => false} = {}) {
       if (!sirenLoop(arg?.crew ? 'yelp' : 'twoTone', k, arg?.crew ? 1500 : 1100, level)) { siren(960 * k, 800 * k, 0); siren(740 * k, 880 * k, .4); }
     },
     // tyre squeal for hard steering in a bend: short, soft, rate-limited
-    turn: () => { const now = Date.now(); if (now - lastTurn < 300) return; lastTurn = now; noise(.28, {gain: .032, from: 1700, to: 2300, q: 3}); tone(1500, .22, {type: 'sine', gain: .012, slide: 400}); },
+    turn: () => { const now = Date.now(); if (now - lastTurn < 300) return; lastTurn = now; noise(.28, {gain: .16, from: 1700, to: 2300, q: 3}); tone(1500, .22, {type: 'sine', gain: .024, slide: 400}); },
     // tyre shots: a cartoon pop (a paintball thump, never a real firearm), a metallic clink with a sparks fizz on a hit
-    shot: () => { tone(520, .09, {type: 'sine', gain: .16, slide: -380}); noise(.07, {gain: .09, from: 1100, to: 350}); tone(95, .12, {type: 'triangle', gain: .09, slide: -30, delay: .01}); },
-    shotHit: () => { tone(2600, .16, {type: 'triangle', gain: .1, slide: -900}); tone(3900, .12, {type: 'sine', gain: .055, delay: .02, slide: -1400}); noise(.22, {gain: .06, from: 6000, to: 3500, q: .8, delay: .04}); },
+    shot: () => { tone(520, .09, {type: 'sine', gain: .19, slide: -380}); noise(.07, {gain: .09, from: 1100, to: 350}); tone(95, .12, {type: 'triangle', gain: .09, slide: -30, delay: .01}); },
+    shotHit: () => { tone(2600, .16, {type: 'triangle', gain: .12, slide: -900}); tone(3900, .12, {type: 'sine', gain: .065, delay: .02, slide: -1400}); noise(.22, {gain: .06, from: 6000, to: 3500, q: .8, delay: .04}); },
     // a flat tyre: a hiss, then a flap-flap that slows down for about 1.2 s
-    flat: () => { noise(.4, {gain: .1, from: 5200, to: 2200, q: .9}); let at = .28, gap = .11; for (let i = 0; i < 7; i++) { tone(88, .07, {type: 'sine', gain: .11, delay: at, slide: -28}); noise(.05, {gain: .035, from: 900, to: 400, delay: at}); at += gap; gap += .018; } },
+    flat: () => { noise(.4, {gain: .12, from: 5200, to: 2200, q: .9}); let at = .28, gap = .11; for (let i = 0; i < 7; i++) { tone(88, .07, {type: 'sine', gain: .14, delay: at, slide: -28}); noise(.05, {gain: .035, from: 900, to: 400, delay: at}); at += gap; gap += .018; } },
     // the stop: a long screech, a thud, and a hubcap ting that wobbles out
-    skid: () => { noise(1.05, {gain: .11, from: 2700, to: 1300, q: 2.2, hold: .5}); tone(1900, .95, {type: 'sine', gain: .02, slide: -700}); tone(95, .32, {type: 'sine', gain: .17, delay: .98, slide: -45}); noise(.14, {gain: .07, from: 700, to: 250, delay: .98}); tone(3150, .5, {type: 'triangle', gain: .045, delay: 1.08}); tone(3230, .45, {type: 'sine', gain: .03, delay: 1.1}); tone(4700, .25, {type: 'sine', gain: .02, delay: 1.08}); },
+    skid: () => { noise(1.05, {gain: .1, from: 2700, to: 1300, q: 2.2, hold: .5}); tone(1900, .95, {type: 'sine', gain: .02, slide: -700}); tone(95, .32, {type: 'sine', gain: .11, delay: .98, slide: -45}); noise(.14, {gain: .07, from: 700, to: 250, delay: .98}); tone(3150, .5, {type: 'triangle', gain: .045, delay: 1.08}); tone(3230, .45, {type: 'sine', gain: .03, delay: 1.1}); tone(4700, .25, {type: 'sine', gain: .02, delay: 1.08}); },
     // ----- the catch (bow and net) -----
     draw,
     twang: () => { drawStop(true); tone(180, .18, {type: 'triangle', gain: .12, slide: -90}); tone(360, .12, {type: 'sine', gain: .06, slide: -180}); noise(.12, {gain: .05, from: 2500, to: 900}); },
     whistle: () => { tone(1900, .55, {type: 'sine', gain: .045, slide: -1000}); tone(1904, .5, {type: 'sine', gain: .02, slide: -1000}); },
     // the net in flight: a falling whistle over the rush of air (the session plays this on 'launch')
-    whoosh: () => { noise(.5, {gain: .08, from: 2200, to: 500}); tone(1900, .5, {type: 'sine', gain: .035, slide: -1000, delay: .02}); },
-    hitBody: () => { tone(130, .22, {type: 'sine', gain: .17, slide: -50}); noise(.2, {gain: .07, from: 1400, to: 500}); for (let i = 0; i < 4; i++) noise(.05, {gain: .04, from: 3000, to: 1800, delay: .06 + i * .055}); },
+    whoosh: () => { noise(.5, {gain: .1, from: 2200, to: 500}); tone(1900, .5, {type: 'sine', gain: .05, slide: -1000, delay: .02}); },
+    hitBody: () => { tone(130, .22, {type: 'sine', gain: .125, slide: -50}); noise(.2, {gain: .07, from: 1400, to: 500}); for (let i = 0; i < 4; i++) noise(.05, {gain: .04, from: 3000, to: 1800, delay: .06 + i * .055}); },
     hitHead: () => { [1047, 1319, 1760].forEach((f, i) => tone(f, .24, {type: 'triangle', gain: .1, delay: i * .07})); tone(3520, .3, {type: 'sine', gain: .03, delay: .14}); },
     // ----- shared with v5 -----
     tool: () => tone(620, .08, {type: 'triangle', gain: .06}),
     swing: () => noise(.22, {gain: .05, from: 700, to: 1600}),
-    thud: () => { tone(120, .2, {type: 'sine', gain: .2, slide: -60}); noise(.12, {gain: .06, from: 900, to: 300}); },
+    thud: () => { tone(120, .2, {type: 'sine', gain: .14, slide: -60}); noise(.12, {gain: .06, from: 900, to: 300}); },
     miss: () => { tone(260, .28, {type: 'triangle', gain: .09, slide: -140}); },
     catch: () => { [523, 659, 784].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .16, delay: i * .08})); noise(.2, {gain: .06, from: 3200, to: 1200}); },
     perfect: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .22, {type: 'triangle', gain: .16, delay: i * .07})); noise(.3, {gain: .07, from: 4200, to: 1500}); },

@@ -21,11 +21,17 @@ const tap = () => {
 };
 const rms = () => { analyser.getFloatTimeDomainData(buf); let s = 0; for (const v of buf) s += v * v; return Math.sqrt(s / buf.length); };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-async function measure(name, fn, ms = 700) {
-  let peak = 0, sum = 0, n = 0; const t0 = performance.now(); fn();
-  while (performance.now() - t0 < ms) { const v = rms(); peak = Math.max(peak, v); sum += v; n++; await sleep(16); }
+// Short cues are measured twice and the louder pass is kept: headless Chromium stalls the render thread now and then and a
+// 46 ms window can miss a 100 ms beep (seen: 'count' .002 in one run, .023 in the next).
+async function measure(name, fn, ms = 700, reps = ms < 1000 ? 2 : 1) {
+  let peak = 0, sum = 0, n = 0;
+  for (let r = 0; r < reps; r++) {
+    let p = 0, s = 0, k = 0; const t0 = performance.now(); fn();
+    while (performance.now() - t0 < ms) { const v = rms(); p = Math.max(p, v); s += v; k++; await sleep(8); }
+    if (p > peak) { peak = p; sum = s; n = k; }
+    await sleep(250);
+  }
   report.cues[name] = {peak: +peak.toFixed(4), mean: +(sum / Math.max(1, n)).toFixed(4)}; log(name.padEnd(18) + ' peak ' + peak.toFixed(4) + '  mean ' + (sum / Math.max(1, n)).toFixed(4));
-  await sleep(250);
 }
 async function run() {
   if (!tap()) { log('no AudioContext'); window.report = report; window.done = true; return; }
@@ -33,13 +39,13 @@ async function run() {
   audio.cue('engine'); // v5 start cue: also kicks the loop decode
   for (let i = 0; i < 40 && !audio.status().sirenDecoded.twoTone; i++) await sleep(50);
   report.status.decoded = audio.status();
-  await measure('siren-first-call', () => audio.cue('siren', {approach: 0}), 900);
+  await measure('siren-first-call', () => audio.cue('siren', {approach: 0}), 900, 1);
   report.status.sirenFirst = audio.status();
-  for (let i = 0; i < 3; i++) await measure('siren-loop-' + i, () => audio.cue('siren', {approach: .5}), 800);
+  for (let i = 0; i < 3; i++) await measure('siren-loop-' + i, () => audio.cue('siren', {approach: .5}), 800, 1);
   report.status.sirenLoop = audio.status();
-  await measure('siren-far', () => audio.cue('siren', {approach: -1, level: .5}), 800);
+  await measure('siren-far', () => audio.cue('siren', {approach: -1, level: .5}), 800, 1);
   await sleep(1300); report.status.sirenAfterHold = audio.status();
-  await measure('siren-crew', () => audio.cue('siren', {crew: true}), 900); await sleep(1600);
+  await measure('siren-crew', () => audio.cue('siren', {crew: true}), 900, 1); await sleep(1600);
   await measure('engine-idle-4', () => { const iv = setInterval(() => audio.engine(4, false), 50); setTimeout(() => clearInterval(iv), 900); }, 1000);
   await measure('engine-20', () => { const iv = setInterval(() => audio.engine(20, false), 50); setTimeout(() => clearInterval(iv), 900); }, 1000);
   await measure('engine-31-boost', () => { const iv = setInterval(() => audio.engine(31, true), 50); setTimeout(() => { clearInterval(iv); }, 900); }, 1000);
@@ -47,7 +53,7 @@ async function run() {
   await measure('engine+siren', () => { audio.cue('siren', {approach: .3}); const iv = setInterval(() => audio.engine(28, true), 50); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
   await sleep(1300);
   for (const c of ['shot', 'shotHit', 'turn', 'flat', 'skid', 'twang', 'whistle', 'whoosh', 'hitBody', 'hitHead', 'catch', 'perfect', 'crash', 'scrape', 'ram', 'thud', 'count', 'go', 'tool', 'miss', 'near', 'brake', 'nitro']) await measure(c, () => audio.cue(c), c === 'skid' || c === 'flat' ? 1500 : 800);
-  await measure('draw', () => { let k = 0; const iv = setInterval(() => { k += .1; audio.cue('draw', Math.min(1, k)); if (k > 1.2) clearInterval(iv); }, 60); }, 900);
+  await measure('draw', () => { let k = 0; const iv = setInterval(() => { k += .1; audio.cue('draw', Math.min(1, k)); if (k > 1.2) clearInterval(iv); }, 60); }, 900, 1);
   await measure('stack-shot+siren+engine', () => { audio.cue('siren', {approach: .5}); const iv = setInterval(() => audio.engine(30, true), 50); audio.cue('shotHit'); setTimeout(() => audio.cue('shot'), 150); setTimeout(() => audio.cue('flat'), 300); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
   report.status.final = audio.status();
   window.report = report; window.done = true; log(JSON.stringify(report, null, 1));
