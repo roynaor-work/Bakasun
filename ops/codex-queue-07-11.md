@@ -1,6 +1,6 @@
 # הנחיות Codex להדבקה (07/11/2026, רועי: "תכין הכל, אני אעלה לשם")
 
-עשרים משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
+עשרים ואחת משימות. כל אחת בבלוק נפרד; מדביקים משימה אחת בכל פעם ב-Codex.
 
 ## 1. סביבת מירוצים בסגנון פורמולה 1 (רמה: ultra למודלים, extra high למרקמים)
 ```
@@ -215,4 +215,11 @@ workout/island/minigames/athletes-roles.mjs (הערך hockey).
 כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי אנשים אמיתיים. ה-CSP של האפליקציה חוסם WebAssembly: לכל GLB עם Draco חובה גם עותק ריצה בלי Draco/meshopt בתיקיית runtime/. דוח REPORT.md עם מדידות, preview.html, ובדיקה שטוענת כל קובץ. ענף חדש codex/athlete-body-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/athlete-body-v1/
 הרקע (רועי: "אותם שחקנים באותה גרפיקה, לא שתי גרפיקות שונות"): בכדורגל השחקן הוא athlete.glb, ובכדורסל שלושה גופים מצוירים, ולכן הם נראים שונים. המשימה: גוף שחקן אחד על השלד הקנוני של 18 עצמות (CANON_BONES ב-athletes-core.mjs) שמחליף את שניהם: 1) שלושה מבנים (רכז, קיצוני, סנטר) בגובה 1.78 עד 2.08 מ' ושחקן כדורגל 1.75 עד 1.85 מ', מאותו מבנה גוף ואותם חומרים; 2) 6 גווני עור, 8 סגנונות שיער, נעליים, וצבעי תלבושת בצבעי קודקודים לפי אזורים (uniform_primary, uniform_secondary, uniform_trim) כך שאפשר לצבוע חולצה ומכנסיים לפי קבוצה ולפי ענף ספורט (ג'רזי כדורגל, גופייה כדורסל, חולצת טניס, ג'רזי הוקי); 3) חומר אחד (MeshToonMaterial או PBR פשוט עם גוון), תאורה זהה, אותו קו מתאר; 4) עד 7,000 משולשים לשחקן, UV משותף, טקסטורה 1024 אחת; 5) כל הגופים נטענים על קליפי soccer-v9/v10/v11, hoops-tall-v1 ו-hoops-v11 מהקטלוג המתוקן (design/motion-fix-v12/runtime/catalog.json) בלי עיוות מפרקים.
 בדיקות חובה: glTF validator, טעינה בלי Draco, הרצה של 5 קליפים מכל ספרייה על כל גוף וגיליון 8 פריימים, ומדידת הפרש מראה בין גוף כדורגל לכדורסל (צילום זה לצד זה באותה תאורה). מוכן כש: preview.html מציג את כל הגופים וצבעי התלבושת לפי ענף, ו-REPORT עם טבלת משולשים ומשקל.
+```
+
+## 21. קיט כדורסל אמיתי לגוף האתלט (רמה: ultra)
+```
+המאגר: https://github.com/roynaor-work/Bakasun (ציבורי), ענף main. כדי לא להוריד הכול: git clone --depth 1 --filter=blob:none --sparse https://github.com/roynaor-work/Bakasun.git ; cd Bakasun ; git sparse-checkout set workout/island/assets/athlete workout/island/minigames
+כללים: קבצים חדשים בלבד בתיקייה שלמטה. לא לערוך קוד קיים, release.json, release.mjs, תגי ?v=, CLAUDE.md, ops או בדיקות. הכול מקורי או CC0, עם רישיון ומקור לכל קובץ ב-LICENSES.md, בלי מותגים ובלי לוגו של ליגה. ענף חדש codex/athlete-kits-v1 מ-main, ו-PR טיוטה. תיקייה: workout/island/design/athlete-kits-v1/
+המשימה: לגוף workout/island/assets/athlete/athlete.glb (MakeHuman hm08, UV של הקיט ב-assets/athlete/textures/kit-mask.png) לבנות וריאציית קיט כדורסל: מסכת UV נפרדת kit-mask-basketball.png (R = גופייה בלי שרוולים עם סרט קצה בצבע משני, G = מכנסיים עד הברך, B = גרביים קצרות, שחור = נעליים), kit-detail-basketball.png (קפלים, תפרים, רשת), ו-kit-normal-basketball.jpg. לצרף preview.html עם three.js מקומי שמציג את הגוף עם המסכה החדשה מול הישנה, ו-REPORT.md עם צילומים.
 ```
