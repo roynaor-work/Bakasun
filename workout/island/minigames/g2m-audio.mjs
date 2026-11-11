@@ -1,12 +1,13 @@
+import {alienV15Enabled} from './alien-v15.mjs';
 import {alienV13Enabled,V13_AUDIO} from './alien-v13.mjs';
 import {alienV12Enabled,vulcanSamples,vulcanSpin} from './alien-v12.mjs';
 import {alienV11Enabled,BOAR_MG,LASER_SFX,whiteNoise,playLayers} from './alien-v11.mjs';
 const EVENTS=['shot','hit','explosion','missileLaunch','missileExplosion','bonus','stageEnd'];
 export const G2M_SAMPLES=Object.freeze(Object.fromEntries(EVENTS.map(id=>[id,new URL(`../assets/audio/g2m/${id}.ogg?v=island-v2-20261107-8`,import.meta.url).href])));
-export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235,laser:.1,explosionBig:.36});
+export const G2M_LEVELS=Object.freeze({shot:.07,hit:.145,explosion:.21,missileLaunch:.22,missileExplosion:.36,bonus:.195,stageEnd:.235,laser:.1,explosionBig:.36,vulcan:.1});
 /** Alien-only sample bank. The shared shell owns the existing island.sound switch. */
 export function createG2mAudio({v13:v13cfg=null,storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
- let context,master,noise,white,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map(),v11=alienV11Enabled(),v12=alienV12Enabled(),v13=alienV13Enabled()?{loopGain:1.5,spinGain:1.2,flashGain:.6,spinUpOverlap:.15,...v13cfg}:null,synth=[],v13buf=new Map();let vulcan=null,vulcanBuffer=null,lastShot=-9,vulcanStarts=0;
+ let context,master,noise,white,paused=false,disposed=false,loaded=0,played=0;const buffers=new Map(),sources=new Set(),last=new Map(),v11=alienV11Enabled(),v12=alienV12Enabled(),v15=alienV15Enabled(),v13=alienV13Enabled()?{loopGain:1.5,spinGain:1.2,flashGain:.6,spinUpOverlap:.15,...v13cfg}:null,synth=[],v13buf=new Map();let vulcan=null,vulcanBuffer=null,lastShot=-9,vulcanStarts=0;
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
  function unlock(){
   if(disposed||!AudioContext)return;
@@ -65,7 +66,7 @@ export function createG2mAudio({v13:v13cfg=null,storage=globalThis.localStorage,
   if(disposed||paused||muted()||!G2M_LEVELS[event]||sources.size>=18)return;
   unlock();if(context.state!=='running')return;
   const now=context.currentTime;
-  if(v12&&event==='shot'){lastShot=now;if(!vulcan)startVulcan(now);return;}
+  if(v12&&(event==='vulcan'||(event==='shot'&&!v15))){lastShot=now;if(!vulcan)startVulcan(now);return;}
   if(v11&&(event==='shot'||event==='laser')){
    const spec=event==='shot'?BOAR_MG:LASER_SFX;if(now-(last.get(event)??-1)<spec.minGap)return;last.set(event,now);
    while(synth.length&&synth[0]<=now)synth.shift();if(synth.length>=8)return;synth.push(now+.2);
