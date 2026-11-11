@@ -65,6 +65,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,tacticalRole:entry.tacticalRole,soccerExtra:!!entry.soccerExtra,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,slideKind:null,slideBehind:false,slideLate:false,slideFromX:0,slideFromZ:0,slideTick:-1,slideAge:0,sprinting:false,sprintTime:0,sprintRest:0};
   });
   const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
+  Object.defineProperty(s,'aiV2',{value:aiV2,enumerable:false});// read by the lob preview so it lands where the ball will (not part of any snapshot)
   let events=[],rivalPasses=0,nextRivalShot=0,nextHomeShot=0;
   const before={valid:false,players:[],ball:[0,0,0]};
   const shown={players:[],ball:{},state:{}};
@@ -360,14 +361,14 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   const crossConfig=aiV2?{...config,aerial:{...config.aerial,reach:config.aerial.crossReach??1.9,minHeight:config.aerial.crossMinHeight??.8},assistance:{...config.assistance,contact:{...config.assistance?.contact,headReach:config.aerial.crossReach??1.9}}}:config;
   // Deterministic in [-1,1] from the seed, the header taker and the clock; it must not draw from the match RNG (other streams would shift).
   const headNoise=p=>{const v=Math.sin(seed*12.9898+p.id*78.233+s.elapsed*37.719)*43758.5453;return ((v-Math.floor(v))*2-1);};
-  function aerialStrike(p,clear=false,aim=null,cfg=config){
+  function aerialStrike(p,clear=false,aim=null,cfg=config,auto=false){
     if(!canHead(p,s.ball,cfg))return false;
     const b=s.ball,d=direction(p.team),intent=aim||{x:d*hx-b.x,z:-b.z},len=Math.hypot(intent.x,intent.z)||1;
-    // v2: a header off a cross is not a laser. It is aimed at a point on the goal line that wobbles by up to +-aerial.headSpreadGoals goal widths
+    // v2: a header off a cross is not a laser. The automatic header (the child did not press anything) is aimed at a point on the goal line that wobbles by up to +-aerial.headSpreadGoals goal widths
     // (default 1: about half of them are on target), and the power is aerial.headPower (cross bench: 70-80% of headers went in without this).
-    const wobble=aiV2&&!clear?(config.aerial.headSpreadGoals??1)*config.pitch.goalWidth*headNoise(p):0;
-    if(aiV2&&!clear&&!aim)intent.z=wobble-b.z;
-    const power=clear?config.aerial.clearPower:(aiV2?config.aerial.headPower??.4:config.aerial.power),speed=ph.shotSpeed+power*ph.shotBoost,ang=Math.atan2(intent.z,intent.x);
+    const wobble=aiV2&&auto&&!clear?(config.aerial.headSpreadGoals??1)*config.pitch.goalWidth*headNoise(p):0;
+    if(aiV2&&auto&&!clear&&!aim)intent.z=wobble-b.z;
+    const power=clear?config.aerial.clearPower:(aiV2&&auto?config.aerial.headPower??.4:config.aerial.power),speed=ph.shotSpeed+power*ph.shotBoost,ang=Math.atan2(intent.z,intent.x);
     p.fx=Math.cos(ang);p.fz=Math.sin(ang);p.headerTime=config.aerial.seconds;p.kickTime=0;p.cooldown=aiConfig.kickCooldown;
     Object.assign(b,{owner:null,flight:null,thrower:null,vx:p.fx*speed,vz:p.fz*speed,vy:config.aerial.lift,curve:0,lastTeam:p.team,lastPlayer:p.id,grace:ph.possessionGrace});
     b.shot={speed,aim:Math.min(1,Math.abs(b.z)/(config.pitch.goalWidth/2)),distance:Math.abs(d*hx-p.x),shooter:p.id};
@@ -636,7 +637,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(p.id===b.thrower||p.id===b.owner || p.cooldown>0 || p.recover>0 || p.slideTime>0)continue;
       const handsAllowed=b.lastTeam!==p.team&&p.role==='keeper'&&inPenaltyArea(p,p,s,config)&&inPenaltyArea(p,b,s,config);
       const receivingCross=b.flight&&b.vy<0&&s.passTarget?.kind==='loft'&&s.passTarget.player===p.id&&p.team===b.lastTeam&&p.role!=='keeper'&&b.x*direction(p.team)>hx-config.pitch.penaltyDepth&&Math.abs(b.z)<config.pitch.penaltyWidth/2;
-      if(receivingCross){const hc=p.team===0?crossConfig:config;if(canHead(p,b,hc)){p.autoHeadTime+=dt;if(p.autoHeadTime+1e-8>=config.aerial.autoHeaderDelaySeconds&&aerialStrike(p,false,null,hc))break;continue;}else p.autoHeadTime=0;}else p.autoHeadTime=0;
+      if(receivingCross){const hc=p.team===0?crossConfig:config;if(canHead(p,b,hc)){p.autoHeadTime+=dt;if(p.autoHeadTime+1e-8>=config.aerial.autoHeaderDelaySeconds&&aerialStrike(p,false,null,hc,true))break;continue;}else p.autoHeadTime=0;}else p.autoHeadTime=0;
       if(b.y>rules.pickupHeight){if(p.team===1&&p.role!=='keeper'&&b.x*direction(p.team)<-hx+config.aerial.clearanceZone&&aerialStrike(p,true))break;if(!handsAllowed||b.y>config.aerial.keeperHeight)continue;}
       const dist=distance(p,b),owner=b.owner===null?null:players[b.owner];
       if(owner) {

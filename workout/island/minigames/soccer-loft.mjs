@@ -78,9 +78,9 @@ export function loftDestination(state,c,power=0,{aim:requestedAim,point,snap=fal
   }
  }
  if(!bestReceiver&&snap&&!manual&&!point){
-  // Pointer-style lob: with the stick towards a team-mate (cone of about 25 degrees) the ball goes to that team-mate whatever the charge.
+  // Pointer-style lob: with the stick towards a team-mate (cone of about 30 degrees) the ball goes to that team-mate whatever the charge.
   // The charge then only chooses the flight time. A drag (manual) keeps its ray as before.
-  const dirSign=state.attackDir*(p.team===0?1:-1),cone=Math.cos(clamp(finite(c.assistance?.passing?.lobSnapDegrees,25),0,45)*Math.PI/180);let bestScore=Infinity;
+  const dirSign=state.attackDir*(p.team===0?1:-1),cone=Math.cos(clamp(finite(c.assistance?.passing?.lobSnapDegrees,30),0,45)*Math.PI/180);let bestScore=Infinity;
   for(const member of state.players){
    if(member.team!==p.team||member.id===p.id||member.recover>0||member.slideTime>0||member.role==='keeper')continue;
    const d=distance(member,b);if(d<min||d>max+zone)continue;
@@ -107,7 +107,9 @@ export function createLoftFlight(ball,destination,c,power=0,options={}){
  const dt=c.match.fixedStep,range=distance(ball,target),nominal=c.passing.minDistance+(c.passing.maxDistance-c.passing.minDistance)*q;
  const configured=Math.max(.45,finite(c.passing.loftMinSeconds,1.05)+q*finite(c.passing.loftExtraSeconds,.45));
  if(options.durationSeconds!==undefined&&(!Number.isFinite(options.durationSeconds)||options.durationSeconds<=0))throw Error('Invalid soccer flight duration');
- const duration=options.durationSeconds===undefined?Math.max(.35,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal)))):clamp(options.durationSeconds,.18,3);
+ // A lob always clears head height: a full charge to a near team-mate used to make a flat flight of under 1 m.
+ const minimumApex=Math.sqrt(8*(finite(c.aerial?.minHeight,1)+.25)/Math.max(1,g));
+ const duration=options.durationSeconds===undefined?Math.max(.35,minimumApex,configured*Math.sqrt(Math.min(1,range/Math.max(1,nominal)))):clamp(options.durationSeconds,.18,3);
  const steps=Math.max(8,Math.ceil(duration/dt)),time=steps*dt,fromY=Math.max(r,finite(ball.y,r));
  const vy=(r-fromY)/time+g*dt*(steps-1)/2;
  let attenuation=1,travel=0,height=fromY-r;
