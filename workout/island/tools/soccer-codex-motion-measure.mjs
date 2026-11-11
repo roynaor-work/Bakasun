@@ -4,7 +4,7 @@
  * hips step) over a scripted sequence, and the idle arm angles.
  * Usage: node tools/soccer-codex-motion-measure.mjs [off|v7run|v9]   ("off" = without the Codex clips; "v7run" = Codex walk/jog/idle/brake but the v7 runs) */
 import {readFile} from 'node:fs/promises';
-const off=process.argv[2]==='off',v7run=process.argv[2]==='v7run',v9only=process.argv[2]==='v9';
+const useV12=process.argv.includes('--v12'),off=process.argv[2]==='off',v7run=process.argv[2]==='v7run',v9only=process.argv[2]==='v9';
 globalThis.location={search:(v7run?'?soccerRunV9=0':'')+(process.argv.includes('--slow')?(v7run?'&':'?')+'soccerSlideSlow=1':'')};
 const T=await import('../vendor/three.module.js');
 const {composeSoccerRestartMotion}=await import('../minigames/soccer-restart-motion.mjs');
@@ -14,11 +14,14 @@ const base=await read('motion/soccer.json'),packs=await Promise.all(['throws-rec
 const rig=await read('characters/rig.json'),map=await read('viewer/retarget-map.json');
 const config=JSON.parse(await readFile(new URL('../data/config.json',import.meta.url),'utf8')).minigames.soccer;
 const v7=await readFile(new URL('../assets/soccer-v7/clips.json',import.meta.url),'utf8').then(JSON.parse),v8=await readFile(new URL('../assets/soccer-v8/clips.json',import.meta.url),'utf8').then(JSON.parse),v9=await readFile(new URL('../assets/soccer-v9/clips.json',import.meta.url),'utf8').then(JSON.parse);
+const {soccerV12Overlay}=await import('../minigames/soccer-codex-motion.mjs');
 const {soccerV8States}=await import('../minigames/soccer-v8.mjs'),{soccerCodexStates,soccerV10States}=await import('../minigames/soccer-codex-motion.mjs');
 const v10=await readFile(new URL('../assets/soccer-v10/clips.json',import.meta.url),'utf8').then(JSON.parse);
 {const g=process.argv.indexOf('--grace');if(g>0)config.view.slideGraceSeconds=Number(process.argv[g+1]);}
 const library=composeSoccerRestartMotion(base,...packs);
-const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...(off?{}:soccerCodexStates(v9)),...(off||v7run||v9only?{}:soccerV10States(v10))}},clips=compileSoccerDesignClips(data,rig,map);
+let L9=off?{}:soccerCodexStates(v9),L10=off||v7run||v9only?{}:soccerV10States(v10);
+if(useV12){const o=soccerV12Overlay(JSON.parse(await readFile(new URL('../assets/soccer-v12/clips.json',import.meta.url),'utf8')),{v9:L9,v10:L10});L9=o.v9;L10=o.v10;}
+const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...L9,...L10}},clips=compileSoccerDesignClips(data,rig,map);
 const deg=r=>r*180/Math.PI,dt=1/60;
 function make(){
   const bones={};let root;

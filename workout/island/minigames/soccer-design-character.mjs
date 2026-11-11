@@ -7,7 +7,7 @@ import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
-import {soccerMotionV10Enabled,soccerV10ClipsUrl,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
+import {soccerMotionV10Enabled,soccerV10ClipsUrl,soccerMotionV12Enabled,soccerV12ClipsUrl,soccerV12Overlay,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 
@@ -358,13 +358,13 @@ export function keeperStand(character,p,s,dt){
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
 let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null;
 /** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
-let lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
+let lastV12=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
 /** One line for the load report / debug: which motion packs are in this match, and why one was skipped. */
 export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5;
 /** Opt-in (`?soccerSlideSlow=1`): the get-up is not finished when the simulation returns control, so it needs phone testing and, to be the default, a longer simulated recovery. */
 export const soccerSlideSlowEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerSlideSlow')==='1';
-export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error].filter(Boolean));}
+export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error,lastV12?.error&&'v12: '+lastV12.error].filter(Boolean));}
 /** Why the v8 motion clips were skipped (null when loaded or not asked for). */
 export function soccerV8MotionError(){return lastV8Error;}
 /** Why the authored characters last failed to prepare (for the load report). */
@@ -426,7 +426,9 @@ async function prepareV7(loader){
   if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
   let v10={};
   if(soccerMotionV10Enabled(null)){try{v10=soccerV10States(await fetchJson(soccerV10ClipsUrl()));}catch(error){lastV10Error=String(error?.message||error);}}
-  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length};
+  lastV12=null;
+  if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length)){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10});v9=o.v9;v10=o.v10;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
+  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v12:lastV12};
   const data={...library,states:{...library.states,...extra.states,...v8,...v9,...v10}};
   const lod0=names.map((_,i)=>glbs[i*2].scene),lod1=names.map((_,i)=>glbs[i*2+1].scene);
   for(const scene of lod0)joinSoccerV7Meshes(scene);for(const scene of lod1)joinSoccerV7Meshes(scene,{doubleSided:false});
