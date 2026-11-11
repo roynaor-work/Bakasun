@@ -38,7 +38,7 @@ await verify('racing-deep-fable/m6/shots',sizes,async({page,viewport,tick,snap,s
  if(await page.locator('.rb-intro-go').count())await page.locator('.rb-intro-go').tap();await tick(4200);await shot(`${tag}-4-race`);
  const raced=await page.evaluate(BOT);assert.equal(raced.finished,true);assert.equal(raced.cars,12);report.race1=raced;
  await tick(500);if(await page.locator('.racing-podium,.rb-podium').count())await page.locator('.racing-podium,.rb-podium').first().tap();await page.waitForSelector('[data-racing-league-result]',{timeout:60000});
- let L=await league();assert.equal(L.race,1);assert.equal(L.history.length,1);assert.equal(L.table,12);
+ let L=await league();assert.equal(L.race,1);assert.equal(L.history,1);assert.equal(L.table,12);
  assert.ok((await page.locator('[data-league-row=place]').textContent()).includes('/ 12'));assert.equal(await page.locator('[data-racing-league-result] .rl-table tr[data-driver]').count(),12);
  await page.waitForSelector('[data-upgrade-offer]',{timeout:20000});assert.equal(await page.locator('[data-upgrade-key="islandRacing:league:1:0"]').count(),1,'one upgrade offer for this race');report.afterRace1=L;
  await shot(`${tag}-5-result-offer`);

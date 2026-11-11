@@ -75,16 +75,17 @@ export const SHORT_SEASONS = Object.freeze([
  * 11/11/2026: on tier 0 a stock casual bot wins at x1.3 and finishes 4th at x1.6, 11th at x2; on tier 4 it is 8th already at x1). The tiers make the
  * computer faster by themselves, so the factor eases season by season while the overall challenge still rises. */
 export const LONG_SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 7400, laps: 3, minRank: 0, rating: 0.05, corner: 1.6 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 7400, laps: 3, minRank: 8, rating: 0.05, corner: 1.4 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 7400, laps: 3, minRank: 6, rating: 0.05, corner: 1.25 }),
-  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 7400, laps: 3, minRank: 5, rating: 0.05, corner: 1.15 }),
-  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 7400, laps: 3, minRank: 4, rating: 0.06, corner: 1.1 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 7800, laps: 3, minRank: 0, rating: 0.05, corner: 1.6 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 7800, laps: 3, minRank: 8, rating: 0.05, corner: 1.4 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 7800, laps: 3, minRank: 6, rating: 0.05, corner: 1.25 }),
+  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 7800, laps: 3, minRank: 5, rating: 0.05, corner: 1.15 }),
+  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 7800, laps: 3, minRank: 4, rating: 0.06, corner: 1.1 })
 ]);
 /** Race distance factors of the variants and the ceiling a race may ask of a slow driver under the 295 s clock (about 31 m/s). The "short races"
  * league setting scales every race by SHORT_RACES_FACTOR. */
 export const VARIANT_FACTOR = Object.freeze({ short: 0.65, normal: 1, long: 1.3 });
-export const MAX_DISTANCE = 8700, SHORT_RACES_FACTOR = 0.7;
+// MAX_DISTANCE: 295 s at about 32 m/s (the casual bot averages 38 m/s over a race, a slow child with crashes less); measured 11/11: 7,400 m gave 3.3 min, so 7,800 m with the long races now allowed 4 laps on the grand prix circuits aims at 3.5.
+export const MAX_DISTANCE = 9300, SHORT_RACES_FACTOR = 0.7;
 /** Laps of a race from its target distance and the circuit length: the nearest whole number of laps, never over MAX_DISTANCE, within MIN..MAX_LAPS. */
 export function lapsForDistance(distance, length) {
   if (!(length > 0)) return MIN_LAPS;
@@ -92,7 +93,7 @@ export function lapsForDistance(distance, length) {
   return Math.max(MIN_LAPS, Math.min(MAX_LAPS, laps));
 }
 /** Target distance of a calendar entry in metres (long league), after its variant and the short-races setting. */
-export function raceDistance(season, variant, shortRaces = false) { return Math.round((season.distance || 7400) * (VARIANT_FACTOR[variant] || 1) * (shortRaces ? SHORT_RACES_FACTOR : 1)); }
+export function raceDistance(season, variant, shortRaces = false) { return Math.round((season.distance || 7800) * (VARIANT_FACTOR[variant] || 1) * (shortRaces ? SHORT_RACES_FACTOR : 1)); }
 export const SEASONS = LONG ? LONG_SEASONS : SHORT_SEASONS;
 export const MAX_SEASONS = Math.max(LONG_SEASONS.length, SHORT_SEASONS.length);
 export const CIRCUITS = 6;
@@ -133,12 +134,14 @@ export const HISTORY_CAP = 150;
 export const UPGRADE_COST = Object.freeze([100, 180, 280, 420, 600]);
 /** League coins for a finish: 1st..last, plus a bonus for the fastest lap. Kept separate from island money. */
 export const SHORT_PRIZE = Object.freeze([220, 160, 120, 90, 70]);
-export const LONG_PRIZE = Object.freeze([200, 150, 120, 100, 85, 70, 60, 50, 45, 40, 35, 30]);
+// racing-deep-m6 economy (measured 11/11/2026 with tools/racing-league-sim.mjs): with race prizes of 200..30 a winner earned 3,980 coins in season 1 and bought 19 of the 30
+// upgrade levels at once, so every bot was champion from season 1. Halved: about 1,300 a season for a mid-field driver, 2,000 for a winner; the full garage (9,480) takes most of the five seasons.
+export const LONG_PRIZE = Object.freeze([120, 95, 80, 70, 60, 50, 45, 40, 35, 30, 25, 20]);
 export const PRIZE = LONG ? LONG_PRIZE : SHORT_PRIZE;
-export const FASTEST_LAP_COINS = 40;
+export const FASTEST_LAP_COINS = LONG ? 25 : 40;
 /** racing-deep-m6: coins at the end of a season by place in the drivers' table, and a bonus when the player's team wins the teams' table. */
-export const SEASON_PRIZE = Object.freeze([800, 500, 350, 250, 200, 150, 120, 100, 80, 60, 50, 40]);
-export const TEAM_PRIZE = 300;
+export const SEASON_PRIZE = Object.freeze([500, 350, 250, 180, 140, 110, 90, 70, 60, 50, 40, 30]);
+export const TEAM_PRIZE = 150;
 
 export function createLeague() {
   return { version: 1, season: 1, race: 0, coins: 0, upgrades: Object.fromEntries(Object.keys(UPGRADES).map(k => [k, 0])),
