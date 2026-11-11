@@ -78,7 +78,8 @@ test('race setup: twelve scoring cars through config only, season rating plus a 
   assert.equal(long.stageOverride.aiCorner,+(getRacingStage(long.stage).aiCorner*SEASONS[0].corner).toFixed(3),'the season raises the computer drivers\' cornering');
   L.race=4;assert.equal(raceSetup(L).variant,'short');assert.equal(raceSetup(L).laps,lapsForDistance(raceDistance(SEASONS[0],'short'),CIRCUIT_LENGTHS[4]));assert.ok(raceSetup(L).laps<=3,'a sprint is never longer than the standard three laps');setShortRaces(L,true);assert.equal(raceSetup(L).laps,MIN_LAPS);L.race=0;assert.ok(raceSetup(L).laps<3,'short races: fewer laps than the standard three');
   for(const sId of SEASONS.map(x=>x.id))for(const c of calendar(sId)){assert.ok(c.laps>=MIN_LAPS&&c.laps<=MAX_LAPS);assert.ok(c.laps*CIRCUIT_LENGTHS[c.circuit]<=MAX_DISTANCE,'under the 295 s clock budget');assert.ok(Math.abs(c.laps*CIRCUIT_LENGTHS[c.circuit]-c.distance)<=CIRCUIT_LENGTHS[c.circuit]*.5+1||c.laps*CIRCUIT_LENGTHS[c.circuit]<=MAX_DISTANCE);}
-  assert.deepEqual(CIRCUIT_LENGTHS.map(Math.round),[2276,1513,1344,2299,1459,2264]);
+  // racing-deep-fable merge: the default set is the Codex v2 circuits at scale 0.87 (2.0-2.3 km); the lengths come from the real tracks, not a literal list
+  assert.equal(CIRCUIT_LENGTHS.length,6);for(const len of CIRCUIT_LENGTHS)assert.ok(len>1900&&len<2400,'a league circuit is 1.9-2.4 km: '+len);
   assert.equal(isRaceUnlocked(L,1,0),true);assert.equal(isRaceUnlocked(L,1,5),false);assert.equal(isRaceUnlocked(L,2,0),false);
   L.race=12;assert.equal(raceSetup(L),null);
 });
