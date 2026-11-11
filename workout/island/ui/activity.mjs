@@ -385,7 +385,7 @@ export class ActivityInterface {
       const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
       const again={engine:this.engine,...this.leagueActions()};
-      const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result,refresh:()=>this.racingLeagueScreen('result',result)}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
+      const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
       dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
       if(kind==='result')this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
