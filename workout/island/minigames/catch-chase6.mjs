@@ -211,7 +211,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       const closeness = !s.outcome ? 0 : s.outcome === 'caught' ? 1 : clamp(Math.max(s.damage * .9, prox * .6), 0, 1);
       return {closeness, damage: s.damage, caught: s.outcome === 'caught', byTyres: gun.state.stopped, flats: gun.state.flatCount, shots: gun.state.shots, gap: s.gap, hits: s.hits, crimHits: s.crim.hits, how: s.outcome, seconds: s.t, scrape: s.scrape,
         frame: {s0: s.crim.s + 6, d0: clamp(s.crim.d, -3, 3)}, // the officer steps out just ahead of the stopped getaway car
-        mods: {dist: lerp(level.dist * C.farFactor, level.dist * C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
+        mods: {distScale: lerp(C.farFactor, C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
     },
   };
   /** The gun's events join the chase events at once (fire() is called between steps). */

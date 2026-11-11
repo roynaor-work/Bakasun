@@ -32,7 +32,7 @@ const launch=async (stage,{skipChase=true,target=page}={})=>{
   await target.waitForFunction(()=>window.__island.ui.activityInterface.current.session.snapshot.mode==='throw');
 };
 try{
-  await page.goto(server.url+'?dev=1&games=1',{waitUntil:'networkidle'});
+  await page.goto(server.url+'?dev=1&games=1&catchV6=0',{waitUntil:'networkidle'});
   await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
   await page.locator('[data-action=avatar-start]').click();
   await page.evaluate(()=>{const e=window.__island.engine;e.skipTutorial();e.tick=()=>({ok:true});window.__island.ui.activityInterface.requireDaily=()=>false;});
@@ -116,7 +116,7 @@ try{
   console.log('exit leaves the island untouched: ok');
   // the off switch: ?catchV2=0 plays the v1 stage with no chase
   const page2=await context.newPage();page2.setDefaultTimeout(120000);page2.on('pageerror',e=>errors.push(e.message));
-  await page2.goto(server.url+'?dev=1&games=1&catchV2=0',{waitUntil:'networkidle'});
+  await page2.goto(server.url+'?dev=1&games=1&catchV6=0&catchV2=0',{waitUntil:'networkidle'});
   await page2.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
   if(await page2.locator('[data-action=avatar-start]').count())await page2.locator('[data-action=avatar-start]').click();
   await page2.evaluate(()=>{const e=window.__island.engine;e.skipTutorial();e.tick=()=>({ok:true});window.__island.ui.activityInterface.requireDaily=()=>false;});
