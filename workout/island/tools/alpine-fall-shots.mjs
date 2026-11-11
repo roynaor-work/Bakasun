@@ -14,7 +14,7 @@ async function open(browser, query, stage) {
   await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded);
   await page.locator('[data-action=avatar-start]').tap();
   await page.evaluate(() => { const {engine: e} = window.__island; e.skipTutorial(); e.tick = () => ({ok: true}); });
-  await page.evaluate(st => { const e = window.__island.engine; if (!e.state.instructionsSeen.includes('alpineRush')) e.state.instructionsSeen.push('alpineRush'); window.__island.ui.activityInterface.launch('alpineRush', undefined, st); }, stage);
+  await page.evaluate(st => { const e = window.__island.engine; if (!e.state.instructionsSeen.includes('alpineRush')) e.state.instructionsSeen.push('alpineRush'); e.state.minigameLevels.alpineRush = Math.max(e.state.minigameLevels.alpineRush, st); e.state.minigameProgress.alpineRush = {...e.state.minigameProgress.alpineRush, stage: Math.max(e.state.minigameProgress.alpineRush.stage, st), stars: [3, 3, 0].slice(0, e.state.minigameProgress.alpineRush.stars.length)}; window.__island.ui.activityInterface.launch('alpineRush', undefined, st); }, stage);
   await page.waitForFunction(() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled && document.querySelector('.game-screen')?.dataset.starting !== 'true'; });
   await page.locator('[data-action=alpine-start]').click();
   await page.waitForFunction(() => window.__island.ui.activityInterface.current.session.snapshot.phase === 'racing');
