@@ -96,7 +96,7 @@ export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 
 // racing-tracks-v2 (Codex, design/racing-tracks-v2): six circuits, opt-in with ?racingTracks=v2. Loaded only on that flag (top-level await), so the normal start-up
 // does not fetch the 72 KB data file. The data is 7.5 m wide with 12 m corners, so the app calibrates it: X/Z scale and road width (V2_SCALE, V2_WIDTH),
 // the same one-metre lift as the v10 circuits, and the original theme/landmark of each stage.
-const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 1, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
+const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.9, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
 const CODEX_V2 = RACING_TRACK_SET === 'v2' ? (await import('../design/racing-tracks-v2/tracks.mjs')).default : null;
 // Dog-legs for the long straights of the Codex circuits that a good driver still took flat out: a straight longer than `min` metres
 // gets whole periods of a sine offset (about 22 m radius at this amplitude), faded to zero 30 m from each end. Units: metres before the 1.65 scale.
