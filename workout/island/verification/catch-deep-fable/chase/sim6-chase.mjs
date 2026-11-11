@@ -1,11 +1,13 @@
 // Chase-only table for the v6 model driver: N chases per stage, three driver skills.
-//   node workout/island/verification/catch-deep-fable/chase/sim6-chase.mjs [games=50] [--only=good] [--json out.json]
+//   node workout/island/verification/catch-deep-fable/chase/sim6-chase.mjs [games=50] [--only=good] [--old] [--json out.json]
 // Columns: stopped by tyres %, roadblock %, mean gap at the end (m), mean kerb seconds, mean crashes, mean seconds.
 import {readFile, writeFile} from 'node:fs/promises';
 import {createChaseEngine6, driveChase6, DRIVING6} from '../../../minigames/catch-chase6.mjs';
 import {seededRandom} from '../../../minigames/catch-track.mjs';
 const balance = JSON.parse(await readFile(new URL('../../../data/config.json', import.meta.url), 'utf8')).minigames.catchCriminal;
 const args = process.argv.slice(2), games = Number(args[0]) || 50, only = (args.find(a => a.startsWith('--only=')) || '--only=expert,good,casual').slice(7).split(',');
+// --old: the 10 m road of the first v6 build (three lanes of 3.3 m, shoulder at 4.3), for before/after comparisons
+if (args.includes('--old')) balance.chase6 = {...(balance.chase6 || {}), roadHalf: 5, shoulder: 4.3, laneWidth: 3.3, lanes: [-3.3, 0, 3.3], parkedD: 3.9};
 export function table(games, drivers) {
   const out = {};
   for (const name of drivers) {

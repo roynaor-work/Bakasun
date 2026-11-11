@@ -11,7 +11,7 @@ const base = 'http://127.0.0.1:8765/workout/island/';
 const browser = await chromium.launch({args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--ignore-gpu-blocklist', '--no-proxy-server']});
 await mkdir(outDir, {recursive: true});
 const page = await browser.newPage({viewport: {width: 844, height: 390}, deviceScaleFactor: 1, hasTouch: true});
-page.on('pageerror', e => console.log('pageerror', e.message.slice(0, 300)));
+page.on('pageerror', e => console.log('pageerror', e.message.slice(0, 300))); page.setDefaultTimeout(180000);
 await page.goto(`${base}tools/catch-view6-harness.html?stage=${stageArg}&seed=${seedArg}&manual=1`);
 await page.waitForFunction('window.done===true', null, {timeout: 120000});
 const step = n => page.evaluate(n => window.stepN(n), n);

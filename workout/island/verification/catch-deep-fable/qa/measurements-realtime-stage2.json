@@ -1,0 +1,456 @@
+{
+ "summary": {
+  "stage": 2,
+  "quality": "low",
+  "loadMs": 3649,
+  "fps": 2.58,
+  "realSeconds": 240,
+  "chaseSeconds": 24.1,
+  "go": 0,
+  "firstLockT": 0.95,
+  "firstShotT": 7.83,
+  "shots": [
+   "04-rt-stage2-00-go.png",
+   "04-rt-stage2-01-turn.png",
+   "04-rt-stage2-02-lock-on.png",
+   "04-rt-stage2-03-shot-miss.png",
+   "04-rt-stage2-04-shot-hit.png",
+   "04-rt-stage2-05-flat1.png",
+   "04-rt-stage2-06-flat2.png",
+   "04-rt-stage2-07-stopped.png",
+   "04-rt-stage2-08-skid.png",
+   "04-rt-stage2-09-end.png"
+  ],
+  "hits": 2,
+  "flatsT": [
+   16.25,
+   21.92
+  ],
+  "stoppedT": 21.92,
+  "endT": 24.12,
+  "endHow": "caught",
+  "locks": 1,
+  "turns": 4,
+  "crashes": 0,
+  "scrapes": 0,
+  "mode": "throw",
+  "gun": {
+   "locked": false,
+   "ammo": 2,
+   "shots": 6,
+   "hits": 2,
+   "flats": 2,
+   "chance": 0
+  },
+  "errors": [],
+  "reticle": null,
+  "fireBtn": {
+   "cls": "catch-fire",
+   "locked": "true",
+   "hidden": true
+  }
+ },
+ "log": [
+  {
+   "t": 0,
+   "real": 7,
+   "type": "count",
+   "value": 2
+  },
+  {
+   "t": 0,
+   "real": 14.42,
+   "type": "count",
+   "value": 1
+  },
+  {
+   "t": 0,
+   "real": 21.39,
+   "type": "go"
+  },
+  {
+   "t": 0.58,
+   "real": 25.7,
+   "type": "turn",
+   "dir": 1,
+   "radius": 98,
+   "s": 70
+  },
+  {
+   "t": 0.95,
+   "real": 30.56,
+   "type": "lock",
+   "on": true
+  },
+  {
+   "t": 7.35,
+   "real": 83.5,
+   "type": "turn",
+   "dir": 1,
+   "radius": 110,
+   "s": 236.98187722102054
+  },
+  {
+   "t": 7.83,
+   "real": 86.64,
+   "type": "shot",
+   "hit": false,
+   "wheel": null,
+   "x": -2.9252736468799414,
+   "y": 0.05,
+   "z": 1.7025864463299514
+  },
+  {
+   "t": 8.82,
+   "real": 96.38,
+   "type": "reload"
+  },
+  {
+   "t": 8.83,
+   "real": 96.68,
+   "type": "shot",
+   "hit": false,
+   "wheel": null,
+   "x": -2.885915616923012,
+   "y": 0.05,
+   "z": -1.7827847845852376
+  },
+  {
+   "t": 9.82,
+   "real": 103.96,
+   "type": "reload"
+  },
+  {
+   "t": 13.12,
+   "real": 141.81,
+   "type": "pad",
+   "id": 0
+  },
+  {
+   "t": 14.57,
+   "real": 153.31,
+   "type": "turn",
+   "dir": 1,
+   "radius": 118,
+   "s": 413.9870217642786
+  },
+  {
+   "t": 14.78,
+   "real": 154.57,
+   "type": "shot",
+   "hit": false,
+   "wheel": null,
+   "x": -3.518745165015571,
+   "y": 0.05,
+   "z": 2.4265594691038133
+  },
+  {
+   "t": 15.77,
+   "real": 162.83,
+   "type": "reload"
+  },
+  {
+   "t": 16.25,
+   "real": 166.94,
+   "type": "shot",
+   "hit": true,
+   "wheel": "RR",
+   "x": -1.4,
+   "y": 0.35,
+   "z": 0.9
+  },
+  {
+   "t": 16.25,
+   "real": 166.94,
+   "type": "flat",
+   "wheel": "RR",
+   "flatCount": 1
+  },
+  {
+   "t": 17.23,
+   "real": 174.36,
+   "type": "reload"
+  },
+  {
+   "t": 17.25,
+   "real": 174.36,
+   "type": "shot",
+   "hit": false,
+   "wheel": null,
+   "x": -3.3327201487729328,
+   "y": 0.05,
+   "z": 2.650387439876795
+  },
+  {
+   "t": 18.23,
+   "real": 181.71,
+   "type": "reload"
+  },
+  {
+   "t": 20.45,
+   "real": 196.29,
+   "type": "turn",
+   "dir": -1,
+   "radius": 92,
+   "s": 559.2196073649142
+  },
+  {
+   "t": 21.92,
+   "real": 208.18,
+   "type": "shot",
+   "hit": true,
+   "wheel": "RL",
+   "x": -1.4,
+   "y": 0.35,
+   "z": 0.9
+  },
+  {
+   "t": 21.92,
+   "real": 208.18,
+   "type": "flat",
+   "wheel": "RL",
+   "flatCount": 2
+  },
+  {
+   "t": 21.92,
+   "real": 208.18,
+   "type": "stopped"
+  },
+  {
+   "t": 21.92,
+   "real": 208.18,
+   "type": "skid",
+   "s": 555.4314343425998
+  },
+  {
+   "t": 24.12,
+   "real": 225.19,
+   "type": "end",
+   "how": "caught",
+   "gap": 14.29706738251457
+  }
+ ],
+ "shots": [
+  {
+   "file": "04-rt-stage2-00-go.png",
+   "event": {
+    "t": 0,
+    "real": 21.39,
+    "type": "go"
+   },
+   "snap": {
+    "t": 0,
+    "v": 22,
+    "gun": {
+     "locked": false,
+     "ammo": 6,
+     "shots": 0,
+     "hits": 0,
+     "flats": 0,
+     "chance": 0
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-01-turn.png",
+   "event": {
+    "t": 0.58,
+    "real": 25.7,
+    "type": "turn",
+    "dir": 1,
+    "radius": 98,
+    "s": 70
+   },
+   "snap": {
+    "t": 0.9,
+    "v": 31,
+    "gun": {
+     "locked": false,
+     "ammo": 6,
+     "shots": 0,
+     "hits": 0,
+     "flats": 0,
+     "chance": 0
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-02-lock-on.png",
+   "event": {
+    "t": 0.95,
+    "real": 30.56,
+    "type": "lock",
+    "on": true
+   },
+   "snap": {
+    "t": 2.1,
+    "v": 22,
+    "gun": {
+     "locked": true,
+     "ammo": 6,
+     "shots": 0,
+     "hits": 0,
+     "flats": 0,
+     "chance": 0.24
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-03-shot-miss.png",
+   "event": {
+    "t": 7.83,
+    "real": 86.64,
+    "type": "shot",
+    "hit": false,
+    "wheel": null,
+    "x": -2.9252736468799414,
+    "y": 0.05,
+    "z": 1.7025864463299514
+   },
+   "snap": {
+    "t": 7.9,
+    "v": 31,
+    "gun": {
+     "locked": true,
+     "ammo": 5,
+     "shots": 1,
+     "hits": 0,
+     "flats": 0,
+     "chance": 0.36
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-04-shot-hit.png",
+   "event": {
+    "t": 16.25,
+    "real": 166.94,
+    "type": "shot",
+    "hit": true,
+    "wheel": "RR",
+    "x": -1.4,
+    "y": 0.35,
+    "z": 0.9
+   },
+   "snap": {
+    "t": 16.3,
+    "v": 27.3,
+    "gun": {
+     "locked": true,
+     "ammo": 3,
+     "shots": 4,
+     "hits": 1,
+     "flats": 1,
+     "chance": 0.47
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-05-flat1.png",
+   "event": {
+    "t": 16.25,
+    "real": 166.94,
+    "type": "flat",
+    "wheel": "RR",
+    "flatCount": 1
+   },
+   "snap": {
+    "t": 16.3,
+    "v": 27.3,
+    "gun": {
+     "locked": true,
+     "ammo": 3,
+     "shots": 4,
+     "hits": 1,
+     "flats": 1,
+     "chance": 0.47
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-06-flat2.png",
+   "event": {
+    "t": 21.92,
+    "real": 208.18,
+    "type": "flat",
+    "wheel": "RL",
+    "flatCount": 2
+   },
+   "snap": {
+    "t": 22,
+    "v": 2.2,
+    "gun": {
+     "locked": false,
+     "ammo": 2,
+     "shots": 6,
+     "hits": 2,
+     "flats": 2,
+     "chance": 0
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-07-stopped.png",
+   "event": {
+    "t": 21.92,
+    "real": 208.18,
+    "type": "stopped"
+   },
+   "snap": {
+    "t": 22,
+    "v": 2.2,
+    "gun": {
+     "locked": false,
+     "ammo": 2,
+     "shots": 6,
+     "hits": 2,
+     "flats": 2,
+     "chance": 0
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-08-skid.png",
+   "event": {
+    "t": 21.92,
+    "real": 208.18,
+    "type": "skid",
+    "s": 555.4314343425998
+   },
+   "snap": {
+    "t": 22,
+    "v": 2.2,
+    "gun": {
+     "locked": false,
+     "ammo": 2,
+     "shots": 6,
+     "hits": 2,
+     "flats": 2,
+     "chance": 0
+    }
+   }
+  },
+  {
+   "file": "04-rt-stage2-09-end.png",
+   "event": {
+    "t": 24.12,
+    "real": 225.19,
+    "type": "end",
+    "how": "caught",
+    "gap": 14.29706738251457
+   },
+   "snap": {
+    "t": 24.1,
+    "v": 2.2,
+    "gun": {
+     "locked": false,
+     "ammo": 2,
+     "shots": 6,
+     "hits": 2,
+     "flats": 2,
+     "chance": 0
+    }
+   }
+  }
+ ]
+}

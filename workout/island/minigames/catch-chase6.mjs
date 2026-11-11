@@ -13,7 +13,7 @@ import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-8';
 
 export const CHASE6 = Object.freeze({
   countdownSeconds: 2.5, startGap: 30, catchGap: 7,
-  roadHalf: 5, shoulder: 4.3, laneWidth: 3.3, lanes: [-3.3, 0, 3.3],
+  roadHalf: 6.8, shoulder: 5.4, laneWidth: 3.6, lanes: [-3.6, 0, 3.6], parkedD: 5.95, // 11/11, Roy: a wider road: three lanes of 3.6 m plus a 1.4 m shoulder each side (13.6 m); parked cars stand on the shoulder
   baseSpeed: 22, boostSpeed: 9, brakeSpeed: 9, accel: 13, decel: 26,
   steerSpeed: 5.6, steerResponse: 7,        // lateral metres per second at full lock, and how fast the wheel answers
   driftK: .5,                                // outward slide in a bend: driftK * v*v*k metres per second
@@ -51,13 +51,13 @@ function layout(C, spec, rnd, track, length) {
     const lane = lanes[Math.floor(rnd() * 3)];
     if (roll < .14) list.push({id: list.length, kind: 'pad', s, d: lane, len: 3});
     else if (roll < .5) list.push({id: list.length, kind: 'traffic', s, d: lane, len: 4.4, v: C.trafficSpeed[0] + rnd() * (C.trafficSpeed[1] - C.trafficSpeed[0]), model: ['taxi', 'truck', 'bus'][Math.floor(rnd() * 3)]});
-    else if (roll < .64) list.push({id: list.length, kind: 'parked', s, d: (rnd() < .5 ? -1 : 1) * 3.9, len: 4.4, model: 'taxi'});
+    else if (roll < .64) list.push({id: list.length, kind: 'parked', s, d: (rnd() < .5 ? -1 : 1) * C.parkedD, len: 4.4, model: 'taxi', tint: Math.floor(rnd() * 4)});
     else if (roll < .8) list.push({id: list.length, kind: 'barrier', s, d: lane, len: 2.2});
     else if (roll < .9 || inBend) list.push({id: list.length, kind: 'cone', s, d: lane, len: 1.2});
     else list.push({id: list.length, kind: 'oil', s, d: lane, len: 3});
     // never wall off the road: a second obstacle within 14 m must leave a lane free
     if (rnd() < spec.density * .2 && !['pad', 'oil'].includes(list.at(-1).kind)) {
-      const other = list.at(-1).d === 0 ? (rnd() < .5 ? -3.3 : 3.3) : 0;
+      const other = list.at(-1).d === 0 ? (rnd() < .5 ? lanes[0] : lanes[2]) : 0;
       list.push({id: list.length, kind: rnd() < .5 ? 'barrier' : 'traffic', s: s + 5 + rnd() * 8, d: other, len: 3, v: C.trafficSpeed[0] + rnd() * 3, model: 'taxi'});
     }
   }
@@ -98,7 +98,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
     if (rnd() > spec.skill) bestLane = c.targetD; // a careless moment
     // the officer is close: swerve to the far side if it is free
     if (c.s - s.s < C.crimFlee && rnd() < spec.skill + .15) {
-      const away = s.d > c.d + .3 ? -3.3 : s.d < c.d - .3 ? 3.3 : (rnd() < .5 ? -3.3 : 3.3);
+      const away = s.d > c.d + .3 ? C.lanes[0] : s.d < c.d - .3 ? C.lanes[2] : (rnd() < .5 ? C.lanes[0] : C.lanes[2]);
       if (freeAhead(c.s, away, 24, s.t) >= 24) bestLane = away;
     }
     // a reticle on his car: he weaves to the next free lane, the better his skill the more often
@@ -248,7 +248,7 @@ export function driveChase6(chase, driving = DRIVING6.good, rnd = Math.random) {
       }
       want = rnd() < driving.miss ? want : best;
       const ds = st.crim.s - st.s;
-      if (ds > -9 && ds < 26 && rnd() >= driving.miss) want = clamp(st.crim.d, -3.3, 3.3);
+      if (ds > -9 && ds < 26 && rnd() >= driving.miss) want = clamp(st.crim.d, C.lanes[0], C.lanes[2]);
     }
     // steer: toward the lane, and against the slide the bend produces (a human feels the pull and counters it)
     const wantVel = clamp((want - st.d) * 2.2, -C.steerSpeed, C.steerSpeed);

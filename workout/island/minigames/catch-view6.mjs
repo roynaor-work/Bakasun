@@ -2,7 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {createActor} from './catch-actors.mjs?v=island-v2-20261107-8';
 import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-8';
-import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, blobShadow, fitModel, rigCar, lightOn, spinWheels, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-8';
+import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, blobShadow, fitModel, rigCar, lightOn, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-8';
 
 /** v6 Three.js view of "תפוס את הפושע": the city street is built along the chase track (catch-track.mjs): a road ribbon
  * with lane markings and kerbs, sidewalks, buildings, lamps and trees placed by distance along the track and offset
@@ -11,17 +11,36 @@ import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileText
  * Nothing here decides the game: positions come from the chase engine and the throw engine. */
 
 const CX_TURN = {policeCar: Math.PI / 2, getawayCar: Math.PI / 2, van: Math.PI / 2, roadblock: Math.PI / 2}; // Codex models face +z, the track heads +x at rest
-const ROAD_W = 10, WALK_W = 3.6, KERB_H = .14;
+const WALK_W = 3.6, KERB_H = .14, PARKED_TINTS = ['#ffffff', '#cfe0ff', '#d6ffd0', '#ffd6cc']; // the road width comes from the chase rules (CHASE6.roadHalf: 13.6 m since 11/11, Roy: "a wider road")
+/** Only the four wheel nodes spin (rigCar also lists their child meshes, which would double the rate). Wheel radius ~.34 m. */
+function spinCar(root, dist) { if (!root.userData.spin) root.userData.spin = (root.userData.wheels || []).filter(w => /^Wheel_[FR][LR]$/.test(w.name)); for (const w of root.userData.spin) w.rotation.x += dist / .34; }
 
-/** Road texture: x runs along the road, y across it: edge lines, dashed lane lines, a double centre line. */
-function roadTexture(theme) {
+/** Road texture: x runs along the road (one tile = 12 m), y across it (the whole width): a one-way road of three lanes with dashed
+ * white lane lines, solid white edge lines where the shoulder starts, a lighter shoulder and a yellow line at the kerb. */
+function roadTexture(theme, C) {
+  const half = C.roadHalf, px = d => (d + half) / (2 * half) * 256; // metres across -> canvas y
   return canvasTexture(512, 256, (g, w, h) => {
     g.fillStyle = theme.road; g.fillRect(0, 0, w, h);
+    g.fillStyle = 'rgba(255,255,255,.07)'; g.fillRect(0, 0, w, px(-C.shoulder)); g.fillRect(0, px(C.shoulder), w, h - px(C.shoulder));
     for (let i = 0; i < 3000; i++) { g.fillStyle = `rgba(255,255,255,${Math.random() * .05})`; g.fillRect(Math.random() * w, Math.random() * h, 2, 2); g.fillStyle = `rgba(0,0,0,${Math.random() * .08})`; g.fillRect(Math.random() * w, Math.random() * h, 2, 2); }
-    g.fillStyle = 'rgba(255,255,255,.7)'; g.fillRect(0, 6, w, 5); g.fillRect(0, h - 11, w, 5);
-    g.fillStyle = '#e9dca0'; g.fillRect(0, h / 2 - 5, w, 3); g.fillRect(0, h / 2 + 2, w, 3);
-    g.fillStyle = 'rgba(255,255,255,.6)'; for (let x = 0; x < w; x += 128) { g.fillRect(x, h / 3 - 2, 64, 4); g.fillRect(x, 2 * h / 3 - 2, 64, 4); }
+    const line = (d, wide, style) => { g.fillStyle = style; g.fillRect(0, px(d) - wide / 2, w, wide); };
+    line(-C.shoulder, 4, 'rgba(255,255,255,.8)'); line(C.shoulder, 4, 'rgba(255,255,255,.8)');
+    line(-half + .3, 3, '#e9dca0'); line(half - .3, 3, '#e9dca0');
+    g.fillStyle = 'rgba(255,255,255,.75)'; for (let x = 0; x < w; x += 256) for (const d of [-C.laneWidth / 2, C.laneWidth / 2]) g.fillRect(x, px(d) - 2, 110, 4);
   }, {repeat: [1, 1]});
+}
+/** Zebra stripes across the road (bands along y = across the ribbon). */
+function zebraTexture() {
+  return canvasTexture(32, 256, (g, w, h) => { g.clearRect(0, 0, w, h); g.fillStyle = 'rgba(255,255,255,.9)'; for (let y = 10; y < h - 8; y += 24) g.fillRect(0, y, w, 12); });
+}
+/** A warning sign for a bend: a yellow diamond with a black arrow that bends left or right (dir > 0 = left). */
+function bendSignTexture(dir) {
+  return canvasTexture(128, 128, (g, w, h) => {
+    g.clearRect(0, 0, w, h); g.fillStyle = '#ffd21f'; g.beginPath(); g.moveTo(64, 2); g.lineTo(126, 64); g.lineTo(64, 126); g.lineTo(2, 64); g.closePath(); g.fill();
+    g.strokeStyle = '#1a1a1a'; g.lineWidth = 5; g.stroke();
+    g.lineWidth = 9; g.lineCap = 'round'; g.lineJoin = 'round'; g.beginPath(); g.moveTo(64, 98); g.lineTo(64, 66); g.quadraticCurveTo(64, 46, 64 + dir * 20, 44); g.stroke();
+    g.fillStyle = '#1a1a1a'; g.beginPath(); g.moveTo(64 + dir * 36, 44); g.lineTo(64 + dir * 16, 30); g.lineTo(64 + dir * 16, 58); g.closePath(); g.fill();
+  });
 }
 /** A ribbon along the track between offsets dA and dB (right positive), at height y; uv.x = s / uScale. */
 function ribbon(track, s0, s1, dA, dB, y, step = 2, uScale = 10) {
@@ -44,7 +63,7 @@ function kerbFace(track, s0, s1, d, y0, y1, step = 2) {
 
 export async function createCatchView6({canvas, balance, stage = 1, chase, quality = 'high', maxDpr = 2, lowDpr = 1.25, onProgress = () => {}, signal}) {
   const level = balance.levels[stage - 1], theme = THEMES[level.theme] || THEMES.day, base = new URL('../' + (balance.render.base || 'assets/game-catch/'), import.meta.url);
-  const track = chase.track, C = chase.C, low = quality === 'low';
+  const track = chase.track, C = chase.C, low = quality === 'low', ROAD_W = (C.roadHalf || 6.8) * 2;
   const renderer = new T.WebGLRenderer({canvas, antialias: !low, alpha: false, powerPreference: 'high-performance'});
   renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, low ? lowDpr : maxDpr));
   renderer.outputColorSpace = T.SRGBColorSpace;
@@ -66,12 +85,23 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   // ----- the street along the track -----
   const S0 = -80, S1 = track.length + 240, world = []; // world = [{obj, s}] for the visibility window
   const keep = (obj, s) => { world.push({obj, s}); scene.add(obj); return obj; };
-  const roadTex = roadTexture(theme); roadTex.wrapS = T.RepeatWrapping; roadTex.wrapT = T.ClampToEdgeWrapping;
+  const roadTex = roadTexture(theme, C); roadTex.wrapS = T.RepeatWrapping; roadTex.wrapT = T.ClampToEdgeWrapping;
   const road = new T.Mesh(ribbon(track, S0, S1, -ROAD_W / 2, ROAD_W / 2, .01, 2, 12), new T.MeshStandardMaterial({map: roadTex, roughness: .95})); scene.add(road);
   const tiles = tileTexture(); tiles.repeat.set(1, 1);
   const walkMat = new T.MeshStandardMaterial({map: tiles, roughness: .9});
   scene.add(new T.Mesh(ribbon(track, S0, S1, ROAD_W / 2, ROAD_W / 2 + WALK_W, KERB_H, 2, 3), walkMat), new T.Mesh(ribbon(track, S0, S1, -ROAD_W / 2 - WALK_W, -ROAD_W / 2, KERB_H, 2, 3), walkMat));
   scene.add(kerbFace(track, S0, S1, ROAD_W / 2, 0, KERB_H), kerbFace(track, S0, S1, -ROAD_W / 2, 0, KERB_H));
+  // pedestrian crossings every ~90 m on the straights, and a bend sign on the right sidewalk 28 m before every arc
+  const zebraMat = new T.MeshBasicMaterial({map: zebraTexture(), transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2});
+  for (let s = 130; s < S1 - 60; s += 90) { if (Math.abs(track.curvatureAt(s)) > 1 / 400 || Math.abs(track.curvatureAt(s + 4)) > 1 / 400) continue; const z = new T.Mesh(ribbon(track, s, s + 3.6, -C.shoulder, C.shoulder, .025, 1.8, 3.6), zebraMat); z.renderOrder = 1; keep(z, s + 1.8); }
+  const signTex = {1: bendSignTexture(1), [-1]: bendSignTexture(-1)}, poleGeo = new T.CylinderGeometry(.05, .06, 2.6, 8), poleMat = new T.MeshStandardMaterial({color: '#8d9299', roughness: .5, metalness: .4}), plateGeo = new T.PlaneGeometry(1, 1);
+  for (const seg of track.segments) {
+    if (seg.kind !== 'arc' || seg.s0 < 40) continue;
+    const s = seg.s0 - 28, p = track.toWorld(s, ROAD_W / 2 + .9), sign = new T.Group();
+    const pole = new T.Mesh(poleGeo, poleMat); pole.position.y = KERB_H + 1.3; sign.add(pole);
+    const plate = new T.Mesh(plateGeo, new T.MeshBasicMaterial({map: signTex[seg.dir > 0 ? 1 : -1], transparent: true, side: T.DoubleSide})); plate.position.y = KERB_H + 2.9; plate.rotation.y = -Math.PI / 2; sign.add(plate);
+    sign.position.set(p.x, 0, p.z); sign.rotation.y = track.yawAt(s); keep(sign, s);
+  }
   const ground = new T.Mesh(new T.PlaneGeometry(2600, 2600), new T.MeshStandardMaterial({color: theme === THEMES.night ? '#1d2230' : theme === THEMES.dusk ? '#6b6a5c' : '#7f8a74', roughness: 1}));
   ground.rotation.x = -Math.PI / 2; ground.position.set(track.toWorld(track.length / 2).x, -.03, track.toWorld(track.length / 2).z); scene.add(ground);
   const shadowTex = glowTexture('#000000');
@@ -104,7 +134,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     else { const bush = fitModel(models.bush, {width: 2}); bush.position.set(p.x, KERB_H, p.z); keep(bush, s); }
   }
   // the roadblock at the end of the chase
-  { const s = chase.spec.seconds * (C.baseSpeed + C.boostSpeed) + 120; for (const d of [-3.3, 0, 3.3]) { const rb = fitModel(models.roadblock, {depth: 3.2}); const p = track.toWorld(s, d); rb.position.set(p.x, 0, p.z); rb.rotation.y = track.yawAt(s); keep(rb, s); } }
+  { const s = chase.spec.seconds * (C.baseSpeed + C.boostSpeed) + 120; for (const d of C.lanes) { const rb = fitModel(models.roadblock, {depth: 3.2}); const p = track.toWorld(s, d); rb.position.set(p.x, 0, p.z); rb.rotation.y = track.yawAt(s); keep(rb, s); } }
   const viewWindow = [-45, 190];
   function cullWorld(sNow) { for (const w of world) w.obj.visible = w.s > sNow + viewWindow[0] && w.s < sNow + viewWindow[1]; }
 
@@ -120,14 +150,14 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   if (theme.lamps) for (const car of [playerCar, crimCar]) { const beam = new T.Mesh(new T.PlaneGeometry(6, 14), new T.MeshBasicMaterial({map: glowTexture('#fff3c4'), transparent: true, opacity: .35, blending: T.AdditiveBlending, depthWrite: false})); beam.rotation.x = -Math.PI / 2; beam.position.set(8, .05, 0); car.add(beam); beams.push(beam); }
   // speed streaks: thin additive sprites that stretch along the road while boosting
   const streakTex = canvasTexture(64, 8, g => { const gr = g.createLinearGradient(0, 0, 64, 0); gr.addColorStop(0, '#ffffff00'); gr.addColorStop(.5, '#ffffffcc'); gr.addColorStop(1, '#ffffff00'); g.fillStyle = gr; g.fillRect(0, 0, 64, 8); });
-  const streaks = []; for (let i = 0; i < 14; i++) { const m = new T.Mesh(new T.PlaneGeometry(6, .12), new T.MeshBasicMaterial({map: streakTex, transparent: true, opacity: 0, blending: T.AdditiveBlending, depthWrite: false})); m.renderOrder = 6; scene.add(m); streaks.push({m, s: 0, d: 0, y: 0}); }
+  const streakGeo = new T.PlaneGeometry(9, .16), streaks = []; for (let i = 0; i < (low ? 14 : 24); i++) { const m = new T.Mesh(streakGeo, new T.MeshBasicMaterial({map: streakTex, transparent: true, opacity: 0, blending: T.AdditiveBlending, depthWrite: false})); m.renderOrder = 6; scene.add(m); streaks.push({m, s: 0, d: 0, y: 0}); }
   playerCar.add(blobShadow(shadowTex, 5, 2.6, .5)); crimCar.add(blobShadow(shadowTex, 5, 2.6, .5));
   const sparks = new Particles(scene, {texture: starTexture(), size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 90});
   // obstacles appear inside the window around the officer
   const props = new Map();
   function makeProp(o) {
     let root;
-    if (o.kind === 'traffic' || o.kind === 'parked') root = fitModel(models[o.model], {width: o.model === 'bus' ? 7.5 : o.model === 'truck' ? 5.6 : 4.4});
+    if (o.kind === 'traffic' || o.kind === 'parked') { root = fitModel(models[o.model], {width: o.model === 'bus' ? 7.5 : o.model === 'truck' ? 5.6 : 4.4}); if (o.kind === 'parked' && o.tint) root.traverse(m => { if (m.isMesh && m.material) { m.material = m.material.clone(); m.material.color.set(PARKED_TINTS[o.tint % PARKED_TINTS.length]); } }); }
     else if (o.kind === 'barrier') root = fitModel(models.roadblock, {depth: 2.8});
     else if (o.kind === 'cone') { root = new T.Group(); for (let i = 0; i < 3; i++) { const c = fitModel(models.cone, {height: .75}); c.position.set((i - 1) * .5, 0, (i % 2) * .3); root.add(c); } }
     else if (o.kind === 'oil') { root = new T.Group(); const m = new T.Mesh(new T.CircleGeometry(1.6, 24), new T.MeshStandardMaterial({color: '#141a22', roughness: .15, metalness: .6, transparent: true, opacity: .85})); m.rotation.x = -Math.PI / 2; m.position.y = .03; m.scale.x = 1.5; root.add(m); }
@@ -165,11 +195,11 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     // streaks: while boosting (or very fast) they fly past on both sides of the road
     const streakOn = st.boosting || st.v > C.baseSpeed + 4;
     for (const k of streaks) {
-      if (k.m.material.opacity <= 0 && streakOn && Math.random() < .25) { k.s = st.s + 30 + Math.random() * 50; k.d = (Math.random() < .5 ? -1 : 1) * (3.5 + Math.random() * 6); k.y = .3 + Math.random() * 2.2; k.m.material.opacity = .5; }
-      if (k.m.material.opacity > 0) { placeOnTrack(k.m, k.s, k.d); k.m.position.y = k.y; k.m.rotation.y = track.yawAt(k.s); k.m.material.opacity -= dt * (k.s < st.s - 8 ? 3 : .2); if (k.s < st.s - 14) k.m.material.opacity = 0; }
+      if (k.m.material.opacity <= 0 && streakOn && Math.random() < .35) { k.s = st.s + 26 + Math.random() * 60; k.d = (Math.random() < .5 ? -1 : 1) * (2.5 + Math.random() * 8); k.y = .25 + Math.random() * 2.8; k.m.material.opacity = .55 + Math.random() * .3; }
+      if (k.m.material.opacity > 0) { placeOnTrack(k.m, k.s, k.d); k.m.position.y = k.y; k.m.material.opacity -= dt * (k.s < st.s - 8 ? 3 : .25); if (k.s < st.s - 14) k.m.material.opacity = 0; }
     }
-    spinWheels(playerCar, st.v * dt / .36); spinWheels(crimCar, c.v * dt / .34);
-    if (st.scraping && Math.random() < .7) { track.toWorld(st.s + 1, Math.sign(st.d) * 4.9, tmp2); sparks.emit(tmp2.x, .3, tmp2.z, 3, {speed: 3, up: 2, color: [1, .8, .4], life: .4}); }
+    spinCar(playerCar, st.v * dt); spinCar(crimCar, c.v * dt);
+    if (st.scraping && Math.random() < .7) { track.toWorld(st.s + 1, Math.sign(st.d) * (C.roadHalf - .1), tmp2); sparks.emit(tmp2.x, .3, tmp2.z, 3, {speed: 3, up: 2, color: [1, .8, .4], life: .4}); }
     if (Math.abs(st.steer) > .6 && st.v > 15 && Math.random() < .5) { track.toWorld(st.s - 1.5, st.d, tmp2); dust.emit(tmp2.x, .2, tmp2.z, 1, {speed: 1.5, up: .6, color: [.8, .78, .7], gravity: .5, life: .5}); }
     if (st.boosting && Math.random() < .6) { track.toWorld(st.s - 2.4, st.d, tmp2); dust.emit(tmp2.x, .3, tmp2.z, 1, {speed: 2, up: .8, color: [1, .75, .4], gravity: 0, life: .35}); }
     // obstacles in the window
@@ -184,17 +214,18 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     const kAhead = track.curvatureAt(st.s + 30);
     const fovTarget = (low ? 50 : 52) + (st.boosting ? 7 : 0) + clamp((st.v - 22) * .4, 0, 4);
     cam.fov = damp(cam.fov, fovTarget, 5, dt); camera.fov = cam.fov; camera.updateProjectionMatrix();
-    track.toWorld(st.s - 7.5, st.d * .55 + kAhead * 40, tmp2); const px = tmp2.x, pz = tmp2.z;
-    track.toWorld(st.s + 14, st.d * .35 - kAhead * 90, tmp2); const lx = tmp2.x, lz = tmp2.z;
-    if (!cam.pos) { cam.pos = new T.Vector3(px, 3.3, pz); cam.look = new T.Vector3(lx, 1.2, lz); }
+    // 11/11: 8.5 m back and 3.6 m up for the wider road; the camera sits a little toward the outside of the bend and looks further into it
+    track.toWorld(st.s - 8.5, st.d * .5 + kAhead * 45, tmp2); const px = tmp2.x, pz = tmp2.z;
+    track.toWorld(st.s + 16, st.d * .3 - kAhead * 120, tmp2); const lx = tmp2.x, lz = tmp2.z;
+    if (!cam.pos) { cam.pos = new T.Vector3(px, 3.6, pz); cam.look = new T.Vector3(lx, 1.1, lz); }
     const kp = 1 - Math.exp(-dt * 7), kl = 1 - Math.exp(-dt * 9);
-    cam.pos.x += (px - cam.pos.x) * kp; cam.pos.z += (pz - cam.pos.z) * kp; cam.pos.y += (3.3 - cam.pos.y) * kp;
-    cam.look.x += (lx - cam.look.x) * kl; cam.look.z += (lz - cam.look.z) * kl; cam.look.y = 1.2;
+    cam.pos.x += (px - cam.pos.x) * kp; cam.pos.z += (pz - cam.pos.z) * kp; cam.pos.y += (3.6 - (st.boosting ? .25 : 0) - cam.pos.y) * kp;
+    cam.look.x += (lx - cam.look.x) * kl; cam.look.z += (lz - cam.look.z) * kl; cam.look.y = 1.1;
     cam.shake = Math.max(0, cam.shake - dt * 2.2);
     const sh = cam.shake * cam.shake * .6, ts = performance.now() / 1000;
     camera.position.set(cam.pos.x + Math.sin(ts * 47) * sh * .4, cam.pos.y + Math.cos(ts * 53) * sh * .3, cam.pos.z + Math.cos(ts * 41) * sh * .4);
     look.copy(cam.look); camera.lookAt(look);
-    cam.bank = damp(cam.bank, -st.steer * .035 - st.slide * .004, 6, dt); camera.rotateZ(cam.bank);
+    cam.bank = damp(cam.bank, -st.steer * .04 - st.slide * .006 - st.curvature * st.v * .012, 6, dt); camera.rotateZ(cam.bank);
     for (const l of lamps) l.material.opacity = .85 + Math.sin(phase * 3 + l.position.x) * .08;
     fx?.update(dt, {thiefSpeed: c.v, flatCount: chase.gun.state.flatCount, skid: st.phase === 'skid'});
   }
