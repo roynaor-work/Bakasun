@@ -69,7 +69,9 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  // racing-v10 Formula 1 circuits: a stepped grandstand with a roof on each side of the start straight and colour boards (no brands) behind the barrier.
  if(track.f1){
   const rowColors=['#c9473f','#e8d8a6','#2f6c8f','#e8d8a6'];
-  for(const [side,from] of [[1,-30],[-1,40]]){
+  // racing-deep-m2: with a main straight the two stands sit on the side opposite to the pits (+1), one before and one after the line
+  const stands=track.mainStraight&&track.mainStraight.length>=150?[[1,-30],[1,46]]:[[1,-30],[-1,40]];
+  for(const [side,from] of stands){
    const site=siteAt((from+track.length)%track.length,side*(track.width/2+17),side>0?-Math.PI/2:Math.PI/2);if(!clear(site,8,36,4))continue;
    for(let row=0;row<4;row++)box('masonry',site,0,.6+row*1.1,-row*1.6,5.2,1.2+row*1.1,70,rowColors[row],1);
    box('roof',site,0,7.4,-5.4,8.5,1.2,72,palette.roof,1);box('metal',site,0,4,-7.6,.3,8,72,palette.trim,1);
