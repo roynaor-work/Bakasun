@@ -75,11 +75,11 @@ export function towerRows(state,{tracker=null,now=state.time,limit=10,watch=null
 
 /** The whole field in finishing order with the gap to the winner (finish times when both finished, else the time gap at the moment the race ended). */
 export function classification(state,{tracker=null,now=state.time,league=false,trackLength=0}={}){
- const cars=[...state.cars].sort((a,b)=>a.rank-b.rank),winner=cars[0],fast=fastestLap(state.cars);
+ const cars=[...state.cars].sort((a,b)=>a.rank-b.rank),winner=cars[0],fast=fastestLap(state.cars),mixed=cars.some(c=>c.scoring===false);   // racing-deep-m6: when the whole field scores (long league) the mark says nothing, so it is left off
  return cars.map(car=>{const idx=state.cars.indexOf(car),d=gridDriver(idx,car.name),gap=car===winner?0:tracker?tracker.gap(winner,car,now):null;
   return {id:car.id,rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false,finished:!!car.finished,
    time:car.finished?car.finishTime:null,gap,gapText:car===winner?fmtTime(car.finished?car.finishTime:now):gapText(gap,{ahead:winner,car,trackLength}),
-   league:league&&car.scoring!==false,fastest:!!fast&&fast.id===car.id,bestLap:car.lapTimes.length?Math.min(...car.lapTimes):null};});
+   league:league&&mixed&&car.scoring!==false,fastest:!!fast&&fast.id===car.id,bestLap:car.lapTimes.length?Math.min(...car.lapTimes):null};});
 }
 
 /** The pre-race card: circuit, laps, time of day and the starting grid with the player's slot. */

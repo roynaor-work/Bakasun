@@ -75,11 +75,11 @@ export const SHORT_SEASONS = Object.freeze([
  * 11/11/2026: on tier 0 a stock casual bot wins at x1.3 and finishes 4th at x1.6, 11th at x2; on tier 4 it is 8th already at x1). The tiers make the
  * computer faster by themselves, so the factor eases season by season while the overall challenge still rises. */
 export const LONG_SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 7800, laps: 3, minRank: 0, rating: 0.05, corner: 1.6 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 7800, laps: 3, minRank: 8, rating: 0.05, corner: 1.4 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 7800, laps: 3, minRank: 6, rating: 0.05, corner: 1.25 }),
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 7800, laps: 3, minRank: 0, rating: 0.05, corner: 1.75 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 7800, laps: 3, minRank: 8, rating: 0.05, corner: 1.5 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 7800, laps: 3, minRank: 8, rating: 0.05, corner: 1.3 }),
   Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 7800, laps: 3, minRank: 5, rating: 0.05, corner: 1.15 }),
-  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 7800, laps: 3, minRank: 4, rating: 0.06, corner: 1.1 })
+  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 7800, laps: 3, minRank: 5, rating: 0.06, corner: 1.1 })
 ]);
 /** Race distance factors of the variants and the ceiling a race may ask of a slow driver under the 295 s clock (about 31 m/s). The "short races"
  * league setting scales every race by SHORT_RACES_FACTOR. */

@@ -121,6 +121,8 @@ test('intro card and final classification on a real ten-car race: every car, lea
   assert.match(rows[0].gapText,/^\d+:\d\d\.\d\d$/);assert.ok(rows.slice(1).every(r=>r.gapText===''||/^\+/.test(r.gapText)),rows.map(r=>r.gapText).join(' '));
   assert.ok(rows.slice(1).filter(r=>r.gapText).length>=5,'most cars have a gap to the winner');assert.equal(rows.filter(r=>r.fastest).length,1);
   const noLeague=classification(s,{tracker});assert.equal(noLeague.filter(r=>r.league).length,0);
+  // racing-deep-m6: a long-league race (twelve scoring cars through stage.opponents) carries no "ליגה" marks, the mark only separates scoring cars from traffic
+  const full=createRacing({stage:1,seed:3,config:{countdown:0,extraRivals:0,stage:{opponents:11}}});assert.equal(full.state.cars.length,12);assert.equal(classification(full.state,{league:true}).filter(r=>r.league).length,0);assert.equal(raceIntro(full.state,full.stage,full.track).grid.length,12);full.dispose();
 });
 test('upgrade offer: a settled stage never shows a second card, "later" still rests the game one stage',()=>{
   const memory=createOfferMemory(),list=[{id:'league:engine',kind:'league',gameId:'islandRacing',category:'ליגה',name:'מנוע',icon:'engine',unit:'coins',price:100,balance:400},{id:'league:tires',kind:'league',gameId:'islandRacing',category:'ליגה',name:'צמיגים',icon:'tires',unit:'coins',price:100,balance:400}];
