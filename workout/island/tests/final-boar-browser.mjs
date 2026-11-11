@@ -27,10 +27,12 @@ const frame=await (await frameEl.elementHandle()).contentFrame();
 await frame.waitForFunction(()=>window.__boar&&window.__boarIsland?.ready);
 const box=await frameEl.boundingBox();log('frame',box,'url',frame.url());
 const cdp=await ctx.newCDPSession(page);await cdp.send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
+// CDP: touchStart/touchMove list the active points; touchEnd lists the points being RELEASED (an empty list releases every remaining point).
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id??1}))});
 const mouse=(type,x,y,button='left')=>cdp.send('Input.dispatchMouseEvent',{type,x:x+box.x,y:y+box.y,button,clickCount:1,pointerType:'mouse'});
 const wait=ms=>page.waitForTimeout(ms);
 const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
+const resetAim=()=>frame.evaluate(()=>window.__boar.aim(0,-.05));
 const shot=name=>page.screenshot({path:out+`frames/boar-${MODE}-${name}.jpg`,type:'jpeg',quality:80});
 const env=await frame.evaluate(()=>({coarse:matchMedia('(pointer:coarse)').matches,hoverNone:matchMedia('(hover:none)').matches,maxTouchPoints:navigator.maxTouchPoints,fireBtn:!!document.getElementById('fire-btn'),aimZone:!!document.getElementById('aim-zone'),landscape:innerWidth>innerHeight}));
 await frame.evaluate(()=>window.__boar.start(1));await wait(1500);
@@ -47,21 +49,21 @@ await step('sceneTaps',async()=>{for(const [x,y] of [[450,150],[650,110],[520,60
 // B) a long drag on the scene
 await step('sceneDrag',async()=>{await touch('touchStart',[{x:500,y:150}]);for(let i=1;i<=10;i++){await touch('touchMove',[{x:500+i*16,y:150+i*5}]);await wait(60);}await wait(400);await touch('touchEnd',[]);await wait(400);});
 // C) a two-second stick drag with enemies in range
-await step('stickDrag2s',async()=>{await touch('touchStart',[{x:150,y:290}]);for(let i=1;i<=20;i++){await touch('touchMove',[{x:150+Math.min(i,8)*6,y:290-Math.min(i,8)*5}]);await wait(100);}await shot('stick');await touch('touchEnd',[]);await wait(400);});
+await resetAim();await step('stickDrag2s',async()=>{await touch('touchStart',[{x:150,y:290}]);for(let i=1;i<=20;i++){await touch('touchMove',[{x:150+Math.min(i,8)*6,y:290-Math.min(i,8)*5}]);await wait(100);}await shot('stick');await touch('touchEnd',[]);await wait(400);});
 // D) a stick drag that leaves the stick zone (and crosses the weapon bar and the fire button)
-await step('stickLeavesZone',async()=>{await touch('touchStart',[{x:120,y:300}]);for(let i=1;i<=10;i++){await touch('touchMove',[{x:120+i*62,y:300-i*18}]);await wait(70);}await wait(600);await touch('touchEnd',[]);await wait(400);});
+await resetAim();await step('stickLeavesZone',async()=>{await touch('touchStart',[{x:120,y:300}]);for(let i=1;i<=10;i++){await touch('touchMove',[{x:120+i*62,y:300-i*18}]);await wait(70);}await wait(600);await touch('touchEnd',[]);await wait(400);});
 // E) the left thumb where the v20 ability buttons sat (taps and a short upward drag)
-await step('leftThumbAbilityRow',async()=>{const before=await st();for(const [x,y] of [[60,200],[180,200],[290,200]]){await touch('touchStart',[{x,y}]);await wait(150);await touch('touchEnd',[]);await wait(300);}
+await resetAim();await step('leftThumbAbilityRow',async()=>{const before=await st();for(const [x,y] of [[60,200],[180,200],[290,200]]){await touch('touchStart',[{x,y}]);await wait(150);await touch('touchEnd',[]);await wait(300);}
  const mid=await st();await touch('touchStart',[{x:60,y:210}]);for(let i=1;i<=8;i++){await touch('touchMove',[{x:60+i*4,y:210-i*7}]);await wait(80);}await wait(500);await touch('touchEnd',[]);await wait(400);const after=await st();
  return {tapsAbilities:Object.keys(mid.abilityBy).reduce((n,k)=>n+(mid.abilityBy[k]||0)-(before.abilityBy[k]||0),0),dragAimMoved:Math.hypot(after.aim.x-mid.aim.x,after.aim.y-mid.aim.y)>.03,abilityBy:after.abilityBy};});
 // F) two fingers: stick (id 1) moving while the fire button (id 2) is held; release the button first, then the stick
-await step('twoFingers',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:140,y:300,id:1}]);await wait(100);await touch('touchStart',[{x:140,y:300,id:1},{x:bx,y:by,id:2}]);
+await resetAim();await step('twoFingers',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:140,y:300,id:1}]);await wait(100);await touch('touchStart',[{x:140,y:300,id:1},{x:bx,y:by,id:2}]);
  for(let i=1;i<=10;i++){await touch('touchMove',[{x:140+i*5,y:300-i*4,id:1},{x:bx,y:by,id:2}]);await wait(100);}await shot('twofinger');const held=await st();
- await touch('touchEnd',[{x:190,y:260,id:1}]);await wait(500);const afterRelease=await st();await touch('touchEnd',[]);await wait(300);const end=await st();
+ await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(500);const afterRelease=await st();await touch('touchEnd',[{x:190,y:260,id:1}]);await wait(300);const end=await st();
  return {heldFiring:held.firing,heldFireHeld:held.fireHeld,stickActiveWhileHeld:held.stick,shotsAfterButtonRelease:end.shots-afterRelease.shots,aimKeptAfterStickRelease:Math.hypot(end.aim.x-afterRelease.aim.x,end.aim.y-afterRelease.aim.y)<.02};});
 // G) hold the fire button and tap the scene with another finger: firing must continue
 await step('strayTapWhileHeld',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(600);const s1=await st();
- await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(100);const s2=await st();await wait(800);const s3=await st();await touch('touchEnd',[]);await wait(300);
+ await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:520,y:130,id:3}]);await wait(100);const s2=await st();await wait(800);const s3=await st();await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(300);
  return {shotsBeforeTap:s1.shots,firingAfterStrayTap:s2.firing,shotsAfterStrayTap:s3.shots-s2.shots};});
 // H) keyboard F (the frame has focus, as on a phone with a keyboard)
 await step('keyboardF',async()=>{await frame.evaluate(()=>document.getElementById('scene').focus());await page.keyboard.down('KeyF');await wait(800);await page.keyboard.up('KeyF');await wait(300);});

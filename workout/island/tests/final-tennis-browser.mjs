@@ -35,7 +35,9 @@ try{
   if(mode==='before')history.replaceState(null,'',location.pathname+'?dev=1&tennisBar=0&tennisDrop=0');},{mode:MODE,difficulty:DIFFICULTY});
  const start=async id=>{await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await tick(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(100);await waitForGameNavigation(page);};
  await start('tennis');
- await page.waitForFunction(()=>{const m=window.__island.games.current?.session.snapshot.renderMetrics;return m&&(m.characterLoaded||m.mode==='canvas');});await tick(600);
+ // The clock is paused, so rAF polling never fires: advance the fake clock while the character model loads (timers and frames both move).
+ for(let i=0;i<600;i++){const loaded=await page.evaluate(()=>{const m=window.__island.games.current?.session.snapshot.renderMetrics;return Boolean(m&&(m.characterLoaded||m.mode==='canvas'));});if(loaded)break;await tick(100);await page.waitForTimeout(50);}
+ await tick(600);
  report.difficulty=await page.evaluate(()=>window.__island.engine.state.tennisDifficulty);
  report.search=await page.evaluate(()=>location.search);
  // Real touch through CDP. Finger 1 = left thumb on the joystick, finger 2 = right thumb on a button; every call sends the full set of active points.
