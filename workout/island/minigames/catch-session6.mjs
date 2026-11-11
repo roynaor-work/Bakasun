@@ -60,7 +60,9 @@ export function runCatchSession6(ctx) {
   const policeLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'police').reduce((n, b) => n + (b.level || 1), 0);
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
-  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
+  // v6 overrides per level (`levels[].v6`, e.g. radiusScale tuned for the fixed-draw archery) without touching the v5 balance
+  const balance6 = {...balance, levels: balance.levels.map(l => ({...l, ...(l.v6 || {})}))};
+  const makeThrow = mods => createCatchEngine({balance: balance6, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
   const withChase = Boolean(ctx.canvas);
   const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
