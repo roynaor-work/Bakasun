@@ -28,7 +28,7 @@ for (const [label, query] of [['before', '?dev=1&alpineFall=0&alpineObs=0'], ['a
     const dbg = window.__island.ui.activityInterface.current.session.debug, e = dbg.engine, ramp = e.course.objects.find(o => o.type === 'ramp');
     for (let i = 0; i < 60 * 200; i++) {
       const d = e.debug()[0], tx = d.s > ramp.s - 40 ? ramp.x + 2.25 : d.x; e.command({type: 'steer', value: Math.max(-1, Math.min(1, (tx - d.x) * 1.5))});
-      dbg.step(1 / 60); if (e.snapshot().player.crashed || e.debug()[0].hitTime > 0 || d.s > ramp.s + 8) break;
+      dbg.step(1 / 60); if (e.snapshot().player.crashed || d.s > ramp.s + 8) break;
     }
     const p = e.debug()[0]; return {ramp: {s: ramp.s, x: ramp.x}, s: p.s, x: p.x, crashes: p.crashes, hitTime: p.hitTime};
   });

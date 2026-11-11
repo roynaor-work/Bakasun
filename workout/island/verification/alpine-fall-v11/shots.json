@@ -1,0 +1,66 @@
+{
+ "before": {
+  "ramp": {
+   "ramp": {
+    "s": 333.54,
+    "x": -4.2
+   },
+   "s": 63.06388888888904,
+   "x": 0.18569756760003053,
+   "crashes": 0,
+   "hitTime": 0.7
+  },
+  "fall1": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall2": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall3": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall4": {
+   "crashed": false,
+   "airborne": false
+  },
+  "warn": {
+   "warn": 164.36,
+   "s": 140.46523333333312
+  }
+ },
+ "after": {
+  "ramp": {
+   "ramp": {
+    "s": 333.54,
+    "x": -4.2
+   },
+   "s": 64.06388888888904,
+   "x": 0.00606616913025789,
+   "crashes": 0,
+   "hitTime": 0.7
+  },
+  "fall1": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall2": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall3": {
+   "crashed": false,
+   "airborne": false
+  },
+  "fall4": {
+   "crashed": true,
+   "airborne": false
+  },
+  "warn": {
+   "warn": 164.36,
+   "s": 140.5499999999998
+  }
+ }
+}
