@@ -110,3 +110,23 @@ export function soccerV12Overlay(json,{v9={},v10={}}={},search=globalThis.locati
   const a=merge(v9,SOCCER_CODEX_PREFIX,json.libraries.v9,false),b=merge(v10,SOCCER_V10_PREFIX,json.libraries.v10,true);
   return {v9:a.states,v10:b.states,counts:{v9Replaced:a.replaced,v10Replaced:b.replaced,v10Added:b.added}};
 }
+/** Codex soccer-v11 repaired keeper dives (motion-fix-v12 catalog, 96.7 QA score, 0 red metrics): the low and middle dives to either side replace the
+ * v8 ones. Opt-in (`?soccerKeeperV11=1`, default off): the clips are authored with the sideways travel as root motion ("simulation-owned"), and whether the game's own dive travel looks right with them cannot be verified without a screen. The catch event stands in for the glove contact; the clip has no takeoff event, so the push-off is taken
+ * at 45% of the way to the contact, as the v8 plan does when a clip lacks one. */
+export const soccerKeeperV11Enabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerKeeperV11')==='1';
+export const soccerV11ClipsUrl=()=>new URL('../assets/soccer-v11/clips.json',import.meta.url).href;
+export const SOCCER_V11_PREFIX='v11_';
+export function soccerV11States(json){
+  if(!json||json.schemaVersion!==1||!json.states)throw Error('Soccer v11 clips: unexpected file');
+  return Object.fromEntries(Object.entries(json.states).map(([name,state])=>[SOCCER_V11_PREFIX+name,{...state,clip:SOCCER_V11_PREFIX+name}]));
+}
+export function soccerV11DiveClip(left,ballHeight,has){
+  if(ballHeight>1.35)return null;
+  const name=SOCCER_V11_PREFIX+(left?'keeper_dive_left':'keeper_dive_right');
+  return has(name)?name:null;
+}
+export function soccerV11DivePlan(state,{lead=.1,reachSeconds=.5,settleRate=1.15}={}){
+  const contact=state?.events?.find(e=>e.name==='visual_catch')?.timeSeconds;
+  if(!(contact>0))return null;
+  const at=Math.max(0,contact*.45-lead);return {at,contact,rate:Math.max(1,(contact-at)/reachSeconds),settleRate};
+}

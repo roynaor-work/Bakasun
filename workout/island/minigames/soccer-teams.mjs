@@ -11,7 +11,7 @@ export const SOCCER_TEAM_PRESETS={
  '11':{extras:7,length:105,width:68,tune:{speedExp:.7}}
 };
 /** The product default (session) is 7-a-side on 58x36; the model's own default stays 6 so every contract is unchanged. `?soccerTeams=6` restores today's game. */
-export const SOCCER_PRODUCT_TEAMS='7';
+export const SOCCER_PRODUCT_TEAMS='8';
 export function resolveSoccerTeams(option,fallback='6'){
  const pick=v=>Object.hasOwn(SOCCER_TEAM_PRESETS,String(v))?String(v):null;
  const search=globalThis.location?.search;
@@ -48,5 +48,9 @@ export function applySoccerTeams(config,option,override={}){
  // Product preset only: a ground pass the player aims arrives at about 10 m/s instead of 14 (measured, pass-bench: -4 points of intended
  // receiver, +2 points intercepted, in return for a first touch that looks like a pass and not a shot).
  if(key===SOCCER_PRODUCT_TEAMS&&scaled.assistance?.passing)scaled.assistance={...scaled.assistance,passing:{...scaled.assistance.passing,travelBaseSeconds:.45,travelPerMetre:.03}};
+ // Product preset: a slide takes about half a second longer to get up from. The authored fall and get-up are 2.6 s of clip; in 0.6 s they were
+ // played at up to 3x (pops of 53-57 degrees per frame). With 1.1 s they play at about 1.5x and the body is upright when control returns.
+ if(key===SOCCER_PRODUCT_TEAMS&&scaled.slide)scaled.slide={...scaled.slide,recoverSeconds:round(scaled.slide.recoverSeconds+.5),maxTotalSeconds:round((scaled.slide.maxTotalSeconds??1.2)+.5),
+  variants:scaled.slide.variants&&Object.fromEntries(Object.entries(scaled.slide.variants).map(([name,v])=>[name,{...v,recoverSeconds:round(v.recoverSeconds+.5)}]))};
  return scaled;
 }
