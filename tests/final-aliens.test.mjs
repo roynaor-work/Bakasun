@@ -73,9 +73,16 @@ test('model: a burst sounds like the Vulcan (shot), steady fire is a single-shot
  run(m,cfg.burstSeconds+cfg.coolSeconds+.5,{firing:true});events.length=0;run(m,1,{firing:true});
  assert.ok(events.filter(e=>e==='shotSingle').length>=3&&!events.includes('shot'),JSON.stringify(events));assert.equal(m.firing,false,'no Vulcan spin for steady shots');
 });
-test('stage 1 lasts 85-135 s for base, upgraded and heavy gear (headless bot holding fire)',()=>{
+const PHONE=(844/390)/(360/480);
+/** Headless bot at the phone aspect (hit test stretched 2.9x like 844x390): steers under the lowest alien, dodges, holds fire. */
+const playPhone=(seed,profile={},level=1)=>{const m=make({random:seededRandom(seed),level,...profile});m.effectAspect=PHONE;
+ for(let f=0;f<30*400&&!m.result;f++){const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>14);if(!safe(want)){out:for(let d=0;d<=360;d+=3)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>18&&x<342&&safe(x)){want=x;break out;}}}
+  m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),firing:true});}
+ return {seconds:+m.time.toFixed(1),outcome:m.result?.outcome||'timeout',fired:m.snapshot().fired,shotsPerSec:+(m.snapshot().fired/m.time).toFixed(2)};};
+test('stage 1 at the phone aspect lasts 85-135 s and is won for base, upgraded and heavy gear (headless bot holding fire)',()=>{
  const profiles=[{},{equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}},{equipment:{weapon:2,rate:1.5,damage:1.8,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3},hangar:{rapid:20},power:1.45}];
- for(const profile of profiles){const rs=[1,2,3].map(s=>stage(1,s,{profile})),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=85&&avg<=135,`avg ${avg} for ${JSON.stringify(profile)}`);assert.ok(rs.every(r=>r.shotsPerSec<=8),rs.map(r=>r.shotsPerSec).join());}
+ for(const profile of profiles){const rs=[1,2,3].map(s=>playPhone(s,profile)),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=85&&avg<=135,`avg ${avg} for ${JSON.stringify(profile)} ${JSON.stringify(rs)}`);assert.ok(rs.every(r=>r.outcome==='win'),JSON.stringify(rs));assert.ok(rs.every(r=>r.shotsPerSec<=8),rs.map(r=>r.shotsPerSec).join());}
+ const old=stage(1,1,{});assert.ok(old.fired>0,'the aspect-1 sim still runs');
 });
 test('v15 cannon convergence: at the phone aspect (844x390) straight wing shots miss an alien centred on the ship, converging shots hit it',()=>{
  const phone=(844/390)/(360/480);
@@ -84,15 +91,6 @@ test('v15 cannon convergence: at the phone aspect (844x390) straight wing shots 
  assert.ok(straight.hits<=straight.fired*.1,`v14 straight shots from the wings: ${straight.hits}/${straight.fired} hits`);
  assert.ok(converging.hits>=converging.fired*.8,`v15 converging shots: ${converging.hits}/${converging.fired} hits`);
  assert.ok(Math.abs(convergeVx(1,11.3,460,cfg))>0&&convergeVx(1,11.3,460,cfg)<0&&convergeVx(-1,11.3,460,cfg)>0);
-});
-test('stage 1 at the phone aspect (844x390, hit test stretched 2.9x): the bot wins in 85-135 s',()=>{
- const phone=(844/390)/(360/480);
- const play=(seed)=>{const m=make({random:seededRandom(seed)});m.effectAspect=phone;
-  for(let f=0;f<30*300&&!m.result;f++){const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>14);if(!safe(want)){out:for(let d=0;d<=360;d+=3)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>18&&x<342&&safe(x)){want=x;break out;}}}
-   m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),firing:true});}
-  return {seconds:+m.time.toFixed(1),outcome:m.result?.outcome||'timeout',fired:m.snapshot().fired,hits:m.snapshot().hits};};
- const rs=[1,2,3].map(play),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;
- assert.ok(rs.every(r=>r.outcome==='win'),JSON.stringify(rs));assert.ok(avg>=85&&avg<=135,`avg ${avg} ${JSON.stringify(rs)}`);
 });
 test('v15 single-shot audio: plays the boar rifle layers on its own context, respects the island mute key',()=>{
  const made=[];class FakeContext{constructor(){this.state='running';this.currentTime=0;this.sampleRate=8000;this.destination={};}createGain(){const g={gain:{value:1,setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}};return g;}createBuffer(c,l){return {getChannelData(){return new Float32Array(l);}};}createBufferSource(){const s={buffer:null,playbackRate:{value:1},connect(){},start(){made.push('noise');},stop(){}};return s;}createBiquadFilter(){return {type:'',Q:{value:0},frequency:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}};}createOscillator(){return {type:'',frequency:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){},start(){made.push('tone');},stop(){}};}resume(){return Promise.resolve();}suspend(){return Promise.resolve();}close(){return Promise.resolve();}}
