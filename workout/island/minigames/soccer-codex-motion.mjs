@@ -84,4 +84,49 @@ export function soccerV10FirstTouchClip(height,speed,id,has){
 /** Clips that play to their end: the v9 held ones plus the cuts and the first touches. */
 export const soccerV10Held=state=>state.startsWith('v10_cut_')||state.startsWith('v10_first_touch_');
 /** What the match loaded, as a line for the load report and the debug view. */
-export function soccerMotionLoadSummary(counts,errors){return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
+export function soccerMotionLoadSummary(counts,errors){const v12=counts.v12&&!counts.v12.error?`, v12 repaired ${(counts.v12.v9Replaced||0)+(counts.v12.v10Replaced||0)}`:'';const v11=counts.v11?`, v11 ${counts.v11}`:'';return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}${v11}${v12}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
+
+/** Codex soccer-v11 repaired keeper dives (motion-fix-v12 catalog, 96.7 QA score, 0 red metrics): the low and middle dives to either side replace the
+ * v8 ones. Opt-in (`?soccerKeeperV11=1`, default off): the clips are authored with the sideways travel as root motion ("simulation-owned"), and whether the game's own dive travel looks right with them cannot be verified without a screen. The catch event stands in for the glove contact; the clip has no takeoff event, so the push-off is taken
+ * at 45% of the way to the contact, as the v8 plan does when a clip lacks one. */
+export const soccerKeeperV11Enabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerKeeperV11')==='1';
+export const soccerV11ClipsUrl=()=>new URL('../assets/soccer-v11/clips.json',import.meta.url).href;
+export const SOCCER_V11_PREFIX='v11_';
+export function soccerV11States(json){
+  if(!json||json.schemaVersion!==1||!json.states)throw Error('Soccer v11 clips: unexpected file');
+  return Object.fromEntries(Object.entries(json.states).map(([name,state])=>[SOCCER_V11_PREFIX+name,{...state,clip:SOCCER_V11_PREFIX+name}]));
+}
+export function soccerV11DiveClip(left,ballHeight,has){
+  if(ballHeight>1.35)return null;
+  const name=SOCCER_V11_PREFIX+(left?'keeper_dive_left':'keeper_dive_right');
+  return has(name)?name:null;
+}
+export function soccerV11DivePlan(state,{lead=.1,reachSeconds=.5,settleRate=1.15}={}){
+  const contact=state?.events?.find(e=>e.name==='visual_catch')?.timeSeconds;
+  if(!(contact>0))return null;
+  const at=Math.max(0,contact*.45-lead);return {at,contact,rate:Math.max(1,(contact-at)/reachSeconds),settleRate};
+}
+/** Codex motion-fix-v12: repaired versions (core range only, 0 red metrics) of the v9 and v10 clips. On by default; `?soccerMotionV12=0` keeps the
+ * v9/v10 clips as shipped. Needs the v9/v10 layers: it replaces their states, and adds the v10 cuts the 70 degree/key gate removed when the
+ * repaired version passes the same gate AND `?soccerCuts=all` is set: the repaired left cuts still show a 30 degree LeftArm step on exit into the run (measured), so they stay opt-in. */
+export const soccerMotionV12Enabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerMotionV12')!=='0';
+export const soccerV12ClipsUrl=()=>new URL('../assets/soccer-v12/clips.json',import.meta.url).href;
+/** Locomotion cycles stay as shipped: the repaired run, sprint and run_brake are re-timed (sprint x2.14, run and run_brake x1.2) and the speed
+ * ladder's stride matching (clip speed in m/s) was calibrated on the original cycle; measured: sprint 3.1 -> 1.5 steps/s, hips bob 2.5 -> 13.9 cm. */
+export const SOCCER_V12_KEEP=Object.freeze(['walk','jog','run','sprint','run_brake','run_backward','turn_in_place']);
+export function soccerV12Overlay(json,{v9={},v10={}}={},search=globalThis.location?.search||''){
+  const cutsAll=new URLSearchParams(search).get('soccerCuts')==='all';
+  if(!json||json.schemaVersion!==1||!json.libraries)throw Error('Soccer v12 clips: unexpected file');
+  const merge=(base,prefix,clips,gate)=>{
+    const out={...base};let replaced=0,added=0;
+    for(const [id,fix] of Object.entries(clips||{})){
+      const name=prefix+id,old=base[name];
+      if(SOCCER_V12_KEEP.includes(id)||gate&&fix.maxKeyDeg>SOCCER_V10_MAX_KEY_DEG){continue;}
+      if(old){const {timeScale,...rest}=fix;out[name]={...old,...rest,clip:name,supports:old.supports,entry:old.entry,exit:old.exit};replaced++;}
+      else if(prefix===SOCCER_V10_PREFIX&&cutsAll){const {timeScale,...rest}=fix;out[name]={...rest,clip:name,supports:[],entry:null,exit:null};added++;}
+    }
+    return {states:out,replaced,added};
+  };
+  const a=merge(v9,SOCCER_CODEX_PREFIX,json.libraries.v9,false),b=merge(v10,SOCCER_V10_PREFIX,json.libraries.v10,true);
+  return {v9:a.states,v10:b.states,counts:{v9Replaced:a.replaced,v10Replaced:b.replaced,v10Added:b.added}};
+}

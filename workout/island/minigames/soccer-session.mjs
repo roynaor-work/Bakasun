@@ -1,20 +1,20 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-8';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261107-8';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-8';
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-8';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-8';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-8';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-8';
-import {createControls} from './controls.mjs?v=island-v2-20261107-8';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-9';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261107-9';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-9';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-9';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-9';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-9';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-9';
+import {createControls} from './controls.mjs?v=island-v2-20261107-9';
 import {withSoccerV7Kits} from './soccer-v7.mjs';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-8';
-import {gameContext} from './context.mjs?v=island-v2-20261107-8';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-9';
+import {gameContext} from './context.mjs?v=island-v2-20261107-9';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
-import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-8';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-9';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
 
@@ -85,9 +85,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-8',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-9',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-8',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-9',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
@@ -185,7 +185,7 @@ export function startSoccer(ctx) {
       // While the loading panel is up nothing is drawn: rendering the dimmed fallback
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
@@ -201,7 +201,7 @@ export function startSoccer(ctx) {
         // Full time: three bonus kicks from the spot, same rival keeper and difficulty.
         shootout={match:model.result};model=createSoccerPenalties({config:balance,stage:context.level,seed:(seed^0x5bd1e995)>>>0,team,difficulty:context.difficulty,card:context.soccerCard,league:true});
         if(contracts)model.setDesignTactics?.(contracts.tactics);
-        input?.reset();model.clearInput();model.drainEvents();hudSignature='';mode='';audio.play('whistle');updateHud();frame=requestAnimationFrame(tick);return;
+        input?.reset();model.clearInput();model.drainEvents();hudSignature='';mode='';audio.whistle('shootout',{force:true});updateHud();frame=requestAnimationFrame(tick);return;
       }
       if(model.result){const m=shootout?shootout.match:model.result;if(telemetry)telemetry.save(storage,telemetry.summary(m));ctx.finish(context.drill?{drill:model.result}:{outcome:m.won?'win':'lose',score:m.goalsFor,performance:m.won?1:0,soccer:m,...(shootout?{penalties:{attempts:model.result.attempts,hits:model.result.hits}}:{})});return;}
       frame=requestAnimationFrame(tick);
