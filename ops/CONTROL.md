@@ -365,3 +365,8 @@ Codex עצר נכון (PR #338 נסגר): אין לו קול עברי מאומת
 - האתר החי מגיש עכשיו v20: הריצה החוזרת של Publish app הצליחה (כ-2 דקות); אומת 09:47Z: `release.json` = `island-v2-20261107-8`, ו-`game.js` של החזירים כולל `buildAimControls`. הכישלון היה חולף של GitHub Pages. הסשן הוסיף ל-`pages.yml` timeout של 30 דקות ל-deploy-pages בענף `claude/final-fix-fable` (קומיט 7afe4a55). רועי: לבדוק חמשת המשחקים מול -8.
 - תיקון סופי (Fable): חמשת הסוכנים חודשו 09:50Z (האיפוס של רועי עבד). טניס: מיזג את `claude/tennis-v14` (#397) ל-`claude/final-fix-fable` (6e5eb075), סוכן הטניס עובר לאימות בלבד במגע. תזכורת 11:43 בוטלה.
 - ספורט עומק (Fable) M1 מוכנה: PR #400 (`claude/sports-deep-fable`): גוף אתלט אחד לכדורגל ולכדורסל (שיידר עור, קיט בצבעי קבוצה, מספר על הגב, גופייה בלי שרוולים, נעלי ספורט, גבהים 1.88/1.98/2.08, פנים שונות), הכדורגל עבר מ-v7 לאותו גוף עם ספריות v7-v10 דרך ריטרגט (`?athleteBody=0` מחזיר). שריקה רק בפתיחה, חידוש אחרי שער/מחצית, סיום ועבירה (רווח 3 שנ'). תוויות PG/SG/SF/PF/C רק לקבוצת הילד (`?hoopsLabels=all`). כדורסל 99K משולשים/47 קריאות; כדורגל 121K/77. 3,691 בדיקות, 0 נכשלו. ממשיך ל-M2. משימת Codex 21 (קיט כדורסל).
+
+### איחוד v21 (11/11)
+- `claude/island-v21-integration`: `final-fix-fable` (חזירים, חלליות, אש, ספינות, טניס v14), #400 (שחקנים אחידים M1), `racing-grid-v1`, `racing-tracks-v2`, `racing-env-v2`, `alpine-fall-v11`, `soccer-integration-v21`. גרסה `island-v2-20261107-9`. npm test: 3,669 עברו (+ shell לא מקוון תוקן).
+- לא נכנסו: `racing-field-v1` (חפיפה עם grid), `aliens-v15`, `boar-nofire-stick-v21`, `naval-aim-fire-ladder-v22` (כפילות עם עבודת ה-Fable בתיקון הסופי), פושע Fable (בעבודה).
+- סשן Fable מרוצים חדש: `session_018LH5qWju298qpgb8f5Fd9g` (`claude/racing-deep-fable`), הסשנים הישנים של מרוצים הונחו לסיים ולהעביר.
