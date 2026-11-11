@@ -14,6 +14,7 @@ const ISLAND=new URLSearchParams(location.search).has('island');
 // 06/11/2026 polish; `?boar=v1` restores the previous behaviour (no last stand, no low-health warning, desktop hint only).
 const LEGACY=new URLSearchParams(location.search).get('boar')==='v1';
 if(LEGACY){setLegacy(true);WEAPON_ORDER.length=4;}
+const BOAR_BUILD='11-11-nofire'; // shown on the menu: if a phone shows no build tag it is running an older cached game.js
 let lastStandUsed=false,lowWarned=false;
 // 07/11/2026 (Roy): on touch the aim is the left stick and a screen touch never fires; only the big fire button shoots. `?boar=v1` restores touch-to-aim-and-fire.
 let AIMSTICK=!LEGACY&&(TOUCH||(navigator.maxTouchPoints||0)>0||'ontouchstart' in window||new URLSearchParams(location.search).get('touch')==='1');
@@ -164,6 +165,7 @@ function init(){
   updateQualityLabel();
   setMode('menu');resize();updateStartLabel();
   if(AIMSTICK)buildAimControls();
+  {const v=document.querySelector('.version');if(v)v.textContent+=` · build ${BOAR_BUILD}`;}
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
