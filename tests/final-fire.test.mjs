@@ -6,13 +6,14 @@ import {fireV21,fireV20} from '../workout/island/minigames/polish-flag.mjs';
 import {pumperFileTurn} from '../workout/island/minigames/fire-v7.mjs';
 import {ladderArmPose,autoBalanceSteer,createFireLadder} from '../workout/island/minigames/fire-ladder.mjs';
 import {nextRescueLatch} from '../workout/island/minigames/fire-session.mjs';
+import {waterGaugeState} from '../workout/island/minigames/fire-ui.mjs';
 import {createFireModel} from '../workout/island/minigames/fire.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.fireRescue;
 const deg=r=>r*180/Math.PI;
 
 test('final fire: every v21 flag is on by default and each value switches one step back',()=>{
- for(const f of ['fireHeading','fireTruckModel','fireLadder','fireRescue']){
+ for(const f of ['fireHeading','fireTruckModel','fireLadder','fireRescue','fireHud']){
   assert.equal(fireV21(f,''),true);assert.equal(fireV21(f,`?${f}=v20`),false);assert.equal(fireV21(f,`?${f}=v19`),false);assert.equal(fireV21(f,'?fireTruck=v1'),false);
   assert.equal(fireV20(f,`?${f}=v20`),true,'v20 keeps the v20 behaviour under the v21 switch');
  }
@@ -70,4 +71,13 @@ test('final fire: a latched rescue input (no hold) completes the stage-3 rescue 
  for(let i=0;i<120;i++)m.update(.02,{}); // the person climbs down for descentSeconds first
  assert.equal(m.ladder.extension,0,'ladder folds back after the rescue');
  delete globalThis.location;
+});
+test('final fire: the water gauge reads percent of the tank and turns orange, then red at the low-water ratio, green while refilling',()=>{
+ assert.deepEqual(waterGaugeState(110,110,.2),{percent:100,level:'ok'});
+ assert.deepEqual(waterGaugeState(40,110,.2),{percent:36,level:'ok'});
+ assert.deepEqual(waterGaugeState(38,110,.2),{percent:35,level:'low'});
+ assert.deepEqual(waterGaugeState(22,110,.2),{percent:20,level:'critical'});
+ assert.deepEqual(waterGaugeState(0,110,.2),{percent:0,level:'critical'});
+ assert.deepEqual(waterGaugeState(22,110,.2,true),{percent:20,level:'refilling'});
+ assert.deepEqual(waterGaugeState(5,0,.2),{percent:0,level:'critical'});
 });
