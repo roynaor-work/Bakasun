@@ -4,6 +4,7 @@
 import * as THREE from '../vendor/three.module.js';
 import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-8';
 import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-8';
+import {hoopsNumbersTexture} from './hoops-athlete.mjs';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
@@ -79,9 +80,11 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
  const avatars=new Map(),cards=new Map(),pending=[],kits=new Map();
  for(const t of teams)for(const card of t.players){cards.set(card.id,{card,look:t.look});pending.push(card.id);}
+ // the athlete body prints the player's number on the back: one texture cell per card (built once, on the first avatar)
+ let numbersTex=null;const numbers=()=>numbersTex||(numbersTex=assets.athlete?hoopsNumbersTexture([...cards.values()].map(c=>c.card)):null);
  function ensureAvatar(id){
   let av=avatars.get(id);if(av||!cards.has(id))return av;
-  const {card,look}=cards.get(id);av=createAvatar(assets,card,look,{baseHeights:config.assets.baseHeights});av.root.visible=false;scene.add(av.root);avatars.set(id,av);if(reflection)reflectable(av.root);for(let i=0;i<teams.length;i++)if(kits.has(i)&&teams[i].players.some(p=>p.id===id))av.applyKit(kits.get(i));
+  const {card,look}=cards.get(id);av=createAvatar(assets,card,look,{baseHeights:config.assets.baseHeights,numbers:numbers(),cell:[...cards.keys()].indexOf(id)});av.root.visible=false;scene.add(av.root);avatars.set(id,av);if(reflection)reflectable(av.root);for(let i=0;i<teams.length;i++)if(kits.has(i)&&teams[i].players.some(p=>p.id===id))av.applyKit(kits.get(i));
   const i=pending.indexOf(id);if(i>=0)pending.splice(i,1);
   return av;
  }
@@ -211,6 +214,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
+  // the athlete body has an economy mesh: the four players nearest the camera (and the ball handler and the child) keep the full one
+  if(assets.athlete){const list=[];for(const av of avatars.values()){if(!av.root.visible||!av.setLod)continue;const d=camera.position.distanceTo(av.root.position)-(av.card.id===handler?.id||av.card.id===me?.id?8:0);list.push([d,av]);}list.sort((a,b)=>a[0]-b[0]);list.forEach(([,av],i)=>av.setLod(i<(quality>=2?4:2)?0:1));}
   // contact shadow blobs follow every visible player, shrinking and fading as he leaves the floor
   let bi=0;
   for(const av of avatars.values()){if(!av.root.visible||bi>=32)continue;const h=av.root.position.y,k=Math.max(0.35,1-h*0.9);blobM.makeScale(k,1,k);blobM.setPosition(av.root.position.x,FLOOR_Y,av.root.position.z);blobs.setMatrixAt(bi++,blobM);}
@@ -323,7 +328,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;

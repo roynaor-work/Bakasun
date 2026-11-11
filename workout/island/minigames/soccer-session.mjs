@@ -185,7 +185,7 @@ export function startSoccer(ctx) {
       // While the loading panel is up nothing is drawn: rendering the dimmed fallback
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.play('whistle');}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
@@ -201,7 +201,7 @@ export function startSoccer(ctx) {
         // Full time: three bonus kicks from the spot, same rival keeper and difficulty.
         shootout={match:model.result};model=createSoccerPenalties({config:balance,stage:context.level,seed:(seed^0x5bd1e995)>>>0,team,difficulty:context.difficulty,card:context.soccerCard,league:true});
         if(contracts)model.setDesignTactics?.(contracts.tactics);
-        input?.reset();model.clearInput();model.drainEvents();hudSignature='';mode='';audio.play('whistle');updateHud();frame=requestAnimationFrame(tick);return;
+        input?.reset();model.clearInput();model.drainEvents();hudSignature='';mode='';audio.whistle('shootout',{force:true});updateHud();frame=requestAnimationFrame(tick);return;
       }
       if(model.result){const m=shootout?shootout.match:model.result;if(telemetry)telemetry.save(storage,telemetry.summary(m));ctx.finish(context.drill?{drill:model.result}:{outcome:m.won?'win':'lose',score:m.goalsFor,performance:m.won?1:0,soccer:m,...(shootout?{penalties:{attempts:model.result.attempts,hits:model.result.hits}}:{})});return;}
       frame=requestAnimationFrame(tick);

@@ -10,6 +10,8 @@ import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,val
 import {soccerMotionV10Enabled,soccerV10ClipsUrl,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
+import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
+import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -212,6 +214,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   };
   const clean=[],boneByName={};let cleanSaved=false;
   mixer.getRoot().traverse(bone=>{if(bone.isBone){clean.push({bone,q:bone.quaternion.clone(),p:bone.position.clone()});boneByName[bone.name]=bone;}});
+  for(const [alias,name] of Object.entries(ATHLETE_ALIASES))if(!boneByName[alias]&&boneByName[name])boneByName[alias]=boneByName[name]; // the athlete rig names the chest Spine1
   // Procedural arm swing over the locomotion clips (see soccer-arm-swing.mjs).
   const standLayer={weight:0,breath:0},standPose={},standOn=soccerMotionV9Enabled();
   const arm={phase:0,weight:0,sprint:0,carry:0},armPose={},applyArms=createArmSwingApplier(T,mixer.getRoot(),boneByName);
@@ -356,7 +359,9 @@ export function keeperStand(character,p,s,dt){
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
-let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null;
+let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null,lastAthleteError=null;
+/** Why the shared athlete body was skipped in favour of v7 (null when it loaded or was not asked for). */
+export function soccerAthleteFallbackReason(){return lastAthleteError;}
 /** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
 let lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
@@ -413,6 +418,33 @@ async function prepareV5(loader){
   return finishSources({scenes:glbs.map(g=>g.scene),rig,map:soccerV5Map(map),data,set:'v5',outfield:SOCCER_V5_FILES.outfield.map((_,i)=>i),keeper:files.length-1,
     assign:(geometry,index)=>assignSoccerV5Regions(geometry,SOCCER_V5_REGIONS[files[index]])});
 }
+/** The optional motion packs every body plays (v7 extras, v8, Codex v9, v10); failures are recorded for the load report. */
+async function loadMotionPacks(){
+  const extra=await fetchJson(soccerV7ClipsUrl());
+  let v8={};lastV8Error=null;
+  if(soccerV8Enabled(null,'motion')){try{v8=soccerV8States(await fetchJson(soccerV8ClipsUrl()));}catch(error){lastV8Error=String(error?.message||error);}}
+  lastV10Error=null;let v9={};lastCodexError=null;
+  if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
+  let v10={};
+  if(soccerMotionV10Enabled(null)){try{v10=soccerV10States(await fetchJson(soccerV10ClipsUrl()));}catch(error){lastV10Error=String(error?.message||error);}}
+  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length};
+  return {extra,v8,v9,v10,extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9),...Object.keys(v10)]};
+}
+/** The shared athlete body (athlete-body.mjs, 11/11): one realistic MakeHuman body for soccer and basketball, retargeted from the canonical
+ * library through the world-basis map. LOD1 is the GLB's own economy mesh (same skeleton). Kits, numbers and faces come per player at
+ * instantiation (loadDesignCharacters). `?soccerChars=v7` keeps the GPT v7 bodies. */
+async function prepareAthlete(loader){
+  const [source,library,packs]=await Promise.all([
+    loadAthleteSource(url=>retrying(()=>loader.loadAsync(url),'athlete/athlete.glb'),{T,prepare:scene=>athleteSources(T,scene)}),
+    retrying(()=>loadSoccerRestartMotion(),'motion library'),loadMotionPacks(),
+  ]);
+  const data={...library,states:{...library.states,...packs.extra.states,...packs.v8,...packs.v9,...packs.v10}};
+  const map=athleteRetargetMap(source.rig,data.skeleton.bones);
+  // LOD1 meshes exist in the scene as their own skinned meshes; lodFor pairs each full mesh with the economy mesh of the same material.
+  const lows=new Map();source.scene.traverse(o=>{if(o.isSkinnedMesh&&/LOD1/.test(o.name+' '+(o.parent?.name||'')))lows.set(o.material.name,o.geometry);});
+  return finishSources({scenes:[source.scene],rig:source.rig,map,data,set:'athlete',outfield:[0],keeper:0,validate:()=>{},assign:()=>{},extraClips:packs.extraClips,
+    lodFor:mesh=>{const low=lows.get(mesh.material.name)||mesh.geometry;return [low,low];},extra:{athlete:source}});
+}
 /** GPT v7: player-01 (team A), player-04 (team B), goalkeeper. LOD0 and LOD1 come from the files; LOD1
  * reuses the LOD0 material (it has no textures of its own). Skeleton = canonical source rest, identity retarget. */
 async function prepareV7(loader){
@@ -450,7 +482,11 @@ export function prepareSoccerDesignSources(){
       globalThis.performance?.mark?.('soccer:prepare-fetch-start');
       lastV5Error=null;lastV7Error=null;
       const wanted=soccerCharacterSet();
-      if(wanted==='v7'){
+      if(wanted==='athlete'){
+        try{return await prepareAthlete(loader);}
+        catch(error){lastAthleteError=String(error?.message||error);}
+      }
+      if(wanted==='v7'||wanted==='athlete'){
         try{return await prepareV7(loader);}
         catch(error){lastV7Error=String(error?.message||error);}
       }
@@ -466,7 +502,7 @@ export function prepareSoccerDesignSources(){
 }
 /** Optional authored GLB path for comparison/fallback. The realistic athlete
  * remains the game's default; no textures or decoding are added to that path. */
-export async function loadDesignCharacters({config,roster,scene,track=x=>x,selectedKit=null}) {
+export async function loadDesignCharacters({config,roster,scene,track=x=>x,selectedKit=null,numbers=null}) {
   const resources=new Set(),characters=[];
   const own=value=>(resources.add(value),track(value),value);
   let disposed=false;
@@ -475,12 +511,37 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
     for(const r of resources)r.dispose?.();resources.clear();
   };
   try {
-    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource}=await prepareSoccerDesignSources();
+    const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource,athlete:athleteSource}=await prepareSoccerDesignSources();
     globalThis.performance?.mark?.('soccer:characters-instance-start');
     const height=config.view.animation.characterHeight||1.8;
     let triangles=0,lowTriangles=0,mobileTriangles=0;
+    const a=config.view.athlete||{};
     for(let id=0;id<roster.length;id++) {
-      const slot=roster[id],isKeeper=slot.role==='keeper',isV7=set==='v7',index=isKeeper?keeperSource:isV7?outfield[slot.team===0?0:1]:outfield[roster.slice(0,id).filter(other=>other.role!=='keeper').length%outfield.length],source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
+      const slot=roster[id],isKeeper=slot.role==='keeper';
+      if(set==='athlete'){
+        // the shared body: kit shader per team (selected kit for the child's outfield players), face/skin profile per slot, number from the roster
+        const team=slot.team===0?config.team:config.opponent,profile=(a.profiles||[{skin:'#c08a68',hair:'#1f1712'}])[id%(a.profiles?.length||1)];
+        const kit=athleteKitFor('soccer',team.colors,{keeper:isKeeper,keeperColor:a.keeperColors?.[slot.team]||'#cf9d2e',selected:slot.team===0&&!isKeeper?selectedKit:null});
+        const inst=createAthleteInstance(T,athleteSource,{createMaterials:createAthleteMaterials,cloneRig:cloneSoccerRig,profile,kit,number:id,numbers,track:own,style:'soccer',height:athleteHeight('soccer',isKeeper?'keeper':'field',isKeeper?(a.keeperHeight||height*1.033):height)});
+        const pivot=new T.Group();pivot.add(inst.root);scene.add(pivot);
+        triangles+=inst.meshes.full.reduce((n,o)=>n+(o.geometry.index?.count||o.geometry.attributes.position.count)/3,0);const lowCount=inst.meshes.low.reduce((n,o)=>n+(o.geometry.index?.count||o.geometry.attributes.position.count)/3,0);lowTriangles+=lowCount;mobileTriangles+=lowCount;
+        const mixer=new T.AnimationMixer(inst.root),motion=createSoccerDesignMotion(mixer,clipSets[0],data,config);
+        let characterDisposed=false;
+        const character={design:true,v7:false,athleteBody:true,root:inst.root,pivot,mixer,motion,team:slot.team,keeper:isKeeper,active:data.initialState,mode:'idle',yaw:null,restartContactMap:map,materials:inst.materials,kit,profile,
+          setLod(level){return inst.setLod(level);},
+          update(p,s,animation,dt){
+            if(characterDisposed)return;
+            const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:Math.atan2(p.fx,p.fz);
+            if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*18));
+            pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
+            this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
+          },
+          metrics:()=>({kind:'athlete-body',set,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod:inst.lod,heightMetres:inst.height,armSwing:motion.armSwing.weight,slide:motion.slide}),
+          dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(inst.root);inst.dispose();pivot.removeFromParent();},
+        };
+        mixer.update(0);characters.push(character);continue;
+      }
+      const isV7=set==='v7',index=isKeeper?keeperSource:isV7?outfield[slot.team===0?0:1]:outfield[roster.slice(0,id).filter(other=>other.role!=='keeper').length%outfield.length],source=sources[index],root=cloneSoccerRig(source),pivot=new T.Group();
       const variation=isV7?soccerV7Variation(id):null;
       root.scale.setScalar(soccerMetreScale(sourceHeights[index],height)*(variation?.scale||1));pivot.add(root);scene.add(pivot);
       const team=slot.team===0?config.team:config.opponent;
@@ -528,6 +589,6 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
       mixer.update(0);characters.push(character);
     }
     globalThis.performance?.mark?.('soccer:characters-instance-end');
-    return {characters,metrics:{kind:'design-glb-v2',characterSet:set,source:set==='v7'?'assets/soccer-v7':set==='v5'?'assets/soccer-v5':'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:set==='v7'?2:3,independentSkeletons:true,clips:[...clips],retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
+    return {characters,metrics:{kind:set==='athlete'?'athlete-body':'design-glb-v2',characterSet:set,source:set==='athlete'?'assets/athlete':set==='v7'?'assets/soccer-v7':set==='v5'?'assets/soccer-v5':'design/characters2',triangles:triangles/roster.length,eightCharacterTriangles:triangles,economyCharacterTriangles:lowTriangles/roster.length,mobileCharacterTriangles:mobileTriangles/roster.length,meshes:1,lod:0,lodCount:set==='v7'||set==='athlete'?2:3,independentSkeletons:true,clips:[...clips],retarget:'calibrated-world-basis',floor:'baked-at-load',referenceRootMotion:false,heightMetres:height},dispose};
   }catch(error){dispose();throw error;}
 }
