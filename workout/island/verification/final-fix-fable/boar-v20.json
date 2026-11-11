@@ -98,8 +98,8 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.264,
-    "y": 0.129
+    "x": 0.76,
+    "y": 0.464
    },
    "aimMoved": true
   },
@@ -115,8 +115,8 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.547,
-    "y": 0.079
+    "x": 0.95,
+    "y": 0.331
    },
    "aimMoved": true
   },
@@ -145,9 +145,9 @@
    }
   },
   "twoFingers": {
-   "shots": 10,
+   "shots": 9,
    "nonButton": 0,
-   "button": 10,
+   "button": 9,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
@@ -156,34 +156,36 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimMoved": true,
    "heldFiring": true,
    "heldFireHeld": true,
    "stickActiveWhileHeld": true,
    "shotsAfterButtonRelease": 0,
-   "aimKeptAfterStickRelease": false
+   "aimKeptAfterStickRelease": true
   },
   "strayTapWhileHeld": {
-   "shots": 3,
+   "shots": 1,
    "nonButton": 0,
-   "button": 3,
+   "button": 1,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimMoved": false,
-   "shotsBeforeTap": 11,
-   "firingAfterStrayTap": true,
+   "shotsBeforeTap": 9,
+   "heatAtTap": 26.820000000001638,
+   "firingAfterStrayTap": false,
+   "fireHeldAfterStrayTap": true,
    "shotsAfterStrayTap": 0
   },
   "keyboardF": {
@@ -194,12 +196,12 @@
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimMoved": false
   },
@@ -211,12 +213,12 @@
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimMoved": false
   },
@@ -228,21 +230,22 @@
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.627
+    "x": 0.947,
+    "y": 0.566
    },
    "aimMoved": false,
    "heldFiring": true
   }
  },
  "final": {
-  "shots": 15,
+  "shots": 12,
+  "heat": 20.47500000000162,
   "shotsBy": {
-   "button": 15,
+   "button": 12,
    "scene": 0,
    "keyboard": 0,
    "mouse": 0,
@@ -258,8 +261,8 @@
   },
   "abilityFromLeft": 0,
   "aim": {
-   "x": 0.95,
-   "y": 0.627
+   "x": 0.947,
+   "y": 0.566
   },
   "firing": false,
   "stick": false,
@@ -271,7 +274,7 @@
    "LEGACY": false
   },
   "mode": "battle",
-  "hp": 100,
+  "hp": 88.4,
   "enemies": 4
  },
  "errors": [],
@@ -305,8 +308,8 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.264,
-     "y": 0.129
+     "x": 0.76,
+     "y": 0.464
     },
     "aimMoved": true
    }
@@ -326,8 +329,8 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.547,
-     "y": 0.079
+     "x": 0.95,
+     "y": 0.331
     },
     "aimMoved": true
    }
@@ -362,11 +365,11 @@
   },
   {
    "name": "two fingers: shots only from the button, stick active, firing stops when the button is released, aim kept",
-   "pass": false,
+   "pass": true,
    "detail": {
-    "shots": 10,
+    "shots": 9,
     "nonButton": 0,
-    "button": 10,
+    "button": 9,
     "stickNoButton": 0,
     "abilities": 0,
     "abilityFromLeft": 0,
@@ -375,38 +378,40 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.627
+     "x": 0.947,
+     "y": 0.566
     },
     "aimMoved": true,
     "heldFiring": true,
     "heldFireHeld": true,
     "stickActiveWhileHeld": true,
     "shotsAfterButtonRelease": 0,
-    "aimKeptAfterStickRelease": false
+    "aimKeptAfterStickRelease": true
    }
   },
   {
    "name": "stray scene tap while the button is held: firing continues",
    "pass": false,
    "detail": {
-    "shots": 3,
+    "shots": 1,
     "nonButton": 0,
-    "button": 3,
+    "button": 1,
     "stickNoButton": 0,
     "abilities": 0,
     "abilityFromLeft": 0,
     "aimFrom": {
-     "x": 0.95,
-     "y": 0.627
+     "x": 0.947,
+     "y": 0.566
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.627
+     "x": 0.947,
+     "y": 0.566
     },
     "aimMoved": false,
-    "shotsBeforeTap": 11,
-    "firingAfterStrayTap": true,
+    "shotsBeforeTap": 9,
+    "heatAtTap": 26.820000000001638,
+    "firingAfterStrayTap": false,
+    "fireHeldAfterStrayTap": true,
     "shotsAfterStrayTap": 0
    }
   },
@@ -431,12 +436,12 @@
     "abilities": 0,
     "abilityFromLeft": 0,
     "aimFrom": {
-     "x": 0.95,
-     "y": 0.627
+     "x": 0.947,
+     "y": 0.566
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.627
+     "x": 0.947,
+     "y": 0.566
     },
     "aimMoved": false,
     "heldFiring": true
@@ -447,7 +452,7 @@
    "pass": true,
    "detail": {
     "shotsBy": {
-     "button": 15,
+     "button": 12,
      "scene": 0,
      "keyboard": 0,
      "mouse": 0,
