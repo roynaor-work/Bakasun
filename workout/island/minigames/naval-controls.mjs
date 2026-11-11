@@ -1,5 +1,5 @@
 import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-8';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample} from './naval-aim-flag.mjs';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalTapAim,navalEdgeReach,navalReleaseSample} from './naval-aim-flag.mjs';
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-8';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
@@ -91,15 +91,17 @@ export function createNavalInput(ctx,getModel,getView){
  const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
   if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,reachConfig);}
   else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,reachConfig);
-  if(g.engaged&&navalAimWide())g.aim={...g.aim,yaw:g.start.yaw+navalWideYaw(g.dx,balance.aimControls?{aimControls:balance.aimControls}:{})};
+  if(g.engaged&&navalAimWide()){const W=canvas.getBoundingClientRect().width||innerWidth,avail=g.dx>=0?W-(g.x0??g.x):(g.x0??g.x);g.aim={...g.aim,yaw:g.start.yaw+navalWideYaw(g.dx,balance.aimControls?{aimControls:balance.aimControls}:{},navalEdgeReach()?avail:Infinity)};}
   g.lastX=x;g.lastY=y;g.lastT=t??performance.now();if(g.aim)(g.hist||(g.hist=[])).push({t:g.lastT,yaw:g.aim.yaw,elevation:g.aim.elevation});if(g.hist?.length>40)g.hist.shift();};
  const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
  const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance,m?.ammoIndex),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
  const finish=(g,x,y,t)=>{settle(g,x,y,t);if(!navalAimLegacy())navalReleaseSample(g,c.assist?.releaseLagMs??0);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(!g.engaged&&s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
- const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
+ const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,x0:e.clientX,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
  fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
- canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);
+ canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;
+  // 11/11/2026: a tap on any water point aims the turret at it (no shot); the aim stays until the next drag. `?navalAim=v19` or `v1` turns it off.
+  else if(navalTapAim()&&!gesture&&!keyboard){const m=getModel(),cam=m?.camera;if(m&&cam&&!m.result){const w=navalWaterAt(e.clientX-r.left,e.clientY-r.top,cam,r.width,r.height,balance);if(w)queue.push({type:'aimAt',x:w.x,z:w.z});}}},options);
  window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){moveTo(gesture,e);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
  window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY,e.timeStamp);gesture=null;show(false);cancel.dataset.hot='false';},options);
  window.addEventListener('pointercancel',e=>{if(gesture?.id===e.pointerId){gesture=null;queue.push({type:'cancel'});show(false);}},options);
@@ -118,7 +120,7 @@ export function createNavalInput(ctx,getModel,getView){
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
  return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();controls.classList?.remove('left-handed');},sample(input){
    const m=getModel(),g=gesture||keyboard,event=queue.shift(),live=g?state(g):null;
-   const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
+   const out={...input,targetX:event?.type==='aimAt'?event.x:undefined,targetZ:event?.type==='aimAt'?event.z:undefined,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    out.aimSide=side;pendingSelection=null;
    const b=balance.ballistics||{},power=s?.power??m?.power??1,elev=m?((s?.elevation??m.elevation)-(b.minElevation??3))/((b.maxElevation??42)-(b.minElevation??3)):0;

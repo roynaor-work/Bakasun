@@ -122,3 +122,30 @@ test('Naval v20 air: aircraft arrive on stages 12, 20 and 27, every shot is tele
  }
  for(const stage of [1,5,11])assert.equal(createNavalModel({config,balance:nb,level:stage,seed:1,random:seededRandom(1)}).vulcan,null,'no aircraft on other stages');
 });
+
+import {navalPadReach,navalWideYaw as wideYaw2} from '../workout/island/minigames/naval-aim-flag.mjs';
+import {navalMuzzle} from '../workout/island/minigames/naval-ballistics.mjs';
+import {navalWaterAt} from '../workout/island/minigames/naval-camera.mjs';
+test('Naval v22: from the pad at the screen edge the aim reaches at least 120 degrees to each side, and continuously',()=>{
+ for(const [startX,W] of [[700,844],[760,844],[620,844],[1100,1366],[500,740]]){
+  const r=navalPadReach(startX,W,nb);assert.ok(r.right>=120,`right ${r.right} at ${startX}/${W}`);assert.ok(r.left<=-120&&r.left>=-195,`left ${r.left}`);
+  const avail=W-startX;let last=-1;for(let d=0;d<=avail;d+=3){const y=wideYaw2(d,nb,avail)*180/Math.PI;assert.ok(y>=last,'monotone');last=y;}
+  const near=wideYaw2(60,nb,avail)*180/Math.PI;assert.ok(near<12,`fine control kept in the first 60 px (${near}°)`);
+ }
+ const before=700+0; // v20: 144 px toward the screen edge was all the room
+ assert.ok(wideYaw2(144,nb,Infinity)*180/Math.PI<45,'v20 reached under 45 degrees toward the edge');
+});
+test('Naval v22: a tap on any water point maps to that point and aims the turret at it without a shot',()=>{
+ const m=createNavalModel({config,balance:nb,level:3,seed:0,random:seededRandom(0)});for(let i=0;i<60;i++)m.update(.02,{});
+ const W=844,H=390;let checked=0,aimedOk=0;
+ for(let x=60;x<W;x+=90)for(let y=170;y<H-60;y+=40){
+  const w=navalWaterAt(x,y,m.camera,W,H,nb);if(!w)continue;
+  const T=nb.targeting,inside=w.x>=Math.max(T.minX,m.playerShip.x+40)&&w.x<=T.maxX&&w.z>=T.minZ&&w.z<=T.maxZ&&Math.hypot(w.x-m.playerShip.x,w.z)<=300&&Math.hypot(w.x-m.playerShip.x,w.z)>=90;
+  if(!inside)continue;checked++;
+  const back=projectNavalPoint(navalWorldPoint(w.x,w.z,nb,0),m.camera,W,H);assert.ok(Math.hypot(back.x-x,back.y-y)<1.5,`round trip at ${x},${y}`);
+  const n=createNavalModel({config,balance:nb,level:3,seed:0,random:seededRandom(0)});for(let i=0;i<60;i++)n.update(.02,{});const fired=n.fired;
+  n.update(.02,{targetX:w.x,targetZ:w.z});assert.equal(n.fired,fired,'tapping never fires');
+  const land=n.prediction.landing||n.prediction.end,miss=Math.hypot(land.x-w.x,land.z-w.z);if(miss<8)aimedOk++;
+ }
+ assert.ok(checked>=6,`${checked} points inside the firing arena`);assert.ok(aimedOk/checked>=.8,`${aimedOk}/${checked} taps land within 8 units of the tapped water point`);
+});
