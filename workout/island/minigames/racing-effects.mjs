@@ -16,7 +16,7 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
  // Two instanced meshes = at most two extra draw calls, and none while no car is flipping. crashFx=false (?racingCrashFx=0) keeps the m2 dust and sparks only.
  const DEBRIS=24,TYRES=4,NEAR=70,paint=new T.Color();
  const debrisMaterial=own(new T.MeshStandardMaterial({color:'#ffffff',roughness:.5,metalness:.25}));
- const debrisMesh=new T.InstancedMesh(own(new T.BoxGeometry(.2,.08,.32)),debrisMaterial,DEBRIS);debrisMesh.count=0;debrisMesh.frustumCulled=false;root.add(debrisMesh);
+ const debrisMesh=new T.InstancedMesh(own(new T.BoxGeometry(.3,.1,.42)),debrisMaterial,DEBRIS);debrisMesh.count=0;debrisMesh.frustumCulled=false;root.add(debrisMesh);
  for(let i=0;i<DEBRIS;i++)debrisMesh.setColorAt(i,paint.set('#9aa4aa'));   // creates the per-instance colour buffer once
  const tyreMaterial=own(new T.MeshStandardMaterial({color:'#1b2226',roughness:.92}));
  const tyreMesh=new T.InstancedMesh(own(new T.CylinderGeometry(.33,.33,.3,10)),tyreMaterial,TYRES);tyreMesh.count=0;tyreMesh.frustumCulled=false;root.add(tyreMesh);
