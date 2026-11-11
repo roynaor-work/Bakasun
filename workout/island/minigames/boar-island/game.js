@@ -16,7 +16,7 @@ const LEGACY=new URLSearchParams(location.search).get('boar')==='v1';
 if(LEGACY){setLegacy(true);WEAPON_ORDER.length=4;}
 let lastStandUsed=false,lowWarned=false;
 // 07/11/2026 (Roy): on touch the aim is the left stick and a screen touch never fires; only the big fire button shoots. `?boar=v1` restores touch-to-aim-and-fire.
-const AIMSTICK=!LEGACY&&(TOUCH||new URLSearchParams(location.search).get('touch')==='1');
+let AIMSTICK=!LEGACY&&(TOUCH||(navigator.maxTouchPoints||0)>0||'ontouchstart' in window||new URLSearchParams(location.search).get('touch')==='1');
 let aimStick=null,firePointer=null,aimZone=null,fireBtn=null,aimShots=0;
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
 let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
@@ -633,7 +633,8 @@ function resetWeaponState(){refreshWeaponCache();for(const k of WEAPON_ORDER)wst
 function switchWeapon(k){if(!save.weapons[k]||k===current||mode!=='battle'&&mode!=='paused')return;current=k;swapTimer=.32;sfx.play('swap');buildWeaponBar();}
 function startReload(k=current){const s=wstate[k],ws=wsCache[k];if(ws.mode!=='mag'||s.reload>0||s.ammo>=ws.mag)return;s.reload=ws.reload*(perk==='cool'?.75:1)/(furyTimer>0?3:1);s.reloadMax=s.reload;if(k===current)sfx.play('reload');}
 function updateWeapons(dt){
-  const st=stats(save);const firingInput=(pointer.down||keys.has('KeyF'))&&swapTimer<=0;
+  const st=stats(save);if(AIMSTICK&&pointer.down&&!fireAllowed())pointer.down=false;
+  const firingInput=(pointer.down||keys.has('KeyF'))&&swapTimer<=0;
   for(const k of WEAPON_ORDER){const s=wstate[k],ws=wsCache[k];if(!save.weapons[k])continue;s.cool-=dt;
     if(ws.mode==='heat'){const firing=k===current&&firingInput&&!s.overheated;const ht=tickHeat(s.heat,dt,firing,st.cooling*WEATHER[weatherKind].cooling,furyTimer>0,perk,ws.heatPerShot*ws.rate);s.heat=ht.heat;
       if(ht.overheated&&!s.overheated){s.overheated=true;if(k===current){toast('הנשק התחמם · תנו לו להתקרר');sfx.play('overheat');for(let i=0;i<8;i++)sprite(TEX.smoke,muzzleWorld(gunModels[k],i),.6,.8,{additive:false,grow:2.5,rise:1.5,opacity:.4,color:'#cfd6da'});}}
@@ -716,8 +717,14 @@ function buildAimControls(){
   aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,dz=.12,mag=m<dz?0:(m-dz)/(1-dz);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
   for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on');rest.hidden=false;});
   fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;pointer.down=true;fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
-  for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;firePointer=null;pointer.down=false;fireBtn.classList.remove('held');});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;releaseFire();});
 }
+// 11/11/2026 (Roy, second report): the screen is never a fire button once a touch has been seen on this device, whatever the pointer type
+// or media query said at load. The first real touch switches the controls on (stick left, one fire button right); firing then comes only
+// from that button (or the keyboard F), never from the stick, the scene, a mouse button or a leftover pointer.
+function enableAimControls(){if(AIMSTICK&&aimZone)return;AIMSTICK=true;if(!aimZone)buildAimControls();aimZone.hidden=fireBtn.hidden=mode!=='battle';}
+function fireAllowed(){return !AIMSTICK||firePointer!==null||Boolean(bot)||qaFire;}
+let qaFire=false;
 function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;pointer.x=clamp(pointer.x+aimStick.vx*dt*1.6,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*1.3,-.85,.85);}
 function buildWeaponBar(){
   const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
@@ -814,13 +821,18 @@ function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWi
 
 // ---------- input ----------
 function pointAbs(e){const r=$('scene').getBoundingClientRect();pointer.x=clamp((e.clientX-r.left)/r.width*2-1,-1,1);pointer.y=clamp(-((e.clientY-r.top)/r.height)*2+1,-1,1);}
-$('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||AIMSTICK&&e.pointerType==='touch')return;
+$('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||AIMSTICK&&e.pointerType!=='mouse')return;
   if(e.pointerType==='touch'){if(!touchAim||touchAim.id!==e.pointerId)return;const r=$('scene').getBoundingClientRect();pointer.x=clamp(pointer.x+(e.clientX-touchAim.x)/r.width*2*1.5,-.95,.95);pointer.y=clamp(pointer.y-(e.clientY-touchAim.y)/r.height*2*1.5,-.85,.85);touchAim.x=e.clientX;touchAim.y=e.clientY;}
   else pointAbs(e);});
-$('scene').addEventListener('pointerdown',e=>{if(mode!=='battle'||AIMSTICK&&e.pointerType==='touch')return;e.preventDefault();sfx.init();
+$('scene').addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'&&!LEGACY&&!AIMSTICK)enableAimControls();if(mode!=='battle'||AIMSTICK)return;e.preventDefault();sfx.init();
   if(e.pointerType==='touch'){if(touchAim)return;touchAim={id:e.pointerId,x:e.clientX,y:e.clientY};}else pointAbs(e);
   pointer.down=true;try{$('scene').setPointerCapture(e.pointerId);}catch{}});
 for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(touchAim&&e.pointerId!==touchAim.id)return;pointer.down=false;touchAim=null;});
+window.addEventListener('pointerdown',e=>{if(!LEGACY&&e.pointerType!=='mouse'&&!AIMSTICK)enableAimControls();},{capture:true,passive:true});
+function releaseFire(){firePointer=null;if(!bot&&!qaFire)pointer.down=false;fireBtn?.classList.remove('held');}
+for(const ev of ['pointerup','pointercancel'])window.addEventListener(ev,e=>{if(AIMSTICK&&firePointer!==null&&e.pointerId===firePointer)releaseFire();},{capture:true,passive:true});
+for(const ev of ['touchend','touchcancel'])window.addEventListener(ev,e=>{if(AIMSTICK&&firePointer!==null&&e.touches.length===0)releaseFire();},{capture:true,passive:true});
+document.addEventListener('visibilitychange',()=>{if(AIMSTICK)releaseFire();});
 $('scene').addEventListener('wheel',e=>{if(mode!=='battle')return;const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);const i=owned.indexOf(current);switchWeapon(owned[(i+(e.deltaY>0?1:-1)+owned.length)%owned.length]);},{passive:true});
 window.addEventListener('blur',()=>{if(QA)return;pointer.down=false;touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
 document.addEventListener('visibilitychange',()=>{if(QA)return;visible=!document.hidden;if(!visible&&!ISLAND&&mode==='battle')setMode('paused');lastTime=performance.now();});
@@ -897,7 +909,7 @@ function installQA(){
   window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
-    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){pointer.down=on;},weapon(k){switchWeapon(k);},
+    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){qaFire=Boolean(on);pointer.down=on;},weapon(k){switchWeapon(k);},
     bot(on,opts={}){bot=on?{...opts}:false;if(!on)pointer.down=false;},speed(n){timeScale=n;},
     rocket,frost,fury:()=>{fury=100;activateFury();},killAll(){for(const e of [...enemies])damageEnemy(e,1e6,{explosive:true});},
     sim(sec,step=1/30){camera.updateMatrixWorld();let n=Math.round(sec/step);while(n-->0&&mode==='battle'){elapsed+=step;updateBattle(step);updateEffects(step);}return mode;},
