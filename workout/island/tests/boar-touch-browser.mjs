@@ -33,17 +33,17 @@ for(const [name,opts] of Object.entries(profiles)){
  let a=await st();await touch('touchStart',[{x:150+24,y:290-16,id:1},{...fc,id:2}]);await until(async()=>(await st()).shots>a.shots);let b=await st();log.push({profile:name,step:'two fingers: button down while stick held',shots:b.shots-a.shots,firing:b.firing,ok:b.shots-a.shots>0&&b.firing});if(!(b.shots>a.shots&&b.firing)){failures++;console.error('FAIL button does not fire',name);}
  await page.screenshot({path:`${out}frames/two-fingers-fire-${name}.jpg`,type:'jpeg',quality:78});
  await touch('touchMove',[{x:210,y:230,id:1},{...fc,id:2}]);await wait(150);
- await touch('touchEnd',[{x:210,y:230,id:1}]); // finger 2 (the button) lifts, finger 1 stays on the stick
+ await touch('touchEnd',[{...fc,id:2}]); // CDP touchEnd lists the points that LIFT: finger 2 (the button) lifts, finger 1 stays on the stick
  await until(async()=>!(await st()).firing,6000);await wait(1500);a=await st();for(let i=1;i<=10;i++){await touch('touchMove',[{x:210-i*6,y:230+i*4,id:1}]);await wait(150);}await wait(800);b=await st();
  log.push({profile:name,step:'button lifted, stick still moving: no more shots',shots:b.shots-a.shots,firing:b.firing,ok:b.shots===a.shots&&!b.firing});if(!(b.shots===a.shots&&!b.firing)){failures++;console.error('FAIL fire stuck after button lift',name);}
- await touch('touchEnd',[]);await wait(200);
+ await touch('touchEnd',[{x:210,y:230,id:1}]);await wait(200);
  // stuck-button insurance: the button finger is cancelled by the system without a pointerup
  await touch('touchStart',[{...fc,id:1}]);await until(async()=>(await st()).firing);await touch('touchCancel',[]);await until(async()=>!(await st()).firing,6000);await wait(1500);a=await st();await wait(1500);b=await st();
  log.push({profile:name,step:'button finger cancelled: fire released',firing:b.firing,shots:b.shots-a.shots,ok:!b.firing&&b.shots===a.shots});if(b.firing||b.shots!==a.shots){failures++;console.error('FAIL fire stuck after cancel',name);}
  // mouse on a touch device: aim, never fire
  await step('mouse press and drag on the scene',async()=>{await page.mouse.move(300,150);await page.mouse.down();await page.mouse.move(520,200,{steps:6});await page.mouse.up();},{expectShots:'none'});
  // the keyboard fire key still works (it is a fire button too) and stops on release
- await step('keyboard F held',async()=>{await page.keyboard.down('KeyF');},{expectShots:'some'});await page.keyboard.up('KeyF');await wait(300);
+ await step('keyboard F held',async()=>{await page.evaluate(()=>document.activeElement?.blur());await page.keyboard.down('KeyF');},{expectShots:'some'});await page.keyboard.up('KeyF');await wait(300);
  log.push({profile:name,errors});if(errors.length){failures++;console.error('page errors',errors);}
  await ctx.close();
 }

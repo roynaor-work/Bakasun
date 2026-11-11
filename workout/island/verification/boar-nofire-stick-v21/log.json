@@ -48,8 +48,8 @@
    "y": -0.05
   },
   "aimAfter": {
-   "x": 0.833,
-   "y": 0.762
+   "x": 0.84,
+   "y": 0.769
   },
   "expect": "none",
   "ok": true
@@ -60,12 +60,12 @@
   "shots": 0,
   "firing": false,
   "aimBefore": {
-   "x": 0.833,
-   "y": 0.762
+   "x": 0.84,
+   "y": 0.769
   },
   "aimAfter": {
-   "x": 0.833,
-   "y": 0.762
+   "x": 0.84,
+   "y": 0.769
   },
   "expect": "none",
   "ok": true
@@ -73,14 +73,14 @@
  {
   "profile": "phone",
   "step": "two fingers: button down while stick held",
-  "shots": 0,
+  "shots": 1,
   "firing": true,
-  "ok": false
+  "ok": true
  },
  {
   "profile": "phone",
   "step": "button lifted, stick still moving: no more shots",
-  "shots": 7,
+  "shots": 6,
   "firing": true,
   "ok": false
  },
@@ -176,8 +176,8 @@
    "y": -0.05
   },
   "aimAfter": {
-   "x": 0.799,
-   "y": 0.729
+   "x": 0.806,
+   "y": 0.736
   },
   "expect": "none",
   "ok": true
@@ -188,12 +188,12 @@
   "shots": 0,
   "firing": false,
   "aimBefore": {
-   "x": 0.799,
-   "y": 0.729
+   "x": 0.806,
+   "y": 0.736
   },
   "aimAfter": {
-   "x": 0.799,
-   "y": 0.729
+   "x": 0.806,
+   "y": 0.736
   },
   "expect": "none",
   "ok": true
@@ -201,9 +201,9 @@
  {
   "profile": "touch-fine-pointer",
   "step": "two fingers: button down while stick held",
-  "shots": 0,
+  "shots": 1,
   "firing": true,
-  "ok": false
+  "ok": true
  },
  {
   "profile": "touch-fine-pointer",
