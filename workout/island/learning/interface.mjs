@@ -1,6 +1,6 @@
-import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-9';
-import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-9';
-import {unpoint} from './questions.mjs?v=island-v2-20261107-9';
+import {createLearningVoice} from './voice.mjs?v=island-v2-20261107-10';
+import {STATIONS,levelForAge,questionsForAge} from './state.mjs?v=island-v2-20261107-10';
+import {unpoint} from './questions.mjs?v=island-v2-20261107-10';
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='learning-answer')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
 const phrase=(text,q)=>q.level<=4?text:unpoint(text);

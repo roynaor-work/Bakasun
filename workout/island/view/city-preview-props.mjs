@@ -1,5 +1,5 @@
 import * as T from '../vendor/three.module.js';
-import {CITY_DIR,LOD_DIR} from './city-models.mjs?v=island-v2-20261107-9';
+import {CITY_DIR,LOD_DIR} from './city-models.mjs?v=island-v2-20261107-10';
 
 /** Model-only extras for the full-city preview, taken from the 58 city models: downtown towers, mall, hotel, cinema,
  * trees, bushes, rocks, traffic lights and a small bridge. They own no game state. Trees, rocks and lights are instanced. */
