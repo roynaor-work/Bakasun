@@ -5,7 +5,7 @@ import {loadData} from '../engine/load-data.mjs';
 import {createEngine} from '../engine/engine.mjs';
 import {createActivity} from '../activity/runtime.mjs';
 import {moneyCandidates,leagueCandidates,pickOffer,createOfferMemory,dismiss,stageEligible,stageKey} from '../ui/upgrade-offer-core.mjs';
-import {PRIZE,applyRace,createLeague,nextSeason,RACES_PER_SEASON} from '../minigames/racing-league-core.mjs';
+import {PRIZE,applyRace,createLeague,nextSeason,racesIn,LEAGUE_IDS,SEASONS} from '../minigames/racing-league-core.mjs';
 
 const root=new URL('../',import.meta.url);
 export const data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
@@ -29,12 +29,13 @@ export function simulateGame(gameId,stages=24,buyEvery=2){
 /** League: three seasons, a race at a time; the child finishes 1st..4th in turn and buys the offer about every other time. */
 export function simulateLeague(buyEvery=2){
   const L=createLeague(),memory=createOfferMemory(),out={gameId:'league',stages:0,eligible:0,offers:0,bought:0,declined:0,offerStages:[],first:null};
-  const ids=['ai-1','ai-2','ai-3','ai-4'];let n=0;
-  for(let season=1;season<=3;season++){
-    for(let r=0;r<RACES_PER_SEASON;r++){
+  // racing-deep-m6: the scoring grid comes from the core (five in the short league, twelve in the long one)
+  const ids=LEAGUE_IDS.slice(1).map((_,i)=>'ai-'+(i+1));let n=0;
+  for(let season=1;season<=SEASONS.length;season++){
+    for(let r=0;r<racesIn(season);r++){
       n++;const place=1+(n%4),order=[...ids];order.splice(place-1,0,'player');
-      const race=L.race,res=applyRace(L,{order:order.slice(0,5),fastestLapId:null});
-      const result={outcome:place<=3?'win':'lose',score:6-place,money:0,stars:0,stage:1,league:{season,race,...res}};out.stages++;out.eligible++;
+      const race=L.race,res=applyRace(L,{order,fastestLapId:null});
+      const result={outcome:place<=3?'win':'lose',score:ids.length+2-place,money:0,stars:0,stage:1,league:{season,race,...res}};out.stages++;out.eligible++;
       const key=stageKey('islandRacing',result),offer=pickOffer({gameId:'islandRacing',key,candidates:leagueCandidates(L),memory});
       if(!offer)continue;out.offers++;out.offerStages.push(n);out.first??=n;
       if(out.offers%buyEvery===0){const name=offer.track,cost=offer.price;L.coins-=cost;L.upgrades[name]++;out.bought++;}else{dismiss(memory,key,offer.id,'islandRacing');out.declined++;}
