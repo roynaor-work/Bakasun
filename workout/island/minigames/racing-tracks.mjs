@@ -184,16 +184,25 @@ export function createTrack(value = 1) {
   }
   function project(x, z, hint) {
     let best = null;
-    // A local hint is optional. All segments are considered to make off-road recovery reliable.
-    for (let index=0; index<points.length; index++) {
-      const a=points[index], b=points[(index+1)%points.length], dx=b.x-a.x, dz=b.z-a.z;
-      const t=clamp(((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz || 1),0,1);
-      const px=a.x+dx*t, pz=a.z+dz*t, dist2=(x-px)**2+(z-pz)**2;
-      const s=a.s+((index===points.length-1?length:b.s)-a.s)*t;
-      // Break a rare geometric tie in favour of the caller's route neighbourhood.
-      const nearHint = Number.isFinite(hint) ? Math.abs(wrap(s-hint+length/2,length)-length/2) : 0;
-      if (!best || dist2 < best.dist2-0.0001 || (Math.abs(dist2-best.dist2)<0.0001 && nearHint<best.nearHint)) best={s:wrap(s,length),dist2,nearHint};
-    }
+    const scan = (from, count) => {
+      for (let n=0; n<count; n++) {
+        const index=(from+n)%points.length, a=points[index], b=points[(index+1)%points.length], dx=b.x-a.x, dz=b.z-a.z;
+        const t=clamp(((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz || 1),0,1);
+        const px=a.x+dx*t, pz=a.z+dz*t, dist2=(x-px)**2+(z-pz)**2;
+        const s=a.s+((index===points.length-1?length:b.s)-a.s)*t;
+        // Break a rare geometric tie in favour of the caller's route neighbourhood.
+        const nearHint = Number.isFinite(hint) ? Math.abs(wrap(s-hint+length/2,length)-length/2) : 0;
+        if (!best || dist2 < best.dist2-0.0001 || (Math.abs(dist2-best.dist2)<0.0001 && nearHint<best.nearHint)) best={s:wrap(s,length),dist2,nearHint};
+      }
+    };
+    // racing-grid-v1: ten cars call this twice per step. With a hint, a window of about 130 m around it is scanned first (the car is on or beside the road);
+    // only when nothing in the window is close, all segments are considered, as before, so off-road recovery stays reliable.
+    if (Number.isFinite(hint)) {
+      const target = wrap(hint-65,length); let low = 0, high = points.length;
+      while (low+1 < high) { const mid=(low+high)>>1; if (distances[mid] <= target) low=mid; else high=mid; }
+      scan(low, Math.min(points.length, Math.ceil(130/(length/points.length))+4));
+      if (best.dist2 > (width*1.6)**2) { best = null; scan(0, points.length); }
+    } else scan(0, points.length);
     const p=sample(best.s), lateral=(x-p.x)*p.normal.x+(z-p.z)*p.normal.z;
     return {...p,lateral,distance:Math.sqrt(best.dist2)};
   }
@@ -201,7 +210,11 @@ export function createTrack(value = 1) {
   const checkpoints=Array.from({length:16},(_,index)=>({...sample(index*length/16),index}));
   const boostPads=[0.46].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`pad-${index}`,length:10}));
   const pickups=[0.16,0.73].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`cell-${index}`,lane:index===0?0:3}));
-  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups };
+  // racing-grid-v1: share of the lap spent in corners (curvature above 1/160 per metre); the gearbox shifts up earlier on circuits with many corners
+  let cornerLength=0;const step=8,count=Math.floor(length/step);
+  for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step),turn=Math.abs(racingAngle(b.heading-a.heading))/step;if(turn>1/160)cornerLength+=step;}
+  const cornerFraction=cornerLength/Math.max(1,count*step);
+  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction };
 }
 
 export function wrapRacingDistance(value, length) { return wrap(value, length); }

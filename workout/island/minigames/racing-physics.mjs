@@ -4,6 +4,8 @@ const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
 const FIXED_STEP = 1/60;
 const LAT_CAP = 44;
+// Crash: impact is speed x how directly the wall is hit (m/s); a restart speed of 9 m/s is an ordinary slow start.
+const CRASH_TIME = 0.55, CRASH_IMPACT = 24, CRASH_RESTART = 9, STUCK_TIME = 1.4;
 // Energy recovery rates, meter units per second (the meter is 0-100, boosting spends 29 per second).
 const ERS = { brake: 14, corner: 0.75, cornerMax: 8, drift: 3, line: 0.8 };
 // Gearbox (racing-v11). Shift points as fractions of the car's top speed; ENGINE_TAU is the time constant of the pull towards it.
@@ -20,8 +22,6 @@ function finite(value,fallback=0) { return Number.isFinite(Number(value)) ? Numb
  */
 export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',config={}}={}) {
   const stage={...getRacingStage(stageValue),...(config.stage||{})};
-  // racing-field-v1: config.field = extra backmarker cars (ids ai-5..), slower than the league drivers; not part of the league order. 0 = the old five-car grid.
-  const field=Math.max(0,Math.min(8,Math.floor(Number(config.field))||0));stage.opponents+=field;
   const seedUint=Number(seed)>>>0;
   const track=createTrack(stage), random=randomSource(seedUint), sector=track.length/track.checkpoints.length;
   const equipment=config.equipment||{};
@@ -30,20 +30,23 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const brakeUp=clamp(finite(equipment.brakes,1),1,1.3), steerUp=clamp(finite(equipment.steer,1),1,1.12), aeroUp=clamp(finite(equipment.aero,1),1,1.25);
   const drivers=Array.isArray(config.drivers)?config.drivers:null;
   // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
-  const engineModel=config.engine!==false,ersOn=config.ers!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
+  const shiftMapOn=config.shiftMap!==false,engineModel=config.engine!==false,ersOn=config.ers!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
-  const names=['אתם','אלמוג','טורקיז','שמש','ברקת','נמר','סער','להב','רוח','גלעד'];
-  const cars=Array.from({length:1+stage.opponents},(_,index)=>{
-    const start=index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4;
+  const names=['אתם','אלמוג','טורקיז','שמש','ברקת'];
+  // racing-grid-v1: extraRivals more cars share the grid with the player and the four scoring drivers (league standings, rank contract and result stay on those five).
+  const extra=Math.max(0,Math.min(11,Math.floor(finite(config.extraRivals,0)))),crashOn=config.crash!==false;
+  const EXTRA_NAMES=['נועה','רום','דור','ים','אור','שקד','גל','טל','לב','עמית','פז'];
+  const cars=Array.from({length:1+stage.opponents+extra},(_,index)=>{
+    const start=index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4-(index>stage.opponents?(index-stage.opponents)*3:0);
     const lane=index===0?0:index%2?2.8:-2.8;
     const p=track.sample(start);
-    return {id:index===0?'player':`ai-${index}`,name:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,
+    return {id:index===0?'player':`ai-${index}`,name:index>stage.opponents?EXTRA_NAMES[(index-stage.opponents-1)%EXTRA_NAMES.length]:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,scoring:index<=stage.opponents,crashT:0,stuckT:0,crashes:0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,gearT:1,gearInit:false,rpm:.2,shiftT:0,charging:0,ersRate:0,ersUsed:0,ersHarvested:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:index>4?.9+random()*.06:.96+random()*.075),collisionCooldown:0};
+      maxSpeed:stage.aiSpeed*skill*(index>stage.opponents?.93+random()*.07:drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
   const state={phase:config.countdown===0?'racing':'countdown',countdown:config.countdown===0?0:3,time:0,elapsed:0,
@@ -59,6 +62,19 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     car.s=p.s;car.routeS=safeS;car.previousS=safeS;car.progress=safeS;car.speed=Math.max(8,Math.min(car.speed*.45,15));
     car.steer=0;car.offroadTime=0;car.offroad=false;car.lateral=lane;car.recoveryTime=1.8;car.driftCharge=0;car.drifting=false;car.slipAngle=0;car.recoveries++;
     event('recovery',car,{manual});
+  }
+  // racing-grid-v1 crash: a severe wall hit, or being stuck for too long (wall, rivals), flips the car for 0.5 s and then puts it back on the centre line,
+  // pointing along the track, at a low restart speed. Same rule for the player and the computer drivers. config.crash=false (or ?racingCrash=0) removes it.
+  function startCrash(car,reason) {
+    if(!crashOn||car.crashT>0||car.finished)return;
+    car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;
+    event('crash',car,{reason,speed:car.speed});
+  }
+  function endCrash(car) {
+    const p=track.sample(car.routeS),lane=clamp(car.isPlayer?0:car.lane*.5,-track.width*.2,track.width*.2);
+    car.x=p.x+p.normal.x*lane;car.y=p.y;car.z=p.z+p.normal.z*lane;car.heading=p.heading;car.s=p.s;car.previousS=car.routeS;car.lateral=lane;
+    car.speed=CRASH_RESTART;car.steer=0;car.slipAngle=0;car.gearInit=false;car.gearT=1;car.rpm=.3;car.offroad=false;car.offroadTime=0;car.recoveryTime=1.2;car.wallCooldown=.5;car.crashT=0;
+    event('crashRecover',car);
   }
   function aiInput(car) {
     const p=track.project(car.x,car.z,car.s), look=10+car.speed*.5;
@@ -93,6 +109,13 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   function integrate(car,input,dt) {
     if(car.finished) {car.speed=moveToward(car.speed,0,dt*12);return;}
     if(!Number.isFinite(car.x+car.z+car.heading+car.speed))recoverCar(car);
+    if(car.crashT>0){
+      // flipping: the car slides on and stops (no wall or gate logic), then endCrash() restarts it on the track
+      car.crashT=Math.max(0,car.crashT-dt);car.speed*=Math.exp(-dt*4.5);car.x+=Math.sin(car.heading)*car.speed*dt;car.z+=Math.cos(car.heading)*car.speed*dt;
+      const slide=track.project(car.x,car.z,car.s);car.lateral=slide.lateral;car.s=slide.s;car.y=slide.y;
+      if(walls&&Math.abs(slide.lateral)>wallLimit){const side=Math.sign(slide.lateral),inside=wallLimit-.12;car.x=slide.x+slide.normal.x*side*inside;car.z=slide.z+slide.normal.z*side*inside;car.lateral=side*inside;car.speed*=.3;}
+      if(car.crashT<=0)endCrash(car);return;
+    }
     const before=track.project(car.x,car.z,car.s);
     // Collision separation happens after driving. Include that small physical displacement
     // in the next gate sweep so a bumper nudge cannot silently invalidate a full lap.
@@ -133,13 +156,16 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       const top=Math.max(8,(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)),ratio=clamp(car.speed/top,0,.999);
       // racing-ers-v1: shifts have hysteresis and a dwell time. Without them a speed hovering at a shift point flipped gears several times a second
       // (6>7>6 within 0.1 s in the player run), every flip played a shift sound and cut the drive: the "unclear noise" at shifts.
-      let up=1;while(up<GEARS&&ratio>=GEAR_BOUNDS[up])up++;
-      let down=1;while(down<GEARS&&ratio+.035>=GEAR_BOUNDS[down])down++;
+      // racing-grid-v1: more corners = earlier upshifts (up to 12% lower shift points on a twisty circuit, a little more while steering or braking); the sound is unchanged,
+      // only the speed at which each gear is left moves. config.shiftMap=false (or ?racingShiftMap=0) keeps the fixed points.
+      const scale=shiftMapOn?1-.12*clamp(track.cornerFraction/.5,0,1)-(car.isPlayer?.04*Math.min(1,Math.abs(car.steer))+(input.brake?.03:0):0):1,B=GEAR_BOUNDS;
+      let up=1;while(up<GEARS&&ratio>=B[up]*scale)up++;
+      let down=1;while(down<GEARS&&ratio+.035>=B[down]*scale)down++;
       car.gearT+=dt;let g=car.gear;
       if(!car.gearInit){g=up;car.gearInit=true;}
       else if(up>g&&car.gearT>=.35){g++;car.gearT=0;}
       else if(down<g&&car.gearT>=.6){g--;car.gearT=0;}
-      const lo=GEAR_BOUNDS[g-1],hi=g<GEARS?GEAR_BOUNDS[g]:1,frac=clamp((ratio-lo)/(hi-lo),0,1);
+      const lo=B[g-1]*scale,hi=g<GEARS?B[g]*scale:1,frac=clamp((ratio-lo)/(hi-lo),0,1);
       if(g>car.gear&&throttle&&car.speed>1)car.shiftT=SHIFT_CUT;
       car.gear=g;car.shiftT=Math.max(0,car.shiftT-dt);
       const shape=1.4-.75*frac,cut=car.shiftT>0?.06:1;
@@ -197,7 +223,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       if(into>.02&&car.wallCooldown<=0) {
         const angleF=Math.min(1,into/.6),speedF=clamp((car.speed-8)/32,0,1),loss=.25+.2*(.7*angleF+.3*speedF);
         event('wall',car,{intensity:into,loss,speed:car.speed});
+        const impact=car.speed*into;
         car.speed*=1-loss;car.wallHits++;car.wallCooldown=.3;car.drifting=false;car.driftCharge=0;
+        if(crashOn&&impact>CRASH_IMPACT)startCrash(car,'wall');
       } else if(car.wallCooldown>0)car.speed=Math.max(0,car.speed-dt*3);
       const error=racingAngle(car.heading-after.heading);car.heading=racingAngle(after.heading+error*(into>.02?.4:.8));
       car.slipAngle=0;car.steer*=.5;
@@ -207,6 +235,11 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const plausible=Math.abs(delta)<=maxDelta;
     if(plausible)car.routeS+=delta;
     car.offroad=Math.abs(car.lateral)>track.width*.5+.4;
+    if(crashOn&&state.phase==='racing'&&state.time>4&&car.recoveryTime<=0&&car.crashT<=0){
+      const trying=!car.isPlayer||input.autoAccelerate!==false||finite(input.throttle)>0||input.nitro;
+      if(trying&&car.speed<2.5)car.stuckT+=dt;else car.stuckT=Math.max(0,car.stuckT-dt*2);
+      if(car.stuckT>STUCK_TIME)startCrash(car,'stuck');
+    }
     car.offroadTime=car.offroad?car.offroadTime+dt:Math.max(0,car.offroadTime-dt*2);
     const physicalGateDistance=Math.abs(racingAngle((after.s-wrapRacingDistance(car.nextCheckpoint*sector,track.length))/track.length*Math.PI*2))*track.length/(Math.PI*2);
     if(plausible&&delta>0&&physicalGateDistance<maxDelta+1&&car.routeS>=car.nextCheckpoint*sector&&car.previousS<car.nextCheckpoint*sector&&
@@ -234,7 +267,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   }
   function conclude() {
     updateRanks();
-    const finished=player.finished,rank=player.rank,won=finished&&rank<=stage.targetRank;
+    // the result contract and the league see the five scoring cars only (extra rivals are traffic)
+    const order=[...cars].filter(c=>c.scoring!==false).sort((a,b)=>a.finished&&b.finished?a.finishTime-b.finishTime:a.finished?-1:b.finished?1:b.progress-a.progress),
+      finished=player.finished,rank=order.indexOf(player)+1,won=finished&&rank<=stage.targetRank;
     state.result={won,stars:won?Math.max(0,4-rank):0,rank,stage:stage.id,seed:state.seed,durationSeconds:state.time,
       laps:Math.floor(player.checkpoints/track.checkpoints.length),checkpoints:player.checkpoints,
       requiredCheckpoints:track.checkpoints.length*stage.laps,finished:true};
