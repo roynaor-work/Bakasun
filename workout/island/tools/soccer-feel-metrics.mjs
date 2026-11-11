@@ -1,7 +1,8 @@
 /** Soccer feel v2 harness (evidence only, no browser): reaction times in the headless match, before/after.
- * Per pass release (ground passes of both teams): seconds until the intended receiver first moves toward the pass point (distance to it
- * shrinks by 0.1 m), until the nearest opposing field player first reacts (his closing speed on the ball rises by 0.5 m/s, or his
- * distance to the pass point shrinks by 0.1 m), and until the ball is received. Per turnover to the rival: seconds until the child's
+ * Per pass release (ground passes of both teams): seconds until the intended receiver first moves (his velocity changes by 0.5 m/s, or his
+ * distance to the pass point shrinks by 0.1 m; a receiver already running at 1 m/s or more counts as moving at once), until the nearest
+ * opposing field player first reacts (same velocity change, his closing speed on the ball rises by 0.5 m/s, or his distance to the pass
+ * point shrinks by 0.1 m; already closing at 1 m/s = at once), and until the ball is received. Per turnover to the rival: seconds until the child's
  * selection is the team-0 field player nearest the ball (or within 1 m of him). Plus goals, possession, pass completion and the child's
  * win rate (typical bot) per stage.
  * A receiver already standing at the pass point (within 0.5 m) and a defender already closing at 1 m/s or more count as reacting at once.
@@ -31,8 +32,8 @@ export function playFeelMatch({config,seed,stage,difficulty='normal',feel,maxSec
         const receiver=s.players[e.target],point={x:e.x,z:e.z},passer=s.players[e.player];
         let defender=null,best=Infinity;for(const q of s.players)if(q.team!==e.team&&q.role!=='keeper'&&!(q.recover>0)){const at=dist(q,point);if(at<best){best=at;defender=q;}}
         const closing=q=>{const dx=b.x-q.x,dz=b.z-q.z,l=Math.hypot(dx,dz)||1;return ((q.vx||0)*dx+(q.vz||0)*dz)/l;};
-        const d0=dist(receiver,point),close0=defender?closing(defender):null;
-        open.push({team:e.team,t0:elapsed,target:e.target,keeper:receiver.role==='keeper',controlled:s.controlled===e.target,point,d0,defender:defender?.id??null,dd0:defender?dist(defender,point):null,close0,receiverMove:d0<.5?0:null,defenderMove:close0!==null&&close0>=1?0:null,received:null,outcome:null,passer:passer.id,through:e.kind==='through'});
+        const d0=dist(receiver,point),close0=defender?closing(defender):null,rv0={x:receiver.vx||0,z:receiver.vz||0},dv0=defender?{x:defender.vx||0,z:defender.vz||0}:null;
+        open.push({team:e.team,t0:elapsed,target:e.target,keeper:receiver.role==='keeper',controlled:s.controlled===e.target,point,d0,rv0,dv0,defender:defender?.id??null,dd0:defender?dist(defender,point):null,close0,receiverMove:d0<.5||Math.hypot(rv0.x,rv0.z)>=1?0:null,defenderMove:close0!==null&&close0>=1?0:null,received:null,outcome:null,passer:passer.id,through:e.kind==='through'});
         passCount[e.team]++;
       }
       else if(e.type==='possession'){
@@ -47,8 +48,8 @@ export function playFeelMatch({config,seed,stage,difficulty='normal',feel,maxSec
     playing++;const owner=b.owner===null?null:s.players[b.owner];possessionTicks[owner?owner.team:b.lastTeam]++;
     for(const o of open){
       const receiver=s.players[o.target];if(o.receiverMove===null&&s.controlled===o.target)o.controlled=true;
-      if(o.receiverMove===null&&dist(receiver,o.point)<=o.d0-.1)o.receiverMove=elapsed-o.t0;
-      if(o.defender!=null&&o.defenderMove===null){const q=s.players[o.defender],dx=b.x-q.x,dz=b.z-q.z,l=Math.hypot(dx,dz)||1,closing=((q.vx||0)*dx+(q.vz||0)*dz)/l;if(closing-o.close0>=.5||dist(q,o.point)<=o.dd0-.1)o.defenderMove=elapsed-o.t0;}
+      if(o.receiverMove===null&&(dist(receiver,o.point)<=o.d0-.1||Math.hypot((receiver.vx||0)-o.rv0.x,(receiver.vz||0)-o.rv0.z)>=.5))o.receiverMove=elapsed-o.t0;
+      if(o.defender!=null&&o.defenderMove===null){const q=s.players[o.defender],dx=b.x-q.x,dz=b.z-q.z,l=Math.hypot(dx,dz)||1,closing=((q.vx||0)*dx+(q.vz||0)*dz)/l;if(closing-o.close0>=.5||dist(q,o.point)<=o.dd0-.1||Math.hypot((q.vx||0)-o.dv0.x,(q.vz||0)-o.dv0.z)>=.5)o.defenderMove=elapsed-o.t0;}
     }
     if(turnover&&turnover.lag===null&&s.mode==='defense'){
       let nearest=null,best=Infinity;for(const q of s.players)if(q.team===0&&q.role!=='keeper'&&!(q.recover>0)){const at=dist(q,b);if(at<best){best=at;nearest=q;}}
