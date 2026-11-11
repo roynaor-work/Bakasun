@@ -10,7 +10,7 @@ const MODE=process.env.MODE==='before'?'before':'after';
 const directory=fileURLToPath(new URL('../verification/final-fix-fable/',import.meta.url)),frames=directory+'frames/';await mkdir(frames,{recursive:true});
 const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium-1243/chrome-linux64/chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
-const KILL='&fireHeading=v20&fireLadder=v20&fireRescue=v20';
+const KILL='&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20';
 const variants=MODE==='after'?[{name:'meshy',query:''},{name:'pumper',query:'&fireTruckModel=v20'}]:[{name:'meshy-v20',query:KILL},{name:'pumper-v20',query:'&fireTruckModel=v20'+KILL}];
 const deg=r=>r*180/Math.PI,wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),fold=a=>{let d=Math.abs(wrap(a));return d>Math.PI/2?Math.PI-d:d;};
 const reports=[];let failures=0;
@@ -54,7 +54,14 @@ for(const variant of variants){
   checks.roofLadderStowedWhileDriving={pass:!hasRoofLadder||ladderOpen<=.02,ladderOpenShare:ladderOpen,applies:hasRoofLadder};
   checks.boxLadderHiddenWhileDriving={pass:!boxLadderSeen};
   // ---- 2. sound: water jet while spraying, fire roar while flames burn (synthesized; by ear only on the phone) ---------------------
-  const spray=await center('#shoot');await touch('touchStart',spray);await tick(700);s=await snap();await touch('touchEnd');await tick(32);
+  const spray=await center('#shoot');await touch('touchStart',spray);await tick(700);s=await snap();
+  // ---- 2b. water gauge (Roy, 11/11): no word inside the water button; a bar with percent that turns orange/red as the tank empties ------
+  const gaugeBefore=await page.evaluate(()=>{const g=document.querySelector('.fire-water-gauge');if(!g)return null;const r=g.getBoundingClientRect();return {percent:Number(g.dataset.percent),level:g.dataset.level,text:g.textContent.trim(),box:{x:r.x,y:r.y,w:r.width,h:r.height},visible:r.width>0&&r.height>0&&getComputedStyle(g).visibility!=='hidden'};});
+  for(let i=0;i<60;i++)await tick(100);await shot('water-low');
+  const gaugeLow=await page.evaluate(()=>{const g=document.querySelector('.fire-water-gauge');return g?{percent:Number(g.dataset.percent),level:g.dataset.level}:null;}),refillText=await page.locator('#fire-refill').evaluate(n=>n.textContent.trim()),low=await snap();
+  await touch('touchEnd');await tick(32);
+  const inside=b=>b&&b.x>=0&&b.y>=0&&b.x+b.w<=844&&b.y+b.h<=390;
+  checks.waterGauge={pass:Boolean(gaugeBefore?.visible&&inside(gaugeBefore.box)&&gaugeBefore.text.includes('%')&&gaugeLow&&gaugeLow.percent<gaugeBefore.percent&&gaugeLow.percent===Math.round(100*low.water/low.maxWater)&&['low','critical'].includes(gaugeLow.level)&&refillText===''),before:gaugeBefore,low:gaugeLow,modelPercent:Math.round(100*low.water/low.maxWater),refillButtonText:refillText};
   const loops=s.audio.loops||{};checks.waterAndFireSound={pass:s.audio.state==='running'&&(loops.jet?.gain>0||loops.spray?.gain>0)&&loops.fire?.gain>0&&s.spraying,state:s.audio.state,jet:loops.jet?.gain??null,spray:loops.spray?.gain??null,fire:loops.fire?.gain??null,played:s.audio.played};
   await exit();
   // ---- 3. rescue at stage 3: tap the person, the truck drives there, one tap on the ladder button rescues ----------------------------
@@ -79,7 +86,7 @@ for(const variant of variants){
  const failed=Object.entries(checks).filter(([,c])=>!c.pass).map(([k])=>k);rec.failed=failed;
  if(MODE==='after'){if(failed.length){failures++;console.error('final-fire FAILED',variant.name,failed);}else console.log('final-fire verified',variant.name);}
  else{ // the old behaviour must be reproduced: the pumper drives sideways; the Meshy roof ladder turns while driving; a tap alone does not rescue
-  const expected=variant.name==='pumper-v20'?['noseFollowsMotion','singleTapRescues']:['roofLadderStowedWhileDriving','singleTapRescues'];
+  const expected=variant.name==='pumper-v20'?['noseFollowsMotion','singleTapRescues','waterGauge']:['roofLadderStowedWhileDriving','singleTapRescues','waterGauge'];
   const missing=expected.filter(k=>!failed.includes(k));rec.expectedFailures=expected;rec.notReproduced=missing;
   if(missing.length||checks.suite||errors.length){failures++;console.error('final-fire BEFORE: old fault not reproduced',variant.name,missing,checks.suite?.error||'');}else console.log('final-fire before: old faults reproduced',variant.name,failed);
  }

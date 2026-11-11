@@ -30,7 +30,7 @@ export function createNavalAir(cfg,balance){
    const a=air[i],c=cfg[a.kind];
    if(a.state==='down'){
     // Shot down: the aircraft keeps some of its speed, noses over, spins and falls until the sea takes it.
-    a.vh-=v.fall*dt;a.h+=a.vh*dt;a.x+=a.vx*.55*dt;a.z+=a.vz*dt;a.roll+=dt*(a.kind==='heli'?2.6:4.2);a.attack=null;
+    a.vh-=v.fall*dt;a.h+=a.vh*dt;a.x+=a.vx*.55*dt;a.z+=a.vz*dt;a.roll+=dt*(a.kind==='heli'?2.6:4.2);a.attack=null;a.hit=Math.max(0,a.hit-dt);
     if(a.h<=0){air.splice(i,1);state.splashes++;ctx.sound?.('splash');}
     continue;
    }

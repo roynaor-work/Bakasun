@@ -20,3 +20,18 @@
 .game-screen.fire-play.fire-v9 #fire-finish{right:calc(max(20px,env(safe-area-inset-right)) + 110px);bottom:calc(max(20px,env(safe-area-inset-bottom)) + 104px);width:84px;height:84px;min-width:84px;min-height:84px}
 .game-screen.fire-play.fire-v9 #pass.idle{opacity:.55}
 .game-screen.fire-play.fire-v9 .soccer-stick-zone .soccer-joystick{left:calc(max(20px,env(safe-area-inset-left)) + 70px);top:calc(100% - max(20px,env(safe-area-inset-bottom)) - 70px)}
+
+/* 11/11/2026 water gauge in the HUD (`?fireHud=v20` removes it) */
+.fire-play .fire-water-gauge{position:relative;display:flex;gap:6px;align-items:center;min-width:132px;height:40px;padding:4px 10px;border-radius:11px;font-size:14px;font-weight:650;font-variant-numeric:tabular-nums;color:#e6f2f4}
+.fire-play .fire-water-gauge:before{content:'';position:absolute;left:-2px;top:10px;bottom:10px;width:1px;background:#d5e4e21c}
+.fire-play .fire-water-gauge>svg{width:20px;height:20px;color:#8fd3e6;flex:none}
+.fire-play .fire-gauge-track{position:relative;flex:1;height:13px;border-radius:7px;background:#0b161f99;border:1px solid #d5e4e233;overflow:hidden}
+.fire-play .fire-gauge-fill{position:absolute;inset:0;transform-origin:right;background:linear-gradient(180deg,#8fdcf0,#3e9fc0);transition:transform .25s,background .3s}
+.fire-play .fire-gauge-text{min-width:36px;text-align:center}
+.fire-play .fire-water-gauge[data-level=low] .fire-gauge-fill{background:linear-gradient(180deg,#f3c47a,#e08a2e)}
+.fire-play .fire-water-gauge[data-level=low] .fire-gauge-text,.fire-play .fire-water-gauge[data-level=low]>svg{color:#f3c47a}
+.fire-play .fire-water-gauge[data-level=critical] .fire-gauge-fill{background:linear-gradient(180deg,#f08a7a,#d9432f)}
+.fire-play .fire-water-gauge[data-level=critical] .fire-gauge-text,.fire-play .fire-water-gauge[data-level=critical]>svg{color:#f6a394;animation:fire-gauge-pulse 1s ease-in-out infinite}
+.fire-play .fire-water-gauge[data-level=refilling] .fire-gauge-fill{background:linear-gradient(180deg,#a9e8c3,#4fb87e)}
+@keyframes fire-gauge-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.fire-play .fire-water-gauge[data-level=critical] .fire-gauge-text,.fire-play .fire-water-gauge[data-level=critical]>svg{animation:none}}
