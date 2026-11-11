@@ -173,6 +173,9 @@ export function soccerV7Rung(speed,current=-1){
   return index;
 }
 // v9: the aeroplane holds both arms straight out for 2.2 s, which Roy saw as a T-pose after a goal.
+/** The beaten keeper after a goal (soccerShow v1): the first clip that exists. No shipped pack has keeper_after_goal or disappointed (11/11/2026), so a
+ * restless idle stands in; the list is the place a Codex clip plugs in. */
+export const SOCCER_SHOW_DEJECTED=Object.freeze(['v11_keeper_after_goal','disappointed','v10_idle_weight_shift','v9_idle_weight_shift','v10_idle_relaxed','v9_idle_relaxed','idle']);
 const SOCCER_V7_CELEBRATIONS=soccerMotionV9Enabled()?['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap']:['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap','celebrate_aeroplane'];
 /** Feel v2: seconds until a rolling pass reaches the player (straight line at the ball's speed), Infinity for a ball that is not coming. */
 export const FEEL_TOUCH_LEAD=.33;
@@ -290,7 +293,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
       if(slide&&state!==slide.name)slide=null;
-      if(mode==='celebrate'&&edge){const variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
+      // soccerShow v1 may name the clip (team-mates clap / hop, winners cycle the pack); otherwise the scorer's pick by id as before.
+      if(mode==='celebrate'&&edge){const hint=animation.clipHint,variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(hint&&actions[hint]?hint:variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
+      else if(mode==='dejected'&&edge){const name=SOCCER_SHOW_DEJECTED.find(n=>actions[n]);if(name)change(name,'result_fail');}
       else if(mode==='slide'&&edge&&feelSlideOn){
         // Feel v2: the repaired v8 slide (won) or v9 miss + quick get-up (lost), see slideTimelineV2(). Entered just before the push-off so the
         // run crosses into the crouch within the 0.08 s fade; the yaw is locked to the slide direction by the character update.
@@ -368,7 +373,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,ladderBounds);locomotion=ladder[rung];}
-        if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
+        if(mode==='celebrate'||mode==='dejected'){/* Hold the authored celebration (or the beaten keeper's stance) until the goal phase ends. */}
         else if(!moving&&running)change(codex&&actions.v9_run_brake?(previousSpeed>=SOCCER_CODEX_BRAKE_FROM?'v9_run_brake':(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':actions[idleHome]?idleHome:'idle')):'decelerate','slowing');
         else if(!moving)change(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':actions[idleHome]?(idles.includes(state)?state:idleHome):'idle','stopped');
         else if(running&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');

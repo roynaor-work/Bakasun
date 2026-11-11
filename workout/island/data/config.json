@@ -9615,6 +9615,36 @@
     "laneTeam0": false,
     "teamReaction": null
    },
+   "show": {
+    "version": "v1",
+    "cutSeconds": 0.7,
+    "replay": {
+     "before": 3,
+     "recordSeconds": 4.6,
+     "strikeLead": 0.55,
+     "closeMaxBefore": 1.15,
+     "after": 0.45,
+     "slowRate": 0.5,
+     "maxWideSeconds": 1.9,
+     "maxCloseSeconds": 2.6,
+     "minRecording": 1
+    },
+    "celebrate": {
+     "holdSeconds": 2.2,
+     "runSpeed": 4.6,
+     "maxRun": 10
+    },
+    "fulltimeSeconds": 3,
+    "camera": {
+     "boxZoom": 3,
+     "cutBlend": 0.35,
+     "exitBlend": 0.6
+    },
+    "short": {
+     "enabled": true,
+     "cooldown": 20
+    }
+   },
    "chargeSpeedMultiplier": 0.5,
    "passing": {
     "minDistance": 5,
