@@ -196,3 +196,11 @@
   .aimstick.hudv21 #weapon-btn{right:10px;bottom:140px}
   .aimstick.hudv21 .abilities{right:84px;bottom:140px}
 }
+
+/* 11/11/2026 (Roy, phone): precise stick. Bigger floating ring, a precision label with a second finger, a direction arrow on the crosshair. `?boarStick=v20` restores the v20 stick. */
+#aim-ring.v21{width:168px;height:168px;margin:-84px 0 0 -84px}
+#aim-ring.v21 i{width:60px;height:60px;margin:-30px 0 0 -30px}
+#aim-ring.v21.precise{border-color:#ffd06b}
+#aim-ring.v21.precise:after{content:'דיוק';position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:12px;color:#ffd06b}
+#crosshair u{position:absolute;left:50%;top:50%;width:0;height:0;border:6px solid transparent;border-bottom:11px solid #ffd06b;transform-origin:50% 100%;transform:translate(-50%,-100%) rotate(var(--dir,0deg)) translateY(-18px);opacity:0;transition:opacity .1s;filter:drop-shadow(0 0 2px #000)}
+#crosshair.moving u{opacity:1}

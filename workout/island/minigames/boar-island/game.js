@@ -27,6 +27,16 @@ function setFiring(on,source){pointer.down=on;fireSource=on?source:'none';}
 // coins/defence as thin strips in the top corners, a small wave counter, no bottom bar. `?boarHud=v20` restores the v20 cards.
 const HUD_V21=!LEGACY&&new URLSearchParams(location.search).get('boarHud')!=='v20';
 let weaponBtn=null,frames=0;
+// 11/11/2026 (Roy, phone: "הג'ויסטיק לא מספיק מדויק"): dead zone 8%, power curve (small tilt = fine aim, full tilt = fast), light smoothing while held
+// (time constant 45 ms) and an immediate stop on release, floating radius 80 px, a direction arrow on the crosshair, precision mode with a second finger
+// on the stick zone (x0.35), and a sensitivity setting (localStorage `boar-island-aim`, not part of the save). `?boarStick=v20` restores the v20 stick.
+const STICK_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarStick')!=='v20';
+const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_CURVE=1.8,STICK_TAU=.045,STICK_PRECISE=.35,AIM_SPEED_X=1.6,AIM_SPEED_Y=1.3;
+const AIM_SENS={low:.7,mid:1,high:1.4},AIM_SENS_NAME={low:'נמוכה',mid:'בינונית',high:'גבוהה'};
+let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AIM_SENS)aimSens=v;}catch{}
+function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ)));return STICK_V21?Math.pow(mag,STICK_CURVE):mag;}
+function aimSensButton(){const b=document.createElement('button');b.className='text-btn';b.id='aim-sens';const label=()=>{b.textContent=`רגישות כוונון: ${AIM_SENS_NAME[aimSens]}`;};label();
+  b.onclick=()=>{const keys=Object.keys(AIM_SENS);aimSens=keys[(keys.indexOf(aimSens)+1)%keys.length];try{localStorage.setItem('boar-island-aim',aimSens);}catch{}label();};document.querySelector('.menu-links').append(b);}
 function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
 function buildCompactHud(){
   $('game').classList.add('hudv21');
@@ -734,17 +744,22 @@ function buildAimControls(){
   const rest=document.createElement('div');rest.id='aim-rest';aimZone.append(rest);
   fireBtn=document.createElement('button');fireBtn.id='fire-btn';fireBtn.type='button';fireBtn.setAttribute('aria-label','ירי');fireBtn.innerHTML='<b>◎</b><span>ירי</span>';
   g.append(aimZone,fireBtn);aimZone.hidden=fireBtn.hidden=true;
-  const R=62;
-  aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle'||aimStick)return;e.preventDefault();aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';try{aimZone.setPointerCapture(e.pointerId);}catch{}});
-  aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,dz=.12,mag=m<dz?0:(m-dz)/(1-dz);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
-  for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on');rest.hidden=false;});
+  const R=STICK_R;if(STICK_V21){ring.classList.add('v21');const arrow=document.createElement('u');$('crosshair').append(arrow);aimSensButton();}
+  aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle')return;e.preventDefault();if(aimStick){if(STICK_V21&&aimStick.precise===null){aimStick.precise=e.pointerId;ring.classList.add('precise');try{aimZone.setPointerCapture(e.pointerId);}catch{}}return;}aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0,sx:0,sy:0,precise:null};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';try{aimZone.setPointerCapture(e.pointerId);}catch{}});
+  aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,mag=stickMag(m);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&aimStick.precise===e.pointerId){aimStick.precise=null;ring.classList.remove('precise');return;}if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on','precise');rest.hidden=false;$('crosshair').classList.remove('moving');});
   fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;setFiring(true,'button');fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
   for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;releaseFire();});
   if(FIRE_V21){for(const el of [aimZone,fireBtn])el.addEventListener('contextmenu',e=>e.preventDefault());
     // a press on an ability button that starts inside the stick zone is counted (the test proves the buttons are out of the zone)
     for(const [id,key] of [['rocket','rocket'],['frost','frost'],['fury','fury']])$(id).addEventListener('pointerdown',e=>{const r=aimZone.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)abilityFromLeft++;});}
 }
-function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;pointer.x=clamp(pointer.x+aimStick.vx*dt*1.6,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*1.3,-.85,.85);}
+function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;
+  if(!STICK_V21){pointer.x=clamp(pointer.x+aimStick.vx*dt*AIM_SPEED_X,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*AIM_SPEED_Y,-.85,.85);return;}
+  const k=1-Math.exp(-dt/STICK_TAU);aimStick.sx+=(aimStick.vx-aimStick.sx)*k;aimStick.sy+=(aimStick.vy-aimStick.sy)*k;
+  const g=AIM_SENS[aimSens]*(aimStick.precise!==null?STICK_PRECISE:1);
+  pointer.x=clamp(pointer.x+aimStick.sx*dt*AIM_SPEED_X*g,-.95,.95);pointer.y=clamp(pointer.y-aimStick.sy*dt*AIM_SPEED_Y*g,-.85,.85);
+  const moving=Math.hypot(aimStick.sx,aimStick.sy)>.02,ch=$('crosshair');ch.classList.toggle('moving',moving);if(moving)ch.style.setProperty('--dir',`${Math.atan2(aimStick.sx,-aimStick.sy)*180/Math.PI}deg`);}
 function buildWeaponBar(){
   const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
   WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).forEach((k,i)=>{const w=WEAPONS[k],lv=save.weapons[k];const b=document.createElement('button');b.className='wslot'+(k===current?' active':'')+(lv?'':' locked');b.dataset.key=k;b.setAttribute('aria-label',`${w.name}${lv?'':' · נעול'}`);
@@ -923,7 +938,7 @@ async function runBench(){
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,LEGACY},frames,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY},frames,elapsed:+elapsed.toFixed(3),aimSens,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},weapon(k){switchWeapon(k);},

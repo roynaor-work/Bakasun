@@ -1,0 +1,2899 @@
+{
+ "mode": "before",
+ "browser": "Chromium / SwiftShader, hasTouch + isMobile, 844x390",
+ "physicalPhone": false,
+ "reports": [
+  {
+   "variant": "meshy-v20",
+   "mode": "before",
+   "query": "&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20",
+   "checks": {
+    "noseFollowsMotion": {
+     "pass": true,
+     "maxSlipStraight": 1.2,
+     "straightSamples": 29
+    },
+    "roofLadderStowedWhileDriving": {
+     "pass": false,
+     "ladderOpenShare": 0.9818181818181818,
+     "applies": true
+    },
+    "boxLadderHiddenWhileDriving": {
+     "pass": true
+    },
+    "waterGauge": {
+     "pass": false,
+     "before": null,
+     "low": null,
+     "modelPercent": 36,
+     "refillButtonText": "מים"
+    },
+    "waterAndFireSound": {
+     "pass": true,
+     "state": "running",
+     "jet": 0.30367326736450195,
+     "spray": null,
+     "fire": 0.1599999964237213,
+     "played": [
+      "siren",
+      "crackle",
+      "engine",
+      "spray"
+     ]
+    },
+    "tapNavigatesToPerson": {
+     "pass": true,
+     "navigationActive": true,
+     "distance": 3.01
+    },
+    "singleTapRescues": {
+     "pass": false,
+     "seconds": null
+    },
+    "ladderOpensOnlyDuringRescue": {
+     "pass": true,
+     "opened": true,
+     "after": {
+      "turretDeg": 88.5,
+      "armScale": null,
+      "boxLadder": false
+     }
+    },
+    "noPageErrors": {
+     "pass": true,
+     "errors": []
+    }
+   },
+   "errors": [],
+   "truck": {
+    "loaded": true,
+    "kind": "meshy",
+    "nose": "asIs",
+    "roofLadder": null,
+    "boxLadderVisible": false,
+    "cannonFaces": 585,
+    "yaw": 0,
+    "muzzle": {
+     "x": 5.552014274539657,
+     "y": 2.6277924508645345,
+     "z": 16.603777822315262
+    },
+    "hydrantHose": false,
+    "hoseEnd": {
+     "x": 6,
+     "z": 18
+    }
+   },
+   "renderMode": "three",
+   "drive": {
+    "samples": [
+     {
+      "phase": "up",
+      "time": 0.2380000000000001,
+      "speed": 2.88,
+      "slipDeg": 0,
+      "turretDeg": 17.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.3500000000000002,
+      "speed": 6.55,
+      "slipDeg": 0,
+      "turretDeg": 18.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.4460000000000003,
+      "speed": 9.69,
+      "slipDeg": 0,
+      "turretDeg": 19.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.5420000000000004,
+      "speed": 12.83,
+      "slipDeg": 0,
+      "turretDeg": 20.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.6380000000000005,
+      "speed": 15.97,
+      "slipDeg": 0,
+      "turretDeg": 22.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.7500000000000006,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 25.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.8460000000000006,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 28.7,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.9420000000000007,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 33,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.0380000000000007,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 38.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.1500000000000008,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 47.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.2460000000000009,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 57.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.342000000000001,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 71.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "right",
+      "time": 1.438000000000001,
+      "speed": 8.1,
+      "slipDeg": 7.3,
+      "turretDeg": 89.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.251
+     },
+     {
+      "phase": "right",
+      "time": 1.5500000000000012,
+      "speed": 4.8,
+      "slipDeg": 2.7,
+      "turretDeg": 89.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.67
+     },
+     {
+      "phase": "right",
+      "time": 1.6460000000000012,
+      "speed": 3.61,
+      "slipDeg": 0.7,
+      "turretDeg": 88.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.003
+     },
+     {
+      "phase": "right",
+      "time": 1.7420000000000013,
+      "speed": 1.76,
+      "slipDeg": 0.2,
+      "turretDeg": 86.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.319
+     },
+     {
+      "phase": "right",
+      "time": 1.8380000000000014,
+      "speed": 0.79,
+      "slipDeg": null,
+      "turretDeg": 53.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.491
+     },
+     {
+      "phase": "right",
+      "time": 1.9500000000000015,
+      "speed": 1.12,
+      "slipDeg": null,
+      "turretDeg": 13.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.46
+     },
+     {
+      "phase": "right",
+      "time": 2.0460000000000016,
+      "speed": 2.53,
+      "slipDeg": 48.5,
+      "turretDeg": 34.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.101
+     },
+     {
+      "phase": "right",
+      "time": 2.1420000000000017,
+      "speed": 4.62,
+      "slipDeg": 14.9,
+      "turretDeg": 65.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.753
+     },
+     {
+      "phase": "right",
+      "time": 2.2380000000000018,
+      "speed": 6.23,
+      "slipDeg": 3.9,
+      "turretDeg": 71.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.427
+     },
+     {
+      "phase": "right",
+      "time": 2.350000000000002,
+      "speed": 8.37,
+      "slipDeg": 2.2,
+      "turretDeg": 66.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.095
+     },
+     {
+      "phase": "right",
+      "time": 2.446000000000002,
+      "speed": 11.53,
+      "slipDeg": 2.4,
+      "turretDeg": 61.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0.028
+     },
+     {
+      "phase": "right",
+      "time": 2.542000000000002,
+      "speed": 11.18,
+      "slipDeg": 2.4,
+      "turretDeg": 54.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.009
+     },
+     {
+      "phase": "right",
+      "time": 2.638000000000002,
+      "speed": 5.43,
+      "slipDeg": 10.3,
+      "turretDeg": 40.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.359
+     },
+     {
+      "phase": "right",
+      "time": 2.750000000000002,
+      "speed": 6.03,
+      "slipDeg": 14.3,
+      "turretDeg": 16.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.769
+     },
+     {
+      "phase": "right",
+      "time": 2.8460000000000023,
+      "speed": 6.52,
+      "slipDeg": 14.4,
+      "turretDeg": 4.7,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.095
+     },
+     {
+      "phase": "right",
+      "time": 2.9420000000000024,
+      "speed": 6.27,
+      "slipDeg": 34.9,
+      "turretDeg": 35,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.39
+     },
+     {
+      "phase": "right",
+      "time": 3.0380000000000025,
+      "speed": 10.51,
+      "slipDeg": 1.1,
+      "turretDeg": 49,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.514
+     },
+     {
+      "phase": "right",
+      "time": 3.1500000000000026,
+      "speed": 14.67,
+      "slipDeg": 5.2,
+      "turretDeg": 34.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.556
+     },
+     {
+      "phase": "right",
+      "time": 3.2460000000000027,
+      "speed": 17.78,
+      "slipDeg": 1.2,
+      "turretDeg": 27.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.566
+     },
+     {
+      "phase": "right",
+      "time": 3.3420000000000027,
+      "speed": 18,
+      "slipDeg": 0.3,
+      "turretDeg": 23.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.569
+     },
+     {
+      "phase": "right",
+      "time": 3.438000000000003,
+      "speed": 18,
+      "slipDeg": 0.1,
+      "turretDeg": 20.7,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.57
+     },
+     {
+      "phase": "right",
+      "time": 3.550000000000003,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 18.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.646000000000003,
+      "speed": 18,
+      "slipDeg": 0.3,
+      "turretDeg": 16.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.742000000000003,
+      "speed": 18,
+      "slipDeg": 0.1,
+      "turretDeg": 15,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.838000000000003,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 13.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "down",
+      "time": 3.9500000000000033,
+      "speed": 8.1,
+      "slipDeg": 7.3,
+      "turretDeg": 19.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.822
+     },
+     {
+      "phase": "down",
+      "time": 4.046000000000003,
+      "speed": 6,
+      "slipDeg": 12,
+      "turretDeg": 34.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.184
+     },
+     {
+      "phase": "down",
+      "time": 4.142000000000003,
+      "speed": 6.63,
+      "slipDeg": 12.5,
+      "turretDeg": 52.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.519
+     },
+     {
+      "phase": "down",
+      "time": 4.238000000000003,
+      "speed": 6.7,
+      "slipDeg": 16.3,
+      "turretDeg": 82.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.837
+     },
+     {
+      "phase": "down",
+      "time": 4.350000000000003,
+      "speed": 9.94,
+      "slipDeg": 3.4,
+      "turretDeg": 86.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.062
+     },
+     {
+      "phase": "down",
+      "time": 4.446000000000003,
+      "speed": 13.11,
+      "slipDeg": 0.9,
+      "turretDeg": 86.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.116
+     },
+     {
+      "phase": "down",
+      "time": 4.542000000000003,
+      "speed": 16.25,
+      "slipDeg": 0.2,
+      "turretDeg": 89.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.134
+     },
+     {
+      "phase": "down",
+      "time": 4.6380000000000035,
+      "speed": 18,
+      "slipDeg": 0.1,
+      "turretDeg": 87.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.139
+     },
+     {
+      "phase": "down",
+      "time": 4.7500000000000036,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 82.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.141
+     },
+     {
+      "phase": "down",
+      "time": 4.846000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 78.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.141
+     },
+     {
+      "phase": "down",
+      "time": 4.942000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 74.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.038000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 71.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.150000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 67,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.246000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 63.7,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.342000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 60.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.438000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 57.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.550000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 54.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.646000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 51.7,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.742000000000004,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 49.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.8380000000000045,
+      "speed": 18,
+      "slipDeg": 0,
+      "turretDeg": 47.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     }
+    ],
+    "maxSlipStraight": 1.2,
+    "ladderOpenShare": 0.982,
+    "boxLadderSeen": false
+   },
+   "navigation": {
+    "activeAfterTap": true,
+    "kind": "rescue"
+   },
+   "descent": [
+    {
+     "time": 5.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    }
+   ],
+   "rescue": {
+    "during": [
+     {
+      "time": 1.5,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.6,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.69,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 1.9,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.09,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.49,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.7,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.89,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.1,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.29,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.5,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.69,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.9,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.09,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.49,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.7,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.89,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.1,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.29,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     }
+    ],
+    "rescued": false,
+    "opened": true,
+    "afterTurretDeg": 88.5,
+    "afterArmScale": null,
+    "afterBoxLadder": false
+   },
+   "failed": [
+    "roofLadderStowedWhileDriving",
+    "waterGauge",
+    "singleTapRescues"
+   ],
+   "expectedFailures": [
+    "roofLadderStowedWhileDriving",
+    "singleTapRescues",
+    "waterGauge"
+   ],
+   "notReproduced": []
+  },
+  {
+   "variant": "pumper-v20",
+   "mode": "before",
+   "query": "&fireTruckModel=v20&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20",
+   "checks": {
+    "noseFollowsMotion": {
+     "pass": false,
+     "maxSlipStraight": 91.6,
+     "straightSamples": 29
+    },
+    "roofLadderStowedWhileDriving": {
+     "pass": true,
+     "ladderOpenShare": 0.9818181818181818,
+     "applies": false
+    },
+    "boxLadderHiddenWhileDriving": {
+     "pass": true
+    },
+    "waterGauge": {
+     "pass": false,
+     "before": null,
+     "low": null,
+     "modelPercent": 36,
+     "refillButtonText": "מים"
+    },
+    "waterAndFireSound": {
+     "pass": true,
+     "state": "running",
+     "jet": 0.30431219935417175,
+     "spray": null,
+     "fire": 0.1599999964237213,
+     "played": [
+      "siren",
+      "crackle",
+      "engine",
+      "spray"
+     ]
+    },
+    "tapNavigatesToPerson": {
+     "pass": true,
+     "navigationActive": true,
+     "distance": 3.01
+    },
+    "singleTapRescues": {
+     "pass": false,
+     "seconds": null
+    },
+    "ladderOpensOnlyDuringRescue": {
+     "pass": true,
+     "opened": true,
+     "after": {
+      "turretDeg": 88.5,
+      "armScale": null,
+      "boxLadder": false
+     }
+    },
+    "noPageErrors": {
+     "pass": true,
+     "errors": []
+    }
+   },
+   "errors": [],
+   "truck": {
+    "loaded": true,
+    "kind": "v7",
+    "nose": "asIs",
+    "roofLadder": null,
+    "boxLadderVisible": false,
+    "cannonFaces": 1,
+    "yaw": 0,
+    "muzzle": {
+     "x": 5.552014274539657,
+     "y": 2.6277924508645345,
+     "z": 16.603777822315262
+    },
+    "hydrantHose": false,
+    "hoseEnd": {
+     "x": 6,
+     "z": 18
+    }
+   },
+   "renderMode": "three",
+   "drive": {
+    "samples": [
+     {
+      "phase": "up",
+      "time": 0.095,
+      "speed": 2.85,
+      "slipDeg": 90.8,
+      "turretDeg": 17.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.19100000000000006,
+      "speed": 5.99,
+      "slipDeg": 91.3,
+      "turretDeg": 18.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.28700000000000014,
+      "speed": 9.13,
+      "slipDeg": 91.5,
+      "turretDeg": 19.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.39900000000000024,
+      "speed": 12.8,
+      "slipDeg": 91.5,
+      "turretDeg": 20.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.49500000000000033,
+      "speed": 15.94,
+      "slipDeg": 91.6,
+      "turretDeg": 22.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.5910000000000004,
+      "speed": 18,
+      "slipDeg": 91.1,
+      "turretDeg": 24.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.6870000000000005,
+      "speed": 18,
+      "slipDeg": 90.5,
+      "turretDeg": 28,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.7990000000000006,
+      "speed": 18,
+      "slipDeg": 90.2,
+      "turretDeg": 32.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.8950000000000007,
+      "speed": 18,
+      "slipDeg": 90.1,
+      "turretDeg": 38.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 0.9910000000000008,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 45.9,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.0870000000000009,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 55.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "up",
+      "time": 1.199000000000001,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 71,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0
+     },
+     {
+      "phase": "right",
+      "time": 1.295000000000001,
+      "speed": 11.7,
+      "slipDeg": 94.7,
+      "turretDeg": 88.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.16
+     },
+     {
+      "phase": "right",
+      "time": 1.3910000000000011,
+      "speed": 5.05,
+      "slipDeg": 84.1,
+      "turretDeg": 84.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.496
+     },
+     {
+      "phase": "right",
+      "time": 1.4870000000000012,
+      "speed": 4.31,
+      "slipDeg": 88.5,
+      "turretDeg": 84,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.839
+     },
+     {
+      "phase": "right",
+      "time": 1.5990000000000013,
+      "speed": 2.43,
+      "slipDeg": 89.8,
+      "turretDeg": 81.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.214
+     },
+     {
+      "phase": "right",
+      "time": 1.6950000000000014,
+      "speed": 1.04,
+      "slipDeg": null,
+      "turretDeg": 61.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.454
+     },
+     {
+      "phase": "right",
+      "time": 1.7910000000000015,
+      "speed": 0.45,
+      "slipDeg": null,
+      "turretDeg": 22.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.534
+     },
+     {
+      "phase": "right",
+      "time": 1.8870000000000016,
+      "speed": 1.53,
+      "slipDeg": 22.1,
+      "turretDeg": 11.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.286
+     },
+     {
+      "phase": "right",
+      "time": 1.9990000000000017,
+      "speed": 3.95,
+      "slipDeg": 66.8,
+      "turretDeg": 53,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.866
+     },
+     {
+      "phase": "right",
+      "time": 2.0950000000000015,
+      "speed": 5.76,
+      "slipDeg": 84.2,
+      "turretDeg": 66.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.533
+     },
+     {
+      "phase": "right",
+      "time": 2.1910000000000016,
+      "speed": 7,
+      "slipDeg": 93.4,
+      "turretDeg": 62.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.216
+     },
+     {
+      "phase": "right",
+      "time": 2.2870000000000017,
+      "speed": 9.45,
+      "slipDeg": 86.9,
+      "turretDeg": 59.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": 0.006
+     },
+     {
+      "phase": "right",
+      "time": 2.399000000000002,
+      "speed": 7.31,
+      "slipDeg": 94.3,
+      "turretDeg": 54.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.062
+     },
+     {
+      "phase": "right",
+      "time": 2.495000000000002,
+      "speed": 5.62,
+      "slipDeg": 101.8,
+      "turretDeg": 38.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.439
+     },
+     {
+      "phase": "right",
+      "time": 2.591000000000002,
+      "speed": 6.27,
+      "slipDeg": 103.9,
+      "turretDeg": 18.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -0.787
+     },
+     {
+      "phase": "right",
+      "time": 2.687000000000002,
+      "speed": 6.66,
+      "slipDeg": 104.4,
+      "turretDeg": 2.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.113
+     },
+     {
+      "phase": "right",
+      "time": 2.799000000000002,
+      "speed": 7.31,
+      "slipDeg": 119.7,
+      "turretDeg": 32.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.431
+     },
+     {
+      "phase": "right",
+      "time": 2.8950000000000022,
+      "speed": 11.4,
+      "slipDeg": 89.8,
+      "turretDeg": 41.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.527
+     },
+     {
+      "phase": "right",
+      "time": 2.9910000000000023,
+      "speed": 14.68,
+      "slipDeg": 88.5,
+      "turretDeg": 31.4,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.557
+     },
+     {
+      "phase": "right",
+      "time": 3.0870000000000024,
+      "speed": 17.78,
+      "slipDeg": 90.9,
+      "turretDeg": 26.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.566
+     },
+     {
+      "phase": "right",
+      "time": 3.1990000000000025,
+      "speed": 18,
+      "slipDeg": 90.5,
+      "turretDeg": 22.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.57
+     },
+     {
+      "phase": "right",
+      "time": 3.2950000000000026,
+      "speed": 18,
+      "slipDeg": 90.2,
+      "turretDeg": 20,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.57
+     },
+     {
+      "phase": "right",
+      "time": 3.3910000000000027,
+      "speed": 18,
+      "slipDeg": 90.1,
+      "turretDeg": 18.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.4870000000000028,
+      "speed": 18,
+      "slipDeg": 89.8,
+      "turretDeg": 16.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.599000000000003,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 14.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "right",
+      "time": 3.695000000000003,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 13.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.571
+     },
+     {
+      "phase": "down",
+      "time": 3.791000000000003,
+      "speed": 9.9,
+      "slipDeg": 95.3,
+      "turretDeg": 17.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -1.771
+     },
+     {
+      "phase": "down",
+      "time": 3.887000000000003,
+      "speed": 5.88,
+      "slipDeg": 101.2,
+      "turretDeg": 31.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.125
+     },
+     {
+      "phase": "down",
+      "time": 3.999000000000003,
+      "speed": 5.39,
+      "slipDeg": 115.1,
+      "turretDeg": 75.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.519
+     },
+     {
+      "phase": "down",
+      "time": 4.095000000000003,
+      "speed": 6.7,
+      "slipDeg": 96.6,
+      "turretDeg": 87.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -2.837
+     },
+     {
+      "phase": "down",
+      "time": 4.191000000000003,
+      "speed": 9.4,
+      "slipDeg": 92.5,
+      "turretDeg": 84.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.045
+     },
+     {
+      "phase": "down",
+      "time": 4.2870000000000035,
+      "speed": 12.58,
+      "slipDeg": 91.6,
+      "turretDeg": 85.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.111
+     },
+     {
+      "phase": "down",
+      "time": 4.399000000000004,
+      "speed": 16.25,
+      "slipDeg": 91.5,
+      "turretDeg": 89,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.134
+     },
+     {
+      "phase": "down",
+      "time": 4.495000000000004,
+      "speed": 18,
+      "slipDeg": 91,
+      "turretDeg": 87.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.139
+     },
+     {
+      "phase": "down",
+      "time": 4.591000000000004,
+      "speed": 18,
+      "slipDeg": 90.4,
+      "turretDeg": 83.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.141
+     },
+     {
+      "phase": "down",
+      "time": 4.687000000000004,
+      "speed": 18,
+      "slipDeg": 90.2,
+      "turretDeg": 79.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.141
+     },
+     {
+      "phase": "down",
+      "time": 4.799000000000004,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 74.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 4.895000000000004,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 71.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 4.991000000000004,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 67.6,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.087000000000004,
+      "speed": 18,
+      "slipDeg": 90,
+      "turretDeg": 64.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.199000000000004,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 60.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.295000000000004,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 57.5,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.3910000000000045,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 54.8,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.4870000000000045,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 52.2,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.599000000000005,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 49.3,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     },
+     {
+      "phase": "down",
+      "time": 5.695000000000005,
+      "speed": 18,
+      "slipDeg": 89.9,
+      "turretDeg": 47.1,
+      "armScale": null,
+      "boxLadder": false,
+      "yaw": -3.142
+     }
+    ],
+    "maxSlipStraight": 91.6,
+    "ladderOpenShare": 0.982,
+    "boxLadderSeen": false
+   },
+   "navigation": {
+    "activeAfterTap": true,
+    "kind": "rescue"
+   },
+   "descent": [
+    {
+     "time": 5.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 5.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 6.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 7.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 8.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.49,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.7,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 9.89,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.1,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.29,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.5,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.6,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.69,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.8,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 10.9,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.09,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.2,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.3,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    },
+    {
+     "time": 11.4,
+     "descent": 0,
+     "extension": 0,
+     "boxLadder": false
+    }
+   ],
+   "rescue": {
+    "during": [
+     {
+      "time": 1.49,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.6,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.7,
+      "rescuing": false,
+      "progress": 0.08,
+      "extension": 0.07,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": true
+     },
+     {
+      "time": 1.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 1.89,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.1,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.29,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.5,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.69,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 2.9,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.09,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.49,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.7,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 3.89,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.1,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.29,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.5,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.6,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.69,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.8,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 4.9,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.09,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.2,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.3,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     },
+     {
+      "time": 5.4,
+      "rescuing": false,
+      "progress": 0,
+      "extension": 0,
+      "turretDeg": 88.5,
+      "armScale": null,
+      "armPitchDeg": null,
+      "boxLadder": false
+     }
+    ],
+    "rescued": false,
+    "opened": true,
+    "afterTurretDeg": 88.5,
+    "afterArmScale": null,
+    "afterBoxLadder": false
+   },
+   "failed": [
+    "noseFollowsMotion",
+    "waterGauge",
+    "singleTapRescues"
+   ],
+   "expectedFailures": [
+    "noseFollowsMotion",
+    "singleTapRescues",
+    "waterGauge"
+   ],
+   "notReproduced": []
+  }
+ ]
+}
