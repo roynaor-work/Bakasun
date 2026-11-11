@@ -84,7 +84,7 @@ export function soccerV10FirstTouchClip(height,speed,id,has){
 /** Clips that play to their end: the v9 held ones plus the cuts and the first touches. */
 export const soccerV10Held=state=>state.startsWith('v10_cut_')||state.startsWith('v10_first_touch_');
 /** What the match loaded, as a line for the load report and the debug view. */
-export function soccerMotionLoadSummary(counts,errors){return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
+export function soccerMotionLoadSummary(counts,errors){const v12=counts.v12&&!counts.v12.error?`, v12 repaired ${(counts.v12.v9Replaced||0)+(counts.v12.v10Replaced||0)}`:'';const v11=counts.v11?`, v11 ${counts.v11}`:'';return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}${v11}${v12}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
 
 /** Codex soccer-v11 repaired keeper dives (motion-fix-v12 catalog, 96.7 QA score, 0 red metrics): the low and middle dives to either side replace the
  * v8 ones. Opt-in (`?soccerKeeperV11=1`, default off): the clips are authored with the sideways travel as root motion ("simulation-owned"), and whether the game's own dive travel looks right with them cannot be verified without a screen. The catch event stands in for the glove contact; the clip has no takeoff event, so the push-off is taken

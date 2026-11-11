@@ -41,7 +41,7 @@ export function decodeTallPack(json){
   if(q.length!==c.frames*TALL_BONES.length*4||h.length!==c.frames*3)throw Error('Basketball tall clip is truncated: '+id);
   const quat=new Float32Array(q.length),hips=new Float32Array(h.length);for(let i=0;i<q.length;i++)quat[i]=q[i]/32767;for(let i=0;i<h.length;i++)hips[i]=h[i]/10000;
   let ball=null;if(c.ball){const b=decode64(c.ball,Int16Array);ball=new Float32Array(b.length);for(let i=0;i<b.length;i++)ball[i]=b[i]/10000;}
-  clips[id]={id,duration:c.duration,frames:c.frames,loop:c.loop,kind:c.kind,events:c.events||{},refSpeed:c.refSpeed,quat,hips,ball,jumpScale:c.jumpScale||null};
+  clips[id]={id,duration:c.duration,frames:c.frames,loop:c.loop,kind:c.kind,events:c.events||{},refSpeed:c.refSpeed,quat,hips,ball,jumpScale:c.jumpScale||null,timeScale:c.timeScale||1,score:c.score??null};
  }
  return {fps:json.fps,profiles:json.profiles,clips};
 }
@@ -75,7 +75,9 @@ export function pickGait(list,speed,current=null){
  for(const [name,ref] of list){if(!ref)continue;const d=Math.abs(Math.log(Math.max(.05,speed)/ref))*(name===current?.88:1);if(d<bd){bd=d;best=name;}}
  return best;
 }
-export const gaitRate=(speed,ref)=>clamp(speed/Math.max(.1,ref),.5,1.45);
+/** Playback rate for a gait: the clip's own reference speed (the v12 repair slows some gaits, so the rate climbs up to 1.45 x its timeScale). */
+export const gaitRate=(speed,ref,max=1.45)=>clamp(speed/Math.max(.1,ref),.5,max);
+const clipRef=(pack,name,ref)=>pack?.clips?.[name]?.refSpeed||ref,clipMax=(pack,name)=>1.45*(pack?.clips?.[name]?.timeScale||1);
 export const GAIT_TABLE=Object.freeze({gaits:GAITS,dribble:DRIBBLE_GAITS});
 
 /** Piecewise-linear clip time for an engine act time through anchors [[engineT, clipT], ...] (sorted); held at the end. */
@@ -145,13 +147,13 @@ export function chooseTallMotion(pack,p,ctx,st){
  if(p.hasBall){
   if(p.dribbling!==false&&!st.guardLocked){
    if(speed<.3)return {kind:'layer',upper:'dribble_right',lower:'idle_ready_ball',rate:1,group:'dribble'};
-   const g=pickGait(DRIBBLE_GAITS,speed,st.dribbleGait);return {kind:'loop',clip:g,rate:gaitRate(speed,DRIBBLE_GAITS.find(x=>x[0]===g)[1]),group:g==='dribble_walk_right'?'dribble':'gait',dribble:true};
+   const g=pickGait(DRIBBLE_GAITS,speed,st.dribbleGait);return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,DRIBBLE_GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:g==='dribble_walk_right'?'dribble':'gait',dribble:true};
   }
   if(speed<.3)return {kind:'loop',clip:'idle_ready_ball',rate:1,group:'idle'};
  }
  const g=pickGait(GAITS,speed,st.gait);
  if(g==='idle_ready')return {kind:'loop',clip:'idle_ready',rate:1,group:'idle'};
- return {kind:'loop',clip:g,rate:gaitRate(speed,GAITS.find(x=>x[0]===g)[1]),group:'gait'};
+ return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:'gait'};
 }
 
 /** Ball-bounce phase for the view (floor contact at u = 0.42, the convention of the dribble code), from the clip's own events. */
