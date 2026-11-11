@@ -82,6 +82,25 @@
 - כרטיס ההקפה נבנה קודם על `state.events` של המודל, ואירועים מצעד שלא רואים (פריים שדולג, או המודל שמונע מבחוץ) אבדו; עכשיו לפי מצב (`player.lapTimes.length` גדל). הבדיקה בדפדפן תפסה את זה.
 - "הקפה 2 / 4" בתוך משפט בעברית התהפך ל-"4 / 2" (בידי); המספרים עטופים ב-`⁦…⁩` (כמו ב-HUD הקיים).
 
+## מסירה ל-M6: ליגה ארוכה (12-24 מרוצים לעונה, 5 עונות, קבוצות, יריבות, פודיום סוף עונה)
+רועי אחרי הבדיקה בטלפון: "פורמולה מעולה. נותר לבנות ליגה ארוכה." לא התחלתי אותה. מה להרחיב ב-`minigames/racing-league-core.mjs` (טהור, נטען באתחול, בלי ייבוא):
+| מבנה | היום | מה הליגה הארוכה צריכה |
+|---|---|---|
+| `GRID_DRIVERS` (12) | שם, מספר, צבע, `team`, `style`, `scoring` לפי אינדקס ברשימת המכוניות של המודל; רק 5 הראשונים בטבלה | להרחיב ל-12 נהגי ליגה: `scoring:true` לכולם, `teamId` משותף לזוגות (קבוצות של 2 כמו בפורמולה 1: 6 קבוצות), דירוג `rating` לכל נהג (היום רק ל-`DRIVERS`), ויריבות (`rival` = מזהה). השידור (`racing-broadcast.mjs`, `racing-tower.mjs`) כבר קורא מכאן, אז כל שינוי כאן מופיע בלוח, ברשת ובפודיום בלי קוד נוסף |
+| `DRIVERS` (4) | מקור השמות/הדירוג של נהגי הליגה ב-`raceSetup` (`racing-league.mjs`) וב-`applyRace` | לאחד עם `GRID_DRIVERS` (נהגי הליגה = `GRID_DRIVERS.filter(d=>d.scoring)`); `racing-physics.mjs` ממפה `drivers[index-1]` לפי אינדקס ולכן סדר הרשימה = סדר המכוניות |
+| `SEASONS` (3: `tier`, `laps`, `minRank`, `rating`) ו-`RACES_PER_SEASON=6` | `seasonStages` = 6 שלבי ה-tier; `nextSeason` שער לפי `minRank` | 5 עונות עם `races` לעונה (12-24) ולוח מסלולים (`calendar: [stageId...]`, חזרות על המסלולים מותרות); `seasonStages` לפי הלוח; `RACES_PER_SEASON` הופך לשדה של העונה (`applyRace`, `isRaceUnlocked`, `leagueSummary`, `raceStrip` ב-`ui/racing-league.mjs` ו-`validLeague` מסתמכים על הקבוע) |
+| `applyRace(state,{order,fastestLapId})` | מצפה בדיוק ל-5 מזהים (`player`,`ai-1..4`), `POINTS` ל-5 מקומות, `PRIZE` ל-5, סוגר עונה אחרי 6 | לקבל 10-12 מזהים (`ai-1..ai-11`), `POINTS` ל-10 מקומות (25-18-15-12-10-8-6-4-2-1), טבלת קבוצות (`teams`), `history` עם המסלול, ופודיום סוף עונה (`seasonPodium[season]=[id,id,id]`). שימו לב: `racing-league-result.mjs` מאמת `order.length===5` (`IDS`) ו-`racing-session.mjs` `leagueOrder` מסנן `scoring!==false`: שניהם צריכים לעבור ל-12 |
+| `validLeague` / `mergeLeague` | בדיקה קשיחה: `season` 1..3, `race` 0..6, `table` עם בדיוק 5 מפתחות, `history` עד `HISTORY_CAP=36` עם `place` 1..5, `champion`/`seasonRank` לעונות 1..3 | להרחיב את הטווחים ולהוסיף שדות חדשים **רק כאופציונליים** (ראו כללים) |
+
+כללי השמירה התוספתית שגיליתי (החוזה: גרסה 19 לא עולה):
+1. `validLeague` נקרא גם ב-`engine/persistence.mjs` שורה 196 (טעינה: שמירה לא תקינה = `invalid()` = נדחית כולה) וגם במיגרציה 18→19 (ליגה לא תקינה = `createLeague()`). כל שדה חדש חייב להתקבל גם כשהוא חסר, אחרת כל שמירה קיימת של גרסה 19 תידחה בטעינה. הנוסח: `l.teams===undefined || plain(l.teams)&&...`.
+2. `table` נבדק עם `Object.keys(l.table).length !== ids.length`: הרחבה ל-12 מזהים חייבת להשלים מפתחות חסרים בטעינה (`createLeague()` חדש מול שמירה ישנה עם 5) ולא לדחות; הדרך: `normalizeLeague(l)` שמוסיף ברירות מחדל לפני `validLeague`, או בדיקה "לפחות 5 המפתחות הישנים ואפס לחדשים".
+3. `history[].place` 1..5 ו-`race` 0..5: שמירה חדשה עם `place` 7 תיפסל בקוד הישן אבל זה בסדר (קדימה בלבד); הפוך אסור: הקוד החדש חייב לקבל `place` 1..5 ו-6 מרוצים לעונה מהשמירות הקיימות.
+4. `mergeLeague` (ייבוא גיבוי) משווה `season*10+race`: עם 24 מרוצים לעונה המקדם חייב לעלות (`season*100+race`), אחרת עונה 1 מרוץ 12 "גדול" מעונה 2 מרוץ 0.
+5. `history` מוגבל ל-`HISTORY_CAP=36` ונחתך מההתחלה: 5 עונות × 24 = 120 רשומות; `raceStrip` ו-`leagueSummary.career` קוראים מהרשומות, אז או להעלות את התקרה (עדיין קטן: כ-60 בתים לרשומה) או לשמור סיכום לעונה.
+6. הסימולציה (`tools/racing-league-sim.mjs`) מריצה `raceSetup`/`applyRace` ישירות: להריץ אחרי כל שינוי; 5 עונות × 24 מרוצים × 4 תרחישים ≈ 10 דקות, אפשר לצמצם עם `RACING_SIM_SEASONS`.
+7. ה-UI (`ui/racing-league.mjs`): `resultBody` מדפיס `מקום X / 5` ו-`standingsTable` 5 שורות: להחליף ב-`GRID_DRIVERS.filter(scoring).length`; `raceStrip` 6 תאים (ב-CSS 3/6 עמודות): לוח של 12-24 צריך גלילה או שורות.
+
 ## משימת Codex (extra high): גרפיקת שידור למרוצי האי
 - תיקייה: `workout/island/design/racing-broadcast/`
 - לבנות: (1) גשר רמזורי זינוק כ-GLB קטן (עד 3K משולשים) עם 5 נורות כחומרים נפרדים (emissive שאפשר להדליק מהקוד, שמות `lamp1..lamp5`), להצבה מעל קו הזינוק; (2) ערכת פאנלים לשידור: רקע לוח דירוג (פס 150×12 חוזר), מסגרת כרטיסייה 9-slice, רקע פודיום 844×390 עם קהל וקונפטי (WebP עד 300KB); (3) 12 סמלי קבוצות 64×64 (SVG) לפי הצבעים והשמות ב-`GRID_DRIVERS` (להבה, גל, שמש, ים, כסף, שקיעה, יער, סגול, חול, סלע, לילה, ענן), בלי מותגים אמיתיים ובלי טקסט.
