@@ -15,6 +15,10 @@ await page.waitForFunction(()=>window.__session?.snapshot?.renderMetrics?.frames
 await page.waitForTimeout(1500);
 await page.screenshot({path:path.join(out,process.env.SHOT_NAME||'idle.png')});
 if(process.env.PROBE)console.log('PROBE',JSON.stringify(await page.evaluate(()=>{const m=window.__session.debug.model,p=m.state.player,t=m.track,q=t.project(p.x,p.z);return {s:p.s,x:p.x,y:p.y,z:p.z,lateral:p.lateral,offroad:p.offroad,speed:p.speed,roadY:q.y,dist:q.distance,width:t.width,len:t.length};})));
+
+if(process.env.TELEPORT){for(const [i,frac] of process.env.TELEPORT.split(',').map(Number).entries()){
+ await page.evaluate(f=>{const m=window.__session.debug.model,p=m.state.player,t=m.track,q=t.sample(f*t.length);p.x=q.x;p.z=q.z;p.y=q.y;p.s=q.s;p.heading=q.heading;p.lateral=0;p.speed=30;},frac);
+ await page.waitForTimeout(1200);await page.screenshot({path:path.join(out,(process.env.SHOT_NAME||'tp').replace('.png','')+'-'+i+'.png')});}}
 if(touch.length===2){
  const cdp=await ctx.newCDPSession(page);
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:touch[0],y:touch[1],id:1}]});
