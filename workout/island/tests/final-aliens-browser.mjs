@@ -54,9 +54,10 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
  // 1b. Ship movement through the real stick (alienMove): top speed, time to 90% of it, lean angle, glide after release.
  if(await alive()){const stick=await center('#joystick');const samples=[];let t=0;
   await page.evaluate(()=>{window.__mv=[];const m=window.__island.games.current.session.debug.model;const u=m.update.bind(m);m.update=(dt,i)=>{const r=u(dt,i);window.__mv.push([+m.time.toFixed(3),+m.player.x.toFixed(2),+(m.player.vx||0).toFixed(1),+(m.player.bank||0).toFixed(3)]);return r;};});
-  await touch('touchStart',[{...stick,id:1}]);await touch('touchMove',[{x:stick.x+46,y:stick.y,id:1}]);await tick(1000);await touch('touchEnd');await tick(900);
+  // 0.45 s of full stick (the ship crosses about a third of the screen, no wall contact), then release and watch the glide.
+  await touch('touchStart',[{...stick,id:1}]);await touch('touchMove',[{x:stick.x+46,y:stick.y,id:1}]);await tick(450);await touch('touchEnd');await tick(900);
   const mv=await page.evaluate(()=>{const v=window.__mv;window.__mv=[];return v;});const t0=mv[0][0];let top=0;for(const r of mv)top=Math.max(top,Math.abs(r[2]));
-  const t90=mv.find(r=>Math.abs(r[2])>=.9*top);const release=mv.find(r=>r[0]-t0>=1);const xAtRelease=release?release[1]:mv.at(-1)[1],glide=+(Math.abs(mv.at(-1)[1]-xAtRelease)).toFixed(1);
+  const t90=mv.find(r=>Math.abs(r[2])>=.9*top);const release=mv.find(r=>r[0]-t0>=.45);const xAtRelease=release?release[1]:mv.at(-1)[1],glide=+(Math.abs(mv.at(-1)[1]-xAtRelease)).toFixed(1);
   const bankAngle=await page.evaluate(()=>window.__island.data.config.minigames.alienDefense.render.bankAngle),tilt=+(Math.max(...mv.map(r=>Math.abs(r[3])))*bankAngle*180/Math.PI).toFixed(1);
   const r={topSpeed:+top.toFixed(0),timeTo90pct:t90?+(t90[0]-t0).toFixed(2):null,tiltDeg:tilt,glideAfterRelease:glide,samples:mv.length};report.motion=r;console.log('motion',JSON.stringify(r));
   check(r.topSpeed>=200,`stick: top speed ${r.topSpeed} units/s`);check(before||(r.timeTo90pct!==null&&r.timeTo90pct<=.35),`stick: 90% of top speed after ${r.timeTo90pct} s (eased, target <= 0.35)`);check(before||r.tiltDeg>=8,`stick: lean ${r.tiltDeg} degrees`);check(before||r.glideAfterRelease>=6,`stick: glide ${r.glideAfterRelease} units after release (v20 stops dead)`);

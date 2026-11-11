@@ -60,19 +60,22 @@ test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboa
   assert.match(css,/#weapon-btn\{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px/,'weapon button at least 44 px');
   assert.match(css,/#game\.hudv21 \.ability\{width:52px;height:52px;border-radius:50%/,'round ability buttons at least 44 px');
   assert.match(css,/#game\.hudv21 \.abilities\{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column/,'abilities in a right column, not a mid-screen row');
+  assert.match(css,/#game\.hudv21:not\(\.aimstick\) \.abilities\{bottom:96px\}/,'desktop: the ability column clears the weapon button');
+  assert.match(css,/#game\.hudv21 \.wave-block\{top:44px\}/,'portrait: the wave counter drops below the strips');
+  assert.match(css,/#game\.hudv21 \.ability small\{font-size:10px/);
 });
 
 test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, smoothing, immediate stop, precision finger, sensitivity setting)', async()=>{
   const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
   assert.match(src,/const STICK_V21=AIMSTICK&&new URLSearchParams\(location\.search\)\.get\('boarStick'\)!=='v20'/);
-  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_LIN=\.2,STICK_TAU=\.045,STICK_PRECISE=\.35/);
+  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_LIN=\.3,STICK_TAU=\.045,STICK_PRECISE=\.35/);
   assert.match(session,/get\('boarStick'\)==='v20'\)url\.searchParams\.set\('boarStick','v20'\)/);
   assert.match(css,/#aim-ring\.v21\{width:168px;height:168px/);
   assert.match(css,/#crosshair\.moving u\{opacity:1\}/);
   // the curve as written in game.js
-  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?mag*(.2+.8*mag):mag;};
+  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?mag*(.3+.7*mag):mag;};
   assert.equal(stickMag(.05,true),0,'inside the dead zone');
-  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.5,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
+  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.6,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
   // linear start: just past the dead zone the response is proportional (slope 0.2), no jump and no flat spot
   assert.ok(stickMag(.081,true)>0&&stickMag(.081,true)<.001);const ratio=stickMag(.18,true)/stickMag(.13,true);assert.ok(ratio>1.9&&ratio<2.6,'response about doubles when the tilt past the dead zone doubles (linear start, gentle growth): '+ratio);
   assert.equal(stickMag(1,true),1,'full tilt keeps the full speed');

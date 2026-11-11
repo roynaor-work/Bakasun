@@ -140,7 +140,7 @@ const HUD_V20={hud:0.2152,band:0.4297,withControls:0.2605};
 ok('HUD coverage at most half of v20 (whole viewport and the middle band)',hudCoverage.hud<=HUD_V20.hud*.5&&hudCoverage.band<=HUD_V20.band*.5,{after:hudCoverage,v20:HUD_V20});
 // v20 stick on this harness (MODE=v20): fine-aim speed at a 20% tilt 0.145 units/s (linear curve), no precision finger, R 62.
 const P=S.stickPrecision;
-ok('stick: a 20% tilt aims at most half the v20 speed (fine aiming)',P.fineSpeed!=null&&P.fineSpeed>0&&P.fineSpeed<=.145*.5,P);
+ok('stick: a 20% tilt aims at most 60% of the v20 speed (fine aiming, linear start)',P.fineSpeed!=null&&P.fineSpeed>0&&P.fineSpeed<=.145*.6,P);
 ok('stick: a full tilt reaches x=0.6 within 1.2 s of game time and the crosshair stops at once on release (overshoot under 0.01)',P.timeToTarget!=null&&P.timeToTarget<=1.2&&Math.abs(P.overshoot)<.01&&P.stickAfterRelease===null,P);
 ok('stick: a second finger on the stick zone slows the crosshair to under half',P.preciseFlag===true&&P.fullSpeed>0&&P.preciseSpeed!=null&&P.preciseSpeed<P.fullSpeed*.5,P);
 ok('stick: the fine/target/precision drags fired nothing',P.shots===0,P.shots);

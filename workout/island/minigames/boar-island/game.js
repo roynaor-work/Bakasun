@@ -33,7 +33,7 @@ let weaponBtn=null,frames=0;
 const STICK_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarStick')!=='v20';
 // 11/11/2026 (Roy, v21 on the phone: "עדיין לא זז חלק"): the response starts linear (slope STICK_LIN at the dead-zone edge, no jump) and grows to the full speed at full tilt;
 // the crosshair moves with a compositor transform, and the adaptive resolution never changes while the stick is held (each change re-sizes the renderer = a hitch).
-const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_LIN=.2,STICK_TAU=.045,STICK_PRECISE=.35,AIM_SPEED_X=1.6,AIM_SPEED_Y=1.3;
+const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_LIN=.3,STICK_TAU=.045,STICK_PRECISE=.35,AIM_SPEED_X=1.6,AIM_SPEED_Y=1.3;
 let trace=null,moveCount=0,resChanges=0;
 const AIM_SENS={low:.7,mid:1,high:1.4},AIM_SENS_NAME={low:'נמוכה',mid:'בינונית',high:'גבוהה'};
 let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AIM_SENS)aimSens=v;}catch{}

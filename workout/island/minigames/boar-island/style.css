@@ -178,7 +178,7 @@
 #game.hudv21 .ability{width:52px;height:52px;border-radius:50%;border:1px solid #ffffff55;background:#10283aa6;box-shadow:0 2px 8px #0006;display:grid;place-items:center;align-content:center;padding:0}
 #game.hudv21 .ability strong,#game.hudv21 .ability kbd{display:none}
 #game.hudv21 .ability-icon{font-size:20px;line-height:20px}
-#game.hudv21 .ability small{font-size:8px;line-height:1;color:#cfe3ea}
+#game.hudv21 .ability small{font-size:10px;line-height:1;color:#cfe3ea}
 #game.hudv21 .ability i{height:2px}
 #game.hudv21 .ability.fury{background:#4a3a1fa6}
 #weapon-btn{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px;border-radius:14px;border:1px solid #ffd06b80;background:#12273ab8;color:#f4f3e9;display:grid;place-items:center;align-content:center;gap:1px;padding:3px;overflow:hidden;box-shadow:0 3px 10px #0007;touch-action:manipulation;-webkit-touch-callout:none;user-select:none}
@@ -190,11 +190,17 @@
 /* with the aim stick: weapon button left of the fire button, abilities in the column above the fire button */
 #game.aimstick.hudv21 #weapon-btn{right:136px;bottom:40px}
 #game.aimstick.hudv21 .abilities{right:46px;bottom:140px}
-#game.aimstick.hudv21 #aim-rest{width:110px;height:110px;border-color:#cfddd340;background:none}
-#game.aimstick.hudv21 #aim-rest:after{font-size:12px;color:#cfddd380}
+#game.aimstick.hudv21 #aim-rest{width:110px;height:110px;border-color:#cfddd399;background:none}
+#game.aimstick.hudv21 #aim-rest:after{font-size:12px;color:#cfddd3cc}
+/* desktop (no stick): the weapon button sits in the corner, the ability column above it */
+#game.hudv21:not(.aimstick) .abilities{bottom:96px}
 @media(max-width:700px){
   #game.aimstick.hudv21 #weapon-btn{right:10px;bottom:140px}
   #game.aimstick.hudv21 .abilities{right:84px;bottom:140px}
+  /* portrait: the defence strip and the wave counter cannot share the top line */
+  #game.hudv21 .health-block{width:120px}
+  #game.hudv21 .wave-block{top:44px}
+  #game.hudv21 .battle-hint,#game.hudv21 .battle-hint.touch-hint{top:70px}
 }
 
 /* 11/11/2026 (Roy, phone): precise stick. Bigger floating ring, a precision label with a second finger, a direction arrow on the crosshair. `?boarStick=v20` restores the v20 stick. */
