@@ -15,6 +15,7 @@ import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-8';
 import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-8';
 import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-8';
 
+const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
 function controlMode(snapshot){
@@ -34,7 +35,8 @@ export function startHoops(ctx){
  const storage=(()=>{try{return globalThis.localStorage;}catch{return null;}})();
  const setup=matchTeams(balance,ctx.hoops,{stage,equipment:ctx.equipment||{},power:ctx.power||1,game:ctx.hoopsGame});
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2'});
+ // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
@@ -77,7 +79,7 @@ export function startHoops(ctx){
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
- controls=createHoopsControls({root,doc,config:balance.controls,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
+ controls=createHoopsControls({root,doc,config:{...balance.controls,doubleTap:(balance.play?.doubleTapMs??260)/1000},onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
  doc.addEventListener('visibilitychange',()=>{last=0;loop.reset();controls.setEnabled(!doc.hidden&&!paused&&!view?.replaying);audio.setPaused(paused||doc.hidden);},on);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
@@ -130,6 +132,9 @@ export function startHoops(ctx){
    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
    if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
    if(e.type==='timeout'&&e.team===0)openBench();
+   // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
+   if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
+   if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
   }
  }
 
