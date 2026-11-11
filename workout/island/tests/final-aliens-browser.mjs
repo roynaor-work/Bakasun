@@ -10,6 +10,7 @@ import {mkdir} from 'node:fs/promises';
 const before=process.env.MODE==='before',part=before?'final-fix-fable/aliens-before':'final-fix-fable/aliens';
 const frames=new URL('../verification/final-fix-fable/frames/',import.meta.url);await mkdir(frames,{recursive:true});
 const BOT_CAP_SECONDS=Number(process.env.FINAL_ALIENS_BOT_CAP||260);
+let failures=[];
 await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,exit,nav,assert})=>{
  if(before)await page.evaluate(()=>{globalThis.__alienV15=false;globalThis.__alienMove=false;});
  const client=await context.newCDPSession(page),touch=(type,points=[])=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
@@ -114,7 +115,9 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
   await tick(300);await capture('4-stage-end');
  }
  await leave();
- report.fails=fails;
- if(fails.length){console.error('FAILED',fails);assert.fail(`${fails.length} acceptance checks failed: ${fails.join(' | ')}`);}
+ report.fails=fails;failures=fails;void assert;
  return report;
 });
+// The numbers are written to verification.json in both modes (a thrown assertion would drop the report row); the
+// exit code carries the verdict: non-zero on any failed check, so MODE=before fails and the default must pass.
+if(failures.length){console.error('FAILED',failures);process.exitCode=1;}else console.log('all acceptance checks passed');

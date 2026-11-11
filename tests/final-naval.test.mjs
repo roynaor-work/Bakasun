@@ -130,11 +130,11 @@ test('ammo limit: flag, magazines from the stage stock (12 to 24 loaded shells),
  assert.equal(navalLoad(28,13),13);assert.equal(navalLoad(5,13),5,'a stock smaller than the magazine loads what there is');assert.equal(navalLoad(0,13),0);
  assert.deepEqual(navalAmmoState(13,13,3),{fraction:1,level:'ok'});assert.equal(navalAmmoState(3,13,3).level,'low');assert.equal(navalAmmoState(0,13,3).level,'empty');
  const c=navalSupplyConfig(nb);assert.equal(c.lowShells,3);assert.equal(c.collect,16);assert.deepEqual(c.refill,{guided:1,torpedo:4,mine:2,salvo:2});
- assert.equal(navalSupplyNeeded(13,28,160,m1,[],nb),false);assert.equal(navalSupplyNeeded(3,15,160,m1,[],nb),true,'low shells with stock left');assert.equal(navalSupplyNeeded(3,3,160,m1,[],nb),false,'no stock to load: the emergency refill handles it, not a buoy');
+ assert.equal(navalSupplyNeeded(13,28,160,m1,[],nb),false);assert.equal(navalSupplyNeeded(3,15,160,m1,[],nb),true,'low shells');assert.equal(navalSupplyNeeded(3,3,160,m1,[],nb),true,'low shells even with no stock: the buoy brings fresh shells');
  assert.equal(navalSupplyNeeded(13,28,30,m1,[],nb),true,'low belt');assert.equal(navalSupplyNeeded(3,15,160,m1,[{x:0,z:0}],nb),false,'one buoy at a time');
  assert.equal(navalSupplyNeeded(7,28,160,m1,[],nb,true),true,'after a sinking below the wave share');assert.equal(navalSupplyNeeded(9,28,160,m1,[],nb,true),false);
  const r=seededRandom(7);for(let i=0;i<50;i++){const b=navalBuoySpot({x:60,z:0,heading:Math.PI/2},r,nb.movement,nb);assert.ok(b.x>=nb.movement.minX&&b.x<=nb.movement.maxX&&b.z>=nb.movement.minZ&&b.z<=nb.movement.maxZ);const d=Math.hypot(b.x-60,b.z);assert.ok(d>=30&&d<=70.01,`distance ${d}`);}
- const ammo=[2,0,3,6,8,3],got=navalCollect(ammo,2,20,m1,nb.levels[0],nb);assert.equal(got.loaded,2,'reload cannot exceed the stock');assert.deepEqual(ammo,[2,1,7,6,8,3]);assert.deepEqual(got.added,[0,1,4,0,0,0]);assert.equal(got.belt,140);
+ const ammo=[2,0,3,6,8,3],got=navalCollect(ammo,2,20,m1,nb.levels[0],nb);assert.equal(got.loaded,13,'a full magazine of fresh shells');assert.deepEqual(ammo,[13,1,7,6,8,3],'the stock grew by the 11 missing rounds');assert.deepEqual(got.added,[11,1,4,0,0,0]);assert.equal(got.belt,140);
  assert.equal(navalBuoyReached({x:60,z:0},{x:70,z:10},nb),true);assert.equal(navalBuoyReached({x:60,z:0},{x:80,z:0},nb),false);
  const buoy={x:120,z:0,born:0};assert.equal(navalBuoyDrift(buoy,{x:60,z:0},0,.5,1,nb),false,'waits driftAfter');assert.equal(navalBuoyDrift(buoy,{x:60,z:0},5,.5,10,nb),false,'does not drift while shells are loaded');
  assert.equal(navalBuoyDrift(buoy,{x:60,z:0},0,.5,10,nb),true);assert.ok(Math.abs(buoy.x-112)<1e-9&&buoy.drifting);
@@ -149,7 +149,7 @@ test('ammo limit in the model: the stock keeps the stage counts, the magazine em
  assert.equal(m.loaded,0);assert.equal(m.ammoState.level,'empty');const fired=m.fired;m.update(.02,{ammoIndex:0,aimYaw:1.2,aimElevation:30,aimPower:1,fireRelease:true});assert.equal(m.fired,fired,'nothing loaded, nothing fires');
  // Passive ship: the buoy drifts over within a few seconds and reloads from the stock.
  for(let i=0;i<400&&m.loaded<=0;i++)m.update(.02,{});
- assert.ok(m.loaded>0,'reloaded');assert.equal(m.supplies,1);assert.equal(m.buoys.length,0);assert.equal(m.lastAction.type,'supply');assert.equal(m.loaded,Math.min(13,m.ammo[0]));
+ assert.ok(m.loaded>0,'reloaded');assert.equal(m.supplies,1);assert.equal(m.buoys.length,0);assert.equal(m.lastAction.type,'supply');assert.equal(m.loaded,13);assert.ok(m.ammo[0]>=13,'the stock holds the fresh magazine');
  assert.equal(createNavalModel({config,balance:nb,level:1,seed:3,random:seededRandom(3)}).magazines.ammo[0],13);
 });
 
