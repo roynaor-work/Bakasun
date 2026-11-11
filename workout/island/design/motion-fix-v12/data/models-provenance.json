@@ -1,0 +1,3436 @@
+{
+  "schemaVersion": 1,
+  "generator": "source-models.mjs",
+  "license": "CC0-1.0",
+  "models": [
+    {
+      "id": "canonical-player-01",
+      "label": "שחקן 1",
+      "path": "runtime/models/canonical-player-01.glb",
+      "profile": "canonical18",
+      "role": "field",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 795740,
+      "sha256": "d6c8ac7d103a51fb7a48875641a88623173e466c05e87c52cf1cec2b6366b122",
+      "source": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "ref": "codex/soccer-motion-v11",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/celebrate_player.glb",
+        "sha256": "b723711ad5c46afca7ef3651e80fba2effcf439f91639418f2527433250ea85a",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "canonical-player-02",
+      "label": "שחקן 2",
+      "path": "runtime/models/canonical-player-02.glb",
+      "profile": "canonical18",
+      "role": "field",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1011928,
+      "sha256": "a0ad6c0b4488391df3eaf10ac9e2f04eb60988c155d94daf40c425dcda76d68c",
+      "source": {
+        "commit": "ae09529bc8fc9ff42f6aa76b8e79e7f760992f62",
+        "ref": "main",
+        "path": "workout/island/design/soccer-v7/characters/models/player-02-lod1.glb",
+        "sha256": "142653e332c367f696c19af2e098d6d12df4974707dbf05c5820f485d8adc613",
+        "license": "CC0-1.0"
+      },
+      "processing": "Offline Draco decode; animation removed; bind skeleton unchanged.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "canonical-player-03",
+      "label": "שחקן 3",
+      "path": "runtime/models/canonical-player-03.glb",
+      "profile": "canonical18",
+      "role": "field",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1053356,
+      "sha256": "adc1994fee3a67c57e20f44672083ed21fe2b95b95ce0ebb24ae4d44294d7955",
+      "source": {
+        "commit": "ae09529bc8fc9ff42f6aa76b8e79e7f760992f62",
+        "ref": "main",
+        "path": "workout/island/design/soccer-v7/characters/models/player-03-lod1.glb",
+        "sha256": "5438af304eefb02dd1b54bd4e5c00670ddb1ff3a6afe6e7f7b6d31e8abfb8180",
+        "license": "CC0-1.0"
+      },
+      "processing": "Offline Draco decode; animation removed; bind skeleton unchanged.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "canonical-keeper",
+      "label": "שוער",
+      "path": "runtime/models/canonical-keeper.glb",
+      "profile": "canonical18",
+      "role": "keeper",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 786928,
+      "sha256": "2314b1942ef5bc2534c25adb5ed40b2a8e9e406ab064096cdccacc1aa1fb13b9",
+      "source": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "ref": "codex/soccer-motion-v10",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/goalkeeper_hand_roll.glb",
+        "sha256": "56a6404d7a2a51f7e33caa4b8fda4d9e75e59dfe45c227f8ec46617d92ed5428",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "canonical-hoops",
+      "label": "שחקן כדורסל",
+      "path": "runtime/models/canonical-hoops.glb",
+      "profile": "canonical18",
+      "role": "hoops",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 636560,
+      "sha256": "b76cabad6532df003e731c4ce63d4695d665733115d98819ca68aaa486698ad0",
+      "source": {
+        "commit": "6dd1675ded8ef2c9d361821aa1642ab75de90541",
+        "ref": "codex/hoops-motion-v9",
+        "path": "workout/island/design/hoops-motion-v9/runtime/clips/basket_cut_left.glb",
+        "sha256": "44d528ae302fadb41a730ae06655910c7ed4bc4308c0d16ffbc9f12f380cda5f",
+        "license": "CC0-1.0"
+      },
+      "processing": "Offline Draco decode; animation removed; bind skeleton unchanged.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "tennis",
+      "label": "שחקן טניס ומחבט",
+      "path": "runtime/models/tennis.glb",
+      "profile": "canonical18",
+      "role": "tennis",
+      "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.18,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.13,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            0.86,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.1,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.37,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.27,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.24,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.41,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.1,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 341352,
+      "sha256": "562ed7b4821f617983b8b0ae88ad1c30ef2ecf9c15dfd5ba92d01aeb31d6988a",
+      "source": {
+        "commit": "e1338bbc0998768fa654f551d50b71c298cb6542",
+        "ref": "codex/tennis-motion-v1",
+        "path": "workout/island/design/tennis-motion-v1/runtime/clips/backhand_flat_long.glb",
+        "sha256": "1d04edc9cacd0aae6bb6f228edfcdb3391bb975b316716f17b80522628ea6f29",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "tall-guard",
+      "label": "guard",
+      "path": "runtime/models/tall-guard.glb",
+      "profile": "guard",
+      "role": "hoops",
+      "rigFingerprint": "6588d3110988ddda39ef4a4998f8b8c0e4fcf78e914bd7122ad8692575344f89",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2305843806624474,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.03909909063406716,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.0276043053502095,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13033030211355723,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.21454372809462496,
+            0.10025407854889018,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.4521458942554947,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.38096549848578265,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.3408638670662266,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.49425260724602854,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.10526678247633467,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.23559708458989187,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1030616,
+      "sha256": "01837a9378834468d75478fa195154a7a988d73ff508b96e0f4457b9b67d6d40",
+      "source": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "ref": "codex/hoops-tall-v1",
+        "path": "workout/island/design/hoops-tall-v1/runtime/guard.glb",
+        "sha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "tall-wing",
+      "label": "wing",
+      "path": "runtime/models/tall-wing.glb",
+      "profile": "wing",
+      "role": "hoops",
+      "rigFingerprint": "3b53d1ea29c890d5f550a7e98ad10936ca081bb2489b40a87d2cccc695687607",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.24284950535149372,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04117882916829676,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.082264099476709,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.13726276389432254,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.23838318618785534,
+            0.10558674145717117,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.47619620397184204,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.4333279869402306,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.38771451463073264,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5205426353838539,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.11696371284918135,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.24812884242435226,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1030612,
+      "sha256": "21866593c085ab108c0d7e46f3208277cb623351a2ea2d1880d9450ac3771800",
+      "source": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "ref": "codex/hoops-tall-v1",
+        "path": "workout/island/design/hoops-tall-v1/runtime/wing.glb",
+        "sha256": "e5621aad5be2864d4c0aafb43571dc285f1559928bbb13a8430cb25d610526d5",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    },
+    {
+      "id": "tall-center",
+      "label": "center",
+      "path": "runtime/models/tall-center.glb",
+      "profile": "center",
+      "role": "hoops",
+      "rigFingerprint": "e14e90e198e0992f0062fb38a475d90e538c975b9a6c0b558b3fc78b44b14744",
+      "rig": [
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "translation": [
+            0,
+            0.2551146445843419,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "translation": [
+            0,
+            0.04325857016864927,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "translation": [
+            0,
+            1.1369239593516665,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "translation": [
+            0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "translation": [
+            0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "translation": [
+            0,
+            0.14419523389549757,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "translation": [
+            -0.2634779681502808,
+            0.1109194106888443,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "translation": [
+            0,
+            -0.5002465422066877,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "translation": [
+            0,
+            -0.47207301189172135,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "translation": [
+            0,
+            -0.4223811159031191,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "translation": [
+            0,
+            -0.5468326946960024,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "translation": [
+            -0.12927657315784802,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Root",
+          "parent": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "translation": [
+            0,
+            0.2606606151187841,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1030612,
+      "sha256": "1305fd7c45724957554df3638ddc3bec1e469ad771cd69dec134b229bded6112",
+      "source": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "ref": "codex/hoops-tall-v1",
+        "path": "workout/island/design/hoops-tall-v1/runtime/center.glb",
+        "sha256": "68c770f5f93126cb821818dfa857a2bb9cc67ca08d6584c5e9a169767a853e62",
+        "license": "CC0-1.0"
+      },
+      "processing": "Animation removed; native source geometry and bind skeleton preserved.",
+      "maximumTransformError": 0
+    }
+  ]
+}
