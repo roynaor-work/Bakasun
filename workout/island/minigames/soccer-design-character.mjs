@@ -7,7 +7,7 @@ import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
-import {soccerMotionV10Enabled,soccerV10ClipsUrl,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
+import {soccerMotionV10Enabled,soccerV10ClipsUrl,soccerMotionV12Enabled,soccerV12ClipsUrl,soccerV12Overlay,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM,soccerKeeperV11Enabled,soccerV11ClipsUrl,soccerV11States,soccerV11DiveClip,soccerV11DivePlan} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 
@@ -195,9 +195,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       // The simulation's 0.6 s recovery used to play the whole fall and get-up (2.5 s of clip) at up to 2.7x: measured pops of 53-57 degrees per
       // frame. The v9 timeline is now stretched over recovery + SLIDE_SLOW_SECONDS; once the simulation lets go, a standing player finishes the
       // get-up at the rate it had (a moving player interrupts it into the run, as before). `?soccerSlideSlow=1` turns this on (default off).
-      const stretch=soccerSlideSlowEnabled()?SLIDE_SLOW_SECONDS:0,span=slide.recoverSeconds+stretch;
-      const v9=soccerMotionV9Enabled()?slideRecoverTime(clip.parts,span,clamp((slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))/span,0,1),stretch?{fallMaxSpeed:SLIDE_FALL_MAX_SPEED}:{}):null;
-      if(v9!==null&&clip.parts?.length>=3){const rise=clip.parts[2];slide.rate=Math.max(1,rise.durationSeconds*.78/(Math.max(.05,span)*(1-clamp(clip.parts[1].durationSeconds/((stretch?SLIDE_FALL_MAX_SPEED:3)*span),.15,.45))));}
+      const slow=soccerSlideSlowEnabled()&&slide.recoverSeconds>=SLIDE_SLOW_MIN_RECOVER,stretch=soccerSlideSlowEnabled()&&!slow?SLIDE_SLOW_SECONDS*0:0,span=slide.recoverSeconds+stretch;
+      const v9=soccerMotionV9Enabled()?slideRecoverTime(clip.parts,span,clamp((slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))/span,0,1),slow?{fallMaxSpeed:SLIDE_FALL_MAX_SPEED}:{}):null;
+      if(v9!==null&&clip.parts?.length>=3){const rise=clip.parts[2];slide.rate=Math.max(1,rise.durationSeconds*.78/(Math.max(.05,span)*(1-clamp(clip.parts[1].durationSeconds/((slow?SLIDE_FALL_MAX_SPEED:3)*span),.15,.45))));}
       t=v9!==null?Math.max(t,v9):Math.max(t,slideDur+(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
     }
     else{
@@ -206,7 +206,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       if(moving||t>=total-1e-5){slide=null;return true;}
       slide.follow=true;t=Math.min(total,t+dt*Math.max(1,slide.rate));
     }
-    slide.time=t;action.stopFading().setEffectiveWeight(1).setEffectiveTimeScale(0);action.time=clamp(t,0,total);
+    slide.age=(slide.age||0)+dt;slide.time=t;action.stopFading().setEffectiveWeight(soccerSlideSlowEnabled()?clamp(slide.age/SLIDE_BLEND_IN,0,1):1).setEffectiveTimeScale(0);action.time=clamp(t,0,total);
     if(t>=total-1e-5&&mode!=='slide'&&mode!=='recover'){slide=null;return true;}
     return false;
   };
@@ -268,8 +268,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         // GPT v7 keeper dives: the side comes from the dive direction against the keeper's facing
         // (anatomical left is (cos yaw, -sin yaw) in x,z), the high clip from the ball height.
         const left=-Math.sin(yaw)*(p.diveZ||1)>0,high=(s.ball.y||0)>1.1&&left;
-        const v8=soccerV8DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])),plan=v8&&soccerV8DivePlan(data.states[v8]);
-        if(plan){dive={name:v8,contact:plan.contact,settleRate:plan.settleRate,rate:plan.rate};change(v8,'fall_confirmed',true,{at:plan.at,rate:plan.rate,fadeSeconds:soccerSlideSlowEnabled()?.12:.06});}
+        const v11=soccerKeeperV11Enabled()?soccerV11DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])):null,plan11=v11&&soccerV11DivePlan(data.states[v11]);
+        const v8=plan11?null:soccerV8DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])),plan=plan11||(v8&&soccerV8DivePlan(data.states[v8])),diveName=plan11?v11:v8;
+        if(plan){dive={name:diveName,contact:plan.contact,settleRate:plan.settleRate,rate:plan.rate};change(diveName,'fall_confirmed',true,{at:plan.at,rate:plan.rate,fadeSeconds:soccerSlideSlowEnabled()?.12:.06});}
         else{
           const chosen=actions.keeper_dive_left?(high?'keeper_dive_high':left?'keeper_dive_left':'keeper_dive_right'):'fall';
           change(chosen,'fall_confirmed',true,{rate:chosen==='fall'?1:data.states[chosen].durationSeconds/1.05});
@@ -358,13 +359,15 @@ export function keeperStand(character,p,s,dt){
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
 let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,lastV8Error=null;
 /** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
-let lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
+let lastV12=null,lastV11Error=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
 /** One line for the load report / debug: which motion packs are in this match, and why one was skipped. */
-export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5;
-/** Opt-in (`?soccerSlideSlow=1`): the get-up is not finished when the simulation returns control, so it needs phone testing and, to be the default, a longer simulated recovery. */
-export const soccerSlideSlowEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerSlideSlow')==='1';
-export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error].filter(Boolean));}
+export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5,SLIDE_SLOW_MIN_RECOVER=1,SLIDE_BLEND_IN=.1;
+/** On by default; `?soccerSlideSlow=0` restores the old timing. It only changes anything when the simulated recovery is 1 s or longer (the product
+ * preset sets 1.1 s): the fall then plays at most 1.5x instead of 3x and the body is still upright when control returns. A 0.6 s recovery
+ * (`?soccerTeams=6`) keeps the old timeline, which the upright-at-control tests pin. */
+export const soccerSlideSlowEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerSlideSlow')!=='0';
+export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error,lastV11Error&&'v11: '+lastV11Error,lastV12?.error&&'v12: '+lastV12.error].filter(Boolean));}
 /** Why the v8 motion clips were skipped (null when loaded or not asked for). */
 export function soccerV8MotionError(){return lastV8Error;}
 /** Why the authored characters last failed to prepare (for the load report). */
@@ -426,13 +429,17 @@ async function prepareV7(loader){
   if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
   let v10={};
   if(soccerMotionV10Enabled(null)){try{v10=soccerV10States(await fetchJson(soccerV10ClipsUrl()));}catch(error){lastV10Error=String(error?.message||error);}}
-  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length};
-  const data={...library,states:{...library.states,...extra.states,...v8,...v9,...v10}};
+  lastV12=null;
+  if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length)){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10});v9=o.v9;v10=o.v10;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
+  let v11={};lastV11Error=null;
+  if(soccerKeeperV11Enabled()){try{v11=soccerV11States(await fetchJson(soccerV11ClipsUrl()));}catch(error){lastV11Error=String(error?.message||error);}}
+  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12};
+  const data={...library,states:{...library.states,...extra.states,...v8,...v9,...v10,...v11}};
   const lod0=names.map((_,i)=>glbs[i*2].scene),lod1=names.map((_,i)=>glbs[i*2+1].scene);
   for(const scene of lod0)joinSoccerV7Meshes(scene);for(const scene of lod1)joinSoccerV7Meshes(scene,{doubleSided:false});
   const firstMesh=scene=>{let m=null;scene.traverse(o=>{if(!m&&o.isSkinnedMesh)m=o;});return m;};
   return finishSources({scenes:lod0,rig:soccerV7Rig(lod0[0]),map:soccerV7Map(map),data,set:'v7',outfield:SOCCER_V7_FILES.outfield.map((_,i)=>i),keeper:names.length-1,
-    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9),...Object.keys(v10)],
+    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9),...Object.keys(v10),...Object.keys(v11)],
     lodFor:(mesh,sourceIndex)=>{const low=firstMesh(lod1[sourceIndex]);if(!low||low.skeleton.bones.some((b,i)=>b.name!==mesh.skeleton.bones[i]?.name))throw Error('Soccer v7 LOD1 skeleton mismatch');return [low.geometry,low.geometry];}});
 }
 /** Decode, retarget, floor-bake and LOD the authored characters once per
