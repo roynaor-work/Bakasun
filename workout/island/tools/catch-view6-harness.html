@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8"><title>catch v6 view harness</title>
+<!-- The v6 chase world on its own: the chase engine driven by the model driver (or keys) and the Three.js view.
+     ?stage=N&seed=S&auto=1&quality=low -->
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden}canvas{width:100vw;height:100vh;display:block}</style>
+<body><div id="stage" style="position:fixed;inset:0"><canvas id="cv"></canvas></div>
+<script type="module">
+import {createChaseEngine6, DRIVING6, CHASE6} from '../minigames/catch-chase6.mjs';
+import {createCatchView6} from '../minigames/catch-view6.mjs';
+import {seededRandom} from '../minigames/catch-track.mjs';
+const q=new URLSearchParams(location.search),stage=+(q.get('stage')||1),seed=+(q.get('seed')||3),auto=q.get('auto')!=='0';
+const config=await (await fetch('../data/config.json')).json(),balance=config.minigames.catchCriminal;
+const chase=createChaseEngine6({balance,stage,seed});
+const view=await createCatchView6({canvas:document.getElementById('cv'),balance,stage,chase,quality:q.get('quality')||'high',maxDpr:2,lowDpr:1.25});
+window.chase=chase;window.view=view;window.done=true;
+const rnd=seededRandom(seed*13+stage),dr=DRIVING6[q.get('driver')||'good'];let timer=0,want=0,fireTimer=0;
+function drive(dt){const st=chase.state,C=chase.C;timer-=dt;fireTimer-=dt;
+ if(timer<=0&&st.phase==='run'){timer=dr.react;let best=want,bs=-1e9;for(const lane of C.lanes){let free=60;for(const o of chase.obstacles){if(o.kind==='pad')continue;const os=chase.obstacleS(o,st.t)-st.s;if(os>-2&&os<60&&Math.abs(o.d-lane)<2.2)free=Math.min(free,os);}const sc=free-Math.abs(lane-st.d)*1.5;if(sc>bs){bs=sc;best=lane;}}want=rnd()<dr.miss?want:best;const ds=st.crim.s-st.s;if(ds>-9&&ds<26&&rnd()>=dr.miss)want=Math.max(-3.3,Math.min(3.3,st.crim.d));}
+ const wantVel=Math.max(-C.steerSpeed,Math.min(C.steerSpeed,(want-st.d)*2.2));chase.setSteer(Math.max(-1,Math.min(1,(wantVel-st.slide*.9)/C.steerSpeed)));
+ let near=99;for(const o of chase.obstacles){if(o.kind==='pad')continue;const os=chase.obstacleS(o,st.t)-st.s;if(os>0&&os<near&&Math.abs(o.d-st.d)<2.2)near=os;}
+ const ds=st.crim.s-st.s,kA=Math.abs(chase.track.curvatureAt(st.s+25));chase.setBoost(st.tank>.12&&ds>4&&near>18&&kA<1/110);chase.setBrake(ds<-1.5||(kA>1/60&&st.v>C.baseSpeed+2));
+ if(chase.gun.state.locked&&chase.gun.state.reload<=0&&fireTimer<=0){fireTimer=.25+rnd()*.3;if(rnd()>=dr.aim&&chase.gun.state.hitChance>.35)chase.fire();}}
+const keys=new Set();addEventListener('keydown',e=>keys.add(e.key));addEventListener('keyup',e=>keys.delete(e.key));
+window.stepN=(n,dt=1/60)=>{for(let i=0;i<n;i++){if(auto)drive(dt);else{chase.setSteer((keys.has('ArrowRight')?1:0)-(keys.has('ArrowLeft')?1:0));chase.setBoost(keys.has(' '));chase.setBrake(keys.has('Shift'));if(keys.has('f'))chase.fire();}chase.step(dt);view.handleChase(chase.drainEvents());view.update(dt,{noRender:i<n-1});}};
+let last=0;function frame(now){requestAnimationFrame(frame);if(window.paused)return;const dt=Math.min(.05,(now-(last||now))/1000);last=now;window.stepN(1,dt);}
+if(q.get('manual')!=='1')requestAnimationFrame(frame);
+</script>

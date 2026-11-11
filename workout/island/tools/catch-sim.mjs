@@ -6,6 +6,7 @@
 import {readFile, writeFile} from 'node:fs/promises';
 import {createCatchEngine, seededRandom} from '../minigames/catch-engine.mjs';
 import {createChaseEngine} from '../minigames/catch-chase.mjs';
+import {createChaseEngine6, driveChase6, DRIVING6} from '../minigames/catch-chase6.mjs';
 
 const config = JSON.parse(await readFile(new URL('../data/config.json', import.meta.url), 'utf8'));
 const defaultBalance = config.minigames.catchCriminal;
@@ -110,10 +111,12 @@ export function plan(engine, skill, rnd) {
   return best;
 }
 
-export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = false, arch = v2, driving = DRIVING.good} = {}) {
+export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = false, arch = v2, driving = DRIVING.good, v6 = false} = {}) {
   const rnd = seededRandom(seed * 7919 + stage);
   let chased = null, mods = {};
-  if (v2) { chased = driveChase(createChaseEngine({balance, stage, seed}), driving, rnd); mods = chased.mods; }
+  // v6: the chase on the winding track with tyre shots (catch-chase6); its model driver mirrors the three skills
+  if (v6) { const name = Object.keys(DRIVING).find(k => DRIVING[k] === driving) || 'good'; chased = driveChase6(createChaseEngine6({balance, stage, seed}), DRIVING6[name] || DRIVING6.good, rnd); mods = chased.mods; }
+  else if (v2) { chased = driveChase(createChaseEngine({balance, stage, seed}), driving, rnd); mods = chased.mods; }
   const engine = createCatchEngine({balance, stage, seed, v2, mods, arch});
   const dt = 1 / 60;
   let guard = 0, throws = 0, hits = 0, flightTime = 0;
@@ -140,14 +143,14 @@ export function measure(games, stages, skills = SKILLS, balance = defaultBalance
   const out = {};
   for (const [name, skill] of Object.entries(skills)) {
     out[name] = stages.map(stage => {
-      let close = 0, chaseHits = 0, wins = 0, perfect = 0, throws = 0, seconds = 0, firstThrow = 0, stars = [0, 0, 0, 0], coins = 0;
+      let close = 0, chaseHits = 0, tyres = 0, wins = 0, perfect = 0, throws = 0, seconds = 0, firstThrow = 0, stars = [0, 0, 0, 0], coins = 0;
       for (let g = 0; g < games; g++) {
         const r = playGame(stage, g + 1, skill, balance, {...opts, driving: DRIVING[name] || DRIVING.good});
-        if (r.chase) { close += r.chase.closeness; chaseHits += r.chase.hits; }
+        if (r.chase) { close += r.chase.closeness; chaseHits += r.chase.hits; if (r.chase.byTyres) tyres++; }
         if (r.won) { wins++; if (r.perfect) perfect++; if (r.throws === 1) firstThrow++; stars[1 + (r.performance >= 0.45) + (r.performance >= 0.8)]++; coins += Math.floor(r.score / balance.pointsPerCoin) + balance.levels[stage - 1].winMoney; } else stars[0]++;
         throws += r.throws; seconds += r.seconds;
       }
-      return {stage, games, catchRate: wins / games, perfectRate: perfect / games, firstThrowRate: firstThrow / games, avgThrows: throws / games, avgSeconds: seconds / games, stars: stars.map(n => n / games), avgCoins: coins / games, closeness: close / games, chaseHits: chaseHits / games};
+      return {stage, games, catchRate: wins / games, perfectRate: perfect / games, firstThrowRate: firstThrow / games, avgThrows: throws / games, avgSeconds: seconds / games, stars: stars.map(n => n / games), avgCoins: coins / games, closeness: close / games, chaseHits: chaseHits / games, tyreRate: tyres / games};
     });
   }
   return out;
@@ -158,11 +161,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const range = (args[1] && !args[1].startsWith('--') ? args[1] : '1-10').split('-').map(Number);
   const listArg = args.find(a => a.startsWith('--stages='));
   const stages = listArg ? listArg.slice(9).split(',').map(Number) : Array.from({length: (range[1] || range[0]) - range[0] + 1}, (_, i) => range[0] + i);
-  const v1 = args.includes('--v1'), onlyArg = args.find(a => a.startsWith('--only=')), skills = onlyArg ? Object.fromEntries(Object.entries(SKILLS).filter(([k]) => onlyArg.slice(7).split(',').includes(k))) : SKILLS, started = Date.now(), result = measure(games, stages, skills, defaultBalance, {v2: !v1, arch: !args.includes('--noarch')});
+  const v1 = args.includes('--v1'), onlyArg = args.find(a => a.startsWith('--only=')), skills = onlyArg ? Object.fromEntries(Object.entries(SKILLS).filter(([k]) => onlyArg.slice(7).split(',').includes(k))) : SKILLS, started = Date.now(), result = measure(games, stages, skills, defaultBalance, {v2: !v1, arch: !args.includes('--noarch'), v6: args.includes('--v6')});
   console.log('games per stage:', games, 'seconds:', ((Date.now() - started) / 1000).toFixed(1));
   for (const [name, rows] of Object.entries(result)) {
-    console.log(`\n[${name}]  stage  catch%  first%  perfect%  throws  secs  coins`);
-    for (const r of rows) console.log(`        ${String(r.stage).padStart(2)}   ${(r.catchRate * 100).toFixed(0).padStart(5)}  ${(r.firstThrowRate * 100).toFixed(0).padStart(5)}  ${(r.perfectRate * 100).toFixed(0).padStart(7)}  ${r.avgThrows.toFixed(2).padStart(6)} ${r.avgSeconds.toFixed(0).padStart(5)} ${r.avgCoins.toFixed(0).padStart(6)}`);
+    console.log(`\n[${name}]  stage  catch%  first%  perfect%  throws  secs  coins  tyres%  close`);
+    for (const r of rows) console.log(`        ${String(r.stage).padStart(2)}   ${(r.catchRate * 100).toFixed(0).padStart(5)}  ${(r.firstThrowRate * 100).toFixed(0).padStart(5)}  ${(r.perfectRate * 100).toFixed(0).padStart(7)}  ${r.avgThrows.toFixed(2).padStart(6)} ${r.avgSeconds.toFixed(0).padStart(5)} ${r.avgCoins.toFixed(0).padStart(6)}  ${((r.tyreRate || 0) * 100).toFixed(0).padStart(5)}  ${r.closeness.toFixed(2).padStart(5)}`);
   }
   const j = args.indexOf('--json');
   if (j >= 0) await writeFile(args[j + 1], JSON.stringify({games, result}, null, 1));
