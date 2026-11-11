@@ -60,8 +60,9 @@ await verify('racing-deep-fable/m6/shots',sizes,async({page,viewport,tick,snap,s
  // 6. the save stays at version 19 and holds the long league
  const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('island.v1')));assert.equal(saved.version,19);assert.equal(Object.keys(saved.islandRacingLeague.table).length,12);report.savedVersion=saved.version;
  // 7. an older version-19 save with the five-driver league (mid season 2 of six races) loads and continues on the long calendar without losing anything
+ // the engine persists its live state on pagehide, so the old league goes into the live state (and the stored JSON) before the reload
  await page.evaluate(()=>{const save=JSON.parse(localStorage.getItem('island.v1'));save.islandRacingLeague={version:1,season:2,race:3,coins:415,upgrades:{engine:2,tires:1,steering:0,brakes:1,aero:0},table:{player:40,almog:33,turkiz:52,shemesh:18,barkat:25},
-   history:[0,1,2,3,4,5].map(i=>({season:1,race:i,place:1+(i%5),points:[25,18,15,12,10][i%5],coins:[220,160,120,90,70][i%5]})).concat([0,1,2].map(i=>({season:2,race:i,place:2,points:18,coins:160}))),champion:{1:'player'},seasonRank:{1:1}};localStorage.setItem('island.v1',JSON.stringify(save));});
+   history:[0,1,2,3,4,5].map(i=>({season:1,race:i,place:1+(i%5),points:[25,18,15,12,10][i%5],coins:[220,160,120,90,70][i%5]})).concat([0,1,2].map(i=>({season:2,race:i,place:2,points:18,coins:160}))),champion:{1:'player'},seasonRank:{1:1}};window.__island.engine.state.islandRacingLeague=structuredClone(save.islandRacingLeague);localStorage.setItem('island.v1',JSON.stringify(save));});
  await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island?.engine);await tick(200);
  if(await page.locator('[data-action=avatar-start]').count()){await page.locator('[data-action=avatar-start]').tap();await tick(32);}
  await page.evaluate(()=>{const {engine,games,data}=window.__island;engine.skipTutorial?.();engine.tick=()=>({ok:true});data.featureFlags.events=false;games.now=()=>0;});
