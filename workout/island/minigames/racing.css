@@ -341,12 +341,23 @@
 .game-screen[data-game=islandRacing] .racing-podium-note{font-size:12px;opacity:.85}
 
 /* racing-v11 gearbox readout under the speed number */
-.game-screen[data-game=islandRacing] .racing-gearbox{position:absolute;left:50%;top:27%;transform:translateX(-50%);display:flex;align-items:center;gap:5px;pointer-events:none}
+/* racing-deep-m3 gear cluster: a Formula 1 wheel display next to the dial: big gear number inside a rev arc, three shift lights that light one by one (all three = shift) */
+.game-screen[data-game=islandRacing] .racing-gearbox{position:absolute;left:-62px;top:50%;width:58px;height:66px;transform:translateY(-54%);pointer-events:none;z-index:3}
 .game-screen[data-game=islandRacing] .racing-gearbox[hidden]{display:none}
-.game-screen[data-game=islandRacing] .racing-gear{font-size:13px;font-weight:800;color:var(--race-yellow);min-width:10px;text-align:center}
-.game-screen[data-game=islandRacing] .racing-rev{display:block;width:34px;height:4px;border-radius:2px;background:#d7e6f330;overflow:hidden}
-.game-screen[data-game=islandRacing] .racing-rev i{display:block;height:100%;background:#e9f3f8;transform-origin:0 50%;transform:scaleX(0)}
-.game-screen[data-game=islandRacing] .racing-rev i.red{background:#ff5a4a}
+.game-screen[data-game=islandRacing] .racing-gear-dial{display:block;width:100%;height:100%;overflow:visible}
+.game-screen[data-game=islandRacing] .racing-gear-face{fill:#091321d9;stroke:#afc7dc4d;stroke-width:.8}
+.game-screen[data-game=islandRacing] .racing-rev-track{fill:none;stroke:#8092a442;stroke-width:4;stroke-linecap:round}
+.game-screen[data-game=islandRacing] .racing-rev-arc{fill:none;stroke:#e9f3f8;stroke-width:4;stroke-linecap:round;stroke-dasharray:113.1;stroke-dashoffset:113.1;transition:stroke-dashoffset .08s linear,stroke .15s}
+.game-screen[data-game=islandRacing] .racing-rev-arc.red{stroke:#ff5a4a}
+.game-screen[data-game=islandRacing] .racing-gear{font:900 27px Arial,sans-serif;fill:var(--race-yellow);text-anchor:middle;direction:ltr;paint-order:stroke;stroke:#000a;stroke-width:1.2}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle{fill:#22303d;stroke:#8fa3b533;stroke-width:.8;transition:fill .08s}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle.on{fill:#3dd66a;filter:drop-shadow(0 0 2px #3dd66a)}
+.game-screen[data-game=islandRacing] .racing-shift-lights circle:nth-child(2).on{fill:#ffd23c;filter:drop-shadow(0 0 2px #ffd23c)}
+.game-screen[data-game=islandRacing] .racing-gearbox[data-shift=now] .racing-shift-lights circle.on{fill:#ff5a4a;filter:drop-shadow(0 0 3px #ff5a4a)}
+.game-screen[data-game=islandRacing] .racing-gearbox[data-shift=now] .racing-gear{fill:#fff}
+.game-screen[data-game=islandRacing] .racing-rev{display:none}
+@media(max-height:400px) and (orientation:landscape){.game-screen[data-game=islandRacing] .racing-gearbox{left:-56px;width:52px;height:60px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-rev-arc,.game-screen[data-game=islandRacing] .racing-shift-lights circle{transition:none}}
 
 /* racing-ers-v1: the energy meter charges while driving; the tag and a moving sheen show it */
 .game-screen[data-game=islandRacing] .racing-energy{overflow:visible}
@@ -354,4 +365,10 @@
 .game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-tag{color:#8dffb0}
 .game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{background:linear-gradient(90deg,#44d17a,#b8ffd0,#44d17a);background-size:60px 100%;animation:racing-ers-flow .7s linear infinite}
 @keyframes racing-ers-flow{to{background-position:60px 0}}
+/* racing-deep-m3: a full meter glows and blinks twice, the tag reads "ERS מלא" */
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true]{border-color:#9fffc0;box-shadow:0 0 8px #44d17a99}
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-fill{background:linear-gradient(90deg,#8dffb0,#e6fff0);animation:racing-ers-full .45s ease-in-out 2}
+.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-tag{color:#b8ffd0}
+@keyframes racing-ers-full{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-energy[data-full=true] .racing-energy-fill{animation:none}}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-energy[data-charging=true] .racing-energy-fill{animation:none}}
