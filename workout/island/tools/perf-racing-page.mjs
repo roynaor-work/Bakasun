@@ -45,6 +45,8 @@ const ctx={balance,level:STAGE,seed:SEED,difficulty:'easy',equipment:{},canvas,c
 session=runRacingSession(ctx);window.__session=session;
 // ready = the view is built and the first frame is drawn
 await new Promise(res=>{const wait=()=>{const s=session.snapshot;if(s.error){res();return;}if(s.renderMetrics?.frames>1)res();else setTimeout(wait,100);};wait();});
+// racing-deep-fable: the broadcast intro card (M4) holds the model until "למרוץ" is tapped (or 4 s); dismiss it so the measured frames are the race itself
+{const go=document.querySelector('[data-action=racing-intro-go]');if(go)go.click();}
 const loadMs=Math.round(performance.now()-created);
 if(session.snapshot.error){window.__perf={error:session.snapshot.error};}
 else{

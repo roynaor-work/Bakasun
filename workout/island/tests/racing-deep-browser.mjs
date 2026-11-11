@@ -9,7 +9,9 @@ await verify('racing-deep-fable',[{width:844,height:390}],async({page,tick,snap,
  await page.evaluate(()=>window.__island.games.racingLeagueGo());await tick(100);
  if(await page.locator('[data-action=game-understood]').count()){await tick(32);await page.locator('[data-action=game-understood]').tap();}
  for(let i=0;i<400&&!await page.evaluate(()=>window.__island.games.current?.session?.snapshot?.renderMetrics?.frames>1);i++){await tick(100);await page.waitForTimeout(100);}
- await ready();await tick(100);await nav();await tick(3400);
+ await ready();await tick(100);await nav();await tick(400);
+ if(await page.locator('[data-action=racing-intro-go]').count()){await page.locator('[data-action=racing-intro-go]').tap();await tick(32);}
+ await tick(3000);
  let s=await snap();
  assert.equal(s.cars.length,10,'ten cars on the grid by default');report.cars=s.cars.map(c=>c.name);
  assert.equal((await page.locator('.racing-of').textContent()).trim().replace(/\s/g,''),'/10','the HUD counts ten');
