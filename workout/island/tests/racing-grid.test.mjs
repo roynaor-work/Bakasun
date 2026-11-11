@@ -17,11 +17,11 @@ test('extra rivals: ten cars on the grid, only the five scoring cars rank in the
   const raw={outcome:r.won?'win':'lose',score:r.checkpoints===r.requiredCheckpoints?6-r.rank:0,racing:r};
   assert.ok(racingResult(raw,{level:1,seed:7},balance),'the result contract accepts a ten-car race');
 });
-test('crash: a hard wall hit flips the car for 0.5 s, then it restarts on the centre line, along the track, at 9 m/s, without gaining a gate',()=>{
+test('crash: a hard wall hit flips the car for 0.5-1.2 s (racing-deep-m7 arc; 0.55 s with crashFx:false), then it restarts on the centre line, along the track, at 9 m/s, without gaining a gate',()=>{
   const race=createRacing({stage:1,seed:1,config:{countdown:0,stage:{opponents:0},steeringAssist:false}}),p=race.state.player,tr=race.track;
   const pt=place(race,p,300,tr.width/2-.3,40);p.heading=pt.heading+1.2;   // heading into the fence at 40 m/s
   const cp=p.checkpoints;let crashed=false,recovered=false,t0=0;
-  for(let n=0;n<120;n++){race.step(1/60,{autoAccelerate:true,steer:0});for(const e of race.state.events){if(e.type==='crash'&&e.car==='player'){crashed=true;t0=race.state.time;}if(e.type==='crashRecover'&&e.car==='player'){recovered=true;assert.ok(race.state.time-t0>=.5&&race.state.time-t0<=.62,'0.55 s: '+(race.state.time-t0));}}if(recovered)break;}
+  for(let n=0;n<120;n++){race.step(1/60,{autoAccelerate:true,steer:0});for(const e of race.state.events){if(e.type==='crash'&&e.car==='player'){crashed=true;t0=race.state.time;}if(e.type==='crashRecover'&&e.car==='player'){recovered=true;assert.ok(race.state.time-t0>=.5&&race.state.time-t0<=1.2,'0.5-1.2 s: '+(race.state.time-t0));}}if(recovered)break;}
   assert.ok(crashed&&recovered);assert.ok(Math.abs(p.lateral)<=tr.width*.2+.01,'back on the centre line: '+p.lateral);
   assert.ok(Math.abs(wrap(p.heading-tr.sample(p.s).heading))<.08);assert.ok(p.speed>=8&&p.speed<=12,'restart speed '+p.speed);assert.equal(p.checkpoints,cp);assert.equal(p.crashes,1);assert.equal(p.offroad,false);
 });
@@ -43,7 +43,7 @@ test('1,000 random hard hits: every restart lands on the road, no gate is awarde
     const stage=1+Math.floor(rand()*30),race=createRacing({stage,seed:3,config:{countdown:0,stage:{opponents:0},steeringAssist:false}}),p=race.state.player,tr=race.track,s=rand()*tr.length;
     const pt=place(race,p,s,(rand()<.5?-1:1)*(tr.width/2-.3),30+rand()*18);const side=Math.sign(p.lateral);p.heading=pt.heading+side*-(.5+rand()*1)*-1;
     const cp=p.checkpoints;for(let n=0;n<90;n++)race.step(1/60,{autoAccelerate:true,steer:0});
-    if(p.crashes)flips++;for(let n=0;n<40&&p.crashT>0;n++)race.step(1/60,{autoAccelerate:true,steer:0});   // a second hit near the end of the window also finishes within 0.55 s
+    if(p.crashes)flips++;for(let n=0;n<75&&p.crashT>0;n++)race.step(1/60,{autoAccelerate:true,steer:0});   // a second hit near the end of the window also finishes within 1.2 s (racing-deep-m7 arc)
     assert.ok(p.crashT===0,'nobody stays flipped');assert.equal(p.offroad,false);assert.ok(p.checkpoints<=cp+1);
   }
   assert.ok(flips>100&&flips<1000,'flips happen for the hard hits only: '+flips);

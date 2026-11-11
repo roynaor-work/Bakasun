@@ -53,7 +53,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const start=gridOn?slots[slot].s:index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4-(index>stage.opponents?(index-stage.opponents)*3:0);
     const lane=gridOn?slots[slot].lane:index===0?0:index%2?2.8:-2.8;
     const p=track.sample(start);
-    return {id:index===0?'player':`ai-${index}`,name:index>stage.opponents?EXTRA_NAMES[(index-stage.opponents-1)%EXTRA_NAMES.length]:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,scoring:index<=stage.opponents,crashT:0,stuckT:0,crashes:0,
+    return {id:index===0?'player':`ai-${index}`,name:index>stage.opponents?EXTRA_NAMES[(index-stage.opponents-1)%EXTRA_NAMES.length]:drivers&&index>0&&drivers[index-1]?drivers[index-1].name:names[index]||`רוכב ${index}`,isPlayer:index===0,scoring:index<=stage.opponents,crashT:0,stuckT:0,crashes:0,crashAir:0,crashDur:0,crashSpin:0,
       x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,heading:p.heading,speed:0,steer:0,
       s:p.s,routeS:start,previousS:start,progress:start,checkpoints:0,nextCheckpoint:1,lap:1,rank:1,
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
@@ -79,15 +79,35 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   }
   // racing-grid-v1 crash: a severe wall hit, or being stuck for too long (wall, rivals), flips the car for 0.5 s and then puts it back on the centre line,
   // pointing along the track, at a low restart speed. Same rule for the player and the computer drivers. config.crash=false (or ?racingCrash=0) removes it.
+  // racing-deep-m7 crash show (Roy, after v21: "the car flips, but it should look more impressive, not just a flip on the spot"): with config.crashFx (default on,
+  // ?racingCrashFx=0 keeps the 0.55 s roll on the spot) the car flies on in an arc along the road towards its restart lane, rolls once or twice (crashSpin) by the
+  // strength of the hit, rises up to CRASH_FX_PEAK metres (crashAir, a parabola) and lands on its wheels exactly where endCrash() restarts it: centre line, along the
+  // track, 9 m/s. The flight lasts CRASH_FX_MIN..CRASH_FX_MAX seconds (crashDur) and never crosses the next gate, so a crash still never grants one.
+  const crashFx=config.crashFx!==false,CRASH_FX_MIN=.6,CRASH_FX_MAX=1.1,CRASH_FX_PEAK=1.6,CRASH_FX_DECAY=3;
+  const restartLane=car=>clamp(car.isPlayer?0:car.lane*.5,-track.width*.2,track.width*.2);
   function startCrash(car,reason) {
     if(!crashOn||car.crashT>0||car.finished)return;
     car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.grindT=0;car.passing=null;car.laneHold=0;
-    event('crash',car,{reason,speed:car.speed});
+    if(crashFx){
+      // strength from the speed left after the hit (a wall hit has already scrubbed 25-45%): stuck ~0, grind ~0.3-0.6, a hard wall hit ~0.6-1
+      const k=clamp((car.speed-4)/26,0,1);
+      car.crashDur=car.crashT=CRASH_FX_MIN+(CRASH_FX_MAX-CRASH_FX_MIN)*k;car.crashSpin=k>.45?2:1;car.crashPeak=.5+(CRASH_FX_PEAK-.5)*k;car.crashAir=0;
+      car.crashV=Math.max(car.speed,4);car.crashLat0=car.lateral;car.crashLane=restartLane(car);car.crashHead0=car.heading;
+    }
+    event('crash',car,{reason,speed:car.speed,strength:crashFx?+(clamp((car.speed-4)/26,0,1)).toFixed(2):1});
+  }
+  function flyCrash(car,dt) {
+    // the arc: horizontal speed eases from the launch speed to the restart speed, height is a parabola, lateral and heading ease towards the restart lane and the road
+    const t=car.crashDur-car.crashT,u=clamp(t/car.crashDur,0,1),ease=u*u*(3-2*u);
+    car.speed=CRASH_RESTART+(car.crashV-CRASH_RESTART)*Math.exp(-CRASH_FX_DECAY*t);car.crashAir=4*car.crashPeak*u*(1-u);
+    const gate=car.nextCheckpoint*sector-.5;if(car.routeS<gate)car.routeS=Math.min(gate,car.routeS+car.speed*dt);
+    const lat=car.crashLat0+(car.crashLane-car.crashLat0)*ease,p=track.sample(car.routeS);
+    car.x=p.x+p.normal.x*lat;car.y=p.y;car.z=p.z+p.normal.z*lat;car.s=p.s;car.lateral=lat;car.heading=racingAngle(car.crashHead0+racingAngle(p.heading-car.crashHead0)*ease);
   }
   function endCrash(car) {
-    const p=track.sample(car.routeS),lane=clamp(car.isPlayer?0:car.lane*.5,-track.width*.2,track.width*.2);
+    const p=track.sample(car.routeS),lane=crashFx&&car.crashDur>0?car.crashLane:restartLane(car);
     car.x=p.x+p.normal.x*lane;car.y=p.y;car.z=p.z+p.normal.z*lane;car.heading=p.heading;car.s=p.s;car.previousS=car.routeS;car.lateral=lane;
-    car.speed=CRASH_RESTART;car.steer=0;car.slipAngle=0;car.gearInit=false;car.gearT=1;car.rpm=.3;car.offroad=false;car.offroadTime=0;car.recoveryTime=1.2;car.wallCooldown=.5;car.crashT=0;
+    car.speed=CRASH_RESTART;car.steer=0;car.slipAngle=0;car.gearInit=false;car.gearT=1;car.rpm=.3;car.offroad=false;car.offroadTime=0;car.recoveryTime=1.2;car.wallCooldown=.5;car.crashT=0;car.crashAir=0;car.crashDur=0;
     event('crashRecover',car);
   }
   function aiInput(car){return aiOn?aiInput2(car):aiInputV1(car);}
@@ -180,9 +200,11 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     if(!Number.isFinite(car.x+car.z+car.heading+car.speed))recoverCar(car);
     if(car.crashT>0){
       // flipping: the car slides on and stops (no wall or gate logic), then endCrash() restarts it on the track
-      car.crashT=Math.max(0,car.crashT-dt);car.speed*=Math.exp(-dt*4.5);car.x+=Math.sin(car.heading)*car.speed*dt;car.z+=Math.cos(car.heading)*car.speed*dt;
+      car.crashT=Math.max(0,car.crashT-dt);
+      if(crashFx&&car.crashDur>0)flyCrash(car,dt);   // racing-deep-m7: the arc (see flyCrash); it lands where endCrash() restarts it
+      else{car.speed*=Math.exp(-dt*4.5);car.x+=Math.sin(car.heading)*car.speed*dt;car.z+=Math.cos(car.heading)*car.speed*dt;
       const slide=track.project(car.x,car.z,car.s);car.lateral=slide.lateral;car.s=slide.s;car.y=slide.y;
-      if(walls&&Math.abs(slide.lateral)>wallLimit){const side=Math.sign(slide.lateral),inside=wallLimit-.12;car.x=slide.x+slide.normal.x*side*inside;car.z=slide.z+slide.normal.z*side*inside;car.lateral=side*inside;car.speed*=.3;}
+      if(walls&&Math.abs(slide.lateral)>wallLimit){const side=Math.sign(slide.lateral),inside=wallLimit-.12;car.x=slide.x+slide.normal.x*side*inside;car.z=slide.z+slide.normal.z*side*inside;car.lateral=side*inside;car.speed*=.3;}}
       if(car.crashT<=0)endCrash(car);return;
     }
     const before=track.project(car.x,car.z,car.s);
