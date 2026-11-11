@@ -1,0 +1,321 @@
+{
+  "license": "CC0-1.0",
+  "method": "Hard calibrated contact knots; cubic Hermite free-ball trajectory; consistent reference-forward clearance sine envelopes; actual skinned triangles at120Hz; no pose or event changes",
+  "samplingHz": 120,
+  "clips": [
+    {
+      "id": "dribble_slow",
+      "inputAssetSha256": "6a7986e3f80b5e0d5c0a6739f9dbc8895c47812cb56e000940483b96dad1d2c6",
+      "inputBallPathSha256": "8ec2738ca9dc5251c18792e3dea6bc336327a9ca88f5a100667be1a236fa046f",
+      "envelopes": [
+        {
+          "start": 0,
+          "end": 0.26666666666666666,
+          "maxForwardCorrectionMeters": 0.10199210091012743
+        },
+        {
+          "start": 0.26666666666666666,
+          "end": 0.6666666666666666,
+          "maxForwardCorrectionMeters": 0.2335453725084853
+        },
+        {
+          "start": 0.6666666666666666,
+          "end": 1.0666666666666667,
+          "maxForwardCorrectionMeters": 0.25688000852438236
+        },
+        {
+          "start": 1.0666666666666667,
+          "end": 1.4666666666666666,
+          "maxForwardCorrectionMeters": 0.2568151645826194
+        },
+        {
+          "start": 1.4666666666666666,
+          "end": 1.8666666666666667,
+          "maxForwardCorrectionMeters": 0.256880842613936
+        },
+        {
+          "start": 1.8666666666666667,
+          "end": 2.2666666666666666,
+          "maxForwardCorrectionMeters": 0.25681607015499874
+        },
+        {
+          "start": 2.2666666666666666,
+          "end": 2.6666666666666665,
+          "maxForwardCorrectionMeters": 0.2568806433926132
+        },
+        {
+          "start": 2.6666666666666665,
+          "end": 3.066666666666667,
+          "maxForwardCorrectionMeters": 0.3081995610516295
+        },
+        {
+          "start": 3.066666666666667,
+          "end": 3.6,
+          "maxForwardCorrectionMeters": 0
+        }
+      ],
+      "iterations": 2,
+      "outputBallPathSha256": "83d267280f5c7c91bb978dab72592c39af59b0fdf67d1d75e3845dd27a338b09",
+      "maxContactCenterChangeMeters": 0,
+      "maxSkinPenetrationMeters": 0,
+      "maxBallSpeedMetersPerSecond": 4.609172598028789,
+      "maxOffContactVelocityStepMetersPerSecond": 0.14965483456529804
+    },
+    {
+      "id": "dribble_medium",
+      "inputAssetSha256": "d66fb2c1327fb95eb24eabfb73b0f990d8f52005bceb0c69813316fb468c8787",
+      "inputBallPathSha256": "a95f38667c73399db054aa6e29b8f3d60d79b25227412b614ba42ee4b1d8b3f9",
+      "envelopes": [
+        {
+          "start": 0,
+          "end": 0.26666666666666666,
+          "maxForwardCorrectionMeters": 0.18809420178570893
+        },
+        {
+          "start": 0.26666666666666666,
+          "end": 0.5666666666666667,
+          "maxForwardCorrectionMeters": 0.3372407179960432
+        },
+        {
+          "start": 0.5666666666666667,
+          "end": 0.8666666666666667,
+          "maxForwardCorrectionMeters": 0.34205128676319857
+        },
+        {
+          "start": 0.8666666666666667,
+          "end": 1.1666666666666667,
+          "maxForwardCorrectionMeters": 0.3419956241735421
+        },
+        {
+          "start": 1.1666666666666667,
+          "end": 1.4666666666666666,
+          "maxForwardCorrectionMeters": 0.34205071976717233
+        },
+        {
+          "start": 1.4666666666666666,
+          "end": 1.7666666666666666,
+          "maxForwardCorrectionMeters": 0.3419954119073491
+        },
+        {
+          "start": 1.7666666666666666,
+          "end": 2.066666666666667,
+          "maxForwardCorrectionMeters": 0.34205198565620265
+        },
+        {
+          "start": 2.066666666666667,
+          "end": 2.3666666666666667,
+          "maxForwardCorrectionMeters": 0.34199584702961106
+        },
+        {
+          "start": 2.3666666666666667,
+          "end": 2.6666666666666665,
+          "maxForwardCorrectionMeters": 0.34205154438755964
+        },
+        {
+          "start": 2.6666666666666665,
+          "end": 2.966666666666667,
+          "maxForwardCorrectionMeters": 0.35791221682296154
+        },
+        {
+          "start": 2.966666666666667,
+          "end": 3.4,
+          "maxForwardCorrectionMeters": 0
+        }
+      ],
+      "iterations": 2,
+      "outputBallPathSha256": "8879994d6016087091bf78fcb5705316c42694d74a3d07e388e56d64244867b8",
+      "maxContactCenterChangeMeters": 0,
+      "maxSkinPenetrationMeters": 0,
+      "maxBallSpeedMetersPerSecond": 7.937543421990597,
+      "maxOffContactVelocityStepMetersPerSecond": 0.32053804244426326
+    },
+    {
+      "id": "dribble_sprint",
+      "inputAssetSha256": "0fe4e1ff8b1a85804e1faa6067fee0eca9adce3603e4898ef1886262303a6bd0",
+      "inputBallPathSha256": "88dbd9b4c8d372ba770c7832f52485588e21e29706e949b10213c77d6014b353",
+      "envelopes": [
+        {
+          "start": 0,
+          "end": 0.26666666666666666,
+          "maxForwardCorrectionMeters": 0.25849297436486857
+        },
+        {
+          "start": 0.26666666666666666,
+          "end": 0.5,
+          "maxForwardCorrectionMeters": 0.38995269328738685
+        },
+        {
+          "start": 0.5,
+          "end": 0.7333333333333333,
+          "maxForwardCorrectionMeters": 0.3600666716735899
+        },
+        {
+          "start": 0.7333333333333333,
+          "end": 0.9666666666666667,
+          "maxForwardCorrectionMeters": 0.3596418980520082
+        },
+        {
+          "start": 0.9666666666666667,
+          "end": 1.2,
+          "maxForwardCorrectionMeters": 0.3600660946735412
+        },
+        {
+          "start": 1.2,
+          "end": 1.4333333333333333,
+          "maxForwardCorrectionMeters": 0.3596419341754603
+        },
+        {
+          "start": 1.4333333333333333,
+          "end": 1.6666666666666667,
+          "maxForwardCorrectionMeters": 0.3600675703150694
+        },
+        {
+          "start": 1.6666666666666667,
+          "end": 1.9,
+          "maxForwardCorrectionMeters": 0.35964195927200715
+        },
+        {
+          "start": 1.9,
+          "end": 2.1333333333333333,
+          "maxForwardCorrectionMeters": 0.36006478253709834
+        },
+        {
+          "start": 2.1333333333333333,
+          "end": 2.3666666666666667,
+          "maxForwardCorrectionMeters": 0.35964204907601527
+        },
+        {
+          "start": 2.3666666666666667,
+          "end": 2.6,
+          "maxForwardCorrectionMeters": 0.36006783512983787
+        },
+        {
+          "start": 2.6,
+          "end": 2.8333333333333335,
+          "maxForwardCorrectionMeters": 0.3462865119069131
+        },
+        {
+          "start": 2.8333333333333335,
+          "end": 3.2,
+          "maxForwardCorrectionMeters": 0
+        }
+      ],
+      "iterations": 2,
+      "outputBallPathSha256": "52450328ecf14435e1151012ab99288f316a61fce4b36018b891a0a488a61348",
+      "maxContactCenterChangeMeters": 0,
+      "maxSkinPenetrationMeters": 0,
+      "maxBallSpeedMetersPerSecond": 11.03811177566638,
+      "maxOffContactVelocityStepMetersPerSecond": 0.5646696674903753
+    },
+    {
+      "id": "dribble_turn_left",
+      "inputAssetSha256": "d82e7b8225731eabab9aab5146336b6bff0ca7cb4d200c41744bb07eb8fd69d6",
+      "inputBallPathSha256": "aefefbb1dc5a040606ee1a20a92bee803a78e6fe4472b2ad28925234ab0bc7f1",
+      "envelopes": [
+        {
+          "start": 0,
+          "end": 0.26666666666666666,
+          "maxForwardCorrectionMeters": 0.07740325972567841
+        },
+        {
+          "start": 0.26666666666666666,
+          "end": 0.6666666666666666,
+          "maxForwardCorrectionMeters": 0.13389001744857007
+        },
+        {
+          "start": 0.6666666666666666,
+          "end": 1.0666666666666667,
+          "maxForwardCorrectionMeters": 0.19556469500078
+        },
+        {
+          "start": 1.0666666666666667,
+          "end": 1.4666666666666666,
+          "maxForwardCorrectionMeters": 0.15054569229373838
+        },
+        {
+          "start": 1.4666666666666666,
+          "end": 1.8666666666666667,
+          "maxForwardCorrectionMeters": 0.21946889707554088
+        },
+        {
+          "start": 1.8666666666666667,
+          "end": 2.2666666666666666,
+          "maxForwardCorrectionMeters": 0.25474251640481754
+        },
+        {
+          "start": 2.2666666666666666,
+          "end": 2.8,
+          "maxForwardCorrectionMeters": 0
+        }
+      ],
+      "iterations": 2,
+      "outputBallPathSha256": "cdce8b78c270feef47052f2f6a49a54e8b68bd4830fb525a8ee436eeffdf10c0",
+      "maxContactCenterChangeMeters": 0,
+      "maxSkinPenetrationMeters": 0,
+      "maxBallSpeedMetersPerSecond": 3.8501862110583795,
+      "maxOffContactVelocityStepMetersPerSecond": 0.15473360096805938
+    },
+    {
+      "id": "dribble_feint_left",
+      "unchanged": true,
+      "reason": "Stationary feint has no travelling ball correction"
+    },
+    {
+      "id": "dribble_turn_right",
+      "inputAssetSha256": "2b14c3e75ab61dfaa662a42629f5c7e1a93626bb54e38761c8bdaa73e4c1a7b0",
+      "inputBallPathSha256": "7658d137ba5ca2b44b6f11835ed1afc6c7f2f445456a75ee4d942d5f7c20e4ee",
+      "envelopes": [
+        {
+          "start": 0,
+          "end": 0.26666666666666666,
+          "maxForwardCorrectionMeters": 0.06843049999195179
+        },
+        {
+          "start": 0.26666666666666666,
+          "end": 0.6666666666666666,
+          "maxForwardCorrectionMeters": 0.16899785730068237
+        },
+        {
+          "start": 0.6666666666666666,
+          "end": 1.0666666666666667,
+          "maxForwardCorrectionMeters": 0.14486828222089884
+        },
+        {
+          "start": 1.0666666666666667,
+          "end": 1.4666666666666666,
+          "maxForwardCorrectionMeters": 0.2093711697267137
+        },
+        {
+          "start": 1.4666666666666666,
+          "end": 1.8666666666666667,
+          "maxForwardCorrectionMeters": 0.16461016486597504
+        },
+        {
+          "start": 1.8666666666666667,
+          "end": 2.2666666666666666,
+          "maxForwardCorrectionMeters": 0.3289520059403788
+        },
+        {
+          "start": 2.2666666666666666,
+          "end": 2.8,
+          "maxForwardCorrectionMeters": 0.017695252306877695
+        }
+      ],
+      "iterations": 3,
+      "outputBallPathSha256": "0201a85e579cf022c67aa451858e69926a575ac0aa890e1450676305d73b67e0",
+      "maxContactCenterChangeMeters": 0,
+      "maxSkinPenetrationMeters": 0.000001585995662398143,
+      "maxBallSpeedMetersPerSecond": 4.065118616325618,
+      "maxOffContactVelocityStepMetersPerSecond": 0.16925033985515478
+    },
+    {
+      "id": "dribble_feint_right",
+      "unchanged": true,
+      "reason": "Stationary feint has no travelling ball correction"
+    }
+  ],
+  "nativeMotionFramesUnchanged": true,
+  "pass": true,
+  "sourceMotionSha256": "5ce04162744aa50606b087e3a40f1f997cc9405e11dea98c94916cf31e34318f",
+  "outputMotionSha256": "8ac38953add06adfdeed50e5a9498aacf1d62e7b6560ef960e512781b073712f"
+}
