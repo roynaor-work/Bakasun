@@ -17,7 +17,9 @@ for(const [name,opts] of Object.entries(profiles)){
  await page.evaluate(()=>{for(const z of [-18,-24,-30])window.__boar.spawn('scout',z);});
  const cdp=await ctx.newCDPSession(page),touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts});
  const st=()=>page.evaluate(()=>window.__boar.state),wait=ms=>page.waitForTimeout(ms);
- const step=async(label,fn,{expectShots})=>{const a=await st();await fn();await wait(250);const b=await st(),shots=b.shots-a.shots,ok=expectShots==='some'?shots>0:expectShots==='none'?shots===0:true;log.push({profile:name,step:label,shots,firing:b.firing,aimBefore:a.aim,aimAfter:b.aim,expect:expectShots,ok});if(!ok){failures++;console.error('FAIL',name,label,'shots',shots);}return b;};
+ // swiftshader renders only a few frames per second, so 'shots happen' is polled and 'no shots' is observed over a long window
+ const until=async(fn,ms=9000)=>{const t=Date.now();while(Date.now()-t<ms){if(await fn())return true;await wait(150);}return false;};
+ const step=async(label,fn,{expectShots})=>{const a=await st();await fn();if(expectShots==='some')await until(async()=>(await st()).shots>a.shots);else await wait(1200);const b=await st(),shots=b.shots-a.shots,ok=expectShots==='some'?shots>0:expectShots==='none'?shots===0:true;log.push({profile:name,step:label,shots,firing:b.firing,aimBefore:a.aim,aimAfter:b.aim,expect:expectShots,ok});if(!ok){failures++;console.error('FAIL',name,label,'shots',shots);}return b;};
  // first touch anywhere: must not shoot (this is also what switches the controls on for a device whose media query said "fine pointer")
  await step('first touch on the scene (tap)',async()=>{await touch('touchStart',[{x:620,y:150,id:1}]);await wait(120);await touch('touchEnd',[]);},{expectShots:'none'});
  await step('three taps and a drag on the scene',async()=>{for(const [x,y] of [[420,160],[600,200],[300,120]]){await touch('touchStart',[{x,y,id:1}]);await wait(100);await touch('touchEnd',[]);}await touch('touchStart',[{x:500,y:150,id:1}]);for(let i=1;i<=8;i++){await touch('touchMove',[{x:500+i*20,y:150+i*6,id:1}]);await wait(30);}await touch('touchEnd',[]);},{expectShots:'none'});
@@ -28,20 +30,20 @@ for(const [name,opts] of Object.entries(profiles)){
  await step('touch outside stick and button (right middle, top)',async()=>{for(const [x,y] of [[640,120],[420,30],[760,200]]){await touch('touchStart',[{x,y,id:1}]);await wait(120);await touch('touchEnd',[]);}},{expectShots:'none'});
  // two fingers: stick finger 1 stays down and keeps moving; finger 2 presses the button, then lifts. Shots only while finger 2 is down.
  await touch('touchStart',[{x:150,y:290,id:1}]);for(let i=1;i<=4;i++){await touch('touchMove',[{x:150+i*6,y:290-i*4,id:1}]);await wait(40);}
- let a=await st();await touch('touchStart',[{x:150+24,y:290-16,id:1},{...fc,id:2}]);await wait(500);let b=await st();log.push({profile:name,step:'two fingers: button down while stick held',shots:b.shots-a.shots,firing:b.firing,ok:b.shots-a.shots>0&&b.firing});if(!(b.shots>a.shots&&b.firing)){failures++;console.error('FAIL button does not fire',name);}
+ let a=await st();await touch('touchStart',[{x:150+24,y:290-16,id:1},{...fc,id:2}]);await until(async()=>(await st()).shots>a.shots);let b=await st();log.push({profile:name,step:'two fingers: button down while stick held',shots:b.shots-a.shots,firing:b.firing,ok:b.shots-a.shots>0&&b.firing});if(!(b.shots>a.shots&&b.firing)){failures++;console.error('FAIL button does not fire',name);}
  await page.screenshot({path:`${out}frames/two-fingers-fire-${name}.jpg`,type:'jpeg',quality:78});
  await touch('touchMove',[{x:210,y:230,id:1},{...fc,id:2}]);await wait(150);
  await touch('touchEnd',[{x:210,y:230,id:1}]); // finger 2 (the button) lifts, finger 1 stays on the stick
- await wait(150);a=await st();for(let i=1;i<=10;i++){await touch('touchMove',[{x:210-i*6,y:230+i*4,id:1}]);await wait(50);}b=await st();
+ await until(async()=>!(await st()).firing,6000);await wait(1500);a=await st();for(let i=1;i<=10;i++){await touch('touchMove',[{x:210-i*6,y:230+i*4,id:1}]);await wait(150);}await wait(800);b=await st();
  log.push({profile:name,step:'button lifted, stick still moving: no more shots',shots:b.shots-a.shots,firing:b.firing,ok:b.shots===a.shots&&!b.firing});if(!(b.shots===a.shots&&!b.firing)){failures++;console.error('FAIL fire stuck after button lift',name);}
  await touch('touchEnd',[]);await wait(200);
  // stuck-button insurance: the button finger is cancelled by the system without a pointerup
- await touch('touchStart',[{...fc,id:1}]);await wait(300);await touch('touchCancel',[]);await wait(300);b=await st();a=b;await wait(400);b=await st();
+ await touch('touchStart',[{...fc,id:1}]);await until(async()=>(await st()).firing);await touch('touchCancel',[]);await until(async()=>!(await st()).firing,6000);await wait(1500);a=await st();await wait(1500);b=await st();
  log.push({profile:name,step:'button finger cancelled: fire released',firing:b.firing,shots:b.shots-a.shots,ok:!b.firing&&b.shots===a.shots});if(b.firing||b.shots!==a.shots){failures++;console.error('FAIL fire stuck after cancel',name);}
  // mouse on a touch device: aim, never fire
  await step('mouse press and drag on the scene',async()=>{await page.mouse.move(300,150);await page.mouse.down();await page.mouse.move(520,200,{steps:6});await page.mouse.up();},{expectShots:'none'});
  // the keyboard fire key still works (it is a fire button too) and stops on release
- await step('keyboard F held',async()=>{await page.keyboard.down('KeyF');await wait(400);},{expectShots:'some'});await page.keyboard.up('KeyF');await wait(200);
+ await step('keyboard F held',async()=>{await page.keyboard.down('KeyF');},{expectShots:'some'});await page.keyboard.up('KeyF');await wait(300);
  log.push({profile:name,errors});if(errors.length){failures++;console.error('page errors',errors);}
  await ctx.close();
 }

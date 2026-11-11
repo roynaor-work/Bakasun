@@ -1,0 +1,258 @@
+[
+ {
+  "profile": "phone",
+  "step": "first touch on the scene (tap)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0,
+   "y": -0.05
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "three taps and a drag on the scene",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0,
+   "y": -0.05
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "controls visible",
+  "zone": true,
+  "btn": true,
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "left stick drag (aim moves, no shots)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0.833,
+   "y": 0.762
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "touch outside stick and button (right middle, top)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.833,
+   "y": 0.762
+  },
+  "aimAfter": {
+   "x": 0.833,
+   "y": 0.762
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "two fingers: button down while stick held",
+  "shots": 0,
+  "firing": true,
+  "ok": false
+ },
+ {
+  "profile": "phone",
+  "step": "button lifted, stick still moving: no more shots",
+  "shots": 7,
+  "firing": true,
+  "ok": false
+ },
+ {
+  "profile": "phone",
+  "step": "button finger cancelled: fire released",
+  "firing": false,
+  "shots": 0,
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "mouse press and drag on the scene",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.95,
+   "y": 0.85
+  },
+  "aimAfter": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "phone",
+  "step": "keyboard F held",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "aimAfter": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "expect": "some",
+  "ok": false
+ },
+ {
+  "profile": "phone",
+  "errors": []
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "first touch on the scene (tap)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0,
+   "y": -0.05
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "three taps and a drag on the scene",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0,
+   "y": -0.05
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "controls visible",
+  "zone": true,
+  "btn": true,
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "left stick drag (aim moves, no shots)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0,
+   "y": -0.05
+  },
+  "aimAfter": {
+   "x": 0.799,
+   "y": 0.729
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "touch outside stick and button (right middle, top)",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.799,
+   "y": 0.729
+  },
+  "aimAfter": {
+   "x": 0.799,
+   "y": 0.729
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "two fingers: button down while stick held",
+  "shots": 0,
+  "firing": true,
+  "ok": false
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "button lifted, stick still moving: no more shots",
+  "shots": 7,
+  "firing": true,
+  "ok": false
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "button finger cancelled: fire released",
+  "firing": false,
+  "shots": 0,
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "mouse press and drag on the scene",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.95,
+   "y": 0.85
+  },
+  "aimAfter": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "expect": "none",
+  "ok": true
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "step": "keyboard F held",
+  "shots": 0,
+  "firing": false,
+  "aimBefore": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "aimAfter": {
+   "x": 0.95,
+   "y": 0.77
+  },
+  "expect": "some",
+  "ok": false
+ },
+ {
+  "profile": "touch-fine-pointer",
+  "errors": []
+ }
+]
