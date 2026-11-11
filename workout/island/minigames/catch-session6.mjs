@@ -333,9 +333,9 @@ export function runCatchSession6(ctx) {
     if (!engine) return;
     const s = engine.state, w = engine.wind, a = engine.aim;
     const dir = w >= 0 ? 1 : -1;
-    hudNodes.windArrow.style.transform = `scaleX(${dir})`; hudNodes.wind.dataset.calm = String(Math.abs(w) < .01);
-    hudNodes.windText.textContent = Math.abs(w) < .01 ? t('catch.windNone') : `${t('catch.wind')} ${Math.abs(w).toFixed(1)}`;
-    hudNodes.wind.setAttribute('aria-label', Math.abs(w) < .01 ? t('catch.windNone') : t(dir > 0 ? 'catch.windRight' : 'catch.windLeft') + ' ' + Math.abs(w).toFixed(1));
+    hudNodes.windArrow.style.transform = `scaleX(${dir})`; hudNodes.wind.dataset.calm = String(Math.abs(w) < .05);
+    hudNodes.windText.textContent = Math.abs(w) < .05 ? t('catch.windNone') : `${t('catch.wind')} ${Math.abs(w).toFixed(1)}`;
+    hudNodes.wind.setAttribute('aria-label', Math.abs(w) < .05 ? t('catch.windNone') : t(dir > 0 ? 'catch.windRight' : 'catch.windLeft') + ' ' + Math.abs(w).toFixed(1));
     pipNodes.forEach((p, i) => { p.dataset.state = i < s.throwsLeft ? 'ready' : 'used'; });
     pips.setAttribute('aria-label', t('catch.throws', {count: s.throwsLeft}));
     const crew = engine.level.crew || 1, need = engine.hitsNeeded || 1;

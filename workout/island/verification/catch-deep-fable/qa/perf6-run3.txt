@@ -1,0 +1,7 @@
+stage  step ms  chase ms  calls  tris     throw ms  calls  tris     textures geometries
+  1     0.01      1.29    113   213824       1.72    122   241547        28        69
+  5     0.05      1.39    122   207268        1.8    137   238070        31        75
+  8     0.03      0.82    104   134595       1.55    105   144611        29        76
+ 10     0.07      1.41     97   127222       1.09    104   149476        29        72
+[{"stage":1,"chaseStepMs":0.01,"chaseFrameMs":1.29,"chaseCalls":113,"chaseTris":213824,"throwFrameMs":1.72,"throwCalls":122,"throwTris":241547,"textures":28,"geometries":69},{"stage":5,"chaseStepMs":0.05,"chaseFrameMs":1.39,"chaseCalls":122,"chaseTris":207268,"throwFrameMs":1.8,"throwCalls":137,"throwTris":238070,"textures":31,"geometries":75},{"stage":8,"chaseStepMs":0.03,"chaseFrameMs":0.82,"chaseCalls":104,"chaseTris":134595,"throwFrameMs":1.55,"throwCalls":105,"throwTris":144611,"textures":29,"geometries":76},{"stage":10,"chaseStepMs":0.07,"chaseFrameMs":1.41,"chaseCalls":97,"chaseTris":127222,"throwFrameMs":1.09,"throwCalls":104,"throwTris":149476,"textures":29,"geometries":72}]
+exit 0
