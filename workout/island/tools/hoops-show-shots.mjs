@@ -49,8 +49,7 @@ try{
   const cel=await page.evaluate(id=>{const d=window.__session.debug,s=d.engine.snapshot(),p=s.players.find(p=>p.id===id);return {x:p.x,z:p.z,motion:[...d.view.avatars.values()].filter(a=>a.root.visible).map(a=>a.card.id+':'+a.motionState),show:window.__session.snapshot.renderMetrics.show};},found.lastScore.shooter);
   log.celebration=cel;console.log('motion',cel.motion.join(' '));
   await override({x:cel.x-scorer.side*4.2,y:1.7,z:cel.z+(cel.z>=0?-3.6:3.6)},{x:cel.x,y:1.2,z:cel.z},44);await shot('03-celebration');
-  // one second after the make: the dunked-on defender's delayed 'disappointed' has started
-  await page.waitForTimeout(800);
+  // 0.75 s of game time later (the wall clock has passed the 0.7 s delay during the still above): the dunked-on defender's 'disappointed'
   const cel2=await page.evaluate(id=>{const d=window.__session.debug;d.step(45);const s=d.engine.snapshot(),p=s.players.find(p=>p.id===id);return {x:p.x,z:p.z,motion:[...d.view.avatars.values()].filter(a=>a.root.visible).map(a=>a.card.id+':'+a.motionState)};},found.lastScore.shooter);
   log.celebration2=cel2;console.log('motion+1s',cel2.motion.join(' '));
   await override({x:cel2.x-scorer.side*4.2,y:1.7,z:cel2.z+(cel2.z>=0?-3.6:3.6)},{x:cel2.x,y:1.2,z:cel2.z},44);await shot('03b-celebration-1s');

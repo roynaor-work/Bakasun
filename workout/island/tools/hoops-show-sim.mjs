@@ -35,7 +35,8 @@ try{
   result=await page.evaluate(()=>{const S=window.__sim,s=window.__session.snapshot,pct=(a,p)=>{if(!a.length)return 0;const b=[...a].sort((x,y)=>x-y);return +b[Math.min(b.length-1,Math.floor(p*(b.length-1)))].toFixed(1);},over=a=>a.filter(f=>f>33.4).length;
    return {mode:'live',gameClock:s.clock,quarter:s.quarter,steps:s.stepsRun,score:s.score,show:s.show,frames:{live:S.live.length,replay:S.replay.length,over33Live:over(S.live),over33Replay:over(S.replay),p50Live:pct(S.live,.5),p50Replay:pct(S.replay,.5),p95Live:pct(S.live,.95),p95Replay:pct(S.replay,.95)},render:{calls:s.renderMetrics?.calls,triangles:s.renderMetrics?.triangles,frameMs:s.renderMetrics?.frameMs},audio:s.audioMetrics?.played,viewShow:s.renderMetrics?.show};});
  }else{
-  // fast: the session's dev hook steps the engine; while a replay runs we render on the wall clock until it completes,
+  // fast: the session's dev hook steps the engine; while a replay runs we render on the wall clock (a 16 ms timer: headless RAF can
+  // stall for seconds while the page is driven from outside, which inflated two replay durations to 10-13 s) until it completes,
   // measuring its duration and its render frame times (view.render CPU) against live render frames
   await page.evaluate(()=>{const d=window.__session.debug;d.hold=true;});
   const ticks=Math.round(minutes*60*60);
@@ -50,13 +51,14 @@ try{
     const snap=window.__session.snapshot;
     if(snap.show?.pending){await new Promise(r=>setTimeout(r,1300));d.render();}
     if(view()?.replaying){
-     const t0=performance.now();let reason=window.__session.snapshot.replayInfo?.reason;
-     while(view()?.replaying&&performance.now()-t0<15000){await new Promise(r=>requestAnimationFrame(r));d.render();S.replayMs.push(frameMs());}
+     const t0=performance.now();const ri0=window.__session.snapshot.replayInfo;let reason=ri0?.reason;S.plans=(S.plans||[]).concat([ri0&&{frames:ri0.frames,contact:ri0.contact,total:ri0.total}]);
+     const trace=[];while(view()?.replaying&&performance.now()-t0<15000){await new Promise(r=>setTimeout(r,16));d.render();S.replayMs.push(frameMs());const ri=window.__session.snapshot.replayInfo;if(trace.length<400)trace.push(ri?+ri.wall.toFixed(2):null);}
+     S.traces=(S.traces||[]).concat([trace.length>12?trace.slice(0,6).concat(['…'],trace.slice(-4)):trace]);
      S.durations.push(+((performance.now()-t0)/1000).toFixed(2));if(reason)S.reasons[reason]=(S.reasons[reason]||0)+1;
     }
    }
    const s=window.__session.snapshot,pct=(a,p)=>{if(!a.length)return 0;const b=[...a].sort((x,y)=>x-y);return +b[Math.min(b.length-1,Math.floor(p*(b.length-1)))].toFixed(1);},over=a=>a.filter(f=>f>33.4).length;
-   return {mode:'fast',ticks:done,gameMinutes:+(done/3600).toFixed(1),quarter:s.quarter,phase:s.phase,score:s.score,show:s.show,replayDurations:S.durations,replayReasons:S.reasons,render:{liveFrames:S.liveMs.length,replayFrames:S.replayMs.length,over33Live:over(S.liveMs),over33Replay:over(S.replayMs),p50Live:pct(S.liveMs,.5),p50Replay:pct(S.replayMs,.5),p95Live:pct(S.liveMs,.95),p95Replay:pct(S.replayMs,.95),calls:s.renderMetrics?.calls,triangles:s.renderMetrics?.triangles},audio:s.audioMetrics?.played,viewShow:s.renderMetrics?.show};
+   return {mode:'fast',replayTraces:S.traces||[],replayPlans:S.plans||[],ticks:done,gameMinutes:+(done/3600).toFixed(1),quarter:s.quarter,phase:s.phase,score:s.score,show:s.show,replayDurations:S.durations,replayReasons:S.reasons,render:{liveFrames:S.liveMs.length,replayFrames:S.replayMs.length,over33Live:over(S.liveMs),over33Replay:over(S.replayMs),p50Live:pct(S.liveMs,.5),p50Replay:pct(S.replayMs,.5),p95Live:pct(S.liveMs,.95),p95Replay:pct(S.replayMs,.95),calls:s.renderMetrics?.calls,triangles:s.renderMetrics?.triangles},audio:s.audioMetrics?.played,viewShow:s.renderMetrics?.show};
   },ticks);
  }
  result.errors=errors.filter(e=>!/favicon|manifest|404/.test(e));result.seed=seed;result.extra=extra;

@@ -210,8 +210,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   const s=state.replay?replayFrame(presentationDt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
   // the clips advance with the replay's own time scale (slow motion slows the bodies too), never with the wall clock
   const poseDt=Math.min(0.2,state.replay?presentationDt*(state.replay.scale??1):dt);
-  // delayed reactions fire when due; one that waited through a whole replay (more than 1.5 s late) is dropped, not played at the inbound
-  if(state.casts.length&&!state.replay)state.casts=state.casts.filter(c=>{if(c.due>now)return true;if(now-c.due<1500)avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});return false;});
+  // delayed reactions fire when due; one that waited through a whole replay (more than 2.5 s late) is dropped, not played at the inbound
+  if(state.casts.length&&!state.replay)state.casts=state.casts.filter(c=>{if(c.due>now)return true;if(now-c.due<2500)avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});return false;});
   const t0=performance.now();
   interp.index(p0?.players);
   seen.clear();
@@ -422,7 +422,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,startShowReplay,skipReplay,dispose,get replaying(){return !!state.replay;},get replayInfo(){const r=state.replay;return r?{show:!!r.show,reason:r.trigger?.reason||null,cam:r.seg?.cam||null,scale:r.scale??1,wall:r.wallElapsed||0}:null;},get show(){return show;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
+ return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,startShowReplay,skipReplay,dispose,get replaying(){return !!state.replay;},get replayInfo(){const r=state.replay;return r?{show:!!r.show,reason:r.trigger?.reason||null,cam:r.seg?.cam||null,scale:r.scale??1,wall:r.wallElapsed||0,frames:r.frames.length,contact:r.timeline?.contactT??null,total:r.timeline?.wall??null}:null;},get show(){return show;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
  }catch(error){
   loadingFeel?.dispose();loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
  }
