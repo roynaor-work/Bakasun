@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {playPoint,baseConfig} from '../workout/island/verification/tennis-v9/sim.mjs';
 import {createTennis} from '../workout/island/minigames/tennis.mjs';
 
-const v9=baseConfig.v9,N=120,legacyConfig={...baseConfig,v9:{...baseConfig.v9,hold:{...baseConfig.v9.hold,enabled:false},deep:{...baseConfig.v9.deep,enabled:false}}};
+const v9=baseConfig.v9,N=120,legacyConfig={...baseConfig,v9:{...baseConfig.v9,hold:{...baseConfig.v9.hold,enabled:false},deep:{...baseConfig.v9.deep,enabled:false},dropFix:{...baseConfig.v9.dropFix,enabled:false}}};
 const outcome=(r)=>{
   const land=r.landings.find(l=>l.by===0&&l.after===2),returned=r.cpuHits>r.cpuBefore;
   if(r.humanShots.length<2||r.cpuBefore===undefined)return null;

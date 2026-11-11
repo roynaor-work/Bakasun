@@ -6,6 +6,7 @@ import {alienV14Enabled,gearFactor,heatStep} from '../workout/island/minigames/a
 import {seededRandom} from '../workout/island/minigames/context.mjs';
 import {stage} from '../workout/island/verification/aliens-v14/sim.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.alienDefense,v14=balance.v14;
+globalThis.__alienV15=false; // v14 behaviour is measured as v14; v15 (final-fix-fable) has its own tests in final-aliens.test.mjs
 const make=(o={},off=false,level=1)=>{globalThis.__alienV14=off?false:undefined;const m=createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false,...o});globalThis.__alienV14=undefined;return m;};
 const run=(m,s,input={})=>{for(let i=0;i<Math.ceil(s*30);i++)m.update(1/30,input);};
 const heavy={equipment:{weapon:2,rate:1.5,damage:2,shield:2},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:2},hangar:{rapid:10}};

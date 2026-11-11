@@ -1,8 +1,8 @@
-import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-8';
-import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-8';
-import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-8';
-import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-8';
-import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-8';
+import {adventureRenderer} from '../presentation/surfaces.mjs?v=island-v2-20261107-9';
+import {createUltraSoccerStadium} from './ultra-soccer-stadium.mjs?v=island-v2-20261107-9';
+import {createUltraSoccerEffects} from './ultra-soccer-effects.mjs?v=island-v2-20261107-9';
+import {createSoccerLighting} from './soccer-lighting.mjs?v=island-v2-20261107-9';
+import {soccerCrowd} from './soccer-crowd.mjs?v=island-v2-20261107-9';
 import {createSoccerSurround} from './soccer-surround.mjs';
 import {soccerV8Enabled} from './soccer-v8.mjs';
 import {loadStadium as loadV8Stadium} from './soccer-v8-stadium.mjs';
@@ -16,17 +16,17 @@ import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-8';
+import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-9';
 import {soccerV7FullDetail,SOCCER_V7_FULL_DETAIL,withSoccerV7Kits} from './soccer-v7.mjs';
-import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-8';
-import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-8';
-import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-8';
-import {passDestination} from './soccer.mjs?v=island-v2-20261107-8';
-import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-8';
-import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-8';
+import {nearDetailPlayers,playerAnimation,passReceiver,passLanding,soccerCamera,projectSoccerPoint,slideWeight,crossArc,createQualityMonitor,soccerElevationDegrees} from './soccer-presentation.mjs?v=island-v2-20261107-9';
+import {shotHeight,safeShotAim} from './soccer-shot.mjs?v=island-v2-20261107-9';
+import {holdSoccerBall} from './soccer-poses.mjs?v=island-v2-20261107-9';
+import {passDestination} from './soccer.mjs?v=island-v2-20261107-9';
+import {setupAthletes} from './soccer-athlete.mjs?v=island-v2-20261107-9';
+import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,compileAthleteRestartClips} from './soccer-athlete-motion.mjs?v=island-v2-20261107-9';
 import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
-import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-8';
+import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-9';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
@@ -134,15 +134,15 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   }}):null;
   const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
   // Authored v2 characters first, retaining the previous athlete and kid as fallbacks.
-  // Comparison flag: ?soccerChars=athlete (realistic MakeHuman set, Oct 29) or =kid (illustrated kid-full.glb, Oct 26); v4/v5 are handled by the design loader.
+  // Comparison flag: ?soccerChars=athlete-old (the Oct 29 athlete path with its own 13 CMU clips) or =kid (illustrated kid-full.glb, Oct 26); athlete (default, shared body)/v7/v5/v4 are handled by the design loader.
   const forcedChars=new URLSearchParams(globalThis.location?.search||'').get('soccerChars');
   const kidUrl=new URL('../assets/kid-full.glb',import.meta.url).href,athleteUrl=config.view.athlete&&config.view.athlete.enabled!==false&&forcedChars!=='kid'?new URL(config.view.athlete.url,import.meta.url).href:null;let athleteMode=false;
   // Kickoff waits for the turf maps too: a texture arriving mid-match recompiled the pitch shader.
   let designCharacters=null;
-  const design=()=>loadDesignCharacters({config,roster,scene,track,selectedKit}).then(result=>({design:result}));
+  const design=()=>loadDesignCharacters({config,roster,scene,track,selectedKit,numbers:numberTexture}).then(result=>({design:result}));
   const fallback=()=>{athleteMode=false;return design().catch(()=>new GLTFLoader().loadAsync(kidUrl));};
   const athlete=()=>athleteUrl?new GLTFLoader().loadAsync(athleteUrl).then(data=>(athleteMode=true,data)):new GLTFLoader().loadAsync(kidUrl);
-  const model=config.view.designCharacters===false||forcedChars==='athlete'||forcedChars==='kid'?athlete().catch(fallback):design().catch(error=>{loadReport.characterError=String(error?.message||error)||soccerDesignCharacterError();return athlete().catch(e=>{loadReport.athleteError=String(e?.message||e);return new GLTFLoader().loadAsync(kidUrl);});});
+  const model=config.view.designCharacters===false||forcedChars==='athlete-old'||forcedChars==='kid'?athlete().catch(fallback):design().catch(error=>{loadReport.characterError=String(error?.message||error)||soccerDesignCharacterError();return athlete().catch(e=>{loadReport.athleteError=String(e?.message||e);return new GLTFLoader().loadAsync(kidUrl);});});
   const ready=Promise.all([model,stadium.ready.catch(()=>null),designScene?.ready,v8Ready,designVfx.ready,replay.ready,loadSoccerRestartMotion().catch(()=>null)]).then(([data,,,,,,restartData])=>{
     if(data.design){
       designCharacters=data.design;
@@ -287,7 +287,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     restartStrike=null;
     // GPT v7 characters: LOD0 is 35K triangles, so at most `fullDetail` players show it (priority actors first,
     // then the nearest to the camera focus); everyone else uses the 5.8K LOD1 to stay inside maxTriangles.
-    v7Full=characters[0]?.v7&&quality<config.view.athlete.lodFromQuality?soccerV7FullDetail(s.players,cameraState||{x:s.ball.x,z:s.ball.z},[poseFocus,s.controlled,s.ball.owner,...s.players.filter(q=>q.restartMotion||q.kickTime>0||q.headerTime>0||q.slideTime>0||q.diveTime>0).map(q=>q.id)],Math.min(v7Cap,config.view.v7?.fullDetail??SOCCER_V7_FULL_DETAIL),v7Full):null;
+    v7Full=(characters[0]?.v7||characters[0]?.athleteBody)&&quality<config.view.athlete.lodFromQuality?soccerV7FullDetail(s.players,cameraState||{x:s.ball.x,z:s.ball.z},[poseFocus,s.controlled,s.ball.owner,...s.players.filter(q=>q.restartMotion||q.kickTime>0||q.headerTime>0||q.slideTime>0||q.diveTime>0).map(q=>q.id)],Math.min(v7Cap,config.view.v7?.fullDetail??SOCCER_V7_FULL_DETAIL),v7Full):null;
     for(const p of s.players){
       // Authored characters remain visible. Foreground/actions retain their
       // detail while distant geometry stays within the mobile triangle budget.

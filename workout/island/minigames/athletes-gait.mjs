@@ -110,11 +110,12 @@ export function tallPlanFor(id) {
   return null;
 }
 /** Applies the unified gait rules to every clip of a decoded tall pack (typed arrays, in place). Returns a summary. */
-export function unifyTallPack(pack, donor, {fps = pack.fps || 30} = {}) {
+/** `cap:false` leaves the idle / brake / cut arms as authored (the v12 repairs on the athlete body read as a zombie with the cap: elbows in, hands forward). */
+export function unifyTallPack(pack, donor, {fps = pack.fps || 30, cap = true} = {}) {
   checkDonor(donor);
   const report = {gait: [], cap: [], skipped: 0};
   for (const [id, clip] of Object.entries(pack.clips)) {
-    const plan = tallPlanFor(id); if (!plan) { report.skipped++; continue; }
+    const plan = tallPlanFor(id); if (!plan || (!cap && plan.kind === 'cap')) { report.skipped++; continue; }
     const host = normaliseTallClip(id, clip, fps), keep = plan.ball ? ballArm(host) : null, free = ['Left', 'Right'].filter(s => s !== keep);
     if (plan.kind === 'gait') {
       const gait = donor.gaits[plan.gait];

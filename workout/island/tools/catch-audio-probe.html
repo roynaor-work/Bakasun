@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8"><title>catch audio probe</title>
+<!-- Measures the sound set of "תפוס את הפושע": does the recorded siren decode and play, and how loud is each cue (RMS over the cue).
+     Open with autoplay allowed (Playwright: --autoplay-policy=no-user-gesture-required), then read window.report after window.done. -->
+<body><pre id="out"></pre>
+<script type="module">
+import {createCatchAudio} from '../minigames/catch-audio.mjs';
+const out=document.getElementById('out');
+const audio=createCatchAudio();
+// tap the destination: wrap AudioContext.destination with an analyser by patching connect of GainNodes is intrusive; instead measure through a MediaStream? Simpler: patch AudioContext.prototype.destination getter once.
+const AC=window.AudioContext;const real=Object.getOwnPropertyDescriptor(AudioContext.prototype,'destination');
+let analyser=null,ctx=null;
+Object.defineProperty(AudioContext.prototype,'destination',{get(){if(!analyser){ctx=this;analyser=this.createAnalyser();analyser.fftSize=2048;analyser.connect(real.get.call(this));}return analyser;}});
+const rms=()=>{const d=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(d);let s=0;for(const v of d)s+=v*v;return Math.sqrt(s/d.length);};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const report={cues:{},siren:{}};
+async function measure(name,fn,ms=700){let peak=0;const t0=performance.now();fn();while(performance.now()-t0<ms){peak=Math.max(peak,rms());await sleep(16);}report.cues[name]=+peak.toFixed(4);out.textContent+=name+' '+peak.toFixed(4)+'\n';await sleep(250);}
+audio.cue('engine');await sleep(1500); // fetches the loops
+await measure('siren-first-call',()=>audio.cue('siren',{approach:0}),900);
+for(let i=0;i<4;i++){await measure('siren-loop-'+i,()=>audio.cue('siren',{approach:.5}),800);}
+report.siren.state=ctx?.state;
+for(const c of ['shot','shotHit','flat','skid','turn','twang','whistle','hitBody','hitHead','catch','perfect','crash','scrape','count','go'])await measure(c,()=>audio.cue(c));
+await measure('draw',()=>{let k=0;const iv=setInterval(()=>{k+=.1;audio.cue('draw',Math.min(1,k));if(k>1.2)clearInterval(iv);},60);},900);
+await measure('engine-20',()=>{const iv=setInterval(()=>audio.engine(20,false),50);setTimeout(()=>clearInterval(iv),800);},900);
+await measure('engine-31-boost',()=>{const iv=setInterval(()=>audio.engine(31,true),50);setTimeout(()=>{clearInterval(iv);audio.engineStop();},800);},900);
+window.report=report;window.done=true;out.textContent+=JSON.stringify(report);
+</script>
