@@ -11,6 +11,28 @@ export const DRIVERS = Object.freeze([
   Object.freeze({ id: 'shemesh', name: 'שמש', rating: 1.05, style: 'מהיר בפינות' }),
   Object.freeze({ id: 'barkat', name: 'ברקת', rating: 1.07, style: 'אלוף העונה' })
 ]);
+/** racing-deep-m4: the whole grid of twelve, fixed for every race and season: index = position in the race model's car list (0 = the player,
+ * 1-4 = the league drivers above, 5-11 = the extra rivals of racing-physics EXTRA_NAMES in the same order). number and colour are the ones
+ * racing-view.mjs paints (CAR_NUMBERS / carColors), so the broadcast tower, the grid card and the podium match the cars on the track.
+ * Only the first five score in the league; the rest are traffic. Pure data; racing-view/physics may import it instead of their own copies. */
+export const GRID_DRIVERS = Object.freeze([
+  { id: 'player', name: 'אתם', number: 1, color: '#d93228', team: 'להבה', style: 'אתם', scoring: true },
+  { id: 'almog', name: 'אלמוג', number: 16, color: '#18b6bd', team: 'גל', style: 'יציב', scoring: true },
+  { id: 'turkiz', name: 'טורקיז', number: 44, color: '#d6aa3b', team: 'שמש', style: 'תוקפני', scoring: true },
+  { id: 'shemesh', name: 'שמש', number: 63, color: '#566bd1', team: 'ים', style: 'מהיר בפינות', scoring: true },
+  { id: 'barkat', name: 'ברקת', number: 11, color: '#b7c2ca', team: 'כסף', style: 'אלוף העונה', scoring: true },
+  { id: 'noa', name: 'נועה', number: 4, color: '#e07b39', team: 'שקיעה', style: 'זהירה', scoring: false },
+  { id: 'rom', name: 'רום', number: 27, color: '#7ac05a', team: 'יער', style: 'עקבי', scoring: false },
+  { id: 'dor', name: 'דור', number: 55, color: '#a05fc4', team: 'סגול', style: 'אוהב קווים ישרים', scoring: false },
+  { id: 'yam', name: 'ים', number: 81, color: '#e0c3a1', team: 'חול', style: 'רגוע', scoring: false },
+  { id: 'or', name: 'אור', number: 14, color: '#4b6a88', team: 'סלע', style: 'בולם מאוחר', scoring: false },
+  { id: 'shaked', name: 'שקד', number: 22, color: '#2b2f36', team: 'לילה', style: 'שקט', scoring: false },
+  { id: 'gal', name: 'גל', number: 31, color: '#e8e6d2', team: 'ענן', style: 'חדש בליגה', scoring: false }
+].map(Object.freeze));
+/** Driver card for a car of the race model by its index in state.cars (an unknown index gets a neutral card with the car's own name). */
+export function gridDriver(index, name = '') {
+  return GRID_DRIVERS[index] || { id: 'car-' + index, name, number: 90 + index, color: '#8a98a6', team: '', style: '', scoring: false };
+}
 /** Season k uses the circuits of stage tiers 0, 2 and 4 (laps 4, 5, 5 on the longer racing-v10 circuits: about 3.5 to 4.5 minutes a race). */
 // racing-look-v1: the circuits now force braking (laps about 8% slower), so a season is 3, 4, 4 laps to stay under the 295 s race cap (?racingLook=0: 4, 5, 5).
 const LOOK = new URLSearchParams(globalThis.location?.search || '').get('racingLook') !== '0';

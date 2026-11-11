@@ -5,6 +5,7 @@ import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-8';
 import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-8';
 import {createRacingTower, towerEnabled} from './racing-tower.mjs';
 import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-8';
+import {createBroadcast, broadcastEnabled} from './racing-broadcast.mjs?v=island-v2-20261107-8';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
 function leagueOrder(cars){
@@ -59,20 +60,22 @@ export function runRacingSession(ctx){
   let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);card.remove();done();};
   const timer=setTimeout(close,4000);card.addEventListener('pointerdown',close,{signal:abort.signal});abort.signal.addEventListener('abort',()=>clearTimeout(timer),{once:true});
  }
- const tower=towerEnabled()?createRacingTower(stage):null;abort.signal.addEventListener('abort',()=>tower?.dispose(),{once:true});
+ // racing-deep-m4 broadcast: start lights, race intro (holds the model until it closes), lower-third cards, full-field tower and podium. ?racingBroadcast=0 keeps the old HUD.
+ const bc=broadcastEnabled()?createBroadcast({stage,model,league:Boolean(ctx.league),signal:abort.signal}):null;abort.signal.addEventListener('abort',()=>bc?.dispose(),{once:true});
+ const tower=towerEnabled()?createRacingTower(stage,{broadcast:bc}):null;abort.signal.addEventListener('abort',()=>tower?.dispose(),{once:true});
  function tick(at){if(disposed)return;const dt=last?Math.min(.1,(at-last)/1000):0,ms=last?at-last:0;last=at;tower?.update(model.state,dt);
-  if(!paused&&!document.hidden){lastInput=input.sample();model.step(dt,lastInput);view.observeFrame(ms);}const s=model.state,p=s.player;
+  if(!paused&&!document.hidden&&!bc?.holding()){lastInput=input.sample();model.step(dt,lastInput);view.observeFrame(ms);}const s=model.state,p=s.player;bc?.update(s,paused?0:dt,lastInput);
   if(engineOn&&!paused)audio.setOpponents?.(s.cars.slice(1).map(c=>{const dx=c.x-p.x,dz=c.z-p.z;return {rpm:c.rpm,gear:c.gear,throttle:c.speed>1?1:.3,distance:Math.hypot(dx,dz),pan:(dx*-Math.cos(p.heading)+dz*Math.sin(p.heading))/25};}));
   audio.sync(paused?0:p.speed,p.boosting,{drifting:p.drifting,offroad:p.offroad,steer:p.steer,...(engineOn?{kerb:Math.abs(p.lateral)>model.track.width/2-.8&&!p.offroad?1:0,topVar:topSoundOn,rpm:p.rpm,gear:p.gear,throttle:lastInput.brake?.1:(lastInput.autoAccelerate||lastInput.throttle)?1:0}:{})});view.render(s,paused?0:dt);minimap();
   rank.firstChild.textContent=String(s.rank);lap.textContent=t('racing.lap',{lap:'\u2066'+p.lap,total:s.laps+'\u2069'});clock.textContent=`${Math.floor(s.time/60)}:${String(Math.floor(s.time%60)).padStart(2,'0')}`;speedometer.update(p.speed,engineOn?{gear:p.gear,rpm:p.rpm}:null);energyFill.style.transform=`scaleX(${Math.min(1,p.nitro/100)})`;energy.setAttribute('aria-valuenow',String(Math.round(p.nitro)));energy.dataset.charging=String(!!p.charging);energyTag.textContent=p.charging?'ERS ▲':'ERS';drift.hidden=!p.drifting;driftFill.style.transform=`scaleX(${p.driftCharge/2.7})`;
   if(lastRank&&s.rank<lastRank&&s.phase==='racing')audio.event?.('pass');lastRank=s.rank;
-  lapInfo.textContent=p.lapTimes.length?`אחרונה ${fmt(p.lapTimes[p.lapTimes.length-1])} · שיא ${fmt(bestLap)}`:(bestLap?`שיא ${fmt(bestLap)}`:'');draftBadge.hidden=!(p.draft>.15);draftBadge.style.opacity=String(Math.min(1,.4+p.draft));countdown.hidden=s.phase!=='countdown';countdown.textContent=Math.ceil(s.countdown)||'';hint.hidden=s.time>4.5;screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
+  lapInfo.textContent=p.lapTimes.length?`אחרונה ${fmt(p.lapTimes[p.lapTimes.length-1])} · שיא ${fmt(bestLap)}`:(bestLap?`שיא ${fmt(bestLap)}`:'');draftBadge.hidden=!(p.draft>.15);draftBadge.style.opacity=String(Math.min(1,.4+p.draft));countdown.hidden=Boolean(bc)||s.phase!=='countdown';countdown.textContent=Math.ceil(s.countdown)||'';hint.hidden=s.time>4.5;screen.dataset.boosting=String(p.boosting);screen.dataset.offroad=String(p.offroad);
   for(const e of s.events){if(e.car!=='player')continue;if(e.type==='crash'){ctx.sound?.('hit');view.kick?.(1);try{navigator.vibrate?.(60);}catch{}}else if(e.type==='wall'){ctx.sound?.('hit');view.kick?.(e.intensity);try{navigator.vibrate?.(Math.round(18+30*e.intensity));}catch{}}else if(e.type==='pickup'){ctx.sound?.('bonus');toastText='אנרגיית ניטרו +31';messageUntil=s.time+1.4;}else if(['driftBoost','boostPad'].includes(e.type)){ctx.sound?.('upgrade');toastText=e.type==='driftBoost'?'דריפט מעולה · בוסט!':'מסלול בוסט!';messageUntil=s.time+1.1;}else if(e.type==='recovery'){toastText=t('racing.recover');messageUntil=s.time+2;}else if(e.type==='lap'){if(e.lapTime>0&&(!bestLap||e.lapTime<bestLap)){bestLap=e.lapTime;try{globalThis.localStorage?.setItem(bestKey,String(bestLap));}catch{}toastText='הקפה מהירה ביותר '+fmt(e.lapTime);messageUntil=s.time+2;}ctx.sound?.('bonus');status.textContent=t('racing.lap',{lap:p.lap,total:s.laps});}}
   toast.hidden=!(p.offroad||s.time<messageUntil);toast.textContent=p.offroad?t('racing.offroad'):toastText;
   if(s.result&&!finished){finished=true;ctx.onRacingSummary?.(s.result);
    const done=()=>ctx.finish({outcome:s.result.won?'win':'lose',score:s.result.checkpoints===s.result.requiredCheckpoints?6-s.result.rank:0,racing:s.result,...(ctx.league?{league:leagueOrder(s.cars)}:{})});
    // racing-v11 podium: the top three of the finished race for 4 s (tap to skip), then the normal result. ?racingPodium=0 skips it.
-   if(podiumOn){showPodium(s,done);return;}
+   if(podiumOn){if(bc)bc.podium(s,done);else showPodium(s,done);return;}
    done();return;}frame=requestAnimationFrame(tick);
  }
  return session;

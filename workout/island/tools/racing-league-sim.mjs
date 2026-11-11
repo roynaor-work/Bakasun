@@ -24,7 +24,7 @@ function season(bot,upgrade=true){
    const r=race(setup,bot,s*100+L.race),res=applyRace(L,{order:r.order,fastestLapId:r.fastest});
    if(upgrade)for(const name of ['engine','tires','brakes','steering','aero']){}  // order below
    let bought=[];if(upgrade)for(let i=0;i<10;i++){const name=Object.keys(UPGRADES).sort((a,b)=>L.upgrades[a]-L.upgrades[b]||Object.keys(UPGRADES).indexOf(a)-Object.keys(UPGRADES).indexOf(b))[0];const b=buyUpgrade(L,name);if(!b.ok)break;bought.push(name+b.level);}
-   log.push({season:s,race:L.race,place:res.place,points:res.points,coins:res.coins,duration:Math.round(r.duration),walls:r.walls,bought});
+   log.push({season:s,race:L.race,place:res.place,points:res.points,coins:res.coins,duration:Math.round(r.duration),walls:r.walls,bought,cut:!r.finished,limit:setup.stageOverride.timeLimit});
    if(res.seasonDone)break;}
   const rank=L.seasonRank[s],table=standings(L);log.push({season:s,final:table.map(t=>t.name+' '+t.points).join(' · '),rank});
   if(!nextSeason(L).ok)break;
@@ -32,7 +32,11 @@ function season(bot,upgrade=true){
  return {bot,upgrade,log,upgrades:L.upgrades,coins:L.coins};
 }
 const results=[season('casual'),season('casual',false),season('pro'),season('pro',false)];
+// racing-deep-m4: one line per scenario for the report (places per season, race length, races cut at the time cap), written into the JSON as `summary`.
+const summary=results.map(r=>{const races=r.log.filter(l=>!l.final),d=races.map(l=>l.duration);
+ return {bot:r.bot,upgrade:r.upgrade,seasonRank:r.log.filter(l=>l.final).map(l=>l.rank),races:races.length,avgDuration:Math.round(d.reduce((a,b)=>a+b,0)/Math.max(1,d.length)),minDuration:Math.min(...d),maxDuration:Math.max(...d),cut:races.filter(l=>l.cut).length,wins:races.filter(l=>l.place===1).length,upgrades:r.upgrades,coinsLeft:r.coins};});
 for(const r of results){console.log(`\n== ${r.bot} ${r.upgrade?'with upgrades':'no upgrades'} ==`);
- for(const l of r.log)console.log(l.final?`  season ${l.season}: ${l.final} | player rank ${l.rank}`:`  S${l.season} race ${l.race}: place ${l.place} pts ${l.points} coins ${l.coins} ${l.duration}s walls ${l.walls} ${l.bought.join(',')}`);
+ for(const l of r.log)console.log(l.final?`  season ${l.season}: ${l.final} | player rank ${l.rank}`:`  S${l.season} race ${l.race}: place ${l.place} pts ${l.points} coins ${l.coins} ${l.duration}s${l.cut?' CUT':''} walls ${l.walls} ${l.bought.join(',')}`);
  console.log('  upgrades',JSON.stringify(r.upgrades));}
-if(process.argv[2])await writeFile(fileURLToPath(new URL('../'+process.argv[2],import.meta.url)),JSON.stringify(results,null,1));
+console.log('\n== summary ==');for(const s of summary)console.log(`  ${s.bot} ${s.upgrade?'upgrades':'stock'}: seasons ${s.seasonRank.join('/')} | avg ${s.avgDuration}s (${s.minDuration}-${s.maxDuration}) | cut ${s.cut}/${s.races} | wins ${s.wins}`);
+if(process.argv[2])await writeFile(fileURLToPath(new URL('../'+process.argv[2],import.meta.url)),JSON.stringify({generated:new Date().toISOString(),tracks:process.env.RACING_TRACKS||'default',summary,results},null,1));
