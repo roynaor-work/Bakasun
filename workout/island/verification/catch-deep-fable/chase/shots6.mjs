@@ -35,7 +35,9 @@ if (job === 'width') {
   await step(60 * 3.6); const i = await info(); await snap(path.join(outDir, `stage${stageArg}-straight-behind.png`)); console.log(JSON.stringify(i));
 } else if (job === 'perf') {
   // draw calls, triangles and the JS time of chase.step + view.update per frame, 3 s into the chase (deterministic counts; the ms depend on the machine)
-  const out = await page.evaluate(() => { window.stepN(60 * 3); const r = view.renderer; const t0 = performance.now(); for (let i = 0; i < 30; i++) window.stepN(1); const ms = (performance.now() - t0) / 30; return {calls: r.info.render.calls, tris: r.info.render.triangles, frameMs: +ms.toFixed(2), textures: r.info.memory.textures, geometries: r.info.memory.geometries}; });
+  const sample = () => page.evaluate(() => { const r = view.renderer; const t0 = performance.now(); for (let i = 0; i < 30; i++) window.stepN(1); const ms = (performance.now() - t0) / 30; return {s: Math.round(chase.state.s), calls: r.info.render.calls, tris: r.info.render.triangles, frameMs: +ms.toFixed(2), textures: r.info.memory.textures, geometries: r.info.memory.geometries}; });
+  await step(60 * 3); const early = await sample(); await step(60 * 17); const late = await sample(); // 3 s in (the opening straight) and 20 s in (deep in the bends)
+  const out = {early, late};
   console.log(JSON.stringify({stage: +stageArg, ...out})); await writeFile(path.join(outDir, `perf-stage${stageArg}.json`), JSON.stringify({stage: +stageArg, ...out}));
 } else if (job === 'sheet') {
   // find the first arc of at least 60 degrees after the opening straight and shoot 8 frames spread through it

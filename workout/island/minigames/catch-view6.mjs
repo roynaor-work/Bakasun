@@ -108,9 +108,9 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   // buildings on both sides: a deterministic row by stage, shops and cafes near, apartments taller behind
   const rowKeys = level.decor === 'downtown' || level.decor === 'harbor' ? ['apartment', 'apartment', 'shop', 'apartment', 'cafe', 'apartment', 'station', 'apartment'] : level.decor === 'avenue' ? ['shop', 'apartment', 'cafe', 'station', 'house', 'apartment', 'shop'] : ['apartment', 'shop', 'cafe', 'house', 'apartment', 'station', 'shop', 'cafe', 'apartment', 'house'];
   const fitted = {}; for (const k of rowKeys) if (!fitted[k]) { const f = fitModel(models[k], {height: BUILDINGS[k].h}); fitted[k] = f.userData.size; }
-  const budget = low ? 140 : 220; let count = 0;
+  const budget = low ? 150 : 240; // per side: a shared budget left the right side empty after ~300 m (found 11/11 on the stage 3 sheet)
   for (const side of [-1, 1]) {
-    let s = S0 + 10, i = (stage * 3 + (side > 0 ? 2 : 0)) % rowKeys.length;
+    let s = S0 + 10, i = (stage * 3 + (side > 0 ? 2 : 0)) % rowKeys.length, count = 0;
     while (s < S1 && count < budget) {
       const key = rowKeys[i++ % rowKeys.length], size = fitted[key], gap = 1.5 + ((i * 7) % 5);
       // skip the inside of tight bends where the buildings would overlap the road

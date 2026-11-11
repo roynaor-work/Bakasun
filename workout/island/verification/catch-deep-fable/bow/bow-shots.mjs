@@ -20,7 +20,7 @@ const open=async stage=>{
   await page.waitForFunction(()=>session.snapshot.mode==='chase',null,{timeout:90000,polling:200});
   await page.evaluate(()=>session.debug.skipChase());
   await page.waitForFunction(()=>session.snapshot.mode==='throw',null,{timeout:90000,polling:200});
-  await page.waitForTimeout(3800); // the camera blend from the chase, drawn slowly in software GL
+  await page.waitForTimeout(5200); // the camera blend from the chase, drawn slowly in software GL
   return page;
 };
 // solve a shot at full draw on the real engine: the (angle, yaw) whose wind-aware flight catches (or catches perfectly)

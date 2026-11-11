@@ -21,7 +21,7 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
   const rig = new T.Group(); camera.add(rig);
   const launcher = new T.Group(); rig.add(launcher);
   const metal = mat('#3a4150', {metalness: .55, roughness: .4}), navy = mat('#223a6b', {roughness: .6}), brass = mat('#d9b44a', {metalness: .65, roughness: .3}), rubber = mat('#1c1f27', {roughness: .95});
-  const body = new T.Mesh(new T.BoxGeometry(.11, .13, .4, 1, 1, 1), navy); body.position.set(0, -.01, -.06); launcher.add(body);
+  const body = new T.Mesh(new T.BoxGeometry(.1, .11, .4, 1, 1, 1), navy); body.position.set(0, -.01, -.06); launcher.add(body);
   const bodyTop = new T.Mesh(new T.CylinderGeometry(.055, .055, .4, 12, 1, false, 0, Math.PI), navy); bodyTop.rotation.x = Math.PI / 2; bodyTop.rotation.z = Math.PI; bodyTop.position.set(0, .055, -.06); launcher.add(bodyTop);
   const stripe = new T.Mesh(new T.BoxGeometry(.114, .03, .3), mat('#f2f4f8', {roughness: .6})); stripe.position.set(0, -.02, -.06); launcher.add(stripe);
   const tube = new T.Mesh(new T.CylinderGeometry(.045, .05, .5, 14), metal); tube.rotation.x = Math.PI / 2; tube.position.set(0, .01, -.48); launcher.add(tube);
@@ -29,9 +29,9 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
   const muzzle = new T.Mesh(new T.CylinderGeometry(.095, .065, .14, 16, 1, true), metal); muzzle.rotation.x = -Math.PI / 2; muzzle.position.set(0, .01, -.76); launcher.add(muzzle);
   const muzzleRing = new T.Mesh(new T.TorusGeometry(.095, .014, 8, 20), brass); muzzleRing.position.set(0, .01, -.83); launcher.add(muzzleRing);
   const netTex = netTexture();
-  const loadedNet = new T.Group(); loadedNet.position.set(0, .01, -.86); launcher.add(loadedNet);
-  const netCore = new T.Mesh(new T.SphereGeometry(.072, 12, 10), mat('#f08c1c', {roughness: .8})); loadedNet.add(netCore);
-  const netWrap = new T.Mesh(new T.SphereGeometry(.082, 14, 10), new T.MeshBasicMaterial({map: netTex, transparent: true, alphaTest: .2, color: '#f6f9ff', side: T.DoubleSide})); loadedNet.add(netWrap);
+  const loadedNet = new T.Group(); loadedNet.position.set(0, .01, -.93); launcher.add(loadedNet);
+  const netCore = new T.Mesh(new T.SphereGeometry(.082, 12, 10), mat('#f08c1c', {roughness: .8})); loadedNet.add(netCore);
+  const netWrap = new T.Mesh(new T.SphereGeometry(.094, 14, 10), new T.MeshBasicMaterial({map: netTex, transparent: true, alphaTest: .2, color: '#f6f9ff', side: T.DoubleSide})); loadedNet.add(netWrap);
   const rail = new T.Mesh(new T.BoxGeometry(.03, .025, .22), metal); rail.position.set(0, .085, -.1); launcher.add(rail);
   const bead = new T.Mesh(new T.SphereGeometry(.012, 8, 6), brass); bead.position.set(0, .07, -.7); launcher.add(bead);
   const grip = new T.Mesh(new T.BoxGeometry(.05, .15, .07), rubber); grip.position.set(0, -.12, .04); grip.rotation.x = .3; launcher.add(grip);
@@ -52,7 +52,7 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     return g;
   };
   launcher.add(hand(.005, -.15, .05, {armDir: [.45, -1, .55]}), hand(-.01, -.1, -.42, {armDir: [-.55, -1, .35], scale: .95}));
-  const LAUNCHER_AT = {x: .3, y: -.3, z: -.62, rx: .02, ry: -.1, rz: .08, scale: 1};
+  const LAUNCHER_AT = {x: .36, y: -.11, z: -.55, rx: .05, ry: .3, rz: .1, scale: .6}; // lower right, the muzzle ends about 130 px from the sight at 844x390
   launcher.position.set(LAUNCHER_AT.x, LAUNCHER_AT.y, LAUNCHER_AT.z); launcher.rotation.set(LAUNCHER_AT.rx, LAUNCHER_AT.ry, LAUNCHER_AT.rz);
   rig.visible = false;
 
