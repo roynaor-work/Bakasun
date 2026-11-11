@@ -12546,6 +12546,8 @@
     "lateralBoostDamp": 0.05,
     "airControl": 0.4,
       "airBoost": {"accel": 2.2, "maxGain": 0.08, "control": 0.55, "steerPenalty": 0.5, "refVy": 6.6},
+      "warnAhead": 30,
+      "fall": {"ramp": {"seconds": 1.2, "loss": 0.45}, "gate": {"seconds": 0.9, "loss": 0.35}},
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
     "hitGraceSeconds": 0.35,
@@ -12756,6 +12758,7 @@
      ],
      "reachFactor": 0.75,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.2, "gapScale": 0.88},
      "rockPitch": 3.2,
      "rockDensity": 0.75,
      "rockRadius": [
@@ -12831,6 +12834,7 @@
      ],
      "reachFactor": 0.72,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.35, "gapScale": 0.86},
      "rockPitch": 3,
      "rockDensity": 0.85,
      "rockRadius": [

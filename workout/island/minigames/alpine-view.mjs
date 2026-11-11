@@ -222,7 +222,14 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     return g;
   }
   function rock(){const g=new THREE.Group(),geo=new THREE.SphereGeometry(.7,24,16),p=geo.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),n=1+.10*Math.sin(x*13+z*3)*Math.cos(y*9);p.setXYZ(i,x*n,y*n,z*n);}geo.computeVertexNormals();const r=mesh(geo,stone,g,0,.39,0);r.scale.set(1,.67,1);return g;}
-  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp}, pools = {rock: [], gate: [], boost: [], ramp: []};
+  /** Warning sign: a pole with an orange diamond and a black exclamation mark, readable from far away against snow. */
+  const warnTex = canvasTexture(128, 128, (ctx, w, h) => { ctx.fillStyle = '#ff8a1f'; ctx.fillRect(0, 0, w, h); ctx.strokeStyle = '#1b2330'; ctx.lineWidth = 9; ctx.strokeRect(9, 9, w - 18, h - 18); ctx.fillStyle = '#1b2330'; ctx.fillRect(w / 2 - 7, 26, 14, 48); ctx.beginPath(); ctx.arc(w / 2, 92, 9, 0, 7); ctx.fill(); });
+  function warn() {
+    const g = new THREE.Group(); box(.1, 2.3, .1, navy, g, 0, 1.15, 0);
+    const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 1.15), new THREE.MeshBasicMaterial({map: warnTex, side: THREE.DoubleSide, fog: true}));
+    sign.position.set(0, 2.45, 0); sign.rotation.z = Math.PI / 4; sign.rotation.y = Math.PI; g.add(sign); return g;
+  }
+  const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp, warn}, pools = {rock: [], gate: [], boost: [], ramp: [], warn: []};
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
@@ -328,7 +335,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
   // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
-  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0});
+  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0});
   for (const list of Object.values(pools)) for (const g of list) g.visible = false;
   vfx.warmUp();
   try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
@@ -350,7 +357,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     worldPoint(0, 0, 0, P); sun.target.position.copy(P); sun.position.set(P.x - 32, P.y + 25, P.z - 38);
     worldPoint(-6, .4, 2.6, camera.position); worldPoint(12, 0, 1, target); camera.lookAt(target); camera.updateProjectionMatrix();
     let i = 0; for (const r of riders.values()) { r.root.visible = r.shadow.visible = true; place(r.root, 4 + i * 1.5, (i % 3 - 1) * 2.4, .03); place(r.shadow, 4 + i * 1.5, (i % 3 - 1) * 2.4, .05); r.shadow.rotateX(-Math.PI / 2); if (r.actor) r.actor.pose(0, .3, .5, .2, .4); i++; }
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0}; let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
+    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0}; let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
     for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
     coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
     for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
@@ -395,7 +402,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
       let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
       if (trick) { const e = ease(Math.min(1, trick.progress)); if (trick.id === 'spin' || trick.id === 'combo') yaw = e * Math.PI * 2; if (trick.id === 'flip' || trick.id === 'combo') flip = e * Math.PI * 2; if (trick.id === 'grab') roll = Math.sin(trick.progress * Math.PI) * .35 * side; }
-      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); if (!envRig?.powder(P, 2.1)) powder?.emit(P, 2.1); } } const c = Math.min(1, (t - r.crashAt) / crashSeconds), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
+      if (s.crashed) { if (r.crashAt < 0) { r.crashAt = t; if (id === 'player') { worldPoint(s.s ?? ps, s.x, surf + .6, P); burst(P, puffColor, 26, 3.2); if (!envRig?.powder(P, 2.1)) powder?.emit(P, 2.1); } } const c = Math.min(1, (t - r.crashAt) / (s.crashDur || crashSeconds)), fall = c < .35 ? c / .35 : c > .75 ? (1 - c) / .25 : 1; roll = side * -1.25 * fall; drop = .45 * fall; yaw = Math.sin(c * 9) * .3 * (1 - c);
         // A real wipe-out: the rider tumbles two full somersaults in the first half, thrown up off the snow, then slides and lies flat before getting up.
         const tc = Math.min(1, c / .5); if (!reduced) { flip = -Math.PI * 4 * (1 - (1 - tc) ** 3); lift = Math.sin(tc * Math.PI) * .55; } }
       else r.crashAt = -1;
@@ -414,7 +421,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       if(r.sf){const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;}
     }
     // Obstacles and coins from the frame.
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0};
+    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0};
     for (const list of Object.values(pools)) for (const g of list) g.visible = false;
     let coinCount = 0; const seen = new Map();
     for (const o of state.obstacles ?? []) {
