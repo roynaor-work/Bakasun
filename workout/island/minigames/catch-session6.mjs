@@ -48,6 +48,8 @@ const STYLE6 = `
 .catch-steer-ring{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:3px solid #8fdcffcc;background:#8fdcff22}
 .catch-steer-ring i{position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff}
 .catch-steer-ring[hidden]{display:none}
+.catch-hud[data-v6][data-mode=throw] .catch-tools{left:auto;right:max(118px,calc(env(safe-area-inset-right) + 104px));transform:none;bottom:max(14px,env(safe-area-inset-bottom))}
+.catch-hud[data-v6][data-mode=throw] .catch-tool{min-width:62px;min-height:50px;font-size:11px}
 `;
 
 /** v6 controller: a chase on the winding track (catch-chase6), tyre shots, then the archery-style net throw.
