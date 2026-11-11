@@ -31,7 +31,7 @@ const cdp=await ctx.newCDPSession(page);await cdp.send('Emulation.setTouchEmulat
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id??1}))});
 const mouse=(type,x,y,button='left')=>cdp.send('Input.dispatchMouseEvent',{type,x:x+box.x,y:y+box.y,button,clickCount:1,pointerType:'mouse'});
 const wait=ms=>page.waitForTimeout(ms);
-const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,heat:s.heat,frames:s.frames||0,current:s.current,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
+const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,heat:s.heat,frames:s.frames||0,current:s.current,elapsed:s.elapsed||0,stickInfo:s.stickInfo||null,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
 const resetAim=()=>frame.evaluate(()=>window.__boar.aim(0,-.05));
 // the machine gun overheats after long holds; a step that counts shots waits for it to cool first
 const cool=async()=>{for(let i=0;i<40;i++){if(((await st()).heat||0)<15)return;await wait(250);}};
@@ -85,6 +85,23 @@ await cool();await step('keyboardF',async()=>{await frame.evaluate(()=>document.
 await cool();await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await wait(700);await mouse('mouseReleased',500,200);await wait(300);});
 // J) the fire button alone: shots, all from the button, aim unchanged
 await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(1000);await shot('fire');const held=await st();await touch('touchEnd',[]);await wait(300);return {heldFiring:held.firing};});
+// L) stick precision, measured in game time (`elapsed`, so a starved CPU does not distort it): fine-aim speed at a 20% tilt, time to a target with a full tilt,
+//    overshoot after release (the crosshair must stop at once), and the precision finger (second finger on the stick zone slows the crosshair).
+await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)return noBtn;const R=(await st()).stickInfo?.R||62;const o={x:150,y:290};
+ // fine aim: 20% tilt to the right for about 2 s of wall time
+ await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await wait(300);const f0=await st();await wait(2000);const f1=await st();await touch('touchEnd',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await wait(300);
+ const fine=f1.elapsed-f0.elapsed>0?(f1.aim.x-f0.aim.x)/(f1.elapsed-f0.elapsed):null;
+ // time to target: full tilt from x=0 until x>=0.6, then release at once and watch for overshoot
+ await resetAim();await touch('touchStart',[{...o,id:1}]);const t0=(await st());await touch('touchMove',[{x:o.x+R+20,y:o.y,id:1}]);let reach=null,cross=null;
+ for(let i=0;i<120;i++){const s=await st();if(s.aim.x>=.6){reach=s;break;}await wait(25);}
+ await touch('touchEnd',[{x:o.x+R+20,y:o.y,id:1}]);const rel=await st();await wait(400);const after=await st();
+ const timeToTarget=reach?+(reach.elapsed-t0.elapsed).toFixed(3):null,overshoot=+(after.aim.x-rel.aim.x).toFixed(4),stickAfterRelease=rel.stickInfo;
+ // precision finger: full tilt, then a second finger on the stick zone
+ await resetAim();await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x,y:o.y-R-20,id:1}]);await wait(250);const p0=await st();await wait(600);const p1=await st();
+ await touch('touchStart',[{x:o.x,y:o.y-R-20,id:1},{x:60,y:360,id:5}]);await wait(250);const q0=await st();await wait(600);const q1=await st();
+ await touch('touchEnd',[{x:60,y:360,id:5}]);await touch('touchEnd',[{x:o.x,y:o.y-R-20,id:1}]);await wait(200);
+ const vFull=p1.elapsed-p0.elapsed>0?(p1.aim.y-p0.aim.y)/(p1.elapsed-p0.elapsed):null,vPrecise=q1.elapsed-q0.elapsed>0?(q1.aim.y-q0.aim.y)/(q1.elapsed-q0.elapsed):null;
+ return {R,fineSpeed:fine==null?null:+fine.toFixed(3),timeToTarget,overshoot,stickAfterRelease,fullSpeed:vFull==null?null:+vFull.toFixed(3),preciseSpeed:vPrecise==null?null:+vPrecise.toFixed(3),preciseFlag:q0.stickInfo?.precise??null};});
 // K) the weapon-switch button: tap cycles the weapon (two owned weapons), fires nothing
 await step('weaponButton',async()=>{await frame.evaluate(()=>{const s=window.__boar.state.save;s.weapons.shotgun=s.weapons.shotgun||1;window.__boar.setSave(s);});const a=await st();const b=await frame.evaluate(()=>{const e=document.getElementById('weapon-btn');if(!e)return null;const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2,r.width,r.height];});
  if(!b)return {skipped:'no weapon button in this mode'};await touch('touchStart',[{x:b[0],y:b[1],id:4}]);await wait(120);await touch('touchEnd',[{x:b[0],y:b[1],id:4}]);await wait(500);const c=await st();return {size:[b[2],b[3]],weaponBefore:a.current,weaponAfter:c.current};});
@@ -106,6 +123,12 @@ ok('weapon-switch button: at least 44 px, cycles the weapon, fires nothing',S.we
 // HUD coverage baseline of v20 (MODE=v20 on this harness, 844x390, wave 1): hud 0.2152 of the viewport, middle band 0.4297. Target: at least 50% less.
 const HUD_V20={hud:0.2152,band:0.4297,withControls:0.2605};
 ok('HUD coverage at most half of v20 (whole viewport and the middle band)',hudCoverage.hud<=HUD_V20.hud*.5&&hudCoverage.band<=HUD_V20.band*.5,{after:hudCoverage,v20:HUD_V20});
+// v20 stick on this harness (MODE=v20): fine-aim speed at a 20% tilt 0.145 units/s (linear curve), no precision finger, R 62.
+const P=S.stickPrecision;
+ok('stick: a 20% tilt aims at most half the v20 speed (fine aiming)',P.fineSpeed!=null&&P.fineSpeed>0&&P.fineSpeed<=.145*.5,P);
+ok('stick: a full tilt reaches x=0.6 within 1.2 s of game time and the crosshair stops at once on release (overshoot under 0.01)',P.timeToTarget!=null&&P.timeToTarget<=1.2&&Math.abs(P.overshoot)<.01&&P.stickAfterRelease===null,P);
+ok('stick: a second finger on the stick zone slows the crosshair to under half',P.preciseFlag===true&&P.fullSpeed>0&&P.preciseSpeed!=null&&P.preciseSpeed<P.fullSpeed*.5,P);
+ok('stick: the fine/target/precision drags fired nothing',P.shots===0,P.shots);
 ok('every shot in the run is attributed to the fire button',nonButton(final)===0&&final.stickNoButton===0,{shotsBy:final.shotsBy,stickNoButton:final.stickNoButton});
 ok('no page errors and the game frame stayed alive',errors.length===0&&!dead,{errors,frameLost:dead});
 results.checks=checks;

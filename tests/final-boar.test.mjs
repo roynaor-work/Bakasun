@@ -56,8 +56,28 @@ test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboa
   assert.match(src,/if\(e\.code==='KeyQ'\)rocket\(\);if\(e\.code==='KeyE'\)frost\(\);/,'desktop shortcuts stay');
   assert.match(src,/const n=\['Digit1','Digit2','Digit3','Digit4'/,'digit shortcuts stay');
   assert.match(session,/get\('boarHud'\)==='v20'\)url\.searchParams\.set\('boarHud','v20'\)/);
-  assert.match(css,/\.hudv21 #weapons,\.hudv21 \.ammo-panel\{display:none\}/);
+  assert.match(css,/#game\.hudv21 #weapons,#game\.hudv21 \.ammo-panel\{display:none\}/);
   assert.match(css,/#weapon-btn\{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px/,'weapon button at least 44 px');
-  assert.match(css,/\.hudv21 \.ability\{width:52px;height:52px;border-radius:50%/,'round ability buttons at least 44 px');
-  assert.match(css,/\.hudv21 \.abilities\{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column/,'abilities in a right column, not a mid-screen row');
+  assert.match(css,/#game\.hudv21 \.ability\{width:52px;height:52px;border-radius:50%/,'round ability buttons at least 44 px');
+  assert.match(css,/#game\.hudv21 \.abilities\{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column/,'abilities in a right column, not a mid-screen row');
+});
+
+test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, smoothing, immediate stop, precision finger, sensitivity setting)', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
+  assert.match(src,/const STICK_V21=AIMSTICK&&new URLSearchParams\(location\.search\)\.get\('boarStick'\)!=='v20'/);
+  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_CURVE=1\.8,STICK_TAU=\.045,STICK_PRECISE=\.35/);
+  assert.match(session,/get\('boarStick'\)==='v20'\)url\.searchParams\.set\('boarStick','v20'\)/);
+  assert.match(css,/#aim-ring\.v21\{width:168px;height:168px/);
+  assert.match(css,/#crosshair\.moving u\{opacity:1\}/);
+  // the curve as written in game.js
+  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?Math.pow(mag,1.8):mag;};
+  assert.equal(stickMag(.05,true),0,'inside the dead zone');
+  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.3,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
+  assert.equal(stickMag(1,true),1,'full tilt keeps the full speed');
+  assert.ok(stickMag(.6,true)>stickMag(.3,true)*2,'speed grows with the tilt');
+  // smoothing: after one 16 ms frame the smoothed value is a third of the way; after 150 ms it is at 96%
+  const k=dt=>1-Math.exp(-dt/.045);assert.ok(k(.016)>.28&&k(.016)<.36);assert.ok(1-Math.exp(-.15/.045)>.95);
+  assert.match(src,/aimStick=null;ring\.classList\.remove\('on','precise'\)/,'release drops the stick object: the aim stops at once');
+  assert.match(src,/const g=AIM_SENS\[aimSens\]\*\(aimStick\.precise!==null\?STICK_PRECISE:1\)/);
+  assert.match(src,/localStorage\.setItem\('boar-island-aim',aimSens\)/,'the sensitivity setting is not part of the save');
 });

@@ -22,8 +22,9 @@
 .game-screen.fire-play.fire-v9 .soccer-stick-zone .soccer-joystick{left:calc(max(20px,env(safe-area-inset-left)) + 70px);top:calc(100% - max(20px,env(safe-area-inset-bottom)) - 70px)}
 
 /* 11/11/2026 water gauge in the HUD (`?fireHud=v20` removes it) */
-.fire-play .fire-water-gauge{position:relative;display:flex;gap:6px;align-items:center;min-width:132px;height:40px;padding:4px 10px;border-radius:11px;font-size:14px;font-weight:650;font-variant-numeric:tabular-nums;color:#e6f2f4}
-.fire-play .fire-water-gauge:before{content:'';position:absolute;left:-2px;top:10px;bottom:10px;width:1px;background:#d5e4e21c}
+.fire-play .fire-water-gauge{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left));top:calc(max(14px,env(safe-area-inset-top)) + 58px);display:flex;gap:7px;align-items:center;width:200px;height:36px;padding:4px 10px;box-sizing:border-box;border:1px solid var(--fire-line);border-radius:14px;background:var(--fire-glass);box-shadow:0 5px 22px #050b1538,inset 0 1px #ffffff0b;backdrop-filter:blur(8px);pointer-events:none;direction:rtl;font-size:14px;font-weight:650;font-variant-numeric:tabular-nums;color:#e6f2f4}
+.game-screen.fire-play[data-orientation-blocked=true] .fire-water-gauge{visibility:hidden}
+@media(max-height:380px){.fire-play .fire-water-gauge{top:calc(10px + 54px);left:max(12px,env(safe-area-inset-left))}}
 .fire-play .fire-water-gauge>svg{width:20px;height:20px;color:#8fd3e6;flex:none}
 .fire-play .fire-gauge-track{position:relative;flex:1;height:13px;border-radius:7px;background:#0b161f99;border:1px solid #d5e4e233;overflow:hidden}
 .fire-play .fire-gauge-fill{position:absolute;inset:0;transform-origin:right;background:linear-gradient(180deg,#8fdcf0,#3e9fc0);transition:transform .25s,background .3s}
