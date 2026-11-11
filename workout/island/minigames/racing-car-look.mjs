@@ -1,4 +1,11 @@
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
+import {RACING_NUMBERS} from './racing-physics.mjs?v=island-v2-20261107-8';
+// racing-deep-m2 livery for twelve cars: one distinct paint per car (the podium and the leaderboard swatches use the same list by index), the cars pair up into six
+// teams of our own that share an accent colour on the stripe decal and the stand-in's wings. No real teams, no brands.
+export const CAR_COLORS=Object.freeze(['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca','#e07b39','#7ac05a','#a05fc4','#e0c3a1','#4b6a88','#2b2f36','#e8e6d2']);
+export const CAR_NUMBERS=RACING_NUMBERS;
+export const TEAMS=Object.freeze([{name:'סער',accent:'#f4f5f2'},{name:'אופק',accent:'#14181c'},{name:'גל',accent:'#ffd166'},{name:'צוק',accent:'#06d6a0'},{name:'רקיע',accent:'#ef476f'},{name:'שחף',accent:'#8ecae6'}]);
+export const teamOf=index=>TEAMS[Math.floor(index/2)%TEAMS.length];
 // racing-look-v1: better looking formula cars. Same GLB (11.9K triangles), no new files: clear-coated metallic paint, carbon and rubber tuning, an env-map boost,
 // generic number/stripe decals (canvas textures, no brands), brake lights that follow the braking, a motion-blur disc per front wheel, speed lines on the camera and cheap
 // stand-ins for rivals that are far away. Every part is off with ?racingLook=0. Budget: about +2% triangles over the formula car, +0 textures per rival (5 shared canvases).
@@ -19,18 +26,18 @@ function numberTexture(T,number,color,keep){
  x.fillStyle=color;x.fillRect(4,46,120,10);x.fillStyle='#14181c';x.font='bold 44px system-ui,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(String(number),64,26);
  const t=keep(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=4;return t;
 }
-function stripeTexture(T,color,keep){
+function stripeTexture(T,color,keep,accent='#14181c'){
  const c=document.createElement('canvas');c.width=256;c.height=64;const x=c.getContext('2d');x.clearRect(0,0,256,64);
  x.fillStyle='#f4f5f2';x.beginPath();x.moveTo(0,64);x.lineTo(60,0);x.lineTo(110,0);x.lineTo(50,64);x.fill();
- x.fillStyle='#14181c';x.beginPath();x.moveTo(70,64);x.lineTo(130,0);x.lineTo(150,0);x.lineTo(90,64);x.fill();
+ x.fillStyle=accent;x.beginPath();x.moveTo(70,64);x.lineTo(130,0);x.lineTo(150,0);x.lineTo(90,64);x.fill();
  x.fillStyle=color;x.beginPath();x.moveTo(170,64);x.lineTo(230,0);x.lineTo(256,0);x.lineTo(256,64);x.lineTo(196,64);x.fill();
  const t=keep(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=4;return t;
 }
 /** Adds decals, brake lights and a wheel-blur disc to one formula car. `car` is the cloned model (rear at -Z, nose at +Z). Returns handles for per-frame updates. */
-export function dressCar(T,car,{index,color,keep,player=false,number=index+1}){
+export function dressCar(T,car,{index,color,keep,player=false,number=index+1,accent=teamOf(index).accent}){
  const decals=new T.Group();decals.name='decals';car.add(decals);
  const flat=(map,w,h,x,y,z,ry=0,rx=0)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(w,h)),keep(new T.MeshBasicMaterial({map,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,toneMapped:false})));m.position.set(x,y,z);m.rotation.set(rx,ry,0);decals.add(m);return m;};
- const num=numberTexture(T,number,color,keep),stripe=stripeTexture(T,color,keep);
+ const num=numberTexture(T,number,color,keep),stripe=stripeTexture(T,color,keep,accent);
  // rear face of the rear wing (the camera sits behind): number left, stripe right; nose top: number; engine cover side stripes
  flat(num,.52,.26,-.26,.92,-2.312,Math.PI);flat(stripe,.62,.16,.3,.92,-2.312,Math.PI);
  const down=new T.Raycaster(),mesh=[];car.traverse(o=>{if(o.isMesh&&!decals.children.includes(o))mesh.push(o);});car.updateMatrixWorld(true);
@@ -42,12 +49,16 @@ export function dressCar(T,car,{index,color,keep,player=false,number=index+1}){
  const lamps=[-1,1].map(s=>{const m=new T.Mesh(keep(new T.BoxGeometry(.12,.1,.05)),lampMaterial);m.position.set(s*.62,.82,-2.3);car.add(m);return m;});
  return {lampMaterial,brake(on){lampMaterial.emissiveIntensity=on?2.6:.25;lampMaterial.color.set(on?'#ff2a1a':'#3a0808');},lamps};
 }
-/** A cheap silhouette (about 90 triangles) shown instead of the 11.9K-triangle car when a rival is more than ~70 m from the camera. */
-export function createStandIn(T,color,keep){
+/** A cheap silhouette (about 150 triangles) shown instead of the 11.9K-triangle car when a rival is more than ~70 m from the camera, and the whole car of the extra rivals.
+ * racing-deep-m2: it reads as a formula car from behind: nose, sidepods, airbox with a helmet, rear wing with endplates in the team accent, four wheels. */
+export function createStandIn(T,color,keep,accent='#15191d'){
  // one merged, vertex-coloured mesh (a single draw call per far car)
- const paint=new T.Color(color),dark=new T.Color('#15191d'),parts=[];
+ const paint=new T.Color(color),dark=new T.Color('#15191d'),team=new T.Color(accent),parts=[];
  const add=(geo,col,x,y,z,rz=0)=>{const g=geo.toNonIndexed();g.deleteAttribute('uv');if(rz)g.rotateZ(rz);g.translate(x,y,z);const n=g.attributes.position.count,c=new Float32Array(n*3);for(let i=0;i<n;i++){c[i*3]=col.r;c[i*3+1]=col.g;c[i*3+2]=col.b;}g.setAttribute('color',new T.BufferAttribute(c,3));parts.push(g);};
- add(new T.BoxGeometry(.7,.34,3.6),paint,0,.38,.1);add(new T.BoxGeometry(2,.06,.6),paint,0,.2,1.9);add(new T.BoxGeometry(1.35,.06,.5),paint,0,.95,-2.05);
+ add(new T.BoxGeometry(.6,.3,3.7),paint,0,.36,.1);add(new T.BoxGeometry(1.7,.26,1.5),paint,0,.34,-.2);     // monocoque and sidepods
+ add(new T.BoxGeometry(.36,.26,.9),paint,0,.6,1.6);add(new T.BoxGeometry(2,.06,.6),paint,0,.2,1.9);          // nose and front wing
+ add(new T.BoxGeometry(.5,.42,.9),paint,0,.72,-.5);add(new T.SphereGeometry(.22,6,4),dark,0,.78,.25);          // airbox and helmet
+ add(new T.BoxGeometry(1.35,.06,.5),team,0,.95,-2.05);for(const sx of [-1,1])add(new T.BoxGeometry(.05,.4,.5),team,sx*.68,.78,-2.05);   // rear wing and endplates
  for(const sx of [-1,1])for(const [z,r] of [[1.28,.34],[-1.26,.36]])add(new T.CylinderGeometry(r,r,.32,8),dark,sx*.95,r,z,Math.PI/2);
  const merged=keep(mergeGeometries(parts)),g=new T.Group(),m=new T.Mesh(merged,keep(new T.MeshStandardMaterial({vertexColors:true,metalness:.4,roughness:.4})));g.add(m);g.visible=false;return g;
 }

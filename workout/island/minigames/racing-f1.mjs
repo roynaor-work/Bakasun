@@ -24,8 +24,10 @@ export function createRacingF1({T,scene,track,keep,night=false}){
  const unit=keep(new T.BoxGeometry(1,1,1)),tyreGeo=keep(new T.CylinderGeometry(.5,.5,1,8));
  const boxes=[],tyres=[],lights=[];
  let tag=null;const box=(s,lane,y,w,h,d,color,rot=0)=>{const q=at(s,lane,y);boxes.push({x:q.x,y:q.y,z:q.z,rot:q.heading+rot,w,h,d,color,tag});};
- // pit building along the start straight on the side opposite to the first grandstand: s = -60 .. 150 m, behind a pit wall
- const side=-1,toward=-side,S0=track.length-60,len=210,lane=side*(half+34);
+ // pit building along the start straight on the side opposite to the first grandstand, behind a pit wall. racing-deep-m2: along the circuit's main straight when
+ // createTrack found one (the Codex circuits: 230-300 m, the line at 62% of it), otherwise s = -60 .. 150 m as before.
+ const main=track.mainStraight&&track.mainStraight.length>=150?track.mainStraight:null;
+ const side=-1,toward=-side,len=main?Math.min(260,main.length-24):210,S0=main?(main.from+12+track.length)%track.length:track.length-60,lane=side*(half+34);
  const buildingCentre=(S0+len/2)%track.length;
  tag='pit';
  box(buildingCentre,lane,3,9,6,len,'#cfd5d8');                    // body
@@ -46,6 +48,8 @@ export function createRacingF1({T,scene,track,keep,night=false}){
  for(let i=2;i<n-6&&tyreCount<150;i+=3){let sum=0;for(let j=0;j<6;j++)sum+=turn[(i+j)%n];if(Math.abs(sum)<.2)continue;
   const out=sum>0?-1:1,q=at(i*step+3,out*(half+3.4));if(buildingCentre&&Math.abs(((i*step-buildingCentre+track.length*1.5)%track.length)-track.length/2)<len/2+20)continue;
   for(let k=0;k<2;k++)tyres.push({x:q.x+q.p.tangent.x*k*1.0,y:q.y,z:q.z+q.p.tangent.z*k*1.0,h:.5+k*.45,color:palette[(tyreCount+k)%3]});tyreCount++;}
+ // racing-deep-m2: pit entry and exit kerbs (short white blocks on the pit side) so the lane reads as a pit lane from the road
+ for(const s of [S0-6,S0+len+6]){box((s+track.length)%track.length,side*(half+5.2),.12,.4,.24,10,'#f2f2ee');}
  // start gantry lights: five red lamps over the line, 6.4 m up (emissive, the only lit items)
  for(let k=-2;k<=2;k++){const q=at(0,k*3.2,6.4);lights.push({x:q.x,y:q.y,z:q.z,rot:q.heading});}
  const dummy=new T.Object3D(),color=new T.Color();

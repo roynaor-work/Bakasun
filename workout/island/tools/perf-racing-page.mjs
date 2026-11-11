@@ -5,10 +5,11 @@
  * run: before/after pairs compare identical scenes. Frame times are still measured with the real clock.
  * URL: ?frames=60 (frames to measure after a 40-frame warm-up) &stage=1 &seed=7 &dpr=0.15 (tiny backing store: CPU only) &fixed=0 (real dt)
  *      &racingV7=0 (previous assets) &shot=1 (hide the panel for screenshots) &hold=1 (stay on the grid: no driving)
- *      &at=SECONDS (shot mode: drive that long, then freeze for the screenshot) */
+ *      &at=SECONDS (shot mode: drive that long, then freeze for the screenshot)
+ *      &behind=1 (racing-deep-m2: the player starts 60 m behind the grid, so the whole pack is in front of the camera while the frames are measured) */
 import {runRacingSession} from '../minigames/racing-session.mjs?v=island-v2-20261107-8';
 const q=new URLSearchParams(location.search);
-const FRAMES=Math.max(10,Number(q.get('frames')||60)),WARM=40,FIXED=q.get('fixed')!=='0',STAGE=Number(q.get('stage')||1),SEED=Number(q.get('seed')||7),HOLD=q.get('hold')==='1',AT=Number(q.get('at')||0);
+const FRAMES=Math.max(10,Number(q.get('frames')||60)),WARM=40,FIXED=q.get('fixed')!=='0',STAGE=Number(q.get('stage')||1),SEED=Number(q.get('seed')||7),HOLD=q.get('hold')==='1',AT=Number(q.get('at')||0),BEHIND=q.get('behind')==='1';
 if(q.get('shot')==='1')document.body.classList.add('shot');
 if(q.get('dev')!=='1'){q.set('dev','1');history.replaceState(null,'',location.pathname+'?'+q.toString());}
 if(q.get('dpr'))Object.defineProperty(window,'devicePixelRatio',{get:()=>Number(q.get('dpr')),configurable:true});
@@ -48,6 +49,7 @@ const loadMs=Math.round(performance.now()-created);
 if(session.snapshot.error){window.__perf={error:session.snapshot.error};}
 else{
  const model=session.debug.model,input=session.debug.input,track=model.track;
+ if(BEHIND){const p=model.state.player,q=track.sample(-60);Object.assign(p,{x:q.x,y:q.y,z:q.z,heading:q.heading,s:q.s,routeS:-60,previousS:-60,progress:-60,lateral:0});}
  if(!HOLD){
   // autopilot: pure pursuit on the centre line; drifts in the sharper corners so smoke, skid marks and the camera kick run
   input.sample=()=>{
