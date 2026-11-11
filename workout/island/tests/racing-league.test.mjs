@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {createLeague,raceSetup,applyRace,nextSeason,restartSeason,buyUpgrade,equipmentFor,standings,teamStandings,rivalOf,seasonStages,seasonCalendar,racesIn,lapVariant,isRaceUnlocked,
-  normalizeLeague,validLeague,mergeLeague,leagueSummary,setShortRaces,describeRace,formOf,longLeagueEnabled,LONG,POINTS,PRIZE,SEASON_PRIZE,TEAM_PRIZE,SEASONS,DRIVERS,GRID_DRIVERS,TEAMS,LEAGUE_IDS,UPGRADES,MAX_LEVEL,HISTORY_CAP,MIN_LAPS,MAX_LAPS} from '../minigames/racing-league.mjs';
+  normalizeLeague,validLeague,mergeLeague,leagueSummary,setShortRaces,describeRace,formOf,longLeagueEnabled,calendar,lapsForDistance,raceDistance,CIRCUIT_LENGTHS,MAX_DISTANCE,LONG,POINTS,PRIZE,SEASON_PRIZE,TEAM_PRIZE,SEASONS,DRIVERS,GRID_DRIVERS,TEAMS,LEAGUE_IDS,UPGRADES,MAX_LEVEL,HISTORY_CAP,MIN_LAPS,MAX_LAPS} from '../minigames/racing-league.mjs';
 import {createRacing} from '../minigames/racing-physics.mjs';
 import {getRacingStage} from '../minigames/racing-tracks.mjs';
 
@@ -72,8 +72,12 @@ test('race setup: twelve scoring cars through config only, season rating plus a 
   assert.equal(formOf(1,0,1),formOf(1,0,1));assert.notEqual(formOf(1,0,1),formOf(1,1,1));assert.ok(Math.abs(formOf(3,7,5))<=0.012);
   const race=createRacing({stage:s.stage,seed:1,config:{countdown:0,equipment:s.equipment,drivers:s.drivers,extraRivals:s.extraRivals,stage:s.stageOverride}});
   assert.equal(race.state.cars.length,12);assert.equal(race.state.cars.filter(c=>c.scoring!==false).length,12);assert.deepEqual(race.state.cars.slice(1).map(c=>c.name),DRIVERS.map(d=>d.name));assert.equal(race.state.laps,3);race.dispose();
-  L.race=1;const long=raceSetup(L);assert.equal(long.variant,'long');assert.equal(long.laps,4);assert.ok(long.tags.includes('מרוץ ארוך'));
-  L.race=4;assert.equal(raceSetup(L).laps,2);setShortRaces(L,true);L.race=1;assert.equal(raceSetup(L).laps,3);L.race=4;assert.equal(raceSetup(L).laps,MIN_LAPS);
+  // laps come from the race distance and the real circuit length: a long race on the 1.5 km jungle circuit is 5 laps (6 would pass MAX_DISTANCE), a sprint on the 1.46 km summit 3
+  L.race=1;const long=raceSetup(L);assert.equal(long.variant,'long');assert.equal(long.laps,lapsForDistance(raceDistance(SEASONS[0],'long'),CIRCUIT_LENGTHS[1]));assert.equal(long.laps,5);assert.ok(long.laps*CIRCUIT_LENGTHS[1]<=MAX_DISTANCE);assert.ok(long.tags.includes('מרוץ ארוך'));
+  assert.equal(long.stageOverride.aiCorner,+(getRacingStage(long.stage).aiCorner*SEASONS[0].corner).toFixed(3),'the season raises the computer drivers\' cornering');
+  L.race=4;assert.equal(raceSetup(L).variant,'short');assert.equal(raceSetup(L).laps,3);setShortRaces(L,true);assert.equal(raceSetup(L).laps,MIN_LAPS);L.race=0;assert.equal(raceSetup(L).laps,2,'short races: 7400*0.7 on the 2.3 km grand prix = 2 laps');
+  for(const sId of SEASONS.map(x=>x.id))for(const c of calendar(sId)){assert.ok(c.laps>=MIN_LAPS&&c.laps<=MAX_LAPS);assert.ok(c.laps*CIRCUIT_LENGTHS[c.circuit]<=MAX_DISTANCE,'under the 295 s clock budget');assert.ok(Math.abs(c.laps*CIRCUIT_LENGTHS[c.circuit]-c.distance)<=CIRCUIT_LENGTHS[c.circuit]*.5+1||c.laps*CIRCUIT_LENGTHS[c.circuit]<=MAX_DISTANCE);}
+  assert.deepEqual(CIRCUIT_LENGTHS.map(Math.round),[2276,1513,1344,2299,1459,2264]);
   assert.equal(isRaceUnlocked(L,1,0),true);assert.equal(isRaceUnlocked(L,1,5),false);assert.equal(isRaceUnlocked(L,2,0),false);
   L.race=12;assert.equal(raceSetup(L),null);
 });

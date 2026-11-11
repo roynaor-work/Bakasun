@@ -68,19 +68,35 @@ export const SHORT_SEASONS = Object.freeze([
   Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: V2 ? 3 : LOOK ? 5 : 6, minRank: 3, rating: 0.045 })
 ]);
 /** racing-deep-m6 long league. `tiers` = the stage tiers (time of day / direction of the six circuits) the calendar draws from, `races` = calendar
- * length (12..24), `laps` = the one place that sets the race length (LAP_VARIANT adds the long and short races; M2 may retune it with the circuits),
- * `minRank` = the place in the previous season that opens this one (0 = open), `rating` = added to every computer driver's rating. */
+ * length (12..24), `distance` = the one place that sets the race length in metres (laps = distance / circuit length, rounded, so a 1.3 km ring runs
+ * six laps and a 2.3 km grand prix three; lapVariant stretches or shortens it; M2 may retune it with the circuits), `laps` = the fallback when no
+ * track length is at hand, `minRank` = the place in the previous season that opens this one (0 = open), `rating` = added to every computer
+ * driver's rating, `corner` = multiplies the stage's aiCorner (how fast the computer takes bends: the real limiter of the computer drivers, measured
+ * 11/11/2026: on tier 0 a stock casual bot wins at x1.3 and finishes 4th at x1.6, 11th at x2; on tier 4 it is 8th already at x1). The tiers make the
+ * computer faster by themselves, so the factor eases season by season while the overall challenge still rises. */
 export const LONG_SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, laps: 3, minRank: 0, rating: 0.02 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, laps: 3, minRank: 8, rating: 0.03 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, laps: 3, minRank: 6, rating: 0.04 }),
-  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, laps: 3, minRank: 5, rating: 0.045 }),
-  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, laps: 3, minRank: 4, rating: 0.05 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 7400, laps: 3, minRank: 0, rating: 0.05, corner: 1.6 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 7400, laps: 3, minRank: 8, rating: 0.05, corner: 1.4 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 7400, laps: 3, minRank: 6, rating: 0.05, corner: 1.25 }),
+  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 7400, laps: 3, minRank: 5, rating: 0.05, corner: 1.15 }),
+  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 7400, laps: 3, minRank: 4, rating: 0.06, corner: 1.1 })
 ]);
+/** Race distance factors of the variants and the ceiling a race may ask of a slow driver under the 295 s clock (about 31 m/s). The "short races"
+ * league setting scales every race by SHORT_RACES_FACTOR. */
+export const VARIANT_FACTOR = Object.freeze({ short: 0.65, normal: 1, long: 1.3 });
+export const MAX_DISTANCE = 8700, SHORT_RACES_FACTOR = 0.7;
+/** Laps of a race from its target distance and the circuit length: the nearest whole number of laps, never over MAX_DISTANCE, within MIN..MAX_LAPS. */
+export function lapsForDistance(distance, length) {
+  if (!(length > 0)) return MIN_LAPS;
+  let laps = Math.round(distance / length); while (laps > MIN_LAPS && laps * length > MAX_DISTANCE) laps--;
+  return Math.max(MIN_LAPS, Math.min(MAX_LAPS, laps));
+}
+/** Target distance of a calendar entry in metres (long league), after its variant and the short-races setting. */
+export function raceDistance(season, variant, shortRaces = false) { return Math.round((season.distance || 7400) * (VARIANT_FACTOR[variant] || 1) * (shortRaces ? SHORT_RACES_FACTOR : 1)); }
 export const SEASONS = LONG ? LONG_SEASONS : SHORT_SEASONS;
 export const MAX_SEASONS = Math.max(LONG_SEASONS.length, SHORT_SEASONS.length);
 export const CIRCUITS = 6;
-export const MIN_LAPS = 2, MAX_LAPS = 5;
+export const MIN_LAPS = 2, MAX_LAPS = 7;
 /** Race variants of a long season by calendar index: every second race is a long one (+1 lap), every eighth a sprint (-1 lap). One rule, one place. */
 export function lapVariant(index) { return index % 8 === 4 ? 'short' : index % 2 === 1 ? 'long' : 'normal'; }
 const VARIANT_DELTA = Object.freeze({ short: -1, normal: 0, long: 1 });
@@ -88,15 +104,16 @@ export const RACES_PER_SEASON = 6;
 export const MAX_RACES = 24;
 /** Number of races in a season (short league: always six). */
 export function racesIn(seasonId) { const s = SEASONS[seasonId - 1]; return LONG && s ? s.races : RACES_PER_SEASON; }
-/** The calendar of a season: [{race, stage, tier, circuit, laps, variant}]. Long league: race i runs circuit i%6 in tier tiers[(i + floor(i/6)) % tiers.length]
- * (a Latin square: each circuit visits each tier once before any repeats). `shortRaces` (a league setting) takes a lap off every race, never under MIN_LAPS. */
-export function seasonCalendar(seasonId, { shortRaces = false } = {}) {
+/** The calendar of a season: [{race, stage, tier, circuit, laps, distance, variant}]. Long league: race i runs circuit i%6 in tier tiers[(i + floor(i/6)) % tiers.length]
+ * (a Latin square: each circuit visits each tier once before any repeats). `lengths` (circuit index -> metres, from racing-league.mjs which has the
+ * tracks) turns the race distance into laps; without it `laps` is the season fallback plus the variant. `shortRaces` (a league setting) shortens every race. */
+export function seasonCalendar(seasonId, { shortRaces = false, lengths = null } = {}) {
   const season = SEASONS[seasonId - 1]; if (!season) return [];
   if (!LONG) return Array.from({ length: RACES_PER_SEASON }, (_, i) => ({ race: i, stage: season.tier * CIRCUITS + i + 1, tier: season.tier, circuit: i, laps: season.laps, variant: 'normal' }));
   return Array.from({ length: season.races }, (_, i) => {
-    const circuit = i % CIRCUITS, tier = season.tiers[(i + Math.floor(i / CIRCUITS)) % season.tiers.length], variant = lapVariant(i);
-    const laps = Math.max(MIN_LAPS, Math.min(MAX_LAPS, season.laps + VARIANT_DELTA[variant] - (shortRaces ? 1 : 0)));
-    return { race: i, stage: tier * CIRCUITS + circuit + 1, tier, circuit, laps, variant };
+    const circuit = i % CIRCUITS, tier = season.tiers[(i + Math.floor(i / CIRCUITS)) % season.tiers.length], variant = lapVariant(i), distance = raceDistance(season, variant, shortRaces);
+    const laps = lengths?.[circuit] > 0 ? lapsForDistance(distance, lengths[circuit]) : Math.max(MIN_LAPS, Math.min(MAX_LAPS, season.laps + VARIANT_DELTA[variant] - (shortRaces ? 1 : 0)));
+    return { race: i, stage: tier * CIRCUITS + circuit + 1, tier, circuit, laps, distance, variant };
   });
 }
 /** Stage ids of a season (the same list racing-tracks.mjs builds: tier k holds stages 6k+1 .. 6k+6). */
@@ -195,7 +212,7 @@ const nameOf = id => id === 'player' ? 'אתם' : (driverById(id)?.name || id);
 export function standings(state) {
   const best = {};
   for (const h of state.history) if (h.season === state.season && Array.isArray(h.order)) h.order.forEach((gi, place) => { const id = ALL_IDS[gi]; if (id) best[id] = Math.min(best[id] ?? 99, place); });
-  return Object.entries(state.table).map(([id, points]) => { const d = driverById(id); return { id, name: nameOf(id), points, number: d?.number, color: d?.color, teamId: d?.teamId, team: d?.team, best: best[id] ?? 99 }; })
+  return Object.entries(state.table).filter(([id]) => LEAGUE_IDS.includes(id)).map(([id, points]) => { const d = driverById(id); return { id, name: nameOf(id), points, number: d?.number, color: d?.color, teamId: d?.teamId, team: d?.team, best: best[id] ?? 99 }; })
     .sort((a, b) => b.points - a.points || a.best - b.best || LEAGUE_IDS.indexOf(a.id) - LEAGUE_IDS.indexOf(b.id));
 }
 /** racing-deep-m6: teams' table (constructors): the sum of each pair's points. */

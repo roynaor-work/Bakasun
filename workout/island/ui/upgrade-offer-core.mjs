@@ -20,7 +20,7 @@ export const TRACK_ICON=Object.freeze({
   streetSlam:{shoes:'speed',touch:'accuracy',spring:'jump'},
   alpineRush:{wax:'speed',tank:'upgrade'},
   catchCriminal:{net:'throw-power',scope:'accuracy'}});
-const LEAGUE_ICON=Object.freeze({engine:'engine',tires:'tires',brakes:'brakes',aero:'aerodynamics',steering:'speed'});
+const LEAGUE_ICON=Object.freeze({engine:'engine',tires:'tires',brakes:'brakes',aero:'aerodynamics',steering:'speed',ers:'nitro'});
 
 const int=v=>Number.isSafeInteger(v)&&v>=0;
 /** Island money drifts in fractions (income ticks); the child sees and pays whole coins. */
