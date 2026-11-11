@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <title>אצטדיון טניס · מהדורת ערב</title>
+</head>
+<body>
+  <header>
+    <div class="wordmark"><span class="court-icon" aria-hidden="true"></span><span>אצטדיון טניס <small>חבילת עיצוב מקורית / 01</small></span></div>
+    <a href="REPORT.md">דוח ומדידות <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">מגרש קשיח · תאורת ערב · מודולים של 10 מטר</p><h1>כשהאורות נדלקים.</h1><p class="subtitle">יציעים מדורגים, קהל צבעוני וקו רקיע בשעת דמדומים.</p></div>
+      <div class="edition"><span>מהדורת ערב</span><b>01 / 08</b><small>נכסים תלת־ממדיים מקוריים</small></div>
+    </section>
+    <section class="stage" aria-label="תצוגת אצטדיון אינטראקטיבית">
+      <canvas id="stadium" aria-label="אצטדיון תלת ממדי; גרירה לסיבוב וגלילה לזום"></canvas>
+      <div class="scene-label"><span class="live-dot"></span> מגרש מרכזי <small>סצנה מלאה</small></div>
+      <div class="scene-controls" role="group" aria-label="זווית צילום">
+        <button data-view="overview" aria-pressed="true">מבט כללי</button><button data-view="court" aria-pressed="false">לצד הרשת</button><button data-view="stand" aria-pressed="false">היציע מקרוב</button>
+      </div>
+      <p class="hint">גרירה לסיבוב · גלילה לזום</p>
+      <div id="loading" role="status">טוען את האצטדיון…</div>
+    </section>
+    <section class="metrics" aria-label="מדידות סצנה">
+      <div><small>משולשים בסצנה כולה</small><strong id="triangles">—</strong><span>מתוך 25,000</span></div>
+      <div><small>אוהדים ביציעים</small><strong id="fans">—</strong><span>8 וריאציות · שתי תנוחות</span></div>
+      <div><small>נפח החבילה</small><strong id="bytes">—</strong><span>תקציב כולל: 4 MB</span></div>
+      <div><small>מצב טעינה</small><strong id="loaded">—</strong><span id="gpu">ללא פענוח WebAssembly</span></div>
+    </section>
+    <section class="details">
+      <div class="catalogue">
+        <div class="section-title"><h2>נכסים מוכנים למגרש</h2><span>מטרים · ציר Y כלפי מעלה</span></div>
+        <div class="table-wrap"><table><thead><tr><th>קובץ</th><th>נפח</th><th>משולשים / מידות</th></tr></thead><tbody id="files"></tbody></table></div>
+      </div>
+      <aside>
+        <p class="eyebrow">הקהל נותן את הצבע</p><h2>אותו אוהד.<br>רגע אחר במשחק.</h2>
+        <p>שמונה אוהדים מקוריים עם לבוש מגוון ופנים מופשטות. לכל אחד תנוחה רגועה ותנוחת עידוד.</p>
+        <a href="runtime/crowd-atlas.png" class="atlas-link"><img src="runtime/crowd-atlas.png" alt="אטלס שקוף: שמונה אוהדים, לכל אחד ידיים למטה ולמעלה" width="1024" height="512"></a>
+        <div class="toggles"><button id="cheer" aria-pressed="false">עידוד: אוטומטי</button><button id="wire" aria-pressed="false">רשת משולשים</button></div>
+        <p class="note">נכסים מקוריים ברישיון CC0. המקורות, הוראות ההרצה ומפת האטלס מפורטים בדוח.</p>
+        <a class="license" href="LICENSES.md">רישיונות ומקורות ↗</a>
+      </aside>
+    </section>
+  </main>
+  <footer><span>טניס / אצטדיון מודולרי</span><span>אור חם. שמיים קרים. משחק אחד.</span></footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

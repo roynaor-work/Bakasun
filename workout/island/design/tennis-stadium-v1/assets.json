@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "path": "runtime/stand-10m.glb",
+      "triangles": 2040,
+      "limit": 3000,
+      "bounds": [
+        [
+          -5.0,
+          0.0,
+          0.03
+        ],
+        [
+          5.0,
+          2.99,
+          4.44
+        ]
+      ],
+      "bytes": 143572,
+      "sha256": "5609a093544c9d38a8551f33e480c67477e31d296d677ad87673a60acf1e8a1e",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/ad-board.glb",
+      "triangles": 66,
+      "limit": 1500,
+      "bounds": [
+        [
+          -1.5,
+          0.0,
+          -0.195
+        ],
+        [
+          1.5,
+          0.96,
+          0.455
+        ]
+      ],
+      "bytes": 9776,
+      "sha256": "02cd3c12a3a25b71770b86adfedc12e87e3fbb8a2de10cc624bd31518ecf35d9",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/umpire-chair.glb",
+      "triangles": 664,
+      "limit": 1500,
+      "bounds": [
+        [
+          -0.7541,
+          0.0513,
+          -0.7286
+        ],
+        [
+          0.7541,
+          2.925,
+          0.7645
+        ]
+      ],
+      "bytes": 45496,
+      "sha256": "3559c67449be19d5c14a6d4ea0be952aaf6c2633d3a2d32ec7b11f14bba282e5",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/net-post.glb",
+      "triangles": 156,
+      "limit": 1500,
+      "bounds": [
+        [
+          -0.16,
+          0.0,
+          -0.16
+        ],
+        [
+          0.202,
+          1.1,
+          0.16
+        ]
+      ],
+      "bytes": 14024,
+      "sha256": "121f746bcd2b8778e8538ca12a51f5cb09513629700bca93bf00c3078711d18b",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/player-bench.glb",
+      "triangles": 196,
+      "limit": 1500,
+      "bounds": [
+        [
+          -1.2,
+          0.0,
+          -0.35
+        ],
+        [
+          1.2,
+          1.04,
+          0.35
+        ]
+      ],
+      "bytes": 17364,
+      "sha256": "e327832d711b1a3ee7a57ed916fcc752555ba8245d05c23912e50ba812e86585",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/scoreboard.glb",
+      "triangles": 74,
+      "limit": 1500,
+      "bounds": [
+        [
+          -1.8,
+          0.0,
+          -0.325
+        ],
+        [
+          1.8,
+          4.09,
+          0.325
+        ]
+      ],
+      "bytes": 10024,
+      "sha256": "e482c7893e9e6d6bb7b2d934a034e17608c5b5e4c8633a099513d4cdfa18547c",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/floodlight.glb",
+      "triangles": 168,
+      "limit": 1500,
+      "bounds": [
+        [
+          -1.35,
+          0.0,
+          -0.45
+        ],
+        [
+          1.35,
+          10.42,
+          0.45
+        ]
+      ],
+      "bytes": 15248,
+      "sha256": "83a9637131b0db90f0908bcfdc3fbc20242ebd6fd9c574df5501b13d6609d593",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/net.glb",
+      "triangles": 240,
+      "limit": 1500,
+      "bounds": [
+        [
+          -6.407,
+          0.07,
+          0
+        ],
+        [
+          6.407,
+          1.09,
+          0
+        ]
+      ],
+      "bytes": 19996,
+      "sha256": "315165329cf8660886257389a2ce7122fd7df52af53afdae5409b3079bc7053b",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/court-blue-green.png",
+      "width": 512,
+      "height": 1024,
+      "bytes": 265949,
+      "sha256": "f33471e379802fa0da3ad6117659334ed2990f895c04526b5305b8cf41f969e0",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/crowd-atlas.png",
+      "width": 1024,
+      "height": 512,
+      "bytes": 631749,
+      "sha256": "cdd6cb1208845798c6fa84afb1fd743eebc02548675b81a9a8780c7216f1d046",
+      "license": "CC0-1.0",
+      "source": "source/fans.py"
+    },
+    {
+      "path": "runtime/evening-city.png",
+      "width": 1024,
+      "height": 512,
+      "bytes": 5763,
+      "sha256": "dd177162f70cf44716474b0605b400b75fd8b430d59c5ad6790f480ccf6a6d12",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/hardcourt-tile.png",
+      "width": 128,
+      "height": 128,
+      "bytes": 10798,
+      "sha256": "251af4396251954dd016d031dfdcde0e16ed1051dbe31e78e9d8e4ad3246fb3d",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    },
+    {
+      "path": "runtime/score-display.png",
+      "width": 512,
+      "height": 256,
+      "bytes": 1328,
+      "sha256": "61342e4e4dec4ec0a556c09deb4e25942e54f8fcb7f1432ca24ba9a12c661471",
+      "license": "CC0-1.0",
+      "source": "source/build.py"
+    }
+  ]
+}
