@@ -3,7 +3,7 @@
  * turnDrive), and a pass received at a run and standing. Prints per scenario: the clip that played, its length, the largest per-frame bone
  * rotation (pose pop) and the largest hips step. Usage: node tools/soccer-cut-touch-measure.mjs */
 import {readFile} from 'node:fs/promises';
-import {soccerV10States,soccerCodexStates} from '../minigames/soccer-codex-motion.mjs';
+import {soccerV10States,soccerCodexStates,soccerV12Overlay} from '../minigames/soccer-codex-motion.mjs';
 globalThis.location={search:''};
 const root=new URL('../',import.meta.url),read=async f=>JSON.parse(await readFile(new URL(f,root),'utf8'));
 async function rig(withV10,all=false){
@@ -14,7 +14,9 @@ async function rig(withV10,all=false){
   const {soccerV8States}=await import('../minigames/soccer-v8.mjs');
   const [base,k,l,t,r,map,v7,v8,v9,v10,full]=await Promise.all([read('design/motion/soccer.json'),...['throws-receives','kicks-locomotion','tackles-reactions'].map(p=>read('design/motion2/soccer/'+p+'.json')),read('design/characters/rig.json'),read('design/viewer/retarget-map.json'),read('assets/soccer-v7/clips.json'),read('assets/soccer-v8/clips.json'),read('assets/soccer-v9/clips.json'),read('assets/soccer-v10/clips.json'),read('data/config.json')]);
   const config=full.minigames.soccer,library=composeSoccerRestartMotion(base,k,l,t);
-  const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...soccerCodexStates(v9),...(withV10?soccerV10States(v10,all?'?soccerCuts=all':''):{})}},clips=compileSoccerDesignClips(data,r,map);
+  let S9=soccerCodexStates(v9),S10=withV10?soccerV10States(v10,all?'?soccerCuts=all':''):{};
+  if(process.argv.includes('--v12')&&withV10){const o=soccerV12Overlay(JSON.parse(await readFile(new URL('../assets/soccer-v12/clips.json',import.meta.url),'utf8')),{v9:S9,v10:S10},all?'?soccerCuts=all':'');S9=o.v9;S10=o.v10;}
+  const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...S9,...S10}},clips=compileSoccerDesignClips(data,r,map);
   const bones={};let top;for(const j of r.joints){const b=new T.Bone();b.name=j.name;b.position.fromArray(j.translation);b.quaternion.fromArray(j.rotation);bones[j.name]=b;if(j.parent)bones[j.parent].add(b);else top=b;}
   const group=new T.Group();group.add(top);const mixer=new T.AnimationMixer(group);
   return {T,bones,motion:createSoccerDesignMotion(mixer,clips,data,config),data};

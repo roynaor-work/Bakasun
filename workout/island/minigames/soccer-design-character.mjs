@@ -7,7 +7,7 @@ import {regionForTriangle} from '../design/variants/apply-variant.js';
 import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swing.mjs';
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
-import {soccerKeeperV11Enabled,soccerV11ClipsUrl,soccerV11States,soccerV11DiveClip,soccerV11DivePlan,soccerMotionV10Enabled,soccerV10ClipsUrl,soccerV10States,SOCCER_V10_IDLES,soccerRunLadder,soccerV10CutClip,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,soccerV10FirstTouchClip,soccerV10Held,soccerMotionLoadSummary,soccerCodexRunEnabled,SOCCER_CODEX_RUN_LADDER,SOCCER_CODEX_RUN_BOUNDS,soccerCodexMotionEnabled,soccerCodexClipsUrl,soccerCodexStates,soccerLadderRung,SOCCER_CODEX_LADDER,SOCCER_CODEX_BOUNDS,soccerCodexKickClip,soccerCodexKeeperCatch,soccerCodexNextIdle,soccerCodexIdleHold,SOCCER_CODEX_IDLES,SOCCER_CODEX_CELEBRATIONS,soccerCodexHeld,SOCCER_CODEX_BRAKE_FROM} from './soccer-codex-motion.mjs';
+import {SOCCER_CODEX_BOUNDS,SOCCER_CODEX_BRAKE_FROM,SOCCER_CODEX_CELEBRATIONS,SOCCER_CODEX_IDLES,SOCCER_CODEX_LADDER,SOCCER_CODEX_RUN_BOUNDS,SOCCER_CODEX_RUN_LADDER,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,SOCCER_V10_IDLES,soccerCodexClipsUrl,soccerCodexHeld,soccerCodexIdleHold,soccerCodexKeeperCatch,soccerCodexKickClip,soccerCodexMotionEnabled,soccerCodexNextIdle,soccerCodexRunEnabled,soccerCodexStates,soccerKeeperV11Enabled,soccerLadderRung,soccerMotionLoadSummary,soccerMotionV10Enabled,soccerMotionV12Enabled,soccerRunLadder,soccerV10ClipsUrl,soccerV10CutClip,soccerV10FirstTouchClip,soccerV10Held,soccerV10States,soccerV11ClipsUrl,soccerV11DiveClip,soccerV11DivePlan,soccerV11States,soccerV12ClipsUrl,soccerV12Overlay} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
@@ -364,7 +364,7 @@ let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,la
 /** Why the shared athlete body was skipped in favour of v7 (null when it loaded or was not asked for). */
 export function soccerAthleteFallbackReason(){return lastAthleteError;}
 /** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
-let lastV11Error=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
+let lastV11Error=null,lastV12=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
 /** One line for the load report / debug: which motion packs are in this match, and why one was skipped. */
 export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5,SLIDE_SLOW_MIN_RECOVER=1,SLIDE_BLEND_IN=.1;
@@ -372,7 +372,7 @@ export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5,SLIDE_SLOW_MIN_RECOV
  * preset sets 1.1 s): the fall then plays at most 1.5x instead of 3x and the body is still upright when control returns. A 0.6 s recovery
  * (`?soccerTeams=6`) keeps the old timeline, which the upright-at-control tests pin. */
 export const soccerSlideSlowEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerSlideSlow')!=='0';
-export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error,lastV11Error&&'v11: '+lastV11Error].filter(Boolean));}
+export function soccerMotionLoadReport(){return soccerMotionLoadSummary(motionCounts,[lastV8Error&&'v8: '+lastV8Error,lastCodexError&&'v9: '+lastCodexError,lastV10Error&&'v10: '+lastV10Error,lastV11Error&&'v11: '+lastV11Error,lastV12?.error&&'v12: '+lastV12.error].filter(Boolean));}
 /** Why the v8 motion clips were skipped (null when loaded or not asked for). */
 export function soccerV8MotionError(){return lastV8Error;}
 /** Why the authored characters last failed to prepare (for the load report). */
@@ -421,7 +421,7 @@ async function prepareV5(loader){
   return finishSources({scenes:glbs.map(g=>g.scene),rig,map:soccerV5Map(map),data,set:'v5',outfield:SOCCER_V5_FILES.outfield.map((_,i)=>i),keeper:files.length-1,
     assign:(geometry,index)=>assignSoccerV5Regions(geometry,SOCCER_V5_REGIONS[files[index]])});
 }
-/** The optional motion packs every body plays (v7 extras, v8, Codex v9, v10); failures are recorded for the load report. */
+/** The optional motion packs every body plays (v7 extras, v8, Codex v9, v10, the v11 keeper dives, the v12 repairs); failures are recorded for the load report. */
 async function loadMotionPacks(){
   const extra=await fetchJson(soccerV7ClipsUrl());
   let v8={};lastV8Error=null;
@@ -430,8 +430,13 @@ async function loadMotionPacks(){
   if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
   let v10={};
   if(soccerMotionV10Enabled(null)){try{v10=soccerV10States(await fetchJson(soccerV10ClipsUrl()));}catch(error){lastV10Error=String(error?.message||error);}}
-  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length};
-  return {extra,v8,v9,v10,extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9),...Object.keys(v10)]};
+  let v11={};lastV11Error=null;
+  if(soccerKeeperV11Enabled()){try{v11=soccerV11States(await fetchJson(soccerV11ClipsUrl()));}catch(error){lastV11Error=String(error?.message||error);}}
+  lastV12=null;
+  if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length)){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10});v9=o.v9;v10=o.v10;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
+  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12};
+  const states={...extra.states,...v8,...v9,...v10,...v11};
+  return {extra,v8,v9,v10,v11,states,extraClips:Object.keys(states)};
 }
 /** The shared athlete body (athlete-body.mjs, 11/11): one realistic MakeHuman body for soccer and basketball, retargeted from the canonical
  * library through the world-basis map. LOD1 is the GLB's own economy mesh (same skeleton). Kits, numbers and faces come per player at
@@ -441,7 +446,7 @@ async function prepareAthlete(loader){
     loadAthleteSource(url=>retrying(()=>loader.loadAsync(url),'athlete/athlete.glb'),{T,prepare:scene=>athleteSources(T,scene)}),
     retrying(()=>loadSoccerRestartMotion(),'motion library'),loadMotionPacks(),
   ]);
-  const data={...library,states:{...library.states,...packs.extra.states,...packs.v8,...packs.v9,...packs.v10}};
+  const data={...library,states:{...library.states,...packs.states}};
   const map=athleteRetargetMap(source.rig,data.skeleton.bones);
   // LOD1 meshes exist in the scene as their own skinned meshes; lodFor pairs each full mesh with the economy mesh of the same material.
   const lows=new Map();source.scene.traverse(o=>{if(o.isSkinnedMesh&&/LOD1/.test(o.name+' '+(o.parent?.name||'')))lows.set(o.material.name,o.geometry);});
@@ -452,24 +457,15 @@ async function prepareAthlete(loader){
  * reuses the LOD0 material (it has no textures of its own). Skeleton = canonical source rest, identity retarget. */
 async function prepareV7(loader){
   const names=[...SOCCER_V7_FILES.outfield,SOCCER_V7_FILES.keeper];
-  const [map,library,extra,...glbs]=await Promise.all([json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),fetchJson(soccerV7ClipsUrl()),
+  const [map,library,packs,...glbs]=await Promise.all([json('viewer/retarget-map.json'),retrying(()=>loadSoccerRestartMotion(),'motion library'),loadMotionPacks(),
     ...names.flatMap(name=>[0,1].map(lod=>retrying(()=>loader.loadAsync(soccerV7Url(name,lod)),`soccer-v7/${name}-lod${lod}`)))]);
-  // GPT soccer v8 clips: optional. Any failure keeps the v7/library clips (recorded for the load report).
-  let v8={};lastV8Error=null;
-  if(soccerV8Enabled(null,'motion')){try{v8=soccerV8States(await fetchJson(soccerV8ClipsUrl()));}catch(error){lastV8Error=String(error?.message||error);}}
-  lastV10Error=null;let v9={};lastCodexError=null;
-  if(soccerCodexMotionEnabled(null)){try{v9=soccerCodexStates(await fetchJson(soccerCodexClipsUrl()));}catch(error){lastCodexError=String(error?.message||error);}}
-  let v10={};
-  if(soccerMotionV10Enabled(null)){try{v10=soccerV10States(await fetchJson(soccerV10ClipsUrl()));}catch(error){lastV10Error=String(error?.message||error);}}
-  let v11={};lastV11Error=null;
-  if(soccerKeeperV11Enabled()){try{v11=soccerV11States(await fetchJson(soccerV11ClipsUrl()));}catch(error){lastV11Error=String(error?.message||error);}}
-  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length};
-  const data={...library,states:{...library.states,...extra.states,...v8,...v9,...v10,...v11}};
+  const extra=packs.extra,v8=packs.v8,v9=packs.v9,v10=packs.v10,v11=packs.v11;
+  const data={...library,states:{...library.states,...packs.states}};
   const lod0=names.map((_,i)=>glbs[i*2].scene),lod1=names.map((_,i)=>glbs[i*2+1].scene);
   for(const scene of lod0)joinSoccerV7Meshes(scene);for(const scene of lod1)joinSoccerV7Meshes(scene,{doubleSided:false});
   const firstMesh=scene=>{let m=null;scene.traverse(o=>{if(!m&&o.isSkinnedMesh)m=o;});return m;};
   return finishSources({scenes:lod0,rig:soccerV7Rig(lod0[0]),map:soccerV7Map(map),data,set:'v7',outfield:SOCCER_V7_FILES.outfield.map((_,i)=>i),keeper:names.length-1,
-    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:[...Object.keys(extra.states),...Object.keys(v8),...Object.keys(v9),...Object.keys(v10),...Object.keys(v11)],
+    validate:scene=>validateSoccerV7Bind(scene,data.skeleton.bones),assign:()=>{},extraClips:packs.extraClips,
     lodFor:(mesh,sourceIndex)=>{const low=firstMesh(lod1[sourceIndex]);if(!low||low.skeleton.bones.some((b,i)=>b.name!==mesh.skeleton.bones[i]?.name))throw Error('Soccer v7 LOD1 skeleton mismatch');return [low.geometry,low.geometry];}});
 }
 /** Decode, retarget, floor-bake and LOD the authored characters once per

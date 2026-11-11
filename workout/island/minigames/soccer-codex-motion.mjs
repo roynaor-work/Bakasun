@@ -106,3 +106,27 @@ export function soccerV11DivePlan(state,{lead=.1,reachSeconds=.5,settleRate=1.15
   if(!(contact>0))return null;
   const at=Math.max(0,contact*.45-lead);return {at,contact,rate:Math.max(1,(contact-at)/reachSeconds),settleRate};
 }
+/** Codex motion-fix-v12: repaired versions (core range only, 0 red metrics) of the v9 and v10 clips. On by default; `?soccerMotionV12=0` keeps the
+ * v9/v10 clips as shipped. Needs the v9/v10 layers: it replaces their states, and adds the v10 cuts the 70 degree/key gate removed when the
+ * repaired version passes the same gate AND `?soccerCuts=all` is set: the repaired left cuts still show a 30 degree LeftArm step on exit into the run (measured), so they stay opt-in. */
+export const soccerMotionV12Enabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('soccerMotionV12')!=='0';
+export const soccerV12ClipsUrl=()=>new URL('../assets/soccer-v12/clips.json',import.meta.url).href;
+/** Locomotion cycles stay as shipped: the repaired run, sprint and run_brake are re-timed (sprint x2.14, run and run_brake x1.2) and the speed
+ * ladder's stride matching (clip speed in m/s) was calibrated on the original cycle; measured: sprint 3.1 -> 1.5 steps/s, hips bob 2.5 -> 13.9 cm. */
+export const SOCCER_V12_KEEP=Object.freeze(['walk','jog','run','sprint','run_brake','run_backward','turn_in_place']);
+export function soccerV12Overlay(json,{v9={},v10={}}={},search=globalThis.location?.search||''){
+  const cutsAll=new URLSearchParams(search).get('soccerCuts')==='all';
+  if(!json||json.schemaVersion!==1||!json.libraries)throw Error('Soccer v12 clips: unexpected file');
+  const merge=(base,prefix,clips,gate)=>{
+    const out={...base};let replaced=0,added=0;
+    for(const [id,fix] of Object.entries(clips||{})){
+      const name=prefix+id,old=base[name];
+      if(SOCCER_V12_KEEP.includes(id)||gate&&fix.maxKeyDeg>SOCCER_V10_MAX_KEY_DEG){continue;}
+      if(old){const {timeScale,...rest}=fix;out[name]={...old,...rest,clip:name,supports:old.supports,entry:old.entry,exit:old.exit};replaced++;}
+      else if(prefix===SOCCER_V10_PREFIX&&cutsAll){const {timeScale,...rest}=fix;out[name]={...rest,clip:name,supports:[],entry:null,exit:null};added++;}
+    }
+    return {states:out,replaced,added};
+  };
+  const a=merge(v9,SOCCER_CODEX_PREFIX,json.libraries.v9,false),b=merge(v10,SOCCER_V10_PREFIX,json.libraries.v10,true);
+  return {v9:a.states,v10:b.states,counts:{v9Replaced:a.replaced,v10Replaced:b.replaced,v10Added:b.added}};
+}
