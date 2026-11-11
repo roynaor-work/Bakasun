@@ -80,6 +80,31 @@ __BOT__
 * `node workout/island/tests/final-aliens-browser.mjs` (עם `PLAYWRIGHT_MODULE` ו-`CHROMIUM_PATH`): בדיקת הקבלה דרך הטלפון. `MODE=before` מריץ את קוד v20 ונכשל. יוצא עם קוד שגיאה בכל כישלון.
 * `node --test tests/*.mjs`: __FULL__
 
+## בקשות המשך (רועי, אחרי בדיקת v20 בטלפון: "משחק חלליות מעולה. נותר רק לשפר מעט את הירי, כי זה לא באמת לייזר. וגם את הירי של החייזרים, ואת המראה של הבונוסים. לסיום למלא שלבים ובוסים כל כמה שלבים.")
+שלב 2, מאחורי דגל משלו (`?alienLook=v20` מחזיר את המראה הנוכחי), לא בסבב הזה:
+1. **ירי השחקן כלייזר אמיתי**: קרן ארוכה זוהרת עם הילה, הבזק לוע, ניצוץ פגיעה, צליל זאפ/המהום. הוולקן נשאר כפרץ (v15) או כשדרוג נפרד.
+2. **ירי החייזרים**: פולסי פלזמה צבעוניים עם זנב, אזהרה ברורה לפני הירי, וריאציה לכל סוג חייזר.
+3. **בונוסים**: אייקונים זוהרים וברורים, ריחוף/סיבוב, צבע לפי סוג, טבעת טיימר.
+4. **שלבים ובוסים**: לפחות 30 שלבים עם עקומת קושי, בוס כל כ-5 שלבים עם וריאציות.
+
+איפה שלב 2 מתחבר לקוד של שלב 1 (בלי לשנות את ההיגיון):
+* קליעי השחקן נוצרים במקום אחד, `fireShot` ב-`alien-flight-model.mjs`, עם `kind` (0 תותח, 1 לייזר-שדרוג, 2 מטח לייזר) ועם `fireMode` של v15 ('burst'/'normal') זמין ב-`model.fireMode` לציור שונה לפרץ ולירי יציב. הציור: הלולאה `for(const s of m.shots)` ב-`aliens.mjs` (מסלול הקנבס) ו-`ultra-alien-effects.mjs` (מסלול התלת-ממד); `drawV11Laser` מצייר כבר את `kind===2`.
+* ירי החייזרים: `enemyFire` במודל (shape/color/pattern לכל סוג), הציור ב-`drawV10Bolts` (`alien-v10-draw.mjs`), האזהרה ב-`telegraphs`/`drawV11Tells`.
+* בונוסים: `pickups` במודל (`kind` 0-5, `balance.pickups`), הציור ב-`aliens.mjs` (`if(!m.v10)for(const d of m.pickups)`) וב-`alien-v10-draw.mjs`; הטיימר ב-`drawV11BonusTimer`.
+* שלבים: `balance.levels` ו-`stageBehaviors` ב-`data/config.json` (היום 10+ רשומות; `settings.boss`/`bossLives`/`bossStyle`), המודל כבר תומך בבוס עם שלבי התקפה (`bossPhase`, `bossGuard`).
+* המדידות של שלב 1 (קצב, פרץ, תקרה, זמן שלב) חייבות להישאר ירוקות: `tests/final-aliens.test.mjs` ו-`final-aliens-browser.mjs`.
+
+משימה ל-Codex (extra high) אם צריך נכסים, מוכנה להדבקה:
+```
+Island alien game assets (workout/island/minigames/, kids 7+). Create NEW files only under workout/island/design/alien-v16/ with a LICENSES.md (CC0 or own work). Do not touch existing code.
+1. Player laser: a 512x64 PNG sprite sheet of a glowing laser bolt (core white, halo cyan, 4 frames of flicker) plus a 128x128 muzzle flash (4 frames) and a 128x128 impact spark (6 frames). Transparent background, no text.
+2. Alien plasma shots: 5 variants (one per alien type: scout, heavy, weaver, splitter, carrier) as 64x128 PNG with a bright head and a fading tail, colors #a1e5f5 #edb865 #c985ed #a5e68a #f58da5, 4 frames each.
+3. Bonus icons: 6 glowing round tokens 96x96 (spread, laser, rapid, shield, wing, nova) with a clear symbol, one color family per type, plus a 96x96 timer ring (12 steps).
+4. Boss ships: 6 GLB variants (one per 5 stages), under 150 KB each, no Draco, same scale and pivot as assets/alien-v13/player-ship.glb, with named nodes Core, Turret_L, Turret_R; plus a 1024x1024 texture each.
+5. Audio: laser zap (0.15 s), laser hum loop (1 s seamless), plasma shot (0.2 s), boss alarm (1 s), all OGG under 20 KB each.
+Deliver a README listing every file, its size and license. Hebrew is not needed in assets. No brand names, no faces.
+```
+
 ## מה לא אומת
 * בטלפון אמיתי: הצליל (הוולקן בפרץ, הרובה הבודד בירי יציב, ההשתקה) והתחושה של הקירור. בקונטיינר אין רמקול; מודול הצליל נבדק עם AudioContext מדומה בלבד.
 * הטקסט בעזרה של המשחק (`minigame.alienDefense.help.1` ב-`strings.he.json`: "בתחילת הקרב יורים ירייה אחת") ישן עוד מלפני v12 ולא עודכן כאן (מחוץ לקבצים שלי).

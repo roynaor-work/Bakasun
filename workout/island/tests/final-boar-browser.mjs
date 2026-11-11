@@ -53,7 +53,11 @@ log('hudCoverage',hudCoverage);results.hudCoverage=hudCoverage;await page.screen
 const results={mode:MODE,query,env,layout,steps:{}};const hasBtn=!!layout.fireBtn;const noBtn={skipped:'no fire button in this mode (legacy touch-to-fire)'};
 const nonButton=s=>Object.entries(s.shotsBy).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
 const diff=(a,b)=>({shots:b.shots-a.shots,frames:b.frames-a.frames,nonButton:nonButton(b)-nonButton(a),button:(b.shotsBy.button||0)-(a.shotsBy.button||0),stickNoButton:b.stickNoButton-a.stickNoButton,abilities:Object.keys(b.abilityBy).reduce((n,k)=>n+(b.abilityBy[k]||0)-(a.abilityBy[k]||0),0),abilityFromLeft:b.abilityFromLeft-a.abilityFromLeft,aimFrom:a.aim,aimTo:b.aim,aimMoved:Math.hypot(b.aim.x-a.aim.x,b.aim.y-a.aim.y)>.03});
-async function step(name,fn){const a=await st();const extra=await fn()||{};const b=await st();results.steps[name]={...diff(a,b),...extra};log(name,JSON.stringify(results.steps[name]));}
+let dead=false;
+async function step(name,fn){if(dead){results.steps[name]={error:'skipped: the game frame was lost earlier'};return;}
+ try{const a=await st();const extra=await fn()||{};const b=await st();results.steps[name]={...diff(a,b),...extra};}
+ catch(e){results.steps[name]={error:String(e.message||e).split('\n')[0]};if(/detached|closed/i.test(String(e.message)))dead=true;}
+ log(name,JSON.stringify(results.steps[name]));}
 // A) three taps on the scene (right half, away from every control)
 await step('sceneTaps',async()=>{for(const [x,y] of [[450,150],[650,110],[520,60]]){await touch('touchStart',[{x,y}]);await wait(150);await touch('touchEnd',[]);await wait(120);}await wait(400);});
 // B) a long drag on the scene
@@ -84,9 +88,9 @@ await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const
 // K) the weapon-switch button: tap cycles the weapon (two owned weapons), fires nothing
 await step('weaponButton',async()=>{await frame.evaluate(()=>{const s=window.__boar.state.save;s.weapons.shotgun=s.weapons.shotgun||1;window.__boar.setSave(s);});const a=await st();const b=await frame.evaluate(()=>{const e=document.getElementById('weapon-btn');if(!e)return null;const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2,r.width,r.height];});
  if(!b)return {skipped:'no weapon button in this mode'};await touch('touchStart',[{x:b[0],y:b[1],id:4}]);await wait(120);await touch('touchEnd',[{x:b[0],y:b[1],id:4}]);await wait(500);const c=await st();return {size:[b[2],b[3]],weaponBefore:a.current,weaponAfter:c.current};});
-const final=await st();results.final=final;results.errors=errors;
+const final=dead?{shots:-1,shotsBy:{},stickNoButton:-1,abilityBy:{},aim:{x:0,y:0}}:await st();results.final=final;results.errors=errors;results.frameLost=dead;
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
-const S=results.steps;
+const S=new Proxy(results.steps,{get:(t,k)=>t[k]||{}});
 ok('aimstick controls exist (fire button + stick zone) in the frame on a coarse-pointer phone',env.coarse&&env.fireBtn&&env.aimZone);
 ok('scene taps: 0 shots',S.sceneTaps.shots===0,S.sceneTaps.shots);
 ok('scene drag: 0 shots',S.sceneDrag.shots===0,S.sceneDrag.shots);
@@ -103,7 +107,7 @@ ok('weapon-switch button: at least 44 px, cycles the weapon, fires nothing',S.we
 const HUD_V20={hud:0.2152,band:0.4297,withControls:0.2605};
 ok('HUD coverage at most half of v20 (whole viewport and the middle band)',hudCoverage.hud<=HUD_V20.hud*.5&&hudCoverage.band<=HUD_V20.band*.5,{after:hudCoverage,v20:HUD_V20});
 ok('every shot in the run is attributed to the fire button',nonButton(final)===0&&final.stickNoButton===0,{shotsBy:final.shotsBy,stickNoButton:final.stickNoButton});
-ok('no page errors',errors.length===0,errors);
+ok('no page errors and the game frame stayed alive',errors.length===0&&!dead,{errors,frameLost:dead});
 results.checks=checks;
 await writeFile(out+`boar-${MODE}.json`,JSON.stringify(results,null,1)+'\n');
 console.log(JSON.stringify({mode:MODE,env,steps:S,final:{shots:final.shots,shotsBy:final.shotsBy,stickNoButton:final.stickNoButton,abilityBy:final.abilityBy,abilityFromLeft:final.abilityFromLeft},checks},null,1));

@@ -8,7 +8,52 @@
  "browserVersion": "153.0.8010.12",
  "physicalPhone": false,
  "touch": "CDP Input.dispatchTouchEvent",
- "checks": {},
+ "checks": {
+  "servePlayed": {
+   "ok": true,
+   "detail": "points 4"
+  },
+  "serveMeterVisibleWithGreenAndYellow": {
+   "ok": true,
+   "detail": "{\"exists\":true,\"hidden\":false,\"visible\":true,\"mode\":\"serve\",\"zone\":\"red\",\"rect\":{\"x\":626,\"y\":192,\"w\":10,\"h\":104},\"background\":\"linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 17%, rgb(239, 195, 85) 17%, rgb(239, 195, 85) 27%, rgb(103, 211, 152) 27%, rgb(103, 211, 152) 73%, rgb(239, 195, 85) 73%, rgb(239, 195, 85) 83%, rgb(240, 105, 96) 83%)\",\"needleBottom\":\"10.5105%\",\"serveMeter\":0.10510510510510507,\"green\":true,\"yellow\":true}"
+  },
+  "tappedReturns": {
+   "ok": true,
+   "detail": "tapped returns 7"
+  },
+  "meterVisibleOnEveryTappedReturn": {
+   "ok": true,
+   "detail": "7/7 tapped returns had the bar on screen before and at the tap"
+  },
+  "meterHasGreenAndYellowLikeServe": {
+   "ok": true,
+   "detail": "7/7"
+  },
+  "meterBigEnough": {
+   "ok": true,
+   "detail": "[{\"x\":453,\"y\":190,\"w\":18,\"h\":128},{\"x\":477,\"y\":190,\"w\":18,\"h\":128},{\"x\":431,\"y\":179,\"w\":18,\"h\":128},{\"x\":445,\"y\":164,\"w\":18,\"h\":128},{\"x\":446,\"y\":163,\"w\":18,\"h\":128},{\"x\":455,\"y\":190,\"w\":18,\"h\":128},{\"x\":466,\"y\":179,\"w\":18,\"h\":128}]"
+  },
+  "dropsPlayed": {
+   "ok": true,
+   "detail": "drops 2"
+  },
+  "dropNotOneSecondWin": {
+   "ok": true,
+   "detail": "0/2 drops ended untouched within ~1 s (seconds: 5.98, 6.49)"
+  },
+  "dropReachedByOpponent": {
+   "ok": true,
+   "detail": "2/2 reached"
+  },
+  "dropLastsAtLeast1_2s": {
+   "ok": true,
+   "detail": "5.98, 6.49"
+  },
+  "noPageErrors": {
+   "ok": true,
+   "detail": "[]"
+  }
+ },
  "frames": [
   "tennis-after-serve-meter.jpg",
   "tennis-after-return-incoming.jpg",
@@ -43,5 +88,375 @@
    "h": 64
   }
  },
- "error": "cdpSession.send: Target page, context or browser has been closed\n    at send (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:47:23)\n    at down (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:48:84)\n    at stickTowards (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:68:123)\n    at /home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:90:11"
+ "pointsPlayed": 4,
+ "framesRun": 1031,
+ "points": [
+  {
+   "n": 1,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 3,
+   "elapsed": 5.341666666666722
+  },
+  {
+   "n": 2,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 1,
+   "elapsed": 8.608333333333485
+  },
+  {
+   "n": 3,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 9,
+   "elapsed": 25.541666666665858
+  },
+  {
+   "n": 4,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 5,
+   "elapsed": 36.08333333333193
+  }
+ ],
+ "returns": [
+  {
+   "key": "0:2",
+   "pointNumber": 0,
+   "etaAtStart": 1.583528618872937,
+   "visibleBeforeTap": true,
+   "visibleFrames": 67,
+   "frames": 67,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 453,
+     "y": 190,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": false,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "2:2",
+   "pointNumber": 2,
+   "etaAtStart": 1.5746203747273473,
+   "visibleBeforeTap": true,
+   "visibleFrames": 67,
+   "frames": 67,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 477,
+     "y": 190,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": true,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "2:4",
+   "pointNumber": 2,
+   "etaAtStart": 1.5568029896841775,
+   "visibleBeforeTap": true,
+   "visibleFrames": 73,
+   "frames": 73,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 431,
+     "y": 179,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": false,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "2:6",
+   "pointNumber": 2,
+   "etaAtStart": 1.5352871128820986,
+   "visibleBeforeTap": true,
+   "visibleFrames": 56,
+   "frames": 56,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 445,
+     "y": 164,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": true,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "2:8",
+   "pointNumber": 2,
+   "etaAtStart": 1.4842271518468841,
+   "visibleBeforeTap": true,
+   "visibleFrames": 60,
+   "frames": 60,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 446,
+     "y": 163,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": false,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "3:2",
+   "pointNumber": 3,
+   "etaAtStart": 1.5912870413940148,
+   "visibleBeforeTap": true,
+   "visibleFrames": 68,
+   "frames": 68,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 455,
+     "y": 190,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": true,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  },
+  {
+   "key": "3:4",
+   "pointNumber": 3,
+   "etaAtStart": 1.556731700106102,
+   "visibleBeforeTap": true,
+   "visibleFrames": 73,
+   "frames": 73,
+   "meterAtTap": {
+    "exists": true,
+    "hidden": false,
+    "visible": true,
+    "mode": "hit",
+    "zone": "yellow",
+    "rect": {
+     "x": 466,
+     "y": 179,
+     "w": 18,
+     "h": 128
+    },
+    "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 2%, rgb(239, 195, 85) 2%, rgb(239, 195, 85) 22%, rgb(103, 211, 152) 22%, rgb(103, 211, 152) 78%, rgb(239, 195, 85) 78%, rgb(239, 195, 85) 98%, rgb(240, 105, 96) 98%)",
+    "needleBottom": "5%"
+   },
+   "hmAtTap": {
+    "active": true,
+    "value": 0.04999999999999999,
+    "zone": "yellow",
+    "greenHalf": 0.28,
+    "yellowHalf": 0.48000000000000004
+   },
+   "tapped": true,
+   "drop": false,
+   "zoneAtTap": "yellow",
+   "greenBand": true,
+   "yellowBand": true,
+   "modes": [
+    "hit"
+   ]
+  }
+ ],
+ "serveMeter": {
+  "exists": true,
+  "hidden": false,
+  "visible": true,
+  "mode": "serve",
+  "zone": "red",
+  "rect": {
+   "x": 626,
+   "y": 192,
+   "w": 10,
+   "h": 104
+  },
+  "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 17%, rgb(239, 195, 85) 17%, rgb(239, 195, 85) 27%, rgb(103, 211, 152) 27%, rgb(103, 211, 152) 73%, rgb(239, 195, 85) 73%, rgb(239, 195, 85) 83%, rgb(240, 105, 96) 83%)",
+  "needleBottom": "10.5105%",
+  "serveMeter": 0.10510510510510507,
+  "green": true,
+  "yellow": true
+ },
+ "drops": [
+  {
+   "at": 19.558333333332865,
+   "reached": true,
+   "pointNumber": 2,
+   "landZ": -5.739111249169278,
+   "end": 25.541666666665858,
+   "seconds": 5.98,
+   "winner": 0,
+   "reason": "doubleBounce"
+  },
+  {
+   "at": 29.591666666665628,
+   "reached": true,
+   "pointNumber": 3,
+   "landZ": -5.890573066936391,
+   "end": 36.08333333333193,
+   "seconds": 6.49,
+   "winner": 0,
+   "reason": "doubleBounce"
+  }
+ ],
+ "summary": {
+  "tappedReturns": 7,
+  "meterVisibleOnTappedReturn": 7,
+  "meterWithGreenAndYellow": 7,
+  "drops": 2,
+  "dropsReached": 2,
+  "dropsNobodyTouched": 0,
+  "dropsEndedWithinOneSecondUntouched": 0,
+  "dropSeconds": [
+   5.98,
+   6.49
+  ]
+ },
+ "csp": {
+  "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "htmlResponsesSeen": 1,
+  "violations": [],
+  "policyErrors": [],
+  "workers": [
+   {
+    "url": "http://127.0.0.1:36775/workout/island/minigames/tennis-draco-worker.mjs",
+    "hooked": true,
+    "closed": true,
+    "waitingForDebugger": true,
+    "domains": {
+     "Log.enable": true,
+     "Audits.enable": true
+    }
+   }
+  ]
+ }
 }

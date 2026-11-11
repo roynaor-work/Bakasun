@@ -57,7 +57,7 @@ try{
  const read=()=>page.evaluate(()=>{const s=window.__island.games.current.session.snapshot,m=document.querySelector('.tennis-serve-meter'),r=m?.getBoundingClientRect(),cs=m&&getComputedStyle(m),needle=m?.querySelector('.tennis-serve-needle');
   const visible=Boolean(m)&&!m.hidden&&cs.display!=='none'&&cs.visibility!=='hidden'&&Number(cs.opacity)>0&&r.width>0&&r.height>0&&r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight;
   return {phase:s.phase,server:s.server,serveZone:s.serveZone,serveMeter:s.serveMeter,elapsed:s.elapsed,pointNumber:s.pointNumber,rallyHits:s.rallyHits,charge:s.charge,
-   contact:s.contact?{side:s.contact.side,eta:s.contact.eta,x:s.contact.x,z:s.contact.z}:null,shotSide:s.shot?.side??null,shotDrop:Boolean(s.shot?.drop),lastHitter:s.ball.lastHitter,ballZ:s.ball.z,ballY:s.ball.y,px:s.players[0].x,pz:s.players[0].z,ox:s.players[1].x,oz:s.players[1].z,
+   contact:s.contact?{side:s.contact.side,eta:s.contact.eta,x:s.contact.x,z:s.contact.z}:null,shotSide:s.shot?.side??null,shotDrop:Boolean(s.shot?.drop),landingZ:s.landing?.z??null,lastHitter:s.ball.lastHitter,ballZ:s.ball.z,ballY:s.ball.y,px:s.players[0].x,pz:s.players[0].z,ox:s.players[1].x,oz:s.players[1].z,
    hm:s.hitMeter?{active:s.hitMeter.active,value:s.hitMeter.value,zone:s.hitMeter.zone,greenHalf:s.hitMeter.greenHalf,yellowHalf:s.hitMeter.yellowHalf}:null,
    meter:{exists:Boolean(m),hidden:m?.hidden??null,visible,mode:m?.dataset.mode??null,zone:m?.dataset.zone??null,rect:r?{x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)}:null,background:m?.style.background||'',needleBottom:needle?.style.bottom||''},
    event:{id:s.event.id,type:s.event.type,side:s.event.side,reason:s.event.reason,winner:s.event.winner,serving:s.event.serving},renderMode:s.renderMetrics?.mode};});
@@ -68,9 +68,8 @@ try{
  const stickTowards=async targetX=>{const sx=zone.x,sy=zone.y,dx=Math.max(-1,Math.min(1,targetX*4))*44;if(!stickOn){await down(1,sx,sy);stickOn=true;}await move(1,sx+dx,sy);};
  const stickOff=async()=>{if(stickOn){await up(1);stickOn=false;}};
  const absorb=s=>{if(s.event.id!==eventId){eventId=s.event.id;const e=s.event;
-   if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){pendingDrop={at:s.elapsed,reached:false,pointNumber:s.pointNumber,landZ:null};}
+   if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){pendingDrop={at:s.elapsed,reached:false,pointNumber:s.pointNumber,landZ:s.landingZ===null?null:Math.round(s.landingZ*100)/100};/* where the model predicts the drop lands (metres past the net, negative = opponent's side) */}
    if(e.type==='hit'&&e.side===1&&!e.serving&&pendingDrop)pendingDrop.reached=true;
-   if(e.type==='bounce'&&pendingDrop&&pendingDrop.landZ===null&&s.lastHitter===0)pendingDrop.landZ=s.ballZ;
    if(['point','game','complete'].includes(e.type)){points.push({n:s.pointNumber,winner:e.winner,reason:e.reason,rallyHits:s.rallyHits,elapsed:s.elapsed});if(pendingDrop){drops.push({...pendingDrop,end:s.elapsed,seconds:s.elapsed-pendingDrop.at,winner:e.winner,reason:e.reason});pendingDrop=null;}if(incoming){returns.push(incoming);incoming=null;incomingKey=null;}}}};
  log('controls read');let s=await read();const startPoint=s.pointNumber;absorb(s);log('first state',s.phase,s.renderMode);
  while(s.pointNumber-startPoint<POINTS&&s.phase!=='complete'&&framesRun<FRAMES){

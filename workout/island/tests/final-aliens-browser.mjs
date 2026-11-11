@@ -91,7 +91,7 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
    const f=finger(plan.px+plan.dx);
    // A good player lifts the finger when far from any target, and lets the Vulcan recharge for the next column.
    const wantFire=plan.aim<60;
-   if(wantFire!==fireHeld){fireHeld=wantFire;if(wantFire)await touch('touchStart',[f,{...fire,id:2}]);else await touch('touchEnd',[f]);}
+   if(wantFire!==fireHeld){fireHeld=wantFire;if(wantFire)await touch('touchStart',[f,{...fire,id:2}]);else await touch('touchEnd',[{...fire,id:2}]);} // touchEnd lists the released point; the drag finger keeps its anchor
    const pts=[f];if(fireHeld)pts.push({...fire,id:2});await touch('touchMove',pts);
    await tick(100);last=s;s=await snap();steps++;
   }
