@@ -111,7 +111,8 @@ export function createNavalInput(ctx,getModel,getView){
  const beginSky=e=>{if(gesture||sky||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();try{vulcan.setPointerCapture?.(e.pointerId);}catch{}const start={yaw:m.turret?.yaw||0,pitch:vc.defaultPitch*DEG};sky={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{...start},spin:0,lastT:e.timeStamp};controls.dataset.sky='true';};
  vulcan.addEventListener('pointerdown',beginSky,options);
  window.addEventListener('pointermove',e=>{if(sky?.id===e.pointerId)settleSky(sky,e.clientX,e.clientY,e.timeStamp);},options);
- for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(sky?.id===e.pointerId){sky=null;controls.dataset.sky='false';}},options);
+ // Capture phase: the pointer ends on the captured Vulcan button, and a button-level handler in the shell stops the bubble (the fire gesture ends over the pad, so it never met this).
+ for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(sky?.id===e.pointerId){sky=null;controls.dataset.sky='false';}},{signal:abort.signal,capture:true});
  canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);
  window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){moveTo(gesture,e);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
  window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY,e.timeStamp);gesture=null;show(false);cancel.dataset.hot='false';},options);

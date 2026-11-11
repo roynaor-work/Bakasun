@@ -103,6 +103,8 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
   s=await snap();Object.assign(sky,{onTargetFrames,shotsHeld:s.vulcan.shots,hits:s.vulcan.hits,kills:s.vulcan.kills,belt:s.belt,secondsToDown:s.vulcan.kills?+(s.time-firstOn).toFixed(1):null,crosshair:s.hud?.sky||null,trace,sounds:await page.evaluate(()=>{const log=window.__island.games.current.session.debug?.sounds||[];const c={};for(const e of log)c[e.name]=(c[e.name]||0)+1;return c;})});
   if(s.vulcan.kills)await capture('vulcan-down');
   await touch('touchEnd');await tick(60);const shotsAtRelease=(await snap()).vulcan.shots;await tick(600);s=await snap();sky.shotsAfterRelease=s.vulcan.shots-shotsAtRelease;sky.heldAfter=Boolean(s.sky);
+  // The stop sound comes with the release and the splash when the falling helicopter meets the water (about 2 s).
+  await page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<120;i++)s.debug.drive(.02,{skyMode:'manual'});});await tick(50);sky.sounds=await page.evaluate(()=>{const log=window.__island.games.current.session.debug?.sounds||[];const c={};for(const e of log)c[e.name]=(c[e.name]||0)+1;return c;});sky.splashes=(await snap()).vulcan.splashes;
   report.sky=sky;console.log('SKY',JSON.stringify(sky));
   assert.ok(sky.onTargetFrames>0,'the crosshair reached the helicopter');assert.ok(sky.shotsHeld>0&&sky.hits>0,'held on target: shots and hits');assert.equal(sky.kills,1,'the helicopter is shot down');
   assert.equal(sky.shotsAfterRelease,0,'releasing the button stops the gun');assert.equal(sky.heldAfter,false);assert.ok((sky.sounds.vulcanStart||0)>=1&&(sky.sounds.vulcanStop||0)>=1&&(sky.sounds.splash||0)>=1,'Vulcan start/stop and the splash were requested');
