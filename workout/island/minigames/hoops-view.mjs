@@ -109,7 +109,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const glow=new THREE.Mesh(new THREE.CircleGeometry(0.5,40),new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.22,depthWrite:false}));glow.rotation.x=-Math.PI/2;glow.position.y=0.017;scene.add(glow);
  const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.16,0.34,3),ringMat);arrow.rotation.x=Math.PI;scene.add(arrow);
 
- const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
+ const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null,casts:[]};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
  const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;mark('vfx');
  const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
@@ -210,6 +210,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   const s=state.replay?replayFrame(presentationDt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
   // the clips advance with the replay's own time scale (slow motion slows the bodies too), never with the wall clock
   const poseDt=Math.min(0.2,state.replay?presentationDt*(state.replay.scale??1):dt);
+  // delayed reactions fire when due; one that waited through a whole replay (more than 1.5 s late) is dropped, not played at the inbound
+  if(state.casts.length&&!state.replay)state.casts=state.casts.filter(c=>{if(c.due>now)return true;if(now-c.due<1500)avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});return false;});
   const t0=performance.now();
   interp.index(p0?.players);
   seen.clear();
@@ -373,7 +375,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    if(!vfx.reducedMotion&&(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3))state.shake=Math.max(state.shake,0.4);
    if(!show||!snap)continue;
    // show: the nearest teammate and the dunked-on defender react, the losers at the final (2.2 s clips, view only, the engine clock runs on)
-   for(const c of castCelebration(e,snap,{userTeam})){avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});showCounts.casts++;}
+   // the dunked-on defender is usually still landing his block (an act clears a reaction): his 'disappointed' waits 0.7 s
+   for(const c of castCelebration(e,snap,{userTeam})){if(c.clip==='disappointed')state.casts.push({due:performance.now()+700,...c});else avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});showCounts.casts++;}
    const mood=crowdReaction(e,{userTeam,triggers});
    if(mood){state.stand=Math.max(state.stand||0,mood.stand);state.groan=Math.max(state.groan||0,mood.groan);if(mood.wave&&state.waveT==null){state.waveT=0;state.waveDir=(snap.dir?.[e.team]??1);}}
    if(e.type==='score'&&e.shotType!=='ft'){

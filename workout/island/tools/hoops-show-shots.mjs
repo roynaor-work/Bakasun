@@ -38,7 +38,7 @@ try{
  // step one tick at a time until a dunk by the home team is made (the automatic replay is armed by that score)
  // bursts of 20 ticks (one software render per burst): a dunk is noticed within a third of a second of game time
  page.on('console',m=>{if(m.type()==='log'&&/^search/.test(m.text()))console.log(m.text());});
- const found=await page.evaluate(()=>{const d=window.__session.debug;let tries=0,away=null,lastTick=-1;for(let i=0;i<60*60*20;i+=20){d.step(20);const s=window.__session.snapshot;if(s.phase==='final')return {final:true,i};if(i%3600===0)console.log('search',i/3600,'min',JSON.stringify(s.show));const ls=s.lastScore;if(ls&&ls.tick!==lastTick){lastTick=ls.tick;if(ls.type==='dunk'){if(ls.team===0||++tries>8)return {i,lastScore:ls,show:s.show};away=ls;}}}return {none:true,away};});
+ const found=await page.evaluate(()=>{const d=window.__session.debug;let tries=0,away=null,lastTick=-1;for(let i=0;i<60*60*20;i+=20){d.step(20);const s=window.__session.snapshot;if(s.phase==='final')return {final:true,i};if(i%3600===0)console.log('search',i/3600,'min',JSON.stringify(s.show));const ls=s.lastScore;if(ls&&ls.tick!==lastTick){lastTick=ls.tick;if(ls.type==='dunk'){if(ls.team===0||++tries>0)return {i,lastScore:ls,show:s.show};away=ls;}}}return {none:true,away};});
  log.found=found;console.log('dunk',JSON.stringify(found));
  if(found.lastScore){
   const scorer=await page.evaluate(id=>{const s=window.__session.debug.engine.snapshot(),p=s.players.find(p=>p.id===id);return {x:p.x,z:p.z,face:p.face,team:p.team,side:s.dir[p.team]};},found.lastScore.shooter);
@@ -49,6 +49,11 @@ try{
   const cel=await page.evaluate(id=>{const d=window.__session.debug,s=d.engine.snapshot(),p=s.players.find(p=>p.id===id);return {x:p.x,z:p.z,motion:[...d.view.avatars.values()].filter(a=>a.root.visible).map(a=>a.card.id+':'+a.motionState),show:window.__session.snapshot.renderMetrics.show};},found.lastScore.shooter);
   log.celebration=cel;console.log('motion',cel.motion.join(' '));
   await override({x:cel.x-scorer.side*4.2,y:1.7,z:cel.z+(cel.z>=0?-3.6:3.6)},{x:cel.x,y:1.2,z:cel.z},44);await shot('03-celebration');
+  // one second after the make: the dunked-on defender's delayed 'disappointed' has started
+  await page.waitForTimeout(800);
+  const cel2=await page.evaluate(id=>{const d=window.__session.debug;d.step(45);const s=d.engine.snapshot(),p=s.players.find(p=>p.id===id);return {x:p.x,z:p.z,motion:[...d.view.avatars.values()].filter(a=>a.root.visible).map(a=>a.card.id+':'+a.motionState)};},found.lastScore.shooter);
+  log.celebration2=cel2;console.log('motion+1s',cel2.motion.join(' '));
+  await override({x:cel2.x-scorer.side*4.2,y:1.7,z:cel2.z+(cel2.z>=0?-3.6:3.6)},{x:cel2.x,y:1.2,z:cel2.z},44);await shot('03b-celebration-1s');
   // the stands on the dunk (standing, wave), same camera as the rest shot
   await override(...standsCam);await shot('04-crowd-dunk');await override(null,null,0);
   // release the armed automatic replay (SHOW.replayDelay has long passed on the wall clock), render once to start it
@@ -61,11 +66,16 @@ try{
   log.back=await runFor(1100);await shot('07-replay-back');
   log.after=await runFor(1500);
   log.tagHidden=await page.evaluate(()=>document.querySelector('.hoops-replay-tag').hidden);
+  // a home dunk is rare in one autopilot game (about one a game): the home crowd's standing reaction is shown by feeding the view
+  // a synthetic home dunk score event on the live snapshot (the mapping itself is unit tested), same stands camera as 01/04
+  const homeDunk=await page.evaluate(()=>{const d=window.__session.debug,s=d.engine.snapshot(),p=s.players.find(p=>p.team===0);d.view.effects([{type:'score',team:0,points:2,playerId:p.id,shotType:'dunk',shotId:-1,score:s.score}],s);d.step(10);return window.__session.snapshot.renderMetrics.show;});
+  log.homeDunk=homeDunk;await override(...standsCam);await shot('04b-crowd-home-dunk-synthetic');await override(null,null,0);
   console.log('replay phases',JSON.stringify([log.baseline,log.chase,log.back,log.after]),'tag hidden after',log.tagHidden);
  }
  // the shot-clock warning: step until the shot clock is under five seconds in live play
  // bursts of 10 ticks (a sixth of a second): the warning window is five seconds wide
- const low=await page.evaluate(()=>{const d=window.__session.debug;for(let i=0;i<60*60*6;i+=10){d.step(10);const s=window.__session.snapshot;if(s.phase==='live'&&s.shotClockOn&&s.shotClock<=4.6&&s.shotClock>3&&!s.replaying)return {i,shotClock:s.shotClock};}return null;});
+ // the autopilot shoots long before five seconds: set the shot clock by the engine's dev hook on a live held ball
+ const low=await page.evaluate(()=>{const d=window.__session.debug;for(let i=0;i<60*60*3;i+=10){d.step(10);const s=window.__session.snapshot;if(s.phase==='live'&&s.ball.state==='held'&&s.shotClockOn&&!s.replaying&&!s.show?.pending){d.engine.debug.setClock(null,4.2);d.step(1);return {i,shotClock:window.__session.snapshot.shotClock,low:document.querySelector('.hoops-shotclock').dataset.low};}}return null;});
  log.shotClock=low;if(low){await page.evaluate(()=>window.__session.debug.view.snapCamera());await shot('08-hud-shotclock');}
  log.errors=errors.filter(e=>!/favicon|manifest|404/.test(e));
  await context.close();
