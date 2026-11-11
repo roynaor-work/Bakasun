@@ -2,7 +2,8 @@ import {createUltraFireCity} from './ultra-fire-city.mjs';
 import {createUltraFireEffects} from './ultra-fire-effects.mjs';
 import {createUltraFireScenery} from './ultra-fire-scenery.mjs';
 import {fireScreenMovement} from './fire-navigation.mjs?v=island-v2-20261107-8';
-import {polishLegacy,polishValue,fireV20} from './polish-flag.mjs';
+import {polishLegacy,polishValue,fireV20,fireV21} from './polish-flag.mjs';
+import {ladderArmPose} from './fire-ladder.mjs?v=island-v2-20261107-8';
 import * as T from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {palette} from '../view/environment.mjs?v=island-v2-20261107-8';
@@ -17,7 +18,7 @@ import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 export function createFireScene(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render,colors=config.visuals.palette;
   const scene=new T.Scene(),geometries=new Set(),materials=new Set(),textures=new Set();
-  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false;const cityVisuals=[],citizenVisuals=[];
+  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false,truckArm=null,armLength=1;const cityVisuals=[],citizenVisuals=[],pivotWorld=new T.Vector3();
   const models=new LocalModels(adapters),loader=models.loader;
   models.loader={async loadAsync(url){const asset=await loader.loadAsync(url);asset.scene.animations=asset.animations||[];return asset;}};
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
@@ -135,9 +136,14 @@ export function createFireScene(ctx,model,adapters={}) {
     cannon.position.set(model.truck.x,balance.vehicle.cannonPivot[1],model.truck.z);
     const dx=impact.x-cannon.position.x,dz=impact.z-cannon.position.z;
     cannon.rotation.y=Math.atan2(-dx,-dz);barrel.rotation.x=Math.atan2(impact.y-cannon.position.y,Math.hypot(dx,dz));
-    if(truckVisual){truckVisual.root.position.set(model.truck.x,0,model.truck.z);const heading=legacyTruck?balance.vehicle.headingOffset:balance.vehicle.feel?.headingOffset??balance.vehicle.headingOffset,wheelSign=legacyTruck?1:balance.vehicle.feel?.wheelSign??1;truckVisual.root.rotation.order='YXZ';truckVisual.root.rotation.y=(drawYawOn&&model.truck.drawYaw!==undefined?model.truck.drawYaw:model.truck.yaw)+T.MathUtils.degToRad(heading);
+    if(truckVisual){truckVisual.root.position.set(model.truck.x,0,model.truck.z);const flipped=noseFix(truckVisual),heading=(legacyTruck?balance.vehicle.headingOffset:balance.vehicle.feel?.headingOffset??balance.vehicle.headingOffset)+(flipped?180:0),wheelSign=(legacyTruck?1:balance.vehicle.feel?.wheelSign??1)*(flipped?-1:1);truckVisual.root.rotation.order='YXZ';truckVisual.root.rotation.y=(drawYawOn&&model.truck.drawYaw!==undefined?model.truck.drawYaw:model.truck.yaw)+T.MathUtils.degToRad(heading);
       if(!legacyTruck&&balance.vehicle.feel){const f=balance.vehicle.feel,k=1-Math.exp(-f.leanEase*dtLean());lean.roll+=(clamp01(-(model.truck.yawRate||0)*Math.abs(model.truck.speed||0)*f.rollPerTurn,f.maxRoll)-lean.roll)*k;lean.pitch+=(clamp01((model.truck.accel||0)*f.pitchPerAccel,f.maxPitch)-lean.pitch)*k;truckVisual.root.rotation.z=lean.roll;truckVisual.root.rotation.x=lean.pitch;}
-      for(const wheel of truckVisual.wheels||[]){wheel.rotation.order='YXZ';wheel.rotation.x=model.truck.wheelRotation*wheelSign;wheel.rotation.y=drawYawOn&&wheel.position.z<0?clamp01((model.truck.yawRate||0)*.12,.42):0;}truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
+      for(const wheel of truckVisual.wheels||[]){wheel.rotation.order='YXZ';wheel.rotation.x=model.truck.wheelRotation*wheelSign;wheel.rotation.y=drawYawOn&&(flipped?wheel.position.z>0:wheel.position.z<0)?clamp01((model.truck.yawRate||0)*.12,.42):0;}
+      if(truckArm){ // 11/11/2026: the engine's own roof ladder stays stowed along the body; during a rescue it turns, lifts and stretches to the window, then folds back.
+        const target=model.ladder.target,ext=model.ladder.extension;truckVisual.root.updateMatrixWorld(true);truckVisual.turret.getWorldPosition(pivotWorld);
+        const pose=target&&ext>0?ladderArmPose({dx:target.world[0]+model.ladder.sway*2-pivotWorld.x,dz:target.world[2]-pivotWorld.z,dy:target.world[1]+.85-pivotWorld.y,rootYaw:truckVisual.root.rotation.y,extension:ext,length:armLength,sway:model.ladder.sway,tip:-1}):{yaw:0,pitch:0,scale:1};
+        truckVisual.turret.rotation.y=pose.yaw;truckArm.rotation.x=pose.pitch;truckArm.scale.z=pose.scale;}
+      else truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
     else{cannon.updateMatrixWorld(true);cannonMuzzle.getWorldPosition(nozzle);}
     for(let i=0;i<model.rescues.length;i++){
       const rescue=model.rescues[i],citizen=citizenVisuals[i]||citizens[i],start=rescuePoints[i];
@@ -147,7 +153,7 @@ export function createFireScene(ctx,model,adapters={}) {
       if(rescue.rescued){citizen.position.lerp(ladder.position,rescue.descent);citizen.position.y-=.8*rescue.descent;}
 
     }
-    ladder.visible=!ladderOnlyOnRescue||Boolean(model.ladder.target&&model.ladder.extension>0);
+    ladder.visible=!ladderOnlyOnRescue||Boolean(model.ladder.target&&model.ladder.extension>0&&!truckArm);
     const target=model.ladder.target,extension=model.ladder.extension;
     if(target&&extension>0){direction.set(target.world[0]+model.ladder.sway*2,target.world[1]+.85,target.world[2]).sub(ladder.position);const length=direction.length();ladder.quaternion.setFromUnitVectors(up,direction.normalize());ladder.scale.set(1,length*extension,1);}
     else{ladder.rotation.set(-Math.PI/2,0,model.truck.yaw);ladder.scale.set(1,3.7,1);}
@@ -179,13 +185,13 @@ export function createFireScene(ctx,model,adapters={}) {
       await scenery.load();
     },
     /** Fire v7 art. Resolves with what was placed; anything missing is loaded from the earlier art by the caller. */
-    async loadV7(){
+    async loadV7(options={}){
       const rep={truck:false,hydrant:false,crew:false,citizens:false,lots:new Set(),atlas:false};
       for(const l of beaconLights)l.visible=false; // idle point lights still cost every lit pixel; the lamp meshes keep pulsing
       v7=createFireV7({scene,balance,model,adapters,canAdd:m=>m.triangles<=r.maxTriangles&&m.drawCalls<=r.maxDrawCalls,lotBases,metricsOf:metrics});
       const guard=p=>p.catch(()=>null);
       await Promise.all([
-        guard((async()=>{const visual=await v7.loadTruck();if(visual&&!disposed)rep.truck=this.setTruck(visual);})()),
+        guard((async()=>{if(options.skipTruck)return;const visual=await v7.loadTruck();if(visual&&!disposed)rep.truck=this.setTruck(visual);})()),
         guard((async()=>{await v7.loadBuildings(focus);for(const l of v7.metrics().lots)if(l.file)rep.lots.add(l.index);})()),
         guard((async()=>{const n=await v7.loadHydrants(balance.hydrant);if(!disposed&&n===city.hydrants.length&&n>0){hydrantBase.visible=false;hydrantVisual=v7.hydrants[0];rep.hydrant=true;}})()),
         guard((async()=>{const c=await v7.loadCrew();if(c&&!disposed){crewVisual=c.visual;crewRig=c.rig;v7Crew=true;firefighter.visible=false;rep.crew=true;}})()),
@@ -194,6 +200,8 @@ export function createFireScene(ctx,model,adapters={}) {
       ]);
       return rep;
     },
+    /** The v7 pumper as a fallback after the Meshy fire engine could not be placed. */
+    async loadV7Truck(){if(!v7||disposed||truckVisual)return false;try{const visual=await v7.loadTruck();return Boolean(visual&&!disposed&&this.setTruck(visual));}catch{return false;}},
     setQuality(level){ultraEffects.setQuality(level);sun.castShadow=level>0;},
     v7Metrics(){return v7?v7.metrics():null;},
     effectsMetrics(){return ultraEffects.metrics();},
@@ -201,13 +209,18 @@ export function createFireScene(ctx,model,adapters={}) {
     setHoseStart(v){handHose=Boolean(v);if(v)hoseStart.copy(v);},
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visuals=[];for(const p of city.hydrants){const visual=models.create(spec,{height:spec.height});if(!visual)continue;visual.position.fromArray(p);scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visuals.push(visual);}hydrantVisual=visuals[0];if(visuals.length===city.hydrants.length)hydrantBase.visible=false;return Boolean(hydrantVisual);},
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),height:balance.hydrant.height,ringRadius:balance.hydrant.radius,connected:model.atHydrant,art:models.metrics()};},
-    setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}visual.root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});truckVisual=visual;truckBase.visible=cannon.visible=false;return true;},
-    truckRoot(){return truckVisual?.root||truckBase;},ladderRoot(){return ladder;},
-    truckMetrics(){return {loaded:Boolean(truckVisual),cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z},hydrantHose:model.atHydrant,hoseEnd:{x:model.truck.x,z:model.truck.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
+    setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}visual.root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});truckVisual=visual;truckBase.visible=cannon.visible=false;
+      truckArm=null;if(ladderV21&&visual.kind==='meshy'&&visual.ladderBox){ // re-pivot the roof ladder at its rear end so it lifts like a real turntable ladder
+        const rear=visual.ladderBox.max[2];armLength=Math.max(.5,rear-visual.ladderBox.min[2]);const arm=new T.Group();arm.position.z=rear;for(const child of [...visual.turret.children]){visual.turret.remove(child);child.position.z-=rear;arm.add(child);}visual.turret.add(arm);truckArm=arm;}
+      return true;},
+    truckRoot(){return truckVisual?.root||truckBase;},ladderRoot(){return ladder;},truckParts(){return truckVisual?{root:truckVisual.root,turret:truckVisual.turret,arm:truckArm,kind:truckVisual.kind}:null;},
+    truckMetrics(){return {loaded:Boolean(truckVisual),kind:truckVisual?.kind||null,nose:truckVisual?noseFix(truckVisual)?'fixed':'asIs':null,roofLadder:truckArm?{yaw:truckVisual.turret.rotation.y,pitch:truckArm.rotation.x,scale:truckArm.scale.z}:null,boxLadderVisible:ladder.visible,cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z},hydrantHose:model.atHydrant,hoseEnd:{x:model.truck.x,z:model.truck.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
 }
 
 /** Same two-stage degradation contract as naval-view; the model never changes. */
-const legacyTruck=polishLegacy('fireTruck'),drawYawOn=fireV20('fireDraw'),ladderOnlyOnRescue=fireV20('fireLadder'),crewV9Flag=()=>!legacyTruck&&polishValue('fireCrew')!=='v8',clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
+const legacyTruck=polishLegacy('fireTruck'),drawYawOn=fireV20('fireDraw'),ladderOnlyOnRescue=fireV20('fireLadder'),ladderV21=fireV21('fireLadder'),headingV21=fireV21('fireHeading'),meshyFirst=fireV21('fireTruckModel'),
+  /** 11/11/2026: a truck visual whose nose is its local +Z gets a half turn so it drives nose first (the Meshy engine's nose is -Z, so it is left as is; the v7 pumper turns its file in fire-v7.mjs). */
+  noseFix=visual=>headingV21&&visual?.kind==='meshy'&&visual.nose==='+z',crewV9Flag=()=>!legacyTruck&&polishValue('fireCrew')!=='v8',clamp01=(x,m)=>Math.max(-m,Math.min(m,x)),lean={roll:0,pitch:0,t:0};
 function dtLean(){const now=globalThis.performance?.now?.()??0,dt=lean.t?Math.min(.1,Math.max(.001,(now-lean.t)/1000)):.016;lean.t=now;return dt;}
 export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRenderer(options)) {
   const r=ctx.balance.render,canvas=globalThis.document?.createElement('canvas');
@@ -224,13 +237,14 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     world=createFireScene(ctx,model);surface.addEventListener('webglcontextlost',onLost);if(gov.level!==2)world.setQuality(gov.level);
     if(globalThis.document){
       const earlier=(skip=null)=>{
-        if(!skip?.truck)void loadFireTruck(ctx.balance).then(visual=>{if(visual)world.setTruck(visual);}).catch(()=>{});
+        if(!skip?.truck)void loadFireTruck(ctx.balance).then(visual=>{if(!(visual&&world.setTruck(visual))&&meshyFirst)return world.loadV7Truck();}).catch(()=>{if(meshyFirst)void world.loadV7Truck();});
         if(!skip?.hydrant)void world.loadHydrant();
         void world.loadCity(skip);
       };
       // Fire v7 first; each piece it could not place (blocked file, budget, no Draco) loads from the earlier art instead.
+      // 11/11/2026 (Roy: a regular fire engine, use the Meshy one): the Meshy fire engine is the first choice and the v7 pumper the fallback (`?fireTruckModel=v20` = pumper first).
       if(fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7)){
-        world.loadV7().then(earlier,()=>earlier());
+        world.loadV7({skipTruck:meshyFirst}).then(earlier,()=>earlier());
       }else earlier();
     }
   }catch{failed=true;dispose();return null;}

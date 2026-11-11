@@ -25,19 +25,21 @@ try{
  page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
  await page.addInitScript(()=>{HTMLElement.prototype.requestFullscreen=undefined;Object.defineProperty(screen.orientation,'lock',{configurable:true,value:async()=>{throw Error('unsupported');}});});
  const tick=ms=>page.clock.runFor(ms),tap=s=>page.locator(s).tap();
- await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();
+ const log=(...a)=>console.log(new Date().toISOString().slice(11,19),...a);
+ await page.clock.install();await page.goto(server.url+'?dev=1',{waitUntil:'networkidle'});await csp.assertClean();log('island page loaded');
  await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);await page.clock.pauseAt(await page.evaluate(()=>Date.now()+60000));await tap('[data-action=avatar-start]');await tick(32);
  await page.evaluate(({mode,difficulty})=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;
   for(const type of ['soccer','tennis']){let done=false;for(let z=0;z<e.state.world.size&&!done;z++)for(let x=0;x<e.state.world.size&&!done;x++)if(e.place(type,x,z).ok)done=true;}
   if(difficulty)e.setTennisDifficulty(difficulty);
-  data.config.minigames.tennis.render.slowFrameMs=100000;/* SwiftShader timing must not change the render tier */
+  const r=data.config.minigames.tennis.render;r.slowFrameMs=100000;/* SwiftShader timing must not change the render tier or drop to the 2D fallback */
+  r.pixelRatios=r.pixelRatios.map(()=>.75);r.shadowEnabled=r.shadowEnabled.map(()=>false);/* a phone's middle tier; the bar is DOM and does not depend on it */
   // The session reads its kill switches from location.search when the game starts: "before" is the v20 behaviour.
   if(mode==='before')history.replaceState(null,'',location.pathname+'?dev=1&tennisBar=0&tennisDrop=0');},{mode:MODE,difficulty:DIFFICULTY});
  const start=async id=>{await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await tick(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(100);await waitForGameNavigation(page);};
- await start('tennis');
+ log('avatar ready');await start('tennis');log('tennis started');
  // The clock is paused, so rAF polling never fires: advance the fake clock while the character model loads (timers and frames both move).
  for(let i=0;i<600;i++){const loaded=await page.evaluate(()=>{const m=window.__island.games.current?.session.snapshot.renderMetrics;return Boolean(m&&(m.characterLoaded||m.mode==='canvas'));});if(loaded)break;await tick(100);await page.waitForTimeout(50);}
- await tick(600);
+ await tick(600);log('character loaded');
  report.difficulty=await page.evaluate(()=>window.__island.engine.state.tennisDifficulty);
  report.search=await page.evaluate(()=>location.search);
  // Real touch through CDP. Finger 1 = left thumb on the joystick, finger 2 = right thumb on a button; every call sends the full set of active points.
@@ -47,7 +49,7 @@ try{
  const move=async(id,x,y)=>{const p=active.find(p=>p.id===id);if(!p)return;p.x=x;p.y=y;await send('touchMove');};
  const up=async id=>{const p=active.find(p=>p.id===id);if(!p)return;active=active.filter(q=>q.id!==id);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[{x:p.x,y:p.y,id}]});/* CDP: touchEnd lists the released fingers only; the others stay down */};
  const box=async s=>{const b=await page.locator(s).boundingBox();assert.ok(b,s+' is on screen');return {x:b.x+b.width/2,y:b.y+b.height/2,w:b.width,h:b.height};};
- const zone=await box('.soccer-stick-zone'),hit=await box('#shoot'),serveBtn=await box('#pass'),dropBtn=await box('#drop');
+ log('reading controls');const zone=await box('.soccer-stick-zone'),hit=await box('#shoot'),serveBtn=await box('#pass'),dropBtn=await box('#drop');
  assert.ok(zone.x<viewport.width/2,'joystick on the left half');assert.ok(hit.x>viewport.width/2,'hit button on the right half');
  report.controls={zone,hit,serve:serveBtn,drop:dropBtn};
  // A child's tap: 70 ms down, then up. The hit fires on release (v20) and the bar must already be up before the finger lands.
@@ -65,9 +67,9 @@ try{
  const points=[],returns=[],drops=[];let serveSeen=null,stickOn=false,eventId=-1,incomingKey=null,incoming=null,pendingDrop=null,serveTapAt=0,framesRun=0,shotServe=false,shotReturn=false,shotTap=false,shotDrop=false;
  const stickTowards=async targetX=>{const sx=zone.x,sy=zone.y,dx=Math.max(-1,Math.min(1,targetX*4))*44;if(!stickOn){await down(1,sx,sy);stickOn=true;}await move(1,sx+dx,sy);};
  const stickOff=async()=>{if(stickOn){await up(1);stickOn=false;}};
- let s=await read();const startPoint=s.pointNumber;
+ log('controls read');let s=await read();const startPoint=s.pointNumber;log('first state',s.phase,s.renderMode);
  while(s.pointNumber-startPoint<POINTS&&s.phase!=='complete'&&framesRun<9000){
-  const step=(s.phase==='rally'&&s.contact?.side===0&&s.contact.eta<.6)||s.phase==='toss'?16:40;
+  const step=(s.phase==='rally'&&s.contact?.side===0&&s.contact.eta<.6)||(s.phase==='toss'&&s.server===0&&s.serveMeter>.3)?16:(s.phase==='rally'&&s.contact?.side===1&&!pendingDrop)?80:40;
   if(s.event.id!==eventId){eventId=s.event.id;const e=s.event;
    if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){pendingDrop={at:s.elapsed,reached:false,pointNumber:s.pointNumber,landZ:null};}
    if(e.type==='hit'&&e.side===1&&!e.serving&&pendingDrop)pendingDrop.reached=true;
@@ -93,6 +95,7 @@ try{
    }
   }else{await stickOff();if(pendingDrop&&!shotDrop&&s.lastHitter===0&&s.ballZ<0){await shotFrame('drop-flight');shotDrop=true;}}
   await tick(step);framesRun++;s=await read();
+  if(framesRun%200===0||framesRun<=6)log('frame',framesRun,'point',s.pointNumber-startPoint,'phase',s.phase,'returns',returns.length,'drops',drops.length);
  }
  await stickOff();
  if(incoming)returns.push(incoming);

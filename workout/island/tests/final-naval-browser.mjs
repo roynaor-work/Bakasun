@@ -32,14 +32,15 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
   const fire=await center('#shoot');report['fireBox'+stage]=fire.box;const edge=viewport.width-4-fire.x;
   const right=await drag(`s${stage} fire right to edge ${Math.round(edge)}px, hold 1.5s`,fire,edge,0,1500,{shot:`s${stage}-right-edge`,back:true});
   const left=await drag(`s${stage} fire left 100px, hold 1.5s`,fire,-100,0,1500,{shot:`s${stage}-left-100`,fire:true});
-  const fine=await drag(`s${stage} fire right 15px (fine), hold 1s`,fire,15,0,1000);
-  const up=await drag(`s${stage} fire up 90px (reach), hold .5s`,fire,0,-90,500);
+  // The fine and vertical drags do not depend on the stage: once, on stage 3 (SwiftShader renders every sampled frame, so the run stays short).
+  const fine=stage===3?await drag(`s${stage} fire right 15px (fine), hold 1s`,fire,15,0,1000):null;
+  const up=stage===3?await drag(`s${stage} fire up 90px (reach), hold .5s`,fire,0,-90,500):null;
   // Reach: at least 120 degrees to each side from the Fire button inside the screen; smooth (no step above 12 degrees in 50 ms); feedback kept.
   assert.ok(right.yawDeg>=120,`turn right from the Fire button reaches 120 degrees (got ${right.yawDeg})`);
   assert.ok(left.yawDeg<=-120,`turn left reaches 120 degrees (got ${left.yawDeg})`);
   for(const row of [right,left])assert.ok(row.maxStepDeg<=12,`smooth turn: largest step ${row.maxStepDeg} deg per sample`);
-  assert.ok(Math.abs(fine.yawDeg)<=4&&Math.abs(fine.yawDeg)>=.8,`a small drag is a fine aim (${fine.yawDeg} deg)`);
-  assert.equal(Math.abs(up.yawDeg)<1,true,'a vertical drag does not turn the turret');
+  if(fine)assert.ok(Math.abs(fine.yawDeg)<=4&&Math.abs(fine.yawDeg)>=.8,`a small drag is a fine aim (${fine.yawDeg} deg)`);
+  if(up)assert.equal(Math.abs(up.yawDeg)<1,true,'a vertical drag does not turn the turret');
   assert.ok(right.stopDriftDeg<1,`bringing the thumb back stops the turn (drift ${right.stopDriftDeg} deg in .5 s)`);
   for(const row of [right,left])assert.ok(row.landingOffscreen===0||row.arrowWhenOffscreen===row.landingOffscreen,`landing mark visible or an edge arrow (${row.landingOffscreen} off, ${row.arrowWhenOffscreen} arrows)`);
   assert.equal(left.fired,1,'release fires once');
@@ -49,7 +50,9 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
  await page.evaluate(()=>{const l=window.__island.data.config.minigames.navalDuel.levels[2];l.air={...l.air,from:2,every:22};});
  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
  const air={aircraftSeen:0,tracersSeen:0,hudTarget:0,peakDrawCalls:0,peakTriangles:0,kills:0,shots:0,hits:0,splashes:0,frames:[]};let framed=false,killed=false;
- for(let t=0;t<45000&&!(killed&&framed&&air.splashes>0);t+=100){await tick(100);const s=await snap();const v=s.vulcan||{},m=s.renderMetrics;air.aircraftSeen=Math.max(air.aircraftSeen,s.air?.length||0);air.tracersSeen=Math.max(air.tracersSeen,m.air?.tracers||0);air.peakDrawCalls=Math.max(air.peakDrawCalls,m.drawCalls||0);air.peakTriangles=Math.max(air.peakTriangles,m.triangles||0);air.kills=v.kills||0;air.shots=v.shots||0;air.hits=v.hits||0;air.splashes=v.splashes||0;if(s.hud?.air?.target)air.hudTarget++;
+ // The model advances half a second per step through the session's own update (no input), then one real frame is rendered and read: 45 s of game time in about 90 frames.
+ const advance=()=>page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<25;i++)s.debug.drive(.02,{});});
+ for(let t=0;t<45000&&!(killed&&framed&&air.splashes>0);t+=500){await advance();await tick(50);const s=await snap();const v=s.vulcan||{},m=s.renderMetrics;air.aircraftSeen=Math.max(air.aircraftSeen,s.air?.length||0);air.tracersSeen=Math.max(air.tracersSeen,m.air?.tracers||0);air.peakDrawCalls=Math.max(air.peakDrawCalls,m.drawCalls||0);air.peakTriangles=Math.max(air.peakTriangles,m.triangles||0);air.kills=v.kills||0;air.shots=v.shots||0;air.hits=v.hits||0;air.splashes=v.splashes||0;if(s.hud?.air?.target)air.hudTarget++;
   if(!framed&&m.air?.tracers>0&&s.hud?.air?.target){framed=true;await capture('s3-air-vulcan');air.frames.push('s3-air-vulcan');}
   if(!killed&&v.kills>0){killed=true;await tick(250);await capture('s3-air-down');air.frames.push('s3-air-down');}
   if(s.result)break;}

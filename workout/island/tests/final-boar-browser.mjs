@@ -31,8 +31,10 @@ const cdp=await ctx.newCDPSession(page);await cdp.send('Emulation.setTouchEmulat
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id??1}))});
 const mouse=(type,x,y,button='left')=>cdp.send('Input.dispatchMouseEvent',{type,x:x+box.x,y:y+box.y,button,clickCount:1,pointerType:'mouse'});
 const wait=ms=>page.waitForTimeout(ms);
-const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
+const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,heat:s.heat,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
 const resetAim=()=>frame.evaluate(()=>window.__boar.aim(0,-.05));
+// the machine gun overheats after long holds; a step that counts shots waits for it to cool first
+const cool=async()=>{for(let i=0;i<40;i++){if(((await st()).heat||0)<15)return;await wait(250);}};
 const shot=name=>page.screenshot({path:out+`frames/boar-${MODE}-${name}.jpg`,type:'jpeg',quality:80});
 const env=await frame.evaluate(()=>({coarse:matchMedia('(pointer:coarse)').matches,hoverNone:matchMedia('(hover:none)').matches,maxTouchPoints:navigator.maxTouchPoints,fireBtn:!!document.getElementById('fire-btn'),aimZone:!!document.getElementById('aim-zone'),landscape:innerWidth>innerHeight}));
 await frame.evaluate(()=>window.__boar.start(1));await wait(1500);
@@ -40,14 +42,14 @@ await frame.evaluate(()=>{window.__boar.spawn('scout',-20);window.__boar.spawn('
 const layout=await frame.evaluate(()=>{const at=(x,y)=>{const e=document.elementFromPoint(x,y);return e?(e.closest('button')?.id||e.id||e.className||e.tagName):null;};const r=id=>{const e=document.getElementById(id);if(!e)return null;const b=e.getBoundingClientRect();return [Math.round(b.x),Math.round(b.y),Math.round(b.width),Math.round(b.height)];};
  return {aimZone:r('aim-zone'),fireBtn:r('fire-btn'),rocket:r('rocket'),frost:r('frost'),fury:r('fury'),under:Object.fromEntries([[60,200],[180,200],[290,200],[150,290],[120,300],[450,150],[650,110],[520,60]].map(([x,y])=>[x+','+y,at(x,y)]))};});
 log('env',env);log('layout',layout);await shot('layout');
-const results={mode:MODE,query,env,layout,steps:{}};
+const results={mode:MODE,query,env,layout,steps:{}};const hasBtn=!!layout.fireBtn;const noBtn={skipped:'no fire button in this mode (legacy touch-to-fire)'};
 const nonButton=s=>Object.entries(s.shotsBy).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
 const diff=(a,b)=>({shots:b.shots-a.shots,nonButton:nonButton(b)-nonButton(a),button:(b.shotsBy.button||0)-(a.shotsBy.button||0),stickNoButton:b.stickNoButton-a.stickNoButton,abilities:Object.keys(b.abilityBy).reduce((n,k)=>n+(b.abilityBy[k]||0)-(a.abilityBy[k]||0),0),abilityFromLeft:b.abilityFromLeft-a.abilityFromLeft,aimFrom:a.aim,aimTo:b.aim,aimMoved:Math.hypot(b.aim.x-a.aim.x,b.aim.y-a.aim.y)>.03});
 async function step(name,fn){const a=await st();const extra=await fn()||{};const b=await st();results.steps[name]={...diff(a,b),...extra};log(name,JSON.stringify(results.steps[name]));}
 // A) three taps on the scene (right half, away from every control)
 await step('sceneTaps',async()=>{for(const [x,y] of [[450,150],[650,110],[520,60]]){await touch('touchStart',[{x,y}]);await wait(150);await touch('touchEnd',[]);await wait(120);}await wait(400);});
 // B) a long drag on the scene
-await step('sceneDrag',async()=>{await touch('touchStart',[{x:500,y:150}]);for(let i=1;i<=10;i++){await touch('touchMove',[{x:500+i*16,y:150+i*5}]);await wait(60);}await wait(400);await touch('touchEnd',[]);await wait(400);});
+await step('sceneDrag',async()=>{await touch('touchStart',[{x:480,y:300}]);for(let i=1;i<=10;i++){await touch('touchMove',[{x:480+i*16,y:300-i*2}]);await wait(60);}await wait(400);await touch('touchEnd',[]);await wait(400);});
 // C) a two-second stick drag with enemies in range
 await resetAim();await step('stickDrag2s',async()=>{await touch('touchStart',[{x:150,y:290}]);for(let i=1;i<=20;i++){await touch('touchMove',[{x:150+Math.min(i,8)*6,y:290-Math.min(i,8)*5}]);await wait(100);}await shot('stick');await touch('touchEnd',[]);await wait(400);});
 // D) a stick drag that leaves the stick zone (and crosses the weapon bar and the fire button)
@@ -57,20 +59,20 @@ await resetAim();await step('leftThumbAbilityRow',async()=>{const before=await s
  const mid=await st();await touch('touchStart',[{x:60,y:210}]);for(let i=1;i<=8;i++){await touch('touchMove',[{x:60+i*4,y:210-i*7}]);await wait(80);}await wait(500);await touch('touchEnd',[]);await wait(400);const after=await st();
  return {tapsAbilities:Object.keys(mid.abilityBy).reduce((n,k)=>n+(mid.abilityBy[k]||0)-(before.abilityBy[k]||0),0),dragAimMoved:Math.hypot(after.aim.x-mid.aim.x,after.aim.y-mid.aim.y)>.03,abilityBy:after.abilityBy};});
 // F) two fingers: stick (id 1) moving while the fire button (id 2) is held; release the button first, then the stick
-await resetAim();await step('twoFingers',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:140,y:300,id:1}]);await wait(100);await touch('touchStart',[{x:140,y:300,id:1},{x:bx,y:by,id:2}]);
+await resetAim();await cool();await step('twoFingers',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:140,y:300,id:1}]);await wait(100);await touch('touchStart',[{x:140,y:300,id:1},{x:bx,y:by,id:2}]);
  for(let i=1;i<=10;i++){await touch('touchMove',[{x:140+i*5,y:300-i*4,id:1},{x:bx,y:by,id:2}]);await wait(100);}await shot('twofinger');const held=await st();
- await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(500);const afterRelease=await st();await touch('touchEnd',[{x:190,y:260,id:1}]);await wait(300);const end=await st();
- return {heldFiring:held.firing,heldFireHeld:held.fireHeld,stickActiveWhileHeld:held.stick,shotsAfterButtonRelease:end.shots-afterRelease.shots,aimKeptAfterStickRelease:Math.hypot(end.aim.x-afterRelease.aim.x,end.aim.y-afterRelease.aim.y)<.02};});
+ await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(500);const afterRelease=await st();await touch('touchEnd',[{x:190,y:260,id:1}]);await wait(100);const released=await st();await wait(400);const end=await st();
+ return {heldFiring:held.firing,heldFireHeld:held.fireHeld,stickActiveWhileHeld:held.stick,shotsAfterButtonRelease:end.shots-afterRelease.shots,aimKeptAfterStickRelease:Math.hypot(end.aim.x-released.aim.x,end.aim.y-released.aim.y)<.02};});
 // G) hold the fire button and tap the scene with another finger: firing must continue
-await step('strayTapWhileHeld',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(600);const s1=await st();
- await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:520,y:130,id:3}]);await wait(100);const s2=await st();await wait(800);const s3=await st();await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(300);
- return {shotsBeforeTap:s1.shots,firingAfterStrayTap:s2.firing,shotsAfterStrayTap:s3.shots-s2.shots};});
+await cool();await step('strayTapWhileHeld',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(400);const s1=await st();
+ await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:520,y:130,id:3}]);await wait(100);const s2=await st();await wait(1200);const s3=await st();await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(300);
+ return {shotsBeforeTap:s1.shots,heatAtTap:s1.heat,firingAfterStrayTap:s2.firing,fireHeldAfterStrayTap:s2.fireHeld,shotsAfterStrayTap:s3.shots-s2.shots};});
 // H) keyboard F (the frame has focus, as on a phone with a keyboard)
-await step('keyboardF',async()=>{await frame.evaluate(()=>document.getElementById('scene').focus());await page.keyboard.down('KeyF');await wait(800);await page.keyboard.up('KeyF');await wait(300);});
+await cool();await step('keyboardF',async()=>{await frame.evaluate(()=>document.getElementById('scene').focus());await page.keyboard.down('KeyF');await wait(800);await page.keyboard.up('KeyF');await wait(300);});
 // I) mouse-type pointer on the scene
-await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await wait(700);await mouse('mouseReleased',500,200);await wait(300);});
+await cool();await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await wait(700);await mouse('mouseReleased',500,200);await wait(300);});
 // J) the fire button alone: shots, all from the button, aim unchanged
-await step('fireButtonHold',async()=>{const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(1000);await shot('fire');const held=await st();await touch('touchEnd',[]);await wait(300);return {heldFiring:held.firing};});
+await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(1000);await shot('fire');const held=await st();await touch('touchEnd',[]);await wait(300);return {heldFiring:held.firing};});
 const final=await st();results.final=final;results.errors=errors;
 const checks=[];const ok=(name,pass,detail)=>checks.push({name,pass:!!pass,detail});
 const S=results.steps;
