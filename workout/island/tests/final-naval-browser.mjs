@@ -64,6 +64,50 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
  assert.ok(air.peakDrawCalls<=70&&air.peakTriangles<=90000,`render budget with aircraft (${air.peakDrawCalls} calls, ${air.peakTriangles} triangles)`);
  assert.ok((report.sounds.vulcanStart||0)>=1&&(report.sounds.vulcanStop||0)>=1,'Vulcan start and stop sounds are requested');
  assert.ok(report.airAudio&&report.airAudio.loaded.length===3,`the three Vulcan samples decode (${JSON.stringify(report.airAudio)})`);
- await exit();
+ await exit();await tick(300);
+ if(!before){
+  // ---- 11/11/2026 phase 2 (Roy, phone) ----
+  // (A) Ammo limit, stage 1: quick taps on Fire spend the loaded shells; at 3 a supply buoy appears (gauge turns orange), at 0 the message shows (red);
+  // a ship that does not sail gets the buoy drifted to it and reloads from the stock. Sailing into the buoy is the same reach check.
+  await start('navalDuel',1);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
+  const fire1=await center('#shoot');let s=await snap();const ammo={magazine:s.magazines?.ammo?.[0],loadedStart:s.loaded,stock:s.ammo?.[0],gauge:s.hud?.ammo||null,taps:0};
+  assert.equal(ammo.loadedStart,ammo.magazine,'the magazine is loaded at the start');assert.ok(ammo.gauge&&ammo.gauge.level==='ok','the ammo gauge is drawn');
+  const tapFire=async()=>{await touch('touchStart',[fire1]);await tick(60);await touch('touchEnd');await tick(420);ammo.taps++;};
+  for(let i=0;i<30&&(await snap()).loaded>3;i++)await tapFire();await tick(100);s=await snap();
+  ammo.atLow={loaded:s.loaded,level:s.hud?.ammo?.level,buoys:s.buoys?.length,dataset:await page.evaluate(()=>document.querySelector('.game-controls')?.dataset.ammoLevel)};await capture('ammo-low');
+  assert.equal(s.loaded,3);assert.equal(ammo.atLow.level,'low');assert.equal(s.buoys.length,1,'a buoy appears at the low mark');assert.equal(ammo.atLow.dataset,'low');
+  for(let i=0;i<10&&(await snap()).loaded>0;i++)await tapFire();await tick(100);s=await snap();
+  ammo.atEmpty={loaded:s.loaded,level:s.hud?.ammo?.level,message:s.hud?.ammo?.message,fired:s.fired,stock:s.ammo[0]};await capture('ammo-empty');
+  assert.equal(s.loaded,0);assert.equal(ammo.atEmpty.message,'נגמרה התחמושת, אוספים אספקה');const firedEmpty=s.fired;await tapFire();assert.equal((await snap()).fired,firedEmpty,'nothing loaded, the tap does not fire');
+  for(let t=0;t<12000&&(await snap()).supplies<1;t+=250)await tick(250);s=await snap();
+  ammo.afterBuoy={loaded:s.loaded,supplies:s.supplies,level:s.hud?.ammo?.level,seconds:+s.time.toFixed(1)};await capture('ammo-refill');
+  assert.equal(s.supplies,1,'the buoy reached the stranded ship');assert.ok(s.loaded>0&&s.hud?.ammo?.level!=='empty','reloaded from the stock');
+  report.ammo=ammo;console.log('AMMO',JSON.stringify(ammo));await exit();await tick(300);
+  // (B) Manual Vulcan, stage 3: the aircraft arrives, nothing fires by itself, the Vulcan button appears; holding it and dragging the crosshair onto the
+  // helicopter fires (hits, kill); releasing stops the gun.
+  await start('navalDuel',3);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);
+  await touch('touchStart',[{x:300,y:150}]);await tick(40);await touch('touchEnd');await tick(200);
+  const K=await page.evaluate(()=>{const b=window.__island.data.config.minigames.navalDuel;return {ws:b.render.worldScale,sp:b.render.enemySpacing/b.combat.laneSpacing};});
+  const angles=(p,a)=>({yaw:Math.atan2(a.z-p.z,a.x-p.x),pitch:Math.atan2(Math.max(0,a.h)*.32,Math.max(.01,Math.hypot((a.x-p.x)*K.ws,(a.z-p.z)*K.sp)))});
+  const advanceManual=()=>page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<10;i++)s.debug.drive(.02,{skyMode:'manual'});});
+  let inRange=0;for(let t=0;t<40&&inRange<15;t++){await advanceManual();await tick(50);s=await snap();if(s.air?.some(a=>a.state!=='down'&&Math.hypot(a.x-s.playerShip.x,a.z-s.playerShip.z)<=135))inRange++;}
+  s=await snap();const sky={shotsBeforeHold:s.vulcan?.shots,inRangeFrames:inRange,button:await page.locator('.naval-vulcan').isVisible(),manual:s.vulcan?.manual};await capture('vulcan-button');
+  assert.ok(inRange>=15,'an aircraft stayed in range for 3 s of game time');assert.equal(sky.shotsBeforeHold,0,'no Vulcan shot without the button');assert.equal(sky.button,true,'the Vulcan button is on screen');
+  const vb=await center('.naval-vulcan');await touch('touchStart',[vb]);await tick(60);s=await snap();assert.ok(s.sky?.held,'holding the button opens the sky crosshair');
+  let dx=0,dy=0,onTargetFrames=0,firstOn=null,trace=[];const DEG=180/Math.PI;
+  for(let i=0;i<160;i++){const a=s.air?.find(a=>a.state!=='down');if(!a)break;const want=angles(s.playerShip,a),yawErr=Math.atan2(Math.sin(want.yaw-s.sky.yaw),Math.cos(want.yaw-s.sky.yaw))*DEG,pitchErr=(want.pitch-s.sky.pitch)*DEG;
+   // A thumb controller: big errors use the held turn (past the dead band), small ones the fine zone; up/down is pitch.
+   dx=Math.abs(yawErr)>3?Math.sign(yawErr)*Math.min(70,24+Math.abs(yawErr)):yawErr/.12;dy=-Math.max(-70,Math.min(70,pitchErr/.16));
+   await touch('touchMove',[{x:vb.x+dx,y:vb.y+dy}]);await tick(50);s=await snap();
+   if(s.vulcan.onTarget){onTargetFrames++;firstOn??=s.time;}if(i%10===0)trace.push({t:+s.time.toFixed(2),yawErr:+yawErr.toFixed(1),pitchErr:+pitchErr.toFixed(1),on:s.vulcan.onTarget,shots:s.vulcan.shots,hits:s.vulcan.hits});
+   if(onTargetFrames===4)await capture('vulcan-aim');if(s.vulcan.kills>0)break;}
+  s=await snap();Object.assign(sky,{onTargetFrames,shotsHeld:s.vulcan.shots,hits:s.vulcan.hits,kills:s.vulcan.kills,belt:s.belt,secondsToDown:s.vulcan.kills?+(s.time-firstOn).toFixed(1):null,crosshair:s.hud?.sky||null,trace});
+  if(s.vulcan.kills)await capture('vulcan-down');
+  await touch('touchEnd');await tick(60);const shotsAtRelease=(await snap()).vulcan.shots;await tick(600);s=await snap();sky.shotsAfterRelease=s.vulcan.shots-shotsAtRelease;sky.heldAfter=Boolean(s.sky);
+  report.sky=sky;console.log('SKY',JSON.stringify(sky));
+  assert.ok(sky.onTargetFrames>0,'the crosshair reached the helicopter');assert.ok(sky.shotsHeld>0&&sky.hits>0,'held on target: shots and hits');assert.equal(sky.kills,1,'the helicopter is shot down');
+  assert.equal(sky.shotsAfterRelease,0,'releasing the button stops the gun');assert.equal(sky.heldAfter,false);
+  await exit();
+ }
  return report;
 });

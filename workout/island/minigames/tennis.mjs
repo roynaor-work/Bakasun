@@ -106,7 +106,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     state.serveMeter=0;state.serveMeterDirection=1;state.tossProgress=0;state.serveZone='red';state.manualMovement=false;if(!state.faults)state.faultMark=null;
     state.players.forEach(player=>{player.assistTravel=0;player.swing=0;player.contactPoint=null;player.preparing=false;player.running=false;player.serving=false;});
     Object.assign(state.ball, { x: 0, y: c.serveHeight, z: state.players[state.server].z, vx: 0, vy: 0, vz: 0, bounces: 0, lastHitter: state.server });
-    state.landing = null; state.contact = null; state.shot = null; emit('ready');
+    state.landing = null; state.contact = null; state.shot = null;if(M)state.hitMeter=hitMeter(null,false); emit('ready');
   }
   function point(winner, reason) {
     if (!['rally','serve','toss'].includes(state.phase)) return;
@@ -306,7 +306,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
         const meter=serveMeterAt(state.phaseTime,config.serve.tossSeconds);state.serveMeter=meter.value;state.serveMeterDirection=meter.direction;state.tossProgress=t/config.serve.tossSeconds;
         const green=config.serve.green[difficulty]+(safeRanks.serve-1)*config.serve.rankGreenBonus,distance=Math.abs(state.serveMeter-.5);
         state.serveZone=distance<=green/2?'green':distance<=(green+config.serve.yellowWidth)/2?'yellow':'red';
-        if(state.server===1&&state.phaseTime>=config.serve.tossSeconds*.45)shoot(1);
+        if(state.server===1&&state.phaseTime>=config.serve.tossSeconds*.45){shoot(1);if(M)state.hitMeter=hitMeter(input.aim,input.prepare);/* the bar for the serve return starts clean on the very first rally frame, not with the previous rally's needle */}
       }else{b.y=config.serve.handHeight;if(state.server===1&&state.phaseTime>=Math.max(.25,rules.serveWait-config.serve.tossSeconds*.45)){state.phase='toss';state.phaseTime=0;emit('toss');}}
       return;
     }

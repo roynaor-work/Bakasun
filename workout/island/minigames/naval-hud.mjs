@@ -1,6 +1,6 @@
 import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-8';
 import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-8';
-import {NAVAL_AIR_LIFT,NAVAL_AIR_WING} from './naval-air.mjs?v=island-v2-20261107-8';
+import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-8';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -58,12 +58,46 @@ function feedbackIcon(p,kind,q,u){
   else if(kind==='repair'||kind==='full'){p.strokeStyle='#73e7aa';p.beginPath();p.moveTo(-8,0);p.lineTo(8,0);p.moveTo(0,-8);p.lineTo(0,8);p.stroke();}
   else if(kind==='mine'){p.strokeStyle='#d69bf4';p.beginPath();p.arc(0,0,6,0,TAU);p.stroke();for(let i=0;i<6;i++){const a=i*TAU/6;p.beginPath();p.moveTo(Math.cos(a)*7,Math.sin(a)*7);p.lineTo(Math.cos(a)*11,Math.sin(a)*11);p.stroke();}}
   else if(kind==='resupply'){p.fillStyle='#ffd36e';p.beginPath();p.roundRect(-4,-9,8,15,3);p.fill();}
+  else if(kind==='supply'||kind==='empty'){p.fillStyle=kind==='empty'?'#ff8a6a':'#ffb060';p.strokeStyle='#103847';p.lineWidth=1.4;p.beginPath();p.roundRect(-9,-6,18,14,3);p.fill();p.stroke();p.strokeStyle='#103847';p.beginPath();p.moveTo(0,-6);p.lineTo(0,8);p.moveTo(-9,1);p.lineTo(9,1);p.stroke();}
   p.restore();
 }
 
 /** 11/11/2026: an arrow on the screen edge toward something that left the picture (landing mark, aircraft). */
 function edgeArrow(p,hint,color,size=11){p.save();p.translate(hint.x,hint.y);p.rotate(hint.angle);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=2;p.lineJoin='round';p.beginPath();p.moveTo(size,0);p.lineTo(-size*.6,-size*.7);p.lineTo(-size*.25,0);p.lineTo(-size*.6,size*.7);p.closePath();p.fill();p.stroke();p.restore();}
 function planeMark(p,x,y,color='#ffd2a6'){p.save();p.translate(x,y);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(0,-9);p.lineTo(2.2,-2);p.lineTo(11,1);p.lineTo(11,3.5);p.lineTo(2.2,2.2);p.lineTo(1.4,7);p.lineTo(4.5,9);p.lineTo(4.5,10.5);p.lineTo(-4.5,10.5);p.lineTo(-4.5,9);p.lineTo(-1.4,7);p.lineTo(-2.2,2.2);p.lineTo(-11,3.5);p.lineTo(-11,1);p.lineTo(-2.2,-2);p.closePath();p.fill();p.stroke();p.restore();}
+/** 11/11/2026 ammo limit: the loaded shells (or the selected weapon's stock) as icon, count and bar under the hull panel, the Vulcan belt beside it,
+ * a plain line when empty, the supply buoy as a ring on the water with an edge arrow when it is out of the picture. */
+export function drawNavalAmmoHud(p,m,balance,project,width,height){
+  const state=m.ammoState,mags=m.magazines;if(!state||!mags)return null;
+  const index=m.ammoIndex||0,count=index===0?m.loaded:m.ammo[index],max=index===0?mags.ammo[0]:(m.settings?.ammunition?.[index]||1),color=state.level==='empty'?'#ff7a66':state.level==='low'?'#ffb060':'#8edcc7';
+  const shown={level:state.level,count,max,buoys:0,buoyArrow:false,message:null};
+  p.save();glass(p,16,72,196,30,10);
+  // Shell icon, count over magazine, bar.
+  p.save();p.translate(36,87);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(-4,7);p.lineTo(-4,-3);p.quadraticCurveTo(-4,-9,0,-9);p.quadraticCurveTo(4,-9,4,-3);p.lineTo(4,7);p.closePath();p.fill();p.stroke();p.restore();
+  p.direction='ltr';p.textAlign='left';p.font='bold 13px sans-serif';p.fillStyle='#f3e2b3';p.fillText(`${count}/${max}`,48,92);
+  bar(p,100,83,70,7,count,max,color);
+  // Vulcan belt beside it when the gun exists.
+  if(m.vulcan&&Number.isFinite(m.belt)){const bc=m.belt<=0?'#ff7a66':m.belt<=30?'#ffb060':'#ffe27a';p.fillStyle=bc;p.fillRect(178,80,3,12);p.fillRect(183,80,3,12);p.fillRect(188,80,3,12);bar(p,176,95,30,4,m.belt,mags.belt,bc);shown.belt=m.belt;}
+  p.restore();
+  // Supply buoy on the water and the message.
+  for(const b of m.buoys||[]){const q=project(b.x,b.z,.2),hint=navalEdgeHint(q,width,height,30);shown.buoys++;
+    if(hint){edgeArrow(p,hint,'#ffb060',12);shown.buoyArrow=true;continue;}
+    p.save();p.strokeStyle='#ffb060';p.lineWidth=2;p.setLineDash([5,4]);p.beginPath();p.ellipse(q.x,q.y,22,10,0,0,TAU);p.stroke();p.setLineDash([]);
+    p.fillStyle='#3d2c1ff0';panel(p,q.x-26,q.y-34,52,18,5);p.fillStyle='#ffd9a6';p.font='bold 11px sans-serif';p.textAlign='center';p.direction='rtl';p.fillText('אספקה',q.x,q.y-21);p.restore();}
+  if(state.level==='empty'&&(m.buoys?.length||index===0)){const text=index===0?'נגמרה התחמושת, אוספים אספקה':'הנשק הזה נגמר, בוחרים נשק אחר';shown.message=text;p.save();p.font='bold 14px sans-serif';const w=p.measureText(text).width+28,x=width/2-w/2,y=height-128;p.fillStyle='#3d1f1af0';panel(p,x,y,w,30,9);p.strokeStyle='#ff8a6a88';p.lineWidth=1;p.stroke();p.fillStyle='#ffe0d6';p.textAlign='center';p.direction='rtl';p.fillText(text,width/2,y+20);p.restore();}
+  return shown;
+}
+/** Manual Vulcan: the sky crosshair where the held drag points (yellow and filled when inside the hit cone of an aircraft). */
+export function drawNavalSkyHud(p,m,balance,project,width,height){
+  const sky=m.sky,v=m.vulcan;if(!sky||!v)return null;
+  const target=(m.air||[]).find(a=>a.id===v.target&&a.state!=='down'),dist=target?navalSkyAngles(m.playerShip,target,balance).dist:110,pt=navalSkyPoint(m.playerShip,sky,dist,balance),q=project(pt.x,pt.z,Math.max(0,pt.h)*NAVAL_AIR_LIFT);
+  const hint=navalEdgeHint(q,width,height,30);if(hint){edgeArrow(p,hint,'#ffe27a',12);return {x:null,y:null,edge:true,onTarget:Boolean(v.onTarget)};}
+  p.save();p.strokeStyle=v.onTarget?'#ffe27a':'#f6f2e6';p.lineWidth=v.onTarget?2.6:1.8;p.lineCap='round';p.beginPath();p.arc(q.x,q.y,13,0,TAU);p.stroke();
+  for(const [sx,sy]of [[-1,0],[1,0],[0,-1],[0,1]]){p.beginPath();p.moveTo(q.x+sx*7,q.y+sy*7);p.lineTo(q.x+sx*19,q.y+sy*19);p.stroke();}
+  if(v.onTarget){p.fillStyle='#ffe27a';p.beginPath();p.arc(q.x,q.y,3.5,0,TAU);p.fill();}
+  if(v.firing){p.fillStyle='#ffe27a66';p.beginPath();p.arc(q.x,q.y,22+Math.abs(Math.sin(m.time*40))*4,0,TAU);p.fill();}
+  p.restore();return {x:Math.round(q.x),y:Math.round(q.y),edge:false,onTarget:Boolean(v.onTarget),firing:Boolean(v.firing)};
+}
 /** Vulcan panel (heat, kills) while aircraft are about, a ring on the gun's target, edge arrows for aircraft out of the picture. */
 export function drawNavalAirHud(p,m,balance,project,width,height){
   const v=m.vulcan,air=m.air||[];if(!v||!air.length&&!(v.heat>0))return null;
@@ -81,6 +115,7 @@ export function drawNavalAirHud(p,m,balance,project,width,height){
   const x=width-278,y=16,w=104;glass(p,x,y,w,50,12);planeMark(p,x+18,y+25);
   bar(p,x+36,y+14,58,7,v.heat,1,v.overheated?'#ff9a5c':v.firing?'#ffe27a':'#8edcc7');
   p.fillStyle='#f3e2b3';p.font='bold 13px sans-serif';p.direction='ltr';p.textAlign='left';p.fillText('×'+String(v.kills||0),x+36,y+42);
+  if(v.manual&&!v.held&&air.some(a=>a.state!=='down')){p.fillStyle='#ffd2a6';p.font='bold 10px sans-serif';p.textAlign='right';p.direction='rtl';p.fillText('לחצו וולקן',x+w-8,y+42);}
   if(v.firing){p.fillStyle='#ffe27a';p.beginPath();p.arc(x+86,y+38,4+Math.abs(Math.sin(m.time*40))*2,0,TAU);p.fill();}
   return shown;
 }
@@ -125,6 +160,10 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   // 11/11/2026 spin aim: when the landing mark leaves the picture (the turret turned faster than the camera), an arrow on the edge says where it is.
   if(m.aiming&&m.prediction&&!m.prediction.guided&&navalAimSpin()){const pr=m.prediction,at=pr.contact||pr.landing,q=project(at.x,at.z,0),hint=navalEdgeHint(q,width,height,28);if(hint){edgeArrow(p,hint,navalArcColor(navalMarkKind(pr),balance.aimLook||{}),13);shown.landingArrow={x:Math.round(hint.x),y:Math.round(hint.y),behind:hint.behind};}}
   if(m.vulcan)shown.air=drawNavalAirHud(p,m,balance,project,width,height);
+  shown.ammo=drawNavalAmmoHud(p,m,balance,project,width,height);shown.sky=drawNavalSkyHud(p,m,balance,project,width,height);
+  // 11/11/2026 enemy base: a fortress icon with the base's health bar and the count of main targets left, under the mission panel.
+  const bh=m.baseHealth;if(bh&&missionRect){const x=missionRect.x-16,y=missionRect.y+missionRect.h+6,w=missionRect.w+32;glass(p,x,y,w,26,9);p.save();p.translate(x+16,y+13);p.fillStyle='#e3d2a5';p.strokeStyle='#103847';p.lineWidth=1;p.beginPath();p.moveTo(-8,7);p.lineTo(-8,-3);p.lineTo(-5,-3);p.lineTo(-5,-6);p.lineTo(-2,-6);p.lineTo(-2,-3);p.lineTo(2,-3);p.lineTo(2,-6);p.lineTo(5,-6);p.lineTo(5,-3);p.lineTo(8,-3);p.lineTo(8,7);p.closePath();p.fill();p.stroke();p.restore();
+   bar(p,x+32,y+9,w-72,8,bh.hp,bh.max,bh.hp/bh.max<.35?'#ff9a5c':'#e39b88');p.fillStyle='#f3e2b3';p.font='bold 12px sans-serif';p.direction='ltr';p.textAlign='right';p.fillText(`${bh.total-bh.left}/${bh.total}`,x+w-8,y+18);shown.base={hp:+(bh.hp/bh.max).toFixed(2),left:bh.left,total:bh.total};}
   return shown;
 }
 

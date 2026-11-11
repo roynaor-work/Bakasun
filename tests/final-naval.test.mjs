@@ -117,3 +117,54 @@ test('air audio: ignores other sound names, needs an unlocked context, start the
  audio.play('vulcanStart');audio.setPaused(true);assert.ok(!audio.metrics().looping,'pause ends the loop');assert.equal(audio.play('vulcanStart'),false);audio.setPaused(false);
  audio.dispose();assert.equal(audio.metrics().disposed,true);assert.equal(audio.play('vulcanStart'),false);
 });
+
+// ---- 11/11/2026 phase 2 (Roy, phone): ammo limit and manual Vulcan ----
+import {navalAmmoLimit,navalMagazines,navalLoad,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalBuoyDrift,navalAmmoState,navalSupplyConfig} from '../workout/island/minigames/naval-supply.mjs';
+import {navalAirManual,navalSkyAngles,navalSkyError,navalSkyPoint} from '../workout/island/minigames/naval-air.mjs';
+
+test('ammo limit: flag, magazines from the stage stock (12 to 24 loaded shells), belt, state levels, buoy spot inside the bounds, collect reloads from stock',()=>{
+ assert.equal(navalAmmoLimit('?dev=1'),true);assert.equal(navalAmmoLimit('?navalAmmo=0'),false);
+ const m1=navalMagazines(nb.levels[0],nb),m3=navalMagazines(nb.levels[2],nb),m12=navalMagazines(nb.levels[11],nb);
+ assert.deepEqual(m1.ammo,[13,3,10,6,8,3]);assert.equal(m3.ammo[0],17);assert.equal(m12.ammo[0],18);assert.equal(m1.belt,160);
+ assert.equal(navalMagazines({ammunition:[4,0,0,0,0,0]},nb).ammo[0],12,'never below the minimum');assert.equal(navalMagazines({ammunition:[90,0,0,0,0,0]},nb).ammo[0],24,'never above the maximum');
+ assert.equal(navalLoad(28,13),13);assert.equal(navalLoad(5,13),5,'a stock smaller than the magazine loads what there is');assert.equal(navalLoad(0,13),0);
+ assert.deepEqual(navalAmmoState(13,13,3),{fraction:1,level:'ok'});assert.equal(navalAmmoState(3,13,3).level,'low');assert.equal(navalAmmoState(0,13,3).level,'empty');
+ const c=navalSupplyConfig(nb);assert.equal(c.lowShells,3);assert.equal(c.collect,16);assert.deepEqual(c.refill,{guided:1,torpedo:4,mine:2,salvo:2});
+ assert.equal(navalSupplyNeeded(13,28,160,m1,[],nb),false);assert.equal(navalSupplyNeeded(3,15,160,m1,[],nb),true,'low shells with stock left');assert.equal(navalSupplyNeeded(3,3,160,m1,[],nb),false,'no stock to load: the emergency refill handles it, not a buoy');
+ assert.equal(navalSupplyNeeded(13,28,30,m1,[],nb),true,'low belt');assert.equal(navalSupplyNeeded(3,15,160,m1,[{x:0,z:0}],nb),false,'one buoy at a time');
+ assert.equal(navalSupplyNeeded(7,28,160,m1,[],nb,true),true,'after a sinking below the wave share');assert.equal(navalSupplyNeeded(9,28,160,m1,[],nb,true),false);
+ const r=seededRandom(7);for(let i=0;i<50;i++){const b=navalBuoySpot({x:60,z:0,heading:Math.PI/2},r,nb.movement,nb);assert.ok(b.x>=nb.movement.minX&&b.x<=nb.movement.maxX&&b.z>=nb.movement.minZ&&b.z<=nb.movement.maxZ);const d=Math.hypot(b.x-60,b.z);assert.ok(d>=30&&d<=70.01,`distance ${d}`);}
+ const ammo=[2,0,3,6,8,3],got=navalCollect(ammo,2,20,m1,nb.levels[0],nb);assert.equal(got.loaded,2,'reload cannot exceed the stock');assert.deepEqual(ammo,[2,1,7,6,8,3]);assert.deepEqual(got.added,[0,1,4,0,0,0]);assert.equal(got.belt,140);
+ assert.equal(navalBuoyReached({x:60,z:0},{x:70,z:10},nb),true);assert.equal(navalBuoyReached({x:60,z:0},{x:80,z:0},nb),false);
+ const buoy={x:120,z:0,born:0};assert.equal(navalBuoyDrift(buoy,{x:60,z:0},0,.5,1,nb),false,'waits driftAfter');assert.equal(navalBuoyDrift(buoy,{x:60,z:0},5,.5,10,nb),false,'does not drift while shells are loaded');
+ assert.equal(navalBuoyDrift(buoy,{x:60,z:0},0,.5,10,nb),true);assert.ok(Math.abs(buoy.x-112)<1e-9&&buoy.drifting);
+});
+
+test('ammo limit in the model: the stock keeps the stage counts, the magazine empties and a buoy appears, sailing into it reloads, a stranded ship gets the buoy drifted to it; v20 counts with the flag off',()=>{
+ const m=createNavalModel({config,balance:nb,level:1,seed:3,random:seededRandom(3)});
+ assert.deepEqual(m.ammo,nb.levels[0].ammunition,'stock unchanged');assert.equal(m.loaded,13);assert.equal(m.belt,null,'no Vulcan on stage 1, no belt');assert.equal(m.ammoState.level,'ok');
+ let shots=0;for(let i=0;i<2000&&m.loaded>3;i++){m.update(.02,m.cooldowns[0]<=0?{ammoIndex:0,aimYaw:1.2,aimElevation:30,aimPower:1,fireRelease:true}:{});}
+ m.update(.02,{});shots=nb.levels[0].ammunition[0]-m.ammo[0];assert.equal(m.loaded,3);assert.equal(shots,10);assert.equal(m.buoys.length,1,'a buoy at the low mark (checked on the next frame)');assert.equal(m.lastFeedback.kind,'supply');
+ for(let i=0;i<400&&m.loaded>0;i++)m.update(.02,m.cooldowns[0]<=0?{ammoIndex:0,aimYaw:1.2,aimElevation:30,aimPower:1,fireRelease:true}:{});
+ assert.equal(m.loaded,0);assert.equal(m.ammoState.level,'empty');const fired=m.fired;m.update(.02,{ammoIndex:0,aimYaw:1.2,aimElevation:30,aimPower:1,fireRelease:true});assert.equal(m.fired,fired,'nothing loaded, nothing fires');
+ // Passive ship: the buoy drifts over within a few seconds and reloads from the stock.
+ for(let i=0;i<400&&m.loaded<=0;i++)m.update(.02,{});
+ assert.ok(m.loaded>0,'reloaded');assert.equal(m.supplies,1);assert.equal(m.buoys.length,0);assert.equal(m.lastAction.type,'supply');assert.equal(m.loaded,Math.min(13,m.ammo[0]));
+ assert.equal(createNavalModel({config,balance:nb,level:1,seed:3,random:seededRandom(3)}).magazines.ammo[0],13);
+});
+
+test('manual Vulcan: flag, sky angles, cone error, crosshair point; the model fires only while held and the headless drive keeps the automatic gun',()=>{
+ assert.equal(navalAirManual('?dev=1'),true);assert.equal(navalAirManual('?navalAirAim=auto'),false);
+ const player={x:60,z:0},a={x:160,z:0,h:22};const t=navalSkyAngles(player,a,nb);assert.ok(Math.abs(t.yaw)<1e-9&&t.dist===100&&t.pitch>.3&&t.pitch<.6,JSON.stringify(t));
+ assert.ok(Math.abs(navalSkyError({yaw:0,pitch:t.pitch},t))<1e-9);assert.ok(Math.abs(navalSkyError({yaw:6*Math.PI/180,pitch:t.pitch},t)-6)<1e-9);assert.ok(Math.abs(navalSkyError({yaw:Math.PI*2-.1,pitch:t.pitch},{yaw:.1,pitch:t.pitch})-.2*180/Math.PI)<1e-9,'wraps');
+ const p=navalSkyPoint(player,{yaw:0,pitch:t.pitch},100,nb);assert.ok(Math.abs(p.x-160)<1e-9&&Math.abs(p.h-22)<1e-6,'the crosshair point at the aircraft distance is the aircraft');
+ const make=()=>createNavalModel({config,balance:nb,level:3,seed:4,random:seededRandom(4)});
+ // Headless: no input layer, the gun stays automatic (v20 contract).
+ const auto=make();for(let i=0;i<4500&&!auto.vulcan.kills;i++)auto.update(.02,{});assert.ok(auto.vulcan.kills>=1);assert.equal(auto.vulcan.manual,false);
+ // Manual, never held: zero shots; held with the crosshair on the aircraft: shots, hits and a kill within a few seconds; held off target: shots but no hits.
+ const idle=make();for(let i=0;i<4500;i++)idle.update(.02,{skyMode:'manual'});assert.equal(idle.vulcan.shots,0,'no shots without the button');assert.equal(idle.vulcan.manual,true);assert.ok(idle.vulcan.spawned>=1);
+ const held=make();let first=null,down=null;for(let i=0;i<4500&&down===null;i++){const a=held.air.find(a=>a.state!=='down');const input={skyMode:'manual'};if(a){first??=held.time;const tt=navalSkyAngles(held.playerShip,a,nb);Object.assign(input,{skyHeld:true,skyYaw:tt.yaw,skyPitch:tt.pitch});}held.update(.02,input);if(held.vulcan.kills)down=held.time;}
+ assert.ok(down!==null&&down-first<4,`downed in ${(down-first).toFixed(1)} s`);assert.ok(held.vulcan.hits>0&&held.belt<160,'belt spent');
+ const off=make();for(let i=0;i<3000;i++){const a=off.air.find(a=>a.state!=='down');const input={skyMode:'manual'};if(a){const tt=navalSkyAngles(off.playerShip,a,nb);Object.assign(input,{skyHeld:true,skyYaw:tt.yaw+Math.PI/2,skyPitch:tt.pitch});}off.update(.02,input);}
+ assert.ok(off.vulcan.shots>0&&off.vulcan.hits===0,'firing 90 degrees off hits nothing');assert.equal(off.vulcan.onTarget,false);
+});

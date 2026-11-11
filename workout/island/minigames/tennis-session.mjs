@@ -2,7 +2,9 @@ import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-8';
 import {gameContext} from './context.mjs?v=island-v2-20261107-8';
 import {createTennis} from './tennis.mjs?v=island-v2-20261107-8';
 import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-8';
-import {createTennisControls,applyTennisSample} from './tennis-controls.mjs?v=island-v2-20261107-8';
+import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-8';
+// v15: with the sweeping return meter the stroke is judged the moment the finger lands (like the serve); the model still receives the real dt.
+const applyTennisSample=(model,sample,dt)=>applySampleBase(model,sample,dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});
 import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-8';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
@@ -36,7 +38,7 @@ export function startTennis(ctx){
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();fallback();},{signal:abort.signal});
  createTennisView(canvas,viewConfig).then(loaded=>{if(disposed){loaded.dispose();return;}view=loaded;last=0;frame=requestAnimationFrame(tick);}).catch(()=>{if(!disposed){fallback();last=0;frame=requestAnimationFrame(tick);}});
  function tick(at){if(disposed)return;const dt=last?Math.min((at-last)/1000,balance.simulation.maxDelta):0,frameMs=last?at-last:0;last=at;
-  if(!paused&&!document.hidden){applyTennisSample(model,input.sample(),dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});/* v15: the tap is judged at the press, like the serve */
+  if(!paused&&!document.hidden){applyTennisSample(model,input.sample(),dt);
    view.observeFrame(frameMs);if(view.metrics().quality>=balance.render.fallbackQuality)fallback();
   }
   audio.sync();view.render(model.getState(),paused?0:dt*(stopLeft>0?.12:1));stopLeft=Math.max(0,stopLeft-dt);

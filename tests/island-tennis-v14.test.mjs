@@ -18,7 +18,7 @@ test('tennis v14: a near-net drop shot is answered (the point does not end at on
 
 test('tennis v14: the drop floats longer (slower, higher arc) and the flag turns the fix off',async()=>{
   const cfg=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.tennis;
-  assert.ok(cfg.v9.dropFix.flightScale>=1.3);assert.equal(cfg.v9.dropFix.enabled,true);
+  assert.ok(cfg.v9.dropFix.flightScale>=1.1);/* v15 (final-fix): 1.15, measured so the drop crosses the net at about 1.1-2.1 m instead of 2.9-3.4 m with 1.6; see verification/final-fix-fable/REPORT-tennis.md */assert.equal(cfg.v9.dropFix.enabled,true);
   const session=await readFile(new URL('../workout/island/minigames/tennis-session.mjs',import.meta.url),'utf8');
   assert.ok(session.includes("'tennisDrop')==='0'"));
 });

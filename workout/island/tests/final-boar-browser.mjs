@@ -106,16 +106,16 @@ await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)r
 //    every 40 ms to 60 px, then holds 3 game frames. Per-frame crosshair deltas in px: first non-zero step (dead-zone jump), max step, speed scatter during the hold
 //    (standard deviation of delta/dt over the mean), longest stall in frames while tilted, frames that moved without a new pointermove (= updated every frame, not per event),
 //    pointermoves received by the stick vs sent (HUD hit-testing), renderer re-sizes during the drag.
-await resetAim();await step('stickSmooth',async()=>{if(!hasBtn)return noBtn;const o={x:150,y:290};await frame.evaluate(()=>window.__boar.record(true));
- await touch('touchStart',[{...o,id:1}]);let sent=0;for(let i=1;i<=60;i++){await touch('touchMove',[{x:o.x+i,y:o.y,id:1}]);sent++;await wait(40);}
- await framesLater(3,30000);const tr=await frame.evaluate(()=>window.__boar.trace());await touch('touchEnd',[{x:o.x+60,y:o.y,id:1}]);await framesLater(1);await frame.evaluate(()=>window.__boar.record(false));
- const W=844,dz=(await st()).stickR===80?.08:.12,R=(await st()).stickR;const fr=tr.filter(f=>f.s);const d=[];for(let i=1;i<fr.length;i++)d.push({px:(fr[i].x-fr[i-1].x)*W/2,dt:fr[i].dt,m:fr[i].m-fr[i-1].m,tilt:fr[i].m});
+await frame.evaluate(()=>window.__boar.aim(-.5,-.05));await step('stickSmooth',async()=>{if(!hasBtn)return noBtn;const o={x:150,y:290};await frame.evaluate(()=>window.__boar.record(true));
+ await touch('touchStart',[{...o,id:1}]);let sent=0;for(let i=1;i<=24;i++){await touch('touchMove',[{x:o.x+i,y:o.y,id:1}]);sent++;await wait(40);}
+ await framesLater(8,30000);await wait(400);const tr=await frame.evaluate(()=>window.__boar.trace());await touch('touchEnd',[{x:o.x+24,y:o.y,id:1}]);await framesLater(1);await frame.evaluate(()=>window.__boar.record(false));
+ const W=844,dz=(await st()).stickR===80?.08:.12,R=(await st()).stickR;const fr=tr.filter(f=>f.s&&f.x<.94);const d=[];for(let i=1;i<fr.length;i++)d.push({px:(fr[i].x-fr[i-1].x)*W/2,dt:fr[i].dt,m:fr[i].m-fr[i-1].m,tilt:fr[i].m});
  const moving=d.filter(x=>x.px>1e-6),first=moving[0]?+moving[0].px.toFixed(2):null,maxStep=moving.length?+Math.max(...moving.map(x=>x.px)).toFixed(2):null;
  // stall: consecutive frames without motion once the finger is past the dead zone (sent moves count as tilt proxy: 1 px per move)
  let stall=0,run=0;for(const x of d){if(x.tilt>R*dz+2&&x.px<=1e-6){run++;stall=Math.max(stall,run);}else run=0;}
- const hold=d.slice(-3).filter(x=>x.px>0),sp=hold.map(x=>x.px/x.dt),mean=sp.reduce((s,v)=>s+v,0)/(sp.length||1),sd=Math.sqrt(sp.reduce((s,v)=>s+(v-mean)**2,0)/(sp.length||1));
+ const hold=d.filter(x=>x.m===0&&x.tilt>=sent),sp=hold.map(x=>x.px/x.dt),mean=sp.reduce((s,v)=>s+v,0)/(sp.length||1),sd=Math.sqrt(sp.reduce((s,v)=>s+(v-mean)**2,0)/(sp.length||1));
  const framesNoMove=moving.filter(x=>x.m===0).length,received=fr.length?fr.at(-1).m-fr[0].m:0,res=fr.length?fr.at(-1).r-fr[0].r:0;
- return {frames:fr.length,sentMoves:sent,receivedMoves:received,firstStepPx:first,maxStepPx:maxStep,stallFrames:stall,holdSpeedMean:+mean.toFixed(1),holdSpeedSd:+sd.toFixed(2),framesMovedWithoutMove:framesNoMove,resChanges:res,deltas:d.map(x=>+x.px.toFixed(2))};});
+ return {frames:fr.length,holdFrames:hold.length,sentMoves:sent,receivedMoves:received,firstStepPx:first,maxStepPx:maxStep,stallFrames:stall,holdSpeedMean:+mean.toFixed(1),holdSpeedSd:+sd.toFixed(2),framesMovedWithoutMove:framesNoMove,resChanges:res,deltas:d.map(x=>+x.px.toFixed(2))};});
 // K) the weapon-switch button: tap cycles the weapon (two owned weapons), fires nothing
 await step('weaponButton',async()=>{await frame.evaluate(()=>{const s=window.__boar.state.save;s.weapons.shotgun=s.weapons.shotgun||1;window.__boar.setSave(s);});const a=await st();const b=await frame.evaluate(()=>{const e=document.getElementById('weapon-btn');if(!e)return null;const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2,r.width,r.height];});
  if(!b)return {skipped:'no weapon button in this mode'};await touch('touchStart',[{x:b[0],y:b[1],id:4}]);await wait(120);await touch('touchEnd',[{x:b[0],y:b[1],id:4}]);await wait(500);const c=await st();return {size:[b[2],b[3]],weaponBefore:a.current,weaponAfter:c.current};});
