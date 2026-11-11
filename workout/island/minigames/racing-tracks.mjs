@@ -172,6 +172,15 @@ function codexTrack(spec, base) {
 
 export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : RACING_TRACK_SET === 'v2' ? CLASSIC_LIST.map(track => codexTrack(CODEX_V2.find(c => c.id === track.id), track)) : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
 
+// racing-deep-m2 league balance: on the Codex circuits the computer's corner law (v = sqrt(aiCorner / curvature)) held it 20% behind a casual player (the player's tyres
+// only bleed speed gradually), so a slow driver without upgrades won every race. aiCorner is scaled on the v2 set so the computer's lap sits level with a casual driver
+// in season 1 and ahead of a casual driver without upgrades in seasons 2-3 (tools/racing-ai-pace.mjs, racing-league-sim.mjs). ?racingAiCorner= tunes it (1 = the old law).
+// Measured (pace tool, computer best lap / casual lap, seasons 1/2/3 = tiers 0/2/4): the old law 1.20 / 1.10 / 1.03; x1.8 everywhere 1.01 / 0.92 / 0.86 (seasons 2-3 too strong,
+// since aiSpeed and the league rating already climb 15% a season while upgrades give a player about 4.5%); a flat 30.6 + 0.6 a tier: 1.01 / 0.97 / 0.96 (league: a slow driver
+// without upgrades champion in season 1 and 5th in season 2). Tier 0 is also the regular stages 1-6 that skilled driving must win outright (racing-physics tests), so the
+// table keeps tier 0 gentler and lands seasons 2-3 at 0.97: [tier 0..4]. ?racingAiCorner=a,b,c,d,e tunes it; ?racingAiCorner=0 restores the old law.
+const AI_CORNER_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingAiCorner');
+const V2_AI_CORNER = RACING_TRACK_SET !== 'v2' || AI_CORNER_PARAM === '0' ? null : (AI_CORNER_PARAM && AI_CORNER_PARAM.split(',').length === 5 ? AI_CORNER_PARAM.split(',').map(Number) : [23, 27, 31.8, 32.4, 33]);
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
 const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
 export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index) => {
@@ -179,7 +188,7 @@ export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index)
   const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
     timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
-    aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: 17 + tier * 2.2,
+    aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: V2_AI_CORNER ? V2_AI_CORNER[tier] : 17 + tier * 2.2,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
     // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
     timeLimit: Math.min(295, Math.ceil(TRACK_LENGTHS.get(circuit.id) * laps / 18 + 25)), // 295: the app result envelope is 300 s
