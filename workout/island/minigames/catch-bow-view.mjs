@@ -16,18 +16,44 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
   const shadowTex = glowTexture('#000000');
 
   // ----- the launcher and hands, fixed to the camera like a bow -----
+  // A chunky cartoon net launcher: receiver, barrel, bell muzzle with the wound net, pistol grip and fore-grip, a strap,
+  // two gloved hands in the uniform's blue. Lower right of the screen, the muzzle never reaches the sight at the centre.
   const rig = new T.Group(); camera.add(rig);
   const launcher = new T.Group(); rig.add(launcher);
-  const tube = new T.Mesh(new T.CylinderGeometry(.045, .055, .62, 14), mat('#3a4150', {metalness: .5, roughness: .4})); tube.rotation.x = Math.PI / 2; tube.position.set(0, 0, -.2); launcher.add(tube);
-  const muzzle = new T.Mesh(new T.CylinderGeometry(.075, .06, .08, 16), mat('#d9b44a', {metalness: .6, roughness: .3})); muzzle.rotation.x = Math.PI / 2; muzzle.position.set(0, 0, -.52); launcher.add(muzzle);
+  const metal = mat('#3a4150', {metalness: .55, roughness: .4}), navy = mat('#223a6b', {roughness: .6}), brass = mat('#d9b44a', {metalness: .65, roughness: .3}), rubber = mat('#1c1f27', {roughness: .95});
+  const body = new T.Mesh(new T.BoxGeometry(.11, .13, .4, 1, 1, 1), navy); body.position.set(0, -.01, -.06); launcher.add(body);
+  const bodyTop = new T.Mesh(new T.CylinderGeometry(.055, .055, .4, 12, 1, false, 0, Math.PI), navy); bodyTop.rotation.x = Math.PI / 2; bodyTop.rotation.z = Math.PI; bodyTop.position.set(0, .055, -.06); launcher.add(bodyTop);
+  const stripe = new T.Mesh(new T.BoxGeometry(.114, .03, .3), mat('#f2f4f8', {roughness: .6})); stripe.position.set(0, -.02, -.06); launcher.add(stripe);
+  const tube = new T.Mesh(new T.CylinderGeometry(.045, .05, .5, 14), metal); tube.rotation.x = Math.PI / 2; tube.position.set(0, .01, -.48); launcher.add(tube);
+  const band = new T.Mesh(new T.TorusGeometry(.052, .012, 8, 18), brass); band.position.set(0, .01, -.3); launcher.add(band);
+  const muzzle = new T.Mesh(new T.CylinderGeometry(.095, .065, .14, 16, 1, true), metal); muzzle.rotation.x = -Math.PI / 2; muzzle.position.set(0, .01, -.76); launcher.add(muzzle);
+  const muzzleRing = new T.Mesh(new T.TorusGeometry(.095, .014, 8, 20), brass); muzzleRing.position.set(0, .01, -.83); launcher.add(muzzleRing);
   const netTex = netTexture();
-  const loadedNet = new T.Mesh(new T.SphereGeometry(.07, 12, 8), new T.MeshBasicMaterial({map: netTex, transparent: true, alphaTest: .2, color: '#f6f9ff'})); loadedNet.position.set(0, 0, -.56); launcher.add(loadedNet);
-  const grip = new T.Mesh(new T.BoxGeometry(.05, .12, .07), mat('#2b2f3a')); grip.position.set(0, -.08, -.05); launcher.add(grip);
-  const stock = new T.Mesh(new T.BoxGeometry(.06, .08, .22), mat('#5a4631')); stock.position.set(0, -.03, .16); launcher.add(stock);
-  const skin = '#d9a07a', sleeve = '#2f4f9a';
-  const hand = (x, y, z, r = .055) => { const g = new T.Group(); const palm = new T.Mesh(new T.SphereGeometry(r, 12, 10), mat(skin)); palm.scale.set(1, .8, 1.2); g.add(palm); const arm = new T.Mesh(new T.CylinderGeometry(r * .9, r * 1.2, .42, 10), mat(sleeve)); arm.position.set(0, -.18, .14); arm.rotation.x = .5; g.add(arm); g.position.set(x, y, z); return g; };
-  launcher.add(hand(0, -.1, -.22), hand(.02, -.11, .08, .05));
-  launcher.position.set(.26, -.28, -.75); launcher.rotation.set(.02, -.06, .06);
+  const loadedNet = new T.Group(); loadedNet.position.set(0, .01, -.86); launcher.add(loadedNet);
+  const netCore = new T.Mesh(new T.SphereGeometry(.072, 12, 10), mat('#f08c1c', {roughness: .8})); loadedNet.add(netCore);
+  const netWrap = new T.Mesh(new T.SphereGeometry(.082, 14, 10), new T.MeshBasicMaterial({map: netTex, transparent: true, alphaTest: .2, color: '#f6f9ff', side: T.DoubleSide})); loadedNet.add(netWrap);
+  const rail = new T.Mesh(new T.BoxGeometry(.03, .025, .22), metal); rail.position.set(0, .085, -.1); launcher.add(rail);
+  const bead = new T.Mesh(new T.SphereGeometry(.012, 8, 6), brass); bead.position.set(0, .07, -.7); launcher.add(bead);
+  const grip = new T.Mesh(new T.BoxGeometry(.05, .15, .07), rubber); grip.position.set(0, -.12, .04); grip.rotation.x = .3; launcher.add(grip);
+  const foreGrip = new T.Mesh(new T.BoxGeometry(.045, .1, .06), rubber); foreGrip.position.set(0, -.06, -.42); foreGrip.rotation.x = .15; launcher.add(foreGrip);
+  const strapCurve = new T.CatmullRomCurve3([new T.Vector3(.02, -.06, .16), new T.Vector3(.1, -.3, .14), new T.Vector3(.16, -.5, -.02), new T.Vector3(.14, -.62, -.34), new T.Vector3(.02, -.2, -.5)]);
+  const strap = new T.Mesh(new T.TubeGeometry(strapCurve, 24, .014, 6, false), mat('#8a6a3c', {roughness: .9})); launcher.add(strap);
+  const glove = mat('#2b4c9c', {roughness: .7}), cuffMat = mat('#1a2d5c', {roughness: .7});
+  /** A gloved hand: palm, four curled fingers and a thumb around a grip, a cuff with a gold stripe, the sleeve leading out of the frame. */
+  const hand = (x, y, z, {curl = 1, armDir = [.3, -1, .5], scale = 1} = {}) => {
+    const g = new T.Group(); g.position.set(x, y, z); g.scale.setScalar(scale);
+    const palm = new T.Mesh(new T.SphereGeometry(.052, 12, 10), glove); palm.scale.set(1.05, .75, 1.3); g.add(palm);
+    for (let i = 0; i < 4; i++) { const f = new T.Mesh(new T.CapsuleGeometry(.014, .05, 3, 8), glove); f.position.set(-.012 + i * .016, .03 + curl * .01, .02 - i * .003); f.rotation.x = -.9 * curl; f.rotation.z = (i - 1.5) * .06; g.add(f); }
+    const thumb = new T.Mesh(new T.CapsuleGeometry(.015, .04, 3, 8), glove); thumb.position.set(-.045, .02, -.01); thumb.rotation.z = .9; thumb.rotation.x = -.4; g.add(thumb);
+    const cuff = new T.Mesh(new T.CylinderGeometry(.056, .06, .05, 12), cuffMat), stripe = new T.Mesh(new T.CylinderGeometry(.061, .061, .012, 12), brass);
+    const arm = new T.Mesh(new T.CylinderGeometry(.058, .07, .5, 12), mat('#2f4f9a', {roughness: .7}));
+    const dir = new T.Vector3(...armDir).normalize();
+    for (const [m, d] of [[cuff, .07], [stripe, .095], [arm, .36]]) { m.position.copy(dir).multiplyScalar(d); m.quaternion.setFromUnitVectors(new T.Vector3(0, 1, 0), dir.clone().negate()); g.add(m); }
+    return g;
+  };
+  launcher.add(hand(.005, -.15, .05, {armDir: [.45, -1, .55]}), hand(-.01, -.1, -.42, {armDir: [-.55, -1, .35], scale: .95}));
+  const LAUNCHER_AT = {x: .3, y: -.3, z: -.62};
+  launcher.position.set(LAUNCHER_AT.x, LAUNCHER_AT.y, LAUNCHER_AT.z); launcher.rotation.set(.02, -.1, .08);
   rig.visible = false;
 
   // ----- thief dressing (same as v5) and the caught nets -----
@@ -59,6 +85,21 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
   const leafTex = canvasTexture(32, 32, g => { g.fillStyle = '#e8d8a8'; g.beginPath(); g.ellipse(16, 16, 12, 5, .6, 0, 7); g.fill(); });
   const leaves = []; for (let i = 0; i < 10; i++) { const s = new T.Sprite(new T.SpriteMaterial({map: leafTex, transparent: true, depthWrite: false, opacity: .85})); s.scale.set(.28, .28, 1); s.visible = false; scene.add(s); leaves.push({s, x: 0, y: 0, z: 0, life: 0}); }
 
+  // ----- feedback: target-ring bursts on a catch, a dust ring on a miss, a halo on the thief under the sight, wind flags -----
+  const ringGeo = new T.RingGeometry(.72, .9, 40);
+  const bursts = Array.from({length: 3}, (_, i) => { const m = new T.Mesh(ringGeo, new T.MeshBasicMaterial({color: '#ffffff', transparent: true, opacity: 0, depthTest: false, depthWrite: false, side: T.DoubleSide, fog: false})); m.renderOrder = 11; m.visible = false; m.userData = {t: 0, delay: i * .09, gold: false}; scene.add(m); return m; });
+  const missRing = new T.Mesh(new T.RingGeometry(.6, .78, 32), new T.MeshBasicMaterial({color: '#c9a86a', transparent: true, opacity: 0, depthWrite: false, side: T.DoubleSide})); missRing.rotation.x = -Math.PI / 2; missRing.visible = false; missRing.userData = {t: 9}; scene.add(missRing);
+  const halo = new T.Sprite(new T.SpriteMaterial({map: glowTexture('#9fe4ff'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, depthTest: false, opacity: 0, fog: false})); halo.renderOrder = 7; halo.scale.set(2.6, 3.2, 1); halo.visible = false; scene.add(halo);
+  /** A streamer flag on a pole at the sidewalk: hangs limp in calm air, stands out and flutters with the wind, towards where it blows. */
+  const flagMat = mat('#ff7a2a', {side: T.DoubleSide, roughness: .8}), flagGeo = new T.PlaneGeometry(.9, .24, 6, 1); flagGeo.translate(.45, 0, 0);
+  const flags = [[-1.5, 5.3], [3.5, -5.3]].map(([dx, z]) => {
+    const g = new T.Group(); const pole = new T.Mesh(new T.CylinderGeometry(.03, .035, 3.4, 8), metal); pole.position.y = 1.7; g.add(pole);
+    const knob = new T.Mesh(new T.SphereGeometry(.06, 8, 6), brass); knob.position.y = 3.42; g.add(knob);
+    const pivot = new T.Group(); pivot.position.y = 3.25; g.add(pivot); const cloth = new T.Mesh(flagGeo, flagMat); pivot.add(cloth);
+    g.visible = false; scene.add(g); return {g, pivot, cloth, dx, z, phase: Math.random() * 6};
+  });
+  const flagPos = flagGeo.attributes.position, flagRest = flagPos.array.slice();
+
   // ----- camera -----
   const cam = {fov: BOW.fovIdle, yaw: 0, pitch: BOW.pitchBase, blend: 0, from: null, draw: 0, holdSway: {yaw: 0, angle: 0}};
   const look = new T.Vector3(), eye = new T.Vector3();
@@ -76,7 +117,7 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     const c = engine.criminalAt(engine.clock);
     // the sight: where the wind-free arc passes the thief's distance (an archer's sight pin)
     sightLocal = null;
-    if (show) { const full = engine.trajectory(engine.aimNow().angle, engine.aimNow().power, engine.aim.tool, {withWind: false, yaw: engine.aimNow().yaw, stopAtObstacle: false}); const at = full.path.find(p => p.x >= c.x) || full.path[full.path.length - 1]; sightLocal = {x: at.x, y: Math.max(.05, at.y), z: at.z || 0}; w(sightLocal.x, sightLocal.z, tmp); sight.position.set(tmp.x, sightLocal.y, tmp.z); sight.scale.setScalar(.12 + Math.abs(c.x) * .03); sight.visible = true; }
+    if (show) { const full = engine.trajectory(engine.aimNow().angle, engine.aimNow().power, engine.aim.tool, {withWind: false, yaw: engine.aimNow().yaw, stopAtObstacle: false}); const at = full.path.find(p => p.x >= c.x) || full.path[full.path.length - 1]; sightLocal = {x: at.x, y: Math.max(.05, at.y), z: at.z || 0}; w(sightLocal.x, sightLocal.z, tmp); sight.position.set(tmp.x, sightLocal.y, tmp.z); sight.scale.setScalar(.12 + Math.abs(c.x) * .03); sight.visible = false; } // the HUD's .catch-bow-sight is the one sight; the sprite only keeps the point
     else sight.visible = false;
     const showArc = show && (pr.help >= 1 || pr.fraction < 1);
     dots.forEach((d, i) => {
@@ -108,8 +149,9 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     enter() {
       mode = 'aim'; rig.visible = true; officer.root.visible = false; cam.blend = 0; cam.from = camera.position.clone(); cam.fromLook = cam.from.clone().add(camera.getWorldDirection(tmpV).multiplyScalar(10)); cam.fromFov = camera.fov;
       placeActor(officer, 0, 0); thief.root.visible = true; for (const l of leaves) l.life = 0;
+      for (const fl of flags) { fl.g.visible = true; w(engine.level.dist + fl.dx, fl.z, tmp); fl.g.position.set(tmp.x, .16, tmp.z); fl.g.rotation.y = yaw0; }
     },
-    leave() { mode = 'idle'; rig.visible = false; officer.root.visible = true; sight.visible = false; dots.forEach(d => { d.visible = false; }); landRing.visible = false; endFlight(); },
+    leave() { mode = 'idle'; rig.visible = false; officer.root.visible = true; sight.visible = false; dots.forEach(d => { d.visible = false; }); landRing.visible = false; halo.visible = false; for (const fl of flags) fl.g.visible = false; for (const b of bursts) b.visible = false; missRing.visible = false; endFlight(); },
     /** How far the thief is, in metres, for the HUD label. */
     thiefDistance() { const c = engine.criminalAt(engine.clock); return Math.hypot(c.x, c.z); },
     /** World point of the sight pin (null when there is none). */
@@ -127,11 +169,13 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
           w(e.x, e.z || 0, tmp); sparks.emit(tmp.x, e.y, tmp.z, e.perfect ? 46 : 26, {speed: 5, up: 4, color: e.perfect ? [1, .85, .3] : [.7, .9, 1], gravity: 5, life: 1.2});
           w(cx, (e.z || 0) + .3, tmp); flash.visible = true; flash.position.set(tmp.x, 1.3, tmp.z); flash.userData.t = 0; flash.scale.setScalar(.5);
           cam.shake = (cam.shake || 0) + (e.perfect ? .9 : .55); endFlight();
+          w(cx, (e.z || 0), tmp); for (const b of bursts) { b.visible = true; b.userData.t = 0; b.userData.gold = Boolean(e.perfect); b.position.set(tmp.x, e.perfect ? 1.55 : 1.05, tmp.z); b.material.color.set(e.perfect ? '#ffd25e' : '#9fe4ff'); }
         } else if (e.type === 'bossHit') { caughtNets[idx].userData.fade = .001; th.stagger = .001; cam.shake = (cam.shake || 0) + .5; sparks.emit(th.actor.root.position.x, 1.2, th.actor.root.position.z, 20, {speed: 5, up: 3, color: [1, .6, .3], life: .8}); }
         else if (e.type === 'blocked') { w(e.x, e.z || 0, tmp); sparks.emit(tmp.x, e.y, tmp.z, 14, {speed: 3, up: 2.5, color: [1, .9, .7], life: .6}); dust.emit(tmp.x, e.y, tmp.z, 8, {speed: 1.5, up: 1.2, color: [.7, .65, .55], gravity: 1}); endFlight(); groundNet.visible = false; }
         else if (e.type === 'miss' || e.type === 'hidden') {
           w(e.x, e.z || 0, tmp); dust.emit(tmp.x, .1, tmp.z, 14, {speed: 2.4, up: 1.6, color: [.75, .68, .55], gravity: 2}); groundNet.visible = true; groundNet.position.set(tmp.x, .05, tmp.z);
           const R = toolOf(s.flight.tool).radius; groundNet.scale.setScalar(Math.max(.5, R * 1.1)); groundTimer = 1.4; endFlight();
+          missRing.visible = true; missRing.userData.t = 0; missRing.position.set(tmp.x, .07, tmp.z);
           if (e.near && e.kind !== 'hidden') th.dodge = .001;
         }
         else if (e.type === 'crew') { const n = thieves[e.index]; if (n) { n.actor.root.visible = true; n.arrive = 0; n.fromX = e.x + 9; } }
@@ -186,13 +230,29 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
         if (l.life <= 0) { if (Math.abs(wind) > .05 && Math.random() < .04) { l.x = 3 + Math.random() * (engine.level.dist + 4); l.z = -Math.sign(wind) * (4 + Math.random() * 2); l.y = .3 + Math.random() * 2; l.life = 3 + Math.random() * 2; l.s.visible = true; } continue; }
         l.life -= dt; l.z += wind * 1.6 * dt; l.y += Math.sin(l.life * 5) * .4 * dt; w(l.x, l.z, tmp); l.s.position.set(tmp.x, l.y, tmp.z); l.s.material.rotation += dt * 3; if (l.life <= 0 || Math.abs(l.z) > 7) { l.life = 0; l.s.visible = false; }
       }
+      // target-ring bursts face the camera and grow outwards, gold for a head hit
+      for (const b of bursts) {
+        if (!b.visible) continue; b.userData.t += dt; const u = (b.userData.t - b.userData.delay) / .75;
+        if (u < 0) { b.material.opacity = 0; continue; } if (u >= 1) { b.visible = false; continue; }
+        b.scale.setScalar((.25 + u * (b.userData.gold ? 2.6 : 2)) * (1 + b.userData.delay * 2)); b.material.opacity = (1 - u) * .9; b.lookAt(camera.position);
+      }
+      if (missRing.visible) { missRing.userData.t += dt; const u = missRing.userData.t / .7; if (u >= 1) missRing.visible = false; else { missRing.scale.setScalar(.4 + u * 2.4); missRing.material.opacity = (1 - u) * .7; } }
+      // a soft halo on the thief while the sight is close to him (helps at 24 to 32 m)
+      { const c = engine.criminalAt(tn), near = sightLocal && phase === 'aim' ? clamp(1 - Math.hypot((sightLocal.z - c.z) / 1.6, (sightLocal.y - 1.1) / 1.4), 0, 1) : 0;
+        halo.material.opacity = damp(halo.material.opacity, near * .4, 8, dt); halo.visible = halo.material.opacity > .02; if (halo.visible) { const th = thieves[cur].actor.root; halo.position.set(th.position.x, 1.05, th.position.z); } }
+      // wind flags: the cloth points with the wind, stands out more in a stronger wind, ripples along its length
+      for (const fl of flags) {
+        if (!fl.g.visible) continue; const k = clamp(Math.abs(wind) / 1.6, 0, 1); fl.phase += dt * (3 + k * 7);
+        fl.pivot.rotation.y = (wind >= 0 ? -Math.PI / 2 : Math.PI / 2) + Math.sin(fl.phase * .7) * .12 * k; fl.pivot.rotation.z = -(1 - k) * 1.25 + Math.sin(fl.phase) * .06 * k;
+        for (let i = 0; i < flagPos.count; i++) { const x = flagRest[i * 3]; flagPos.setZ(i, Math.sin(fl.phase * 1.3 + x * 7) * .06 * k * (x / .9)); } flagPos.needsUpdate = true;
+      }
       // camera: first person; the aim turns the head, drawing zooms in, a release kicks
       const a = engine.aimNow();
       const drawn = phase === 'aim' ? cam.draw : 0;
       cam.yawT = -(a.yaw || 0); cam.pitchT = BOW.pitchBase + clamp((a.angle - 20) * .25, -6, 10);
       cam.yaw = damp(cam.yaw, cam.yawT, 12, dt); cam.pitch = damp(cam.pitch, cam.pitchT, 10, dt);
       // far targets get a longer lens so the thief stays readable (44 degrees at 14 m, 30 at 32 m), the draw zooms a little more
-      const dist = Math.max(1, Math.hypot(engine.criminalAt(tn).x, engine.criminalAt(tn).z)), fovFar = clamp(44 - (dist - 14) * (14 / 18), 30, 44);
+      const dist = Math.max(1, Math.hypot(engine.criminalAt(tn).x, engine.criminalAt(tn).z)), fovFar = clamp(44 - (dist - 14) * (16 / 18), 28, 44);
       cam.fov = damp(cam.fov, lerp(fovFar, fovFar - 8, drawn), 8, dt);
       cam.kick = Math.max(0, (cam.kick || 0) - dt * 3); cam.shake = Math.max(0, (cam.shake || 0) - dt * 2.2);
       const sh = cam.shake * cam.shake * .5, ts = performance.now() / 1000;
@@ -204,12 +264,14 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
       if (cam.from && cam.blend < 1) { cam.blend = Math.min(1, cam.blend + dt / BOW.blendSeconds); const k = smooth(cam.blend); eye.lerpVectors(cam.from, eye, k); look.lerpVectors(cam.fromLook, look, k); fov = lerp(cam.fromFov, fov, k); if (cam.blend >= 1) cam.from = null; }
       camera.position.copy(eye); camera.up.set(0, 1, 0); camera.lookAt(look); camera.fov = fov; camera.updateProjectionMatrix();
       // the launcher draws back and dips while the string is pulled, then springs forward on release
-      launcher.position.z = -.75 + drawn * .16 + cam.kick * -.08; launcher.position.y = -.28 - drawn * .03 + Math.sin(ts * 1.7) * .004; launcher.rotation.x = .02 + drawn * .05 - cam.kick * .12;
-      loadedNet.visible = phase === 'aim' || phase === 'throw' || phase === 'rearm' || phase === 'flee';
+      // the launcher draws back and tilts up 5 degrees while the string is pulled, kicks up and back on release, and breathes a little
+      launcher.position.z = LAUNCHER_AT.z + drawn * .14 + cam.kick * .1; launcher.position.y = LAUNCHER_AT.y - drawn * .02 + Math.sin(ts * 1.7) * .004 + cam.kick * .02; launcher.position.x = LAUNCHER_AT.x + Math.sin(ts * 1.1) * .003;
+      launcher.rotation.x = .02 + drawn * .09 + cam.kick * .16; launcher.rotation.y = -.1 + drawn * .03;
+      loadedNet.visible = phase === 'aim' || phase === 'throw' || phase === 'rearm' || phase === 'flee'; loadedNet.scale.setScalar(1 + drawn * .18); netWrap.rotation.y += dt * .6;
     },
     debugCam() { return {blend: cam.blend, from: cam.from ? cam.from.toArray() : null, eye: eye.toArray(), look: look.toArray(), fov: camera.fov, mode}; },
     project(x, y, z = 0) { w(x, z, tmp); tmpV.set(tmp.x, y, tmp.z).project(camera); return {x: tmpV.x, y: tmpV.y, visible: tmpV.z < 1}; },
-    dispose() { camera.remove(rig); for (const o of [projectile, trail, landRing, sight, flash, groundNet, ...dots, ...caughtNets, ...leaves.map(l => l.s)]) scene.remove(o); },
+    dispose() { camera.remove(rig); for (const o of [projectile, trail, landRing, sight, flash, groundNet, halo, missRing, ...bursts, ...flags.map(f => f.g), ...dots, ...caughtNets, ...leaves.map(l => l.s)]) scene.remove(o); },
   };
   return api;
 }
