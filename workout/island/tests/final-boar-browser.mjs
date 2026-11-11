@@ -14,7 +14,7 @@ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:tru
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(180000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 const log=(...a)=>console.error('['+MODE+']',...a);
-const query='?dev=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20&boarStick=v20':'');
+const query='?dev=1&adapt=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20&boarStick=v20':'');// adapt=1 keeps the adaptive resolution on under qa, as on the phone
 await page.goto(server.url+query,{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
 await page.locator('[data-action=avatar-start]').tap();

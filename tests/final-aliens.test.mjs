@@ -115,8 +115,8 @@ test('alienMove: eases to full speed in about 0.25 s, leans with the velocity, g
  assert.ok(t90!==null&&t90>=.12&&t90<=.35,`90% of top speed after ${t90} s`);assert.ok(maxStep<=mcfg.maxSpeed/60+.01,'no jumps: a frame never moves more than top speed allows');assert.ok(peakBank>=.8,`lean ${peakBank}`);
  const q={x:100,vx:mcfg.maxSpeed,bank:1,recoil:0};let glide=0;for(let i=0;i<60;i++){const x0=q.x;alienMoveStep(q,{},1/60,b,360,mcfg);glide+=q.x-x0;}
  assert.ok(glide>8&&glide<120,`glide ${glide}`);assert.equal(q.vx,0);assert.ok(Math.abs(q.bank)<.05,'the lean settles when the ship stops');
- // v20 for comparison: constant velocity after a 0.15 s ramp, no lean at all.
- const o={x:180,vx:0,bank:0};let lean=0;for(let i=0;i<60;i++){moveAlienPlayer(o,{moveX:1,flight:true},1/60,balance,360);lean=Math.max(lean,Math.abs(o.bank||0));}assert.equal(lean,0);
+ // v20 for comparison: a 0.15 s linear ramp to a constant velocity, no glide after release.
+ const o={x:180,vx:0,bank:0};for(let i=0;i<60;i++)moveAlienPlayer(o,{moveX:1,flight:true},1/60,balance,360);const ox=o.x;moveAlienPlayer(o,{},1/60,balance,360);assert.equal(o.vx,0);assert.equal(o.x,ox,'v20 stops dead');
 });
 test('alienMove: a drag target is reached smoothly (critically damped, no overshoot beyond a few units) and bounds hold',()=>{
  const b={playerRadius:balance.playerRadius},p={x:100,vx:0,bank:0,recoil:0};let over=0;for(let i=0;i<90;i++){alienMoveStep(p,{x:220,flight:true},1/60,b,360,mcfg);over=Math.max(over,p.x-220);}
