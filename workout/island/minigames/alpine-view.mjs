@@ -335,7 +335,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
   // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
-  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0});
+  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0});
   for (const list of Object.values(pools)) for (const g of list) g.visible = false;
   vfx.warmUp();
   try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
