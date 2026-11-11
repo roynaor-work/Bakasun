@@ -1,0 +1,493 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'"><title>run_ball · מדידת תנועה</title><link rel="stylesheet" href="../../style.css"><script type="module" src="../../preview.mjs"></script></head><body><a class="skip" href="#main">לתוכן</a><header><div class="eyebrow" dir="ltr">hoops-v9</div><h1 dir="ltr">run_ball</h1><p><span class="score large green">90</span> מתוך 100 · 0.667 שניות · גובה 1.69 מטר</p><nav><a href="../report.html">לכל הקליפים</a><a href="hoops-v9--run_ball.json">נתוני הקליפ</a><a href="../../preview.html?clip=hoops-v9--run_ball">תצוגת שלד בתלת־ממד</a></nav></header><main id="main"><section><h2>מה הוריד את הציון</h2><ul class="reason-list"><li>קפיצות פוזה: LeftLeg בזמן 0.2 ש׳; קפיצת סיבוב שקולה 13.785 מעלות ב־60Hz (צהוב)</li><li>כניסה ויציאה מול המתנה: פער ב־יציאה מול המתנה; יחס חריגה 2.4147 (צהוב)</li></ul><p class="muted">כיסוי: 100%. לא כל מדד חל על כל קליפ; הסטטוס והראיות מפורטים למטה.</p></section><section><h2>שמונה פריימים</h2><p class="muted">תצוגת שלד אבחונית שנבנתה מהפריימים הנמדדים. צד שמאל בכחול, ימין בסגול, כדור בכתום. מיקום השורש ממורכז לצפייה; מיקומו בעולם כתוב בכל פריים.</p><a href="../sheets/hoops-v9--run_ball.svg"><img class="sheet" src="../sheets/hoops-v9--run_ball.svg" alt="שמונה פוזות שלד מדודות לקליפ run_ball" width="1280" height="742"></a></section><section><h2>המדדים והראיות</h2><div class="table-wrap"><table><thead><tr><th>מדד</th><th>מצב</th><th>ערך</th><th>ציון</th><th>סף ופרטי מדידה</th></tr></thead><tbody><tr><th scope="row">החלקת רגליים</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0.002 height ratio</td><td>97</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;החלקת רגליים&quot;,
+    &quot;unit&quot;: &quot;height ratio&quot;,
+    &quot;green&quot;: 0.01,
+    &quot;yellow&quot;: 0.035,
+    &quot;weight&quot;: 18,
+    &quot;description&quot;: &quot;Maximum horizontal sole displacement from the first sample of each declared support window, divided by character height. Inferred support is used only when no windows were supplied.&quot;
+  },
+  &quot;value&quot;: 0.001649,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 96.7,
+  &quot;evidence&quot;: {
+    &quot;coordinateSpace&quot;: &quot;authored reference world (simulation-owned)&quot;,
+    &quot;supportSource&quot;: &quot;declared&quot;,
+    &quot;windows&quot;: 2,
+    &quot;samples&quot;: 27,
+    &quot;maxDriftMeters&quot;: 0.002786,
+    &quot;p95SpeedMetersPerSecond&quot;: 0.167167,
+    &quot;worst&quot;: {
+      &quot;bone&quot;: &quot;LeftFoot&quot;,
+      &quot;t&quot;: 0.016667,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 0.2,
+      &quot;driftMeters&quot;: 0.002786
+    }
+  }
+}</pre></td></tr><tr><th scope="row">חדירה לרצפה</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0 height ratio</td><td>100</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;חדירה לרצפה&quot;,
+    &quot;unit&quot;: &quot;height ratio&quot;,
+    &quot;green&quot;: 0.005,
+    &quot;yellow&quot;: 0.02,
+    &quot;weight&quot;: 15,
+    &quot;description&quot;: &quot;Maximum depth of the supplied sole probe points and all skeletal joint centers below the declared floor plane, divided by height. Sole probes are not a mesh collision audit.&quot;
+  },
+  &quot;value&quot;: 0,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 100,
+  &quot;evidence&quot;: {
+    &quot;samples&quot;: 860,
+    &quot;floorY&quot;: 0,
+    &quot;probeKind&quot;: &quot;declared sole probes plus skeletal joint centers (no mesh surfaces)&quot;,
+    &quot;maxDepthMeters&quot;: 0,
+    &quot;worst&quot;: {
+      &quot;t&quot;: 0,
+      &quot;bone&quot;: &quot;LeftFoot&quot;,
+      &quot;depthMeters&quot;: 0,
+      &quot;y&quot;: 0.015
+    }
+  }
+}</pre></td></tr><tr><th scope="row">קפיצות פוזה</th><td><span class="badge yellow">צהוב</span></td><td dir="ltr">1.335 discontinuity ratio</td><td>73</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;קפיצות פוזה&quot;,
+    &quot;unit&quot;: &quot;discontinuity ratio&quot;,
+    &quot;green&quot;: 1,
+    &quot;yellow&quot;: 2.5,
+    &quot;weight&quot;: 18,
+    &quot;description&quot;: &quot;Maximum adjacent 60 Hz-equivalent step: root-relative marker displacement / 0.04 height, root-relative rotation / 15 degrees, or root translation / 0.08 height. A fast continuous action can also exceed this screening threshold.&quot;
+  },
+  &quot;value&quot;: 1.334676,
+  &quot;status&quot;: &quot;yellow&quot;,
+  &quot;score&quot;: 73.31,
+  &quot;evidence&quot;: {
+    &quot;adjacentPairs&quot;: 42,
+    &quot;observations&quot;: 714,
+    &quot;maxDegrees60Hz&quot;: 13.785035,
+    &quot;maxMarkerStepHeight60Hz&quot;: 0.053387,
+    &quot;maxRootStepHeight60Hz&quot;: 0.045365,
+    &quot;worst&quot;: {
+      &quot;ratio&quot;: 1.3346761594613616,
+      &quot;t&quot;: 0.2,
+      &quot;previousTime&quot;: 0.183333,
+      &quot;bone&quot;: &quot;LeftLeg&quot;,
+      &quot;markerStepHeight60Hz&quot;: 0.053387,
+      &quot;degrees60Hz&quot;: 3.235347
+    }
+  }
+}</pre></td></tr><tr><th scope="row">חריגות אנטומיות</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0 % affected frames</td><td>100</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;חריגות אנטומיות&quot;,
+    &quot;unit&quot;: &quot;% affected frames&quot;,
+    &quot;green&quot;: 0.5,
+    &quot;yellow&quot;: 3,
+    &quot;weight&quot;: 14,
+    &quot;description&quot;: &quot;Percentage of frames with elbow or knee flexion above 165 degrees, neck bend above 80 degrees, or a segment length changing by more than 5%. Optional calibrated hinge checks detect reverse knee flexion above 8 degrees. Conservative marker limits do not diagnose axial joint twist.&quot;
+  },
+  &quot;value&quot;: 0,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 100,
+  &quot;evidence&quot;: {
+    &quot;testedFrames&quot;: 43,
+    &quot;affectedFrames&quot;: 0,
+    &quot;checks&quot;: 731,
+    &quot;maxLimbFlexionDegrees&quot;: 119.300201,
+    &quot;maxRelativeSegmentLengthChange&quot;: 0,
+    &quot;hingeDirectionChecked&quot;: true,
+    &quot;axialTwistChecked&quot;: false,
+    &quot;violations&quot;: []
+  }
+}</pre></td></tr><tr><th scope="row">מגע בכדור</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0 height ratio</td><td>100</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;מגע בכדור&quot;,
+    &quot;unit&quot;: &quot;height ratio&quot;,
+    &quot;green&quot;: 0.015,
+    &quot;yellow&quot;: 0.05,
+    &quot;weight&quot;: 13,
+    &quot;description&quot;: &quot;Maximum absolute distance from the ball surface to the sampled, bone-transformed declared contact point, divided by height. Events are evaluated at their exact declared times by interpolation.&quot;
+  },
+  &quot;value&quot;: 0.000128,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 99.83,
+  &quot;evidence&quot;: {
+    &quot;radiusMeters&quot;: 0.12,
+    &quot;samples&quot;: 14,
+    &quot;missed&quot;: [],
+    &quot;contacts&quot;: [
+      {
+        &quot;t&quot;: 0.616667,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000216,
+        &quot;signedGapMeters&quot;: -0.000216,
+        &quot;centerDistanceMeters&quot;: 0.119784,
+        &quot;contactPoint&quot;: [
+          -0.312651,
+          0.917469,
+          3.085816
+        ],
+        &quot;ballCenter&quot;: [
+          -0.312358,
+          0.797704,
+          3.083684
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.05,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000157,
+        &quot;signedGapMeters&quot;: 0.000157,
+        &quot;centerDistanceMeters&quot;: 0.120157,
+        &quot;contactPoint&quot;: [
+          -0.287595,
+          0.917859,
+          0.503277
+        ],
+        &quot;ballCenter&quot;: [
+          -0.287164,
+          0.797704,
+          0.502569
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.093333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000137,
+        &quot;signedGapMeters&quot;: 0.000137,
+        &quot;centerDistanceMeters&quot;: 0.120137,
+        &quot;contactPoint&quot;: [
+          -0.278123,
+          0.859888,
+          0.711123
+        ],
+        &quot;ballCenter&quot;: [
+          -0.27788,
+          0.739752,
+          0.710559
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.65,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000116,
+        &quot;signedGapMeters&quot;: -0.000116,
+        &quot;centerDistanceMeters&quot;: 0.119884,
+        &quot;contactPoint&quot;: [
+          -0.304295,
+          0.944021,
+          3.246267
+        ],
+        &quot;ballCenter&quot;: [
+          -0.30429,
+          0.824139,
+          3.245552
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.573333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000094,
+        &quot;signedGapMeters&quot;: 0.000094,
+        &quot;centerDistanceMeters&quot;: 0.120094,
+        &quot;contactPoint&quot;: [
+          -0.320858,
+          0.859846,
+          2.875252
+        ],
+        &quot;ballCenter&quot;: [
+          -0.320836,
+          0.739752,
+          2.874995
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.083333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000075,
+        &quot;signedGapMeters&quot;: 0.000075,
+        &quot;centerDistanceMeters&quot;: 0.120075,
+        &quot;contactPoint&quot;: [
+          -0.280237,
+          0.87384,
+          0.663642
+        ],
+        &quot;ballCenter&quot;: [
+          -0.279843,
+          0.753769,
+          0.662757
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.583333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0.000012,
+        &quot;signedGapMeters&quot;: -0.000012,
+        &quot;centerDistanceMeters&quot;: 0.119988,
+        &quot;contactPoint&quot;: [
+          -0.319112,
+          0.873756,
+          2.923374
+        ],
+        &quot;ballCenter&quot;: [
+          -0.319074,
+          0.753769,
+          2.922971
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.3,
+          0.95,
+          0.26
+        ],
+        &quot;ballCenter&quot;: [
+          -0.3,
+          0.83,
+          0.26
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.016667,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.295773,
+          0.944139,
+          0.341069
+        ],
+        &quot;ballCenter&quot;: [
+          -0.295607,
+          0.824139,
+          0.341025
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.033333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.291214,
+          0.938278,
+          0.42205
+        ],
+        &quot;ballCenter&quot;: [
+          -0.291214,
+          0.818278,
+          0.42205
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.066667,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.283114,
+          0.89713,
+          0.583088
+        ],
+        &quot;ballCenter&quot;: [
+          -0.283114,
+          0.77713,
+          0.583088
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.6,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.316137,
+          0.89713,
+          3.00293
+        ],
+        &quot;ballCenter&quot;: [
+          -0.316137,
+          0.77713,
+          3.00293
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.633333,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.308579,
+          0.938278,
+          3.164438
+        ],
+        &quot;ballCenter&quot;: [
+          -0.308579,
+          0.818278,
+          3.164438
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      },
+      {
+        &quot;t&quot;: 0.666667,
+        &quot;bone&quot;: &quot;RightHand&quot;,
+        &quot;gapMeters&quot;: 0,
+        &quot;signedGapMeters&quot;: 0,
+        &quot;centerDistanceMeters&quot;: 0.12,
+        &quot;contactPoint&quot;: [
+          -0.3,
+          0.95,
+          3.326667
+        ],
+        &quot;ballCenter&quot;: [
+          -0.3,
+          0.83,
+          3.326667
+        ],
+        &quot;declaredLocalPoint&quot;: true
+      }
+    ],
+    &quot;contactDetailsTruncated&quot;: false,
+    &quot;coordinateSpace&quot;: &quot;authored reference world (simulation-owned)&quot;
+  }
+}</pre></td></tr><tr><th scope="row">כניסה ויציאה מול המתנה</th><td><span class="badge yellow">צהוב</span></td><td dir="ltr">2.415 continuity ratio</td><td>59</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;כניסה ויציאה מול המתנה&quot;,
+    &quot;unit&quot;: &quot;continuity ratio&quot;,
+    &quot;green&quot;: 1,
+    &quot;yellow&quot;: 3,
+    &quot;weight&quot;: 10,
+    &quot;description&quot;: &quot;Worst entry/exit mismatch to the best matching idle phase: RMS marker error / 0.04 height, RMS bone rotation / 25 degrees, or RMS endpoint velocity error / 0.75 height per second. Horizontal root translation is aligned; root height and body pose remain measurable.&quot;
+  },
+  &quot;value&quot;: 2.414689,
+  &quot;status&quot;: &quot;yellow&quot;,
+  &quot;score&quot;: 58.78,
+  &quot;evidence&quot;: {
+    &quot;entry&quot;: {
+      &quot;ratio&quot;: 2.4146894403533143,
+      &quot;t&quot;: 0,
+      &quot;idleTime&quot;: 2.366667,
+      &quot;markers&quot;: 17,
+      &quot;rmsPositionHeight&quot;: 0.096588,
+      &quot;rmsRotationDegrees&quot;: 38.069551,
+      &quot;rmsVelocityHeightPerSecond&quot;: 0.926566,
+      &quot;velocityEvaluated&quot;: true
+    },
+    &quot;exit&quot;: {
+      &quot;ratio&quot;: 2.4146894573139144,
+      &quot;t&quot;: 0.666667,
+      &quot;idleTime&quot;: 2.366667,
+      &quot;markers&quot;: 17,
+      &quot;rmsPositionHeight&quot;: 0.096588,
+      &quot;rmsRotationDegrees&quot;: 38.06955,
+      &quot;rmsVelocityHeightPerSecond&quot;: 0.689681,
+      &quot;velocityEvaluated&quot;: true
+    },
+    &quot;worstEndpoint&quot;: &quot;exit&quot;,
+    &quot;alignment&quot;: &quot;horizontal root translation; raw asset poses used when provided&quot;
+  }
+}</pre></td></tr><tr><th scope="row">מהירות גוף מול צעדים</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0 relative speed error</td><td>100</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;מהירות גוף מול צעדים&quot;,
+    &quot;unit&quot;: &quot;relative speed error&quot;,
+    &quot;green&quot;: 0.2,
+    &quot;yellow&quot;: 0.5,
+    &quot;weight&quot;: 8,
+    &quot;description&quot;: &quot;Relative difference between average root travel speed and the median backward support-foot sweep speed relative to the root. Cadence and implied stride lengths are also reported. In-place clips need an explicit reference travel scenario; stationary actions are not scored as locomotion.&quot;
+  },
+  &quot;value&quot;: 0,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 100,
+  &quot;evidence&quot;: {
+    &quot;rootSource&quot;: &quot;sampled presented root&quot;,
+    &quot;rootSpeedMetersPerSecond&quot;: 4.6,
+    &quot;observedRootSpeedMetersPerSecond&quot;: 4.6,
+    &quot;referenceRootSpeedMetersPerSecond&quot;: 4.6,
+    &quot;supportSource&quot;: &quot;declared&quot;,
+    &quot;backwardSweepSpeedMetersPerSecond&quot;: 4.6,
+    &quot;cadenceStepsPerSecond&quot;: 3,
+    &quot;impliedStrideMeters&quot;: 3.066667,
+    &quot;rootStrideMeters&quot;: 3.066667,
+    &quot;supportSweeps&quot;: [
+      {
+        &quot;bone&quot;: &quot;LeftFoot&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 0.2,
+        &quot;duration&quot;: 0.2,
+        &quot;sweepMeters&quot;: 0.92,
+        &quot;speedMetersPerSecond&quot;: 4.6
+      },
+      {
+        &quot;bone&quot;: &quot;RightFoot&quot;,
+        &quot;start&quot;: 0.333333,
+        &quot;end&quot;: 0.533333,
+        &quot;duration&quot;: 0.2,
+        &quot;sweepMeters&quot;: 0.92,
+        &quot;speedMetersPerSecond&quot;: 4.599999
+      }
+    ]
+  }
+}</pre></td></tr><tr><th scope="row">סימטריה</th><td><span class="badge green">ירוק</span></td><td dir="ltr">0.002 relative mismatch</td><td>99</td><td><pre>{
+  &quot;definition&quot;: {
+    &quot;label&quot;: &quot;סימטריה&quot;,
+    &quot;unit&quot;: &quot;relative mismatch&quot;,
+    &quot;green&quot;: 0.03,
+    &quot;yellow&quot;: 0.1,
+    &quot;weight&quot;: 4,
+    &quot;description&quot;: &quot;Maximum bilateral segment-length mismatch. Looping locomotion additionally compares reflected half-cycle leg markers; explicit pose symmetry compares simultaneous bilateral markers. One-sided actions retain unscored motion diagnostics, so a valid kick or dribble arm is not penalized for intentional asymmetry.&quot;
+  },
+  &quot;value&quot;: 0.001938,
+  &quot;status&quot;: &quot;green&quot;,
+  &quot;score&quot;: 98.71,
+  &quot;evidence&quot;: {
+    &quot;mode&quot;: &quot;gait&quot;,
+    &quot;modeSource&quot;: &quot;looping locomotion id rule; legs only&quot;,
+    &quot;structuralMismatch&quot;: 0,
+    &quot;segments&quot;: [
+      {
+        &quot;segment&quot;: &quot;Arm-ForeArm&quot;,
+        &quot;mismatch&quot;: 0
+      },
+      {
+        &quot;segment&quot;: &quot;ForeArm-Hand&quot;,
+        &quot;mismatch&quot;: 0
+      },
+      {
+        &quot;segment&quot;: &quot;UpLeg-Leg&quot;,
+        &quot;mismatch&quot;: 0
+      },
+      {
+        &quot;segment&quot;: &quot;Leg-Foot&quot;,
+        &quot;mismatch&quot;: 0
+      }
+    ],
+    &quot;motionRmsHeight&quot;: 0.001938,
+    &quot;worstMotion&quot;: {
+      &quot;t&quot;: 0.2,
+      &quot;errorHeight&quot;: 0.003619
+    },
+    &quot;bilateralPoseRmsHeightUnscored&quot;: 0.182864,
+    &quot;note&quot;: &quot;Motion is mirrored in a pelvis-centred body basis.&quot;
+  }
+}</pre></td></tr></tbody></table></div></section></main><footer>כלי אבחון תנועה · ציון התחושה הוא אומדן הנדסי לפי הספים, ואינו תחליף לביקורת חזותית. נתון חסר אינו מסומן כתקין.</footer></body></html>

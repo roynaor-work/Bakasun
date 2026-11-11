@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-11-08T08:44:23.341Z",
+  "node": "v24.22.1",
+  "platform": "linux",
+  "unitTests": {
+    "command": "node --test workout/island/design/motion-qa-v1/test/*.test.mjs",
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0
+  },
+  "artifacts": {
+    "libraries": 7,
+    "clips": 549,
+    "loadedArtifacts": 1649,
+    "localLinks": 5878,
+    "verifiedSourceRecords": 495,
+    "sourceBytes": 81481198,
+    "eightFrameImages": 549,
+    "loadedPackageFiles": 1671
+  },
+  "analysis": {
+    "fps": 60,
+    "elapsedSeconds": 9.83,
+    "cache": "warm immutable source cache",
+    "webAssemblyDisabled": true,
+    "method": "globalThis.WebAssembly=undefined before importing run.mjs and generate()",
+    "matchedComparisons": 19,
+    "comparisonRows": 362
+  },
+  "browser": {
+    "passed": true,
+    "clipCount": 549,
+    "comparisonCount": 362,
+    "viewportChecks": [
+      "1440x1000",
+      "390x844"
+    ],
+    "webAssemblyDisabled": true,
+    "remoteRequests": [],
+    "errors": [],
+    "failedRequests": []
+  },
+  "scope": {
+    "changes": "new files only under workout/island/design/motion-qa-v1/",
+    "existingRepositoryTests": "not run; sparse checkout excludes original suite and application code; existing tests unchanged"
+  },
+  "limits": [
+    "Skeleton and declared sole/contact points are audited; compressed mesh geometry and texture pixels are not decoded.",
+    "Reference-root paths describe the author scenario. Actual simulation speed/IK/blending are not executed.",
+    "Feeling score is a reproducible weighted diagnostic heuristic, not a perceptual or medical validation.",
+    "Missing applicable metadata is unavailable and earns zero points; not-applicable metrics are excluded. Coverage is shown."
+  ]
+}
