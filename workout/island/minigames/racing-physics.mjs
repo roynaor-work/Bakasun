@@ -20,6 +20,8 @@ function finite(value,fallback=0) { return Number.isFinite(Number(value)) ? Numb
  */
 export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',config={}}={}) {
   const stage={...getRacingStage(stageValue),...(config.stage||{})};
+  // racing-field-v1: config.field = extra backmarker cars (ids ai-5..), slower than the league drivers; not part of the league order. 0 = the old five-car grid.
+  const field=Math.max(0,Math.min(8,Math.floor(Number(config.field))||0));stage.opponents+=field;
   const seedUint=Number(seed)>>>0;
   const track=createTrack(stage), random=randomSource(seedUint), sector=track.length/track.checkpoints.length;
   const equipment=config.equipment||{};
@@ -30,7 +32,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
   const engineModel=config.engine!==false,ersOn=config.ers!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
-  const names=['אתם','אלמוג','טורקיז','שמש','ברקת'];
+  const names=['אתם','אלמוג','טורקיז','שמש','ברקת','נמר','סער','להב','רוח','גלעד'];
   const cars=Array.from({length:1+stage.opponents},(_,index)=>{
     const start=index===0 ? -(stage.grid-1)*4 : -(index<stage.grid?index-1:index)*4;
     const lane=index===0?0:index%2?2.8:-2.8;
@@ -41,7 +43,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,gearT:1,gearInit:false,rpm:.2,shiftT:0,charging:0,ersRate:0,ersUsed:0,ersHarvested:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
+      maxSpeed:stage.aiSpeed*skill*(drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:index>4?.9+random()*.06:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
   const state={phase:config.countdown===0?'racing':'countdown',countdown:config.countdown===0?0:3,time:0,elapsed:0,
