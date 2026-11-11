@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'">
+  <link rel="icon" href="data:,">
+  <title>המשחק בידיים · מעבדת תנועה בכדורסל 11</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.mjs"></script>
+</head>
+<body>
+  <header class="page-header">
+    <a class="brand" href="preview.html" aria-label="תצוגת תנועות כדורסל"><span class="brand-mark" aria-hidden="true">◉</span><span>מעבדת תנועה<span class="brand-sub">כדורסל / מהדורה 11</span></span></a>
+    <nav class="header-links" aria-label="מסמכי החבילה"><a href="REPORT.md">דוח מדידות ↗</a><a href="LICENSES.md">מקורות ורישיונות ↗</a></nav>
+  </header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">שליטה. קצב. תזמון.</p><h1>המשחק בידיים.</h1><p class="subtitle">שלושים מהלכים, שלושה מבני גוף. כל מגע וכל צעד ניתנים לבדיקה.</p></div><div class="edition"><b>30 × 3</b><span>ביצועים על דמויות בגובה מלא</span><span class="runtime-tag">ניגון מקומי · ללא WebAssembly</span></div></section>
+    <div class="workspace">
+      <aside class="library" aria-label="ספריית מהלכים">
+        <div class="library-heading"><h2>ספריית המהלכים</h2><span id="count">—</span></div>
+        <label class="sr-only" for="search">חיפוש מהלך</label><input id="search" type="search" placeholder="חיפוש מהלך…" autocomplete="off">
+        <div id="filters" class="filters" aria-label="סינון משפחת תנועה"></div>
+        <nav id="clips" aria-label="בחירת מהלך"></nav>
+        <p class="library-note">הדמויות והאנימציות נטענות מקובצי הריצה שבחבילה. הטבעת בגובה 3.05 מטר בכל מסלול.</p>
+      </aside>
+      <section class="review" aria-label="ניגון והשוואה">
+        <div class="review-heading"><div><p id="clip-id" class="eyebrow" dir="ltr">טוען ספרייה</p><h2 id="clip-title">מכינים את המגרש…</h2></div><span id="phase" class="phase">30Hz</span></div>
+        <div id="stage" class="stage"><canvas id="canvas" role="img" aria-label="אותו מהלך מנוגן על הרכז, הקיצוני והסנטר בשלושה מגרשים מול טבעות תקניות"></canvas><div class="lane-labels" aria-hidden="true"><span>רכז <b>1.88</b></span><span>קיצוני <b>1.98</b></span><span>סנטר <b>2.08</b></span></div><div id="status" class="status" role="status" aria-live="polite">טוען את שלוש הדמויות…</div><div class="stage-caption"><span>גובה הטבעת <b>3.05 מ׳</b></span><span>סוליה נטועה <i class="key-dot"></i></span></div></div>
+        <div class="transport"><button id="play" class="primary" aria-label="השהיה" disabled>Ⅱ</button><button id="restart" aria-label="נגן מהתחלה" title="מהתחלה">↺</button><label class="sr-only" for="scrub">זמן המהלך</label><input id="scrub" type="range" min="0" max="1" step="0.0001" value="0" dir="ltr"><output id="time" for="scrub" dir="ltr">0.00 / 0.00 s</output><label class="sr-only" for="speed">מהירות</label><select id="speed" aria-label="מהירות ניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></div>
+        <div class="view-controls"><div class="camera-controls" aria-label="זווית מצלמה"><button data-camera="angle" aria-pressed="true">אלכסון</button><button data-camera="front" aria-pressed="false">חזית</button><button data-camera="side" aria-pressed="false">צד</button><button data-camera="overhead" aria-pressed="false">מעל</button></div><label><input id="contacts" type="checkbox" checked> מגעי רגל</label><label><input id="paths" type="checkbox" checked> מסלול שורש</label><label><input id="ball-path" type="checkbox"> מסלול כדור</label><button id="moment" class="moment-button">לרגע המגע ↗</button></div>
+        <div id="profiles" class="profiles" aria-label="נתוני הדמויות"></div>
+        <div class="event-heading"><h3>רצף המהלך</h3><span id="frame-count" dir="ltr">—</span></div><div id="events" class="event-strip" aria-label="קפיצה לאירוע"></div>
+        <p class="method-note">מגע ירוק מציין סוליה נטועה. כתום מציין מגע יד בכדור. מעבר ללחיצה על אירוע משהה את הניגון לבדיקה. דמויות שקופות מסמנות יעד מסירה או לחץ הגנתי. סמן טורקיז באלי־הופ מציין יעד קליטה באוויר. החזרה בסוף מהלך היא איפוס לצורך סקירה.</p>
+      </section>
+    </div>
+  </main>
+  <footer><span>תנועות מקוריות · CC0</span><span>תצוגת נכסים עצמאית · שלד ומידות הדמות נשמרים</span></footer>
+</body>
+</html>

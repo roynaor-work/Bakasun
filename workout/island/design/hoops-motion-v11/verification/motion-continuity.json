@@ -1,0 +1,5533 @@
+{
+  "method": "Read-only independent FK from delivered JSON. 30Hz maxima and shot-release right elbow angle for visual review; thresholds are attention markers, not anatomical pass/fail gates.",
+  "units": {
+    "maximumPalmVelocity": "m/s",
+    "maximumContactPalmVelocity": "m/s",
+    "maximumSoleVelocity": "m/s",
+    "maximumBoneWorldOrientationStep": "degrees per 30Hz interval",
+    "maximumBoneLocalOrientationStep": "degrees per 30Hz interval",
+    "maximumKneeBackwardOffset": "m",
+    "minimumElbowInteriorDegrees": "degrees",
+    "releaseRightElbowInteriorDegrees": "degrees, shoulder-elbow-wrist interior angle at the non-dribble ball_release key; shots only",
+    "maximumElbowSideOffset": "m",
+    "maximumRootVelocity": "m/s",
+    "maximumRootVelocityChange": "m/s change per interval"
+  },
+  "performances": 90,
+  "results": [
+    {
+      "id": "dribble_crossover",
+      "profile": "guard",
+      "loop": true,
+      "keyframesSha256": "076fe02d468876fc10e19011b74cb38118b9446dd8b31a0ea24209af1e447693",
+      "maximumPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 1.7,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 13.915495,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 13.915495,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.2695,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.146095,
+        "timeSeconds": 1.0667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.442803,
+        "timeSeconds": 2.4
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.07748,
+        "timeSeconds": 1.5333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_crossover",
+      "profile": "wing",
+      "loop": true,
+      "keyframesSha256": "ac6ae8fe29505f7be8f5c00030cb1477ef355d2b8ab69bfb61de89732b14205c",
+      "maximumPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 1.8667,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 1.8667,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 1.6,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 12.274097,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 12.274097,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 53.4475,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.152123,
+        "timeSeconds": 2.2667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.442803,
+        "timeSeconds": 2.4
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.07748,
+        "timeSeconds": 1.5333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_crossover",
+      "profile": "center",
+      "loop": true,
+      "keyframesSha256": "290d8338a74d5de2462a7d422787fc40a4c855dd8eafdd2746ceb49f75544eae",
+      "maximumPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 0.6667,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.635212,
+        "timeSeconds": 0.6667,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 1.9,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 11.134804,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 11.134804,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.845,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.154902,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.442803,
+        "timeSeconds": 2.4
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.07748,
+        "timeSeconds": 1.5333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_between_legs",
+      "profile": "guard",
+      "loop": true,
+      "keyframesSha256": "b84343c0bcaa24eaebf1ef3410bc2ced79d9611148713d78ad48d47e7bf42474",
+      "maximumPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 23.629343,
+        "timeSeconds": 1.2667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.629343,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.0403,
+        "timeSeconds": 2.4,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.151717,
+        "timeSeconds": 1.1,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_between_legs",
+      "profile": "wing",
+      "loop": true,
+      "keyframesSha256": "47866da0f4720c5f72988dadd93abc96bb140af58fee66502f195242d75cb98e",
+      "maximumPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.255705,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 21.255705,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 53.4475,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.157348,
+        "timeSeconds": 1.0667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_between_legs",
+      "profile": "center",
+      "loop": true,
+      "keyframesSha256": "8d26dd5d2ad0dbdb33c063d35ccfceb0e3194495a5216199aa44fff71fa8bd71",
+      "maximumPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 1.8667,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.995136,
+        "timeSeconds": 1.8667,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 19.684666,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 19.684666,
+        "timeSeconds": 0.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.845,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.159383,
+        "timeSeconds": 2.2667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_behind_back",
+      "profile": "guard",
+      "loop": true,
+      "keyframesSha256": "3f62cb73ee4e296df9a4518d825c8a3eb789540cabef40a1776ed16f8bad5506",
+      "maximumPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.142672,
+        "timeSeconds": 2.4,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.142672,
+        "timeSeconds": 2.4,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.003,
+        "timeSeconds": 2.1667,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.149958,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_behind_back",
+      "profile": "wing",
+      "loop": true,
+      "keyframesSha256": "b6bf455c001a8ab669f29ac3c2a88196dd0a62d0b65787a85406ffefa3703dbd",
+      "maximumPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.493253,
+        "timeSeconds": 2.4,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.493253,
+        "timeSeconds": 2.4,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8874,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.155286,
+        "timeSeconds": 0.3,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_behind_back",
+      "profile": "center",
+      "loop": true,
+      "keyframesSha256": "58cf03265a138b5ce100d2827c713496faf81a7ddf9d8c734820ec429dff9e1b",
+      "maximumPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 0.6667,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.556889,
+        "timeSeconds": 0.6667,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 27.661418,
+        "timeSeconds": 2.4,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 27.661418,
+        "timeSeconds": 2.4,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 53.2382,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.158627,
+        "timeSeconds": 0.3,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_hesitation",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "5b2c0c3d172246efd0ed76873afa3d4c5cfe312083dbb897589647404b9afb92",
+      "maximumPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.329845,
+        "timeSeconds": 2,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 15.271757,
+        "timeSeconds": 1.6333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 15.749502,
+        "timeSeconds": 2.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.0632,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.144831,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.11427,
+        "timeSeconds": 1.9333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.276114,
+        "timeSeconds": 2.4
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.7,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 59.8144
+      }
+    },
+    {
+      "id": "dribble_hesitation",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "1359eb046cb989259a1260dba11557d9f3176b3cb95cc81b7a3019fca5c14071",
+      "maximumPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.329845,
+        "timeSeconds": 2,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 13.470732,
+        "timeSeconds": 1.6333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 13.470732,
+        "timeSeconds": 1.6333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 57.6752,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.150927,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.11427,
+        "timeSeconds": 1.9333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.276114,
+        "timeSeconds": 2.4
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.7,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 55.6761
+      }
+    },
+    {
+      "id": "dribble_hesitation",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "47402cdecfc5dec5d4f97c8e5b10330a698bdfcadb270b6e703591bc7b7ffc8a",
+      "maximumPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.381686,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.329845,
+        "timeSeconds": 2,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 12.134897,
+        "timeSeconds": 1.6333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 12.365507,
+        "timeSeconds": 1.6667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8198,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153534,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.11427,
+        "timeSeconds": 1.9333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.276114,
+        "timeSeconds": 2.4
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.7,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 52.1023
+      }
+    },
+    {
+      "id": "dribble_step_back",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "4de2e641f7b9677d91cbc4a2f1e94202fe7da4804b61a07a7c2773d5dbd02752",
+      "maximumPalmVelocity": {
+        "value": 2.889487,
+        "timeSeconds": 0.8667,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.72236,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.052708,
+        "timeSeconds": 0.8,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 13.949413,
+        "timeSeconds": 1.8667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 13.949413,
+        "timeSeconds": 1.2667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.0632,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.144831,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.639095,
+        "timeSeconds": 0.9
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.523457,
+        "timeSeconds": 1.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.05,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 12.5154
+      }
+    },
+    {
+      "id": "dribble_step_back",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "0b0b26ba6405b03e4a17eb1e73a0aef66f40607312af4f8fac90da5cd78f3841",
+      "maximumPalmVelocity": {
+        "value": 2.90334,
+        "timeSeconds": 0.8667,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.72236,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.052708,
+        "timeSeconds": 0.8,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 12.199863,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 12.199863,
+        "timeSeconds": 1.2667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 57.6752,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.150927,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.639095,
+        "timeSeconds": 0.9
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.523457,
+        "timeSeconds": 1.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.05,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 11.7144
+      }
+    },
+    {
+      "id": "dribble_step_back",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "49d2e86939895b1721c6c5e97f947e29ed467d050c5425e05354e032343e8daf",
+      "maximumPalmVelocity": {
+        "value": 2.917608,
+        "timeSeconds": 0.8667,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.72236,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.052708,
+        "timeSeconds": 0.8,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 11.002105,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 11.112332,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8198,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153534,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 2.639095,
+        "timeSeconds": 0.9
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.523457,
+        "timeSeconds": 1.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 1.05,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 10.9997
+      }
+    },
+    {
+      "id": "dribble_jab_step",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "057167dac95112330fc77029f2d42129068a9c06284a260a0fa72d8f0a2b5706",
+      "maximumPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.436633,
+        "timeSeconds": 0.3667,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 13.949413,
+        "timeSeconds": 1.8667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 13.949413,
+        "timeSeconds": 1.2667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.0632,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.144831,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.298413,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.092517,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_jab_step",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "5d23d9a8b5c3a0c3bbec0a21156b6af08c6b33c5b66f299374a947b03cec8e0b",
+      "maximumPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.436633,
+        "timeSeconds": 0.3667,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 12.199863,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 12.199863,
+        "timeSeconds": 1.2667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 57.6752,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.150927,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.298413,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.092517,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_jab_step",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "c84632347468e73fedb34178138bb932a7ccb02ef9273b34562ab0837be3a66d",
+      "maximumPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.60109,
+        "timeSeconds": 0.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.436633,
+        "timeSeconds": 0.3667,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 11.002105,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 11.112332,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8198,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153534,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.298413,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.092517,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_spin",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "5c3dfc806fff1c5776ff9050ba01914071dcae33e59b2eedff6067a6992f5d1e",
+      "maximumPalmVelocity": {
+        "value": 4.509628,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.509628,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.912789,
+        "timeSeconds": 1.0667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 28.753255,
+        "timeSeconds": 1.0667,
+        "bone": "LeftFoot"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 38.822795,
+        "timeSeconds": 1.3667,
+        "bone": "RightFoot"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.0632,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.144831,
+        "timeSeconds": 0.6,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 1.013101,
+        "timeSeconds": 1.1667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.14728,
+        "timeSeconds": 0.9667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0.8641
+      }
+    },
+    {
+      "id": "dribble_spin",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "e2ee212a7915678d1cb61bf3f290d11c6f50f837f3ca2cf1bf33bd996ddf179b",
+      "maximumPalmVelocity": {
+        "value": 4.583592,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.583592,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.912789,
+        "timeSeconds": 1.0667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 28.753255,
+        "timeSeconds": 1.0667,
+        "bone": "LeftFoot"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 38.68576,
+        "timeSeconds": 1.3667,
+        "bone": "RightFoot"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 57.6752,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.150927,
+        "timeSeconds": 0.6,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 1.013101,
+        "timeSeconds": 1.1667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.14728,
+        "timeSeconds": 0.9667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0.8084
+      }
+    },
+    {
+      "id": "dribble_spin",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "93210194e243a3e3eb2338ca9eb61678f6ff69a44249359a768462da7c8f0c2c",
+      "maximumPalmVelocity": {
+        "value": 4.660144,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.660144,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.912789,
+        "timeSeconds": 1.0667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 28.753255,
+        "timeSeconds": 1.0667,
+        "bone": "LeftFoot"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 38.581478,
+        "timeSeconds": 1.3667,
+        "bone": "RightFoot"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8198,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153534,
+        "timeSeconds": 1.2,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 1.013101,
+        "timeSeconds": 1.1667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.14728,
+        "timeSeconds": 0.9667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0.7588
+      }
+    },
+    {
+      "id": "dribble_sprint",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "677cb2c98c72d0cdcbcafb19ff191eab6c68886ea834ad0c5e2c4cf87e715557",
+      "maximumPalmVelocity": {
+        "value": 6.40119,
+        "timeSeconds": 2,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.992995,
+        "timeSeconds": 2.0333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 9.326601,
+        "timeSeconds": 1.1333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.366239,
+        "timeSeconds": 0.8333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 21.366239,
+        "timeSeconds": 0.8333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.2868,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.154885,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 4.2,
+        "timeSeconds": 2.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 2.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 10.08,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 103.5272
+      }
+    },
+    {
+      "id": "dribble_sprint",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "758efb43174bc18031fbc8dc78700a0a2494a3deb260d478e2c7b25a8aa4ea00",
+      "maximumPalmVelocity": {
+        "value": 6.40119,
+        "timeSeconds": 1.0333,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.992995,
+        "timeSeconds": 1.6667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 9.326601,
+        "timeSeconds": 1.1333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 19.101022,
+        "timeSeconds": 0.8333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 19.101022,
+        "timeSeconds": 0.8333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 48.4518,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164441,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 4.2,
+        "timeSeconds": 2.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 2.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 10.08,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 89.7824
+      }
+    },
+    {
+      "id": "dribble_sprint",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "9a3205228372df9bdcc5cfc514f1f53900ae5ac848527c7f434f0a2af06217e9",
+      "maximumPalmVelocity": {
+        "value": 6.40119,
+        "timeSeconds": 1.0333,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.992995,
+        "timeSeconds": 2.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 9.326601,
+        "timeSeconds": 1.6333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 17.214223,
+        "timeSeconds": 0.8333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 17.214223,
+        "timeSeconds": 0.8333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 45.496,
+        "timeSeconds": 2.3667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.169538,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 4.2,
+        "timeSeconds": 2.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 2.2
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 10.08,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 81.6642
+      }
+    },
+    {
+      "id": "dribble_protective",
+      "profile": "guard",
+      "loop": true,
+      "keyframesSha256": "98448f334b25fc708b115ac267db3fefa2359208e6ef88212580256583ff6847",
+      "maximumPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 17.053329,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 27.959806,
+        "timeSeconds": 1.3,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 75.5749,
+        "timeSeconds": 0.3,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.196299,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_protective",
+      "profile": "wing",
+      "loop": true,
+      "keyframesSha256": "ce86fd2c420bacf9bf49930619963d6958df7eee04289da083bafd48c0868a28",
+      "maximumPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 12.891317,
+        "timeSeconds": 1.8667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 16.77597,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 68.2563,
+        "timeSeconds": 0.3,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.204395,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "dribble_protective",
+      "profile": "center",
+      "loop": true,
+      "keyframesSha256": "17cff6de6cafa88126500237e1d31b320c22e0304824f77e95a2ab44860bb727",
+      "maximumPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.6,
+        "timeSeconds": 0.0667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 11.414467,
+        "timeSeconds": 0.0667,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 14.747417,
+        "timeSeconds": 1.8667,
+        "bone": "RightForeArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.0191,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.209994,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "pass_chest",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "fcca49091fce142b1f0b6ece4f94675e22b808d50b0392336eb4f1e0fd9db8ba",
+      "maximumPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.6,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.979299,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.3144,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.094983,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7127,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_chest",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "69c8c96b3ca3b2005732f4da89efcf571a0c19d8ca090dc8c58314e9ed2a3259",
+      "maximumPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.7,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 24.227725,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.6329,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.099701,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7148,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_chest",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "821b3a51f7aba63590598cf2f8ab476b6cd71ddab16d837a3713f5841ca71dee",
+      "maximumPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.985698,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.9667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 24.511513,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 45.4361,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.102062,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7173,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "pass_bounce",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "f86a9809ec1ee2ddafd19af595165857c64784f045c6d7319a3a88030c6bf7a9",
+      "maximumPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.6,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 25.076854,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.3144,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.094983,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7127,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_bounce",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "ccf873b27dcd54074e8ec0f13cbe3043021700a0c378b09270178fcc2f590a59",
+      "maximumPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.7,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 24.858196,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.6329,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.099701,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7148,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_bounce",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "eee2eca727ea049779e92ba0bf539df3018d9ee1c1f07e6130618c8d04b531cd",
+      "maximumPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.946879,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.9667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 25.00566,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 45.4361,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.102062,
+        "timeSeconds": 1.5667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7173,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "pass_overhead",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "d48796f4fa482a71679d8dedd3b70107eebb54a6f4ad11a14de2430fbada460b",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.6,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.976596,
+        "timeSeconds": 0.5,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.976596,
+        "timeSeconds": 0.5,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 26.7733,
+        "timeSeconds": 0.5333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.101995,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7127,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_overhead",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "e488d6f64a6fff9650f1b465b44601e167ba342ff373189f2963319fd0a3268b",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.7,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.081022,
+        "timeSeconds": 0.5333,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.081022,
+        "timeSeconds": 0.5333,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 22.5336,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.117358,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7148,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_overhead",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "a20f513647d0934dd288efe40c1f61b6f9f606fdb0b312ab670d47eb31a8ef9c",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.9667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 36.864145,
+        "timeSeconds": 0.5333,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 36.864145,
+        "timeSeconds": 0.5333,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 20.8979,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.13416,
+        "timeSeconds": 0.9,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 1.7173,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "pass_behind_back",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "0626f05cb1472ccada049bd2d2a6253473de954286e60dbeba8e27d15b6e3af1",
+      "maximumPalmVelocity": {
+        "value": 3.423546,
+        "timeSeconds": 0.7,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.057204,
+        "timeSeconds": 0.4667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 1.1,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 20.896363,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 25.766828,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 54.8075,
+        "timeSeconds": 1.4333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.219859,
+        "timeSeconds": 1,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 4.7815,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_behind_back",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "ba47b9d195941ab40c1961fd5ad939177503b104991ded6f7f2db17ce3199743",
+      "maximumPalmVelocity": {
+        "value": 3.442453,
+        "timeSeconds": 0.7,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.086034,
+        "timeSeconds": 0.4667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.8333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 20.896363,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 26.547745,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 46.5868,
+        "timeSeconds": 1.4333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.227575,
+        "timeSeconds": 0.5333,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 4.7825,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_behind_back",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "72a92e6f975a446f017925ae5eefb0a07267174dc13ad096d5fe2e42c4e15773",
+      "maximumPalmVelocity": {
+        "value": 3.465979,
+        "timeSeconds": 0.7,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.121754,
+        "timeSeconds": 0.4667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 1,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 20.896363,
+        "timeSeconds": 1.1667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 27.185194,
+        "timeSeconds": 1.1667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 41.6144,
+        "timeSeconds": 1.4333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.240641,
+        "timeSeconds": 0.5333,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 4.7836,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "pass_jump",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "71eb943fc8c2c3f3b76ce7d633623953035f5b9face2e89c985f61abd0773e0a",
+      "maximumPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.516105,
+        "timeSeconds": 1.5,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.2667,
+        "bone": "LeftHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.303515,
+        "timeSeconds": 1.2667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 59.3144,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.094983,
+        "timeSeconds": 1.6667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.654731,
+        "timeSeconds": 1.1333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.10026,
+        "timeSeconds": 1.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.35,
+        "ballLocalDistanceMeters": 1.547,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_jump",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "d85a82985eedb38017b3ff083763b698d86f098d053233f4391c43de78956029",
+      "maximumPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.516105,
+        "timeSeconds": 1.5,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.2667,
+        "bone": "LeftHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.631258,
+        "timeSeconds": 1.2667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.6329,
+        "timeSeconds": 1.6667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.099701,
+        "timeSeconds": 1.6667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.654731,
+        "timeSeconds": 1.1333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.10026,
+        "timeSeconds": 1.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.35,
+        "ballLocalDistanceMeters": 1.5494,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_jump",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "f2a4f9578e46635fcb68ff2b4e2dcdb88d67d92d4ea0a90541caab9274745b45",
+      "maximumPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.133248,
+        "timeSeconds": 0.8333,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.516105,
+        "timeSeconds": 0.8333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 21.588512,
+        "timeSeconds": 1.2667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.935853,
+        "timeSeconds": 1.2667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 45.4361,
+        "timeSeconds": 1.6667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.102062,
+        "timeSeconds": 1.6667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.654731,
+        "timeSeconds": 1.1333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.10026,
+        "timeSeconds": 1.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.35,
+        "ballLocalDistanceMeters": 1.5521,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "pass_alley_oop",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "33ba37f26eb08c33be533822b4f420f50b95fe77a78dc118172ab092996b9cd5",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.6,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.976596,
+        "timeSeconds": 0.5,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.976596,
+        "timeSeconds": 0.5,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 26.7733,
+        "timeSeconds": 0.5333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.101995,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 2.1855,
+        "maximumLocalRotationDifferenceDegrees": 152.0384
+      }
+    },
+    {
+      "id": "pass_alley_oop",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "4c116fcac1faa67e94d5ba0450ca73bbcb9429d90b11307d8446ef91a618a8a6",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.7,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.081022,
+        "timeSeconds": 0.5333,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.081022,
+        "timeSeconds": 0.5333,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 22.5336,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.117358,
+        "timeSeconds": 0.9333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 2.1088,
+        "maximumLocalRotationDifferenceDegrees": 155.1972
+      }
+    },
+    {
+      "id": "pass_alley_oop",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "b983631ffced2e07717aff1a41a3f11aca8bcff2b1f50fe1a430cee828f8de59",
+      "maximumPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 2.684361,
+        "timeSeconds": 0.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.9667,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 36.864145,
+        "timeSeconds": 0.5333,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 36.864145,
+        "timeSeconds": 0.5333,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 20.8979,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.13416,
+        "timeSeconds": 0.9,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.447333,
+        "timeSeconds": 0.8
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.096667,
+        "timeSeconds": 0.6
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.15,
+        "ballLocalDistanceMeters": 2.0327,
+        "maximumLocalRotationDifferenceDegrees": 157.6547
+      }
+    },
+    {
+      "id": "jump_shot",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "0393592d97327243ddff777779efa68cffbdd8532456d55b25ffc52180e6a930",
+      "maximumPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.775348,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 37.4481,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 2.6976,
+        "maximumLocalRotationDifferenceDegrees": 140.6902
+      }
+    },
+    {
+      "id": "jump_shot",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "a84912a9b98e6368e6241a687387d22ce0572ed6789ae770ab2c08eda6c99660",
+      "maximumPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 32.7389,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 2.7326,
+        "maximumLocalRotationDifferenceDegrees": 143.5558
+      }
+    },
+    {
+      "id": "jump_shot",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "249eac419e769c8e68ee39a374b8e33f8db87fbb237c2ace6c6c69c454ac484f",
+      "maximumPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 29.919,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 1.6,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 2.77,
+        "maximumLocalRotationDifferenceDegrees": 145.8655
+      }
+    },
+    {
+      "id": "fadeaway",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "4cd2f881ac132ed3bf2cb5c4d6c5050da5494a8e1ca74247dd1332714a869676",
+      "maximumPalmVelocity": {
+        "value": 4.599701,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.599701,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.310044,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.794552,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 36.7381,
+        "timeSeconds": 2.0667,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.151189,
+        "timeSeconds": 2.1667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.122396,
+        "timeSeconds": 1.5
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.171875,
+        "timeSeconds": 1.1667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 3.2049,
+        "maximumLocalRotationDifferenceDegrees": 140.4636
+      }
+    },
+    {
+      "id": "fadeaway",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "d9b8032085eb3a9ac6d9bf5bd67f54b600cb5d5bdae388d9dc306edde98ab6a3",
+      "maximumPalmVelocity": {
+        "value": 4.99841,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.99841,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.310044,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.794552,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 33.575,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.161797,
+        "timeSeconds": 2,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.122396,
+        "timeSeconds": 1.5
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.171875,
+        "timeSeconds": 1.1667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 3.2345,
+        "maximumLocalRotationDifferenceDegrees": 143.2752
+      }
+    },
+    {
+      "id": "fadeaway",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "a07e1ff9d01ed739c0e3d7902336c255984bfed93999510641f61e34a2479d8c",
+      "maximumPalmVelocity": {
+        "value": 5.306184,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.306184,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.310044,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 31.212959,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 31.212959,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 31.4977,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.16973,
+        "timeSeconds": 2.1667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.122396,
+        "timeSeconds": 1.5
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.171875,
+        "timeSeconds": 1.1667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.6,
+        "ballLocalDistanceMeters": 3.2663,
+        "maximumLocalRotationDifferenceDegrees": 145.5192
+      }
+    },
+    {
+      "id": "floater",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "31c499163c7dc0b00dbd5d4328930f39a47ba72ae102f75844b062a4a4b880f9",
+      "maximumPalmVelocity": {
+        "value": 4.473754,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.473754,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.02408,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.98055,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 43.1902,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.171197,
+        "timeSeconds": 0.8333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.093587,
+        "timeSeconds": 0.0667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 1.25,
+        "ballLocalDistanceMeters": 1.8439,
+        "maximumLocalRotationDifferenceDegrees": 140.6902
+      }
+    },
+    {
+      "id": "floater",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "b2b1a52285750c9e5f3d2a873b7126911c22b0bd987fb2ae46fad15439446480",
+      "maximumPalmVelocity": {
+        "value": 4.992754,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.992754,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.02408,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.643412,
+        "timeSeconds": 1.4667,
+        "bone": "LeftArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.643412,
+        "timeSeconds": 1.4667,
+        "bone": "LeftArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 38.4034,
+        "timeSeconds": 1.4667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.171197,
+        "timeSeconds": 0.8333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.093587,
+        "timeSeconds": 0.0667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 1.25,
+        "ballLocalDistanceMeters": 1.8954,
+        "maximumLocalRotationDifferenceDegrees": 143.5558
+      }
+    },
+    {
+      "id": "floater",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "703073292e2083457bf93ce6354413a85b25569c9083d1b497532533e1c25445",
+      "maximumPalmVelocity": {
+        "value": 5.385665,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.385665,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.02408,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 32.950366,
+        "timeSeconds": 1.4667,
+        "bone": "LeftArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 32.950366,
+        "timeSeconds": 1.4667,
+        "bone": "LeftArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 34.1791,
+        "timeSeconds": 1.4667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 1.8333,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.171197,
+        "timeSeconds": 0.8333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.093587,
+        "timeSeconds": 0.0667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 1.25,
+        "ballLocalDistanceMeters": 1.9493,
+        "maximumLocalRotationDifferenceDegrees": 145.8655
+      }
+    },
+    {
+      "id": "hook_shot",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "d5e5ddb5c0aebcbecae7d7879158bef6cb395642db3f11efe6c1b968ab287741",
+      "maximumPalmVelocity": {
+        "value": 4.515649,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.515649,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.166356,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.606593,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 34.268,
+        "timeSeconds": 1.0667,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 2.1,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.746914,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.148148,
+        "timeSeconds": 1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.3,
+        "ballLocalDistanceMeters": 2.6719,
+        "maximumLocalRotationDifferenceDegrees": 140.6902
+      }
+    },
+    {
+      "id": "hook_shot",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "c10ec0416cf2d6fd9e075897db2f3854bdbe7e158a3160f951fbc106a857dbc6",
+      "maximumPalmVelocity": {
+        "value": 5.00509,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.00509,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.166356,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.606593,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 28.7939,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 2,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.746914,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.148148,
+        "timeSeconds": 1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.3,
+        "ballLocalDistanceMeters": 2.7102,
+        "maximumLocalRotationDifferenceDegrees": 143.5558
+      }
+    },
+    {
+      "id": "hook_shot",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "145d1c1b9a76fac5386d78ed48d62d95f610f40566970aa1f56b3faae6236337",
+      "maximumPalmVelocity": {
+        "value": 5.384939,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 5.384939,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.166356,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.606593,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 26.1121,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 2,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.746914,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.148148,
+        "timeSeconds": 1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.3,
+        "ballLocalDistanceMeters": 2.7503,
+        "maximumLocalRotationDifferenceDegrees": 145.8655
+      }
+    },
+    {
+      "id": "three_off_dribble",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "f64aa45c0ad1b9e7548084de82e2c7ed6ccc8226d78daa78f0ae20e73b2bfdf2",
+      "maximumPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164502,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.775348,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 37.4481,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.348,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.312,
+        "timeSeconds": 0.6667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.45,
+        "ballLocalDistanceMeters": 7.687,
+        "maximumLocalRotationDifferenceDegrees": 114.5177
+      }
+    },
+    {
+      "id": "three_off_dribble",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "3877b5f9c9c71dc9233864e6fd72b1a98c7e2b55c1469218c1581a8913ffc198",
+      "maximumPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164502,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 32.7389,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.348,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.312,
+        "timeSeconds": 0.6667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.45,
+        "ballLocalDistanceMeters": 7.6923,
+        "maximumLocalRotationDifferenceDegrees": 121.048
+      }
+    },
+    {
+      "id": "three_off_dribble",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "0d9ee82674d17e7fdc9e5ef18d06e5d1684999e7b1b127d0847dfb1d53236947",
+      "maximumPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164502,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 29.919,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 1.6,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.348,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.312,
+        "timeSeconds": 0.6667
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.45,
+        "ballLocalDistanceMeters": 7.6983,
+        "maximumLocalRotationDifferenceDegrees": 127.1391
+      }
+    },
+    {
+      "id": "three_catch",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "23b2fd24f6df2b107842f62a9e636063a1349aeda4089b14c1682753fb82d053",
+      "maximumPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.775348,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 37.4481,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 5.5411,
+        "maximumLocalRotationDifferenceDegrees": 140.6902
+      }
+    },
+    {
+      "id": "three_catch",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "43e7c941c5bd64b92b5473d753eb74fe030b1ef626439fcc99b4ce09a8930970",
+      "maximumPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 32.7389,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 5.5578,
+        "maximumLocalRotationDifferenceDegrees": 143.5558
+      }
+    },
+    {
+      "id": "three_catch",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "064d562e9a490162e742c2a85877f1485e24f9e5d86ea1d6813680e31e18ee3e",
+      "maximumPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164495,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 29.919,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 1.6,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 5.576,
+        "maximumLocalRotationDifferenceDegrees": 145.8655
+      }
+    },
+    {
+      "id": "shot_under_pressure",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "2c8b0e07d4cbcdc92d79c905c9eec5d384431f8300d0bd5ef8fc2b922ac58efe",
+      "maximumPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.20093,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164913,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 29.876543,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.775348,
+        "timeSeconds": 1.5667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 37.4481,
+        "timeSeconds": 2.1,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.153038,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.838756,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.194133,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.28,
+        "ballLocalDistanceMeters": 2.5822,
+        "maximumLocalRotationDifferenceDegrees": 140.6902
+      }
+    },
+    {
+      "id": "shot_under_pressure",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "739bc2d2e3bc0630b2c768ed7da316e8471a5d107cd545d6c829a7dd1d71aa0d",
+      "maximumPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.643153,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164913,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 32.522236,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 32.7389,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.164236,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.838756,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.194133,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.28,
+        "ballLocalDistanceMeters": 2.6188,
+        "maximumLocalRotationDifferenceDegrees": 143.5558
+      }
+    },
+    {
+      "id": "shot_under_pressure",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "9953bd5524f994f86a9d4d5cd3f8e2c6e1c4768f271f3c03997b585d3db09ca6",
+      "maximumPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 4.979338,
+        "timeSeconds": 1.2667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.164913,
+        "timeSeconds": 1.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 34.856138,
+        "timeSeconds": 1.4667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 29.919,
+        "timeSeconds": 1.0333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.172696,
+        "timeSeconds": 1.6,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.838756,
+        "timeSeconds": 0.8667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.194133,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "releaseTimeSeconds": 1.4,
+      "releaseRightElbowInteriorDegrees": 157.007325,
+      "endpoint": {
+        "rootDistanceMeters": 0.28,
+        "ballLocalDistanceMeters": 2.6579,
+        "maximumLocalRotationDifferenceDegrees": 145.8655
+      }
+    },
+    {
+      "id": "rebound_offensive",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "5983ed73399680c8c7da556102b353e09a565ed073b4c1300c770fb3f3622115",
+      "maximumPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.565379,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 27.186048,
+        "timeSeconds": 0.5,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 27.186048,
+        "timeSeconds": 0.5,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 42.1486,
+        "timeSeconds": 1.5667,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.150713,
+        "timeSeconds": 0.2667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.847411,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.0926,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.65,
+        "ballLocalDistanceMeters": 3.0449,
+        "maximumLocalRotationDifferenceDegrees": 46.4288
+      }
+    },
+    {
+      "id": "rebound_offensive",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "0da554a3224ce030efb6534623ee1262eea1a7debcda85697a653d9f799800cb",
+      "maximumPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.565379,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 28.940773,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 28.940773,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 34.5815,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.145274,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.847411,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.0926,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.65,
+        "ballLocalDistanceMeters": 2.984,
+        "maximumLocalRotationDifferenceDegrees": 46.3089
+      }
+    },
+    {
+      "id": "rebound_offensive",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "31078ae9462e7d52ce5fde20f4631c29c5c0b42101c8cd947960e9d6058ad49e",
+      "maximumPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.965548,
+        "timeSeconds": 1.5,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.565379,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.698583,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.698583,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 28.6487,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.139004,
+        "timeSeconds": 0.4667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.847411,
+        "timeSeconds": 0.7
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.0926,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.65,
+        "ballLocalDistanceMeters": 2.9244,
+        "maximumLocalRotationDifferenceDegrees": 46.3128
+      }
+    },
+    {
+      "id": "rebound_defensive",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "415013c49b62cf4e377545c85a8bfc3df003a27b6da6230bbdb9f7799163caa4",
+      "maximumPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.033439,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 26.429682,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 26.429682,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 42.5783,
+        "timeSeconds": 1.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.158365,
+        "timeSeconds": 2.1333,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.730986,
+        "timeSeconds": 0.3333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185094,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 3.0851,
+        "maximumLocalRotationDifferenceDegrees": 70.3766
+      }
+    },
+    {
+      "id": "rebound_defensive",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "f503857f3c2be68c0f1dfdf8f5cc32ebb182f91d20a44f8796a8851d1d0ff047",
+      "maximumPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "RightHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.033439,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 28.385962,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 28.385962,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 33.7605,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.173585,
+        "timeSeconds": 2.0667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.730986,
+        "timeSeconds": 0.3333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185094,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 3.025,
+        "maximumLocalRotationDifferenceDegrees": 70.3583
+      }
+    },
+    {
+      "id": "rebound_defensive",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "907fe5b167ee25b68c322051766d944e1f20df3689688a14746db7bb54b1a69c",
+      "maximumPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand",
+        "wasContact": true,
+        "isContact": true
+      },
+      "maximumContactPalmVelocity": {
+        "value": 3.639956,
+        "timeSeconds": 1.5,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 3.033439,
+        "timeSeconds": 0.7,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.067399,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.067399,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 27.9104,
+        "timeSeconds": 0.5333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.189199,
+        "timeSeconds": 2.0667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.730986,
+        "timeSeconds": 0.3333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185094,
+        "timeSeconds": 0.1667
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 2.9662,
+        "maximumLocalRotationDifferenceDegrees": 70.1071
+      }
+    },
+    {
+      "id": "shot_block",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "aec7d2c550155617a60e11e8aa780ddf27b0074b0eac683df4a8c2e2ba88750a",
+      "maximumPalmVelocity": {
+        "value": 4.364191,
+        "timeSeconds": 0.6333,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 2.691786,
+        "timeSeconds": 1.4,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 22.857615,
+        "timeSeconds": 0.5,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 22.857615,
+        "timeSeconds": 0.5,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 46.7339,
+        "timeSeconds": 1.2333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.135984,
+        "timeSeconds": 1.8333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.598714,
+        "timeSeconds": 0.6333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.127824,
+        "timeSeconds": 0.9
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 4.1953,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "shot_block",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "f736c8549eb8971f56dbee4bee5c5d62ce52d0bb692c9f387c9699f079ea0c0f",
+      "maximumPalmVelocity": {
+        "value": 4.364191,
+        "timeSeconds": 0.6333,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 2.691786,
+        "timeSeconds": 0.6333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 23.025092,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.025092,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 38.7022,
+        "timeSeconds": 1.2333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.136916,
+        "timeSeconds": 1.4667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.598714,
+        "timeSeconds": 0.6333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.127824,
+        "timeSeconds": 0.9
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 4.2272,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "shot_block",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "d1237dd35d6f1410a9e68a2c434ed40b756ea60568bf6e08bc5e9c32378bdf47",
+      "maximumPalmVelocity": {
+        "value": 4.364191,
+        "timeSeconds": 0.6333,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 2.691786,
+        "timeSeconds": 1.4,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 23.607712,
+        "timeSeconds": 0.5333,
+        "bone": "RightForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 23.607712,
+        "timeSeconds": 0.5333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 33.7922,
+        "timeSeconds": 1.2333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.138481,
+        "timeSeconds": 0.5333,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.598714,
+        "timeSeconds": 0.6333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.127824,
+        "timeSeconds": 0.9
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 4.2606,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "body_block",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "253c65e690c5d8287524b2cb04bce18355c345575a80e40e34652d9bd029c68f",
+      "maximumPalmVelocity": {
+        "value": 5.053153,
+        "timeSeconds": 0.4,
+        "hand": "RightHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.482724,
+        "timeSeconds": 1.8667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.226078,
+        "timeSeconds": 0.3,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.035218,
+        "timeSeconds": 1.4,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 28.769131,
+        "timeSeconds": 1.4,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 36.4748,
+        "timeSeconds": 1.4333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.226547,
+        "timeSeconds": 0.7,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 3.0633,
+        "maximumLocalRotationDifferenceDegrees": 78.347
+      }
+    },
+    {
+      "id": "body_block",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "de659a4165412f88973124fe3de4998d24b40393b81779f1b831c9716357a7b5",
+      "maximumPalmVelocity": {
+        "value": 5.319255,
+        "timeSeconds": 0.4,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.482724,
+        "timeSeconds": 1.8667,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.226078,
+        "timeSeconds": 0.3,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 30.74812,
+        "timeSeconds": 1.4,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 29.528087,
+        "timeSeconds": 1.4,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 29.8365,
+        "timeSeconds": 1.4333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.238477,
+        "timeSeconds": 0.7,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 3.004,
+        "maximumLocalRotationDifferenceDegrees": 80.4351
+      }
+    },
+    {
+      "id": "body_block",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "d7235e1d90e1236d547d809b9e7adc0d5c9f5832faaa8cf82c1b301c076449e2",
+      "maximumPalmVelocity": {
+        "value": 5.585482,
+        "timeSeconds": 0.4,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.482724,
+        "timeSeconds": 1.8667,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.226078,
+        "timeSeconds": 0.3,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 31.69135,
+        "timeSeconds": 1.4333,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 30.676262,
+        "timeSeconds": 1.4333,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 25.6493,
+        "timeSeconds": 1.4333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.247959,
+        "timeSeconds": 0.7,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumRootVelocityChange": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 2.9459,
+        "maximumLocalRotationDifferenceDegrees": 82.629
+      }
+    },
+    {
+      "id": "screen",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "3fb1cba71390f64642381e225de405538d0456792d60439571518c75fbd6c7f8",
+      "maximumPalmVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 1.104415,
+        "timeSeconds": 0.5667,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 4.956101,
+        "timeSeconds": 0.2333,
+        "bone": "LeftLeg"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 7.175272,
+        "timeSeconds": 0.5,
+        "bone": "LeftLeg"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 113.8497,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.114009,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.152533,
+        "timeSeconds": 0.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "screen",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "d236298d248c9ee8155bcc6b782e1d6b104281ea4ff7890ab5ad86fcf7d0cbb1",
+      "maximumPalmVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 1.104415,
+        "timeSeconds": 0.3,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 4.756533,
+        "timeSeconds": 0.2333,
+        "bone": "LeftLeg"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 6.943487,
+        "timeSeconds": 0.5,
+        "bone": "LeftLeg"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 96.8066,
+        "timeSeconds": 2.4,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.135787,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.152533,
+        "timeSeconds": 0.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "screen",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "ce1fe9b387fbc6f0daae0e08e2dc9cef1ad9aa17ebbd78ba8fb43577343c8086",
+      "maximumPalmVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 1.104415,
+        "timeSeconds": 0.3,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 4.575874,
+        "timeSeconds": 0.2333,
+        "bone": "LeftLeg"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 6.730582,
+        "timeSeconds": 0.5,
+        "bone": "LeftLeg"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 88.6947,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.156428,
+        "timeSeconds": 0,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.659022,
+        "timeSeconds": 0.2667
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.152533,
+        "timeSeconds": 0.5
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.22,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "close_guard",
+      "profile": "guard",
+      "loop": true,
+      "keyframesSha256": "b47db5f61603d26f3e4322af4bb3f0bb110d1a330b25f9e325451a14ad762a05",
+      "maximumPalmVelocity": {
+        "value": 0.258839,
+        "timeSeconds": 1.2,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 2.2,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 1.429258,
+        "timeSeconds": 0.0667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 1.429258,
+        "timeSeconds": 0.0667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 72.0809,
+        "timeSeconds": 0.6,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.212824,
+        "timeSeconds": 0.0667,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.183027,
+        "timeSeconds": 1.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.015982,
+        "timeSeconds": 1.8333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "close_guard",
+      "profile": "wing",
+      "loop": true,
+      "keyframesSha256": "1fc5f73e94cafd91b1313ce58add1d66a6dde65e07b3df20c9ba2ed9475b8fe2",
+      "maximumPalmVelocity": {
+        "value": 0.258839,
+        "timeSeconds": 1.2333,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 0.1333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 1.379315,
+        "timeSeconds": 0.0667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 1.379315,
+        "timeSeconds": 0.0667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 63.0304,
+        "timeSeconds": 0.6,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.223246,
+        "timeSeconds": 1.4333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.183027,
+        "timeSeconds": 1.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.015982,
+        "timeSeconds": 1.8333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "close_guard",
+      "profile": "center",
+      "loop": true,
+      "keyframesSha256": "f7237a4c13fc267deb18479a7f60aa845a175b8e56a8fe8b15e60eac47320e42",
+      "maximumPalmVelocity": {
+        "value": 0.258839,
+        "timeSeconds": 1.2,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "maximumSoleVelocity": {
+        "value": 0,
+        "timeSeconds": 2.2333,
+        "foot": "LeftFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 1.344404,
+        "timeSeconds": 0.0667,
+        "bone": "LeftForeArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 1.344404,
+        "timeSeconds": 0.0667,
+        "bone": "LeftHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 57.9165,
+        "timeSeconds": 0.6,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.231746,
+        "timeSeconds": 0.0333,
+        "side": "Right"
+      },
+      "maximumRootVelocity": {
+        "value": 0.183027,
+        "timeSeconds": 1.2
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.015982,
+        "timeSeconds": 1.8333
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0,
+        "maximumLocalRotationDifferenceDegrees": 0
+      }
+    },
+    {
+      "id": "steal",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "3fe4b455c0dafe040dbd8620184b61f82e13905eefc1e7d35ab05d872cb677f8",
+      "maximumPalmVelocity": {
+        "value": 2.575872,
+        "timeSeconds": 0.7667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.441886,
+        "timeSeconds": 0.9,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.746607,
+        "timeSeconds": 0.4333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 15.138822,
+        "timeSeconds": 1.0667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 16.912724,
+        "timeSeconds": 1.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 48.4318,
+        "timeSeconds": 0.1333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.20724,
+        "timeSeconds": 0.9667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.870857,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185925,
+        "timeSeconds": 0.7
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0.852,
+        "maximumLocalRotationDifferenceDegrees": 81.3745
+      }
+    },
+    {
+      "id": "steal",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "2151957978b1cce75dc682941b4cf8922d385fc08b37dbda766c828aa7c6230c",
+      "maximumPalmVelocity": {
+        "value": 2.66627,
+        "timeSeconds": 0.7667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.550834,
+        "timeSeconds": 0.9,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.746607,
+        "timeSeconds": 0.4,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 15.138822,
+        "timeSeconds": 1.0667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 16.984805,
+        "timeSeconds": 1.0667,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 39.6832,
+        "timeSeconds": 0.1333,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.220638,
+        "timeSeconds": 0.9667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.870857,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185925,
+        "timeSeconds": 0.7
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0.85,
+        "maximumLocalRotationDifferenceDegrees": 81.8476
+      }
+    },
+    {
+      "id": "steal",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "0025fc196a0c4aab24eb659af8f4a2069aea57729e66a49205e85d961974794a",
+      "maximumPalmVelocity": {
+        "value": 2.760855,
+        "timeSeconds": 0.7667,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 1.668973,
+        "timeSeconds": 0.9,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.746607,
+        "timeSeconds": 0.4,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 15.138822,
+        "timeSeconds": 1.0667,
+        "bone": "RightHand"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 17.118678,
+        "timeSeconds": 1.0333,
+        "bone": "RightHand"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 34.3642,
+        "timeSeconds": 0,
+        "side": "Right"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.234726,
+        "timeSeconds": 1,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 0.870857,
+        "timeSeconds": 0.4333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.185925,
+        "timeSeconds": 0.7
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0,
+        "ballLocalDistanceMeters": 0.8489,
+        "maximumLocalRotationDifferenceDegrees": 82.9495
+      }
+    },
+    {
+      "id": "lane_intercept",
+      "profile": "guard",
+      "loop": false,
+      "keyframesSha256": "d27982bdc4070bc8c3a2833daad58e4d5ba2dc56c29aef85d67eab094cc24f55",
+      "maximumPalmVelocity": {
+        "value": 2.818855,
+        "timeSeconds": 0.8,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0.722589,
+        "timeSeconds": 1.4,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.280786,
+        "timeSeconds": 0.6333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 6.133114,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 6.133114,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 64.5659,
+        "timeSeconds": 0.7333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.158777,
+        "timeSeconds": 1.6667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.824157,
+        "timeSeconds": 0.7333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.279337,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.9751,
+        "ballLocalDistanceMeters": 2.2006,
+        "maximumLocalRotationDifferenceDegrees": 62.0798
+      }
+    },
+    {
+      "id": "lane_intercept",
+      "profile": "wing",
+      "loop": false,
+      "keyframesSha256": "f052dbfcbe07bd43c1fa608245862d9a4dd84f0637d22a277ba77b6c242050aa",
+      "maximumPalmVelocity": {
+        "value": 2.879086,
+        "timeSeconds": 0.8,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0.722589,
+        "timeSeconds": 1.4,
+        "hand": "LeftHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.280786,
+        "timeSeconds": 0.6333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 6.294243,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 6.294243,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 55.7196,
+        "timeSeconds": 0.7333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.174058,
+        "timeSeconds": 1.6667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.824157,
+        "timeSeconds": 0.7333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.279337,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.9751,
+        "ballLocalDistanceMeters": 2.2006,
+        "maximumLocalRotationDifferenceDegrees": 63.1975
+      }
+    },
+    {
+      "id": "lane_intercept",
+      "profile": "center",
+      "loop": false,
+      "keyframesSha256": "09259f4107388047adffc7e2bae65aafba6333f68d1351ea7f12919b2bfa7c87",
+      "maximumPalmVelocity": {
+        "value": 2.93962,
+        "timeSeconds": 0.8,
+        "hand": "LeftHand",
+        "wasContact": false,
+        "isContact": false
+      },
+      "maximumContactPalmVelocity": {
+        "value": 0.722589,
+        "timeSeconds": 1.4,
+        "hand": "RightHand"
+      },
+      "maximumSoleVelocity": {
+        "value": 2.280786,
+        "timeSeconds": 0.6333,
+        "foot": "RightFoot"
+      },
+      "maximumBoneWorldOrientationStep": {
+        "value": 6.515273,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumBoneLocalOrientationStep": {
+        "value": 6.515273,
+        "timeSeconds": 0.8,
+        "bone": "LeftArm"
+      },
+      "maximumKneeBackwardOffset": {
+        "value": 0,
+        "timeSeconds": 0
+      },
+      "minimumElbowInteriorDegrees": {
+        "value": 50.5023,
+        "timeSeconds": 0.7333,
+        "side": "Left"
+      },
+      "maximumElbowSideOffset": {
+        "value": 0.189711,
+        "timeSeconds": 1.6667,
+        "side": "Left"
+      },
+      "maximumRootVelocity": {
+        "value": 1.824157,
+        "timeSeconds": 0.7333
+      },
+      "maximumRootVelocityChange": {
+        "value": 0.279337,
+        "timeSeconds": 1.1
+      },
+      "hotspots": [],
+      "endpoint": {
+        "rootDistanceMeters": 0.9751,
+        "ballLocalDistanceMeters": 2.2006,
+        "maximumLocalRotationDifferenceDegrees": 64.4078
+      }
+    }
+  ]
+}
