@@ -26,8 +26,10 @@ const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'C
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
 export function runAlpineSession(ctx) {
   // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
-  const airOff = new URLSearchParams(globalThis.location?.search || '').get('alpineAir') === '0';
-  const balance = airOff && ctx.balance.physics.airBoost ? {...ctx.balance, physics: (({airBoost, ...rest}) => rest)(ctx.balance.physics)} : ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+  const urlQuery = new URLSearchParams(globalThis.location?.search || ''), airOff = urlQuery.get('alpineAir') === '0', fallOff = urlQuery.get('alpineFall') === '0', obsOff = urlQuery.get('alpineObs') === '0';
+  const balance0 = (airOff && ctx.balance.physics.airBoost) || (fallOff && ctx.balance.physics.fall) ? {...ctx.balance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(ctx.balance.physics)} : ctx.balance,
+    // ?alpineObs=0 removes the narrow passages (warning signs come with them).
+    balance = obsOff ? {...balance0, tracks: Object.fromEntries(Object.entries(balance0.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : balance0, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
   const level = engine.level, track = engine.track;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
@@ -185,12 +187,12 @@ export function runAlpineSession(ctx) {
       if (e.type === 'countdown') { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); continue; }
       if (e.riderId !== 'player') { if (e.type === 'overtake' && e.objectId === 'player') status.textContent = t('alpine.status.overtaken', {rank: snap.rank}); continue; }
       if (e.type === 'boost-start') { audio.cue('boost'); showCallout(e.objectId ? CALLOUTS.pad : CALLOUTS.boost, now); }
-      else if (e.type === 'collision') { audio.cue('hit'); showCallout(CALLOUTS.collision, now); }
+      else if (e.type === 'collision') { audio.cue('hit'); /* the fall itself is the feedback: no banner text */ }
       else if (e.type === 'takeoff') { audio.cue('takeoff'); showCallout(CALLOUTS.takeoff, now); }
       else if (e.type === 'land') audio.cue('land');
       else if (e.type === 'trick-start') audio.cue('trickStart');
       else if (e.type === 'trick') { audio.cue('trick'); showCallout('trick', now, TRICK_NAMES[e.objectId] + (e.count > 1 ? ` ×${e.count}` : ''), t('alpine.callout.trick', {points: e.value})); status.textContent = t('alpine.status.trick', {points: e.value}); }
-      else if (e.type === 'crash') { audio.cue('crash'); showCallout('crash', now); status.textContent = t('alpine.callout.crash'); }
+      else if (e.type === 'crash') { audio.cue('crash'); status.textContent = t('alpine.callout.crash'); }
       else if (e.type === 'coin') { audio.cue('coin'); coinPulse = now + .25; }
       else if (e.type === 'gate') { audio.cue('gate'); if (now > calloutUntil) showCallout(CALLOUTS.gate, now); }
       else if (e.type === 'overtake') { audio.cue('overtake'); if (now > calloutUntil) showCallout(CALLOUTS.overtake, now); status.textContent = t('alpine.status.rank', {rank: snap.rank}); }
