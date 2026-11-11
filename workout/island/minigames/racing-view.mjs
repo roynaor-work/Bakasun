@@ -207,7 +207,9 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
     for(const w of wheels){const d=new T.Mesh(keep(new T.CircleGeometry(.33,12)),blurMaterial);d.rotation.y=Math.PI/2;w.add(d);blurDiscs.push(d);}
     if(i>0){standIn=createStandIn(T,carColors[i],keep,teamOf(i).accent);root.add(standIn);}}
   }
-  else if(i>=5&&carCount>5){lightOnly=true;standIn=createStandIn(T,carColors[i],keep,teamOf(i).accent);standIn.visible=true;body.add(standIn);}   // racing-grid-v1 extra rivals: the light model only
+  // racing-grid-v1 extra rivals: the light model only. racing-deep-m2: with the formula asset loaded, every rival beyond the two nearest full models is the light formula
+  // silhouette too (the v7 sports coupes next to formula cars broke the Formula 1 look); ?racingF1Field=0 brings the coupes back for cars 3-4.
+  else if((i>=5&&carCount>5)||(formulaAsset&&new URLSearchParams(globalThis.location?.search||'').get('racingF1Field')!=='0')){lightOnly=true;standIn=createStandIn(T,carColors[i],keep,teamOf(i).accent);standIn.visible=true;body.add(standIn);}
   else if(rig){body.add(rig.root);modelLoaded=true;}
   else if(carAsset){
    function fitCar(source){const original=source.clone(true);original.rotation.y=carAssetName==='original-meshy'?Math.PI/2:0;const box=new T.Box3().setFromObject(original),size=box.getSize(new T.Vector3()),c=box.getCenter(new T.Vector3()),fit=new T.Group();original.position.set(-c.x,-box.min.y,-c.z);if(carAssetName==='sport-coupe')fit.scale.setScalar(4.6/size.z);else fit.scale.set(2.25/size.x,1.5/size.y,4.2/size.z);fit.add(original);body.add(fit);original.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(carAssetName==='sport-coupe'){const materials=Array.isArray(o.material)?o.material:[o.material];const tinted=materials.map(m=>{if(!/^Paint 1/.test(m.name))return m;const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}}if(/^Wheel(Front|Rear)[LR]$/.test(o.name))wheels.push(o);});models.push(fit);return fit;}
