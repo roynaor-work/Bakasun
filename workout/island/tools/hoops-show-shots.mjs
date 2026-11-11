@@ -64,7 +64,8 @@ try{
   console.log('replay phases',JSON.stringify([log.baseline,log.chase,log.back,log.after]),'tag hidden after',log.tagHidden);
  }
  // the shot-clock warning: step until the shot clock is under five seconds in live play
- const low=await page.evaluate(()=>{const d=window.__session.debug;for(let i=0;i<60*60*6;i++){d.step(1);const s=window.__session.snapshot;if(s.phase==='live'&&s.shotClockOn&&s.shotClock<=4.6&&s.shotClock>3)return {i,shotClock:s.shotClock};}return null;});
+ // bursts of 10 ticks (a sixth of a second): the warning window is five seconds wide
+ const low=await page.evaluate(()=>{const d=window.__session.debug;for(let i=0;i<60*60*6;i+=10){d.step(10);const s=window.__session.snapshot;if(s.phase==='live'&&s.shotClockOn&&s.shotClock<=4.6&&s.shotClock>3&&!s.replaying)return {i,shotClock:s.shotClock};}return null;});
  log.shotClock=low;if(low){await page.evaluate(()=>window.__session.debug.view.snapCamera());await shot('08-hud-shotclock');}
  log.errors=errors.filter(e=>!/favicon|manifest|404/.test(e));
  await context.close();
