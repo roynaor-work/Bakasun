@@ -6,12 +6,17 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const PROFILES=Object.freeze(Object.fromEntries(Object.entries(SOCCER_RESTART_SEQUENCES).map(([kind,profile])=>[kind,Object.freeze({...profile,clip:kind})])));
 
+/** Rules v1: a free kick and a penalty are standing kicks, so they reuse the goal-kick clip and
+ * its release clock (0.528 s to contact) instead of a new authored sequence. */
+const CLIP_ALIASES=Object.freeze({freeKick:'goalKick',penalty:'goalKick'});
+export function restartClipKind(kind){return CLIP_ALIASES[kind]||kind;}
 /** The simulation owns the release clock. Clips only display that same clock. */
 export function restartActionProfile(kind){
-  const p=PROFILES[kind];if(!p)throw Error(`Unknown soccer restart action: ${kind}`);
+  const p=PROFILES[restartClipKind(kind)];if(!p)throw Error(`Unknown soccer restart action: ${kind}`);
   return p;
 }
 export function sampleRestartAction(kind,elapsed,out={}){
+  kind=restartClipKind(kind);
   const p=restartActionProfile(kind),t=clamp(Number.isFinite(elapsed)?elapsed:0,0,p.duration);
   out.kind=kind;out.elapsed=t;out.duration=p.duration;out.contact=p.contact;
   out.progress=t/p.duration;out.released=t+1e-8>=p.contact;
@@ -106,6 +111,9 @@ export function restartAimPreview(s,c,out,solveDestination=assistedPassDestinati
     const dx=aim.x,dz=-Math.sign(r.z)*Math.max(c.restarts.inwardMinimum,Math.abs(aim.z)),length=Math.hypot(dx,dz)||1;
     const range=c.restarts.throwReach||9;
     out.aimX=dx/length;out.aimZ=dz/length;x=r.x+out.aimX*range;z=r.z+out.aimZ*range;
+  }else if(shot&&(r.type==='freeKick'||r.type==='penalty')){
+    // Rules v1: the shot button at a free kick or penalty is a real shot, so the cue is a straight line at the aim, not a pass arc.
+    const length=Math.hypot(aim.x,aim.z)||1;out.aimX=aim.x/length;out.aimZ=aim.z/length;x=r.x+out.aimX*10;z=r.z+out.aimZ*10;
   }else{
     const ball={...s.ball,x:r.x,z:r.z},state={...s,controlled:p.id,ball,aim,passAim:manual||null};
     const destination=solveDestination(state,c,power);
@@ -128,6 +136,13 @@ export function createRestartLayout(r,s,c){
   const mates=s.players.filter(p=>p.team===r.team&&p.id!==r.player&&p.role!=='keeper');
   mates.sort((a,b)=>r.type==='throwIn'?distance(a,r)-distance(b,r)||a.id-b.id:(b.role==='striker')-(a.role==='striker')||a.id-b.id);
   for(const p of s.players)if(p.role==='keeper'&&p.id!==r.player){const pd=s.attackDir*(p.team===0?1:-1);put(p,-pd*(hx-c.ai.keeperInset),clamp(r.z*.15,-c.pitch.goalWidth/3,c.pitch.goalWidth/3),'restart-keeper');}
+  if(r.type==='penalty'){
+    // Rules v1: only the taker and the keeper stay in the area; both teams line the edge of the box.
+    const edge=d*(hx-c.pitch.penaltyDepth-1.2),rivals=s.players.filter(p=>p.team!==r.team&&p.role!=='keeper').sort((a,b)=>a.id-b.id);
+    mates.forEach((p,i)=>put(p,edge,(i%2?1:-1)*(1.6+Math.floor(i/2)*2.4),'penalty-wait'));
+    rivals.forEach((p,i)=>put(p,edge-d*1.2,(i%2?-1:1)*(2.8+Math.floor(i/2)*2.4),'penalty-wait'));
+    return targets;
+  }
   for(let i=0;i<mates.length;i++){
     const p=mates[i];
     if(r.type==='throwIn'){
@@ -139,6 +154,11 @@ export function createRestartLayout(r,s,c){
       const points=[[hx-c.pitch.penaltySpot,Math.sign(r.z)*c.pitch.goalWidth*.24],[hx-c.pitch.penaltySpot-1.6,-Math.sign(r.z)*c.pitch.goalWidth*.33],[hx-c.pitch.penaltyDepth-2,Math.sign(r.z)*2.8]];
       const q=points[i]||[hx-c.pitch.penaltyDepth-5-(i-3)*3,(i%2?1:-1)*hz*.45];
       put(p,d*q[0],q[1],i===0?'corner-near':i===1?'corner-far':'corner-cover');
+    }else if(r.type==='freeKick'){
+      // Rules v1: one runner toward goal, one wide outlet, the rest cover behind the ball.
+      const ahead=Math.min(8,Math.max(2,(hx-2-r.x*d)));
+      const q=i===0?[r.x+d*ahead,r.z*.4]:i===1?[r.x+d*Math.min(3,ahead),r.z+inward*4]:[r.x-d*(4+(i-2)*2.5),r.z*.5+(i%2?1:-1)*3];
+      put(p,q[0],q[1],i===0?'free-kick-run':i===1?'free-kick-outlet':'free-kick-cover');
     }else{
       // A short outlet on either side and a central forward beyond the press.
       const q=i===0?[-hx+c.pitch.penaltyDepth+8,0]:[-hx+c.pitch.penaltyDepth+1.5+(i-1)*1.2,(i%2?1:-1)*Math.min(hz-inset,c.pitch.penaltyWidth/2+1)];
@@ -147,16 +167,15 @@ export function createRestartLayout(r,s,c){
   }
   const rivals=s.players.filter(p=>p.team!==r.team&&p.role!=='keeper');
   rivals.sort((a,b)=>a.id-b.id);
-  const available=mates.slice();
+  const available=mates.slice(),space=r.type==='throwIn'?(c.restarts.opponentSpace||3.5):r.type==='corner'?3:r.type==='freeKick'?(c.rules.freeKickSpace||9.15):0;
   for(const p of rivals){
     let mark=null,cost=Infinity;
     for(const q of available){const t=targets[q.id],v=distance(p,t);if(v<cost||v===cost&&q.id<mark.id){mark=q;cost=v;}}
     if(mark){available.splice(available.indexOf(mark),1);const t=targets[mark.id];let x=t.x+d*1.4,z=t.z;
       if(r.type==='goalKick')x=d*Math.max(x*d,-hx+c.pitch.penaltyDepth+2.2);
-      const space=r.type==='throwIn'?(c.restarts.opponentSpace||3.5):r.type==='corner'?3:0;
       const dx=x-r.x,dz=z-r.z,l=Math.hypot(dx,dz);if(space&&l<space){x=r.x+(l?dx/l:-d)*space;z=r.z+(l?dz/l:inward)*space;}
       put(p,x,z,'restart-mark');
-    }else put(p,r.x+d*(4+targets.filter(Boolean).length*.15),r.z*.3,'restart-zone');
+    }else put(p,r.x+d*Math.max(space,4+targets.filter(Boolean).length*.15),r.z*.3,'restart-zone');
   }
   return targets;
 }

@@ -136,6 +136,8 @@ export function startSoccer(ctx) {
       if(ms&&!paused)try{navigator.vibrate?.(ms);}catch{}
     }
     function actionFeedback(event){
+      // Rules v1: the referee's call shows for both teams (the whistle comes from the audio layer).
+      if(event.type==='foul'){feedback.textContent=event.penalty?'עבירה · פנדל':'עבירה';feedback.dataset.action='foul';feedback.hidden=false;feedbackTime=1.6;return;}
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
       if(!key)return;
@@ -188,7 +190,7 @@ export function startSoccer(ctx) {
       if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
+      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
       phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
       audio.update(s);
       for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);}

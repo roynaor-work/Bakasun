@@ -8635,6 +8635,14 @@
     "passSelectionAdvanceWeight": 0.3,
     "keeperStealRate": 12,
     "sprintFromStage": 6,
+    "slide": {
+     "rate": 2.5,
+     "minDistance": 0.8,
+     "maxDistance": 1.8,
+     "minHoldSeconds": 0.35,
+     "fromStage": 2,
+     "cooldownSeconds": 3
+    },
       "catchUpDistance": 8,
       "catchUpBoost": 0.45,
     "sprintSeconds": 0.65,
@@ -8696,6 +8704,11 @@
     "sideInset": 0,
     "sideGoalInset": 2,
     "restartSpace": 2.2,
+    "freeKickSpace": 9.15,
+    "foul": {
+     "reach": 1.3,
+     "frontChance": 0.6
+    },
     "restartPushX": 2.5,
     "restartPushZ": 2,
     "restartPlayerInset": 0.5,
@@ -9596,6 +9609,10 @@
     "groundTravelSeconds": 0.55,
     "groundConeDegrees": 80,
     "leadSeconds": 0.32,
+    "throughLeadSeconds": 0.75,
+    "throughSpeed": 2,
+    "throughLaneRadius": 1.2,
+    "throughArrivalRatio": 1.15,
     "loftMinSeconds": 1.05,
     "loftExtraSeconds": 0.45,
     "loftMinHeight": 2.8,
@@ -11912,6 +11929,22 @@
     "laneRadius": 0.9,
     "lanePenalty": 1.6,
     "lobAbove": 11
+   },
+   "play": {
+    "enabled": true,
+    "oopRadius": 3.2,
+    "oopBox": 0.9,
+    "oopApproach": 0.6,
+    "oopNear": 1.8,
+    "oopDunkRadius": 1.6,
+    "oopBonus": 0.15,
+    "oopTargetBonus": 2.5,
+    "oopCatchHeight": 2.75,
+    "aiOopChance": 0.08,
+    "lobFar": 7.0,
+    "spacingRadius": 2.5,
+    "spacingMax": 2,
+    "doubleTapMs": 260
    },
    "jump": {
     "duration": 0.72,

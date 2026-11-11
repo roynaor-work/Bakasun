@@ -41,7 +41,8 @@ function digest(opt){
   return out;
 }
 test('aiVersion v1 reproduces the pre-gameplay-1 model exactly; v2 differs',()=>{
-  assert.deepEqual(digest({aiVersion:'v1'}),MAIN_DIGESTS);
+  // Rules v1 (M3: fouls, through balls, rival slides) is a separate flag; the legacy digest is the match with both off.
+  assert.deepEqual(digest({aiVersion:'v1',rulesVersion:'off'}),MAIN_DIGESTS);
   assert.notDeepEqual(digest({aiVersion:'v2'}),MAIN_DIGESTS);
 });
 
