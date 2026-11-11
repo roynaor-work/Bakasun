@@ -28,7 +28,7 @@ export function createTyreGun({balance = {}, stage = 1, rnd = Math.random, level
   const B = {...TYRES, ...(balance.tyres || {})}, i = clamp(stage, 1, 10) - 1;
   const pick = arr => arr[Math.min(arr.length - 1, i)];
   const range = B.rangeStage1 + (B.rangeStage10 - B.rangeStage1) * i / 9;
-  const s = {ammo: pick(B.ammoMax), ammoMax: pick(B.ammoMax), reload: 0, trickle: B.trickleSeconds, locked: false, lockWheel: null, flats: {FL: false, FR: false, RL: false, RR: false}, flatCount: 0, flatsToStop: level.flatsToStop || pick(B.flatsToStop), hitChance: 0, range, shots: 0, hits: 0, stopped: false, t: 0};
+  const s = {ammo: pick(B.ammoMax), ammoMax: pick(B.ammoMax), reload: 0, trickle: B.trickleSeconds, locked: false, lockWheel: null, flats: {FL: false, FR: false, RL: false, RR: false}, flatCount: 0, flatsToStop: level.flatsToStop || pick(B.flatsToStop), hitChance: 0, armed: true, armIn: 0, range, shots: 0, hits: 0, stopped: false, t: 0};
   const events = [];
   let last = null;
   const api = {
@@ -38,7 +38,8 @@ export function createTyreGun({balance = {}, stage = 1, rnd = Math.random, level
       if (s.reload > 0) { s.reload = Math.max(0, s.reload - dt); if (s.reload === 0) events.push({type: 'reload'}); }
       if (s.ammo < s.ammoMax) { s.trickle -= dt; if (s.trickle <= 0) { s.trickle = B.trickleSeconds; s.ammo++; } } else s.trickle = B.trickleSeconds;
       const gap = ctx.gap ?? 99, lat = ctx.lateral ?? 0;
-      const inRange = gap > 2 && gap < range && Math.abs(lat) < B.lateralMax && !s.stopped;
+      s.armed = ctx.armed !== false; s.armIn = ctx.armed === false ? (ctx.armIn ?? 1) : 0;
+      const inRange = s.armed && gap > 2 && gap < range && Math.abs(lat) < B.lateralMax && !s.stopped;
       if (inRange) {
         const gapF = gap <= B.nearGap ? 1 : 1 - (1 - B.farChance) * (gap - B.nearGap) / Math.max(1, range - B.nearGap);
         const latF = 1 - .5 * Math.abs(lat) / B.lateralMax;

@@ -33,6 +33,8 @@ const CSS = `
 .catch-fire{position:absolute;right:max(14px,env(safe-area-inset-right));bottom:max(126px,calc(env(safe-area-inset-bottom) + 126px));width:84px;height:84px;border-radius:50%;border:3px solid #ffd6c8;background:radial-gradient(circle at 35% 28%,#ff9d7a,#d8401f 72%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:14px;font-weight:800;box-shadow:0 5px 0 #7a1f0a,0 8px 22px #0008;cursor:pointer;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none;transition:transform .08s,box-shadow .08s,opacity .2s,filter .2s;font-family:inherit}
 .catch-fire:active,.catch-fire.kick{transform:translateY(4px);box-shadow:0 1px 0 #7a1f0a,0 4px 12px #0008}
 .catch-fire[data-locked=false]{opacity:.5;filter:grayscale(.65)}
+.catch-fire[data-arming=true]{opacity:.35}
+.catch-fire-arm{position:absolute;right:-4px;top:-4px;min-width:22px;height:22px;border-radius:11px;background:#0c1830;border:1px solid #ffffff55;color:#ffe08a;font-size:12px;font-weight:800;line-height:20px;text-align:center}
 .catch-fire[data-reload=true]{filter:saturate(.6)}
 .catch-fire[data-empty=true]{opacity:.45;filter:grayscale(.8)}
 .catch-fire[data-locked=true][data-reload=false][data-empty=false]{box-shadow:0 5px 0 #7a1f0a,0 8px 22px #0008,0 0 18px #ff9d7acc;animation:catch-fire-ready 1.1s ease-in-out infinite}
@@ -127,6 +129,8 @@ export function installFireHud({hud, stageEl, t, gun, project, crimWorld, onFire
     if (!on) { reticle.hidden = true; return; }
     const B = g.balance || {};
     button.dataset.locked = String(Boolean(st.locked)); button.dataset.reload = String(st.reload > 0); button.dataset.empty = String(st.ammo <= 0);
+    // the gun arms after the opening stretch of the chase: the button shows the seconds left until then
+    button.dataset.arming = String(st.armed === false); if (st.armed === false) { if (!button.armLabel) { button.armLabel = document.createElement('small'); button.armLabel.className = 'catch-fire-arm'; button.append(button.armLabel); } button.armLabel.textContent = String(Math.ceil(st.armIn || 0)); } else if (button.armLabel) { button.armLabel.remove(); button.armLabel = null; }
     button.disabled = false;
     const prog = reloadProgress(st, B); arcCircle.setAttribute('stroke-dashoffset', String(ARC * (1 - prog)));
     if (st.reload > 0) wasReloading = true; else if (wasReloading) { wasReloading = false; }

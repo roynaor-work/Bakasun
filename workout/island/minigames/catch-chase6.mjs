@@ -29,7 +29,8 @@ export const CHASE6 = Object.freeze({
   contactLen: 4.4, contactWidth: 2, sideZone: .8, sideBonus: 1.8, ramRate: .04, crimPush: 1.6, ramDrag: .8,
   skidSeconds: 2.2, stopSearch: 45,          // after the last flat: the thief slides to a stop, on a straight if one is near (skidSeconds is the minimum)
   farFactor: 1.3, nearFactor: .75, windFar: 1.25, windNear: .6, bonusThrowAt: .85,
-  turnWarn: 55,                              // metres ahead a bend is announced
+  turnWarn: 55,
+  gunArmSeconds: 14, gunArmPerStage: .6,       // the tyre gun arms only after this: the chase runs through its first bends before the car can be stopped (QA 11/11)                              // metres ahead a bend is announced
 });
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -75,6 +76,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
   const gun = createTyreGun({balance, stage, rnd, level});
   const tankScale = 1 + ((Number(equipment.net) || 1) - 1) * 2;
   const crimTop = Math.max(spec.crimSpeed, C.baseSpeed + C.crimLead + (stage - 1) * C.crimLeadPerStage);
+  const armAt = (C.gunArmSeconds || 0) + (stage - 1) * (C.gunArmPerStage || 0);
   const s = {t: 0, phase: 'countdown', countdown: C.countdownSeconds, s: 0, d: 0, v: C.baseSpeed, steer: 0, slide: 0, tank: tankScale, stun: 0, oil: 0, hits: 0, pads: 0, scrape: 0, scraping: false, boosting: false, braking: false, damage: 0, rams: 0, ramCool: 0, curvature: 0, bendAhead: null,
     crim: {s: spec.gap ?? C.startGap, d: 0, targetD: 0, v: C.baseSpeed, slow: 0, boostLeft: 0, nextBoost: spec.crimBoost || 1e9, hits: 0, retarget: 0, swerve: 0, stopS: null, wobble: 0},
     gap: spec.gap ?? C.startGap, outcome: null, skid: 0};
@@ -199,7 +201,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       }
       s.gap = ds;
       // --- tyre gun ---
-      gun.step(dt, {gap: ds, lateral: dd, vOfficer: s.v, vThief: c.v, stun: s.stun, scraping: s.scraping, thiefSwerve: c.swerve, curvature: s.curvature});
+      gun.step(dt, {gap: ds, lateral: dd, vOfficer: s.v, vThief: c.v, stun: s.stun, scraping: s.scraping, thiefSwerve: c.swerve, curvature: s.curvature, armed: s.t >= armAt, armIn: Math.max(0, armAt - s.t)});
       pullGun();
       // --- end: the damage meter is full, or the time runs out and he reaches the police roadblock ---
       if (s.phase === 'run') { if (s.damage >= 1) beginSkid(); else if (s.t >= spec.seconds) finish('roadblock'); }
