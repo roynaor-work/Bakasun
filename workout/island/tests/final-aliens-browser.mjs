@@ -95,7 +95,10 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
    const pts=[f];if(fireHeld)pts.push({...fire,id:2});await touch('touchMove',pts);
    await tick(100);last=s;s=await snap();steps++;
   }
-  await touch('touchEnd');const end=s||last;const r={stageSeconds:+((end.time)-t0).toFixed(1),outcome:end.result?.outcome||(s?'running':'ended'),fired:end.fired,kills:end.kills,livesLeft:end.lives,maxLives:end.maxLives,wave:end.wave,overheats:end.overheats,steps};report.botStage1=r;console.log('bot-stage1',JSON.stringify(r));
+  await touch('touchEnd');const end=s||last;
+  // The shell closes the game on the last kill, so the final snapshot may be gone: the island's win counter says how the round ended.
+  const won=end.result?.outcome==='win'||(!s&&await page.evaluate(()=>(window.__island.engine.state.minigameWins.alienDefense||0)>0));
+  const r={stageSeconds:+((end.time)-t0).toFixed(1),outcome:won?'win':end.result?.outcome||(s?'running':'ended'),fired:end.fired,kills:end.kills,livesLeft:end.lives,maxLives:end.maxLives,wave:end.wave,overheats:end.overheats,steps};report.botStage1=r;console.log('bot-stage1',JSON.stringify(r));
   check(r.outcome==='win',`bot wins stage 1 (${r.outcome})`);check(r.stageSeconds>=85&&r.stageSeconds<=135,`stage 1 lasts ${r.stageSeconds} s (target 85-135)`);
   await tick(300);await capture('4-stage-end');
  }

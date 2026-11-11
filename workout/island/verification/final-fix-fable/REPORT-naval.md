@@ -61,7 +61,7 @@
 
 - `node workout/island/tests/final-naval-browser.mjs` (Chromium/SwiftShader, 844×390, מגע CDP על `#shoot`): עבר (יציאה 0): 6 גרירות בשלבים 3 ו-10, שלב האוויר, תקציב ציור. `MODE=before node ...` (דגל `navalAim=v20`): נכשל כנדרש (יציאה 1): "turn right from the Fire button reaches 120 degrees (got 10.3)"; שמאלה 100 פיקסלים -22°, כמו המדידה המקורית של v20.
 - `node --test tests/final-naval.test.mjs`: 8 בדיקות (דגל, עקומת הסיבוב, נתיב הקלט האמיתי עם 62 פיקסלים, מעקב מצלמה, חץ קצה, מודל האוויר עם נפילה לים, שלבי האוויר, אודיו).
-- `node --test tests/*.mjs` על המצב הסופי: {FULL}.
+- `node --test tests/*.mjs` על המצב הסופי: 3,721 בדיקות, 3,656 עברו, 0 נכשלו, 65 דולגו (יציאה 0).
 
 ## 7. מה לא אומת
 

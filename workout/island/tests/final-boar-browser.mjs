@@ -1,7 +1,7 @@
 // Acceptance test for the boar game ("חזירים") through the REAL island shell with real touch (11/11/2026).
 // Run: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs node workout/island/tests/final-boar-browser.mjs
 //   MODE=after  (default) the fixed code: every shot must come from the fire button, the left stick only moves the aim.
-//   MODE=v20    `?boarFire=v20&boarHud=v20` on the island URL: the v20 code (HUD cards included) (ability buttons inside the stick zone, F and mouse fire, a stray scene touch releases the button).
+//   MODE=v20    `?boarFire=v20&boarHud=v20&boarStick=v20` on the island URL: the v20 code (HUD cards included) (ability buttons inside the stick zone, F and mouse fire, a stray scene touch releases the button).
 //   MODE=before `?boar=v1`: the code Roy's phone ran (v19 on the live site): any touch on the scene aims and fires.
 // Exit code: MODE=after exits 1 on any failure. MODE=before/v20 exit 0 only when the old code is caught failing (the test proves it can see the bug) and 2 otherwise.
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
@@ -14,7 +14,7 @@ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:tru
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(180000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 const log=(...a)=>console.error('['+MODE+']',...a);
-const query='?dev=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20':'');
+const query='?dev=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20&boarStick=v20':'');
 await page.goto(server.url+query,{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
 await page.locator('[data-action=avatar-start]').tap();
@@ -30,11 +30,12 @@ const cdp=await ctx.newCDPSession(page);await cdp.send('Emulation.setTouchEmulat
 // CDP: touchStart/touchMove list the active points; touchEnd lists the points being RELEASED (an empty list releases every remaining point).
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id??1}))});
 const mouse=(type,x,y,button='left')=>cdp.send('Input.dispatchMouseEvent',{type,x:x+box.x,y:y+box.y,button,clickCount:1,pointerType:'mouse'});
-const wait=ms=>page.waitForTimeout(ms);
-const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,heat:s.heat,frames:s.frames||0,current:s.current,elapsed:s.elapsed||0,stickInfo:s.stickInfo||null,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
-const resetAim=()=>frame.evaluate(()=>window.__boar.aim(0,-.05));
+const wait=ms=>page.waitForTimeout(ms);let dead=false;
+const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {shots:s.shots,heat:s.heat,frames:s.frames||0,current:s.current,elapsed:s.elapsed||0,stickInfo:s.stickInfo||null,stickR:s.stickR||62,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,aim:s.aim,firing:s.firing,stick:s.stick,fireHeld:s.fireHeld,flags:s.flags||{},mode:s.mode,hp:s.hp,enemies:s.enemies.length};});
+const resetAim=()=>dead?null:frame.evaluate(()=>window.__boar.aim(0,-.05)).catch(()=>{dead=true;});
 // the machine gun overheats after long holds; a step that counts shots waits for it to cool first
-const cool=async()=>{for(let i=0;i<40;i++){if(((await st()).heat||0)<15)return;await wait(250);}};
+const framesLater=async(n,maxMs=40000)=>{const f0=(await st()).frames;const t=Date.now();while(Date.now()-t<maxMs){const s=await st();if(s.frames>=f0+n)return s;await wait(60);}return null;};
+const cool=async()=>{if(dead)return;try{for(let i=0;i<40;i++){if(((await st()).heat||0)<15)return;await wait(250);}}catch{dead=true;}};
 const shot=name=>page.screenshot({path:out+`frames/boar-${MODE}-${name}.jpg`,type:'jpeg',quality:80});
 const env=await frame.evaluate(()=>({coarse:matchMedia('(pointer:coarse)').matches,hoverNone:matchMedia('(hover:none)').matches,maxTouchPoints:navigator.maxTouchPoints,fireBtn:!!document.getElementById('fire-btn'),aimZone:!!document.getElementById('aim-zone'),landscape:innerWidth>innerHeight}));
 await frame.evaluate(()=>window.__boar.start(1));await wait(1500);
@@ -53,7 +54,6 @@ log('hudCoverage',hudCoverage);await page.screenshot({path:out+`frames/boar-hud-
 const results={mode:MODE,query,env,layout,hudCoverage,steps:{}};const hasBtn=!!layout.fireBtn;const noBtn={skipped:'no fire button in this mode (legacy touch-to-fire)'};
 const nonButton=s=>Object.entries(s.shotsBy).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
 const diff=(a,b)=>({shots:b.shots-a.shots,frames:b.frames-a.frames,nonButton:nonButton(b)-nonButton(a),button:(b.shotsBy.button||0)-(a.shotsBy.button||0),stickNoButton:b.stickNoButton-a.stickNoButton,abilities:Object.keys(b.abilityBy).reduce((n,k)=>n+(b.abilityBy[k]||0)-(a.abilityBy[k]||0),0),abilityFromLeft:b.abilityFromLeft-a.abilityFromLeft,aimFrom:a.aim,aimTo:b.aim,aimMoved:Math.hypot(b.aim.x-a.aim.x,b.aim.y-a.aim.y)>.03});
-let dead=false;
 async function step(name,fn){if(dead){results.steps[name]={error:'skipped: the game frame was lost earlier'};return;}
  try{const a=await st();const extra=await fn()||{};const b=await st();results.steps[name]={...diff(a,b),...extra};}
  catch(e){results.steps[name]={error:String(e.message||e).split('\n')[0]};if(/detached|closed/i.test(String(e.message)))dead=true;}
@@ -77,20 +77,19 @@ await resetAim();await cool();await step('twoFingers',async()=>{if(!hasBtn)retur
  return {heldFiring:held.firing,heldFireHeld:held.fireHeld,stickActiveWhileHeld:held.stick,shotsAfterButtonRelease:end.shots-afterRelease.shots,aimKeptAfterStickRelease:Math.hypot(end.aim.x-released.aim.x,end.aim.y-released.aim.y)<.02};});
 // G) hold the fire button and tap the scene with another finger: firing must continue
 await cool();await step('strayTapWhileHeld',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(400);const s1=await st();
- await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:520,y:130,id:3}]);await wait(100);const s2=await st();await wait(1200);const s3=await st();await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(300);
+ await touch('touchStart',[{x:bx,y:by,id:2},{x:520,y:130,id:3}]);await wait(120);await touch('touchEnd',[{x:520,y:130,id:3}]);await wait(100);const s2=await st();const s3=(await framesLater(6,20000))||await st();await touch('touchEnd',[{x:bx,y:by,id:2}]);await wait(300);
  return {shotsBeforeTap:s1.shots,heatAtTap:s1.heat,firingAfterStrayTap:s2.firing,fireHeldAfterStrayTap:s2.fireHeld,shotsAfterStrayTap:s3.shots-s2.shots,framesAfterStrayTap:s3.frames-s2.frames};});
 // H) keyboard F (the frame has focus, as on a phone with a keyboard)
-await cool();await step('keyboardF',async()=>{await frame.evaluate(()=>document.getElementById('scene').focus());await page.keyboard.down('KeyF');await wait(800);await page.keyboard.up('KeyF');await wait(300);});
+await cool();await step('keyboardF',async()=>{await frame.evaluate(()=>document.getElementById('scene').focus());await page.keyboard.down('KeyF');await framesLater(4,15000);await page.keyboard.up('KeyF');await wait(200);});
 // I) mouse-type pointer on the scene
-await cool();await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await wait(700);await mouse('mouseReleased',500,200);await wait(300);});
+await cool();await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await framesLater(4,15000);await mouse('mouseReleased',500,200);await wait(200);});
 // J) the fire button alone: shots, all from the button, aim unchanged
 await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(1000);await shot('fire');const held=await st();await touch('touchEnd',[]);await wait(300);return {heldFiring:held.firing};});
 // L) stick precision with real touch, measured in game time over game frames (`frames`/`elapsed`), so a starved CPU (about one frame a second here) measures the same
 //    kinematics as a 60 fps phone: fine-aim speed at a 20% tilt, time to a target with a full tilt, overshoot after release (the crosshair must stop at once), and the
 //    precision finger (second finger on the stick zone slows the crosshair).
-const framesLater=async(n,maxMs=40000)=>{const f0=(await st()).frames;const t=Date.now();while(Date.now()-t<maxMs){const s=await st();if(s.frames>=f0+n)return s;await wait(60);}return null;};
 const speedOver=async(n,axis)=>{const s0=await framesLater(1);if(!s0)return null;const s1=await framesLater(n);if(!s1||s1.elapsed<=s0.elapsed)return null;return +((s1.aim[axis]-s0.aim[axis])/(s1.elapsed-s0.elapsed)).toFixed(3);};
-await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)return noBtn;const R=(await st()).stickInfo?.R||62;const o={x:150,y:290};
+await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)return noBtn;const R=(await st()).stickR;const o={x:150,y:290};
  // fine aim: 20% tilt to the right; let the smoothing settle for 3 frames, then measure over 4 frames
  await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(3);const fine=await speedOver(4,'x');await touch('touchEnd',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(1);
  // time to target: full tilt from x=0 until x>=0.6, then release at once and watch for overshoot over 3 more frames
@@ -117,8 +116,8 @@ ok('stick drag leaving the zone: 0 shots, aim moved',S.stickLeavesZone.shots===0
 ok('left thumb where the ability row sat: no ability fired, no press counted inside the zone, drag moves the aim',S.leftThumbAbilityRow.tapsAbilities===0&&S.leftThumbAbilityRow.abilityFromLeft===0&&S.leftThumbAbilityRow.dragAimMoved,S.leftThumbAbilityRow);
 ok('two fingers: shots only from the button, stick active, firing stops when the button is released, aim kept',S.twoFingers.button>0&&S.twoFingers.nonButton===0&&S.twoFingers.stickActiveWhileHeld&&S.twoFingers.shotsAfterButtonRelease===0&&S.twoFingers.aimKeptAfterStickRelease,S.twoFingers);
 ok('stray scene tap while the button is held: the button stays held and firing continues',S.strayTapWhileHeld.firingAfterStrayTap&&S.strayTapWhileHeld.fireHeldAfterStrayTap&&(S.strayTapWhileHeld.shotsAfterStrayTap>0||S.strayTapWhileHeld.framesAfterStrayTap<6),S.strayTapWhileHeld);
-ok('keyboard F: 0 shots',S.keyboardF.shots===0,S.keyboardF.shots);
-ok('mouse on the scene: 0 shots',S.mouseOnScene.shots===0,S.mouseOnScene.shots);
+ok('keyboard F: 0 shots over at least 4 game frames',S.keyboardF.shots===0&&S.keyboardF.frames>=4,S.keyboardF);
+ok('mouse on the scene: 0 shots over at least 4 game frames',S.mouseOnScene.shots===0&&S.mouseOnScene.frames>=4,S.mouseOnScene);
 ok('fire button alone: shots, aim unchanged',S.fireButtonHold.shots>0&&S.fireButtonHold.button===S.fireButtonHold.shots&&!S.fireButtonHold.aimMoved,S.fireButtonHold);
 ok('weapon-switch button: at least 44 px, cycles the weapon, fires nothing',S.weaponButton.size&&S.weaponButton.size[0]>=44&&S.weaponButton.size[1]>=44&&S.weaponButton.weaponAfter!==S.weaponButton.weaponBefore&&S.weaponButton.shots===0,S.weaponButton);
 // HUD coverage baseline of v20 (MODE=v20 on this harness, 844x390, wave 1): hud 0.2152 of the viewport, middle band 0.4297. Target: at least 50% less.

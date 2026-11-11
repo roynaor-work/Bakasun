@@ -79,7 +79,7 @@
 - `node workout/island/tests/final-tennis-browser.mjs` (אחרי): 11 מתוך 11 עברו, בשתי הרצות (7 ו-8 החזרות בנגיעה). `MODE=before`: 3 נכשלו, קוד יציאה 1.
 - `node --test tests/final-tennis.test.mjs`: 3 מתוך 3 עברו.
 - בדיקות הטניס הקיימות (`tests/island-tennis*.test.mjs`, `island-g4c..g4f`): 164 עברו, 0 נכשלו, 2 מדולגות.
-- `node --test tests/*.mjs` המלא: FULLSUITE_RESULT
+- `node --test tests/*.mjs` המלא: 3721 בדיקות, 3656 עברו, 0 נכשלו, 65 מדולגות (הורץ במקביל להרצות הדפדפן של הסוכנים האחרים).
 
 ## מה לא אומת
 - טלפון אמיתי: הכול ב-Chromium עם SwiftShader (רינדור איטי, שעון מדומה, דרגת רינדור אמצעית בכוונה). קצב הפריימים והתחושה באצבע לא נמדדו.
