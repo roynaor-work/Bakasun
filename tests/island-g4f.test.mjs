@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createTennis} from '../workout/island/minigames/tennis.mjs';
 import {synthesizeApplause} from '../workout/island/assets/audio/g4e/applause-source.mjs';
-const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis,dt=config.simulation.step;
+const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames.tennis,dt=config.simulation.step;config.v9.dropFix.enabled=false;// this file pins the original drop physics; v14 has its own tests (island-tennis-v14)
 const advance=(m,t,input={})=>{for(let n=0;n<Math.round(t/dt);n++)m.update(dt,input);};
 const press=(m,key,input={})=>{m.update(0,{...input,[key]:true});m.update(0,{});};
 function incoming(difficulty='normal',z=6,v9){const m=createTennis({config,difficulty,v9}),s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=z;s.contact={side:0,at:0};Object.assign(s.ball,{x:0,z,y:config.ball.hitHeight,lastHitter:1,bounces:1});return m;}

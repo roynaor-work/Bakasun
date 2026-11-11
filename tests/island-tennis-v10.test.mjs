@@ -13,7 +13,7 @@ const byZone=(config,offsets)=>{const g={};for(let i=0;i<N;i++){const t=offsets[
 test('tennis v11: one bar, only while the hit button is held; the needle is the charge measured from the ideal one, green in the centre',()=>{
   const m=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal',hold:false});
   const s=m.getState();s.phase='rally';s.shot={serving:false,side:1};s.players[0].x=0;s.players[0].z=6;Object.assign(s.ball,{x:0,z:6,y:baseConfig.ball.hitHeight,lastHitter:1,bounces:1});s.contact={side:0,at:s.elapsed+2,eta:2,x:0,z:6};
-  m.update(1/60,{});assert.equal(m.getState().hitMeter.active,false,'no button, no bar');
+  m.update(1/60,{});assert.equal(m.getState().hitMeter.active,true,'v14: the bar is up for the incoming ball even with no button pressed');
   m.update(1/60,{prepare:true,aim:{manual:false,x:0,z:0}});let hm=m.getState().hitMeter;assert.equal(hm.active,true);assert.equal(hm.zone,'green','a quick tap at the default length is green');assert.ok(Math.abs(hm.value-.5)<hm.greenHalf);
   for(let i=0;i<70;i++)m.update(1/60,{prepare:true,aim:{manual:false,x:0,z:0}});hm=m.getState().hitMeter;assert.ok(hm.value>.5+hm.greenHalf&&hm.zone!=='green','holding too long moves the needle above the green');
   const deep=createTennis({config:baseConfig,stage:5,seed:3,difficulty:'normal',hold:false}),ds=deep.getState();ds.phase='rally';ds.shot={serving:false,side:1};ds.contact={side:0,at:ds.elapsed+2,eta:2,x:0,z:6};
