@@ -1,15 +1,15 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-8';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-8';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-9';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-9';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-8';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-8';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-8';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-8';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-8';
-import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-8';
-import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-8';
-import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-8';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-9';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-9';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-9';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-9';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-9';
+import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-9';
+import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-9';
+import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-9';
 import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
@@ -224,7 +224,7 @@ export function createNavalView(ctx,model,adapters={}) {
   function playerBox(){if(failed||disposed)return null;let min=Infinity,max=-Infinity,minX=Infinity,maxX=-Infinity;player.root.updateMatrixWorld(true);player.body.traverse(node=>{if(!node.isMesh||!node.geometry?.attributes?.position)return;const pos=node.geometry.attributes.position;for(let i=0;i<pos.count;i+=4){corner.fromBufferAttribute(pos,i).applyMatrix4(node.matrixWorld).project(camera);min=Math.min(min,corner.y);max=Math.max(max,corner.y);minX=Math.min(minX,corner.x);maxX=Math.max(maxX,corner.x);}});if(!Number.isFinite(min))return null;return {height:(Math.min(1,max)-Math.max(-1,min))/2,top:(1-Math.min(1,max))/2,bottom:(1-Math.max(-1,min))/2,left:(Math.max(-1,minX)+1)/2,right:(Math.min(1,maxX)+1)/2};}
   return {get mode(){return failed?'perspective':'three';},resetPeak(){peakTriangles=0;peakDrawCalls=0;},capturePreview(){if(failed||disposed)return null;renderer.info.reset();renderer.render(scene,camera);return canvas.toDataURL('image/png');},metrics(){return {triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,peak:{triangles:peakTriangles,drawCalls:peakDrawCalls},playerModel:{...player.modelStatus},disposed,
     environment:environment.metrics(),models:{requested:Number(Boolean(balance.playerModel))+Number(vessels.some(v=>v.modelStatus.requested)),loaded:Number(player.modelStatus.loaded)+Number(vessels.some(v=>v.modelStatus.loaded)),failed:Number(player.modelStatus.failed)+Number(vessels.some(v=>v.modelStatus.failed))},
-    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),playerPaint:player.paint,aimArc:arc.metrics(),dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,v7:{enabled:Boolean(v7api),player:Boolean(player.modelStatus.v7),enemies:vessels.filter(v=>v.modelStatus.v7).length,failed:Number(Boolean(player.modelStatus.v7Failed))+vessels.filter(v=>v.modelStatus.v7Failed).length},enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
+    playerMarkers:{flag:player.flag.visible,flame:player.flame.visible,flameY:player.flame.position.y},effects:scenery.metrics(),playerBox:playerBox(),playerPaint:player.paint,aimArc:arc.metrics(),air:airView.metrics?.()||null,dressing:dressing.metrics(),projectiles:projectiles.metrics(),impacts:impacts.metrics(),scenery:adventure.metrics(),camera:JSON.parse(JSON.stringify(model.camera)),gpu:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,programs:renderer.info.programs?.length||0},quality:low?'low':'full',playerLoaded:player.modelStatus.loaded,v7:{enabled:Boolean(v7api),player:Boolean(player.modelStatus.v7),enemies:vessels.filter(v=>v.modelStatus.v7).length,failed:Number(Boolean(player.modelStatus.v7Failed))+vessels.filter(v=>v.modelStatus.v7Failed).length},enemiesLoaded:vessels.filter(v=>v.modelStatus.loaded).length,playerLength:player.modelLength,enemyLengths:vessels.map(v=>v.modelLength),headings:vessels.map(v=>v.root.rotation.y),periscopes:vessels.map(v=>Boolean(v.periscope?.visible))};},degrade(fallback=false){if(fallback){failed=true;dispose();}else if(!low){low=true;environment.degrade();dressing.degrade();renderer.setSize(r.width*.75,r.height*.75,false);}},dispose,
     resize(){if(failed||disposed)return;camera.aspect=config.width/config.height;camera.updateProjectionMatrix();renderer.setSize(Math.min(config.width,1280)*(low?.75:1),Math.min(config.width,r.width)*config.height/config.width*(low?.75:1),false);},
     projectTarget(x,z,y=0){if(failed||disposed)return null;return model.screenPoint(x,z,y);},
     targetAt(x,y){if(failed||disposed)return null;pointer.set(x/config.width*2-1,1-y/config.height*2);raycaster.setFromCamera(pointer,camera);if(!raycaster.ray.intersectPlane(seaPlane,intersection))return null;return {x:balance.shipX-intersection.z/r.worldScale,z:intersection.x/r.enemySpacing*balance.combat.laneSpacing};},

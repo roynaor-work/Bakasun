@@ -91,8 +91,39 @@ const CLASSIC_LIST = [
 const freezeTrack = (track) => Object.freeze({ ...track, points: Object.freeze(track.points.map(([x,y,z]) => Object.freeze([x*RACING_TRACK_SCALE,y,z*RACING_TRACK_SCALE]))) });
 /** The circuits before racing-v10 (also what ?racingTracks=v1 selects). */
 export const CLASSIC_TRACKS = Object.freeze(CLASSIC_LIST.map(freezeTrack));
-export const RACING_TRACK_SET = new URLSearchParams(globalThis.location?.search || '').get('racingTracks') === 'v1' ? 'v1' : 'f1';
-export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
+const TRACKS_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingTracks');
+export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'v2' ? 'v2' : 'f1';
+// racing-tracks-v2 (Codex, design/racing-tracks-v2): six circuits, opt-in with ?racingTracks=v2. Loaded only on that flag (top-level await), so the normal start-up
+// does not fetch the 72 KB data file. The data is 7.5 m wide with 12 m corners, so the app calibrates it: X/Z scale and road width (V2_SCALE, V2_WIDTH),
+// the same one-metre lift as the v10 circuits, and the original theme/landmark of each stage.
+const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.9, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
+const CODEX_V2 = RACING_TRACK_SET === 'v2' ? (await import('../design/racing-tracks-v2/tracks.mjs')).default : null;
+// Dog-legs for the long straights of the Codex circuits that a good driver still took flat out: a straight longer than `min` metres
+// gets whole periods of a sine offset (about 22 m radius at this amplitude), faded to zero 30 m from each end. Units: metres before the 1.65 scale.
+const V2_KINK = new Set(['coast', 'jungle', 'volcano', 'harbor', 'summit', 'ruins']);
+function kinkStraights(points, { min = 110, period = 70, amp = 10.5, margin = 22 } = {}) {
+  const n = points.length, out = points.map(p => p.slice()), wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
+  const heading = i => { const a = points[i], b = points[(i + 1) % n]; return Math.atan2(b[0] - a[0], b[2] - a[2]); };
+  const straight = Array.from({ length: n }, (_, i) => Math.abs(wrapA(heading(i) - heading((i + n - 1) % n))) < .006);
+  let i = 0; const seen = new Set();
+  const start = straight.findIndex(v => !v); if (start < 0) return out;
+  for (let k = 0; k < n; k++) {
+    const idx = (start + k) % n; if (!straight[idx] || seen.has(idx)) continue;
+    const run = []; for (let j = idx; straight[j % n] && run.length < n && !seen.has(j % n); j++) { run.push(j % n); seen.add(j % n); }
+    const d = [0]; for (let j = 1; j < run.length; j++) d.push(d[j - 1] + Math.hypot(points[run[j]][0] - points[run[j - 1]][0], points[run[j]][2] - points[run[j - 1]][2]));
+    const length = d[d.length - 1]; if (length < min) continue;
+    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1) continue;
+    const from = (length - periods * period) / 2, h = heading(run[0]), nx = Math.cos(h), nz = -Math.sin(h);
+    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * Math.min(1, u / 15, (periods * period - u) / 15); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
+  }
+  return out;
+}
+function codexTrack(spec, base) {
+  const lift = Math.max(0, 1 - Math.min(...spec.points.map(p => p[1])));
+  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: spec.samples, points: (V2_KINK.has(spec.id) ? kinkStraights(spec.points) : spec.points).map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
+}
+
+export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : RACING_TRACK_SET === 'v2' ? CLASSIC_LIST.map(track => codexTrack(CODEX_V2.find(c => c.id === track.id), track)) : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
 
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
 const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
@@ -153,16 +184,25 @@ export function createTrack(value = 1) {
   }
   function project(x, z, hint) {
     let best = null;
-    // A local hint is optional. All segments are considered to make off-road recovery reliable.
-    for (let index=0; index<points.length; index++) {
-      const a=points[index], b=points[(index+1)%points.length], dx=b.x-a.x, dz=b.z-a.z;
-      const t=clamp(((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz || 1),0,1);
-      const px=a.x+dx*t, pz=a.z+dz*t, dist2=(x-px)**2+(z-pz)**2;
-      const s=a.s+((index===points.length-1?length:b.s)-a.s)*t;
-      // Break a rare geometric tie in favour of the caller's route neighbourhood.
-      const nearHint = Number.isFinite(hint) ? Math.abs(wrap(s-hint+length/2,length)-length/2) : 0;
-      if (!best || dist2 < best.dist2-0.0001 || (Math.abs(dist2-best.dist2)<0.0001 && nearHint<best.nearHint)) best={s:wrap(s,length),dist2,nearHint};
-    }
+    const scan = (from, count) => {
+      for (let n=0; n<count; n++) {
+        const index=(from+n)%points.length, a=points[index], b=points[(index+1)%points.length], dx=b.x-a.x, dz=b.z-a.z;
+        const t=clamp(((x-a.x)*dx+(z-a.z)*dz)/(dx*dx+dz*dz || 1),0,1);
+        const px=a.x+dx*t, pz=a.z+dz*t, dist2=(x-px)**2+(z-pz)**2;
+        const s=a.s+((index===points.length-1?length:b.s)-a.s)*t;
+        // Break a rare geometric tie in favour of the caller's route neighbourhood.
+        const nearHint = Number.isFinite(hint) ? Math.abs(wrap(s-hint+length/2,length)-length/2) : 0;
+        if (!best || dist2 < best.dist2-0.0001 || (Math.abs(dist2-best.dist2)<0.0001 && nearHint<best.nearHint)) best={s:wrap(s,length),dist2,nearHint};
+      }
+    };
+    // racing-grid-v1: ten cars call this twice per step. With a hint, a window of about 130 m around it is scanned first (the car is on or beside the road);
+    // only when nothing in the window is close, all segments are considered, as before, so off-road recovery stays reliable.
+    if (Number.isFinite(hint)) {
+      const target = wrap(hint-65,length); let low = 0, high = points.length;
+      while (low+1 < high) { const mid=(low+high)>>1; if (distances[mid] <= target) low=mid; else high=mid; }
+      scan(low, Math.min(points.length, Math.ceil(130/(length/points.length))+4));
+      if (best.dist2 > (width*1.6)**2) { best = null; scan(0, points.length); }
+    } else scan(0, points.length);
     const p=sample(best.s), lateral=(x-p.x)*p.normal.x+(z-p.z)*p.normal.z;
     return {...p,lateral,distance:Math.sqrt(best.dist2)};
   }
@@ -170,7 +210,11 @@ export function createTrack(value = 1) {
   const checkpoints=Array.from({length:16},(_,index)=>({...sample(index*length/16),index}));
   const boostPads=[0.46].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`pad-${index}`,length:10}));
   const pickups=[0.16,0.73].map((fraction,index)=>({...sample((fraction+offset)%1*length),id:`cell-${index}`,lane:index===0?0:3}));
-  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups };
+  // racing-grid-v1: share of the lap spent in corners (curvature above 1/160 per metre); the gearbox shifts up earlier on circuits with many corners
+  let cornerLength=0;const step=8,count=Math.floor(length/step);
+  for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step),turn=Math.abs(racingAngle(b.heading-a.heading))/step;if(turn>1/160)cornerLength+=step;}
+  const cornerFraction=cornerLength/Math.max(1,count*step);
+  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction };
 }
 
 export function wrapRacingDistance(value, length) { return wrap(value, length); }

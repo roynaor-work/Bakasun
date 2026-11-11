@@ -1,8 +1,8 @@
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {createActor} from './catch-actors.mjs?v=island-v2-20261107-8';
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-8';
-import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, blobShadow, fitModel, rigCar, lightOn, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-8';
+import {createActor} from './catch-actors.mjs?v=island-v2-20261107-9';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-9';
+import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, blobShadow, fitModel, rigCar, lightOn, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-9';
 
 /** v6 Three.js view of "תפוס את הפושע": the city street is built along the chase track (catch-track.mjs): a road ribbon
  * with lane markings and kerbs, sidewalks, buildings, lamps and trees placed by distance along the track and offset
@@ -175,7 +175,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   const placeOnTrack = (obj, s, d, yawExtra = 0) => { track.toWorld(s, d, tmp2); obj.position.set(tmp2.x, obj.position.y, tmp2.z); obj.rotation.y = track.yawAt(s) + yawExtra; };
 
   let mode = 'chase', phase = 0, fx = null, bow = null, engine = null, frame = null, skidSpin = 0;
-  import('./catch-tyre-fx.mjs?v=island-v2-20261107-8').then(m => { if (m.createTyreFx && !signal?.aborted) fx = m.createTyreFx({T, scene, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, blobShadow}}); }).catch(() => { fx = null; });
+  import('./catch-tyre-fx.mjs?v=island-v2-20261107-9').then(m => { if (m.createTyreFx && !signal?.aborted) fx = m.createTyreFx({T, scene, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, blobShadow}}); }).catch(() => { fx = null; });
 
   function updateChase(dt) {
     const st = chase.state, c = st.crim;
@@ -253,7 +253,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     thieves = [{actor: thief, shadow: blobShadow(shadowTex, 1.4, 1.1, .5)}]; thief.root.add(thieves[0].shadow); officer.root.add(blobShadow(shadowTex, 1.4, 1.1, .5));
     scene.add(officer.root, thief.root);
     try {
-      const m = await import('./catch-bow-view.mjs?v=island-v2-20261107-8');
+      const m = await import('./catch-bow-view.mjs?v=island-v2-20261107-9');
       bow = m.createBowStage({T, scene, camera, models, officer, thieves, frame: fr, track, balance, level, stage, engine: eng, sparks, dust, gfx: {glowTexture, canvasTexture, blobShadow, starTexture, fitModel}, theme});
       bow.bind?.(eng); bow.enter?.();
     } catch (err) { bow = null; bowFallback = makeFallbackBow(eng, fr); }

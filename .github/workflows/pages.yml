@@ -39,3 +39,6 @@ jobs:
           path: _site
       - id: deploy
         uses: actions/deploy-pages@v4
+        with:
+          # 10/11/2026: the v20 deploy hung in syncing_files past the default 10 minutes and was aborted; the live site stayed on v19.
+          timeout: 1800000

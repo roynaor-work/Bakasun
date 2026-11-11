@@ -41,7 +41,7 @@ export function decodeTallPack(json){
   if(q.length!==c.frames*TALL_BONES.length*4||h.length!==c.frames*3)throw Error('Basketball tall clip is truncated: '+id);
   const quat=new Float32Array(q.length),hips=new Float32Array(h.length);for(let i=0;i<q.length;i++)quat[i]=q[i]/32767;for(let i=0;i<h.length;i++)hips[i]=h[i]/10000;
   let ball=null;if(c.ball){const b=decode64(c.ball,Int16Array);ball=new Float32Array(b.length);for(let i=0;i<b.length;i++)ball[i]=b[i]/10000;}
-  clips[id]={id,duration:c.duration,frames:c.frames,loop:c.loop,kind:c.kind,events:c.events||{},refSpeed:c.refSpeed,quat,hips,ball,jumpScale:c.jumpScale||null};
+  clips[id]={id,duration:c.duration,frames:c.frames,loop:c.loop,kind:c.kind,events:c.events||{},refSpeed:c.refSpeed,quat,hips,ball,jumpScale:c.jumpScale||null,timeScale:c.timeScale||1,score:c.score??null};
  }
  return {fps:json.fps,profiles:json.profiles,clips};
 }
@@ -75,7 +75,9 @@ export function pickGait(list,speed,current=null){
  for(const [name,ref] of list){if(!ref)continue;const d=Math.abs(Math.log(Math.max(.05,speed)/ref))*(name===current?.88:1);if(d<bd){bd=d;best=name;}}
  return best;
 }
-export const gaitRate=(speed,ref)=>clamp(speed/Math.max(.1,ref),.5,1.45);
+/** Playback rate for a gait: the clip's own reference speed (the v12 repair slows some gaits, so the rate climbs up to 1.45 x its timeScale). */
+export const gaitRate=(speed,ref,max=1.45)=>clamp(speed/Math.max(.1,ref),.5,max);
+const clipRef=(pack,name,ref)=>pack?.clips?.[name]?.refSpeed||ref,clipMax=(pack,name)=>1.45*(pack?.clips?.[name]?.timeScale||1);
 export const GAIT_TABLE=Object.freeze({gaits:GAITS,dribble:DRIBBLE_GAITS});
 
 /** Piecewise-linear clip time for an engine act time through anchors [[engineT, clipT], ...] (sorted); held at the end. */
@@ -145,13 +147,13 @@ export function chooseTallMotion(pack,p,ctx,st){
  if(p.hasBall){
   if(p.dribbling!==false&&!st.guardLocked){
    if(speed<.3)return {kind:'layer',upper:'dribble_right',lower:'idle_ready_ball',rate:1,group:'dribble'};
-   const g=pickGait(DRIBBLE_GAITS,speed,st.dribbleGait);return {kind:'loop',clip:g,rate:gaitRate(speed,DRIBBLE_GAITS.find(x=>x[0]===g)[1]),group:g==='dribble_walk_right'?'dribble':'gait',dribble:true};
+   const g=pickGait(DRIBBLE_GAITS,speed,st.dribbleGait);return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,DRIBBLE_GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:g==='dribble_walk_right'?'dribble':'gait',dribble:true};
   }
   if(speed<.3)return {kind:'loop',clip:'idle_ready_ball',rate:1,group:'idle'};
  }
  const g=pickGait(GAITS,speed,st.gait);
  if(g==='idle_ready')return {kind:'loop',clip:'idle_ready',rate:1,group:'idle'};
- return {kind:'loop',clip:g,rate:gaitRate(speed,GAITS.find(x=>x[0]===g)[1]),group:'gait'};
+ return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:'gait'};
 }
 
 /** Ball-bounce phase for the view (floor contact at u = 0.42, the convention of the dribble code), from the clip's own events. */
@@ -228,22 +230,25 @@ export async function loadTall(cfg,base,onProgress,{params,onFallback}={}){
 // ---- the avatar ---------------------------------------------------------------------------------
 export function createAvatarTall(assets,card,teamLook,opts={}){
  const profile=tallProfileFor({posProfile:assets.posProfile},card.pos),src=assets.bodies[profile],pack=assets.pack,clipSet=assets.clipSets[profile];
- const root=cloneSkinned(src.scene);root.name='player-'+card.id;root.userData.characterVersion=9;
- const baseH=assets.baseHeights?.[profile]||pack.profiles[profile].height*100,scale=(card.ratings?.height||baseH)/baseH;root.scale.setScalar(scale);
+ // the shared athlete body (hoops-athlete.mjs) supplies the root, materials, palms and kit instead of the merged tall mesh
+ const body=assets.bodyFactory?assets.bodyFactory(profile,card,teamLook,opts):null;
+ const root=body?body.root:cloneSkinned(src.scene);root.name='player-'+card.id;if(!body)root.userData.characterVersion=9;
+ const baseH=assets.baseHeights?.[profile]||pack.profiles[profile].height*100,scale=(card.ratings?.height||baseH)/baseH;if(body)root.scale.multiplyScalar(scale);else root.scale.setScalar(scale);
  root.rotation.order='YXZ';
- const mesh=root.getObjectByName('tall-body'),geometry=new THREE.BufferGeometry();
- for(const [n,a] of Object.entries(mesh.geometry.attributes))geometry.setAttribute(n,n==='color'?a.clone():a);geometry.setIndex(mesh.geometry.index);mesh.geometry=geometry;
- const material=mesh.material.clone();mesh.material=material;const mats=[material];
+ const mesh=body?null:root.getObjectByName('tall-body'),geometry=body?null:new THREE.BufferGeometry();
+ if(!body){for(const [n,a] of Object.entries(mesh.geometry.attributes))geometry.setAttribute(n,n==='color'?a.clone():a);geometry.setIndex(mesh.geometry.index);mesh.geometry=geometry;}
+ const material=body?null:mesh.material.clone();if(!body)mesh.material=material;const mats=body?body.mats:[material];
  const bones={};root.traverse(o=>{if(o.isBone)bones[o.name]=o;});
  const hands={},palms=pack.profiles[profile].palms;
  for(const [side,key] of [['Right','r'],['Left','l']]){
+  if(body){hands[key]=body.palms[key];hands[key+'Wrist']=body.palms[key+'Wrist'];continue;}
   const a=new THREE.Object3D();a.name=side+'Palm';const pp=palms?.[side+'Hand']?.palmPoint||pack.profiles[profile].palm;a.position.fromArray(pp);bones[side+'Hand'].add(a);hands[key]=a;hands[key+'Wrist']=bones[side+'Hand'];
  }
  // kit colours and the skin tone live in the vertex colours of this avatar's own copy
  const variant=Math.abs(card.look?.skin??card.number??0)%SKIN_TINTS.length,tint=SKIN_TINTS[variant];
- const colors=geometry.attributes.color;
- const paint=(name,c)=>{const r=src.ranges[name];if(!r)return;for(let i=r[0];i<r[0]+r[1];i++)colors.setXYZ(i,c.r,c.g,c.b);};
- const skin=src.ranges.human_surface;if(skin)for(let i=skin[0];i<skin[0]+skin[1];i++)colors.setXYZ(i,src.base[i*3]*tint[0],src.base[i*3+1]*tint[1],src.base[i*3+2]*tint[2]);
+ const colors=geometry?.attributes.color;
+ const paint=(name,c)=>{const r=src?.ranges[name];if(!r||!colors)return;for(let i=r[0];i<r[0]+r[1];i++)colors.setXYZ(i,c.r,c.g,c.b);};
+ const skin=src?.ranges.human_surface;if(skin&&colors)for(let i=skin[0];i<skin[0]+skin[1];i++)colors.setXYZ(i,src.base[i*3]*tint[0],src.base[i*3+1]*tint[1],src.base[i*3+2]*tint[2]);
  const mixer=new THREE.AnimationMixer(root),actions={},cur={full:{},upper:{},lower:{},mix:1};
  const clipData=id=>pack.clips[id];
  function action(name){
@@ -259,8 +264,10 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
  let gaitPhase=0,state='idle',statePhase=0,lastAct=null,dribbleSrc=null,ownsJump=false;
  const dur=name=>clipSet.get(name)?.duration||1;
  function easeWeights(map,name,tau,dt){const k=1-Math.exp(-dt/tau);let sum=0;for(const n of new Set([...Object.keys(map),...(name?[name]:[])])){const g=n===name?1:0,v=(map[n]||0)+(g-(map[n]||0))*k;if(v<.004&&g===0)delete map[n];else{map[n]=v;sum+=v;}}return sum;}
- const av={root,hands,mixer,actions,mats,card,kind:'tall',role:profile,scale,dribblePump:0,dribbleCtx:null,layupSideFor:layupSide,
+ const av={root,hands,mixer,actions,mats,card,kind:body?'athlete':'tall',role:profile,scale,dribblePump:0,dribbleCtx:null,layupSideFor:layupSide,body,
+  setLod(level){return body?body.setLod(level):0;},get lod(){return body?body.lod:0;},
   applyKit(kit){
+   if(body){body.applyKit(kit);return;}
    const primary=new THREE.Color(kit.base||'#5b38c9'),accent=new THREE.Color(kit.accent||'#f4d377'),secondary=kit.shorts?new THREE.Color(kit.shorts):primary.clone().multiplyScalar(.62);
    paint('uniform_primary',primary);paint('uniform_secondary',secondary);paint('uniform_trim',accent);colors.needsUpdate=true;
   },
@@ -275,7 +282,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
    if(!dribbleSrc)return null;const l=ballAt(dribbleSrc.clip,dribbleSrc.t);if(!l)return null;
    out.set(l[0],l[1],l[2]);return root.localToWorld(out);
   },
-  dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);for(const m of mats)m.dispose();geometry.dispose();},
+  dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);if(body){body.dispose();return;}for(const m of mats)m.dispose();geometry.dispose();},
  };
  av.pose=function(p,ctx={},dt){
   if(!(dt>0))return;dt=Math.min(.05,dt);

@@ -1,0 +1,467 @@
+{
+ "mode": "v20",
+ "query": "?dev=1&boarFire=v20",
+ "env": {
+  "coarse": true,
+  "hoverNone": true,
+  "maxTouchPoints": 5,
+  "fireBtn": true,
+  "aimZone": true,
+  "landscape": true
+ },
+ "layout": {
+  "aimZone": [
+   0,
+   86,
+   405,
+   304
+  ],
+  "fireBtn": [
+   718,
+   264,
+   108,
+   108
+  ],
+  "rocket": [
+   244,
+   168,
+   96,
+   82
+  ],
+  "frost": [
+   136,
+   168,
+   96,
+   82
+  ],
+  "fury": [
+   28,
+   168,
+   96,
+   82
+  ],
+  "under": {
+   "60,200": "fury",
+   "180,200": "frost",
+   "290,200": "rocket",
+   "150,290": "aim-zone",
+   "120,300": "aim-zone",
+   "450,150": "scene",
+   "650,110": "SPAN",
+   "520,60": "scene"
+  }
+ },
+ "steps": {
+  "sceneTaps": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false
+  },
+  "sceneDrag": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false
+  },
+  "stickDrag2s": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.264,
+    "y": 0.129
+   },
+   "aimMoved": true
+  },
+  "stickLeavesZone": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.547,
+    "y": 0.079
+   },
+   "aimMoved": true
+  },
+  "leftThumbAbilityRow": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 2,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false,
+   "tapsAbilities": 2,
+   "dragAimMoved": false,
+   "abilityBy": {
+    "rocket": 1,
+    "frost": 1,
+    "fury": 0
+   }
+  },
+  "twoFingers": {
+   "shots": 10,
+   "nonButton": 0,
+   "button": 10,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimMoved": true,
+   "heldFiring": true,
+   "heldFireHeld": true,
+   "stickActiveWhileHeld": true,
+   "shotsAfterButtonRelease": 0,
+   "aimKeptAfterStickRelease": false
+  },
+  "strayTapWhileHeld": {
+   "shots": 3,
+   "nonButton": 0,
+   "button": 3,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimMoved": false,
+   "shotsBeforeTap": 11,
+   "firingAfterStrayTap": true,
+   "shotsAfterStrayTap": 0
+  },
+  "keyboardF": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimMoved": false
+  },
+  "mouseOnScene": {
+   "shots": 0,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimMoved": false
+  },
+  "fireButtonHold": {
+   "shots": 2,
+   "nonButton": 0,
+   "button": 2,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimTo": {
+    "x": 0.95,
+    "y": 0.627
+   },
+   "aimMoved": false,
+   "heldFiring": true
+  }
+ },
+ "final": {
+  "shots": 15,
+  "shotsBy": {
+   "button": 15,
+   "scene": 0,
+   "keyboard": 0,
+   "mouse": 0,
+   "auto": 0,
+   "qa": 0,
+   "unknown": 0
+  },
+  "stickNoButton": 0,
+  "abilityBy": {
+   "rocket": 1,
+   "frost": 1,
+   "fury": 0
+  },
+  "abilityFromLeft": 0,
+  "aim": {
+   "x": 0.95,
+   "y": 0.627
+  },
+  "firing": false,
+  "stick": false,
+  "fireHeld": false,
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": false,
+   "LEGACY": false
+  },
+  "mode": "battle",
+  "hp": 100,
+  "enemies": 4
+ },
+ "errors": [],
+ "checks": [
+  {
+   "name": "aimstick controls exist (fire button + stick zone) in the frame on a coarse-pointer phone",
+   "pass": true
+  },
+  {
+   "name": "scene taps: 0 shots",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "name": "scene drag: 0 shots",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "name": "2 s stick drag: 0 shots, aim moved",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0.264,
+     "y": 0.129
+    },
+    "aimMoved": true
+   }
+  },
+  {
+   "name": "stick drag leaving the zone: 0 shots, aim moved",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0.547,
+     "y": 0.079
+    },
+    "aimMoved": true
+   }
+  },
+  {
+   "name": "left thumb where the ability row sat: no ability fired, no press counted inside the zone, drag moves the aim",
+   "pass": false,
+   "detail": {
+    "shots": 0,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 2,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimMoved": false,
+    "tapsAbilities": 2,
+    "dragAimMoved": false,
+    "abilityBy": {
+     "rocket": 1,
+     "frost": 1,
+     "fury": 0
+    }
+   }
+  },
+  {
+   "name": "two fingers: shots only from the button, stick active, firing stops when the button is released, aim kept",
+   "pass": false,
+   "detail": {
+    "shots": 10,
+    "nonButton": 0,
+    "button": 10,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0.95,
+     "y": 0.627
+    },
+    "aimMoved": true,
+    "heldFiring": true,
+    "heldFireHeld": true,
+    "stickActiveWhileHeld": true,
+    "shotsAfterButtonRelease": 0,
+    "aimKeptAfterStickRelease": false
+   }
+  },
+  {
+   "name": "stray scene tap while the button is held: firing continues",
+   "pass": false,
+   "detail": {
+    "shots": 3,
+    "nonButton": 0,
+    "button": 3,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0.95,
+     "y": 0.627
+    },
+    "aimTo": {
+     "x": 0.95,
+     "y": 0.627
+    },
+    "aimMoved": false,
+    "shotsBeforeTap": 11,
+    "firingAfterStrayTap": true,
+    "shotsAfterStrayTap": 0
+   }
+  },
+  {
+   "name": "keyboard F: 0 shots",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "name": "mouse on the scene: 0 shots",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "name": "fire button alone: shots, aim unchanged",
+   "pass": true,
+   "detail": {
+    "shots": 2,
+    "nonButton": 0,
+    "button": 2,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0.95,
+     "y": 0.627
+    },
+    "aimTo": {
+     "x": 0.95,
+     "y": 0.627
+    },
+    "aimMoved": false,
+    "heldFiring": true
+   }
+  },
+  {
+   "name": "every shot in the run is attributed to the fire button",
+   "pass": true,
+   "detail": {
+    "shotsBy": {
+     "button": 15,
+     "scene": 0,
+     "keyboard": 0,
+     "mouse": 0,
+     "auto": 0,
+     "qa": 0,
+     "unknown": 0
+    },
+    "stickNoButton": 0
+   }
+  },
+  {
+   "name": "no page errors",
+   "pass": true,
+   "detail": []
+  }
+ ]
+}
