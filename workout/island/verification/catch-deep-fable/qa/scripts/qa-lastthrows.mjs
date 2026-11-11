@@ -30,7 +30,11 @@ for (const stage of [1, 3]) {
   if (sol) {
     row.throw4 = await page.evaluate(`(()=>{const s=${S},e=s.engine;e.setAim({angle:${sol.angle},power:1,yaw:${sol.yaw}});s.debug.release();
       for(let i=0;i<60*20&&!['impact','caught','aim','done'].includes(e.state.phase);i++){s.debug.step(1/60);}for(let i=0;i<12;i++)s.debug.step(1/60);s.debug.view().update(1/60,{});
-      return {phase:e.state.phase,catches:e.state.catches,bossHp:e.state.bossHp,thrown:e.state.thrown,throwsLeft:e.state.throwsLeft}})()`);
+      const atImpact={phase:e.state.phase,catches:e.state.catches};window.__after=()=>{for(let i=0;i<60*20&&['throw','flight','impact'].includes(e.state.phase);i++)s.debug.step(1/60);return {phase:e.state.phase,catches:e.state.catches,bossHp:e.state.bossHp,thrown:e.state.thrown,throwsLeft:e.state.throwsLeft}};
+      return atImpact})()`);
+    await page.waitForTimeout(400);
+    await page.screenshot({path: `${SHOTS}05b-throw4-impact-stage${stage}.png`});
+    row.throw4 = {...row.throw4, ...(await page.evaluate('window.__after()'))};
     await page.waitForTimeout(400);
     await page.screenshot({path: `${SHOTS}05b-throw4-hit-stage${stage}.png`});
   }
