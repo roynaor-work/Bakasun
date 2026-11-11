@@ -11,9 +11,9 @@ test('v2 set is active and has the six stages', () => {
   assert.deepEqual(TRACKS.map(t => t.id), ['coast', 'jungle', 'volcano', 'harbor', 'summit', 'ruins']);
 });
 for (const track of TRACKS) {
-  test(`v2 ${track.id}: closed, 2.0-2.7 km, road above the island surface, no leg closer than 2.2 road widths`, () => {
+  test(`v2 ${track.id}: closed, 1.9-2.7 km, road above the island surface, no leg closer than 2.2 road widths`, () => {
     const t = createTrack(track.id), low = Math.min(...t.points.map(p => p.y));
-    assert.ok(t.length > 2000 && t.length < 2700, `length ${t.length}`);
+    assert.ok(t.length > 1900 && t.length < 2700, `length ${t.length}`);   // racing-deep-m2: scale 0.87 (jungle 2.0 km)
     assert.ok(low >= -0.1, `lowest road point ${low}`);
     const a = t.sample(0), b = t.sample(t.length - 1); assert.ok(Math.hypot(a.x - b.x, a.z - b.z) < 3, 'closed loop');
     let min = 1e9;

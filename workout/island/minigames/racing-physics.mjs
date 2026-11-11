@@ -94,7 +94,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const p=track.project(car.x,car.z,car.s), look=10+car.speed*.5, W=track.width, edge=W*.5-2.3, dt=FIXED_STEP;
     car.laneHold=Math.max(0,car.laneHold-dt);
     // corner geometry ahead (rad per metre; positive = the road bends toward +lateral, so the inside is +lateral)
-    const turnAt=(a,b)=>racingAngle(track.sample(p.s+b).heading-track.sample(p.s+a).heading)/(b-a);
+    const turnAt=(a,b)=>(track.headingAt(p.s+b)-track.headingAt(p.s+a))/(b-a);
     const here=turnAt(0,14),near=turnAt(10,42),inCorner=Math.min(1,Math.abs(here)*170),entering=Math.min(1,Math.abs(near)*140)*(1-inCorner);
     const k=W*.26,insideNear=Math.sign(near)||1;
     // racing line: apex inside, wide before the corner, the driver's own lane on straights
@@ -132,7 +132,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     // corner speed with a braking distance: the sharpest corner within 100 m limits the speed now (brake point), the closest one the speed in it
     const aLat=stage.aiCorner||13.5,aBrake=15+2*car.aiStyle;
     let targetSpeed=car.maxSpeed;
-    for(let d=4;d<=104;d+=10){const c=Math.abs(racingAngle(track.sample(p.s+d+9).heading-track.sample(p.s+d-3).heading))/12;if(c<.0025)continue;const vc=Math.sqrt(aLat/c),allowed=Math.sqrt(vc*vc+2*aBrake*Math.max(0,d-6));targetSpeed=Math.min(targetSpeed,allowed);}
+    for(let d=4;d<=104;d+=10){const c=Math.abs(track.headingAt(p.s+d+9)-track.headingAt(p.s+d-3))/12;if(c<.0025)continue;const vc=Math.sqrt(aLat/c),allowed=Math.sqrt(vc*vc+2*aBrake*Math.max(0,d-6));targetSpeed=Math.min(targetSpeed,allowed);}
     // following: no running into the car ahead unless this is the pass; keep about 0.4 s of gap
     if(ahead&&car.passing!==ahead.o.id&&Math.abs(ahead.dl)<3){const g=ahead.gap-4.2;if(g<car.speed*.45)targetSpeed=Math.min(targetSpeed,Math.max(6,ahead.o.speed-(g<2.5?4:0)));}
     const brake=car.speed>targetSpeed+2.5;car.braking=brake;
@@ -293,9 +293,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       } else if(car.wallCooldown>0)car.speed=Math.max(0,car.speed-dt*3);
       const error=racingAngle(car.heading-after.heading);car.heading=racingAngle(after.heading+error*(into>.02?.4:.8));
       car.slipAngle=0;car.steer*=.5;
-      // racing-deep-m2 grind: pressed against the fence while still moving for GRIND_TIME seconds flips the car (config.grind=false or ?racingGrind=0 removes it)
-      if(crashOn&&config.grind!==false&&car.speed>3&&state.phase==='racing'&&car.recoveryTime<=0){car.grindT+=dt;if(car.grindT>GRIND_TIME)startCrash(car,'grind');}
-    } else car.grindT=Math.max(0,car.grindT-dt*1.5);
+    }
+    // racing-deep-m2 grind: riding the fence (within 0.6 m of it, still moving) for GRIND_TIME seconds flips the car: "stuck at the side for too long" (config.grind=false or ?racingGrind=0 removes it)
+    if(walls&&Math.abs(car.lateral)>wallLimit-.6&&car.speed>3){if(crashOn&&config.grind!==false&&state.phase==='racing'&&car.recoveryTime<=0&&car.crashT<=0){car.grindT+=dt;if(car.grindT>GRIND_TIME)startCrash(car,'grind');}}
+    else car.grindT=Math.max(0,car.grindT-dt*1.5);
     const delta=racingAngle((after.s-before.s)/track.length*Math.PI*2)/ (Math.PI*2)*track.length;
     const maxDelta=Math.max(2,car.speed*dt*2.2);
     const plausible=Math.abs(delta)<=maxDelta;

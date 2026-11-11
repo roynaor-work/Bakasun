@@ -16,10 +16,12 @@ export const DRIVERS = Object.freeze([
 const LOOK = new URLSearchParams(globalThis.location?.search || '').get('racingLook') !== '0';
 // racing-deep-m2: the Codex circuits are the default set (65-90 s laps): 3, 3, 3 laps; ?racingTracks=f1 or v1 keep their lap counts
 const V2 = !['f1', 'v1'].includes(new URLSearchParams(globalThis.location?.search || '').get('racingTracks'));
+/** racing-deep-m2: laps of a league race on the default circuits. standard = 3 (3.4-3.9 minutes, measured), short = 2 (about 2.4 minutes) for a league format that wants quicker rounds. */
+export const RACE_LAPS = Object.freeze({ standard: 3, short: 2 });
 export const SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: V2 ? 3 : LOOK ? 4 : 5, minRank: 0, rating: 0.02 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: V2 ? 3 : LOOK ? 5 : 6, minRank: 3, rating: 0.045 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: V2 ? 3 : LOOK ? 5 : 6, minRank: 3, rating: 0.045 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tier: 0, laps: V2 ? RACE_LAPS.standard : LOOK ? 4 : 5, minRank: 0, rating: 0.02 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tier: 2, laps: V2 ? RACE_LAPS.standard : LOOK ? 5 : 6, minRank: 3, rating: 0.045 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tier: 4, laps: V2 ? RACE_LAPS.standard : LOOK ? 5 : 6, minRank: 3, rating: 0.045 })
 ]);
 export const UPGRADES = Object.freeze({
   engine: { name: 'מנוע', perLevel: 0.03, key: 'engine', cap: 1.16 },
