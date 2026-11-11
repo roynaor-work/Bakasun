@@ -11,7 +11,7 @@ export function createSoccerShowView({config,replay,reducedMotion=()=>preference
   const cfg=soccerShowConfig(config),pitch=config.pitch,timeline=createSoccerShowTimeline(cfg,pitch),look=new T.Vector3();
   const live={pos:[0,0,0],target:[0,0,0],fov:50},shot={pos:[0,0,0],target:[0,0,0],fov:50},from={pos:[0,0,0],target:[0,0,0],fov:50},out={pos:[0,0,0],target:[0,0,0],fov:50};
   const recorder={get clock(){return replay.clock;},get oldest(){return replay.oldest;},get latest(){return replay.latest;},strike:(id,contact)=>replay.strike(id,contact),ballAt:(time,o)=>replay.ballAt(time,o)};
-  const mood={cheer:0,groan:0,excitement:0},anchor={x:0,y:0,z:0},roles={};let state=null,players=[],reaction=null,lastCut=-1,entry=0,exit=1,owned=false,baseFov=null,lastPhase='live',holdSeconds=0,fulltimeFocus=null;
+  const mood={cheer:0,groan:0,excitement:0},anchor={x:0,y:0,z:0},roles={};let state=null,players=[],reaction=null,goalMood=null,lastCut=-1,entry=0,exit=1,owned=false,baseFov=null,lastPhase='live',holdSeconds=0,fulltimeFocus=null;
   function ensure(source){
     if(state)return;players=source.players.map(p=>({...p}));state={...source,players,ball:source.ball,show:{roles}};
   }
@@ -40,7 +40,7 @@ export function createSoccerShowView({config,replay,reducedMotion=()=>preference
     get finaleSeconds(){return cfg.fulltimeSeconds;},
     skip(){timeline.skip();},
     /** Match events drained by the session (after the frame): short replays and the crowd mood. */
-    event(e){timeline.event(e,replay.clock);const r=crowdReaction(e,0);if(r)reaction=r;},
+    event(e){timeline.event(e,replay.clock);const r=crowdReaction(e,0);if(r)reaction=r;if(e?.type==='goal')goalMood=r;},
     /** Returns the state to render, the clip playback rate and whether the camera was taken over. `liveTarget` is the point the live camera looks at. */
     update(source,dt,camera,liveTarget,quality=0){
       const step=Math.max(0,Number.isFinite(dt)?dt:0);
@@ -48,6 +48,8 @@ export function createSoccerShowView({config,replay,reducedMotion=()=>preference
       replay.held=timeline.hold;replay.record(source,step);
       const excitement=Math.max(boxExcitement(source.ball,pitch,cfg.camera.boxRamp),source.phase==='goal'?1:0);
       stepCrowdMood(mood,reaction,excitement,step,cfg.crowd);reaction=null;
+      // The stands keep cheering (or sagging) for the whole goal show, not just the decay seconds: the celebration plays to a full house.
+      if(source.phase==='goal'&&goalMood)mood[goalMood==='cheer'?'cheer':'groan']=Math.max(mood[goalMood==='cheer'?'cheer':'groan'],.85);else if(source.phase!=='goal')goalMood=null;
       if(reducedMotion()){replay.held=false;timeline.skip();}
       const r=timeline.update(source,step,recorder),phase=r.phase;
       if(baseFov===null)baseFov=camera.fov;
@@ -79,7 +81,8 @@ export function createSoccerShowView({config,replay,reducedMotion=()=>preference
         exit=Math.min(1,exit+step/cfg.camera.exitBlend);mix(out,from,live,smooth(exit));apply(camera,out);owned=true;
         if(exit>=1&&camera.fov!==baseFov){camera.fov=baseFov;camera.updateProjectionMatrix();}
       }else owned=false;
-      return {state:rendered,rate,owned,phase,hold:timeline.hold,replaying:timeline.replaying,tag:timeline.replaying?'replay':phase==='celebrate'||phase==='fulltime'?'celebrate':null};
+      // No selection ring, request rings or edge arrow inside a broadcast shot (replay, celebration, finale): the live markers return with the live camera.
+      return {state:rendered,rate,owned,phase,hold:timeline.hold,replaying:timeline.replaying,markers:!(desc&&phase!=='cut'),tag:timeline.replaying?'replay':phase==='celebrate'||phase==='fulltime'?'celebrate':null};
     },
     metrics(){return {...timeline.metrics(),owned,mood:{cheer:+mood.cheer.toFixed(3),groan:+mood.groan.toFixed(3),excitement:+mood.excitement.toFixed(3)},holdSeconds:+holdSeconds.toFixed(3),recording:{seconds:+(replay.latest-replay.oldest).toFixed(3),samples:replay.count}};},
     dispose(){state=null;players.length=0;},

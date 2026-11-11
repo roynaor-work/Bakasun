@@ -15,8 +15,36 @@ const args=process.argv.slice(2),outDir=args.find(a=>!a.startsWith('--'))||'audi
 const opt=(name,fallback)=>{const hit=args.find(a=>a.startsWith(`--${name}=`));return hit?hit.slice(name.length+3):fallback;};
 const GAMES=opt('games','streetSlam,soccer,tennis,alpineRush,islandRacing,city').split(',').filter(Boolean);
 const SECONDS=Number(opt('seconds',180)),CITY_SECONDS=Number(opt('city-seconds',30)),ASSERT=args.includes('--assert'),EXTRA=opt('query','');
-const BUILDING={streetSlam:'basketball',soccer:'soccer',tennis:'tennis',alpineRush:'alpineRush',islandRacing:'islandRacing'};
+// config.minigames[id].requiresBuilding: alpine and racing need none (a fake typeId breaks the city view).
+const BUILDING={streetSlam:'basketball',soccer:'soccer',tennis:'tennis'};
 await mkdir(outDir,{recursive:true});
+
+/** Attribution and classification of one game's raw log; also used by --from=<dir>
+ * to re-run the classifier on saved logs after a threshold change. */
+function classify(game,log,seconds){
+  const t0s=log.frames[0]?.t??0;if(!log.normalized){for(const f of log.frames)f.t=+(f.t-t0s).toFixed(3);for(const n of log.nodes)if(n.wall!==undefined)n.wall=+(n.wall-t0s).toFixed(3);log.normalized=true;}
+  const segments=whistleLike(log.frames),live=new Set(LIVE_PHASES[game]||[]);
+  for(const s of segments){s.live=s.phases.some(p=>live.has(p));
+    // Sources sounding while the segment sounded: the evidence that names the file.
+    s.sources=log.nodes.filter(n=>n.wall!==undefined&&n.kind!=='filter'&&n.wall<=s.end&&(n.endedAt===undefined?true:(n.wall+(n.endedAt-n.startedAt))>=s.start)).map(n=>n.kind==='oscillator'?`osc ${n.type} ${n.frequency}Hz`:`${n.url}${n.loop?' loop':''}`).filter((v,i,a)=>a.indexOf(v)===i).slice(0,8);}
+  const byUrl={};for(const n of log.nodes){if(n.kind==='filter'||n.wall===undefined)continue;const k=n.kind==='oscillator'?`osc:${n.type}`:n.url||'?';const e=byUrl[k]||(byUrl[k]={count:0,live:0,loop:0,phases:{}});e.count++;if(n.loop)e.loop++;if(live.has(n.ph))e.live++;e.phases[n.ph]=(e.phases[n.ph]||0)+1;}
+  const oscillators=log.nodes.filter(n=>n.kind==='oscillator'&&n.wall!==undefined).map(n=>({type:n.type,frequency:n.frequency,automation:n.automation.slice(0,6),path:n.path,ph:n.ph}));
+  const filters=log.nodes.filter(n=>n.kind==='filter').map(n=>({type:n.type,frequency:n.frequency,Q:n.Q,automation:n.automation.slice(0,4)}));
+  const result={game,seconds,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),liveHums:segments.filter(s=>s.live&&s.kind==='hum'),errors:log.errors,timeline:log.timeline};
+  return {result,file:{...result,oscillatorDetail:oscillators.slice(0,40),filterDetail:filters.slice(0,40),decoded:log.decoded,nodes:log.nodes,frames:log.frames,normalized:true}};
+}
+const FROM=opt('from','');
+if(FROM){
+  const {readFile}=await import('node:fs/promises');
+  const summary={generatedAt:new Date().toISOString(),reclassifiedFrom:FROM,games:{}};
+  for(const game of GAMES){
+    let log;try{log=JSON.parse(await readFile(path.join(FROM,`${game}.json`),'utf8'));}catch{continue;}
+    const {result,file}=classify(game,log,log.seconds);summary.games[game]=result;
+    await writeFile(path.join(outDir,`${game}.json`),JSON.stringify(file));
+    console.log(JSON.stringify({game,segments:result.segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,live:s.live,phases:s.phases,sources:s.sources}))}));
+  }
+  await writeFile(path.join(outDir,'summary.json'),JSON.stringify(summary,null,1));process.exit(0);
+}
 
 /** Installed before navigation: wraps the audio constructors, tags decoded buffers
  * with their fetch URL (by content fingerprint, so .slice(0) copies still match)
@@ -175,19 +203,10 @@ for(const game of GAMES){
   }catch(e){errors.push('tool: '+e.message);mark('error '+e.message);}
   finally{await context.close();}
   // Classification: whistle-like segments overall and inside live-play phases.
-  const t0s=log.frames[0]?.t??0;for(const f of log.frames)f.t=+(f.t-t0s).toFixed(3);
-  for(const n of log.nodes)if(n.wall!==undefined)n.wall=+(n.wall-t0s).toFixed(3);
-  const segments=whistleLike(log.frames),live=new Set(LIVE_PHASES[game]||[]);
-  for(const s of segments){s.live=s.phases.some(p=>live.has(p));
-    // Sources sounding while the segment sounded: the evidence that names the file.
-    s.sources=log.nodes.filter(n=>n.wall!==undefined&&n.kind!=='filter'&&n.wall<=s.end&&(n.endedAt===undefined?true:(n.wall+(n.endedAt-n.startedAt))>=s.start)).map(n=>n.kind==='oscillator'?`osc ${n.type} ${n.frequency}Hz`:`${n.url}${n.loop?' loop':''}`).filter((v,i,a)=>a.indexOf(v)===i).slice(0,8);}
-  const byUrl={};for(const n of log.nodes){if(n.kind==='filter'||n.wall===undefined)continue;const k=n.kind==='oscillator'?`osc:${n.type}`:n.url||'?';const e=byUrl[k]||(byUrl[k]={count:0,live:0,loop:0,phases:{}});e.count++;if(n.loop)e.loop++;if(live.has(n.ph))e.live++;e.phases[n.ph]=(e.phases[n.ph]||0)+1;}
-  const oscillators=log.nodes.filter(n=>n.kind==='oscillator'&&n.wall!==undefined).map(n=>({type:n.type,frequency:n.frequency,automation:n.automation.slice(0,6),path:n.path,ph:n.ph}));
-  const filters=log.nodes.filter(n=>n.kind==='filter').map(n=>({type:n.type,frequency:n.frequency,Q:n.Q,automation:n.automation.slice(0,4)}));
-  const result={game,seconds:game==='city'?CITY_SECONDS:SECONDS,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),errors,timeline:log.timeline};
+  const {result,file}=classify(game,log,game==='city'?CITY_SECONDS:SECONDS);
   summary.games[game]=result;if(result.liveTones.length)failures++;
-  await writeFile(path.join(outDir,`${game}.json`),JSON.stringify({...result,oscillatorDetail:oscillators.slice(0,40),filterDetail:filters.slice(0,40),decoded:log.decoded,nodes:log.nodes,frames:log.frames},null,0));
-  console.log(JSON.stringify({game,contexts:log.contexts.length,frames:log.frames.length,phases:result.phases,sources:byUrl,segments:segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,live:s.live,phases:s.phases,sources:s.sources})),errors}));
+  await writeFile(path.join(outDir,`${game}.json`),JSON.stringify(file));
+  console.log(JSON.stringify({game,contexts:log.contexts.length,frames:log.frames.length,phases:result.phases,sources:result.sources,segments:result.segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,live:s.live,phases:s.phases,sources:s.sources})),errors}));
 }
 await browser.close();await server.close();
 await writeFile(path.join(outDir,'summary.json'),JSON.stringify(summary,null,1));

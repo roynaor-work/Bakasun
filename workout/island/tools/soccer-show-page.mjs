@@ -40,7 +40,10 @@ function createBot(seed){
 }
 const stats=list=>{const s=[...list].sort((a,b)=>a-b),q=p=>s.length?s[Math.min(s.length-1,Math.floor(p*s.length))]:0;return {n:list.length,mean:+(list.reduce((a,b)=>a+b,0)/(list.length||1)).toFixed(2),p50:+q(.5).toFixed(2),p95:+q(.95).toFixed(2),max:+(s.at(-1)||0).toFixed(2)};};
 
+const SCREEN=document.querySelector('.game-screen'),SCREEN_HTML=SCREEN.innerHTML;
 async function runMatch(index,out){
+  // A disposed session has lost its WebGL context and left its HUD nodes behind: every match gets a fresh game screen (the shell does the same).
+  SCREEN.innerHTML=SCREEN_HTML;
   let finished;const done=new Promise(r=>finished=r);
   const session=startSoccer({...fakeContext(result=>finished(result)),balance});
   if(!session.debug)throw Error('open with ?dev=1');

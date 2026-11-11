@@ -36,7 +36,7 @@ export const SOCCER_SHOW_DEFAULTS=Object.freeze({
   celebrate:Object.freeze({
     /** The model is held this long for the celebration (a tap ends the hold early); the choreography keeps going until the kickoff. */
     holdSeconds:2.2,
-    runSpeed:4.6,maxRun:10,cornerInset:2.4,mates:2,mateSpeed:4.4,mateDelay:.35,mateOffset:1.25,mateBack:1.2,
+    runSpeed:4.6,maxRun:10,cornerInset:2.4,mates:2,mateSpeed:5.4,mateDelay:.25,mateOffset:1.25,mateBack:1.2,
     mateClips:Object.freeze(['v9_celebrate_clap','v9_celebrate_hop']),
     /** The beaten keeper: the first clip that exists. keeper_after_goal / disappointed are not in any shipped pack (11/11/2026). */
     keeperClips:Object.freeze(['v11_keeper_after_goal','disappointed','v10_idle_weight_shift','v9_idle_weight_shift','v10_idle_relaxed','v9_idle_relaxed']),
@@ -187,7 +187,7 @@ export function createSoccerShowTimeline(cfg=SOCCER_SHOW_DEFAULTS,pitch={length:
   return {
     get phase(){return phase;},get hold(){return hold;},get elapsed(){return t;},get cuts(){return cuts;},get cast(){return cast;},get cursor(){return cursor;},get shortAnchor(){return shortAnchor;},
     get active(){return phase!=='live';},get replaying(){return phase==='replay'||phase==='short';},get reason(){return reason;},
-    metrics(){return {phase,hold,elapsed:t,starts,shorts,reason,wall:cuts?.wall??null,cuts:cuts?.segments.map(s=>({cam:s.cam,span:+(s.to-s.from).toFixed(3),rate:s.rate,wall:+s.wall.toFixed(3)}))??null};},
+    metrics(){return {phase,hold,elapsed:t,starts,shorts,reason,cast:cast?{scorer:cast.scorer,mates:cast.mates,keeper:cast.keeper,team:cast.team}:null,wall:cuts?.wall??null,cuts:cuts?.segments.map(s=>({cam:s.cam,span:+(s.to-s.from).toFixed(3),rate:s.rate,wall:+s.wall.toFixed(3)}))??null};},
     skip(){tap=true;},
     /** Match events (drained by the session after the frame): a post and a keeper dive may earn a short replay. */
     event(e,clock){if(e?.type==='post')pendingPost={at:clock};else if(e?.type==='dive')pendingDive={player:e.player,at:clock};},

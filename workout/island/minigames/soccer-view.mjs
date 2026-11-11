@@ -270,12 +270,12 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     if(s.eventId!==lastEvent){lastEvent=s.eventId;if(s.event?.type==='goal'){
       goalPulse=1;goalTeam=s.event.team;
     }}
-    const live=s;let rate=1;
+    const live=s;let rate=1,markers=true;
     if(show){
       // The show renders the same scene with the same live avatars (recorded frames read back into one reused state copy), so it costs the
       // same at every tier: a tier-2 phone gets the replay too. `rate` slows the design clips inside the half-speed cut.
       liveTarget[0]=cameraState.x;liveTarget[1]=0;liveTarget[2]=cameraState.z;
-      const shown=show.update(live,dt,camera,liveTarget,quality);s=shown.state;rate=shown.rate;if(shown.owned||shown.hold)onEdge(null);
+      const shown=show.update(live,dt,camera,liveTarget,quality);s=shown.state;rate=shown.rate;markers=shown.markers;if(shown.owned||shown.hold)onEdge(null);
     }
     // The existing economy tiers spend their budget on the athletes and pitch.
     // Replays never extend the goal pause or force a weaker device to render a
@@ -371,7 +371,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
     turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
-    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
+    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);selector.visible=arrow.visible=markers;if(!markers)requests.count=0;
     const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
     const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
     aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);

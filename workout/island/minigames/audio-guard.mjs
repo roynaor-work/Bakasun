@@ -16,9 +16,9 @@ export const LIVE_PHASES={soccer:['playing'],streetSlam:['live'],tennis:['rally'
  * glideSeconds is a 'glide' (siren, squeak, pitch ramp; the sneaker squeak's
  * audible high part is only ~0.3 s, but it repeats on every fast dribble). Levels
  * are analyser dB (a loud thump peaks near -45), so thresholds are relative. */
-export function whistleLike(frames,{minSeconds=.6,glideSeconds=.25,humSeconds=2,lowHz=WHISTLE_BAND.lowHz,highHz=WHISTLE_BAND.highHz,glideLowHz=900,tolerance=.05,glideStep=.35,minProminenceDb=10,maxBelowPeakDb=12,strongProminenceDb=18,strongBelowPeakDb=22,minLevelDb=-95,humShare=.2,humBelowPeakDb=6}={}){
-  // The sneaker squeak (basketball/shoes) starts at 1.08 kHz and jumps to its
-  // second partial, so glide candidates start lower and may step up to 35% a frame.
+export function whistleLike(frames,{minSeconds=.6,glideSeconds=.25,humSeconds=2,lowHz=WHISTLE_BAND.lowHz,highHz=WHISTLE_BAND.highHz,glideLowHz=900,tolerance=.05,glideStep=.4,minProminenceDb=10,maxBelowPeakDb=12,strongProminenceDb=18,strongBelowPeakDb=22,minLevelDb=-95,humShare=.2,humBelowPeakDb=6}={}){
+  // The sneaker squeak (basketball/shoes) is a 1.7 kHz lead-in that drops to a pure
+  // 1.08 kHz tone (-37%), so glide candidates start at 0.9 kHz and may step 40% a frame.
   // A very prominent line may sit further under the frame peak: the ear hears a
   // 2 kHz line 20 dB under a 150 Hz thump (equal-loudness), the FFT peak does not.
   const tonal=f=>!!f.hi&&f.hi.f>=glideLowHz&&f.hi.f<=highHz&&f.hi.db>=minLevelDb&&((f.hi.prom>=minProminenceDb&&f.hi.rel>=-maxBelowPeakDb)||(f.hi.prom>=strongProminenceDb&&f.hi.rel>=-strongBelowPeakDb));
