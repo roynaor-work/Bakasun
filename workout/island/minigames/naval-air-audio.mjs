@@ -8,7 +8,7 @@ export function createNavalAirAudio({storage,AudioContext=globalThis.AudioContex
  const sync=()=>{try{muted=storage?.getItem('island.sound')==='off';}catch{}const level=paused||muted?0:.2;if(master&&level!==masterLevel){masterLevel=level;master.gain.setTargetAtTime(level,context.currentTime,.025);}};
  async function load(){
   if(loaded)return;loaded=true;
-  await Promise.all(NAVAL_AIR_AUDIO_FILES.map(async name=>{try{const response=await fetcher(new URL(`../assets/game-naval/audio/${name}.ogg?v=island-v2-20261107-8`,import.meta.url));if(!response.ok)return;const bytes=await response.arrayBuffer();const decoded=await context.decodeAudioData(bytes);if(!disposed)buffers.set(name,decoded);}catch{}}));
+  await Promise.all(NAVAL_AIR_AUDIO_FILES.map(async name=>{try{const response=await fetcher(new URL(`../assets/game-naval/audio/${name}.ogg?v=island-v2-20261107-9`,import.meta.url));if(!response.ok)return;const bytes=await response.arrayBuffer();const decoded=await context.decodeAudioData(bytes);if(!disposed)buffers.set(name,decoded);}catch{}}));
  }
  function source(name,{loop:looping=false,gain=1,rate=1}={}){
   if(disposed||!context||!buffers.has(name))return null;

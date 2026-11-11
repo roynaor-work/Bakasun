@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-8';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-9';
 import {NAVAL_AIR_LIFT} from './naval-air.mjs';
 /** 11/11/2026: attack aircraft at hull scale (the v20 boxes were a tenth of the hull and sat at mast height), one merged
  * geometry per airframe plus spinning rotors, a hit flash, a smoke trail and a nose-over fall when shot down; Vulcan tracers

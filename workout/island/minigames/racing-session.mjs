@@ -1,9 +1,9 @@
-import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-8';
-import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-8';
-import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-8';
-import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-8';
-import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-8';
-import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-8';
+import {createRacing} from './racing-physics.mjs?v=island-v2-20261107-9';
+import {createRacingView} from './racing-view.mjs?v=island-v2-20261107-9';
+import {createRacingControls} from './racing-controls.mjs?v=island-v2-20261107-9';
+import {createRacingAudio} from './racing-audio.mjs?v=island-v2-20261107-9';
+import {bindAudioUnlock} from './racing-unlock.mjs?v=island-v2-20261107-9';
+import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-9';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
 function leagueOrder(cars){
@@ -21,7 +21,7 @@ export function runRacingSession(ctx){
  const abort=new AbortController();let audio;try{audio=createRacingAudio({samples:engineOn&&samplesOn});}catch{audio=createRacingAudio({storage:null});}
  const session={get ready(){return Boolean(view)&&renderError!=='webgl-context-lost';},get loadFailed(){return renderError&&renderError!=='webgl-context-lost'?String(renderError):null;},setPaused(value){paused=!!value;last=0;input?.setEnabled(!paused);audio.setPaused(paused);if(paused)model.pause();else model.resume();},dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();input?.dispose();audio.dispose();view?.dispose();model.dispose();},get snapshot(){return {stage:model.state.stage,phase:model.state.phase,time:model.state.time,paused,disposed,player:{...model.state.player},cars:model.state.cars.map(c=>({...c})),result:model.state.result,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),error:renderError};}};
  if(!canvas)return session;
- const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-8',import.meta.url).href;screen.append(css);
+ const screen=canvas.closest('.game-screen'),stage=canvas.parentElement,css=document.createElement('link');css.rel='stylesheet';css.href=new URL('./racing.css?v=island-v2-20261107-9',import.meta.url).href;screen.append(css);
  const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const hud=node('div','racing-hud'),rank=node('bdi','racing-rank','3'),of=node('small','racing-of','/ '+model.state.cars.length),lap=node('span','racing-lap'),clock=node('bdi','racing-clock','0:00'),trackName=node('strong','racing-track',model.track.name);rank.append(of);const position=node('div','racing-position');position.append(rank,node('span','racing-position-label','מקום'));const info=node('div','racing-race-info');info.append(trackName,lap,clock);const lapInfo=node('span','racing-lapinfo');lapInfo.style.direction='rtl';info.append(lapInfo);hud.append(position,info);stage.append(hud);
  const draftBadge=node('div','racing-draft','סלפה');draftBadge.hidden=true;stage.append(draftBadge);

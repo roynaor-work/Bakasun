@@ -1,4 +1,4 @@
-import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-8';
+import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-9';
 import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs';
 import {NAVAL_AIR_LIFT} from './naval-air.mjs';
 const TAU=Math.PI*2;

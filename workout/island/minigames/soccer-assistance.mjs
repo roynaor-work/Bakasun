@@ -1,5 +1,5 @@
 // Pure helpers for human control. Coordinates are metres in the pitch X/Z plane.
-import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-8';
+import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-9';
 // They never change a player, ball, input, save, RNG or wall clock.
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const finite=(n,fallback=0)=>Number.isFinite(n)?n:fallback;
