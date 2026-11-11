@@ -1,48 +1,62 @@
 {
- "generatedAt": "2026-11-11T18:53:02.578Z",
- "reclassifiedFrom": "verification/sports-deep-fable/audio-forensics",
+ "generatedAt": "2026-11-11T22:54:51.863Z",
+ "seconds": 180,
  "games": {
-  "soccer": {
-   "game": "soccer",
+  "tennis": {
+   "game": "tennis",
    "seconds": 180,
    "contexts": [
     {
      "id": 1,
      "kind": "AudioContext",
      "sampleRate": 44100,
-     "createdAt": 5424,
-     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
+     "createdAt": 5491,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:43427/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:43427/workout/island/ui/activity.mjs:37:64)"
     },
     {
      "id": 2,
      "kind": "AudioContext",
      "sampleRate": 44100,
-     "createdAt": 11542,
-     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:41693/workout/island/minigames/soccer-design-audio.mjs:48:17) < Object.setPaused (http://127.0.0.1:41693/workout/island/minigames/soccer-design-audio.mjs:131:204)"
+     "createdAt": 8574,
+     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:43427/workout/island/minigames/g4e-audio.mjs:8:87) < Object.setPaused (http://127.0.0.1:43427/workout/island/minigames/g4e-audio.mjs:16:172)"
     }
    ],
-   "frames": 3520,
+   "frames": 3157,
    "phases": {
-    "playing": {
-     "frames": 1974,
-     "s25": 0.305,
-     "s12": 0.258,
-     "maxDb": -28.2,
-     "audible": 1972
+    "toss": {
+     "frames": 237,
+     "s25": 0.034,
+     "s12": 0.26,
+     "maxDb": -49.9,
+     "audible": 175
     },
-    "goal": {
-     "frames": 1468,
-     "s25": 0.286,
-     "s12": 0.266,
-     "maxDb": -37.4,
-     "audible": 1468
+    "rally": {
+     "frames": 2336,
+     "s25": 0.009,
+     "s12": 0.155,
+     "maxDb": -29.6,
+     "audible": 2330
     },
-    "halftime": {
-     "frames": 78,
-     "s25": 0.376,
-     "s12": 0.251,
-     "maxDb": -52.2,
-     "audible": 78
+    "point": {
+     "frames": 312,
+     "s25": 0.047,
+     "s12": 0.292,
+     "maxDb": -29.6,
+     "audible": 312
+    },
+    "serve": {
+     "frames": 109,
+     "s25": 0.043,
+     "s12": 0.278,
+     "maxDb": -50.8,
+     "audible": 109
+    },
+    "game": {
+     "frames": 163,
+     "s25": 0.076,
+     "s12": 0.448,
+     "maxDb": -29.6,
+     "audible": 163
     }
    },
    "sources": {
@@ -54,2411 +68,90 @@
       "null": 1
      }
     },
-    "design/audio/soccer/whistle.ogg": {
-     "count": 9,
-     "live": 8,
-     "loop": 0,
-     "phases": {
-      "playing": 8,
-      "halftime": 1
-     }
-    },
-    "design/audio/soccer/crowd-calm.ogg": {
-     "count": 15,
-     "live": 15,
-     "loop": 0,
-     "phases": {
-      "playing": 15
-     }
-    },
-    "design/audio/soccer/ambience-loop.ogg": {
+    "assets/audio/g4e/stadium-bed.ogg": {
      "count": 1,
      "live": 1,
      "loop": 1,
      "phases": {
-      "playing": 1
+      "toss": 1
      }
     },
-    "design/audio/soccer/kick.ogg": {
-     "count": 8,
-     "live": 8,
+    "assets/audio/g4e/racket.ogg": {
+     "count": 76,
+     "live": 76,
      "loop": 0,
      "phases": {
-      "playing": 8
+      "rally": 76
      }
     },
-    "design/audio/soccer/pass.ogg": {
-     "count": 20,
-     "live": 20,
+    "assets/audio/g4e/bounce.ogg": {
+     "count": 78,
+     "live": 66,
      "loop": 0,
      "phases": {
-      "playing": 20
+      "rally": 66,
+      "point": 9,
+      "game": 3
      }
     },
-    "design/audio/soccer/net.ogg": {
-     "count": 7,
+    "assets/audio/g4e/applause-short.ogg": {
+     "count": 6,
      "live": 0,
      "loop": 0,
      "phases": {
-      "goal": 7
+      "point": 6
      }
     },
-    "design/audio/soccer/crowd-goal.ogg": {
-     "count": 7,
+    "assets/audio/g4e/near-point-oh.ogg": {
+     "count": 5,
      "live": 0,
      "loop": 0,
      "phases": {
-      "goal": 7
+      "point": 5
      }
     },
-    "design/audio/soccer/crowd-excited.ogg": {
+    "assets/audio/g4e/pre-serve-hush.ogg": {
+     "count": 14,
+     "live": 14,
+     "loop": 0,
+     "phases": {
+      "serve": 14
+     }
+    },
+    "assets/audio/g4e/applause-large.ogg": {
+     "count": 3,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "game": 3
+     }
+    },
+    "assets/audio/g4e/mistake-aw.ogg": {
      "count": 2,
-     "live": 2,
+     "live": 0,
      "loop": 0,
      "phases": {
-      "playing": 2
+      "point": 2
+     }
+    },
+    "assets/audio/g4e/applause-medium.ogg": {
+     "count": 3,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "point": 3
+     }
+    },
+    "assets/audio/g4e/net.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "point": 1
      }
     }
    },
    "oscillators": 1,
-   "filters": 138,
-   "segments": [
-    {
-     "kind": "glide",
-     "start": 0,
-     "end": 0.352,
-     "seconds": 0.352,
-     "hz": 2756,
-     "fromHz": 2896,
-     "toHz": 2724,
-     "maxDb": -52,
-     "frames": 7,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 0,
-     "end": 6.457,
-     "seconds": 6.457,
-     "hz": 1596,
-     "share": 0.341,
-     "maxDb": -52,
-     "frames": 109,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/kick.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 0.65,
-     "end": 1.05,
-     "seconds": 0.4,
-     "hz": 1475,
-     "fromHz": 1766,
-     "toHz": 1044,
-     "maxDb": -61.2,
-     "frames": 5,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 6.85,
-     "end": 12.15,
-     "seconds": 5.3,
-     "hz": 1542,
-     "share": 0.3,
-     "maxDb": -59.3,
-     "frames": 107,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/kick.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 7.9,
-     "end": 8.2,
-     "seconds": 0.3,
-     "hz": 1733,
-     "fromHz": 2304,
-     "toHz": 1249,
-     "maxDb": -67.9,
-     "frames": 6,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 16.6,
-     "end": 19.522,
-     "seconds": 2.922,
-     "hz": 1545,
-     "share": 0.297,
-     "maxDb": -57.1,
-     "frames": 58,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 19.8,
-     "end": 23.75,
-     "seconds": 3.95,
-     "hz": 1589,
-     "share": 0.304,
-     "maxDb": -61.6,
-     "frames": 79,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 24.75,
-     "end": 27.564,
-     "seconds": 2.814,
-     "hz": 1432,
-     "share": 0.299,
-     "maxDb": -60.2,
-     "frames": 56,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/kick.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 27.9,
-     "end": 30.451,
-     "seconds": 2.551,
-     "hz": 1604,
-     "share": 0.303,
-     "maxDb": -58.7,
-     "frames": 52,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/kick.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 34,
-     "end": 39.509,
-     "seconds": 5.509,
-     "hz": 1460,
-     "share": 0.306,
-     "maxDb": -59.7,
-     "frames": 110,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 41.55,
-     "end": 43.95,
-     "seconds": 2.4,
-     "hz": 1482,
-     "share": 0.277,
-     "maxDb": -59.2,
-     "frames": 49,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 47.9,
-     "end": 48.159,
-     "seconds": 0.259,
-     "hz": 2649,
-     "fromHz": 2649,
-     "toHz": 2422,
-     "maxDb": -70,
-     "frames": 4,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 48.8,
-     "end": 53.05,
-     "seconds": 4.25,
-     "hz": 1393,
-     "share": 0.285,
-     "maxDb": -64,
-     "frames": 86,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 55.3,
-     "end": 55.558,
-     "seconds": 0.258,
-     "hz": 3198,
-     "fromHz": 2745,
-     "toHz": 3198,
-     "maxDb": -56.9,
-     "frames": 2,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 56.4,
-     "end": 63.5,
-     "seconds": 7.1,
-     "hz": 1467,
-     "share": 0.301,
-     "maxDb": -59.2,
-     "frames": 140,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 65.55,
-     "end": 67.95,
-     "seconds": 2.4,
-     "hz": 1767,
-     "share": 0.387,
-     "maxDb": -51.7,
-     "frames": 49,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 73.854,
-     "end": 84.8,
-     "seconds": 10.946,
-     "hz": 1561,
-     "share": 0.322,
-     "maxDb": -51.5,
-     "frames": 220,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 79.9,
-     "end": 80.158,
-     "seconds": 0.258,
-     "hz": 1464,
-     "fromHz": 2315,
-     "toHz": 1464,
-     "maxDb": -63.2,
-     "frames": 5,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 85.1,
-     "end": 87.5,
-     "seconds": 2.4,
-     "hz": 1528,
-     "share": 0.313,
-     "maxDb": -68.4,
-     "frames": 49,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 90.15,
-     "end": 92.401,
-     "seconds": 2.251,
-     "hz": 1605,
-     "share": 0.308,
-     "maxDb": -57.6,
-     "frames": 46,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/crowd-calm.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 96.1,
-     "end": 105.85,
-     "seconds": 9.75,
-     "hz": 1486,
-     "share": 0.322,
-     "maxDb": -52.3,
-     "frames": 196,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 106.1,
-     "end": 110.956,
-     "seconds": 4.856,
-     "hz": 1455,
-     "share": 0.302,
-     "maxDb": -63.2,
-     "frames": 98,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 118.65,
-     "end": 125.4,
-     "seconds": 6.75,
-     "hz": 1511,
-     "share": 0.329,
-     "maxDb": -52,
-     "frames": 136,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 125.65,
-     "end": 127.7,
-     "seconds": 2.05,
-     "hz": 1628,
-     "share": 0.324,
-     "maxDb": -64.7,
-     "frames": 42,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 128.007,
-     "end": 133.101,
-     "seconds": 5.094,
-     "hz": 1422,
-     "share": 0.295,
-     "maxDb": -60,
-     "frames": 103,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/crowd-calm.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 133.35,
-     "end": 135.5,
-     "seconds": 2.15,
-     "hz": 1662,
-     "share": 0.315,
-     "maxDb": -61.3,
-     "frames": 44,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 142.457,
-     "end": 153.2,
-     "seconds": 10.743,
-     "hz": 1506,
-     "share": 0.304,
-     "maxDb": -51.5,
-     "frames": 213,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 143.9,
-     "end": 144.15,
-     "seconds": 0.25,
-     "hz": 2649,
-     "fromHz": 2649,
-     "toHz": 2778,
-     "maxDb": -66.2,
-     "frames": 4,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 153.4,
-     "end": 157.455,
-     "seconds": 4.055,
-     "hz": 1490,
-     "share": 0.31,
-     "maxDb": -52.8,
-     "frames": 82,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 161.75,
-     "end": 163.95,
-     "seconds": 2.2,
-     "hz": 1833,
-     "share": 0.416,
-     "maxDb": -52.2,
-     "frames": 45,
-     "phases": [
-      "playing",
-      "halftime"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 162.803,
-     "end": 163.25,
-     "seconds": 0.447,
-     "hz": 2745,
-     "fromHz": 2573,
-     "toHz": 2842,
-     "maxDb": -52.2,
-     "frames": 8,
-     "phases": [
-      "playing",
-      "halftime"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 166.1,
-     "end": 169.9,
-     "seconds": 3.8,
-     "hz": 1744,
-     "share": 0.387,
-     "maxDb": -52.4,
-     "frames": 77,
-     "phases": [
-      "halftime",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 167.9,
-     "end": 168.156,
-     "seconds": 0.256,
-     "hz": 2649,
-     "fromHz": 2649,
-     "toHz": 2422,
-     "maxDb": -71.1,
-     "frames": 4,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 170.101,
-     "end": 173.518,
-     "seconds": 3.417,
-     "hz": 1509,
-     "share": 0.299,
-     "maxDb": -58.9,
-     "frames": 69,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/kick.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 176.6,
-     "end": 179.4,
-     "seconds": 2.8,
-     "hz": 1460,
-     "share": 0.293,
-     "maxDb": -58.5,
-     "frames": 57,
-     "phases": [
-      "goal"
-     ],
-     "live": false,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg"
-     ]
-    }
-   ],
-   "liveTones": [],
-   "liveGlides": [
-    {
-     "kind": "glide",
-     "start": 0,
-     "end": 0.352,
-     "seconds": 0.352,
-     "hz": 2756,
-     "fromHz": 2896,
-     "toHz": 2724,
-     "maxDb": -52,
-     "frames": 7,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 0.65,
-     "end": 1.05,
-     "seconds": 0.4,
-     "hz": 1475,
-     "fromHz": 1766,
-     "toHz": 1044,
-     "maxDb": -61.2,
-     "frames": 5,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 7.9,
-     "end": 8.2,
-     "seconds": 0.3,
-     "hz": 1733,
-     "fromHz": 2304,
-     "toHz": 1249,
-     "maxDb": -67.9,
-     "frames": 6,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 47.9,
-     "end": 48.159,
-     "seconds": 0.259,
-     "hz": 2649,
-     "fromHz": 2649,
-     "toHz": 2422,
-     "maxDb": -70,
-     "frames": 4,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 162.803,
-     "end": 163.25,
-     "seconds": 0.447,
-     "hz": 2745,
-     "fromHz": 2573,
-     "toHz": 2842,
-     "maxDb": -52.2,
-     "frames": 8,
-     "phases": [
-      "playing",
-      "halftime"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 167.9,
-     "end": 168.156,
-     "seconds": 0.256,
-     "hz": 2649,
-     "fromHz": 2649,
-     "toHz": 2422,
-     "maxDb": -71.1,
-     "frames": 4,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop"
-     ]
-    }
-   ],
-   "liveHums": [
-    {
-     "kind": "hum",
-     "start": 0,
-     "end": 6.457,
-     "seconds": 6.457,
-     "hz": 1596,
-     "share": 0.341,
-     "maxDb": -52,
-     "frames": 109,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/kick.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 6.85,
-     "end": 12.15,
-     "seconds": 5.3,
-     "hz": 1542,
-     "share": 0.3,
-     "maxDb": -59.3,
-     "frames": 107,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/kick.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 16.6,
-     "end": 19.522,
-     "seconds": 2.922,
-     "hz": 1545,
-     "share": 0.297,
-     "maxDb": -57.1,
-     "frames": 58,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 19.8,
-     "end": 23.75,
-     "seconds": 3.95,
-     "hz": 1589,
-     "share": 0.304,
-     "maxDb": -61.6,
-     "frames": 79,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 24.75,
-     "end": 27.564,
-     "seconds": 2.814,
-     "hz": 1432,
-     "share": 0.299,
-     "maxDb": -60.2,
-     "frames": 56,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/kick.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 27.9,
-     "end": 30.451,
-     "seconds": 2.551,
-     "hz": 1604,
-     "share": 0.303,
-     "maxDb": -58.7,
-     "frames": 52,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/kick.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 48.8,
-     "end": 53.05,
-     "seconds": 4.25,
-     "hz": 1393,
-     "share": 0.285,
-     "maxDb": -64,
-     "frames": 86,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 65.55,
-     "end": 67.95,
-     "seconds": 2.4,
-     "hz": 1767,
-     "share": 0.387,
-     "maxDb": -51.7,
-     "frames": 49,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 73.854,
-     "end": 84.8,
-     "seconds": 10.946,
-     "hz": 1561,
-     "share": 0.322,
-     "maxDb": -51.5,
-     "frames": 220,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 85.1,
-     "end": 87.5,
-     "seconds": 2.4,
-     "hz": 1528,
-     "share": 0.313,
-     "maxDb": -68.4,
-     "frames": 49,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 90.15,
-     "end": 92.401,
-     "seconds": 2.251,
-     "hz": 1605,
-     "share": 0.308,
-     "maxDb": -57.6,
-     "frames": 46,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/crowd-calm.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 96.1,
-     "end": 105.85,
-     "seconds": 9.75,
-     "hz": 1486,
-     "share": 0.322,
-     "maxDb": -52.3,
-     "frames": 196,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 106.1,
-     "end": 110.956,
-     "seconds": 4.856,
-     "hz": 1455,
-     "share": 0.302,
-     "maxDb": -63.2,
-     "frames": 98,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 118.65,
-     "end": 125.4,
-     "seconds": 6.75,
-     "hz": 1511,
-     "share": 0.329,
-     "maxDb": -52,
-     "frames": 136,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 125.65,
-     "end": 127.7,
-     "seconds": 2.05,
-     "hz": 1628,
-     "share": 0.324,
-     "maxDb": -64.7,
-     "frames": 42,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 128.007,
-     "end": 133.101,
-     "seconds": 5.094,
-     "hz": 1422,
-     "share": 0.295,
-     "maxDb": -60,
-     "frames": 103,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/crowd-calm.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 133.35,
-     "end": 135.5,
-     "seconds": 2.15,
-     "hz": 1662,
-     "share": 0.315,
-     "maxDb": -61.3,
-     "frames": 44,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 142.457,
-     "end": 153.2,
-     "seconds": 10.743,
-     "hz": 1506,
-     "share": 0.304,
-     "maxDb": -51.5,
-     "frames": 213,
-     "phases": [
-      "goal",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-goal.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 153.4,
-     "end": 157.455,
-     "seconds": 4.055,
-     "hz": 1490,
-     "share": 0.31,
-     "maxDb": -52.8,
-     "frames": 82,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 161.75,
-     "end": 163.95,
-     "seconds": 2.2,
-     "hz": 1833,
-     "share": 0.416,
-     "maxDb": -52.2,
-     "frames": 45,
-     "phases": [
-      "playing",
-      "halftime"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/whistle.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 166.1,
-     "end": 169.9,
-     "seconds": 3.8,
-     "hz": 1744,
-     "share": 0.387,
-     "maxDb": -52.4,
-     "frames": 77,
-     "phases": [
-      "halftime",
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/whistle.ogg",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg"
-     ]
-    },
-    {
-     "kind": "hum",
-     "start": 170.101,
-     "end": 173.518,
-     "seconds": 3.417,
-     "hz": 1509,
-     "share": 0.299,
-     "maxDb": -58.9,
-     "frames": 69,
-     "phases": [
-      "playing"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/soccer/ambience-loop.ogg loop",
-      "design/audio/soccer/crowd-calm.ogg",
-      "design/audio/soccer/pass.ogg",
-      "design/audio/soccer/kick.ogg"
-     ]
-    }
-   ],
-   "errors": [],
-   "timeline": [
-    {
-     "at": 10.5,
-     "what": "ready"
-    },
-    {
-     "at": 10.6,
-     "what": "bot running"
-    },
-    {
-     "at": 191.2,
-     "what": "done"
-    }
-   ]
-  },
-  "streetSlam": {
-   "game": "streetSlam",
-   "seconds": 180,
-   "contexts": [
-    {
-     "id": 1,
-     "kind": "AudioContext",
-     "sampleRate": 44100,
-     "createdAt": 4496,
-     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
-    },
-    {
-     "id": 2,
-     "kind": "AudioContext",
-     "sampleRate": 44100,
-     "createdAt": 6835,
-     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:41693/workout/island/minigames/hoops-audio.mjs:70:13) < Object.setPaused (http://127.0.0.1:41693/workout/island/minigames/hoops-audio.mjs:136:53)"
-    }
-   ],
-   "frames": 1301,
-   "phases": {
-    "jumpball": {
-     "frames": 4,
-     "s25": 0.543,
-     "s12": 0.171,
-     "maxDb": -67.1,
-     "audible": 3
-    },
-    "live": {
-     "frames": 1297,
-     "s25": 0.015,
-     "s12": 0.068,
-     "maxDb": -45.3,
-     "audible": 927
-    }
-   },
-   "sources": {
-    "osc:sine": {
-     "count": 1,
-     "live": 0,
-     "loop": 0,
-     "phases": {
-      "null": 1
-     }
-    },
-    "design/audio/scenes/opening.ogg": {
-     "count": 1,
-     "live": 0,
-     "loop": 0,
-     "phases": {
-      "jumpball": 1
-     }
-    },
-    "design/audio/basketball/bounce.ogg": {
-     "count": 111,
-     "live": 111,
-     "loop": 0,
-     "phases": {
-      "live": 111
-     }
-    },
-    "design/audio/basketball/shoes.ogg": {
-     "count": 34,
-     "live": 34,
-     "loop": 0,
-     "phases": {
-      "live": 34
-     }
-    },
-    "assets/audio/g3h/pass.ogg": {
-     "count": 7,
-     "live": 7,
-     "loop": 0,
-     "phases": {
-      "live": 7
-     }
-    },
-    "design/audio/basketball/swish.ogg": {
-     "count": 1,
-     "live": 0,
-     "loop": 0,
-     "phases": {
-      "dead": 1
-     }
-    },
-    "design/audio/basketball/crowd-calm.ogg": {
-     "count": 1,
-     "live": 0,
-     "loop": 0,
-     "phases": {
-      "dead": 1
-     }
-    },
-    "design/audio/basketball/crowd-excited.ogg": {
-     "count": 1,
-     "live": 0,
-     "loop": 0,
-     "phases": {
-      "dead": 1
-     }
-    }
-   },
-   "oscillators": 1,
-   "filters": 298,
-   "segments": [
-    {
-     "kind": "glide",
-     "start": 2.95,
-     "end": 3.25,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 4.304,
-     "end": 4.604,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 6,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 6.25,
-     "end": 6.6,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 7.25,
-     "end": 7.6,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 9.95,
-     "end": 10.306,
-     "seconds": 0.356,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 36.303,
-     "end": 36.65,
-     "seconds": 0.347,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 37.1,
-     "end": 37.4,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 37.85,
-     "end": 38.2,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 39.356,
-     "end": 39.652,
-     "seconds": 0.296,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 40.1,
-     "end": 40.4,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 40.9,
-     "end": 41.2,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 65.5,
-     "end": 65.8,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 67.6,
-     "end": 67.95,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 68.7,
-     "end": 69,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 70.9,
-     "end": 71.2,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 154.003,
-     "end": 154.355,
-     "seconds": 0.352,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 156.451,
-     "end": 156.75,
-     "seconds": 0.299,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 157.15,
-     "end": 157.45,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 161,
-     "end": 161.35,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 162.4,
-     "end": 162.7,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 163.2,
-     "end": 163.55,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 164.75,
-     "end": 165.05,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 165.402,
-     "end": 165.703,
-     "seconds": 0.301,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 166.25,
-     "end": 166.55,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 6,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 166.9,
-     "end": 167.25,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    }
-   ],
-   "liveTones": [],
-   "liveGlides": [
-    {
-     "kind": "glide",
-     "start": 2.95,
-     "end": 3.25,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 4.304,
-     "end": 4.604,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 6,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 6.25,
-     "end": 6.6,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 7.25,
-     "end": 7.6,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 9.95,
-     "end": 10.306,
-     "seconds": 0.356,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 36.303,
-     "end": 36.65,
-     "seconds": 0.347,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 37.1,
-     "end": 37.4,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 37.85,
-     "end": 38.2,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 39.356,
-     "end": 39.652,
-     "seconds": 0.296,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 40.1,
-     "end": 40.4,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 40.9,
-     "end": 41.2,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 65.5,
-     "end": 65.8,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 67.6,
-     "end": 67.95,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 68.7,
-     "end": 69,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 70.9,
-     "end": 71.2,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 154.003,
-     "end": 154.355,
-     "seconds": 0.352,
-     "hz": 1087,
-     "fromHz": 1690,
-     "toHz": 1077,
-     "maxDb": -59,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 156.451,
-     "end": 156.75,
-     "seconds": 0.299,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 157.15,
-     "end": 157.45,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.8,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 161,
-     "end": 161.35,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 162.4,
-     "end": 162.7,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 163.2,
-     "end": 163.55,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 164.75,
-     "end": 165.05,
-     "seconds": 0.3,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 165.402,
-     "end": 165.703,
-     "seconds": 0.301,
-     "hz": 1077,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.5,
-     "frames": 7,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 166.25,
-     "end": 166.55,
-     "seconds": 0.3,
-     "hz": 1087,
-     "fromHz": 1723,
-     "toHz": 1077,
-     "maxDb": -57.1,
-     "frames": 6,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    },
-    {
-     "kind": "glide",
-     "start": 166.9,
-     "end": 167.25,
-     "seconds": 0.35,
-     "hz": 1087,
-     "fromHz": 1712,
-     "toHz": 1077,
-     "maxDb": -59.6,
-     "frames": 8,
-     "phases": [
-      "live"
-     ],
-     "live": true,
-     "sources": [
-      "design/audio/basketball/bounce.ogg",
-      "design/audio/basketball/shoes.ogg"
-     ]
-    }
-   ],
-   "liveHums": [],
-   "errors": [],
-   "timeline": [
-    {
-     "at": 7,
-     "what": "ready"
-    },
-    {
-     "at": 9,
-     "what": "bot running"
-    },
-    {
-     "at": 189.5,
-     "what": "done"
-    }
-   ]
-  },
-  "city": {
-   "game": "city",
-   "seconds": 30,
-   "contexts": [
-    {
-     "id": 1,
-     "kind": "AudioContext",
-     "sampleRate": 44100,
-     "createdAt": 4419,
-     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:41693/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:41693/workout/island/ui/activity.mjs:37:64)"
-    }
-   ],
-   "frames": 0,
-   "phases": {},
-   "sources": {},
-   "oscillators": 0,
    "filters": 0,
    "segments": [],
    "liveTones": [],
@@ -2467,11 +160,3727 @@
    "errors": [],
    "timeline": [
     {
-     "at": 4.4,
-     "what": "city idle"
+     "at": 6.1,
+     "what": "ready"
     },
     {
-     "at": 34.6,
+     "at": 7.7,
+     "what": "bot running"
+    },
+    {
+     "at": 188.5,
+     "what": "done"
+    }
+   ]
+  },
+  "alpineRush": {
+   "game": "alpineRush",
+   "seconds": 180,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 8472,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:43427/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:43427/workout/island/ui/activity.mjs:37:64)"
+    },
+    {
+     "id": 2,
+     "kind": "OfflineAudioContext",
+     "sampleRate": 48000,
+     "createdAt": 8885,
+     "stack": "new W (<anonymous>:70:113) < http://127.0.0.1:43427/workout/island/minigames/alpine-design-audio.mjs:104:52"
+    },
+    {
+     "id": 3,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 16808,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:43427/workout/island/minigames/alpine-design-audio.mjs:124:19) < Object.start (http://127.0.0.1:43427/workout/island/minigames/alpine-session.mjs:46:88)"
+    }
+   ],
+   "frames": 3197,
+   "phases": {
+    "countdown": {
+     "frames": 14,
+     "s25": 0.002,
+     "s12": 0.009,
+     "maxDb": -51.4,
+     "audible": 7
+    },
+    "racing": {
+     "frames": 3183,
+     "s25": 0.177,
+     "s12": 0.275,
+     "maxDb": -39.1,
+     "audible": 3183
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 3,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1,
+      "countdown": 2
+     }
+    },
+    "osc:triangle": {
+     "count": 27,
+     "live": 24,
+     "loop": 0,
+     "phases": {
+      "countdown": 3,
+      "racing": 24
+     }
+    },
+    "design/audio/ski/ambience-loop.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 1,
+     "phases": {
+      "racing": 1
+     }
+    },
+    "design/audio/ski/wind.ogg": {
+     "count": 48,
+     "live": 48,
+     "loop": 0,
+     "phases": {
+      "racing": 48
+     }
+    },
+    "design/audio/ski/scrape-slow.ogg": {
+     "count": 3,
+     "live": 3,
+     "loop": 0,
+     "phases": {
+      "racing": 3
+     }
+    },
+    "design/audio/ski/fall.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    },
+    "design/audio/ski/scrape-medium.ogg": {
+     "count": 34,
+     "live": 34,
+     "loop": 0,
+     "phases": {
+      "racing": 34
+     }
+    },
+    "design/audio/ski/scrape-fast.ogg": {
+     "count": 47,
+     "live": 47,
+     "loop": 0,
+     "phases": {
+      "racing": 47
+     }
+    },
+    "design/audio/ski/jump.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    },
+    "design/audio/ski/landing.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    },
+    "design/audio/ski/slalom-gate.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    }
+   },
+   "oscillators": 30,
+   "filters": 278,
+   "segments": [
+    {
+     "kind": "glide",
+     "start": 41.735,
+     "end": 42.094,
+     "seconds": 0.359,
+     "hz": 1227,
+     "fromHz": 1001,
+     "toHz": 1227,
+     "maxDb": -66.7,
+     "frames": 5,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/wind.ogg",
+      "design/audio/ski/scrape-medium.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.267,
+     "end": 70.535,
+     "seconds": 0.268,
+     "hz": 1367,
+     "fromHz": 1260,
+     "toHz": 1303,
+     "maxDb": -63.8,
+     "frames": 6,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-medium.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 131.585,
+     "end": 131.835,
+     "seconds": 0.25,
+     "hz": 1443,
+     "fromHz": 1314,
+     "toHz": 1443,
+     "maxDb": -52.2,
+     "frames": 4,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-fast.ogg",
+      "osc triangle 440Hz",
+      "design/audio/ski/wind.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 176.235,
+     "end": 176.485,
+     "seconds": 0.25,
+     "hz": 1561,
+     "fromHz": 1464,
+     "toHz": 1109,
+     "maxDb": -62.4,
+     "frames": 4,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-fast.ogg",
+      "design/audio/ski/wind.ogg"
+     ]
+    }
+   ],
+   "liveTones": [],
+   "liveGlides": [
+    {
+     "kind": "glide",
+     "start": 41.735,
+     "end": 42.094,
+     "seconds": 0.359,
+     "hz": 1227,
+     "fromHz": 1001,
+     "toHz": 1227,
+     "maxDb": -66.7,
+     "frames": 5,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/wind.ogg",
+      "design/audio/ski/scrape-medium.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.267,
+     "end": 70.535,
+     "seconds": 0.268,
+     "hz": 1367,
+     "fromHz": 1260,
+     "toHz": 1303,
+     "maxDb": -63.8,
+     "frames": 6,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-medium.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 131.585,
+     "end": 131.835,
+     "seconds": 0.25,
+     "hz": 1443,
+     "fromHz": 1314,
+     "toHz": 1443,
+     "maxDb": -52.2,
+     "frames": 4,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-fast.ogg",
+      "osc triangle 440Hz",
+      "design/audio/ski/wind.ogg"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 176.235,
+     "end": 176.485,
+     "seconds": 0.25,
+     "hz": 1561,
+     "fromHz": 1464,
+     "toHz": 1109,
+     "maxDb": -62.4,
+     "frames": 4,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "design/audio/ski/ambience-loop.ogg loop",
+      "design/audio/ski/scrape-fast.ogg",
+      "design/audio/ski/wind.ogg"
+     ]
+    }
+   ],
+   "liveHums": [],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 16.6,
+     "what": "ready"
+    },
+    {
+     "at": 17.1,
+     "what": "bot running"
+    },
+    {
+     "at": 197.5,
+     "what": "done"
+    }
+   ]
+  },
+  "islandRacing": {
+   "game": "islandRacing",
+   "seconds": 180,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 5179,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:43427/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:43427/workout/island/ui/activity.mjs:37:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 5437,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:43427/workout/island/minigames/racing-audio.mjs:40:13) < unlock (http://127.0.0.1:43427/workout/island/minigames/racing-unlock.mjs:6:31)"
+    }
+   ],
+   "frames": 3511,
+   "phases": {
+    "countdown": {
+     "frames": 570,
+     "s25": 0.085,
+     "s12": 0.077,
+     "maxDb": -51.6,
+     "audible": 570
+    },
+    "racing": {
+     "frames": 2941,
+     "s25": 0.112,
+     "s12": 0.115,
+     "maxDb": -48.7,
+     "audible": 2941
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:custom": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "generated:61739@44100": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/engine-idle.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/engine-low.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/engine-mid.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/engine-high.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/engine-redline.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/tyre-squeal.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/wind-speed.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:triangle": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:sawtooth": {
+     "count": 5,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1,
+      "countdown": 4
+     }
+    },
+    "assets/racing-audio-v2/shift-up.ogg": {
+     "count": 7,
+     "live": 7,
+     "loop": 0,
+     "phases": {
+      "racing": 7
+     }
+    },
+    "assets/racing-audio-v2/pass-whoosh.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v2/turbo-blowoff.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    },
+    "assets/racing-audio-v2/shift-down.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "racing": 1
+     }
+    }
+   },
+   "oscillators": 8,
+   "filters": 6,
+   "segments": [
+    {
+     "kind": "glide",
+     "start": 0,
+     "end": 33.149,
+     "seconds": 33.149,
+     "hz": 1755,
+     "fromHz": 2078,
+     "toHz": 1820,
+     "maxDb": -58.5,
+     "frames": 659,
+     "phases": [
+      "countdown",
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 33.35,
+     "end": 36.199,
+     "seconds": 2.849,
+     "hz": 1884,
+     "fromHz": 2584,
+     "toHz": 1346,
+     "maxDb": -56,
+     "frames": 58,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37,
+     "end": 37.349,
+     "seconds": 0.349,
+     "hz": 1432,
+     "fromHz": 2024,
+     "toHz": 1432,
+     "maxDb": -56.7,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.5,
+     "end": 37.8,
+     "seconds": 0.3,
+     "hz": 1432,
+     "fromHz": 2153,
+     "toHz": 1432,
+     "maxDb": -55.8,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.85,
+     "end": 38.45,
+     "seconds": 0.6,
+     "hz": 2132,
+     "fromHz": 2153,
+     "toHz": 2476,
+     "maxDb": -56.2,
+     "frames": 13,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 38.849,
+     "end": 42.299,
+     "seconds": 3.45,
+     "hz": 1895,
+     "fromHz": 1475,
+     "toHz": 980,
+     "maxDb": -57,
+     "frames": 68,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 42.5,
+     "end": 45.052,
+     "seconds": 2.552,
+     "hz": 1755,
+     "fromHz": 2455,
+     "toHz": 1324,
+     "maxDb": -55.2,
+     "frames": 52,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 45.099,
+     "end": 45.553,
+     "seconds": 0.454,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1324,
+     "maxDb": -55.2,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 45.599,
+     "end": 46.5,
+     "seconds": 0.901,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1367,
+     "maxDb": -55.7,
+     "frames": 19,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 46.565,
+     "end": 46.849,
+     "seconds": 0.284,
+     "hz": 1389,
+     "fromHz": 2078,
+     "toHz": 1389,
+     "maxDb": -56.3,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 46.9,
+     "end": 47.266,
+     "seconds": 0.366,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1400,
+     "maxDb": -56.1,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.299,
+     "end": 47.728,
+     "seconds": 0.429,
+     "hz": 2175,
+     "fromHz": 2153,
+     "toHz": 1453,
+     "maxDb": -55.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.75,
+     "end": 48.149,
+     "seconds": 0.399,
+     "hz": 2175,
+     "fromHz": 2175,
+     "toHz": 1453,
+     "maxDb": -55.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 48.2,
+     "end": 52.649,
+     "seconds": 4.449,
+     "hz": 1938,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -57.5,
+     "frames": 84,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 53.699,
+     "end": 55.449,
+     "seconds": 1.75,
+     "hz": 1669,
+     "fromHz": 2519,
+     "toHz": 1023,
+     "maxDb": -57,
+     "frames": 35,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 55.5,
+     "end": 57.599,
+     "seconds": 2.099,
+     "hz": 1766,
+     "fromHz": 1540,
+     "toHz": 1270,
+     "maxDb": -55.7,
+     "frames": 43,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 57.649,
+     "end": 58.049,
+     "seconds": 0.4,
+     "hz": 1270,
+     "fromHz": 1906,
+     "toHz": 1270,
+     "maxDb": -57.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 58.1,
+     "end": 59.449,
+     "seconds": 1.349,
+     "hz": 1346,
+     "fromHz": 1906,
+     "toHz": 1410,
+     "maxDb": -56.8,
+     "frames": 28,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 59.499,
+     "end": 59.799,
+     "seconds": 0.3,
+     "hz": 1410,
+     "fromHz": 2121,
+     "toHz": 1410,
+     "maxDb": -55.9,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 59.849,
+     "end": 62,
+     "seconds": 2.151,
+     "hz": 1400,
+     "fromHz": 2121,
+     "toHz": 1389,
+     "maxDb": -56.2,
+     "frames": 42,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 62.049,
+     "end": 62.452,
+     "seconds": 0.403,
+     "hz": 1410,
+     "fromHz": 2078,
+     "toHz": 1432,
+     "maxDb": -56.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 62.499,
+     "end": 63.05,
+     "seconds": 0.551,
+     "hz": 1432,
+     "fromHz": 2143,
+     "toHz": 1443,
+     "maxDb": -56.5,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 63.099,
+     "end": 64.249,
+     "seconds": 1.15,
+     "hz": 2218,
+     "fromHz": 2196,
+     "toHz": 1486,
+     "maxDb": -55.9,
+     "frames": 24,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 65.3,
+     "end": 69.15,
+     "seconds": 3.85,
+     "hz": 1960,
+     "fromHz": 1798,
+     "toHz": 2487,
+     "maxDb": -61.2,
+     "frames": 76,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 69.2,
+     "end": 69.749,
+     "seconds": 0.549,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.3,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 69.799,
+     "end": 70.349,
+     "seconds": 0.55,
+     "hz": 1475,
+     "fromHz": 2164,
+     "toHz": 2519,
+     "maxDb": -62.3,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.399,
+     "end": 71.499,
+     "seconds": 1.1,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.6,
+     "frames": 21,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 72.649,
+     "end": 83.25,
+     "seconds": 10.601,
+     "hz": 1755,
+     "fromHz": 2487,
+     "toHz": 1357,
+     "maxDb": -55.9,
+     "frames": 212,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 83.399,
+     "end": 83.901,
+     "seconds": 0.502,
+     "hz": 2035,
+     "fromHz": 2713,
+     "toHz": 1389,
+     "maxDb": -58.3,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 83.95,
+     "end": 84.249,
+     "seconds": 0.299,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1400,
+     "maxDb": -58.5,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 84.403,
+     "end": 84.957,
+     "seconds": 0.554,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1432,
+     "maxDb": -58.4,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 85.099,
+     "end": 85.499,
+     "seconds": 0.4,
+     "hz": 2153,
+     "fromHz": 2143,
+     "toHz": 1432,
+     "maxDb": -58.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 85.549,
+     "end": 85.8,
+     "seconds": 0.251,
+     "hz": 2143,
+     "fromHz": 2143,
+     "toHz": 1432,
+     "maxDb": -58.3,
+     "frames": 6,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 86.3,
+     "end": 91.059,
+     "seconds": 4.759,
+     "hz": 2250,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -55.6,
+     "frames": 93,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 91.352,
+     "end": 103.201,
+     "seconds": 11.849,
+     "hz": 1776,
+     "fromHz": 2110,
+     "toHz": 1270,
+     "maxDb": -55.5,
+     "frames": 235,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 103.249,
+     "end": 103.849,
+     "seconds": 0.6,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1292,
+     "maxDb": -56.7,
+     "frames": 13,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 103.9,
+     "end": 104.399,
+     "seconds": 0.499,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1292,
+     "maxDb": -56.1,
+     "frames": 11,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 104.45,
+     "end": 104.899,
+     "seconds": 0.449,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1314,
+     "maxDb": -56.8,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 105.1,
+     "end": 105.4,
+     "seconds": 0.3,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1346,
+     "maxDb": -57.6,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 105.836,
+     "end": 106.199,
+     "seconds": 0.363,
+     "hz": 1378,
+     "fromHz": 2067,
+     "toHz": 1400,
+     "maxDb": -56.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 106.249,
+     "end": 106.701,
+     "seconds": 0.452,
+     "hz": 1400,
+     "fromHz": 2099,
+     "toHz": 1400,
+     "maxDb": -56.1,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 107.099,
+     "end": 113.151,
+     "seconds": 6.052,
+     "hz": 2132,
+     "fromHz": 2164,
+     "toHz": 1475,
+     "maxDb": -55.3,
+     "frames": 117,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 113.199,
+     "end": 121.2,
+     "seconds": 8.001,
+     "hz": 1712,
+     "fromHz": 2153,
+     "toHz": 2455,
+     "maxDb": -56.6,
+     "frames": 160,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 121.4,
+     "end": 133.349,
+     "seconds": 11.949,
+     "hz": 1809,
+     "fromHz": 2455,
+     "toHz": 2659,
+     "maxDb": -55.5,
+     "frames": 237,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 133.449,
+     "end": 133.8,
+     "seconds": 0.351,
+     "hz": 2046,
+     "fromHz": 2692,
+     "toHz": 2724,
+     "maxDb": -57.8,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 133.949,
+     "end": 135.049,
+     "seconds": 1.1,
+     "hz": 2046,
+     "fromHz": 2046,
+     "toHz": 2745,
+     "maxDb": -59.6,
+     "frames": 22,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 135.251,
+     "end": 135.649,
+     "seconds": 0.398,
+     "hz": 2067,
+     "fromHz": 2067,
+     "toHz": 1378,
+     "maxDb": -58.9,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 135.7,
+     "end": 136.1,
+     "seconds": 0.4,
+     "hz": 2067,
+     "fromHz": 2067,
+     "toHz": 1378,
+     "maxDb": -58.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 136.149,
+     "end": 137.299,
+     "seconds": 1.15,
+     "hz": 2089,
+     "fromHz": 2067,
+     "toHz": 1400,
+     "maxDb": -58.7,
+     "frames": 24,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 137.452,
+     "end": 137.8,
+     "seconds": 0.348,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1410,
+     "maxDb": -58.9,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 138.434,
+     "end": 138.7,
+     "seconds": 0.266,
+     "hz": 2132,
+     "fromHz": 2132,
+     "toHz": 1421,
+     "maxDb": -58.6,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 139.35,
+     "end": 139.653,
+     "seconds": 0.303,
+     "hz": 2153,
+     "fromHz": 2153,
+     "toHz": 1443,
+     "maxDb": -58,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 139.7,
+     "end": 152.4,
+     "seconds": 12.7,
+     "hz": 2229,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -54.6,
+     "frames": 202,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 153,
+     "end": 153.9,
+     "seconds": 0.9,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.4,
+     "frames": 19,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 154.149,
+     "end": 154.949,
+     "seconds": 0.8,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61,
+     "frames": 15,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 155,
+     "end": 157.649,
+     "seconds": 2.649,
+     "hz": 1507,
+     "fromHz": 2164,
+     "toHz": 1658,
+     "maxDb": -58.7,
+     "frames": 52,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 157.753,
+     "end": 167.9,
+     "seconds": 10.147,
+     "hz": 1475,
+     "fromHz": 1776,
+     "toHz": 2616,
+     "maxDb": -49.3,
+     "frames": 200,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 168.504,
+     "end": 169.652,
+     "seconds": 1.148,
+     "hz": 2143,
+     "fromHz": 1992,
+     "toHz": 1421,
+     "maxDb": -56.3,
+     "frames": 23,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 170.299,
+     "end": 170.649,
+     "seconds": 0.35,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.5,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 171.151,
+     "end": 171.75,
+     "seconds": 0.599,
+     "hz": 2164,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -61.2,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 171.949,
+     "end": 172.25,
+     "seconds": 0.301,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1475,
+     "maxDb": -62.1,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 172.299,
+     "end": 172.853,
+     "seconds": 0.554,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1475,
+     "maxDb": -61.6,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 172.999,
+     "end": 174.399,
+     "seconds": 1.4,
+     "hz": 1701,
+     "fromHz": 2121,
+     "toHz": 2476,
+     "maxDb": -58.3,
+     "frames": 27,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 175.002,
+     "end": 177.65,
+     "seconds": 2.648,
+     "hz": 1863,
+     "fromHz": 2487,
+     "toHz": 1324,
+     "maxDb": -56,
+     "frames": 53,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    }
+   ],
+   "liveTones": [],
+   "liveGlides": [
+    {
+     "kind": "glide",
+     "start": 0,
+     "end": 33.149,
+     "seconds": 33.149,
+     "hz": 1755,
+     "fromHz": 2078,
+     "toHz": 1820,
+     "maxDb": -58.5,
+     "frames": 659,
+     "phases": [
+      "countdown",
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 33.35,
+     "end": 36.199,
+     "seconds": 2.849,
+     "hz": 1884,
+     "fromHz": 2584,
+     "toHz": 1346,
+     "maxDb": -56,
+     "frames": 58,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37,
+     "end": 37.349,
+     "seconds": 0.349,
+     "hz": 1432,
+     "fromHz": 2024,
+     "toHz": 1432,
+     "maxDb": -56.7,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.5,
+     "end": 37.8,
+     "seconds": 0.3,
+     "hz": 1432,
+     "fromHz": 2153,
+     "toHz": 1432,
+     "maxDb": -55.8,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 37.85,
+     "end": 38.45,
+     "seconds": 0.6,
+     "hz": 2132,
+     "fromHz": 2153,
+     "toHz": 2476,
+     "maxDb": -56.2,
+     "frames": 13,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 38.849,
+     "end": 42.299,
+     "seconds": 3.45,
+     "hz": 1895,
+     "fromHz": 1475,
+     "toHz": 980,
+     "maxDb": -57,
+     "frames": 68,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 42.5,
+     "end": 45.052,
+     "seconds": 2.552,
+     "hz": 1755,
+     "fromHz": 2455,
+     "toHz": 1324,
+     "maxDb": -55.2,
+     "frames": 52,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 45.099,
+     "end": 45.553,
+     "seconds": 0.454,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1324,
+     "maxDb": -55.2,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 45.599,
+     "end": 46.5,
+     "seconds": 0.901,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1367,
+     "maxDb": -55.7,
+     "frames": 19,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 46.565,
+     "end": 46.849,
+     "seconds": 0.284,
+     "hz": 1389,
+     "fromHz": 2078,
+     "toHz": 1389,
+     "maxDb": -56.3,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 46.9,
+     "end": 47.266,
+     "seconds": 0.366,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1400,
+     "maxDb": -56.1,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.299,
+     "end": 47.728,
+     "seconds": 0.429,
+     "hz": 2175,
+     "fromHz": 2153,
+     "toHz": 1453,
+     "maxDb": -55.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 47.75,
+     "end": 48.149,
+     "seconds": 0.399,
+     "hz": 2175,
+     "fromHz": 2175,
+     "toHz": 1453,
+     "maxDb": -55.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 48.2,
+     "end": 52.649,
+     "seconds": 4.449,
+     "hz": 1938,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -57.5,
+     "frames": 84,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 53.699,
+     "end": 55.449,
+     "seconds": 1.75,
+     "hz": 1669,
+     "fromHz": 2519,
+     "toHz": 1023,
+     "maxDb": -57,
+     "frames": 35,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 55.5,
+     "end": 57.599,
+     "seconds": 2.099,
+     "hz": 1766,
+     "fromHz": 1540,
+     "toHz": 1270,
+     "maxDb": -55.7,
+     "frames": 43,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 57.649,
+     "end": 58.049,
+     "seconds": 0.4,
+     "hz": 1270,
+     "fromHz": 1906,
+     "toHz": 1270,
+     "maxDb": -57.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 58.1,
+     "end": 59.449,
+     "seconds": 1.349,
+     "hz": 1346,
+     "fromHz": 1906,
+     "toHz": 1410,
+     "maxDb": -56.8,
+     "frames": 28,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 59.499,
+     "end": 59.799,
+     "seconds": 0.3,
+     "hz": 1410,
+     "fromHz": 2121,
+     "toHz": 1410,
+     "maxDb": -55.9,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 59.849,
+     "end": 62,
+     "seconds": 2.151,
+     "hz": 1400,
+     "fromHz": 2121,
+     "toHz": 1389,
+     "maxDb": -56.2,
+     "frames": 42,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 62.049,
+     "end": 62.452,
+     "seconds": 0.403,
+     "hz": 1410,
+     "fromHz": 2078,
+     "toHz": 1432,
+     "maxDb": -56.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 62.499,
+     "end": 63.05,
+     "seconds": 0.551,
+     "hz": 1432,
+     "fromHz": 2143,
+     "toHz": 1443,
+     "maxDb": -56.5,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 63.099,
+     "end": 64.249,
+     "seconds": 1.15,
+     "hz": 2218,
+     "fromHz": 2196,
+     "toHz": 1486,
+     "maxDb": -55.9,
+     "frames": 24,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 65.3,
+     "end": 69.15,
+     "seconds": 3.85,
+     "hz": 1960,
+     "fromHz": 1798,
+     "toHz": 2487,
+     "maxDb": -61.2,
+     "frames": 76,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 69.2,
+     "end": 69.749,
+     "seconds": 0.549,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.3,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 69.799,
+     "end": 70.349,
+     "seconds": 0.55,
+     "hz": 1475,
+     "fromHz": 2164,
+     "toHz": 2519,
+     "maxDb": -62.3,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 70.399,
+     "end": 71.499,
+     "seconds": 1.1,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.6,
+     "frames": 21,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 72.649,
+     "end": 83.25,
+     "seconds": 10.601,
+     "hz": 1755,
+     "fromHz": 2487,
+     "toHz": 1357,
+     "maxDb": -55.9,
+     "frames": 212,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 83.399,
+     "end": 83.901,
+     "seconds": 0.502,
+     "hz": 2035,
+     "fromHz": 2713,
+     "toHz": 1389,
+     "maxDb": -58.3,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 83.95,
+     "end": 84.249,
+     "seconds": 0.299,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1400,
+     "maxDb": -58.5,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 84.403,
+     "end": 84.957,
+     "seconds": 0.554,
+     "hz": 2089,
+     "fromHz": 2089,
+     "toHz": 1432,
+     "maxDb": -58.4,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 85.099,
+     "end": 85.499,
+     "seconds": 0.4,
+     "hz": 2153,
+     "fromHz": 2143,
+     "toHz": 1432,
+     "maxDb": -58.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 85.549,
+     "end": 85.8,
+     "seconds": 0.251,
+     "hz": 2143,
+     "fromHz": 2143,
+     "toHz": 1432,
+     "maxDb": -58.3,
+     "frames": 6,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 86.3,
+     "end": 91.059,
+     "seconds": 4.759,
+     "hz": 2250,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -55.6,
+     "frames": 93,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 91.352,
+     "end": 103.201,
+     "seconds": 11.849,
+     "hz": 1776,
+     "fromHz": 2110,
+     "toHz": 1270,
+     "maxDb": -55.5,
+     "frames": 235,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 103.249,
+     "end": 103.849,
+     "seconds": 0.6,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1292,
+     "maxDb": -56.7,
+     "frames": 13,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 103.9,
+     "end": 104.399,
+     "seconds": 0.499,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1292,
+     "maxDb": -56.1,
+     "frames": 11,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 104.45,
+     "end": 104.899,
+     "seconds": 0.449,
+     "hz": 1927,
+     "fromHz": 1927,
+     "toHz": 1314,
+     "maxDb": -56.8,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 105.1,
+     "end": 105.4,
+     "seconds": 0.3,
+     "hz": 1981,
+     "fromHz": 1981,
+     "toHz": 1346,
+     "maxDb": -57.6,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 105.836,
+     "end": 106.199,
+     "seconds": 0.363,
+     "hz": 1378,
+     "fromHz": 2067,
+     "toHz": 1400,
+     "maxDb": -56.9,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 106.249,
+     "end": 106.701,
+     "seconds": 0.452,
+     "hz": 1400,
+     "fromHz": 2099,
+     "toHz": 1400,
+     "maxDb": -56.1,
+     "frames": 10,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 107.099,
+     "end": 113.151,
+     "seconds": 6.052,
+     "hz": 2132,
+     "fromHz": 2164,
+     "toHz": 1475,
+     "maxDb": -55.3,
+     "frames": 117,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 113.199,
+     "end": 121.2,
+     "seconds": 8.001,
+     "hz": 1712,
+     "fromHz": 2153,
+     "toHz": 2455,
+     "maxDb": -56.6,
+     "frames": 160,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 121.4,
+     "end": 133.349,
+     "seconds": 11.949,
+     "hz": 1809,
+     "fromHz": 2455,
+     "toHz": 2659,
+     "maxDb": -55.5,
+     "frames": 237,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 133.449,
+     "end": 133.8,
+     "seconds": 0.351,
+     "hz": 2046,
+     "fromHz": 2692,
+     "toHz": 2724,
+     "maxDb": -57.8,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 133.949,
+     "end": 135.049,
+     "seconds": 1.1,
+     "hz": 2046,
+     "fromHz": 2046,
+     "toHz": 2745,
+     "maxDb": -59.6,
+     "frames": 22,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 135.251,
+     "end": 135.649,
+     "seconds": 0.398,
+     "hz": 2067,
+     "fromHz": 2067,
+     "toHz": 1378,
+     "maxDb": -58.9,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 135.7,
+     "end": 136.1,
+     "seconds": 0.4,
+     "hz": 2067,
+     "fromHz": 2067,
+     "toHz": 1378,
+     "maxDb": -58.8,
+     "frames": 9,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 136.149,
+     "end": 137.299,
+     "seconds": 1.15,
+     "hz": 2089,
+     "fromHz": 2067,
+     "toHz": 1400,
+     "maxDb": -58.7,
+     "frames": 24,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 137.452,
+     "end": 137.8,
+     "seconds": 0.348,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1410,
+     "maxDb": -58.9,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 138.434,
+     "end": 138.7,
+     "seconds": 0.266,
+     "hz": 2132,
+     "fromHz": 2132,
+     "toHz": 1421,
+     "maxDb": -58.6,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 139.35,
+     "end": 139.653,
+     "seconds": 0.303,
+     "hz": 2153,
+     "fromHz": 2153,
+     "toHz": 1443,
+     "maxDb": -58,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 139.7,
+     "end": 152.4,
+     "seconds": 12.7,
+     "hz": 2229,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -54.6,
+     "frames": 202,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 153,
+     "end": 153.9,
+     "seconds": 0.9,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.4,
+     "frames": 19,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 154.149,
+     "end": 154.949,
+     "seconds": 0.8,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61,
+     "frames": 15,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 155,
+     "end": 157.649,
+     "seconds": 2.649,
+     "hz": 1507,
+     "fromHz": 2164,
+     "toHz": 1658,
+     "maxDb": -58.7,
+     "frames": 52,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 157.753,
+     "end": 167.9,
+     "seconds": 10.147,
+     "hz": 1475,
+     "fromHz": 1776,
+     "toHz": 2616,
+     "maxDb": -49.3,
+     "frames": 200,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 168.504,
+     "end": 169.652,
+     "seconds": 1.148,
+     "hz": 2143,
+     "fromHz": 1992,
+     "toHz": 1421,
+     "maxDb": -56.3,
+     "frames": 23,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 170.299,
+     "end": 170.649,
+     "seconds": 0.35,
+     "hz": 1475,
+     "fromHz": 1475,
+     "toHz": 1475,
+     "maxDb": -61.5,
+     "frames": 8,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 171.151,
+     "end": 171.75,
+     "seconds": 0.599,
+     "hz": 2164,
+     "fromHz": 2175,
+     "toHz": 1475,
+     "maxDb": -61.2,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 171.949,
+     "end": 172.25,
+     "seconds": 0.301,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1475,
+     "maxDb": -62.1,
+     "frames": 7,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 172.299,
+     "end": 172.853,
+     "seconds": 0.554,
+     "hz": 2121,
+     "fromHz": 2121,
+     "toHz": 1475,
+     "maxDb": -61.6,
+     "frames": 12,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 172.999,
+     "end": 174.399,
+     "seconds": 1.4,
+     "hz": 1701,
+     "fromHz": 2121,
+     "toHz": 2476,
+     "maxDb": -58.3,
+     "frames": 27,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    },
+    {
+     "kind": "glide",
+     "start": 175.002,
+     "end": 177.65,
+     "seconds": 2.648,
+     "hz": 1863,
+     "fromHz": 2487,
+     "toHz": 1324,
+     "maxDb": -56,
+     "frames": 53,
+     "phases": [
+      "racing"
+     ],
+     "live": true,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/engine-idle.ogg loop",
+      "assets/racing-audio-v2/engine-low.ogg loop",
+      "assets/racing-audio-v2/engine-mid.ogg loop",
+      "assets/racing-audio-v2/engine-high.ogg loop",
+      "assets/racing-audio-v2/engine-redline.ogg loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop"
+     ]
+    }
+   ],
+   "liveHums": [],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 7.6,
+     "what": "ready"
+    },
+    {
+     "at": 7.8,
+     "what": "bot running"
+    },
+    {
+     "at": 188.4,
      "what": "done"
     }
    ]
