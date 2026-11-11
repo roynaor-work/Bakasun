@@ -1,6 +1,6 @@
 import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-8';
-import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs';
-import {NAVAL_AIR_LIFT} from './naval-air.mjs';
+import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-8';
+import {NAVAL_AIR_LIFT,NAVAL_AIR_WING} from './naval-air.mjs?v=island-v2-20261107-8';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -71,9 +71,12 @@ export function drawNavalAirHud(p,m,balance,project,width,height){
   for(const a of air){const q=project(a.x,a.z,Math.max(0,a.h)*NAVAL_AIR_LIFT);const hint=navalEdgeHint(q,width,height,30);
     if(hint){edgeArrow(p,hint,'#ffd2a6',10);shown.arrows++;continue;}
     if(a.state==='down')continue;
-    const chosen=a.id===v.target;p.save();p.strokeStyle=chosen?(v.firing?'#ffe27a':'#ffd2a6'):'#ffd2a680';p.lineWidth=chosen?2:1.2;p.beginPath();p.arc(q.x,q.y,chosen?16:11,0,TAU);p.stroke();
-    if(chosen){for(const [sx,sy]of [[-1,0],[1,0],[0,-1],[0,1]]){p.beginPath();p.moveTo(q.x+sx*19,q.y+sy*19);p.lineTo(q.x+sx*26,q.y+sy*26);p.stroke();}shown.target={id:a.id,x:q.x,y:q.y};}
-    bar(p,q.x-14,q.y+20,28,4,a.hp,a.maxHp,'#ffd2a6');p.restore();}
+    // Corner brackets outside the body (QA 11/11: a 16 px ring hid the head-on helicopter): the half-size follows the wingspan on screen.
+    const wing=project(a.x,a.z+NAVAL_AIR_WING*balance.combat.laneSpacing/balance.render.enemySpacing,Math.max(0,a.h)*NAVAL_AIR_LIFT),half=Math.max(20,Math.min(70,(wing&&wing.depth>0?Math.hypot(wing.x-q.x,wing.y-q.y):16)*1.15+8)),arm=Math.max(6,half*.38);
+    const chosen=a.id===v.target,on=chosen&&v.onTarget;p.save();p.strokeStyle=on?'#ffe27a':chosen?'#ffd2a6':'#ffd2a680';p.lineWidth=chosen?2.2:1.4;p.lineCap='round';p.beginPath();
+    for(const [sx,sy]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(q.x+sx*half,q.y+sy*(half-arm));p.lineTo(q.x+sx*half,q.y+sy*half);p.lineTo(q.x+sx*(half-arm),q.y+sy*half);}p.stroke();
+    if(chosen)shown.target={id:a.id,x:q.x,y:q.y,half:Math.round(half),onTarget:Boolean(v.onTarget)};
+    bar(p,q.x-14,q.y+half+6,28,4,a.hp,a.maxHp,'#ffd2a6');p.restore();}
   // Panel: a plane icon, the Vulcan heat bar (turns orange when it must cool) and the number shot down.
   const x=width-278,y=16,w=104;glass(p,x,y,w,50,12);planeMark(p,x+18,y+25);
   bar(p,x+36,y+14,58,7,v.heat,1,v.overheated?'#ff9a5c':v.firing?'#ffe27a':'#8edcc7');

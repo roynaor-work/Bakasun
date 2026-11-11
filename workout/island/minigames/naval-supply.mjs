@@ -1,7 +1,7 @@
 /** 11/11/2026 (Roy, phone): "צריך הגבלה על תחמושת". Magazines per weapon (smaller than the stage's old counts), a Vulcan belt,
  * and supply buoys instead of the silent 2-second refill: when the shells or the belt run low a buoy appears ahead, sailing into
  * it refills. Pure helpers, no render clock. `?navalAmmo=0` restores the v20 counts and the automatic refill. */
-import {polishValue} from './polish-flag.mjs';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-8';
 export const navalAmmoLimit=search=>polishValue('navalAmmo',search)!=='0';
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 export const NAVAL_SUPPLY_DEFAULTS=Object.freeze({shellShare:.45,shellMin:12,shellMax:24,belt:160,lowShells:3,lowBelt:30,waveShare:.6,near:45,far:70,spread:.7,collect:16,refill:{guided:1,torpedo:4,mine:2,salvo:2}});

@@ -4,7 +4,7 @@
  * telegraphed by a landing marker, and an automatic Vulcan with heat so it comes in bursts. A hit aircraft falls into the sea
  * (`state:'down'`) rather than vanishing. Deterministic for the model's random stream. `?navalAir=off` removes the whole
  * mechanic. Stages with attacks (11/11/2026): 3, 4, 6, 8, 9, 12, 14, 16, 18, 20, 22, 24, 26, 27, 29 (`air` in the stage data). */
-import {polishValue} from './polish-flag.mjs';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-8';
 export const navalAirEnabled=search=>polishValue('navalAir',search)!=='off';
 /** 11/11/2026 (Roy, phone): "שמדיע מסוק אז שיהיה איך לכוון עליו עם וולקן ולא ירי אוטומטי". Manual Vulcan by default:
  * the gun fires only while the Vulcan button is held, along the player's sky crosshair; a hit needs the crosshair within
@@ -12,6 +12,8 @@ export const navalAirEnabled=search=>polishValue('navalAir',search)!=='off';
 export const navalAirManual=search=>polishValue('navalAirAim',search)!=='auto';
 /** World height per model height unit (shared by the view and the HUD, so rings sit on the aircraft). */
 export const NAVAL_AIR_LIFT=.32;
+/** Half wingspan of the drawn aircraft in world units (the HUD brackets are sized from it). */
+export const NAVAL_AIR_WING=4.3;
 export const NAVAL_AIR_DEFAULTS=Object.freeze({
  plane:{speed:72,hp:1.6,pass:96,telegraph:1.3,damage:.7,size:1},
  heli:{speed:34,hp:3,hover:84,telegraph:1.5,every:3.4,damage:.55,leaveAfter:30,size:1.2},
