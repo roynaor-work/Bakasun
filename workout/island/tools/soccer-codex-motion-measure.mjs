@@ -20,10 +20,10 @@ const v10=await readFile(new URL('../assets/soccer-v10/clips.json',import.meta.u
 if(process.argv.includes('--product')){const {applySoccerTeams}=await import('../minigames/soccer-teams.mjs');Object.assign(config,applySoccerTeams(config,'7'));}
 {const g=process.argv.indexOf('--grace');if(g>0)config.view.slideGraceSeconds=Number(process.argv[g+1]);}
 const library=composeSoccerRestartMotion(base,...packs);
-let L9=off?{}:soccerCodexStates(v9),L10=off||v7run||v9only?{}:soccerV10States(v10);
-if(useV12){const o=soccerV12Overlay(JSON.parse(await readFile(new URL('../assets/soccer-v12/clips.json',import.meta.url),'utf8')),{v9:L9,v10:L10});L9=o.v9;L10=o.v10;}
 const {soccerV11States}=await import('../minigames/soccer-codex-motion.mjs');
 const L11=!process.argv.includes('--v11')?{}:soccerV11States(JSON.parse(await readFile(new URL('../assets/soccer-v11/clips.json',import.meta.url),'utf8')));
+let L9=off?{}:soccerCodexStates(v9),L10=off||v7run||v9only?{}:soccerV10States(v10);
+if(useV12){const o=soccerV12Overlay(JSON.parse(await readFile(new URL('../assets/soccer-v12/clips.json',import.meta.url),'utf8')),{v9:L9,v10:L10});L9=o.v9;L10=o.v10;}
 const data={...library,states:{...library.states,...v7.states,...soccerV8States(v8),...L9,...L10,...L11}},clips=compileSoccerDesignClips(data,rig,map);
 const deg=r=>r*180/Math.PI,dt=1/60;
 function make(){

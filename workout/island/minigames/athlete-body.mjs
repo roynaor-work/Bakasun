@@ -77,7 +77,23 @@ export function athleteRig(scene) {
  * the clip points it. End bones (hands, feet, head) keep their bind orientation relative to the source bone. Athlete bones the canonical rig
  * lacks (LowerBack, shoulders, fingers, toes) ride on the nearest mapped ancestor with their bind local rotation folded into the basis, which
  * is what `compileAthleteRestartClips` did bone by bone. motionScale = athlete hips height / canonical hips height (0.86). */
-export function athleteRetargetMap(rig, sourceBones = CANON_REST, map = ATHLETE_MAP) {
+/** Relaxed hands: the CMU bind holds the fingers straight and spread, which reads as a zombie on a player standing still. The curl is folded into
+ * the retarget basis of the finger bones (they inherit the hand), so every clip plays with it. Axis: the fingers point +Z of the hand, a turn about
+ * the hand's Y brings them toward the palm (inward: -X for the left hand, +X for the right). `?fingerCurl=<radians>` tunes it (0 = off). */
+export const FINGER_CURL = 0.55;
+export function fingerTweaks(angle = fingerCurlFromSearch()) {
+  if (!(angle > 0)) return {};
+  const out = {};
+  for (const [side, sign] of [['Left', 1], ['Right', -1]]) {
+    out[side + 'FingerBase'] = qaxisY(sign * angle * 0.6); out[side + 'HandFinger1'] = qaxisY(sign * angle);
+    out[side.slice(0, 1) + 'Thumb'] = qaxisY(sign * angle * 0.35);
+  }
+  return out;
+}
+const qaxisY = a => [0, Math.sin(a / 2), 0, Math.cos(a / 2)];
+export function fingerCurlFromSearch(search = globalThis.location?.search || '') { const v = new URLSearchParams(search).get('fingerCurl'); return v === null ? FINGER_CURL : Math.max(0, Number(v) || 0); }
+
+export function athleteRetargetMap(rig, sourceBones = CANON_REST, map = ATHLETE_MAP, {tweaks = fingerTweaks()} = {}) {
   const joints = new Map(rig.joints.map(j => [j.name, j])), reverse = {};
   for (const [src, tgt] of Object.entries(map)) if (tgt) reverse[tgt] = src;
   const srcByName = new Map(sourceBones.map(b => [b.name, b]));
@@ -94,7 +110,8 @@ export function athleteRetargetMap(rig, sourceBones = CANON_REST, map = ATHLETE_
     const parent = joint.parent && joints.get(joint.parent);
     if (!parent) throw Error('Athlete retarget: no mapped ancestor for ' + joint.name);
     const p = resolve(parent);
-    basis[joint.name] = {source: p.source, inherit: true, q: qmul(p.q, qnorm(joint.rotation || [0, 0, 0, 1]))}; return basis[joint.name];
+    let q = qmul(p.q, qnorm(joint.rotation || [0, 0, 0, 1])); if (tweaks[joint.name]) q = qmul(q, tweaks[joint.name]);
+    basis[joint.name] = {source: p.source, inherit: true, q}; return basis[joint.name];
   };
   for (const joint of rig.joints) {
     const b = resolve(joint);

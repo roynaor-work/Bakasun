@@ -53,18 +53,44 @@ export function retargetClipMap(clips,restHips,rig,map,fps=30){
  return out;
 }
 
+/** Dunk calibration on the athlete body (the packs were calibrated on the Codex tall bodies, whose arms are longer than the MakeHuman athlete's at
+ * the same height): plays each dunk clip on a bare clone of the rig scaled like the profile, measures the highest palm against the rim and
+ * scales the positive hips lift so the palm clears the rim by `clearance` (NBA Live look: the hand well over the ring). Returns the scales. */
+export function calibrateAthleteDunks(source,clipSet,{height,bulk=1,rimY=3.05,clearance=.25,ids=['dunk_one_hand','dunk_two_hands']}={}){
+ const root=cloneSkinned(source.scene),scale=height/source.height;root.scale.set(scale*bulk,scale,scale*bulk);root.position.y=-source.floor*scale;
+ const hands=[],bones={};root.traverse(o=>{if(o.isBone)bones[o.name]=o;});
+ for(const side of ['Left','Right']){const hand=bones[side+'Hand'],f=bones[side+'FingerBase'];const a=new THREE.Object3D();if(f)a.position.copy(f.position).multiplyScalar(.75);else a.position.set(0,-.08,0);hand.add(a);hands.push(a);}
+ const mixer=new THREE.AnimationMixer(root),v=new THREE.Vector3(),result={};
+ for(const id of ids){
+  const clip=clipSet.get(id);if(!clip)continue;
+  const track=clip.tracks.find(t=>t.name==='Hips.position');if(!track)continue;
+  const action=mixer.clipAction(clip);action.play();action.setEffectiveWeight(1);
+  let palmMax=-Infinity,liftAtMax=0;const rest=bones.Hips.position.y;
+  for(let t=0;t<clip.duration;t+=1/60){action.time=t;mixer.update(0);root.updateMatrixWorld(true);for(const h of hands){const y=h.getWorldPosition(v).y;if(y>palmMax){palmMax=y;liftAtMax=(bones.Hips.position.y-rest)*scale;}}}
+  action.stop();mixer.uncacheClip(clip);
+  const wanted=rimY+clearance,k=liftAtMax>.05?Math.max(.5,Math.min(1.8,(wanted-palmMax+liftAtMax)/liftAtMax)):1;
+  if(Math.abs(k-1)>.02){const vals=track.values,restY=vals[1];for(let i=0;i<vals.length;i+=3){const y=vals[i+1];if(y>restY)vals[i+1]=restY+(y-restY)*k;}}
+  result[id]={palmMax:+palmMax.toFixed(3),lift:+liftAtMax.toFixed(3),scale:+k.toFixed(3)};
+ }
+ mixer.uncacheRoot(root);return result;
+}
+
 /** The three profiles and the pack, on the athlete body. Same contract as loadTall (createAvatarTall reads pack / clipSets / baseHeights /
  * posProfile / unified / v8) plus `athlete:true` and `bodyFactory`. Throws on any failure: the caller falls back to the tall bodies. */
 export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={}){
  const t=cfg.tall;if(!t?.profiles)throw Error('Basketball tall is not configured');
  const loader=new GLTFLoader();let done=0;const tick=()=>onProgress?.(++done/4);
- const pr=await fetch(new URL(t.base+t.motion,base));if(!pr.ok)throw Error('Basketball tall motion pack '+pr.status);
- const pack=decodeTallPack(await pr.json());tick();
+ // the repaired Codex v12 clips (tools/hoops-tall-v12.mjs, QA 90-97) are the default on the athlete body; ?hoopsMotion=v9 keeps the v9 pack
+ const wantV12=params?.get?.('hoopsMotion')!=='v9',v12Name=t.motionV12||'motion-v12.json';
+ let pack=null,motionSource='v9';
+ if(wantV12){try{const r=await fetch(new URL(t.base+v12Name,base));if(!r.ok)throw Error('Basketball v12 motion pack '+r.status);pack=decodeTallPack(await r.json());motionSource='v12';}catch(error){pack=null;onFallback?.('motion v12',error);}}
+ if(!pack){const pr=await fetch(new URL(t.base+t.motion,base));if(!pr.ok)throw Error('Basketball tall motion pack '+pr.status);pack=decodeTallPack(await pr.json());}
+ tick();
  for(const n of TALL_REQUIRED)if(!pack.clips[n])throw Error('Basketball tall clip missing: '+n);
  const source=await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
  let unified=null;
  if(t.athletes&&athletesEnabled(t,params||'')){
-  try{const dr=await fetch(new URL(t.athletes.donor,base));if(!dr.ok)throw Error('Gait donor '+dr.status);unified=unifyTallPack(pack,await dr.json());}
+  try{const dr=await fetch(new URL(t.athletes.donor,base));if(!dr.ok)throw Error('Gait donor '+dr.status);unified=unifyTallPack(pack,await dr.json(),{cap:motionSource!=='v12'});}
   catch(error){unified=null;onFallback?.('athletes',error);}
  }
  tick();
@@ -72,15 +98,16 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
  const map=athleteRetargetMap(source.rig,CANON_REST),clipSets={};
  const t0=globalThis.performance?.now?.()??0;
+ const heights=t.baseHeights||{guard:188,wing:198,center:208},dunks={};
  for(const p of TALL_PROFILES){
   const rest=pack.profiles[p].hips,canonical=buildTallClips(pack,p);
   if(v8)for(const [n,c] of buildV8Clips(THREE,v8,rest))canonical.set(n,c);
   clipSets[p]=retargetClipMap(canonical,rest,source.rig,map);
+  dunks[p]=calibrateAthleteDunks(source,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:ATHLETE_BULK[p]||1});
  }
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=athleteKitGeometry(THREE,source,'basketball');
- const heights=t.baseHeights||{guard:188,wing:198,center:208};
- return {tall:true,athlete:true,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,
+ return {tall:true,athlete:true,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
    const height=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100;
