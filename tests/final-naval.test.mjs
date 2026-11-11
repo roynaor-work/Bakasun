@@ -168,3 +168,45 @@ test('manual Vulcan: flag, sky angles, cone error, crosshair point; the model fi
  const off=make();for(let i=0;i<3000;i++){const a=off.air.find(a=>a.state!=='down');const input={skyMode:'manual'};if(a){const tt=navalSkyAngles(off.playerShip,a,nb);Object.assign(input,{skyHeld:true,skyYaw:tt.yaw+Math.PI/2,skyPitch:tt.pitch});}off.update(.02,input);}
  assert.ok(off.vulcan.shots>0&&off.vulcan.hits===0,'firing 90 degrees off hits nothing');assert.equal(off.vulcan.onTarget,false);
 });
+
+// ---- 11/11/2026 phase 2 (C): enemy base every 5 stages ----
+import {navalBaseRows,navalBaseEnabled,NAVAL_BASE_DEFAULTS,navalCampaignStage} from '../workout/island/minigames/naval-campaign.mjs';
+
+test('enemy base: flag, rows per block (guns fire, towers optional, gate, depot with chain, pen on subpen), armour scales hp, stages 5/15/25 carry a block (10, 20, 30 stay fleets for the v20 pilot tests); the campaign roster is unchanged',()=>{
+ assert.equal(navalBaseEnabled('?dev=1'),true);assert.equal(navalBaseEnabled('?navalBase=0'),false);assert.deepEqual(navalBaseRows(null),[]);
+ const withBase=nb.levels.map((l,i)=>l.base?i+1:null).filter(Boolean);assert.deepEqual(withBase,[5,15,25]);
+ for(const n of withBase){const b=nb.levels[n-1].base;assert.ok(['coast','palace','subpen'].includes(b.variant));assert.ok(b.guns>=2&&b.guns<=5&&b.armor>=1&&b.armor<=1.6,`stage ${n} block`);}
+ assert.deepEqual(withBase.map(n=>nb.levels[n-1].base.variant),['coast','palace','subpen'],'three looks');
+ const rows=navalBaseRows(nb.levels[4].base,5,nb);assert.deepEqual(rows.map(r=>r.structure),['gun','gun','tower','depot']);
+ for(const r of rows){assert.equal(r.behavior,'base');assert.equal(r.kind,1);assert.ok(r.x>=60&&r.x<=130&&Math.abs(r.z)<=120,`offset ${r.x}`);assert.equal(r.variant,'coast');}
+ assert.ok(rows[0].cannons===1&&rows[2].cannons===0&&rows[2].main===false&&rows[3].chain===true&&rows[3].main===true);
+ const r25=navalBaseRows(nb.levels[24].base,25,nb);assert.equal(r25.filter(r=>r.structure==='gun').length,4);assert.ok(r25.some(r=>r.structure==='gate'));
+ assert.ok(r25.find(r=>r.structure==='gun').hpScale>rows.find(r=>r.structure==='gun').hpScale,'armour grows with the stage');
+ assert.ok(r25.some(r=>r.structure==='pen'),'subpen variant adds the pen');assert.ok(!navalBaseRows(nb.levels[14].base,15,nb).some(r=>r.structure==='pen'));
+ assert.equal(NAVAL_BASE_DEFAULTS.chainRadius,75);
+ // The campaign's own roster and mission keep the v20 contract (roster length = waves, mission id unchanged).
+ const c=navalCampaignStage(nb,5,1);assert.equal(c.fleet.length,c.settings.waves);assert.equal(c.mission.id,'fleet');assert.ok(!c.fleet.some(r=>r.structure));
+});
+
+test('enemy base in the model: structures join the roster, guns telegraph and fire, the objective needs the fleet and the main targets, the depot explosion damages its neighbours, the base bar reads the state',()=>{
+ const m=createNavalModel({config,balance:nb,level:5,seed:2,random:seededRandom(2)});
+ const st=m.enemies.filter(e=>e.structure);assert.equal(st.length,4);assert.ok(st.every(e=>e.active&&e.x>nb.enemyX&&e.behavior==='base'));assert.equal(m.mission.base,'coast');
+ assert.deepEqual(m.missionState.base,{completed:0,total:3});assert.equal(m.baseHealth.total,3);assert.equal(m.baseHealth.left,3);
+ // Guns telegraph before they fire.
+ let warned=false,fired=0;for(let i=0;i<1500&&!(warned&&fired>0);i++){m.playerShip.hp=m.playerShip.maxHp;m.update(.02,{});if(st.some(e=>e.structure==='gun'&&e.attack))warned=true;fired=m.enemyFired;}
+ assert.ok(warned,'a gun shows its landing mark');assert.ok(fired>0,'and fires');
+ // Sink the whole fleet: not complete while the base's main targets stand.
+ m.playerShip.hp=m.playerShip.maxHp;for(const e of m.enemies)if(!e.structure){e.hp=0;e.sunkAt=m.time;}m.update(.02,{});assert.equal(m.missionState.fleet.complete,true);assert.equal(m.missionState.complete,false);assert.equal(m.result,undefined);
+ // Depot explosion: the neighbours lose 60% of their max health (the tower, 70 units away, is inside the chain radius).
+ const depot=st.find(e=>e.structure==='depot'),before=st.filter(e=>e!==depot).map(e=>e.hp);
+ // The base stands past the fleet, so the ship sails closer first (the shell's range is about 335 units).
+ // From the flank, so the line of fire clears the guns in front of the depot.
+ m.playerShip.x=300;m.playerShip.z=depot.z+80;m.update(.02,{ammoIndex:0,targetX:depot.x,targetZ:depot.z,fireRelease:true});assert.equal(m.prediction?.contact?.index,depot.index,'the solved shot meets the depot hull (the target box reaches it)');depot.hp=.01;for(let i=0;i<300&&depot.hp>0;i++){m.playerShip.hp=m.playerShip.maxHp;m.update(.02,{});}
+ assert.ok(depot.hp<=0,'the depot went down');assert.ok(m.chainBlast,'chain blast recorded');
+ const after=st.filter(e=>e!==depot).map(e=>e.hp);assert.ok(after.some((hp,i)=>hp<before[i]),'a neighbour was damaged by the explosion');
+ // Clear the rest: the stage is won.
+ for(const e of st)if(e.hp>0){e.hp=0;e.sunkAt=m.time;}for(let i=0;i<200&&!m.result;i++)m.update(.02,{});assert.equal(m.result?.outcome,'win');
+ // Stage 10 keeps its moving fleet (no base), stage 1 is clean.
+ assert.equal(createNavalModel({config,balance:nb,level:10,seed:1,random:seededRandom(1)}).enemies.some(e=>e.structure),false);
+ assert.equal(createNavalModel({config,balance:nb,level:1,seed:1,random:seededRandom(1)}).baseHealth,null);
+});

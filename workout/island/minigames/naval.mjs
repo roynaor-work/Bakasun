@@ -7,7 +7,7 @@ import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-202
 import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-8';
 import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-8';
 import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-8';
-import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS} from './naval-campaign.mjs?v=island-v2-20261107-8';
+import {navalCampaignStage,navalMissionState,navalStagePressure,NAVAL_BASE_DEFAULTS,navalBaseRows,navalBaseEnabled} from './naval-campaign.mjs?v=island-v2-20261107-8';
 import {navalCameraPose,navalWorldPoint,projectNavalPoint,navalWaterAt,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-8';
 import {createNavalAudio} from './g6d-audio.mjs?v=island-v2-20261107-8';
 import {drawNavalHud,mountNavalWeaponPicker} from './naval-hud.mjs?v=island-v2-20261107-8';
@@ -64,10 +64,12 @@ export function navalScreenPoint(x,z,config,balance){return {x:config.width/2+z*
 export function navalTargetAt(x,y,config,balance){return {x:balance.shipX+(config.height*.8-y)/1.05,z:(x-config.width/2)/.85};}
 /** All live shots freeze a visible reticle; direct firing remains the deterministic fixture API. */
 export function createNavalModel({config,balance,level,random=()=>.5,power=1,equipment=EMPTY,sound=()=>{},seed=0,previousFleet,difficulty='normal'}){
- const campaign=navalCampaignStage(balance,level,seed,previousFleet),{settings,mission,fleet}=campaign,targeting=balance.targeting;
+ const campaign=navalCampaignStage(balance,level,seed,previousFleet),{settings,fleet}=campaign,targeting=balance.targeting,mission=settings.base&&navalBaseEnabled()?{...campaign.mission,base:settings.base.variant||'coast',baseBrief:'naval.mission.brief.bases'}:campaign.mission;
  const mode=Object.hasOwn(balance.lock.difficulties,difficulty)?difficulty:'normal',tactics=settings.enemyTactics||{telegraphSeconds:1.8,fireSeconds:10,speedScale:1};
  const playerShip={...createShipEntity(balance.shipX,settings.lives*power*(equipment.hull||1),equipment.shield||0),z:0,heading:0,speed:0};
- const enemies=fleet.map(row=>row.structure?{...row,baseX:row.x,baseZ:row.z,x:undefined,z:undefined}:row).map((row,i)=>({...createShipEntity(balance.enemyX,settings.enemyLives*balance.shipTypes[row.kind].hp*(row.boss?balance.boss.hp:1)*(row.hpScale||1)),...row,index:i,hullScale:balance.shipTypes[row.kind].scale*(row.boss?balance.boss.scale:1)*(row.scale||1),z:(i-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing,heading:Math.PI,depth:0,vx:0,vz:0,active:i<settings.concurrent||row.behavior==='base',slot:i<settings.concurrent?i:null,spawnTime:0,fireAt:tactics.fireSeconds+i*balance.combat.enemyStagger,warning:0}));
+ // 11/11/2026 enemy base: structure rows join the roster here, after the campaign's fleet (the roster contract stays), and extend the objective.
+ const structures=settings.base&&navalBaseEnabled()?navalBaseRows(settings.base,level,balance).map(row=>({...row,baseX:row.x,baseZ:row.z,x:undefined,z:undefined})):[];
+ const enemies=[...fleet,...structures].map((row,i)=>({...createShipEntity(balance.enemyX,settings.enemyLives*balance.shipTypes[row.kind].hp*(row.boss?balance.boss.hp:1)*(row.hpScale||1)),...row,index:i,hullScale:balance.shipTypes[row.kind].scale*(row.boss?balance.boss.scale:1)*(row.scale||1),z:(i-(Math.min(settings.concurrent,fleet.length)-1)/2)*balance.combat.laneSpacing,heading:Math.PI,depth:0,vx:0,vz:0,active:i<settings.concurrent||row.behavior==='base',slot:i<settings.concurrent?i:null,spawnTime:0,fireAt:tactics.fireSeconds+i*balance.combat.enemyStagger,warning:0}));
  let enemyShip=enemies[0],phase='aim',time=0,remaining=settings.seconds,result,score=0,wave=1,fired=0,hits=0,ammoIndex=0,wasFiring=false,wasAmmo=false,delay=0,sinkingShip=null;
  const ballistic=navalBallisticConfig(balance),pressure=navalStagePressure(level),turret={yaw:0,elevation:ballistic.defaultElevation,power:1};let prediction=null,lastShot=null,holdView=-1,quickShots=0,aimSide=1;
  const legacyAim=navalAimLegacy();let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
@@ -80,6 +82,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const limited=navalAmmoLimit(),mags=navalMagazines(settings,balance),supplyCfg=navalSupplyConfig(balance);let manualAir=false;
  const ammo=[...settings.ammunition],cooldowns=ammo.map(()=>0),extraShots=[],enemyShots=[],trail=[],mines=[],creditedShots=new Set(),buoys=[];
  let loaded=limited?navalLoad(ammo[0],mags.ammo[0]):Infinity,belt=limited&&airSim?mags.belt:null,sky=null,supplies=0,sunkCount=0,chainBlast=null;
+ // Shore structures may stand past the fleet's targeting box; the box grows to include them (yaw aiming was never clamped).
+ const targetMaxX=Math.max(targeting.maxX,...structures.map(r=>balance.enemyX+(r.baseX??0)+20));
  const baseHealth=()=>{const s=enemies.filter(e=>e.structure);if(!s.length)return null;return {hp:s.reduce((a,e)=>a+Math.max(0,e.hp),0),max:s.reduce((a,e)=>a+e.maxHp,0),left:s.filter(e=>e.hp>0&&e.main!==false).length,total:s.filter(e=>e.main!==false).length,variant:s[0].variant};};const beltBox={get value(){return belt;},set value(v){belt=v;}};
  const blast={x:0,y:balance.shipY,z:0,life:0,hit:false},ball={x:playerShip.x,z:0,y:balance.shipY,owner:'player',ammo:0,age:0,duration:0,fromX:0,fromZ:0,targetX:0,targetZ:0,active:false};
  const aim={x:enemies[0].x,z:enemies[0].z},maxEnemyFleet=enemies.reduce((sum,e)=>sum+e.hp,0);
@@ -290,7 +294,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  }
  const model={get air(){return airSim?.air||[];},get vulcan(){return airSim?{...airSim.state,tracers:airSim.tracers,belt,manual:manualAir}:null;},get sky(){return sky;},get baseHealth(){return baseHealth();},get chainBlast(){return chainBlast;},get belt(){return belt;},get loaded(){return limited?loaded:ammo[0];},get buoys(){return buoys;},get supplies(){return supplies;},magazines:limited?mags:null,get ammoState(){return limited?(ammoIndex===0?navalAmmoState(loaded,mags.ammo[0],supplyCfg.lowShells):navalAmmoState(ammo[ammoIndex],settings.ammunition[ammoIndex],1)):null;},settings,equipment,mission,playerShip,enemies,ammo,cooldowns,ball,aim,blast,trail,extraShots,enemyShots,mines,maxEnemyFleet,statusId:'minigame.navalStatus',difficulty:mode,
   beginAim:lock,cancelAim(){aiming=false;lockedTargetIndex=null;},get selectedTargetIndex(){return selectedTargetIndex;},get lockedTargetIndex(){return lockedTargetIndex;},get lockedTarget(){return enemies.find(e=>e.index===lockedTargetIndex)||null;},get reticle(){return reticle&&{...reticle};},
-  get missionState(){return navalMissionState(mission,enemies);},get resupplyTime(){return resupplyTime;},get resupplies(){return resupplies;},get lastFeedback(){return lastFeedback;},
+  get missionState(){const ms=navalMissionState(mission,enemies.filter(e=>!e.structure));if(!structures.length)return ms;const main=enemies.filter(e=>e.structure&&e.main!==false),done=main.filter(e=>e.hp<=0).length;return {completed:ms.completed+done,total:ms.total+main.length,complete:ms.complete&&done===main.length,fleet:ms,base:{completed:done,total:main.length}};},get resupplyTime(){return resupplyTime;},get resupplies(){return resupplies;},get lastFeedback(){return lastFeedback;},
   get rangeState(){return navalLockRadius(playerShip,model.lockedTarget||enemies.find(e=>e.index===selectedTargetIndex&&e.active&&e.hp>0)||enemies.find(e=>e.active&&e.hp>0)||enemyShip,balance,level,mode,equipment);},
   get aiming(){return aiming;},get wind(){return wind;},get moving(){return moving;},get returning(){return false;},get fired(){return fired;},get camera(){return camera;},get triggerDown(){return wasFiring;},get heat(){return 0;},get overheated(){return false;},get enemyFired(){return enemyFired;},get repairLife(){return repairLife;},get lastAction(){return lastAction;},
   get enemyShip(){return enemyShip;},get remaining(){return remaining;},get score(){return score;},get lives(){return playerShip.hp;},get maxLives(){return playerShip.maxHp;},get wave(){return wave;},get enemyX(){return enemyShip.x;},get shipScale(){return balance.shipTypes[enemyShip.kind].scale;},get boss(){return enemyShip.boss;},get result(){return result;},get phase(){return phase;},get enemyLives(){return enemyShip.hp;},get time(){return time;},get ammoIndex(){return ammoIndex;},get enemyFleetHp(){return fleetHealth();},get sinkProgress(){return sinkingShip?Math.min(1,(time-sinkingShip.sunkAt)/balance.sinkSeconds):0;},
@@ -316,7 +320,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(Number.isFinite(input.aimElevation))turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,input.aimElevation));
    if(Number.isFinite(input.aimPower))turret.power=Math.max(ballistic.minPower,Math.min(1,input.aimPower));
    if(!legacyAim&&aiming&&Number.isFinite(input.aimYaw)&&!input.autoAim&&!Number.isFinite(input.targetX)&&!Number.isFinite(input.targetZ))assistAim();
-   if(Number.isFinite(input.targetX)||Number.isFinite(input.targetZ))solveTo({x:Math.max(targeting.minX,Math.min(targeting.maxX,Number.isFinite(input.targetX)?input.targetX:aim.x)),z:Math.max(targeting.minZ,Math.min(targeting.maxZ,Number.isFinite(input.targetZ)?input.targetZ:aim.z))});
+   if(Number.isFinite(input.targetX)||Number.isFinite(input.targetZ))solveTo({x:Math.max(targeting.minX,Math.min(targetMaxX,Number.isFinite(input.targetX)?input.targetX:aim.x)),z:Math.max(targeting.minZ,Math.min(targeting.maxZ,Number.isFinite(input.targetZ)?input.targetZ:aim.z))});
    if(input.autoAim){const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(e){solveTo(e);const flight=launchFor().duration;solveTo({x:e.x+(e.vx||0)*flight,z:e.z+(e.vz||0)*flight});}}
    if(input.aimHeld){if(!aiming||!model.lockedTarget?.hp)lock();aiming=true;}else if(!input.fireRelease&&!input.quickShot){aiming=false;lockedTargetIndex=null;}
    if(input.aimCancel){aiming=false;lockedTargetIndex=null;}
@@ -324,10 +328,10 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    camYaw=legacyAim?turret.yaw:navalFollowYaw(camYaw,sky?sky.yaw:turret.yaw,dt,followBalance,aiming||Boolean(sky));camera=navalCameraPose(playerShip,aim,aiming||Boolean(sky)||time<holdView,balance,camera,dt,framing());
    for(let i=mines.length-1;i>=0;i--){const mine=mines[i];mine.age+=dt;mine.life-=dt;const e=mine.age>=balance.weapons.mineArmSeconds&&enemies.find(e=>e.active&&e.hp>0&&Math.hypot(e.x-mine.x,e.z-mine.z)<=balance.weapons.mineRadius);if(e){mine.targetX=mine.x;mine.targetZ=mine.z;mine.victim=e.index;impact(mine);mines.splice(i,1);}else if(mine.life<=0)mines.splice(i,1);}
    for(let i=extraShots.length-1;i>=0;i--){advanceProjectile(extraShots[i],dt);if(!extraShots[i].active)extraShots.splice(i,1);}advanceProjectile(ball,dt);
-   const missionState=navalMissionState(mission,enemies);
+   const missionState=model.missionState;
    if(playerShip.hp<=0){finish('lose');return;}
    if(missionState.complete){if(delay<=0)finish('win');return;}
-   if(enemyShip.hp<=0){enemyShip=enemies.find(e=>e.hp>0);wave=enemyShip.index+1;}
+   if(enemyShip.hp<=0){enemyShip=enemies.find(e=>e.hp>0&&!e.structure)||enemies.find(e=>e.hp>0)||enemyShip;wave=enemyShip.index+1;}
    if(phase==='sink'&&delay<=0)phase=ball.active?'shot':'aim';
    if(remaining<=0){finish('lose');return;}
    const useful=[0,1,2,4].some(i=>ammo[i]>0),inFlight=ball.active||extraShots.length>0;

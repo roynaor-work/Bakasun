@@ -2,11 +2,12 @@
 import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-8';
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 /** 11/11/2026 (Roy, phone: "צריך גם לבנות בסיס שצריך להתקיף, עם תותחים וכדומה, נגיד כל 5 שלבים"): a fortified enemy base on stages
- * 5, 15, 20, 25 and 30 (stage 10 keeps its moving fleet for the v20 aim test). The stage's `base` block names the variant and the
+ * 5, 15 and 25 (stages 10, 20 and 30 keep their moving fleets: the v20 aim test and the hold-release pilot tests run there). The stage's `base` block names the variant and the
  * structures; the rows it adds are stationary `behavior:'base'` entities with a `structure` kind, so shore cannons telegraph and fire like
- * the stage-9 bases, and the mission becomes `bases`. `?navalBase=0` leaves those stages as they were. */
+ * the stage-9 bases. The model adds them beside the stage's fleet (the campaign roster and its mission keep the v20 contract) and the stage
+ * is won only when the fleet objective and the base's main targets are both done. `?navalBase=0` leaves those stages as they were. */
 export const navalBaseEnabled=search=>polishValue('navalBase',search)!=='0';
-export const NAVAL_BASE_DEFAULTS=Object.freeze({x:140,hp:{gun:1.2,tower:.7,gate:2.4,depot:1,pen:1.6},scale:{gun:1.1,tower:1.4,gate:2.2,depot:1.3,pen:1.9},spread:14,telegraph:2.1,chainRadius:75,chainDamage:.6});
+export const NAVAL_BASE_DEFAULTS=Object.freeze({x:80,hp:{gun:1.2,tower:.7,gate:2.4,depot:1,pen:1.6},scale:{gun:1.1,tower:1.4,gate:2.2,depot:1.3,pen:1.9},spread:14,telegraph:2.1,chainRadius:75,chainDamage:.6});
 /** Structure rows for a base block: guns along the shore (they fire), towers behind, a gate in the middle, the ammo depot at the back (explodes
  * into its neighbours), a submarine pen on the `subpen` variant. Positions are offsets from `enemyX`; main targets end the mission. */
 export function navalBaseRows(base,stage=1,balance){
@@ -45,8 +46,7 @@ export function navalCampaignStage(balance,stage,seed=0,previousFleet=''){
   const make=()=>Array.from({length:count},(_,i)=>({kind:(i+offset)%kinds,boss:n%balance.boss.everyStages===0&&i===count-1,behavior:balance.shipTypes[(i+offset)%kinds].submarine?'dive':'patrol'}));
   fleet=make();if(fleet.map(row=>row.kind).join()===previousFleet){offset=(offset+1)%kinds;fleet=make();}
  }
- let mission={id:'fleet',title:settings.feature,brief:'naval.mission.brief.fleet',...settings.mission};
- if(settings.base&&navalBaseEnabled()){fleet=[...fleet,...navalBaseRows(settings.base,n,balance)];mission={...mission,id:'bases',brief:'naval.mission.brief.bases',base:settings.base.variant||'coast'};}
+ const mission={id:'fleet',title:settings.feature,brief:'naval.mission.brief.fleet',...settings.mission};
  return {settings,mission,fleet,pressure:navalStagePressure(n)};
 }
 

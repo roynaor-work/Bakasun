@@ -52,17 +52,16 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
  // One tap on the sea (a target pick, no shot) unlocks the audio contexts the way a finger would.
  await touch('touchStart',[{x:300,y:150}]);await tick(40);await touch('touchEnd');await tick(200);
  const air={aircraftSeen:0,tracersSeen:0,hudTarget:0,peakDrawCalls:0,peakTriangles:0,kills:0,shots:0,hits:0,splashes:0,frames:[]};let framed=false,killed=false;
- // The model advances half a second per step through the session's own update (no input), then one real frame is rendered and read: 45 s of game time in about 90 frames.
- const advance=()=>page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<25;i++)s.debug.drive(.02,{});});
- for(let t=0;t<45000&&!(killed&&framed&&air.splashes>0);t+=500){await advance();await tick(50);const s=await snap();const v=s.vulcan||{},m=s.renderMetrics;air.aircraftSeen=Math.max(air.aircraftSeen,s.air?.length||0);air.tracersSeen=Math.max(air.tracersSeen,m.air?.tracers||0);air.peakDrawCalls=Math.max(air.peakDrawCalls,m.drawCalls||0);air.peakTriangles=Math.max(air.peakTriangles,m.triangles||0);air.kills=v.kills||0;air.shots=v.shots||0;air.hits=v.hits||0;air.splashes=v.splashes||0;if(s.hud?.air?.target)air.hudTarget++;
-  if(!framed&&m.air?.tracers>0&&s.hud?.air?.target){framed=true;await capture('s3-air-vulcan');air.frames.push('s3-air-vulcan');}
-  if(!killed&&v.kills>0){killed=true;await tick(250);await capture('s3-air-down');air.frames.push('s3-air-down');}
+ // The model advances half a second per step through the session's own update (the Vulcan declared manual, as the on-screen controls do), then one real
+ // frame is rendered and read: aircraft arrive, get their brackets, attack with landing marks, and nothing fires by itself. Shooting them down is scenario (B) below, by touch.
+ const advance=()=>page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<25;i++)s.debug.drive(.02,{skyMode:'manual'});});
+ for(let t=0;t<30000&&!(framed&&air.marks>0);t+=500){await advance();await tick(50);const s=await snap();const v=s.vulcan||{},m=s.renderMetrics;air.aircraftSeen=Math.max(air.aircraftSeen,s.air?.length||0);air.tracersSeen=Math.max(air.tracersSeen,m.air?.tracers||0);air.peakDrawCalls=Math.max(air.peakDrawCalls,m.drawCalls||0);air.peakTriangles=Math.max(air.peakTriangles,m.triangles||0);air.kills=v.kills||0;air.shots=v.shots||0;air.hits=v.hits||0;air.splashes=v.splashes||0;if(s.hud?.air?.aircraft>0)air.hudTarget++;air.marks=(air.marks||0)+(s.hud?.marks||0);
+  if(!framed&&s.hud?.air?.aircraft>0&&!s.hud.air.arrows){framed=true;await capture('s3-air-arrives');air.frames.push('s3-air-arrives');}
   if(s.result)break;}
  report.air=air;report.airAudio=await page.evaluate(()=>window.__island.games.current.session.debug?.airAudio?.metrics?.()||null);report.sounds=await page.evaluate(()=>{const log=window.__island.games.current.session.debug?.sounds||[];const c={};for(const e of log)c[e.name]=(c[e.name]||0)+1;return c;});
  console.log('AIR',JSON.stringify(air),JSON.stringify(report.sounds),JSON.stringify(report.airAudio));
- assert.ok(air.aircraftSeen>=1,'aircraft appear on stage 3');assert.ok(air.tracersSeen>=3,'the Vulcan fires visible tracers');assert.ok(air.kills>=1,'the Vulcan brings an aircraft down');assert.ok(air.splashes>=1,'the aircraft falls into the sea');assert.ok(air.hudTarget>0,'the HUD rings the gun target');
+ assert.ok(air.aircraftSeen>=1,'aircraft appear on stage 3');assert.ok(air.hudTarget>0,'the HUD brackets the aircraft');assert.equal(air.shots,0,'the Vulcan never fires by itself (manual)');assert.ok(air.marks>0,'the attack is telegraphed by a landing mark');
  assert.ok(air.peakDrawCalls<=70&&air.peakTriangles<=90000,`render budget with aircraft (${air.peakDrawCalls} calls, ${air.peakTriangles} triangles)`);
- assert.ok((report.sounds.vulcanStart||0)>=1&&(report.sounds.vulcanStop||0)>=1,'Vulcan start and stop sounds are requested');
  assert.ok(report.airAudio&&report.airAudio.loaded.length===3,`the three Vulcan samples decode (${JSON.stringify(report.airAudio)})`);
  await exit();await tick(300);
  if(!before){
@@ -101,13 +100,28 @@ await verify('final-naval',[{width:844,height:390}],async({page,context,viewport
    await touch('touchMove',[{x:vb.x+dx,y:vb.y+dy}]);await tick(50);s=await snap();
    if(s.vulcan.onTarget){onTargetFrames++;firstOn??=s.time;}if(i%10===0)trace.push({t:+s.time.toFixed(2),yawErr:+yawErr.toFixed(1),pitchErr:+pitchErr.toFixed(1),on:s.vulcan.onTarget,shots:s.vulcan.shots,hits:s.vulcan.hits});
    if(onTargetFrames===4)await capture('vulcan-aim');if(s.vulcan.kills>0)break;}
-  s=await snap();Object.assign(sky,{onTargetFrames,shotsHeld:s.vulcan.shots,hits:s.vulcan.hits,kills:s.vulcan.kills,belt:s.belt,secondsToDown:s.vulcan.kills?+(s.time-firstOn).toFixed(1):null,crosshair:s.hud?.sky||null,trace});
+  s=await snap();Object.assign(sky,{onTargetFrames,shotsHeld:s.vulcan.shots,hits:s.vulcan.hits,kills:s.vulcan.kills,belt:s.belt,secondsToDown:s.vulcan.kills?+(s.time-firstOn).toFixed(1):null,crosshair:s.hud?.sky||null,trace,sounds:await page.evaluate(()=>{const log=window.__island.games.current.session.debug?.sounds||[];const c={};for(const e of log)c[e.name]=(c[e.name]||0)+1;return c;})});
   if(s.vulcan.kills)await capture('vulcan-down');
   await touch('touchEnd');await tick(60);const shotsAtRelease=(await snap()).vulcan.shots;await tick(600);s=await snap();sky.shotsAfterRelease=s.vulcan.shots-shotsAtRelease;sky.heldAfter=Boolean(s.sky);
   report.sky=sky;console.log('SKY',JSON.stringify(sky));
   assert.ok(sky.onTargetFrames>0,'the crosshair reached the helicopter');assert.ok(sky.shotsHeld>0&&sky.hits>0,'held on target: shots and hits');assert.equal(sky.kills,1,'the helicopter is shot down');
-  assert.equal(sky.shotsAfterRelease,0,'releasing the button stops the gun');assert.equal(sky.heldAfter,false);
-  await exit();
+  assert.equal(sky.shotsAfterRelease,0,'releasing the button stops the gun');assert.equal(sky.heldAfter,false);assert.ok((sky.sounds.vulcanStart||0)>=1&&(sky.sounds.vulcanStop||0)>=1&&(sky.sounds.splash||0)>=1,'Vulcan start/stop and the splash were requested');
+  await exit();await tick(300);
+  // (C) Enemy base, stage 5: the shore base is on screen with its health bar, solved shots destroy a gun, the depot's explosion damages its neighbours, the budget holds.
+  await start('navalDuel',5);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(600);
+  s=await snap();const base={variant:s.baseHealth?.variant,structures:s.renderMetrics?.structures,plate:s.renderMetrics?.base,hud:s.hud?.base,objective:s.mission,peak:{calls:s.renderMetrics.drawCalls,tris:s.renderMetrics.triangles}};await capture('base-after');
+  assert.ok(s.baseHealth&&s.baseHealth.total>=3,'a base with main targets');assert.ok(base.structures>=4,'structures are drawn');assert.ok(base.hud&&base.hud.left===base.hud.total,'the base bar is on the HUD');
+  const structureAt=kind=>page.evaluate(kind=>{const e=window.__island.games.current.session.snapshot.enemies.find(e=>e.structure===kind&&e.hp>0);return e?{x:e.x,z:e.z,index:e.index,hp:e.hp}:null;},kind);
+  const fireAt=async target=>{await page.evaluate(t=>{const s=window.__island.games.current.session;s.debug.drive(.02,{ammoIndex:0,targetX:t.x,targetZ:t.z,fireRelease:true});},target);const sh=await snap();const t=sh.ball.predicted?.contact?.t??sh.ball.duration??1.5;await page.evaluate(ms=>{const s=window.__island.games.current.session;for(let i=0;i<ms/20;i++)s.debug.drive(.02,{});},Math.round(t*1000)+300);await tick(50);};
+  let gun=await structureAt('gun'),attempts=0;while(gun&&gun.hp>0&&attempts<14){await fireAt(gun);gun=await structureAt('gun');attempts++;if(gun&&gun.hp>0&&attempts%4===0)await page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<30;i++)s.debug.drive(.02,{});});}
+  s=await snap();base.gunAttempts=attempts;base.afterGun={hud:s.hud?.base,baseHp:+(s.baseHealth.hp/s.baseHealth.max).toFixed(2)};await capture('base-gun-down');
+  assert.ok(s.baseHealth.hp<s.baseHealth.max,'the base lost health');
+  const depot=await structureAt('depot');let before=null;if(depot){before=await page.evaluate(()=>window.__island.games.current.session.snapshot.enemies.filter(e=>e.structure&&e.hp>0).map(e=>({s:e.structure,hp:+e.hp.toFixed(2)})));let d=depot,n=0;while(d&&d.hp>0&&n<16){await fireAt(d);d=await structureAt('depot');n++;}
+   await page.evaluate(()=>{const s=window.__island.games.current.session;for(let i=0;i<8;i++)s.debug.drive(.02,{});});await tick(50);s=await snap();await capture('base-depot-chain');
+   base.chain={before,after:s.enemies.filter(e=>e.structure).map(e=>({s:e.structure,hp:+e.hp.toFixed(2)})),blast:s.chainBlast,shots:n};assert.ok(s.chainBlast,'the depot exploded');
+   const dropped=before.filter(b=>b.s!=='depot').some(b=>{const a=base.chain.after.find(x=>x.s===b.s);return a&&a.hp<b.hp;});assert.ok(dropped,'the explosion damaged a neighbour');}
+  s=await snap();base.peak={calls:s.renderMetrics.peak.drawCalls,tris:s.renderMetrics.peak.triangles};assert.ok(base.peak.calls<=70&&base.peak.tris<=90000,`base stage budget (${base.peak.calls} calls, ${base.peak.tris} triangles)`);
+  report.base=base;console.log('BASE',JSON.stringify(base));await exit();
  }
  return report;
 });

@@ -835,7 +835,7 @@ function frame(t){
   updateGunRig(dt);
   // crosshair state
   const cx=(pointer.x*.5+.5)*innerWidth,cy=(-pointer.y*.5+.5)*innerHeight;for(const id of ['crosshair','hit-marker']){if(STICK_V21)$(id).style.transform=`translate3d(${cx.toFixed(2)}px,${cy.toFixed(2)}px,0) translate(-50%,-50%)`;else{$(id).style.left=`${cx}px`;$(id).style.top=`${cy}px`;}}
-  if(trace&&trace.length<6000)trace.push({t:+t.toFixed(1),dt:+dt.toFixed(4),x:+pointer.x.toFixed(5),y:+pointer.y.toFixed(5),m:moveCount,s:aimStick?1:0,r:resChanges});
+  if(trace&&trace.length<6000)trace.push({t:+t.toFixed(1),dt:+dt.toFixed(4),x:+pointer.x.toFixed(5),y:+pointer.y.toFixed(5),m:moveCount,s:aimStick?1:0,v:aimStick?+Math.hypot(STICK_V21?aimStick.sx:aimStick.vx,STICK_V21?aimStick.sy:aimStick.vy).toFixed(4):0,r:resChanges});
   if(mode==='battle'&&Math.floor(elapsed*20)!==Math.floor((elapsed-dt)*20)){const h=castShot(aimRay(),TOUCH?1.35:1);$('crosshair').classList.toggle('on-target',!!(h.e||h.shell));$('crosshair').classList.toggle('crit',!!h.crit);}
   if(elapsed>bannerUntil)$('banner').style.opacity=0;if(elapsed>toastUntil)$('toast').style.opacity=0;if(elapsed>hitUntil)$('hit-marker').style.opacity=0;if(elapsed>damageUntil)$('damage-flash').style.opacity=lowPulse();
   if(mode==='battle'||mode==='paused')updateLabels();

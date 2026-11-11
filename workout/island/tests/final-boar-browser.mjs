@@ -109,10 +109,11 @@ await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)r
 await frame.evaluate(()=>window.__boar.aim(-.5,-.05));await step('stickSmooth',async()=>{if(!hasBtn)return noBtn;const o={x:150,y:290};await frame.evaluate(()=>window.__boar.record(true));
  await touch('touchStart',[{...o,id:1}]);let sent=0;for(let i=1;i<=24;i++){await touch('touchMove',[{x:o.x+i,y:o.y,id:1}]);sent++;await wait(40);}
  await framesLater(8,30000);await wait(400);const tr=await frame.evaluate(()=>window.__boar.trace());await touch('touchEnd',[{x:o.x+24,y:o.y,id:1}]);await framesLater(1);await frame.evaluate(()=>window.__boar.record(false));
- const W=844,dz=(await st()).stickR===80?.08:.12,R=(await st()).stickR;const fr=tr.filter(f=>f.s&&f.x<.94);const d=[];for(let i=1;i<fr.length;i++)d.push({px:(fr[i].x-fr[i-1].x)*W/2,dt:fr[i].dt,m:fr[i].m-fr[i-1].m,tilt:fr[i].m});
+ const W=844,dz=(await st()).stickR===80?.08:.12,R=(await st()).stickR;const fr=tr.filter(f=>f.s&&f.x<.94),m0=tr.length?tr[0].m:0;const d=[];for(let i=1;i<fr.length;i++)d.push({px:(fr[i].x-fr[i-1].x)*W/2,dt:fr[i].dt,m:fr[i].m-fr[i-1].m,tilt:fr[i].m-m0,v:fr[i].v});
  const moving=d.filter(x=>x.px>1e-6),first=moving[0]?+moving[0].px.toFixed(2):null,maxStep=moving.length?+Math.max(...moving.map(x=>x.px)).toFixed(2):null;
  // stall: consecutive frames without motion once the finger is past the dead zone (sent moves count as tilt proxy: 1 px per move)
- let stall=0,run=0;for(const x of d){if(x.tilt>R*dz+2&&x.px<=1e-6){run++;stall=Math.max(stall,run);}else run=0;}
+ // stall: the stick commands motion (smoothed magnitude over 0.01 = over 6 px/s) but the aim did not move that frame
+ let stall=0,run=0;for(const x of d){if(x.v>.01&&x.px<=1e-6){run++;stall=Math.max(stall,run);}else run=0;}
  const hold=d.filter(x=>x.m===0&&x.tilt>=sent),sp=hold.map(x=>x.px/x.dt),mean=sp.reduce((s,v)=>s+v,0)/(sp.length||1),sd=Math.sqrt(sp.reduce((s,v)=>s+(v-mean)**2,0)/(sp.length||1));
  const framesNoMove=moving.filter(x=>x.m===0).length,received=fr.length?fr.at(-1).m-fr[0].m:0,res=fr.length?fr.at(-1).r-fr[0].r:0;
  return {frames:fr.length,holdFrames:hold.length,sentMoves:sent,receivedMoves:received,firstStepPx:first,maxStepPx:maxStep,stallFrames:stall,holdSpeedMean:+mean.toFixed(1),holdSpeedSd:+sd.toFixed(2),framesMovedWithoutMove:framesNoMove,resChanges:res,deltas:d.map(x=>+x.px.toFixed(2))};});
