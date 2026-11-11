@@ -55,7 +55,9 @@ const KIT_BODY = `
   }
   diffuseColor.rgb = c;
 }`;
-export function createAthleteMaterials(T, source, {profile, kit, numbers, cell, track = x => x}) {
+/** `sleeveless` (basketball): kit vertices flagged by the `_sleeve` attribute (see athlete-body.mjs) are discarded, so the jersey is a tank
+ * top over the skin mesh. `kit.boots` / `kit.bootAccent` override the profile's boots (white sneakers with a team accent). */
+export function createAthleteMaterials(T, source, {profile, kit, numbers, cell, track = x => x, sleeveless = false}) {
   const skinSource = source.skin, kitSource = source.kit;
   const skin = track(skinSource.clone()), kitMat = track(kitSource.clone());
   const tone = linear(T, profile.skin), hair = linear(T, profile.hair);
@@ -73,14 +75,16 @@ export function createAthleteMaterials(T, source, {profile, kit, numbers, cell, 
   kitMat.userData.athlete = {
     athleteKitMask: {value: source.kitMask}, athleteNumbers: {value: numbers}, athleteNumberCell: {value: cell}, athleteNumberCells: {value: Math.max(1,numbers.image.width/64)},
     kitPrimary: {value: col(kit.primary)}, kitSecondary: {value: col(kit.secondary)}, kitShorts: {value: col(kit.shorts)}, kitShortsTrim: {value: col(kit.shortsTrim)},
-    kitSocks: {value: col(kit.socks)}, kitSocksTrim: {value: col(kit.socksTrim)}, kitBoots: {value: col(profile.boots || '#1b1d22')}, kitBootAccent: {value: col(profile.bootAccent || '#e9eef2')},
+    kitSocks: {value: col(kit.socks)}, kitSocksTrim: {value: col(kit.socksTrim)}, kitBoots: {value: col(kit.boots || profile.boots || '#1b1d22')}, kitBootAccent: {value: col(kit.bootAccent || profile.bootAccent || '#e9eef2')},
   };
   kitMat.onBeforeCompile = shader => {
     Object.assign(shader.uniforms, kitMat.userData.athlete);
-    shader.vertexShader = 'attribute vec2 _numberuv; attribute vec2 _crestuv; varying vec2 vAthleteNumber; varying vec2 vAthleteCrest;\n' + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvAthleteNumber = _numberuv; vAthleteCrest = _crestuv;');
-    shader.fragmentShader = KIT_HEAD + "\n" + shader.fragmentShader.replace('#include <map_fragment>', KIT_BODY);
+    shader.vertexShader = 'attribute vec2 _numberuv; attribute vec2 _crestuv; varying vec2 vAthleteNumber; varying vec2 vAthleteCrest;\n' + (sleeveless ? 'attribute float _sleeve; varying float vAthleteSleeve;\n' : '') + shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvAthleteNumber = _numberuv; vAthleteCrest = _crestuv;' + (sleeveless ? ' vAthleteSleeve = _sleeve;' : ''));
+    shader.fragmentShader = KIT_HEAD + (sleeveless ? '\nvarying float vAthleteSleeve;' : '') + "\n" + shader.fragmentShader.replace('#include <map_fragment>', (sleeveless ? 'if (vAthleteSleeve > 0.5) discard;\n' : '') + KIT_BODY);
   };
-  kitMat.customProgramCacheKey = () => 'athlete-kit-2';
+  kitMat.customProgramCacheKey = () => sleeveless ? 'athlete-kit-2-sleeveless' : 'athlete-kit-2';
+  // the armholes must not show the inside of the shell (a white back face with the mirrored number): the skin underneath shows instead
+  if (sleeveless) kitMat.side = T.FrontSide;
   return {skin, kit: kitMat};
 }
 /** Team colours -> full kit. Keepers get a contrasting kit of their own. */

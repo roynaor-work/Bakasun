@@ -72,7 +72,8 @@ export function startHoops(ctx){
  const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
  const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
  stageEl.append(bug,meter,grade,toast,stepEl,replayBtn,benchPanel,loading,stamina);
- roleLabels=createHoopsRoleLabels(stageEl);
+ // ?hoopsLabels=all puts a position label over all ten players (old behaviour).
+ roleLabels=createHoopsRoleLabels(stageEl,{scope:params.get('hoopsLabels')==='all'?'all':'team'});
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});

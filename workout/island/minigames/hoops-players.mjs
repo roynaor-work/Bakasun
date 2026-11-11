@@ -15,11 +15,17 @@ import {loadPlayerAssetsV1,createAvatarV1,loadMotionClips,bundlePlayerAssets} fr
 import {V4_ROLES,v4Enabled} from './hoops-v4.mjs';
 import {v7Enabled,loadPlayerAssetsV7,createAvatarV7} from './hoops-v7.mjs';
 import {tallEnabled,loadTall,createAvatarTall} from './hoops-tall.mjs';
+import {hoopsAthleteEnabled,loadAthleteHoops} from './hoops-athlete.mjs';
 /** Default (v3, 01/11): the textured motion-capture athletes. `assets.characterVersion: 2`
  * (or ?hoopsCharacters=2) selects the characters2 low-poly athlete with the motion2 clips. */
 export async function loadPlayerAssets(cfg,base,onProgress,{params,onFallback,quality}={}){
  if((cfg.characterVersion??1)===2)return loadPlayerAssetsV2(cfg,base,onProgress);
- // tall bodies + the v9 motion library (08/11, Codex): first choice; any failure falls back to the v7 bodies
+ // the shared athlete body with the tall motion library (11/11): first choice; any failure falls back to the tall bodies
+ if(hoopsAthleteEnabled(cfg,params,quality??2)){
+  try{return await loadAthleteHoops(cfg,base,onProgress,{params,onFallback});}
+  catch(error){onFallback?.('players-athlete',error);}
+ }
+ // tall bodies + the v9 motion library (08/11, Codex): any failure falls back to the v7 bodies
  if(tallEnabled(cfg,params,quality??2)){
   try{return await loadTall(cfg,base,onProgress,{params,onFallback});}
   catch(error){onFallback?.('players-tall',error);}

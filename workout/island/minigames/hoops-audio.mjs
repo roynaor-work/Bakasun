@@ -1,10 +1,14 @@
 /** Basketball presentation audio. The authored mix supplies gains, filters, layer
  * recipes and voice limits. Sound never changes the match or saved club state. */
-export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch}={}){
+import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
+const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
+export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,clock=wallClock}={}){
  const mixURL=new URL('../design/audio/mix.json',import.meta.url);
  const aliases={bounce:'basketball/bounce',swish:'basketball/swish',rim:'basketball/rim',shoes:'basketball/shoes',buzzer:'basketball/buzzer',crowd:'basketball/crowd-excited',calm:'basketball/crowd-calm',ambience:'basketball/ambience-loop',opening:'scenes/opening',victory:'scenes/victory',defeat:'scenes/defeat'};
  const buffers=new Map(),specs=new Map(),active=new Set(),last=new Map(),played={};
- let context,master,bedGain,limiter,pauseTimer,duckTimer,bed=null,mix=null,paused=false,disposed=false,muted=false,decoded=false,openingPlayed=false,final=false,holds=[];
+ let context,master,bedGain,limiter,pauseTimer,duckTimer,bed=null,mix=null,paused=false,disposed=false,muted=false,decoded=false,openingPlayed=false,final=false,holds=[],jumpBalls=0;
+ // Whistle spacing runs on the wall clock (the context may not exist yet).
+ const gate=createWhistleGate(WHISTLE_SPACING.hoops);
  const db=n=>Math.pow(10,n/20),fade=()=>Math.max(.001,(mix?.playback?.start_stop_fade_ms??40)/1000);
  const files=(async()=>{
   try{
@@ -105,12 +109,21 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
    last.set(key,now);const metricName=Object.keys(aliases).find(alias=>aliases[alias]===key)||name;played[metricName]=(played[metricName]||0)+1;return true;
   }catch{if(voice)disconnect(voice);return false;}
  }
- const map={floor:['bounce',.8],rim:['rim',.75],board:['board',.9],pad:['board',.5],pass:['pass',.8],release:['pass',.45],steal:['shoes',.6],interception:['shoes',.6],block:['board',1],foul:['whistle',.9],violation:['whistle',.9],buzzer:['buzzer',1],quarterEnd:['buzzer',1],jumpBall:['whistle',.7],timeout:['whistle',.8],goaltending:['whistle',.9]};
+ const map={floor:['bounce',.8],rim:['rim',.75],board:['board',.9],pad:['board',.5],pass:['pass',.8],release:['pass',.45],steal:['shoes',.6],interception:['shoes',.6],block:['board',1],buzzer:['buzzer',1],quarterEnd:['buzzer',1]};
+ // Referee whistle: foul, violation (out of bounds quieter), goaltending, timeout
+ // and the opening tip only; inbounds and quarter starts are silent or the horn.
+ // Two calls close together (out then foul) sound as one whistle.
+ function whistle(e){
+  const gain=hoopsWhistleGain(e.type,e,{jumpBalls});if(e.type==='jumpBall')jumpBalls++;
+  if(!gain||!gate.allow(clock()))return false;
+  return play('whistle',{volume:gain});
+ }
  return {
   unlock,play,sync,
   events(list){for(const e of list){
    if(e.type==='final'){final=true;stop(true);layer(e.won?'victory':'defeat');continue;}
    if(e.type==='score'){if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
+   if(e.type==='foul'||e.type==='violation'||e.type==='goaltending'||e.type==='timeout'||e.type==='jumpBall'){whistle(e);continue;}
    const type=e.type==='contact'?e.what:e.type,m=map[type];if(!m)continue;
    const v=e.speed?Math.min(1,.35+e.speed*.12):1;play(m[0],{volume:m[1]*v,rate:type==='floor'?1+Math.min(.3,(e.speed||0)*.03):1});
   }},
@@ -120,7 +133,7 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
    if(paused){stop();pauseTimer=setTimeout(()=>{if(paused&&!disposed&&context?.state==='running')void context.suspend().catch(()=>{});},fade()*1000);}
    else {stop(true);if(bedGain)bedGain.gain.value=1;unlock();}
   },
-  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
+  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,whistle:{last:gate.last,blocked:gate.blocked,jumpBalls},scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
   dispose(){if(disposed)return;disposed=true;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];stop(true);buffers.clear();for(const node of [bedGain,master,limiter])try{node?.disconnect();}catch{}if(context&&context.state!=='closed')void context.close().catch(()=>{});context=null;},
  };
 }

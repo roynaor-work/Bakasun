@@ -25,12 +25,13 @@ test('v7 runtime files are light, offline-listed and not published from design/'
  assert.match(pages,/soccer-v7/,'design/soccer-v7 is excluded from the published site');
 });
 
-test('character set switch: v7 default, v6 and v5 are the previous cartoon set, v4 the authored set',()=>{
- assert.equal(SOCCER_CHARACTER_SET_DEFAULT,'v7');
- assert.equal(soccerCharacterSet(''),'v7');
- assert.equal(soccerCharacterSet('?soccerChars=v7'),'v7');
+test('character set switch: the shared athlete body is the default (11/11), ?athleteBody=0 and ?soccerChars=v7 return v7, v6 and v5 are the cartoon set, v4 the authored set',()=>{
+ assert.equal(SOCCER_CHARACTER_SET_DEFAULT,'athlete');
+ assert.equal(soccerCharacterSet(''),'athlete');
+ assert.equal(soccerCharacterSet('?athleteBody=0'),'v7');
+ assert.equal(soccerCharacterSet('?soccerChars=v7'),'v7');assert.equal(soccerCharacterSet('?soccerChars=athlete'),'athlete');
  assert.equal(soccerCharacterSet('?soccerChars=v6'),'v5');assert.equal(soccerCharacterSet('?soccerChars=v5'),'v5');
- assert.equal(soccerCharacterSet('?soccerChars=v4'),'v4');assert.equal(soccerCharacterSet('?soccerChars=zzz'),'v7');
+ assert.equal(soccerCharacterSet('?soccerChars=v4'),'v4');assert.equal(soccerCharacterSet('?soccerChars=zzz'),'athlete');
 });
 
 test('v7 retarget map is the identity over the 18 canonical bones',async()=>{
