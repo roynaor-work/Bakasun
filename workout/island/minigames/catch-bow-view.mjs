@@ -200,12 +200,14 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
       const yawW = yaw0 + cam.yaw * Math.PI / 180 + Math.sin(ts * 47) * sh * .01, pitch = (cam.pitch - cam.kick * 3) * Math.PI / 180;
       look.set(eye.x + Math.cos(yawW) * Math.cos(pitch) * 10, eye.y + Math.sin(pitch) * 10, eye.z - Math.sin(yawW) * Math.cos(pitch) * 10);
       let fov = cam.fov;
+      if (cam.from && cam.from.distanceTo(eye) > 25) cam.from = null; // a cut, not a glide, when the chase camera is far away (tests that skip the chase)
       if (cam.from && cam.blend < 1) { cam.blend = Math.min(1, cam.blend + dt / BOW.blendSeconds); const k = smooth(cam.blend); eye.lerpVectors(cam.from, eye, k); look.lerpVectors(cam.fromLook, look, k); fov = lerp(cam.fromFov, fov, k); if (cam.blend >= 1) cam.from = null; }
       camera.position.copy(eye); camera.up.set(0, 1, 0); camera.lookAt(look); camera.fov = fov; camera.updateProjectionMatrix();
       // the launcher draws back and dips while the string is pulled, then springs forward on release
       launcher.position.z = -.75 + drawn * .16 + cam.kick * -.08; launcher.position.y = -.28 - drawn * .03 + Math.sin(ts * 1.7) * .004; launcher.rotation.x = .02 + drawn * .05 - cam.kick * .12;
       loadedNet.visible = phase === 'aim' || phase === 'throw' || phase === 'rearm' || phase === 'flee';
     },
+    debugCam() { return {blend: cam.blend, from: cam.from ? cam.from.toArray() : null, eye: eye.toArray(), look: look.toArray(), fov: camera.fov, mode}; },
     project(x, y, z = 0) { w(x, z, tmp); tmpV.set(tmp.x, y, tmp.z).project(camera); return {x: tmpV.x, y: tmpV.y, visible: tmpV.z < 1}; },
     dispose() { camera.remove(rig); for (const o of [projectile, trail, landRing, sight, flash, groundNet, ...dots, ...caughtNets, ...leaves.map(l => l.s)]) scene.remove(o); },
   };
