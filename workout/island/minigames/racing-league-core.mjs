@@ -80,11 +80,11 @@ export const SHORT_SEASONS = Object.freeze([
 // racing-deep-fable merge: `corner` multiplies the per-tier aiCorner of racing-tracks.mjs, which racing-deep-m2 raised for the Codex circuits (23..33 instead of 17..25.8);
 // the factors below give the same effective cornering limits the long league was balanced against (about 30 in season 1 down to about 27 in season 5).
 export const LONG_SEASONS = Object.freeze([
-  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 6400, laps: 3, minRank: 0, rating: 0.05, corner: 1.27 }),
-  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 6400, laps: 3, minRank: 8, rating: 0.05, corner: 1.04 }),
-  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 6400, laps: 3, minRank: 8, rating: 0.05, corner: 0.91 }),
-  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 6400, laps: 3, minRank: 5, rating: 0.05, corner: 0.84 }),
-  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 6400, laps: 3, minRank: 5, rating: 0.06, corner: 0.83 })
+  Object.freeze({ id: 1, name: 'עונת הפתיחה', tiers: [0, 1], races: 12, distance: 6400, laps: 3, minRank: 0, rating: 0.05, corner: 1.5 }),
+  Object.freeze({ id: 2, name: 'ליגת הכסף', tiers: [1, 2], races: 14, distance: 6400, laps: 3, minRank: 8, rating: 0.05, corner: 1.25 }),
+  Object.freeze({ id: 3, name: 'ליגת הזהב', tiers: [2, 3], races: 16, distance: 6400, laps: 3, minRank: 8, rating: 0.05, corner: 1.1 }),
+  Object.freeze({ id: 4, name: 'ליגת הפלטינה', tiers: [2, 3, 4], races: 18, distance: 6400, laps: 3, minRank: 5, rating: 0.05, corner: 1.0 }),
+  Object.freeze({ id: 5, name: 'ליגת האלופים', tiers: [3, 4], races: 18, distance: 6400, laps: 3, minRank: 5, rating: 0.06, corner: 0.97 })
 ]);
 /** Race distance factors of the variants and the ceiling a race may ask of a slow driver under the 295 s clock (about 31 m/s). The "short races"
  * league setting scales every race by SHORT_RACES_FACTOR. */
