@@ -92,35 +92,70 @@ const freezeTrack = (track) => Object.freeze({ ...track, points: Object.freeze(t
 /** The circuits before racing-v10 (also what ?racingTracks=v1 selects). */
 export const CLASSIC_TRACKS = Object.freeze(CLASSIC_LIST.map(freezeTrack));
 const TRACKS_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingTracks');
-export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'v2' ? 'v2' : 'f1';
+// racing-deep-m2 (11/11/2026): the Codex v2 circuits are the default set. Measured with tools/racing-topspeed.mjs: on the f1 set a skilled driver spent 57-100% of the lap
+// above 95% of top speed (volcano, summit and jungle were the gentle classic curves), on v2 0-5% with 50-70% of the lap under 85%. ?racingTracks=f1 restores the previous
+// default (the v10 polygons with tuneCircuit), ?racingTracks=v1 the circuits before racing-v10.
+export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'f1' ? 'f1' : 'v2';
 // racing-tracks-v2 (Codex, design/racing-tracks-v2): six circuits, opt-in with ?racingTracks=v2. Loaded only on that flag (top-level await), so the normal start-up
 // does not fetch the 72 KB data file. The data is 7.5 m wide with 12 m corners, so the app calibrates it: X/Z scale and road width (V2_SCALE, V2_WIDTH),
 // the same one-metre lift as the v10 circuits, and the original theme/landmark of each stage.
 const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.9, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
 const CODEX_V2 = RACING_TRACK_SET === 'v2' ? (await import('../design/racing-tracks-v2/tracks.mjs')).default : null;
+// racing-deep-m2: the longest straight of every v2 circuit stays straight (the main straight with the grid, the pits and the only place to reach top speed, like a
+// Formula 1 pit straight); every other long straight still gets its chicane. ?racingKinkAll=1 kinks the main straight too, as the 07/11 build did.
+const KINK_ALL = new URLSearchParams(globalThis.location?.search || '').get('racingKinkAll') === '1';
+// ?racingShortKink=0: no S on the medium straights (the 07/11 geometry apart from the main straight)
+// radius (raw metres) at the peaks of the S on a medium straight; 11 measured: a skilled driver 47-59% of the lap under 85% of top speed on all six circuits (?racingShortR= to tune)
+const SHORT_R = Number(new URLSearchParams(globalThis.location?.search || '').get('racingShortR')) || 11;
+const SHORT_KINK = new URLSearchParams(globalThis.location?.search || '').get('racingShortKink') !== '0';
 // Dog-legs for the long straights of the Codex circuits that a good driver still took flat out: a straight longer than `min` metres
 // gets whole periods of a sine offset (about 22 m radius at this amplitude), faded to zero 30 m from each end. Units: metres before the 1.65 scale.
 const V2_KINK = new Set(['coast', 'jungle', 'volcano', 'harbor', 'summit', 'ruins']);
-function kinkStraights(points, { min = 110, period = 70, amp = 10.5, margin = 22 } = {}) {
-  const n = points.length, out = points.map(p => p.slice()), wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
+/** Runs of collinear control points (heading change under .006 rad between neighbours): [{run:[indices], d:[cumulative metres], length}]. */
+function straightRuns(points) {
+  const n = points.length, wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
   const heading = i => { const a = points[i], b = points[(i + 1) % n]; return Math.atan2(b[0] - a[0], b[2] - a[2]); };
   const straight = Array.from({ length: n }, (_, i) => Math.abs(wrapA(heading(i) - heading((i + n - 1) % n))) < .006);
-  let i = 0; const seen = new Set();
-  const start = straight.findIndex(v => !v); if (start < 0) return out;
+  const start = straight.findIndex(v => !v), runs = [], seen = new Set(); if (start < 0) return runs;
   for (let k = 0; k < n; k++) {
     const idx = (start + k) % n; if (!straight[idx] || seen.has(idx)) continue;
     const run = []; for (let j = idx; straight[j % n] && run.length < n && !seen.has(j % n); j++) { run.push(j % n); seen.add(j % n); }
     const d = [0]; for (let j = 1; j < run.length; j++) d.push(d[j - 1] + Math.hypot(points[run[j]][0] - points[run[j - 1]][0], points[run[j]][2] - points[run[j - 1]][2]));
-    const length = d[d.length - 1]; if (length < min) continue;
-    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1) continue;
-    const from = (length - periods * period) / 2, h = heading(run[0]), nx = Math.cos(h), nz = -Math.sin(h);
-    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * Math.min(1, u / 15, (periods * period - u) / 15); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
+    runs.push({ run, d, length: d[d.length - 1], heading: heading(run[0]) });
+  }
+  return runs;
+}
+function kinkStraights(points, { min = 110, period: fullPeriod = 70, amp: fullAmp = 10.5, margin = 22, keepLongest = !KINK_ALL, short = SHORT_KINK ? 78 : Infinity } = {}) {
+  const out = points.map(p => p.slice()), runs = straightRuns(points);
+  const longest = runs.reduce((best, r) => r.length > (best?.length || 0) ? r : best, null);
+  for (const { run, d, length, heading: h } of runs) {
+    if (length < Math.min(min, short) || (keepLongest && run === longest?.run)) continue;
+    // racing-deep-m2: a medium straight (78-110 m raw, 115-165 m on the island) gets one gentler S (the same 13 m raw radius at the sine peaks as the long ones);
+    // without it a skilled driver spent only 31-38% of the lap under 85% of top speed on jungle and volcano (target 40%).
+    const period = length >= min ? fullPeriod : Math.min(fullPeriod, length - 2 * margin), amp = length >= min ? fullAmp : Math.min(fullAmp, (period / (2 * Math.PI)) ** 2 / SHORT_R);
+    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1 || period < 30) continue;
+    const from = (length - periods * period) / 2, nx = Math.cos(h), nz = -Math.sin(h);
+    // racing-deep-m2: a C1 fade (raised cosine over 20 m) instead of the linear min(1, u/15, ...) hinge. The hinge put a 0.6 rad cusp (radius about 5 m) in the centre line
+    // at both ends of every chicane; the projection of a car 5 m inside such a cusp jumped 2-4 m in one frame, the gate sweep called it implausible and a drifting player
+    // lost gate 8 of coast for good (recovery loop every 12 s in the measurement bot).
+    const fade = u => { const r = Math.min(1, u / 20, (periods * period - u) / 20); return .5 - .5 * Math.cos(Math.PI * r); };
+    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * fade(u); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
   }
   return out;
 }
+/** racing-deep-m2: the start/finish line sits on the main straight (62% of the way along it, so the grid of twelve stands on the straight behind the line and the
+ * pit exit still has 38% of it ahead). The control points are rotated (a closed Catmull-Rom loop keeps its exact shape) and rebased to the new first point. */
+function startOnMainStraight(points) {
+  const runs = straightRuns(points), longest = runs.reduce((best, r) => r.length > (best?.length || 0) ? r : best, null);
+  if (!longest || longest.length < 60) return points;
+  const k = longest.run[Math.min(longest.run.length - 1, Math.round(0.62 * (longest.run.length - 1)))], ring = points.slice(k).concat(points.slice(0, k)), x0 = ring[0][0], z0 = ring[0][2];
+  return ring.map(([x, y, z]) => [x - x0, y, z - z0]);
+}
 function codexTrack(spec, base) {
   const lift = Math.max(0, 1 - Math.min(...spec.points.map(p => p[1])));
-  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: spec.samples, points: (V2_KINK.has(spec.id) ? kinkStraights(spec.points) : spec.points).map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
+  const shaped = V2_KINK.has(spec.id) ? kinkStraights(spec.points) : spec.points, placed = KINK_ALL ? shaped : startOnMainStraight(shaped);
+  // f1: true gives the v2 circuits the Formula 1 trackside (pits, gantry, kerb paint) of racing-f1.mjs; set: 'v2' marks the data source
+  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: spec.samples, f1: true, set: 'v2', points: placed.map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
 }
 
 export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : RACING_TRACK_SET === 'v2' ? CLASSIC_LIST.map(track => codexTrack(CODEX_V2.find(c => c.id === track.id), track)) : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
@@ -214,7 +249,13 @@ export function createTrack(value = 1) {
   let cornerLength=0;const step=8,count=Math.floor(length/step);
   for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step),turn=Math.abs(racingAngle(b.heading-a.heading))/step;if(turn>1/160)cornerLength+=step;}
   const cornerFraction=cornerLength/Math.max(1,count*step);
-  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction };
+  // racing-deep-m2: straights of the sampled circuit (heading change under 1/400 rad per metre over 8 m steps), as unwrapped s ranges [from, to] in metres, longest first;
+  // mainStraight is the longest one. The pit lane, the grid markings and the AI's "where can I reach top speed" read them.
+  const straights=[];{let run=null;const flat=[];for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step);flat.push(Math.abs(racingAngle(b.heading-a.heading))/step<1/400);}
+    const first=flat.findIndex(v=>!v);if(first>=0)for(let k=0;k<count;k++){const i=(first+k)%count;if(flat[i]){if(!run)run={from:(first+k)*step,to:(first+k+1)*step};else run.to=(first+k+1)*step;}else if(run){straights.push(run);run=null;}}if(run)straights.push(run);
+    for(const r of straights){r.length=r.to-r.from;r.from=wrap(r.from,length);r.to=r.from+r.length;}straights.sort((a,b)=>b.length-a.length);}
+  const mainStraight=straights[0]||null;
+  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction, straights, mainStraight };
 }
 
 export function wrapRacingDistance(value, length) { return wrap(value, length); }
