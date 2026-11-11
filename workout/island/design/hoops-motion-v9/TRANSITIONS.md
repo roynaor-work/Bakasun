@@ -1,0 +1,35 @@
+# מפת מעברים — תצוגה בלבד
+
+המפה הקונקרטית המלאה נמצאת ב־[runtime/transition-map.json](runtime/transition-map.json); היא נוצרת ישירות מ־[state-machine.mjs](runtime/state-machine.mjs). 84 מצבים: idle ועוד 83 קליפים. כל צלע מפורשת במפה ומכילה דרישות החזקה וזמינות כדרור. אין מעבר אוטומטי בסיום קליפ.
+
+```mermaid
+stateDiagram-v2
+  idle --> Empty
+  idle --> Held: authoritative possession
+  Held --> Dribble: dribble available
+  Dribble --> Dribble
+  Dribble --> Gather: stop / shot
+  Gather --> Pivot
+  Pivot --> Shot
+  Gather --> Shot
+  Shot --> Empty
+  Empty --> Receive
+  Receive --> Held: host confirms possession
+  Empty --> Dive
+  Dive --> GetUp
+  GetUp --> Empty
+```
+
+התרשים מציג משפחות לשם קריאות; קובץ JSON הוא המפה המדויקת לכל מזהה קליפ.
+
+| משפחה | משמעות |
+|---|---|
+| Empty | תנועה ללא כדור, הגנה, מסך וחגיגות |
+| Held | עמידות עם כדור, בלימה ואיסוף, ציר אחורי מוגן |
+| Dribble | תנועה עם כדרור, חיתוכים עם כדור, קרוס אובר, בין הרגליים והיסוס |
+| Shot | יורו, לייאפ, פלוטר, קליעות והטבעות |
+| Receive | ריבאונד, נחיתה עם כדור וצלילה לכדור חופשי; האנימציה אינה יוצרת החזקה |
+
+רק authorizePossession({epoch,owner}) עם epoch שלם חדש מהמשחק יכול לקבוע החזקה ולשחרר את נעילת סוף הכדרור. מעבר ממצב כדרור לאיסוף, לזריקה או לכל פעולה אחרת נועל את חידוש הכדרור באותה החזקה. ציר, idle וקבלת כדור אינם מאפסים את הנעילה. חידוש כדרור לפני שהוחל כדרור נשאר אפשרי כשכללי המשחק מתירים אותו.
+
+אירועי contact, release, bounce, takeoff ו־land הם presentation בלבד: handlePresentationEvent אינו משנה מצב, epoch, בעלות, ניקוד או פיזיקה. createMotionPlayer בודק את המדיניות לפני טעינה ואחריה ומבטל בקשות ישנות כשהמשחק מספק עדכון סמכותי.

@@ -1,0 +1,32 @@
+✔ every delivered 30 Hz GLB really decodes with Draco and passes the independent naturalness audit (3676.69592ms)
+✔ GLBs contain exactly the canonical 18 bones, 30 Hz tracks and Draco-compressed geometry (835.749249ms)
+✔ negative control: moving only the decoded ball by 20cm fails actual contact and GLB/JSON agreement (91.895984ms)
+✔ negative control: a 12cm decoded pelvis drift fails planted support even if JSON and its markers claim perfection (46.609206ms)
+✔ negative control: frozen decoded running legs fail independently detected step cadence (19.940927ms)
+✔ negative controls: an inverted wrist and a broken decoded loop are measured independently (83.622391ms)
+✔ negative control: impossible knee axial twist fails even when decoded GLB and JSON agree and foot pose is preserved (103.021873ms)
+✔ negative control: matching GLB/JSON projectile shifted after release misses the unchanged fixed rim (77.958217ms)
+✔ audit source is independent from the procedural author and build pipeline (1.802858ms)
+✔ expanded graph covers every state and only concrete, catalogued edges (9.602141ms)
+✔ no presentation path through pivot, idle or a catch reopens a stopped dribble (4.058317ms)
+✔ authority epochs are monotonic; initial clips and presentation events cannot grant possession (0.456678ms)
+✔ a protected pivot before dribbling preserves the first dribble entitlement (0.183993ms)
+✔ real AnimationMixer controller clamps one-shots, seeks silently and preserves pause (4.359885ms)
+✔ loop updates cross multiple cycles without losing or duplicating events (0.895099ms)
+✔ an event callback can replace playback without dispatching stale later events (0.67326ms)
+✔ motion player checks authority before IO, then supersedes asynchronous requests (1.059124ms)
+✔ authority updates cancel an in-flight owned-ball playback request (0.427925ms)
+✔ same-clip requests share one load, rejected loads can retry (1.142487ms)
+✔ late load after disposal frees owned GPU resources exactly once (0.681653ms)
+✔ disposeClip deduplicates shared scenes, material arrays, textures, skeletons and images (1.112662ms)
+✔ decoded run/sprint to brake matches the landing phase, locks the stance sole and introduces no airborne stop (240.493192ms)
+✔ decoded run to brake has continuous hip position and incoming world velocity across its touchdown seam (29.578211ms)
+✔ motion player exposes queued contact readiness and continuous descriptive root guidance (28.677954ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5063.076185
