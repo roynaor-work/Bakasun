@@ -16,19 +16,20 @@ export function createNavalAirView(scene,model,balance){
  const merged=list=>{const g=mergeGeometries(list,false);for(const l of list)l.dispose();return keep(g);};
  // Nose along +z (Object3D.lookAt points +z at the target). Sizes in world units: the player hull is about 5.7 long.
  const frames={
-  plane:merged([part(.9,.8,4.4),part(.6,.5,1.2,0,.05,2.6),part(6.2,.14,1.4,0,-.05,.1,0,0,0),part(2.4,.1,.9,0,.15,-1.8),part(.12,1,.9,0,.6,-1.8,.3),part(.5,.5,.7,-2.8,-.2,.1),part(.5,.5,.7,2.8,-.2,.1)]),
-  cockpit:keep(part(.6,.45,1.3,0,.5,.7)),
-  heli:merged([part(1.7,1.4,3.4),part(.45,.45,3.4,0,.15,-3),part(.12,1.1,.7,0,.6,-4.4),part(.14,.6,.14,0,1,0),part(.12,.3,2.4,-.8,-.95,0),part(.12,.3,2.4,.8,-.95,0),part(.08,.55,.08,-.8,-.7,.9),part(.08,.55,.08,.8,-.7,.9),part(.08,.55,.08,-.8,-.7,-.9),part(.08,.55,.08,.8,-.7,-.9)]),
-  heliGlass:keep(part(1.3,.8,1,0,.25,1.3)),
-  rotor:merged([part(5.8,.07,.34),part(.34,.07,5.8)]),
-  tailRotor:keep(part(.06,1.2,.2)),
+  // Planes come at the ship nose-on, so the wings are thick and the fuselage wide enough to read from the front.
+  plane:merged([part(1.3,1.1,5.6),part(.8,.7,1.4,0,.05,3.4),part(8.6,.34,1.8,0,-.05,.1),part(3.2,.22,1.1,0,.2,-2.4),part(.2,1.4,1.1,0,.85,-2.4,.3),part(.7,.7,1,-3.6,-.25,.1),part(.7,.7,1,3.6,-.25,.1)]),
+  cockpit:keep(part(.8,.55,1.6,0,.68,.9)),
+  heli:merged([part(2.2,1.8,4.4),part(.6,.6,4.4,0,.2,-3.9),part(.16,1.4,.9,0,.8,-5.7),part(.18,.8,.18,0,1.3,0),part(.16,.4,3.1,-1,-1.25,0),part(.16,.4,3.1,1,-1.25,0),part(.1,.7,.1,-1,-.9,1.2),part(.1,.7,.1,1,-.9,1.2),part(.1,.7,.1,-1,-.9,-1.2),part(.1,.7,.1,1,-.9,-1.2)]),
+  heliGlass:keep(part(1.7,1,1.3,0,.3,1.7)),
+  rotor:merged([part(7.6,.09,.44),part(.44,.09,7.6)]),
+  tailRotor:keep(part(.08,1.6,.26)),
  };
- const smokeGeometry=keep(new THREE.SphereGeometry(1,6,4)),sparkGeometry=keep(new THREE.SphereGeometry(1,6,4)),traceGeometry=keep(new THREE.BoxGeometry(.16,.16,1)),flashGeometry=keep(new THREE.SphereGeometry(.32,8,6));
+ const smokeGeometry=keep(new THREE.SphereGeometry(1,6,4)),sparkGeometry=keep(new THREE.SphereGeometry(1,6,4)),traceGeometry=keep(new THREE.BoxGeometry(.3,.3,1)),flashGeometry=keep(new THREE.SphereGeometry(.32,8,6));
  const tracers=new THREE.InstancedMesh(traceGeometry,mats.trace,12),sparks=new THREE.InstancedMesh(sparkGeometry,mats.spark,12),smoke=new THREE.InstancedMesh(smokeGeometry,mats.smoke,24),flash=new THREE.Mesh(flashGeometry,mats.flash);
  for(const m of [tracers,sparks,smoke,flash]){m.frustumCulled=false;m.userData.noReflect=true;group.add(m);}tracers.count=sparks.count=smoke.count=0;flash.visible=false;
  function build(kind){const g=new THREE.Group();g.userData.kind=kind;
   if(kind==='plane'){const body=new THREE.Mesh(frames.plane,mats.plane),glass=new THREE.Mesh(frames.cockpit,mats.glass);g.add(body,glass);g.userData.body=body;}
-  else{const body=new THREE.Mesh(frames.heli,mats.heli),glass=new THREE.Mesh(frames.heliGlass,mats.glass),rotor=new THREE.Mesh(frames.rotor,mats.dark),tail=new THREE.Mesh(frames.tailRotor,mats.dark);rotor.position.y=1.32;tail.position.set(.3,.75,-4.4);g.add(body,glass,rotor,tail);g.userData.body=body;g.userData.rotor=rotor;g.userData.tail=tail;}
+  else{const body=new THREE.Mesh(frames.heli,mats.heli),glass=new THREE.Mesh(frames.heliGlass,mats.glass),rotor=new THREE.Mesh(frames.rotor,mats.dark),tail=new THREE.Mesh(frames.tailRotor,mats.dark);rotor.position.y=1.72;tail.position.set(.38,.95,-5.7);g.add(body,glass,rotor,tail);g.userData.body=body;g.userData.rotor=rotor;g.userData.tail=tail;}
   for(const c of g.children)c.frustumCulled=false;group.add(g);return g;}
  const pool=new Map(),puffs=[],dummy=new THREE.Object3D(),a=new THREE.Vector3(),b=new THREE.Vector3(),look=new THREE.Vector3();let lastTime=-1,puffClock=0;
  const world=(x,z,h)=>navalWorldPoint(x,z,balance,h*NAVAL_AIR_LIFT);
@@ -39,7 +40,7 @@ export function createNavalAirView(scene,model,balance){
    for(const e of model.air||[]){live.add(e.id);let g=pool.get(e.id);if(!g){g=build(e.kind);pool.set(e.id,g);}
     const p=world(e.x,e.z,Math.max(0,e.h)),v=velocity(e);g.position.set(p.x,p.y,p.z);look.set(p.x+v.x,p.y,p.z+v.z);if(Math.hypot(v.x,v.z)>1e-4)g.lookAt(look);
     if(e.state==='down'){g.rotateX(-Math.min(1.1,(time-(e.downAt??time))*.9));g.rotateZ(e.roll||0);}
-    else g.rotateZ(e.kind==='plane'?Math.sin(time*2+e.id)*.14:Math.sin(time*1.3+e.id)*.05);
+    else g.rotateZ(e.kind==='plane'?Math.sin(time*1.6+e.id)*.32:Math.sin(time*1.3+e.id)*.06);
     if(g.userData.rotor){g.userData.rotor.rotation.y=time*(e.state==='down'?9:38);g.userData.tail.rotation.x=time*44;}
     g.userData.body.material=e.hit>0?mats.hit:mats[e.kind];g.visible=true;
     // Smoke: a puff every 80 ms while falling, and thin smoke once below half health.
@@ -50,7 +51,7 @@ export function createNavalAirView(scene,model,balance){
    smoke.count=n;smoke.instanceMatrix.needsUpdate=true;while(puffs.length&&time-puffs[0].t>1.6)puffs.shift();
    const vulcan=model.vulcan,list=vulcan?.tracers||[],player=model.playerShip,mount=navalWorldPoint(player.x,player.z,balance,(r.effects?.muzzleY??1.95)*(r.playerScale||1)+.4);
    let t=0,s=0;for(const tr of list){const to=world(tr.toX,tr.toZ,tr.h);a.set(mount.x,mount.y,mount.z);b.set(to.x,to.y,to.z);const len=a.distanceTo(b);if(len<.1)continue;
-    const u=Math.min(1,(time-tr.t)/.14);dummy.position.copy(a).lerp(b,.15+u*.6);dummy.lookAt(b);dummy.scale.set(1,1,Math.max(.6,len*.2));dummy.updateMatrix();tracers.setMatrixAt(t++,dummy.matrix);
+    const u=Math.min(1,(time-tr.t)/.14);dummy.position.copy(a).lerp(b,.15+u*.6);dummy.lookAt(b);dummy.scale.set(1,1,Math.max(1,len*.32));dummy.updateMatrix();tracers.setMatrixAt(t++,dummy.matrix);
     if(tr.hit&&u>.5){dummy.position.copy(b);dummy.scale.setScalar(.22+(1-u)*.3);dummy.rotation.set(0,0,0);dummy.updateMatrix();sparks.setMatrixAt(s++,dummy.matrix);}}
    tracers.count=t;sparks.count=s;tracers.instanceMatrix.needsUpdate=true;sparks.instanceMatrix.needsUpdate=true;
    flash.visible=Boolean(vulcan?.firing);if(flash.visible){flash.position.set(mount.x,mount.y,mount.z);flash.scale.setScalar(.8+Math.abs(Math.sin(time*57))*.7);}

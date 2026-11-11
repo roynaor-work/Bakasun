@@ -25,7 +25,7 @@ test('final-boar: game.js writes the firing flag only through setFiring/releaseF
   assert.match(src,/const FIRE_V21=AIMSTICK&&new URLSearchParams\(location\.search\)\.get\('boarFire'\)!=='v20'/);
   assert.match(src,/const sceneIgnores=e=>FIRE_V21\|\|AIMSTICK&&e\.pointerType==='touch'/);
   for(const ev of ['pointermove','pointerdown'])assert.match(src,new RegExp(`\\$\\('scene'\\)\\.addEventListener\\('${ev}',e=>\\{if\\(mode!=='battle'\\|\\|sceneIgnores\\(e\\)\\)return;`),ev);
-  assert.match(src,/\$\('scene'\)\.addEventListener\(ev,e=>\{if\(sceneIgnores\(e\)\|\|touchAim&&e\.pointerId!==touchAim\.id\)return;/,'a stray scene touch must not release the held fire button');
+  assert.match(src,/\$\('scene'\)\.addEventListener\(ev,e=>\{if\(FIRE_V21\|\|touchAim&&e\.pointerId!==touchAim\.id\)return;/,'a stray scene touch must not release the held fire button');
   assert.match(src,/firingInput=\(pointer\.down\|\|\(!FIRE_V21&&keys\.has\('KeyF'\)\)\)&&swapTimer<=0/);
   assert.match(src,/setFiring\(true,'button'\)/);
   assert.doesNotMatch(src,/aimZone\.addEventListener\([^)]*setFiring/,'the stick never fires');

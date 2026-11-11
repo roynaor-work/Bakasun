@@ -831,7 +831,7 @@ $('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||sceneIgnores(e
 $('scene').addEventListener('pointerdown',e=>{if(mode!=='battle'||sceneIgnores(e))return;e.preventDefault();sfx.init();
   if(e.pointerType==='touch'){if(touchAim)return;touchAim={id:e.pointerId,x:e.clientX,y:e.clientY};}else pointAbs(e);
   setFiring(true,e.pointerType==='touch'?'scene':'mouse');try{$('scene').setPointerCapture(e.pointerId);}catch{}});
-for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(sceneIgnores(e)||touchAim&&e.pointerId!==touchAim.id)return;setFiring(false,'none');touchAim=null;});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(FIRE_V21||touchAim&&e.pointerId!==touchAim.id)return;setFiring(false,'none');touchAim=null;});
 $('scene').addEventListener('wheel',e=>{if(mode!=='battle')return;const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);const i=owned.indexOf(current);switchWeapon(owned[(i+(e.deltaY>0?1:-1)+owned.length)%owned.length]);},{passive:true});
 window.addEventListener('blur',()=>{if(QA)return;releaseFire();touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
 document.addEventListener('visibilitychange',()=>{if(QA)return;visible=!document.hidden;if(!visible&&!ISLAND&&mode==='battle')setMode('paused');lastTime=performance.now();});
