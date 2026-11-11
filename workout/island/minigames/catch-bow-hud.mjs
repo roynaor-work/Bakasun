@@ -2,7 +2,7 @@
  * drag = move the sight (yaw from the horizontal movement, pitch from the vertical, dragging up raises the aim);
  * the sight sways a little while you hold, more the longer you hold; lift the finger = the net flies. A tap that is too short cancels.
  * Keyboard: arrows move the sight, space or enter releases the net. Pure helpers (dragToAim, holdSway) are exported for tests. */
-export const BOW_CONTROLS = Object.freeze({yawPerPx: .11, anglePerPx: .11, minHoldSeconds: .15, cancelPx: 4, swayAfter: 1.2, swayMax: 1.6, swayAngleK: .7});
+export const BOW_CONTROLS = Object.freeze({yawPerPx: .11, anglePerPx: .11, finePerPx: .045, fineBelowPxPerSec: 60, minHoldSeconds: .15, cancelPx: 4, swayAfter: 1.8, swayMax: .9, swayAngleK: .7});
 export const STRINGS = Object.freeze({
   'catch.bow.hint': 'נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק',
   'catch.bow.distance': 'מרחק {m} מ׳', 'catch.bow.drawn': 'מתוח', 'catch.bow.ready': 'מוכן',
@@ -21,6 +21,12 @@ export function autoAngle(engine, targetY = 1.0) {
 }
 /** Finger movement (px) to the aim: yaw grows to the right, the angle grows when the finger moves up. */
 export function dragToAim(dx, dy, start, C = BOW_CONTROLS) { return {yaw: start.yaw + dx * C.yawPerPx, angle: start.angle - dy * C.anglePerPx}; }
+/** Fine aiming: a slow finger (under fineBelowPxPerSec) moves the sight at finePerPx instead of yawPerPx, so the last centimetres are precise.
+ * Integrates the movement step by step: returns the new aim from the previous aim and the finger step. */
+export function stepAim(prev, ddx, ddy, dtSeconds, C = BOW_CONTROLS) {
+  const speed = Math.hypot(ddx, ddy) / Math.max(1e-3, dtSeconds), k = speed < C.fineBelowPxPerSec ? C.finePerPx / C.yawPerPx : 1;
+  return {yaw: prev.yaw + ddx * C.yawPerPx * k, angle: prev.angle - ddy * C.anglePerPx * k};
+}
 /** Sway of the sight (degrees) after holding the string for `held` seconds: nothing for the first swayAfter seconds, then it grows to swayMax over three seconds. */
 export function holdSway(held, t, stage = 1, C = BOW_CONTROLS) {
   const k = clamp((held - C.swayAfter) / 3, 0, 1) * (.6 + stage * .04);
@@ -72,7 +78,10 @@ export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, 
   stageEl.addEventListener('pointermove', ev => {
     if (!drag || ev.pointerId !== drag.id) return;
     const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; drag.moved = Math.max(drag.moved, Math.hypot(dx, dy));
-    const e = engine(); if (!e) return; const a = dragToAim(dx, dy, drag, C); drag.base = a; e.setAim({yaw: a.yaw - sway.yaw, angle: a.angle - sway.angle});
+    const e = engine(); if (!e) return;
+    const now = performance.now(), ddx = ev.clientX - (drag.lx ?? drag.x), ddy = ev.clientY - (drag.ly ?? drag.y), dts = (now - (drag.lt ?? now - 16)) / 1000;
+    drag.lx = ev.clientX; drag.ly = ev.clientY; drag.lt = now;
+    const a = stepAim(drag.base || drag, ddx, ddy, dts, C); drag.base = a; e.setAim({yaw: a.yaw - sway.yaw, angle: a.angle - sway.angle});
   }, {signal: abort.signal});
   const end = ev => {
     if (!drag || ev.pointerId !== drag.id) return;

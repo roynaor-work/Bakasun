@@ -117,7 +117,7 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     const c = engine.criminalAt(engine.clock);
     // the sight: where the wind-free arc passes the thief's distance (an archer's sight pin)
     sightLocal = null;
-    if (show) { const full = engine.trajectory(engine.aimNow().angle, engine.aimNow().power, engine.aim.tool, {withWind: false, yaw: engine.aimNow().yaw, stopAtObstacle: false}); const at = full.path.find(p => p.x >= c.x) || full.path[full.path.length - 1]; sightLocal = {x: at.x, y: Math.max(.05, at.y), z: at.z || 0}; w(sightLocal.x, sightLocal.z, tmp); sight.position.set(tmp.x, sightLocal.y, tmp.z); sight.scale.setScalar(.12 + Math.abs(c.x) * .03); sight.visible = false; } // the HUD's .catch-bow-sight is the one sight; the sprite only keeps the point
+    if (show) { const full = engine.trajectory(engine.aimNow().angle, engine.aimNow().power, engine.aim.tool, {withWind: (engine.aimHelp || 0) >= 1, t0: engine.clock + engine.balance.physics.throwSeconds, yaw: engine.aimNow().yaw, stopAtObstacle: false}); /* with the wind on the helped stages: the pin says where the net really passes */ const at = full.path.find(p => p.x >= c.x) || full.path[full.path.length - 1]; sightLocal = {x: at.x, y: Math.max(.05, at.y), z: at.z || 0}; w(sightLocal.x, sightLocal.z, tmp); sight.position.set(tmp.x, sightLocal.y, tmp.z); sight.scale.setScalar(.12 + Math.abs(c.x) * .03); sight.visible = false; } // the HUD's .catch-bow-sight is the one sight; the sprite only keeps the point
     else sight.visible = false;
     const showArc = show && (pr.help >= 1 || pr.fraction < 1);
     dots.forEach((d, i) => {
