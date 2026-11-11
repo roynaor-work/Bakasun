@@ -203,7 +203,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       const g0 = spec.gap ?? C.startGap, prox = clamp((g0 - Math.abs(s.gap)) / Math.max(1, g0 - C.catchGap), 0, 1);
       const closeness = !s.outcome ? 0 : s.outcome === 'caught' ? 1 : clamp(Math.max(s.damage * .9, prox * .6), 0, 1);
       return {closeness, damage: s.damage, caught: s.outcome === 'caught', byTyres: gun.state.stopped, flats: gun.state.flatCount, shots: gun.state.shots, gap: s.gap, hits: s.hits, crimHits: s.crim.hits, how: s.outcome, seconds: s.t, scrape: s.scrape,
-        frame: {s0: s.crim.s, d0: clamp(s.crim.d, -3, 3)},
+        frame: {s0: s.crim.s + 6, d0: clamp(s.crim.d, -3, 3)}, // the officer steps out just ahead of the stopped getaway car
         mods: {dist: lerp(level.dist * C.farFactor, level.dist * C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
     },
   };

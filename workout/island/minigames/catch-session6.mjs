@@ -182,7 +182,7 @@ export function runCatchSession6(ctx) {
   }
   function endChase() {
     if (mode !== 'chase') return;
-    const res = chase.result(); mode = 'bail'; chase.setBoost(false); chase.setSteer(0); keys.clear(); boostHeld = brakeHeld = false; steerDrag = null; steerRing.hidden = true; reticle.hidden = true; bend.hidden = true;
+    const res = chase.result(); mode = 'bail'; chase.setBoost(false); chase.setSteer(0); keys.clear(); boostHeld = brakeHeld = false; steerDrag = null; steerRing.hidden = true; reticle.hidden = true; bend.hidden = true; count.hidden = true;
     audio?.engineStop?.();
     const key = res.byTyres ? 'catch.chase.stopped' : res.caught ? 'catch.chase.caught' : res.closeness >= .66 ? 'catch.chase.close' : res.closeness >= .33 ? 'catch.chase.mid' : 'catch.chase.far';
     say(key, res.caught || res.closeness >= .66 ? 'good' : res.closeness >= .33 ? 'warn' : 'bad', {gap: Math.round(res.gap), throws: (balance.levels[stage - 1].throws || balance.throws) + (res.mods.extraThrows || 0)});
@@ -201,7 +201,7 @@ export function runCatchSession6(ctx) {
   async function installBow() {
     try {
       const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-8');
-      bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio});
+      bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio, stage: () => view?.bow, project: (x, y, z) => view.project(x, y, z), level: stage});
       bowHud.show?.(true);
     } catch { bowHud = null; }
   }
