@@ -1,30 +1,61 @@
 import * as THREE from '../vendor/three.module.js';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-8';
-/** Placeholder aircraft: simple solids (plane = fuselage + wings + tail, helicopter = body + tail boom + spinning rotor) and Vulcan tracers.
- * A Codex model/animation set replaces `build` later; the model contract (`model.air`, `model.vulcan`) stays. */
+import {NAVAL_AIR_LIFT} from './naval-air.mjs';
+/** 11/11/2026: attack aircraft at hull scale (the v20 boxes were a tenth of the hull and sat at mast height), one merged
+ * geometry per airframe plus spinning rotors, a hit flash, a smoke trail and a nose-over fall when shot down; Vulcan tracers
+ * as bright instanced streaks from the ship's mount with sparks where they strike. A Codex model set can replace `build`
+ * later; the model contract (`model.air`, `model.vulcan`) stays. Draw calls: plane 2, helicopter 3, plus 4 shared. */
 export function createNavalAirView(scene,model,balance){
  const r=balance.render,group=new THREE.Group();scene.add(group);
- const mats={plane:new THREE.MeshStandardMaterial({color:'#7d8b94',roughness:.55,metalness:.3}),heli:new THREE.MeshStandardMaterial({color:'#4d6b57',roughness:.6,metalness:.2}),dark:new THREE.MeshStandardMaterial({color:'#20262b',roughness:.8}),hit:new THREE.MeshBasicMaterial({color:'#ffd9a0'}),trace:new THREE.MeshBasicMaterial({color:'#ffe59a',transparent:true,opacity:.95,depthWrite:false,toneMapped:false})};
- const boxes=new Set(),geos=[];const box=(w,h,d,m,x=0,y=0,z=0,parent)=>{const g=new THREE.BoxGeometry(w,h,d);geos.push(g);const me=new THREE.Mesh(g,m);me.position.set(x,y,z);parent.add(me);return me;};
- function build(kind){const g=new THREE.Group(),m=mats[kind],s=r.worldScale*(kind==='heli'?1.3:1.1);
-  if(kind==='plane'){box(.5,.4,3.2,m,0,0,0,g);box(4.2,.12,.9,m,0,0,.2,g);box(1.4,.1,.5,m,0,.1,1.5,g);box(.1,.7,.5,m,0,.35,1.5,g);}
-  else{box(1.2,1,2.2,m,0,0,0,g);box(.3,.3,2.2,m,0,.1,2.1,g);const rotor=box(4.4,.06,.3,mats.dark,0,.8,0,g);g.userData.rotor=rotor;box(.1,.7,.1,mats.dark,0,.5,0,g);}
-  g.scale.setScalar(s*.9);g.userData.kind=kind;group.add(g);return g;}
- const pool=new Map(),tracers=[];for(let i=0;i<10;i++){const g=new THREE.BoxGeometry(.06,.06,1);geos.push(g);const m=new THREE.Mesh(g,mats.trace);m.visible=false;m.frustumCulled=false;group.add(m);tracers.push(m);}
- const a=new THREE.Vector3(),b=new THREE.Vector3();
+ const mats={plane:new THREE.MeshStandardMaterial({color:'#8d9aa3',roughness:.5,metalness:.35}),heli:new THREE.MeshStandardMaterial({color:'#5a7a63',roughness:.6,metalness:.2}),glass:new THREE.MeshStandardMaterial({color:'#8fd6ff',roughness:.2,metalness:.6}),dark:new THREE.MeshStandardMaterial({color:'#20262b',roughness:.8}),
+  hit:new THREE.MeshBasicMaterial({color:'#fff1c2',toneMapped:false}),trace:new THREE.MeshBasicMaterial({color:'#ffe27a',transparent:true,opacity:.95,depthWrite:false,toneMapped:false,blending:THREE.AdditiveBlending}),
+  spark:new THREE.MeshBasicMaterial({color:'#fff5d6',transparent:true,opacity:.9,depthWrite:false,toneMapped:false}),smoke:new THREE.MeshBasicMaterial({color:'#3c3f44',transparent:true,opacity:.5,depthWrite:false}),flash:new THREE.MeshBasicMaterial({color:'#fff0b0',transparent:true,opacity:.85,depthWrite:false,toneMapped:false,blending:THREE.AdditiveBlending})};
+ const geos=[],keep=g=>{geos.push(g);return g;};
+ const part=(w,h,d,x=0,y=0,z=0,rx=0,ry=0,rz=0)=>{const g=new THREE.BoxGeometry(w,h,d);g.rotateX(rx);g.rotateY(ry);g.rotateZ(rz);g.translate(x,y,z);return g;};
+ const merged=list=>{const g=mergeGeometries(list,false);for(const l of list)l.dispose();return keep(g);};
+ // Nose along +z (Object3D.lookAt points +z at the target). Sizes in world units: the player hull is about 5.7 long.
+ const frames={
+  plane:merged([part(.9,.8,4.4),part(.6,.5,1.2,0,.05,2.6),part(6.2,.14,1.4,0,-.05,.1,0,0,0),part(2.4,.1,.9,0,.15,-1.8),part(.12,1,.9,0,.6,-1.8,.3),part(.5,.5,.7,-2.8,-.2,.1),part(.5,.5,.7,2.8,-.2,.1)]),
+  cockpit:keep(part(.6,.45,1.3,0,.5,.7)),
+  heli:merged([part(1.7,1.4,3.4),part(.45,.45,3.4,0,.15,-3),part(.12,1.1,.7,0,.6,-4.4),part(.14,.6,.14,0,1,0),part(.12,.3,2.4,-.8,-.95,0),part(.12,.3,2.4,.8,-.95,0),part(.08,.55,.08,-.8,-.7,.9),part(.08,.55,.08,.8,-.7,.9),part(.08,.55,.08,-.8,-.7,-.9),part(.08,.55,.08,.8,-.7,-.9)]),
+  heliGlass:keep(part(1.3,.8,1,0,.25,1.3)),
+  rotor:merged([part(5.8,.07,.34),part(.34,.07,5.8)]),
+  tailRotor:keep(part(.06,1.2,.2)),
+ };
+ const smokeGeometry=keep(new THREE.SphereGeometry(1,6,4)),sparkGeometry=keep(new THREE.SphereGeometry(1,6,4)),traceGeometry=keep(new THREE.BoxGeometry(.16,.16,1)),flashGeometry=keep(new THREE.SphereGeometry(.32,8,6));
+ const tracers=new THREE.InstancedMesh(traceGeometry,mats.trace,12),sparks=new THREE.InstancedMesh(sparkGeometry,mats.spark,12),smoke=new THREE.InstancedMesh(smokeGeometry,mats.smoke,24),flash=new THREE.Mesh(flashGeometry,mats.flash);
+ for(const m of [tracers,sparks,smoke,flash]){m.frustumCulled=false;m.userData.noReflect=true;group.add(m);}tracers.count=sparks.count=smoke.count=0;flash.visible=false;
+ function build(kind){const g=new THREE.Group();g.userData.kind=kind;
+  if(kind==='plane'){const body=new THREE.Mesh(frames.plane,mats.plane),glass=new THREE.Mesh(frames.cockpit,mats.glass);g.add(body,glass);g.userData.body=body;}
+  else{const body=new THREE.Mesh(frames.heli,mats.heli),glass=new THREE.Mesh(frames.heliGlass,mats.glass),rotor=new THREE.Mesh(frames.rotor,mats.dark),tail=new THREE.Mesh(frames.tailRotor,mats.dark);rotor.position.y=1.32;tail.position.set(.3,.75,-4.4);g.add(body,glass,rotor,tail);g.userData.body=body;g.userData.rotor=rotor;g.userData.tail=tail;}
+  for(const c of g.children)c.frustumCulled=false;group.add(g);return g;}
+ const pool=new Map(),puffs=[],dummy=new THREE.Object3D(),a=new THREE.Vector3(),b=new THREE.Vector3(),look=new THREE.Vector3();let lastTime=-1,puffClock=0;
+ const world=(x,z,h)=>navalWorldPoint(x,z,balance,h*NAVAL_AIR_LIFT);
+ const velocity=e=>({x:(e.vz||0)*r.enemySpacing/balance.combat.laneSpacing,z:-(e.vx||0)*r.worldScale});
  return {
   update(){
-   const live=new Set();
+   const time=model.time||0,dt=lastTime<0?0:Math.max(0,Math.min(.1,time-lastTime));lastTime=time;const live=new Set();
    for(const e of model.air||[]){live.add(e.id);let g=pool.get(e.id);if(!g){g=build(e.kind);pool.set(e.id,g);}
-    const p=navalWorldPoint(e.x,e.z,balance,e.h*r.worldScale*.35);g.position.set(p.x,p.y,p.z);
-    g.rotation.y=Math.atan2(-e.vx,-(-e.vz*.0))+Math.PI;g.rotation.z=e.kind==='plane'?Math.sin(model.time*2+e.id)*.12:0;if(g.userData.rotor)g.userData.rotor.rotation.y=model.time*38;
-    g.visible=true;}
+    const p=world(e.x,e.z,Math.max(0,e.h)),v=velocity(e);g.position.set(p.x,p.y,p.z);look.set(p.x+v.x,p.y,p.z+v.z);if(Math.hypot(v.x,v.z)>1e-4)g.lookAt(look);
+    if(e.state==='down'){g.rotateX(-Math.min(1.1,(time-(e.downAt??time))*.9));g.rotateZ(e.roll||0);}
+    else g.rotateZ(e.kind==='plane'?Math.sin(time*2+e.id)*.14:Math.sin(time*1.3+e.id)*.05);
+    if(g.userData.rotor){g.userData.rotor.rotation.y=time*(e.state==='down'?9:38);g.userData.tail.rotation.x=time*44;}
+    g.userData.body.material=e.hit>0?mats.hit:mats[e.kind];g.visible=true;
+    // Smoke: a puff every 80 ms while falling, and thin smoke once below half health.
+    if(e.state==='down'||e.hp<e.maxHp*.5){puffClock+=dt;if(puffClock>=.08||e.state==='down'&&e.hit>.25){puffClock=0;puffs.push({x:p.x,y:p.y+.3,z:p.z,t:time,big:e.state==='down'});if(puffs.length>24)puffs.shift();}}
+   }
    for(const [id,g] of pool)if(!live.has(id)){group.remove(g);pool.delete(id);}
-   const v=model.vulcan,list=v?.tracers||[];
-   for(let i=0;i<tracers.length;i++){const t=list[i],m=tracers[i];if(!t){m.visible=false;continue;}
-    const f=navalWorldPoint(t.fromX,t.fromZ,balance,r.muzzleY??2),to=navalWorldPoint(t.toX,t.toZ,balance,t.h*r.worldScale*.35);a.set(f.x,f.y,f.z);b.set(to.x,to.y,to.z);
-    m.position.copy(a).lerp(b,.5);m.scale.z=a.distanceTo(b);m.lookAt(b);m.visible=true;}
+   let n=0;for(const puff of puffs){const age=time-puff.t;if(age>1.6)continue;dummy.position.set(puff.x,puff.y+age*.9,puff.z);dummy.scale.setScalar((puff.big?.45:.25)+age*.6);dummy.rotation.set(0,0,0);dummy.updateMatrix();smoke.setMatrixAt(n++,dummy.matrix);}
+   smoke.count=n;smoke.instanceMatrix.needsUpdate=true;while(puffs.length&&time-puffs[0].t>1.6)puffs.shift();
+   const vulcan=model.vulcan,list=vulcan?.tracers||[],player=model.playerShip,mount=navalWorldPoint(player.x,player.z,balance,(r.effects?.muzzleY??1.95)*(r.playerScale||1)+.4);
+   let t=0,s=0;for(const tr of list){const to=world(tr.toX,tr.toZ,tr.h);a.set(mount.x,mount.y,mount.z);b.set(to.x,to.y,to.z);const len=a.distanceTo(b);if(len<.1)continue;
+    const u=Math.min(1,(time-tr.t)/.14);dummy.position.copy(a).lerp(b,.15+u*.6);dummy.lookAt(b);dummy.scale.set(1,1,Math.max(.6,len*.2));dummy.updateMatrix();tracers.setMatrixAt(t++,dummy.matrix);
+    if(tr.hit&&u>.5){dummy.position.copy(b);dummy.scale.setScalar(.22+(1-u)*.3);dummy.rotation.set(0,0,0);dummy.updateMatrix();sparks.setMatrixAt(s++,dummy.matrix);}}
+   tracers.count=t;sparks.count=s;tracers.instanceMatrix.needsUpdate=true;sparks.instanceMatrix.needsUpdate=true;
+   flash.visible=Boolean(vulcan?.firing);if(flash.visible){flash.position.set(mount.x,mount.y,mount.z);flash.scale.setScalar(.8+Math.abs(Math.sin(time*57))*.7);}
   },
-  dispose(){scene.remove(group);for(const g of geos)g.dispose();for(const m of Object.values(mats))m.dispose();pool.clear();}
+  metrics(){return {aircraft:pool.size,tracers:tracers.count,sparks:sparks.count,smoke:smoke.count,flash:flash.visible};},
+  dispose(){scene.remove(group);for(const g of geos)g.dispose();for(const m of Object.values(mats))m.dispose();tracers.dispose();sparks.dispose();smoke.dispose();pool.clear();}
  };
 }

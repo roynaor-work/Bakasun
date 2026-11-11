@@ -136,3 +136,21 @@
 #fire-btn.held{transform:scale(.94);background:radial-gradient(circle at 38% 28%,#ffc36e,#d0651f 72%)}
 .aimstick .weapons{bottom:140px}
 .aimstick .abilities{bottom:140px}
+/* 11/11/2026 (Roy): the ability buttons leave the stick zone. Landscape: one compact row on the right (weapons + abilities) above the fire button; the stick zone keeps the left 36%. `?boarFire=v20` keeps the v20 layout. */
+.aimstick.firev21 #aim-zone{width:36%;-webkit-touch-callout:none}
+.aimstick.firev21 #fire-btn{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.aimstick.firev21 .ammo-panel{pointer-events:none}
+.aimstick.firev21 .weapons{right:18px;bottom:140px;gap:6px}
+.aimstick.firev21 .wslot{width:62px;height:60px;border-radius:10px}
+.aimstick.firev21 .wslot strong,.aimstick.firev21 .wslot kbd,.aimstick.firev21 .ability strong,.aimstick.firev21 .ability kbd{display:none}
+.aimstick.firev21 .wslot b{font-size:20px;line-height:22px}
+.aimstick.firev21 .abilities{left:auto;right:136px;bottom:18px;flex-direction:row;gap:6px}
+.aimstick.firev21 .ammo-panel{left:36%;transform:none;width:196px;bottom:80px}
+.aimstick.firev21 .ability{width:62px;height:60px;border-radius:10px}
+.aimstick.firev21 .ability-icon{font-size:22px;line-height:24px}
+@media(max-width:700px){
+  .aimstick.firev21 #aim-zone{width:48%}
+  .aimstick.firev21 .weapons{right:10px;bottom:140px;flex-direction:column;gap:7px}
+  .aimstick.firev21 .wslot{height:56px}
+  .aimstick.firev21 .abilities{left:auto;right:80px;bottom:140px;flex-direction:column;gap:7px}
+}

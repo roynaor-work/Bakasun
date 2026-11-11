@@ -1,4 +1,6 @@
-import {navalLostHealth} from './naval-marks.mjs?v=island-v2-20261107-8';
+import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-8';
+import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs';
+import {NAVAL_AIR_LIFT} from './naval-air.mjs';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -59,6 +61,26 @@ function feedbackIcon(p,kind,q,u){
   p.restore();
 }
 
+/** 11/11/2026: an arrow on the screen edge toward something that left the picture (landing mark, aircraft). */
+function edgeArrow(p,hint,color,size=11){p.save();p.translate(hint.x,hint.y);p.rotate(hint.angle);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=2;p.lineJoin='round';p.beginPath();p.moveTo(size,0);p.lineTo(-size*.6,-size*.7);p.lineTo(-size*.25,0);p.lineTo(-size*.6,size*.7);p.closePath();p.fill();p.stroke();p.restore();}
+function planeMark(p,x,y,color='#ffd2a6'){p.save();p.translate(x,y);p.fillStyle=color;p.strokeStyle='#103847';p.lineWidth=1.2;p.beginPath();p.moveTo(0,-9);p.lineTo(2.2,-2);p.lineTo(11,1);p.lineTo(11,3.5);p.lineTo(2.2,2.2);p.lineTo(1.4,7);p.lineTo(4.5,9);p.lineTo(4.5,10.5);p.lineTo(-4.5,10.5);p.lineTo(-4.5,9);p.lineTo(-1.4,7);p.lineTo(-2.2,2.2);p.lineTo(-11,3.5);p.lineTo(-11,1);p.lineTo(-2.2,-2);p.closePath();p.fill();p.stroke();p.restore();}
+/** Vulcan panel (heat, kills) while aircraft are about, a ring on the gun's target, edge arrows for aircraft out of the picture. */
+export function drawNavalAirHud(p,m,balance,project,width,height){
+  const v=m.vulcan,air=m.air||[];if(!v||!air.length&&!(v.heat>0))return null;
+  const shown={aircraft:air.length,target:null,arrows:0,firing:Boolean(v.firing)};
+  for(const a of air){const q=project(a.x,a.z,Math.max(0,a.h)*NAVAL_AIR_LIFT);const hint=navalEdgeHint(q,width,height,30);
+    if(hint){edgeArrow(p,hint,'#ffd2a6',10);shown.arrows++;continue;}
+    if(a.state==='down')continue;
+    const chosen=a.id===v.target;p.save();p.strokeStyle=chosen?(v.firing?'#ffe27a':'#ffd2a6'):'#ffd2a680';p.lineWidth=chosen?2:1.2;p.beginPath();p.arc(q.x,q.y,chosen?16:11,0,TAU);p.stroke();
+    if(chosen){for(const [sx,sy]of [[-1,0],[1,0],[0,-1],[0,1]]){p.beginPath();p.moveTo(q.x+sx*19,q.y+sy*19);p.lineTo(q.x+sx*26,q.y+sy*26);p.stroke();}shown.target={id:a.id,x:q.x,y:q.y};}
+    bar(p,q.x-14,q.y+20,28,4,a.hp,a.maxHp,'#ffd2a6');p.restore();}
+  // Panel: a plane icon, the Vulcan heat bar (turns orange when it must cool) and the number shot down.
+  const x=width-278,y=16,w=104;glass(p,x,y,w,50,12);planeMark(p,x+18,y+25);
+  bar(p,x+36,y+14,58,7,v.heat,1,v.overheated?'#ff9a5c':v.firing?'#ffe27a':'#8edcc7');
+  p.fillStyle='#f3e2b3';p.font='bold 13px sans-serif';p.direction='ltr';p.textAlign='left';p.fillText('×'+String(v.kills||0),x+36,y+42);
+  if(v.firing){p.fillStyle='#ffe27a';p.beginPath();p.arc(x+86,y+38,4+Math.abs(Math.sin(m.time*40))*2,0,TAU);p.fill();}
+  return shown;
+}
 /** Mission, hulls and incoming fire read as icons, bars and rings: no explanatory lines in battle. */
 export function drawNavalHud(p,m,{config,balance,art,t},project){
   const width=config.width,height=config.height,index=m.aiming?m.lockedTargetIndex:m.selectedTargetIndex,selected=m.enemies.find(e=>e.index===index&&e.active&&e.hp>0)||m.enemies.find(e=>e.active&&e.hp>0);
@@ -97,6 +119,9 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   // Wind: a windsock, an arrow along the wind's push and one to three wind lines.
   const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x),strength=Math.hypot(m.wind.x,m.wind.z),bars=strength>70?3:strength>45?2:1;
   if(!missionRect||missionRect.x>314){windMark(p,240,40,angle,bars);shown.icons.push('wind');shown.windLines=bars;}p.restore();
+  // 11/11/2026 spin aim: when the landing mark leaves the picture (the turret turned faster than the camera), an arrow on the edge says where it is.
+  if(m.aiming&&m.prediction&&!m.prediction.guided&&navalAimSpin()){const pr=m.prediction,at=pr.contact||pr.landing,q=project(at.x,at.z,0),hint=navalEdgeHint(q,width,height,28);if(hint){edgeArrow(p,hint,navalArcColor(navalMarkKind(pr),balance.aimLook||{}),13);shown.landingArrow={x:Math.round(hint.x),y:Math.round(hint.y),behind:hint.behind};}}
+  if(m.vulcan)shown.air=drawNavalAirHud(p,m,balance,project,width,height);
   return shown;
 }
 

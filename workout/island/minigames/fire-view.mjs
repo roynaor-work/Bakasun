@@ -202,6 +202,7 @@ export function createFireScene(ctx,model,adapters={}) {
     async loadHydrant(){const spec=balance.hydrant;if(!await models.load(spec)||disposed)return false;const visuals=[];for(const p of city.hydrants){const visual=models.create(spec,{height:spec.height});if(!visual)continue;visual.position.fromArray(p);scene.add(visual);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls){visual.removeFromParent();continue;}visuals.push(visual);}hydrantVisual=visuals[0];if(visuals.length===city.hydrants.length)hydrantBase.visible=false;return Boolean(hydrantVisual);},
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),height:balance.hydrant.height,ringRadius:balance.hydrant.radius,connected:model.atHydrant,art:models.metrics()};},
     setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}visual.root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});truckVisual=visual;truckBase.visible=cannon.visible=false;return true;},
+    truckRoot(){return truckVisual?.root||truckBase;},ladderRoot(){return ladder;},
     truckMetrics(){return {loaded:Boolean(truckVisual),cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z},hydrantHose:model.atHydrant,hoseEnd:{x:model.truck.x,z:model.truck.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};
 }
 
@@ -242,7 +243,8 @@ export function createFireView(ctx,model,createRenderer=options=>new T.WebGLRend
     if(gov.slow>=60&&gov.gap>=150&&gov.level>0){gov.level--;gov.slow=0;gov.gap=0;gov.changes++;world.setQuality(gov.level);if(gov.level===0&&!low)view.degrade(false);}
   }
   const pointer=new T.Vector2(),ray=new T.Raycaster(),ground=new T.Plane(new T.Vector3(0,1,0),0),hit=new T.Vector3(),point=new T.Vector3(),screen={x:0,y:0};
-  const view={get mode(){return failed?'canvas':'three';},
+  const devMode=new URLSearchParams(globalThis.location?.search||'').get('dev')==='1';
+  const view={get mode(){return failed?'canvas':'three';},get world(){return devMode&&!disposed?world:null;},
     metrics(){return {...world.metrics(),low,avatarLoaded:world.cityMetrics().firefighterLoaded,avatarPosition:model.firefighter.visible?{x:model.firefighter.x,y:0,z:model.firefighter.z}:null,ladder:{stowed:model.ladder.extension===0,extension:model.ladder.extension,sway:model.ladder.sway,mode:model.ladder.mode},city:world.cityMetrics(),fireV7:{enabled:fireV7Enabled(globalThis.location?.search||'',globalThis.__fireV7),level:gov.level,pinned:gov.pinned,governorSteps:gov.changes,...(world.v7Metrics()||{}),effects:world.effectsMetrics()},rendererTriangles:renderer.info?.render.triangles||0,rendererDrawCalls:renderer.info?.render.calls||0,truck:world.truckMetrics(),hydrant:world.hydrantMetrics()};},
     capturePreview({hero=false}={}){if(disposed)return null;world.animate();const camera=hero?world.camera.clone():world.camera;if(hero){camera.position.x+=3;camera.position.z-=1;camera.zoom*=1.85;camera.updateProjectionMatrix();camera.updateMatrixWorld();}renderer.render(world.scene,camera);return surface.toDataURL('image/png');},
     degrade(fallback=false){if(disposed)return;if(fallback){failed=true;dispose();}else if(!low){low=true;renderer.setSize(r.width*r.resolutionScale,r.height*r.resolutionScale,false);}},dispose,

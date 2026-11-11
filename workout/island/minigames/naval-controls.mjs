@@ -1,5 +1,5 @@
 import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-8';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample} from './naval-aim-flag.mjs';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs';
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-8';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
@@ -91,7 +91,9 @@ export function createNavalInput(ctx,getModel,getView){
  const settle=(g,x,y,t)=>{const px=g.lastX??g.x,py=g.lastY??g.y,ms=Math.max(1,(t??performance.now())-(g.lastT??t??0));g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));
   if(!g.engaged&&g.moved>=startPixels){g.engaged=true;g.aim=navalAimStep(g.aim,g.dx,g.dy,ms,g.track,reachConfig);}
   else if(g.engaged)g.aim=navalAimStep(g.aim,x-px,y-py,ms,g.track,reachConfig);
-  if(g.engaged&&navalAimWide())g.aim={...g.aim,yaw:g.start.yaw+navalWideYaw(g.dx,balance.aimControls?{aimControls:balance.aimControls}:{})};
+  // 11/11/2026 spin mode: fine position part plus the held turn integrated per frame in sample(); v20 wide gain and older behind the flag.
+  if(g.engaged&&navalAimSpin())g.aim={...g.aim,yaw:g.start.yaw+navalSpinFine(g.dx,balance)+(g.spin||0)};
+  else if(g.engaged&&navalAimWide())g.aim={...g.aim,yaw:g.start.yaw+navalWideYaw(g.dx,balance.aimControls?{aimControls:balance.aimControls}:{})};
   g.lastX=x;g.lastY=y;g.lastT=t??performance.now();if(g.aim)(g.hist||(g.hist=[])).push({t:g.lastT,yaw:g.aim.yaw,elevation:g.aim.elevation});if(g.hist?.length>40)g.hist.shift();};
  const moveTo=(g,e)=>{const list=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(list?.length)for(const p of list)settle(g,p.clientX,p.clientY,p.timeStamp);else settle(g,e.clientX,e.clientY,e.timeStamp);};
  const state=g=>{const m=getModel(),reach=g.aim?.elevation??g.start.elevation,shot=navalReachAim(reach,balance,m?.ammoIndex),held=Math.max(0,(m?.time??0)-g.start.time),R=navalReachRange(balance);return {yaw:g.aim?.yaw??g.start.yaw,elevation:shot.elevation,power:shot.power,reach:(reach-R.min)/(R.max-R.min),held};};
@@ -117,7 +119,10 @@ export function createNavalInput(ctx,getModel,getView){
  window.addEventListener('pointerdown',()=>{keyboardClick=false;},options);
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
  return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();controls.classList?.remove('left-handed');},sample(input){
-   const m=getModel(),g=gesture||keyboard,event=queue.shift(),live=g?state(g):null;
+   const m=getModel(),g=gesture||keyboard,event=queue.shift();
+   // Spin mode: while the thumb is held out past the dead band the turret keeps turning, one step per model frame (model time, so pauses add nothing).
+   if(gesture&&gesture.engaged&&navalAimSpin()&&m){const now=m.time??0;if(Number.isFinite(gesture.spinT))gesture.spin=navalSpinStep(gesture.spin,gesture.dx,now-gesture.spinT,balance);gesture.spinT=now;gesture.aim={...gesture.aim,yaw:gesture.start.yaw+navalSpinFine(gesture.dx,balance)+(gesture.spin||0)};(gesture.hist||(gesture.hist=[])).push({t:performance.now(),yaw:gesture.aim.yaw,elevation:gesture.aim.elevation});if(gesture.hist.length>40)gesture.hist.shift();}
+   const live=g?state(g):null;
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    out.aimSide=side;pendingSelection=null;

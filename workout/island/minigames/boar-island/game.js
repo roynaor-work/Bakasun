@@ -18,6 +18,12 @@ let lastStandUsed=false,lowWarned=false;
 // 07/11/2026 (Roy): on touch the aim is the left stick and a screen touch never fires; only the big fire button shoots. `?boar=v1` restores touch-to-aim-and-fire.
 const AIMSTICK=!LEGACY&&(TOUCH||new URLSearchParams(location.search).get('touch')==='1');
 let aimStick=null,firePointer=null,aimZone=null,fireBtn=null,aimShots=0;
+// 11/11/2026 (Roy, after v20 on the phone): on touch the fire button is the only thing that fires. The scene ignores every pointer type,
+// F does not fire, a stray touch on the scene cannot release the held button, and the ability buttons leave the stick zone. `?boarFire=v20` restores v20.
+const FIRE_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarFire')!=='v20';
+let fireSource='none';const shotsBy={button:0,scene:0,keyboard:0,mouse:0,auto:0,qa:0,unknown:0},abilityBy={rocket:0,frost:0,fury:0};let stickNoButton=0,abilityFromLeft=0;
+function setFiring(on,source){pointer.down=on;fireSource=on?source:'none';}
+function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
 let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
 const SAVE_KEY='boar-island-v1';
@@ -88,7 +94,7 @@ function setMode(next){
   mode=next;$('game').dataset.mode=next;for(const id of ['menu','shop','pause-screen','gameover','help-screen'])$(id).hidden=true;
   const map={menu:'menu',shop:'shop',paused:'pause-screen',dead:'gameover',help:'help-screen'};if(map[next])$(map[next]).hidden=false;
   $('battle-ui').hidden=!['battle','paused'].includes(next);$('pause').hidden=next!=='battle';$('crosshair').hidden=next!=='battle';$('boss-hud').hidden=next!=='battle'||!boss;
-  pointer.down=false;touchAim=null;firePointer=null;aimStick=null;keys.clear();if(aimZone){aimZone.hidden=fireBtn.hidden=next!=='battle';fireBtn.classList.remove('held');}updateHud();
+  releaseFire();touchAim=null;aimStick=null;keys.clear();if(aimZone){aimZone.hidden=fireBtn.hidden=next!=='battle';}updateHud();
 }
 function announce(title,subtitle='',time=3){$('banner').innerHTML=`${title}<small>${subtitle}</small>`;bannerUntil=elapsed+time;$('banner').style.opacity=1;}
 function toast(text){$('toast').textContent=text;$('toast').style.opacity=1;toastUntil=elapsed+2.4;}
@@ -535,6 +541,7 @@ function impactFx(hit,kind){
 }
 function fireWeapon(){
   const ws=wsCache[current],model=gunModels[fam(current)],st=wstate[current];shotCount++;roundShots++;lastShotAt=elapsed;firedSince++;
+  {const src=pointer.down?fireSource:keys.has('KeyF')?'keyboard':'unknown';shotsBy[src in shotsBy?src:'unknown']++;if(aimStick&&firePointer===null)stickNoButton++;}
   const furyMul=furyTimer>0?1.5:1;const assist=TOUCH?1.35:1;
   if(fam(current)==='cannon'){
     const ray=aimRay(ws.spread);const from=muzzleWorld(model,0);const target=castShot(ray,assist).point;const dir=target.clone().sub(from).normalize();
@@ -633,7 +640,7 @@ function resetWeaponState(){refreshWeaponCache();for(const k of WEAPON_ORDER)wst
 function switchWeapon(k){if(!save.weapons[k]||k===current||mode!=='battle'&&mode!=='paused')return;current=k;swapTimer=.32;sfx.play('swap');buildWeaponBar();}
 function startReload(k=current){const s=wstate[k],ws=wsCache[k];if(ws.mode!=='mag'||s.reload>0||s.ammo>=ws.mag)return;s.reload=ws.reload*(perk==='cool'?.75:1)/(furyTimer>0?3:1);s.reloadMax=s.reload;if(k===current)sfx.play('reload');}
 function updateWeapons(dt){
-  const st=stats(save);const firingInput=(pointer.down||keys.has('KeyF'))&&swapTimer<=0;
+  const st=stats(save);const firingInput=(pointer.down||(!FIRE_V21&&keys.has('KeyF')))&&swapTimer<=0;
   for(const k of WEAPON_ORDER){const s=wstate[k],ws=wsCache[k];if(!save.weapons[k])continue;s.cool-=dt;
     if(ws.mode==='heat'){const firing=k===current&&firingInput&&!s.overheated;const ht=tickHeat(s.heat,dt,firing,st.cooling*WEATHER[weatherKind].cooling,furyTimer>0,perk,ws.heatPerShot*ws.rate);s.heat=ht.heat;
       if(ht.overheated&&!s.overheated){s.overheated=true;if(k===current){toast('הנשק התחמם · תנו לו להתקרר');sfx.play('overheat');for(let i=0;i<8;i++)sprite(TEX.smoke,muzzleWorld(gunModels[k],i),.6,.8,{additive:false,grow:2.5,rise:1.5,opacity:.4,color:'#cfd6da'});}}
@@ -655,7 +662,7 @@ function beginWave(){
   perk=selectedPerk;selectedPerk='';plan=wavePlan(wave);if(!save.weapons[current])current='mg';resetWeaponState();showWeapon(current);buildWeaponBar();setMode('battle');
   camera.position.set(0,8.6,24);$('scene').focus({preventScroll:true});
   $('battle-hint').hidden=wave>2;
-  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?'גררו משמאל כדי לכוון · לחצו על ירי <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
+  if(!LEGACY&&TOUCH)$('battle-hint').innerHTML=(AIMSTICK?'הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי <span>מגע על המסך לא יורה</span>':'גררו כדי לכוון · החזיקו כדי לירות <span>הכפתורים למטה: נשק, טילים והקפאה</span>');$('battle-hint').classList.toggle('touch-hint',!LEGACY&&TOUCH);
   weatherKind=waveWeather(wave);weather.set(weatherKind);refreshWeaponCache();
   announce(`גל ${String(wave).padStart(2,'0')}`,plan.some(p=>isBoss(p.kind))?'פלישת בוס · החזיקו את קו ההגנה':waveHint(wave));sfx.play('start');
   const wk=weatherKind;if(wk!=='clear')later(3.4,()=>{if(mode==='battle'&&weatherKind===wk)toast(`${WEATHER[wk].name} · ${WEATHER[wk].rule}`);});
@@ -663,7 +670,7 @@ function beginWave(){
 function waveHint(w){return {1:'זוהתה פלישה · כוונו לעיניים הזוהרות',2:'רצים מהירים בדרך',3:'רחפנים באוויר',4:'רפסודות ומשוריינים · נסו את התותח',6:'כרישי פלדה במים · הפילו את הטורפדו לפני החוף',7:'סרטני מצור · הצבת בולעת כדורים, כוונו לעיניים',8:'מנטות צוללות לעמדה · הפילו אותן באוויר',9:'כל הכוחות יחד',11:'פרק 2 · כרישים ורפסודות מתוך הערפל',12:'מצור בגשם · סרטנים ומרגמות',13:'נחיל מהיר · רצים, רחפנים ומנטות',14:'סערה ראשונה · הכול בבת אחת',16:'האוויר מלא · מנטות ורחפנים בערפל',17:'קו מצור כבד · התותח עובר את הצבתות',18:'להקת כרישים בסערה · הפילו טורפדו',19:'הגל האחרון לפני הלווייתן'}[w]||'זוהתה פלישה · הגנו על החוף';}
 function returnToMenu(){clearBattlefield();weatherKind='clear';weather.set('clear');refreshWeaponCache();for(const e of showcase)e.root.visible=true;setMode('menu');updateStartLabel();}
 function completeWave(){const bonus=waveBonus(wave);save.coins+=bonus;roundCoins+=bonus;save.bestWave=Math.max(save.bestWave,wave);save.nextWave=wave+1;persist();sfx.play('buy');openShop('win');}
-function defeat(){pointer.down=false;save.bestWave=Math.max(save.bestWave,wave-1);persist();$('result').textContent=`הפלתם ${killed} רובוטים בגל ${wave} וצברתם ${roundCoins} מטבעות. המטבעות והשדרוגים נשמרו. נסו לשדרג נשק או לפתוח את התותח.`;setMode('dead');sfx.play('boom');}
+function defeat(){releaseFire();save.bestWave=Math.max(save.bestWave,wave-1);persist();$('result').textContent=`הפלתם ${killed} רובוטים בגל ${wave} וצברתם ${roundCoins} מטבעות. המטבעות והשדרוגים נשמרו. נסו לשדרג נשק או לפתוח את התותח.`;setMode('dead');sfx.play('boom');}
 function remaining(){return plan.length-spawnIndex+enemies.filter(e=>!e.dead&&e.state!=='retreat').length;}
 function updateBattle(dt){
   for(let i=timers.length-1;i>=0;i--){timers[i].t-=dt;if(timers[i].t<=0){const f=timers[i].fn;timers.splice(i,1);f();}}
@@ -705,7 +712,7 @@ function updateEffects(dt){
 // ---------- HUD ----------
 
 function buildAimControls(){
-  const g=$('game');g.classList.add('aimstick');
+  const g=$('game');g.classList.add('aimstick');if(FIRE_V21)g.classList.add('firev21');
   aimZone=document.createElement('div');aimZone.id='aim-zone';aimZone.setAttribute('aria-label','כוונון: גררו כדי להזיז את הכוונת');
   const ring=document.createElement('div');ring.id='aim-ring';const knob=document.createElement('i');ring.append(knob);aimZone.append(ring);
   const rest=document.createElement('div');rest.id='aim-rest';aimZone.append(rest);
@@ -715,8 +722,11 @@ function buildAimControls(){
   aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle'||aimStick)return;e.preventDefault();aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';try{aimZone.setPointerCapture(e.pointerId);}catch{}});
   aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,dz=.12,mag=m<dz?0:(m-dz)/(1-dz);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
   for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on');rest.hidden=false;});
-  fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;pointer.down=true;fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
-  for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;firePointer=null;pointer.down=false;fireBtn.classList.remove('held');});
+  fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;setFiring(true,'button');fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;releaseFire();});
+  if(FIRE_V21){for(const el of [aimZone,fireBtn])el.addEventListener('contextmenu',e=>e.preventDefault());
+    // a press on an ability button that starts inside the stick zone is counted (the test proves the buttons are out of the zone)
+    for(const [id,key] of [['rocket','rocket'],['frost','frost'],['fury','fury']])$(id).addEventListener('pointerdown',e=>{const r=aimZone.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)abilityFromLeft++;});}
 }
 function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;pointer.x=clamp(pointer.x+aimStick.vx*dt*1.6,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*1.3,-.85,.85);}
 function buildWeaponBar(){
@@ -814,15 +824,16 @@ function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWi
 
 // ---------- input ----------
 function pointAbs(e){const r=$('scene').getBoundingClientRect();pointer.x=clamp((e.clientX-r.left)/r.width*2-1,-1,1);pointer.y=clamp(-((e.clientY-r.top)/r.height)*2+1,-1,1);}
-$('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||AIMSTICK&&e.pointerType==='touch')return;
+const sceneIgnores=e=>FIRE_V21||AIMSTICK&&e.pointerType==='touch';
+$('scene').addEventListener('pointermove',e=>{if(mode!=='battle'||sceneIgnores(e))return;
   if(e.pointerType==='touch'){if(!touchAim||touchAim.id!==e.pointerId)return;const r=$('scene').getBoundingClientRect();pointer.x=clamp(pointer.x+(e.clientX-touchAim.x)/r.width*2*1.5,-.95,.95);pointer.y=clamp(pointer.y-(e.clientY-touchAim.y)/r.height*2*1.5,-.85,.85);touchAim.x=e.clientX;touchAim.y=e.clientY;}
   else pointAbs(e);});
-$('scene').addEventListener('pointerdown',e=>{if(mode!=='battle'||AIMSTICK&&e.pointerType==='touch')return;e.preventDefault();sfx.init();
+$('scene').addEventListener('pointerdown',e=>{if(mode!=='battle'||sceneIgnores(e))return;e.preventDefault();sfx.init();
   if(e.pointerType==='touch'){if(touchAim)return;touchAim={id:e.pointerId,x:e.clientX,y:e.clientY};}else pointAbs(e);
-  pointer.down=true;try{$('scene').setPointerCapture(e.pointerId);}catch{}});
-for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(touchAim&&e.pointerId!==touchAim.id)return;pointer.down=false;touchAim=null;});
+  setFiring(true,e.pointerType==='touch'?'scene':'mouse');try{$('scene').setPointerCapture(e.pointerId);}catch{}});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])$('scene').addEventListener(ev,e=>{if(sceneIgnores(e)||touchAim&&e.pointerId!==touchAim.id)return;setFiring(false,'none');touchAim=null;});
 $('scene').addEventListener('wheel',e=>{if(mode!=='battle')return;const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);const i=owned.indexOf(current);switchWeapon(owned[(i+(e.deltaY>0?1:-1)+owned.length)%owned.length]);},{passive:true});
-window.addEventListener('blur',()=>{if(QA)return;pointer.down=false;touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
+window.addEventListener('blur',()=>{if(QA)return;releaseFire();touchAim=null;keys.clear();if(!ISLAND&&mode==='battle')setMode('paused');});
 document.addEventListener('visibilitychange',()=>{if(QA)return;visible=!document.hidden;if(!visible&&!ISLAND&&mode==='battle')setMode('paused');lastTime=performance.now();});
 window.addEventListener('resize',()=>{if(renderer)resize();});
 window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();keys.add(e.code);if(e.repeat)return;
@@ -830,7 +841,7 @@ window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return
   if(mode!=='battle')return;if(e.code==='KeyQ')rocket();if(e.code==='KeyE')frost();if(e.code==='Space')activateFury();if(e.code==='KeyR')startReload();
   const n=['Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9'].indexOf(e.code);if(n>=0){const k=WEAPON_ORDER.filter(x=>save.weapons[x]||BASE_WEAPONS.includes(x))[n];if(k&&save.weapons[k])switchWeapon(k);else if(k)toast(`${WEAPONS[k].name} נפתח במוסך`);}});
 window.addEventListener('keyup',e=>keys.delete(e.code));
-$('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=rocket;$('frost').onclick=frost;$('fury').onclick=activateFury;
+$('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=()=>{abilityBy.rocket++;rocket();};$('frost').onclick=()=>{abilityBy.frost++;frost();};$('fury').onclick=()=>{abilityBy.fury++;activateFury();};
 $('tab-weapons').onclick=()=>setShopTab('weapons');$('tab-upgrades').onclick=()=>setShopTab('upgrades');
 $('help').onclick=()=>{previousMode=mode;setMode('help');};
 $('quality').onclick=()=>{setQuality(HIGH?'normal':'high');location.reload();};$('help-close').onclick=()=>setMode(previousMode);
@@ -843,9 +854,9 @@ function runBot(dt){
   for(const s of shells){const sc=100+s.t;if(sc>score){score=sc;pick={shell:s};}}
   for(const e of live){if(!aimPoint(e))continue;const sc=e.root.position.z+(isBoss(e.kind)?40:0)+(e.zones.some(z=>z.part&&!z.dead)?60:0)+(e.state==='retreat'?-200:0)+(e.kind==='manta'&&e.state!=='advance'?160:0);if(sc>score){score=sc;pick={e};}}
   bot.pick=pick;}
-  if(!pick){pointer.down=false;return;}
+  if(!pick){setFiring(false,'none');return;}
   const p=pick.shell?pick.shell.mesh.position.clone():(aimPoint(pick.e)||pick.e.root.position.clone());projected.copy(p).project(camera);
-  const err=bot.error||0;pointer.x=clamp(projected.x+rand(-err,err),-.98,.98);pointer.y=clamp(projected.y+rand(-err,err),-.98,.98);pointer.down=true;
+  const err=bot.error||0;pointer.x=clamp(projected.x+rand(-err,err),-.98,.98);pointer.y=clamp(projected.y+rand(-err,err),-.98,.98);setFiring(true,'auto');
   const s=wstate[current];if(bot.stay){}else if(wsCache[current].mode==='heat'&&s.overheated){const alt=WEAPON_ORDER.find(k=>k!==current&&save.weapons[k]&&(wsCache[k].mode==='mag'?wstate[k].reload<=0:!wstate[k].overheated));if(alt)switchWeapon(alt);}
   if(!bot.stay&&wsCache[current].mode==='mag'&&s.reload>0){const alt=WEAPON_ORDER.find(k=>k!==current&&save.weapons[k]&&(wsCache[k].mode==='heat'?!wstate[k].overheated:wstate[k].ammo>0));if(alt)switchWeapon(alt);}
   if(bot.abilities){if(live.length>=4&&rocketCooldown<=0)rocket();if(live.filter(e=>e.root.position.z>-25).length>=3&&frostCooldown<=0)frost();if(fury>=100)activateFury();}
@@ -887,18 +898,18 @@ async function runBench(){
     msg.textContent=`${i+1} מתוך ${steps.length}: ${name} · מודד 10 שניות`;
     const r=await benchMeasure(10);rows.push({q,name,fps:+r.fps.toFixed(1),worst:r.worst,res:Math.round(resScale*100),sh:shadowsOff?'חסכוניים':'רגילים'});
     try{localStorage.setItem(BENCH_KEY,JSON.stringify(rows));}catch{}benchDraw();}
-  bot=false;pointer.down=false;returnToMenu();save=backup;benchActive=false;persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();
+  bot=false;setFiring(false,'none');returnToMenu();save=backup;benchActive=false;persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();
   box.classList.remove('running');const both=new Set(rows.map(r=>r.q)).size>1;
   msg.textContent=both?'המדידה הסתיימה בשתי האיכויות. צלמו את המסך ושלחו לקלוד.':`המדידה באיכות ${q} הסתיימה. עכשיו לחצו על המעבר לאיכות ${HIGH?'רגילה':'גבוהה'} ואז שוב על התחלת מדידה.`;
   $('bench-q').hidden=both;$('bench-clear').hidden=false;$('bench-go').hidden=false;$('bench-go').textContent=`מדידה חוזרת · איכות ${q}`;
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,LEGACY},mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
-    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){pointer.down=on;},weapon(k){switchWeapon(k);},
-    bot(on,opts={}){bot=on?{...opts}:false;if(!on)pointer.down=false;},speed(n){timeScale=n;},
+    aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},weapon(k){switchWeapon(k);},
+    bot(on,opts={}){bot=on?{...opts}:false;if(!on)setFiring(false,'none');},speed(n){timeScale=n;},
     rocket,frost,fury:()=>{fury=100;activateFury();},killAll(){for(const e of [...enemies])damageEnemy(e,1e6,{explosive:true});},
     sim(sec,step=1/30){camera.updateMatrixWorld();let n=Math.round(sec/step);while(n-->0&&mode==='battle'){elapsed+=step;updateBattle(step);updateEffects(step);}return mode;},
     buy(t,k){const ok=t==='w'?buyWeapon(save,k):buyUpgrade(save,k);if(ok){persist();refreshWeaponCache();showWeapon(current);buildWeaponBar();}return ok;},
@@ -942,9 +953,9 @@ if(ISLAND){
   window.__boarIsland={
     get ready(){return islandReady;},
     get snapshot(){return {mode,wave,time:waveTime,hp,coins:save.coins,bestWave:save.bestWave,nextWave:save.nextWave,muted:!soundEnabled,paused:islandPaused};},
-    setPaused(value){islandPaused=Boolean(value);pointer.down=false;touchAim=null;keys.clear();lastTime=performance.now();if(islandPaused&&sfx.ctx?.state==='running')void sfx.ctx.suspend().catch(()=>{});else if(!islandPaused&&soundEnabled&&sfx.ctx?.state==='suspended')void sfx.ctx.resume().catch(()=>{});},
+    setPaused(value){islandPaused=Boolean(value);releaseFire();touchAim=null;keys.clear();lastTime=performance.now();if(islandPaused&&sfx.ctx?.state==='running')void sfx.ctx.suspend().catch(()=>{});else if(!islandPaused&&soundEnabled&&sfx.ctx?.state==='suspended')void sfx.ctx.resume().catch(()=>{});},
     setMuted(value){soundEnabled=!value;if(sfx.master)sfx.master.gain.value=value?0:.75;if(value&&sfx.rainGain)sfx.rainGain.gain.value=0;},
-    dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;pointer.down=false;touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
+    dispose(){if(islandDisposed)return;islandDisposed=true;islandPaused=true;releaseFire();touchAim=null;keys.clear();cancelAnimationFrame(islandFrame);persist();void sfx.ctx?.close().catch(()=>{});renderer?.dispose();renderer?.forceContextLoss();},
     onExit:null,onPause:null
   };
   const back=document.createElement('button');back.className='text-btn';back.id='island-back';back.textContent='חזרה לעיר';back.onclick=()=>window.__boarIsland.onExit?.();document.querySelector('.menu-links').append(back);

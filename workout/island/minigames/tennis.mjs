@@ -39,7 +39,7 @@ export function predictLanding(ball, config) {
   const t = Math.max(0, (ball.vy + Math.sqrt(Math.max(0, ball.vy ** 2 + 2 * g * (ball.y - c.radius)))) / g);
   return { x: ball.x + ball.vx * t, z: ball.z + ball.vz * t, seconds: t };
 }
-export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false } = {}) {
+export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false,bar=true } = {}) {
   stage = clamp(Math.trunc(Number(stage) || 1), 1, config.levels.length);
   seed = Number(seed) >>> 0;
   const rng = seededRandom(seed), selected=config.levels[stage-1],d=config.difficulties?.[difficulty]||{speed:1,timing:1,miss:0},level={...selected,speed:selected.speed*d.speed,timingWindow:selected.timingWindow*d.timing,missChance:clamp(selected.missChance+d.miss,0,config.opponent.maximumMissChance)}, p = config.player, c = config.ball, court = config.court, rules = config.rules;
@@ -81,7 +81,9 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     // v14: the bar is up for every ball that comes to the player (the needle waits at the bottom: press and fill it), not only while the button is held.
     const incomingShot=k&&k.side===0&&state.shot?.side===1&&state.ball.lastHitter===1;
     const dev=state.charge-guide.need,green=guide.tol,yellow=green+(config.v9.meter.yellow??.2);
-    return {active:state.phase==='rally'&&(Boolean(preparing)||Boolean(incomingShot)),value:clamp(.5+dev,0,1),zone:Math.abs(dev)<=green?'green':Math.abs(dev)<=yellow?'yellow':'red',grade,greenHalf:green,yellowHalf:yellow};
+    // `bar=false` (?tennisBar=0) is the v20 rule: the bar only after the button was held ~0.45 s, so a tap never showed it.
+    const active=bar?state.phase==='rally'&&(Boolean(preparing)||Boolean(incomingShot)):Boolean(preparing)&&state.phase==='rally'&&!(H&&state.charge<config.v9.hold.tapSeconds/config.v9.hold.seconds);
+    return {active,value:clamp(.5+dev,0,1),zone:Math.abs(dev)<=green?'green':Math.abs(dev)<=yellow?'yellow':'red',grade,greenHalf:green,yellowHalf:yellow};
   }
   function emit(type, details = {}) { state.event = { id: state.event.id + 1, type, ...details };state.feedback={kind:type,age:0,...details}; }
   function prepareServe() {

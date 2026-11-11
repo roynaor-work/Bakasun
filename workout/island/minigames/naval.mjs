@@ -1,6 +1,7 @@
 import {NAVAL_WEAPON_COLORS} from './naval-icons.mjs?v=island-v2-20261107-8';
-import {navalAimLegacy,navalFollowYaw} from './naval-aim-flag.mjs';
+import {navalAimLegacy,navalFollowYaw,navalAimSpin,navalSpinFollow} from './naval-aim-flag.mjs';
 import {createNavalAir,navalAirConfig,navalAirEnabled} from './naval-air.mjs';
+import {createNavalAirAudio} from './naval-air-audio.mjs';
 import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-8';
 import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-8';
 import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-8';
@@ -70,6 +71,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const ballistic=navalBallisticConfig(balance),pressure=navalStagePressure(level),turret={yaw:0,elevation:ballistic.defaultElevation,power:1};let prediction=null,lastShot=null,holdView=-1,quickShots=0,aimSide=1;
  const legacyAim=navalAimLegacy();let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
  const airCfg=navalAirEnabled()?navalAirConfig(settings,balance):null,airSim=airCfg?createNavalAir(airCfg,balance):null;
+ // 11/11/2026 spin aim: the camera follows the turning turret faster and with a smaller lead, so the landing mark stays near the middle.
+ const followBalance=navalAimSpin()?{aimControls:{...(balance.aimControls||{}),follow:navalSpinFollow(balance)}}:balance;
  const ammo=[...settings.ammunition],cooldowns=ammo.map(()=>0),extraShots=[],enemyShots=[],trail=[],mines=[],creditedShots=new Set();
  const blast={x:0,y:balance.shipY,z:0,life:0,hit:false},ball={x:playerShip.x,z:0,y:balance.shipY,owner:'player',ammo:0,age:0,duration:0,fromX:0,fromZ:0,targetX:0,targetZ:0,active:false};
  const aim={x:enemies[0].x,z:enemies[0].z},maxEnemyFleet=enemies.reduce((sum,e)=>sum+e.hp,0);
@@ -307,7 +310,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(input.aimHeld){if(!aiming||!model.lockedTarget?.hp)lock();aiming=true;}else if(!input.fireRelease&&!input.quickShot){aiming=false;lockedTargetIndex=null;}
    if(input.aimCancel){aiming=false;lockedTargetIndex=null;}
    predict();
-   camYaw=legacyAim?turret.yaw:navalFollowYaw(camYaw,turret.yaw,dt,balance,aiming);camera=navalCameraPose(playerShip,aim,aiming||time<holdView,balance,camera,dt,framing());
+   camYaw=legacyAim?turret.yaw:navalFollowYaw(camYaw,turret.yaw,dt,followBalance,aiming);camera=navalCameraPose(playerShip,aim,aiming||time<holdView,balance,camera,dt,framing());
    for(let i=mines.length-1;i>=0;i--){const mine=mines[i];mine.age+=dt;mine.life-=dt;const e=mine.age>=balance.weapons.mineArmSeconds&&enemies.find(e=>e.active&&e.hp>0&&Math.hypot(e.x-mine.x,e.z-mine.z)<=balance.weapons.mineRadius);if(e){mine.targetX=mine.x;mine.targetZ=mine.z;mine.victim=e.index;impact(mine);mines.splice(i,1);}else if(mine.life<=0)mines.splice(i,1);}
    for(let i=extraShots.length-1;i>=0;i--){advanceProjectile(extraShots[i],dt);if(!extraShots[i].active)extraShots.splice(i,1);}advanceProjectile(ball,dt);
    const missionState=navalMissionState(mission,enemies);
@@ -356,9 +359,9 @@ export function startNaval(ctx){
  if(!document.querySelector('[data-naval-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval.css?v=island-v2-20261107-8',import.meta.url).href;link.dataset.navalStyle='';document.head.append(link);}
  if(!document.querySelector('[data-g6e-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g6e-naval.css?v=island-v2-20261107-8',import.meta.url).href;link.dataset.g6eStyle='';document.head.append(link);}
  if(!document.querySelector('[data-naval-aim-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./naval-aim.css?v=island-v2-20261107-8',import.meta.url).href;link.dataset.navalAimStyle='';document.head.append(link);}
- let model,view,storage,rawUpdate=null;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage});let soundLog=null;const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>audio.unlock(),{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
+ let model,view,storage,rawUpdate=null,airAudio=null;const picker=mountNavalWeaponPicker(ctx,()=>model);try{storage=globalThis.localStorage;}catch{}const audio=createNavalAudio({storage});let soundLog=null;const audioEvents=new AbortController();for(const type of ['pointerdown','keydown'])document.addEventListener(type,()=>{audio.unlock();airAudio?.unlock();},{signal:audioEvents.signal});const input=createNavalInput(ctx,()=>model,()=>view);
  try{
-  const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);}});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));
-  input.applyHand?.();const dispose=session.dispose,pause=session.setPaused;session.dispose=()=>{picker.dispose();audioEvents.abort();audio.dispose();input.dispose();dispose();};session.setPaused=value=>{audio.setPaused(value);input.reset();pause(value);};if(session.debug){session.debug.audio=audio;soundLog=[];session.debug.sounds=soundLog;session.debug.drive=(dt,raw={})=>rawUpdate(dt,raw);}return session;
- }catch(error){picker.dispose();audioEvents.abort();audio.dispose();input.dispose();throw error;}
+  const session=runCanvasGame({...ctx,config:{...ctx.config,height:ctx.balance.render.height}},args=>{model=createNavalModel({...args,sound:name=>{if(soundLog&&soundLog.length<2000)soundLog.push({name,t:model?model.time:0});audio.play(name);airAudio?.play(name);}});if(model.vulcan&&!airAudio)airAudio=createNavalAirAudio({storage});const update=model.update;rawUpdate=update;let buzzed=-1;model.update=(dt,raw)=>{update(dt,input.sample(raw));const f=model.lastFeedback;if(f?.kind==='critical'&&f.time!==buzzed){buzzed=f.time;navalBuzz(storage);}audio.update(model.playerShip.speed||0,model.time);picker.update();};return model;},drawNaval,(args,m)=>view=createNavalView(args,m));
+  input.applyHand?.();const dispose=session.dispose,pause=session.setPaused;session.dispose=()=>{picker.dispose();audioEvents.abort();audio.dispose();airAudio?.dispose();input.dispose();dispose();};session.setPaused=value=>{audio.setPaused(value);airAudio?.setPaused(value);input.reset();pause(value);};if(session.debug){session.debug.audio=audio;session.debug.airAudio=airAudio;soundLog=[];session.debug.sounds=soundLog;session.debug.drive=(dt,raw={})=>rawUpdate(dt,raw);}return session;
+ }catch(error){picker.dispose();audioEvents.abort();audio.dispose();airAudio?.dispose();input.dispose();throw error;}
 }

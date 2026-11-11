@@ -27,6 +27,8 @@ export function runBoarSession(ctx) {
   const url=new URL('./boar-island/index.html',import.meta.url);url.searchParams.set('v',DATA_VERSION);url.searchParams.set('island','1');
   if(new URLSearchParams(globalThis.location?.search).get('dev')==='1')url.searchParams.set('qa','1');
   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
+  // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
+  if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');
   const failed=()=>{if(disposed)return;error='reason.gameStart';ctx.warning.hidden=false;ctx.warning.textContent=ctx.t('boar.loadError');};
   listen(frame,'load',()=>{
     if(disposed)return;
