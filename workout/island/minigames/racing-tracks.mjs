@@ -91,8 +91,39 @@ const CLASSIC_LIST = [
 const freezeTrack = (track) => Object.freeze({ ...track, points: Object.freeze(track.points.map(([x,y,z]) => Object.freeze([x*RACING_TRACK_SCALE,y,z*RACING_TRACK_SCALE]))) });
 /** The circuits before racing-v10 (also what ?racingTracks=v1 selects). */
 export const CLASSIC_TRACKS = Object.freeze(CLASSIC_LIST.map(freezeTrack));
-export const RACING_TRACK_SET = new URLSearchParams(globalThis.location?.search || '').get('racingTracks') === 'v1' ? 'v1' : 'f1';
-export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
+const TRACKS_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingTracks');
+export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'v2' ? 'v2' : 'f1';
+// racing-tracks-v2 (Codex, design/racing-tracks-v2): six circuits, opt-in with ?racingTracks=v2. Loaded only on that flag (top-level await), so the normal start-up
+// does not fetch the 72 KB data file. The data is 7.5 m wide with 12 m corners, so the app calibrates it: X/Z scale and road width (V2_SCALE, V2_WIDTH),
+// the same one-metre lift as the v10 circuits, and the original theme/landmark of each stage.
+const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.9, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
+const CODEX_V2 = RACING_TRACK_SET === 'v2' ? (await import('../design/racing-tracks-v2/tracks.mjs')).default : null;
+// Dog-legs for the long straights of the Codex circuits that a good driver still took flat out: a straight longer than `min` metres
+// gets whole periods of a sine offset (about 22 m radius at this amplitude), faded to zero 30 m from each end. Units: metres before the 1.65 scale.
+const V2_KINK = new Set(['coast', 'jungle', 'volcano', 'harbor', 'summit', 'ruins']);
+function kinkStraights(points, { min = 110, period = 70, amp = 10.5, margin = 22 } = {}) {
+  const n = points.length, out = points.map(p => p.slice()), wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
+  const heading = i => { const a = points[i], b = points[(i + 1) % n]; return Math.atan2(b[0] - a[0], b[2] - a[2]); };
+  const straight = Array.from({ length: n }, (_, i) => Math.abs(wrapA(heading(i) - heading((i + n - 1) % n))) < .006);
+  let i = 0; const seen = new Set();
+  const start = straight.findIndex(v => !v); if (start < 0) return out;
+  for (let k = 0; k < n; k++) {
+    const idx = (start + k) % n; if (!straight[idx] || seen.has(idx)) continue;
+    const run = []; for (let j = idx; straight[j % n] && run.length < n && !seen.has(j % n); j++) { run.push(j % n); seen.add(j % n); }
+    const d = [0]; for (let j = 1; j < run.length; j++) d.push(d[j - 1] + Math.hypot(points[run[j]][0] - points[run[j - 1]][0], points[run[j]][2] - points[run[j - 1]][2]));
+    const length = d[d.length - 1]; if (length < min) continue;
+    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1) continue;
+    const from = (length - periods * period) / 2, h = heading(run[0]), nx = Math.cos(h), nz = -Math.sin(h);
+    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * Math.min(1, u / 15, (periods * period - u) / 15); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
+  }
+  return out;
+}
+function codexTrack(spec, base) {
+  const lift = Math.max(0, 1 - Math.min(...spec.points.map(p => p[1])));
+  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: spec.samples, points: (V2_KINK.has(spec.id) ? kinkStraights(spec.points) : spec.points).map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
+}
+
+export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : RACING_TRACK_SET === 'v2' ? CLASSIC_LIST.map(track => codexTrack(CODEX_V2.find(c => c.id === track.id), track)) : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
 
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
 const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));

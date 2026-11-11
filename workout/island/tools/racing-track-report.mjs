@@ -1,7 +1,7 @@
 // Track report: length, width, corner mix, straights, overtaking zones and a good driver's lap time, plus a top-down map per circuit.
 // Usage: node tools/racing-track-report.mjs [out.json] [mapDir]; ?racingTracks=v1 equivalent: RACING_TRACKS=v1 node ... (sets the query before import)
 import {writeFile,mkdir} from 'node:fs/promises';import {fileURLToPath} from 'node:url';import {createRequire} from 'node:module';
-if(process.env.RACING_TRACKS==='v1')globalThis.location={search:'?racingTracks=v1'};
+if(process.env.RACING_TRACKS)globalThis.location={search:'?racingTracks='+process.env.RACING_TRACKS+(process.env.V2Q||'')};
 const {createTrack,TRACKS}=await import('../minigames/racing-tracks.mjs');
 const {createRacing}=await import('../minigames/racing-physics.mjs');
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
