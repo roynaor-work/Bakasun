@@ -222,7 +222,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
         w(c.x, c.z, tmp2); th.root.position.set(tmp2.x, c.y, tmp2.z); th.root.rotation.y = track.yawAt(fr.s0 + c.x) + Math.PI; th.state.mode = c.mode === 'gone' ? 'run' : c.mode; th.update(dt);
         w(0, 0, tmp2); officer.root.position.set(tmp2.x, 0, tmp2.z); officer.root.rotation.y = track.yawAt(fr.s0); officer.state.mode = 'aim'; officer.update(dt);
         const fn = eng.flightNow(); if (fn) { w(fn.x, fn.z, tmp2); net.visible = true; net.position.set(tmp2.x, fn.y, tmp2.z); } else net.visible = false;
-        w(-.6, .4, tmp2); camera.position.set(tmp2.x, 1.65, tmp2.z); w(c.x, c.z * .5, tmp2); look.set(tmp2.x, 1.1, tmp2.z); camera.fov = 40; camera.updateProjectionMatrix(); camera.lookAt(look);
+        w(.9, .35, tmp2); camera.position.set(tmp2.x, 1.6, tmp2.z); w(c.x, c.z * .5, tmp2); look.set(tmp2.x, 1.1, tmp2.z); camera.fov = 40; camera.updateProjectionMatrix(); camera.lookAt(look);
       },
       handle() {}, project: null, dispose() { scene.remove(net); },
     };

@@ -1,0 +1,19 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><title>catch harness</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- QA page for tools/catch-shots.mjs: runs one match through the real session without the island around it.
+     ?stage=N&seed=S&help=1&quality=low -->
+<link rel="stylesheet" href="../styles.css">
+<style>html,body{margin:0;height:100%;background:#000}.game-screen{position:fixed;inset:0;width:100%;max-width:none;padding:0;border:0;border-radius:0;display:block}</style>
+<body><div class="game-screen modal" id="screen" data-game="catchCriminal"><div class="game-stage" id="stage"><canvas class="minigame-canvas" id="cv"></canvas></div><div class="game-controls" id="ctl"></div></div>
+<script type="module">
+import {runCatchSession6} from '../minigames/catch-session6.mjs';
+const q=new URLSearchParams(location.search),stage=+(q.get('stage')||1);
+const config=await (await fetch('../data/config.json')).json(),strings=await (await fetch('../data/strings.he.json')).json();
+const balance=config.minigames.catchCriminal;
+const t=(k,v)=>String(strings[k]??k).replace(/{(\w+)}/g,(_,x)=>v?.[x]??`{${x}}`);
+localStorage.setItem('island.catch.help2',q.get('help')==='1'?'0':'1');
+window.finished=null;
+const session=runCatchSession6({balance,level:stage,seed:+(q.get('seed')||3),equipment:{},state:{buildings:[]},t,canvas:document.getElementById('cv'),controls:document.getElementById('ctl'),warning:document.createElement('p'),finish:r=>{window.finished=r;return {ok:true}},cancel:()=>{window.cancelled=true},sound:()=>{},debug:true});
+window.session=session;
+await new Promise(r=>{const i=setInterval(()=>{if(session.snapshot.ready||session.snapshot.error){clearInterval(i);r()}},100)});
+window.done=true;
+</script>
