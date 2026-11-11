@@ -102,7 +102,7 @@ export function createCards(){
 export function broadcastEvents(state,{changes=[],prevFastest=null,prevLaps=null}={}){
  const out=[],fast=fastestLap(state.cars),p=state.player,laps=p?.lapTimes?.length||0;
  if(p&&prevLaps!==null&&laps>prevLaps&&!p.finished){const last=p.lap>=state.laps;
-  out.push({kind:'lap',title:last?'הקפה אחרונה':`הקפה ${p.lap} / ${state.laps}`,sub:`אחרונה ${fmtTime(p.lapTimes[laps-1])}`});}
+  out.push({kind:'lap',title:last?'הקפה אחרונה':`הקפה \u2066${p.lap} / ${state.laps}\u2069`,sub:`אחרונה ${fmtTime(p.lapTimes[laps-1])}`});}
  if(fast&&prevFastest&&fast.time<prevFastest.time-1e-9){const car=state.cars.find(c=>c.id===fast.id);out.push({kind:'fastest',title:'הקפה מהירה ביותר',sub:`${car?.isPlayer?'אתם':car?.name||''} · ${fmtTime(fast.time)}`,duration:2.2});}
  if(state.phase==='racing'&&state.time>START_QUIET)for(const c of changes)if(c.id==='player')out.push({kind:c.delta>0?'up':'down',title:`מקום ${c.to}`,sub:c.delta>0?'עקיפה':'נעקפתם',urgent:true,duration:1.3});
  return {cards:out,fastest:fast,laps};

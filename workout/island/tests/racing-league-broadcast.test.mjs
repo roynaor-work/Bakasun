@@ -93,7 +93,7 @@ test('cards: lap for the player with "הקפה אחרונה", a purple fastest l
   const p=car('player',0,{rank:3,lap:2,lapTimes:[52.3]}),a=car('ai-1',0,{rank:1,lapTimes:[50]});
   let state={time:60,laps:3,phase:'racing',player:p,cars:[p,a]};
   // state based (a skipped frame loses nothing): the player's lap count grew from 0 to 1
-  let ev=broadcastEvents(state,{changes:[],prevFastest:null,prevLaps:0});assert.equal(ev.cards.length,1);assert.equal(ev.cards[0].kind,'lap');assert.equal(ev.cards[0].title,'הקפה 2 / 3');assert.equal(ev.cards[0].sub,'אחרונה 0:52.30');
+  let ev=broadcastEvents(state,{changes:[],prevFastest:null,prevLaps:0});assert.equal(ev.cards.length,1);assert.equal(ev.cards[0].kind,'lap');assert.equal(ev.cards[0].title,'הקפה \u20662 / 3\u2069','the numbers sit in an LTR isolate so 2 / 4 never reads 4 / 2');assert.equal(ev.cards[0].sub,'אחרונה 0:52.30');
   assert.equal(ev.fastest.id,'ai-1');assert.equal(ev.laps,1);
   assert.equal(broadcastEvents(state,{changes:[],prevFastest:ev.fastest,prevLaps:1}).cards.length,0,'same lap count, no card');
   p.lap=3;p.lapTimes.push(51);ev=broadcastEvents(state,{changes:[],prevFastest:ev.fastest,prevLaps:1});assert.equal(ev.cards[0].title,'הקפה אחרונה');
