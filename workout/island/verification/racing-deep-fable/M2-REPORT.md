@@ -63,8 +63,8 @@
 |---|---|---|---|
 | לפני (v2 ברירת מחדל, לפני שינויי המראה) | 222.7 | 186,153 | perf-before-v2.json |
 | לפני (`racingTracks=f1`) | 220.4 | 185,672 | perf-before-f1.json |
-| אחרי (v2) | PERF_AFTER_V2 | | perf-after-v2.json |
-| אחרי (`racingTracks=f1`) | PERF_AFTER_F1 | | perf-after-f1.json |
+| אחרי (v2, כולל סימוני גריד, פיטס לאורך הישרת, צללית פורמולה למכוניות 3-4) | 209.5 (**−6%**) | 176,316 (**−5%**) | perf-after-v2.json |
+| אחרי (`racingTracks=f1`) | 206.3 (−6%) | 178,211 (−4%) | perf-after-f1.json |
 זמן פריים במכונה הזו 1.3-1.7 שנ' (SwiftShader עם 4 ליבות עמוסות): לא מדד לטלפון.
 
 ## נבדק בדפדפן אמיתי מול יחידה בלבד
@@ -77,7 +77,14 @@
 | עקיפות, בלימה, קו מרוץ, היפרדות | לא (מודל ללא DOM) | `racing-grid-measure.mjs`, בדיקות |
 | רף המהירות, משך ליגה | לא | `racing-topspeed.mjs`, `racing-league-sim.mjs` |
 | ביצועים | כן (perf-racing) | |
-SHOTS_TABLE
+
+### צילומים (`m2/shots/`, `shots.json` עם מדדי הרנדר של כל פריים; `tools/racing-m2-shots.mjs`)
+| מסלול | גריד (hold, נגיעת מגע) | פיטס (2.5 שנ') | אמצע מרוץ (12 שנ', השחקן התחיל 60 מ' מאחור) | התהפכות (crashT 0.45) |
+|---|---|---|---|---|
+| 1 חוף | stage1-1-grid.png (328 קריאות, 230K משולשים, 10 מכוניות בטווח) | stage1-2-pits.png | stage1-3-midrace.png (צולם לפני המעבר של מכוניות 3-4 לצללית: רואים קופה כחולה) | stage1-4-flip.png |
+| 2 ג'ונגל | stage2-1-grid.png | stage2-2-pits.png | stage2-3-midrace.png (השחקן כבר מוביל) | stage2-4-flip.png |
+| 4 מרינה | stage4-1-grid.png | stage4-2-pits.png | stage4-3-midrace.png | stage4-4-flip.png |
+שגיאת קונסול יחידה בכל צילום: 404 של favicon של דף המדידה (גם במדידות הבסיס).
 
 ## דגלי כיבוי
 `?racingTracks=f1` (ברירת המחדל הקודמת) / `v1`; `?racingKinkAll=1` (שיקיינה גם בישרת הראשית); `?racingShortKink=0` (בלי S בישרות הביניים); `?racingKink=0` (גיאומטריית Codex גולמית, למדידה); `?racingKinkAmp=`, `?racingKinkFade=`, `?racingShortR=`, `?v2scale=`, `?v2samples=` (כיוונון); `?racingAi=0` (הנהגים הקודמים + חוקי המגע הקודמים); `?racingGrid=0` (עמדות הזינוק הקודמות, בלי סימוני גריד); `?racingGrind=0` (בלי התהפכות על גלישה); `?racingCrash=0` (בלי התהפכות בכלל, קיים).
