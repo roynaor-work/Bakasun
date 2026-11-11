@@ -1,0 +1,71 @@
+{
+ "stages": {
+  "1": {
+   "idle": {
+    "angle": 7.274751663208008,
+    "power": 1,
+    "yaw": 0,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "thief": {
+    "feetY": 190.71459217511557,
+    "headY": 135.61768539342458,
+    "height": 55,
+    "dist": 15.8
+   },
+   "render": {
+    "calls": 138,
+    "triangles": 205059
+   },
+   "drawn": {
+    "angle": 10.574751663208009,
+    "power": 1,
+    "yaw": 4.4,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "drawnOk": true,
+   "released": true,
+   "hit": {
+    "angle": 6.5,
+    "yaw": -1.0000000000000004,
+    "perfect": false
+   },
+   "hitResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 1
+   },
+   "head": {
+    "angle": 13,
+    "yaw": -0.2000000000000004,
+    "perfect": true
+   },
+   "headResult": {
+    "kind": "catch",
+    "perfect": true,
+    "catches": 2
+   },
+   "state": {
+    "phase": "done",
+    "catches": 2,
+    "throwsLeft": 3,
+    "won": true
+   }
+  }
+ },
+ "sheet": {
+  "frames": [
+   "sheet-f0-drawn",
+   "sheet-f1-release",
+   "sheet-f2-flight",
+   "sheet-f3-flight",
+   "sheet-f4-flight",
+   "sheet-f5-flight",
+   "sheet-f6-slowmo",
+   "sheet-f7-impact"
+  ],
+  "result": {}
+ }
+}

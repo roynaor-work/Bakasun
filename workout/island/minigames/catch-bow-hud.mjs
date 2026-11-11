@@ -1,7 +1,7 @@
 /** v6 "תפוס את הפושע": the archery controls, like Archery Master. Touch and hold anywhere = the string is drawn (full power);
  * drag = move the sight (yaw from the horizontal movement, pitch from the vertical, dragging up raises the aim);
- * the sight sways a little while you hold, more the longer you hold; lift the finger = shoot. A tap that is too short cancels.
- * Keyboard: arrows move the sight, space or enter shoots. Pure helpers (dragToAim, holdSway) are exported for tests. */
+ * the sight sways a little while you hold, more the longer you hold; lift the finger = the net flies. A tap that is too short cancels.
+ * Keyboard: arrows move the sight, space or enter releases the net. Pure helpers (dragToAim, holdSway) are exported for tests. */
 export const BOW_CONTROLS = Object.freeze({yawPerPx: .11, anglePerPx: .11, minHoldSeconds: .15, cancelPx: 4, swayAfter: 1.2, swayMax: 1.6, swayAngleK: .7});
 export const STRINGS = Object.freeze({
   'catch.bow.hint': 'נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק',

@@ -52,8 +52,8 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     return g;
   };
   launcher.add(hand(.005, -.15, .05, {armDir: [.45, -1, .55]}), hand(-.01, -.1, -.42, {armDir: [-.55, -1, .35], scale: .95}));
-  const LAUNCHER_AT = {x: .3, y: -.3, z: -.62};
-  launcher.position.set(LAUNCHER_AT.x, LAUNCHER_AT.y, LAUNCHER_AT.z); launcher.rotation.set(.02, -.1, .08);
+  const LAUNCHER_AT = {x: .3, y: -.3, z: -.62, rx: .02, ry: -.1, rz: .08, scale: 1};
+  launcher.position.set(LAUNCHER_AT.x, LAUNCHER_AT.y, LAUNCHER_AT.z); launcher.rotation.set(LAUNCHER_AT.rx, LAUNCHER_AT.ry, LAUNCHER_AT.rz);
   rig.visible = false;
 
   // ----- thief dressing (same as v5) and the caught nets -----
@@ -123,10 +123,11 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     dots.forEach((d, i) => {
       const k = points.length > 1 ? i / (dots.length - 1) * (points.length - 1) : 0, a = points[Math.floor(k)], b = points[Math.min(points.length - 1, Math.floor(k) + 1)];
       if (!showArc || !a || !b || points.length < 2) { d.visible = false; return; }
-      const u = k - Math.floor(k); d.visible = true;
+      const u = k - Math.floor(k);
       const x = a.x + (b.x - a.x) * u, y = a.y + (b.y - a.y) * u, z = (a.z || 0) + ((b.z || 0) - (a.z || 0)) * u;
       w(x, z, tmp); d.position.set(tmp.x, y, tmp.z);
-      d.material.opacity = 1 - i / dots.length * .55; d.scale.setScalar(.22 * (1 - i / dots.length * .35));
+      // a dotted line of the same thickness all the way (scaled by the distance from the eye), faint near the muzzle so it never blocks the view
+      const dc = d.position.distanceTo(camera.position); d.visible = i >= 3; d.scale.setScalar(.012 * dc + .03); d.material.opacity = clamp((dc - 2) / 6, .15, .85);
     });
     if (pr && pr.help >= 1 && pr.land) { landRing.visible = true; w(pr.land.x, pr.land.z || 0, tmp); landRing.position.set(tmp.x, .06, tmp.z); landRing.material.color.set(pr.hit ? '#7dffb0' : '#ffd37a'); landRing.scale.setScalar(pr.hit ? 1.25 + Math.sin(performance.now() / 120) * .12 : 1); }
     else landRing.visible = false;
@@ -266,9 +267,11 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
       // the launcher draws back and dips while the string is pulled, then springs forward on release
       // the launcher draws back and tilts up 5 degrees while the string is pulled, kicks up and back on release, and breathes a little
       launcher.position.z = LAUNCHER_AT.z + drawn * .14 + cam.kick * .1; launcher.position.y = LAUNCHER_AT.y - drawn * .02 + Math.sin(ts * 1.7) * .004 + cam.kick * .02; launcher.position.x = LAUNCHER_AT.x + Math.sin(ts * 1.1) * .003;
-      launcher.rotation.x = .02 + drawn * .09 + cam.kick * .16; launcher.rotation.y = -.1 + drawn * .03;
+      launcher.rotation.x = LAUNCHER_AT.rx + drawn * .09 + cam.kick * .16; launcher.rotation.y = LAUNCHER_AT.ry + drawn * .03; launcher.rotation.z = LAUNCHER_AT.rz; launcher.scale.setScalar(LAUNCHER_AT.scale);
       loadedNet.visible = phase === 'aim' || phase === 'throw' || phase === 'rearm' || phase === 'flee'; loadedNet.scale.setScalar(1 + drawn * .18); netWrap.rotation.y += dt * .6;
     },
+    /** Tuning hook for the harness: where the launcher sits in the camera's frame. */
+    launcherAt(next) { Object.assign(LAUNCHER_AT, next); return {...LAUNCHER_AT}; },
     debugCam() { return {blend: cam.blend, from: cam.from ? cam.from.toArray() : null, eye: eye.toArray(), look: look.toArray(), fov: camera.fov, mode}; },
     project(x, y, z = 0) { w(x, z, tmp); tmpV.set(tmp.x, y, tmp.z).project(camera); return {x: tmpV.x, y: tmpV.y, visible: tmpV.z < 1}; },
     dispose() { camera.remove(rig); for (const o of [projectile, trail, landRing, sight, flash, groundNet, halo, missRing, ...bursts, ...flags.map(f => f.g), ...dots, ...caughtNets, ...leaves.map(l => l.s)]) scene.remove(o); },
