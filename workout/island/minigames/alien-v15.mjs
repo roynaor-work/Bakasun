@@ -30,8 +30,13 @@ export const V15_DEFAULTS=Object.freeze({
  capPerSecond:15,      // hard cap on projectiles per second at the spawn point
  capBurst:6,           // bucket size: one spread round (3) plus two wing shots pass, a stream does not
  gearExp:1,
- secondsMult:1.5         // stage clock: fewer bullets need more time, a slow child must not lose to the clock
+ secondsMult:1.5,        // stage clock: fewer bullets need more time, a slow child must not lose to the clock
+ convergeDistance:300    // the two wing cannons aim at the ship's centre line this far ahead (model units), like a fighter's guns
 });
+/** Horizontal speed of a wing-cannon shot so it crosses the centre line convergeDistance ahead. At a phone's
+ * 844x390 the model's hit test is stretched 2.9x in x, so a straight shot from a wing (11 units out) misses an
+ * alien centred on the ship; converging shots hit what the child is under. */
+export function convergeVx(side,offset,shotSpeed,cfg=V15_DEFAULTS){return cfg.convergeDistance>0?-side*offset*shotSpeed/cfg.convergeDistance:0;}
 export function v15Config(balance){return {...V15_DEFAULTS,...(balance?.v15||{})};}
 /** Fire gate state machine. state={heat,cool,spent}. Returns the next state plus mode and firing.
  * modes: 'idle' (not firing), 'burst' (Vulcan), 'cool' (locked), 'normal' (steady cannon). */

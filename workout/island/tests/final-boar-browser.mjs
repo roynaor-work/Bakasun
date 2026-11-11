@@ -49,8 +49,8 @@ const hudCoverage=await frame.evaluate(()=>{const sel='.brand,.coin-block,.healt
  const g=4,W=Math.ceil(innerWidth/g),H=Math.ceil(innerHeight/g);const paint=list=>{const grid=new Uint8Array(W*H);for(const r of list){const x0=Math.max(0,Math.floor(r.left/g)),x1=Math.min(W,Math.ceil(r.right/g)),y0=Math.max(0,Math.floor(r.top/g)),y1=Math.min(H,Math.ceil(r.bottom/g));for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++)grid[y*W+x]=1;}return grid;};
  const frac=(grid,y0=0,y1=H)=>{let n=0;for(let y=y0;y<y1;y++)for(let x=0;x<W;x++)n+=grid[y*W+x];return n/(W*(y1-y0));};
  const a=paint(rects),b=paint([...rects,...ctrl]);return {hud:+frac(a).toFixed(4),withControls:+frac(b).toFixed(4),band:+frac(a,Math.floor(110/g),Math.ceil(290/g)).toFixed(4),nodes:rects.length};});
-log('hudCoverage',hudCoverage);results.hudCoverage=hudCoverage;await page.screenshot({path:out+`frames/boar-hud-${MODE==='after'?'after':'before'}.jpg`,type:'jpeg',quality:84});
-const results={mode:MODE,query,env,layout,steps:{}};const hasBtn=!!layout.fireBtn;const noBtn={skipped:'no fire button in this mode (legacy touch-to-fire)'};
+log('hudCoverage',hudCoverage);await page.screenshot({path:out+`frames/boar-hud-${MODE==='after'?'after':'before'}.jpg`,type:'jpeg',quality:84});
+const results={mode:MODE,query,env,layout,hudCoverage,steps:{}};const hasBtn=!!layout.fireBtn;const noBtn={skipped:'no fire button in this mode (legacy touch-to-fire)'};
 const nonButton=s=>Object.entries(s.shotsBy).filter(([k])=>k!=='button').reduce((n,[,v])=>n+v,0);
 const diff=(a,b)=>({shots:b.shots-a.shots,frames:b.frames-a.frames,nonButton:nonButton(b)-nonButton(a),button:(b.shotsBy.button||0)-(a.shotsBy.button||0),stickNoButton:b.stickNoButton-a.stickNoButton,abilities:Object.keys(b.abilityBy).reduce((n,k)=>n+(b.abilityBy[k]||0)-(a.abilityBy[k]||0),0),abilityFromLeft:b.abilityFromLeft-a.abilityFromLeft,aimFrom:a.aim,aimTo:b.aim,aimMoved:Math.hypot(b.aim.x-a.aim.x,b.aim.y-a.aim.y)>.03});
 let dead=false;
@@ -85,23 +85,24 @@ await cool();await step('keyboardF',async()=>{await frame.evaluate(()=>document.
 await cool();await step('mouseOnScene',async()=>{await mouse('mouseMoved',500,200);await mouse('mousePressed',500,200);await wait(700);await mouse('mouseReleased',500,200);await wait(300);});
 // J) the fire button alone: shots, all from the button, aim unchanged
 await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const b=layout.fireBtn,bx=b[0]+b[2]/2,by=b[1]+b[3]/2;await touch('touchStart',[{x:bx,y:by,id:2}]);await wait(1000);await shot('fire');const held=await st();await touch('touchEnd',[]);await wait(300);return {heldFiring:held.firing};});
-// L) stick precision, measured in game time (`elapsed`, so a starved CPU does not distort it): fine-aim speed at a 20% tilt, time to a target with a full tilt,
-//    overshoot after release (the crosshair must stop at once), and the precision finger (second finger on the stick zone slows the crosshair).
+// L) stick precision with real touch, measured in game time over game frames (`frames`/`elapsed`), so a starved CPU (about one frame a second here) measures the same
+//    kinematics as a 60 fps phone: fine-aim speed at a 20% tilt, time to a target with a full tilt, overshoot after release (the crosshair must stop at once), and the
+//    precision finger (second finger on the stick zone slows the crosshair).
+const framesLater=async(n,maxMs=40000)=>{const f0=(await st()).frames;const t=Date.now();while(Date.now()-t<maxMs){const s=await st();if(s.frames>=f0+n)return s;await wait(60);}return null;};
+const speedOver=async(n,axis)=>{const s0=await framesLater(1);if(!s0)return null;const s1=await framesLater(n);if(!s1||s1.elapsed<=s0.elapsed)return null;return +((s1.aim[axis]-s0.aim[axis])/(s1.elapsed-s0.elapsed)).toFixed(3);};
 await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)return noBtn;const R=(await st()).stickInfo?.R||62;const o={x:150,y:290};
- // fine aim: 20% tilt to the right for about 2 s of wall time
- await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await wait(300);const f0=await st();await wait(2000);const f1=await st();await touch('touchEnd',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await wait(300);
- const fine=f1.elapsed-f0.elapsed>0?(f1.aim.x-f0.aim.x)/(f1.elapsed-f0.elapsed):null;
- // time to target: full tilt from x=0 until x>=0.6, then release at once and watch for overshoot
- await resetAim();await touch('touchStart',[{...o,id:1}]);const t0=(await st());await touch('touchMove',[{x:o.x+R+20,y:o.y,id:1}]);let reach=null,cross=null;
- for(let i=0;i<120;i++){const s=await st();if(s.aim.x>=.6){reach=s;break;}await wait(25);}
- await touch('touchEnd',[{x:o.x+R+20,y:o.y,id:1}]);const rel=await st();await wait(400);const after=await st();
+ // fine aim: 20% tilt to the right; let the smoothing settle for 3 frames, then measure over 4 frames
+ await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(3);const fine=await speedOver(4,'x');await touch('touchEnd',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(1);
+ // time to target: full tilt from x=0 until x>=0.6, then release at once and watch for overshoot over 3 more frames
+ await resetAim();await touch('touchStart',[{...o,id:1}]);const t0=await st();await touch('touchMove',[{x:o.x+R+20,y:o.y,id:1}]);let reach=null;const tw=Date.now();
+ while(Date.now()-tw<40000){const s=await st();if(s.aim.x>=.6){reach=s;break;}await wait(60);}
+ await touch('touchEnd',[{x:o.x+R+20,y:o.y,id:1}]);const rel=await st();const after=await framesLater(3)||rel;
  const timeToTarget=reach?+(reach.elapsed-t0.elapsed).toFixed(3):null,overshoot=+(after.aim.x-rel.aim.x).toFixed(4),stickAfterRelease=rel.stickInfo;
- // precision finger: full tilt, then a second finger on the stick zone
- await resetAim();await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x,y:o.y-R-20,id:1}]);await wait(250);const p0=await st();await wait(600);const p1=await st();
- await touch('touchStart',[{x:o.x,y:o.y-R-20,id:1},{x:60,y:360,id:5}]);await wait(250);const q0=await st();await wait(600);const q1=await st();
- await touch('touchEnd',[{x:60,y:360,id:5}]);await touch('touchEnd',[{x:o.x,y:o.y-R-20,id:1}]);await wait(200);
- const vFull=p1.elapsed-p0.elapsed>0?(p1.aim.y-p0.aim.y)/(p1.elapsed-p0.elapsed):null,vPrecise=q1.elapsed-q0.elapsed>0?(q1.aim.y-q0.aim.y)/(q1.elapsed-q0.elapsed):null;
- return {R,fineSpeed:fine==null?null:+fine.toFixed(3),timeToTarget,overshoot,stickAfterRelease,fullSpeed:vFull==null?null:+vFull.toFixed(3),preciseSpeed:vPrecise==null?null:+vPrecise.toFixed(3),preciseFlag:q0.stickInfo?.precise??null};});
+ // precision finger: full tilt up, measure, then a second finger on the stick zone, measure again
+ await resetAim();await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x,y:o.y-R-20,id:1}]);await framesLater(3);const vFull=await speedOver(4,'y');
+ await touch('touchStart',[{x:o.x,y:o.y-R-20,id:1},{x:60,y:360,id:5}]);await framesLater(2);const q=await st();const vPrecise=await speedOver(4,'y');
+ await touch('touchEnd',[{x:60,y:360,id:5}]);await touch('touchEnd',[{x:o.x,y:o.y-R-20,id:1}]);await framesLater(1);
+ return {R,fineSpeed:fine,timeToTarget,overshoot,stickAfterRelease,fullSpeed:vFull,preciseSpeed:vPrecise,preciseFlag:q.stickInfo?.precise??null};});
 // K) the weapon-switch button: tap cycles the weapon (two owned weapons), fires nothing
 await step('weaponButton',async()=>{await frame.evaluate(()=>{const s=window.__boar.state.save;s.weapons.shotgun=s.weapons.shotgun||1;window.__boar.setSave(s);});const a=await st();const b=await frame.evaluate(()=>{const e=document.getElementById('weapon-btn');if(!e)return null;const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2,r.width,r.height];});
  if(!b)return {skipped:'no weapon button in this mode'};await touch('touchStart',[{x:b[0],y:b[1],id:4}]);await wait(120);await touch('touchEnd',[{x:b[0],y:b[1],id:4}]);await wait(500);const c=await st();return {size:[b[2],b[3]],weaponBefore:a.current,weaponAfter:c.current};});
