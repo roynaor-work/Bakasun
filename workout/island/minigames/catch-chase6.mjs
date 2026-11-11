@@ -182,6 +182,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
         if (os > c.s + 20 && os > s.s + 20) break;
         if (o.kind === 'pad') { if (!o.used && Math.abs(s.s - os) < 2.6 && Math.abs(s.d - o.d) < 1.6) { o.used = true; s.tank = Math.min(tankMax, s.tank + C.padCharge); s.pads++; events.push({type: 'pad', id: o.id}); } continue; }
         if (o.kind === 'oil') { if (!o.hitP && Math.abs(s.s - os) < 2.4 && Math.abs(s.d - o.d) < 1.7) { o.hitP = true; s.oil = C.oilSeconds; events.push({type: 'oil', id: o.id}); } continue; }
+        if (!o.hitP && !o.passed && o.kind !== 'pad' && o.kind !== 'oil' && os < s.s - 1 && os > s.s - 6 && Math.abs(s.d - o.d) >= C.hitLateral && Math.abs(s.d - o.d) < C.hitLateral + 1.1 && s.v > 18) { o.passed = true; s.nearMisses = (s.nearMisses || 0) + 1; events.push({type: 'nearMiss', id: o.id, kind: o.kind}); }
         if (!o.hitP && hitBox(s.s, s.d, o, s.t)) {
           o.hitP = true; s.hits++; s.v *= o.kind === 'cone' ? C.coneKeep : C.crashKeep; s.stun = o.kind === 'cone' ? .15 : C.stunSeconds; s.tank = Math.max(0, s.tank - .2);
           events.push({type: 'crash', id: o.id, kind: o.kind});

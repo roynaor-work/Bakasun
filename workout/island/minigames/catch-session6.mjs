@@ -20,7 +20,7 @@ const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS,
   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
   'catch.help6.3': 'הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.',
   'catch.help6.4': 'יש כמה זריקות, וצריך כמה פגיעות מדויקות כדי לתפוס. הרוח דוחפת את הרשת הצידה, והחץ למעלה מראה לאן.',
-  'catch.bend': 'פנייה', 'catch.lock': 'כוונת',
+  'catch.bend': 'פנייה', 'catch.lock': 'כוונת', 'catch.pop.nearMiss': 'עקיפה צמודה',
 };
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -69,7 +69,7 @@ export function runCatchSession6(ctx) {
   const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let scrapeSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
+  let scrapeSaid = false, nearSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
@@ -171,6 +171,7 @@ export function runCatchSession6(ctx) {
       else if (e.type === 'go') { count.textContent = t('catch.go'); audio?.cue('go'); setTimeout(() => { count.hidden = true; }, 700); }
       else if (e.type === 'crash') { audio?.cue('crash'); say(e.kind === 'cone' ? 'catch.pop.cone' : e.kind === 'parked' ? 'catch.pop.parked' : 'catch.pop.crash', 'bad'); }
       else if (e.type === 'crimCrash') { audio?.cue('crimCrash'); say('catch.pop.crimCrash', 'good'); }
+      else if (e.type === 'nearMiss') { audio?.cue('whoosh'); if (!nearSaid) { nearSaid = true; say('catch.pop.nearMiss', 'good'); } }
       else if (e.type === 'pad') { audio?.cue('pad'); }
       else if (e.type === 'oil') { audio?.cue('scrape'); say('catch.pop.oil', 'warn'); }
       else if (e.type === 'scrape') { audio?.cue('scrape'); if (!scrapeSaid) { scrapeSaid = true; say('catch.pop.kerb', 'warn'); } }

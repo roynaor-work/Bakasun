@@ -237,6 +237,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
         else if (e.type === 'ram') { cam.shake += .35; sparks.emit((playerCar.position.x + crimCar.position.x) / 2, .9, (playerCar.position.z + crimCar.position.z) / 2, e.side ? 22 : 12, {speed: 4, up: 2.5, color: [1, .85, .5], life: .5}); }
         else if (e.type === 'scrape') { cam.shake += .2; }
         else if (e.type === 'oil') { cam.shake += .15; }
+        else if (e.type === 'nearMiss') { cam.shake += .18; }
         else if (e.type === 'pad') sparks.emit(playerCar.position.x, .3, playerCar.position.z, 12, {speed: 2.5, up: 2.5, color: [.5, 1, .7], life: .6});
         else if (e.type === 'skid') { cam.shake += .5; }
       }
