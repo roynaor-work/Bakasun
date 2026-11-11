@@ -48,6 +48,8 @@ const STYLE6 = `
 .catch-steer-ring{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:3px solid #8fdcffcc;background:#8fdcff22}
 .catch-steer-ring i{position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff}
 .catch-steer-ring[hidden]{display:none}
+.catch-hud[data-v6][data-mode=throw] .catch-tools{left:auto;right:max(118px,calc(env(safe-area-inset-right) + 104px));transform:none;bottom:max(14px,env(safe-area-inset-bottom))}
+.catch-hud[data-v6][data-mode=throw] .catch-tool{min-width:62px;min-height:50px;font-size:11px}
 `;
 
 /** v6 controller: a chase on the winding track (catch-chase6), tyre shots, then the archery-style net throw.
@@ -60,7 +62,9 @@ export function runCatchSession6(ctx) {
   const policeLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'police').reduce((n, b) => n + (b.level || 1), 0);
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
-  const makeThrow = mods => createCatchEngine({balance, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
+  // v6 overrides per level (`levels[].v6`, e.g. radiusScale tuned for the fixed-draw archery) without touching the v5 balance
+  const balance6 = {...balance, levels: balance.levels.map(l => ({...l, ...(l.v6 || {})}))};
+  const makeThrow = mods => createCatchEngine({balance: balance6, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
   const withChase = Boolean(ctx.canvas);
   const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
@@ -78,7 +82,7 @@ export function runCatchSession6(ctx) {
     get snapshot() { return {ready: Boolean(view) || !ctx.canvas, paused, disposed, error, mode, v2: true, v6: true, phase: engine?.state.phase || mode, throwsLeft: engine?.state.throwsLeft ?? null}; },
     get engine() { return engine; }, get chase() { return chase; }, city, v2: true, v6: true,
   };
-  if (params.get('dev') === '1' || ctx.debug) session.debug = {get engine() { return engine; }, chase, view: () => view, release: () => (ctx.canvas ? release() : (engine.release() && undefined)), setAim: a => engine?.setAim(a), step: dt => stepThrow(dt), stepChase: dt => stepChase(dt), skipChase: () => { if (mode === 'chase') { chase.state.phase = 'run'; chase.gun.state.hitChance = 1; chase.gun.state.locked = true; while (!chase.gun.state.stopped) { chase.gun.state.reload = 0; chase.fire(); } while (chase.state.phase !== 'end') { chase.step(1 / 60); } handleChase(chase.drainEvents()); } }, fire: () => chase?.fire()};
+  if (params.get('dev') === '1' || ctx.debug) session.debug = {get engine() { return engine; }, chase, view: () => view, release: () => (ctx.canvas ? release() : (engine.release() && undefined)), setAim: a => engine?.setAim(a), step: dt => stepThrow(dt), stepChase: dt => stepChase(dt), skipChase: () => { if (mode === 'chase') { chase.state.phase = 'run'; chase.gun.state.hitChance = 1; chase.gun.state.locked = true; while (!chase.gun.state.stopped) { chase.gun.state.reload = 0; chase.fire(); } while (chase.state.phase !== 'end') { chase.step(1 / 60); } handleChase(chase.drainEvents()); } }, fire: () => chase?.fire(), held: () => ({boostHeld, brakeHeld, frames: frameCount})};
   if (!ctx.canvas) return session;
 
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
@@ -245,7 +249,7 @@ export function runCatchSession6(ctx) {
   }
 
   // ----- input -----
-  let drag = null, steerDrag = null, boostHeld = false, brakeHeld = false;
+  let drag = null, steerDrag = null, boostHeld = false, brakeHeld = false, frameCount = 0;
   const placeRing = (el, e, r) => { el.hidden = false; el.style.left = (e.clientX - r.left) + 'px'; el.style.top = (e.clientY - r.top) + 'px'; };
   stageEl.addEventListener('pointerdown', e => {
     if (paused || helpOpen || finished) return;
@@ -275,12 +279,13 @@ export function runCatchSession6(ctx) {
   stageEl.addEventListener('pointerup', endDrag, {signal: abort.signal}); stageEl.addEventListener('pointercancel', endDrag, {signal: abort.signal});
   throwButton.addEventListener('click', release, {signal: abort.signal});
   const hold = (button, set) => {
-    button.addEventListener('pointerdown', e => { e.preventDefault(); button.setPointerCapture?.(e.pointerId); set(true); }, {signal: abort.signal});
+    button.addEventListener('pointerdown', e => { e.preventDefault(); set(true); try { button.setPointerCapture?.(e.pointerId); } catch { /* a synthetic event has no active pointer */ } }, {signal: abort.signal});
     for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) button.addEventListener(type, () => set(false), {signal: abort.signal});
   };
   hold(boostButton, v => { boostHeld = v; }); hold(brakeButton, v => { brakeHeld = v; });
   const fireNow = () => { if (mode !== 'chase' || paused || helpOpen) return; chase.fire(); };
   fireButton.addEventListener('pointerdown', e => { e.preventDefault(); fireNow(); }, {signal: abort.signal});
+  fireButton.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); fireNow(); } }, {signal: abort.signal});
   const keys = new Set();
   doc.addEventListener('keydown', e => {
     if (disposed || paused || helpOpen) return;
@@ -344,7 +349,7 @@ export function runCatchSession6(ctx) {
   // ----- loop -----
   const STEP = 1 / 60;
   function frame(now) {
-    raf = requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame); frameCount++;
     if (disposed) return;
     if (!last) last = now;
     let dt = Math.min(.05, (now - last) / 1000); last = now;

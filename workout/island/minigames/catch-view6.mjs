@@ -157,7 +157,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     crimCar.position.y = 0;
     if (st.phase === 'skid') { const u = clamp(st.skid / C.skidSeconds, 0, 1); skidSpin = Math.sin(u * Math.PI) * .9 * (1 - u * .5) + u * .35; placeOnTrack(crimCar, c.s, cd, -skidSpin); if (Math.random() < .8) dust.emit(crimCar.position.x, .3, crimCar.position.z, 2, {speed: 2.5, up: 1.2, color: [.55, .55, .55], gravity: -.5, life: 1}); }
     else placeOnTrack(crimCar, c.s, cd, -clamp((c.targetD - c.d) * .12, -.25, .25));
-    crimCar.rotation.z = Math.sin(phase * 2.3) * st.damage * .03;
+    crimCar.rotation.z = Math.sin(phase * 2.3) * st.damage * .03 + (crimCar.userData.flatLeanNow || 0); crimCar.rotation.x = (crimCar.userData.flatPitch || 0) * .5;
     if (st.damage > .25 && Math.random() < st.damage * .6) dust.emit(crimCar.position.x, 1, crimCar.position.z, 1, {speed: 1, up: 1.6, color: [.5, .5, .5], gravity: -1.2, life: .9});
     flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(phase * 9) * .4); flameC.visible = c.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(phase * 9) * .35);
     const red = Math.sin(phase * 9) > 0; lightOn(playerCar.userData.lights.Light_R, red); lightOn(playerCar.userData.lights.Light_B, !red);

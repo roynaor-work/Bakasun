@@ -22,10 +22,11 @@ export const CHASE6 = Object.freeze({
   crashKeep: .5, stunSeconds: .7, coneKeep: .82, oilSeconds: 1.1, oilDrift: 3.5,
   hitLateral: 1.9, carLen: 4.4,
   crimLatAccel: 7.5,                         // the thief's grip: top speed in a bend = sqrt(crimLatAccel / |k|)
-  crimLead: 2.5, crimLeadPerStage: .35, crimAdrenaline: 2.5, rubberFrom: 30, rubberSpan: 20, rubberSlow: 8, // far ahead the thief runs into traffic and slows, so one bad bend does not lose the chase       // the thief is a little faster than the officer's base speed: boosting and clean bends close the gap
+  crimLead: 2.5, crimLeadPerStage: .35, crimAdrenaline: 2.5, rubberFrom: 16, rubberSpan: 14, rubberSlow: 8, // far ahead the thief runs into traffic and slows, so one bad bend does not lose the chase       // the thief is a little faster than the officer's base speed: boosting and clean bends close the gap
+  weaveSeconds: .9,                          // with a reticle on him the thief weaves between lanes
   crimSteer: 2.6, crimBoostSpeed: 6, crimBoostSeconds: 1.3, crimSlowSeconds: 1, crimFlee: 18,
   trafficSpeed: [9, 13],
-  contactLen: 4.4, contactWidth: 2, sideZone: .8, sideBonus: 1.8, ramRate: .07, crimPush: 1.6, ramDrag: .8,
+  contactLen: 4.4, contactWidth: 2, sideZone: .8, sideBonus: 1.8, ramRate: .04, crimPush: 1.6, ramDrag: .8,
   skidSeconds: 2.2, stopSearch: 45,          // after the last flat: the thief slides to a stop, on a straight if one is near (skidSeconds is the minimum)
   farFactor: 1.3, nearFactor: .75, windFar: 1.25, windNear: .6, bonusThrowAt: .85,
   turnWarn: 55,                              // metres ahead a bend is announced
@@ -99,6 +100,12 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
     if (c.s - s.s < C.crimFlee && rnd() < spec.skill + .15) {
       const away = s.d > c.d + .3 ? -3.3 : s.d < c.d - .3 ? 3.3 : (rnd() < .5 ? -3.3 : 3.3);
       if (freeAhead(c.s, away, 24, s.t) >= 24) bestLane = away;
+    }
+    // a reticle on his car: he weaves to the next free lane, the better his skill the more often
+    c.weave = (c.weave || 0) - c.retarget;
+    if (gun.state.locked && c.weave <= 0 && rnd() < spec.skill + .2) {
+      c.weave = C.weaveSeconds; const options = C.lanes.filter(l => l !== c.targetD && freeAhead(c.s, l, 26, s.t) >= 26);
+      if (options.length) bestLane = options[Math.floor(rnd() * options.length)];
     }
     c.targetD = bestLane;
   }
@@ -204,7 +211,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       const closeness = !s.outcome ? 0 : s.outcome === 'caught' ? 1 : clamp(Math.max(s.damage * .9, prox * .6), 0, 1);
       return {closeness, damage: s.damage, caught: s.outcome === 'caught', byTyres: gun.state.stopped, flats: gun.state.flatCount, shots: gun.state.shots, gap: s.gap, hits: s.hits, crimHits: s.crim.hits, how: s.outcome, seconds: s.t, scrape: s.scrape,
         frame: {s0: s.crim.s + 6, d0: clamp(s.crim.d, -3, 3)}, // the officer steps out just ahead of the stopped getaway car
-        mods: {dist: lerp(level.dist * C.farFactor, level.dist * C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
+        mods: {distScale: lerp(C.farFactor, C.nearFactor, closeness), windScale: lerp(C.windFar, C.windNear, closeness), extraThrows: closeness >= C.bonusThrowAt ? 1 : 0}};
     },
   };
   /** The gun's events join the chase events at once (fire() is called between steps). */
@@ -250,7 +257,7 @@ export function driveChase6(chase, driving = DRIVING6.good, rnd = Math.random) {
     const ds = st.crim.s - st.s, kAhead = Math.abs(chase.track.curvatureAt(st.s + 25));
     chase.setBoost(st.tank > .12 && ds > 4 && near > 18 && kAhead < 1 / 110);
     chase.setBrake(ds < -1.5 || (kAhead > 1 / 60 && st.v > C.baseSpeed + 2));
-    if (chase.gun.state.locked && chase.gun.state.reload <= 0 && fireTimer <= 0) { fireTimer = .25 + rnd() * .3; if (rnd() >= driving.aim && chase.gun.state.hitChance > .35) chase.fire(); }
+    if (chase.gun.state.locked && chase.gun.state.reload <= 0 && fireTimer <= 0) { fireTimer = .25 + rnd() * .3; if (rnd() >= driving.aim && chase.gun.state.hitChance > .22) chase.fire(); }
     chase.step(dt); chase.drainEvents();
   }
   return chase.result();

@@ -83,3 +83,10 @@ Fable מחבר את C לתוך catch-session6/catch-view6 אחרי שהשניי�
 | `catch-audio.mjs` | ללא שינוי. הסשן כבר קורא ל-`audio.engine(v, boosting)`, `audio.engineStop()`, `cue('turn'|'shot'|'shotHit'|'flat'|'skid'|'twang')` כשהם קיימים (אופציונליים). D מוסיף |
 | דפי בדיקה | `tools/catch-view6-harness.html` (עולם + נהג מודל, `window.stepN(n)`), `tools/catch-harness6.html` (סשן מלא, `window.session`) |
 | דגל | `extensions/catch-criminal.mjs`: ברירת מחדל v6 בטעינה עצלה, `?catchV6=0` = v5 |
+
+### עדכון 10:45 UTC
+- `catch-bow-view.mjs` + `catch-bow-hud.mjs` נבנו (גוף ראשון, משגר למטה, החזקה = מתיחה, גרירה = כוונת, רעד בהחזקה, שחרור = זריקה, כוונת שמתחילה על הפושע ב-`autoAngle`, עלים ברוח). C: ליטוש בלבד (משגר וידיים יפים יותר, אנימציית מתיחה, כוונת, טבעות פגיעה), לא לשנות את ה-API.
+- `catch-tyre-fx.mjs` נבנה (הבזק, קו ירי, ניצוצות, גלגל שטוח ורכב שנוטה, עשן, סימן החלקה). B: ליטוש + `catch-fire-hud.mjs` (הסשן מתחבר אליו אוטומטית ומסתיר את ה-HUD הזמני).
+- `catch-audio.mjs`: נוספו `engine(v, boosting)`, `engineStop()`, והרמזים shot/shotHit/flat/skid/turn/draw/twang/whistle/hitBody/hitHead; הסירנה המוקלטת הוגברה (.42). נמדד בדפדפן (`tools/catch-audio-probe.html`): סירנה RMS .069, מנוע בטורבו .092, פופ ירי .080. D: ליטוש ודוח.
+- ביצועים (`tools/catch-perf6.mjs`, GL תוכנתי): 95-129 קריאות ציור, 127-263 אלף משולשים, 1.4-2.4 מ"ש JS לפריים.
+- איזון: `levels[].v6.radiusScale` (דריסה לכל שלב בלי לגעת ב-v5) מכוון ב-`verification/catch-deep-fable/balance/tune-radius6.mjs`.

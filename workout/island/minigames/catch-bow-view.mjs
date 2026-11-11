@@ -191,7 +191,9 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
       const drawn = phase === 'aim' ? cam.draw : 0;
       cam.yawT = -(a.yaw || 0); cam.pitchT = BOW.pitchBase + clamp((a.angle - 20) * .25, -6, 10);
       cam.yaw = damp(cam.yaw, cam.yawT, 12, dt); cam.pitch = damp(cam.pitch, cam.pitchT, 10, dt);
-      cam.fov = damp(cam.fov, lerp(BOW.fovIdle, BOW.fovDrawn, drawn), 8, dt);
+      // far targets get a longer lens so the thief stays readable (44 degrees at 14 m, 30 at 32 m), the draw zooms a little more
+      const dist = Math.max(1, Math.hypot(engine.criminalAt(tn).x, engine.criminalAt(tn).z)), fovFar = clamp(44 - (dist - 14) * (14 / 18), 30, 44);
+      cam.fov = damp(cam.fov, lerp(fovFar, fovFar - 8, drawn), 8, dt);
       cam.kick = Math.max(0, (cam.kick || 0) - dt * 3); cam.shake = Math.max(0, (cam.shake || 0) - dt * 2.2);
       const sh = cam.shake * cam.shake * .5, ts = performance.now() / 1000;
       w(BOW.eyeX, 0, tmp); eye.set(tmp.x, BOW.eyeY + Math.cos(ts * 53) * sh * .2, tmp.z);

@@ -5,12 +5,12 @@
  * Ammo is limited with a slow trickle so a child is never stuck without a shot. Deterministic with the rnd given. */
 
 export const TYRES = Object.freeze({
-  rangeStage1: 30, rangeStage10: 20,     // lock range in metres, shrinking with the stage
+  rangeStage1: 28, rangeStage10: 18,     // lock range in metres, shrinking with the stage
   lateralMax: 3.6,                        // metres of sideways offset that still lock
-  reloadSeconds: .8, trickleSeconds: 6,   // between shots, and one bullet back every trickleSeconds
+  reloadSeconds: 1, trickleSeconds: 5,   // between shots, and one bullet back every trickleSeconds
   ammoMax: [6, 6, 6, 7, 7, 7, 8, 8, 8, 8],
   flatsToStop: [2, 2, 2, 2, 2, 2, 2, 2, 3, 3],
-  baseChance: [.86, .84, .82, .8, .77, .74, .71, .68, .65, .62],
+  baseChance: [.72, .7, .68, .66, .64, .62, .6, .58, .56, .54],
   speedScale: [1, .82, .62, .45, .3],     // thief speed by number of flats
   wobbleAmp: .32,                          // metres sideways per flat
   nearGap: 8,                              // closer than this the gap no longer helps
