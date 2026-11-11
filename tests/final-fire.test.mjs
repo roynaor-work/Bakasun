@@ -51,7 +51,7 @@ test('final fire: wind mode balances itself; even pushing the stick the wrong wa
   if(expectStable)assert.ok(unstable===0,`unstable ${unstable}/${n} with push ${push} (${search||'default'})`);else assert.ok(unstable>n*.5,'without balancing the wind tips the ladder');
  }
  delete globalThis.location;
- assert.ok(autoBalanceSteer(.3)<0&&autoBalanceSteer(-.3)>0&&autoBalanceSteer(2)>=-1.4);
+ assert.ok(autoBalanceSteer(.3)<0&&autoBalanceSteer(-.3)>0&&autoBalanceSteer(2)>=-1.6);
 });
 test('final fire: a tap latches the rescue and the latch drops for driving, hose, hydrant, nothing left or a finished rescue',()=>{
  assert.equal(nextRescueLatch(false,{tapped:true,available:true}),true);

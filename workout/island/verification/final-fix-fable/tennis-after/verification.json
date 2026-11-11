@@ -9,38 +9,6 @@
  "physicalPhone": false,
  "touch": "CDP Input.dispatchTouchEvent",
  "checks": {},
- "frames": [
-  "tennis-after-serve-meter.jpg",
-  "tennis-after-return-incoming.jpg",
-  "tennis-after-return-tap.jpg"
- ],
- "difficulty": "easy",
- "search": "?dev=1",
- "controls": {
-  "zone": {
-   "x": 185.6796875,
-   "y": 242,
-   "w": 371.359375,
-   "h": 296
-  },
-  "hit": {
-   "x": 778,
-   "y": 330,
-   "w": 84,
-   "h": 84
-  },
-  "serve": {
-   "x": 688,
-   "y": 336,
-   "w": 64,
-   "h": 64
-  },
-  "drop": {
-   "x": 688,
-   "y": 240,
-   "w": 64,
-   "h": 64
-  }
- },
- "error": "cdpSession.send: Target page, context or browser has been closed\n    at send (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:46:23)\n    at move (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:48:94)\n    at stickTowards (/home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:67:157)\n    at /home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:89:11"
+ "frames": [],
+ "error": "page.waitForFunction: Target page, context or browser has been closed\n    at /home/user/Bakasun/workout/island/tests/final-tennis-browser.mjs:30:13"
 }

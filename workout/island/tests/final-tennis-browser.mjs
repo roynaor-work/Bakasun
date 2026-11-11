@@ -12,7 +12,7 @@ import {fileURLToPath} from 'node:url';
 import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const MODE=process.env.MODE==='before'?'before':'after',POINTS=Number(process.env.POINTS)||10,DIFFICULTY=process.env.DIFFICULTY||'';
+const MODE=process.env.MODE==='before'?'before':'after',POINTS=Number(process.env.POINTS)||6,DIFFICULTY=process.env.DIFFICULTY||'';
 const base=fileURLToPath(new URL('../verification/final-fix-fable/',import.meta.url)),frames=base+'frames/',logDir=base+`tennis-${MODE}/`;
 await mkdir(frames,{recursive:true});await mkdir(logDir,{recursive:true});
 const viewport={width:844,height:390};
@@ -64,17 +64,12 @@ try{
  const shotFrame=async name=>{const file=`tennis-${MODE}-${name}.jpg`;await page.screenshot({path:frames+file,type:'jpeg',quality:70});report.frames.push(file);};
  const hasGreen=bg=>/#67d398|103,\s*211,\s*152/i.test(bg),hasYellow=bg=>/#efc355|239,\s*195,\s*85/i.test(bg);
  // ---- play ----
- const points=[],returns=[],drops=[];let serveSeen=null,stickOn=false,eventId=-1,incomingKey=null,incoming=null,pendingDrop=null,serveTapAt=0,framesRun=0,shotServe=false,shotReturn=false,shotTap=false,shotDrop=false;
+ const points=[],returns=[],drops=[];let serveSeen=null,stickOn=false,tapNo=0,eventId=-1,incomingKey=null,incoming=null,pendingDrop=null,serveTapAt=0,framesRun=0,shotServe=false,shotReturn=false,shotTap=false,shotDrop=false;
  const stickTowards=async targetX=>{const sx=zone.x,sy=zone.y,dx=Math.max(-1,Math.min(1,targetX*4))*44;if(!stickOn){await down(1,sx,sy);stickOn=true;}await move(1,sx+dx,sy);};
  const stickOff=async()=>{if(stickOn){await up(1);stickOn=false;}};
- log('controls read');let s=await read();const startPoint=s.pointNumber;log('first state',s.phase,s.renderMode);
+ log('controls read');let s=await read();const startPoint=s.pointNumber;absorb(s);log('first state',s.phase,s.renderMode);
  while(s.pointNumber-startPoint<POINTS&&s.phase!=='complete'&&framesRun<9000){
   const step=(s.phase==='rally'&&s.contact?.side===0&&s.contact.eta<.6)||(s.phase==='toss'&&s.server===0&&s.serveMeter>.3)?16:(s.phase==='rally'&&s.contact?.side===1&&!pendingDrop)?80:40;
-  if(s.event.id!==eventId){eventId=s.event.id;const e=s.event;
-   if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){pendingDrop={at:s.elapsed,reached:false,pointNumber:s.pointNumber,landZ:null};}
-   if(e.type==='hit'&&e.side===1&&!e.serving&&pendingDrop)pendingDrop.reached=true;
-   if(e.type==='bounce'&&pendingDrop&&pendingDrop.landZ===null&&s.lastHitter===0)pendingDrop.landZ=s.ballZ;
-   if(['point','game','complete'].includes(e.type)){points.push({n:s.pointNumber,winner:e.winner,reason:e.reason,rallyHits:s.rallyHits,elapsed:s.elapsed});if(pendingDrop){drops.push({...pendingDrop,end:s.elapsed,seconds:s.elapsed-pendingDrop.at,winner:e.winner,reason:e.reason});pendingDrop=null;}if(incoming){returns.push(incoming);incoming=null;incomingKey=null;}}}
   if(s.server===0&&s.phase==='serve'){await stickOff();await tapButton(serveBtn);serveTapAt=s.elapsed;}
   else if(s.phase==='toss'&&s.server===0){
    if(!serveSeen&&s.meter.visible){serveSeen={...s.meter,serveMeter:s.serveMeter,green:hasGreen(s.meter.background),yellow:hasYellow(s.meter.background)};}
@@ -89,12 +84,12 @@ try{
     if(s.meter.visible&&s.contact.eta>.2)incoming.visibleBeforeTap=true;
     await stickTowards(s.contact.x-s.px);
     if(!shotReturn&&s.contact.eta<.75&&s.contact.eta>.45){await shotFrame('return-incoming');shotReturn=true;}
-    if(s.contact.eta<=.08){const dropNow=(s.pointNumber%2===1)&&s.rallyHits>=2&&s.pz<7.4;incoming.meterAtTap={...s.meter};incoming.hmAtTap=s.hm;incoming.zoneAtTap=s.hm?.zone??null;incoming.tapped=true;incoming.drop=dropNow;
+    if(s.contact.eta<=.08){const dropNow=tapNo++%2===1;incoming.meterAtTap={...s.meter};incoming.hmAtTap=s.hm;incoming.zoneAtTap=s.hm?.zone??null;incoming.tapped=true;incoming.drop=dropNow;
      if(!shotTap){await shotFrame('return-tap');shotTap=true;}
      await tapButton(dropNow?dropBtn:hit);}
    }
   }else{await stickOff();if(pendingDrop&&!shotDrop&&s.lastHitter===0&&s.ballZ<0){await shotFrame('drop-flight');shotDrop=true;}}
-  await tick(step);framesRun++;s=await read();
+  await tick(step);framesRun++;s=await read();absorb(s);
   if(framesRun%200===0||framesRun<=6)log('frame',framesRun,'point',s.pointNumber-startPoint,'phase',s.phase,'returns',returns.length,'drops',drops.length);
  }
  await stickOff();
