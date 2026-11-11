@@ -11,7 +11,7 @@ export const SOCCER_TEAM_PRESETS={
  '11':{extras:7,length:105,width:68,tune:{speedExp:.7}}
 };
 /** The product default (session) is 7-a-side on 58x36; the model's own default stays 6 so every contract is unchanged. `?soccerTeams=6` restores today's game. */
-export const SOCCER_PRODUCT_TEAMS='7';
+export const SOCCER_PRODUCT_TEAMS='8';
 export function resolveSoccerTeams(option,fallback='6'){
  const pick=v=>Object.hasOwn(SOCCER_TEAM_PRESETS,String(v))?String(v):null;
  const search=globalThis.location?.search;

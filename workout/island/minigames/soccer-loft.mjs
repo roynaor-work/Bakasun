@@ -14,10 +14,34 @@ export function safeLoftPoint(point,c){
  return {x:clamp(finite(point.x),-hx+Math.min(margin,hx*.25),hx-Math.min(margin,hx*.25)),z:clamp(finite(point.z),-hz+Math.min(margin,hz*.25),hz-Math.min(margin,hz*.25))};
 }
 
+/** Where a lob must land so that, on its way down, it passes `receiver` at header height. The pass is flown with the real flight solver and
+ * stepped with the real ball integrator; the landing is moved past the receiver (away from the passer) until the descent crosses the header
+ * height over the receiver. Returns the landing point (the receiver itself if no better point is found). */
+export function headerLandingPoint(ball,receiver,c,power=0){
+ const u=unit(receiver.x-ball.x,receiver.z-ball.z),height=finite(c.aerial?.headerHeight,1.45),dt=c.match.fixedStep;
+ const crossing=landing=>{
+  const solved=createLoftFlight(ball,landing,c,power),f={x:ball.x,y:finite(ball.y,c.physics.ballRadius),z:ball.z,vx:solved.vx,vy:solved.vy,vz:solved.vz,curve:0};
+  for(let i=0;i<400;i++){
+   const descending=f.vy<0;rollBall(f,dt,c);
+   if(descending&&f.y<=height)return (f.x-ball.x)*u.x+(f.z-ball.z)*u.z;
+   if(descending&&f.y<=c.physics.ballRadius+1e-7)break;
+  }
+  return null;
+ };
+ const along=(receiver.x-ball.x)*u.x+(receiver.z-ball.z)*u.z;
+ let lo=0,hi=6;
+ for(let i=0;i<14;i++){
+  const mid=(lo+hi)/2,at=crossing(safeLoftPoint({x:receiver.x+u.x*mid,z:receiver.z+u.z*mid},c));
+  if(at===null){hi=mid;continue;}
+  if(at<along)lo=mid;else hi=mid;
+ }
+ return safeLoftPoint({x:receiver.x+u.x*(lo+hi)/2,z:receiver.z+u.z*(lo+hi)/2},c);
+}
+
 /** Power chooses range along the requested direction. Only an automatic aim may
  * turn slightly to a teammate already near that landing point; a manual drag
  * keeps its ray until that ray would leave the pitch. No hidden AI intent. */
-export function loftDestination(state,c,power=0,{aim:requestedAim,point}={}){
+export function loftDestination(state,c,power=0,{aim:requestedAim,point,snap=false}={}){
  const p=state.players.find(player=>player.id===state.controlled),b=state.ball;
  if(!p)throw Error('A controlled soccer player is required');
  const q=clamp(finite(power),0,1),passing=c.passing;
@@ -51,6 +75,24 @@ export function loftDestination(state,c,power=0,{aim:requestedAim,point}={}){
   if(score<best-1e-10||Math.abs(score-best)<=1e-10&&(target===null||member.id<target)){
    best=score;target=member.id;
    bestReceiver=receiver;bestTurn=turn;
+  }
+ }
+ if(!bestReceiver&&snap&&!manual&&!point){
+  // Pointer-style lob: with the stick towards a team-mate (cone of about 25 degrees) the ball goes to that team-mate whatever the charge.
+  // The charge then only chooses the flight time. A drag (manual) keeps its ray as before.
+  const dirSign=state.attackDir*(p.team===0?1:-1),cone=Math.cos(clamp(finite(c.assistance?.passing?.lobSnapDegrees,25),0,45)*Math.PI/180);let bestScore=Infinity;
+  for(const member of state.players){
+   if(member.team!==p.team||member.id===p.id||member.recover>0||member.slideTime>0||member.role==='keeper')continue;
+   const d=distance(member,b);if(d<min||d>max+zone)continue;
+   if(Math.abs(member.x)>hx-c.physics.ballRadius||Math.abs(member.z)>hz-c.physics.ballRadius)continue;
+   const dot=((member.x-b.x)*aim.x+(member.z-b.z)*aim.z)/d;if(dot<cone)continue;
+   const score=d*(1+(1-dot)*6);
+   if(score<bestScore){bestScore=score;target=member.id;
+    const lead=Math.min(.35,Math.max(0,finite(passing.leadSeconds))),lx=finite(member.vx)*lead,lz=finite(member.vz)*lead,leadLength=Math.hypot(lx,lz),k=leadLength>maxLead?maxLead/leadLength:1;
+    bestReceiver=safeLoftPoint({x:member.x+lx*k,z:member.z+lz*k},c);
+    // A team-mate in the attacking box gets the ball at head height, not at his feet.
+    if(member.x*dirSign>hx-c.pitch.penaltyDepth&&Math.abs(member.z)<c.pitch.penaltyWidth/2)bestReceiver=headerLandingPoint(b,bestReceiver,c,q);
+    bestTurn=angle(aim,unit(bestReceiver.x-b.x,bestReceiver.z-b.z,aim));}
   }
  }
  if(bestReceiver&&!manual&&!point){landing=bestReceiver;assisted=distance(landing,originalLanding)>1e-8;correction=bestTurn;}
