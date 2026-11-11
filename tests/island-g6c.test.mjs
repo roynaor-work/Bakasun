@@ -1,3 +1,5 @@
+// Pins the pre-11/11 aim (`?navalAim=v20`: no edge stretch, no tap-to-aim); the new aim is covered by island-polish-v11.test.mjs.
+globalThis.location={search:'?navalAim=v20'};
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
