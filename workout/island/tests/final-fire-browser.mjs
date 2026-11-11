@@ -57,7 +57,7 @@ for(const variant of variants){
   const spray=await center('#shoot');await touch('touchStart',spray);await tick(700);s=await snap();
   // ---- 2b. water gauge (Roy, 11/11): no word inside the water button; a bar with percent that turns orange/red as the tank empties ------
   const gaugeBefore=await page.evaluate(()=>{const g=document.querySelector('.fire-water-gauge');if(!g)return null;const r=g.getBoundingClientRect();return {percent:Number(g.dataset.percent),level:g.dataset.level,text:g.textContent.trim(),box:{x:r.x,y:r.y,w:r.width,h:r.height},visible:r.width>0&&r.height>0&&getComputedStyle(g).visibility!=='hidden'};});
-  for(let i=0;i<60;i++)await tick(100);await shot('water-low');
+  for(let i=0;i<110;i++)await tick(100);await shot('water-low'); // the pump also runs dry and recharges in between, so the tank empties slower than waterUsePerSecond
   const gaugeLow=await page.evaluate(()=>{const g=document.querySelector('.fire-water-gauge');return g?{percent:Number(g.dataset.percent),level:g.dataset.level}:null;}),refillText=await page.locator('#fire-refill').evaluate(n=>n.textContent.trim()),low=await snap();
   await touch('touchEnd');await tick(32);
   const inside=b=>b&&b.x>=0&&b.y>=0&&b.x+b.w<=844&&b.y+b.h<=390;
@@ -75,6 +75,7 @@ for(const variant of variants){
   const ladderButton=await center('#pass');await tapAt(ladderButton.x,ladderButton.y,80); // a short tap, not a hold
   const during=[];let rescued=false,opened=false;for(let i=0;i<40;i++){await tick(100);s=await snap();const t=await truckPose();during.push({time:+s.time.toFixed(2),rescuing:s.rescuing,progress:+s.rescueProgress.toFixed(2),extension:+s.ladder.extension.toFixed(2),turretDeg:+deg(fold(t.turretYaw)).toFixed(1),armScale:t.arm?+t.arm.scale.toFixed(2):null,armPitchDeg:t.arm?+deg(t.arm.pitch).toFixed(1):null,boxLadder:s.renderMetrics.truck.boxLadderVisible});if(s.ladder.extension>0&&(t.arm?t.arm.scale>1.05||Math.abs(t.arm.pitch)>.05:s.renderMetrics.truck.boxLadderVisible))opened=true;if(i===8)await shot('rescue-ladder');if(s.rescues[0].rescued){rescued=true;break;}}
   const descent=[];for(let i=0;i<60;i++){await tick(100);const d=await snap();descent.push({time:+d.time.toFixed(2),descent:+(d.rescues[0].descent??0).toFixed(2),extension:+d.ladder.extension.toFixed(2),boxLadder:d.renderMetrics.truck.boxLadderVisible});if(d.rescues[0].descent>=1&&i>=8)break;} // the person climbs down for descentSeconds, then the ladder folds back
+  for(let i=0;i<15;i++)await tick(100); // the fold-back eases over about a second
   const after=await truckPose(),afterSnap=await snap();rec.descent=descent;
   rec.rescue={during,rescued,opened,afterTurretDeg:+deg(fold(after.turretYaw)).toFixed(1),afterArmScale:after.arm?+after.arm.scale.toFixed(2):null,afterBoxLadder:afterSnap.renderMetrics.truck.boxLadderVisible};
   checks.singleTapRescues={pass:rescued,seconds:rescued?+(s.time-during[0].time).toFixed(2):null};
