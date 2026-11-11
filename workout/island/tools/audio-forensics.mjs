@@ -5,7 +5,7 @@
  * whistle-like segments: a narrow 1.5-5 kHz line that lasts, or a pitch glide.
  * Usage: node tools/audio-forensics.mjs <outDir> [--games=streetSlam,soccer,tennis,alpineRush,islandRacing,city]
  *        [--seconds=180] [--city-seconds=30] [--assert] [--query=extra&params]
- * --assert exits 1 when a sustained tone appears during a live-play phase. */
+ * --assert exits 1 when a sustained tone, a steady bright hum or repeated glides appear during a live-play phase. */
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
@@ -204,10 +204,11 @@ for(const game of GAMES){
   finally{await context.close();}
   // Classification: whistle-like segments overall and inside live-play phases.
   const {result,file}=classify(game,log,game==='city'?CITY_SECONDS:SECONDS);
-  summary.games[game]=result;if(result.liveTones.length)failures++;
+  // --assert: a sustained tone or a steady bright hum in live play fails, and so do three or more squeak glides (a repeat is a pattern, one may be a stray).
+  summary.games[game]=result;if(result.liveTones.length||result.liveHums.length||result.liveGlides.length>=3)failures++;
   await writeFile(path.join(outDir,`${game}.json`),JSON.stringify(file));
   console.log(JSON.stringify({game,contexts:log.contexts.length,frames:log.frames.length,phases:result.phases,sources:result.sources,segments:result.segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,live:s.live,phases:s.phases,sources:s.sources})),errors}));
 }
 await browser.close();await server.close();
 await writeFile(path.join(outDir,'summary.json'),JSON.stringify(summary,null,1));
-if(ASSERT&&failures){console.error(`audio-forensics: sustained 2-5 kHz tone during live play in ${failures} game(s)`);process.exit(1);}
+if(ASSERT&&failures){console.error(`audio-forensics: whistle-like sound during live play in ${failures} game(s)`);process.exit(1);}
