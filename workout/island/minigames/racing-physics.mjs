@@ -14,6 +14,11 @@ export const RACING_NUMBERS = Object.freeze([1, 16, 44, 63, 11, 4, 27, 55, 81, 1
 const ERS = { brake: 14, corner: 0.75, cornerMax: 8, drift: 3, line: 0.8 };
 // Gearbox (racing-v11). Shift points as fractions of the car's top speed; ENGINE_TAU is the time constant of the pull towards it.
 const GEARS = 7, GEAR_BOUNDS = [0, .15, .31, .47, .62, .76, .89], SHIFT_CUT = .16, ENGINE_TAU = 5.0;
+// racing-deep-m3: on the throttle alone gear 7 pulls to TOP_CAP of the car's maximum and keeps creeping towards it; the last few percent (the note that sat
+// "stuck" at the limiter) come only with the slipstream, a boost pad or the ERS push (config.topCap=false / ?racingTopCap=0 restores 100% on throttle).
+// REV_PULL: at the top of a gear (last 20% of its band) the pull grows up to +35% so the box reaches the shift point a little sooner at high revs
+// (Roy: "with more revs, shift up a bit faster"; config.revShift=false / ?racingRevShift=0 keeps the flat pull).
+const TOP_CAP = .965, REV_PULL = .35;
 function randomSource(seed) {
   let value=Number(seed)>>>0;
   return () => { value=(Math.imul(value,1664525)+1013904223)>>>0; return value/4294967296; };
@@ -34,7 +39,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const brakeUp=clamp(finite(equipment.brakes,1),1,1.3), steerUp=clamp(finite(equipment.steer,1),1,1.12), aeroUp=clamp(finite(equipment.aero,1),1,1.25);
   const drivers=Array.isArray(config.drivers)?config.drivers:null;
   // config.walls=false (or ?racingWalls=0) restores the old open shoulders.
-  const shiftMapOn=config.shiftMap!==false,engineModel=config.engine!==false,ersOn=config.ers!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
+  const shiftMapOn=config.shiftMap!==false,engineModel=config.engine!==false,ersOn=config.ers!==false,topCapOn=config.topCap!==false,revShiftOn=config.revShift!==false,engineUp=clamp(finite(equipment.engine,1),1,1.16),walls=config.walls!==false,wallLimit=track.width*.5+.2;
   const skill=difficulty==='hard'?1.06:difficulty==='normal'?1.025:1;
   const names=['אתם','אלמוג','טורקיז','שמש','ברקת'];
   // racing-grid-v1: extraRivals more cars share the grid with the player and the four scoring drivers (league standings, rank contract and result stay on those five).
@@ -229,14 +234,17 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       if(!car.gearInit){g=up;car.gearInit=true;}
       else if(up>g&&car.gearT>=.35){g++;car.gearT=0;}
       else if(down<g&&car.gearT>=.6){g--;car.gearT=0;}
-      const lo=B[g-1]*scale,hi=g<GEARS?B[g]*scale:1,frac=clamp((ratio-lo)/(hi-lo),0,1);
+      // gear 7 ends at the natural top (TOP_CAP) so the revs read near the limiter there; beyond it (slipstream, boost) the rpm stays at the limiter
+      const lo=B[g-1]*scale,hi=g<GEARS?B[g]*scale:(topCapOn?TOP_CAP:1),frac=clamp((ratio-lo)/(hi-lo),0,1);
       if(g>car.gear&&throttle&&car.speed>1)car.shiftT=SHIFT_CUT;
       car.gear=g;car.shiftT=Math.max(0,car.shiftT-dt);
-      const shape=1.4-.75*frac,cut=car.shiftT>0?.06:1;
-      if(throttle&&car.speed<target){
-        const pull=(target-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?2.1:1)*(car.isPlayer?engineUp:1);
-        car.speed=Math.min(target,car.speed+pull*dt);
-      } else car.speed=moveToward(car.speed,target,dt*5);
+      const shape=(1.4-.75*frac)*(revShiftOn&&g<GEARS&&frac>.8?1+REV_PULL*(frac-.8)/.2:1),cut=car.shiftT>0?.06:1;
+      const goal=topCapOn?Math.min(target,(top*TOP_CAP*(1+.07*car.draft*aeroUp)+(car.boosting?12:0))*(throttle?1:0)):target;
+      if(throttle&&car.speed<goal){
+        // gears 1-6 pull towards the full top as before (the rise is unchanged); gear 7 pulls towards the natural top, so the car keeps creeping up to it
+        const pull=((g>=GEARS?goal:target)-car.speed)/ENGINE_TAU*shape*cut*(1+.4*car.draft)*(car.boosting?2.1:1)*(car.isPlayer?engineUp:1);
+        car.speed=Math.min(goal,car.speed+pull*dt);
+      } else car.speed=moveToward(car.speed,goal,dt*5);
       const rpmTarget=throttle?.2+.8*frac:Math.max(.12,.14+.5*frac);
       car.rpm+=(rpmTarget-car.rpm)*(1-Math.exp(-dt*(car.shiftT>0?30:12)));
     } else car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
@@ -259,8 +267,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       if(drifting)rate+=ERS.drift;
       if(car.speed>22&&!car.offroad&&car.recoveryTime<=0&&Math.abs(before.lateral)<track.width*.2&&Math.abs(car.steer)<.15)rate+=ERS.line;
       if(car.boosting&&input.nitro)rate=0;
-      const cap=100*nitroUpgrade,gain=Math.max(0,Math.min(cap-car.nitro,rate*dt));car.nitro+=gain;car.ersHarvested+=gain;
+      const cap=100*nitroUpgrade,wasFull=car.nitro>=cap-.5,gain=Math.max(0,Math.min(cap-car.nitro,rate*dt));car.nitro+=gain;car.ersHarvested+=gain;
       car.ersRate+=(rate-car.ersRate)*(1-Math.exp(-dt*8));car.charging=car.ersRate>1.2&&car.nitro<cap-.5?1:0;
+      // racing-deep-m3: one 'ersFull' event per fill (HUD: "ERS מלא" once, a short buzz); the next one needs a spend first
+      if(!wasFull&&gain>0&&car.nitro>=cap-.5)event('ersFull',car);
     }
     if(car.isPlayer&&Math.abs(steer)<.065&&config.steeringAssist!==false&&!car.offroad) {
       // Small guidance softens a released steering pad. It cannot negotiate a lap by itself.

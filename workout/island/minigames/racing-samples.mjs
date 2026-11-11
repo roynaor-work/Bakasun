@@ -42,7 +42,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     source.onended=()=>{try{source.disconnect();g.disconnect();}catch{}};
   }
   /** rpm 0..1 (the physics rpm); level is the overall sample level (0 when muted or paused). */
-  function update({rpm=0,throttle=1,speed=0,drifting=false,steer=0,kerb=0,offroad=false,level=1}={}){
+  function update({rpm=0,throttle=1,speed=0,drifting=false,braking=false,steer=0,kerb=0,offroad=false,level=1}={}){
     if(!ready||disposed)return;const now=context.currentTime;
     target(bus.gain,level,now,.05);
     // fake engine rpm from the physics value: idle 4900 .. redline about 15300; crossfade the two nearest loops (equal power)
@@ -52,7 +52,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
       const loop=loops.get(id);let weight=0;if(i===lo)weight=Math.cos(t*Math.PI/2);else if(i===lo+1)weight=Math.sin(t*Math.PI/2);
       target(loop.gain.gain,weight*.07*load,now,.045);target(loop.source.playbackRate,clamp(fake/loop.spec.rpm,.82,1.2),now,.045);
     });
-    const slip=drifting?.07+Math.abs(steer)*.05:0;
+    const slip=drifting?.07+Math.abs(steer)*.05:braking&&speed>14?.03+Math.min(speed/45,1)*.03:0;  // racing-deep-m3: the squeal loop also under hard braking
     target(loops.get('tyre-squeal').gain.gain,offroad?0:slip,now,.08);
     target(loops.get('wind-speed').gain.gain,Math.min(.07,.012+speed/55*.055),now,.15);
     target(loops.get('wind-speed').source.playbackRate,.85+Math.min(speed/60,1)*.35,now,.2);
