@@ -1,3 +1,4 @@
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 // racing-look-v1: better looking formula cars. Same GLB (11.9K triangles), no new files: clear-coated metallic paint, carbon and rubber tuning, an env-map boost,
 // generic number/stripe decals (canvas textures, no brands), brake lights that follow the braking, a motion-blur disc per front wheel, speed lines on the camera and cheap
 // stand-ins for rivals that are far away. Every part is off with ?racingLook=0. Budget: about +2% triangles over the formula car, +0 textures per rival (5 shared canvases).
@@ -26,10 +27,10 @@ function stripeTexture(T,color,keep){
  const t=keep(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=4;return t;
 }
 /** Adds decals, brake lights and a wheel-blur disc to one formula car. `car` is the cloned model (rear at -Z, nose at +Z). Returns handles for per-frame updates. */
-export function dressCar(T,car,{index,color,keep,player=false}){
+export function dressCar(T,car,{index,color,keep,player=false,number=index+1}){
  const decals=new T.Group();decals.name='decals';car.add(decals);
  const flat=(map,w,h,x,y,z,ry=0,rx=0)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(w,h)),keep(new T.MeshBasicMaterial({map,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,toneMapped:false})));m.position.set(x,y,z);m.rotation.set(rx,ry,0);decals.add(m);return m;};
- const num=numberTexture(T,index+1,color,keep),stripe=stripeTexture(T,color,keep);
+ const num=numberTexture(T,number,color,keep),stripe=stripeTexture(T,color,keep);
  // rear face of the rear wing (the camera sits behind): number left, stripe right; nose top: number; engine cover side stripes
  flat(num,.52,.26,-.26,.92,-2.312,Math.PI);flat(stripe,.62,.16,.3,.92,-2.312,Math.PI);
  const down=new T.Raycaster(),mesh=[];car.traverse(o=>{if(o.isMesh&&!decals.children.includes(o))mesh.push(o);});car.updateMatrixWorld(true);
@@ -43,11 +44,12 @@ export function dressCar(T,car,{index,color,keep,player=false}){
 }
 /** A cheap silhouette (about 90 triangles) shown instead of the 11.9K-triangle car when a rival is more than ~70 m from the camera. */
 export function createStandIn(T,color,keep){
- const g=new T.Group(),paint=keep(new T.MeshStandardMaterial({color,metalness:.5,roughness:.35})),dark=keep(new T.MeshStandardMaterial({color:'#15191d',roughness:.8}));
- const m=(geo,mat,x,y,z)=>{const o=new T.Mesh(keep(geo),mat);o.position.set(x,y,z);g.add(o);return o;};
- m(new T.BoxGeometry(.7,.34,3.6),paint,0,.38,.1);m(new T.BoxGeometry(2,.06,.6),paint,0,.2,1.9);m(new T.BoxGeometry(1.35,.06,.5),paint,0,.95,-2.05);
- for(const sx of [-1,1])for(const [z,r] of [[1.28,.34],[-1.26,.36]])m(new T.CylinderGeometry(r,r,.32,8),dark,sx*.95,r,z).rotation.z=Math.PI/2;
- g.visible=false;return g;
+ // one merged, vertex-coloured mesh (a single draw call per far car)
+ const paint=new T.Color(color),dark=new T.Color('#15191d'),parts=[];
+ const add=(geo,col,x,y,z,rz=0)=>{const g=geo.toNonIndexed();g.deleteAttribute('uv');if(rz)g.rotateZ(rz);g.translate(x,y,z);const n=g.attributes.position.count,c=new Float32Array(n*3);for(let i=0;i<n;i++){c[i*3]=col.r;c[i*3+1]=col.g;c[i*3+2]=col.b;}g.setAttribute('color',new T.BufferAttribute(c,3));parts.push(g);};
+ add(new T.BoxGeometry(.7,.34,3.6),paint,0,.38,.1);add(new T.BoxGeometry(2,.06,.6),paint,0,.2,1.9);add(new T.BoxGeometry(1.35,.06,.5),paint,0,.95,-2.05);
+ for(const sx of [-1,1])for(const [z,r] of [[1.28,.34],[-1.26,.36]])add(new T.CylinderGeometry(r,r,.32,8),dark,sx*.95,r,z,Math.PI/2);
+ const merged=keep(mergeGeometries(parts)),g=new T.Group(),m=new T.Mesh(merged,keep(new T.MeshStandardMaterial({vertexColors:true,metalness:.4,roughness:.4})));g.add(m);g.visible=false;return g;
 }
 /** 28 streaks around the view axis, attached to the camera; only visible at speed. One draw call. */
 export function createSpeedLines(T,camera,scene,keep){
