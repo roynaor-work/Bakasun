@@ -46,3 +46,18 @@ test('final-boar: the shell forwards the kill switch and the layout keeps the ab
   // v20 layout for the record: abilities at left:28px bottom:140px, 312x82, inside the 48% zone
   assert.equal(overlaps({x:0,y:390*.22,w:844*.48,h:390*.78},{x:28,y:390-140-82,w:312,h:82}),true,'v20 abilities sat inside the stick zone');
 });
+
+test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboard 1-4/E/Q untouched', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
+  assert.match(src,/const HUD_V21=!LEGACY&&new URLSearchParams\(location\.search\)\.get\('boarHud'\)!=='v20'/);
+  assert.match(src,/if\(HUD_V21\)buildCompactHud\(\);/);
+  assert.match(src,/weaponBtn\.onclick=nextWeapon;/);
+  assert.match(src,/function nextWeapon\(\)\{const owned=WEAPON_ORDER\.filter\(k=>save\.weapons\[k\]\);/);
+  assert.match(src,/if\(e\.code==='KeyQ'\)rocket\(\);if\(e\.code==='KeyE'\)frost\(\);/,'desktop shortcuts stay');
+  assert.match(src,/const n=\['Digit1','Digit2','Digit3','Digit4'/,'digit shortcuts stay');
+  assert.match(session,/get\('boarHud'\)==='v20'\)url\.searchParams\.set\('boarHud','v20'\)/);
+  assert.match(css,/\.hudv21 #weapons,\.hudv21 \.ammo-panel\{display:none\}/);
+  assert.match(css,/#weapon-btn\{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px/,'weapon button at least 44 px');
+  assert.match(css,/\.hudv21 \.ability\{width:52px;height:52px;border-radius:50%/,'round ability buttons at least 44 px');
+  assert.match(css,/\.hudv21 \.abilities\{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column/,'abilities in a right column, not a mid-screen row');
+});

@@ -23,6 +23,22 @@ let aimStick=null,firePointer=null,aimZone=null,fireBtn=null,aimShots=0;
 const FIRE_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarFire')!=='v20';
 let fireSource='none';const shotsBy={button:0,scene:0,keyboard:0,mouse:0,auto:0,qa:0,unknown:0},abilityBy={rocket:0,frost:0,fury:0};let stickNoButton=0,abilityFromLeft=0;
 function setFiring(on,source){pointer.down=on;fireSource=on?source:'none';}
+// 11/11/2026 (Roy, phone): the HUD hid the water where the boars come out. Compact HUD: one weapon-switch button, small round ability buttons in the right column,
+// coins/defence as thin strips in the top corners, a small wave counter, no bottom bar. `?boarHud=v20` restores the v20 cards.
+const HUD_V21=!LEGACY&&new URLSearchParams(location.search).get('boarHud')!=='v20';
+let weaponBtn=null,frames=0;
+function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
+function buildCompactHud(){
+  $('game').classList.add('hudv21');
+  weaponBtn=document.createElement('button');weaponBtn.id='weapon-btn';weaponBtn.type='button';weaponBtn.setAttribute('aria-label','החלפת נשק');
+  weaponBtn.innerHTML='<b class="wicon"></b><strong class="wname"></strong><small class="wammo"></small><i class="wbar"></i>';weaponBtn.onclick=nextWeapon;
+  $('battle-ui').append(weaponBtn);
+}
+function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCache[current],s=wstate[current];weaponBtn.querySelector('.wicon').textContent=w.icon;weaponBtn.querySelector('.wname').textContent=w.short;
+  if(!ws||!s)return;const bar=weaponBtn.querySelector('.wbar');
+  if(ws.mode==='heat'){weaponBtn.querySelector('.wammo').textContent=s.overheated?'מתקרר':`חום ${Math.round(s.heat)}%`;bar.style.width=`${s.heat}%`;bar.style.background=s.overheated?'#ed7451':s.heat>70?'#ffb067':'#ffd06b';}
+  else{weaponBtn.querySelector('.wammo').textContent=s.reload>0?'טוען':`${s.ammo} / ${ws.mag}`;bar.style.width=`${s.reload>0?(1-s.reload/s.reloadMax)*100:s.ammo/ws.mag*100}%`;bar.style.background=s.reload>0?'#ffb067':'#9ad9c0';}
+  weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
 function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
 let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
@@ -169,7 +185,7 @@ function init(){
   for(const [x,z,k,y] of [[-8,-3,'scout'],[0,-8,'crab'],[7.5,-4,'runner'],[5,-18,'manta',9.5]]){const e=makeEnemy(k);e.root.position.set(x,y??groundY(x,z),z);e.baseX=x;e.root.rotation.y=-x*.03;scene.add(e.root);showcase.push(e);}
   updateQualityLabel();
   setMode('menu');resize();updateStartLabel();
-  if(AIMSTICK)buildAimControls();
+  if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
@@ -749,6 +765,7 @@ function updateHud(){
   $('rocket').querySelector('i').style.width=`${(1-rocketCooldown/st.rocketCd)*100}%`;$('frost').querySelector('i').style.width=`${(1-frostCooldown/st.frostCd)*100}%`;
   $('fury-text').textContent=furyTimer>0?`${Math.ceil(furyTimer)} שנ׳`:fury>=100?'מוכן':`${Math.floor(fury)}%`;$('fury').disabled=fury<100||furyTimer>0;$('fury').classList.toggle('ready',fury>=100);$('fury').querySelector('i').style.width=`${furyTimer>0?furyTimer/7*100:fury}%`;
   $('frost-veil').style.opacity=frostTimer>0?1:0;
+  updateWeaponBtn();
 }
 
 // ---------- shop ----------
@@ -787,6 +804,7 @@ function frame(t){
   if(islandDisposed)return;
   islandFrame=requestAnimationFrame(frame);
   if(islandPaused){lastTime=t;return;}
+  frames++;
   if(visible&&lastTime)adapt(t-lastTime);const raw=Math.min(.05,(t-lastTime)/1000||.016);lastTime=t;if(!visible)return;
   slowmo=Math.max(0,slowmo-raw);const dt=raw*(slowmo>0?.35:1);elapsed+=dt;world.update(elapsed);weather.update(raw);
   if(mode==='battle'){for(let i=0;i<timeScale;i++){updateBattle(dt);if(mode!=='battle')break;}}
@@ -905,7 +923,7 @@ async function runBench(){
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,LEGACY},overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,LEGACY},frames,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},weapon(k){switchWeapon(k);},

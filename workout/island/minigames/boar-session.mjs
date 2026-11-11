@@ -29,6 +29,7 @@ export function runBoarSession(ctx) {
   if(new URLSearchParams(globalThis.location?.search).get('boar')==='v1')url.searchParams.set('boar','v1');
   // 11/11/2026 kill switch: `?boarFire=v20` on the island URL restores the v20 touch layout and firing paths inside the frame.
   if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');
+  if(new URLSearchParams(globalThis.location?.search).get('boarHud')==='v20')url.searchParams.set('boarHud','v20');
   const failed=()=>{if(disposed)return;error='reason.gameStart';ctx.warning.hidden=false;ctx.warning.textContent=ctx.t('boar.loadError');};
   listen(frame,'load',()=>{
     if(disposed)return;
