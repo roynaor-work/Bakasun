@@ -69,3 +69,17 @@ Fable מחבר את C לתוך catch-session6/catch-view6 אחרי שהשניי�
 
 ## הוכחות (לכל סוכן)
 צילומים ב-`verification/catch-deep-fable/<topic>/` (Playwright 844x390, hasTouch, `--use-gl=angle --use-angle=swiftshader`), גיליון 8 פריימים למהלך, מספרים נמדדים, `node --test` של הקובץ שלך ושל `tests/island-catch.test.mjs`. דוח קצר `REPORT-<topic>.md` באותה תיקייה: מה נבנה, מה נמדד, מה פתוח.
+
+## מצב (11/11, 10:25 UTC, אחרי שהסוכנים נפלו על מגבלת שימוש; Fable כתב את הבסיס בעצמו)
+
+| קובץ | מצב |
+|---|---|
+| `catch-track.mjs`, `catch-gfx.mjs` | מוכנים |
+| `catch-tyres.mjs` | מוכן לפי החוזה (חוקים טהורים, `STRINGS`, `TYRES`). B: לא לשכתב, רק לכוונן אם צריך, ולבנות `catch-tyre-fx.mjs` ו-`catch-fire-hud.mjs` |
+| `catch-chase6.mjs` | מוכן: מסלול, היגוי עם סחיפה בפניות, שפה, מכשולים (traffic/parked/barrier/cone/oil/pad), פושע שבולם לפניות ונמתח בגומייה כשהוא רחוק, רובה, החלקה לעצירה, `result().frame`, `driveChase6` + `DRIVING6` לסימולציה. A: לכוונן תחושה, לא לשנות API |
+| `catch-view6.mjs` | בסיס עובד: כביש-סרט, מדרכות, בניינים, פנסים ועצים לאורך המסלול, רכבים, מכשולים, מצלמה מאחורי הניידת, חלון נראות. A: ליטוש (תחושת מהירות, פסי מהירות, עשן, מראה הפניות, שמיים, לילה, ביצועים), בלי לשנות את ה-API |
+| `catch-session6.mjs` | עובד מקצה לקצה עם HUD זמני לירי (כפתור, מחסנית, כוונת) ועם הגרירה של v5 לזריקה. מתחבר אוטומטית ל-`catch-fire-hud.mjs` (B) ול-`catch-bow-hud.mjs` (C) כשהם קיימים |
+| `catch-bow-view.mjs` | חסר. בינתיים נפילה לגוף ראשון פשוט בתוך catch-view6 (`makeFallbackBow`). C בונה |
+| `catch-audio.mjs` | ללא שינוי. הסשן כבר קורא ל-`audio.engine(v, boosting)`, `audio.engineStop()`, `cue('turn'|'shot'|'shotHit'|'flat'|'skid'|'twang')` כשהם קיימים (אופציונליים). D מוסיף |
+| דפי בדיקה | `tools/catch-view6-harness.html` (עולם + נהג מודל, `window.stepN(n)`), `tools/catch-harness6.html` (סשן מלא, `window.session`) |
+| דגל | `extensions/catch-criminal.mjs`: ברירת מחדל v6 בטעינה עצלה, `?catchV6=0` = v5 |
