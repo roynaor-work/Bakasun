@@ -79,15 +79,16 @@ test('rows that fit above the wheel: ten at 844x390, fewer on a shorter screen, 
 });
 test('the grid of twelve is fixed: the four league drivers, then the extra rivals in the order and names of the race model, with unique numbers',()=>{
   assert.equal(GRID_DRIVERS.length,12);assert.equal(new Set(GRID_DRIVERS.map(d=>d.number)).size,12);assert.equal(new Set(GRID_DRIVERS.map(d=>d.color)).size,12);assert.equal(new Set(GRID_DRIVERS.map(d=>d.id)).size,12);
-  assert.deepEqual(GRID_DRIVERS.slice(1,5).map(d=>d.id),DRIVERS.map(d=>d.id));assert.deepEqual(GRID_DRIVERS.slice(1,5).map(d=>d.name),DRIVERS.map(d=>d.name));
-  assert.deepEqual(GRID_DRIVERS.map(d=>d.scoring),[true,true,true,true,true,false,false,false,false,false,false,false]);
+  assert.deepEqual(GRID_DRIVERS.slice(1,1+DRIVERS.length).map(d=>d.id),DRIVERS.map(d=>d.id));assert.deepEqual(GRID_DRIVERS.slice(1,1+DRIVERS.length).map(d=>d.name),DRIVERS.map(d=>d.name));
+  // racing-deep-m6: in the long league (default) all twelve score; a regular race (opponents 4 + extra rivals) still marks only five as scoring in the model
+  assert.deepEqual(GRID_DRIVERS.map(d=>d.scoring),Array(12).fill(true));
   const race=createRacing({stage:1,seed:9,config:{countdown:0,extraRivals:7}});assert.equal(race.state.cars.length,12);
-  race.state.cars.forEach((c,i)=>{assert.equal(c.name,GRID_DRIVERS[i].name,'car '+i);assert.equal(c.scoring!==false,GRID_DRIVERS[i].scoring);});
+  race.state.cars.forEach((c,i)=>{assert.equal(c.name,GRID_DRIVERS[i].name,'car '+i);assert.equal(c.scoring!==false,i<5,'a regular race scores five');});
   const again=createRacing({stage:7,seed:12345,config:{countdown:0,extraRivals:7}});assert.deepEqual(again.state.cars.map(c=>c.name),race.state.cars.map(c=>c.name),'the same names on another circuit and seed');
   for(const d of GRID_DRIVERS){assert.ok(!/!/.test(d.name+d.team+d.style));assert.ok(/^[֐-׿\s]+$/.test(d.name),'Hebrew name: '+d.name);}
   assert.equal(gridDriver(13,'זר').name,'זר');assert.equal(gridDriver(13).scoring,false);
-  // the extra rivals never reach the league table
-  const L=createLeague();assert.deepEqual(Object.keys(L.table),['player',...DRIVERS.map(d=>d.id)]);assert.equal(standings(L).length,5);
+  // the league table holds exactly the scoring grid (twelve in the long league)
+  const L=createLeague();assert.deepEqual(Object.keys(L.table),['player',...DRIVERS.map(d=>d.id)]);assert.equal(standings(L).length,12);
 });
 test('cards: lap for the player with "הקפה אחרונה", a purple fastest lap for any car, a position card after the start, urgent cards replace',()=>{
   const p=car('player',0,{rank:3,lap:2,lapTimes:[52.3]}),a=car('ai-1',0,{rank:1,lapTimes:[50]});
