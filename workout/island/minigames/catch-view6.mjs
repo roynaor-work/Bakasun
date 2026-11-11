@@ -113,7 +113,14 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   scene.add(playerCar, crimCar);
   const carGlow = (color, size) => { const sp = new T.Sprite(new T.SpriteMaterial({map: glowTexture(color), transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); sp.scale.set(size, size, 1); return sp; };
   const flameP = carGlow('#ffb347', 2.6), flameC = carGlow('#ff8a3d', 2.2); flameP.position.set(-2.6, .55, 0); flameC.position.set(-2.4, .55, 0);
-  playerCar.add(flameP); crimCar.add(flameC);
+  const redLight = carGlow('#ff3b3b', 1.4), blueLight = carGlow('#3b6bff', 1.4); redLight.position.set(.2, 1.7, -.35); blueLight.position.set(.2, 1.7, .35);
+  playerCar.add(flameP, redLight, blueLight); crimCar.add(flameC);
+  // headlights at dusk and night: a soft cone of light on the road ahead of each car
+  const beams = [];
+  if (theme.lamps) for (const car of [playerCar, crimCar]) { const beam = new T.Mesh(new T.PlaneGeometry(6, 14), new T.MeshBasicMaterial({map: glowTexture('#fff3c4'), transparent: true, opacity: .35, blending: T.AdditiveBlending, depthWrite: false})); beam.rotation.x = -Math.PI / 2; beam.position.set(8, .05, 0); car.add(beam); beams.push(beam); }
+  // speed streaks: thin additive sprites that stretch along the road while boosting
+  const streakTex = canvasTexture(64, 8, g => { const gr = g.createLinearGradient(0, 0, 64, 0); gr.addColorStop(0, '#ffffff00'); gr.addColorStop(.5, '#ffffffcc'); gr.addColorStop(1, '#ffffff00'); g.fillStyle = gr; g.fillRect(0, 0, 64, 8); });
+  const streaks = []; for (let i = 0; i < 14; i++) { const m = new T.Mesh(new T.PlaneGeometry(6, .12), new T.MeshBasicMaterial({map: streakTex, transparent: true, opacity: 0, blending: T.AdditiveBlending, depthWrite: false})); m.renderOrder = 6; scene.add(m); streaks.push({m, s: 0, d: 0, y: 0}); }
   playerCar.add(blobShadow(shadowTex, 5, 2.6, .5)); crimCar.add(blobShadow(shadowTex, 5, 2.6, .5));
   const sparks = new Particles(scene, {texture: starTexture(), size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 90});
   // obstacles appear inside the window around the officer
@@ -154,6 +161,13 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     if (st.damage > .25 && Math.random() < st.damage * .6) dust.emit(crimCar.position.x, 1, crimCar.position.z, 1, {speed: 1, up: 1.6, color: [.5, .5, .5], gravity: -1.2, life: .9});
     flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(phase * 9) * .4); flameC.visible = c.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(phase * 9) * .35);
     const red = Math.sin(phase * 9) > 0; lightOn(playerCar.userData.lights.Light_R, red); lightOn(playerCar.userData.lights.Light_B, !red);
+    redLight.visible = red; blueLight.visible = !red; redLight.material.opacity = blueLight.material.opacity = .55 + Math.abs(Math.sin(phase * 9)) * .45;
+    // streaks: while boosting (or very fast) they fly past on both sides of the road
+    const streakOn = st.boosting || st.v > C.baseSpeed + 4;
+    for (const k of streaks) {
+      if (k.m.material.opacity <= 0 && streakOn && Math.random() < .25) { k.s = st.s + 30 + Math.random() * 50; k.d = (Math.random() < .5 ? -1 : 1) * (3.5 + Math.random() * 6); k.y = .3 + Math.random() * 2.2; k.m.material.opacity = .5; }
+      if (k.m.material.opacity > 0) { placeOnTrack(k.m, k.s, k.d); k.m.position.y = k.y; k.m.rotation.y = track.yawAt(k.s); k.m.material.opacity -= dt * (k.s < st.s - 8 ? 3 : .2); if (k.s < st.s - 14) k.m.material.opacity = 0; }
+    }
     spinWheels(playerCar, st.v * dt / .36); spinWheels(crimCar, c.v * dt / .34);
     if (st.scraping && Math.random() < .7) { track.toWorld(st.s + 1, Math.sign(st.d) * 4.9, tmp2); sparks.emit(tmp2.x, .3, tmp2.z, 3, {speed: 3, up: 2, color: [1, .8, .4], life: .4}); }
     if (Math.abs(st.steer) > .6 && st.v > 15 && Math.random() < .5) { track.toWorld(st.s - 1.5, st.d, tmp2); dust.emit(tmp2.x, .2, tmp2.z, 1, {speed: 1.5, up: .6, color: [.8, .78, .7], gravity: .5, life: .5}); }
