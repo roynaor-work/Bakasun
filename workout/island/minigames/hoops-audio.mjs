@@ -1,6 +1,7 @@
 /** Basketball presentation audio. The authored mix supplies gains, filters, layer
  * recipes and voice limits. Sound never changes the match or saved club state. */
 import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
+import {scoreCrowdSample} from './hoops-show.mjs';
 const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
 export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,clock=wallClock}={}){
  const mixURL=new URL('../design/audio/mix.json',import.meta.url);
@@ -120,9 +121,10 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
  }
  return {
   unlock,play,sync,
-  events(list){for(const e of list){
+  // show (M4): the visitors' basket gets the swish and the calm crowd instead of the excited layer (same cooldowns, one voice, no bed)
+  events(list,{show=false,userTeam=0}={}){for(const e of list){
    if(e.type==='final'){final=true;stop(true);layer(e.won?'victory':'defeat');continue;}
-   if(e.type==='score'){if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
+   if(e.type==='score'){if(show&&scoreCrowdSample(e,{show,userTeam})==='calm'){play('swish');play('calm');}else if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
    if(e.type==='foul'||e.type==='violation'||e.type==='goaltending'||e.type==='timeout'||e.type==='jumpBall'){whistle(e);continue;}
    const type=e.type==='contact'?e.what:e.type,m=map[type];if(!m)continue;
    const v=e.speed?Math.min(1,.35+e.speed*.12):1;play(m[0],{volume:m[1]*v,rate:type==='floor'?1+Math.min(.3,(e.speed||0)*.03):1});

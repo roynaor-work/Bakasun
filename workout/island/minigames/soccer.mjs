@@ -15,6 +15,7 @@ import {SOCCER_TACTICS_DATA} from './soccer-tactics-data.mjs';
 import {createRestartLayout,restartTarget,restartActionProfile,sampleRestartAction,restartBallPose,restartThrowTarget,createKeeperThrowFlight,puntDestination,createKeeperPuntFlight,restartClipKind} from './soccer-restarts.mjs';
 import {resolveSoccerAI} from './soccer-ai-flag.mjs';
 import {resolveSoccerRules,slideFoul,foulRestart,penaltySpot,throughBallPoint,throughBallSpeed,throughMeetPoint,aiSlideAim} from './soccer-rules.mjs';
+import {resolveSoccerFeel,soccerFeelConfig,feelSwitchDwell} from './soccer-feel.mjs';
 import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideRecoverySeconds} from './soccer-control-depth.mjs';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
@@ -44,13 +45,16 @@ export function passDestination(state,config,power=0){
 }
 export function soccerPassAim(state){return state.passAim?.manual?state.passAim:state.moving?state.aim:state.passAim||state.aim;}
 export function canHead(player,ball,config){return canContactBall(player,ball,config,{kind:'head'});}
-export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false,aiVersion,rulesVersion}={}) {
+export function createSoccer({config,seed=1,stage=1,team=config.team,random,difficulty='normal',card,role='field',league=false,aiVersion,rulesVersion,feelVersion}={}) {
   if (!config?.stages?.length || !Number.isFinite(config.match?.fixedStep) || config.match.fixedStep<=0) throw Error('Invalid soccer config');
   config=expandSoccerConfig(config);
   seed=Number(seed)>>>0; stage=clamp(Math.round(finite(stage))||1,1,30);const leagueStage=stage,ladder=league?leagueMatch(config,stage):null;if(ladder?.leagues)stage=clamp(finite(ladder.tuning)||1,1,30);config=campaignConfig(config,stage);
   const aiV2=resolveSoccerAI(aiVersion)==='v2';
   // Rules v1 (M3): fouls on slide tackles, free kicks, penalties, through balls, rival slides. `?soccerRules=0` = the old match.
   const rulesV1=resolveSoccerRules(rulesVersion)==='v1';
+  // Feel v2 (M3, soccer-feel.mjs): receivers and defenders move at a pass release, fast switch after a turnover, lane cover, rival runs.
+  // `?soccerFeel=0` = the match as it was. The tactics controller reads the same flag from config.feel.v2.
+  const feelV2=resolveSoccerFeel(feelVersion)==='v2',feelCfg=soccerFeelConfig(config);config={...config,feel:{...feelCfg,v2:feelV2}};let turnoverAt=-Infinity;
   if(config.squad&&!config.tactics.designController)config={...config,tactics:{...config.tactics,designController:compileSoccerTactics(SOCCER_TACTICS_DATA,config)}};
   const attack=config.ai.attack[difficulty];
   // Rival build-up and pass-lane safety were measured from stage 2 up; the tutorial stage keeps the original rival.
@@ -67,7 +71,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     const rank=key=>clamp(Math.round(finite(template[key]))||1,1,5);
     return {card:cards[i],hands:false,diveTime:0,diveCooldown:0,throwTime:0,catchTime:0,id:i,templateId:entry.team===0?template.id:`opponent${entry.template}`,team:entry.team,role:entry.role,tacticalRole:entry.tacticalRole,soccerExtra:!!entry.soccerExtra,x:0,z:0,vx:0,vz:0,fx:entry.team===0?1:-1,fz:0,speed:rank('speed'),kick:rank('kick'),guard:rank('guard'),cooldown:0,kickTime:0,request:false,think:0,hold:0,slideTime:0,recover:0,slideCooldown:0,stealCooldown:0,stealTime:0,headerTime:0,autoHeadTime:0,turnLean:0,slideAttempted:false,slideWon:false,slideX:0,slideZ:0,slideKind:null,slideBehind:false,slideLate:false,slideFromX:0,slideFromZ:0,slideTick:-1,slideAge:0,sprinting:false,sprintTime:0,sprintRest:0};
   });
-  const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,rules:rulesV1?'v1':'off',mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
+  const s={role,league:ladder?.leagues?ladder:null,campaign:config.campaign,campaignStats:createCampaignStats(),bufferedAction:null,selectionTime:0,switchCooldown:0,actionAim:null,phase:'playing',half:1,halfElapsed:0,elapsed:0,phaseTime:0,score:[0,0],stage:leagueStage,seed,difficulty,rules:rulesV1?'v1':'off',feel:feelV2?'v2':'off',turnoverAt:-Infinity,mode:'attack',aim:{x:1,z:0},sprint:{value:config.sprint.capacity*effects.capacity,capacity:config.sprint.capacity*effects.capacity,active:false,locked:false,regenDelay:0},attackDir:1,controlled:0,players,ball:{x:0,z:0,y:ph.ballRadius,vx:0,vz:0,vy:0,curve:0,owner:0,lastTeam:0,lastPlayer:0,grace:0},charge:0,charging:false,chargeKind:null,idle:0,defenseIdle:0,autoSwitchCandidate:null,passTarget:null,restart:null,event:null,eventId:0,result:null};
   let events=[],rivalPasses=0,nextRivalShot=0,nextHomeShot=0;
   const before={valid:false,players:[],ball:[0,0,0]};
   const shown={players:[],ball:{},state:{}};
@@ -237,7 +241,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     for(const q of players)if(q.team===0){const v=(config.players.speed+(q.speed-1)*config.players.speedPerRank)*personal(q).pace;if(v>best)best=v;}
     return referenceSpeed=best;
   }
-  function move(p,dx,dz,dt,multiplier=1) {const pm=p.role==='keeper'?keeperMotion:p.team===0&&p.id===s.controlled?humanMotion:config.players;
+  function move(p,dx,dz,dt,multiplier=1) {let pm=p.role==='keeper'?keeperMotion:p.team===0&&p.id===s.controlled?humanMotion:config.players;
+    // Feel v2: the intended receiver reads the pass at release and sets off with the controlled player's acceleration and turn rate
+    // (a mate running the other way needed 0.35 s to reverse at the AI's 12 m/s^2; measured p90 of the first move).
+    if(feelV2&&pm===config.players&&s.passTarget?.player===p.id&&s.passTarget.time>0&&s.ball.owner===null)pm=humanMotion;
     const length=Math.hypot(dx,dz),reference=teamReference(),speed=p.team===0?(config.players.speed+(p.speed-1)*config.players.speedPerRank)*multiplier*personal(p).pace:Math.max(opponent.speed*multiplier*personal(p).pace,reference*config.opponents.minSpeedRatio*attack.speed);
     const scale=length>1?1/length:1;
     // Turn the body toward intent before redirecting momentum. Reversals brake
@@ -364,6 +371,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   function helping(){return !!(opponent.help&&difficulty==='easy'&&s.idle>aiConfig.idleHelpSeconds&&!s.charging);}
   function takeBall(p){
     const b=s.ball;if(b.owner!==null&&players[b.owner].hands)return;
+    if(p.team!==(b.owner!==null?players[b.owner].team:b.lastTeam)){turnoverAt=s.elapsed;s.turnoverAt=turnoverAt;}
     if(p.team===1&&b.lastTeam===0)rivalPasses=0;if(b.owner!==null){players[b.owner].cooldown=rules.tackleCooldown;players[b.owner].hands=false;}
     const mayHandle=p.role==='keeper'&&inPenaltyArea(p,p,s,config)&&inPenaltyArea(p,b,s,config)&&b.lastTeam!==p.team;
     const received=s.passTarget?.player===p.id&&b.lastTeam===p.team;
@@ -734,9 +742,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     const candidate=players[selectControlledPlayer(s,config,active?{moveX:finite(input.moveX),moveZ:finite(input.moveZ),path:true}:{})],current=players[s.controlled];
     const advantage=distance(current,s.ball)-distance(candidate,s.ball);
     s.switchCooldown=Math.max(0,s.switchCooldown-step);
-    if(role!=='keeper'&&!s.switchCooldown&&candidate.id!==current.id&&(active?!s.bufferedAction&&!s.charging&&current.slideTime<=0&&(mode()==='defense'&&advantage>=config.autoSwitchAdvantage||s.ball.owner===null&&advantage>=config.autoSwitchAdvantage*.5):mode()==='defense'&&advantage>=config.autoSwitchAdvantage)){
+    // Feel v2: a turnover may switch inside the 0.45 s switch cooldown (the child is looking at the ball, not at who was selected a moment ago).
+    const switchFree=!s.switchCooldown||feelV2&&s.elapsed-turnoverAt<=feelCfg.turnoverWindow&&candidate.id!==leftId;
+    if(role!=='keeper'&&switchFree&&candidate.id!==current.id&&(active?!s.bufferedAction&&!s.charging&&current.slideTime<=0&&(mode()==='defense'&&advantage>=config.autoSwitchAdvantage||s.ball.owner===null&&advantage>=config.autoSwitchAdvantage*.5):mode()==='defense'&&advantage>=config.autoSwitchAdvantage)){
       s.defenseIdle=s.autoSwitchCandidate===candidate.id?s.defenseIdle+step:step;s.autoSwitchCandidate=candidate.id;
-      if(s.defenseIdle+1e-8>=(aiV2?autoSwitchDwell(config,advantage,candidate.id===leftId&&s.elapsed-leftAt<(aiConfig.switchBackSeconds??1.5)):config.autoSwitchSeconds))selectPlayer(candidate.id);
+      const dwell=aiV2?autoSwitchDwell(config,advantage,candidate.id===leftId&&s.elapsed-leftAt<(aiConfig.switchBackSeconds??1.5)):config.autoSwitchSeconds;
+      // Feel v2: right after the ball changed team the child is watching it; the selection follows within switchTurnoverSeconds.
+      if(s.defenseIdle+1e-8>=(feelV2?feelSwitchDwell(feelCfg,dwell,s.elapsed,turnoverAt):dwell))selectPlayer(candidate.id);
     }else{s.defenseIdle=0;s.autoSwitchCandidate=null;}
     if(role==='keeper')pendingSwitch=false;
     if(pendingSwitch){const id=selectControlledPlayer(s,config,{manual:true,directional:aiV2,moveX:finite(input.moveX),moveZ:finite(input.moveZ)});if(id!==null){s.bufferedAction=null;selectPlayer(id);event('switch',{player:id});}pendingSwitch=false;}
@@ -791,8 +803,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
         if(member.hold+1e-8>=k.maxHoldSeconds-keeperThrowLead){member.cooldown=0;kick(member,0,true);}
       }else if(member.id===s.controlled&&role==='keeper')moveControlledKeeper(member,mx,mz,step);
       // A through ball (rules v1) is aimed a run ahead of the receiver: his automatic run reaches further and meets the rolling ball on its path.
-      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&s.passTarget.through&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(config.assistance?.contact?.receiveRunDistance??3.2)*2.5){const to=throughMeetPoint(member,s.ball,config,(config.players.speed+(member.speed-1)*config.players.speedPerRank)*personal(member).pace);move(member,to.x-member.x,to.z-member.z,step,1);}
-      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(config.assistance?.contact?.receiveRunDistance??3.2))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,.82);
+      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&s.passTarget.through&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<Math.max(feelV2?feelCfg.receiveRunDistance:0,(config.assistance?.contact?.receiveRunDistance??3.2)*2.5)){const to=throughMeetPoint(member,s.ball,config,(config.players.speed+(member.speed-1)*config.players.speedPerRank)*personal(member).pace);move(member,to.x-member.x,to.z-member.z,step,1);}
+      // Feel v2: the controlled receiver sets off toward the pass by himself from further out (receiveRunDistance 9 m, was 3.2) while the stick is idle.
+      else if(member.id===s.controlled&&s.ball.owner===null&&s.passTarget?.player===member.id&&(length<=aiConfig.idleThreshold||staleStick(s.passTarget,mx,mz,length))&&distance(member,s.passTarget)<(feelV2?feelCfg.receiveRunDistance:(config.assistance?.contact?.receiveRunDistance??3.2)))move(member,s.passTarget.x-member.x,s.passTarget.z-member.z,step,feelV2?1:.82);
       else if(member.id===s.controlled && !helping())move(member,mx,mz,step,(s.sprint.active?config.sprint.multiplier:1)*(s.charging?config.chargeSpeedMultiplier:1));
       else ai(member,step);
     }

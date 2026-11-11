@@ -1,6 +1,6 @@
 /** Batch runner for soccer-gameplay-metrics: hundreds of full matches across worker threads.
  * Usage: node tools/soccer-gameplay-sim.mjs [--n 200] [--stages 2,5,8] [--difficulty normal]
- *          [--ai v1|v2] [--rules v1|off] [--seed0 1000] [--latency 9] [--out file.json] [--quiet]
+ *          [--ai v1|v2] [--rules v1|off] [--feel v2|0] [--seed0 1000] [--latency 9] [--out file.json] [--quiet]
  * Every (stage) cell gets `n` matches, seeds seed0..seed0+n-1, so two runs are paired by seed. */
 import {readFile,writeFile} from 'node:fs/promises';
 import {Worker,isMainThread,parentPort,workerData} from 'node:worker_threads';
@@ -23,11 +23,11 @@ if(!isMainThread){
   parentPort.postMessage({ready:true});
 }else if(process.argv[1]===fileURLToPath(import.meta.url)){
   const args=Object.fromEntries(process.argv.slice(2).reduce((a,x,i,all)=>x.startsWith('--')?[...a,[x.slice(2),all[i+1]&&!all[i+1].startsWith('--')?all[i+1]:true]]:a,[]));
-  const n=Number(args.n||200),stages=String(args.stages||'2,5,8').split(',').map(Number),difficulty=args.difficulty||'normal',ai=args.ai||undefined,rules=args.rules||undefined,seed0=Number(args.seed0||1000),latency=Number(args.latency||9),bot=args.bot||'human',helpAll=!!args.helpAll,set=args.set||'',teams=args.teams||undefined,profile=args.profile||'typical',tune=args.tune?Object.fromEntries(String(args.tune).split(';').map(x=>x.split('=')).map(([k,v])=>[k,Number(v)])):undefined;
-  const jobs=[];for(const stage of stages)for(let i=0;i<n;i++)jobs.push({seed:seed0+i,stage,difficulty,latency,bot,helpAll,teams,tune,profile,...(ai?{ai}:{}),...(rules?{rules}:{})});
+  const n=Number(args.n||200),stages=String(args.stages||'2,5,8').split(',').map(Number),difficulty=args.difficulty||'normal',ai=args.ai||undefined,rules=args.rules||undefined,feel=args.feel||undefined,seed0=Number(args.seed0||1000),latency=Number(args.latency||9),bot=args.bot||'human',helpAll=!!args.helpAll,set=args.set||'',teams=args.teams||undefined,profile=args.profile||'typical',tune=args.tune?Object.fromEntries(String(args.tune).split(';').map(x=>x.split('=')).map(([k,v])=>[k,Number(v)])):undefined;
+  const jobs=[];for(const stage of stages)for(let i=0;i<n;i++)jobs.push({seed:seed0+i,stage,difficulty,latency,bot,helpAll,teams,tune,profile,...(ai?{ai}:{}),...(rules?{rules}:{}),...(feel?{feel}:{})});
   const results=await runJobs(jobs,Number(args.workers||4),{set});
   const byStage={};for(const stage of stages)byStage[stage]=summarize(results.filter(r=>r.stage===stage));
-  const report={profile,ai:ai||'default',rules:rules||'default',teams:teams||'6',set,difficulty,n,stages,latency,bot,helpAll,all:summarize(results),byStage};
+  const report={profile,ai:ai||'default',rules:rules||'default',feel:feel||'default',teams:teams||'6',set,difficulty,n,stages,latency,bot,helpAll,all:summarize(results),byStage};
   if(args.out)await writeFile(args.out,JSON.stringify(report,null,1));
   if(!args.quiet)print(report);
 }
@@ -45,7 +45,7 @@ export function runJobs(jobs,workers=4,data={}){
 function print(r){
   for(const [stage,s] of Object.entries(r.byStage)){
     const t0=s.team[0],t1=s.team[1],g=s.game;
-    console.log(`\n== ai=${r.ai} stage ${stage} (${s.matches} matches, ${f(s.seconds,0)}s) ==`);
+    console.log(`\n== ai=${r.ai} feel=${r.feel} stage ${stage} (${s.matches} matches, ${f(s.seconds,0)}s) ==`);
     console.log(`goals/match ${f(g.totalGoals)} (home ${f(t0.goals)} rival ${f(t1.goals)}) 2-5 goals in ${p(s.spread.totalGoals.inRange)}, 0-0 in ${p(s.spread.totalGoals.zeroGoal)}`);
     console.log(`shots/match ${f(g.totalShots)} (home ${f(t0.shots)} rival ${f(t1.shots)}); on target ${f(t0.shotsOnTarget+t1.shotsOnTarget)}`);
     console.log(`possession home ${p(t0.possession)}  pass attempts ${f(t0.passes,1)}/${f(t1.passes,1)}  completion ${p(t0.passCompletion)}/${p(t1.passCompletion)}  unintended ${p(t0.passUnintended)}/${p(t1.passUnintended)}  intercepted ${p(t0.passIntercepted)}/${p(t1.passIntercepted)}  out ${p(t0.passOut)}/${p(t1.passOut)}`);

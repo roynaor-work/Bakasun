@@ -225,3 +225,18 @@
 .game-screen[data-game=streetSlam] .hoops-steps[data-n="1"]{border-color:#f2d04a}
 .game-screen[data-game=streetSlam] .hoops-steps[data-n="2"]{border-color:#ff9a3c}
 .game-screen[data-game=streetSlam] .hoops-steps[data-n="3"]{border-color:#ff4d4d}
+
+/* Show (M4, 11/11): the broadcast tag during a replay, the soft shot-clock pulse under 5 s, and the three action
+ * buttons in one size on one arc. All under [data-hoops-show=v1]; ?hoopsShow=0 keeps the layout above. */
+.game-screen[data-game=streetSlam] .hoops-replay-tag{position:absolute;z-index:5;top:max(64px,calc(54px + env(safe-area-inset-top)));right:max(14px,env(safe-area-inset-right));height:34px;padding:0 14px 0 12px;border-radius:17px;display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;letter-spacing:.2px;color:#fff;background:#0c111ce6;border:1px solid var(--h-line);pointer-events:none;direction:rtl;animation:hoops-pop-in .25s ease-out}
+.game-screen[data-game=streetSlam] .hoops-replay-tag::before{content:'';width:10px;height:10px;border-radius:50%;background:#ff4b3a;box-shadow:0 0 8px #ff4b3a;animation:hoops-blink 1.1s ease-in-out infinite}
+.game-screen[data-game=streetSlam] .hoops-replay-tag[hidden]{display:none}
+@keyframes hoops-pop-in{from{transform:scale(.8);opacity:0}}
+@keyframes hoops-blink{50%{opacity:.35}}
+.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-shotclock[data-low=true]{animation:hoops-shotclock-pulse 1s ease-in-out infinite}
+@keyframes hoops-shotclock-pulse{50%{opacity:.55;transform:scale(1.08)}}
+.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-shoot,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-block{right:2px;bottom:2px;width:60px;height:60px}
+.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-pass,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-steal{right:70px;bottom:2px;width:60px;height:60px}
+.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-move,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-switch{right:116px;bottom:66px;width:60px;height:60px}
+.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-move svg,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-pass svg,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-steal svg{width:32px;height:32px}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=streetSlam] .hoops-replay-tag::before,.game-screen[data-game=streetSlam][data-hoops-show=v1] .hoops-shotclock[data-low=true]{animation:none}}

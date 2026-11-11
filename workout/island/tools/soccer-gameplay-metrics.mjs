@@ -79,11 +79,11 @@ const makeTeam=()=>({
 const blankInput=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
 /** bot 'idle' = no input at all; with help (stage rows forced to help:true, difficulty easy) the model's own
  * beginner helper drives the selected player, so both sides are pure model AI. */
-export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical'}){
+export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical'}){
   if(teams)config=applySoccerTeams(config,teams,tune||{});
   const shotLog=[];let openShot=null;
   if(helpAll)config={...config,stages:config.stages.map(row=>({...row,help:true}))};
-  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
+  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{}),...(feel?{feelVersion:feel}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
   const step=config.match.fixedStep,hx=config.pitch.length/2,L=config.pitch.length;
   const T=[makeTeam(),makeTeam()];
   const m={playingTicks:0,deadTicks:0,restTicks:0,stuckWindows:0,windows:0,maxStuck:0,thirds:[0,0,0],swings:0,progress10:0,progressN:0,coverage:0,coverageN:0,

@@ -9598,6 +9598,23 @@
     ]
    },
    "autoSwitchAdvantage": 0,
+   "feel": {
+    "version": "v2",
+    "reaction": {
+     "easy": 0.24,
+     "normal": 0.18,
+     "hard": 0.12
+    },
+    "switchTurnoverSeconds": 0.12,
+    "turnoverWindow": 1,
+    "receiveRunDistance": 9,
+    "rivalRunsFromStage": 3,
+    "rivalRunSpace": 4,
+    "laneFraction": 0.55,
+    "laneGoalSide": 0.9,
+    "laneTeam0": false,
+    "teamReaction": null
+   },
    "chargeSpeedMultiplier": 0.5,
    "passing": {
     "minDistance": 5,
