@@ -115,7 +115,7 @@ export function drawNavalAirHud(p,m,balance,project,width,height){
   const x=width-278,y=16,w=104;glass(p,x,y,w,50,12);planeMark(p,x+18,y+25);
   bar(p,x+36,y+14,58,7,v.heat,1,v.overheated?'#ff9a5c':v.firing?'#ffe27a':'#8edcc7');
   p.fillStyle='#f3e2b3';p.font='bold 13px sans-serif';p.direction='ltr';p.textAlign='left';p.fillText('×'+String(v.kills||0),x+36,y+42);
-  if(v.manual&&!v.held&&air.some(a=>a.state!=='down')){p.fillStyle='#ffd2a6';p.font='bold 10px sans-serif';p.textAlign='right';p.direction='rtl';p.fillText('לחצו וולקן',x+w-8,y+42);}
+  if(v.manual&&!v.held&&air.some(a=>a.state!=='down')){p.fillStyle='#ffd2a6';p.font='bold 10px sans-serif';p.textAlign='center';p.direction='rtl';p.fillText('לחצו וולקן',x+w/2,y+62);shown.hint=true;}
   if(v.firing){p.fillStyle='#ffe27a';p.beginPath();p.arc(x+86,y+38,4+Math.abs(Math.sin(m.time*40))*2,0,TAU);p.fill();}
   return shown;
 }
