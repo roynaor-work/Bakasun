@@ -17,8 +17,8 @@ function sampler(){let previous={...NONE},gesture=0;return({moveX=0,moveZ=0,tap=
 
 /** A child who taps the hit button when the ball arrives (never holds), and taps the near-net drop button on every `dropEvery`-th return.
  * Returns what the bar did on every tapped return and how every drop point ended. */
-export function playMatch({stage=1,difficulty='easy',seed=1,config=baseConfig,bar=true,dropFix=true,dropEvery=2,maxDrops=25,maxFrames=60*900,ranks={speed:1,hit:1,serve:1}}={}){
-  const model=createTennis({config,stage,seed:(Math.imul(seed,2654435761)>>>0)||1,difficulty,ranks,bar,dropFix}),next=sampler(),r=rngOf(seed*77+3);
+export function playMatch({stage=1,difficulty='easy',seed=1,config=baseConfig,bar=true,dropFix=true,returnMeter=true,dropEvery=2,maxDrops=25,maxFrames=60*900,ranks={speed:1,hit:1,serve:1}}={}){
+  const model=createTennis({config,stage,seed:(Math.imul(seed,2654435761)>>>0)||1,difficulty,ranks,bar,dropFix,returnMeter}),next=sampler(),r=rngOf(seed*77+3);
   const out={returns:[],drops:[],points:0,frames:0};let eventId=model.getState().event.id,incomingKey=null,incoming=null,pending=null,returnNo=0;
   for(let frame=0;frame<maxFrames&&out.drops.length<maxDrops&&model.getState().phase!=='complete';frame++){
     const s=model.getState();let opts={};
@@ -35,7 +35,7 @@ export function playMatch({stage=1,difficulty='easy',seed=1,config=baseConfig,ba
           const drop=dropEvery>0&&returnNo%dropEvery===dropEvery-1&&p.z<7.6;returnNo++;incoming.drop=drop;opts.tap=drop?'drop':'hit';opts.aim={x:r()*2-1,z:0,height:0,manual:true};}
       }
     }
-    applyTennisSample(model,next(opts),1/60);out.frames++;
+    applyTennisSample(model,next(opts),1/60,{pressFires:returnMeter});out.frames++;
     const n=model.getState(),e=n.event;
     if(e.id!==eventId){eventId=e.id;
       if(e.type==='hit'&&e.side===0&&!e.serving&&n.shot?.drop)pending={at:n.elapsed,reached:false,landZ:null,pointNumber:n.pointNumber};
