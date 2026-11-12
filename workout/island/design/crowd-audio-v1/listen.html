@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>דגימות קהל — האזנה</title>
+<style>
+  :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #111b24; color: #edf3f7; }
+  body { max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.7; }
+  h1 { line-height: 1.3; } a { color: #99d9ff; }
+  article { background: #1c2c38; border: 1px solid #476074; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+  button, select { font: inherit; padding: 7px 16px; border-radius: 6px; margin: 4px; }
+  button { cursor: pointer; } button:focus-visible, select:focus-visible { outline: 3px solid #8ed8ff; }
+  output { display: block; min-height: 1.7em; } .details { color: #c1d2de; }
+</style>
+<h1>ארבע דגימות קהל חדשות</h1>
+<p>האזנה בעוצמת המיקס המומלצת. הרקע הרחב והרקע השקט חוזרים בלולאה רציפה עד עצירה.
+ההתרגשות והשער מתנגנים פעם אחת. החלפת דגימה עוצרת את הקודמת.</p>
+<p><a href="REPORT.md">דוח המדידות</a> · <a href="manifest.json">מניפסט</a> · <a href="LICENSES.md">מקורות ורישיון</a></p>
+<label>פורמט <select id="format"><option value="ogg">OGG / Vorbis</option><option value="mp3">MP3</option></select></label>
+<button id="stop" type="button">עצירה</button>
+<output id="status" role="status">טוען את רשימת הדגימות…</output>
+<main id="samples"></main>
+<script>
+// Original audition utility. CC0-1.0; see LICENSES.md.
+let context, active;
+const status = document.querySelector('#status');
+function stop() {
+  if (!active) return;
+  const { source, gain } = active;
+  const now = context.currentTime;
+  gain.gain.cancelScheduledValues(now);
+  gain.gain.setValueAtTime(gain.gain.value, now);
+  gain.gain.linearRampToValueAtTime(0, now + 0.01);
+  source.stop(now + 0.015);
+  active = null;
+}
+let requestId = 0;
+document.querySelector('#stop').onclick = () => { requestId++; stop(); status.textContent = 'הניגון נעצר'; };
+document.querySelector('#format').onchange = () => { requestId++; stop(); status.textContent = 'הפורמט הוחלף'; };
+async function play(sample) {
+  const id = ++requestId;
+  stop();
+  context ||= new AudioContext({ sampleRate: 48000 });
+  await context.resume();
+  const format = document.querySelector('#format').value;
+  status.textContent = 'טוען: ' + sample.name;
+  try {
+    const response = await fetch(sample.formats[format].file);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const buffer = await context.decodeAudioData(await response.arrayBuffer());
+    if (id !== requestId) return;
+    const source = context.createBufferSource();
+    const gain = context.createGain();
+    source.buffer = buffer;
+    source.loop = sample.loop.enabled;
+    if (source.loop) {
+      source.loopStart = sample.loop.start_seconds;
+      source.loopEnd = sample.loop.end_seconds;
+    }
+    source.connect(gain).connect(context.destination);
+    gain.gain.setValueAtTime(0, context.currentTime);
+    gain.gain.linearRampToValueAtTime(sample.recommended_volume, context.currentTime + 0.01);
+    active = { source, gain };
+    source.onended = () => {
+      source.disconnect(); gain.disconnect();
+      if (active?.source === source) { active = null; status.textContent = 'הניגון הסתיים'; }
+    };
+    source.start();
+    status.textContent = 'מתנגן: ' + sample.name + (source.loop ? ' — בלולאה' : '');
+  } catch (error) {
+    if (id === requestId) status.textContent = 'הניגון נכשל: ' + error.message;
+  }
+}
+fetch('manifest.json').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(manifest => {
+  for (const sample of manifest.samples) {
+    const article = document.createElement('article');
+    const title = document.createElement('h2'); title.textContent = sample.name;
+    const detail = document.createElement('p'); detail.className = 'details';
+    detail.textContent = `${sample.duration_seconds} שניות בקובץ · ${sample.target_lufs} LUFS · עוצמה ${Math.round(sample.recommended_volume * 100)}%`;
+    if (sample.loop.enabled) detail.textContent += ` · לולאה ${sample.loop.start_seconds}–${sample.loop.end_seconds} שניות`;
+    const button = document.createElement('button'); button.textContent = 'ניגון'; button.type = 'button'; button.onclick = () => play(sample);
+    article.append(title, detail, button);
+    for (const format of ['ogg', 'mp3']) {
+      const link = document.createElement('a'); link.href = sample.formats[format].file;
+      link.textContent = ' ' + format.toUpperCase() + ' '; link.download = ''; article.append(link);
+    }
+    document.querySelector('#samples').append(article);
+  }
+  status.textContent = 'מוכן להאזנה';
+}).catch(error => { status.textContent = 'פתיחת דף ההאזנה דורשת שרת HTTP מקומי: ' + error.message; });
+</script>
+</html>

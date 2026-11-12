@@ -1,0 +1,299 @@
+{
+  "reference_commit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "sample_rate_hz": 48000,
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "samples": {
+    "ambience-loop": {
+      "before": {
+        "decoded_frames": 1152000,
+        "duration_seconds": 24.0,
+        "integrated_lufs": -22.99,
+        "true_peak_dbtp": -14.5,
+        "loudness_range_lu": 3.1,
+        "energy_percent": {
+          "0-200": 3.3663057199540236,
+          "200-500": 17.50905550223001,
+          "500-1100": 27.337578870949468,
+          "1100-2000": 25.611153908362247,
+          "2000-5000": 26.06639785558984,
+          "5000-24000": 0.10950814291442197
+        },
+        "max_100ms_2_5khz_percent": 36.40983453789385,
+        "max_narrow_line_persistence_percent": 3.571428571428571,
+        "persistent_line_count": 0,
+        "first_sample_dbfs": -213.88998413085938,
+        "file": "workout/island/design/audio/soccer/ambience-loop.ogg",
+        "sha256": "95f548902f010826714ef3625815ffa36d2ab645e54c21e2527955a389ff8f32"
+      },
+      "after": {
+        "ogg": {
+          "decoded_frames": 1200000,
+          "duration_seconds": 25.0,
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -6.41,
+          "loudness_range_lu": 0.8,
+          "energy_percent": {
+            "0-200": 6.06104730920955,
+            "200-500": 23.589097695371176,
+            "500-1100": 50.90212151891069,
+            "1100-2000": 19.447729603577127,
+            "2000-5000": 3.845563714180979e-06,
+            "5000-24000": 2.7367721279939503e-08
+          },
+          "max_100ms_2_5khz_percent": 0.00010390963727656055,
+          "max_narrow_line_persistence_percent": 0.3436426116838488,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -69.86277770996094,
+          "loop": {
+            "sample_step_dbfs": -44.145729064941406,
+            "continuation_error_dbfs": -240.0,
+            "guard_20ms_rms_error_dbfs": -240.0
+          },
+          "sha256": "bf8ac3dd072563fe05f8d0bbfdc6ffae153f943eabafbb1429767add269c3152",
+          "bytes": 164254
+        },
+        "mp3": {
+          "decoded_frames": 1200000,
+          "duration_seconds": 25.0,
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -6.53,
+          "loudness_range_lu": 0.8,
+          "energy_percent": {
+            "0-200": 5.905374582817599,
+            "200-500": 23.15748668857059,
+            "500-1100": 50.59989128856082,
+            "1100-2000": 20.337243604574823,
+            "2000-5000": 3.820059970790017e-06,
+            "5000-24000": 1.5416195826781984e-08
+          },
+          "max_100ms_2_5khz_percent": 0.00011445908935034986,
+          "max_narrow_line_persistence_percent": 0.6872852233676976,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -105.74347686767578,
+          "loop": {
+            "sample_step_dbfs": -42.02423858642578,
+            "continuation_error_dbfs": -240.0,
+            "guard_20ms_rms_error_dbfs": -240.0
+          },
+          "sha256": "44396fec7ba898ff064d982e49f59704e2ab38db833e8a88f35998533cef89d3",
+          "bytes": 601388
+        }
+      }
+    },
+    "crowd-calm": {
+      "before": {
+        "decoded_frames": 86400,
+        "duration_seconds": 1.8,
+        "integrated_lufs": -22.97,
+        "true_peak_dbtp": -16.88,
+        "loudness_range_lu": 0.0,
+        "energy_percent": {
+          "0-200": 1.070035750796254,
+          "200-500": 15.735178694691777,
+          "500-1100": 24.746408560663156,
+          "1100-2000": 27.533610476676493,
+          "2000-5000": 30.79696226636998,
+          "5000-24000": 0.11780425080231698
+        },
+        "max_100ms_2_5khz_percent": 36.89208517741408,
+        "max_narrow_line_persistence_percent": 15.0,
+        "persistent_line_count": 0,
+        "first_sample_dbfs": -202.76953125,
+        "file": "workout/island/design/audio/soccer/crowd-calm.ogg",
+        "sha256": "88c92968d600e9cf2c695acf8c39b4ea03755490e451011e9358ccd40b2845c2"
+      },
+      "after": {
+        "ogg": {
+          "decoded_frames": 637824,
+          "duration_seconds": 13.288,
+          "integrated_lufs": -18.01,
+          "true_peak_dbtp": -6.96,
+          "loudness_range_lu": 0.3,
+          "energy_percent": {
+            "0-200": 6.726580904417676,
+            "200-500": 23.42874406894319,
+            "500-1100": 50.99702613271452,
+            "1100-2000": 18.84764700033808,
+            "2000-5000": 1.7209884958520467e-06,
+            "5000-24000": 1.7259802749595647e-07
+          },
+          "max_100ms_2_5khz_percent": 5.787760994700421e-05,
+          "max_narrow_line_persistence_percent": 2.5974025974025974,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -83.13206481933594,
+          "loop": {
+            "sample_step_dbfs": -42.23699951171875,
+            "continuation_error_dbfs": -240.0,
+            "guard_20ms_rms_error_dbfs": -240.0
+          },
+          "sha256": "8edf1e60364eeb458c0d8b5a607f1285d026a3a9ad702a42c37b5847eb48e19d",
+          "bytes": 90038
+        },
+        "mp3": {
+          "decoded_frames": 637824,
+          "duration_seconds": 13.288,
+          "integrated_lufs": -18.0,
+          "true_peak_dbtp": -6.96,
+          "loudness_range_lu": 0.4,
+          "energy_percent": {
+            "0-200": 6.5566603337259775,
+            "200-500": 22.9940595309508,
+            "500-1100": 50.69280665883194,
+            "1100-2000": 19.756472009176715,
+            "2000-5000": 1.4519005978933707e-06,
+            "5000-24000": 1.5413976595385792e-08
+          },
+          "max_100ms_2_5khz_percent": 5.570775166297726e-05,
+          "max_narrow_line_persistence_percent": 1.948051948051948,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -103.98138427734375,
+          "loop": {
+            "sample_step_dbfs": -43.181610107421875,
+            "continuation_error_dbfs": -240.0,
+            "guard_20ms_rms_error_dbfs": -240.0
+          },
+          "sha256": "d2050c9ab67b4cba5a775b996ab372673bb24fbeac4aa60a9f33ba43ec4eda55",
+          "bytes": 320300
+        }
+      }
+    },
+    "crowd-excited": {
+      "before": {
+        "decoded_frames": 96000,
+        "duration_seconds": 2.0,
+        "integrated_lufs": -22.99,
+        "true_peak_dbtp": -15.11,
+        "loudness_range_lu": 0.0,
+        "energy_percent": {
+          "0-200": 1.189060135439364,
+          "200-500": 13.9347597342992,
+          "500-1100": 30.33827479597585,
+          "1100-2000": 27.179378873204918,
+          "2000-5000": 27.17236907882571,
+          "5000-24000": 0.18615738225497902
+        },
+        "max_100ms_2_5khz_percent": 41.75805568230561,
+        "max_narrow_line_persistence_percent": 13.636363636363635,
+        "persistent_line_count": 0,
+        "first_sample_dbfs": -199.416015625,
+        "file": "workout/island/design/audio/soccer/crowd-excited.ogg",
+        "sha256": "2e5ad15059140a295ccae8673db1cb9d477198b42367bf37f0b0f5dd0af57d69"
+      },
+      "after": {
+        "ogg": {
+          "decoded_frames": 192000,
+          "duration_seconds": 4.0,
+          "integrated_lufs": -17.99,
+          "true_peak_dbtp": -5.08,
+          "loudness_range_lu": 2.9,
+          "energy_percent": {
+            "0-200": 7.058318894772573,
+            "200-500": 26.08143701785112,
+            "500-1100": 50.00083219080176,
+            "1100-2000": 16.859406214914472,
+            "2000-5000": 5.681605705459195e-06,
+            "5000-24000": 5.43836262398943e-11
+          },
+          "max_100ms_2_5khz_percent": 0.00041720691567374016,
+          "max_narrow_line_persistence_percent": 2.2222222222222223,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -86.3070068359375,
+          "sha256": "9656d7b14edf1d4722bfae7f509c192f2636cad3bbf938df08abb16ff1795112",
+          "bytes": 29581
+        },
+        "mp3": {
+          "decoded_frames": 192000,
+          "duration_seconds": 4.0,
+          "integrated_lufs": -17.99,
+          "true_peak_dbtp": -4.92,
+          "loudness_range_lu": 2.9,
+          "energy_percent": {
+            "0-200": 6.936407825726252,
+            "200-500": 25.694368895629406,
+            "500-1100": 49.81006438038925,
+            "1100-2000": 17.559152716617536,
+            "2000-5000": 6.166239677904456e-06,
+            "5000-24000": 1.539789871228755e-08
+          },
+          "max_100ms_2_5khz_percent": 0.00042705502881953164,
+          "max_narrow_line_persistence_percent": 2.2222222222222223,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -115.6380615234375,
+          "sha256": "b448e373b71d73158921a836405e35f50fe960c3a9575d4c4b88fcfa98ed6c10",
+          "bytes": 97388
+        }
+      }
+    },
+    "crowd-goal": {
+      "before": {
+        "decoded_frames": 134400,
+        "duration_seconds": 2.8,
+        "integrated_lufs": -23.01,
+        "true_peak_dbtp": -15.4,
+        "loudness_range_lu": 0.0,
+        "energy_percent": {
+          "0-200": 1.134033395818024,
+          "200-500": 15.827551289246529,
+          "500-1100": 35.39689011853981,
+          "1100-2000": 23.739133213757437,
+          "2000-5000": 23.63270494824241,
+          "5000-24000": 0.2696870343957885
+        },
+        "max_100ms_2_5khz_percent": 45.48169192237328,
+        "max_narrow_line_persistence_percent": 22.58064516129032,
+        "persistent_line_count": 0,
+        "first_sample_dbfs": -199.82119750976562,
+        "file": "workout/island/design/audio/soccer/crowd-goal.ogg",
+        "sha256": "519600f9f9bb6ff33f30d6b034d11a5dc2de1e464997e8eafae44b75182e17d6"
+      },
+      "after": {
+        "ogg": {
+          "decoded_frames": 240000,
+          "duration_seconds": 5.0,
+          "integrated_lufs": -15.99,
+          "true_peak_dbtp": -1.3,
+          "loudness_range_lu": 13.0,
+          "energy_percent": {
+            "0-200": 6.1854035435307795,
+            "200-500": 22.967077115098785,
+            "500-1100": 50.841097185586136,
+            "1100-2000": 20.00640602034781,
+            "2000-5000": 1.6135420190906335e-05,
+            "5000-24000": 1.627813073569804e-11
+          },
+          "max_100ms_2_5khz_percent": 0.0006094029434918925,
+          "max_narrow_line_persistence_percent": 1.7543859649122806,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -92.46845245361328,
+          "sha256": "bb666727dbe8cb2eaf53f9e2df16412eb739d498bbbf3f29b12f35adaa9fdc03",
+          "bytes": 36052
+        },
+        "mp3": {
+          "decoded_frames": 240000,
+          "duration_seconds": 5.0,
+          "integrated_lufs": -16.02,
+          "true_peak_dbtp": -1.4,
+          "loudness_range_lu": 12.9,
+          "energy_percent": {
+            "0-200": 6.053121487811834,
+            "200-500": 22.746590335998373,
+            "500-1100": 50.68994728491698,
+            "1100-2000": 20.510324546184968,
+            "2000-5000": 1.6329620409913343e-05,
+            "5000-24000": 1.5467436534856872e-08
+          },
+          "max_100ms_2_5khz_percent": 0.0006336898469437343,
+          "max_narrow_line_persistence_percent": 3.508771929824561,
+          "persistent_line_count": 0,
+          "first_sample_dbfs": -101.96470642089844,
+          "sha256": "cdb9cd06b555bfc4b75d9ec56afe45f59efff86326afbcd12da390fa26e72a22",
+          "bytes": 121580
+        }
+      }
+    }
+  }
+}
