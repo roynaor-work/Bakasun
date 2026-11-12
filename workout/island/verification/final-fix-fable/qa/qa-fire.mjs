@@ -24,6 +24,7 @@ export const RUNS={
  'rescue-new-tap':{query:'',scenario:'rescue',stage:3,taps:[100],early:true,build:'after'},
  'rescue-new-press':{query:'',scenario:'rescue',stage:3,taps:[500,100],build:'after'},
  'rescue-new-early':{query:'',scenario:'rescue',stage:3,taps:[100],early:true,build:'after'},
+ 'rescue-new-double':{query:'',scenario:'rescue',stage:3,taps:[100],double:300,build:'after'},
  'rescue-old-tap':{query:OLD,scenario:'rescue',stage:3,taps:[100],hold:1600,build:'before'},
  'rescue-oldmeshy-tap':{query:OLD_MESHY,scenario:'rescue',stage:3,taps:[100],hold:1600,build:'before'},
  'wind-new':{query:'',scenario:'rescue',stage:7,taps:[100],wrongStick:true,build:'after'},
@@ -126,6 +127,7 @@ async function runOne(browser,server,name){
  const errors=[],outside=[],rec={run:name,...spec,startedAt:new Date().toISOString(),errors,outside,shots:[]};
  page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text());});
  page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});
+ const assetLog=[];rec.assetLog=assetLog;const T00=Date.now();page.on('request',r=>{const u=new URL(r.url());if(/\.(glb|ktx2|png|jpg|ogg)$/i.test(u.pathname)&&/fire|truck|engine|models/.test(u.pathname))assetLog.push({t:Date.now()-T00,ev:'req',path:u.pathname.replace('/workout/island/','')});});page.on('requestfinished',r=>{const u=new URL(r.url());if(/fire-truck-512|engine-pumper/.test(u.pathname))assetLog.push({t:Date.now()-T00,ev:'done',path:u.pathname.replace('/workout/island/','')});});
  const client=await context.newCDPSession(page),active=new Map();
  const touch=async(type,id,x,y)=>{if(type==='touchEnd'||type==='touchCancel')active.delete(id);else active.set(id,{x:Math.round(x),y:Math.round(y),id});await client.send('Input.dispatchTouchEvent',{type,touchPoints:[...active.values()]});};
  const tick=ms=>page.clock.runFor(ms);
@@ -261,6 +263,7 @@ async function runOne(browser,server,name){
      await touch('touchStart',3,ladderBtn.x,ladderBtn.y);
      for(let held=0;held<ms;held+=50){await frames(Math.min(50,ms-held));await sample(label+'-holding');}
      await touch('touchEnd',3,ladderBtn.x,ladderBtn.y);
+     if(spec.double&&ti===0){await frames(spec.double);await sample(label+'-gap');await touch('touchStart',3,ladderBtn.x,ladderBtn.y);await frames(100);await touch('touchEnd',3,ladderBtn.x,ladderBtn.y);R.secondTapAfterMs=spec.double;} // a child taps twice
      const t0=before.time;let rescued=false,wrong=false,maxDev=0,minTip=Infinity;
      for(let i=0;i<80;i++){
       // wind: a second finger pushes the stick fully the wrong way (with the wind, +X) during the last rescue

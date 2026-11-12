@@ -228,14 +228,17 @@ try{
    // d) half deflection (24 px of 48) for 0.8 s
    await sampling(I,true);await push(24,800);await release();await I.tick(900);seg.half=(await samples(I)).s;
    // e) relative drag on the flight surface: finger moves 100 px right and stays
-   await sampling(I,true);const fx=420,fy=120;await I.touch('touchStart',[{x:fx,y:fy,id:2}]);await I.tick(64);const dragFrom=(await snap(I.page)).player.x;await I.touch('touchMove',[{x:fx+100,y:fy,id:2}]);await I.tick(900);await I.touch('touchEnd',[]);await I.tick(300);seg.drag=(await samples(I)).s;seg.dragFrom=dragFrom;
+   await sampling(I,true);const fx=420,fy=120;await I.touch('touchStart',[{x:fx,y:fy,id:2}]);await I.tick(64);const ds=await snap(I.page),dragFrom=ds.player.x;seg.dragAt=ds.time;await I.touch('touchMove',[{x:fx+100,y:fy,id:2}]);await I.tick(900);await I.touch('touchEnd',[]);await I.tick(300);seg.drag=(await samples(I)).s;seg.dragFrom=dragFrom;
    await sampling(I,false);
-   const an=(rows,releaseT)=>{const t0=rows.find(s=>Math.abs(s.vx)>0)?.t;const pre=rows.filter(s=>s.t<=releaseT+1e-9),post=rows.filter(s=>s.t>releaseT+1e-9);const top=Math.max(...pre.map(s=>Math.abs(s.vx)));
-    const tStart=rows[0].t-0.016;const t90=pre.find(s=>Math.abs(s.vx)>=.9*top);const t50=pre.find(s=>Math.abs(s.vx)>=.5*top);const xRel=pre.at(-1).x;const rest=post.find(s=>s.vx===0);
-    let maxStep=0;for(let i=1;i<rows.length;i++)maxStep=Math.max(maxStep,Math.abs(rows[i].x-rows[i-1].x));
-    return {topSpeed:round(top,1),topSpeedPxPerSec:round(top*pxPerUnit,0),t50:t50?round(t50.t-tStart,3):null,t90:t90?round(t90.t-tStart,3):null,distanceFirst250ms:round(Math.abs((rows.find(s=>s.t-tStart>=.25-1e-6)?.x??NaN)-rows[0].x+ (rows[0].vx*0.016)),1),
+   // sample i = state after frame i-1, so rows[0] is the state at the moment the stick was pushed (t0)
+   const an=(rows,releaseT)=>{const t0=rows[0].t,x0=rows[0].x;const pre=rows.filter(s=>s.t<=releaseT+1e-9),post=rows.filter(s=>s.t>releaseT+1e-9);const top=Math.max(...pre.map(s=>Math.abs(s.vx)));
+    const t90=pre.find(s=>Math.abs(s.vx)>=.9*top),t50=pre.find(s=>Math.abs(s.vx)>=.5*top),xRel=pre.at(-1).x,rest=post.find(s=>s.vx===0);
+    const at=sec=>rows.find(s=>s.t>=t0+sec-1e-6);let maxStep=0;for(let i=1;i<rows.length;i++)maxStep=Math.max(maxStep,Math.abs(rows[i].x-rows[i-1].x));
+    return {topSpeed:round(top,1),topSpeedPxPerSec:round(top*pxPerUnit,0),t50:t50?round(t50.t-t0,3):null,t90:t90?round(t90.t-t0,3):null,
+     distance100ms:round(Math.abs(at(.1).x-x0),1),distance250ms:round(Math.abs(at(.25).x-x0),1),distance500ms:round(Math.abs(at(.5).x-x0),1),
      glideUnits:round(Math.abs((post.at(-1)?.x??xRel)-xRel),1),glidePx:round(Math.abs((post.at(-1)?.x??xRel)-xRel)*pxPerUnit,0),glideSeconds:rest?round(rest.t-releaseT,3):(post.length?'>'+round(post.at(-1).t-releaseT,2):0),
-     maxBank:round(Math.max(...rows.map(s=>Math.abs(s.bank))),3),bankAtRelease:pre.at(-1).bank,maxFrameStep:round(maxStep,2),startX:rows[0].x,xAtRelease:round(xRel,1)};};
+     glideColumns:round(Math.abs((post.at(-1)?.x??xRel)-xRel)/46,2),
+     maxBank:round(Math.max(...rows.map(s=>Math.abs(s.bank))),3),maxLeanDeg3d:round(Math.max(...rows.map(s=>Math.abs(s.bank)))*0.25*180/Math.PI,1),bankAtRelease:pre.at(-1).bank,maxFrameStep:round(maxStep,2),startX:x0,xAtRelease:round(xRel,1)};};
    const full=an(seg.full,seg.fullRelease);
    const rv=seg.rev;const ri=rv.findIndex(s=>s.t>seg.revAt+1e-9);const revTop=Math.max(...rv.slice(ri).map(s=>-s.vx));const zero=rv.slice(ri).find(s=>s.vx<=0);const r90=rv.slice(ri).find(s=>-s.vx>=.9*revTop);
    const half=seg.half;const halfTop=Math.max(...half.map(s=>Math.abs(s.vx)));
@@ -243,7 +246,7 @@ try{
    r[mode]={start:{geometry:g.geometry,renderMode:g.renderMode},pxPerUnit:round(pxPerUnit,3),bankAngleRad:0.24,full,
     reverse:{topLeftSpeed:round(revTop,1),secondsToZero:zero?round(zero.t-seg.revAt,3):null,secondsTo90:r90?round(r90.t-seg.revAt,3):null},
     halfStick:{topSpeed:round(halfTop,1)},
-    drag:{fromX:round(seg.dragFrom,2),targetX:round(dTarget,2),secondsTo90:d90&&dStart?round(d90.t-(dStart.t-0.016),3):null,overshoot:round(Math.max(0,dMax-dTarget),2),finalX:round(dr.at(-1).x,2)},
+    drag:{fromX:round(seg.dragFrom,2),targetX:round(dTarget,2),secondsTo90:d90?round(d90.t-seg.dragAt,3):null,overshoot:round(Math.max(0,dMax-dTarget),2),finalX:round(dr.at(-1).x,2)},
     traces:{full:seg.full.map(s=>[s.t,s.x,s.vx,s.bank]),release:seg.fullRelease}};
    await shot(I,`motion-${mode}`);
    await exitGame(I);r[mode].close=await closeIsland(I);log('motion',mode,JSON.stringify({full,reverse:r[mode].reverse,half:r[mode].halfStick,drag:r[mode].drag}));}
