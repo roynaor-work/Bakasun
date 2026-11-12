@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Racing crash FX · asset inspection</title>
+<link rel="icon" href="data:,">
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#10151b;color:#edf1f6;font:15px system-ui,sans-serif;padding:28px;max-width:1440px;margin-inline:auto}
+  h1{font-size:26px;margin:0 0 8px}p{color:#aebdcc;line-height:1.5;margin:8px 0 18px}.controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:20px 0}
+  button,input{cursor:pointer}button{border:1px solid #455261;color:#edf1f6;background:#273340;padding:9px 16px;border-radius:6px}label{display:flex;align-items:center;gap:8px}
+  #models{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}article{background:#1b242d;border:1px solid #35424e;border-radius:10px;overflow:hidden}
+  article canvas{display:block;width:100%;height:170px}h2{font-size:14px;font-weight:600;margin:12px 14px 5px}small{display:block;margin:0 14px 14px;color:#b9c7d4}.budget{padding:15px;line-height:1.8}
+  #atlases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.atlas-body{display:flex;justify-content:space-evenly;align-items:center;gap:8px;padding:12px;flex-wrap:wrap}
+  .atlas-body canvas,.atlas-body img{width:224px;height:224px;background:#0a0f14;border-radius:6px}.atlas-body canvas{image-rendering:auto}
+  #status{color:#a6edcc;font-size:13px}a{color:#a9cfff}@media(max-width:800px){body{padding:16px}#models{grid-template-columns:repeat(2,minmax(0,1fr))}#atlases{grid-template-columns:1fr}}
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<h1>Racing crash FX <span style="color:#ffb657">/ v1</span></h1>
+<p>Original CC0 assets · uncompressed GLB · 4 × 4 RGBA flipbooks · isolated asset preview</p>
+<div class="controls">
+  <button id="pause" type="button">Pause rotation &amp; playback</button>
+  <label>Car paint <input id="paint" type="color" value="#ff633b"></label>
+  <span id="status" role="status">Loading assets…</span>
+  <a href="manifest.json">Manifest</a>
+</div>
+<div id="models"></div>
+<div id="atlases">
+  <article><h2>Sparks / AdditiveBlending / 40 fps</h2><div class="atlas-body"><canvas id="sparks" width="256" height="256" aria-label="Animated spark burst"></canvas><img src="sparks-atlas.png" alt="All sixteen spark frames"></div><small>Animated frame (left) · complete transparent atlas (right)</small></article>
+  <article><h2>Smoke &amp; dust / NormalBlending / 20 fps</h2><div class="atlas-body"><canvas id="smoke" width="256" height="256" aria-label="Animated smoke and dust cloud"></canvas><img src="smoke-dust-atlas.png" alt="All sixteen cloud frames"></div><small>Animated frame (left) · complete transparent atlas (right)</small></article>
+</div>
+<script type="module" src="preview.mjs"></script>
+</html>
