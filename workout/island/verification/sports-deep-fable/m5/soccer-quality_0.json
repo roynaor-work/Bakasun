@@ -1,0 +1,120 @@
+{
+ "done": true,
+ "result": {
+  "viewport": {
+   "width": 844,
+   "height": 390
+  },
+  "devicePixelRatio": 1,
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "seed": 7,
+  "level": 1,
+  "pinnedQuality": 0,
+  "warmupSeconds": 3,
+  "seconds": 25.05,
+  "frames": 218,
+  "fps": 8.7,
+  "frameMs": {
+   "mean": 114.9,
+   "p50": 100,
+   "p95": 216.7,
+   "p99": 416.6,
+   "max": 1016.6
+  },
+  "over33": 183,
+  "over50": 175,
+  "tickMs": {
+   "mean": 0.65,
+   "p50": 0.4,
+   "p95": 2.2,
+   "p99": 5.6,
+   "max": 7.1
+  },
+  "renderMs": {
+   "mean": 10.55,
+   "p50": 4,
+   "p95": 9.3,
+   "p99": 16.6,
+   "max": 1000.2
+  },
+  "glMs": {
+   "mean": 9.05,
+   "p50": 2.4,
+   "p95": 7,
+   "p99": 12.7,
+   "max": 998
+  },
+  "animMs": {
+   "mean": 1.49,
+   "p50": 1.1,
+   "p95": 4.3,
+   "p99": 7.7,
+   "max": 13.3
+  },
+  "programsCompiled": 0,
+  "allocByPhaseMB": {
+   "tick": 78.3,
+   "render": 23.1,
+   "gl": 28.4,
+   "other": -5.2
+  },
+  "longTasks": 5,
+  "longTaskMs": 1628,
+  "heap": {
+   "startMB": 85.7,
+   "endMB": 63.8,
+   "allocatedMB": 124.6,
+   "allocatedMBPerSecond": 4.97,
+   "gcCount": 7
+  },
+  "assetReadyMs": 3336,
+  "warmup": {
+   "programs": 66,
+   "ms": 514
+  },
+  "quality": {
+   "final": 3,
+   "pixelRatio": 0.85,
+   "changes": [
+    {
+     "atSeconds": 1,
+     "quality": 2
+    },
+    {
+     "atSeconds": 2,
+     "quality": 3
+    }
+   ],
+   "crowdCount": 0,
+   "shadows": false,
+   "triangles": 83351,
+   "drawCalls": 68,
+   "assetStatus": "ready",
+   "turf": {
+    "turfStatus": "ready",
+    "turfMaps": 1,
+    "source": "design/environment"
+   },
+   "lod": 1
+  },
+  "match": {
+   "score": [
+    1,
+    0
+   ],
+   "elapsed": 17.2,
+   "phase": "playing",
+   "events": {
+    "goal": 1,
+    "shot": 1,
+    "pass": 3,
+    "loft": 0,
+    "header": 0,
+    "steal": 0,
+    "save": 0
+   }
+  },
+  "extra": "quality=0",
+  "consoleErrors": []
+ }
+}
