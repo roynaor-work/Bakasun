@@ -1,0 +1,38 @@
+{
+  "source": "runtime/reference/idle_relaxed.glb",
+  "sourceSha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+  "method": "Closest point on the actual uncompressed Skin triangle to the authored forehead landmark, above eye geometry; all three vertices have Head weight 1. Head-local point uses the actual inverse bind matrix.",
+  "targetBindMeters": [
+    0,
+    1.65,
+    0.115
+  ],
+  "bone": "Head",
+  "triangle": 1561,
+  "vertexIndices": [
+    1069,
+    1070,
+    1094
+  ],
+  "vertexHeadWeights": [
+    1,
+    1,
+    1
+  ],
+  "bindPointMeters": [
+    -0.000012818158276582323,
+    1.6508561287696766,
+    0.1177554968434827
+  ],
+  "localPointMeters": [
+    -0.000012818158276582323,
+    0.1808561001594471,
+    0.1177554968434827
+  ],
+  "barycentric": [
+    0.4196543370493828,
+    0.3674552288363938,
+    0.21289043411422334
+  ],
+  "snapDistanceMeters": 0.0028854607309566336
+}
