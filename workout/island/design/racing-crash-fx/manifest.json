@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "id": "racing-crash-fx-v1",
+  "license": "CC0-1.0",
+  "original": true,
+  "generator": "generate.py",
+  "seed": 73109,
+  "compression": "none",
+  "units": "meters",
+  "upAxis": "+Y",
+  "forwardAxis": "+Z",
+  "axleAxis": "+X",
+  "atlases": [
+    {
+      "id": "sparks",
+      "file": "sparks-atlas.png",
+      "bytes": 13068,
+      "sha256": "c788e5ed9aef010a749e81daad352daf377ddd3fe765fc0d464f815877e55d67",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameOrder": "row-major-top-left",
+      "alpha": "straight",
+      "transparentGutter": 3,
+      "blending": "AdditiveBlending",
+      "fps": 40,
+      "loop": false
+    },
+    {
+      "id": "smoke-dust",
+      "file": "smoke-dust-atlas.png",
+      "bytes": 34722,
+      "sha256": "488b20e0baa65d679d49e7272b894fe1435d02cff3d943d9674aaccc1baa0271",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameOrder": "row-major-top-left",
+      "alpha": "straight",
+      "transparentGutter": 3,
+      "blending": "NormalBlending",
+      "fps": 20,
+      "loop": false
+    }
+  ],
+  "models": [
+    {
+      "id": "body-fragments",
+      "file": "body-fragments.glb",
+      "bytes": 19600,
+      "sha256": "75ec081ff606156918524bcded8915878b408e7e40a10982f07ee3cb462f099e",
+      "triangleLimitPerMesh": 60,
+      "triangles": 192,
+      "material": "car_paint_tint",
+      "meshes": [
+        {
+          "name": "broken_front_wing",
+          "triangles": 48,
+          "dimensions": [
+            1.16,
+            0.243,
+            0.47
+          ]
+        },
+        {
+          "name": "half_sidepod",
+          "triangles": 44,
+          "dimensions": [
+            0.51,
+            0.31,
+            0.84
+          ]
+        },
+        {
+          "name": "mirror",
+          "triangles": 32,
+          "dimensions": [
+            0.36,
+            0.11,
+            0.13
+          ]
+        },
+        {
+          "name": "nose_fragment",
+          "triangles": 32,
+          "dimensions": [
+            0.35,
+            0.195,
+            0.84
+          ]
+        },
+        {
+          "name": "body_panel_a",
+          "triangles": 20,
+          "dimensions": [
+            0.6,
+            0.1051,
+            0.4
+          ]
+        },
+        {
+          "name": "body_panel_b",
+          "triangles": 16,
+          "dimensions": [
+            0.39,
+            0.1032,
+            0.55
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formula-tire",
+      "file": "formula-tire.glb",
+      "bytes": 13000,
+      "sha256": "8883d76d38c2344469f89eef2e985d1342142d08e51cece547f12ce81954a55d",
+      "triangleLimitPerMesh": 120,
+      "triangles": 120,
+      "material": "unbranded_slick_rubber",
+      "meshes": [
+        {
+          "name": "formula_tire",
+          "triangles": 120,
+          "dimensions": [
+            0.38,
+            0.71,
+            0.67525
+          ]
+        }
+      ],
+      "texture": {
+        "file": "formula-tire-128.png",
+        "bytes": 8275,
+        "sha256": "6413fbbe93886f71a6bc82e8e5ea57cccaf5d54d0f6dc96d8c3ebe04edec7cc5",
+        "width": 128,
+        "height": 128,
+        "embedded": true
+      }
+    }
+  ]
+}
