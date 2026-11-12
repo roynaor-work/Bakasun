@@ -454,3 +454,11 @@
  .game-screen[data-game=islandRacing] .rp-go{min-height:44px;font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .rb-lamp{transition:none}}
+/* racing-broadcast-v1 (Codex art, ?racingBroadcastArt=0 removes the rb-art class): team crests, podium backdrop, leaderboard strip, card frame. The urls come from the --rb-* properties set in racing-broadcast-art.mjs. */
+.game-screen[data-game=islandRacing] .rb-crest{display:block;width:16px;height:16px;flex:none}
+.game-screen[data-game=islandRacing] .rb-chip.crest{grid-template-columns:auto auto 1fr}
+.game-screen[data-game=islandRacing] .racing-tower.rb-art .rt-row{grid-template-columns:14px 11px 16px 1fr 36px 9px}
+.game-screen[data-game=islandRacing] .racing-tower.rb-art .rt-bar{width:11px;height:11px;border-radius:0}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast.rb-art{background:linear-gradient(#08111ccc,#08111c99),var(--rb-podium) center/cover no-repeat}
+.game-screen[data-game=islandRacing] .racing-podium.broadcast.rb-art .rp-row:not(.you){background:var(--rb-strip) 0 0/150px 12px repeat,#0b1624b8}
+.game-screen[data-game=islandRacing] .racing-intro.rb-art .rb-intro-side{border:8px solid transparent;border-image:var(--rb-frame) 12 fill/8px/0 stretch}

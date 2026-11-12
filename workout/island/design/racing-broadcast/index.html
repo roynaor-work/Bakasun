@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ערכת שידור מרוצים · תצוגת נכסים</title>
+  <link rel="icon" href="teams/flame.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <section class="overview" aria-label="סקירת הערכה">
+      <header class="masthead">
+        <div class="heading"><span class="kicker">ערכת שידור מרוצים <i></i> 01</span><h1>על קו הזינוק.</h1></div>
+        <div class="specs"><span id="geometry">טוענים גשר…</span><span>12 קבוצות</span><span>מקורי · CC0</span></div>
+      </header>
+
+      <div class="deck">
+        <section class="gantry panel" aria-label="גשר רמזורי זינוק בתלת ממד">
+          <div class="panel-heading"><h2><b>01</b> גשר הזינוק</h2><span>5 נורות עצמאיות</span></div>
+          <canvas id="gantry" aria-label="דגם הגשר מעל קו זינוק, הנורות פונות אל הצופה"></canvas>
+          <div class="lamp-controls" aria-label="שליטה ברמזורים" dir="ltr">
+            <button type="button" id="sequence">רצף זינוק</button>
+            <div id="lamps" aria-label="נורות משמאל לימין"></div>
+            <button type="button" id="reset">איפוס</button>
+          </div>
+          <p id="model-status" class="sr-only" role="status">טוענים מודל</p>
+        </section>
+        <section class="podium panel" aria-label="רקע הפודיום">
+          <img id="podium-art" src="assets/podium.webp" width="844" height="390" alt="פודיום ריק מול יציעים מלאים בקהל וקונפטי">
+          <div class="panel-heading"><h2><b>02</b> רגע הניצחון</h2><span>844 × 390</span></div>
+          <p class="podium-title">הבמה שלכם.</p>
+          <div class="podium-places" aria-label="דוגמת שכבת שמות מעל הרקע">
+            <span class="place second"><img src="teams/wave.svg" alt="" width="32" height="32"><b>2</b></span>
+            <span class="place first"><img src="teams/flame.svg" alt="" width="40" height="40"><b>1</b></span>
+            <span class="place third"><img src="teams/sun.svg" alt="" width="32" height="32"><b>3</b></span>
+          </div>
+          <span class="art-note">קהל וקונפטי · WebP</span>
+        </section>
+      </div>
+
+      <section class="teams" aria-labelledby="teams-title">
+        <div class="section-heading"><h2 id="teams-title"><b>03</b> הנבחרת המלאה</h2><span>12 סמלים · SVG · 64 × 64</span></div>
+        <div id="teams" class="team-grid"></div>
+      </section>
+      <footer class="overview-footer"><span id="load-status" role="status">טוענים נכסים…</span><a href="#surfaces">פאנלים ופרטי שימוש <span aria-hidden="true">↓</span></a></footer>
+    </section>
+
+    <section id="surfaces" class="details" aria-labelledby="surfaces-title">
+      <div class="section-heading"><h2 id="surfaces-title">פאנלים לשידור</h2><span>טקסט חי ב־HTML · תמונות נקיות מכיתוב</span></div>
+      <div class="surface-grid">
+        <section class="surface-demo"><h3>פס דירוג חוזר</h3><p>150 × 12, חזרה בשני הצירים</p><ol id="leaderboard" class="leaderboard"></ol><a href="assets/leaderboard-strip.svg">פתיחת הפס המקורי</a></section>
+        <section class="surface-demo"><h3>מסגרת כרטיסייה · 9-slice</h3><p>48 × 48, חיתוך 12px, שוליים קבועים</p><div class="card-examples"><div class="nine-card small">הקפה מהירה <strong dir="ltr">1:24.086</strong></div><div class="nine-card wide">מסגרת גמישה <small>אותן פינות, רוחב משתנה</small></div></div><a href="assets/card-frame.svg">פתיחת המסגרת המקורית</a></section>
+      </div>
+      <p id="palette-note" class="palette-note"></p>
+      <nav class="documentation" aria-label="קבצי החבילה"><a href="assets/start-gantry.glb">GLB</a><a href="assets/podium.webp">WebP</a><a href="manifest.json">מיפוי נכסים</a><a href="README.md">הוראות</a><a href="REPORT.md">דוח מדידות</a><a href="LICENSES.md">מקור ורישיונות</a><a href="preview-844x390.png">צילום 844 × 390</a></nav>
+      <p class="technical-note">הדף משתמש במנוע התלת־ממד המקומי של המאגר. להפעלה יש להגיש את המאגר דרך HTTP, כמפורט בהוראות.</p>
+      <noscript>יש להפעיל JavaScript לתצוגת הגשר, הסמלים ובקרת התאורה.</noscript>
+    </section>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

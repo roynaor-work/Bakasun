@@ -17,9 +17,16 @@ export const samplesEnabled=(search=globalThis.location?.search||'')=>new URLSea
 // The procedural engine (racing-audio.mjs) carries the motor; the sample layer keeps gearbox,
 // exhaust, kerb, tyre and wind. ?racingEngineLoops=1 restores the five engine loops.
 export const engineLoopsOn=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingEngineLoops')==='1';
-export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn()}){
+/** racing-audio-v3 (Codex package design/racing-audio-v3, CC0; assets/racing-audio-v3): collision, wall scrape, roll-over, restart, brake squeal and an optional shift-light beep.
+ * Same bus, same 12 ms attack and the same 0.45 s gearbox gate as the v2 one-shots; loaded separately, so a missing v3 file never takes the v2 layer down.
+ * Gains are the package's recommendedGain (Roy has not listened yet: conservative). ?racingAudioV3=0 skips the whole group; ?racingShiftBeep=1 adds the beep (off by default, as the package asks). */
+export const audioV3Enabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingAudioV3')!=='0';
+export const shiftBeepEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingShiftBeep')==='1';
+export const V3_SHOTS=Object.freeze({'car-bump':.03,'wall-scrape-short':.025,'wall-scrape-long':.025,'crash-roll':.035,'engine-restart':.03,'shift-light-beep':.02});
+export const V3_LOOPS=Object.freeze({'brake-squeal-loop':{gain:.025,loop:[0.05,1.95]}});
+export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
-  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0;const lastShot=new Map();
+  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false;const lastShot=new Map();
   const bus=context.createGain();bus.gain.value=0;bus.connect(destination);nodes.push(bus);
   const target=(param,value,time,k=.06)=>{try{if(typeof param.setTargetAtTime==='function')param.setTargetAtTime(value,time,k);else param.value=value;}catch{}};
   async function load(){
@@ -35,8 +42,21 @@ export function createRacingSamples({context,destination=context?.destination,ba
       gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0,spec.loop[0]);loops.set(id,{source,gain,spec});nodes.push(source,gain);
     }
     ready=true;
+    if(v3)await loadV3().catch(()=>{});   // v3 is extra: any failure leaves the v2 layer (already ready) as it was
   }
-  let lastGearbox=-9;const GEARBOX=new Set(['shift-up','shift-down','exhaust-pop-1','exhaust-pop-2','exhaust-pop-3','turbo-blowoff']);
+  /** all-or-nothing: v3 becomes usable only when every file of the group decoded */
+  async function loadV3(){
+    const ids=[...Object.keys(V3_SHOTS).filter(id=>beep||id!=='shift-light-beep'),...Object.keys(V3_LOOPS)],got=new Map();
+    await Promise.all(ids.map(async id=>{const response=await fetchFn(new URL(`${id}.${ext}`,base3).href);if(!response.ok)throw new Error('sample '+id);got.set(id,await context.decodeAudioData(await response.arrayBuffer()));}));
+    if(disposed)return;
+    for(const [id,buffer] of got)buffers.set(id,buffer);
+    for(const [id,spec] of Object.entries(V3_LOOPS)){
+      const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffers.get(id);source.loop=true;source.loopStart=spec.loop[0];source.loopEnd=spec.loop[1];
+      gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0);loops.set(id,{source,gain,spec});nodes.push(source,gain);   // from the file start: it rises softly, then loops 0.05-1.95 s
+    }
+    v3Ready=true;
+  }
+  let lastGearbox=-9;const GEARBOX=new Set(['shift-up','shift-down','exhaust-pop-1','exhaust-pop-2','exhaust-pop-3','turbo-blowoff',...Object.keys(V3_SHOTS)]);
   function shot(id,gain=.1,rate=1,minGap=.12){
     if(!ready||disposed)return;const now=context.currentTime;if(now-(lastShot.get(id)||-9)<minGap)return;
     // one gearbox/exhaust sound per 0.45 s: a shift never stacks a shift sound, a pop and a blow-off on top of each other
@@ -63,11 +83,23 @@ export function createRacingSamples({context,destination=context?.destination,ba
     target(loops.get('wind-speed').gain.gain,Math.min(.07,.012+speed/55*.055),now,.15);
     target(loops.get('wind-speed').source.playbackRate,.85+Math.min(speed/60,1)*.35,now,.2);
     if(kerb>.5)shot('kerb-rumble',.05+.04*Math.min(1,speed/45),1,.7);
+    // racing-audio-v3: hard braking at speed (not while drifting: the v2 tyre squeal covers that) fades the brake squeal in and out in 80 ms steps
+    const squeal=loops.get('brake-squeal-loop');if(squeal)target(squeal.gain.gain,braking&&!drifting&&!offroad&&speed>26?squeal.spec.gain*Math.min(1,(speed-20)/20):0,now,.08);
   }
   return {
     load,get ready(){return ready;},get engineLoops(){return engineLoops;},update,
     shiftUp(){shot('shift-up',.035,1,.45);},shiftDown(){shot('shift-down',.03,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
+    get v3Ready(){return v3Ready;},
+    /** a game event by the audio engine's names ('bump', 'wall', 'crash', 'crashRecover'); intensity 0..1. Does nothing until v3 is ready. */
+    event(name,intensity=1){
+      if(!v3Ready||disposed)return;
+      if(name==='bump')shot('car-bump',V3_SHOTS['car-bump'],1,.2);
+      else if(name==='wall')shot(intensity>=.5?'wall-scrape-long':'wall-scrape-short',V3_SHOTS['wall-scrape-short'],1,.25);
+      else if(name==='crash')shot('crash-roll',V3_SHOTS['crash-roll'],1,.6);
+      else if(name==='crashRecover')shot('engine-restart',V3_SHOTS['engine-restart'],1,.6);
+    },
+    shiftBeep(){if(v3Ready&&beep)shot('shift-light-beep',V3_SHOTS['shift-light-beep'],1,.3);},
     dispose(){if(disposed)return;disposed=true;for(const n of nodes){try{n.stop?.();}catch{}try{n.disconnect();}catch{}}}
   };
 }

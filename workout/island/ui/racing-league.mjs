@@ -7,6 +7,7 @@
 import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
 import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-10';
 import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-10';
+import {leagueArtEnabled,crestImg,trophyImg,medalImg,markArt} from './racing-league-art.mjs?v=island-v2-20261107-10';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -47,7 +48,7 @@ function standingsTable(rows){
 /** Teams' table (constructors): six rows, the player's team marked, both drivers named. */
 function teamsTable(teams){
   const table=el('table','rl-table rl-teams'),head=el('tr');for(const h of ['#','קבוצה','נהגים','נקודות'])head.append(el('th','',h));table.append(head);
-  teams.forEach((t,i)=>{const tr=el('tr');if(t.mine)tr.className='mine';tr.dataset.team=t.id;const name=el('td','rl-driver');const dot=el('i','rl-dot');dot.style.background=t.color;name.append(dot,t.name);
+  teams.forEach((t,i)=>{const tr=el('tr');if(t.mine)tr.className='mine';tr.dataset.team=t.id;const name=el('td','rl-driver');const dot=el('i','rl-dot');dot.style.background=t.color;const crest=leagueArtEnabled()?crestImg(t.id):null;name.append(crest||dot,t.name);   // racing-league-v1: the crest replaces the colour dot
     const pts=el('td','rl-pts');pts.append(num(t.points));tr.append(el('td','rl-place',String(i+1)),name,el('td','rl-team',t.drivers.map(id=>id==='player'?'אתם':driverById(id)?.name||id).join(' · ')),pts);table.append(tr);});
   return table;
 }
@@ -65,7 +66,7 @@ function rivalBox(rival){
 }
 /** Season podium: the three steps (2-1-3), the champion team, the player's place and prize. Shown when the season is over. */
 export function seasonPodiumBlock(sum,{compact=false}={}){
-  const box=el('section','rl-podium');box.dataset.seasonPodium=String(sum.seasonId);if(compact)box.classList.add('compact');
+  const box=el('section','rl-podium'),art=leagueArtEnabled();box.dataset.seasonPodium=String(sum.seasonId);if(compact)box.classList.add('compact');if(art)markArt(box);
   box.append(el('h4','',sum.finalSeason?`סיום ${sum.season.name} · העונה האחרונה`:`סיום ${sum.season.name}`));
   const row=el('div','rl-podium-row');const ids=sum.podium||[];const order=[ids[1],ids[0],ids[2]];
   order.forEach((id,k)=>{if(!id)return;const place=[2,1,3][k],step=el('div','rl-podium-step place-'+place);if(id==='player')step.classList.add('you');
@@ -73,7 +74,9 @@ export function seasonPodiumBlock(sum,{compact=false}={}){
   box.append(row);
   const team=TEAMS.find(t=>t.id===sum.teamChampion);
   const facts=el('div','rl-podium-facts');
-  if(team){const f=el('p','rl-line');const dot=el('i','rl-dot');dot.style.background=team.color;f.append('הקבוצה האלופה: ',dot,team.name+(team.drivers.includes('player')?' (הקבוצה שלכם)':''));facts.append(f);}
+  if(team){const f=el('p','rl-line');const dot=el('i','rl-dot');dot.style.background=team.color;f.append('הקבוצה האלופה: ',(art&&crestImg(team.id))||dot,team.name+(team.drivers.includes('player')?' (הקבוצה שלכם)':''));facts.append(f);}
+  if(art){const shelf=el('div','rl-trophies'),driver=sum.podium?.[0],cup=(kind,label)=>{const fig=el('figure','rl-cup');fig.append(trophyImg(kind),el('figcaption','',label));return fig;};
+   if(driver)shelf.append(cup('driver',driver==='player'?'אלוף הנהגים: אתם':`אלוף הנהגים: ${driverById(driver)?.name||driver}`));if(team)shelf.append(cup('team',`הקבוצה האלופה: ${team.name}`));if(shelf.childElementCount)facts.append(shelf);}
   const mine=el('p','rl-line rl-big');mine.append(sum.place===1?'אתם האלופים של העונה':`סיימתם במקום ${sum.place} מתוך ${FIELD}`);facts.append(mine);
   if(sum.seasonPrize){const p=el('p','rl-prize');p.append('פרס סוף העונה: +',num(sum.seasonPrize),' מטבעות');facts.append(p);}
   box.append(facts);return box;
@@ -115,7 +118,7 @@ export function leagueCard({engine,go,season,shop,refresh}){
 /** Season screen body: calendar, drivers, teams, rival, podium, gates and the short-races setting. */
 export function seasonBody({engine,go,refresh}){
   ensureLeagueStyle();
-  const sum=engine.racingLeague.summary(),l=engine.state.islandRacingLeague,root=el('section','rl-season');root.dataset.racingSeason='true';
+  const sum=engine.racingLeague.summary(),l=engine.state.islandRacingLeague,root=el('section','rl-season');root.dataset.racingSeason='true';if(leagueArtEnabled())markArt(root);   // racing-league-v1: banner above the season (css ::before)
   root.append(el('p','rl-line',statusLine(sum)),el('h4','','לוח המרוצים'),raceStrip(l));
   if(sum.done)root.append(seasonPodiumBlock(sum));
   root.append(el('h4','','טבלת הנהגים'),standingsTable(sum.table));
@@ -160,6 +163,7 @@ export function resultBody({engine,result,go,season,shop,refresh}){
   ensureLeagueStyle();
   const r=result.league,sum=engine.racingLeague.summary(),root=el('section','rl-result');root.dataset.racingLeagueResult='true';
   const medal=el('div','rl-medal',String(r.place));medal.dataset.place=String(r.place);medal.setAttribute('aria-label',ordinal(r.place));
+  {const img=leagueArtEnabled()?medalImg(r.place):null;if(img){medal.textContent='';medal.classList.add('art');medal.append(img);}}   // racing-league-v1: gold, silver and bronze medal for places 1-3
   const rows=el('div','rl-rows');
   // numbers are LTR islands; text that mixes Hebrew and numbers stays in the page direction
   const list=[['place','מקום',`${r.place} / ${FIELD}`],['points','נקודות במרוץ',`+${r.points}`],['coins','מטבעות ליגה',`+${r.coins}`],['table','מקום בטבלה',`${sum.place} · ${sum.points} נק׳`,true],['season',`${sum.season.name}`,sum.done?'הסתיימה':`מרוץ ${sum.race} מתוך ${sum.total}`,true]];

@@ -4,7 +4,7 @@ import {createRacingScenery} from './racing-scenery.mjs?v=island-v2-20261107-10'
 import {createRacingEffects} from './racing-effects.mjs?v=island-v2-20261107-10';
 import {v7Enabled} from './racing-v7.mjs';
 import {createRacingF1, racingLookEnabled} from './racing-f1.mjs';
-import {envV2Enabled, loadEnvV2, buildEnvV2} from './racing-env-v2.mjs';
+import {envV2Enabled, loadEnvV2, buildEnvV2, bake as envBake} from './racing-env-v2.mjs';
 import {tunePaint, tuneMaterial, dressCar, createStandIn, createSpeedLines, CAR_COLORS, CAR_NUMBERS, teamOf} from './racing-car-look.mjs';
 
 const PALETTES={
@@ -154,8 +154,13 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
   }else if(!disposed)canvasAsphalt(rngFor(seed^0xa5a5));
  }
  // racing-env-v2: Codex trackside models and textures on the F1 circuits (?racingEnv=v1 or any load problem keeps the procedural trackside)
- let envV2=null;
- if(f1Look&&envV2Enabled()&&!disposed){try{const kit=await loadEnvV2({T,GLTFLoader,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});if(!disposed)envV2=buildEnvV2({T,scene,track,keep,f1:f1Look,kit,night});}catch(e){failures.push('env-v2');console.warn('env v2',e?.message||e);}}
+ let envV2=null,gantry=null,gantryModel=null,artMod=null;
+ // racing-broadcast-v1: Codex start gantry (five lamps that follow the start lights). ?racingBroadcastArt=0 or any load problem keeps the env-v2 gantry.
+ if(f1Look&&envV2Enabled()&&!disposed){try{artMod=await import('./racing-broadcast-art.mjs?v=island-v2-20261107-10');if(artMod.broadcastArtEnabled())gantryModel=await artMod.loadGantry({GLTFLoader});}catch(e){gantryModel=null;failures.push('broadcast-art');console.warn('broadcast art',e?.message||e);}}
+ if(f1Look&&envV2Enabled()&&!disposed){try{const kit=await loadEnvV2({T,GLTFLoader,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});if(!disposed){envV2=buildEnvV2({T,scene,track,keep,f1:f1Look,kit,night,skip:gantryModel?['start-gantry']:[]});if(gantryModel)try{gantry=artMod.buildGantry({T,scene,track,keep,f1:f1Look,model:gantryModel,bake:envBake});}catch(e){failures.push('gantry');console.warn('gantry',e?.message||e);}}}catch(e){failures.push('env-v2');console.warn('env v2',e?.message||e);}}
+ // racing-crash-fx-v1: Codex spark and dust atlases, six body fragments and a formula tyre for the crash show (?racingCrashAssets=0 or any load problem keeps the boxes and cylinder)
+ let crashAssets=false;
+ if(crashFxOn&&!disposed){const crashMod=await import('./racing-crash-assets.mjs?v=island-v2-20261107-10');if(crashMod.crashAssetsEnabled()){try{const pack=await crashMod.loadCrashAssets({T,GLTFLoader});if(!disposed)crashAssets=effects.setCrashAssets(pack);}catch(e){failures.push('crash-fx');console.warn('crash fx',e?.message||e);}}}
  let carAsset=null,lowCarAsset=null,treeAsset=null;
  // racing-v11 formula car (Codex asset, 11,868 triangles, no Draco): all five cars, or the player only at low quality. ?racingFormulaCar=0 disables it; any failure keeps the previous cars.
  // Weak device or lite restart (ctx.lite): the previous cars, no 11.8K-triangle formula model at all. ?racingFormulaCar=1 forces it back on, =0 off.
@@ -250,5 +255,5 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
   renderer.info.reset();renderer.render(scene,camera);
  }
  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();sun.shadow.dispose();scenery.dispose();effects.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const r of resources)r.dispose?.();resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();}
- return {render,observeFrame,dispose,kick(a=.5){shakeA=.3+Math.max(0,Math.min(1,a))*.5;shakeT=.28;},metrics:()=>({mode:'webgl',quality,frames,frameMilliseconds,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,countsIncludeShadowPasses:true,shadowsEnabled:renderer.shadowMap.enabled,visibleTrees:foliageParts[0]?.inst.count||0,treeLimit:[28,18,10][quality],scenery:scenery.metrics(),effects:effects.metrics(),f1:f1Look?.metrics?.()||null,envV2:envV2?.metrics()||null,v7:{enabled:v7On,active:!!v7,reason:v7Reason,lods:cars.map(c=>c.v7?c.v7.lod:-1),spectators:v7?{visible:v7.parts.crowd.visible,capacity:v7.parts.crowd.capacity,triangles:Math.round(v7.parts.crowd.triangles())}:null},modelLoaded,carAsset:carAssetName,vegetationLoaded:!!treeAsset,failures,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures})};
+ return {render,observeFrame,dispose,setStartLamps(n){gantry?.light(n,night);},kick(a=.5){shakeA=.3+Math.max(0,Math.min(1,a))*.5;shakeT=.28;},metrics:()=>({mode:'webgl',quality,frames,frameMilliseconds,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,countsIncludeShadowPasses:true,shadowsEnabled:renderer.shadowMap.enabled,visibleTrees:foliageParts[0]?.inst.count||0,treeLimit:[28,18,10][quality],scenery:scenery.metrics(),effects:effects.metrics(),crashAssets,gantry:gantry?gantry.metrics():null,f1:f1Look?.metrics?.()||null,envV2:envV2?.metrics()||null,v7:{enabled:v7On,active:!!v7,reason:v7Reason,lods:cars.map(c=>c.v7?c.v7.lod:-1),spectators:v7?{visible:v7.parts.crowd.visible,capacity:v7.parts.crowd.capacity,triangles:Math.round(v7.parts.crowd.triangles())}:null},modelLoaded,carAsset:carAssetName,vegetationLoaded:!!treeAsset,failures,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures})};
 }

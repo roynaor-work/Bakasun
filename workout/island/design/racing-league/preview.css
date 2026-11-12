@@ -1,0 +1,92 @@
+:root {
+  color-scheme: dark;
+  font-family: Arial, sans-serif;
+  background: #0a1220;
+  color: #edf2f6;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-underline-offset: 4px; }
+a:focus-visible { outline: 3px solid #18b6bd; outline-offset: 4px; }
+figure, p, h1, h2, h3 { margin: 0; }
+.dark { --surface: #101e30; --ink: #edf2f6; --muted: #aebdcb; --rule: #324359; }
+.light { --surface: #f4f1e8; --ink: #17283b; --muted: #53616e; --rule: #d4d4cd; color-scheme: light; }
+.proof {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 844px;
+  max-width: 100%;
+  margin: auto;
+}
+.proof-panel {
+  height: 390px;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-rows: 40px 80px 103px 106px 25px;
+  background: var(--surface);
+  color: var(--ink);
+  overflow: hidden;
+}
+.proof-header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.proof-header strong { font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
+.proof-header span, .proof-footer { font-size: 11px; color: var(--muted); }
+.proof-teams { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+.proof-team { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.proof-team > img { width: 40px; height: 40px; }
+.proof-team figcaption { display: flex; align-items: center; gap: 2px; font-size: 10px; white-space: nowrap; }
+.proof-team figcaption img { width: 24px; height: 24px; }
+.proof-awards { display: grid; grid-template-columns: 70px 70px 1fr; gap: 12px; align-items: start; }
+.proof-trophy { text-align: center; }
+.proof-trophy img { width: 64px; height: 80px; margin: auto; }
+.proof-trophy figcaption { font-size: 10px; padding-top: 4px; color: var(--muted); }
+.proof-medals { padding-top: 20px; text-align: center; }
+.proof-medals div { display: flex; gap: 4px; justify-content: center; }
+.proof-medals img { width: 40px; height: 40px; }
+.proof-medals p { font-size: 10px; padding-top: 5px; color: var(--muted); }
+.proof-scenes { display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px; align-items: start; }
+.proof-scenes img { width: 100%; border-radius: 5px; }
+.proof-scenes figcaption { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.proof-footer { border-top: 1px solid var(--rule); padding-top: 8px; display: flex; justify-content: space-between; }
+.page { max-width: 1100px; margin: auto; padding: 36px 24px 48px; }
+.page-header { margin-bottom: 32px; }
+.eyebrow { color: #d6aa3b; font-size: 12px; letter-spacing: 1px; margin-bottom: 8px; }
+h1 { font-size: clamp(26px, 5vw, 40px); margin-bottom: 12px; }
+.lede { max-width: 680px; line-height: 1.8; color: #b7c2ca; }
+nav { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 20px; font-size: 14px; }
+.sample { background: var(--surface); color: var(--ink); padding: 24px; border-radius: 12px; margin-bottom: 24px; }
+.sample > h2 { font-size: 23px; margin-bottom: 24px; }
+.sample h3 { font-size: 16px; margin: 28px 0 16px; color: var(--muted); }
+.team-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.team-card { min-width: 0; text-align: center; }
+.team-native { display: block; width: 96px; margin: 0 auto 10px; }
+.team-card strong { display: block; font-size: 15px; }
+.team-card code { display: block; color: var(--muted); font-size: 12px; margin: 6px 0; }
+.micro { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: var(--muted); }
+.micro img { width: 24px; height: 24px; }
+.awards { display: flex; gap: 24px 36px; flex-wrap: wrap; align-items: center; }
+.awards figure { text-align: center; }
+.awards img { margin: auto; }
+.awards figcaption { margin-top: 10px; font-size: 13px; }
+.medals { display: flex; gap: 16px; flex-wrap: wrap; }
+.background-grid { display: grid; gap: 24px; }
+.background-grid img { border-radius: 8px; }
+.background-grid figcaption { display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline; margin-top: 10px; font-size: 14px; }
+.dimensions { font-size: 12px; color: var(--muted); }
+.page-footer { color: #b7c2ca; line-height: 1.8; font-size: 13px; }
+@media (max-width: 760px) {
+  .team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 12px; }
+}
+@media (max-width: 600px) {
+  .proof { grid-template-columns: 1fr; }
+  .proof-panel { padding-inline: 16px; }
+  .page { padding: 28px 16px; }
+  .sample { padding: 20px 12px; }
+  .awards { gap: 20px 12px; }
+  .proof-header strong { font-size: 21px; }
+  .proof-awards { gap: 8px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

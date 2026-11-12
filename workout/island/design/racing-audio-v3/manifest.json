@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sampleRate": 44100,
+  "channels": 1,
+  "targetLufs": -16,
+  "lufsTolerance": 0.2,
+  "attackSeconds": 0.01,
+  "loopUnit": "seconds",
+  "loopEndExclusive": true,
+  "gainReference": 1,
+  "assets": [
+    {
+      "id": "car-bump",
+      "name": "car-bump",
+      "durationSeconds": 0.25,
+      "loop": null,
+      "recommendedGain": 0.03,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611120,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "car-bump.ogg",
+          "bytes": 5467,
+          "sha256": "a7f598193d7f90d273e0c5a5cf4e9b225df1c5d8d9553b1025f5db5290589dc8",
+          "decodedSamples": 11025,
+          "lufs": -15.99,
+          "truePeakDbtp": -4.35,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -79.92,
+          "endSampleDbfs": -61.02
+        },
+        "mp3": {
+          "path": "car-bump.mp3",
+          "bytes": 3820,
+          "sha256": "d5aaa12bc8e78d72fcca5d963ba8fa68ebf6fcd7a26311dc561557b5f8493192",
+          "decodedSamples": 11025,
+          "lufs": -15.99,
+          "truePeakDbtp": -4.33,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -66.92,
+          "endSampleDbfs": -120.55
+        }
+      }
+    },
+    {
+      "id": "wall-scrape-short",
+      "name": "wall-scrape-short",
+      "durationSeconds": 0.3,
+      "loop": null,
+      "recommendedGain": 0.025,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611121,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "wall-scrape-short.ogg",
+          "bytes": 6620,
+          "sha256": "18f8267bab2238f9da1715d85e225e461a830139d77696c8a4dd6045cddc9407",
+          "decodedSamples": 13230,
+          "lufs": -16.06,
+          "truePeakDbtp": -6.4,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -80.65,
+          "endSampleDbfs": -58.1
+        },
+        "mp3": {
+          "path": "wall-scrape-short.mp3",
+          "bytes": 4456,
+          "sha256": "98ba442d292d04b894b4000de6ebc501dfefabd3930ecdf7fe782f9ff7b76931",
+          "decodedSamples": 13230,
+          "lufs": -15.96,
+          "truePeakDbtp": -6.59,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -56.14,
+          "endSampleDbfs": -85.77
+        }
+      }
+    },
+    {
+      "id": "wall-scrape-long",
+      "name": "wall-scrape-long",
+      "durationSeconds": 0.9,
+      "loop": null,
+      "recommendedGain": 0.025,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611122,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "wall-scrape-long.ogg",
+          "bytes": 12093,
+          "sha256": "285723a3e75042c20a2f67951eca4d1785efdce2ca49991902ae9dcef8da7c7a",
+          "decodedSamples": 39690,
+          "lufs": -15.95,
+          "truePeakDbtp": -5.82,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -68.3,
+          "endSampleDbfs": -45.81
+        },
+        "mp3": {
+          "path": "wall-scrape-long.mp3",
+          "bytes": 11665,
+          "sha256": "163e6ac8633f301e4a0ebf9c8055dc53f0a725c831ee97e9d52f4748a8e17869",
+          "decodedSamples": 39690,
+          "lufs": -15.99,
+          "truePeakDbtp": -6.84,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -65.11,
+          "endSampleDbfs": -82.62
+        }
+      }
+    },
+    {
+      "id": "crash-roll",
+      "name": "crash-roll",
+      "durationSeconds": 1.2,
+      "loop": null,
+      "recommendedGain": 0.035,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611123,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "crash-roll.ogg",
+          "bytes": 13642,
+          "sha256": "b091f0184df234071b2c8de02afb143050af18b9d6865d3074b422ae86376fe9",
+          "decodedSamples": 52920,
+          "lufs": -15.98,
+          "truePeakDbtp": -1.15,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -84.46,
+          "endSampleDbfs": -76.9
+        },
+        "mp3": {
+          "path": "crash-roll.mp3",
+          "bytes": 15107,
+          "sha256": "e2566ccce6fcf853c9d99793131ee6899409f0301d7140516c790aaafd8fda41",
+          "decodedSamples": 52920,
+          "lufs": -16.01,
+          "truePeakDbtp": -1.22,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -65.0,
+          "endSampleDbfs": -105.89
+        }
+      }
+    },
+    {
+      "id": "engine-restart",
+      "name": "engine-restart",
+      "durationSeconds": 0.6,
+      "loop": null,
+      "recommendedGain": 0.03,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611124,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "engine-restart.ogg",
+          "bytes": 7925,
+          "sha256": "83a9e28ae8af22151246599bc4d6c166575c1820d34def3ecbda7ab721d6265d",
+          "decodedSamples": 26460,
+          "lufs": -16.05,
+          "truePeakDbtp": -8.55,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -86.84,
+          "endSampleDbfs": -73.96
+        },
+        "mp3": {
+          "path": "engine-restart.mp3",
+          "bytes": 7901,
+          "sha256": "5a6ba7d6fd1f4a6bcc260a20a03352dc71ad515414ad6a82289f4d81239b3e19",
+          "decodedSamples": 26460,
+          "lufs": -16.0,
+          "truePeakDbtp": -9.11,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -69.02,
+          "endSampleDbfs": -74.19
+        }
+      }
+    },
+    {
+      "id": "brake-squeal-loop",
+      "name": "brake-squeal-loop",
+      "durationSeconds": 2,
+      "loop": [
+        0.05,
+        1.95
+      ],
+      "recommendedGain": 0.025,
+      "optional": false,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611125,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "brake-squeal-loop.ogg",
+          "bytes": 21501,
+          "sha256": "4b7f716ac272fc4734cee8a63c9cbf1b5a8bfe065da876a046f159b7f19f83a9",
+          "decodedSamples": 88200,
+          "lufs": -16.03,
+          "truePeakDbtp": -11.72,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -73.12,
+          "endSampleDbfs": -84.9,
+          "loopSamples": [
+            2205,
+            85995
+          ],
+          "loopSeamStepDbfs": -48.17,
+          "loopSeamSlopeErrorDbfs": -61.01,
+          "loopEdgeRmsDifferenceDb": 0.143
+        },
+        "mp3": {
+          "path": "brake-squeal-loop.mp3",
+          "bytes": 24832,
+          "sha256": "ef4de415cac8fee09940fff824c423985a4a89b9147e82592828e370f26fab16",
+          "decodedSamples": 88200,
+          "lufs": -16.0,
+          "truePeakDbtp": -12.2,
+          "loudnessMethod": "ebu-r128-integrated",
+          "startSampleDbfs": -61.67,
+          "endSampleDbfs": -87.97,
+          "loopSamples": [
+            2205,
+            85995
+          ],
+          "loopSeamStepDbfs": -58.2,
+          "loopSeamSlopeErrorDbfs": -47.75,
+          "loopEdgeRmsDifferenceDb": -0.302
+        }
+      }
+    },
+    {
+      "id": "shift-light-beep",
+      "name": "shift-light-beep",
+      "durationSeconds": 0.08,
+      "loop": null,
+      "recommendedGain": 0.02,
+      "optional": true,
+      "source": {
+        "type": "original-procedural-synthesis",
+        "seed": 202611126,
+        "externalSamples": false
+      },
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "shift-light-beep.ogg",
+          "bytes": 4399,
+          "sha256": "0a88a0a6e2adc25613fbbb3ce6aa796454d6cc4f9a44d47b2c31fdee23f7cf99",
+          "decodedSamples": 3528,
+          "lufs": -15.95,
+          "truePeakDbtp": -12.39,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -80.98,
+          "endSampleDbfs": -71.73
+        },
+        "mp3": {
+          "path": "shift-light-beep.mp3",
+          "bytes": 1947,
+          "sha256": "cb52ae1ec11169c6ede0509aa456a2342e864f1899e4ae0df36c956556c40a88",
+          "decodedSamples": 3528,
+          "lufs": -16.05,
+          "truePeakDbtp": -12.58,
+          "loudnessMethod": "ebu-r128-integrated-repeated-to-at-least-4s",
+          "startSampleDbfs": -83.53,
+          "endSampleDbfs": -105.97
+        }
+      }
+    }
+  ]
+}
