@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-12",
+  "base_commit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "status": "passed",
+  "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/naval-air-browsers node --test --test-force-exit tests/*.mjs",
+  "node": "v24.19.0",
+  "playwright": "1.62.1",
+  "browser": "Installed /usr/bin/chromium, located via a task-local Playwright browser path",
+  "metrics": {
+    "tests": 3667,
+    "suites": 0,
+    "pass": 3603,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 285499.997305
+  },
+  "initial_attempt": {
+    "command": "npm test",
+    "status": "environment setup failure",
+    "reason": "Playwright bundled Chromium executable absent. The existing workout-royiki browser test could not launch. No source changes were made to resolve this.",
+    "recovery": "The isolated existing workout-royiki suite passed 5/5 with installed Chromium, then the complete suite was rerun successfully with that browser."
+  },
+  "summary_lines": [
+    "✔ count words, time cues and parsing what the child said (1.169651ms)",
+    "ℹ tests 3667",
+    "ℹ suites 0",
+    "ℹ pass 3603",
+    "ℹ fail 0",
+    "ℹ cancelled 0",
+    "ℹ skipped 64",
+    "ℹ todo 0",
+    "ℹ duration_ms 285499.997305"
+  ]
+}

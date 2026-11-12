@@ -1,0 +1,227 @@
+{
+  "validator": "Independent standard-library GLB inspection",
+  "models": [
+    {
+      "status": "passed",
+      "file": "plane.glb",
+      "bytes": 127212,
+      "sha256": "e3d5adb2056953f7142779c5454477bed48bd9ea6fa93218d1f6e86de6497902",
+      "triangles": 1096,
+      "materials": 1,
+      "textures": 0,
+      "compression": "none",
+      "external_uris": 0,
+      "primitives": 2,
+      "vertex_palette_colors": 5,
+      "light_blue_glass_colors": 1,
+      "nodes": [
+        "motionRoot",
+        "airframe",
+        "propeller"
+      ],
+      "bind_root": "identity at body origin",
+      "rest_bounds": {
+        "min": [
+          -4.300000190734863,
+          -0.6428115367889404,
+          -2.799999952316284
+        ],
+        "max": [
+          4.300000190734863,
+          1.1799999475479126,
+          2.8000000029802323
+        ],
+        "size": [
+          8.600000381469727,
+          1.822811484336853,
+          5.599999955296516
+        ]
+      },
+      "airframe_bounds_excluding_main_rotor": {
+        "min": [
+          -4.300000190734863,
+          -0.6428115367889404,
+          -2.799999952316284
+        ],
+        "max": [
+          4.300000190734863,
+          1.1799999475479126,
+          2.8000000029802323
+        ],
+        "size": [
+          8.600000381469727,
+          1.822811484336853,
+          5.599999955296516
+        ]
+      },
+      "spinners": {
+        "propeller": {
+          "axis": "Z",
+          "pivot": [
+            0.0,
+            -0.025,
+            2.6
+          ],
+          "max_radius": 1.050761636795556,
+          "radial_vertex_centroid": [
+            -3.104408589535547e-10,
+            -2.5697604366165363e-09
+          ]
+        }
+      },
+      "clips": {
+        "fly": {
+          "duration": 2.4000000953674316,
+          "rotation_keys": 49,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            -5.273688070631235e-43,
+            4.408728321890747e-18,
+            1.0
+          ]
+        },
+        "bank": {
+          "duration": 2.4000000953674316,
+          "rotation_keys": 49,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            -2.204364202304404e-17,
+            6.123233849335534e-18,
+            1.0
+          ]
+        },
+        "down": {
+          "duration": 1.600000023841858,
+          "rotation_keys": 33,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            7.575208742825598e-18,
+            -0.9390993558103276,
+            0.3436457623613407
+          ],
+          "axial_spin_radians": 6.283185307179586
+        }
+      }
+    },
+    {
+      "status": "passed",
+      "file": "helicopter.glb",
+      "bytes": 171784,
+      "sha256": "32bb617f9674652bc0cbdcd01512abbac1477c9d2ad11b547cd4c35fb8b0f80f",
+      "triangles": 1480,
+      "materials": 1,
+      "textures": 0,
+      "compression": "none",
+      "external_uris": 0,
+      "primitives": 6,
+      "vertex_palette_colors": 8,
+      "light_blue_glass_colors": 2,
+      "nodes": [
+        "motionRoot",
+        "body",
+        "cockpit",
+        "tail",
+        "skids",
+        "rotor",
+        "tailRotor"
+      ],
+      "bind_root": "identity at body origin",
+      "rest_bounds": {
+        "min": [
+          -3.799999952316284,
+          -0.9176313877105713,
+          -3.909999952316284
+        ],
+        "max": [
+          3.799999952316284,
+          1.3792820298671722,
+          3.6899999523162843
+        ],
+        "size": [
+          7.599999904632568,
+          2.2969134175777435,
+          7.599999904632568
+        ]
+      },
+      "airframe_bounds_excluding_main_rotor": {
+        "min": [
+          -0.7450000047683716,
+          -0.9176313877105713,
+          -2.200000047683716
+        ],
+        "max": [
+          0.7450000047683716,
+          1.1399999856948853,
+          2.200000047683716
+        ],
+        "size": [
+          1.4900000095367432,
+          2.0576313734054565,
+          4.400000095367432
+        ]
+      },
+      "spinners": {
+        "rotor": {
+          "axis": "Y",
+          "pivot": [
+            0.0,
+            1.19,
+            -0.11
+          ],
+          "max_radius": 3.799999952316284,
+          "radial_vertex_centroid": [
+            -1.1104817803619872e-17,
+            -9.65483589262535e-18
+          ]
+        },
+        "tailRotor": {
+          "axis": "X",
+          "pivot": [
+            0.15,
+            0.38,
+            -1.83
+          ],
+          "max_radius": 0.3221897663398421,
+          "radial_vertex_centroid": [
+            -2.7108067920671367e-19,
+            -2.7108066843613274e-19
+          ]
+        }
+      },
+      "clips": {
+        "fly": {
+          "duration": 2.4000000953674316,
+          "rotation_keys": 49,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            -5.273688070631235e-43,
+            4.408728321890747e-18,
+            1.0
+          ]
+        },
+        "bank": {
+          "duration": 2.4000000953674316,
+          "rotation_keys": 49,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            -2.204364202304404e-17,
+            6.123233849335534e-18,
+            1.0
+          ]
+        },
+        "down": {
+          "duration": 1.600000023841858,
+          "rotation_keys": 33,
+          "quaternion_samples_checked": 257,
+          "final_nose_direction": [
+            7.575208742825598e-18,
+            -0.9390993558103276,
+            0.3436457623613407
+          ],
+          "axial_spin_radians": 6.283185307179586
+        }
+      }
+    }
+  ],
+  "status": "passed"
+}
