@@ -1,0 +1,569 @@
+{
+ "summary": {
+  "gait": 8,
+  "cap": 28
+ },
+ "gaits": [
+  {
+   "gait": "walk",
+   "label": "soccer (reference)",
+   "armAbdMax": 15,
+   "swing": 65,
+   "elbow": 51,
+   "lean": 2.1,
+   "fails": []
+  },
+  {
+   "gait": "walk",
+   "label": "basketball before",
+   "armAbdMax": 42.9,
+   "swing": 21,
+   "elbow": 106,
+   "lean": 0.9,
+   "fails": [
+    "arms 43° out (max 24°)",
+    "arm swing 21° (min 40°)",
+    "elbows 106° (allowed 40 to 100°)"
+   ]
+  },
+  {
+   "gait": "walk",
+   "label": "basketball after",
+   "armAbdMax": 15.2,
+   "swing": 64,
+   "elbow": 51,
+   "lean": 2.1,
+   "fails": []
+  },
+  {
+   "gait": "walk",
+   "label": "basketball with ball before",
+   "armAbdMax": 48.9,
+   "swing": 17,
+   "elbow": 84,
+   "lean": 0.9,
+   "fails": [
+    "arms 49° out (max 24°)",
+    "arm swing 17° (min 40°)"
+   ]
+  },
+  {
+   "gait": "walk",
+   "label": "basketball with ball after",
+   "armAbdMax": 13.8,
+   "swing": 67,
+   "elbow": 75,
+   "lean": 2.1,
+   "fails": []
+  },
+  {
+   "gait": "jog",
+   "label": "soccer (reference)",
+   "armAbdMax": 14.8,
+   "swing": 86,
+   "elbow": 54,
+   "lean": 4.7,
+   "fails": []
+  },
+  {
+   "gait": "jog",
+   "label": "basketball before",
+   "armAbdMax": 42.9,
+   "swing": 31,
+   "elbow": 109,
+   "lean": 2.6,
+   "fails": [
+    "arms 43° out (max 24°)",
+    "arm swing 31° (min 55°)",
+    "elbows 109° (allowed 40 to 100°)",
+    "lean 2.6° (min 3°)"
+   ]
+  },
+  {
+   "gait": "jog",
+   "label": "basketball after",
+   "armAbdMax": 15,
+   "swing": 86,
+   "elbow": 54,
+   "lean": 4.8,
+   "fails": []
+  },
+  {
+   "gait": "jog",
+   "label": "basketball with ball before",
+   "armAbdMax": 50,
+   "swing": 12,
+   "elbow": 75,
+   "lean": 2.6,
+   "fails": [
+    "arms 50° out (max 24°)",
+    "arm swing 12° (min 55°)",
+    "lean 2.6° (min 3°)"
+   ]
+  },
+  {
+   "gait": "jog",
+   "label": "basketball with ball after",
+   "armAbdMax": 14.1,
+   "swing": 86,
+   "elbow": 68,
+   "lean": 4.8,
+   "fails": []
+  },
+  {
+   "gait": "run",
+   "label": "soccer (reference)",
+   "armAbdMax": 15.3,
+   "swing": 90,
+   "elbow": 80,
+   "lean": 8.1,
+   "fails": []
+  },
+  {
+   "gait": "run",
+   "label": "basketball before",
+   "armAbdMax": 42.8,
+   "swing": 37,
+   "elbow": 112,
+   "lean": 4.4,
+   "fails": [
+    "arms 43° out (max 24°)",
+    "arm swing 37° (min 65°)",
+    "elbows 112° (allowed 40 to 100°)",
+    "lean 4.4° (min 6°)"
+   ]
+  },
+  {
+   "gait": "run",
+   "label": "basketball after",
+   "armAbdMax": 15.5,
+   "swing": 90,
+   "elbow": 80,
+   "lean": 8.4,
+   "fails": []
+  },
+  {
+   "gait": "run",
+   "label": "basketball with ball before",
+   "armAbdMax": 52.8,
+   "swing": 21,
+   "elbow": 73,
+   "lean": 4.4,
+   "fails": [
+    "arms 53° out (max 24°)",
+    "arm swing 21° (min 65°)",
+    "lean 4.4° (min 6°)"
+   ]
+  },
+  {
+   "gait": "run",
+   "label": "basketball with ball after",
+   "armAbdMax": 15.2,
+   "swing": 89,
+   "elbow": 80,
+   "lean": 8.3,
+   "fails": []
+  },
+  {
+   "gait": "sprint",
+   "label": "soccer (reference)",
+   "armAbdMax": 15.6,
+   "swing": 95,
+   "elbow": 62,
+   "lean": 12.2,
+   "fails": []
+  },
+  {
+   "gait": "sprint",
+   "label": "basketball before",
+   "armAbdMax": 42.9,
+   "swing": 38,
+   "elbow": 112,
+   "lean": 5.9,
+   "fails": [
+    "arms 43° out (max 24°)",
+    "arm swing 38° (min 70°)",
+    "elbows 112° (allowed 40 to 100°)",
+    "lean 5.9° (min 9°)"
+   ]
+  },
+  {
+   "gait": "sprint",
+   "label": "basketball after",
+   "armAbdMax": 15.7,
+   "swing": 95,
+   "elbow": 62,
+   "lean": 12.6,
+   "fails": []
+  },
+  {
+   "gait": "sprint",
+   "label": "basketball with ball before",
+   "armAbdMax": 54.2,
+   "swing": 26,
+   "elbow": 73,
+   "lean": 5.9,
+   "fails": [
+    "arms 54° out (max 24°)",
+    "arm swing 26° (min 70°)",
+    "lean 5.9° (min 9°)"
+   ]
+  },
+  {
+   "gait": "sprint",
+   "label": "basketball with ball after",
+   "armAbdMax": 16.3,
+   "swing": 95,
+   "elbow": 72,
+   "lean": 12.6,
+   "fails": []
+  }
+ ],
+ "stand": [
+  {
+   "id": "idle_ready",
+   "before": 39,
+   "after": 14,
+   "fails": []
+  },
+  {
+   "id": "idle_ready_ball",
+   "before": 35,
+   "after": 14,
+   "fails": []
+  },
+  {
+   "id": "idle_relaxed",
+   "before": 39,
+   "after": 14,
+   "fails": []
+  },
+  {
+   "id": "idle_weight_shift",
+   "before": 39,
+   "after": 14,
+   "fails": []
+  },
+  {
+   "id": "brake",
+   "before": 43,
+   "after": 23,
+   "fails": []
+  },
+  {
+   "id": "brake_ball",
+   "before": 49,
+   "after": 22,
+   "fails": []
+  },
+  {
+   "id": "cut_90_left",
+   "before": 43,
+   "after": 23,
+   "fails": []
+  },
+  {
+   "id": "cut_90_left_ball",
+   "before": 49,
+   "after": 22,
+   "fails": []
+  },
+  {
+   "id": "cut_180_right",
+   "before": 45,
+   "after": 23,
+   "fails": []
+  },
+  {
+   "id": "basket_cut_left",
+   "before": 43,
+   "after": 22,
+   "fails": []
+  },
+  {
+   "id": "dribble_walk_right",
+   "before": 49,
+   "after": 22,
+   "fails": []
+  }
+ ],
+ "ballHand": [
+  {
+   "id": "brake_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_135_left_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_135_right_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_180_left_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_180_right_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_45_left_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_45_right_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_90_left_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "cut_90_right_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "dribble_walk_left",
+   "arm": "Left",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "dribble_walk_right",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "idle_ready_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "idle_relaxed_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "idle_weight_shift_ball",
+   "arm": "Right",
+   "maxShiftCm": 0
+  },
+  {
+   "id": "jog_ball",
+   "arm": "Right",
+   "maxShiftCm": 1.3
+  },
+  {
+   "id": "run_ball",
+   "arm": "Right",
+   "maxShiftCm": 2.3
+  },
+  {
+   "id": "sprint_ball",
+   "arm": "Right",
+   "maxShiftCm": 3.9
+  },
+  {
+   "id": "walk_ball",
+   "arm": "Right",
+   "maxShiftCm": 0.8
+  }
+ ],
+ "standard": {
+  "feelScoreMin": 88,
+  "gait": {
+   "walk": {
+    "armAbdMax": 24,
+    "swingMin": 40,
+    "elbowMin": 40,
+    "elbowMax": 100,
+    "leanMin": 0
+   },
+   "jog": {
+    "armAbdMax": 24,
+    "swingMin": 55,
+    "elbowMin": 40,
+    "elbowMax": 100,
+    "leanMin": 3
+   },
+   "run": {
+    "armAbdMax": 24,
+    "swingMin": 65,
+    "elbowMin": 40,
+    "elbowMax": 100,
+    "leanMin": 6
+   },
+   "sprint": {
+    "armAbdMax": 24,
+    "swingMin": 70,
+    "elbowMin": 40,
+    "elbowMax": 100,
+    "leanMin": 9
+   }
+  },
+  "stand": {
+   "armAbdMax": 30
+  }
+ },
+ "allPlanned": {
+  "gait": [
+   {
+    "id": "jog",
+    "fails": []
+   },
+   {
+    "id": "jog_ball",
+    "fails": []
+   },
+   {
+    "id": "run",
+    "fails": []
+   },
+   {
+    "id": "run_ball",
+    "fails": []
+   },
+   {
+    "id": "sprint",
+    "fails": []
+   },
+   {
+    "id": "sprint_ball",
+    "fails": []
+   },
+   {
+    "id": "walk",
+    "fails": []
+   },
+   {
+    "id": "walk_ball",
+    "fails": []
+   }
+  ],
+  "stand": [
+   {
+    "id": "basket_cut_left",
+    "fails": []
+   },
+   {
+    "id": "basket_cut_right",
+    "fails": []
+   },
+   {
+    "id": "brake",
+    "fails": []
+   },
+   {
+    "id": "brake_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_135_left",
+    "fails": []
+   },
+   {
+    "id": "cut_135_left_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_135_right",
+    "fails": []
+   },
+   {
+    "id": "cut_135_right_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_180_left",
+    "fails": []
+   },
+   {
+    "id": "cut_180_left_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_180_right",
+    "fails": []
+   },
+   {
+    "id": "cut_180_right_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_45_left",
+    "fails": []
+   },
+   {
+    "id": "cut_45_left_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_45_right",
+    "fails": []
+   },
+   {
+    "id": "cut_45_right_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_90_left",
+    "fails": []
+   },
+   {
+    "id": "cut_90_left_ball",
+    "fails": []
+   },
+   {
+    "id": "cut_90_right",
+    "fails": []
+   },
+   {
+    "id": "cut_90_right_ball",
+    "fails": []
+   },
+   {
+    "id": "dribble_walk_left",
+    "fails": []
+   },
+   {
+    "id": "dribble_walk_right",
+    "fails": []
+   },
+   {
+    "id": "idle_ready",
+    "fails": []
+   },
+   {
+    "id": "idle_ready_ball",
+    "fails": []
+   },
+   {
+    "id": "idle_relaxed",
+    "fails": []
+   },
+   {
+    "id": "idle_relaxed_ball",
+    "fails": []
+   },
+   {
+    "id": "idle_weight_shift",
+    "fails": []
+   },
+   {
+    "id": "idle_weight_shift_ball",
+    "fails": []
+   }
+  ]
+ },
+ "untouched": 47
+}
