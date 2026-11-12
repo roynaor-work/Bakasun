@@ -133,7 +133,8 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    for(let i=0;i<10&&(await snap()).loaded>0;i++)await tapFire();await tick(100);s=await snap();
    ammo.atEmpty={loaded:s.loaded,level:s.hud?.ammo?.level,message:s.hud?.ammo?.message,fired:s.fired,stock:s.ammo[0]};await capture('ammo-empty');
    assert.equal(s.loaded,0);assert.equal(ammo.atEmpty.message,'נגמרה התחמושת, אוספים אספקה');const firedEmpty=s.fired;await tapFire();assert.equal((await snap()).fired,firedEmpty,'nothing loaded, the tap does not fire');
-   for(let t=0;t<12000&&(await snap()).supplies<1;t+=250)await tick(250);s=await snap();
+   let overlap=0,labelled=0;for(let t=0;t<12000&&(await snap()).supplies<1;t+=250){await tick(250);const h=(await snap()).hud?.ammo;if(h?.buoyLabel&&h?.messageBox){labelled++;const a=h.buoyLabel,b=h.messageBox;if(a.x<b.x+b.w&&b.x<a.x+a.w&&a.y<b.y+b.h&&b.y<a.y+a.h)overlap++;}}s=await snap();
+   ammo.labelFrames={labelled,overlap};assert.ok(labelled>0,'the drifting buoy is labelled on screen while the message shows');assert.equal(overlap,0,'the buoy label never hides under the empty message');
    ammo.afterDrift={loaded:s.loaded,supplies:s.supplies,level:s.hud?.ammo?.level,seconds:+s.time.toFixed(1)};await capture('ammo-refill');
    assert.equal(s.supplies,1,'the buoy reached the stranded ship');assert.ok(s.loaded>0&&s.hud?.ammo?.level!=='empty','reloaded from the stock');
    for(let i=0;i<30&&(await snap()).loaded>3;i++)await tapFire();await tick(100);s=await snap();
@@ -151,11 +152,10 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    await ready(3);await touch('touchStart',[{x:300,y:150}]);await tick(40);await touch('touchEnd');await tick(200);
    let s,inRange=0;for(let t=0;t<20000&&inRange<10;t+=100){await tick(100);s=await snap();if(s.air?.some(a=>a.state!=='down'&&Math.hypot(a.x-s.playerShip.x,a.z-s.playerShip.z)<=135))inRange++;}
    s=await snap();const sky={inRangeFrames:inRange,seconds:+s.time.toFixed(1),shotsBeforeHold:s.vulcan?.shots??null,button:await page.locator('.naval-vulcan').isVisible(),manual:s.vulcan?.manual??null};
-   const a0=s.air?.find(a=>a.state!=='down');sky.brackets=s.hud?.air?.target||null;
-   if(a0)sky.wingPx=await page.evaluate(a=>{const s=window.__island.games.current.session,b=window.__island.data.config.minigames.navalDuel,p=(x,z,y)=>s.debug.view.projectTarget(x,z,y),h=Math.max(0,a.h)*.32,q=p(a.x,a.z,h),w=p(a.x,a.z+4.3*b.combat.laneSpacing/b.render.enemySpacing,h);return q&&w?+Math.hypot(w.x-q.x,w.y-q.y).toFixed(1):null;},a0);
+   // The projected half wingspan of an aircraft (the HUD sizes its brackets from it).
+   const wingPx=a=>page.evaluate(a=>{const s=window.__island.games.current.session,b=window.__island.data.config.minigames.navalDuel,p=(x,z,y)=>s.debug.view.projectTarget(x,z,y),h=Math.max(0,a.h)*.32,q=p(a.x,a.z,h),w=p(a.x,a.z+4.3*b.combat.laneSpacing/b.render.enemySpacing,h);return q&&w?+Math.hypot(w.x-q.x,w.y-q.y).toFixed(1):null;},a);
    await capture('vulcan-button');
    assert.ok(inRange>=10,'an aircraft stayed in gun range for a second of game time');assert.equal(sky.shotsBeforeHold,0,'no Vulcan shot without the button');assert.equal(sky.button,true,'the Vulcan button is on screen');
-   assert.ok(sky.brackets&&sky.brackets.half>=20&&(sky.wingPx==null||sky.brackets.half>=sky.wingPx),`brackets outside the aircraft (half ${sky.brackets?.half}, wing ${sky.wingPx} px)`);
    const vb=await center('.naval-vulcan');await touch('touchStart',[{x:vb.x,y:vb.y,id:5}]);await tick(60);s=await snap();assert.ok(s.sky?.held,'holding the button opens the sky crosshair');
    const K=await page.evaluate(()=>{const b=window.__island.data.config.minigames.navalDuel;return {ws:b.render.worldScale,sp:b.render.enemySpacing/b.combat.laneSpacing};});
    const angles=(p,a)=>({yaw:Math.atan2(a.z-p.z,a.x-p.x),pitch:Math.atan2(Math.max(0,a.h)*.32,Math.max(.01,Math.hypot((a.x-p.x)*K.ws,(a.z-p.z)*K.sp)))});
@@ -165,7 +165,7 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
     if(Math.abs(yawErr)>2.4)dx=Math.sign(yawErr)*Math.min(78,26+Math.abs(yawErr)*.8);else dx=Math.max(-22,Math.min(22,Math.max(-22,Math.min(22,dx))+yawErr/.12));
     dy=Math.max(-150,Math.min(60,dy-pitchErr/.16));
     await touch('touchMove',[{x:vb.x+dx,y:vb.y+dy,id:5}]);await tick(50);s=await snap();
-    if(s.vulcan.onTarget){onTargetFrames++;firstOn??=s.time;}if(i%10===0)trace.push({t:+s.time.toFixed(2),yawErr:+yawErr.toFixed(1),pitchErr:+pitchErr.toFixed(1),on:s.vulcan.onTarget,shots:s.vulcan.shots,hits:s.vulcan.hits});
+    if(s.vulcan.onTarget){onTargetFrames++;firstOn??=s.time;if(!sky.brackets&&s.hud?.air?.target){sky.brackets=s.hud.air.target;sky.wingPx=await wingPx(s.air.find(x=>x.id===a.id)||a);}}if(i%10===0)trace.push({t:+s.time.toFixed(2),yawErr:+yawErr.toFixed(1),pitchErr:+pitchErr.toFixed(1),on:s.vulcan.onTarget,shots:s.vulcan.shots,hits:s.vulcan.hits});
     if(onTargetFrames===4)await capture('vulcan-aim');if(s.vulcan.kills>0)break;}
    s=await snap();Object.assign(sky,{onTargetFrames,shotsHeld:s.vulcan.shots,hits:s.vulcan.hits,kills:s.vulcan.kills,belt:s.belt,secondsToDown:s.vulcan.kills?+(s.time-firstOn).toFixed(1):null,crosshair:s.hud?.sky||null,trace});
    if(s.vulcan.kills)await capture('vulcan-down');
@@ -174,7 +174,7 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    for(let t=0;t<4000&&!(s.vulcan.splashes>0);t+=250){await tick(250);s=await snap();}
    sky.splashes=s.vulcan.splashes;sky.sounds=await page.evaluate(()=>{const log=window.__island.games.current.session.debug?.sounds||[];const c={};for(const e of log)c[e.name]=(c[e.name]||0)+1;return c;});
    report.sky=sky;console.log('SKY',JSON.stringify(sky));
-   assert.ok(sky.onTargetFrames>0,'the crosshair reached the helicopter');assert.ok(sky.shotsHeld>0&&sky.hits>0,'held on target: shots and hits');assert.equal(sky.kills,1,'the helicopter is shot down');
+   assert.ok(sky.onTargetFrames>0,'the crosshair reached the helicopter');assert.ok(sky.brackets&&sky.brackets.half>=20&&sky.wingPx>0&&sky.brackets.half>=sky.wingPx,`brackets outside the aircraft (half ${sky.brackets?.half}, wing ${sky.wingPx} px)`);assert.ok(sky.shotsHeld>0&&sky.hits>0,'held on target: shots and hits');assert.equal(sky.kills,1,'the helicopter is shot down');
    assert.equal(sky.shotsAfterRelease,0,'releasing the button stops the gun');assert.equal(sky.heldAfter,false);assert.ok((sky.sounds.vulcanStart||0)>=1&&(sky.sounds.vulcanStop||0)>=1&&(sky.sounds.splash||0)>=1,'Vulcan start/stop and the splash were requested');
    sky.peak=await budget('vulcan stage');await exit();await tick(300);
   });

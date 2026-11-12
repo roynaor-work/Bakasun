@@ -79,12 +79,16 @@ export function drawNavalAmmoHud(p,m,balance,project,width,height){
   // Vulcan belt beside it when the gun exists.
   if(m.vulcan&&Number.isFinite(m.belt)){const bc=m.belt<=0?'#ff7a66':m.belt<=30?'#ffb060':'#ffe27a';p.fillStyle=bc;p.fillRect(178,80,3,12);p.fillRect(183,80,3,12);p.fillRect(188,80,3,12);bar(p,176,95,30,4,m.belt,mags.belt,bc);shown.belt=m.belt;}
   p.restore();
-  // Supply buoy on the water and the message.
+  // Supply buoy on the water and the message. 12/11/2026: the message box is laid out first; a buoy that drifted to the ship sits right under
+  // it, so its label moves above the box instead of hiding behind it.
+  const empty=state.level==='empty'&&(m.buoys?.length||index===0),text=empty?(index===0?'נגמרה התחמושת, אוספים אספקה':'הנשק הזה נגמר, בוחרים נשק אחר'):null;let box=null;
+  if(empty){p.save();p.font='bold 14px sans-serif';const w=p.measureText(text).width+28;box={x:width/2-w/2,y:height-128,w,h:30};p.restore();}
   for(const b of m.buoys||[]){const q=project(b.x,b.z,.2),hint=navalEdgeHint(q,width,height,30);shown.buoys++;
     if(hint){edgeArrow(p,hint,'#ffb060',12);shown.buoyArrow=true;continue;}
+    let ly=q.y-34;if(box&&q.x+26>box.x&&q.x-26<box.x+box.w&&ly+18>box.y&&ly<box.y+box.h)ly=box.y-22;
     p.save();p.strokeStyle='#ffb060';p.lineWidth=2;p.setLineDash([5,4]);p.beginPath();p.ellipse(q.x,q.y,22,10,0,0,TAU);p.stroke();p.setLineDash([]);
-    p.fillStyle='#3d2c1ff0';panel(p,q.x-26,q.y-34,52,18,5);p.fillStyle='#ffd9a6';p.font='bold 11px sans-serif';p.textAlign='center';p.direction='rtl';p.fillText('אספקה',q.x,q.y-21);p.restore();}
-  if(state.level==='empty'&&(m.buoys?.length||index===0)){const text=index===0?'נגמרה התחמושת, אוספים אספקה':'הנשק הזה נגמר, בוחרים נשק אחר';shown.message=text;p.save();p.font='bold 14px sans-serif';const w=p.measureText(text).width+28,x=width/2-w/2,y=height-128;p.fillStyle='#3d1f1af0';panel(p,x,y,w,30,9);p.strokeStyle='#ff8a6a88';p.lineWidth=1;p.stroke();p.fillStyle='#ffe0d6';p.textAlign='center';p.direction='rtl';p.fillText(text,width/2,y+20);p.restore();}
+    p.fillStyle='#3d2c1ff0';panel(p,q.x-26,ly,52,18,5);p.fillStyle='#ffd9a6';p.font='bold 11px sans-serif';p.textAlign='center';p.direction='rtl';p.fillText('אספקה',q.x,ly+13);p.restore();shown.buoyLabel={x:Math.round(q.x-26),y:Math.round(ly),w:52,h:18};}
+  if(empty){shown.message=text;shown.messageBox={x:Math.round(box.x),y:box.y,w:Math.round(box.w),h:box.h};p.save();p.font='bold 14px sans-serif';const {x,y,w}=box;p.fillStyle='#3d1f1af0';panel(p,x,y,w,30,9);p.strokeStyle='#ff8a6a88';p.lineWidth=1;p.stroke();p.fillStyle='#ffe0d6';p.textAlign='center';p.direction='rtl';p.fillText(text,width/2,y+20);p.restore();}
   return shown;
 }
 /** Manual Vulcan: the sky crosshair where the held drag points (yellow and filled when inside the hit cone of an aircraft). */
