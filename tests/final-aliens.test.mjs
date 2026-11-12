@@ -64,6 +64,13 @@ test('model, fresh save, real input shape: 6 s hold = one burst, one cool-down, 
  const old=make({},true);run(old,6,{firing:true});assert.ok(old.snapshot().fired>=s.fired*1.5,`v14 ${old.snapshot().fired} vs v15 ${s.fired}`);
  const idle=make();run(idle,4,{});assert.equal(idle.snapshot().fired,0);
 });
+test('model: after the burst the gauge stays amber between taps (gunsWarm), only a full rest makes it cold; v14 never reports warm',()=>{
+ const m=make(),hold={moveX:0,firing:true,nova:false,flight:true},up={moveX:0,firing:false,nova:false,flight:true};run(m,4,hold);
+ assert.equal(m.fireMode,'normal');assert.equal(m.gunsWarm,true);
+ for(let k=0;k<10;k++){run(m,.06,hold);assert.equal(m.gunsWarm,true);run(m,.04,up);assert.equal(m.fireMode,'idle');assert.equal(m.gunsWarm,true,`tap ${k}`);}
+ run(m,3,up);assert.equal(m.gunsWarm,false);
+ const off=make({},true);run(off,4,{firing:true});assert.equal(off.gunsWarm,false);
+});
 test('model, every multiplier maxed (equipment, upgrades, hangar 20, power 1.45, fireRate bonus, rapid pickup, spread, wings): the cap holds',()=>{
  const m=make(maxed);m.pickups.push({kind:2,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:0,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:4,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});
  assert.equal(m.powerup,2);assert.ok(m.spreadTime>0);assert.ok(m.wingTime>0);
