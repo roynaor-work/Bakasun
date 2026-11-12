@@ -1,0 +1,49 @@
+{
+ "part": "air",
+ "flag": "",
+ "errors": [],
+ "search": "?dev=1",
+ "airCfg": {
+  "from": 18,
+  "every": 42,
+  "count": 1,
+  "kinds": [
+   "heli",
+   "plane"
+  ],
+  "hpScale": 1
+ },
+ "air": {
+  "firstAircraftMs": 17500,
+  "kinds": [
+   "heli:in",
+   "heli:down"
+  ],
+  "maxTracers": 3,
+  "shots": 44,
+  "hits": 9,
+  "kills": 1,
+  "splashes": 1,
+  "peakCalls": 59,
+  "peakTris": 70022,
+  "hudTarget": 8,
+  "killMs": 21500,
+  "visibleAt": 19500,
+  "visibleState": "[{\"k\":\"heli\",\"s\":\"in\",\"h\":14,\"hp\":3}]",
+  "visibleTarget": {
+   "id": 1,
+   "x": 432.9036205715359,
+   "y": 174.4997930514217
+  },
+  "gameMs": 23300,
+  "sounds": {
+   "cannon": 1,
+   "metal": 1,
+   "explosion": 2,
+   "vulcanStart": 1,
+   "vulcanStop": 1,
+   "splash": 1
+  }
+ },
+ "csp": "clean"
+}

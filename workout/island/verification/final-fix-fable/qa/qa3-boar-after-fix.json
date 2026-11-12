@@ -1,0 +1,637 @@
+{
+ "mode": "after",
+ "tag": "-fix",
+ "steps_filter": [
+  "C3"
+ ],
+ "query": "index.html?dev=1&adapt=1",
+ "viewport": [
+  844,
+  390
+ ],
+ "steps": {
+  "C3_weaponSwitchTap": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "frames": 8,
+   "game": 0.4,
+   "weapon": "mg->shotgun",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    }
+   },
+   "control": "weapon-btn",
+   "size": [
+    64,
+    64
+   ],
+   "weaponBefore": "mg",
+   "weaponAfter": "shotgun",
+   "switched": true
+  },
+  "C3_weaponSwitchWhileStickHeld": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.025,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.025,
+    "y": -0.05
+   },
+   "frames": 26,
+   "game": 1.283,
+   "weapon": "shotgun->mg",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 2,
+      "pointerup": 2,
+      "click": 1
+     }
+    }
+   },
+   "control": "weapon-btn",
+   "stickHeld": true,
+   "weaponBefore": "shotgun",
+   "weaponAfter": "mg",
+   "switched": true
+  },
+  "C3_abilityTap": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 2,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0,
+   "aimFrom": {
+    "x": 0.025,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.025,
+    "y": -0.05
+   },
+   "frames": 10,
+   "game": 0.45,
+   "weapon": "mg",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 2,
+      "pointerup": 2,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 2,
+      "pointerup": 2,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    }
+   },
+   "rocketRect": [
+    746,
+    78,
+    52,
+    52
+   ],
+   "rocketPresses": 2,
+   "bullets": 0
+  },
+  "C3_abilityWhileStickHeld": {
+   "shots": 0,
+   "button": 0,
+   "nonButton": 0,
+   "abilities": 1,
+   "abilityFromLeft": 0,
+   "stickNoButton": 0,
+   "aimMove": 0.026,
+   "aimFrom": {
+    "x": 0.025,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.051,
+    "y": -0.05
+   },
+   "frames": 26,
+   "game": 1.267,
+   "weapon": "mg",
+   "events": {
+    "before": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 2,
+      "pointerup": 2,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     }
+    },
+    "after": {
+     "start": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "weapon-btn": {
+      "pointerdown": 2,
+      "pointerup": 2,
+      "click": 1
+     },
+     "rocket": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 1
+     },
+     "frost": {
+      "pointerdown": 1,
+      "pointerup": 1,
+      "click": 0
+     }
+    }
+   },
+   "frostRect": [
+    746,
+    138,
+    52,
+    52
+   ],
+   "frostInsideStickZone": false,
+   "stickHeld": true,
+   "frostPresses": 1
+  }
+ },
+ "notes": [
+  "after the layout capture the battle runs as a sandbox wave 1 (hp 999, the wave never ends); targets spawned"
+ ],
+ "intro": [
+  "בטלפון: מזיזים את הכוונת עם הג׳ויסטיק משמאל, ויורים רק בכפתור הירי הכתום מימין. הכפתור הקטן ליד כפתור הירי מחליף נשק. במחשב: מכוונים בעכבר ומחזיקים לחיצה לירי.",
+  "במוסך קונים ומשדרגים ארבעה נשקים, ביצורים ויכולות. המטבעות של החווה נשמרים בנפרד ממטבעות העיר.",
+  "מגינים על החוף מול גלי פלישה ובוסים. השהיה וחזרה לעיר זמינות בכפתור העליון."
+ ],
+ "frameBox": {
+  "x": 0,
+  "y": 0,
+  "width": 844,
+  "height": 390
+ },
+ "frameUrl": "http://127.0.0.1:33731/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-10&island=1&qa=1&adapt=1",
+ "menu": {
+  "buttons": [
+   "start: הגנו על האי ←",
+   "garage: מוסך ונשקים ⚙",
+   "help: איך משחקים?",
+   "quality: איכות גרפיקה: רגילה",
+   "aim-sens: רגישות כוונון: בינונית",
+   "island-back: חזרה לעיר"
+  ],
+  "aimSens": "רגישות כוונון: בינונית",
+  "help": "בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.",
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
+   "LEGACY": false
+  },
+  "coarse": true,
+  "maxTouchPoints": 5
+ },
+ "load": {
+  "framesPerWallSecond": 2.08,
+  "gameSecondsPerWallSecond": 0.097
+ },
+ "env": {
+  "mode": "battle",
+  "frames": 78,
+  "elapsed": 3.667,
+  "aim": {
+   "x": 0,
+   "y": -0.05
+  },
+  "firing": false,
+  "fireHeld": false,
+  "stick": false,
+  "stickInfo": null,
+  "shots": 0,
+  "shotsBy": {
+   "button": 0,
+   "scene": 0,
+   "keyboard": 0,
+   "mouse": 0,
+   "auto": 0,
+   "qa": 0,
+   "unknown": 0
+  },
+  "stickNoButton": 0,
+  "abilityBy": {
+   "rocket": 0,
+   "frost": 0,
+   "fury": 0
+  },
+  "abilityFromLeft": 0,
+  "heat": 0,
+  "overheated": false,
+  "current": "mg",
+  "hp": 100,
+  "enemies": 5,
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
+   "LEGACY": false
+  },
+  "stickR": 80,
+  "aimSens": "mid",
+  "paused": false,
+  "wave": 1,
+  "qa3": {
+   "blur": 0,
+   "focus": 0,
+   "vis": 0,
+   "raf": 75,
+   "ev": {
+    "start": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    }
+   }
+  }
+ },
+ "layout": {
+  "aim-zone": [
+   0,
+   86,
+   304,
+   304
+  ],
+  "aim-rest": [
+   24,
+   256,
+   110,
+   110
+  ],
+  "fire-btn": [
+   718,
+   264,
+   108,
+   108
+  ],
+  "weapon-btn": [
+   644,
+   286,
+   64,
+   64
+  ],
+  "rocket": [
+   746,
+   78,
+   52,
+   52
+  ],
+  "frost": [
+   746,
+   138,
+   52,
+   52
+  ],
+  "fury": [
+   746,
+   198,
+   52,
+   52
+  ],
+  "boss-hud": null,
+  "battle-hint": [
+   282,
+   34,
+   279,
+   34
+  ],
+  "coins": [
+   12,
+   8,
+   66,
+   34
+  ],
+  "health": [
+   622,
+   8,
+   150,
+   31
+  ],
+  "wave": [
+   361,
+   6,
+   121,
+   21
+  ],
+  "weapons": null,
+  "ammo": null,
+  "under": {
+   "76,209": "aim-zone",
+   "184,209": "aim-zone",
+   "292,209": "aim-zone",
+   "60,200": "aim-zone",
+   "110,320": "aim-zone",
+   "79,311": "aim-zone",
+   "150,290": "aim-zone",
+   "450,140": "scene",
+   "620,110": "scene",
+   "520,60": "SPAN"
+  },
+  "leftThumbGrid": {
+   "points": 361,
+   "onStick": 361,
+   "other": {}
+  },
+  "fonts": {
+   "abilitySmall": [
+    "10px",
+    "10px",
+    "10px"
+   ],
+   "weaponName": "10px",
+   "weaponAmmo": "10px"
+  },
+  "rest": {
+   "border": "rgba(207, 221, 211, 0.6)",
+   "label": "\"כוונון\""
+  },
+  "crosshairMode": "transform",
+  "hint": "הג׳ויסטיק משמאל רק מזיז את הכוונת · יורים רק בכפתור ירי מגע על המסך לא יורה"
+ },
+ "origin": [
+  79,
+  311
+ ],
+ "hasFire": true,
+ "final": {
+  "mode": "battle",
+  "frames": 153,
+  "elapsed": 7.25,
+  "aim": {
+   "x": 0.051,
+   "y": -0.05
+  },
+  "firing": false,
+  "fireHeld": false,
+  "stick": false,
+  "stickInfo": null,
+  "shots": 0,
+  "shotsBy": {
+   "button": 0,
+   "scene": 0,
+   "keyboard": 0,
+   "mouse": 0,
+   "auto": 0,
+   "qa": 0,
+   "unknown": 0
+  },
+  "stickNoButton": 0,
+  "abilityBy": {
+   "rocket": 2,
+   "frost": 1,
+   "fury": 0
+  },
+  "abilityFromLeft": 0,
+  "heat": 0,
+  "overheated": false,
+  "current": "mg",
+  "hp": 999,
+  "enemies": 2,
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
+   "LEGACY": false
+  },
+  "stickR": 80,
+  "aimSens": "mid",
+  "paused": false,
+  "wave": 1,
+  "qa3": {
+   "blur": 0,
+   "focus": 0,
+   "vis": 0,
+   "raf": 150,
+   "ev": {
+    "start": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    },
+    "weapon-btn": {
+     "pointerdown": 2,
+     "pointerup": 2,
+     "click": 1
+    },
+    "rocket": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 1
+    },
+    "frost": {
+     "pointerdown": 1,
+     "pointerup": 1,
+     "click": 0
+    }
+   }
+  }
+ },
+ "focus": {
+  "blur": 0,
+  "focus": 0,
+  "vis": 0,
+  "raf": 150,
+  "ev": {
+   "start": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 1
+   },
+   "weapon-btn": {
+    "pointerdown": 2,
+    "pointerup": 2,
+    "click": 1
+   },
+   "rocket": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 1
+   },
+   "frost": {
+    "pointerdown": 1,
+    "pointerup": 1,
+    "click": 0
+   }
+  }
+ },
+ "exit": {
+  "exitFound": true,
+  "frameGone": true
+ },
+ "save": {
+  "keys": [
+   "bestWave",
+   "coins",
+   "kills",
+   "nextWave",
+   "upgrades",
+   "version",
+   "weapons"
+  ],
+  "weapons": [
+   "cannon",
+   "cannon2",
+   "cannon3",
+   "mg",
+   "mg2",
+   "mg3",
+   "shotgun",
+   "shotgun2",
+   "shotgun3",
+   "tesla",
+   "tesla2",
+   "tesla3"
+  ],
+  "upgrades": [
+   "armor",
+   "cooling",
+   "frost",
+   "rocket",
+   "turret"
+  ],
+  "otherBoarKeys": [
+   "boar-island-quality",
+   "boar-island-v1"
+  ],
+  "aimKey": null
+ },
+ "saveExpected": {
+  "keys": [
+   "bestWave",
+   "coins",
+   "kills",
+   "nextWave",
+   "upgrades",
+   "version",
+   "weapons"
+  ],
+  "weapons": [
+   "cannon",
+   "cannon2",
+   "cannon3",
+   "mg",
+   "mg2",
+   "mg3",
+   "shotgun",
+   "shotgun2",
+   "shotgun3",
+   "tesla",
+   "tesla2",
+   "tesla3"
+  ],
+  "upgrades": [
+   "armor",
+   "cooling",
+   "frost",
+   "rocket",
+   "turret"
+  ]
+ },
+ "saveNewFields": {
+  "top": [],
+  "weapons": [],
+  "upgrades": []
+ },
+ "csp": "clean",
+ "errors": [],
+ "frameLost": false,
+ "wallSeconds": 81
+}

@@ -8,7 +8,9 @@ export function drawV14Heat(p,m,aspect=1,scale=1){
  p.save();p.translate(m.player.x,m.player.y);p.scale(1/aspect,1);
  const x=(v15?40:38)*scale,y=16*scale;
  p.globalAlpha=.9;p.fillStyle='#0a1622';p.fillRect(x-1,-y+h-h-1,w+2,h+2);p.fillStyle='#1c2c3c';p.fillRect(x,-y,w,h);
- p.fillStyle=blink?'#ffffff':cool||hot?'#ff4a30':heat>.6?'#ffc94a':'#7fe0a0';p.fillRect(x,-y+h*(1-heat),w,h*heat);
+ // 12/11/2026 (QA): steady fire holds the gauge at warmHeat (.35), under the .6 amber mark, so it showed green like a burst; with v15 the steady mode itself is amber.
+ // 12/11/2026 (QA retest): amber follows the warm barrels (burst spent, not cooling), not the press, so taps during steady fire no longer flick it green between presses.
+ p.fillStyle=blink?'#ffffff':cool||hot?'#ff4a30':heat>.6||(v15&&(m.fireMode==='normal'||m.gunsWarm))?'#ffc94a':'#7fe0a0';p.fillRect(x,-y+h*(1-heat),w,h*heat);
  if(v15){p.globalAlpha=1;p.lineWidth=1.5*scale;p.strokeStyle=cool?(blink?'#ffffff':'#ff4a30'):'#9bd7ff';p.strokeRect(x-1.5*scale,-y-1.5*scale,w+3*scale,h+3*scale);
   if(cool){p.fillStyle=blink?'#ffffff':'#ff4a30';p.beginPath();p.moveTo(x+w/2,-y-10*scale);p.lineTo(x+w/2+4*scale,-y-3*scale);p.lineTo(x+w/2-4*scale,-y-3*scale);p.closePath();p.fill();}}
  p.restore();

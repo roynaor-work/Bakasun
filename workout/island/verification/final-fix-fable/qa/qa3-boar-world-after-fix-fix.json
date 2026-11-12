@@ -1,0 +1,59 @@
+{
+ "mode": "after",
+ "diagonal": {
+  "thumb": "45 degrees up-right, 40 px",
+  "crosshairDegAboveHorizontal": 44.9,
+  "arrowDegFromUp": "45deg",
+  "pxPerS": {
+   "right": 100.4,
+   "up": 100.2
+  }
+ },
+ "cameraLineUnchanged": "camera.rotation.y=damp(camera.rotation.y,-pointer.x*.1,.12,dt) (game.js frame())",
+ "rows": [
+  {
+   "label": "full tilt",
+   "thumbPx": 95,
+   "crosshairSpeedUnitsPerS": null,
+   "releaseAt": 2.383,
+   "crosshairMovedAfterReleasePx": 0,
+   "aimPointSlipAfterReleasePx": {
+    "max": 10.4,
+    "after1s": -10.42,
+    "at100ms": -4.61,
+    "at300ms": -8.62
+   },
+   "samples": 21
+  },
+  {
+   "label": "half tilt",
+   "thumbPx": 40,
+   "crosshairSpeedUnitsPerS": null,
+   "releaseAt": 5.567,
+   "crosshairMovedAfterReleasePx": 0,
+   "aimPointSlipAfterReleasePx": {
+    "max": 2.5,
+    "after1s": -2.53,
+    "at100ms": -1.12,
+    "at300ms": -2.09
+   },
+   "samples": 20
+  },
+  {
+   "label": "20% tilt",
+   "thumbPx": 17,
+   "crosshairSpeedUnitsPerS": null,
+   "releaseAt": 8.733,
+   "crosshairMovedAfterReleasePx": 0,
+   "aimPointSlipAfterReleasePx": {
+    "max": 0.6,
+    "after1s": -0.6,
+    "at100ms": -0.26,
+    "at300ms": -0.49
+   },
+   "samples": 20
+  }
+ ],
+ "errors": [],
+ "csp": "clean"
+}

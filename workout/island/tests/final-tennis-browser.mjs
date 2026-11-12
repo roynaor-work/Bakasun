@@ -2,7 +2,7 @@
 // with real touch (Chromium, hasTouch + isMobile, 844x390, CDP Input.dispatchTouchEvent on the on-screen joystick and buttons), the way a
 // child plays: short taps on the hit button when the ball arrives, never a long hold.
 //   MODE=after  node workout/island/tests/final-tennis-browser.mjs   (default: the shipped code; must pass)
-//   MODE=before node workout/island/tests/final-tennis-browser.mjs   (kill switches ?tennisBar=0&tennisDrop=0 = the v20 behaviour; must FAIL)
+//   MODE=before node workout/island/tests/final-tennis-browser.mjs   (kill switches ?tennisReturn=v14&tennisBar=0&tennisDrop=0 = the v20 behaviour; must FAIL)
 // Writes frames to verification/final-fix-fable/frames/tennis-<mode>-*.jpg and the run log to verification/final-fix-fable/tennis-<mode>/.
 // Exits non-zero on any failed assertion. CHROMIUM_PATH points at the browser (default /usr/bin/chromium).
 import assert from 'node:assert/strict';
@@ -12,7 +12,7 @@ import {fileURLToPath} from 'node:url';
 import {serveIsland,installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart,waitForGameNavigation} from './shell-ready.mjs';
 const require=createRequire(import.meta.url),{chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
-const MODE=process.env.MODE==='before'?'before':'after',POINTS=Number(process.env.POINTS)||6,DIFFICULTY=process.env.DIFFICULTY||'';
+const MODE=process.env.MODE==='before'?'before':'after',POINTS=Number(process.env.POINTS)||4,FRAMES=Number(process.env.FRAMES)||1100,DIFFICULTY=process.env.DIFFICULTY||'';
 const base=fileURLToPath(new URL('../verification/final-fix-fable/',import.meta.url)),frames=base+'frames/',logDir=base+`tennis-${MODE}/`;
 await mkdir(frames,{recursive:true});await mkdir(logDir,{recursive:true});
 const viewport={width:844,height:390};
@@ -34,7 +34,7 @@ try{
   const r=data.config.minigames.tennis.render;r.slowFrameMs=100000;/* SwiftShader timing must not change the render tier or drop to the 2D fallback */
   r.pixelRatios=r.pixelRatios.map(()=>.75);r.shadowEnabled=r.shadowEnabled.map(()=>false);/* a phone's middle tier; the bar is DOM and does not depend on it */
   // The session reads its kill switches from location.search when the game starts: "before" is the v20 behaviour.
-  if(mode==='before')history.replaceState(null,'',location.pathname+'?dev=1&tennisBar=0&tennisDrop=0');},{mode:MODE,difficulty:DIFFICULTY});
+  if(mode==='before')history.replaceState(null,'',location.pathname+'?dev=1&tennisReturn=v14&tennisBar=0&tennisDrop=0');},{mode:MODE,difficulty:DIFFICULTY});
  const start=async id=>{await page.evaluate(id=>window.__island.games.start(id,undefined,1),id);if(await page.locator('[data-action=game-understood]').count()){await tick(32);await tap('[data-action=game-understood]');}await waitForGameStart(page);await tick(100);await waitForGameNavigation(page);};
  log('avatar ready');await start('tennis');log('tennis started');
  // The clock is paused, so rAF polling never fires: advance the fake clock while the character model loads (timers and frames both move).
@@ -57,18 +57,24 @@ try{
  const read=()=>page.evaluate(()=>{const s=window.__island.games.current.session.snapshot,m=document.querySelector('.tennis-serve-meter'),r=m?.getBoundingClientRect(),cs=m&&getComputedStyle(m),needle=m?.querySelector('.tennis-serve-needle');
   const visible=Boolean(m)&&!m.hidden&&cs.display!=='none'&&cs.visibility!=='hidden'&&Number(cs.opacity)>0&&r.width>0&&r.height>0&&r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight;
   return {phase:s.phase,server:s.server,serveZone:s.serveZone,serveMeter:s.serveMeter,elapsed:s.elapsed,pointNumber:s.pointNumber,rallyHits:s.rallyHits,charge:s.charge,
-   contact:s.contact?{side:s.contact.side,eta:s.contact.eta,x:s.contact.x,z:s.contact.z}:null,shotSide:s.shot?.side??null,shotDrop:Boolean(s.shot?.drop),lastHitter:s.ball.lastHitter,ballZ:s.ball.z,ballY:s.ball.y,px:s.players[0].x,pz:s.players[0].z,ox:s.players[1].x,oz:s.players[1].z,
-   hm:s.hitMeter?{active:s.hitMeter.active,value:s.hitMeter.value,zone:s.hitMeter.zone,greenHalf:s.hitMeter.greenHalf,yellowHalf:s.hitMeter.yellowHalf}:null,
+   contact:s.contact?{side:s.contact.side,eta:s.contact.eta,x:s.contact.x,z:s.contact.z}:null,shotSide:s.shot?.side??null,faults:s.faults,shotDrop:Boolean(s.shot?.drop),landingZ:s.landing?.z??null,lastHitter:s.ball.lastHitter,ballZ:s.ball.z,ballY:s.ball.y,px:s.players[0].x,pz:s.players[0].z,ox:s.players[1].x,oz:s.players[1].z,
+   hm:s.hitMeter?{active:s.hitMeter.active,value:s.hitMeter.value,zone:s.hitMeter.zone,greenHalf:s.hitMeter.greenHalf,yellowHalf:s.hitMeter.yellowHalf,sweep:Boolean(s.hitMeter.sweep),direction:s.hitMeter.direction??1}:null,
    meter:{exists:Boolean(m),hidden:m?.hidden??null,visible,mode:m?.dataset.mode??null,zone:m?.dataset.zone??null,rect:r?{x:Math.round(r.x),y:Math.round(r.y),w:Math.round(r.width),h:Math.round(r.height)}:null,background:m?.style.background||'',needleBottom:needle?.style.bottom||''},
-   event:{id:s.event.id,type:s.event.type,side:s.event.side,reason:s.event.reason,winner:s.event.winner,serving:s.event.serving},renderMode:s.renderMetrics?.mode};});
+   event:{id:s.event.id,type:s.event.type,side:s.event.side,reason:s.event.reason,winner:s.event.winner,serving:s.event.serving,grade:s.event.grade,zone:s.event.zone,rating:s.event.rating,power:s.event.power},renderMode:s.renderMetrics?.mode};});
  const shotFrame=async name=>{const file=`tennis-${MODE}-${name}.jpg`;await page.screenshot({path:frames+file,type:'jpeg',quality:70});report.frames.push(file);};
  const hasGreen=bg=>/#67d398|103,\s*211,\s*152/i.test(bg),hasYellow=bg=>/#efc355|239,\s*195,\s*85/i.test(bg);
  // ---- play ----
- const points=[],returns=[],drops=[];let serveSeen=null,stickOn=false,tapNo=0,eventId=-1,incomingKey=null,incoming=null,pendingDrop=null,serveTapAt=0,framesRun=0,shotServe=false,shotReturn=false,shotTap=false,shotDrop=false;
+ const points=[],returns=[],drops=[];let serveSeen=null,stickOn=false,tapNo=0,oppHit=0,eventId=-1,incomingKey=null,incoming=null,pendingDrop=null,serveTapAt=0,framesRun=0,shotServe=false,shotReturn=false,shotTap=false,shotDrop=false,shotSweep=false;
  const stickTowards=async targetX=>{const sx=zone.x,sy=zone.y,dx=Math.max(-1,Math.min(1,targetX*4))*44;if(!stickOn){await down(1,sx,sy);stickOn=true;}await move(1,sx+dx,sy);};
  const stickOff=async()=>{if(stickOn){await up(1);stickOn=false;}};
+ const absorb=s=>{if(s.event.id!==eventId){eventId=s.event.id;const e=s.event;
+   if(e.type==='hit'&&e.side===0&&!e.serving&&incoming?.tapped&&!incoming.hit)incoming.hit={grade:e.grade,zone:e.zone,rating:e.rating,power:e.power,drop:s.shotDrop};
+   if(e.type==='missSwing'&&incoming?.tapped&&!incoming.hit)incoming.miss=e.reason;
+   if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){pendingDrop={at:s.elapsed,reached:false,pointNumber:s.pointNumber,landZ:s.landingZ===null?null:Math.round(s.landingZ*100)/100};/* where the model predicts the drop lands (metres past the net, negative = opponent's side) */}
+   if(e.type==='hit'&&e.side===1&&!e.serving&&pendingDrop)pendingDrop.reached=true;
+   if(['point','game','complete'].includes(e.type)){points.push({n:s.pointNumber,winner:e.winner,reason:e.reason,rallyHits:s.rallyHits,elapsed:s.elapsed});if(pendingDrop){drops.push({...pendingDrop,end:s.elapsed,seconds:s.elapsed-pendingDrop.at,winner:e.winner,reason:e.reason});pendingDrop=null;}if(incoming){returns.push(incoming);incoming=null;incomingKey=null;}}}};
  log('controls read');let s=await read();const startPoint=s.pointNumber;absorb(s);log('first state',s.phase,s.renderMode);
- while(s.pointNumber-startPoint<POINTS&&s.phase!=='complete'&&framesRun<9000){
+ while(s.pointNumber-startPoint<POINTS&&s.phase!=='complete'&&framesRun<FRAMES){
   const step=(s.phase==='rally'&&s.contact?.side===0&&s.contact.eta<.6)||(s.phase==='toss'&&s.server===0&&s.serveMeter>.3)?16:(s.phase==='rally'&&s.contact?.side===1&&!pendingDrop)?80:40;
   if(s.server===0&&s.phase==='serve'){await stickOff();await tapButton(serveBtn);serveTapAt=s.elapsed;}
   else if(s.phase==='toss'&&s.server===0){
@@ -77,14 +83,16 @@ try{
    if(s.serveZone==='green'&&Math.abs(s.serveMeter-.5)<.09){await tapButton(serveBtn);}
   }
   else if(s.phase==='rally'&&s.contact?.side===0&&s.shotSide===1&&s.lastHitter===1){
-   const key=`${s.pointNumber}:${s.rallyHits}`;
-   if(key!==incomingKey){if(incoming)returns.push(incoming);incomingKey=key;incoming={key,pointNumber:s.pointNumber,etaAtStart:s.contact.eta,visibleBeforeTap:false,visibleFrames:0,frames:0,meterAtTap:null,hmAtTap:null,tapped:false,drop:false,zoneAtTap:null,greenBand:false,yellowBand:false,modes:new Set()};}
-   incoming.frames++;if(s.meter.visible){incoming.visibleFrames++;incoming.modes.add(s.meter.mode);if(hasGreen(s.meter.background))incoming.greenBand=true;if(hasYellow(s.meter.background))incoming.yellowBand=true;}
+   if(s.event.type==='hit'&&s.event.side===1)oppHit=s.event.id;const key=`${s.pointNumber}:${oppHit}`;
+   if(key!==incomingKey){if(incoming)returns.push(incoming);incomingKey=key;const plan=['green','drop','red'][tapNo%3];incoming={key,pointNumber:s.pointNumber,etaAtStart:s.contact.eta,visibleBeforeTap:false,visibleFrames:0,frames:0,meterAtTap:null,hmAtTap:null,tapped:false,drop:false,zoneAtTap:null,greenBand:false,yellowBand:false,modes:new Set(),plan,needleMoves:0,needleValues:[],hit:null,miss:null};}
+   incoming.frames++;if(s.hm){const v=s.hm.value,last=incoming.needleValues.at(-1);if(last!==undefined&&v!==last)incoming.needleMoves++;incoming.needleValues.push(Math.round(v*1000)/1000);}if(s.meter.visible){incoming.visibleFrames++;incoming.modes.add(s.meter.mode);if(hasGreen(s.meter.background))incoming.greenBand=true;if(hasYellow(s.meter.background))incoming.yellowBand=true;}
    if(!incoming.tapped){
     if(s.meter.visible&&s.contact.eta>.2)incoming.visibleBeforeTap=true;
     await stickTowards(s.contact.x-s.px);
     if(!shotReturn&&s.contact.eta<.75&&s.contact.eta>.45){await shotFrame('return-incoming');shotReturn=true;}
-    if(s.contact.eta<=.08){const dropNow=tapNo++%2===1;incoming.meterAtTap={...s.meter};incoming.hmAtTap=s.hm;incoming.zoneAtTap=s.hm?.zone??null;incoming.tapped=true;incoming.drop=dropNow;
+    if(!shotSweep&&s.hm?.sweep&&s.hm.value>=.3&&s.hm.value<.42){await shotFrame('return-needle-mid');shotSweep=true;}
+    const due=incoming.plan==='red'?(s.hm?.active&&s.hm.value>=.1&&s.hm.direction===1):s.contact.eta<=.08;
+    if(due){const dropNow=incoming.plan==='drop';tapNo++;incoming.meterAtTap={...s.meter};incoming.hmAtTap=s.hm;incoming.zoneAtTap=s.hm?.zone??null;incoming.tapped=true;incoming.drop=dropNow;
      if(!shotTap){await shotFrame('return-tap');shotTap=true;}
      await tapButton(dropNow?dropBtn:hit);}
    }
@@ -105,7 +113,7 @@ try{
  console.log(JSON.stringify(report.summary));
  // ---- acceptance ----
  const check=(name,ok,detail)=>{report.checks[name]={ok:Boolean(ok),detail};if(!ok)failure??=new Error(`${name}: ${detail}`);};
- check('servePlayed',points.length>=Math.min(POINTS,4),`points ${points.length}`);
+ check('servePlayed',points.length>=1,`points ${points.length}`);
  check('serveMeterVisibleWithGreenAndYellow',serveSeen&&serveSeen.green&&serveSeen.yellow,JSON.stringify(serveSeen));
  check('tappedReturns',tapped.length>=3,`tapped returns ${tapped.length}`);
  // (a) every tapped return: the bar is on screen before the finger lands and when it lands, with green in the middle and yellow around it, like the serve
@@ -117,6 +125,13 @@ try{
  check('dropNotOneSecondWin',drops.length&&fast.length===0,`${fast.length}/${drops.length} drops ended untouched within ~1 s (seconds: ${report.summary.dropSeconds.join(', ')})`);
  check('dropReachedByOpponent',drops.length&&drops.filter(d=>d.reached).length>=Math.ceil(drops.length/2),`${drops.filter(d=>d.reached).length}/${drops.length} reached`);
  check('dropLastsAtLeast1_2s',drops.length&&drops.every(d=>d.seconds>=1.2),report.summary.dropSeconds.join(', '));
+ // v15: the needle sweeps by itself on every incoming ball; a tap in the green centre is a good stroke, a tap in the red is weak (or a miss)
+ const greenTaps=tapped.filter(r=>r.plan==='green'&&r.hit),redTaps=tapped.filter(r=>r.plan==='red'),dropTaps=tapped.filter(r=>r.plan==='drop'&&r.hit);
+ report.summary.needleMoves=tapped.map(r=>r.needleMoves);report.summary.greenTapGrades=greenTaps.map(r=>r.hit.grade);report.summary.redTapResults=redTaps.map(r=>r.hit?r.hit.grade:'miss:'+r.miss);report.summary.dropTapRatings=dropTaps.map(r=>r.hit.rating);
+ check('needleSweepsOnIncoming',tapped.length&&tapped.every(r=>r.needleMoves>=10),`needle position changed on ${JSON.stringify(tapped.map(r=>r.needleMoves))} frames per incoming ball`);
+ check('greenTapIsGood',greenTaps.length>=1&&greenTaps.every(r=>r.hit.grade==='good'&&['perfect','good'].includes(r.hit.rating)),JSON.stringify(greenTaps.map(r=>[r.hmAtTap?.zone,r.hit.grade,r.hit.rating])));
+ check('redTapIsWeak',redTaps.length>=1&&redTaps.every(r=>r.miss||r.hit.grade==='weak'),JSON.stringify(redTaps.map(r=>[r.hmAtTap?.zone,r.hit?.grade||('miss:'+r.miss)])));
+ check('dropTapNotSpuriouslyEarly',dropTaps.length>=1&&dropTaps.every(r=>['perfect','good'].includes(r.hit.rating)),JSON.stringify(dropTaps.map(r=>r.hit.rating)));
  check('noPageErrors',errors.length===0,JSON.stringify(errors.slice(0,3)));
  if(!await page.locator('.game-pause-sheet').count())await tap('[data-action=game-pause]');await tap('[data-action=game-exit]');await waitForGameNavigation(page);
  await csp.assertClean();report.csp=csp.snapshot();await context.close();

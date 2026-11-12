@@ -1,0 +1,36 @@
+{
+ "part": "aim",
+ "flag": "&navalAim=v20",
+ "errors": [],
+ "search": "?dev=1&navalAim=v20",
+ "fireBox": {
+  "x": 734,
+  "y": 280,
+  "width": 88,
+  "height": 88
+ },
+ "right": {
+  "label": "a right 60px hold 1.5s",
+  "dx": 60,
+  "holdMs": 1500,
+  "fireX": 778,
+  "fireToRightEdge": 66,
+  "aimingWhenHeld": true,
+  "yawAfterMoveDeg": 9.6,
+  "yawDeg": 10.8,
+  "maxStepDeg": 1.2,
+  "landingSamples": 15,
+  "landingOffscreen": 0,
+  "arrowsWhenOff": 0,
+  "midLanding": {
+   "x": 420,
+   "y": 188,
+   "front": true,
+   "arrow": null
+  },
+  "firedWhileHeld": 0,
+  "firedAfterRelease": 1,
+  "driftAfterReleaseDeg": 0
+ },
+ "csp": "clean"
+}

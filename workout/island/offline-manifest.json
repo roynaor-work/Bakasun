@@ -185,6 +185,7 @@
   "minigames/alien-flight-input-hud.mjs",
   "minigames/alien-flight-input.mjs",
   "minigames/alien-flight-model.mjs",
+  "minigames/alien-move.mjs",
   "minigames/alien-session.mjs",
   "minigames/alien-ui.mjs",
   "minigames/alien-v10-draw.mjs",
@@ -356,6 +357,7 @@
   "minigames/naval-air-view.mjs",
   "minigames/naval-air.mjs",
   "minigames/naval-ballistics.mjs",
+  "minigames/naval-base-view.mjs",
   "minigames/naval-camera.mjs",
   "minigames/naval-campaign.mjs",
   "minigames/naval-controls.mjs",
@@ -370,6 +372,8 @@
   "minigames/naval-patrol.mjs",
   "minigames/naval-projectiles.mjs",
   "minigames/naval-scenery.mjs",
+  "minigames/naval-supply-view.mjs",
+  "minigames/naval-supply.mjs",
   "minigames/naval-upgrades.css",
   "minigames/naval-upgrades.mjs",
   "minigames/naval-v7.mjs",
@@ -976,7 +980,10 @@
    "assets/naval-v7/ships/destroyer-lod0.glb",
    "assets/naval-v7/textures/blank-1.png",
    "assets/naval-v7/textures/fleet-ember-1024.png",
-   "assets/naval-v7/textures/fleet-tide-1024.png"
+   "assets/naval-v7/textures/fleet-tide-1024.png",
+   "assets/game-naval/audio/vulcan-spin-up.ogg",
+   "assets/game-naval/audio/vulcan-fire-loop.ogg",
+   "assets/game-naval/audio/vulcan-spin-down.ogg"
   ],
   "fire": [
    "assets/fire-v7/models/apartment-burning-lod.glb",

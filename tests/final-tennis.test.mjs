@@ -17,27 +17,30 @@ function sampler(){let previous={...NONE},gesture=0;return({moveX=0,moveZ=0,tap=
 
 /** A child who taps the hit button when the ball arrives (never holds), and taps the near-net drop button on every `dropEvery`-th return.
  * Returns what the bar did on every tapped return and how every drop point ended. */
-export function playMatch({stage=1,difficulty='easy',seed=1,config=baseConfig,bar=true,dropFix=true,dropEvery=2,maxDrops=25,maxFrames=60*900,ranks={speed:1,hit:1,serve:1}}={}){
-  const model=createTennis({config,stage,seed:(Math.imul(seed,2654435761)>>>0)||1,difficulty,ranks,bar,dropFix}),next=sampler(),r=rngOf(seed*77+3);
-  const out={returns:[],drops:[],points:0,frames:0};let eventId=model.getState().event.id,incomingKey=null,incoming=null,pending=null,returnNo=0;
+export function playMatch({stage=1,difficulty='easy',seed=1,config=baseConfig,bar=true,dropFix=true,returnMeter=true,tapAt=null,kind='hit',dropEvery=2,maxDrops=25,maxFrames=60*900,ranks={speed:1,hit:1,serve:1}}={}){
+  const model=createTennis({config,stage,seed:(Math.imul(seed,2654435761)>>>0)||1,difficulty,ranks,bar,dropFix,returnMeter}),next=sampler(),r=rngOf(seed*77+3);
+  const out={returns:[],drops:[],points:0,frames:0};let eventId=model.getState().event.id,incomingKey=null,incoming=null,pending=null,returnNo=0,oppHit=0;
   for(let frame=0;frame<maxFrames&&out.drops.length<maxDrops&&model.getState().phase!=='complete';frame++){
     const s=model.getState();let opts={};
     if(s.server===0&&s.phase==='serve')opts.tap='serve';
     else if(s.server===0&&s.phase==='toss'){if(s.serveZone==='green'&&Math.abs(s.serveMeter-.5)<.07)opts.tap='serve';}
     else if(s.phase==='rally'&&s.contact?.side===0&&s.shot?.side===1&&s.ball.lastHitter===1){
-      const key=`${s.pointNumber}:${s.rallyHits}`;
+      if(s.event.type==='hit'&&s.event.side===1)oppHit=s.event.id;const key=`${s.pointNumber}:${oppHit}`;/* a new incoming ball = a new opponent hit (a re-serve after a fault keeps rallyHits) */
       if(key!==incomingKey){if(incoming)out.returns.push(incoming);incomingKey=key;incoming={key,activeBefore:false,activeAtTap:null,zoneAtTap:null,greenHalf:null,yellowHalf:null,tapped:false,drop:false,frames:0,activeFrames:0};}
-      incoming.frames++;if(s.hitMeter?.active)incoming.activeFrames++;
+      incoming.frames++;if(s.hitMeter?.active){incoming.activeFrames++;incoming.sweep=Boolean(s.hitMeter.sweep);const v=s.hitMeter.value;if(incoming.lastValue!==undefined&&v!==incoming.lastValue)incoming.moves=(incoming.moves||0)+1;incoming.lastValue=v;if(Math.abs(s.contact.eta)<1/60)incoming.valueAtContact=v;}
       const p=s.players[0];opts.moveX=clamp((s.contact.x-p.x)*4,-1,1);opts.moveZ=clamp((s.contact.z-p.z)*4,-1,1);
       if(!incoming.tapped){
         if(s.contact.eta>.2&&s.hitMeter?.active)incoming.activeBefore=true;
-        if(s.contact.eta<=.08){incoming.tapped=true;incoming.activeAtTap=Boolean(s.hitMeter?.active);incoming.zoneAtTap=s.hitMeter?.zone??null;incoming.greenHalf=s.hitMeter?.greenHalf??null;incoming.yellowHalf=s.hitMeter?.yellowHalf??null;
-          const drop=dropEvery>0&&returnNo%dropEvery===dropEvery-1&&p.z<7.6;returnNo++;incoming.drop=drop;opts.tap=drop?'drop':'hit';opts.aim={x:r()*2-1,z:0,height:0,manual:true};}
+        const target=tapAt==null?null:tapAt,v=s.hitMeter?.value??0,due=target===null?s.contact.eta<=.08:(v>=target&&s.hitMeter?.direction===1&&s.hitMeter?.active);
+        if(due){incoming.tapped=true;incoming.activeAtTap=Boolean(s.hitMeter?.active);incoming.zoneAtTap=s.hitMeter?.zone??null;incoming.greenHalf=s.hitMeter?.greenHalf??null;incoming.yellowHalf=s.hitMeter?.yellowHalf??null;
+          const drop=dropEvery>0&&returnNo%dropEvery===dropEvery-1&&p.z<7.6;returnNo++;incoming.drop=drop;opts.tap=drop?'drop':kind;incoming.needleAtTap=v;opts.aim={x:r()*2-1,z:0,height:0,manual:true};}
       }
     }
-    applyTennisSample(model,next(opts),1/60);out.frames++;
+    applyTennisSample(model,next(opts),1/60,{pressFires:returnMeter});out.frames++;
     const n=model.getState(),e=n.event;
     if(e.id!==eventId){eventId=e.id;
+      if(e.type==='hit'&&e.side===0&&!e.serving&&incoming?.tapped&&!incoming.hit)incoming.hit={grade:e.grade,zone:e.zone,rating:e.rating,power:Math.round(e.power*1000)/1000,error:e.error||null,drop:Boolean(n.shot?.drop),lob:Boolean(n.shot?.lob)};
+      if(e.type==='missSwing'&&incoming?.tapped&&!incoming.hit)incoming.miss=e.reason;
       if(e.type==='hit'&&e.side===0&&!e.serving&&n.shot?.drop)pending={at:n.elapsed,reached:false,landZ:null,pointNumber:n.pointNumber};
       if(e.type==='hit'&&e.side===1&&!e.serving&&pending)pending.reached=true;
       if(e.type==='bounce'&&pending&&pending.landZ===null&&n.ball.lastHitter===0)pending.landZ=Math.round(n.ball.z*100)/100;
@@ -54,11 +57,11 @@ export function summarize(runs){
 }
 const cells=[[1,'easy'],[6,'easy'],[10,'normal'],[25,'hard']];
 const measure=(opts,seeds=6)=>summarize(Array.from({length:seeds},(_,i)=>playMatch({...opts,seed:i+1})));
-const seedsFor=difficulty=>difficulty==='easy'?6:difficulty==='normal'?10:14;/* the harder the match, the fewer points before it ends */
+const seedsFor=difficulty=>difficulty==='easy'?6:difficulty==='normal'?10:18;/* the harder the match, the fewer points before it ends */
 
 test('final tennis: a tapped return (press+release in one frame, as the phone sends it) has the bar up before the finger lands and when it lands; with ?tennisBar=0 (v20) it never does',()=>{
   for(const [stage,difficulty] of cells){
-    const after=measure({stage,difficulty,dropEvery:0,maxDrops:1,maxFrames:60*120},3),before=measure({stage,difficulty,dropEvery:0,maxDrops:1,maxFrames:60*120,bar:false},3);
+    const after=measure({stage,difficulty,dropEvery:0,maxDrops:1,maxFrames:60*120},3),before=measure({stage,difficulty,dropEvery:0,maxDrops:1,maxFrames:60*120,bar:false,returnMeter:false},3);
     assert.ok(after.tapped>=8,`${difficulty} ${stage}: tapped returns ${after.tapped}`);
     assert.equal(after.barBefore,after.tapped,`${difficulty} ${stage}: bar up before the tap on ${after.barBefore}/${after.tapped}`);
     assert.equal(after.barAtTap,after.tapped,`${difficulty} ${stage}: bar up at the tap on ${after.barAtTap}/${after.tapped}`);
@@ -91,10 +94,52 @@ test('final tennis: a near-net drop tapped through the controls is not an automa
   }
 });
 
+
+const hits=o=>o.returns.filter(r=>r.tapped&&r.hit).map(r=>r.hit),grades=rows=>Object.fromEntries(['good','medium','weak'].map(g=>[g,rows.filter(h=>h.grade===g).length]));
+const meanPower=rows=>rows.reduce((a,h)=>a+h.power,0)/Math.max(1,rows.length);
+test('final tennis v15: on every incoming ball the needle sweeps by itself (like the serve) and is in the middle when the ball arrives; with ?tennisReturn=v14 it waits at the bottom',()=>{
+  const o=playMatch({stage:1,difficulty:'easy',dropEvery:0,maxDrops:1,maxFrames:60*120}),inc=o.returns.filter(r=>r.frames>20);
+  assert.ok(inc.length>=6,`incoming balls ${inc.length}`);
+  for(const r of inc){assert.ok(r.moves>=10,`the needle moved on ${r.moves} frames of ${r.frames}`);if(r.valueAtContact!==undefined)assert.ok(Math.abs(r.valueAtContact-.5)<=.08,`needle ${r.valueAtContact} at the contact instant`);}
+  const v14=playMatch({stage:1,difficulty:'easy',dropEvery:0,maxDrops:1,maxFrames:60*120,returnMeter:false}),still=v14.returns.filter(r=>r.frames>20);
+  assert.ok(still.length>=6);for(const r of still)assert.ok(!r.sweep,'v14: no sweep, the needle is the held charge');for(const r of inc)assert.ok(r.sweep,'v15: the needle sweeps');
+});
+test('final tennis v15: a tap in the green centre is accurate and strong, yellow is fine, red is weak or missed, in both difficulties; drops and lobs are judged by the same needle (no spurious early)',()=>{
+  for(const difficulty of ['easy','normal']){
+    const stage=difficulty==='easy'?1:10,ws=.6,green=baseConfig.serve.green[difficulty]*ws,yellowEdge=.5-(green+baseConfig.serve.yellowWidth*ws*.85)/2;
+    const run=(tapAt,kind='hit',seeds=4)=>Array.from({length:seeds},(_,i)=>playMatch({stage,difficulty,seed:i+1,dropEvery:0,maxDrops:60,maxFrames:60*150,tapAt,kind})).flatMap(hits);
+    const centre=run(.5),yellow=run(yellowEdge),red=run(.1),arrival=run(null);
+    assert.ok(centre.length>=20&&yellow.length>=20&&arrival.length>=20,`samples ${centre.length}/${yellow.length}/${arrival.length}`);
+    assert.ok(grades(centre).good/centre.length>=.9,`${difficulty} centre: ${JSON.stringify(grades(centre))}`);
+    assert.ok(centre.every(h=>['perfect','good'].includes(h.rating)),`${difficulty} centre ratings`);
+    assert.ok(grades(yellow).medium/yellow.length>=.9,`${difficulty} yellow: ${JSON.stringify(grades(yellow))}`);
+    assert.ok(red.every(h=>h.grade==='weak'),`${difficulty} red: ${JSON.stringify(grades(red))}`);
+    assert.ok(meanPower(centre)>meanPower(yellow)+.1&&meanPower(yellow)>=meanPower(red),`${difficulty} power centre ${meanPower(centre).toFixed(2)} > yellow ${meanPower(yellow).toFixed(2)} >= red ${meanPower(red).toFixed(2)}`);
+    assert.ok(grades(arrival).good/arrival.length>=.9,`${difficulty} a tap when the ball arrives is in the green: ${JSON.stringify(grades(arrival))}`);
+    const drops=run(.5,'drop'),lobs=run(.5,'lob');
+    assert.ok(drops.length>=15&&lobs.length>=15,`drops ${drops.length} lobs ${lobs.length}`);
+    assert.ok(drops.every(h=>h.drop&&['perfect','good'].includes(h.rating)),`${difficulty} drop in the centre is rated perfect/good, never early`);
+    assert.ok(lobs.every(h=>h.lob&&['perfect','good'].includes(h.rating)),`${difficulty} lob in the centre is rated perfect/good, never early`);
+    const redDrops=Array.from({length:6},(_,i)=>playMatch({stage,difficulty,seed:i+1,dropEvery:0,maxDrops:60,maxFrames:60*150,tapAt:.1,kind:'drop'})).flatMap(o=>o.returns.filter(r=>r.tapped));
+    const redFired=redDrops.filter(r=>r.hit);assert.ok(redDrops.length>=10,`red drops ${redDrops.length}`);
+    assert.ok(redFired.every(r=>r.hit.rating==='early'||r.hit.rating==='late'),`${difficulty} a red drop is rated early/late`);
+  }
+});
+test('final tennis v15: the drop floats a little (net crossing 1.1 to 2.3 m, not a lob) and the config has defaults and keys',async()=>{
+  const cfg=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.tennis;
+  assert.ok(cfg.v9.dropFix.flightScale>=1.1&&cfg.v9.dropFix.flightScale<=1.3,`flightScale ${cfg.v9.dropFix.flightScale}`);
+  assert.equal(cfg.v9.meter.bar,true);assert.equal(cfg.v9.returnMeter.enabled,true);
+  const noScale={...baseConfig,v9:{...baseConfig.v9,dropFix:{...baseConfig.v9.dropFix}}};delete noScale.v9.dropFix.flightScale;
+  const o=playMatch({stage:1,difficulty:'easy',config:noScale,maxDrops:3,maxFrames:60*120});
+  assert.ok(o.drops.length>=1&&o.drops.every(d=>Number.isFinite(d.seconds)),'a missing flightScale falls back to 1 (no NaN flight)');
+  const session=await readFile(new URL('../workout/island/minigames/tennis-session.mjs',import.meta.url),'utf8');
+  assert.ok(session.includes("'tennisReturn')==='v14'")&&session.includes('pressFires'),'kill switch and press-judged tap in the session');
+  assert.ok(/maxLeft|stageBox/.test(session),'the bar is clamped inside the stage');
+});
 if(process.argv[1]&&process.argv[1].endsWith('final-tennis.test.mjs')&&process.argv.includes('table')){
   console.log('stage | diff | mode | tapped | bar before | bar at tap | drops | reached | untouched win | untouched<=1.05s | median s | min s');
   for(const [stage,difficulty] of cells)for(const mode of ['before','after']){
-    const m=measure({stage,difficulty,bar:mode==='after',dropFix:mode==='after'},seedsFor(difficulty));
+    const m=measure({stage,difficulty,bar:mode==='after',dropFix:mode==='after',returnMeter:mode==='after'},seedsFor(difficulty));
     console.log(`${stage} | ${difficulty} | ${mode} | ${m.tapped} | ${m.barBefore} | ${m.barAtTap} | ${m.drops} | ${(100*m.reachedShare).toFixed(0)}% | ${(100*m.untouchedShare).toFixed(0)}% | ${(100*m.untouchedFastShare).toFixed(0)}% | ${m.medianSeconds} | ${m.minSeconds}`);
   }
 }

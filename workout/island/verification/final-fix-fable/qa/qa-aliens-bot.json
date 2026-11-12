@@ -1,0 +1,51 @@
+{
+ "default": {
+  "stageSeconds": 108.1,
+  "limitSeconds": 270,
+  "outcome": "win",
+  "fired": 736,
+  "kills": 59,
+  "shotsPerKill": 12.5,
+  "livesLeft": 5,
+  "maxLives": 6,
+  "wave": 5,
+  "overheats": 1,
+  "capDropped": 19,
+  "pickupsSeen": [
+   {
+    "kind": 0,
+    "at": 39.3
+   },
+   {
+    "kind": 3,
+    "at": 73
+   }
+  ],
+  "steps": 1082,
+  "inAirSteadyAimed": {
+   "samples": 599,
+   "mean": 5.4,
+   "max": 32
+  },
+  "inAirSteadyAll": {
+   "samples": 1049,
+   "mean": 6,
+   "max": 33
+  },
+  "close": {
+   "errors": [],
+   "outside": [],
+   "cspClean": true,
+   "cspError": null,
+   "cspHtmlResponses": 1,
+   "cspViolations": 0,
+   "cspPolicyErrors": 0,
+   "setup": {
+    "placed": true,
+    "saved": true,
+    "search": "?dev=1"
+   },
+   "url": "http://127.0.0.1:36973/workout/island/index.html?dev=1"
+  }
+ }
+}

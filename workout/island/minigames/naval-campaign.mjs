@@ -1,5 +1,25 @@
 /** Naval content stays separate from save, reward and simulation contracts. */
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-10';
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+/** 11/11/2026 (Roy, phone: "צריך גם לבנות בסיס שצריך להתקיף, עם תותחים וכדומה, נגיד כל 5 שלבים"): a fortified enemy base on stages
+ * 5, 15 and 25 (stages 10, 20 and 30 keep their moving fleets: the v20 aim test and the hold-release pilot tests run there). The stage's `base` block names the variant and the
+ * structures; the rows it adds are stationary `behavior:'base'` entities with a `structure` kind, so shore cannons telegraph and fire like
+ * the stage-9 bases. The model adds them beside the stage's fleet (the campaign roster and its mission keep the v20 contract) and the stage
+ * is won only when the fleet objective and the base's main targets are both done. `?navalBase=0` leaves those stages as they were. */
+export const navalBaseEnabled=search=>polishValue('navalBase',search)!=='0';
+export const NAVAL_BASE_DEFAULTS=Object.freeze({x:80,hp:{gun:1.2,tower:.7,gate:2.4,depot:1,pen:1.6},scale:{gun:1.1,tower:1.4,gate:2.2,depot:1.3,pen:1.9},spread:14,telegraph:2.1,chainRadius:75,chainDamage:.6});
+/** Structure rows for a base block: guns along the shore (they fire), towers behind, a gate in the middle, the ammo depot at the back (explodes
+ * into its neighbours), a submarine pen on the `subpen` variant. Positions are offsets from `enemyX`; main targets end the mission. */
+export function navalBaseRows(base,stage=1,balance){
+ if(!base)return [];const d={...NAVAL_BASE_DEFAULTS,...(balance?.base||{})},armor=base.armor??1,reload=base.reload??8,guns=clamp(integer(base.guns,2),1,6),towers=clamp(integer(base.towers,1),0,4),x=base.x??d.x,rows=[];
+ const row=(structure,ox,oz,extra={})=>rows.push({kind:1,behavior:'base',structure,variant:base.variant||'coast',x:x+ox,z:oz,cannons:0,reload,spread:base.spread??d.spread,telegraph:base.telegraph??d.telegraph,hpScale:+(d.hp[structure]*armor).toFixed(3),scale:d.scale[structure],main:true,...extra});
+ for(let i=0;i<guns;i++){const z=(i-(guns-1)/2)*44;row('gun',-12+Math.abs(z)*.08,z,{cannons:1,reload:reload*(1+i*.07)});}
+ for(let i=0;i<towers;i++)row('tower',22,(i-(towers-1)/2)*70+(towers%2?0:0),{main:false});
+ if(base.gate!==false)row('gate',6,0);
+ if(base.depot!==false)row('depot',30,guns>=3?48:30,{chain:true});
+ if(base.variant==='subpen')row('pen',36,-52,{});
+ return rows.map((r,i)=>({...r,baseIndex:i}));
+}
 const integer=(value,fallback=1)=>Number.isInteger(value)?value:fallback;
 
 /** The second and third acts add tactics, rather than tripling invisible aim error. */
@@ -34,7 +54,7 @@ export function navalCampaignStage(balance,stage,seed=0,previousFleet=''){
 export function navalMissionState(mission,enemies){
  let targets;
  if(mission?.id==='flagship')targets=enemies.filter(e=>e.boss);
- else if(mission?.id==='bases')targets=enemies.filter(e=>e.behavior==='base');
+ else if(mission?.id==='bases'){targets=enemies.filter(e=>e.behavior==='base'&&e.main!==false);if(!targets.length)targets=enemies.filter(e=>e.behavior==='base');}
  else if(mission?.id==='intercept')targets=enemies.filter(e=>e.behavior==='flank');
  else if(mission?.id==='subhunt')targets=enemies.filter(e=>e.behavior==='dive');
  if(!targets?.length)targets=enemies;

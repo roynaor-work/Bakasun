@@ -1,0 +1,327 @@
+{
+ "mode": "before",
+ "query": "?dev=1&boar=v1",
+ "env": {
+  "coarse": true,
+  "hoverNone": true,
+  "maxTouchPoints": 5,
+  "fireBtn": false,
+  "aimZone": false,
+  "landscape": true
+ },
+ "layout": {
+  "aimZone": null,
+  "fireBtn": null,
+  "rocket": [
+   244,
+   286,
+   96,
+   82
+  ],
+  "frost": [
+   136,
+   286,
+   96,
+   82
+  ],
+  "fury": [
+   28,
+   286,
+   96,
+   82
+  ],
+  "under": {
+   "60,200": "scene",
+   "180,200": "scene",
+   "290,200": "scene",
+   "150,290": "frost",
+   "120,300": "fury",
+   "450,150": "SPAN",
+   "650,110": "scene",
+   "520,60": "scene"
+  }
+ },
+ "hudCoverage": {
+  "hud": 0.3265,
+  "withControls": 0.3265,
+  "band": 0.2243,
+  "nodes": 13
+ },
+ "steps": {
+  "sceneTaps": {
+   "shots": 2,
+   "frames": 12,
+   "nonButton": 2,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false
+  },
+  "sceneDrag": {
+   "shots": 8,
+   "frames": 26,
+   "nonButton": 8,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0.569,
+    "y": 0.104
+   },
+   "aimMoved": true
+  },
+  "stickDrag2s": {
+   "shots": 0,
+   "frames": 26,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false
+  },
+  "stickLeavesZone": {
+   "shots": 0,
+   "frames": 25,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimMoved": false
+  },
+  "leftThumbAbilityRow": {
+   "error": "frame.evaluate: Frame was detached"
+  },
+  "twoFingers": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "strayTapWhileHeld": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "keyboardF": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "mouseOnScene": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "fireButtonHold": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "stickPrecision": {
+   "error": "skipped: the game frame was lost earlier"
+  },
+  "weaponButton": {
+   "error": "skipped: the game frame was lost earlier"
+  }
+ },
+ "final": {
+  "shots": -1,
+  "shotsBy": {},
+  "stickNoButton": -1,
+  "abilityBy": {},
+  "aim": {
+   "x": 0,
+   "y": 0
+  }
+ },
+ "errors": [],
+ "frameLost": true,
+ "checks": [
+  {
+   "name": "aimstick controls exist (fire button + stick zone) in the frame on a coarse-pointer phone",
+   "pass": false
+  },
+  {
+   "name": "scene taps: 0 shots",
+   "pass": false,
+   "detail": 2
+  },
+  {
+   "name": "scene drag: 0 shots",
+   "pass": false,
+   "detail": 8
+  },
+  {
+   "name": "2 s stick drag: 0 shots, aim moved",
+   "pass": false,
+   "detail": {
+    "shots": 0,
+    "frames": 26,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimMoved": false
+   }
+  },
+  {
+   "name": "stick drag leaving the zone: 0 shots, aim moved",
+   "pass": false,
+   "detail": {
+    "shots": 0,
+    "frames": 25,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimMoved": false
+   }
+  },
+  {
+   "name": "left thumb where the ability row sat: no ability fired, no press counted inside the zone, drag moves the aim",
+   "pass": false,
+   "detail": {
+    "error": "frame.evaluate: Frame was detached"
+   }
+  },
+  {
+   "name": "two fingers: shots only from the button, stick active, firing stops when the button is released, aim kept",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "stray scene tap while the button is held: the button stays held and firing continues",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "keyboard F: 0 shots over at least 4 game frames",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "mouse on the scene: 0 shots over at least 4 game frames",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "fire button alone: shots, aim unchanged",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "weapon-switch button: at least 44 px, cycles the weapon, fires nothing",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "HUD coverage at most half of v20 (whole viewport and the middle band)",
+   "pass": false,
+   "detail": {
+    "after": {
+     "hud": 0.3265,
+     "withControls": 0.3265,
+     "band": 0.2243,
+     "nodes": 13
+    },
+    "v20": {
+     "hud": 0.2152,
+     "band": 0.4297,
+     "withControls": 0.2605
+    }
+   }
+  },
+  {
+   "name": "stick: a 20% tilt aims at most half the v20 speed (fine aiming)",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "stick: a full tilt reaches x=0.6 within 1.2 s of game time and the crosshair stops at once on release (overshoot under 0.01)",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "stick: a second finger on the stick zone slows the crosshair to under half",
+   "pass": false,
+   "detail": {
+    "error": "skipped: the game frame was lost earlier"
+   }
+  },
+  {
+   "name": "stick: the fine/target/precision drags fired nothing",
+   "pass": false
+  },
+  {
+   "name": "every shot in the run is attributed to the fire button",
+   "pass": false,
+   "detail": {
+    "shotsBy": {},
+    "stickNoButton": -1
+   }
+  },
+  {
+   "name": "no page errors and the game frame stayed alive",
+   "pass": false,
+   "detail": {
+    "errors": [],
+    "frameLost": true
+   }
+  }
+ ]
+}
