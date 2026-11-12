@@ -61,7 +61,8 @@ async function step(name,fn){if(!want(name))return;if(!await guard(name)){R.step
   try{const a=await st();const extra=await fn(a)||{};const b=await st();R.steps[name]={...delta(a,b),...extra};}
   catch(e){R.steps[name]={error:String(e.message||e).split('\n')[0]};if(/detached|closed|Target/i.test(String(e.message)))lost=true;}
   try{await touch('touchEnd',[]);}catch{}
-  log(name,JSON.stringify({...R.steps[name],trace:undefined,deltas:undefined,speeds:undefined}).slice(0,600));}
+  log(name,JSON.stringify({...R.steps[name],trace:undefined,deltas:undefined,speeds:undefined}).slice(0,600));
+  await writeFile(out+`qa3-boar-${MODE}${TAG}.json`,JSON.stringify({...R,partial:true},null,1)+'\n').catch(()=>{});}
 const hasStick=async()=>!!(await rect('aim-zone'))||!!(await frame.evaluate(()=>!!document.getElementById('aim-zone')));
 const pick=async(id,fallback)=>{const r=await rect(id);return r?[r.cx,r.cy]:fallback;};
 const slide=async(id,from,to,n)=>{for(let i=1;i<=n;i++){await touch('touchMove',[{x:from[0]+(to[0]-from[0])*i/n,y:from[1]+(to[1]-from[1])*i/n,id}]);await tillFrames(1);}};
