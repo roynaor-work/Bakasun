@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'">
+<title>שחקן אחד · ארבעה ענפי ספורט</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<script type="module" src="preview.mjs"></script>
+</head>
+<body>
+<main>
+<header class="masthead"><div><p class="eyebrow">האי · מעבדת דמויות</p><h1>אותם שחקנים.<br><span>אותה גרפיקה.</span></h1><p class="intro">גוף משותף לכדורגל, כדורסל, טניס והוקי. ארבעה מבנים, תאורה אחת ושלד אחד.</p></div><div class="edition"><b>18</b><span>עצמות משותפות</span><a href="REPORT.md">דוח מדידות ↗</a></div></header>
+<section class="lab" aria-label="תצוגת דמויות">
+<div class="stage-head"><div><span class="dot"></span><strong>ארבעת הגופים</strong><span class="subtle">אותו חומר · אותו קו מתאר</span></div><div class="view-buttons"><button type="button" data-angle="front" aria-pressed="true">מלפנים</button><button type="button" data-angle="side" aria-pressed="false">מהצד</button><button type="button" data-angle="three" aria-pressed="false">שלושה רבעים</button></div></div>
+<div class="stage-wrap"><canvas id="stage" aria-label="ארבע דמויות תלת־ממד עם תנועה ותלבושות משותפות"></canvas><p id="loading" class="loading" role="status">טוען את הגופים והתנועות…</p></div>
+<div class="body-labels" id="body-labels"></div>
+<div class="transport"><button type="button" id="play" aria-label="השהה תנועה">השהיה</button><label for="clip">תנועה</label><select id="clip" aria-label="בחירת תנועה"></select><input id="timeline" aria-label="מיקום בזמן" type="range" min="0" max="1000" value="0"><output id="clock">0.00</output></div>
+</section>
+<section class="controls" aria-label="מראה ותלבושת">
+<div class="control-block sports"><h2>אותו גוף, ענף אחר</h2><div class="sport-options"><button type="button" data-sport="soccer" aria-pressed="true"><span>01</span>כדורגל</button><button type="button" data-sport="basketball" aria-pressed="false"><span>02</span>כדורסל</button><button type="button" data-sport="tennis" aria-pressed="false"><span>03</span>טניס</button><button type="button" data-sport="hockey" aria-pressed="false"><span>04</span>הוקי</button></div></div>
+<div class="control-block"><h2>צבעי קבוצה</h2><div class="kit-colors"><label><input type="color" id="primary" value="#187e83"><span>חולצה</span></label><label><input type="color" id="secondary" value="#16363b"><span>מכנסיים</span></label><label><input type="color" id="trim" value="#e7dbb9"><span>גימור</span></label></div></div>
+<div class="control-block"><h2>גוון עור</h2><div id="skin-options" class="swatches" role="group" aria-label="שישה גווני עור"></div></div>
+<div class="control-block"><h2>שיער</h2><label class="sr-only" for="hair">תסרוקת</label><select id="hair"></select><label class="hair-color"><input type="color" id="hair-color" value="#342820"><span>צבע שיער</span></label></div>
+</section>
+<section class="comparison"><div class="section-head"><div><p class="eyebrow">השוואה מבוקרת</p><h2>כדורגל לצד כדורסל</h2><p>אותה תנוחה, אותה מצלמה ואותה תאורה. אפשר להשוות בגובה משותף או בגובה הטבעי.</p></div><div class="compare-options"><label><input type="checkbox" id="normalize" checked>גובה משותף</label><label><input type="checkbox" id="same-kit" checked>אותה תלבושת</label><button type="button" id="compare-refresh">עדכון ההשוואה</button></div></div><div class="comparison-labels"><span>כדורגל</span><span>רכז כדורסל</span></div><img id="comparison-image" alt="גוף כדורגל וגוף רכז כדורסל, מצולמים באותה תאורה ובאותו חומר"><p id="comparison-note" class="subtle"></p></section>
+<footer><p>כל הדמויות בדיוניות. הגופים והתסרוקות זמינים בקובצי ריצה ללא דחיסת גאומטריה.</p><nav><a href="body-manifest.json">נתוני גופים</a><a href="motion-manifest.json">נתוני תנועות</a><a href="LICENSES.md">מקורות ורישיונות</a></nav></footer>
+</main>
+</body>
+</html>
