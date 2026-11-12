@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "baseCommit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "paletteSource": {
+    "status": "approved-name-based",
+    "requested": "GRID_DRIVERS",
+    "approval": "User approved choosing colors matching the supplied team names in chat on 2026-11-12.",
+    "note": "GRID_DRIVERS is absent from main at baseCommit. First five colors and sunset/forest/purple reuse baseColors in racing-view.mjs; sand/rock/night/cloud are original colors chosen for the requested names."
+  },
+  "gantry": {
+    "path": "assets/start-gantry.glb",
+    "units": "meters",
+    "up": "+Y",
+    "front": "+Z",
+    "anchor": [
+      0,
+      0,
+      0
+    ],
+    "lampOrder": "left to right when viewed from +Z",
+    "lamps": [
+      "lamp1",
+      "lamp2",
+      "lamp3",
+      "lamp4",
+      "lamp5"
+    ],
+    "offIntensity": 0,
+    "onIntensity": 1,
+    "triangleLimit": 3000,
+    "draco": false
+  },
+  "panels": [
+    {
+      "id": "leaderboard",
+      "path": "assets/leaderboard-strip.svg",
+      "width": 150,
+      "height": 12,
+      "repeat": "repeat",
+      "cssBackgroundSize": "150px 12px",
+      "note": "Seamless in both axes; repeat vertically to fill a row, horizontally to fill a wider board."
+    },
+    {
+      "id": "card",
+      "path": "assets/card-frame.svg",
+      "width": 48,
+      "height": 48,
+      "slice": 12,
+      "css": "border-image: url(assets/card-frame.svg) 12 fill / 12px / 0 stretch; border: 12px solid transparent;",
+      "minSize": [
+        24,
+        24
+      ]
+    },
+    {
+      "id": "podium",
+      "path": "assets/podium.webp",
+      "width": 844,
+      "height": 390,
+      "maxBytes": 300000
+    }
+  ],
+  "teams": [
+    {
+      "id": "flame",
+      "name": "להבה",
+      "color": "#d93228",
+      "path": "teams/flame.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "wave",
+      "name": "גל",
+      "color": "#18b6bd",
+      "path": "teams/wave.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "sun",
+      "name": "שמש",
+      "color": "#d6aa3b",
+      "path": "teams/sun.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "sea",
+      "name": "ים",
+      "color": "#566bd1",
+      "path": "teams/sea.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "silver",
+      "name": "כסף",
+      "color": "#b7c2ca",
+      "path": "teams/silver.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "sunset",
+      "name": "שקיעה",
+      "color": "#e07b2a",
+      "path": "teams/sunset.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "forest",
+      "name": "יער",
+      "color": "#2f9e5b",
+      "path": "teams/forest.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "purple",
+      "name": "סגול",
+      "color": "#7a3fb0",
+      "path": "teams/purple.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "sand",
+      "name": "חול",
+      "color": "#e8d7ad",
+      "path": "teams/sand.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "rock",
+      "name": "סלע",
+      "color": "#8a9298",
+      "path": "teams/rock.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "night",
+      "name": "לילה",
+      "color": "#2b2f46",
+      "path": "teams/night.svg",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "cloud",
+      "name": "ענן",
+      "color": "#b9dfe9",
+      "path": "teams/cloud.svg",
+      "width": 64,
+      "height": 64
+    }
+  ]
+}
