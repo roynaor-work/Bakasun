@@ -18,7 +18,7 @@ import {createFireV7,fireV7Enabled} from './fire-v7.mjs';
 export function createFireScene(ctx,model,adapters={}) {
   const {config,balance}=ctx,r=balance.render,colors=config.visuals.palette;
   const scene=new T.Scene(),geometries=new Set(),materials=new Set(),textures=new Set();
-  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false,truckArm=null,armLength=1;const cityVisuals=[],citizenVisuals=[],pivotWorld=new T.Vector3(),armState={yaw:0,pitch:0,scale:1};
+  let disposed=false,truckVisual=null,hydrantVisual=null,crewVisual=null,crewRig=null,v7=null,v7Crew=false,truckArm=null,armLength=1,armBack=0;const cityVisuals=[],citizenVisuals=[],pivotWorld=new T.Vector3(),armState={yaw:0,pitch:0,scale:1};
   const models=new LocalModels(adapters),loader=models.loader;
   models.loader={async loadAsync(url){const asset=await loader.loadAsync(url);asset.scene.animations=asset.animations||[];return asset;}};
   const ownG=g=>(geometries.add(g),g),ownM=m=>(materials.add(m),m);
@@ -141,7 +141,7 @@ export function createFireScene(ctx,model,adapters={}) {
       for(const wheel of truckVisual.wheels||[]){wheel.rotation.order='YXZ';wheel.rotation.x=model.truck.wheelRotation*wheelSign;wheel.rotation.y=drawYawOn&&(flipped?wheel.position.z>0:wheel.position.z<0)?clamp01((model.truck.yawRate||0)*.12,.42):0;}
       if(truckArm){ // 11/11/2026: the engine's own roof ladder stays stowed along the body; during a rescue it turns, lifts and stretches to the window, then folds back.
         const target=model.ladder.target,ext=model.ladder.extension;truckVisual.root.updateMatrixWorld(true);truckVisual.turret.getWorldPosition(pivotWorld);
-        const pose=target&&ext>0?ladderArmPose({dx:target.world[0]+model.ladder.sway*2-pivotWorld.x,dz:target.world[2]-pivotWorld.z,dy:target.world[1]+.85-pivotWorld.y,rootYaw:truckVisual.root.rotation.y,extension:ext,length:armLength,sway:model.ladder.sway,tip:-1}):{yaw:0,pitch:0,scale:1};
+        const pose=target&&ext>0?ladderArmPose({dx:target.world[0]+model.ladder.sway*2-pivotWorld.x,dz:target.world[2]-pivotWorld.z,dy:target.world[1]+.85-pivotWorld.y,rootYaw:truckVisual.root.rotation.y,extension:ext,length:armLength,sway:model.ladder.sway,tip:-1,back:armBack}):{yaw:0,pitch:0,scale:1};
         const k=1-Math.exp(-8*elapsed);armState.yaw+=(pose.yaw-armState.yaw)*k;armState.pitch+=(pose.pitch-armState.pitch)*k;armState.scale+=(pose.scale-armState.scale)*k; // eases out and folds back instead of snapping
         truckVisual.turret.rotation.y=armState.yaw;truckArm.rotation.x=armState.pitch;truckArm.scale.z=armState.scale;}
       else truckVisual.turret.rotation.y=cannon.rotation.y-truckVisual.root.rotation.y+T.MathUtils.degToRad(balance.vehicle.cannonYawOffset);truckVisual.root.updateMatrixWorld(true);truckVisual.muzzle.getWorldPosition(nozzle);}
@@ -212,7 +212,7 @@ export function createFireScene(ctx,model,adapters={}) {
     hydrantMetrics(){return {loaded:Boolean(hydrantVisual),height:balance.hydrant.height,ringRadius:balance.hydrant.radius,connected:model.atHydrant,art:models.metrics()};},
     setTruck(visual){if(disposed){visual.dispose();return false;}scene.add(visual.root);if(metrics().triangles>r.maxTriangles||metrics().drawCalls>r.maxDrawCalls||visual.cannonFaces===0){visual.dispose();return false;}visual.root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});truckVisual=visual;truckBase.visible=cannon.visible=false;
       truckArm=null;if(ladderV21&&visual.kind==='meshy'&&visual.ladderBox){ // re-pivot the roof ladder at its rear end so it lifts like a real turntable ladder
-        const rear=visual.ladderBox.max[2];armLength=Math.max(.5,rear-visual.ladderBox.min[2]);const arm=new T.Group();arm.position.z=rear;for(const child of [...visual.turret.children]){visual.turret.remove(child);child.position.z-=rear;arm.add(child);}visual.turret.add(arm);truckArm=arm;}
+        const rear=visual.ladderBox.max[2];armLength=Math.max(.5,rear-visual.ladderBox.min[2]);armBack=rear;const arm=new T.Group();arm.position.z=rear;for(const child of [...visual.turret.children]){visual.turret.remove(child);child.position.z-=rear;arm.add(child);}visual.turret.add(arm);truckArm=arm;}
       return true;},
     truckRoot(){return truckVisual?.root||truckBase;},ladderRoot(){return ladder;},truckParts(){return truckVisual?{root:truckVisual.root,turret:truckVisual.turret,arm:truckArm,kind:truckVisual.kind}:null;},
     truckMetrics(){return {loaded:Boolean(truckVisual),kind:truckVisual?.kind||null,nose:truckVisual?noseFix(truckVisual)?'fixed':'asIs':null,roofLadder:truckArm?{yaw:truckVisual.turret.rotation.y,pitch:truckArm.rotation.x,scale:truckArm.scale.z}:null,boxLadderVisible:ladder.visible,cannonFaces:truckVisual?.cannonFaces||0,yaw:truckVisual?.turret.rotation.y??cannon.rotation.y,muzzle:{x:nozzle.x,y:nozzle.y,z:nozzle.z},hydrantHose:model.atHydrant,hoseEnd:{x:model.truck.x,z:model.truck.z}};},worldPoint,project,animate,metrics,dispose,anchors,point,scratch};

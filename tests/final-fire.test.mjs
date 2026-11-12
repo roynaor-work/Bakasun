@@ -1,4 +1,6 @@
 // 11/11/2026 final fix (Fable), fire rescue: pure logic behind the kill switches `fireHeading`, `fireTruckModel`, `fireLadder`, `fireRescue`.
+// 12/11/2026 independent QA fixes: `fireTurn` (turn at the junction where the stick was tilted), `fireMapTap` (taps on the map in the stick
+// zone), `fireArrows` (edge arrows clear of the water gauge and the hydrant button); a second tap never cancels a rescue.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -9,11 +11,13 @@ import {nextRescueLatch} from '../workout/island/minigames/fire-session.mjs';
 import {waterGaugeState} from '../workout/island/minigames/fire-ui.mjs';
 import {createFireModel} from '../workout/island/minigames/fire.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
+import {fireIndicators} from '../workout/island/minigames/fire-navigation.mjs';
+import {createFireDriver} from '../workout/island/minigames/fire-roads.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.fireRescue;
 const deg=r=>r*180/Math.PI;
 
 test('final fire: every v21 flag is on by default and each value switches one step back',()=>{
- for(const f of ['fireHeading','fireTruckModel','fireLadder','fireRescue','fireHud']){
+ for(const f of ['fireHeading','fireTruckModel','fireLadder','fireRescue','fireHud','fireTurn','fireMapTap','fireArrows']){
   assert.equal(fireV21(f,''),true);assert.equal(fireV21(f,`?${f}=v20`),false);assert.equal(fireV21(f,`?${f}=v19`),false);assert.equal(fireV21(f,'?fireTruck=v1'),false);
   assert.equal(fireV20(f,`?${f}=v20`),true,'v20 keeps the v20 behaviour under the v21 switch');
  }
@@ -54,10 +58,16 @@ test('final fire: wind mode balances itself; even pushing the stick the wrong wa
  delete globalThis.location;
  assert.ok(autoBalanceSteer(.3)<0&&autoBalanceSteer(-.3)>0&&autoBalanceSteer(2)>=-1.6);
 });
-test('final fire: a tap latches the rescue and the latch drops for driving, hose, hydrant, nothing left or a finished rescue',()=>{
+test('final fire: a tap latches the rescue, another tap never cancels it, and the latch drops for driving, hose, hydrant, nothing left or a finished rescue',async()=>{
  assert.equal(nextRescueLatch(false,{tapped:true,available:true}),true);
- assert.equal(nextRescueLatch(true,{tapped:true,available:true}),false,'second tap stops');
+ // 12/11/2026 (QA): two taps 300 ms apart used to stop the rescue; a child taps again when nothing seems to happen.
+ assert.equal(nextRescueLatch(true,{tapped:true,available:true}),true,'second tap keeps the rescue');
+ let latch=false;for(let i=0;i<5;i++)latch=nextRescueLatch(latch,{tapped:true,available:true});assert.equal(latch,true,'any number of taps');
  assert.equal(nextRescueLatch(false,{tapped:true,available:false}),false,'nothing to rescue');
+ // the press itself latches (no 350 ms tap window: a 0.5 s press used to lift the ladder and drop it)
+ const source=await readFile(new URL('../workout/island/minigames/fire-session.mjs',import.meta.url),'utf8');
+ assert.match(source,/ui\.ladder\.addEventListener\('pointerdown',\(\)=>\{if\(paused\|\|!rescueTap\)return;rescueLatch=nextRescueLatch\(rescueLatch,\{tapped:true/);
+ assert.doesNotMatch(source,/ladderDownAt|>350/);
  assert.equal(nextRescueLatch(true,{available:true}),true);
  for(const drop of [{driving:true},{firing:true},{refill:true},{available:false},{completedBefore:0,completedNow:1}])assert.equal(nextRescueLatch(true,{available:true,...drop}),false,JSON.stringify(drop));
 });
@@ -80,4 +90,47 @@ test('final fire: the water gauge reads percent of the tank and turns orange, th
  assert.deepEqual(waterGaugeState(0,110,.2),{percent:0,level:'critical'});
  assert.deepEqual(waterGaugeState(22,110,.2,true),{percent:20,level:'refilling'});
  assert.deepEqual(waterGaugeState(5,0,.2),{percent:0,level:'critical'});
+});
+
+test('final fire (QA): a stick tilted at the junction or up to 3.5 past it turns into that junction\'s street; `?fireTurn=v20` drives on to the next one',()=>{
+ const trial=(d,search='')=>{const saved=globalThis.location;globalThis.location={search};try{
+  const truck={x:6,z:18},drive=createFireDriver(truck,balance),dt=1/60;
+  for(let i=0;i<600&&truck.z-6>d;i++)drive.update(dt,{moveX:0,moveZ:-1,assisted:true}); // full speed down x=6 toward the junction (6,6)
+  for(let i=0;i<Math.round(3.6/dt);i++){drive.update(dt,{moveX:-1,moveZ:0,assisted:true});const v=Math.hypot(truck.velocityX,truck.velocityZ);
+   if(v>5&&-truck.velocityX/v>Math.cos(Math.PI/9))return {z:truck.z,t:i*dt};}
+  return null;}finally{globalThis.location=saved;}};
+ for(const d of [3,1,0,-1,-2,-3,-3.5]){const turn=trial(d);assert.ok(turn&&Math.abs(turn.z-6)<1.5,`tilt at ${d}: turned at z=${turn?.z}`);assert.ok(turn.t<1.6,`tilt at ${d}: ${turn.t}s`);}
+ for(const d of [-1,-2,-3]){const old=trial(d,'?fireTurn=v20');assert.ok(old&&Math.abs(old.z+6)<1.5,`v20 tilt at ${d}: z=${old?.z}`);}
+});
+
+test('final fire (QA): edge arrows keep clear of the water gauge and the hydrant button; without HUD boxes the layout is unchanged',()=>{
+ const gauge={left:16,top:72,right:216,bottom:108},refill={left:734,top:176,right:818,bottom:260};
+ const run=avoid=>{const m={truck:{x:0,z:0},flames:[{x:-60,y:-60},{x:100,y:-80},{x:-80,y:150},{x:-90,y:120},{x:950,y:180},{x:960,y:220},{x:980,y:150}].map(p=>({...p,active:true,heat:1,warning:0})),rescues:[{x:120,y:-90,world:[0,3,0]}],water:1,maxWater:1};
+  return fireIndicators(m,{config:{width:844,height:390},balance,...(avoid?{hudAvoid:avoid}:{})},(x,y)=>({x,y}),()=>({x:422,y:195}));};
+ const boxed=run([gauge,refill]),overlap=(a,r)=>a.x+a.size>r.left&&a.x-a.size<r.right&&a.y+a.size>r.top&&a.y-a.size<r.bottom;
+ assert.equal(boxed.length,8);for(const a of boxed){assert.ok(!overlap(a,gauge),`${a.kind} ${a.edge} at ${a.x},${a.y} under the gauge`);assert.ok(!overlap(a,refill),`${a.kind} ${a.edge} at ${a.x},${a.y} under the hydrant button`);}
+ for(let i=0;i<boxed.length;i++)for(let j=0;j<i;j++)assert.ok(Math.hypot(boxed[i].x-boxed[j].x,boxed[i].y-boxed[j].y)>=boxed[i].size+boxed[j].size+6,'arrows stay apart');
+ const plain=run(null);assert.ok(plain.some(a=>overlap(a,gauge)||overlap(a,refill)),'the same scene without boxes hid arrows (the QA finding)');
+ assert.deepEqual(run([]).map(a=>[a.x,a.y,a.edge]),plain.map(a=>[a.x,a.y,a.edge]),'no boxes = the old layout');
+});
+
+test('final fire (QA): a tap on the map inside the stick zone is a map tap (the stick waits up to 250 ms), the canvas and the zone share one tap path',async()=>{
+ const source=await readFile(new URL('../workout/island/minigames/fire-session.mjs',import.meta.url),'utf8');
+ assert.match(source,/fireV21\('fireMapTap'\)\?controls\.querySelector\('\.soccer-stick-zone'\)/);
+ assert.match(source,/performance\.now\(\)-zoneTap\.at<250/);assert.match(source,/zoneTap\.moved=true/);
+ assert.match(source,/still=zoneTapPending\(\),stickX=still\?0:sample\.moveX,stickZ=still\?0:sample\.moveZ/);
+ assert.equal(source.match(/tapObjective\(screenPoint\(event\)\)/g)?.length,2,'canvas and stick zone use the same tap');
+});
+
+test('final fire (QA): the roof ladder tip reaches the window point: run and stretch are counted from the ladder\'s rear end, `back` behind the turret centre',()=>{
+ const L=4.52,back=2.2;
+ const tipOf=(pose,b)=>{const a=L*pose.scale,z=b-a*Math.cos(pose.pitch),y=a*Math.sin(pose.pitch);return {x:z*Math.sin(pose.yaw),y,z:z*Math.cos(pose.yaw)};}; // turret frame, rootYaw 0, tip toward -Z
+ for(const [dx,dz,dy] of [[0,-2.5,4],[1.5,-3,3.2],[-2,-2,4.6],[3,-1,2.5]]){
+  const pose=ladderArmPose({dx,dz,dy,rootYaw:0,extension:1,length:L,tip:-1,back}),tip=tipOf(pose,back);
+  assert.ok(Math.hypot(tip.x-dx,tip.y-dy,tip.z-dz)<.05,`target ${[dx,dz,dy]}: tip ${JSON.stringify(tip)}`);
+  assert.ok(pose.scale>1.05,'the ladder stretches to the window');
+  const old=ladderArmPose({dx,dz,dy,rootYaw:0,extension:1,length:L,tip:-1}),oldTip=tipOf(old,back);
+  assert.ok(Math.hypot(oldTip.x-dx,oldTip.y-dy,oldTip.z-dz)>.5,'measured from the turret centre the tip stopped short (the QA finding)');
+ }
+ assert.deepEqual(ladderArmPose({dx:1,dz:-2,dy:3,rootYaw:0,extension:0,length:L,back}),{yaw:0,pitch:0,scale:1},'stowed is unchanged');
 });

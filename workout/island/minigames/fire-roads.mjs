@@ -1,4 +1,4 @@
-import {polishLegacy,polishValue,fireV20} from './polish-flag.mjs';
+import {polishLegacy,polishValue,fireV20,fireV21} from './polish-flag.mjs';
 /** Deterministic street graph for lane assistance and optional point navigation.
  * Coordinates and tuning come from fireRescue.city. */
 const EPS=1e-7;
@@ -113,9 +113,9 @@ export function slideFireTruck(truck,dx,dz,buildings,vehicle){
   return Math.hypot(truck.x-start.x,truck.z-start.z);
 }
 export function createFireDriver(truck,balance){
-  const legacyFeel=polishLegacy('fireTruck'),drawFollow=fireV20('fireDraw'),noPivot=legacyFeel||polishValue('fireTruck')==='v8';
+  const legacyFeel=polishLegacy('fireTruck'),drawFollow=fireV20('fireDraw'),noPivot=legacyFeel||polishValue('fireTruck')==='v8',turnBack=fireV21('fireTurn');
   const route=createRouteDriver(truck,balance),roads=route.roads,v=balance.vehicle,city=balance.city;
-  let routed=false,blockedSeconds=0,assistedUntil=0,clock=0;
+  let routed=false,blockedSeconds=0,assistedUntil=0,clock=0,tiltAt=null;
   return {roads,update(dt,input={}){
     if(dt<=0)return 0;
     clock+=dt;
@@ -129,13 +129,23 @@ export function createFireDriver(truck,balance){
     let lane=0,heading=truck.heading;
     if(throttle){
       heading=Math.atan2(-dx,-dz);let axis=horizontal?(dx>=0?-Math.PI/2:Math.PI/2):(dz<=0?0:Math.PI);
+      // 12/11/2026 (QA): where the stick first pointed into a crossing street is where the child meant to turn.
+      const across=horizontal?{x:0,z:Math.sign(dz)}:{x:Math.sign(dx),z:0},sideways=Math.abs(horizontal?dz:dx)>=Math.abs(horizontal?dx:dz)*.5;
+      if(turnBack)tiltAt=sideways?tiltAt||{x:truck.x,z:truck.z}:null;
       // A blocked perpendicular turn is buffered until the next intersection.
       // This is opt-in assistance; the low-level continuous steering API stays
       // available to deterministic callers without changing its response.
       if(input.assisted&&blockedSeconds>.16)assistedUntil=clock+.8;
       if(input.assisted&&clock<assistedUntil){
-        const junction=roads.nodes.reduce((best,n)=>distance(n,truck)<distance(best,truck)?n:best,roads.nodes[0]);
-        if(distance(junction,truck)>1.25){
+        const nearest=p=>roads.nodes.reduce((best,n)=>distance(n,p)<distance(best,p)?n:best,roads.nodes[0]),junction=nearest(truck);
+        // 12/11/2026 (QA): a stick tilted at the junction itself or just after it leaves the truck blocked by the corner with
+        // its nose already half turned, and "forward" read from that nose sent it on to the next junction. Now: the junction
+        // nearest to where the stick was tilted, if it has a street where the stick points; drive back into it and turn there.
+        // `?fireTurn=v20` restores.
+        const turnAt=turnBack&&sideways&&tiltAt?nearest(tiltAt):null,street=turnAt&&distance(turnAt,tiltAt)<=city.roadWidth&&turnAt.links.some(i=>Math.sign(roads.nodes[i].x-turnAt.x)===across.x&&Math.sign(roads.nodes[i].z-turnAt.z)===across.z);
+        const goal=street?{x:turnAt.x+across.x*city.roadWidth*.4,z:turnAt.z+across.z*city.roadWidth*.4}:null; // aim a little into the crossing street: one smooth move, no second pivot
+        if(street){if(distance(goal,truck)>.8){heading=Math.atan2(truck.x-goal.x,truck.z-goal.z);axis=heading;}else{assistedUntil=0;blockedSeconds=0;}}
+        else if(distance(junction,truck)>1.25){
           const along=horizontal?(-Math.sin(truck.yaw)||1):(-Math.cos(truck.yaw)||-1);
           const candidates=[road.edge.a,road.edge.b],forward=candidates.find(n=>horizontal?(n.x-truck.x)*along>0:(n.z-truck.z)*along>0)||junction;
           heading=Math.atan2(truck.x-forward.x,truck.z-forward.z);axis=heading;
@@ -173,7 +183,7 @@ export function createFireDriver(truck,balance){
     const limit=city.extent/2-Math.hypot(v.length/2,v.width/2);
     truck.x=clamp(truck.x,-limit,limit);truck.z=clamp(truck.z,-limit,limit);
     const moved=Math.hypot(truck.x-oldX,truck.z-oldZ);
-    if(input.assisted){blockedSeconds=throttle&&travel>.01&&moved<travel*.2?blockedSeconds+dt:Math.max(0,blockedSeconds-dt*2);if(!throttle){blockedSeconds=0;assistedUntil=0;}}
+    if(input.assisted){blockedSeconds=throttle&&travel>.01&&moved<travel*.2?blockedSeconds+dt:Math.max(0,blockedSeconds-dt*2);if(!throttle){blockedSeconds=0;assistedUntil=0;tiltAt=null;}}
     truck.velocityX=(truck.x-oldX)/dt;truck.velocityZ=(truck.z-oldZ)/dt;
     // 09/11/2026: the picture follows the real motion. Sliding along a wall or being pulled into a lane never shows the truck sideways.
     {const sp=Math.hypot(truck.velocityX,truck.velocityZ);if(truck.drawYaw===undefined)truck.drawYaw=truck.yaw;

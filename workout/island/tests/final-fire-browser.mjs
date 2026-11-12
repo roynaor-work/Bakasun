@@ -10,7 +10,7 @@ const MODE=process.env.MODE==='before'?'before':'after';
 const directory=fileURLToPath(new URL('../verification/final-fix-fable/',import.meta.url)),frames=directory+'frames/';await mkdir(frames,{recursive:true});
 const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/opt/pw-browsers/chromium-1243/chrome-linux64/chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
-const KILL='&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20';
+const KILL='&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20&fireTurn=v20&fireMapTap=v20&fireArrows=v20';
 const variants=MODE==='after'?[{name:'meshy',query:''},{name:'pumper',query:'&fireTruckModel=v20'}]:[{name:'meshy-v20',query:KILL},{name:'pumper-v20',query:'&fireTruckModel=v20'+KILL}];
 const deg=r=>r*180/Math.PI,wrap=a=>Math.atan2(Math.sin(a),Math.cos(a)),fold=a=>{let d=Math.abs(wrap(a));return d>Math.PI/2?Math.PI-d:d;};
 const reports=[];let failures=0;

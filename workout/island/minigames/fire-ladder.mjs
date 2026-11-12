@@ -5,12 +5,14 @@ const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
  * `?fireRescue=v20` restores manual balancing. */
 export function autoBalanceSteer(sway,gain=4){return clamp(-sway*gain,-1.6,1.6);}
 /** 11/11/2026 pure: how the fire engine's own roof ladder points during a rescue, in the truck's local frame (`tip` = the sign of the local Z end the ladder tip is at; the Meshy engine's tip lies over the cab at -Z).
- * rootYaw is the model root's world rotation (yaw plus heading fix); dx/dz/dy are target minus pivot in world units; length is the stowed
- * ladder length. Stowed (extension 0): yaw 0, pitch 0, scale 1. Extended: it turns and lifts toward the window and stretches to reach it (at most 2.6x). */
-export function ladderArmPose({dx,dz,dy,rootYaw,extension,length,sway=0,tip=-1}){
+ * rootYaw is the model root's world rotation (yaw plus heading fix); dx/dz/dy are target minus the turret centre in world units; length is the stowed
+ * ladder length; back is how far behind the turret centre the ladder's rear end (where it lifts) sits. Stowed (extension 0): yaw 0, pitch 0, scale 1. Extended: it turns and lifts toward the window and stretches to reach it (at most 2.6x). */
+export function ladderArmPose({dx,dz,dy,rootYaw,extension,length,sway=0,tip=-1,back=0}){
   const e=clamp(extension,0,1);if(e<=0)return {yaw:0,pitch:0,scale:1};
   const lx=dx*Math.cos(rootYaw)-dz*Math.sin(rootYaw),lz=dx*Math.sin(rootYaw)+dz*Math.cos(rootYaw),flat=Math.hypot(lx,lz);
-  const yaw=Math.atan2(tip*lx,tip*lz)+sway*.12,pitch=-tip*Math.atan2(Math.max(0,dy),Math.max(.01,flat)),reach=Math.hypot(flat,Math.max(0,dy));
+  // 12/11/2026 (QA): the ladder turns about the turret centre but lifts and stretches from its rear end, `back` behind that centre;
+  // measuring from the centre left the tip about a metre short and too high (scale stayed 1). The run is counted from the rear end.
+  const run=Math.max(.01,flat+back),yaw=Math.atan2(tip*lx,tip*lz)+sway*.12,pitch=-tip*Math.atan2(Math.max(0,dy),run),reach=Math.hypot(run,Math.max(0,dy));
   return {yaw:yaw*e,pitch:pitch*e,scale:1+e*clamp(reach/Math.max(.1,length)-1,0,1.6)};
 }
 /** Ladder challenges share the fire simulation clock and ordinary controls. */
