@@ -6,7 +6,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {HoopsDRACOLoader} from './hoops-draco.mjs';
 import {loadHoopsGLTF} from './hoops-gltf.mjs';
-import {dataURL} from '../release.mjs?v=island-v2-20261107-9';
+import {dataURL} from '../release.mjs?v=island-v2-20261107-10';
 
 export const NAVAL_V7={
   // Player: LOD0 destroyer (articulated turret). Enemies: LOD1, one draw call each.

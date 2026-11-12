@@ -1,8 +1,8 @@
 /** Racing league screens (07/11/2026): the entry card on the racing stage map, season and table, the upgrade shop and the race result.
  * Loaded on demand from ui/activity.mjs the first time the racing menu opens, so the cold start never pays for it.
  * Every change goes through engine.racingLeague (validates, saves, refuses while a game runs). Hebrew, 56px targets, no hidden info. */
-import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,seasonStages,equipmentFor,DRIVERS} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-9';
-import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-9';
+import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,seasonStages,equipmentFor,DRIVERS} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
+import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-10';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -12,7 +12,7 @@ export const SHOP=Object.freeze([
   ['engine','האצה ומהירות שיא'],['brakes','בלימה מאוחרת לפני פניות'],['aero','יציבות במהירות גבוהה'],['steering','תגובת הגה'],['tires','אחיזה בפניות']]);
 export function ensureLeagueStyle(root=document.head){
   if(document.querySelector('link[data-racing-league-css]'))return;
-  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-9',import.meta.url).href;root.append(link);
+  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-10',import.meta.url).href;root.append(link);
 }
 const trackOf=(seasonId,race)=>getRacingStage(seasonStages(seasonId)[race]).name;
 const ordinal=place=>`מקום ${place}`;

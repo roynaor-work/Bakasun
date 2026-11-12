@@ -1,6 +1,6 @@
-import { levelFactor, population } from './metrics.mjs?v=island-v2-20261107-9';
-import {productionMultiplier} from './city-depth.mjs?v=island-v2-20261107-9';
-import {municipalBudget} from './city-management.mjs?v=island-v2-20261107-9';
+import { levelFactor, population } from './metrics.mjs?v=island-v2-20261107-10';
+import {productionMultiplier} from './city-depth.mjs?v=island-v2-20261107-10';
+import {municipalBudget} from './city-management.mjs?v=island-v2-20261107-10';
 
 /** All income sources are records in config.json or explicit registry extensions. Amounts are per minute. */
 export function calculateIncome(state, registry, config, city) {
