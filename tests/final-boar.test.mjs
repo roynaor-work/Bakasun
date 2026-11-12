@@ -111,5 +111,7 @@ test('final-boar QA3: buttons work with the thumb on the stick, the crosshair go
   const portrait=css.slice(css.indexOf('@media(max-width:700px){'));assert.match(portrait,/#game\.hudv21 \.wave-block\{top:44px\}/);assert.match(portrait,/#game\.hudv21 #boss-hud\{top:72px\}/);
   // Help texts describe the stick and the fire button, not "drag to aim and fire".
   const intro=strings['minigame.boarDefense.help.1'];assert.match(intro,/ג׳ויסטיק/);assert.match(intro,/רק בכפתור הירי/);assert.doesNotMatch(intro,/גוררים אצבע כדי לכוון ולירות/);
-  assert.doesNotMatch(html,/מניחים אצבע בכל מקום וגוררים/);assert.match(src,/if\(FIRE_V21&&\$\('help-aim'\)\)\$\('help-aim'\)\.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה/);
+  // index.html keeps the shipped bytes (island-boar-integration); with the v21 fire its first help paragraph (the controls one) is rewritten in game.js
+  assert.match(html,/class="panel small-panel help-panel"><div class="eyebrow">[^<]*<\/div><h2>[^<]*<\/h2><p>כוונו בעכבר/);
+  assert.match(src,/helpAim=\$\('help-screen'\)\?\.querySelector\('\.help-panel p'\);if\(FIRE_V21&&helpAim\)helpAim\.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה/);
 });

@@ -130,7 +130,7 @@ export function createFireDriver(truck,balance){
     if(throttle){
       heading=Math.atan2(-dx,-dz);let axis=horizontal?(dx>=0?-Math.PI/2:Math.PI/2):(dz<=0?0:Math.PI);
       // 12/11/2026 (QA): where the stick first pointed into a crossing street is where the child meant to turn.
-      const across=horizontal?{x:0,z:Math.sign(dz)}:{x:Math.sign(dx),z:0},sideways=Math.abs(horizontal?dz:dx)>=Math.abs(horizontal?dx:dz)*.5;
+      const across=horizontal?{x:0,z:Math.sign(dz)}:{x:Math.sign(dx),z:0},sideways=Math.abs(horizontal?dz:dx)>Math.abs(horizontal?dx:dz); // more than 45 degrees off the road: a diagonal push keeps the old assist (its slip stays as in v20)
       if(turnBack)tiltAt=sideways?tiltAt||{x:truck.x,z:truck.z}:null;
       // A blocked perpendicular turn is buffered until the next intersection.
       // This is opt-in assistance; the low-level continuous steering API stays
