@@ -1,0 +1,81 @@
+{
+  "atlases": {
+    "explosion": {
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "frames": 64,
+      "nonemptyFrames": 57,
+      "transparentGuardPixels": 8,
+      "bytes": 1114303
+    },
+    "smoke": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "frames": 16,
+      "nonemptyFrames": 16,
+      "transparentGuardPixels": 8,
+      "bytes": 249229,
+      "phase0EqualsPhase1": true,
+      "premultipliedFrameDeltaMean": [
+        7.021456849341298,
+        7.473524804208792,
+        7.545375629499847,
+        7.673053457222732,
+        7.576795450846355,
+        7.692631560680913,
+        7.723868216720282,
+        7.5161419438380825,
+        7.309532733992034,
+        7.313981119791667,
+        7.2383404301662075,
+        7.56977814319087,
+        7.533299225451899,
+        7.183381981943168,
+        7.036479157092525,
+        6.801090674306831
+      ],
+      "seamToMeanDeltaRatio": 0.9157034425104009
+    },
+    "sparks": {
+      "dimensions": [
+        512,
+        512
+      ],
+      "frames": 16,
+      "nonemptyFrames": 15,
+      "transparentGuardPixels": 8,
+      "bytes": 17150
+    }
+  },
+  "audio": {
+    "explosion-deep.ogg": {
+      "sampleRate": 44100,
+      "channels": 1,
+      "codec": "vorbis",
+      "integratedLufs": -16.02,
+      "truePeakDbtp": -2.5,
+      "bytes": 45330
+    },
+    "explosion-deep.mp3": {
+      "sampleRate": 44100,
+      "channels": 1,
+      "codec": "mp3",
+      "integratedLufs": -16.01,
+      "truePeakDbtp": -2.64,
+      "bytes": 102302
+    }
+  },
+  "sha256": {
+    "explosion-deep.mp3": "d0343ddad1e694c95216b028cef30d51d01bd3aa9064b705af628e57e588cf57",
+    "explosion-deep.ogg": "8fa0d4a4e48c54529137ff8d9b323f1e198066e376f2f6c0337618a97ba3e6d7",
+    "explosion.png": "535534ec6070fd33411306794d64a5f7d9244ed8d2f173d36d55fd1572af2463",
+    "smoke-loop.png": "f9877678bef61a6413bf230470fed084ebd3d8da87dd3e89386f87085d1fa6cb",
+    "sources/explosion-generated.png": "2adf5c0861ba1e84d339419398768e2328612b3667fdb40153f069f031ae9382",
+    "sources/smoke-puff-generated.png": "ae46f7c285074cb8be59fbc5f6d9a7bf34c62baae8cf9431d5cf1f52f14021a4",
+    "sparks.png": "b9d55308b31e7500b2a817e00d606c8f8fb8ae8eec3f4a484fdb9b93370325ba"
+  }
+}
