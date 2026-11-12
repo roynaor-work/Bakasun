@@ -181,17 +181,20 @@ try{
 
  // ---------------------------------------------------------------- recharge: after steady fire, how long a rest brings the Vulcan burst back
  if(PARTS.includes('recharge')){const r={};const I=await openIsland('default');
-  for(const rest of [300,500,600,1000,1500]){
+  for(const rest of [300,500,600,1500]){
    await startGame(I);await I.tick(2600);await sampling(I,true);
    const fire=await center(I.page,'#shoot');
    await I.touch('touchStart',[{x:fire.x,y:fire.y,id:3}],true);await I.tick(4200);await I.touch('touchEnd',[],false); // burst, cool, steady
    await I.tick(rest);
    await I.touch('touchStart',[{x:fire.x,y:fire.y,id:3}],true);await I.tick(1000);await I.touch('touchEnd',[],false);await I.tick(100);
    const {s:S}=await samples(I);await sampling(I,false);
-   const presses=[];for(let i=1;i<S.length;i++)if(S[i].held&&!S[i-1].held)presses.push(i);
-   const p2=presses[1];const after=S.slice(p2,p2+63);const releaseIdx=S.slice(0,p2).map(s=>s.held).lastIndexOf(true);
-   r[rest]={restMs:rest,heatAtRelease:S[releaseIdx]?.heat,modeAtRelease:S[releaseIdx]?.mode,heatAtRepress:S[p2-1]?.heat,firstModeAfterRepress:after[0]?.mode,burstFrames:after.filter(s=>s.mode==='burst').length,shotsInSecondAfter:after.length?after.at(-1).fired-S[p2-1].fired:null};
-   await exitGame(I);log('recharge',rest,JSON.stringify(r[rest]));}
+   // sample i = state after frame i-1: a press is the first sample with held=1 (state at the touch), a release the first sample after it with held=0
+   const presses=[];for(let i=0;i<S.length;i++)if(S[i].held&&(i===0||!S[i-1].held))presses.push(i);
+   const p1=presses[0],p2=presses[1],r1=S.findIndex((q,i)=>i>p1&&!q.held),after=S.slice(p2+1,p2+1+62);
+   r[rest]={restMs:rest,presses:presses.length,modeBeforeRelease:S[r1-1]?.mode,heatAtRelease:S[r1]?.heat,restSeconds:round(S[p2].t-S[r1].t,3),heatAtRepress:S[p2]?.heat,
+    firstModeAfterRepress:after[0]?.mode,burstFramesInNextSecond:after.filter(q=>q.mode==='burst').length,shotsInNextSecond:after.length?after.at(-1).fired-S[p2].fired:null,
+    trace:S.map(q=>[q.t,q.fired,q.mode,q.heat,q.held?1:0])};
+   await exitGame(I);log('recharge',rest,JSON.stringify({...r[rest],trace:undefined}));}
   r.close=await closeIsland(I);results.recharge=r;await writeJSON('recharge',r);}
 
  // ---------------------------------------------------------------- gear: maxed equipment through the island's own save
@@ -280,19 +283,19 @@ try{
  if(PARTS.includes('bot')){const r={};const modes=(process.env.QA_BOT_MODES||'default').split(',');const cap=Number(process.env.QA_BOT_CAP||200);
   for(const mode of modes){const I=await openIsland(mode);const g=await startGame(I);await I.tick(1500);const canvas=g.geometry.canvas,unitsPerPx=360/canvas.w;
    const fire=await center(I.page,'#shoot');let s=await snap(I.page);const t0=s.time,ship0=s.player.x,fx0=420,fy=110;const finger=x=>({x:Math.max(2,Math.min(842,Math.round(fx0+(x-ship0)/unitsPerPx))),y:fy,id:1});
-   await I.touch('touchStart',[finger(ship0)]);await I.touch('touchStart',[finger(ship0),{x:fire.x,y:fire.y,id:2}],true);let steps=0,last=s,pickups=[];
+   await I.touch('touchStart',[finger(ship0)]);await I.touch('touchStart',[finger(ship0),{x:fire.x,y:fire.y,id:2}],true);let steps=0,last=s,pickups=[];const air=[];
    while(s&&!s.result&&s.time-t0<cap){
     const plan=await I.page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const py=m.player.y;
      const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}for(const a of m.aliens)if(a.diveAge>=0&&a.y<py)cross.push(a.x);
      let want=t?t.x:m.player.x;const p=m.pickups[0];if(p&&p.y>py-200)want=p.x;const safe=x=>cross.every(c=>Math.abs(c-x)>30);if(!safe(want)){out:for(let d=0;d<=360;d+=6)for(const sg of[1,-1]){const x=want+sg*d;if(x>20&&x<340&&safe(x)){want=x;break out;}}}
-     return {want,pickup:p?{kind:p.kind,y:p.y}:null,powerup:m.powerup,spread:m.spreadTime>0};});
-    if(!plan)break;if(plan.pickup&&!pickups.some(q=>q.kind===plan.pickup.kind&&Math.abs(q.at-s.time)<3))pickups.push({kind:plan.pickup.kind,at:round(s.time-t0,1)});
+     return {want,pickup:p?{kind:p.kind,y:p.y}:null,powerup:m.powerup,spread:m.spreadTime>0,mode:m.fireMode,inAir:m.shots.length,aimDx:t?Math.abs(t.x-m.player.x):null};});
+    if(!plan)break;air.push([plan.mode,plan.inAir,plan.aimDx]);if(plan.pickup&&!pickups.some(q=>q.kind===plan.pickup.kind&&Math.abs(q.at-s.time)<3))pickups.push({kind:plan.pickup.kind,at:round(s.time-t0,1)});
     await I.touch('touchMove',[finger(plan.want),{x:fire.x,y:fire.y,id:2}]);await I.tick(100);last=s;s=await snap(I.page);steps++;
     if(steps%100===0)log('bot',mode,round(s?.time-t0,1),'kills',s?.kills,'wave',s?.wave,'lives',s?.lives);
    }
    await I.touch('touchEnd',[]);const end=s||last;
    const won=end.result?.outcome==='win'||(!s&&await I.page.evaluate(()=>(window.__island.engine.state.minigameWins.alienDefense||0)>0));
-   r[mode]={stageSeconds:round(end.time-t0,1),limitSeconds:g.equipment.settingsSeconds,outcome:won?'win':end.result?.outcome||(s?'running at cap':'ended'),fired:end.fired,kills:end.kills,shotsPerKill:round(end.fired/Math.max(1,end.kills),1),livesLeft:end.lives,maxLives:end.maxLives,wave:end.wave,overheats:end.overheats,capDropped:end.capDropped,pickupsSeen:pickups,steps};
+   r[mode]={stageSeconds:round(end.time-t0,1),limitSeconds:g.equipment.settingsSeconds,outcome:won?'win':end.result?.outcome||(s?'running at cap':'ended'),fired:end.fired,kills:end.kills,shotsPerKill:round(end.fired/Math.max(1,end.kills),1),livesLeft:end.lives,maxLives:end.maxLives,wave:end.wave,overheats:end.overheats,capDropped:end.capDropped,pickupsSeen:pickups,steps,inAirSteadyAimed:(()=>{const q=air.filter(a=>a[0]==='normal'&&a[2]!==null&&a[2]<4);return q.length?{samples:q.length,mean:round(q.reduce((n,a)=>n+a[1],0)/q.length,1),max:Math.max(...q.map(a=>a[1]))}:null;})(),inAirSteadyAll:(()=>{const q=air.filter(a=>a[0]==='normal');return q.length?{samples:q.length,mean:round(q.reduce((n,a)=>n+a[1],0)/q.length,1),max:Math.max(...q.map(a=>a[1]))}:null;})()};
    await I.tick(300);await shot(I,`bot-${mode}-end`);
    await exitGame(I).catch(()=>{});r[mode].close=await closeIsland(I);log('bot',mode,JSON.stringify(r[mode]));}
   results.bot=r;await writeJSON('bot',r);}

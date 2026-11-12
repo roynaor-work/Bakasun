@@ -22,7 +22,9 @@
   "qa-fire-drive-new-drive-left.jpg",
   "qa-fire-drive-new-drive-left-zoom.jpg",
   "qa-fire-drive-new-drive-acrossBlock.jpg",
-  "qa-fire-drive-new-drive-acrossBlock-zoom.jpg"
+  "qa-fire-drive-new-drive-acrossBlock-zoom.jpg",
+  "qa-fire-drive-new-spray.jpg",
+  "qa-fire-drive-new-spray-zoom.jpg"
  ],
  "assetLog": [
   {
@@ -179,9 +181,21 @@
    "t": 121135,
    "ev": "req",
    "path": "assets/fire-v7/models/warehouse-burning.glb"
+  },
+  {
+   "t": 189220,
+   "ev": "req",
+   "path": "assets/fire-v7/models/workshop-scorched-lod.glb"
   }
  ],
- "taps": [],
+ "taps": [
+  {
+   "x": 520,
+   "y": 257,
+   "ms": 80,
+   "hit": ".minigame-canvas"
+  }
+ ],
  "saveBefore": {
   "keys": [
    "island.v1"
@@ -8195,6 +8209,4859 @@
      -0.3641579961615986
     ]
    }
+  },
+  {
+   "phase": "stop",
+   "time": 6.560000000000005,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018419723032,
+    "z": -1.8847979961615926,
+    "vx": -0.0000013082285255094916,
+    "vz": -14.39999999999994,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.281893349388183,
+    "driving": true,
+    "speed": 13.68,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.68606279991167,
+    "y": 187.27506185574086
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8693682802680746,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7066490110431665,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7150424207167566,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "נוגעים באש, בחלון או בברז כדי לנסוע",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0.4180000126361847,
+      "rate": 1.284000039100647
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -0.0012919574319911892,
+    -0.9999991654226488
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.2276857997042543,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.985518122302588,
+     3.094111480475627,
+     -4.156814781070571
+    ],
+    "ends": [
+     [
+      -5.985518122302588,
+      3.094111480475627,
+      -4.156814781070571
+     ],
+     [
+      -5.979676606649052,
+      3.19100805235857,
+      0.3646273606703041
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018755865073,
+     2.8,
+     -5.584797996161578
+    ],
+    "base": [
+     -5.925018419723032,
+     2.8,
+     -1.8847979961615926
+    ]
+   }
+  },
+  {
+   "phase": "stop",
+   "time": 6.656000000000005,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018520194983,
+    "z": -2.9907179961615875,
+    "vx": -9.157599678566442e-7,
+    "vz": -10.079999999999965,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.282848296943685,
+    "driving": true,
+    "speed": 9.360000000000001,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.78202183178826,
+    "y": 188.77771277065665
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8702322802680744,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7075130110431663,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7159064207167565,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "נוגעים באש, בחלון או בברז כדי לנסוע",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0.28600001335144043,
+      "rate": 1.0679999589920044
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -0.00033701022952188696,
+    -0.999999943212051
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.7981315501015325,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.9833525159956364,
+     3.0713373059341653,
+     -5.29348386281899
+    ],
+    "ends": [
+     [
+      -5.9833525159956364,
+      3.0713373059341653,
+      -5.29348386281899
+     ],
+     [
+      -5.981829143105688,
+      3.213244555073036,
+      -0.7732269982110735
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018856337024,
+     2.8,
+     -6.690717996161573
+    ],
+    "base": [
+     -5.925018520194983,
+     2.8,
+     -2.9907179961615875
+    ]
+   }
+  },
+  {
+   "phase": "stop",
+   "time": 6.752000000000005,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018582989952,
+    "z": -3.681917996161585,
+    "vx": -5.232914102037967e-7,
+    "vz": -5.759999999999987,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.2830973476270175,
+    "driving": true,
+    "speed": 5.040000000000003,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.8486497552333,
+    "y": 190.9766733894342
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8710962802680743,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7083770110431662,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7167704207167563,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "נוגעים באש, בחלון או בברז כדי לנסוע",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0.26003891229629517,
+      "rate": 1.0464898347854614
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -0.00008795955245523393,
+    -0.9999999961315585
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 2.0627841635724806,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982777363691388,
+     3.060667930595284,
+     -5.998860395188563
+    ],
+    "ends": [
+     [
+      -5.982777363691388,
+      3.060667930595284,
+      -5.998860395188563
+     ],
+     [
+      -5.982379825794892,
+      3.2234529281490416,
+      -1.4793069884244447
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018919131993,
+     2.8,
+     -7.381917996161571
+    ],
+    "base": [
+     -5.925018582989952,
+     2.8,
+     -3.681917996161585
+    ]
+   }
+  },
+  {
+   "phase": "stop",
+   "time": 6.848000000000005,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.92501860810794,
+    "z": -3.9583979961615845,
+    "vx": -1.3082285255094916e-7,
+    "vz": -1.4399999999999968,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283162300139343,
+    "driving": true,
+    "speed": 0.7200000000000029,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.8949120487199,
+    "y": 193.6591065574477
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8719602802680742,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7092410110431661,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7176344207167562,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "נוגעים באש, בחלון או בברז כדי לנסוע",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.157697531652545
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.833417979728832
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0.09002271294593811,
+      "rate": 0.7651494145393372
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -0.000023007040241827776,
+    -0.999999999735338
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 2.185567102648155,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982625677955669,
+     3.0556957907860607,
+     -6.281897726785053
+    ],
+    "ends": [
+     [
+      -5.982625677955669,
+      3.0556957907860607,
+      -6.281897726785053
+     ],
+     [
+      -5.982521704672754,
+      3.2281656589665926,
+      -1.762703523852693
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018944249981,
+     2.8,
+     -7.65839799616157
+    ],
+    "base": [
+     -5.92501860810794,
+     2.8,
+     -3.9583979961615845
+    ]
+   }
+  },
+  {
+   "phase": "stop",
+   "time": 6.944000000000005,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283179239779102,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.92703370044103,
+    "y": 196.23259022645905
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.872824280268074,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7101050110431659,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7184984207167561,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "נוגעים באש, בחלון או בברז כדי לנסוע",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -0.000006067400484683228,
+    -0.9999999999815934
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.2582644439840776,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982585382121791,
+     3.09289863573318,
+     -6.243661700773297
+    ],
+    "ends": [
+     [
+      -5.982585382121791,
+      3.09289863573318,
+      -6.243661700773297
+     ],
+     [
+      -5.9825579490163285,
+      3.192208280450099,
+      -1.7222681430555298
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "toFire",
+   "time": 7.2480000000000055,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185131589435,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9770160146408,
+    "y": 200.3004009124782
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8755602802680736,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7128410110431656,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7212344207167557,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -1.7559015131704884e-7,
+    -0.9999999999999846
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0.11055229036658847,
+    "length": 4.522484064102174,
+    "tip": [
+     -5.982571472837995,
+     3.1378212754045887,
+     -6.181255069072808
+    ],
+    "ends": [
+     [
+      -5.982571472837995,
+      3.1378212754045887,
+      -6.181255069072808
+     ],
+     [
+      -5.982570678735811,
+      3.1465474096059536,
+      -1.6587794235176685
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "toFire",
+   "time": 7.440000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185210566574,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9889193794654,
+    "y": 201.26915626941746
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8772882802680734,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7145690110431653,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7229624207167554,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.661301215124051e-8,
+    -0.9999999999999952
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0.02379531291679138,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571259797565,
+     3.1411660729895523,
+     -6.176501267383129
+    ],
+    "ends": [
+     [
+      -5.982571259797565,
+      3.1411660729895523,
+      -6.176501267383129
+     ],
+     [
+      -5.982570822866795,
+      3.14304429022104,
+      -1.6540175932989492
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "toFire",
+   "time": 7.632000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185215938349,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9946580129811,
+    "y": 201.73619496324397
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8790162802680731,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.716297011043165,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7246904207167552,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.124123715270506e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0.005121711318060656,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.9825712396855035,
+     3.141885066719833,
+     -6.175477394766233
+    ],
+    "ends": [
+     [
+      -5.9825712396855035,
+      3.141885066719833,
+      -6.175477394766233
+     ],
+     [
+      -5.982570827048465,
+      3.14228933485237,
+      -1.6529933487329895
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "toFire",
+   "time": 7.824000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216303721,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99742461848405,
+    "y": 201.96135515458508
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": false,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 110,
+   "maxWater": 110,
+   "pressure": 1,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8807442802680728,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7180250110431647,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7264184207167549,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.087586507211638e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0.001102398901719674,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571237102106,
+     3.14203977953242,
+     -6.175256985383788
+    ],
+    "ends": [
+     [
+      -5.982571237102106,
+      3.14203977953242,
+      -6.175256985383788
+     ],
+     [
+      -5.9825708261174535,
+      3.1421267943441107,
+      -1.6527729221187375
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 8.752000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99992425647486,
+    "y": 202.1647881947143
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 107.76000000000003,
+   "maxWater": 110,
+   "pressure": 0.9680000000000002,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8890962802680715,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7263770110431634,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.6301452702590663,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.3164006769657135,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 6.57864633600265e-7,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236556058,
+     3.142082185442843,
+     -6.175196566667662
+    ],
+    "ends": [
+     [
+      -5.982571236556058,
+      3.142082185442843,
+      -6.175196566667662
+     ],
+     [
+      -5.982570825691993,
+      3.1420822373695705,
+      -1.652712502565508
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 8.912000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99995876229684,
+    "y": 202.16759645106302
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 105.52000000000007,
+   "maxWater": 110,
+   "pressure": 0.9360000000000004,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8905362802680713,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7278170110431632,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.530326682622184,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.3137211501598358,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.8291090735480386e-7,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555848,
+     3.142082203723518,
+     -6.175196540621352
+    ],
+    "ends": [
+     [
+      -5.982571236555848,
+      3.142082203723518,
+      -6.175196540621352
+     ],
+     [
+      -5.982570825691783,
+      3.142082218161085,
+      -1.6527124765191976
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 9.072000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999775486002,
+    "y": 202.16912537438154
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 103.2800000000001,
+   "maxWater": 110,
+   "pressure": 0.9040000000000006,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8919762802680711,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.729257011043163,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.43387465780610723,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.3096652030944824,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 5.085605088279473e-8,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.98257123655579,
+     3.1420822088062272,
+     -6.175196533379506
+    ],
+    "ends": [
+     [
+      -5.98257123655579,
+      3.1420822088062272,
+      -6.175196533379506
+     ],
+     [
+      -5.982570825691725,
+      3.142082212820409,
+      -1.6527124692773518
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 9.232000000000006,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99998777659,
+    "y": 202.16995777934156
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 101.04000000000013,
+   "maxWater": 110,
+   "pressure": 0.8720000000000008,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8934162802680709,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7306970110431628,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.34078919581083594,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.304639995098114,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.4139876759815022e-8,
+    "length": 4.522484064102174,
+    "tip": [
+     -5.982571236555774,
+     3.14208221021941,
+     -6.175196531366003
+    ],
+    "ends": [
+     [
+      -5.982571236555774,
+      3.14208221021941,
+      -6.175196531366003
+     ],
+     [
+      -5.982570825691709,
+      3.1420822113355023,
+      -1.6527124672638487
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 9.392000000000007,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999334510306,
+    "y": 202.17041097278104
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 98.80000000000017,
+   "maxWater": 110,
+   "pressure": 0.840000000000001,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8948562802680706,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7321370110431625,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.2510702966363701,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.30156800150871277,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 3.9314143327523085e-9,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555769,
+     3.1420822106123274,
+     -6.175196530806174
+    ],
+    "ends": [
+     [
+      -5.982571236555769,
+      3.1420822106123274,
+      -6.175196530806174
+     ],
+     [
+      -5.982570825691704,
+      3.1420822109226427,
+      -1.6527124667040196
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 9.552000000000007,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999637681685,
+    "y": 202.17065770880933
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 96.5600000000002,
+   "maxWater": 110,
+   "pressure": 0.8080000000000012,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8962962802680704,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7335770110431623,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.16471796028270969,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.2969599962234497,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.0930822565206898e-9,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555768,
+     3.142082210721573,
+     -6.1751965306505205
+    ],
+    "ends": [
+     [
+      -5.982571236555768,
+      3.142082210721573,
+      -6.1751965306505205
+     ],
+     [
+      -5.9825708256917025,
+      3.1420822108078523,
+      -1.6527124665483663
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 9.712000000000007,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999802739904,
+    "y": 202.1707920414414
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 94.32000000000023,
+   "maxWater": 110,
+   "pressure": 0.7760000000000014,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.8977362802680702,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7350170110431621,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.08173218674985475,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "מחזיקים ריסוס עד שהאש כבה",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.293784499168396,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 3.0391652082896497e-10,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555767,
+     3.1420822107519473,
+     -6.175196530607243
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.1420822107519473,
+      -6.175196530607243
+     ],
+     [
+      -5.982570825691702,
+      3.142082210775936,
+      -1.652712466505089
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 10.640000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999999419846,
+    "y": 202.17094785999132
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 81.32800000000043,
+   "maxWater": 110,
+   "pressure": 0.5904000000000025,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9060882802680689,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7433690110431608,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.27084800601005554,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.8003866612105e-13,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555767,
+     3.1420822107636384,
+     -6.175196530590586
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.1420822107636384,
+      -6.175196530590586
+     ],
+     [
+      -5.982570825691702,
+      3.1420822107636526,
+      -1.652712466488432
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 10.800000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999996841416,
+    "y": 202.17095001096155
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 79.08800000000046,
+   "maxWater": 110,
+   "pressure": 0.5584000000000027,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9075282802680686,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7448090110431606,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.26767250895500183,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 5.06358748465453e-14,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763643,
+     -6.175196530590579
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763643,
+      -6.175196530590579
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763647,
+      -1.652712466488425
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 10.960000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999998280344,
+    "y": 202.17095118203295
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 76.8480000000005,
+   "maxWater": 110,
+   "pressure": 0.5264000000000029,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9089682802680684,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7462490110431603,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.26434871554374695,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 1.1252416632565625e-14,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555767,
+     3.1420822107636446,
+     -6.175196530590577
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.1420822107636446,
+      -6.175196530590577
+     ],
+     [
+      -5.982570825691702,
+      3.1420822107636455,
+      -1.6527124664884232
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.120000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999063755,
+    "y": 202.1709518196096
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 74.60800000000053,
+   "maxWater": 110,
+   "pressure": 0.494400000000003,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9104082802680682,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7476890110431601,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.26009601354599,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102173,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.1751965305905765
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.1751965305905765
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884223
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.280000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999999949027,
+    "y": 202.1709521667308
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 72.36800000000056,
+   "maxWater": 110,
+   "pressure": 0.4624000000000029,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.911848280268068,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7491290110431599,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.25615251064300537,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.440000000000008,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999722485,
+    "y": 202.17095235571716
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 70.1280000000006,
+   "maxWater": 110,
+   "pressure": 0.43040000000000284,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9132882802680677,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7505690110431597,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.2516480088233948,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.600000000000009,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999999984891,
+    "y": 202.17095245860847
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 67.88800000000063,
+   "maxWater": 110,
+   "pressure": 0.39840000000000275,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9147282802680675,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7520090110431594,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.249240443110466,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.760000000000009,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999917736,
+    "y": 202.17095251462666
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 65.64800000000066,
+   "maxWater": 110,
+   "pressure": 0.36640000000000267,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9161682802680673,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7534490110431592,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.244246244430542,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 11.920000000000009,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999955213,
+    "y": 202.17095254512498
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 63.40800000000068,
+   "maxWater": 110,
+   "pressure": 0.3344000000000026,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9176082802680671,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.754889011043159,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.24152906239032745,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 12.080000000000009,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999999997562,
+    "y": 202.1709525617296
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 61.16800000000068,
+   "maxWater": 110,
+   "pressure": 0.3024000000000025,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9190482802680668,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7563290110431587,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.2369210571050644,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 12.240000000000009,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999986727,
+    "y": 202.1709525707697
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 58.92800000000068,
+   "maxWater": 110,
+   "pressure": 0.2704000000000024,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9204882802680666,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7577690110431585,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.23244799673557281,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 12.40000000000001,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.9999999999277,
+    "y": 202.17095257569142
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 56.68800000000068,
+   "maxWater": 110,
+   "pressure": 0.2384000000000024,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9219282802680664,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7592090110431583,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.22860799729824066,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
+  },
+  {
+   "phase": "spray",
+   "time": 12.56000000000001,
+   "renderMode": "three",
+   "truck": {
+    "x": -5.925018609154522,
+    "z": -3.9699179961615845,
+    "vx": 0,
+    "vz": 0,
+    "yaw": -6.283185216330386,
+    "drawYaw": -6.283185216330385,
+    "driving": false,
+    "speed": 0,
+    "blocked": false
+   },
+   "truckScreen": {
+    "x": 421.99999999996066,
+    "y": 202.17095257837101
+   },
+   "latch": false,
+   "rescuing": false,
+   "spraying": true,
+   "refilling": false,
+   "atHydrant": false,
+   "water": 54.448000000000675,
+   "maxWater": 110,
+   "pressure": 0.20640000000000244,
+   "ladder": {
+    "extension": 0,
+    "sway": 0,
+    "stable": true,
+    "engaged": false,
+    "available": false,
+    "mode": "simple"
+   },
+   "rescues": [],
+   "flames": [
+    {
+     "active": true,
+     "heat": 0.9233682802680662,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0.7606490110431581,
+     "warning": 0
+    },
+    {
+     "active": true,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    },
+    {
+     "active": false,
+     "heat": 0,
+     "warning": 0
+    }
+   ],
+   "coach": "האש כבתה · בוחרים יעד נוסף",
+   "navigation": {
+    "active": false,
+    "kind": null
+   },
+   "indicators": [
+    {
+     "kind": "fire",
+     "edge": "right",
+     "x": 808,
+     "y": 210,
+     "size": 20.15678535978131
+    },
+    {
+     "kind": "fire",
+     "edge": "left",
+     "x": 36,
+     "y": 210,
+     "size": 20.832221455327065
+    }
+   ],
+   "audio": {
+    "state": "running",
+    "loops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.225724458694458,
+      "rate": 1
+     }
+    },
+    "played": [
+     "siren",
+     "crackle",
+     "engine",
+     "spray",
+     "steam"
+    ]
+   },
+   "kind": "meshy",
+   "noseMethod": "root-local-minusZ (front verified on render)",
+   "nose": [
+    -9.084920105095762e-8,
+    -0.999999999999996
+   ],
+   "roofLadder": {
+    "meshVertices": 1755,
+    "deviationDeg": 0,
+    "pitchDeg": 0,
+    "length": 4.522484064102172,
+    "tip": [
+     -5.982571236555767,
+     3.142082210763645,
+     -6.175196530590576
+    ],
+    "ends": [
+     [
+      -5.982571236555767,
+      3.142082210763645,
+      -6.175196530590576
+     ],
+     [
+      -5.982570825691702,
+      3.142082210763645,
+      -1.6527124664884218
+     ]
+    ]
+   },
+   "boxLadder": {
+    "visible": false,
+    "tip": [
+     -5.925018945296563,
+     2.8,
+     -7.66991799616157
+    ],
+    "base": [
+     -5.925018609154522,
+     2.8,
+     -3.9699179961615845
+    ]
+   }
   }
  ],
  "indicatorsUnderGauge": [],
@@ -8338,6 +13205,464 @@
    "background": "linear-gradient(rgb(143, 220, 240), rgb(62, 159, 192))"
   }
  },
+ "fireTapped": {
+  "index": 2,
+  "screen": {
+   "x": 520.1229057479891,
+   "y": 257.3683649662482,
+   "heat": 0.7184984207167561,
+   "active": true
+  }
+ },
+ "audioIdle": {
+  "label": "fire burning, not spraying",
+  "n": 12,
+  "medianRmsDb": -51,
+  "maxRmsDb": -46.9,
+  "medianCentroidHz": 83,
+  "medianPhoneBandShare": 0.004,
+  "state": "running"
+ },
+ "audioIdleLoops": {
+  "unlocked": true,
+  "state": "running",
+  "muted": false,
+  "paused": false,
+  "disposed": false,
+  "samples": [
+   "engine",
+   "ladder",
+   "rescue",
+   "fire"
+  ],
+  "played": [
+   "siren",
+   "crackle",
+   "engine"
+  ],
+  "loops": {
+   "fire": {
+    "gain": 0.1599999964237213,
+    "rate": 0.550000011920929
+   },
+   "engine": {
+    "gain": 0,
+    "rate": 0.6000000238418579
+   }
+  }
+ },
+ "sprayButton": {
+  "x": 776,
+  "y": 322,
+  "w": 96,
+  "h": 96
+ },
+ "gaugeTrack": [
+  {
+   "phase": "spray",
+   "time": 8.752000000000006,
+   "water": 107.76000000000003,
+   "maxWater": 110,
+   "model": 98,
+   "gauge": 98,
+   "level": "ok",
+   "text": "98%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 8.912000000000006,
+   "water": 105.52000000000007,
+   "maxWater": 110,
+   "model": 96,
+   "gauge": 96,
+   "level": "ok",
+   "text": "96%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 9.072000000000006,
+   "water": 103.2800000000001,
+   "maxWater": 110,
+   "model": 94,
+   "gauge": 94,
+   "level": "ok",
+   "text": "94%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 9.232000000000006,
+   "water": 101.04000000000013,
+   "maxWater": 110,
+   "model": 92,
+   "gauge": 92,
+   "level": "ok",
+   "text": "92%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 9.392000000000007,
+   "water": 98.80000000000017,
+   "maxWater": 110,
+   "model": 90,
+   "gauge": 90,
+   "level": "ok",
+   "text": "90%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 9.552000000000007,
+   "water": 96.5600000000002,
+   "maxWater": 110,
+   "model": 88,
+   "gauge": 88,
+   "level": "ok",
+   "text": "88%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 9.712000000000007,
+   "water": 94.32000000000023,
+   "maxWater": 110,
+   "model": 86,
+   "gauge": 86,
+   "level": "ok",
+   "text": "86%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 10.640000000000008,
+   "water": 81.32800000000043,
+   "maxWater": 110,
+   "model": 74,
+   "gauge": 74,
+   "level": "ok",
+   "text": "74%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 10.800000000000008,
+   "water": 79.08800000000046,
+   "maxWater": 110,
+   "model": 72,
+   "gauge": 72,
+   "level": "ok",
+   "text": "72%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 10.960000000000008,
+   "water": 76.8480000000005,
+   "maxWater": 110,
+   "model": 70,
+   "gauge": 70,
+   "level": "ok",
+   "text": "70%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.120000000000008,
+   "water": 74.60800000000053,
+   "maxWater": 110,
+   "model": 68,
+   "gauge": 68,
+   "level": "ok",
+   "text": "68%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.280000000000008,
+   "water": 72.36800000000056,
+   "maxWater": 110,
+   "model": 66,
+   "gauge": 66,
+   "level": "ok",
+   "text": "66%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.440000000000008,
+   "water": 70.1280000000006,
+   "maxWater": 110,
+   "model": 64,
+   "gauge": 64,
+   "level": "ok",
+   "text": "64%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.600000000000009,
+   "water": 67.88800000000063,
+   "maxWater": 110,
+   "model": 62,
+   "gauge": 62,
+   "level": "ok",
+   "text": "62%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.760000000000009,
+   "water": 65.64800000000066,
+   "maxWater": 110,
+   "model": 60,
+   "gauge": 60,
+   "level": "ok",
+   "text": "60%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 11.920000000000009,
+   "water": 63.40800000000068,
+   "maxWater": 110,
+   "model": 58,
+   "gauge": 58,
+   "level": "ok",
+   "text": "58%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 12.080000000000009,
+   "water": 61.16800000000068,
+   "maxWater": 110,
+   "model": 56,
+   "gauge": 56,
+   "level": "ok",
+   "text": "56%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 12.240000000000009,
+   "water": 58.92800000000068,
+   "maxWater": 110,
+   "model": 54,
+   "gauge": 54,
+   "level": "ok",
+   "text": "54%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 12.40000000000001,
+   "water": 56.68800000000068,
+   "maxWater": 110,
+   "model": 52,
+   "gauge": 52,
+   "level": "ok",
+   "text": "52%",
+   "spraying": true,
+   "refilling": false
+  },
+  {
+   "phase": "spray",
+   "time": 12.56000000000001,
+   "water": 54.448000000000675,
+   "maxWater": 110,
+   "model": 49,
+   "gauge": 49,
+   "level": "ok",
+   "text": "49%",
+   "spraying": true,
+   "refilling": false
+  }
+ ],
+ "audioSpray": {
+  "label": "spraying",
+  "n": 12,
+  "medianRmsDb": -33.7,
+  "maxRmsDb": -33.4,
+  "medianCentroidHz": 2413,
+  "medianPhoneBandShare": 0.217,
+  "state": "running"
+ },
+ "audioSprayLoops": {
+  "unlocked": true,
+  "state": "running",
+  "muted": false,
+  "paused": false,
+  "disposed": false,
+  "samples": [
+   "engine",
+   "ladder",
+   "rescue",
+   "fire"
+  ],
+  "played": [
+   "siren",
+   "crackle",
+   "engine",
+   "spray",
+   "steam"
+  ],
+  "loops": {
+   "fire": {
+    "gain": 0.1599999964237213,
+    "rate": 0.550000011920929
+   },
+   "engine": {
+    "gain": 0,
+    "rate": 0.6000000238418579
+   },
+   "jet": {
+    "gain": 0.2746880054473877,
+    "rate": 1
+   }
+  }
+ },
+ "domSpray": {
+  "items": [
+   {
+    "sel": ".fire-hud",
+    "id": null,
+    "cls": "fire-hud",
+    "text": "2041",
+    "box": {
+     "x": 16,
+     "y": 14,
+     "w": 199.875,
+     "h": 54
+    },
+    "visible": true
+   },
+   {
+    "sel": ".fire-water-gauge",
+    "id": null,
+    "cls": "fire-water-gauge",
+    "text": "76%",
+    "box": {
+     "x": 16,
+     "y": 72,
+     "w": 200,
+     "h": 36
+    },
+    "visible": true
+   },
+   {
+    "sel": ".fire-coach",
+    "id": null,
+    "cls": "fire-coach",
+    "text": "כיבוי מוקדי אשהאש כבתה · בוחרים יעד נוסף×",
+    "box": {
+     "x": 260,
+     "y": 14,
+     "w": 504,
+     "h": 50
+    },
+    "visible": true
+   },
+   {
+    "sel": ".game-header .game-pause",
+    "id": null,
+    "cls": "secondary-button game-pause",
+    "text": "",
+    "box": {
+     "x": 780,
+     "y": 14,
+     "w": 48,
+     "h": 48
+    },
+    "visible": true
+   },
+   {
+    "sel": "#shoot",
+    "id": "shoot",
+    "cls": "held",
+    "text": "ריסוס",
+    "box": {
+     "x": 730.4000244140625,
+     "y": 276.3999938964844,
+     "w": 91.20001220703125,
+     "h": 91.19998168945312
+    },
+    "visible": true
+   },
+   {
+    "sel": "#fire-refill",
+    "id": "fire-refill",
+    "cls": "",
+    "text": "",
+    "box": {
+     "x": 734,
+     "y": 176,
+     "w": 84,
+     "h": 84
+    },
+    "visible": true
+   },
+   {
+    "sel": "#pass",
+    "id": "pass",
+    "cls": "idle",
+    "text": "סולם",
+    "box": {
+     "x": 630,
+     "y": 280,
+     "w": 84,
+     "h": 84
+    },
+    "visible": true
+   },
+   {
+    "sel": "#joystick",
+    "id": "joystick",
+    "cls": "soccer-joystick",
+    "text": "",
+    "box": {
+     "x": 20,
+     "y": 230,
+     "w": 140,
+     "h": 140
+    },
+    "visible": true
+   }
+  ],
+  "overlaps": [],
+  "outOfView": [],
+  "waterWords": [],
+  "refill": {
+   "text": "",
+   "aria": "מילוי מים",
+   "labels": 0
+  },
+  "ladderButton": {
+   "text": "סולם",
+   "disabled": true,
+   "held": false
+  }
+ },
  "partial": true,
- "frameCount": 202
+ "frameCount": 393
 }
