@@ -8,6 +8,7 @@ import {armSwingPose,armSwingState,createArmSwingApplier} from './soccer-arm-swi
 import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRecoverTime} from './soccer-motion-v9.mjs';
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
 import {SOCCER_CODEX_BOUNDS,SOCCER_CODEX_BRAKE_FROM,SOCCER_CODEX_CELEBRATIONS,SOCCER_CODEX_IDLES,SOCCER_CODEX_LADDER,SOCCER_CODEX_RUN_BOUNDS,SOCCER_CODEX_RUN_LADDER,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,SOCCER_V10_IDLES,soccerCodexClipsUrl,soccerCodexHeld,soccerCodexIdleHold,soccerCodexKeeperCatch,soccerCodexKickClip,soccerCodexMotionEnabled,soccerCodexNextIdle,soccerCodexRunEnabled,soccerCodexStates,soccerKeeperV11Enabled,soccerLadderRung,soccerMotionLoadSummary,soccerMotionV10Enabled,soccerMotionV12Enabled,soccerRunLadder,soccerV10ClipsUrl,soccerV10CutClip,soccerV10FirstTouchClip,soccerV10Held,soccerV10States,soccerV11ClipsUrl,soccerV11DiveClip,soccerV11DivePlan,soccerV11States,soccerV12ClipsUrl,soccerV12Overlay} from './soccer-codex-motion.mjs';
+import {soccerHeadersEnabled,soccerHeaderClipsUrl,soccerHeaderStates,soccerHeaderState,soccerHeaderClip,soccerHeaderIsClear,soccerHeaderPlan,soccerHeaderEvents,soccerHeaderPhase,SOCCER_HEADER_ENTRY_FADE,SOCCER_HEADER_EXIT_FADE,SOCCER_HEADER_FOLLOW,soccerKeeperCrowdEnabled,soccerKeeperClipsUrl,soccerKeeperStates,soccerKeeperDejectedNext,SOCCER_KEEPER_AFTER_GOAL_FADE} from './soccer-headers.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
 import {soccerFeelEnabled,soccerFeelDiveClip,soccerFeelDivePlan,soccerFeelSlidePlan,slideFeelCursor,slideFeelRecoverRate} from './soccer-feel.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
@@ -175,7 +176,7 @@ export function soccerV7Rung(speed,current=-1){
 // v9: the aeroplane holds both arms straight out for 2.2 s, which Roy saw as a T-pose after a goal.
 /** The beaten keeper after a goal (soccerShow v1): the first clip that exists. No shipped pack has keeper_after_goal or disappointed (11/11/2026), so a
  * restless idle stands in; the list is the place a Codex clip plugs in. */
-export const SOCCER_SHOW_DEJECTED=Object.freeze(['v11_keeper_after_goal','disappointed','v10_idle_weight_shift','v9_idle_weight_shift','v10_idle_relaxed','v9_idle_relaxed','idle']);
+export const SOCCER_SHOW_DEJECTED=Object.freeze(['v22_keeper_after_goal','v11_keeper_after_goal','disappointed','v10_idle_weight_shift','v9_idle_weight_shift','v10_idle_relaxed','v9_idle_relaxed','idle']);
 const SOCCER_V7_CELEBRATIONS=soccerMotionV9Enabled()?['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap']:['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap','celebrate_aeroplane'];
 /** Feel v2: seconds until a rolling pass reaches the player (straight line at the ball's speed), Infinity for a ball that is not coming. */
 export const FEEL_TOUCH_LEAD=.33;
@@ -193,8 +194,10 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const v10=codexRuns&&Boolean(actions.v10_run&&actions.v10_idle_relaxed),idles=v10?SOCCER_V10_IDLES:SOCCER_CODEX_IDLES,idleHome=v10?'v10_idle_relaxed':'v9_idle_relaxed';
   const ladderDef=codexRuns?soccerRunLadder(v10):codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER,ladderBounds=codexRuns?SOCCER_CODEX_RUN_BOUNDS:codex?SOCCER_CODEX_BOUNDS:null;
   const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
+  // Codex header clips (v22, see soccer-headers.mjs): present only when the pack loaded and `?soccerHeaders` is not 0.
+  const headersOn=soccerHeadersEnabled(config)&&Boolean(actions.v22_header_stand_goal&&actions.v22_header_jump_goal);
   let idleAge=0,cutAccum=0,touchTimer=0,recentSpeed=0;
-  let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null,slide=null,dive=null;
+  let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,headerTimer=0,headerPrevTime=0,headerEvents=[],headerPlan=null,lastTransition=null,slide=null,dive=null;
   // soccer-feel v2 (see soccer-feel.mjs): repaired slide and dive clips on the simulation's clocks, first touch armed before the ball arrives.
   const feel=soccerFeelEnabled(),feelSlide=feel?soccerFeelSlidePlan(data.states):null,feelSlideOn=Boolean(feelSlide&&actions.v8_slide);let armedTouch=null,armed=false,nextFade=null;
   // The run and the crouch before the push-off are far apart: a 0.14 s ramp keeps the crossfade under 25 degrees per frame (measured 28 at 0.1 s).
@@ -267,7 +270,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const change=(name,event,force=false,{at=0,rate=1,fadeSeconds}={})=>{
     if(!actions[name]||name===state&&!force)return;
     const transition=data.transitions.find(t=>(t.source===state||t.source==='*')&&t.target===name&&(!event||t.on===event));
-    const fade=fadeSeconds??nextFade??transition?.visualBlendSeconds??.12;nextFade=null;
+    const fade=fadeSeconds??nextFade??(soccerHeaderState(state)?SOCCER_HEADER_EXIT_FADE:null)??transition?.visualBlendSeconds??.12;nextFade=null;
     const outgoing=actions[state],incoming=actions[name];
     if(incoming!==outgoing)outgoing.fadeOut(fade);
     incoming.reset().setEffectiveWeight(1).setEffectiveTimeScale(rate);incoming.time=at;
@@ -276,6 +279,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   };
   return {
     actions,/** Seconds into a state at which its authored ball contact happens (null if it has none). */contactTime(name){const st=data.states[name],c=st?.ballContacts?.find(c=>/strike|contact/.test(c.event));return c?c.time*st.durationSeconds:null;},get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},get slide(){return slide?{name:slide.name,time:slide.time,rate:slide.rate,follow:slide.follow,v2:Boolean(slide.plan)}:null;},
+    /** The Codex header clip is playing: its hips carry the jump, so the view must not lift the body a second time. */
+    get ownsHeight(){return headersOn&&soccerHeaderState(state);},
+    get header(){return soccerHeaderState(state)&&actions[state]?{name:state,time:actions[state].time,contact:headerPlan?.contact??null,phase:soccerHeaderPhase(data.states[state],actions[state].time),events:headerEvents.map(e=>e.name)}:null;},
     /** Feel v2: the dive clip has landed and is not yet back on its feet; the view holds the body where it landed meanwhile. */
     get diveGround(){return Boolean(dive?.v2&&state===dive.name&&actions[state].time>=dive.land&&actions[state].time<dive.stand);},
     get dive(){return dive?{name:dive.name,time:actions[dive.name]?.time??0,contact:dive.contact,land:dive.land,stand:dive.stand,rate:dive.rate,v2:Boolean(dive.v2)}:null;},
@@ -292,10 +298,13 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       cutAccum=cutAccum*Math.exp(-dt/.2)+turn;recentSpeed=Math.max(speed,recentSpeed*Math.exp(-dt/.3));
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
+      // A new header (the simulation has just set headerTime): which clip, from the ball's height, the player's speed, the turn of the body and clearance.
+      const headerClip=headersOn&&(p.headerTime||0)>headerTimer+1e-6&&mode==='header'?soccerHeaderClip({clear:soccerHeaderIsClear(p,s),ballHeight:s.ball.y||0,speed:recentSpeed,turn:cutAccum},n=>Boolean(actions[n])):null;
       if(slide&&state!==slide.name)slide=null;
       // soccerShow v1 may name the clip (team-mates clap / hop, winners cycle the pack); otherwise the scorer's pick by id as before.
       if(mode==='celebrate'&&edge){const hint=animation.clipHint,variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(hint&&actions[hint]?hint:variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
       else if(mode==='dejected'&&edge){const name=SOCCER_SHOW_DEJECTED.find(n=>actions[n]);if(name)change(name,'result_fail');}
+      else if(mode==='dejected'&&soccerKeeperDejectedNext(state,actions[state]?.time??0,data.states[state]?.durationSeconds??0,n=>Boolean(actions[n]))){change('v22_disappointed','result_fail',false,{fadeSeconds:SOCCER_KEEPER_AFTER_GOAL_FADE});}
       else if(mode==='slide'&&edge&&feelSlideOn){
         // Feel v2: the repaired v8 slide (won) or v9 miss + quick get-up (lost), see slideTimelineV2(). Entered just before the push-off so the
         // run crosses into the crouch within the 0.08 s fade; the yaw is locked to the slide direction by the character update.
@@ -342,6 +351,11 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         const kind=p.slideKind&&actions['slide_'+p.slideKind+'_recover']?(p.slideWon===false&&actions.slide_miss?'slide_miss':'slide_'+p.slideKind+'_recover'):'recover',clip=data.states[kind],total=Math.max(.2,(p.recover||0)*(kind==='slide_miss'?.5:.75));
         change(kind,'recovery_allowed',true,{rate:Math.max(1,clip.durationSeconds/total)});
       }
+      else if(headerClip){
+        // Entered just before the clip's own contact, so it meets the strike the simulation has already made; the way out is a 6 frame fade.
+        headerPlan=soccerHeaderPlan(data.states[headerClip]);
+        change(headerClip,'action',true,{at:headerPlan.at,rate:1,fadeSeconds:SOCCER_HEADER_ENTRY_FADE});headerPrevTime=headerPlan.at;
+      }
       else if((mode==='kick'||mode==='steal')&&kick) {
         // The simulation has already released the ball. Enter immediately before
         // the authored contact, then fit only the follow-through to its existing
@@ -353,6 +367,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         const remaining=Math.max(.08,(mode==='steal'?p.stealTime:p.kickTime)||config.ai?.kickAnimationSeconds||.42);
         change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
+      else if(soccerHeaderState(state)&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>(headerPlan?.contact??0)+SOCCER_HEADER_FOLLOW)){/* a Codex header plays through its contact and follow-through */}
       else if(feel&&v10&&p.role!=='keeper'&&s.passTarget&&s.passTarget.player===p.id&&s.ball.owner===null&&!s.ball.flight&&armedTouch!==s.passTarget&&!(['kick','steal','slide','recover','celebrate','dive'].includes(mode))&&feelTouchEta(p,s.ball)<=FEEL_TOUCH_LEAD&&soccerV10FirstTouchClip(s.ball.y||0,speed,p.id||0,n=>Boolean(actions[n]))){
         // Feel v2: the pass is about to reach him. The first touch starts now so its authored contact (0.33 s in) meets the ball instead of
         // starting when the ball is already at his feet; the arrival itself (receiveTime) then does not retrigger it.
@@ -389,11 +404,13 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
       else if(isLadder(state))actions[state].setEffectiveTimeScale(clamp(speed/ladderDef[ladder.indexOf(state)][1],state==='v9_walk'?.6:.5,state==='v9_walk'?1.6:1.4));
       if(codex&&p.role!=='keeper'&&idles.includes(state)&&!moving){idleAge+=dt;if(idleAge>=soccerCodexIdleHold(p.id||0)){idleAge=0;change(idles[(idles.indexOf(state)+1)%idles.length],'idle_variety',true,{fadeSeconds:.35});}}else idleAge=0;
-      previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;touchTimer=p.receiveTime||0;
+      previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;headerTimer=p.headerTime||0;touchTimer=p.receiveTime||0;
       // An armed touch is spent by the arrival (or by any other clip taking over); the next pass arms again.
       if(armed&&((p.receiveTime||0)>touchTimer+1e-6||!state.startsWith('v10_first_touch_')))armed=false;
       if(armedTouch&&s.passTarget!==armedTouch&&!armed)armedTouch=null;
       updateMixer(dt);
+      // takeoff / contact / land passed during this step (for tests and the dev overlay; the simulation never waits for them).
+      if(soccerHeaderState(state)&&actions[state]){const t=actions[state].time;headerEvents=t>=headerPrevTime?soccerHeaderEvents(data.states[state],headerPrevTime,t):[];headerPrevTime=t;}else headerEvents=[];
       const runSpeed=config.view.animation.runSpeed||4.5,idle=config.view.animation.idleSpeed||.2,locomotion=LOCOMOTION.has(state)&&moving;
       const clipPhase=state==='run'||state==='dribble_run'?(actions[state].time/data.states[state].durationSeconds+ARM_PHASE[state])%1:NaN;
       armSwingState(arm,dt,{locomotion,clipPhase,speed01:(speed-idle)/(runSpeed-idle),sprint01:Math.max(mode==='sprint'?1:0,(speed-runSpeed)/2),carrying:s.ball.owner===p.id});
@@ -442,8 +459,12 @@ let designSources=null,lastDesignError=null,lastV5Error=null,lastV7Error=null,la
 /** Why the shared athlete body was skipped in favour of v7 (null when it loaded or was not asked for). */
 export function soccerAthleteFallbackReason(){return lastAthleteError;}
 /** Why the Codex v9 motion clips were skipped (null when loaded or not asked for). */
-let lastV11Error=null,lastV12=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
+let lastKeeperClipsError=null,lastHeadersError=null,lastV11Error=null,lastV12=null,lastCodexError=null,lastV10Error=null,motionCounts={v8:0,v9:0,v10:0};
 export function soccerCodexMotionError(){return lastCodexError;}
+/** Why the Codex header clips (v22) were skipped (null when loaded or not asked for). */
+export function soccerHeaderMotionError(){return lastHeadersError;}
+/** Why the Codex beaten-keeper clips (v22) were skipped (null when loaded or not asked for). */
+export function soccerKeeperClipsError(){return lastKeeperClipsError;}
 /** One line for the load report / debug: which motion packs are in this match, and why one was skipped. */
 export const SLIDE_SLOW_SECONDS=.8,SLIDE_FALL_MAX_SPEED=1.5,SLIDE_SLOW_MIN_RECOVER=1,SLIDE_BLEND_IN=.1;
 /** On by default; `?soccerSlideSlow=0` restores the old timing. It only changes anything when the simulated recovery is 1 s or longer (the product
@@ -512,9 +533,16 @@ async function loadMotionPacks(){
   if(soccerKeeperV11Enabled()){try{v11=soccerV11States(await fetchJson(soccerV11ClipsUrl()));}catch(error){lastV11Error=String(error?.message||error);}}
   lastV12=null;
   if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length||soccerFeelEnabled())){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10,v8,v11});v9=o.v9;v10=o.v10;v8=o.v8;v11=o.v11;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
-  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12};
-  const states={...extra.states,...v8,...v9,...v10,...v11};
-  return {extra,v8,v9,v10,v11,states,extraClips:Object.keys(states)};
+  // Codex soccer-header-v1 (v22): six header clips. `?soccerHeaders=0` leaves the state set exactly as before.
+  let v22={};lastHeadersError=null;
+  if(soccerHeadersEnabled(null)){try{v22=soccerHeaderStates(await fetchJson(soccerHeaderClipsUrl()));}catch(error){lastHeadersError=String(error?.message||error);}}
+  // Codex soccer-keeper-crowd-v1 (v22): the beaten keeper's two clips. `?soccerKeeperCrowd=0` leaves the state set as before.
+  let v22k={};lastKeeperClipsError=null;
+  if(soccerKeeperCrowdEnabled(null)){try{v22k=soccerKeeperStates(await fetchJson(soccerKeeperClipsUrl()));}catch(error){lastKeeperClipsError=String(error?.message||error);}}
+  v22={...v22,...v22k};
+  motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12,headers:Object.keys(v22).length};
+  const states={...extra.states,...v8,...v9,...v10,...v11,...v22};
+  return {extra,v8,v9,v10,v11,v22,states,extraClips:Object.keys(states)};
 }
 /** The shared athlete body (athlete-body.mjs, 11/11): one realistic MakeHuman body for soccer and basketball, retargeted from the canonical
  * library through the world-basis map. LOD1 is the GLB's own economy mesh (same skeleton). Kits, numbers and faces come per player at
@@ -612,10 +640,10 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
             if(characterDisposed)return;
             const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
             if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
-            pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
+            pivot.position.set(stand?stand.x:p.x,motion.ownsHeight?0:Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
             this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
           },
-          metrics:()=>({kind:'athlete-body',set,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod:inst.lod,heightMetres:inst.height,armSwing:motion.armSwing.weight,slide:motion.slide}),
+          metrics:()=>({kind:'athlete-body',set,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod:inst.lod,heightMetres:inst.height,armSwing:motion.armSwing.weight,slide:motion.slide,header:motion.header}),
           dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(inst.root);inst.dispose();pivot.removeFromParent();},
         };
         mixer.update(0);characters.push(character);continue;
@@ -659,10 +687,10 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           if(characterDisposed)return;
           const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
           if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
-          pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
+          pivot.position.set(stand?stand.x:p.x,motion.ownsHeight?0:Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
-        metrics:()=>({kind:'design-glb-v2',set,fullTriangles:isV7?fullTriangleCount:undefined,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide}),
+        metrics:()=>({kind:'design-glb-v2',set,fullTriangles:isV7?fullTriangleCount:undefined,state:motion.state,lastTransition:motion.lastTransition,keeper:isKeeper,lod,heightMetres:height,armSwing:motion.armSwing.weight,slide:motion.slide,header:motion.header}),
         dispose(){if(characterDisposed)return;characterDisposed=true;mixer.stopAllAction();mixer.uncacheRoot(root);root.traverse(o=>o.skeleton?.dispose());pivot.removeFromParent();},
       };
       mixer.update(0);characters.push(character);
