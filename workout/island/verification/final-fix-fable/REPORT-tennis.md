@@ -108,6 +108,7 @@
 - `node --test tests/final-tennis.test.mjs`: 6 מתוך 6 עברו.
 - בדיקות הטניס הקיימות (`tests/island-tennis*.test.mjs`, `island-g4c..g4f`) + החדשות: 172, 170 עברו, 0 נכשלו, 2 מדולגות.
 - `node --test tests/*.mjs` המלא: 3735 בדיקות, 3669 עברו, **1 נכשלה**, 65 מדולגות. הנכשלת: `island-offline.test.mjs` "shell list is stale": קבצים חדשים של סוכני החלליות והספינות (`alien-move.mjs`, `naval-base-view.mjs`, `naval-supply*.mjs`) לא ברשימת ה-offline. לא טניס; התיקון: `node workout/island/tools/offline-shell.mjs` בסשן הריכוז (הקובץ `offline-manifest.json` משותף, לא נגעתי בו). כל בדיקות הטניס ירוקות.
+- סגירה, 12/11/2026, על הקוד הסופי של הענף (`island-offline.test.mjs` עוברת): `npm test` 3,786 בדיקות, 3,722 עברו, 0 נכשלו, 64 דולגו (יציאה 0).
 
 ## מה לא אומת
 - טלפון אמיתי: הכול ב-Chromium עם SwiftShader (רינדור איטי, שעון מדומה, דרגת רינדור אמצעית בכוונה). קצב הפריימים והתחושה באצבע לא נמדדו.
