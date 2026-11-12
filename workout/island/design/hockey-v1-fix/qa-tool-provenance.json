@@ -1,0 +1,51 @@
+{
+  "license": "CC0-1.0",
+  "source": "נגזר ממתאם PR 414; רק נתיב קובץ הקלט ופרטי מקור הוחלפו. בחירת idle/mirror, דגימות, מטא-דאטה ונוסחאות זהות.",
+  "toolCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "files": [
+    {
+      "name": "glb.mjs",
+      "expected": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "actual": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "name": "licenses.mjs",
+      "expected": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+      "actual": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    },
+    {
+      "name": "metrics.mjs",
+      "expected": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "actual": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "name": "report.mjs",
+      "expected": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+      "actual": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "name": "run.mjs",
+      "expected": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+      "actual": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "name": "sheets.mjs",
+      "expected": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+      "actual": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "name": "sources.json",
+      "expected": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+      "actual": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684"
+    },
+    {
+      "name": "sources.mjs",
+      "expected": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+      "actual": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0"
+    }
+  ],
+  "baselineExactMetricMatch": true,
+  "baselineMismatches": [],
+  "cliApiExactMetricMatch": true,
+  "retained": "כל JSON ו-SVG המקוריים; HTML הושמט כי נתיבי התצוגה שלו שייכים לכלי הזמני. preview.html בתיקיית התיקון מציג GLB לפני ואחרי."
+}

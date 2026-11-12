@@ -1,0 +1,2805 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "source": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1",
+  "baseCommit": "dc99f03416ca279b549b7f2db927ef7a6ac401e0",
+  "requestedBaseRef": "codex/hockey-v1",
+  "actualBaseRef": "codex/island-hockey-v1",
+  "branch": "codex/hockey-fix-v1",
+  "status": "טיוטה: 1 מ-15 התיקונים מוכן, 14 לא מוכנים לאחר 3 ניסיונות",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3017,
+      "sha256": "cf15f3412f2fb81613179c029109604c3ac2e557bcd8155a689b6bad72dbcfa0",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "REPORT-fix.md",
+      "bytes": 23192,
+      "sha256": "5462817421f447fac7a4ae53a119a9b727576b676b8cb72a44099997c0f27d31",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "clips.json",
+      "bytes": 3608154,
+      "sha256": "d1af8a2b281da4118d4d67f872e739f33149b6dc51b6791a965bfcf5a990645a",
+      "license": "CC0-1.0",
+      "source": "source/build-fix.mjs על תנועות CC0 של PR 414"
+    },
+    {
+      "path": "evidence/after/cli.log",
+      "bytes": 151,
+      "sha256": "a5136feb4baba0c5d95529205fe24ecc3ec699a202828ff6b3480c0860d043e2",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 10433,
+      "sha256": "d3531a989b1226d0863afc2e4d41f778c0c184aabe689370986095483bc87721",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12572,
+      "sha256": "45560d49abe3f3b9841bf9018ed89d914878ce1b97e1fb2190e9a13084c2235c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12709,
+      "sha256": "176dad3332a74adfeb9d7ff38a95d89266774ac7c455394a5bd5c56da3a88734",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12579,
+      "sha256": "1fe3fe589b564606b52caa37eb6ebcc66a113dac504e65564aee9ee7fd0f1a97",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12977,
+      "sha256": "d5a4bcc156249e43c034189af60eaaba9004dbd10e0262349455e610b4663e22",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13108,
+      "sha256": "7c8a43facdbcc17b257b62c156622bc0fffc800816c225ade0e51550bc1b06ce",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12109,
+      "sha256": "c43c26036e5045906b1f0bcab3b54af012e7b01ce5af6cf70770d579ab197a1c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12542,
+      "sha256": "2d4a31c0288a6d50411036e07ce00d5a12a32d3ade7aae1725fba78a6b8e7eac",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12510,
+      "sha256": "367049165381186ecc071aa4bc4891b58b14e0a3e8fbcb7b5a97c6f23b674cb6",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12569,
+      "sha256": "66d137f9f0638e4cae8257cb7b62975d0f46c497856e7c41f31e200a96563ff9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13026,
+      "sha256": "b97b06582e4d19324d9b00ac6f3edb4c9c613d27411d280a8dac58a49d550b96",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13095,
+      "sha256": "220efbf1b85c17c1e685ef91d06c583d28c2cc00f8f30e9575bbd619f5b7a266",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12508,
+      "sha256": "9593726da44b578b8e00cc40e1e829a605357d4a37676e6daf3cbdc351f17d4a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12557,
+      "sha256": "08f80cb4ae92cf40e1f9c3df134bdc955ba5f265d37c2514a20fdaa4659dd30f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12538,
+      "sha256": "82dad95bee8eedd1e8e0370cbcbeb6f547aea4f9531deaa8898219b3f6194346",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/report.json",
+      "bytes": 324293,
+      "sha256": "279883245deb6e1ee97cde93eb3b48602b5951fb2d29b0badc519c8274b16b80",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26237,
+      "sha256": "ab659216e8049fa307559dce758d7b022ee6d4215d8c76219b67cc34262350ba",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26239,
+      "sha256": "67fbe2f3c4cc565fa73f3812710a7b43ee2de0cf3ec8a1f32e4a739c0bb9b7a8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26235,
+      "sha256": "2117940b7cc5786181ba06456a9e4577fbc8e77e3cd7ecfb314d86dfe384990d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26239,
+      "sha256": "5594f34c21813e0f1f21d904ded5ccdb0f07f10f811ce948f4964f39ff38ac77",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26249,
+      "sha256": "434a5b81b5f1878884c4c02270e6eb59d218894b5ff1a6dc08fccd654f26a377",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26251,
+      "sha256": "373c1c54e0229346a50a490f4a442f9376d0509ad8d857416a6c3dd05794986b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26249,
+      "sha256": "2dfd32660a43c66c305ff6e90e0bae33769312735dcab6e71cf1942040a06651",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26251,
+      "sha256": "7a31fcaf8f4d59658c8339799d4511d18dee7cb834e30b8d29d9a697b4e71af4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26260,
+      "sha256": "bf9a881d2a4397c20b9f3ae826142e4d43219a6a212b64e6ee46dde468950d02",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26243,
+      "sha256": "9758f96e4875ba009c9b074cde8fea150368b5682dd3c142849d25f232e1e29e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26251,
+      "sha256": "0f95aeefa1f0ef3682d679d56114ab8a393cbc0852992362cbd0dc5a19c30d3d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26225,
+      "sha256": "8fb5bb1a6ad3e1adebac100ba1ed17bb1ec87f2f0672a3e47cb65f7eff3670fd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26231,
+      "sha256": "9f9c43b7abf3b598a52a8aaad410e3e43088c9dccf3fb0883a22401a9e9f26f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26231,
+      "sha256": "0ba9c2d688ae2a3cb7bca5c6c7f606f0e7b9aae8c34b211373f4dd39bec22eea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26231,
+      "sha256": "217ea7d0b9a820dc8db7dd367f8607110239de1edf358bcbf2081c636621943e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26231,
+      "sha256": "3588abf18c8d12ab2578700b6e772f006aeba4c49dc8ec7ca8f769e4cd92bfa4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26235,
+      "sha256": "8edd932678c21065032514670f5b7cbba1fd64ea441b1fa7dd835ef02eb3fcdc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26237,
+      "sha256": "2d300bf1555d1bc14d15e2ba1a188a2252c4240f7ddd65a17bbdcb87089946e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26252,
+      "sha256": "7ed55889b50951e4e0b8c2a1069ebe3d83c958ae89d655dde17cd75bb0c045ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26257,
+      "sha256": "f475588c5b409dafd3131a3a413aca95a84f1d4ed06b0ebc0fbd3ee27c1d41f4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26266,
+      "sha256": "7f36a03b9c1d32255ce81f793aaddcb711b60a2925d43a611928f3cb4a13c4eb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26239,
+      "sha256": "14b275f211a65dd667c9b7732571fa43448c7fb464c5e89545c863b5f8214b9f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26247,
+      "sha256": "d47de41fb11b86a3622c83d7c7088d21c307428ddb0bf54c46f047ff76e75a53",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26251,
+      "sha256": "c48cd7e048069b59481ebaec322820e990a2e0096cc10ac267941ac4aa7fca46",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26247,
+      "sha256": "2c850520dcc9f26cde0fb39ada29dd56f14579bc3ef5def262d4a3a3551219cd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26247,
+      "sha256": "bc0d9aeb125283358721cbf7a7cefa9312d291596f45ebf990d8a35d62534ecf",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26249,
+      "sha256": "fbb2951d697e47b1393e2b14cd4167d6d05f182e48151f26022960c143df262a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26245,
+      "sha256": "7e8ef84b54aff5571aeb6f6076bd47feec056972ed958e401d8052637194af63",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26243,
+      "sha256": "fdd53efde2377ed3817b6f9f0b31a93e6e62036f2785bca2da3f2c22861e3a69",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26243,
+      "sha256": "e45ef802ece1a9b70dfa8448abade4c77dc5119caa7ad989f23b11e0f6dc6a08",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/after/motion-measurements.json",
+      "bytes": 244591,
+      "sha256": "5771506d5b9e8865f30696fc52255b08bcd625f4d958b7f61e58db8061f190f2",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-1/cli.log",
+      "bytes": 155,
+      "sha256": "bb4a08fe4f745ef20bd53c5e25188b4e7fb7c72c3e8390628fd449b29a4da51b",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-1/clips.json",
+      "bytes": 3601925,
+      "sha256": "d3ce28b2a503ae95475a0b39e58f4087abc84ab329c96857487b64a6acd02ae5",
+      "license": "CC0-1.0",
+      "source": "source/build-fix.mjs על תנועות CC0 של PR 414"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 11067,
+      "sha256": "2c60925943fd56c617a6a2d727e31ee364e234aea8915bdcf7c8c661ba49604d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12565,
+      "sha256": "3b47472726ffdc30d24782c9893edb817e85f973ec546c853701e76c592bbb8f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12702,
+      "sha256": "fdcf7024c0160a9b6f41c38a9230e1c1e719634865bd7962a462e69644b4696b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12581,
+      "sha256": "fe0eab2394f1d033914a679c61430ee2eae560231e9ebfe0bc855ea87fdf1b94",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12950,
+      "sha256": "9b6ed718d591209d023dc91705c99686dcf126530f390b2cbd38597819b59008",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13081,
+      "sha256": "e7406d322b5dc8684fee2979b474258abc82e4f863586ef87d4e94b3848287bb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12240,
+      "sha256": "9fd7c66c8e428d474e4bcf40ac15d03d4dbcc56cda284fc681027ef26c5f9696",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12538,
+      "sha256": "3781ebac3fb73b1c1e136f9272c0dbc25bffe870316d26f408f0b5ae3caa5a53",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12501,
+      "sha256": "43508a66f774f0f8ab8eb5ad9cd29f93ca388911c759bc321a76dc0faf7b4344",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12557,
+      "sha256": "ff33f2749f6dedc021a55112039d752af3da3f8be578b54bf15b03607123a069",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13010,
+      "sha256": "f0b71693d157e5b988c642d0864daf0b57482b136e6fd63acfce537eac7cb1ca",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13091,
+      "sha256": "0fd1400355374c312c1941e798a95c768232796856d5e2532bc65668745081f2",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12508,
+      "sha256": "9593726da44b578b8e00cc40e1e829a605357d4a37676e6daf3cbdc351f17d4a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12543,
+      "sha256": "9e31aac8d12e81317d4b6537186476981f410853fe4090f27c412edefe74408d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12558,
+      "sha256": "6b9c1e853d21eff4895aa5558f50a5d65fa7a39859fc6faa0accadc809724913",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/report.json",
+      "bytes": 324900,
+      "sha256": "efcf9634b0e7ee43e709f08fa21ff6e080de90be838c3a1e7c99a2204a1007eb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26237,
+      "sha256": "ab659216e8049fa307559dce758d7b022ee6d4215d8c76219b67cc34262350ba",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26239,
+      "sha256": "67fbe2f3c4cc565fa73f3812710a7b43ee2de0cf3ec8a1f32e4a739c0bb9b7a8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26235,
+      "sha256": "2117940b7cc5786181ba06456a9e4577fbc8e77e3cd7ecfb314d86dfe384990d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26239,
+      "sha256": "1814e4a8c868a5a4558686f4a7050efb999115ca883df47c6b5361ec8e493893",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26249,
+      "sha256": "434a5b81b5f1878884c4c02270e6eb59d218894b5ff1a6dc08fccd654f26a377",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26251,
+      "sha256": "373c1c54e0229346a50a490f4a442f9376d0509ad8d857416a6c3dd05794986b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26249,
+      "sha256": "2dfd32660a43c66c305ff6e90e0bae33769312735dcab6e71cf1942040a06651",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26251,
+      "sha256": "21c7137557459e4e10238b78f4ceca164953718e93781be3b345c2b64e6ff9eb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26260,
+      "sha256": "249b638bc4801c7178e1867623d4f11613920cffc797c159bff45c14f816f492",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26243,
+      "sha256": "9758f96e4875ba009c9b074cde8fea150368b5682dd3c142849d25f232e1e29e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26251,
+      "sha256": "0f95aeefa1f0ef3682d679d56114ab8a393cbc0852992362cbd0dc5a19c30d3d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26225,
+      "sha256": "8fb5bb1a6ad3e1adebac100ba1ed17bb1ec87f2f0672a3e47cb65f7eff3670fd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26231,
+      "sha256": "9f9c43b7abf3b598a52a8aaad410e3e43088c9dccf3fb0883a22401a9e9f26f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26231,
+      "sha256": "0ba9c2d688ae2a3cb7bca5c6c7f606f0e7b9aae8c34b211373f4dd39bec22eea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26231,
+      "sha256": "217ea7d0b9a820dc8db7dd367f8607110239de1edf358bcbf2081c636621943e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26231,
+      "sha256": "3588abf18c8d12ab2578700b6e772f006aeba4c49dc8ec7ca8f769e4cd92bfa4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26235,
+      "sha256": "8edd932678c21065032514670f5b7cbba1fd64ea441b1fa7dd835ef02eb3fcdc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26237,
+      "sha256": "2d300bf1555d1bc14d15e2ba1a188a2252c4240f7ddd65a17bbdcb87089946e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26252,
+      "sha256": "26e747da35ccf57ce77144ead408b445f3af0e6e91942d095b92a60085a6b8f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26257,
+      "sha256": "26cdfe46500b5686ec7c6f573ccf281a378b2f3883545841d8783cf31415fac8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26266,
+      "sha256": "180881574cc8c79d1aad1e18bf6972b980bee861d2f00ee441852b8c6a792e16",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26239,
+      "sha256": "42ec64e4d20d79363b2b6311b9b9d4dba1891beb657070b25cf72f7e6dafd16e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26247,
+      "sha256": "6dd0183255fd3fd291a7c46f59322fe34761063fe1ffa5660f8c5301ea05c299",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26251,
+      "sha256": "f6eb664b7b47979ee50bdeb8075a70009bad12f0b9a46c28eb236259ecb3f373",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26247,
+      "sha256": "4bcee541aa60bc0624a9ad026ce5271f77826a9ba98ab3eb0a33d12f72aaa9c1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26247,
+      "sha256": "5a7da45f02d1405a16116ffdddef5cf546c6a150a8de4a614abd3f829a3a85e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26249,
+      "sha256": "3e70c7d7ebf8f4a2dcf8dbf8833096acc6fc039cf95f653b3412ab4ce639b32a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26245,
+      "sha256": "7e8ef84b54aff5571aeb6f6076bd47feec056972ed958e401d8052637194af63",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26243,
+      "sha256": "6fdf0275e51d238e9da67ad186807f9d27dadaaf92157b5a0c298f03b6624434",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26243,
+      "sha256": "0d35c06d1cea4256dca62997fe3d91381b423c7874847a3112458cfeb5f3e5ea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-1/motion-measurements.json",
+      "bytes": 245024,
+      "sha256": "977e73964d68c5c3b026d948624b0256289f06bc1e319b551b0dbeb9e3ae7731",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-2/cli.log",
+      "bytes": 155,
+      "sha256": "ae3c44aaa7c8f30573a9ca11ffdebf9174e96ff18a0db690b38b12f583f33f92",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-2/clips.json",
+      "bytes": 3607975,
+      "sha256": "a8de3ca946eb0dedb1492399d21f9e19e94a2a79fe68396595c4ef5810dabaed",
+      "license": "CC0-1.0",
+      "source": "source/build-fix.mjs על תנועות CC0 של PR 414"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 10433,
+      "sha256": "d3531a989b1226d0863afc2e4d41f778c0c184aabe689370986095483bc87721",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12570,
+      "sha256": "b36f6e1b674203e059c62f25104b617aebc83bf1be21d0ab17e24b4c2a58884e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12707,
+      "sha256": "04654efafa247d385895f47cf51b6ddd3dab18318d67356c6ee6e17211b44409",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12576,
+      "sha256": "731070e521b5267b775ac276aa016fd8b285601298c77780b0cb2654490640b2",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12947,
+      "sha256": "531759ce3d5a133740439ee8df60cca8134b61acd48c423616d0df9f8c31a819",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13080,
+      "sha256": "8432711b7be8757d7dd8f68e46719edbc6ee46821be8d1849936b43350631678",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12097,
+      "sha256": "3cdad6dece2a3c0ad54a54fc936443f65c524a1a5cf1c1fab6e220794d3283cc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12525,
+      "sha256": "3baf2effaef0f5adfff918c94174448653819155869a5950774a1f0a890318e4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12493,
+      "sha256": "e054f50d97321f5a2cf140829fc8a4cb34b83bf7779cf12797a09088d4904a93",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12566,
+      "sha256": "07bfba785fd2e0317fb1bfe5213a44b9fc1933805eb27e405125a6c2cd50ab64",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13020,
+      "sha256": "86c7fa55bd82b1ed3563e32653e954040a17d850e6f655a84ed4cc00856c3718",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13092,
+      "sha256": "4cb171794660406a79c61735cbb767b7e64c84fbeb24821bbaf238a473e368cd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12485,
+      "sha256": "a6d1b633a4c311386ce00064ac23e6892733dfe644f987211ad83b41498881db",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12532,
+      "sha256": "b7905c6ea516e94b829ec839777b971367ee1c3813ff4a98868318ed32587967",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12543,
+      "sha256": "494f286b2b658798ecf0e50eef6fc4482660282e91b33b60fabc6f94b67b49d4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/report.json",
+      "bytes": 324145,
+      "sha256": "058ffee79310c105faa0f92d682fe70b6bb01a025fbb3df1aa1dac19fbe26ef9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26237,
+      "sha256": "ab659216e8049fa307559dce758d7b022ee6d4215d8c76219b67cc34262350ba",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26239,
+      "sha256": "67fbe2f3c4cc565fa73f3812710a7b43ee2de0cf3ec8a1f32e4a739c0bb9b7a8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26235,
+      "sha256": "2117940b7cc5786181ba06456a9e4577fbc8e77e3cd7ecfb314d86dfe384990d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26239,
+      "sha256": "5594f34c21813e0f1f21d904ded5ccdb0f07f10f811ce948f4964f39ff38ac77",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26249,
+      "sha256": "434a5b81b5f1878884c4c02270e6eb59d218894b5ff1a6dc08fccd654f26a377",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26251,
+      "sha256": "373c1c54e0229346a50a490f4a442f9376d0509ad8d857416a6c3dd05794986b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26249,
+      "sha256": "2dfd32660a43c66c305ff6e90e0bae33769312735dcab6e71cf1942040a06651",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26251,
+      "sha256": "594be5131f3542b599d362ff49a345768674023b97de8069fe32739d133c16a1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26260,
+      "sha256": "aff8989b8bc4784b93f205136a78e9c4788caba8fbdfcb3a5db44470dc893111",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26243,
+      "sha256": "9758f96e4875ba009c9b074cde8fea150368b5682dd3c142849d25f232e1e29e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26251,
+      "sha256": "0f95aeefa1f0ef3682d679d56114ab8a393cbc0852992362cbd0dc5a19c30d3d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26225,
+      "sha256": "8fb5bb1a6ad3e1adebac100ba1ed17bb1ec87f2f0672a3e47cb65f7eff3670fd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26231,
+      "sha256": "9f9c43b7abf3b598a52a8aaad410e3e43088c9dccf3fb0883a22401a9e9f26f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26231,
+      "sha256": "0ba9c2d688ae2a3cb7bca5c6c7f606f0e7b9aae8c34b211373f4dd39bec22eea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26231,
+      "sha256": "217ea7d0b9a820dc8db7dd367f8607110239de1edf358bcbf2081c636621943e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26231,
+      "sha256": "3588abf18c8d12ab2578700b6e772f006aeba4c49dc8ec7ca8f769e4cd92bfa4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26235,
+      "sha256": "8edd932678c21065032514670f5b7cbba1fd64ea441b1fa7dd835ef02eb3fcdc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26237,
+      "sha256": "2d300bf1555d1bc14d15e2ba1a188a2252c4240f7ddd65a17bbdcb87089946e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26252,
+      "sha256": "1c1abdb70550ccc86775980b6788c390f31afd495115347eb010759ecf631df8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26257,
+      "sha256": "61eeb637ce7f35852955ed29ddeede6ec130006caf52ac248b3c1bd316d9d1c2",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26266,
+      "sha256": "e3ae6955d0372008fe74d18912d0180e8ded2f71a5594ccf99612545e2ab237d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26239,
+      "sha256": "6b4c4724f626437d4fbee2f30bf4d5f42ffc78c62f51e68e1fb01077379b3311",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26247,
+      "sha256": "edb08d0f07b94074f89df3187b185ab68db64f2570d506791ff92551209d2f50",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26251,
+      "sha256": "bf5313cec58a1088d5d08ee44ab07741c029bcb353314f8e1f99e0685a9d9b12",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26247,
+      "sha256": "45ce5868f38cfd49b9bae8ed5ebcd314059ff967590ea8d312acfa59172efffa",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26247,
+      "sha256": "871dd5251b6583dc4dae7a8ef4ad1adcd7eb14fad4c6173f4a40a56b0d504692",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26249,
+      "sha256": "93d2f176f9d519042ddbb038d888261bdd04b380a93193a03a2db81b348832a1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26245,
+      "sha256": "e98d080988f240d370d15a0971ae96d1e5a2ca2328f22b4b421886874eebf968",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26243,
+      "sha256": "6a7a0d6169e0967a4c4cfe5800ec3467a45605cc7ebaec8191226b3aa4f9d63a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26243,
+      "sha256": "8c37b579424e3e2e1323205c0d63bda9acb4225270ea619ac40b51c004d4c403",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-2/motion-measurements.json",
+      "bytes": 244391,
+      "sha256": "e8fb36006365db54b797f7c35514ca9f951ebae6344be35cfd2250862dc3dd7d",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-3/cli.log",
+      "bytes": 155,
+      "sha256": "685098104e4c3b93b0528e797fada4d067021bf6ca825f0ee2f5ce33fbc90672",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/attempt-3/clips.json",
+      "bytes": 3607754,
+      "sha256": "34440b1c5e8e05c38657a5b57b448d17adc2d4e8a57d5b9c0d8f50e165bdcf5d",
+      "license": "CC0-1.0",
+      "source": "source/build-fix.mjs על תנועות CC0 של PR 414"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 10468,
+      "sha256": "a27caad11ab529ee7f67d8e9cd5ece8f28916f528546f913ac86bde1c8a6e16e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12572,
+      "sha256": "45560d49abe3f3b9841bf9018ed89d914878ce1b97e1fb2190e9a13084c2235c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12709,
+      "sha256": "176dad3332a74adfeb9d7ff38a95d89266774ac7c455394a5bd5c56da3a88734",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12579,
+      "sha256": "1fe3fe589b564606b52caa37eb6ebcc66a113dac504e65564aee9ee7fd0f1a97",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12977,
+      "sha256": "d5a4bcc156249e43c034189af60eaaba9004dbd10e0262349455e610b4663e22",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13108,
+      "sha256": "7c8a43facdbcc17b257b62c156622bc0fffc800816c225ade0e51550bc1b06ce",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12109,
+      "sha256": "c43c26036e5045906b1f0bcab3b54af012e7b01ce5af6cf70770d579ab197a1c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12542,
+      "sha256": "2d4a31c0288a6d50411036e07ce00d5a12a32d3ade7aae1725fba78a6b8e7eac",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12510,
+      "sha256": "367049165381186ecc071aa4bc4891b58b14e0a3e8fbcb7b5a97c6f23b674cb6",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12569,
+      "sha256": "66d137f9f0638e4cae8257cb7b62975d0f46c497856e7c41f31e200a96563ff9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13026,
+      "sha256": "b97b06582e4d19324d9b00ac6f3edb4c9c613d27411d280a8dac58a49d550b96",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13095,
+      "sha256": "220efbf1b85c17c1e685ef91d06c583d28c2cc00f8f30e9575bbd619f5b7a266",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12477,
+      "sha256": "34a0f9d0968bc3aadfcd1cd6359709f85599ac0adfa46fdc09e42354ebac43f4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12557,
+      "sha256": "08f80cb4ae92cf40e1f9c3df134bdc955ba5f265d37c2514a20fdaa4659dd30f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12538,
+      "sha256": "82dad95bee8eedd1e8e0370cbcbeb6f547aea4f9531deaa8898219b3f6194346",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/report.json",
+      "bytes": 324278,
+      "sha256": "1468f4dcaac555a20f7878cf06d937b4c82a94ac02bf380b4fb69c5197e2d327",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26237,
+      "sha256": "ab659216e8049fa307559dce758d7b022ee6d4215d8c76219b67cc34262350ba",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26239,
+      "sha256": "67fbe2f3c4cc565fa73f3812710a7b43ee2de0cf3ec8a1f32e4a739c0bb9b7a8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26235,
+      "sha256": "2117940b7cc5786181ba06456a9e4577fbc8e77e3cd7ecfb314d86dfe384990d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26239,
+      "sha256": "f69bea14bc7e12e0750ca5709ba167cbef4bf4966c8965c49ff61a8885707996",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26249,
+      "sha256": "434a5b81b5f1878884c4c02270e6eb59d218894b5ff1a6dc08fccd654f26a377",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26251,
+      "sha256": "373c1c54e0229346a50a490f4a442f9376d0509ad8d857416a6c3dd05794986b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26249,
+      "sha256": "2dfd32660a43c66c305ff6e90e0bae33769312735dcab6e71cf1942040a06651",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26251,
+      "sha256": "7a31fcaf8f4d59658c8339799d4511d18dee7cb834e30b8d29d9a697b4e71af4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26260,
+      "sha256": "bf9a881d2a4397c20b9f3ae826142e4d43219a6a212b64e6ee46dde468950d02",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26243,
+      "sha256": "9758f96e4875ba009c9b074cde8fea150368b5682dd3c142849d25f232e1e29e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26251,
+      "sha256": "0f95aeefa1f0ef3682d679d56114ab8a393cbc0852992362cbd0dc5a19c30d3d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26225,
+      "sha256": "8fb5bb1a6ad3e1adebac100ba1ed17bb1ec87f2f0672a3e47cb65f7eff3670fd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26231,
+      "sha256": "9f9c43b7abf3b598a52a8aaad410e3e43088c9dccf3fb0883a22401a9e9f26f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26231,
+      "sha256": "0ba9c2d688ae2a3cb7bca5c6c7f606f0e7b9aae8c34b211373f4dd39bec22eea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26231,
+      "sha256": "217ea7d0b9a820dc8db7dd367f8607110239de1edf358bcbf2081c636621943e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26231,
+      "sha256": "3588abf18c8d12ab2578700b6e772f006aeba4c49dc8ec7ca8f769e4cd92bfa4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26235,
+      "sha256": "8edd932678c21065032514670f5b7cbba1fd64ea441b1fa7dd835ef02eb3fcdc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26237,
+      "sha256": "2d300bf1555d1bc14d15e2ba1a188a2252c4240f7ddd65a17bbdcb87089946e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26252,
+      "sha256": "7ed55889b50951e4e0b8c2a1069ebe3d83c958ae89d655dde17cd75bb0c045ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26257,
+      "sha256": "f475588c5b409dafd3131a3a413aca95a84f1d4ed06b0ebc0fbd3ee27c1d41f4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26266,
+      "sha256": "7f36a03b9c1d32255ce81f793aaddcb711b60a2925d43a611928f3cb4a13c4eb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26239,
+      "sha256": "14b275f211a65dd667c9b7732571fa43448c7fb464c5e89545c863b5f8214b9f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26247,
+      "sha256": "d47de41fb11b86a3622c83d7c7088d21c307428ddb0bf54c46f047ff76e75a53",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26251,
+      "sha256": "c48cd7e048069b59481ebaec322820e990a2e0096cc10ac267941ac4aa7fca46",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26247,
+      "sha256": "2c850520dcc9f26cde0fb39ada29dd56f14579bc3ef5def262d4a3a3551219cd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26247,
+      "sha256": "bc0d9aeb125283358721cbf7a7cefa9312d291596f45ebf990d8a35d62534ecf",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26249,
+      "sha256": "fbb2951d697e47b1393e2b14cd4167d6d05f182e48151f26022960c143df262a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26245,
+      "sha256": "16b6b36a2ed268cd4c0122962f4e58084d790155174884aa2ba05bed2c9b3c1f",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26243,
+      "sha256": "fdd53efde2377ed3817b6f9f0b31a93e6e62036f2785bca2da3f2c22861e3a69",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26243,
+      "sha256": "e45ef802ece1a9b70dfa8448abade4c77dc5119caa7ad989f23b11e0f6dc6a08",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/attempt-3/motion-measurements.json",
+      "bytes": 244602,
+      "sha256": "9b42a3ebe469c044b8479e6e64780f23cedeaa26a486b2fc7125196fa4e55737",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/before/cli.log",
+      "bytes": 152,
+      "sha256": "2029a975e468b51b9c15a6b1b2a8ed9f2406c978b796bbae4776fdb92c81582a",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 11406,
+      "sha256": "1e842b935edb674f59248c29935bebb8ebe122e4527b6d02237f1e8b5f54092a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12572,
+      "sha256": "208febcaeeec4641c9649c111876eaa8c33e42bafb8c66ee488582005ad6ce9e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12713,
+      "sha256": "e9fa07b61002e484c4ad2da979b784c4041e12948eb7a7aeecb28909a6db6c96",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12581,
+      "sha256": "9bab5301b2e07fe7f1377ea009ab87d3a43723e033d1966997426480eb1aee89",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12955,
+      "sha256": "1025249f447f3a758ade57e5c6afcadb1eed5d5ba21f9e0f83acec287fdeee8c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13080,
+      "sha256": "7d701f06fff2f5d9030d481f42a4c01ecfac13f82952345937db6ba79cc95556",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12240,
+      "sha256": "9fd7c66c8e428d474e4bcf40ac15d03d4dbcc56cda284fc681027ef26c5f9696",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12540,
+      "sha256": "30e005db42876a8173872298501b59e0e846ee043e7d1ab925c59a3d48fdc7e6",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12497,
+      "sha256": "bc3b635144812ad5762e2c328779e670f5a085f9a938dfa7dfeb5ea53988d1e3",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12561,
+      "sha256": "d3bddd596b55dfba71ad040d7a7a6060141c73e1d323edb60bf97e5a70f53407",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13011,
+      "sha256": "bd49ddf9b6c5642e3638fb9b46a65fd7a51add994435d1ce03c50eab24593d06",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13091,
+      "sha256": "5808c44d9193a35d923c31fe55f6ca84645d1e481a81e28d80874c3bc707c157",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12508,
+      "sha256": "6d0ea6ee9df8580fc8d22e5540bb702926ec526bfdf86a5bde910400bdaef21e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12543,
+      "sha256": "9314e83144b9590a66ec08a624d7698d5a86075c396827b579be2d5963d893f7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12558,
+      "sha256": "78faabda4336e148f73b0a631c37d2629b7b1ba7e9623aebb1839bbd2e588b74",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/report.json",
+      "bytes": 324376,
+      "sha256": "ea944d0acd527531c684a8e1f0c65f1ceed9d75e2eec433c43d1d7ad2781dbfe",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26237,
+      "sha256": "ab659216e8049fa307559dce758d7b022ee6d4215d8c76219b67cc34262350ba",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26239,
+      "sha256": "67fbe2f3c4cc565fa73f3812710a7b43ee2de0cf3ec8a1f32e4a739c0bb9b7a8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26235,
+      "sha256": "2117940b7cc5786181ba06456a9e4577fbc8e77e3cd7ecfb314d86dfe384990d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26239,
+      "sha256": "7518c9dac7cf3992c422a15a1353217e7e3c1a7dd1119dc95d8cd053a254a065",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26249,
+      "sha256": "434a5b81b5f1878884c4c02270e6eb59d218894b5ff1a6dc08fccd654f26a377",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26251,
+      "sha256": "373c1c54e0229346a50a490f4a442f9376d0509ad8d857416a6c3dd05794986b",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26249,
+      "sha256": "2dfd32660a43c66c305ff6e90e0bae33769312735dcab6e71cf1942040a06651",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26251,
+      "sha256": "ce4a2a45dbc4f6755e3d7a5fb91f5ca8c7376bcb70a8ad63696d37cccdac5f1c",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26260,
+      "sha256": "0fcecdd940d1efcd87c910361423d5d3e4742dfc5bc2d52ef3cb15b5608b48af",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26243,
+      "sha256": "9758f96e4875ba009c9b074cde8fea150368b5682dd3c142849d25f232e1e29e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26251,
+      "sha256": "0f95aeefa1f0ef3682d679d56114ab8a393cbc0852992362cbd0dc5a19c30d3d",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26225,
+      "sha256": "8fb5bb1a6ad3e1adebac100ba1ed17bb1ec87f2f0672a3e47cb65f7eff3670fd",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26231,
+      "sha256": "9f9c43b7abf3b598a52a8aaad410e3e43088c9dccf3fb0883a22401a9e9f26f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26231,
+      "sha256": "0ba9c2d688ae2a3cb7bca5c6c7f606f0e7b9aae8c34b211373f4dd39bec22eea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26231,
+      "sha256": "217ea7d0b9a820dc8db7dd367f8607110239de1edf358bcbf2081c636621943e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26231,
+      "sha256": "3588abf18c8d12ab2578700b6e772f006aeba4c49dc8ec7ca8f769e4cd92bfa4",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26235,
+      "sha256": "8edd932678c21065032514670f5b7cbba1fd64ea441b1fa7dd835ef02eb3fcdc",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26237,
+      "sha256": "2d300bf1555d1bc14d15e2ba1a188a2252c4240f7ddd65a17bbdcb87089946e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26252,
+      "sha256": "26e747da35ccf57ce77144ead408b445f3af0e6e91942d095b92a60085a6b8f5",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26257,
+      "sha256": "26cdfe46500b5686ec7c6f573ccf281a378b2f3883545841d8783cf31415fac8",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26266,
+      "sha256": "180881574cc8c79d1aad1e18bf6972b980bee861d2f00ee441852b8c6a792e16",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26239,
+      "sha256": "42ec64e4d20d79363b2b6311b9b9d4dba1891beb657070b25cf72f7e6dafd16e",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26247,
+      "sha256": "6dd0183255fd3fd291a7c46f59322fe34761063fe1ffa5660f8c5301ea05c299",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26251,
+      "sha256": "f6eb664b7b47979ee50bdeb8075a70009bad12f0b9a46c28eb236259ecb3f373",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26247,
+      "sha256": "4bcee541aa60bc0624a9ad026ce5271f77826a9ba98ab3eb0a33d12f72aaa9c1",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26247,
+      "sha256": "5a7da45f02d1405a16116ffdddef5cf546c6a150a8de4a614abd3f829a3a85e7",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26249,
+      "sha256": "3e70c7d7ebf8f4a2dcf8dbf8833096acc6fc039cf95f653b3412ab4ce639b32a",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26245,
+      "sha256": "7e8ef84b54aff5571aeb6f6076bd47feec056972ed958e401d8052637194af63",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26243,
+      "sha256": "6fdf0275e51d238e9da67ad186807f9d27dadaaf92157b5a0c298f03b6624434",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26243,
+      "sha256": "0d35c06d1cea4256dca62997fe3d91381b423c7874847a3112458cfeb5f3e5ea",
+      "license": "CC0-1.0",
+      "source": "run.mjs המקורי, PR 371, דרך source/qa-loader.mjs ו-source/qa-adapter.mjs"
+    },
+    {
+      "path": "evidence/before/motion-measurements.json",
+      "bytes": 245208,
+      "sha256": "a25f39da47cf3a6e22f83b441c60d1512d877153308466758c1ecd8828ea5fb7",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/measure.json",
+      "bytes": 8810,
+      "sha256": "42a0e503b3663f82d74f72358c96e6f75467cd50132a5d2542a2c05a3d817e93",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/brake.svg",
+      "bytes": 89962,
+      "sha256": "298316636449779e13f42461b6d3e063402ead7f3424e06f49f9d51e53d61551",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/cut.svg",
+      "bytes": 89982,
+      "sha256": "15f82e28256b7a857559a56c68e7fe6985fab2f5ec918238aff4e3f7b2fe4bcf",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/idle.svg",
+      "bytes": 89972,
+      "sha256": "872afbc8178781a5ac96bfc25fe95fa2eb8ab2c0cd5167f62c6536f4fea13eaf",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/run.svg",
+      "bytes": 150608,
+      "sha256": "beb6921108a10d30c137cd78b0381939d542d18bed2dc3986a22c7a9d55b7c38",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/sprint.svg",
+      "bytes": 89966,
+      "sha256": "f4a12ce1d42bc9f4ddf0e28a0e133b41da88411adee6089ea7f10bb040609b53",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/canonical-baseline/tables.md",
+      "bytes": 2063,
+      "sha256": "8fb2ec170604b48b51e72ba5bc62d27f4ad9d86daa7c4b32ba55f77b658a9338",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/changes.json",
+      "bytes": 13425,
+      "sha256": "649c8300e052286c7c31fdf41a367cd981315f275d8419baa49a27a566a771fc",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/mesh-contact.json",
+      "bytes": 579468,
+      "sha256": "96ab98e6a277882cb4f14b21cafea5d188187fa12e852a47370aa6ad9fa69a0e",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/unified-athletes-tests.log",
+      "bytes": 1653,
+      "sha256": "ec7bddead9dc20b2439ef0ae8e0a0c7eddf53fe4f1b2682b06759532ecda438b",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "evidence/validation.json",
+      "bytes": 15423,
+      "sha256": "9412f33614a0b1a5f47595849ce3caf2e8fe959e2a75639edf58c0811bfa19e4",
+      "license": "CC0-1.0",
+      "source": "תוצר הפקודות המתועדות ב-REPORT-fix.md"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 18707,
+      "sha256": "87a9d6231ba7af2318fa8a4af2b6fcfc4b0ae8cc02c3441a9fa429d17f525aab",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "preview/browser-evidence.json",
+      "bytes": 161383,
+      "sha256": "bb0d01b0a1bd6d30eddf233355f640f9fdb68ea5cef7c5bb2d85948913d95143",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "preview/gallery.png",
+      "bytes": 558253,
+      "sha256": "0517e3131d4624365d870628e0b2d9bb460ce2dcf33e30e18bb4c673afba048a",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "qa-tool-provenance.json",
+      "bytes": 2285,
+      "sha256": "86adc2ff4cdd2b9c87ee80601769d241e4c97f2468fcc3dd9f08478681a3c2f8",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "sheets/after/celebrate_3.png",
+      "bytes": 490124,
+      "sha256": "1dfdb2eddba48bdfa087ad61a5757d0df0854c6e5bad50b56cf74381faf892ec",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/goalie_slide_left.png",
+      "bytes": 572612,
+      "sha256": "2d5ad6537bb770da768609776537fef2e6a7f7aa5f480af6f1dafe9afb26a550",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/goalie_slide_right.png",
+      "bytes": 567980,
+      "sha256": "ad4aa4763cee07e315c8aeda4df7f22f364df7cd3aa4979311ef93c263e737e6",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_backward.png",
+      "bytes": 566025,
+      "sha256": "86de35f696ba1b4db923364c9ed506b0d02faa5d0a55fc5b0038c6ed72fad5af",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_crossover_left.png",
+      "bytes": 560499,
+      "sha256": "6cecfd27c1eefcbc60b9c9025925adb90c12de29c4083df45ae1e3c8cc8a0dff",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_crossover_right.png",
+      "bytes": 568577,
+      "sha256": "0b777b11f17c069ba953c305cdf82bb5330af0266013dfce2511e27b33611285",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_glide.png",
+      "bytes": 551129,
+      "sha256": "721c7996ad749a71f7c0362bf4f6e2c9d2e4a50a5c765c33cea37d1c5ccc3ec2",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_push_fast.png",
+      "bytes": 573680,
+      "sha256": "ca3b22187624e5e779e4a7ad60223f2e7c45aebe1c08b7e6f4bc238b2390d31e",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_push_medium.png",
+      "bytes": 570414,
+      "sha256": "d87316dfb3ac2da29f048d2b778762f302741d6db6d058a5fee00c7f48278557",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_push_slow.png",
+      "bytes": 568393,
+      "sha256": "23a43552ac035b815edba31c5a2a5e24ce4dbda10aee4b4e458a9a2ef887c579",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_stop_left.png",
+      "bytes": 595678,
+      "sha256": "61e8616badf0b77fdd834a19ba0052310f861e360fe2290eb8a3626144032500",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_stop_right.png",
+      "bytes": 562942,
+      "sha256": "6e324ae879add71d43395054c8ecd65808cc70bd259e61e0ac51adcf8046ab43",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_turn_180.png",
+      "bytes": 581708,
+      "sha256": "588597ac3659557882f133c250c12d50d4b9cdc288160f86654e9091188f6bfc",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_turn_45.png",
+      "bytes": 577343,
+      "sha256": "ffb3020a2cc0cebfe85788e9cc15ed98c8b98908b92e0aa6586f56ed0a32dafb",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/after/skate_turn_90.png",
+      "bytes": 585778,
+      "sha256": "239d62e74e4fab28e01a71661a5ef920d03467597f72ad93ad76eed6734252e9",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/celebrate_3.png",
+      "bytes": 566674,
+      "sha256": "43a1442885f6cf368ba0836072a0a456c55c928b3758d912df754503072596d7",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/goalie_slide_left.png",
+      "bytes": 574925,
+      "sha256": "414f0b362ee055e2f4ac1bd7c49dbd22602ed0bab0229d5455134e6b22ac0514",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/goalie_slide_right.png",
+      "bytes": 571468,
+      "sha256": "88e9c417d70719ef96595ba432a7c19dfc5f8dba44640f30e78dc1494545a8b2",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_backward.png",
+      "bytes": 566638,
+      "sha256": "5086fc3885ab713f7474cd5995882d654a20ee510e524bb5019535ed33f9ceb2",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_crossover_left.png",
+      "bytes": 501991,
+      "sha256": "2c193f9a875aa8ddba8ce71e8d5e577d1c3ab6b253018f473639a9fc6ad26b24",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_crossover_right.png",
+      "bytes": 503145,
+      "sha256": "1c1b1c8bdf89cfff1ada59096a3ee23628e80dde5f717c9cc3e87afc99adf371",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_glide.png",
+      "bytes": 510854,
+      "sha256": "0e4bd7a2c5c9215f91d60df90c9b9ee98e14f75b77bb850b191c55fbb2f5739e",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_push_fast.png",
+      "bytes": 575811,
+      "sha256": "608e8e10a16dac470400c68deccd86229300e43210b31da202e6a430db25abf7",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_push_medium.png",
+      "bytes": 573433,
+      "sha256": "991ae647f64dbaf98ecf88abadeabde2bd76609aeffb9a1f89219b462f0e9433",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_push_slow.png",
+      "bytes": 570955,
+      "sha256": "280cfc67750c71c862396f50c6e94ae9595fc72ccb408d2ce26a92c389f31734",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_stop_left.png",
+      "bytes": 598003,
+      "sha256": "5913c63aa8ed3a18594e498eb95dad2af3c181d01ecad16e1205d6f5a5909674",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_stop_right.png",
+      "bytes": 565254,
+      "sha256": "26715caf8fd7e421e6eee8196a57881a7c7b25616fa220fd388bb3ec4fd51f6d",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_turn_180.png",
+      "bytes": 580987,
+      "sha256": "d2d7ed65d9c3d4d523b157744ffab94d8443e9a3473eb9def8d98d2226cfa027",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_turn_45.png",
+      "bytes": 577796,
+      "sha256": "fd37a2cbbb5efa50c2d7c83ff3f40369eee5a15e143d86eecbe1640bb336f083",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/before/skate_turn_90.png",
+      "bytes": 581500,
+      "sha256": "d62bce11444658e173b66a52aa7aee9b06690b65c7c0c5a2bd321d5168c58ac8",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/celebrate_3.png",
+      "bytes": 691787,
+      "sha256": "eded078037f3d3c26ab4cffd6c75414c08cc2f87b14d3cb4fd182f5faf248dad",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/goalie_slide_left.png",
+      "bytes": 776027,
+      "sha256": "5cf9479e316273f24d307178219fce36cdbea82909bab82a7b5b58031720e627",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/goalie_slide_right.png",
+      "bytes": 769764,
+      "sha256": "35ae369d8603dfa58576678bce0f8d3e320add8a5bac4ab17f0e27d9a8c96b9a",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_backward.png",
+      "bytes": 757715,
+      "sha256": "c1195b1b6c80ca693fb8e2a060c7c10f59bf3d3a84b129eed12c5e6b23dc49e0",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_crossover_left.png",
+      "bytes": 715857,
+      "sha256": "5e6dcf26403dbba585e77f097d0e17a60ded6b4fe047e0d646beb838ec04e7a4",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_crossover_right.png",
+      "bytes": 722865,
+      "sha256": "c267d2812b2d0f38ba025289255fa295157cc269bad6e66d72d5cdc7873bef9a",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_glide.png",
+      "bytes": 723936,
+      "sha256": "cea2c3c446f2fa7cdbb40aaf4049fe18164b1f99d07071bbf01524ae2a281f6a",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_push_fast.png",
+      "bytes": 764046,
+      "sha256": "22e507b05addf610892ee4aa1167a2c12138066b40fd848da4d9088f8ca7cfc8",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_push_medium.png",
+      "bytes": 763798,
+      "sha256": "43d728bc74d88705f5c79e335eb484c0332d8e37103c47fa5d4b070ae87737d5",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_push_slow.png",
+      "bytes": 763236,
+      "sha256": "63cdd88415fa08f6762f4f8572ec37af13551835927a93cf2824567ee4e9013b",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_stop_left.png",
+      "bytes": 767288,
+      "sha256": "f628f5c4bf71f068a6c3d64eb59ad914a335d8289a50f23e543378598010914e",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_stop_right.png",
+      "bytes": 720536,
+      "sha256": "92b8b3273ccb1d6c03b83111e60ce68a6ae9602bb0eeef66356ca4896c95ed0a",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_turn_180.png",
+      "bytes": 751810,
+      "sha256": "3e983a18c75eaddf55960488afe982526d72323c5be2932996555f63b4ee4137",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_turn_45.png",
+      "bytes": 748670,
+      "sha256": "c1c333ad7407cadd3a6bfdf382f0868b06399c3a27f3ee86b9edab8ebc3cbb79",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "sheets/comparison/skate_turn_90.png",
+      "bytes": 755788,
+      "sha256": "3b7350e380b1b7d68c112f6750f67e75e521896a4627c236a6729252f7bd62d1",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs; GLB מקוריים ו-clips.json לפני/אחרי"
+    },
+    {
+      "path": "source/build-fix.mjs",
+      "bytes": 2770,
+      "sha256": "6716ff943b27f4b60035be976297e15892728a1fc5c3f6c0ef917200d05b85af",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/build-manifest.mjs",
+      "bytes": 2773,
+      "sha256": "06de1493e835dc4477efac2cfbc2546fbd7f8d446380eaa181fb31fbb86b2bf3",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/build-report.mjs",
+      "bytes": 21994,
+      "sha256": "ef158ca67a4c2c979be1ef0879e7c1dbfec720910994707c07f4aa9df7c436f1",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/edge-fixes.mjs",
+      "bytes": 5591,
+      "sha256": "757d0e9bccaf67082c7f0823443b663645d1bf7c3c3a7a471d16658454ba6432",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/goalie-fixes.mjs",
+      "bytes": 7741,
+      "sha256": "01391feb2d7d0e2d146fc44d337579b774b1febd1822e1bc84244e11692885c8",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/mesh-contact-audit.mjs",
+      "bytes": 6487,
+      "sha256": "b571cde07b369e5d6c2af2e8cfabddc9f5b68f7032a516d0ae7e4b6980442f0e",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/qa-adapter.mjs",
+      "bytes": 9522,
+      "sha256": "c2dc9e9bdfa5a06d60ad5b8ecc0056c983af01c8d4155893cbe63d55313e50fa",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/qa-loader.mjs",
+      "bytes": 607,
+      "sha256": "9cea8f5583b2e7fcc7e6ecab8e256e41e3927f5143f7dfef42c701c0eabe3ae7",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/render-sheets.mjs",
+      "bytes": 5332,
+      "sha256": "c7d21d380294015540cd532afead94e574027535e20854a6cf6641d1cb067d55",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/run-qa.mjs",
+      "bytes": 3541,
+      "sha256": "3187f31daddef8bf9ee98e7c05007afd214f7ba74757c3801a582c17d1d4d7bd",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/stride-fixes.mjs",
+      "bytes": 5131,
+      "sha256": "d305d5a02cf3b8ff8be7a08674a431937375b8211584fb0e79a704cb2663c3d7",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    },
+    {
+      "path": "source/validate-fix.mjs",
+      "bytes": 5993,
+      "sha256": "7ccb3be50e06a530d1fde47398cc619e7f3601509d79362d5c604c5ab9f33f08",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית של Codex או עיבוד מקור CC0 של PR 414; LICENSES.md"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "../hockey-v1/clips.json",
+      "bytes": 3602172,
+      "sha256": "5a734cb9848bdae6976deb5ee0e9a7a8e97e95df710110c14fa0fc15a6dde9d2",
+      "license": "CC0-1.0",
+      "url": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1/clips.json"
+    },
+    {
+      "path": "../hockey-v1/models/skater.glb",
+      "bytes": 1015100,
+      "sha256": "536d5d06fe0f7328754d4d011ca190b60b81d916c90705dbe3b756e01a6f3756",
+      "license": "CC0-1.0",
+      "url": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1/models/skater.glb"
+    },
+    {
+      "path": "../hockey-v1/models/goalie.glb",
+      "bytes": 1076208,
+      "sha256": "a32b93785d015395b65f7c9f1a6954822c85e16d5a2143f0782091af632c753a",
+      "license": "CC0-1.0",
+      "url": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1/models/goalie.glb"
+    },
+    {
+      "path": "../hockey-v1/models/stick.glb",
+      "bytes": 19236,
+      "sha256": "9ce0db0e179ff47f88b70c565caecb123a48fc64757b81494eade2015a747c2c",
+      "license": "CC0-1.0",
+      "url": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1/models/stick.glb"
+    },
+    {
+      "path": "../hockey-v1/source/qa-adapter-fetch.mjs",
+      "bytes": 2248,
+      "sha256": "566f87e2fb0496dda027c4e3cc803adfff72ed6249e50f55c821ef13f1d299e8",
+      "license": "CC0-1.0",
+      "url": "https://github.com/roynaor-work/Bakasun/tree/dc99f03416ca279b549b7f2db927ef7a6ac401e0/workout/island/design/hockey-v1/source/qa-adapter-fetch.mjs"
+    },
+    {
+      "path": "../../minigames/athletes-core.mjs",
+      "sha256": "539c465ae9d455c6aa04e5609a6d24d1f95a965356431cdf2eccaad3c900b177",
+      "source": "חוזה השלד והתקן המקוריים בענף הבסיס, ללא שינוי"
+    }
+  ]
+}

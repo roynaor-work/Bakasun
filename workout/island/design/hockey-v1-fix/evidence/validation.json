@@ -1,0 +1,557 @@
+{
+  "license": "CC0-1.0",
+  "source": "source/validate-fix.mjs",
+  "passed": true,
+  "errors": [],
+  "clipsSha256": "d1af8a2b281da4118d4d67f872e739f33149b6dc51b6791a965bfcf5a990645a",
+  "preserved": [
+    {
+      "id": "ready_1",
+      "before": 99.7,
+      "after": 99.7,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "18cde85f280ff0915abef3f425e39e36bce9557be04fab66ffbc56fc6666199a"
+    },
+    {
+      "id": "ready_2",
+      "before": 99.6,
+      "after": 99.6,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "015cb500563154f3fa73a6e1855e89dcf0fb693a85b11f064290564aa799be26"
+    },
+    {
+      "id": "ready_3",
+      "before": 99.9,
+      "after": 99.9,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "e25a2c2d72195221498683990e3cf0e1375b98a5d2fb924003fbaeb18dcf251d"
+    },
+    {
+      "id": "shot_wrist",
+      "before": 89.7,
+      "after": 89.7,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "5c0fb6f850f234abd6d581f5aaef35d4a1925c6bcf685ed2411b7e8882d1fcd1"
+    },
+    {
+      "id": "shot_slap",
+      "before": 90.1,
+      "after": 90.1,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "750ee2eee4376e24000e3db4c1cae4bfea3cdfc3488ade461a2c2e5e1c85f452"
+    },
+    {
+      "id": "pass",
+      "before": 90.1,
+      "after": 90.1,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "a6852836c4f245303a5ff783e2b280ac3708290e29812fcebe9a2d18541a1caf"
+    },
+    {
+      "id": "receive",
+      "before": 98.2,
+      "after": 98.2,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "6046f7bbc35927055d1efc538bfa3a23ee242b884ae87e5e8633e6c8905507f3"
+    },
+    {
+      "id": "body_check",
+      "before": 98.6,
+      "after": 98.6,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "255d38822e8b685b50aee0bc8f0cb28ff79db7d34d3edf6d8dce97483eab8135"
+    },
+    {
+      "id": "goalie_stance",
+      "before": 99.9,
+      "after": 99.9,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "08bd09f6f20862f54b38bd223a1c4495725ffaf72d1fe694d270effefb175fda"
+    },
+    {
+      "id": "goalie_butterfly",
+      "before": 98.5,
+      "after": 98.5,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "a608e72d7566f76827e3ee7753beba64b41930c78ee9008c0f16e5d9fcfae18c"
+    },
+    {
+      "id": "goalie_glove_high",
+      "before": 98.3,
+      "after": 98.3,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "f6235dc8c01cc80c850b136e7a8f98e28b912394c6433e8ea83879d8e6c0d27f"
+    },
+    {
+      "id": "goalie_glove_low",
+      "before": 95.8,
+      "after": 95.8,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "3a9a4b8356f06ceee5ba7473035bc66b34af6d83f116be64187a188b7d721ad4"
+    },
+    {
+      "id": "goalie_stick_save",
+      "before": 98.6,
+      "after": 98.6,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "57cd2b7cc7b55f278ca6565046190858a3e8db7f94a32f77bf78895cf16e1ca9"
+    },
+    {
+      "id": "celebrate_1",
+      "before": 95.4,
+      "after": 95.4,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "db1c0d6f918447a78253344c55082acd4f437d64bcce249f1a193353652e21b9"
+    },
+    {
+      "id": "celebrate_2",
+      "before": 95,
+      "after": 95,
+      "unchangedState": true,
+      "unchangedMetrics": true,
+      "stateSha256": "957a904649cee8a7e01a9943f1ba1d93ef54dbb1b00d950b7664c59d73c0ff6d"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "athleteFailures": [],
+      "clipsSha256": "d3ce28b2a503ae95475a0b39e58f4087abc84ab329c96857487b64a6acd02ae5"
+    },
+    {
+      "attempt": 2,
+      "athleteFailures": [],
+      "clipsSha256": "a8de3ca946eb0dedb1492399d21f9e19e94a2a79fe68396595c4ef5810dabaed"
+    },
+    {
+      "attempt": 3,
+      "athleteFailures": [],
+      "clipsSha256": "34440b1c5e8e05c38657a5b57b448d17adc2d4e8a57d5b9c0d8f50e165bdcf5d"
+    }
+  ],
+  "athlete": [
+    {
+      "id": "skate_push_slow",
+      "gaitKind": "walk",
+      "armAbdMean": 7.97864111652815,
+      "armAbdMax": 8.592827078285472,
+      "handOutMax": 0.03502390983309259,
+      "elbowMean": 69.99999913400457,
+      "elbowMin": 62.00000250587624,
+      "swingRange": 48.345573138796354,
+      "lean": 7.346257345065819,
+      "leanMax": 7.346257345065798,
+      "slide": 0.21057578896982054,
+      "slideRatio": 0.2632197362122757,
+      "refSpeed": 0.062435112294135515,
+      "planted": 0.7833333333333333,
+      "elbowMin120Hz": 62.00000250587624,
+      "elbowMax120Hz": 77.9999980175281,
+      "samples120Hz": 193,
+      "fails": []
+    },
+    {
+      "id": "skate_push_medium",
+      "gaitKind": "jog",
+      "armAbdMean": 7.840342570593837,
+      "armAbdMax": 8.38676989451855,
+      "handOutMax": 0.03806579337671151,
+      "elbowMean": 70.0000005349074,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 64.41763894849282,
+      "lean": 8.816845818833249,
+      "leanMax": 8.816845818833238,
+      "slide": 0.34717177688594686,
+      "slideRatio": 0.43396472110743356,
+      "refSpeed": 0.08321116267825954,
+      "planted": 0.7833333333333333,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752811,
+      "samples120Hz": 145,
+      "fails": []
+    },
+    {
+      "id": "skate_push_fast",
+      "gaitKind": "sprint",
+      "armAbdMean": 7.585742902552726,
+      "armAbdMax": 7.6699464869728615,
+      "handOutMax": 0.04082055002540319,
+      "elbowMean": 70.00000038679076,
+      "elbowMin": 62.00000250587624,
+      "swingRange": 84.46162814260022,
+      "lean": 11.760366933308427,
+      "leanMax": 11.760366933308413,
+      "slide": 0.6269348843534219,
+      "slideRatio": 0.7836686054417774,
+      "refSpeed": 0.12439275060174992,
+      "planted": 0.7833333333333333,
+      "elbowMin120Hz": 62.00000250587624,
+      "elbowMax120Hz": 77.99999801752813,
+      "samples120Hz": 97,
+      "fails": []
+    },
+    {
+      "id": "skate_glide",
+      "gaitKind": "walk",
+      "armAbdMean": 8.987860372041753,
+      "armAbdMax": 20.456900231737237,
+      "handOutMax": 0.03502390983309259,
+      "elbowMean": 70.18412973795236,
+      "elbowMin": 62.00000250587624,
+      "swingRange": 48.345573138796354,
+      "lean": 7.346257345065819,
+      "leanMax": 7.346257345065798,
+      "slide": 0.00000372588420526085,
+      "slideRatio": 0.000004657355256576062,
+      "refSpeed": 0,
+      "planted": 1,
+      "elbowMin120Hz": 62.00000250587624,
+      "elbowMax120Hz": 77.9999980175281,
+      "samples120Hz": 289,
+      "fails": []
+    },
+    {
+      "id": "skate_crossover_left",
+      "gaitKind": "run",
+      "armAbdMean": 8.618901371938893,
+      "armAbdMax": 22.26952514532693,
+      "handOutMax": 0.05285196572465711,
+      "elbowMean": 70.18412017444899,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 76.7815695379745,
+      "lean": 10.777151693650904,
+      "leanMax": 10.777151693650888,
+      "slide": 0.34582025983621645,
+      "slideRatio": 0.43227532479527053,
+      "refSpeed": 1.1518563880486e-16,
+      "planted": 0.6666666666666666,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752811,
+      "samples120Hz": 193,
+      "fails": []
+    },
+    {
+      "id": "skate_crossover_right",
+      "gaitKind": "run",
+      "armAbdMean": 8.58781406062067,
+      "armAbdMax": 16.98299623045822,
+      "handOutMax": 0.05285196572465711,
+      "elbowMean": 70.184120174449,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 76.7815695379745,
+      "lean": 10.777151693650904,
+      "leanMax": 10.777151693650888,
+      "slide": 0.345830212375877,
+      "slideRatio": 0.43228776546984626,
+      "refSpeed": 1.56472057533108e-16,
+      "planted": 0.6666666666666666,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752813,
+      "samples120Hz": 193,
+      "fails": []
+    },
+    {
+      "id": "skate_stop_left",
+      "gaitKind": "walk",
+      "armAbdMean": 8.988978500776621,
+      "armAbdMax": 20.427008350631457,
+      "handOutMax": 0.03499919870093687,
+      "elbowMean": 70.18414012140204,
+      "elbowMin": 62.013531144432996,
+      "swingRange": 48.26392948153645,
+      "lean": 7.346257345065819,
+      "leanMax": 7.3462573450657995,
+      "slide": 0.18634274315147722,
+      "slideRatio": 0.2329284289393465,
+      "refSpeed": 1.4698804373633375e-8,
+      "planted": 1,
+      "elbowMin120Hz": 62.013531144432996,
+      "elbowMax120Hz": 77.9864646967597,
+      "samples120Hz": 217,
+      "fails": []
+    },
+    {
+      "id": "skate_stop_right",
+      "gaitKind": "walk",
+      "armAbdMean": 8.988978500776618,
+      "armAbdMax": 20.427008350631457,
+      "handOutMax": 0.03499919870093679,
+      "elbowMean": 70.18414012140205,
+      "elbowMin": 62.013531144432996,
+      "swingRange": 48.26392948153644,
+      "lean": 7.346257345065819,
+      "leanMax": 7.3462573450657995,
+      "slide": 0.2727971776870732,
+      "slideRatio": 0.34099647210884143,
+      "refSpeed": 1.4698804364333405e-8,
+      "planted": 1,
+      "elbowMin120Hz": 62.01353114443302,
+      "elbowMax120Hz": 77.9864646967597,
+      "samples120Hz": 217,
+      "fails": []
+    },
+    {
+      "id": "skate_turn_45",
+      "gaitKind": "walk",
+      "armAbdMean": 8.988067947660186,
+      "armAbdMax": 20.44855815006714,
+      "handOutMax": 0.03502390983309259,
+      "elbowMean": 70.184142819936,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 48.34557313879636,
+      "lean": 7.346257345065816,
+      "leanMax": 7.3462573450657995,
+      "slide": 0.08570159097828173,
+      "slideRatio": 0.10712698872285216,
+      "refSpeed": 0.004393399807807652,
+      "planted": 1,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752811,
+      "samples120Hz": 241,
+      "fails": []
+    },
+    {
+      "id": "skate_turn_90",
+      "gaitKind": "walk",
+      "armAbdMean": 8.987860372041755,
+      "armAbdMax": 20.45690023173723,
+      "handOutMax": 0.03502390983309259,
+      "elbowMean": 70.18412973795235,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 48.34557313879636,
+      "lean": 7.346257345065817,
+      "leanMax": 7.3462573450657995,
+      "slide": 0.13668916241821397,
+      "slideRatio": 0.17086145302276745,
+      "refSpeed": 0.012500005394419556,
+      "planted": 1,
+      "elbowMin120Hz": 62.00000250587624,
+      "elbowMax120Hz": 77.99999801752811,
+      "samples120Hz": 289,
+      "fails": []
+    },
+    {
+      "id": "skate_turn_180",
+      "gaitKind": "walk",
+      "armAbdMean": 7.978741180710748,
+      "armAbdMax": 8.592827078285467,
+      "handOutMax": 0.035023909833092615,
+      "elbowMean": 69.99999916444261,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 48.34557313879634,
+      "lean": 7.346257345065818,
+      "leanMax": 7.3462573450657995,
+      "slide": 0.21199051580285155,
+      "slideRatio": 0.2649881447535644,
+      "refSpeed": 2.8639897775601988e-8,
+      "planted": 1,
+      "elbowMin120Hz": 62.00000250587624,
+      "elbowMax120Hz": 77.9999980175281,
+      "samples120Hz": 385,
+      "fails": []
+    },
+    {
+      "id": "skate_backward",
+      "gaitKind": "jog",
+      "armAbdMean": 7.840465599983523,
+      "armAbdMax": 8.38676989451855,
+      "handOutMax": 0.03806579337671151,
+      "elbowMean": 69.99999913400458,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 64.41763894849282,
+      "lean": 8.816845818833249,
+      "leanMax": 8.816845818833238,
+      "slide": 0.2608361509832716,
+      "slideRatio": 0.3260451887290895,
+      "refSpeed": 0,
+      "planted": 0.7833333333333333,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752811,
+      "samples120Hz": 193,
+      "fails": []
+    },
+    {
+      "id": "goalie_slide_left",
+      "gaitKind": "walk",
+      "armAbdMean": 7.730007135675868,
+      "armAbdMax": 9.513752492201457,
+      "handOutMax": 0.03879252440970621,
+      "elbowMean": 70.00000086630996,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 48.450466768689864,
+      "lean": 9.797379729654832,
+      "leanMax": 9.797639765517673,
+      "slide": 0.11945649613316167,
+      "slideRatio": 0.1493206201664521,
+      "refSpeed": 0,
+      "planted": 1,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752813,
+      "samples120Hz": 241,
+      "fails": []
+    },
+    {
+      "id": "goalie_slide_right",
+      "gaitKind": "walk",
+      "armAbdMean": 7.73000713567587,
+      "armAbdMax": 9.513752492201457,
+      "handOutMax": 0.03879252440970621,
+      "elbowMean": 70.00000086630997,
+      "elbowMin": 62.000002505876225,
+      "swingRange": 48.450466768689864,
+      "lean": 9.797379729654832,
+      "leanMax": 9.797639765517673,
+      "slide": 0.11945649613316166,
+      "slideRatio": 0.14932062016645206,
+      "refSpeed": 0,
+      "planted": 1,
+      "elbowMin120Hz": 62.000002505876225,
+      "elbowMax120Hz": 77.99999801752813,
+      "samples120Hz": 241,
+      "fails": []
+    }
+  ],
+  "meshSummary": {
+    "clipCount": 30,
+    "bodyFailures": [],
+    "stickFailures": [],
+    "allBodyAboveTolerance": true,
+    "allStickAboveTolerance": true
+  },
+  "ready": [
+    {
+      "id": "celebrate_3",
+      "score": 97.8
+    }
+  ],
+  "notReady": [
+    {
+      "id": "skate_push_slow",
+      "score": 68.7,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_push_medium",
+      "score": 67.6,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_push_fast",
+      "score": 66.2,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_glide",
+      "score": 68.2,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_crossover_left",
+      "score": 66,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_crossover_right",
+      "score": 66.1,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_stop_left",
+      "score": 64.1,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_stop_right",
+      "score": 64.3,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_turn_45",
+      "score": 67.1,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_turn_90",
+      "score": 64.9,
+      "redMetrics": [
+        "footSliding",
+        "continuity",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_turn_180",
+      "score": 63.5,
+      "redMetrics": [
+        "footSliding",
+        "continuity",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "skate_backward",
+      "score": 68.2,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "goalie_slide_left",
+      "score": 67.6,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    },
+    {
+      "id": "goalie_slide_right",
+      "score": 67.6,
+      "redMetrics": [
+        "footSliding",
+        "bodySliding"
+      ]
+    }
+  ]
+}
