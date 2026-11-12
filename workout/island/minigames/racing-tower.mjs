@@ -4,6 +4,7 @@
 // the player always among them) with the car number, the team colour, a real time gap to the car ahead, an up/down arrow for 2.5 s after a
 // position change and a purple mark on the fastest lap. The old five-row tower stays for ?racingBroadcast=0.
 import {towerRows} from './racing-broadcast.mjs?v=island-v2-20261107-10';
+import {broadcastArtEnabled,crestUrl} from './racing-broadcast-art.mjs?v=island-v2-20261107-10';
 const COLORS=['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca','#e07b39','#7ac05a','#a05fc4','#e0c3a1','#4b6a88'];
 export const towerEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingTower')!=='0';
 export const ROW_HEIGHT=12,TOWER_TOP=120,MIN_ROWS=5,MAX_ROWS=10;
@@ -14,12 +15,12 @@ export function rowsThatFit({height=390,top=TOWER_TOP,wheelTop=null,row=ROW_HEIG
  return Math.max(MIN_ROWS,Math.min(MAX_ROWS,Math.floor((wheel-top-4)/row)));
 }
 
-export function createRacingTower(parent,{broadcast=null}={}){
+export function createRacingTower(parent,{broadcast=null,art=broadcast?.art??broadcastArtEnabled()}={}){
  const root=document.createElement('div');root.className='racing-tower';root.setAttribute('aria-hidden','true');
  parent.append(root);let age=1;
  const rows=[];
  if(broadcast){
-  root.classList.add('broadcast');
+  root.classList.add('broadcast');if(art)root.classList.add('rb-art');   // racing-broadcast-v1: the team crest replaces the colour bar
   for(let i=0;i<MAX_ROWS;i++){const row=document.createElement('div');row.className='rt-row';
    const pos=document.createElement('b'),bar=document.createElement('i'),no=document.createElement('span'),name=document.createElement('span'),gap=document.createElement('small'),arrow=document.createElement('em');
    pos.className='rt-pos';bar.className='rt-bar';no.className='rt-no';no.dir='ltr';name.className='rt-name';gap.className='rt-gap';gap.dir='ltr';arrow.className='rt-arrow';
@@ -32,7 +33,7 @@ export function createRacingTower(parent,{broadcast=null}={}){
    const list=towerRows(state,{tracker:broadcast.tracker,now:state.time,limit,watch:broadcast.watch,fastest:broadcast.fastest?.()||null,trackLength:broadcast.trackLength||0});
    rows.forEach((r,i)=>{const car=list[i];r.row.style.display=car?'grid':'none';if(!car)return;
     r.row.classList.toggle('you',car.isPlayer);r.row.classList.toggle('fastest',car.fastest);r.row.classList.toggle('traffic',!car.scoring);r.row.dataset.id=car.id;r.row.dataset.delta=String(car.delta);
-    r.pos.textContent=String(car.rank);r.bar.style.background=car.color;r.no.textContent=String(car.number);r.name.textContent=car.name;r.gap.textContent=car.gapText;r.arrow.textContent=car.delta>0?'▲':car.delta<0?'▼':'';});}
+    r.pos.textContent=String(car.rank);if(art){const crest=crestUrl(car.number);if(r.crest!==crest){r.crest=crest;r.bar.style.background=crest?`url("${crest}") center/contain no-repeat`:car.color;}}else r.bar.style.background=car.color;r.no.textContent=String(car.number);r.name.textContent=car.name;r.gap.textContent=car.gapText;r.arrow.textContent=car.delta>0?'▲':car.delta<0?'▼':'';});}
   return {update,rows:()=>limit,dispose(){globalThis.removeEventListener?.('resize',onResize);root.remove();}};
  }
  Object.assign(root.style,{position:'absolute',left:'10px',top:'128px',zIndex:'4',display:'grid',gap:'1px',font:'600 11px/1.15 system-ui,sans-serif',color:'#fff',direction:'rtl',pointerEvents:'none',textShadow:'0 1px 2px #000a'});

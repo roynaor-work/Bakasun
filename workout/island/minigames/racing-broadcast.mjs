@@ -6,6 +6,7 @@
 // purple mark for the fastest lap; lower-third cards announce the lap, an overtake and a new fastest lap; the results page lists all finishers
 // with their gap to the winner. A good phone racing game keeps the tower short on the left, never over the wheel or the buttons.
 import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-10';
+import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-10';
 
 export const broadcastEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingBroadcast')!=='0';
 export const COUNTDOWN=3,LIGHTS=5,LIGHT_STEP=.5,GO_SHOW=1.2,INTRO_SECONDS=4,PODIUM_SECONDS=8,START_QUIET=2,CARD_SECONDS=1.7;
@@ -111,11 +112,11 @@ export function broadcastEvents(state,{changes=[],prevFastest=null,prevLaps=null
 /* ---------- DOM layer ---------- */
 const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const ltr=(tag,cls,text)=>{const n=node(tag,cls,text);n.dir='ltr';return n;};
-function chip(row,withName=true){const c=node('span','rb-chip');c.style.setProperty('--team',row.color);c.append(ltr('b','rb-no',String(row.number)));if(withName)c.append(node('span','rb-name',row.name));if(row.isPlayer)c.classList.add('you');return c;}
+function chip(row,withName=true,art=false){const c=node('span','rb-chip');c.style.setProperty('--team',row.color);const crest=art?crestUrl(row.number):'';if(crest){const img=node('img','rb-crest');img.src=crest;img.alt='';img.width=img.height=16;img.decoding='async';c.classList.add('crest');c.append(img);}c.append(ltr('b','rb-no',String(row.number)));if(withName)c.append(node('span','rb-name',row.name));if(row.isPlayer)c.classList.add('you');return c;}
 
 /** The broadcast layer of one race. update(state, dt, input) every frame after the view is ready; holding() is true while the intro card is up
  * (the session does not step the model then); podium(state, done) replaces the plain podium. */
-export function createBroadcast({stage,model,league=false,signal=null}){
+export function createBroadcast({stage,model,league=false,signal=null,art=broadcastArtEnabled()}){
  const track=model.track,trackLength=track.length,tracker=createGapTracker(),watch=createRankWatch(),cards=createCards();
  let introT=0,introDone=false,fastest=null,lapsSeen=0,disposed=false,prevLights=-1;
  const lights=node('div','racing-lights');lights.setAttribute('role','img');lights.setAttribute('aria-label','רמזורי זינוק');
@@ -126,9 +127,10 @@ export function createBroadcast({stage,model,league=false,signal=null}){
  {const info=raceIntro(model.state,model.stage,track),head=node('div','rb-intro-head');
   head.append(node('strong','rb-intro-track',info.track),node('span','rb-intro-meta',[`${info.laps} הקפות`,info.timeOfDay,`${info.cars} מכוניות`].filter(Boolean).join(' · ')));
   if(league)head.append(node('span','rb-intro-league','מרוץ ליגה'));
-  const grid=node('ol','rb-grid');for(const row of info.grid){const li=node('li','rb-grid-slot');li.dataset.rank=String(row.rank);if(row.isPlayer)li.classList.add('you');li.append(node('b','rb-grid-pos',String(row.rank)),chip(row));grid.append(li);}
+  const grid=node('ol','rb-grid');for(const row of info.grid){const li=node('li','rb-grid-slot');li.dataset.rank=String(row.rank);if(row.isPlayer)li.classList.add('you');li.append(node('b','rb-grid-pos',String(row.rank)),chip(row,true,art));grid.append(li);}
   const you=node('p','rb-intro-you',`המקום שלכם בזינוק: ${info.playerGrid}`),go=node('button','rb-intro-go','למרוץ');go.type='button';go.dataset.action='racing-intro-go';
   const side=node('div','rb-intro-side');side.append(head,you,go);intro.append(side,grid);}
+ if(art)applyPanelArt(intro);
  stage.append(lights,card,intro);
  const closeIntro=()=>{if(introDone)return;introDone=true;intro.remove();};
  intro.addEventListener('pointerdown',e=>{e.stopPropagation();closeIntro();},signal?{signal}:{});
@@ -149,19 +151,21 @@ export function createBroadcast({stage,model,league=false,signal=null}){
  /** The full result page: three steps and the whole classification; tap or the button continues, or PODIUM_SECONDS pass. */
  function podium(state,done){
   const rows=classification(state,{tracker,now:state.time,league,trackLength}),top=rows.slice(0,3),layout=[top[1],top[0],top[2]].filter(Boolean);
-  const root=node('div','racing-podium broadcast');root.setAttribute('role','dialog');root.setAttribute('aria-label','תוצאות המרוץ');
+  const root=node('div','racing-podium broadcast');if(art)applyPanelArt(root);root.setAttribute('role','dialog');root.setAttribute('aria-label','תוצאות המרוץ');
   const me=rows.find(r=>r.isPlayer),title=node('strong','racing-podium-title',state.result?.won?'ניצחון':me&&me.rank<=3?'על הפודיום':'סיום המרוץ');
   const steps=node('div','racing-podium-row rp-steps');
   for(const row of layout){const step=node('div','racing-podium-step place-'+row.rank);if(row.isPlayer)step.classList.add('you');
    const sw=node('i','racing-podium-car');sw.style.background=row.color;step.append(sw,ltr('span','rp-step-no','#'+row.number),node('span','racing-podium-name',row.name),ltr('small','rp-step-time',row.rank===1?row.gapText:row.gapText||'--'),node('b','racing-podium-place',String(row.rank)));steps.append(step);}
   const table=node('ol','rp-table');table.setAttribute('aria-label','דירוג סופי');
   for(const row of rows){const li=node('li','rp-row');li.dataset.rank=String(row.rank);li.dataset.id=row.id;if(row.isPlayer)li.classList.add('you');if(row.fastest)li.classList.add('fastest');
-   li.append(node('b','rp-pos',String(row.rank)),chip(row),ltr('span','rp-gap',row.gapText||''));if(row.league)li.append(node('em','rp-league','ליגה'));table.append(li);}
+   li.append(node('b','rp-pos',String(row.rank)),chip(row,true,art),ltr('span','rp-gap',row.gapText||''));if(row.league)li.append(node('em','rp-league','ליגה'));table.append(li);}
   const left=node('div','rp-left'),note=node('small','racing-podium-note',me&&me.rank>3?`סיימתם במקום ${me.rank} מתוך ${rows.length}`:'לחצו להמשך'),go=node('button','rp-go','המשך');go.type='button';go.dataset.action='racing-podium-go';
   left.append(title,steps,note,go);root.append(left,table);stage.append(root);
   let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);root.remove();done();};
   const timer=setTimeout(close,PODIUM_SECONDS*1000);root.addEventListener('pointerdown',close,signal?{signal}:{});signal?.addEventListener('abort',()=>clearTimeout(timer),{once:true});
   return root;
  }
- return {update,holding:()=>!introDone,podium,tracker,watch,fastest:()=>fastest,trackLength,dispose(){disposed=true;lights.remove();card.remove();intro.remove();}};
+ /** racing-broadcast-v1: how many of the 3D gantry's lamps are lit (always 0 with the art off, so the old view never gets a lamp call that does anything). */
+ const gantryLamps=state=>art?litCount(startLights(state)):0;
+ return {update,holding:()=>!introDone,podium,lamps:gantryLamps,art,tracker,watch,fastest:()=>fastest,trackLength,dispose(){disposed=true;lights.remove();card.remove();intro.remove();}};
 }

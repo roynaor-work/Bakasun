@@ -39,3 +39,9 @@
 .rl-rows{display:grid;gap:4px}.rl-rows .result-row{display:flex;justify-content:space-between;margin:0}
 @media(orientation:landscape) and (max-height:600px){.rl-race{flex-basis:96px;padding:4px 6px}.rl-race-name{font-size:.78rem}.rl-podium-step.place-1{min-height:96px}.rl-podium-step.place-2{min-height:80px}.rl-podium-step.place-3{min-height:70px}.rl-table tr.mine{font-size:1rem}.rl-actions button{min-height:48px}.rl-next{font-size:.85rem}.rl-card,.rl-season,.rl-shop,.rl-result{padding:8px;gap:6px}.rl-shop{grid-template-columns:repeat(2,minmax(0,1fr))}.rl-shop>.rl-coins-bar,.rl-shop>.rl-line{grid-column:1/-1}.rl-part .primary-button{min-width:110px}.rl-result{grid-template-columns:1fr 1fr;align-items:start}.rl-result>.rl-actions,.rl-result>.rl-line{grid-column:1/-1;grid-row:2}.rl-result>.rl-result-main{grid-row:1}.rl-result>.rl-table{grid-row:1;grid-column:2}.rl-table th,.rl-table td{padding:3px 6px}.rl-medal{width:64px;height:64px;font-size:1.8rem}}
 @media(prefers-reduced-motion:no-preference){.rl-race[data-state=next]{animation:rl-pulse 2.4s ease-in-out infinite}@keyframes rl-pulse{50%{box-shadow:0 0 0 4px #dd954433}}}
+/* racing-league-v1 (Codex art; the rl-art class and the images exist only without ?racingLeagueArt=0) */
+.rl-crest{width:22px;height:22px;vertical-align:middle;margin-inline-end:6px}
+.rl-season.rl-art::before{content:'';display:block;height:96px;border-radius:12px;background:var(--rl-season-bg) center/cover no-repeat}
+.rl-podium.rl-art .rl-podium-row{padding:14px 8px 0;border-radius:10px;background:var(--rl-podium-bg) center/cover no-repeat}
+.rl-trophies{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:4px}.rl-cup{display:grid;justify-items:center;gap:2px;margin:0;font-size:.85rem;font-weight:800;text-align:center}.rl-trophy{width:56px;height:70px}
+.rl-medal.art{background:none;border:0;width:84px;height:84px}.rl-medal-img{width:76px;height:76px;display:block}

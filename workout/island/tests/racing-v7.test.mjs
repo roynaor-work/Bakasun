@@ -120,10 +120,12 @@ const AUDIO_FILES=["engine-high.mp3", "engine-high.ogg", "engine-idle.mp3", "eng
 test('offline: racing is a game group with exactly the v7 files and the formula car, all cacheable, and the shell lists the new modules',async()=>{
  assert.equal(OFFLINE_GAMES.racing,'מרוצים');
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
- assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES].sort());
+ const V22=manifest.games.racing.filter(p=>/^assets\/(racing-crash-fx-v1|racing-broadcast-v1|racing-league-v1|racing-audio-v3)\//.test(p));   // the v22 Codex packages, listed one by one in tests/island-racing-assets-v22.test.mjs
+ assert.ok(V22.length>=45);
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===48);
+ assert.ok(pathsFor(manifest,['racing']).length===48+V22.length);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 

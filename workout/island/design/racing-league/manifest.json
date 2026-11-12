@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "created": "2026-11-12",
+  "baseCommit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "teamMapping": {
+    "source": "Explicit user brief",
+    "status": "TEAMS is absent from racing-league-core.mjs at baseCommit; filenames are proposed design keys, not verified game IDs"
+  },
+  "encoding": {
+    "renderer": "Chromium 151.0.7922.173",
+    "pixelRatio": 2,
+    "resampling": "Pillow 12.3.0 LANCZOS to exact target dimensions",
+    "webpQuality": 90,
+    "webpMethod": 6
+  },
+  "preview": {
+    "page": "index.html",
+    "stylesheet": "preview.css",
+    "screenshot": "preview/overview-844x390.png",
+    "themes": [
+      "#101e30",
+      "#f4f1e8"
+    ]
+  },
+  "runtimeAssetCount": 13,
+  "runtimeBytes": 40954,
+  "assets": [
+    {
+      "path": "teams/flame.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 443,
+      "sha256": "05c1d25e3262f3f7a4c00e833331e10ce50f1d32fd7031ad95c0f3aacc95c6f9",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "להבה",
+      "primaryColor": "#d93228",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "teams/ocean.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 478,
+      "sha256": "54944ff8b4a5af3bc2107cf566b91b2f4d038eee6e09069fd9e4f41343e1dc80",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "אוקיינוס",
+      "primaryColor": "#18b6bd",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "teams/gold.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 455,
+      "sha256": "af24ae2e58caa4411293b8b89ebc6d922882d0f5f1c45e0fdd74f989964ad806",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "זהב",
+      "primaryColor": "#d6aa3b",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "teams/silver.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 423,
+      "sha256": "ee762217741462c10d890579e5aa1d362153319e9a166cf87021b73d5e641339",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "כסף",
+      "primaryColor": "#b7c2ca",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "teams/forest.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 394,
+      "sha256": "b36fe12d7f46fccd50c4c1dd721abd34f1d4938adb01d9d784340812666987af",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "יער",
+      "primaryColor": "#7ac05a",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "teams/night.svg",
+      "kind": "team",
+      "width": 96,
+      "height": 96,
+      "bytes": 396,
+      "sha256": "61da468e370aa68baca4d575568838ffc4270d1284aa3dc635fe05092c06cd08",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0",
+      "name": "לילה",
+      "primaryColor": "#a05fc4",
+      "smallDisplaySize": 24
+    },
+    {
+      "path": "trophies/driver-champion.svg",
+      "kind": "trophy",
+      "width": 160,
+      "height": 200,
+      "bytes": 1556,
+      "sha256": "11554999bb83facac7fee387d53c55fcc7b9e10943d8266c06e45fec1935611a",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "trophies/team-champion.svg",
+      "kind": "trophy",
+      "width": 160,
+      "height": 200,
+      "bytes": 1431,
+      "sha256": "5119eba635ff25e6f1678643822975897ad426985c635d82650937270325077e",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "medals/gold.svg",
+      "kind": "medal",
+      "width": 64,
+      "height": 64,
+      "bytes": 1020,
+      "sha256": "16c6cedf5e66433e25d7aa5f593b8a0bc3484dd65e385c0c836c07f62acc9348",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "medals/silver.svg",
+      "kind": "medal",
+      "width": 64,
+      "height": 64,
+      "bytes": 1020,
+      "sha256": "57db2e048519f7a3956f2e212059dfc0e2f8ba0af5dc7534ca197809838c61ac",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "medals/bronze.svg",
+      "kind": "medal",
+      "width": 64,
+      "height": 64,
+      "bytes": 1020,
+      "sha256": "7a0ae64a9e1310adef3b597c643993f6d636a623f9b3cc124a0443e53a1a1d33",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "backgrounds/podium.webp",
+      "kind": "background",
+      "width": 844,
+      "height": 390,
+      "bytes": 21572,
+      "sha256": "672119456e73341c2225ec7f7bf25ef96764c002e75d3c50790fce7b60e562e3",
+      "source": "source/podium.svg",
+      "license": "CC0-1.0",
+      "maxBytes": 250000
+    },
+    {
+      "path": "source/podium.svg",
+      "kind": "editable-source",
+      "width": 844,
+      "height": 390,
+      "bytes": 42134,
+      "sha256": "ae84ff4418433e3f7805398197b7f7b450eea60359f40babbc885945d3986090",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "backgrounds/season.webp",
+      "kind": "background",
+      "width": 580,
+      "height": 240,
+      "bytes": 10746,
+      "sha256": "cf55ec5e4aafb32305340da0d19886cdb94b044c5bc4281674808f191e6ad144",
+      "source": "source/season.svg",
+      "license": "CC0-1.0",
+      "maxBytes": 120000
+    },
+    {
+      "path": "source/season.svg",
+      "kind": "editable-source",
+      "width": 580,
+      "height": 240,
+      "bytes": 6317,
+      "sha256": "4d0b5e3573889ae846bb99fab8d3dfcbb6cb28071fdfb6864822377ea159e71f",
+      "source": "Original SVG geometry authored for this task with Codex assistance",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview/overview-844x390.png",
+      "kind": "browser-screenshot",
+      "width": 844,
+      "height": 390,
+      "bytes": 95992,
+      "sha256": "cf6a7526f4585349898be28f71ebda92f3734d7809f658b5c9feccc402ef1345",
+      "source": "Chromium screenshot of index.html .proof at deviceScaleFactor 1",
+      "license": "CC0-1.0"
+    }
+  ]
+}
