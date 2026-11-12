@@ -1,0 +1,607 @@
+{
+  "license": "CC0-1.0",
+  "source": "source/build-clips.mjs באמצעות athletes-core.mjs ללא שינוי",
+  "measurements": [
+    {
+      "id": "skate_push_slow",
+      "labelHe": "דחיפה רגועה",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978640995439031,
+        "armAbdMax": 8.592827078285472,
+        "handOutMax": 0.03502390983309259,
+        "elbowMean": 69.99999939349085,
+        "elbowMin": 62.000002505876246,
+        "swingRange": 48.345573138796354,
+        "lean": 7.346257345065819,
+        "leanMax": 7.346257345065798,
+        "slide": 0.20785220577515678,
+        "slideRatio": 0.25981525721894594,
+        "refSpeed": 0.0712794517233968,
+        "planted": 0.75
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_push_medium",
+      "labelHe": "דחיפה בקצב בינוני",
+      "gaitKind": "jog",
+      "metrics": {
+        "armAbdMean": 7.840342673385406,
+        "armAbdMax": 8.38676989451855,
+        "handOutMax": 0.03806579337671154,
+        "elbowMean": 70.0000005349074,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 64.41763894849282,
+        "lean": 8.816845818833249,
+        "leanMax": 8.816845818833238,
+        "slide": 0.34439485827682337,
+        "slideRatio": 0.4304935728460292,
+        "refSpeed": 0.0946413559414029,
+        "planted": 0.75
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_push_fast",
+      "labelHe": "דחיפה מהירה",
+      "gaitKind": "sprint",
+      "metrics": {
+        "armAbdMean": 7.5857429025527265,
+        "armAbdMax": 7.6699464869728615,
+        "handOutMax": 0.04082055002540319,
+        "elbowMean": 70.00000038679076,
+        "elbowMin": 62.00000250587624,
+        "swingRange": 84.46162814260022,
+        "lean": 11.760366933308427,
+        "leanMax": 11.760366933308413,
+        "slide": 0.6245974402319434,
+        "slideRatio": 0.7807468002899293,
+        "refSpeed": 0.1407951750543721,
+        "planted": 0.75
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_glide",
+      "labelHe": "גלישה",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978715936120713,
+        "armAbdMax": 8.592827078285472,
+        "handOutMax": 0.03502390983309259,
+        "elbowMean": 70.00000051448323,
+        "elbowMin": 62.00000250587624,
+        "swingRange": 48.345573138796354,
+        "lean": 7.346257345065819,
+        "leanMax": 7.346257345065798,
+        "slide": 0.06538078464269448,
+        "slideRatio": 0.0817259808033681,
+        "refSpeed": 4.625929269271485e-18,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_crossover_left",
+      "labelHe": "חצייה שמאלה",
+      "gaitKind": "run",
+      "metrics": {
+        "armAbdMean": 7.661578149105866,
+        "armAbdMax": 10.797635269253242,
+        "handOutMax": 0.05285196572465711,
+        "elbowMean": 69.99999939349084,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 76.7815695379745,
+        "lean": 10.777151693650904,
+        "leanMax": 10.777151693650888,
+        "slide": 0.6392306042156357,
+        "slideRatio": 0.7990382552695446,
+        "refSpeed": 9.516197353929913e-17,
+        "planted": 0.7
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_crossover_right",
+      "labelHe": "חצייה ימינה",
+      "gaitKind": "run",
+      "metrics": {
+        "armAbdMean": 7.66157814910587,
+        "armAbdMax": 10.797635269253242,
+        "handOutMax": 0.05285196572465711,
+        "elbowMean": 69.99999939349084,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 76.7815695379745,
+        "lean": 10.777151693650904,
+        "leanMax": 10.777151693650888,
+        "slide": 0.6392284909233471,
+        "slideRatio": 0.7990356136541839,
+        "refSpeed": 7.269317423140906e-17,
+        "planted": 0.7
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_stop_left",
+      "labelHe": "בלימה לשמאל",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978664051759008,
+        "armAbdMax": 8.591332083088979,
+        "handOutMax": 0.034999198700936845,
+        "elbowMean": 70.00000059086327,
+        "elbowMin": 62.013531144432996,
+        "swingRange": 48.26392948153645,
+        "lean": 7.346257345065818,
+        "leanMax": 7.3462573450657995,
+        "slide": 0.17152521510868227,
+        "slideRatio": 0.21440651888585283,
+        "refSpeed": 1.4698804358137415e-8,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_stop_right",
+      "labelHe": "בלימה לימין",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.9786640517590035,
+        "armAbdMax": 8.59133208308897,
+        "handOutMax": 0.03499919870093682,
+        "elbowMean": 70.00000059086327,
+        "elbowMin": 62.013531144432996,
+        "swingRange": 48.26392948153644,
+        "lean": 7.346257345065818,
+        "leanMax": 7.3462573450657995,
+        "slide": 0.2675290383754672,
+        "slideRatio": 0.334411297969334,
+        "refSpeed": 1.469880436321487e-8,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_turn_45",
+      "labelHe": "פנייה של 45 מעלות",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978708672844581,
+        "armAbdMax": 8.592827078285474,
+        "handOutMax": 0.03502390983309259,
+        "elbowMean": 70.00000086630996,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 48.34557313879636,
+        "lean": 7.346257345065816,
+        "leanMax": 7.3462573450657995,
+        "slide": 0.10804663104788084,
+        "slideRatio": 0.13505828880985105,
+        "refSpeed": 6.710744917629944e-9,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_turn_90",
+      "labelHe": "פנייה של 90 מעלות",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978715936120715,
+        "armAbdMax": 8.59282707828548,
+        "handOutMax": 0.03502390983309259,
+        "elbowMean": 70.00000051448322,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 48.34557313879636,
+        "lean": 7.346257345065817,
+        "leanMax": 7.3462573450657995,
+        "slide": 0.14987424616331874,
+        "slideRatio": 0.1873428077041484,
+        "refSpeed": 1.909326519181076e-8,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_turn_180",
+      "labelHe": "פנייה של 180 מעלות",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.978741116900273,
+        "armAbdMax": 8.592827078285467,
+        "handOutMax": 0.035023909833092615,
+        "elbowMean": 69.99999929418192,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 48.34557313879634,
+        "lean": 7.346257345065818,
+        "leanMax": 7.3462573450657995,
+        "slide": 0.21199051593864301,
+        "slideRatio": 0.26498814492330375,
+        "refSpeed": 2.863989777930273e-8,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "skate_backward",
+      "labelHe": "החלקה אחורה",
+      "gaitKind": "jog",
+      "metrics": {
+        "armAbdMean": 7.840465599983526,
+        "armAbdMax": 8.38676989451855,
+        "handOutMax": 0.03806579337671154,
+        "elbowMean": 69.99999939349085,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 64.41763894849282,
+        "lean": 8.816845818833249,
+        "leanMax": 8.816845818833238,
+        "slide": 0.25801931976384007,
+        "slideRatio": 0.3225241497048001,
+        "refSpeed": 0,
+        "planted": 0.75
+      },
+      "fails": []
+    },
+    {
+      "id": "ready_1",
+      "labelHe": "מוכנות נמוכה",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 15.424618317672182,
+        "armAbdMax": 26.148973858854045,
+        "handOutMax": -0.08499997525811348,
+        "elbowMean": 71.88887179975595,
+        "elbowMin": 69.45857763827841,
+        "swingRange": 12.2182698198035,
+        "lean": 7.346257345065819,
+        "leanMax": 7.346257345065798,
+        "slide": 0.0000018568220972693994,
+        "slideRatio": 0.000002321027621586749,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "ready_2",
+      "labelHe": "מוכנות עם מבט לצדדים",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 15.424618540966053,
+        "armAbdMax": 26.148973858854045,
+        "handOutMax": -0.08499997525811348,
+        "elbowMean": 71.88887167652129,
+        "elbowMin": 69.45857763827841,
+        "swingRange": 12.2182698198035,
+        "lean": 7.346257345065819,
+        "leanMax": 7.346257345065798,
+        "slide": 0.0000012324722346622738,
+        "slideRatio": 0.0000015405902933278422,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "ready_3",
+      "labelHe": "מוכנות עם העברת משקל",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 15.424618217624117,
+        "armAbdMax": 26.14897385885405,
+        "handOutMax": -0.08499997525811344,
+        "elbowMean": 71.88887153762845,
+        "elbowMin": 69.45857763827841,
+        "swingRange": 12.2182698198035,
+        "lean": 7.346257345065819,
+        "leanMax": 7.346257345065798,
+        "slide": 0.000006363380724396977,
+        "slideRatio": 0.000007954225905496221,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "shot_wrist",
+      "labelHe": "קליעת פרק יד",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 7.586500692613137,
+        "armAbdMax": 34.222957932708944,
+        "handOutMax": -0.02436293501182829,
+        "elbowMean": 64.96104725756503,
+        "elbowMin": 47.52906103639905,
+        "swingRange": 25.954574590329027,
+        "lean": 9.642415297414818,
+        "leanMax": 12.071520475117874,
+        "slide": 0.08274081952743481,
+        "slideRatio": 0.10342602440929351,
+        "refSpeed": 2.3129646346357427e-18,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "shot_slap",
+      "labelHe": "קליעת סלאפ",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 9.774429929926953,
+        "armAbdMax": 34.222416406663285,
+        "handOutMax": -0.0243760148333044,
+        "elbowMean": 63.47958538520986,
+        "elbowMin": 33.89572015942741,
+        "swingRange": 25.18949606428115,
+        "lean": 9.642374494220835,
+        "leanMax": 12.062418267751884,
+        "slide": 0.06883336469628977,
+        "slideRatio": 0.08604170587036221,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "pass",
+      "labelHe": "מסירה",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 12.820693247008899,
+        "armAbdMax": 32.96369292782662,
+        "handOutMax": -0.05436659542570109,
+        "elbowMean": 65.43009657049372,
+        "elbowMin": 41.32331005848484,
+        "swingRange": 27.068917492583253,
+        "lean": 9.6427201851591,
+        "leanMax": 12.058792537221182,
+        "slide": 0.09156559709312119,
+        "slideRatio": 0.11445699636640148,
+        "refSpeed": 1.7076184216646695e-18,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "receive",
+      "labelHe": "קבלת מסירה",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 14.864019871930912,
+        "armAbdMax": 26.90391185434259,
+        "handOutMax": -0.08259210956727141,
+        "elbowMean": 68.65080349273566,
+        "elbowMin": 58.31298225052322,
+        "swingRange": 16.760200690890958,
+        "lean": 9.195377560101631,
+        "leanMax": 9.212861278327697,
+        "slide": 0.0001144409509316317,
+        "slideRatio": 0.00014305118866453964,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "body_check",
+      "labelHe": "מפגש כתף מבוקר",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 13.661722746452266,
+        "armAbdMax": 31.063813771296665,
+        "handOutMax": -0.057878615397257985,
+        "elbowMean": 67.653436340322,
+        "elbowMin": 51.1871878539571,
+        "swingRange": 13.565035105960735,
+        "lean": 10.039719816624256,
+        "leanMax": 10.175139479983883,
+        "slide": 0.00006393296269087348,
+        "slideRatio": 0.00007991620336359185,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_stance",
+      "labelHe": "עמידת שוער",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 7.717904367950661,
+        "armAbdMax": 7.734206664684633,
+        "handOutMax": 0.023368600711279885,
+        "elbowMean": 70.00000051448322,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 4.032476773914468,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517674,
+        "slide": 0.0000016654456458335542,
+        "slideRatio": 0.0000020818070572919424,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_butterfly",
+      "labelHe": "נפילה לפרפר",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 16.873025098391953,
+        "armAbdMax": 17.059449669818033,
+        "handOutMax": 0.06046073526975665,
+        "elbowMean": 71.00000177135422,
+        "elbowMin": 69.99999949878664,
+        "swingRange": 4.1674564558230305,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517674,
+        "slide": 0.22266952455656241,
+        "slideRatio": 0.278336905695703,
+        "refSpeed": 0.0008078950728310712,
+        "planted": 0.45
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_slide_left",
+      "labelHe": "החלקת שוער שמאלה",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.730036351005615,
+        "armAbdMax": 7.953047238293647,
+        "handOutMax": 0.035023909833092615,
+        "elbowMean": 70.00000086630999,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 48.34557313879633,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517674,
+        "slide": 0.11102129470171558,
+        "slideRatio": 0.13877661837714447,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_slide_right",
+      "labelHe": "החלקת שוער ימינה",
+      "gaitKind": "walk",
+      "metrics": {
+        "armAbdMean": 7.730036351005617,
+        "armAbdMax": 7.953047238293647,
+        "handOutMax": 0.035023909833092615,
+        "elbowMean": 70.00000086630999,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 48.34557313879633,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517674,
+        "slide": 0.11102129470171566,
+        "slideRatio": 0.13877661837714458,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_glove_high",
+      "labelHe": "עצירה עם כפפה גבוהה",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": -6.336909934036125,
+        "armAbdMax": 177.83485760666815,
+        "handOutMax": 0.0641624838990375,
+        "elbowMean": 78.13749959917146,
+        "elbowMin": 62.000002505876225,
+        "swingRange": 102.30883799599808,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517673,
+        "slide": 0,
+        "slideRatio": 0,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_glove_low",
+      "labelHe": "עצירה עם כפפה נמוכה",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 13.86446343918453,
+        "armAbdMax": 22.10888763811245,
+        "handOutMax": 0.12764041019796843,
+        "elbowMean": 95.41704564109352,
+        "elbowMin": 62.00000250587624,
+        "swingRange": 45.29109493992685,
+        "lean": 21.088410051038842,
+        "leanMax": 32.06358734427664,
+        "slide": 0.000002071866398287883,
+        "slideRatio": 0.0000025898329978598535,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "goalie_stick_save",
+      "labelHe": "עצירה עם מקל",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 12.692168102697226,
+        "armAbdMax": 18.993003330436803,
+        "handOutMax": 0.20643679490285005,
+        "elbowMean": 75.81248349358133,
+        "elbowMin": 62.01353114443302,
+        "swingRange": 29.763414924340722,
+        "lean": 9.797639765517692,
+        "leanMax": 9.797639765517674,
+        "slide": 0.000019763124318966292,
+        "slideRatio": 0.000024703905398707864,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "celebrate_1",
+      "labelHe": "חגיגה עם אגרוף",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": -11.937833483212033,
+        "armAbdMax": 179.7288595621309,
+        "handOutMax": 0.02902558603046762,
+        "elbowMean": 67.18000227052198,
+        "elbowMin": 57.99999836746017,
+        "swingRange": 106.81303426775229,
+        "lean": 7.200218427549336,
+        "leanMax": 7.2002184275493475,
+        "slide": 0.000004000575024922343,
+        "slideRatio": 0.000005000718781152928,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "celebrate_2",
+      "labelHe": "חגיגה עם הרמת מקל",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": -10.83692836691758,
+        "armAbdMax": 176.46360514127582,
+        "handOutMax": 0.06391468658736946,
+        "elbowMean": 75.16999448805029,
+        "elbowMin": 69.99999949878658,
+        "swingRange": 119.53675634401618,
+        "lean": 7.200218427549335,
+        "leanMax": 7.2002184275493475,
+        "slide": 0.00000366749498713302,
+        "slideRatio": 0.000004584368733916275,
+        "refSpeed": 1.4558378780933288e-23,
+        "planted": 1
+      },
+      "fails": []
+    },
+    {
+      "id": "celebrate_3",
+      "labelHe": "חגיגה עם סיבוב על הקרח",
+      "gaitKind": null,
+      "metrics": {
+        "armAbdMean": 20.425736863253967,
+        "armAbdMax": 72.61520881603077,
+        "handOutMax": 0.05479560291887489,
+        "elbowMean": 69.99999939648424,
+        "elbowMin": 62.00000250587621,
+        "swingRange": 69.7950510252945,
+        "lean": 7.200218427549339,
+        "leanMax": 7.200218427549351,
+        "slide": 0.35848422764232707,
+        "slideRatio": 0.4481052845529088,
+        "refSpeed": 3.3393426912553537e-18,
+        "planted": 1
+      },
+      "fails": []
+    }
+  ],
+  "failures": []
+}
