@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "version": "soccer-keeper-crowd-v1",
+  "base": {
+    "repository": "https://github.com/roynaor-work/Bakasun",
+    "branch": "main",
+    "commit": "51f4faab518c695672efaf6323a8b72f239a2b84"
+  },
+  "branch": "codex/soccer-keeper-crowd-v1",
+  "fps": 30,
+  "canonicalBoneCount": 18,
+  "rigFingerprint": "9b90eef9de1951c98362aec1408c4a61e348f2398e6de8ff696e15d8e9ff2f02",
+  "qaTool": {
+    "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "unchangedCli": true,
+    "inputAdapter": "source/qa-sources.mjs",
+    "summary": "qa/summary.json"
+  },
+  "rigReference": {
+    "commit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+    "path": "workout/island/design/motion-fix-v12/runtime/models/canonical-keeper.glb"
+  },
+  "catalog": "runtime/catalog.json",
+  "crowdManifest": "runtime/crowd-manifest.json",
+  "clips": [
+    {
+      "key": "soccer-keeper-crowd-v1/keeper_after_goal",
+      "id": "keeper_after_goal",
+      "library": "soccer-keeper-crowd-v1",
+      "status": "original",
+      "version": "soccer-keeper-crowd-v1",
+      "animation": "runtime/clips/keeper_after_goal.glb",
+      "animationName": "keeper_after_goal",
+      "characters": [
+        {
+          "id": "canonical-keeper",
+          "model": "runtime/keeper.glb"
+        }
+      ],
+      "duration": 2.5,
+      "frameCount": 76,
+      "height": 1.69,
+      "metadata": {
+        "id": "keeper_after_goal",
+        "label": "אחרי ספיגת שער",
+        "role": "keeper",
+        "kind": "reaction",
+        "duration": 2.5,
+        "loop": false,
+        "fps": 30,
+        "events": [
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "LeftFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "RightFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0.35,
+            "type": "head_lowered",
+            "bone": "Head"
+          },
+          {
+            "time": 0.9,
+            "type": "ground_contact",
+            "bone": "RightHand",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 1.2,
+            "type": "ground_release",
+            "bone": "RightHand",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 2.5,
+            "type": "recovered"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.5,
+            "anchor": [
+              0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.5,
+            "anchor": [
+              -0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightHand",
+            "start": 0.9,
+            "end": 1.2,
+            "anchor": [
+              -0.29,
+              0,
+              0.39
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ball": {
+          "visible": false
+        },
+        "ballVisible": false,
+        "ballContacts": [],
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "referenceTravelKnown": false,
+        "coordinateSpace": "native GLB world; Root lift applied once",
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "notes": "Head drops first; a planted right glove supports a low crouch, then the keeper rises slowly. Both soles stay planted.",
+        "coreRange": {
+          "start": 0,
+          "end": 2.5,
+          "duration": 2.5
+        },
+        "originalLoop": false,
+        "timeScale": 1
+      },
+      "bytes": 27756,
+      "sha256": "1d7155e0cff3852be6bcb3426dab4b589ca2f77bd66d8640163dcc64b3740a35",
+      "score": 96.7,
+      "sheet": "sheets/keeper_after_goal.png",
+      "measurements": "qa/measurements.json"
+    },
+    {
+      "key": "soccer-keeper-crowd-v1/disappointed",
+      "id": "disappointed",
+      "library": "soccer-keeper-crowd-v1",
+      "status": "original",
+      "version": "soccer-keeper-crowd-v1",
+      "animation": "runtime/clips/disappointed.glb",
+      "animationName": "disappointed",
+      "characters": [
+        {
+          "id": "canonical-keeper",
+          "model": "runtime/keeper.glb"
+        }
+      ],
+      "duration": 2,
+      "frameCount": 61,
+      "height": 1.69,
+      "metadata": {
+        "id": "disappointed",
+        "label": "אכזבה בעמידה",
+        "role": "keeper",
+        "kind": "reaction",
+        "duration": 2,
+        "loop": true,
+        "fps": 30,
+        "events": [
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "LeftFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "RightFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0.37,
+            "type": "shoulders_drop"
+          },
+          {
+            "time": 0.73,
+            "type": "head_touch",
+            "bone": "RightHand"
+          },
+          {
+            "time": 0.865,
+            "type": "nod",
+            "bone": "Head"
+          },
+          {
+            "time": 1.3150000000000002,
+            "type": "nod",
+            "bone": "Head"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2,
+            "anchor": [
+              0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2,
+            "anchor": [
+              -0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ball": {
+          "visible": false
+        },
+        "ballVisible": false,
+        "ballContacts": [],
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "referenceTravelKnown": false,
+        "coordinateSpace": "native GLB world; Root lift applied once",
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "notes": "Standing shoulder slump, right glove to the side of the head and two small nods. Identical endpoint poses and zero endpoint velocity form a seamless loop.",
+        "coreRange": {
+          "start": 0,
+          "end": 2,
+          "duration": 2
+        },
+        "originalLoop": true,
+        "timeScale": 1
+      },
+      "bytes": 23532,
+      "sha256": "8dd59488dfd5368d23d966194d052922be2b0ec459c4990c0dc548cc1afca4df",
+      "score": 96,
+      "sheet": "sheets/disappointed.png",
+      "measurements": "qa/measurements.json"
+    },
+    {
+      "key": "soccer-keeper-crowd-v1/keeper_celebrate",
+      "id": "keeper_celebrate",
+      "library": "soccer-keeper-crowd-v1",
+      "status": "original",
+      "version": "soccer-keeper-crowd-v1",
+      "animation": "runtime/clips/keeper_celebrate.glb",
+      "animationName": "keeper_celebrate",
+      "characters": [
+        {
+          "id": "canonical-keeper",
+          "model": "runtime/keeper.glb"
+        }
+      ],
+      "duration": 1.8,
+      "frameCount": 55,
+      "height": 1.69,
+      "metadata": {
+        "id": "keeper_celebrate",
+        "label": "חגיגה אחרי עצירה",
+        "role": "keeper",
+        "kind": "reaction",
+        "duration": 1.8,
+        "loop": false,
+        "fps": 30,
+        "events": [
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "LeftFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "RightFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0.5,
+            "type": "takeoff"
+          },
+          {
+            "time": 0.7,
+            "type": "fist_peak",
+            "bone": "RightHand"
+          },
+          {
+            "time": 0.9,
+            "type": "land",
+            "bone": "LeftFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 0.9,
+            "type": "land",
+            "bone": "RightFoot",
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "time": 1.8,
+            "type": "recovered"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.5,
+            "anchor": [
+              0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.5,
+            "anchor": [
+              -0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 0.9,
+            "end": 1.8,
+            "anchor": [
+              0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.9,
+            "end": 1.8,
+            "anchor": [
+              -0.18,
+              0,
+              0
+            ],
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "ball": {
+          "visible": false
+        },
+        "ballVisible": false,
+        "ballContacts": [],
+        "rootMotion": true,
+        "rootMotionApplied": true,
+        "referenceTravelKnown": false,
+        "coordinateSpace": "native GLB world; Root lift applied once",
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "notes": "Dominant right glove is modeled as a closed fist in the bundled canonical keeper. Small 10 cm hop, a soft two-foot landing and a return to the shared neutral stance. The same 18 bind bones are retained.",
+        "coreRange": {
+          "start": 0,
+          "end": 1.8,
+          "duration": 1.8
+        },
+        "originalLoop": false,
+        "timeScale": 1
+      },
+      "bytes": 23076,
+      "sha256": "ea40ceebe3cd29988d1334dcf8745903997db1b2c1d5e159da08a076647bb98e",
+      "score": 96.1,
+      "sheet": "sheets/keeper_celebrate.png",
+      "measurements": "qa/measurements.json"
+    }
+  ],
+  "qualityGate": {
+    "minimumScore": 88,
+    "allScoresPass": true,
+    "redMetrics": 0,
+    "coverage": 1,
+    "browserPass": true
+  },
+  "scope": "All added paths are within workout/island/design/soccer-keeper-crowd-v1/; no integration or existing file changes."
+}
