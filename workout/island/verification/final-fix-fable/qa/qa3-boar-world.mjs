@@ -39,7 +39,14 @@ for(const [label,d] of [['full tilt',R0+15],['half tilt',Math.round(R0/2)],['20%
   rows.push({label,thumbPx:d,crosshairSpeedUnitsPerS:null,releaseAt:rel.elapsed,crosshairMovedAfterReleasePx:end.crossPx,aimPointSlipAfterReleasePx:{max:+maxSlip.toFixed(1),after1s:end.worldSlipPx,at100ms:slip.find(s=>s.dt>=.1)?.worldSlipPx??null,at300ms:slip.find(s=>s.dt>=.3)?.worldSlipPx??null},samples:slip.length});
   log(label,JSON.stringify(rows.at(-1)));
 }
-const res={mode:MODE,cameraLineUnchanged:'camera.rotation.y=damp(camera.rotation.y,-pointer.x*.1,.12,dt) (game.js frame())',rows,errors};
+// direction: the thumb pushes up-right at 45 degrees (28,28 px = 40 px); which way does the crosshair really move on screen, and where does the arrow on the crosshair point?
+let diagonal=null;try{await frame.evaluate(()=>window.__boar.aim(-.6,-.6));await tillGame(.3);
+  await touch('touchStart',[{x:P0[0],y:P0[1],id:1}]);await touch('touchMove',[{x:P0[0]+28,y:P0[1]-28,id:1}]);await tillGame(.3);
+  const s0=await st();const s1=await tillGame(.5);const arrow=await frame.evaluate(()=>document.getElementById('crosshair').style.getPropertyValue('--dir')||null);
+  await touch('touchEnd',[{x:P0[0]+28,y:P0[1]-28,id:1}]);await tillGame(.2);
+  const dxPx=(s1.aim.x-s0.aim.x)*W/2,dyPx=(s1.aim.y-s0.aim.y)*H/2,dt=s1.elapsed-s0.elapsed;
+  diagonal={thumb:'45 degrees up-right, 40 px',crosshairDegAboveHorizontal:+(Math.atan2(dyPx,dxPx)*180/Math.PI).toFixed(1),arrowDegFromUp:arrow,pxPerS:{right:+(dxPx/dt).toFixed(1),up:+(dyPx/dt).toFixed(1)}};log('diagonal',JSON.stringify(diagonal));}catch(e){diagonal={error:e.message.split('\n')[0]};}
+const res={mode:MODE,diagonal,cameraLineUnchanged:'camera.rotation.y=damp(camera.rotation.y,-pointer.x*.1,.12,dt) (game.js frame())',rows,errors};
 try{await csp.assertClean();res.csp='clean';}catch(e){res.csp=String(e.message).slice(0,400);}
 await writeFile(out+`qa3-boar-world-${MODE}.json`,JSON.stringify(res,null,1)+'\n');log('done',errors.length,res.csp);
 await csp.dispose().catch(()=>{});await browser.close();await server.close();

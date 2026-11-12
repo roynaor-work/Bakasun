@@ -152,6 +152,8 @@ async function runOne(browser,server,name){
   await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;for(const type of ['fireStation']){let done=false;for(let z=0;z<e.state.world.size&&!done;z++)for(let x=0;x<e.state.world.size&&!done;x++)if(e.place(type,x,z).ok)done=true;}});
   rec.saveBefore=await page.evaluate(saveShapeInPage);
   const stage=spec.stage||1;
+  // fixture: a later stage opens only after the earlier ones are won (the shell refuses with "קודם מנצחים בשלב הקודם"); mark them won
+  if(stage>1)await page.evaluate(s=>{const p=window.__island.engine.state.minigameProgress.fireRescue;p.stage=Math.max(p.stage,s);p.stars.fill(1,0,s-1);},stage);
   await page.evaluate(s=>window.__island.games.start('fireRescue',undefined,s),stage);await tick(32);
   if(await page.locator('[data-action=game-understood]').count()){rec.help=await page.evaluate(()=>[...document.querySelectorAll('.game-help-lines p')].map(p=>p.textContent));await shot('help',false);await page.locator('[data-action=game-understood]').tap();}
   await waitForGameStart(page);await waitForGameNavigation(page);

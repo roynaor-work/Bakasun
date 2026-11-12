@@ -284,13 +284,15 @@ try{
   for(const mode of modes){const I=await openIsland(mode);const g=await startGame(I);await I.tick(1500);const canvas=g.geometry.canvas,unitsPerPx=360/canvas.w;
    const fire=await center(I.page,'#shoot');let s=await snap(I.page);const t0=s.time,ship0=s.player.x,fx0=420,fy=110;const finger=x=>({x:Math.max(2,Math.min(842,Math.round(fx0+(x-ship0)/unitsPerPx))),y:fy,id:1});
    await I.touch('touchStart',[finger(ship0)]);await I.touch('touchStart',[finger(ship0),{x:fire.x,y:fire.y,id:2}],true);let steps=0,last=s,pickups=[];const air=[];
+   const status=()=>I.page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const q=g.session.debug.model.snapshot();return {time:q.time,result:q.result,kills:q.kills,wave:q.wave,lives:q.lives,maxLives:q.maxLives,fired:q.fired,overheats:q.overheats,capDropped:q.capDropped,hits:q.hits};});
+   s=await status();
    while(s&&!s.result&&s.time-t0<cap){
     const plan=await I.page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const py=m.player.y;
      const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}for(const a of m.aliens)if(a.diveAge>=0&&a.y<py)cross.push(a.x);
      let want=t?t.x:m.player.x;const p=m.pickups[0];if(p&&p.y>py-200)want=p.x;const safe=x=>cross.every(c=>Math.abs(c-x)>30);if(!safe(want)){out:for(let d=0;d<=360;d+=6)for(const sg of[1,-1]){const x=want+sg*d;if(x>20&&x<340&&safe(x)){want=x;break out;}}}
-     return {want,pickup:p?{kind:p.kind,y:p.y}:null,powerup:m.powerup,spread:m.spreadTime>0,mode:m.fireMode,inAir:m.shots.length,aimDx:t?Math.abs(t.x-m.player.x):null};});
-    if(!plan)break;air.push([plan.mode,plan.inAir,plan.aimDx]);if(plan.pickup&&!pickups.some(q=>q.kind===plan.pickup.kind&&Math.abs(q.at-s.time)<3))pickups.push({kind:plan.pickup.kind,at:round(s.time-t0,1)});
-    await I.touch('touchMove',[finger(plan.want),{x:fire.x,y:fire.y,id:2}]);await I.tick(100);last=s;s=await snap(I.page);steps++;
+     return {want,pickup:p?{kind:p.kind,y:p.y}:null,powerup:m.powerup,spread:m.spreadTime>0,mode:m.fireMode,inAir:m.shots.length,aimDx:t?Math.abs(t.x-m.player.x):null,time:m.time};});
+    if(!plan)break;air.push([plan.mode,plan.inAir,plan.aimDx]);if(plan.pickup&&!pickups.some(q=>q.kind===plan.pickup.kind&&Math.abs(q.at-(plan.time-t0))<3))pickups.push({kind:plan.pickup.kind,at:round(plan.time-t0,1)});
+    await I.touch('touchMove',[finger(plan.want),{x:fire.x,y:fire.y,id:2}]);await I.tick(100);last=s;s=await status();steps++;
     if(steps%100===0)log('bot',mode,round(s?.time-t0,1),'kills',s?.kills,'wave',s?.wave,'lives',s?.lives);
    }
    await I.touch('touchEnd',[]);const end=s||last;

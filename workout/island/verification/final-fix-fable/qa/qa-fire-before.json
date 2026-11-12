@@ -1,0 +1,1152 @@
+{
+ "build": "old behaviour via kill switches",
+ "browser": "Chromium/SwiftShader, hasTouch+isMobile, 844x390, CDP touch",
+ "physicalPhone": false,
+ "runs": {
+  "drive-old": {
+   "run": "drive-old",
+   "query": "&fireTruckModel=v20&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20",
+   "build": "before",
+   "kind": "v7",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": {
+    "legs": {
+     "up": {
+      "samples": 7,
+      "fastSamples": 5,
+      "medianSlipFast": 90.2,
+      "maxSlipFast": 90.5,
+      "maxSlipAll": 90.5,
+      "maxOffRoadCenter": 0
+     },
+     "right": {
+      "samples": 18,
+      "fastSamples": 8,
+      "medianSlipFast": 89.9,
+      "maxSlipFast": 93,
+      "maxSlipAll": 129.6,
+      "maxOffRoadCenter": 0.94
+     },
+     "down": {
+      "samples": 14,
+      "fastSamples": 10,
+      "medianSlipFast": 89.9,
+      "maxSlipFast": 91.6,
+      "maxSlipAll": 103,
+      "maxOffRoadCenter": 1.13
+     },
+     "left": {
+      "samples": 12,
+      "fastSamples": 8,
+      "medianSlipFast": 89.8,
+      "maxSlipFast": 90.4,
+      "maxSlipAll": 105.8,
+      "maxOffRoadCenter": 1.87
+     },
+     "acrossBlock": {
+      "samples": 13,
+      "fastSamples": 9,
+      "medianSlipFast": 90,
+      "maxSlipFast": 91.8,
+      "maxSlipAll": 101.1,
+      "maxOffRoadCenter": 0.49
+     }
+    },
+    "drivingSamples": 66,
+    "roofLadderOpenWhileDriving": 0,
+    "maxRoofLadderDeviationDriving": null,
+    "boxLadderVisibleWhileDriving": 0,
+    "spraySamples": 44,
+    "roofLadderOpenWhileSpraying": 0,
+    "maxRoofLadderDeviationSpraying": null
+   },
+   "gauge": {
+    "start": null,
+    "refill": null,
+    "end": null,
+    "samples": 102,
+    "mismatches": 0,
+    "levels": [
+     null
+    ],
+    "minModel": 0
+   },
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [
+      {
+       "text": "מים",
+       "cls": "fire-control-label",
+       "parentId": "fire-refill",
+       "box": {
+        "x": 737,
+        "y": 242,
+        "w": 78,
+        "h": 11
+       }
+      }
+     ],
+     "refill": {
+      "text": "מים",
+      "aria": "מילוי מים",
+      "labels": 1
+     }
+    },
+    "spray": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 0,
+   "audio": {
+    "idle": {
+     "label": "fire burning, not spraying",
+     "n": 12,
+     "medianRmsDb": -51,
+     "maxRmsDb": -49,
+     "medianCentroidHz": 87,
+     "medianPhoneBandShare": 0.005,
+     "state": "running"
+    },
+    "spray": {
+     "label": "spraying",
+     "n": 12,
+     "medianRmsDb": -33.8,
+     "maxRmsDb": -32.8,
+     "medianCentroidHz": 2649,
+     "medianPhoneBandShare": 0.191,
+     "state": "running"
+    },
+    "idleLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "sprayLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.27582621574401855,
+      "rate": 1
+     }
+    },
+    "state": "running"
+   },
+   "taps": [
+    {
+     "x": 521,
+     "y": 276,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 245,
+     "y": 178,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "tap": {
+     "screen": {
+      "x": 244.69710574967385,
+      "y": 177.7201070671518
+     },
+     "inStickZone": true,
+     "hit": ".soccer-stick-zone",
+     "navigationAfterTap": {
+      "active": false,
+      "kind": null
+     }
+    },
+    "drive": {
+     "hydrant": [
+      -16.7,
+      0.1,
+      -6
+     ],
+     "goal": [
+      -16.7,
+      -6
+     ],
+     "ok": true
+    },
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 7311,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 7312,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 27767,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 35222,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 35222,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 35224,
+     "ev": "req",
+     "path": "assets/fire-v7/models/engine-pumper.glb"
+    },
+    {
+     "t": 35225,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 35281,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 35282,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 35282,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 35282,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 35297,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 36231,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 36254,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 36256,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 36281,
+     "ev": "done",
+     "path": "assets/fire-v7/models/engine-pumper.glb"
+    },
+    {
+     "t": 40410,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 56355,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning.glb"
+    },
+    {
+     "t": 64455,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning-lod.glb"
+    },
+    {
+     "t": 131142,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning.glb"
+    },
+    {
+     "t": 206822,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-scorched-lod.glb"
+    },
+    {
+     "t": 411655,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-burning.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 1,
+      "stars": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "drive-oldmeshy": {
+   "run": "drive-oldmeshy",
+   "query": "&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20",
+   "build": "before",
+   "kind": "meshy",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": {
+    "legs": {
+     "up": {
+      "samples": 7,
+      "fastSamples": 5,
+      "medianSlipFast": 0,
+      "maxSlipFast": 0,
+      "maxSlipAll": 0,
+      "maxOffRoadCenter": 0
+     },
+     "right": {
+      "samples": 18,
+      "fastSamples": 8,
+      "medianSlipFast": 1.4,
+      "maxSlipFast": 8.6,
+      "maxSlipAll": 49.7,
+      "maxOffRoadCenter": 0.94
+     },
+     "down": {
+      "samples": 14,
+      "fastSamples": 10,
+      "medianSlipFast": 0.1,
+      "maxSlipFast": 1.2,
+      "maxSlipAll": 12.4,
+      "maxOffRoadCenter": 0.73
+     },
+     "left": {
+      "samples": 12,
+      "fastSamples": 8,
+      "medianSlipFast": 0.3,
+      "maxSlipFast": 0.8,
+      "maxSlipAll": 15.7,
+      "maxOffRoadCenter": 2.28
+     },
+     "acrossBlock": {
+      "samples": 13,
+      "fastSamples": 9,
+      "medianSlipFast": 0,
+      "maxSlipFast": 1.4,
+      "maxSlipAll": 11.1,
+      "maxOffRoadCenter": 0.59
+     }
+    },
+    "drivingSamples": 66,
+    "roofLadderOpenWhileDriving": 1,
+    "maxRoofLadderDeviationDriving": 89.4,
+    "boxLadderVisibleWhileDriving": 0,
+    "spraySamples": 44,
+    "roofLadderOpenWhileSpraying": 1,
+    "maxRoofLadderDeviationSpraying": 35.1
+   },
+   "gauge": {
+    "start": null,
+    "refill": null,
+    "end": null,
+    "samples": 102,
+    "mismatches": 0,
+    "levels": [
+     null
+    ],
+    "minModel": 0
+   },
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [
+      {
+       "text": "מים",
+       "cls": "fire-control-label",
+       "parentId": "fire-refill",
+       "box": {
+        "x": 737,
+        "y": 242,
+        "w": 78,
+        "h": 11
+       }
+      }
+     ],
+     "refill": {
+      "text": "מים",
+      "aria": "מילוי מים",
+      "labels": 1
+     }
+    },
+    "spray": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 0,
+   "audio": {
+    "idle": {
+     "label": "fire burning, not spraying",
+     "n": 12,
+     "medianRmsDb": -50.3,
+     "maxRmsDb": -49.7,
+     "medianCentroidHz": 84,
+     "medianPhoneBandShare": 0.002,
+     "state": "running"
+    },
+    "spray": {
+     "label": "spraying",
+     "n": 12,
+     "medianRmsDb": -33.8,
+     "maxRmsDb": -32.7,
+     "medianCentroidHz": 2526,
+     "medianPhoneBandShare": 0.194,
+     "state": "running"
+    },
+    "idleLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "sprayLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.27568262815475464,
+      "rate": 1
+     }
+    },
+    "state": "running"
+   },
+   "taps": [
+    {
+     "x": 522,
+     "y": 275,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 245,
+     "y": 177,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "tap": {
+     "screen": {
+      "x": 245.02138744791708,
+      "y": 176.63297740759774
+     },
+     "inStickZone": true,
+     "hit": ".soccer-stick-zone",
+     "navigationAfterTap": {
+      "active": false,
+      "kind": null
+     }
+    },
+    "drive": {
+     "hydrant": [
+      -16.7,
+      0.1,
+      -6
+     ],
+     "goal": [
+      -16.7,
+      -6
+     ],
+     "ok": true
+    },
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 7359,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 23113,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 29548,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 30249,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 30249,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 30249,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 33433,
+     "ev": "req",
+     "path": "assets/models/fire-truck-512.glb"
+    },
+    {
+     "t": 33433,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 33534,
+     "ev": "done",
+     "path": "assets/models/fire-truck-512.glb"
+    },
+    {
+     "t": 47482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning.glb"
+    },
+    {
+     "t": 56746,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning-lod.glb"
+    },
+    {
+     "t": 127201,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning.glb"
+    },
+    {
+     "t": 183174,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-scorched-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 1,
+      "stars": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "rescue-old-tap": {
+   "run": "rescue-old-tap",
+   "query": "&fireTruckModel=v20&fireHeading=v20&fireLadder=v20&fireRescue=v20&fireHud=v20",
+   "build": "before",
+   "kind": "v7",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": null,
+   "gauge": null,
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [
+      {
+       "text": "מים",
+       "cls": "fire-control-label",
+       "parentId": "fire-refill",
+       "box": {
+        "x": 737,
+        "y": 242,
+        "w": 78,
+        "h": 11
+       }
+      }
+     ],
+     "refill": {
+      "text": "מים",
+      "aria": "מילוי מים",
+      "labels": 1
+     }
+    },
+    "rescue": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 0,
+   "audio": {},
+   "rescues": [
+    {
+     "index": 0,
+     "tapAt": {
+      "x": 550.0059624090179,
+      "y": 155.58787423872647,
+      "marker": "person",
+      "inStickZone": false,
+      "hit": ".minigame-canvas",
+      "navigationAfterTap": {
+       "active": true,
+       "kind": "rescue"
+      }
+     },
+     "arrived": {
+      "near": true,
+      "time": 1.328000000000001,
+      "distance": 3.021165642253304,
+      "heat": 0.979085012327414,
+      "safe": false
+     },
+     "windowCleared": {
+      "safe": true,
+      "heat": 0,
+      "time": 3.2000000000000024,
+      "water": 79.80800000000036
+     },
+     "tap100": {
+      "pressMs": 100,
+      "rescued": false,
+      "seconds": null,
+      "maxProgress": 0.08333333333333334,
+      "maxExtension": 0.08333333333333334,
+      "maxLadderDeviationDeg": 0,
+      "minTipToTarget": 2.84,
+      "wrongStick": false
+     },
+     "hold": {
+      "rescued": true,
+      "seconds": 1.25,
+      "maxProgress": 1,
+      "unstableShare": 0,
+      "maxSway": 0
+     },
+     "folded": {
+      "time": 10.884000000000007,
+      "extension": 0,
+      "deviationDeg": null,
+      "pitchDeg": null,
+      "boxLadderVisible": false,
+      "rescued": true
+     }
+    }
+   ],
+   "taps": [
+    {
+     "x": 550,
+     "y": 156,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 389,
+     "y": 163,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 3335,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 24512,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 28732,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/fire-v7/models/engine-pumper.glb"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 28733,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 28734,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 28734,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 28734,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander.glb"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander-lod.glb"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 28735,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 29294,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 29303,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 29303,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 31026,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 82804,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-scorched-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 3,
+      "stars": [
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  }
+ }
+}
