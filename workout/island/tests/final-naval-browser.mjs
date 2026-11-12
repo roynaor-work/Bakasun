@@ -79,7 +79,9 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
   // ---- 11/11/2026 phase 2 (Roy, phone). Every input is touch on the real controls and every step is real frames; the model is only read
   // (the way a child reads the arc, the mark and the gauges), never driven. ----
   const reproduced=[],passedOld=[];
+  const only=(process.env.ONLY||'').split(',').filter(Boolean);// ONLY=ammo,vulcan,base,budget runs a subset while iterating
   const scenario=async(name,fn)=>{
+   if(only.length&&!only.includes(name))return;
    try{await fn();if(before)passedOld.push(name);}
    catch(e){if(!before)throw e;const message=String(e.message).split('\n')[0];reproduced.push({name,message});console.log('OLD',name,message);try{if(await page.locator('.game-screen').count())await exit();await tick(300);}catch{}}
   };
@@ -190,7 +192,7 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    assert.ok(s.baseHealth&&s.baseHealth.total>=3,'a base with main targets');assert.ok(base.structures>=4,'structures are drawn');assert.ok(base.hud&&base.hud.left===base.hud.total,'the base bar is on the HUD');assert.equal(base.water,'light','the base stage draws the light sea (render budget)');
    // Firing spots chosen by eye: south of the line to the first gun, then north so the flagship does not stand between the ship and the depot.
    const spot={gun:{x:185,z:-20},depot:{x:200,z:55}};base.sail=await sailTo(spot.gun,{near:10,ms:12000});
-   const watch=async()=>{const x=await snap();if(x.enemies.some(e=>e.structure&&e.attack))base.telegraphs++;return x;};
+   const watch=async()=>{const x=await snap();if(x.enemies.some(e=>e.structure&&e.attack))base.telegraphs++;base.barOverlaps=Math.max(base.barOverlaps||0,x.hud?.barOverlaps||0);base.barsSeen=(base.barsSeen||0)+Number(x.hud!=null);return x;};
    const keepAfloat=async()=>{const x=await snap();if(x.lives<x.maxLives*.4&&x.ammo[5]>0){await pick(5);const f=await center('#shoot');await touch('touchStart',[f]);await tick(60);await touch('touchEnd');await tick(500);await pick(0);base.repairs++;}};
    const targetOf=kind=>s.enemies.find(e=>e.structure===kind&&e.hp>0&&e.main!==false);
    // One shore gun, then the depot (fleet ships that cross the arc take the hit instead, as they would for a child).
@@ -208,14 +210,14 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    assert.ok(gunsDown>=1,'a shore gun is destroyed');assert.ok(s.baseHealth.left<s.baseHealth.total&&s.hud?.base?.left===s.baseHealth.left,'the base bar counts down');
    assert.ok(base.depotDown&&s.chainBlast,'the depot exploded');
    const neighbour=base.beforeDepot?.filter(b=>b.s!=='depot').some(b=>{const a=base.afterDepot.find(x=>x.index===b.index);return a&&a.hp<b.hp;});assert.ok(neighbour,'the depot blast damaged a neighbouring structure');
-   assert.ok(base.telegraphs>0,'the shore guns telegraph before they fire');
+   assert.ok(base.telegraphs>0,'the shore guns telegraph before they fire');assert.equal(base.barOverlaps,0,'structure health bars never cover each other');
    assert.ok(!s.result||s.result.outcome!=='win'||s.baseHealth.left===0,'no win while main targets of the base stand');
    if(s.baseHealth.left>0)assert.equal(s.mission.complete,false,'the mission is not complete while the base stands');
    await exit();
   });
   // (D) Render budget on the bigger bases (stages 15 and 25): quick shots and their impacts over a few seconds of real frames; the base stages
   // draw the light sea (no reflection pass) and stay within 70 calls and 90,000 triangles. A budget guard, not an old-code check.
-  if(!before)for(const stage of [15,25]){
+  if(!before&&(!only.length||only.includes('budget')))for(const stage of [15,25]){
    await ready(stage);const f=await center('#shoot');let s=await snap();const row={stage,water:s.renderMetrics?.environment?.water,structures:s.renderMetrics?.structures};
    for(let i=0;i<6;i++){await touch('touchStart',[f]);await tick(60);await touch('touchEnd');await tick(640);}await tick(1500);s=await snap();
    Object.assign(row,{fired:s.fired,peak:s.renderMetrics.peak,captures:s.renderMetrics.environment?.reflectionCaptures});(report.budget||(report.budget=[])).push(row);console.log('BUDGET',JSON.stringify(row));

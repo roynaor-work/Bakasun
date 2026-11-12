@@ -6,7 +6,8 @@
 //      MODE=after node workout/island/verification/final-fix-fable/qa/qa3-boar.mjs
 import {serveIsland,islandChromium,installIslandCspMonitor} from '../../../../../tests/helpers/island-browser.mjs';
 import {writeFile} from 'node:fs/promises';
-const MODE=process.env.MODE||'after';
+const MODE=process.env.MODE||'after',TAG=process.env.TAG?'-'+process.env.TAG:'';
+const STEPS=(process.env.STEPS||'').split(',').filter(Boolean),want=n=>!STEPS.length||STEPS.some(p=>n.startsWith(p));
 const FLAGS={after:'',v20:'&boarFire=v20&boarHud=v20&boarStick=v20',v1:'&boar=v1'}[MODE];
 if(FLAGS===undefined)throw Error('MODE must be after|v20|v1');
 const out=new URL('./',import.meta.url).pathname,W=844,H=390;
@@ -18,8 +19,8 @@ const csp=await installIslandCspMonitor(ctx);
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(300000);
 const errors=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text());});
-const R={mode:MODE,query:'index.html?dev=1&adapt=1'+FLAGS,viewport:[W,H],steps:{},notes:[]};
-const shot=name=>page.screenshot({path:out+`qa3-boar-${MODE}-${name}.jpg`,type:'jpeg',quality:82}).catch(e=>log('shot failed',name,e.message));
+const R={mode:MODE,tag:TAG,steps_filter:STEPS,query:'index.html?dev=1&adapt=1'+FLAGS,viewport:[W,H],steps:{},notes:[]};
+const shot=name=>page.screenshot({path:out+`qa3-boar-${MODE}${TAG}-${name}.jpg`,type:'jpeg',quality:82}).catch(e=>log('shot failed',name,e.message));
 
 // ---------- open the island like a phone, start the game like a tap in the city ----------
 await page.goto(server.url+R.query,{waitUntil:'networkidle'});
@@ -35,7 +36,8 @@ const frame=await (await frameEl.elementHandle()).contentFrame();
 await frame.waitForFunction(()=>window.__boar&&window.__boarIsland?.ready);
 const box=await frameEl.boundingBox();R.frameBox=box;R.frameUrl=frame.url();
 // instrumentation only: count focus loss of the game window (under ?qa the game ignores blur; on a phone a blur releases the fire button)
-await frame.evaluate(()=>{window.__qa3={blur:0,focus:0,vis:0};addEventListener('blur',()=>window.__qa3.blur++);addEventListener('focus',()=>window.__qa3.focus++);document.addEventListener('visibilitychange',()=>window.__qa3.vis++);});
+await frame.evaluate(()=>{window.__qa3={blur:0,focus:0,vis:0,raf:0,ev:{}};const tick=()=>{window.__qa3.raf++;requestAnimationFrame(tick);};requestAnimationFrame(tick);
+  for(const type of ['pointerdown','pointerup','click'])document.addEventListener(type,e=>{const b=e.target.closest&&e.target.closest('button');if(!b)return;const k=b.id||('card-'+(b.dataset.key||b.className));const o=window.__qa3.ev[k]||(window.__qa3.ev[k]={pointerdown:0,pointerup:0,click:0});o[type]++;},true);addEventListener('blur',()=>window.__qa3.blur++);addEventListener('focus',()=>window.__qa3.focus++);document.addEventListener('visibilitychange',()=>window.__qa3.vis++);});
 const cdp=await ctx.newCDPSession(page);await cdp.send('Emulation.setTouchEmulationEnabled',{enabled:true,maxTouchPoints:5});
 // CDP: touchStart/touchMove carry every active point; touchEnd carries the points being released (empty = release all). Verified by qa3-boar-probe.mjs.
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id??1}))});
@@ -44,19 +46,18 @@ const st=()=>frame.evaluate(()=>{const s=window.__boar.state;return {mode:s.mode
   shots:s.shots,shotsBy:s.shotsBy||{},stickNoButton:s.stickNoButton||0,abilityBy:s.abilityBy||{},abilityFromLeft:s.abilityFromLeft||0,heat:s.heat,overheated:s.overheated,current:s.current,hp:s.hp,
   enemies:s.enemies.length,flags:s.flags||{},stickR:s.stickR||62,aimSens:s.aimSens||null,paused:s.paused,wave:s.wave,qa3:{...window.__qa3}};});
 const sleep=ms=>page.waitForTimeout(ms);
-const tillFrames=async(n,ms=180000)=>{const f0=(await st()).frames,t=Date.now();while(Date.now()-t<ms){const s=await st();if(s.frames>=f0+n)return s;await sleep(25);}log('tillFrames timeout',n);return st();};
-const tillGame=async(sec,ms=240000)=>{const e0=(await st()).elapsed,t=Date.now();while(Date.now()-t<ms){const s=await st();if(s.elapsed>=e0+sec)return s;await sleep(25);}log('tillGame timeout',sec);return st();};
+const tillFrames=async n=>{await frame.evaluate(n=>new Promise(r=>{const a=window.__qa3.raf;const c=()=>window.__qa3.raf>=a+n?r():requestAnimationFrame(c);requestAnimationFrame(c);}),n);return st();};
+const tillGame=async sec=>{await frame.evaluate(sec=>new Promise(r=>{const e0=window.__boar.state.elapsed;const c=()=>window.__boar.state.elapsed>=e0+sec-1e-9?r():requestAnimationFrame(c);requestAnimationFrame(c);}),sec);return st();};
 const cool=async()=>{for(let i=0;i<120;i++){const s=await st();if((s.heat||0)<12&&!s.overheated)return;await sleep(200);}};
 const rect=id=>frame.evaluate(id=>{const e=document.getElementById(id);if(!e||e.hidden||e.closest('[hidden]'))return null;const cs=getComputedStyle(e);if(cs.display==='none')return null;const b=e.getBoundingClientRect();return {x:b.x,y:b.y,w:b.width,h:b.height,cx:b.x+b.width/2,cy:b.y+b.height/2};},id);
 const sumAb=s=>Object.values(s.abilityBy).reduce((a,b)=>a+b,0),nonButton=s=>Object.entries(s.shotsBy).filter(([k])=>k!=='button').reduce((a,[,v])=>a+v,0);
 const delta=(a,b)=>({shots:b.shots-a.shots,button:(b.shotsBy.button||0)-(a.shotsBy.button||0),nonButton:nonButton(b)-nonButton(a),abilities:sumAb(b)-sumAb(a),
   abilityFromLeft:b.abilityFromLeft-a.abilityFromLeft,stickNoButton:b.stickNoButton-a.stickNoButton,aimMove:+Math.hypot(b.aim.x-a.aim.x,b.aim.y-a.aim.y).toFixed(4),
   aimFrom:a.aim,aimTo:b.aim,frames:b.frames-a.frames,game:+(b.elapsed-a.elapsed).toFixed(3),weapon:a.current===b.current?a.current:a.current+'->'+b.current});
-async function guard(){if(lost)return false;try{const s=await st();
-  if(s.mode!=='battle'){R.notes.push(`mode was ${s.mode} before a step; restarted wave 1 with __boar.start(1)`);await frame.evaluate(()=>window.__boar.start(1));await tillFrames(3);}
-  if(s.hp<45){R.notes.push(`hp ${s.hp} before a step: killAll to keep the battle alive`);await frame.evaluate(()=>window.__boar.killAll());await tillFrames(2);}
+async function guard(name){if(lost)return false;try{const s=await st();
+  if(s.mode!=='battle'){R.notes.push(`${name}: mode was ${s.mode}; back to a sandbox wave 1`);await frame.evaluate(()=>window.__boar.sandbox(1));await tillFrames(3);}
   if(s.enemies<2)await frame.evaluate(()=>{window.__boar.spawn('scout',-20);window.__boar.spawn('scout',-26);});return true;}catch(e){lost=true;R.notes.push('frame lost: '+e.message.split('\n')[0]);return false;}}
-async function step(name,fn){if(!await guard()){R.steps[name]={error:'skipped: frame lost'};return;}
+async function step(name,fn){if(!want(name))return;if(!await guard(name)){R.steps[name]={error:'skipped: frame lost'};return;}
   try{const a=await st();const extra=await fn(a)||{};const b=await st();R.steps[name]={...delta(a,b),...extra};}
   catch(e){R.steps[name]={error:String(e.message||e).split('\n')[0]};if(/detached|closed|Target/i.test(String(e.message)))lost=true;}
   try{await touch('touchEnd',[]);}catch{}
@@ -90,6 +91,8 @@ R.layout=await frame.evaluate(()=>{const r=e=>{if(!e||e.hidden||e.closest('[hidd
   const rest=document.getElementById('aim-rest');o.rest=rest?{border:getComputedStyle(rest).borderTopColor,label:getComputedStyle(rest,'::after').content}:null;
   o.crosshairMode=document.getElementById('crosshair').style.transform?'transform':'left/top';o.hint=document.getElementById('battle-hint').textContent;return o;});
 log('layout',JSON.stringify(R.layout));await shot('wave1');
+await frame.evaluate(()=>{window.__boar.sandbox(1);window.__boar.spawn('scout',-20);window.__boar.spawn('scout',-24);window.__boar.spawn('scout',-28);});R.notes.push('after the layout capture the battle runs as a sandbox wave 1 (hp 999, the wave never ends); targets spawned');
+await frame.waitForFunction(()=>getComputedStyle(document.getElementById('banner')).opacity==='0',null,{timeout:300000}).catch(()=>{});
 
 // ---------- complaint 1: aiming must never fire ----------
 await step('C1_sceneTaps',async()=>{for(const [x,y] of [[450,140],[620,110],[520,60]]){await touch('touchStart',[{x,y,id:3}]);await tillFrames(2);await touch('touchEnd',[{x,y,id:3}]);await tillFrames(1);}await tillFrames(4);});
@@ -130,20 +133,20 @@ if(hasFire){
 await step('C3_weaponSwitchTap',async()=>{const wb=await rect('weapon-btn');let target=wb,kind='weapon-btn';
   if(!wb){const cards=await frame.evaluate(()=>[...document.querySelectorAll('#weapons .wslot')].map(b=>{const r=b.getBoundingClientRect();return {key:b.dataset.key,active:b.classList.contains('active'),locked:b.classList.contains('locked'),cx:r.x+r.width/2,cy:r.y+r.height/2,w:r.width,h:r.height};}));
     const c=cards.find(c=>!c.active&&!c.locked);if(!c)return {skipped:'no weapon control',cards};target=c;kind='card '+c.key;}
-  const a=await st();await touch('touchStart',[{x:target.cx,y:target.cy,id:4}]);await sleep(90);await touch('touchEnd',[{x:target.cx,y:target.cy,id:4}]);await tillFrames(4);const b=await st();
-  return {control:kind,size:[Math.round(target.w),Math.round(target.h)],weaponBefore:a.current,weaponAfter:b.current,switched:a.current!==b.current};});
+  const ev0=await frame.evaluate(()=>JSON.stringify(window.__qa3.ev));const a=await st();await touch('touchStart',[{x:target.cx,y:target.cy,id:4}]);await sleep(90);await touch('touchEnd',[{x:target.cx,y:target.cy,id:4}]);await tillFrames(4);const b=await st();
+  return {events:{before:JSON.parse(ev0),after:b.qa3.ev},control:kind,size:[Math.round(target.w),Math.round(target.h)],weaponBefore:a.current,weaponAfter:b.current,switched:a.current!==b.current};});
 if(await hasStick()){
   await step('C3_weaponSwitchWhileStickHeld',async()=>{const wb=await rect('weapon-btn');let target=wb,kind='weapon-btn';
     if(!wb){const cards=await frame.evaluate(()=>[...document.querySelectorAll('#weapons .wslot')].map(b=>{const r=b.getBoundingClientRect();return {key:b.dataset.key,active:b.classList.contains('active'),locked:b.classList.contains('locked'),cx:r.x+r.width/2,cy:r.y+r.height/2};}));const c=cards.find(c=>!c.active&&!c.locked);if(!c)return {skipped:'no card'};target=c;kind='card '+c.key;}
     await touch('touchStart',[{x:O[0],y:O[1],id:1}]);await slide(1,O,[O[0]+12,O[1]],3);const a=await st();
     await touch('touchStart',[{x:O[0]+12,y:O[1],id:1},{x:target.cx,y:target.cy,id:4}]);await sleep(90);await touch('touchEnd',[{x:target.cx,y:target.cy,id:4}]);await tillFrames(4);const b=await st();
-    await touch('touchEnd',[{x:O[0]+12,y:O[1],id:1}]);await tillFrames(2);return {control:kind,stickHeld:a.stick,weaponBefore:a.current,weaponAfter:b.current,switched:a.current!==b.current};});
+    await touch('touchEnd',[{x:O[0]+12,y:O[1],id:1}]);await tillFrames(2);return {events:{before:a.qa3.ev,after:b.qa3.ev},control:kind,stickHeld:a.stick,weaponBefore:a.current,weaponAfter:b.current,switched:a.current!==b.current};});
   await step('C3_abilityTap',async()=>{const r=await rect('rocket');if(!r)return {skipped:'no rocket button'};const a=await st();await touch('touchStart',[{x:r.cx,y:r.cy,id:4}]);await sleep(90);await touch('touchEnd',[{x:r.cx,y:r.cy,id:4}]);await tillFrames(4);const b=await st();
-    return {rocketRect:[Math.round(r.x),Math.round(r.y),Math.round(r.w),Math.round(r.h)],rocketPresses:(b.abilityBy.rocket||0)-(a.abilityBy.rocket||0),bullets:b.shots-a.shots};});
+    return {events:{before:a.qa3.ev,after:b.qa3.ev},rocketRect:[Math.round(r.x),Math.round(r.y),Math.round(r.w),Math.round(r.h)],rocketPresses:(b.abilityBy.rocket||0)-(a.abilityBy.rocket||0),bullets:b.shots-a.shots};});
   await step('C3_abilityWhileStickHeld',async()=>{const r=await rect('frost');if(!r)return {skipped:'no frost button'};const inZone=await frame.evaluate(([x,y])=>!!document.elementFromPoint(x,y)?.closest('#aim-zone'),[r.cx,r.cy]);
     await touch('touchStart',[{x:O[0],y:O[1],id:1}]);await slide(1,O,[O[0]+12,O[1]],3);const a=await st();
     await touch('touchStart',[{x:O[0]+12,y:O[1],id:1},{x:r.cx,y:r.cy,id:4}]);await sleep(90);await touch('touchEnd',[{x:r.cx,y:r.cy,id:4}]);await tillFrames(4);const b=await st();await touch('touchEnd',[{x:O[0]+12,y:O[1],id:1}]);await tillFrames(2);
-    return {frostRect:[Math.round(r.x),Math.round(r.y),Math.round(r.w),Math.round(r.h)],frostInsideStickZone:inZone,stickHeld:a.stick,frostPresses:(b.abilityBy.frost||0)-(a.abilityBy.frost||0)};});
+    return {events:{before:a.qa3.ev,after:b.qa3.ev},frostRect:[Math.round(r.x),Math.round(r.y),Math.round(r.w),Math.round(r.h)],frostInsideStickZone:inZone,stickHeld:a.stick,frostPresses:(b.abilityBy.frost||0)-(a.abilityBy.frost||0)};});
 }
 
 // ---------- complaint 5: precision (speed per thumb offset, nudges, precision finger, edge, release) ----------
@@ -193,11 +196,11 @@ if(await hasStick()){
       const tr=await trOf(async()=>{await touch('touchStart',[{x:P0[0],y:P0[1],id:1}]);await tillFrames(2);for(let i=1;i<=N;i++){await touch('touchMove',[{x:P0[0]+dir[0]*i,y:P0[1]+dir[1]*i,id:1}]);await tillFrames(2);}
         await tillFrames(30);await touch('touchEnd',[{x:P0[0]+dir[0]*N,y:P0[1]+dir[1]*N,id:1}]);const r0=await st();await tillFrames(10);const r1=await st();after={driftAfterRelease10f:+Math.hypot(r1.aim.x-r0.aim.x,r1.aim.y-r0.aim.y).toFixed(5)};});
       const a=ramp(tr,dir[0]?'x':'y',dir[0]?1:1,N,Rr,dz);return {thumb:'1 px every 2 game frames to 24 px, hold 30 frames',...a,...after};});}
-  await step('C4_circle',async()=>{await frame.evaluate(()=>window.__boar.aim(0,-.1));const r=40;
+  await step('C4_circle',async()=>{await frame.evaluate(()=>window.__boar.aim(0,.4));const r=16;
     const tr=await trOf(async()=>{await touch('touchStart',[{x:P0[0],y:P0[1],id:1}]);await slide(1,P0,[P0[0]+r,P0[1]],4);for(let k=1;k<=48;k++){const an=k*Math.PI/24;await touch('touchMove',[{x:P0[0]+r*Math.cos(an),y:P0[1]+r*Math.sin(an),id:1}]);await tillFrames(2);}await touch('touchEnd',[{x:P0[0]+r,y:P0[1],id:1}]);await tillFrames(2);});
     const fr=tr.filter(f=>f.s===1&&Math.abs(f.x)<.94&&Math.abs(f.y)<.84);const hd=[],sp=[];let prev=null;
     for(let i=1;i<fr.length;i++){const dx=(fr[i].x-fr[i-1].x)*W/2,dy=-(fr[i].y-fr[i-1].y)*H/2;const m=Math.hypot(dx,dy);if(m<1e-6)continue;sp.push(m/fr[i].dt);const h=Math.atan2(dy,dx)*180/Math.PI;if(prev!==null){let dh=h-prev;while(dh>180)dh-=360;while(dh<-180)dh+=360;hd.push(dh);}prev=h;}
-    const tail=hd.slice(6),sps=sd(sp.slice(8));return {thumb:'circle radius 40 px, one move every 2 game frames (48 per turn)',frames:fr.length,headingSteps:tail.length,zeroTurnFrames:tail.filter(x=>Math.abs(x)<.05).length,maxTurnDeg:tail.length?+Math.max(...tail.map(Math.abs)).toFixed(1):null,
+    const tail=hd.slice(6),sps=sd(sp.slice(8));return {thumb:'circle radius 16 px, one move every 2 game frames (48 per turn)',frames:fr.length,headingSteps:tail.length,zeroTurnFrames:tail.filter(x=>Math.abs(x)<.05).length,maxTurnDeg:tail.length?+Math.max(...tail.map(Math.abs)).toFixed(1):null,
       turnSdDeg:+sd(tail.map(Math.abs)).sd.toFixed(2),speedCvPct:sps.mean?+(sps.sd/sps.mean*100).toFixed(1):null,turns:tail.map(x=>+x.toFixed(1))};});
   await step('C4_flick',async()=>{await frame.evaluate(()=>window.__boar.aim(-.8,-.05));
     const tr=await trOf(async()=>{await touch('touchStart',[{x:P0[0],y:P0[1],id:1}]);await tillFrames(2);await touch('touchMove',[{x:P0[0]+48,y:P0[1],id:1}]);await tillFrames(12);await touch('touchEnd',[{x:P0[0]+48,y:P0[1],id:1}]);await tillFrames(3);});
@@ -237,6 +240,6 @@ R.save=await page.evaluate(()=>{const v=localStorage.getItem('boar-island-v1');i
   R.saveNewFields=R.save?{top:R.save.keys.filter(k=>!R.saveExpected.keys.includes(k)),weapons:R.save.weapons.filter(k=>!R.saveExpected.weapons.includes(k)),upgrades:R.save.upgrades.filter(k=>!R.saveExpected.upgrades.includes(k))}:null;}
 try{await csp.assertClean();R.csp='clean';}catch(e){R.csp=String(e.message).slice(0,800);}
 R.errors=errors;R.frameLost=lost;R.wallSeconds=Math.round((Date.now()-t0)/1000);
-await writeFile(out+`qa3-boar-${MODE}.json`,JSON.stringify(R,null,1)+'\n');
+await writeFile(out+`qa3-boar-${MODE}${TAG}.json`,JSON.stringify(R,null,1)+'\n');
 log('done: errors',errors.length,'csp',R.csp==='clean'?'clean':'NOT CLEAN','save new fields',JSON.stringify(R.saveNewFields),'lost',lost);
 await csp.dispose().catch(()=>{});await browser.close();await server.close();

@@ -361,7 +361,8 @@ async function merge(){
    gauge:r.scenario==='drive'?{start:r.gaugeStart,critical:r.gaugeCritical,refill:r.gaugeRefill,end:r.gaugeEnd,samples:g.length,mismatches:mismatch,levels:[...new Set(g.map(x=>x.level))],minModel:g.length?Math.min(...g.map(x=>x.model)):null}:null,
    dom:{start:r.domStart&&{overlaps:r.domStart.overlaps,outOfView:r.domStart.outOfView,waterWords:r.domStart.waterWords,refill:r.domStart.refill},spray:r.domSpray&&{overlaps:r.domSpray.overlaps},rescue:r.domRescue&&{overlaps:r.domRescue.overlaps}},
    indicatorsUnderGauge:(r.indicatorsUnderGauge||[]).length,audio:{idle:r.audioIdle,spray:r.audioSpray,idleLoops:r.audioIdleLoops?.loops,sprayLoops:r.audioSprayLoops?.loops,state:r.audioSprayLoops?.state},
-   rescues:r.rescues?.map(x=>({index:x.index,arrived:x.arrived,windowCleared:x.windowCleared,early:x.early,tap100:x.tap100,tap500:x.tap500,hold:x.hold1600||x.hold3000,folded:x.folded,error:x.error})),
+   rescues:r.rescues?.map(x=>({index:x.index,tapAt:x.tapAt,manualDrive:x.manualDrive,arrived:x.arrived,windowCleared:x.windowCleared,early:x.early,secondTapAfterMs:x.secondTapAfterMs,tap100:x.tap100,tap500:x.tap500,hold:x.hold1600||x.hold3000,folded:x.folded,error:x.error})),
+   turns:r.turns,taps:r.taps,hydrant:{tap:r.hydrantTap,drive:r.hydrantDrive,notReached:r.hydrantNotReached||false},assetLog:r.assetLog,
    save:{before:r.saveBefore&&{version:r.saveBefore.version,keys:r.saveBefore.keys,paths:r.saveBefore.paths?.length},after:r.saveAfter&&{version:r.saveAfter.version,keys:r.saveAfter.keys,paths:r.saveAfter.paths?.length,fireProgress:r.saveAfter.fireProgress}}};};
  const pick=b=>Object.fromEntries(Object.values(runs).filter(r=>r.build===b).map(r=>[r.run,summary(r)]));
  // the save written by the new build must have exactly the same shape as the one written by the old build
