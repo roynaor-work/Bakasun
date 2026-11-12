@@ -1,0 +1,110 @@
+{
+  "result": "PASS",
+  "browser": "Chromium / SwiftShader (software WebGL)",
+  "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src 'self' blob:; worker-src 'none'; object-src 'none'; base-uri 'none'",
+  "webAssembly": "unavailable before module startup",
+  "models": [
+    {
+      "name": "grandstand",
+      "rendered": true,
+      "captureSha256": "880b98f3c045e2c41be04bb7535fadd240ebe4493a6ed2de8e0bcd0cecc34992",
+      "drawStats": {
+        "triangles": 1168,
+        "calls": 14
+      }
+    },
+    {
+      "name": "pit-building",
+      "rendered": true,
+      "captureSha256": "9d73b8080c80166a8df4a561dd89176351a50a035a07d0178f68c9836ea1a2cc",
+      "drawStats": {
+        "triangles": 1778,
+        "calls": 10
+      }
+    },
+    {
+      "name": "start-gantry",
+      "rendered": true,
+      "captureSha256": "a56f4fd58cb33f3c1150b329a268ea4ba2f4607ca7f6a4053912d2c11b9b1937",
+      "drawStats": {
+        "triangles": 1276,
+        "calls": 12
+      }
+    },
+    {
+      "name": "control-tower",
+      "rendered": true,
+      "captureSha256": "9cea6b54f609f65977b35d15c1ec6fe1eabd0719c1ed35eeda67c95b49d1dd4e",
+      "drawStats": {
+        "triangles": 1254,
+        "calls": 10
+      }
+    },
+    {
+      "name": "tire-barrier",
+      "rendered": true,
+      "captureSha256": "ac15d0c2a638144f5d2bdd8c73a217f3979493177305e15982ad2dfee7164386",
+      "drawStats": {
+        "triangles": 2042,
+        "calls": 4
+      }
+    },
+    {
+      "name": "chainlink-fence",
+      "rendered": true,
+      "captureSha256": "873b855a04a0ea79aeb531a23f91cc4e381e0f3836c355d3726163a693cf7069",
+      "drawStats": {
+        "triangles": 806,
+        "calls": 4
+      }
+    },
+    {
+      "name": "sponsor-board",
+      "rendered": true,
+      "captureSha256": "f0abe4c9cb17703a59969fa9faf66f81b2e4efd3cbba31906d34f9e57f298e7a",
+      "drawStats": {
+        "triangles": 112,
+        "calls": 5
+      }
+    }
+  ],
+  "textureCount": 15,
+  "errors": [],
+  "physicalPhoneTested": false,
+  "textureNames": [
+    "asphalt-clean",
+    "asphalt-pits",
+    "asphalt-skid",
+    "concrete-barrier",
+    "crowd-atlas",
+    "grass-01",
+    "grass-02",
+    "grass-03",
+    "gravel-runoff",
+    "kerb-normal",
+    "kerb-red-white",
+    "paint-white",
+    "paint-yellow",
+    "sponsor-race",
+    "tire-barrier"
+  ],
+  "overviewStats": {
+    "triangles": 8710,
+    "calls": 121
+  },
+  "allTextureViewsRendered": true,
+  "mobileLayout": {
+    "scroll": 390,
+    "width": 390,
+    "canvas": {
+      "x": 22.453125,
+      "y": 392.1875,
+      "width": 345.09375,
+      "height": 400,
+      "top": 392.1875,
+      "right": 367.546875,
+      "bottom": 792.1875,
+      "left": 22.453125
+    }
+  }
+}

@@ -115,14 +115,18 @@ export function generateCourse(track, physics) {
   const half = pipe.F, board = physics.board.halfWidth;
   const objects = [], rows = [];
   let s = track.calmStart, centre = 0, row = 0;
-  const deck = patternDeck(random, track);
+  const deck = patternDeck(random, track), narrowRandom = courseRandom(track.seed + 7919);
   while (s < track.length - track.finishRunout) {
     const spacing = between(random, track.rowSpacing);
     // A corridor never asks for a lateral move faster than a boosted rider can make.
     const reach = physics.lateralSpeed * (spacing / physics.boostSpeed) * track.reachFactor;
     const next = Math.max(-track.corridorLimit, Math.min(track.corridorLimit, centre + (random() * 2 - 1) * reach));
     const kind = deck[row++ % deck.length];
-    const gap = between(random, track.gap);
+    let gap = between(random, track.gap);
+    // Narrow passage (track.narrow): some rock rows get a tighter gap and a warning sign pair 30 m before them. Decided on its own
+    // random stream so the main layout stream keeps its order.
+    const narrowDraw = track.narrow ? narrowRandom() : 1, narrowRow = !!track.narrow && kind === 'rocks' && narrowDraw < track.narrow.chance;
+    if (narrowRow) gap *= track.narrow.gapScale;
     const items = [];
     let coins = null;
     if (kind === 'rocks') {
@@ -155,6 +159,11 @@ export function generateCourse(track, physics) {
         const side = x > 0 ? -1 : 1, free = x + side * 4.4;
         rows.push({ s: rockS, from: Math.min(free, side < 0 ? -half : free), to: Math.max(free, side < 0 ? free : half) });
       } else coinLine(random, 'air', s, x, pipe, physics, items);
+    }
+    // Warning signs (non-colliding, drawn by the view): before narrow passages and before rocks hidden behind a jump.
+    if (narrowRow || kind === 'rampRocks') {
+      const warnS = Math.max(8, s - (physics.warnAhead ?? 30));
+      for (const side of [-1, 1]) items.push({ type: 'warn', x: round(side * (half - 0.5)), s: round(warnS), kind: kind === 'rampRocks' ? 'jump' : 'narrow' });
     }
     if (coins) coinLine(random, coins, s + physics.coins.lineStart, next, pipe, physics, items);
     objects.push(...items);

@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261107-8';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261107-9';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
@@ -25,11 +25,11 @@ export function passLanding(state,config){
   if(!state.charging||state.chargeKind!=='pass'||state.ball.owner!==state.controlled||state.ball.owner==null)return null;
   const power=state.charge/config.passing.chargeSeconds;
   if(state.charge>=config.passing.loftThresholdSeconds)return null;
-  const destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
+  const destination=passDestination({...state,aim:soccerPassAim(state)},config,power,{snap:state.aiV2});
   return {x:destination.x,z:destination.z,target:destination.target??null,distance:destination.distance};
 }
 export function passReceiver(state,config){
-  return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds).target:null;
+  return state.charging&&state.chargeKind==='pass'&&state.ball.owner===state.controlled?passDestination(state,config,state.charge/config.passing.chargeSeconds,{snap:state.aiV2}).target:null;
 }
 export function soccerShotIcon(state,config){
  if(state.role==='keeper'&&state.ball.owner!==state.controlled)return 'slide';
@@ -39,7 +39,7 @@ export function soccerShotIcon(state,config){
 export function crossArc(state,config){
  if(state.ball.flight)return state.ball.flight;
  if(!state.charging||state.chargeKind!=='pass'||state.charge<config.passing.loftThresholdSeconds)return null;
- const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power);
+ const power=state.charge/config.passing.chargeSeconds,destination=passDestination({...state,aim:soccerPassAim(state)},config,power,{snap:state.aiV2});
  return createLoftFlight(state.ball,destination,config,power).flight;
 }
 /** Camera elevation for the display: portrait looks down more steeply so the

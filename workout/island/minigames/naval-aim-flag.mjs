@@ -27,3 +27,28 @@ export function navalWideYaw(dx,config){
  const w=config.aimControls?.wide||{},a=w.fine??.12,b=w.grow??.001,d=Math.abs(dx);
  return Math.sign(dx)*(a*d+b*d*d)*Math.PI/180;
 }
+
+/** 11/11/2026 (Roy, after v20 on the phone): "the aiming still is not fixed". Measured through the real touch path at 844x390:
+ * the Fire button sits 62 px from the right edge, so a thumb drag to the right reached 11 degrees and no more, whatever the gain.
+ * Spin mode: the first `finePx` of thumb travel aim pixel for pixel (fine), and past `deadPx` the turret keeps turning while the
+ * thumb is held out, faster the farther it is (up to `maxDegPerSecond`). The turret can turn all the way round in both directions
+ * from the Fire button itself; bringing the thumb back stops the turn. `?navalAim=v20` restores the v20 distance gain,
+ * `?navalAim=v19` the v9 fixed gain, `?navalAim=v1` the original. */
+export const navalAimSpin=search=>!polishLegacy('navalAim',search)&&!['v19','v20'].includes(polishValue('navalAim',search));
+export function navalSpinConfig(config){const s=config?.aimControls?.spin||{};return {finePerPx:s.finePerPx??.12,finePx:s.finePx??22,deadPx:s.deadPx??22,spanPx:s.spanPx??56,maxRate:s.maxDegPerSecond??150,curve:s.curve??1.4,maxStep:s.maxStepSeconds??.1};}
+/** Position part of the yaw (radians): pixel for pixel up to `finePx`, then held. */
+export function navalSpinFine(dx,config){const c=navalSpinConfig(config),d=Math.max(-c.finePx,Math.min(c.finePx,Number.isFinite(dx)?dx:0));return d*c.finePerPx*Math.PI/180;}
+/** Turn rate (radians per second) from the thumb's distance beyond the dead band: zero inside it, `maxRate` at `deadPx+spanPx`. */
+export function navalSpinRate(dx,config){const c=navalSpinConfig(config),x=Number.isFinite(dx)?dx:0,d=Math.abs(x)-c.deadPx;if(d<=0)return 0;const u=Math.min(1,d/Math.max(1,c.spanPx));return Math.sign(x)*Math.pow(u,c.curve)*c.maxRate*Math.PI/180;}
+/** One frame of the held turn. Frames longer than `maxStepSeconds` (a hidden tab) count as one short step. */
+export function navalSpinStep(spin,dx,dt,config){const c=navalSpinConfig(config);return (spin||0)+navalSpinRate(dx,config)*Math.max(0,Math.min(c.maxStep,Number.isFinite(dt)?dt:0));}
+/** Camera follow settings for spin mode: a faster follow and a smaller lead, so the landing mark stays near the middle while the turret turns. */
+export function navalSpinFollow(config){const f=config?.aimControls?.follow||{},s=config?.aimControls?.spin||{};return {...f,rate:s.followRate??7,maxLeadDegrees:s.followLeadDegrees??30};}
+/** Where to draw an edge arrow for a point that left the screen (or is behind the camera): null while it is on screen. */
+export function navalEdgeHint(q,width,height,inset=26){
+ if(!q||!Number.isFinite(q.x)||!Number.isFinite(q.y))return null;const behind=!(q.depth>0);
+ const cx=width/2,cy=height/2;let dx=q.x-cx,dy=q.y-cy;if(behind){dx=-dx;dy=Math.abs(dy)||1;}
+ if(!behind&&q.x>=inset&&q.x<=width-inset&&q.y>=inset&&q.y<=height-inset)return null;
+ const len=Math.hypot(dx,dy)||1,ux=dx/len,uy=dy/len,tx=ux!==0?(cx-inset)/Math.abs(ux):Infinity,ty=uy!==0?(cy-inset)/Math.abs(uy):Infinity,t=Math.min(tx,ty);
+ return {x:cx+ux*t,y:cy+uy*t,angle:Math.atan2(uy,ux),behind};
+}

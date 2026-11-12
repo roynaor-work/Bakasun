@@ -1,11 +1,11 @@
 import {createAlpineHud} from './alpine-hud.mjs';
 import {enhanceAlpineOpening} from './alpine-screen.mjs';
-import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-8';
-import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-8';
-import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-8';
-import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261107-8';
+import {createAlpineEngine} from './alpine-engine.mjs?v=island-v2-20261107-9';
+import {createAlpineControls} from './alpine-controls.mjs?v=island-v2-20261107-9';
+import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-9';
+import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261107-9';
 import {createQualityGovernor} from './alpine-quality.mjs';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-8';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-9';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -26,8 +26,10 @@ const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'C
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
 export function runAlpineSession(ctx) {
   // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
-  const airOff = new URLSearchParams(globalThis.location?.search || '').get('alpineAir') === '0';
-  const balance = airOff && ctx.balance.physics.airBoost ? {...ctx.balance, physics: (({airBoost, ...rest}) => rest)(ctx.balance.physics)} : ctx.balance, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
+  const urlQuery = new URLSearchParams(globalThis.location?.search || ''), airOff = urlQuery.get('alpineAir') === '0', fallOff = urlQuery.get('alpineFall') === '0', obsOff = urlQuery.get('alpineObs') === '0';
+  const balance0 = (airOff && ctx.balance.physics.airBoost) || (fallOff && ctx.balance.physics.fall) ? {...ctx.balance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(ctx.balance.physics)} : ctx.balance,
+    // ?alpineObs=0 removes the narrow passages (warning signs come with them).
+    balance = obsOff ? {...balance0, tracks: Object.fromEntries(Object.entries(balance0.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : balance0, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
   const level = engine.level, track = engine.track;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
@@ -67,12 +69,12 @@ export function runAlpineSession(ctx) {
   const el = (tag, cls = '', text = '') => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
   const svg = (paths, viewBox = '0 0 24 24') => { const s = doc.createElementNS(SVG_NS, 'svg'); s.setAttribute('viewBox', viewBox); s.setAttribute('aria-hidden', 'true'); s.innerHTML = paths; return s; };
   const ltr = text => { const b = el('bdi', 'alpine-ltr', text); b.dir = 'ltr'; return b; };
-  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-8', import.meta.url).href;
-  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-8', import.meta.url).href;
+  const css = el('link'); css.rel = 'stylesheet'; css.href = new URL('./alpine.css?v=island-v2-20261107-9', import.meta.url).href;
+  const polish = el('link'); polish.rel = 'stylesheet'; polish.href = new URL('./alpine-polish.css?v=island-v2-20261107-9', import.meta.url).href;
   const screenCss=el('link');screenCss.rel='stylesheet';screenCss.href=new URL('./alpine-screen.css',import.meta.url).href;
   const kitCss=el('link');kitCss.rel='stylesheet';kitCss.href=new URL('../design/hud-kit/hud.css',import.meta.url).href;
   const feelCss=el('link');feelCss.rel='stylesheet';feelCss.href=new URL('./alpine-feel.css',import.meta.url).href;
-  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-8',import.meta.url).href;
+  const cleanCss=el('link');cleanCss.rel='stylesheet';cleanCss.href=new URL('./alpine-clean.css?v=island-v2-20261107-9',import.meta.url).href;
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
@@ -165,7 +167,7 @@ export function runAlpineSession(ctx) {
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   const loadStart = performance.now();
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: timeout 25 s']}); fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-v2-20261107-8').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-v2-20261107-9').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
@@ -185,12 +187,12 @@ export function runAlpineSession(ctx) {
       if (e.type === 'countdown') { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); continue; }
       if (e.riderId !== 'player') { if (e.type === 'overtake' && e.objectId === 'player') status.textContent = t('alpine.status.overtaken', {rank: snap.rank}); continue; }
       if (e.type === 'boost-start') { audio.cue('boost'); showCallout(e.objectId ? CALLOUTS.pad : CALLOUTS.boost, now); }
-      else if (e.type === 'collision') { audio.cue('hit'); showCallout(CALLOUTS.collision, now); }
+      else if (e.type === 'collision') { audio.cue('hit'); /* the fall itself is the feedback: no banner text */ }
       else if (e.type === 'takeoff') { audio.cue('takeoff'); showCallout(CALLOUTS.takeoff, now); }
       else if (e.type === 'land') audio.cue('land');
       else if (e.type === 'trick-start') audio.cue('trickStart');
       else if (e.type === 'trick') { audio.cue('trick'); showCallout('trick', now, TRICK_NAMES[e.objectId] + (e.count > 1 ? ` ×${e.count}` : ''), t('alpine.callout.trick', {points: e.value})); status.textContent = t('alpine.status.trick', {points: e.value}); }
-      else if (e.type === 'crash') { audio.cue('crash'); showCallout('crash', now); status.textContent = t('alpine.callout.crash'); }
+      else if (e.type === 'crash') { audio.cue('crash'); status.textContent = t('alpine.callout.crash'); }
       else if (e.type === 'coin') { audio.cue('coin'); coinPulse = now + .25; }
       else if (e.type === 'gate') { audio.cue('gate'); if (now > calloutUntil) showCallout(CALLOUTS.gate, now); }
       else if (e.type === 'overtake') { audio.cue('overtake'); if (now > calloutUntil) showCallout(CALLOUTS.overtake, now); status.textContent = t('alpine.status.rank', {rank: snap.rank}); }
