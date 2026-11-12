@@ -63,7 +63,7 @@ test('gates and replay: season 2 opens from 8th, the last season has no gate; a 
   const M=createLeague();runSeason(M,9);const coins=M.coins;M.upgrades.engine=2;assert.equal(nextSeason(M).ok,false);assert.equal(nextSeason(M).need,8);
   assert.equal(restartSeason(M).ok,true);assert.equal(M.season,1);assert.equal(M.race,0);assert.equal(M.coins,coins);assert.equal(M.upgrades.engine,2);assert.ok(M.history.length>0);
   assert.equal(restartSeason(M).ok,false,'not finished');runSeason(M,1);assert.equal(restartSeason(M).reason,'gate open');assert.equal(nextSeason(M).ok,true);
-  assert.deepEqual(SEASONS.map(s=>s.minRank),[0,8,8,5,5]);
+  assert.deepEqual(SEASONS.map(s=>s.minRank),[0,10,8,5,5]);
   const Z=createLeague();Z.season=5;runSeason(Z,5);assert.equal(nextSeason(Z).reason,'last season');assert.equal(restartSeason(Z).ok,true,'the last season can be raced again');
 });
 test('race setup: twelve scoring cars through config only, season rating plus a deterministic form, long/short laps, tags, time cap',()=>{
