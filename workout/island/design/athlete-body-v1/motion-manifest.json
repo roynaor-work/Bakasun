@@ -1,0 +1,1525 @@
+{
+  "schemaVersion": 1,
+  "rig": "canonical18",
+  "license": "CC0-1.0",
+  "catalog": {
+    "path": "workout/island/design/motion-fix-v12/runtime/catalog.json",
+    "ref": "codex/motion-fix-v12",
+    "commit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+    "sha256": "be2ff1a59824a499f97e548c94ca2fa0a5caebd3371305c2deab4372f57b7f2c",
+    "url": "https://github.com/roynaor-work/Bakasun/blob/5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad/workout/island/design/motion-fix-v12/runtime/catalog.json",
+    "blocklistPath": "workout/island/design/motion-fix-v12/blocklist.json",
+    "blocklistSha256": "473845325ab93f77848228d949b442b6aa0e322a3b66fe51af1f8220db76ed49",
+    "sourceManifestPath": "workout/island/design/motion-fix-v12/manifest.json",
+    "sourceManifestSha256": "e0d4ec92b63d8b14b77b20b6c259d6db19782523605683c6a3d08a04c79f950b"
+  },
+  "canonicalBonesSource": {
+    "path": "workout/island/minigames/athletes-core.mjs",
+    "ref": "claude/unified-athletes-v1",
+    "symbol": "CANON_BONES"
+  },
+  "retargetPolicy": "All 18 target bones use the exact canonical bind. Source rotation keyframes and their times are copied without modification. Missing rotation channels explicitly reset to identity. Root and Hips translations are rest-relative, scaled by canonical/source mean leg length. Other joint translations and scale channels are absent. This is body retargeting, not a revalidation of game-specific foot-lock or ball-contact constraints.",
+  "playbackPolicy": "Full repaired clips include idle handles and are one-shots, as in the source catalog. sourceLoop/coreRange expose the original cyclic segment without silently dropping the repaired handles.",
+  "clips": [
+    {
+      "id": "soccer-v9/walk",
+      "library": "soccer-v9",
+      "label": "הליכה",
+      "path": "runtime/motion/soccer-v9/walk.glb",
+      "animationName": "soccer-v9/walk",
+      "duration": 1.899999976158142,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.5499999523162842,
+        "duration": 1.1999999582767487,
+        "sourceDurationSeconds": 1.1999999999999997
+      },
+      "sourceKey": "soccer-v9/walk",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v9/walk.motion-fix-v12.glb",
+      "sourceSha256": "c4d8d07c49263d088989d606f774c49107b7fae315ff1e8ef1034cf3880aa247",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 33392,
+      "sourceCatalogEntrySha256": "630bc48223c6f39718af7341b02c31234f2758e431224e5f2d8c67502ba32145",
+      "originalSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/walk.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 13,
+      "identityRotationChannels": 5,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 34352,
+      "sha256": "76bb2df5a0f13c14b5016dc45412f39241edc2a258fc88ad691f8ff755e07c61",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v9/run",
+      "library": "soccer-v9",
+      "label": "ריצה",
+      "path": "runtime/motion/soccer-v9/run.glb",
+      "animationName": "soccer-v9/run",
+      "duration": 1.4075112342834473,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.0575112104415894,
+        "duration": 0.7075112164020538,
+        "sourceDurationSeconds": 0.6
+      },
+      "sourceKey": "soccer-v9/run",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v9/run.motion-fix-v12.glb",
+      "sourceSha256": "9a7f4a33dfb5f4f8cd09cb012792d6f30aa5646febb19c2f4c8f6d2b14d62f2f",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 27592,
+      "sourceCatalogEntrySha256": "0195d00c39f07a005992d681d11bf5342d280ef3c422d6b3e8cfacc868ba5c73",
+      "originalSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/run.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 13,
+      "identityRotationChannels": 5,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 28364,
+      "sha256": "3e854ea2ab199bff022f2aaa094cb40a98923e2bbcb57b915f18b7dc9fc3bf63",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v9/sprint",
+      "library": "soccer-v9",
+      "label": "ספרינט",
+      "path": "runtime/motion/soccer-v9/sprint.glb",
+      "animationName": "soccer-v9/sprint",
+      "duration": 1.842810034751892,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.4928101301193237,
+        "duration": 1.1428101360797882,
+        "sourceDurationSeconds": 0.5333333333333333
+      },
+      "sourceKey": "soccer-v9/sprint",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v9/sprint.motion-fix-v12.glb",
+      "sourceSha256": "3ffb1bb6cbe1115f9de419659683337c48c897fe5afe7d54cb160ed371a655c9",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 27136,
+      "sourceCatalogEntrySha256": "1ac326100d3d3964a4ae90a467c8055c3398cfdc127cff8a88f00d1873154acd",
+      "originalSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/sprint.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 13,
+      "identityRotationChannels": 5,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 27884,
+      "sha256": "e432bf0e46d1fe7ce06e92fae59d71bce327515f2b938907b693b8afe6bff552",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v9/cut_90",
+      "library": "soccer-v9",
+      "label": "חיתוך 90 מעלות",
+      "path": "runtime/motion/soccer-v9/cut_90.glb",
+      "animationName": "soccer-v9/cut_90",
+      "duration": 2.160667896270752,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.8019521236419678,
+        "duration": 1.4519521296024323,
+        "sourceDurationSeconds": 1.4
+      },
+      "sourceKey": "soccer-v9/cut_90",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v9/cut_90.motion-fix-v12.glb",
+      "sourceSha256": "154a029350a32f075094e686452889666fff8a2af3a8a30843b3f6db6b58b87f",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 40140,
+      "sourceCatalogEntrySha256": "e26895b217ace2013256a129020b2bf608f86a77facb5c3cb5bcb4390931638b",
+      "originalSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/cut_90.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 39760,
+      "sha256": "ebc3ebd49b102912bb16200813c8dde5658328d112e4db5e365069dd497d9719",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v9/throw_in",
+      "library": "soccer-v9",
+      "label": "הוצאת חוץ",
+      "path": "runtime/motion/soccer-v9/throw_in.glb",
+      "animationName": "soccer-v9/throw_in",
+      "duration": 2.5102622509002686,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.1602623462677,
+        "duration": 1.8102623522281647,
+        "sourceDurationSeconds": 1.7999999999999998
+      },
+      "sourceKey": "soccer-v9/throw_in",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v9/throw_in.motion-fix-v12.glb",
+      "sourceSha256": "fe8d40c978a71b08f8c98f3716fa64473e31f78090177da93072867faafea795",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 37228,
+      "sourceCatalogEntrySha256": "355651e95077127115dec4db5030449a9b8644a97db05fc5fbae770926b4b369",
+      "originalSource": {
+        "commit": "5d516207d66cdf91af062b93142e04c6dcbae131",
+        "path": "workout/island/design/soccer-motion-v9/runtime/clips/throw_in.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 16,
+      "identityRotationChannels": 2,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 35808,
+      "sha256": "4a9c7499c531fdaf8a690f55e0c51f367f507cefb500e0b3aa14b0b4cb1dd4db",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v10/cut_45_left",
+      "library": "soccer-v10",
+      "label": "חיתוך שמאלה 45 מעלות",
+      "path": "runtime/motion/soccer-v10/cut_45_left.glb",
+      "animationName": "soccer-v10/cut_45_left",
+      "duration": 1.1404104232788086,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 0.7904103994369507,
+        "duration": 0.44041040539741516,
+        "sourceDurationSeconds": 0.4
+      },
+      "sourceKey": "soccer-v10/cut_45_left",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v10/cut_45_left.motion-fix-v12.glb",
+      "sourceSha256": "0667a62c5af8f2427418c0515e92c605728bdf2116a22e96ffba68ed2724fc48",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 24652,
+      "sourceCatalogEntrySha256": "922c0bf3e8951f4db9b2003cbdc1db313a45207b4d92e06e2c0f88c2f55724e9",
+      "originalSource": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/cut_45_left.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 25520,
+      "sha256": "489236454115b1d44183fa0fffad49671eb04da8f7316857a17522beb6dcdd48",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v10/cut_90_right",
+      "library": "soccer-v10",
+      "label": "חיתוך ימינה 90 מעלות",
+      "path": "runtime/motion/soccer-v10/cut_90_right.glb",
+      "animationName": "soccer-v10/cut_90_right",
+      "duration": 1.2117916345596313,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 0.8617916703224182,
+        "duration": 0.5117916762828827,
+        "sourceDurationSeconds": 0.4666666666666667
+      },
+      "sourceKey": "soccer-v10/cut_90_right",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v10/cut_90_right.motion-fix-v12.glb",
+      "sourceSha256": "8f1689f2056dbc781c4e1061bd61a2e1a386456a9bd1de21a4ea26a0dbced354",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 25784,
+      "sourceCatalogEntrySha256": "94013e42b0a11b0a912db530e39e0b505eab9b054aa31ce9f469303d953253ff",
+      "originalSource": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/cut_90_right.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 26636,
+      "sha256": "9e8758c78d48935d2995d5a3a9321275eec34ac821cd565c8047bb55ed0e479c",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v10/first_touch_chest_standing_quick",
+      "library": "soccer-v10",
+      "label": "עצירת חזה",
+      "path": "runtime/motion/soccer-v10/first_touch_chest_standing_quick.glb",
+      "animationName": "soccer-v10/first_touch_chest_standing_quick",
+      "duration": 1.2000000476837158,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 0.8500000238418579,
+        "duration": 0.5000000298023224,
+        "sourceDurationSeconds": 0.5
+      },
+      "sourceKey": "soccer-v10/first_touch_chest_standing_quick",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v10/first_touch_chest_standing_quick.motion-fix-v12.glb",
+      "sourceSha256": "ed4874b6f7cdfe7a2885303fb43a7128185c1a02ab4e6528e5fe32b3de4fa588",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 15484,
+      "sourceCatalogEntrySha256": "8a1c61f3e42b030d5288006f3ee0c81630a013f30714dc184897f1525935ff1b",
+      "originalSource": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/first_touch_chest_standing_quick.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 16840,
+      "sha256": "6d1623f00d7111935ab705e630d3a97e333b9af2a97ea7ff9a3f568520b039f7",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v10/goalkeeper_long_goal_kick",
+      "library": "soccer-v10",
+      "label": "בעיטת שוער ארוכה",
+      "path": "runtime/motion/soccer-v10/goalkeeper_long_goal_kick.glb",
+      "animationName": "soccer-v10/goalkeeper_long_goal_kick",
+      "duration": 2.110311269760132,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.760311245918274,
+        "duration": 1.4103112518787384,
+        "sourceDurationSeconds": 1.4
+      },
+      "sourceKey": "soccer-v10/goalkeeper_long_goal_kick",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v10/goalkeeper_long_goal_kick.motion-fix-v12.glb",
+      "sourceSha256": "a3e60e768fc96840d19a3f8a9159355097cdd3e3c5430733fa851d35cb423c40",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 30672,
+      "sourceCatalogEntrySha256": "99c266a0d88c75b2505b9cc70e67990aa051960e3e671815b207683b26e9bbe4",
+      "originalSource": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/goalkeeper_long_goal_kick.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 30468,
+      "sha256": "230587509fdbb8c0dd810fdd68a05fcf358a45d8ce7d6bf2e9baabd54c6ebecc",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v10/brake_reaccelerate",
+      "library": "soccer-v10",
+      "label": "בלימה והאצה",
+      "path": "runtime/motion/soccer-v10/brake_reaccelerate.glb",
+      "animationName": "soccer-v10/brake_reaccelerate",
+      "duration": 2.5418577194213867,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.1918578147888184,
+        "duration": 1.8418578207492828,
+        "sourceDurationSeconds": 1.6
+      },
+      "sourceKey": "soccer-v10/brake_reaccelerate",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v10/brake_reaccelerate.motion-fix-v12.glb",
+      "sourceSha256": "0ed3326f83be380b2019b8ee2f6271e67ca74ddc619f92f1c5e26b87649e0952",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 36840,
+      "sourceCatalogEntrySha256": "4058bb10c346da77cb90887aa76e77cbdbb4814033b26d68a888d4e3781b4464",
+      "originalSource": {
+        "commit": "57c536e1291803161e069eff97987295c6194466",
+        "path": "workout/island/design/soccer-motion-v10/runtime/clips/brake_reaccelerate.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 13,
+      "identityRotationChannels": 5,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 38092,
+      "sha256": "180d05518c70237b92a2ae5c18db34f6abd3d7e527189b893ceaf963747fb505",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v11/dribble_slow",
+      "library": "soccer-v11",
+      "label": "כדרור איטי",
+      "path": "runtime/motion/soccer-v11/dribble_slow.glb",
+      "animationName": "soccer-v11/dribble_slow",
+      "duration": 4.406400680541992,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 4.056400775909424,
+        "duration": 3.7064007818698883,
+        "sourceDurationSeconds": 3.6
+      },
+      "sourceKey": "soccer-v11/dribble_slow",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v11/dribble_slow.motion-fix-v12.glb",
+      "sourceSha256": "e633d442cd2f3f5b236b5e751a9126591a8148772578dca15b33fef887e71df9",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 58656,
+      "sourceCatalogEntrySha256": "069eefe346b7686bfa54c3ae043636e5a477e2b66a931de2a09badab1124ab8a",
+      "originalSource": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/dribble_slow.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 13,
+      "identityRotationChannels": 5,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 56328,
+      "sha256": "30593f0f85057a7279e45d258cfee1ec66400fae5849f405c762df918638ce6c",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v11/pass_cross_left",
+      "library": "soccer-v11",
+      "label": "הגבהה משמאל",
+      "path": "runtime/motion/soccer-v11/pass_cross_left.glb",
+      "animationName": "soccer-v11/pass_cross_left",
+      "duration": 3.0999999046325684,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.75,
+        "duration": 2.4000000059604645,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "soccer-v11/pass_cross_left",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v11/pass_cross_left.motion-fix-v12.glb",
+      "sourceSha256": "a0087c615d5bf62041a19ac56a0b256ccbbe845f2b0487752ddb854ddf3594f6",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 25948,
+      "sourceCatalogEntrySha256": "e7cf440d081e33bb8aa403577f122a8d12fe59ba951c67018fee2f6368cf426e",
+      "originalSource": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/pass_cross_left.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 26208,
+      "sha256": "69c0d9a3d6bfb0a811f76f493d9623fdb60071f751c5909fda391bb72678d778",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v11/shot_volley",
+      "library": "soccer-v11",
+      "label": "בעיטת יעף",
+      "path": "runtime/motion/soccer-v11/shot_volley.glb",
+      "animationName": "soccer-v11/shot_volley",
+      "duration": 2.900303602218628,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.5503036975860596,
+        "duration": 2.200303703546524,
+        "sourceDurationSeconds": 2.2
+      },
+      "sourceKey": "soccer-v11/shot_volley",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v11/shot_volley.motion-fix-v12.glb",
+      "sourceSha256": "a03ea6b7488fd3e3599f56784a176ba1c48dec8ad4e3ac4c85276c5d7d8769b3",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 25708,
+      "sourceCatalogEntrySha256": "ae89870659fc17067c6fe41d161b988ab139d9fd76b2dc38f48ea3457d5bf38f",
+      "originalSource": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/shot_volley.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 14,
+      "identityRotationChannels": 4,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 25788,
+      "sha256": "2f8df76d79204255a9815cc1a6fef5a0e528dd868b77a49b0e7a1b38c6fb28ad",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v11/set_throw_in",
+      "library": "soccer-v11",
+      "label": "הוצאת חוץ בעמידה",
+      "path": "runtime/motion/soccer-v11/set_throw_in.glb",
+      "animationName": "soccer-v11/set_throw_in",
+      "duration": 3.1763882637023926,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.826388359069824,
+        "duration": 2.4763883650302887,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "soccer-v11/set_throw_in",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v11/set_throw_in.motion-fix-v12.glb",
+      "sourceSha256": "9bee878cf882c7fd7d4a28417a7696d0352f4eddf86f1aba7f8087087c25ac29",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 33772,
+      "sourceCatalogEntrySha256": "c2e59b1f3b713e1b3ff98a2b70e3200d512b304aa6eea42cdb4a1ebf075c8ebd",
+      "originalSource": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/set_throw_in.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 16,
+      "identityRotationChannels": 2,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 34264,
+      "sha256": "5574777871d50d0dc1cb084404722f3548f07d2123c06fba298dff745288c067",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "soccer-v11/keeper_dive_right",
+      "library": "soccer-v11",
+      "label": "זינוק שוער ימינה",
+      "path": "runtime/motion/soccer-v11/keeper_dive_right.glb",
+      "animationName": "soccer-v11/keeper_dive_right",
+      "duration": 3.700000047683716,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 3.3499999046325684,
+        "duration": 2.999999910593033,
+        "sourceDurationSeconds": 3
+      },
+      "sourceKey": "soccer-v11/keeper_dive_right",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/soccer-v11/keeper_dive_right.motion-fix-v12.glb",
+      "sourceSha256": "3cb3c3e24c37d8fac85a534b89bee1d4b3a781951ded0f2f9feb940df263e17d",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 62264,
+      "sourceCatalogEntrySha256": "3f4119f3de4abc9fe7e1ffefbd40df4f1d8d1751f530915caa6824cef0235177",
+      "originalSource": {
+        "commit": "0c6b5877bd81d69bf389b1e3831e5c49b5feb770",
+        "path": "workout/island/design/soccer-motion-v11/runtime/clips/keeper_dive_right.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "canonical18",
+      "sourceLegLength": 0.78,
+      "targetLegLength": 0.78,
+      "hipsScale": 1,
+      "sourceHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 16,
+      "identityRotationChannels": 2,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 60660,
+      "sha256": "4dad907fd6b3254827e6c6f12c6945ca31ab597b9e6dbed7d784215b50add4fd",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-tall-v1/guard/v9/run",
+      "library": "hoops-tall-v1",
+      "label": "רכז · ריצה",
+      "path": "runtime/motion/hoops-tall-v1/guard__v9__run.glb",
+      "animationName": "hoops-tall-v1/guard/v9/run",
+      "duration": 1.5312402248382568,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.18048894405365,
+        "duration": 0.8304889500141144,
+        "sourceDurationSeconds": 0.6666666667
+      },
+      "sourceKey": "hoops-tall-v1/guard/v9/run",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-tall-v1/guard__v9__run.motion-fix-v12.glb",
+      "sourceSha256": "fc51787a7c7bb9618d67677c358ab85dc321026a9462383ed6ecffd6b2cc8740",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 32612,
+      "sourceCatalogEntrySha256": "5579b15616507a8d78a913ed6d315351d63f51c8031d5b063e34149bcd8a1f80",
+      "originalSource": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "path": "workout/island/design/hoops-tall-v1/runtime/guard.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "guard",
+      "sourceLegLength": 0.9463985015015233,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.8241771291506473,
+      "sourceHipsRest": [
+        0,
+        1.0276043053502095,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 17,
+      "identityRotationChannels": 1,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 32500,
+      "sha256": "aa10b0d6281c6616258f3d9c79c2447b7f97492c5c8a1d732a0fec98e87a77b4",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-tall-v1/guard/v9/dribble_crossover_left",
+      "library": "hoops-tall-v1",
+      "label": "רכז · שינוי יד שמאלה",
+      "path": "runtime/motion/hoops-tall-v1/guard__v9__dribble_crossover_left.glb",
+      "animationName": "hoops-tall-v1/guard/v9/dribble_crossover_left",
+      "duration": 2.0999999046325684,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.75,
+        "duration": 1.4000000059604645,
+        "sourceDurationSeconds": 1.4
+      },
+      "sourceKey": "hoops-tall-v1/guard/v9/dribble_crossover_left",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-tall-v1/guard__v9__dribble_crossover_left.motion-fix-v12.glb",
+      "sourceSha256": "37ead41cbcb378d2ba841a1d2b0eda8e5c12ef39d6db987d942552c3aee74209",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 34504,
+      "sourceCatalogEntrySha256": "53fd71b99220bbdd740d9d06dd6ebf7914060468e75ec4edd0fdb19ddc35c3f6",
+      "originalSource": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "path": "workout/island/design/hoops-tall-v1/runtime/guard.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "guard",
+      "sourceLegLength": 0.9463985015015233,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.8241771291506473,
+      "sourceHipsRest": [
+        0,
+        1.0276043053502095,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 17,
+      "identityRotationChannels": 1,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 32836,
+      "sha256": "d40187dddd469152e01f954f4787d5aaadf97b374eeefb46dd37e4f76b5bb3ee",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-tall-v1/wing/v9/jump_shot",
+      "library": "hoops-tall-v1",
+      "label": "קיצוני · קליעת ניתור",
+      "path": "runtime/motion/hoops-tall-v1/wing__v9__jump_shot.glb",
+      "animationName": "hoops-tall-v1/wing/v9/jump_shot",
+      "duration": 2.8361010551452637,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3520898222923279,
+        "end": 2.486100912094116,
+        "duration": 2.1340110898017883,
+        "sourceDurationSeconds": 2
+      },
+      "sourceKey": "hoops-tall-v1/wing/v9/jump_shot",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-tall-v1/wing__v9__jump_shot.motion-fix-v12.glb",
+      "sourceSha256": "e3b7c858966f3ab0f7d88c228bc407c4b96322730ce027017b34aaeedee85dfb",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 46740,
+      "sourceCatalogEntrySha256": "08e439407ec781cc55fb2af11eae040682f18261f5ad37cc8478c5308467ebad",
+      "originalSource": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "path": "workout/island/design/hoops-tall-v1/runtime/wing.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "wing",
+      "sourceLegLength": 0.996738839355696,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7825520278754277,
+      "sourceHipsRest": [
+        0,
+        1.082264099476709,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 17,
+      "identityRotationChannels": 1,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 45312,
+      "sha256": "3dec50fb4d1e5146eb3e8da666d94488220b31e9630189ca43db913bc0f9bc62",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-tall-v1/center/v9/dunk_two_hands",
+      "library": "hoops-tall-v1",
+      "label": "סנטר · הטבעה בשתי ידיים",
+      "path": "runtime/motion/hoops-tall-v1/center__v9__dunk_two_hands.glb",
+      "animationName": "hoops-tall-v1/center/v9/dunk_two_hands",
+      "duration": 3.2307064533233643,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.37711960077285767,
+        "end": 2.880706548690796,
+        "duration": 2.5035869479179382,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "hoops-tall-v1/center/v9/dunk_two_hands",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-tall-v1/center__v9__dunk_two_hands.motion-fix-v12.glb",
+      "sourceSha256": "529b2b0a924276607929d3edb38dcd991e02e7e5449ea5f5d29556d5d15c7c3e",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 58752,
+      "sourceCatalogEntrySha256": "ac7d3a5726e89d904c703552c06f83d2ad8dd025f2a42060843754154089229d",
+      "originalSource": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "path": "workout/island/design/hoops-tall-v1/runtime/center.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "center",
+      "sourceLegLength": 1.04707923690269,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7449292971440031,
+      "sourceHipsRest": [
+        0,
+        1.1369239593516665,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 17,
+      "identityRotationChannels": 1,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 56044,
+      "sha256": "8ca3a1d775223b1f703fa2aa76c73d3efe7ac2f662685a001f01fd587f781830",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-tall-v1/center/v9/defensive_slide_left",
+      "library": "hoops-tall-v1",
+      "label": "סנטר · תנועת הגנה שמאלה",
+      "path": "runtime/motion/hoops-tall-v1/center__v9__defensive_slide_left.glb",
+      "animationName": "hoops-tall-v1/center/v9/defensive_slide_left",
+      "duration": 2.0999999046325684,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 1.75,
+        "duration": 1.4000000059604645,
+        "sourceDurationSeconds": 1.4
+      },
+      "sourceKey": "hoops-tall-v1/center/v9/defensive_slide_left",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-tall-v1/center__v9__defensive_slide_left.motion-fix-v12.glb",
+      "sourceSha256": "4a46a46f13c2947096ccd4fe86c6d3c0474a92000bbcdd1c656750d7967cf891",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 32024,
+      "sourceCatalogEntrySha256": "95944330b8ec574f14e3da60a105b3b8904d3a8f446657bc4067449a0125ba10",
+      "originalSource": {
+        "commit": "cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa",
+        "path": "workout/island/design/hoops-tall-v1/runtime/center.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "center",
+      "sourceLegLength": 1.04707923690269,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7449292971440031,
+      "sourceHipsRest": [
+        0,
+        1.1369239593516665,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 16,
+      "identityRotationChannels": 2,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 32168,
+      "sha256": "5548a1a017ff456f490aeb5e180482bd2932b087029adb6018afdb91594c912d",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-v11/guard/dribble_between_legs",
+      "library": "hoops-v11",
+      "label": "רכז · כדרור בין הרגליים",
+      "path": "runtime/motion/hoops-v11/guard__dribble_between_legs.glb",
+      "animationName": "hoops-v11/guard/dribble_between_legs",
+      "duration": 3.2079434394836426,
+      "loop": false,
+      "sourceLoop": true,
+      "coreRange": {
+        "start": 0.41162407398223877,
+        "end": 2.857943296432495,
+        "duration": 2.4463192224502563,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "hoops-v11/guard/dribble_between_legs",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-v11/guard__dribble_between_legs.motion-fix-v12.glb",
+      "sourceSha256": "57fd4188d2aa42d59558b3f1f9a5f0f44c17b83ed7b0bdf446c97088dafb0db9",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 38724,
+      "sourceCatalogEntrySha256": "2f8460a08a721f03157db4bed952184a513b43d21e07ff43a43d4070ab1baf4d",
+      "originalSource": {
+        "commit": "20b8740bfc28779815eb5171246ab76816748a46",
+        "path": "workout/island/design/hoops-motion-v11/runtime/clips/guard/dribble_between_legs.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "guard",
+      "sourceLegLength": 0.9463985015015233,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.8241771291506473,
+      "sourceHipsRest": [
+        0,
+        1.0276043053502095,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 15,
+      "identityRotationChannels": 3,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 36816,
+      "sha256": "d543e4cc3abe8595ab070eec6e21e05cb99b32f5be162516d4999207a1b5aea7",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-v11/wing/pass_chest",
+      "library": "hoops-v11",
+      "label": "קיצוני · מסירת חזה",
+      "path": "runtime/motion/hoops-v11/wing__pass_chest.glb",
+      "animationName": "hoops-v11/wing/pass_chest",
+      "duration": 3.0999999046325684,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 2.75,
+        "duration": 2.4000000059604645,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "hoops-v11/wing/pass_chest",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-v11/wing__pass_chest.motion-fix-v12.glb",
+      "sourceSha256": "1daae40f1ca2e9037d70c3e5dd2f6769694987794dfffc9db0e172f5f29f2190",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 32084,
+      "sourceCatalogEntrySha256": "c16c4be716b78641a3e20c2330666d2f2e841ae2ba6c7eb2947a8602c02e9f5e",
+      "originalSource": {
+        "commit": "20b8740bfc28779815eb5171246ab76816748a46",
+        "path": "workout/island/design/hoops-motion-v11/runtime/clips/wing/pass_chest.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "wing",
+      "sourceLegLength": 0.996738839355696,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7825520278754277,
+      "sourceHipsRest": [
+        0,
+        1.082264099476709,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 15,
+      "identityRotationChannels": 3,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 32416,
+      "sha256": "f08cb62177fa1f2b1cbf288dcd9ffcd00e8b311f37ca17845b12ecd9000b9a09",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-v11/center/jump_shot",
+      "library": "hoops-v11",
+      "label": "סנטר · קליעת ניתור",
+      "path": "runtime/motion/hoops-v11/center__jump_shot.glb",
+      "animationName": "hoops-v11/center/jump_shot",
+      "duration": 4.345134258270264,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 3.9951343536376953,
+        "duration": 3.64513435959816,
+        "sourceDurationSeconds": 3.6
+      },
+      "sourceKey": "hoops-v11/center/jump_shot",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-v11/center__jump_shot.motion-fix-v12.glb",
+      "sourceSha256": "a834230d07da7af1783c04901af2eff53e5733742f6965d5da740d6acaa19777",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 45568,
+      "sourceCatalogEntrySha256": "a3c7a53a6c09d2b3d9d79aa2d17a3c58c18e339e4cac32479bba8eb6b022b92a",
+      "originalSource": {
+        "commit": "20b8740bfc28779815eb5171246ab76816748a46",
+        "path": "workout/island/design/hoops-motion-v11/runtime/clips/center/jump_shot.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "center",
+      "sourceLegLength": 1.04707923690269,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7449292971440031,
+      "sourceHipsRest": [
+        0,
+        1.1369239593516665,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 15,
+      "identityRotationChannels": 3,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 43784,
+      "sha256": "b07ee4bb1f7efa23537a958dd752d3443f9ecc2ab376f96f81324ca983699a26",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-v11/guard/fadeaway",
+      "library": "hoops-v11",
+      "label": "רכז · קליעה בנסיגה",
+      "path": "runtime/motion/hoops-v11/guard__fadeaway.glb",
+      "animationName": "hoops-v11/guard/fadeaway",
+      "duration": 4.33667516708374,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3499999940395355,
+        "end": 3.986675262451172,
+        "duration": 3.6366752684116364,
+        "sourceDurationSeconds": 3.6
+      },
+      "sourceKey": "hoops-v11/guard/fadeaway",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-v11/guard__fadeaway.motion-fix-v12.glb",
+      "sourceSha256": "8da92a47898351ee63ed300481e54dfc05001942932dea9c606b29f8a23cd581",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 48384,
+      "sourceCatalogEntrySha256": "dc7399a1c5d6ff86f7f16d695b1719996fe06c1b9f4a8f0528c744b6d2d64d47",
+      "originalSource": {
+        "commit": "20b8740bfc28779815eb5171246ab76816748a46",
+        "path": "workout/island/design/hoops-motion-v11/runtime/clips/guard/fadeaway.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "guard",
+      "sourceLegLength": 0.9463985015015233,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.8241771291506473,
+      "sourceHipsRest": [
+        0,
+        1.0276043053502095,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 15,
+      "identityRotationChannels": 3,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 46588,
+      "sha256": "3f2b9a4b30159ff3045b66c0e3606694ab8816c3dd36a55dcfb9dd1d54fd01ae",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    },
+    {
+      "id": "hoops-v11/center/shot_block",
+      "library": "hoops-v11",
+      "label": "סנטר · חסימת קליעה",
+      "path": "runtime/motion/hoops-v11/center__shot_block.glb",
+      "animationName": "hoops-v11/center/shot_block",
+      "duration": 3.1142311096191406,
+      "loop": false,
+      "sourceLoop": false,
+      "coreRange": {
+        "start": 0.3505305051803589,
+        "end": 2.7637007236480713,
+        "duration": 2.4131702184677124,
+        "sourceDurationSeconds": 2.4
+      },
+      "sourceKey": "hoops-v11/center/shot_block",
+      "sourcePath": "workout/island/design/motion-fix-v12/runtime/hoops-v11/center__shot_block.motion-fix-v12.glb",
+      "sourceSha256": "360c91c9e680afad2d4aa541a6d8c12c7bf47b9c54c7c1f2d05bd7aa79de4b16",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sourceBytes": 36736,
+      "sourceCatalogEntrySha256": "dcfa1647ae9f29f707b28e477d92031c4e7a7d8413bda0a60c666075ba6a637d",
+      "originalSource": {
+        "commit": "20b8740bfc28779815eb5171246ab76816748a46",
+        "path": "workout/island/design/hoops-motion-v11/runtime/clips/center/shot_block.glb",
+        "license": "CC0-1.0"
+      },
+      "sourceProfile": "center",
+      "sourceLegLength": 1.04707923690269,
+      "targetLegLength": 0.78,
+      "hipsScale": 0.7449292971440031,
+      "sourceHipsRest": [
+        0,
+        1.1369239593516665,
+        0
+      ],
+      "targetHipsRest": [
+        0,
+        0.86,
+        0
+      ],
+      "sourceRotationChannels": 15,
+      "identityRotationChannels": 3,
+      "rotationMaxAbsoluteError": 0,
+      "quaternionSamplesPreserved": true,
+      "sourceCatalogMetadata": {
+        "rootMotionApplied": true,
+        "coordinateSpace": "baked native target-rig world; external root motion applied once"
+      },
+      "retarget": "Rest-relative uniform translation scale on Hips and Root. Bone rotations are unchanged. Fixed canonical limb lengths. Ball and other accessories omitted.",
+      "motionScaleNote": "The actor wrapper scales the entire canonical rig and animation together. Travel speed and body-space displacement scale by hipsScale × actorScale; cadence and duration are unchanged. Prop contacts and world-space targets require integration calibration.",
+      "bytes": 36144,
+      "sha256": "911d0a8efcd09ea14df3adb064d8de606951c0bad8643fcf65aa96f3f8aaac6d",
+      "license": "CC0-1.0",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 5,
+        "hints": 0
+      }
+    }
+  ]
+}

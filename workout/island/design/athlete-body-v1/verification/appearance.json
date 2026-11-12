@@ -1,0 +1,2413 @@
+{
+  "schemaVersion": 1,
+  "method": "Two actual renders with the same orthographic camera, studio lights, exposure, PBR material, atlas, outline, skin, hair and vertex palette. Masks use a 10/255 RGB distance from the common background. IoU and pixel differences are image measurements, not a perceptual quality score.",
+  "comparisons": [
+    {
+      "id": "same-kit-normalized",
+      "leftBody": "soccer",
+      "rightBody": "guard",
+      "normalizeHeight": true,
+      "sameUniform": true,
+      "pixels": 372000,
+      "leftForegroundPixels": 41605,
+      "rightForegroundPixels": 41015,
+      "silhouetteIoU": 0.9855803893294881,
+      "foregroundUnionMeanAbsoluteRGB_255": 5.347336377473364,
+      "foregroundIntersectionRGB_RMSE_255": 16.23011040579955,
+      "changedCanvasPixelsPercent": 1.8045698924731184,
+      "exactlyEqualPixelsPercent": 92.63978494623656,
+      "backgroundRGB": [
+        233,
+        234,
+        221
+      ],
+      "files": {
+        "pair": "verification/compare-same-kit-normalized.png",
+        "left": "verification/compare-same-kit-normalized-left.png",
+        "right": "verification/compare-same-kit-normalized-right.png"
+      }
+    },
+    {
+      "id": "sports-normalized",
+      "leftBody": "soccer",
+      "rightBody": "guard",
+      "normalizeHeight": true,
+      "sameUniform": false,
+      "pixels": 372000,
+      "leftForegroundPixels": 41605,
+      "rightForegroundPixels": 40334,
+      "silhouetteIoU": 0.9692141312184571,
+      "foregroundUnionMeanAbsoluteRGB_255": 11.708058960185852,
+      "foregroundIntersectionRGB_RMSE_255": 28.922097180022252,
+      "changedCanvasPixelsPercent": 2.575537634408602,
+      "exactlyEqualPixelsPercent": 92.34596774193548,
+      "backgroundRGB": [
+        233,
+        234,
+        221
+      ],
+      "files": {
+        "pair": "verification/compare-sports-normalized.png",
+        "left": "verification/compare-sports-normalized-left.png",
+        "right": "verification/compare-sports-normalized-right.png"
+      }
+    },
+    {
+      "id": "sports-native-height",
+      "leftBody": "soccer",
+      "rightBody": "guard",
+      "normalizeHeight": false,
+      "sameUniform": false,
+      "pixels": 372000,
+      "leftForegroundPixels": 41605,
+      "rightForegroundPixels": 39450,
+      "silhouetteIoU": 0.9441379641178164,
+      "foregroundUnionMeanAbsoluteRGB_255": 19.62435639131408,
+      "foregroundIntersectionRGB_RMSE_255": 34.95899381368321,
+      "changedCanvasPixelsPercent": 5.497043010752688,
+      "exactlyEqualPixelsPercent": 90.16075268817204,
+      "backgroundRGB": [
+        233,
+        234,
+        221
+      ],
+      "files": {
+        "pair": "verification/compare-sports-native-height.png",
+        "left": "verification/compare-sports-native-height-left.png",
+        "right": "verification/compare-sports-native-height-right.png"
+      }
+    },
+    {
+      "id": "control-identical-body",
+      "leftBody": "soccer",
+      "rightBody": "soccer",
+      "normalizeHeight": true,
+      "sameUniform": true,
+      "pixels": 372000,
+      "leftForegroundPixels": 41605,
+      "rightForegroundPixels": 41605,
+      "silhouetteIoU": 1.0,
+      "foregroundUnionMeanAbsoluteRGB_255": 0.0,
+      "foregroundIntersectionRGB_RMSE_255": 0.0,
+      "changedCanvasPixelsPercent": 0.0,
+      "exactlyEqualPixelsPercent": 100.0,
+      "backgroundRGB": [
+        233,
+        234,
+        221
+      ],
+      "files": {
+        "pair": "verification/compare-control-identical-body.png",
+        "left": "verification/compare-control-identical-body-left.png",
+        "right": "verification/compare-control-identical-body-right.png"
+      }
+    }
+  ],
+  "sheetCoverage": {
+    "sheets": 100,
+    "frames": 800,
+    "rows": [
+      {
+        "path": "verification/sheets/soccer--soccer-v9--walk.png",
+        "foregroundPixelsPerFrame": [
+          14018,
+          12382,
+          12378,
+          12883,
+          13046,
+          13291,
+          12517,
+          14018
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v9--run.png",
+        "foregroundPixelsPerFrame": [
+          14012,
+          13480,
+          13165,
+          12707,
+          12557,
+          12410,
+          13353,
+          14012
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v9--sprint.png",
+        "foregroundPixelsPerFrame": [
+          14024,
+          12842,
+          13166,
+          12414,
+          12268,
+          11193,
+          12572,
+          14024
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v9--cut_90.png",
+        "foregroundPixelsPerFrame": [
+          14023,
+          13783,
+          13311,
+          12882,
+          12562,
+          12328,
+          12214,
+          14023
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v9--throw_in.png",
+        "foregroundPixelsPerFrame": [
+          14030,
+          13584,
+          14606,
+          14877,
+          14112,
+          13438,
+          14305,
+          14030
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v10--cut_45_left.png",
+        "foregroundPixelsPerFrame": [
+          14352,
+          14101,
+          12627,
+          13076,
+          12644,
+          12459,
+          13294,
+          14400
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v10--cut_90_right.png",
+        "foregroundPixelsPerFrame": [
+          14384,
+          13197,
+          12107,
+          12909,
+          11303,
+          11959,
+          11611,
+          10758
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v10--first_touch_chest_standing_quick.png",
+        "foregroundPixelsPerFrame": [
+          14367,
+          14235,
+          14054,
+          14025,
+          13667,
+          13668,
+          14024,
+          14367
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v10--goalkeeper_long_goal_kick.png",
+        "foregroundPixelsPerFrame": [
+          13605,
+          13997,
+          13703,
+          13562,
+          12748,
+          13528,
+          13991,
+          13605
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v10--brake_reaccelerate.png",
+        "foregroundPixelsPerFrame": [
+          14350,
+          12706,
+          12542,
+          13022,
+          12473,
+          12660,
+          13167,
+          14350
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v11--dribble_slow.png",
+        "foregroundPixelsPerFrame": [
+          14357,
+          11691,
+          11245,
+          11903,
+          12556,
+          12527,
+          11216,
+          14357
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v11--pass_cross_left.png",
+        "foregroundPixelsPerFrame": [
+          14372,
+          14146,
+          13445,
+          12817,
+          12683,
+          13540,
+          14140,
+          14372
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v11--shot_volley.png",
+        "foregroundPixelsPerFrame": [
+          14368,
+          14298,
+          13382,
+          12615,
+          11703,
+          13293,
+          14292,
+          14368
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v11--set_throw_in.png",
+        "foregroundPixelsPerFrame": [
+          14380,
+          13829,
+          13726,
+          13782,
+          12894,
+          13121,
+          13931,
+          14380
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--soccer-v11--keeper_dive_right.png",
+        "foregroundPixelsPerFrame": [
+          13619,
+          14055,
+          12822,
+          10554,
+          10271,
+          9874,
+          13469,
+          13619
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-tall-v1--guard--v9--run.png",
+        "foregroundPixelsPerFrame": [
+          13707,
+          13072,
+          13120,
+          13114,
+          13748,
+          12097,
+          13109,
+          13707
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-tall-v1--guard--v9--dribble_crossover_left.png",
+        "foregroundPixelsPerFrame": [
+          13721,
+          13578,
+          13678,
+          13486,
+          13668,
+          13650,
+          13581,
+          13721
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-tall-v1--wing--v9--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          13215,
+          13021,
+          12880,
+          13168,
+          13224,
+          13581,
+          13277,
+          13215
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-tall-v1--center--v9--dunk_two_hands.png",
+        "foregroundPixelsPerFrame": [
+          8691,
+          8526,
+          7954,
+          8692,
+          8516,
+          9120,
+          8606,
+          8691
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-tall-v1--center--v9--defensive_slide_left.png",
+        "foregroundPixelsPerFrame": [
+          13824,
+          13988,
+          13933,
+          13466,
+          13682,
+          13544,
+          13821,
+          13824
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-v11--guard--dribble_between_legs.png",
+        "foregroundPixelsPerFrame": [
+          13781,
+          12492,
+          12908,
+          12598,
+          12667,
+          12909,
+          12494,
+          13781
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-v11--wing--pass_chest.png",
+        "foregroundPixelsPerFrame": [
+          13751,
+          13186,
+          12666,
+          12810,
+          13457,
+          13629,
+          13631,
+          13751
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-v11--center--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          12485,
+          11609,
+          11341,
+          12291,
+          11975,
+          12399,
+          12400,
+          12485
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-v11--guard--fadeaway.png",
+        "foregroundPixelsPerFrame": [
+          11878,
+          11074,
+          10803,
+          11617,
+          11385,
+          11786,
+          11785,
+          11878
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/soccer--hoops-v11--center--shot_block.png",
+        "foregroundPixelsPerFrame": [
+          12257,
+          12172,
+          12239,
+          11945,
+          12157,
+          12157,
+          12174,
+          12257
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v9--walk.png",
+        "foregroundPixelsPerFrame": [
+          13252,
+          11713,
+          11714,
+          12241,
+          12363,
+          12566,
+          11834,
+          13252
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v9--run.png",
+        "foregroundPixelsPerFrame": [
+          13247,
+          12750,
+          12439,
+          12043,
+          11911,
+          11741,
+          12642,
+          13247
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v9--sprint.png",
+        "foregroundPixelsPerFrame": [
+          13257,
+          12097,
+          12370,
+          11753,
+          11670,
+          10511,
+          11869,
+          13257
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v9--cut_90.png",
+        "foregroundPixelsPerFrame": [
+          13251,
+          13041,
+          12601,
+          12184,
+          12036,
+          11799,
+          11693,
+          13251
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v9--throw_in.png",
+        "foregroundPixelsPerFrame": [
+          13265,
+          12886,
+          13856,
+          14132,
+          13371,
+          12764,
+          13594,
+          13265
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v10--cut_45_left.png",
+        "foregroundPixelsPerFrame": [
+          13677,
+          13346,
+          11949,
+          12318,
+          11939,
+          11823,
+          12599,
+          13705
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v10--cut_90_right.png",
+        "foregroundPixelsPerFrame": [
+          13703,
+          12555,
+          11529,
+          12262,
+          10961,
+          11596,
+          11267,
+          10437
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v10--first_touch_chest_standing_quick.png",
+        "foregroundPixelsPerFrame": [
+          13682,
+          13499,
+          13271,
+          13368,
+          13065,
+          13068,
+          13407,
+          13682
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v10--goalkeeper_long_goal_kick.png",
+        "foregroundPixelsPerFrame": [
+          12928,
+          13251,
+          13084,
+          12964,
+          12172,
+          12903,
+          13256,
+          12928
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v10--brake_reaccelerate.png",
+        "foregroundPixelsPerFrame": [
+          13680,
+          11999,
+          11938,
+          12340,
+          11856,
+          11962,
+          12425,
+          13680
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v11--dribble_slow.png",
+        "foregroundPixelsPerFrame": [
+          13658,
+          11069,
+          10688,
+          11312,
+          11895,
+          11862,
+          10665,
+          13658
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v11--pass_cross_left.png",
+        "foregroundPixelsPerFrame": [
+          13671,
+          13451,
+          12812,
+          12254,
+          12103,
+          12903,
+          13441,
+          13671
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v11--shot_volley.png",
+        "foregroundPixelsPerFrame": [
+          13679,
+          13608,
+          12744,
+          12046,
+          11171,
+          12644,
+          13613,
+          13679
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v11--set_throw_in.png",
+        "foregroundPixelsPerFrame": [
+          13661,
+          13127,
+          13010,
+          13086,
+          12208,
+          12527,
+          13242,
+          13661
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--soccer-v11--keeper_dive_right.png",
+        "foregroundPixelsPerFrame": [
+          12948,
+          13366,
+          12156,
+          9950,
+          9697,
+          9319,
+          12769,
+          12948
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-tall-v1--guard--v9--run.png",
+        "foregroundPixelsPerFrame": [
+          12973,
+          12419,
+          12492,
+          12505,
+          13040,
+          11446,
+          12456,
+          12973
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-tall-v1--guard--v9--dribble_crossover_left.png",
+        "foregroundPixelsPerFrame": [
+          12989,
+          12863,
+          12946,
+          12777,
+          12954,
+          12984,
+          12906,
+          12989
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-tall-v1--wing--v9--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          12776,
+          12739,
+          12588,
+          12823,
+          12848,
+          13191,
+          12883,
+          12776
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-tall-v1--center--v9--dunk_two_hands.png",
+        "foregroundPixelsPerFrame": [
+          8439,
+          8335,
+          7789,
+          8438,
+          8250,
+          8857,
+          8375,
+          8439
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-tall-v1--center--v9--defensive_slide_left.png",
+        "foregroundPixelsPerFrame": [
+          13100,
+          13247,
+          13182,
+          12766,
+          12994,
+          12813,
+          13112,
+          13100
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-v11--guard--dribble_between_legs.png",
+        "foregroundPixelsPerFrame": [
+          13052,
+          11679,
+          12033,
+          11788,
+          11811,
+          12062,
+          11658,
+          13052
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-v11--wing--pass_chest.png",
+        "foregroundPixelsPerFrame": [
+          12995,
+          12288,
+          11845,
+          12008,
+          12613,
+          12780,
+          12780,
+          12995
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-v11--center--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          12087,
+          11073,
+          10789,
+          11891,
+          11544,
+          11925,
+          11925,
+          12087
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-v11--guard--fadeaway.png",
+        "foregroundPixelsPerFrame": [
+          11500,
+          10576,
+          10289,
+          11246,
+          10979,
+          11348,
+          11347,
+          11500
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/guard--hoops-v11--center--shot_block.png",
+        "foregroundPixelsPerFrame": [
+          11870,
+          11603,
+          11737,
+          11525,
+          11600,
+          11590,
+          11605,
+          11870
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v9--walk.png",
+        "foregroundPixelsPerFrame": [
+          16557,
+          14619,
+          14589,
+          15315,
+          15481,
+          15689,
+          14752,
+          16557
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v9--run.png",
+        "foregroundPixelsPerFrame": [
+          16573,
+          15990,
+          15620,
+          15084,
+          14902,
+          14684,
+          15814,
+          16573
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v9--sprint.png",
+        "foregroundPixelsPerFrame": [
+          16501,
+          15091,
+          15481,
+          14665,
+          14544,
+          13130,
+          14761,
+          16501
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v9--cut_90.png",
+        "foregroundPixelsPerFrame": [
+          16560,
+          16331,
+          15775,
+          15300,
+          15072,
+          14735,
+          14564,
+          16560
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v9--throw_in.png",
+        "foregroundPixelsPerFrame": [
+          14492,
+          14123,
+          15159,
+          15482,
+          14682,
+          14017,
+          14857,
+          14492
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v10--cut_45_left.png",
+        "foregroundPixelsPerFrame": [
+          16988,
+          16682,
+          14967,
+          15479,
+          14896,
+          14817,
+          15710,
+          17025
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v10--cut_90_right.png",
+        "foregroundPixelsPerFrame": [
+          16991,
+          15628,
+          14416,
+          15292,
+          13532,
+          14375,
+          13899,
+          12958
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v10--first_touch_chest_standing_quick.png",
+        "foregroundPixelsPerFrame": [
+          16952,
+          16768,
+          16542,
+          16596,
+          16224,
+          16228,
+          16613,
+          16952
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v10--goalkeeper_long_goal_kick.png",
+        "foregroundPixelsPerFrame": [
+          16229,
+          16543,
+          16254,
+          16191,
+          15182,
+          16031,
+          16543,
+          16229
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v10--brake_reaccelerate.png",
+        "foregroundPixelsPerFrame": [
+          16954,
+          15045,
+          14917,
+          15407,
+          14798,
+          14921,
+          15590,
+          16954
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v11--dribble_slow.png",
+        "foregroundPixelsPerFrame": [
+          16956,
+          13775,
+          13333,
+          14001,
+          14850,
+          14755,
+          13240,
+          16956
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v11--pass_cross_left.png",
+        "foregroundPixelsPerFrame": [
+          16950,
+          16754,
+          15953,
+          15252,
+          15066,
+          16072,
+          16745,
+          16950
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v11--shot_volley.png",
+        "foregroundPixelsPerFrame": [
+          16937,
+          16874,
+          15899,
+          15021,
+          13916,
+          15784,
+          16870,
+          16937
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v11--set_throw_in.png",
+        "foregroundPixelsPerFrame": [
+          16956,
+          16341,
+          16324,
+          16404,
+          15295,
+          15681,
+          16419,
+          16956
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--soccer-v11--keeper_dive_right.png",
+        "foregroundPixelsPerFrame": [
+          16271,
+          16697,
+          15211,
+          12495,
+          12172,
+          11622,
+          15971,
+          16271
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-tall-v1--guard--v9--run.png",
+        "foregroundPixelsPerFrame": [
+          16342,
+          15591,
+          15554,
+          15589,
+          16329,
+          14356,
+          15586,
+          16342
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-tall-v1--guard--v9--dribble_crossover_left.png",
+        "foregroundPixelsPerFrame": [
+          16332,
+          16182,
+          16294,
+          16037,
+          16268,
+          16299,
+          16175,
+          16332
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-tall-v1--wing--v9--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          13509,
+          13422,
+          13277,
+          13521,
+          13573,
+          13953,
+          13605,
+          13509
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-tall-v1--center--v9--dunk_two_hands.png",
+        "foregroundPixelsPerFrame": [
+          8941,
+          8778,
+          8243,
+          8908,
+          8704,
+          9352,
+          8846,
+          8941
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-tall-v1--center--v9--defensive_slide_left.png",
+        "foregroundPixelsPerFrame": [
+          16432,
+          16682,
+          16600,
+          16027,
+          16255,
+          16080,
+          16480,
+          16432
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-v11--guard--dribble_between_legs.png",
+        "foregroundPixelsPerFrame": [
+          16348,
+          14606,
+          15057,
+          14737,
+          14761,
+          15108,
+          14625,
+          16348
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-v11--wing--pass_chest.png",
+        "foregroundPixelsPerFrame": [
+          16305,
+          15347,
+          14805,
+          15001,
+          15728,
+          15909,
+          15911,
+          16305
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-v11--center--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          12766,
+          11663,
+          11382,
+          12553,
+          12206,
+          12556,
+          12556,
+          12766
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-v11--guard--fadeaway.png",
+        "foregroundPixelsPerFrame": [
+          12149,
+          11122,
+          10816,
+          11885,
+          11589,
+          11943,
+          11944,
+          12149
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/wing--hoops-v11--center--shot_block.png",
+        "foregroundPixelsPerFrame": [
+          12577,
+          12273,
+          12413,
+          12212,
+          12237,
+          12255,
+          12271,
+          12577
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v9--walk.png",
+        "foregroundPixelsPerFrame": [
+          17844,
+          15732,
+          15663,
+          16563,
+          16780,
+          16942,
+          15894,
+          17844
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v9--run.png",
+        "foregroundPixelsPerFrame": [
+          17356,
+          16793,
+          16412,
+          15868,
+          15671,
+          15366,
+          16633,
+          17356
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v9--sprint.png",
+        "foregroundPixelsPerFrame": [
+          17253,
+          15844,
+          16248,
+          15418,
+          15249,
+          13747,
+          15452,
+          17253
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v9--cut_90.png",
+        "foregroundPixelsPerFrame": [
+          17590,
+          17407,
+          16813,
+          16310,
+          16031,
+          15657,
+          15490,
+          17590
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v9--throw_in.png",
+        "foregroundPixelsPerFrame": [
+          15174,
+          14873,
+          15936,
+          16241,
+          15400,
+          14740,
+          15562,
+          15174
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v10--cut_45_left.png",
+        "foregroundPixelsPerFrame": [
+          18299,
+          18177,
+          16314,
+          16837,
+          16234,
+          16159,
+          17051,
+          18358
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v10--cut_90_right.png",
+        "foregroundPixelsPerFrame": [
+          18353,
+          17059,
+          15778,
+          16652,
+          14656,
+          15636,
+          15099,
+          14103
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v10--first_touch_chest_standing_quick.png",
+        "foregroundPixelsPerFrame": [
+          18369,
+          18259,
+          18061,
+          18018,
+          17701,
+          17699,
+          18024,
+          18369
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v10--goalkeeper_long_goal_kick.png",
+        "foregroundPixelsPerFrame": [
+          17897,
+          18174,
+          17763,
+          17756,
+          16630,
+          17500,
+          18174,
+          17897
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v10--brake_reaccelerate.png",
+        "foregroundPixelsPerFrame": [
+          18370,
+          16451,
+          16259,
+          16845,
+          16145,
+          16330,
+          17037,
+          18370
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v11--dribble_slow.png",
+        "foregroundPixelsPerFrame": [
+          18370,
+          14978,
+          14529,
+          15219,
+          16225,
+          16100,
+          14441,
+          18370
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v11--pass_cross_left.png",
+        "foregroundPixelsPerFrame": [
+          18371,
+          18150,
+          17380,
+          16667,
+          16489,
+          17533,
+          18152,
+          18371
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v11--shot_volley.png",
+        "foregroundPixelsPerFrame": [
+          18331,
+          18279,
+          17377,
+          16336,
+          15132,
+          17259,
+          18278,
+          18331
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v11--set_throw_in.png",
+        "foregroundPixelsPerFrame": [
+          18367,
+          17815,
+          17930,
+          17985,
+          16792,
+          17185,
+          17889,
+          18367
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--soccer-v11--keeper_dive_right.png",
+        "foregroundPixelsPerFrame": [
+          17761,
+          18140,
+          16601,
+          13631,
+          13298,
+          12625,
+          17387,
+          17761
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-tall-v1--guard--v9--run.png",
+        "foregroundPixelsPerFrame": [
+          19316,
+          18409,
+          18272,
+          18354,
+          19292,
+          16981,
+          18359,
+          19316
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-tall-v1--guard--v9--dribble_crossover_left.png",
+        "foregroundPixelsPerFrame": [
+          19572,
+          19393,
+          19539,
+          19201,
+          19476,
+          19446,
+          19366,
+          19572
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-tall-v1--wing--v9--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          14266,
+          14069,
+          13930,
+          14238,
+          14278,
+          14653,
+          14302,
+          14266
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-tall-v1--center--v9--dunk_two_hands.png",
+        "foregroundPixelsPerFrame": [
+          9419,
+          9167,
+          8680,
+          9344,
+          9167,
+          9860,
+          9327,
+          9419
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-tall-v1--center--v9--defensive_slide_left.png",
+        "foregroundPixelsPerFrame": [
+          19942,
+          20248,
+          20130,
+          19421,
+          19698,
+          19491,
+          20013,
+          19942
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-v11--guard--dribble_between_legs.png",
+        "foregroundPixelsPerFrame": [
+          19831,
+          17683,
+          18222,
+          17849,
+          17848,
+          18302,
+          17722,
+          19831
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-v11--wing--pass_chest.png",
+        "foregroundPixelsPerFrame": [
+          19234,
+          18047,
+          17422,
+          17631,
+          18422,
+          18637,
+          18636,
+          19234
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-v11--center--jump_shot.png",
+        "foregroundPixelsPerFrame": [
+          13450,
+          12263,
+          11956,
+          13194,
+          12853,
+          13192,
+          13192,
+          13450
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-v11--guard--fadeaway.png",
+        "foregroundPixelsPerFrame": [
+          12783,
+          11690,
+          11397,
+          12513,
+          12200,
+          12576,
+          12576,
+          12783
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "path": "verification/sheets/center--hoops-v11--center--shot_block.png",
+        "foregroundPixelsPerFrame": [
+          13264,
+          12904,
+          13122,
+          12919,
+          12892,
+          12880,
+          12905,
+          13264
+        ],
+        "clipped": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    ]
+  },
+  "passed": true
+}
