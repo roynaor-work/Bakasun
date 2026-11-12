@@ -16,6 +16,8 @@ import {waitForGameStart,waitForGameNavigation} from '../../../tests/shell-ready
 
 const OUT=new URL('./',import.meta.url);
 const PARTS=(process.env.QA_PART||'smoke').split(',').map(s=>s.trim()).filter(Boolean);
+const TAG=process.env.QA_TAG?process.env.QA_TAG+'-':'';const ONLY=process.env.QA_MODES?process.env.QA_MODES.split(','):null;const want=list=>ONLY?list.filter(m=>ONLY.includes(m)):list;
+const RESTS=(process.env.QA_RESTS||'300,500,600,1500').split(',').map(Number);
 const MODES={default:'',v15off:'&alienV15=0',movev20:'&alienMove=v20'};
 const wall0=Date.now(),log=(...a)=>console.log(`[${((Date.now()-wall0)/1000).toFixed(0)}s]`,...a);
 const round=(n,d=2)=>Number.isFinite(n)?+n.toFixed(d):n;
@@ -97,7 +99,7 @@ async function exitGame(I){
 }
 async function sampling(I,on){await I.page.evaluate(v=>{window.__qaOn=v;if(v)window.__qaS=[];},on);}
 async function samples(I){return I.page.evaluate(()=>{const s=window.__qaS;window.__qaS=[];return {s,err:window.__qaErr||null};});}
-const shot=(I,name)=>I.page.screenshot({path:new URL(`qa-aliens-${name}.jpg`,OUT).pathname,type:'jpeg',quality:82});
+const shot=(I,name)=>I.page.screenshot({path:new URL(`qa-aliens-${TAG}${name}.jpg`,OUT).pathname,type:'jpeg',quality:82});
 
 /** Hold the real fire button (one finger) for ms of game time; marks = {ms:name} screenshots + snapshot. */
 async function holdFire(I,ms,marks={}){
@@ -133,7 +135,10 @@ function analyseHold(rows,{v15}){
   firstGaps:gapsOf(cannonEvents).slice(0,14),
   inAirSteady:steadyLast?inAir(s=>s.t>t0+steadyLast.from+.9&&s.t<=t0+steadyLast.to):null,inAirAll:inAir(()=>true)};
 }
-async function writeJSON(name,value){await writeFile(new URL(`qa-aliens-${name}.json`,OUT),JSON.stringify(value,null,1)+'\n');log('wrote',`qa-aliens-${name}.json`);}
+async function writeJSON(name,value){const {execSync}=await import('node:child_process');let head=null;try{head=execSync('git rev-parse --short HEAD',{cwd:new URL('./',import.meta.url).pathname}).toString().trim();}catch{}
+ const {createHash}=await import('node:crypto');const {readFileSync}=await import('node:fs');const code={};for(const f of ['minigames/alien-v15.mjs','minigames/alien-move.mjs','minigames/alien-flight-model.mjs','minigames/alien-v14-draw.mjs','data/config.json','data/strings.he.json'])try{code[f]=createHash('sha1').update(readFileSync(new URL('../../../../'+f,import.meta.url))).digest('hex').slice(0,10);}catch{}
+ if(value&&typeof value==='object'&&!Array.isArray(value))value={...value,_meta:{head,code,writtenAt:new Date().toISOString()}};
+ await writeFile(new URL(`qa-aliens-${TAG}${name}.json`,OUT),JSON.stringify(value,null,1)+'\n');log('wrote',`qa-aliens-${TAG}${name}.json`);}
 
 const results={};
 if(PARTS.includes('reanalyse')){const {readFile}=await import('node:fs/promises');for(const part of ['fire','gear']){let r;try{r=JSON.parse(await readFile(new URL(`qa-aliens-${part}.json`,OUT),'utf8'));}catch{continue;}
@@ -147,9 +152,9 @@ try{
 
  // ---------------------------------------------------------------- fire: fresh save, hold the real button 8 s
  if(PARTS.includes('fire')){const r={};
-  for(const mode of ['default','v15off']){const I=await openIsland(mode);const tag=mode==='default'?'new':'v20';
+  for(const mode of want(['default','v15off'])){const I=await openIsland(mode);const tag=mode==='default'?'new':'v20';
    const lsBefore=await I.page.evaluate(()=>Object.fromEntries(Object.keys(localStorage).map(k=>[k,localStorage.getItem(k)])));
-   const g=await startGame(I,{captureIntro:mode==='default'?new URL('qa-aliens-help-intro.jpg',OUT).pathname:null});
+   const g=await startGame(I,{captureIntro:mode==='default'?new URL(`qa-aliens-${TAG}help-intro.jpg`,OUT).pathname:null});
    await I.tick(2600); // formation entry (1.7 s) before the press, button untouched
    await sampling(I,true);
    const marks=mode==='default'?{700:`${tag}-burst`,2200:`${tag}-cooling`,5000:`${tag}-steady-a`,6600:`${tag}-steady-b`}:{700:`${tag}-burst`,2500:`${tag}-firing`,4200:`${tag}-cooling`,6600:`${tag}-after-cool`};
@@ -165,7 +170,7 @@ try{
 
  // ---------------------------------------------------------------- taps: a child hammering the real button
  if(PARTS.includes('taps')){const r={};
-  for(const mode of ['default','v15off']){const I=await openIsland(mode);r[mode]={};
+  for(const mode of want(['default','v15off'])){const I=await openIsland(mode);r[mode]={};
    for(const [name,down,up] of [['fast10hz',40,60],['tap6hz',64,96],['tap3hz',112,192]]){
     const g=await startGame(I);await I.tick(2600);await sampling(I,true);
     const fire=await center(I.page,'#shoot');let t=0,taps=0;
@@ -181,7 +186,7 @@ try{
 
  // ---------------------------------------------------------------- recharge: after steady fire, how long a rest brings the Vulcan burst back
  if(PARTS.includes('recharge')){const r={};const I=await openIsland('default');
-  for(const rest of [300,500,600,1500]){
+  for(const rest of RESTS){
    await startGame(I);await I.tick(2600);await sampling(I,true);
    const fire=await center(I.page,'#shoot');
    await I.touch('touchStart',[{x:fire.x,y:fire.y,id:3}],true);await I.tick(4200);await I.touch('touchEnd',[],false); // burst, cool, steady
@@ -217,7 +222,7 @@ try{
 
  // ---------------------------------------------------------------- motion: the real stick, default vs ?alienMove=v20 vs ?alienV15=0
  if(PARTS.includes('motion')){const r={};
-  for(const mode of ['default','movev20','v15off']){const I=await openIsland(mode);const g=await startGame(I);await I.tick(2600);
+  for(const mode of want(['default','movev20','v15off'])){const I=await openIsland(mode);const g=await startGame(I);await I.tick(2600);
    const stick=await center(I.page,'#joystick'),canvas=g.geometry.canvas,pxPerUnit=canvas.w/360;
    const seg={};await sampling(I,true);
    const push=async(dx,ms)=>{await I.touch('touchStart',[{x:stick.x,y:stick.y,id:1}]);await I.touch('touchMove',[{x:stick.x+dx,y:stick.y,id:1}]);await I.tick(ms);};

@@ -1257,5 +1257,996 @@
   },
   "csp": "clean",
   "errors": []
+ },
+ "after-portrait": {
+  "viewport": {
+   "width": 390,
+   "height": 844
+  },
+  "touch": true,
+  "query": "index.html?dev=1&adapt=1",
+  "startLabel": "ממשיכים לגל 9 ←",
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
+   "LEGACY": false
+  },
+  "m": {
+   "W": 390,
+   "H": 844,
+   "rects": {
+    "coins": [
+     12,
+     8,
+     78,
+     34
+    ],
+    "health": [
+     198,
+     8,
+     120,
+     31
+    ],
+    "wave": [
+     134,
+     44,
+     121,
+     21
+    ],
+    "hint": null,
+    "boss": null,
+    "weapons": null,
+    "ammo": null,
+    "abilities": [
+     254,
+     532,
+     52,
+     172
+    ],
+    "rocket": [
+     254,
+     532,
+     52,
+     52
+    ],
+    "frost": [
+     254,
+     592,
+     52,
+     52
+    ],
+    "fury": [
+     254,
+     652,
+     52,
+     52
+    ],
+    "weaponBtn": [
+     316,
+     640,
+     64,
+     64
+    ],
+    "fire": [
+     264,
+     718,
+     108,
+     108
+    ],
+    "aimRest": [
+     24,
+     710,
+     110,
+     110
+    ],
+    "aimZone": [
+     0,
+     186,
+     187,
+     658
+    ],
+    "brand": null,
+    "topControls": null,
+    "wslots": []
+   },
+   "overlaps": [],
+   "controlsInStickZone": [],
+   "leftThumbGrid": {
+    "points": 492,
+    "onStick": 492,
+    "other": {}
+   },
+   "coverage": {
+    "hud": {
+     "screen": 6.3,
+     "band": 3,
+     "leftHalf": 2.4,
+     "leftBand": 0,
+     "rightBand": 6
+    },
+    "hudAndControls": {
+     "screen": 13.6,
+     "band": 3,
+     "leftHalf": 9.7,
+     "leftBand": 0,
+     "rightBand": 6
+    },
+    "fixerSelectors": {
+     "screen": 6.5,
+     "band": 3,
+     "leftHalf": 2.5,
+     "leftBand": 0,
+     "rightBand": 6
+    }
+   },
+   "paintedHud": [
+    [
+     198,
+     8,
+     120,
+     31
+    ],
+    [
+     270,
+     13,
+     37,
+     14
+    ],
+    [
+     209,
+     13,
+     43,
+     14
+    ],
+    [
+     209,
+     30,
+     98,
+     4
+    ],
+    [
+     209,
+     30,
+     98,
+     4
+    ],
+    [
+     211,
+     50,
+     44,
+     14
+    ],
+    [
+     180,
+     39,
+     23,
+     29
+    ],
+    [
+     134,
+     48,
+     12,
+     17
+    ],
+    [
+     147,
+     48,
+     25,
+     17
+    ],
+    [
+     12,
+     8,
+     78,
+     34
+    ],
+    [
+     67,
+     13,
+     12,
+     24
+    ],
+    [
+     23,
+     14,
+     38,
+     22
+    ],
+    [
+     254,
+     532,
+     52,
+     52
+    ],
+    [
+     272,
+     538,
+     17,
+     29
+    ],
+    [
+     271,
+     561,
+     18,
+     14
+    ],
+    [
+     255,
+     581,
+     50,
+     2
+    ],
+    [
+     254,
+     592,
+     52,
+     52
+    ],
+    [
+     272,
+     598,
+     17,
+     29
+    ],
+    [
+     271,
+     621,
+     18,
+     14
+    ],
+    [
+     255,
+     641,
+     50,
+     2
+    ],
+    [
+     254,
+     652,
+     52,
+     52
+    ],
+    [
+     275,
+     658,
+     11,
+     29
+    ],
+    [
+     274,
+     681,
+     13,
+     14
+    ],
+    [
+     316,
+     640,
+     64,
+     64
+    ],
+    [
+     342,
+     645,
+     12,
+     29
+    ],
+    [
+     336,
+     670,
+     25,
+     14
+    ],
+    [
+     333,
+     682,
+     13,
+     14
+    ],
+    [
+     346,
+     682,
+     18,
+     14
+    ]
+   ],
+   "controls": [
+    [
+     24,
+     710,
+     110,
+     110
+    ],
+    [
+     264,
+     718,
+     108,
+     108
+    ],
+    [
+     303,
+     736,
+     30,
+     50
+    ],
+    [
+     309,
+     778,
+     18,
+     22
+    ]
+   ],
+   "fonts": {
+    "abilitySmall": [
+     "10px",
+     "10px",
+     "10px"
+    ],
+    "weaponName": "10px",
+    "weaponAmmo": "10px",
+    "waveSmall": "10px",
+    "waveNumber": "20px",
+    "healthLabel": "10px",
+    "hint": "11px",
+    "restLabel": "12px",
+    "wslotSmall": []
+   },
+   "restStyle": {
+    "border": "rgba(207, 221, 211, 0.6) dashed",
+    "label": "\"כוונון\"",
+    "labelColor": "rgba(207, 221, 211, 0.8)"
+   }
+  },
+  "islandOverlay": [
+   {
+    "what": "game-header",
+    "rect": [
+     8,
+     8,
+     374,
+     56
+    ]
+   },
+   {
+    "what": "game-pause",
+    "rect": [
+     326,
+     8,
+     56,
+     56
+    ]
+   }
+  ],
+  "islandOverlayOverlaps": [],
+  "hiddenBoars": {
+   "samples": [
+    {
+     "visible": 4,
+     "underHud": 0
+    },
+    {
+     "visible": 5,
+     "underHud": 0
+    },
+    {
+     "visible": 5,
+     "underHud": 0
+    },
+    {
+     "visible": 6,
+     "underHud": 0
+    },
+    {
+     "visible": 6,
+     "underHud": 0
+    },
+    {
+     "visible": 7,
+     "underHud": 0
+    },
+    {
+     "visible": 7,
+     "underHud": 0
+    },
+    {
+     "visible": 8,
+     "underHud": 0
+    },
+    {
+     "visible": 8,
+     "underHud": 0
+    },
+    {
+     "visible": 9,
+     "underHud": 0
+    }
+   ],
+   "visible": 65,
+   "underHud": 0,
+   "pct": 0
+  },
+  "boss": {
+   "rects": {
+    "boss": [
+     59,
+     56,
+     273,
+     36
+    ],
+    "wave": [
+     134,
+     44,
+     121,
+     21
+    ],
+    "health": [
+     198,
+     8,
+     120,
+     31
+    ],
+    "hint": null
+   },
+   "overlaps": [
+    "wave/boss"
+   ]
+  },
+  "weaponCycle": [
+   {
+    "current": "shotgun",
+    "label": "רסס",
+    "ammo": "6 / 6"
+   },
+   {
+    "current": "cannon",
+    "label": "תותח",
+    "ammo": "4 / 4"
+   },
+   {
+    "current": "tesla",
+    "label": "ברק",
+    "ammo": "חום 0%"
+   },
+   {
+    "current": "mg",
+    "label": "מקלע",
+    "ammo": "חום 0%"
+   }
+  ],
+  "screens": {
+   "menu": {
+    "mode": "menu",
+    "hudVisible": [
+     ".coin-block",
+     ".health-block",
+     ".wave-block",
+     ".brand"
+    ],
+    "hudOverMenuText": []
+   },
+   "shop": {
+    "mode": "shop",
+    "hudVisible": [
+     ".coin-block",
+     ".health-block",
+     ".wave-block",
+     ".brand"
+    ],
+    "hudOverMenuText": [
+     ".wave-block over \"חוזרים לקרב חזקים יותר\"",
+     ".brand over \"חוזרים לקרב חזקים יותר\""
+    ]
+   }
+  },
+  "final": {
+   "mode": "shop",
+   "frames": 263,
+   "elapsed": 12.767,
+   "shots": 0,
+   "shotsBy": {
+    "button": 0,
+    "scene": 0,
+    "keyboard": 0,
+    "mouse": 0,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "abilityBy": {
+    "rocket": 0,
+    "frost": 0,
+    "fury": 0
+   },
+   "current": "mg",
+   "wave": 9,
+   "flags": {
+    "TOUCH": true,
+    "AIMSTICK": true,
+    "FIRE_V21": true,
+    "HUD_V21": true,
+    "STICK_V21": true,
+    "LEGACY": false
+   },
+   "enemies": 0,
+   "hp": 100,
+   "aim": {
+    "x": 0,
+    "y": -0.05
+   }
+  },
+  "csp": "clean",
+  "errors": []
+ },
+ "after-desktop": {
+  "viewport": {
+   "width": 1280,
+   "height": 720
+  },
+  "touch": false,
+  "query": "index.html?dev=1&adapt=1",
+  "startLabel": "ממשיכים לגל 9 ←",
+  "flags": {
+   "TOUCH": false,
+   "AIMSTICK": false,
+   "FIRE_V21": false,
+   "HUD_V21": true,
+   "STICK_V21": false,
+   "LEGACY": false
+  },
+  "m": {
+   "W": 1280,
+   "H": 720,
+   "rects": {
+    "coins": [
+     12,
+     8,
+     78,
+     34
+    ],
+    "health": [
+     1058,
+     8,
+     150,
+     31
+    ],
+    "wave": [
+     579,
+     6,
+     121,
+     21
+    ],
+    "hint": null,
+    "boss": null,
+    "weapons": null,
+    "ammo": null,
+    "abilities": [
+     1182,
+     452,
+     52,
+     172
+    ],
+    "rocket": [
+     1182,
+     452,
+     52,
+     52
+    ],
+    "frost": [
+     1182,
+     512,
+     52,
+     52
+    ],
+    "fury": [
+     1182,
+     572,
+     52,
+     52
+    ],
+    "weaponBtn": [
+     1198,
+     638,
+     64,
+     64
+    ],
+    "fire": null,
+    "aimRest": null,
+    "aimZone": null,
+    "brand": null,
+    "topControls": null,
+    "wslots": []
+   },
+   "overlaps": [],
+   "controlsInStickZone": [],
+   "leftThumbGrid": {
+    "points": 1015,
+    "onStick": 0,
+    "other": {
+     "scene": 1015
+    }
+   },
+   "coverage": {
+    "hud": {
+     "screen": 2.4,
+     "band": 0.9,
+     "leftHalf": 0.9,
+     "leftBand": 0,
+     "rightBand": 1.8
+    },
+    "hudAndControls": {
+     "screen": 2.4,
+     "band": 0.9,
+     "leftHalf": 0.9,
+     "leftBand": 0,
+     "rightBand": 1.8
+    },
+    "fixerSelectors": {
+     "screen": 2.4,
+     "band": 0.9,
+     "leftHalf": 0.9,
+     "leftBand": 0,
+     "rightBand": 1.8
+    }
+   },
+   "paintedHud": [
+    [
+     1058,
+     8,
+     150,
+     31
+    ],
+    [
+     1160,
+     13,
+     37,
+     14
+    ],
+    [
+     1069,
+     13,
+     43,
+     14
+    ],
+    [
+     1069,
+     30,
+     128,
+     4
+    ],
+    [
+     1069,
+     30,
+     128,
+     4
+    ],
+    [
+     656,
+     12,
+     44,
+     14
+    ],
+    [
+     625,
+     1,
+     23,
+     29
+    ],
+    [
+     579,
+     10,
+     12,
+     17
+    ],
+    [
+     592,
+     10,
+     25,
+     17
+    ],
+    [
+     12,
+     8,
+     78,
+     34
+    ],
+    [
+     67,
+     13,
+     12,
+     24
+    ],
+    [
+     23,
+     14,
+     38,
+     22
+    ],
+    [
+     1182,
+     452,
+     52,
+     52
+    ],
+    [
+     1200,
+     458,
+     17,
+     29
+    ],
+    [
+     1199,
+     481,
+     18,
+     14
+    ],
+    [
+     1183,
+     501,
+     50,
+     2
+    ],
+    [
+     1182,
+     512,
+     52,
+     52
+    ],
+    [
+     1200,
+     518,
+     17,
+     29
+    ],
+    [
+     1199,
+     541,
+     18,
+     14
+    ],
+    [
+     1183,
+     561,
+     50,
+     2
+    ],
+    [
+     1182,
+     572,
+     52,
+     52
+    ],
+    [
+     1203,
+     578,
+     11,
+     29
+    ],
+    [
+     1202,
+     601,
+     13,
+     14
+    ],
+    [
+     1198,
+     638,
+     64,
+     64
+    ],
+    [
+     1224,
+     643,
+     12,
+     29
+    ],
+    [
+     1218,
+     668,
+     25,
+     14
+    ],
+    [
+     1215,
+     680,
+     13,
+     14
+    ],
+    [
+     1228,
+     680,
+     18,
+     14
+    ]
+   ],
+   "controls": [],
+   "fonts": {
+    "abilitySmall": [
+     "10px",
+     "10px",
+     "10px"
+    ],
+    "weaponName": "10px",
+    "weaponAmmo": "10px",
+    "waveSmall": "10px",
+    "waveNumber": "20px",
+    "healthLabel": "10px",
+    "hint": "11px",
+    "restLabel": null,
+    "wslotSmall": []
+   },
+   "restStyle": null
+  },
+  "islandOverlay": [
+   {
+    "what": "game-header",
+    "rect": [
+     8,
+     8,
+     1264,
+     56
+    ]
+   },
+   {
+    "what": "game-pause",
+    "rect": [
+     1216,
+     8,
+     56,
+     56
+    ]
+   }
+  ],
+  "islandOverlayOverlaps": [],
+  "hiddenBoars": {
+   "samples": [
+    {
+     "visible": 7,
+     "underHud": 0
+    },
+    {
+     "visible": 8,
+     "underHud": 0
+    },
+    {
+     "visible": 8,
+     "underHud": 0
+    },
+    {
+     "visible": 9,
+     "underHud": 0
+    },
+    {
+     "visible": 9,
+     "underHud": 0
+    },
+    {
+     "visible": 10,
+     "underHud": 0
+    },
+    {
+     "visible": 10,
+     "underHud": 0
+    },
+    {
+     "visible": 11,
+     "underHud": 0
+    },
+    {
+     "visible": 11,
+     "underHud": 0
+    },
+    {
+     "visible": 12,
+     "underHud": 0
+    }
+   ],
+   "visible": 95,
+   "underHud": 0,
+   "pct": 0
+  },
+  "boss": {
+   "rects": {
+    "boss": [
+     430,
+     56,
+     420,
+     36
+    ],
+    "wave": [
+     579,
+     6,
+     121,
+     21
+    ],
+    "health": [
+     1058,
+     8,
+     150,
+     31
+    ],
+    "hint": null
+   },
+   "overlaps": []
+  },
+  "screens": {
+   "menu": {
+    "mode": "menu",
+    "hudVisible": [
+     ".coin-block",
+     ".health-block",
+     ".wave-block",
+     ".brand"
+    ],
+    "hudOverMenuText": []
+   },
+   "shop": {
+    "mode": "shop",
+    "hudVisible": [
+     ".coin-block",
+     ".health-block",
+     ".wave-block",
+     ".brand"
+    ],
+    "hudOverMenuText": []
+   }
+  },
+  "desktopInput": {
+   "mouseShots": 2,
+   "mouseAim": {
+    "x": -0.219,
+    "y": 0.167
+   },
+   "keyFShots": 3,
+   "keyQ": 0,
+   "shotsBy": {
+    "button": 0,
+    "scene": 0,
+    "keyboard": 3,
+    "mouse": 2,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   }
+  },
+  "final": {
+   "mode": "battle",
+   "frames": 304,
+   "elapsed": 14.783,
+   "shots": 5,
+   "shotsBy": {
+    "button": 0,
+    "scene": 0,
+    "keyboard": 3,
+    "mouse": 2,
+    "auto": 0,
+    "qa": 0,
+    "unknown": 0
+   },
+   "abilityBy": {
+    "rocket": 0,
+    "frost": 0,
+    "fury": 0
+   },
+   "current": "mg",
+   "wave": 9,
+   "flags": {
+    "TOUCH": false,
+    "AIMSTICK": false,
+    "FIRE_V21": false,
+    "HUD_V21": true,
+    "STICK_V21": false,
+    "LEGACY": false
+   },
+   "enemies": 2,
+   "hp": 100,
+   "aim": {
+    "x": -0.219,
+    "y": 0.167
+   }
+  },
+  "csp": "clean",
+  "errors": []
  }
 }

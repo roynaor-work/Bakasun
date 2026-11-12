@@ -480,6 +480,1094 @@
     }
    }
   },
+  "drive-pumper": {
+   "run": "drive-pumper",
+   "query": "&fireTruckModel=v20",
+   "build": "after",
+   "kind": "v7",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": {
+    "legs": {
+     "up": {
+      "samples": 7,
+      "fastSamples": 5,
+      "medianSlipFast": 0.1,
+      "maxSlipFast": 0.1,
+      "maxSlipAll": 0.1,
+      "maxOffRoadCenter": 0
+     },
+     "right": {
+      "samples": 9,
+      "fastSamples": 6,
+      "medianSlipFast": 3.3,
+      "maxSlipFast": 15.1,
+      "maxSlipAll": 46.1,
+      "maxOffRoadCenter": 0.89
+     },
+     "down": {
+      "samples": 8,
+      "fastSamples": 4,
+      "medianSlipFast": 0.3,
+      "maxSlipFast": 0.6,
+      "maxSlipAll": 15.1,
+      "maxOffRoadCenter": 2.06
+     },
+     "left": {
+      "samples": 13,
+      "fastSamples": 9,
+      "medianSlipFast": 0.4,
+      "maxSlipFast": 0.7,
+      "maxSlipAll": 17,
+      "maxOffRoadCenter": 2.53
+     },
+     "acrossBlock": {
+      "samples": 13,
+      "fastSamples": 9,
+      "medianSlipFast": 0,
+      "maxSlipFast": 1.7,
+      "maxSlipAll": 11.4,
+      "maxOffRoadCenter": 0.64
+     }
+    },
+    "drivingSamples": 52,
+    "roofLadderOpenWhileDriving": 0,
+    "maxRoofLadderDeviationDriving": null,
+    "boxLadderVisibleWhileDriving": 0,
+    "spraySamples": 44,
+    "roofLadderOpenWhileSpraying": 0,
+    "maxRoofLadderDeviationSpraying": null
+   },
+   "gauge": {
+    "start": {
+     "percent": 100,
+     "level": "ok",
+     "text": "100%",
+     "box": {
+      "x": 16,
+      "y": 72,
+      "w": 200,
+      "h": 36
+     },
+     "visible": true,
+     "fontSize": "14px",
+     "textColor": "rgb(230, 242, 244)",
+     "textAnimation": "none",
+     "fill": {
+      "transform": "scaleX(1)",
+      "background": "linear-gradient(rgb(143, 220, 240), rgb(62, 159, 192))"
+     }
+    },
+    "critical": {
+     "percent": 19,
+     "level": "critical",
+     "text": "19%",
+     "box": {
+      "x": 16,
+      "y": 72,
+      "w": 200,
+      "h": 36
+     },
+     "visible": true,
+     "fontSize": "14px",
+     "textColor": "rgb(246, 163, 148)",
+     "textAnimation": "fire-gauge-pulse",
+     "fill": {
+      "transform": "scaleX(0.19)",
+      "background": "linear-gradient(rgb(240, 138, 122), rgb(217, 67, 47))"
+     }
+    },
+    "refill": {
+     "percent": 19,
+     "level": "refilling",
+     "text": "19%",
+     "box": {
+      "x": 16,
+      "y": 72,
+      "w": 200,
+      "h": 36
+     },
+     "visible": true,
+     "fontSize": "14px",
+     "textColor": "rgb(230, 242, 244)",
+     "textAnimation": "none",
+     "fill": {
+      "transform": "scaleX(0.19)",
+      "background": "linear-gradient(rgb(169, 232, 195), rgb(79, 184, 126))"
+     }
+    },
+    "end": {
+     "percent": 100,
+     "level": "ok",
+     "text": "100%",
+     "box": {
+      "x": 16,
+      "y": 72,
+      "w": 200,
+      "h": 36
+     },
+     "visible": true,
+     "fontSize": "14px",
+     "textColor": "rgb(230, 242, 244)",
+     "textAnimation": "none",
+     "fill": {
+      "transform": "scaleX(1)",
+      "background": "linear-gradient(rgb(143, 220, 240), rgb(62, 159, 192))"
+     }
+    },
+    "samples": 102,
+    "mismatches": 0,
+    "levels": [
+     "ok",
+     "low",
+     "critical",
+     "refilling"
+    ],
+    "minModel": 0
+   },
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [],
+     "refill": {
+      "text": "",
+      "aria": "מילוי מים",
+      "labels": 0
+     }
+    },
+    "spray": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 0,
+   "audio": {
+    "idle": {
+     "label": "fire burning, not spraying",
+     "n": 12,
+     "medianRmsDb": -50.9,
+     "maxRmsDb": -47.5,
+     "medianCentroidHz": 111,
+     "medianPhoneBandShare": 0.014,
+     "state": "running"
+    },
+    "spray": {
+     "label": "spraying",
+     "n": 12,
+     "medianRmsDb": -33.5,
+     "maxRmsDb": -33.4,
+     "medianCentroidHz": 2552,
+     "medianPhoneBandShare": 0.21,
+     "state": "running"
+    },
+    "idleLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     }
+    },
+    "sprayLoops": {
+     "fire": {
+      "gain": 0.1599999964237213,
+      "rate": 0.550000011920929
+     },
+     "engine": {
+      "gain": 0,
+      "rate": 0.6000000238418579
+     },
+     "jet": {
+      "gain": 0.2753211557865143,
+      "rate": 1
+     }
+    },
+    "state": "running"
+   },
+   "taps": [
+    {
+     "x": 521,
+     "y": 274,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 244,
+     "y": 176,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "tap": {
+     "screen": {
+      "x": 243.8210507547461,
+      "y": 175.99183661162712
+     },
+     "inStickZone": true,
+     "hit": ".soccer-stick-zone",
+     "navigationAfterTap": {
+      "active": false,
+      "kind": null
+     }
+    },
+    "drive": {
+     "hydrant": [
+      -16.7,
+      0.1,
+      -6
+     ],
+     "goal": [
+      -16.7,
+      -6
+     ],
+     "ok": true
+    },
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 2337,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 2339,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 14726,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/engine-pumper.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 18482,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 18930,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 18930,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 18930,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 19170,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 32610,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning.glb"
+    },
+    {
+     "t": 78307,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning-lod.glb"
+    },
+    {
+     "t": 87383,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning.glb"
+    },
+    {
+     "t": 167052,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-scorched-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 1,
+      "stars": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "rescue-new-double": {
+   "run": "rescue-new-double",
+   "query": "",
+   "build": "after",
+   "kind": "meshy",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": null,
+   "gauge": null,
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [],
+     "refill": {
+      "text": "",
+      "aria": "מילוי מים",
+      "labels": 0
+     }
+    },
+    "rescue": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 6,
+   "audio": {},
+   "rescues": [
+    {
+     "index": 0,
+     "tapAt": {
+      "x": 550.0059624090179,
+      "y": 155.58787423872647,
+      "marker": "person",
+      "inStickZone": false,
+      "hit": ".minigame-canvas",
+      "navigationAfterTap": {
+       "active": true,
+       "kind": "rescue"
+      }
+     },
+     "arrived": {
+      "near": true,
+      "time": 1.328000000000001,
+      "distance": 3.021165642253304,
+      "heat": 0.9871064060018397,
+      "safe": false
+     },
+     "windowCleared": {
+      "safe": true,
+      "heat": 0,
+      "time": 3.3600000000000025,
+      "water": 77.5680000000004
+     },
+     "secondTapAfterMs": 300,
+     "tap100": {
+      "pressMs": 100,
+      "rescued": false,
+      "seconds": null,
+      "maxProgress": 0.41333333333333355,
+      "maxExtension": 0.41333333333333355,
+      "maxLadderDeviationDeg": 30.5,
+      "minTipToTarget": 2.03,
+      "wrongStick": false
+     },
+     "folded": {
+      "time": 11.924000000000008,
+      "extension": 0,
+      "deviationDeg": 0,
+      "pitchDeg": 0,
+      "boxLadderVisible": false,
+      "rescued": false
+     }
+    }
+   ],
+   "taps": [
+    {
+     "x": 550,
+     "y": 156,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 389,
+     "y": 163,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 2750,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 17394,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 20675,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 20675,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 20677,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 20677,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 20678,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 20685,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander-lod.glb"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 20686,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 21009,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 21009,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 21009,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 21652,
+     "ev": "req",
+     "path": "assets/models/fire-truck-512.glb"
+    },
+    {
+     "t": 21652,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 49950,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-scorched-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 3,
+      "stars": [
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "rescue-new-press": {
+   "run": "rescue-new-press",
+   "query": "",
+   "build": "after",
+   "kind": "meshy",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": null,
+   "gauge": null,
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [],
+     "refill": {
+      "text": "",
+      "aria": "מילוי מים",
+      "labels": 0
+     }
+    },
+    "rescue": {
+     "overlaps": []
+    }
+   },
+   "indicatorsUnderGauge": 37,
+   "audio": {},
+   "rescues": [
+    {
+     "index": 0,
+     "tapAt": {
+      "x": 551.7100279719419,
+      "y": 155.06320456703713,
+      "marker": "person",
+      "inStickZone": false,
+      "hit": ".minigame-canvas",
+      "navigationAfterTap": {
+       "active": true,
+       "kind": "rescue"
+      }
+     },
+     "arrived": {
+      "near": true,
+      "time": 1.392000000000001,
+      "distance": 3.021165642253304,
+      "heat": 0.9712995370733551,
+      "safe": false
+     },
+     "windowCleared": {
+      "safe": true,
+      "heat": 0,
+      "time": 3.2640000000000025,
+      "water": 79.80800000000036
+     },
+     "tap100": {
+      "pressMs": 100,
+      "rescued": true,
+      "seconds": 1.25,
+      "maxProgress": 1,
+      "maxExtension": 1,
+      "maxLadderDeviationDeg": 70.2,
+      "minTipToTarget": 1.09,
+      "wrongStick": false
+     },
+     "tap500": {
+      "pressMs": 500,
+      "rescued": false,
+      "seconds": null,
+      "maxProgress": 0.4166666666666668,
+      "maxExtension": 0.4166666666666668,
+      "maxLadderDeviationDeg": 30.7,
+      "minTipToTarget": 2.02,
+      "wrongStick": false
+     },
+     "folded": {
+      "time": 10.584000000000007,
+      "extension": 0,
+      "deviationDeg": 0.02,
+      "pitchDeg": 0,
+      "boxLadderVisible": false,
+      "rescued": true
+     }
+    }
+   ],
+   "taps": [
+    {
+     "x": 552,
+     "y": 155,
+     "ms": 80,
+     "hit": ".minigame-canvas"
+    },
+    {
+     "x": 389,
+     "y": 163,
+     "ms": 80,
+     "hit": ".soccer-stick-zone"
+    }
+   ],
+   "hydrant": {
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 2190,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 15178,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/models/bystander-lod.glb"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 19454,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 19852,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 19869,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 19869,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 20976,
+     "ev": "req",
+     "path": "assets/models/fire-truck-512.glb"
+    },
+    {
+     "t": 20976,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 60294,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-scorched-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 3,
+      "stars": [
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
   "rescue-new-tap": {
    "run": "rescue-new-tap",
    "query": "",
@@ -820,6 +1908,487 @@
       "stars": [
        1,
        1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  "turns-new": {
+   "run": "turns-new",
+   "query": "",
+   "build": "after",
+   "kind": "meshy",
+   "renderMode": "three",
+   "error": null,
+   "errors": [],
+   "outside": [],
+   "csp": {
+    "clean": true
+   },
+   "drive": null,
+   "gauge": null,
+   "dom": {
+    "start": {
+     "overlaps": [],
+     "outOfView": [],
+     "waterWords": [],
+     "refill": {
+      "text": "",
+      "aria": "מילוי מים",
+      "labels": 0
+     }
+    }
+   },
+   "indicatorsUnderGauge": 9,
+   "audio": {},
+   "turns": [
+    {
+     "d": 4,
+     "actualBefore": 3.7,
+     "speed": 18,
+     "time": 0.8000000000000005,
+     "from": {
+      "x": 6,
+      "z": 9.7
+     },
+     "junction": {
+      "x": 6,
+      "z": 6
+     },
+     "interior": true,
+     "push": {
+      "x": -1,
+      "z": 0
+     },
+     "turnedAt": {
+      "x": 4.29,
+      "z": 6.13,
+      "time": 1.280000000000001
+     },
+     "turnedAtJunctionCoordinate": 6,
+     "intended": 6,
+     "turnedWhereIntended": true,
+     "secondsToTurn": 0.48,
+     "blockedSamples": 0
+    },
+    {
+     "d": 2,
+     "actualBefore": 1.65,
+     "speed": 18,
+     "time": 2.528000000000002,
+     "from": {
+      "x": -16.35,
+      "z": 5.99
+     },
+     "junction": {
+      "x": -18,
+      "z": 6
+     },
+     "interior": false,
+     "push": {
+      "x": 0,
+      "z": -1
+     },
+     "turnedAt": {
+      "x": -19.02,
+      "z": 4.7,
+      "time": 2.912000000000002
+     },
+     "turnedAtJunctionCoordinate": -18,
+     "intended": -18,
+     "turnedWhereIntended": true,
+     "secondsToTurn": 0.38,
+     "blockedSamples": 0
+    },
+    {
+     "d": 0,
+     "actualBefore": -0.09,
+     "speed": 18,
+     "time": 4.320000000000003,
+     "from": {
+      "x": -18.28,
+      "z": -18.09
+     },
+     "junction": {
+      "x": -19,
+      "z": -18
+     },
+     "interior": false,
+     "push": {
+      "x": 1,
+      "z": 0
+     },
+     "turnedAt": {
+      "x": -17.34,
+      "z": -21.06,
+      "time": 4.704000000000003
+     },
+     "turnedAtJunctionCoordinate": -18,
+     "intended": -18,
+     "turnedWhereIntended": true,
+     "secondsToTurn": 0.38,
+     "blockedSamples": 0
+    },
+    {
+     "d": -1.5,
+     "actualBefore": -2.01,
+     "speed": 18,
+     "time": 6.304000000000005,
+     "from": {
+      "x": 8.01,
+      "z": -18.62
+     },
+     "junction": {
+      "x": 6,
+      "z": -20
+     },
+     "interior": false,
+     "push": {
+      "x": 0,
+      "z": 1
+     },
+     "turnedAt": {
+      "x": 19.26,
+      "z": -16.56,
+      "time": 8.032000000000005
+     },
+     "turnedAtJunctionCoordinate": 18,
+     "intended": 6,
+     "turnedWhereIntended": false,
+     "secondsToTurn": 1.73,
+     "blockedSamples": 1
+    },
+    {
+     "d": 1,
+     "actualBefore": 0.57,
+     "speed": 18,
+     "time": 9.376000000000007,
+     "from": {
+      "x": 18.34,
+      "z": 5.43
+     },
+     "junction": {
+      "x": 19,
+      "z": 6
+     },
+     "interior": false,
+     "push": {
+      "x": -1,
+      "z": 0
+     },
+     "turnedAt": {
+      "x": 16.75,
+      "z": 19.01,
+      "time": 11.200000000000008
+     },
+     "turnedAtJunctionCoordinate": 18,
+     "intended": 6,
+     "turnedWhereIntended": false,
+     "secondsToTurn": 1.82,
+     "blockedSamples": 1
+    },
+    {
+     "d": 0,
+     "actualBefore": -0.03,
+     "speed": 18,
+     "time": 12.60800000000001,
+     "from": {
+      "x": -6.03,
+      "z": 18.28
+     },
+     "junction": {
+      "x": -6,
+      "z": 19
+     },
+     "interior": false,
+     "push": {
+      "x": 0,
+      "z": -1
+     },
+     "turnedAt": {
+      "x": -19.08,
+      "z": 16.54,
+      "time": 14.432000000000011
+     },
+     "turnedAtJunctionCoordinate": -18,
+     "intended": -6,
+     "turnedWhereIntended": false,
+     "secondsToTurn": 1.82,
+     "blockedSamples": 1
+    },
+    {
+     "d": 3,
+     "actualBefore": 2.86,
+     "speed": 18,
+     "time": 15.648000000000012,
+     "from": {
+      "x": -18.34,
+      "z": -3.14
+     },
+     "junction": {
+      "x": -19,
+      "z": -6
+     },
+     "interior": false,
+     "push": {
+      "x": 1,
+      "z": 0
+     },
+     "turnedAt": {
+      "x": -16.37,
+      "z": -6.14,
+      "time": 16.12800000000001
+     },
+     "turnedAtJunctionCoordinate": -6,
+     "intended": -6,
+     "turnedWhereIntended": true,
+     "secondsToTurn": 0.48,
+     "blockedSamples": 0
+    },
+    {
+     "d": -1,
+     "actualBefore": -1.49,
+     "speed": 18,
+     "time": 17.536000000000012,
+     "from": {
+      "x": 7.49,
+      "z": -6.05
+     },
+     "junction": {
+      "x": 6,
+      "z": -6
+     },
+     "interior": true,
+     "push": {
+      "x": 0,
+      "z": 1
+     },
+     "turnedAt": {
+      "x": 19.26,
+      "z": -4.76,
+      "time": 19.264000000000014
+     },
+     "turnedAtJunctionCoordinate": 18,
+     "intended": 6,
+     "turnedWhereIntended": false,
+     "secondsToTurn": 1.73,
+     "blockedSamples": 1
+    }
+   ],
+   "taps": [],
+   "hydrant": {
+    "notReached": false
+   },
+   "assetLog": [
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/palm-tree-512.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/adult-man-rigged-512.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/adult-woman-rigged-512.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/city/47-sedan-car.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/city/34-town-hall.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/city/52-taxi.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/city/50-police-car.glb"
+    },
+    {
+     "t": 2927,
+     "ev": "req",
+     "path": "assets/models/city/51-ambulance.glb"
+    },
+    {
+     "t": 21829,
+     "ev": "req",
+     "path": "assets/models/city/28-fire-station.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/audio/g2n/engine.ogg"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/audio/g2n/fire.ogg"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/row-house-intact-lod.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-intact-lod.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-intact-lod.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-intact-lod.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-intact-lod.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/hydrant.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/models/crew-nozzle.glb"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/flame-256.png"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/smoke-256.png"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/ember-256.png"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/water-256.png"
+    },
+    {
+     "t": 24850,
+     "ev": "req",
+     "path": "assets/fire-v7/particles/steam-256.png"
+    },
+    {
+     "t": 25243,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning-lod.glb"
+    },
+    {
+     "t": 25243,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning-lod.glb"
+    },
+    {
+     "t": 25243,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning.glb"
+    },
+    {
+     "t": 27047,
+     "ev": "req",
+     "path": "assets/models/fire-truck-512.glb"
+    },
+    {
+     "t": 27047,
+     "ev": "req",
+     "path": "assets/ultra-fire/tree-a-512.glb"
+    },
+    {
+     "t": 44175,
+     "ev": "req",
+     "path": "assets/fire-v7/models/workshop-burning.glb"
+    },
+    {
+     "t": 49811,
+     "ev": "req",
+     "path": "assets/fire-v7/models/corner-store-burning-lod.glb"
+    },
+    {
+     "t": 57509,
+     "ev": "req",
+     "path": "assets/fire-v7/models/warehouse-burning.glb"
+    },
+    {
+     "t": 254270,
+     "ev": "req",
+     "path": "assets/fire-v7/models/apartment-burning-lod.glb"
+    }
+   ],
+   "save": {
+    "before": {
+     "version": 19,
+     "keys": [
+      "island.v1"
+     ],
+     "paths": 265
+    },
+    "after": {
+     "version": 19,
+     "keys": [
+      "island.quality.auto",
+      "island.v1"
+     ],
+     "paths": 265,
+     "fireProgress": {
+      "stage": 1,
+      "stars": [
+       0,
+       0,
        0,
        0,
        0,
@@ -1271,6 +2840,22 @@
    "onlyHere": [],
    "missingHere": []
   },
+  "drive-pumper": {
+   "onlyHere": [],
+   "missingHere": []
+  },
+  "drive-v19": {
+   "onlyHere": [],
+   "missingHere": []
+  },
+  "rescue-new-double": {
+   "onlyHere": [],
+   "missingHere": []
+  },
+  "rescue-new-press": {
+   "onlyHere": [],
+   "missingHere": []
+  },
   "rescue-new-tap": {
    "onlyHere": [],
    "missingHere": []
@@ -1279,7 +2864,15 @@
    "onlyHere": [],
    "missingHere": []
   },
+  "turns-new": {
+   "onlyHere": [],
+   "missingHere": []
+  },
   "wind-new": {
+   "onlyHere": [],
+   "missingHere": []
+  },
+  "wind-old": {
    "onlyHere": [],
    "missingHere": []
   }
