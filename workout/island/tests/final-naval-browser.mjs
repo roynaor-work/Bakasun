@@ -130,10 +130,10 @@ await verify(before?(phase1?'final-naval-before':'final-naval2-before'):(phase1?
    s=await snap();ammo.turnedAway={yawDeg:+(s.turret.yaw*DEG).toFixed(1),fired:s.fired};assert.equal(s.fired,0,'lifting over the cancel chip does not fire');
    const tapFire=async()=>{await touch('touchStart',[fire1]);await tick(60);await touch('touchEnd');await tick(420);ammo.taps++;};
    for(let i=0;i<30&&(await snap()).loaded>3;i++)await tapFire();await tick(100);s=await snap();
-   ammo.atLow={loaded:s.loaded,level:s.hud?.ammo?.level,buoys:s.buoys?.length,dataset:await page.evaluate(()=>document.querySelector('.game-controls')?.dataset.ammoLevel)};await capture('ammo-low');
-   assert.equal(s.loaded,3);assert.equal(ammo.atLow.level,'low');assert.equal(s.buoys.length,1,'a buoy appears at the low mark');assert.equal(ammo.atLow.dataset,'low');
+   ammo.atLow={loaded:s.loaded,level:s.hud?.ammo?.level,buoys:s.buoys?.length,dataset:await page.evaluate(()=>document.querySelector('.game-controls')?.dataset.ammoLevel),picker:(await page.locator('.naval-picked-count').textContent())?.trim()};await capture('ammo-low');
+   assert.equal(s.loaded,3);assert.equal(ammo.atLow.level,'low');assert.equal(ammo.atLow.picker,'3','the weapon picker shows the loaded shells, like the gauge');assert.equal(s.buoys.length,1,'a buoy appears at the low mark');assert.equal(ammo.atLow.dataset,'low');
    for(let i=0;i<10&&(await snap()).loaded>0;i++)await tapFire();await tick(100);s=await snap();
-   ammo.atEmpty={loaded:s.loaded,level:s.hud?.ammo?.level,message:s.hud?.ammo?.message,fired:s.fired,stock:s.ammo[0]};await capture('ammo-empty');
+   ammo.atEmpty={loaded:s.loaded,level:s.hud?.ammo?.level,message:s.hud?.ammo?.message,fired:s.fired,stock:s.ammo[0],picker:(await page.locator('.naval-picked-count').textContent())?.trim()};await capture('ammo-empty');assert.equal(ammo.atEmpty.picker,'0');
    assert.equal(s.loaded,0);assert.equal(ammo.atEmpty.message,'נגמרה התחמושת, אוספים אספקה');const firedEmpty=s.fired;await tapFire();assert.equal((await snap()).fired,firedEmpty,'nothing loaded, the tap does not fire');
    let overlap=0,labelled=0;for(let t=0;t<12000&&(await snap()).supplies<1;t+=250){await tick(250);const h=(await snap()).hud?.ammo;if(h?.buoyLabel&&h?.messageBox){labelled++;const a=h.buoyLabel,b=h.messageBox;if(a.x<b.x+b.w&&b.x<a.x+a.w&&a.y<b.y+b.h&&b.y<a.y+a.h)overlap++;}}s=await snap();
    ammo.labelFrames={labelled,overlap};assert.ok(labelled>0,'the drifting buoy is labelled on screen while the message shows');assert.equal(overlap,0,'the buoy label never hides under the empty message');
