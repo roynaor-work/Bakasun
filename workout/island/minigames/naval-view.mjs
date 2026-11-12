@@ -9,7 +9,7 @@ import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-10';
 import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-10';
 import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-10';
 import {createNavalSupplyView} from './naval-supply-view.mjs?v=island-v2-20261107-10';
-import {createNavalStructure,createNavalBasePlate} from './naval-base-view.mjs?v=island-v2-20261107-10';
+import {createNavalStructure,createNavalBasePlate,navalBaseLightSea} from './naval-base-view.mjs?v=island-v2-20261107-10';
 import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-10';
 import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-10';
 import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
@@ -191,7 +191,7 @@ export function createNavalView(ctx,model,adapters={}) {
   const player=createVessel(THREE,r,model.equipment,{player:true},balance.playerModel,v7opt(NAVAL_V7.kinds.player,'tide'));player.root.scale.setScalar(r.playerScale);scene.add(player.root);
   const vessels=model.enemies.map(e=>{const type=balance.shipTypes[e.kind],variant=e.boss?balance.boss:type,scale=type.scale*(e.boss?balance.boss.scale:1),spec=variant.modelSpec||(balance.enemyModel&&{...balance.enemyModel,length:(balance.playerModel?.length??balance.enemyModel.length)*r.playerScale/scale});const v=e.structure?createNavalStructure(r,e,r.effects):type.submarine?createSubmarine(r,r.effects):createVessel(THREE,{...r,hull:variant.hull},{},variant,spec,v7opt(NAVAL_V7.kinds[e.boss?'boss':e.kind],'ember'));v.root.rotation.y=Math.PI;v.root.scale.setScalar(scale);scene.add(v.root);return v;});
   const scenery=createNavalEffects(scene,seaMaterial,model,balance),adventure=createNavalScenery(scene,model,balance,adapters);
-  const basePlate=createNavalBasePlate(scene,balance,model.enemies.filter(e=>e.structure)),airView=createNavalAirView(scene,model,balance),supplyView=createNavalSupplyView(scene,model,balance),projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
+  const basePlate=createNavalBasePlate(scene,balance,model.enemies.filter(e=>e.structure));if(basePlate&&navalBaseLightSea())environment.degrade();const airView=createNavalAirView(scene,model,balance),supplyView=createNavalSupplyView(scene,model,balance),projectiles=createNavalProjectiles(scene,model,balance),impacts=createNavalImpacts(scene,model,config,balance);
   const aimGeometry=new THREE.BufferGeometry(),aimArray=new Float32Array(18*3);aimGeometry.setAttribute('position',new THREE.BufferAttribute(aimArray,3));const aimMaterial=new THREE.LineBasicMaterial({color:r.foam}),aimLine=new THREE.LineSegments(aimGeometry,aimMaterial);aimLine.userData.noReflect=true;scene.add(aimLine);
   const arc=createNavalAimArc(scene,model,balance),dressing=createNavalDressing(scene,balance,{maxShips:model.enemies.length+1});
   const projected=new THREE.Vector3(),raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),seaPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),intersection=new THREE.Vector3();camera.updateMatrixWorld();const positions=seaGeometry.attributes.position;

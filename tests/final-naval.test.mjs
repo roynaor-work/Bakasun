@@ -210,3 +210,21 @@ test('enemy base in the model: structures join the roster, guns telegraph and fi
  assert.equal(createNavalModel({config,balance:nb,level:10,seed:1,random:seededRandom(1)}).enemies.some(e=>e.structure),false);
  assert.equal(createNavalModel({config,balance:nb,level:1,seed:1,random:seededRandom(1)}).baseHealth,null);
 });
+
+// 12/11/2026 (final fix, stage 2 verification): the base stages broke the 70-call budget on reflection frames; they draw the light sea,
+// and the reflection pass now honours `noReflect` inside groups (Vulcan effects, supply buoys).
+import {navalBaseLightSea} from '../workout/island/minigames/naval-base-view.mjs';
+import {navalReflectionHide} from '../workout/island/minigames/naval-environment.mjs';
+test('render budget: base stages draw the light sea unless ?navalBaseSea=mirror; the reflection pass hides flagged objects at any depth and shows nothing twice',async()=>{
+ assert.equal(navalBaseLightSea('?dev=1'),true);assert.equal(navalBaseLightSea('?navalBaseSea=mirror'),false);
+ const view=await readFile(new URL('../workout/island/minigames/naval-view.mjs',import.meta.url),'utf8');
+ assert.match(view,/const basePlate=createNavalBasePlate\(scene,balance,model\.enemies\.filter\(e=>e\.structure\)\);if\(basePlate&&navalBaseLightSea\(\)\)environment\.degrade\(\);/,'the light sea only where a base stands');
+ const node=(name,flag=false,children=[],visible=true)=>({name,visible,userData:flag?{noReflect:true}:{},children});
+ const buoy=node('buoy',false,[node('float',true),node('band',true)]),hiddenBuoy=node('spare',false,[node('float2',true)],false);
+ const air=node('air',false,[node('plane'),node('tracers',true),node('sparks',true)]),shells=node('shells',true,[node('inner',true)]),ship=node('ship',false,[node('hull')]);
+ const scene=node('scene',false,[node('supply',false,[buoy,hiddenBuoy]),air,shells,ship]);
+ const hidden=navalReflectionHide(scene);
+ assert.deepEqual(hidden.map(o=>o.name).sort(),['band','float','shells','sparks','tracers'],'nested flags are found; a flagged branch is hidden whole; invisible branches are skipped');
+ assert.ok(hidden.every(o=>o.visible===false));assert.equal(air.children[0].visible,true,'the aircraft itself still reflects');assert.equal(ship.children[0].visible,true);
+ for(const o of hidden)o.visible=true;assert.equal(navalReflectionHide(node('empty')).length,0);
+});
