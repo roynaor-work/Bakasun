@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alien v16 — asset review</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1425;color:#dcecf8;font:15px system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:32px}h1{font-size:30px;margin-bottom:8px}p{color:#9eb7ce;line-height:1.6}h2{font-size:21px;margin:32px 0 16px}section{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}.card{border:1px solid #294058;border-radius:16px;padding:16px;background:#101f34;min-width:0}.card h3{font-size:15px;margin:0 0 12px}.sprite{display:block;width:128px;height:128px;object-fit:contain;margin:auto}.tokens{display:flex;flex-wrap:wrap;gap:24px}.tokens figure{margin:0;text-align:center}.tokens img{width:96px;height:96px;display:block}figcaption{margin-top:8px;color:#a8c2da}canvas.ship{width:100%;height:220px;display:block}audio{width:100%;height:34px}button{background:#203c59;border:1px solid #466987;color:#e5f6ff;padding:7px 12px;border-radius:8px;cursor:pointer}a{color:#80e5ff}.timer{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.timer input{width:180px}code{font-size:12px}#status{padding:12px 0;color:#85ebcb}@media(prefers-reduced-motion:reduce){.motion-note{display:block}}
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<main>
+<h1>Alien v16</h1>
+<p>Original luminous effects and mechanical boss ships. <a href="README.md">File inventory</a> · <a href="LICENSES.md">CC0 license</a><br>Space pauses animation. Bosses share the player ship's ground pivot, units and forward axis.</p>
+<h2>Player effects</h2><section id="player"></section>
+<h2>Alien plasma</h2><section id="plasma"></section>
+<h2>Bonus tokens</h2><div class="tokens" id="tokens"></div>
+<h2>Timer ring</h2><div class="timer"><img id="timer" width="96" height="96" alt="Timer ring"><input id="timer-step" type="range" min="0" max="11" value="0" aria-label="Timer step"><span id="timer-label"></span></div>
+<h2>Boss fleet</h2><p>Stages 1–5 and an alternate Elite carrier for stage 5. Each preview loads the delivered GLB, including its embedded 1024px texture. Use the rotate button to inspect each ship.</p><div id="status">Loading fleet…</div><section id="bosses"></section>
+<h2>Sound effects</h2><p>Playback starts only when you press play. The hum repeats continuously while enabled.</p><section id="sounds"></section>
+</main>
+<script type="module" src="preview.mjs"></script>
+</html>
