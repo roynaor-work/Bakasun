@@ -11,7 +11,7 @@ const before=process.env.MODE==='before',part=before?'final-fix-fable/aliens-bef
 const frames=new URL('../verification/final-fix-fable/frames/',import.meta.url);await mkdir(frames,{recursive:true});
 const BOT_CAP_SECONDS=Number(process.env.FINAL_ALIENS_BOT_CAP||260);
 let failures=[];
-await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,exit,nav,assert})=>{
+await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tick,snap,start,exit,nav,assert})=>{
  if(before)await page.evaluate(()=>{globalThis.__alienV15=false;globalThis.__alienMove=false;});
  const client=await context.newCDPSession(page),touch=(type,points=[])=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
  const center=async sel=>{const b=await page.locator(sel).boundingBox();return {x:b.x+b.width/2,y:b.y+b.height/2};};
@@ -61,7 +61,7 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
   const t90=mv.find(r=>Math.abs(r[2])>=.9*top);const release=mv.find(r=>r[0]-t0>=.45);const xAtRelease=release?release[1]:mv.at(-1)[1],glide=+(Math.abs(mv.at(-1)[1]-xAtRelease)).toFixed(1);
   const bankAngle=await page.evaluate(()=>window.__island.data.config.minigames.alienDefense.render.bankAngle),tilt=+(Math.max(...mv.map(r=>Math.abs(r[3])))*bankAngle*180/Math.PI).toFixed(1);
   const r={topSpeed:+top.toFixed(0),timeTo90pct:t90?+(t90[0]-t0).toFixed(2):null,tiltDeg:tilt,glideAfterRelease:glide,samples:mv.length};report.motion=r;console.log('motion',JSON.stringify(r));
-  check(r.topSpeed>=200,`stick: top speed ${r.topSpeed} units/s`);check(before||(r.timeTo90pct!==null&&r.timeTo90pct<=.35),`stick: 90% of top speed after ${r.timeTo90pct} s (eased, target <= 0.35)`);check(before||r.tiltDeg>=8,`stick: lean ${r.tiltDeg} degrees`);check(before||r.glideAfterRelease>=6,`stick: glide ${r.glideAfterRelease} units after release (v20 stops dead)`);
+  check(r.topSpeed>=200,`stick: top speed ${r.topSpeed} units/s`);check(before||(r.timeTo90pct!==null&&r.timeTo90pct<=.35),`stick: 90% of top speed after ${r.timeTo90pct} s (eased, target <= 0.35)`);check(before||r.tiltDeg>=8,`stick: lean ${r.tiltDeg} degrees`);check(before||r.glideAfterRelease>=6,`stick: glide ${r.glideAfterRelease} units after release (v20 stops dead)`);check(r.glideAfterRelease<=30,`stick: glide ${r.glideAfterRelease} units, under half an alien column (46 units), so a released ship stays under its target`);
   await tick(500);}
  // 2. Keyboard (Space) uses the same gate.
  if(await alive()){const s0=await snap();const [s1]=await hold(6000,[6000],{keyboard:true});
@@ -73,6 +73,16 @@ await verify(part,[{width:844,height:390}],async({page,context,tick,snap,start,e
   if(s1){const r={steady:rate(s0,s1),triggerPulls:+((pulls(s1)-pulls(s0))/(s1.time-s0.time)).toFixed(2),powerup:s1.powerup,fireMode:s1.fireMode};report.rapidBonus=r;console.log('rapid-bonus',JSON.stringify(r));
    check(r.triggerPulls<=8,`rapid bonus steady phase: ${r.triggerPulls} trigger pulls/s, ${r.steady} projectiles/s incl. lasers (floor 7.7/s; v14 gave 16)`);}await tick(1500);}
  await leave();
+ // 3b. Taps instead of a hold (12/11/2026, independent QA): a child hammering the real button gets one short burst, the cool-down and the
+ //     steady cannon, never an endless Vulcan. Fresh round so the gauge starts cold; three tap speeds through CDP touch on #shoot.
+ for(const [down,up] of [[40,60],[64,96],[112,192]]){await fresh();const fire=await center('#shoot');const s0=await snap();let mark=null,elapsed=0;
+  while(elapsed<6000&&await alive()){await touch('touchStart',[{...fire,id:2}]);await tick(down);await touch('touchEnd');await tick(up);elapsed+=down+up;if(!mark&&elapsed>=1500)mark=await snap();}
+  const s6=await snap();const r={pattern:`${down}/${up} ms`,overall:rate(s0,s6),after1500:mark?rate(mark,s6):null,overheats:s6.overheats-s0.overheats,fired:s6.fired-s0.fired};
+  (report.taps||(report.taps=[])).push(r);console.log('taps',JSON.stringify(r));
+  check(r.overall<=6.5,`taps ${r.pattern} for 6 s: ${r.overall} shots/s overall (target <= 6.5; the first v15 gate and v20 gave 6.1-9.7)`);
+  check(r.after1500!==null&&r.after1500<=6.5,`taps ${r.pattern} after the first 1.5 s: ${r.after1500} shots/s`);
+  check(before||r.overheats>=1,`taps ${r.pattern} add up to a burst and a cool-down (overheats ${r.overheats})`);
+  if(down===40)await capture('3b-taps-10hz');await leave();}
  // 4. Maxed gear (equipment, permanent upgrades, hangar rank 20, power level 3): the cap holds.
  await page.evaluate(()=>{const {engine:e}=window.__island;Object.assign(e.state.minigameEquipment.alienDefense,{damage:3,rate:3,shield:3,weapon:2});for(const k of Object.keys(e.state.alienUpgrades))e.state.alienUpgrades[k]=3;e.state.hangar.rapid=20;e.state.minigameLevels.alienDefense=3;e.state.minigameWins.alienDefense=10;});
  await fresh();

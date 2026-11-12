@@ -1,4 +1,4 @@
-// Final fix (Fable, 11/11/2026), aliens v15: steady cannon at 4/s, Vulcan only in short bursts, a hard cap at
+// Final fix (Fable, 11/11/2026), aliens v15: steady cannon at about 5.6/s, Vulcan only in short bursts (taps too, 12/11), a hard cap at
 // the spawn point that no gear, bonus or input path can exceed, stage 1 about 90-130 s. Pure model tests.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -30,9 +30,18 @@ test('fireGate: burst for burstSeconds, forced cool for coolSeconds, then steady
  assert.ok(Math.abs(burst-cfg.burstSeconds)<.05,`burst ${burst}`);assert.ok(Math.abs(cool-cfg.coolSeconds)<.05,`cool ${cool}`);assert.ok(normal>4,`normal ${normal}`);
  assert.equal(modes.indexOf('cool'),modes.lastIndexOf('burst')+1,'cool starts right after the burst');assert.equal(modes.indexOf('normal'),modes.lastIndexOf('cool')+1,'steady fire right after the cool');
  assert.ok(s.heat>0&&s.heat<=cfg.warmHeat+1e-9,'the gauge stays warm while firing steadily');
- for(let i=0;i<60*cfg.rechargeSeconds+2;i++)s=fireGate(s,false,1/60,cfg);assert.equal(s.spent,false);assert.equal(s.heat,0);
+ // The burst comes back after restSeconds plus the warm gauge's cool-down (about 1.5 s), not before.
+ const back=cfg.restSeconds+cfg.warmHeat*cfg.rechargeSeconds;assert.ok(back>1.3&&back<1.7,`burst returns after ${back} s`);
+ let early=s;for(let i=0;i<60*(back-.3);i++)early=fireGate(early,false,1/60,cfg);assert.equal(early.spent,true,'not before the rest is over');
+ for(let i=0;i<60*back+3;i++)s=fireGate(s,false,1/60,cfg);assert.equal(s.spent,false);assert.equal(s.heat,0);
  s=fireGate(s,true,1/60,cfg);assert.equal(s.mode,'burst','after a rest the Vulcan bursts again');
- const held=fireGate({heat:.5,cool:0,spent:false},false,.3,cfg);assert.equal(held.spent,false);assert.ok(held.heat<.5&&held.heat>0);
+ // 12/11/2026 (independent QA): taps must not keep the gauge cold. A short gap keeps the heat, a real rest cools it, and every
+ // press heats it by at least one burst shot, so taps add up to one burst, the cool-down and steady fire, like a hold.
+ const shortGap=fireGate({heat:.5,cool:0,spent:false},false,.3,cfg);assert.equal(shortGap.spent,false);assert.equal(shortGap.heat,.5,'a short gap keeps the heat');
+ let rested={heat:.5,cool:0,spent:false};for(let i=0;i<60*(cfg.restSeconds+.3);i++)rested=fireGate(rested,false,1/60,cfg);assert.ok(rested.heat<.5&&rested.heat>0,'a real rest cools the gauge');
+ const taps=(on,off,seconds,c=cfg)=>{let g={},t=0,overheat=null;for(let f=0;f<seconds*60;f++){g=fireGate(g,(t*1000)%(on+off)<on,1/60,c);if(g.overheat&&overheat===null)overheat=t;t+=1/60;}return {g,overheat};};
+ for(const [on,off] of [[40,60],[64,96],[112,192]]){const {g,overheat}=taps(on,off,8);assert.ok(overheat!==null&&overheat<4.5,`taps ${on}/${off} ms overheat into the cool-down (${overheat})`);assert.equal(g.spent,true,`taps ${on}/${off} ms then fire steadily`);}
+ const firstGate=v15Config(balance,'?alienTaps=v15');assert.equal(firstGate.restSeconds,0);assert.equal(firstGate.pressShots,0);assert.equal(taps(40,60,8,firstGate).overheat,null,'?alienTaps=v15: the first v15 gate, where fast taps never overheat');
 });
 test('fireInterval and shotDamage: floors hold for any gear, rapid bonus has its own floor, burst is the only fast mode',()=>{
  assert.equal(fireInterval('normal',1,false,cfg),cfg.normalInterval);
@@ -112,7 +121,7 @@ test('alienMove: eases to full speed in about 0.25 s, leans with the velocity, g
  for(let i=0;i<60;i++){const x0=p.x;alienMoveStep(p,{moveX:1,flight:true},1/60,b,360,mcfg);t+=1/60;maxStep=Math.max(maxStep,Math.abs(p.x-x0));peakBank=Math.max(peakBank,Math.abs(p.bank));if(t90===null&&p.vx>=.9*mcfg.maxSpeed)t90=t;}
  assert.ok(t90!==null&&t90>=.12&&t90<=.35,`90% of top speed after ${t90} s`);assert.ok(maxStep<=mcfg.maxSpeed/60+.01,'no jumps: a frame never moves more than top speed allows');assert.ok(peakBank>=.8,`lean ${peakBank}`);
  const q={x:100,vx:mcfg.maxSpeed,bank:1,recoil:0};let glide=0;for(let i=0;i<60;i++){const x0=q.x;alienMoveStep(q,{},1/60,b,360,mcfg);glide+=q.x-x0;}
- assert.ok(glide>8&&glide<120,`glide ${glide}`);assert.equal(q.vx,0);assert.ok(Math.abs(q.bank)<.05,'the lean settles when the ship stops');
+ assert.ok(glide>8&&glide<30,`glide ${glide}: some inertia, but under half an alien column (46 units) so a released ship stays under its target`);assert.equal(q.vx,0);assert.ok(Math.abs(q.bank)<.05,'the lean settles when the ship stops');
  // v20 for comparison: a 0.15 s linear ramp to a constant velocity, no glide after release.
  const o={x:180,vx:0,bank:0};for(let i=0;i<60;i++)moveAlienPlayer(o,{moveX:1,flight:true},1/60,balance,360);const ox=o.x;moveAlienPlayer(o,{},1/60,balance,360);assert.equal(o.vx,0);assert.equal(o.x,ox,'v20 stops dead');
 });

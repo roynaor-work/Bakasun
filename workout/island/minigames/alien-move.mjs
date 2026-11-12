@@ -1,6 +1,6 @@
 /** Aliens v15 ship movement (Roy, 11/11/2026, live v20 on his phone: "the movement of the ships should be more
- * dynamic"). The old step (g2m-motion.mjs) ramps to a constant velocity in 0.15 s and stops dead; the tilt
- * field (player.bank) was never set, so the ship never leaned. Here: acceleration with easing toward the stick's
+ * dynamic"). The old step (g2m-motion.mjs) ramps to a constant velocity in 0.15 s and stops dead (its lean follows
+ * the velocity directly). Here: acceleration with easing toward the stick's
  * speed, a short glide after the stick is released, a critically damped spring for the drag target, a lean
  * (bank) that follows the velocity, and a small recoil nudge on each shot. Positions change only through
  * velocity integration, so there are no jumps; the hit model (radii, segment contacts) is untouched.
@@ -14,7 +14,7 @@ export const MOVE_DEFAULTS=Object.freeze({
  maxSpeed:265,        // model units per second (v20: 221)
  accelSeconds:.11,    // easing time constant toward the stick's speed (90% in about 0.25 s)
  reverseSeconds:.05,  // quicker when the stick flips direction
- driftSeconds:.2,     // glide after the stick is released (90% stopped after about 0.45 s)
+ driftSeconds:.08,    // glide after the stick is released: about 20 units, under half an alien column (12/11 QA: 0.2 glided 50 units, past the next column)
  dragSpring:24,       // rad/s of the critically damped spring that follows a drag target
  bankSeconds:.08,     // how fast the lean follows the velocity
  bankMax:1,           // bank = velocity / maxSpeed, clamped to this
