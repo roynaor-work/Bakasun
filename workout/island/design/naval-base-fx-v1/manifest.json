@@ -1,0 +1,38 @@
+{
+  "id": "naval-base-fx-v1",
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+  "colorSpace": "sRGB",
+  "alpha": "straight",
+  "sampling": {"filter": "linear", "wrap": "clamp-to-edge", "mipmaps": false, "uvInsetPixels": 0.5},
+  "sprites": {
+    "explosion": {
+      "image": "explosion.png", "width": 1024, "height": 1024,
+      "columns": 8, "rows": 8, "frames": 64, "frameWidth": 128, "frameHeight": 128,
+      "paddingPixels": 8, "fps": 30, "durationSeconds": 2.1333333333333333,
+      "loop": false, "pivot": [0.5, 0.75], "blend": "source-over"
+    },
+    "smoke": {
+      "image": "smoke-loop.png", "width": 512, "height": 512,
+      "columns": 4, "rows": 4, "frames": 16, "frameWidth": 128, "frameHeight": 128,
+      "paddingPixels": 8, "fps": 12, "durationSeconds": 1.3333333333333333,
+      "loop": true, "pivot": [0.5, 0.84375], "blend": "source-over",
+      "startSeconds": 0.45, "fadeInSeconds": 0.4, "fadeOutSeconds": 0.5
+    },
+    "sparks": {
+      "image": "sparks.png", "width": 512, "height": 512,
+      "columns": 4, "rows": 4, "frames": 16, "frameWidth": 128, "frameHeight": 128,
+      "paddingPixels": 8, "fps": 24, "durationSeconds": 0.6666666666666666,
+      "loop": false, "pivot": [0.5, 0.5625], "blend": "additive-src-alpha-one"
+    }
+  },
+  "audio": {
+    "sources": [{"file": "explosion-deep.ogg", "type": "audio/ogg; codecs=vorbis"}, {"file": "explosion-deep.mp3", "type": "audio/mpeg"}],
+    "sampleRate": 44100, "channels": 1, "durationSeconds": 4.2,
+    "targetIntegratedLufs": -16, "toleranceLu": 0.1,
+    "maxTruePeakDbtp": -1, "loop": false, "seed": 20261112,
+    "provenance": "Original oscillator, filtered-noise, debris and reflection synthesis; no external audio samples"
+  },
+  "budget": {"residentRgba8Bytes": 6291456, "simultaneousQuads": 3, "maxActiveInstances": 1}
+}

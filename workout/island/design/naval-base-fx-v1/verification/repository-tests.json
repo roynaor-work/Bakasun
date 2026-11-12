@@ -1,0 +1,22 @@
+{
+  "baseCommit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+  "command": "npm test",
+  "tests": 3762,
+  "pass": 3697,
+  "fail": 1,
+  "skipped": 64,
+  "durationMs": 429311.306918,
+  "failure": {
+    "test": "tests/workout-royiki.test.mjs:91",
+    "reason": "Playwright browserType.launch: missing chromium_headless_shell-1234 executable",
+    "cleanup": "Stopped the dangling test process after its failed launch left a local server open"
+  },
+  "mainBaseline": {
+    "source": "git archive of unchanged main files at baseCommit, without the new FX directory",
+    "command": "node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "pass": 4,
+    "fail": 1,
+    "sameFailure": true
+  },
+  "fxBrowserChecks": "Passed with explicitly selected /usr/bin/chromium; see browser.json"
+}

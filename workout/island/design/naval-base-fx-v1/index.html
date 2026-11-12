@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>פיצוץ מחסן · בסיס ימי</title>
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" type="module"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div><p class="eyebrow">האי שלי / ספריית אפקטים</p><h1>מחסן בבסיס הימי<span>רגע הפגיעה.</span></h1></div>
+      <span class="edition" dir="ltr">FX — 01 <i></i> CC0</span>
+    </header>
+
+    <section class="viewer" aria-label="תצוגת האפקטים">
+      <div class="stage" data-background="sea">
+        <div class="stage-top"><span><b class="dot"></b> תצוגה משולבת</span><span dir="ltr" id="clock">00.00 s</span></div>
+        <canvas id="scene" width="960" height="540" role="img" aria-label="פיצוץ מחסן בנמל, עשן שחור עולה וניצוצות"></canvas>
+        <p class="stage-caption">הבזק. גל אש. שובל עשן.</p>
+      </div>
+      <div class="transport">
+        <div class="buttons"><button id="replay" class="primary" disabled>הפעלת פיצוץ <span aria-hidden="true">↻</span></button><button id="pause" disabled>השהיה</button></div>
+        <label class="sound-toggle"><input id="sound" type="checkbox"> צליל עם הפיצוץ</label>
+        <label class="volume">עוצמה <input id="volume" type="range" min="0" max="1" step="0.01" value="0.65"></label>
+      </div>
+      <div class="timeline"><label for="timeline">ציר זמן</label><input id="timeline" type="range" min="0" max="6.4" step="0.01" value="0" disabled><output id="time-label" for="timeline" dir="ltr">0.00 / 6.40 s</output></div>
+      <div class="settings">
+        <fieldset><legend>שכבות</legend><label><input id="layer-explosion" type="checkbox" checked> פיצוץ</label><label><input id="layer-smoke" type="checkbox" checked> עשן</label><label><input id="layer-sparks" type="checkbox" checked> ניצוצות</label></fieldset>
+        <label>רקע <select id="background"><option value="sea">נמל</option><option value="checker">משבצות שקיפות</option><option value="light">בהיר</option><option value="dark">כהה</option></select></label>
+        <label>מהירות <select id="speed"><option value="1">רגילה</option><option value="0.5">חצי מהירות</option><option value="0.25">רבע מהירות</option></select></label>
+        <label><input id="repeat" type="checkbox" checked> חזרה חזותית</label>
+      </div>
+      <p id="status" role="status">טוען את האפקטים…</p>
+      <noscript><p class="error">יש להפעיל JavaScript כדי לצפות באנימציות. אפשר להוריד את הקבצים מהקישורים למטה.</p></noscript>
+    </section>
+
+    <div class="section-title"><h2>שלוש שכבות. פגיעה אחת.</h2><span>קבצים שקופים לשילוב במשחק</span></div>
+    <section class="assets" aria-label="נכסי האפקטים">
+      <article><div class="tile"><canvas id="solo-explosion" width="256" height="256" role="img" aria-label="אנימציית הפיצוץ בנפרד"></canvas></div><div class="asset-text"><span class="number">01</span><h3>פיצוץ המחסן</h3><p>אש חמה, ליבה בוהקת ועשן מתפזר.</p><p class="spec" dir="ltr">64 frames · 8×8 · 1024×1024</p><a href="explosion.png" download>הורדת ספרייט־שיט PNG <span aria-hidden="true">↙</span></a></div></article>
+      <article><div class="tile"><canvas id="solo-smoke" width="256" height="256" role="img" aria-label="לולאת עשן שחור עולה בנפרד"></canvas></div><div class="asset-text"><span class="number">02</span><h3>עשן שחור עולה</h3><p>לולאה רציפה של עננים מתגלגלים.</p><p class="spec" dir="ltr">16 frames · 4×4 · 512×512</p><a href="smoke-loop.png" download>הורדת ספרייט־שיט PNG <span aria-hidden="true">↙</span></a></div></article>
+      <article><div class="tile"><canvas id="solo-sparks" width="256" height="256" role="img" aria-label="ניצוצות מתפזרים בנפרד"></canvas></div><div class="asset-text"><span class="number">03</span><h3>ניצוצות</h3><p>רסס זהוב קצר שמתפזר ודועך.</p><p class="spec" dir="ltr">16 frames · 4×4 · 512×512</p><a href="sparks.png" download>הורדת ספרייט־שיט PNG <span aria-hidden="true">↙</span></a></div></article>
+    </section>
+
+    <section class="audio-panel" aria-labelledby="audio-title">
+      <div><p class="eyebrow">הצליל של הפגיעה</p><h2 id="audio-title">פיצוץ עמוק. זנב מהדהד.</h2><p>סינתזה מקורית · ללא דגימות חיצוניות · CC0</p><p class="spec" dir="ltr">44.1 kHz · −16 LUFS · 4.2 seconds · mono</p></div>
+      <div class="audio-controls"><label>פורמט להאזנה <select id="audio-format"><option value="auto">אוטומטי</option><option value="ogg">OGG / Vorbis</option><option value="mp3">MP3</option></select></label><audio id="audio" controls preload="metadata"><source src="explosion-deep.ogg" type="audio/ogg"><source src="explosion-deep.mp3" type="audio/mpeg">הדפדפן אינו תומך בנגן. אפשר להוריד את הצליל.</audio><div class="audio-links"><a href="explosion-deep.ogg" download>הורדת OGG ↙</a><a href="explosion-deep.mp3" download>הורדת MP3 ↙</a></div></div>
+    </section>
+    <footer><span dir="ltr">NAVAL BASE FX / V1</span><nav aria-label="תיעוד"><a href="README.md">הוראות שילוב</a><a href="manifest.json">מפרט קבצים</a><a href="LICENSES.md">מקור ורישיון</a><a href="VALIDATION.md">תוצאות בדיקה</a></nav></footer>
+  </main>
+</body>
+</html>
