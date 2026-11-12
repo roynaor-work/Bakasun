@@ -1,27 +1,64 @@
 <!doctype html>
 <meta charset="utf-8"><title>catch audio probe</title>
-<!-- Measures the sound set of "תפוס את הפושע": does the recorded siren decode and play, and how loud is each cue (RMS over the cue).
-     Open with autoplay allowed (Playwright: --autoplay-policy=no-user-gesture-required), then read window.report after window.done. -->
-<body><pre id="out"></pre>
+<!-- Measures the sound set of "תפוס את הפושע" in a real browser: does the recorded siren decode and play (status().sirenLive,
+     not the synth fallback), and how loud is each cue. Loudness = the loudest 46 ms RMS window during the cue ("peak") and the
+     mean RMS over the measured span ("mean"), tapped from audio.output() with an AnalyserNode, so the numbers are before the limiter.
+     Run: tools/catch-audio-probe.html?auto=1 with autoplay allowed (Playwright: autoplay-policy=no-user-gesture-required), then read
+     window.report after window.done. Without ?auto=1 the page waits for a tap (the phone path: suspended context, first gesture). -->
+<style>body{font:14px system-ui;margin:16px;background:#111;color:#eee}button{font:inherit;padding:8px 14px;margin:4px}pre{white-space:pre-wrap}</style>
+<body>
+<div id="bar"><button id="run">הרץ מדידה</button> <span id="st"></span></div>
+<pre id="out"></pre>
 <script type="module">
-import {createCatchAudio} from '../minigames/catch-audio.mjs';
-const out=document.getElementById('out');
-const audio=createCatchAudio();
-// tap the destination: wrap AudioContext.destination with an analyser by patching connect of GainNodes is intrusive; instead measure through a MediaStream? Simpler: patch AudioContext.prototype.destination getter once.
-const AC=window.AudioContext;const real=Object.getOwnPropertyDescriptor(AudioContext.prototype,'destination');
-let analyser=null,ctx=null;
-Object.defineProperty(AudioContext.prototype,'destination',{get(){if(!analyser){ctx=this;analyser=this.createAnalyser();analyser.fftSize=2048;analyser.connect(real.get.call(this));}return analyser;}});
-const rms=()=>{const d=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(d);let s=0;for(const v of d)s+=v*v;return Math.sqrt(s/d.length);};
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const report={cues:{},siren:{}};
-async function measure(name,fn,ms=700){let peak=0;const t0=performance.now();fn();while(performance.now()-t0<ms){peak=Math.max(peak,rms());await sleep(16);}report.cues[name]=+peak.toFixed(4);out.textContent+=name+' '+peak.toFixed(4)+'\n';await sleep(250);}
-audio.cue('engine');await sleep(1500); // fetches the loops
-await measure('siren-first-call',()=>audio.cue('siren',{approach:0}),900);
-for(let i=0;i<4;i++){await measure('siren-loop-'+i,()=>audio.cue('siren',{approach:.5}),800);}
-report.siren.state=ctx?.state;
-for(const c of ['shot','shotHit','flat','skid','turn','twang','whistle','hitBody','hitHead','catch','perfect','crash','scrape','count','go'])await measure(c,()=>audio.cue(c));
-await measure('draw',()=>{let k=0;const iv=setInterval(()=>{k+=.1;audio.cue('draw',Math.min(1,k));if(k>1.2)clearInterval(iv);},60);},900);
-await measure('engine-20',()=>{const iv=setInterval(()=>audio.engine(20,false),50);setTimeout(()=>clearInterval(iv),800);},900);
-await measure('engine-31-boost',()=>{const iv=setInterval(()=>audio.engine(31,true),50);setTimeout(()=>{clearInterval(iv);audio.engineStop();},800);},900);
-window.report=report;window.done=true;out.textContent+=JSON.stringify(report);
+import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-10';
+const out = document.getElementById('out'), st = document.getElementById('st'), log = s => { out.textContent += s + '\n'; };
+const audio = createCatchAudio(); window.audio = audio;
+const report = {cues: {}, siren: {}, status: {}};
+let analyser = null, buf = null;
+const tap = () => {
+  if (analyser) return true; const node = audio.output(); if (!node) return false;
+  analyser = node.context.createAnalyser(); analyser.fftSize = 2048; node.connect(analyser); analyser.connect(node.context.destination); buf = new Float32Array(analyser.fftSize); return true;
+};
+const rms = () => { analyser.getFloatTimeDomainData(buf); let s = 0; for (const v of buf) s += v * v; return Math.sqrt(s / buf.length); };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Short cues are measured twice and the louder pass is kept: headless Chromium stalls the render thread now and then and a
+// 46 ms window can miss a 100 ms beep (seen: 'count' .002 in one run, .023 in the next).
+async function measure(name, fn, ms = 700, reps = ms < 1000 ? 2 : 1) {
+  let peak = 0, sum = 0, n = 0;
+  for (let r = 0; r < reps; r++) {
+    let p = 0, s = 0, k = 0; const t0 = performance.now(); fn();
+    while (performance.now() - t0 < ms) { const v = rms(); p = Math.max(p, v); s += v; k++; await sleep(8); }
+    if (p > peak) { peak = p; sum = s; n = k; }
+    await sleep(250);
+  }
+  report.cues[name] = {peak: +peak.toFixed(4), mean: +(sum / Math.max(1, n)).toFixed(4)}; log(name.padEnd(18) + ' peak ' + peak.toFixed(4) + '  mean ' + (sum / Math.max(1, n)).toFixed(4));
+}
+async function run() {
+  if (!tap()) { log('no AudioContext'); window.report = report; window.done = true; return; }
+  report.status.afterGesture = audio.status(); st.textContent = 'state ' + report.status.afterGesture.state;
+  audio.cue('engine'); // v5 start cue: also kicks the loop decode
+  for (let i = 0; i < 40 && !audio.status().sirenDecoded.twoTone; i++) await sleep(50);
+  report.status.decoded = audio.status();
+  await measure('siren-first-call', () => audio.cue('siren', {approach: 0}), 900, 1);
+  report.status.sirenFirst = audio.status();
+  for (let i = 0; i < 3; i++) await measure('siren-loop-' + i, () => audio.cue('siren', {approach: .5}), 800, 1);
+  report.status.sirenLoop = audio.status();
+  await measure('siren-far', () => audio.cue('siren', {approach: -1, level: .5}), 800, 1);
+  await sleep(1300); report.status.sirenAfterHold = audio.status();
+  await measure('siren-crew', () => audio.cue('siren', {crew: true}), 900, 1); await sleep(1600);
+  await measure('engine-idle-4', () => { const iv = setInterval(() => audio.engine(4, false), 50); setTimeout(() => clearInterval(iv), 900); }, 1000);
+  await measure('engine-20', () => { const iv = setInterval(() => audio.engine(20, false), 50); setTimeout(() => clearInterval(iv), 900); }, 1000);
+  await measure('engine-31-boost', () => { const iv = setInterval(() => audio.engine(31, true), 50); setTimeout(() => { clearInterval(iv); }, 900); }, 1000);
+  report.status.engine = audio.status();
+  await measure('engine+siren', () => { audio.cue('siren', {approach: .3}); const iv = setInterval(() => audio.engine(28, true), 50); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
+  await sleep(1300);
+  for (const c of ['shot', 'shotHit', 'turn', 'flat', 'skid', 'twang', 'whistle', 'whoosh', 'hitBody', 'hitHead', 'catch', 'perfect', 'crash', 'scrape', 'ram', 'thud', 'count', 'go', 'tool', 'miss', 'near', 'brake', 'nitro']) await measure(c, () => audio.cue(c), c === 'skid' || c === 'flat' ? 1500 : 800);
+  await measure('draw', () => { let k = 0; const iv = setInterval(() => { k += .1; audio.cue('draw', Math.min(1, k)); if (k > 1.2) clearInterval(iv); }, 60); }, 900, 1);
+  await measure('stack-shot+siren+engine', () => { audio.cue('siren', {approach: .5}); const iv = setInterval(() => audio.engine(30, true), 50); audio.cue('shotHit'); setTimeout(() => audio.cue('shot'), 150); setTimeout(() => audio.cue('flat'), 300); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
+  report.status.final = audio.status();
+  window.report = report; window.done = true; log(JSON.stringify(report, null, 1));
+}
+document.getElementById('run').addEventListener('click', run);
+if (new URLSearchParams(location.search).get('auto') === '1') run();
+else { st.textContent = 'state ' + audio.status().state + ' (לחצו להרצה)'; }
 </script>

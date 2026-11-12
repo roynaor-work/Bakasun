@@ -20,7 +20,7 @@ const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS,
   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
   'catch.help6.3': 'הפושע בורח ברגל, ועכשיו כמו חץ וקשת: נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק את הרשת.',
   'catch.help6.4': 'יש כמה זריקות, וצריך כמה פגיעות מדויקות כדי לתפוס. הרוח דוחפת את הרשת הצידה, והחץ למעלה מראה לאן.',
-  'catch.bend': 'פנייה', 'catch.lock': 'כוונת',
+  'catch.bend': 'פנייה', 'catch.lock': 'כוונת', 'catch.pop.nearMiss': 'עקיפה צמודה',
 };
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -63,13 +63,14 @@ export function runCatchSession6(ctx) {
   const prisonLevel = (ctx.state?.buildings || []).filter(b => b.typeId === 'prison').reduce((n, b) => n + (b.level || 1), 0);
   const city = {police: Math.min(balance.city.policeMax, policeLevel * balance.city.policeRadiusPerLevel), prison: Math.min(balance.city.prisonMax, prisonLevel * balance.city.prisonCoinPerLevel)};
   // v6 overrides per level (`levels[].v6`, e.g. radiusScale tuned for the fixed-draw archery) without touching the v5 balance
-  const balance6 = {...balance, levels: balance.levels.map(l => ({...l, ...(l.v6 || {})}))};
+  // v6 drops the v5 street cover (obstacles, crossing cars): the archery stage stands in the chase world, where those props are not drawn, and at the v6 distances they would block the net unseen
+  const balance6 = {...balance, levels: balance.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})}))};
   const makeThrow = mods => createCatchEngine({balance: balance6, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
   const withChase = Boolean(ctx.canvas);
   const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let scrapeSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
+  let scrapeSaid = false, nearSaid = false, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
@@ -171,6 +172,7 @@ export function runCatchSession6(ctx) {
       else if (e.type === 'go') { count.textContent = t('catch.go'); audio?.cue('go'); setTimeout(() => { count.hidden = true; }, 700); }
       else if (e.type === 'crash') { audio?.cue('crash'); say(e.kind === 'cone' ? 'catch.pop.cone' : e.kind === 'parked' ? 'catch.pop.parked' : 'catch.pop.crash', 'bad'); }
       else if (e.type === 'crimCrash') { audio?.cue('crimCrash'); say('catch.pop.crimCrash', 'good'); }
+      else if (e.type === 'nearMiss') { audio?.cue('whoosh'); if (!nearSaid) { nearSaid = true; say('catch.pop.nearMiss', 'good'); } }
       else if (e.type === 'pad') { audio?.cue('pad'); }
       else if (e.type === 'oil') { audio?.cue('scrape'); say('catch.pop.oil', 'warn'); }
       else if (e.type === 'scrape') { audio?.cue('scrape'); if (!scrapeSaid) { scrapeSaid = true; say('catch.pop.kerb', 'warn'); } }
@@ -331,9 +333,9 @@ export function runCatchSession6(ctx) {
     if (!engine) return;
     const s = engine.state, w = engine.wind, a = engine.aim;
     const dir = w >= 0 ? 1 : -1;
-    hudNodes.windArrow.style.transform = `scaleX(${dir})`; hudNodes.wind.dataset.calm = String(Math.abs(w) < .01);
-    hudNodes.windText.textContent = Math.abs(w) < .01 ? t('catch.windNone') : `${t('catch.wind')} ${Math.abs(w).toFixed(1)}`;
-    hudNodes.wind.setAttribute('aria-label', Math.abs(w) < .01 ? t('catch.windNone') : t(dir > 0 ? 'catch.windRight' : 'catch.windLeft') + ' ' + Math.abs(w).toFixed(1));
+    hudNodes.windArrow.style.transform = `scaleX(${dir})`; hudNodes.wind.dataset.calm = String(Math.abs(w) < .05);
+    hudNodes.windText.textContent = Math.abs(w) < .05 ? t('catch.windNone') : `${t('catch.wind')} ${Math.abs(w).toFixed(1)}`;
+    hudNodes.wind.setAttribute('aria-label', Math.abs(w) < .05 ? t('catch.windNone') : t(dir > 0 ? 'catch.windRight' : 'catch.windLeft') + ' ' + Math.abs(w).toFixed(1));
     pipNodes.forEach((p, i) => { p.dataset.state = i < s.throwsLeft ? 'ready' : 'used'; });
     pips.setAttribute('aria-label', t('catch.throws', {count: s.throwsLeft}));
     const crew = engine.level.crew || 1, need = engine.hitsNeeded || 1;
@@ -381,7 +383,7 @@ export function runCatchSession6(ctx) {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView6({canvas, balance, stage, chase, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
-    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-10'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
+    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-10'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
     loading.hidden = true;
     startChase();
     ctx.onReady?.();

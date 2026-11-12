@@ -13,7 +13,7 @@ import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-10';
 
 export const CHASE6 = Object.freeze({
   countdownSeconds: 2.5, startGap: 30, catchGap: 7,
-  roadHalf: 5, shoulder: 4.3, laneWidth: 3.3, lanes: [-3.3, 0, 3.3],
+  roadHalf: 6.8, shoulder: 5.4, laneWidth: 3.6, lanes: [-3.6, 0, 3.6], parkedD: 5.95, // 11/11, Roy: a wider road: three lanes of 3.6 m plus a 1.4 m shoulder each side (13.6 m); parked cars stand on the shoulder
   baseSpeed: 22, boostSpeed: 9, brakeSpeed: 9, accel: 13, decel: 26,
   steerSpeed: 5.6, steerResponse: 7,        // lateral metres per second at full lock, and how fast the wheel answers
   driftK: .5,                                // outward slide in a bend: driftK * v*v*k metres per second
@@ -29,7 +29,8 @@ export const CHASE6 = Object.freeze({
   contactLen: 4.4, contactWidth: 2, sideZone: .8, sideBonus: 1.8, ramRate: .04, crimPush: 1.6, ramDrag: .8,
   skidSeconds: 2.2, stopSearch: 45,          // after the last flat: the thief slides to a stop, on a straight if one is near (skidSeconds is the minimum)
   farFactor: 1.3, nearFactor: .75, windFar: 1.25, windNear: .6, bonusThrowAt: .85,
-  turnWarn: 55,                              // metres ahead a bend is announced
+  turnWarn: 55,
+  gunArmSeconds: 14, gunArmPerStage: .6,       // the tyre gun arms only after this: the chase runs through its first bends before the car can be stopped (QA 11/11)                              // metres ahead a bend is announced
 });
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -51,13 +52,13 @@ function layout(C, spec, rnd, track, length) {
     const lane = lanes[Math.floor(rnd() * 3)];
     if (roll < .14) list.push({id: list.length, kind: 'pad', s, d: lane, len: 3});
     else if (roll < .5) list.push({id: list.length, kind: 'traffic', s, d: lane, len: 4.4, v: C.trafficSpeed[0] + rnd() * (C.trafficSpeed[1] - C.trafficSpeed[0]), model: ['taxi', 'truck', 'bus'][Math.floor(rnd() * 3)]});
-    else if (roll < .64) list.push({id: list.length, kind: 'parked', s, d: (rnd() < .5 ? -1 : 1) * 3.9, len: 4.4, model: 'taxi'});
+    else if (roll < .64) list.push({id: list.length, kind: 'parked', s, d: (rnd() < .5 ? -1 : 1) * C.parkedD, len: 4.4, model: 'taxi', tint: Math.floor(rnd() * 4)});
     else if (roll < .8) list.push({id: list.length, kind: 'barrier', s, d: lane, len: 2.2});
     else if (roll < .9 || inBend) list.push({id: list.length, kind: 'cone', s, d: lane, len: 1.2});
     else list.push({id: list.length, kind: 'oil', s, d: lane, len: 3});
     // never wall off the road: a second obstacle within 14 m must leave a lane free
     if (rnd() < spec.density * .2 && !['pad', 'oil'].includes(list.at(-1).kind)) {
-      const other = list.at(-1).d === 0 ? (rnd() < .5 ? -3.3 : 3.3) : 0;
+      const other = list.at(-1).d === 0 ? (rnd() < .5 ? lanes[0] : lanes[2]) : 0;
       list.push({id: list.length, kind: rnd() < .5 ? 'barrier' : 'traffic', s: s + 5 + rnd() * 8, d: other, len: 3, v: C.trafficSpeed[0] + rnd() * 3, model: 'taxi'});
     }
   }
@@ -75,6 +76,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
   const gun = createTyreGun({balance, stage, rnd, level});
   const tankScale = 1 + ((Number(equipment.net) || 1) - 1) * 2;
   const crimTop = Math.max(spec.crimSpeed, C.baseSpeed + C.crimLead + (stage - 1) * C.crimLeadPerStage);
+  const armAt = (C.gunArmSeconds || 0) + (stage - 1) * (C.gunArmPerStage || 0);
   const s = {t: 0, phase: 'countdown', countdown: C.countdownSeconds, s: 0, d: 0, v: C.baseSpeed, steer: 0, slide: 0, tank: tankScale, stun: 0, oil: 0, hits: 0, pads: 0, scrape: 0, scraping: false, boosting: false, braking: false, damage: 0, rams: 0, ramCool: 0, curvature: 0, bendAhead: null,
     crim: {s: spec.gap ?? C.startGap, d: 0, targetD: 0, v: C.baseSpeed, slow: 0, boostLeft: 0, nextBoost: spec.crimBoost || 1e9, hits: 0, retarget: 0, swerve: 0, stopS: null, wobble: 0},
     gap: spec.gap ?? C.startGap, outcome: null, skid: 0};
@@ -98,7 +100,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
     if (rnd() > spec.skill) bestLane = c.targetD; // a careless moment
     // the officer is close: swerve to the far side if it is free
     if (c.s - s.s < C.crimFlee && rnd() < spec.skill + .15) {
-      const away = s.d > c.d + .3 ? -3.3 : s.d < c.d - .3 ? 3.3 : (rnd() < .5 ? -3.3 : 3.3);
+      const away = s.d > c.d + .3 ? C.lanes[0] : s.d < c.d - .3 ? C.lanes[2] : (rnd() < .5 ? C.lanes[0] : C.lanes[2]);
       if (freeAhead(c.s, away, 24, s.t) >= 24) bestLane = away;
     }
     // a reticle on his car: he weaves to the next free lane, the better his skill the more often
@@ -177,9 +179,10 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       for (const o of obstacles) {
         const os = obstacleS(o, s.t);
         if (os < s.s - 12 && os < c.s - 12) continue;
-        if (os > c.s + 20 && os > s.s + 20) break;
+        if (os > c.s + 20 && os > s.s + 20) continue; // not break: traffic moves, so the list is no longer ordered by position (QA 11/11: a barrier behind a far taxi was skipped)
         if (o.kind === 'pad') { if (!o.used && Math.abs(s.s - os) < 2.6 && Math.abs(s.d - o.d) < 1.6) { o.used = true; s.tank = Math.min(tankMax, s.tank + C.padCharge); s.pads++; events.push({type: 'pad', id: o.id}); } continue; }
         if (o.kind === 'oil') { if (!o.hitP && Math.abs(s.s - os) < 2.4 && Math.abs(s.d - o.d) < 1.7) { o.hitP = true; s.oil = C.oilSeconds; events.push({type: 'oil', id: o.id}); } continue; }
+        if (!o.hitP && !o.passed && o.kind !== 'pad' && o.kind !== 'oil' && os < s.s - 1 && os > s.s - 6 && Math.abs(s.d - o.d) >= C.hitLateral && Math.abs(s.d - o.d) < C.hitLateral + 1.1 && s.v > 18) { o.passed = true; s.nearMisses = (s.nearMisses || 0) + 1; events.push({type: 'nearMiss', id: o.id, kind: o.kind}); }
         if (!o.hitP && hitBox(s.s, s.d, o, s.t)) {
           o.hitP = true; s.hits++; s.v *= o.kind === 'cone' ? C.coneKeep : C.crashKeep; s.stun = o.kind === 'cone' ? .15 : C.stunSeconds; s.tank = Math.max(0, s.tank - .2);
           events.push({type: 'crash', id: o.id, kind: o.kind});
@@ -199,7 +202,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       }
       s.gap = ds;
       // --- tyre gun ---
-      gun.step(dt, {gap: ds, lateral: dd, vOfficer: s.v, vThief: c.v, stun: s.stun, scraping: s.scraping, thiefSwerve: c.swerve, curvature: s.curvature});
+      gun.step(dt, {gap: ds, lateral: dd, vOfficer: s.v, vThief: c.v, stun: s.stun, scraping: s.scraping, thiefSwerve: c.swerve, curvature: s.curvature, armed: s.t >= armAt, armIn: Math.max(0, armAt - s.t)});
       pullGun();
       // --- end: the damage meter is full, or the time runs out and he reaches the police roadblock ---
       if (s.phase === 'run') { if (s.damage >= 1) beginSkid(); else if (s.t >= spec.seconds) finish('roadblock'); }
@@ -248,7 +251,7 @@ export function driveChase6(chase, driving = DRIVING6.good, rnd = Math.random) {
       }
       want = rnd() < driving.miss ? want : best;
       const ds = st.crim.s - st.s;
-      if (ds > -9 && ds < 26 && rnd() >= driving.miss) want = clamp(st.crim.d, -3.3, 3.3);
+      if (ds > -9 && ds < 26 && rnd() >= driving.miss) want = clamp(st.crim.d, C.lanes[0], C.lanes[2]);
     }
     // steer: toward the lane, and against the slide the bend produces (a human feels the pull and counters it)
     const wantVel = clamp((want - st.d) * 2.2, -C.steerSpeed, C.steerSpeed);

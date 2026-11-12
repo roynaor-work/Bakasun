@@ -13408,7 +13408,9 @@
     {
      "stage": 1,
      "v6": {
-      "dist": 21,
+      "dist": 19,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.1",
@@ -13464,7 +13466,9 @@
     {
      "stage": 2,
      "v6": {
-      "dist": 20,
+      "dist": 21,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.2",
@@ -13529,7 +13533,9 @@
     {
      "stage": 3,
      "v6": {
-      "dist": 25,
+      "dist": 24,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.3",
@@ -13595,7 +13601,9 @@
     {
      "stage": 4,
      "v6": {
-      "dist": 22,
+      "dist": 27,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.4",
@@ -13663,7 +13671,9 @@
     {
      "stage": 5,
      "v6": {
-      "dist": 14,
+      "dist": 20,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.5",
@@ -13735,7 +13745,12 @@
      "stage": 6,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.6,
+      "zmove": {"kind": "dash", "amp": 2.6, "speed": 4.5, "pause": 0.5}
      },
      "feature": "feature.catchCriminal.6",
      "difficulty": 6,
@@ -13823,7 +13838,12 @@
      "stage": 7,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 2.6, "period": 3.0}
      },
      "feature": "feature.catchCriminal.7",
      "difficulty": 7,
@@ -13900,7 +13920,13 @@
      "stage": 8,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "crew": 3,
+      "throws": 6,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 3.0, "period": 2.8}
      },
      "feature": "feature.catchCriminal.8",
      "difficulty": 8,
@@ -13997,7 +14023,12 @@
      "stage": 9,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "wind": 2.2,
+      "throws": 5,
+      "zmove": {"kind": "dash", "amp": 2.8, "speed": 5.0, "pause": 0.4}
      },
      "feature": "feature.catchCriminal.9",
      "difficulty": 9,
@@ -14092,7 +14123,9 @@
     {
      "stage": 10,
      "v6": {
-      "dist": 17,
+      "dist": 28,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.10",

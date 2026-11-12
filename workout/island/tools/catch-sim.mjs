@@ -159,7 +159,7 @@ export function playGame(stage, seed, skill, balance = defaultBalance, {v2 = fal
   // v6: the chase on the winding track with tyre shots (catch-chase6); its model driver mirrors the three skills
   if (v6) { const name = Object.keys(DRIVING).find(k => DRIVING[k] === driving) || 'good'; chased = driveChase6(createChaseEngine6({balance, stage, seed}), DRIVING6[name] || DRIVING6.good, rnd); mods = chased.mods; }
   else if (v2) { chased = driveChase(createChaseEngine({balance, stage, seed}), driving, rnd); mods = chased.mods; }
-  const engine = createCatchEngine({balance: v6 ? {...balance, levels: balance.levels.map(l => ({...l, ...(l.v6 || {})}))} : balance, stage, seed, v2, mods, arch});
+  const engine = createCatchEngine({balance: v6 ? {...balance, levels: balance.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})}))} : balance, stage, seed, v2, mods, arch});
   const dt = 1 / 60;
   let guard = 0, throws = 0, hits = 0, flightTime = 0;
   while (engine.state.phase !== 'done' && guard++ < 60 * 120) {

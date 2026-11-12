@@ -3,7 +3,7 @@
 // racing-deep-m4: with a `broadcast` option (from racing-broadcast.mjs) the tower lists the whole field (as many rows as fit above the wheel, 5..10,
 // the player always among them) with the car number, the team colour, a real time gap to the car ahead, an up/down arrow for 2.5 s after a
 // position change and a purple mark on the fastest lap. The old five-row tower stays for ?racingBroadcast=0.
-import {towerRows} from './racing-broadcast.mjs?v=island-v2-20261107-9';
+import {towerRows} from './racing-broadcast.mjs?v=island-v2-20261107-10';
 const COLORS=['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca','#e07b39','#7ac05a','#a05fc4','#e0c3a1','#4b6a88'];
 export const towerEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingTower')!=='0';
 export const ROW_HEIGHT=12,TOWER_TOP=120,MIN_ROWS=5,MAX_ROWS=10;

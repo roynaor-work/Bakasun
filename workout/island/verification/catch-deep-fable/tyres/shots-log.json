@@ -1,0 +1,542 @@
+{
+ "f1-lock": {
+  "t": 1.183333333333334,
+  "gap": 10.786982846363262,
+  "vC": 20,
+  "gun": {
+   "ammo": 6,
+   "ammoMax": 6,
+   "reload": 0,
+   "trickle": 5,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": false,
+    "RR": false
+   },
+   "flatCount": 0,
+   "flatsToStop": 2,
+   "hitChance": 0.6184193840928738,
+   "range": 28,
+   "shots": 0,
+   "hits": 0,
+   "stopped": false,
+   "t": 1.183333333333334
+  },
+  "flats": [],
+  "ribbon": 0,
+  "events": [
+   "lock"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [],
+  "note": "כוונת נעולה על הרכב הנמלט"
+ },
+ "f2-shot": {
+  "t": 1.2166666666666672,
+  "gap": 10.662466286398036,
+  "vC": 16.4,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0.9666666666666666,
+   "trickle": 4.966666666666667,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": false
+   },
+   "flatCount": 1,
+   "flatsToStop": 2,
+   "hitChance": 0.5543881799992897,
+   "range": 28,
+   "shots": 1,
+   "hits": 1,
+   "stopped": false,
+   "t": 1.2166666666666672
+  },
+  "flats": [
+   "RL"
+  ],
+  "ribbon": 0,
+  "events": [
+   "lock",
+   "shot",
+   "flat"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [
+   "RL"
+  ],
+  "note": "ירייה: הבזק בניידת וקו זוהר לגלגל"
+ },
+ "f3-hit": {
+  "t": 1.3000000000000003,
+  "gap": 10.355488229122386,
+  "vC": 16.4,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0.883333333333333,
+   "trickle": 4.883333333333334,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": false
+   },
+   "flatCount": 1,
+   "flatsToStop": 2,
+   "hitChance": 0.5882720894672281,
+   "range": 28,
+   "shots": 1,
+   "hits": 1,
+   "stopped": false,
+   "t": 1.3000000000000003
+  },
+  "flats": [
+   "RL"
+  ],
+  "ribbon": 0,
+  "events": [
+   "lock",
+   "shot",
+   "flat"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [
+   "RL"
+  ],
+  "note": "פגיעה: ניצוצות וטבעת על הגלגל האחורי"
+ },
+ "f4-flat": {
+  "t": 2.0499999999999976,
+  "gap": 8.258842400429721,
+  "vC": 16.4,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0.13333333333333192,
+   "trickle": 4.133333333333336,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": false
+   },
+   "flatCount": 1,
+   "flatsToStop": 2,
+   "hitChance": 0.6307389912826615,
+   "range": 28,
+   "shots": 1,
+   "hits": 1,
+   "stopped": false,
+   "t": 2.0499999999999976
+  },
+  "flats": [
+   "RL"
+  ],
+  "ribbon": 0,
+  "events": [
+   "lock",
+   "shot",
+   "flat"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [
+   "RL"
+  ],
+  "note": "פנצ׳ר ראשון: גלגל שטוח, הרכב נוטה, עשן"
+ },
+ "f5-shot2": {
+  "t": 2.7666666666666617,
+  "gap": 7.205351800202692,
+  "vC": 11.842768595041324,
+  "gun": {
+   "ammo": 4,
+   "ammoMax": 6,
+   "reload": 0.9499999999999998,
+   "trickle": 3.4166666666666723,
+   "locked": false,
+   "lockWheel": null,
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": true
+   },
+   "flatCount": 2,
+   "flatsToStop": 2,
+   "hitChance": 0,
+   "range": 28,
+   "shots": 2,
+   "hits": 2,
+   "stopped": true,
+   "t": 2.7666666666666617
+  },
+  "flats": [
+   "RL",
+   "RR"
+  ],
+  "ribbon": 3,
+  "events": [
+   "lock",
+   "shot",
+   "flat",
+   "reload",
+   "shot",
+   "flat",
+   "stopped"
+  ],
+  "fireButtons": 1,
+  "reticle": false,
+  "pivots": [
+   "RL",
+   "RR"
+  ],
+  "note": "ירייה שנייה לגלגל השני"
+ },
+ "f6-stopped": {
+  "t": 3.183333333333327,
+  "gap": 7.850834549828718,
+  "vC": 7.697337006427918,
+  "gun": {
+   "ammo": 4,
+   "ammoMax": 6,
+   "reload": 0.5333333333333319,
+   "trickle": 3.000000000000007,
+   "locked": false,
+   "lockWheel": null,
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": true
+   },
+   "flatCount": 2,
+   "flatsToStop": 2,
+   "hitChance": 0,
+   "range": 28,
+   "shots": 2,
+   "hits": 2,
+   "stopped": true,
+   "t": 3.183333333333327
+  },
+  "flats": [
+   "RL",
+   "RR"
+  ],
+  "ribbon": 28,
+  "events": [
+   "lock",
+   "shot",
+   "flat",
+   "reload",
+   "shot",
+   "flat",
+   "stopped"
+  ],
+  "fireButtons": 1,
+  "reticle": false,
+  "pivots": [
+   "RL",
+   "RR"
+  ],
+  "note": "פנצ׳ר שני: הרכב מתחיל להחליק"
+ },
+ "f7-skid": {
+  "t": 4.183333333333324,
+  "gap": 7.813476398151913,
+  "vC": 1.377777777777779,
+  "gun": {
+   "ammo": 4,
+   "ammoMax": 6,
+   "reload": 0,
+   "trickle": 2.0000000000000107,
+   "locked": false,
+   "lockWheel": null,
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": true
+   },
+   "flatCount": 2,
+   "flatsToStop": 2,
+   "hitChance": 0,
+   "range": 28,
+   "shots": 2,
+   "hits": 2,
+   "stopped": true,
+   "t": 4.183333333333324
+  },
+  "flats": [
+   "RL",
+   "RR"
+  ],
+  "ribbon": 58,
+  "events": [
+   "lock",
+   "shot",
+   "flat",
+   "reload",
+   "shot",
+   "flat",
+   "stopped",
+   "reload"
+  ],
+  "fireButtons": 1,
+  "reticle": false,
+  "pivots": [
+   "RL",
+   "RR"
+  ],
+  "note": "החלקה: שני פסי בלימה מאחורי הגלגלים האחוריים"
+ },
+ "f8-stop": {
+  "t": 6.016666666666651,
+  "gap": 5.935081365434208,
+  "vC": 0,
+  "gun": {
+   "ammo": 4,
+   "ammoMax": 6,
+   "reload": 0,
+   "trickle": 0.1666666666666794,
+   "locked": false,
+   "lockWheel": null,
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": true
+   },
+   "flatCount": 2,
+   "flatsToStop": 2,
+   "hitChance": 0,
+   "range": 28,
+   "shots": 2,
+   "hits": 2,
+   "stopped": true,
+   "t": 6.016666666666651
+  },
+  "flats": [
+   "RL",
+   "RR"
+  ],
+  "ribbon": 71,
+  "events": [
+   "lock",
+   "shot",
+   "flat",
+   "reload",
+   "shot",
+   "flat",
+   "stopped",
+   "reload"
+  ],
+  "fireButtons": 1,
+  "reticle": false,
+  "pivots": [
+   "RL",
+   "RR"
+  ],
+  "note": "עצירה: פס ההחלקה שלם ופוף אבק"
+ },
+ "d1-wheel": {
+  "t": 1.183333333333334,
+  "gap": 7.7869828463632444,
+  "vC": 20,
+  "gun": {
+   "ammo": 6,
+   "ammoMax": 6,
+   "reload": 0,
+   "trickle": 5,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": false,
+    "RR": false
+   },
+   "flatCount": 0,
+   "flatsToStop": 2,
+   "hitChance": 0.6775793840928741,
+   "range": 28,
+   "shots": 0,
+   "hits": 0,
+   "stopped": false,
+   "t": 1.183333333333334
+  },
+  "flats": [],
+  "ribbon": 0,
+  "events": [
+   "lock"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [],
+  "note": "תקריב: הגלגל האחורי השמאלי לפני הירי"
+ },
+ "d2-wheel-hit": {
+  "t": 1.2500000000000004,
+  "gap": 7.538757614566077,
+  "vC": 16.4,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0.9333333333333331,
+   "trickle": 4.933333333333334,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": false
+   },
+   "flatCount": 1,
+   "flatsToStop": 2,
+   "hitChance": 0.6153765550992314,
+   "range": 28,
+   "shots": 1,
+   "hits": 1,
+   "stopped": false,
+   "t": 1.2500000000000004
+  },
+  "flats": [
+   "RL"
+  ],
+  "ribbon": 0,
+  "events": [
+   "lock",
+   "shot",
+   "flat"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [
+   "RL"
+  ],
+  "note": "תקריב: פגיעה, ניצוצות וטבעת"
+ },
+ "d3-wheel-flat": {
+  "t": 2.083333333333331,
+  "gap": 5.1963213277771985,
+  "vC": 16.4,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0.09999999999999859,
+   "trickle": 4.100000000000003,
+   "locked": true,
+   "lockWheel": "RL",
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": false
+   },
+   "flatCount": 1,
+   "flatsToStop": 2,
+   "hitChance": 0.6479257965226968,
+   "range": 28,
+   "shots": 1,
+   "hits": 1,
+   "stopped": false,
+   "t": 2.083333333333331
+  },
+  "flats": [
+   "RL"
+  ],
+  "ribbon": 0,
+  "events": [
+   "lock",
+   "shot",
+   "flat"
+  ],
+  "fireButtons": 1,
+  "reticle": true,
+  "pivots": [
+   "RL"
+  ],
+  "note": "תקריב: פנצ׳ר, גומי מתנפנף, הרכב נוטה, עשן"
+ },
+ "d4-wheel-skid": {
+  "t": 6.583333333333315,
+  "gap": 5.9421005169050005,
+  "vC": 0,
+  "gun": {
+   "ammo": 5,
+   "ammoMax": 6,
+   "reload": 0,
+   "trickle": 4.616666666666668,
+   "locked": false,
+   "lockWheel": null,
+   "flats": {
+    "FL": false,
+    "FR": false,
+    "RL": true,
+    "RR": true
+   },
+   "flatCount": 2,
+   "flatsToStop": 2,
+   "hitChance": 0,
+   "range": 28,
+   "shots": 2,
+   "hits": 2,
+   "stopped": true,
+   "t": 6.583333333333315
+  },
+  "flats": [
+   "RL",
+   "RR"
+  ],
+  "ribbon": 71,
+  "events": [
+   "lock",
+   "shot",
+   "flat",
+   "reload",
+   "shot",
+   "flat",
+   "stopped",
+   "reload"
+  ],
+  "fireButtons": 1,
+  "reticle": false,
+  "pivots": [
+   "RL",
+   "RR"
+  ],
+  "note": "תקריב: פסי ההחלקה אחרי העצירה"
+ },
+ "session": {
+  "fireButtons": 1,
+  "fireVisible": [
+   true
+  ],
+  "ammo": 1,
+  "reticleHidden": false,
+  "locked": true,
+  "chance": 0.4057247336299518,
+  "styleInjected": true,
+  "ammo0": 6,
+  "ammo1": 5,
+  "note": "ה-HUD של B בתוך הסשן האמיתי"
+ },
+ "errors": []
+}

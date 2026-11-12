@@ -1,5 +1,5 @@
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {RACING_NUMBERS} from './racing-physics.mjs?v=island-v2-20261107-9';
+import {RACING_NUMBERS} from './racing-physics.mjs?v=island-v2-20261107-10';
 // racing-deep-m2 livery for twelve cars: one distinct paint per car (the podium and the leaderboard swatches use the same list by index), the cars pair up into six
 // teams of our own that share an accent colour on the stripe decal and the stand-in's wings. No real teams, no brands.
 export const CAR_COLORS=Object.freeze(['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca','#e07b39','#7ac05a','#a05fc4','#e0c3a1','#4b6a88','#2b2f36','#e8e6d2']);
