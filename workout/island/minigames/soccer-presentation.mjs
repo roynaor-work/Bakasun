@@ -10,13 +10,15 @@ export function slideWeight(player,config){
  return keys.at(-1).weight;
 }
 export function playerAnimation(player,state,config){
-  const a=config.view.animation,speed=hypot2(player.vx,player.vz),celebrating=state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
-  const mode=celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
-  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks'}[mode];
+  // soccerShow v1: the presentation copy carries the celebration cast (state.show.roles); without it the scorer celebrates in place as before.
+  const role=state.show?.roles?.[player.id]||null;
+  const a=config.view.animation,speed=hypot2(player.vx,player.vz),celebrating=role?role.role==='celebrate':state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
+  const mode=role?.role==='dejected'?'dejected':celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
+  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks',dejected:'stand'}[mode];
   const recovery=mode==='slide'||mode==='recover'?slideWeight(player,config):1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
   return {mode,clip,speed:clip==='run'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
     lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,
-    roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode};
+    roll:mode==='dive'?a.diveRoll*(player.diveZ||1):mode==='slide'||mode==='recover'?a.slideRoll*recovery:player.turnLean||0,height:mode==='slide'||mode==='recover'?a.slideHeight*recovery:header*config.aerial.jumpHeight,leg:mode==='slide'?a.slideLeg:mode==='steal'?steal*a.slideLeg:0,head:header*config.aerial.headLean,bonePose:mode,clipHint:role?.clip||null};
 }
 /** Landing point of a charging ground pass (the loft shows its arc instead). */
 export function passLanding(state,config){
@@ -53,7 +55,7 @@ export function projectSoccerPoint(point,camera,aspect,config){
 }
 /** Smooth tracking with velocity lead and zoom, then a hard fit for ball + player.
  * The fit is solved after smoothing, including the player's head and airborne ball. */
-export function soccerCamera(state,aspect,config,previous,dt=0){
+export function soccerCamera(state,aspect,config,previous,dt=0,boxZoom=0){
   const c=config.view.camera,b=state.ball,p=state.players[state.controlled],speed=hypot2(b.vx,b.vz),lead=Math.min(c.maxLead,speed*c.leadSeconds),length=speed||1;
   // A narrow portrait frame starts further back than landscape (portraitNearDistance):
   // the landscape near distance showed only five metres of pitch width.
@@ -66,6 +68,8 @@ export function soccerCamera(state,aspect,config,previous,dt=0){
   // A ball in the net keeps the centre at the goal line, not in the stands behind it.
   const edge=config.pitch.length/2-(c.portraitGoalInset??3);
   const wanted={x:followPlayer?(b.x+p.x)/2+b.vx/length*lead:clamp(b.x+b.vx/length*lead,-edge,edge),z:(followPlayer?(b.z+p.z)/2:b.z)+b.vz/length*lead,distance:near+clamp(speed/c.fastBallSpeed,0,1)*c.speedZoom,direction:state.attackDir};
+  // soccerShow v1 broadcast zoom: a few metres closer while the ball is in either box (the hard fit below still frames ball and player); landscape only.
+  if(boxZoom>0&&aspect>=1)wanted.distance-=boxZoom*soccerBoxFactor(b,config.pitch);
   const blend=previous?1-Math.exp(-c.smoothing*dt):1;
   const next={x:previous?previous.x+(wanted.x-previous.x)*blend:wanted.x,z:previous?previous.z+(wanted.z-previous.z)*blend:wanted.z,distance:previous?previous.distance+(wanted.distance-previous.distance)*blend:wanted.distance,direction:wanted.direction};
   const angle=soccerElevationDegrees(aspect,config)*Math.PI/180,sin=Math.sin(angle),cos=Math.cos(angle),tan=Math.tan(c.fovDegrees*Math.PI/360);
@@ -75,6 +79,11 @@ export function soccerCamera(state,aspect,config,previous,dt=0){
     const dx=point.x-next.x,dz=(point.z-next.z)*next.direction,y=point.y||0;
     next.distance=Math.max(next.distance,y*sin+dz*cos+Math.max(Math.abs(dx)/(tan*aspect*c.safeX),Math.abs(y*cos-dz*sin)/(tan*c.safeY)));
   }return next;
+}
+/** 1 inside either penalty box, 0 four metres outside it (soccer-show.boxExcitement without the module import; the view's camera budget is tight). */
+export function soccerBoxFactor(ball,pitch,ramp=4){
+  const outX=Math.max(0,pitch.length/2-pitch.penaltyDepth-Math.abs(ball.x)),outZ=Math.max(0,Math.abs(ball.z)-pitch.penaltyWidth/2);
+  return clamp(1-hypot2(outX,outZ)/ramp,0,1);
 }
 /** Adaptive-quality policy on wall-clock frame times (pure, unit-tested). sample() returns true when
  * the view should step one tier down: either the average over `qualityWindowSeconds` is above

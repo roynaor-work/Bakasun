@@ -1,4 +1,5 @@
 import {passLaneClearance} from './soccer-teamplay.mjs';
+import {passInterceptPoint,spaceAhead} from './soccer-feel.mjs';
 
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const finite=(value,fallback=0)=>Number.isFinite(value)?value:fallback;
@@ -65,9 +66,13 @@ export function compileSoccerTactics(data,c){
  // island's short pitch, but never below half so a run is still visible.
  const run=metres=>metres*Math.max(.5,Math.min(1,length/70));
  const caches=new WeakMap();let plans=0;
+ // Soccer feel v2 (config.feel.v2, soccer-feel.mjs): defenders answer a rival pass within feel.reaction seconds (presser to the intercept
+ // point, nearest defender onto the receiver), a second defender screens the pass lane, and the rival gets the attack runs when its carrier
+ // has free space ahead. null = the controller as it was.
+ const feel=c.feel?.v2?c.feel:null;
 
  function createState(state){
-  const teams=[0,1].map(team=>({team,nodes:[],byId:new Map(),phase:'defense',possessionPhase:null,lastPossessionAt:-Infinity,transitionUntil:-Infinity,pressId:null,pressUntil:-Infinity,nextDecision:-Infinity,key:'',observed:state.players.filter(player=>player.team!==team).map(player=>({player,x:0,z:0})),candidatePoint:{x:0,z:0},boundsPoint:{x:0,z:0},desiredPoint:{x:0,z:0},placed:[]}));
+  const teams=[0,1].map(team=>({team,nodes:[],byId:new Map(),phase:'defense',possessionPhase:null,lastPossessionAt:-Infinity,transitionUntil:-Infinity,pressId:null,pressUntil:-Infinity,nextDecision:-Infinity,key:'',passRef:null,passAt:-Infinity,react:false,observed:state.players.filter(player=>player.team!==team).map(player=>({player,x:0,z:0})),candidatePoint:{x:0,z:0},boundsPoint:{x:0,z:0},desiredPoint:{x:0,z:0},placed:[]}));
   for(const team of teams){
    const members=state.players.filter(p=>p.team===team.team).sort((a,b)=>a.id-b.id),used=new Set();
    if(members.length>selectedRoles.length)throw Error('The soccer tactics adapter supports at most '+(selectedRoles.length===6?'six':selectedRoles.length)+' players per side');
@@ -257,17 +262,21 @@ export function compileSoccerTactics(data,c){
    }
    if(restart&&state.restart.team!==team.team&&node.role!=='GK')node.clearance=state.restart.type==='throwIn'?parameters.throwClearance:state.restart.type==='goalKick'?0:parameters.cornerClearance;
    if(node.clearance&&distance(node,state.restart)<node.clearance){const dx=node.x-state.restart.x,dz=node.z-state.restart.z,at=Math.hypot(dx,dz)||1;node.x=state.restart.x+dx/at*node.clearance;node.z=state.restart.z+dz/at*node.clearance;}
-   if(node===presser){node.x=freePass?state.passTarget.x:b.x+finite(b.vx)*parameters.intercept;node.z=freePass?state.passTarget.z:b.z+finite(b.vz)*parameters.intercept;node.duty='press';node.fixed=true;}
+   if(node===presser){node.x=freePass?state.passTarget.x:b.x+finite(b.vx)*parameters.intercept;node.z=freePass?state.passTarget.z:b.z+finite(b.vz)*parameters.intercept;node.duty='press';node.fixed=true;
+    // Feel v2: a rival pass is rolling; the presser runs to where he can meet it on its path instead of chasing the ball from behind.
+    if(team.react){const at=passInterceptPoint(node.player,b,state.passTarget);node.x=at.x;node.z=at.z;node.duty='intercept';}}
    if(node.player.id===owner?.id||node.player.id===state.controlled){node.x=node.player.x;node.z=node.player.z;node.fixed=true;}
    if(restart&&state.restart.team===team.team&&node.player.id===state.restart.player){node.x=state.restart.x;node.z=state.restart.z;node.duty='restart-taker';node.fixed=true;}
    const bounded=inBounds(node,node.x,node.z,d);node.x=bounded.x;node.z=bounded.z;
   }
   // The child's team gets the richer attacking movement; the rival keeps the
-  // tuned behaviour that its stage and difficulty contracts were measured on.
-  if(ours&&!restart&&owner.role!=='keeper'&&team.team===0)attackRuns(team,state,owner,d);
+  // tuned behaviour that its stage and difficulty contracts were measured on (feel v2: the rival runs too once its carrier has free space ahead).
+  if(ours&&!restart&&owner.role!=='keeper'&&(team.team===0||feel&&profileStage>=feel.rivalRunsFromStage&&spaceAhead(owner,state.players,d)>=feel.rivalRunSpace))attackRuns(team,state,owner,d);
   if(!ours&&!freePass&&!restart){
    const defenders=team.nodes.filter(node=>node!==presser&&node.role!=='GK'&&!node.fixed&&!(node.player.recover>0)),threats=state.players.filter(p=>p.team!==team.team&&p.role!=='keeper'&&p.id!==owner?.id).sort((a,b)=>(a.x-b.x)*d||a.id-b.id);
    const marked=new Set(),limit=Math.max(0,fieldCount-1-coverCount);
+   // Feel v2: the receiver of a rolling rival pass is marked first, by the defender nearest to him, before the advance order below.
+   if(team.react){const receiver=state.players.find(p=>p.id===state.passTarget.player);if(receiver&&receiver.team!==team.team)threats.sort((a,b)=>(a===receiver?-1:b===receiver?1:0)||(a.x-b.x)*d||a.id-b.id);}
    for(const threat of threats){
     if(marked.size>=limit)break;
     let marker=null,best=Infinity;for(const node of defenders)if(node.markId==null){const at=distance(node.player,threat);if(at<best-1e-10||Math.abs(at-best)<=1e-10&&node.player.id<(marker?.player.id??Infinity)){marker=node;best=at;}}
@@ -275,6 +284,17 @@ export function compileSoccerTactics(data,c){
     const depth=Math.min(parameters.goalSideDepth,opponentClearance),lateral=Math.sqrt(Math.max(0,opponentClearance**2-depth**2));
     marker.x=threat.x-d*depth;marker.z=threat.z+(Math.sign(marker.z-threat.z)||(marker.player.id%2?1:-1))*lateral;marker.maxDepth=threat.x*d-.2;marker.markId=threat.id;marker.duty='mark';marked.add(threat.id);
     const point=inBounds(marker,marker.x,marker.z,d);marker.x=point.x;marker.z=point.z;
+   }
+   // Feel v2: the second defender screens the pass lane from the carrier to the most advanced attacker, goal-side, instead of holding a zone
+   // (the presser closes the carrier, this one takes away the pass that beats him).
+   if(feel&&owner&&!team.react&&(team.team===1||feel.laneTeam0!==false)){
+    const threat=threats.find(p=>!marked.has(p.id)&&p.id!==owner.id)||threats[0];
+    const free=defenders.filter(node=>node.markId==null&&node.duty==='cover');
+    if(threat&&free.length){
+     const point={x:owner.x+(threat.x-owner.x)*feel.laneFraction-d*feel.laneGoalSide,z:owner.z+(threat.z-owner.z)*feel.laneFraction};
+     let lane=null,best=Infinity;for(const node of free){const at=distance(node.player,point);if(at<best){best=at;lane=node;}}
+     lane.x=point.x;lane.z=point.z;lane.duty='lane';lane.maxDepth=Math.max(owner.x*d,threat.x*d)-.2;const bounded=inBounds(lane,lane.x,lane.z,d);lane.x=bounded.x;lane.z=bounded.z;
+    }
    }
   }
   for(const node of team.nodes)if(!node.fixed){const point=avoidOpponents(node,team,state,node,d);node.x=point.x;node.z=point.z;}
@@ -294,7 +314,12 @@ export function compileSoccerTactics(data,c){
   }
   if(owner)cached.teams[owner.team].lastPossessionAt=now;
   for(const team of cached.teams){
-   const phase=choosePhase(team,state,now,owner),key=phase+'/'+state.attackDir+'/'+(owner?.team??'loose')+'/'+(state.restart?.id??state.restart?.type??'');
+   // Feel v2: a rival pass in flight is noticed feel.reaction seconds after its release (per difficulty); the plan then changes (key).
+   if(feel){const pass=state.passTarget&&owner==null&&state.ball.lastTeam!==team.team&&state.passTarget.time>0?state.passTarget:null;
+    if(pass!==team.passRef){team.passRef=pass;team.passAt=now;}
+    const reaction=team.team===0&&Number.isFinite(feel.teamReaction)?feel.teamReaction:feel.reaction?.[state.difficulty]??.18;
+    team.react=Boolean(pass)&&now-team.passAt>=reaction;}
+   const phase=choosePhase(team,state,now,owner),key=phase+'/'+state.attackDir+'/'+(owner?.team??'loose')+'/'+(state.restart?.id??state.restart?.type??'')+(team.react?'/rp':'');
    if(now<team.nextDecision&&key===team.key)continue;
    team.phase=phase;team.key=key;team.nextDecision=now+parameters.decisionSeconds;plan(team,state,now,owner);
   }

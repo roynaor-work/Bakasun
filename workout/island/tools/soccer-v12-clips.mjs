@@ -1,4 +1,6 @@
-/** Build assets/soccer-v12/clips.json from Codex's motion-fix-v12 repaired soccer-v9 and soccer-v10 clips.
+/** Build assets/soccer-v12/clips.json from Codex's motion-fix-v12 repaired soccer-v9, soccer-v10, soccer-v8 and soccer-v11 clips.
+ * v8 and v11 ship only the clips soccer-feel v2 plays (slide, keeper dives, receive, first touch; FEEL_V8 / FEEL_V11 below), the rest of those
+ * packs stay as shipped in assets/soccer-v8 and assets/soccer-v11.
  * Each repaired GLB carries 0.35 s of idle lead-in and a trailing handle around the real motion; `metadata.coreRange` (runtime seconds) marks the
  * motion itself. Only the core is shipped (the game's own state machine does the blending), keys re-timed so the core starts at 0.
  * Run: node tools/soccer-v12-clips.mjs <pack-dir> [<catalog-json>]
@@ -10,12 +12,13 @@ import {parseGLB,readAccessor} from '../design/soccer-motion-v8/verification/glb
 
 const pack=resolve(process.argv[2]||'.')+'/',catalogPath=process.argv[3]||pack+'runtime/catalog.json';
 const out=new URL('../assets/soccer-v12/',import.meta.url);
-const rawCatalog=JSON.parse(await readFile(catalogPath,'utf8')),catalog=(rawCatalog.clips||rawCatalog).filter(c=>/^soccer-v(9|10)$/.test(c.library));
+const FEEL_V8=new Set(['slide','receive_chest','first_touch_moving',...['low_left','low_right','middle_left','middle_center','middle_right','high_left','high_center','high_right'].map(z=>'keeper_dive_'+z)]),FEEL_V11=new Set(['keeper_dive_left','keeper_dive_right']);
+const rawCatalog=JSON.parse(await readFile(catalogPath,'utf8')),catalog=(rawCatalog.clips||rawCatalog).filter(c=>/^soccer-v(9|10)$/.test(c.library)||c.library==='soccer-v8'&&FEEL_V8.has(c.id)||c.library==='soccer-v11'&&FEEL_V11.has(c.id));
 const round=(v,n=3)=>Math.round(v*10**n)/10**n,REST_HIPS=[0,.86,0];
 const ang=(a,b)=>2*Math.acos(Math.min(1,Math.abs(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3])))*180/Math.PI;
-const libraries={v9:{},v10:{}};
+const libraries={v8:{},v9:{},v10:{},v11:{}};
 for(const meta of catalog){
-  const lib=meta.library.slice(-2)==='v9'?'v9':'v10',m=meta.metadata,id=meta.id;
+  const lib=meta.library.replace('soccer-',''),m=meta.metadata,id=meta.id;
   const glb=parseGLB(await readFile(pack+'runtime/'+meta.animation.replace(/^runtime\//,''))),{json}=glb;
   const animation=json.animations[0];
   // Each channel has its own sparse keys (adaptive timing): resample all of them onto one 30 Hz grid over the core.
@@ -44,11 +47,15 @@ for(const meta of catalog){
   }
   const shift=e=>round(e-t0,4),inCore=e=>e>=t0-.02&&e<=t1+.02;
   const named=(m.events||[]).filter(e=>e.type!=='plant'&&inCore(e.time));
+  // Slides and dives end back on the feet: the last foot plant after the landing marks where the body is standing again (soccer-feel v2 fits the
+  // simulation's recovery clock to it). Only for the v8/v11 clips, so the v9/v10 output stays as it was.
+  const plants=(lib==='v8'||lib==='v11')?(m.events||[]).filter(e=>e.type==='plant'&&inCore(e.time)&&e.time>t0+.3).map(e=>shift(e.time)):[];
+  const standSeconds=plants.length?Math.max(...plants):null;
   const events=named.map(e=>({timeSeconds:shift(e.time),name:'visual_'+e.type,bone:e.bone,domain:'presentation'}));
   const ballContacts=named.filter(e=>['receive','release','contact'].includes(e.type)).map(e=>({time:round(Math.max(0,Math.min(1,(e.time-t0)/duration)),6),atSeconds:shift(e.time),event:'visual_contact',kind:e.type,bone:e.bone}));
   let maxKeyDeg=0;for(let i=1;i<keyframes.length;i++){const dtk=(keyframes[i].time-keyframes[i-1].time)*duration;for(const b of bones)maxKeyDeg=Math.max(maxKeyDeg,ang(keyframes[i-1].rotations[b],keyframes[i].rotations[b])/(dtk*30||1));}
-  libraries[lib][id]={clip:id,group:m.role==='keeper'?'keeper':'action',category:m.category,durationSeconds:duration,loop:Boolean(m.originalLoop??m.loop),maxKeyDeg:round(maxKeyDeg,1),timeScale:round(meta.metadata.timeScale||1,4),events,ballContacts,keyframes};
+  libraries[lib][id]={clip:id,group:m.role==='keeper'?'keeper':'action',category:m.category,durationSeconds:duration,loop:Boolean(m.originalLoop??m.loop),maxKeyDeg:round(maxKeyDeg,1),timeScale:round(meta.metadata.timeScale||1,4),...(standSeconds!==null?{standSeconds}:{}),events,ballContacts,keyframes};
 }
 await mkdir(out,{recursive:true});
-await writeFile(new URL('clips.json',out),JSON.stringify({schemaVersion:1,source:'design/motion-fix-v12 (repaired soccer-v9, soccer-v10), core range only',fps:30,libraries}));
-for(const lib of ['v9','v10'])for(const [n,s] of Object.entries(libraries[lib]))console.log(lib,n.padEnd(34),s.durationSeconds.toFixed(2)+'s',s.keyframes.length+'k',s.maxKeyDeg+'deg/key',s.ballContacts.map(c=>c.kind+'@'+c.atSeconds).join(' '));
+await writeFile(new URL('clips.json',out),JSON.stringify({schemaVersion:1,source:'design/motion-fix-v12 (repaired soccer-v9, soccer-v10; soccer-v8 and soccer-v11 slide/dive/receive for soccer-feel v2), core range only',fps:30,libraries}));
+for(const lib of ['v8','v9','v10','v11'])for(const [n,s] of Object.entries(libraries[lib]))console.log(lib,n.padEnd(34),s.durationSeconds.toFixed(2)+'s',s.keyframes.length+'k',s.maxKeyDeg+'deg/key',s.ballContacts.map(c=>c.kind+'@'+c.atSeconds).join(' '));

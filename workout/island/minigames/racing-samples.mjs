@@ -10,9 +10,14 @@ const SHOTS=['shift-up','shift-down','turbo-blowoff','exhaust-pop-1','exhaust-po
 const ENGINE_IDS=['engine-idle','engine-low','engine-mid','engine-high','engine-redline'];
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export const samplesEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingSamples')!=='0';
-
-/** context: an AudioContext (or test double); base: URL of assets/racing-audio-v2/; fetchFn/format injectable for tests. */
-export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format}){
+// Every engine loop carries a strong harmonic line at 1.6-2.4 kHz (idle 1798 Hz +26 dB, high +38 dB,
+// redline 2250 Hz the loudest bin); the rpm playback-rate slide turned it into a continuous whine
+// (audio-forensics 11/11/2026: a 33 s glide and 64 segments in 3 minutes; 0 with ?racingSamples=0,
+// 34 still with a 1.3 kHz low-pass because the lines are 26-40 dB above their surroundings).
+// The procedural engine (racing-audio.mjs) carries the motor; the sample layer keeps gearbox,
+// exhaust, kerb, tyre and wind. ?racingEngineLoops=1 restores the five engine loops.
+export const engineLoopsOn=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingEngineLoops')==='1';
+export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn()}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
   const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0;const lastShot=new Map();
   const bus=context.createGain();bus.gain.value=0;bus.connect(destination);nodes.push(bus);
@@ -25,6 +30,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     }));
     if(disposed)return;
     for(const [id,spec] of Object.entries(LOOPS)){
+      if(!engineLoops&&ENGINE_IDS.includes(id))continue;
       const source=context.createBufferSource(),gain=context.createGain();source.buffer=buffers.get(id);source.loop=true;source.loopStart=spec.loop[0];source.loopEnd=spec.loop[1];
       gain.gain.value=0;source.connect(gain);gain.connect(bus);source.start(0,spec.loop[0]);loops.set(id,{source,gain,spec});nodes.push(source,gain);
     }
@@ -49,7 +55,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     const fake=3500+clamp(rpm,0,1)*11800;let lo=0;while(lo<ENGINE_IDS.length-2&&fake>=LOOPS[ENGINE_IDS[lo+1]].rpm)lo++;
     const a=LOOPS[ENGINE_IDS[lo]],b=LOOPS[ENGINE_IDS[lo+1]],t=clamp((fake-a.rpm)/(b.rpm-a.rpm),0,1),load=.55+.45*clamp(throttle,0,1);
     ENGINE_IDS.forEach((id,i)=>{
-      const loop=loops.get(id);let weight=0;if(i===lo)weight=Math.cos(t*Math.PI/2);else if(i===lo+1)weight=Math.sin(t*Math.PI/2);
+      const loop=loops.get(id);if(!loop)return;let weight=0;if(i===lo)weight=Math.cos(t*Math.PI/2);else if(i===lo+1)weight=Math.sin(t*Math.PI/2);
       target(loop.gain.gain,weight*.07*load,now,.045);target(loop.source.playbackRate,clamp(fake/loop.spec.rpm,.82,1.2),now,.045);
     });
     const slip=drifting?.07+Math.abs(steer)*.05:0;
@@ -59,7 +65,7 @@ export function createRacingSamples({context,destination=context?.destination,ba
     if(kerb>.5)shot('kerb-rumble',.05+.04*Math.min(1,speed/45),1,.7);
   }
   return {
-    load,get ready(){return ready;},update,
+    load,get ready(){return ready;},get engineLoops(){return engineLoops;},update,
     shiftUp(){shot('shift-up',.035,1,.45);},shiftDown(){shot('shift-down',.03,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
     dispose(){if(disposed)return;disposed=true;for(const n of nodes){try{n.stop?.();}catch{}try{n.disconnect();}catch{}}}

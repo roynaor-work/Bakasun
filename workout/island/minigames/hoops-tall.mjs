@@ -274,6 +274,8 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   event(e){
    const type=typeof e==='string'?e:e?.type;
    if(type==='score'||type==='result_success'){st.celebrate=2.2;st.celebrateClip=['celebrate_fist','celebrate_chest','celebrate_jump','celebrate_point'][Math.floor(Math.random()*4)];}
+   // show (M4): a named reaction clip from the presentation (teammate fist/point, dunked-on 'disappointed', losers' 'hands_on_hips')
+   else if(type==='celebrate'&&e.clip&&pack.clips[e.clip]){st.celebrate=2.2;st.celebrateClip=e.clip;}
    else if(type==='catch'||type==='interception')st.catchUntil=performance.now()+420;
   },
   get motionState(){return state;},get motionPhase(){return statePhase;},get dribbleLocked(){return guard.locked;},

@@ -14,6 +14,8 @@ import {createSoccerDesignLoader} from './soccer-design-loader.mjs';
 import {createSoccerDesignScene} from './soccer-design-scene.mjs';
 import {createSoccerDesignVfx} from './soccer-design-vfx.mjs';
 import {createSoccerDesignReplay} from './soccer-design-replay.mjs';
+import {soccerShowEnabled,soccerShowConfig} from './soccer-show.mjs';
+import {createSoccerShowView} from './soccer-show-view.mjs';
 import {selectedSoccerKit} from './soccer-design-screens.mjs';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {cloneSoccerRig,playerSoccerClip} from './soccer-rig.mjs?v=island-v2-20261107-10';
@@ -48,7 +50,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const resources=new Set(),track=o=>(resources.add(o),o);
   const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
   const lighting=createSoccerLighting(scene,renderer,config);
-  const designVfx=createSoccerDesignVfx(scene,{track}),replay=createSoccerDesignReplay({config});
+  // soccerShow v1 (M4 broadcast: two-cut goal replay at every tier, celebrations, crowd mood, box zoom); `?soccerShow=0` keeps the previous presentation.
+  const showOn=soccerShowEnabled(config.show?.version),showCfg=soccerShowConfig(config);
+  const designVfx=createSoccerDesignVfx(scene,{track}),replay=createSoccerDesignReplay(showOn?{config,historySeconds:showCfg.replay.recordSeconds,capacity:Math.ceil(showCfg.replay.recordSeconds*30)+8}:{config}),show=showOn?createSoccerShowView({config,replay}):null,liveTarget=[0,0,0];
   const beforeStadium=new Set(scene.children),stadium=createUltraSoccerStadium(scene,config,track);
   const fallbackStadiumObjects=scene.children.filter(object=>!beforeStadium.has(object));
   const surround=createSoccerSurround(scene,config,track),effects=createUltraSoccerEffects(scene,config,track);
@@ -255,7 +259,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
     if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,numberCanvas.width,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
     const c=config.view.camera,elevation=soccerElevationDegrees(camera.aspect,config),angle=elevation*Math.PI/180;
-    cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt);
+    cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt,show?showCfg.camera.boxZoom:0);
     camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
     const ballProjection=projectSoccerPoint(s.ball,cameraState,camera.aspect,config),playerProjection=projectSoccerPoint(s.players[s.controlled],cameraState,camera.aspect,config);
     framing=framingShown;framing.ball=ballProjection;framing.controlled=playerProjection;Object.assign(framing.camera,cameraState);framing.elevationDegrees=elevation;
@@ -266,18 +270,25 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     if(s.eventId!==lastEvent){lastEvent=s.eventId;if(s.event?.type==='goal'){
       goalPulse=1;goalTeam=s.event.team;
     }}
-    const live=s;
+    const live=s;let rate=1,markers=true;
+    if(show){
+      // The show renders the same scene with the same live avatars (recorded frames read back into one reused state copy), so it costs the
+      // same at every tier: a tier-2 phone gets the replay too. `rate` slows the design clips inside the half-speed cut.
+      liveTarget[0]=cameraState.x;liveTarget[1]=0;liveTarget[2]=cameraState.z;
+      const shown=show.update(live,dt,camera,liveTarget,quality);s=shown.state;rate=shown.rate;markers=shown.markers;if(shown.owned||shown.hold)onEdge(null);
+    }
     // The existing economy tiers spend their budget on the athletes and pitch.
     // Replays never extend the goal pause or force a weaker device to render a
     // second camera workload. The normal tiers retain the full presentation.
-    if(quality>=2||config.view.designReplay===false)replay.skip('quality');
+    else if(quality>=2||config.view.designReplay===false)replay.skip('quality');
     else s=replay.sample(live,dt,camera);
     if(replay.active)onEdge(null);
     designVfx.update(live,dt,quality,camera);
     const stadiumDirection=-Math.sign(camera.getWorldDirection(target).z)||live.attackDir;
     if(designSceneReady){designScene.update(stadiumDirection,lastWidth,lastHeight);designScene.netRipple(goalPulse,(goalTeam===0?1:-1)*live.attackDir,time);}else stadium.update(stadiumDirection);
-    if(v8)v8.update(camera,time,{autoLOD:false,reducedMotion:quality>=2||globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true});
-    else{surround.update(stadiumDirection);crowd.update(time,live.phase==='goal',stadiumDirection);}
+    const calm=quality>=2||globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true;
+    if(v8){v8.update(camera,time,{autoLOD:false,reducedMotion:calm});if(show)v8.setMood(show.mood.cheer,show.mood.groan,calm&&quality>=3);}
+    else{surround.update(stadiumDirection);crowd.update(time,show?show.mood.cheer>.2:live.phase==='goal',stadiumDirection,show?show.mood.groan:0);}
     goalPulse=Math.max(0,goalPulse-dt*.7);
     let boxIndex=0,sphereIndex=0;
     function box(x,y,z,sx,sy,sz,c,angle=0){dummy.position.set(x,y,z);dummy.rotation.set(0,angle,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();boxes.setMatrixAt(boxIndex,dummy.matrix);boxes.setColorAt(boxIndex++,color.set(c));}
@@ -296,11 +307,11 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       if(useModel){if(character.design){
         const contactActor=p.id===s.controlled||p.id===s.ball.owner||p.restartMotion||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0;
         const wantedLod=(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0),actorLod=character.setLod(v7Full&&wantedLod===0&&!v7Full.has(p.id)?1:wantedLod);
-        const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt);
+        const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt*rate);
         const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;pose.lod=actorLod;
       }else if(character.athlete){
         if(nearCount>0&&nearDetail&&quality<config.view.athlete.lodFromQuality&&character.lodCount>1)character.setLod(nearDetail.has(p.id)||p.id===s.controlled||p.id===poseFocus?0:1);
-        const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;
+        const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;if(animation.mode==='dejected')animation.mode='idle'; // the show's keeper stance exists only in the design state machine
         const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive'].includes(animation.mode));character.yaw=bodyState.yaw;
         const sliding=animation.mode==='slide'||animation.mode==='recover',roll=animation.mode==='dive'?animation.roll:sliding?animation.roll*ad.slideRollScale:bodyState.roll;
         const lift=animation.mode==='dive'?Math.sin(Math.PI*Math.min(1,Math.max(0,1-p.diveTime/config.goalkeeping.diveSeconds)))*ad.diveLift:0;
@@ -324,7 +335,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
         if(p.hands){pose.handRadii=pose.handRadii||[0,0];pose.handRadii[0]=ballDistance(bones.Hand_L.bone.getWorldPosition(target),s.ball);pose.handRadii[1]=ballDistance(bones.Hand_R.bone.getWorldPosition(target),s.ball);}else pose.handRadii=null;
         Object.assign(pose.weights,character.motion.weights);
       }else{
-        const {pivot,actions,mixer,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz);if(character.yaw===null||['slide','kick','throw'].includes(animation.mode))character.yaw=wanted;else character.yaw+=Math.atan2(Math.sin(wanted-character.yaw),Math.cos(wanted-character.yaw))*(1-Math.exp(-config.view.animation.turnSmoothing*dt));
+        const {pivot,actions,mixer,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz);if(animation.mode==='dejected')animation.mode='idle';if(character.yaw===null||['slide','kick','throw'].includes(animation.mode))character.yaw=wanted;else character.yaw+=Math.atan2(Math.sin(wanted-character.yaw),Math.cos(wanted-character.yaw))*(1-Math.exp(-config.view.animation.turnSmoothing*dt));
         pivot.position.set(p.x,animation.height,p.z);pivot.rotation.set(0,character.yaw,0);pivot.rotateX(animation.lean);pivot.rotateZ(animation.roll);
         const retrigger=animation.clip==='kick'&&(p.kickTime>character.kickTime||p.stealTime>character.stealTime);
         if(animation.clip!==character.active||retrigger){const fade=animation.clip==='kick'||character.active==='kick'?config.view.animation.fadeSeconds:config.view.animation.locomotionFadeSeconds;actions[character.active].fadeOut(fade);actions[animation.clip].reset().fadeIn(fade).play();character.active=animation.clip;}
@@ -360,7 +371,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     for(let i=0;i<arcDots.count;i++){const u=i/(arcDots.count-1);dummy.position.set(arc.fromX+(arc.x-arc.fromX)*u,config.physics.ballRadius+4*arc.height*u*(1-u),arc.fromZ+(arc.z-arc.fromZ)*u);dummy.rotation.set(0,0,0);dummy.scale.setScalar(1);dummy.updateMatrix();arcDots.setMatrixAt(i,dummy.matrix);}arcDots.instanceMatrix.needsUpdate=true;
     turfG.attributes.position.needsUpdate=true;turf.visible=s.players.some(p=>p.slideTime>0);requests.count=s.players.some(p=>p.request||receiver===p.id)?roster.length:0;const groundLanding=arc?null:passLanding(s,config);landing.visible=Boolean(arc||groundLanding);if(arc)landing.position.set(arc.x,.04,arc.z);else if(groundLanding)landing.position.set(groundLanding.x,.04,groundLanding.z);
     boxes.count=boxIndex;spheres.count=sphereIndex;boxes.instanceMatrix.needsUpdate=true;spheres.instanceMatrix.needsUpdate=true;if(boxes.instanceColor)boxes.instanceColor.needsUpdate=true;if(spheres.instanceColor)spheres.instanceColor.needsUpdate=true;requests.instanceMatrix.needsUpdate=true;
-    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);
+    const controlled=s.players[s.controlled];selector.position.set(controlled.x,.055,controlled.z);selector.scale.setScalar(1+Math.max(0,s.selectionTime||0)*.35);arrow.position.set(controlled.x,2.4+Math.sin(time*4)*.08,controlled.z);selector.visible=arrow.visible=markers;if(!markers)requests.count=0;
     const destination=!restartCue&&s.chargeKind==='pass'&&s.charging?passDestination(s,config,s.charge/config.passing.chargeSeconds):null;
     const aim=destination?{x:destination.x-controlled.x,z:destination.z-controlled.z}:safeShotAim(s.actionAim||s.kickAim||s.aim,s.kickAim,s.attackDir,s.charge/config.physics.chargeSeconds,config);
     aimArrow.visible=s.charging;aimArrow.position.set(restartCue?.originX??controlled.x,.065,restartCue?.originZ??controlled.z);aimArrow.rotation.y=restartCue?Math.atan2(restartCue.aimX,restartCue.aimZ):Math.atan2(aim.x,aim.z);
@@ -389,7 +400,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     else if(!pinQuality&&quality<2&&(renderer.info.render.triangles>config.view.maxTriangles||renderer.info.render.calls>config.view.maxDrawCalls)){lowerQuality();renderer.render(scene,camera);}
   }
   const lost=event=>{event.preventDefault();onContextLost();};canvas.addEventListener('webglcontextlost',lost);
-  const skipReplay=()=>replay.skip('touch');canvas.addEventListener('pointerdown',skipReplay);
+  const skipReplay=()=>{replay.skip('touch');show?.skip();};canvas.addEventListener('pointerdown',skipReplay);
   function pitchBounds(){
     const points=[];for(const x of [-hx,hx])for(const z of [-hz,hz]){target.set(x,0,z).project(camera);points.push({x:(target.x+1)*lastWidth/2,y:(1-target.y)*lastHeight/2});}
     return {width:Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x)),height:Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y))};
@@ -398,12 +409,14 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   function report(){if(loadReport.ms===null&&assetStatus!=='loading')loadReport.ms=Math.round((globalThis.performance?.now?.()??0)-loadStart);let gpu=null;try{const gl=renderer.getContext(),info=gl.getExtension('WEBGL_debug_renderer_info');gpu=info?gl.getParameter(info.UNMASKED_RENDERER_WEBGL):null;}catch{}return {...loadReport,assetStatus,scene:designSceneReady?'design':designScene?.metrics().status||'disabled',sceneFailure:designScene?.metrics().failure||null,quality,gpu,warmup:warmed,webgl2:!!renderer.capabilities?.isWebGL2};}
   if(lite){lowerQuality();lowerQuality();loadReport.lite=true;}
   if(pinQuality)for(let i=0;i<Math.min(3,Math.floor(Number(pinParam)));i++)lowerQuality();
-  return {ready,render,qualitySample,report,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return replay.active;},
+  return {ready,render,qualitySample,report,loading:()=>assetStatus==='loading',get renderer(){return renderer;},get replaying(){return show?show.replaying:replay.active;},
+    /** soccerShow v1: the session does not step the model while `hold` is true; `noteEvent` feeds drained match events (short replays, crowd mood). */
+    get hold(){return Boolean(show?.hold);},get show(){return show;},get showPhase(){return show?.phase||'live';},get finaleSeconds(){return show?show.finaleSeconds:0;},get crowdMood(){return show?.mood||null;},noteEvent(event){show?.event(event);},
     poseCamera(id,mode){poseFocus=id;poseMode=mode;},
     /** Test hook: backdrop meshes off and the clear colour magenta, so any pixel the scenery fails to cover shows. */
     get scene(){return scene;},get characters(){return characters;},
     skyProbe(on,surroundOn=true){if(on&&!probeBackground)probeBackground=scene.background;scene.background=on?new T.Color('#ff00ff'):probeBackground||new T.Color('#7d9592');if(!on)probeBackground=null;scene.traverse(o=>{if(o.renderOrder===-1000)o.visible=!on;});if(v8)v8.root.visible=surroundOn;else surround.root.visible=surroundOn;},
-    metrics:()=>({v8:{...v8Report,lod:v8?.lod??null,roofCutaway:v8?.roofCutawayActive??null,parts:v8?.metrics().parts??null,triangles:v8?.metrics().total??null},triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:v8?'Soccer v8 evening stadium':designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
-    dispose(){if(disposed)return;disposed=true;v8?.dispose();replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
+    metrics:()=>({v8:{...v8Report,lod:v8?.lod??null,roofCutaway:v8?.roofCutawayActive??null,parts:v8?.metrics().parts??null,triangles:v8?.metrics().total??null},triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:v8?'Soccer v8 evening stadium':designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),show:show?.metrics()||null,assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    dispose(){if(disposed)return;disposed=true;v8?.dispose();show?.dispose();replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }

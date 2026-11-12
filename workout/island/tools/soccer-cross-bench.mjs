@@ -6,8 +6,10 @@ import {createSoccer,seededRandom} from '../minigames/soccer.mjs';
 import {applySoccerTeams} from '../minigames/soccer-teams.mjs';
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 export async function loadConfig(){return JSON.parse(await readFile(new URL('../data/config.json',import.meta.url),'utf8')).minigames.soccer;}
-function simulateCross(config,{seed,hold=.55,errorDegrees=8,press='auto'}){
-  const rng=seededRandom(seed*2654435761>>>0||1),game=createSoccer({config,seed,stage:3,difficulty:'normal',...(process.env.AI?{aiVersion:process.env.AI}:{})}),s=game.getState();
+// The bench isolates the lob -> header chain, so the match runs without feel v2 (defenders marking the receiver of a lob in flight halve the
+// striker's headers: 46.7% with it, 12/11/2026); FEEL=v2 in the environment measures the full match instead.
+function simulateCross(config,{seed,hold=.55,errorDegrees=8,press='auto',feel=process.env.FEEL||'off'}){
+  const rng=seededRandom(seed*2654435761>>>0||1),game=createSoccer({config,seed,stage:3,difficulty:'normal',feelVersion:feel,...(process.env.AI?{aiVersion:process.env.AI}:{})}),s=game.getState();
   const step=config.match.fixedStep,hx=config.pitch.length/2,hz=config.pitch.width/2;
   const home=s.players.filter(p=>p.team===0),opps=s.players.filter(p=>p.team===1);
   const place=(p,x,z)=>{p.x=x;p.z=z;p.vx=p.vz=0;p.recover=0;p.cooldown=0;p.hold=0;};

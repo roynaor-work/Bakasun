@@ -14,6 +14,7 @@ import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
+import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -39,6 +40,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  scene.add(arena);mark('arena');
  // v4 assets (02/11) are an upgrade, never a requirement: any load failure falls back to the v3 venue and bodies
  const params=new URLSearchParams(globalThis.location?.search||''),fallbacks=[];
+ // M4 presentation (11/11): automatic two-angle replay, teammate and defender reactions, crowd moods, live cuts; `?hoopsShow=0` restores the old presentation
+ const show=showEnabled(params),userTeam=0,showCounts={autoReplays:0,autoReplaysDone:0,skipped:0,liveCuts:0,casts:0};
  const onFallback=(what,error)=>{fallbacks.push(what);console.warn('Basketball v4 '+what+' unavailable, using the v3 assets: '+(error?.message||error));};
  const arenaOptions={assetBase,quality,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())};
  let models=null;
@@ -106,7 +109,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const glow=new THREE.Mesh(new THREE.CircleGeometry(0.5,40),new THREE.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0.22,depthWrite:false}));glow.rotation.x=-Math.PI/2;glow.position.y=0.017;scene.add(glow);
  const arrow=new THREE.Mesh(new THREE.ConeGeometry(0.16,0.34,3),ringMat);arrow.rotation.x=Math.PI;scene.add(arrow);
 
- const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null};
+ const state={camX:0,camZ:0,shake:0,replay:null,lastFrameMs:16,frames:0,slow:0,landscape:true,w:1,h:1,portraitT:1,ballVis:null,casts:[]};
  const v=new THREE.Vector3(),v2=new THREE.Vector3();
  const vfx=await createHoopsVfx(scene,assetBase,{quality,court});loadingVfx=vfx;mark('vfx');
  const feel=createHoopsFeel(await loadHoopsFeel(),{reducedMotion:vfx.reducedMotion,onCue(cue,event,snapshot){if(cue.kind==='audio')onFeelAudio?.(cue.asset,{volume:Math.pow(10,cue.gain_db/20)});else vfx.trigger?.(cue,event,snapshot);}});loadingFeel=feel;
@@ -135,8 +138,16 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    // following the ball with a lead towards the basket being attacked.
    const h=s.players.find(p=>p.hasBall),fx=h?h.x:b.x,fz=h?h.z:b.z,side=attack||0;
    const lead2=side?clamp((side*court.rimX-fx)*(V.bLead??0.35),-(V.bLeadMax??4),V.bLeadMax??4):0;
-   const tx=clamp(fx+lead2,-court.hx+(V.bEdge??5),court.hx-(V.bEdge??5));
-   const kb=state.snap||state.bcX==null?1:1-Math.exp(-dt*(V.bRate??2.4));
+   // show: the camera leads the handler's own speed on a fast break (less lag, no catch-up jerk), and pans gently for
+   // SHOW.possessionPan seconds after the ball changes side instead of swinging at the full follow rate
+   const leadV=show&&h?clamp(h.vx*SHOW.leadVelocity,-3,3):0;
+   const poss=s.possession===0||s.possession===1?s.possession:null;
+   if(show&&poss!=null&&state.lastPoss!=null&&poss!==state.lastPoss&&s.phase==='live')state.trans=SHOW.possessionPan;
+   if(poss!=null)state.lastPoss=poss;
+   state.trans=Math.max(0,(state.trans||0)-dt);
+   const rateK=state.trans>0?lerp(0.45,1,smoothstep(1-state.trans/SHOW.possessionPan)):1;
+   const tx=clamp(fx+lead2+leadV,-court.hx+(V.bEdge??5),court.hx-(V.bEdge??5));
+   const kb=state.snap||state.bcX==null?1:1-Math.exp(-dt*(V.bRate??2.4)*rateK);
    state.bcX=state.bcX==null?tx:lerp(state.bcX,tx,kb);state.bcZ=lerp(state.bcZ??0,clamp(fz,-court.hz,court.hz),kb);
    state.punch=Math.max(0,(state.punch||0)-dt/1.6);const pb=state.punch;
    // fixed spot above the near sideline; the lens zooms so the players keep the same size
@@ -146,6 +157,12 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    camera.fov=clamp(2*Math.atan(span/2/dist)*180/Math.PI,V.bFovMin??16,V.bFovMax??40);
    camera.position.set(state.bcX,cy,cz);
    camera.lookAt(state.bcX,V.bLookY??1,lz);
+   // show: a made basket cuts to the low baseline angle for SHOW.liveCut.hold seconds, then blends back (no snap)
+   if(state.cut){
+    const c=state.cut;c.t+=dt;const hold=SHOW.liveCut.hold,blend=SHOW.liveCut.blend;
+    if(c.t>=hold+blend)state.cut=null;
+    else{const w=c.t<hold?1:1-smootherstep((c.t-hold)/blend);camera.updateMatrixWorld();camera.position.lerp(c.pos,w);camera.quaternion.slerp(c.quat,w);camera.fov=lerp(camera.fov,c.fov,w);}
+   }
   } else if(state.landscape&&V.mode==='behind'){
    // behind the play (2K / NBA Live mobile style): low behind the ball, facing the basket the
    // team with the ball attacks; it swings round smoothly when the ball changes hands
@@ -191,6 +208,10 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  function render(prev,cur,alpha,dt){
   const now=performance.now(),presentationDt=dt>0?Math.max(0,(now-(state.presentationNow??now-dt*1000))/1000):0;state.presentationNow=now;
   const s=state.replay?replayFrame(presentationDt):cur,p0=state.replay?s:prev;state.lastSnapshot=cur;
+  // the clips advance with the replay's own time scale (slow motion slows the bodies too), never with the wall clock
+  const poseDt=Math.min(0.2,state.replay?presentationDt*(state.replay.scale??1):dt);
+  // delayed reactions fire when due; one that waited through a whole replay (more than 2.5 s late) is dropped, not played at the inbound
+  if(state.casts.length&&!state.replay)state.casts=state.casts.filter(c=>{if(c.due>now)return true;if(now-c.due<2500)avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});return false;});
   const t0=performance.now();
   interp.index(p0?.players);
   seen.clear();
@@ -211,7 +232,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
    const attackSide=s.dir?.[p.team]||1,rimDx=attackSide*court.rimX-p.x,rimDz=-p.z,rimDist=Math.hypot(rimDx,rimDz),nearHandler=!!handler&&handler.team!==p.team&&Math.hypot(handler.x-p.x,handler.z-p.z)<3.5;
    if(p.act==='pass'&&p.passTo){const q=s.players.find(o=>o.id===p.passTo);if(q)passDist=Math.hypot(q.x-p.x,q.z-p.z);}
    if(catching)eta=Math.hypot(s.ball.x-p.x,s.ball.z-p.z)/passFlightSpeed(s.ball.passKind,config.pass?.speed);
-   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},Math.min(0.2,dt));
+   av.pose(p,{defending,dribbling:s.phase==='live'&&p.dribbling!==false,airU:p.air?clamp((p.y)/(0.7),0,1):0,contest,catching,passKind:p.passKind||s.ball.passKind,screen:p.role==='screen',layupSide:p.z<0?'left':'right',ball:state.ballVis||s.ball,steal:config.steal,dribble:p.hasBall?av.dribbleCtx:null,passDist,eta,passWindup:config.pass?.windup,stealReach:config.steal?.reachAt},poseDt);
   }
   for(const [id,av] of avatars)if(!seen.has(id))av.root.visible=false;
   // the athlete body has an economy mesh: the four players nearest the camera (and the ball handler and the child) keep the full one
@@ -265,12 +286,18 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   for(const n of dyn.nets){if(n.swing>0){n.swing=Math.max(0,n.swing-dt*1.6);const a=n.mesh.geometry.attributes.position,base=n.base,k=n.swing;for(let i=0;i<a.count;i++){const y=base[i*3+1];const d=-y/0.42;a.setXYZ(i,base[i*3]*(1-0.25*k*d),y*(1+0.35*k*Math.sin(performance.now()*0.03+i)),base[i*3+2]*(1-0.25*k*d));}a.needsUpdate=true;}}
   dyn.led.offset.x=(dyn.led.offset.x+dt*0.03)%1;
   drawDisplays(dyn,s,looks.map(l=>l.primary));
-  if(crowd)crowd.update(dt,state.cheer||0);else models.crowdV5?.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
-  if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else cameraFor(s,dt);
-  if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
+  // crowd moods (show): stand/arms up decays over SHOW.crowd.standSeconds, the groan over groanSeconds, the cheer wave sweeps the stands once
+  state.stand=Math.max(0,(state.stand||0)-dt/SHOW.crowd.standSeconds);state.groan=Math.max(0,(state.groan||0)-dt/SHOW.crowd.groanSeconds);
+  if(state.waveT!=null){state.waveT+=dt/SHOW.crowd.waveSeconds;if(state.waveT>=1)state.waveT=null;}
+  const mood=show?{stand:state.stand,groan:state.groan,waveOn:state.waveT==null?0:1,waveX:state.waveT==null?-999:lerp(-SHOW.crowd.waveSpan/2,SHOW.crowd.waveSpan/2,state.waveT)*(state.waveDir||1)}:null;
+  if(crowd)crowd.update(dt,state.cheer||0,mood);else models.crowdV5?.update(dt,state.cheer||0);state.cheer=Math.max(0,(state.cheer||0)-dt*0.5);
+  // the automatic replay computes the live camera itself (showCamera): one follow step per frame, on the live snapshot only
+  if(state.override){camera.position.copy(state.override.pos);camera.fov=state.override.fov||camera.fov;camera.updateProjectionMatrix();camera.lookAt(state.override.look);}else if(!state.replay?.show)cameraFor(s,dt);
+  if(state.replay?.show&&!state.override)showCamera(state.replay,s,cur,presentationDt);
+  else if(state.replay?.dunk&&!vfx.reducedMotion&&!state.override)replayCamera(state.replay,cur,dt);
   const feedback=feel.update(presentationDt,s);
   if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
-  models.arenaV8?.update(camera,now/1000,presentationDt||dt||1/60,state.cheer||0);
+  models.arenaV8?.update(camera,now/1000,presentationDt||dt||1/60,state.cheer||0,mood);
   vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
   // metrics: `calls`/`triangles` stay the main pass (comparable with earlier measurements; three.js
   // resets its counters after the shadow pass); the reflection pass is counted separately
@@ -278,15 +305,22 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   // the skinned players are the whole cost of the pass; the shadow map refreshes with it
   if(reflection){renderer.shadowMap.needsUpdate=true;if(state.frames%(V.reflEvery??2)===0){renderer.info.reset();reflection.update(camera);state.reflCalls=renderer.info.render.calls;state.reflTris=renderer.info.render.triangles;}}
   renderer.render(scene,camera);
-  if(state.replay?.complete){const done=state.replay.done;state.replay=null;done?.();}
+  if(state.replay?.complete){const r=state.replay,done=r.done;state.replay=null;if(r.show)showCounts.autoReplaysDone++;done?.();}
   state.lastFrameMs=performance.now()-t0;if(!state.frames)loadTimes.firstFrame=Math.round(state.lastFrameMs);state.frames++;
  }
 
  function replayFrame(dt){
   const r=state.replay;r.wallElapsed=(r.wallElapsed||0)+dt;
+  if(r.show){
+   // the automatic replay: the two-angle cut over the recording; a tap jumps to the blend back (skipWall), never to live
+   if(r.skip){r.wallElapsed=skipWall(r.timeline,r.wallElapsed);r.skip=false;}
+   const seg=segmentAt(r.timeline,r.wallElapsed);r.seg=seg;r.scale=seg.scale;r.complete=seg.done;
+   return r.frames[clamp(Math.round(seg.t*config.replay.hz),0,r.frames.length-1)];
+  }
   const contactTime=vfx.cameraTrack.entry.durationSeconds+vfx.cameraTrack.replayContactPathTime;
   if(r.dunk&&r.elapsed>=contactTime&&r.contactWall==null)r.contactWall=r.wallElapsed;
-  r.elapsed+=dt*(r.contactWall==null?1:sampleHoopsReplayScale(feel.profile.events.dunk,(r.wallElapsed-r.contactWall)*1000));
+  r.scale=r.dunk?(r.contactWall==null?1:sampleHoopsReplayScale(feel.profile.events.dunk,(r.wallElapsed-r.contactWall)*1000)):r.speed;
+  r.elapsed+=dt*(r.dunk?r.scale:1);
   let i;
   if(r.dunk){
    const contact=vfx.cameraTrack.entry.durationSeconds+vfx.cameraTrack.replayContactPathTime;
@@ -308,15 +342,52 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   camera.updateProjectionMatrix();
  }
 
+ /** The automatic replay's camera: a hard cut into the low baseline angle, a hard cut to the slow-motion chase on the scorer,
+  * then a blend into the live camera over the last segment. The angles track the recorded scorer with a soft follow. */
+ const showPose={pos:new THREE.Vector3(),look:new THREE.Vector3()};
+ function showCamera(r,frame,live,dt){
+  const seg=r.seg||segmentAt(r.timeline,0),scorer=frame.players.find(p=>p.id===r.trigger.playerId)||null;
+  cameraFor(live,dt);
+  if(seg.cam==='back'){
+   const w=backBlend(seg.u);camera.position.lerp(r.last.pos,1-w);camera.quaternion.slerp(r.last.quat,1-w);camera.fov=lerp(r.last.fov,camera.fov,w);
+   camera.updateProjectionMatrix();return;
+  }
+  const want=seg.cam==='chase'?chaseCamera(scorer,r.side,court,{landscape:state.landscape}):baselineCamera(scorer,r.side,court,{landscape:state.landscape});
+  // cut: the first frame of a segment jumps, the following frames follow the scorer softly (a camera operator, not a tripod)
+  const k=r.segCam!==seg.cam?1:1-Math.exp(-dt*(seg.cam==='chase'?6:4));r.segCam=seg.cam;
+  showPose.pos.set(want.pos[0],want.pos[1],want.pos[2]);showPose.look.set(want.look[0],want.look[1],want.look[2]);
+  if(k>=1){replayCam.position.copy(showPose.pos);replayTarget.copy(showPose.look);replayCam.fov=want.fov;}
+  else{replayCam.position.lerp(showPose.pos,k);replayTarget.lerp(showPose.look,k);replayCam.fov=lerp(replayCam.fov,want.fov,k);}
+  replayCam.lookAt(replayTarget);
+  camera.position.copy(replayCam.position);camera.quaternion.copy(replayCam.quaternion);camera.fov=replayCam.fov;camera.updateProjectionMatrix();
+  r.last.pos.copy(camera.position);r.last.quat.copy(camera.quaternion);r.last.fov=camera.fov;
+ }
+
  function effects(events,snapshot){
   vfx.effects(events,snapshot||state.lastSnapshot);
   feel.effects(events,snapshot||state.lastSnapshot);
+  const snap=snapshot||state.lastSnapshot,triggers=show?replayTriggers(events,snap,{userTeam}):[];
   for(const e of events){
    if(e.playerId&&(e.type!=='control'||(snapshot||state.lastSnapshot)?.players.find(p=>p.id===e.playerId)?.team!==(snapshot||state.lastSnapshot)?.possession))avatars.get(e.playerId)?.event(e);
    if(e.type==='final'&&snapshot){const winner=e.won?0:1;for(const p of snapshot.players)if(p.team===winner)avatars.get(p.id)?.event('result_success');}
    if(!vfx.reducedMotion&&e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
    if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;}
    if(!vfx.reducedMotion&&(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3))state.shake=Math.max(state.shake,0.4);
+   if(!show||!snap)continue;
+   // show: the nearest teammate and the dunked-on defender react, the losers at the final (2.2 s clips, view only, the engine clock runs on)
+   // the dunked-on defender is usually still landing his block (an act clears a reaction): his 'disappointed' waits 0.7 s
+   for(const c of castCelebration(e,snap,{userTeam})){if(c.clip==='disappointed')state.casts.push({due:performance.now()+700,...c});else avatars.get(c.playerId)?.event({type:'celebrate',clip:c.clip});showCounts.casts++;}
+   const mood=crowdReaction(e,{userTeam,triggers});
+   if(mood){state.stand=Math.max(state.stand||0,mood.stand);state.groan=Math.max(state.groan||0,mood.groan);if(mood.wave&&state.waveT==null){state.waveT=0;state.waveDir=(snap.dir?.[e.team]??1);}}
+   if(e.type==='score'&&e.shotType!=='ft'){
+    // the slam itself gets a second, shorter lens punch; every made basket cuts to the baseline angle for 0.4 s (landscape broadcast only)
+    if(e.shotType==='dunk'&&!vfx.reducedMotion)state.punch=Math.max(state.punch||0,0.7);
+    if(!vfx.reducedMotion&&state.landscape&&(V.mode||'broadcast')==='broadcast'&&!state.replay){
+     const scorer=snap.players.find(p=>p.id===e.playerId),side=snap.dir?.[e.team]??1,pose=baselineCamera(scorer,side,court,{landscape:true});
+     replayCam.position.set(pose.pos[0],pose.pos[1],pose.pos[2]);replayTarget.set(pose.look[0],pose.look[1],pose.look[2]);replayCam.lookAt(replayTarget);
+     state.cut={t:0,pos:replayCam.position.clone(),quat:replayCam.quaternion.clone(),fov:pose.fov};showCounts.liveCuts++;
+    }
+   }
   }
  }
 
@@ -328,19 +399,30 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),show:show?{...showCounts,stand:+(state.stand||0).toFixed(2),groan:+(state.groan||0).toFixed(2),wave:state.waveT!=null,cut:!!state.cut}:null,motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
   for(let i=0;i<frames.length;i++)for(const p of frames[i].players)if(p.act==='shoot'&&p.shotType==='dunk'){if(shooter!==p.id){shooter=p.id;start=i;best=Infinity;}side=frames[i].dir[p.team];const b=frames[i].ball,d=Math.hypot(b.x-side*court.rimX,b.y-court.rimY,b.z);if(d<best){best=d;contact=i;}}
   state.replay={frames,t:0,elapsed:0,speed,done,dunk:!!shooter&&!vfx.reducedMotion,contact,first:Math.max(start,contact-90),side,entry:{position:camera.position.clone(),quaternion:camera.quaternion.clone(),fov:camera.fov}};return true;
  }
+ /** The automatic replay (show): the recorded frames with the two-angle cut around the contact frame of `trigger`'s shot. */
+ function startShowReplay(frames,trigger,done){
+  if(!show||!frames?.length||!trigger)return false;
+  const hz=config.replay.hz,contact=contactFrame(frames,trigger,hz),timeline=cutTimeline(contact/hz,(frames.length-1)/hz);
+  if(timeline.wall<0.5)return false;
+  const side=frames[contact].dir?.[trigger.team]??1;
+  state.cut=null;
+  state.replay={show:true,frames,trigger,timeline,side,wallElapsed:0,elapsed:0,t:0,speed:1,scale:1,done,seg:null,segCam:null,last:{pos:camera.position.clone(),quat:camera.quaternion.clone(),fov:camera.fov}};
+  showCounts.autoReplays++;return true;
+ }
+ function skipReplay(){const r=state.replay;if(!r?.show||r.seg?.cam==='back')return false;r.skip=true;showCounts.skipped++;return true;}
  function dispose(){
   for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();reflection?.dispose();
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,dispose,get replaying(){return !!state.replay;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
+ return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,startShowReplay,skipReplay,dispose,get replaying(){return !!state.replay;},get replayInfo(){const r=state.replay;return r?{show:!!r.show,reason:r.trigger?.reason||null,cam:r.seg?.cam||null,scale:r.scale??1,wall:r.wallElapsed||0,frames:r.frames.length,contact:r.timeline?.contactT??null,total:r.timeline?.wall??null}:null;},get show(){return show;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
  }catch(error){
   loadingFeel?.dispose();loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
  }
@@ -357,9 +439,11 @@ async function buildCrowd(spots,url,grid,quality){
  const cell=new Float32Array(pick.length*2),shade=new Float32Array(pick.length);
  geo.setAttribute('cell',new THREE.InstancedBufferAttribute(cell,2));geo.setAttribute('shade',new THREE.InstancedBufferAttribute(shade,1));
  mat.onBeforeCompile=sh=>{
-  sh.uniforms.uGrid={value:new THREE.Vector2(cols,rows)};sh.uniforms.uCheer={value:0};mat.userData.sh=sh;
-  sh.vertexShader=sh.vertexShader.replace('#include <uv_pars_vertex>','#include <uv_pars_vertex>\nattribute vec2 cell;attribute float shade;uniform vec2 uGrid;uniform float uCheer;varying vec2 vCellUv;varying float vShade;')
-   .replace('#include <uv_vertex>','#include <uv_vertex>\nfloat cheering=step(fract(cell.y*7.31),uCheer);float idx=cell.x*2.0+cheering;float col=mod(idx,uGrid.x);float row=floor(idx/uGrid.x);vCellUv=vec2((col+uv.x)/uGrid.x,1.0-(row+1.0-uv.y)/uGrid.y);vShade=shade;');
+  sh.uniforms.uGrid={value:new THREE.Vector2(cols,rows)};sh.uniforms.uCheer={value:0};sh.uniforms.uStand={value:0};sh.uniforms.uGroan={value:0};mat.userData.sh=sh;
+  // show moods: standing lifts and stretches the upper body (everyone switches to the arms-up cell), a groan slumps it
+  sh.vertexShader=sh.vertexShader.replace('#include <uv_pars_vertex>','#include <uv_pars_vertex>\nattribute vec2 cell;attribute float shade;uniform vec2 uGrid;uniform float uCheer;uniform float uStand;uniform float uGroan;varying vec2 vCellUv;varying float vShade;')
+   .replace('#include <uv_vertex>','#include <uv_vertex>\nfloat cheering=step(fract(cell.y*7.31),uCheer+uStand);float idx=cell.x*2.0+cheering;float col=mod(idx,uGrid.x);float row=floor(idx/uGrid.x);vCellUv=vec2((col+uv.x)/uGrid.x,1.0-(row+1.0-uv.y)/uGrid.y);vShade=shade;')
+   .replace('#include <begin_vertex>','#include <begin_vertex>\nfloat crowdUp=smoothstep(0.1,0.9,uv.y);transformed.y+=(uStand*0.14-uGroan*0.06)*crowdUp;');
   sh.fragmentShader=sh.fragmentShader.replace('#include <map_pars_fragment>','#include <map_pars_fragment>\nvarying vec2 vCellUv;varying float vShade;').replace('#include <map_fragment>','vec4 sampledDiffuseColor=texture2D(map,vCellUv);diffuseColor*=sampledDiffuseColor;diffuseColor.rgb*=vShade;');
  };
  const mesh=new THREE.InstancedMesh(geo,mat,pick.length);
@@ -371,7 +455,7 @@ async function buildCrowd(spots,url,grid,quality){
   cell[i*2]=Math.floor(r()*people);cell[i*2+1]=r();shade[i]=(1-Math.min(0.45,(s.row||0)*0.07))*(0.82+r()*0.18);
  });
  mesh.receiveShadow=false;mesh.castShadow=false;
- return {mesh,count:pick.length,update(dt,cheer){const sh=mat.userData.sh;if(sh)sh.uniforms.uCheer.value=cheer*0.85;}};
+ return {mesh,count:pick.length,update(dt,cheer,mood){const sh=mat.userData.sh;if(!sh)return;sh.uniforms.uCheer.value=cheer*0.85;sh.uniforms.uStand.value=mood?.stand||0;sh.uniforms.uGroan.value=mood?.groan||0;}};
 }
 
 function blobTexture(size=128){

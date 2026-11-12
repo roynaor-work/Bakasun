@@ -14,7 +14,9 @@ import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-10';
 import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-10';
 import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-10';
 import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-10';
+import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
 
+const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
 const fmtClock=s=>{s=Math.max(0,s);if(s<60)return `${Math.floor(s)}.${Math.floor((s*10)%10)}`;const m=Math.floor(s/60);return `${m}:${String(Math.floor(s%60)).padStart(2,'0')}`;};
 
 function controlMode(snapshot){
@@ -34,7 +36,10 @@ export function startHoops(ctx){
  const storage=(()=>{try{return globalThis.localStorage;}catch{return null;}})();
  const setup=matchTeams(balance,ctx.hoops,{stage,equipment:ctx.equipment||{},power:ctx.power||1,game:ctx.hoopsGame});
  const profile=params.get('hoopsProfile')||setup.profile||'standard';
- const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2'});
+ // M4 presentation (11/11): automatic replay after dunks, alley-oops and buzzer/winning threes, reactions, crowd moods, HUD polish; `?hoopsShow=0` restores today
+ const show=showEnabled(params),showCounts={dunks:0,alleyoops:0,buzzer:0,winner:0,triggers:0,replays:0,replaysDone:0,replayWall:[],skipped:0};let autoReplay=null;
+ // M3 gameplay layer (alley-oops, pass kinds, spacing): on by default, `?hoopsPlay=0` restores the previous behaviour
+ const engine=createHoopsEngine({config:balance,seed,teams:setup.teams,userTeam:0,profile,difficulty:setup.difficulty,assist:setup.assist,autopilot:params.get('hoopsAuto')==='1',aiVersion:params.get('hoopsAI')==='v1'?'v1':'v2',play:params.get('hoopsPlay')==='0'?false:undefined});
  engine.setAutoSub(setup.autoSub!==false);
  let screens=null,roleLabels=null,kitPaused=false,selectedKit=null,view=null,controls=null,frame,last=0,paused=false,disposed=false,finished=false,prev=engine.snapshot(),cur=prev,error=null,stepsRun=0,replayOffer=0,dribbleClock=0,finalDisplay=0;
  const loop=createFixedLoop({dt:HOOPS_DT,maxFrame:balance.simulation.maxFrameSeconds,maxSteps:balance.simulation.maxStepsPerFrame});
@@ -45,12 +50,13 @@ export function startHoops(ctx){
   dispose(){if(disposed)return;disposed=true;if(frame!==undefined)cancelAnimationFrame(frame);abort.abort();screens?.dispose();roleLabels?.dispose();controls?.dispose();audio.dispose();view?.dispose();view=null;engine.dispose();
    try{if(document.fullscreenElement)void screen.orientation?.lock?.('landscape')?.catch(()=>{});}catch{}},
   get ready(){return Boolean(view)&&!error;},get loadFailed(){return error;},
-  get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying};},
+  get snapshot(){return {...engine.snapshot(),paused,disposed,stepsRun,error,renderMetrics:view?.metrics(),audioMetrics:audio.metrics(),input:controls?.held,replaying:!!view?.replaying,replayInfo:view?.replayInfo||null,show:{enabled:show,...showCounts,pending:!!autoReplay}};},
  };
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
  const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-10',import.meta.url).href;screenEl.append(css);
+ screenEl.dataset.hoopsShow=show?'v1':'0';
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
 
@@ -65,19 +71,21 @@ export function startHoops(ctx){
  const meter=node('div','hoops-meter');meter.hidden=true;meter.setAttribute('aria-hidden','true');const meterYellow=node('span','hoops-meter-yellow'),meterWin=node('span','hoops-meter-win'),meterFill=node('span','hoops-meter-fill');meter.append(meterYellow,meterWin,meterFill);
  const grade=node('div','hoops-grade');grade.hidden=true;let gradeUntil=0;
  const toast=node('div','hoops-toast');toast.hidden=true;toast.setAttribute('aria-live','polite');let toastUntil=0;
+ // show: the broadcast tag during a replay (Hebrew, no words otherwise on the game screen), gone the moment live play returns
+ const replayTag=node('div','hoops-replay-tag','שידור חוזר');replayTag.dir='rtl';replayTag.hidden=true;replayTag.setAttribute('aria-live','polite');
  const replayBtn=node('button','hoops-replay');replayBtn.type='button';replayBtn.dataset.action='hoops-replay';replayBtn.setAttribute('aria-label',labels.replay);replayBtn.title=labels.replay;replayBtn.append(hoopsIcon('replay',doc));replayBtn.hidden=true;
  const benchPanel=node('div','hoops-bench');benchPanel.hidden=true;benchPanel.setAttribute('role','dialog');benchPanel.setAttribute('aria-label',labels.bench);
  const loading=node('div','hoops-loading');loading.setAttribute('role','status');loading.setAttribute('aria-label',t('hoops.loading'));const ringEl=node('span','hoops-progress');loading.append(ringEl,node('p','hoops-controls-hint','ספרינט בהחזקה · תרגיל: נגיעה להצלבה, החזקה לסיבוב · פייק: הטעיית זריקה ועצירת כדרור (אחריו אין כדרור, עד 2 צעדים)'));
  const stepEl=node('div','hoops-steps');stepEl.hidden=true;stepEl.setAttribute('role','status');
  const stamina=node('div','hoops-stamina');stamina.setAttribute('role','progressbar');stamina.setAttribute('aria-label','סיבולת ספרינט · נגמרת אחרי כ-3.5 שניות ריצה וחוזרת לאט');stamina.setAttribute('aria-valuemin','0');stamina.setAttribute('aria-valuemax','100');
  const staminaTrack=node('span','hoops-stamina-track'),staminaFill=node('i'),staminaValue=node('bdi','hoops-stamina-value','100');staminaValue.dir='ltr';staminaTrack.append(staminaFill);stamina.append(staminaTrack,staminaValue);
- stageEl.append(bug,meter,grade,toast,stepEl,replayBtn,benchPanel,loading,stamina);
+ stageEl.append(bug,meter,grade,toast,stepEl,replayBtn,replayTag,benchPanel,loading,stamina);
  // ?hoopsLabels=all puts a position label over all ten players (old behaviour).
  roleLabels=createHoopsRoleLabels(stageEl,{scope:params.get('hoopsLabels')==='all'?'all':'team'});
  screens=createHoopsScreens({stageEl,loading,teams:setup.teams,
   onOpen(){kitPaused=paused;session.setPaused(true);},onClose(){if(!disposed)session.setPaused(kitPaused);},
   onKit(kit,team){selectedKit={kit,team};view?.setKit(team,kit);}});
- controls=createHoopsControls({root,doc,config:balance.controls,onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
+ controls=createHoopsControls({root,doc,config:{...balance.controls,doubleTap:(balance.play?.doubleTapMs??260)/1000},onEscape:()=>{const b=screenEl.querySelector('[data-action=game-pause]');if(b&&!paused)b.click();},icons:name=>hoopsIcon(name,doc),labels,basis:()=>view?view.screenBasis():{rx:1,rz:0,ux:0,uz:1}});
  root.classList.add('hoops-controls');controls.setEnabled(!paused);
  doc.addEventListener('visibilitychange',()=>{last=0;loop.reset();controls.setEnabled(!doc.hidden&&!paused&&!view?.replaying);audio.setPaused(paused||doc.hidden);},on);
  screenEl.addEventListener('pointerdown',()=>audio.unlock(),{...on,capture:true});doc.defaultView.addEventListener('keydown',()=>audio.unlock(),on);
@@ -114,14 +122,28 @@ export function startHoops(ctx){
  const ro=new ResizeObserver(()=>{if(!view)return;const r=stageEl.getBoundingClientRect();view.resize(r.width,r.height,devicePixelRatio||1);});ro.observe(stageEl);abort.signal.addEventListener('abort',()=>ro.disconnect());
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();if(disposed)return;view?.dispose();view=null;session.setPaused(true);fail('webgl-context-lost');},on);
  replayBtn.addEventListener('click',()=>{if(!view||view.replaying)return;const frames=engine.replay();replayBtn.hidden=true;controls.setEnabled(false);view.startReplay(frames,()=>{controls.setEnabled(!paused);last=0;loop.reset();});},on);
+ // show: a tap anywhere during the automatic replay skips to the blend back to the live camera
+ screenEl.addEventListener('pointerdown',e=>{if(!show||!view?.replaying||!view.replayInfo?.show||e.target?.closest?.('button'))return;if(view.skipReplay())showCounts.skipped++;},{...on,capture:true});
+ function startAutoReplay(now){
+  const t=autoReplay.trigger;autoReplay=null;if(!view||view.replaying)return false;
+  const t0=now,ok=view.startShowReplay(engine.replay(),t,()=>{showCounts.replaysDone++;showCounts.replayWall.push(+((performance.now()-t0)/1000).toFixed(2));controls.setEnabled(!paused);last=0;loop.reset();});
+  if(ok){showCounts.replays++;replayOffer=0;replayBtn.hidden=true;controls.setEnabled(false);}
+  return ok;
+ }
  if(dev)session.debug={engine,controls,get screens(){return screens;},get view(){return view;},
   step(n=1,input){for(let i=0;i<n;i++){prev=cur;engine.step(input||consumeHoopsInput(controls,cur));cur=engine.snapshot();handleEvents(engine.drainEvents());}if(view){if(n>1)view.snapCamera();view.render(prev,cur,1,1/60);}hud(cur,performance.now());return cur;},
-  render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}}};
+  render(){if(view){view.render(prev,cur,1,1/60);hud(cur,performance.now());}},
+  // show stills: `holdReplay` keeps an armed automatic replay waiting until the harness releases it
+  holdReplay:false};
  load();
 
  function showToast(content,kind,ms=900){toast.hidden=false;toast.dataset.kind=kind;toast.replaceChildren(content);toastUntil=performance.now()+ms;}
  function handleEvents(events){
-  if(!events.length)return;view?.effects(events,cur);audio.events(events);
+  if(!events.length)return;view?.effects(events,cur);audio.events(events,{show,userTeam:0});
+  for(const e of events)if(e.type==='score'&&e.shotType==='dunk')showCounts.dunks++;
+  if(show){const triggers=replayTriggers(events,cur,{userTeam:0});for(const t of triggers){showCounts.triggers++;if(t.reason==='alleyoop')showCounts.alleyoops++;else if(t.reason==='buzzer')showCounts.buzzer++;else if(t.reason==='winner')showCounts.winner++;}
+   // one automatic replay per basket, SHOW.replayDelay seconds after the make (the live celebration first; the inbound has not started)
+   if(triggers.length&&!autoReplay&&!view?.replaying)autoReplay={trigger:triggers[0],at:performance.now()+SHOW.replayDelay*1000};}
   for(const e of events){
    if(e.type==='timing'&&e.playerId===cur.controlled){const g=e.zone==='green'?'perfect':e.zone==='yellow'?'good':e.early?'early':'late';grade.hidden=false;grade.dataset.grade=g;grade.replaceChildren(hoopsIcon(g,doc));gradeUntil=performance.now()+800;}
    if(e.type==='score'){if(statusEl)statusEl.textContent=t('hoops.scoreStatus',{home:e.score[0],away:e.score[1]});replayOffer=performance.now()+4500;showToast(doc.createTextNode('+'+e.points),e.team===0?'home':'away',900);}
@@ -130,6 +152,9 @@ export function startHoops(ctx){
    if(e.type==='block'&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('block',doc),'home',700);
    if((e.type==='steal'||e.type==='interception')&&cur.players.find(p=>p.id===e.playerId)?.team===0)showToast(hoopsIcon('steal',doc),'home',700);
    if(e.type==='timeout'&&e.team===0)openBench();
+   // M3: the kind of pass the child threw, in words, for the moment it leaves the hands; the alley-oop when it drops
+   if(e.type==='pass'&&e.human&&params.get('hoopsPlay')!=='0'){const w=doc.createElement('span');w.dir='rtl';w.textContent=e.oop?PASS_HE.oop:PASS_HE[e.kind]||PASS_HE.chest;showToast(w,'home',700);}
+   if(e.type==='alleyoop'&&e.result==='score'){const w=doc.createElement('span');w.dir='rtl';w.textContent=PASS_HE.oop;showToast(w,e.team===0?'home':'away',1100);}
   }
  }
 
@@ -171,7 +196,8 @@ export function startHoops(ctx){
   }
   if(!grade.hidden&&now>gradeUntil)grade.hidden=true;
   if(!toast.hidden&&now>toastUntil)toast.hidden=true;
-  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));
+  if(autoReplay&&now>=autoReplay.at&&view&&!view.replaying&&!session.debug?.holdReplay)startAutoReplay(now);
+  setHidden(replayBtn,!(now<replayOffer&&!view?.replaying));setHidden(replayTag,!view?.replaying);
   if(s.phase!=='timeout'&&!benchPanel.hidden&&s.phase==='live')benchPanel.hidden=true;
   setData(screenEl,'hoopsPhase',s.phase);
  }
@@ -190,7 +216,7 @@ export function startHoops(ctx){
   view.render(prev,cur,alpha,paused||doc.hidden?0:dt);hud(cur,now);
   if(cur.phase==='final'&&!finished){
    if(!paused&&!doc.hidden)finalDisplay+=Math.min(dt,.1);
-   if(finalDisplay<(view.celebrationSeconds||0))return;
+   if(finalDisplay<(view.celebrationSeconds||0)||view.replaying)return;
    finished=true;const r=engine.result;cancelAnimationFrame(frame);frame=undefined;
    const sc=r.score,won=sc[0]>sc[1];
    const box=r.box[0].map(p=>({id:p.id,pts:p.pts,reb:p.reb,ast:p.ast,stl:p.stl,blk:p.blk,sec:p.sec,fgm:p.fgm,fga:p.fga,tpm:p.tpm,tpa:p.tpa,ftm:p.ftm,fta:p.fta,pf:p.pf,tov:p.tov}));

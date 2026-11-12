@@ -16,7 +16,7 @@ export function teamThink(api,dt,mode){
   const T=S.teams[t];
   if(!T.ai)T.ai={assign:{},plan:null,planT:0,lastPossession:null,zoneShift:0};
   const ai=T.ai;
-  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;ai.chain=0;}
+  if(ai.lastPossession!==S.possession){ai.lastPossession=S.possession;ai.plan=null;ai.planT=0;ai.transition=1.6;ai.chain=0;ai.oopTried=null;}
   ai.transition=Math.max(0,(ai.transition||0)-dt);
   assignDefence(api,t);
   for(const p of api.onCourt(t)){
@@ -212,9 +212,10 @@ export function passReason({progress=0,role=null,receiverOpen=0,receiverShot=0,m
 
 function openness(api,t,pt){let m=9;for(const o of api.onCourt(1-t))m=Math.min(m,hyp(o.x-pt.x,o.z-pt.z));return m;}
 
-function laneClear(api,t,from,to,r){
+function laneClear(api,t,from,to,r,except){
  const dx=to.x-from.x,dz=to.z-from.z,L=hyp(dx,dz)||1;
  for(const o of api.onCourt(1-t)){
+  if(o===except)continue;
   const u=((o.x-from.x)*dx+(o.z-from.z)*dz)/(L*L);if(u<0||u>1)continue;
   const px=from.x+dx*u,pz=from.z+dz*u;if(hyp(o.x-px,o.z-pz)<r)return false;
  }
@@ -260,9 +261,23 @@ function offenseMove(api,p,t){
  }
  // give and go: after passing, cut
  if(S.lastPasser&&S.lastPasser.id===p.id&&S.tick-S.lastPasser.tick<60){setGoal(p,{x:rim.x-s*1.6,z:p.z>0?1.2:-1.2},1,null,true);p.role='giveGo';return;}
+ // M3: the handler is doubled (two defenders on him) and nobody is cutting: the nearest free mate cuts to the rim,
+ // the release pass or the lob is what breaks a trap (measured: a cutter existed in 46% of doubled moments before).
+ // Only a cut that can win: from outside the trap (2.5 m+ from the handler), with his own man not ahead of him
+ // to the rim and the line past that man open. A cut into traffic was measured as +1.4 turnovers a game.
+ if(api.play&&api.play.doubledCut!==false&&h&&passPressure(api,h,t)>=2&&!api.onCourt(t).some(q=>q!==h&&q!==p&&q.role==='cut')){
+  const near=api.onCourt(t).filter(q=>q!==h&&api.dist(q,h)>=(api.play.cutFrom??2.5)&&(q.id!==S.controlled||S.autopilot)).sort((a,c)=>api.dist(a,h)-api.dist(c,h))[0];
+  const canWin=!dfd||api.dist(dfd,rim)>api.dist(p,rim)-0.4;
+  if(near===p&&canWin&&laneClear(api,t,p,rim,0.8,dfd)){setGoal(p,{x:rim.x-s*1.2,z:p.z>0?0.8:-0.8},1,null,true);p.role='cut';return;}
+ }
  // relocate a little around the spot so the defence has to move
  const wob=Math.sin((S.tick/60+p.slot*1.7)*0.9)*0.9;
- setGoal(p,{x:pt.x,z:pt.z+wob},0.7);
+ let goal={x:pt.x,z:pt.z+wob};
+ // M3 spacing: at most play.spacingMax mates within play.spacingRadius of the handler. A spot that would make one
+ // more is pushed out along its own line from the handler (cutters and rollers are exempt: they are the play)
+ if(api.play&&api.play.spacing!==false&&h){const R=api.play.spacingRadius??2.5,gd=hyp(goal.x-h.x,goal.z-h.z);
+  if(gd<R){const crowd=api.onCourt(t).filter(q=>q!==h&&q!==p&&api.dist(q,h)<R).length;if(crowd>=(api.play.spacingMax??2)){const k=(R+0.4)/Math.max(gd,0.3);goal={x:h.x+(goal.x-h.x)*k,z:h.z+(goal.z-h.z)*k};}}}
+ setGoal(p,goal,0.7);
 }
 
 function handlerMove(api,p,t){
@@ -282,6 +297,8 @@ function handlerMove(api,p,t){
  const hurry=clock<6.5;
  // someone asked for the ball (the child's teammate pressed pass)
  if(p.intent.wantPass){const q=api.byId(p.intent.wantPass);p.intent.wantPass=null;if(q){api.startPass(p,q,null);return;}}
+ // M3: a mate at the rim asked for the lob (the child's off-ball shoot button): thrown when he is still eligible and the line is open
+ if(p.intent.wantOop){const w=p.intent.wantOop;if(S.tick>w.until)p.intent.wantOop=null;else{const q=api.byId(w.id);if(q&&api.oopEligible(q)&&laneClear(api,t,p,q,0.6)){p.intent.wantOop=null;api.startPass(p,q,'lob');return;}}}
  const pref=rolePreference(p,T.tactics.pace??0.5),myShot=shotValue(api,p,t,pref);
  // options
  // what the rest of the possession is worth: a good team waits for a shot better than that,
@@ -302,6 +319,12 @@ function handlerMove(api,p,t){
  // backward passes without one of those are not thrown, and never straight back to the man who
  // just gave me the ball.
  const hold=S.ball.dribbleT||0,pressure=passPressure(api,p,t);
+ // M3: a mate cutting or rolling to the rim down an open line gets the alley-oop lob with probability
+ // play.aiOopChance, rolled once per cut (the roll is forgotten when he stops cutting)
+ if(api.play&&api.play.aiOop!==false){const tried=T.ai.oopTried||(T.ai.oopTried=new Set());
+  for(const q of api.onCourt(t)){if(q===p)continue;const cutting=q.role==='cut'||q.role==='roll'||q.role==='giveGo';if(!cutting){tried.delete(q.id);continue;}
+   if(tried.has(q.id)||!api.oopEligible(q)||!laneClear(api,t,p,q,0.6))continue;tried.add(q.id);
+   if(api.rand()<(api.play.aiOopChance??0.08)){T.ai.chain=(T.ai.chain||0)+1;p.lastPassReason='oop';api.startPass(p,q,'lob');return;}}}
  // a short chain only: two passes (three under pressure) before somebody must shoot or attack
  const chain=T.ai.chain||0;
  if(chain<(pressure>=1?2:1)+(api.aiV2?1:0))for(const q of api.onCourt(t)){

@@ -9,6 +9,7 @@ import {soccerMotionV9Enabled,armStandPose,armStandState,armStandWeight,slideRec
 import {soccerV7ClipsUrl,soccerV7Url,SOCCER_V7_FILES,soccerV7Map,soccerV7Rig,validateSoccerV7Bind,soccerV7Variation,joinSoccerV7Meshes,applySoccerV7HueShift,SOCCER_V7_KEEPER_HUE} from './soccer-v7.mjs';
 import {SOCCER_CODEX_BOUNDS,SOCCER_CODEX_BRAKE_FROM,SOCCER_CODEX_CELEBRATIONS,SOCCER_CODEX_IDLES,SOCCER_CODEX_LADDER,SOCCER_CODEX_RUN_BOUNDS,SOCCER_CODEX_RUN_LADDER,SOCCER_V10_CUT_MIN_SPEED,SOCCER_V10_CUT_MIN_STEP,SOCCER_V10_IDLES,soccerCodexClipsUrl,soccerCodexHeld,soccerCodexIdleHold,soccerCodexKeeperCatch,soccerCodexKickClip,soccerCodexMotionEnabled,soccerCodexNextIdle,soccerCodexRunEnabled,soccerCodexStates,soccerKeeperV11Enabled,soccerLadderRung,soccerMotionLoadSummary,soccerMotionV10Enabled,soccerMotionV12Enabled,soccerRunLadder,soccerV10ClipsUrl,soccerV10CutClip,soccerV10FirstTouchClip,soccerV10Held,soccerV10States,soccerV11ClipsUrl,soccerV11DiveClip,soccerV11DivePlan,soccerV11States,soccerV12ClipsUrl,soccerV12Overlay} from './soccer-codex-motion.mjs';
 import {soccerV8Enabled,soccerV8ClipsUrl,soccerV8States,soccerV8KickClip,soccerV8DiveClip,soccerV8DivePlan} from './soccer-v8.mjs';
+import {soccerFeelEnabled,soccerFeelDiveClip,soccerFeelDivePlan,soccerFeelSlidePlan,slideFeelCursor,slideFeelRecoverRate} from './soccer-feel.mjs';
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
 import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
@@ -172,7 +173,17 @@ export function soccerV7Rung(speed,current=-1){
   return index;
 }
 // v9: the aeroplane holds both arms straight out for 2.2 s, which Roy saw as a T-pose after a goal.
+/** The beaten keeper after a goal (soccerShow v1): the first clip that exists. No shipped pack has keeper_after_goal or disappointed (11/11/2026), so a
+ * restless idle stands in; the list is the place a Codex clip plugs in. */
+export const SOCCER_SHOW_DEJECTED=Object.freeze(['v11_keeper_after_goal','disappointed','v10_idle_weight_shift','v9_idle_weight_shift','v10_idle_relaxed','v9_idle_relaxed','idle']);
 const SOCCER_V7_CELEBRATIONS=soccerMotionV9Enabled()?['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap']:['celebrate_arms_up','celebrate_fist_pump','celebrate_victory_leap','celebrate_aeroplane'];
+/** Feel v2: seconds until a rolling pass reaches the player (straight line at the ball's speed), Infinity for a ball that is not coming. */
+export const FEEL_TOUCH_LEAD=.33;
+export function feelTouchEta(p,ball){
+  const dx=p.x-ball.x,dz=p.z-ball.z,dist=Math.hypot(dx,dz),speed=Math.hypot(ball.vx||0,ball.vz||0);
+  if(!(speed>.5)||(dx*(ball.vx||0)+dz*(ball.vz||0))<=0)return Infinity;
+  return Math.max(0,dist-.6)/speed;
+}
 export function createSoccerDesignMotion(mixer,clips,data,config) {
   const actions=Object.fromEntries(clips.map(clip=>{
     const a=mixer.clipAction(clip);a.setLoop(data.states[clip.name].loop?T.LoopRepeat:T.LoopOnce,Infinity);a.clampWhenFinished=true;return [clip.name,a];
@@ -184,6 +195,35 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
   let idleAge=0,cutAccum=0,touchTimer=0,recentSpeed=0;
   let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,lastTransition=null,slide=null,dive=null;
+  // soccer-feel v2 (see soccer-feel.mjs): repaired slide and dive clips on the simulation's clocks, first touch armed before the ball arrives.
+  const feel=soccerFeelEnabled(),feelSlide=feel?soccerFeelSlidePlan(data.states):null,feelSlideOn=Boolean(feelSlide&&actions.v8_slide);let armedTouch=null,armed=false,nextFade=null;
+  // The run and the crouch before the push-off are far apart: a 0.14 s ramp keeps the crossfade under 25 degrees per frame (measured 28 at 0.1 s).
+  const FEEL_SLIDE_BLEND=.14;
+  /** Feel v2 slide: one virtual time axis over the repaired clips (soccerFeelSlidePlan). Slide = slideTime, recover = the recovery clock,
+   * then the standing player finishes the clip; a moving player blends into the run. Returns true when over. */
+  const slideTimelineV2=(p,mode,moving,dt)=>{
+    const grace=config.view.slideGraceSeconds??.35;
+    if(mode==='slide'){const part=slide.plan.slide,u=1-clamp((p.slideTime||0)/slide.slideSeconds,0,1);slide.cursor={clip:part.clip,time:part.from+u*(part.to-part.from),done:false};}
+    else if(mode==='recover'){
+      if(slide.recoverSeconds===null){
+        // The result of the duel is known now: a lost slide continues on the miss clip at the same point of its fall.
+        if(p.slideWon===false&&feelSlide.lost!==feelSlide.won){slide.plan=feelSlide.lost;}
+        slide.recoverSeconds=Math.max(.05,p.recover||config.slide?.recoverSeconds||.6);slide.rate=slideFeelRecoverRate(slide.plan.recover,slide.recoverSeconds,grace);
+      }
+      slide.cursor=slideFeelCursor(slide.plan.recover,slide.plan.tail,(slide.recoverSeconds-clamp(p.recover||0,0,slide.recoverSeconds))*slide.rate);
+    }
+    else{
+      // Rising into a run from the half-up pose: the next locomotion change gets a longer fade (0.12 s popped 25+ degrees per frame, measured).
+      if(moving||slide.cursor.done){if(moving&&!slide.cursor.done)nextFade=.22;slide=null;return true;}
+      slide.follow=true;slide.progress=(slide.progress??(slide.recoverSeconds??0)*slide.rate)+dt*slide.rate;slide.cursor=slideFeelCursor(slide.plan.recover,slide.plan.tail,slide.progress);
+    }
+    const {clip,time}=slide.cursor;
+    if(state!==clip){change(clip,mode==='slide'?'fall_confirmed':'recovery_allowed',true,{rate:0,fadeSeconds:FEEL_SLIDE_BLEND});slide.age=0;}
+    // The clip is scrubbed (time scale 0), so its weight is ramped by hand over SLIDE_BLEND_IN while the previous action fades out.
+    slide.age=(slide.age||0)+dt;slide.name=clip;slide.time=time;const action=actions[clip];action.stopFading().setEffectiveWeight(clamp(slide.age/FEEL_SLIDE_BLEND,0,1)).setEffectiveTimeScale(0);action.time=clamp(time,0,data.states[clip].durationSeconds);
+    if(slide.cursor.done&&mode!=='slide'&&mode!=='recover'){slide=null;return true;}
+    return false;
+  };
   /** Map the simulation's slide and recovery clocks onto the composite slide clip.
    * The slide part follows slideTime exactly; the fall and the getting up are
    * given the recovery plus `slideGraceSeconds` so they are not rushed, and keep
@@ -227,7 +267,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const change=(name,event,force=false,{at=0,rate=1,fadeSeconds}={})=>{
     if(!actions[name]||name===state&&!force)return;
     const transition=data.transitions.find(t=>(t.source===state||t.source==='*')&&t.target===name&&(!event||t.on===event));
-    const fade=fadeSeconds??transition?.visualBlendSeconds??.12;
+    const fade=fadeSeconds??nextFade??transition?.visualBlendSeconds??.12;nextFade=null;
     const outgoing=actions[state],incoming=actions[name];
     if(incoming!==outgoing)outgoing.fadeOut(fade);
     incoming.reset().setEffectiveWeight(1).setEffectiveTimeScale(rate);incoming.time=at;
@@ -235,7 +275,10 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     state=name;lastTransition=event||name;
   };
   return {
-    actions,/** Seconds into a state at which its authored ball contact happens (null if it has none). */contactTime(name){const st=data.states[name],c=st?.ballContacts?.find(c=>/strike|contact/.test(c.event));return c?c.time*st.durationSeconds:null;},get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},get slide(){return slide?{name:slide.name,time:slide.time,rate:slide.rate,follow:slide.follow}:null;},
+    actions,/** Seconds into a state at which its authored ball contact happens (null if it has none). */contactTime(name){const st=data.states[name],c=st?.ballContacts?.find(c=>/strike|contact/.test(c.event));return c?c.time*st.durationSeconds:null;},get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},get slide(){return slide?{name:slide.name,time:slide.time,rate:slide.rate,follow:slide.follow,v2:Boolean(slide.plan)}:null;},
+    /** Feel v2: the dive clip has landed and is not yet back on its feet; the view holds the body where it landed meanwhile. */
+    get diveGround(){return Boolean(dive?.v2&&state===dive.name&&actions[state].time>=dive.land&&actions[state].time<dive.stand);},
+    get dive(){return dive?{name:dive.name,time:actions[dive.name]?.time??0,contact:dive.contact,land:dive.land,stand:dive.stand,rate:dive.rate,v2:Boolean(dive.v2)}:null;},
     update(p,s,animation,dt) {
       const restart=p.restartMotion;
       if(restart&&actions[restart.kind]){
@@ -250,7 +293,15 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
       if(slide&&state!==slide.name)slide=null;
-      if(mode==='celebrate'&&edge){const variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
+      // soccerShow v1 may name the clip (team-mates clap / hop, winners cycle the pack); otherwise the scorer's pick by id as before.
+      if(mode==='celebrate'&&edge){const hint=animation.clipHint,variants=[...SOCCER_V7_CELEBRATIONS,...SOCCER_CODEX_CELEBRATIONS].filter(n=>actions[n]);change(hint&&actions[hint]?hint:variants.length?variants[(p.id||0)%variants.length]:'celebrate','result_success');}
+      else if(mode==='dejected'&&edge){const name=SOCCER_SHOW_DEJECTED.find(n=>actions[n]);if(name)change(name,'result_fail');}
+      else if(mode==='slide'&&edge&&feelSlideOn){
+        // Feel v2: the repaired v8 slide (won) or v9 miss + quick get-up (lost), see slideTimelineV2(). Entered just before the push-off so the
+        // run crosses into the crouch within the 0.08 s fade; the yaw is locked to the slide direction by the character update.
+        slide={plan:feelSlide.won,name:feelSlide.won.slide.clip,kind:p.slideKind||'straight',time:0,slideSeconds:Math.max(.05,p.slideTime||config.slide?.seconds||.35),recoverSeconds:null,rate:1,follow:false,cursor:null};
+        slideTimelineV2(p,mode,moving,dt);
+      }
       else if(mode==='slide'&&edge&&actions['slide-'+(p.slideKind||'straight')]){
         // One continuous authored timeline (slide, fall, get up) driven by the
         // simulation's own slide and recovery clocks; see slideTimeline().
@@ -264,13 +315,19 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         change(kind,'fall_confirmed',true,{rate:Math.max(1,clip.durationSeconds/total)});
       }
       else if(mode==='recover'&&edge&&slide&&state===slide.name){
-        // A missed tackle continues on the miss timeline from the same instant.
-        if(p.slideWon===false&&actions[slide.name+'-miss']){const name=slide.name+'-miss';change(name,'recovery_allowed',true,{rate:0,fadeSeconds:0});actions[name].time=slide.time;slide.name=name;}
+        // A missed tackle continues on the miss timeline from the same instant (feel v2 switches clips inside slideTimelineV2).
+        if(slide.plan)slideTimelineV2(p,mode,moving,dt);
+        else if(p.slideWon===false&&actions[slide.name+'-miss']){const name=slide.name+'-miss';change(name,'recovery_allowed',true,{rate:0,fadeSeconds:0});actions[name].time=slide.time;slide.name=name;}
       }
       else if(mode==='dive'&&edge){
         // GPT v7 keeper dives: the side comes from the dive direction against the keeper's facing
         // (anatomical left is (cos yaw, -sin yaw) in x,z), the high clip from the ball height.
         const left=-Math.sin(yaw)*(p.diveZ||1)>0,high=(s.ball.y||0)>1.1&&left;
+        // Feel v2: repaired v11 dives for a reachable ball, repaired v8 rows otherwise, contact at 70% of the simulated dive, landing and
+        // getting up near real time with the body held where it landed (diveGround). The ball's own side decides left/right as before.
+        const feelName=feel?soccerFeelDiveClip(left,s.ball.y||0,n=>Boolean(actions[n])):null,feelPlan=feelName&&soccerFeelDivePlan(data.states[feelName],config.goalkeeping?.diveSeconds||.65);
+        if(feelPlan){dive={name:feelName,v2:true,...feelPlan};change(feelName,'fall_confirmed',true,{at:feelPlan.at,rate:feelPlan.rate,fadeSeconds:.1});}
+        else{
         const v11=soccerKeeperV11Enabled()?soccerV11DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])):null,plan11=v11&&soccerV11DivePlan(data.states[v11]);
         const v8=plan11?null:soccerV8DiveClip(left,s.ball.y||0,n=>Boolean(actions[n])),plan=plan11||(v8&&soccerV8DivePlan(data.states[v8])),diveName=plan11?v11:v8;
         if(plan){dive={name:diveName,contact:plan.contact,settleRate:plan.settleRate,rate:plan.rate};change(diveName,'fall_confirmed',true,{at:plan.at,rate:plan.rate,fadeSeconds:soccerSlideSlowEnabled()?.12:.06});}
@@ -278,7 +335,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
           const chosen=actions.keeper_dive_left?(high?'keeper_dive_high':left?'keeper_dive_left':'keeper_dive_right'):'fall';
           change(chosen,'fall_confirmed',true,{rate:chosen==='fall'?1:data.states[chosen].durationSeconds/1.05});
         }
+        }
       }
+      else if(dive?.v2&&state===dive.name&&actions[state].time<dive.stand&&(mode==='catch'||mode==='recover'||mode==='idle'||mode==='run')){/* feel v2: the dive lands and gets up on its own clip; a catch after a diving save keeps the dive */}
       else if(mode==='recover'&&edge){
         const kind=p.slideKind&&actions['slide_'+p.slideKind+'_recover']?(p.slideWon===false&&actions.slide_miss?'slide_miss':'slide_'+p.slideKind+'_recover'):'recover',clip=data.states[kind],total=Math.max(.2,(p.recover||0)*(kind==='slide_miss'?.5:.75));
         change(kind,'recovery_allowed',true,{rate:Math.max(1,clip.durationSeconds/total)});
@@ -294,7 +353,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         const remaining=Math.max(.08,(mode==='steal'?p.stealTime:p.kickTime)||config.ai?.kickAnimationSeconds||.42);
         change(name,'action',true,{at,rate:(clip.durationSeconds-at)/remaining,fadeSeconds:m.kickFadeIn??.025});
       }
-      else if(v10&&p.role!=='keeper'&&(p.receiveTime||0)>touchTimer+1e-6&&!(['kick','steal','slide','recover','celebrate'].includes(mode))&&soccerV10FirstTouchClip(p.receiveHeight||0,p.receiveSpeed||0,p.id||0,n=>Boolean(actions[n]))){
+      else if(feel&&v10&&p.role!=='keeper'&&s.passTarget&&s.passTarget.player===p.id&&s.ball.owner===null&&!s.ball.flight&&armedTouch!==s.passTarget&&!(['kick','steal','slide','recover','celebrate','dive'].includes(mode))&&feelTouchEta(p,s.ball)<=FEEL_TOUCH_LEAD&&soccerV10FirstTouchClip(s.ball.y||0,speed,p.id||0,n=>Boolean(actions[n]))){
+        // Feel v2: the pass is about to reach him. The first touch starts now so its authored contact (0.33 s in) meets the ball instead of
+        // starting when the ball is already at his feet; the arrival itself (receiveTime) then does not retrigger it.
+        armedTouch=s.passTarget;armed=true;change(soccerV10FirstTouchClip(s.ball.y||0,speed,p.id||0,n=>Boolean(actions[n])),'receive',true,{at:Math.max(0,.33-feelTouchEta(p,s.ball)),rate:1,fadeSeconds:.06});
+      }
+      else if(v10&&p.role!=='keeper'&&(p.receiveTime||0)>touchTimer+1e-6&&!(['kick','steal','slide','recover','celebrate'].includes(mode))&&!armed&&soccerV10FirstTouchClip(p.receiveHeight||0,p.receiveSpeed||0,p.id||0,n=>Boolean(actions[n]))){
         // The ball has just reached him: the short first touch, entered just before its receive event (0.33 s into the clip).
         change(soccerV10FirstTouchClip(p.receiveHeight||0,p.receiveSpeed||0,p.id||0,n=>Boolean(actions[n])),'receive',true,{at:.2,rate:1.1,fadeSeconds:.06});
       }
@@ -304,12 +368,12 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       else if(mode==='catch'&&edge)change((p.role==='keeper'&&soccerCodexKeeperCatch(s.ball.y||0,n=>Boolean(actions[n])))||(p.role==='keeper'&&actions.keeper_catch?'keeper_catch':'catch'),'receive');
       else if(state==='v9_run_brake'&&!(moving&&actions[state].time>.2)&&actions[state].time<data.states[state].durationSeconds-.05){/* the brake plays to its end unless the player clearly sets off again */}
       else if((soccerCodexHeld(state)||soccerV10Held(state))&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>.7)){/* a Codex once-clip plays to its end */}
-      else if(slide&&state===slide.name&&!slideTimeline(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
-      else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
+      else if(slide&&state===slide.name&&!(slide.plan?slideTimelineV2:slideTimeline)(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
+      else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&!state.startsWith('v11_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,ladderBounds);locomotion=ladder[rung];}
-        if(mode==='celebrate'){/* Hold the authored celebration until the goal phase ends. */}
+        if(mode==='celebrate'||mode==='dejected'){/* Hold the authored celebration (or the beaten keeper's stance) until the goal phase ends. */}
         else if(!moving&&running)change(codex&&actions.v9_run_brake?(previousSpeed>=SOCCER_CODEX_BRAKE_FROM?'v9_run_brake':(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':actions[idleHome]?idleHome:'idle')):'decelerate','slowing');
         else if(!moving)change(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':actions[idleHome]?(idles.includes(state)?state:idleHome):'idle','stopped');
         else if(running&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
@@ -326,6 +390,9 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       else if(isLadder(state))actions[state].setEffectiveTimeScale(clamp(speed/ladderDef[ladder.indexOf(state)][1],state==='v9_walk'?.6:.5,state==='v9_walk'?1.6:1.4));
       if(codex&&p.role!=='keeper'&&idles.includes(state)&&!moving){idleAge+=dt;if(idleAge>=soccerCodexIdleHold(p.id||0)){idleAge=0;change(idles[(idles.indexOf(state)+1)%idles.length],'idle_variety',true,{fadeSeconds:.35});}}else idleAge=0;
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;touchTimer=p.receiveTime||0;
+      // An armed touch is spent by the arrival (or by any other clip taking over); the next pass arms again.
+      if(armed&&((p.receiveTime||0)>touchTimer+1e-6||!state.startsWith('v10_first_touch_')))armed=false;
+      if(armedTouch&&s.passTarget!==armedTouch&&!armed)armedTouch=null;
       updateMixer(dt);
       const runSpeed=config.view.animation.runSpeed||4.5,idle=config.view.animation.idleSpeed||.2,locomotion=LOCOMOTION.has(state)&&moving;
       const clipPhase=state==='run'||state==='dribble_run'?(actions[state].time/data.states[state].durationSeconds+ARM_PHASE[state])%1:NaN;
@@ -349,14 +416,25 @@ export function keeperStand(character,p,s,dt){
   if(keeperKickOn&&m&&KEEPER_KICKS.has(m.kind)&&m.released&&p.id!==s.controlled){
     return character.stand||(character.stand={x:p.x,z:p.z,yaw:Math.atan2(p.fx,p.fz),ease:0});
   }
+  // Feel v2: a dived keeper lies where he landed until the clip has him back on his feet (the simulation may already be walking him
+  // back to goal; the lying body must not glide over the grass), then eases to his real place like after a throw.
+  if(character.motion?.diveGround){const st=character.stand||(character.stand={x:p.x,z:p.z,yaw:character.yaw??Math.atan2(p.fx,p.fz),ease:0});st.hold=true;st.ease=0;return st;}
   if(character.stand){
-    const st=character.stand;st.ease+=dt/KEEPER_EASE;
+    const st=character.stand;st.hold=false;st.ease+=dt/KEEPER_EASE;
     if(st.ease>=1){character.stand=null;return null;}
     const u=st.ease*st.ease*(3-2*st.ease);return {x:st.x+(p.x-st.x)*u,z:st.z+(p.z-st.z)*u,yaw:Math.atan2(p.fx,p.fz)};
   }
   return null;
 }
 
+/** Feel v2: the body faces the slide direction for the whole slide and recovery (the simulation keeps the pre-slide facing; the authored
+ * clip slides forward). Locked on the first slide frame, released when the slide timeline is over. Returns null when not sliding. */
+export function feelSlideYaw(character,p,motion){
+  if(!motion?.slide?.v2){character.slideYaw=null;return null;}
+  if(p.slideTime>0&&(character.slideYaw==null||!character.slideLocked)){character.slideYaw=Math.atan2(p.slideX||p.fx,p.slideZ||p.fz);character.slideLocked=true;}
+  if(!(p.slideTime>0))character.slideLocked=false;
+  return character.slideYaw;
+}
 /** Compile actions that have a live simulation mapping. Other extension
  * states remain in the merged library without an expensive unused floor bake. */
 const ACTIVE_CLIPS=['idle','run','decelerate','turn_left','turn_right','kick','catch','celebrate','fall','recover','throwIn','corner','goalKick','keeperThrow','keeperPunt','dribble_run','defensive_jockey','pass_short','pass_long','kick_power','slide_straight','slide_straight_recover','slide_lateral','slide_lateral_recover','slide_fast','slide_fast_recover','slide_miss'];
@@ -433,7 +511,7 @@ async function loadMotionPacks(){
   let v11={};lastV11Error=null;
   if(soccerKeeperV11Enabled()){try{v11=soccerV11States(await fetchJson(soccerV11ClipsUrl()));}catch(error){lastV11Error=String(error?.message||error);}}
   lastV12=null;
-  if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length)){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10});v9=o.v9;v10=o.v10;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
+  if(soccerMotionV12Enabled()&&(Object.keys(v9).length||Object.keys(v10).length||soccerFeelEnabled())){try{const o=soccerV12Overlay(await fetchJson(soccerV12ClipsUrl()),{v9,v10,v8,v11});v9=o.v9;v10=o.v10;v8=o.v8;v11=o.v11;lastV12=o.counts;}catch(error){lastV12={error:String(error?.message||error)};}}
   motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12};
   const states={...extra.states,...v8,...v9,...v10,...v11};
   return {extra,v8,v9,v10,v11,states,extraClips:Object.keys(states)};
@@ -532,8 +610,8 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           setLod(level){return inst.setLod(level);},
           update(p,s,animation,dt){
             if(characterDisposed)return;
-            const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:Math.atan2(p.fx,p.fz);
-            if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*18));
+            const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
+            if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
             pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
             this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
           },
@@ -579,8 +657,8 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
         setLod(level){const next=isV7?(level>0?1:0):level>=2?2:level>0?1:0;if(next===lod)return lod;lod=next;fullMeshes.forEach(o=>o.visible=lod===0);lowMeshes.forEach(o=>o.visible=lod===1);mobileMeshes.forEach(o=>o.visible=lod===2);return lod;},
         update(p,s,animation,dt){
           if(characterDisposed)return;
-          const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:Math.atan2(p.fx,p.fz);
-          if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*18));
+          const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
+          if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
           pivot.position.set(stand?stand.x:p.x,Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },

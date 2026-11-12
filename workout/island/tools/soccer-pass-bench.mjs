@@ -20,7 +20,7 @@ function laneBlocked(opps,from,to,radius){
 }
 
 /** One simulated pass. scenario: 'clean' (opponents parked far, frozen) or 'live' (opponents random, AI active). */
-export function simulatePass(config,{seed,scenario='clean',kind='tap',errorDegrees=10,mode='intent'}){
+export function simulatePass(config,{seed,scenario='clean',kind='tap',errorDegrees=10,mode='intent',trace=null}){
   const rng=seededRandom(seed*2654435761>>>0||1),game=createSoccer({config,seed,stage:3,difficulty:'normal'});
   const s=game.getState(),step=config.match.fixedStep,hx=config.pitch.length/2,hz=config.pitch.width/2;
   const home=s.players.filter(p=>p.team===0),opps=s.players.filter(p=>p.team===1);
@@ -72,7 +72,7 @@ export function simulatePass(config,{seed,scenario='clean',kind='tap',errorDegre
   for(let i=0;i<maxTicks;i++){
     // press for holdTicks then release; keep the stick pointing the same way.
     if(i<holdTicks){input.passHeld=true;}else input.passHeld=false;
-    game.update(step,{...input});t=i;
+    game.update(step,{...input});t=i;if(trace)trace(i,s,intended,input);
     for(const e of game.drainEvents()){
       if((e.type==='pass'||e.type==='loft')&&e.team===0&&e.player===0&&!pass){if(false)console.log('EV',JSON.stringify(e),'carrier',carrier.x,carrier.z,'mate',intended.x,intended.z,'ball',s.ball.x,s.ball.z);clear=judgeClear();pass=e;mate0={x:intended.x,z:intended.z};released=(i+1)*step-0;destination={x:e.x,z:e.z};aimBearing=Math.atan2(e.z-carrier.z,e.x-carrier.x);startDistI=dist(intended,destination);}
     }
@@ -95,7 +95,7 @@ export function simulatePass(config,{seed,scenario='clean',kind='tap',errorDegre
   if(!pass)return {seed,scenario,kind,noPass:true};
   if(outcome==='loose'&&closest<config.physics.pickupRadius+.3)flyby=true;
   const moved=pass.target===intended.id&&mate0?dist(mate0,destination)-dist(mate0Last,destination):0;
-  return {seed,scenario,kind,blocked,clear,outcome,intendedId:intended.id,target:pass.target??null,targetCorrect:(pass.target??null)===intended.id,
+  return {seed,scenario,kind,blocked,clear,outcome,intendedId:intended.id,target:pass.target??null,targetCorrect:(pass.target??null)===intended.id,throughBall:pass.kind==='through',
     releaseSeconds:released,distance:pass.distance,range:dist(startI,carrier),errorDegrees:err*180/Math.PI,
     aimOffDegrees:Math.abs(((aimBearing-bearing)*180/Math.PI+540)%360-180),flyby,arrivalSpeed:closest<Infinity?arrival:null,
     receiverMovedToPoint:moved,controlOffset:receivedAt!==null?controlOffset:null,passKind:pass.type,
