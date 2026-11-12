@@ -209,6 +209,6 @@ test('offline list: every new asset is in the racing pack and every new module i
 });
 test('the new modules import with the current version tag',async()=>{
  for(const file of ['minigames/racing-crash-assets.mjs','minigames/racing-broadcast-art.mjs','ui/racing-league-art.mjs']){
-  const tags=[...(await read(file)).toString().matchAll(/\?v=([\w-]+)/g)].map(m=>m[1]);assert.ok(tags.every(t=>t==='island-v2-20261107-10'),file+' '+tags);
+  const tags=[...(await read(file)).toString().matchAll(/\?v=([\w-]+)/g)].map(m=>m[1]);assert.ok(tags.every(t=>t==='island-v2-20261107-11'),file+' '+tags);
  }
 });

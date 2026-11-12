@@ -1,7 +1,7 @@
 // racing-broadcast-v1 (Codex, CC0; assets/racing-broadcast-v1, from design/racing-broadcast): a start gantry with five lamp materials, twelve team crests, a podium backdrop, a
 // leaderboard strip and a card frame. Off with ?racingBroadcastArt=0 (or ?racingBroadcast=0, whose HUD this art belongs to): the lamps of racing-env-v2, the colour bars and the plain
 // podium stay exactly as before. The DOM layer (racing-broadcast.mjs, racing-tower.mjs) and the 3D view (racing-view.mjs) read this module; nothing here touches the race model.
-import {GRID_DRIVERS} from './racing-league-core.mjs?v=island-v2-20261107-10';
+import {GRID_DRIVERS} from './racing-league-core.mjs?v=island-v2-20261107-11';
 
 export const broadcastArtEnabled=(search=globalThis.location?.search||'')=>{const q=new URLSearchParams(search);return q.get('racingBroadcastArt')!=='0'&&q.get('racingBroadcast')!=='0';};
 export const ART_DIR='../assets/racing-broadcast-v1/';

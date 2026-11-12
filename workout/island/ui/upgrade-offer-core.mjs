@@ -3,8 +3,8 @@
  * (activity.upgrade for island coins, engine.racingLeague.buy for league coins).
  * Rules: only the category that was just played; only an upgrade the child can pay for now; the cheapest one; one offer per stage;
  * "later" is remembered for that stage and upgrade, so the same stage does not ask again. `?upgradeOffer=0` turns it all off. */
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-10';
-import {UPGRADES,UPGRADE_COST,MAX_LEVEL} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-11';
+import {UPGRADES,UPGRADE_COST,MAX_LEVEL} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-11';
 
 export const offerEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('upgradeOffer')!=='0';
 

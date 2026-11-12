@@ -1,5 +1,5 @@
 /** Naval content stays separate from save, reward and simulation contracts. */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-10';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-11';
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 /** 11/11/2026 (Roy, phone: "צריך גם לבנות בסיס שצריך להתקיף, עם תותחים וכדומה, נגיד כל 5 שלבים"): a fortified enemy base on stages
  * 5, 15 and 25 (stages 10, 20 and 30 keep their moving fleets: the v20 aim test and the hold-release pilot tests run there). The stage's `base` block names the variant and the

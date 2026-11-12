@@ -1,11 +1,11 @@
-import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-10';
-import {gameContext} from './context.mjs?v=island-v2-20261107-10';
-import {createTennis} from './tennis.mjs?v=island-v2-20261107-10';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-10';
-import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-10';
+import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-11';
+import {gameContext} from './context.mjs?v=island-v2-20261107-11';
+import {createTennis} from './tennis.mjs?v=island-v2-20261107-11';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-11';
+import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-11';
 // v15: with the sweeping return meter the stroke is judged the moment the finger lands (like the serve); the model still receives the real dt.
 const applyTennisSample=(model,sample,dt)=>applySampleBase(model,sample,dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});
-import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-10';
+import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-11';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};
@@ -16,7 +16,7 @@ export function startTennis(ctx){
  const session={get ready(){return Boolean(view);},get loadFailed(){return null;},dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
- const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-10',import.meta.url);screen.append(powerStyle);
+ const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-11',import.meta.url);screen.append(powerStyle);
  screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls||'';return n;};
  const zone=node('div','soccer-stick-zone'),stick=node('div','soccer-joystick'),knob=node('span','soccer-knob'),home=node('div','tennis-stick-home');

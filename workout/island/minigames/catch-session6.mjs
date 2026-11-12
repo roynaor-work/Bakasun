@@ -1,7 +1,7 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-10';
-import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-10';
-import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-10';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-10';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-11';
+import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-11';
+import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-11';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-11';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const ICONS = {
@@ -89,7 +89,7 @@ export function runCatchSession6(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-10', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-11', import.meta.url).href; stageEl.append(css);
   const style6 = doc.createElement('style'); style6.textContent = STYLE6; stageEl.append(style6);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
@@ -206,7 +206,7 @@ export function runCatchSession6(ctx) {
   /** The archery HUD of catch-bow-hud.mjs when it exists; otherwise the v5 drag aim stays usable. */
   async function installBow() {
     try {
-      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-10');
+      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-11');
       bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio, stage: () => view?.bow, project: (x, y, z) => view.project(x, y, z), level: stage});
       bowHud.show?.(true);
     } catch { bowHud = null; }
@@ -379,11 +379,11 @@ export function runCatchSession6(ctx) {
     refreshHud();
   }
 
-  import('./catch-view6.mjs?v=island-v2-20261107-10').then(async ({createCatchView6}) => {
+  import('./catch-view6.mjs?v=island-v2-20261107-11').then(async ({createCatchView6}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView6({canvas, balance, stage, chase, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
-    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-10'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
+    try { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-11'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true; } catch { fireHud = null; }
     loading.hidden = true;
     startChase();
     ctx.onReady?.();

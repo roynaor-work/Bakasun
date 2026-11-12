@@ -5,8 +5,8 @@
 // tower lists every car with position, team colour, number, the gap to the car ahead in seconds, a green/red arrow on a position change and a
 // purple mark for the fastest lap; lower-third cards announce the lap, an overtake and a new fastest lap; the results page lists all finishers
 // with their gap to the winner. A good phone racing game keeps the tower short on the left, never over the wheel or the buttons.
-import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-10';
-import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-10';
+import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-11';
+import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-11';
 
 export const broadcastEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingBroadcast')!=='0';
 export const COUNTDOWN=3,LIGHTS=5,LIGHT_STEP=.5,GO_SHOW=1.2,INTRO_SECONDS=4,PODIUM_SECONDS=8,START_QUIET=2,CARD_SECONDS=1.7;
