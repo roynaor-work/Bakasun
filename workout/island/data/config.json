@@ -12567,6 +12567,8 @@
     "lateralBoostDamp": 0.05,
     "airControl": 0.4,
       "airBoost": {"accel": 2.2, "maxGain": 0.08, "control": 0.55, "steerPenalty": 0.5, "refVy": 6.6},
+      "warnAhead": 30,
+      "fall": {"ramp": {"seconds": 1.2, "loss": 0.45}, "gate": {"seconds": 0.9, "loss": 0.35}},
     "hitSpeedLoss": 0.35,
     "recoverySeconds": 1,
     "hitGraceSeconds": 0.35,
@@ -12777,6 +12779,7 @@
      ],
      "reachFactor": 0.75,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.2, "gapScale": 0.88},
      "rockPitch": 3.2,
      "rockDensity": 0.75,
      "rockRadius": [
@@ -12852,6 +12855,7 @@
      ],
      "reachFactor": 0.72,
      "corridorLimit": 4.3,
+      "narrow": {"chance": 0.35, "gapScale": 0.86},
      "rockPitch": 3,
      "rockDensity": 0.85,
      "rockRadius": [
@@ -13344,6 +13348,10 @@
    "levels": [
     {
      "stage": 1,
+     "v6": {
+      "dist": 21,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.1",
      "difficulty": 1,
      "winMoney": 30,
@@ -13396,6 +13404,10 @@
     },
     {
      "stage": 2,
+     "v6": {
+      "dist": 20,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.2",
      "difficulty": 2,
      "winMoney": 38,
@@ -13457,6 +13469,10 @@
     },
     {
      "stage": 3,
+     "v6": {
+      "dist": 25,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.3",
      "difficulty": 3,
      "winMoney": 46,
@@ -13519,6 +13535,10 @@
     },
     {
      "stage": 4,
+     "v6": {
+      "dist": 22,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.4",
      "difficulty": 4,
      "winMoney": 54,
@@ -13583,6 +13603,10 @@
     },
     {
      "stage": 5,
+     "v6": {
+      "dist": 14,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.5",
      "difficulty": 5,
      "winMoney": 64,
@@ -13650,6 +13674,10 @@
     },
     {
      "stage": 6,
+     "v6": {
+      "dist": 32,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.6",
      "difficulty": 6,
      "winMoney": 76,
@@ -13734,6 +13762,10 @@
     },
     {
      "stage": 7,
+     "v6": {
+      "dist": 32,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.7",
      "difficulty": 7,
      "winMoney": 90,
@@ -13807,6 +13839,10 @@
     },
     {
      "stage": 8,
+     "v6": {
+      "dist": 32,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.8",
      "difficulty": 8,
      "winMoney": 106,
@@ -13900,6 +13936,10 @@
     },
     {
      "stage": 9,
+     "v6": {
+      "dist": 32,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.9",
      "difficulty": 9,
      "winMoney": 124,
@@ -13992,6 +14032,10 @@
     },
     {
      "stage": 10,
+     "v6": {
+      "dist": 17,
+      "radiusScale": 1
+     },
      "feature": "feature.catchCriminal.10",
      "difficulty": 10,
      "winMoney": 150,

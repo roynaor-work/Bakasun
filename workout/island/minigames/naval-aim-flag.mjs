@@ -1,6 +1,6 @@
 /** Kill switch for the 06/11/2026 aim-direction fix: `?navalAim=v1` restores the
  * old behaviour (camera glued to the turret, speed-blended gain). */
-import {polishLegacy,polishValue} from './polish-flag.mjs?v=island-v2-20261107-8';
+import {polishLegacy,polishValue} from './polish-flag.mjs?v=island-v2-20261107-10';
 export const navalAimLegacy=search=>polishLegacy('navalAim',search);
 /** Camera yaw trails the turret so the landing mark moves with the finger, never against it.
  * The lead is capped so the mark cannot leave the screen; it closes at `rate` per second. */

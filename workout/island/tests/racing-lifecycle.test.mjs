@@ -27,7 +27,7 @@ for(const [stage,seed]of [[1,0],[15,17],[30,42]])test(`real racing extension sta
   const run=engine.startMinigame('islandRacing',{...context,onFinish:result=>finishes.push(result)});
   assert.equal(run.ok,true);assert.equal(engine.isMinigameActive(),true);
   assert.equal(run.session.snapshot.stage,stage);assert.equal(run.session.snapshot.phase,'countdown');
-  assert.equal(run.session.snapshot.cars.length,5);assert.equal(run.session.snapshot.audioMetrics.unlocked,false);
+  assert.equal(run.session.snapshot.cars.length,10,'racing-grid-v1: four scoring drivers and five extra rivals');assert.equal(run.session.snapshot.audioMetrics.unlocked,false);
   assert.equal(engine.startMinigame('islandRacing',context).reason,'reason.gameBusy');
   const cars=run.session.snapshot.cars,time=run.session.snapshot.time;
   run.session.setPaused(true);assert.equal(run.session.snapshot.phase,'paused');

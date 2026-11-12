@@ -108,7 +108,7 @@ test('air audio: ignores other sound names, needs an unlocked context, start the
  let flag='on';const storage={getItem:k=>k==='island.sound'?flag:null};
  const audio=createNavalAirAudio({storage,AudioContext:FakeContext,fetch:fetcher});
  assert.equal(audio.play('vulcanStart'),false,'locked: nothing plays');audio.unlock();await new Promise(r=>setTimeout(r,5));
- assert.equal(audio.metrics().loaded.length,3);assert.ok(fetched.every(u=>u.includes('assets/game-naval/audio/')&&u.includes('?v=island-v2-20261107-8')),'tagged asset urls');
+ assert.equal(audio.metrics().loaded.length,3);assert.ok(fetched.every(u=>u.includes('assets/game-naval/audio/')&&u.includes('?v=island-v2-20261107-10')),'tagged asset urls');
  assert.equal(audio.play('cannon'),false,'other names are ignored');
  assert.equal(audio.play('vulcanStart'),true);assert.ok(audio.metrics().looping);assert.equal(audio.play('vulcanStart'),false,'already looping');
  assert.equal(audio.play('vulcanStop'),true);assert.ok(!audio.metrics().looping);assert.equal(audio.play('vulcanStop'),false,'nothing to stop');

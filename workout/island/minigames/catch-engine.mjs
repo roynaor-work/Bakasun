@@ -61,7 +61,7 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
   const isArch = Boolean(arch && v2 && base.zmove);
   const hitsNeeded = isArch ? (base.hits || 1) : (v2 && base.boss ? base.boss.hits : 1);
   const crewSize = v2 ? (base.crew || 1) : 1, bossHits = hitsNeeded;
-  const level = v2 ? {...base, ...(!isArch && base.v4 ? base.v4 : {}), ...(!feel && base.v3 ? base.v3 : {}), aimHelp: feel ? base.aimHelp : 0, dist: mods.dist ?? base.dist, wind: (base.wind || 0) * (mods.windScale ?? 1), obstacles: [...base.obstacles, ...(base.movers || [])].map((o, i) => isArch ? {z: ARCH_Z[i % ARCH_Z.length], zw: 1.3, ...o} : o)} : {...base, movers: [], gust: 0, crew: 1, boss: null};
+  const level = v2 ? {...base, ...(!isArch && base.v4 ? base.v4 : {}), ...(!feel && base.v3 ? base.v3 : {}), aimHelp: feel ? base.aimHelp : 0, dist: mods.dist ?? base.dist * (mods.distScale ?? 1), wind: (base.wind || 0) * (mods.windScale ?? 1), obstacles: [...base.obstacles, ...(base.movers || [])].map((o, i) => isArch ? {z: ARCH_Z[i % ARCH_Z.length], zw: 1.3, ...o} : o)} : {...base, movers: [], gust: 0, crew: 1, boss: null};
   const throwsTotal = isArch ? (base.throws || balance.throws) + (mods.extraThrows || 0) : balance.throws + (v2 ? (crewSize - 1) * (balance.crewThrows || 2) + (bossHits - 1) * 2 + (mods.extraThrows || 0) : 0);
   const rnd = seededRandom((seed * 2654435761 + stage * 97) >>> 0);
   const P = balance.physics, C = balance.criminal;

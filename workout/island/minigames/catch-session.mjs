@@ -1,6 +1,6 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-8';
-import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-8';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-8';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-10';
+import {createChaseEngine} from './catch-chase.mjs?v=island-v2-20261107-10';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-10';
 
 const SVG = 'http://www.w3.org/2000/svg';
 const ICONS = {
@@ -59,7 +59,7 @@ export function runCatchSession(ctx) {
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
   try { audio = createCatchAudio({muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-8', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-10', import.meta.url).href; stageEl.append(css);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
   // ----- HUD shared by both parts -----
@@ -309,7 +309,7 @@ export function runCatchSession(ctx) {
     refreshHud();
   }
 
-  import('./catch-view.mjs?v=island-v2-20261107-8').then(async ({createCatchView}) => {
+  import('./catch-view.mjs?v=island-v2-20261107-10').then(async ({createCatchView}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
     view = await createCatchView({canvas, arch: arch5, engine, balance, stage, v2, quality, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }

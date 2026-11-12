@@ -1,8 +1,8 @@
-import {fireIndicators} from './fire-navigation.mjs?v=island-v2-20261107-8';
-import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-8';
-import {createControls} from './controls.mjs?v=island-v2-20261107-8';
-import {installFireUI,updateFireUI} from './fire-ui.mjs?v=island-v2-20261107-8';
-import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-8';
+import {fireIndicators} from './fire-navigation.mjs?v=island-v2-20261107-10';
+import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-10';
+import {createControls} from './controls.mjs?v=island-v2-20261107-10';
+import {installFireUI,updateFireUI} from './fire-ui.mjs?v=island-v2-20261107-10';
+import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-10';
 import {fireV21} from './polish-flag.mjs';
 /** 11/11/2026 pure: one tap on the ladder button starts (or stops) a rescue; the latch drops when the truck drives, the hose or hydrant is used, the ladder has nothing left to do or a rescue just finished. */
 export function nextRescueLatch(latch,{tapped=false,available=false,driving=false,firing=false,refill=false,completedBefore=0,completedNow=0}={}){if(tapped)return available&&!latch;return latch&&available&&!driving&&!firing&&!refill&&completedNow===completedBefore;}

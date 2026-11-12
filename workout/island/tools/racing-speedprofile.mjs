@@ -2,7 +2,7 @@
 // Reports the share of lap TIME at >=95% / >=90% of top speed, the number of braking zones (drop of 12+ m/s) and the minimum speed.
 // Usage: node tools/racing-speedprofile.mjs [out.json]   (RACING_TRACKS=v1 for the old circuits, RACING_LOOK=... n/a)
 import {writeFile} from 'node:fs/promises';import {fileURLToPath} from 'node:url';
-if(process.env.RACING_TRACKS==='v1')globalThis.location={search:'?racingTracks=v1'};
+if(process.env.RACING_TRACKS)globalThis.location={search:'?racingTracks='+process.env.RACING_TRACKS+(process.env.V2Q||'')};
 const {createTrack,TRACKS}=await import('../minigames/racing-tracks.mjs');
 const TOP=42.6,A_LAT=Number(process.env.A_LAT||26),ACC=7,BRK=22,step=4;
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));

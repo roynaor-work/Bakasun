@@ -54,11 +54,40 @@ export function createCatchAudio({muted = () => false} = {}) {
     if (live && live.id !== id) stopLoop();
     if (!live) {
       const src = a.createBufferSource(), g = a.createGain(); src.buffer = buf; src.loop = true; src.playbackRate.value = rate;
-      g.gain.setValueAtTime(0, a.currentTime); g.gain.linearRampToValueAtTime(.2, a.currentTime + .2); src.connect(g).connect(a.destination); src.start(); live = {id, src, g};
+      g.gain.setValueAtTime(0, a.currentTime); g.gain.linearRampToValueAtTime(.42, a.currentTime + .2); src.connect(g).connect(a.destination); src.start(); live = {id, src, g};
     } else live.src.playbackRate.setTargetAtTime(rate, a.currentTime, .2);
     clearTimeout(killTimer); killTimer = setTimeout(stopLoop, holdMs); return true;
   };
+  // ----- engine loop: two detuned oscillators through a low-pass, pitch follows the speed, a whine while boosting -----
+  let eng = null;
+  const engineStart = () => {
+    const a = ensure(); if (!a || eng) return;
+    const o1 = a.createOscillator(), o2 = a.createOscillator(), o3 = a.createOscillator(), lp = a.createBiquadFilter(), g = a.createGain(), gw = a.createGain();
+    o1.type = 'sawtooth'; o2.type = 'square'; o3.type = 'sine'; o2.detune.value = -9; lp.type = 'lowpass'; lp.frequency.value = 520; lp.Q.value = 1.1;
+    o1.frequency.value = 60; o2.frequency.value = 60; o3.frequency.value = 1400;
+    g.gain.setValueAtTime(0, a.currentTime); g.gain.linearRampToValueAtTime(.05, a.currentTime + .4); gw.gain.value = 0;
+    o1.connect(lp); o2.connect(lp); lp.connect(g).connect(a.destination); o3.connect(gw).connect(a.destination);
+    o1.start(); o2.start(); o3.start(); eng = {o1, o2, o3, lp, g, gw};
+  };
+  const engineStop = () => {
+    const e = eng; eng = null; if (!e || !ac) return;
+    try { const t = ac.currentTime; e.g.gain.cancelScheduledValues(t); e.g.gain.linearRampToValueAtTime(0, t + .3); e.gw.gain.linearRampToValueAtTime(0, t + .2); for (const o of [e.o1, e.o2, e.o3]) o.stop(t + .35); } catch { /* ignore */ }
+  };
+  let drawOsc = null, lastDraw = 0;
   const cues = {
+    // tyre shots: a cartoon pop (never a real gunshot), a metallic clink on a hit
+    shot: () => { noise(.09, {gain: .14, from: 900, to: 300}); tone(220, .09, {type: 'square', gain: .08, slide: -120}); },
+    shotHit: () => { noise(.08, {gain: .1, from: 1200, to: 400}); tone(1900, .14, {type: 'triangle', gain: .09, slide: -900}); tone(2600, .1, {type: 'sine', gain: .05, delay: .03, slide: -1200}); },
+    // a flat tyre: a hiss, then a flap-flap for a second
+    flat: () => { noise(.5, {gain: .09, from: 5000, to: 1800}); for (let i = 0; i < 6; i++) tone(90, .07, {type: 'square', gain: .06, delay: .25 + i * .17, slide: -30}); },
+    skid: () => { noise(1.1, {gain: .12, from: 2800, to: 900}); tone(110, .5, {type: 'sawtooth', gain: .07, delay: .9, slide: -60}); },
+    turn: () => { noise(.3, {gain: .05, from: 2400, to: 1600}); tone(1800, .22, {type: 'sine', gain: .025, slide: 300}); },
+    // the bowstring: a creak that rises with the draw (one oscillator, re-tuned), a twang on release, a whistle in flight
+    draw: k => { const a = ensure(); if (!a || muted() || paused) return; const kk = clamp(Number(k) || 0, 0, 1); if (!drawOsc) { const o = a.createOscillator(), g = a.createGain(); o.type = 'triangle'; o.frequency.value = 140; g.gain.value = 0; o.connect(g).connect(a.destination); o.start(); drawOsc = {o, g}; } drawOsc.o.frequency.setTargetAtTime(140 + kk * 260, a.currentTime, .05); drawOsc.g.gain.setTargetAtTime(.025 + kk * .03, a.currentTime, .05); clearTimeout(lastDraw); lastDraw = setTimeout(() => { try { drawOsc.g.gain.setTargetAtTime(0, a.currentTime, .08); } catch { /* ignore */ } }, 260); },
+    twang: () => { if (drawOsc && ac) { try { drawOsc.g.gain.setTargetAtTime(0, ac.currentTime, .02); } catch { /* ignore */ } } tone(180, .18, {type: 'triangle', gain: .12, slide: -90}); tone(360, .12, {type: 'sine', gain: .06, slide: -180}); noise(.12, {gain: .05, from: 2500, to: 900}); },
+    whistle: () => tone(1900, .55, {type: 'sine', gain: .04, slide: -900}),
+    hitBody: () => { tone(130, .22, {type: 'sine', gain: .16, slide: -50}); noise(.2, {gain: .07, from: 1400, to: 500}); },
+    hitHead: () => [988, 1319, 1568].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .1, delay: i * .06})),
     tool: () => tone(620, .08, {type: 'triangle', gain: .08}),
     swing: () => noise(.22, {gain: .06, from: 700, to: 1600}),
     whoosh: () => noise(.5, {gain: .09, from: 2200, to: 500}),
@@ -89,8 +118,11 @@ export function createCatchAudio({muted = () => false} = {}) {
   };
   return {
     cue(name, arg) { try { cues[name]?.(arg); } catch { /* audio is optional */ } },
+    /** Continuous engine note: call every frame of the chase with the speed (m/s) and whether the boost is on. */
+    engine(v, boosting) { try { if (muted() || paused) { engineStop(); return; } engineStart(); if (!eng || !ac) return; const t = ac.currentTime, k = clamp((Number(v) || 0) / 31, 0, 1); eng.o1.frequency.setTargetAtTime(55 + k * 95, t, .08); eng.o2.frequency.setTargetAtTime(55 + k * 95, t, .08); eng.lp.frequency.setTargetAtTime(420 + k * 900, t, .1); eng.g.gain.setTargetAtTime(.04 + k * .03, t, .1); eng.o3.frequency.setTargetAtTime(1100 + k * 900, t, .1); eng.gw.gain.setTargetAtTime(boosting ? .018 : 0, t, .12); } catch { /* audio is optional */ } },
+    engineStop() { try { engineStop(); } catch { /* ignore */ } },
     tick() { /* silent on purpose: dragging should not chatter */ },
     setPaused(v) { paused = Boolean(v); if (ac) { try { paused ? ac.suspend() : ac.resume(); } catch { /* ignore */ } } },
-    dispose() { clearTimeout(killTimer); live = null; try { ac?.close(); } catch { /* ignore */ } ac = null; },
+    dispose() { clearTimeout(killTimer); clearTimeout(lastDraw); try { engineStop(); } catch { /* ignore */ } live = null; drawOsc = null; try { ac?.close(); } catch { /* ignore */ } ac = null; },
   };
 }

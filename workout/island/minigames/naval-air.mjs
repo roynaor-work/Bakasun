@@ -4,7 +4,7 @@
  * telegraphed by a landing marker, and an automatic Vulcan with heat so it comes in bursts. A hit aircraft falls into the sea
  * (`state:'down'`) rather than vanishing. Deterministic for the model's random stream. `?navalAir=off` removes the whole
  * mechanic. Stages with attacks (11/11/2026): 3, 4, 6, 8, 9, 12, 14, 16, 18, 20, 22, 24, 26, 27, 29 (`air` in the stage data). */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-8';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-10';
 export const navalAirEnabled=search=>polishValue('navalAir',search)!=='off';
 /** 11/11/2026 (Roy, phone): "שמדיע מסוק אז שיהיה איך לכוון עליו עם וולקן ולא ירי אוטומטי". Manual Vulcan by default:
  * the gun fires only while the Vulcan button is held, along the player's sky crosshair; a hit needs the crosshair within

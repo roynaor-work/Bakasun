@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261107-8';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261107-10';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -84,7 +84,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
   // ---------- AI: same rules, decisions limited by reaction time, lookahead and accuracy ----------
   function aiDecide(r) {
     const ai = r.ai, half = pipe.lip - 0.5, board = physics.board;
-    const ahead = objects.filter(o => o.s > r.s + 1 && o.s < r.s + ai.lookahead && o.type !== 'coin');
+    const ahead = objects.filter(o => o.s > r.s + 1 && o.s < r.s + ai.lookahead && o.type !== 'coin' && o.type !== 'warn');
     // Each obstacle is judged once: a rider either notices it or misses it (mistakeRate).
     for (const o of ahead) if (!r.seen.has(o.id)) r.seen.set(o.id, aiRandom.value() < ai.mistakeRate);
     const laneCost = cx => {
@@ -193,14 +193,16 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const rock = object.type === 'rock';
     // Hitting a rock is a fall for the player and every rival: the rider tumbles, loses most of the
     // speed and cannot steer or boost until up again. A gate post stays a bump.
-    if (rock) {
-      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds;
+    // physics.fall: a ramp wall or a gate post is a real (shorter) fall too, with its own duration and speed loss.
+    const fallCfg = !rock && physics.fall ? physics.fall[object.type] : null, seconds = fallCfg ? fallCfg.seconds : physics.crashSeconds;
+    if (rock || fallCfg) {
+      r.crashes++; r.speed *= 1 - (fallCfg ? fallCfg.loss : physics.crashSpeedLoss); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds;
       r.boostTime = 0; r.padTime = 0; r.trick = null; r.airScore = 0; r.airTricks = 0;
     } else { r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds; }
     r.glideT = 0;
     const impactSide = rock ? separateRock(r, object) : 0;
     emit('collision', { riderId: r.id, objectId: object.id, objectType: object.type, impactSide, impactStrength: clamp(speedBefore / physics.boostSpeed, 0, 1) });
-    if (rock) emit('crash', { riderId: r.id, objectId: object.id, objectType: 'rock' });
+    if (rock || fallCfg) emit('crash', { riderId: r.id, objectId: object.id, objectType: object.type });
   }
 
   function takeoff(r, kind, vy, objectId) {
@@ -218,7 +220,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const kind = r.airKind; r.airKind = null;
     if (r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
       // An unfinished trick on landing is a fall: a big slowdown and a longer recovery.
-      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.grace = physics.crashSeconds; r.glideT = 0;
+      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.crashDur = physics.crashSeconds; r.grace = physics.crashSeconds; r.glideT = 0;
       emit('crash', { riderId: r.id, objectId: r.trick.id }); r.trick = null; r.airScore = 0; r.airTricks = 0;
       return;
     }
@@ -452,7 +454,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       // What the player is asking for right now (stick after expo and rate limit): the body leans on this before the track position moves.
       intent: r.ai ? clamp(r.steer, -1, 1) : r.steerOut,
       boosting: r.boostTime > 0 || r.padTime > 0, hit: r.hitTime > physics.recoverySeconds - physics.hitFlashSeconds || r.crashTime > 0,
-      crashed: r.crashTime > 0, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind, airBoost: r.airborne && r.airCap > 0 && r.crashTime <= 0 && r.speed < r.airCap - 1e-6,
+      crashed: r.crashTime > 0, crashDur: r.crashDur || physics.crashSeconds, landing: r.landTime > 0, airborne: r.airborne || r.ramp !== null, airKind: r.airKind, airBoost: r.airborne && r.airCap > 0 && r.crashTime <= 0 && r.speed < r.airCap - 1e-6,
       trick: r.trick ? { id: r.trick.id, progress: Math.min(1, r.trick.t / r.trick.duration) } : null,
     };
   }
