@@ -138,7 +138,8 @@ async function runOne(browser,server,name){
  const save=()=>writeFile(DIR+`qa-fire-run-${name}.json`,JSON.stringify({...rec,partial:true,frameCount},null,1)+'\n').catch(()=>{});
  const measure=()=>page.evaluate(measureInPage),snap=()=>page.evaluate(()=>window.__island.games.current?.session.snapshot);
  const box=async sel=>{const b=await page.locator(sel).boundingBox();return b&&{x:b.x+b.width/2,y:b.y+b.height/2,w:b.width,h:b.height};};
- const tap=async(x,y,ms=80,id=7)=>{await touch('touchStart',id,x,y);await frames(ms);await touch('touchEnd',id,x,y);await frames(32);};
+ const taps=[];rec.taps=taps;
+ const tap=async(x,y,ms=80,id=7)=>{const hit=await page.evaluate(([x,y])=>{const e=document.elementFromPoint(x,y);return e?(e.id?'#'+e.id:'')+'.'+String(e.className||e.tagName).split(' ').join('.'):null;},[x,y]);taps.push({x:Math.round(x),y:Math.round(y),ms,hit});await touch('touchStart',id,x,y);await frames(ms);await touch('touchEnd',id,x,y);await frames(32);return hit;};
  const shot=async(label,crop=true)=>{const file=`qa-fire-${name}-${label}.jpg`;await page.screenshot({path:DIR+file,type:'jpeg',quality:80});rec.shots.push(file);
   if(crop){try{const m=await measure();const sx=m?.truckScreen?.x,sy=m?.truckScreen?.y;if(Number.isFinite(sx)&&Number.isFinite(sy)){const W=260,H=180,x=Math.max(0,Math.min(844-W,Math.round(sx-W/2))),y=Math.max(0,Math.min(390-H,Math.round(sy-H/2)));const cf=`qa-fire-${name}-${label}-zoom.jpg`;execFileSync('convert',[DIR+file,'-crop',`${W}x${H}+${x}+${y}`,'+repage','-filter','Lanczos','-resize','300%','-quality','88',DIR+cf]);rec.shots.push(cf);}}catch(e){rec.cropError=String(e);}}
   return file;};
@@ -159,6 +160,31 @@ async function runOne(browser,server,name){
   const stick=await box('#joystick');rec.stick=stick;
   const stickDown=async()=>touch('touchStart',1,stick.x,stick.y),stickTo=async(dx,dy)=>touch('touchMove',1,stick.x+dx,stick.y+dy),stickUp=async()=>touch('touchEnd',1,stick.x,stick.y);
   const samples=[];rec.samples=samples;const indicatorHits=[];rec.indicatorsUnderGauge=indicatorHits;
+  // The left 48% x lower 82% of the screen is the joystick zone (fire-v9): a tap there moves the stick instead of selecting a target.
+  const inStickZone=p=>p.x<844*.48&&p.y>390*.18;
+  /** Drive along the street grid to (tx,tz) with the joystick, stopping at each junction to turn, as a careful child would. */
+  const GRID=[-18,-6,6,18],nearRoad=v=>GRID.reduce((a,b)=>Math.abs(b-v)<Math.abs(a-v)?b:a);
+  async function driveTo(tx,tz,phase){
+   const legAxis=async(axis,goal)=>{ // axis 'x' moves along a horizontal street, 'z' along a vertical one
+    for(let k=0;k<6;k++){let m=await measure();const pos=()=>axis==='x'?m.truck.x:m.truck.z,rem=()=>goal-pos();if(Math.abs(rem())<1)break;
+     const sign=Math.sign(rem()),full=Math.abs(rem())>4,dx=axis==='x'?sign*(full?70:30):0,dy=axis==='z'?sign*(full?70:30):0;
+     await touch('touchStart',1,stick.x,stick.y);await touch('touchMove',1,stick.x+dx,stick.y+dy);
+     for(let g=0;g<80;g++){await frames(64);m=await sample(phase);const v=Math.hypot(m.truck.vx,m.truck.vz);if(Math.abs(rem())<=Math.max(.6,v*v/90+.3)||Math.sign(rem())!==sign)break;}
+     await touch('touchEnd',1,stick.x,stick.y);for(let g=0;g<30;g++){await frames(64);m=await sample(phase);if(Math.hypot(m.truck.vx,m.truck.vz)<.3)break;}}
+   };
+   for(let leg=0;leg<6;leg++){
+    const m=await measure(),x=m.truck.x,z=m.truck.z;if(Math.hypot(tx-x,tz-z)<1.5)return true;
+    const onVertical=Math.abs(x-nearRoad(x))<1.6,onHorizontal=Math.abs(z-nearRoad(z))<1.6,targetVertical=Math.abs(tx-nearRoad(tx))<.5,targetHorizontal=Math.abs(tz-nearRoad(tz))<.5;
+    if(onHorizontal&&targetHorizontal&&Math.abs(nearRoad(z)-tz)<.5){await legAxis('x',tx);continue;}
+    if(onVertical&&targetVertical&&Math.abs(nearRoad(x)-tx)<.5){await legAxis('z',tz);continue;}
+    if(onHorizontal&&targetVertical){await legAxis('x',nearRoad(tx));continue;}
+    if(onVertical&&targetHorizontal){await legAxis('z',nearRoad(tz));continue;}
+    if(onHorizontal){await legAxis('x',nearRoad(x));continue;}
+    await legAxis('z',nearRoad(z));
+   }
+   const m=await measure();return Math.hypot(tx-m.truck.x,tz-m.truck.z)<1.5;
+  }
+
   let gaugeBox=null;{const g=await page.evaluate(gaugeInPage);gaugeBox=g?.box||null;}
   const sample=async phase=>{const m=await measure();if(!m)return null;const row={phase,...m};samples.push(row);
    if(gaugeBox)for(const i of m.indicators){if(i.x+i.size>gaugeBox.x&&i.x-i.size<gaugeBox.x+gaugeBox.w&&i.y+i.size>gaugeBox.y&&i.y-i.size<gaugeBox.y+gaugeBox.h)indicatorHits.push({time:m.time,phase,...i});}
@@ -201,7 +227,12 @@ async function runOne(browser,server,name){
    // ---- 5: tap the hydrant marker (water drop) on the map; the truck drives to it and refills; the gauge turns green and rises ----
    s=await snap();const hydrants=await page.evaluate(()=>{const g=window.__island.games.current.session,v=g.debug.view,b=window.__island.data.config.minigames.fireRescue;return b.city.hydrants.map(h=>v.projectWorld([h[0],h[1]+b.hydrant.height+1.2,h[2]]));});
    const ind=s.indicators.find(i=>i.kind==='hydrant'),onScreen=hydrants.find(p=>p&&p.x>40&&p.x<600&&p.y>90&&p.y<300);rec.hydrantTap=onScreen?{screen:onScreen}:ind?{indicator:{x:ind.x,y:ind.y}}:null;
-   const hp=onScreen||ind;if(hp){await tap(hp.x,hp.y);for(let i=0;i<150;i++){await frames(192);const {m}=await gaugeSample('toHydrant');if(m&&m.refilling&&!rec.shotRefill){for(let k=0;k<6;k++){await frames(160);await gaugeSample('refill');}rec.shotRefill=await shot('refill');rec.gaugeRefill=await page.evaluate(gaugeInPage);}if(m&&m.water>=m.maxWater-0.5&&rec.shotRefill)break;}}
+   const hp=onScreen||ind;
+   if(hp){rec.hydrantTap.inStickZone=inStickZone(hp);rec.hydrantTap.hit=await tap(hp.x,hp.y);for(let i=0;i<6;i++){await frames(96);await gaugeSample('hydrantTap');}rec.hydrantTap.navigationAfterTap=(await measure()).navigation;}
+   if(hp&&!(await measure()).navigation.active){ // the tap did not start a drive: drive to the nearest hydrant with the joystick
+    const hs=await page.evaluate(()=>window.__island.data.config.minigames.fireRescue.city.hydrants),m0=await measure(),h=hs.slice().sort((a,b)=>Math.hypot(a[0]-m0.truck.x,a[2]-m0.truck.z)-Math.hypot(b[0]-m0.truck.x,b[2]-m0.truck.z))[0];
+    const gx=Math.abs(h[0]-nearRoad(h[0]))<Math.abs(h[2]-nearRoad(h[2]))?nearRoad(h[0]):h[0],gz=gx===h[0]?nearRoad(h[2]):h[2];rec.hydrantDrive={hydrant:h,goal:[gx,gz],ok:await driveTo(gx,gz,'driveToHydrant')};progress('drove to hydrant',JSON.stringify(rec.hydrantDrive));}
+   if(hp){for(let i=0;i<150;i++){await frames(192);const {m}=await gaugeSample('toHydrant');if(m&&m.refilling&&!rec.shotRefill){for(let k=0;k<6;k++){await frames(160);await gaugeSample('refill');}rec.shotRefill=await shot('refill');rec.gaugeRefill=await page.evaluate(gaugeInPage);}if(m&&m.water>=m.maxWater-0.5&&rec.shotRefill)break;if(m&&!m.navigation.active&&!m.truck.driving&&!m.atHydrant&&i>8){rec.hydrantNotReached=true;break;}}}
    rec.gaugeEnd=await page.evaluate(gaugeInPage);progress('refill done');await save();
   }
 
@@ -241,7 +272,9 @@ async function runOne(browser,server,name){
     if(!point){R.error='no rescue marker';break;}R.tapAt={x:point.x,y:point.y,marker:inView(s.rescueScreens[ri])?'person':'edge'};
     if(spec.early&&ri===0){ // a child presses the ladder before the truck is there: the latch must not open anything on its own
      await tap(ladderBtn.x,ladderBtn.y,100);for(let i=0;i<10;i++){await frames(96);const m=await sample('earlyTap');}R.early=samples.filter(x=>x.phase==='earlyTap').map(x=>({time:x.time,latch:x.latch,ext:x.ladder.extension,dev:x.roofLadder?.deviationDeg}));}
-    await tap(point.x,point.y);let m;
+    R.tapAt.inStickZone=inStickZone(point);R.tapAt.hit=await tap(point.x,point.y);let m;
+    for(let i=0;i<4;i++){await frames(96);m=await sample('afterPersonTap');}R.tapAt.navigationAfterTap=m.navigation;
+    if(!m.navigation.active&&!m.rescues[ri].near){const w=m.rescues[ri].world,gx=Math.abs(w[0]-nearRoad(w[0]))<Math.abs(w[2]-nearRoad(w[2]))?nearRoad(w[0]):w[0],gz=gx===w[0]?nearRoad(w[2]):w[2];R.manualDrive={goal:[gx,gz],ok:await driveTo(gx,gz,'driveToWindow')};progress('manual drive',ri,JSON.stringify(R.manualDrive));}
     for(let i=0;i<160;i++){await frames(192);m=await sample('toWindow');if(m.rescues[ri].near&&!m.truck.driving&&!m.navigation.active)break;}progress('arrived',ri);await save();
     R.arrived={near:m.rescues[ri].near,time:m.time,distance:Math.hypot(m.truck.x-m.rescues[ri].world[0],m.truck.z-m.rescues[ri].world[2]),heat:m.flames[m.rescues[ri].fireIndex]?.heat,safe:m.rescues[ri].safe};ev('arrived',m);
     await shot(`r${ri}-arrived`);
