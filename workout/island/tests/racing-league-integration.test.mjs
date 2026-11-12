@@ -110,7 +110,7 @@ test('importing a backup never lowers league progress',()=>{
 });
 test('season summary: standings, gate for the next season and the career total',()=>{
   const l=createLeague(),last=[...GRID.slice(1),'player'];for(let i=0;i<racesIn(1);i++)applyRace(l,{order:last});
-  const sum=leagueSummary(l);assert.equal(sum.done,true);assert.equal(sum.place,N);assert.equal(sum.gate.ok,false);assert.equal(sum.gate.minRank,8);assert.equal(sum.career,0);assert.equal(sum.total,racesIn(1));assert.equal(sum.canRestart,true);assert.equal(sum.teams.length,6);assert.ok(sum.podium.length===3&&!sum.podium.includes('player'));
+  const sum=leagueSummary(l);assert.equal(sum.done,true);assert.equal(sum.place,N);assert.equal(sum.gate.ok,false);assert.equal(sum.gate.minRank,10);assert.equal(sum.career,0);assert.equal(sum.total,racesIn(1));assert.equal(sum.canRestart,true);assert.equal(sum.teams.length,6);assert.ok(sum.podium.length===3&&!sum.podium.includes('player'));
   assert.equal(raceSetup(l),null);assert.equal(seasonStages(2).length,racesIn(2));assert.ok(seasonStages(2).every(id=>id>=7&&id<=18),'season 2 runs tiers 1 and 2');
 });
 test('a full league race on the real model produces an order the result contract accepts',()=>{

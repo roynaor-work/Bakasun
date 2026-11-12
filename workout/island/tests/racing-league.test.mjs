@@ -58,9 +58,9 @@ test('teams table sums the pairs; the rival is the driver just above you with he
   applyRace(L,{order:finish(1)});const r2=rivalOf(L);assert.equal(r2.myPlace,1);assert.equal(r2.place,2,'when leading, the rival is the one behind');assert.equal(r2.myWins,2);assert.equal(r2.id,DRIVERS[0].id);assert.ok(r2.diff<0);
   assert.equal(rivalOf(createLeague()).myPlace,1);
 });
-test('gates and replay: season 2 opens from 8th, the last season has no gate; a missed gate offers the season again without losing coins or upgrades',()=>{
-  const L=createLeague();runSeason(L,8);assert.equal(nextSeason(L).ok,true);assert.equal(L.season,2);assert.equal(L.race,0);assert.equal(L.table.player,0);
-  const M=createLeague();runSeason(M,9);const coins=M.coins;M.upgrades.engine=2;assert.equal(nextSeason(M).ok,false);assert.equal(nextSeason(M).need,8);
+test('gates and replay: season 2 opens from 10th, the last season has no gate; a missed gate offers the season again without losing coins or upgrades',()=>{
+  const L=createLeague();runSeason(L,10);assert.equal(nextSeason(L).ok,true);assert.equal(L.season,2);assert.equal(L.race,0);assert.equal(L.table.player,0);
+  const M=createLeague();runSeason(M,11);const coins=M.coins;M.upgrades.engine=2;assert.equal(nextSeason(M).ok,false);assert.equal(nextSeason(M).need,10);
   assert.equal(restartSeason(M).ok,true);assert.equal(M.season,1);assert.equal(M.race,0);assert.equal(M.coins,coins);assert.equal(M.upgrades.engine,2);assert.ok(M.history.length>0);
   assert.equal(restartSeason(M).ok,false,'not finished');runSeason(M,1);assert.equal(restartSeason(M).reason,'gate open');assert.equal(nextSeason(M).ok,true);
   assert.deepEqual(SEASONS.map(s=>s.minRank),[0,10,8,5,5]);
