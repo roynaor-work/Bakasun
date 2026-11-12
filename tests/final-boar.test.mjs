@@ -90,3 +90,26 @@ test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, s
   assert.match(src,/const g=AIM_SENS\[aimSens\]\*\(aimStick\.precise!==null\?STICK_PRECISE:1\)/);
   assert.match(src,/localStorage\.setItem\('boar-island-aim',aimSens\)/,'the sensitivity setting is not part of the save');
 });
+
+// 12/11/2026, independent QA round 3: second-finger taps, the stick's direction, two layout overlaps and the help texts.
+// The stick step as written in game.js (AIM_TRUE): the thumb's direction is kept in screen pixels; pure axes keep their old speeds.
+const trueStep=(sx,sy,W,H,X=1.6,Y=1.3)=>{const m=Math.hypot(sx,sy);if(!m)return {dx:0,dy:0};const ux=sx/m,uy=sy/m,px=Math.hypot(X*W*ux,Y*H*uy)*m;return {dx:ux*px,dy:uy*px};};
+test('final-boar QA3: buttons work with the thumb on the stick, the crosshair goes where the thumb points, layout and help texts', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),html=await read('minigames/boar-island/index.html'),strings=JSON.parse(await read('data/strings.he.json'));
+  // A second finger gets pointer events but no click: the weapon and ability buttons act on a touch's pointerup and swallow the following click.
+  assert.match(src,/function touchTap\(el,act\)\{/);assert.match(src,/el\.addEventListener\('click',e=>\{if\(performance\.now\(\)<until\)\{until=0;e\.preventDefault\(\);e\.stopImmediatePropagation\(\);\}\},true\);/);
+  assert.match(src,/weaponBtn\.onclick=nextWeapon;touchTap\(weaponBtn,/,'the weapon button is hooked where it is made');
+  assert.match(src,/if\(HUD_V21\)for\(const id of \['rocket','frost','fury'\]\)touchTap\(\$\(id\),/);
+  // Direction: a 45-degree push moves at 45 degrees on screen (it went at about 20); sideways and up keep their v21 speeds.
+  assert.match(src,/const AIM_TRUE=new URLSearchParams\(location\.search\)\.get\('boarAim'\)!=='axes';/);
+  assert.match(src,/if\(AIM_TRUE\)\{const W=Math\.max\(1,innerWidth\/2\),H=Math\.max\(1,innerHeight\/2\),m=Math\.hypot\(aimStick\.sx,aimStick\.sy\);/);
+  const W=422,H=195,d=trueStep(.5,-.5,W,H);assert.ok(Math.abs(Math.atan2(-d.dy,d.dx)*180/Math.PI-45)<1e-9,'45 degrees in, 45 degrees out');
+  const old={dx:.5*1.6*W,dy:.5*1.3*H};assert.ok(Math.atan2(old.dy,old.dx)*180/Math.PI<21,'the per-axis scaling bent it to about 20 degrees');
+  assert.ok(Math.abs(trueStep(1,0,W,H).dx-1.6*W)<1e-9&&Math.abs(trueStep(0,1,W,H).dy-1.3*H)<1e-9,'pure sideways and pure up/down keep their speeds');
+  // Layout: the compact battle HUD is hidden in the game menu; in portrait the boss bar sits under the wave counter.
+  assert.match(css,/#game\.hudv21\[data-mode=menu\] \.combat-hud\{display:none\}/);
+  const portrait=css.slice(css.indexOf('@media(max-width:700px){'));assert.match(portrait,/#game\.hudv21 \.wave-block\{top:44px\}/);assert.match(portrait,/#game\.hudv21 #boss-hud\{top:72px\}/);
+  // Help texts describe the stick and the fire button, not "drag to aim and fire".
+  const intro=strings['minigame.boarDefense.help.1'];assert.match(intro,/ג׳ויסטיק/);assert.match(intro,/רק בכפתור הירי/);assert.doesNotMatch(intro,/גוררים אצבע כדי לכוון ולירות/);
+  assert.doesNotMatch(html,/מניחים אצבע בכל מקום וגוררים/);assert.match(src,/if\(FIRE_V21&&\$\('help-aim'\)\)\$\('help-aim'\)\.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה/);
+});

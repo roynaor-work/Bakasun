@@ -161,6 +161,8 @@
 #game[data-mode=battle].hudv21 .brand,#game[data-mode=paused].hudv21 .brand{display:none}
 #game.hudv21 #hud{padding:8px 12px}
 #game.hudv21 .combat-hud{margin:0;position:static;display:block}
+/* 12/11/2026 (QA 3): the compact battle HUD stays hidden in the game menu, like the v20 HUD (same specificity let it show over the menu text). */
+#game.hudv21[data-mode=menu] .combat-hud{display:none}
 #game.hudv21 .coin-block{position:absolute;top:8px;left:12px;grid-template-columns:auto auto;column-gap:6px;padding:4px 10px;min-height:30px;border-radius:15px;background:#10242db8}
 #game.hudv21 .coin-block .coin{font-size:16px;grid-row:auto}
 #game.hudv21 .coin-block b{font-size:15px;line-height:1}
@@ -201,6 +203,8 @@
   #game.hudv21 .health-block{width:120px}
   #game.hudv21 .wave-block{top:44px}
   #game.hudv21 .battle-hint,#game.hudv21 .battle-hint.touch-hint{top:70px}
+  /* 12/11/2026 (QA 3): portrait boss waves: the boss bar goes under the wave counter instead of over it */
+  #game.hudv21 #boss-hud{top:72px}
 }
 
 /* 11/11/2026 (Roy, phone): precise stick. Bigger floating ring, a precision label with a second finger, a direction arrow on the crosshair. `?boarStick=v20` restores the v20 stick. */

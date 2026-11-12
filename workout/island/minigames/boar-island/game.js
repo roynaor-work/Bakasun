@@ -26,6 +26,9 @@ function setFiring(on,source){pointer.down=on;fireSource=on?source:'none';}
 // 11/11/2026 (Roy, phone): the HUD hid the water where the boars come out. Compact HUD: one weapon-switch button, small round ability buttons in the right column,
 // coins/defence as thin strips in the top corners, a small wave counter, no bottom bar. `?boarHud=v20` restores the v20 cards.
 const HUD_V21=!LEGACY&&new URLSearchParams(location.search).get('boarHud')!=='v20';
+// 12/11/2026 (QA 3): the crosshair moved 2.7x faster sideways than up in screen pixels, so a 45-degree push went at 20 degrees.
+// Now the stick's direction is kept on screen; pure sideways and pure up/down pushes keep their speeds. `?boarAim=axes` restores the per-axis scaling.
+const AIM_TRUE=new URLSearchParams(location.search).get('boarAim')!=='axes';
 let weaponBtn=null,frames=0;
 // 11/11/2026 (Roy, phone: "הג'ויסטיק לא מספיק מדויק"): dead zone 8%, power curve (small tilt = fine aim, full tilt = fast), light smoothing while held
 // (time constant 45 ms) and an immediate stop on release, floating radius 80 px, a direction arrow on the crosshair, precision mode with a second finger
@@ -44,7 +47,7 @@ function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(own
 function buildCompactHud(){
   $('game').classList.add('hudv21');
   weaponBtn=document.createElement('button');weaponBtn.id='weapon-btn';weaponBtn.type='button';weaponBtn.setAttribute('aria-label','החלפת נשק');
-  weaponBtn.innerHTML='<b class="wicon"></b><strong class="wname"></strong><small class="wammo"></small><i class="wbar"></i>';weaponBtn.onclick=nextWeapon;
+  weaponBtn.innerHTML='<b class="wicon"></b><strong class="wname"></strong><small class="wammo"></small><i class="wbar"></i>';weaponBtn.onclick=nextWeapon;touchTap(weaponBtn,()=>weaponBtn.onclick?.());
   $('battle-ui').append(weaponBtn);
 }
 function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCache[current],s=wstate[current];weaponBtn.querySelector('.wicon').textContent=w.icon;weaponBtn.querySelector('.wname').textContent=w.short;
@@ -199,6 +202,8 @@ function init(){
   updateQualityLabel();
   setMode('menu');resize();updateStartLabel();
   if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
+  // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
+  if(FIRE_V21&&$('help-aim'))$('help-aim').textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.';
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
@@ -761,7 +766,8 @@ function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;
   if(!STICK_V21){pointer.x=clamp(pointer.x+aimStick.vx*dt*AIM_SPEED_X,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*AIM_SPEED_Y,-.85,.85);return;}
   const k=1-Math.exp(-dt/STICK_TAU);aimStick.sx+=(aimStick.vx-aimStick.sx)*k;aimStick.sy+=(aimStick.vy-aimStick.sy)*k;
   const g=AIM_SENS[aimSens]*(aimStick.precise!==null?STICK_PRECISE:1);
-  pointer.x=clamp(pointer.x+aimStick.sx*dt*AIM_SPEED_X*g,-.95,.95);pointer.y=clamp(pointer.y-aimStick.sy*dt*AIM_SPEED_Y*g,-.85,.85);
+  if(AIM_TRUE){const W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(aimStick.sx,aimStick.sy);if(m>1e-6){const ux=aimStick.sx/m,uy=aimStick.sy/m,px=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g*dt;pointer.x=clamp(pointer.x+ux*px/W,-.95,.95);pointer.y=clamp(pointer.y-uy*px/H,-.85,.85);}}
+  else{pointer.x=clamp(pointer.x+aimStick.sx*dt*AIM_SPEED_X*g,-.95,.95);pointer.y=clamp(pointer.y-aimStick.sy*dt*AIM_SPEED_Y*g,-.85,.85);}
   const moving=Math.hypot(aimStick.sx,aimStick.sy)>.02,ch=$('crosshair');ch.classList.toggle('moving',moving);if(moving)ch.style.setProperty('--dir',`${Math.atan2(aimStick.sx,-aimStick.sy)*180/Math.PI}deg`);}
 function buildWeaponBar(){
   const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
@@ -879,6 +885,15 @@ window.addEventListener('keydown',e=>{if(e.target.closest('button,input'))return
   const n=['Digit1','Digit2','Digit3','Digit4','Digit5','Digit6','Digit7','Digit8','Digit9'].indexOf(e.code);if(n>=0){const k=WEAPON_ORDER.filter(x=>save.weapons[x]||BASE_WEAPONS.includes(x))[n];if(k&&save.weapons[k])switchWeapon(k);else if(k)toast(`${WEAPONS[k].name} נפתח במוסך`);}});
 window.addEventListener('keyup',e=>keys.delete(e.code));
 $('start').onclick=beginWave;$('garage').onclick=()=>openShop('menu');$('next-wave').onclick=beginWave;$('shop-back').onclick=returnToMenu;$('pause').onclick=()=>setMode('paused');$('resume').onclick=()=>{setMode('battle');$('scene').focus();};$('exit').onclick=returnToMenu;$('retry').onclick=beginWave;$('death-shop').onclick=()=>openShop('dead');$('rocket').onclick=()=>{abilityBy.rocket++;rocket();};$('frost').onclick=()=>{abilityBy.frost++;frost();};$('fury').onclick=()=>{abilityBy.fury++;activateFury();};
+// 12/11/2026 (QA 3): with the left thumb on the stick, a tap on the weapon or ability buttons is a second finger, and browsers send it
+// pointer events but no click, so nothing happened. These buttons act on the pointerup of a touch that ends on them; the click that
+// follows a one-finger tap is swallowed so nothing runs twice. Mouse and keyboard keep the click. `?boarHud=v20` keeps the v20 buttons.
+function touchTap(el,act){if(!el)return;let id=null,until=0;
+ el.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||mode!=='battle')return;id=e.pointerId;try{el.setPointerCapture(e.pointerId);}catch{}});
+ el.addEventListener('pointerup',e=>{if(e.pointerId!==id)return;id=null;const r=el.getBoundingClientRect();if(e.clientX>=r.left-6&&e.clientX<=r.right+6&&e.clientY>=r.top-6&&e.clientY<=r.bottom+6){until=performance.now()+700;act();}});
+ el.addEventListener('pointercancel',e=>{if(e.pointerId===id)id=null;});
+ el.addEventListener('click',e=>{if(performance.now()<until){until=0;e.preventDefault();e.stopImmediatePropagation();}},true);}
+if(HUD_V21)for(const id of ['rocket','frost','fury'])touchTap($(id),()=>$(id).onclick?.());// the weapon button is made in init (buildCompactHud) and hooked there
 $('tab-weapons').onclick=()=>setShopTab('weapons');$('tab-upgrades').onclick=()=>setShopTab('upgrades');
 $('help').onclick=()=>{previousMode=mode;setMode('help');};
 $('quality').onclick=()=>{setQuality(HIGH?'normal':'high');location.reload();};$('help-close').onclick=()=>setMode(previousMode);
