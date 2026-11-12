@@ -1,0 +1,1067 @@
+{
+  "tool": "independent GLB geometry checks",
+  "triangle_budget": "1500 per GLB including all three states",
+  "assets": [
+    {
+      "id": "coastal-coastal-gun",
+      "file": "models/coastal-coastal-gun.glb",
+      "bytes": 78472,
+      "sha256": "dee566a9afdc464ac593a20046516660f472fe0b17631fd64c69c9aaaf73fec4",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 969,
+      "states": {
+        "intact": {
+          "triangles": 368,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 64.66164
+        },
+        "damaged": {
+          "triangles": 449,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 66.2781
+        },
+        "ruined": {
+          "triangles": 152,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 14.27915
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "gun_hierarchy_pivots_front_positive_z": true
+      }
+    },
+    {
+      "id": "coastal-watchtower",
+      "file": "models/coastal-watchtower.glb",
+      "bytes": 77216,
+      "sha256": "721571f93db8b94bd68692afe64a79094cd42b3bac3f088fbecbc838f57751a5",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 969,
+      "states": {
+        "intact": {
+          "triangles": 376,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 142.08589
+        },
+        "damaged": {
+          "triangles": 457,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 145.15679
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -2.74921,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            1.07,
+            2.5
+          ],
+          "dimensions": [
+            5.24921,
+            1.07,
+            5.0
+          ],
+          "signed_volume": 11.08218
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "coastal-gate",
+      "file": "models/coastal-gate.glb",
+      "bytes": 87032,
+      "sha256": "623b72718f547fd92e38f884d87ee5e469601c30c6a662e90179be6d01a05b50",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1121,
+      "states": {
+        "intact": {
+          "triangles": 432,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 396.99779
+        },
+        "damaged": {
+          "triangles": 513,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 407.86358
+        },
+        "ruined": {
+          "triangles": 176,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            1.07,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            1.07,
+            3.6
+          ],
+          "signed_volume": 15.26876
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "central_opening_30_rays": true
+      }
+    },
+    {
+      "id": "coastal-ammo-depot",
+      "file": "models/coastal-ammo-depot.glb",
+      "bytes": 97808,
+      "sha256": "f9ec75cfa630ff5b6dee4461eff66ffe256f262de9ce713a9bd3e8ab1aa916a0",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1233,
+      "states": {
+        "intact": {
+          "triangles": 508,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 104.79792
+        },
+        "damaged": {
+          "triangles": 589,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 108.3723
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 17.87453
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "palace-coastal-gun",
+      "file": "models/palace-coastal-gun.glb",
+      "bytes": 82972,
+      "sha256": "4fb9855de2507aceba1a8b1f83d388289005dfd53f66325f634543c5d9f6c2d3",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1021,
+      "states": {
+        "intact": {
+          "triangles": 394,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 68.28225
+        },
+        "damaged": {
+          "triangles": 475,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 69.89871
+        },
+        "ruined": {
+          "triangles": 152,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 14.09225
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "gun_hierarchy_pivots_front_positive_z": true
+      }
+    },
+    {
+      "id": "palace-watchtower",
+      "file": "models/palace-watchtower.glb",
+      "bytes": 83544,
+      "sha256": "7c1e3a6fe1599934245397e90cf2808f496f46dbbf4b06b7cbb5ffd542605669",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1045,
+      "states": {
+        "intact": {
+          "triangles": 414,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 158.64138
+        },
+        "damaged": {
+          "triangles": 495,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 161.71228
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -2.54782,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            1.07,
+            2.5
+          ],
+          "dimensions": [
+            5.04782,
+            1.07,
+            5.0
+          ],
+          "signed_volume": 9.7737
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "palace-gate",
+      "file": "models/palace-gate.glb",
+      "bytes": 86232,
+      "sha256": "cece84b47b2f5c21975906471bb9d1263e943085e2ba81a3384db02dad78b8ae",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1089,
+      "states": {
+        "intact": {
+          "triangles": 416,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 398.92347
+        },
+        "damaged": {
+          "triangles": 497,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 409.78925
+        },
+        "ruined": {
+          "triangles": 176,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            1.07,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            1.07,
+            3.6
+          ],
+          "signed_volume": 16.28635
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "central_opening_30_rays": true
+      }
+    },
+    {
+      "id": "palace-ammo-depot",
+      "file": "models/palace-ammo-depot.glb",
+      "bytes": 104536,
+      "sha256": "8439ca3088ba0f997f208fced6029718013856ae19b84c961e09a3272b239cd3",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1305,
+      "states": {
+        "intact": {
+          "triangles": 544,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 110.22249
+        },
+        "damaged": {
+          "triangles": 625,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 113.79687
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 18.57856
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "submarine-coastal-gun",
+      "file": "models/submarine-coastal-gun.glb",
+      "bytes": 78492,
+      "sha256": "44c6c7d113c792b7ecfeef34eabae1fa5ee95c8d479b2a085d0d6b4a4aa2f84e",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 969,
+      "states": {
+        "intact": {
+          "triangles": 368,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 64.66164
+        },
+        "damaged": {
+          "triangles": 449,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            3.0,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            3.0,
+            6.0
+          ],
+          "signed_volume": 66.2781
+        },
+        "ruined": {
+          "triangles": 152,
+          "min": [
+            -3.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            3.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            7.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 13.8639
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "gun_hierarchy_pivots_front_positive_z": true
+      }
+    },
+    {
+      "id": "submarine-watchtower",
+      "file": "models/submarine-watchtower.glb",
+      "bytes": 77228,
+      "sha256": "4aff9967c98f928d0c4c35e5e83b9fee3127e326f7a88a81a63fd98430530e1f",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 969,
+      "states": {
+        "intact": {
+          "triangles": 376,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 142.08589
+        },
+        "damaged": {
+          "triangles": 457,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.5,
+            11.0,
+            2.5
+          ],
+          "dimensions": [
+            5.0,
+            11.0,
+            5.0
+          ],
+          "signed_volume": 145.15679
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -2.5,
+            0.0,
+            -2.5
+          ],
+          "max": [
+            2.64882,
+            1.07,
+            2.5
+          ],
+          "dimensions": [
+            5.14882,
+            1.07,
+            5.0
+          ],
+          "signed_volume": 10.35561
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "submarine-gate",
+      "file": "models/submarine-gate.glb",
+      "bytes": 87044,
+      "sha256": "ce4ef868a31c9775fb0315eed85afb78d5bf7d6b1eb0a23b481fde0bb9369309",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1121,
+      "states": {
+        "intact": {
+          "triangles": 432,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 396.99779
+        },
+        "damaged": {
+          "triangles": 513,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            9.0,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            9.0,
+            3.6
+          ],
+          "signed_volume": 407.86358
+        },
+        "ruined": {
+          "triangles": 176,
+          "min": [
+            -11.0,
+            0.0,
+            -1.8
+          ],
+          "max": [
+            11.0,
+            1.07,
+            1.8
+          ],
+          "dimensions": [
+            22.0,
+            1.07,
+            3.6
+          ],
+          "signed_volume": 15.75253
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true,
+        "central_opening_30_rays": true
+      }
+    },
+    {
+      "id": "submarine-ammo-depot",
+      "file": "models/submarine-ammo-depot.glb",
+      "bytes": 97812,
+      "sha256": "84563c0981acb05458862653b99eec971984ef8f8f888e767838b7f501c1aace",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1233,
+      "states": {
+        "intact": {
+          "triangles": 508,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 104.79792
+        },
+        "damaged": {
+          "triangles": 589,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            4.0,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            4.0,
+            6.0
+          ],
+          "signed_volume": 108.3723
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -4.5,
+            0.0,
+            -3.0
+          ],
+          "max": [
+            4.5,
+            1.07,
+            3.0
+          ],
+          "dimensions": [
+            9.0,
+            1.07,
+            6.0
+          ],
+          "signed_volume": 17.23832
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    },
+    {
+      "id": "submarine-submarine-pen",
+      "file": "models/submarine-submarine-pen.glb",
+      "bytes": 84052,
+      "sha256": "0249298f91effb2e77c2507baaa5635051155cb94f8bfb81c0782c16aad1ca69",
+      "materials": 1,
+      "textures": [],
+      "triangles_all_states": 1046,
+      "states": {
+        "intact": {
+          "triangles": 428,
+          "min": [
+            -6.0,
+            0.0,
+            -5.0
+          ],
+          "max": [
+            6.0,
+            7.0,
+            5.0
+          ],
+          "dimensions": [
+            12.0,
+            7.0,
+            10.0
+          ],
+          "signed_volume": 159.05869
+        },
+        "damaged": {
+          "triangles": 482,
+          "min": [
+            -6.0,
+            0.0,
+            -5.0
+          ],
+          "max": [
+            6.0,
+            7.0,
+            5.0
+          ],
+          "dimensions": [
+            12.0,
+            7.0,
+            10.0
+          ],
+          "signed_volume": 151.68939
+        },
+        "ruined": {
+          "triangles": 136,
+          "min": [
+            -6.0,
+            0.0,
+            -5.0
+          ],
+          "max": [
+            6.0,
+            1.2,
+            5.0
+          ],
+          "dimensions": [
+            12.0,
+            1.2,
+            10.0
+          ],
+          "signed_volume": 37.87034
+        }
+      },
+      "checks": {
+        "self_contained": true,
+        "one_shared_material": true,
+        "no_compression": true,
+        "bottom_origin": true,
+        "centered_footprint": true,
+        "three_separate_states": true,
+        "default_intact_only": true,
+        "low_ruin": true,
+        "normal_winding_consistency": true,
+        "positive_signed_volume": true,
+        "distinct_soot_colors": true
+      }
+    }
+  ],
+  "failures": [],
+  "passed": true
+}
