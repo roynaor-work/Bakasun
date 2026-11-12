@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "package": "crowd-audio-v1",
+  "license": "CC0-1.0",
+  "sample_rate_hz": 48000,
+  "channels": 2,
+  "attack_ms": 10,
+  "loop_end_exclusive": true,
+  "loop_units": "decoded PCM seconds and frames at 48000 Hz",
+  "loudness_tolerance_lu": 0.1,
+  "max_2_5khz_energy_percent": 8,
+  "volume_units": "linear gain 0..1, after file loudness normalization",
+  "playback_notes": [
+    "Decode full files with codec pre-skip / LAME gapless metadata honored.",
+    "Loop only the declared internal region, not the entire encoded file.",
+    "Play from time zero on first use; intro and outro guards are outside the loop.",
+    "Apply a 10 ms gain ramp when manually starting inside the loop or stopping a bed.",
+    "Recommended volumes are mix starting points, not a change to the file LUFS target.",
+    "No runtime low-pass is needed to meet this asset spectral budget; integration is separate."
+  ],
+  "samples": [
+    {
+      "id": "ambience-loop",
+      "name": "המולת אצטדיון רחבה",
+      "seed": 2026111201,
+      "duration_seconds": 25.0,
+      "decoded_frames": 1200000,
+      "loop": {
+        "enabled": true,
+        "start_seconds": 0.5,
+        "end_seconds": 24.5,
+        "start_frame": 24000,
+        "end_frame": 1176000,
+        "duration_seconds": 24,
+        "crossfade_ms": 0
+      },
+      "target_lufs": -18,
+      "recommended_volume": 0.32,
+      "formats": {
+        "ogg": {
+          "file": "ambience-loop.ogg",
+          "codec": "vorbis",
+          "mime_type": "audio/ogg; codecs=vorbis",
+          "measured_lufs": -18.0,
+          "true_peak_dbtp": -6.41,
+          "sha256": "bf8ac3dd072563fe05f8d0bbfdc6ffae153f943eabafbb1429767add269c3152"
+        },
+        "mp3": {
+          "file": "ambience-loop.mp3",
+          "codec": "mp3",
+          "mime_type": "audio/mpeg",
+          "measured_lufs": -18.0,
+          "true_peak_dbtp": -6.53,
+          "sha256": "44396fec7ba898ff064d982e49f59704e2ab38db833e8a88f35998533cef89d3"
+        }
+      }
+    },
+    {
+      "id": "crowd-calm",
+      "name": "רקע קהל שקט",
+      "seed": 2026111202,
+      "duration_seconds": 13.288,
+      "decoded_frames": 637824,
+      "loop": {
+        "enabled": true,
+        "start_seconds": 0.5,
+        "end_seconds": 12.788,
+        "start_frame": 24000,
+        "end_frame": 613824,
+        "duration_seconds": 12.288,
+        "crossfade_ms": 0
+      },
+      "target_lufs": -18,
+      "recommended_volume": 0.24,
+      "formats": {
+        "ogg": {
+          "file": "crowd-calm.ogg",
+          "codec": "vorbis",
+          "mime_type": "audio/ogg; codecs=vorbis",
+          "measured_lufs": -18.01,
+          "true_peak_dbtp": -6.96,
+          "sha256": "8edf1e60364eeb458c0d8b5a607f1285d026a3a9ad702a42c37b5847eb48e19d"
+        },
+        "mp3": {
+          "file": "crowd-calm.mp3",
+          "codec": "mp3",
+          "mime_type": "audio/mpeg",
+          "measured_lufs": -18.0,
+          "true_peak_dbtp": -6.96,
+          "sha256": "d2050c9ab67b4cba5a775b996ab372673bb24fbeac4aa60a9f33ba43ec4eda55"
+        }
+      }
+    },
+    {
+      "id": "crowd-excited",
+      "name": "קהל בהתרגשות",
+      "seed": 2026111203,
+      "duration_seconds": 4.0,
+      "decoded_frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_seconds": null,
+        "end_seconds": null,
+        "start_frame": null,
+        "end_frame": null,
+        "duration_seconds": null,
+        "crossfade_ms": 0
+      },
+      "target_lufs": -18,
+      "recommended_volume": 0.48,
+      "formats": {
+        "ogg": {
+          "file": "crowd-excited.ogg",
+          "codec": "vorbis",
+          "mime_type": "audio/ogg; codecs=vorbis",
+          "measured_lufs": -17.99,
+          "true_peak_dbtp": -5.08,
+          "sha256": "9656d7b14edf1d4722bfae7f509c192f2636cad3bbf938df08abb16ff1795112"
+        },
+        "mp3": {
+          "file": "crowd-excited.mp3",
+          "codec": "mp3",
+          "mime_type": "audio/mpeg",
+          "measured_lufs": -17.99,
+          "true_peak_dbtp": -4.92,
+          "sha256": "b448e373b71d73158921a836405e35f50fe960c3a9575d4c4b88fcfa98ed6c10"
+        }
+      }
+    },
+    {
+      "id": "crowd-goal",
+      "name": "שאגת שער",
+      "seed": 2026111204,
+      "duration_seconds": 5.0,
+      "decoded_frames": 240000,
+      "loop": {
+        "enabled": false,
+        "start_seconds": null,
+        "end_seconds": null,
+        "start_frame": null,
+        "end_frame": null,
+        "duration_seconds": null,
+        "crossfade_ms": 0
+      },
+      "target_lufs": -16,
+      "recommended_volume": 0.65,
+      "formats": {
+        "ogg": {
+          "file": "crowd-goal.ogg",
+          "codec": "vorbis",
+          "mime_type": "audio/ogg; codecs=vorbis",
+          "measured_lufs": -15.99,
+          "true_peak_dbtp": -1.3,
+          "sha256": "bb666727dbe8cb2eaf53f9e2df16412eb739d498bbbf3f29b12f35adaa9fdc03"
+        },
+        "mp3": {
+          "file": "crowd-goal.mp3",
+          "codec": "mp3",
+          "mime_type": "audio/mpeg",
+          "measured_lufs": -16.02,
+          "true_peak_dbtp": -1.4,
+          "sha256": "cdb9cd06b555bfc4b75d9ec56afe45f59efff86326afbcd12da390fa26e72a22"
+        }
+      }
+    }
+  ]
+}
