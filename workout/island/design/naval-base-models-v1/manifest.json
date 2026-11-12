@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "name": "naval-base-models-v1",
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
+  "origin": "ground-centre",
+  "stateScenes": [
+    "intact",
+    "damaged",
+    "ruined"
+  ],
+  "defaultState": "intact",
+  "material": "one PBR material per GLB; linear vertex colours; no textures",
+  "compression": "none",
+  "license": "CC0-1.0",
+  "assets": [
+    {
+      "id": "coastal-coastal-gun",
+      "style": "coastal",
+      "type": "coastal-gun",
+      "file": "models/coastal-coastal-gun.glb",
+      "dimensions": [
+        7,
+        3,
+        6
+      ],
+      "triangles": {
+        "intact": 368,
+        "damaged": 449,
+        "ruined": 152
+      },
+      "totalTriangles": 969,
+      "bytes": 78472,
+      "sha256": "dee566a9afdc464ac593a20046516660f472fe0b17631fd64c69c9aaaf73fec4",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "coastal-watchtower",
+      "style": "coastal",
+      "type": "watchtower",
+      "file": "models/coastal-watchtower.glb",
+      "dimensions": [
+        5,
+        11,
+        5
+      ],
+      "triangles": {
+        "intact": 376,
+        "damaged": 457,
+        "ruined": 136
+      },
+      "totalTriangles": 969,
+      "bytes": 77216,
+      "sha256": "721571f93db8b94bd68692afe64a79094cd42b3bac3f088fbecbc838f57751a5",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "coastal-gate",
+      "style": "coastal",
+      "type": "gate",
+      "file": "models/coastal-gate.glb",
+      "dimensions": [
+        22,
+        9,
+        3.6
+      ],
+      "triangles": {
+        "intact": 432,
+        "damaged": 513,
+        "ruined": 176
+      },
+      "totalTriangles": 1121,
+      "bytes": 87032,
+      "sha256": "623b72718f547fd92e38f884d87ee5e469601c30c6a662e90179be6d01a05b50",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "coastal-ammo-depot",
+      "style": "coastal",
+      "type": "ammo-depot",
+      "file": "models/coastal-ammo-depot.glb",
+      "dimensions": [
+        9,
+        4,
+        6
+      ],
+      "triangles": {
+        "intact": 508,
+        "damaged": 589,
+        "ruined": 136
+      },
+      "totalTriangles": 1233,
+      "bytes": 97808,
+      "sha256": "f9ec75cfa630ff5b6dee4461eff66ffe256f262de9ce713a9bd3e8ab1aa916a0",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "palace-coastal-gun",
+      "style": "palace",
+      "type": "coastal-gun",
+      "file": "models/palace-coastal-gun.glb",
+      "dimensions": [
+        7,
+        3,
+        6
+      ],
+      "triangles": {
+        "intact": 394,
+        "damaged": 475,
+        "ruined": 152
+      },
+      "totalTriangles": 1021,
+      "bytes": 82972,
+      "sha256": "4fb9855de2507aceba1a8b1f83d388289005dfd53f66325f634543c5d9f6c2d3",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "palace-watchtower",
+      "style": "palace",
+      "type": "watchtower",
+      "file": "models/palace-watchtower.glb",
+      "dimensions": [
+        5,
+        11,
+        5
+      ],
+      "triangles": {
+        "intact": 414,
+        "damaged": 495,
+        "ruined": 136
+      },
+      "totalTriangles": 1045,
+      "bytes": 83544,
+      "sha256": "7c1e3a6fe1599934245397e90cf2808f496f46dbbf4b06b7cbb5ffd542605669",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "palace-gate",
+      "style": "palace",
+      "type": "gate",
+      "file": "models/palace-gate.glb",
+      "dimensions": [
+        22,
+        9,
+        3.6
+      ],
+      "triangles": {
+        "intact": 416,
+        "damaged": 497,
+        "ruined": 176
+      },
+      "totalTriangles": 1089,
+      "bytes": 86232,
+      "sha256": "cece84b47b2f5c21975906471bb9d1263e943085e2ba81a3384db02dad78b8ae",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "palace-ammo-depot",
+      "style": "palace",
+      "type": "ammo-depot",
+      "file": "models/palace-ammo-depot.glb",
+      "dimensions": [
+        9,
+        4,
+        6
+      ],
+      "triangles": {
+        "intact": 544,
+        "damaged": 625,
+        "ruined": 136
+      },
+      "totalTriangles": 1305,
+      "bytes": 104536,
+      "sha256": "8439ca3088ba0f997f208fced6029718013856ae19b84c961e09a3272b239cd3",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "submarine-coastal-gun",
+      "style": "submarine",
+      "type": "coastal-gun",
+      "file": "models/submarine-coastal-gun.glb",
+      "dimensions": [
+        7,
+        3,
+        6
+      ],
+      "triangles": {
+        "intact": 368,
+        "damaged": 449,
+        "ruined": 152
+      },
+      "totalTriangles": 969,
+      "bytes": 78492,
+      "sha256": "44c6c7d113c792b7ecfeef34eabae1fa5ee95c8d479b2a085d0d6b4a4aa2f84e",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "submarine-watchtower",
+      "style": "submarine",
+      "type": "watchtower",
+      "file": "models/submarine-watchtower.glb",
+      "dimensions": [
+        5,
+        11,
+        5
+      ],
+      "triangles": {
+        "intact": 376,
+        "damaged": 457,
+        "ruined": 136
+      },
+      "totalTriangles": 969,
+      "bytes": 77228,
+      "sha256": "4aff9967c98f928d0c4c35e5e83b9fee3127e326f7a88a81a63fd98430530e1f",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "submarine-gate",
+      "style": "submarine",
+      "type": "gate",
+      "file": "models/submarine-gate.glb",
+      "dimensions": [
+        22,
+        9,
+        3.6
+      ],
+      "triangles": {
+        "intact": 432,
+        "damaged": 513,
+        "ruined": 176
+      },
+      "totalTriangles": 1121,
+      "bytes": 87044,
+      "sha256": "ce4ef868a31c9775fb0315eed85afb78d5bf7d6b1eb0a23b481fde0bb9369309",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "submarine-ammo-depot",
+      "style": "submarine",
+      "type": "ammo-depot",
+      "file": "models/submarine-ammo-depot.glb",
+      "dimensions": [
+        9,
+        4,
+        6
+      ],
+      "triangles": {
+        "intact": 508,
+        "damaged": 589,
+        "ruined": 136
+      },
+      "totalTriangles": 1233,
+      "bytes": 97812,
+      "sha256": "84563c0981acb05458862653b99eec971984ef8f8f888e767838b7f501c1aace",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    },
+    {
+      "id": "submarine-submarine-pen",
+      "style": "submarine",
+      "type": "submarine-pen",
+      "file": "models/submarine-submarine-pen.glb",
+      "dimensions": [
+        12,
+        7,
+        10
+      ],
+      "triangles": {
+        "intact": 428,
+        "damaged": 482,
+        "ruined": 136
+      },
+      "totalTriangles": 1046,
+      "bytes": 84052,
+      "sha256": "0249298f91effb2e77c2507baaa5635051155cb94f8bfb81c0782c16aad1ca69",
+      "states": [
+        "intact",
+        "damaged",
+        "ruined"
+      ]
+    }
+  ]
+}

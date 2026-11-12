@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173e49">
+  <link rel="icon" href="data:,">
+  <title>בסיסים על קו המים · ערכת מבנים</title>
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./preview.html" aria-label="ערכת בסיסים – התחלה"><span class="brandmark" aria-hidden="true">≈</span><span>האי שלי<span class="brand-sub">מעבדת העיצוב</span></span></a>
+    <span class="edition" dir="ltr">NAVAL BASES <span> / V1</span></span>
+    <a class="text-link" href="./README.md">על הערכה <span aria-hidden="true">←</span></a>
+  </header>
+  <main>
+    <section class="intro">
+      <div><span class="eyebrow">13 מבנים · 3 עולמות</span><h1>בסיסים על קו המים<span>.</span></h1><p>חול ובטון, כיפות כחולות, פלדה כהה. אותה ערכה, שלושה סיפורים.</p></div>
+      <div class="kit-stamp"><span class="stamp-number">01</span><span>ערכת בסיס אויב<br>תצוגת מודלים עצמאית</span></div>
+    </section>
+    <nav class="style-nav" aria-label="סגנון הבסיס">
+      <button data-style="coastal" aria-pressed="true"><span class="style-dot coastal"></span><span>בסיס חוף<small>חול · בטון</small></span><span class="style-index" aria-hidden="true">01</span></button>
+      <button data-style="palace" aria-pressed="false"><span class="style-dot palace"></span><span>ארמון הים<small>לבן · זהב · כחול</small></span><span class="style-index" aria-hidden="true">02</span></button>
+      <button data-style="submarine" aria-pressed="false"><span class="style-dot submarine"></span><span>מספן צוללות<small>בטון כהה · פלדה</small></span><span class="style-index" aria-hidden="true">03</span></button>
+    </nav>
+    <section class="workbench" aria-label="תצוגת תלת ממד">
+      <div class="stage-column">
+        <div class="stage-toolbar"><div class="state-switch" role="group" aria-label="מצב המבנה"><button data-state="intact" aria-pressed="true">שלם</button><button data-state="damaged" aria-pressed="false">פגוע</button><button data-state="ruined" aria-pressed="false">הרוס</button></div><button id="compare" class="compare-button" aria-pressed="false">השוואת מצבים <span aria-hidden="true">▥</span></button></div>
+        <div id="stage" tabindex="0" role="region" aria-label="מודלים בתלת ממד. גררו לסיבוב, גללו לקירוב; חצים לסיבוב, פלוס ומינוס לקירוב, Home לאיפוס.">
+          <canvas id="canvas" aria-hidden="true"></canvas>
+          <div id="labels" aria-hidden="true"></div>
+          <div class="stage-topline"><span id="scene-title">בסיס חוף</span><span id="scene-count">04 מבנים</span></div>
+          <div id="loading" role="status" aria-live="polite"><span class="spinner"></span><span>מכינים את הבסיס…</span></div>
+          <div class="compass" aria-label="חזית המבנים לכיוון פלוס Z"><span>+Z</span><span class="compass-arrow">↑</span><small>חזית</small></div>
+          <div class="view-controls" role="group" aria-label="זווית צפייה"><button id="isometric" aria-label="מבט אלכסוני" title="מבט אלכסוני">◈</button><button id="front" aria-label="מבט חזית" title="מבט חזית">▣</button><button id="reset" aria-label="איפוס מצלמה" title="איפוס מצלמה">↺</button></div>
+          <div class="stage-hint">גרירה לסיבוב · גלילה / צביטה לקירוב</div>
+        </div>
+        <div class="stage-footer"><span><i></i> <span id="status">טוען מודלים מקומיים</span></span><span>מידות אמיתיות · ראשית בתחתית</span></div>
+      </div>
+      <aside class="inspector">
+        <span class="eyebrow">מבט מקרוב</span><h2 id="inspector-title">ערכת החוף</h2><p id="inspector-description">מבנים בגווני חול ובטון, לשמירה על קו החוף.</p>
+        <label class="field-label" for="model-select">מה מציגים?</label><select id="model-select"><option value="all">כל המבנים יחד</option></select>
+        <div class="metadata"><div><span>מידות <small dir="ltr">X × Y × Z</small></span><strong id="dimensions">—</strong></div><div><span>משולשים במצב הנבחר</span><strong id="triangles">—</strong></div><div><span>חומרים לכל מבנה</span><strong id="materials">1</strong></div></div>
+        <div id="articulation" hidden><label class="range-label" for="yaw">סיבוב הצריח <output id="yaw-value">0°</output></label><input id="yaw" type="range" min="-90" max="90" value="0" step="1"><label class="range-label" for="pitch">הגבהת הקנה <output id="pitch-value">0°</output></label><input id="pitch" type="range" min="0" max="35" value="0" step="1"></div>
+        <div class="display-options"><label><input id="grid" type="checkbox"> רשת מידות</label><label><input id="wireframe" type="checkbox"> הצגת משולשים</label></div>
+        <a id="download" class="download" hidden download>הורדת המודל <span aria-hidden="true">↓</span></a>
+        <button id="copy-link" class="copy-button">העתקת קישור לתצוגה</button><span id="copy-status" role="status" aria-live="polite"></span>
+        <div class="inspector-note"><span aria-hidden="true">◇</span><p>פגוע: סימני פיח.<br>הרוס: ערימת שברים נמוכה.<br>בחרו מבנה כדי להשוות בין המצבים.</p></div>
+      </aside>
+    </section>
+    <section class="library" aria-labelledby="library-title"><div class="section-heading"><h2 id="library-title">מה בערכה</h2><span id="library-note">לחצו על מבנה למבט מקרוב</span></div><div id="asset-cards" class="asset-cards"></div></section>
+    <footer class="footer"><span>נבנה לאי שלי · ערכת בסיסים V1</span><span><a href="./LICENSES.md">מקורות ורישיונות</a><span class="footer-dot">·</span><a href="./verification/REPORT.md">תוצאות בדיקה</a></span></footer>
+  </main>
+  <script type="module" src="./preview.js"></script>
+</body>
+</html>
