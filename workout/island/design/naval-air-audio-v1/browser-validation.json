@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "files": [
+    {
+      "path": "jet-flyby.ogg",
+      "duration_seconds": 1.5,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 66150,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    },
+    {
+      "path": "helicopter-rotor-loop.ogg",
+      "duration_seconds": 4,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 176400,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "three_loop_max_sample_error": 0,
+      "seam_step": 0.009012226015329361,
+      "passed": true
+    },
+    {
+      "path": "vulcan-metal-hit.ogg",
+      "duration_seconds": 0.55,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 24127,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    },
+    {
+      "path": "sea-fall.ogg",
+      "duration_seconds": 2,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 88200,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    },
+    {
+      "path": "jet-flyby.mp3",
+      "duration_seconds": 1.5,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 66150,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    },
+    {
+      "path": "helicopter-rotor-loop.mp3",
+      "duration_seconds": 4,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 176400,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "three_loop_max_sample_error": 0,
+      "seam_step": 0.004383135586977005,
+      "passed": true
+    },
+    {
+      "path": "vulcan-metal-hit.mp3",
+      "duration_seconds": 0.55,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 24255,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    },
+    {
+      "path": "sea-fall.mp3",
+      "duration_seconds": 2,
+      "time_advanced": true,
+      "media_error": null,
+      "samples": 88200,
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "passed": true
+    }
+  ],
+  "checks": [
+    "All eight files play and decode at 44100 Hz mono with manifest sample counts",
+    "Rotor loops render three exact consecutive copies for each codec",
+    "Continuous loop controls play across a full boundary and stop for each codec",
+    "Changing format cancels a pending loop",
+    "No page errors or HTTP audio failures",
+    "No horizontal overflow at 390px and 1100px",
+    "All existing download/document links return HTTP 200"
+  ],
+  "local_file_playback": "Not verified: managed Chromium blocks file:// navigation by administrator policy; HTTP playback passed",
+  "screenshot": "Ephemeral review image: /tmp/naval-air-audio-mobile.png"
+}

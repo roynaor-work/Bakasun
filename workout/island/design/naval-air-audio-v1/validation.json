@@ -1,0 +1,151 @@
+{
+  "method": "FFmpeg loudnorm / EBU R128 (mono, dual_mono=false), decoded files; ffprobe; sample and loop seam checks",
+  "target_integrated_lufs": -16.0,
+  "tolerance_lu": 0.15,
+  "maximum_true_peak_dbtp": -1.0,
+  "tools": {
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "numpy": "2.3.5"
+  },
+  "passed": true,
+  "files": [
+    {
+      "path": "jet-flyby.ogg",
+      "codec": "vorbis",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 66150,
+      "decoded_duration_seconds": 1.5,
+      "container_duration_seconds": 1.5,
+      "integrated_lufs": -15.97,
+      "true_peak_dbtp": -7.56,
+      "sha256": "06cc00cd2e75f3b847ee31a0e424a3bfdf484876cc8a860cecbd81e7dee1fe9d",
+      "bytes": 20555,
+      "passed": true,
+      "decoder_trim_samples": 0
+    },
+    {
+      "path": "jet-flyby.mp3",
+      "codec": "mp3",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 66150,
+      "decoded_duration_seconds": 1.5,
+      "container_duration_seconds": 1.541224,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -9.24,
+      "sha256": "fc1656e37c4767a3cba908e5e8f3d105ea5e81858803ac57d6cb03600c94e6cb",
+      "bytes": 37747,
+      "passed": true,
+      "decoder_trim_samples": 0
+    },
+    {
+      "path": "helicopter-rotor-loop.ogg",
+      "codec": "vorbis",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 176400,
+      "decoded_duration_seconds": 4.0,
+      "container_duration_seconds": 4.0,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -8.37,
+      "sha256": "662c644135d0367dcba7d120af73fc4300599a69155bef40e96ee24e8b4df204",
+      "bytes": 65701,
+      "passed": true,
+      "decoder_trim_samples": 0,
+      "loop_seam": {
+        "boundary_step": 0.00901223,
+        "interior_step_p999": 0.1691028,
+        "edge_10ms_rms": [
+          0.1081053763628006,
+          0.11141491681337357
+        ],
+        "passed": true
+      }
+    },
+    {
+      "path": "helicopter-rotor-loop.mp3",
+      "codec": "mp3",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 176400,
+      "decoded_duration_seconds": 4.0,
+      "container_duration_seconds": 4.04898,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -8.72,
+      "sha256": "793021cc0a3c61caf4c1a6467652d4e6c3e671f12ba2e15e830e1f7b7bfee3ed",
+      "bytes": 97945,
+      "passed": true,
+      "decoder_trim_samples": 0,
+      "loop_seam": {
+        "boundary_step": 0.0043831,
+        "interior_step_p999": 0.16934462,
+        "edge_10ms_rms": [
+          0.10645733773708344,
+          0.10801000893115997
+        ],
+        "passed": true
+      }
+    },
+    {
+      "path": "vulcan-metal-hit.ogg",
+      "codec": "vorbis",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 24127,
+      "decoded_duration_seconds": 0.5470975056689342,
+      "container_duration_seconds": 0.55,
+      "integrated_lufs": -16.03,
+      "true_peak_dbtp": -2.55,
+      "sha256": "97ec2365eba81a42d6c0dcc8d7f52c8f7a1f85dfbe48b262a4e105ed673a81c1",
+      "bytes": 8311,
+      "passed": true,
+      "decoder_trim_samples": 128
+    },
+    {
+      "path": "vulcan-metal-hit.mp3",
+      "codec": "mp3",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 24255,
+      "decoded_duration_seconds": 0.55,
+      "container_duration_seconds": 0.600816,
+      "integrated_lufs": -16.03,
+      "true_peak_dbtp": -1.85,
+      "sha256": "226153d3ffab014a579cf5125c881324c5d10129041492e6468d1ab1860153e9",
+      "bytes": 15184,
+      "passed": true,
+      "decoder_trim_samples": 0
+    },
+    {
+      "path": "sea-fall.ogg",
+      "codec": "vorbis",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 88200,
+      "decoded_duration_seconds": 2.0,
+      "container_duration_seconds": 2.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -5.8,
+      "sha256": "73b233336a710f66df80a17e574c743bf56ed9fadd4b00e23808c5c4f88efcb3",
+      "bytes": 27084,
+      "passed": true,
+      "decoder_trim_samples": 0
+    },
+    {
+      "path": "sea-fall.mp3",
+      "codec": "mp3",
+      "sample_rate_hz": 44100,
+      "channels": 1,
+      "decoded_samples": 88200,
+      "decoded_duration_seconds": 2.0,
+      "container_duration_seconds": 2.037551,
+      "integrated_lufs": -15.98,
+      "true_peak_dbtp": -6.8,
+      "sha256": "03796f669ed8033ed9040222835a4b3192252f24122d4c6939f87d57eff56371",
+      "bytes": 49658,
+      "passed": true,
+      "decoder_trim_samples": 0
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>צלילי אוויר לספינות — האזנה</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #eaf3fc; background: #081320; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 20px; background: radial-gradient(ellipse at top right, #19384d, transparent 60%); min-height: 100vh; }
+    main { max-width: 960px; margin: auto; }
+    header { margin-bottom: 28px; }
+    .eyebrow { color: #7ee7d5; font-size: .85rem; letter-spacing: .08em; }
+    h1 { font-size: clamp(2rem, 6vw, 3.3rem); line-height: 1.15; margin: 14px 0; }
+    p { color: #b3c7da; line-height: 1.7; }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; background: #122437; border-radius: 14px; margin-bottom: 22px; }
+    select, button { font: inherit; min-height: 44px; border: 1px solid #527691; border-radius: 8px; background: #102c40; color: #eaf3fc; padding: 8px 15px; cursor: pointer; }
+    button:hover { background: #21506a; }
+    :focus-visible { outline: 3px solid #7ee7d5; outline-offset: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    article { background: #102236; border: 1px solid #29445b; border-radius: 18px; padding: 24px; }
+    .number { color: #7ee7d5; font-variant-numeric: tabular-nums; font-size: .9rem; }
+    h2 { font-size: 1.3rem; margin: 10px 0 8px; }
+    article p { min-height: 55px; margin-top: 8px; }
+    audio { display: block; width: 100%; margin: 20px 0 14px; }
+    a { color: #8fe2ff; text-underline-offset: 4px; }
+    .downloads, footer { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+    .loop-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .note { font-size: .85rem; }
+    #status { min-height: 1.7em; color: #7ee7d5; }
+    footer { border-top: 1px solid #29445b; margin-top: 30px; padding-top: 22px; line-height: 2; }
+    @media (max-width: 640px) { body { padding: 24px 14px; } .grid { grid-template-columns: 1fr; } article { padding: 20px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="eyebrow">האי / ספריית הצלילים</span>
+    <h1>אוויר מעל המים</h1>
+    <p>ארבעה צלילים מקוריים לספינות. מעבר, רוטור, פגיעה ונפילה לים.</p>
+    <p class="note"><bdi>44.1 kHz · Mono · −16 LUFS · CC0</bdi></p>
+  </header>
+  <div class="toolbar">
+    <label for="format">פורמט האזנה</label>
+    <select id="format" dir="ltr"><option value="ogg">OGG · Vorbis</option><option value="mp3">MP3</option></select>
+    <button id="stop-all" type="button">עצירת הכול</button>
+    <span class="note">ההשמעה מתחילה בלחיצה שלך</span>
+  </div>
+  <section class="grid" aria-label="ארבעת הצלילים">
+    <article data-id="jet-flyby">
+      <span class="number">01 / 1.50 שניות</span>
+      <h2 id="jet-title">מעבר מטוס</h2>
+      <p>טורבינה ורעש אוויר מתקרבים, עוברים ויורדים בגובה הצליל עם דופלר.</p>
+      <audio controls preload="metadata" aria-labelledby="jet-title" src="jet-flyby.ogg"></audio>
+      <div class="downloads"><a href="jet-flyby.ogg" download>הורדת OGG</a><a href="jet-flyby.mp3" download>הורדת MP3</a></div>
+    </article>
+    <article data-id="helicopter-rotor-loop">
+      <span class="number">02 / לולאה של 4.00 שניות</span>
+      <h2 id="rotor-title">רוטור מסוק</h2>
+      <p>פעימות להבים עמוקות ורעש מנוע. אפשר להאזין פעם אחת או ברצף.</p>
+      <audio controls preload="metadata" aria-labelledby="rotor-title" src="helicopter-rotor-loop.ogg"></audio>
+      <div class="downloads"><a href="helicopter-rotor-loop.ogg" download>הורדת OGG</a><a href="helicopter-rotor-loop.mp3" download>הורדת MP3</a></div>
+      <div class="loop-controls"><button id="loop-play" type="button" aria-pressed="false">הפעלת לולאה רציפה</button><button id="loop-stop" type="button">עצירת לולאה</button></div>
+    </article>
+    <article data-id="vulcan-metal-hit">
+      <span class="number">03 / 0.55 שניות</span>
+      <h2 id="hit-title">פגיעת וולקן במתכת</h2>
+      <p>מכה חדה יחידה במעטפת מתכת, עם גוף נמוך והדהוד קצר.</p>
+      <audio controls preload="metadata" aria-labelledby="hit-title" src="vulcan-metal-hit.ogg"></audio>
+      <div class="downloads"><a href="vulcan-metal-hit.ogg" download>הורדת OGG</a><a href="vulcan-metal-hit.mp3" download>הורדת MP3</a></div>
+    </article>
+    <article data-id="sea-fall">
+      <span class="number">04 / 2.00 שניות</span>
+      <h2 id="sea-title">נפילה לים</h2>
+      <p>שריקה שיורדת אל המים, חבטה רטובה, נתז ובועות דועכות.</p>
+      <audio controls preload="metadata" aria-labelledby="sea-title" src="sea-fall.ogg"></audio>
+      <div class="downloads"><a href="sea-fall.ogg" download>הורדת OGG</a><a href="sea-fall.mp3" download>הורדת MP3</a></div>
+    </article>
+  </section>
+  <p id="status" role="status" aria-live="polite"></p>
+  <p class="note">הצלילים נוצרו בסינתזה מקורית ומותרים גם לשימוש מסחרי ללא חובת ייחוס. לולאה רציפה דורשת פתיחה דרך שרת מקומי; ההאזנה הרגילה פועלת גם מהדיסק.</p>
+  <footer><a href="manifest.json">מניפסט</a><a href="validation.json">מדידות אודיו</a><a href="browser-validation.json">בדיקת דפדפן</a><a href="LICENSES.md">רישיון ומקורות</a><a href="README.md">הוראות שחזור וחיבור</a></footer>
+</main>
+<script>
+  const players = [...document.querySelectorAll('audio')];
+  const format = document.querySelector('#format');
+  const status = document.querySelector('#status');
+  const loopButton = document.querySelector('#loop-play');
+  let context, loopNode, request = 0;
+  function stopLoop() {
+    request++;
+    if (loopNode) { loopNode.stop(); loopNode.disconnect(); loopNode = null; }
+    loopButton.setAttribute('aria-pressed', 'false');
+  }
+  function stopAll() {
+    stopLoop();
+    players.forEach(player => { player.pause(); player.currentTime = 0; });
+  }
+  players.forEach(player => {
+    player.addEventListener('play', () => {
+      stopLoop();
+      players.filter(other => other !== player).forEach(other => other.pause());
+      status.textContent = '';
+    });
+    player.addEventListener('error', () => { status.textContent = 'לא ניתן לנגן את הקובץ. אפשר לבחור את הפורמט השני או להוריד אותו.'; });
+  });
+  format.addEventListener('change', () => {
+    stopAll();
+    players.forEach(player => {
+      player.src = player.closest('article').dataset.id + '.' + format.value;
+      player.load();
+    });
+    status.textContent = 'פורמט ההאזנה עודכן.';
+  });
+  document.querySelector('#stop-all').addEventListener('click', () => { stopAll(); status.textContent = 'ההשמעה נעצרה.'; });
+  document.querySelector('#loop-stop').addEventListener('click', () => { stopLoop(); status.textContent = 'הלולאה נעצרה.'; });
+  loopButton.addEventListener('click', async () => {
+    stopAll();
+    const current = request;
+    try {
+      context ||= new AudioContext({sampleRate: 44100});
+      await context.resume();
+      status.textContent = 'טוען את הלולאה…';
+      const response = await fetch('helicopter-rotor-loop.' + format.value);
+      if (!response.ok) throw new Error('audio request failed');
+      const buffer = await context.decodeAudioData(await response.arrayBuffer());
+      if (current !== request) return;
+      loopNode = context.createBufferSource();
+      loopNode.buffer = buffer;
+      loopNode.loop = true;
+      loopNode.loopStart = 0;
+      loopNode.loopEnd = 4;
+      loopNode.connect(context.destination);
+      loopNode.start();
+      loopButton.setAttribute('aria-pressed', 'true');
+      status.textContent = 'לולאת הרוטור מתנגנת ברצף.';
+    } catch (error) {
+      if (current === request) status.textContent = 'לא ניתן להפעיל לולאה. יש לפתוח את הדף דרך שרת מקומי או להאזין בנגן הרגיל.';
+    }
+  });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stopAll(); });
+</script>
+</body>
+</html>
