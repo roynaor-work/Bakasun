@@ -9,7 +9,7 @@
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
-import {whistleLike,summarizeFrames,LIVE_PHASES} from '../minigames/audio-guard.mjs';
+import {whistleLike,summarizeFrames,LIVE_PHASES,liveEntries,restartWhistle} from '../minigames/audio-guard.mjs';
 
 const args=process.argv.slice(2),outDir=args.find(a=>!a.startsWith('--'))||'audio-forensics-out';
 const opt=(name,fallback)=>{const hit=args.find(a=>a.startsWith(`--${name}=`));return hit?hit.slice(name.length+3):fallback;};
@@ -23,14 +23,16 @@ await mkdir(outDir,{recursive:true});
  * to re-run the classifier on saved logs after a threshold change. */
 function classify(game,log,seconds){
   const t0s=log.frames[0]?.t??0;if(!log.normalized){for(const f of log.frames)f.t=+(f.t-t0s).toFixed(3);for(const n of log.nodes)if(n.wall!==undefined)n.wall=+(n.wall-t0s).toFixed(3);log.normalized=true;}
-  const segments=whistleLike(log.frames),live=new Set(LIVE_PHASES[game]||[]);
-  for(const s of segments){s.live=s.phases.some(p=>live.has(p));
+  const segments=whistleLike(log.frames),live=new Set(LIVE_PHASES[game]||[]),entries=liveEntries(log.frames,live);
+  for(const s of segments){
     // Sources sounding while the segment sounded: the evidence that names the file.
-    s.sources=log.nodes.filter(n=>n.wall!==undefined&&n.kind!=='filter'&&n.wall<=s.end&&(n.endedAt===undefined?true:(n.wall+(n.endedAt-n.startedAt))>=s.start)).map(n=>n.kind==='oscillator'?`osc ${n.type} ${n.frequency}Hz`:`${n.url}${n.loop?' loop':''}`).filter((v,i,a)=>a.indexOf(v)===i).slice(0,8);}
+    s.sources=log.nodes.filter(n=>n.wall!==undefined&&n.kind!=='filter'&&n.wall<=s.end&&(n.endedAt===undefined?true:(n.wall+(n.endedAt-n.startedAt))>=s.start)).map(n=>n.kind==='oscillator'?`osc ${n.type} ${n.frequency}Hz`:`${n.url}${n.loop?' loop':''}`).filter((v,i,a)=>a.indexOf(v)===i).slice(0,8);
+    // The referee's restart whistle (kickoff, after a goal or half time) sounds as the phase flips to playing: allowed by the rules, not live.
+    s.restart=restartWhistle(s,entries);s.live=!s.restart&&s.phases.some(p=>live.has(p));}
   const byUrl={};for(const n of log.nodes){if(n.kind==='filter'||n.wall===undefined)continue;const k=n.kind==='oscillator'?`osc:${n.type}`:n.url||'?';const e=byUrl[k]||(byUrl[k]={count:0,live:0,loop:0,phases:{}});e.count++;if(n.loop)e.loop++;if(live.has(n.ph))e.live++;e.phases[n.ph]=(e.phases[n.ph]||0)+1;}
   const oscillators=log.nodes.filter(n=>n.kind==='oscillator'&&n.wall!==undefined).map(n=>({type:n.type,frequency:n.frequency,automation:n.automation.slice(0,6),path:n.path,ph:n.ph}));
   const filters=log.nodes.filter(n=>n.kind==='filter').map(n=>({type:n.type,frequency:n.frequency,Q:n.Q,automation:n.automation.slice(0,4)}));
-  const result={game,seconds,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),liveHums:segments.filter(s=>s.live&&s.kind==='hum'),errors:log.errors,timeline:log.timeline};
+  const result={game,seconds,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,restartWhistles:segments.filter(s=>s.restart).length,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),liveHums:segments.filter(s=>s.live&&s.kind==='hum'),errors:log.errors,timeline:log.timeline};
   return {result,file:{...result,oscillatorDetail:oscillators.slice(0,40),filterDetail:filters.slice(0,40),decoded:log.decoded,nodes:log.nodes,frames:log.frames,normalized:true}};
 }
 const FROM=opt('from','');

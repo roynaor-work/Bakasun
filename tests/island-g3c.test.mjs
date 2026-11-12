@@ -99,7 +99,8 @@ test('G3c steal success, failure, reach and cooldown are explicit',()=>{
 });
 test('G3c slide lunges, succeeds on contact and misses recover on grass before moving',()=>{
  const hit=defend(),s=hit.getState();hit.update(dt,{kickHeld:true,moveX:1});assert.ok(s.players[0].slideTime>0);assert.equal(s.ball.owner,0);near(s.players[0].slideCooldown,c.slide.cooldownSeconds);
- const miss=defend(()=>.99),m=miss.getState();advance(miss,.36,{kickHeld:true,moveX:1});assert.ok(m.players[0].recover>0);const x=m.players[0].x;advance(miss,.2,{moveX:1});near(m.players[0].x,x);assert.ok(m.players[0].slideCooldown>0);
+ // The old match for the miss: under rules v1 (default) a lost slide that touches the carrier is a foul, and the stoppage repositions him.
+ const miss=defend(()=>.99,{rulesVersion:'off'}),m=miss.getState();advance(miss,.36,{kickHeld:true,moveX:1});assert.ok(m.players[0].recover>0);const x=m.players[0].x;advance(miss,.2,{moveX:1});near(m.players[0].x,x);assert.ok(m.players[0].slideCooldown>0);
 });
 test('G3c seeded defensive sequences are reproducible without unseeded randomness',()=>{
  function sequence(seed){const g=defend(undefined,{seed});for(let i=0;i<100;i++)g.update(dt,{passPressed:i%4===0,kickHeld:i%7<2,moveX:1});return g.snapshot();}

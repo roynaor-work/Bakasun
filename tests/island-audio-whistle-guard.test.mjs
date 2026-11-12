@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {whistleLike,summarizeFrames,liveCueProblems,LIVE_CUES,LIVE_PHASES,WHISTLE_ASSETS} from '../workout/island/minigames/audio-guard.mjs';
+import {whistleLike,summarizeFrames,liveCueProblems,LIVE_CUES,LIVE_PHASES,WHISTLE_ASSETS,liveEntries,restartWhistle} from '../workout/island/minigames/audio-guard.mjs';
 
 const spectra=JSON.parse(await readFile(new URL('../workout/island/verification/sports-deep-fable/audio-forensics/sample-spectra.json',import.meta.url),'utf8')).samples;
 const mix=JSON.parse(await readFile(new URL('../workout/island/design/audio/mix.json',import.meta.url),'utf8'));
@@ -62,4 +62,17 @@ test('mix.json: every soccer and basketball event sample is short; only the ambi
   // energy above 2 kHz, the real tennis bed under 1%. The hoops bed is already off;
   // the soccer bed is the patch plan. This pins the measurement, not the fix.
   assert.ok(spectra['soccer/ambience-loop'].band2to5k>.2);assert.ok(spectra['g4e/stadium-bed'].band2to5k<.02);
+});
+
+test('the referee whistle at kickoff and at the restart after a goal is not a live-play finding; the same whistle 5 s into play is', () => {
+  const live=new Set(LIVE_PHASES.soccer),frames=[];
+  for(let i=0;i<300;i++){const t=+(i/20).toFixed(2);frames.push({t,ph:t<8?'playing':t<10.5?'goal':'playing'});}
+  assert.deepEqual(liveEntries(frames,live),[0,10.5]);
+  const whistle=(start,sources)=>({kind:'tone',start,end:start+.6,hz:2842,phases:['playing'],sources});
+  assert.ok(restartWhistle(whistle(.06,['design/audio/soccer/whistle.ogg']),[0,10.5]),'kickoff');
+  assert.ok(restartWhistle(whistle(11.1,['design/audio/soccer/whistle.ogg']),[0,10.5]),'restart after a goal');
+  assert.ok(restartWhistle(whistle(10.3,['design/audio/soccer/whistle.ogg']),[0,10.5]),'the probe saw the flip a frame late');
+  assert.equal(restartWhistle(whistle(15,['design/audio/soccer/whistle.ogg']),[0,10.5]),false,'a whistle during play');
+  assert.equal(restartWhistle(whistle(.1,['design/audio/basketball/shoes.ogg']),[0,10.5]),false,'a squeak at kickoff is still a finding');
+  assert.equal(restartWhistle(whistle(.1,[]),[0,10.5]),false);
 });

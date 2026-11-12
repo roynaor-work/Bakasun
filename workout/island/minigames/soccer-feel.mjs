@@ -17,8 +17,11 @@ export const SOCCER_FEEL_DEFAULTS=Object.freeze({
   /** Seconds a rival pass is in flight before the defending team re-plans around it (after this the presser runs to the intercept point and a
    * second defender marks the receiver), per difficulty: a child-level rival reacts like a child. */
   reaction:{easy:.24,normal:.18,hard:.12},
-  /** The child's AI team-mates: null = the difficulty's reaction; a number slows them down so the rival keeps its attack (tuned by the sim). */
-  teamReaction:null,
+  /** The child's AI team-mates: null = the difficulty's reaction; a number slows them down so the rival keeps its attack. 0.3 s: at the hard
+   * rival's 0.12 s the mates cut every stage 1 build-up (G3h cohort, seed 8: 28 passes, 0 forward metres); 0.28 and below fail a seed, 0.3 to
+   * 0.4 keep all 180 rival matches threatening. Slower also means fewer rival crosses at stage 8 (20 seeds: 43 at 0.18, 28 at 0.3, 12 at 0.35;
+   * rival shots and goals unchanged), so 0.3 is the value that keeps both contracts. */
+  teamReaction:.3,
   /** Whether the child's team also screens the pass lane (false keeps the rival's attack as tuned; the rival always screens). */
   laneTeam0:true,
   /** Auto-switch dwell right after the ball changes team (seconds); the normal dwell (autoSwitchSeconds, 0.5) returns after turnoverWindow. */

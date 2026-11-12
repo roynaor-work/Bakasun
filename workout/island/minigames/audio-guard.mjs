@@ -52,6 +52,21 @@ export function whistleLike(frames,{minSeconds=.6,glideSeconds=.25,humSeconds=2,
   closeHum();return segments.sort((a,b)=>a.start-b.start);
 }
 
+/** Times (frame t) at which the phase enters a live-play phase from a stoppage or from nothing: kickoff, the restart after a goal or
+ * half time, a tip-off. The frame probe samples 20 times a second, so an entry is known to within 0.05 s. */
+export function liveEntries(frames,live){
+  const out=[];let was=false;
+  for(const f of frames){const now=!!f.ph&&live.has(f.ph);if(now&&!was)out.push(f.t);was=now;}
+  return out;
+}
+/** A referee whistle that starts within `grace` seconds after play resumes (or `before` seconds before the probe saw the phase flip) is the
+ * restart whistle the rules allow, not a whistle during play. Only segments whose sources include a whistle asset qualify: a squeak or a
+ * synthetic line at kickoff is still a finding. */
+export function restartWhistle(segment,entries,{grace=1.5,before=.3}={}){
+  if(!segment.sources?.some(src=>/whistle/i.test(src)))return false;
+  return entries.some(t=>segment.start>=t-before&&segment.start<=t+grace);
+}
+
 /** Energy summary per phase: mean share of 2-5 kHz and 1-2 kHz, frames, peak level. */
 export function summarizeFrames(frames){
   const by={};

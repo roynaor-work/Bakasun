@@ -40,7 +40,8 @@ export function penaltySpot(teamId,state,c){
   return {x:d*(c.pitch.length/2-c.pitch.penaltySpot),z:0};
 }
 
-/** Through ball: the receiver is already running at goal (forward speed above passing.throughSpeed)
+/** Through ball: the receiver is already running at goal (forward speed above passing.throughSpeed, 3.5 m/s = a run; at 2 a 2 m/s jogger got
+ * a ball led 1.5 m past the assisted lead and turned back for it)
  * and no defender stands within passing.throughLaneRadius of the ball's path or of his own run, so
  * the pass goes passing.throughLeadSeconds ahead of him instead of the ordinary lead. Null = normal pass. */
 export function throughBallPoint(ball,mate,players,c,d){

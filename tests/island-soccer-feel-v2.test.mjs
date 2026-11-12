@@ -154,7 +154,8 @@ test('tactics: a rival pass in flight makes the presser run to the intercept poi
   for(const p of defenders)p.x=-2+p.id;
   const dutiesAt=()=>defenders.map(p=>game.tacticalTarget(p).duty);
   const first=dutiesAt();assert.ok(!first.includes('intercept'),'before the reaction time: '+first.join(','));
-  s.elapsed+=config.feel.reaction.normal+.05;
+  // The child's team-mates react at feel.teamReaction (0.35 s, slower than the rival's 0.18 so the rival can still build; G3h cohort).
+  s.elapsed+=(Number.isFinite(config.feel.teamReaction)?config.feel.teamReaction:config.feel.reaction.normal)+.05;
   const after=dutiesAt();assert.ok(after.includes('intercept'),'after the reaction time: '+after.join(','));
   assert.ok(after.includes('mark'),'the receiver is marked: '+after.join(','));
   // The child's carrier with the ball: the rival's second defender screens the lane.
