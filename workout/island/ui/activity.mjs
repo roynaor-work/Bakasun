@@ -292,7 +292,7 @@ export class ActivityInterface {
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
     const eventBonuses=eventId?this.activity.bonuses():{};
     if(rescue.lite||isLowQuality())context.lite=true;
-    if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1} · ${next.track}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
+    if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1}${next.total?` מתוך ${next.total}`:''} · ${next.track}${next.tags?.length?' · '+next.tags.join(' · '):''}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
@@ -385,7 +385,7 @@ export class ActivityInterface {
       const titles={season:'ליגת המירוצים · עונה וטבלה',shop:'ליגת המירוצים · שדרוג הרכב',result:'ליגת המירוצים · תוצאת המרוץ'};
       const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
       const again={engine:this.engine,...this.leagueActions()};
-      const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result,refresh:()=>this.racingLeagueScreen('result',result)}):m.seasonBody(again);
+      const body=kind==='shop'?m.shopBody({...again,refresh:()=>this.racingLeagueScreen('shop')}):kind==='result'?m.resultBody({...again,result}):m.seasonBody({...again,refresh:()=>this.racingLeagueScreen('season')});
       dialog.append(body,button('חזרה לליגה','racing-league-back',()=>this.stages('islandRacing'),'adventure-back'));
       if(kind==='result')this.offerUpgrade('islandRacing',result,host=>{if(!body.isConnected)return;const actions=body.querySelector('.rl-actions');if(actions)actions.before(host);else body.append(host);});
     }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));

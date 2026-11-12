@@ -15,8 +15,8 @@ function launch(config={},equipment={}){
   }
   race.dispose();return out;
 }
-test('gearbox: 0 to 98% of top speed takes 20-30 s on a straight, seven gears, a shift between each',()=>{
-  const r=launch();
+test('gearbox: 0 to 98% of top speed takes 20-30 s on a straight, seven gears, a shift between each (topCap:false: the pure rise)',()=>{
+  const r=launch({topCap:false});
   assert.ok(r.t98>=20&&r.t98<=30,'0-top '+r.t98);assert.ok(r.t100>=6&&r.t100<=10,'0-100 km/h '+r.t100);
   assert.deepEqual([...r.gears].sort(),[1,2,3,4,5,6,7]);assert.ok(r.shifts>=6);assert.ok(r.rpmMin>=0&&r.rpmMax<=1);
 });
@@ -75,4 +75,27 @@ test('top speed is alive: over 10 s at the rev limit the pitch hunts, drops at t
   assert.ok(range(off.pitches)<2.5,'static without it: '+range(off.pitches).toFixed(2)+' Hz');
   assert.ok(range(on.levels)>range(off.levels)*3+1e-6,'level varies (limiter cut + rattle)');
   assert.ok(new Set(on.pitches.map(v=>Math.round(v*4))).size>25,'many distinct pitches over 10 s');
+});
+
+/** racing-deep-m3: in gear 7 the throttle alone pulls the car to about 96.5% of its maximum and keeps creeping up; the last few percent (the "stuck at the
+ * top" note) come only with the slipstream, a boost pad or the ERS push. config.topCap=false (?racingTopCap=0) restores the old 100% on throttle. */
+function pursuit(config,seconds,input={},each=()=>{}){
+  const race=createRacing({stage:1,seed:3,config:{countdown:0,walls:false,scrub:false,stage:{opponents:0,grid:1},...config}}),tr=race.track,p=race.state.player,speeds=[],plain=[],shifts=[];let g=p.gear,lastBoost=-999;
+  for(let n=0;n<60*seconds;n++){const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),a=Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading,err=Math.atan2(Math.sin(a),Math.cos(a));
+    each(p);race.step(1/60,{steer:Math.max(-1,Math.min(1,err*1.7)),autoAccelerate:true,...input});speeds.push(p.speed);if(p.boosting)lastBoost=n;plain.push(n-lastBoost<180?0:p.speed);if(p.gear!==g){shifts.push(n/60);g=p.gear;}}
+  const rpm=p.rpm;race.dispose();return {top:race.stage.playerSpeed,speeds,plain,shifts,rpm};  // plain: speed outside boost pads / nitro (0 while boosting)
+}
+test('gear 7 top cap: throttle alone settles under 97% of the maximum and still accelerates there; nitro reaches the full top; topCap:false restores 100%',()=>{
+  const capped=pursuit({},50),ratio=Math.max(...capped.plain)/capped.top;
+  assert.ok(ratio>.93&&ratio<.97,'throttle alone settles just under the top: '+ratio.toFixed(3));
+  assert.ok(capped.speeds[60*30]>capped.speeds[60*20]+.3,'still creeping up between 20 s and 30 s: '+capped.speeds[60*20].toFixed(2)+' -> '+capped.speeds[60*30].toFixed(2));
+  assert.ok(capped.speeds[60*21]/capped.top>=.90,'the rise Roy liked is unchanged: 90% by 21 s');
+  const boosted=pursuit({},50,{nitro:true},p=>{p.nitro=100;});assert.ok(Math.max(...boosted.speeds)>capped.top*1.1,'the ERS push goes well past the top: '+Math.max(...boosted.speeds).toFixed(1));
+  const old=pursuit({topCap:false},50);assert.ok(Math.max(...old.plain)/old.top>=.98,'topCap:false reaches 98%+: '+(Math.max(...old.plain)/old.top).toFixed(3));
+  assert.ok(capped.rpm>.9,'rpm near the limiter at the natural top (the top-speed sound variation plays there): '+capped.rpm.toFixed(2));
+});
+test('at high revs the box reaches the shift point a little sooner (quicker upshifts at the top of a gear); revShift:false keeps the old pull',()=>{
+  const quick=pursuit({},30).shifts,slow=pursuit({revShift:false},30).shifts;
+  assert.equal(quick.length,6);assert.equal(slow.length,6);
+  assert.ok(quick[5]<slow[5],'the sixth upshift comes sooner: '+quick[5]+' < '+slow[5]);assert.ok(slow[5]-quick[5]<2.5,'but only a little');
 });

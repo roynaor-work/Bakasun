@@ -20,7 +20,7 @@ export const TRACK_ICON=Object.freeze({
   streetSlam:{shoes:'speed',touch:'accuracy',spring:'jump'},
   alpineRush:{wax:'speed',tank:'upgrade'},
   catchCriminal:{net:'throw-power',scope:'accuracy'}});
-const LEAGUE_ICON=Object.freeze({engine:'engine',tires:'tires',brakes:'brakes',aero:'aerodynamics',steering:'speed'});
+const LEAGUE_ICON=Object.freeze({engine:'engine',tires:'tires',brakes:'brakes',aero:'aerodynamics',steering:'speed',ers:'nitro'});
 
 const int=v=>Number.isSafeInteger(v)&&v>=0;
 /** Island money drifts in fractions (income ticks); the child sees and pays whole coins. */
@@ -59,14 +59,17 @@ export function leagueCandidates(league){
 
 /** Remembers, for this visit only, what the child put off. Nothing here is saved.
  * dismissed: stage+upgrade pairs. quiet: after "later" the game rests for one stage, so a child who is not interested is not asked every time. */
-export function createOfferMemory(){return {dismissed:new Set(),seen:new Set(),count:{},quiet:{}};}
+export function createOfferMemory(){return {dismissed:new Set(),seen:new Set(),count:{},quiet:{},done:new Set()};}
 export const dismiss=(memory,key,id,gameId=key.split(':')[0])=>{memory.dismissed.add(key+'|'+id);memory.quiet[gameId]=(memory.count[gameId]||0)+1;};
+/** racing-deep-m4: after a purchase the stage is settled, so a re-rendered result screen (next season, refresh) never shows a second card for it. */
+export const settle=(memory,key)=>{(memory.done??=new Set()).add(key);};
 export const isDismissed=(memory,key,id)=>memory.dismissed.has(key+'|'+id);
 export const affordable=c=>Boolean(c)&&!c.locked&&Number.isSafeInteger(c.price)&&c.price>0&&int(c.balance)&&c.balance>=c.price;
 
 /** The one offer for a finished stage, or null. `candidates` may include other games; only the played one counts.
  * Counts the stage once (a repeat call for the same stage key does not advance the rest period). */
 export function pickOffer({gameId,key,candidates,memory=createOfferMemory()}){
+  if(memory.done?.has(key))return null;
   if(!memory.seen.has(key)){memory.seen.add(key);memory.count[gameId]=(memory.count[gameId]||0)+1;}
   if(memory.count[gameId]===memory.quiet[gameId])return null;
   const list=(candidates||[]).filter(c=>c&&c.gameId===gameId&&affordable(c)&&!isDismissed(memory,key,c.id));

@@ -11,7 +11,7 @@ import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-10';
 import {prepareReadyPlan,readyPlots as listReadyPlots,readyPlotForType as findReadyType,readyPlotAt as findReadyCell} from './ready-plots.mjs?v=island-v2-20261107-10';
 import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mjs?v=island-v2-20261107-10';
 import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-10';
-import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
+import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
 import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-10';
 import { createRegistry } from './registry.mjs?v=island-v2-20261107-10';
 import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-10';
@@ -399,6 +399,9 @@ export function createEngine(data, options = {}) {
     next:()=>leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null,
     buy:name=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-upgrade');return r;})(leagueBuy(state.islandRacingLeague,name))),
     nextSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-season');return r;})(leagueNext(state.islandRacingLeague))),
+    // racing-deep-m6: replay a season that ended below the gate; league setting "short races" (one lap less)
+    restartSeason:()=>leagueBusy()||((r=>{if(r.ok)changed('racing-league-restart');return r;})(leagueRestart(state.islandRacingLeague))),
+    setShortRaces:on=>leagueBusy()||((r=>{changed('racing-league-settings');return r;})(leagueShort(state.islandRacingLeague,on))),
   };
   engine.setTennisDifficulty=difficulty=>{if(activeMinigame)return {ok:false,reason:'reason.gameBusy'};if(!Object.hasOwn(config.minigames.tennis.difficulties,difficulty))return {ok:false,reason:'reason.invalid'};state.tennisDifficulty=difficulty;changed('tennis-difficulty');return {ok:true};};
   engine.startMinigame = (id, context = {}) => {

@@ -42,3 +42,14 @@ test('sample one-shots start with an attack ramp and never stack gearbox sounds 
   assert.equal(sources.length-before,1,'one gearbox sound per 0.45 s');assert.equal(ramps.length,1);assert.ok(ramps[0].v<=.04&&ramps[0].t>1,'quiet and ramped: '+JSON.stringify(ramps[0]));
   ctx.currentTime=1.6;layer.shiftDown();assert.equal(sources.length-before,2);
 });
+
+/** racing-deep-m3: the meter reports a fill once (event ersFull) so the HUD can say "ERS מלא" and buzz once; the next fill needs a spend first. */
+test('ERS fill cue: one ersFull event when the meter reaches the cap, none again until it drops',()=>{
+  const race=onRoad(),p=race.state.player;p.nitro=96;const seen=[];
+  for(let n=0;n<180;n++){race.step(1/60,{autoAccelerate:true,steer:0,brake:true});seen.push(...race.state.events.filter(e=>e.type==='ersFull'));p.speed=34;}
+  assert.equal(seen.length,1,'one fill event');assert.equal(seen[0].car,'player');
+  p.nitro=40;for(let n=0;n<60;n++){race.step(1/60,{autoAccelerate:true,steer:0,brake:true});seen.push(...race.state.events.filter(e=>e.type==='ersFull'));p.speed=34;}
+  assert.equal(seen.length,1,'still one while the meter is below the cap');
+  p.nitro=99;for(let n=0;n<60;n++){race.step(1/60,{autoAccelerate:true,steer:0,brake:true});seen.push(...race.state.events.filter(e=>e.type==='ersFull'));p.speed=34;}
+  assert.equal(seen.length,2,'a second fill after a spend');
+});
