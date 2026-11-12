@@ -1,0 +1,24 @@
+{
+  "license": "CC0-1.0",
+  "sourceHe": "השוואת בתים ישירה לקומיט הבסיס והרצת הבדיקה הקיימת ללא שינוי",
+  "baseCommit": "34c9dee36497f0a242975c12004a3450259ddf03",
+  "command": "node --test tests/island-perf-v16.test.mjs",
+  "testResult": {
+    "tests": 5,
+    "pass": 4,
+    "fail": 1,
+    "assertion": "iOS gives no facts: not assumed weak; actual low, expected mid"
+  },
+  "files": [
+    {
+      "path": "tests/island-perf-v16.test.mjs",
+      "identicalToBase": true,
+      "sha256": "2e0bdebcd9fcda5ca728417b1589ff5bd324d9bb0841cb7c0a5bdc48ed78f862"
+    },
+    {
+      "path": "workout/island/ui/device-tier.mjs",
+      "identicalToBase": true,
+      "sha256": "aa2d2ed5628a6f7d5edbec38d66bf155124b6082536a4cc7c53675ee1fe773ab"
+    }
+  ]
+}

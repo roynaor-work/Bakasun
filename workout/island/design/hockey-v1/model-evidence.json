@@ -1,0 +1,296 @@
+{
+  "license": "CC0-1.0",
+  "source": {
+    "path": "workout/island/assets/hoops-tall/guard.glb",
+    "sha256": "2ad0d1d29cbbfc600b7cb21b77df6d98adc0beb41eba8278cf44079cab1315da",
+    "gitBlobSha": "814f4d93c33a31570b6fc7deafd8a78c4d94754b",
+    "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa/workout/island/design/hoops-tall-v1/runtime/guard.glb",
+    "licenseUrl": "https://github.com/roynaor-work/Bakasun/blob/cfd4215c314fb673a6585f7a482ac4fb5ea3cbaa/workout/island/design/hoops-tall-v1/LICENSES.md",
+    "description": "ליבת אדם ועיניים CC0 מתוך hoops-tall; בגדים, קסדות, מחליקיים, מקל וציוד שוער חדשים ומקוריים"
+  },
+  "models": [
+    {
+      "file": "models/skater.glb",
+      "bytes": 1015100,
+      "sha256": "536d5d06fe0f7328754d4d011ca190b60b81d916c90705dbe3b756e01a6f3756",
+      "triangles": 5095,
+      "vertices": 2906,
+      "boundsMeters": {
+        "min": [
+          -0.32,
+          0.0,
+          -0.14200000000000002
+        ],
+        "max": [
+          0.32,
+          1.85,
+          0.20600000000000002
+        ]
+      },
+      "teamRegions": {
+        "uniform_primary": {
+          "primitiveIndex": 2,
+          "vertexCount": 744
+        },
+        "uniform_trim": {
+          "primitiveIndex": 3,
+          "vertexCount": 456
+        },
+        "uniform_secondary": {
+          "primitiveIndex": 4,
+          "vertexCount": 338
+        }
+      },
+      "skinJoints": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ]
+    },
+    {
+      "file": "models/goalie.glb",
+      "bytes": 1076208,
+      "sha256": "a32b93785d015395b65f7c9f1a6954822c85e16d5a2143f0782091af632c753a",
+      "triangles": 6211,
+      "vertices": 3560,
+      "boundsMeters": {
+        "min": [
+          -0.32,
+          0.0,
+          -0.14200000000000002
+        ],
+        "max": [
+          0.327,
+          1.85,
+          0.20600000000000002
+        ]
+      },
+      "teamRegions": {
+        "uniform_primary": {
+          "primitiveIndex": 2,
+          "vertexCount": 798
+        },
+        "uniform_trim": {
+          "primitiveIndex": 3,
+          "vertexCount": 672
+        },
+        "uniform_secondary": {
+          "primitiveIndex": 4,
+          "vertexCount": 438
+        }
+      },
+      "skinJoints": [
+        "Root",
+        "Hips",
+        "Spine",
+        "Chest",
+        "Neck",
+        "Head",
+        "LeftArm",
+        "LeftForeArm",
+        "LeftHand",
+        "RightArm",
+        "RightForeArm",
+        "RightHand",
+        "LeftUpLeg",
+        "LeftLeg",
+        "LeftFoot",
+        "RightUpLeg",
+        "RightLeg",
+        "RightFoot"
+      ]
+    },
+    {
+      "file": "models/stick.glb",
+      "bytes": 19236,
+      "sha256": "9ce0db0e179ff47f88b70c565caecb123a48fc64757b81494eade2015a747c2c",
+      "triangles": 368,
+      "vertices": 214,
+      "boundsMeters": {
+        "min": [
+          -0.016,
+          -1.2995,
+          -0.0135
+        ],
+        "max": [
+          0.016,
+          0.17999999999999994,
+          0.3285
+        ]
+      },
+      "teamRegions": {
+        "uniform_secondary": {
+          "primitiveIndex": 0,
+          "vertexCount": 34
+        },
+        "uniform_trim": {
+          "primitiveIndex": 2,
+          "vertexCount": 162
+        }
+      },
+      "skinJoints": []
+    }
+  ],
+  "rig": {
+    "names": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "parents": [
+      null,
+      0,
+      1,
+      2,
+      3,
+      4,
+      3,
+      6,
+      7,
+      3,
+      9,
+      10,
+      1,
+      12,
+      13,
+      1,
+      15,
+      16
+    ],
+    "restLocalMeters": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0.86,
+        0
+      ],
+      [
+        0,
+        0.2,
+        0
+      ],
+      [
+        0,
+        0.18,
+        0
+      ],
+      [
+        0,
+        0.1,
+        0
+      ],
+      [
+        0,
+        0.13,
+        0
+      ],
+      [
+        0.16,
+        0.06,
+        0
+      ],
+      [
+        0,
+        -0.27,
+        0
+      ],
+      [
+        0,
+        -0.24,
+        0
+      ],
+      [
+        -0.16,
+        0.06,
+        0
+      ],
+      [
+        0,
+        -0.27,
+        0
+      ],
+      [
+        0,
+        -0.24,
+        0
+      ],
+      [
+        0.1,
+        0,
+        0
+      ],
+      [
+        0,
+        -0.41,
+        0
+      ],
+      [
+        0,
+        -0.37,
+        0
+      ],
+      [
+        -0.1,
+        0,
+        0
+      ],
+      [
+        0,
+        -0.41,
+        0
+      ],
+      [
+        0,
+        -0.37,
+        0
+      ]
+    ],
+    "skinJoints": 18,
+    "restRotations": "identity",
+    "bindPose": "exact canonical18",
+    "heightIncludesHelmetMeters": 1.85,
+    "bladeContactLocalMeters": [
+      0,
+      -0.08,
+      0
+    ]
+  },
+  "limitations": [
+    "מקור האנימציה אינו מצריך עצמות אצבעות או פנים; הכפפות נעות עם עצמות כף היד",
+    "הגובה נמדד מהלהב עד כתר הקסדה; מידות הגאומטריה מותאמות לשלד הקנוני ואינן משנות את מנוחת העצמות"
+  ]
+}

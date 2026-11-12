@@ -1,0 +1,19 @@
+✔ the three motion libraries and the game rig share one canonical bone list and rest pose (12.783482ms)
+✔ the standard is a measurement, not a guess: the soccer reference gaits pass it, the shipped basketball gaits fail it (133.892556ms)
+✔ unified basketball gaits and idles pass the standard, every planned clip (198.502542ms)
+✔ actions keep their authored arms: shots, passes, blocks, defence and celebrations are not touched, and legs never change (128.92233ms)
+✔ the hand that holds the ball stays with the ball (the trunk lean moves it by under 4.5 cm); only the other arm takes the donor swing (120.304381ms)
+✔ donor file: valid, soccer sources, one entry per gait, rig matches (13.300035ms)
+✔ edit primitives: capAbduction brings the arms to the cap and never pushes them out; setLean only adds; applyDonor aligns the phase (106.000024ms)
+✔ heading: a runner runs where he is going, a defender and a shooter keep the simulation face, a standing player turns to the face, no flicker (4.108428ms)
+✔ sideways on the real engine: AI against AI, the share of moving player ticks whose body faces away from the travel direction by over 45 degrees falls from over half to under 8 percent (1657.145941ms)
+✔ flags and roles: ?athletes=0 switches the layer off; basketball is unified, soccer is the reference, hockey lists what it still needs (11.000988ms)
+✔ wiring: the basketball loader applies the layer behind the flag and falls back, the avatar uses the heading, the view reads the visible face for the ball (0.966044ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3043.46187

@@ -1,0 +1,34 @@
+✖ device tier: ?quality override, facts and frame-rate verdict (6.125422ms)
+✔ fps probe waits while a game is busy and judges only city frames (0.844712ms)
+✔ download gate: no file starts while a game runs, files resume after, concurrency 1 keeps order (94.23513ms)
+✔ rescue: every island game has the stuck button; a session without async work is ready (27.895953ms)
+✔ heavy features have off switches and a weak-device path (8.592437ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 343.354183
+
+✖ failing tests:
+
+test at tests/island-perf-v16.test.mjs:8:1
+✖ device tier: ?quality override, facts and frame-rate verdict (6.125422ms)
+  AssertionError [ERR_ASSERTION]: iOS gives no facts: not assumed weak
+
+  'low' !== 'mid'
+
+      at TestContext.<anonymous> (file:///workspace/Bakasun/tests/island-perf-v16.test.mjs:17:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'low',
+    expected: 'mid',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

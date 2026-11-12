@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "sourceHe": "בדיקת מקורות קוד כלי המדידה בענף PR 371, והמתאמים המקוריים של חבילת ההוקי",
+  "tool": {
+    "repository": "roynaor-work/Bakasun",
+    "pullRequest": 371,
+    "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "path": "workout/island/design/motion-qa-v1",
+    "files": [
+      {
+        "path": "run.mjs",
+        "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/run.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "metrics.mjs",
+        "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/metrics.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "sources.mjs",
+        "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sources.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "sources.json",
+        "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sources.json",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "glb.mjs",
+        "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/glb.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "report.mjs",
+        "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/report.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "sheets.mjs",
+        "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sheets.mjs",
+        "license": "CC0-1.0"
+      },
+      {
+        "path": "licenses.mjs",
+        "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+        "url": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/licenses.mjs",
+        "license": "CC0-1.0"
+      }
+    ]
+  },
+  "findingsHe": [
+    "כלי motion-qa-v1 אינו קיים בקומיט הבסיס 34c9dee36497f0a242975c12004a3450259ddf03 של ענף unified-athletes-v1.",
+    "run.mjs המקורי מקבל מזהי ספריות נעולות מתוך SOURCES ואינו מקבל קובץ קליפים חדש. מתאם טעינה מחליף רק את sources.mjs בעת הרצה מבודדת; run.mjs, metrics.mjs וספי המדידה נשארים זהים למקור.",
+    "footSliding מחשב כל תזוזה אופקית בחלון מגע כהחלקה של סוליה. השדות contact ו-allowSlide ונקודות מסלול אינם משנים מדד זה.",
+    "bodySliding מניח שמהירות הגוף שווה למהירות סריקת רגל תמיכה לאחור. הנחה זו אינה מתארת גלישה חופשית על להב.",
+    "מדדי הלהב הנוספים מפורטים בנפרד ואינם מחליפים או מתקנים את ציון התחושה הגולמי.",
+    "measure.mjs המקורי בענף מודד רק ספריות כדורגל וכדורסל קבועות. מדידת ההוקי משתמשת ישירות ב-gaitMetrics/checkGait/checkStand מאותם athletes-core.mjs, בלי שינוי של התקן.",
+    "תוצרי ה-HTML של כלי QA אינם חלק מהמסירה כי נתיבי התלויות שלהם שייכים לתיקיית הכלי המקורי. כל קובצי המדידה JSON נשמרים ללא שינוי. גיליונות SVG נשמרים עם תרגום תוויות תצוגה בלבד. preview.html בתיקיית ההוקי מציג את הדגמים המלאים.",
+    "תוויות התצוגה בגיליונות SVG תורגמו לעברית בלבד אחרי הרצת המקור. הגאומטריה, זמני הדגימה וה-JSON המקורי נשארו ללא שינוי. svg-localization.json כולל SHA-256 לפני ואחרי התרגום לכל גיליון."
+  ],
+  "reproduce": [
+    "node workout/island/design/hockey-v1/source/qa-adapter-run.mjs"
+  ]
+}

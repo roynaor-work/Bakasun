@@ -1,0 +1,1633 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "source": "source/build-manifest.mjs",
+  "baseCommit": "34c9dee36497f0a242975c12004a3450259ddf03",
+  "directory": "workout/island/design/hockey-v1",
+  "rig": "canonical18",
+  "fps": 30,
+  "language": "he",
+  "minimumAge": 7,
+  "acceptance": {
+    "readyForIntegration": false,
+    "structuralChecksPass": true,
+    "gltfChecksPass": true,
+    "meshFloorChecksPass": true,
+    "browserErrors": [],
+    "feelScoreMinimumRequired": 88,
+    "measuredMinimum": 63.5,
+    "rawFailures": [
+      {
+        "id": "skate_push_slow",
+        "score": 68.7
+      },
+      {
+        "id": "skate_push_medium",
+        "score": 67.6
+      },
+      {
+        "id": "skate_push_fast",
+        "score": 66.2
+      },
+      {
+        "id": "skate_glide",
+        "score": 67.9
+      },
+      {
+        "id": "skate_crossover_left",
+        "score": 65.6
+      },
+      {
+        "id": "skate_crossover_right",
+        "score": 65.6
+      },
+      {
+        "id": "skate_stop_left",
+        "score": 63.9
+      },
+      {
+        "id": "skate_stop_right",
+        "score": 64.3
+      },
+      {
+        "id": "skate_turn_45",
+        "score": 66.8
+      },
+      {
+        "id": "skate_turn_90",
+        "score": 64.8
+      },
+      {
+        "id": "skate_turn_180",
+        "score": 63.5
+      },
+      {
+        "id": "skate_backward",
+        "score": 68.2
+      },
+      {
+        "id": "goalie_slide_left",
+        "score": 67.6
+      },
+      {
+        "id": "goalie_slide_right",
+        "score": 67.6
+      },
+      {
+        "id": "celebrate_3",
+        "score": 72.1
+      }
+    ],
+    "athleteFailures": []
+  },
+  "checksumConventionHe": "כל הקבצים למעט המניפסט עצמו חתומים כאן ב־SHA-256 של הבתים המלאים. חתימת המניפסט עצמו מפורסמת בתיאור ה־PR כדי למנוע תלות מעגלית.",
+  "fileCount": 137,
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3139,
+      "sha256": "6b3f1532fc524678500d2560b90939830fb8b477b148174446a75b94b055ecce",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 16147,
+      "sha256": "2679bc7b6d220e0859325655b3e1b0aa625faa246b589a57fbbb8c83ee3e34b1",
+      "license": "CC0-1.0",
+      "source": "source/build-report.mjs",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "clips.json",
+      "bytes": 3602172,
+      "sha256": "5a734cb9848bdae6976deb5ee0e9a7a8e97e95df710110c14fa0fc15a6dde9d2",
+      "license": "CC0-1.0",
+      "source": "source/build-clips.mjs"
+    },
+    {
+      "path": "evidence/baseline-perf-provenance.json",
+      "bytes": 796,
+      "sha256": "716d61a21933a71560a2783a0554fb3e712d8daf0b3571e2f75a0b774264b488",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/baseline-perf-tests.log",
+      "bytes": 1300,
+      "sha256": "6e9418ee0e1be736fd6bf46b9b9b1eef3391c73cf7f090f1d3b0df6505912b7a",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/canonical-baseline.log",
+      "bytes": 3716,
+      "sha256": "e8e0ccdd5ae8aee3c56cd4211bd2870a384a0d3892d473efc43d91501a648a21",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/measure.json",
+      "bytes": 8810,
+      "sha256": "42a0e503b3663f82d74f72358c96e6f75467cd50132a5d2542a2c05a3d817e93",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/brake.svg",
+      "bytes": 89962,
+      "sha256": "298316636449779e13f42461b6d3e063402ead7f3424e06f49f9d51e53d61551",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/cut.svg",
+      "bytes": 89982,
+      "sha256": "15f82e28256b7a857559a56c68e7fe6985fab2f5ec918238aff4e3f7b2fe4bcf",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/idle.svg",
+      "bytes": 89972,
+      "sha256": "872afbc8178781a5ac96bfc25fe95fa2eb8ab2c0cd5167f62c6536f4fea13eaf",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/run.svg",
+      "bytes": 150608,
+      "sha256": "beb6921108a10d30c137cd78b0381939d542d18bed2dc3986a22c7a9d55b7c38",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/sheets/sprint.svg",
+      "bytes": 89966,
+      "sha256": "f4a12ce1d42bc9f4ddf0e28a0e133b41da88411adee6089ea7f10bb040609b53",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/canonical-baseline/tables.md",
+      "bytes": 2063,
+      "sha256": "8fb2ec170604b48b51e72ba5bc62d27f4ad9d86daa7c4b32ba55f77b658a9338",
+      "license": "CC0-1.0",
+      "source": "workout/island/tools/athletes/measure.mjs",
+      "purposeHe": "מדידת קו בסיס של הספריות הקיימות, ללא קליפי הוקי"
+    },
+    {
+      "path": "evidence/codex-qa-run.json",
+      "bytes": 857,
+      "sha256": "081e5e9eba7bf291c121df2d84a88f7da416b5605bd92ab1aa656b840113c29a",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--body_check.json",
+      "bytes": 10052,
+      "sha256": "38e423701f4324370bf56a6e152c2a4d566337cfe2c5bfe48cf35824397e6cde",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--celebrate_1.json",
+      "bytes": 10121,
+      "sha256": "d1692404e813dfba2d059ff6587a705f44e854fe7c5481f5ee63a20396ccae98",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--celebrate_2.json",
+      "bytes": 10049,
+      "sha256": "4eec94774795b3d7095577ff34e1693089e22a5716dc0597935d3b98abd0e6ab",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--celebrate_3.json",
+      "bytes": 11406,
+      "sha256": "1e842b935edb674f59248c29935bebb8ebe122e4527b6d02237f1e8b5f54092a",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_butterfly.json",
+      "bytes": 10242,
+      "sha256": "c00d76c7d45d665976b082ca04c78929298f64acfe71b5b63c8bbd77c9ac820d",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_glove_high.json",
+      "bytes": 9588,
+      "sha256": "c95655ba164158ffadd5a8e1aa05fbc71fe3fbe94dab60d81d93b4ae55ced089",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_glove_low.json",
+      "bytes": 10523,
+      "sha256": "58c6d34902492c31a693f7d208576e66728e4e0d6c4040e7451c0b3886c17ebc",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_slide_left.json",
+      "bytes": 12572,
+      "sha256": "208febcaeeec4641c9649c111876eaa8c33e42bafb8c66ee488582005ad6ce9e",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_slide_right.json",
+      "bytes": 12713,
+      "sha256": "e9fa07b61002e484c4ad2da979b784c4041e12948eb7a7aeecb28909a6db6c96",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_stance.json",
+      "bytes": 9503,
+      "sha256": "cba958ab97f80b9257e1b5ca31744ff44e576037497c845b6a7087f2c743f9d9",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--goalie_stick_save.json",
+      "bytes": 9829,
+      "sha256": "38073edecb7e731f1e66fba10893f9c08a330e22db89a2908c4fc339e0bb56f9",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--pass.json",
+      "bytes": 10677,
+      "sha256": "971c2ed632cba7653a112e215e2a00dd7722cc716c218d010e01a1aba1f5d6e0",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--ready_1.json",
+      "bytes": 9403,
+      "sha256": "43cbf1b63f164a053be4dc712741fc4c10704da644ae8ac8286e34f3619535cb",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--ready_2.json",
+      "bytes": 9400,
+      "sha256": "615782eb625e49a0fdb48bc510cf54d0dcac1ee2a020e70ab1a31911250b82e1",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--ready_3.json",
+      "bytes": 9779,
+      "sha256": "4e16fe68ca28b4496446616c394232fefa0be1c7468a6756b58ad47ef1550362",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--receive.json",
+      "bytes": 10097,
+      "sha256": "bcc9f4c6c09b299a6ae12f7a327c99a9b772e416b45a1f9d6b69ac72b549e5f3",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--shot_slap.json",
+      "bytes": 10717,
+      "sha256": "e3dce3fc2c081b7f2cb8c39e1887655fd4a6e06dc9f0cb7627e6526c14277bad",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--shot_wrist.json",
+      "bytes": 10710,
+      "sha256": "2bf1b73bf75236e70fadc937f4237282cf49b27d53c61c4be1184813939787e5",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_backward.json",
+      "bytes": 12581,
+      "sha256": "9bab5301b2e07fe7f1377ea009ab87d3a43723e033d1966997426480eb1aee89",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_crossover_left.json",
+      "bytes": 12955,
+      "sha256": "1025249f447f3a758ade57e5c6afcadb1eed5d5ba21f9e0f83acec287fdeee8c",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_crossover_right.json",
+      "bytes": 13080,
+      "sha256": "7d701f06fff2f5d9030d481f42a4c01ecfac13f82952345937db6ba79cc95556",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_glide.json",
+      "bytes": 12240,
+      "sha256": "9fd7c66c8e428d474e4bcf40ac15d03d4dbcc56cda284fc681027ef26c5f9696",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_push_fast.json",
+      "bytes": 12540,
+      "sha256": "30e005db42876a8173872298501b59e0e846ee043e7d1ab925c59a3d48fdc7e6",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_push_medium.json",
+      "bytes": 12497,
+      "sha256": "bc3b635144812ad5762e2c328779e670f5a085f9a938dfa7dfeb5ea53988d1e3",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_push_slow.json",
+      "bytes": 12561,
+      "sha256": "d3bddd596b55dfba71ad040d7a7a6060141c73e1d323edb60bf97e5a70f53407",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_stop_left.json",
+      "bytes": 13011,
+      "sha256": "bd49ddf9b6c5642e3638fb9b46a65fd7a51add994435d1ce03c50eab24593d06",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_stop_right.json",
+      "bytes": 13091,
+      "sha256": "5808c44d9193a35d923c31fe55f6ca84645d1e481a81e28d80874c3bc707c157",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_turn_180.json",
+      "bytes": 12508,
+      "sha256": "6d0ea6ee9df8580fc8d22e5540bb702926ec526bfdf86a5bde910400bdaef21e",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_turn_45.json",
+      "bytes": 12543,
+      "sha256": "9314e83144b9590a66ec08a624d7698d5a86075c396827b579be2d5963d893f7",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/clips/hockey-v1--skate_turn_90.json",
+      "bytes": 12558,
+      "sha256": "78faabda4336e148f73b0a631c37d2629b7b1ba7e9623aebb1839bbd2e588b74",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/report.json",
+      "bytes": 324374,
+      "sha256": "fd637af2edff7b0381a8d8e6dd8917c4a7ca4ed239af62e362f95f1f4fd82e0c",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--body_check.svg",
+      "bytes": 26557,
+      "sha256": "4e6fb8c2d43cb4891df2dde9fb86b772e2e34d0921ffa0ba6203de0ab58fd762",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--celebrate_1.svg",
+      "bytes": 26557,
+      "sha256": "752cdd939a4606f800ea4f122464b1e302e862fca3a28423a8f154c0e3213d59",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--celebrate_2.svg",
+      "bytes": 26563,
+      "sha256": "fab7298fb8f3ba7f76506b4863e3491fdb220e5b24a1015f8847c64f2471a63e",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--celebrate_3.svg",
+      "bytes": 26585,
+      "sha256": "e23d19d393a1b95b6b23dcf4a506650c8906b0e3abb35306546f9c510d9fe385",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_butterfly.svg",
+      "bytes": 26547,
+      "sha256": "1b1e6053622ebc8855682d90353848fc4d7e0da04616947d4980ae3b9a1b79f1",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_glove_high.svg",
+      "bytes": 26575,
+      "sha256": "b9903efbd4adba059fd9a45af1ae92d86ea45dd83045a6447e5f1e40b89b34da",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_glove_low.svg",
+      "bytes": 26575,
+      "sha256": "dcd314e5b7ef683e1fefb6fd37470a219ef46de1cbd705d6a8ddbc80bfdb2d87",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_slide_left.svg",
+      "bytes": 26565,
+      "sha256": "f36cc017c399515b9b764ac0768392e9df09ebf531d6ab09e1c7d23ea1dfbd81",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_slide_right.svg",
+      "bytes": 26572,
+      "sha256": "53ec16778f301b5697a5d0a91d283195e2d1fa71645dcb7d5989f6ba59086d4c",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_stance.svg",
+      "bytes": 26543,
+      "sha256": "7725454c0184bf476d51cde977690bbfe9c3caaf8071140ba9e27201144bfb3d",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--goalie_stick_save.svg",
+      "bytes": 26549,
+      "sha256": "a6884a7897f302e1c95fee5391b5e14e79d164f82ccb97a745cf64ded819f6f1",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--pass.svg",
+      "bytes": 26525,
+      "sha256": "b7c9bcdbac76469c21bbe800e7162ef80814722e28f5bf4f0fd3d13d68081221",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--ready_1.svg",
+      "bytes": 26551,
+      "sha256": "b1624d2c3f34ff44b129ab01508704ba97151c3ba470b3cf745a24ad3713d75b",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--ready_2.svg",
+      "bytes": 26579,
+      "sha256": "ed7a59c8a71a3a67f40b9ed32af82414f1ffddaf6948f119826df2ac42998883",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--ready_3.svg",
+      "bytes": 26579,
+      "sha256": "7ab7058e99c606ee3c4968509ffe9b5d5ecbf7b75179b1f6d980e7ef4fee3697",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--receive.svg",
+      "bytes": 26543,
+      "sha256": "92ff490dcf2b440574a33f70e24758256068ac0483fa82917d321da2bb14f37c",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--shot_slap.svg",
+      "bytes": 26543,
+      "sha256": "730fee461431ddc13d5ee4aa85ecc275e1f63d82b4ac8711b9ff880ff2eaac16",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--shot_wrist.svg",
+      "bytes": 26549,
+      "sha256": "e2bc25adf938bfe53a1dfea7c5e668d6c5cdf0154aa1ef9e5014b03011bd90d7",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_backward.svg",
+      "bytes": 26554,
+      "sha256": "c75f2c9bb613a21fba2dd6c879462f4810e67a69cc1c62f6cc5792fd6fe8aa9f",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_crossover_left.svg",
+      "bytes": 26547,
+      "sha256": "e64177b560b550ecf6c8c68723eb2de501deb7ee332123663015718e454bc128",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_crossover_right.svg",
+      "bytes": 26554,
+      "sha256": "6033b4880b34cb872d4d6814e63b8745fb72c2d42d733374886582a38c9fe546",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_glide.svg",
+      "bytes": 26525,
+      "sha256": "0574206ba664fc7174f9845c01c31a3a96c629ddd9dde58530a16cfb85d9a29e",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_push_fast.svg",
+      "bytes": 26547,
+      "sha256": "5b8887c49bcccb84faf794144f50d9eb247332a35a2e15414bed85df4c211bcf",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_push_medium.svg",
+      "bytes": 26569,
+      "sha256": "20794e99d182596d4179da00179fd57cc19f1d39e95173833262d79597463da2",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_push_slow.svg",
+      "bytes": 26547,
+      "sha256": "48e3db39d22fdb6e15194645deef99e46fc5859402e73cec14d0d1f0bc0fdfa4",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_stop_left.svg",
+      "bytes": 26547,
+      "sha256": "37eab0c1755ec5d04bf57e260721d14e15dfcb709912bc281261b6e4293f1a94",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_stop_right.svg",
+      "bytes": 26547,
+      "sha256": "fee72696932d74c980ae9193b4f23cb6b2b92624cedbf927f8fd78551d685bbe",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_turn_180.svg",
+      "bytes": 26565,
+      "sha256": "526aee04328639e2e8a7159db32955e85fea6c015a80be7f0a7e2646cdb2d406",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_turn_45.svg",
+      "bytes": 26563,
+      "sha256": "df57dc3e42ac3d5e89202f35690d363137f8dbcdc296e60a34aa6f953bf840c7",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/sheets/hockey-v1--skate_turn_90.svg",
+      "bytes": 26563,
+      "sha256": "965853146e67adfc3b0081733b5bfc8e67824fcd67c7d32bc6761040379c2a94",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/codex-qa/svg-localization.json",
+      "bytes": 7748,
+      "sha256": "2e041bf88966f09c9b1cf090af2ecf67a19567ed728c3e86b42628b7221f8984",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter-loader.mjs",
+      "upstream": "roynaor-work/Bakasun@5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputs": [
+        "clips.json"
+      ],
+      "licenseEvidence": "qa-tool-provenance.json"
+    },
+    {
+      "path": "evidence/final-qa-verification.json",
+      "bytes": 689,
+      "sha256": "d15dfce213825f9ac69846efc89223b46f5fc0b5ccfb10e1da01cd46cacf68cd",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/gltf-validation.json",
+      "bytes": 8368,
+      "sha256": "5dad598a6a09e29b4e62dd853616b828c28bb7c57f09a346301b9203afa652d9",
+      "license": "CC0-1.0",
+      "source": "source/validate-gltf.mjs"
+    },
+    {
+      "path": "evidence/mesh-contact.json",
+      "bytes": 580400,
+      "sha256": "01a4915e35df7baa086d2325653fd042cc3f4286092a2e88244e785f476dc1d7",
+      "license": "CC0-1.0",
+      "source": "source/mesh-contact-audit.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb"
+      ]
+    },
+    {
+      "path": "evidence/motion-measurements.json",
+      "bytes": 245208,
+      "sha256": "a25f39da47cf3a6e22f83b441c60d1512d877153308466758c1ecd8828ea5fb7",
+      "license": "CC0-1.0",
+      "source": "source/qa-adapter.mjs",
+      "inputs": [
+        "clips.json"
+      ]
+    },
+    {
+      "path": "evidence/repository-tests-status.json",
+      "bytes": 665,
+      "sha256": "f4bc66ea56992cd24ca08bd7ae5a4ca575e21d6d706865eb75f9843b5664b4a5",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/repository-tests.log",
+      "bytes": 433235,
+      "sha256": "548efd1b221b54b55093507be3abde0cfa0e15ac3a8fd6afe093f6f1b8df9b11",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/unified-athletes-tests.log",
+      "bytes": 1662,
+      "sha256": "84690baf6a47c035232ad98aa231e2941b1f667e2ae660553c207cfccf984165",
+      "license": "CC0-1.0",
+      "source": "הרצות ואימות מקוריים המתועדים ב־REPORT.md"
+    },
+    {
+      "path": "evidence/validation.json",
+      "bytes": 555960,
+      "sha256": "3ad99432899a44fecfc8b70ae3656c31426968b57bb1edd0c68d443de03ad98e",
+      "license": "CC0-1.0",
+      "source": "source/validate.mjs"
+    },
+    {
+      "path": "model-evidence.json",
+      "bytes": 5730,
+      "sha256": "1b6a62d1af7cfbb32fabb19967e7533555eac96f01c2699d44d7348abdb9167a",
+      "license": "CC0-1.0",
+      "source": "source/build-models.py"
+    },
+    {
+      "path": "models/goalie.glb",
+      "bytes": 1076208,
+      "sha256": "a32b93785d015395b65f7c9f1a6954822c85e16d5a2143f0782091af632c753a",
+      "license": "CC0-1.0",
+      "source": "source/build-models.py",
+      "upstream": "workout/island/assets/hoops-tall/guard.glb",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "models/skater.glb",
+      "bytes": 1015100,
+      "sha256": "536d5d06fe0f7328754d4d011ca190b60b81d916c90705dbe3b756e01a6f3756",
+      "license": "CC0-1.0",
+      "source": "source/build-models.py",
+      "upstream": "workout/island/assets/hoops-tall/guard.glb",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "models/stick.glb",
+      "bytes": 19236,
+      "sha256": "9ce0db0e179ff47f88b70c565caecb123a48fc64757b81494eade2015a747c2c",
+      "license": "CC0-1.0",
+      "source": "source/build-models.py",
+      "upstream": "workout/island/assets/hoops-tall/guard.glb",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "motion-measure.json",
+      "bytes": 18619,
+      "sha256": "fcc08b385695fd5de3e69c36034099725dc72073d25022413fd803dabc93c3e4",
+      "license": "CC0-1.0",
+      "source": "source/build-clips.mjs"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 14507,
+      "sha256": "653b8b554f91b3c22cd75551721c506e83b9bc136777253ced8a4c3872e9971f",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "preview/browser-evidence.json",
+      "bytes": 106378,
+      "sha256": "e1e230612d601fe76db89e70b2af21cbc525fc8099a377d017f22b4e22a93eb1",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "preview/gallery.png",
+      "bytes": 149498,
+      "sha256": "e1a5c437f31dc87d6585cdb1953ff74924f784e92ed13f73ca0c9c5f8201f6e6",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "preview/goalie.png",
+      "bytes": 191531,
+      "sha256": "770e2da9defef7c8087601786dc931b31643eef724267947a2c70f840c3b248c",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "preview/skater.png",
+      "bytes": 177816,
+      "sha256": "6779476bc53657e994ad80b6e499af4a77898eff1677d1e4b68dd3d938bbd377",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "qa-tool-provenance.json",
+      "bytes": 4952,
+      "sha256": "c1ab55ead68df41529f147c9d398052104393c2303c60e883623fab0e8e0a3b2",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "sheets/body_check.png",
+      "bytes": 496694,
+      "sha256": "2f2fb6ecf8b709af071bf2be15d417615cbfd905e9ccbb58c6ea8d8f43b719e5",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/celebrate_1.png",
+      "bytes": 513190,
+      "sha256": "d33dd510bb26c3f26a6c854f3b87593fe6caee9e650b0a91a7cf945983bf830b",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/celebrate_2.png",
+      "bytes": 526074,
+      "sha256": "e9c0dbf8b70e55be73d8e36c554488171ea5cf17e634be1be7bdb056e1163dac",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/celebrate_3.png",
+      "bytes": 565969,
+      "sha256": "cb64532b46d542396c2efe96ca6dabc0f41c3ed017871f5d84616418dbd3a1ff",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_butterfly.png",
+      "bytes": 544645,
+      "sha256": "3a8831039e73f1241a560bd8fe6de6c74f2d779558c5ae2e09808d950cc61be6",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_glove_high.png",
+      "bytes": 538688,
+      "sha256": "69aefb93f6f96f13c05f0f2059e2cf14c9c2f8c435f50011b91bd87ce8f5f820",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_glove_low.png",
+      "bytes": 542509,
+      "sha256": "1d07b6a87603603013d2975f030b161d69590c593157ebf211d96d9203a8dca5",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_slide_left.png",
+      "bytes": 574019,
+      "sha256": "631cb93cde63096a22f81588c77bef5960aec103d495860f75eb44bf035e701c",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_slide_right.png",
+      "bytes": 570350,
+      "sha256": "d99540a894dbbe1e7b6855165dce3697ae429228bd4b154179c20c43de3615d0",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_stance.png",
+      "bytes": 451198,
+      "sha256": "e6b47be0d63f2d2b4eb7816406249e516e4cc3a3f2d6c7221a06664dc909b15e",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/goalie_stick_save.png",
+      "bytes": 540103,
+      "sha256": "24fb93eff2ae88982a2bb0a0b77298058b08cc7ced53ad4a24f97c812f0a6c3b",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/pass.png",
+      "bytes": 530196,
+      "sha256": "8da0cf8d73d1db9accebed69823cf7bd3c876a86046218c5740cdf5c72d01864",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/ready_1.png",
+      "bytes": 383118,
+      "sha256": "98afe836cad2668d55a0b74e1cf5c5203862f24d3269f4d7df59f7015a3d0b1e",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/ready_2.png",
+      "bytes": 384379,
+      "sha256": "656ee7542bf722f7c6051179398c0499e42b91e5c75987f2d336417154eb4bbc",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/ready_3.png",
+      "bytes": 414901,
+      "sha256": "43da166214a5784cf90ddd3dca2d6bd50a35b4da04ca5077590d44c9b4faf1bb",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/receive.png",
+      "bytes": 508155,
+      "sha256": "70573c30b336e488f86172cd0a0af28f6d6793e7bdf439781038fdf691d3a250",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/shot_slap.png",
+      "bytes": 533350,
+      "sha256": "201e77c64fd95a2e2b0f2952ec5c75ef457ff803c1cb4fc9d790630d68cc692d",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/shot_wrist.png",
+      "bytes": 529752,
+      "sha256": "c4d2f707618010cb53d51f3377312727c821dcf802389c3ce929d7b7e49fb7dd",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_backward.png",
+      "bytes": 565647,
+      "sha256": "714564a35aa6c6bb626bd9014dc2bac674f6a1f765b9bb674765d5dfc51d8a2f",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_crossover_left.png",
+      "bytes": 500833,
+      "sha256": "d1cc9cd19009c973e4c6c23fbf5500b9eb7b0ed61030393c5767eea6319dfc07",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_crossover_right.png",
+      "bytes": 502109,
+      "sha256": "3aa62e23103a803e92c8bf17732397c63318df64d627f6888deca08155b184bd",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_glide.png",
+      "bytes": 510255,
+      "sha256": "c52dc26dc6cb5ac27fff2512aa92d64a0378685b13bedb5532b44a3cbcb92239",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_push_fast.png",
+      "bytes": 574453,
+      "sha256": "ed8424cb63dabfea632b4cd30f8fad696a38588a0108dc3fb28c1024dc30d7bd",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_push_medium.png",
+      "bytes": 572807,
+      "sha256": "53185a0710a43f3bd89634ffe596b0e05feb81c5ae9b0cc6457b2d5d4c1c8e06",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_push_slow.png",
+      "bytes": 570230,
+      "sha256": "20b87132ac8f22c47726e98e69112353cfc4e4f9930ec6e276fc456c04a6275d",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_stop_left.png",
+      "bytes": 597251,
+      "sha256": "df62a170a06f25f9fc9b7aa0a06b4b1a98dbe7196f77a6fbd519ec7c32518801",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_stop_right.png",
+      "bytes": 564333,
+      "sha256": "57aee07dd8b8346eaa0046073bb6a59c1e628d79b6ba06a8eb89591c03028dd2",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_turn_180.png",
+      "bytes": 579995,
+      "sha256": "8cc4d306d118cf6e899f80e2b0658c3ba5855347f7bc54d576cc80da096e6314",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_turn_45.png",
+      "bytes": 576966,
+      "sha256": "2294d57496ffc19a28ff736225f32e88e29d133da9e66acf29286f6d7a6e69f2",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "sheets/skate_turn_90.png",
+      "bytes": 581066,
+      "sha256": "88db4f603fd5b1a19b654a6646525931c6f33de3ddfd3f218582d3181edcdbf4",
+      "license": "CC0-1.0",
+      "source": "source/render-sheets.mjs",
+      "inputs": [
+        "clips.json",
+        "models/skater.glb",
+        "models/goalie.glb",
+        "models/stick.glb",
+        "preview.html"
+      ]
+    },
+    {
+      "path": "source/build-clips.mjs",
+      "bytes": 22868,
+      "sha256": "6bcd844cf513124d3092e5a66e1c03c094788ca7c039f508d26fbc16eb47246e",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/build-manifest.mjs",
+      "bytes": 4486,
+      "sha256": "d68753d8e1b76169041ad8c0a9be6b949982d356f5aabbeabc4e1b0c5b7d97f7",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/build-models.py",
+      "bytes": 18837,
+      "sha256": "93738104ebbbccb70ed8f8b2cdde48fd4e78c6d963fe82c6893a52517a52bafc",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/build-report.mjs",
+      "bytes": 14278,
+      "sha256": "1cdf89631705eccc3a70932d0f576840e56011b196f73030e56560e9a3c97cfe",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/mesh-contact-audit.mjs",
+      "bytes": 6388,
+      "sha256": "461f135fd664aba5ca4ae1ca96b7db069bc052c008809e5fe5d2b7dc9d0d0705",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/qa-adapter-fetch.mjs",
+      "bytes": 2248,
+      "sha256": "566f87e2fb0496dda027c4e3cc803adfff72ed6249e50f55c821ef13f1d299e8",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/qa-adapter-loader.mjs",
+      "bytes": 684,
+      "sha256": "8e7bef0126c8e12bae25d22cd79414b56ad7dcdd781de3ac969be13cd8d205ae",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/qa-adapter-run.mjs",
+      "bytes": 6834,
+      "sha256": "ca288963f5d7f8017083038dbda9a48fc8e2a8c46bcd708a8597c00aef9d23df",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/qa-adapter.mjs",
+      "bytes": 9290,
+      "sha256": "e92d524b55a802c10df9820230208f8564ea1a062ba19ecd0676536e9f59d65f",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/render-sheets.mjs",
+      "bytes": 4971,
+      "sha256": "d7aed729069a51d52d8458c48a3c75d181a7e76d2afc5c74fe073348d187ff57",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/validate-gltf.mjs",
+      "bytes": 1391,
+      "sha256": "63376a813cebe679ef260e298879f7cbdb11fb580d8f9d973c85045f169a5748",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    },
+    {
+      "path": "source/validate.mjs",
+      "bytes": 9679,
+      "sha256": "60a65d1127a467913a1385921e792212eb1c406cdfdfc35143f27381eccd3b48",
+      "license": "CC0-1.0",
+      "source": "יצירה מקורית לחבילת ההוקי, 12/11/2026",
+      "licenseEvidence": "LICENSES.md"
+    }
+  ]
+}
