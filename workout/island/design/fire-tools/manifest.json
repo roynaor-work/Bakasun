@@ -1,0 +1,150 @@
+{
+  "units": "meters",
+  "up": "+Y",
+  "forward": "-Z",
+  "atlas": {
+    "file": "fire-tools-atlas.png",
+    "width": 512,
+    "height": 512,
+    "palette": {
+      "red": "#e43632",
+      "red_dark": "#ad252b",
+      "red_light": "#f15b46",
+      "rubber": "#202a30",
+      "charcoal": "#39434b",
+      "fold": "#505d65",
+      "silver": "#bdc9cb",
+      "silver_dark": "#819296",
+      "ivory": "#f1eee4",
+      "brass": "#c7a15d",
+      "hose": "#d7b578",
+      "hose_light": "#eed19a",
+      "black": "#10191e",
+      "green": "#65977b",
+      "wall": "#dce1da",
+      "white": "#ffffff"
+    }
+  },
+  "models": [
+    {
+      "file": "fire-extinguisher.glb",
+      "bytes": 72360,
+      "triangles": 1064,
+      "bounds": {
+        "min": [
+          -0.15299999713897705,
+          0.0,
+          -0.14399999380111694
+        ],
+        "max": [
+          0.15299999713897705,
+          0.6169999837875366,
+          0.14399999380111694
+        ]
+      },
+      "dimensions_m": [
+        0.3059999942779541,
+        0.6169999837875366,
+        0.2879999876022339
+      ],
+      "nozzle_m": [
+        0.119,
+        0.26,
+        -0.144
+      ],
+      "nozzle_purpose": "spray",
+      "sha256": "1dadebe98099a921607665d16d3042d632814002bbbd1921d313ee13aa80ef7c",
+      "atlas_sha256": "b4d65c142054b4d88883f2b405ec06a59ee7b69649d1ec0dcaddf9a72ea0e268"
+    },
+    {
+      "file": "fire-blanket.glb",
+      "bytes": 46652,
+      "triangles": 660,
+      "bounds": {
+        "min": [
+          -0.22100000083446503,
+          0.0,
+          -0.20899999141693115
+        ],
+        "max": [
+          0.22100000083446503,
+          0.12050000578165054,
+          0.20899999141693115
+        ]
+      },
+      "dimensions_m": [
+        0.44200000166893005,
+        0.12049999833106995,
+        0.4180000126361847
+      ],
+      "nozzle_m": [
+        0.0,
+        0.062,
+        -0.131
+      ],
+      "nozzle_purpose": "deploy-edge; no fluid outlet",
+      "sha256": "1448e88791cf8589da749335728504691a09d23acf2d6097dca532625285305b",
+      "atlas_sha256": "b4d65c142054b4d88883f2b405ec06a59ee7b69649d1ec0dcaddf9a72ea0e268"
+    },
+    {
+      "file": "foam-hose.glb",
+      "bytes": 89180,
+      "triangles": 1288,
+      "bounds": {
+        "min": [
+          -0.23721516132354736,
+          0.0,
+          -0.39893239736557007
+        ],
+        "max": [
+          0.23721516132354736,
+          0.29999998211860657,
+          0.39893239736557007
+        ]
+      },
+      "dimensions_m": [
+        0.47442999482154846,
+        0.30000001192092896,
+        0.7978649735450745
+      ],
+      "nozzle_m": [
+        0.0,
+        0.176,
+        -0.398932
+      ],
+      "nozzle_purpose": "spray",
+      "sha256": "1bef49fa6e3d211f0a4570957966f46e4da9649c3e246edbddc521aa426cb03a",
+      "atlas_sha256": "b4d65c142054b4d88883f2b405ec06a59ee7b69649d1ec0dcaddf9a72ea0e268"
+    },
+    {
+      "file": "wall-hose-reel.glb",
+      "bytes": 145184,
+      "triangles": 2108,
+      "bounds": {
+        "min": [
+          -0.4099999964237213,
+          0.0,
+          -0.22325000166893005
+        ],
+        "max": [
+          0.4099999964237213,
+          1.3200000524520874,
+          0.22325000166893005
+        ]
+      },
+      "dimensions_m": [
+        0.8199999928474426,
+        1.3200000524520874,
+        0.4465000033378601
+      ],
+      "nozzle_m": [
+        0.112,
+        0.4,
+        -0.22325
+      ],
+      "nozzle_purpose": "spray",
+      "sha256": "9be70098a251baaee31c79e69b152f638efd2e44b97ff6d2d4701cee1f149940",
+      "atlas_sha256": "b4d65c142054b4d88883f2b405ec06a59ee7b69649d1ec0dcaddf9a72ea0e268"
+    }
+  ]
+}

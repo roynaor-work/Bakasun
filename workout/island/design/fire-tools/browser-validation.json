@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "viewports": [
+    [
+      1600,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "models": [
+    {
+      "id": "fire-blanket",
+      "nozzle": [
+        0,
+        0.062,
+        -0.131
+      ],
+      "triangles": 660,
+      "dimensions": [
+        0.44200000166893005,
+        0.12050000578165054,
+        0.4179999828338623
+      ]
+    },
+    {
+      "id": "foam-hose",
+      "nozzle": [
+        0,
+        0.176,
+        -0.398932
+      ],
+      "triangles": 1288,
+      "dimensions": [
+        0.4744303226470947,
+        0.29999998211860657,
+        0.7978647947311401
+      ]
+    },
+    {
+      "id": "fire-extinguisher",
+      "nozzle": [
+        0.119,
+        0.26,
+        -0.144
+      ],
+      "triangles": 1064,
+      "dimensions": [
+        0.3059999942779541,
+        0.6169999837875366,
+        0.2879999876022339
+      ]
+    },
+    {
+      "id": "wall-hose-reel",
+      "nozzle": [
+        0.112,
+        0.4,
+        -0.22325
+      ],
+      "triangles": 2108,
+      "dimensions": [
+        0.8199999928474426,
+        1.3200000524520874,
+        0.4465000033378601
+      ]
+    }
+  ],
+  "page_errors": [],
+  "failed_requests": [],
+  "requests": [
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/preview.html",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/preview.css",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/preview.mjs",
+    "http://127.0.0.1:8765/workout/island/vendor/three.module.js",
+    "http://127.0.0.1:8765/workout/island/vendor/GLTFLoader.js",
+    "http://127.0.0.1:8765/workout/island/vendor/BufferGeometryUtils.js",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/fire-extinguisher.glb",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/fire-blanket.glb",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/foam-hose.glb",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/wall-hose-reel.glb",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/icons/fire-extinguisher.svg",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/icons/fire-blanket.svg",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/icons/foam-hose.svg",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/icons/wall-hose-reel.svg",
+    "blob:http://127.0.0.1:8765/c6a2a1d1-f16a-485c-8aa1-7399126813de",
+    "blob:http://127.0.0.1:8765/19728df3-f008-4253-bc95-0e303ce2ae10",
+    "blob:http://127.0.0.1:8765/e7f24a10-0c33-4319-b330-8987d0bdd2ff",
+    "blob:http://127.0.0.1:8765/c65896cd-6d9c-4e3f-87ca-b9f7cc6e47c3",
+    "http://127.0.0.1:8765/workout/island/design/fire-tools/icons/fire-extinguisher.svg"
+  ],
+  "wasm_blocked_by_csp": true,
+  "wasm_probe": "CompileError: WebAssembly.compile(): Compiling or instantiating WebAssembly module violates the following Content Security policy directive because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self'\".",
+  "no_decoder_requests": true,
+  "rotate_button": true,
+  "anchors_button": true,
+  "mobile_no_horizontal_overflow": true
+}
