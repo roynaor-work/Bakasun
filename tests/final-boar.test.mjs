@@ -63,6 +63,7 @@ test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboa
   assert.match(css,/#game\.hudv21:not\(\.aimstick\) \.abilities\{bottom:96px\}/,'desktop: the ability column clears the weapon button');
   assert.match(css,/#game\.hudv21 \.wave-block\{top:44px\}/,'portrait: the wave counter drops below the strips');
   assert.match(css,/#game\.hudv21 \.ability small\{font-size:10px/);
+  assert.match(css,/#weapon-btn \.wammo\{font-size:10px/,'weapon heat/ammo label as readable as the other labels');
 });
 
 test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, smoothing, immediate stop, precision finger, sensitivity setting)', async()=>{

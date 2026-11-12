@@ -184,7 +184,7 @@
 #weapon-btn{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px;border-radius:14px;border:1px solid #ffd06b80;background:#12273ab8;color:#f4f3e9;display:grid;place-items:center;align-content:center;gap:1px;padding:3px;overflow:hidden;box-shadow:0 3px 10px #0007;touch-action:manipulation;-webkit-touch-callout:none;user-select:none}
 #weapon-btn .wicon{font-size:20px;line-height:22px;color:var(--gold)}
 #weapon-btn .wname{font-size:10px;line-height:1.1}
-#weapon-btn .wammo{font-size:9px;color:#b9dde6;line-height:1.1}
+#weapon-btn .wammo{font-size:10px;color:#b9dde6;line-height:1.1}
 #weapon-btn .wbar{position:absolute;bottom:0;left:0;height:3px;width:100%;background:#ffd06b;transition:width .15s}
 #weapon-btn.hot .wammo{color:#ffb067}
 /* with the aim stick: weapon button left of the fire button, abilities in the column above the fire button */
