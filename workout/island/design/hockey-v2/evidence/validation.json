@@ -1,0 +1,578 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "source": "source/validate.mjs",
+  "clipsSha256": "5aab0236151ac353651ca6757c9a7c218e40b266fcb15ee67cf3082b011f60a3",
+  "valid": true,
+  "ready": true,
+  "errors": [],
+  "targetedScores": [
+    {
+      "id": "skate_push_slow",
+      "score": 95.9,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_push_medium",
+      "score": 95,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_push_fast",
+      "score": 93.7,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_glide",
+      "score": 95.5,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_crossover_left",
+      "score": 92.8,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_crossover_right",
+      "score": 92.8,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_stop_left",
+      "score": 92,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_stop_right",
+      "score": 92,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_turn_45",
+      "score": 95.6,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_turn_90",
+      "score": 96.2,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_turn_180",
+      "score": 96.9,
+      "redMetrics": []
+    },
+    {
+      "id": "skate_backward",
+      "score": 95.6,
+      "redMetrics": []
+    },
+    {
+      "id": "goalie_slide_left",
+      "score": 95.2,
+      "redMetrics": []
+    },
+    {
+      "id": "goalie_slide_right",
+      "score": 95.2,
+      "redMetrics": []
+    },
+    {
+      "id": "celebrate_3",
+      "score": 98.3,
+      "redMetrics": []
+    }
+  ],
+  "notReady": [],
+  "preserved": [
+    {
+      "id": "ready_1",
+      "identical": true
+    },
+    {
+      "id": "ready_2",
+      "identical": true
+    },
+    {
+      "id": "ready_3",
+      "identical": true
+    },
+    {
+      "id": "shot_wrist",
+      "identical": true
+    },
+    {
+      "id": "shot_slap",
+      "identical": true
+    },
+    {
+      "id": "pass",
+      "identical": true
+    },
+    {
+      "id": "receive",
+      "identical": true
+    },
+    {
+      "id": "body_check",
+      "identical": true
+    },
+    {
+      "id": "goalie_stance",
+      "identical": true
+    },
+    {
+      "id": "goalie_butterfly",
+      "identical": true
+    },
+    {
+      "id": "goalie_glove_high",
+      "identical": true
+    },
+    {
+      "id": "goalie_glove_low",
+      "identical": true
+    },
+    {
+      "id": "goalie_stick_save",
+      "identical": true
+    },
+    {
+      "id": "celebrate_1",
+      "identical": true
+    },
+    {
+      "id": "celebrate_2",
+      "identical": true
+    }
+  ],
+  "states": [
+    {
+      "id": "skate_push_slow",
+      "samples240Hz": 385,
+      "keyframes": 195,
+      "contactSamples": 447,
+      "maxPlaneErrorMeters": 0.000001916958733014229,
+      "maxNormalTiltDegrees": 0.00013036483372090427,
+      "maxUncoveredContactSeconds": 0.024999999999999998,
+      "minBladeCenterSeparationMeters": 0.3981321961506652,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 7.9875657151982455,
+        "armAbdMax": 8.669350918225815,
+        "handOutMax": 0.035296134889179015,
+        "elbowMean": 69.99999999882134,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.366377322615364,
+        "lean": 7.346259438398314,
+        "leanMax": 7.34625943839833,
+        "slide": 0.20484275262625298,
+        "slideRatio": 0.2560534407828162,
+        "refSpeed": 0.08953091080863626,
+        "planted": 0.7166666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 2.56
+    },
+    {
+      "id": "skate_push_medium",
+      "samples240Hz": 289,
+      "keyframes": 147,
+      "contactSamples": 337,
+      "maxPlaneErrorMeters": 0.0000048037703996584025,
+      "maxNormalTiltDegrees": 0.0002095905620823094,
+      "maxUncoveredContactSeconds": 0.020833333333333332,
+      "minBladeCenterSeparationMeters": 0.43331699274555774,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197034,
+      "athleteMetrics": {
+        "armAbdMean": 7.847786240705019,
+        "armAbdMax": 8.446022713210182,
+        "handOutMax": 0.0381652817498683,
+        "elbowMean": 70.00000000040404,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 68.43074539373227,
+        "lean": 8.816846304369278,
+        "leanMax": 8.816846304369278,
+        "slide": 0.325263867823902,
+        "slideRatio": 0.40657983477987747,
+        "refSpeed": 0.11934465615390553,
+        "planted": 0.7166666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 4.32
+    },
+    {
+      "id": "skate_push_fast",
+      "samples240Hz": 193,
+      "keyframes": 99,
+      "contactSamples": 225,
+      "maxPlaneErrorMeters": 0.000014980190909619218,
+      "maxNormalTiltDegrees": 0.0006061281805179641,
+      "maxUncoveredContactSeconds": 0.0125,
+      "minBladeCenterSeparationMeters": 0.46925877206777467,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197034,
+      "athleteMetrics": {
+        "armAbdMean": 7.5851331456534625,
+        "armAbdMax": 7.672260832743305,
+        "handOutMax": 0.0405029173903258,
+        "elbowMean": 70.00000000028473,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 86.4629817680885,
+        "lean": 11.760363098378466,
+        "leanMax": 11.760363098378447,
+        "slide": 0.5707074919411421,
+        "slideRatio": 0.7133843649264276,
+        "refSpeed": 0.17892630141220853,
+        "planted": 0.7166666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 5.2
+    },
+    {
+      "id": "skate_glide",
+      "samples240Hz": 577,
+      "keyframes": 289,
+      "contactSamples": 1154,
+      "maxPlaneErrorMeters": 2.5676365492111053e-8,
+      "maxNormalTiltDegrees": 0.000002561320938754782,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.2999999987853727,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 7.987571496933928,
+        "armAbdMax": 8.669350918225815,
+        "handOutMax": 0.035296134889179015,
+        "elbowMean": 70.00000000336024,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.366377322615364,
+        "lean": 7.346259438398314,
+        "leanMax": 7.34625943839833,
+        "slide": 1.959030153279204e-7,
+        "slideRatio": 2.448787691599005e-7,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 6.24
+    },
+    {
+      "id": "skate_crossover_left",
+      "samples240Hz": 385,
+      "keyframes": 195,
+      "contactSamples": 433,
+      "maxPlaneErrorMeters": 0.000009578901069812185,
+      "maxNormalTiltDegrees": 0.000634721995572612,
+      "maxUncoveredContactSeconds": 0.020833333333333332,
+      "minBladeCenterSeparationMeters": 0.14364833205413935,
+      "elbowMin": 63.0000000489542,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 7.663127114520906,
+        "armAbdMax": 7.827528208128846,
+        "handOutMax": 0.0395842267814554,
+        "elbowMean": 69.9999999987956,
+        "elbowMin": 63.0000000489542,
+        "swingRange": 78.45417484744789,
+        "lean": 10.778798451234724,
+        "leanMax": 10.77879845123474,
+        "slide": 0.41964083923390444,
+        "slideRatio": 0.5245510490423805,
+        "refSpeed": 0.1273288535575396,
+        "planted": 0.6666666666666666
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 5.600000000136602
+    },
+    {
+      "id": "skate_crossover_right",
+      "samples240Hz": 385,
+      "keyframes": 195,
+      "contactSamples": 433,
+      "maxPlaneErrorMeters": 0.000009578901069826062,
+      "maxNormalTiltDegrees": 0.0006347214213607729,
+      "maxUncoveredContactSeconds": 0.020833333333333332,
+      "minBladeCenterSeparationMeters": 0.1436483320541393,
+      "elbowMin": 63.0000000489542,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 7.663127114520906,
+        "armAbdMax": 7.827528208128846,
+        "handOutMax": 0.0395842267814554,
+        "elbowMean": 69.9999999987956,
+        "elbowMin": 63.0000000489542,
+        "swingRange": 78.45417484744789,
+        "lean": 10.778798451234724,
+        "leanMax": 10.77879845123474,
+        "slide": 0.4196408392339043,
+        "slideRatio": 0.5245510490423803,
+        "refSpeed": 0.12732885355753962,
+        "planted": 0.6666666666666666
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 5.600000000136602
+    },
+    {
+      "id": "skate_stop_left",
+      "samples240Hz": 433,
+      "keyframes": 217,
+      "contactSamples": 866,
+      "maxPlaneErrorMeters": 0.0000010465078311983067,
+      "maxNormalTiltDegrees": 0.000511441770440976,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.30000000109826447,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 9.074237507706721,
+        "armAbdMax": 21.663506349693055,
+        "handOutMax": 0.035296134889179015,
+        "elbowMean": 70.20398445423612,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.366377322615364,
+        "lean": 7.346259216131034,
+        "leanMax": 7.34625943839833,
+        "slide": 0.06556074166836912,
+        "slideRatio": 0.0819509270854614,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 2.7
+    },
+    {
+      "id": "skate_stop_right",
+      "samples240Hz": 433,
+      "keyframes": 217,
+      "contactSamples": 866,
+      "maxPlaneErrorMeters": 0.0000020918745097103786,
+      "maxNormalTiltDegrees": 0.0005330249115976379,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.30000000109826447,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 9.074237507706721,
+        "armAbdMax": 21.663506349693055,
+        "handOutMax": 0.035296134889179015,
+        "elbowMean": 70.20398445423612,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.366377322615364,
+        "lean": 7.346259216131034,
+        "leanMax": 7.34625943839833,
+        "slide": 0.06556074166836912,
+        "slideRatio": 0.0819509270854614,
+        "refSpeed": 0,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 2.7
+    },
+    {
+      "id": "skate_turn_45",
+      "samples240Hz": 481,
+      "keyframes": 241,
+      "contactSamples": 962,
+      "maxPlaneErrorMeters": 5.965660997142574e-8,
+      "maxNormalTiltDegrees": 0.00000391248236030638,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.29994149974604883,
+      "elbowMin": 63.0000000489542,
+      "elbowMax": 77.00000002197034,
+      "athleteMetrics": {
+        "armAbdMean": 9.074091612332364,
+        "armAbdMax": 21.665840286865787,
+        "handOutMax": 0.035296134889179015,
+        "elbowMean": 70.20398854668713,
+        "elbowMin": 63.0000000489542,
+        "swingRange": 52.36637732261537,
+        "lean": 7.346259212851354,
+        "leanMax": 7.346259438398333,
+        "slide": 0.08570159681414075,
+        "slideRatio": 0.10712699601767593,
+        "refSpeed": 0.004393398333344929,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 4.9999999999085825
+    },
+    {
+      "id": "skate_turn_90",
+      "samples240Hz": 577,
+      "keyframes": 289,
+      "contactSamples": 1154,
+      "maxPlaneErrorMeters": 4.2616841888776236e-8,
+      "maxNormalTiltDegrees": 0.000003415094585006376,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.29995935366785037,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197035,
+      "athleteMetrics": {
+        "armAbdMean": 9.074178445182621,
+        "armAbdMax": 21.663625544247793,
+        "handOutMax": 0.03529613488917907,
+        "elbowMean": 70.2039873339678,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.36637732261537,
+        "lean": 7.346259216402372,
+        "leanMax": 7.346259438398333,
+        "slide": 0.13671854292438704,
+        "slideRatio": 0.1708981786554838,
+        "refSpeed": 0.012500000177156988,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 6.00000000048464
+    },
+    {
+      "id": "skate_turn_180",
+      "samples240Hz": 769,
+      "keyframes": 385,
+      "contactSamples": 1538,
+      "maxPlaneErrorMeters": 2.5266580591654098e-8,
+      "maxNormalTiltDegrees": 0.0000030783246591999756,
+      "maxUncoveredContactSeconds": 0,
+      "minBladeCenterSeparationMeters": 0.2999771242743738,
+      "elbowMin": 63.00000004895422,
+      "elbowMax": 77.00000002197032,
+      "athleteMetrics": {
+        "armAbdMean": 9.074136053172735,
+        "armAbdMax": 21.664987592073725,
+        "handOutMax": 0.03529613488917904,
+        "elbowMean": 70.20398695775378,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.36637732261537,
+        "lean": 7.34625921454479,
+        "leanMax": 7.346259438398333,
+        "slide": 0.2028202951908494,
+        "slideRatio": 0.25352536898856176,
+        "refSpeed": 0.018750000265735443,
+        "planted": 1
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 7.999999999957589
+    },
+    {
+      "id": "skate_backward",
+      "samples240Hz": 385,
+      "keyframes": 195,
+      "contactSamples": 447,
+      "maxPlaneErrorMeters": 0.0000027479701799337786,
+      "maxNormalTiltDegrees": 0.0001474781224517752,
+      "maxUncoveredContactSeconds": 0.024999999999999998,
+      "minBladeCenterSeparationMeters": 0.4325887349808705,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197034,
+      "athleteMetrics": {
+        "armAbdMean": 7.84779486905752,
+        "armAbdMax": 8.446022713210182,
+        "handOutMax": 0.0381652817498683,
+        "elbowMean": 69.99999999882134,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 68.43074539373227,
+        "lean": 8.816846304369275,
+        "leanMax": 8.816846304369278,
+        "slide": 0.24392906475537832,
+        "slideRatio": 0.3049113309442229,
+        "refSpeed": 0,
+        "planted": 0.7166666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 3.84
+    },
+    {
+      "id": "goalie_slide_left",
+      "samples240Hz": 481,
+      "keyframes": 243,
+      "contactSamples": 741,
+      "maxPlaneErrorMeters": 1.8987235710088424e-7,
+      "maxNormalTiltDegrees": 0.00000572728773124927,
+      "maxUncoveredContactSeconds": 0.041666666666666664,
+      "minBladeCenterSeparationMeters": 0.45999996849947106,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197032,
+      "athleteMetrics": {
+        "armAbdMean": 7.731978879465091,
+        "armAbdMax": 7.978927968908356,
+        "handOutMax": 0.03529613488917904,
+        "elbowMean": 69.99999994596952,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.36637732261538,
+        "lean": 9.797639302542327,
+        "leanMax": 9.797639615045517,
+        "slide": 0.07529304041314117,
+        "slideRatio": 0.09411630051642646,
+        "refSpeed": 1.261323417506715e-10,
+        "planted": 0.8666666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 2.8
+    },
+    {
+      "id": "goalie_slide_right",
+      "samples240Hz": 481,
+      "keyframes": 243,
+      "contactSamples": 741,
+      "maxPlaneErrorMeters": 1.8987235710088424e-7,
+      "maxNormalTiltDegrees": 0.000005598568198963992,
+      "maxUncoveredContactSeconds": 0.041666666666666664,
+      "minBladeCenterSeparationMeters": 0.45999996849947106,
+      "elbowMin": 63.000000048954206,
+      "elbowMax": 77.00000002197032,
+      "athleteMetrics": {
+        "armAbdMean": 7.731978879465091,
+        "armAbdMax": 7.978927968908356,
+        "handOutMax": 0.03529613488917904,
+        "elbowMean": 69.99999994596952,
+        "elbowMin": 63.000000048954206,
+        "swingRange": 52.36637732261538,
+        "lean": 9.797639302542327,
+        "leanMax": 9.797639615045517,
+        "slide": 0.07529304041314114,
+        "slideRatio": 0.09411630051642642,
+        "refSpeed": 0,
+        "planted": 0.8666666666666667
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 2.8
+    },
+    {
+      "id": "celebrate_3",
+      "samples240Hz": 769,
+      "keyframes": 387,
+      "contactSamples": 801,
+      "maxPlaneErrorMeters": 0.000002431656139764704,
+      "maxNormalTiltDegrees": 0.000009035490975690213,
+      "maxUncoveredContactSeconds": 0.0375,
+      "minBladeCenterSeparationMeters": 0.300000000277276,
+      "elbowMin": 69.50559732498758,
+      "elbowMax": 74.27197188670426,
+      "athleteMetrics": {
+        "armAbdMean": -32.684964959307564,
+        "armAbdMax": 26.148973918912006,
+        "handOutMax": -0.08499997483839213,
+        "elbowMean": 71.88878460584587,
+        "elbowMin": 69.50559732498758,
+        "swingRange": 76.96438886576762,
+        "lean": 7.346257358207253,
+        "leanMax": 7.346257358207253,
+        "slide": 0.03877396499612453,
+        "slideRatio": 0.04846745624515566,
+        "refSpeed": 7.885389053301238e-18,
+        "planted": 0.55
+      },
+      "athleteFails": [],
+      "pathLengthMeters": 0
+    }
+  ],
+  "meshSummary": {
+    "clipCount": 30,
+    "bodyFailures": [],
+    "stickFailures": [],
+    "allBodyAboveTolerance": true,
+    "allStickAboveTolerance": true
+  }
+}

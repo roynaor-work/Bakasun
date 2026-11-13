@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "upstream": {
+    "repository": "roynaor-work/Bakasun",
+    "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "path": "workout/island/design/motion-qa-v1",
+    "files": [
+      {
+        "name": "glb.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/glb.mjs",
+        "sourceSha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+        "currentSha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+        "unchanged": true
+      },
+      {
+        "name": "licenses.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/licenses.mjs",
+        "sourceSha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+        "currentSha256": "e6358f4a2ca02defaef4845c4fc9a8d5dc555a9c97b37c65e343b19536c45cf2",
+        "unchanged": false
+      },
+      {
+        "name": "metrics.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/metrics.mjs",
+        "sourceSha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+        "currentSha256": "7d39e0964408f90a470e03a01ff04f4b8617f52531abb456ebd3689accac8fa6",
+        "unchanged": false
+      },
+      {
+        "name": "report.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/report.mjs",
+        "sourceSha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+        "currentSha256": "c116971198fc975b953891aecf3b2668f15ac440e985d174a3988cd47e5618c8",
+        "unchanged": false
+      },
+      {
+        "name": "run.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/run.mjs",
+        "sourceSha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+        "currentSha256": "f3d9105fbe69161b981e6884544a6726ab31a55e1770542b342f0b3c19bc685a",
+        "unchanged": false
+      },
+      {
+        "name": "sheets.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sheets.mjs",
+        "sourceSha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+        "currentSha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+        "unchanged": true
+      },
+      {
+        "name": "sources.json",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sources.json",
+        "sourceSha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+        "currentSha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+        "unchanged": true
+      },
+      {
+        "name": "sources.mjs",
+        "sourceUrl": "https://github.com/roynaor-work/Bakasun/blob/5eb4f093bc22523ee417a7f2345c3b813bffba24/workout/island/design/motion-qa-v1/sources.mjs",
+        "sourceSha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+        "currentSha256": "941b748be4c36bd719ec9120f4883f2ee04661880de9055133cb8d237e01a54c",
+        "unchanged": false
+      }
+    ]
+  },
+  "frozenOriginalMetrics": {
+    "path": "legacy-metrics.mjs",
+    "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+  },
+  "extension": "Explicit blade contact and independent skating reference velocity; planted-foot formulas, thresholds and weights remain unchanged.",
+  "newFiles": [
+    "hockey-source.mjs",
+    "skating.mjs",
+    "skating.test.mjs",
+    "report-browser-test.mjs",
+    "report-ui.mjs",
+    "style.css",
+    "README.md"
+  ]
+}
