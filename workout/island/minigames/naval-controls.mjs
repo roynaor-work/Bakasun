@@ -119,8 +119,10 @@ export function createNavalInput(ctx,getModel,getView){
   // Capture phase: these run before the stick, the pad and the Fire gesture see the event.
   const capture={signal:abort.signal,capture:true};
   window.addEventListener('pointerdown',e=>{if(press||e.button>0)return;const m=getModel();if(!m||m.result||onButton(e.target))return;const index=pickAt(e.clientX,e.clientY);if(index===null)return;press={id:e.pointerId,x:e.clientX,y:e.clientY,t0:m.time??0,index,onPad:e.target===pad,deferred:null,done:false};},capture);
-  window.addEventListener('pointermove',e=>{if(!press||press.id!==e.pointerId||press.done)return;if(Math.hypot(e.clientX-press.x,e.clientY-press.y)>lc.movePixels){const d=press.deferred;press=null;if(d)begin(d);}},capture);
-  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(!press||press.id!==e.pointerId)return;const p=press;press=null;if(!p.done&&p.deferred&&type==='pointerup')begin(p.deferred);},capture);
+  // A deferred pad press becomes the v22 gesture from its first point and its first moment (so a tap or a hold reads as it did in v22).
+  const resume=p=>{begin(p.deferred);if(gesture?.id===p.id)gesture.start.time=p.t0;};
+  window.addEventListener('pointermove',e=>{if(!press||press.id!==e.pointerId||press.done)return;if(Math.hypot(e.clientX-press.x,e.clientY-press.y)>lc.movePixels){const p=press;press=null;if(p.deferred)resume(p);}},capture);
+  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(!press||press.id!==e.pointerId)return;const p=press;press=null;if(!p.done&&p.deferred&&type==='pointerup')resume(p);},capture);
  }
  // Sky crosshair: starts where the cannon points, at the default pitch; sideways = the same fine/spin turn as the cannon, up/down = pitch.
  const DEG=Math.PI/180,settleSky=(g,x,y,t)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));g.lastX=x;g.lastY=y;g.lastT=t??performance.now();g.aim={yaw:g.start.yaw+navalSpinFine(g.dx,balance)+(g.spin||0),pitch:Math.max(vc.pitchMin*DEG,Math.min(vc.pitchMax*DEG,g.start.pitch-g.dy*vc.pitchPerPx*DEG))};};

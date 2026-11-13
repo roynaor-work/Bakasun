@@ -128,7 +128,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   else{const launch=launchFor();prediction={launch,...navalPredict(launch,ammoIndex===3?[]:contactTargets(ammoIndex),balance,ballistic.previewSamples||28)};}
   aim.x=prediction.end.x;aim.z=prediction.end.z;
   // The camera keeps leaning on the still-hull prediction above (approved 24/10); while aiming the marks, the arc colour and the shot record use the forecast.
-  if((aiming||homing)&&prediction.launch&&ammoIndex!==3)prediction=honest(prediction);
+  if(homing&&!aiming&&homing.aligned&&homing.solution?.end&&prediction.launch&&ammoIndex!==3)prediction=lockPrediction(prediction);
+  else if((aiming||homing)&&prediction.launch&&ammoIndex!==3)prediction=honest(prediction);
   reticle={x:aim.x,z:aim.z,windX:0,windZ:0,jitter:{x:0,z:0},flight:prediction.flight,contact:prediction.contact,landing:prediction.landing,...navalLockRadius(playerShip,enemies.find(e=>e.index===selectedTargetIndex&&e.hp>0)||enemyShip,balance,level,mode,equipment)};
  }
  /** Honest solver: real turret settings that put the same physics on a point. */
@@ -173,7 +174,14 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   * fresh settings solved in that same frame, so what the arc showed is what flies. */
  const lockTarget=()=>homing?enemies.find(e=>e.index===homing.index&&e.active&&e.hp>0)||null:null;
  const lockShootable=e=>e.active&&e.hp>0&&navalTargetable(e,ammoIndex,balance);
- function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation},balance,lockCfg);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
+ function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation,warm:homing.solution},balance,lockCfg);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
+ /** Locked and on target with no finger on Fire: the arc's end and colour come from the lock's own forecast (refreshed every
+  * `refreshSeconds`), re-sampled on the turret's launch, instead of the two forecasts honest() runs on every frame while aiming. */
+ function lockPrediction(pr){
+  const sol=homing.solution,c=sol.contact,at=t=>navalBallisticPoint(pr.launch,Math.min(t,pr.launch.duration));
+  const contact=c&&Number.isFinite(c.t)?{...c,...at(c.t),t:c.t}:null,t=contact?contact.t:Math.min(sol.end?.t??pr.launch.duration,pr.launch.duration),end=contact||{...at(t),t};
+  return {...pr,contact,end,flight:end.t,over:null,safe:Boolean(contact),safeCritical:Boolean(contact?.critical),lead:null,forecast:true,locked:true};
+ }
  function unlock(reason){if(homing)unlocked={index:homing.index,reason,time};homing=null;}
  /** A miss on a submarine under water reads 'dive' (wait for it to surface, or pick the guided missile or a mine). */
  const lockWord=status=>{const e=status==='miss'&&lockTarget();return e&&balance.shipTypes[e.kind]?.submarine&&e.depth>balance.combat.submarineHitDepth?'dive':status;};

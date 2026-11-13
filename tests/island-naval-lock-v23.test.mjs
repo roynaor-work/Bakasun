@@ -132,12 +132,13 @@ test('?navalLock=0: lock input is ignored and a scripted v22 run gives the same 
 
 /** The real input layer on a fake DOM: elements with listeners, window listeners by phase. */
 function fakeInput(m,search=''){
- const els=new Map(),el=name=>{const e={name,dataset:{},style:{setProperty(){},removeProperty(){}},listeners:new Map(),setAttribute(){},getAttribute:()=>null,addEventListener(t,fn){e.listeners.set(t,[...(e.listeners.get(t)||[]),fn]);},closest:s=>name==='fire'&&/button/.test(s)?e:null,getBoundingClientRect:()=>name==='fire'?{left:734,right:822,top:280,bottom:368,width:88,height:88}:{left:0,top:0,right:844,bottom:390,width:844,height:390},setPointerCapture(){}};els.set(name,e);return e;};
- const fire=el('fire'),canvas=el('canvas'),controls={addEventListener(){},style:{setProperty(){},removeProperty(){}},dataset:{},classList:{toggle(){},remove(){},add(){}},querySelector:s=>s==='#shoot'?fire:null,prepend(){},append(){}};
- const win={bubble:new Map(),capture:new Map()};globalThis.window={addEventListener(t,fn,o){const map=o?.capture?win.capture:win.bubble;map.set(t,[...(map.get(t)||[]),fn]);}};globalThis.document={addEventListener(){},createElement:undefined};globalThis.location={search};
- const input=createNavalInput({controls,canvas,balance:nb,t:k=>k},()=>m,()=>null);let ms=0;
+ const made=[],away={left:-1e4,right:-1e4,top:-1e4,bottom:-1e4,width:0,height:0};
+ const el=(name,rect)=>{const e={name,dataset:{},style:{setProperty(){},removeProperty(){}},listeners:new Map(),setAttribute(){},getAttribute:()=>null,remove(){},addEventListener(t,fn){e.listeners.set(t,[...(e.listeners.get(t)||[]),fn]);},closest:s=>(name==='fire'||e.tag==='button')&&/button/.test(s)?e:null,getBoundingClientRect:()=>rect||{left:0,top:0,right:844,bottom:390,width:844,height:390},setPointerCapture(){}};return e;};
+ const fire=el('fire',{left:734,right:822,top:280,bottom:368,width:88,height:88}),canvas=el('canvas'),controls={addEventListener(){},style:{setProperty(){},removeProperty(){}},dataset:{},classList:{toggle(){},remove(){},add(){}},querySelector:s=>s==='#shoot'?fire:null,prepend(){},append(){}};
+ const win={bubble:new Map(),capture:new Map()};globalThis.window={addEventListener(t,fn,o){const map=o?.capture?win.capture:win.bubble;map.set(t,[...(map.get(t)||[]),fn]);}};globalThis.document={addEventListener(){},createElement:tag=>{const e=el('made'+made.length,away);e.tag=tag;made.push(e);return e;}};globalThis.location={search};
+ const input=createNavalInput({controls,canvas,balance:nb,t:k=>k},()=>m,()=>null);let ms=0;const pad=made[0];
  const fireEvent=(type,id,x,y,target)=>{const e={pointerId:id,clientX:x,clientY:y,timeStamp:ms,button:0,target,preventDefault(){}};for(const fn of win.capture.get(type)||[])fn(e);for(const fn of target?.listeners?.get(type)||[])fn(e);for(const fn of win.bubble.get(type)||[])fn(e);};
- return {input,controls,fire,canvas,win,down:(id,x,y,t)=>fireEvent('pointerdown',id,x,y,t),move:(id,x,y)=>fireEvent('pointermove',id,x,y,null),up:(id,x,y)=>fireEvent('pointerup',id,x,y,null),
+ return {input,controls,fire,canvas,pad,win,down:(id,x,y,t)=>fireEvent('pointerdown',id,x,y,t),move:(id,x,y)=>fireEvent('pointermove',id,x,y,null),up:(id,x,y)=>fireEvent('pointerup',id,x,y,null),
   step(n=1,raw={}){const outs=[];for(let i=0;i<n;i++){ms+=1000/60;const out=input.sample(raw);outs.push(out);m.update(1/60,out);}return outs;},
   dispose(){input.dispose();delete globalThis.window;delete globalThis.document;delete globalThis.location;}};
 }
@@ -172,6 +173,22 @@ test('input layer while locked: a tap on Fire fires the lock (no aim values sent
   const off=make(3,2,'?navalLock=0');run(off,30);const g=fakeInput(off,'?navalLock=0');const e=off.enemies[0],q=off.screenPoint(e.x,e.z,1.5);
   g.down(7,q.x,q.y,g.canvas);const o2=g.step(40);assert.ok(o2.every(o=>!('lockTarget' in o)&&!('lockPress' in o)),'no lock fields with ?navalLock=0');assert.equal(g.controls.dataset.lock,undefined);assert.equal(off.homing,null);assert.ok(!g.win.capture.has('pointerdown')&&!g.win.capture.has('pointermove'),'no long-press listeners with ?navalLock=0');
   g.dispose();
+ }finally{delete globalThis.window;delete globalThis.document;delete globalThis.location;}
+});
+
+test('input layer on the aim pad (the right side of the screen): a press over a hull waits; a hold locks without aiming or firing, a quick tap is v22\'s quick shot, a drag is v22\'s aim',()=>{
+ const m=make(3,1);run(m,30);const f=fakeInput(m);
+ try{
+  assert.equal(f.pad.className,'naval-aim-zone','the first element the layer makes is the aim pad');const e=m.enemies[0];let q=m.screenPoint(e.x,e.z,1.5);
+  f.down(1,q.x,q.y,f.pad);let outs=f.step(40);assert.ok(outs.every(o=>!o.aimHeld),'no aim while the finger rests on the hull');assert.equal(f.controls.dataset.aiming,undefined);assert.ok(outs.some(o=>o.lockTarget===e.index),'locked');
+  const fired=m.fired;f.up(1,q.x,q.y);f.step(5);assert.equal(m.fired,fired,'lifting after the lock does not fire');assert.equal(m.homing.index,e.index);
+  m.update(1/60,{lockClear:true});
+  // A quick tap over the hull: the quick shot of v22 (no lock).
+  q=m.screenPoint(e.x,e.z,1.5);f.down(2,q.x,q.y,f.pad);f.step(4);f.up(2,q.x,q.y);outs=f.step(3);assert.ok(outs.some(o=>o.quickShot),'quick shot');assert.equal(m.fired,fired+1);assert.equal(m.homing,null);
+  run(m,60);
+  // A drag that starts over the hull: the v22 aim from the first point, release fires.
+  q=m.screenPoint(e.x,e.z,1.5);const f1=m.fired;f.down(3,q.x,q.y,f.pad);f.step(3);f.move(3,q.x-40,q.y-20);outs=f.step(6);assert.ok(outs.at(-1).aimHeld&&Number.isFinite(outs.at(-1).aimYaw),'aiming like v22');f.up(3,q.x-40,q.y-20);f.step(3);assert.equal(m.fired,f1+1,'release fires');assert.equal(m.homing,null);
+  f.dispose();
  }finally{delete globalThis.window;delete globalThis.document;delete globalThis.location;}
 });
 

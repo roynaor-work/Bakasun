@@ -14,8 +14,9 @@ const DEG=Math.PI/180;
  * movePixels: a finger that travels farther is a drag (steering, aiming), not a long press; pickPixels: how far from the hull line a
  * finger still picks it (the bar above the hull counts, `barLift`); slew: the turret's own turn (exponential at `rate` per second,
  * capped at `maxYawDeg` and `maxElevDeg` per second); alignDeg: on target; queueSeconds: a tap waits this long for the turret at most;
+ * settle: the aim point is refined until it moves less than this (sea units; a hull is 16 to 34 units from its centre to its side);
  * powers: candidate muzzle speeds, the flattest arc first, steeper ones to drop over a hull that stands in the way. */
-export const NAVAL_LOCK_DEFAULTS=Object.freeze({holdSeconds:.45,showAfter:.12,movePixels:12,pickPixels:34,barLift:26,refreshSeconds:.1,
+export const NAVAL_LOCK_DEFAULTS=Object.freeze({holdSeconds:.45,showAfter:.12,movePixels:12,pickPixels:34,barLift:26,refreshSeconds:.1,settle:1.5,
  slew:Object.freeze({rate:12,maxYawDeg:240,maxElevDeg:90}),alignDeg:.5,queueSeconds:1.6,iterations:4,powers:Object.freeze([1,.86,.74,.64,.55,.47])});
 export function navalLockConfig(balance){const c=balance?.lockOn||{};return {...NAVAL_LOCK_DEFAULTS,...c,slew:{...NAVAL_LOCK_DEFAULTS.slew,...(c.slew||{})}};}
 
@@ -40,30 +41,34 @@ export function navalLockPick(enemies,project,point,width,height,config,balance)
  return best?best.index:null;
 }
 
-/** Turret settings for the locked hull. For each candidate power (flattest first) the aim point is refined against the forecast
- * fleet with only the locked hull as a target: aim where it will be when the shell ends its flight, fly the forecast, repeat. The
- * candidate is then checked against every hull (another hull in the line of fire takes the shell): the first candidate that meets
- * the locked hull wins (`status:'ready'`). Otherwise the full-power answer is returned honestly: 'far' (beyond the shell's reach),
- * 'blocked' (another hull is in the way), 'miss' (for example a submarine under water). A guided missile homes by itself and a
- * repair kit needs no aim (`status:'ready'`, bearing only). Every answer is a real launch flown by the same physics. */
-export function navalLockSolve({ship,target,enemies,wind,kind=0,pressure=1,context={},targetable=e=>e.active&&e.hp>0,elevation},balance,config){
+/** Turret settings for the locked hull. For each candidate power (flattest first) the aim point is refined against the forecast fleet:
+ * solve the launch for the point, fly the forecast against every hull; when it meets the locked hull, move the point to where that hull
+ * is at the moment of contact; when it meets another hull or nothing, move it to where the locked hull is at the end of the flight (a
+ * forecast with the locked hull alone); repeat until the point stands still (`settle` units). The first candidate that meets the locked
+ * hull wins (`status:'ready'`). Otherwise the full-power answer is returned honestly: 'far' (beyond the shell's reach), 'blocked'
+ * (another hull is in the way), 'miss' (for example a submarine under water). `warm` (the previous answer's point for the same hull,
+ * weapon and power) starts the refinement where it ended, so a lock that is already on target costs one launch and one forecast.
+ * A guided missile homes by itself and a repair kit needs no aim (bearing only). Every answer is a real launch flown by the same physics. */
+export function navalLockSolve({ship,target,enemies,wind,kind=0,pressure=1,context={},targetable=e=>e.active&&e.hp>0,elevation,warm=null},balance,config){
  const c=config||navalLockConfig(balance),b=navalBallisticConfig(balance),bearing=Math.atan2(target.z-(ship.z||0),target.x-ship.x);
  if(kind===1||kind===5)return {yaw:bearing,elevation:Number.isFinite(elevation)?elevation:b.defaultElevation,power:1,reachable:true,status:'ready',contact:{index:target.index},guided:true};
- const only=e=>e.index===target.index&&targetable(e),all=kind===3?()=>false:targetable;
+ const only=e=>e.index===target.index&&targetable(e),all=kind===3?()=>false:targetable,settle=c.settle??1.5;
  const powers=kind===2?[1]:c.powers;let first=null;
  for(const p of powers){
-  let point={x:target.x,z:target.z},s=null,launch=null,last=null;
+  const fromWarm=warm&&warm.index===target.index&&warm.kind===kind&&warm.candidate===p&&Number.isFinite(warm.point?.x);
+  let point=fromWarm?{x:warm.point.x,z:warm.point.z}:{x:target.x,z:target.z},result=null;
   for(let i=0;i<c.iterations;i++){
-   s=navalSolveLaunch(ship,point,{power:p,wind,ammo:kind,pressure},balance);
-   launch=navalLaunch({ship,yaw:s.yaw,elevation:s.elevation,power:kind===2?s.power:p,wind,ammo:kind,pressure},balance);
-   last=navalForecast(launch,enemies,{...context,targetable:kind===3?()=>false:only},balance);const future=last.fleet.find(e=>e.index===target.index);
-   if(!future)break;const next={x:future.x,z:future.z};if(Math.hypot(next.x-point.x,next.z-point.z)<.05)break;point=next;
+   const s=navalSolveLaunch(ship,point,{power:p,wind,ammo:kind,pressure},balance);
+   const launch=navalLaunch({ship,yaw:s.yaw,elevation:s.elevation,power:kind===2?s.power:p,wind,ammo:kind,pressure},balance);
+   const check=navalForecast(launch,enemies,{...context,targetable:all},balance);result={s,check,point};
+   if(!s.reachable)break;
+   const ref=check.contact?.index===target.index||kind===3?check:navalForecast(launch,enemies,{...context,targetable:only},balance),future=ref.fleet.find(e=>e.index===target.index);
+   if(!future)break;const next={x:future.x,z:future.z};if(Math.hypot(next.x-point.x,next.z-point.z)<settle)break;point=next;
   }
-  if(!s)continue;
-  const settings={yaw:s.yaw,elevation:kind===2?0:s.elevation,power:kind===2?s.power:p,reachable:Boolean(s.reachable)};
-  if(!settings.reachable){if(p===powers[0])return {...settings,status:'far',contact:null,end:last?.end||null,flight:last?.flight??null};continue;}
-  if(kind===3)return {...settings,status:'ready',contact:{index:target.index,mine:true},end:last?.end||null,flight:last?.flight??null};
-  const check=navalForecast(launch,enemies,{...context,targetable:all},balance);
+  if(!result)continue;
+  const {s,check}=result,settings={yaw:s.yaw,elevation:kind===2?0:s.elevation,power:kind===2?s.power:p,reachable:Boolean(s.reachable),point:result.point,kind,index:target.index,candidate:p};
+  if(!settings.reachable){if(p===powers[0])return {...settings,status:'far',contact:null,end:check.end||null,flight:check.flight??null};continue;}
+  if(kind===3)return {...settings,status:'ready',contact:{index:target.index,mine:true},end:check.end||null,flight:check.flight??null};
   const answer={...settings,contact:check.contact,end:check.end,flight:check.flight,status:check.contact?.index===target.index?'ready':check.contact?'blocked':'miss'};
   if(answer.status==='ready')return answer;first??=answer;
  }
