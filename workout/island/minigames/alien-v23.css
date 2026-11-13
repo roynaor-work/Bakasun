@@ -1,0 +1,24 @@
+/* Aliens v23: two fire buttons in one row for the right thumb, above the ship's lane and clear of the stick:
+ * steady cannon (#shoot, unchanged size and place), the Vulcan (#vulcan) right next to it, the missile (#pass) one step
+ * further left. The Vulcan carries its heat on a ring: green, yellow, red, and a red blink while it is locked. */
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan{position:absolute;pointer-events:auto;width:88px;height:88px;min-width:0;min-height:88px;padding:21px;border-radius:50%;right:144px;bottom:calc(max(96px,13vh,env(safe-area-inset-bottom)) + 10px);color:#ffe2b8;opacity:1;border:1px solid #f0b46e88;background:radial-gradient(circle,#2a1d16f0 57%,transparent 60%),conic-gradient(var(--vulcan-color,#7fe0a0) var(--heat,0%),#2b3442 0);box-shadow:inset 0 1px #ffffff1f,inset 0 0 0 4px #160c0870,0 5px 24px #0006;backdrop-filter:blur(4px);transition:filter .15s,box-shadow .15s;touch-action:none;-webkit-tap-highlight-color:transparent}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan svg{width:100%;height:100%;position:relative;z-index:1;filter:drop-shadow(0 1px 3px #0008)}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan .alien-vulcan-ring{position:absolute;inset:-5px;border-radius:50%;border:2px solid transparent;pointer-events:none}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=green]{--vulcan-color:#7fe0a0}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=yellow]{--vulcan-color:#ffd34a}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=red],.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock]{--vulcan-color:#ff4a30}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock]{color:#ffb3a6;border-color:#ff4a30}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock] svg{opacity:.55}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock] .alien-vulcan-ring{border-color:#ff4a30;box-shadow:0 0 14px #ff4a3088}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock][data-blink=on]{--vulcan-color:#ffffff;border-color:#ffffff}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock][data-blink=on] .alien-vulcan-ring{border-color:#ffffff;box-shadow:0 0 18px #ff4a30cc}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan.held{filter:brightness(1.35);box-shadow:inset 0 0 22px #ffb46e38,0 0 25px #ffb46e33!important}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-v9=true].alien-controls #pass,.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23].alien-controls #pass{right:246px;bottom:calc(max(96px,13vh,env(safe-area-inset-bottom)) + 16px)}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] .alien-fire-caption{position:absolute;top:calc(100% + 3px);left:50%;transform:translateX(-50%);font:600 11px/1.2 Assistant,Arial,sans-serif;color:#c8e0ed;white-space:nowrap;text-shadow:0 1px 3px #000,0 0 6px #000;pointer-events:none;letter-spacing:0;direction:rtl}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan .alien-fire-caption{color:#ffd9a8}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan[data-level=lock] .alien-fire-caption{color:#ff8a78}
+@media(max-width:500px){
+ .game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan{right:130px}
+ .game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-v9=true].alien-controls #pass,.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23].alien-controls #pass{right:230px}
+}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23] #vulcan{transition:none}}

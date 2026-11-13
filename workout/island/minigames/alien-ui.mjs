@@ -1,5 +1,7 @@
 import {dataURL} from '../release.mjs?v=island-v2-20261107-11';
 import {alienPickup} from './ultra-alien-feedback.mjs';
+import {alienFireV23Enabled} from './alien-v23.mjs?v=island-v2-20261107-11';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-11';
 
 const paths={normal:'M10 19V8l2-5 2 5v11M8 20h8',spread:'M12 20V4m-2 3 2-3 2 3M8 20 4 6m-1 4 1-4 3 2m9 12 4-14m-3 2 3-2 1 4',laser:'M12 2v20M5 4H2v5m17 11h3v-5M8 5v14m8-14v14',wing:'m7 6 5 13-5-3-5 3Zm10-4 5 13-5-3-5 3Z',fire:'m14 2-9 12h6l-1 8 9-13h-6Z',nova:'M12 2C8 5 8 9 8 16h8c0-7 0-11-4-14ZM8 10l-4 7 4-1m8-6 4 7-4-1M10 19l2 3 2-3M10.5 8h3',pause:'M8 4v16M16 4v16',repair:'m14 4 2 4 4 2-5 5-4-4-7 7-2-2 7-7-4-4 5-5',upgrade:'m12 3 8 9h-5v9H9v-9H4Z',paint:'M12 3C10 6 5 10 5 15a7 7 0 0 0 14 0c0-5-5-9-7-12Z',hand:'M4 12h16m-5-5 5 5-5 5M4 5v14',play:'m7 3 14 9-14 9Z',shield:'m12 3 9 4-2 9-7 5-7-5-2-9Z'};
 export function alienIcon(kind){
@@ -16,6 +18,8 @@ if(typeof document!=='undefined'){
  void Promise.all([fetch(dataURL('data/config.json')).then(r=>r.json()),fetch(dataURL('data/strings.he.json')).then(r=>r.json())]).then(([config,strings])=>{
   const c=config.minigames.alienDefense.controls;
   const decorate=()=>{
+   // v23: the help text describes the two fire buttons; with ?alienFire=v15 (or ?alienV15=0) the single v22 button is back, so the intro shows the v22 text.
+   if((!alienFireV23Enabled()||!alienV15Enabled())&&strings['minigame.alienDefense.help.1.v15'])for(const line of document.querySelectorAll('.modal[data-intro=alienDefense] .game-help-lines p'))if(line.textContent===strings['minigame.alienDefense.help.1'])line.textContent=strings['minigame.alienDefense.help.1.v15'];
    for(const row of document.querySelectorAll('.game-screen[data-game=alienDefense] .alien-flight-weapon,.game-screen[data-game=alienDefense] .alien-flight-feedback')){
     const kind=row.dataset.alienWeapon||row.dataset.alienPickup||'',slot=row.querySelector('[data-alien-hud-icon]');if(!slot||slot.dataset.alienGlyph===kind)continue;
     slot.dataset.alienGlyph=kind;const item=alienPickup(kind);row.style.setProperty('--alien-flight-accent',item?.color||'#b4d7ea');

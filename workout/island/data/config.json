@@ -1253,6 +1253,7 @@
    }
   },
   "alienDefense": {
+   "v23": {"vulcanInterval": 0.1, "heatShots": 12, "lockSeconds": 2, "restSeconds": 0.5, "coolSeconds": 2, "regularDamage": 0.8, "vulcanDamage": 0.45, "yellowAt": 0.5, "redAt": 0.8, "vulcanKey": "KeyZ"},
    "v15": {"normalInterval": 0.18, "minInterval": 0.167, "rapidMinInterval": 0.13, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "restSeconds": 1, "pressShots": 1, "warmHeat": 0.35, "normalDamage": 0.8, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
    "move": {"maxSpeed": 265, "accelSeconds": 0.11, "reverseSeconds": 0.05, "driftSeconds": 0.08, "dragSpring": 24, "bankSeconds": 0.08, "bankMax": 1, "recoilSeconds": 0.14, "recoilPixels": 3},
    "v14": {"rateMult": 0.28, "damageTrim": 1.45, "minInterval": 0.055, "heatSeconds": 3.5, "coolSeconds": 1.6, "resumeHeat": 0.25, "shieldGap": 0.26, "gearExp": 1.0},

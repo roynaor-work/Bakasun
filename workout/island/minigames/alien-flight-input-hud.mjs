@@ -7,11 +7,12 @@ export function alienFlightHudStatus(model,mode='touch',manualFire=alienV9Enable
  const laser=model.powerup===1||(model.upgrades?.laser||0)>0||(model.equipment?.weapon||0)>=2,rapid=model.powerup===2,spread=model.spreadTime>0;
  const weapon=spread?'spread':laser?'laser':rapid?'rapid':'normal';
  const names={normal:'תותח',spread:'ירי מניפה',laser:'לייזר',rapid:'ירי מהיר'};
- const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');
+ const extras=[];if(spread&&laser)extras.push('לייזר');if(spread&&rapid)extras.push('ירי מהיר');if(model.powerup===3)extras.push('מגן');if(model.v23&&model.vulcanLocked)extras.push('וולקן מתקרר');
  const wings=model.wings?.filter(w=>w.active).length||0;if(wings)extras.push((wings===1?'מלווה':`${wings} מלווים`)+(model.v10&&model.wingTime>0?` ${Math.ceil(model.wingTime)}ש׳`:''));
  const left=model.spreadTime>0?model.spreadTime:model.powerup>=0&&model.powerTime>0?model.powerTime:0,timer=model.v11&&left>0?` · ${Math.ceil(left)}ש׳`:'';
  return {weapon,weaponText:`נשק: ${names[weapon]}${extras.length?' · '+extras.join(' · '):''}${timer}`,
-  controlText:mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
+  // v23: two fire buttons (steady cannon, Vulcan) and two keys (Space, Z).
+  controlText:model.v23?(mode==='keyboard'?'חצים לתנועה · רווח ירי רגיל · Z וולקן':mode==='mouse'?'גרירה לתנועה · רווח ירי רגיל · Z וולקן':'סטיק לתנועה · ברק ירי רגיל · וולקן ירי מהיר שמתחמם'):mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
 }
 
 export function alienFlightFeedbackText(feedback){

@@ -7,6 +7,7 @@ import {alienV13Enabled} from './alien-v13.mjs';
 import {alienV14Enabled,gearFactor,heatStep} from './alien-v14.mjs';
 import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-11';
 import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-11';
+import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-11';
 import {alienV11Enabled,blastRule} from './alien-v11.mjs';
 import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
@@ -17,10 +18,13 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,v11=balance.v11&&alienV11Enabled()?balance.v11:null,v12=balance.v12&&alienV12Enabled()?balance.v12:null,v13=balance.v13&&alienV13Enabled()?balance.v13:null,v14=balance.v14&&alienV14Enabled()?balance.v14:null,v15=v14&&alienV15Enabled()?v15Config(balance):null,move=v15&&alienMoveEnabled()?moveConfig(balance):null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
  if(v11)settings.shotSeconds*=v11.shotSecondsMult;
  if(v15)settings.seconds=Math.round(settings.seconds*v15.secondsMult);
+ // v23 (13/11/2026): two weapons on two buttons (steady cannon on input.firing, Vulcan on input.vulcan). Built on v15; ?alienFire=v15 keeps the v22 gate.
+ const v23=v15&&alienFireV23Enabled()?v23Config(balance):null;
  const rateK=v12?(v14?v14.rateMult:v12.rateMult):1,dmgK=v12?(v14?v14.rateMult*v14.damageTrim:v12.rateMult*v12.damageTrim):1;
  if(v12)settings.shotSeconds*=rateK;
  const hpGear14=v14?Math.pow(gearFactor({rateCap:v15?v15RateCap(v15):settings.shotSeconds/v14.minInterval,equipment,permanentUpgrades,hangar,power,rankRate:balance.hangar.rankRate,stacks:{damage:alienStack(campaign,'damage',permanentUpgrades.damage||0),rapid:alienStack(campaign,'rapid',permanentUpgrades.rapid||0),laser:alienStack(campaign,'laser',permanentUpgrades.laser||0)}}),v15?v15.gearExp:v14.gearExp):1;
  let heat=0,coolLeft=0,overheats=0,shotsBurst=0,gate={heat:0,cool:0,spent:false},fireMode='idle',burstShots=0,steadyShots=0;const spawnCap=v15?createSpawnCap(v15):null;
+ let vgate={heat:0,lock:0,rest:0},vulcanTime=0,vulcanSide=1,shotMode='normal',regularOn=false,vulcanOn=false,regularFired=0,vulcanFired=0;
  const behavior={motion:'drift',shoots:true,shield:0,warningSeconds:.7,bulletCap:12,fireCadence:settings.boltSeconds,diveEverySeconds:balance.tactics.diveEverySeconds,...balance.stageBehaviors[level-1]};
  if(v9)behavior.fireCadence*=v9.boltSecondsMult||1;
  if(v10&&v10.earlyBolt[level-1])behavior.fireCadence*=v10.earlyBolt[level-1];
@@ -109,7 +113,43 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   if(spawnCap&&!spawnCap.allow(time))return;
   const s=sp.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed*(kind===2?1.5:1),0,kind);if(!s)return;
   s.hitIds??=new Set();s.hitIds.clear();
-  Object.assign(s,{wing,damage:(v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});shots.push(s);fired++;
+  if(v23){s.vulcan=kind!==2&&shotMode==='burst';if(kind!==2){if(s.vulcan)vulcanFired++;else regularFired++;}}
+  Object.assign(s,{wing,damage:(v23&&kind!==2?(shotMode==='burst'?v23.vulcanDamage:v23.regularDamage):v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});shots.push(s);fired++;
+ }
+ /** v23: one trigger pull. kind 'regular' = the steady cannon on its own clock (single-shot sound), 'vulcan' = a Vulcan
+  * bullet, 'ride' = the steady cannon's shot carried by a Vulcan tick while both buttons are held (regular damage, but it
+  * sounds and spins with the Vulcan stream). Wing cannons alternate and converge like v15; the fan bonus and the escort
+  * wings join each pull as before. */
+ function v23Round(kind){
+  const stream=kind!=='regular',laser=upgrades.laser>0||powerup===1||(equipment.weapon||0)>=2,ship13=Boolean(v13&&model.shipV13),off=v12?(ship13?v13.cannonOffset:v12.cannonOffset):0,side=stream?vulcanSide:cannonSide,cx=player.x+side*off,fy=ship13?player.y-(v13.muzzleForward-balance.playerRadius):player.y;
+  shotMode=kind==='vulcan'?'burst':'normal';if(kind==='vulcan')burstShots++;else steadyShots++;if(move)player.recoil=Math.max(player.recoil||0,stream?.5:1);
+  sound(stream?'shot':'shotSingle');
+  fireShot(off?convergeVx(side,off,balance.shotSpeed,v15):0,laser?1:0,cx,false,fy);
+  if(spreadTime>0){fireShot(-balance.pickups.spreadSpeed,0,cx,false,fy);fireShot(balance.pickups.spreadSpeed,0,cx,false,fy);}
+  if(v12)cannonLast[side>0?1:0]=time;if(stream){lastShotAt=time;vulcanSide=-vulcanSide;}else cannonSide=-cannonSide;
+  for(const w of wings)if(w.active)fireShot(0,laser?1:0,w.x,true,w.y);
+  shotMode='normal';
+ }
+ /** v23 fire step. The steady cannon (input.firing) keeps its own clock (shotTime) at all times. While the Vulcan
+  * (input.vulcan) runs, its barrels set the pace, 10 per second: each tick carries the cannon's shot when that is due, or
+  * else a Vulcan bullet, so both buttons together never fire faster than the Vulcan alone and the cannon keeps its rate
+  * inside the stream. Every tick heats the gauge; a full gauge locks only the Vulcan, and the cannon fires on alone.
+  * Returns whether any weapon is firing (the v11 laser volleys follow it as before). */
+ function v23Fire(dt,input){
+  const wantRegular=Boolean(input.firing),wantVulcan=Boolean(input.vulcan),rapid=powerup===2;
+  vgate=vulcanGate(vgate,wantVulcan,dt,v23);
+  const gearRate=(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+alienStack(campaign,'rapid',upgrades.rapid))*power+(bonuses.fireRate||0),interval=()=>fireInterval('normal',gearRate*(rapid?balance.pickups.rapidMultiplier:1),rapid,v15);
+  if(!wantRegular)shotTime=Math.max(shotTime,0);
+  if(!vgate.firing)vulcanTime=Math.max(vulcanTime,0);
+  for(let rounds=0;vgate.firing&&vulcanTime<=0&&rounds<3;rounds++){
+   if(wantRegular&&shotTime<=0){v23Round('ride');shotTime+=interval();}else v23Round('vulcan');
+   vgate=vulcanShot(vgate,v23);vulcanTime+=v23.vulcanInterval;
+   if(vgate.lock>0){overheats++;vulcanTime=Math.max(vulcanTime,0);break;}
+  }
+  if(!vgate.firing)for(let rounds=0;wantRegular&&shotTime<=0&&rounds<3;rounds++){v23Round('regular');shotTime+=interval();}
+  regularOn=wantRegular;vulcanOn=vgate.firing;heat=vgate.heat;coolLeft=vgate.lock;
+  fireMode=vulcanOn?'burst':regularOn?'normal':coolLeft>0?'cool':'idle';
+  return regularOn||vulcanOn;
  }
  function offerUpgrade(){const available=availableAlienUpgrades(upgrades,balance,equipment,careerWins);if(!roundChoices||!available.length)return false;choices.length=0;for(let i=0;i<Math.min(campaign.choiceCount,available.length);i++){const at=i+Math.floor(random()*(available.length-i));[available[i],available[at]]=[available[at],available[i]];choices.push(available[i]);}choosing=true;return true;}
  function chooseUpgrade(index){if(!choosing||!Number.isInteger(index)||!choices[index])return false;const id=choices[index];upgrades[id]++;onUpgrade({...upgrades});sound('upgrade');if(id==='wing')wingTime=balance.pickups.seconds;if(id==='shield'){maxLives++;lives++;}choosing=false;wave++;formation();return true;}
@@ -133,7 +173,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  formation();
  const model={settings,behavior,player,aliens,shots,bolts,sparks,pickups,nova,equipment,upgrades,choices,wings,loot,feedback,telegraphs,chooseUpgrade,resetInput(){novaPressed=false;},
   get maxLives(){return maxLives;},get choosing(){return choosing;},get combo(){return combo;},get celebration(){return celebration;},get coins(){return coins;},get crystals(){return crystals;},get pattern(){return pattern();},get remaining(){return Math.max(0,settings.seconds-time);},statusId:'minigame.alienStatus',
-  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
+  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get v23(){return Boolean(v23);},get vulcanHeat(){return vgate.heat;},get vulcanLocked(){return Boolean(v23&&vgate.lock>0);},get vulcanLockLeft(){return vgate.lock;},get vulcanOn(){return vulcanOn;},get regularOn(){return regularOn;},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
   statusValues(){Object.assign(status,{score,lives,wave,nova:novaCharges});return status;},
   update(dt,input=EMPTY){
    if(result||dt<=0||choosing)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;formationAge+=dt;feedback.life=Math.max(0,feedback.life-dt);invulnerable=Math.max(0,invulnerable-dt);nova.life=Math.max(0,nova.life-dt);comboTime=Math.max(0,comboTime-dt);if(!comboTime)combo=0;celebration=Math.max(0,celebration-dt);
@@ -148,14 +188,16 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
     nova.y=y0+(nextY-y0)*tMin;nova.flight=Math.max(0,(nova.y-nova.stopY)/(nova.fromY-nova.stopY)*balance.nova.throwSeconds);
     if(hit||nextY===nova.stopY)detonate(hit);
    }
-   shotTime-=dt;hitSoundCool=Math.max(0,hitSoundCool-dt);spinRate+=((v12&&time-lastShotAt<.12?v12.spinRate:0)-spinRate)*Math.min(1,dt*8);spinAngle+=spinRate*dt;
+   shotTime-=dt;if(v23)vulcanTime-=dt;hitSoundCool=Math.max(0,hitSoundCool-dt);spinRate+=((v12&&time-lastShotAt<.12?v12.spinRate:0)-spinRate)*Math.min(1,dt*8);spinAngle+=spinRate*dt;
    let fireOn=Boolean(input.firing);
+   if(v23)fireOn=v23Fire(dt,input);else{
    if(v15){const was=gate.cool>0;gate=fireGate(gate,fireOn,dt,v15);heat=gate.heat;coolLeft=gate.cool;fireMode=gate.mode;fireOn=gate.firing;if(!was&&gate.cool>0)overheats++;}
    else if(v14){const was=coolLeft>0,h=heatStep({heat,cool:coolLeft},fireOn,dt,v14);heat=h.heat;coolLeft=h.cool;fireOn=h.firing;if(!was&&coolLeft>0)overheats++;}
    if(v12&&!fireOn)shotTime=Math.max(shotTime,0);
    for(let rounds=0;fireOn&&shotTime<=0&&rounds<(v12?3:1);rounds++){const laser=upgrades.laser>0||powerup===1||(equipment.weapon||0)>=2,ship13=Boolean(v13&&model.shipV13),cx=v12?player.x+cannonSide*(ship13?v13.cannonOffset:v12.cannonOffset):player.x;const fy=ship13?player.y-(v13.muzzleForward-balance.playerRadius):player.y;if(v15){if(fireMode==='burst')burstShots++;else steadyShots++;if(move)player.recoil=fireMode==='burst'?.5:1;}sound(v15&&fireMode!=='burst'?'shotSingle':'shot');fireShot(v15&&v12?convergeVx(cannonSide,ship13?v13.cannonOffset:v12.cannonOffset,balance.shotSpeed,v15):0,laser?1:0,cx,false,fy);if(spreadTime>0){fireShot(-balance.pickups.spreadSpeed,0,cx,false,fy);fireShot(balance.pickups.spreadSpeed,0,cx,false,fy);}if(v12){cannonLast[cannonSide>0?1:0]=time;if(!v15||fireMode==='burst')lastShotAt=time;cannonSide=-cannonSide;}for(const w of wings)if(w.active)fireShot(0,laser?1:0,w.x,true,w.y);
     const gearRate=(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(1+alienStack(campaign,'rapid',upgrades.rapid))*power+(bonuses.fireRate||0);
     shotTime=(v12?shotTime:0)+(v15?fireInterval(fireMode,gearRate*(powerup===2?balance.pickups.rapidMultiplier:1),powerup===2,v15):Math.max(v14?v14.minInterval:.1*(v12?rateK:1),settings.shotSeconds/gearRate/(powerup===2?balance.pickups.rapidMultiplier:1)));}
+   }
    if(v11&&aliens.length){if(fireOn&&laserLeft<=0){laserTimer-=dt;if(laserTimer<=0){laserLeft=v11.laserShots[0]+Math.floor(random()*(v11.laserShots[1]-v11.laserShots[0]+1));laserGap=0;laserTimer=v11.laserEvery[0]+random()*(v11.laserEvery[1]-v11.laserEvery[0]);}}
     if(laserLeft>0){laserGap-=dt;if(laserGap<=0){sound('laser');fireShot(0,2);lasersFired++;laserLeft--;laserGap=v11.laserGap;}}}
    if(!aliens.length){if(time>=settings.seconds){finish(wave>=settings.waves||completion==='survival'?'win':'lose');return;}nextWave+=dt;if(nextWave>=(v9?.wavePauseSeconds??balance.wavePauseSeconds)){while(bolts.length)releaseAt(bolts,bolts.length-1,bp);if(wave>=settings.waves){finish('win');return;}if(offerUpgrade())return;wave++;formation();}return;}
@@ -198,6 +240,6 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(!a.boss&&a.diveAge<0&&a.y-a.radius>player.y+20){releaseAt(aliens,i,ap);damagePlayer(player.x,player.y);}}
    if(lives<=0)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');else if(time>=settings.seconds)finish(completion==='survival'&&!settings.boss?'win':'lose');
   },
-  snapshot(){return{overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
+  snapshot(){return{...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
  };return model;
 }

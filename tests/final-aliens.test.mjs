@@ -1,5 +1,10 @@
 // Final fix (Fable, 11/11/2026), aliens v15: steady cannon at about 5.6/s, Vulcan only in short bursts (taps too, 12/11), a hard cap at
 // the spawn point that no gear, bonus or input path can exceed, stage 1 about 90-130 s. Pure model tests.
+// 13/11/2026 (v23): two fire buttons are the default now (steady cannon on the fire button, Vulcan with its own heat on a second
+// one); ?alienFire=v15 keeps this v15 single-button gate exactly. make() pins that gate unless o.fire==='v23' (as the v14 tests run
+// with __alienV15=false), so every v15 mechanic below is still checked as it was. The stage-level checks (the cap with everything
+// maxed, keyboard and touch, stage 1 at the phone aspect, converging cannons) run in both modes, and in v23 with the regular button
+// alone and with both buttons. The two-button mechanics: tests/island-aliens-v23.test.mjs.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -9,9 +14,13 @@ import {createV15ShotAudio} from '../workout/island/minigames/alien-v15-audio.mj
 import {alienMoveEnabled,MOVE_DEFAULTS,moveConfig,alienMoveStep,recoilOffset} from '../workout/island/minigames/alien-move.mjs';
 import {moveAlienPlayer} from '../workout/island/minigames/g2m-motion.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
+import {v23Config} from '../workout/island/minigames/alien-v23.mjs';
 import {stage} from '../workout/island/verification/aliens-v14/sim.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.alienDefense,cfg=v15Config(balance);
-const make=(o={},off=false,level=1)=>{globalThis.__alienV15=off?false:undefined;try{return createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false,...o});}finally{globalThis.__alienV15=undefined;}};
+const make=(o={},off=false,level=1)=>{const {fire='v15',...rest}=o;globalThis.__alienV15=off?false:undefined;globalThis.__alienFire=fire==='v23'?undefined:'v15';try{return createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienV15=undefined;globalThis.__alienFire=undefined;}};
+const c23=v23Config(balance);
+/** Inputs per mode: v15 = the single button held; v23 = the regular button alone, or both buttons (regular + Vulcan). */
+const MODES=[{fire:'v15',name:'v15 single button',hold:{firing:true}},{fire:'v23',name:'v23 regular button',hold:{firing:true}},{fire:'v23',name:'v23 both buttons',hold:{firing:true,vulcan:true}}];
 const run=(m,s,input={},dt=1/60)=>{for(let i=0;i<Math.ceil(s/dt);i++)m.update(dt,input);};
 const maxed={equipment:{weapon:2,rate:1.5,damage:1.8,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3},hangar:{rapid:20},power:1.45,bonuses:{fireRate:2}};
 
@@ -72,16 +81,20 @@ test('model: after the burst the gauge stays amber between taps (gunsWarm), only
  const off=make({},true);run(off,4,{firing:true});assert.equal(off.gunsWarm,false);
 });
 test('model, every multiplier maxed (equipment, upgrades, hangar 20, power 1.45, fireRate bonus, rapid pickup, spread, wings): the cap holds',()=>{
- const m=make(maxed);m.pickups.push({kind:2,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:0,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:4,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});
+ for(const mode of MODES){
+ const m=make({...maxed,fire:mode.fire});m.pickups.push({kind:2,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:0,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});m.pickups.push({kind:4,x:m.player.x,y:m.player.y,vy:0});m.update(1/60,{});
  assert.equal(m.powerup,2);assert.ok(m.spreadTime>0);assert.ok(m.wingTime>0);
- const a=m.snapshot();run(m,.5,{firing:true});assert.ok(m.wings.filter(w=>w.active).length>=1,'wings are active in this profile');run(m,9.5,{firing:true});const b=m.snapshot();
+ const a=m.snapshot();run(m,.5,mode.hold);assert.ok(m.wings.filter(w=>w.active).length>=1,'wings are active in this profile');run(m,9.5,mode.hold);const b=m.snapshot();
  const rounds=(b.steadyShots+b.burstShots)-(a.steadyShots+a.burstShots),projectiles=b.fired-a.fired;
- const maxRounds=cfg.burstSeconds/cfg.burstInterval+(10-cfg.burstSeconds-cfg.coolSeconds)/cfg.rapidMinInterval+2;
- assert.ok(rounds<=maxRounds,`trigger pulls ${rounds} > ${maxRounds}`);
- assert.ok(projectiles<=cfg.capPerSecond*10+cfg.capBurst,`projectiles ${projectiles}`);assert.ok(b.capDropped>0,'the spawn cap actually dropped something under this load');
+ // v15: one burst, one cool-down, then the rapid floor. v23: the regular button alone has no burst (the rapid floor all the time);
+ // with both buttons the Vulcan's barrels set the pace (one tick per vulcanInterval, carrying the cannon's shots), never faster.
+ const maxRounds=mode.fire==='v15'?cfg.burstSeconds/cfg.burstInterval+(10-cfg.burstSeconds-cfg.coolSeconds)/cfg.rapidMinInterval+2:mode.hold.vulcan?10/Math.min(c23.vulcanInterval,cfg.rapidMinInterval)+2:10/cfg.rapidMinInterval+2;
+ assert.ok(rounds<=maxRounds,`${mode.name}: trigger pulls ${rounds} > ${maxRounds}`);
+ assert.ok(projectiles<=cfg.capPerSecond*10+cfg.capBurst,`${mode.name}: projectiles ${projectiles}`);assert.ok(b.capDropped>0,`${mode.name}: the spawn cap actually dropped something under this load`);
+ }
 });
 test('model: keyboard-style and touch-style inputs reach the same gate (same fired count)',()=>{
- const a=make(),b=make();run(a,5,{moveX:0,firing:true});run(b,5,{moveX:0,firing:true,flight:true,x:a.player.x});assert.equal(a.snapshot().fired,b.snapshot().fired);
+ for(const mode of MODES){const a=make({fire:mode.fire}),b=make({fire:mode.fire});run(a,5,{moveX:0,...mode.hold});run(b,5,{moveX:0,...mode.hold,flight:true,x:a.player.x});assert.equal(a.snapshot().fired,b.snapshot().fired,mode.name);assert.ok(a.snapshot().fired>0,mode.name);}
 });
 test('model: a burst sounds like the Vulcan (shot), steady fire is a single-shot sound (shotSingle); the ship only shakes in a burst',()=>{
  const events=[];const m=make({sound:e=>events.push(e)});
@@ -91,19 +104,24 @@ test('model: a burst sounds like the Vulcan (shot), steady fire is a single-shot
 });
 const PHONE=(844/390)/(360/480);
 /** Headless bot at the phone aspect (hit test stretched 2.9x like 844x390): steers under the lowest alien, dodges, holds fire. */
-const playPhone=(seed,profile={},level=1)=>{const m=make({random:seededRandom(seed),level,...profile});m.effectAspect=PHONE;
+const playPhone=(seed,profile={},level=1,mode=MODES[0])=>{const m=make({random:seededRandom(seed),level,...profile,fire:mode.fire});m.effectAspect=PHONE;
  for(let f=0;f<30*400&&!m.result;f++){const t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];const py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}let want=t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>14);if(!safe(want)){out:for(let d=0;d<=360;d+=3)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>18&&x<342&&safe(x)){want=x;break out;}}}
-  m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),firing:true});}
+  m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),...mode.hold});}
  return {seconds:+m.time.toFixed(1),outcome:m.result?.outcome||'timeout',fired:m.snapshot().fired,shotsPerSec:+(m.snapshot().fired/m.time).toFixed(2)};};
 test('stage 1 at the phone aspect lasts 85-135 s and is won for base, upgraded and heavy gear (headless bot holding fire)',()=>{
  const profiles=[{},{equipment:{weapon:1,rate:1.15,damage:1.25,shield:1}},{equipment:{weapon:2,rate:1.5,damage:1.8,shield:3},permanentUpgrades:{damage:3,rapid:3,laser:3,wing:3,shield:3},hangar:{rapid:20},power:1.45}];
- for(const profile of profiles){const rs=[1,2,3].map(s=>playPhone(s,profile)),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length;assert.ok(avg>=85&&avg<=135,`avg ${avg} for ${JSON.stringify(profile)} ${JSON.stringify(rs)}`);assert.ok(rs.every(r=>r.outcome==='win'),JSON.stringify(rs));assert.ok(rs.every(r=>r.shotsPerSec<=8),rs.map(r=>r.shotsPerSec).join());}
+ // v23 with both buttons held all stage long: the Vulcan stream (10/s while open, 1.2 s, then a 2 s lock) plus the cannon during the
+ // lock and the laser volleys average about 8-8.4 projectiles/s, more than one button (that is the Vulcan Roy asked for), so that mode
+ // is bounded at 9/s; the v15 button and the v23 regular button keep the 8/s bound. The stage window and the wins are the same for all.
+ for(const mode of MODES)for(const profile of profiles){const rs=[1,2,3].map(s=>playPhone(s,profile,1,mode)),avg=rs.reduce((n,r)=>n+r.seconds,0)/rs.length,spsCap=mode.hold.vulcan?9:8;assert.ok(avg>=85&&avg<=135,`${mode.name}: avg ${avg} for ${JSON.stringify(profile)} ${JSON.stringify(rs)}`);assert.ok(rs.every(r=>r.outcome==='win'),mode.name+' '+JSON.stringify(rs));assert.ok(rs.every(r=>r.shotsPerSec<=spsCap),mode.name+' '+rs.map(r=>r.shotsPerSec).join());}
  const old=stage(1,1,{});assert.ok(old.fired>0,'the aspect-1 sim still runs');
 });
 test('v15 cannon convergence: at the phone aspect (844x390) straight wing shots miss an alien centred on the ship, converging shots hit it',()=>{
  const phone=(844/390)/(360/480);
- const hitsOf=off=>{const m=make({},off);m.effectAspect=phone;const a=m.aliens[0];for(const o of m.aliens)o.entry=0;a.x=a.baseX=m.player.x;a.y=a.baseY=a.originY=110;a.hp=a.maxHp=1000;a.shield=0;m.aliens.splice(1);run(m,3,{firing:true});const s=m.snapshot();return {fired:s.fired,hits:s.hits};};
+ const hitsOf=(off,mode=MODES[0])=>{const m=make({fire:mode.fire},off);m.effectAspect=phone;const a=m.aliens[0];for(const o of m.aliens)o.entry=0;a.x=a.baseX=m.player.x;a.y=a.baseY=a.originY=110;a.hp=a.maxHp=1000;a.shield=0;m.aliens.splice(1);run(m,3,mode.hold);const s=m.snapshot();return {fired:s.fired,hits:s.hits};};
  const straight=hitsOf(true),converging=hitsOf(false);
+ // v23: the regular cannon and the Vulcan both fire from the converging wing cannons.
+ for(const mode of MODES.slice(1)){const r=hitsOf(false,mode);assert.ok(r.hits>=r.fired*.8,`${mode.name}: ${r.hits}/${r.fired} hits`);}
  assert.ok(straight.hits<=straight.fired*.1,`v14 straight shots from the wings: ${straight.hits}/${straight.fired} hits`);
  assert.ok(converging.hits>=converging.fired*.8,`v15 converging shots: ${converging.hits}/${converging.fired} hits`);
  assert.ok(Math.abs(convergeVx(1,11.3,460,cfg))>0&&convergeVx(1,11.3,460,cfg)<0&&convergeVx(-1,11.3,460,cfg)>0);
