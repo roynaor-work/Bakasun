@@ -11,9 +11,11 @@ import {leagueBalance, leagueTrack, leagueAi, stageGoals, judgeGoals, courseFact
 import {alpineLeagueResult} from '../workout/island/minigames/alpine-league-result.mjs';
 import {loadLeague, saveLeague, createLeagueStore, LEAGUE_KEY} from '../workout/island/minigames/alpine-league-store.mjs';
 import {createGhostRecorder, decodeGhost, ghostAt, ghostTimeAt, saveGhost, loadGhost, validGhost, GHOST_KEY} from '../workout/island/minigames/alpine-league-ghost.mjs';
-import {ALPINE_THEME_ASSETS, THEME_LOOKS, themeAssetFiles} from '../workout/island/minigames/alpine-league-theme.mjs';
+import {ALPINE_THEME_ASSETS as ALPINE_THEMES, THEME_LOOKS, THEME_IDS, THEME_DIR, themeAssetFiles, themePackFiles} from '../workout/island/minigames/alpine-league-theme.mjs';
 import {createKidBot} from '../workout/island/tools/alpine-league-bot.mjs';
 import {buildShell} from '../workout/island/tools/offline-shell.mjs';
+import {leagueOfflineFiles} from '../workout/island/tools/alpine-league-offline.mjs';
+import {OFFLINE_GAMES} from '../workout/island/ui/offline.mjs';
 
 /** Ski league v23: 30 stages after the three ski stages, in six themes, with seasons, points, stars, gear, goals, a record ghost and
  * bosses. Node part only (the real-touch browser proof is tools/alpine-league-browser.mjs). */
@@ -244,14 +246,46 @@ test('child-like bot on the real engine: early stages mostly passed, the last st
   assert.deepEqual(first[0].stats.order.slice().sort(), [...RIDER_IDS].sort());
 });
 
-test('offline: every league module is in the shell, every theme asset exists and is in the ski download list, within its budget', async () => {
+/** Positions of every primitive of an uncompressed glTF binary: [{min, max, points}] (the Codex pack is plain glTF, no Draco). */
+async function primitivesOf(file) {
+  const b = await readFile(new URL(file, root)), len = b.readUInt32LE(12), j = JSON.parse(b.subarray(20, 20 + len).toString()), bin = 20 + len + 8;
+  return j.meshes.flatMap(m => m.primitives.map(p => {
+    const a = j.accessors[p.attributes.POSITION], v = j.bufferViews[a.bufferView], off = bin + (v.byteOffset || 0) + (a.byteOffset || 0), stride = v.byteStride || 12;
+    return {min: a.min, max: a.max, points: Array.from({length: a.count}, (_, i) => [0, 4, 8].map(k => b.readFloatLE(off + i * stride + k)))};
+  }));
+}
+test('Codex theme art matches the fits in the asset map: gate poles where poleHalf says and flags above 0.5 m, ramps rising toward -Z (flipped), landmarks upright', async () => {
+  for (const id of THEME_IDS) {
+    const a = ALPINE_THEMES[id];
+    for (const gate of a.gates) {
+      const parts = await primitivesOf(gate.path), ground = parts.filter(p => p.min[1] <= .5), flags = parts.filter(p => p.min[1] > .5);
+      assert.ok(ground.length && flags.length, `${gate.path}: poles and flags`);
+      for (const p of ground) for (const [x] of p.points) assert.ok(Math.abs(Math.abs(x) - gate.poleHalf) < .25, `${gate.path}: pole or foot at ${x}`);
+      for (const p of flags) for (const [x] of p.points) assert.ok(Math.abs(x) <= gate.poleHalf + .01 && Math.abs(x) > 1, `${gate.path}: flag hangs inward from its pole (${x})`);
+    }
+    const ramp = await primitivesOf(a.track.kicker.path), top = ramp.flatMap(p => p.points).reduce((m, q) => q[1] > m[1] ? q : m);
+    assert.equal(a.track.kicker.flip, true); assert.ok(top[2] < 0, `${id}: the pack's ramp rises toward -Z`); assert.deepEqual([...a.track.kicker.box], [4, 1.8, 6]);
+    for (const l of a.landmarks) { const parts = await primitivesOf(l.path); assert.ok(Math.min(...parts.map(p => p.min[1])) >= -.01 && Math.max(...parts.map(p => p.max[1])) > 2, l.path); assert.ok(l.height > 2 && l.spacing[0] > 20 && l.offset[0] >= 8, l.path); }
+  }
+});
+
+test('offline: every league module is in the shell; every theme file exists and is in the league group (the pack) or the ski group (shipped fallbacks), both within budget', async () => {
   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8')), shell = await buildShell();
   assert.deepEqual(manifest.shell, shell, 'run node workout/island/tools/offline-shell.mjs');
   for (const f of ['minigames/alpine-league-core.mjs', 'minigames/alpine-league-stages.mjs', 'minigames/alpine-league-result.mjs', 'minigames/alpine-league-store.mjs', 'minigames/alpine-league-island.mjs', 'minigames/alpine-league-ghost.mjs', 'minigames/alpine-league-theme.mjs', 'minigames/alpine-league-look.mjs', 'minigames/alpine-league.css', 'ui/alpine-league.mjs', 'ui/alpine-league.css'])
     assert.ok(manifest.shell.includes(f), f);
-  const listed = new Set(manifest.games.alpine);
-  for (const id of Object.keys(ALPINE_THEME_ASSETS)) for (const f of themeAssetFiles(id)) { await stat(new URL(f, root)); assert.ok(listed.has(f), `${f} (${id}) is in games.alpine`); }
-  let bytes = 0; for (const f of manifest.games.alpine) bytes += (await stat(new URL(f, root))).size; assert.ok(bytes < 8_500_000, `games.alpine ${bytes} bytes`);
+  assert.deepEqual(manifest.games.alpineLeague, leagueOfflineFiles(), 'run node workout/island/tools/alpine-league-offline.mjs');
+  assert.equal(OFFLINE_GAMES.alpineLeague, 'ליגת הסקי');
+  const ski = new Set(manifest.games.alpine), league = new Set(manifest.games.alpineLeague);
+  for (const id of THEME_IDS) {
+    assert.ok(themePackFiles(id).length >= 9, `${id} uses the Codex pack`);
+    for (const f of themeAssetFiles(id)) { await stat(new URL(f, root)); assert.ok(f.startsWith(THEME_DIR) ? league.has(f) : ski.has(f), `${f} (${id}) is listed`); }
+  }
+  // Runtime files only: no previews, review sheets, sources or the reference skier from design/, no inventory or licence text.
+  for (const f of league) assert.match(f, /^assets\/alpine-themes-v23\/(pine|ice|lava|aurora|village|peak)\/[a-z-]+\.(glb|webp|png)$/, f);
+  const size = async list => { let n = 0; for (const f of list) n += (await stat(new URL(f, root))).size; return n; };
+  const skiBytes = await size(manifest.games.alpine), leagueBytes = await size(manifest.games.alpineLeague);
+  assert.ok(skiBytes < 8_500_000, `games.alpine ${skiBytes} bytes`); assert.ok(leagueBytes < 1_200_000, `games.alpineLeague ${leagueBytes} bytes`);
 });
 
 test('the island UI wires the league behind the flag; screens are Hebrew and never use exclamation marks', async () => {

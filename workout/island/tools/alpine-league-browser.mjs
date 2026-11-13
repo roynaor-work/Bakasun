@@ -6,9 +6,12 @@
  * 2. League stage 1 (game stage 4) from the league button, through the instructions, a full race to the finish, the league result.
  * 3. Save and return: back to the league (stage 2 open), reload the page, the league is still there (and the island save never got a
  *    league field).
- * 4. The six themes at full size (tools/alpine-league-themes.html: the real session on a stage of each theme), opening and mid-race.
+ * 4. The six themes at full size (tools/alpine-league-themes.html: the real session on a stage of each theme), opening and mid-race, with
+ *    the Codex art: the files each theme fetched from assets/alpine-themes-v23, the gates and landmarks that loaded, triangles and calls.
  * Usage: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tools/alpine-league-browser.mjs [--skip-themes] [--themes-only]
- * Writes screenshots and browser-proof.json to verification/alpine-league-v23/. */
+ * Writes screenshots and browser-proof.json to verification/alpine-league-v23/. SwiftShader on a busy machine can fall to a frame every
+ * few seconds (the race clock then runs slower than the wall clock, as on a very slow phone), so the limits are generous: a full stage
+ * may take tens of minutes. The stage time in the report is the race clock. */
 import {mkdir, writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {serveIsland, islandChromium, installIslandCspMonitor} from '../../../tests/helpers/island-browser.mjs';
@@ -37,12 +40,13 @@ async function touchKit(page) {
 /** The child-like bot, playing through touches: thumb 1 holds the floating stick in the left half of the slope, finger 2 taps boost or a trick.
  * CDP keeps a second finger down until a touchEnd, which lifts every finger: a tap of finger 2 is therefore "lift all, put the thumb back on
  * its landing point, press the button, slide the thumb to its steering offset", and the next frame lifts the button the same way. */
-async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds = 260, shotAt = null, shotPath = null, stopAt = null} = {}) {
+async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds = 260, shotAt = null, shotPath = null, shots = [], stopAt = null} = {}) {
+  const pending = [...(shotAt ? [[shotAt, shotPath]] : []), ...shots].sort((a, b) => a[0] - b[0]), taken = [];
   const stick = await page.locator('.alpine-joystick').boundingBox(), reach = Math.max(10, (stick.width / 2 - 8) * .62);
   const boost = await touch.center('.alpine-boost'), grab = await touch.center('.alpine-trick[data-trick=grab]');
   const origin = [Math.round(W / 2 * .62), Math.round(H * .55)];   // on the slope, left half, clear of the stick (as tests/island-alpine-ctrl-ski)
   let snap = await readSnapshot(); const physics = snap.physics;
-  const bot = createKidBot({seed, physics}); let down = false, extra = null, presses = {boost: 0, trick: 0}, polls = 0, shot = false;
+  const bot = createKidBot({seed, physics}); let down = false, extra = null, presses = {boost: 0, trick: 0}, polls = 0;
   const regrip = async (thumb, button) => { await touch.send('touchEnd', []); await touch.send('touchStart', [[1, ...origin]]); if (button) await touch.send('touchStart', [[1, ...origin], [2, ...button]]); await touch.send('touchMove', button ? [thumb, [2, ...button]] : [thumb]); };
   const t0 = Date.now();
   while (Date.now() - t0 < maxSeconds * 1000) {
@@ -57,12 +61,12 @@ async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds
     else if (d.boost) { await regrip(thumb, boost); extra = 'boost'; presses.boost++; }
     else if (d.trick) { await regrip(thumb, grab); extra = 'trick'; presses.trick++; }
     else await touch.send('touchMove', [thumb]);
-    if (shotAt && !shot && f.timeMs > shotAt) { shot = true; await page.screenshot({path: shotPath}); }
+    while (pending.length && f.timeMs > pending[0][0]) { const [, path] = pending.shift(); await page.screenshot({path}); taken.push({path: path.split('/').pop(), raceMs: f.timeMs}); }
     if (stopAt && f.timeMs > stopAt) break;
     await page.waitForTimeout(30);
   }
   if (down) await touch.send('touchEnd', []);
-  return {presses, polls, wallSeconds: +((Date.now() - t0) / 1000).toFixed(1)};
+  return {presses, polls, shots: taken, wallSeconds: +((Date.now() - t0) / 1000).toFixed(1)};
 }
 /** Read-only: the race snapshot of the session the island is running (exposed by ?dev=1). */
 const islandSnapshot = page => page.evaluate(() => { const s = window.__island?.ui?.activityInterface?.current?.session?.snapshot; return s ? {phase: s.phase, disposed: s.disposed, frame: s.frame, league: s.league} : null; });
@@ -70,7 +74,7 @@ const islandSnapshot = page => page.evaluate(() => { const s = window.__island?.
 try {
   if (!args.has('--themes-only')) {
     // ---------- 1. Fresh island, games menu, the ski league card, season and gear ----------
-    const page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
+    const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page);
     page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
     const touch = await touchKit(page);
     await page.goto(server.url + '?dev=1&games=1', {waitUntil: 'load'});
@@ -97,8 +101,8 @@ try {
       if (attempt === 1) { await page.screenshot({path: OUT + '05-stage-opening.png'}); step('stage opening (goals on the card)', opening); }
       const physics = await page.evaluate(async () => (await (await fetch('data/config.json')).json()).minigames.alpineRush.physics);
       const startWall = Date.now(); await touch.tap('[data-action=alpine-start]');
-      const ride = await rideWithTouches(page, touch, async () => { const s = await islandSnapshot(page); return s && {...s, physics}; }, {seed: 40 + attempt, shotAt: 20000, shotPath: OUT + `06-race-${attempt}.png`});
-      await page.waitForSelector('[data-alpine-league-result]', {timeout: 120000});
+      const ride = await rideWithTouches(page, touch, async () => { const s = await islandSnapshot(page); return s && {...s, physics}; }, {seed: 40 + attempt, maxSeconds: 3600, shotAt: 20000, shotPath: OUT + `06-race-${attempt}.png`});
+      await page.waitForSelector('[data-alpine-league-result]', {timeout: 600000});
       result = await page.evaluate(() => { const r = document.querySelector('[data-alpine-league-result]'); return {passed: r.dataset.passed === 'true', headline: r.querySelector('h4')?.textContent, stars: r.querySelectorAll('.al-result-top .al-stars i.on').length, goals: [...r.querySelectorAll('.al-goal-check li')].map(li => ({goal: li.dataset.goal, ok: li.dataset.ok === 'true', text: li.textContent})), rows: [...r.querySelectorAll('.result-row')].map(x => x.textContent)}; });
       const league = await page.evaluate(() => JSON.parse(localStorage.getItem('island.alpine.league.v1') || 'null'));
       const last = league?.history?.at(-1);
@@ -125,18 +129,20 @@ try {
     const picks = {pine: 2, ice: 7, lava: 13, aurora: 17, village: 22, peak: 28};
     const only = process.argv.includes('--theme') ? process.argv[process.argv.indexOf('--theme') + 1] : null;
     for (const theme of THEMES.filter(t => !only || t.id === only)) {
-      const n = picks[theme.id], page = await context.newPage(), errors = []; page.setDefaultTimeout(180000); await csp.attachPage(page);
-      page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
+      const n = picks[theme.id], page = await context.newPage(), errors = [], codexFiles = new Set(); page.setDefaultTimeout(600000); await csp.attachPage(page);
+      page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
+      page.on('response', r => { const p = new URL(r.url()).pathname; if (r.status() >= 400) errors.push(`${r.status()} ${p}`); else if (p.includes('/alpine-themes-v23/')) codexFiles.add(p.split('/alpine-themes-v23/')[1]); });
       const touch = await touchKit(page);
       await page.goto(server.url + `tools/alpine-league-themes.html?stage=${n}&seed=5`, {waitUntil: 'load'});
-      await page.waitForFunction(() => window.__theme?.ready || window.__theme?.error, null, {timeout: 180000});
+      await page.waitForFunction(() => window.__theme?.ready || window.__theme?.error, null, {timeout: 600000});
       await page.waitForTimeout(600); await page.screenshot({path: OUT + `theme-${theme.id}-opening.png`});
       const physics = await page.evaluate(async () => (await (await fetch('../data/config.json')).json()).minigames.alpineRush.physics);
       await touch.tap('[data-action=alpine-start]');
       const read = () => page.evaluate(() => { const s = window.__theme.session.snapshot; return {phase: s.phase, disposed: s.disposed, frame: s.frame}; });
-      const ride = await rideWithTouches(page, touch, async () => ({...(await read()), physics}), {seed: 3, maxSeconds: 150, shotAt: 16000, stopAt: 17000, shotPath: OUT + `theme-${theme.id}.png`});
-      const m = await page.evaluate(() => { const s = window.__theme.session.snapshot, r = s.renderMetrics || {}; return {league: r.league, triangles: r.triangles, calls: r.calls, quality: r.quality, environment: r.environment?.id ?? null, phase: s.phase, timeMs: s.frame?.timeMs}; });
-      report.themes.push({theme: theme.id, name: theme.name, stage: n, ...m, ride, errors});
+      const ride = await rideWithTouches(page, touch, async () => ({...(await read()), physics}), {seed: 3, maxSeconds: 1200, shots: [[3500, OUT + `theme-${theme.id}.png`], [12000, OUT + `theme-${theme.id}-course.png`]], stopAt: 12500});
+      const m = await page.evaluate(() => { const s = window.__theme.session.snapshot, r = s.renderMetrics || {}, d = r.designAssets || {}; return {league: r.league, triangles: r.triangles, calls: r.calls, quality: r.quality, environment: r.environment?.id ?? null, phase: s.phase, timeMs: s.frame?.timeMs,
+        codex: {themeGates: d.themeGates, landmarks: d.landmarks, pack: d.pack, textures: d.textures}}; });
+      report.themes.push({theme: theme.id, name: theme.name, stage: n, ...m, codexFiles: [...codexFiles].sort(), ride, errors});
       console.error(`· theme ${theme.id}`, JSON.stringify(m));
       await page.close();
     }

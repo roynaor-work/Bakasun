@@ -58,10 +58,10 @@
 | `minigames/alpine-league-stages.mjs` | בניית המסלול, היריבים והיעדים של כל שלב מעקומת קושי אחת ומהטעם של הנושא; `AI_STRENGTH` מכויל ב-`tools/alpine-league-calibrate.mjs` |
 | `minigames/alpine-league-result.mjs`, `alpine-league-island.mjs`, `alpine-league-store.mjs` | בדיקת תוצאה (אותה בדיקה קפדנית של `alpine-result.mjs` ועוד סדר הסיום והשערים), `engine.alpineLeague`, שמירה במפתח נפרד |
 | `minigames/alpine-league-ghost.mjs` | הקלטת הריצה הטובה, דחיסה והשמעה כרוח רפאים שקופה (תצוגה בלבד) |
-| `minigames/alpine-league-theme.mjs`, `alpine-league-look.mjs` | מפת הנכסים היחידה של הנושאים (`ALPINE_THEME_ASSETS`) וצבעי המעבר; שכבות קוד: אורורה, גחלים וזוהר רחוק, קירות קרח וניצוצות, עננים, בתים ופנסים |
+| `minigames/alpine-league-theme.mjs`, `alpine-league-look.mjs` | מפת הנכסים היחידה של הנושאים (`ALPINE_THEME_ASSETS`) ופלטת הצבעים של כל נושא; שכבות: אורורה עדינה, נצנוץ, עננים, ציוני דרך (קשתות קרח, בקתות) ופנסים |
 | `ui/alpine-league.mjs`, `ui/alpine-league.css`, `minigames/alpine-league.css` | כרטיס הליגה במפת השלבים, עונה וטבלה, ציוד, תוצאה; יעדים, רוח ופער מהשיא בזמן המרוץ |
 
-נכסי Codex (`design/alpine-themes-v1`): מחליפים נתיבים ב-`ALPINE_THEME_ASSETS` בלבד. כל טוען קורא משם ונופל לקובץ הקיים אם הנכס החדש נכשל. כל קובץ חדש צריך להיכנס ל-`games.alpine` ב-`offline-manifest.json`.
+נכסי Codex: החבילה המקורית ב-`design/alpine-themes-v1` (לא משנים אותה), וחלק הריצה שלה ב-`assets/alpine-themes-v23` (`tools/alpine-themes-runtime.py` מעתיק: שמיים, שלג וקרקע ב-WebP, שלושה מודלי סביבה, שני שערים, רמפה, בקתה, נצנוץ). `ALPINE_THEME_ASSETS` הוא המקום היחיד שמחבר נכס לנושא: מודלים בתאי העצים והסלעים, אריחי שלג וקרקע, רמפה שמותאמת למסגרת הקיקר, שערים שהעמודים שלהם עוברים לעמודי ההתנגשות של המנוע והדגלים תלויים מחוצה להם (צבע לסירוגין), שמיים ונקודות ציון. כל טוען ב-`alpine-design-world.mjs` נופל לקובץ הקיים אם נכס נכשל. הקבצים בקבוצת אופליין משלהם, `games.alpineLeague` ("ליגת הסקי", `tools/alpine-league-offline.mjs`), כך שהתקציב של `games.alpine` לא משתנה. מדידת עלות: `tools/alpine-league-perf.mjs` (שלב סקי רגיל מול שלב מכל נושא).
 המנוע: רוח צד (`track.wind`, אזורים קבועים לכל מסלול), קסדה ומשקפיים לשחקן בלבד, `slalomGates`; כולם חסרי השפעה בשלבים 1 עד 3 (טביעת אצבע מול v22.1 בבדיקה).
 
 ## תפוס את הפושע (catchCriminal)

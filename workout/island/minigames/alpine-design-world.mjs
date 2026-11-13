@@ -16,9 +16,13 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   const decoder = new DRACOLoader().setDecoderPath(asset('../vendor/draco/')).setDecoderConfig({type: 'wasm'}).setWorkerLimit(2);
   const loader = new GLTFLoader().setDRACOLoader(decoder), textureLoader = new T.TextureLoader();
   // Ski league v23: a theme may name other files for the same ids (minigames/alpine-league-theme.mjs, ALPINE_THEME_ASSETS, paths from the
-  // island root). An override that fails falls back to the shipped file; without `assets` every path is the shipped one, as before.
-  const pick = (group, id, fallback) => { const p = assets?.[group]?.[id]; return p && '../' + p !== fallback ? '../' + p : null; };
-  const loadModel = (group, id, fallback) => { const o = pick(group, id, fallback); return o ? loader.loadAsync(asset(o)).catch(() => loader.loadAsync(asset(fallback))) : loader.loadAsync(asset(fallback)); };
+  // island root; an entry is a path or {path, ...fit}). An override that fails falls back to the shipped file; without `assets` every path
+  // is the shipped one, as before. A model that came from the theme is marked (gltf.themeAsset): it has no vertex colours, so its
+  // material colours (and glow) are baked into the merged geometry, and fits named in its entry apply to it only.
+  const pathOf = entry => typeof entry === 'string' ? entry : entry?.path || null;
+  const pick = (group, id, fallback) => { const p = pathOf(assets?.[group]?.[id]); return p && '../' + p !== fallback ? '../' + p : null; };
+  const themed = gltf => Object.assign(gltf, {themeAsset: true});
+  const loadModel = (group, id, fallback) => { const o = pick(group, id, fallback); return o ? loader.loadAsync(asset(o)).then(themed).catch(() => loader.loadAsync(asset(fallback))) : loader.loadAsync(asset(fallback)); };
   const loadTex = (id, fallback) => { const o = pick('track', id, fallback); return o ? textureLoader.loadAsync(asset(o)).catch(() => textureLoader.loadAsync(asset(fallback))) : textureLoader.loadAsync(asset(fallback)); };
   const geometries = new Set(), materials = new Set(), textures = new Set(), models = {}, worlds = new Set(), powders = new Set();
   let disposed = false;
@@ -33,42 +37,82 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   function check() { if (disposed || isDisposed()) { free(); throw Object.assign(Error('alpine.disposed'), {disposed: true}); } }
   // Normalize attribute layouts when merging Draco primitives: colors may be
   // normalized Uint8 or float, but all are converted through BufferAttribute.
-  function geometryOf(root, name = null) {
+  /** Colour of a mesh without vertex colours: its material colour; with `glow` (theme models) the emissive colour is added, so the
+   * pack's glowing inclusions stay bright under the shared palette material. */
+  const fillOf = (node, glow) => {
+    const m = [].concat(node.material || [])[0], base = m?.color, e = glow && m?.emissive;
+    return base ? [base.r, base.g, base.b].map((v, k) => Math.min(1, v + (e ? [e.r, e.g, e.b][k] * (m.emissiveIntensity ?? 1) : 0))) : [1, 1, 1];
+  };
+  /** One world-space part of every mesh: position, normal and a colour attribute (kept: uv when `keepUv`). */
+  function partsOf(root, {name = null, glow = false, keepUv = false} = {}) {
     root.updateMatrixWorld(true); const parts = [];
     root.traverse(node => {
       if (!node.isMesh || (name && !(Array.isArray(name) ? name.includes(node.name) : node.name === name))) return;
-      const g = node.geometry.clone().applyMatrix4(node.matrixWorld), count = g.attributes.position.count, color = g.attributes.color, rgb = new Float32Array(count * 3);
-      const base = [].concat(node.material || [])[0]?.color, fill = base ? [base.r, base.g, base.b] : [1, 1, 1];
+      const g = node.geometry.clone().applyMatrix4(node.matrixWorld), count = g.attributes.position.count, color = g.attributes.color, rgb = new Float32Array(count * 3), fill = fillOf(node, glow);
       for (let i = 0; i < count; i++) rgb.set(color ? [color.getX(i), color.getY(i), color.getZ(i)] : fill, i * 3);
-      for (const key of Object.keys(g.attributes)) if (!['position', 'normal'].includes(key)) g.deleteAttribute(key);
+      for (const key of Object.keys(g.attributes)) if (!['position', 'normal', ...(keepUv ? ['uv'] : [])].includes(key)) g.deleteAttribute(key);
       if (!g.attributes.normal) g.computeVertexNormals(); g.setAttribute('color', new T.BufferAttribute(rgb, 3)); g.clearGroups(); parts.push(g);
     });
-    if (!parts.length) throw Error(`alpine.world.geometry:${name || 'root'}`);
+    return parts;
+  }
+  function merge(parts, label) {
+    if (!parts.length) throw Error(`alpine.world.geometry:${label}`);
     const merged = mergeGeometries(parts, false); for (const p of parts) p.dispose();
     if (!merged) throw Error('alpine.world.merge'); merged.computeBoundingBox(); merged.computeBoundingSphere(); return ownGeometry(merged);
   }
+  function geometryOf(root, name = null, {glow = false} = {}) { return merge(partsOf(root, {name, glow}), name || 'root'); }
   let snowTexture, landscape, portrait;
   // Optional track pack (design/alpine-track): grooming textures, a real kicker and a flag rope. Missing files only
   // mean the older procedural look stays; they never fail the world.
-  const trackTextures = {}, trackGeometries = {}, pack = {};
+  const trackTextures = {}, trackGeometries = {}, pack = {}, themeGates = [], landmarks = [];
   let powderGltf = null;
+  const release = gltf => gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); });
+  /** A theme ramp in the shipped kicker's frame: optionally turned half a revolution (the pack's ramp rises toward -Z), then scaled to
+   * `box` [width, height, length] with its base at y 0 and its approach at z 0, so the view places it exactly like the shipped kicker. */
+  function fitBox(g, {flip = false, box}) {
+    if (flip) g.rotateY(Math.PI); g.computeBoundingBox(); const b = g.boundingBox;
+    g.translate(-(b.min.x + b.max.x) / 2, -b.min.y, -b.min.z); g.scale(box[0] / (b.max.x - b.min.x), box[1] / (b.max.y - b.min.y), box[2] / (b.max.z - b.min.z));
+    g.computeBoundingBox(); return g;
+  }
   async function trackGeometry(id) {
-    const gltf = await loadModel('track', id, `../design/alpine-track/models/${id}.glb`);
+    const gltf = await loadModel('track', id, `../design/alpine-track/models/${id}.glb`), entry = assets?.track?.[id];
     try {
+      if (gltf.themeAsset && entry?.box) {
+        const parts = partsOf(gltf.scene, {glow: true, keepUv: true}), g = parts.length ? mergeGeometries(parts, false) : null; for (const p of parts) p.dispose();
+        if (!g) throw Error(`alpine.track.geometry:${id}`); fitBox(g, entry); g.computeBoundingSphere(); return ownGeometry(g);
+      }
       gltf.scene.updateMatrixWorld(true); const parts = [];
       gltf.scene.traverse(n => { if (n.isMesh) parts.push(n.geometry.clone().applyMatrix4(n.matrixWorld)); });
       if (!parts.length) throw Error(`alpine.track.geometry:${id}`);
       const g = parts.length === 1 ? parts[0] : mergeGeometries(parts, false); if (!g.attributes.normal) g.computeVertexNormals(); g.computeBoundingSphere(); return ownGeometry(g);
-    } finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
+    } finally { release(gltf); }
+  }
+  /** A theme slalom gate (one file = both poles with their flags), split into the parts standing on the snow (poles, feet) and the
+   * flags (everything starting above 0.5 m); prop('gate') fits them to the course's gate width. */
+  async function themeGate(entry) {
+    const gltf = await loader.loadAsync(asset('../' + pathOf(entry)));
+    try {
+      const parts = partsOf(gltf.scene, {glow: true}).map(g => { g.computeBoundingBox(); return {geometry: ownGeometry(g), flag: g.boundingBox.min.y > .5}; });
+      if (!parts.some(p => p.flag) || !parts.some(p => !p.flag)) throw Error('alpine.theme.gate');
+      return {parts, poleHalf: entry.poleHalf ?? 3.2};
+    } finally { release(gltf); }
+  }
+  /** Scenery of a theme layer (alpine-league-look.mjs), loaded with the world so a missing file never fails the stage. */
+  async function landmark(entry) {
+    const gltf = await loader.loadAsync(asset('../' + pathOf(entry)));
+    try { const g = geometryOf(gltf.scene, null, {glow: true}); return {geometry: g, entry}; } finally { release(gltf); }
   }
   try {
     const loaded = await Promise.allSettled([
       ...MODELS.map(async id => {
         const gltf = await loadModel('models', id, `../design/models/${id}.glb`);
         if (isDisposed()) { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); throw Object.assign(Error('alpine.disposed'), {disposed: true}); }
-        try { models[id] = geometryOf(gltf.scene); if (id === 'ski-slope') models.surface = geometryOf(gltf.scene, 'slope_surface'); if (id === 'slalom-gate') { models.gatePoles = geometryOf(gltf.scene, ['gate_poles', 'gate_feet']); models.gateBanner = geometryOf(gltf.scene, ['gate_banner', 'banner_stripes']); } }
-        finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
+        try { models[id] = geometryOf(gltf.scene, null, {glow: !!gltf.themeAsset}); if (id === 'ski-slope') models.surface = geometryOf(gltf.scene, 'slope_surface'); if (id === 'slalom-gate') { models.gatePoles = geometryOf(gltf.scene, ['gate_poles', 'gate_feet']); models.gateBanner = geometryOf(gltf.scene, ['gate_banner', 'banner_stripes']); } }
+        finally { release(gltf); }
       }),
+      // Theme gates and landmarks: optional, each failure only keeps the shipped gate / skips that scenery.
+      ...(assets?.gates || []).map(async (entry, i) => { try { themeGates[i] = await themeGate(entry); } catch {} }),
+      ...(assets?.landmarks || []).map(async (entry, i) => { try { landmarks[i] = await landmark(entry); } catch {} }),
       ...[['groomed', 'groomed-snow.webp', true], ['groomedN', 'groomed-normal.webp', false], ['ripples', 'snow-ripples.webp', true]].map(async ([id, file, color]) => {
         try {
           const t = await loadTex(id, `../design/alpine-track/textures/${file}`); textures.add(t);
@@ -79,7 +123,7 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
       ...PACK.map(async id => {
         try {
           const gltf = await loadModel('pack', id, `../design/alpine-world/models/${id}.glb`);
-          try { pack[id] = geometryOf(gltf.scene); } finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
+          try { pack[id] = geometryOf(gltf.scene, null, {glow: !!gltf.themeAsset}); } finally { release(gltf); }
         } catch {}
       }),
       (async () => { try { powderGltf = await loader.loadAsync(asset('../design/alpine-world/models/snow-powder.glb')); } catch {} })(),
@@ -98,17 +142,38 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   const iceMaterial = new T.MeshStandardMaterial({color: '#ffffff', vertexColors: true, roughness: .38, metalness: 0, envMapIntensity: .6}); materials.add(iceMaterial);
   const propGeometries = new Map();
   let propRocks = 0;
-  const fitRock = (source, width) => {
+  // A collision rock keeps the old 1.4 m footprint limit and is never lower than `minHeight`, so a flat theme boulder still reads as an
+  // obstacle at speed (the shipped pack rocks are 1.28 m and 0.96 m high, above both limits, so they are unchanged).
+  const fitRock = (source, width, minHeight = 0) => {
     const g = source.clone(), box = g.boundingBox, size = new T.Vector3(); box.getSize(size);
     g.translate(-(box.min.x + box.max.x) / 2, -box.min.y, -(box.min.z + box.max.z) / 2);
-    const f = width / Math.max(size.x, size.z); g.scale(f, f, f); g.computeBoundingBox(); g.computeBoundingSphere(); return g;
+    const f = width / Math.max(size.x, size.z); g.scale(f, Math.max(f, minHeight / size.y), f); g.computeBoundingBox(); g.computeBoundingSphere(); return g;
   };
-  function prop(type, physics = {}) {
+  /** A theme gate fitted to the course: each pole moves (unscaled) to the collision post at +-halfWidth, and its flag is mirrored to hang
+   * outside it, so the whole passage between the posts is open and nothing stands where the engine has no collider (the pack's flags
+   * hang inward from poles 6.4 m apart). Mirrored flags get their triangles turned back to face the camera. */
+  function fitThemeGate({parts, poleHalf}, halfWidth) {
+    const out = parts.map(({geometry, flag}) => {
+      const g = geometry.clone(), p = g.attributes.position, n = g.attributes.normal;
+      for (let i = 0; i < p.count; i++) {
+        const x = p.getX(i), side = Math.sign(x) || 1;
+        if (flag) { p.setX(i, side * (halfWidth + poleHalf - Math.abs(x))); n.setX(i, -n.getX(i)); } else p.setX(i, x - side * (poleHalf - halfWidth));
+      }
+      if (flag && g.index) { const ix = g.index; for (let i = 0; i < ix.count; i += 3) { const b = ix.getX(i + 1); ix.setX(i + 1, ix.getX(i + 2)); ix.setX(i + 2, b); } }
+      return g;
+    });
+    const g = mergeGeometries(out, false); for (const o of out) o.dispose(); g.computeBoundingBox(); g.computeBoundingSphere(); return g;
+  }
+  // Both colours or none: a theme whose gate file failed keeps the shipped gate everywhere.
+  const themeGatesReady = () => (assets?.gates?.length ?? 0) > 1 && themeGates.filter(Boolean).length === assets.gates.length;
+  function prop(type, physics = {}, variant = 0) {
     check(); if (!['gate', 'rock'].includes(type)) return null;
     // Collision rocks alternate between the pack's two rocks; both keep the old 1.4m footprint limit.
-    const variant = type === 'rock' && pack['rock-large'] && pack['rock-small'] ? (propRocks++ % 2 ? 'small' : 'large') : null;
-    const key = type === 'gate' ? `gate:${physics.gateHalfWidth}:${physics.gatePostHeight}` : variant ? `rock:${variant}` : 'rock';
+    const rockVariant = type === 'rock' && pack['rock-large'] && pack['rock-small'] ? (propRocks++ % 2 ? 'small' : 'large') : null;
+    const themeGate = type === 'gate' && themeGatesReady() ? themeGates[variant % themeGates.length] : null;
+    const key = type === 'gate' ? `gate:${physics.gateHalfWidth}:${physics.gatePostHeight}${themeGate ? ':theme' + variant % themeGates.length : ''}` : rockVariant ? `rock:${rockVariant}` : 'rock';
     let g = propGeometries.get(key);
+    if (!g && themeGate) { try { g = fitThemeGate(themeGate, physics.gateHalfWidth ?? 1.5); ownGeometry(g); propGeometries.set(key, g); } catch { g = null; } }
     if (!g) {
       if (type === 'gate') {
         const top = physics.gatePostHeight ?? 2.35, sx = (physics.gateHalfWidth ?? 1.5) / 1.5;
@@ -117,8 +182,8 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
         // below that same collision height, with the authored banner above it.
         banner.scale(sx, .5 / .78, 1); banner.translate(0, top + .25 - 1.68 * .5 / .78, 0);
         g = mergeGeometries([poles, banner], false); poles.dispose(); banner.dispose();
-      } else if (variant) {
-        g = fitRock(pack[`rock-${variant}`], variant === 'large' ? 1.4 : 1.05);
+      } else if (rockVariant) {
+        g = fitRock(pack[`rock-${rockVariant}`], rockVariant === 'large' ? 1.4 : 1.05, rockVariant === 'large' ? 1.1 : .85);
       } else {
         g = models.rock.clone();
         const box = g.boundingBox, size = new T.Vector3(); box.getSize(size);
@@ -127,7 +192,7 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
       }
       ownGeometry(g); propGeometries.set(key, g);
     }
-    const mesh = new T.Mesh(g, palette); mesh.castShadow = mesh.receiveShadow = true; mesh.userData.designModel = type === 'gate' ? 'slalom-gate' : variant ? `rock-${variant}` : 'rock'; return mesh;
+    const mesh = new T.Mesh(g, palette); mesh.castShadow = mesh.receiveShadow = true; mesh.userData.designModel = themeGate ? `theme-gate-${variant % themeGates.length}` : type === 'gate' ? 'slalom-gate' : rockVariant ? `rock-${rockVariant}` : 'rock'; return mesh;
   }
   /** Re-tessellate the real authored surface and project it onto the existing
    * halfpipe. Its 6m wedge is not added to the course elevation a second time.
@@ -283,5 +348,9 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   return {snowTexture, trackTextures, gate, createPowder, trackGeometry: id => trackGeometries[id] || null, createArtWorld, prop, slopeSurface, dispose: free,
     /** A loaded pack geometry (shared, owned here: never dispose it) for theme scenery, or null. */
     packGeometry: id => pack[id] || null, palette,
-    metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size, pack: Object.keys(pack).sort(), powder: !!powderGltf})};
+    /** Theme scenery i of assets.landmarks: {geometry (shared, owned here), entry}, or null when the file did not load. */
+    landmark: i => landmarks[i] || null,
+    /** 2 when the theme's two gate colours loaded (the view alternates them along the course), else 1. */
+    gateVariants: () => themeGatesReady() ? themeGates.length : 1,
+    metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size, pack: Object.keys(pack).sort(), powder: !!powderGltf, themeGates: themeGates.filter(Boolean).length, landmarks: landmarks.filter(Boolean).length})};
 }

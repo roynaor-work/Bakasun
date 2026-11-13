@@ -129,7 +129,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     if (env.snowRough && !mobile) { env.snowRough.repeat.set(1.5, 2); terrainMat.roughnessMap = env.snowRough; }
   }
   if (theme) {
-    leagueLook.tintMaterials(theme, [[terrainMat, 'snow', 1], [pipeMat !== snow ? pipeMat : snow, 'snow', 1], [stone, 'rock', .8]]);
+    // The theme's snow and ground tiles carry their own colours: the environment's snow tint is replaced by the grade's colour.
+    leagueLook.tintMaterials(theme, [[terrainMat, 'snow'], [pipeMat !== snow ? pipeMat : snow, 'snow']]);
     leagueLook.tintPalette(theme, designWorld.palette); if (env) disposeBackplate = leagueLook.themeBackplate(theme, env);
   }
   // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
@@ -240,6 +241,11 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     sign.position.set(0, 2.45, 0); sign.rotation.z = Math.PI / 4; sign.rotation.y = Math.PI; g.add(sign); return g;
   }
   const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp, warn}, pools = {rock: [], gate: [], boost: [], ramp: [], warn: []};
+  // Ski league v23: a theme with two gate colours alternates them along the course (by first sight, so a gate keeps its colour).
+  const gateColours = designWorld.gateVariants?.() > 1 ? new Map() : null;
+  if (gateColours) { makers.gateB = () => designWorld.prop('gate', physics, 1); pools.gateB = []; }
+  const gateType = id => { if (!gateColours) return 'gate'; if (!gateColours.has(id)) gateColours.set(id, gateColours.size % 2); return gateColours.get(id) ? 'gateB' : 'gate'; };
+  const unused = () => Object.fromEntries(Object.keys(makers).map(type => [type, 0]));
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
@@ -290,7 +296,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const SNOW_MAX = Math.round(450 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
   for (let i = 0; i < SNOW_MAX; i++) { const a = rnd() * Math.PI * 2, d = 3 + rnd() * 27; snowOffsets[i * 3] = Math.cos(a) * d; snowOffsets[i * 3 + 1] = rnd() * 24 - 5; snowOffsets[i * 3 + 2] = Math.sin(a) * d; }
   const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
-  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
+  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: look.snowColor || '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
   const snowSpeed = 1.6 + look.snow * 2.6, wind = look.snow > .8 ? 3.2 : .6;
   const trailGeo = new THREE.BufferGeometry(), trailPositions = new Float32Array(140 * 3),trailAge=new Float32Array(140); trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));trailGeo.setAttribute('powderAge',new THREE.BufferAttribute(trailAge,1));
   const powderMat=new THREE.PointsMaterial({color:'#f2f7fa',map:dot,size:.23,transparent:true,opacity:.55,depthWrite:false});powderMat.onBeforeCompile=s=>{s.vertexShader='attribute float powderAge; varying float vPowderAge;\n'+s.vertexShader;s.vertexShader=s.vertexShader.replace('gl_PointSize = size;','vPowderAge=powderAge;gl_PointSize=size*(.55+powderAge*1.4);');s.fragmentShader='varying float vPowderAge;\n'+s.fragmentShader;s.fragmentShader=s.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );','vec4 diffuseColor=vec4(diffuse,opacity*pow(1.-vPowderAge,1.7));');};powderMat.customProgramCacheKey=()=> 'alpine-powder-v7';
@@ -348,7 +354,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
   // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
-  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0});
+  for (const type of Object.keys(makers)) prop(type, unused());
   for (const list of Object.values(pools)) for (const g of list) g.visible = false;
   vfx.warmUp();
   try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
@@ -371,7 +377,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     worldPoint(-6, .4, 2.6, camera.position); worldPoint(12, 0, 1, target); camera.lookAt(target); camera.updateProjectionMatrix();
     let i = 0; for (const r of riders.values()) { r.root.visible = r.shadow.visible = true; place(r.root, 4 + i * 1.5, (i % 3 - 1) * 2.4, .03); place(r.shadow, 4 + i * 1.5, (i % 3 - 1) * 2.4, .05); r.shadow.rotateX(-Math.PI / 2); if (r.actor) r.actor.pose(0, .3, .5, .2, .4); i++; }
     if (ghostRider) { ghostRider.root.visible = true; place(ghostRider.root, 6, 1.2, .03); ghostRider.actor?.pose?.(0, .2, 0, 0, 0); leagueLook.ghostify(ghostRider.root); }
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0}; let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
+    const used = unused(); let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
     for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
     coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
     for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
@@ -447,7 +453,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       }
     }
     // Obstacles and coins from the frame.
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0};
+    const used = unused();
     for (const list of Object.values(pools)) for (const g of list) g.visible = false;
     let coinCount = 0; const seen = new Map();
     for (const o of state.obstacles ?? []) {
@@ -461,7 +467,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
         seen.set(o.id, {s: os, x: o.x, h: o.h ?? .85}); continue;
       }
       if (!makers[o.type]) continue;
-      const g = prop(o.type, used); place(g, os, o.x, 0);
+      const g = prop(o.type === 'gate' ? gateType(o.id) : o.type, used); place(g, os, o.x, 0);
       if (o.type === 'rock') g.scale.setScalar((o.radius ?? .7) / .7);
     }
     coins.count = coinCount; coins.instanceMatrix.clearUpdateRanges(); if (coinCount) { coins.instanceMatrix.addUpdateRange(0, coinCount * 16); coins.instanceMatrix.needsUpdate = true; }

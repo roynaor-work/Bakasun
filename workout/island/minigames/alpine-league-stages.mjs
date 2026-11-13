@@ -31,14 +31,16 @@ export const CURVE = Object.freeze({
   /** Rival strength s = 0..1 maps to every AI parameter (speed stays within config.aiCaps). */
   ai: {speed: [.93, 1], spread: [.012, .004], reaction: [.5, .2], lookahead: [28, 60], error: [.9, .3], mistake: [.14, .03], margin: [.15, .35],
     boostChance: [.3, .8], boostTank: [.9, .6], trickChance: [.3, .7], trickMargin: [.35, .15], padDesire: [4, 6], rampDesire: [2, 4], gateDesire: [1, 5], windComp: [.8, .92]},
-  goals: {timeFactor: [1.0, 1.0], gates: [.6, .8]}
+  goals: {gates: [.6, .5]}
 });
 /** Rival strength of each stage (index n - 1), calibrated with tools/alpine-league-sim.mjs so the child-like bot passes about 85% of
  * stages 1-5 and about 35% of stage 30, falling steadily in between (the place goal steps 3 -> 2 -> 1 at stages 11 and 16, so the rivals
  * ease a little there). */
-// Measured 13/11/2026 (32 races a stage, bisection with common seeds; gear as tools/alpine-league-sim.mjs gearByProgress).
-export const AI_STRENGTH = Object.freeze([1, .969, .75, .906, .625, .875, .906, .75, .719, .75, .625, .969, .75, 1, .75,
-  .75, .75, .719, .75, .781, .688, .594, .75, .625, .75, .5, .438, .75, 1, .625]);
+// Measured 13/11/2026: a bisection with 32 races a stage (common seeds), then one secant step on the pooled estimate of that and an
+// independent 48-race check, then a second independent 48-race check that moved the two stages furthest from the line (13 and 30:
+// a scan of s with 96 independent races a point on two new seed sets, pooled); gear as tools/alpine-league-sim.mjs gearByProgress.
+export const AI_STRENGTH = Object.freeze([1, .969, .691, 1, .774, 1, .728, .75, .814, .75, .569, .969, .75, 1, .964,
+  .995, .669, .719, .863, .781, .688, .594, .75, .625, .834, .699, .528, .671, 1, .62]);
 
 const difficultyOf = n => Math.min(1, (n - 1) / (STAGE_COUNT - 1) + (stageInfo(n)?.boss ? .02 : 0));
 const LETTERS = 'abcd';
@@ -115,13 +117,14 @@ export function courseFacts(base, n) {
 /** The three goals of stage n: place (required), time, and gates or a clean run. Time = course length at the stage's reference pace. */
 export function stageGoals(base, n) {
   const info = stageInfo(n), d = difficultyOf(n), f = courseFacts(base, n), b = leagueBalance(base, n);
-  const pace = b.physics.baseSpeed * lerp(GOAL_PACE[0], GOAL_PACE[1], d) * lerp(CURVE.goals.timeFactor[0], CURVE.goals.timeFactor[1], d);
+  const pace = b.physics.baseSpeed * lerp(GOAL_PACE[0], GOAL_PACE[1], d);
   const goals = [{kind: 'place', target: info.targetRank}, {kind: 'time', ms: Math.ceil(f.length / pace * 2) * 500}];
   goals.push(info.goals[2] === 'gates' && f.gates > 0 ? {kind: 'gates', count: Math.max(1, Math.round(f.gates * lerp(CURVE.goals.gates[0], CURVE.goals.gates[1], d))), total: f.gates} : {kind: 'clean'});
   return goals;
 }
-/** Average speed of a good clean run as a share of the stage's base speed (boosts and pads lift it above 1), from the simulation. */
-export const GOAL_PACE = Object.freeze([1.2, 1.18]);
+/** Time goal pace as a share of the stage's base speed (boosts, pads and gates lift a run above 1): the child-like bot's median pace at
+ * stage 1 and stage 30 (tools/alpine-league-sim.mjs, 48 races a stage), so about half of such runs earn the time star. */
+export const GOAL_PACE = Object.freeze([1.19, 1.25]);
 /** Checks a verified race against the goals: [{kind, ok, ...}] in the goal order. */
 export function judgeGoals(goals, {completed, rank, elapsedMs, gates, crashes}) {
   return goals.map(g => ({...g, ok: g.kind === 'place' ? completed && rank <= g.target : g.kind === 'time' ? completed && elapsedMs <= g.ms : g.kind === 'gates' ? gates >= g.count : completed && crashes === 0}));

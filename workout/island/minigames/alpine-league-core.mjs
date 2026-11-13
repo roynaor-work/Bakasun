@@ -50,7 +50,7 @@ export const GEAR = Object.freeze({
   goggles: Object.freeze({name: 'משקפיים', key: 'goggles', perLevel: .08, what: 'הרוח מזיזה פחות, ושער ממלא יותר את המיכל'})
 });
 export const HISTORY_CAP = 60;
-const GOAL_THIRD = Object.freeze(['gates', 'clean', 'gates', 'clean', 'clean']);
+const GOAL_THIRD = Object.freeze(['gates', 'clean', 'gates', 'clean', 'gates']);
 
 const QUERY_OFF = search => new URLSearchParams(search).get('alpineLeague') === '0';
 export const leagueEnabled = (search = globalThis.location?.search || '') => !QUERY_OFF(search);
@@ -67,7 +67,7 @@ export function stageInfo(n) {
   if (!validN(n)) return null;
   const t = Math.floor((n - 1) / PER_THEME), index = (n - 1) % PER_THEME + 1, theme = THEMES[t], boss = index === PER_THEME;
   return Object.freeze({n, number: engineStageOf(n), theme: theme.id, themeIndex: t + 1, themeName: theme.name, index, boss, targetRank: targetRankOf(n),
-    name: boss ? `${theme.name} · ${theme.boss}` : `${theme.name} · שלב ${index}`, goals: Object.freeze(['place', 'time', boss ? 'clean' : GOAL_THIRD[index - 1]])});
+    name: boss ? `${theme.name} · ${theme.boss}` : `${theme.name} · שלב ${index}`, goals: Object.freeze(['place', 'time', GOAL_THIRD[index - 1]])});
 }
 export function themeOfStage(n) { return validN(n) ? THEMES[Math.floor((n - 1) / PER_THEME)] : null; }
 /** Stars of a verified run: none without the place goal, otherwise one plus each other goal reached. */
