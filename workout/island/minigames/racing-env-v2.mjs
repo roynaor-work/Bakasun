@@ -30,11 +30,15 @@ export function bake(T,scene,keep){
  return parts;
 }
 
-export function buildEnvV2({T,scene,track,keep,f1,kit,night=false,skip=[]}){
+// racing-v23: clear>0 (no walls) puts the tyre modules, fences and sponsor boards that far beyond the asphalt (stands, tower and pits are already farther)
+export function buildEnvV2({T,scene,track,keep,f1,kit,night=false,skip=[],clear=0}){
  const root=new T.Group();root.name='racing-env-v2';scene.add(root);
  const dummy=new T.Object3D(),baked={};for(const [name,model] of Object.entries(kit.models))baked[name]=bake(T,model,keep);
  const jobs={};  // model name -> [{x,y,z,rot,sx,sy,sz}]
- const put=(name,s,lane,{y=0,scaleX=1,scaleY=1,scaleZ=1}={})=>{const q=f1.at(s,lane,y),side=Math.sign(lane)||1;(jobs[name]||(jobs[name]=[])).push({x:q.x,y:q.y,z:q.z,rot:q.heading+(lane===0?Math.PI:side<0?Math.PI/2:-Math.PI/2),sx:scaleX,sy:scaleY,sz:scaleZ});};
+ const FOOT={'tire-barrier':[2.9,.5],'chainlink-fence':[3.16,.24],'sponsor-board':[2.56,.6],'grandstand':[10,3.8],'control-tower':[3.2,3.2]};
+ const put=(name,s,lane,{y=0,scaleX=1,scaleY=1,scaleZ=1}={})=>{const q=f1.at(s,lane,y),side=Math.sign(lane)||1;
+  if(clear&&FOOT[name]){const [a,b]=FOOT[name],t=q.p.tangent,n=q.p.normal;if([[-a,-b],[a,-b],[-a,b],[a,b]].some(([u,v])=>track.project(q.x+t.x*u+n.x*v,q.z+t.z*u+n.z*v).distance<f1.half+clear))return;}
+  (jobs[name]||(jobs[name]=[])).push({x:q.x,y:q.y,z:q.z,rot:q.heading+(lane===0?Math.PI:side<0?Math.PI/2:-Math.PI/2),sx:scaleX,sy:scaleY,sz:scaleZ});};
  const L=track.length,half=f1.half,[S0,len]=f1.pitSpan;
  // start gantry across the line, scaled in X to the road; pit building (4 modules) on the pit side; grandstand (4 modules) and control tower opposite
  if(!skip.includes('start-gantry'))put('start-gantry',L-10,0,{scaleX:(track.width+3)/15.75});   // racing-broadcast-v1 skips it: its own gantry has lamps that follow the start lights
@@ -42,11 +46,11 @@ export function buildEnvV2({T,scene,track,keep,f1,kit,night=false,skip=[]}){
  for(let k=0;k<3;k++)put('grandstand',(52+k*20.5)%L,half+18);
  put('control-tower',175,half+16);
  // sponsor boards on the straights (generic graphic), a tyre module and fence behind the outside of the eight sharpest corners
- for(const s of [L-100,300]) put('sponsor-board',s%L,((Math.floor(s/10)%2)?1:-1)*(half+7.5));
+ for(const s of [L-100,300]) put('sponsor-board',s%L,((Math.floor(s/10)%2)?1:-1)*(half+(clear?clear+.9:7.5)));
  const corners=[];for(let i=0;i<f1.n;i++){let sum=0;for(let j=0;j<6;j++)sum+=f1.turn[(i+j)%f1.n];corners.push({i,sum});}
  corners.sort((a,b)=>Math.abs(b.sum)-Math.abs(a.sum));const used=[];
  for(const c of corners){if(used.length>=5)break;const s=c.i*f1.step+18;if(used.some(u=>Math.abs(((u-s+L*1.5)%L)-L/2)<70))continue;
-  const out=c.sum>0?-1:1;used.push(s);put('tire-barrier',s,out*(half+3.1));put('chainlink-fence',s,out*(half+5.4));}
+  const out=c.sum>0?-1:1;used.push(s);put('tire-barrier',s,out*(half+(clear?clear+.8:3.1)));put('chainlink-fence',s,out*(half+(clear?clear+3.1:5.4)));}
  let triangles=0,draws=0;
  for(const [name,list] of Object.entries(jobs)){for(const part of baked[name]){const mesh=new T.InstancedMesh(part.geometry,part.material,list.length);
    list.forEach((p,i)=>{dummy.position.set(p.x,p.y,p.z);dummy.rotation.set(0,p.rot,0);dummy.scale.set(p.sx,p.sy,p.sz);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);});

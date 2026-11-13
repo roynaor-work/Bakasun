@@ -3,7 +3,8 @@
 // Five draw calls, about 6K triangles, no textures, no brands. ?racingLook=0 (or config.racingLook.enabled=false) never creates it.
 export function racingLookEnabled(search=globalThis.location?.search||''){return new URLSearchParams(search).get('racingLook')!=='0';}
 
-export function createRacingF1({T,scene,track,keep,night=false}){
+// racing-v23: clear>0 (no walls) moves the tyre stacks, marshal posts and pit signal posts that far beyond the asphalt (the run-off and the gravel stay open)
+export function createRacingF1({T,scene,track,keep,night=false,clear=0}){
  const root=new T.Group();root.name='racing-f1';scene.add(root);
  const half=track.width/2,wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
  // curvature every 6 m: which side is the outside of a corner, and how sharp
@@ -37,16 +38,16 @@ export function createRacingF1({T,scene,track,keep,night=false}){
  tag=null;
  box(buildingCentre,side*(half+11.5),.55,.6,1.1,len,'#d9dcda');       // pit wall
  box(buildingCentre,side*(half+11.5),1.35,.5,.5,len,'#a9262d');      // wall stripe
- for(const s of [S0+30,S0+110,S0+190]){box(s%track.length,side*(half+10.7),2.2,1.2,2.4,1.2,'#e8e8e6');box(s%track.length,side*(half+10.7),3.6,2.2,.35,2.2,'#25465a');} // signal gantry posts
+ const signal=half+(clear?Math.max(10.7,clear+.7):10.7);for(const s of [S0+30,S0+110,S0+190]){box(s%track.length,side*signal,2.2,1.2,2.4,1.2,'#e8e8e6');box(s%track.length,side*signal,3.6,2.2,.35,2.2,'#25465a');} // signal gantry posts
  ribbons.pit=ribbon(half+4.8,half+10.4,night?'#5b6065':'#9aa0a4',.0,.9,[S0-12,S0+len+12],-1);   // pit lane (one side), lies over the gravel
  box(buildingCentre,-(half+7.6),.01,.35,.02,len,'#f2f2ee');   // pit lane line
  // marshal posts and a judges' tower on the opposite side of the start
- for(const [s,l] of [[track.length*.25,half+11],[track.length*.5,-(half+11)],[track.length*.75,half+11]]){box(s,l,1.6,3,3.2,3,'#e8e8e6');box(s,l,3.5,3.6,.4,3.6,'#a9262d');}
+ const marshal=half+(clear?Math.max(11,clear+2.3):11);for(const [s,l] of [[track.length*.25,marshal],[track.length*.5,-marshal],[track.length*.75,marshal]]){if(clear){const q=at(s,l);if(track.project(q.x,q.z).distance<half+clear+1.6)continue;}box(s,l,1.6,3,3.2,3,'#e8e8e6');box(s,l,3.5,3.6,.4,3.6,'#a9262d');}
  tag='tower';box(30,-side*(half+20),6,6,12,10,'#cfd5d8');box(30,-side*(half+20),12.4,7,.6,11,'#2b3338');tag=null;
  // tyre barriers on the outside of every corner that turns more than 0.2 rad over 36 m
  const palette=['#a9262d','#f2f2ee','#2f6c8f'];let tyreCount=0;
  for(let i=2;i<n-6&&tyreCount<150;i+=3){let sum=0;for(let j=0;j<6;j++)sum+=turn[(i+j)%n];if(Math.abs(sum)<.2)continue;
-  const out=sum>0?-1:1,q=at(i*step+3,out*(half+3.4));if(buildingCentre&&Math.abs(((i*step-buildingCentre+track.length*1.5)%track.length)-track.length/2)<len/2+20)continue;
+  const out=sum>0?-1:1,q=at(i*step+3,out*(half+(clear?clear+1.1:3.4)));if(clear&&[0,1].some(k=>track.project(q.x+q.p.tangent.x*k,q.z+q.p.tangent.z*k).distance<half+clear+.5))continue;if(buildingCentre&&Math.abs(((i*step-buildingCentre+track.length*1.5)%track.length)-track.length/2)<len/2+20)continue;
   for(let k=0;k<2;k++)tyres.push({x:q.x+q.p.tangent.x*k*1.0,y:q.y,z:q.z+q.p.tangent.z*k*1.0,h:.5+k*.45,color:palette[(tyreCount+k)%3]});tyreCount++;}
  // racing-deep-m2: pit entry and exit kerbs (short white blocks on the pit side) so the lane reads as a pit lane from the road
  for(const s of [S0-6,S0+len+6]){box((s+track.length)%track.length,side*(half+5.2),.12,.4,.24,10,'#f2f2ee');}

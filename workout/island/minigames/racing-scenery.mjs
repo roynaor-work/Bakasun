@@ -1,6 +1,7 @@
 import {createRacingRoadside} from './racing-roadside.mjs?v=island-v2-20261107-11';
 /** Original, instanced roadside scenery. The view owns every registered resource. */
-export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center}){
+// racing-v23: clear>0 (no walls) keeps bushes, rocks, tufts and the grass mounds that far beyond the asphalt; 0 = the old layout
+export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center,clear=0}){
  let word=(seed>>>0)^0x734af21;const random=()=>((word=(Math.imul(word,1664525)+1013904223)>>>0)/4294967296);
  const root=new T.Group();root.name='racing-original-scenery';scene.add(root);
  const material=(color,options={})=>keep(mat(color,options)),dummy=new T.Object3D(),batches=[];let disposed=false,quality=0;
@@ -22,12 +23,13 @@ export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center
  const safe=(x,z,margin)=>track.project(x,z).distance>track.width/2+margin;
  for(let distance=12;distance<track.length;distance+=18){const p=track.sample(distance);
   for(const sign of [-1,1]){
-   const lane=sign*(track.width/2+3.8+random()*7),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(!safe(x,z,2.8))continue;
+   const lane=sign*(track.width/2+(clear?clear+2.6:3.8)+random()*7),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(!safe(x,z,clear?clear+2.2:2.8))continue;
    const y=ground(x,z),spread=.7+random()*1.2;
+   if(clear&&!safe(x+sign*2,z+1,clear+1.4))continue;   // the rock beside it too, on every leg of the circuit
    if(Math.floor(distance/18)%3===0){bushRows.push({x,y:y+.28,z,sx:1+random()*.8,sy:.5+random()*.4,sz:.8+random()*.9,angle:random()*6.28});rockRows.push({x:x+sign*2,y:y+.22,z:z+1,sx:.4+random()*.8,sy:.3+random()*.5,sz:.5+random()*.9,angle:random()*6.28});}
    for(let i=0;i<2;i++){const tx=x+(random()-.5)*spread,tz=z+(random()-.5)*spread;tuftRows.push({x:tx,y:ground(tx,tz)+.03,z:tz,sx:.7+random()*.6,sy:.45+random()*.65,sz:.7+random()*.6,angle:random()*6.28});if(i===0&&track.theme!=='volcano')flowerRows.push({x:tx,y:ground(tx,tz)+.35+random()*.2,z:tz,sx:.8,sy:1,sz:.8,color:['#f4d78c','#e5aa9d','#f0e5bc'][Math.floor(random()*3)]});}
   }
-  if(Math.floor(distance/18)%4===0){const sign=random()<.5?-1:1,lane=sign*(track.width/2+19+random()*23),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(safe(x,z,15))moundRows.push({x,y:ground(x,z)-.15,z,sx:5+random()*7,sy:1.2+random()*3,sz:5+random()*10,angle:random()*6.28});}
+  if(Math.floor(distance/18)%4===0){const sign=random()<.5?-1:1,lane=sign*(track.width/2+19+random()*23),x=p.x+p.normal.x*lane,z=p.z+p.normal.z*lane;if(safe(x,z,15)){const m={x,y:ground(x,z)-.15,z,sx:5+random()*7,sy:1.2+random()*3,sz:5+random()*10,angle:random()*6.28};if(!clear||safe(x,z,clear+.6+Math.max(m.sx,m.sz)))moundRows.push(m);}}
  }
  const hemisphere=new T.SphereGeometry(1,10,4,0,Math.PI*2,0,Math.PI/2);
  batch(hemisphere,grassMaterial,limit(moundRows,16));
@@ -35,8 +37,9 @@ export function createRacingScenery({T,scene,track,colors,keep,mat,seed=1,center
  batch(rockGeometry,stone,limit(rockRows,50),{decorative:true});batch(new T.SphereGeometry(1,6,4),leaf,limit(bushRows,44),{decorative:true,factors:[1,.5,0]});batch(new T.ConeGeometry(.22,.7,3),tuftMaterial,limit(tuftRows,200),{decorative:true,factors:[1,.45,0]});batch(new T.IcosahedronGeometry(.13,0),flowerMaterial,limit(flowerRows,96),{decorative:true,factors:[1,.4,0]});
  // Low, curved islands beyond the route create depth without enclosing the sea.
  const farSand=[],farGreen=[];for(let i=0;i<8;i++){const angle=i*Math.PI*.25+.18+random()*.25,radius=360+random()*110,x=center.x+Math.cos(angle)*radius,z=center.z+Math.sin(angle)*radius,sx=25+random()*35,sz=12+random()*20;farSand.push({x,y:-3,z,sx:sx+5,sy:5+random()*3,sz:sz+5,angle:angle+.6});farGreen.push({x,y:-1.5,z,sx,sy:6+random()*12,sz,angle:angle+.6});}
+ if(clear)for(const list of [farSand,farGreen])for(let k=list.length-1;k>=0;k--){const h=list[k];if(!safe(h.x,h.z,clear+Math.max(h.sx,h.sz))){farSand.splice(k,1);farGreen.splice(k,1);}}
  batch(new T.SphereGeometry(1,12,5,0,Math.PI*2,0,Math.PI/2),sand,farSand);batch(new T.SphereGeometry(1,12,5,0,Math.PI*2,0,Math.PI/2),grassMaterial,farGreen);
- const roadside=createRacingRoadside({T,parent:root,track,colors,keep,material,ground,seed});
+ const roadside=createRacingRoadside({T,parent:root,track,colors,keep,material,ground,seed,clear});
  function setQuality(q){quality=Math.max(0,Math.min(2,q|0));for(const b of batches)if(b.decorative){b.inst.count=Math.ceil(b.total*b.factors[quality]);b.inst.visible=b.inst.count>0;}roadside.setQuality(quality);}
  // Source GPU resources belong to the view's Set; only detach this scenery here.
  function dispose(){if(disposed)return;disposed=true;root.removeFromParent();roadside.dispose();for(const b of batches)b.inst.dispose();root.clear();}

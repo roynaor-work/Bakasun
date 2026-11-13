@@ -193,11 +193,14 @@ function makeCrowd(pack,sites,stand){
 }
 
 /** Build the v7 scene parts from a loaded pack, detached from the scene. groundAt(x,z) is the grass height. */
-export function buildRacingV7(pack,{track,groundAt,seed=1}){
+// racing-v23: clear>0 (no walls) moves the grandstand and the standing spectators that far beyond the asphalt
+export function buildRacingV7(pack,{track,groundAt,seed=1,clear=0}){
  const cars=V7_SLOT_CARS.map((id,slot)=>makeCar(pack,id,carLodsFor(slot),{color:V7_SLOT_COLORS[slot],traffic:slot>0}));
  const props=pack.glb.get(V7_FILES.props).scene;
  // the grandstand: just after the start line, on the right of the road, its front towards the track
- const side=1,s=26,p=track.sample(s),lateral=side*(track.width/2+9.6),x=p.x+p.normal.x*lateral,z=p.z+p.normal.z*lateral,yaw=Math.atan2(-side*p.normal.x,-side*p.normal.z),y=groundAt(x,z);
+ const side=1,s=26,p=track.sample(s);let lateral=side*(track.width/2+(clear?Math.max(9.6,clear+1.6):9.6));
+ if(clear)for(let k=0;k<12&&[-12.3,0,12.3].some(u=>track.project(p.x+p.normal.x*(lateral-side*1.2)+p.tangent.x*u,p.z+p.normal.z*(lateral-side*1.2)+p.tangent.z*u).distance<track.width/2+clear);k++)lateral+=side*1.5;
+ const x=p.x+p.normal.x*lateral,z=p.z+p.normal.z*lateral,yaw=Math.atan2(-side*p.normal.x,-side*p.normal.z),y=groundAt(x,z);
  const stand=props.getObjectByName('Grandstand').clone(true);stand.position.set(x,y,z);stand.rotation.y=yaw;
  stand.traverse(o=>{if(o.isMesh){o.castShadow=false;o.receiveShadow=true;}});
  const spectators=[],cos=Math.cos(yaw),sin=Math.sin(yaw);
@@ -205,7 +208,7 @@ export function buildRacingV7(pack,{track,groundAt,seed=1}){
   const lx=(col-4.5)*2.2,ly=.9+row*.6,lz=-row*1.3-.2;
   spectators.push({x:x+lx*cos+lz*sin,y:y+ly,z:z-lx*sin+lz*cos,yaw,scale:.92+((row*10+col)*37%13)/100,variant:(row*10+col)%3});
  }
- const crowd=makeCrowd(pack,crowdSites(track,groundAt,seed),{spectators});
+ const crowd=makeCrowd(pack,crowdSites(track,groundAt,seed,clear),{spectators});
  const standGroup=new T.Group();standGroup.name='v7-grandstand';standGroup.add(stand);
  return {cars,crowd,standGroup,smokeMap:pack.textures.smoke,tree:theme=>{const t=props.getObjectByName(theme==='jungle'||theme==='summit'?'Pine':'Palm');t.updateWorldMatrix(true,true);return t;},
   resources(){const out=packResources(pack);for(const c of cars)for(const r of c.owned)out.add(r);for(const r of crowd.resources())out.add(r);return out;}};

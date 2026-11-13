@@ -57,14 +57,16 @@ export function createRacingSamples({context,destination=context?.destination,ba
     v3Ready=true;
   }
   let lastGearbox=-9;const GEARBOX=new Set(['shift-up','shift-down','exhaust-pop-1','exhaust-pop-2','exhaust-pop-3','turbo-blowoff',...Object.keys(V3_SHOTS)]);
-  function shot(id,gain=.1,rate=1,minGap=.12){
+  // length (racing-v23): play only the first `length` seconds, with a 70 ms fade at the end (the shift 'pssh' is the start of the 0.75 s blow-off)
+  function shot(id,gain=.1,rate=1,minGap=.12,length=0){
     if(!ready||disposed)return;const now=context.currentTime;if(now-(lastShot.get(id)||-9)<minGap)return;
     // one gearbox/exhaust sound per 0.45 s: a shift never stacks a shift sound, a pop and a blow-off on top of each other
     if(GEARBOX.has(id)){if(now-lastGearbox<.45)return;lastGearbox=now;}lastShot.set(id,now);
     // 12 ms attack ramp: the samples start at full scale and a hard onset is a click (measured by tools/racing-shift-audio.mjs).
     const source=context.createBufferSource(),g=context.createGain();source.buffer=buffers.get(id);source.playbackRate.value=rate;
-    if(g.gain.setValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(gain,now+.012);}else g.gain.value=gain;
-    source.connect(g);g.connect(bus);source.start(now);
+    // racing-v23: from 0, not from the default 1 (one frame at full scale when the start rounds before the ramp)
+    g.gain.value=0;if(g.gain.setValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(gain,now+.012);if(length>0){g.gain.setValueAtTime(gain,now+Math.max(.02,length-.07));g.gain.linearRampToValueAtTime(0,now+length);}}else g.gain.value=gain;
+    source.connect(g);g.connect(bus);source.start(now);if(length>0)try{source.stop(now+length+.02);}catch{}
     source.onended=()=>{try{source.disconnect();g.disconnect();}catch{}};
   }
   /** rpm 0..1 (the physics rpm); level is the overall sample level (0 when muted or paused). */
@@ -89,6 +91,8 @@ export function createRacingSamples({context,destination=context?.destination,ba
   return {
     load,get ready(){return ready;},get engineLoops(){return engineLoops;},update,
     shiftUp(){shot('shift-up',.035,1,.45);},shiftDown(){shot('shift-down',.03,1,.45);},
+    /** racing-v23 shift styles (racing-audio ?racingShift=b|c): the blow-off cut to its first 0.32 s, one exhaust crack, the down blips quieter */
+    turbo(){shot('turbo-blowoff',.028,1.2,.45,.32);},crack(){shot(`exhaust-pop-${1+(pop++%3)}`,.03,1.05,.45);},shiftDownSoft(){shot('shift-down',.02,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
     get v3Ready(){return v3Ready;},
     /** a game event by the audio engine's names ('bump', 'wall', 'crash', 'crashRecover'); intensity 0..1. Does nothing until v3 is ready. */

@@ -1,0 +1,84 @@
+<!doctype html>
+<html dir="rtl" lang="he">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>מרוצים: צליל העברת הילוך, השוואה</title>
+<style>
+ :root{color-scheme:dark}
+ body{margin:0;min-height:100vh;background:#0f1b22;color:#eef4f2;font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;direction:rtl;text-align:right;unicode-bidi:embed}
+ main{max-width:680px;margin:0 auto;padding:22px 16px 40px}
+ h1{font-size:22px;margin:0 0 6px}
+ p{margin:6px 0 14px;color:#c4d3d0}
+ .start{width:100%;padding:16px;border:0;border-radius:14px;background:#ffd166;color:#14212a;font-size:18px;font-weight:800;cursor:pointer}
+ .start[disabled]{opacity:.55}
+ .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+ .opt{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:#17303a;border:2px solid transparent}
+ .opt.picked{border-color:#ffd166}
+ .opt button{flex:none;width:86px;height:56px;border:0;border-radius:12px;background:#2f8f9d;color:#fff;font-size:17px;font-weight:800;cursor:pointer}
+ .opt button[disabled]{opacity:.4}
+ .opt.playing button{background:#e07b39}
+ .opt b{display:block;font-size:17px}
+ .opt small{display:block;color:#a8bcb8;font-size:14px}
+ .tag{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:999px;background:#ffd166;color:#14212a;font-size:12px;font-weight:800;vertical-align:middle}
+ .links{margin-top:20px;padding:14px;border-radius:14px;background:#122630}
+ .links a{color:#8fd3dc}
+ .ltr{direction:ltr;display:inline-block;unicode-bidi:isolate}
+ #state{min-height:1.5em;margin-top:10px;color:#ffd166;font-weight:700}
+</style>
+</head>
+<body>
+<main>
+ <h1>צליל העברת הילוך: 3 אפשרויות</h1>
+ <p>כל לחיצה מנגנת 10 שניות של האצה: 6 העברות הילוך למעלה, ואחר כך 2 הורדות הילוך בבלימה. אותו מנוע ואותם צלילים כמו במשחק, רק צליל ההילוך משתנה.</p>
+ <button class="start" id="start" type="button">להפעיל צליל (לחיצה אחת)</button>
+ <div id="state" role="status" aria-live="polite"></div>
+ <div class="grid" id="grid"></div>
+ <div class="links">
+  <b>לנסות בתוך המשחק</b>
+  <p>פותחים מרוץ ליגה עם אחד הקישורים. ברירת המחדל היא אפשרות א.</p>
+  <div id="links"></div>
+ </div>
+</main>
+<script type="module">
+import {createRacingAudio,SHIFT_STYLES} from '../minigames/racing-audio.mjs?v=island-v2-20261107-11';
+const OPTIONS=[
+ {id:'a',name:'א · נקי',note:'כמו תיבת הילוכים של פורמולה 1: קפיצה קטנה בטון המנוע ו"טאק" נמוך ורך. בלי שריקה ובלי פיצוץ.',def:true},
+ {id:'b',name:'ב · טורבו',note:'"פששש" קצר של טורבו בכל העברה למעלה. בהורדת הילוך רק קפיצה קטנה בטון.'},
+ {id:'c',name:'ג · ספורטיבי',note:'ניתוק הצתה קצר ו"טראח" אחד של אגזוז. בהורדת הילוך קפיצות טון עם פצפוצים.'},
+ {id:'v22',name:'כמו היום',note:'הצליל הנוכחי, להשוואה: צפצוף עולה, הפסקה קטנה ופיצוץ.'}
+];
+const picked=new URLSearchParams(location.search).get('racingShift'),grid=document.getElementById('grid'),state=document.getElementById('state'),start=document.getElementById('start');
+const audios=new Map();let running=null,frame=0;
+for(const o of OPTIONS){
+ const row=document.createElement('div');row.className='opt'+((picked||'a')===o.id?' picked':'');row.dataset.id=o.id;
+ const b=document.createElement('button');b.type='button';b.textContent='▶ לשמוע';b.disabled=true;b.setAttribute('aria-label','לשמוע את '+o.name);
+ const t=document.createElement('div');t.innerHTML=`<b>${o.name}${o.def?'<span class="tag">ברירת מחדל</span>':''}</b><small>${o.note}</small>`;
+ row.append(b,t);grid.append(row);b.addEventListener('click',()=>play(o.id));
+}
+const links=document.getElementById('links'),base=new URL('../',location.href).href;
+for(const o of OPTIONS.slice(0,3)){const a=document.createElement('a');a.href=base+'?racingShift='+o.id;a.textContent='אפשרות '+o.name;const d=document.createElement('div');d.append(a);links.append(d);}
+start.addEventListener('click',()=>{
+ start.disabled=true;state.textContent='טוען צלילים…';
+ // one engine per option, all unlocked inside this tap (a phone allows sound only from a tap); the sample layer loads in the background
+ for(const o of OPTIONS){const audio=createRacingAudio({shift:o.id,samples:true,storage:null});audio.unlock();audios.set(o.id,audio);}
+ setTimeout(()=>{state.textContent='מוכן. לחצו על אחת האפשרויות.';for(const b of grid.querySelectorAll('button'))b.disabled=false;},1800);
+});
+/** 10 s: gears 1-7 every 1.25 s (the revs climb in each gear), 1.5 s at the top, then braking with two downshifts */
+function script(t){
+ if(t<8.75){const g=Math.min(7,1+Math.floor(t/1.25)),u=(t-(g-1)*1.25)/1.25,rpm=Math.min(.95,.32+.62*Math.min(1,u*1.05));return {gear:g,rpm:g>=7?Math.min(.93,.62+.4*u):rpm,speed:4+t*5.2,throttle:1,brake:false};}
+ const b=t-8.75,g=b<.45?7:b<.9?6:5;return {gear:g,rpm:Math.max(.25,.86-b*.35+(b>.45&&b<.6||b>.9&&b<1.05?.12:0)),speed:Math.max(10,49-b*16),throttle:0,brake:true};
+}
+function play(id){
+ const audio=audios.get(id);if(!audio)return;
+ if(running){running.audio.sync(0,false,{throttle:0});cancelAnimationFrame(frame);document.querySelector(`.opt[data-id="${running.id}"]`)?.classList.remove('playing');}
+ const row=document.querySelector(`.opt[data-id="${id}"]`);row.classList.add('playing');audio.unlock();
+ const t0=performance.now();running={id,audio};
+ const tick=now=>{const t=(now-t0)/1000;if(t>10.4){audio.sync(0,false,{throttle:0,rpm:.15,gear:1});row.classList.remove('playing');running=null;state.textContent='';return;}
+  const s=script(t);audio.sync(s.speed,false,{rpm:s.rpm,gear:s.gear,throttle:s.throttle,brake:s.brake,steer:0,topVar:true});state.textContent='הילוך '+s.gear;frame=requestAnimationFrame(tick);};
+ frame=requestAnimationFrame(tick);
+}
+if(!SHIFT_STYLES.includes('a'))state.textContent='שגיאה בטעינת המנוע';
+</script>
+</body>
+</html>

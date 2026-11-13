@@ -1,0 +1,1475 @@
+{
+ "scenario": "wall",
+ "query": "racingWalls=1",
+ "frames": [
+  {
+   "name": "0-racing",
+   "spread": 40.41,
+   "colors": 351,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 0.03,
+   "speed": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing"
+  },
+  {
+   "name": "1-gas",
+   "spread": 33.77,
+   "colors": 362,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 2.53,
+   "speed": 16.9,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing"
+  },
+  {
+   "name": "wall-00",
+   "spread": 37.9,
+   "colors": 287,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 3.98,
+   "speed": 12.2,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 0
+  },
+  {
+   "name": "wall-01",
+   "spread": 39.42,
+   "colors": 285,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4,
+   "speed": 12.3,
+   "lateral": -8.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 1
+  },
+  {
+   "name": "wall-02",
+   "spread": 41.94,
+   "colors": 297,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.02,
+   "speed": 12.4,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 2
+  },
+  {
+   "name": "wall-03",
+   "spread": 43.8,
+   "colors": 305,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.03,
+   "speed": 12.5,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 3
+  },
+  {
+   "name": "wall-04",
+   "spread": 43.96,
+   "colors": 333,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.05,
+   "speed": 12.6,
+   "lateral": -8.15,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 4
+  },
+  {
+   "name": "wall-05",
+   "spread": 43.71,
+   "colors": 354,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.07,
+   "speed": 12.7,
+   "lateral": -8.19,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 5
+  },
+  {
+   "name": "wall-06",
+   "spread": 43.32,
+   "colors": 377,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.08,
+   "speed": 12.8,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 6
+  },
+  {
+   "name": "wall-07",
+   "spread": 44.67,
+   "colors": 419,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.1,
+   "speed": 12.9,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 7
+  },
+  {
+   "name": "wall-08",
+   "spread": 45.63,
+   "colors": 442,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.12,
+   "speed": 13,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 8
+  },
+  {
+   "name": "wall-09",
+   "spread": 45.89,
+   "colors": 428,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.13,
+   "speed": 13.1,
+   "lateral": -8.14,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 9
+  },
+  {
+   "name": "wall-10",
+   "spread": 45.86,
+   "colors": 461,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.15,
+   "speed": 13.2,
+   "lateral": -8.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 10
+  },
+  {
+   "name": "wall-11",
+   "spread": 45.9,
+   "colors": 470,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.17,
+   "speed": 13.3,
+   "lateral": -8.19,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 11
+  },
+  {
+   "name": "wall-12",
+   "spread": 45.26,
+   "colors": 467,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.18,
+   "speed": 13.3,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 12
+  },
+  {
+   "name": "wall-13",
+   "spread": 42.53,
+   "colors": 471,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.2,
+   "speed": 13.4,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 13
+  },
+  {
+   "name": "wall-14",
+   "spread": 42.08,
+   "colors": 465,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.2,
+   "speed": 13.4,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 14
+  },
+  {
+   "name": "wall-15",
+   "spread": 42.92,
+   "colors": 458,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.22,
+   "speed": 13.5,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 15
+  },
+  {
+   "name": "wall-16",
+   "spread": 42.67,
+   "colors": 405,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.23,
+   "speed": 13.6,
+   "lateral": -8.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 16
+  },
+  {
+   "name": "wall-17",
+   "spread": 43.21,
+   "colors": 404,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.25,
+   "speed": 13.7,
+   "lateral": -8.14,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 17
+  },
+  {
+   "name": "wall-18",
+   "spread": 44.14,
+   "colors": 395,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.27,
+   "speed": 13.8,
+   "lateral": -8.17,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 18
+  },
+  {
+   "name": "wall-19",
+   "spread": 44.91,
+   "colors": 399,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.28,
+   "speed": 13.9,
+   "lateral": -8.19,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 19
+  },
+  {
+   "name": "wall-20",
+   "spread": 45.81,
+   "colors": 389,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.3,
+   "speed": 10,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 20
+  },
+  {
+   "name": "wall-21",
+   "spread": 46.74,
+   "colors": 397,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.32,
+   "speed": 10.1,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 21
+  },
+  {
+   "name": "wall-22",
+   "spread": 47.39,
+   "colors": 398,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.33,
+   "speed": 10.2,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 22
+  },
+  {
+   "name": "wall-23",
+   "spread": 47.01,
+   "colors": 373,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.35,
+   "speed": 10.4,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 23
+  },
+  {
+   "name": "wall-24",
+   "spread": 47.44,
+   "colors": 393,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.37,
+   "speed": 10.5,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 24
+  },
+  {
+   "name": "wall-25",
+   "spread": 46.75,
+   "colors": 383,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.38,
+   "speed": 10.7,
+   "lateral": -8.14,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 25
+  },
+  {
+   "name": "wall-26",
+   "spread": 47.1,
+   "colors": 392,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.4,
+   "speed": 10.8,
+   "lateral": -8.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 26
+  },
+  {
+   "name": "wall-27",
+   "spread": 46.94,
+   "colors": 403,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.42,
+   "speed": 10.9,
+   "lateral": -8.18,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 27
+  },
+  {
+   "name": "wall-28",
+   "spread": 47.48,
+   "colors": 415,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.43,
+   "speed": 11.1,
+   "lateral": -8.2,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 28
+  },
+  {
+   "name": "wall-29",
+   "spread": 47.48,
+   "colors": 431,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.45,
+   "speed": 11.2,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 29
+  },
+  {
+   "name": "wall-30",
+   "spread": 47.16,
+   "colors": 445,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.47,
+   "speed": 11.3,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 30
+  },
+  {
+   "name": "wall-31",
+   "spread": 47.87,
+   "colors": 459,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.48,
+   "speed": 11.4,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 31
+  },
+  {
+   "name": "wall-32",
+   "spread": 48.1,
+   "colors": 444,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.5,
+   "speed": 11.6,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 32
+  },
+  {
+   "name": "wall-33",
+   "spread": 48.35,
+   "colors": 434,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.52,
+   "speed": 11.7,
+   "lateral": -8.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 33
+  },
+  {
+   "name": "wall-34",
+   "spread": 48.43,
+   "colors": 466,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.53,
+   "speed": 11.8,
+   "lateral": -8.15,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 34
+  },
+  {
+   "name": "wall-35",
+   "spread": 48.29,
+   "colors": 427,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.55,
+   "speed": 11.9,
+   "lateral": -8.17,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 35
+  },
+  {
+   "name": "wall-36",
+   "spread": 48.29,
+   "colors": 448,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.57,
+   "speed": 12,
+   "lateral": -8.2,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 36
+  },
+  {
+   "name": "wall-37",
+   "spread": 45.99,
+   "colors": 413,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.58,
+   "speed": 12.1,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 37
+  },
+  {
+   "name": "wall-38",
+   "spread": 45.61,
+   "colors": 402,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.6,
+   "speed": 12.2,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 38
+  },
+  {
+   "name": "wall-39",
+   "spread": 45.5,
+   "colors": 401,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.6,
+   "speed": 12.2,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 39
+  },
+  {
+   "name": "wall-40",
+   "spread": 44.95,
+   "colors": 399,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.62,
+   "speed": 12.4,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 40
+  },
+  {
+   "name": "wall-41",
+   "spread": 44.47,
+   "colors": 393,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.63,
+   "speed": 12.5,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 41
+  },
+  {
+   "name": "wall-42",
+   "spread": 44.14,
+   "colors": 397,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.65,
+   "speed": 12.6,
+   "lateral": -8.14,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 42
+  },
+  {
+   "name": "wall-43",
+   "spread": 43.84,
+   "colors": 411,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.67,
+   "speed": 12.7,
+   "lateral": -8.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 43
+  },
+  {
+   "name": "wall-44",
+   "spread": 43.51,
+   "colors": 384,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.68,
+   "speed": 12.8,
+   "lateral": -8.18,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 44
+  },
+  {
+   "name": "wall-45",
+   "spread": 42.99,
+   "colors": 396,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.7,
+   "speed": 9.2,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 45
+  },
+  {
+   "name": "wall-46",
+   "spread": 42.64,
+   "colors": 380,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.72,
+   "speed": 9.3,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 46
+  },
+  {
+   "name": "wall-47",
+   "spread": 42.39,
+   "colors": 418,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.73,
+   "speed": 9.4,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 47
+  },
+  {
+   "name": "wall-48",
+   "spread": 42.02,
+   "colors": 393,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.75,
+   "speed": 9.5,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 48
+  },
+  {
+   "name": "wall-49",
+   "spread": 41.75,
+   "colors": 405,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.77,
+   "speed": 9.6,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 49
+  },
+  {
+   "name": "wall-50",
+   "spread": 41.82,
+   "colors": 386,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.78,
+   "speed": 9.7,
+   "lateral": -8.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 50
+  },
+  {
+   "name": "wall-51",
+   "spread": 41.81,
+   "colors": 393,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.8,
+   "speed": 9.7,
+   "lateral": -8.15,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 51
+  },
+  {
+   "name": "wall-52",
+   "spread": 41.89,
+   "colors": 406,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.82,
+   "speed": 9.8,
+   "lateral": -8.17,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 52
+  },
+  {
+   "name": "wall-53",
+   "spread": 42.38,
+   "colors": 434,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.83,
+   "speed": 9.9,
+   "lateral": -8.18,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 53
+  },
+  {
+   "name": "wall-54",
+   "spread": 42.47,
+   "colors": 446,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.85,
+   "speed": 9.9,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 54
+  },
+  {
+   "name": "wall-55",
+   "spread": 42.41,
+   "colors": 459,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.87,
+   "speed": 10,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 55
+  },
+  {
+   "name": "wall-56",
+   "spread": 42.56,
+   "colors": 436,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.88,
+   "speed": 10.1,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 56
+  },
+  {
+   "name": "wall-57",
+   "spread": 42.68,
+   "colors": 464,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.9,
+   "speed": 10.2,
+   "lateral": -8.11,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 57
+  },
+  {
+   "name": "wall-58",
+   "spread": 42.96,
+   "colors": 455,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.92,
+   "speed": 10.3,
+   "lateral": -8.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 58
+  },
+  {
+   "name": "wall-59",
+   "spread": 43.2,
+   "colors": 465,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.93,
+   "speed": 10.3,
+   "lateral": -8.14,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 59
+  },
+  {
+   "name": "wall-60",
+   "spread": 43.64,
+   "colors": 440,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.95,
+   "speed": 10.4,
+   "lateral": -8.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 60
+  },
+  {
+   "name": "wall-61",
+   "spread": 44.06,
+   "colors": 458,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.97,
+   "speed": 10.5,
+   "lateral": -8.18,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 61
+  },
+  {
+   "name": "wall-62",
+   "spread": 44.11,
+   "colors": 433,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 4.98,
+   "speed": 10.6,
+   "lateral": -8.2,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 62
+  },
+  {
+   "name": "wall-63",
+   "spread": 44.52,
+   "colors": 399,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5,
+   "speed": 10.6,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 63
+  },
+  {
+   "name": "wall-64",
+   "spread": 44.38,
+   "colors": 426,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5,
+   "speed": 10.6,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 64
+  },
+  {
+   "name": "wall-65",
+   "spread": 45.03,
+   "colors": 385,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.02,
+   "speed": 10.7,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 65
+  },
+  {
+   "name": "wall-66",
+   "spread": 45.81,
+   "colors": 385,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.03,
+   "speed": 10.8,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 66
+  },
+  {
+   "name": "wall-67",
+   "spread": 46.53,
+   "colors": 377,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.05,
+   "speed": 10.9,
+   "lateral": -8.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 67
+  },
+  {
+   "name": "wall-68",
+   "spread": 46.76,
+   "colors": 380,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.07,
+   "speed": 11,
+   "lateral": -8.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 68
+  },
+  {
+   "name": "wall-69",
+   "spread": 46.92,
+   "colors": 371,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.08,
+   "speed": 11,
+   "lateral": -8.15,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 69
+  },
+  {
+   "name": "wall-70",
+   "spread": 47.08,
+   "colors": 377,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.1,
+   "speed": 11.1,
+   "lateral": -8.17,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 70
+  },
+  {
+   "name": "wall-71",
+   "spread": 47.26,
+   "colors": 368,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.12,
+   "speed": 11.1,
+   "lateral": -8.19,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 71
+  },
+  {
+   "name": "wall-72",
+   "spread": 47.42,
+   "colors": 369,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.13,
+   "speed": 8,
+   "lateral": -8.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 72
+  },
+  {
+   "name": "wall-73",
+   "spread": 47.55,
+   "colors": 360,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.15,
+   "speed": 8,
+   "lateral": -8.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 73
+  },
+  {
+   "name": "wall-74",
+   "spread": 48.36,
+   "colors": 387,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.17,
+   "speed": 8,
+   "lateral": -8.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing",
+   "frame": 74
+  },
+  {
+   "name": "wall-after",
+   "spread": 47.43,
+   "colors": 419,
+   "blank": false,
+   "camera": {
+    "finite": true,
+    "fallbacks": 0
+   },
+   "time": 5.8,
+   "speed": 3.1,
+   "lateral": -8.18,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "phase": "racing"
+  }
+ ],
+ "events": [
+  {
+   "t": 0,
+   "type": "start",
+   "car": "player"
+  },
+  {
+   "t": 3.267,
+   "type": "bump",
+   "car": "player"
+  },
+  {
+   "t": 3.983,
+   "type": "wall",
+   "car": "player",
+   "intensity": 0.8131858391003682
+  },
+  {
+   "t": 4.3,
+   "type": "wall",
+   "car": "player",
+   "intensity": 0.11636875287637381
+  },
+  {
+   "t": 4.7,
+   "type": "wall",
+   "car": "player",
+   "intensity": 0.1170371100708521
+  },
+  {
+   "t": 5.133,
+   "type": "wall",
+   "car": "player",
+   "intensity": 0.1239611468705305
+  },
+  {
+   "t": 5.517,
+   "type": "wall",
+   "car": "player",
+   "intensity": 0.133073749857263
+  }
+ ],
+ "controls": {
+  "gas": {
+   "x": 681,
+   "y": 253,
+   "width": 50,
+   "height": 50
+  },
+  "pad": {
+   "x": 0,
+   "y": 0,
+   "width": 422,
+   "height": 390
+  }
+ },
+ "firstHit": {
+  "t": 3.983,
+  "type": "wall",
+  "car": "player",
+  "intensity": 0.8131858391003682
+ },
+ "blankFrames": [],
+ "summary": {
+  "framesChecked": 75,
+  "blank": 0,
+  "minSpread": 37.9
+ }
+}
