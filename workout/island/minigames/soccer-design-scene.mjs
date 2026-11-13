@@ -204,7 +204,7 @@ export function createSoccerDesignScene({scene,config,loader,track=x=>x,ballRoot
     };
     goalMaterial.customProgramCacheKey=()=> 'soccer-design-goal-net-ripple-v3';
     if(goalsV6)goalMaterial.side=T.DoubleSide;
-    const goalGeometry=goalsV6||mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,goalMaterial);
+    const goalGeometry=goalsV6||mergeGeometries(goalGeometries);goalGeometries.forEach(geometry=>geometry.dispose());mesh(goalGeometry,goalMaterial).name='soccer-design-goals'; // named: the v24 pitch kit hides it when its own goals are up
     netRipple=(pulse,side,time)=>{goalMaterial.userData.ripple.value=pulse;goalMaterial.userData.rippleSide.value=side;goalMaterial.userData.rippleTime.value=time;};
     // Asset diameter .22m, anchor_ball_center (0,.11,0). BallRoot already
     // supplies simulation position and spin; imported ground offset is removed.

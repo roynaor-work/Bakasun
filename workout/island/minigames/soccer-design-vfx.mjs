@@ -28,15 +28,17 @@ export function createSoccerDesignVfx(scene,{track,fetcher=globalThis.fetch,redu
       slots.push({id,data,texture,material,sprite,age:data.durationSeconds,size:1});
     }catch{/* A missing decorative atlas cannot interrupt the match. */}
   })).then(()=>{if(!disposed)status=slots.length===3?'ready':slots.length?'partial':'unavailable';});
+  let skipped=null;
   function emit(id,x,y,z,size=1){
-    if(disposed||reducedMotion()&&id!=='landing-dust')return false;
+    if(disposed||reducedMotion()&&id!=='landing-dust'||skipped?.has(id))return false;
     for(const slot of slots)if(slot.id===id){slot.age=0;slot.size=size;slot.sprite.position.set(x,y,z);slot.sprite.visible=true;return true;}
     return false;
   }
   return {
     ready,emit,
-    update(state,dt,quality=0,camera){
-      if(disposed)return;
+    /** v24: `skip` = atlases another effect set draws now (soccer-fx-v1 confetti and slide turf replace confetti and landing-dust). */
+    update(state,dt,quality=0,camera,{skip=null}={}){
+      if(disposed)return;skipped=skip;
       if(state.eventId!==lastEvent){
         lastEvent=state.eventId;const event=state.event,p=state.players[event?.player??state.controlled];
         if(event?.type==='slide'&&p)emit('landing-dust',p.x,.23,p.z,.8);
