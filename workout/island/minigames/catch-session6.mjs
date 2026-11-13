@@ -89,7 +89,7 @@ export function runCatchSession6(ctx) {
   const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment, v7: (v7.weapons || v7.elements) ? v7 : null}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let blockSirenUntil = 0, scrapeSaid = false, nearSaid = false, nearAt = -9, blockSaid = false,toolSaid = {}, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
+  let blockSirenUntil = 0, scrapeSaid = false, nearSaid = false, nearAt = -9, blockSaid = false, toolSaid = {}, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
