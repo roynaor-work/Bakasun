@@ -19,16 +19,19 @@ export const PLACEMENTS=[
 export function fitZ(z,halfLength){const missing=11.885-halfLength;return Math.abs(z)>=5?Math.sign(z)*(Math.abs(z)-missing):z;}
 /** Seats (row, column) on a stand in its local frame, 5 rows x 12 columns = 60 fans per stand. */
 export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=0;col<12;col++)out.push({x:col<6?-4.5+col*.7:.95+(col-6)*.7,y:.28+row*.42-.025,z:.48+row*.88-.06,row,col});return out;}
-export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base}){
+export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,camera}){
  const flag=params?.get?.('tennisStadium');
  if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
- const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-11`,base);
- const [models,atlas,city]=await Promise.all([
+ const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-12`,base);
+ const use3dFlag=params?.get?.('tennisCrowd3d')!=='0';
+ const crowdBase=new URL('../assets/tennis-crowd-v22/',base);
+ const [models,city,crowdModule]=await Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
-  new T.TextureLoader().loadAsync(url('crowd-atlas.webp').href),new T.TextureLoader().loadAsync(url('evening-city.png').href)]);
+  new T.TextureLoader().loadAsync(url('evening-city.png').href),
+  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-12').catch(()=>null):null]);
  const library=new Map(models),halfLength=config.court.halfLength,group=new T.Group();group.name='tennis-v12-stadium';
- const disposables=[atlas,city],track=o=>{disposables.push(o);return o;};
- atlas.colorSpace=city.colorSpace=T.SRGBColorSpace;atlas.generateMipmaps=false;atlas.minFilter=atlas.magFilter=T.LinearFilter;
+ const disposables=[city],track=o=>{disposables.push(o);return o;};
+ city.colorSpace=T.SRGBColorSpace;
  // Static pieces are drawn instanced: one draw call per (model, mesh) instead of one per placed copy.
  const stands=[],byModel=new Map();
  for(const p of PLACEMENTS){const holder=new T.Object3D();holder.position.set(p.position[0],0,fitZ(p.position[2],halfLength));holder.rotation.y=p.rotationY;holder.updateMatrix();holder.matrixWorld.copy(holder.matrix);
@@ -36,29 +39,44 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
  for(const [name,holders] of byModel){const model=library.get(name);model.updateMatrixWorld(true);
   model.traverse(o=>{if(!o.isMesh)return;const mesh=new T.InstancedMesh(o.geometry,o.material,holders.length),m=new T.Matrix4();
    holders.forEach((h,k)=>{m.multiplyMatrices(h.matrixWorld,o.matrixWorld);mesh.setMatrixAt(k,m);});mesh.instanceMatrix.needsUpdate=true;mesh.frustumCulled=false;mesh.name=name;group.add(mesh);disposables.push(o.geometry);});}
- // 600 fans in one InstancedMesh: cell = variant, phase = when the hands go up.
+ // 600 fans: the 3D LOD crowd first (?tennisCrowd3d=0 skips it); if it fails to load, the billboard atlas crowd below is built exactly as before.
+ const seats=standSeats(),count=stands.length*60;let crowd3d=null,crowd=null,atlas=null;const cheer={value:0},clock={value:0};
+ group.updateMatrixWorld(true);
+ if(crowdModule?.createLODCrowd){try{
+  const list=[],point3=new T.Vector3();let n=0;
+  for(const stand of stands)for(const s of seats){point3.set(s.x,s.y,s.z).applyMatrix4(stand.matrixWorld);const jr=Math.sin(n*12.9898)*43758.5453,jit=jr-Math.floor(jr);list.push({id:n,x:point3.x,y:point3.y,z:point3.z,yaw:stand.rotation.y+Math.PI+(jit-.5)*.3});n++;}
+  crowd3d=await crowdModule.createLODCrowd({T,GLTFLoader,seats:list,base:crowdBase});
+  // Unlit vertex colours read brighter than the evening-lit atlas: pull them toward the cool dusk grade.
+  for(const m of crowd3d.batches)m.material.color.set('#c2ccd8');
+  group.add(crowd3d.root);
+ }catch(error){crowd3d?.dispose?.();crowd3d=null;}}
+ if(!crowd3d){
+ // billboard crowd (the previous look): cell = variant, phase = when the hands go up.
+ atlas=await new T.TextureLoader().loadAsync(url('crowd-atlas.webp').href);disposables.push(atlas);atlas.colorSpace=T.SRGBColorSpace;atlas.generateMipmaps=false;atlas.minFilter=atlas.magFilter=T.LinearFilter;
  const plane=track(new T.PlaneGeometry(.88,1.76));plane.translate(0,.88,0);
- const count=stands.length*60,cells=new Float32Array(count*2),shades=new Float32Array(count);
+ const cells=new Float32Array(count*2),shades=new Float32Array(count);
  plane.setAttribute('cell',new T.InstancedBufferAttribute(cells,2));plane.setAttribute('shade',new T.InstancedBufferAttribute(shades,1));
- const cheer={value:0},clock={value:0},material=track(new T.MeshBasicMaterial({map:atlas,side:T.DoubleSide,alphaTest:.5,color:'#b0c0cf'}));
+ const material=track(new T.MeshBasicMaterial({map:atlas,side:T.DoubleSide,alphaTest:.5,color:'#b0c0cf'}));
  material.onBeforeCompile=shader=>{shader.uniforms.uCheer=cheer;shader.uniforms.uTime=clock;
   shader.vertexShader=shader.vertexShader.replace('#include <uv_pars_vertex>','#include <uv_pars_vertex>\nattribute vec2 cell; attribute float shade; uniform float uCheer; uniform float uTime; varying vec2 vCellUv; varying float vShade;')
    .replace('#include <begin_vertex>','#include <begin_vertex>\nfloat ph=cell.y*6.2831; float up=position.y/1.76; float cheerNow=step(cell.y,uCheer); transformed.x+=sin(uTime*1.6+ph)*0.05*up; transformed.y+=cheerNow*abs(sin(uTime*7.0+ph*3.0))*0.12*uCheer; transformed.y+=sin(uTime*2.1+ph*2.0)*0.012*up;')
    .replace('#include <uv_vertex>','#include <uv_vertex>\nfloat cheering=step(cell.y,uCheer); float idx=cell.x*2.0+cheering; float col=mod(idx,8.0); float row=floor(idx/8.0); vec2 safeUv=mix(vec2(1.0/128.0,1.0/256.0),vec2(127.0/128.0,255.0/256.0),uv); vCellUv=(vec2(col,1.0-row-1.0)+safeUv)*vec2(1.0/8.0,1.0/2.0); vShade=shade*mix(0.58,1.0,smoothstep(0.0,0.55,uv.y));');
   shader.fragmentShader=shader.fragmentShader.replace('#include <map_pars_fragment>','#include <map_pars_fragment>\nvarying vec2 vCellUv; varying float vShade;').replace('#include <map_fragment>','diffuseColor*=texture2D(map,vCellUv); diffuseColor.rgb*=vShade;');};
  material.customProgramCacheKey=()=>'tennis-v12-crowd';
- const crowd=new T.InstancedMesh(plane,material,count);crowd.name='Crowd_v12';crowd.frustumCulled=false;
- const dummy=new T.Object3D(),point=new T.Vector3(),seats=standSeats(),cam=config.render.cameraLandscape||[0,12.8,25],turn=Number(params?.get?.('tennisFansTurn')??.6);group.updateMatrixWorld(true);let i=0;
+ crowd=new T.InstancedMesh(plane,material,count);crowd.name='Crowd_v12';crowd.frustumCulled=false;
+ const dummy=new T.Object3D(),point=new T.Vector3(),cam=config.render.cameraLandscape||[0,12.8,25],turn=Number(params?.get?.('tennisFansTurn')??.6);let i=0;
  for(const stand of stands)for(const s of seats){point.set(s.x,s.y,s.z).applyMatrix4(stand.matrixWorld);const jr=Math.sin(i*12.9898)*43758.5453,jit=jr-Math.floor(jr),jr2=Math.sin(i*78.233)*12345.6789,jit2=jr2-Math.floor(jr2);dummy.position.copy(point);{const court=stand.rotation.y+Math.PI,toCamera=Math.atan2(cam[0]-point.x,cam[2]-point.z);let d=toCamera-court;d=Math.atan2(Math.sin(d),Math.cos(d));dummy.rotation.set(0,court+d*turn+(jit-.5)*.7,0);}dummy.scale.setScalar(.92+jit2*.2);dummy.updateMatrix();crowd.setMatrixAt(i,dummy.matrix);
   cells[i*2]=(i*7+s.row*3)%8;cells[i*2+1]=((i*47)%101)/101;shades[i]=.85-s.row*.04+(i%7)*.017;i++;}
  crowd.instanceMatrix.needsUpdate=true;group.add(crowd);
+ }
  const sky=new T.Mesh(track(new T.CylinderGeometry(95,95,70,48,1,true)),track(new T.MeshBasicMaterial({map:city,side:T.BackSide,fog:false,toneMapped:false,depthWrite:false})));sky.position.y=28;sky.renderOrder=-2;group.add(sky);
  // Everything is loaded: only now is the v7 venue hidden and the evening look applied.
  v7.hideVenue();scene.add(group);
  scene.background=new T.Color('#53647c');scene.fog?.color.set('#718095');
  hemi.color.set('#b4c8e6');hemi.groundColor.set('#343b35');hemi.intensity=1.35;sun.color.set('#ffd1a0');sun.intensity=2.1;sun.position.set(-24,19,10);renderer.toneMappingExposure=1.05;
- const clap={last:-1,left:0};let triangles=0;group.traverse(o=>{if(o.isMesh)triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);});
- return {group,metrics:{fans:count,stands:stands.length,triangles},
-  update(state,dt){clock.value+=dt;const e=state?.event;if(e&&['point','game','complete'].includes(e.type)&&e.id!==clap.last){clap.last=e.id;clap.left=2.4;}clap.left=Math.max(0,clap.left-dt);cheer.value=clap.left>0?Math.min(1,clap.left):0;},
-  dispose(){scene.remove(group);v7.showVenue?.();for(const d of disposables)d.dispose?.();group.traverse(o=>{if(o.isMesh&&o!==crowd&&o.geometry&&!o.geometry.userData?.shared)o.geometry.dispose?.();});}};
+ const clap={last:-1,left:0},aim=new T.Vector3(),camLocal=[0,0,0];let camSeen=false,triangles=0;group.traverse(o=>{if(o.isMesh&&!(crowd3d&&crowd3d.batches.includes(o)))triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);});
+ return {group,metrics:{fans:count,stands:stands.length,triangles,crowd:crowd3d?'3d-lod':'billboard',crowd3d:crowd3d?crowd3d.metrics:null},
+  update(state,dt){clock.value+=dt;const e=state?.event;if(e&&['point','game','complete'].includes(e.type)&&e.id!==clap.last){clap.last=e.id;clap.left=2.4;}clap.left=Math.max(0,clap.left-dt);cheer.value=clap.left>0?Math.min(1,clap.left):0;
+   if(crowd3d){const ball=v7.ball?.position;if(ball)aim.copy(ball);const c=camera?.position;if(c&&(!camSeen||Math.hypot(c.x-camLocal[0],c.y-camLocal[1],c.z-camLocal[2])>.4)){camLocal[0]=c.x;camLocal[1]=c.y;camLocal[2]=c.z;camSeen=true;}crowd3d.update({seconds:clock.value,celebration:cheer.value,ballPosition:[aim.x,Math.max(aim.y,.3),aim.z],cameraPosition:camera?.position?camLocal:[0,12.8,25]});}},
+  dispose(){crowd3d?.dispose?.();scene.remove(group);v7.showVenue?.();for(const d of disposables)d.dispose?.();group.traverse(o=>{if(o.isMesh&&o!==crowd&&!(crowd3d&&crowd3d.batches.includes(o))&&o.geometry&&!o.geometry.userData?.shared)o.geometry.dispose?.();});}};
 }

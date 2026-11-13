@@ -1,8 +1,8 @@
 /** Island racing league (racing-v9, option B chosen by Roy). The rules, validation and merge live in racing-league-core.mjs (loaded at boot);
  * this file adds the race setup that needs the track list and re-exports everything, so tests and tools keep one import. */
-import {RACING_STAGES,createTrack} from './racing-tracks.mjs?v=island-v2-20261107-11';
-import {SEASONS,DRIVERS,LONG,CIRCUITS,seasonCalendar,equipmentFor} from './racing-league-core.mjs?v=island-v2-20261107-11';
-export * from './racing-league-core.mjs?v=island-v2-20261107-11';
+import {RACING_STAGES,createTrack} from './racing-tracks.mjs?v=island-v2-20261107-12';
+import {SEASONS,DRIVERS,LONG,CIRCUITS,seasonCalendar,equipmentFor} from './racing-league-core.mjs?v=island-v2-20261107-12';
+export * from './racing-league-core.mjs?v=island-v2-20261107-12';
 
 /** racing-deep-m6: the six circuit lengths in metres (tier 0 stages; every tier reuses the same six circuits), measured once from the real track. */
 export const CIRCUIT_LENGTHS = Object.freeze(Array.from({ length: CIRCUITS }, (_, i) => createTrack(i + 1).length));

@@ -1,11 +1,11 @@
 /** soccerShow v1 evidence page: real league matches (same session, view, HUD and CSS as the game) with the perf bench's bot, counting
  * goals against replays, their on-screen length, how long the model was held, the render cost per show phase against live play, and
  * console errors. Opens on a phone (tap the button) and in Playwright (?auto=1&matches=2&quality=2). Soccer only; nothing is written. */
-import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261107-11';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-11';
-import {initialSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-11';
-import {initialSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-11';
-import {createTranslator} from '../ui/translate.mjs?v=island-v2-20261107-11';
+import {startSoccer} from '../minigames/soccer-session.mjs?v=island-v2-20261107-12';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-12';
+import {initialSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-12';
+import {initialSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-12';
+import {createTranslator} from '../ui/translate.mjs?v=island-v2-20261107-12';
 
 const query=new URLSearchParams(location.search);
 if(query.get('dev')!=='1'){query.set('dev','1');location.replace(`${location.pathname}?${query}`);}
