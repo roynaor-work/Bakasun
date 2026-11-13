@@ -1,0 +1,890 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "originalArtwork": true,
+  "note": "Digests exclude this inventory, REPORT.md and LICENSES.md to avoid recursive document hashes. The license ledger enumerates every file.",
+  "files": [
+    {
+      "path": "levels.json",
+      "bytes": 267624,
+      "sha256": "8376f01bc4c3d482e714fe47f285dafc56ea6ad7f24ab2180a371aca497a7a80",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 34792,
+      "sha256": "993400d6529c431990e8a4755cb7935bf05102eae46d2b62a295cafe4a465647",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 10123,
+      "sha256": "4eb9116827bf61cf3a570cc3c1636c9a24173543da734260be019e8ff4d30fb2",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 4445,
+      "sha256": "8138178d9c4f88261a614d86ef5627a01a85b21ba4f862710b3276aadf06a459",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 20050,
+      "sha256": "6cab608baa88d437437809a5e79f3e2af82a64711c37541a1c98678573142828",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/01-pine.png",
+      "bytes": 148577,
+      "sha256": "85280b21bc638437d95488b7ff6a4f91f3c8f2c66951b2edf3a5b75dea149b74",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/02-ice.png",
+      "bytes": 243234,
+      "sha256": "fa5480d5ecdc3aa5c80c5228c85ceb9bce658db4e196729faa2238a566c8f654",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/03-volcano.png",
+      "bytes": 194379,
+      "sha256": "7b6ca0c5d20877e0b65a4ec99bdedeedc37c9e9f468e144988c792fe94d4bccf",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/04-aurora.png",
+      "bytes": 235921,
+      "sha256": "fe2f80c77b0a1981f314bc47727c5d01e248fb679f6259f68d8db5bfa7ce50f7",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/05-village.png",
+      "bytes": 158109,
+      "sha256": "1853a081d6b035121832702a49016580a9e2a756578c266b5626969bd3d1aa84",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "previews/06-summit.png",
+      "bytes": 168483,
+      "sha256": "c8e88875e00efcb40c85bd846d03a39e32c981868d466dc4c5c6603d95871510",
+      "source": "source/capture_previews.py + preview.mjs + original models/textures",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "shared/reference-skier.glb",
+      "bytes": 45032,
+      "sha256": "74a2ff1ed861a0fe8a4a9748836232967677a06f9d3734e9ea8e388493814b99",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/build_assets.py",
+      "bytes": 28559,
+      "sha256": "ade554bbefd2fa36702305c38a1d56c0d7844a65fd6428fbd3a8c7f90c93b850",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/capture_previews.py",
+      "bytes": 1665,
+      "sha256": "ba383de0ae1018fb798906fc9792ac112104a2975812281d362ee3c034df4367",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/catalogue.py",
+      "bytes": 4743,
+      "sha256": "d9be0630c7b2cf41096248753ced4e2a56904bbda440309a4ce7a906aec1426a",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/requirements.txt",
+      "bytes": 100,
+      "sha256": "bc81646e0327ad79639408732afbbef734a2f53d8ba6630499a43ca84bc69aaf",
+      "source": "original authored source; this file",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/effects.json",
+      "bytes": 2057,
+      "sha256": "b75b43c46aa43955ce9c2411f71e654ecab5419552452c3e8f14b50a895872c1",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/arrow-sign.glb",
+      "bytes": 7496,
+      "sha256": "4071bf5386e80f16292a9a63dc740c646c2dc4ce997ad6b3d728f41393f2d600",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "d0ba09d3d12b198402dd5730d7e3dc1413f89040eb43b7cc7f7543f00f9e4bc4",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/gate-teal.glb",
+      "bytes": 14972,
+      "sha256": "24a31fcc5d0e353ef45c6068875e5a9b22c139da64e6ed9b17f84e0c1ad11269",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/pine-round.glb",
+      "bytes": 15192,
+      "sha256": "f45746492d55462daf242f46fea3831ba2fda9432ca20a513e6854ed78f9b414",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/pine-tall.glb",
+      "bytes": 15196,
+      "sha256": "91785be7523ff67b38c3b3190411da6de179127fa9e1aec3db1a38639c898b14",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/pine-young.glb",
+      "bytes": 15204,
+      "sha256": "55a6afacb7f4662e7004866a565e03715348db0fb28ca53113784638e24b6edc",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/ramp.glb",
+      "bytes": 4824,
+      "sha256": "382d5f565de74eae3514454994efe1fa3a104bc2a6a8d39d9e68efb5a35d90f6",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/models/terrain-tile.glb",
+      "bytes": 4180,
+      "sha256": "fccbec0cd833572ebb70769aea850ee984f772a56eed59215a207c0b6515ccaa",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/glow.png",
+      "bytes": 6781,
+      "sha256": "e9368e688259a70cb043784084c8c22ecabc39e110275cad7a4a961a32d5aba7",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/ground-a.png",
+      "bytes": 90241,
+      "sha256": "d8231d72de3efb407855c84b4c313a20d5022fce50872be917b58d60caabeee1",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/ground-b.png",
+      "bytes": 115231,
+      "sha256": "02cba68cfddd9bf286f3b2cf3558e6db16390e84ee40fc4fac873a3e0f70d309",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/particles.png",
+      "bytes": 21051,
+      "sha256": "fade9c496aa44e9044c2e32edae5fcea9a6871bed843b578da179f73a00a898d",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/powder.png",
+      "bytes": 8532,
+      "sha256": "89c4d644a2146b5cf70a7a19f8d9e19415ec4cc4b31fc8dcdbe2aede784c6ac9",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/sky.png",
+      "bytes": 33648,
+      "sha256": "c3e58a1bbe836990caa2e22d766d14f8f19e417240ac1888b158c8ecc901ecde",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/snow.png",
+      "bytes": 31615,
+      "sha256": "44ad27c6b9e37f9e3ead87d60921d20e37bda774ef8abb6de3f50030e50ceacc",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/snowflake.png",
+      "bytes": 2247,
+      "sha256": "1197435a1b951e6c72eb6f9de90039d46f4b4d79c395ef56720aed130241c3d9",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/01-pine/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "0fb32bd683f7f0538f3d66e6663ee3285c3d52a2de2fda2b67c24cd1e2d1bf99",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/effects.json",
+      "bytes": 2057,
+      "sha256": "da1cf59f1522cd41f8aa0c29e70bff0add3f74e5081465ddf31924ada0922bdd",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/arrow-sign.glb",
+      "bytes": 7496,
+      "sha256": "4b3c21a227cb6f31ac7f6e5931a4eeef2e22dd969b3156a4759552017b4a49da",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "4e52eb3a1815f92d9d215d7423a4e6c4b8119c0ac0dbe7cdf2f3a98d5b4fa924",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/gate-teal.glb",
+      "bytes": 14972,
+      "sha256": "61e3a6bccb389979ef160c10e5a9b344539ea0aa21cc357a35b3349c252cce3e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/ice-arch.glb",
+      "bytes": 23756,
+      "sha256": "60fb93d228a9f7b36b6e0440bc6b7899f30a6a86f394c63f25697d8644635cd1",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/ice-cluster.glb",
+      "bytes": 15352,
+      "sha256": "ae195f394621142a18fa442d17afac86172604bdd863f052c3d3059828d636f4",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/ice-spire.glb",
+      "bytes": 12276,
+      "sha256": "fa73dc9cf551a362ce26270fc3902ecf3412f78395d8e3ff2cde4b4ee1174fb0",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/ramp.glb",
+      "bytes": 4824,
+      "sha256": "d8d826ec9a15ba680ba15b547fd9a3115d10663769f74b4943a724c40262000e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/models/terrain-tile.glb",
+      "bytes": 4180,
+      "sha256": "345a6b86392c0b93e76d17c51c5cd11526faa2f3fe906e6e5e27ab3869d5346a",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/glow.png",
+      "bytes": 6783,
+      "sha256": "d08dd3a5153af0e41ea32b90f3baf848897dcdd90ee7811746840b4a98ec176a",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/ground-a.png",
+      "bytes": 128552,
+      "sha256": "f7efafb59e6f7a30d667abef6173acbd0cae3f9b47075b4ee3e5e4b9cf04896e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/ground-b.png",
+      "bytes": 172049,
+      "sha256": "e5a09657794c2cd55aed0550720e8bfe20b2253008bef348ada949129ce107d3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/particles.png",
+      "bytes": 20809,
+      "sha256": "420dfdc7144170a36dd89c62a147372d02092505ce5c32d6c86a63fd68354b9b",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/powder.png",
+      "bytes": 8530,
+      "sha256": "e71ebd949ae139e457e02673a73090c87ea207cef3244433f8ba40f6a8325628",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/sky.png",
+      "bytes": 37827,
+      "sha256": "e6b6acccf665d0ef8065a5006838c725fd11fd72d37fb73b8abb2c7a77bcd44c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/snow.png",
+      "bytes": 31291,
+      "sha256": "8adb8aa5646d40970104eb12a7a2e554116a47fbdbbd0e3e6d19ae0832377205",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/snowflake.png",
+      "bytes": 2235,
+      "sha256": "ea5c98733f8902520c7f2a124b2088fa24caaf2defa244093387d7fddb1aacdd",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/02-ice/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "36d831d2c54512912ab95b9b10b0cbad9f60259ec8358a788a6cb02bd1cc09e1",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/effects.json",
+      "bytes": 2057,
+      "sha256": "b52ed40c9cd2c32943b382137444c3cc936518aa873543a29115ac8941336ee8",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/arrow-sign.glb",
+      "bytes": 7500,
+      "sha256": "274e52120fc9e1973f12bbfb83ab6ff2859bd15718b2a7d55c9730a48168a06a",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/basalt-stack.glb",
+      "bytes": 10432,
+      "sha256": "b19b6be6097c1f15ea7b2e83647a9dfc94c6a9e60f0060b2c7bf6a4fa32db8b6",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "c61115ad3cdb5908c85add95879f4f0dfb70a3b35632b2e6ae74eddc517d6944",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/gate-teal.glb",
+      "bytes": 14972,
+      "sha256": "b61a85d06e48b59132b0ab9b61d3a54d4211207ee1ddf0fb6d7993cae30680a2",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/glow-stones.glb",
+      "bytes": 10432,
+      "sha256": "dae9ddd997df33652f24aae4cc571c0c503596d151ad0ebb263cf9f1d5eb6678",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/ramp.glb",
+      "bytes": 4832,
+      "sha256": "b9a624436f0acf90969c96c976de2947611b9a5a2976d17513df991b6f059063",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/soot-boulder.glb",
+      "bytes": 10436,
+      "sha256": "37333e4e6765224583a54bdd3cac69fa0fb5174dca11d6a0afd9c39696ed8ae7",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/models/terrain-tile.glb",
+      "bytes": 4180,
+      "sha256": "642ce917c1cca902dba907256f10111b2bf0ca02df65a6e6f2ed1e15ef4ed5ff",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/glow.png",
+      "bytes": 6781,
+      "sha256": "f85e51cfeb7811c09586ee9b5db517d1703b4f471adb052739324279d3bede5c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/ground-a.png",
+      "bytes": 118559,
+      "sha256": "e4fd0bcdb42bbf98ade41581db512641e22b594450006c4ada7d647bced41fa2",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/ground-b.png",
+      "bytes": 160479,
+      "sha256": "37b5fe6a313c4774eaa36821391cab96a8dee3cc7699528cf70545108f2f3f9c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/particles.png",
+      "bytes": 21033,
+      "sha256": "689fbfbd34d48b8b98b97bb33a04a46957242eacef691d6e36cec350b7245e6d",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/powder.png",
+      "bytes": 8534,
+      "sha256": "3dd377241f73cfb8232da6165c3fc68fe1975578af373ea7232211231ca47247",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/sky.png",
+      "bytes": 29980,
+      "sha256": "5229b4685c49f0413d813df9dfbff6a8fb25d86dae6d117a869139e46008919c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/snow.png",
+      "bytes": 31185,
+      "sha256": "188c8535854633660db4d0abd3fb03f45e408d3bc8f92732c21cd6710e091161",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/snowflake.png",
+      "bytes": 2243,
+      "sha256": "7351e4d377a6a82927bb5d612523087115ae0d59eea29ed7b9dfa113365ef871",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/03-volcano/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "6dbe2fe0465307c70d37c84bbeb122b558c54c247ae7efc89532f1d26b2702b0",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/effects.json",
+      "bytes": 2057,
+      "sha256": "69c6402563caf991b12ba2f24511b3cf47747666a31766d5e0b387b1f6beb288",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/arrow-sign.glb",
+      "bytes": 7496,
+      "sha256": "280dbdbceab5d466fbc7b9ab630a999c96840baa18518ab71218d1c997ea04c5",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/frost-boulder.glb",
+      "bytes": 7144,
+      "sha256": "40cd2306ff90a81b1ddd7405d661cfac94a452a00d2fcb7b32287d17c8fb3412",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "45e47fb044226f141e150f401e1c504c7c1b54b86633b13a050d08531e186a6e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/gate-teal.glb",
+      "bytes": 14968,
+      "sha256": "44864346e52cf7c5d04990a02db52c99ecc108f884be049043b0332f1b2012b2",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/moon-crystal.glb",
+      "bytes": 12284,
+      "sha256": "9b34c2f4b555c949abdc464f56ef5c1d599d858c8dde7d0477d51883bc587b64",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/night-pine.glb",
+      "bytes": 15200,
+      "sha256": "456eac4d2dbe3d727829fb8b8c3587af0d770eadbf19677f358c67720ea27808",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/ramp.glb",
+      "bytes": 4824,
+      "sha256": "54b7d7b269005e65c43e9e0de809496a70ac9a96ed4768d3f3e51b2f5073062b",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/models/terrain-tile.glb",
+      "bytes": 4176,
+      "sha256": "033b4d308f378e3a84850895db142fbc7468b10ec758ced60aedea89007d7199",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/glow.png",
+      "bytes": 6783,
+      "sha256": "f9a9fb8970647a102ec6f7de48c395510767c6a5e25b810fe4b42278ee9f0fed",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/ground-a.png",
+      "bytes": 129407,
+      "sha256": "6685654bf68e3d62b7658940d899a56cc992ece281a4444b1860060214bac13f",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/ground-b.png",
+      "bytes": 176327,
+      "sha256": "59e71a5e0a05b23527c747712e1a08fba64c2dc40024b6ad5540c4c8c386b1d5",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/particles.png",
+      "bytes": 21009,
+      "sha256": "d95057c9983b78e286b91fd9dbfd3653a44e4e8baabad77174ee429fb2bef6a4",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/powder.png",
+      "bytes": 8534,
+      "sha256": "77fa90a37066f1d52b43c22f6285d9d989c88fc05ee1cbb9a0b96a338a2b3d7c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/sky.png",
+      "bytes": 41408,
+      "sha256": "3e8a089a10c4de0d3b28aa84e2a77a8cb07a298e0188e8659223a2285fe98583",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/snow.png",
+      "bytes": 31739,
+      "sha256": "d5d0508c801e690f385e3aa864ea149eaa3e6d0416f46c1578675aec45df40cb",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/snowflake.png",
+      "bytes": 2241,
+      "sha256": "d32f60d70846008d2c5c13b59b55267a9f7c3617a62952f2590e4184a81dddad",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/04-aurora/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "38399e9c874ede846fe02d4638c8ba26dae2233a2bedeea84cd38df0d6375754",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/effects.json",
+      "bytes": 2057,
+      "sha256": "c508997f72340184e0440a1151133742b778234195eb34691717988a8b90a9be",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/arrow-sign.glb",
+      "bytes": 7500,
+      "sha256": "b8e9e19b80dac9f671c104b882dd3b254fed9575ddad74238e229a94fca05729",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/chalet.glb",
+      "bytes": 32496,
+      "sha256": "09bfb5f2034ae900ffad08970fbdb3f01cf5b0f54e0bf45f6578d2f0d584421f",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/garden-boulder.glb",
+      "bytes": 7148,
+      "sha256": "511b698c221ed9ecda18f114dc98ec0d35b6bd53ab7af3a0da5a290c2714fe17",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "6c619335bedfaa58d5ee2006d4b43be7fe5fe7f30a98e9a8d1fd2b1bcd702363",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/gate-teal.glb",
+      "bytes": 14972,
+      "sha256": "2c07004f0414f3e984364ee852aaf2364f686492187db99d1c5eadd8449f14a3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/ramp.glb",
+      "bytes": 4828,
+      "sha256": "c8f316b425a4fbed3841d8d47a3bc0b700913097b1815494803660efe307bfc6",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/rope-fence.glb",
+      "bytes": 41420,
+      "sha256": "55e84a733818ede59b98cf337e35a9df1061e53682274c291362d6215f60d8e5",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/snow-fir.glb",
+      "bytes": 15200,
+      "sha256": "c99038b7803fa62bb9e5624024df238147b0ea7398d57529eda39b207b7836bb",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/terrain-tile.glb",
+      "bytes": 4180,
+      "sha256": "08858b3a9a075e6cb7f203b5d36fa66ee444fef4b9fb5485bc97ea54fd69fe02",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/models/village-pine.glb",
+      "bytes": 15204,
+      "sha256": "1866a177b64a5a027fff8bdbfd990d70dc66c11efe345d676470098b0b90d4da",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/glow.png",
+      "bytes": 6781,
+      "sha256": "cacb5dd1c09edd1b27a5a59966cf6bf1134f6c8ffb87f2fceab22a1853ac76a8",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/ground-a.png",
+      "bytes": 80503,
+      "sha256": "7ded6ba314d8e9f539115b9db99ee1d621e1d3a55897b281baff7d088ab5d4c3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/ground-b.png",
+      "bytes": 102161,
+      "sha256": "f8f02ac25d74168ce833add781103f37194550b0ee334e7460d3223f134a1a64",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/particles.png",
+      "bytes": 21098,
+      "sha256": "422acb40bce1eb13e6750c53266ccad03f1b3e4809aa60117df0990b11cb2831",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/powder.png",
+      "bytes": 8532,
+      "sha256": "361f2ec5b545dc35c501b31d2af242bed38065e207b64c12fb865ae1cc2368f3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/sky.png",
+      "bytes": 32912,
+      "sha256": "e5d0e4534d98af82aac441d97026aa27394e4ff1b16f985463fd4df369bcce97",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/snow.png",
+      "bytes": 31301,
+      "sha256": "b06da3212779abaa5a88b60f2e0750bc62bf8a0404a4190eb6a64d849277dde3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/snowflake.png",
+      "bytes": 2248,
+      "sha256": "7cca52bbc580039aefe5869fc5c1b8b2fd96f107f596671faa413d1e13f11492",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/05-village/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "65bc54cea65a96b0669682beb79ca715e43196e849ca53ed405a890174f3c321",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/effects.json",
+      "bytes": 2057,
+      "sha256": "dd0b58d0c803909e719043427dfc42222bcfea827f489b28c7825e31e042bd7f",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/arrow-sign.glb",
+      "bytes": 7496,
+      "sha256": "9ecbe333bdbc23204a03eb6ef040d9d0c1c2d7e585e26f1db1ab0cc085d52a60",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/cloud-boulder.glb",
+      "bytes": 7144,
+      "sha256": "400f6b608f6e89060bebd019615660e72dcabd3a0cc9b1d5d3a1591d109e9e58",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/gate-coral.glb",
+      "bytes": 14972,
+      "sha256": "30101772791e31ebc997ef58ca0ca396064a97d6ff59da9f00f9cd10e56367f0",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/gate-teal.glb",
+      "bytes": 14972,
+      "sha256": "2c163b3838826c180a1e81f3f0e206db241e539f50f63896fd1e776f9511b72e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/granite-slab.glb",
+      "bytes": 7144,
+      "sha256": "51dbc5b18d0bc9829e387002ec5b899ff76d7201af35dca6e6b602081876550b",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/ramp.glb",
+      "bytes": 4824,
+      "sha256": "4d62cfa109405edfa67a6e42be95d6f861a286c794afe217e0c7b2f944110d24",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/snow-spire.glb",
+      "bytes": 7140,
+      "sha256": "7c50d62a782b6446ad6d5edab6c3b943a3a6e54f938c74ce8b1ce3362889552f",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/models/terrain-tile.glb",
+      "bytes": 4180,
+      "sha256": "d7bc2cf4149991cb04e82706f03f6c566026d499c1e9cd425b8cfe6519f3d37f",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/glow.png",
+      "bytes": 6783,
+      "sha256": "bf63f37716ff6071bcfa3b6afea7535fd183ee41eda05bfaacb1aa530e81c222",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/ground-a.png",
+      "bytes": 103393,
+      "sha256": "175c26faffb3fce99bc44ea526a85fbacb8f70af72288510ff6ed7db3f0bee86",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/ground-b.png",
+      "bytes": 136611,
+      "sha256": "d5bb130d0883499b267c489fe63c3f04994a25a27186c3861880f8abed625b0c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/particles.png",
+      "bytes": 20909,
+      "sha256": "7fb5e0b8f5269349554b6d59bb922b65d7266cfced80e4244d91239fb3031991",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/powder.png",
+      "bytes": 8531,
+      "sha256": "1f743fe764482d0847aba20174a37431f3d5390b05d470685d3b22520c12f582",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/sky.png",
+      "bytes": 33354,
+      "sha256": "e7a615af3a9533636a6d049ef921c3252dd32d47a3dcdb8a68937bd990c1bb3b",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/snow.png",
+      "bytes": 30993,
+      "sha256": "3e201310c13cce5f6ffc25b702f300251da030e6099a7bd4b1d33bbd329e0ad9",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/snowflake.png",
+      "bytes": 2243,
+      "sha256": "be26b395ce6225159fa595c8aa108795db0ebe55438a518ac0dab2ce2f902dae",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "themes/06-summit/textures/sparkle.png",
+      "bytes": 896,
+      "sha256": "05edc83cf1e99338a0b8aa48839917c113fd7bd6865f4834ec1a649b8236b3f8",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    }
+  ]
+}
