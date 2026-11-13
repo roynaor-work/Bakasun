@@ -1,0 +1,66 @@
+/* Original preview styling, CC0-1.0. See LICENSES.md. */
+:root { color-scheme: light; font-family: Arial, "Noto Sans Hebrew", sans-serif; color: #314644; background: #f6f1e8; --ink: #314644; --teal: #426f67; --line: #dcded3; }
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 1800px; padding: 40px 40px 24px; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; color: var(--ink); border: 1px solid var(--line); border-radius: 9px; background: #fffaf1; padding: 9px 15px; min-height: 42px; }
+button:hover { background: #e7eddf; }
+button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid #a45837; outline-offset: 4px; }
+button.primary { background: var(--teal); color: white; border-color: var(--teal); }
+a { color: var(--teal); text-underline-offset: 3px; }
+.page-header { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 30px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .7px; display: flex; gap: 8px; align-items: center; margin: 0 0 11px; }
+.status-dot { width: 7px; height: 7px; background: #b86f4e; border-radius: 50%; }
+h1 { font-size: clamp(34px, 4vw, 56px); font-weight: 700; letter-spacing: -1.8px; margin: 0 0 12px; }
+.intro { color: #6c766b; line-height: 1.6; margin: 0; font-size: 15px; }
+.spec { display: grid; gap: 9px; border-right: 1px solid #cdd6c8; padding-right: 21px; font-size: 12px; color: #6b776c; min-width: 195px; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 17px 0; border-block: 1px solid var(--line); }
+.state-controls, .display-controls { display: flex; gap: 8px; }
+.display-controls { gap: 20px; }
+.display-controls label { display: flex; gap: 6px; align-items: center; font-size: 13px; cursor: pointer; min-height: 36px; }
+input { accent-color: var(--teal); }
+.toolbar p { color: #6b776c; font-size: 12px; margin: 0 auto 0 0; }
+#global-status { min-height: 44px; padding: 15px 0 12px; font-size: 12px; color: #6b776c; }
+#global-status.error { color: #9f3f30; }
+.room-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: start; }
+.room-card { border: 1px solid #dde0d4; border-radius: 17px; background: #fffdf6; overflow: hidden; min-width: 0; box-shadow: 0 4px 14px #465b3b05; }
+.room-card.expanded { grid-column: 1 / -1; width: min(100%, 1100px); justify-self: center; }
+.room-heading { padding: 18px 20px 10px; display: flex; justify-content: space-between; align-items: center; }
+.room-heading > div { display: flex; align-items: center; gap: 10px; }
+.room-number { font-size: 11px; font-weight: 700; color: #9e765a; font-variant-numeric: tabular-nums; }
+h2 { font-size: 21px; margin: 0; letter-spacing: -.3px; }
+.expand { font-size: 12px; background: none; padding: 4px 8px; min-height: 36px; border-color: transparent; }
+.viewport { width: 100%; aspect-ratio: 4 / 3; position: relative; background: #e6ebe0; }
+canvas { width: 100%; height: 100%; display: block; cursor: pointer; touch-action: manipulation; }
+.load-state { position: absolute; inset: 40% 10%; text-align: center; pointer-events: none; font-size: 13px; }
+.load-state[hidden] { display: none; }
+.room-stats { display: grid; grid-template-columns: repeat(3, 1fr); padding: 18px 9px; text-align: center; gap: 7px; }
+.room-stats > div + div { border-right: 1px solid #e8e8dc; }
+.room-stats strong { display: block; font-size: 21px; font-variant-numeric: tabular-nums; margin-bottom: 5px; }
+.room-stats span { display: block; font-size: 10px; color: #75806f; }
+.room-actions { padding: 0 18px 17px; display: flex; gap: 7px; align-items: center; }
+.room-actions button { font-size: 12px; padding: 6px 13px; }
+.download { font-size: 11px; margin-right: auto; }
+.node-details { border-top: 1px solid #e4e7dc; font-size: 12px; }
+summary { padding: 16px 19px; cursor: pointer; font-weight: 700; }
+.node-count { color: #83907d; font-weight: 400; margin-right: 6px; }
+.node-hint { padding: 0 19px; color: #6e7a6c; line-height: 1.6; margin: 0 0 12px; }
+.node-tree { max-height: 390px; overflow: auto; padding: 0 16px 16px; margin: 0; list-style: none; }
+.node-tree ul { list-style: none; margin: 0; padding-left: 13px; border-left: 1px solid #e4e7dc; }
+.node-tree li { margin: 3px 0; }
+.node-name { font-family: ui-monospace, monospace; font-size: 10px; overflow-wrap: anywhere; }
+button.node-name { border: 0; background: #edf1e7; text-align: left; width: 100%; padding: 7px 8px; min-height: 36px; }
+button.node-name[aria-pressed="true"] { background: #e9ddd0; }
+.node-type { color: #8e9a88; font-family: Arial, sans-serif; font-size: 9px; margin-left: 5px; }
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; padding: 24px 4px; font-size: 12px; }
+.legend > span { display: flex; gap: 7px; align-items: center; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.dot.fire { background: #ed7844; } .dot.rescue { background: #399cba; } .dot.exit { background: #4a9e77; }
+.legend-note { color: #7d8877; margin-right: auto; font-size: 11px; }
+footer { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 11px; color: #75806f; }
+footer nav { display: flex; gap: 18px; }
+@media (min-width: 1800px) { body { padding-inline: 50px; } }
+@media (max-width: 1050px) { body { padding: 25px 20px; } .room-grid { gap: 12px; } .room-heading { padding-inline: 13px; } h2 { font-size: 18px; } .room-actions { padding-inline: 10px; } .display-controls { gap: 12px; } .toolbar p { width: 100%; } }
+@media (max-width: 720px) { body { padding: 24px 15px 20px; } .page-header { align-items: start; margin-bottom: 22px; } .spec { min-width: 0; font-size: 10px; padding-right: 12px; gap: 7px; max-width: 135px; } .intro { font-size: 13px; } h1 { font-size: 36px; letter-spacing: -.9px; } .room-grid { grid-template-columns: 1fr; gap: 20px; } .toolbar { gap: 10px 18px; } .toolbar p { line-height: 1.5; } .room-heading { padding: 17px 19px 12px; } h2 { font-size: 23px; } .room-actions { padding-inline: 18px; } .room-stats span { font-size: 11px; } .legend { gap: 14px; line-height: 1.5; } .legend-note { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }

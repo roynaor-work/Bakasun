@@ -1,0 +1,606 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "atlas": "palette-1024.png",
+  "atlasSize": [
+    1024,
+    1024
+  ],
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "camera": {
+    "position": [
+      0,
+      5.4,
+      11
+    ],
+    "target": [
+      0,
+      1.35,
+      0
+    ],
+    "verticalSpan": 5.7,
+    "aspect": 1.3333333333333333,
+    "near": 0.1,
+    "far": 40
+  },
+  "stateContract": {
+    "parent": "burn_<name>",
+    "intact": "intact_<name>",
+    "burnt": "burnt_<name>",
+    "fire": "fire_<name>",
+    "default": "intact",
+    "burntStoredScale": [
+      0,
+      0,
+      0
+    ],
+    "burntActiveScale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "rooms": [
+    {
+      "id": "living-room",
+      "label": "סלון",
+      "file": "living-room.glb",
+      "bytes": 321004,
+      "sha256": "b08e25db194ff522d6206df7ed008566fdda7d0f9558e39c3d709e603907e04d",
+      "totalTriangles": 4173,
+      "visibleTriangles": 2696,
+      "architectureTriangles": 1219,
+      "nodeCount": 41,
+      "burnableCount": 9,
+      "items": [
+        {
+          "name": "curtain_left",
+          "label": "וילון שמאל",
+          "category": "fabric",
+          "trianglesPerState": 68,
+          "fireLocal": [
+            0,
+            0.8,
+            0.07
+          ],
+          "fireWorld": [
+            -2.72,
+            1.88,
+            -2.02
+          ]
+        },
+        {
+          "name": "curtain_right",
+          "label": "וילון ימין",
+          "category": "fabric",
+          "trianglesPerState": 68,
+          "fireLocal": [
+            0,
+            0.8,
+            0.07
+          ],
+          "fireWorld": [
+            -0.42,
+            1.88,
+            -2.02
+          ]
+        },
+        {
+          "name": "door",
+          "label": "דלת",
+          "category": "wood",
+          "trianglesPerState": 160,
+          "fireLocal": [
+            0.19,
+            1.08,
+            -0.4
+          ],
+          "fireWorld": [
+            2.57,
+            1.08,
+            -2.84
+          ]
+        },
+        {
+          "name": "sofa",
+          "label": "ספה",
+          "category": "upholstery",
+          "trianglesPerState": 488,
+          "fireLocal": [
+            0,
+            0.7,
+            0.17
+          ],
+          "fireWorld": [
+            -1.34,
+            0.7,
+            -1.08
+          ]
+        },
+        {
+          "name": "rug",
+          "label": "שטיח",
+          "category": "fabric",
+          "trianglesPerState": 92,
+          "fireLocal": [
+            1.18,
+            0.07,
+            0.6
+          ],
+          "fireWorld": [
+            0.18,
+            0.07,
+            1.14
+          ]
+        },
+        {
+          "name": "coffee_table",
+          "label": "שולחן קפה",
+          "category": "wood",
+          "trianglesPerState": 92,
+          "fireLocal": [
+            0,
+            0.58,
+            0
+          ],
+          "fireWorld": [
+            -1.12,
+            0.62,
+            0.65
+          ]
+        },
+        {
+          "name": "tv_console",
+          "label": "ארון טלוויזיה",
+          "category": "wood",
+          "trianglesPerState": 180,
+          "fireLocal": [
+            0,
+            0.48,
+            0.34
+          ],
+          "fireWorld": [
+            0.98,
+            0.48,
+            -1.42
+          ]
+        },
+        {
+          "name": "television",
+          "label": "טלוויזיה",
+          "category": "electrical",
+          "trianglesPerState": 169,
+          "fireLocal": [
+            0,
+            0.56,
+            0.08
+          ],
+          "fireWorld": [
+            0.98,
+            1.24,
+            -1.66
+          ]
+        },
+        {
+          "name": "floor_lamp",
+          "label": "מנורת רצפה",
+          "category": "electrical_fabric",
+          "trianglesPerState": 160,
+          "fireLocal": [
+            0,
+            1.5,
+            0
+          ],
+          "fireWorld": [
+            -2.76,
+            1.5,
+            -0.25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kitchen",
+      "label": "מטבח",
+      "file": "kitchen.glb",
+      "bytes": 419632,
+      "sha256": "fedf072fd86a5c2438914ea08dbc521b50fa1dfd2f3317b8fdb99943d1e4bd4c",
+      "totalTriangles": 5604,
+      "visibleTriangles": 3352,
+      "architectureTriangles": 1100,
+      "nodeCount": 49,
+      "burnableCount": 11,
+      "items": [
+        {
+          "name": "door",
+          "label": "דלת",
+          "category": "wood",
+          "trianglesPerState": 160,
+          "fireLocal": [
+            0.19,
+            1.08,
+            -0.4
+          ],
+          "fireWorld": [
+            2.57,
+            1.08,
+            -2.84
+          ]
+        },
+        {
+          "name": "stove",
+          "label": "כיריים ותנור",
+          "category": "electrical",
+          "trianglesPerState": 620,
+          "fireLocal": [
+            0,
+            1.03,
+            0.2
+          ],
+          "fireWorld": [
+            -2.16,
+            1.03,
+            -1.53
+          ]
+        },
+        {
+          "name": "oil_pot",
+          "label": "סיר שמן",
+          "category": "cooking_oil",
+          "trianglesPerState": 220,
+          "fireLocal": [
+            0,
+            0.27,
+            0
+          ],
+          "fireWorld": [
+            -2.41,
+            1.305,
+            -1.53
+          ]
+        },
+        {
+          "name": "base_cabinet",
+          "label": "ארון מטבח תחתון",
+          "category": "wood",
+          "trianglesPerState": 180,
+          "fireLocal": [
+            0,
+            0.55,
+            0.43
+          ],
+          "fireWorld": [
+            -0.88,
+            0.55,
+            -1.31
+          ]
+        },
+        {
+          "name": "wall_cabinet",
+          "label": "ארון מטבח עליון",
+          "category": "wood",
+          "trianglesPerState": 180,
+          "fireLocal": [
+            0,
+            0.42,
+            0.2
+          ],
+          "fireWorld": [
+            -0.88,
+            2.32,
+            -1.87
+          ]
+        },
+        {
+          "name": "refrigerator",
+          "label": "מקרר",
+          "category": "electrical",
+          "trianglesPerState": 220,
+          "fireLocal": [
+            -0.3,
+            0.38,
+            0.47
+          ],
+          "fireWorld": [
+            0.34,
+            0.38,
+            -1.3
+          ]
+        },
+        {
+          "name": "kitchen_table",
+          "label": "שולחן מטבח",
+          "category": "wood",
+          "trianglesPerState": 92,
+          "fireLocal": [
+            0,
+            0.86,
+            0
+          ],
+          "fireWorld": [
+            -0.57,
+            0.86,
+            0.67
+          ]
+        },
+        {
+          "name": "chair_left",
+          "label": "כיסא שמאל",
+          "category": "wood",
+          "trianglesPerState": 136,
+          "fireLocal": [
+            0,
+            0.58,
+            0
+          ],
+          "fireWorld": [
+            -1.84,
+            0.58,
+            0.66
+          ]
+        },
+        {
+          "name": "chair_right",
+          "label": "כיסא ימין",
+          "category": "wood",
+          "trianglesPerState": 136,
+          "fireLocal": [
+            0,
+            0.58,
+            0
+          ],
+          "fireWorld": [
+            0.72,
+            0.58,
+            0.66
+          ]
+        },
+        {
+          "name": "electrical_outlet",
+          "label": "שקע חשמל",
+          "category": "electrical",
+          "trianglesPerState": 80,
+          "fireLocal": [
+            0,
+            0,
+            0.05
+          ],
+          "fireWorld": [
+            1.47,
+            0.49,
+            -2.19
+          ]
+        },
+        {
+          "name": "power_strip",
+          "label": "מפצל וכבל חשמל",
+          "category": "electrical",
+          "trianglesPerState": 228,
+          "fireLocal": [
+            0,
+            0.15,
+            0
+          ],
+          "fireWorld": [
+            2.53,
+            0.15,
+            -0.57
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bedroom",
+      "label": "חדר שינה",
+      "file": "bedroom.glb",
+      "bytes": 355096,
+      "sha256": "a0b8f463e28de265a7d64699fe99a29dbc6c85c1f4df94a8140a95ccdcc9125e",
+      "totalTriangles": 4523,
+      "visibleTriangles": 2871,
+      "architectureTriangles": 1219,
+      "nodeCount": 53,
+      "burnableCount": 12,
+      "items": [
+        {
+          "name": "curtain_left",
+          "label": "וילון שמאל",
+          "category": "fabric",
+          "trianglesPerState": 68,
+          "fireLocal": [
+            0,
+            0.8,
+            0.07
+          ],
+          "fireWorld": [
+            -2.72,
+            1.88,
+            -2.02
+          ]
+        },
+        {
+          "name": "curtain_right",
+          "label": "וילון ימין",
+          "category": "fabric",
+          "trianglesPerState": 68,
+          "fireLocal": [
+            0,
+            0.8,
+            0.07
+          ],
+          "fireWorld": [
+            -0.42,
+            1.88,
+            -2.02
+          ]
+        },
+        {
+          "name": "door",
+          "label": "דלת",
+          "category": "wood",
+          "trianglesPerState": 160,
+          "fireLocal": [
+            0.19,
+            1.08,
+            -0.4
+          ],
+          "fireWorld": [
+            2.57,
+            1.08,
+            -2.84
+          ]
+        },
+        {
+          "name": "bed",
+          "label": "מסגרת מיטה",
+          "category": "wood",
+          "trianglesPerState": 180,
+          "fireLocal": [
+            0,
+            0.4,
+            1.27
+          ],
+          "fireWorld": [
+            -1.53,
+            0.4,
+            0.68
+          ]
+        },
+        {
+          "name": "mattress",
+          "label": "מזרן",
+          "category": "upholstery",
+          "trianglesPerState": 88,
+          "fireLocal": [
+            0.5,
+            0.24,
+            0.94
+          ],
+          "fireWorld": [
+            -1.03,
+            0.675,
+            0.35
+          ]
+        },
+        {
+          "name": "blanket",
+          "label": "שמיכה",
+          "category": "fabric",
+          "trianglesPerState": 112,
+          "fireLocal": [
+            0,
+            0.12,
+            0.1
+          ],
+          "fireWorld": [
+            -1.53,
+            0.855,
+            -0.12
+          ]
+        },
+        {
+          "name": "pillow",
+          "label": "כרית",
+          "category": "fabric",
+          "trianglesPerState": 44,
+          "fireLocal": [
+            0,
+            0.25,
+            0
+          ],
+          "fireWorld": [
+            -1.53,
+            0.985,
+            -1.54
+          ]
+        },
+        {
+          "name": "wardrobe",
+          "label": "ארון בגדים",
+          "category": "wood",
+          "trianglesPerState": 220,
+          "fireLocal": [
+            0,
+            1.2,
+            0.42
+          ],
+          "fireWorld": [
+            0.44,
+            1.2,
+            -1.42
+          ]
+        },
+        {
+          "name": "desk",
+          "label": "שולחן מחשב",
+          "category": "wood",
+          "trianglesPerState": 92,
+          "fireLocal": [
+            0.4,
+            0.82,
+            0.3
+          ],
+          "fireWorld": [
+            2.08,
+            0.82,
+            1.27
+          ]
+        },
+        {
+          "name": "computer",
+          "label": "מחשב",
+          "category": "electrical",
+          "trianglesPerState": 280,
+          "fireLocal": [
+            0,
+            0.4,
+            -0.05
+          ],
+          "fireWorld": [
+            1.62,
+            1.2,
+            0.89
+          ]
+        },
+        {
+          "name": "nightstand",
+          "label": "שידה",
+          "category": "wood",
+          "trianglesPerState": 180,
+          "fireLocal": [
+            0,
+            0.4,
+            0.27
+          ],
+          "fireWorld": [
+            -2.77,
+            0.4,
+            -1.0
+          ]
+        },
+        {
+          "name": "bedside_lamp",
+          "label": "מנורת לילה",
+          "category": "electrical_fabric",
+          "trianglesPerState": 160,
+          "fireLocal": [
+            0,
+            0.4,
+            0
+          ],
+          "fireWorld": [
+            -2.77,
+            1.01,
+            -1.27
+          ]
+        }
+      ]
+    }
+  ]
+}
