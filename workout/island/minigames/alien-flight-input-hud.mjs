@@ -12,7 +12,7 @@ export function alienFlightHudStatus(model,mode='touch',manualFire=alienV9Enable
  const left=model.spreadTime>0?model.spreadTime:model.powerup>=0&&model.powerTime>0?model.powerTime:0,timer=model.v11&&left>0?` · ${Math.ceil(left)}ש׳`:'';
  return {weapon,weaponText:`נשק: ${names[weapon]}${extras.length?' · '+extras.join(' · '):''}${timer}`,
   // v23: two fire buttons (steady cannon, Vulcan) and two keys (Space, Z).
-  controlText:model.v23?(mode==='keyboard'?'חצים לתנועה · רווח ירי רגיל · Z וולקן':mode==='mouse'?'גרירה לתנועה · רווח ירי רגיל · Z וולקן':'סטיק לתנועה · ברק ירי רגיל · וולקן ירי מהיר שמתחמם'):mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
+  controlText:model.v23?(mode==='keyboard'?'חצים לתנועה · רווח ירי רגיל · Z וולקן':mode==='mouse'?'גרירה לתנועה · רווח ירי רגיל · Z וולקן':'סטיק לתנועה · ירי רגיל · וולקן'):mode==='keyboard'?'חצים לתנועה · רווח לירי':mode==='mouse'?'גרירה לתנועה · רווח לירי':manualFire?'סטיק לתנועה · כפתור ירי לירי':mode==='stick'?'סטיק לתנועה ולירי':'גוררים לתנועה ולירי'};
 }
 
 export function alienFlightFeedbackText(feedback){
