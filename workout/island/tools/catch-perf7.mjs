@@ -27,11 +27,12 @@ for (const stage of stagesArg.split(',').map(Number)) for (const [label, q] of [
       c.state.crim.s = c.state.s + 12; c.state.crim.d = c.state.d; for (let i = 0; i < 3; i++) d.stepChase(1 / 60);
       c.gun.raw.marked = 12; c.gun.raw.slows.net = 3; // the tracker (helicopter) and the sticky net, as after two hits
       c.gun.select('spikes'); d.stepChase(1 / 60); c.gun.raw.locked = true; c.gun.state.perTool.spikes.reload = 0; c.fire(); // a strip on the road
-      if (orb && block) { const lo = Math.min(orb.s, block.s); if (lo - c.state.s > 120) { const shift = lo - c.state.s - 100; c.state.s += shift; c.state.crim.s += shift; } }
+      let shift = 0; if (orb && block) { const lo = Math.min(orb.s, block.s); if (lo - c.state.s > 120) { shift = lo - c.state.s - 100; c.state.s += shift; c.state.crim.s += shift; } }
       for (let i = 0; i < 90; i++) frame();
       out.busy = v.fx7?.stats?.() || null;
-    } else for (let i = 0; i < 90; i++) frame();
-    time('busyMs', frame); out.busyCalls = r.info.render.calls; out.busyTris = r.info.render.triangles;
+      time('busyMs', frame); out.busyCalls = r.info.render.calls; out.busyTris = r.info.render.triangles;
+      c.state.s -= shift; c.state.crim.s -= shift; for (let i = 0; i < 3; i++) frame(); // back to the same stretch of road, so the throw compares with v22
+    } else { for (let i = 0; i < 90; i++) frame(); time('busyMs', frame); out.busyCalls = r.info.render.calls; out.busyTris = r.info.render.triangles; }
     d.skipChase();
     return new Promise(res => setTimeout(() => { time('throwMs', () => { d.step(1 / 60); v.update(1 / 60, {}); }); out.throwCalls = r.info.render.calls; out.throwTris = r.info.render.triangles; out.textures = r.info.memory.textures; out.geometries = r.info.memory.geometries; res(out); }, 3200));
   });

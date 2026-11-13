@@ -25,8 +25,8 @@ export const ARSENAL = Object.freeze({
     // zone: s along the getaway car from its centre (+ ahead), d across (side: toward the officer's side), y height, w half-width (m) the assist keeps on target near
     tyres: {zone: {s: -1.35, d: .85, side: true, y: .35, w: 1.35}, range: [2, 28, 18], reload: 1.2, ammo: 5, trickle: 5, weight: 1}, // the v6 tyre-gun range
     net: {zone: {s: .1, d: 0, y: 1.35, w: 1.55}, range: [4, 22, 16], reload: 2.2, ammo: 3, trickle: 7, weight: .9, slow: .72, slowSeconds: 3},
-    spikes: {zone: {s: 15, d: 0, lane: true, y: .05, w: 1.7}, range: [6, 26, 20], reload: 2.5, ammo: 2, trickle: 8, weight: 1.5, slow: .6, slowSeconds: 2.2},
-    emp: {zone: {s: 0, d: 0, y: .7, w: 2.3, ring: true}, range: [2, 13, 10], reload: 1, ammo: 1, trickle: 9, weight: .8, slow: .5, slowSeconds: 1.6},
+    spikes: {zone: {s: 15, d: 0, lane: true, y: .05, w: 1.7}, range: [6, 26, 20], reload: 2.5, ammo: 2, trickle: 8, weight: 1.5, slow: .65, slowSeconds: 2.2},
+    emp: {zone: {s: 0, d: 0, y: .7, w: 2.3, ring: true}, range: [2, 13, 10], reload: 1, ammo: 1, trickle: 9, weight: .8, slow: .55, slowSeconds: 1.6},
     mark: {zone: {s: -2.05, d: 0, y: .85, w: 1.25}, range: [4, 30, 22], reload: 1.5, ammo: 2, trickle: 10, weight: .45, markSeconds: 12, markSlow: .94, markCone: 1.25},
   }),
   // per stage 1..10: equivalent hits to fill the meter, the assist cone (degrees), the near half-width scale, the base chance
@@ -108,6 +108,16 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     const condF = ((ctx.stun || 0) > 0 ? .55 : ctx.scraping ? .78 : 1) * (1 - Math.min(.22, Math.abs(ctx.curvature || 0) * 11)) * (g.closeT > 0 ? 1 : 1 - .12 * Math.abs(ctx.thiefSwerve || 0));
     return {inRange, chance: clamp(assistChance(geo.e, allowed, pick(A.core)) * distF * condF, .03, .99), allowed};
   }
+  /** Lock, chance and reticle of the tool in hand for this frame (also right after a switch, so a tap at once fires the new tool). */
+  function evaluate(ctx) {
+    const geo = geometry(g.current, ctx), c = chanceFor(g.current, geo, ctx);
+    const locked = c.inRange && !g.stopped;
+    g.hitChance = locked ? c.chance : 0; g.quality = quality7(g.hitChance); g.inRange = c.inRange; g.e = geo.e; g.allowed = c.allowed;
+    g.lockWheel = g.current === 'tyres' && locked ? (geo.lat > 0 ? 'RL' : 'RR') : null;
+    g.aim = {...geo, weapon: g.current, chance: g.hitChance, quality: g.quality, inRange: c.inRange, allowed: c.allowed, assist};
+    if (locked !== g.locked) { g.locked = locked; events.push({type: 'lock', on: locked}); }
+    return locked;
+  }
   const damageOf = id => A.tools[id].weight / hitsToStop * Math.min(1, A.rampFrom + (1 - A.rampFrom) * g.t / pick(A.rampSeconds));
   function hurt(id, extra = {}) {
     if (g.stopped) return;
@@ -128,8 +138,8 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     /** The aim of the tool in hand this frame (for the HUD): zone, the line of the police car, the error and the cone. */
     aimInfo() { return g.aim; },
     calm() { return g.closeT > 0; },
-    next() { const k = ids.indexOf(g.current); for (let n = 1; n <= ids.length; n++) { const id = ids[(k + n) % ids.length]; if (per[id].ammo > 0 || n === ids.length) { g.current = id; break; } } events.push({type: 'weapon', id: g.current}); return g.current; },
-    select(id) { if (!per[id]) return false; g.current = id; events.push({type: 'weapon', id}); return true; },
+    next() { const k = ids.indexOf(g.current); for (let n = 1; n <= ids.length; n++) { const id = ids[(k + n) % ids.length]; if (per[id].ammo > 0 || n === ids.length) { g.current = id; break; } } events.push({type: 'weapon', id: g.current}); if (last.gap !== undefined) evaluate(last); return g.current; },
+    select(id) { if (!per[id]) return false; g.current = id; events.push({type: 'weapon', id}); if (last.gap !== undefined) evaluate(last); return true; },
     step(dt, ctx = {}) {
       g.t += dt; last = ctx;
       for (const id of ids) { const w = per[id], d = A.tools[id]; if (w.reload > 0) { w.reload = Math.max(0, w.reload - dt); if (!w.reload && id === g.current) events.push({type: 'reload'}); } if (w.ammo < w.ammoMax) { w.trickle -= dt; if (w.trickle <= 0) { w.trickle = d.trickle; w.ammo++; } } else w.trickle = d.trickle; }
@@ -149,12 +159,7 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
       }
       g.strips = g.strips.filter(st => st.state === 'live' || st.age < 1.5);
       // the tool in hand: geometry, chance, reticle colour, and the close time on the first green lock
-      const geo = geometry(g.current, ctx), c = chanceFor(g.current, geo, ctx);
-      const locked = c.inRange && !g.stopped;
-      g.hitChance = locked ? c.chance : 0; g.quality = quality7(g.hitChance); g.inRange = c.inRange; g.e = geo.e; g.allowed = c.allowed;
-      g.lockWheel = g.current === 'tyres' && locked ? (geo.lat > 0 ? 'RL' : 'RR') : null;
-      g.aim = {...geo, weapon: g.current, chance: g.hitChance, quality: g.quality, inRange: c.inRange, allowed: c.allowed, assist};
-      if (locked !== g.locked) { g.locked = locked; events.push({type: 'lock', on: locked}); }
+      const locked = evaluate(ctx);
       if (assist && locked && g.quality === 'green' && g.closeT <= 0 && g.closeCool <= 0) { g.closeT = pick(A.closeSeconds); g.closes++; events.push({type: 'closeTime', seconds: g.closeT}); }
     },
     fire() {
@@ -193,7 +198,7 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
       let k = A.speedScale[Math.min(A.speedScale.length - 1, g.flatCount)];
       if (g.slows.net > 0) k *= A.tools.net.slow; if (g.slows.spikes > 0) k *= A.tools.spikes.slow; if (g.slows.emp > 0) k *= A.tools.emp.slow;
       if (g.marked > 0) k *= A.tools.mark.markSlow; if (g.closeT > 0) k *= A.closeSlow;
-      return Math.max(.3, k);
+      return Math.max(.5, k); // stacked tools never stop him dead: the police car would shoot past him
     },
     /** True for a moment after a hit: the chase gives him a short burst away from the police car. */
     panicking() { return g.panic > 0 && g.slows.emp <= 0 && g.slows.spikes <= 0; },
