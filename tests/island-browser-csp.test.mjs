@@ -290,7 +290,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     const athleteFallback=await fixture('hoops-athlete-fallback-tall',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       await athleteFallback.page.route(/assets\/athlete\//,route=>route.abort());
-      await athleteFallback.page.goto(server.url+tallBase,{waitUntil:'load'});
+      await athleteFallback.page.goto(server.url+tallBase+'&athleteBodyV22=0',{waitUntil:'load'});
       const live=await hoopsReady(athleteFallback.page);
       assert.equal(live.error,null,'a missing athlete body never stops the game');assert.equal(live.m.athleteBody,false);assert.equal(live.m.characterVersion,9);assert.ok(live.m.v4Fallbacks.includes('players-athlete'));
       await athleteFallback.csp.assertClean();reports.push({name:'hoops-athlete-fallback-tall-result',...live.m,loadTimes:undefined});
