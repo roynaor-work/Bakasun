@@ -29,7 +29,9 @@ test('v7 tools: five of them from the first second, one button cycles, each has 
   assert.ok(a.drainEvents().filter(e => e.type === 'weapon').length === 5);
   a.step(1 / 60, ctx()); const ammo = a.state.ammo; assert.equal(a.fire(), true);
   assert.equal(a.state.ammo, ammo - 1); assert.equal(a.state.perTool.net.ammo, ARSENAL.tools.net.ammo, 'the other tools keep theirs');
-  assert.ok(Math.abs(total - 1 / ARSENAL.hitsToStop[0]) < 1e-9, 'one tyre hit = 1/hitsToStop of the meter');
+  const ramp = t => Math.min(1, ARSENAL.rampFrom + (1 - ARSENAL.rampFrom) * t / ARSENAL.rampSeconds[0]);
+  assert.ok(Math.abs(total - ramp(a.raw.t) / ARSENAL.hitsToStop[0]) < 1e-9, 'one tyre hit = 1/hitsToStop of the meter, less in the first seconds');
+  assert.ok(ramp(0) < .7 && ramp(ARSENAL.rampSeconds[0]) === 1, 'early hits count less, so a sharp player still drives through the bends');
   const ev = a.drainEvents().map(e => e.type); assert.deepEqual(ev, ['shot', 'flat'], 'the v6 event shapes for the tyre fx');
   assert.equal(a.fire(), false, 'reloading');
   // the meter fills: the car goes down
@@ -108,6 +110,28 @@ test('v7 chase: tools from the start bring the car down, the chase still runs th
   assert.equal(ch.forceDown(), true); assert.equal(ch.state.phase, 'skid');
   let g = 0; while (ch.state.phase !== 'end' && g++ < 60 * 20) ch.step(1 / 60);
   const r = ch.result(); assert.equal(r.how, 'caught'); assert.equal(r.byWeapons, true); assert.equal(r.closeness, 1); assert.equal(ch.gun.state.stopped, true);
+});
+
+test('v7 chase: a sharp player who fires on every green still drives the bends (early hits count less)', () => {
+  const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v)), secs = [];
+  for (let seed = 1; seed <= 12; seed++) {
+    const ch = createChaseEngine6({balance, stage: 1, seed, v7: V7}); let g = 0;
+    while (ch.state.phase !== 'end' && g++ < 60 * 80) {
+      const st = ch.state, gs = ch.gun.state, a = ch.gun.aimInfo();
+      if (st.phase === 'run') {
+        const free = lane => { let f = 60; for (const o of ch.obstacles) { if (['pad', 'nitro', 'oil'].includes(o.kind)) continue; const os = ch.obstacleS(o, st.t) - st.s; if (os > -2 && os < 60 && Math.abs(o.d - lane) < 2.2) f = Math.min(f, os); } return f; };
+        const best = ch.C.lanes.reduce((b, l) => free(l) - Math.abs(l - st.d) * 1.5 > free(b) - Math.abs(b - st.d) * 1.5 ? l : b, 0);
+        const zone = gs.locked && a ? (a.weapon === 'spikes' ? a.predD : a.zoneD) : st.crim.d, want = free(clamp(zone, -3.6, 3.6)) > 22 ? zone : best;
+        ch.setSteer(clamp((want - st.d) * .55 - st.slide / 5.6, -1, 1)); ch.setBoost(st.tank > .15 && st.gap > 7 && Math.abs(ch.track.curvatureAt(st.s + 30)) < 1 / 110); ch.setBrake(st.gap < -1.5);
+        if (gs.locked && gs.quality === 'green' && gs.reload <= 0 && gs.ammo > 0) ch.fire();
+        if (gs.ammo <= 0 && gs.reload <= 0) ch.cycle();
+      }
+      ch.step(1 / 60); ch.drainEvents();
+    }
+    secs.push(ch.result().seconds);
+  }
+  secs.sort((a, b) => a - b); const median = secs[6];
+  assert.ok(median >= 11, 'the chase lasts for a sharp player too: median ' + median.toFixed(1) + ' s');
 });
 
 test('v7 catch assist: the lead point, a pulled release catches inside the cone, nothing outside it, the close time slows him', () => {

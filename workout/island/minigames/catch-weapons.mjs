@@ -30,7 +30,7 @@ export const ARSENAL = Object.freeze({
     mark: {zone: {s: -2.05, d: 0, y: .85, w: 1.25}, range: [4, 30, 22], reload: 1.5, ammo: 2, trickle: 10, weight: .45, markSeconds: 12, markSlow: .94, markCone: 1.25},
   }),
   // per stage 1..10: equivalent hits to fill the meter, the assist cone (degrees), the near half-width scale, the base chance
-  hitsToStop: [6, 6.5, 7, 7, 7, 7.5, 7.5, 8, 8.5, 9],
+  hitsToStop: [5.5, 6, 6.5, 6.5, 6.5, 7, 7, 7.5, 8, 8.5],
   cone: [13.5, 13, 12.5, 10.5, 10, 9.5, 9, 7, 7, 6.5],
   widen: [1, .97, .94, .86, .82, .79, .76, .64, .64, .62],
   core: [.96, .95, .94, .9, .89, .88, .86, .8, .8, .78],
@@ -43,6 +43,7 @@ export const ARSENAL = Object.freeze({
   stripHit: 2.1, stripAhead: 15, stripLife: 4, // a spike strip catches him if his centre passes within stripHit metres of it
   dodge: [.08, .1, .14, .18, .22, .26, .3, .34, .38, .42], // chance that he spots a strip and changes lane (not in close time)
   speedScale: [1, .9, .8, .72, .66],          // by number of flat tyres
+  rampFrom: .6, rampSeconds: [14, 14, 15, 15, 16, 16, 17, 17, 18, 18], // early hits count less: firing starts at once, yet a sharp player still drives the bends (QA 11/11: a car stopped in 10 s made the track feel straight)
   wobbleAmp: .3,
 });
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -107,7 +108,7 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     const condF = ((ctx.stun || 0) > 0 ? .55 : ctx.scraping ? .78 : 1) * (1 - Math.min(.22, Math.abs(ctx.curvature || 0) * 11)) * (g.closeT > 0 ? 1 : 1 - .12 * Math.abs(ctx.thiefSwerve || 0));
     return {inRange, chance: clamp(assistChance(geo.e, allowed, pick(A.core)) * distF * condF, .03, .99), allowed};
   }
-  const damageOf = id => A.tools[id].weight / hitsToStop;
+  const damageOf = id => A.tools[id].weight / hitsToStop * Math.min(1, A.rampFrom + (1 - A.rampFrom) * g.t / pick(A.rampSeconds));
   function hurt(id, extra = {}) {
     if (g.stopped) return;
     const amount = damageOf(id), total = addDamage(amount); g.damage = Number.isFinite(total) ? total : Math.min(1, g.damage + amount);

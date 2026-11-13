@@ -34,9 +34,11 @@ const down = async (id, x, y) => { fingers.set(id, {x, y}); await send('touchSta
 const move = async (id, x, y) => { fingers.set(id, {x, y}); await send('touchMove'); };
 // CDP: touchEnd carries no points and lifts every finger, so one finger leaves with a touchMove that lists the fingers still down
 const up = async id => { if (!fingers.has(id)) return; fingers.delete(id); await send(fingers.size ? 'touchMove' : 'touchEnd'); };
+// every new touch is a new finger id, as on a phone (Chromium does not press a lifted id again)
+let nextId = 10; const fresh = () => nextId++;
 const center = async (sel, must = true) => { const b = await page.locator(sel).first().boundingBox().catch(() => null); if (must) assert.ok(b, 'on screen: ' + sel); return b ? {x: b.x + b.width / 2, y: b.y + b.height / 2} : null; };
 // a game button can leave the screen between looking and tapping (the fire button goes when the car is down): then the tap lands on nothing
-async function tap(sel, id = 9, holdMs = 70, must = true) { const c = await center(sel, must); if (!c) return false; await down(id, c.x, c.y); await page.waitForTimeout(holdMs); await up(id); log.taps[sel] = (log.taps[sel] || 0) + 1; return true; }
+async function tap(sel, _id = 0, holdMs = 70, must = true) { const c = await center(sel, must); if (!c) return false; const id = fresh(); await down(id, c.x, c.y); await page.waitForTimeout(holdMs); await up(id); log.taps[sel] = (log.taps[sel] || 0) + 1; return true; }
 const shot = async name => { const file = join(OUT, name + '.png'); await page.screenshot({path: file}); log.shots.push(name); console.log('  screenshot', name, secs()); };
 const frames = () => page.evaluate(`${S}.debug.held().frames`);
 const nextFrame = async f => page.waitForFunction(f => (window.__island.ui.activityInterface.current?.session?.debug.held().frames ?? 0) > f, f);
@@ -67,31 +69,37 @@ try {
   console.log('library, stage map and help card by touch: ok', secs());
 
   // ----- the chase: one finger steers on the left, the other hand boosts, cycles the tool and fires -----
+  // what a player sees: the lanes ahead (free or blocked), the thief, the reticle and its colour, the tool button
   const read = `(()=>{const s=${S},c=s.chase,st=c.state,g=c.gun.state,a=c.gun.aimInfo?.(),raw=c.gun.raw||{},k=Math.abs(c.track.curvatureAt(st.s+30));
-    return {mode:s.snapshot.mode,phase:st.phase,frames:s.debug.held().frames,t:st.t,d:st.d,slide:st.slide,gap:st.gap,tank:st.tank,bend:k>1/110,crimD:st.crim.d,v:st.v,
+    const freeOf=lane=>{let free=60;for(const o of c.obstacles){if(o.kind==='pad'||o.kind==='nitro'||o.kind==='oil')continue;const os=c.obstacleS(o,st.t)-st.s;if(os>-2&&os<60&&Math.abs(o.d-lane)<2.2)free=Math.min(free,os);}return free;};
+    let best=0,bs=-1e9;for(const lane of c.C.lanes){const sc=freeOf(lane)-Math.abs(lane-st.d)*1.5;if(sc>bs){bs=sc;best=lane;}}
+    const zone=g.locked&&a?(a.weapon==='spikes'?a.predD:a.zoneD):st.crim.d,zoneFree=freeOf(Math.max(-3.6,Math.min(3.6,zone)))>22;
+    return {mode:s.snapshot.mode,phase:st.phase,frames:s.debug.held().frames,t:st.t,d:st.d,slide:st.slide,gap:st.gap,tank:st.tank,bend:k>1/110,crimD:st.crim.d,v:st.v,want:zoneFree?zone:best,
       locked:g.locked,q:g.quality,reload:g.reload,ammo:g.ammo,tool:g.weapon,damage:st.damage,aimD:a?(a.weapon==='spikes'?a.predD:a.zoneD):null,close:g.closeT>0,
       hits:g.hits,shots:g.shots,net:(raw.slows?.net||0)>0,emp:(raw.slows?.emp||0)>0,marked:(raw.marked||0)>0,strips:(raw.strips||[]).filter(x=>x.state==='live').length,nitro:st.nitro||0,
       fx:s.debug.view()?.fx7?.stats?.()||null};})()`;
   const STEER = {x: 200, y: 280};
-  let steering = false, boosting = false, f = await frames(), lastHits = 0, firstLock = false, seen = {}, plan = ['net', 'spikes', 'emp', 'mark', 'tyres'], planIdx = 0, guard = 0, lastLog = 0;
+  let steering = false, boosting = false, braking = false, boostId = 0, brakeId = 0, f = await frames(), lastHits = 0, firstLock = false, seen = {}, plan = ['net', 'spikes', 'emp', 'mark', 'tyres'], planIdx = 0, guard = 0, lastLog = 0, lastT = 0, yellowFor = 0, stuckFor = 0;
   while (guard++ < 6000) {
     const r = await page.evaluate(read);
     if (r.mode !== 'chase') break;
     if (r.phase === 'run') {
-      const want = r.locked && r.aimD !== null ? r.aimD : r.crimD;
-      const steer = clamp((want - r.d) * .55 - r.slide / 5.6, -1, 1);
+      const steer = clamp((r.want - r.d) * .55 - r.slide / 5.6, -1, 1); // the zone (or the thief) when its lane is free, else the free lane
       if (!steering) { await down(1, STEER.x, STEER.y); steering = true; }
       await move(1, STEER.x + Math.round(steer * 60), STEER.y);
-      const wantBoost = r.tank > .15 && !r.bend && r.gap > (r.tool === 'emp' ? 7 : 12);
-      if (wantBoost && !boosting) { const c = await center('.catch-boost', false); if (c) { await down(2, c.x, c.y); boosting = true; } }
-      else if (!wantBoost && boosting) { await up(2); boosting = false; }
-      if (r.locked && r.q === 'green' && r.reload <= 0 && r.ammo > 0) {
-        if (!firstLock) { firstLock = true; await shot('02-chase-green'); }
-        if (await tap('.catch-fire', 3, 50, false)) log.tools[r.tool] = (log.tools[r.tool] || 0) + 1;
+      const wantBoost = r.tank > .15 && !r.bend && r.gap > 7;
+      if (r.gap < -1.5 && !braking) { const c = await center('.catch-brake', false); if (c) { brakeId = fresh(); await down(brakeId, c.x, c.y); braking = true; } } else if (r.gap >= -1.5 && braking) { await up(brakeId); braking = false; }
+      if (wantBoost && !boosting) { const c = await center('.catch-boost', false); if (c) { boostId = fresh(); await down(boostId, c.x, c.y); boosting = true; } }
+      else if (!wantBoost && boosting) { await up(boostId); boosting = false; }
+      // like a child: green = tap at once; yellow = tap after a short wait (about 0.6 s of game time)
+      const dtg = Math.max(0, r.t - lastT); lastT = r.t; yellowFor = r.locked && r.q === 'yellow' ? yellowFor + dtg : 0; stuckFor = r.locked && r.q === 'green' ? 0 : stuckFor + dtg;
+      if (r.locked && r.reload <= 0 && r.ammo > 0 && (r.q === 'green' || yellowFor >= .6)) {
+        if (!firstLock && r.q === 'green') { firstLock = true; await shot('02-chase-green'); }
+        if (await tap('.catch-fire', 3, 50, false)) { log.tools[r.tool] = (log.tools[r.tool] || 0) + 1; yellowFor = 0; console.log(`  fire ${r.tool} (${r.q}) at t ${r.t.toFixed(1)} gap ${r.gap.toFixed(1)}`, secs()); }
       }
       // a new hit (or an empty tool): the next tool in the plan, through the one tool button
-      if (r.hits > lastHits || (r.ammo <= 0 && r.reload <= 0)) {
-        lastHits = r.hits;
+      if (r.hits > lastHits || (r.ammo <= 0 && r.reload <= 0) || stuckFor > 4) {
+        lastHits = r.hits; stuckFor = 0;
         const target = plan[planIdx++ % plan.length];
         for (let n = 0; n < 5 && (await page.evaluate(`${S}.chase.gun.current`)) !== target; n++) if (!(await tap('.catch-weapon', 4, 50, false))) break;
         if (!seen['tool-' + target] && target !== 'tyres') { seen['tool-' + target] = true; if (target === 'net') await shot('03-tool-button-net'); }
@@ -99,10 +107,10 @@ try {
       for (const [key, name] of [['net', '03-sticky-net'], ['strips', '04-spike-strip'], ['emp', '05-pulse'], ['marked', '05-tracker-helicopter'], ['close', '02-close-time']]) if (r[key] && !seen[key]) { seen[key] = true; await shot(name); }
       if (r.fx?.orbs && !seen.orbs && r.t > 2) { seen.orbs = true; await shot('02-nitro-orbs'); }
       if (r.t - lastLog >= 5) { lastLog = r.t; console.log(`  t ${r.t.toFixed(1)} gap ${r.gap.toFixed(1)} tool ${r.tool} shots ${r.shots} hits ${r.hits} damage ${r.damage.toFixed(2)} nitro ${r.nitro}`, secs()); }
-    } else if (r.phase === 'skid' && !seen.skid) { seen.skid = true; if (steering) { await up(1); steering = false; } if (boosting) { await up(2); boosting = false; } await shot('06-car-down'); }
+    } else if (r.phase === 'skid' && !seen.skid) { seen.skid = true; if (steering) { await up(1); steering = false; } if (boosting) { await up(boostId); boosting = false; } if (braking) { await up(brakeId); braking = false; } await shot('06-car-down'); }
     await nextFrame(r.frames);
   }
-  if (steering) await up(1); if (boosting) await up(2);
+  if (steering) await up(1); if (boosting) await up(boostId); if (braking) await up(brakeId);
   const chase = await page.evaluate(`(()=>{const r=${S}.chase.result();return {how:r.how,byWeapons:r.byWeapons,seconds:+r.seconds.toFixed(1),shots:r.shots,toolHits:r.toolHits,damage:r.damage,nitro:r.nitro,nearMisses:r.nearMisses,closeness:r.closeness};})()`);
   log.chase = chase; console.log('chase by touch:', JSON.stringify(chase), secs());
   assert.equal(chase.how, 'caught', 'the tools brought the car down'); assert.equal(chase.byWeapons, true); assert.ok(chase.toolHits >= 3, 'several tool hits');
@@ -120,7 +128,7 @@ try {
     let r = await page.evaluate(readThrow);
     if (r.done || !(await page.evaluate(`${S}.snapshot.mode`)).includes('throw')) break;
     await page.waitForTimeout(250);
-    const F = {x: 560, y: 250}; await down(5, F.x, F.y);
+    const F = {x: 560, y: 250}, fid = fresh(); await down(fid, F.x, F.y);
     let fx = F.x, fy = F.y;
     for (let k = 0; k < 14; k++) {
       await nextFrame((await page.evaluate(readThrow)).frames);
@@ -128,10 +136,10 @@ try {
       if (r.phase !== 'aim' || !r.sight || !r.target) continue;
       const dx = r.target.x - r.sight.x, dy = r.target.y - r.sight.y;
       if (k >= 4 && (r.sight.lock || Math.hypot(dx, dy) < 10)) break; // held long enough to count as a draw (0.15 s)
-      fx += clamp(dx * 1.1, -45, 45); fy += clamp(dy * 1.1, -45, 45); await move(5, Math.round(fx), Math.round(fy));
+      fx += clamp(dx * 1.1, -45, 45); fy += clamp(dy * 1.1, -45, 45); await move(fid, Math.round(fx), Math.round(fy));
     }
     if (!aimShot) { aimShot = true; await shot('07-aim-sight'); }
-    await up(5); throws++;
+    await up(fid); throws++;
     const before = r.catches;
     // follow the net to the end of the turn; a catch gets its picture
     let caughtShot = false;
