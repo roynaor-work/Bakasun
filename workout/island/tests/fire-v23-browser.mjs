@@ -24,7 +24,9 @@ async function open(query=''){
   const errors=[],outside=[];page.on('pageerror',e=>errors.push('pageerror: '+e.message));page.on('console',m=>{if(m.type()==='error')errors.push('console: '+m.text());});
   page.on('request',r=>{const u=new URL(r.url());if(u.protocol.startsWith('http')&&!u.pathname.startsWith('/workout/island/'))outside.push(u.href);});
   const client=await context.newCDPSession(page),active=new Map();
-  const touch=async(type,id,x,y)=>{if(type==='touchEnd'||type==='touchCancel')active.delete(id);else active.set(id,{x:Math.round(x),y:Math.round(y),id});await client.send('Input.dispatchTouchEvent',{type,touchPoints:[...active.values()]});};
+  const touch=async(type,id,x,y)=>{ // CDP releases every point missing from touchEnd, so a release lists only the finger that lifts
+    if(type==='touchEnd'||type==='touchCancel'){const point=active.get(id);active.delete(id);await client.send('Input.dispatchTouchEvent',{type,touchPoints:point?[point]:[]});return;}
+    active.set(id,{x:Math.round(x),y:Math.round(y),id});await client.send('Input.dispatchTouchEvent',{type,touchPoints:[...active.values()]});};
   const tick=ms=>page.clock.runFor(ms);
   const tapAt=async(x,y,ms=80,id=9)=>{await touch('touchStart',id,x,y);await tick(ms);await touch('touchEnd',id);await tick(48);};
   const tapEl=async(selector,id=9)=>{const l=page.locator(selector).first();if(!await l.isVisible())throw Error('not shown: '+selector);await l.scrollIntoViewIfNeeded({timeout:5000});await tick(32);const b=await l.boundingBox();if(!b)throw Error('not on screen: '+selector);await tapAt(b.x+b.width/2,b.y+b.height/2,80,id);};
@@ -76,7 +78,7 @@ async function playTargets(t,level,name){
 // ---- inside the building --------------------------------------------------------------------------------------------------------------
 async function holdOn(t,point,seconds,id=1,until){await t.touch('touchStart',id,point.x,point.y);for(let i=0;i<seconds*10;i++){await t.tick(100);if(until&&await until())break;}await t.touch('touchEnd',id);await t.tick(64);}
 async function putOut(t,spotId,tool,run,maxSeconds=14){
-  if(tool){await t.tapEl(`.fv-tool[data-tool=${tool}]`,7);await t.tick(64);}
+  if(tool)for(let tryTool=0;tryTool<4;tryTool++){await t.tapEl(`.fv-tool[data-tool=${tool}]`,7);await t.tick(80);if((await t.snap()).tool===tool)break;} // the tool must actually switch before spraying
   let s=await t.snap();let spot=s.screen.spots.find(x=>x.id===spotId);if(!spot||spot.done)return true;
   if(tool==='blanket'){await t.tapAt(spot.x,spot.y,80,1);await t.tick(200);s=await t.snap();return s.room.spots.find(x=>x.id===spotId).done;}
   await holdOn(t,spot,maxSeconds,1,async()=>{const n=await t.snap();return n.room?.spots.find(x=>x.id===spotId)?.done||n.phase!=='play';});
@@ -87,19 +89,22 @@ async function playInterior(t,name){
   let s=await waitReady(t);const run={rooms:[],shots:[]};report.runs[name]=run;run.shots.push(await t.shot(name+'-arrive'));
   s=await waitReady(t,'door');run.shots.push(await t.shot(name+'-door'));
   await t.tapAt(s.screen.door.x,s.screen.door.y,90,3);for(let i=0;i<10;i++)await t.tick(100);s=await t.snap();run.afterDoor=s.phase;
-  const plan={living:[['sofa','water'],['rescue'],['curtain','water'],['tv','water-then-extinguisher']],kitchen:[['bin','water'],['rescue'],['towel','water'],['pot','water-then-blanket']],bedroom:[['bed','foam'],['rescue'],['wardrobe','foam'],['curtain','water']]};
-  const rescue=async(room,id)=>{for(let attempt=0;attempt<3;attempt++){let s=await t.snap();if(s.phase!=='play'||!s.screen.rescue||s.room.rescue.state!=='waiting')return;
-      room.rescueTries=(room.rescueTries||0)+1;room.coveredAtTap=s.room.covered;room.crawlAtTap=+s.room.crawl.toFixed(2);room.smokeAtTap=+s.room.smoke.toFixed(2);
+  const plan={living:[['rug','water'],['rescue'],['sofa','water'],['television','water-then-extinguisher']],kitchen:[['power_strip','water'],['rescue'],['kitchen_table','water'],['oil_pot','water-then-blanket']],bedroom:[['mattress','foam'],['rescue'],['wardrobe','foam'],['curtain_left','water']]};
+  // the rescue: in the smoky bedroom the kid is low and hidden, so crawl (one thumb) only for the tap; the high fires are sprayed standing
+  const rescue=async(room,id,crawling)=>{for(let attempt=0;attempt<3;attempt++){let s=await t.snap();if(s.phase!=='play'||!s.screen.rescue||s.room.rescue.state!=='waiting')return;
+      if(crawling){const c=await t.center('.fv-crawl');await t.touch('touchStart',5,c.x,c.y);for(let i=0;i<7;i++)await t.tick(100);}
+      s=await t.snap();room.rescueTries=(room.rescueTries||0)+1;room.coveredAtTap=s.room.covered;room.crawlAtTap=+s.room.crawl.toFixed(2);room.smokeAtTap=+s.room.smoke.toFixed(2);
       await t.tapAt(s.screen.rescue.x,s.screen.rescue.y,80,1);for(let i=0;i<4;i++)await t.tick(100);s=await t.snap();room.rescueAfter=s.room?.rescue.state;room.rescueFeedback=s.feedback?.key||null;
+      if(crawling)await t.touch('touchEnd',5);
       if(room.rescueAfter==='leaving'||room.rescueAfter==='saved'){run.shots.push(await t.shot(`${name}-${id}-rescue`));return;}}};
   for(let r=0;r<3;r++){
     for(let i=0;i<40&&s.phase!=='intro';i++){await t.tick(100);s=await t.snap();}
     const id=s.room.id,room={id,mistakes:0};run.rooms.push(room);run.shots.push(await t.shot(`${name}-${id}-card`));
     await t.tapEl('.fv-card',3);await t.tick(200);s=await t.snap();room.phaseAfterCard=s.phase;
     const crawling=id==='bedroom';
-    if(crawling){const c=await t.center('.fv-crawl');await t.touch('touchStart',5,c.x,c.y);for(let i=0;i<5;i++)await t.tick(100);s=await t.snap();room.crawlBefore=+s.room.crawl.toFixed(2);room.coveredWhileCrawling=s.room.covered;run.shots.push(await t.shot(`${name}-${id}-crawl`));}
+    if(crawling){const c=await t.center('.fv-crawl');await t.touch('touchStart',5,c.x,c.y);for(let i=0;i<6;i++)await t.tick(100);s=await t.snap();room.crawlBefore=+s.room.crawl.toFixed(2);room.coveredWhileCrawling=s.room.covered;run.shots.push(await t.shot(`${name}-${id}-crawl`));await t.touch('touchEnd',5);for(let i=0;i<4;i++)await t.tick(100);}
     for(const [spot,how] of plan[id]){
-      if(spot==='rescue'){await rescue(room,id);continue;}
+      if(spot==='rescue'){await rescue(room,id,crawling);continue;}
       if(how==='water-then-extinguisher'||how==='water-then-blanket'){ // the rule: show what water does, then use the right tool
         await t.tapEl('.fv-tool[data-tool=water]',7);s=await t.snap();const p=s.screen.spots.find(x=>x.id===spot);await holdOn(t,p,1.2,1);s=await t.snap();
         room.rule={coach:await t.page.locator('.fv-coach-text').textContent(),feedback:s.feedback?.key||null,mistakes:s.room.mistakes};run.shots.push(await t.shot(`${name}-${id}-rule`));
@@ -109,9 +114,8 @@ async function playInterior(t,name){
       s=await t.snap();if(s.phase!=='play')break;
     }
     s=await t.snap();room.spots=s.room?.spots.map(x=>({id:x.id,done:x.done}));
-    await rescue(room,id); // in case the plan's rescue came too early
+    await rescue(room,id,crawling); // in case the plan's rescue came too early
     for(let i=0;i<40;i++){s=await t.snap();if(s.phase==='clear'||s.phase==='intro'||s.phase==='victory')break;await t.tick(100);}
-    if(crawling)await t.touch('touchEnd',5);
     s=await t.snap();room.mistakes=s.rooms[r].mistakes;room.rescue=s.rooms[r].rescue;room.cleared=s.rooms[r].cleared;
   }
   for(let i=0;i<40&&s.phase!=='victory';i++){await t.tick(100);s=await t.snap();}

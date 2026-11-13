@@ -4,7 +4,7 @@
 import {createTargetsModel} from './fire-targets.mjs?v=island-v2-20261107-11';
 import {createInteriorModel,TOOLS,rescueCovered} from './fire-interior.mjs?v=island-v2-20261107-11';
 import {TARGET_STAGES,INTERIOR_STAGES,fireBonusNumber} from './fire-bonus.mjs?v=island-v2-20261107-11';
-import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,fireV23AssetURL,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-11';
+import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,fireV23AssetURL,fireV23ModeImages,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-11';
 import {createBonusPainter} from './fire-bonus-draw.mjs?v=island-v2-20261107-11';
 import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-11';
 
@@ -21,7 +21,7 @@ export function runFireBonusSession(ctx){
   const images=new Map(),events=new AbortController(),options={signal:events.signal};
   let disposed=false,paused=false,frame=0,last,W=1,H=1,dpr=1,ready=false,loadFailed=false,firstFrame=false,drawn=0,lowQuality=Boolean(ctx.lite);
   // ---- pictures: what this mode needs first, the rest behind it ---------------------------------------------------------------------
-  const needs=FIRE_V23_NEEDS[mode],all=Object.keys(FIRE_V23_IMAGES).filter(id=>mode==='targets'?['street','truck','flame','smoke','steam','water','ember'].includes(id)||id.startsWith('crew-'):true);
+  const needs=FIRE_V23_NEEDS[mode],all=fireV23ModeImages(mode);
   let loaded=0,failed=0;
   const loadOne=id=>new Promise(resolve=>{const im=new Image();im.decoding='async';im.onload=()=>{loaded++;resolve(true);};im.onerror=()=>{failed++;resolve(false);};im.src=fireV23AssetURL(id);images.set(id,im);});
   Promise.all(needs.map(loadOne)).then(results=>{if(disposed)return;if(results.filter(Boolean).length<Math.ceil(needs.length*.6))loadFailed=true;ready=true;for(const id of all)if(!images.has(id))loadOne(id);});

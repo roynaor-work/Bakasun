@@ -9,7 +9,7 @@ import {gameContext} from '../workout/island/minigames/context.mjs';
 import {FIRE_BONUS_MODES,fireBonusOn,TARGET_STAGES,INTERIOR_STAGES,fireBonusUnlocked,fireBonusNumber,fireBonusMission,fireBonusCards,fireBonusResult} from '../workout/island/minigames/fire-bonus.mjs';
 import {createTargetsModel,resolveTargets,jetImpact,crewFor,TARGET_TUNING} from '../workout/island/minigames/fire-targets.mjs';
 import {createInteriorModel,EFFECT,TOOLS,smokeLine,rescueCovered} from '../workout/island/minigames/fire-interior.mjs';
-import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,FIRE_V23_ANCHOR_DATA,streetAnchor,roomAnchor,spriteBox,crewNozzle} from '../workout/island/minigames/fire-v23-assets.mjs';
+import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,FIRE_V23_ANCHOR_DATA,streetAnchor,streetOverlay,roomAnchor,spriteBox,crewNozzle} from '../workout/island/minigames/fire-v23-assets.mjs';
 import {startFireBonus} from '../workout/island/minigames/fire.mjs';
 import {fitScene} from '../workout/island/minigames/fire-bonus-draw.mjs';
 
@@ -89,7 +89,7 @@ test('targets model: smoke hides its window until it is cleared, cans fall and l
     m.update(1/30,{aimX:aim.x,aimY:aim.y,firing:m.pressure>.3||m.spraying});assert.ok(m.score>=last,'score never goes down');last=m.score;scores.push(m.score);
   }
   assert.equal(m.result.outcome,'win');assert.ok(m.result.score>0);assert.ok(m.targets.every(t=>t.done));
-  const can=m.targets.find(t=>t.kind==='can');assert.equal(can.fall.landed,true);assert.equal(can.y,TARGET_TUNING.ground);
+  const can=m.targets.find(t=>t.kind==='can');assert.equal(can.fall.landed,true);assert.equal(can.y,can.landY,'the can lands on its fallen anchor');
   assert.ok(m.result.performance>0&&m.result.performance<=1);assert.equal(m.result.summary.hits,stage.targets.length);
 });
 
@@ -137,7 +137,7 @@ test('interior rules: water on electricity only sparks, water on oil makes it gr
   // kitchen
   const k=createInteriorModel({stage:{...INTERIOR_STAGES[0],rooms:[INTERIOR_STAGES[0].rooms[1]]}});const kg=input=>k.update(.1,input);for(let i=0;i<40&&k.phase!=='door';i++)kg({});kg({enter:true});for(let i=0;i<10;i++)kg({});kg({skip:true});
   const pot=k.room.spots.find(s=>s.kind==='oil');for(let i=0;i<10;i++)kg({pointer:{x:pot.x,y:pot.y}});assert.ok(pot.heat>1,'water on oil makes it grow');assert.ok(pot.flare>0);assert.equal(k.feedback.key,'fire.v23.say.oil');
-  kg({tool:'blanket'});const bin=k.room.spots.find(s=>s.id==='bin');kg({tap:{x:bin.x,y:bin.y}});assert.equal(bin.done,false);assert.equal(k.feedback.key,'fire.v23.say.blanketOil');
+  kg({tool:'blanket'});const other=k.room.spots.find(s=>s.kind==='normal');kg({tap:{x:other.x,y:other.y}});assert.equal(other.done,false,'a blanket does nothing on a non-oil fire');assert.equal(k.feedback.key,'fire.v23.say.blanketOil');
   kg({tap:{x:pot.x,y:pot.y}});assert.equal(pot.done,true);assert.equal(pot.smothered,true);assert.equal(k.blankets,0);
 });
 test('interior smoke: the bedroom child is hidden in the smoke until the player crawls; smoke at the floor sends a second crew (no points)',()=>{
@@ -145,7 +145,7 @@ test('interior smoke: the bedroom child is hidden in the smoke until the player 
   for(let i=0;i<40&&m.phase!=='door';i++)go({});go({enter:true});for(let i=0;i<10;i++)go({});go({skip:true});
   assert.equal(rescueCovered(m.room),true,'hidden while standing');for(let i=0;i<10;i++)go({crawl:true});assert.equal(rescueCovered(m.room),false,'visible while crawling');
   const before=m.room.smoke;go({crawl:true});const crawlRate=m.room.smoke-before;for(let i=0;i<14;i++)go({});const b2=m.room.smoke;go({});const standRate=m.room.smoke-b2;assert.ok(crawlRate<standRate,'smoke comes down slower while crawling');
-  const kid=m.room.rescue,bed=m.room.spots.find(s=>s.id==='bed'),tapKid={x:kid.x,y:(kid.y+kid.headY)/2};
+  const kid=m.room.rescue,bed=m.room.spots.find(s=>s.id==='mattress'),tapKid={x:kid.x,y:(kid.y+kid.headY)/2};
   go({crawl:true,tap:tapKid});assert.equal(kid.state,'waiting');assert.equal(m.feedback.key,'fire.v23.say.clearKid','crawling: the child is seen, the bed fire comes first');
   for(let i=0;i<5;i++)go({});assert.equal(rescueCovered(m.room),false,'the view stays low for a moment after letting go');
   for(let i=0;i<20;i++)go({});assert.equal(rescueCovered(m.room),true);go({tap:tapKid});assert.equal(kid.state,'waiting');assert.equal(m.feedback.key,'fire.v23.say.crawl','standing: hidden in the smoke');
@@ -192,20 +192,24 @@ test('session proxy: loads the bonus module lazily, reports loading through `rea
 test('assets: every picture exists, anchors cover them, the window grid is complete, and the offline list keeps them on the phone',async()=>{
   for(const [id,path] of Object.entries(FIRE_V23_IMAGES))await access(new URL(path.replace('../',''),root));
   for(const mode of Object.keys(FIRE_V23_NEEDS))for(const id of FIRE_V23_NEEDS[mode])assert.ok(FIRE_V23_IMAGES[id],id);
-  for(const id of Object.keys(FIRE_V23_IMAGES).filter(id=>id.startsWith('crew')||id.startsWith('kid')||id.startsWith('room')||id.startsWith('victory')||id==='street'||id==='truck'))assert.ok(FIRE_V23_ANCHOR_DATA[id],'anchors for '+id);
-  assert.equal(Object.keys(FIRE_V23_ANCHOR_DATA.street.grid).length,12);for(let r=1;r<=4;r++)for(let c=1;c<=3;c++)assert.ok(streetAnchor('w'+r+c));
+  // every rendered sprite (a top-level anchor) has a picture, and every window/roof/can/door/sky anchor it needs resolves
+  for(const id of Object.keys(FIRE_V23_ANCHOR_DATA))assert.ok(FIRE_V23_IMAGES[id],'image for anchor '+id);
+  for(let n=1;n<=9;n++){assert.ok(streetAnchor('win_'+n),'win_'+n);assert.ok(streetOverlay('burnt-win-'+n),'burnt win_'+n);}
+  for(const name of ['door','roof1','roof2','roof3','skyLeft','skyRight','target_bin_green','target_bin_green_fallen','target_crate','target_barrel'])assert.ok(streetAnchor(name),name);
+  assert.ok(streetOverlay('door-open'));
   for(const i of [0,1,2,3,4]){assert.ok(spriteBox('crew-'+i));assert.ok(crewNozzle(i));}
-  for(const name of ['door','roofCenter','rowRoof','storeRoof','awning1','skyLeft','balcony41','balcony33'])assert.ok(streetAnchor(name),name);
+  for(const room of ['room-living','room-kitchen','room-bedroom'])for(const name of ['rescue','rescueTop','exit','ceiling'])assert.ok(roomAnchor(room,name),room+'.'+name);
   for(const icon of ['water','extinguisher','blanket','foam'])assert.match(FIRE_V23_ICONS[icon],/^M/);
-  const manifest=JSON.parse(await read('offline-manifest.json')),files=(await readdir(new URL('assets/fire-v23/',root))).filter(f=>!f.endsWith('.json')&&!f.endsWith('.md'));
-  for(const f of files)assert.ok(manifest.games.fire.includes('assets/fire-v23/'+f),'offline: '+f);
+  const manifest=JSON.parse(await read('offline-manifest.json'));
+  const walk=async d=>{const out=[];for(const e of await readdir(new URL('assets/fire-v23/'+d,root),{withFileTypes:true})){if(e.isDirectory())out.push(...await walk(d+e.name+'/'));else if(!e.name.endsWith('.json')&&!e.name.endsWith('.md'))out.push(d+e.name);}return out;};
+  for(const f of await walk(''))assert.ok(manifest.games.fire.includes('assets/fire-v23/'+f),'offline: '+f);
   for(const m of ['minigames/fire-bonus.mjs','minigames/fire-targets.mjs','minigames/fire-interior.mjs','minigames/fire-bonus-session.mjs','minigames/fire-bonus-draw.mjs','minigames/fire-v23-assets.mjs','minigames/fire-v23-anchors.mjs','minigames/fire-v23.css','ui/fire-bonus-ui.mjs'])assert.ok(manifest.shell.includes(m),'shell: '+m);
 });
 
 test('screen fit: the targets and the room stay on screen on a phone, a wide phone and a tablet',()=>{
   for(const [W,H] of [[844,390],[915,412],[740,360],[1024,768],[1180,820]]){
-    const street=fitScene(W,H,2000,900,{x0:520,x1:1600,y0:40,y1:900}),room=fitScene(W,H,1600,740,{x0:120,x1:1520,y0:90,y1:740});
-    for(const [f,x0,x1,y0,y1] of [[street,520,1600,40,900],[room,120,1520,90,740]]){assert.ok(f.ox+x0*f.s>=-1&&f.ox+x1*f.s<=W+1,`${W}x${H} x`);assert.ok(f.oy+y0*f.s>=-1&&f.oy+y1*f.s<=H+1,`${W}x${H} y`);}
+    const street=fitScene(W,H,2000,900,{x0:600,x1:1420,y0:150,y1:880}),room=fitScene(W,H,1600,1200,{x0:140,x1:1460,y0:300,y1:1140});
+    for(const [f,x0,x1,y0,y1] of [[street,600,1420,150,880],[room,140,1460,300,1140]]){assert.ok(f.ox+x0*f.s>=-1&&f.ox+x1*f.s<=W+1,`${W}x${H} x`);assert.ok(f.oy+y0*f.s>=-1&&f.oy+y1*f.s<=H+1,`${W}x${H} y`);}
   }
 });
 

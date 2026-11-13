@@ -26,7 +26,9 @@ export function resolveTargets(stage,anchor=streetAnchor){
   return stage.targets.map((t,i)=>{const at=anchor(t.at);if(!at)throw new RangeError('Unknown fire target anchor '+t.at);
     const size=SIZE[t.kind];if(!size)throw new RangeError('Unknown fire target kind '+t.kind);
     const r=t.kind==='window'?Math.max(size.r,Math.min(at.w,at.h)*.62):size.r;
+    const land=t.kind==='can'?anchor(t.at+'_fallen'):null;
     return {id:i,kind:t.kind,at:t.at,baseX:at.x,baseY:t.kind==='can'?at.y-20:t.kind==='roof'?at.y-14:at.y,x:at.x,y:at.y,r,move:t.move||null,covers:Number.isInteger(t.covers)?t.covers:null,
+      landX:land?land.x:at.x,landY:land?land.y:TARGET_TUNING.ground,
       heat:size.heat??0,maxHeat:size.heat??0,density:t.kind==='smoke'?1:0,push:0,fall:null,done:false,doneAt:null,lastHit:-10,hitTime:0};});
 }
 /** Where the jet lands for an aim point: the wind carries it sideways over its flight time, low pressure makes it sag below the aim. */
@@ -73,7 +75,7 @@ export function createTargetsModel({stage,random=Math.random,sound=()=>{},tuning
       const help=stage.assist??tuning.assist;if(help>0){let near=null,gap=Infinity;for(const t of targets){if(!hittable(t))continue;const d=Math.hypot(t.x-impact.x,t.y-impact.y);if(d<=t.r+tuning.splash+help&&d<gap){gap=d;near=t;}}
         if(near&&gap>near.r*.5){const pull=Math.min(help,gap-near.r*.5)/gap;impact.x+=(near.x-impact.x)*pull;impact.y+=(near.y-impact.y)*pull;}}
       for(const t of targets){if(t.move&&!t.done){const m=t.move;t.x=t.baseX+m.ax*Math.sin(time*m.wx+(m.phase||0));t.y=t.baseY+m.ay*Math.sin(time*(m.wy||0)+(m.phase||0)*.7);}
-        if(t.kind==='can'&&t.fall&&!t.fall.landed){t.fall.vy+=tuning.fall*dt;t.x+=t.fall.vx*dt;t.y=Math.min(tuning.ground,t.y+t.fall.vy*dt);t.fall.spin+=t.fall.vx*.012*dt;if(t.y>=tuning.ground){t.fall.landed=true;if(!t.done)finish(t,'can');}}}
+        if(t.kind==='can'&&t.fall&&!t.fall.landed){t.fall.vy+=tuning.fall*dt;t.x+=t.fall.vx*dt;t.y=Math.min(t.landY,t.y+t.fall.vy*dt);t.fall.spin+=t.fall.vx*.012*dt;if(t.y>=t.landY){t.fall.landed=true;t.x=t.landX;if(!t.done)finish(t,'can');}}}
       hitTarget=null;
       if(spraying){
         sprayTime+=dt;const power=.35+.65*Math.min(1,pressure/.6);
@@ -81,7 +83,7 @@ export function createTargetsModel({stage,random=Math.random,sound=()=>{},tuning
         let best=null,dist=Infinity;for(const t of targets){if(!hittable(t))continue;const d=Math.hypot(t.x-impact.x,t.y-impact.y);if(d<=t.r+tuning.splash&&(d<dist||t.kind==='smoke')){if(best?.kind==='smoke'&&t.kind!=='smoke')continue;best=t;dist=d;}}
         if(best){hitTarget=best;onTargetTime+=dt;best.lastHit=time;best.hitTime+=dt;scoreAcc+=tuning.hitPoints*dt;
           const accuracy=1-Math.min(1,dist/(best.r+tuning.splash))*.35;
-          if(best.kind==='can'){best.push+=tuning.push*power*accuracy*dt;if(best.push>=1){const side=impact.x<best.x?1:-1;best.fall={vx:side*160,vy:-260,spin:0};sound('clank');}}
+          if(best.kind==='can'){best.push+=tuning.push*power*accuracy*dt;if(best.push>=1){best.fall={vx:(best.landX-best.x)/.62,vy:-260,spin:0};sound('clank');}}
           else if(best.kind==='smoke'){best.density=Math.max(0,best.density-tuning.clear*power*accuracy*dt);if(best.density===0)finish(best,'smoke');}
           else{best.heat=Math.max(0,best.heat-tuning.cool*power*accuracy*dt);if(best.heat===0)finish(best,best.kind);}
         }

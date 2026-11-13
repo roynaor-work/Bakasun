@@ -25,7 +25,8 @@ export const EFFECT=Object.freeze({
   heavy:{water:.3,extinguisher:.45,foam:1.35},
 });
 export const TOOLS=Object.freeze(['water','extinguisher','blanket','foam']);
-const TANK={water:{drain:.13,refill:.24,restart:.3},extinguisher:{drain:.2,refill:0},foam:{drain:.16,refill:0}};
+// water refills fast; the extinguisher and the foam refill slowly, so two heavy fires are always beatable (a child is never stuck)
+const TANK={water:{drain:.13,refill:.24,restart:.3},extinguisher:{drain:.2,refill:.1,restart:.3},foam:{drain:.16,refill:.09,restart:.3}};
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 
 function buildRoom(def,index,tuning,anchor){
@@ -33,7 +34,7 @@ function buildRoom(def,index,tuning,anchor){
   const spots=def.spots.map(s=>{const p=pick(s.at),heat=tuning.heat[s.kind];if(heat===undefined)throw new RangeError('Unknown fire kind '+s.kind);return {id:s.id,kind:s.kind,x:p.x,y:p.y,r:s.r,heat,maxHeat:heat,done:false,doneAt:null,smothered:false,flare:0,spark:0,lastHit:-10};});
   const r=def.rescue,feet=pick(r.at),head=anchor(def.image,r.kind==='pet'?'petTop':'kidTop')||{x:feet.x,y:feet.y-180},exit=pick('exit'),exitTop=anchor(def.image,'exitTop')||exit;
   const rescue={kind:r.kind,near:r.near,sprite:r.sprite||null,run:r.run||null,low:Boolean(r.low),x:feet.x,y:feet.y,headY:head.y,exit,exitTop,state:'waiting',t:0};
-  const ceiling=pick('ceiling').y,floor=740;
+  const ceiling=pick('ceiling').y,floor=feet.y+40;   // the room pictures are 1600x1200; the floor is where the rescue stands
   return {index,id:def.id,image:def.image,rule:def.rule,tool:def.tool,def,spots,rescue,ceiling,floor,smoke:def.smokeStart||0,time:0,mistakes:0,sprayTime:0,crawl:0,feedback:null,feedbackAt:-10,lastMistake:-10,lastHint:-10,clearedAt:null,score:0};
 }
 export function smokeLine(room,tuning=INTERIOR_TUNING){return room.ceiling+clamp(room.smoke)*(room.floor-room.ceiling);}

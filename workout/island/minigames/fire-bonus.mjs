@@ -16,31 +16,31 @@ export function fireBonusOn(mode,search){return FIRE_BONUS_MODES.includes(mode)&
  * `wind` is the steady push on the stream (scene px/s²), `gust` its swing; `move` makes a target sway (scene px, rad/s). */
 export const TARGET_STAGES=Object.freeze([
   {level:1,unlock:1,par:28,winMoney:24,wind:0,gust:0,titleKey:'fire.v23.targets.1',
-    targets:[{kind:'window',at:'w42'},{kind:'window',at:'w31'},{kind:'window',at:'w33'}]},
+    targets:[{kind:'window',at:'win_5'},{kind:'window',at:'win_1'},{kind:'window',at:'win_3'}]},
   {level:2,unlock:2,par:40,winMoney:30,wind:0,gust:0,titleKey:'fire.v23.targets.2',
-    targets:[{kind:'window',at:'w41'},{kind:'window',at:'w43'},{kind:'roof',at:'roofCenter'},{kind:'can',at:'awning1'},{kind:'can',at:'awning2'}]},
+    targets:[{kind:'window',at:'win_7'},{kind:'window',at:'win_9'},{kind:'roof',at:'roof2'},{kind:'can',at:'target_bin_green'},{kind:'can',at:'target_bin_ash'}]},
   {level:3,unlock:3,par:48,winMoney:36,wind:240,gust:0,assist:36,regrow:.05,titleKey:'fire.v23.targets.3',
-    targets:[{kind:'smoke',at:'w32',covers:1},{kind:'window',at:'w32'},{kind:'window',at:'w21'},{kind:'window',at:'w23'},{kind:'can',at:'balcony41'},{kind:'can',at:'balcony43'},{kind:'roof',at:'storeRoof'}]},
+    targets:[{kind:'smoke',at:'win_5',covers:1},{kind:'window',at:'win_5'},{kind:'window',at:'win_2'},{kind:'window',at:'win_8'},{kind:'can',at:'target_crate'},{kind:'can',at:'target_barrel'},{kind:'roof',at:'roof1'}]},
   {level:4,unlock:4,par:56,winMoney:42,wind:-160,gust:300,assist:34,regrow:.05,titleKey:'fire.v23.targets.4',
-    targets:[{kind:'fireball',at:'skyLeft',move:{ax:170,ay:30,wx:.5,wy:1.2}},{kind:'window',at:'w42'},{kind:'window',at:'w31'},{kind:'smoke',at:'w33',covers:4},{kind:'window',at:'w33'},
-      {kind:'can',at:'awning1'},{kind:'can',at:'awning2'},{kind:'can',at:'awning3'}]},
+    targets:[{kind:'fireball',at:'skyLeft',move:{ax:170,ay:30,wx:.5,wy:1.2}},{kind:'window',at:'win_4'},{kind:'window',at:'win_1'},{kind:'smoke',at:'win_9',covers:4},{kind:'window',at:'win_9'},
+      {kind:'can',at:'target_bin_green'},{kind:'can',at:'target_bin_ash'},{kind:'can',at:'target_crate_small'}]},
   {level:5,unlock:5,par:68,winMoney:48,wind:220,gust:260,assist:38,regrow:.07,titleKey:'fire.v23.targets.5',
-    targets:[{kind:'fireball',at:'skyLeft',move:{ax:170,ay:34,wx:.5,wy:1.2}},{kind:'fireball',at:'skyRight',move:{ax:140,ay:40,wx:.6,wy:1,phase:2}},{kind:'roof',at:'rowRoof'},{kind:'window',at:'w41'},{kind:'window',at:'w43'},
-      {kind:'smoke',at:'w22',covers:6,move:{ax:26,ay:0,wx:.5,wy:0}},{kind:'window',at:'w22'},{kind:'can',at:'balcony31'},{kind:'can',at:'balcony33'},{kind:'can',at:'awning2'}]},
+    targets:[{kind:'fireball',at:'skyLeft',move:{ax:170,ay:34,wx:.5,wy:1.2}},{kind:'fireball',at:'skyRight',move:{ax:140,ay:40,wx:.6,wy:1,phase:2}},{kind:'roof',at:'roof3'},{kind:'window',at:'win_7'},{kind:'window',at:'win_9'},
+      {kind:'smoke',at:'win_5',covers:6,move:{ax:26,ay:0,wx:.5,wy:0}},{kind:'window',at:'win_5'},{kind:'can',at:'target_bin_green'},{kind:'can',at:'target_bin_ash'},{kind:'can',at:'target_barrel'}]},
 ]);
 
 /** One interior mission: three rooms in a row, each teaching one rule and opening one tool. Spots and the rescue name anchors of the room picture. */
 export const INTERIOR_STAGES=Object.freeze([
   {level:1,unlock:3,winMoney:60,par:110,titleKey:'fire.v23.interior.1',rooms:[
     {id:'living',image:'room-living',rule:'electric',tool:'extinguisher',smokeSeconds:80,smokeStart:0,
-      spots:[{id:'sofa',kind:'normal',at:'sofa',r:70},{id:'curtain',kind:'normal',at:'curtain',r:58},{id:'tv',kind:'electric',at:'tv',r:66}],
-      rescue:{kind:'kid',at:'kid',near:'sofa',sprite:'kid-living',run:'kidrun-living'}},
+      spots:[{id:'sofa',kind:'normal',at:'sofa',r:80},{id:'rug',kind:'normal',at:'rug',r:70},{id:'television',kind:'electric',at:'television',r:70}],
+      rescue:{kind:'kid',at:'rescue',near:'rug'}},
     {id:'kitchen',image:'room-kitchen',rule:'oil',tool:'blanket',smokeSeconds:70,smokeStart:.05,
-      spots:[{id:'pot',kind:'oil',at:'pot',r:58},{id:'bin',kind:'normal',at:'bin',r:58},{id:'towel',kind:'normal',at:'towel',r:52}],
-      rescue:{kind:'pet',at:'pet',near:'bin'}},
-    {id:'bedroom',image:'room-bedroom',rule:'smoke',tool:'foam',smokeSeconds:70,smokeStart:.5,
-      spots:[{id:'bed',kind:'heavy',at:'bed',r:84},{id:'wardrobe',kind:'heavy',at:'wardrobe',r:74},{id:'curtain',kind:'normal',at:'curtain',r:56}],
-      rescue:{kind:'kid',at:'kid',near:'bed',sprite:'kid-bedroom',run:'kidrun-bedroom',low:true}},
+      spots:[{id:'oil_pot',kind:'oil',at:'oil_pot',r:60},{id:'kitchen_table',kind:'normal',at:'kitchen_table',r:72},{id:'power_strip',kind:'normal',at:'power_strip',r:58}],
+      rescue:{kind:'pet',at:'rescue',near:'power_strip'}},
+    {id:'bedroom',image:'room-bedroom',rule:'smoke',tool:'foam',smokeSeconds:70,smokeStart:.8,
+      spots:[{id:'mattress',kind:'heavy',at:'mattress',r:92},{id:'wardrobe',kind:'heavy',at:'wardrobe',r:84},{id:'curtain_left',kind:'normal',at:'curtain_left',r:60}],
+      rescue:{kind:'kid',at:'rescue',near:'mattress',low:true}},
   ]},
 ]);
 

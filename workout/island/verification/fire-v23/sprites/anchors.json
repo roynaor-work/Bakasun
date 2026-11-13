@@ -13,358 +13,262 @@
    0,
    0
   ],
-  "px": {
-   "workshop.workshop-burning": [
-    145,
-    778.8
-   ],
-   "workshop.frontDoor": [
-    -36.1,
-    786.1
-   ],
-   "workshop.fireLower": [
-    -89.8,
-    683.3
-   ],
-   "workshop.fireUpper": [
-    117.6,
-    571.8
-   ],
-   "workshop.fireRoof": [
-    183.6,
-    482.5
-   ],
-   "row.row-house-burning": [
-    569.1,
-    779.9
-   ],
-   "row.frontDoor": [
-    484.3,
-    785.5
-   ],
-   "row.fireLower": [
-    419.7,
-    683.2
-   ],
-   "row.fireUpper": [
-    600.8,
-    523.8
-   ],
-   "row.fireRoof": [
-    592.4,
-    425.3
-   ],
-   "apartment.apartment-burning": [
-    986.9,
-    781.9
-   ],
-   "apartment.frontDoor": [
-    984.2,
-    789
-   ],
-   "apartment.fireLower": [
-    892.1,
-    684
-   ],
-   "apartment.fireUpper": [
-    1073.5,
-    345.9
-   ],
-   "apartment.fireRoof": [
-    988,
-    222.9
-   ],
-   "store.corner-store-burning": [
-    1465,
-    778.9
-   ],
-   "store.frontDoor": [
-    1561.6,
-    785.7
-   ],
-   "store.fireLower": [
-    1434.7,
-    683.2
-   ],
-   "store.fireUpper": [
-    1631.2,
-    566.6
-   ],
-   "store.fireRoof": [
-    1443.5,
-    476.2
-   ],
-   "warehouse.warehouse-burning": [
-    1926.7,
-    777.2
-   ],
-   "warehouse.frontDoor": [
-    2143.9,
-    786.8
-   ],
-   "warehouse.fireLower": [
-    1978.5,
-    683.5
-   ],
-   "warehouse.fireUpper": [
-    2195.3,
-    576.9
-   ],
-   "warehouse.fireRoof": [
-    1886.2,
-    490.7
-   ],
-   "hydrant.hydrant": [
-    1324.9,
-    813.3
-   ],
-   "hydrant.outlet": [
-    1348.6,
-    773.6
-   ]
-  },
   "points": {
-   "door": [
-    1000,
-    722.3
-   ],
-   "roofLeft": [
-    832.1,
-    163.7
-   ],
-   "roofRight": [
-    1155,
-    163.7
-   ],
-   "roofCenter": [
-    1000,
-    163.5
-   ],
    "ground": [
     1000,
-    821.3
+    844.1
    ],
-   "truckFront": [
-    343.2,
-    953.7
+   "skyLeft": [
+    693.4,
+    113.6
    ],
-   "truckBack": [
-    -770.4,
-    953.7
+   "skyRight": [
+    1315,
+    86.1
    ],
-   "crewFeet": [
-    335.6,
-    1535
+   "door": [
+    874.8,
+    793.3
    ],
-   "ledge3a": [
-    847,
-    310.5
+   "roof1": [
+    862.7,
+    263.3
    ],
-   "ledge3b": [
-    1000,
-    310.5
+   "roof2": [
+    1123.9,
+    263.1
    ],
-   "ledge3c": [
-    1153,
-    310.5
+   "roof3": [
+    873.5,
+    222.2
    ],
-   "ledge2a": [
-    843.2,
-    463
+   "target_bin_green": [
+    1153.7,
+    574.4
    ],
-   "ledge2c": [
-    1156.8,
-    463
+   "target_bin_ash": [
+    1225,
+    574.4
    ],
-   "storeRoof": [
-    1459.2,
-    414.2
+   "target_crate": [
+    1149.4,
+    397.6
    ],
-   "rowRoof": [
-    572.2,
-    343.9
+   "target_barrel": [
+    1218.6,
+    397.6
    ],
-   "warehouseRoof": [
-    1932.7,
-    433.5
+   "target_crate_small": [
+    1143.6,
+    406.4
+   ],
+   "target_bin_green_fallen": [
+    1105.6,
+    825.5
+   ],
+   "target_bin_ash_fallen": [
+    1168.7,
+    827.6
+   ],
+   "target_crate_fallen": [
+    1228.1,
+    818.3
+   ],
+   "target_barrel_fallen": [
+    1292.7,
+    826.9
+   ],
+   "target_crate_small_fallen": [
+    1351.1,
+    827.2
    ]
   },
-  "windows": {
-   "apartment": [
-    [
-     826.3,
-     203.1,
-     886,
-     275.3
-    ],
-    [
-     822.2,
-     345.7,
-     883.2,
-     425
-    ],
-    [
-     954.6,
-     345.7,
-     1017.4,
-     425
-    ],
-    [
-     953.5,
-     499,
-     1017.8,
-     578.5
-    ],
-    [
-     1089.2,
-     499,
-     1155.3,
-     578.5
-    ],
-    [
-     1091.5,
-     656.2,
-     1159.3,
-     743.9
-    ]
-   ]
-  },
-  "objects": {
-   "workshop": [
-    -405.6,
-    393.7,
-    459.1,
+  "boxes": {
+   "win_1": [
+    756,
+    621.5,
+    875.5,
+    746.3
+   ],
+   "win_2": [
+    943.9,
+    621.5,
+    1056.1,
+    746.3
+   ],
+   "win_3": [
+    1124.5,
+    621.5,
+    1244,
+    746.3
+   ],
+   "win_4": [
+    747.6,
+    448.1,
+    893.2,
+    568.1
+   ],
+   "win_5": [
+    930.2,
+    448.1,
+    1069.8,
+    568.1
+   ],
+   "win_6": [
+    1106.8,
+    448.1,
+    1252.4,
+    568.1
+   ],
+   "win_7": [
+    754.5,
+    283.9,
+    896,
+    403.6
+   ],
+   "win_8": [
+    932.1,
+    283.9,
+    1067.9,
+    403.6
+   ],
+   "win_9": [
+    1104,
+    283.9,
+    1245.5,
+    403.6
+   ],
+   "doorBox": [
+    874.6,
+    664.2,
+    940.7,
+    793.8
+   ],
+   "hero": [
+    665.4,
+    264.6,
+    1334.6,
     817.2
-   ],
-   "row": [
-    197.8,
-    292.3,
-    803,
-    815.5
-   ],
-   "apartment": [
-    732.8,
-    63.5,
-    1267.2,
-    820.8
-   ],
-   "store": [
-    1195.2,
-    376.1,
-    1881.5,
-    817.3
-   ],
-   "warehouse": [
-    1560.2,
-    382.9,
-    2589,
-    818.8
-   ],
-   "hydrant": [
-    1291.7,
-    739.1,
-    1357.3,
-    816.4
-   ],
-   "lampL": [
-    98,
-    378.9,
-    244.1,
-    821.5
-   ],
-   "lampR": [
-    1802.8,
-    378.9,
-    1954.5,
-    821.5
-   ],
-   "tree": [
-    -762.2,
-    341.1,
-    -80.4,
-    830.4
    ]
   },
-  "grid": {
-   "w11": [
-    822.2,
-    656.2,
-    886,
-    743.9
-   ],
-   "w12": [
-    953.5,
-    656.2,
-    1017.8,
-    743.9
-   ],
-   "w13": [
-    1089.2,
-    656.2,
-    1159.3,
-    743.9
-   ],
-   "w21": [
-    822.2,
-    499,
-    886,
-    578.5
-   ],
-   "w22": [
-    953.5,
-    499,
-    1017.8,
-    578.5
-   ],
-   "w23": [
-    1089.2,
-    499,
-    1159.3,
-    578.5
-   ],
-   "w31": [
-    822.2,
-    345.7,
-    886,
-    425
-   ],
-   "w32": [
-    953.5,
-    345.7,
-    1017.8,
-    425
-   ],
-   "w33": [
-    1089.2,
-    345.7,
-    1159.3,
-    425
-   ],
-   "w41": [
-    822.2,
-    203.1,
-    886,
-    275.3
-   ],
-   "w42": [
-    953.5,
-    203.1,
-    1017.8,
-    275.3
-   ],
-   "w43": [
-    1089.2,
-    203.1,
-    1159.3,
-    275.3
-   ]
+  "overlays": {
+   "burnt-win-1": {
+    "file": "street-burnt-win-1.webp",
+    "origin": [
+     765,
+     612
+    ],
+    "size": [
+     102,
+     126
+    ]
+   },
+   "burnt-win-2": {
+    "file": "street-burnt-win-2.webp",
+    "origin": [
+     950,
+     612
+    ],
+    "size": [
+     103,
+     126
+    ]
+   },
+   "burnt-win-3": {
+    "file": "street-burnt-win-3.webp",
+    "origin": [
+     1134,
+     613
+    ],
+    "size": [
+     101,
+     125
+    ]
+   },
+   "burnt-win-4": {
+    "file": "street-burnt-win-4.webp",
+    "origin": [
+     771,
+     441
+    ],
+    "size": [
+     104,
+     118
+    ]
+   },
+   "burnt-win-5": {
+    "file": "street-burnt-win-5.webp",
+    "origin": [
+     952,
+     441
+    ],
+    "size": [
+     99,
+     118
+    ]
+   },
+   "burnt-win-6": {
+    "file": "street-burnt-win-6.webp",
+    "origin": [
+     1130,
+     443
+    ],
+    "size": [
+     98,
+     116
+    ]
+   },
+   "burnt-win-7": {
+    "file": "street-burnt-win-7.webp",
+    "origin": [
+     777,
+     285
+    ],
+    "size": [
+     101,
+     104
+    ]
+   },
+   "burnt-win-8": {
+    "file": "street-burnt-win-8.webp",
+    "origin": [
+     953,
+     285
+    ],
+    "size": [
+     98,
+     104
+    ]
+   },
+   "burnt-win-9": {
+    "file": "street-burnt-win-9.webp",
+    "origin": [
+     1126,
+     285
+    ],
+    "size": [
+     97,
+     104
+    ]
+   },
+   "door-open": {
+    "file": "street-door-open.webp",
+    "origin": [
+     874,
+     663
+    ],
+    "size": [
+     68,
+     132
+    ]
+   }
   }
  },
  "truck": {
   "file": "truck.webp",
   "size": [
-   400,
-   484
+   461,
+   349
   ],
   "frame": [
    2000,
@@ -372,337 +276,316 @@
   ],
   "origin": [
    0,
-   416
+   551
   ],
-  "px": {},
-  "points": {
-   "nose": [
-    346.6,
-    360.2
-   ]
-  },
-  "windows": {},
-  "objects": {
-   "truck": [
-    -517.1,
-    -40.8,
-    435.7,
-    526.6
-   ]
-  }
+  "points": {},
+  "boxes": {}
  },
  "crew-2": {
   "file": "crew-2.webp",
   "size": [
-   139,
-   201
+   66,
+   27
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   514,
-   699
+   664,
+   873
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    47.3,
-    443
-   ],
-   "crew.headlamp": [
-    116.8,
-    38
-   ],
-   "crew.waterNozzle": [
-    124.6,
-    117.6
-   ],
-   "crew.hoseInlet": [
-    116.7,
-    120.8
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -62.3,
-    -2.5,
-    185.4,
-    484.5
-   ]
-  }
+  "boxes": {}
  },
  "crew-0": {
   "file": "crew-0.webp",
   "size": [
-   236,
-   201
+   60,
+   26
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   468,
-   699
+   673,
+   874
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    69.4,
-    439.7
-   ],
-   "crew.headlamp": [
-    145.8,
-    39.1
-   ],
-   "crew.waterNozzle": [
-    225.9,
-    120.1
-   ],
-   "crew.hoseInlet": [
-    183.7,
-    123.1
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -93.7,
-    -2.9,
-    285.2,
-    491.9
-   ]
-  }
+  "boxes": {}
  },
  "crew-4": {
   "file": "crew-4.webp",
   "size": [
-   142,
-   201
+   65,
+   26
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   537,
-   699
+   654,
+   874
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    54.1,
-    439.7
-   ],
-   "crew.headlamp": [
-    102.4,
-    36.6
-   ],
-   "crew.waterNozzle": [
-    35.3,
-    120.1
-   ],
-   "crew.hoseInlet": [
-    63.8,
-    120.9
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -162.7,
-    -2.9,
-    216.2,
-    491.9
-   ]
-  }
+  "boxes": {}
  },
  "room-living": {
   "file": "room-living.webp",
   "size": [
    1600,
-   740
+   1200
   ],
   "frame": [
    1600,
-   740
+   1200
   ],
   "origin": [
    0,
    0
   ],
-  "px": {},
   "points": {
    "sofa": [
-    241.6,
-    413.5
+    517.9,
+    649.9
    ],
-   "curtain": [
-    518.7,
-    300.6
+   "television": [
+    1006.3,
+    501
    ],
-   "tv": [
-    1337.2,
-    365.5
+   "rug": [
+    837.9,
+    935.8
    ],
-   "kid": [
-    251.4,
-    680.7
+   "rescue": [
+    1172.6,
+    945.3
    ],
-   "kidTop": [
-    232.8,
-    437.3
-   ],
-   "exitTop": [
-    1194.6,
-    355.9
-   ],
-   "door": [
-    1179.1,
-    363.8
+   "rescueTop": [
+    1172.6,
+    757.6
    ],
    "exit": [
-    1187.5,
-    492.3
+    1301.1,
+    690.7
    ],
-   "floor": [
-    800,
-    756.2
+   "leave": [
+    1172.6,
+    1178
    ],
    "ceiling": [
-    800,
-    118.5
+    1301.1,
+    98
    ]
   },
-  "windows": {},
-  "objects": {}
+  "boxes": {},
+  "overlays": {
+   "burnt-sofa": {
+    "file": "room-living-burnt-sofa.webp",
+    "origin": [
+     250,
+     503
+    ],
+    "size": [
+     536,
+     306
+    ]
+   },
+   "burnt-television": {
+    "file": "room-living-burnt-television.webp",
+    "origin": [
+     881,
+     417
+    ],
+    "size": [
+     251,
+     197
+    ]
+   },
+   "burnt-rug": {
+    "file": "room-living-burnt-rug.webp",
+    "origin": [
+     241,
+     826
+    ],
+    "size": [
+     697,
+     155
+    ]
+   }
+  }
  },
  "room-kitchen": {
   "file": "room-kitchen.webp",
   "size": [
    1600,
-   740
+   1200
   ],
   "frame": [
    1600,
-   740
+   1200
   ],
   "origin": [
    0,
    0
   ],
-  "px": {},
   "points": {
-   "petTop": [
-    341.9,
-    546.5
+   "oil_pot": [
+    292.6,
+    497.6
    ],
-   "exitTop": [
-    1190.3,
-    439.5
+   "kitchen_table": [
+    680,
+    745.5
    ],
-   "pot": [
-    572.7,
-    339.4
+   "power_strip": [
+    1332.6,
+    795.6
    ],
-   "towel": [
-    879.8,
-    417.5
+   "rescue": [
+    1258.9,
+    962.7
    ],
-   "bin": [
-    718.1,
-    438.1
-   ],
-   "pet": [
-    347,
-    628.8
-   ],
-   "door": [
-    1179.1,
-    363.8
+   "rescueTop": [
+    1258.9,
+    775
    ],
    "exit": [
-    1187.5,
-    492.3
+    1301.1,
+    690.7
    ],
-   "floor": [
-    800,
-    756.2
+   "leave": [
+    1258.9,
+    1195.5
    ],
    "ceiling": [
-    800,
-    118.5
+    1301.1,
+    98
    ]
   },
-  "windows": {},
-  "objects": {}
+  "boxes": {},
+  "overlays": {
+   "burnt-oil_pot": {
+    "file": "room-kitchen-burnt-oil_pot.webp",
+    "origin": [
+     220,
+     490
+    ],
+    "size": [
+     146,
+     76
+    ]
+   },
+   "burnt-kitchen_table": {
+    "file": "room-kitchen-burnt-kitchen_table.webp",
+    "origin": [
+     506,
+     719
+    ],
+    "size": [
+     348,
+     224
+    ]
+   },
+   "burnt-power_strip": {
+    "file": "room-kitchen-burnt-power_strip.webp",
+    "origin": [
+     1107,
+     609
+    ],
+    "size": [
+     250,
+     240
+    ]
+   }
+  }
  },
  "room-bedroom": {
   "file": "room-bedroom.webp",
   "size": [
    1600,
-   740
+   1200
   ],
   "frame": [
    1600,
-   740
+   1200
   ],
   "origin": [
    0,
    0
   ],
-  "px": {},
   "points": {
-   "bed": [
-    939.1,
-    412.2
+   "mattress": [
+    583.2,
+    758.8
    ],
    "wardrobe": [
-    211.7,
-    347
+    892.6,
+    526.3
    ],
-   "curtain": [
-    458.2,
-    300.4
+   "curtain_left": [
+    227.4,
+    348.4
    ],
-   "kid": [
-    1197.4,
-    576.7
+   "rescue": [
+    831.6,
+    979.5
    ],
-   "kidTop": [
-    1207.4,
-    392.1
-   ],
-   "exitTop": [
-    1194.6,
-    355.9
-   ],
-   "door": [
-    1179.1,
-    363.8
+   "rescueTop": [
+    831.6,
+    791.8
    ],
    "exit": [
-    1187.5,
-    492.3
+    1301.1,
+    690.7
    ],
-   "floor": [
-    800,
-    756.2
+   "leave": [
+    831.6,
+    1212.2
    ],
    "ceiling": [
-    800,
-    118.5
-   ],
-   "underBed": [
-    950.6,
-    538.8
+    1301.1,
+    98
    ]
   },
-  "windows": {},
-  "objects": {}
+  "boxes": {},
+  "overlays": {
+   "burnt-mattress": {
+    "file": "room-bedroom-burnt-mattress.webp",
+    "origin": [
+     306,
+     590
+    ],
+    "size": [
+     344,
+     188
+    ]
+   },
+   "burnt-wardrobe": {
+    "file": "room-bedroom-burnt-wardrobe.webp",
+    "origin": [
+     768,
+     262
+    ],
+    "size": [
+     249,
+     495
+    ]
+   },
+   "burnt-curtain_left": {
+    "file": "room-bedroom-burnt-curtain_left.webp",
+    "origin": [
+     176,
+     139
+    ],
+    "size": [
+     102,
+     360
+    ]
+   }
+  }
  },
  "kid-living": {
   "file": "kid-living.webp",
@@ -978,61 +861,25 @@
    243,
    146
   ],
-  "px": {
-   "tool-extinguisher.fire-extinguisher": [
-    107,
-    393.4
-   ],
-   "tool-extinguisher.nozzle": [
-    224.6,
-    234.6
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "tool-extinguisher": [
-    -41.7,
-    3.7,
-    255.7,
-    431.9
-   ]
-  }
+  "boxes": {}
  },
  "tool-blanket": {
   "file": "tool-blanket.png",
   "size": [
-   426,
-   320
+   418,
+   186
   ],
   "frame": [
    700,
    700
   ],
   "origin": [
-   155,
-   380
+   160,
+   422
   ],
-  "px": {
-   "tool-blanket.fire-blanket": [
-    195,
-    159.4
-   ],
-   "tool-blanket.nozzle": [
-    158.6,
-    66.7
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "tool-blanket": [
-    -64,
-    -37.6,
-    454,
-    345.3
-   ]
-  }
+  "boxes": {}
  },
  "tool-hose": {
   "file": "tool-hose.png",
@@ -1048,26 +895,8 @@
    146,
    348
   ],
-  "px": {
-   "tool-hose.foam-hose": [
-    204,
-    191.4
-   ],
-   "tool-hose.nozzle": [
-    63,
-    132.1
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "tool-hose": [
-    -125.5,
-    -28.3,
-    533.5,
-    293.2
-   ]
-  }
+  "boxes": {}
  },
  "victory-kid": {
   "file": "victory-kid.webp",
@@ -1098,130 +927,464 @@
  "victory-crew": {
   "file": "victory-crew.webp",
   "size": [
-   63,
-   197
+   49,
+   151
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   852,
-   654
+   877,
+   721
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    29.5,
-    187.7
-   ],
-   "crew.headlamp": [
-    22.6,
-    18.9
-   ],
-   "crew.waterNozzle": [
-    29.4,
-    4.6
-   ],
-   "crew.hoseInlet": [
-    28.2,
-    38.3
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -16,
-    3.5,
-    75.3,
-    196.3
-   ]
-  }
+  "boxes": {}
  },
  "crew-1": {
   "file": "crew-1.webp",
   "size": [
-   187,
-   201
+   65,
+   27
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   493,
-   699
+   669,
+   873
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    54.8,
-    442.1
-   ],
-   "crew.headlamp": [
-    129.9,
-    38.6
-   ],
-   "crew.waterNozzle": [
-    176,
-    118.3
-   ],
-   "crew.hoseInlet": [
-    150,
-    121.7
-   ]
-  },
   "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -88,
-    -2.9,
-    238.1,
-    491.2
-   ]
-  }
+  "boxes": {}
  },
  "crew-3": {
   "file": "crew-3.webp",
   "size": [
-   142,
-   201
+   64,
+   27
   ],
   "frame": [
    2000,
    900
   ],
   "origin": [
-   525,
-   699
+   659,
+   873
   ],
-  "px": {
-   "crew.crew-nozzle": [
-    51.4,
-    442.1
+  "points": {},
+  "boxes": {}
+ },
+ "target-bin-green": {
+  "file": "target-bin-green.webp",
+  "size": [
+   47,
+   67
+  ],
+  "frame": [
+   2000,
+   900
+  ],
+  "origin": [
+   1130,
+   540
+  ],
+  "points": {},
+  "boxes": {}
+ },
+ "target-bin-ash": {
+  "file": "target-bin-ash.webp",
+  "size": [
+   50,
+   67
+  ],
+  "frame": [
+   2000,
+   900
+  ],
+  "origin": [
+   1199,
+   540
+  ],
+  "points": {},
+  "boxes": {}
+ },
+ "target-crate": {
+  "file": "target-crate.webp",
+  "size": [
+   50,
+   51
+  ],
+  "frame": [
+   2000,
+   900
+  ],
+  "origin": [
+   1125,
+   380
+  ],
+  "points": {},
+  "boxes": {}
+ },
+ "target-barrel": {
+  "file": "target-barrel.webp",
+  "size": [
+   46,
+   60
+  ],
+  "frame": [
+   2000,
+   900
+  ],
+  "origin": [
+   1196,
+   369
+  ],
+  "points": {},
+  "boxes": {}
+ },
+ "target-crate-small": {
+  "file": "target-crate-small.webp",
+  "size": [
+   36,
+   36
+  ],
+  "frame": [
+   2000,
+   900
+  ],
+  "origin": [
+   1126,
+   402
+  ],
+  "points": {},
+  "boxes": {}
+ },
+ "victory-girl": {
+  "file": "victory-girl.webp",
+  "size": [
+   420,
+   86
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    70,
+    86
    ],
-   "crew.headlamp": [
-    111.5,
-    37.3
+   "origin": [
+    1055,
+    791
    ],
-   "crew.waterNozzle": [
-    80.4,
-    118.3
-   ],
-   "crew.hoseInlet": [
-    91.2,
-    120.6
+   "times": [
+    0,
+    0.33,
+    0.67,
+    1,
+    1.33,
+    1.67
    ]
   },
-  "points": {},
-  "windows": {},
-  "objects": {
-   "crew": [
-    -120,
-    -2.9,
-    206.1,
-    491.2
+  "points": {}
+ },
+ "victory-cat": {
+  "file": "victory-cat.webp",
+  "size": [
+   414,
+   96
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    69,
+    96
+   ],
+   "origin": [
+    1145,
+    779
+   ],
+   "times": [
+    0,
+    0.33,
+    0.67,
+    1,
+    1.33,
+    1.67
    ]
-  }
+  },
+  "points": {}
+ },
+ "victory-dog": {
+  "file": "victory-dog.webp",
+  "size": [
+   402,
+   89
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    67,
+    89
+   ],
+   "origin": [
+    983,
+    789
+   ],
+   "times": [
+    0,
+    0.33,
+    0.67,
+    1,
+    1.33,
+    1.67
+   ]
+  },
+  "points": {}
+ },
+ "friend-living-scared": {
+  "file": "friend-living-scared.webp",
+  "size": [
+   990,
+   221
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    165,
+    221
+   ],
+   "origin": [
+    1090,
+    740
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25
+   ]
+  },
+  "points": {}
+ },
+ "friend-living-rescued": {
+  "file": "friend-living-rescued.webp",
+  "size": [
+   1002,
+   236
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    167,
+    236
+   ],
+   "origin": [
+    1089,
+    729
+   ],
+   "times": [
+    0,
+    0.3,
+    0.6,
+    0.9,
+    1.2,
+    1.5
+   ]
+  },
+  "points": {}
+ },
+ "friend-living-walkout": {
+  "file": "friend-living-walkout.webp",
+  "size": [
+   1148,
+   284
+  ],
+  "frames": {
+   "count": 7,
+   "cell": [
+    164,
+    284
+   ],
+   "origin": [
+    1091,
+    741
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5
+   ]
+  },
+  "points": {}
+ },
+ "friend-kitchen-scared": {
+  "file": "friend-kitchen-scared.webp",
+  "size": [
+   840,
+   242
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    140,
+    242
+   ],
+   "origin": [
+    1194,
+    736
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25
+   ]
+  },
+  "points": {}
+ },
+ "friend-kitchen-rescued": {
+  "file": "friend-kitchen-rescued.webp",
+  "size": [
+   876,
+   257
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    146,
+    257
+   ],
+   "origin": [
+    1193,
+    726
+   ],
+   "times": [
+    0,
+    0.3,
+    0.6,
+    0.9,
+    1.2,
+    1.5
+   ]
+  },
+  "points": {}
+ },
+ "friend-kitchen-walkout": {
+  "file": "friend-kitchen-walkout.webp",
+  "size": [
+   1008,
+   305
+  ],
+  "frames": {
+   "count": 7,
+   "cell": [
+    144,
+    305
+   ],
+   "origin": [
+    1195,
+    737
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5
+   ]
+  },
+  "points": {}
+ },
+ "friend-bedroom-scared": {
+  "file": "friend-bedroom-scared.webp",
+  "size": [
+   1014,
+   223
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    169,
+    223
+   ],
+   "origin": [
+    747,
+    790
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25
+   ]
+  },
+  "points": {}
+ },
+ "friend-bedroom-rescued": {
+  "file": "friend-bedroom-rescued.webp",
+  "size": [
+   1470,
+   349
+  ],
+  "frames": {
+   "count": 6,
+   "cell": [
+    245,
+    349
+   ],
+   "origin": [
+    709,
+    664
+   ],
+   "times": [
+    0,
+    0.3,
+    0.6,
+    0.9,
+    1.2,
+    1.5
+   ]
+  },
+  "points": {}
+ },
+ "friend-bedroom-walkout": {
+  "file": "friend-bedroom-walkout.webp",
+  "size": [
+   1183,
+   360
+  ],
+  "frames": {
+   "count": 7,
+   "cell": [
+    169,
+    360
+   ],
+   "origin": [
+    747,
+    703
+   ],
+   "times": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5
+   ]
+  },
+  "points": {}
  }
 }
