@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- Original work, CC0-1.0. See LICENSES.md. -->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>חברים לחילוץ · שלוש דמויות</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <div class="eyebrow"><span class="sun" aria-hidden="true"></span> האי שלי · חברים לחילוץ</div>
+      <h1>כולם חוזרים הביתה.</h1>
+      <p>ילדה, חתול וכלב שמחכים ליד מושטת. קצת אומץ, הרבה לב.</p>
+      <div class="facts"><span>3 חברים</span><span>5 תנועות לכל אחד</span><span>צבעים שאפשר לשנות</span></div>
+    </header>
+
+    <section class="toolbar" aria-label="שליטה בתנועות">
+      <div class="clip-buttons" role="group" aria-label="תנועה לכל החברים">
+        <button data-clip="idle" aria-pressed="true">מחכים בשקט</button>
+        <button data-clip="scared" aria-pressed="false">קצת רועדים</button>
+        <button data-clip="wave" aria-pressed="false">מבקשים עזרה</button>
+        <button data-clip="rescued" aria-pressed="false">איזה כיף, חולצנו!</button>
+        <button data-clip="walk_out" aria-pressed="false">הולכים למקום בטוח</button>
+      </div>
+      <div class="playback">
+        <button id="play" aria-pressed="true">השהיה</button>
+        <button id="replay">מהתחלה</button>
+        <label>מהירות <select id="speed"><option value=".5">חצי</option><option value="1" selected>רגילה</option></select></label>
+        <label class="timeline-label" for="timeline">מיקום בתנועה</label>
+        <input id="timeline" type="range" min="0" max="1" step=".001" value="0" aria-label="מיקום בתנועה">
+        <output id="time" dir="ltr">0.00 s</output>
+      </div>
+    </section>
+
+    <section class="friends" aria-label="שלוש הדמויות">
+      <article class="friend girl" data-id="girl">
+        <div class="card-top"><span class="number">01</span><span class="tag">יד קטנה, אומץ גדול</span></div>
+        <div class="viewport" id="view-girl" role="img" aria-label="ילדה בתלת ממד, עם תלבושת אלמוג וטורקיז"></div>
+        <div class="caption"><div><h2>הילדה</h2><p>מנופפת, מחייכת, יוצאת בבטחה.</p></div><a href="girl.glb" download aria-label="הורדת דמות הילדה">GLB <span aria-hidden="true">↓</span></a></div>
+        <label class="individual">התנועה שלה <select data-actor="girl" aria-label="תנועה לילדה"></select></label>
+        <p class="technical" id="stats-girl">טוען…</p>
+      </article>
+      <article class="friend cat" data-id="cat">
+        <div class="card-top"><span class="number">02</span><span class="tag">שפם קטן, לב חם</span></div>
+        <div class="viewport" id="view-cat" role="img" aria-label="חתול ג׳ינג׳י ידידותי בתלת ממד"></div>
+        <div class="caption"><div><h2>החתול</h2><p>כפה קטנה מבקשת עזרה.</p></div><a href="cat.glb" download aria-label="הורדת דמות החתול">GLB <span aria-hidden="true">↓</span></a></div>
+        <label class="individual">התנועה שלו <select data-actor="cat" aria-label="תנועה לחתול"></select></label>
+        <p class="technical" id="stats-cat">טוען…</p>
+      </article>
+      <article class="friend dog" data-id="dog">
+        <div class="card-top"><span class="number">03</span><span class="tag">אוזניים רכות, חבר טוב</span></div>
+        <div class="viewport" id="view-dog" role="img" aria-label="כלב חום ידידותי עם אוזניים שמוטות בתלת ממד"></div>
+        <div class="caption"><div><h2>הכלב</h2><p>כבר מוכן לכשכש בזנב.</p></div><a href="dog.glb" download aria-label="הורדת דמות הכלב">GLB <span aria-hidden="true">↓</span></a></div>
+        <label class="individual">התנועה שלו <select data-actor="dog" aria-label="תנועה לכלב"></select></label>
+        <p class="technical" id="stats-dog">טוען…</p>
+      </article>
+    </section>
+
+    <section class="details" aria-label="צבעים וזווית צפייה">
+      <fieldset class="palette"><legend>התלבושת שלה, בצבעים שלכם</legend>
+        <label><input id="primary" type="color" value="#ec805e"> צבע ראשי</label>
+        <label><input id="secondary" type="color" value="#417e83"> צבע משני</label>
+        <button id="reset-colors">צבעים מקוריים</button>
+      </fieldset>
+      <fieldset class="angles"><legend>מכל כיוון</legend>
+        <button data-angle="0" aria-pressed="true">חזית</button>
+        <button data-angle="0.65" aria-pressed="false">שלושה רבעים</button>
+        <button data-angle="1.5707963268" aria-pressed="false">צד</button>
+        <button data-angle="3.1415926536" aria-pressed="false">גב</button>
+      </fieldset>
+    </section>
+    <p id="status" role="status" aria-live="polite">טוען את שלושת החברים…</p>
+    <noscript>יש להפעיל JavaScript כדי להציג את הדמויות.</noscript>
+    <footer><span>דמויות מקוריות · CC0 · ללא טקסטורות</span><nav aria-label="תיעוד"><a href="REPORT.md">נתוני הדמויות והתנועות</a><a href="LICENSES.md">מקורות ורישוי</a></nav></footer>
+  </main>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>
