@@ -1,0 +1,11 @@
+{
+  "name": "bakasun-alien-fx-v1-source",
+  "version": "1.0.0",
+  "private": true,
+  "license": "CC0-1.0",
+  "scripts": {
+    "pack": "node pack.mjs",
+    "audio": "python3 synthesize.py"
+  },
+  "dependencies": {"sharp": "0.35.4"}
+}
