@@ -8,8 +8,8 @@
  * with a catch, the car skids to a halt and the throw stage (archery) starts where it stopped. Ramming still fills a
  * damage meter as a slower second way. When the time runs out the thief reaches the roadblock and bails out further away.
  * Deterministic from (seed, stage, inputs) so tools/catch-sim.mjs can drive it. */
-import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-11';
-import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-11';
+import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-12';
+import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-12';
 
 export const CHASE6 = Object.freeze({
   countdownSeconds: 2.5, startGap: 30, catchGap: 7,

@@ -1,7 +1,7 @@
 // Soccer rules v1 (sports-deep-fable M3, 11/11/2026): fouls on slide tackles, the free kick and
 // penalty that follow, the through ball and the rival's own slide tackle. Pure helpers: they read
 // visible positions and the config and never change a player, the ball, the input or the RNG.
-import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-11';
+import {passLaneClearance,passInterceptionClearance} from './soccer-teamplay.mjs?v=island-v2-20261107-12';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const finite=n=>Number.isFinite(n)?n:0;
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);

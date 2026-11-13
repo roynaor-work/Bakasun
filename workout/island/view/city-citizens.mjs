@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {Citizens as PrimitiveCitizens} from './avatar.mjs?v=island-v2-20261107-11';
-import {LocalModels} from './local-models.mjs?v=island-v2-20261107-11';
+import {Citizens as PrimitiveCitizens} from './avatar.mjs?v=island-v2-20261107-12';
+import {LocalModels} from './local-models.mjs?v=island-v2-20261107-12';
 
 const MODELS=Object.freeze([
   Object.freeze({path:'assets/models/adult-man-rigged-512.glb',rotationY:0,scale:.32}),

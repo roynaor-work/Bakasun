@@ -125,7 +125,7 @@ test('flag wiring: soccer and basketball ask the flag before the Codex body, and
   // no pre-existing branch lost its code: the MakeHuman bodyFactory and the sleeve geometry are still built when v22 is off
   assert.match(hoops, /const sleeves=v22\?null:athleteKitGeometry\(THREE,source,'basketball'\)/);
   // both games import the module with the current release tag
-  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-11/);
+  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-12/);
 });
 
 test('roles: soccer is one body, basketball guard / wing / center are their own', () => {

@@ -51,7 +51,7 @@ test('tennis crowd v22: ?tennisCrowd3d=0 returns the billboard crowd, and the 3D
   assert.ok(stadium.includes("crowd:crowd3d?'3d-lod':'billboard'"),'metrics say which crowd runs');
   assert.ok(stadium.includes('crowd3d.update(')&&stadium.includes('ballPosition')&&stadium.includes('celebration:cheer.value'),'heads follow the ball, cheer lifts the arms');
   assert.ok(/GLTFLoader:Loader,base:import\.meta\.url,camera\}/.test(view),'the view passes its camera for the LOD distance');
-  assert.ok(!/island-v2-2026(?!1107-11)\d{4}-\d+/.test(stadium.replace(/island-v2-20261107-11/g,'')),'only the current version tag');
+  assert.ok(!/island-v2-2026(?!1107-11)\d{4}-\d+/.test(stadium.replace(/island-v2-20261107-12/g,'')),'only the current version tag');
 });
 
 test('tennis crowd v22: the offline list carries the crowd files and the shell list is current',async()=>{
