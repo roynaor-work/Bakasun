@@ -135,14 +135,15 @@ export function generateCourse(track, physics) {
       rows.push({ s, from: next - gap / 2 + board, to: next + gap / 2 - board });
       coins = random() < track.wallCoins ? 'wall' : 'floor';
     } else if (kind === 'gate' || kind === 'slalom') {
-      const count = kind === 'slalom' ? 3 : 1;
+      // track.slalomGates (ski league v23): longer, denser slalom sections on harder stages; the three existing tracks keep 3.
+      const count = kind === 'slalom' ? (track.slalomGates ?? 3) : 1;
       for (let i = 0; i < count; i++) {
         const offset = kind === 'slalom' ? (i % 2 ? -1 : 1) * track.slalomOffset : 0;
         const x = Math.max(-half + 2.5, Math.min(half - 2.5, next + offset));
         items.push({ type: 'gate', x: round(x), s: round(s + i * track.slalomStep) });
       }
       rows.push({ s, from: -half, to: half });
-      if (kind === 'slalom') s += track.slalomStep * 2; else coins = random() < track.wallCoins ? 'wall' : 'floor';
+      if (kind === 'slalom') s += track.slalomStep * (count - 1); else coins = random() < track.wallCoins ? 'wall' : 'floor';
     } else if (kind === 'pad') {
       items.push({ type: 'boost', x: round(Math.max(-half + 1.7, Math.min(half - 1.7, next))), s: round(s) });
       // Rocks on the far sides only; the pad lane itself stays open.
@@ -175,7 +176,38 @@ export function generateCourse(track, physics) {
   objects.sort((a, b) => a.s - b.s || a.x - b.x);
   objects.forEach((object, index) => { object.id = `${track.id}-${index}`; });
   const frozen = Object.freeze(objects.map(o => Object.freeze(o)));
-  return Object.freeze({ id: track.id, length: track.length, objects: frozen, rows: Object.freeze(rows), path: buildPath(track, physics), coins: frozen.filter(o => o.type === 'coin').length });
+  const wind = windZones(track);
+  return Object.freeze({ id: track.id, length: track.length, objects: frozen, rows: Object.freeze(rows), path: buildPath(track, physics), coins: frozen.filter(o => o.type === 'coin').length, ...(wind ? { wind } : {}) });
+}
+
+/** Ski league v23: gusts of side wind (track.wind), fixed per course on their own random stream, so every rider meets the same gust
+ * at the same place. A zone {s0, s1, dir, speed} pushes riders sideways at up to `speed` m/s, easing in and out over WIND_EASE metres.
+ * Tracks without `wind` (the three existing ones) get no zones and no `wind` key. */
+export const WIND_EASE = 14;
+function windZones(track) {
+  const w = track.wind; if (!w) return null;
+  const random = courseRandom((track.seed + 104729) >>> 0), zones = [];
+  let s = w.start ?? 160;
+  while (s < track.length - (w.end ?? 90)) {
+    const length = Math.round(between(random, w.length)), speed = round(between(random, w.speed)), dir = random() < .5 ? -1 : 1;
+    zones.push(Object.freeze({ s0: round(s), s1: round(Math.min(track.length - 40, s + length)), dir, speed }));
+    s += length + Math.round(between(random, w.every));
+  }
+  return Object.freeze(zones);
+}
+/** Signed side wind (m/s, + is to the right) at distance s. Pure lookup (binary search), safe for snapshots. */
+export function windAt(zones, s) {
+  if (!zones?.length) return 0;
+  let lo = 0, hi = zones.length - 1, i = -1;
+  while (lo <= hi) { const mid = (lo + hi) >> 1; if (zones[mid].s0 <= s) { i = mid; lo = mid + 1; } else hi = mid - 1; }
+  const z = zones[i]; if (!z || s > z.s1) return 0;
+  return z.dir * z.speed * Math.max(0, Math.min(1, (s - z.s0) / WIND_EASE, (z.s1 - s) / WIND_EASE));
+}
+/** The next gust that has not started at s (for the HUD warning), or null. */
+export function nextWind(zones, s, within = 60) {
+  if (!zones?.length) return null;
+  for (const z of zones) if (z.s0 > s) return z.s0 - s <= within ? { dir: z.dir, speed: z.speed, inM: Math.round(z.s0 - s) } : null;
+  return null;
 }
 
 /** Rock collision height: the snow-capped dome reaches about 0.4 + 0.65r. */

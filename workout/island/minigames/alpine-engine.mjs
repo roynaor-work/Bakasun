@@ -1,4 +1,4 @@
-import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt} from './alpine-track.mjs?v=island-v2-20261107-12';
+import {generateCourse,rockClearance,courseRandom,pipeProfile,surfaceHeight,wallAngle,curvatureAt,windAt,nextWind,WIND_EASE} from './alpine-track.mjs?v=island-v2-20261107-12';
 
 /** Alpine Rush race engine (CONTRACT.ts SkiEngine, extended). Pure: no DOM, Three.js, audio or Date.
  * Physics advance only in fixed 1/60 s ticks through an accumulator, so the same seed and the
@@ -36,11 +36,22 @@ function boardHitsCircle(dx, ds, hx, hs, r) {
 export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {}, power = 1, course: courseOverride = null }) {
   // Purchased equipment and the game level apply to the player only, within configured tracks.
   const wax = clamp(Number(equipment.wax) || 1, 1, 1.1), tankSize = clamp(Number(equipment.tank) || 1, 1, 1.5), recharge = clamp(Number(power) || 1, 1, 1.2);
+  // Ski league v23 gear, player only: the helmet shortens a fall and softens its speed loss, goggles cut the side wind and make a gate fill
+  // more of the tank. Both are 1 (no effect) unless the league passes them, so the three existing stages are unchanged.
+  const helmet = clamp(Number(equipment.helmet) || 1, 1, 1.3), goggles = clamp(Number(equipment.goggles) || 1, 1, 1.4);
   const physics = balance.physics, step = physics.fixedStep, pipe = pipeProfile(physics), tricks = physics.tricks;
   const { level, track } = alpineTrack(balance, stage);
   // courseOverride exists for rule tests only (hand-placed obstacles); the game always generates.
   const course = courseOverride || generateCourse(track, physics);
-  const objects = course.objects;
+  const objects = course.objects, windZones = course.wind?.length ? course.wind : null, gatesTotal = objects.filter(o => o.type === 'gate').length;
+  let finalOrder = null;
+  /** Side wind felt by a rider at its position (league courses only). Each rider walks the zones with its own cursor. */
+  function windFor(r) {
+    while (r.windCursor < windZones.length && windZones[r.windCursor].s1 < r.s) r.windCursor++;
+    const z = windZones[r.windCursor]; if (!z || r.s < z.s0) return 0;
+    return z.dir * z.speed * Math.max(0, Math.min(1, (r.s - z.s0) / WIND_EASE, (z.s1 - r.s) / WIND_EASE));
+  }
+  const fallScale = r => r.ai ? 1 : 1 / helmet, lossScale = r => r.ai ? 1 : 1 - (helmet - 1) / 2;
   let phase = 'menu', countdownShown = 0, resumePhase = null, accumulator = 0, ticks = 0, countdownTicks = 0, run = 0, disposed = false;
   const bumpUntil = new Map();
   let riders = [], events = [], eventSeq = 0, result = null, steerInput = 0, boostRequest = false, trickRequest = null, order = [], previousPresentation = null;
@@ -57,7 +68,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       ramp: null, seen: new Map(), hits: new Set(), pads: new Set(), gates: new Set(), coins: new Set(), cursor: 0,
       trick: null, airScore: 0, airTricks: 0, lastTrick: null, trickScore: 0, crashes: 0, trickDecideIn: 0,
       finished: false, finishTicks: 0, peak: 0, collisions: 0,
-      decideIn: 0, targetX: grid.x,
+      decideIn: 0, targetX: grid.x, windCursor: 0,
     };
   }
 
@@ -66,7 +77,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     aiRandom.value = courseRandom((Number(seed) >>> 0) ^ Math.imul(run, 0x9e3779b1));
     riders = RIDER_IDS.map(makeRider);
     bumpUntil.clear(); accumulator = 0; ticks = 0; countdownTicks = Math.round(physics.countdownSeconds / step);
-    result = null; steerInput = 0; boostRequest = false; trickRequest = null; resumePhase = null;
+    result = null; finalOrder = null; steerInput = 0; boostRequest = false; trickRequest = null; resumePhase = null;
     order = riders.map(r => r.id);
     previousPresentation = null;
     phase = 'countdown';
@@ -194,9 +205,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     // Hitting a rock is a fall for the player and every rival: the rider tumbles, loses most of the
     // speed and cannot steer or boost until up again. A gate post stays a bump.
     // physics.fall: a ramp wall or a gate post is a real (shorter) fall too, with its own duration and speed loss.
-    const fallCfg = !rock && physics.fall ? physics.fall[object.type] : null, seconds = fallCfg ? fallCfg.seconds : physics.crashSeconds;
+    const fallCfg = !rock && physics.fall ? physics.fall[object.type] : null, seconds = (fallCfg ? fallCfg.seconds : physics.crashSeconds) * fallScale(r);
     if (rock || fallCfg) {
-      r.crashes++; r.speed *= 1 - (fallCfg ? fallCfg.loss : physics.crashSpeedLoss); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds;
+      r.crashes++; r.speed *= 1 - (fallCfg ? fallCfg.loss : physics.crashSpeedLoss) * lossScale(r); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds;
       r.boostTime = 0; r.padTime = 0; r.trick = null; r.airScore = 0; r.airTricks = 0;
     } else { r.speed *= 1 - physics.hitSpeedLoss; r.hitTime = physics.recoverySeconds; r.grace = physics.hitGraceSeconds; }
     r.glideT = 0;
@@ -220,7 +231,8 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     const kind = r.airKind; r.airKind = null;
     if (r.trick && r.trick.t < r.trick.duration * physics.trickLandWindow) {
       // An unfinished trick on landing is a fall: a big slowdown and a longer recovery.
-      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss; r.hitTime = physics.crashSeconds; r.crashTime = physics.crashSeconds; r.crashDur = physics.crashSeconds; r.grace = physics.crashSeconds; r.glideT = 0;
+      const seconds = physics.crashSeconds * fallScale(r);
+      r.crashes++; r.speed *= 1 - physics.crashSpeedLoss * lossScale(r); r.hitTime = seconds; r.crashTime = seconds; r.crashDur = seconds; r.grace = seconds; r.glideT = 0;
       emit('crash', { riderId: r.id, objectId: r.trick.id }); r.trick = null; r.airScore = 0; r.airTricks = 0;
       return;
     }
@@ -263,7 +275,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
           }
         }
         if (prevS < o.s && r.s >= o.s && !r.gates.has(o.id) && !r.hits.has(o.id) && Math.abs(dx) < physics.gateHalfWidth - physics.postHalf[0] - board.halfWidth) {
-          r.gates.add(o.id); r.tank = Math.min(1, r.tank + physics.gateCharge);
+          r.gates.add(o.id); r.tank = Math.min(1, r.tank + physics.gateCharge * (r.ai ? 1 : goggles));
           emit('gate', { riderId: r.id, objectId: o.id });
         }
       } else if (o.type === 'boost') {
@@ -289,11 +301,14 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
       if (r.airborne) { r.vy -= physics.gravity * dt; r.alt += r.vy * dt; if (r.alt <= surfaceHeight(r.x, pipe)) { r.alt = surfaceHeight(r.x, pipe); r.airborne = false; r.trick = null; r.vy = 0; } }
       return;
     }
+    // League courses only: the side wind here (goggles soften it for the player; a rider who is down drifts a little).
+    const wind = windZones ? windFor(r) * (r.ai ? 1 : 1 / goggles) * (r.crashTime > 0 ? .3 : 1) : 0;
     if (r.ai) {
       r.decideIn -= dt; if (r.decideIn <= 0) aiDecide(r);
       // Feed-forward against the turn's outward push, then a proportional pull to the chosen line.
       const lean = curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush / (physics.lateralResponse * physics.lateralSpeed);
-      r.steer = clamp((r.targetX - r.x) * 0.7 + lean, -1, 1);
+      // In wind the computer leans into the gust too, not quite fully (ai.windComp, default 0.85).
+      r.steer = clamp((r.targetX - r.x) * 0.7 + lean - (wind ? (r.ai.windComp ?? .85) * wind / physics.lateralSpeed : 0), -1, 1);
       if (r.wantsBoost) { r.wantsBoost = false; if (r.crashTime <= 0) startBoost(r); }
       if (r.airborne) aiTrick(r);
     } else {
@@ -340,7 +355,9 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
     // toward the outer wall, and airborne riders have reduced (pipe air: no) control.
     if (r.airKind !== 'pipe') {
       const control = r.airborne ? (r.airCap > 0 && physics.airBoost?.control ? physics.airBoost.control : physics.airControl) : Math.cos(angle);
-      r.vx += (r.steer * physics.lateralSpeed * (1 - (physics.lateralBoostDamp ?? 0) * clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1)) - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
+      const lateral = r.steer * physics.lateralSpeed * (1 - (physics.lateralBoostDamp ?? 0) * clamp((r.speed - physics.baseSpeed) / Math.max(1e-6, physics.boostSpeed - physics.baseSpeed), 0, 1));
+      // Wind shifts the line a rider holds: with the stick centred the board drifts at the gust's speed.
+      r.vx += ((wind ? lateral + wind : lateral) - r.vx) * Math.min(1, physics.lateralResponse * control * dt);
       if (!r.airborne) {
         if (onWall) r.vx -= Math.sign(r.x) * physics.wallGravity * Math.sin(angle) * dt;
         r.vx -= curvatureAt(course.path, r.s) * r.speed * r.speed * physics.turnPush * dt;
@@ -415,6 +432,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
 
   function finishRace(completed) {
     const player = riders[0], ranked = standings(), rank = ranked.indexOf(player) + 1;
+    finalOrder = ranked.map(r => r.id);
     const elapsedMs = Math.round((completed ? player.finishTicks : ticks) * step * 1000);
     const coins = player.coins.size, reward = alpineReward(balance, stage, rank, completed, coins);
     result = Object.freeze({
@@ -528,8 +546,16 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         trickReady: p.airborne && !p.trick && p.crashTime <= 0,
         score: p.trickScore, coins: p.coins.size, coinTotal: course.coins || 0,
         trackLength: course.length,
+        // League courses: the side wind at the player (m/s, + right) and the next gust within 60 m, for the HUD.
+        ...(windZones ? { wind: { v: +windAt(windZones, p.s).toFixed(3), next: nextWind(windZones, p.s) } } : {}),
         ...(result ? { result: { ...result } } : {}),
       };
+    },
+    /** Ski league v23: what a league result needs beyond the island race summary: the finishing order of all six riders (taken when
+     * the race ended) and the gates the player went through. Read-only. */
+    leagueStats() {
+      const p = riders[0];
+      return { order: finalOrder ? [...finalOrder] : standings().map(r => r.id), gates: p ? p.gates.size : 0, gatesTotal, crashes: p ? p.crashes : 0 };
     },
     /** Read-only render timing, deliberately separate from the canonical SkiFrame. */
     presentation() {

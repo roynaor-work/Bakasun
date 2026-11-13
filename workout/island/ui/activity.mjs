@@ -216,6 +216,7 @@ export class ActivityInterface {
       }
     }
     if(id==='islandRacing'&&this.leagueOn())this.racingLeagueCard(outer);
+    if(id==='alpineRush'&&this.alpineLeagueOn())this.alpineLeagueCard(outer);
     for(const bonus of this.data.config.minigames.starBonuses)dialog.append(el('p','',this.t('minigame.starBonus',{stars:bonus.stars,level:bonus.upgradeLevel})));
     if(id==='soccer'&&this.data.config.minigames.soccer.league?.leagues?.length){outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));return;}
     const map=el('div','stage-map');
@@ -241,12 +242,12 @@ export class ActivityInterface {
     const render=()=>{toggle.checked=right;text.textContent=this.t(right?'soccer.leftStick':'soccer.rightStick');};
     toggle.onchange=()=>{right=toggle.checked;try{localStorage.setItem(c.handednessKey,right?'right':'left');}catch{}render();};render();label.append(toggle,text);return label;
   }
-  intro(id,eventId,stage) {
+  intro(id,eventId,stage,rescue) {
     if(id==='navalDuel')ensureNavalTheme();
     const game=this.engine.registry.minigames.get(id),dialog=this.modal(game.title,'minigame.subtitle',eventId);
     dialog.dataset.intro=id;
     {const opening=kitIntro(id);if(opening){const card=el('div','island-kit ik-opening ik-opening-small');card.append(opening);dialog.append(card);}}
-    dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
+    dialog.append(this.helpLines(id),this.playButton(id,'game-understood',()=>{this.activity.instructions(id);this.launch(id,eventId,stage,undefined,rescue);}),button(this.t('minigame.helpAgain'),'game-help-again',()=>this.narrateHelp(id)));
     this.narrateHelp(id);
   }
   start(id,eventId,stage) {
@@ -293,6 +294,8 @@ export class ActivityInterface {
     const eventBonuses=eventId?this.activity.bonuses():{};
     if(rescue.lite||isLowQuality())context.lite=true;
     if(rescue.league&&id==='islandRacing'){context.league=true;const next=this.engine.racingLeague.next();if(next){heading.textContent=`ליגה · מרוץ ${next.race+1}${next.total?` מתוך ${next.total}`:''} · ${next.track}${next.tags?.length?' · '+next.tags.join(' · '):''}`;dialog.dataset.stage=next.stage;dialog.dataset.league='true';}}
+    // Ski league (v23): league stage n runs as game stage 3 + n; the engine builds the run from the league, not from the stage map.
+    if(rescue.alpineLeague&&id==='alpineRush'){context.alpineLeague=rescue.alpineLeague;const s=this.engine.alpineLeague?.stage(rescue.alpineLeague);if(s){heading.textContent=`ליגת הסקי · שלב ${s.number} · ${s.name}`;dialog.dataset.stage=s.number;dialog.dataset.alpineLeague=String(s.n);}}
     const response=this.engine.startMinigame(id,{...context,bonuses:{...context.bonuses,...eventBonuses},config:this.data.config.minigames,canvas,controls,status,dialog,gauges,warning,turnLabel,novaButton,spreadButton,ammoButtons,fleetMeters,upgradePanel,upgradeButtons,gameId:id,t:this.t,sound:event=>this.sound.play(event),onUpgrade:ranks=>this.saveAlienUpgrades(ranks),
       onFireSummary:summary=>{fireSummary=summary;},onRacingSummary:summary=>{racingSummary=summary;},onAlpineSummary:summary=>{alpineSummary=summary;},onError:reason=>this.ui.toast(reason),
       onFinish:result=>{
@@ -317,7 +320,7 @@ export class ActivityInterface {
    * and the same game again with the same stage, drill and event. Attempt 2 offers the light version,
    * attempt 3 clears only this game's asset cache. Saves and localStorage are never touched. */
   async rescueRestart({id,eventId,stageNumber,drill,rescue},kind){
-    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{})};
+    const key=RESCUE_GAMES[id],next={attempts:rescue.attempts+1,lite:rescue.lite||kind==='lite',...(rescue.league?{league:true}:{}),...(rescue.alpineLeague?{alpineLeague:rescue.alpineLeague}:{})};
     this.closing=true;
     try{this.fpsStop?.();this.rescueWatch?.stop();this.rescueWatch=null;const current=this.current;this.current=null;current?.cancel();this.shell?.dispose();this.shell=null;}finally{this.closing=false;}
     let count=0;
@@ -331,6 +334,7 @@ export class ActivityInterface {
   }
   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
     if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}
+    if(id==='alpineRush'&&result.alpineLeague){this.alpineLeagueResult(result,alpineSummary);return;}
     if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return;}
     const game=this.engine.registry.minigames.get(id);
     this.ui.modalCleanup=null;
@@ -393,6 +397,35 @@ export class ActivityInterface {
   racingLeagueResult(result){
     this.ui.modalCleanup=null;this.sound.play(result.outcome==='win'?'win':'lose');
     this.racingLeagueScreen('result',result);
+    this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
+  }
+  /** Ski league (ui/alpine-league.mjs, loaded on first use). ?alpineLeague=0 removes every entry point: the ski game is then v22.1. */
+  alpineLeagueOn(){return Boolean(this.engine.alpineLeague?.enabled())&&this.data.featureFlags.minigames;}
+  alpineLeagueModule(){return this.alpineLeagueLoad??=import('./alpine-league.mjs?v=island-v2-20261107-12').catch(error=>{this.alpineLeagueLoad=null;throw error;});}
+  alpineLeagueActions(){return {go:n=>this.alpineLeagueGo(n),season:()=>this.alpineLeagueScreen('season'),shop:()=>this.alpineLeagueScreen('shop'),refresh:()=>this.stages('alpineRush')};}
+  alpineLeagueGo(n){
+    if(this.requireBuilding('alpineRush'))return;
+    const setup=this.engine.alpineLeague?.setup(n);if(!setup)return;
+    const rescue={attempts:0,lite:false,alpineLeague:setup.n};
+    if(!this.engine.state.instructionsSeen.includes('alpineRush')){this.intro('alpineRush',undefined,undefined,rescue);return;}
+    this.launch('alpineRush',undefined,undefined,undefined,rescue);
+  }
+  alpineLeagueCard(outer){
+    this.alpineLeagueModule().then(m=>{if(!outer.isConnected)return;const card=m.leagueCard({engine:this.engine,...this.alpineLeagueActions()});outer.querySelector('.modal-subtitle')?.after(card);}).catch(()=>{});
+  }
+  alpineLeagueScreen(kind,result,summary){
+    this.alpineLeagueModule().then(m=>{
+      const dialog=this.modal('minigame.alpineRush.title','minigame.subtitle');dialog.dataset.alpineLeagueScreen=kind;
+      const titles={season:'ליגת הסקי · עונה וטבלה',shop:'ליגת הסקי · ציוד',result:'ליגת הסקי · תוצאת השלב'};
+      const heading=dialog.querySelector('h2'),subtitle=dialog.querySelector('.modal-subtitle');if(heading)heading.textContent=titles[kind];if(subtitle)subtitle.hidden=true;
+      const actions=this.alpineLeagueActions(),again=()=>this.alpineLeagueGo(result?.alpineLeague?.n);
+      const body=kind==='shop'?m.shopBody({engine:this.engine,refresh:()=>this.alpineLeagueScreen('shop')}):kind==='result'?m.resultBody({engine:this.engine,result,summary,...actions,again}):m.seasonBody({...actions,engine:this.engine,refresh:()=>this.alpineLeagueScreen('season')});
+      dialog.append(body,button('חזרה לליגה','alpine-league-back',()=>this.stages('alpineRush'),'adventure-back'));
+    }).catch(()=>this.ui.result({ok:false,reason:'reason.gameStart'}));
+  }
+  alpineLeagueResult(result,summary){
+    this.ui.modalCleanup=null;this.sound.play(result.outcome==='win'?'win':'lose');
+    this.alpineLeagueScreen('result',result,summary);
     this.engine.narration.announce(result.outcome==='win'?'minigame.win':'minigame.lose');
   }
   alpineResult(dialog,summary,a){

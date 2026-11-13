@@ -1,0 +1,55 @@
+/* Ski league screens (ui/alpine-league.mjs). Snow white and ice blue, each theme's accent (--al-accent) on its chips and stages.
+ * Right-to-left, 56px targets, numbers as LTR islands. */
+.al-card,.al-season,.al-shop,.al-result{display:grid;gap:10px;text-align:right;margin:8px 0;padding:12px;border-radius:14px;background:#f7fbff;border:1px solid #c9dcea;color:#173b52;--al-accent:#3f8f5a}
+.al-card{background:linear-gradient(135deg,#ffffff 0,#eaf4fb 100%);border-color:#8fb3cc;box-shadow:0 0 0 3px color-mix(in srgb,var(--al-accent) 22%,transparent)}
+.al-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.al-head h3,.al-season h4,.al-result h4{margin:0;font-size:1.05rem}
+.al-coins,.al-coins-bar{padding:4px 12px;border-radius:999px;background:#fff0c9;color:#7a5314;font-weight:800;font-size:.9rem;margin:0}
+.al-line{margin:0;font-size:.9rem;line-height:1.5}.al-big{font-size:1.02rem;font-weight:800}.al-note{margin:0;font-size:.78rem;opacity:.75}
+.al-next{display:grid;gap:4px;padding:8px 10px;border-radius:12px;background:#ffffffd9;border-inline-start:5px solid var(--al-accent)}
+.al-goals{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}.al-goals li{font-size:.82rem;font-weight:700;padding:2px 9px;border-radius:999px;background:color-mix(in srgb,var(--al-accent) 14%,#fff);border:1px solid color-mix(in srgb,var(--al-accent) 45%,#fff)}
+.al-rival .al-chip{margin:0 2px}
+.al-chip{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #0003;vertical-align:middle}
+.al-themes{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.al-theme{flex:0 0 auto;display:grid;gap:1px;min-height:56px;min-width:112px;padding:6px 10px;border-radius:12px;border:2px solid color-mix(in srgb,var(--al-accent) 55%,#fff);background:#fff;color:#173b52;text-align:right;font:inherit}
+.al-theme b{font-size:.9rem}.al-theme small{font-size:.75rem;opacity:.8}
+.al-theme[aria-selected=true]{background:var(--al-accent);color:#fff;border-color:var(--al-accent)}
+.al-theme:disabled{opacity:.5}
+.al-stages{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.al-stage-button{width:100%;min-height:76px;display:grid;justify-items:center;align-content:center;gap:1px;padding:6px 4px;border-radius:12px;border:2px solid #d5e3ee;background:#fff;color:#173b52;font:inherit}
+.al-stage[data-state=done] .al-stage-button{border-color:var(--al-accent);background:color-mix(in srgb,var(--al-accent) 10%,#fff)}
+.al-stage[data-state=next] .al-stage-button{border-color:#e08a2b;background:#fff4e2;box-shadow:0 0 0 2px #e08a2b55}
+.al-stage[data-boss=true] .al-stage-button{border-style:double;border-width:4px}
+.al-stage-button:disabled{opacity:.55}
+.al-stage-no{font-weight:900;font-size:1.25rem;line-height:1}.al-stage-name{font-size:.75rem;font-weight:700}.al-stage-best{font-size:.68rem;direction:ltr;opacity:.75}.al-lock{font-size:.72rem;opacity:.75}
+.al-stars{display:flex;gap:1px;direction:ltr}.al-stars i{font-style:normal;color:#c9d3db;font-size:.95rem;line-height:1}.al-stars i.on{color:#f2b51c;text-shadow:0 1px 1px #8a5a0055}
+.al-actions{display:flex;flex-wrap:wrap;gap:8px}.al-actions button{flex:1 1 140px;min-height:56px}.al-actions .primary-button{flex:2 1 200px}
+.al-table{width:100%;border-collapse:collapse;font-size:.95rem}.al-table th,.al-table td{padding:5px 6px;border-bottom:1px solid #0002;text-align:right;vertical-align:middle}
+.al-table th{font-size:.75rem;color:#4f6b73;font-weight:700}.al-table tr.mine{font-weight:900;background:#ffd84a55;font-size:1.05rem}
+.al-place{width:1.6em;font-weight:900;color:#2c6c94}.al-pts{font-weight:900;font-size:1.1rem;text-align:left}
+.al-theme-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}.al-theme-row{display:grid;gap:2px;padding:8px 10px;border-radius:10px;background:#eef5fa;border-inline-start:5px solid var(--al-accent)}.al-theme-row[data-open=false]{opacity:.6}.al-theme-row span{font-size:.82rem}.al-theme-row em{font-style:normal;font-weight:800;font-size:.85rem}
+.al-part{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:10px;border-radius:12px;background:#f3f8fc;border:1px solid #d5e3ee}
+.al-part-name{font-size:1rem}.al-part-what{grid-column:1;font-size:.85rem;opacity:.85}.al-part .primary-button{grid-column:2;grid-row:1/span 3;min-width:150px;min-height:56px}
+.al-pips{display:flex;gap:4px;direction:ltr;justify-content:flex-end}.al-pips i{width:22px;height:8px;border-radius:4px;background:#d5dfe6}.al-pips i.on{background:#2c86c4}
+.al-result-top{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.al-result-top .al-stars i{font-size:1.6rem}
+.al-medal{display:grid;place-items:center;width:78px;height:78px;border-radius:50%;font-size:2.2rem;font-weight:900;background:#e9eef0;border:5px solid #9bb0b6;color:#37525a}
+.al-medal[data-place="1"]{background:#ffe29a;border-color:#d4a62b;color:#6b4b05}.al-medal[data-place="2"]{background:#eef1f3;border-color:#aab4ba}.al-medal[data-place="3"]{background:#f3d9c0;border-color:#b5763b;color:#5d3512}
+.al-goal-check{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.al-goal-check li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:6px 10px;border-radius:10px;background:#fff;border:2px solid #d5e3ee}
+.al-goal-check li[data-ok=true]{border-color:#3fb56b;background:#effaf2}.al-goal-check li[data-ok=false]{border-color:#e3a5a3;background:#fff4f3}
+.al-check{font-weight:900;font-size:1.1rem}.al-goal-check li[data-ok=true] .al-check{color:#1f8a4c}.al-goal-check li[data-ok=false] .al-check{color:#c0392b}
+.al-goal-check em{font-style:normal;font-weight:800;font-size:.85rem;unicode-bidi:isolate}
+.al-rows{display:grid;gap:4px}.al-rows .result-row{display:flex;justify-content:space-between;margin:0}
+.al-podium{display:grid;gap:8px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#fff6dc 0,#ffe9b0 100%);border:1px solid #e0b858}
+.al-podium-row{display:flex;align-items:flex-end;justify-content:center;gap:8px;direction:ltr}
+.al-step{display:grid;gap:3px;justify-items:center;align-content:end;width:31%;max-width:150px;padding:8px 6px 6px;border-radius:12px 12px 4px 4px;background:#e9eef0;border:1px solid #9bb0b6;direction:rtl;font-weight:800}
+.al-step b{font-size:1.8rem;line-height:1}.al-step.place-1{min-height:104px;background:#ffe29a;border-color:#d4a62b}.al-step.place-2{min-height:86px}.al-step.place-3{min-height:74px;background:#f3d9c0;border-color:#b5763b}.al-step.you{outline:3px solid #2c86c4;outline-offset:1px}
+@media(orientation:landscape) and (max-height:600px){
+  .al-card,.al-season,.al-shop,.al-result{padding:8px;gap:6px}
+  .al-stage-button{min-height:62px}.al-stage-no{font-size:1.05rem}
+  .al-actions button{min-height:48px}
+  .al-result{grid-template-columns:1fr 1fr;align-items:start}.al-result>.al-actions{grid-column:1/-1}.al-result>.al-table{grid-column:2;grid-row:1/span 3}
+  .al-shop{grid-template-columns:repeat(3,minmax(0,1fr))}.al-shop>.al-coins-bar,.al-shop>.al-line{grid-column:1/-1}.al-part{grid-template-columns:1fr}.al-part .primary-button{grid-column:1;grid-row:auto;min-width:0}
+}
+@media(prefers-reduced-motion:no-preference){.al-stage[data-state=next] .al-stage-button{animation:al-pulse 2.4s ease-in-out infinite}@keyframes al-pulse{50%{box-shadow:0 0 0 5px #e08a2b33}}}

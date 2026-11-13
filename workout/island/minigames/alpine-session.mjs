@@ -6,6 +6,10 @@ import {createAlpineAudio} from './alpine-audio.mjs?v=island-v2-20261107-12';
 import {loadRecords,recordRun,formatRaceTime} from './alpine-records.mjs?v=island-v2-20261107-12';
 import {createQualityGovernor} from './alpine-quality.mjs';
 import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-12';
+import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-12';
+import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-12';
+import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-12';
+import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-12';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -20,20 +24,43 @@ const TRICK_ICONS = {
   combo: STAR,
 };
 const TRICK_NAMES = {grab: 'GRAB', spin: 'SPIN 360', flip: 'BACKFLIP', combo: 'COMBO'};
+/** League goal icons: finish flag (place), clock (time), slalom gate (gates), shield (no fall). */
+const GOAL_ICONS = {
+  place: '<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>',
+  time: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',
+  gates: '<path d="M6 21V5m12 16V5M6 7h12"/><path d="M6 11h3m6 0h3"/>',
+  clean: '<path d="M12 3 5 6v6c0 4 3 7.5 7 9 4-1.5 7-5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/>',
+};
+const WIND_ICON = '<path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h8"/>';
+/** Goal time as a child reads it: 1:05 or 1:05.5 (goal times are whole half seconds). */
+export const goalClock = ms => { const s = Math.ceil(ms / 500) / 2, m = Math.floor(s / 60), r = s - m * 60; return `${m}:${String(Math.floor(r)).padStart(2, '0')}${r % 1 ? '.5' : ''}`; };
+export function goalText(g) {
+  if (g.kind === 'place') return g.target === 1 ? 'לסיים ראשונים (חובה)' : `לסיים במקום ${g.target} ומעלה (חובה)`;
+  if (g.kind === 'time') return `לסיים עד ${goalClock(g.ms)}`;
+  if (g.kind === 'gates') return `לעבור ${g.count} שערים מתוך ${g.total}`;
+  return 'לגלוש בלי ליפול';
+}
 
 /** Controller for one Alpine Rush session: owns the engine, the view, requestAnimationFrame,
  * input, audio and the HUD. The island engine owns rewards; this file only reports the
  * finished race once through ctx.finish. Without a canvas it runs headless (tests). */
 export function runAlpineSession(ctx) {
+  // Ski league v23: the island engine hands a league run its setup (ctx.alpineLeague: stage, theme, goals, gear); the course, rivals and
+  // speed come from the league balance of that stage. Without it this is the regular game, unchanged.
+  const league = ctx.alpineLeague || null, leagueTheme = league ? THEME_LOOKS[league.theme] : null;
+  const baseBalance = league ? leagueBalance(ctx.balance, league.n) : ctx.balance;
   // ?alpineAir=0 switches the ramp air boost off (before/after captures, instant rollback).
   const urlQuery = new URLSearchParams(globalThis.location?.search || ''), airOff = urlQuery.get('alpineAir') === '0', fallOff = urlQuery.get('alpineFall') === '0', obsOff = urlQuery.get('alpineObs') === '0';
-  const balance0 = (airOff && ctx.balance.physics.airBoost) || (fallOff && ctx.balance.physics.fall) ? {...ctx.balance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(ctx.balance.physics)} : ctx.balance,
+  const balance0 = (airOff && baseBalance.physics.airBoost) || (fallOff && baseBalance.physics.fall) ? {...baseBalance, physics: (({airBoost, fall, ...rest}) => ({...rest, ...(airOff ? {} : {airBoost}), ...(fallOff ? {} : {fall})}))(baseBalance.physics)} : baseBalance,
     // ?alpineObs=0 removes the narrow passages (warning signs come with them).
     balance = obsOff ? {...balance0, tracks: Object.fromEntries(Object.entries(balance0.tracks).map(([k, v]) => [k, (({narrow, ...rest}) => rest)(v)]))} : balance0, stageNumber = ctx.level || 1, t = ctx.t || (key => key);
   const engine = createAlpineEngine({balance, stage: stageNumber, seed: ctx.seed, equipment: ctx.equipment, power: ctx.power});
   const level = engine.level, track = engine.track;
   let storage = null; try { storage = ctx.storage === undefined ? globalThis.localStorage : ctx.storage; } catch {}
   const records = loadRecords(storage, balance.records);
+  // League: the record run of this stage rides along as a ghost, and this run is recorded to become the next ghost if it is faster.
+  const ghostTrack = league ? loadGhost(storage, league.n) : null, ghostRecorder = league ? createGhostRecorder() : null;
+  let ghostOutcome = null;
   let audio; try { audio = createAlpineAudio({storage}); } catch { audio = createAlpineAudio({storage: null, AudioContext: null}); }
   let kitHud=null;
   let view = null, input = null, frame, last = 0, paused = false, disposed = false, finished = false, renderError = null, loadTimer, quality = 'high';
@@ -57,7 +84,8 @@ export function runAlpineSession(ctx) {
     get snapshot() {
       return {phase: engine.phase, paused, disposed, loaded: Boolean(view), error: renderError, quality, stage: stageNumber, trackId: track.id,
         frame: disposed ? null : engine.snapshot(), records: {status: records.status, best: records.data.best[track.id] || null}, recordOutcome,
-        renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), qualityGovernor: governor?.metrics() ?? null, input: input ? {enabled: input.enabled, dragging: input.dragging} : null};
+        renderMetrics: view?.metrics(), audioMetrics: audio.metrics(), qualityGovernor: governor?.metrics() ?? null, input: input ? {enabled: input.enabled, dragging: input.dragging} : null,
+        ...(league ? {league: {n: league.n, theme: league.theme, boss: league.boss, goals: league.goals, ghost: ghostTrack ? {ms: ghostTrack.ms} : null, ghostOutcome, speed: balance.league?.speed ?? 1}} : {})};
     },
   };
   const ready = () => !ctx.canvas || Boolean(view);
@@ -78,7 +106,7 @@ export function runAlpineSession(ctx) {
   const app = el('div', 'alpine-app'); app.dataset.phase = 'menu';
   const vignette = el('div', 'alpine-vignette');
   const brand = el('div', 'alpine-brand'); brand.setAttribute('aria-hidden', 'true'); brand.append(svg(BRAND, '0 0 40 32'), ltr('ALPINE')); brand.lastChild.append(el('span', 'alpine-brand-light', 'RUSH'));
-  const trackName = t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
+  const trackName = league ? league.name : t(track.name), trackNumber = String(track.number).padStart(2, '0'), km = (track.length / 1000).toLocaleString('he-IL', {maximumFractionDigits: 2});
   // HUD
   const hud = el('section', 'alpine-hud'); hud.setAttribute('aria-label', t('alpine.hud'));
   const rank = el('strong', 'alpine-rank', '06'), position = el('div', 'alpine-position'), of = el('span', 'alpine-of'); of.append(ltr('/ 06'), el('small', '', t('alpine.position')));
@@ -92,6 +120,16 @@ export function runAlpineSession(ctx) {
   scoreBox.append(svg(STAR), scoreValue); scoreBox.setAttribute('aria-label', t('alpine.score')); coinBox.append(svg(COIN), coinValue); coinBox.setAttribute('aria-label', t('alpine.coins'));
   tally.append(scoreBox, coinBox);
   hud.append(position, info, time, tally);
+  // League HUD: the three goals live (place, time, gates or a clean run), the gap to the record ghost and the side wind.
+  let goalNodes = null, ghostGap = null, windCue = null;
+  if (league) {
+    const goalBar = el('div', 'alpine-league-goals'); goalBar.setAttribute('aria-label', 'יעדי השלב'); goalNodes = {};
+    for (const g of league.goals) { const node = el('span', 'alpine-goal'); node.dataset.goal = g.kind; node.append(svg(GOAL_ICONS[g.kind]), el('b')); goalNodes[g.kind] = {node, value: node.lastChild, goal: g, shown: ''}; goalBar.append(node); }
+    ghostGap = el('span', 'alpine-ghost-gap'); ghostGap.hidden = true; time.append(ghostGap);
+    windCue = el('div', 'alpine-wind'); windCue.setAttribute('role', 'status'); windCue.hidden = true;
+    hud.append(goalBar, windCue);
+    screen.dataset.alpineLeague = league.theme; screen.style.setProperty('--league-accent', leagueTheme?.accent || '#3f8f5a');
+  }
   // Opening card
   const intro = el('section', 'alpine-intro'); intro.setAttribute('aria-label', t('alpine.opening'));
   const title = el('h1', 'alpine-title'); title.dir = 'ltr'; title.append('ALPINE', el('br'), el('em', '', 'RUSH.'));
@@ -109,8 +147,19 @@ export function runAlpineSession(ctx) {
   const themeButtons = ['classic', 'codex'].map(id => { const b = el('button', 'alpine-theme'); b.type = 'button'; b.dataset.theme = id; b.dataset.action = 'alpine-theme'; b.setAttribute('role', 'radio'); b.setAttribute('aria-label', t(`alpine.theme.${id}`)); b.title = t(`alpine.theme.${id}`); b.append(el('i'), el('i')); themes.append(b); return b; });
   const setTheme = id => { theme = id; screen.dataset.alpineTheme = id; for (const b of themeButtons) b.setAttribute('aria-checked', String(b.dataset.theme === id)); };
   for (const b of themeButtons) b.addEventListener('click', () => { setTheme(b.dataset.theme); try { storage?.setItem(THEME_KEY, theme); } catch {} }, {signal: abort.signal});
-  intro.append(el('span', 'alpine-eyebrow', 'THE MOUNTAIN IS YOURS'), title, el('p', 'alpine-tagline', t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine, themes);
+  if (league) {
+    // League opening: the theme and the place in it, the three goals (a star each), the record of this stage.
+    cardText.replaceChildren(el('b', '', trackName), el('small', '', `ליגת הסקי · שלב ${league.number} · ${km} ק״מ${league.boss ? ' · מסלול ארוך' : ''}`));
+    bestLine.replaceChildren(); if (best) bestLine.append('השיא שלך בשלב: ', ltr(formatRaceTime(best.ms)), ghostTrack ? ' · רוח הרפאים של השיא גולשת איתך' : ''); else bestLine.textContent = 'עוד אין שיא בשלב הזה';
+  }
+  const eyebrow = league ? `${league.themeName} · ${league.boss ? 'שלב בוס' : `שלב ${league.index} מתוך 5`}` : 'THE MOUNTAIN IS YOURS';
+  intro.append(el('span', 'alpine-eyebrow', eyebrow), title, el('p', 'alpine-tagline', league ? (THEMES.find(x => x.id === league.theme)?.line || '') + (league.boss ? ' · מסלול ארוך ונקודות כפולות' : '') : t('alpine.tagline')), startButton, el('span', 'alpine-start-note', t('alpine.startNote')), card, bestLine, themes);
   enhanceAlpineOpening({intro,doc});
+  if (league) {
+    const list = el('ol', 'alpine-league-goal-list'); list.setAttribute('aria-label', 'שלושה יעדים, כוכב לכל יעד');
+    for (const g of league.goals) { const li = el('li'); li.dataset.goal = g.kind; li.append(svg(GOAL_ICONS[g.kind]), el('span', '', goalText(g))); list.append(li); }
+    (intro.querySelector('.alpine-screen-meta') || intro).prepend(list);
+  }
   const worldLabel = el('div', 'alpine-world-label'); worldLabel.setAttribute('aria-hidden', 'true'); worldLabel.append(el('span', '', '46°35′ N   08°02′ E'), el('b', '', 'ABOVE THE ORDINARY.'), el('span', '', '2,840 M / ALPINE CIRCUIT'));
   const countdown = el('div', 'alpine-countdown'); countdown.setAttribute('aria-live', 'assertive');
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
@@ -145,6 +194,7 @@ export function runAlpineSession(ctx) {
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);
   dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, cleanCss, app]};
+  if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-12', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
   setPhase('menu');
@@ -167,7 +217,7 @@ export function runAlpineSession(ctx) {
   const modelUrl = params.get('alpineModel') === 'missing' ? new URL('../assets/missing-alpine-rider.glb', import.meta.url).href : undefined;
   const loadStart = performance.now();
   loadTimer = setTimeout(() => { if (!view && !disposed) { renderError = 'timeout'; saveGameReport('alpine', {status: 'failed', ms: performance.now() - loadStart, lines: ['failed: timeout 25 s']}); fail(t('alpine.loadSlow')); } }, 25000);
-  import('./alpine-view.mjs?v=island-v2-20261107-12').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {})})).then(async loaded => {
+  import('./alpine-view.mjs?v=island-v2-20261107-12').then(({createSkiView}) => createSkiView(stage, {canvas, quality, maxPlayerSpeedKmh, course: engine.course, physics: balance.physics, visual: track.visual, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, isDisposed: () => disposed, v7: balance.assets?.v7, ...(modelUrl ? {modelUrl} : {}), ...(ghostTrack ? {ghost: ghostTrack} : {})})).then(async loaded => {
     await audio.ready;
     // A view that arrives after exit is released at once and never attached.
     if (disposed || renderError) { loaded.dispose(); return; }
@@ -220,6 +270,28 @@ export function runAlpineSession(ctx) {
     coinBox.classList.toggle('pulse', snap.timeMs / 1000 < coinPulse);
     const ready = String(!!snap.trickReady); for (const b of trickButtons) if (b.dataset.ready !== ready) b.dataset.ready = ready;
     setData('crashed', String(!!snap.player.crashed));
+    if (goalNodes) updateLeagueHud(snap);
+  }
+  /** League goals while racing: ok (green), lost (red) or still open, from the same numbers the result check uses. */
+  let crashesSeen = 0, gatesSeen = 0, shownGap = '', shownWind = '';
+  function updateLeagueHud(snap) {
+    const racing = snap.phase === 'racing' || snap.phase === 'finished', stats = racing ? engine.leagueStats() : null;
+    if (stats) { gatesSeen = stats.gates; crashesSeen = stats.crashes; }
+    for (const [kind, g] of Object.entries(goalNodes)) {
+      let text = '', state = 'open';
+      if (kind === 'place') { text = `מקום ${snap.rank}/${g.goal.target}`; state = racing ? (snap.rank <= g.goal.target ? 'ok' : 'behind') : 'open'; }
+      else if (kind === 'time') { text = goalClock(g.goal.ms); state = snap.timeMs > g.goal.ms ? 'lost' : racing ? 'ok' : 'open'; }
+      else if (kind === 'gates') { text = `${gatesSeen}/${g.goal.count}`; state = gatesSeen >= g.goal.count ? 'ok' : 'open'; }
+      else { text = crashesSeen ? 'נפילה' : 'נקי'; state = crashesSeen ? 'lost' : racing ? 'ok' : 'open'; }
+      const key = text + state; if (key !== g.shown) { g.shown = key; g.value.textContent = text; g.node.dataset.state = state; }
+    }
+    if (ghostTrack && racing) {
+      const at = ghostTimeAt(ghostTrack, snap.distanceM), gap = at === null ? '' : ((snap.timeMs - at) / 1000).toFixed(1);
+      const text = gap === '' ? '' : `שיא ${Number(gap) > 0 ? '+' : ''}${gap}`;
+      if (text !== shownGap) { shownGap = text; ghostGap.textContent = text; ghostGap.hidden = !text; ghostGap.dataset.ahead = String(Number(gap) <= 0); }
+    }
+    const w = snap.wind, now = w ? (Math.abs(w.v) > .25 ? `רוח ${w.v > 0 ? '→' : '←'}` : w.next ? `רוח בעוד ${w.next.inM} מ׳ ${w.next.dir > 0 ? '→' : '←'}` : '') : '';
+    if (now !== shownWind) { shownWind = now; windCue.replaceChildren(); if (now) windCue.append(svg(WIND_ICON), el('b', '', now)); windCue.hidden = !now; windCue.dataset.active = String(!!w && Math.abs(w.v) > .25); }
   }
 
   function tick(at) {
@@ -239,14 +311,18 @@ export function runAlpineSession(ctx) {
     handleEvents(snap, now);
     if(now>calloutUntil){callout.hidden=true;kitHud.hide();}
     audio.sync(blocked ? 0 : snap.speedKmh, {boosting: snap.player.boosting, carving: Math.abs(snap.player.lean || 0), airborne: snap.player.airborne, crashed:snap.player.crashed});
+    ghostRecorder?.record(snap);
     view.render(snap, engine.presentation()); updateHud(snap);
     if (snap.result && !finished) {
       finished = true;
       const r = snap.result;
       recordOutcome = recordRun(storage, balance.records, records, r);
-      const summary = {...r, trackName, coinTotal: engine.course.coins, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest};
+      // League: a finished run faster than the stored ghost becomes the new ghost of this stage.
+      if (league && r.completed) ghostOutcome = saveGhost(storage, league.n, ghostRecorder.encode(r.elapsedMs));
+      const summary = {...r, trackName, coinTotal: engine.course.coins, bestMs: recordOutcome.best?.ms ?? null, newBest: recordOutcome.newBest, ...(league ? {ghost: {saved: !!ghostOutcome?.saved, previousMs: ghostTrack?.ms ?? null}} : {})};
       ctx.onAlpineSummary?.(summary);
-      const settled = ctx.finish({outcome: r.won ? 'win' : 'lose', score: r.score, alpine: {...r}});
+      const stats = league ? engine.leagueStats() : null;
+      const settled = ctx.finish({outcome: r.won ? 'win' : 'lose', score: r.score, alpine: {...r}, ...(stats ? {league: {order: stats.order, gates: stats.gates}} : {})});
       if (settled && settled.ok === false && !disposed) { ctx.onError?.(settled.reason); ctx.cancel(); }
       return;
     }

@@ -12,9 +12,14 @@ const PACK = ['rock-small', 'rock-large', 'snow-sign', 'mogul', 'ice-wall', 'sta
 
 /** One decode per model, one merged geometry per prop. All geometry is authored
  * design data; this adapter changes placement only and never creates colliders. */
-export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds = false} = {}) {
+export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds = false, assets = null} = {}) {
   const decoder = new DRACOLoader().setDecoderPath(asset('../vendor/draco/')).setDecoderConfig({type: 'wasm'}).setWorkerLimit(2);
   const loader = new GLTFLoader().setDRACOLoader(decoder), textureLoader = new T.TextureLoader();
+  // Ski league v23: a theme may name other files for the same ids (minigames/alpine-league-theme.mjs, ALPINE_THEME_ASSETS, paths from the
+  // island root). An override that fails falls back to the shipped file; without `assets` every path is the shipped one, as before.
+  const pick = (group, id, fallback) => { const p = assets?.[group]?.[id]; return p && '../' + p !== fallback ? '../' + p : null; };
+  const loadModel = (group, id, fallback) => { const o = pick(group, id, fallback); return o ? loader.loadAsync(asset(o)).catch(() => loader.loadAsync(asset(fallback))) : loader.loadAsync(asset(fallback)); };
+  const loadTex = (id, fallback) => { const o = pick('track', id, fallback); return o ? textureLoader.loadAsync(asset(o)).catch(() => textureLoader.loadAsync(asset(fallback))) : textureLoader.loadAsync(asset(fallback)); };
   const geometries = new Set(), materials = new Set(), textures = new Set(), models = {}, worlds = new Set(), powders = new Set();
   let disposed = false;
   const ownGeometry = g => (geometries.add(g), g);
@@ -48,7 +53,7 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   const trackTextures = {}, trackGeometries = {}, pack = {};
   let powderGltf = null;
   async function trackGeometry(id) {
-    const gltf = await loader.loadAsync(asset(`../design/alpine-track/models/${id}.glb`));
+    const gltf = await loadModel('track', id, `../design/alpine-track/models/${id}.glb`);
     try {
       gltf.scene.updateMatrixWorld(true); const parts = [];
       gltf.scene.traverse(n => { if (n.isMesh) parts.push(n.geometry.clone().applyMatrix4(n.matrixWorld)); });
@@ -59,21 +64,21 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
   try {
     const loaded = await Promise.allSettled([
       ...MODELS.map(async id => {
-        const gltf = await loader.loadAsync(asset(`../design/models/${id}.glb`));
+        const gltf = await loadModel('models', id, `../design/models/${id}.glb`);
         if (isDisposed()) { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); throw Object.assign(Error('alpine.disposed'), {disposed: true}); }
         try { models[id] = geometryOf(gltf.scene); if (id === 'ski-slope') models.surface = geometryOf(gltf.scene, 'slope_surface'); if (id === 'slalom-gate') { models.gatePoles = geometryOf(gltf.scene, ['gate_poles', 'gate_feet']); models.gateBanner = geometryOf(gltf.scene, ['gate_banner', 'banner_stripes']); } }
         finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
       }),
       ...[['groomed', 'groomed-snow.webp', true], ['groomedN', 'groomed-normal.webp', false], ['ripples', 'snow-ripples.webp', true]].map(async ([id, file, color]) => {
         try {
-          const t = await textureLoader.loadAsync(asset(`../design/alpine-track/textures/${file}`)); textures.add(t);
+          const t = await loadTex(id, `../design/alpine-track/textures/${file}`); textures.add(t);
           t.colorSpace = color ? T.SRGBColorSpace : T.NoColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.anisotropy = 4; trackTextures[id] = t;
         } catch {}
       }),
       ...['kicker', 'flag-rope'].map(async id => { try { trackGeometries[id] = await trackGeometry(id); } catch {} }),
       ...PACK.map(async id => {
         try {
-          const gltf = await loader.loadAsync(asset(`../design/alpine-world/models/${id}.glb`));
+          const gltf = await loadModel('pack', id, `../design/alpine-world/models/${id}.glb`);
           try { pack[id] = geometryOf(gltf.scene); } finally { gltf.scene.traverse(n => { n.geometry?.dispose(); for (const m of [].concat(n.material || [])) m.dispose(); }); }
         } catch {}
       }),
@@ -275,5 +280,8 @@ export async function loadAlpineWorld({isDisposed = () => false, skipBackgrounds
     };
     powders.add(api); return api;
   }
-  return {snowTexture, trackTextures, gate, createPowder, trackGeometry: id => trackGeometries[id] || null, createArtWorld, prop, slopeSurface, dispose: free, metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size, pack: Object.keys(pack).sort(), powder: !!powderGltf})};
+  return {snowTexture, trackTextures, gate, createPowder, trackGeometry: id => trackGeometries[id] || null, createArtWorld, prop, slopeSurface, dispose: free,
+    /** A loaded pack geometry (shared, owned here: never dispose it) for theme scenery, or null. */
+    packGeometry: id => pack[id] || null, palette,
+    metrics: () => ({loaded: !disposed, models: MODELS.length, textures: textures.size, pack: Object.keys(pack).sort(), powder: !!powderGltf})};
 }

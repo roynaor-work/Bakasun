@@ -48,6 +48,22 @@
 
 מסך: `gameShell.games.alpineRush.orientation` הוא `any`, ולכן אין שכבת סיבוב והכניסה למסך מלא אינה נועלת לרוחב (`FullscreenEntry.enter(orientation)`; משחקי רוחב לא השתנו).
 
+### ליגת הסקי (v23)
+
+30 שלבים בשישה נושאים של חמישה (יער אורנים, מערת קרח, הר געש, לילה עם אורורה, כפר אלפיני, פסגה ועננים). כל נושא הוא עונה עם טבלת נקודות של שישה גולשים, והשלב החמישי הוא שלב בוס (מסלול ארוך ב-40%, נקודות כפולות). שלב ליגה n רץ כשלב משחק 3 + n (4 עד 33), אחרי שלושת השלבים הקיימים, והשמירה של האי לא משתנה: הליגה במפתח `island.alpine.league.v1` ורוח הרפאים ב-`island.alpine.ghosts.v1`. `?alpineLeague=0` מכבה הכול.
+
+| קובץ | תפקיד |
+| --- | --- |
+| `minigames/alpine-league-core.mjs` | כללים טהורים: נושאים, יעד מקום (3, 2, 1), נקודות, מטבעות ליגה, ציוד (מגלשיים, קסדה, משקפיים), עונה ובוס, בדיקת מבנה ומיזוג |
+| `minigames/alpine-league-stages.mjs` | בניית המסלול, היריבים והיעדים של כל שלב מעקומת קושי אחת ומהטעם של הנושא; `AI_STRENGTH` מכויל ב-`tools/alpine-league-calibrate.mjs` |
+| `minigames/alpine-league-result.mjs`, `alpine-league-island.mjs`, `alpine-league-store.mjs` | בדיקת תוצאה (אותה בדיקה קפדנית של `alpine-result.mjs` ועוד סדר הסיום והשערים), `engine.alpineLeague`, שמירה במפתח נפרד |
+| `minigames/alpine-league-ghost.mjs` | הקלטת הריצה הטובה, דחיסה והשמעה כרוח רפאים שקופה (תצוגה בלבד) |
+| `minigames/alpine-league-theme.mjs`, `alpine-league-look.mjs` | מפת הנכסים היחידה של הנושאים (`ALPINE_THEME_ASSETS`) וצבעי המעבר; שכבות קוד: אורורה, גחלים וזוהר רחוק, קירות קרח וניצוצות, עננים, בתים ופנסים |
+| `ui/alpine-league.mjs`, `ui/alpine-league.css`, `minigames/alpine-league.css` | כרטיס הליגה במפת השלבים, עונה וטבלה, ציוד, תוצאה; יעדים, רוח ופער מהשיא בזמן המרוץ |
+
+נכסי Codex (`design/alpine-themes-v1`): מחליפים נתיבים ב-`ALPINE_THEME_ASSETS` בלבד. כל טוען קורא משם ונופל לקובץ הקיים אם הנכס החדש נכשל. כל קובץ חדש צריך להיכנס ל-`games.alpine` ב-`offline-manifest.json`.
+המנוע: רוח צד (`track.wind`, אזורים קבועים לכל מסלול), קסדה ומשקפיים לשחקן בלבד, `slalomGates`; כולם חסרי השפעה בשלבים 1 עד 3 (טביעת אצבע מול v22.1 בבדיקה).
+
 ## תפוס את הפושע (catchCriminal)
 
 משחק זריקה בתורות: שוטרת זורקת רשת צרה, רשת רחבה או חבל לכידה על פושע שבורח ברחוב. אף אחד לא יורה: הפושע רק רץ, מתכופף מאחורי מחסה או עומד. 10 שלבים, שלוש זריקות לשלב. הדגל: `featureFlags.catchCriminal` (או `?catch=off`).
