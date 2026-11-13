@@ -1,0 +1,23 @@
+✔ upstream thresholds, weights and planted metric results are unchanged (1659.734146ms)
+✔ legal longitudinal glide passes blade contact and independent velocity (7.997118ms)
+✔ legacy planted metric still rejects the same legal glide (7.709331ms)
+✔ a tilted sole plane fails even when the contact center stays on the ice (4.133355ms)
+✔ a lifted blade falsely declared in contact fails (3.12278ms)
+✔ illegal lateral skating is not forgiven as longitudinal glide (3.025259ms)
+✔ actual/reference speed and direction mismatch both fail (7.863264ms)
+✔ missing and zero reference travel cannot earn a locomotion pass (6.216754ms)
+✔ shortened contact windows cannot hide all contact observations (2.230064ms)
+✔ declared braking permits its independently requested lateral velocity only (7.011203ms)
+✔ braking cannot silently omit the independent expected-velocity track (1.826225ms)
+✔ a pivot contact must keep its declared anchor stationary (3.449664ms)
+✔ heading normalization removes yaw while preserving body height and pitch errors (0.566846ms)
+✔ turn continuity still rejects a wrong endpoint limb pose (538.219815ms)
+✔ legacy CLI sampler reproduces all v1 published metric values (995.394115ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3397.593435

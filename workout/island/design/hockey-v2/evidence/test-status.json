@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "focusedQa": {
+    "command": "node --test workout/island/design/motion-qa-v1/skating.test.mjs",
+    "tests": 15,
+    "pass": 15,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "unifiedAthletes": {
+    "command": "node --test tests/island-athletes-unified.test.mjs",
+    "tests": 11,
+    "pass": 11,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0
+  },
+  "repository": {
+    "command": "npm test",
+    "tests": 3660,
+    "pass": 3596,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 63,
+    "status": "One environment failure; all remaining completed tests passed.",
+    "failure": "tests/workout-royiki.test.mjs: Playwright Chromium headless shell missing; failed launch left a local server open. Hung worker was stopped after diagnosis."
+  },
+  "environmentRetest": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/hockey-v2-system-browser.mjs node --test tests/workout-royiki.test.mjs",
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "status": "Passed using installed /usr/bin/chromium; no repository test edits.",
+    "adapter": "system-browser-adapter.mjs"
+  }
+}
