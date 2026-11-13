@@ -1,0 +1,95 @@
+{
+  "instances": 600,
+  "variantCounts": [
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50,
+    50
+  ],
+  "boundaries": [
+    {
+      "distance": 17.1,
+      "maxWeightDifferenceAcross2Micrometers": 2.0775619666564719e-13
+    },
+    {
+      "distance": 19,
+      "maxWeightDifferenceAcross2Micrometers": 7.894736850921902e-7
+    },
+    {
+      "distance": 20.900000000000002,
+      "maxWeightDifferenceAcross2Micrometers": 2.077227279073668e-13
+    },
+    {
+      "distance": 27.900000000000002,
+      "maxWeightDifferenceAcross2Micrometers": 7.80486786311485e-14
+    },
+    {
+      "distance": 31,
+      "maxWeightDifferenceAcross2Micrometers": 4.838709681820319e-7
+    },
+    {
+      "distance": 34.1,
+      "maxWeightDifferenceAcross2Micrometers": 7.80486786311485e-14
+    }
+  ],
+  "routes": [
+    {
+      "from": "landscape",
+      "to": "rear",
+      "samples": 301,
+      "maxTriangles": 65532,
+      "minDistanceScale": 1,
+      "maxOverlapping": 154,
+      "maxWeightChangePerStep": 0.0015596393389882834
+    },
+    {
+      "from": "side",
+      "to": "rear",
+      "samples": 301,
+      "maxTriangles": 77598,
+      "minDistanceScale": 0.8059460988559856,
+      "maxOverlapping": 335,
+      "maxWeightChangePerStep": 0.07269929827073562
+    },
+    {
+      "from": "close",
+      "to": "side",
+      "samples": 301,
+      "maxTriangles": 77598,
+      "minDistanceScale": 0.5243657873556471,
+      "maxOverlapping": 335,
+      "maxWeightChangePerStep": 0.07179855315294248
+    }
+  ],
+  "stress": {
+    "seed": 409,
+    "samples": 300,
+    "cameraBounds": {
+      "x": [
+        -30,
+        30
+      ],
+      "y": [
+        1,
+        30
+      ],
+      "z": [
+        -35,
+        35
+      ]
+    },
+    "maxTriangles": 77736,
+    "minDistanceScale": 0.5080621078430612,
+    "cameraPerturbationMeters": 0.000001,
+    "maxCameraPerturbationWeightChange": 0.0000011627529080682208
+  },
+  "note": "Numerical continuity of the distance blend is verified. This does not prove perceptual invisibility of topology changes or camera teleports."
+}

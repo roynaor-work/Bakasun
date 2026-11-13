@@ -2,18 +2,18 @@
  * and the icon HUD to the island game shell. One RAF, fixed 1/60 s steps with interpolation;
  * pause and hidden tabs freeze the simulation and the input. No words on the game screen. */
 import {createHoopsScreens} from './hoops-screens.mjs';
-import {gameContext} from './context.mjs?v=island-v2-20261107-11';
-import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-11';
-import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-11';
+import {gameContext} from './context.mjs?v=island-v2-20261107-12';
+import {createHoopsEngine,HOOPS_DT} from './hoops-engine.mjs?v=island-v2-20261107-12';
+import {createHoopsControls,loadHoopsControlsProfile} from './hoops-controls.mjs?v=island-v2-20261107-12';
 import {loadHoopsTactics} from './hoops-tactics.mjs';
 import {createHoopsRoleLabels} from './hoops-role-labels.mjs';
-import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-11';
-import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-11';
-import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-11';
-import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-11';
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-11';
-import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-11';
-import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-11';
+import {createHoopsAudio} from './hoops-audio.mjs?v=island-v2-20261107-12';
+import {hoopsIcon} from './hoops-icons.mjs?v=island-v2-20261107-12';
+import {saveGameReport} from '../ui/load-report.mjs?v=island-v2-20261107-12';
+import {createFixedLoop} from './hoops-loop.mjs?v=island-v2-20261107-12';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-12';
+import {matchTeams} from './hoops-franchise.mjs?v=island-v2-20261107-12';
+import {setText,setAttr,setData,setHidden,markFirst} from './hoops-perf.mjs?v=island-v2-20261107-12';
 import {showEnabled,SHOW,replayTriggers} from './hoops-show.mjs';
 
 const PASS_HE={chest:'מסירת חזה',bounce:'מסירת קרקע',lob:'מסירה מעל הראש',jump:'מסירה בקפיצה',oop:'אלי-הופ'};
@@ -55,7 +55,7 @@ export function startHoops(ctx){
  const canvas=ctx.canvas;if(!canvas)return session;
  const doc=canvas.ownerDocument,screenEl=canvas.closest('.game-screen'),stageEl=canvas.parentElement,root=ctx.controls;
  try{void screen.orientation?.unlock?.();}catch{}
- const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-11',import.meta.url).href;screenEl.append(css);
+ const css=doc.createElement('link');css.rel='stylesheet';css.href=new URL('./hoops.css?v=island-v2-20261107-12',import.meta.url).href;screenEl.append(css);
  screenEl.dataset.hoopsShow=show?'v1':'0';
  const node=(tag,cls,text)=>{const n=doc.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;};
  const labels=Object.fromEntries(['stick','shoot','jump','block','pass','steal','cross','switch','sprint','timeout','call','callForBall','replay','bench'].map(k=>[k,t('hoops.'+k)]));
@@ -111,7 +111,7 @@ export function startHoops(ctx){
   const court=createCourt(balance.court);
   const assetBase=new URL('../',import.meta.url);
   const quality=ctx.lite?0:Number(params.get('hoopsQuality')||setup.quality||2);
-  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-11');
+  const viewModule=forceFail?Promise.reject(new Error('forced')):import('./hoops-view.mjs?v=island-v2-20261107-12');
   Promise.all([viewModule,loadHoopsControlsProfile({signal:abort.signal}),loadHoopsTactics()]).then(([m,profile,tactics])=>{if(disposed)return null;controls.setProfile(profile);engine.setTacticsData(tactics);cur=engine.snapshot();prev=cur;const characterVersion=Number(params.get('hoopsCharacters')||balance.assets.characterVersion||1);return m.createHoopsView(canvas,{...balance,assets:{...balance.assets,characterVersion},view:{...balance.view,preserve:dev}},{court,teams:setup.teams,quality,assetBase,onFeelAudio:(name,options)=>audio.play(name,options),onProgress:p=>ringEl.style.setProperty('--p',String(p))});}).then(loaded=>{
    if(!loaded)return;
    if(disposed){loaded.dispose();return;}
