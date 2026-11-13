@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "compression": "none",
+  "sampleRate": 24,
+  "assets": [
+    {
+      "id": "girl",
+      "file": "girl.glb",
+      "triangles": 2910,
+      "vertices": 1547,
+      "materials": 1,
+      "primitives": 1,
+      "joints": 16,
+      "textures": 0,
+      "bytes": 252816,
+      "sha256": "6aaeb1ff7a658628cc761510f4e897af37e6c4d69aa4a9d2daeada0e5495f40f",
+      "colorRegions": {
+        "uniform_primary": {
+          "attribute": "_UNIFORM_PRIMARY",
+          "defaultSRGB": "#EC805E",
+          "vertices": 116
+        },
+        "uniform_secondary": {
+          "attribute": "_UNIFORM_SECONDARY",
+          "defaultSRGB": "#417E83",
+          "vertices": 238
+        }
+      },
+      "clips": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "scared",
+          "duration": 1.5,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "wave",
+          "duration": 2.0,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "rescued",
+          "duration": 2.4,
+          "loop": false,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "walk_out",
+          "duration": 1.5,
+          "loop": false,
+          "rootDistanceMetres": 0.9
+        }
+      ]
+    },
+    {
+      "id": "cat",
+      "file": "cat.glb",
+      "triangles": 2888,
+      "vertices": 1550,
+      "materials": 1,
+      "primitives": 1,
+      "joints": 17,
+      "textures": 0,
+      "bytes": 245004,
+      "sha256": "ff6e9631cfac704f81831389dc521cb95a02eff6b1a37d7ae46bf226984583cc",
+      "colorRegions": {},
+      "clips": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "scared",
+          "duration": 1.5,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "wave",
+          "duration": 2.0,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "rescued",
+          "duration": 2.4,
+          "loop": false,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "walk_out",
+          "duration": 1.5,
+          "loop": false,
+          "rootDistanceMetres": 0.76
+        }
+      ]
+    },
+    {
+      "id": "dog",
+      "file": "dog.glb",
+      "triangles": 2968,
+      "vertices": 1558,
+      "materials": 1,
+      "primitives": 1,
+      "joints": 19,
+      "textures": 0,
+      "bytes": 256372,
+      "sha256": "19bf5242d283dddd5d63f9ac30189b7f8c0846f71cc2898f7ca3032b29c9d905",
+      "colorRegions": {},
+      "clips": [
+        {
+          "name": "idle",
+          "duration": 2.4,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "scared",
+          "duration": 1.5,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "wave",
+          "duration": 2.0,
+          "loop": true,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "rescued",
+          "duration": 2.4,
+          "loop": false,
+          "rootDistanceMetres": 0
+        },
+        {
+          "name": "walk_out",
+          "duration": 1.5,
+          "loop": false,
+          "rootDistanceMetres": 0.76
+        }
+      ]
+    }
+  ]
+}
