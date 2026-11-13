@@ -1,0 +1,47 @@
+/* Original CC0-1.0. System fonts only; no remote resources. */
+:root {font-family:Arial,"Noto Sans Hebrew",sans-serif;color:#15212b;background:#f5f2eb;font-synthesis:none;--accent:#d93228;--line:#d8d8ce}
+* {box-sizing:border-box}
+body {margin:0}
+a {color:inherit;text-decoration:none}
+button {font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,#stage:focus-visible {outline:3px solid #285db7;outline-offset:5px}
+.masthead,main,footer {max-width:1440px;margin:auto;padding-inline:44px}
+.masthead {min-height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.wordmark {font-size:20px;font-weight:800;letter-spacing:-1px}.wordmark span {padding:0 10px;color:#96988e;font-weight:400}
+.edition {font-size:12px;color:#646b6d}.edition bdi {display:inline-block;margin-inline-start:22px;font:12px monospace}
+.intro {padding:52px 0 32px;display:flex;align-items:end;justify-content:space-between;gap:24px}
+.eyebrow {font-size:12px;letter-spacing:.5px;margin:0 0 14px;color:#5e6a6c}
+h1 {font-size:clamp(30px,3.5vw,48px);line-height:1.1;letter-spacing:-1.7px;margin:0;font-weight:800}
+.intro-note {font-size:14px;line-height:1.7;margin:0;color:#646b6d}
+.showcase {display:grid;grid-template-columns:minmax(0,1fr) 294px;background:#fffdf8;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.stage-wrap {position:relative;background:#18232e;color:#e4e9e8;min-width:0}
+.stage-heading,.stage-footer {position:absolute;inset-inline:26px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;z-index:1}
+.stage-heading {top:24px;font-size:13px}.stage-count {font:13px monospace;color:#a9b7bb;direction:ltr}
+.stage-footer {bottom:21px;color:#aebbc0;font-size:11px}
+#stage {height:490px;touch-action:pan-y;cursor:grab;position:relative;overflow:hidden}
+#stage:active {cursor:grabbing}
+#stage canvas {display:block;width:100%;height:100%}
+.team-info {padding:30px 26px;display:flex;flex-direction:column;border-top:4px solid var(--accent)}
+.team-info .eyebrow {margin:0 0 7px}
+.team-info h2 {font-size:42px;letter-spacing:-1.4px;margin:0 0 12px;line-height:1.1}
+.pair {font:bold 19px monospace;direction:ltr;text-align:right;margin:0 0 16px;color:#3e4c52}
+.team-description {font-size:13px;line-height:1.7;margin:0 0 22px;color:#59666b}
+.swatches {display:flex;gap:13px;margin:0 0 24px}.swatch {min-width:0;flex:1}.swatch i {display:block;height:10px;background:var(--swatch);border:1px solid #0002;border-radius:1px;margin-bottom:6px}.swatch span {font-size:10px;color:#4a575c}.swatch code {display:block;font:10px monospace;margin-top:5px;direction:ltr;color:#4a575c}
+.view-buttons {display:flex;gap:5px}.view-buttons button {flex:1;font-size:12px;background:transparent;border:1px solid var(--line);padding:9px 4px;min-height:40px;border-radius:3px}
+.view-buttons button[aria-pressed=true] {background:#18232e;color:#fff;border-color:#18232e}
+.spin {border:0;background:none;align-self:start;padding:10px 0;font-size:11px;text-decoration:underline;text-underline-offset:4px}
+.download {border-top:1px solid var(--line);margin-top:auto;padding-top:18px;font-size:12px;font-weight:bold;display:flex;justify-content:space-between;gap:8px}
+.number-links {display:flex;gap:12px;margin-top:13px;font-size:11px;color:#59666b}.number-links a {text-decoration:underline;text-underline-offset:4px;min-height:28px}
+.gallery-heading {display:flex;align-items:baseline;justify-content:space-between;margin:38px 0 17px}.gallery-heading h2 {font-size:20px;margin:0}.gallery-heading p {font-size:12px;margin:0;color:#59666b}
+.gallery {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.team-card {background:#fffdf8;border:1px solid var(--line);border-radius:4px;padding:0;text-align:start;overflow:hidden;transition:box-shadow .15s,transform .15s;position:relative}
+.team-card:hover {transform:translateY(-2px);box-shadow:0 7px 16px #15212b15}
+.team-card[aria-pressed=true] {border-color:var(--team);box-shadow:0 0 0 2px var(--team)}
+.team-card img {width:100%;height:auto;aspect-ratio:1.8;display:block;object-fit:contain;background:#18232e}
+.card-caption {padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-top:3px solid var(--team)}
+.card-name {font-size:17px;font-weight:bold}.card-numbers {font:12px monospace;direction:ltr;color:#59666b}
+.status {font-size:12px;line-height:1.7;margin:18px 0 30px;color:#59666b;min-height:21px}.status.error {color:#a32121;font-weight:bold}
+footer {border-top:1px solid var(--line);padding-block:25px;font-size:11px;color:#59666b;display:flex;justify-content:space-between;gap:20px}footer div {display:flex;gap:22px}footer a {text-decoration:underline;text-underline-offset:4px}
+@media (prefers-reduced-motion:reduce) {* {transition:none!important}}
+@media (max-width:1000px) {.masthead,main,footer {padding-inline:24px}.showcase {grid-template-columns:minmax(0,1fr) 240px}.team-info {padding:24px 20px}#stage {height:460px}.intro {padding-top:38px}.gallery {gap:13px}}
+@media (max-width:720px) {.masthead,main,footer {padding-inline:18px}.masthead {min-height:66px}.edition {font-size:10px}.edition bdi {display:none}.wordmark {font-size:17px}.intro {padding-top:30px;padding-bottom:24px}.intro-note {display:none}h1 {font-size:32px;line-height:1.2}.eyebrow {font-size:11px}.showcase {display:flex;flex-direction:column}#stage {height:330px}.stage-heading {top:18px;inset-inline:18px}.stage-footer {inset-inline:18px;bottom:16px;font-size:10px}.team-info {padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}.team-info .eyebrow {grid-column:1/-1;margin:0}.team-info h2 {font-size:33px;margin:0}.pair {align-self:center;margin:0;font-size:17px;text-align:left}.team-description {grid-column:1/-1;margin:0;font-size:12px}.swatches {grid-column:1/-1;margin:4px 0}.view-buttons {align-self:center;grid-column:1/-1}.spin {margin:0;padding:6px 0;align-self:center}.download {font-size:11px;border-top:0;padding-top:6px;align-self:center}.number-links {grid-column:1/-1;margin:0}.gallery-heading {margin-top:29px;gap:12px}.gallery-heading p {font-size:11px}.gallery {grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card-caption {padding:11px 10px;gap:4px;flex-wrap:wrap}.card-name {font-size:15px}.card-numbers {font-size:11px}.team-card img {aspect-ratio:1.8}.status {font-size:11px}footer {flex-direction:column;gap:14px}}

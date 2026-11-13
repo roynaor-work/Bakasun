@@ -1,0 +1,33 @@
+{
+  "id": "night",
+  "name": "לילה",
+  "license": "CC0-1.0",
+  "primary": "#a05fc4",
+  "secondary": "#35224f",
+  "stripe": "#f7f2e8",
+  "pinstripe": "#35224f",
+  "finish": {
+    "metalness": 0.36,
+    "roughness": 0.29,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.16
+  },
+  "cars": [
+    {
+      "driverId": "dor",
+      "number": 55,
+      "variant": "A",
+      "stripeWidth": 0.07,
+      "pinstripeWidth": 0.008,
+      "numberPlate": "numbers/night-55.png"
+    },
+    {
+      "driverId": "shaked",
+      "number": 22,
+      "variant": "B",
+      "stripeWidth": 0.1,
+      "pinstripeWidth": 0.012,
+      "numberPlate": "numbers/night-22.png"
+    }
+  ]
+}
