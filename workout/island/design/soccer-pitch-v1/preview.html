@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ערכת מגרש כדורגל · 105 × 68</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <header>
+    <div class="identity"><span class="emblem" aria-hidden="true"></span><div><span class="eyebrow">כדורגל · ערכת מגרש 01</span><h1>מגרש בגודל אמיתי.</h1></div></div>
+    <div class="scale-note"><span class="live-dot"></span><span>מטרים בעולם · Y למעלה</span></div>
+  </header>
+  <main>
+    <section id="stage" aria-label="תצוגה תלת־ממדית של מגרש הכדורגל">
+      <div class="stage-toolbar" role="group" aria-label="בחירת מצלמה">
+        <button type="button" data-view="game" aria-pressed="true">מצלמת המשחק</button>
+        <button type="button" data-view="overview" aria-pressed="false">כל המגרש</button>
+        <button type="button" data-view="goal" aria-pressed="false">השער</button>
+        <button type="button" data-view="ball" aria-pressed="false">הכדור</button>
+      </div>
+      <div id="loading" role="status">טוען את המגרש…</div>
+      <div class="view-caption"><span id="view-name">מצלמת המשחק</span><span id="camera-note" dir="ltr">42° FOV · 28° · 15 m</span></div>
+      <div class="compact-budget" aria-label="משולשים בכל הערכה"><strong id="compact-count">—</strong><span dir="ltr">/ 4,000</span><span>משולשים</span></div>
+      <div class="player-label" id="player-label" hidden><span dir="ltr">1.75 m</span><span>גובה השחקן</span></div>
+      <div class="stage-footer"><span>ללא מיתוג · ללא טקסט על הנכסים</span><span>קנה מידה 1:1</span></div>
+    </section>
+    <aside aria-label="מידות ופרטי הערכה">
+      <div class="section-kicker">01 / קנה מידה</div>
+      <div class="pitch-size" dir="ltr">105 <span>×</span> 68<span class="unit">m</span></div>
+      <p class="intro">מגרש מלא, קווי סימון מדויקים ושער במידות תקניות. השחקן והכדור מוצגים בגודלם האמיתי.</p>
+      <dl class="dimensions">
+        <div><dt>מפתח השער</dt><dd dir="ltr">7.32 × 2.44 m</dd></div>
+        <div><dt>קוטר העמודים</dt><dd dir="ltr">0.12 m</dd></div>
+        <div><dt>עומק השער</dt><dd dir="ltr">2.00 m</dd></div>
+        <div><dt>רחבת העונשין</dt><dd dir="ltr">40.32 × 16.50 m</dd></div>
+        <div><dt>שטח השער</dt><dd dir="ltr">18.32 × 5.50 m</dd></div>
+        <div><dt>עיגול האמצע</dt><dd dir="ltr">r = 9.15 m</dd></div>
+        <div><dt>נקודת הפנדל</dt><dd dir="ltr">11.00 m</dd></div>
+        <div><dt>קשתות הפינה</dt><dd dir="ltr">r = 1.00 m</dd></div>
+        <div><dt>קוטר הכדור</dt><dd dir="ltr">0.22 m</dd></div>
+      </dl>
+      <div class="section-kicker budget-title">02 / משולשים</div>
+      <div class="budget-number"><strong id="triangle-count">—</strong><span>/ 4,000</span></div>
+      <div class="budget-track" aria-hidden="true"><span id="budget-fill"></span></div>
+      <p class="budget-caption">כל הערכה המוצבת במגרש</p>
+      <div class="count-row"><span>נכסים ייחודיים</span><b id="unique-count">—</b></div>
+      <div class="count-row"><span>כולל שחקן ותצוגה</span><b id="scene-count">—</b></div>
+      <div class="switches">
+        <label><input type="checkbox" id="show-net" checked><span>רשתות השערים</span></label>
+        <label><input type="checkbox" id="wireframe"><span>הצגת משולשים</span></label>
+      </div>
+      <a class="report-link" href="./REPORT.md">דוח המידות והמסירה <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"><path d="M3 9 9 3M3 3h6v6"/></svg></a>
+    </aside>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

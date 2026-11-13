@@ -1,0 +1,158 @@
+{
+  "license": "CC0-1.0",
+  "units": "metres",
+  "upAxis": "Y",
+  "lengthAxis": "X",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "atlas": {
+    "file": "atlas.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "sha256": "deeeaa9a405c05ce3b9b9d493d7a7f479fb92934be4a74f7b1a7f472858112f3",
+    "grassTilePixels": [
+      8,
+      8,
+      504,
+      504
+    ],
+    "netPixels": [
+      8,
+      520,
+      752,
+      764
+    ],
+    "ballPixels": [
+      768,
+      520,
+      1016,
+      644
+    ]
+  },
+  "assets": [
+    {
+      "file": "pitch.glb",
+      "triangles": 766,
+      "bytes": 58132,
+      "sha256": "b6ac63fb3d7e3141fdd9e70b8e03c6d0315665737acaa5412a3420ce064c9729"
+    },
+    {
+      "file": "goal.glb",
+      "triangles": 280,
+      "bytes": 20524,
+      "sha256": "05a0978a03b61dbc8339d576f539f69e9b120fc93d87b905fcf56cc3d980ed5a"
+    },
+    {
+      "file": "corner_flag.glb",
+      "triangles": 32,
+      "bytes": 4264,
+      "sha256": "66a682ec4015b1963b9b6034d621f1e7d2c84de0f352c9a4393f5c3af4d599bf"
+    },
+    {
+      "file": "bench.glb",
+      "triangles": 96,
+      "bytes": 9944,
+      "sha256": "67827c8e8b552d7f7fe7c94ea81ee5fbfd0a02a704da6c380cfa518528a5f276"
+    },
+    {
+      "file": "ad_board.glb",
+      "triangles": 14,
+      "bytes": 3256,
+      "sha256": "d2545aa28382fc72bf4aab3c1b18026fee597a65d21ca5233059ae27209ac621"
+    },
+    {
+      "file": "ball.glb",
+      "triangles": 528,
+      "bytes": 39956,
+      "sha256": "ecac1590b59a69dc07724a2ee256ee48e46291fcb1df75af351c16b6c2ebef04"
+    }
+  ],
+  "uniqueTriangles": 1716,
+  "fullSceneInstances": {
+    "pitch.glb": 1,
+    "goal.glb": 2,
+    "corner_flag.glb": 4,
+    "bench.glb": 2,
+    "ad_board.glb": 8,
+    "ball.glb": 1
+  },
+  "fullSceneTriangles": 2286,
+  "triangleLimit": 4000,
+  "pitchBounds": {
+    "min": [
+      -52.5,
+      0,
+      -34
+    ],
+    "max": [
+      52.5,
+      0.003,
+      34
+    ]
+  },
+  "placement": {
+    "goals": [
+      {
+        "position": [
+          52.38,
+          0,
+          0
+        ],
+        "rotationY": 0
+      },
+      {
+        "position": [
+          -52.38,
+          0,
+          0
+        ],
+        "rotationY": 3.141592653589793
+      }
+    ],
+    "flags": [
+      [
+        -52.5,
+        0,
+        -34
+      ],
+      [
+        -52.5,
+        0,
+        34
+      ],
+      [
+        52.5,
+        0,
+        -34
+      ],
+      [
+        52.5,
+        0,
+        34
+      ]
+    ]
+  },
+  "camera": {
+    "source": "../../data/config.json minigames.soccer.view.camera",
+    "fov": 42,
+    "landscapeElevation": 28,
+    "landscapeDistance": 15,
+    "portraitElevation": 40,
+    "portraitDistance": 21,
+    "near": 0.1,
+    "far": 240
+  },
+  "referencePlayer": {
+    "file": "reference_player.glb",
+    "triangles": 1604,
+    "bytes": 168788,
+    "sha256": "2add80d2a97e38e0be7300945839c53f4e8f9c7eff3b46903e1a326f276cdacf",
+    "height": 1.75,
+    "sourceSha256": {
+      "workout/3d/model/character.js": "5495f73ac7ad786761393537855a3c7996d7e8c410134c19aafe13a7295562b6",
+      "workout/3d/model/skaterMaleA.png": "cabeed9d1be58037cc1cf3e29fdb42a0cb6af15bebeed877c41a758a932d14f8"
+    }
+  },
+  "fullPreviewTriangles": 3892
+}
