@@ -110,9 +110,9 @@ export function keeperTarget(p,s,c){
   if(time>0&&time<.8)z=b.z+b.vz*time;
  }
  const ballDistance=distance(p,b);let opposition=Infinity;for(const q of s.players)if(q.team!==p.team)opposition=Math.min(opposition,distance(q,b));
- if(!owner&&b.y<=c.rules.pickupHeight&&Math.hypot(b.vx,b.vz)<a.keeperFastBall&&b.x*d<-hx+a.keeperChaseDistance&&Math.abs(b.z)<c.pitch.penaltyWidth/2-k.areaInset&&ballDistance<a.keeperChaseRadius&&opposition>ballDistance+.6){x=b.x;z=b.z;duty='keeper-sweep';}
- const limit=duty==='keeper-sweep'?c.pitch.penaltyWidth/2-k.areaInset:c.pitch.goalWidth/2-a.keeperPostInset;
- return {x:d*clamp(x*d,-hx+k.areaInset,-hx+c.pitch.penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
+ if(!owner&&b.y<=c.rules.pickupHeight&&Math.hypot(b.vx,b.vz)<a.keeperFastBall&&b.x*d<-hx+a.keeperChaseDistance&&Math.abs(b.z)<(c.pitch.play||c.pitch).penaltyWidth/2-k.areaInset&&ballDistance<a.keeperChaseRadius&&opposition>ballDistance+.6){x=b.x;z=b.z;duty='keeper-sweep';}
+ const limit=duty==='keeper-sweep'?(c.pitch.play||c.pitch).penaltyWidth/2-k.areaInset:(c.pitch.play||c.pitch).goalWidth/2-a.keeperPostInset;
+ return {x:d*clamp(x*d,-hx+k.areaInset,-hx+(c.pitch.play||c.pitch).penaltyDepth-k.areaInset),z:clamp(z,-limit,limit),duty};
 }
 
 /** How many passes a rival may make in one possession before it must dribble or shoot.

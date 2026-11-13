@@ -274,7 +274,7 @@ export function soccerActionContext(state,c){
   if(p.role==='keeper'||state.role==='keeper')return p.hands||owner?.team===p.team?'attack':'keeper';
   if(owner)return owner.team===p.team?'attack':'defense';
   const direction=state.attackDir*(p.team===0?1:-1),ownEnd=-direction*c.pitch.length/2;
-  const threat=(b.x-ownEnd)*direction<c.pitch.penaltyDepth+1&&finite(b.vx)*direction<0;
+  const threat=(b.x-ownEnd)*direction<(c.pitch.play||c.pitch).penaltyDepth+1&&finite(b.vx)*direction<0;
   return threat?'defense':'loose';
 }
 

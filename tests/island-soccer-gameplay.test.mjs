@@ -6,8 +6,8 @@ import {restartActionProfile} from '../workout/island/minigames/soccer-restarts.
 
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames.soccer;
 const dt=config.match.fixedStep,distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
-function fixture({role='field',seed=41,stage=4}={}){
- const game=createSoccer({config,role,seed,stage,difficulty:'normal'}),s=game.getState();
+function fixture({role='field',seed=41,stage=4,airVersion}={}){
+ const game=createSoccer({config,role,seed,stage,difficulty:'normal',...(airVersion?{airVersion}:{})}),s=game.getState();
  for(const p of s.players){Object.assign(p,{x:p.team===0?-10:12,z:(p.id%3-1)*6,vx:0,vz:0,fx:p.team===0?1:-1,fz:0,cooldown:100,think:100,hold:0,recover:0,slideTime:0,hands:false});}
  const p=s.players[role==='keeper'?2:0];Object.assign(p,{x:role==='keeper'?-config.pitch.length/2+2:0,z:0,cooldown:0,fx:1,fz:0});
  Object.assign(s.players[1],{x:6,z:0});Object.assign(s.players[6],{x:4,z:-7});
@@ -104,11 +104,15 @@ for(const kind of ['pass','shot'])test(`gameplay buffered ${kind}: no remote pos
  stopIncoming(f);f.tick();f.tick();assert.equal(has(f,kind),false,'later contact cannot revive the expired input');
 });
 
-test('gameplay buffered header: an early press waits for nearby airborne contact',()=>{
- const f=fixture();Object.assign(f.s.ball,{x:config.aerial.reach+.25,y:1.9,vx:0,vy:0});
- f.tick({kickHeld:true});assert.equal(f.s.bufferedAction?.kind,'shot');assert.equal(has(f,'header'),false);f.tick();
+// v22 keeps the press in the 0.18 s input buffer; air v23 (soccer-v23.mjs) keeps it as an armed header until the ball arrives.
+for(const airVersion of ['v22','v23'])test(`gameplay buffered header (air ${airVersion}): an early press waits for nearby airborne contact`,()=>{
+ // v23 heads the child's high balls from the cross reach (aerial.crossReach), so the ball starts just outside that.
+ const f=fixture({airVersion});Object.assign(f.s.ball,{x:(airVersion==='v22'?config.aerial.reach:config.aerial.crossReach??1.9)+.25,y:1.9,vx:0,vy:0});
+ f.tick({kickHeld:true});
+ if(airVersion==='v22')assert.equal(f.s.bufferedAction?.kind,'shot');else{assert.equal(f.s.headerArm?.player,f.p.id);assert.equal(f.s.bufferedAction,null);}
+ assert.equal(has(f,'header'),false);f.tick();
  Object.assign(f.s.ball,{x:f.p.x+config.aerial.reach-.1,y:1.7,vx:0,vy:-.3});f.tick();
- assert.ok(has(f,'header'));assert.equal(f.s.ball.owner,null);assert.ok(f.s.ball.vx>0);assert.equal(f.s.bufferedAction,null);
+ assert.ok(has(f,'header'));assert.equal(f.s.ball.owner,null);assert.ok(f.s.ball.vx>0);assert.equal(f.s.bufferedAction,null);assert.equal(f.s.headerArm,null);
 });
 
 test('gameplay header buffer expires before remote airborne contact becomes local',()=>{

@@ -4,6 +4,7 @@ import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mj
 import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-11';
 import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-11';
 import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-11';
+import {soccerQuietButton} from '../minigames/soccer-v23.mjs?v=island-v2-20261107-11';
 import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-11';
 import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-11';
 import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-11';
@@ -34,7 +35,9 @@ export class ActivityInterface {
     this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal(),onMapBack:()=>this.confirmMapExit()});
     let storage;try{storage=window.localStorage;}catch{}
     this.sound=createSound({storage,soccerVoices:data.config.minigames.soccer.sound});this.soundEvents=new AbortController();
-    document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
+    // Soccer v23 (`?soccerTapSound=v22` restores): the action buttons of the match do not chirp; the 580->740 Hz button glide on every steal
+    // and slide press was the "kind of whistle when there is a steal" (verification/soccer-v23). Menus and every other button keep it.
+    document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target)&&!soccerQuietButton(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.sound.suspend();},{signal:this.soundEvents.signal});
     ui.activityInterface=this;
     this.openButton=button(t('minigame.open'),'open-games',()=>this.menu());

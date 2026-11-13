@@ -23,11 +23,11 @@ if(!isMainThread){
   parentPort.postMessage({ready:true});
 }else if(process.argv[1]===fileURLToPath(import.meta.url)){
   const args=Object.fromEntries(process.argv.slice(2).reduce((a,x,i,all)=>x.startsWith('--')?[...a,[x.slice(2),all[i+1]&&!all[i+1].startsWith('--')?all[i+1]:true]]:a,[]));
-  const n=Number(args.n||200),stages=String(args.stages||'2,5,8').split(',').map(Number),difficulty=args.difficulty||'normal',ai=args.ai||undefined,rules=args.rules||undefined,feel=args.feel||undefined,seed0=Number(args.seed0||1000),latency=Number(args.latency||9),bot=args.bot||'human',helpAll=!!args.helpAll,set=args.set||'',teams=args.teams||undefined,profile=args.profile||'typical',tune=args.tune?Object.fromEntries(String(args.tune).split(';').map(x=>x.split('=')).map(([k,v])=>[k,Number(v)])):undefined;
-  const jobs=[];for(const stage of stages)for(let i=0;i<n;i++)jobs.push({seed:seed0+i,stage,difficulty,latency,bot,helpAll,teams,tune,profile,...(ai?{ai}:{}),...(rules?{rules}:{}),...(feel?{feel}:{})});
+  const n=Number(args.n||200),stages=String(args.stages||'2,5,8').split(',').map(Number),difficulty=args.difficulty||'normal',ai=args.ai||undefined,rules=args.rules||undefined,feel=args.feel||undefined,seed0=Number(args.seed0||1000),latency=Number(args.latency||9),bot=args.bot||'human',helpAll=!!args.helpAll,set=args.set||'',teams=args.teams||undefined,pitch=args.pitch||undefined,switchVersion=args.switch||undefined,control=args.control||undefined,airVersion=args.air||undefined,profile=args.profile||'typical',tune=args.tune?Object.fromEntries(String(args.tune).split(';').map(x=>x.split('=')).map(([k,v])=>[k,Number(v)])):undefined;
+  const jobs=[];for(const stage of stages)for(let i=0;i<n;i++)jobs.push({seed:seed0+i,stage,difficulty,latency,bot,helpAll,teams,tune,profile,pitch,switchVersion,control,airVersion,...(ai?{ai}:{}),...(rules?{rules}:{}),...(feel?{feel}:{})});
   const results=await runJobs(jobs,Number(args.workers||4),{set});
   const byStage={};for(const stage of stages)byStage[stage]=summarize(results.filter(r=>r.stage===stage));
-  const report={profile,ai:ai||'default',rules:rules||'default',feel:feel||'default',teams:teams||'6',set,difficulty,n,stages,latency,bot,helpAll,all:summarize(results),byStage};
+  const report={profile,ai:ai||'default',rules:rules||'default',feel:feel||'default',teams:teams||'6',pitch:pitch||'v22',switch:switchVersion||'default',control:control||'v22',air:airVersion||'default',set,difficulty,n,stages,latency,bot,helpAll,all:summarize(results),byStage};
   if(args.out)await writeFile(args.out,JSON.stringify(report,null,1));
   if(!args.quiet)print(report);
 }

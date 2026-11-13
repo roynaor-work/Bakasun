@@ -29,6 +29,7 @@ import {createAthleteMotion,athleteLook,ATHLETE_BONES,loadSoccerRestartMotion,co
 import {soccerRestartBallAttachment,alignSoccerRestartStrike,SOCCER_RESTART_SEQUENCES} from './soccer-restart-motion.mjs';
 import {restartAimPreview} from './soccer-restarts.mjs';
 import {createAthleteBody} from './soccer-athlete-body.mjs?v=island-v2-20261107-11';
+import {soccerMarkingRects,penaltyArcAngles,soccerGlitchVersion} from './soccer-v23.mjs?v=island-v2-20261107-11';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
 const along=(v,p)=>(v.x-p.x)*p.fx+(v.z-p.z)*p.fz,ballDistance=(v,b)=>Math.hypot(v.x-b.x,v.y-b.y,v.z-b.z);
@@ -67,10 +68,17 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const hx=config.pitch.length/2,hz=config.pitch.width/2,gw=config.pitch.goalWidth,gh=config.pitch.goalHeight,gd=config.pitch.goalDepth;
   const line=(x,z,w,d)=>addStatic(new T.PlaneGeometry(w,d),white,x,.018,z,-Math.PI/2);
   line(0,0, LW,config.pitch.width);line(0,-hz,config.pitch.length, LW);line(0,hz,config.pitch.length, LW);line(-hx,0, LW,config.pitch.width);line(hx,0, LW,config.pitch.width);
-  addStatic(new T.RingGeometry(2.43,2.55,64),white,0,.02,0,-Math.PI/2);addStatic(new T.CircleGeometry(.12,16),white,0,.02,0,-Math.PI/2);
+  // Pitch v23 (soccer-v23.mjs, `?soccerPitch=v22` = as before): every line from the numbers the simulation plays on, plus the penalty arc and
+  // the corner arcs. v22 drew a 1.7 x 5.8 m goal area and a 2.5 m centre circle whatever the pitch (the 8-a-side goal area is 2.5 x 8.2 m).
+  const pitchV23=Boolean(config.pitch.v23),centreRadius=pitchV23?config.pitch.centreRadius:2.49;
+  addStatic(new T.RingGeometry(centreRadius-LW/2,centreRadius+LW/2,pitchV23?96:64),white,0,.02,0,-Math.PI/2);addStatic(new T.CircleGeometry(.12,16),white,0,.02,0,-Math.PI/2);
+  if(pitchV23)for(const d of [-1,1])for(const side of [-1,1]){const r=config.pitch.cornerRadius,start=d>0?(side>0?Math.PI/2:Math.PI):(side>0?0:-Math.PI/2);addStatic(new T.RingGeometry(r-LW/2,r+LW/2,12,1,start,Math.PI/2),white,d*hx,.02,side*hz,-Math.PI/2);}
   for(const d of [-1,1]){
+    if(pitchV23){for(const r of soccerMarkingRects(config.pitch,d,LW))line(r.x,r.z,r.sx,r.sz);const arc=penaltyArcAngles(config.pitch);if(arc)addStatic(new T.RingGeometry(arc.radius-LW/2,arc.radius+LW/2,40,1,(d>0?Math.PI:0)-arc.half,2*arc.half),white,d*(hx-config.pitch.penaltySpot),.02,0,-Math.PI/2);}
+    else{
     const depth=config.pitch.penaltyDepth,width=config.pitch.penaltyWidth;line(d*(hx-depth),0, LW,width);line(d*(hx-depth/2),-width/2,depth, LW);line(d*(hx-depth/2),width/2,depth, LW);
     line(d*(hx-1.7),0, LW,5.8);line(d*(hx-.85),-2.9,1.7, LW);line(d*(hx-.85),2.9,1.7, LW);
+    }
     addStatic(new T.CircleGeometry(.1,12),white,d*(hx-config.pitch.penaltySpot),.025,0,-Math.PI/2);
     for(const z of [-gw/2,gw/2]){
       addStatic(new T.CylinderGeometry(config.pitch.postRadius,config.pitch.postRadius,gh,10),goalWhite,d*hx,gh/2,z);
@@ -108,7 +116,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const landing=new T.Mesh(track(new T.RingGeometry(.65,.74,32)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,side:T.DoubleSide,transparent:true,opacity:.9})));landing.rotation.x=-Math.PI/2;scene.add(landing);
   const arcDots=new T.InstancedMesh(track(new T.SphereGeometry(config.passing.arcRadius,6,4)),track(new T.MeshBasicMaterial({color:config.passing.landingColor,depthTest:false})),config.passing.arcDots);arcDots.frustumCulled=false;scene.add(arcDots);
   const turfPositions=new Float32Array(roster.length*config.view.animation.turfPerPlayer*3),turfG=track(new T.BufferGeometry());turfG.setAttribute('position',new T.BufferAttribute(turfPositions,3));const turf=new T.Points(turfG,track(new T.PointsMaterial({color:config.view.animation.turfColor,size:.12,transparent:true,opacity:.65})));scene.add(turf);
-  const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0};const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
+  const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
   let probeBackground=null,nearDetail=null,v7Full=null,v7Cap=SOCCER_V7_FULL_DETAIL,disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
   const loadStart=globalThis.performance?.now?.()??0,loadReport={characters:null,characterError:null,athleteError:null,sceneError:null,ms:null};
@@ -381,6 +389,11 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       const holder=s.ball.owner===null||s.ball.owner===undefined?null:s.players[s.ball.owner],hc=holder&&characters[holder.id],off=hc?.athlete&&s.ball.y<.6?hc.dribbleOffset||0:0,dx=holder?holder.fx*off:0,dz=holder?holder.fz*off:0;
       const drift=ballDrift,k=off?1:1-Math.exp(-dt/.07),px=drift.x,pz=drift.z;drift.x+=(dx-drift.x)*k;drift.z+=(dz-drift.z)*k;drift.vx=dt>0?(drift.x-px)/dt:0;drift.vz=dt>0?(drift.z-pz)/dt:0;}
     ballRoot.position.set(s.ball.x+ballDrift.x,s.ball.y,s.ball.z+ballDrift.z);{ballRoot.rotation.z-=(s.ball.vx+ballDrift.vx)*dt/config.ball.spinRadius;ballRoot.rotation.x+=(s.ball.vz+ballDrift.vz)*dt/config.ball.spinRadius;}
+    // Glitch v23 (`?soccerGlitch=v22` = as before): a keeper's catch and the start of his throw moved the ball 0.5-1.5 m in one frame (the
+    // simulation puts it in his hands at once); the shown ball now travels there in about 0.1 s. Teleports (kickoff, restarts) stay instant.
+    if(glitchV23){const holderNow=s.ball.owner==null?null:s.players[s.ball.owner],gap=Math.hypot(ballRoot.position.x-ballShown.x,ballRoot.position.y-ballShown.y,ballRoot.position.z-ballShown.z);
+      if(ballShown.valid&&holderNow?.hands&&s.phase==='playing'&&gap>.2&&gap<3&&dt>0){const k=1-Math.exp(-dt/.05);ballRoot.position.set(ballShown.x+(ballRoot.position.x-ballShown.x)*k,ballShown.y+(ballRoot.position.y-ballShown.y)*k,ballShown.z+(ballRoot.position.z-ballShown.z)*k);}
+      ballShown.x=ballRoot.position.x;ballShown.y=ballRoot.position.y;ballShown.z=ballRoot.position.z;ballShown.valid=true;}
     const holder=s.ball.owner==null?null:s.players[s.ball.owner],character=holder&&characters[holder.id];
     restartAttachment=character&&soccerRestartBallAttachment(T,character,holder.restartMotion,config.physics.ballRadius,ballRoot.position)?character.restartContactMetrics:null;
     if(restartAttachment&&character.v7){

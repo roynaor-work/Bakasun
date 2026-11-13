@@ -25,7 +25,7 @@ export function fieldTarget(p,s,c){
   const w=a.wideAttack,wide=w&&Math.abs(owner.z)>=w.width&&hx-owner.x*d<=w.range;
   if(wide){
    const runner=first(mates,byStriker(d),q=>q.id!==owner.id);
-   if(runner?.id===p.id){x=d*(hx-c.pitch.penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
+   if(runner?.id===p.id){x=d*(hx-(c.pitch.play||c.pitch).penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
    else{x=owner.x-d*w.squareBack;z=owner.z*w.squareInside;duty='square';}
   }
   // A pressed carrier gets a safe outlet: the support player drops diagonally behind,

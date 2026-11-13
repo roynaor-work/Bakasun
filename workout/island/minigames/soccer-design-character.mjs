@@ -14,6 +14,7 @@ import {soccerFeelEnabled,soccerFeelDiveClip,soccerFeelDivePlan,soccerFeelSlideP
 import {soccerCharacterSet,SOCCER_V5_FILES,SOCCER_V5_REGIONS,SOCCER_V5_RIG_URL,soccerV5Url,soccerV5Map,assignSoccerV5Regions} from './soccer-v5.mjs';
 import {loadAthleteSource,athleteRetargetMap,createAthleteInstance,athleteKitFor,athleteHeight,ATHLETE_ALIASES} from './athlete-body.mjs';
 import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
+import {createLocomotionGate,heldClipRelease,soccerSwitchVersion,soccerGlitchVersion,capYawStep,softenCut} from './soccer-v23.mjs?v=island-v2-20261107-11'; // v23 (13/11): locomotion gate (?soccerGlitch=v22), selected player leaves held clips (?soccerSwitch=v22)
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -196,7 +197,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
   // Codex header clips (v22, see soccer-headers.mjs): present only when the pack loaded and `?soccerHeaders` is not 0.
   const headersOn=soccerHeadersEnabled(config)&&Boolean(actions.v22_header_stand_goal&&actions.v22_header_jump_goal);
-  let idleAge=0,cutAccum=0,touchTimer=0,recentSpeed=0;
+  let idleAge=0,cutAccum=0,touchTimer=0,recentSpeed=0;const gate=createLocomotionGate(),switchFast=soccerSwitchVersion()==='v23';
   let rung=-1,state=data.initialState,previousMode=null,previousSpeed=0,previousYaw=null,kickTimer=0,stealTimer=0,headerTimer=0,headerPrevTime=0,headerEvents=[],headerPlan=null,lastTransition=null,slide=null,dive=null;
   // soccer-feel v2 (see soccer-feel.mjs): repaired slide and dive clips on the simulation's clocks, first touch armed before the ball arrives.
   const feel=soccerFeelEnabled(),feelSlide=feel?soccerFeelSlidePlan(data.states):null,feelSlideOn=Boolean(feelSlide&&actions.v8_slide);let armedTouch=null,armed=false,nextFade=null;
@@ -275,7 +276,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
     if(incoming!==outgoing)outgoing.fadeOut(fade);
     incoming.reset().setEffectiveWeight(1).setEffectiveTimeScale(rate);incoming.time=at;
     if(incoming!==outgoing)incoming.fadeIn(fade);incoming.play();
-    state=name;lastTransition=event||name;
+    state=name;lastTransition=event||name;gate?.changed();
   };
   return {
     actions,/** Seconds into a state at which its authored ball contact happens (null if it has none). */contactTime(name){const st=data.states[name],c=st?.ballContacts?.find(c=>/strike|contact/.test(c.event));return c?c.time*st.durationSeconds:null;},get state(){return state;},get lastTransition(){return lastTransition;},get armSwing(){return arm;},get slide(){return slide?{name:slide.name,time:slide.time,rate:slide.rate,follow:slide.follow,v2:Boolean(slide.plan)}:null;},
@@ -296,7 +297,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       if(dt<=0)return state;
       const speed=Math.hypot(p.vx,p.vz),yaw=Math.atan2(p.fx,p.fz),mode=animation.mode,turn=previousYaw===null?0:wrap(yaw-previousYaw);
       cutAccum=cutAccum*Math.exp(-dt/.2)+turn;recentSpeed=Math.max(speed,recentSpeed*Math.exp(-dt/.3));
-      const moving=speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode;
+      const moving=gate?gate.update(speed,dt):speed>(config.view.animation.idleSpeed||.2),edge=mode!==previousMode,mine=switchFast&&p.id===s.controlled&&p.team===0;
       const kick=(p.kickTime||0)>kickTimer+1e-6||(p.stealTime||0)>stealTimer+1e-6;
       // A new header (the simulation has just set headerTime): which clip, from the ball's height, the player's speed, the turn of the body and clearance.
       const headerClip=headersOn&&(p.headerTime||0)>headerTimer+1e-6&&mode==='header'?soccerHeaderClip({clear:soccerHeaderIsClear(p,s),ballHeight:s.ball.y||0,speed:recentSpeed,turn:cutAccum},n=>Boolean(actions[n])):null;
@@ -378,21 +379,22 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
         change(soccerV10FirstTouchClip(p.receiveHeight||0,p.receiveSpeed||0,p.id||0,n=>Boolean(actions[n])),'receive',true,{at:.2,rate:1.1,fadeSeconds:.06});
       }
       else if(v10&&p.role!=='keeper'&&(isLadder(state)||state==='turn_left'||state==='turn_right')&&recentSpeed>=SOCCER_V10_CUT_MIN_SPEED&&Math.abs(turn)>SOCCER_V10_CUT_MIN_STEP&&soccerV10CutClip(cutAccum,n=>Boolean(actions[n]),turn/dt)){
-        const name=soccerV10CutClip(cutAccum,n=>Boolean(actions[n]),turn/dt);cutAccum=0;change(name,'cut',true,{fadeSeconds:.06});
+        const raw=soccerV10CutClip(cutAccum,n=>Boolean(actions[n]),turn/dt),name=gate?softenCut(raw,n=>Boolean(actions[n])):raw;cutAccum=0;change(name,'cut',true,{fadeSeconds:.06});
       }
       else if(mode==='catch'&&edge)change((p.role==='keeper'&&soccerCodexKeeperCatch(s.ball.y||0,n=>Boolean(actions[n])))||(p.role==='keeper'&&actions.keeper_catch?'keeper_catch':'catch'),'receive');
-      else if(state==='v9_run_brake'&&!(moving&&actions[state].time>.2)&&actions[state].time<data.states[state].durationSeconds-.05){/* the brake plays to its end unless the player clearly sets off again */}
-      else if((soccerCodexHeld(state)||soccerV10Held(state))&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>.7)){/* a Codex once-clip plays to its end */}
+      else if(state==='v9_run_brake'&&!(moving&&actions[state].time>(mine?heldClipRelease(state,true):.2))&&actions[state].time<data.states[state].durationSeconds-.05){/* the brake plays to its end unless the player clearly sets off again */}
+      else if((soccerCodexHeld(state)||soccerV10Held(state))&&actions[state]&&actions[state].time<data.states[state].durationSeconds-.05&&!(moving&&actions[state].time>(mine?heldClipRelease(state,true):.7))){/* a Codex once-clip plays to its end */}
       else if(slide&&state===slide.name&&!(slide.plan?slideTimelineV2:slideTimeline)(p,mode,speed>(config.view.animation.idleSpeed||.2),dt)){/* the slide timeline is still playing */}
       else if(!['celebrate','fall','recover','kick','kick_power','pass_short','pass_long','catch','keeper_catch','slide_miss'].includes(state)&&!state.startsWith('slide_')&&!state.startsWith('keeper_dive')&&!state.startsWith('v8_keeper_dive')&&!state.startsWith('v11_keeper_dive')&&state!=='v8_shot'&&!state.startsWith('v8_pass')&&!state.startsWith('celebrate_')||actions[state].time>=data.states[state].durationSeconds-1e-5) {
         const running=['run','dribble_run','defensive_jockey'].includes(state)||isLadder(state);
         let locomotion=s.ball.owner===p.id&&actions.dribble_run?'dribble_run':s.mode==='defense'&&actions.defensive_jockey&&speed<config.view.animation.runSpeed?'defensive_jockey':'run';
         if(hasLadder&&locomotion==='run'){rung=soccerLadderRung(ladderDef,speed,isLadder(state)?ladder.indexOf(state):rung,ladderBounds);locomotion=ladder[rung];}
         if(mode==='celebrate'||mode==='dejected'){/* Hold the authored celebration (or the beaten keeper's stance) until the goal phase ends. */}
+        else if(gate&&!gate.canChange()&&!(mine&&moving)&&(running||idles.includes(state)||state==='idle'||state==='v9_goalkeeper_ready'||state==='v8_keeper_ready'||state==='turn_left'||state==='turn_right'||state==='decelerate')){/* v23: a locomotion clip is kept SOCCER_LOCOMOTION_DWELL before the next one */}
         else if(!moving&&running)change(codex&&actions.v9_run_brake?(previousSpeed>=SOCCER_CODEX_BRAKE_FROM?'v9_run_brake':(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':actions[idleHome]?idleHome:'idle')):'decelerate','slowing');
         else if(!moving)change(p.role==='keeper'&&actions.v9_goalkeeper_ready?'v9_goalkeeper_ready':p.role==='keeper'&&actions.v8_keeper_ready?'v8_keeper_ready':actions[idleHome]?(idles.includes(state)?state:idleHome):'idle','stopped');
-        else if(running&&Math.abs(turn)>.16)change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
-        else if(speed<previousSpeed-.15&&running)change('decelerate','slowing');
+        else if(running&&Math.abs(turn)>.16&&(!gate||gate.turnAllowed(speed)))change(turn<0?'turn_left':'turn_right',turn<0?'turn_left':'turn_right');
+        else if((gate?gate.decelerating:speed<previousSpeed-.15)&&running)change('decelerate','slowing');
         else if(!['turn_left','turn_right','decelerate'].includes(state)||actions[state].time>=data.states[state].durationSeconds-1e-5){
           // Rung to rung keeps the foot phase; every other entry starts the cycle.
           const phase=isLadder(state)&&isLadder(locomotion)?(actions[state].time/data.states[state].durationSeconds)%1:0;
@@ -620,7 +622,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
   try {
     const {sources,clipSets,sourceHeights,lodGeometry,data,map,clips,set,outfield,keeper:keeperSource,athlete:athleteSource}=await prepareSoccerDesignSources();
     globalThis.performance?.mark?.('soccer:characters-instance-start');
-    const height=config.view.animation.characterHeight||1.8;
+    const height=config.view.animation.characterHeight||1.8,yawCapped=soccerGlitchVersion()==='v23';
     let triangles=0,lowTriangles=0,mobileTriangles=0;
     const a=config.view.athlete||{};
     for(let id=0;id<roster.length;id++) {
@@ -639,7 +641,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
           update(p,s,animation,dt){
             if(characterDisposed)return;
             const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
-            if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
+            if(this.yaw===null)this.yaw=wanted;else if(dt>0){const turnStep=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));this.yaw+=yawCapped&&this.slideYaw==null?capYawStep(turnStep,dt):turnStep;}
             pivot.position.set(stand?stand.x:p.x,motion.ownsHeight?0:Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
             this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
           },
@@ -686,7 +688,7 @@ export async function loadDesignCharacters({config,roster,scene,track=x=>x,selec
         update(p,s,animation,dt){
           if(characterDisposed)return;
           const stand=keeperStand(this,p,s,dt),wanted=stand?stand.yaw:feelSlideYaw(this,p,motion)??Math.atan2(p.fx,p.fz);
-          if(this.yaw===null)this.yaw=wanted;else if(dt>0)this.yaw+=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));
+          if(this.yaw===null)this.yaw=wanted;else if(dt>0){const turnStep=wrap(wanted-this.yaw)*(1-Math.exp(-dt*(this.slideYaw!=null?40:18)));this.yaw+=yawCapped&&this.slideYaw==null?capYawStep(turnStep,dt):turnStep;}
           pivot.position.set(stand?stand.x:p.x,motion.ownsHeight?0:Math.max(0,animation.height||0),stand?stand.z:p.z);pivot.rotation.set(0,this.yaw,0);
           this.active=motion.update(p,s,animation,dt);this.mode=animation.mode;
         },
