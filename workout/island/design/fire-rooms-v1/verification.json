@@ -1,0 +1,206 @@
+{
+  "date": "2026-11-13",
+  "baseCommit": "9c8ee743",
+  "license": "CC0-1.0",
+  "validator": {
+    "validatorVersion": "2.0.0-dev.3.10",
+    "rooms": [
+      {
+        "id": "living-room",
+        "totalTriangles": 4173,
+        "visibleTriangles": 2696,
+        "nodes": 41,
+        "burnables": 9,
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ]
+      },
+      {
+        "id": "kitchen",
+        "totalTriangles": 5604,
+        "visibleTriangles": 3352,
+        "nodes": 49,
+        "burnables": 11,
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ]
+      },
+      {
+        "id": "bedroom",
+        "totalTriangles": 4523,
+        "visibleTriangles": 2871,
+        "nodes": 53,
+        "burnables": 12,
+        "errors": 0,
+        "warnings": 0,
+        "infos": 1,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "browser": "151.0.7922.173",
+    "initial": [
+      {
+        "id": "living-room",
+        "total": 4173,
+        "active": 2696,
+        "rendered": 2696,
+        "nodes": 41
+      },
+      {
+        "id": "kitchen",
+        "total": 5604,
+        "active": 3352,
+        "rendered": 3352,
+        "nodes": 49
+      },
+      {
+        "id": "bedroom",
+        "total": 4523,
+        "active": 2871,
+        "rendered": 2871,
+        "nodes": 53
+      }
+    ],
+    "burnt": [
+      {
+        "id": "living-room",
+        "total": 4173,
+        "active": 2696,
+        "rendered": 2696,
+        "nodes": 41
+      },
+      {
+        "id": "kitchen",
+        "total": 5604,
+        "active": 3352,
+        "rendered": 3352,
+        "nodes": 49
+      },
+      {
+        "id": "bedroom",
+        "total": 4523,
+        "active": 2871,
+        "rendered": 2871,
+        "nodes": 53
+      }
+    ],
+    "objectTransitionsChecked": 64,
+    "canvasPicking": true,
+    "globalStateToggles": true,
+    "anchors": true,
+    "wireframe": true,
+    "framing": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "scrollWidth": 1440,
+        "aspects": [
+          1.3363914373088686,
+          1.3323170731707317,
+          1.3363914373088686
+        ]
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "aspects": [
+          1.3308550185873607,
+          1.3308550185873607,
+          1.3308550185873607
+        ]
+      },
+      {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "aspects": [
+          1.3298969072164948,
+          1.3298969072164948,
+          1.3298969072164948
+        ]
+      }
+    ],
+    "wasmDisabled": true,
+    "wasmCalls": 0,
+    "externalRequests": [],
+    "consoleErrors": [],
+    "cspViolations": [],
+    "failedResponses": [],
+    "renderCaptures": 6
+  },
+  "deterministicRebuild": {
+    "passed": true,
+    "sha256": {
+      "kitchen.glb": "fedf072fd86a5c2438914ea08dbc521b50fa1dfd2f3317b8fdb99943d1e4bd4c",
+      "bedroom.glb": "a0b8f463e28de265a7d64699fe99a29dbc6c85c1f4df94a8140a95ccdcc9125e",
+      "living-room.glb": "b08e25db194ff522d6206df7ed008566fdda7d0f9558e39c3d709e603907e04d",
+      "palette-1024.png": "508170e481a28cfe9afa1b4b1e1e03a35cb05a31aca58eec89b884657f8c49d1",
+      "manifest.json": "9f84ab06d81927defb7b9695fa54ae82867d70fb3bf51626f0065e9c0e2bea7a"
+    }
+  },
+  "visualReview": {
+    "allSixCapturesReviewed": true,
+    "capturesContainOnlyRoomRenders": true,
+    "noBrandsOrLettering": true
+  },
+  "repositoryTests": {
+    "command": "node --test tests/*.mjs",
+    "firstRun": {
+      "tests": 3951,
+      "passed": 3886,
+      "failed": 1,
+      "skipped": 64,
+      "exitCode": 1,
+      "durationMs": 615647.676463
+    },
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Playwright bundled Chromium headless shell executable is absent; launch fails before navigation. The existing test leaves its HTTP server open after launch failure; the hung worker was terminated after all other workers completed."
+    },
+    "targetedRetry": {
+      "file": "tests/workout-royiki.test.mjs",
+      "configuration": "ISLAND_PLAYWRIGHT points to a temporary adapter outside the repository, using /usr/bin/chromium",
+      "browserExecutable": "/usr/bin/chromium",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "durationMs": 22852.124799
+    },
+    "repositoryTestsEdited": false
+  },
+  "scope": {
+    "addedFiles": 18,
+    "modifiedExistingFiles": 0,
+    "deletedFiles": 0,
+    "directory": "workout/island/design/fire-rooms-v1/"
+  }
+}
