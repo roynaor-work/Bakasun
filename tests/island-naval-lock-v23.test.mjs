@@ -8,7 +8,7 @@ import {createNavalModel,navalTargetable} from '../workout/island/minigames/nava
 import {createNavalInput} from '../workout/island/minigames/naval-controls.mjs';
 import {navalLockOn,navalLockConfig,navalLockPick,navalHullScreenDistance,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus,NAVAL_LOCK_DEFAULTS} from '../workout/island/minigames/naval-lockon.mjs';
 import {drawNavalLockHud,navalLockBox,NAVAL_LOCK_WORDS} from '../workout/island/minigames/naval-lockon-hud.mjs';
-import {navalLaunch} from '../workout/island/minigames/naval-ballistics.mjs';
+import {navalLaunch,navalBallisticPoint} from '../workout/island/minigames/naval-ballistics.mjs';
 import {navalForecast} from '../workout/island/minigames/naval-forecast.mjs';
 import {navalStagePressure} from '../workout/island/minigames/naval-campaign.mjs';
 import {seededRandom} from '../workout/island/minigames/context.mjs';
@@ -48,13 +48,18 @@ test('solver: a ready solution meets the locked hull in the forecast, on moving 
    assert.ok(Number.isFinite(s.yaw)&&Number.isFinite(s.elevation)&&s.power>=nb.ballistics.minPower&&s.power<=1,'real turret settings');
    if(s.status==='ready'){assert.equal(flown(m,s),e.index,`stage ${stage} hull ${e.index}: the solution meets the hull`);tally.readyHit++;}
    if(s.status==='far')assert.equal(s.reachable,false);
-   if(s.status==='miss')assert.ok(nb.shipTypes[e.kind].submarine&&e.depth>0,'a miss here is a submarine under water');}
+   if(s.status==='miss')assert.ok(nb.shipTypes[e.kind].submarine,'a miss here is a submarine that will be under water when the shell arrives');}
  }
  assert.ok(tally.ready>=20,JSON.stringify(tally));assert.equal(tally.readyHit,tally.ready);
  // Far: the ship is pulled back out of reach (a shell flies about 335 units).
  const far=make(3,1);run(far,30);far.playerShip.x=-200;const fs=solve(far,far.enemies[0]);assert.equal(fs.status,'far');assert.equal(fs.reachable,false);
  // Guided missile and repair need no ballistic solution: bearing only.
  const g=solve(far,far.enemies[0],1);assert.equal(g.status,'ready');assert.ok(Math.abs(g.yaw-Math.atan2(far.enemies[0].z-far.playerShip.z,far.enemies[0].x-far.playerShip.x))<1e-12);
+ // Warm start: the previous ready answer is tried first, a tenth of a second later it is still ready on the same arc and still meets the hull.
+ let warmChecked=0;for(const [stage,seed] of [[3,1],[10,2],[20,1]]){const w=make(stage,seed);run(w,90);const we=w.enemies.find(e=>e.active&&e.hp>0&&!e.structure&&navalTargetable(e,0,nb));const a1=solve(w,we);if(a1.status!=='ready')continue;run(w,6);
+  const a2=navalLockSolve({ship:w.playerShip,target:we,enemies:w.enemies,wind:w.wind,kind:0,pressure:navalStagePressure(w.settings.difficulty),context:context(w),targetable:x=>x.active&&x.hp>0&&navalTargetable(x,0,nb),warm:a1},nb,navalLockConfig(nb));
+  assert.equal(a2.status,'ready');assert.equal(a2.candidate,a1.candidate);assert.ok(Math.hypot(a2.point.x-a1.point.x,a2.point.z-a1.point.z)<12,'the aim point moved with the hull');assert.equal(flown(w,a2),we.index);warmChecked++;}
+ assert.ok(warmChecked>=2);
 });
 
 test('solver on a shore base: when the flat arc meets a structure in front, a steeper arc (lower power) drops onto the locked one',()=>{
@@ -93,6 +98,8 @@ test('model: a lock turns the turret by itself onto a moving hull, a tap fires o
   assert.equal(m.homing.status,'ready',`stage ${stage}: on target after ${frames} frames`);assert.ok(Math.abs(wrap(m.homing.solution.yaw-m.turret.yaw))*DEG<=.5,'the aim input did not move the turret');
   // Follows: a second of the hull sailing on, the turret stays on the solution.
   let worst=0;for(let i=0;i<60;i++){m.update(1/60,{});worst=Math.max(worst,Math.abs(wrap(m.homing.solution.yaw-m.turret.yaw))*DEG);}assert.ok(worst<=.6,`turret error while following ${worst.toFixed(2)} deg`);
+  // On target with no finger on Fire, the arc comes from the lock's own forecast, re-sampled on the turret's launch: it ends on the locked hull.
+  const pr=m.prediction;assert.equal(pr.locked,true);assert.equal(pr.contact?.index,e.index);assert.equal(pr.safe,true);const tip=navalBallisticPoint(pr.launch,pr.end.t);assert.ok(Math.hypot(tip.x-pr.end.x,tip.z-pr.end.z)<1e-9,'the mark sits on the drawn arc');
   const hp=e.hp,fired=m.fired;m.update(1/60,{quickShot:true});assert.equal(m.fired,fired+1,'one tap, one shell');assert.equal(m.homing?.queued,false);
   run(m,200,()=>({}));assert.ok(e.hp<hp,`stage ${stage}: the shell hit the locked hull`);assert.equal(m.lastShot.actual.victim,e.index);
  }
@@ -108,6 +115,14 @@ test('model: behind the bow, the turret swings round and the shell hits; a tap d
  assert.equal(m.fired,fired+1);assert.ok(frames<=72,`fired ${frames} frames after the tap (swing of ${rel().toFixed(0)} degrees)`);
  const turretOffBow=Math.abs(wrap(m.turret.yaw-m.playerShip.heading))*DEG;assert.ok(turretOffBow>150,`the turret points ${turretOffBow.toFixed(0)} degrees off the bow`);
  run(m,200);assert.ok(e.hp<hp,'hit behind the bow');
+});
+
+test('model: a locked submarine that will be under water when the shell arrives reads dive, and the guided missile still homes on it',()=>{
+ const m=make(11,1);run(m,30);const sub=m.enemies.find(e=>e.active&&e.hp>0&&nb.shipTypes[e.kind].submarine);assert.ok(sub,'stage 11 has a submarine');
+ m.update(1/60,{lockTarget:sub.index});const seen=new Set();for(let i=0;i<600;i++){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});if(!m.homing)break;seen.add(m.homing.status);if(seen.has('dive')&&seen.has('ready'))break;}
+ assert.ok(seen.has('dive'),`dive seen (${[...seen]})`);assert.ok(!seen.has('miss'),'a submarine miss always reads dive');
+ // While it is under water, the guided missile (which follows a diving submarine) is ready at once.
+ for(let i=0;i<600&&m.homing&&m.homing.status!=='dive';i++)m.update(1/60,{});m.update(1/60,{ammoIndex:1});run(m,30);assert.equal(m.homing.status,'ready');
 });
 
 test('model: the lock ends with another long press, a clear, or the sinking; a tap during the reload is fired when the gun is ready; an empty magazine never queues',()=>{
