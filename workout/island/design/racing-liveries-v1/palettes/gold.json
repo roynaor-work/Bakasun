@@ -1,0 +1,33 @@
+{
+  "id": "gold",
+  "name": "זהב",
+  "license": "CC0-1.0",
+  "primary": "#d6aa3b",
+  "secondary": "#594014",
+  "stripe": "#182532",
+  "pinstripe": "#f7f2e8",
+  "finish": {
+    "metalness": 0.36,
+    "roughness": 0.29,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.16
+  },
+  "cars": [
+    {
+      "driverId": "turkiz",
+      "number": 44,
+      "variant": "A",
+      "stripeWidth": 0.07,
+      "pinstripeWidth": 0.008,
+      "numberPlate": "numbers/gold-44.png"
+    },
+    {
+      "driverId": "yam",
+      "number": 81,
+      "variant": "B",
+      "stripeWidth": 0.1,
+      "pinstripeWidth": 0.012,
+      "numberPlate": "numbers/gold-81.png"
+    }
+  ]
+}
