@@ -13,7 +13,7 @@ export const INTERIOR_TUNING=Object.freeze({
   heat:{normal:1,electric:1,oil:1,heavy:1.5},
   points:{normal:60,electric:90,oil:90,heavy:110,rescue:150,room:80},
   reach:22,                                       // px beyond a spot's radius that still hits it
-  crawlLift:280,crawlEase:6,                      // how far the view drops when crawling (px of the clear zone) and how fast
+  crawlLift:280,crawlEase:6,crawlLinger:1.2,      // how far the view drops when crawling (px of the clear zone), how fast, how long it stays low
   airOut:.12,                                     // smoke per second leaving a room once every fire is out
   mistakeCooldown:1.6,
 });
@@ -74,14 +74,16 @@ export function createInteriorModel({stage,sound=()=>{},tuning=INTERIOR_TUNING,a
         return;}
       const r=room();
       if(input.tool&&unlocked.has(input.tool)&&input.tool!==tool){tool=input.tool;sound('tool');}
-      // crawling: eyes go down under the smoke (eased), the smoke comes down half as fast
-      r.crawl+= ((input.crawl?1:0)-r.crawl)*Math.min(1,dt*tuning.crawlEase);
+      // crawling: eyes go down under the smoke (eased), the smoke comes down half as fast. The view stays low for a moment after the
+      // long press ends, so one hand can let go of "crawl" and tap the child.
+      r.crawlHold=input.crawl?tuning.crawlLinger:Math.max(0,(r.crawlHold||0)-dt);const low=Boolean(input.crawl)||r.crawlHold>0;
+      r.crawl+=((low?1:0)-r.crawl)*Math.min(1,dt*tuning.crawlEase);
       if(phase==='intro'){if(phaseTime>=tuning.introSeconds||input.tap||input.skip){phase='play';phaseTime=0;newTool=null;}return;}
       if(phase==='clear'){if(phaseTime>=tuning.clearSeconds){if(current+1<rooms.length)enterRoom(current+1);else{phase='victory';phaseTime=0;sound('rescue');}}return;}
       // ---- play ----
       r.time+=dt;
       const fires=r.spots.some(s=>!s.done);
-      r.smoke=fires?Math.min(1,r.smoke+dt/r.def.smokeSeconds*(input.crawl?.5:1)):Math.max(0,r.smoke-tuning.airOut*dt);
+      r.smoke=fires?Math.min(1,r.smoke+dt/r.def.smokeSeconds*(low?.5:1)):Math.max(0,r.smoke-tuning.airOut*dt);
       for(const s of r.spots){s.flare=Math.max(0,s.flare-dt);s.spark=Math.max(0,s.spark-dt);}
       // tanks: water refills while not spraying; the extinguisher and the foam are one per room
       for(const k of ['water','extinguisher','foam']){const t=TANK[k];if(!(input.pointer&&tool===k&&!empty[k])&&t.refill){tanks[k]=Math.min(1,tanks[k]+t.refill*dt);if(empty[k]&&tanks[k]>=t.restart)empty[k]=false;}}

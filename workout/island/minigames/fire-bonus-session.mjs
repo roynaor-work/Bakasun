@@ -40,7 +40,7 @@ export function runFireBonusSession(ctx){
   const gaugeFill=el('i','fv-gauge-fill'),gaugeText=el('bdi','fv-gauge-text','100%');gauge.append(icon('spray'),el('span','fv-gauge-track'),gaugeText);gauge.querySelector('.fv-gauge-track').append(gaugeFill);
   dialog.append(hud,coach,gauge);
   const button=(cls,label,iconName,text)=>{const b=el('button','fv-button '+cls);b.type='button';b.setAttribute('aria-label',label);b.append(icon(iconName));if(text){const s=el('span','fv-button-label',text);s.setAttribute('aria-hidden','true');b.append(s);}pad.append(b);return b;};
-  const input={},keys=new Set();let pointerId=null,downAt=0,downPoint=null,moved=false;
+  const input={};let pointerId=null,downAt=0,downPoint=null,moved=false;
   // ---- targets controls: aim with one finger anywhere, hold the hose button with the other thumb -------------------------------
   let spray=null,wind=null,windArrow=null;
   if(mode==='targets'){
@@ -73,7 +73,7 @@ export function runFireBonusSession(ctx){
   for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,e=>{if(e.pointerId!==pointerId)return;pointerId=null;
     if(mode==='interior'){if(type==='pointerup'&&!moved&&performance.now()-downAt<320)input.tap=local(e);delete input.pointer;}},options);
   for(const type of ['contextmenu','selectstart','dragstart'])dialog.addEventListener(type,e=>e.preventDefault(),options);
-  const clear=()=>{for(const k of Object.keys(input))delete input[k];pointerId=null;keys.clear();spray?.classList.remove('held');crawl?.classList.remove('held');};
+  const clear=()=>{for(const k of Object.keys(input))delete input[k];pointerId=null;spray?.classList.remove('held');crawl?.classList.remove('held');};
   window.addEventListener('blur',clear,options);document.addEventListener('visibilitychange',()=>{clear();last=undefined;},options);
   window.addEventListener('keydown',e=>{if(paused||mode!=='targets')return;if(e.key===' '){input.firing=true;}},options);window.addEventListener('keyup',e=>{if(e.key===' ')input.firing=false;},options);
   // ---- sizing -----------------------------------------------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ export function runFireBonusSession(ctx){
     const elapsed=last===undefined?0:now-last,dt=paused||document.hidden?0:Math.min(.1,elapsed/1000);last=now;
     if(dt>0){samples++;if(elapsed>40)slow++;if(samples>=90){if(slow>45&&!lowQuality){lowQuality=true;resize();}samples=slow=0;}}
     try{
-      if(!paused&&ready){const step={...input};delete input.tap;delete input.enter;delete input.finish;delete input.skip;delete input.tool;model.update(dt,step);}
+      if(!paused&&ready&&dt>0){const step={...input};delete input.tap;delete input.enter;delete input.finish;delete input.skip;delete input.tool;model.update(dt,step);} // one-shot inputs wait for a real frame
       updateAudio();
       if(ready){paint.setTransform(dpr,0,0,dpr,0,0);paint.clearRect(0,0,W,H);
         if(mode==='targets')painter.drawTargets(paint,model,model.time,paused?0:dt,dpr);else painter.drawInterior(paint,model,model.time,paused?0:dt,dpr);drawn++;firstFrame=true;}

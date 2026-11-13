@@ -144,9 +144,10 @@ test('interior smoke: the bedroom child is hidden in the smoke until the player 
   const bedroom=INTERIOR_STAGES[0].rooms[2],m=createInteriorModel({stage:{...INTERIOR_STAGES[0],rooms:[bedroom]}}),go=input=>m.update(.1,input);
   for(let i=0;i<40&&m.phase!=='door';i++)go({});go({enter:true});for(let i=0;i<10;i++)go({});go({skip:true});
   assert.equal(rescueCovered(m.room),true,'hidden while standing');for(let i=0;i<10;i++)go({crawl:true});assert.equal(rescueCovered(m.room),false,'visible while crawling');
-  const before=m.room.smoke;go({crawl:true});const crawlRate=m.room.smoke-before;const b2=m.room.smoke;go({});const standRate=m.room.smoke-b2;assert.ok(crawlRate<standRate,'smoke comes down slower while crawling');
+  const before=m.room.smoke;go({crawl:true});const crawlRate=m.room.smoke-before;for(let i=0;i<14;i++)go({});const b2=m.room.smoke;go({});const standRate=m.room.smoke-b2;assert.ok(crawlRate<standRate,'smoke comes down slower while crawling');
   const kid=m.room.rescue,bed=m.room.spots.find(s=>s.id==='bed'),tapKid={x:kid.x,y:(kid.y+kid.headY)/2};
   go({crawl:true,tap:tapKid});assert.equal(kid.state,'waiting');assert.equal(m.feedback.key,'fire.v23.say.clearKid','crawling: the child is seen, the bed fire comes first');
+  for(let i=0;i<5;i++)go({});assert.equal(rescueCovered(m.room),false,'the view stays low for a moment after letting go');
   for(let i=0;i<20;i++)go({});assert.equal(rescueCovered(m.room),true);go({tap:tapKid});assert.equal(kid.state,'waiting');assert.equal(m.feedback.key,'fire.v23.say.crawl','standing: hidden in the smoke');
   const score=m.score;for(let i=0;i<800&&kid.state==='waiting';i++)go({});assert.equal(kid.state,'teammate');assert.equal(m.score,score,'a second crew rescue gives no points');
   assert.ok(smokeLine(m.room)>=m.room.floor-1);

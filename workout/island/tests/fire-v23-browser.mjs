@@ -49,11 +49,11 @@ async function waitReady(t,phase){for(let i=0;i<150;i++){const s=await t.snap();
 async function playTargets(t,level,name){
   await t.tapEl('[data-action=game-play]');await t.tick(200);await waitForGameNavigation(t.page);
   await t.tapEl(`[data-action=fire-bonus-play][data-fire-bonus=targets][data-level="${level}"]`);await waitForGameStart(t.page);
-  let s=await waitReady(t);const run={level,steps:0,frames:[],sprayPresses:0,emptyHits:0};report.runs[name]=run;
+  let s=await waitReady(t),lastGood=s;const run={level,steps:0,frames:[],sprayPresses:0,emptyHits:0};report.runs[name]=run;
   run.shots=[await t.shot(name+'-start')];const spray=await t.center('#shoot');let aim=null,fingerDown=false,sprayDown=false,current=null,startTime=s.time;
   for(let step=0;step<1400&&!s.result;step++){
     const next=s.targets.find(x=>x.kind==='smoke'&&!x.done)||s.targets.find(x=>!x.done&&!x.covered&&!x.falling); // smoke first: it hides a window
-    if(!next){if(sprayDown){await t.touch('touchEnd',2);sprayDown=false;}if(fingerDown){await t.touch('touchEnd',1);fingerDown=false;}await t.tick(100);s=await t.snap();if(!s)break;continue;}
+    if(!next){if(sprayDown){await t.touch('touchEnd',2);sprayDown=false;}if(fingerDown){await t.touch('touchEnd',1);fingerDown=false;}await t.tick(100);s=await t.snap();if(!s)break;lastGood=s;continue;}
     const target=s.screen.targets.find(x=>x.id===next.id);
     if(current!==next.id){current=next.id;aim={x:target.x,y:target.y};}
     else if(s.spraying){aim.x+=(target.x-s.screen.impact.x)*.35;aim.y+=(target.y-s.screen.impact.y)*.35;}
@@ -61,13 +61,13 @@ async function playTargets(t,level,name){
     if(!fingerDown){await t.touch('touchStart',1,aim.x,aim.y);fingerDown=true;}else await t.touch('touchMove',1,aim.x,aim.y);
     if(s.empty&&sprayDown){await t.touch('touchEnd',2);sprayDown=false;run.emptyHits++;}
     else if(!sprayDown&&!s.empty&&s.pressure>.85){await t.touch('touchStart',2,spray.x,spray.y);sprayDown=true;run.sprayPresses++;}
-    await t.tick(100);s=await t.snap();run.steps++;if(!s)break;
+    await t.tick(100);s=await t.snap();run.steps++;if(!s)break;lastGood=s;
     if(step===14)run.shots.push(await t.shot(name+'-spray'));
     if(step%10===0)run.frames.push({time:+s.time.toFixed(1),pressure:+s.pressure.toFixed(2),spraying:s.spraying,wind:Math.round(s.wind),remaining:s.remaining,score:s.score,hit:s.hitTarget});
     if(s.targets.some(x=>x.kind==='fireball'&&!x.done)&&!run.fireballShot&&s.hitTarget!==null&&s.targets[s.hitTarget]?.kind==='fireball'){run.fireballShot=await t.shot(name+'-fireball');run.shots.push(run.fireballShot);}
   }
   if(sprayDown)await t.touch('touchEnd',2);if(fingerDown)await t.touch('touchEnd',1);
-  const last=s;run.final=last?{time:+last.time.toFixed(1),score:last.score,remaining:last.remaining,result:last.result}:null;
+  const last=lastGood;run.final=last?{time:+last.time.toFixed(1),score:last.score,remaining:last.remaining,result:last.result,sessionEnded:!s}:null;
   for(let i=0;i<40;i++){if(await t.page.locator('[data-fire-bonus-result=targets]').count())break;await t.tick(100);}
   run.resultCard=await t.page.locator('[data-fire-bonus-result=targets]').count()>0;run.shots.push(await t.shot(name+'-result'));
   run.resultRows=await t.page.evaluate(()=>[...document.querySelectorAll('[data-fire-bonus-result] .result-row')].map(r=>r.textContent.trim()));
