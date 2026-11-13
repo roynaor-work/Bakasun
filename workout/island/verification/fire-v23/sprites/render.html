@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>fire v23 sprite renderer</title></head>
+<body style="margin:0;background:transparent">
+<!-- 13/11/2026 fire v23: renders the game's 2D sprites and backgrounds from the island's own 3D assets (fire-v7, Meshy, kid, Codex tools)
+     and simple box rooms. Driven by make-sprites.mjs; nothing here ships to the phone except the PNG/WebP files it produces. -->
+<script type="module">
+import * as T from '/workout/island/vendor/three.module.js';
+import {GLTFLoader} from '/workout/island/vendor/GLTFLoader.js';
+import {DRACOLoader} from '/workout/island/vendor/DRACOLoader.js';
+const loader=new GLTFLoader(),draco=new DRACOLoader();draco.setDecoderPath('/workout/island/vendor/draco/');loader.setDRACOLoader(draco);
+const cache=new Map();
+async function gltf(url){if(!cache.has(url))cache.set(url,loader.loadAsync(url));return cache.get(url);}
+function cloneSkinned(source){const root=source.clone(true),copies=new Map();const map=(a,b)=>{copies.set(a,b);for(let i=0;i<a.children.length;i++)map(a.children[i],b.children[i]);};map(source,root);
+  source.traverse(o=>{if(!o.isSkinnedMesh)return;const m=copies.get(o);m.skeleton=o.skeleton.clone();m.skeleton.bones=o.skeleton.bones.map(b=>copies.get(b));m.bind(m.skeleton,o.bindMatrix);});return root;}
+function material(spec){
+  const m=new T.MeshStandardMaterial({color:spec.color||'#cccccc',roughness:spec.roughness??0.8,metalness:spec.metalness??0});
+  if(spec.emissive){m.emissive=new T.Color(spec.emissive);m.emissiveIntensity=spec.emissiveIntensity??1;}
+  if(spec.opacity!==undefined){m.transparent=true;m.opacity=spec.opacity;}
+  if(spec.stripes){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');g.fillStyle=spec.color;g.fillRect(0,0,256,256);g.fillStyle=spec.stripes.color;const n=spec.stripes.count||8;for(let i=0;i<n;i++){if(spec.stripes.dir==='v')g.fillRect(i*256/n,0,256/n*(spec.stripes.width||0.5),256);else g.fillRect(0,i*256/n,256,256/n*(spec.stripes.width||0.5));}const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.wrapS=t.wrapT=T.RepeatWrapping;if(spec.stripes.repeat)t.repeat.set(...spec.stripes.repeat);m.map=t;m.color=new T.Color('#ffffff');}
+  if(spec.checker){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');const n=spec.checker.count||8,s=256/n;for(let y=0;y<n;y++)for(let x=0;x<n;x++){g.fillStyle=(x+y)%2?spec.checker.a:spec.checker.b;g.fillRect(x*s,y*s,s,s);}const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.wrapS=t.wrapT=T.RepeatWrapping;if(spec.checker.repeat)t.repeat.set(...spec.checker.repeat);m.map=t;m.color=new T.Color('#ffffff');}
+  if(spec.planks){const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');const n=spec.planks.count||8;for(let i=0;i<n;i++){const l=spec.planks.colors[i%spec.planks.colors.length];g.fillStyle=l;g.fillRect(0,i*512/n,512,512/n);g.fillStyle='rgba(0,0,0,.18)';g.fillRect(0,(i+1)*512/n-2,512,2);const off=(i*173)%512;g.fillRect(off,i*512/n,2,512/n);}const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.wrapS=t.wrapT=T.RepeatWrapping;if(spec.planks.repeat)t.repeat.set(...spec.planks.repeat);m.map=t;m.color=new T.Color('#ffffff');}
+  return m;
+}
+function primitive(p){
+  let g;
+  if(p.box)g=new T.BoxGeometry(...p.box);
+  else if(p.cyl)g=new T.CylinderGeometry(p.cyl[0],p.cyl[1],p.cyl[2],p.cyl[3]||24);
+  else if(p.sphere)g=new T.SphereGeometry(p.sphere[0],p.sphere[1]||24,p.sphere[2]||16);
+  else if(p.plane)g=new T.PlaneGeometry(...p.plane);
+  else if(p.torus)g=new T.TorusGeometry(...p.torus);
+  else if(p.cone)g=new T.ConeGeometry(p.cone[0],p.cone[1],p.cone[2]||24);
+  else if(p.capsule)g=new T.CapsuleGeometry(...p.capsule);
+  const mesh=new T.Mesh(g,material(p));mesh.position.fromArray(p.pos||[0,0,0]);if(p.rot)mesh.rotation.set(...p.rot);if(p.scale)mesh.scale.fromArray(p.scale);
+  mesh.castShadow=p.castShadow??true;mesh.receiveShadow=p.receiveShadow??true;return mesh;
+}
+function skyTexture(top,bottom,horizon){const c=document.createElement('canvas');c.width=4;c.height=512;const g=c.getContext('2d');const gr=g.createLinearGradient(0,0,0,512);gr.addColorStop(0,top);gr.addColorStop(0.72,bottom);gr.addColorStop(1,horizon||bottom);g.fillStyle=gr;g.fillRect(0,0,4,512);const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;return t;}
+/** Glass windows on a model's front face, found by casting rays at the face (material name contains "glass"). World rectangles. */
+function glassWindows(object,{step=0.06,front='+z',minArea=0.25}={}){
+  object.updateMatrixWorld(true);const box=new T.Box3().setFromObject(object),ray=new T.Raycaster(),cells=new Map();
+  const nx=Math.ceil((box.max.x-box.min.x)/step),ny=Math.ceil((box.max.y-box.min.y)/step);
+  for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){const x=box.min.x+(ix+.5)*step,y=box.min.y+(iy+.5)*step;ray.set(new T.Vector3(x,y,box.max.z+1),new T.Vector3(0,0,-1));const hit=ray.intersectObject(object,true)[0];if(!hit)continue;const mats=Array.isArray(hit.object.material)?hit.object.material:[hit.object.material];const mat=hit.face&&Array.isArray(hit.object.material)?hit.object.material[hit.face.materialIndex]:mats[0];if(/glass/i.test(mat?.name||''))cells.set(ix+','+iy,{ix,iy,z:hit.point.z});}
+  const seen=new Set(),rects=[];
+  for(const [key,c]of cells){if(seen.has(key))continue;const stack=[c],members=[];seen.add(key);
+    while(stack.length){const m=stack.pop();members.push(m);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1],[2,0],[-2,0],[0,2],[0,-2],[3,0],[-3,0],[0,3],[0,-3]]){const k=(m.ix+dx)+','+(m.iy+dy);if(cells.has(k)&&!seen.has(k)){seen.add(k);stack.push(cells.get(k));}}}
+    const x0=Math.min(...members.map(m=>m.ix)),x1=Math.max(...members.map(m=>m.ix)),y0=Math.min(...members.map(m=>m.iy)),y1=Math.max(...members.map(m=>m.iy));
+    const w=(x1-x0+1)*step,h=(y1-y0+1)*step;if(w*h<minArea)continue;
+    rects.push({x0:box.min.x+x0*step,x1:box.min.x+(x1+1)*step,y0:box.min.y+y0*step,y1:box.min.y+(y1+1)*step,z:Math.max(...members.map(m=>m.z))});}
+  return rects.sort((a,b)=>b.y0-a.y0||a.x0-b.x0);
+}
+window.render=async spec=>{
+  const W=spec.w,H=spec.h;
+  const r=new T.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});r.setSize(W,H);r.setPixelRatio(1);r.outputColorSpace=T.SRGBColorSpace;
+  r.toneMapping=T.ACESFilmicToneMapping;r.toneMappingExposure=spec.exposure??1.0;r.shadowMap.enabled=spec.shadows!==false;r.shadowMap.type=T.PCFSoftShadowMap;document.body.append(r.domElement);
+  const scene=new T.Scene();
+  if(spec.sky)scene.background=skyTexture(...spec.sky);else if(spec.bg)scene.background=new T.Color(spec.bg);
+  if(spec.fog)scene.fog=new T.Fog(...spec.fog);
+  const L=spec.lights||{};
+  scene.add(new T.HemisphereLight(L.sky||'#eef3f7',L.ground||'#5d564d',L.hemi??1.35));
+  const sun=new T.DirectionalLight(L.sunColor||'#fff0d8',L.sun??2.4);sun.position.fromArray(L.sunPos||[-6,12,9]);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  const sc=L.shadowBox||14;Object.assign(sun.shadow.camera,{left:-sc,right:sc,top:sc,bottom:-sc,near:.5,far:80});sun.shadow.bias=-0.0004;sun.shadow.normalBias=0.04;sun.target.position.fromArray(L.sunTarget||[0,0,0]);scene.add(sun,sun.target);
+  if(L.fill!==0){const fill=new T.DirectionalLight(L.fillColor||'#cfe0ff',L.fill??0.55);fill.position.fromArray(L.fillPos||[8,5,-6]);scene.add(fill);}
+  for(const p of L.points||[]){const pl=new T.PointLight(p.color,p.intensity,p.distance||0,p.decay??2);pl.position.fromArray(p.pos);scene.add(pl);}
+  const info={nodes:{},windows:{},objects:{}};
+  for(const p of spec.prims||[])scene.add(primitive(p));
+  for(const o of spec.models||[]){
+    const asset=await gltf(o.url),obj=o.skinned?cloneSkinned(asset.scene):asset.scene.clone(true);
+    obj.traverse(m=>{if(m.isMesh){m.castShadow=o.castShadow??true;m.receiveShadow=true;if(o.tint&&m.material){m.material=m.material.clone();m.material.color?.multiply(new T.Color(o.tint));}}});
+    if(o.pose&&asset.animations?.length){const mixer=new T.AnimationMixer(obj);const clip=asset.animations.find(c=>c.name===o.pose);if(clip){const a=mixer.clipAction(clip);a.play();mixer.setTime(o.poseTime||0);}}
+    obj.updateMatrixWorld(true);
+    let box=new T.Box3().setFromObject(obj),size=box.getSize(new T.Vector3());
+    const s=o.height?o.height/size.y:o.width?o.width/size.x:(o.scale||1);obj.scale.multiplyScalar(s);
+    obj.updateMatrixWorld(true);box=new T.Box3().setFromObject(obj);const c=box.getCenter(new T.Vector3());
+    const holder=new T.Group();holder.add(obj);obj.position.sub(new T.Vector3(c.x,box.min.y,c.z));
+    holder.position.fromArray(o.pos||[0,0,0]);holder.rotation.y=o.rotY||0;if(o.rotX)holder.rotation.x=o.rotX;if(o.rotZ)holder.rotation.z=o.rotZ;scene.add(holder);holder.updateMatrixWorld(true);
+    if(o.name){const b=new T.Box3().setFromObject(holder);info.objects[o.name]={min:b.min.toArray(),max:b.max.toArray()};
+      holder.traverse(n=>{if(n.name&&!n.isMesh&&!n.isBone&&n!==holder&&n!==obj){const v=new T.Vector3();n.getWorldPosition(v);info.nodes[o.name+'.'+n.name]=v.toArray();}});
+      for(const bone of o.bones||[]){const b=holder.getObjectByName(bone);if(b){const v=new T.Vector3();b.getWorldPosition(v);info.nodes[o.name+'.'+bone]=v.toArray();}}
+      if(o.windows)info.windows[o.name]=glassWindows(holder,o.windows===true?{}:o.windows);}
+  }
+  const cam=spec.camera;let camera;
+  if(cam.ortho){const s=cam.ortho/2;camera=new T.OrthographicCamera(-s*W/H,s*W/H,s,-s,.05,400);}else camera=new T.PerspectiveCamera(cam.fov||40,W/H,.05,400);
+  camera.position.fromArray(cam.pos);camera.lookAt(new T.Vector3(...cam.look));camera.updateProjectionMatrix();camera.updateMatrixWorld(true);
+  r.render(scene,camera);
+  const proj=p=>{const v=new T.Vector3(...p).project(camera);return [+((v.x+1)/2*W).toFixed(1),+((1-v.y)/2*H).toFixed(1)];};
+  info.px={};for(const [k,v]of Object.entries(info.nodes))info.px[k]=proj(v);
+  info.points={};for(const [k,v]of Object.entries(spec.points||{}))info.points[k]=proj(v);
+  info.windowPx={};for(const [k,list]of Object.entries(info.windows))info.windowPx[k]=list.map(w=>{const a=proj([w.x0,w.y1,w.z]),b=proj([w.x1,w.y0,w.z]);return [a[0],a[1],b[0],b[1]];});
+  info.objectPx={};for(const [k,b]of Object.entries(info.objects)){const pts=[];for(const x of [b.min[0],b.max[0]])for(const y of [b.min[1],b.max[1]])for(const z of [b.min[2],b.max[2]])pts.push(proj([x,y,z]));info.objectPx[k]=[Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))];}
+  const url=r.domElement.toDataURL('image/png');r.dispose();r.domElement.remove();return {url,info};
+};
+window.ready=true;
+</script></body></html>

@@ -13,6 +13,7 @@ import {editSoccerPlayer,awardSoccerPractice} from '../activity/soccer-roster.mj
 import {raceSetup as leagueRaceSetup} from '../minigames/racing-league.mjs?v=island-v2-20261107-11';
 import {leagueSummary,leagueEnabled,buyUpgrade as leagueBuy,nextSeason as leagueNext,applyRace as leagueApply,restartSeason as leagueRestart,setShortRaces as leagueShort} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-11';
 import {racingLeagueResult} from '../minigames/racing-league-result.mjs?v=island-v2-20261107-11';
+import {fireBonusMission,fireBonusResult,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-11';
 import { createRegistry } from './registry.mjs?v=island-v2-20261107-11';
 import { validatePlacement, canRemove, upgradeAvailability,cellsFor } from './rules.mjs?v=island-v2-20261107-11';
 import { calculateMetrics, population, coverageForBuilding } from './metrics.mjs?v=island-v2-20261107-11';
@@ -416,11 +417,16 @@ export function createEngine(data, options = {}) {
     // A league race picks its own circuit from the season, so it neither needs nor changes the regular stage progress.
     const leagueRun=id==='islandRacing'&&context.league===true&&leagueEnabled()?leagueRaceSetup(state.islandRacingLeague):null;
     if(id==='islandRacing'&&context.league===true&&!leagueRun)return {ok:false,reason:'reason.invalid'};
-    const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:(context.level??progress?.stage);
+    // 13/11/2026 fire v23: a bonus mission (water targets, inside a building) is gated by campaign progress and runs on stage 1 data;
+    // its result pays coins only (see finish), so no save field changes. `?fireTargets=0` / `?fireInterior=0` refuse it.
+    const fireBonus=id==='fireRescue'&&context.fireMode!==undefined?fireBonusMission(context.fireMode,context.fireBonusLevel,state.minigameProgress.fireRescue):null;
+    if(fireBonus&&!fireBonus.ok)return {ok:false,reason:fireBonus.reason};
+    const progress=state.minigameProgress[id],stage=leagueRun?leagueRun.stage:fireBonus?1:(context.level??progress?.stage);
     if(!leagueRun&&progress&&(!Number.isInteger(stage)||stage<1||stage>progress.stage))return {ok:false,reason:'minigame.stageLockedReason'};
     const token = {}, startedAt = now();
     let ended = false, session;
     const ctx = { ...context, level:stage, state, engine, canPlay: () => engine.canPlay(), spendPlayTime: minutes => engine.spendPlayTime(minutes) };
+    if(fireBonus){ctx.fireMode=fireBonus.mode;ctx.fireBonusLevel=fireBonus.level;}else{delete ctx.fireMode;delete ctx.fireBonusLevel;}
     if(id==='tennis')ctx.difficulty=state.tennisDifficulty;
     if(leagueRun){ctx.league=leagueRun;ctx.equipment=leagueRun.equipment;}
     else delete ctx.league;
@@ -439,6 +445,17 @@ export function createEngine(data, options = {}) {
         const league = leagueApply(state.islandRacingLeague, { order: lr.order, fastestLapId: lr.fastestLapId });
         result = Object.freeze({ outcome: lr.outcome, score: lr.score, money: 0, parts: 0, stars: 0, stage, league: Object.freeze({ ...league, season: ctx.league.season, race: ctx.league.race, track: ctx.league.track, laps: ctx.league.laps, order: lr.order }) });
         changed('racing-league', { id, result }); context.onFinish?.(result);
+        return { ok: true, result };
+      }
+      if (!cancelled && fireBonus) {
+        // Fire bonus mission: coins only. No stars, stage progress, certificate, wins, parts or high score are recorded.
+        let bonus; try { bonus = fireBonusResult(raw, fireBonus.mode, fireBonus.level, config.minigames.fireRescue); } catch { return { ok: false, reason: 'reason.invalid' }; }
+        if (!bonus || !Number.isSafeInteger(bonus.money) || bonus.money < 0 || !Number.isFinite(state.money + bonus.money)) return { ok: false, reason: 'reason.invalid' };
+        ended = true; activeMinigame = null; session?.dispose?.(); ctx.spendPlayTime(Math.max(0, now() - startedAt) / 60000);
+        state.money += bonus.money;
+        const summary = raw?.summary && typeof raw.summary === 'object' ? Object.freeze(Object.fromEntries(Object.entries(raw.summary).filter(([, v]) => Number.isSafeInteger(v)))) : null;
+        result = Object.freeze({ outcome: bonus.outcome, score: bonus.score, money: bonus.money, parts: 0, stars: bonus.stars, stage, fireBonus: Object.freeze({ mode: fireBonus.mode, level: fireBonus.level, number: fireBonusNumber(fireBonus.mode, fireBonus.level, config.minigames.fireRescue.levels.length), summary }) });
+        changed('minigame', { id, result }); context.onFinish?.(result);
         return { ok: true, result };
       }
       if (!cancelled) {

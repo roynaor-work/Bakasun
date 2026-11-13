@@ -21,6 +21,7 @@ import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-
 import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-11';
 import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-11';
 import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-11';
+import {fireBonusMap,fireBonusHome,fireBonusHeading,fireBonusResult} from './fire-bonus-ui.mjs?v=island-v2-20261107-11';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -129,6 +130,7 @@ export class ActivityInterface {
     hero.append(el('p','adventure-game-category',art.category));dialog.append(hero);
     const actions=el('div','adventure-home-actions');
     actions.append(kitPrimary(this.playButton(id,'game-play',()=>this.stages(id))),button('איך לשחק','game-help',()=>this.intro(id)),button('שדרוגים','equipment-shop',()=>this.gameUpgrades(id)));
+    if(id==='fireRescue')fireBonusHome(this,actions); // 13/11/2026 fire v23: water targets and inside the building (`?fireTargets=0`, `?fireInterior=0`)
     dialog.append(actions,button('כל המשחקים','game-library-back',()=>this.menu(),'adventure-back'));
   }
   gameUpgrades(id){
@@ -223,7 +225,7 @@ export class ActivityInterface {
       const stage=i+1,locked=stage>p.stage;
       const node=kitStageLabel(button('','stage-play',()=>this.start(id,undefined,stage)),this.t('minigame.stage',{stage}),{locked,stars});
       node.title=this.t(this.data.config.minigames[id].levels[i].feature);node.append(el('small','stage-feature',node.title));node.dataset.stage=stage;node.disabled=locked;node.setAttribute('aria-label',this.t(locked?'minigame.stageLocked':'minigame.stageStars',{stage,stars}));map.append(node);
-    });dialog.append(map);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
+    });dialog.append(map);if(id==='fireRescue')fireBonusMap(this,dialog);outer.append(button('חזרה למשחק','game-home-back',()=>this.gameHome(id),'adventure-back'));
   }
   autoLaunch(choice) {
     if(this.requireDaily(choice.gameId)){this.activity.cancel(choice.eventId);return;}
@@ -284,9 +286,10 @@ export class ActivityInterface {
     this.ui.view.paused=true;
     const context=gameContext(this.engine,this.data.config.minigames,this.now(),id,stageNumber);
     if(id==='soccer'&&drill){context.drill=drill;dialog.dataset.drill=drill;}
+    if(id==='fireRescue'&&drill?.fireMode){context.fireMode=drill.fireMode;context.fireBonusLevel=drill.level;dialog.dataset.fireBonus=drill.fireMode;}
     if(id==='navalDuel')context.previousFleet=this.lastNavalFleet;
     if(id==='fireRescue')controls.querySelector('[data-game-control=rescue]').disabled=context.level<3;
-    heading.textContent=balance.embeddedCampaign?this.t(game.title):this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
+    heading.textContent=balance.embeddedCampaign?this.t(game.title):context.fireMode?fireBonusHeading(this,drill):this.t('minigame.stageTitle',{title:this.t(game.title),stage:context.level});
     dialog.dataset.stage=context.level;
     this.navigation.game();
     this.shell=new GameShell({dialog,stage,controls,pauseButton:pause,sound:this.sound,t:this.t,onExit:()=>this.ui.closeModal(),landscape:gamePresentation(this.data.config,id).orientation==='landscape'});
@@ -331,6 +334,7 @@ export class ActivityInterface {
   }
   showResult(id,eventId,result,fireSummary,racingSummary,alpineSummary) {
     if(id==='islandRacing'&&result.league){this.racingLeagueResult(result);return;}
+    if(id==='fireRescue'&&result.fireBonus){fireBonusResult(this,result,eventId);return;}
     if(result.drill){this.ui.modalCleanup=null;const dialog=this.modal('soccer.practice.done','soccer.practice.doneHint');dialog.dataset.drillResult=result.drill.kind;dialog.append(el('p','',this.t('soccer.practice.score',{hits:result.drill.hits,total:result.drill.attempts})),el('p','soccer-practice-gain',result.practice.ok?this.t('soccer.practice.progress',{attribute:this.t('soccer.stat.'+result.practice.key),points:result.practice.points,total:result.practice.required}):this.t(result.practice.reason)),playerCard(this.engine.state,this.data.config.minigames.soccer,this.t),button(this.t('soccer.training'),'soccer-training',()=>this.training(),'primary-button'));if(result.practice.gained)dialog.classList.add('soccer-card-improved');this.outdoorPrompt(dialog);return;}
     const game=this.engine.registry.minigames.get(id);
     this.ui.modalCleanup=null;
