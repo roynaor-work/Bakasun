@@ -130,6 +130,9 @@ test('clips v13: the state machine reaches each clip from its event, and `?socce
   assert.ok(src.includes('const v24lob=clipsV24?soccerV24LobClip(s,p,has):null;'),'lofted pass');
   assert.ok(src.includes('soccerV24ChestClip(p.receiveHeight||0,p.receiveSpeed||0,has)'),'chest control');
   assert.ok(src.includes('v2:Boolean(slide.plan||slide.v24)'),'the slide keeps its yaw lock');
+  // the throw clips let go lower than the simulation's release point: the shown ball joins the simulated flight within 0.12 s (no jump)
+  const view=await read('minigames/soccer-view.mjs');
+  assert.ok(view.includes('if(restartAttachment&&character?.motion?.restartClip){releaseBlend.x=ballRoot.position.x;')&&view.includes('const u=Math.min(1,releaseBlend.age/.12),w=(1-u)*(1-u);'),'release blend');
   // the v23 yaw cap now covers the v22 / v2 body too (main's v22.1 body path had skipped it)
   assert.equal((src.match(/this\.yaw\+=yawCapped&&this\.slideYaw==null\?capYawStep\(turnStep,dt\):turnStep;/g)||[]).length,3);
 });
