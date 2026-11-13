@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<title>אפקטים לכיבוי אש · Fire FX v1</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b121b;color:#ecf3fa;font:15px/1.6 system-ui,sans-serif}header,main,footer{max-width:1420px;margin:auto;padding:24px}header{padding-top:38px;padding-bottom:15px}.eyebrow{color:#6fe3ef;font-size:12px;letter-spacing:.18em}h1{font-size:clamp(26px,4vw,42px);line-height:1.2;margin:10px 0}p{color:#a9bbcd;margin:12px 0}.controls{position:sticky;top:0;z-index:2;background:#0b121bf5;border-block:1px solid #263344;backdrop-filter:blur(10px)}.bar{max-width:1420px;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}button,select{font:inherit;border:1px solid #385064;background:#172638;color:#ecf3fa;border-radius:9px;padding:7px 13px;cursor:pointer}button:hover{background:#243c50}button:focus-visible,select:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid #6fe3ef;outline-offset:4px}button[aria-pressed=true]{background:#19404b;border-color:#6fe3ef}label{display:flex;align-items:center;gap:7px;font-size:13px}.bar a{margin-inline-start:auto}a{color:#7ae3f1}main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-top:20px}.card{border:1px solid #26384a;border-radius:15px;overflow:hidden;background:#101c29}.card-head{padding:14px 16px 11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}h2{font-size:17px;margin:0}.counter{font:11px ui-monospace,monospace;color:#91a9bd;margin-inline-start:auto;direction:ltr}.stages{display:grid;grid-template-columns:1fr 1fr;direction:ltr}.stage{position:relative;min-width:0}.stage canvas{width:100%;height:220px;display:block}.badge{position:absolute;top:8px;left:10px;font-size:10px;letter-spacing:.07em;pointer-events:none;color:#91a9bd}.stage.light .badge{color:#607381}.meta{padding:10px 16px;border-top:1px solid #26384a;display:flex;gap:8px;flex-wrap:wrap;color:#98b0c4;font:11px ui-monospace,monospace;direction:ltr}.tag{background:#1d2d3c;border-radius:5px;padding:3px 6px}details{padding:0 16px 12px}summary{color:#91bec9;font-size:12px;cursor:pointer}details a{font-size:12px}details img{display:block;width:100%;height:auto;margin-top:10px;background:repeating-conic-gradient(#283341 0 25%,#172332 0 50%) 0/20px 20px;direction:ltr}footer{color:#8da3b5;font-size:12px;padding-top:0}.error{color:#ffb69b}#status{font-size:12px;color:#8da3b5}@media(max-width:1050px){main{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){header,main,footer{padding-inline:15px}main{grid-template-columns:1fr}.bar{padding:10px 15px;gap:9px}.bar a{margin:0}.stage canvas{height:220px}}@media(prefers-reduced-motion:reduce){.controls{backdrop-filter:none}}
+</style>
+<header>
+  <div class="eyebrow" dir="ltr">BAKASUN / FIRE FX / V1</div>
+  <h1>אש, מים — וכיבוי.</h1>
+  <p>13 אפקטים מקוריים. כל אנימציה מוצגת על רקע כהה ובהיר, במצב השקיפות המומלץ.</p>
+</header>
+<div class="controls"><div class="bar">
+  <button id="play" type="button" aria-pressed="true">השהיה</button>
+  <button id="restart" type="button">התחלה מחדש</button>
+  <button id="step" type="button">פריים הבא</button>
+  <label>מהירות <select id="speed"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option></select></label>
+  <label><input id="anchors" type="checkbox">נקודות עיגון</label>
+  <label><input id="repeat" type="checkbox" checked>חזרה על כיבוי ונתז</label>
+  <a href="manifest.json">manifest.json</a><span id="status" role="status">טוען…</span>
+</div></div>
+<main id="gallery" aria-label="גלריית אפקטים"></main>
+<footer>בלי כיתוב בתוך התמונות. כל הקבצים מקוריים תחת <a href="LICENSES.md">CC0-1.0</a>. אפשר לפתוח את הדף ישירות מהדיסק. כיבוי ונתז נעצרים בפריים שקוף; אפשרות החזרה למעלה מוסיפה הפסקה לצורך תצוגה.</footer>
+<script src="preview-data.js"></script>
+<script src="preview.js"></script>
+</html>
