@@ -136,7 +136,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   let kitReady=false,kitHidden=null;
   // 3D fans (budget: the far long stand's front rows, turned with the camera at half time; full: Codex's 1,200 all round).
   const crowdMode=v24Flags.crowd3d,crowdSpec=crowdMode==='full'?SOCCER_CROWD_FULL:SOCCER_CROWD_BUDGET,crowdSections=crowdMode==='full'?null:[4];
-  const crowdState={mode:crowdMode,status:crowdMode==='off'?'off':'loading',error:null,fans:0,seats:0,hiddenCards:0,side:1,limit:null,measured:null,frames:0};
+  const crowdState={mode:crowdMode,status:crowdMode==='off'?'off':'loading',error:null,fans:0,seats:0,hiddenCards:0,side:1,limit:null,measured:null,frames:0,shed:0,room:null};
   let crowd3d=null,crowdOn=false,crowdSide=1;
   const crowdLayout=crowdMode==='off'?null:(()=>{const sx=config.pitch.length/105,sz=config.pitch.width/68;return soccerCrowdSeats(crowdPlacements(V8_LEVELS[0]),{scale:{x:sx,y:Math.min(sx,sz),z:sz},rows:crowdSpec.rows,sections:crowdSections,variants:crowdSpec.variants,fansPerCard:crowdSpec.fansPerCard,limit:crowdMode==='full'?SOCCER_CROWD_FULL.instances:1200,tread:.82*V8_TIERS[0].rise});})();
   if(crowdLayout)crowdState.seats=crowdLayout.seats.length;
@@ -298,11 +298,19 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     if(designScene)designScene.ball.visible=false;fallbackBall.visible=false;
     for(const mesh of fallbackGoalFrames)mesh.visible=false;for(const net of nets)net.mesh.visible=false;
   }
-  /** v24 3D fans. Measured once a few frames after the match is up (the fans hidden, every card drawn): soccerCrowdLimit gives the fans
-   * and the triangle limit that keep the match on its tier; then the fans are drawn and exactly the cards they stand for are hidden.
-   * Budget mode keeps them on the stand the camera faces (half a turn at half time, never during a replay). Tiers 2-3 (v8 LOD1/2):
-   * every card back, no fans. */
-  const crowdBall=new T.Vector3(),crowdCameraLocal=[0,0,0],NO_HIDDEN=new Map();let crowdHidden=NO_HIDDEN,crowdHiddenA=NO_HIDDEN,crowdHiddenB=NO_HIDDEN;
+  /** v24 3D fans. Measured a few frames after the match is up (the fans hidden, every card drawn): soccerCrowdLimit gives the first fan
+   * count and levels; then every frame the room is taken from the previous frame (the stadium is frustum culled, so the match's own count
+   * moves by a few thousand triangles with the camera; one frame above maxTriangles steps the whole match down a tier): fans are shed at
+   * once when the room shrinks, and come back slowly (a few at a time, after a pause) when it grows. The cards they stand for are hidden,
+   * exactly those. Budget mode keeps them on the stand the camera faces (half a turn at half time, never during a replay). Tiers 2-3
+   * (v8 LOD1/2): every card back, no fans. */
+  const crowdBall=new T.Vector3(),crowdLook=new T.Vector3(),crowdCameraLocal=[0,0,0],NO_HIDDEN=new Map();let crowdHidden=NO_HIDDEN,crowdHiddenA=NO_HIDDEN,crowdHiddenB=NO_HIDDEN,crowdCount=0,crowdTarget=0,crowdLevels=[2],crowdGrowAt=0;
+  const CROWD_ROOM=.975,CROWD_GROW_SECONDS=1.5,CROWD_GROW_FANS=30;
+  function setCrowdCount(count,room){
+    crowdCount=count;crowd3d.configure({count,triangles:Math.max(count*24,room),levels:crowdLevels});
+    crowdHiddenA=soccerCrowdHiddenCards(crowdLayout.cards,count,crowdSpec.fansPerCard);crowdHiddenB=crowdMode==='full'?crowdHiddenA:new Map([[0,crowdHiddenA.get(4)||0]]);
+    crowdState.fans=count;
+  }
   /** What v24 is drawing (dev overlay, tests, the touch harness). */
   function v24Metrics(){
     return {flags:v24Flags,pitch:kit?{...kit.metrics(),v8PartsHidden:kitHidden,gameLinesHidden:gameLines.some(m=>!m.visible)}:{status:'off'},fx:fx?.metrics()||{status:'off'},
@@ -315,14 +323,23 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       if(!allowed||poseFocus!==null||++crowdState.frames<6)return;
       const info=renderer.info.render,limit=soccerCrowdLimit({scene:info.triangles,draws:info.calls,maxTriangles:config.view.maxTriangles,maxDrawCalls:config.view.maxDrawCalls,mode:crowdMode,seats:crowdLayout.seats.length});
       const fans=Math.floor(limit.fans/crowdSpec.fansPerCard)*crowdSpec.fansPerCard;
-      crowdState.measured={triangles:info.triangles,draws:info.calls};crowdState.limit={...limit,fans};crowdState.fans=fans;
+      crowdState.measured={triangles:info.triangles,draws:info.calls};crowdState.limit={...limit,fans};
       if(!fans){crowdState.status='no-budget';return;}
-      crowd3d.configure({count:fans,triangles:limit.triangles,levels:limit.levels});
-      crowdHiddenA=soccerCrowdHiddenCards(crowdLayout.cards,fans,crowdSpec.fansPerCard);crowdHiddenB=crowdMode==='full'?crowdHiddenA:new Map([[0,crowdHiddenA.get(4)||0]]);
+      crowdTarget=crowdMode==='full'?fans:crowdLayout.seats.length;crowdLevels=limit.levels;crowdGrowAt=time+CROWD_GROW_SECONDS;setCrowdCount(fans,limit.triangles);
       crowdState.status='active';
     }
     if(crowdState.status!=='active')return;
-    if(crowdMode!=='full'&&!(show?.replaying||replay.active)&&Math.abs(camera.position.z)>2)crowdSide=camera.position.z>0?1:-1;
+    // budget mode: the room the previous frame left (its triangles minus the fans' own); shed at once, grow back slowly
+    if(crowdMode!=='full'&&crowdOn){
+      const info=renderer.info.render,mine=crowd3d.metrics.triangles||0,room=Math.floor(config.view.maxTriangles*CROWD_ROOM-(info.triangles-mine));
+      const fit=Math.max(0,Math.min(crowdTarget,Math.floor(room/24/crowdSpec.fansPerCard)*crowdSpec.fansPerCard));
+      if(fit<crowdCount){setCrowdCount(fit,room);crowdGrowAt=time+CROWD_GROW_SECONDS;crowdState.shed=(crowdState.shed||0)+1;}
+      else if(fit>=crowdCount+CROWD_GROW_FANS&&time>=crowdGrowAt){setCrowdCount(crowdCount+CROWD_GROW_FANS,room);crowdGrowAt=time+CROWD_GROW_SECONDS;}
+      if(crowdLevels.length>1&&info.calls>config.view.maxDrawCalls-2){crowdLevels=[2];setCrowdCount(crowdCount,room);}
+      crowdState.room=room;
+    }
+    // the stand the camera looks at (its view direction, not its position: the game camera sits inside the touchlines when play is wide)
+    if(crowdMode!=='full'&&!(show?.replaying||replay.active)){camera.getWorldDirection(crowdLook);if(Math.abs(crowdLook.z)>.2)crowdSide=crowdLook.z<0?1:-1;}
     crowdOn=allowed;crowd3d.root.visible=crowdOn;crowd3d.root.rotation.y=crowdMode==='full'||crowdSide>0?0:Math.PI;
     const want=crowdOn?(crowdMode==='full'||crowdSide>0?crowdHiddenA:crowdHiddenB):NO_HIDDEN;
     if(want!==crowdHidden){crowdHidden=want;crowdState.hiddenCards=v8.setCrowdHidden(want);}

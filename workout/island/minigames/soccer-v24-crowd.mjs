@@ -14,7 +14,7 @@ import {soccerV24Url,SOCCER_CROWD_BUDGET,SOCCER_CROWD_FULL} from './soccer-v24.m
 const LEVEL_COSTS=[210,90,24];
 /** Fans and triangle limit for the measured scene: `scene` = triangles the match draws without the 3D fans (cards they replace still
  * counted, they are a few hundred), `draws` its draw calls. Leaves `margin` of the tier budget free. Pure. */
-export function soccerCrowdLimit({scene,draws,maxTriangles,maxDrawCalls,mode,seats,margin=.015}){
+export function soccerCrowdLimit({scene,draws,maxTriangles,maxDrawCalls,mode,seats,margin=.025}){
   const spec=mode==='full'?SOCCER_CROWD_FULL:SOCCER_CROWD_BUDGET;
   if(mode==='full')return {fans:Math.min(seats,spec.instances),triangles:spec.triangles,levels:[...spec.levels]};
   const room=Math.floor(maxTriangles*(1-margin)-scene),triangles=Math.max(0,Math.min(spec.triangles,room)),fans=Math.min(seats,Math.floor(triangles/LEVEL_COSTS[2]));

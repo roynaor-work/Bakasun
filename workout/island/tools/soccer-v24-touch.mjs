@@ -20,7 +20,8 @@ function readV24(){
   const view=session.debug.view,model=session.debug.model,s=model.getState(),m=view?.metrics?.();
   const clips=[];for(const p of s.players){const c=view?.characters?.[p.id],state=c?.motion?.state;if(typeof state==='string'&&state.startsWith('v24_'))clips.push({id:p.id,clip:state,restart:p.restartMotion?.kind||null,mode:c.mode});}
   const bodies=(view?.characters||[]).map(c=>c.metrics?.()).filter(Boolean).map(b=>({kind:b.kind,number:b.number,gloves:b.gloves,keeper:b.keeper}));
-  return {clips,restart:s.restart?{type:s.restart.type,player:s.restart.player}:null,restartMotions:s.players.filter(p=>p.restartMotion).map(p=>({id:p.id,kind:p.restartMotion.kind,elapsed:+p.restartMotion.elapsed.toFixed(3)})),
+  const chest=s.players.filter(p=>p.role!=='keeper'&&(p.receiveTime||0)>.35&&(p.receiveHeight||0)>=1.05&&Math.hypot(p.vx,p.vz)<2).map(p=>p.id);
+  return {clips,chest,restart:s.restart?{type:s.restart.type,player:s.restart.player}:null,restartMotions:s.players.filter(p=>p.restartMotion).map(p=>({id:p.id,kind:p.restartMotion.kind,elapsed:+p.restartMotion.elapsed.toFixed(3)})),
     triangles:m?.triangles,draws:m?.drawCalls,quality:m?.quality,v24:m?.v24,bodies,audio:session.snapshot?.audio||null};
 }
 
@@ -31,7 +32,7 @@ async function main(){
   const wanted=new Set((opt('shots',SHOTS.join(','))||'').split(',').filter(Boolean)),taken={};
   await mkdir(out,{recursive:true});
   const h=await openSoccer({query,stage});const t0=Date.now(),frames=[],clipEntries=[],eventCounts={},samples=[];
-  let previousClips=new Map(),lastEvents=[],half=1;
+  let previousClips=new Map(),lastEvents=[],half=1;const pending={};
   /** Summary so far (written every 1,200 frames and at the end, so a long run that is stopped still leaves its evidence). */
   const summarize=last=>{
     const audio=frames.flatMap(f=>f.audio||[]),buffers={},oscillators=[];
@@ -66,11 +67,11 @@ async function main(){
       if(!f.hold&&!f.replaying){
         if(f.phase==='playing'&&f.elapsed>.3)await shot('kickoff',f);
         if(f.phase==='restartReady'||f.restart){const type=f.restart?.type;if(type==='goalKick'||type==='throwIn'||type==='corner'){const m=v?.restartMotions?.find(r=>r.id===f.restart.player);if(m&&m.elapsed>.25)await shot(type,f);}}
-        if(v?.clips.some(c=>c.clip==='v24_keeper_throw'))await shot('keeperThrow',f);
-        if(v?.clips.some(c=>c.clip==='v24_lob_pass'))await shot('loft',f);
-        if(v?.clips.some(c=>c.clip==='v24_slide_tackle'))await shot('slide',f);
-        if(v?.clips.some(c=>c.clip==='v24_chest_control'))await shot('chest',f);
-        if(v?.v24?.crowd?.on&&f.elapsed>8&&f.phase==='playing')await shot('fans',f);
+        if(v?.restartMotions?.some(r=>r.kind==='keeperThrow'&&r.elapsed>.35))await shot('keeperThrow',f);
+        for(const e of f.events||[]){if(e.type==='loft')pending.loft??=i+8;if(e.type==='slide')pending.slide??=i+12;}
+        for(const [name,at] of Object.entries(pending))if(i>=at){delete pending[name];await shot(name,f);}
+        if(v?.chest?.length)await shot('chest',f);
+        if(f.elapsed>12&&f.phase==='playing'&&f.ball?.owner!==null)await shot('fans',f);
       }
       if(f.phase==='goal')await shot('goal',f);
       if(f.result){await shot('finished',f);break;}

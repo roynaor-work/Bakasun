@@ -211,6 +211,10 @@ test('crowd 3D: seats stand in for exactly the cards they replace, face the pitc
   assert.deepEqual(soccerCrowdLimit({scene:0,draws:0,maxTriangles:130000,maxDrawCalls:90,mode:'full',seats:1500}),{fans:1200,triangles:80000,levels:[0,1,2]});
   const stadium=await read('minigames/soccer-v8-stadium.mjs');
   assert.ok(stadium.includes('setCrowdHidden(hidden=new Map())')&&stadium.includes('makeCrowd(LEVELS[i],atlas,time,resources,mood,i===0?crowdRank:null)'),'cards hidden only on LOD0, only with a rank');
+  // every frame: the room the previous frame left decides (one frame over maxTriangles steps the match down a tier); shed at once, grow slowly
+  const view=await read('minigames/soccer-view.mjs');
+  assert.ok(view.includes('room=Math.floor(config.view.maxTriangles*CROWD_ROOM-(info.triangles-mine))')&&view.includes('if(fit<crowdCount){setCrowdCount(fit,room);'),'per-frame budget guard');
+  assert.ok(view.includes("const allowed=assetStatus==='ready'&&quality<=crowdSpec.maxQuality&&v8.lod===0;"),'tiers 2-3: cards only');
 });
 
 test('body v2: hands with the glove morph on the canonical rig; numbers 0-99 and gloves on a v22 instance, one material per player on one program',async()=>{
