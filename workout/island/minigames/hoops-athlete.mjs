@@ -15,6 +15,7 @@ import {createAthleteMaterials,athleteSources} from './soccer-athlete.mjs';
 import {decodeTallPack,buildTallClips,TALL_PROFILES,TALL_REQUIRED,tallEnabled} from './hoops-tall.mjs';
 import {loadV8Motion,buildV8Clips,v8MotionEnabled} from './hoops-v8-motion.mjs';
 import {athletesEnabled,unifyTallPack} from './athletes-gait.mjs';
+import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-11';
 
 /** The athlete body is used when the tall library is on and the flag does not say otherwise. */
 export function hoopsAthleteEnabled(cfg,params,quality=2){return athleteBodyEnabled(params?.toString?.()?'?'+params.toString():'')&&tallEnabled(cfg,params,quality);}
@@ -87,7 +88,13 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  if(!pack){const pr=await fetch(new URL(t.base+t.motion,base));if(!pr.ok)throw Error('Basketball tall motion pack '+pr.status);pack=decodeTallPack(await pr.json());}
  tick();
  for(const n of TALL_REQUIRED)if(!pack.clips[n])throw Error('Basketball tall clip missing: '+n);
- const source=await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
+ // v22 (12/11): the Codex shared body (athlete-body-v22.mjs), canonical 18-bone rig: the packs play on it through an identity map. Any failure keeps the previous athlete.
+ let v22=null;
+ if(athleteBodyV22Enabled(params?.toString?.()?'?'+params.toString():'')){
+  try{v22=await loadAthleteV22(url=>loadHoopsGLTF(loader,url),{T:THREE,bodies:TALL_PROFILES});}
+  catch(error){v22=null;onFallback?.('athlete-body-v22',error);}
+ }
+ const source=v22?v22.bodies[TALL_PROFILES[0]]:await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
  let unified=null;
  if(t.athletes&&athletesEnabled(t,params||'')){
   try{const dr=await fetch(new URL(t.athletes.donor,base));if(!dr.ok)throw Error('Gait donor '+dr.status);unified=unifyTallPack(pack,await dr.json(),{cap:motionSource!=='v12'});}
@@ -96,20 +103,36 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  tick();
  let v8=null;
  if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
- const map=athleteRetargetMap(source.rig,CANON_REST),clipSets={};
+ const map=v22?null:athleteRetargetMap(source.rig,CANON_REST),clipSets={};
  const t0=globalThis.performance?.now?.()??0;
  const heights=t.baseHeights||{guard:188,wing:198,center:208},dunks={};
  for(const p of TALL_PROFILES){
   const rest=pack.profiles[p].hips,canonical=buildTallClips(pack,p);
   if(v8)for(const [n,c] of buildV8Clips(THREE,v8,rest))canonical.set(n,c);
-  clipSets[p]=retargetClipMap(canonical,rest,source.rig,map);
-  dunks[p]=calibrateAthleteDunks(source,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:ATHLETE_BULK[p]||1});
+  // v22: each profile has its own body; Hips and Root translations are rest-relative and scaled by canonical / source leg length (Codex motion-manifest)
+  const body=v22?v22.bodies[p]:source,pmap=v22?{...athleteRetargetMap(body.rig,CANON_REST,V22_MAP,{tweaks:{}}),motionScale:V22_LEG_RATIO[p]}:map;
+  clipSets[p]=retargetClipMap(canonical,rest,body.rig,pmap);
+  dunks[p]=calibrateAthleteDunks(body,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:v22?1:ATHLETE_BULK[p]||1});
  }
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
- const sleeves=athleteKitGeometry(THREE,source,'basketball');
- return {tall:true,athlete:true,pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,
+ const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
+ return {tall:true,athlete:true,v22:!!v22,bodyVersion:v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
+   if(v22){
+    // the Codex body: team colours painted by region into this player's own vertex colours, one shared material, role body (guard / wing / centre)
+    const h22=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100,pr=HOOPS_PROFILES[Math.abs(card.look?.skin??card.number??0)%HOOPS_PROFILES.length];
+    const kit22=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
+    if(look?.shortsBase)kit22.shorts=look.shortsBase;
+    const inst=createAthleteV22Instance(THREE,v22,{bodyId:profile,cloneRig:cloneSkinned,appearance:{skin:pr.skin,hair:pr.hair,hairStyle:v22HairFor(pr,card.number??cell)},kit:kit22,style:'basketball',height:h22,track});
+    inst.root.userData.characterVersion=11;
+    const palmPack=pack.profiles[profile].palms;
+    for(const [side,key] of [['Left','l'],['Right','r']]){const pp=palmPack?.[side+'Hand']?.palmPoint;if(pp)inst.palms[key].position.fromArray(pp);}
+    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,
+     applyKit(k){inst.paint({kit:{...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'}});},
+     setLod:level=>inst.setLod(level),get lod(){return inst.lod;},
+     dispose(){inst.dispose();}};
+   }
    const height=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100;
    const kit=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
    if(look?.shortsBase)kit.shorts=look.shortsBase;
