@@ -1,0 +1,547 @@
+{
+  "license": "CC0-1.0",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "tools": {
+    "gltfValidator": "2.0.0-dev.3.10",
+    "browser": "Chromium / Linux, ANGLE SwiftShader software rendering",
+    "ffmpeg": "7.1.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "Pillow": "12.3.0"
+  },
+  "gltf": [
+    {
+      "file": "ammo_crate.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "landing_flag.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "patrol_boat.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "shell_heavy.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "shell_regular.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "small_destroyer.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "supply_buoy.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "file": "tower_submarine.glb",
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "URI_GLB",
+          "message": "URI is used in GLB container.",
+          "severity": 2,
+          "pointer": "/images/0/uri"
+        }
+      ],
+      "truncated": false
+    }
+  ],
+  "browser": {
+    "errors": [],
+    "failedRequests": [],
+    "externalRequests": [],
+    "checks": [
+      {
+        "name": "Fleet loads all six floating models",
+        "pass": true
+      },
+      {
+        "name": "supply_buoy loads with the declared triangle count",
+        "pass": true,
+        "triangles": 440
+      },
+      {
+        "name": "ammo_crate loads with the declared triangle count",
+        "pass": true,
+        "triangles": 308
+      },
+      {
+        "name": "patrol_boat loads with the declared triangle count",
+        "pass": true,
+        "triangles": 498
+      },
+      {
+        "name": "small_destroyer loads with the declared triangle count",
+        "pass": true,
+        "triangles": 574
+      },
+      {
+        "name": "tower_submarine loads with the declared triangle count",
+        "pass": true,
+        "triangles": 484
+      },
+      {
+        "name": "shell_regular loads with the declared triangle count",
+        "pass": true,
+        "triangles": 100
+      },
+      {
+        "name": "shell_heavy loads with the declared triangle count",
+        "pass": true,
+        "triangles": 100
+      },
+      {
+        "name": "landing_flag loads with the declared triangle count",
+        "pass": true,
+        "triangles": 236
+      },
+      {
+        "name": "patrol_boat/intact scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "intact",
+        "turretName": "turret",
+        "barrelName": "barrel",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "patrol_boat/damaged scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "damaged",
+        "turretName": "turret_1",
+        "barrelName": "barrel_1",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "patrol_boat/sinking scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "sinking",
+        "turretName": "turret_2",
+        "barrelName": "barrel_2",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "patrol_boat sinking moves below water",
+        "pass": true,
+        "y": -2.700000047683716,
+        "roll": 0.6183844896028634
+      },
+      {
+        "name": "patrol_boat sinking replay resets the pooled scene",
+        "pass": true
+      },
+      {
+        "name": "small_destroyer/intact scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "intact",
+        "turretName": "turret",
+        "barrelName": "barrel",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "small_destroyer/damaged scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "damaged",
+        "turretName": "turret_1",
+        "barrelName": "barrel_1",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "small_destroyer/sinking scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "sinking",
+        "turretName": "turret_2",
+        "barrelName": "barrel_2",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "small_destroyer sinking moves below water",
+        "pass": true,
+        "y": -2.700000047683716,
+        "roll": 0.6183844896028634
+      },
+      {
+        "name": "small_destroyer sinking replay resets the pooled scene",
+        "pass": true
+      },
+      {
+        "name": "tower_submarine/intact scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "intact",
+        "turretName": "turret",
+        "barrelName": "barrel",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "tower_submarine/damaged scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "damaged",
+        "turretName": "turret_1",
+        "barrelName": "barrel_1",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "tower_submarine/sinking scene, independent yaw and barrel elevation",
+        "pass": true,
+        "state": "sinking",
+        "turretName": "turret_2",
+        "barrelName": "barrel_2",
+        "yaw": 0.7853981633974483,
+        "pitch": -0.4363323129985824,
+        "parent": true,
+        "muzzle": true
+      },
+      {
+        "name": "tower_submarine sinking moves below water",
+        "pass": true,
+        "y": -2.700000047683716,
+        "roll": 0.6183844896028634
+      },
+      {
+        "name": "tower_submarine sinking replay resets the pooled scene",
+        "pass": true
+      },
+      {
+        "name": "Buoy point light and emissive lens switch on/off together",
+        "pass": true
+      },
+      {
+        "name": "Circular landing decal is transparent and casts no shadow by default; opt-in alpha works",
+        "pass": true
+      },
+      {
+        "name": "All five flipbooks and full-sheet view load",
+        "pass": true
+      },
+      {
+        "name": "Audio control 1 decodes and plays",
+        "pass": true,
+        "error": null,
+        "src": "http://127.0.0.1:8765/workout/island/design/naval-extras-v1/supply_collect.ogg",
+        "duration": 0.702667
+      },
+      {
+        "name": "Audio control 2 decodes and plays",
+        "pass": true,
+        "error": null,
+        "src": "http://127.0.0.1:8765/workout/island/design/naval-extras-v1/shell_hit_ship.ogg",
+        "duration": 0.612
+      },
+      {
+        "name": "Audio control 3 decodes and plays",
+        "pass": true,
+        "error": null,
+        "src": "http://127.0.0.1:8765/workout/island/design/naval-extras-v1/base_cannon.ogg",
+        "duration": 0.756
+      },
+      {
+        "name": "Audio control 4 decodes and plays",
+        "pass": true,
+        "error": null,
+        "src": "http://127.0.0.1:8765/workout/island/design/naval-extras-v1/depot_burst.ogg",
+        "duration": 1.046667
+      },
+      {
+        "name": "supply_collect.ogg browser metadata decode",
+        "pass": true,
+        "duration": 0.72
+      },
+      {
+        "name": "supply_collect.mp3 browser metadata decode",
+        "pass": true,
+        "duration": 0.72
+      },
+      {
+        "name": "shell_hit_ship.ogg browser metadata decode",
+        "pass": true,
+        "duration": 0.62
+      },
+      {
+        "name": "shell_hit_ship.mp3 browser metadata decode",
+        "pass": true,
+        "duration": 0.62
+      },
+      {
+        "name": "base_cannon.ogg browser metadata decode",
+        "pass": true,
+        "duration": 0.76
+      },
+      {
+        "name": "base_cannon.mp3 browser metadata decode",
+        "pass": true,
+        "duration": 0.76
+      },
+      {
+        "name": "depot_burst.ogg browser metadata decode",
+        "pass": true,
+        "duration": 1.05
+      },
+      {
+        "name": "depot_burst.mp3 browser metadata decode",
+        "pass": true,
+        "duration": 1.05
+      },
+      {
+        "name": "390x844 layout has no horizontal overflow",
+        "pass": true,
+        "canvas": {
+          "x": 15,
+          "y": -5.8125,
+          "width": 360,
+          "height": 370,
+          "top": -5.8125,
+          "right": 375,
+          "bottom": 364.1875,
+          "left": 15
+        },
+        "viewport": 390
+      },
+      {
+        "name": "844x390 layout has no horizontal overflow",
+        "pass": true,
+        "canvas": {
+          "x": 19,
+          "y": -18.40625,
+          "width": 576,
+          "height": 505,
+          "top": -18.40625,
+          "right": 595,
+          "bottom": 486.59375,
+          "left": 19
+        },
+        "viewport": 844
+      }
+    ],
+    "environment": "Chromium / Linux, ANGLE SwiftShader software rendering",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+    "pass": true
+  },
+  "sprites": [
+    {
+      "file": "bow_mist.png",
+      "mode": "RGBA",
+      "size": [
+        256,
+        256
+      ],
+      "nonemptyFrames": 16,
+      "uniqueFrames": 16,
+      "transparentGutterPixels": 3
+    },
+    {
+      "file": "landing_splash.png",
+      "mode": "RGBA",
+      "size": [
+        256,
+        256
+      ],
+      "nonemptyFrames": 16,
+      "uniqueFrames": 16,
+      "transparentGutterPixels": 3
+    },
+    {
+      "file": "water_explosion.png",
+      "mode": "RGBA",
+      "size": [
+        256,
+        256
+      ],
+      "nonemptyFrames": 16,
+      "uniqueFrames": 16,
+      "transparentGutterPixels": 3
+    },
+    {
+      "file": "foam.png",
+      "mode": "RGBA",
+      "size": [
+        256,
+        256
+      ],
+      "nonemptyFrames": 16,
+      "uniqueFrames": 16,
+      "transparentGutterPixels": 3
+    },
+    {
+      "file": "vulcan_missile.png",
+      "mode": "RGBA",
+      "size": [
+        256,
+        256
+      ],
+      "nonemptyFrames": 16,
+      "uniqueFrames": 8,
+      "transparentGutterPixels": 3
+    }
+  ],
+  "manifestChecksumsMatch": true,
+  "dracoExtensionsFound": false,
+  "existingRepositoryTestsModified": false,
+  "auditedFiles": [
+    {
+      "file": "source/build.py",
+      "sha256": "6385c4b19c0b6ab54e60305abc9a438a65ca0946cdf7f4ab0e386e27b8703bdf",
+      "bytes": 26125
+    },
+    {
+      "file": "source/catalog.py",
+      "sha256": "d4a1cfb2d93ed1533bad37722a3a8949b75dbe634e611155826096e77e36d395",
+      "bytes": 8129
+    },
+    {
+      "file": "source/requirements.txt",
+      "sha256": "993593d460ade158b5621bfbc20d3d2596c4c94f84ecb521cc1d46bc2286a90b",
+      "bytes": 155
+    },
+    {
+      "file": "preview.html",
+      "sha256": "ee0bbf733c5b26f29d981890dec499aede4e9591d11d0c678029b1c5365425c5",
+      "bytes": 4198
+    },
+    {
+      "file": "preview.css",
+      "sha256": "d4bbb7d3be277f01f0d0bfcc17232e95d88c26c7e46f63c0a163b4080ec70184",
+      "bytes": 8189
+    },
+    {
+      "file": "preview.js",
+      "sha256": "0a9c6bf1abb94eb9494e43860052208e07a5f4052bf31fb10d3b72f73d9a3c49",
+      "bytes": 13944
+    },
+    {
+      "file": "manifest.json",
+      "sha256": "0dff2c436745f3ce672d6749195e476d1b855944eccdc527a490b5d4d55b7ac7",
+      "bytes": 20937
+    },
+    {
+      "file": "audio_metrics.json",
+      "sha256": "416e06622cf0d77637e0c7aff96859dfa13b91541e1367c3df51cf02f9433807",
+      "bytes": 1626
+    },
+    {
+      "file": "preview-desktop.png",
+      "sha256": "0528672b8e336c6b5a3d3088635ffa7201674908e9ed03ad25aae9cf11581fcd",
+      "bytes": 331669
+    },
+    {
+      "file": "preview-mobile.png",
+      "sha256": "43f40de431f7c93298a45ada00587f5cf9910273f6abc8a3022375db7bbe5d22",
+      "bytes": 200705
+    }
+  ]
+}
