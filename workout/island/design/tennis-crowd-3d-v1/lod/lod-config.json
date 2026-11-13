@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "units": "meters, camera and seats in crowd root local coordinates",
+  "instances": 600,
+  "crowdTriangleLimit": 80000,
+  "gameSceneTriangleLimitReference": 90000,
+  "levels": [
+    {
+      "name": "LOD0",
+      "triangles": 210,
+      "maxTriangles": 220,
+      "directory": "runtime/lod0"
+    },
+    {
+      "name": "LOD1",
+      "triangles": 90,
+      "maxTriangles": 90,
+      "directory": "runtime/lod1"
+    },
+    {
+      "name": "LOD2",
+      "triangles": 24,
+      "maxTriangles": 24,
+      "directory": "runtime/lod2"
+    }
+  ],
+  "distanceThresholds": [
+    19,
+    31
+  ],
+  "transition": {
+    "method": "complementary screen-door dither, opaque depth writing",
+    "overlapFraction": 0.2,
+    "bandsAtScaleOne": [
+      [
+        17.1,
+        20.9
+      ],
+      [
+        27.9,
+        34.1
+      ]
+    ],
+    "curve": "smoothstep",
+    "note": "Full band width is 20% of its threshold, from 90% to 110%. At most two levels per seat. Both geometries count in the budget."
+  },
+  "budgetGuard": {
+    "enabled": true,
+    "method": "Continuous distance-scale cap from a monotone reservation envelope: each seat reserves 24, then 114, then 300 triangles as thresholds expand. Reserve is retained after leaving a blend band.",
+    "note": "Maximum safe scale is a weighted order statistic of continuous seat distances. All 600 fans remain. Both thresholds and their 20% bands scale together. Teleporting a camera can still change quality immediately."
+  },
+  "cameras": {
+    "landscape": {
+      "position": [
+        0,
+        12.8,
+        25
+      ],
+      "target": [
+        0,
+        0.4,
+        -0.7
+      ],
+      "fov": 40.3
+    },
+    "portrait": {
+      "position": [
+        0,
+        18,
+        25
+      ],
+      "target": [
+        0,
+        0.4,
+        -0.7
+      ],
+      "fov": 40.3
+    },
+    "side": {
+      "position": [
+        24,
+        10,
+        3
+      ],
+      "target": [
+        -3,
+        1,
+        0
+      ],
+      "fov": 40.3
+    },
+    "rear": {
+      "position": [
+        0,
+        8,
+        28
+      ],
+      "target": [
+        0,
+        1,
+        13.7
+      ],
+      "fov": 40.3
+    },
+    "close": {
+      "position": [
+        2.7,
+        3,
+        7.5
+      ],
+      "target": [
+        -1,
+        1.4,
+        12.8
+      ],
+      "fov": 40.3
+    }
+  },
+  "referenceDistributionFile": "distribution.json",
+  "assetsManifest": "assets.json",
+  "recommendedDistributions": {
+    "landscape": {
+      "scale": 1,
+      "submitted": [
+        149,
+        296,
+        308
+      ],
+      "dominant": [
+        125,
+        205,
+        270
+      ],
+      "weighted": [
+        126.25154170312481,
+        211.85346568541397,
+        261.8949926114613
+      ],
+      "overlapping": 153,
+      "triangles": 65322,
+      "reservedTriangles": 79194,
+      "instances": 600,
+      "thresholds": [
+        19,
+        31
+      ]
+    },
+    "portrait": {
+      "scale": 1,
+      "submitted": [
+        112,
+        345,
+        380
+      ],
+      "dominant": [
+        62,
+        235,
+        303
+      ],
+      "weighted": [
+        62.08635457228026,
+        231.20177152031667,
+        306.711873907403
+      ],
+      "overlapping": 237,
+      "triangles": 63690,
+      "reservedTriangles": 67182,
+      "instances": 600,
+      "thresholds": [
+        19,
+        31
+      ]
+    },
+    "side": {
+      "scale": 1,
+      "submitted": [
+        150,
+        413,
+        372
+      ],
+      "dominant": [
+        80,
+        202,
+        318
+      ],
+      "weighted": [
+        78.91934991369341,
+        215.96166624827634,
+        305.1189838380303
+      ],
+      "overlapping": 335,
+      "triangles": 77598,
+      "reservedTriangles": 79920,
+      "instances": 600,
+      "thresholds": [
+        19,
+        31
+      ]
+    },
+    "rear": {
+      "scale": 1,
+      "submitted": [
+        146,
+        261,
+        327
+      ],
+      "dominant": [
+        122,
+        186,
+        292
+      ],
+      "weighted": [
+        124.91841906544387,
+        188.58757917793767,
+        286.4940017566184
+      ],
+      "overlapping": 134,
+      "triangles": 61998,
+      "reservedTriangles": 75846,
+      "instances": 600,
+      "thresholds": [
+        19,
+        31
+      ]
+    },
+    "close": {
+      "scale": 0.5243657873556471,
+      "submitted": [
+        146,
+        343,
+        258
+      ],
+      "dominant": [
+        105,
+        285,
+        210
+      ],
+      "weighted": [
+        106.3896128365441,
+        283.37973023320154,
+        210.23065693025433
+      ],
+      "overlapping": 147,
+      "triangles": 67722,
+      "reservedTriangles": 79986,
+      "instances": 600,
+      "thresholds": [
+        9.962949959757294,
+        16.25533940802506
+      ]
+    }
+  }
+}
