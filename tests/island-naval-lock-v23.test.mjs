@@ -121,8 +121,13 @@ test('model: a locked submarine that will be under water when the shell arrives 
  const m=make(11,1);run(m,30);const sub=m.enemies.find(e=>e.active&&e.hp>0&&nb.shipTypes[e.kind].submarine);assert.ok(sub,'stage 11 has a submarine');
  m.update(1/60,{lockTarget:sub.index});const seen=new Set();for(let i=0;i<600;i++){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});if(!m.homing)break;seen.add(m.homing.status);if(seen.has('dive')&&seen.has('ready'))break;}
  assert.ok(seen.has('dive'),`dive seen (${[...seen]})`);assert.ok(!seen.has('miss'),'a submarine miss always reads dive');
+ // A tap while it dives is held (the lock says "waiting") and fires by itself once the shell can meet it, and then it hits.
+ for(let i=0;i<600&&m.homing&&m.homing.status!=='dive';i++){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});}assert.equal(m.homing.status,'dive');
+ const fired=m.fired,hp=sub.hp;m.update(1/60,{quickShot:true});assert.equal(m.fired,fired,'held while under water');assert.equal(m.homing.queued,true);
+ let n=0;while(m.fired===fired&&n<900&&m.homing){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});n++;}assert.equal(m.fired,fired+1,`fired by itself after ${(n/60).toFixed(1)} s`);
+ run(m,200,()=>{m.playerShip.hp=m.playerShip.maxHp;return {};});assert.ok(sub.hp<hp,'and hit the submarine');
  // While it is under water, the guided missile (which follows a diving submarine) is ready at once.
- for(let i=0;i<600&&m.homing&&m.homing.status!=='dive';i++)m.update(1/60,{});m.update(1/60,{ammoIndex:1});run(m,30);assert.equal(m.homing.status,'ready');
+ for(let i=0;i<900&&m.homing&&m.homing.status!=='dive';i++){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});}if(m.homing){m.update(1/60,{ammoIndex:1});run(m,30);assert.equal(m.homing.status,'ready');}
 });
 
 test('model: the lock ends with another long press, a clear, or the sinking; a tap during the reload is fired when the gun is ready; an empty magazine never queues',()=>{

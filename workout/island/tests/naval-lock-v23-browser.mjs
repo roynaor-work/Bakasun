@@ -22,6 +22,13 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
  const capture=name=>page.screenshot({path:new URL(`${name}.jpg`,frames).pathname,type:'jpeg',quality:78});
  const center=async selector=>{const b=await page.locator(selector).boundingBox();return {x:b.x+b.width/2,y:b.y+b.height/2};};
  const ready=async stage=>{await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded);await tick(400);};
+ /** Back to the island from wherever the game is: the result card after a won or lost stage (its exit button), or the pause menu. */
+ const leave=async()=>{
+  const s=await snap().catch(()=>null);if(s?.result)for(let t=0;t<5000&&!(await page.locator('[data-action=game-again]:visible').count());t+=200)await tick(200);
+  if(await page.locator('[data-action=game-again]:visible').count()){await page.locator('[data-action=game-exit]:visible').last().tap();await tick(400);}
+  else if(await page.locator('[data-action=game-pause]:visible').count())await exit();
+  for(let i=0;i<3&&await page.locator('[data-action=close-modal]:visible').count();i++){await page.locator('[data-action=close-modal]:visible').first().tap();await tick(300);}
+  await tick(300);};
  /** Where a hull is on the screen (what the child sees). */
  const screenOf=index=>page.evaluate(i=>{const s=window.__island.games.current.session,e=s.debug.model.enemies.find(e=>e.index===i);if(!e)return null;const q=s.debug.view.projectTarget(e.x,e.z,1.5);return q&&{x:q.x,y:q.y,depth:q.depth};},index);
  const visible=q=>q&&q.depth>0&&q.x>=40&&q.x<=viewport.width-40&&q.y>=75&&q.y<=viewport.height-30;
@@ -87,7 +94,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
    const shot=await lockShot(target.index);report.lockShot=shot;await capture('a2-hit');assert.equal(shot.fired,1,'one tap, one shell');assert.ok(shot.hit,'the tap hit the locked hull');
    s=await snap();if(s.homing){const un=await longPress(target.index,650,5);report.unlock=un;assert.equal(un.homing,null,'a second long press unlocks');assert.equal(un.fire,'none');await capture('a3-unlocked');}
   }
-  await exit();await tick(300);
+  await leave();
  }
 
  // (B) Accuracy. Moving hulls: stage 10 (four hulls, three at a time, about 14 units/s). Fixed: the shore base of stage 15 after sailing in.
@@ -97,23 +104,23 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
    const begin=async()=>{runs++;await ready(stage);if(fixed){const sail=await sailTo({x:200,z:0},{near:10,ms:12000});(report.sails||(report.sails=[])).push(sail);}};
    await begin();
    for(let guard=0;rows.length<SHOTS&&guard<400;guard++){
-    let s=await snap();if(!s||s.result){await exit();await tick(300);await begin();continue;}
+    let s=await snap();if(!s||s.result){await leave();await begin();continue;}
     await keepAfloat();if(s.loaded<=0&&!(await waitLoaded())){await tick(300);continue;}
     s=await snap();
     const pool=s.enemies.filter(e=>e.active&&e.hp>0&&(fixed?e.structure:!e.structure)&&!(e.depth>0));
     const scored=[];for(const e of pool){const q=await screenOf(e.index);if(visible(q))scored.push({e,d:Math.hypot(e.x-s.playerShip.x,e.z-s.playerShip.z)});}
     scored.sort((a,b)=>fixed?(Number(a.e.main===false)-Number(b.e.main===false))||a.d-b.d:a.d-b.d);const target=scored[0]?.e;
-    if(!target){if(fixed&&!pool.length){await exit();await tick(300);await begin();continue;}await tick(300);continue;}
-    if(before){const r=await thumbShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',...r});continue;}
+    if(!target){if(fixed&&!pool.length){await leave();await begin();continue;}await tick(300);continue;}
+    if(before){const r=await thumbShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.aimSeconds);continue;}
     if(s.homing?.index!==target.index){const lp=await longPress(target.index,600,1);locks.push({index:target.index,locked:lp.homing===target.index,status:lp.status});if(lp.homing!==target.index){await tick(200);continue;}
      if(locks.length===1)await capture(fixed?'b-fixed-locked':'b-moving-locked');}
     // Wait for the turret (as a child waits for the green Fire), at most a second and a half.
     let waited=0;s=await snap();while(s.homing&&s.homing.status==='turning'&&waited<1500){await tick(100);waited+=100;s=await snap();}
     if(!s.homing)continue;
-    const r=await lockShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',waitedMs:waited,...r});
+    const r=await lockShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',waitedMs:waited,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.status);
    }
    const out={stage,runs,...summary(rows),locks:locks.length,locked:locks.filter(l=>l.locked).length,statuses:rows.reduce((a,r)=>{if(r.status)a[r.status]=(a[r.status]||0)+1;return a;},{}),rows};
-   console.log('CELL',label,JSON.stringify({...out,rows:undefined}));await exit();await tick(300);return out;};
+   console.log('CELL',label,JSON.stringify({...out,rows:undefined}));await leave();return out;};
   report.moving=await cell('moving',10);
   report.fixed=await cell('fixed',15,{fixed:true});
   assert.ok(report.moving.shots>=SHOTS&&report.fixed.shots>=SHOTS,'enough shots per cell');
@@ -136,7 +143,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
   await capture('c1-behind-locked');const shot=await lockShot(target.index);behind.shot=shot;await capture('c2-behind-hit');report.behind=behind;console.log('BEHIND',JSON.stringify(behind));
   assert.ok(behind.turretOffHullBeforeDeg>=30,`the turret pointed away from the hull before the lock (${behind.turretOffHullBeforeDeg} deg)`);assert.ok(behind.locked,'the hull behind the bow locked');assert.ok(behind.bowToHullAtFireDeg>=120,`the hull is behind the bow (${behind.bowToHullAtFireDeg} deg)`);assert.ok(behind.turretOffBowDeg>=120,`the turret swung round (${behind.turretOffBowDeg} deg off the bow)`);
   assert.ok(readyAt!==null&&readyAt<=1.6,`ready after the swing (${readyAt} s)`);assert.equal(shot.fired,1);assert.ok(shot.hit,'hit behind the bow');
-  await exit();await tick(300);
+  await leave();
  }
  console.log('REPORT',JSON.stringify({...report,moving:report.moving&&{...report.moving,rows:undefined},fixed:report.fixed&&{...report.fixed,rows:undefined},follow:report.follow&&{...report.follow,samples:report.follow.samples.length}}));
  return report;

@@ -191,6 +191,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   if(ammo[kind]<=0||(kind===0&&loaded<=0)){homing.queued=null;return shoot();}
   if(cooldowns[kind]>0)return false;
   const fresh=lockSolve(),aligned=navalLockAligned(turret,fresh,lockCfg,kind);homing.aligned=aligned;homing.status=lockWord(navalLockStatus(aligned,fresh));
+  // A submarine under water: the gun holds the shot (the lock says "waiting") and fires by itself when the shell can meet it.
+  if(homing.status==='dive')return false;
   if(!aligned&&time-homing.queued<lockCfg.queueSeconds)return false;
   if(aligned&&fresh&&kind!==1&&kind!==5){turret.yaw=fresh.yaw;if(kind!==2)turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,fresh.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,fresh.power));}
   homing.queued=null;const ok=shoot();if(ok)homing.shots++;return ok;
