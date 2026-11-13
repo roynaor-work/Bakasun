@@ -50,7 +50,7 @@ async function main(){
     const limit=full?Infinity:seconds*62.5;
     for(let i=0;i<limit;i++){
       const f=await h.frame();if(!f)break;
-      const v=i%2===0||f.events?.length?await h.page.evaluate(readV24):null;
+      const v=i%6===0||f.events?.length?await h.page.evaluate(readV24):null;
       for(const e of f.events||[]){eventCounts[e.type]=(eventCounts[e.type]||0)+1;}
       if(f.events?.length)lastEvents=f.events.map(e=>({type:e.type,player:e.player,restart:e.restart??null,kind:e.kind??null,power:e.power??null,at:f.elapsed}));
       if(v){
