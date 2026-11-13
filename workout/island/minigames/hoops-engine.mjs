@@ -2,9 +2,9 @@
  * Deterministic fixed step (1/60 s): same seed + same inputs = same game. No DOM, no Three.js.
  * The engine is the only source of truth for positions, possession, clocks, fouls, scoring and
  * the result. The view, the replay and the sound only read snapshots and ordered events. */
-import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-10';
-import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-10';
-import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-10';
+import {createCourt} from './hoops-court.mjs?v=island-v2-20261107-11';
+import {hoopsColliders,stepBall,launch,passVelocity} from './hoops-ball.mjs?v=island-v2-20261107-11';
+import {teamThink} from './hoops-ai.mjs?v=island-v2-20261107-11';
 import {runtimeRatings,playerAbilities,positionName} from './hoops-roles.mjs';
 import {createHoopsTacticsController} from './hoops-tactics.mjs';
 
@@ -14,15 +14,35 @@ export const SPRINT_RESERVE=Object.freeze({drain:3.5,delay:1,refill:6,unlock:0.3
 export const HOOPS_ATTACK=Object.freeze({moveCost:0.012,spinCost:0.018,moveRange:2,moveResolve:0.18,spinResolve:0.27,moveStun:0.42,spinStun:0.5,moveRecovery:0.16,fakeCost:0.006,fakeDuration:0.52,fakeResolve:0.16,fakeCooldown:0.9,fakeRange:1.8});
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const hyp=Math.hypot;
-export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDir:null,altPress:false,movePress:false,spinPress:false,fakePress:false,switchPress:false,timeoutPress:false,call:null});
+export const NO_INPUT=Object.freeze({move:{x:0,z:0},sprint:false,shootDown:false,shootUp:false,shootCancel:false,passPress:false,passLong:false,passDouble:false,passDir:null,altPress:false,movePress:false,spinPress:false,fakePress:false,switchPress:false,timeoutPress:false,call:null});
 
 export function mulberry32(seed){let a=seed>>>0;return {next(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;},get state(){return a;}};}
+
+/** M3: can `q` finish a lob at the rim? Within play.oopRadius of the attacked rim, running at it (or already
+ * near), and no defender boxing him within play.oopBox. Pure: positions and velocities only. */
+export function alleyOopEligible(q,rim,defenders,play){
+ if(!play||!q||q.air>=0||q.act)return false;
+ const dx=rim.x-q.x,dz=rim.z-q.z,d=Math.hypot(dx,dz);
+ if(d>play.oopRadius||d<0.2)return false;
+ const toward=(q.vx*dx+q.vz*dz)/d;
+ if(toward<(play.oopApproach??0.6)&&d>(play.oopNear??1.8))return false;
+ for(const o of defenders)if(Math.hypot(o.x-q.x,o.z-q.z)<(play.oopBox??0.9))return false;
+ return true;
+}
+/** M3: is a defender's reach inside the straight line of a pass (same radius as the target choice)? Pure. */
+export function passLaneBlocked(p,q,defenders,laneRadius){
+ const dx=q.x-p.x,dz=q.z-p.z,dd=Math.hypot(dx,dz)||1;
+ for(const o of defenders){const t=((o.x-p.x)*dx+(o.z-p.z)*dz)/(dd*dd);if(t<=0.05||t>=0.95)continue;if(Math.hypot(p.x+dx*t-o.x,p.z+dz*t-o.z)<laneRadius)return true;}
+ return false;
+}
 
 /** Effective rating 0..1 (fatigue lowers everything a little). */
 function eff(p,key){return (p.r[key]/100)*(0.82+0.18*p.energy);}
 
-export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2'}={}){
+export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='standard',difficulty='normal',mode='match',assist=0,autopilot=false,aiVersion='v2',play}={}){
  const C=config,court=createCourt(C.court),cols=hoopsColliders(court,C.court),P=C.physics,R=C.rules,A=C.anim;
+ // M3 gameplay layer (alley-oops, pass kinds, spacing, cuts): config.play, on unless `play:false` (?hoopsPlay=0)
+ const PL=play===false?null:(play&&typeof play==='object'?play:(C.play&&C.play.enabled!==false?C.play:null));
  const prof=R.profiles[profile]||R.profiles.standard,diff=C.ai.difficulty[difficulty]||C.ai.difficulty.normal;
  let rng,S,seq=0,queue=[],history=[],disposed=false,tacticsController=null;
  const rand=()=>rng.next();
@@ -65,6 +85,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  const dist=(a,b)=>hyp(a.x-b.x,a.z-b.z);
  const speedCap=(p,sprint)=>C.player.speed*(0.72+0.38*eff(p,'speed'))*(sprint?C.player.sprintFactor:1)*(S.ball.owner===p.id?C.player.dribbleFactor:1);
  function nearestTo(list,pt,exclude){let best=null,bd=1e9;for(const p of list){if(p===exclude)continue;const d=hyp(p.x-pt.x,p.z-pt.z);if(d<bd){bd=d;best=p;}}return best;}
+ const oopEligible=q=>!!PL&&S.phase==='live'&&alleyOopEligible(q,court.rim(side(q.team)),onCourt(1-q.team),PL);
 
  function setControlled(p){if(!p||p.team!==S.userTeam)return;if(S.controlled!==p.id){S.controlled=p.id;emit({type:'control',playerId:p.id});}}
  function autoControl(){
@@ -368,7 +389,8 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   const points=sh.type==='ft'?1:court.points(s,sh.gatherX,sh.gatherZ);
   const quality=releaseQuality(p);sh.quality=quality;
   const contest=sh.type==='ft'?{value:0,defender:null}:contestOf(p);
-  const pr=makeChance(p,sh.type,points,quality,contest.value);
+  let pr=makeChance(p,sh.type,points,quality,contest.value);
+  if(sh.oop)pr=clamp(pr+(PL?.oopBonus??0.15),0.02,0.98);   // M3: a lob caught at the rim is the easiest finish there is
   const make=rand()<pr;
   const height=(p.r.height||200)/100;
   const relY=sh.type==='dunk'?rim.y+0.45:sh.type==='layup'?Math.max(2.9,height+0.85+p.jumpH):height+0.55+p.jumpH;
@@ -396,11 +418,11 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   }
   b.state='shot';b.owner=null;b.touchedRim=false;b.lastTouch=p.team;
   const id=S.nextShotId++;
-  b.shot={id,shooter:p.id,team:p.team,points,type:sh.type,intended:make,pr,quality,contest:contest.value,side:s,blocked:false,scored:false,clockAtRelease:S.clock,gameOver:false,foul:sh.contact};
+  b.shot={id,shooter:p.id,team:p.team,points,type:sh.type,intended:make,pr,quality,contest:contest.value,side:s,blocked:false,scored:false,clockAtRelease:S.clock,gameOver:false,foul:sh.contact,oop:sh.oop||null};
   sh.released=true;
   if(sh.type!=='ft'){p.stats.fga++;if(points===3)p.stats.tpa++;}else p.stats.fta++;
   S.shotClockOn=false;
-  emit({type:'release',playerId:p.id,shotId:id,shotType:sh.type,points,quality:+quality.toFixed(3),chance:+pr.toFixed(3),contest:+contest.value.toFixed(3),x:+p.x.toFixed(2),z:+p.z.toFixed(2)});
+  emit({type:'release',playerId:p.id,shotId:id,shotType:sh.type,points,quality:+quality.toFixed(3),chance:+pr.toFixed(3),contest:+contest.value.toFixed(3),x:+p.x.toFixed(2),z:+p.z.toFixed(2),oop:!!sh.oop});
   S.replayMark={tick:S.tick,shotId:id};
  }
 
@@ -414,6 +436,8 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    let score=long?dd*C.pass.longWeight:-dd*C.pass.shortWeight;
    if(dir&&(dir.x||dir.z)){const dl=hyp(dir.x,dir.z)||1;score+=((dx*dir.x+dz*dir.z)/(dd*dl))*C.pass.dirWeight;}
    const open=Math.min(...opp.map(o=>dist(o,q)));score+=Math.min(open,3)*(long?0.6:0.35);
+   // M3: a held pass button while a mate cuts to the rim means the lob to him, not the far man
+   if(long&&oopEligible(q))score+=PL.oopTargetBonus??2.5;
    for(const o of opp){
     const t=((o.x-p.x)*dx+(o.z-p.z)*dz)/(dd*dd);if(t<=0.05||t>=0.95)continue;
     if(hyp(p.x+dx*t-o.x,p.z+dz*t-o.z)<C.pass.laneRadius)score-=C.pass.lanePenalty*(long?0.5:1);
@@ -423,18 +447,26 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   return best;
  }
 
- function startPass(p,target,kind){
+ function startPass(p,target,kind,human){
   if(p.act||S.ball.owner!==p.id||S.ball.state!=='held'||!target)return false;
   const far=dist(p,target);
   if(kind==='overhead')kind='lob';
   // chosen by the situation when the player did not ask for a kind: far = overhead lob, a defender
   // right on the passer = jump pass over him, otherwise a chest pass
   const pressed=onCourt(1-p.team).some(o=>dist(o,p)<(C.pass.jumpPressure??1.7)&&Math.abs(Math.atan2(o.x-p.x,o.z-p.z)-Math.atan2(target.x-p.x,target.z-p.z))<1.6);
-  const chosen=kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':'chest');
-  p.act='pass';p.actT=0;p.act2={target:target.id,kind:chosen};
+  let chosen,oop=false;
+  if(PL){
+   // M3: legible kinds. Tap = chest, the jump pass over a defender right on the passer (v11), or a bounce pass
+   // under the arm of a defender deeper in the lane; hold = overhead lob to a far man or the alley-oop lob to
+   // a mate cutting to the rim; 'bounce'/'lob' when asked for.
+   oop=(kind==='long'||kind==='lob')&&oopEligible(target);
+   const lane=passLaneBlocked(p,target,onCourt(1-p.team),C.pass.laneRadius);
+   chosen=oop?'lob':kind==='long'?(far>(PL.lobFar??7)?'lob':lane&&!pressed?'bounce':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':lane&&far<9?'bounce':'chest');
+  } else chosen=kind==='long'?(far>9?'lob':'chest'):kind||(far>C.pass.lobAbove?'lob':pressed&&far>3?'jump':'chest');
+  p.act='pass';p.actT=0;p.act2={target:target.id,kind:chosen,oop,human:!!human};
   p.face=Math.atan2(target.x-p.x,target.z-p.z);
   if(chosen==='jump'&&!startJump(p,'pass'))p.act2.kind='chest';
-  emit({type:'passStart',playerId:p.id,targetId:target.id,kind:p.act2.kind});
+  emit({type:'passStart',playerId:p.id,targetId:target.id,kind:p.act2.kind,oop});
   return true;
  }
 
@@ -452,19 +484,40 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   const kind=p.act2.kind,shape=PASS_SHAPE[kind]||PASS_SHAPE.chest,passSkill=eff(p,'pass'),baseSpeed=kind==='lob'?C.pass.lobSpeed:kind==='bounce'?C.pass.bounceSpeed:kind==='jump'?C.pass.speed*1.08:C.pass.speed,speed=baseSpeed*(0.78+0.3*passSkill);
   const lead=0.35;
   const distance=hyp(q.x-p.x,q.z-p.z),error=(1-passSkill)*Math.min(1.8,0.15+distance*0.12);
+  // M3 alley-oop: the lob is thrown above the receiver's reach to where his run meets the rim area; the
+  // cutter is re-checked now (a defender may have closed), otherwise it is an ordinary overhead pass
+  const oop=!!p.act2.oop&&oopEligible(q);
   const to={x:q.x+q.vx*lead+(rand()-.5)*error,y:shape.y1,z:q.z+q.vz*lead+(rand()-.5)*error};
+  if(oop){const rim=court.rim(side(q.team)),t=0.55,mx=q.x+q.vx*t,mz=q.z+q.vz*t,dm=hyp(rim.x-mx,rim.z-mz);const k=dm>1.4?(dm-1.4)/dm:0;to.x=mx+(rim.x-mx)*k+(rand()-.5)*error*0.5;to.z=mz+(rim.z-mz)*k+(rand()-.5)*error*0.5;to.y=PL.oopCatchHeight??2.75;}
   const from={x:p.x+Math.sin(p.face)*0.35,y:shape.y0+(kind==='jump'?p.jumpH:0),z:p.z+Math.cos(p.face)*0.35};
-  const d=hyp(to.x-from.x,to.z-from.z),time=Math.max(0.22,d/speed)+(kind==='lob'?0.4:0);
+  const d=hyp(to.x-from.x,to.z-from.z),time=Math.max(0.22,d/speed)+(kind==='lob'?(oop?0.25:0.4):0);
   const v=passVelocity(from,to,time,P.gravity);
   const b=S.ball;b.x=from.x;b.y=from.y;b.z=from.z;b.vx=v.vx;b.vy=v.vy;b.vz=v.vz;b.state='pass';b.owner=null;b.lastTouch=p.team;
-  b.pass={from:p.id,to:q.id,t:0,time,kind,target:to,checked:new Set(),bounced:false,bounceVy:0};
+  b.pass={from:p.id,to:q.id,t:0,time,kind,target:to,checked:new Set(),bounced:false,bounceVy:0,oop,human:!!p.act2.human};
   if(kind==='bounce'){
    // lands on the floor 58% of the way (constant horizontal speed) and comes up to the receiver's waist
    const t1=time*0.58,t2=time-t1,g=P.gravity;
    b.vy=(court.ballR-from.y)/t1+0.5*g*t1;b.pass.bounceVy=(to.y-court.ballR)/t2+0.5*g*t2;
   }
   q.intent.catchAt={x:to.x,z:to.z};
-  emit({type:'pass',playerId:p.id,targetId:q.id,kind,precision:+passSkill.toFixed(3),speed:+speed.toFixed(2)});
+  emit({type:'pass',playerId:p.id,targetId:q.id,kind,oop,human:!!p.act2.human,precision:+passSkill.toFixed(3),speed:+speed.toFixed(2)});
+ }
+
+ /** M3 alley-oop finish: the receiver leaves the floor to meet the lob and finishes as a dunk (rating, energy and
+  * within play.oopDunkRadius of the rim) or a layup. actT starts at the clip's takeoff so the authored dunk/layup
+  * motion lines up with the engine's jump; the ball is caught in the air (no gather, no dribble) and released at
+  * the clip's release. The lob leads by OOP_LEAD s so the ball arrives at the top of the jump. */
+ const OOP_LEAD=0.40;
+ function startOopFinish(q,ps){
+  const s=side(q.team),rim=court.rim(s),dm=court.distToRim(s,ps.target.x,ps.target.z);
+  const type=dm<(PL.oopDunkRadius??1.6)&&q.r.dunk>=C.shot.dunkMinRating&&q.energy>C.shot.dunkEnergy?'dunk':'layup';
+  const meta=A.layup,releaseAt=meta.release*(type==='dunk'?0.92:1),takeoff=releaseAt-0.32-0.12;
+  const dd=court.distToRim(s,q.x,q.z)||1,toRim={x:(rim.x-q.x)/dd,z:(rim.z-q.z)/dd};
+  q.act='shoot';q.actT=takeoff;q.dead=false;q.jumpQueue=null;
+  q.shot={type,human:false,held:false,releaseAt,duration:meta.duration,quality:null,released:false,gatherX:q.x,gatherZ:q.z,toRim,drive:clamp(q.vx*toRim.x+q.vz*toRim.z,0,C.shot.layupCarry),contact:null,oop:{from:ps.from}};
+  q.air=0;q.airDur=C.jump.shotAir*(type==='dunk'?1.35:1.2);q.jumpMax=type==='dunk'?0.8:0.6;q.jumpH=0;q.cd.jump=C.jump.cooldown;
+  q.face=Math.atan2(toRim.x,toRim.z);
+  emit({type:'shotStart',playerId:q.id,shotType:type,oop:true});
  }
 
  function startJump(p,kind){
@@ -633,17 +686,20 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
    if(p.buf&&(S.tick>p.buf.until||p.buf.kind!=='pass'))p.buf=null;
    if(inp.passPress){
     const dir=inp.passDir||(ml>0.2?{x:m.x,z:m.z}:null);
-    if(startPass(p,choosePassTarget(p,dir,!!inp.passLong),inp.passLong?'long':null))p.buf=null;
+    // M3: the second tap of a double tap, while the first pass is still in the wind-up, turns it into a bounce pass
+    if(PL&&inp.passDouble&&p.act==='pass'&&p.act2&&!p.act2.oop&&p.act2.kind!=='jump'&&p.act2.kind!=='lob'){if(p.act2.kind!=='bounce'){p.act2.kind='bounce';emit({type:'passKind',playerId:p.id,kind:'bounce'});}}
+    else if(startPass(p,choosePassTarget(p,dir,!!inp.passLong),inp.passLong?'long':(PL&&inp.passDouble?'bounce':null),true))p.buf=null;
     else if(p.act&&p.act!=='shoot'&&p.act!=='pass')p.buf={kind:'pass',until:S.tick+BUF,dir,long:!!inp.passLong};
-   }else if(p.buf&&!p.act&&startPass(p,choosePassTarget(p,p.buf.dir,p.buf.long),p.buf.long?'long':null))p.buf=null;
+   }else if(p.buf&&!p.act&&startPass(p,choosePassTarget(p,p.buf.dir,p.buf.long),p.buf.long?'long':null,true))p.buf=null;
    if(inp.spinPress||inp.movePress||inp.altPress){if(p.dead)attemptDribble(p);else startMove(p,inp.spinPress?'spin':'cross');}
   } else if(!offense||S.ball.state==='loose'||S.ball.state==='shot'){
    if(inp.shootDown)humanJump(p,S.ball.state==='shot'||S.ball.state==='loose'?'rebound':'block');
    if(inp.passPress)startSteal(p);
   } else {
-   // off-ball offense: pass button asks for the ball, shoot button jumps (alley/oop is not modelled)
+   // off-ball offense: pass button asks for the ball; shoot button near the rim asks for the alley-oop lob
+   // (M3: the handler AI throws it when the line is open, and the engine times the jump), elsewhere it jumps
    if(inp.passPress){const h=holder();if(h&&h.team===p.team&&h.id!==p.id)h.intent.wantPass=p.id;}
-   if(inp.shootDown)humanJump(p,'rebound');
+   if(inp.shootDown){const h=holder();if(PL&&h&&h.team===p.team&&h.id!==p.id&&oopEligible(p)){h.intent.wantOop={id:p.id,until:S.tick+60};emit({type:'oopCall',playerId:p.id});}else humanJump(p,'rebound');}
   }
   if(p.jumpQueue)followJumpQueue(p,ml);
   if(!hasBall&&S.ball.state==='held'&&S.possession!==p.team&&C.player.defenseAssist)defendAssist(p,ml,!!inp.sprint);
@@ -831,6 +887,14 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
     }
    }
    const q=byId(ps.to);
+   if(ps.oop&&q&&q.onCourt){
+    if(q.air<0&&!q.act&&ps.time-ps.t<=OOP_LEAD)startOopFinish(q,ps);
+    // the catch in the air: the ball attaches the moment it is within reach of the raised hands
+    if(q.act==='shoot'&&q.shot?.oop&&!q.shot.released){
+     const reach=(q.r.height||200)/100*1.33+q.jumpH;
+     if(hyp(q.x-b.x,q.z-b.z)<C.pass.catchRadius+0.3&&b.y<reach&&b.y>1.2+q.jumpH){q.intent.catchAt=null;S.lastPasser={id:ps.from,tick:S.tick};giveBall(q,'pass');emit({type:'catch',playerId:q.id,oop:true});return;}
+    }
+   }
    if(q&&hyp(q.x-b.x,q.z-b.z)<C.pass.catchRadius&&b.y<2.4+q.jumpH&&ps.t>0.1){
     q.intent.catchAt=null;S.lastPasser={id:ps.from,tick:S.tick};giveBall(q,'pass');emit({type:'catch',playerId:q.id});return;
    }
@@ -899,6 +963,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
      if(sh.foul&&!sh.foulDone){sh.foulDone=true;const shooter=byId(sh.shooter),f=byId(sh.foul.by);if(shooter&&f){foul(f,shooter,'shooting',{count:sh.points,andOne:false});return;}}
      if(sh.type==='ft'){b.state='loose';b.shot=null;afterFreeThrowMiss(sh);return;}
      b.state='loose';b.missShot=sh;b.shot=null;emit({type:'miss',shotId:sh.id,playerId:sh.shooter});
+     if(sh.oop)emit({type:'alleyoop',from:sh.oop.from,to:sh.shooter,team:sh.team,shotType:sh.type,result:'miss'});
      reboundSwitch(sh.side);
      if(S.clock<=0){endPeriodAfterShot();return;}
     }
@@ -943,6 +1008,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
   S.lastPasser=null;
   S.lastScore={team:sh.team,points:sh.points,shooter:sh.shooter,type:sh.type,tick:S.tick,shotId:sh.id};
   emit({type:'score',team:sh.team,points:sh.points,playerId:sh.shooter,shotType:sh.type,shotId:sh.id,goaltend:!!goaltend,score:[team(0).score,team(1).score]});
+  if(sh.oop)emit({type:'alleyoop',from:sh.oop.from,to:sh.shooter,team:sh.team,shotType:sh.type,result:'score'});
   b.state='dead';b.shot=null;
   if(sh.type==='ft'){afterFreeThrow(true);return;}
   if(sh.foul&&!sh.foulDone){
@@ -1078,6 +1144,7 @@ export function createHoopsEngine({config,seed=1,teams,userTeam=0,profile='stand
  const api={aiV2:aiVersion!=='v1',
   get S(){return S;},gatherBall,attemptDribble,court,C,rand,eff,onCourt,all,side,holder,byId,dist,nearestTo,
   startShot,startPass,startJump,startSteal,startMove,startFake,choosePassTarget,diff,
+  play:PL,oopEligible,laneBlocked:(p,q)=>passLaneBlocked(p,q,onCourt(1-p.team),C.pass.laneRadius),
  };
 
  const engine={

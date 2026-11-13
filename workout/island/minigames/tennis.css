@@ -60,7 +60,7 @@
 /* Specificity keeps the later power-meter stylesheet in the tournament palette. */
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter{top:auto;left:auto;right:calc(max(24px,env(safe-area-inset-right)) + 184px);bottom:94px;height:104px;width:10px;z-index:3;border:2px solid var(--tennis-cream);border-radius:4px;box-shadow:0 3px 12px #102e294d}
 .game-screen[data-game=tennis]:has(.left-handed) .game-stage .tennis-serve-meter{right:auto;left:calc(max(16px,env(safe-area-inset-left)) + 184px)}
-.game-screen[data-game=tennis] .game-stage .tennis-perfect-band{background:#fff4cb;box-shadow:0 0 0 1px #173f36,0 0 3px #fff4cb}
+.game-screen[data-game=tennis] .game-stage .tennis-perfect-band{background:#8c64f7;box-shadow:0 0 0 1px #173f36,0 0 4px #b5a2ff}
 .game-screen[data-game=tennis] .tennis-serve-needle{left:-5px;width:20px;height:3px;border:1px solid #173f36;border-radius:1px;background:var(--tennis-cream);box-shadow:0 1px 4px #102e2980}
 .game-screen[data-game=tennis] .game-stage .tennis-power-meter{width:9px;height:62px;border:1px solid var(--tennis-cream);border-radius:3px;background:linear-gradient(to top,#183f34 var(--safe),#914a38 var(--safe));box-shadow:0 2px 7px #102e2950}
 .game-screen[data-game=tennis] .game-stage .tennis-power-fill{background:#d8df91;border-radius:2px}

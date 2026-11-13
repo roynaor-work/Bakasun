@@ -2,7 +2,7 @@
  * BRRRT loop and stops it 0.14 s after the last pulse), so a 4/s cannon would spin the Vulcan up and down
  * on every shot. Steady shots therefore play the boar island's basic rifle (BOAR_MG from alien-v11) on a
  * small context of their own; the Vulcan loop stays for bursts. Same mute key as the rest of the island. */
-import {BOAR_MG,playLayers,whiteNoise} from './alien-v11.mjs';
+import {BOAR_MG,playLayers,whiteNoise} from './alien-v11.mjs?v=island-v2-20261107-11';
 export function createV15ShotAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext}={}){
  let context,master,white,paused=false,disposed=false,last=-1,played=0;const queue=[];
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};

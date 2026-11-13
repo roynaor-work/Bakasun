@@ -1,0 +1,2025 @@
+{
+  "method": "Actual GLB FLOAT accessors, native LINEAR/slerp; Hermite bridge endpoint residuals and 240 Hz interior samples. Source outgoing and target incoming velocities measured from their native tracks; target phase resumes after bridge.",
+  "scope": "48 bridges: six headers × idle_relaxed/run × entry/exit × catalog phase zero/interior phase. Idle bridges take .2s and run bridges .3s. Reference samplers loop, including negative times for outgoing phase-zero derivatives; header samplers clamp without looping. This verifies the supplied helper, not game integration, foot locking during transitions, arbitrary interruption of an existing game blend, or the original motion-qa continuity metric.",
+  "thresholds": {
+    "endpointHipsMeters": 1e-9,
+    "endpointRotationDegrees": 0.00001,
+    "endpointVelocityHipsMetersPerSecond": 0.0001,
+    "endpointVelocityRotationRadiansPerSecond": 0.01,
+    "maximum240HzHipsStepMeters": 0.02,
+    "maximum240HzRotationStepDegrees": 10
+  },
+  "sourceFiles": [
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934"
+    },
+    {
+      "path": "runtime/clips/header_stand_goal.glb",
+      "sha256": "fe0ccccc02dc86bda44b89117e00b5974b7c25680534f7183e8338991994bfcc"
+    },
+    {
+      "path": "runtime/clips/header_jump_goal.glb",
+      "sha256": "c91851b0b10fed35248ae43a83af425dc1ea79711bbb196b6006147010e2509b"
+    },
+    {
+      "path": "runtime/clips/header_jump_left.glb",
+      "sha256": "1f5e5f4ff72450e838b925e54b64e6d25120ebe2029b6970e63d4147881552d0"
+    },
+    {
+      "path": "runtime/clips/header_jump_right.glb",
+      "sha256": "0189ca8677bb8681f332c8f5c228300ef68fa8c3fc1363b3479b957c49f263fc"
+    },
+    {
+      "path": "runtime/clips/header_clear.glb",
+      "sha256": "4a9b13b5c4fc1010458da11c6f9675978bfd7a9ca63901b6bdef816fa48f077d"
+    },
+    {
+      "path": "runtime/clips/header_dive.glb",
+      "sha256": "e0c6712732d3d89f824765e9f35cc68a3f9e1b908a65064d0d5641fa5b84a3d0"
+    }
+  ],
+  "summary": {
+    "bridges": 48,
+    "passed": 48,
+    "maxEndpointRotationDegrees": 0.0000034150945850063755,
+    "maxEndpointVelocityRadiansPerSecond": 0.000009602141706739325,
+    "maxHipsStepMeters": 0.0010361113011711914,
+    "maxRotationStepDegrees": 2.5641248719792635,
+    "allPassed": true
+  },
+  "bridges": [
+    {
+      "header": "header_stand_goal",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6464177441624804,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 3.232015006321536e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.465404961898447e-7
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.14795773003698084,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6464177441624804,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 3.232015006321536e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 6.465404961898447e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.14795773003698084,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6464177441624804,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.000009598648770078996
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006249028798023648
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.562080733012261,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6464177441624804,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.000007883186918412525
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.0000053142738392501514
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_stand_goal",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.0000034005968795065057
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.00000959386384118406
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006236113457601616
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.5607939933839177,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.000007877179949668936
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.000005300857943253858
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_goal",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.0000034005968795065057
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.00000959386384118406
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006236113457601616
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.5607939933839177,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.000007877179949668936
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.000005300857943253858
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_left",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.0000034005968795065057
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 3.2571612372692293e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 6.515705741749296e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.14911840763744055,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 6.464466047832546e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 3.23227220824858e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.14795787884015466,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.00000959386384118406
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006236113457601616
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.5607939933839177,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.651488675121128,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.000007877179949668936
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.000005300857943253858
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_jump_right",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6464183943518447,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.0000034005968795065057
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6573750472694395,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 3.287018675101733e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.574483792732122e-7
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.15046573025531074,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6573757084830839,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 6.574073228780687e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 3.2872881500208555e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.15046588159708624,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6573750472694395,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 3.287018675101733e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 6.574483792732122e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.15046573025531074,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6573757084830839,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 6.574073228780687e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 3.2872881500208555e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.15046588159708624,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6573750472694395,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.000009590095346217117
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006228915785168535
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.5600954048908235,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 1.600000023841858,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6573757084830839,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.6573750472694395,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.00000787585906507532
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.000005295499533018041
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_clear",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 1.600000023841858,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.6573757084830839,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.000003293699320607991
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.00784451866797653,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.06845153466683147,
+      "targetMaximumAngularSpeedRadiansPerSecond": 1.723265049474265,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.071321389024888e-9,
+          "rotationRadiansPerSecond": 8.616320939208703e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 0.0000017235600218918751
+        }
+      },
+      "maxHipsStepMeters": 0.000031337785260432405,
+      "maxRotationStepDegrees": 0.3944345928265955,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 3.200000047683716,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.007842778748656798,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 1.6945541771997858,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.06845195541985184,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.440892098500626e-9,
+          "rotationRadiansPerSecond": 0.0000016945537594307475
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.87148124459236e-9,
+          "rotationRadiansPerSecond": 8.473524120264737e-7
+        }
+      },
+      "maxHipsStepMeters": 0.0000313308345193386,
+      "maxRotationStepDegrees": 0.3878630709309922,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "idle_relaxed",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 0.5544000220298767,
+      "toTime": 0,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0.001024604812105423,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 0.00903721051698586,
+      "targetMaximumAngularSpeedRadiansPerSecond": 1.723265049474265,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.3281376826389533e-8,
+          "rotationRadiansPerSecond": 8.616320939208703e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.3314683517128287e-8,
+          "rotationRadiansPerSecond": 0.0000017235600218918751
+        }
+      },
+      "maxHipsStepMeters": 0.00009405635826542635,
+      "maxRotationStepDegrees": 0.3944345928265955,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "idle_relaxed",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.5544000220298767,
+      "fromTime": 3.200000047683716,
+      "toTime": 0.5544000220298767,
+      "durationSeconds": 0.2,
+      "sampleRate": 240,
+      "sampleCount": 49,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.0010246048232076532,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 1.6945541771997858,
+      "targetMaximumAngularSpeedRadiansPerSecond": 0.009037210522499192,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000034150945850063755
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.220446049250313e-8,
+          "rotationRadiansPerSecond": 0.0000016945537594307475
+        },
+        "end": {
+          "hipsMetersPerSecond": 2.1116441928370477e-8,
+          "rotationRadiansPerSecond": 8.473524120264737e-7
+        }
+      },
+      "maxHipsStepMeters": 0.00009192547078695767,
+      "maxRotationStepDegrees": 0.3878630709309922,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 0,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.23104939798359772,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.347586028101265,
+      "targetMaximumAngularSpeedRadiansPerSecond": 1.723265049474265,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.7392922671972963e-7,
+          "rotationRadiansPerSecond": 0.000009602141706739325
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.9730642100056235e-7,
+          "rotationRadiansPerSecond": 0.000006269019598132294
+        }
+      },
+      "maxHipsStepMeters": 0.0010361113011711914,
+      "maxRotationStepDegrees": 2.5641248719792635,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "catalog-zero",
+      "referencePhaseSeconds": 0,
+      "fromTime": 3.200000047683716,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.23104957873974757,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 1.6945541771997858,
+      "targetMaximumAngularSpeedRadiansPerSecond": 11.103904381799122,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 5.793814476156204e-8,
+          "rotationRadiansPerSecond": 0.000005180483757130162
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.8238457063635116e-8,
+          "rotationRadiansPerSecond": 0.000008987463456082961
+        }
+      },
+      "maxHipsStepMeters": 0.0009560100186694836,
+      "maxRotationStepDegrees": 2.5617339460856754,
+      "maxUnitQuaternionError": 3.3306690738754696e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "run",
+      "direction": "entry",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 0.2226000088453293,
+      "toTime": 0,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0.06680877457091305,
+      "targetHipsSpeedMetersPerSecond": 0,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 8.703842192427889,
+      "targetMaximumAngularSpeedRadiansPerSecond": 1.723265049474265,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.392644160582237e-8,
+          "rotationRadiansPerSecond": 0.000007895675135187703
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.550458704115983e-8,
+          "rotationRadiansPerSecond": 0.00000534504726096351
+        }
+      },
+      "maxHipsStepMeters": 0.0005180250073447464,
+      "maxRotationStepDegrees": 2.0231586916284354,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    },
+    {
+      "header": "header_dive",
+      "reference": "run",
+      "direction": "exit",
+      "phaseKind": "interior",
+      "referencePhaseSeconds": 0.2226000088453293,
+      "fromTime": 3.200000047683716,
+      "toTime": 0.2226000088453293,
+      "durationSeconds": 0.3,
+      "sampleRate": 240,
+      "sampleCount": 73,
+      "sourceHipsSpeedMetersPerSecond": 0,
+      "targetHipsSpeedMetersPerSecond": 0.06680877457146951,
+      "sourceMaximumAngularSpeedRadiansPerSecond": 1.6945541771997858,
+      "targetMaximumAngularSpeedRadiansPerSecond": 8.703842192543203,
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationDegrees": 0.0000024148365394514667
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0756382700160047e-7,
+          "rotationRadiansPerSecond": 0.000003414623617560369
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.2820740083679197e-7,
+          "rotationRadiansPerSecond": 0.000006086486601350623
+        }
+      },
+      "maxHipsStepMeters": 0.0006210640017827437,
+      "maxRotationStepDegrees": 2.017566554331898,
+      "maxUnitQuaternionError": 2.220446049250313e-16,
+      "rootFixed": true,
+      "pass": true
+    }
+  ]
+}

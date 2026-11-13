@@ -1,0 +1,99 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><title>catch v6 tyre harness</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Standalone proof page for the tyre gun of "תפוס את הפושע" v6: the police car and the getaway car (Codex GLBs, the same
+     CX_TURN wrap as catch-view6.mjs) on a straight road, the getaway car drives ahead, the rules (catch-tyres.mjs) run
+     with a real ctx, the effects (catch-tyre-fx.mjs) and the HUD (catch-fire-hud.mjs) react to the events.
+     ?manual=1 (no animation loop: window.stepN(n, dt)) &hit=1 (every shot hits) &gap=12 &stage=1
+     window.fireNow() fires, window.state() reports, window.forceFlat('RL') injects a synthetic flat. -->
+<link rel="stylesheet" href="../minigames/catch.css">
+<style>html,body{margin:0;height:100%;background:#000;overflow:hidden}#stage{position:fixed;inset:0}canvas{display:block;width:100%;height:100%}
+.catch-hud{font-family:system-ui,sans-serif}.catch-chase-top{pointer-events:none}</style>
+<body><div id="stage"><canvas id="cv"></canvas></div>
+<script type="module">
+import * as T from '../vendor/three.module.js';
+import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {THEMES, Particles, glowTexture, starTexture, asphaltTexture, tileTexture, skyTexture, canvasTexture, blobShadow, fitModel, rigCar, lightOn, spinWheels, clamp, damp} from '../minigames/catch-gfx.mjs';
+import {createTyreGun} from '../minigames/catch-tyres.mjs';
+import {createTyreFx} from '../minigames/catch-tyre-fx.mjs';
+import {installFireHud} from '../minigames/catch-fire-hud.mjs';
+import {seededRandom} from '../minigames/catch-track.mjs';
+
+const q = new URLSearchParams(location.search), manual = q.get('manual') === '1', stage = +(q.get('stage') || 1), gapTarget = +(q.get('gap') || 12);
+const canvas = document.getElementById('cv'), stageEl = document.getElementById('stage'), theme = THEMES[q.get('theme') || 'day'];
+const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
+renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new T.Scene(); scene.fog = new T.Fog(theme.fog, theme.near, theme.far);
+const camera = new T.PerspectiveCamera(52, 1, .3, 400); scene.add(camera);
+const sky = new T.Mesh(new T.SphereGeometry(300, 24, 12), new T.MeshBasicMaterial({map: skyTexture(theme), side: T.BackSide, fog: false})); scene.add(sky);
+scene.add(new T.HemisphereLight(theme.hemi[0], theme.hemi[1], theme.hemi[2]));
+const sun = new T.DirectionalLight(theme.sun[0], theme.sun[1]); sun.position.set(...theme.sun[2]); scene.add(sun);
+// a straight road: 10 m wide along +x with sidewalks, a few buildings for depth
+const L = 600, road = new T.Mesh(new T.PlaneGeometry(L, 10), new T.MeshStandardMaterial({map: asphaltTexture(theme), roughness: .95})); road.rotation.x = -Math.PI / 2; road.rotation.z = 0; road.position.set(L / 2 - 50, 0, 0); road.material.map.repeat.set(L / 20, 1); scene.add(road);
+for (const side of [-1, 1]) { const walk = new T.Mesh(new T.PlaneGeometry(L, 4), new T.MeshStandardMaterial({map: tileTexture(), roughness: 1})); walk.rotation.x = -Math.PI / 2; walk.position.set(L / 2 - 50, .12, side * 7); walk.material.map.repeat.set(L / 8, 1); scene.add(walk);
+  for (let i = 0; i < 40; i++) { const h = 5 + ((i * 7 + side * 3) % 9), b = new T.Mesh(new T.BoxGeometry(9, h, 7), new T.MeshStandardMaterial({color: ['#d9b48f', '#c9c2b4', '#a9c3cf', '#e0cfa8'][(i + (side > 0)) % 4]})); b.position.set(i * 15 - 40, h / 2, side * 13.5); scene.add(b); } }
+const ground = new T.Mesh(new T.PlaneGeometry(900, 900), new T.MeshStandardMaterial({color: '#7f8f6a'})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; scene.add(ground);
+
+const loader = new GLTFLoader(), CX_TURN = Math.PI / 2;
+const load = async name => { const g = await loader.loadAsync(`../assets/game-catch/models/${name}.glb`); const w = new T.Group(); w.add(g.scene); g.scene.rotation.y = CX_TURN; g.scene = w; return g; };
+const [policeG, getawayG] = await Promise.all([load('police-car'), load('getaway-car')]);
+const playerCar = rigCar(fitModel(policeG, {width: 4.4})), crimCar = rigCar(fitModel(getawayG, {width: 4.2}));
+const shadowTex = glowTexture('#000000'); playerCar.add(blobShadow(shadowTex, 5, 2.6, .5)); crimCar.add(blobShadow(shadowTex, 5, 2.6, .5));
+scene.add(playerCar, crimCar);
+const sparks = new Particles(scene, {texture: starTexture(), size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 60});
+const gfx = {glowTexture, canvasTexture, blobShadow};
+const fx = createTyreFx({T, scene, playerCar, crimCar, sparks, dust, gfx});
+
+const rnd = q.get('hit') === '1' ? () => 0 : seededRandom(+(q.get('seed') || 7));
+const gun = createTyreGun({stage, rnd});
+const st = {t: 0, sP: 0, dP: .2, vP: 20, sC: gapTarget, dC: .6, vC: 20, skid: 0, skidding: false, yawC: 0, events: []};
+const hud = document.createElement('div'); hud.className = 'catch-hud'; hud.dir = 'rtl'; hud.dataset.mode = 'chase'; stageEl.append(hud);
+const chaseBox = document.createElement('div'); chaseBox.className = 'catch-chase'; hud.append(chaseBox);
+const top = document.createElement('div'); top.className = 'catch-chase-top'; top.textContent = 'מרחק 12 מ׳'; chaseBox.append(top);
+const boost = document.createElement('button'); boost.className = 'catch-boost'; boost.type = 'button'; boost.textContent = 'טורבו'; chaseBox.append(boost);
+const strings = await (await fetch('../data/strings.he.json')).json().catch(() => ({}));
+const t = (k, v) => String(strings[k] ?? k).replace(/{(\w+)}/g, (_, x) => v?.[x] ?? `{${x}}`);
+const tmp = new T.Vector3();
+const project = (x, y, z) => { tmp.set(x, y, z).project(camera); return {x: (tmp.x * .5 + .5) * canvas.clientWidth, y: (-tmp.y * .5 + .5) * canvas.clientHeight, visible: tmp.z < 1}; };
+const fireHud = installFireHud({hud: chaseBox, stageEl, t, gun: () => gun, project, crimWorld: () => ({x: crimCar.position.x, y: .5, z: crimCar.position.z}), onFire: () => fireNow()});
+const pull = () => { const ev = gun.drainEvents(); if (ev.length) { fx.handle(ev); fireHud.handle(ev); st.events.push(...ev.map(e => e.type)); for (const e of ev) if (e.type === 'stopped') { st.skidding = true; st.skid = 0; } } return ev; };
+function fireNow() { const ok = gun.fire(); const ev = pull(); return {ok, events: ev}; }
+window.fireNow = fireNow;
+window.forceFlat = wheel => { const ev = [{type: 'shot', hit: true, wheel, x: -1.4, y: .35, z: wheel.endsWith('L') ? -.9 : .9}, {type: 'flat', wheel, flatCount: fx.flats.size + 1}]; fx.handle(ev); fireHud.handle(ev); };
+let phase = 0, camPos = null, look = new T.Vector3();
+function step(dt) {
+  st.t += dt; phase += dt;
+  // the thief: constant pace scaled by the flats, a wobble, then the skid to a halt
+  if (st.stopped) st.vC = 0;
+  else if (st.skidding) { st.skid += dt; const u = clamp(st.skid / 2.2, 0, 1); st.vC = Math.max(0, 20 * .62 * (1 - u) * (1 - u)); st.yawC = -(Math.sin(u * Math.PI) * .9 * (1 - u * .5) + u * .35); }
+  else st.vC = 20 * gun.thiefSpeedScale();
+  st.sC += st.vC * dt; const wob = gun.thiefWobble(st.t);
+  // the officer keeps the gap
+  const gap = st.sC - st.sP; st.vP = damp(st.vP, st.skidding || st.stopped ? Math.max(0, Math.min(st.vC + 4, (gap - 6) * 1.6)) : 20 + (gap - gapTarget) * .9, 4, dt); st.sP += st.vP * dt;
+  gun.step(dt, {gap, lateral: (st.dC + wob) - st.dP, vOfficer: st.vP, vThief: st.vC, stun: 0, scraping: false, thiefSwerve: clamp(wob * .5, -1, 1), curvature: 0});
+  pull();
+  playerCar.position.set(st.sP, 0, st.dP); playerCar.rotation.y = 0;
+  crimCar.position.set(st.sC, 0, st.dC + wob); crimCar.rotation.y = st.yawC;
+  spinWheels(playerCar, st.vP * dt / .36); spinWheels(crimCar, st.vC * dt / .34);
+  const red = Math.sin(phase * 9) > 0; lightOn(playerCar.userData.lights.Light_R, red); lightOn(playerCar.userData.lights.Light_B, !red);
+  if (st.skidding && st.vC > .5 && Math.random() < .8) dust.emit(crimCar.position.x, .3, crimCar.position.z, 2, {speed: 2.5, up: 1.2, color: [.55, .55, .55], gravity: -.5, life: 1});
+  fx.update(dt, {thiefSpeed: st.vC, flatCount: gun.state.flatCount, skid: st.skidding && st.vC > .3});
+  if (st.skidding && st.vC <= .3 && st.skid > 2.2) { st.skidding = false; st.stopped = true; st.vC = 0; }
+  // camera behind and above the officer, as in the chase view
+  if (q.get('cam') === 'wheel') { // close-up of the rear-left wheel of the getaway car
+    camera.position.set(crimCar.position.x - 5.2, 1.4, crimCar.position.z - 3.4); look.set(crimCar.position.x - 1.2, .45, crimCar.position.z - .3); camera.lookAt(look);
+  } else {
+    const px = st.sP - 7.5, pz = st.dP * .55, lx = st.sP + 14, lz = st.dP * .35;
+    if (!camPos) camPos = new T.Vector3(px, 3.3, pz); const k = 1 - Math.exp(-dt * 7); camPos.x += (px - camPos.x) * k; camPos.z += (pz - camPos.z) * k;
+    camera.position.copy(camPos); look.set(lx, 1.2, lz); camera.lookAt(look);
+  }
+  top.textContent = t('catch.gap', {gap: Math.max(0, Math.round(gap))});
+  sparks.update(dt); dust.update(dt); fireHud.refresh();
+}
+function resize() { const w = stageEl.clientWidth, h = stageEl.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+window.stepN = (n, dt = 1 / 60) => { for (let i = 0; i < n; i++) step(dt); renderer.render(scene, camera); };
+window.state = () => ({t: st.t, gap: st.sC - st.sP, vC: st.vC, gun: JSON.parse(JSON.stringify(gun.state)), flats: [...fx.flats], ribbon: fx.ribbonPoints('RL'), events: st.events.slice(), fireButtons: document.querySelectorAll('.catch-fire').length, reticle: !document.querySelector('.catch-reticle').hidden, pivots: Object.keys(fx.pivots)});
+addEventListener('keydown', e => { if (e.key === 'f' || e.key === 'x') fireNow(); });
+let last = 0; function frame(now) { requestAnimationFrame(frame); const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; window.stepN(1, dt); }
+if (!manual) requestAnimationFrame(frame); else window.stepN(1);
+window.__dbg = {scene, fx, gun, st}; window.done = true;
+</script>

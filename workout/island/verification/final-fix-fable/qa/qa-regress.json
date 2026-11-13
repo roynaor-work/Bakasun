@@ -1,0 +1,42 @@
+{
+ "part": "regress",
+ "flag": "",
+ "errors": [],
+ "search": "?dev=1",
+ "stickZone": {
+  "x": 0,
+  "y": 90,
+  "w": 405.109375,
+  "h": 300,
+  "cls": "naval-stick-zone soccer-stick-zone"
+ },
+ "regress": {
+  "releases": 4,
+  "firedOnRelease": 0,
+  "firedTotal": 4,
+  "shipMoved": 294.4,
+  "hits": 0,
+  "result": null,
+  "air": 0,
+  "vulcan": false
+ },
+ "storage": {
+  "before": {
+   "keys": [
+    "island.v1"
+   ],
+   "version": 19
+  },
+  "after": {
+   "keys": [
+    "island.quality.auto",
+    "island.v1"
+   ],
+   "version": 19
+  },
+  "newKeys": [
+   "island.quality.auto"
+  ]
+ },
+ "csp": "clean"
+}

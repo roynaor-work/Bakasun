@@ -1,0 +1,52 @@
+--- check 2: first bend with the gun off, steer 0 vs counter-steer, seed 3 ---
+stage 1 R=130 32° 72m 
+   zero    {"maxD":5.43,"scrapeSeconds":0.13,"vIn":31,"vMin":19.2,"vOut":18.8,"speedLoss":11.8,"crashesInBend":0,"boostAtEntry":true} 
+   counter {"maxD":0.85,"scrapeSeconds":0,"vIn":31,"vMin":22,"vOut":22.2,"speedLoss":9,"crashesInBend":0,"boostAtEntry":true}
+stage 2 R=98 60° 102m 
+   zero    {"maxD":5.56,"scrapeSeconds":1.75,"vIn":22,"vMin":10.6,"vOut":11.8,"speedLoss":11.4,"crashesInBend":0,"boostAtEntry":false} 
+   counter {"maxD":2.12,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"speedLoss":0,"crashesInBend":0,"boostAtEntry":false}
+stage 3 R=114 36° 71m 
+   zero    {"maxD":5.49,"scrapeSeconds":0.93,"vIn":31,"vMin":12.1,"vOut":12.3,"speedLoss":18.9,"crashesInBend":0,"boostAtEntry":true} 
+   counter {"maxD":0.36,"scrapeSeconds":0,"vIn":31,"vMin":22,"vOut":22,"speedLoss":9,"crashesInBend":0,"boostAtEntry":true}
+stage 5 R=98 41° 70m 
+   zero    {"maxD":5.22,"scrapeSeconds":0,"vIn":22,"vMin":11,"vOut":23.8,"speedLoss":11,"crashesInBend":1,"boostAtEntry":false} 
+   counter {"maxD":1.8,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"speedLoss":0,"crashesInBend":0,"boostAtEntry":false}
+stage 8 R=58 90° 92m 
+   zero    {"maxD":6.06,"scrapeSeconds":4.23,"vIn":22,"vMin":7.6,"vOut":10.1,"speedLoss":14.4,"crashesInBend":0,"boostAtEntry":false} 
+   counter {"maxD":1.54,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"speedLoss":0,"crashesInBend":0,"boostAtEntry":false}
+stage 10 R=58 95° 96m 
+   zero    {"maxD":6.07,"scrapeSeconds":5.32,"vIn":22,"vMin":7.6,"vOut":10.1,"speedLoss":14.4,"crashesInBend":0,"boostAtEntry":false} 
+   counter {"maxD":1.55,"scrapeSeconds":0,"vIn":22,"vMin":22,"vOut":31,"speedLoss":0,"crashesInBend":0,"boostAtEntry":false}
+
+--- check 1b: the whole chase per driver (seeds 1..8): seconds of driving, metres, bends actually driven, how it ended ---
+stage driver  secs(avg min-max)  metres(avg)  bends driven(avg, of total)  heading(avg deg)  stopped-by-tyres%  roadblock%  shots  flats
+    1 expert  15 (9.4-23.3)               293                    1.6 of 6               71                100           0    7.9      2 
+    1 good    13.4 (7.4-28.4)             259                    1.5 of 6               67                100           0    6.6      2 
+    1 casual  14.6 (4.7-29.5)             291                    1.8 of 6               78                100           0    6.5      2 
+    2 expert  12 (6.2-23.3)               243                    1.4 of 7               68                100           0    6.6      2 
+    2 good    14.9 (5.2-34)               316                      2 of 7               91                 88          13      7    1.9 
+    2 casual  14.8 (8.2-34)               302                    1.6 of 7               88                 88          13    6.6    1.8  (0 bends in 1/8 runs)
+    3 expert  13.3 (3.8-25.4)             243                    1.4 of 8               65                100           0    6.6      2  (0 bends in 2/8 runs)
+    3 good    17.5 (3.8-36)               384                    2.3 of 8              119                 63          38    6.9    1.5  (0 bends in 2/8 runs)
+    3 casual  14.3 (6.8-27.9)             298                    1.6 of 8               79                100           0    6.6      2 
+    4 expert  10.5 (6.2-18.1)             207                    1.1 of 8               56                100           0    6.9      2 
+    4 good    10 (5.9-20.3)               187                    1.1 of 8               55                100           0    5.8      2 
+    4 casual  12.2 (5.1-20.2)             221                    1.4 of 8               70                100           0    5.4      2 
+    5 expert  17.8 (5-40)                 377                    2.6 of 9              134                 88          13    7.9    1.8 
+    5 good    20.3 (7.3-40)               411                    2.5 of 9              150                 88          13    8.1    1.9 
+    5 casual  16.2 (7.5-42)               310                    2.3 of 9              102                100           0    5.5      2 
+    6 expert  18.7 (7.4-34.6)             365                    2.1 of 9              135                100           0    7.8      2 
+    6 good    13.5 (4.1-26.4)             251                    1.5 of 9               85                100           0    5.6      2  (0 bends in 1/8 runs)
+    6 casual  16 (9.1-31.5)               317                    1.8 of 9              123                100           0    6.1      2 
+    7 expert  16.4 (9-22)                 331                   2.4 of 12              130                100           0    7.8      2 
+    7 good    17.9 (10.5-23.5)            339                   2.4 of 12              143                100           0    6.5      2 
+    7 casual  20.1 (10.4-37.9)            414                   2.9 of 12              171                100           0    6.4      2 
+    8 expert  13.4 (7.6-18.7)             249                   1.6 of 10              106                100           0      6      2 
+    8 good    16 (9.5-27.7)               304                   2.1 of 10              142                100           0    6.4      2 
+    8 casual  25.2 (12.4-46)              540                   3.8 of 10              270                 75          25    7.5    1.6 
+    9 expert  28 (9.7-46)                 481                   3.3 of 12              229                 88           0    7.9    2.9 
+    9 good    28.9 (11.1-48)              579                   4.3 of 12              276                 88          13    9.3    2.9 
+    9 casual  34.1 (10.6-48)              622                   4.3 of 12              312                 75          25    6.8    2.5 
+   10 expert  33.4 (15.2-51)              674                   5.1 of 11              330                 75          25    6.8    2.4 
+   10 good    43.6 (13.9-53.1)            858                   6.4 of 11              432                 38          50    8.4    2.1 
+   10 casual  40 (18.6-52.7)              820                   6.1 of 11              405                 63          38    7.5    2.5 

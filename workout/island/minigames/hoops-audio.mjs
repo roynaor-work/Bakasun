@@ -1,8 +1,14 @@
 /** Basketball presentation audio. The authored mix supplies gains, filters, layer
  * recipes and voice limits. Sound never changes the match or saved club state. */
 import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
+import {scoreCrowdSample} from './hoops-show.mjs';
 const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
-export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,clock=wallClock}={}){
+// Sneaker squeak on every fast dribble: basketball/shoes.ogg is a 1.7 kHz lead-in that drops
+// to a pure 1.08 kHz tone (audio-forensics 11/11/2026: 34 squeaks in 3 minutes of live play,
+// the loudest thing in the frame). Roy heard it as "a strange whistle during play".
+// Off by default; ?hoopsSqueak=1 restores it. Steals and feel cues keep the sample.
+const squeakOn=()=>{try{return new URLSearchParams(globalThis.location?.search||'').get('hoopsSqueak')==='1';}catch{return false;}};
+export function createHoopsAudio({config={},storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,clock=wallClock,dribbleSqueak=squeakOn()}={}){
  const mixURL=new URL('../design/audio/mix.json',import.meta.url);
  const aliases={bounce:'basketball/bounce',swish:'basketball/swish',rim:'basketball/rim',shoes:'basketball/shoes',buzzer:'basketball/buzzer',crowd:'basketball/crowd-excited',calm:'basketball/crowd-calm',ambience:'basketball/ambience-loop',opening:'scenes/opening',victory:'scenes/victory',defeat:'scenes/defeat'};
  const buffers=new Map(),specs=new Map(),active=new Set(),last=new Map(),played={};
@@ -120,20 +126,21 @@ export function createHoopsAudio({config={},storage=globalThis.localStorage,Audi
  }
  return {
   unlock,play,sync,
-  events(list){for(const e of list){
+  // show (M4): the visitors' basket gets the swish and the calm crowd instead of the excited layer (same cooldowns, one voice, no bed)
+  events(list,{show=false,userTeam=0}={}){for(const e of list){
    if(e.type==='final'){final=true;stop(true);layer(e.won?'victory':'defeat');continue;}
-   if(e.type==='score'){if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
+   if(e.type==='score'){if(show&&scoreCrowdSample(e,{show,userTeam})==='calm'){play('swish');play('calm');}else if(mix?.layers?.basketball_score)layer('basketball_score');else {play('swish');play('crowd');}continue;}
    if(e.type==='foul'||e.type==='violation'||e.type==='goaltending'||e.type==='timeout'||e.type==='jumpBall'){whistle(e);continue;}
    const type=e.type==='contact'?e.what:e.type,m=map[type];if(!m)continue;
    const v=e.speed?Math.min(1,.35+e.speed*.12):1;play(m[0],{volume:m[1]*v,rate:type==='floor'?1+Math.min(.3,(e.speed||0)*.03):1});
   }},
-  dribble(speed){play('bounce',{volume:.35+Math.min(.3,speed*.05),rate:1.05,layerName:'basketball_play'});if(speed>3)play('shoes',{volume:.4,layerName:'basketball_play'});},
+  dribble(speed){play('bounce',{volume:.35+Math.min(.3,speed*.05),rate:1.05,layerName:'basketball_play'});if(dribbleSqueak&&speed>3)play('shoes',{volume:.4,layerName:'basketball_play'});},
   setPaused(value){
    paused=!!value;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];sync();
    if(paused){stop();pauseTimer=setTimeout(()=>{if(paused&&!disposed&&context?.state==='running')void context.suspend().catch(()=>{});},fade()*1000);}
    else {stop(true);if(bedGain)bedGain.gain.value=1;unlock();}
   },
-  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,whistle:{last:gate.last,blocked:gate.blocked,jumpBalls},scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
+  metrics(){return {context:context?.state||'none',buffers:buffers.size,active:active.size,events:[...active].filter(v=>!v.loop).length,loops:[...active].filter(v=>v.loop&&!v.ended).length,bed:bed?.key||null,played:{...played},muted,paused,disposed,mix:!!mix,duckGain:bedGain?.gain.value??1,whistle:{last:gate.last,blocked:gate.blocked,jumpBalls},dribbleSqueak,scheduled:[...active].filter(v=>v.startAt>(context?.currentTime??0)).map(v=>({sample:v.key,at:v.startAt}))};},
   dispose(){if(disposed)return;disposed=true;clearTimeout(pauseTimer);clearTimeout(duckTimer);holds=[];stop(true);buffers.clear();for(const node of [bedGain,master,limiter])try{node?.disconnect();}catch{}if(context&&context.state!=='closed')void context.close().catch(()=>{});context=null;},
  };
 }

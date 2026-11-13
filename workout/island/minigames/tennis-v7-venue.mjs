@@ -4,8 +4,8 @@
  * (singles lines on the rules' lines, net at z = 0, floor at the height the players already stand on). */
 import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
-import {TennisDRACOLoader,loadTennisGLTF} from './tennis-draco.mjs?v=island-v2-20261107-10';
-import {V7_FILES,V7_REQUIRED,REAL,courtWarpZ,sceneWarpZ,crowdKeeps,cheerRole,crowdStartLevel,createCrowdGovernor} from './tennis-v7.mjs?v=island-v2-20261107-10';
+import {TennisDRACOLoader,loadTennisGLTF} from './tennis-draco.mjs?v=island-v2-20261107-11';
+import {V7_FILES,V7_REQUIRED,REAL,courtWarpZ,sceneWarpZ,crowdKeeps,cheerRole,crowdStartLevel,createCrowdGovernor} from './tennis-v7.mjs?v=island-v2-20261107-11';
 
 const FLOOR=0.08;            // the court surface sits at y 0.01 in the package; the view's players, ball and shadows are calibrated to 0.09
 const CROWD_SCALE=0.91;      // the package's own preview scale

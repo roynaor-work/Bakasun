@@ -92,39 +92,95 @@ const freezeTrack = (track) => Object.freeze({ ...track, points: Object.freeze(t
 /** The circuits before racing-v10 (also what ?racingTracks=v1 selects). */
 export const CLASSIC_TRACKS = Object.freeze(CLASSIC_LIST.map(freezeTrack));
 const TRACKS_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingTracks');
-export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'v2' ? 'v2' : 'f1';
+// racing-deep-m2 (11/11/2026): the Codex v2 circuits are the default set. Measured with tools/racing-topspeed.mjs: on the f1 set a skilled driver spent 57-100% of the lap
+// above 95% of top speed (volcano, summit and jungle were the gentle classic curves), on v2 0-5% with 50-70% of the lap under 85%. ?racingTracks=f1 restores the previous
+// default (the v10 polygons with tuneCircuit), ?racingTracks=v1 the circuits before racing-v10.
+export const RACING_TRACK_SET = TRACKS_PARAM === 'v1' ? 'v1' : TRACKS_PARAM === 'f1' ? 'f1' : 'v2';
 // racing-tracks-v2 (Codex, design/racing-tracks-v2): six circuits, opt-in with ?racingTracks=v2. Loaded only on that flag (top-level await), so the normal start-up
 // does not fetch the 72 KB data file. The data is 7.5 m wide with 12 m corners, so the app calibrates it: X/Z scale and road width (V2_SCALE, V2_WIDTH),
 // the same one-metre lift as the v10 circuits, and the original theme/landmark of each stage.
-const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.9, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
+// racing-deep-m2: 0.87 (was 0.9): a league race of three laps averages 3.4-3.9 minutes for a regular and a skilled driver (Roy's target), measured with tools/racing-league-sim.mjs
+const V2_SCALE = Number(new URLSearchParams(globalThis.location?.search || '').get('v2scale')) || 0.87, V2_WIDTH = Number(new URLSearchParams(globalThis.location?.search || '').get('v2width')) || 16;
 const CODEX_V2 = RACING_TRACK_SET === 'v2' ? (await import('../design/racing-tracks-v2/tracks.mjs')).default : null;
+// racing-deep-m2: the longest straight of every v2 circuit stays straight (the main straight with the grid, the pits and the only place to reach top speed, like a
+// Formula 1 pit straight); every other long straight still gets its chicane. ?racingKinkAll=1 kinks the main straight too, as the 07/11 build did.
+const KINK_ALL = new URLSearchParams(globalThis.location?.search || '').get('racingKinkAll') === '1';
+// racing-deep-m2: the chicane fades in over half a sine period (35 m raw). With a 20 m fade the first sine peak fell inside the fade and the centre line reached a 6.5 m
+// radius there (the designed corners are 14 m): the AI lost gates (15 recoveries in six races), with 35 m the tightest chicane is 11.5-12.4 m and the AI lost none.
+// racing-deep-m2: chicane amplitude 13 m raw (was 10.5; the road is 16 m wide, so the car must really turn) and the S on a medium straight at a 9 m raw radius: with the 35 m fade the
+// tightest point of any chicane is 9.4-9.8 m on the island, like the designed corners, the AI loses no gate, and a skilled driver spends 40-53% of the lap under 85% of top speed
+// on five circuits (jungle 30%: its long sweepers are over 60 m radius by design). ?racingKinkAmp= and ?racingShortR= tune them.
+const KINK_AMP = Number(new URLSearchParams(globalThis.location?.search || '').get('racingKinkAmp')) || 13;
+const V2_SAMPLES = Number(new URLSearchParams(globalThis.location?.search || '').get('v2samples')) || 4;
+const KINK_FADE = Number(new URLSearchParams(globalThis.location?.search || '').get('racingKinkFade')) || 35;
+// ?racingKink=0: the raw Codex geometry without any chicane (measurement only)
+const NO_KINK = new URLSearchParams(globalThis.location?.search || '').get('racingKink');
+// ?racingShortKink=0: no S on the medium straights (the 07/11 geometry apart from the main straight)
+// radius (raw metres) at the peaks of the S on a medium straight; 11 measured: a skilled driver 47-59% of the lap under 85% of top speed on all six circuits (?racingShortR= to tune)
+const SHORT_R = Number(new URLSearchParams(globalThis.location?.search || '').get('racingShortR')) || 9;
+const SHORT_KINK = new URLSearchParams(globalThis.location?.search || '').get('racingShortKink') !== '0';
 // Dog-legs for the long straights of the Codex circuits that a good driver still took flat out: a straight longer than `min` metres
 // gets whole periods of a sine offset (about 22 m radius at this amplitude), faded to zero 30 m from each end. Units: metres before the 1.65 scale.
 const V2_KINK = new Set(['coast', 'jungle', 'volcano', 'harbor', 'summit', 'ruins']);
-function kinkStraights(points, { min = 110, period = 70, amp = 10.5, margin = 22 } = {}) {
-  const n = points.length, out = points.map(p => p.slice()), wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
+/** Runs of collinear control points (heading change under .006 rad between neighbours): [{run:[indices], d:[cumulative metres], length}]. */
+function straightRuns(points) {
+  const n = points.length, wrapA = a => Math.atan2(Math.sin(a), Math.cos(a));
   const heading = i => { const a = points[i], b = points[(i + 1) % n]; return Math.atan2(b[0] - a[0], b[2] - a[2]); };
   const straight = Array.from({ length: n }, (_, i) => Math.abs(wrapA(heading(i) - heading((i + n - 1) % n))) < .006);
-  let i = 0; const seen = new Set();
-  const start = straight.findIndex(v => !v); if (start < 0) return out;
+  const start = straight.findIndex(v => !v), runs = [], seen = new Set(); if (start < 0) return runs;
   for (let k = 0; k < n; k++) {
     const idx = (start + k) % n; if (!straight[idx] || seen.has(idx)) continue;
     const run = []; for (let j = idx; straight[j % n] && run.length < n && !seen.has(j % n); j++) { run.push(j % n); seen.add(j % n); }
     const d = [0]; for (let j = 1; j < run.length; j++) d.push(d[j - 1] + Math.hypot(points[run[j]][0] - points[run[j - 1]][0], points[run[j]][2] - points[run[j - 1]][2]));
-    const length = d[d.length - 1]; if (length < min) continue;
-    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1) continue;
-    const from = (length - periods * period) / 2, h = heading(run[0]), nx = Math.cos(h), nz = -Math.sin(h);
-    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * Math.min(1, u / 15, (periods * period - u) / 15); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
+    runs.push({ run, d, length: d[d.length - 1], heading: heading(run[0]) });
+  }
+  return runs;
+}
+function kinkStraights(points, { min = 110, period: fullPeriod = 70, amp: fullAmp = KINK_AMP, margin = 22, keepLongest = !KINK_ALL, short = SHORT_KINK ? 78 : Infinity } = {}) {
+  const out = points.map(p => p.slice()), runs = straightRuns(points);
+  const longest = runs.reduce((best, r) => r.length > (best?.length || 0) ? r : best, null);
+  for (const { run, d, length, heading: h } of runs) {
+    if (length < Math.min(min, short) || (keepLongest && run === longest?.run)) continue;
+    // racing-deep-m2: a medium straight (78-110 m raw, 115-165 m on the island) gets one gentler S (the same 13 m raw radius at the sine peaks as the long ones);
+    // without it a skilled driver spent only 31-38% of the lap under 85% of top speed on jungle and volcano (target 40%).
+    const period = length >= min ? fullPeriod : Math.min(fullPeriod, length - 2 * margin), amp = length >= min ? fullAmp : Math.min(fullAmp, (period / (2 * Math.PI)) ** 2 / SHORT_R);
+    const periods = Math.floor((length - 2 * margin) / period); if (periods < 1 || period < 30) continue;
+    const from = (length - periods * period) / 2, nx = Math.cos(h), nz = -Math.sin(h);
+    // racing-deep-m2: a C1 fade (raised cosine over 20 m) instead of the linear min(1, u/15, ...) hinge. The hinge put a 0.6 rad cusp (radius about 5 m) in the centre line
+    // at both ends of every chicane; the projection of a car 5 m inside such a cusp jumped 2-4 m in one frame, the gate sweep called it implausible and a drifting player
+    // lost gate 8 of coast for good (recovery loop every 12 s in the measurement bot).
+    const fade = u => { const r = Math.min(1, u / KINK_FADE, (periods * period - u) / KINK_FADE); return .5 - .5 * Math.cos(Math.PI * r); };
+    for (let j = 0; j < run.length; j++) { const u = d[j] - from; if (u <= 0 || u >= periods * period) continue; const off = amp * Math.sin(2 * Math.PI * u / period) * fade(u); out[run[j]][0] += nx * off; out[run[j]][2] += nz * off; }
   }
   return out;
 }
+/** racing-deep-m2: the start/finish line sits on the main straight (62% of the way along it, so the grid of twelve stands on the straight behind the line and the
+ * pit exit still has 38% of it ahead). The control points are rotated (a closed Catmull-Rom loop keeps its exact shape) and rebased to the new first point. */
+function startOnMainStraight(points) {
+  const runs = straightRuns(points), longest = runs.reduce((best, r) => r.length > (best?.length || 0) ? r : best, null);
+  if (!longest || longest.length < 60) return points;
+  const k = longest.run[Math.min(longest.run.length - 1, Math.round(0.62 * (longest.run.length - 1)))], ring = points.slice(k).concat(points.slice(0, k)), x0 = ring[0][0], z0 = ring[0][2];
+  return ring.map(([x, y, z]) => [x - x0, y, z - z0]);
+}
 function codexTrack(spec, base) {
   const lift = Math.max(0, 1 - Math.min(...spec.points.map(p => p[1])));
-  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: spec.samples, points: (V2_KINK.has(spec.id) ? kinkStraights(spec.points) : spec.points).map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
+  const shaped = V2_KINK.has(spec.id) && NO_KINK !== '0' ? kinkStraights(spec.points) : spec.points, placed = KINK_ALL ? shaped : startOnMainStraight(shaped);
+  // f1: true gives the v2 circuits the Formula 1 trackside (pits, gantry, kerb paint) of racing-f1.mjs; set: 'v2' marks the data source
+  // samples 4 per control point (the data has a point every 4 m raw): 1.5 m segments, a sagitta under 2 cm at a 10 m radius, and track.project scans half the segments of the 0.75 m sampling
+  return freezeTrack({ ...base, id: base.id, name: spec.name, width: V2_WIDTH, samples: V2_SAMPLES, f1: true, set: 'v2', points: placed.map(([x, y, z]) => [x * V2_SCALE, y + lift, z * V2_SCALE]) });
 }
 
 export const TRACKS = Object.freeze(RACING_TRACK_SET === 'v1' ? CLASSIC_TRACKS : RACING_TRACK_SET === 'v2' ? CLASSIC_LIST.map(track => codexTrack(CODEX_V2.find(c => c.id === track.id), track)) : CLASSIC_LIST.map(track => F1_TRACKS[track.id] ? freezeTrack({ ...track, ...F1_TRACKS[track.id], vertices: undefined, elevation: undefined }) : freezeTrack(track)));
 
+// racing-deep-m2 league balance: on the Codex circuits the computer's corner law (v = sqrt(aiCorner / curvature)) held it 20% behind a casual player (the player's tyres
+// only bleed speed gradually), so a slow driver without upgrades won every race. aiCorner is scaled on the v2 set so the computer's lap sits level with a casual driver
+// in season 1 and ahead of a casual driver without upgrades in seasons 2-3 (tools/racing-ai-pace.mjs, racing-league-sim.mjs). ?racingAiCorner= tunes it (1 = the old law).
+// Measured (pace tool, computer best lap / casual lap, seasons 1/2/3 = tiers 0/2/4): the old law 1.20 / 1.10 / 1.03; x1.8 everywhere 1.01 / 0.92 / 0.86 (seasons 2-3 too strong,
+// since aiSpeed and the league rating already climb 15% a season while upgrades give a player about 4.5%); a flat 30.6 + 0.6 a tier: 1.01 / 0.97 / 0.96 (league: a slow driver
+// without upgrades champion in season 1 and 5th in season 2). Tier 0 is also the regular stages 1-6 that skilled driving must win outright (racing-physics tests), so the
+// table keeps tier 0 gentler and lands seasons 2-3 at 0.97: [tier 0..4]. ?racingAiCorner=a,b,c,d,e tunes it; ?racingAiCorner=0 restores the old law.
+const AI_CORNER_PARAM = new URLSearchParams(globalThis.location?.search || '').get('racingAiCorner');
+const V2_AI_CORNER = RACING_TRACK_SET !== 'v2' || AI_CORNER_PARAM === '0' ? null : (AI_CORNER_PARAM && AI_CORNER_PARAM.split(',').length === 5 ? AI_CORNER_PARAM.split(',').map(Number) : [23, 27, 31.8, 32.4, 33]);
 const TIMES = ['day', 'golden', 'day', 'sunset', 'night'];
 const TRACK_LENGTHS = new Map(TRACKS.map(track => [track.id, sampleCircuit(track.points, track.samples || 40).length]));
 export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index) => {
@@ -132,7 +188,7 @@ export const RACING_STAGES = Object.freeze(Array.from({ length: 30 }, (_, index)
   const laps = tier < 2 ? 2 : 3;
   return Object.freeze({ id: index + 1, trackId: circuit.id, name: circuit.name, tier, laps,
     timeOfDay: TIMES[tier], reverse: tier === 3, widthScale: 1 - tier * 0.025,
-    aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: 17 + tier * 2.2,
+    aiSpeed: (34.5 + tier * 2.0 + (index % 6) * 0.18) * (circuit.id === 'volcano' ? 0.98 : 1), aiCorner: V2_AI_CORNER ? V2_AI_CORNER[tier] : 17 + tier * 2.2,
     playerSpeed: 40 + tier * 0.75, targetRank: tier === 0 ? 3 : tier < 3 ? 2 : 1,
     // Allow an average 18 m/s plus recovery/learning margin; the clock is not a speed trap.
     timeLimit: Math.min(295, Math.ceil(TRACK_LENGTHS.get(circuit.id) * laps / 18 + 25)), // 295: the app result envelope is 300 s
@@ -214,7 +270,18 @@ export function createTrack(value = 1) {
   let cornerLength=0;const step=8,count=Math.floor(length/step);
   for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step),turn=Math.abs(racingAngle(b.heading-a.heading))/step;if(turn>1/160)cornerLength+=step;}
   const cornerFraction=cornerLength/Math.max(1,count*step);
-  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction };
+  // racing-deep-m2: straights of the sampled circuit (heading change under 1/400 rad per metre over 8 m steps), as unwrapped s ranges [from, to] in metres, longest first;
+  // mainStraight is the longest one. The pit lane, the grid markings and the AI's "where can I reach top speed" read them.
+  const straights=[];{let run=null;const flat=[];for(let i=0;i<count;i++){const a=sample(i*step),b=sample(i*step+step);flat.push(Math.abs(racingAngle(b.heading-a.heading))/step<1/400);}
+    const first=flat.findIndex(v=>!v);if(first>=0)for(let k=0;k<count;k++){const i=(first+k)%count;if(flat[i]){if(!run)run={from:(first+k)*step,to:(first+k+1)*step};else run.to=(first+k+1)*step;}else if(run){straights.push(run);run=null;}}if(run)straights.push(run);
+    for(const r of straights){r.length=r.to-r.from;r.from=wrap(r.from,length);r.to=r.from+r.length;}straights.sort((a,b)=>b.length-a.length);}
+  const mainStraight=straights[0]||null;
+  // racing-deep-m2: unwrapped heading per metre (one table, built once); headingAt(b)-headingAt(a) is the turn between two unwrapped race metres without any sample()
+  const H=new Float64Array(Math.ceil(length)+1);H[0]=sample(0).heading;for(let i=1;i<H.length;i++)H[i]=H[i-1]+racingAngle(sample(Math.min(i,length)).heading-sample(Math.min(i-1,length)).heading);
+  const totalTurn=H[H.length-1]-H[0],headingAt=(s)=>{const w=wrap(s,length),i=Math.min(H.length-2,Math.floor(w)),f=w-i;return H[i]+(H[i+1]-H[i])*f+Math.floor(s/length)*totalTurn;};
+  /** racing-deep-m2: staggered Formula 1 grid behind the line: two columns 3.3 m off the centre, 9 m between rows, the second column half a row back. Slot 0 is pole. */
+  const gridSlots=(count)=>Array.from({length:count},(_,k)=>{const row=Math.floor(k/2),col=k%2;return {slot:k,s:-9-row*9-col*4.5,lane:col?-3.3:3.3,row,col};});
+  return { ...definition, width, length, points, stage, sample, project, checkpoints, boostPads, pickups, cornerFraction, straights, mainStraight, gridSlots, headingAt };
 }
 
 export function wrapRacingDistance(value, length) { return wrap(value, length); }

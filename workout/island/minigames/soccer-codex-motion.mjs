@@ -1,3 +1,5 @@
+import {soccerFeelEnabled,flattenRootMotion,SOCCER_FEEL_FLATTEN} from './soccer-feel.mjs';
+import {SOCCER_V8_PREFIX} from './soccer-v8.mjs';
 /** Codex soccer motion library v9 (48 original clips): the clips the game plays, chosen by state.
  * Presentation only; the ball, ownership and the result stay with the simulation. Falls back silently to what shipped before:
  * `?soccerMotionV9=0` switches it off (not to be confused with `?soccerMotion=0`, the arm/slide work), `config.soccer.codexMotion=false` too.
@@ -84,7 +86,7 @@ export function soccerV10FirstTouchClip(height,speed,id,has){
 /** Clips that play to their end: the v9 held ones plus the cuts and the first touches. */
 export const soccerV10Held=state=>state.startsWith('v10_cut_')||state.startsWith('v10_first_touch_');
 /** What the match loaded, as a line for the load report and the debug view. */
-export function soccerMotionLoadSummary(counts,errors){const v12=counts.v12&&!counts.v12.error?`, v12 repaired ${(counts.v12.v9Replaced||0)+(counts.v12.v10Replaced||0)}`:'';const v11=counts.v11?`, v11 ${counts.v11}`:'';return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}${v11}${v12}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
+export function soccerMotionLoadSummary(counts,errors){const v12=counts.v12&&!counts.v12.error?`, v12 repaired ${(counts.v12.v9Replaced||0)+(counts.v12.v10Replaced||0)+(counts.v12.v8Replaced||0)}`+(counts.v12.v11Added?`, feel v2 dives ${counts.v12.v11Added}`:''):'';const v11=counts.v11?`, v11 ${counts.v11}`:'';return `motion clips: v8 ${counts.v8}, v9 ${counts.v9}, v10 ${counts.v10}${v11}${v12}`+(errors.length?` · skipped: ${errors.join('; ')}`:'');}
 
 /** Codex soccer-v11 repaired keeper dives (motion-fix-v12 catalog, 96.7 QA score, 0 red metrics): the low and middle dives to either side replace the
  * v8 ones. Opt-in (`?soccerKeeperV11=1`, default off): the clips are authored with the sideways travel as root motion ("simulation-owned"), and whether the game's own dive travel looks right with them cannot be verified without a screen. The catch event stands in for the glove contact; the clip has no takeoff event, so the push-off is taken
@@ -114,19 +116,25 @@ export const soccerV12ClipsUrl=()=>new URL('../assets/soccer-v12/clips.json',imp
 /** Locomotion cycles stay as shipped: the repaired run, sprint and run_brake are re-timed (sprint x2.14, run and run_brake x1.2) and the speed
  * ladder's stride matching (clip speed in m/s) was calibrated on the original cycle; measured: sprint 3.1 -> 1.5 steps/s, hips bob 2.5 -> 13.9 cm. */
 export const SOCCER_V12_KEEP=Object.freeze(['walk','jog','run','sprint','run_brake','run_backward','turn_in_place']);
-export function soccerV12Overlay(json,{v9={},v10={}}={},search=globalThis.location?.search||''){
-  const cutsAll=new URLSearchParams(search).get('soccerCuts')==='all';
+export const SOCCER_FEEL_V9_ADD=Object.freeze(['slide_miss','quick_getup','goalkeeper_getup']);
+export function soccerV12Overlay(json,{v9={},v10={},v8={},v11={}}={},search=globalThis.location?.search||''){
+  const cutsAll=new URLSearchParams(search).get('soccerCuts')==='all',feel=soccerFeelEnabled(undefined,search);
   if(!json||json.schemaVersion!==1||!json.libraries)throw Error('Soccer v12 clips: unexpected file');
-  const merge=(base,prefix,clips,gate)=>{
+  const merge=(base,prefix,clips,gate,{add=false,flatten=false}={})=>{
     const out={...base};let replaced=0,added=0;
     for(const [id,fix] of Object.entries(clips||{})){
-      const name=prefix+id,old=base[name];
+      const name=prefix+id,old=base[name],adding=add===true||Array.isArray(add)&&add.includes(id),fixed=flatten&&SOCCER_FEEL_FLATTEN.test(id)?flattenRootMotion(fix):fix;
       if(SOCCER_V12_KEEP.includes(id)||gate&&fix.maxKeyDeg>SOCCER_V10_MAX_KEY_DEG){continue;}
-      if(old){const {timeScale,...rest}=fix;out[name]={...old,...rest,clip:name,supports:old.supports,entry:old.entry,exit:old.exit};replaced++;}
-      else if(prefix===SOCCER_V10_PREFIX&&cutsAll){const {timeScale,...rest}=fix;out[name]={...rest,clip:name,supports:[],entry:null,exit:null};added++;}
+      if(old){const {timeScale,...rest}=fixed;out[name]={...old,...rest,clip:name,supports:old.supports,entry:old.entry,exit:old.exit};replaced++;}
+      else if(adding||prefix===SOCCER_V10_PREFIX&&cutsAll){const {timeScale,...rest}=fixed;out[name]={...rest,clip:name,supports:[],entry:null,exit:null};added++;}
     }
     return {states:out,replaced,added};
   };
-  const a=merge(v9,SOCCER_CODEX_PREFIX,json.libraries.v9,false),b=merge(v10,SOCCER_V10_PREFIX,json.libraries.v10,true);
-  return {v9:a.states,v10:b.states,counts:{v9Replaced:a.replaced,v10Replaced:b.replaced,v10Added:b.added}};
+  // soccer-feel v2 also adds the three v9 clips the shipped v9 pack never had (a lost slide lies down, then gets up).
+  const a=merge(v9,SOCCER_CODEX_PREFIX,json.libraries.v9,false,{add:feel?SOCCER_FEEL_V9_ADD:false,flatten:feel}),b=merge(v10,SOCCER_V10_PREFIX,json.libraries.v10,true);
+  // soccer-feel v2: the repaired slide and keeper dives replace the v8 states (horizontal root motion dropped, see flattenRootMotion) and the two
+  // v11 dives come in even without the v11 pack (`?soccerKeeperV11=1`). Off: v8 and v11 pass through untouched.
+  const c=feel?merge(v8,SOCCER_V8_PREFIX,json.libraries.v8,false,{add:true,flatten:true}):{states:v8,replaced:0,added:0};
+  const d=feel?merge(v11,SOCCER_V11_PREFIX,json.libraries.v11,false,{add:true,flatten:true}):{states:v11,replaced:0,added:0};
+  return {v9:a.states,v10:b.states,v8:c.states,v11:d.states,counts:{v9Replaced:a.replaced,v9Added:a.added,v10Replaced:b.replaced,v10Added:b.added,v8Replaced:c.replaced,v8Added:c.added,v11Added:d.added}};
 }

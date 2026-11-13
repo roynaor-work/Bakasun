@@ -9,8 +9,8 @@ import {raceSetup, createLeague} from '../minigames/racing-league.mjs';
 // order carried ten ids, the league result contract accepts the scoring cars only, the engine refused the result and the session froze.
 test('league order of a 10-car race holds the scoring cars only and the league result contract accepts it', () => {
   const league = createLeague(), setup = raceSetup(league);
-  const model = createRacing({stage: setup.stage, seed: 5, config: {countdown: 0, equipment: setup.equipment, drivers: setup.drivers, extraRivals: 5, stage: setup.stageOverride}});
-  assert.equal(model.state.cars.length, 10);
+  const model = createRacing({stage: setup.stage, seed: 5, config: {countdown: 0, equipment: setup.equipment, drivers: setup.drivers, extraRivals: setup.extraRivals ?? 5, stage: setup.stageOverride}});
+  assert.ok(model.state.cars.length >= 10, 'a full grid (ten cars in the short league, twelve in the long one)');
   const order = leagueOrder(model.state.cars);
   const scoring = model.state.cars.filter(c => c.scoring !== false);
   assert.equal(order.order.length, scoring.length, 'one id per scoring car');
@@ -22,7 +22,7 @@ test('league order of a 10-car race holds the scoring cars only and the league r
     model.step(1 / 60, {steer: Math.max(-1, Math.min(1, e * 1.7)), throttle: 1, autoAccelerate: true});
   }
   assert.equal(model.state.phase, 'finished');
-  const s = model.state, raw = {outcome: s.result.won ? 'win' : 'lose', score: s.result.checkpoints === s.result.requiredCheckpoints ? 6 - s.result.rank : 0, racing: s.result, league: leagueOrder(s.cars)};
+  const s = model.state, raw = {outcome: s.result.won ? 'win' : 'lose', score: s.result.checkpoints === s.result.requiredCheckpoints ? model.stage.opponents + 2 - s.result.rank : 0, racing: s.result, league: leagueOrder(s.cars)};
   const ctx = {league: setup, level: setup.stage, seed: 5};
   const lr = racingLeagueResult(raw, ctx, {maximumSeconds: 300});
   assert.ok(lr, 'the engine accepts the finished league race');

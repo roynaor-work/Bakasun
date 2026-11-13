@@ -1,22 +1,23 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-10';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261107-10';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-10';
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-10';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-10';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-10';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-10';
-import {createControls} from './controls.mjs?v=island-v2-20261107-10';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-11';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261107-11';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-11';
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-11';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-11';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-11';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-11';
+import {createControls} from './controls.mjs?v=island-v2-20261107-11';
 import {withSoccerV7Kits} from './soccer-v7.mjs';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-10';
-import {gameContext} from './context.mjs?v=island-v2-20261107-10';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-11';
+import {gameContext} from './context.mjs?v=island-v2-20261107-11';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
-import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-10';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-11';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
+import {soccerShowEnabled} from './soccer-show.mjs';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -63,7 +64,8 @@ export function startSoccer(ctx) {
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
   let storage;try{storage=globalThis.localStorage;}catch{}
   const telemetry=context.drill?null:createSoccerTelemetry({teams:teamsKey,stage:context.level,difficulty:context.difficulty,pitch:[balance.pitch.length,balance.pitch.width]});
-  const audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length});
+  // soccerShow v1 (M4 broadcast): the view holds the model during the replay and the celebration, the audio gets the home/rival goal crowd and the swell.
+  const showOn=soccerShowEnabled(balance.show?.version),audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length,show:showOn});
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
   let view,input,frame,last=0,hud=0,paused=false,disposed=false,handed=true,hudSignature='',mode='',started=false,contracts=null,contractsReady=!canvas,contractsError=null,reported=false;
@@ -85,9 +87,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-10',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-11',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-10',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-11',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
@@ -115,7 +117,7 @@ export function startSoccer(ctx) {
     const roster=element('div','soccer-scoreboard'),home=element('span','soccer-kit'),away=element('span','soccer-kit'),score=element('span','soccer-score'),homeScore=element('bdi'),awayScore=element('bdi'),clock=element('bdi','soccer-clock');
     roster.setAttribute('aria-label',t('soccer.scoreboard'));roster.setAttribute('role','group');
     for(const [badge,identity]of [[home,team],[away,opponent]]){badge.style.backgroundColor=identity.colors[0];badge.style.borderColor=identity.colors[1];badge.setAttribute('aria-label',t(identity.nameId));}
-    score.append(homeScore,awayScore);roster.append(home,score,away,clock);status.after(roster);status.classList.add('soccer-live-status');canvas.classList.add('soccer-canvas');
+    score.append(homeScore,awayScore);roster.append(home,score,away,clock);const half=element('bdi','soccer-half');if(showOn)roster.append(half);status.after(roster);status.classList.add('soccer-live-status');canvas.classList.add('soccer-canvas');
     const nodes={pad,stick:zone,primary:shoot,secondary:pass,sprint,trick:swap,pause:canvas.closest('.game-screen')?.querySelector('.game-pause')};
     const autoAim=action=>{const s=model.getState(),p=s.players[s.controlled],target=s.practiceTarget||(s.restart?.type==='corner'?{x:s.attackDir*balance.pitch.length/2-s.attackDir*balance.pitch.penaltyDepth/2,z:0}:null);if(action==='pass'&&!target)return s.moving?{...s.aim}:{x:p.fx,z:p.fz};return {x:(target?.x??s.attackDir*balance.pitch.length/2)-p.x,z:(target?.z??0)-p.z};};
     const layoutControls=()=>{if(!contracts)return;const rect=controls.getBoundingClientRect(),w=rect.width||window.innerWidth,h=rect.height||window.innerHeight,geometry=balance.controls.stick?.[h>w?'padPortrait':'padLandscape']||{widthPct:46,heightPct:60};const layout=applySoccerDesignLayout({root:controls,nodes,contract:contracts.controls,width:w,height:h,rightHanded:handed}),area=soccerPadRect(layout,w,h,geometry);pad.style.width=`${area.width}px`;pad.style.height=`${area.height}px`;};
@@ -136,6 +138,8 @@ export function startSoccer(ctx) {
       if(ms&&!paused)try{navigator.vibrate?.(ms);}catch{}
     }
     function actionFeedback(event){
+      // Rules v1: the referee's call shows for both teams (the whistle comes from the audio layer).
+      if(event.type==='foul'){feedback.textContent=event.penalty?'עבירה · פנדל':'עבירה';feedback.dataset.action='foul';feedback.hidden=false;feedbackTime=1.6;return;}
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
       if(!key)return;
@@ -169,6 +173,7 @@ export function startSoccer(ctx) {
       fixture.hidden=Boolean(context.drill||shootout);
       if(s.campaign&&!context.drill&&!shootout){const objective=stageObjective(s);stageLabel.textContent=s.league?.leagues?t('soccer.league.matchLabel',{league:t(s.league.nameId),match:s.league.match,count:s.league.per}):t('soccer.campaign.stageLabel',{stage:s.stage,name:t(s.campaign.nameId)});objectiveLabel.textContent=`${t(objective.nameId,{target:objective.target})} · ${Math.min(objective.current,objective.target)}/${objective.target}`;objectiveLabel.dataset.complete=String(objective.complete);}
       const seconds=Math.max(0,Math.floor(s.elapsed));clock.textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
+      if(showOn){const text=shootout?'פנדלים':s.phase==='finished'?'סיום':s.phase==='halftime'?'הפסקה':`מחצית ${s.half===2?'2':'1'}`;if(half.textContent!==text)half.textContent=text;}
       const percent=Math.round(s.sprint.value/s.sprint.capacity*100);meter.setAttribute('aria-valuenow',String(percent));ring.style.setProperty('--stamina',`${percent}%`);sprint.dataset.exhausted=String(s.sprint.locked);sprint.dataset.sprinting=String(s.sprint.active);staminaFill.style.width=`${percent}%`;
       shoot.style.setProperty('--charge',`${s.charging&&s.chargeKind==='shot'?Math.round(s.charge/balance.physics.chargeSeconds*100):0}%`);
       pass.style.setProperty('--charge',`${s.charging&&s.chargeKind==='pass'?Math.round(s.charge/balance.passing.chargeSeconds*100):0}%`);
@@ -185,19 +190,22 @@ export function startSoccer(ctx) {
       // While the loading panel is up nothing is drawn: rendering the dimmed fallback
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0)model.update(dt,input.sample(model.getState().attackDir));view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      // soccerShow v1: while the view holds (replay, celebration) the model is not stepped and the frame's input is dropped (a tap skips the replay).
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
-      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅'}[s.restart.type]:s.phase==='halftime'?'↔':s.phase==='goal'&&view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':'';
-      phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;
-      audio.update(s);
-      for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);}
+      const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':'';
+      phaseBanner.hidden=!phaseText;if(phaseBanner.textContent!==phaseText)phaseBanner.textContent=phaseText;const showTag=view.replaying?'replay':'';if(phaseBanner.dataset.show!==showTag)phaseBanner.dataset.show=showTag;
+      audio.update(s,view.crowdMood);
+      for(const event of model.drainEvents?.()||[]){audio.event(event);actionFeedback(event);buzz(event);telemetry?.event(event);view.noteEvent?.(event);}
       if(!paused&&dt>0)telemetry?.frame(s,dt,frameMs);
       if(!paused){feedbackTime=Math.max(0,feedbackTime-dt);feedback.hidden=feedbackTime<=0;}
       if(hud>=.1){hud=0;updateHud();}
+      if(model.result&&!shootout){
+        // A short beat after the final whistle before the kicks start; soccerShow v1 lets the winners' finale play first (view.finaleSeconds, 0 when off).
+        shootoutWait+=dt;if(shootoutWait<Math.max(penaltiesOn?(balance.league.penalties.delaySeconds??1.2):0,view.finaleSeconds||0)){frame=requestAnimationFrame(tick);return;}
+      }
       if(model.result&&penaltiesOn&&!shootout){
-        // A short beat after the final whistle before the kicks start.
-        shootoutWait+=dt;if(shootoutWait<(balance.league.penalties.delaySeconds??1.2)){frame=requestAnimationFrame(tick);return;}
         // Full time: three bonus kicks from the spot, same rival keeper and difficulty.
         shootout={match:model.result};model=createSoccerPenalties({config:balance,stage:context.level,seed:(seed^0x5bd1e995)>>>0,team,difficulty:context.difficulty,card:context.soccerCard,league:true});
         if(contracts)model.setDesignTactics?.(contracts.tactics);

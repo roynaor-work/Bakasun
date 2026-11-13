@@ -1,0 +1,248 @@
+{
+ "cues": {
+  "siren-first-call": {
+   "peak": 0.1023,
+   "mean": 0.0844
+  },
+  "siren-loop-0": {
+   "peak": 0.1017,
+   "mean": 0.0905
+  },
+  "siren-loop-1": {
+   "peak": 0.1018,
+   "mean": 0.0999
+  },
+  "siren-loop-2": {
+   "peak": 0.1015,
+   "mean": 0.0998
+  },
+  "siren-far": {
+   "peak": 0.1003,
+   "mean": 0.0701
+  },
+  "siren-crew": {
+   "peak": 0.1022,
+   "mean": 0.0708
+  },
+  "engine-idle-4": {
+   "peak": 0.043,
+   "mean": 0.0193
+  },
+  "engine-20": {
+   "peak": 0.0511,
+   "mean": 0.0361
+  },
+  "engine-31-boost": {
+   "peak": 0.0574,
+   "mean": 0.0429
+  },
+  "engine+siren": {
+   "peak": 0.1159,
+   "mean": 0.1005
+  },
+  "shot": {
+   "peak": 0.0717,
+   "mean": 0.0047
+  },
+  "shotHit": {
+   "peak": 0.0499,
+   "mean": 0.0052
+  },
+  "turn": {
+   "peak": 0.0181,
+   "mean": 0.0027
+  },
+  "flat": {
+   "peak": 0.0456,
+   "mean": 0.013
+  },
+  "skid": {
+   "peak": 0.0474,
+   "mean": 0.0106
+  },
+  "twang": {
+   "peak": 0.0512,
+   "mean": 0.0038
+  },
+  "whistle": {
+   "peak": 0.0387,
+   "mean": 0.0073
+  },
+  "whoosh": {
+   "peak": 0.0312,
+   "mean": 0.0067
+  },
+  "hitBody": {
+   "peak": 0.0599,
+   "mean": 0.0051
+  },
+  "hitHead": {
+   "peak": 0.0448,
+   "mean": 0.0116
+  },
+  "catch": {
+   "peak": 0.0605,
+   "mean": 0.0144
+  },
+  "perfect": {
+   "peak": 0.0631,
+   "mean": 0.023
+  },
+  "crash": {
+   "peak": 0.0433,
+   "mean": 0.0054
+  },
+  "scrape": {
+   "peak": 0.0241,
+   "mean": 0.0024
+  },
+  "ram": {
+   "peak": 0.0444,
+   "mean": 0.0026
+  },
+  "thud": {
+   "peak": 0.0485,
+   "mean": 0.0015
+  },
+  "count": {
+   "peak": 0.0233,
+   "mean": 0.0025
+  },
+  "go": {
+   "peak": 0.0344,
+   "mean": 0.0051
+  },
+  "tool": {
+   "peak": 0.0174,
+   "mean": 0.0015
+  },
+  "miss": {
+   "peak": 0.0381,
+   "mean": 0.0046
+  },
+  "near": {
+   "peak": 0.0342,
+   "mean": 0.0041
+  },
+  "brake": {
+   "peak": 0.0124,
+   "mean": 0.0022
+  },
+  "nitro": {
+   "peak": 0.0053,
+   "mean": 0.0011
+  },
+  "draw": {
+   "peak": 0.027,
+   "mean": 0.0176
+  },
+  "stack-shot+siren+engine": {
+   "peak": 0.1184,
+   "mean": 0.0964
+  }
+ },
+ "siren": {},
+ "status": {
+  "afterGesture": {
+   "state": "running",
+   "sirenBuffer": null,
+   "sirenDecoded": {
+    "twoTone": null,
+    "yelp": null
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "decoded": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenFirst": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenLoop": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": true,
+   "sirenGain": 0.62,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "sirenAfterHold": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": false,
+   "limiter": true
+  },
+  "engine": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": true,
+   "boosting": true,
+   "draw": false,
+   "limiter": true
+  },
+  "final": {
+   "state": "running",
+   "sirenBuffer": "twoTone",
+   "sirenDecoded": {
+    "twoTone": 5,
+    "yelp": 5
+   },
+   "sirenLive": false,
+   "sirenGain": 0,
+   "engine": false,
+   "boosting": false,
+   "draw": true,
+   "limiter": true
+  }
+ },
+ "before": null,
+ "errors": [],
+ "policy": "no-user-gesture-required"
+}

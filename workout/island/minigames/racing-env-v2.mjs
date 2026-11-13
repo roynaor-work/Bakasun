@@ -18,7 +18,7 @@ export async function loadEnvV2({T,GLTFLoader,anisotropy=4,version=''}){
 }
 
 /** Bake one model: plain materials -> one vertex-coloured geometry; textured/emissive/transparent materials stay as their own parts (original materials). */
-function bake(T,scene,keep){
+export function bake(T,scene,keep){
  scene.updateMatrixWorld(true);const plain=[],parts=[],specials=new Map();
  scene.traverse(o=>{if(!o.isMesh)return;const g=o.geometry.clone();g.applyMatrix4(o.matrixWorld);const m=o.material,special=m.map||m.emissiveIntensity>0&&(m.emissive?.getHex?.()||0)>0||m.transparent;
   if(special){const key=m.name+'|'+(m.map?.uuid||'');let e=specials.get(key);if(!e){e={material:keep(m),geos:[]};specials.set(key,e);}for(const k of Object.keys(g.attributes))if(!['position','normal','uv'].includes(k))g.deleteAttribute(k);e.geos.push(g.index?g.toNonIndexed():g);return;}
@@ -30,14 +30,14 @@ function bake(T,scene,keep){
  return parts;
 }
 
-export function buildEnvV2({T,scene,track,keep,f1,kit,night=false}){
+export function buildEnvV2({T,scene,track,keep,f1,kit,night=false,skip=[]}){
  const root=new T.Group();root.name='racing-env-v2';scene.add(root);
  const dummy=new T.Object3D(),baked={};for(const [name,model] of Object.entries(kit.models))baked[name]=bake(T,model,keep);
  const jobs={};  // model name -> [{x,y,z,rot,sx,sy,sz}]
  const put=(name,s,lane,{y=0,scaleX=1,scaleY=1,scaleZ=1}={})=>{const q=f1.at(s,lane,y),side=Math.sign(lane)||1;(jobs[name]||(jobs[name]=[])).push({x:q.x,y:q.y,z:q.z,rot:q.heading+(lane===0?Math.PI:side<0?Math.PI/2:-Math.PI/2),sx:scaleX,sy:scaleY,sz:scaleZ});};
  const L=track.length,half=f1.half,[S0,len]=f1.pitSpan;
  // start gantry across the line, scaled in X to the road; pit building (4 modules) on the pit side; grandstand (4 modules) and control tower opposite
- put('start-gantry',L-10,0,{scaleX:(track.width+3)/15.75});
+ if(!skip.includes('start-gantry'))put('start-gantry',L-10,0,{scaleX:(track.width+3)/15.75});   // racing-broadcast-v1 skips it: its own gantry has lamps that follow the start lights
  for(let k=0;k<3;k++)put('pit-building',(S0+25+k*(len-50)/2)%L,-(half+30),{scaleX:1.02});
  for(let k=0;k<3;k++)put('grandstand',(52+k*20.5)%L,half+18);
  put('control-tower',175,half+16);

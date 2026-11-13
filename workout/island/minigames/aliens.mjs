@@ -1,6 +1,6 @@
-import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-10';
+import {drawAlienEffects,drawAlienBolts} from './g2m-effects.mjs?v=island-v2-20261107-11';
 import {drawUltraAlienEffects,drawAlienFallbackFeedback} from './ultra-alien-effects.mjs';
-import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-10';
+import {createAlienView} from './alien-view.mjs?v=island-v2-20261107-11';
 import {runAlienSession} from './alien-session.mjs';
 import {createAlienModel} from './alien-flight-model.mjs';
 import './alien-ui.mjs';
@@ -8,7 +8,7 @@ import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons} from './alien-v12-draw.mjs';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer,wingVisible} from './alien-v10-draw.mjs';
-import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-10';
+import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-11';
 export {createAlienModel};
 export {createAlienEntity,separateAliens,alienStack} from './alien-flight-combat.mjs';
 const TAU=Math.PI*2;
@@ -28,7 +28,7 @@ export function drawAliens(p,m,{config,balance,art,quality,view,pixelAspect=1}) 
   drawAlienEffects(p,m,balance,pixelAspect);if(m.v10){drawV10Missile(p,m,pixelAspect);drawV10WingTimer(p,m,pixelAspect);}if(m.v12){drawV12Cannons(p,m,pixelAspect);drawV14Heat(p,m,pixelAspect);}if(m.v11){drawV11Blasts(p,m,pixelAspect);drawV11BonusTimer(p,m,pixelAspect);}
   for(const d of m.loot){if(d.kind){p.fillStyle=palette.cockpitShine;p.beginPath();p.moveTo(d.x,d.y-9);p.lineTo(d.x+7,d.y);p.lineTo(d.x,d.y+9);p.lineTo(d.x-7,d.y);p.fill();}else{oval(p,d.x,d.y,7,8,palette.gold);oval(p,d.x-1,d.y-2,3,4,palette.ivory);}}
   for(const wing of m.wings)if(wing.active&&(!m.v10||wingVisible(m))){p.save();p.translate(wing.x,wing.y);p.rotate(m.time*.7);p.fillStyle=palette.gold;p.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?7:15;if(i)p.lineTo(Math.cos(a)*r,Math.sin(a)*r);else p.moveTo(Math.cos(a)*r,Math.sin(a)*r);}p.closePath();p.fill();oval(p,-4,-1,2,3,palette.cockpit);oval(p,4,-1,2,3,palette.cockpit);p.restore();}
-  const {x,y}=m.player;p.save();p.translate(x,y);p.scale(1/pixelAspect,1);p.rotate(-(m.player.bank||0)*balance.render.bankAngle);if(m.invulnerable&&Math.floor(m.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;
+  const {x}=m.player,y=m.player.y+(m.recoilOffset||0);p.save();p.translate(x,y);p.scale(1/pixelAspect,1);p.rotate(-(m.player.bank||0)*balance.render.bankAngle);if(m.invulnerable&&Math.floor(m.time*a.shipBlinkRate)%2)p.globalAlpha=balance.blinkOpacity;
   const exhaust=12+Math.sin(m.time*25)*4;oval(p,0,30,6,exhaust,palette.exhaust);oval(p,0,29,3,exhaust*.7,palette.exhaustCore);const playerScale=art.modelScales?.player||1;p.drawImage(art.player,-35*playerScale,-40*playerScale,70*playerScale,77*playerScale);
   if(m.upgrades.damage>0||(m.equipment.damage||1)>1){oval(p,0,-9,4+m.upgrades.damage,9,palette.gold);}if((m.equipment.rate||1)>1){oval(p,-20,26,3,12,palette.cockpitShine);oval(p,20,26,3,12,palette.cockpitShine);}if(m.upgrades.laser>0||m.spreadTime>0){p.fillStyle=palette.ivory;p.fillRect(-25,-6,5,21);p.fillRect(20,-6,5,21);}
   if(m.powerup===3||m.upgrades.shield>0||(m.equipment.shield||0)>0){p.strokeStyle=palette.shieldGlow;p.lineWidth=3;p.beginPath();p.arc(0,0,32+Math.sin(m.time*5)*2,0,TAU);p.stroke();}p.restore();drawAlienFallbackFeedback(p,m,balance,pixelAspect,config);

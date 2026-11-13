@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": 1,
+  "version": "soccer-keeper-crowd-v1",
+  "image": "crowd-atlas.png",
+  "width": 1024,
+  "height": 2048,
+  "cellWidth": 256,
+  "cellHeight": 256,
+  "columns": 4,
+  "rows": 8,
+  "format": "RGBA8 PNG, lossless",
+  "source": {
+    "repository": "https://github.com/roynaor-work/Bakasun",
+    "commit": "51f4faab518c695672efaf6323a8b72f239a2b84",
+    "path": "workout/island/design/soccer-stadium-v8/runtime/crowd-atlas.webp",
+    "sha256": "3dec633d8e639b2fb309e0cd8aeff4cc2dc6253310c10be6a718f40353ea8696"
+  },
+  "originalPixelIdentity": true,
+  "originalDecodedSha256": "5906a4e60d329ce00d0c909d7d48a8f428d3a34a6cbb65b007bcd835d1aeb0d3",
+  "sampling": {
+    "flipY": false,
+    "uvConvention": "Use uvBottomLeft for glTF UV coordinates with flipY=false, or uvTopLeft with a top-left canvas crop.",
+    "recommendation": "Use safeUvBottomLeft and alphaTest .35; preserve the 256 px cell size. Original UV v values halve because the new texture is twice as tall."
+  },
+  "cells": [
+    {
+      "id": "original_00",
+      "variant": 0,
+      "pose": "original",
+      "sourceVariant": 0,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0,
+        0.25,
+        0.125
+      ],
+      "uvBottomLeft": [
+        0,
+        0.875,
+        0.25,
+        1
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.876953125,
+        0.24609375,
+        0.998046875
+      ]
+    },
+    {
+      "id": "original_01",
+      "variant": 1,
+      "pose": "original",
+      "sourceVariant": 1,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0,
+        0.5,
+        0.125
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.875,
+        0.5,
+        1
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.876953125,
+        0.49609375,
+        0.998046875
+      ]
+    },
+    {
+      "id": "original_02",
+      "variant": 2,
+      "pose": "original",
+      "sourceVariant": 2,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0,
+        0.75,
+        0.125
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.875,
+        0.75,
+        1
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.876953125,
+        0.74609375,
+        0.998046875
+      ]
+    },
+    {
+      "id": "original_03",
+      "variant": 3,
+      "pose": "original",
+      "sourceVariant": 3,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 0,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0,
+        1,
+        0.125
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.875,
+        1,
+        1
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.876953125,
+        0.99609375,
+        0.998046875
+      ]
+    },
+    {
+      "id": "original_04",
+      "variant": 4,
+      "pose": "original",
+      "sourceVariant": 4,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.125,
+        0.25,
+        0.25
+      ],
+      "uvBottomLeft": [
+        0,
+        0.75,
+        0.25,
+        0.875
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.751953125,
+        0.24609375,
+        0.873046875
+      ]
+    },
+    {
+      "id": "original_05",
+      "variant": 5,
+      "pose": "original",
+      "sourceVariant": 5,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.125,
+        0.5,
+        0.25
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.75,
+        0.5,
+        0.875
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.751953125,
+        0.49609375,
+        0.873046875
+      ]
+    },
+    {
+      "id": "original_06",
+      "variant": 6,
+      "pose": "original",
+      "sourceVariant": 6,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.125,
+        0.75,
+        0.25
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.75,
+        0.75,
+        0.875
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.751953125,
+        0.74609375,
+        0.873046875
+      ]
+    },
+    {
+      "id": "original_07",
+      "variant": 7,
+      "pose": "original",
+      "sourceVariant": 7,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 256,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.125,
+        1,
+        0.25
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.75,
+        1,
+        0.875
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.751953125,
+        0.99609375,
+        0.873046875
+      ]
+    },
+    {
+      "id": "original_08",
+      "variant": 8,
+      "pose": "original",
+      "sourceVariant": 8,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.25,
+        0.25,
+        0.375
+      ],
+      "uvBottomLeft": [
+        0,
+        0.625,
+        0.25,
+        0.75
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.626953125,
+        0.24609375,
+        0.748046875
+      ]
+    },
+    {
+      "id": "original_09",
+      "variant": 9,
+      "pose": "original",
+      "sourceVariant": 9,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.25,
+        0.5,
+        0.375
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.625,
+        0.5,
+        0.75
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.626953125,
+        0.49609375,
+        0.748046875
+      ]
+    },
+    {
+      "id": "original_10",
+      "variant": 10,
+      "pose": "original",
+      "sourceVariant": 10,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.25,
+        0.75,
+        0.375
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.625,
+        0.75,
+        0.75
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.626953125,
+        0.74609375,
+        0.748046875
+      ]
+    },
+    {
+      "id": "original_11",
+      "variant": 11,
+      "pose": "original",
+      "sourceVariant": 11,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 512,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.25,
+        1,
+        0.375
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.625,
+        1,
+        0.75
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.626953125,
+        0.99609375,
+        0.748046875
+      ]
+    },
+    {
+      "id": "original_12",
+      "variant": 12,
+      "pose": "original",
+      "sourceVariant": 12,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.375,
+        0.25,
+        0.5
+      ],
+      "uvBottomLeft": [
+        0,
+        0.5,
+        0.25,
+        0.625
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.501953125,
+        0.24609375,
+        0.623046875
+      ]
+    },
+    {
+      "id": "original_13",
+      "variant": 13,
+      "pose": "original",
+      "sourceVariant": 13,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.375,
+        0.5,
+        0.5
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.5,
+        0.5,
+        0.625
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.501953125,
+        0.49609375,
+        0.623046875
+      ]
+    },
+    {
+      "id": "original_14",
+      "variant": 14,
+      "pose": "original",
+      "sourceVariant": 14,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.375,
+        0.75,
+        0.5
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.5,
+        0.75,
+        0.625
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.501953125,
+        0.74609375,
+        0.623046875
+      ]
+    },
+    {
+      "id": "original_15",
+      "variant": 15,
+      "pose": "original",
+      "sourceVariant": 15,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 768,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.375,
+        1,
+        0.5
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.5,
+        1,
+        0.625
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.501953125,
+        0.99609375,
+        0.623046875
+      ]
+    },
+    {
+      "id": "hands_up_00",
+      "variant": 0,
+      "pose": "hands_up",
+      "sourceVariant": 0,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 1024,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.5,
+        0.25,
+        0.625
+      ],
+      "uvBottomLeft": [
+        0,
+        0.375,
+        0.25,
+        0.5
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.376953125,
+        0.24609375,
+        0.498046875
+      ]
+    },
+    {
+      "id": "hands_up_01",
+      "variant": 1,
+      "pose": "hands_up",
+      "sourceVariant": 1,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 1024,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.5,
+        0.5,
+        0.625
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.375,
+        0.5,
+        0.5
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.376953125,
+        0.49609375,
+        0.498046875
+      ]
+    },
+    {
+      "id": "hands_up_02",
+      "variant": 2,
+      "pose": "hands_up",
+      "sourceVariant": 2,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 1024,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.5,
+        0.75,
+        0.625
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.375,
+        0.75,
+        0.5
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.376953125,
+        0.74609375,
+        0.498046875
+      ]
+    },
+    {
+      "id": "hands_up_03",
+      "variant": 3,
+      "pose": "hands_up",
+      "sourceVariant": 3,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 1024,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.5,
+        1,
+        0.625
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.375,
+        1,
+        0.5
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.376953125,
+        0.99609375,
+        0.498046875
+      ]
+    },
+    {
+      "id": "hands_up_04",
+      "variant": 4,
+      "pose": "hands_up",
+      "sourceVariant": 4,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 1280,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.625,
+        0.25,
+        0.75
+      ],
+      "uvBottomLeft": [
+        0,
+        0.25,
+        0.25,
+        0.375
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.251953125,
+        0.24609375,
+        0.373046875
+      ]
+    },
+    {
+      "id": "hands_up_05",
+      "variant": 5,
+      "pose": "hands_up",
+      "sourceVariant": 5,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 1280,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.625,
+        0.5,
+        0.75
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.25,
+        0.5,
+        0.375
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.251953125,
+        0.49609375,
+        0.373046875
+      ]
+    },
+    {
+      "id": "hands_up_06",
+      "variant": 6,
+      "pose": "hands_up",
+      "sourceVariant": 6,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 1280,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.625,
+        0.75,
+        0.75
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.25,
+        0.75,
+        0.375
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.251953125,
+        0.74609375,
+        0.373046875
+      ]
+    },
+    {
+      "id": "hands_up_07",
+      "variant": 7,
+      "pose": "hands_up",
+      "sourceVariant": 7,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 1280,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.625,
+        1,
+        0.75
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.25,
+        1,
+        0.375
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.251953125,
+        0.99609375,
+        0.373046875
+      ]
+    },
+    {
+      "id": "hands_up_08",
+      "variant": 8,
+      "pose": "hands_up",
+      "sourceVariant": 8,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 1536,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.75,
+        0.25,
+        0.875
+      ],
+      "uvBottomLeft": [
+        0,
+        0.125,
+        0.25,
+        0.25
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.126953125,
+        0.24609375,
+        0.248046875
+      ]
+    },
+    {
+      "id": "hands_up_09",
+      "variant": 9,
+      "pose": "hands_up",
+      "sourceVariant": 9,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 1536,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.75,
+        0.5,
+        0.875
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0.125,
+        0.5,
+        0.25
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.126953125,
+        0.49609375,
+        0.248046875
+      ]
+    },
+    {
+      "id": "hands_up_10",
+      "variant": 10,
+      "pose": "hands_up",
+      "sourceVariant": 10,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 1536,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.75,
+        0.75,
+        0.875
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0.125,
+        0.75,
+        0.25
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.126953125,
+        0.74609375,
+        0.248046875
+      ]
+    },
+    {
+      "id": "hands_up_11",
+      "variant": 11,
+      "pose": "hands_up",
+      "sourceVariant": 11,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 1536,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.75,
+        1,
+        0.875
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0.125,
+        1,
+        0.25
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.126953125,
+        0.99609375,
+        0.248046875
+      ]
+    },
+    {
+      "id": "hands_up_12",
+      "variant": 12,
+      "pose": "hands_up",
+      "sourceVariant": 12,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 0,
+        "y": 1792,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0,
+        0.875,
+        0.25,
+        1
+      ],
+      "uvBottomLeft": [
+        0,
+        0,
+        0.25,
+        0.125
+      ],
+      "safeUvBottomLeft": [
+        0.00390625,
+        0.001953125,
+        0.24609375,
+        0.123046875
+      ]
+    },
+    {
+      "id": "hands_up_13",
+      "variant": 13,
+      "pose": "hands_up",
+      "sourceVariant": 13,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 256,
+        "y": 1792,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.25,
+        0.875,
+        0.5,
+        1
+      ],
+      "uvBottomLeft": [
+        0.25,
+        0,
+        0.5,
+        0.125
+      ],
+      "safeUvBottomLeft": [
+        0.25390625,
+        0.001953125,
+        0.49609375,
+        0.123046875
+      ]
+    },
+    {
+      "id": "hands_up_14",
+      "variant": 14,
+      "pose": "hands_up",
+      "sourceVariant": 14,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 512,
+        "y": 1792,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.5,
+        0.875,
+        0.75,
+        1
+      ],
+      "uvBottomLeft": [
+        0.5,
+        0,
+        0.75,
+        0.125
+      ],
+      "safeUvBottomLeft": [
+        0.50390625,
+        0.001953125,
+        0.74609375,
+        0.123046875
+      ]
+    },
+    {
+      "id": "hands_up_15",
+      "variant": 15,
+      "pose": "hands_up",
+      "sourceVariant": 15,
+      "supporters": 3,
+      "pixelRect": {
+        "x": 768,
+        "y": 1792,
+        "width": 256,
+        "height": 256
+      },
+      "uvTopLeft": [
+        0.75,
+        0.875,
+        1,
+        1
+      ],
+      "uvBottomLeft": [
+        0.75,
+        0,
+        1,
+        0.125
+      ],
+      "safeUvBottomLeft": [
+        0.75390625,
+        0.001953125,
+        0.99609375,
+        0.123046875
+      ]
+    }
+  ]
+}

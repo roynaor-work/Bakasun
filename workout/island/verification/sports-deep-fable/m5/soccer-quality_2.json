@@ -1,0 +1,116 @@
+{
+ "done": true,
+ "result": {
+  "viewport": {
+   "width": 844,
+   "height": 390
+  },
+  "devicePixelRatio": 1,
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "seed": 7,
+  "level": 1,
+  "pinnedQuality": 2,
+  "warmupSeconds": 3,
+  "seconds": 25.1,
+  "frames": 232,
+  "fps": 9.2,
+  "frameMs": {
+   "mean": 108.19,
+   "p50": 100,
+   "p95": 200,
+   "p99": 266.7,
+   "max": 316.7
+  },
+  "over33": 203,
+  "over50": 197,
+  "tickMs": {
+   "mean": 0.72,
+   "p50": 0.5,
+   "p95": 2.7,
+   "p99": 6.7,
+   "max": 8.3
+  },
+  "renderMs": {
+   "mean": 6.64,
+   "p50": 3.8,
+   "p95": 10.6,
+   "p99": 19.7,
+   "max": 234.7
+  },
+  "glMs": {
+   "mean": 5.18,
+   "p50": 2.4,
+   "p95": 7.8,
+   "p99": 11.6,
+   "max": 233.2
+  },
+  "animMs": {
+   "mean": 1.46,
+   "p50": 1.1,
+   "p95": 3.8,
+   "p99": 6.8,
+   "max": 17.8
+  },
+  "programsCompiled": 0,
+  "allocByPhaseMB": {
+   "tick": 75.6,
+   "render": 26.1,
+   "gl": 30.4,
+   "other": -2.7
+  },
+  "longTasks": 4,
+  "longTaskMs": 697,
+  "heap": {
+   "startMB": 75.7,
+   "endMB": 63.4,
+   "allocatedMB": 129.4,
+   "allocatedMBPerSecond": 5.15,
+   "gcCount": 7
+  },
+  "assetReadyMs": 3080,
+  "warmup": {
+   "programs": 66,
+   "ms": 481
+  },
+  "quality": {
+   "final": 3,
+   "pixelRatio": 0.85,
+   "changes": [
+    {
+     "atSeconds": 0.5,
+     "quality": 3
+    }
+   ],
+   "crowdCount": 0,
+   "shadows": false,
+   "triangles": 82985,
+   "drawCalls": 67,
+   "assetStatus": "ready",
+   "turf": {
+    "turfStatus": "ready",
+    "turfMaps": 1,
+    "source": "design/environment"
+   },
+   "lod": 1
+  },
+  "match": {
+   "score": [
+    1,
+    0
+   ],
+   "elapsed": 18.1,
+   "phase": "playing",
+   "events": {
+    "goal": 1,
+    "shot": 1,
+    "pass": 4,
+    "loft": 0,
+    "header": 0,
+    "steal": 0,
+    "save": 0
+   }
+  },
+  "extra": "quality=2",
+  "consoleErrors": []
+ }
+}

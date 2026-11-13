@@ -22,7 +22,7 @@ export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=
 export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base}){
  const flag=params?.get?.('tennisStadium');
  if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
- const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-10`,base);
+ const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-11`,base);
  const [models,atlas,city]=await Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
   new T.TextureLoader().loadAsync(url('crowd-atlas.webp').href),new T.TextureLoader().loadAsync(url('evening-city.png').href)]);

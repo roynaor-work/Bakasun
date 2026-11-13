@@ -1,6 +1,6 @@
 {
  "mode": "after",
- "query": "?dev=1",
+ "query": "?dev=1&adapt=1",
  "env": {
   "coarse": true,
   "hoverNone": true,
@@ -23,22 +23,22 @@
    108
   ],
   "rocket": [
-   646,
-   312,
-   62,
-   60
+   746,
+   78,
+   52,
+   52
   ],
   "frost": [
-   578,
-   312,
-   62,
-   60
+   746,
+   138,
+   52,
+   52
   ],
   "fury": [
-   510,
-   312,
-   62,
-   60
+   746,
+   198,
+   52,
+   52
   ],
   "under": {
    "60,200": "aim-zone",
@@ -47,13 +47,20 @@
    "150,290": "aim-zone",
    "120,300": "aim-zone",
    "450,150": "scene",
-   "650,110": "SPAN",
-   "520,60": "scene"
+   "650,110": "scene",
+   "520,60": "SPAN"
   }
+ },
+ "hudCoverage": {
+  "hud": 0.1036,
+  "withControls": 0.1781,
+  "band": 0.0523,
+  "nodes": 8
  },
  "steps": {
   "sceneTaps": {
    "shots": 0,
+   "frames": 16,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
@@ -71,6 +78,7 @@
   },
   "sceneDrag": {
    "shots": 0,
+   "frames": 27,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
@@ -88,6 +96,7 @@
   },
   "stickDrag2s": {
    "shots": 0,
+   "frames": 31,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
@@ -98,13 +107,14 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.688
+    "x": 0.418,
+    "y": 0.704
    },
    "aimMoved": true
   },
   "stickLeavesZone": {
    "shots": 0,
+   "frames": 27,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
@@ -116,12 +126,13 @@
    },
    "aimTo": {
     "x": 0.95,
-    "y": 0.343
+    "y": 0.85
    },
    "aimMoved": true
   },
   "leftThumbAbilityRow": {
    "shots": 0,
+   "frames": 35,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
@@ -132,8 +143,8 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.316,
-    "y": 0.4
+    "x": 0.119,
+    "y": 0.403
    },
    "aimMoved": true,
    "tapsAbilities": 0,
@@ -145,9 +156,10 @@
    }
   },
   "twoFingers": {
-   "shots": 10,
+   "shots": 9,
+   "frames": 35,
    "nonButton": 0,
-   "button": 10,
+   "button": 9,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
@@ -156,93 +168,250 @@
     "y": -0.05
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimMoved": true,
    "heldFiring": true,
    "heldFireHeld": true,
    "stickActiveWhileHeld": true,
    "shotsAfterButtonRelease": 0,
-   "aimKeptAfterStickRelease": false
+   "aimKeptAfterStickRelease": true
   },
   "strayTapWhileHeld": {
-   "shots": 3,
+   "shots": 5,
+   "frames": 14,
    "nonButton": 0,
-   "button": 3,
+   "button": 5,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimMoved": false,
-   "shotsBeforeTap": 11,
+   "shotsBeforeTap": 10,
+   "heatAtTap": 15.149070000000481,
    "firingAfterStrayTap": true,
-   "shotsAfterStrayTap": 0
+   "fireHeldAfterStrayTap": true,
+   "shotsAfterStrayTap": 2,
+   "framesAfterStrayTap": 6
   },
   "keyboardF": {
    "shots": 0,
+   "frames": 4,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimMoved": false
   },
   "mouseOnScene": {
    "shots": 0,
+   "frames": 5,
    "nonButton": 0,
    "button": 0,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimMoved": false
   },
   "fireButtonHold": {
    "shots": 3,
+   "frames": 10,
    "nonButton": 0,
    "button": 3,
    "stickNoButton": 0,
    "abilities": 0,
    "abilityFromLeft": 0,
    "aimFrom": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimTo": {
-    "x": 0.95,
-    "y": 0.586
+    "x": 0.461,
+    "y": 0.748
    },
    "aimMoved": false,
    "heldFiring": true
+  },
+  "stickPrecision": {
+   "shots": 0,
+   "frames": 58,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": 0,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": 0,
+    "y": 0.85
+   },
+   "aimMoved": true,
+   "R": 80,
+   "fineSpeed": 0.085,
+   "timeToTarget": 0.5,
+   "overshoot": 0,
+   "stickAfterRelease": null,
+   "fullSpeed": 1.3,
+   "preciseSpeed": 0.455,
+   "preciseFlag": true
+  },
+  "stickSmooth": {
+   "shots": 0,
+   "frames": 65,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": -0.5,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": -0.279,
+    "y": -0.05
+   },
+   "aimMoved": true,
+   "holdFrames": 7,
+   "sentMoves": 24,
+   "receivedMoves": 24,
+   "firstStepPx": 0.05,
+   "maxStepPx": 3.78,
+   "stallFrames": 0,
+   "holdSpeedMean": 75.3,
+   "holdSpeedSd": 0.22,
+   "framesMovedWithoutMove": 30,
+   "resChanges": 0,
+   "deltas": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.05,
+    0.08,
+    0.08,
+    0.18,
+    0.22,
+    0.33,
+    0.37,
+    0.49,
+    0.53,
+    0.66,
+    0.7,
+    0.72,
+    0.84,
+    0.89,
+    0.9,
+    1.03,
+    1.08,
+    1.09,
+    1.23,
+    1.27,
+    1.29,
+    1.43,
+    1.48,
+    1.65,
+    1.7,
+    1.71,
+    1.87,
+    2.08,
+    2.15,
+    2.17,
+    2.34,
+    2.4,
+    2.59,
+    2.65,
+    2.84,
+    2.91,
+    3.11,
+    3.36,
+    3.45,
+    3.47,
+    3.68,
+    3.74,
+    3.76,
+    3.77,
+    3.77,
+    3.77,
+    3.78,
+    3.77
+   ]
+  },
+  "weaponButton": {
+   "shots": 0,
+   "frames": 5,
+   "nonButton": 0,
+   "button": 0,
+   "stickNoButton": 0,
+   "abilities": 0,
+   "abilityFromLeft": 0,
+   "aimFrom": {
+    "x": -0.279,
+    "y": -0.05
+   },
+   "aimTo": {
+    "x": -0.279,
+    "y": -0.05
+   },
+   "aimMoved": false,
+   "size": [
+    64,
+    64
+   ],
+   "weaponBefore": "mg",
+   "weaponAfter": "shotgun"
   }
  },
  "final": {
-  "shots": 16,
+  "shots": 17,
+  "heat": 0,
+  "frames": 385,
+  "current": "shotgun",
+  "elapsed": 18.833,
+  "stickInfo": null,
+  "stickR": 80,
   "shotsBy": {
-   "button": 16,
+   "button": 17,
    "scene": 0,
    "keyboard": 0,
    "mouse": 0,
@@ -258,8 +427,8 @@
   },
   "abilityFromLeft": 0,
   "aim": {
-   "x": 0.95,
-   "y": 0.586
+   "x": -0.279,
+   "y": -0.05
   },
   "firing": false,
   "stick": false,
@@ -268,13 +437,16 @@
    "TOUCH": true,
    "AIMSTICK": true,
    "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
    "LEGACY": false
   },
   "mode": "battle",
-  "hp": 71.00000000000001,
-  "enemies": 5
+  "hp": 30.40000000000003,
+  "enemies": 9
  },
  "errors": [],
+ "frameLost": false,
  "checks": [
   {
    "name": "aimstick controls exist (fire button + stick zone) in the frame on a coarse-pointer phone",
@@ -295,6 +467,7 @@
    "pass": true,
    "detail": {
     "shots": 0,
+    "frames": 31,
     "nonButton": 0,
     "button": 0,
     "stickNoButton": 0,
@@ -305,8 +478,8 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.688
+     "x": 0.418,
+     "y": 0.704
     },
     "aimMoved": true
    }
@@ -316,6 +489,7 @@
    "pass": true,
    "detail": {
     "shots": 0,
+    "frames": 27,
     "nonButton": 0,
     "button": 0,
     "stickNoButton": 0,
@@ -327,7 +501,7 @@
     },
     "aimTo": {
      "x": 0.95,
-     "y": 0.343
+     "y": 0.85
     },
     "aimMoved": true
    }
@@ -337,6 +511,7 @@
    "pass": true,
    "detail": {
     "shots": 0,
+    "frames": 35,
     "nonButton": 0,
     "button": 0,
     "stickNoButton": 0,
@@ -347,8 +522,8 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.316,
-     "y": 0.4
+     "x": 0.119,
+     "y": 0.403
     },
     "aimMoved": true,
     "tapsAbilities": 0,
@@ -362,11 +537,12 @@
   },
   {
    "name": "two fingers: shots only from the button, stick active, firing stops when the button is released, aim kept",
-   "pass": false,
+   "pass": true,
    "detail": {
-    "shots": 10,
+    "shots": 9,
+    "frames": 35,
     "nonButton": 0,
-    "button": 10,
+    "button": 9,
     "stickNoButton": 0,
     "abilities": 0,
     "abilityFromLeft": 0,
@@ -375,71 +551,282 @@
      "y": -0.05
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.586
+     "x": 0.461,
+     "y": 0.748
     },
     "aimMoved": true,
     "heldFiring": true,
     "heldFireHeld": true,
     "stickActiveWhileHeld": true,
     "shotsAfterButtonRelease": 0,
-    "aimKeptAfterStickRelease": false
+    "aimKeptAfterStickRelease": true
    }
   },
   {
-   "name": "stray scene tap while the button is held: firing continues",
-   "pass": false,
+   "name": "stray scene tap while the button is held: the button stays held and firing continues",
+   "pass": true,
    "detail": {
-    "shots": 3,
+    "shots": 5,
+    "frames": 14,
     "nonButton": 0,
-    "button": 3,
+    "button": 5,
     "stickNoButton": 0,
     "abilities": 0,
     "abilityFromLeft": 0,
     "aimFrom": {
-     "x": 0.95,
-     "y": 0.586
+     "x": 0.461,
+     "y": 0.748
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.586
+     "x": 0.461,
+     "y": 0.748
     },
     "aimMoved": false,
-    "shotsBeforeTap": 11,
+    "shotsBeforeTap": 10,
+    "heatAtTap": 15.149070000000481,
     "firingAfterStrayTap": true,
-    "shotsAfterStrayTap": 0
+    "fireHeldAfterStrayTap": true,
+    "shotsAfterStrayTap": 2,
+    "framesAfterStrayTap": 6
    }
   },
   {
-   "name": "keyboard F: 0 shots",
+   "name": "keyboard F: 0 shots over at least 4 game frames",
    "pass": true,
-   "detail": 0
+   "detail": {
+    "shots": 0,
+    "frames": 4,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0.461,
+     "y": 0.748
+    },
+    "aimTo": {
+     "x": 0.461,
+     "y": 0.748
+    },
+    "aimMoved": false
+   }
   },
   {
-   "name": "mouse on the scene: 0 shots",
+   "name": "mouse on the scene: 0 shots over at least 4 game frames",
    "pass": true,
-   "detail": 0
+   "detail": {
+    "shots": 0,
+    "frames": 5,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0.461,
+     "y": 0.748
+    },
+    "aimTo": {
+     "x": 0.461,
+     "y": 0.748
+    },
+    "aimMoved": false
+   }
   },
   {
    "name": "fire button alone: shots, aim unchanged",
    "pass": true,
    "detail": {
     "shots": 3,
+    "frames": 10,
     "nonButton": 0,
     "button": 3,
     "stickNoButton": 0,
     "abilities": 0,
     "abilityFromLeft": 0,
     "aimFrom": {
-     "x": 0.95,
-     "y": 0.586
+     "x": 0.461,
+     "y": 0.748
     },
     "aimTo": {
-     "x": 0.95,
-     "y": 0.586
+     "x": 0.461,
+     "y": 0.748
     },
     "aimMoved": false,
     "heldFiring": true
+   }
+  },
+  {
+   "name": "weapon-switch button: at least 44 px, cycles the weapon, fires nothing",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "frames": 5,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": -0.279,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": -0.279,
+     "y": -0.05
+    },
+    "aimMoved": false,
+    "size": [
+     64,
+     64
+    ],
+    "weaponBefore": "mg",
+    "weaponAfter": "shotgun"
+   }
+  },
+  {
+   "name": "HUD coverage at most half of v20 (whole viewport and the middle band)",
+   "pass": true,
+   "detail": {
+    "after": {
+     "hud": 0.1036,
+     "withControls": 0.1781,
+     "band": 0.0523,
+     "nodes": 8
+    },
+    "v20": {
+     "hud": 0.2152,
+     "band": 0.4297,
+     "withControls": 0.2605
+    }
+   }
+  },
+  {
+   "name": "stick: a 20% tilt aims at most 60% of the v20 speed (fine aiming, linear start)",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "frames": 58,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": 0.85
+    },
+    "aimMoved": true,
+    "R": 80,
+    "fineSpeed": 0.085,
+    "timeToTarget": 0.5,
+    "overshoot": 0,
+    "stickAfterRelease": null,
+    "fullSpeed": 1.3,
+    "preciseSpeed": 0.455,
+    "preciseFlag": true
+   }
+  },
+  {
+   "name": "stick: a full tilt reaches x=0.6 within 1.2 s of game time and the crosshair stops at once on release (overshoot under 0.01)",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "frames": 58,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": 0.85
+    },
+    "aimMoved": true,
+    "R": 80,
+    "fineSpeed": 0.085,
+    "timeToTarget": 0.5,
+    "overshoot": 0,
+    "stickAfterRelease": null,
+    "fullSpeed": 1.3,
+    "preciseSpeed": 0.455,
+    "preciseFlag": true
+   }
+  },
+  {
+   "name": "stick: a second finger on the stick zone slows the crosshair to under half",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "frames": 58,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": 0,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": 0,
+     "y": 0.85
+    },
+    "aimMoved": true,
+    "R": 80,
+    "fineSpeed": 0.085,
+    "timeToTarget": 0.5,
+    "overshoot": 0,
+    "stickAfterRelease": null,
+    "fullSpeed": 1.3,
+    "preciseSpeed": 0.455,
+    "preciseFlag": true
+   }
+  },
+  {
+   "name": "stick: the fine/target/precision drags fired nothing",
+   "pass": true,
+   "detail": 0
+  },
+  {
+   "name": "smooth drag: no dead-zone jump (first step under 3 px), no stall, steady speed while held (scatter under 5%), the aim moves on frames without a pointermove, every pointermove reached the stick, no renderer re-size",
+   "pass": true,
+   "detail": {
+    "shots": 0,
+    "frames": 65,
+    "nonButton": 0,
+    "button": 0,
+    "stickNoButton": 0,
+    "abilities": 0,
+    "abilityFromLeft": 0,
+    "aimFrom": {
+     "x": -0.5,
+     "y": -0.05
+    },
+    "aimTo": {
+     "x": -0.279,
+     "y": -0.05
+    },
+    "aimMoved": true,
+    "holdFrames": 7,
+    "sentMoves": 24,
+    "receivedMoves": 24,
+    "firstStepPx": 0.05,
+    "maxStepPx": 3.78,
+    "stallFrames": 0,
+    "holdSpeedMean": 75.3,
+    "holdSpeedSd": 0.22,
+    "framesMovedWithoutMove": 30,
+    "resChanges": 0
    }
   },
   {
@@ -447,7 +834,7 @@
    "pass": true,
    "detail": {
     "shotsBy": {
-     "button": 16,
+     "button": 17,
      "scene": 0,
      "keyboard": 0,
      "mouse": 0,
@@ -459,9 +846,12 @@
    }
   },
   {
-   "name": "no page errors",
+   "name": "no page errors and the game frame stayed alive",
    "pass": true,
-   "detail": []
+   "detail": {
+    "errors": [],
+    "frameLost": false
+   }
   }
  ]
 }

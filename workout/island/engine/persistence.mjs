@@ -1,21 +1,21 @@
-import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-10';
-import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-10';
-import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-10';
-import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-10';
-import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-10';
-import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-10';
-import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-10';
-import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-10';
-import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-10';
-import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-10';
-import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-10';
-import { cellsFor } from './rules.mjs?v=island-v2-20261107-10';
-import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-10';
-import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-10';
-import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-10';
-import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-10';
-import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-10';
-import {createLeague,validLeague,mergeLeague} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-10';
+import {initialCity, validCity, productionTier} from './city-depth.mjs?v=island-v2-20261107-11';
+import {initialLearning,validLearning,mergeLearning} from '../learning/state.mjs?v=island-v2-20261107-11';
+import {initialCityManagement,validCityManagement} from './city-management.mjs?v=island-v2-20261107-11';
+import {initialFireCertificates,validFireCertificates,validCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-11';
+import {initialHangar,validHangar} from '../activity/hangar.mjs?v=island-v2-20261107-11';
+import {initialAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-11';
+import {withCityHall} from './city-hall.mjs?v=island-v2-20261107-11';
+import {validTeamProgress} from '../activity/soccer-team.mjs?v=island-v2-20261107-11';
+import {initialSoccerCard,validSoccerCard,mergeSoccerCard} from '../activity/soccer-card.mjs?v=island-v2-20261107-11';
+import {initialEquipment} from '../activity/equipment.mjs?v=island-v2-20261107-11';
+import {initialProgress,extendStageProgress} from '../activity/progress.mjs?v=island-v2-20261107-11';
+import { cellsFor } from './rules.mjs?v=island-v2-20261107-11';
+import {repairHarbors} from './placement-help.mjs?v=island-v2-20261107-11';
+import {initialSoccerRoster,validSoccerRoster,mergeSoccerRoster} from '../activity/soccer-roster.mjs?v=island-v2-20261107-11';
+import { initialActivity, validActivity, mergeActivity } from '../activity/state.mjs?v=island-v2-20261107-11';
+import {validReadyPlan,prepareReadyPlan} from './ready-plots.mjs?v=island-v2-20261107-11';
+import {initialHoops,validHoops,migrateHoops,mergeHoops} from '../minigames/hoops-franchise.mjs?v=island-v2-20261107-11';
+import {createLeague,validLeague,mergeLeague,normalizeLeague} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-11';
 
 export const CURRENT_VERSION = 19;
 export const STORAGE_KEY = 'island.v1';
@@ -58,7 +58,7 @@ function addNewGame(state,old,data,id){
 /** Each migration is explicit. Existing building positions, currencies, avatar and progress survive. */
 export const migrations = {
   // Racing league (07/11/2026): one additive field. Nothing else in a save from 18 changes.
-  18(old){return {...old,version:19,islandRacingLeague:validLeague(old.islandRacingLeague)?old.islandRacingLeague:createLeague()};},
+  18(old){const league=normalizeLeague(structuredClone(old.islandRacingLeague));return {...old,version:19,islandRacingLeague:validLeague(league)?league:createLeague()};},
   17(old,data) {return GAMES_AFTER_18.reduce((state,id)=>addNewGame(state,old,data,id),{...old,version:18,cityDepthVersion:1,city:initialCity(),cityManagement:initialCityManagement(),hoops:old.hoops??initialHoops(data.config.minigames.streetSlam)});},
   16(old,data){
     const state={...old,version:17};
@@ -145,6 +145,7 @@ export function migrateSave(value, data, registry) {
   else { const club=migrateHoops(state.hoops,data.config.minigames.streetSlam); if(!club) return { ok: false, reason: 'reason.invalid' }; state.hoops=club; }
   // The racing league is its own versioned object inside schema 19; a save without it starts a fresh league.
   if (!Object.hasOwn(state,'islandRacingLeague')) state.islandRacingLeague = createLeague();
+  else normalizeLeague(state.islandRacingLeague);   // racing-deep-m6: additive fill of a league saved by an older build (ers level, new table rows), version stays 19
   const validation = validateSave(state, data, registry);
   if(!validation.ok)return validation;
   const repairedHarbors=repairHarbors(state,registry,data.featureFlags);

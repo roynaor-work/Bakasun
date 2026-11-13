@@ -1,7 +1,7 @@
 import {wingVisible} from './alien-v10-draw.mjs';
 import {alienV13Enabled,V13_SHIP_URL,fitScale} from './alien-v13.mjs';
 import * as T from '../vendor/three.module.js';
-import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-10';
+import {LocalModels} from '../view/local-models.mjs?v=island-v2-20261107-11';
 import {alienModelSpecs,alienAppearance} from './alien-assets.mjs';
 import {alienEnvironment} from './ultra-alien-environment.mjs';
 import {modelTriangles,fleetModel,liveFleetIds,bakeFleet} from './ultra-alien-fleet.mjs';
@@ -91,7 +91,7 @@ export function createAlienView(ctx,model,adapters={}){
   draw(p){if(disposed||failed)return false;try{
    environment.update(model.time,currentWidth/currentHeight);
    const fit=(x,y,pixels)=>worldLength(x,y,pixels),playerPixels=Math.min(76,currentHeight*.18);
-   player.position.set(...world(model.player.x,model.player.y));player.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*(ship13?ctx.balance.v13?.shipScale||1:1)));
+   player.position.set(...world(model.player.x,model.player.y+(model.recoilOffset||0)));player.scale.setScalar(fit(model.player.x,model.player.y,playerPixels*(ship13?ctx.balance.v13?.shipScale||1:1)));
    player.rotation.z=-(model.player.bank||0)*.25;player.rotation.y=(model.player.bank||0)*.18;
    if(ship13)ship13.barrels.forEach((b,i)=>{b.rotation.z=ship13.base[i]+(i?-1:1)*model.spinAngle;});
    if(model.v12&&model.firing){const j=model.time*97;player.rotation.z+=Math.sin(j)*.018;player.position.x+=Math.sin(j*1.7)*fit(model.player.x,model.player.y,.9);}

@@ -1,5 +1,5 @@
 import * as THREE from '../vendor/three.module.js';
-import {Water} from './naval-water.mjs?v=island-v2-20261107-10';
+import {Water} from './naval-water.mjs?v=island-v2-20261107-11';
 import {NAVAL_SHORES} from './ultra-naval-environment-layout.mjs';
 
 const SUN=new THREE.Vector3(-.58,.52,-.64).normalize();
@@ -21,6 +21,11 @@ export function navalWaterNormals(size=128){
   texture.generateMipmaps=true;texture.needsUpdate=true;
   return texture;
 }
+
+/** Hides every visible object flagged `userData.noReflect` for the reflection pass and returns them (the caller shows them again).
+ * 12/11/2026: the flag is honoured at any depth: the Vulcan tracers, sparks and smoke and the supply buoys carry it inside their groups,
+ * and the old top-level-only check drew them in the reflection too. A flagged branch is hidden whole; hidden branches are not walked. */
+export function navalReflectionHide(root){const hidden=[],walk=node=>{for(const child of node?.children||[]){if(!child.visible)continue;if(child.userData?.noReflect){child.visible=false;hidden.push(child);}else if(child.children?.length)walk(child);}};walk(root);return hidden;}
 
 /** Presentation only. Simulation time/camera remain owned by the existing model. */
 export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapters={}){
@@ -92,7 +97,7 @@ export function createNavalEnvironment(scene,renderer,fallbackSea,sunDisk,adapte
   const capture=water.onBeforeRender;
   water.onBeforeRender=function(...args){if(clock-lastCapture<1/12&&clock>=lastCapture)return;lastCapture=clock;const info=args[0]?.info?.render,c0=info?.calls??0,t0=info?.triangles??0;
     // Aim marks, shells, hit effects, smoke and foam are left out of the 12 Hz reflection pass: they read in the main view, and drawing them twice broke the stage-10 budget when aiming over a live hit (28/10).
-    const hidden=[];for(const child of args[1]?.children||[])if(child.userData?.noReflect&&child.visible){child.visible=false;hidden.push(child);}
+    const hidden=navalReflectionHide(args[1]);
     try{capture.apply(this,args);}finally{for(const child of hidden)child.visible=true;}captures++;if(info){mirror.calls=info.calls-c0;mirror.triangles=info.triangles-t0;mirror.peakCalls=Math.max(mirror.peakCalls,mirror.calls);mirror.peakTriangles=Math.max(mirror.peakTriangles,mirror.triangles);}};
   scene.add(water);fallbackSea.visible=false;sunDisk.visible=false;
   normalLoader?.load(new URL('../assets/textures/naval-waternormals.jpg',import.meta.url).href,texture=>{

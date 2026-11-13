@@ -1,6 +1,7 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-10';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-10';
+import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-11';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-11';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-11';
+import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-11';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -72,18 +73,22 @@ export function createNavalInput(ctx,getModel,getView){
  const abort=new AbortController(),options={signal:abort.signal},controls=ctx.controls,fire=controls.querySelector('#shoot'),canvas=ctx.canvas,balance=ctx.balance,c=balance.aimControls||{};
  // Headless harnesses provide no DOM factory; the input logic itself still runs.
  const element=tag=>typeof document.createElement==='function'?document.createElement(tag):{tag,hidden:false,dataset:{},style:{setProperty(){},removeProperty(){}},className:'',innerHTML:'',type:'',setAttribute(){},addEventListener(){},setPointerCapture(){},getBoundingClientRect:()=>({left:-1e4,right:-1e4,top:-1e4,bottom:-1e4}),remove(){}};
- const pad=element('div'),cancel=element('button'),gauge=element('div');
+ const pad=element('div'),cancel=element('button'),gauge=element('div'),vulcan=element('button');
+ // 11/11/2026 (Roy): the Vulcan is aimed by hand. A second large button above Fire appears only while an aircraft is in the air; holding it opens a sky crosshair
+ // (same thumb drag as the cannon: sideways turns, up and down raise and lower), and the gun fires only while it is held. `?navalAirAim=auto` keeps the v20 automatic gun.
+ const manualAir=navalAirManual(),vc=NAVAL_AIR_DEFAULTS.vulcan;
+ vulcan.type='button';vulcan.className='naval-vulcan';vulcan.hidden=true;vulcan.setAttribute('aria-label','וולקן נגד מטוסים');vulcan.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M24 4v9M24 35v9M4 24h9M35 24h9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M24 16l2 6 8 2-8 2-2 6-2-6-8-2 8-2z" fill="currentColor"/></svg><span class="naval-vulcan-label">וולקן</span>';
  pad.className='naval-aim-zone';pad.setAttribute('aria-hidden','true');
  cancel.type='button';cancel.className='naval-aim-cancel';cancel.hidden=true;cancel.setAttribute('aria-label',ctx.t?.('naval.aim.cancel')||'ביטול כיוון');cancel.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
  gauge.className='naval-aim-gauge';gauge.setAttribute('aria-hidden','true');gauge.innerHTML='<span class="naval-aim-arc"></span><span class="naval-aim-needle"></span>';
- controls.prepend?.(pad);controls.append?.(cancel,gauge);
+ controls.prepend?.(pad);controls.append?.(cancel,gauge,vulcan);
  let side=1;const applyHand=()=>{const right=navalHanded(balance);side=right?1:-1;controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
  fire?.setAttribute?.('aria-describedby','naval-weapon-hint');
- let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false;
+ let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false,sky=null;
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
  const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
- const reset=()=>{gesture=keyboard=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.style?.removeProperty?.('--naval-power');};
+ const reset=()=>{gesture=keyboard=sky=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.dataset.sky='false';controls.style?.removeProperty?.('--naval-power');};
  const reachConfig={...balance,ballistics:{...(balance.ballistics||{}),minElevation:navalReachRange(balance).min}};
  const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance,m?.ammoIndex),time:m?.time??0};};
  const startPixels=c.gain?.startPixels??2;
@@ -101,6 +106,13 @@ export function createNavalInput(ctx,getModel,getView){
  const finish=(g,x,y,t)=>{settle(g,x,y,t);if(!navalAimLegacy())navalReleaseSample(g,c.assist?.releaseLagMs??0);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(!g.engaged&&s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
  const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
  fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
+ // Sky crosshair: starts where the cannon points, at the default pitch; sideways = the same fine/spin turn as the cannon, up/down = pitch.
+ const DEG=Math.PI/180,settleSky=(g,x,y,t)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));g.lastX=x;g.lastY=y;g.lastT=t??performance.now();g.aim={yaw:g.start.yaw+navalSpinFine(g.dx,balance)+(g.spin||0),pitch:Math.max(vc.pitchMin*DEG,Math.min(vc.pitchMax*DEG,g.start.pitch-g.dy*vc.pitchPerPx*DEG))};};
+ const beginSky=e=>{if(gesture||sky||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();try{vulcan.setPointerCapture?.(e.pointerId);}catch{}const start={yaw:m.turret?.yaw||0,pitch:vc.defaultPitch*DEG};sky={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{...start},spin:0,lastT:e.timeStamp};controls.dataset.sky='true';};
+ vulcan.addEventListener('pointerdown',beginSky,options);
+ window.addEventListener('pointermove',e=>{if(sky?.id===e.pointerId)settleSky(sky,e.clientX,e.clientY,e.timeStamp);},options);
+ // Capture phase: the pointer ends on the captured Vulcan button, and a button-level handler in the shell stops the bubble (the fire gesture ends over the pad, so it never met this).
+ for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(sky?.id===e.pointerId){sky=null;controls.dataset.sky='false';}},{signal:abort.signal,capture:true});
  canvas.addEventListener('pointerdown',e=>{const r=canvas.getBoundingClientRect(),index=choose({x:e.clientX-r.left,y:e.clientY-r.top});if(index!==null)pendingSelection=index;},options);
  window.addEventListener('pointermove',e=>{if(gesture?.id===e.pointerId){moveTo(gesture,e);cancel.dataset.hot=String(overCancel(e.clientX,e.clientY));}},options);
  window.addEventListener('pointerup',e=>{if(gesture?.id!==e.pointerId)return;finish(gesture,e.clientX,e.clientY,e.timeStamp);gesture=null;show(false);cancel.dataset.hot='false';},options);
@@ -118,13 +130,17 @@ export function createNavalInput(ctx,getModel,getView){
  fire.addEventListener('click',e=>{const valid=keyboardClick&&e.detail===0&&!['touch','mouse','pen'].includes(e.pointerType);keyboardClick=false;if(valid)queue.push({type:'quick'});},options);
  window.addEventListener('pointerdown',()=>{keyboardClick=false;},options);
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
- return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();controls.classList?.remove('left-handed');},sample(input){
+ return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();vulcan.remove();controls.classList?.remove('left-handed');delete controls.dataset.sky;delete controls.dataset.air;delete controls.dataset.ammoLevel;},sample(input){
    const m=getModel(),g=gesture||keyboard,event=queue.shift();
    // Spin mode: while the thumb is held out past the dead band the turret keeps turning, one step per model frame (model time, so pauses add nothing).
    if(gesture&&gesture.engaged&&navalAimSpin()&&m){const now=m.time??0;if(Number.isFinite(gesture.spinT))gesture.spin=navalSpinStep(gesture.spin,gesture.dx,now-gesture.spinT,balance);gesture.spinT=now;gesture.aim={...gesture.aim,yaw:gesture.start.yaw+navalSpinFine(gesture.dx,balance)+(gesture.spin||0)};(gesture.hist||(gesture.hist=[])).push({t:performance.now(),yaw:gesture.aim.yaw,elevation:gesture.aim.elevation});if(gesture.hist.length>40)gesture.hist.shift();}
+   if(sky&&m){const now=m.time??0;if(Number.isFinite(sky.spinT))sky.spin=navalSpinStep(sky.spin,sky.dx,now-sky.spinT,balance);sky.spinT=now;settleSky(sky,sky.lastX??sky.x,sky.lastY??sky.y,sky.lastT);}
+   const airborne=Boolean(m?.air?.some?.(a=>a.state!=='down'));if(manualAir){vulcan.hidden=!airborne&&!sky;controls.dataset.air=String(airborne);}
    const live=g?state(g):null;
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
+   if(manualAir){out.skyMode='manual';out.skyHeld=Boolean(sky);if(sky){out.skyYaw=sky.aim.yaw;out.skyPitch=sky.aim.pitch;}}
+   if(m?.ammoState)controls.dataset.ammoLevel=m.ammoState.level;
    out.aimSide=side;pendingSelection=null;
    const b=balance.ballistics||{},power=s?.power??m?.power??1,elev=m?((s?.elevation??m.elevation)-(b.minElevation??3))/((b.maxElevation??42)-(b.minElevation??3)):0;
    controls.style?.setProperty?.('--naval-power',String(g?(s?.reach??power):0));gauge.style.setProperty('--naval-elev',String(Math.max(0,Math.min(1,elev))));gauge.dataset.visible=String(Boolean(g));

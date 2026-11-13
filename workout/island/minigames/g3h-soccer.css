@@ -1,4 +1,4 @@
-@import url('./soccer-controls.css?v=island-v2-20261107-10');
+@import url('./soccer-controls.css?v=island-v2-20261107-11');
 /* Soccer broadcast layer; the shell continues to own pause and navigation. */
 .game-screen[data-game=soccer]{--soccer-navy:#101f2d;--soccer-ivory:#f3f2df;--soccer-teal:#78cfbd;--soccer-line:#cde2dc42;color:var(--soccer-ivory)}
 .game-screen[data-game=soccer] .game-header .game-pause{flex-direction:row;width:56px;height:56px;padding:0;gap:0;border:1px solid #d2e7df5c;border-radius:16px;background:#102331e8;color:var(--soccer-ivory);box-shadow:0 4px 18px #03111740,inset 0 1px 0 #ffffff14;backdrop-filter:none}
@@ -11,6 +11,13 @@
 .game-screen[data-game=soccer] .soccer-score bdi{display:block;min-width:33px;padding:4px 5px;text-align:center;background:var(--soccer-ivory);color:#132733;line-height:1}
 .game-screen[data-game=soccer] .soccer-score bdi:first-child{border-radius:2px 0 0 2px}
 .game-screen[data-game=soccer] .soccer-score bdi:last-child{border-radius:0 2px 2px 0}
+/* soccerShow v1: half indicator beside the clock, and the broadcast dot on the replay tag. */
+.game-screen[data-game=soccer] .soccer-half{font-size:12px;font-weight:600;color:#b9d1ca;padding-left:8px;border-left:1px solid #b9d1ca38;white-space:nowrap}
+.game-screen[data-game=soccer] .soccer-half:empty{display:none}
+.game-screen[data-game=soccer] .soccer-phase-banner[data-show=replay]{font-size:19px;padding-right:14px}
+.game-screen[data-game=soccer] .soccer-phase-banner[data-show=replay]::before{content:'';display:inline-block;width:10px;height:10px;margin-left:8px;border-radius:50%;background:#e9524a;box-shadow:0 0 6px #e9524a99;vertical-align:middle;animation:soccer-show-blink 1.1s steps(2,start) infinite}
+@keyframes soccer-show-blink{to{visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-phase-banner[data-show=replay]::before{animation:none}}
 .game-screen[data-game=soccer] .soccer-clock{font-size:16px;font-weight:700;padding-left:11px;min-width:60px;color:#e3e8de;border-color:#b9d1ca38;letter-spacing:.4px}
 .game-screen[data-game=soccer] .soccer-phase-banner{top:max(66px,calc(env(safe-area-inset-top) + 58px));left:max(14px,env(safe-area-inset-left));transform:none;width:auto;min-width:48px;min-height:40px;max-width:calc(100% - 100px);padding:5px 12px;border:1px solid var(--soccer-line);border-radius:5px;background:#132733ef;color:var(--soccer-ivory);box-shadow:0 3px 12px #03111733;font-size:23px;font-variant-numeric:tabular-nums}
 .game-screen[data-game=soccer] .soccer-edge-arrow{color:#f1edc8;text-shadow:0 2px 5px #08151d;font-size:28px}

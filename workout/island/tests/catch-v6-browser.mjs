@@ -69,7 +69,8 @@ try{
   await page.mouse.up();
   assert.ok(steer>.5,'dragging right on the left half steers right: '+steer);
   // the tyre gun: lock the reticle by putting the thief close and in line, then the fire button shoots
-  await page.evaluate(()=>{const c=window.__island.ui.activityInterface.current.session.chase;c.state.crim.s=c.state.s+12;c.state.crim.d=c.state.d;c.state.stun=0;c.debug;for(let i=0;i<6;i++)c.step(1/60);c.drainEvents();});
+  // the gun arms after the opening stretch (14 s + 0.6 per stage): jump the chase clock past it, then put the thief close and in line
+  await page.evaluate(()=>{const c=window.__island.ui.activityInterface.current.session.chase;c.state.t=Math.max(c.state.t,20);c.state.crim.s=c.state.s+12;c.state.crim.d=c.state.d;c.state.stun=0;for(let i=0;i<6;i++)c.step(1/60);c.drainEvents();});
   assert.equal(await page.evaluate(()=>window.__island.ui.activityInterface.current.session.chase.gun.state.locked),true,'the reticle locks when the thief is close and in line');
   assert.equal(await page.locator('.catch-fire').isVisible(),true,'fire button');
   const ammo0=await page.evaluate(()=>window.__island.ui.activityInterface.current.session.chase.gun.state.ammo);

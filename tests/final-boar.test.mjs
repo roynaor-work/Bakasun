@@ -46,3 +46,72 @@ test('final-boar: the shell forwards the kill switch and the layout keeps the ab
   // v20 layout for the record: abilities at left:28px bottom:140px, 312x82, inside the 48% zone
   assert.equal(overlaps({x:0,y:390*.22,w:844*.48,h:390*.78},{x:28,y:390-140-82,w:312,h:82}),true,'v20 abilities sat inside the stick zone');
 });
+
+test('final-boar: compact HUD behind ?boarHud=v20, the shell forwards it, keyboard 1-4/E/Q untouched', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
+  assert.match(src,/const HUD_V21=!LEGACY&&new URLSearchParams\(location\.search\)\.get\('boarHud'\)!=='v20'/);
+  assert.match(src,/if\(HUD_V21\)buildCompactHud\(\);/);
+  assert.match(src,/weaponBtn\.onclick=nextWeapon;/);
+  assert.match(src,/function nextWeapon\(\)\{const owned=WEAPON_ORDER\.filter\(k=>save\.weapons\[k\]\);/);
+  assert.match(src,/if\(e\.code==='KeyQ'\)rocket\(\);if\(e\.code==='KeyE'\)frost\(\);/,'desktop shortcuts stay');
+  assert.match(src,/const n=\['Digit1','Digit2','Digit3','Digit4'/,'digit shortcuts stay');
+  assert.match(session,/get\('boarHud'\)==='v20'\)url\.searchParams\.set\('boarHud','v20'\)/);
+  assert.match(css,/#game\.hudv21 #weapons,#game\.hudv21 \.ammo-panel\{display:none\}/);
+  assert.match(css,/#weapon-btn\{position:absolute;z-index:5;right:18px;bottom:18px;width:64px;height:64px/,'weapon button at least 44 px');
+  assert.match(css,/#game\.hudv21 \.ability\{width:52px;height:52px;border-radius:50%/,'round ability buttons at least 44 px');
+  assert.match(css,/#game\.hudv21 \.abilities\{left:auto;right:46px;bottom:28px;transform:none;flex-direction:column/,'abilities in a right column, not a mid-screen row');
+  assert.match(css,/#game\.hudv21:not\(\.aimstick\) \.abilities\{bottom:96px\}/,'desktop: the ability column clears the weapon button');
+  assert.match(css,/#game\.hudv21 \.wave-block\{top:44px\}/,'portrait: the wave counter drops below the strips');
+  assert.match(css,/#game\.hudv21 \.ability small\{font-size:10px/);
+  assert.match(css,/#weapon-btn \.wammo\{font-size:10px/,'weapon heat/ammo label as readable as the other labels');
+});
+
+test('final-boar: precise stick behind ?boarStick=v20 (dead zone, power curve, smoothing, immediate stop, precision finger, sensitivity setting)', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),session=await read('minigames/boar-session.mjs');
+  assert.match(src,/const STICK_V21=AIMSTICK&&new URLSearchParams\(location\.search\)\.get\('boarStick'\)!=='v20'/);
+  assert.match(src,/const STICK_R=STICK_V21\?80:62,STICK_DZ=STICK_V21\?\.08:\.12,STICK_LIN=\.3,STICK_TAU=\.045,STICK_PRECISE=\.35/);
+  assert.match(session,/get\('boarStick'\)==='v20'\)url\.searchParams\.set\('boarStick','v20'\)/);
+  assert.match(css,/#aim-ring\.v21\{width:168px;height:168px/);
+  assert.match(css,/#crosshair\.moving u\{opacity:1\}/);
+  // the curve as written in game.js
+  const stickMag=(m,v21)=>{const mag=Math.max(0,Math.min(1,(m-(v21?.08:.12))/(1-(v21?.08:.12))));return v21?mag*(.3+.7*mag):mag;};
+  assert.equal(stickMag(.05,true),0,'inside the dead zone');
+  assert.ok(stickMag(.2,true)<stickMag(.2,false)*.6,'a small tilt aims much finer than v20: '+stickMag(.2,true)+' vs '+stickMag(.2,false));
+  // linear start: just past the dead zone the response is proportional (slope 0.2), no jump and no flat spot
+  assert.ok(stickMag(.081,true)>0&&stickMag(.081,true)<.001);const ratio=stickMag(.18,true)/stickMag(.13,true);assert.ok(ratio>1.9&&ratio<2.6,'response about doubles when the tilt past the dead zone doubles (linear start, gentle growth): '+ratio);
+  assert.equal(stickMag(1,true),1,'full tilt keeps the full speed');
+  assert.ok(stickMag(.6,true)>stickMag(.3,true)*2,'speed grows with the tilt');
+  // smoothing: after one 16 ms frame the smoothed value is a third of the way; after 150 ms it is at 96%
+  const k=dt=>1-Math.exp(-dt/.045);assert.ok(k(.016)>.28&&k(.016)<.36);assert.ok(1-Math.exp(-.15/.045)>.95);
+  assert.match(src,/aimStick=null;ring\.classList\.remove\('on','precise'\)/,'release drops the stick object: the aim stops at once');
+  assert.match(src,/if\(STICK_V21&&aimStick\)\{adaptMs=0;adaptN=0;return;\}/,'no renderer re-size while the stick is held');
+  assert.match(src,/if\(STICK_V21\)\$\(id\)\.style\.transform=`translate3d/,'crosshair moves with a compositor transform');
+  assert.match(css,/#game\.stickv21 #crosshair,#game\.stickv21 #hit-marker\{left:0;top:0;will-change:transform\}/);
+  assert.match(src,/const g=AIM_SENS\[aimSens\]\*\(aimStick\.precise!==null\?STICK_PRECISE:1\)/);
+  assert.match(src,/localStorage\.setItem\('boar-island-aim',aimSens\)/,'the sensitivity setting is not part of the save');
+});
+
+// 12/11/2026, independent QA round 3: second-finger taps, the stick's direction, two layout overlaps and the help texts.
+// The stick step as written in game.js (AIM_TRUE): the thumb's direction is kept in screen pixels; pure axes keep their old speeds.
+const trueStep=(sx,sy,W,H,X=1.6,Y=1.3)=>{const m=Math.hypot(sx,sy);if(!m)return {dx:0,dy:0};const ux=sx/m,uy=sy/m,px=Math.hypot(X*W*ux,Y*H*uy)*m;return {dx:ux*px,dy:uy*px};};
+test('final-boar QA3: buttons work with the thumb on the stick, the crosshair goes where the thumb points, layout and help texts', async()=>{
+  const src=await read('minigames/boar-island/game.js'),css=await read('minigames/boar-island/style.css'),html=await read('minigames/boar-island/index.html'),strings=JSON.parse(await read('data/strings.he.json'));
+  // A second finger gets pointer events but no click: the weapon and ability buttons act on a touch's pointerup and swallow the following click.
+  assert.match(src,/function touchTap\(el,act\)\{/);assert.match(src,/el\.addEventListener\('click',e=>\{if\(performance\.now\(\)<until\)\{until=0;e\.preventDefault\(\);e\.stopImmediatePropagation\(\);\}\},true\);/);
+  assert.match(src,/weaponBtn\.onclick=nextWeapon;touchTap\(weaponBtn,/,'the weapon button is hooked where it is made');
+  assert.match(src,/if\(HUD_V21\)for\(const id of \['rocket','frost','fury'\]\)touchTap\(\$\(id\),/);
+  // Direction: a 45-degree push moves at 45 degrees on screen (it went at about 20); sideways and up keep their v21 speeds.
+  assert.match(src,/const AIM_TRUE=new URLSearchParams\(location\.search\)\.get\('boarAim'\)!=='axes';/);
+  assert.match(src,/if\(AIM_TRUE\)\{const W=Math\.max\(1,innerWidth\/2\),H=Math\.max\(1,innerHeight\/2\),m=Math\.hypot\(aimStick\.sx,aimStick\.sy\);/);
+  const W=422,H=195,d=trueStep(.5,-.5,W,H);assert.ok(Math.abs(Math.atan2(-d.dy,d.dx)*180/Math.PI-45)<1e-9,'45 degrees in, 45 degrees out');
+  const old={dx:.5*1.6*W,dy:.5*1.3*H};assert.ok(Math.atan2(old.dy,old.dx)*180/Math.PI<21,'the per-axis scaling bent it to about 20 degrees');
+  assert.ok(Math.abs(trueStep(1,0,W,H).dx-1.6*W)<1e-9&&Math.abs(trueStep(0,1,W,H).dy-1.3*H)<1e-9,'pure sideways and pure up/down keep their speeds');
+  // Layout: the compact battle HUD is hidden in the game menu; in portrait the boss bar sits under the wave counter.
+  assert.match(css,/#game\.hudv21\[data-mode=menu\] \.combat-hud\{display:none\}/);
+  const portrait=css.slice(css.indexOf('@media(max-width:700px){'));assert.match(portrait,/#game\.hudv21 \.wave-block\{top:44px\}/);assert.match(portrait,/#game\.hudv21 #boss-hud\{top:72px\}/);
+  // Help texts describe the stick and the fire button, not "drag to aim and fire".
+  const intro=strings['minigame.boarDefense.help.1'];assert.match(intro,/ג׳ויסטיק/);assert.match(intro,/רק בכפתור הירי/);assert.doesNotMatch(intro,/גוררים אצבע כדי לכוון ולירות/);
+  // index.html keeps the shipped bytes (island-boar-integration); with the v21 fire its first help paragraph (the controls one) is rewritten in game.js
+  assert.match(html,/class="panel small-panel help-panel"><div class="eyebrow">[^<]*<\/div><h2>[^<]*<\/h2><p>כוונו בעכבר/);
+  assert.match(src,/helpAim=\$\('help-screen'\)\?\.querySelector\('\.help-panel p'\);if\(FIRE_V21&&helpAim\)helpAim\.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה/);
+});

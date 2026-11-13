@@ -241,7 +241,7 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
           s.phase = 'caught'; s.phaseAt = s.clock; s.won = true; finish();
         } else if (s.throwsLeft > 0) {
           const c = criminalAt(s.clock);
-          s.phase = 'flee'; s.phaseAt = s.clock; s.fromX = c.x; s.fromZ = c.z; s.baseX = c.x; s.toX = c.x + level.flee;
+          s.phase = 'flee'; s.phaseAt = s.clock; s.fromX = c.x; s.fromZ = c.z; s.baseX = c.x; s.toX = Math.min(c.x + level.flee, Math.max(c.x, level.dist + (level.fleeMax ?? Infinity))); // v6: the thief never gets more than fleeMax beyond his start
           events.push({type: 'flee', from: s.fromX, to: s.toX});
         } else {
           const c = criminalAt(s.clock);

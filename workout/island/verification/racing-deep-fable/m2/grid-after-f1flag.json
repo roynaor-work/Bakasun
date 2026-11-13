@@ -1,0 +1,527 @@
+{
+ "ai": "deep-m2",
+ "tracks": "f1",
+ "5 cars": {
+  "avgMsPerStep": 0.117,
+  "playerCrashesPerRace": 0,
+  "rivalCrashesPerRace": 0,
+  "overtakesPerRace": 127,
+  "runs": [
+   {
+    "msPerStep": 0.18,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 62,
+    "shiftsPerLap": 3,
+    "time": 84,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.166,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 139,
+    "shiftsPerLap": 3,
+    "time": 124,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.065,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 124,
+    "shiftsPerLap": 3,
+    "time": 123,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.057,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 183,
+    "shiftsPerLap": 2,
+    "time": 179,
+    "rank": 1
+   }
+  ]
+ },
+ "10 cars": {
+  "avgMsPerStep": 0.115,
+  "playerCrashesPerRace": 0,
+  "rivalCrashesPerRace": 0,
+  "overtakesPerRace": 337,
+  "runs": [
+   {
+    "msPerStep": 0.123,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 183,
+    "shiftsPerLap": 3,
+    "time": 84,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.116,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 334,
+    "shiftsPerLap": 3,
+    "time": 124,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.122,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 344,
+    "shiftsPerLap": 3,
+    "time": 123,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.101,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 486,
+    "shiftsPerLap": 2,
+    "time": 178,
+    "rank": 1
+   }
+  ]
+ },
+ "12 cars": {
+  "avgMsPerStep": 0.145,
+  "playerCrashesPerRace": 0,
+  "rivalCrashesPerRace": 0,
+  "overtakesPerRace": 409,
+  "runs": [
+   {
+    "msPerStep": 0.129,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 223,
+    "shiftsPerLap": 3,
+    "time": 84,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.145,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 420,
+    "shiftsPerLap": 3,
+    "time": 124,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.175,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 397,
+    "shiftsPerLap": 3,
+    "time": 123,
+    "rank": 1
+   },
+   {
+    "msPerStep": 0.13,
+    "playerCrashes": {
+     "wall": 0,
+     "stuck": 0,
+     "grind": 0
+    },
+    "rivalCrashes": 0,
+    "overtakes": 594,
+    "shiftsPerLap": 2,
+    "time": 179,
+    "rank": 1
+   }
+  ]
+ },
+ "shiftMap on": {
+  "shiftsPerLap": 3,
+  "runs": [
+   3,
+   3,
+   3,
+   3
+  ]
+ },
+ "shiftMap off": {
+  "shiftsPerLap": 9.5,
+  "runs": [
+   12,
+   9,
+   14,
+   3
+  ]
+ },
+ "behaviour": {
+  "races": 24,
+  "passesPerRace": 28.79,
+  "rivalCrashesPerRace": 0,
+  "slowSecondsPerCar": 0,
+  "worstSlowCar": 0,
+  "spread60m": 143.83,
+  "minSpread60m": 73,
+  "longestLockS": 0,
+  "bumpsPerRace": 12.08,
+  "races_detail": [
+   {
+    "stage": 1,
+    "seed": 31,
+    "passes": 34,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 119,
+    "longestLock": 0,
+    "bumps": 15,
+    "playerRank": 1,
+    "time": 135
+   },
+   {
+    "stage": 1,
+    "seed": 32,
+    "passes": 44,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 88,
+    "longestLock": 0,
+    "bumps": 16,
+    "playerRank": 1,
+    "time": 124
+   },
+   {
+    "stage": 1,
+    "seed": 33,
+    "passes": 78,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 73,
+    "longestLock": 0,
+    "bumps": 27,
+    "playerRank": 1,
+    "time": 135
+   },
+   {
+    "stage": 1,
+    "seed": 34,
+    "passes": 44,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 96,
+    "longestLock": 0,
+    "bumps": 13,
+    "playerRank": 1,
+    "time": 124
+   },
+   {
+    "stage": 2,
+    "seed": 31,
+    "passes": 9,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 241,
+    "longestLock": 0,
+    "bumps": 9,
+    "playerRank": 1,
+    "time": 93
+   },
+   {
+    "stage": 2,
+    "seed": 32,
+    "passes": 12,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 188,
+    "longestLock": 0,
+    "bumps": 11,
+    "playerRank": 1,
+    "time": 85
+   },
+   {
+    "stage": 2,
+    "seed": 33,
+    "passes": 28,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 151,
+    "longestLock": 0,
+    "bumps": 14,
+    "playerRank": 1,
+    "time": 93
+   },
+   {
+    "stage": 2,
+    "seed": 34,
+    "passes": 36,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 115,
+    "longestLock": 0,
+    "bumps": 22,
+    "playerRank": 1,
+    "time": 86
+   },
+   {
+    "stage": 3,
+    "seed": 31,
+    "passes": 8,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 210,
+    "longestLock": 0,
+    "bumps": 3,
+    "playerRank": 1,
+    "time": 73
+   },
+   {
+    "stage": 3,
+    "seed": 32,
+    "passes": 6,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 178,
+    "longestLock": 0,
+    "bumps": 5,
+    "playerRank": 1,
+    "time": 72
+   },
+   {
+    "stage": 3,
+    "seed": 33,
+    "passes": 11,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 126,
+    "longestLock": 0,
+    "bumps": 9,
+    "playerRank": 1,
+    "time": 73
+   },
+   {
+    "stage": 3,
+    "seed": 34,
+    "passes": 25,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 191,
+    "longestLock": 0,
+    "bumps": 10,
+    "playerRank": 1,
+    "time": 72
+   },
+   {
+    "stage": 4,
+    "seed": 31,
+    "passes": 30,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 104,
+    "longestLock": 0,
+    "bumps": 23,
+    "playerRank": 1,
+    "time": 134
+   },
+   {
+    "stage": 4,
+    "seed": 32,
+    "passes": 37,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 101,
+    "longestLock": 0,
+    "bumps": 9,
+    "playerRank": 1,
+    "time": 124
+   },
+   {
+    "stage": 4,
+    "seed": 33,
+    "passes": 30,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 104,
+    "longestLock": 0,
+    "bumps": 17,
+    "playerRank": 1,
+    "time": 133
+   },
+   {
+    "stage": 4,
+    "seed": 34,
+    "passes": 53,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 86,
+    "longestLock": 0,
+    "bumps": 15,
+    "playerRank": 1,
+    "time": 124
+   },
+   {
+    "stage": 5,
+    "seed": 31,
+    "passes": 10,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 244,
+    "longestLock": 0,
+    "bumps": 4,
+    "playerRank": 1,
+    "time": 83
+   },
+   {
+    "stage": 5,
+    "seed": 32,
+    "passes": 15,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 188,
+    "longestLock": 0,
+    "bumps": 6,
+    "playerRank": 1,
+    "time": 80
+   },
+   {
+    "stage": 5,
+    "seed": 33,
+    "passes": 17,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 184,
+    "longestLock": 0,
+    "bumps": 7,
+    "playerRank": 1,
+    "time": 84
+   },
+   {
+    "stage": 5,
+    "seed": 34,
+    "passes": 11,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 215,
+    "longestLock": 0,
+    "bumps": 14,
+    "playerRank": 1,
+    "time": 80
+   },
+   {
+    "stage": 6,
+    "seed": 31,
+    "passes": 38,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 133,
+    "longestLock": 0,
+    "bumps": 8,
+    "playerRank": 1,
+    "time": 134
+   },
+   {
+    "stage": 6,
+    "seed": 32,
+    "passes": 28,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 114,
+    "longestLock": 0,
+    "bumps": 12,
+    "playerRank": 1,
+    "time": 123
+   },
+   {
+    "stage": 6,
+    "seed": 33,
+    "passes": 51,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 88,
+    "longestLock": 0,
+    "bumps": 15,
+    "playerRank": 1,
+    "time": 134
+   },
+   {
+    "stage": 6,
+    "seed": 34,
+    "passes": 36,
+    "rivalCrashes": 0,
+    "slowPerCar": 0,
+    "maxSlow": 0,
+    "spread60": 115,
+    "longestLock": 0,
+    "bumps": 6,
+    "playerRank": 1,
+    "time": 123
+   }
+  ]
+ }
+}

@@ -1253,7 +1253,8 @@
    }
   },
   "alienDefense": {
-   "v15": {"normalInterval": 0.25, "minInterval": 0.2, "rapidMinInterval": 0.15, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "warmHeat": 0.35, "normalDamage": 0.9, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15},
+   "v15": {"normalInterval": 0.18, "minInterval": 0.167, "rapidMinInterval": 0.13, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "restSeconds": 1, "pressShots": 1, "warmHeat": 0.35, "normalDamage": 0.8, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
+   "move": {"maxSpeed": 265, "accelSeconds": 0.11, "reverseSeconds": 0.05, "driftSeconds": 0.08, "dragSpring": 24, "bankSeconds": 0.08, "bankMax": 1, "recoilSeconds": 0.14, "recoilPixels": 3},
    "v14": {"rateMult": 0.28, "damageTrim": 1.45, "minInterval": 0.055, "heatSeconds": 3.5, "coolSeconds": 1.6, "resumeHeat": 0.25, "shieldGap": 0.26, "gearExp": 1.0},
    "v13": {"shipScale": 1.3, "cannonOffset": 11.3, "muzzleForward": 28, "loopGain": 1.5, "spinGain": 1.2, "flashGain": 0.6, "spinUpOverlap": 0.15},
    "v12": {"rateMult": 0.15, "damageTrim": 0.9, "cannonOffset": 11, "sparkCool": 0.1, "hitSoundGap": 0.12, "pulseHz": 66, "maxShotsMult": 3, "spinRate": 70, "flashSeconds": 0.045},
@@ -5435,6 +5436,7 @@
     },
     {
      "difficulty": 5,
+     "base": {"variant": "coast", "guns": 2, "towers": 1, "gate": false, "depot": true, "armor": 1, "reload": 9},
      "lives": 8,
      "enemyLives": 3,
      "enemyAimError": 0.14,
@@ -5957,6 +5959,7 @@
     },
     {
      "difficulty": 15,
+     "base": {"variant": "palace", "guns": 3, "towers": 2, "gate": true, "depot": true, "armor": 1.15, "reload": 8},
      "lives": 11,
      "enemyLives": 4.8,
      "enemyAimError": 0.114,
@@ -6560,6 +6563,7 @@
     },
     {
      "difficulty": 25,
+     "base": {"variant": "subpen", "guns": 4, "towers": 2, "gate": true, "depot": true, "armor": 1.45, "reload": 7},
      "lives": 14,
      "enemyLives": 6,
      "enemyAimError": 0.099,
@@ -7546,6 +7550,22 @@
      "followRate": 7,
      "followLeadDegrees": 30
     }
+   },
+   "ammoLimit": {
+    "shellShare": 0.45,
+    "shellMin": 12,
+    "shellMax": 24,
+    "belt": 160,
+    "lowShells": 3,
+    "lowBelt": 30,
+    "waveShare": 0.6,
+    "near": 45,
+    "far": 70,
+    "spread": 0.7,
+    "collect": 16,
+    "driftAfter": 2,
+    "driftSpeed": 16,
+    "refill": {"guided": 1, "torpedo": 4, "mine": 2, "salvo": 2}
    },
    "patrol": {
     "table": [[1, 5, 12], [3, 8, 24], [10, 14, 48], [20, 18, 65]],
@@ -8658,6 +8678,14 @@
     "passSelectionAdvanceWeight": 0.3,
     "keeperStealRate": 12,
     "sprintFromStage": 6,
+    "slide": {
+     "rate": 2.5,
+     "minDistance": 0.8,
+     "maxDistance": 1.8,
+     "minHoldSeconds": 0.35,
+     "fromStage": 2,
+     "cooldownSeconds": 3
+    },
       "catchUpDistance": 8,
       "catchUpBoost": 0.45,
     "sprintSeconds": 0.65,
@@ -8719,6 +8747,11 @@
     "sideInset": 0,
     "sideGoalInset": 2,
     "restartSpace": 2.2,
+    "freeKickSpace": 9.15,
+    "foul": {
+     "reach": 1.3,
+     "frontChance": 0.6
+    },
     "restartPushX": 2.5,
     "restartPushZ": 2,
     "restartPlayerInset": 0.5,
@@ -9608,6 +9641,53 @@
     ]
    },
    "autoSwitchAdvantage": 0,
+   "feel": {
+    "version": "v2",
+    "reaction": {
+     "easy": 0.24,
+     "normal": 0.18,
+     "hard": 0.12
+    },
+    "switchTurnoverSeconds": 0.12,
+    "turnoverWindow": 1,
+    "receiveRunDistance": 9,
+    "rivalRunsFromStage": 3,
+    "rivalRunSpace": 4,
+    "laneFraction": 0.55,
+    "laneGoalSide": 0.9,
+    "laneTeam0": false,
+    "teamReaction": 0.3
+   },
+   "show": {
+    "version": "v1",
+    "cutSeconds": 0.7,
+    "replay": {
+     "before": 3,
+     "recordSeconds": 4.6,
+     "strikeLead": 0.55,
+     "closeMaxBefore": 1.15,
+     "after": 0.45,
+     "slowRate": 0.5,
+     "maxWideSeconds": 1.9,
+     "maxCloseSeconds": 2.6,
+     "minRecording": 1
+    },
+    "celebrate": {
+     "holdSeconds": 2.2,
+     "runSpeed": 4.6,
+     "maxRun": 10
+    },
+    "fulltimeSeconds": 3,
+    "camera": {
+     "boxZoom": 3,
+     "cutBlend": 0.35,
+     "exitBlend": 0.6
+    },
+    "short": {
+     "enabled": true,
+     "cooldown": 20
+    }
+   },
    "chargeSpeedMultiplier": 0.5,
    "passing": {
     "minDistance": 5,
@@ -9619,6 +9699,10 @@
     "groundTravelSeconds": 0.55,
     "groundConeDegrees": 80,
     "leadSeconds": 0.32,
+    "throughLeadSeconds": 0.75,
+    "throughSpeed": 3.5,
+    "throughLaneRadius": 1.2,
+    "throughArrivalRatio": 1.15,
     "loftMinSeconds": 1.05,
     "loftExtraSeconds": 0.45,
     "loftMinHeight": 2.8,
@@ -11245,12 +11329,13 @@
    "maximumSeconds": 3600,
    "v9": {
     "enabled": true,
-    "dropFix": {"enabled": true, "fadeFromStage": 20, "fadeToStage": 30, "flightScale": 1.6, "missScale": {"easy": 0.15, "normal": 0.2, "hard": 0.4}, "shortDelay": {"easy": 0.12, "normal": 0.08, "hard": 0.05}, "shortRun": {"easy": {"mul": 1, "min": 4, "max": 5.4}, "normal": {"mul": 1, "min": 4.6, "max": 6}, "hard": {"mul": 1, "min": 5.2, "max": 6.6}}},
+    "dropFix": {"enabled": true, "fadeFromStage": 20, "fadeToStage": 30, "flightScale": 1.15, "missScale": {"easy": 0.15, "normal": 0.2, "hard": 0.4}, "shortDelay": {"easy": 0.12, "normal": 0.08, "hard": 0.05}, "shortRun": {"easy": {"mul": 1, "min": 4, "max": 5.4}, "normal": {"mul": 1, "min": 4.6, "max": 6}, "hard": {"mul": 1, "min": 5.2, "max": 6.6}}},
     "deep": {"enabled": true, "errorScale": {"easy": 0.35, "normal": 0.7, "hard": 1.1}, "buffer": {"easy": 0.5, "normal": 0.38, "hard": 0.24}, "aiMissScale": {"easy": 0.55, "normal": 1, "hard": 1},
      "assist": {"easy": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "normal": {"radius": 3.4, "step": 2.2, "speed": 3.4, "lead": 1.1}, "hard": {"radius": 2.05, "step": 0.55, "speed": 1.65, "lead": 0.7}},
      "rating": {"perfect": 0.25, "good": 0.6}},
     "hold": {"enabled": true, "carry": {"enabled": true, "releaseWait": 1.6, "needleWeight": 0.7, "needlePower": 0.3}, "seconds": 3, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.28, "normal": 0.24, "hard": 0.18}},
-    "meter": {"enabled": true, "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
+    "meter": {"enabled": true, "bar": true, "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
+    "returnMeter": {"enabled": true, "widthScale": 0.6, "wait": 1.1, "power": {"green": 0.3, "yellow": 0, "red": -0.15}, "shortError": {"green": 0, "yellow": 0.15, "red": 0.45}},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
     "shortDelay": {"easy": 0.4, "normal": 0.34, "hard": 0.27},
@@ -11936,6 +12021,22 @@
     "laneRadius": 0.9,
     "lanePenalty": 1.6,
     "lobAbove": 11
+   },
+   "play": {
+    "enabled": true,
+    "oopRadius": 3.2,
+    "oopBox": 0.9,
+    "oopApproach": 0.6,
+    "oopNear": 1.8,
+    "oopDunkRadius": 1.6,
+    "oopBonus": 0.15,
+    "oopTargetBonus": 2.5,
+    "oopCatchHeight": 2.75,
+    "aiOopChance": 0.08,
+    "lobFar": 7.0,
+    "spacingRadius": 2.5,
+    "spacingMax": 2,
+    "doubleTapMs": 260
    },
    "jump": {
     "duration": 0.72,
@@ -13328,7 +13429,9 @@
     {
      "stage": 1,
      "v6": {
-      "dist": 21,
+      "dist": 19,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.1",
@@ -13384,7 +13487,9 @@
     {
      "stage": 2,
      "v6": {
-      "dist": 20,
+      "dist": 21,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.2",
@@ -13449,7 +13554,9 @@
     {
      "stage": 3,
      "v6": {
-      "dist": 25,
+      "dist": 24,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.3",
@@ -13515,7 +13622,9 @@
     {
      "stage": 4,
      "v6": {
-      "dist": 22,
+      "dist": 27,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.4",
@@ -13583,7 +13692,9 @@
     {
      "stage": 5,
      "v6": {
-      "dist": 14,
+      "dist": 20,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.5",
@@ -13655,7 +13766,12 @@
      "stage": 6,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.6,
+      "zmove": {"kind": "dash", "amp": 2.6, "speed": 4.5, "pause": 0.5}
      },
      "feature": "feature.catchCriminal.6",
      "difficulty": 6,
@@ -13743,7 +13859,12 @@
      "stage": 7,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "throws": 5,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 2.6, "period": 3.0}
      },
      "feature": "feature.catchCriminal.7",
      "difficulty": 7,
@@ -13820,7 +13941,13 @@
      "stage": 8,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "crew": 3,
+      "throws": 6,
+      "wind": 1.8,
+      "zmove": {"kind": "pace", "amp": 3.0, "period": 2.8}
      },
      "feature": "feature.catchCriminal.8",
      "difficulty": 8,
@@ -13917,7 +14044,12 @@
      "stage": 9,
      "v6": {
       "dist": 32,
-      "radiusScale": 1
+"flee": 1.2,
+      "fleeMax": 4,
+      "radiusScale": 1,
+      "wind": 2.2,
+      "throws": 5,
+      "zmove": {"kind": "dash", "amp": 2.8, "speed": 5.0, "pause": 0.4}
      },
      "feature": "feature.catchCriminal.9",
      "difficulty": 9,
@@ -14012,7 +14144,9 @@
     {
      "stage": 10,
      "v6": {
-      "dist": 17,
+      "dist": 28,
+"flee": 1.2,
+      "fleeMax": 4,
       "radiusScale": 1
      },
      "feature": "feature.catchCriminal.10",

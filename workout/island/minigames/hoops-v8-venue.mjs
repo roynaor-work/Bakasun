@@ -92,11 +92,13 @@ function createPopulation(level,texture){
  const crowdGeo=new THREE.PlaneGeometry(.66,1.10);crowdGeo.translate(0,.54,.04);
  const variant=new Float32Array(layout.length),phase=new Float32Array(layout.length);
  const crowdMat=new THREE.MeshLambertMaterial({map:texture,alphaTest:.46,side:THREE.DoubleSide,depthWrite:true});crowdMat.forceSinglePass=true;
- const uniforms={arenaTime:{value:0},arenaCheer:{value:0}};
+ // show moods (M4): arenaStand lifts and stretches the upper body (standing, arms up), arenaGroan slumps and sways it, and a cheer
+ // wave (arenaWave = its x along the court, arenaWaveOn its strength) lifts the seats it passes, using the instance's own position
+ const uniforms={arenaTime:{value:0},arenaCheer:{value:0},arenaStand:{value:0},arenaGroan:{value:0},arenaWave:{value:-999},arenaWaveOn:{value:0}};
  crowdMat.onBeforeCompile=shader=>{
   Object.assign(shader.uniforms,uniforms);
-  shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute float spectatorTile;attribute float spectatorPhase;\nuniform float arenaTime;uniform float arenaCheer;\nvarying float vSpectatorTile;')
-   .replace('#include <begin_vertex>','#include <begin_vertex>\nvSpectatorTile=spectatorTile;\nfloat upper=smoothstep(0.20,0.85,position.y);\ntransformed.x+=sin(arenaTime*1.4+spectatorPhase)*0.018*upper;\ntransformed.y+=sin(arenaTime*2.2+spectatorPhase)*0.009*upper*(1.0+arenaCheer*3.0);');
+  shader.vertexShader=shader.vertexShader.replace('#include <common>','#include <common>\nattribute float spectatorTile;attribute float spectatorPhase;\nuniform float arenaTime;uniform float arenaCheer;uniform float arenaStand;uniform float arenaGroan;uniform float arenaWave;uniform float arenaWaveOn;\nvarying float vSpectatorTile;')
+   .replace('#include <begin_vertex>','#include <begin_vertex>\nvSpectatorTile=spectatorTile;\nfloat upper=smoothstep(0.20,0.85,position.y);\nfloat seatX=instanceMatrix[3][0];\nfloat wave=arenaWaveOn*exp(-pow((seatX-arenaWave)*0.22,2.0));\ntransformed.x+=sin(arenaTime*1.4+spectatorPhase)*0.018*upper+sin(arenaTime*2.6+spectatorPhase)*0.03*upper*arenaGroan;\ntransformed.y+=sin(arenaTime*2.2+spectatorPhase)*0.009*upper*(1.0+arenaCheer*3.0)+(arenaStand*0.16+wave*0.12-arenaGroan*0.07)*upper;\ntransformed.y*=1.0+arenaStand*0.08*upper;');
   shader.fragmentShader=shader.fragmentShader.replace('#include <common>','#include <common>\nvarying float vSpectatorTile;')
    .replace('#include <map_fragment>','#ifdef USE_MAP\nvec2 tile=vec2(mod(vSpectatorTile,8.0),3.0-floor(vSpectatorTile/8.0));\nvec2 atlasUv=(tile+vec2(0.018)+vMapUv*0.964)/vec2(8.0,4.0);\nvec4 sampledDiffuseColor=texture2D(map,atlasUv);\ndiffuseColor*=sampledDiffuseColor;\n#endif');
  };
@@ -113,7 +115,7 @@ function createPopulation(level,texture){
  crowdGeo.setAttribute('spectatorTile',new THREE.InstancedBufferAttribute(variant,1));crowdGeo.setAttribute('spectatorPhase',new THREE.InstancedBufferAttribute(phase,1));
  for(const m of [seats,crowd]){m.instanceMatrix.needsUpdate=true;m.computeBoundingSphere();m.frustumCulled=true;m.castShadow=false;m.receiveShadow=false;}
  group.add(seats,crowd);
- return {group,count:layout.length,update(time,cheer=0){uniforms.arenaTime.value=time;uniforms.arenaCheer.value=cheer;},dispose(){seatGeo.dispose();crowdGeo.dispose();seatMat.dispose();crowdMat.dispose();}};
+ return {group,count:layout.length,update(time,cheer=0,mood=null){uniforms.arenaTime.value=time;uniforms.arenaCheer.value=cheer;uniforms.arenaStand.value=mood?.stand||0;uniforms.arenaGroan.value=mood?.groan||0;uniforms.arenaWave.value=mood?.waveX??-999;uniforms.arenaWaveOn.value=mood?.waveOn||0;},dispose(){seatGeo.dispose();crowdGeo.dispose();seatMat.dispose();crowdMat.dispose();}};
 }
 
 /** Scoreboard faces over the court and the two shot clocks behind the baskets, textured with the engine's canvases. The faces on the ends are
@@ -197,7 +199,7 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
   const api={
    get lod(){return current;},get crowdCount(){return populations[current].count;},
    /** Distance picks the level; two seconds under about 28 fps step it down, twelve good seconds step it back. */
-   update(camera,time,delta,cheer=0){
+   update(camera,time,delta,cheer=0,mood=null){
     if(disposed)return;
     if(forced==='auto'){
      const distance=camera.getWorldPosition(cam).distanceTo(group.getWorldPosition(origin));
@@ -208,7 +210,7 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
      desired=Math.min(2,desired+penalty);
      if(desired!==current&&(penalty||Math.abs(distance-V8_LOD_DISTANCES[Math.max(desired,current)])>3))show(desired);
     }
-    prepareView(camera);populations[current].update(time,cheer);
+    prepareView(camera);populations[current].update(time,cheer,mood);
    },
    prepareView,
    /** The hanging scoreboard is hidden in portrait (the close camera is inside it), like the earlier venues. */

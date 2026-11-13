@@ -5,14 +5,31 @@
 .rl-head h3,.rl-season h4{margin:0;font-size:1.05rem}
 .rl-coins,.rl-coins-bar{padding:4px 12px;border-radius:999px;background:#fff0c9;color:#7a5314;font-weight:800;font-size:.9rem;margin:0}
 .rl-line,.rl-next{margin:0;font-size:.9rem;line-height:1.5}.rl-next{font-weight:700}
-.rl-races{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.rl-race{display:grid;gap:2px;padding:6px 8px;border-radius:10px;background:#edf3e9;border:1px solid #dfe8d9;min-width:0}
+/* racing-deep-m6: the calendar is a sideways strip of 12-18 races (scroll-snap, the next race centred by script) */
+.rl-races{list-style:none;margin:0;padding:2px 2px 6px;display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.rl-race{display:grid;gap:2px;padding:6px 8px;border-radius:10px;background:#edf3e9;border:1px solid #dfe8d9;min-width:0;flex:0 0 108px;scroll-snap-align:center}
+.rl-race-tags{display:flex;flex-wrap:wrap;gap:3px}.rl-tag{display:inline-block;font-style:normal;font-size:.68rem;line-height:1.3;padding:1px 6px;border-radius:999px;background:#d9e7dd;color:#2e5551;font-weight:700;white-space:nowrap}
+.rl-next .rl-tag{vertical-align:middle;margin-inline-start:2px}
 .rl-race[data-state=done]{background:#dff0e4;border-color:#74b89b}
 .rl-race[data-state=next]{background:#fff3d9;border-color:#dd9544;box-shadow:0 0 0 2px #dd954455}
 .rl-race[data-state=locked]{opacity:.6}
 .rl-race-no{font-weight:900;font-size:.8rem;color:#986d24}.rl-race-name{font-weight:700;font-size:.85rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rl-race-result{font-size:.8rem}
 .rl-actions{display:flex;flex-wrap:wrap;gap:8px}.rl-actions button{flex:1 1 140px;min-height:56px}.rl-actions .primary-button{flex:2 1 200px}
-.rl-table{width:100%;border-collapse:collapse;font-size:.9rem}.rl-table th,.rl-table td{padding:6px;border-bottom:1px solid #0002;text-align:right}.rl-table tr.mine{font-weight:800;background:#ffd84a33}
+.rl-table{width:100%;border-collapse:collapse;font-size:.95rem}.rl-table th,.rl-table td{padding:5px 6px;border-bottom:1px solid #0002;text-align:right;vertical-align:middle}.rl-table tr.mine{font-weight:900;background:#ffd84a55;font-size:1.05rem}.rl-table tr.mine td{border-bottom-color:#d4a62b}
+.rl-table th{font-size:.75rem;color:#4f6b73;font-weight:700}.rl-place{width:1.6em;font-weight:900;color:#986d24;font-size:1.05rem}.rl-pts{font-weight:900;font-size:1.15rem;color:#1c4a5a;text-align:left}.rl-team{font-size:.8rem;color:#4f6b73}.rl-chipcell{width:40px}
+.rl-chip{display:inline-grid;place-items:center;min-width:30px;height:22px;padding:0 5px;border-radius:7px;background:var(--team,#8a98a6);color:#fff;border:1px solid #0003;box-shadow:inset 0 0 0 1px #ffffff55;vertical-align:middle}.rl-chip-no{font-size:.8rem;font-weight:900;line-height:1;text-shadow:0 1px 1px #0008}
+.rl-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-inline-end:6px;border:1px solid #0003;vertical-align:middle}
+.rl-rival{display:grid;gap:6px;padding:10px;border-radius:12px;background:#f3f1ff;border:1px solid #cfc6ee}.rl-rival-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.rl-rival-head strong{font-size:1.05rem;color:#3b2e6e}
+.rl-vs{display:grid;gap:3px}.rl-vs-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;font-size:1.05rem}.rl-vs-mine{text-align:right;color:#8a5a00;font-weight:900;font-size:1.2rem}.rl-vs-theirs{text-align:left;color:#3b2e6e;font-weight:900;font-size:1.2rem}.rl-vs-label{font-size:.8rem;color:#4f6b73;min-width:72px;text-align:center}
+.rl-vs-names .rl-vs-mine,.rl-vs-names .rl-vs-theirs{font-size:.85rem;font-weight:800}.rl-rival-line .rl-chip{margin:0 2px}
+/* season podium: three steps 2-1-3, the player's step gold */
+.rl-podium{display:grid;gap:8px;padding:12px;border-radius:14px;background:linear-gradient(180deg,#fff6dc 0,#ffe9b0 100%);border:1px solid #e0b858}.rl-podium h4{margin:0;font-size:1.1rem;color:#5a3d05}
+.rl-podium-row{display:flex;align-items:flex-end;justify-content:center;gap:8px;direction:ltr}.rl-podium-step{display:grid;gap:3px;justify-items:center;align-content:end;width:31%;max-width:150px;padding:8px 6px 6px;border-radius:12px 12px 4px 4px;background:#e9eef0;border:1px solid #9bb0b6;color:#1c4a5a;direction:rtl}
+.rl-podium-step.place-1{min-height:118px;background:#ffe29a;border-color:#d4a62b}.rl-podium-step.place-2{min-height:96px;background:#eef1f3}.rl-podium-step.place-3{min-height:84px;background:#f3d9c0;border-color:#b5763b}
+.rl-podium-step.you{outline:3px solid #d93228;outline-offset:1px}.rl-podium-name{font-weight:800;font-size:.95rem;text-align:center}.rl-podium-place{font-size:2rem;line-height:1;font-weight:900}
+.rl-podium-facts{display:grid;gap:3px}.rl-big{font-size:1.15rem;font-weight:900;color:#5a3d05}.rl-prize{margin:0;font-weight:900;font-size:1.05rem;color:#7a5314}
+.rl-podium.compact .rl-podium-step.place-1{min-height:92px}.rl-podium.compact .rl-podium-step.place-2{min-height:76px}.rl-podium.compact .rl-podium-step.place-3{min-height:66px}.rl-podium.compact .rl-podium-place{font-size:1.5rem}
+.rl-setting{display:flex;align-items:center;gap:10px;min-height:48px;padding:4px 8px;font-size:.95rem}.rl-setting input{width:24px;height:24px;accent-color:#288c81}
 .rl-gates{list-style:none;margin:0;padding:0;display:grid;gap:6px}.rl-gate{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;padding:8px 10px;border-radius:10px;background:#edf3e9}.rl-gate[data-open=false]{opacity:.65}.rl-gate span{font-size:.85rem}.rl-gate em{font-style:normal;font-weight:800;color:#2e655e}
 .rl-part{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:10px;border-radius:12px;background:#f7faf2;border:1px solid #dfe8d9}
 .rl-part-name{font-size:1rem}.rl-part-what{grid-column:1;font-size:.85rem;opacity:.85}.rl-part .primary-button{grid-column:2;grid-row:1/span 3;min-width:150px}
@@ -20,5 +37,11 @@
 .rl-result-main{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.rl-medal{justify-self:center;display:grid;place-items:center;width:84px;height:84px;border-radius:50%;font-size:2.4rem;font-weight:900;background:#e9eef0;border:5px solid #9bb0b6;color:#37525a}
 .rl-medal[data-place="1"]{background:#ffe29a;border-color:#d4a62b;color:#6b4b05}.rl-medal[data-place="2"]{background:#eef1f3;border-color:#aab4ba}.rl-medal[data-place="3"]{background:#f3d9c0;border-color:#b5763b;color:#5d3512}
 .rl-rows{display:grid;gap:4px}.rl-rows .result-row{display:flex;justify-content:space-between;margin:0}
-@media(orientation:landscape) and (max-height:600px){.rl-races{grid-template-columns:repeat(6,minmax(0,1fr))}.rl-race-name{display:none}.rl-race{text-align:center;padding:4px}.rl-actions button{min-height:48px}.rl-next{font-size:.85rem}.rl-card,.rl-season,.rl-shop,.rl-result{padding:8px;gap:6px}.rl-shop{grid-template-columns:repeat(2,minmax(0,1fr))}.rl-shop>.rl-coins-bar,.rl-shop>.rl-line{grid-column:1/-1}.rl-part .primary-button{min-width:110px}.rl-result{grid-template-columns:1fr 1fr;align-items:start}.rl-result>.rl-actions,.rl-result>.rl-line{grid-column:1/-1;grid-row:2}.rl-result>.rl-result-main{grid-row:1}.rl-result>.rl-table{grid-row:1;grid-column:2}.rl-table th,.rl-table td{padding:3px 6px}.rl-medal{width:64px;height:64px;font-size:1.8rem}}
+@media(orientation:landscape) and (max-height:600px){.rl-race{flex-basis:96px;padding:4px 6px}.rl-race-name{font-size:.78rem}.rl-podium-step.place-1{min-height:96px}.rl-podium-step.place-2{min-height:80px}.rl-podium-step.place-3{min-height:70px}.rl-table tr.mine{font-size:1rem}.rl-actions button{min-height:48px}.rl-next{font-size:.85rem}.rl-card,.rl-season,.rl-shop,.rl-result{padding:8px;gap:6px}.rl-shop{grid-template-columns:repeat(2,minmax(0,1fr))}.rl-shop>.rl-coins-bar,.rl-shop>.rl-line{grid-column:1/-1}.rl-part .primary-button{min-width:110px}.rl-result{grid-template-columns:1fr 1fr;align-items:start}.rl-result>.rl-actions,.rl-result>.rl-line{grid-column:1/-1;grid-row:2}.rl-result>.rl-result-main{grid-row:1}.rl-result>.rl-table{grid-row:1;grid-column:2}.rl-table th,.rl-table td{padding:3px 6px}.rl-medal{width:64px;height:64px;font-size:1.8rem}}
 @media(prefers-reduced-motion:no-preference){.rl-race[data-state=next]{animation:rl-pulse 2.4s ease-in-out infinite}@keyframes rl-pulse{50%{box-shadow:0 0 0 4px #dd954433}}}
+/* racing-league-v1 (Codex art; the rl-art class and the images exist only without ?racingLeagueArt=0) */
+.rl-crest{width:22px;height:22px;vertical-align:middle;margin-inline-end:6px}
+.rl-season.rl-art::before{content:'';display:block;height:96px;border-radius:12px;background:var(--rl-season-bg) center/cover no-repeat}
+.rl-podium.rl-art .rl-podium-row{padding:14px 8px 0;border-radius:10px;background:var(--rl-podium-bg) center/cover no-repeat}
+.rl-trophies{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:4px}.rl-cup{display:grid;justify-items:center;gap:2px;margin:0;font-size:.85rem;font-weight:800;text-align:center}.rl-trophy{width:56px;height:70px}
+.rl-medal.art{background:none;border:0;width:84px;height:84px}.rl-medal-img{width:76px;height:76px;display:block}

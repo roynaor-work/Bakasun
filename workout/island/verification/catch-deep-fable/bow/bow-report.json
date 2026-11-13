@@ -1,0 +1,239 @@
+{
+ "stages": {
+  "1": {
+   "idle": {
+    "angle": 7.274751663208008,
+    "power": 1,
+    "yaw": 0,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "thief": {
+    "feetY": 190.71471495355843,
+    "headY": 135.6178909091824,
+    "height": 55,
+    "dist": 15.8
+   },
+   "render": {
+    "calls": 145,
+    "triangles": 206465
+   },
+   "drawn": {
+    "angle": 10.574751663208009,
+    "power": 1,
+    "yaw": 4.4,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "drawnOk": true,
+   "released": true,
+   "hit": {
+    "angle": 6.5,
+    "yaw": -1.0000000000000004,
+    "perfect": false
+   },
+   "hitResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 0
+   },
+   "head": {
+    "angle": 13,
+    "yaw": -0.2000000000000004,
+    "perfect": true
+   },
+   "headResult": {
+    "kind": "catch",
+    "perfect": true,
+    "catches": 2
+   },
+   "state": {
+    "phase": "done",
+    "catches": 2,
+    "throwsLeft": 3,
+    "won": true
+   }
+  },
+  "5": {
+   "idle": {
+    "angle": 2.5667667388916016,
+    "power": 1,
+    "yaw": 0,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "thief": {
+    "feetY": 205.78129669181092,
+    "headY": 129.63470026433492,
+    "height": 76,
+    "dist": 10.6
+   },
+   "render": {
+    "calls": 161,
+    "triangles": 203891
+   },
+   "drawn": {
+    "angle": 5.866766738891601,
+    "power": 1,
+    "yaw": 4.4,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "drawnOk": true,
+   "released": true,
+   "hit": {
+    "angle": 2,
+    "yaw": 8.56244828811221,
+    "perfect": false
+   },
+   "hitResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 0
+   },
+   "head": {
+    "angle": 10,
+    "yaw": 4.489819800061781,
+    "perfect": true
+   },
+   "headResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 2
+   },
+   "miss": {
+    "kind": "ground"
+   },
+   "state": {
+    "phase": "impact",
+    "catches": 2,
+    "throwsLeft": 3,
+    "won": false
+   }
+  },
+  "7": {
+   "idle": {
+    "angle": 13.905515670776367,
+    "power": 1,
+    "yaw": 0,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "thief": {
+    "feetY": 188.14202567740062,
+    "headY": 172.52258352066642,
+    "height": 16,
+    "dist": 24
+   },
+   "render": {
+    "calls": 142,
+    "triangles": 173184
+   },
+   "drawn": {
+    "angle": 17.205515670776368,
+    "power": 1,
+    "yaw": 4.4,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "drawnOk": true,
+   "released": true,
+   "hit": {
+    "angle": 15,
+    "yaw": 1.2369434368139143,
+    "perfect": false
+   },
+   "hitResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 1
+   },
+   "head": {
+    "angle": 23.5,
+    "yaw": 1.283338993818912,
+    "perfect": true
+   },
+   "headResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 2
+   },
+   "state": {
+    "phase": "done",
+    "catches": 2,
+    "throwsLeft": 4,
+    "won": true
+   }
+  },
+  "10": {
+   "idle": {
+    "angle": 4.585161209106445,
+    "power": 1,
+    "yaw": 0,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "thief": {
+    "feetY": 197.5374106482454,
+    "headY": 134.50519790199658,
+    "height": 63,
+    "dist": 12.8
+   },
+   "render": {
+    "calls": 120,
+    "triangles": 103530
+   },
+   "drawn": {
+    "angle": 7.885161209106445,
+    "power": 1,
+    "yaw": 4.4,
+    "tool": "narrow",
+    "phase": "aim"
+   },
+   "drawnOk": true,
+   "released": true,
+   "hit": {
+    "angle": 6.25,
+    "yaw": 2.1066058764607845,
+    "perfect": false
+   },
+   "hitResult": {
+    "kind": "catch",
+    "perfect": false,
+    "catches": 1
+   },
+   "head": {
+    "angle": 12.75,
+    "yaw": 4.650260997953591,
+    "perfect": true
+   },
+   "headResult": {
+    "kind": "catch",
+    "perfect": true,
+    "catches": 2
+   },
+   "miss": {
+    "kind": "blocked"
+   },
+   "state": {
+    "phase": "flee",
+    "catches": 2,
+    "throwsLeft": 3,
+    "won": false
+   }
+  }
+ },
+ "sheet": {
+  "frames": [
+   "sheet-f0-drawn",
+   "sheet-f1-release",
+   "sheet-f2-flight",
+   "sheet-f3-flight",
+   "sheet-f4-flight",
+   "sheet-f5-flight",
+   "sheet-f6-slowmo",
+   "sheet-f7-impact"
+  ],
+  "result": {}
+ }
+}

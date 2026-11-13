@@ -1,0 +1,23 @@
+== hoops
+-- quality=2
+844x390 load 4019 ms | fps 2.94 | frame p50 316.6 p95 749.9 p99 916.6 | >33ms 61/73 >50ms 61 | tick avg 10.16 p95 9 | render avg 8.71 p95 7.1 | alloc 1.67 MB/s gcs 3 | long 1 | calls 45 tris 94265 | steps 540 replays 0
+-- quality=1
+844x390 load 3532 ms | fps 4.58 | frame p50 200 p95 449.9 p99 616.6 | >33ms 93/114 >50ms 91 | tick avg 10.44 p95 9.8 | render avg 9.35 p95 8 | alloc 2.6 MB/s gcs 3 | long 1 | calls 45 tris 79253 | steps 794 replays 0
+-- quality=0
+844x390 load 6193 ms | fps 6.69 | frame p50 133.4 p95 283.3 p99 416.6 | >33ms 154/166 >50ms 146 | tick avg 6.95 p95 10.4 | render avg 5.83 p95 9 | alloc 2.4 MB/s gcs 8 | long 1 | calls 44 tris 80259 | steps 1137 replays 0
+-- quality=2&athleteBody=0
+844x390 load 3507 ms | fps 3.44 | frame p50 266.6 p95 550 p99 600 | >33ms 69/86 >50ms 69 | tick avg 10.37 p95 6.9 | render avg 9.15 p95 4.4 | alloc 1.42 MB/s gcs 3 | long 1 | calls 35 tris 78053 | steps 607 replays 0
+-- quality=2&hoopsShow=0
+844x390 load 3470 ms | fps 3.14 | frame p50 300 p95 616.7 p99 699.9 | >33ms 65/77 >50ms 63 | tick avg 8.66 p95 8.9 | render avg 7.48 p95 7.7 | alloc 1.79 MB/s gcs 3 | long 1 | calls 45 tris 94265 | steps 555 replays 0
+== soccer
+-- quality=0
+FAILED undefined
+-- quality=2
+FAILED undefined
+-- quality=3
+FAILED undefined
+-- quality=0&athleteBody=0
+FAILED undefined
+-- quality=0&soccerShow=0
+FAILED undefined
+== done
