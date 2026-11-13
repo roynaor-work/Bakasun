@@ -43,24 +43,26 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
   return {pressed:true,at:{x:Math.round(q.x),y:Math.round(q.y)},seconds:+(s.time-t0).toFixed(2),progress,homing:s.homing?.index??null,status:s.homing?.status??null,hud:s.hud?.lock||null,fire:await page.evaluate(()=>document.querySelector('.game-controls')?.dataset.lock??null)};};
  const tapFire=async()=>{const F=await center('#shoot');await touch('touchStart',[{x:F.x,y:F.y,id:2}]);await tick(50);await touch('touchEnd',[]);await tick(40);};
  /** After a shot: wait until it is fired (a tap may wait for the turret) and has landed; did it hit the hull? */
- const settle=async(index,fired0,hp0)=>{let s=await snap();for(let t=0;t<2400&&s.fired===fired0;t+=60){await tick(60);s=await snap();}const fired=s.fired-fired0;
-  for(let t=0;t<4000&&(s.ball?.active||s.extraShots?.length);t+=100){await tick(100);s=await snap();}await tick(120);s=await snap();
+ // The stage can end while a shell flies (the last hull sinks, or our ship): the last snapshot that existed is the one read.
+ const live=async last=>(await snap().catch(()=>null))||last;
+ const settle=async(index,fired0,hp0)=>{let s=await live(null);if(!s)return {fired:0,hit:false,victim:null,predicted:null,critical:false};for(let t=0;t<2400&&s.fired===fired0&&!s.result;t+=60){await tick(60);s=await live(s);}const fired=s.fired-fired0;
+  for(let t=0;t<4000&&(s.ball?.active||s.extraShots?.length)&&!s.result;t+=100){await tick(100);s=await live(s);}await tick(120);s=await live(s);
   const e=s.enemies.find(e=>e.index===index),victim=s.lastShot?.actual?.victim??null,predicted=s.lastShot?.predicted?.contact?.index??null;
   return {fired,hit:fired>0&&(victim===index||(e?.hp??0)<hp0),victim,predicted,critical:Boolean(s.lastShot?.actual?.critical)};};
  /** The earlier acceptance's thumb (final-naval-browser aimShot): drag from Fire until the arc's end sits on the hull or meets it, lift. */
  const thumbShot=async(index,{ms=7000}={})=>{
-  const F=await center('#shoot');let dx=0,dy=0,good=0,moves=0,s=await snap();const t0=s.time,e0=s.enemies.find(e=>e.index===index),hp0=e0?.hp??0,fired0=s.fired;
+  const F=await center('#shoot');let dx=0,dy=0,good=0,moves=0,s=await live(null);if(!s)return {fired:0,hit:false,victim:null,predicted:null,critical:false,aimSeconds:0,touches:0};const t0=s.time,e0=s.enemies.find(e=>e.index===index),hp0=e0?.hp??0,fired0=s.fired;
   await touch('touchStart',[{x:F.x,y:F.y,id:3}]);await tick(80);
-  for(;;){s=await snap();const e=s.enemies.find(e=>e.index===index);if(!e||e.hp<=0||s.result)break;
+  for(;;){const now=await snap().catch(()=>null);if(!now)break;s=now;const e=s.enemies.find(e=>e.index===index);if(!e||e.hp<=0||s.result)break;
    const P=s.playerShip,L=s.prediction?.landing,C=s.prediction?.contact;if(!L){await tick(50);continue;}
    const eb=wrap(Math.atan2(e.z-P.z,e.x-P.x)-Math.atan2(L.z-P.z,L.x-P.x))*DEG,er=Math.hypot(e.x-P.x,e.z-P.z)-Math.hypot(L.x-P.x,L.z-P.z);
    good=(C?.index===index||(Math.abs(eb)<.7&&Math.abs(er)<3))?good+1:0;if(good>=2||s.time-t0>ms/1000)break;
    if(Math.abs(eb)>2.4)dx=Math.sign(eb)*Math.min(78,26+Math.abs(eb)*.8);else dx=Math.max(-22,Math.min(22,Math.max(-22,Math.min(22,dx))+eb/.12));
    dy=Math.max(-170,Math.min(50,dy-Math.max(-14,Math.min(14,er*.35))));
    await touch('touchMove',[{x:F.x+dx,y:F.y+dy,id:3}]);moves++;await tick(50);}
-  const aimSeconds=+((await snap()).time-t0).toFixed(2);await touch('touchEnd',[]);await tick(60);
+  const aimSeconds=+((await live(s)).time-t0).toFixed(2);await touch('touchEnd',[]);await tick(60);
   return {...await settle(index,fired0,hp0),aimSeconds,touches:moves+2};};
- const lockShot=async index=>{let s=await snap();const t0=s.time,hp0=s.enemies.find(e=>e.index===index)?.hp??0,fired0=s.fired,status=s.homing?.status;await tapFire();const r=await settle(index,fired0,hp0);return {...r,status,aimSeconds:null,touches:2,tapToFire:null,t:+t0.toFixed(1)};};
+ const lockShot=async index=>{let s=await live(null);if(!s)return {fired:0,hit:false,victim:null,predicted:null,critical:false,status:null,aimSeconds:null,touches:0};const t0=s.time,hp0=s.enemies.find(e=>e.index===index)?.hp??0,fired0=s.fired,status=s.homing?.status;await tapFire();const r=await settle(index,fired0,hp0);return {...r,status,aimSeconds:null,touches:2,tapToFire:null,t:+t0.toFixed(1)};};
  const stickPoint=async()=>{const z=await page.locator('.naval-stick-zone').boundingBox();return {x:z.x+z.width*.45,y:z.y+z.height*.6};};
  /** Left thumb: push the stick toward a model point (relative to the camera) until `near`; lift. */
  const sailTo=async(point,{near=8,ms=15000,radius=46,until=null}={})=>{
@@ -117,7 +119,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
     const scored=[];for(const e of pool){if((avoid.get(e.index)??-1)>s.time)continue;const q=await screenOf(e.index);if(visible(q))scored.push({e,d:Math.hypot(e.x-s.playerShip.x,e.z-s.playerShip.z),clear:clearLine(s,e)});}
     scored.sort((a,b)=>Number(!a.clear)-Number(!b.clear)||(fixed?Number(a.e.main===false)-Number(b.e.main===false):0)||a.d-b.d);const target=scored[0]?.e;
     if(!target){if(fixed&&!pool.length){await leave();await begin();continue;}avoid.clear();await tick(300);continue;}
-    if(before){const r=await thumbShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.aimSeconds);continue;}
+    if(before){const r=await thumbShot(target.index);if(!r.fired)continue;rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.aimSeconds);continue;}
     if(s.homing?.index!==target.index){const lp=await longPress(target.index,600,1);locks.push({index:target.index,locked:lp.homing===target.index,status:lp.status});if(lp.homing!==target.index){await tick(200);continue;}
      if(locks.length===1)await capture(fixed?'b-fixed-locked':'b-moving-locked');}
     // Wait for the turret (as a child waits for the green Fire), at most a second and a half.
@@ -125,7 +127,7 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
     if(!s.homing)continue;
     // The lock says another hull is in the way (or the submarine is under water): a child picks another target, as the word asks.
     if(['blocked','dive'].includes(s.homing.status)&&scored.length>1){avoid.set(target.index,s.time+3);skipped++;continue;}
-    const r=await lockShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,waitedMs:waited,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.status);
+    const r=await lockShot(target.index);if(!r.fired)continue;rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,waitedMs:waited,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.status);
    }
    const out={stage,runs,...summary(rows),clearLineShots:rows.filter(r=>r.clear).length,skippedBlockedLocks:skipped,locks:locks.length,locked:locks.filter(l=>l.locked).length,statuses:rows.reduce((a,r)=>{if(r.status)a[r.status]=(a[r.status]||0)+1;return a;},{}),rows};
    console.log('CELL',label,JSON.stringify({...out,rows:undefined}));await leave();return out;};
