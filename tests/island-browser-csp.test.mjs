@@ -268,7 +268,7 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       await athlete.page.goto(server.url+tallBase,{waitUntil:'load'});
       const live=await hoopsReady(athlete.page);
       assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.athleteBody,true);assert.equal(live.m.characterVersion,10);assert.equal(live.m.motionSource,'v12');assert.deepEqual(live.m.v4Fallbacks,[]);
-      assert.ok(requests.some(u=>u.includes('assets/athlete/athlete.glb')),'the shared body');assert.ok(requests.some(u=>u.includes('assets/athlete/textures/')),'its textures');
+      assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the shared body (v22, Codex)');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/')),'its textures');
       assert.ok(requests.some(u=>u.includes('assets/hoops-tall/motion-v12.json')),'the repaired motion pack');assert.ok(!requests.some(u=>/assets\/hoops-tall\/(guard|wing|center)\.glb/.test(u)),'the tall bodies are not downloaded');
       assert.ok(!requests.some(u=>/\/design\/(hoops-(tall|motion)|motion-fix)/.test(u)),'nothing is read from the unpublished design folder');
       assert.ok(live.m.calls<=52,'two draw calls per body: '+live.m.calls);
