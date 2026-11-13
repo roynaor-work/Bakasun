@@ -4,7 +4,9 @@
 // The harness setup is the one of final-naval-browser.mjs (stages unlocked, the 3D view kept on at SwiftShader speed).
 // MODE=after (default): (A) a long press on an enemy hull locks it (the ring fills, the brackets and the green Fire), the turret follows the
 //   moving hull by itself, a tap on Fire hits, a second long press unlocks; (B) accuracy: SHOTS (default 20) locked shots at moving hulls
-//   (stage 10) and SHOTS at the fixed shore base (stage 15, after sailing in with the left thumb); (C) a hull behind the bow: the ship turns
+//   (stage 10) and SHOTS at the fixed shore base (stage 15, after sailing in with the left thumb); both modes pick targets the same way
+//   (a hull on screen with a clear line of fire first, then the nearest; with lock-on a hull whose lock reads "another target in the way"
+//   is left for three seconds, as the word asks); (C) a hull behind the bow: the ship turns
 //   away on the stick, the hull is locked, the turret swings round and the tap hits.
 // MODE=before (`?navalLock=0`, v22): the long press does nothing (no lock, no ring, no data-lock); the same accuracy cells are measured with
 //   the thumb of the earlier acceptance (drag from Fire until the arc's end sits on the hull, then lift).
@@ -99,27 +101,33 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,vie
 
  // (B) Accuracy. Moving hulls: stage 10 (four hulls, three at a time, about 14 units/s). Fixed: the shore base of stage 15 after sailing in.
  if(want('b')){
+  /** Is another hull standing on the line from our ship to this one (what a child sees: a ship parked in front of the bunker)? */
+  const clearLine=(s,e)=>{const P=s.playerShip,dx=e.x-P.x,dz=e.z-P.z,L2=dx*dx+dz*dz||1;
+   return !s.enemies.some(o=>{if(o.index===e.index||!o.active||!(o.hp>0)||o.depth>0)return false;const u=((o.x-P.x)*dx+(o.z-P.z)*dz)/L2;if(u<.05||u>1.02)return false;return Math.hypot(o.x-(P.x+dx*u),o.z-(P.z+dz*u))<(o.hullScale||1)*30+6;});};
   const cell=async(label,stage,{fixed=false}={})=>{
-   const rows=[],locks=[];let runs=0;
-   const begin=async()=>{runs++;await ready(stage);if(fixed){const sail=await sailTo({x:200,z:0},{near:10,ms:12000});(report.sails||(report.sails=[])).push(sail);}};
+   const rows=[],locks=[],avoid=new Map();let runs=0,skipped=0;
+   const begin=async()=>{runs++;avoid.clear();await ready(stage);if(fixed){const sail=await sailTo({x:200,z:0},{near:10,ms:12000});(report.sails||(report.sails=[])).push(sail);}};
    await begin();
    for(let guard=0;rows.length<SHOTS&&guard<400;guard++){
     let s=await snap();if(!s||s.result){await leave();await begin();continue;}
     await keepAfloat();if(s.loaded<=0&&!(await waitLoaded())){await tick(300);continue;}
     s=await snap();
+    // The same choice in both modes: a hull on screen with a clear line of fire first (main base targets first on the base), then the nearest.
     const pool=s.enemies.filter(e=>e.active&&e.hp>0&&(fixed?e.structure:!e.structure)&&!(e.depth>0));
-    const scored=[];for(const e of pool){const q=await screenOf(e.index);if(visible(q))scored.push({e,d:Math.hypot(e.x-s.playerShip.x,e.z-s.playerShip.z)});}
-    scored.sort((a,b)=>fixed?(Number(a.e.main===false)-Number(b.e.main===false))||a.d-b.d:a.d-b.d);const target=scored[0]?.e;
-    if(!target){if(fixed&&!pool.length){await leave();await begin();continue;}await tick(300);continue;}
-    if(before){const r=await thumbShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.aimSeconds);continue;}
+    const scored=[];for(const e of pool){if((avoid.get(e.index)??-1)>s.time)continue;const q=await screenOf(e.index);if(visible(q))scored.push({e,d:Math.hypot(e.x-s.playerShip.x,e.z-s.playerShip.z),clear:clearLine(s,e)});}
+    scored.sort((a,b)=>Number(!a.clear)-Number(!b.clear)||(fixed?Number(a.e.main===false)-Number(b.e.main===false):0)||a.d-b.d);const target=scored[0]?.e;
+    if(!target){if(fixed&&!pool.length){await leave();await begin();continue;}avoid.clear();await tick(300);continue;}
+    if(before){const r=await thumbShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.aimSeconds);continue;}
     if(s.homing?.index!==target.index){const lp=await longPress(target.index,600,1);locks.push({index:target.index,locked:lp.homing===target.index,status:lp.status});if(lp.homing!==target.index){await tick(200);continue;}
      if(locks.length===1)await capture(fixed?'b-fixed-locked':'b-moving-locked');}
     // Wait for the turret (as a child waits for the green Fire), at most a second and a half.
     let waited=0;s=await snap();while(s.homing&&s.homing.status==='turning'&&waited<1500){await tick(100);waited+=100;s=await snap();}
     if(!s.homing)continue;
-    const r=await lockShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',waitedMs:waited,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.status);
+    // The lock says another hull is in the way (or the submarine is under water): a child picks another target, as the word asks.
+    if(['blocked','dive'].includes(s.homing.status)&&scored.length>1){avoid.set(target.index,s.time+3);skipped++;continue;}
+    const r=await lockShot(target.index);rows.push({index:target.index,kind:target.structure||'ship',clear:scored[0].clear,waitedMs:waited,...r});console.log('SHOT',label,rows.length,r.hit?'hit':'miss',r.status);
    }
-   const out={stage,runs,...summary(rows),locks:locks.length,locked:locks.filter(l=>l.locked).length,statuses:rows.reduce((a,r)=>{if(r.status)a[r.status]=(a[r.status]||0)+1;return a;},{}),rows};
+   const out={stage,runs,...summary(rows),clearLineShots:rows.filter(r=>r.clear).length,skippedBlockedLocks:skipped,locks:locks.length,locked:locks.filter(l=>l.locked).length,statuses:rows.reduce((a,r)=>{if(r.status)a[r.status]=(a[r.status]||0)+1;return a;},{}),rows};
    console.log('CELL',label,JSON.stringify({...out,rows:undefined}));await leave();return out;};
   report.moving=await cell('moving',10);
   report.fixed=await cell('fixed',15,{fixed:true});
