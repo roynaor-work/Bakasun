@@ -127,3 +127,11 @@
 /* v14: the hit bar is big, next to the player, and up for every incoming ball (serve-style bar, same colours) */
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-mode=hit]{position:absolute;width:18px;height:128px;border-width:2px;box-shadow:0 3px 14px #102e2980}
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-mode=hit] .tennis-serve-needle{left:-7px;width:30px;height:5px}
+
+/* v23: one home for the bar, serve and every return alike: at the side, just left of the action buttons and centred on them (the session sets
+   left/top from the real buttons; right/bottom is the fallback). Off the court and off the player; dimmed while not in use. ?tennisMeter=v15 = v15. */
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side],.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side][data-mode=hit]{position:absolute;top:auto;left:auto;right:calc(max(24px,env(safe-area-inset-right)) + 200px);bottom:calc(max(18px,env(safe-area-inset-bottom)) + 14px);width:24px;height:156px;border-width:2px;border-radius:6px;box-shadow:0 3px 14px #102e2980;opacity:1;transition:opacity .16s ease-out}
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side][data-idle=true]{opacity:.38;box-shadow:none}
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side] .tennis-serve-needle{left:-8px;width:36px;height:6px}
+.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side][data-idle=true] .tennis-serve-needle{visibility:hidden}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side]{transition:none}}
