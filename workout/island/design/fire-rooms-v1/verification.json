@@ -168,5 +168,39 @@
     "allSixCapturesReviewed": true,
     "capturesContainOnlyRoomRenders": true,
     "noBrandsOrLettering": true
+  },
+  "repositoryTests": {
+    "command": "node --test tests/*.mjs",
+    "firstRun": {
+      "tests": 3951,
+      "passed": 3886,
+      "failed": 1,
+      "skipped": 64,
+      "exitCode": 1,
+      "durationMs": 615647.676463
+    },
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Playwright bundled Chromium headless shell executable is absent; launch fails before navigation. The existing test leaves its HTTP server open after launch failure; the hung worker was terminated after all other workers completed."
+    },
+    "targetedRetry": {
+      "file": "tests/workout-royiki.test.mjs",
+      "configuration": "ISLAND_PLAYWRIGHT points to a temporary adapter outside the repository, using /usr/bin/chromium",
+      "browserExecutable": "/usr/bin/chromium",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "durationMs": 22852.124799
+    },
+    "repositoryTestsEdited": false
+  },
+  "scope": {
+    "addedFiles": 18,
+    "modifiedExistingFiles": 0,
+    "deletedFiles": 0,
+    "directory": "workout/island/design/fire-rooms-v1/"
   }
 }
