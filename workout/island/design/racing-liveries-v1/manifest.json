@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "license": "CC0-1.0",
+  "source": "Original palettes and polygon number art authored for this package",
+  "model": "../../assets/racing-formula/formula.glb",
+  "modelSha256": "0fafed905c2d8a1274aad64bd9f569bcd303fc6365cec8086da4d1f1cb95883f",
+  "leagueSource": "../../minigames/racing-league-core.mjs",
+  "coordinates": {
+    "up": "+Y",
+    "forward": "+Z",
+    "unit": "metre"
+  },
+  "mapping": {
+    "material": "Paint 1",
+    "primaryNodes": [
+      "Body"
+    ],
+    "secondaryNodes": [
+      "FrontWing",
+      "RearWing",
+      "EngineFin"
+    ],
+    "bodySecondary": {
+      "maxY": 0.24,
+      "minAbsX": 0.28,
+      "feather": 0.04
+    },
+    "stripeNodes": [
+      "Body",
+      "FrontWing",
+      "RearWing"
+    ],
+    "stripeAxis": "X",
+    "stripeCenter": 0,
+    "numberProjections": [
+      {
+        "part": "Body",
+        "face": "top",
+        "center": [
+          0,
+          1.35
+        ],
+        "size": [
+          0.24,
+          0.52
+        ]
+      },
+      {
+        "part": "Body",
+        "face": "both-sides",
+        "center": [
+          -0.4,
+          0.38
+        ],
+        "size": [
+          0.64,
+          0.5
+        ]
+      },
+      {
+        "part": "RearWing",
+        "face": "endplates",
+        "center": [
+          -2.055,
+          0.91
+        ],
+        "size": [
+          0.46,
+          0.54
+        ]
+      }
+    ],
+    "note": "Object-space paint, no UV atlas. Only cloned materials change; geometry, nodes, pivots and GLB bytes stay intact."
+  },
+  "teams": [
+    {
+      "id": "flame",
+      "palette": "palettes/flame.json"
+    },
+    {
+      "id": "ocean",
+      "palette": "palettes/ocean.json"
+    },
+    {
+      "id": "gold",
+      "palette": "palettes/gold.json"
+    },
+    {
+      "id": "silver",
+      "palette": "palettes/silver.json"
+    },
+    {
+      "id": "forest",
+      "palette": "palettes/forest.json"
+    },
+    {
+      "id": "night",
+      "palette": "palettes/night.json"
+    }
+  ]
+}

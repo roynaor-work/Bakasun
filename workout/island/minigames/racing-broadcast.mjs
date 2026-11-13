@@ -6,7 +6,7 @@
 // purple mark for the fastest lap; lower-third cards announce the lap, an overtake and a new fastest lap; the results page lists all finishers
 // with their gap to the winner. A good phone racing game keeps the tower short on the left, never over the wheel or the buttons.
 import {gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-11';
-import {broadcastArtEnabled,crestUrl,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-11';
+import {broadcastArtEnabled,carCrest,applyPanelArt,litCount} from './racing-broadcast-art.mjs?v=island-v2-20261107-11';
 
 export const broadcastEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingBroadcast')!=='0';
 export const COUNTDOWN=3,LIGHTS=5,LIGHT_STEP=.5,GO_SHOW=1.2,INTRO_SECONDS=4,PODIUM_SECONDS=8,START_QUIET=2,CARD_SECONDS=1.7;
@@ -70,7 +70,7 @@ export function towerRows(state,{tracker=null,now=state.time,limit=10,watch=null
  const cars=[...state.cars].sort((a,b)=>a.rank-b.rank),player=state.player;
  let shown=cars.slice(0,limit);if(player&&!shown.includes(player)){shown=cars.slice(0,Math.max(1,limit-1));shown.push(player);}
  return shown.map(car=>{const idx=state.cars.indexOf(car),d=gridDriver(idx,car.name),ahead=cars[car.rank-2]||null,gap=ahead?(tracker?tracker.gap(ahead,car,now):null):0;
-  return {id:car.id,rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false,finished:!!car.finished,
+  return {id:car.id,rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,paint:d.paint||d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false,finished:!!car.finished,
    gap,gapText:!ahead?(car.finished?'סיים':'מוביל'):gapText(gap,{ahead,car,trackLength}),delta:watch?watch.delta(car.id,now):0,fastest:!!fastest&&fastest.id===car.id};});
 }
 
@@ -78,7 +78,7 @@ export function towerRows(state,{tracker=null,now=state.time,limit=10,watch=null
 export function classification(state,{tracker=null,now=state.time,league=false,trackLength=0}={}){
  const cars=[...state.cars].sort((a,b)=>a.rank-b.rank),winner=cars[0],fast=fastestLap(state.cars),mixed=cars.some(c=>c.scoring===false);   // racing-deep-m6: when the whole field scores (long league) the mark says nothing, so it is left off
  return cars.map(car=>{const idx=state.cars.indexOf(car),d=gridDriver(idx,car.name),gap=car===winner?0:tracker?tracker.gap(winner,car,now):null;
-  return {id:car.id,rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false,finished:!!car.finished,
+  return {id:car.id,rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,paint:d.paint||d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false,finished:!!car.finished,
    time:car.finished?car.finishTime:null,gap,gapText:car===winner?fmtTime(car.finished?car.finishTime:now):gapText(gap,{ahead:winner,car,trackLength}),
    league:league&&mixed&&car.scoring!==false,fastest:!!fast&&fast.id===car.id,bestLap:car.lapTimes.length?Math.min(...car.lapTimes):null};});
 }
@@ -87,7 +87,7 @@ export function classification(state,{tracker=null,now=state.time,league=false,t
 export function raceIntro(state,stage,track){
  const cars=[...state.cars].sort((a,b)=>a.rank-b.rank);
  return {track:track?.name||'',laps:state.laps,timeOfDay:TIME_LABEL[stage?.timeOfDay]||'',cars:cars.length,playerGrid:state.player?.rank||1,
-  grid:cars.map(car=>{const idx=state.cars.indexOf(car),d=gridDriver(idx,car.name);return {rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false};})};
+  grid:cars.map(car=>{const idx=state.cars.indexOf(car),d=gridDriver(idx,car.name);return {rank:car.rank,name:car.isPlayer?'אתם':car.name,number:d.number,color:d.color,paint:d.paint||d.color,isPlayer:!!car.isPlayer,scoring:car.scoring!==false};})};
 }
 
 /** Lower-third cards, one at a time; an urgent card (position change) replaces the one on screen. */
@@ -112,7 +112,7 @@ export function broadcastEvents(state,{changes=[],prevFastest=null,prevLaps=null
 /* ---------- DOM layer ---------- */
 const node=(tag,cls,text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const ltr=(tag,cls,text)=>{const n=node(tag,cls,text);n.dir='ltr';return n;};
-function chip(row,withName=true,art=false){const c=node('span','rb-chip');c.style.setProperty('--team',row.color);const crest=art?crestUrl(row.number):'';if(crest){const img=node('img','rb-crest');img.src=crest;img.alt='';img.width=img.height=16;img.decoding='async';c.classList.add('crest');c.append(img);}c.append(ltr('b','rb-no',String(row.number)));if(withName)c.append(node('span','rb-name',row.name));if(row.isPlayer)c.classList.add('you');return c;}
+function chip(row,withName=true,art=false){const c=node('span','rb-chip');c.style.setProperty('--team',row.paint||row.color);const crest=art?carCrest(row.number):'';if(crest){const img=node('img','rb-crest');img.src=crest;img.alt='';img.width=img.height=16;img.decoding='async';c.classList.add('crest');c.append(img);}c.append(ltr('b','rb-no',String(row.number)));if(withName)c.append(node('span','rb-name',row.name));if(row.isPlayer)c.classList.add('you');return c;}
 
 /** The broadcast layer of one race. update(state, dt, input) every frame after the view is ready; holding() is true while the intro card is up
  * (the session does not step the model then); podium(state, done) replaces the plain podium. */
@@ -155,7 +155,7 @@ export function createBroadcast({stage,model,league=false,signal=null,art=broadc
   const me=rows.find(r=>r.isPlayer),title=node('strong','racing-podium-title',state.result?.won?'ניצחון':me&&me.rank<=3?'על הפודיום':'סיום המרוץ');
   const steps=node('div','racing-podium-row rp-steps');
   for(const row of layout){const step=node('div','racing-podium-step place-'+row.rank);if(row.isPlayer)step.classList.add('you');
-   const sw=node('i','racing-podium-car');sw.style.background=row.color;step.append(sw,ltr('span','rp-step-no','#'+row.number),node('span','racing-podium-name',row.name),ltr('small','rp-step-time',row.rank===1?row.gapText:row.gapText||'--'),node('b','racing-podium-place',String(row.rank)));steps.append(step);}
+   const sw=node('i','racing-podium-car');sw.style.background=row.paint||row.color;step.append(sw,ltr('span','rp-step-no','#'+row.number),node('span','racing-podium-name',row.name),ltr('small','rp-step-time',row.rank===1?row.gapText:row.gapText||'--'),node('b','racing-podium-place',String(row.rank)));steps.append(step);}
   const table=node('ol','rp-table');table.setAttribute('aria-label','דירוג סופי');
   for(const row of rows){const li=node('li','rp-row');li.dataset.rank=String(row.rank);li.dataset.id=row.id;if(row.isPlayer)li.classList.add('you');if(row.fastest)li.classList.add('fastest');
    li.append(node('b','rp-pos',String(row.rank)),chip(row,true,art),ltr('span','rp-gap',row.gapText||''));if(row.league)li.append(node('em','rp-league','ליגה'));table.append(li);}

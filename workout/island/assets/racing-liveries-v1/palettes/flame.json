@@ -1,0 +1,33 @@
+{
+  "id": "flame",
+  "name": "להבה",
+  "license": "CC0-1.0",
+  "primary": "#d93228",
+  "secondary": "#501d25",
+  "stripe": "#f7f2e8",
+  "pinstripe": "#501d25",
+  "finish": {
+    "metalness": 0.36,
+    "roughness": 0.29,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.16
+  },
+  "cars": [
+    {
+      "driverId": "player",
+      "number": 1,
+      "variant": "A",
+      "stripeWidth": 0.07,
+      "pinstripeWidth": 0.008,
+      "numberPlate": "numbers/flame-1.png"
+    },
+    {
+      "driverId": "noa",
+      "number": 4,
+      "variant": "B",
+      "stripeWidth": 0.1,
+      "pinstripeWidth": 0.012,
+      "numberPlate": "numbers/flame-4.png"
+    }
+  ]
+}

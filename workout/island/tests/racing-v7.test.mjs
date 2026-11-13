@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {TRACKS,createTrack} from '../minigames/racing-tracks.mjs';
 import {OFFLINE_GAMES,isManagedPath,pathsFor} from '../ui/offline.mjs';
 import {V7_SLOT_CARS,V7_SLOT_COLORS,V7_FILES,V7_REQUIRED,v7Enabled,v7FileList,carLodsFor,carFile,lodDistances,pickLod,crowdSites,CROWD_CAP,CROWD_RADIUS} from '../minigames/racing-v7.mjs';
+import {LIVERY_FILES} from '../minigames/racing-liveries.mjs';
 
 const island=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=file=>readFile(path.join(island,file),'utf8');
@@ -122,10 +123,12 @@ test('offline: racing is a game group with exactly the v7 files and the formula 
  assert.deepEqual(Object.keys(manifest.games).sort(),Object.keys(OFFLINE_GAMES).sort());
  const V22=manifest.games.racing.filter(p=>/^assets\/(racing-crash-fx-v1|racing-broadcast-v1|racing-league-v1|racing-audio-v3)\//.test(p));   // the v22 Codex packages, listed one by one in tests/island-racing-assets-v22.test.mjs
  assert.ok(V22.length>=45);
- assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22].sort());
+ const V24=LIVERY_FILES.map(f=>'assets/racing-liveries-v1/'+f);   // racing-liveries-v1: exactly the runtime files of the loader (tests/island-racing-assets-v24.test.mjs)
+ assert.equal(V24.length,19);
+ assert.deepEqual([...manifest.games.racing].sort(),[...v7FileList().map(f=>'assets/racing-v7/'+f),'assets/racing-formula/formula.glb',...AUDIO_FILES,...V22,...V24].sort());
  for(const p of manifest.games.racing)assert.ok(isManagedPath('/workout/island/'+p),p);
  assert.ok(manifest.shell.includes('minigames/racing-v7.mjs')&&manifest.shell.includes('minigames/racing-v7-assets.mjs'));
- assert.ok(pathsFor(manifest,['racing']).length===48+V22.length);
+ assert.ok(pathsFor(manifest,['racing']).length===48+V22.length+V24.length);
  for(const other of ['soccer','hoops','alpine'])for(const p of manifest.games[other])assert.ok(!p.startsWith('assets/racing-v7/'),'only racing owns the v7 files');
 });
 

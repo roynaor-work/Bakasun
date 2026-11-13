@@ -1,0 +1,33 @@
+{
+  "id": "ocean",
+  "name": "אוקיינוס",
+  "license": "CC0-1.0",
+  "primary": "#18b6bd",
+  "secondary": "#064850",
+  "stripe": "#f7f2e8",
+  "pinstripe": "#064850",
+  "finish": {
+    "metalness": 0.36,
+    "roughness": 0.29,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.16
+  },
+  "cars": [
+    {
+      "driverId": "almog",
+      "number": 16,
+      "variant": "A",
+      "stripeWidth": 0.07,
+      "pinstripeWidth": 0.008,
+      "numberPlate": "numbers/ocean-16.png"
+    },
+    {
+      "driverId": "shemesh",
+      "number": 63,
+      "variant": "B",
+      "stripeWidth": 0.1,
+      "pinstripeWidth": 0.012,
+      "numberPlate": "numbers/ocean-63.png"
+    }
+  ]
+}

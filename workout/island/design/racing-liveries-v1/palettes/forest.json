@@ -1,0 +1,33 @@
+{
+  "id": "forest",
+  "name": "יער",
+  "license": "CC0-1.0",
+  "primary": "#7ac05a",
+  "secondary": "#234a36",
+  "stripe": "#182532",
+  "pinstripe": "#f7f2e8",
+  "finish": {
+    "metalness": 0.36,
+    "roughness": 0.29,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.16
+  },
+  "cars": [
+    {
+      "driverId": "rom",
+      "number": 27,
+      "variant": "A",
+      "stripeWidth": 0.07,
+      "pinstripeWidth": 0.008,
+      "numberPlate": "numbers/forest-27.png"
+    },
+    {
+      "driverId": "or",
+      "number": 14,
+      "variant": "B",
+      "stripeWidth": 0.1,
+      "pinstripeWidth": 0.012,
+      "numberPlate": "numbers/forest-14.png"
+    }
+  ]
+}

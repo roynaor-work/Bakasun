@@ -21,8 +21,8 @@ export function ensureLeagueStyle(root=document.head){
 }
 const ordinal=place=>`מקום ${place}`;
 const FIELD=LEAGUE_IDS.length;
-/** A small team-colour dot with the car number, the same colour racing-view paints on the car. */
-function chip(id){const d=id==='player'?driverById('player'):driverById(id);const c=el('span','rl-chip');c.style.setProperty('--team',d?.color||'#8a98a6');const n=el('b','rl-chip-no',String(d?.number??''));n.dir='ltr';c.append(n);return c;}
+/** A small team-colour dot with the car number, the same colour racing-view paints on the car (racing-liveries-v1: the team colour; ?racingLiveries=0 the driver's own). */
+function chip(id){const d=id==='player'?driverById('player'):driverById(id);const c=el('span','rl-chip');c.style.setProperty('--team',d?.paint||d?.color||'#8a98a6');const n=el('b','rl-chip-no',String(d?.number??''));n.dir='ltr';c.append(n);return c;}
 
 /** Calendar strip of the season: finished races (with place), the next one, and the locked rest. Scrolls sideways; the next race is centred. */
 function raceStrip(league){

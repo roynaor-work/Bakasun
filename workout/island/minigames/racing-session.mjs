@@ -7,6 +7,7 @@ import {createRacingTower, towerEnabled} from './racing-tower.mjs';
 import {createRacingSpeedometer} from './racing-speedometer.mjs?v=island-v2-20261107-11';
 import {createBroadcast, broadcastEnabled} from './racing-broadcast.mjs?v=island-v2-20261107-11';
 import {racingWallsOn, racingOffTrackOn, offTrackConfig} from './racing-offtrack.mjs?v=island-v2-20261107-11';
+import {LIVERIES, gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-11';
 
 /** Finishing order of the whole grid and the car with the fastest lap, for the league result path only. */
 export function leagueOrder(cars){
@@ -55,7 +56,7 @@ export function runRacingSession(ctx){
   const card=node('div','racing-podium');card.setAttribute('role','dialog');card.setAttribute('aria-label','פודיום');
   const title=node('strong','racing-podium-title',s.result.won?'ניצחון':s.player.rank<=3?'על הפודיום':'סיום המרוץ');card.append(title);
   const row=node('div','racing-podium-row');
-  for(const car of layout){const place=car.rank,step=node('div','racing-podium-step place-'+place),swatch=node('i','racing-podium-car');swatch.style.background=PODIUM_COLORS[Math.max(0,s.cars.indexOf(car))%PODIUM_COLORS.length];
+  for(const car of layout){const place=car.rank,step=node('div','racing-podium-step place-'+place),swatch=node('i','racing-podium-car');swatch.style.background=LIVERIES?gridDriver(Math.max(0,s.cars.indexOf(car))).paint:PODIUM_COLORS[Math.max(0,s.cars.indexOf(car))%PODIUM_COLORS.length];   // racing-liveries-v1: the team colour
    const name=node('span','racing-podium-name',car.isPlayer?'אתם':car.name);if(car.isPlayer)step.classList.add('you');step.append(swatch,name,node('b','racing-podium-place',String(place)));row.append(step);}
   card.append(row,node('small','racing-podium-note',s.player.rank>3?`סיימתם במקום ${s.player.rank} מתוך ${s.cars.length}`:'לחצו להמשך'));stage.append(card);
   let closed=false;const close=()=>{if(closed||disposed)return;closed=true;clearTimeout(timer);card.remove();done();};

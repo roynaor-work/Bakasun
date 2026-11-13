@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>צביעות המרוץ — שש קבוצות, שנים־עשר רכבים</title>
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="masthead">
+    <a href="preview.html" class="wordmark">האי שלי <span>/</span> מרוצים</a>
+    <span class="edition">צביעות הקבוצות <bdi>01 / 06</bdi></span>
+  </header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">ליגת המרוצים · סטודיו הצבע</p><h1>צבע אחד. זוג על המסלול.</h1></div>
+      <p class="intro-note">שש קבוצות. שנים־עשר רכבים.<br>זהות משותפת, מספר אישי.</p></div>
+    <section class="showcase" aria-labelledby="team-name">
+      <div class="stage-wrap">
+        <div class="stage-heading"><span id="stage-label">זוג רכבי הקבוצה</span><span class="stage-count" id="stage-count"></span></div>
+        <div id="stage" tabindex="0" role="img" aria-label="דגמי הקבוצה. גררו לסיבוב, חצים לסיבוב במקלדת, פלוס ומינוס להתקרבות."></div>
+        <div class="stage-footer"><span>גרירה לסיבוב · גלילה להתקרבות</span><span id="view-label">מבט קדמי</span></div>
+      </div>
+      <aside class="team-info">
+        <p class="eyebrow" id="team-index">קבוצה 01 / 06</p>
+        <h2 id="team-name">להבה</h2>
+        <p class="pair" id="pair-numbers"></p>
+        <p class="team-description">גוף בצבע הקבוצה, כנפיים בגוון עמוק ופס מרכזי שמחבר בין שני הרכבים.</p>
+        <div id="swatches" class="swatches"></div>
+        <div class="view-buttons" role="group" aria-label="זווית תצוגה">
+          <button type="button" data-view="front" aria-pressed="true">קדמי</button>
+          <button type="button" data-view="rear" aria-pressed="false">אחורי</button>
+          <button type="button" data-view="top" aria-pressed="false">מעל</button>
+        </div>
+        <button type="button" id="spin" class="spin" aria-pressed="false">סיבוב אוטומטי</button>
+        <a id="palette-link" class="download" download>הורדת לוח הצבעים <svg aria-hidden="true" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor"><path d="M8 1v10m-4-4 4 4 4-4M2 12v3h12v-3"/></svg></a>
+        <div id="number-links" class="number-links"></div>
+      </aside>
+    </section>
+    <div class="gallery-heading"><h2>כל הקבוצות</h2><p>בחרו זוג כדי לראות אותו מקרוב</p></div>
+    <div id="gallery" class="gallery" role="group" aria-label="בחירת קבוצה"></div>
+    <p id="status" class="status" role="status">טוען את הדגם והצביעות…</p>
+    <noscript><p>התצוגה התלת־ממדית דורשת JavaScript. לוחות הצבעים זמינים בתיקיית palettes ומדבקות המספר בתיקיית numbers.</p></noscript>
+  </main>
+  <footer><span>דגם הפורמולה הקיים · צביעות מקוריות · CC0</span><div><a href="REPORT.md">דוח המסירה</a><a href="LICENSES.md">מקורות ורישיונות</a></div></footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

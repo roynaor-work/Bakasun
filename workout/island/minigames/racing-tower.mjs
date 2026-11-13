@@ -4,7 +4,8 @@
 // the player always among them) with the car number, the team colour, a real time gap to the car ahead, an up/down arrow for 2.5 s after a
 // position change and a purple mark on the fastest lap. The old five-row tower stays for ?racingBroadcast=0.
 import {towerRows} from './racing-broadcast.mjs?v=island-v2-20261107-11';
-import {broadcastArtEnabled,crestUrl} from './racing-broadcast-art.mjs?v=island-v2-20261107-11';
+import {broadcastArtEnabled,carCrest} from './racing-broadcast-art.mjs?v=island-v2-20261107-11';
+import {LIVERIES,gridDriver} from './racing-league-core.mjs?v=island-v2-20261107-11';
 const COLORS=['#d93228','#18b6bd','#d6aa3b','#566bd1','#b7c2ca','#e07b39','#7ac05a','#a05fc4','#e0c3a1','#4b6a88'];
 export const towerEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingTower')!=='0';
 export const ROW_HEIGHT=12,TOWER_TOP=120,MIN_ROWS=5,MAX_ROWS=10;
@@ -33,7 +34,7 @@ export function createRacingTower(parent,{broadcast=null,art=broadcast?.art??bro
    const list=towerRows(state,{tracker:broadcast.tracker,now:state.time,limit,watch:broadcast.watch,fastest:broadcast.fastest?.()||null,trackLength:broadcast.trackLength||0});
    rows.forEach((r,i)=>{const car=list[i];r.row.style.display=car?'grid':'none';if(!car)return;
     r.row.classList.toggle('you',car.isPlayer);r.row.classList.toggle('fastest',car.fastest);r.row.classList.toggle('traffic',!car.scoring);r.row.dataset.id=car.id;r.row.dataset.delta=String(car.delta);
-    r.pos.textContent=String(car.rank);if(art){const crest=crestUrl(car.number);if(r.crest!==crest){r.crest=crest;r.bar.style.background=crest?`url("${crest}") center/contain no-repeat`:car.color;}}else r.bar.style.background=car.color;r.no.textContent=String(car.number);r.name.textContent=car.name;r.gap.textContent=car.gapText;r.arrow.textContent=car.delta>0?'▲':car.delta<0?'▼':'';});}
+    r.pos.textContent=String(car.rank);if(LIVERIES&&!art)r.bar.style.background=car.paint;else if(art){const crest=carCrest(car.number);if(r.crest!==crest){r.crest=crest;r.bar.style.background=crest?`url("${crest}") center/contain no-repeat`:car.paint||car.color;}}else r.bar.style.background=car.color;r.no.textContent=String(car.number);r.name.textContent=car.name;r.gap.textContent=car.gapText;r.arrow.textContent=car.delta>0?'▲':car.delta<0?'▼':'';});}
   return {update,rows:()=>limit,dispose(){globalThis.removeEventListener?.('resize',onResize);root.remove();}};
  }
  Object.assign(root.style,{position:'absolute',left:'10px',top:'128px',zIndex:'4',display:'grid',gap:'1px',font:'600 11px/1.15 system-ui,sans-serif',color:'#fff',direction:'rtl',pointerEvents:'none',textShadow:'0 1px 2px #000a'});
@@ -46,7 +47,7 @@ export function createRacingTower(parent,{broadcast=null,art=broadcast?.art??bro
   const shown=cars.slice(0,5);if(!shown.includes(player))shown.push(player);
   rows.forEach((r,i)=>{const car=shown[i];r.row.style.display=car?'grid':'none';if(!car)return;
    const ahead=cars[car.rank-2],gap=ahead?Math.max(0,(ahead.progress-car.progress)/Math.max(15,car.speed)):0,idx=state.cars.indexOf(car);
-   r.pos.textContent=String(car.rank);r.dot.style.background=COLORS[idx%COLORS.length];r.name.textContent=car.isPlayer?'אתם':car.name;
+   r.pos.textContent=String(car.rank);r.dot.style.background=LIVERIES?gridDriver(idx).paint:COLORS[idx%COLORS.length];r.name.textContent=car.isPlayer?'אתם':car.name;
    r.gap.textContent=car.finished?'סיים':ahead?'+'+gap.toFixed(1):'';r.row.style.borderInlineStartColor=car.isPlayer?'#ffd54a':'transparent';r.row.style.background=car.isPlayer?'#2a2410d8':'#0b1624c8';});}
  return {update,dispose(){root.remove();}};
 }

@@ -33,10 +33,13 @@ function stripeTexture(T,color,keep,accent='#14181c'){
  x.fillStyle=color;x.beginPath();x.moveTo(170,64);x.lineTo(230,0);x.lineTo(256,0);x.lineTo(256,64);x.lineTo(196,64);x.fill();
  const t=keep(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=4;return t;
 }
-/** Adds decals, brake lights and a wheel-blur disc to one formula car. `car` is the cloned model (rear at -Z, nose at +Z). Returns handles for per-frame updates. */
-export function dressCar(T,car,{index,color,keep,player=false,number=index+1,accent=teamOf(index).accent}){
+/** Adds decals, brake lights and a wheel-blur disc to one formula car. `car` is the cloned model (rear at -Z, nose at +Z). Returns handles for per-frame updates.
+ * racing-liveries-v1: decals:false leaves the four canvas decals out (the livery paints the number plates and the centre stripe itself); the brake lights stay. */
+export function dressCar(T,car,{index,color,keep,player=false,number=index+1,accent=teamOf(index).accent,decals:withDecals=true}){
  const decals=new T.Group();decals.name='decals';car.add(decals);
  const flat=(map,w,h,x,y,z,ry=0,rx=0)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(w,h)),keep(new T.MeshBasicMaterial({map,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,toneMapped:false})));m.position.set(x,y,z);m.rotation.set(rx,ry,0);decals.add(m);return m;};
+ if(withDecals)canvasDecals();
+ function canvasDecals(){
  const num=numberTexture(T,number,color,keep),stripe=stripeTexture(T,color,keep,accent);
  // rear face of the rear wing (the camera sits behind): number left, stripe right; nose top: number; engine cover side stripes
  flat(num,.52,.26,-.26,.92,-2.312,Math.PI);flat(stripe,.62,.16,.3,.92,-2.312,Math.PI);
@@ -44,6 +47,7 @@ export function dressCar(T,car,{index,color,keep,player=false,number=index+1,acc
  const rayY=(x,z)=>{down.set(new T.Vector3(x,3,z),new T.Vector3(0,-1,0));const hit=down.intersectObjects(mesh,false)[0];return hit?hit.point.y:null;};
  const noseY=rayY(0,1.35);if(noseY!=null)flat(num,.34,.17,0,noseY+.012,1.35,0,-Math.PI/2);
  const coverY=rayY(0,-.62);if(coverY!=null)flat(stripe,.3,.075,0,coverY+.012,-.62,0,-Math.PI/2);
+ }
  // brake lights: two emissive blocks on the wing endplates; intensity is set per frame
  const lampMaterial=keep(new T.MeshStandardMaterial({color:'#3a0808',emissive:'#ff1b10',emissiveIntensity:.25,roughness:.4}));
  const lamps=[-1,1].map(s=>{const m=new T.Mesh(keep(new T.BoxGeometry(.12,.1,.05)),lampMaterial);m.position.set(s*.62,.82,-2.3);car.add(m);return m;});
@@ -51,15 +55,17 @@ export function dressCar(T,car,{index,color,keep,player=false,number=index+1,acc
 }
 /** A cheap silhouette (about 150 triangles) shown instead of the 11.9K-triangle car when a rival is more than ~70 m from the camera, and the whole car of the extra rivals.
  * racing-deep-m2: it reads as a formula car from behind: nose, sidepods, airbox with a helmet, rear wing with endplates in the team accent, four wheels. */
-export function createStandIn(T,color,keep,accent='#15191d'){
+export function createStandIn(T,color,keep,accent='#15191d',stripe=null){
  // one merged, vertex-coloured mesh (a single draw call per far car)
  const paint=new T.Color(color),dark=new T.Color('#15191d'),team=new T.Color(accent),parts=[];
  const add=(geo,col,x,y,z,rz=0)=>{const g=geo.toNonIndexed();g.deleteAttribute('uv');if(rz)g.rotateZ(rz);g.translate(x,y,z);const n=g.attributes.position.count,c=new Float32Array(n*3);for(let i=0;i<n;i++){c[i*3]=col.r;c[i*3+1]=col.g;c[i*3+2]=col.b;}g.setAttribute('color',new T.BufferAttribute(c,3));parts.push(g);};
  add(new T.BoxGeometry(.6,.3,3.7),paint,0,.36,.1);add(new T.BoxGeometry(1.7,.26,1.5),paint,0,.34,-.2);     // monocoque and sidepods
- add(new T.BoxGeometry(.36,.26,.9),paint,0,.6,1.6);add(new T.BoxGeometry(2,.06,.6),paint,0,.2,1.9);          // nose and front wing
+ add(new T.BoxGeometry(.36,.26,.9),paint,0,.6,1.6);add(new T.BoxGeometry(2,.06,.6),stripe?team:paint,0,.2,1.9);   // nose and front wing (racing-liveries-v1: wings in the team's secondary colour)
  add(new T.BoxGeometry(.5,.42,.9),paint,0,.72,-.5);add(new T.SphereGeometry(.22,6,4),dark,0,.78,.25);          // airbox and helmet
  add(new T.BoxGeometry(1.35,.06,.5),team,0,.95,-2.05);for(const sx of [-1,1])add(new T.BoxGeometry(.05,.4,.5),team,sx*.68,.78,-2.05);   // rear wing and endplates
  for(const sx of [-1,1])for(const [z,r] of [[1.28,.34],[-1.26,.36]])add(new T.CylinderGeometry(r,r,.32,8),dark,sx*.95,r,z,Math.PI/2);
+ // racing-liveries-v1: the livery's centre stripe along the top of the front wing, nose, cockpit, airbox and rear wing (five thin boxes, 60 triangles)
+ if(stripe){const s=new T.Color(stripe.color),w=Math.max(.05,stripe.width||.07);for(const [y,z,len] of [[.236,1.9,.6],[.736,1.6,.9],[.516,.55,1.2],[.936,-.5,.9],[.986,-2.05,.5]])add(new T.BoxGeometry(w,.012,len),s,0,y,z);}
  const merged=keep(mergeGeometries(parts)),g=new T.Group(),m=new T.Mesh(merged,keep(new T.MeshStandardMaterial({vertexColors:true,metalness:.4,roughness:.4})));g.add(m);g.visible=false;return g;
 }
 /** 28 streaks around the view axis, attached to the camera; only visible at speed. One draw call. */

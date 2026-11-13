@@ -1,7 +1,7 @@
 // racing-broadcast-v1 (Codex, CC0; assets/racing-broadcast-v1, from design/racing-broadcast): a start gantry with five lamp materials, twelve team crests, a podium backdrop, a
 // leaderboard strip and a card frame. Off with ?racingBroadcastArt=0 (or ?racingBroadcast=0, whose HUD this art belongs to): the lamps of racing-env-v2, the colour bars and the plain
 // podium stay exactly as before. The DOM layer (racing-broadcast.mjs, racing-tower.mjs) and the 3D view (racing-view.mjs) read this module; nothing here touches the race model.
-import {GRID_DRIVERS} from './racing-league-core.mjs?v=island-v2-20261107-11';
+import {GRID_DRIVERS,LIVERIES} from './racing-league-core.mjs?v=island-v2-20261107-11';
 
 export const broadcastArtEnabled=(search=globalThis.location?.search||'')=>{const q=new URLSearchParams(search);return q.get('racingBroadcastArt')!=='0'&&q.get('racingBroadcast')!=='0';};
 export const ART_DIR='../assets/racing-broadcast-v1/';
@@ -12,6 +12,12 @@ export const ART_FILES=Object.freeze(['start-gantry.glb','podium.webp','leaderbo
 export const artUrl=file=>new URL(ART_DIR+file,import.meta.url).href;
 /** The crest of a car by its race number (numbers are unique on the grid); '' for a car outside it. */
 export function crestUrl(number){const i=GRID_DRIVERS.findIndex(d=>d.number===number);return i>=0?artUrl('teams/'+CREST_IDS[i]+'.svg'):'';}
+/** racing-liveries-v1: the team's crest of a car by its race number (the six league crests of racing-league-v1, drawn in the team colour), so both team-mates carry
+ * the same one, like their cars; '' for a car outside the grid. */
+export const TEAM_CREST_DIR='../assets/racing-league-v1/teams/';
+export function teamCrestUrl(number){const d=GRID_DRIVERS.find(x=>x.number===number);return d?new URL(TEAM_CREST_DIR+d.teamId+'.svg',import.meta.url).href:'';}
+/** The crest the tower and the chips show: the team crest with the liveries on, the driver crest with ?racingLiveries=0 (as before). */
+export const carCrest=(number,liveries=LIVERIES)=>liveries?teamCrestUrl(number):crestUrl(number);
 /** The class and style the DOM layer sets on a container so racing.css can use the panels (urls are relative to this module, not to the stylesheet). */
 export function applyPanelArt(el){el.classList.add('rb-art');el.style.setProperty('--rb-podium',`url("${artUrl('podium.webp')}")`);el.style.setProperty('--rb-strip',`url("${artUrl('leaderboard-strip.svg')}")`);el.style.setProperty('--rb-frame',`url("${artUrl('card-frame.svg')}")`);}
 /** How many of the five lamps are lit for a startLights() result. */

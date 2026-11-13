@@ -1,0 +1,245 @@
+{
+ "part": "racing-v24/off",
+ "query": "racingLiveries=0",
+ "liveries": false,
+ "full": false,
+ "browser": "Chromium / SwiftShader",
+ "physicalPhone": false,
+ "viewport": "844x390 hasTouch isMobile",
+ "steps": [
+  {
+   "at": 36.4,
+   "tap": "avatar"
+  },
+  {
+   "at": 48.3,
+   "tap": "משחקים"
+  },
+  {
+   "at": 52,
+   "tap": "מרוצים"
+  },
+  {
+   "at": 53,
+   "tap": "שחקו"
+  },
+  {
+   "at": 56.4,
+   "tap": "לליגה: המרוץ הבא"
+  },
+  {
+   "at": 69.8,
+   "view": "ready"
+  },
+  {
+   "at": 92.3,
+   "tap": "למרוץ"
+  },
+  {
+   "at": 293.3,
+   "tap": "pause"
+  },
+  {
+   "at": 300.7,
+   "tap": "exit"
+  }
+ ],
+ "shots": [
+  "1-league-card",
+  "2-grid-card",
+  "3-race-001s",
+  "3-race-003s",
+  "4-tower",
+  "3-race-006s"
+ ],
+ "laps": [
+  {
+   "lap": 1,
+   "at": 1.13,
+   "rank": 3,
+   "real": 191.6
+  }
+ ],
+ "events": null,
+ "leagueCardChips": [],
+ "grid": [
+  {
+   "no": 16,
+   "name": "אלמוג",
+   "team": "#18b6bd",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/wave.svg"
+  },
+  {
+   "no": 44,
+   "name": "טורקיז",
+   "team": "#d6aa3b",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sun.svg"
+  },
+  {
+   "no": 1,
+   "name": "אתם",
+   "team": "#d93228",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/flame.svg"
+  },
+  {
+   "no": 63,
+   "name": "שמש",
+   "team": "#566bd1",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sea.svg"
+  },
+  {
+   "no": 11,
+   "name": "ברקת",
+   "team": "#b7c2ca",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/silver.svg"
+  },
+  {
+   "no": 4,
+   "name": "נועה",
+   "team": "#e07b39",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sunset.svg"
+  },
+  {
+   "no": 27,
+   "name": "רום",
+   "team": "#7ac05a",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/forest.svg"
+  },
+  {
+   "no": 55,
+   "name": "דור",
+   "team": "#a05fc4",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/purple.svg"
+  },
+  {
+   "no": 81,
+   "name": "ים",
+   "team": "#e0c3a1",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sand.svg"
+  },
+  {
+   "no": 14,
+   "name": "אור",
+   "team": "#4b6a88",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/rock.svg"
+  },
+  {
+   "no": 22,
+   "name": "שקד",
+   "team": "#2b2f36",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/night.svg"
+  },
+  {
+   "no": 31,
+   "name": "גל",
+   "team": "#e8e6d2",
+   "crest": "http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/cloud.svg"
+  }
+ ],
+ "viewAtStart": {
+  "liveries": {
+   "enabled": false,
+   "active": false,
+   "reason": "off",
+   "cars": 0,
+   "plates": 0
+  },
+  "failures": [],
+  "carAsset": "racing-v7",
+  "drawCalls": 333,
+  "triangles": 209714,
+  "quality": 0
+ },
+ "controls": {
+  "gas": {
+   "x": 681,
+   "y": 253,
+   "width": 50,
+   "height": 50
+  },
+  "pad": {
+   "x": 0,
+   "y": 0,
+   "width": 422,
+   "height": 390
+  }
+ },
+ "tower": [
+  {
+   "no": 16,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/wave.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 44,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sun.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 1,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/flame.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 63,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sea.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 4,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sunset.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 11,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/silver.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 55,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/purple.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 27,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/forest.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 14,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/rock.svg\") center center / contain no-repeat"
+  },
+  {
+   "no": 81,
+   "bar": "url(\"http://127.0.0.1:35401/workout/island/assets/racing-broadcast-v1/teams/sand.svg\") center center / contain no-repeat"
+  }
+ ],
+ "race": {
+  "phase": "racing",
+  "time": 6.18,
+  "lap": 1,
+  "laps": 3,
+  "rank": 3,
+  "speed": 22.2,
+  "finished": false,
+  "crashT": 0,
+  "lapTimes": [],
+  "frames": 56,
+  "quality": 0,
+  "realSeconds": 106
+ },
+ "errors": [],
+ "outside": [],
+ "missing": [],
+ "realSeconds": 300.8,
+ "csp": {
+  "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "htmlResponsesSeen": 1,
+  "violations": [],
+  "policyErrors": [],
+  "workers": [
+   {
+    "url": "http://127.0.0.1:35401/workout/island/minigames/hoops-draco-worker.mjs",
+    "hooked": true,
+    "closed": true,
+    "waitingForDebugger": true,
+    "domains": {
+     "Log.enable": true,
+     "Audits.enable": true
+    }
+   }
+  ]
+ }
+}

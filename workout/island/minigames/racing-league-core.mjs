@@ -27,6 +27,17 @@ export const TEAMS = Object.freeze([
   { id: 'night', name: 'לילה', color: '#a05fc4', drivers: ['dor', 'shaked'] }
 ].map(Object.freeze));
 const teamOf = id => TEAMS.find(t => t.drivers.includes(id));
+/** racing-liveries-v1 (13/11/2026, Codex design/racing-liveries-v1): every driver races in the colour of the team, on the car, the grid card, the timing tower
+ * and the podium; the two team-mates share it and the car number and the stripe width tell them apart. ?racingLiveries=0 keeps each driver's own colour of
+ * racing-deep-m4 everywhere, exactly as before. `paint` is the colour shown; `color` stays the driver's own colour (data, unchanged). */
+export const liveriesEnabled = (search = globalThis.location?.search || '') => new URLSearchParams(search).get('racingLiveries') !== '0';
+export const LIVERIES = liveriesEnabled();
+/** The colour a driver's car wears: the team colour with liveries on, the driver's own colour with them off; a car outside the grid is neutral grey. */
+export function paintOf(driver, on = LIVERIES) {
+  if (!driver) return '#8a98a6';
+  const team = on && TEAMS.find(t => t.id === driver.teamId);
+  return team ? team.color : driver.color || '#8a98a6';
+}
 /** racing-deep-m4: the whole grid of twelve, fixed for every race and season: index = position in the race model's car list (0 = the player,
  * 1-11 = the computer drivers in the order racing-physics maps config.drivers[index-1]). number and colour are the ones racing-view.mjs paints
  * (CAR_NUMBERS / carColors), so the broadcast tower, the grid card and the podium match the cars on the track.
@@ -45,10 +56,10 @@ export const GRID_DRIVERS = Object.freeze([
   { id: 'or', name: 'אור', number: 14, color: '#4b6a88', style: 'בולם מאוחר', rating: 1.04 },
   { id: 'shaked', name: 'שקד', number: 22, color: '#2b2f36', style: 'שקט', rating: 1.06 },
   { id: 'gal', name: 'גל', number: 31, color: '#e8e6d2', style: 'חדש בליגה', rating: 0.95 }
-].map((d, i) => Object.freeze({ ...d, teamId: teamOf(d.id).id, team: teamOf(d.id).name, scoring: LONG || i < 5 })));
+].map((d, i) => Object.freeze({ ...d, teamId: teamOf(d.id).id, team: teamOf(d.id).name, scoring: LONG || i < 5, paint: LIVERIES ? teamOf(d.id).color : d.color })));
 /** Driver card for a car of the race model by its index in state.cars (an unknown index gets a neutral card with the car's own name). */
 export function gridDriver(index, name = '') {
-  return GRID_DRIVERS[index] || { id: 'car-' + index, name, number: 90 + index, color: '#8a98a6', team: '', teamId: '', style: '', scoring: false, rating: 1 };
+  return GRID_DRIVERS[index] || { id: 'car-' + index, name, number: 90 + index, color: '#8a98a6', paint: '#8a98a6', team: '', teamId: '', style: '', scoring: false, rating: 1 };
 }
 export const driverById = id => GRID_DRIVERS.find(d => d.id === id) || null;
 /** The computer drivers of the league in grid order (racing-physics: config.drivers[index-1] is car index). Long: eleven; short: the four of racing-v9. */

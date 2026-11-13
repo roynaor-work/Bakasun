@@ -7,6 +7,7 @@ import {createRacingF1, racingLookEnabled} from './racing-f1.mjs';
 import {envV2Enabled, loadEnvV2, buildEnvV2, bake as envBake} from './racing-env-v2.mjs';
 import {tunePaint, tuneMaterial, dressCar, createStandIn, createSpeedLines, CAR_COLORS, CAR_NUMBERS, teamOf} from './racing-car-look.mjs';
 import {racingWallsOn, CLEAR_ZONE} from './racing-offtrack.mjs?v=island-v2-20261107-11';
+import {GRID_DRIVERS, LIVERIES} from './racing-league-core.mjs?v=island-v2-20261107-11';
 
 const PALETTES={
  coast:{sky:'#b7dfed',fog:'#b9dfe7',sea:'#1eafa9',land:'#68a879',sand:'#e4cda1',curb:'#e77950',rock:'#b8a98a'},
@@ -68,7 +69,10 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  const scenery=createRacingScenery({T,scene,track,colors,keep,mat,seed,center,clear});scenery.setQuality(quality);
  // racing-deep-m7: the crash show flag (?racingCrashFx=0 = the m2 roll on the spot, no debris, no camera pull-back)
  const crashFxOn=new URLSearchParams(globalThis.location?.search||'').get('racingCrashFx')!=='0';let crashZoom=0;
- const effects=createRacingEffects({T,scene,track,keep,night,carColors:CAR_COLORS,crashFx:crashFxOn});
+ // racing-liveries-v1: every car in its team's colour (GRID_DRIVERS paint: both team-mates alike), also the debris, the beacon and the far silhouettes.
+ // ?racingLiveries=0 = each driver's own colour (CAR_COLORS) exactly as before.
+ const paintColors=LIVERIES?CAR_COLORS.map((c,i)=>GRID_DRIVERS[i]?.paint||c):CAR_COLORS;
+ const effects=createRacingEffects({T,scene,track,keep,night,carColors:paintColors,crashFx:crashFxOn});
  // racing-look-v1: Formula 1 trackside (run-off, gravel, tyre walls, pit building, start lights) on the F1 circuits only; ?racingLook=0 skips it
  const lookOn=racingLookEnabled(),f1Look=lookOn&&track.f1?createRacingF1({T,scene,track,keep,night,clear}):null;
  const vergeHeight=(y,distance)=>Math.max(-1.2,y-.07-Math.max(0,distance-track.width/2-2.1)*.18);
@@ -183,7 +187,13 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
 const formulaFlag=new URLSearchParams(globalThis.location?.search||'').get('racingFormulaCar');
 const formulaOn=formulaFlag==='1'||(formulaFlag!=='0'&&!lite);
 const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars keep the light model (fewer triangles and draw calls)
- const formulaAsset=formulaOn&&!disposed?await loadAsset('../assets/racing-formula/formula.glb').then(mergeFormula).catch(e=>{console.warn('formula',e?.message||e);failures.push('formula');return null;}):null;
+ // racing-liveries-v1: the Codex palettes (7 small JSON files) load next to the formula model, the number plates only for the formula cars. The paint parts are tagged
+ // before the merge below so one paint draw call per car stays. Any problem: failures gets 'liveries' and the cars keep the plain team colour.
+ let livery=null,liveryReason=LIVERIES?'':'off';
+ const liveryLoad=LIVERIES&&!disposed?import('./racing-liveries.mjs?v=island-v2-20261107-11').then(mod=>mod.loadLiveries({T,keep,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy()),
+  drivers:formulaOn?GRID_DRIVERS.slice(0,quality<2?FORMULA_CARS:1).map(d=>d.id):[]}).then(data=>({mod,data}))).catch(e=>{liveryReason=String(e?.message||e).slice(0,160);failures.push('liveries');console.warn('liveries',liveryReason);return null;}):Promise.resolve(null);
+ const formulaAsset=formulaOn&&!disposed?await loadAsset('../assets/racing-formula/formula.glb').then(async source=>{const loaded=await liveryLoad;if(loaded)try{loaded.mod.tagParts(T,source,loaded.data.mapping.material);livery=loaded;}catch(e){liveryReason=String(e?.message||e).slice(0,160);failures.push('liveries');}return mergeFormula(source);}).catch(e=>{console.warn('formula',e?.message||e);failures.push('formula');return null;}):null;
+ if(!formulaAsset&&!livery)livery=await liveryLoad;   // no formula model: the palettes still colour the far silhouettes
  // 40 primitives per car would cost 200 draw calls for five cars: every static part is merged per material once (wheels stay separate nodes so they can spin and steer).
  function mergeFormula(scene){
   scene.updateMatrixWorld(true);const groups=new Map(),wheelsList=[],out=new T.Group();out.name='Formula';
@@ -194,10 +204,11 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
    if(Array.isArray(o.material)){for(const group of geometry.groups||[]){}}
    const key=mats[0].uuid;let entry=groups.get(key);if(!entry){entry={material:mats[0],parts:[]};groups.set(key,entry);}entry.parts.push(geometry);});
   for(const {material,parts} of groups.values()){
-   const merged=new T.BufferGeometry(),indexed=parts.every(g=>g.index);let offset=0;const position=[],normal=[],uv=[],index=[];
-   for(const g of parts){const pos=g.attributes.position,nor=g.attributes.normal,tex=g.attributes.uv;for(let i=0;i<pos.count;i++){position.push(pos.getX(i),pos.getY(i),pos.getZ(i));if(nor)normal.push(nor.getX(i),nor.getY(i),nor.getZ(i));if(tex)uv.push(tex.getX(i),tex.getY(i));}
+   const merged=new T.BufferGeometry(),indexed=parts.every(g=>g.index);let offset=0;const position=[],normal=[],uv=[],index=[],livPart=parts.every(g=>g.attributes.livPart)?[]:null;
+   for(const g of parts){const pos=g.attributes.position,nor=g.attributes.normal,tex=g.attributes.uv;for(let i=0;i<pos.count;i++){position.push(pos.getX(i),pos.getY(i),pos.getZ(i));if(nor)normal.push(nor.getX(i),nor.getY(i),nor.getZ(i));if(tex)uv.push(tex.getX(i),tex.getY(i));if(livPart)livPart.push(g.attributes.livPart.getX(i));}
     if(g.index)for(let i=0;i<g.index.count;i++)index.push(g.index.getX(i)+offset);else for(let i=0;i<pos.count;i++)index.push(i+offset);offset+=pos.count;}
    merged.setAttribute('position',new T.Float32BufferAttribute(position,3));if(normal.length)merged.setAttribute('normal',new T.Float32BufferAttribute(normal,3));else merged.computeVertexNormals();if(uv.length===position.length/3*2)merged.setAttribute('uv',new T.Float32BufferAttribute(uv,2));merged.setIndex(index);
+   if(livPart)merged.setAttribute('livPart',new T.Float32BufferAttribute(livPart,1));   // racing-liveries-v1: body / rear wing / front wing / fin of the merged paint mesh
    const mesh=new T.Mesh(merged,material);mesh.name='FormulaPart';out.add(mesh);keep(merged);
   }
   for(const w of wheelsList){const c=w.clone(true);c.name=w.name;out.add(c);}
@@ -217,23 +228,27 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
  // attributed coupe supplies authored body panels, PBR paint and real wheels.
  const contactCanvas=document.createElement('canvas');contactCanvas.width=contactCanvas.height=64;const cc=contactCanvas.getContext('2d'),gr=cc.createRadialGradient(32,32,4,32,32,32);gr.addColorStop(0,'rgba(13,29,29,.6)');gr.addColorStop(1,'rgba(13,29,29,0)');cc.fillStyle=gr;cc.fillRect(0,0,64,64);const contactMap=keep(new T.CanvasTexture(contactCanvas));
  const blurMaterial=keep(new T.MeshBasicMaterial({color:'#15191d',transparent:true,opacity:0,depthWrite:false,side:T.DoubleSide})),blurDiscs=[],speedLines=lookOn?createSpeedLines(T,camera,scene,keep):null;
- const carColors=CAR_COLORS,paints=[],carCount=gridCount;
+ const carColors=paintColors,paints=[],carCount=gridCount;
+ let liveryCars=0,liveryPlates=0;
  for(let i=0;i<carCount;i++){
   const root=new T.Group(),body=new T.Group();root.add(body);scene.add(root);const wheels=[];
   const models=[];let dress=null,standIn=null,lightOnly=false;
   const rig=v7?.parts.cars[i],useFormula=!!formulaAsset&&(i===0||(quality<2&&i<FORMULA_CARS));
+  // racing-liveries-v1: this car's livery ({palette, car}) and the far silhouette's colours; null = the plain colour / the old accent
+  const lv=livery?.data.of(GRID_DRIVERS[i]?.id)||null,far=lv?livery.mod.standInColors(lv):null,plate=lv?livery.data.plates.get(lv.car.driverId)||null:null;
+  const standInFor=()=>createStandIn(T,carColors[i],keep,far?far.accent:teamOf(i).accent,far?{color:far.stripe,width:far.stripeWidth}:null);
   if(useFormula){
-   const car=formulaAsset.clone(true);car.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const list=Array.isArray(o.material)?o.material:[o.material],tinted=list.map(m=>{if(lookOn&&!/^Paint 1/.test(m.name)){tuneMaterial(m);return m;}if(!/^Paint 1/.test(m.name))return m;if(lookOn)return paints[i]||(paints[i]=tunePaint(T,m,carColors[i],keep));const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}
+   const car=formulaAsset.clone(true);car.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const list=Array.isArray(o.material)?o.material:[o.material],tinted=list.map(m=>{if(lookOn&&!/^Paint 1/.test(m.name)){tuneMaterial(m);return m;}if(!/^Paint 1/.test(m.name))return m;if(lv)return paints[i]||(paints[i]=keep(livery.mod.liveryMaterial(T,{palette:lv.palette,car:lv.car,mapping:livery.data.mapping,plate,envMapIntensity:lookOn?1.6:1})));if(lookOn)return paints[i]||(paints[i]=tunePaint(T,m,carColors[i],keep));const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}
     if(/^Wheel(Front|Rear)[LR]$/.test(o.name)){o.rotation.order='YXZ';wheels.push(o);}});
-   body.add(car);modelLoaded=true;
-   if(lookOn){dress=dressCar(T,car,{index:i,color:carColors[i],keep,player:i===0,number:CAR_NUMBERS[i]});
+   body.add(car);modelLoaded=true;if(lv){liveryCars++;if(plate){livery.mod.addRearPlate(T,car,plate,keep);liveryPlates++;}}
+   if(lookOn){dress=dressCar(T,car,{index:i,color:carColors[i],keep,player:i===0,number:CAR_NUMBERS[i],decals:!lv});
     for(const w of wheels){const d=new T.Mesh(keep(new T.CircleGeometry(.33,12)),blurMaterial);d.rotation.y=Math.PI/2;w.add(d);blurDiscs.push(d);}
-    if(i>0){standIn=createStandIn(T,carColors[i],keep,teamOf(i).accent);root.add(standIn);}}
+    if(i>0){standIn=standInFor();root.add(standIn);}}
   }
   // racing-grid-v1 extra rivals: the light model only. racing-deep-m2: with the formula asset loaded, every rival beyond the two nearest full models is the light formula
   // silhouette too (the v7 sports coupes next to formula cars broke the Formula 1 look); ?racingF1Field=0 brings the coupes back for cars 3-4.
-  else if((i>=5&&carCount>5)||(formulaAsset&&new URLSearchParams(globalThis.location?.search||'').get('racingF1Field')!=='0')){lightOnly=true;standIn=createStandIn(T,carColors[i],keep,teamOf(i).accent);standIn.visible=true;body.add(standIn);}
-  else if(rig){body.add(rig.root);modelLoaded=true;}
+  else if((i>=5&&carCount>5)||(formulaAsset&&new URLSearchParams(globalThis.location?.search||'').get('racingF1Field')!=='0')){lightOnly=true;standIn=standInFor();standIn.visible=true;body.add(standIn);}
+  else if(rig){body.add(rig.root);modelLoaded=true;if(LIVERIES)rig.setColor?.(carColors[i]);}
   else if(carAsset){
    function fitCar(source){const original=source.clone(true);original.rotation.y=carAssetName==='original-meshy'?Math.PI/2:0;const box=new T.Box3().setFromObject(original),size=box.getSize(new T.Vector3()),c=box.getCenter(new T.Vector3()),fit=new T.Group();original.position.set(-c.x,-box.min.y,-c.z);if(carAssetName==='sport-coupe')fit.scale.setScalar(4.6/size.z);else fit.scale.set(2.25/size.x,1.5/size.y,4.2/size.z);fit.add(original);body.add(fit);original.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;if(carAssetName==='sport-coupe'){const materials=Array.isArray(o.material)?o.material:[o.material];const tinted=materials.map(m=>{if(!/^Paint 1/.test(m.name))return m;const copy=keep(m.clone());copy.color.set(carColors[i]);copy.envMapIntensity=1;return copy;});o.material=Array.isArray(o.material)?tinted:tinted[0];}}if(/^Wheel(Front|Rear)[LR]$/.test(o.name))wheels.push(o);});models.push(fit);return fit;}
    fitCar(i===0?carAsset:(lowCarAsset||carAsset));if(i===0&&lowCarAsset)fitCar(lowCarAsset).visible=false;modelLoaded=true;
@@ -274,5 +289,5 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
   renderer.info.reset();renderer.render(scene,camera);
  }
  function dispose(){if(disposed)return;disposed=true;observer?.disconnect();sun.shadow.dispose();scenery.dispose();effects.dispose();scene.traverse(o=>{if(o.isInstancedMesh)o.dispose();});for(const r of resources)r.dispose?.();resources.clear();renderer.renderLists.dispose();renderer.dispose();renderer.forceContextLoss();}
- return {render,observeFrame,dispose,obstacles:()=>obstacles.map(o=>({...o})),setStartLamps(n){gantry?.light(n,night);},kick(a=.5){shakeA=.3+Math.max(0,Math.min(1,a))*.5;shakeT=.28;},metrics:()=>({mode:'webgl',quality,frames,frameMilliseconds,cameraBad,cameraFinite:Number.isFinite(camera.position.x+camera.position.y+camera.position.z),drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,countsIncludeShadowPasses:true,shadowsEnabled:renderer.shadowMap.enabled,visibleTrees:foliageParts[0]?.inst.count||0,treeLimit:[28,18,10][quality],scenery:scenery.metrics(),effects:effects.metrics(),crashAssets,gantry:gantry?gantry.metrics():null,f1:f1Look?.metrics?.()||null,envV2:envV2?.metrics()||null,v7:{enabled:v7On,active:!!v7,reason:v7Reason,lods:cars.map(c=>c.v7?c.v7.lod:-1),spectators:v7?{visible:v7.parts.crowd.visible,capacity:v7.parts.crowd.capacity,triangles:Math.round(v7.parts.crowd.triangles())}:null},modelLoaded,carAsset:carAssetName,vegetationLoaded:!!treeAsset,failures,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures})};
+ return {render,observeFrame,dispose,obstacles:()=>obstacles.map(o=>({...o})),setStartLamps(n){gantry?.light(n,night);},kick(a=.5){shakeA=.3+Math.max(0,Math.min(1,a))*.5;shakeT=.28;},metrics:()=>({mode:'webgl',quality,frames,frameMilliseconds,cameraBad,cameraFinite:Number.isFinite(camera.position.x+camera.position.y+camera.position.z),drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,countsIncludeShadowPasses:true,shadowsEnabled:renderer.shadowMap.enabled,visibleTrees:foliageParts[0]?.inst.count||0,treeLimit:[28,18,10][quality],scenery:scenery.metrics(),effects:effects.metrics(),crashAssets,gantry:gantry?gantry.metrics():null,f1:f1Look?.metrics?.()||null,envV2:envV2?.metrics()||null,v7:{enabled:v7On,active:!!v7,reason:v7Reason,lods:cars.map(c=>c.v7?c.v7.lod:-1),spectators:v7?{visible:v7.parts.crowd.visible,capacity:v7.parts.crowd.capacity,triangles:Math.round(v7.parts.crowd.triangles())}:null},modelLoaded,carAsset:carAssetName,liveries:{enabled:LIVERIES,active:!!livery,reason:liveryReason,cars:liveryCars,plates:liveryPlates},vegetationLoaded:!!treeAsset,failures,disposed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures})};
 }
