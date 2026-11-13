@@ -12,7 +12,8 @@
 <script type="module">
 import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-12';
 const out = document.getElementById('out'), st = document.getElementById('st'), log = s => { out.textContent += s + '\n'; };
-const audio = createCatchAudio(); window.audio = audio;
+// ?siren=v7: the v7 level (SIREN7 .55 of the v6 gain), as catch-session6.mjs plays it unless ?catchSiren=v6
+const audio = createCatchAudio(new URLSearchParams(location.search).get('siren') === 'v7' ? {sirenScale: .55} : {}); window.audio = audio;
 const report = {cues: {}, siren: {}, status: {}};
 let analyser = null, buf = null;
 const tap = () => {

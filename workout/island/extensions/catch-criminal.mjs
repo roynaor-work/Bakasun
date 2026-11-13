@@ -27,7 +27,7 @@ function runCatchSession6Lazy(ctx){
     dispose(){disposed=true;inner?.dispose();},
     get snapshot(){return inner?inner.snapshot:{ready:false,paused,disposed,error:null,mode:'loading',v2:true,phase:'loading',throwsLeft:null};},
     get engine(){return inner?.engine||null;},get chase(){return inner?.chase||null;},
-    get debug(){return inner?.debug;},get city(){return inner?.city;},get v2(){return true;},get v6(){return Boolean(inner?.v6);},
+    get debug(){return inner?.debug;},get city(){return inner?.city;},get v2(){return true;},get v6(){return Boolean(inner?.v6);},get v7(){return inner?.v7;},
   };
   import('../minigames/catch-session6.mjs?v=island-v2-20261107-12').then(({runCatchSession6})=>{
     if(disposed)return;inner=runCatchSession6(ctx);if(paused)inner.setPaused(true);

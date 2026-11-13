@@ -4,10 +4,13 @@
  * one-shot cues below the 'catch' chord peak +20%; a gentle limiter before the destination so stacked cues do not clip.
  * v5 (catch-session.mjs) and v6 (catch-session6.mjs) share this file: every cue name that existed keeps working. */
 const CUE_NAMES = ['tool', 'swing', 'whoosh', 'thud', 'miss', 'catch', 'perfect', 'engine', 'siren', 'count', 'countdown', 'go', 'crash', 'crimCrash', 'pad', 'scrape', 'ram', 'nitro', 'brake', 'near', 'bossHit', 'stars',
-  'turn', 'shot', 'shotHit', 'flat', 'skid', 'draw', 'twang', 'whistle', 'hitBody', 'hitHead'];
+  'turn', 'shot', 'shotHit', 'flat', 'skid', 'draw', 'twang', 'whistle', 'hitBody', 'hitHead',
+  'pickup', 'toolSwap', 'sticky', 'spikes', 'zap', 'tracker', 'slowmo'];
 export {CUE_NAMES};
 
-export function createCatchAudio({muted = () => false} = {}) {
+/** `sirenScale` (v7: .55, about -5.2 dB) turns the police siren down so the engine and the other cues are heard; 1 = v6. */
+export function createCatchAudio({muted = () => false, sirenScale = 1} = {}) {
+  const SIREN_SCALE = Math.max(0, Math.min(1.5, Number(sirenScale) || 0));
   let ac = null, master = null, limiter = null, paused = false, disposed = false, unlockBound = false;
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // ----- recorded siren loops: fetched at creation (no context needed), decoded once a context exists -----
@@ -69,7 +72,7 @@ export function createCatchAudio({muted = () => false} = {}) {
     osc.type = 'sawtooth'; osc2.type = 'square'; lp.type = 'lowpass'; lp.frequency.value = 2400;
     for (const o of [osc, osc2]) { o.frequency.setValueAtTime(from, t0); o.frequency.linearRampToValueAtTime(to, t0 + .38); }
     osc2.detune.value = 7;
-    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.07, t0 + .03); g.gain.setValueAtTime(.07, t0 + .34); g.gain.linearRampToValueAtTime(0, t0 + .39);
+    const peak = .07 * SIREN_SCALE; g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(peak, t0 + .03); g.gain.setValueAtTime(peak, t0 + .34); g.gain.linearRampToValueAtTime(0, t0 + .39);
     osc.connect(lp); osc2.connect(lp); lp.connect(g).connect(out()); osc.start(t0); osc2.start(t0); osc.stop(t0 + .41); osc2.stop(t0 + .41);
   };
   const noise = (dur, {gain = .1, from = 1800, to = 500, delay = 0, q = 1.2, hold = 0} = {}) => {
@@ -93,7 +96,7 @@ export function createCatchAudio({muted = () => false} = {}) {
     const a = ready(); if (!a) return false;
     decodeLoop(id); const buf = buffers[id]; if (!buf) return false;
     if (live && live.id !== id) stopLoop();
-    const target = SIREN_GAIN * level;
+    const target = SIREN_GAIN * level * SIREN_SCALE;
     if (!live) {
       const src = a.createBufferSource(), g = a.createGain(); src.buffer = buf; src.loop = true; src.playbackRate.value = rate;
       g.gain.setValueAtTime(0, a.currentTime); g.gain.linearRampToValueAtTime(target, a.currentTime + .2); src.connect(g).connect(out()); src.start(); live = {id, src, g};
@@ -214,6 +217,14 @@ export function createCatchAudio({muted = () => false} = {}) {
     near: () => { noise(.3, {gain: .1, from: 3500, to: 900}); tone(900, .25, {type: 'sine', gain: .06, slide: -500}); },
     bossHit: () => { tone(140, .35, {type: 'sawtooth', gain: .13, slide: -60}); noise(.25, {gain: .1, from: 2200, to: 500}); tone(784, .2, {type: 'triangle', gain: .09, delay: .12}); },
     stars: () => [659, 784, 988].forEach((f, i) => tone(f, .22, {type: 'triangle', gain: .1, delay: .22 * i})),
+    // ----- v7: chase elements and tools (cartoon: chimes, pops and zaps, nothing like a real firearm) -----
+    pickup: () => { tone(988, .1, {type: 'triangle', gain: .09}); tone(1480, .14, {type: 'triangle', gain: .07, delay: .06}); },
+    toolSwap: () => { tone(740, .05, {type: 'square', gain: .035}); tone(1110, .06, {type: 'triangle', gain: .05, delay: .045}); },
+    sticky: () => { noise(.25, {gain: .08, from: 900, to: 300, q: 2}); tone(180, .3, {type: 'sine', gain: .1, slide: -90}); },
+    spikes: () => { noise(.18, {gain: .1, from: 4200, to: 1600}); for (let i = 0; i < 4; i++) tone(2400 - i * 200, .05, {type: 'triangle', gain: .045, delay: .04 + i * .05}); noise(.5, {gain: .07, from: 5200, to: 2400, q: .9, delay: .2}); },
+    zap: () => { tone(1800, .22, {type: 'sawtooth', gain: .05, slide: -1500}); noise(.2, {gain: .06, from: 6000, to: 2500, q: 3, delay: .03}); },
+    tracker: () => { tone(1320, .07, {type: 'sine', gain: .07}); tone(1320, .07, {type: 'sine', gain: .07, delay: .12}); },
+    slowmo: () => { tone(520, .45, {type: 'sine', gain: .05, slide: -260}); noise(.4, {gain: .035, from: 1600, to: 400}); },
   };
   return {
     cue(name, arg) { try { cues[name]?.(arg); } catch { /* audio is optional */ } },
@@ -226,7 +237,7 @@ export function createCatchAudio({muted = () => false} = {}) {
         state: ac ? ac.state : 'none',
         sirenBuffer: live?.id || (buffers.twoTone ? 'twoTone' : buffers.yelp ? 'yelp' : null),
         sirenDecoded: Object.fromEntries(Object.keys(LOOPS).map(id => [id, buffers[id] ? +buffers[id].duration.toFixed(3) : null])),
-        sirenLive: Boolean(live), sirenGain: live ? +live.g.gain.value.toFixed(3) : 0,
+        sirenLive: Boolean(live), sirenGain: live ? +live.g.gain.value.toFixed(3) : 0, ...(SIREN_SCALE !== 1 ? {sirenScale: SIREN_SCALE} : {}),
         engine: Boolean(eng), boosting: Boolean(eng?.boosting), draw: Boolean(drawOsc), limiter: Boolean(limiter),
       };
     },

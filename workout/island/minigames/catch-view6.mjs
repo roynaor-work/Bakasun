@@ -2,7 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {createActor} from './catch-actors.mjs?v=island-v2-20261107-12';
 import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-12';
-import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, blobShadow, fitModel, rigCar, lightOn, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-12';
+import {FILES, BUILDINGS, THEMES, Particles, canvasTexture, skyTexture, tileTexture, glowTexture, starTexture, netTexture, blobShadow, fitModel, rigCar, lightOn, clamp, lerp, damp, smooth} from './catch-gfx.mjs?v=island-v2-20261107-12';
 
 /** v6 Three.js view of "תפוס את הפושע": the city street is built along the chase track (catch-track.mjs): a road ribbon
  * with lane markings and kerbs, sidewalks, buildings, lamps and trees placed by distance along the track and offset
@@ -174,8 +174,10 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   const observer = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; observer?.observe(canvas.parentElement || canvas);
   const placeOnTrack = (obj, s, d, yawExtra = 0) => { track.toWorld(s, d, tmp2); obj.position.set(tmp2.x, obj.position.y, tmp2.z); obj.rotation.y = track.yawAt(s) + yawExtra; };
 
-  let mode = 'chase', phase = 0, fx = null, bow = null, engine = null, frame = null, skidSpin = 0;
+  let mode = 'chase', phase = 0, fx = null, fx7 = null, bow = null, engine = null, frame = null, skidSpin = 0;
   import('./catch-tyre-fx.mjs?v=island-v2-20261107-12').then(m => { if (m.createTyreFx && !signal?.aborted) fx = m.createTyreFx({T, scene, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, blobShadow}}); }).catch(() => { fx = null; });
+  // v7: nitro orbs, police roadblocks, the tools (spike strip, sticky net, pulse, tracker and helicopter), oil on the thief
+  if (chase.v7?.weapons || chase.v7?.elements) import('./catch-chase-fx7.mjs?v=island-v2-20261107-12').then(m => { if (m.createChaseFx7 && !signal?.aborted && mode === 'chase') fx7 = m.createChaseFx7({T, scene, track, chase, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, netTexture}, theme, low}); }).catch(() => { fx7 = null; });
 
   function updateChase(dt) {
     const st = chase.state, c = st.crim;
@@ -205,6 +207,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     // obstacles in the window
     const lo = st.s - 30, hi = st.s + 160;
     for (const o of chase.obstacles) {
+      if (o.kind === 'nitro') continue; // drawn by catch-chase-fx7.mjs (instanced)
       const os = chase.obstacleS(o, st.t), inside = os > lo && os < hi, entry = props.get(o.id);
       if (inside && !entry) props.set(o.id, {root: makeProp(o), o});
       else if (!inside && entry) { scene.remove(entry.root); props.delete(o.id); }
@@ -228,6 +231,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     cam.bank = damp(cam.bank, -st.steer * .04 - st.slide * .006 - st.curvature * st.v * .012, 6, dt); camera.rotateZ(cam.bank);
     for (const l of lamps) l.material.opacity = .85 + Math.sin(phase * 3 + l.position.x) * .08;
     fx?.update(dt, {thiefSpeed: c.v, flatCount: chase.gun.state.flatCount, skid: st.phase === 'skid'});
+    fx7?.update(dt);
   }
   const dispatch = {
     chase(events) {
@@ -241,7 +245,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
         else if (e.type === 'pad') sparks.emit(playerCar.position.x, .3, playerCar.position.z, 12, {speed: 2.5, up: 2.5, color: [.5, 1, .7], life: .6});
         else if (e.type === 'skid') { cam.shake += .5; }
       }
-      fx?.handle(events);
+      fx?.handle(events); fx7?.handle(events);
     },
   };
 
@@ -276,13 +280,13 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
 
   const api = {
     renderer, scene, camera, models, track, sparks, dust, playerCar, crimCar,
-    get mode() { return mode; }, get bow() { return bow; }, get officer() { return officer; }, get thieves() { return thieves; },
+    get mode() { return mode; }, get bow() { return bow; }, get officer() { return officer; }, get thieves() { return thieves; }, get fx7() { return fx7; },
     shake(amount = 1) { cam.shake = Math.min(1.6, cam.shake + amount); },
     enterChase() { mode = 'chase'; },
     handleChase(events) { dispatch.chase(events); },
     /** After the chase the throw engine takes over the same street at the thief's stop. Resolves when the bow stage is ready. */
     async bindThrow(next, fr) {
-      engine = next; frame = fr; mode = 'throw';
+      engine = next; frame = fr; mode = 'throw'; fx7?.leave?.();
       for (const [, e] of props) { if (e.o.kind !== 'parked' && e.o.kind !== 'barrier') { scene.remove(e.root); props.delete(e.o.id); } }
       playerCar.visible = true; cam.shake = 0;
       await makeBowStage(next, fr);
@@ -300,7 +304,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     },
     resize,
     dispose() {
-      observer?.disconnect(); bow?.dispose?.(); bowFallback?.dispose?.(); fx?.dispose?.();
+      observer?.disconnect(); bow?.dispose?.(); bowFallback?.dispose?.(); fx?.dispose?.(); fx7?.dispose?.();
       scene.traverse(o => { o.geometry?.dispose?.(); const m = o.material; if (m) for (const mm of Array.isArray(m) ? m : [m]) { mm.map?.dispose?.(); mm.dispose?.(); } });
       officer?.dispose(); for (const t of thieves) t.actor.dispose();
       renderer.dispose(); renderer.forceContextLoss?.();

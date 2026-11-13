@@ -155,6 +155,8 @@ export function createBowStage({T, scene, camera, models, officer, thieves, fram
     leave() { mode = 'idle'; rig.visible = false; officer.root.visible = true; sight.visible = false; dots.forEach(d => { d.visible = false; }); landRing.visible = false; halo.visible = false; for (const fl of flags) fl.g.visible = false; for (const b of bursts) b.visible = false; missRing.visible = false; endFlight(); },
     /** How far the thief is, in metres, for the HUD label. */
     thiefDistance() { const c = engine.criminalAt(engine.clock); return Math.hypot(c.x, c.z); },
+    /** Engine coordinates (x forward, z sideways) to the world, for HUD markers such as the v7 lead marker. */
+    toWorld(x, z = 0) { const o = {}; w(x, z, o); return {x: o.x, z: o.z}; },
     /** World point of the sight pin (null when there is none). */
     sightWorld() { if (!sightLocal) return null; w(sightLocal.x, sightLocal.z, tmp); return {x: tmp.x, y: sightLocal.y, z: tmp.z}; },
     /** The HUD tells the stage how far the string is drawn (0..1) and the hold sway it applied. */
