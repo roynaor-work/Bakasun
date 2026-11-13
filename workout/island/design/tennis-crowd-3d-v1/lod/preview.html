@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; worker-src 'none'">
+<title>קהל טניס — שלוש רמות פירוט</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<script type="importmap">{"imports":{"three":"../../../vendor/three.module.js"}}</script>
+<main>
+  <header><span class="eyebrow">טניס באי / מחקר נכסים / LOD V1</span><h1>600 אוהדים.<br>מקום לכל פרט.</h1><p>12 וריאציות, שלוש רמות פירוט ומעבר מדורג לפי מרחק.</p></header>
+  <section aria-labelledby="crowd-title"><div class="section-title"><h2 id="crowd-title">הקהל המלא</h2><span id="caption">מצלמת המשחק</span></div>
+    <canvas id="view" aria-label="יציע עם כל 600 האוהדים"></canvas>
+    <nav aria-label="מצלמות"><button data-camera="landscape" aria-pressed="true">משחק · רוחב</button><button data-camera="portrait">משחק · גובה</button><button data-camera="side">צד</button><button data-camera="rear">מאחור</button><button data-camera="close">תקריב</button></nav>
+    <div class="controls"><label>מצב <select id="mode"><option value="after">אחרי · LOD לפי מרחק</option><option value="before">לפני · LOD0 לכולם</option></select></label><button id="cheer">חגיגה</button><label><input id="auto" type="checkbox" checked> חגיגה מחזורית</label><label>תנועת מצלמה <input id="travel" type="range" min="0" max="100" value="0"></label></div>
+    <div class="numbers" aria-live="polite"><div><strong id="fans">600</strong><span>אוהדים</span></div><div><strong id="triangles">—</strong><span>משולשי קהל, כולל חפיפה</span></div><div><strong id="draws">—</strong><span>קריאות ציור לקהל</span></div><div><strong id="fps">—</strong><span>FPS חי</span></div></div>
+    <p id="distribution"></p><p id="status" role="status">טוען 36 מודלים…</p>
+  </section>
+  <section aria-labelledby="levels-title"><div class="section-title"><h2 id="levels-title">אותה וריאציה, שלוש רמות</h2><label>וריאציה <select id="variant" aria-label="וריאציה"></select></label></div>
+    <div class="level-headings" dir="ltr"><span>LOD0 · 210</span><span>LOD1 · 90</span><span>LOD2 · 24</span></div>
+    <canvas id="levels" aria-label="שלוש רמות הפירוט מוצגות זו לצד זו"></canvas>
+    <div class="controls"><label>סיבוב הדמות <input id="yaw" type="range" min="0" max="360" value="0"></label><label>הרמת ידיים <input id="arms" type="range" min="0" max="100" value="0"></label></div>
+    <p>כל שלוש הרמות בעלות נפח, צבעי עור ושיער תואמים ואנימציית ידיים. LOD2 הוא דמות תלת־ממדית מעוצבת של 24 משולשים.</p>
+  </section>
+  <section aria-labelledby="measure-title"><div class="section-title"><h2 id="measure-title">לפני ואחרי · מדידת תוכנה</h2><button id="benchmark">מדידה במצלמה הנוכחית</button></div>
+    <p>אותו יציע ואותם 600 מושבים בשני המצבים. הטבלה שומרת את המדידות המצורפות; הכפתור מוסיף מדידה מקומית. FPS מתייחס לתצוגה זו במעבד תוכנה, ולא למשחק המלא או לטלפון.</p>
+    <div class="table-wrap"><table><thead><tr><th>מצלמה</th><th>מצב</th><th>LOD0 / 1 / 2 פעילים</th><th>משולשי קהל</th><th>קריאות קהל</th><th>משולשי סצנה</th><th>קריאות סצנה</th><th>FPS</th></tr></thead><tbody id="measurements"></tbody></table></div>
+    <p id="machine"></p><a id="download" download="tennis-lod-measurement.json" hidden>הורדת המדידה המקומית</a>
+  </section>
+  <section><h2>התפלגות ותקציב</h2><p>מעבר 0→1 סביב 19 מטר, מעבר 1→2 סביב 31 מטר. החפיפה היא 20% מהמרחק: 17.1–20.9 ו־27.9–34.1 מטר. שני המודלים המשתתפים נספרים במלואם. בתקריב, מגבלת התקציב מקטינה את שני המרחקים יחד.</p>
+    <div class="table-wrap"><table><thead><tr><th>וריאציה</th><th>LOD0</th><th>LOD1</th><th>LOD2</th><th>בתים, שלוש הרמות</th></tr></thead><tbody id="assets"></tbody></table></div>
+  </section>
+  <footer><a href="REPORT.md">דוח ותוצאות</a><a href="lod-config.json">הגדרות LOD</a><a href="measurements.json">מדידות גולמיות</a><span>CC0 · ללא Draco או WASM</span></footer>
+</main><script type="module" src="preview.mjs"></script>
+</html>

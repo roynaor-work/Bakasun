@@ -3,8 +3,10 @@
 // download" and the last load report of each game with a copy button.
 import {OFFLINE_GAMES,offlineStatus,downloadGames,checkAndDownload,offlineSupported,megabytes} from './offline.mjs';
 import {reportPanel} from './load-report.mjs';
+import {DATA_VERSION} from '../release.mjs';
 
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
+export function versionLine(version=DATA_VERSION){return `גרסה: ${version}`;}
 export function describeProgress(p){return `מוריד ${p.done} מתוך ${p.total} · ${p.percent}%`;}
 export function describeStatus(status){
   if(!status.supported)return 'ההורדה למכשיר לא זמינה בדפדפן הזה. המשחקים נטענים מהרשת.';
@@ -20,7 +22,8 @@ export function offlinePanel({onChange=()=>{}}={}){
   const games=node('ul','offline-games');
   const download=node('button','primary-button','הורדת כל המשחקים למכשיר');download.type='button';download.dataset.action='offline-download-all';
   const check=node('button','secondary-button','בדיקת עדכון והורדה');check.type='button';check.dataset.action='offline-check-update';
-  panel.append(heading,status,bar,games,download,check);
+  const versionRow=node('p','offline-version',versionLine());versionRow.dataset.appVersion='';
+  panel.append(heading,status,bar,games,download,check,versionRow);
   const busy=value=>{download.disabled=value;check.disabled=value;bar.hidden=!value;};
   async function refresh(){
     try{
