@@ -1,0 +1,22 @@
+{
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "testFilesChanged": false,
+  "fullSuite": {
+    "command": "npm test",
+    "tests": 3970,
+    "passed": 3905,
+    "failed": 1,
+    "skipped": 64,
+    "failure": "tests/workout-royiki.test.mjs:91; Playwright default chromium_headless_shell-1234 executable is absent from this environment",
+    "note": "The failed browser launch left the pre-existing test server open; that worker was terminated after all other tests completed. The original launch error is retained as the one failure."
+  },
+  "failedFileRerun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/athlete-v2-system-playwright.mjs node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "configuration": "Existing helper's ISLAND_PLAYWRIGHT override points to an external temporary adapter that sets executablePath to /usr/bin/chromium on launch. All test arguments and assertions are preserved.",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 21204.085999
+  }
+}
