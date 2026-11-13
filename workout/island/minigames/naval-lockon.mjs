@@ -46,16 +46,18 @@ export function navalLockPick(enemies,project,point,width,height,config,balance)
  * is at the moment of contact; when it meets another hull or nothing, move it to where the locked hull is at the end of the flight (a
  * forecast with the locked hull alone); repeat until the point stands still (`settle` units). The first candidate that meets the locked
  * hull wins (`status:'ready'`). Otherwise the full-power answer is returned honestly: 'far' (beyond the shell's reach), 'blocked'
- * (another hull is in the way), 'miss' (for example a submarine under water). `warm` (the previous answer's point for the same hull,
- * weapon and power) starts the refinement where it ended, so a lock that is already on target costs one launch and one forecast.
- * A guided missile homes by itself and a repair kit needs no aim (bearing only). Every answer is a real launch flown by the same physics. */
+ * (another hull is in the way; only then are the steeper arcs tried), 'miss' (the shell meets nothing, for example a submarine that will
+ * be under water). `warm` (the previous ready answer for the same hull and weapon) is tried first and starts the refinement where it
+ * ended, so a lock that stays on target costs one launch and one forecast per refresh. A guided missile homes by itself and a repair
+ * kit needs no aim (bearing only). Every answer is a real launch flown by the same physics. */
 export function navalLockSolve({ship,target,enemies,wind,kind=0,pressure=1,context={},targetable=e=>e.active&&e.hp>0,elevation,warm=null},balance,config){
  const c=config||navalLockConfig(balance),b=navalBallisticConfig(balance),bearing=Math.atan2(target.z-(ship.z||0),target.x-ship.x);
  if(kind===1||kind===5)return {yaw:bearing,elevation:Number.isFinite(elevation)?elevation:b.defaultElevation,power:1,reachable:true,status:'ready',contact:{index:target.index},guided:true};
- const only=e=>e.index===target.index&&targetable(e),all=kind===3?()=>false:targetable,settle=c.settle??1.5;
- const powers=kind===2?[1]:c.powers;let first=null;
+ const only=e=>e.index===target.index&&targetable(e),all=kind===3?()=>false:targetable,settle=c.settle??1.5,base=kind===2?[1]:[...c.powers];
+ const hot=warm&&warm.status==='ready'&&warm.index===target.index&&warm.kind===kind&&base.includes(warm.candidate)&&Number.isFinite(warm.point?.x);
+ const powers=hot?[warm.candidate,...base.filter(p=>p!==warm.candidate)]:base;let first=null;
  for(const p of powers){
-  const fromWarm=warm&&warm.index===target.index&&warm.kind===kind&&warm.candidate===p&&Number.isFinite(warm.point?.x);
+  const fromWarm=hot&&warm.candidate===p;
   let point=fromWarm?{x:warm.point.x,z:warm.point.z}:{x:target.x,z:target.z},result=null;
   for(let i=0;i<c.iterations;i++){
    const s=navalSolveLaunch(ship,point,{power:p,wind,ammo:kind,pressure},balance);
@@ -67,10 +69,12 @@ export function navalLockSolve({ship,target,enemies,wind,kind=0,pressure=1,conte
   }
   if(!result)continue;
   const {s,check}=result,settings={yaw:s.yaw,elevation:kind===2?0:s.elevation,power:kind===2?s.power:p,reachable:Boolean(s.reachable),point:result.point,kind,index:target.index,candidate:p};
-  if(!settings.reachable){if(p===powers[0])return {...settings,status:'far',contact:null,end:check.end||null,flight:check.flight??null};continue;}
+  if(!settings.reachable){if(p===base[0])return {...settings,status:'far',contact:null,end:check.end||null,flight:check.flight??null};continue;}
   if(kind===3)return {...settings,status:'ready',contact:{index:target.index,mine:true},end:check.end||null,flight:check.flight??null};
   const answer={...settings,contact:check.contact,end:check.end,flight:check.flight,status:check.contact?.index===target.index?'ready':check.contact?'blocked':'miss'};
-  if(answer.status==='ready')return answer;first??=answer;
+  if(answer.status==='ready')return answer;if(p===base[0])first=answer;
+  // A steeper arc only helps over a hull that stands in the way; when the flattest shell meets nothing, neither will they.
+  if(p===base[0]&&answer.status==='miss')return answer;
  }
  return first||{yaw:bearing,elevation:b.defaultElevation,power:1,reachable:false,status:'far',contact:null,end:null,flight:null};
 }

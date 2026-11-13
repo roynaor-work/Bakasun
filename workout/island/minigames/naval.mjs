@@ -183,8 +183,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   return {...pr,contact,end,flight:end.t,over:null,safe:Boolean(contact),safeCritical:Boolean(contact?.critical),lead:null,forecast:true,locked:true};
  }
  function unlock(reason){if(homing)unlocked={index:homing.index,reason,time};homing=null;}
- /** A miss on a submarine under water reads 'dive' (wait for it to surface, or pick the guided missile or a mine). */
- const lockWord=status=>{const e=status==='miss'&&lockTarget();return e&&balance.shipTypes[e.kind]?.submarine&&e.depth>balance.combat.submarineHitDepth?'dive':status;};
+ /** A miss on a submarine reads 'dive': the forecast has it under water when the shell arrives (wait for it to surface, or pick the guided missile or a mine). */
+ const lockWord=status=>{const e=status==='miss'&&lockTarget();return e&&balance.shipTypes[e.kind]?.submarine?'dive':status;};
  function lockOnto(index){homing={index,at:time,solution:null,solvedAt:-Infinity,kind:ammoIndex,queued:null,aligned:false,status:'turning',shots:0};selectedTargetIndex=index;locksMade++;sound('lock');}
  function lockFire(){
   const e=lockTarget(),kind=ammoIndex;if(!e){if(homing)homing.queued=null;return false;}
