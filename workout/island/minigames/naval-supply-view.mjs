@@ -1,6 +1,6 @@
 import * as THREE from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-11';
-import {createNavalAssets} from './naval-assets.mjs?v=island-v2-20261107-11';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-12';
+import {createNavalAssets} from './naval-assets.mjs?v=island-v2-20261107-12';
 /** 11/11/2026 supply buoys (ammo limit): an orange float with a white band, a mast and a blinking light, bobbing on the water. Two draw calls each, at most two buoys. */
 export function createNavalSupplyView(scene,model,balance,{assets:shared=null}={}){
  const group=new THREE.Group();scene.add(group);

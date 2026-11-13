@@ -7,7 +7,7 @@
  *      &racingV7=0 (previous assets) &shot=1 (hide the panel for screenshots) &hold=1 (stay on the grid: no driving)
  *      &at=SECONDS (shot mode: drive that long, then freeze for the screenshot)
  *      &behind=1 (racing-deep-m2: the player starts 60 m behind the grid, so the whole pack is in front of the camera while the frames are measured) */
-import {runRacingSession} from '../minigames/racing-session.mjs?v=island-v2-20261107-11';
+import {runRacingSession} from '../minigames/racing-session.mjs?v=island-v2-20261107-12';
 const q=new URLSearchParams(location.search);
 const FRAMES=Math.max(10,Number(q.get('frames')||60)),WARM=40,FIXED=q.get('fixed')!=='0',STAGE=Number(q.get('stage')||1),SEED=Number(q.get('seed')||7),HOLD=q.get('hold')==='1',AT=Number(q.get('at')||0),BEHIND=q.get('behind')==='1';
 if(q.get('shot')==='1')document.body.classList.add('shot');

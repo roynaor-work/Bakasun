@@ -1,4 +1,4 @@
-import {clamp, lerp, damp, smooth, netTexture, glowTexture, starTexture, canvasTexture, blobShadow} from './catch-gfx.mjs?v=island-v2-20261107-11';
+import {clamp, lerp, damp, smooth, netTexture, glowTexture, starTexture, canvasTexture, blobShadow} from './catch-gfx.mjs?v=island-v2-20261107-12';
 
 /** v6 "תפוס את הפושע", the catch as an archery range: first person at the officer's eyes, the net launcher and her hands
  * at the bottom of the screen like a bow, the thief far down the street. Local engine coordinates (x forward, y up,

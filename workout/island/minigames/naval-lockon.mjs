@@ -4,9 +4,9 @@
  * that put the shell on the locked hull where it will be when the shell gets there (the same forecast fleet the arc uses, wind
  * included), and one tap on Fire fires. Another long press on the same hull, or its sinking, ends the lock; a long press on another
  * hull moves it. `?navalLock=0` restores v22 exactly (the held spin aim only). Pure helpers: no clock, no DOM, no random term. */
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-11';
-import {navalSolveLaunch,navalLaunch,navalBallisticConfig,angleDelta} from './naval-ballistics.mjs?v=island-v2-20261107-11';
-import {navalForecast} from './naval-forecast.mjs?v=island-v2-20261107-11';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-12';
+import {navalSolveLaunch,navalLaunch,navalBallisticConfig,angleDelta} from './naval-ballistics.mjs?v=island-v2-20261107-12';
+import {navalForecast} from './naval-forecast.mjs?v=island-v2-20261107-12';
 
 export const navalLockOn=search=>polishValue('navalLock',search)!=='0';
 const DEG=Math.PI/180;

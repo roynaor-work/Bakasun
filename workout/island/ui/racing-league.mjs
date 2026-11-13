@@ -4,10 +4,10 @@
  * racing-deep-m6 (long league): a scrolling calendar of 12-18 races with circuit, time of day, direction and length tags; a drivers' table of
  * twelve with team colours and the player's row marked; a teams' table of six; the rival box ("היריב שלכם"); the season podium with the prize at
  * the end of a season; a replay of a season that missed its gate; the "short races" setting. Numbers are large for a seven-year-old. */
-import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-11';
-import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-11';
-import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-11';
-import {leagueArtEnabled,crestImg,trophyImg,medalImg,markArt} from './racing-league-art.mjs?v=island-v2-20261107-11';
+import {UPGRADES,UPGRADE_COST,MAX_LEVEL,PRIZE,POINTS,SEASONS,SEASON_PRIZE,TEAM_PRIZE,equipmentFor,DRIVERS,TEAMS,LEAGUE_IDS,driverById,LONG} from '../minigames/racing-league-core.mjs?v=island-v2-20261107-12';
+import {calendar,describeRace} from '../minigames/racing-league.mjs?v=island-v2-20261107-12';
+import {getRacingStage} from '../minigames/racing-tracks.mjs?v=island-v2-20261107-12';
+import {leagueArtEnabled,crestImg,trophyImg,medalImg,markArt} from './racing-league-art.mjs?v=island-v2-20261107-12';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;if(text!=='')n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -17,7 +17,7 @@ export const SHOP=Object.freeze([
   ['engine','האצה ומהירות שיא'],['brakes','בלימה מאוחרת לפני פניות'],['aero','יציבות במהירות גבוהה'],['steering','תגובת הגה'],['tires','אחיזה בפניות'],['ers','מאגר אנרגיה גדול יותר לניטרו']]);
 export function ensureLeagueStyle(root=document.head){
   if(document.querySelector('link[data-racing-league-css]'))return;
-  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-11',import.meta.url).href;root.append(link);
+  const link=el('link');link.rel='stylesheet';link.dataset.racingLeagueCss='true';link.href=new URL('./racing-league.css?v=island-v2-20261107-12',import.meta.url).href;root.append(link);
 }
 const ordinal=place=>`מקום ${place}`;
 const FIELD=LEAGUE_IDS.length;

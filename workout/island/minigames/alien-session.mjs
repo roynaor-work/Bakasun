@@ -1,14 +1,14 @@
-import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-11';
-import {createControls} from './controls.mjs?v=island-v2-20261107-11';
-import {createGameArt} from './art.mjs?v=island-v2-20261107-11';
-import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-11';
+import {createG2mAudio} from './g2m-audio.mjs?v=island-v2-20261107-12';
+import {createControls} from './controls.mjs?v=island-v2-20261107-12';
+import {createGameArt} from './art.mjs?v=island-v2-20261107-12';
+import {loadOptionalArt} from './model-art.mjs?v=island-v2-20261107-12';
 import {alienIcon,alienHandedness} from './alien-ui.mjs';
 import {alienBakeSettings} from './alien-assets.mjs';
-import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-11';
+import {alienFlightAxis,createAlienFlightInput} from './alien-flight-input.mjs?v=island-v2-20261107-12';
 import {alienV9Enabled} from './alien-v9.mjs';
-import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-11';
-import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-11';
-import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-11';
+import {createAlienFlightHud} from './alien-flight-input-hud.mjs?v=island-v2-20261107-12';
+import {alienV15Enabled} from './alien-v15.mjs?v=island-v2-20261107-12';
+import {createV15ShotAudio} from './alien-v15-audio.mjs?v=island-v2-20261107-12';
 
 /** Keep action pulses until a simulation frame can consume them. A touch which
  * starts and ends between RAFs must still launch exactly one missile. */

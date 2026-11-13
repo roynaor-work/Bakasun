@@ -1,8 +1,8 @@
 import * as THREE from '../vendor/three.module.js';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-11';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-11';
-import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-11';
-import {createNavalAssets} from './naval-assets.mjs?v=island-v2-20261107-11';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-12';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-12';
+import {NAVAL_AIR_LIFT} from './naval-air.mjs?v=island-v2-20261107-12';
+import {createNavalAssets} from './naval-assets.mjs?v=island-v2-20261107-12';
 /** 11/11/2026: attack aircraft at hull scale (the v20 boxes were a tenth of the hull and sat at mast height), one merged
  * geometry per airframe plus spinning rotors, a hit flash, a smoke trail and a nose-over fall when shot down; Vulcan tracers
  * as bright instanced streaks from the ship's mount with sparks where they strike. A Codex model set can replace `build`

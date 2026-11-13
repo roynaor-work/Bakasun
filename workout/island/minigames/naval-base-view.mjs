@@ -1,7 +1,7 @@
 import * as THREE from '../vendor/three.module.js';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-11';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-11';
-import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-11';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-12';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-12';
+import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-12';
 /** 12/11/2026 render budget: a base stage draws the light sea (the reflective water's 12 Hz mirror pass is skipped). The shore structures and
  * the fleet together broke the 70-call budget on reflection frames (measured through the island: stage 5 up to 73 calls, stage 15 up to 88);
  * the light sea keeps the palette, the waves and the glints. `?navalBaseSea=mirror` keeps the reflective water on base stages. */
