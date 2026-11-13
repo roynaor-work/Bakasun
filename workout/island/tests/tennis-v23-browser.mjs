@@ -81,8 +81,8 @@ try{
  const absorb=s=>{if(s.event.id===eventId)return;eventId=s.event.id;const e=s.event;
   if(e.type==='hit'&&e.side===0&&!e.serving&&incoming?.tapped&&!incoming.hit)incoming.hit={grade:e.grade,zone:e.zone,rating:e.rating,drop:s.shotDrop};
   if(e.type==='missSwing'&&incoming?.tapped&&!incoming.hit)incoming.miss=e.reason;
-  if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop)drop={at:s.elapsed,soft:s.shotSoft,apex:s.ball.y,b1:null,bounceTop:null,touch:null,touchBounced:null,end:null,oppStartZ:s.players[1].z,oppBackMost:s.players[1].z,plan:null};
-  if(e.type==='bounce'&&drop&&drop.b1===null&&s.ball.lastHitter===0)drop.b1=s.elapsed-drop.at;
+  if(e.type==='hit'&&e.side===0&&!e.serving&&s.shotDrop){if(drop)drops.push({...drop,reason:'answered',end:null});/* the previous drop was answered and the rally went on */drop={at:s.elapsed,soft:s.shotSoft,apex:s.ball.y,b1:null,bounceTop:null,touch:null,touchBounced:null,end:null,oppStartZ:s.players[1].z,oppBackMost:s.players[1].z,plan:null};}
+  if(e.type==='bounce'&&drop&&drop.b1===null&&drop.touch===null&&s.ball.lastHitter===0)drop.b1=s.elapsed-drop.at;
   if(e.type==='hit'&&e.side===1&&!e.serving&&drop&&drop.touch===null){drop.touch=s.elapsed-drop.at;drop.touchBounced=drop.b1!==null;drop.touchY=s.ball.y;}
   if(['point','game','complete'].includes(e.type)){points.push({n:s.pointNumber,winner:e.winner,reason:e.reason,rallyHits:s.rallyHits,elapsed:s.elapsed});
    if(drop){drop.end=s.elapsed-drop.at;drop.winner=e.winner;drop.reason=e.reason;if(e.reason==='doubleBounce'&&drop.touch===null)deadTrack={start:{x:s.ball.x,z:s.ball.z},moved:0,maxY:0,bounces:0,frames:0,oppGap:Math.hypot(s.players[1].x-s.ball.x,s.players[1].z-s.ball.z),oppRunning:s.players[1].running};drops.push(drop);drop=null;}
