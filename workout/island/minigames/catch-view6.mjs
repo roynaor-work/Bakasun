@@ -61,7 +61,10 @@ function kerbFace(track, s0, s1, d, y0, y1, step = 2) {
   return new T.Mesh(geo, new T.MeshStandardMaterial({color: '#cfc9bb', roughness: .9, side: T.DoubleSide}));
 }
 
-export async function createCatchView6({canvas, balance, stage = 1, chase, quality = 'high', maxDpr = 2, lowDpr = 1.25, onProgress = () => {}, signal}) {
+/** `assets7` (v7, default on unless ?catchAssets=0): the Codex prop pack (catch-props7.mjs) replaces the drawn shapes: ramps for the
+ * boost pads (the cars hop over them), oil slicks, police and construction barriers, cones, civilian cars, nitro bottles, the police
+ * helicopter, guardrails on the outside of the bends, puddles on the shoulder and a warning sign before every ramp. */
+export async function createCatchView6({canvas, balance, stage = 1, chase, quality = 'high', maxDpr = 2, lowDpr = 1.25, onProgress = () => {}, signal, assets7 = false}) {
   const level = balance.levels[stage - 1], theme = THEMES[level.theme] || THEMES.day, base = new URL('../' + (balance.render.base || 'assets/game-catch/'), import.meta.url);
   const track = chase.track, C = chase.C, low = quality === 'low', ROAD_W = (C.roadHalf || 6.8) * 2;
   const renderer = new T.WebGLRenderer({canvas, antialias: !low, alpha: false, powerPreference: 'high-performance'});
@@ -79,6 +82,11 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   for (const key of ['apartment', 'shop', 'cafe', 'house', 'station', 'lamp', 'tree', 'bush', 'policeCar', 'getawayCar', 'cone', 'taxi', 'truck', 'bus', 'roadblock', 'van']) jobs.push(load(key, modelUrl(FILES[key])));
   const actorUrl = n => new URL('../assets/models/' + n + '.glb', import.meta.url).href;
   jobs.push(load('officer', actorUrl('adult-woman-rigged-512')), load('thief', actorUrl('adult-man-rigged-512')));
+  let props7 = null, P7mod = null; // v7: a failed pack load keeps the drawn shapes
+  if (assets7 && (chase.v7?.elements || chase.v7?.weapons)) {
+    pending.total++;
+    jobs.push(import('./catch-props7.mjs?v=island-v2-20261107-12').then(m => { P7mod = m; return m.loadProps7({T, version: DATA_VERSION, signal}); }).then(p => { props7 = p; }).catch(() => { props7 = null; }).finally(() => onProgress(++pending.done / pending.total)));
+  }
   await Promise.all(jobs);
   if (signal?.aborted) { renderer.dispose(); throw Error('aborted'); }
 
@@ -136,7 +144,45 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   // the roadblock at the end of the chase
   { const s = chase.spec.seconds * (C.baseSpeed + C.boostSpeed) + 120; for (const d of C.lanes) { const rb = fitModel(models.roadblock, {depth: 3.2}); const p = track.toWorld(s, d); rb.position.set(p.x, 0, p.z); rb.rotation.y = track.yawAt(s); keep(rb, s); } }
   const viewWindow = [-45, 190];
-  function cullWorld(sNow) { for (const w of world) w.obj.visible = w.s > sNow + viewWindow[0] && w.s < sNow + viewWindow[1]; }
+  function cullWorld(sNow) { for (const w of world) w.obj.visible = w.s > sNow + viewWindow[0] && w.s < sNow + viewWindow[1]; railWindow(sNow); }
+
+  // ----- v7 prop pack (catch-props7.mjs, Codex CC0) for the chase elements: road decor here, the obstacles in makeProp -----
+  const P7 = props7 && chase.v7?.elements ? props7 : null;
+  const rampKind = o => stage >= 4 && o.id % 3 === 0 ? 'bridge' : 'ramp'; // from stage 4 every third ramp is the jump bridge
+  const ramps = P7 ? chase.obstacles.filter(o => o.kind === 'pad').map(o => ({s: o.s, d: o.d, kind: rampKind(o), ...P7mod.rampSpan(rampKind(o))})).sort((a, b) => a.s - b.s) : [];
+  /** The drawn hop of anything driving at (s, d) over a ramp: {y, pitch} or null (the pad's boost stays the rule). */
+  const liftAt = (s, d) => { for (const r of ramps) { const x = s - (r.s - r.back); if (x <= 0) break; if (x < r.total && Math.abs(d - r.d) < 1.7) return P7mod.rampLift(r.kind, x); } return null; };
+  let rails = null;
+  if (P7) {
+    const at = (s, d, y = KERB_H) => { const g = new T.Group(), p = track.toWorld(s, d); g.position.set(p.x, y, p.z); g.rotation.y = track.yawAt(s); return g; };
+    // a warning sign (a bump ahead) on the sidewalk 26 m before every ramp, on the side of its lane
+    for (const r of ramps) { const g = at(r.s - 26, (r.d < -.5 ? -1 : 1) * (ROAD_W / 2 + 1.1)); g.add(P7.mesh('warning-sign')); keep(g, r.s - 26); }
+    // puddles on the shoulder of the straights, by the kerb (only scenery: the lanes stay clear)
+    for (let s = 150 + (stage * 37) % 60, k = 0; s < S1 - 80; s += 130 + (k * 53) % 70, k++) {
+      if (Math.abs(track.curvatureAt(s)) > 1 / 300) continue;
+      const m = P7.mesh(k % 2 ? 'puddle-b' : 'puddle-a'), bb = m.geometry.boundingBox; m.scale.set(2.6 / (bb.max.x - bb.min.x), 1, 1.15 / (bb.max.z - bb.min.z));
+      const g = at(s, (k % 2 ? 1 : -1) * 6.1, 0); g.add(m); keep(g, s);
+    }
+    // a police barrel on the sidewalk beside every closed edge lane of a police roadblock
+    for (const o of chase.obstacles) if (o.kind === 'barrier' && o.police && Math.abs(o.d) > 1) { const g = at(o.s, Math.sign(o.d) * (ROAD_W / 2 + 1)); g.add(P7.mesh('police-barrel')); keep(g, o.s); }
+    // guardrails on the outside of every bend (one instanced draw, refilled for the visible window)
+    const list = [];
+    for (const seg of track.segments) { if (seg.kind !== 'arc' || seg.s0 < 30) continue; const side = seg.dir > 0 ? 1 : -1; for (let s = seg.s0 - 6; s < seg.s1 + 6; s += 5.08) list.push({s, d: side * (ROAD_W / 2 + .45)}); }
+    list.sort((a, b) => a.s - b.s);
+    if (list.length) {
+      const all = new Float32Array(list.length * 16), m4 = new T.Matrix4(), q = new T.Quaternion(), one = new T.Vector3(1, 1, 1), up = new T.Vector3(0, 1, 0), p3 = new T.Vector3();
+      list.forEach((r, i) => { const mid = r.s + 2.54, p = track.toWorld(mid, r.d); q.setFromAxisAngle(up, track.yawAt(mid)); m4.compose(p3.set(p.x, KERB_H, p.z), q, one); m4.toArray(all, i * 16); });
+      const mesh = P7.instanced('guardrail', 64); mesh.frustumCulled = false; scene.add(mesh);
+      rails = {list, all, mesh, lo: -1, hi: -1};
+    }
+  }
+  function railWindow(sNow) {
+    if (!rails) return;
+    const a = sNow + viewWindow[0], b = sNow + viewWindow[1]; let lo = 0; while (lo < rails.list.length && rails.list[lo].s + 5 < a) lo++;
+    let hi = lo; while (hi < rails.list.length && rails.list[hi].s < b && hi - lo < 64) hi++;
+    if (lo === rails.lo && hi === rails.hi) return; rails.lo = lo; rails.hi = hi;
+    rails.mesh.instanceMatrix.array.set(rails.all.subarray(lo * 16, hi * 16)); rails.mesh.count = hi - lo; rails.mesh.instanceMatrix.needsUpdate = true; rails.mesh.visible = hi > lo;
+  }
 
   // ----- cars -----
   const playerCar = rigCar(fitModel(models.policeCar, {width: 4.4})), crimCar = rigCar(fitModel(models.getawayCar, {width: 4.2}));
@@ -155,7 +201,23 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   const sparks = new Particles(scene, {texture: starTexture(), size: .55, additive: true}), dust = new Particles(scene, {texture: glowTexture('#c9b79a'), size: 1.1, additive: false, max: 90});
   // obstacles appear inside the window around the officer
   const props = new Map();
+  /** v7 pack: a ramp for a boost pad, an oil slick sized to its slippery patch, a police or a construction barrier, three cones,
+   * civilian cars for the taxis and the parked cars (a motorcycle among them); trucks and buses keep their v6 models. */
+  function makeProp7(o) {
+    const root = new T.Group(); let m = null;
+    if (o.kind === 'pad') m = P7.mesh(rampKind(o) === 'bridge' ? 'jump-bridge' : 'short-ramp');
+    else if (o.kind === 'oil') { m = P7.mesh(o.id % 2 ? 'oil-slick-b' : 'oil-slick-a'); const bb = m.geometry.boundingBox; m.scale.set(4.6 / (bb.max.x - bb.min.x), 1, 3.3 / (bb.max.z - bb.min.z)); }
+    else if (o.kind === 'barrier') { m = P7.mesh(o.police ? 'police-barrier' : 'construction-barrier'); if (o.police) m.scale.set(1, 1.35, .82); } // police: within its lane, taller to read from afar
+    else if (o.kind === 'cone') for (let i = 0; i < 3; i++) { const c = P7.mesh('traffic-cone'); c.scale.setScalar(.85); c.position.set((i - 1) * .5, 0, (i % 2) * .3); root.add(c); }
+    else if (o.kind === 'traffic' && o.model === 'taxi') m = P7.mesh(['taxi', 'civilian-sedan', 'civilian-hatchback'][o.id % 3]);
+    else if (o.kind === 'parked') m = P7.mesh(['civilian-hatchback', 'civilian-sedan', 'motorcycle'][o.id % 3]);
+    else return null;
+    if (m) root.add(m);
+    if (o.kind === 'traffic' || o.kind === 'parked') { const bike = o.kind === 'parked' && o.id % 3 === 2; root.add(blobShadow(shadowTex, bike ? 2.8 : 4.8, bike ? 1.2 : 2.4, .45)); }
+    scene.add(root); return root;
+  }
   function makeProp(o) {
+    if (P7) { const r = makeProp7(o); if (r) return r; }
     let root;
     if (o.kind === 'traffic' || o.kind === 'parked') { root = fitModel(models[o.model], {width: o.model === 'bus' ? 7.5 : o.model === 'truck' ? 5.6 : 4.4}); if (o.kind === 'parked' && o.tint) root.traverse(m => { if (m.isMesh && m.material) { m.material = m.material.clone(); m.material.color.set(PARKED_TINTS[o.tint % PARKED_TINTS.length]); } }); }
     else if (o.kind === 'barrier') root = fitModel(models.roadblock, {depth: 2.8});
@@ -177,19 +239,27 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   let mode = 'chase', phase = 0, fx = null, fx7 = null, bow = null, engine = null, frame = null, skidSpin = 0;
   import('./catch-tyre-fx.mjs?v=island-v2-20261107-12').then(m => { if (m.createTyreFx && !signal?.aborted) fx = m.createTyreFx({T, scene, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, blobShadow}}); }).catch(() => { fx = null; });
   // v7: nitro orbs, police roadblocks, the tools (spike strip, sticky net, pulse, tracker and helicopter), oil on the thief
-  if (chase.v7?.weapons || chase.v7?.elements) import('./catch-chase-fx7.mjs?v=island-v2-20261107-12').then(m => { if (m.createChaseFx7 && !signal?.aborted && mode === 'chase') fx7 = m.createChaseFx7({T, scene, track, chase, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, netTexture}, theme, low}); }).catch(() => { fx7 = null; });
+  if (chase.v7?.weapons || chase.v7?.elements) import('./catch-chase-fx7.mjs?v=island-v2-20261107-12').then(m => { if (m.createChaseFx7 && !signal?.aborted && mode === 'chase') fx7 = m.createChaseFx7({T, scene, track, chase, playerCar, crimCar, sparks, dust, gfx: {glowTexture, canvasTexture, netTexture}, theme, low, props7}); }).catch(() => { fx7 = null; });
+  const hop = {p: 0, c: 0, yP: 0, yC: 0}; // v7 ramps: the drawn nose pitch (damped) and the last height, for the landing puff
 
   function updateChase(dt) {
     const st = chase.state, c = st.crim;
     phase += dt;
     cullWorld(st.s);
     // cars: on the track, with the steering angle and the bend showing as a small yaw, a lean on hard steering
-    playerCar.position.y = 0; placeOnTrack(playerCar, st.s, st.d, -st.steer * .22); playerCar.rotation.z = -st.steer * .05 + (st.boosting ? .02 : 0);
+    // v7 ramps: both cars hop over a ramp in their lane (drawn only), with a puff of dust and a small shake on a high landing
+    const lp = P7 ? liftAt(st.s, st.d) : null;
+    hop.p = damp(hop.p, lp ? lp.pitch : 0, 14, dt);
+    playerCar.position.y = lp ? lp.y : 0; placeOnTrack(playerCar, st.s, st.d, -st.steer * .22); playerCar.rotation.z = -st.steer * .05 + (st.boosting ? .02 : 0) + hop.p;
+    if (lp) hop.yP = Math.max(hop.yP, lp.y); else if (hop.yP > .5) { hop.yP = 0; cam.shake += .25; dust.emit(playerCar.position.x, .2, playerCar.position.z, 8, {speed: 2.5, up: 1, color: [.75, .72, .66], gravity: .6, life: .6}); }
     const cd = c.d + (c.wobble || 0);
-    crimCar.position.y = 0;
+    const lc = P7 && st.phase !== 'skid' ? liftAt(c.s, cd) : null;
+    hop.c = damp(hop.c, lc ? lc.pitch : 0, 14, dt);
+    crimCar.position.y = lc ? lc.y : 0;
+    if (lc) hop.yC = Math.max(hop.yC, lc.y); else if (hop.yC > .5) { hop.yC = 0; dust.emit(crimCar.position.x, .2, crimCar.position.z, 6, {speed: 2.5, up: 1, color: [.75, .72, .66], gravity: .6, life: .6}); }
     if (st.phase === 'skid') { const u = clamp(st.skid / C.skidSeconds, 0, 1); skidSpin = Math.sin(u * Math.PI) * .9 * (1 - u * .5) + u * .35; placeOnTrack(crimCar, c.s, cd, -skidSpin); if (Math.random() < .8) dust.emit(crimCar.position.x, .3, crimCar.position.z, 2, {speed: 2.5, up: 1.2, color: [.55, .55, .55], gravity: -.5, life: 1}); }
     else placeOnTrack(crimCar, c.s, cd, -clamp((c.targetD - c.d) * .12, -.25, .25));
-    crimCar.rotation.z = Math.sin(phase * 2.3) * st.damage * .03 + (crimCar.userData.flatLeanNow || 0); crimCar.rotation.x = (crimCar.userData.flatPitch || 0) * .5;
+    crimCar.rotation.z = Math.sin(phase * 2.3) * st.damage * .03 + (crimCar.userData.flatLeanNow || 0) + hop.c; crimCar.rotation.x = (crimCar.userData.flatPitch || 0) * .5;
     if (st.damage > .25 && Math.random() < st.damage * .6) dust.emit(crimCar.position.x, 1, crimCar.position.z, 1, {speed: 1, up: 1.6, color: [.5, .5, .5], gravity: -1.2, life: .9});
     flameP.visible = st.boosting; flameP.scale.setScalar(2 + Math.sin(phase * 9) * .4); flameC.visible = c.boostLeft > 0; flameC.scale.setScalar(1.8 + Math.sin(phase * 9) * .35);
     const red = Math.sin(phase * 9) > 0; lightOn(playerCar.userData.lights.Light_R, red); lightOn(playerCar.userData.lights.Light_B, !red);
@@ -212,7 +282,10 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
       if (inside && !entry) props.set(o.id, {root: makeProp(o), o});
       else if (!inside && entry) { scene.remove(entry.root); props.delete(o.id); }
     }
-    for (const [, e] of props) { const o = e.o, os = chase.obstacleS(o, st.t); placeOnTrack(e.root, os, o.d, o.kind === 'parked' ? 0 : 0); e.root.visible = !(o.kind === 'pad' && o.used); if (o.hitP || o.hitC) e.root.rotation.y += Math.sin(o.id) * .3; }
+    for (const [, e] of props) {
+      const o = e.o, os = chase.obstacleS(o, st.t); placeOnTrack(e.root, os, o.d, o.kind === 'parked' ? 0 : 0); e.root.visible = Boolean(P7) || !(o.kind === 'pad' && o.used); if (o.hitP || o.hitC) e.root.rotation.y += Math.sin(o.id) * .3;
+      if (P7 && o.kind === 'traffic') { const l = liftAt(os, o.d); e.root.position.y = l ? l.y : 0; e.root.rotation.z = l ? l.pitch : 0; } // a car in front also hops a ramp
+    }
     // camera: behind and above the police car, looking ahead into the bend; boost widens the lens
     const kAhead = track.curvatureAt(st.s + 30);
     const fovTarget = (low ? 50 : 52) + (st.boosting ? 7 : 0) + clamp((st.v - 22) * .4, 0, 4);
@@ -281,6 +354,10 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
   const api = {
     renderer, scene, camera, models, track, sparks, dust, playerCar, crimCar,
     get mode() { return mode; }, get bow() { return bow; }, get officer() { return officer; }, get thieves() { return thieves; }, get fx7() { return fx7; },
+    /** v7: the Codex prop pack when it is drawn (null with ?catchAssets=0, without v7 elements or when the pack failed to load). */
+    get props7() { return props7; }, get props7Road() { return Boolean(P7); },
+    /** Tools: which pack props are in the scene now (counts by name) and the guardrails drawn. */
+    props7Stats() { const n = {}; scene.traverseVisible(o => { if (o.name?.startsWith('props7:')) n[o.name.slice(7)] = (n[o.name.slice(7)] || 0) + (o.isInstancedMesh ? o.count : 1); }); return n; },
     shake(amount = 1) { cam.shake = Math.min(1.6, cam.shake + amount); },
     enterChase() { mode = 'chase'; },
     handleChase(events) { dispatch.chase(events); },
@@ -306,7 +383,7 @@ export async function createCatchView6({canvas, balance, stage = 1, chase, quali
     dispose() {
       observer?.disconnect(); bow?.dispose?.(); bowFallback?.dispose?.(); fx?.dispose?.(); fx7?.dispose?.();
       scene.traverse(o => { o.geometry?.dispose?.(); const m = o.material; if (m) for (const mm of Array.isArray(m) ? m : [m]) { mm.map?.dispose?.(); mm.dispose?.(); } });
-      officer?.dispose(); for (const t of thieves) t.actor.dispose();
+      officer?.dispose(); for (const t of thieves) t.actor.dispose(); props7?.dispose?.();
       renderer.dispose(); renderer.forceContextLoss?.();
     },
   };

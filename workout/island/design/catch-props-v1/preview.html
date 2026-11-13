@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>אביזרי מרדף · תצוגת נכסים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header>
+    <div class="title"><span class="eyebrow">ערכת אביזרים · 01</span><h1>יוצאים למרדף</h1><p>צבע חם, צורות פשוטות, דרך פתוחה.</p></div>
+    <div class="stats" aria-label="נתוני הנכסים">
+      <div><strong id="asset-count">—</strong><span>נכסים</span></div>
+      <div><strong id="triangle-count">—</strong><span>משולשים בערכה</span></div>
+      <div><strong>1,024</strong><span>אטלס משותף</span></div>
+    </div>
+  </header>
+  <main>
+    <section id="stage" aria-label="תצוגת כביש תלת ממדית">
+      <div class="viewbar" role="group" aria-label="מבט מצלמה">
+        <button id="chase" class="active" aria-pressed="true">מבט מאחור</button>
+        <button id="overview" aria-pressed="false">כל הכביש</button>
+        <button id="rotate" aria-pressed="false" title="סיבוב איטי סביב הנכס הנבחר">סיבוב</button>
+      </div>
+      <div class="scene-note"><span class="dot"></span>כביש רחב · קדימה +Z</div>
+      <div class="scene-footer"><span id="selected-label">כל הערכה על הכביש</span><span id="render-count">—</span></div>
+      <div id="status" role="status" aria-live="polite">טוען את הכביש והנכסים…</div>
+    </section>
+    <aside aria-label="קטלוג נכסים">
+      <div class="catalog-heading"><h2>על הכביש</h2><span>לחיצה למבט מקרוב</span></div>
+      <div id="catalog"></div>
+      <div class="options">
+        <label><input id="rotor-motion" type="checkbox" checked> רוטור מסתובב</label>
+        <label><input id="wireframe" type="checkbox"> הצגת משולשים</label>
+      </div>
+      <div id="details">כל נכס עד 1,500 משולשים · יחידות במטרים</div>
+      <footer><a href="REPORT.md">דוח הערכה</a><a href="LICENSES.md">מקורות ורישיונות</a><a href="atlas-1024.png">אטלס הצבעים</a></footer>
+    </aside>
+  </main>
+  <noscript>יש להפעיל JavaScript כדי להציג את הנכסים.</noscript>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>

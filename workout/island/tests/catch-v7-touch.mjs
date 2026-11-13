@@ -17,7 +17,8 @@ const QUALITY = process.env.CATCH_QUALITY || 'low', STAGE = Number(process.env.C
 const server = await serveIsland(), chromium = await islandChromium();
 const browser = await chromium.launch({executablePath: process.env.CHROMIUM_PATH || undefined, headless: true, args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--ignore-gpu-blocklist']});
 const context = await browser.newContext({viewport: {width: 844, height: 390}, deviceScaleFactor: 1, hasTouch: true, isMobile: true});
-await context.addInitScript(() => { localStorage.setItem('island.sound', 'off'); });
+// CATCH_SOUND=off mutes the island; by default the sound is on, so the run also shows the Codex sound pack decoding and playing
+if (process.env.CATCH_SOUND === 'off') await context.addInitScript(() => { localStorage.setItem('island.sound', 'off'); });
 const page = await context.newPage(), errors = [], outside = [], log = {stage: STAGE, quality: QUALITY, taps: {}, tools: {}, events: [], shots: []};
 page.setDefaultTimeout(900000);
 page.on('pageerror', e => errors.push(e.message));
@@ -73,7 +74,9 @@ try {
   await page.waitForFunction(() => document.querySelector('.game-screen')?.dataset.starting !== 'true');
   await page.waitForFunction(() => window.__island.ui.activityInterface.current?.session?.snapshot.mode === 'chase');
   const v7 = await page.evaluate(`${S}.snapshot.v7`); log.v7 = v7;
-  assert.deepEqual(v7, {weapons: true, assist: true, elements: true, siren: .55}, 'v7 is the default (tools, assist, road elements, the softer siren)');
+  assert.deepEqual({weapons: v7.weapons, assist: v7.assist, elements: v7.elements, siren: v7.siren, assets: v7.assets}, {weapons: true, assist: true, elements: true, siren: .55, assets: true}, 'v7 is the default (tools, assist, road elements, the softer siren, the Codex packs)');
+  assert.equal(v7.props, true, 'the Codex prop pack is drawn (catch-props7.mjs loaded in the real island)');
+  log.pack = {start: await page.evaluate(`({props:${S}.debug.view().props7Stats(),files:${S}.debug.view().props7.stats(),sounds:${S}.snapshot.v7.sounds})`)};
   // the help card of stage 1 (new save): read it and tap the button
   if (await page.locator('.catch-help:not([hidden]) .catch-help-ok').count()) { await page.waitForTimeout(300); await shot('01-help'); await tap('.catch-help-ok'); }
   console.log('library, stage map and help card by touch: ok', secs());
@@ -87,7 +90,8 @@ try {
     return {mode:s.snapshot.mode,phase:st.phase,frames:s.debug.held().frames,t:st.t,d:st.d,slide:st.slide,gap:st.gap,tank:st.tank,bend:k>1/110,crimD:st.crim.d,v:st.v,want:zoneFree?zone:best,
       locked:g.locked,q:g.quality,reload:g.reload,ammo:g.ammo,tool:g.weapon,damage:st.damage,aimD:a?(a.weapon==='spikes'?a.predD:a.zoneD):null,close:g.closeT>0,
       hits:g.hits,shots:g.shots,net:(raw.slows?.net||0)>0,emp:(raw.slows?.emp||0)>0,marked:(raw.marked||0)>0,strips:(raw.strips||[]).filter(x=>x.state==='live').length,nitro:st.nitro||0,
-      fx:s.debug.view()?.fx7?.stats?.()||null};})()`;
+      ramp:c.obstacles.some(o=>o.kind==='pad'&&o.s-st.s>14&&o.s-st.s<40),air:+(s.debug.view()?.playerCar.position.y||0).toFixed(2),block:c.obstacles.some(o=>o.police&&o.s-st.s>16&&o.s-st.s<55),
+      sounds:s.snapshot.v7.sounds,fx:s.debug.view()?.fx7?.stats?.()||null};})()`;
   const STEER = {x: 200, y: 280};
   let steering = false, boosting = false, braking = false, f = await frames(), lastHits = 0, firstLock = false, seen = {}, plan = ['net', 'tyres', 'mark', 'tyres', 'spikes', 'tyres', 'emp', 'tyres'], planIdx = 0, guard = 0, lastLog = 0, lastT = 0, yellowFor = 0, stuckFor = 0;
   while (guard++ < 6000) {
@@ -116,6 +120,9 @@ try {
       }
       for (const [key, name] of [['net', '03-sticky-net'], ['strips', '04-spike-strip'], ['emp', '05-pulse'], ['marked', '05-tracker-helicopter'], ['close', '02-close-time']]) if (r[key] && !seen[key]) { seen[key] = true; await shot(name); }
       if (r.fx?.orbs && !seen.orbs && r.t > 2) { seen.orbs = true; await shot('02-nitro-orbs'); }
+      // the Codex props when they come up: a ramp ahead (with its warning sign), the car in the air over it, a police roadblock
+      for (const [key, ok, name] of [['ramp', r.ramp, '05-ramp-ahead'], ['air', r.air > .5, '05-ramp-jump'], ['block', r.block, '05-roadblock']]) if (ok && !seen[key]) { seen[key] = true; await shot(name); }
+      if (r.sounds?.siren && !log.sirenPlaying) log.sirenPlaying = {t: +r.t.toFixed(1), ...r.sounds};
       if (r.t - lastLog >= 5) { lastLog = r.t; console.log(`  t ${r.t.toFixed(1)} gap ${r.gap.toFixed(1)} tool ${r.tool} shots ${r.shots} hits ${r.hits} damage ${r.damage.toFixed(2)} nitro ${r.nitro}`, secs()); }
     } else if (r.phase === 'skid' && !seen.skid) { seen.skid = true; if (steering) { await up('steer'); steering = false; } if (boosting) { await up('boost'); boosting = false; } if (braking) { await up('brake'); braking = false; } await shot('06-car-down'); }
     await nextFrame(r.frames);
@@ -123,6 +130,8 @@ try {
   if (steering) await up('steer'); if (boosting) await up('boost'); if (braking) await up('brake');
   const chase = await page.evaluate(`(()=>{const r=${S}.chase.result();return {how:r.how,byWeapons:r.byWeapons,seconds:+r.seconds.toFixed(1),shots:r.shots,toolHits:r.toolHits,damage:r.damage,nitro:r.nitro,nearMisses:r.nearMisses,closeness:r.closeness};})()`);
   log.chase = chase; console.log('chase by touch:', JSON.stringify(chase), secs());
+  log.pack.end = await page.evaluate(`({sounds:${S}.snapshot.v7.sounds})`); log.pack.siren = log.sirenPlaying || null; console.log('packs:', JSON.stringify(log.pack));
+  if (process.env.CATCH_SOUND !== 'off') { assert.equal(log.pack.end.sounds?.decoded, 9, 'the nine pack sounds decoded in the real island'); assert.ok(['police-soft', 'siren-near'].includes(log.sirenPlaying?.siren), 'the pack siren played during the chase'); }
   assert.equal(chase.how, 'caught', 'the tools brought the car down'); assert.equal(chase.byWeapons, true); assert.ok(chase.toolHits >= 3, 'several tool hits');
 
   // ----- the catch: hold anywhere, drag the sight onto him (or onto the dashed lead ring), lift the finger -----

@@ -7,8 +7,10 @@
  *   pulse          a blue ring from the police car to the getaway car and a crackle of sparks
  *   tracker        a red beacon on the trunk and the police helicopter overhead with its spotlight while he is marked
  *   oil            the getaway car fishtails when it drives through oil
- * Draw calls stay low: the helicopter body is one merged mesh with vertex colours, everything else is instanced or shared. */
-export const FX7 = Object.freeze({nitroY: 1, nitroR: .42, heliY: 15, heliAhead: 4, heliSide: 7, heliSpeed: 3.2, stripLen: 3.4, spikes: 9, flyNet: .32, flyPulse: .38, flyStrip: .5, window: [-25, 170]});
+ * Draw calls stay low: the helicopter body is one merged mesh with vertex colours, everything else is instanced or shared.
+ * With `props7` (catch-props7.mjs, the Codex prop pack) the orbs are nitro bottles (still one instanced draw) and the helicopter is the
+ * Codex police helicopter with its own rotor; the spotlight, the flashers and the tool effects stay drawn here. */
+export const FX7 = Object.freeze({nitroY: 1, nitroR: .42, bottleY: .32, heliY: 15, heliScale: 1.55, heliAhead: 4, heliSide: 7, heliSpeed: 3.2, stripLen: 3.4, spikes: 9, flyNet: .32, flyPulse: .38, flyStrip: .5, window: [-25, 170]});
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const lerp = (a, b, k) => a + (b - a) * k;
 
@@ -24,14 +26,35 @@ function mergeColored(T, parts) {
   return out;
 }
 
-export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, sparks, dust, gfx, theme = {}, low = false}) {
+/** The drawn helicopter (no pack): one merged vertex-coloured body and a see-through rotor. Returns the rotor. */
+function drawnHelicopter(T, heli) {
+  const bodyGeo = mergeColored(T, [
+    [new T.SphereGeometry(1.15, 14, 10).scale(1.6, .95, 1), '#1f3f8a'], [new T.SphereGeometry(.92, 12, 8).scale(1.1, .8, .9).translate(.95, .1, 0), '#9fd8ff'],
+    [new T.CylinderGeometry(.22, .34, 4.2, 8).rotateZ(Math.PI / 2).translate(-3.2, .25, 0), '#1f3f8a'], [new T.BoxGeometry(.9, 1.1, .12).translate(-5.2, .75, 0), '#f2f4f8'],
+    [new T.BoxGeometry(3.4, .1, .12).translate(0, -1.25, .75), '#2a2d33'], [new T.BoxGeometry(3.4, .1, .12).translate(0, -1.25, -.75), '#2a2d33'],
+    [new T.BoxGeometry(.1, .5, .1).translate(.8, -.95, .75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(-.8, -.95, .75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(.8, -.95, -.75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(-.8, -.95, -.75), '#2a2d33'],
+    [new T.BoxGeometry(2.2, .1, .5).translate(-.2, -.55, 0), '#f2f4f8'], [new T.CylinderGeometry(.22, .22, .3, 10).translate(0, 1.05, 0), '#2a2d33'],
+  ]);
+  heli.add(new T.Mesh(bodyGeo, new T.MeshStandardMaterial({vertexColors: true, roughness: .55, metalness: .25})));
+  const rotor = new T.Mesh(mergeColored(T, [[new T.BoxGeometry(7.6, .05, .32), '#1b1d22'], [new T.BoxGeometry(.32, .05, 7.6), '#1b1d22']]), new T.MeshBasicMaterial({vertexColors: true, transparent: true, opacity: .55, depthWrite: false}));
+  rotor.position.y = 1.25; heli.add(rotor);
+  return rotor;
+}
+/** The Codex police helicopter (skids at y 0, nose +X after catch-props7 turns it), lifted so the body sits on the group's origin. */
+function packHelicopter(T, heli, props7) {
+  const h = props7.heli(); h.scale.setScalar(FX7.heliScale); h.position.y = -1.1 * FX7.heliScale; heli.add(h);
+  return h.userData.rotor || new T.Object3D();
+}
+
+export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, sparks, dust, gfx, theme = {}, low = false, props7 = null}) {
   const {glowTexture, canvasTexture, netTexture} = gfx, M = new T.Matrix4(), Q = new T.Quaternion(), S = new T.Vector3(), P = new T.Vector3(), UP = new T.Vector3(0, 1, 0), tmp = {}, tmp2 = {};
   const glow = glowTexture('#ffffff');
   const objs = [];
   const add = o => { scene.add(o); objs.push(o); return o; };
-  // ----- nitro orbs -----
+  const bottles = Boolean(props7?.has('nitro-bottle') && chase.v7?.elements), heliPack = props7?.has('police-helicopter') && chase.v7?.weapons ? props7 : null;
+  // ----- nitro orbs (v7 pack: nitro bottles) -----
   const orbs = chase.obstacles.filter(o => o.kind === 'nitro');
-  const orbMesh = add(new T.InstancedMesh(new T.IcosahedronGeometry(FX7.nitroR, 1), new T.MeshBasicMaterial({color: '#62ecff'}), Math.max(1, orbs.length)));
+  const orbMesh = add(bottles ? props7.instanced('nitro-bottle', orbs.length) : new T.InstancedMesh(new T.IcosahedronGeometry(FX7.nitroR, 1), new T.MeshBasicMaterial({color: '#62ecff'}), Math.max(1, orbs.length)));
   const orbGlow = add(new T.InstancedMesh(new T.PlaneGeometry(2.4, 2.4).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({map: glowTexture('#5fe8ff'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: .9}), Math.max(1, orbs.length)));
   orbMesh.frustumCulled = orbGlow.frustumCulled = false; orbMesh.count = orbGlow.count = 0; orbMesh.visible = orbGlow.visible = false;
   // ----- police flashers on the roadblocks -----
@@ -53,18 +76,9 @@ export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, spar
   ring.visible = false;
   const beacon = new T.Sprite(new T.SpriteMaterial({map: glowTexture('#ff3b3b'), transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false})); beacon.scale.set(1.1, 1.1, 1); beacon.position.set(-2.05, 1.05, 0); beacon.visible = false; crimCar.add(beacon); objs.push(beacon);
   const blob = add(new T.Sprite(new T.SpriteMaterial({map: glow, transparent: true, blending: T.AdditiveBlending, depthWrite: false, fog: false, color: '#ffffff'}))); blob.visible = false; blob.scale.set(1.2, 1.2, 1);
-  // ----- the police helicopter: one merged body, a rotor, a spotlight cone and the light on the road -----
+  // ----- the police helicopter: a body, a rotor, a spotlight cone and the light on the road (the origin is the middle of the body) -----
   const heli = new T.Group(); heli.visible = false; add(heli);
-  const bodyGeo = mergeColored(T, [
-    [new T.SphereGeometry(1.15, 14, 10).scale(1.6, .95, 1), '#1f3f8a'], [new T.SphereGeometry(.92, 12, 8).scale(1.1, .8, .9).translate(.95, .1, 0), '#9fd8ff'],
-    [new T.CylinderGeometry(.22, .34, 4.2, 8).rotateZ(Math.PI / 2).translate(-3.2, .25, 0), '#1f3f8a'], [new T.BoxGeometry(.9, 1.1, .12).translate(-5.2, .75, 0), '#f2f4f8'],
-    [new T.BoxGeometry(3.4, .1, .12).translate(0, -1.25, .75), '#2a2d33'], [new T.BoxGeometry(3.4, .1, .12).translate(0, -1.25, -.75), '#2a2d33'],
-    [new T.BoxGeometry(.1, .5, .1).translate(.8, -.95, .75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(-.8, -.95, .75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(.8, -.95, -.75), '#2a2d33'], [new T.BoxGeometry(.1, .5, .1).translate(-.8, -.95, -.75), '#2a2d33'],
-    [new T.BoxGeometry(2.2, .1, .5).translate(-.2, -.55, 0), '#f2f4f8'], [new T.CylinderGeometry(.22, .22, .3, 10).translate(0, 1.05, 0), '#2a2d33'],
-  ]);
-  heli.add(new T.Mesh(bodyGeo, new T.MeshStandardMaterial({vertexColors: true, roughness: .55, metalness: .25})));
-  const rotor = new T.Mesh(mergeColored(T, [[new T.BoxGeometry(7.6, .05, .32), '#1b1d22'], [new T.BoxGeometry(.32, .05, 7.6), '#1b1d22']]), new T.MeshBasicMaterial({vertexColors: true, transparent: true, opacity: .55, depthWrite: false}));
-  rotor.position.y = 1.25; heli.add(rotor);
+  const rotor = heliPack ? packHelicopter(T, heli, heliPack) : drawnHelicopter(T, heli);
   const coneLen = FX7.heliY + .5, cone = new T.Mesh(new T.CylinderGeometry(.35, 3.2, coneLen, 18, 1, true).translate(0, -coneLen / 2, 0), new T.MeshBasicMaterial({color: '#fff6d0', transparent: true, opacity: theme.lamps ? .16 : .08, blending: T.AdditiveBlending, depthWrite: false, side: T.DoubleSide, fog: false}));
   cone.position.y = -1.1; heli.add(cone);
   const spot = add(new T.Mesh(new T.CircleGeometry(3.4, 28).rotateX(-Math.PI / 2), new T.MeshBasicMaterial({map: glowTexture('#fff3c4'), transparent: true, opacity: theme.lamps ? .75 : .4, blending: T.AdditiveBlending, depthWrite: false})));
@@ -102,7 +116,7 @@ export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, spar
       for (const o of orbs) {
         if (o.used || o.s < lo || o.s > hi) continue;
         track.toWorld(o.s, o.d, tmp); const bob = Math.sin(phase * 3 + o.id) * .14;
-        Q.setFromAxisAngle(UP, phase * 2 + o.id); S.setScalar(1 + Math.sin(phase * 6 + o.id) * .06); P.set(tmp.x, FX7.nitroY + bob, tmp.z); M.compose(P, Q, S); orbMesh.setMatrixAt(n, M);
+        Q.setFromAxisAngle(UP, phase * 2 + o.id); S.setScalar(1 + Math.sin(phase * 6 + o.id) * .06); P.set(tmp.x, (bottles ? FX7.bottleY : FX7.nitroY) + bob, tmp.z); M.compose(P, Q, S); orbMesh.setMatrixAt(n, M);
         Q.identity(); S.setScalar(.85 + Math.sin(phase * 5 + o.id) * .12); P.set(tmp.x, .05, tmp.z); M.compose(P, Q, S); orbGlow.setMatrixAt(n, M); n++;
       }
       orbMesh.count = orbGlow.count = n; orbMesh.visible = orbGlow.visible = n > 0; if (n) { orbMesh.instanceMatrix.needsUpdate = true; orbGlow.instanceMatrix.needsUpdate = true; }
@@ -110,7 +124,8 @@ export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, spar
       let f = 0; const red = Math.sin(phase * 10) > 0;
       for (const b of blocks) {
         if (b.s < lo || b.s > hi || f + 2 > flashMax) continue;
-        for (const side of [-1, 1]) { track.toWorld(b.s, b.d + side * 1.1, tmp); flashPos.set([tmp.x, 1.25, tmp.z], f * 3); const on = (side > 0) === red; flashCol.set(on ? (side > 0 ? [1, .15, .15] : [.2, .35, 1]) : [.08, .08, .1], f * 3); f++; }
+        // with the pack the flashers sit on top of the two barrels of the police barrier
+        for (const side of [-1, 1]) { track.toWorld(b.s, b.d + side * (bottles ? 1.37 : 1.1), tmp); flashPos.set([tmp.x, bottles ? 1.45 : 1.25, tmp.z], f * 3); const on = (side > 0) === red; flashCol.set(on ? (side > 0 ? [1, .15, .15] : [.2, .35, 1]) : [.08, .08, .1], f * 3); f++; }
       }
       flashGeo.setDrawRange(0, f); flashes.visible = f > 0; if (f) { flashGeo.attributes.position.needsUpdate = true; flashGeo.attributes.color.needsUpdate = true; }
       // spike strips: fly in an arc over the car to their spot, then lie across the lane
@@ -154,7 +169,7 @@ export function createChaseFx7({T, scene, track, chase, playerCar, crimCar, spar
       if (oilWiggle > 0) { oilWiggle = Math.max(0, oilWiggle - dt); crimCar.rotation.y += Math.sin(phase * 14) * .28 * oilWiggle; }
     },
     leave() { active = false; for (const o of objs) o.visible = false; beacon.visible = false; },
-    stats() { return {orbs: orbMesh.count, flashes: flashGeo.drawRange.count, strips: planks.count, net: net.visible, heli: heli.visible, ring: ring.visible}; },
+    stats() { return {orbs: orbMesh.count, flashes: flashGeo.drawRange.count, strips: planks.count, net: net.visible, heli: heli.visible, ring: ring.visible, pack: {bottles, heli: Boolean(heliPack)}}; },
     dispose() { for (const o of objs) { o.parent?.remove(o); o.traverse?.(m => { m.geometry?.dispose?.(); if (m.material) { m.material.map?.dispose?.(); m.material.dispose?.(); } }); } },
   };
   return api;

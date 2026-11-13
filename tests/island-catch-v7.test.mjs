@@ -204,7 +204,10 @@ test('v7 flags: the session reads them, the defaults are on, and each one turns 
   const off = run({weapons: false, assist: false, elements: false}); assert.deepEqual(off.v7, {weapons: false, assist: false, elements: false});
   assert.equal(off.engine.throwsTotal, balance.levels[3].v6?.throws ?? balance.levels[3].throws, 'the v6 throws'); off.dispose();
   const s6 = await readFile(new URL('minigames/catch-session6.mjs', root), 'utf8');
-  for (const flag of ['catchWeapons', 'catchAssist', 'catchElements', 'catchSiren']) assert.ok(s6.includes(`params.get('${flag}')`), flag);
+  for (const flag of ['catchWeapons', 'catchAssist', 'catchElements', 'catchSiren', 'catchAssets']) assert.ok(s6.includes(`params.get('${flag}')`), flag);
+  // the Codex packs: only with a v7 part on, off with ?catchAssets=0; the props go to the view, the sounds to the audio
+  assert.match(s6, /const assets7 = \(v7\.weapons \|\| v7\.elements\) && \(ctx\.v7\?\.assets \?\? params\.get\('catchAssets'\) !== '0'\)/);
+  assert.match(s6, /createCatchAudio\(\{sirenScale, pack: assets7 \? 'v7' : null/); assert.match(s6, /createCatchView6\(\{[^)]*assets7/);
   assert.match(s6, /createChaseEngine6\(\{[^)]*v7: \(v7\.weapons \|\| v7\.elements\) \? v7 : null\}\)/, 'no flag on = the v6 chase');
   assert.match(s6, /installArsenalHud/); assert.match(s6, /installFireHud/, 'the v6 fire HUD stays for ?catchWeapons=0');
   assert.match(s6, /assistRelease\(engine, stage\)/);
@@ -274,5 +277,118 @@ test('v7 3D effects with the real three.js (no renderer): orbs, flashers, the st
 
 test('v7 offline: the new modules are in the shell list', async () => {
   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
-  for (const f of ['minigames/catch-weapons.mjs', 'minigames/catch-assist.mjs', 'minigames/catch-arsenal-hud.mjs', 'minigames/catch-chase-fx7.mjs']) assert.ok(manifest.shell.includes(f), f);
+  for (const f of ['minigames/catch-weapons.mjs', 'minigames/catch-assist.mjs', 'minigames/catch-arsenal-hud.mjs', 'minigames/catch-chase-fx7.mjs', 'minigames/catch-props7.mjs']) assert.ok(manifest.shell.includes(f), f);
+});
+
+// ----- the Codex packs (13/11): props (design/catch-props-v1) and sounds (design/catch-audio-v1), copied to assets/catch-v7 -----
+const sha256 = async url => (await import('node:crypto')).createHash('sha256').update(await readFile(url)).digest('hex');
+
+test('v7 assets: the packs are copied byte for byte (SHA-256 of their manifests), the game reads only what it uses, all of it offline', async () => {
+  const {PROPS7} = await import('../workout/island/minigames/catch-props7.mjs'), {PACK7} = await import('../workout/island/minigames/catch-audio.mjs');
+  const props = JSON.parse(await readFile(new URL('design/catch-props-v1/manifest.json', root), 'utf8')), sounds = JSON.parse(await readFile(new URL('design/catch-audio-v1/manifest.json', root), 'utf8'));
+  const offline = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8')).games.catch;
+  const {readdir} = await import('node:fs/promises');
+  const models = (await readdir(new URL('assets/catch-v7/models/', root))).sort(), audio = (await readdir(new URL('assets/catch-v7/audio/', root))).sort();
+  assert.deepEqual(models, PROPS7.use.map(id => id + '.glb').sort(), 'only the GLBs the chase uses (no sheets, no previews)');
+  for (const id of PROPS7.use) {
+    const m = props.assets.find(a => a.id === id); assert.ok(m, id);
+    assert.equal(await sha256(new URL(`assets/catch-v7/models/${id}.glb`, root)), m.sha256, id + ' is the Codex file');
+    assert.ok(offline.includes(`assets/catch-v7/models/${id}.glb`), id + ' offline');
+  }
+  assert.deepEqual(audio, Object.keys(PACK7.sounds).flatMap(id => [id + '.mp3', id + '.ogg']).sort(), 'both formats of the nine sounds');
+  for (const [id, spec] of Object.entries(PACK7.sounds)) {
+    const m = sounds.assets.find(a => a.id === id); assert.ok(m, id);
+    assert.equal(spec.vol, m.recommendedVolume, id + ': the volume of the manifest');
+    if (m.loop) assert.deepEqual(spec.loop, [m.loopStartSeconds, m.loopEndSeconds], id + ': its loop bounds'); else assert.equal(spec.loop, undefined, id);
+    for (const ext of ['ogg', 'mp3']) { assert.equal(await sha256(new URL(`assets/catch-v7/audio/${id}.${ext}`, root)), m.files[ext].sha256, `${id}.${ext} is the Codex file`); assert.ok(offline.includes(`assets/catch-v7/audio/${id}.${ext}`), `${id}.${ext} offline`); }
+  }
+  assert.equal(PACK7.voices, sounds.maxSimultaneousVoices); assert.match(sounds.sirenPolicy, /80 ms/); assert.equal(PACK7.crossfade, .08); assert.match(sounds.loopPolicy, /40 ms/); assert.equal(PACK7.ramp, .04);
+});
+
+test('v7 props: every GLB parses to the triangles of its manifest, turned to the track forward, decals flagged, the rotor on its hub; the ramp hop', async () => {
+  const T = await import('../workout/island/vendor/three.module.js');
+  const {PROPS7, parseGlb, buildProps7, rampLift, rampSpan} = await import('../workout/island/minigames/catch-props7.mjs');
+  const props = JSON.parse(await readFile(new URL('design/catch-props-v1/manifest.json', root), 'utf8'));
+  const files = {}; for (const id of PROPS7.use) files[id] = parseGlb(await readFile(new URL(`assets/catch-v7/models/${id}.glb`, root)));
+  const p = buildProps7({T, files});
+  let total = 0;
+  for (const id of PROPS7.use) {
+    const m = props.assets.find(a => a.id === id), g = p.geo(id) || p.geo(id + ':body'), b = g.boundingBox; total += m.triangles;
+    assert.equal(p.triangles[id], m.triangles, id + ' triangles'); assert.equal(p.isDecal(id), m.decal, id + ' decal');
+    if (id !== 'police-helicopter') { assert.ok(Math.abs((b.max.x - b.min.x) - (m.bounds.max[2] - m.bounds.min[2])) < .02, id + ': its length runs along +X now'); assert.ok(Math.abs((b.max.z - b.min.z) - (m.bounds.max[0] - m.bounds.min[0])) < .02, id + ': its width across'); }
+    assert.ok(Math.abs(b.min.y) < 1e-6, id + ' stands on the road');
+  }
+  assert.equal(p.stats().triangles, total); assert.equal(p.stats().textures, 1, 'one shared atlas');
+  assert.equal(files['taxi'].image.mimeType, 'image/png'); assert.ok(PROPS7.use.every(id => files[id].image?.bytes.length === 11270), 'the same embedded atlas in every file');
+  const heli = p.heli(), rotor = heli.userData.rotor; assert.ok(rotor && Math.abs(rotor.position.x - .44) < 1e-6 && Math.abs(rotor.position.y - 2.2) < 1e-6, 'rotor hub [0, 2.2, .44] turned to (.44, 2.2, 0)');
+  const box = new T.Box3().setFromObject(heli); assert.ok(box.max.y > 2 && box.max.y < 2.4, 'helicopter height ' + box.max.y.toFixed(2));
+  const m = p.mesh('puddle-a'); assert.equal(m.material, p.decalMat); assert.ok(m.position.y > 0 && m.renderOrder === 1, 'decals sit over the road');
+  const oil = p.mesh('oil-slick-b'); assert.equal(oil.material, p.oilMat); assert.ok(oil.material.transparent && !oil.material.depthWrite && oil.material.color.r < .6, 'oil: a darker, glossy decal');
+  assert.equal(p.mesh('taxi').material, p.mat); assert.equal(p.instanced('nitro-bottle', 9).count, 0);
+  // the drawn hop over a ramp: up the short ramp, a flight that peaks near 1.3 m and lands 9 m on; the bridge goes up, over the gap and down
+  assert.equal(rampLift('ramp', 0).y, 0); assert.ok(Math.abs(rampLift('ramp', 3.59).y - .906) < .01); const peak = Math.max(...Array.from({length: 90}, (_, i) => rampLift('ramp', 3.6 + i * .1).y));
+  assert.ok(peak > 1.2 && peak < 1.4, 'peak ' + peak.toFixed(2)); assert.equal(rampLift('ramp', rampSpan('ramp').total).y, 0); assert.ok(rampLift('ramp', 2).pitch > .2 && rampLift('ramp', 11).pitch < 0);
+  assert.ok(Math.abs(rampLift('bridge', 3.449).y - 1.606) < .01); assert.ok(rampLift('bridge', 4.2).y > 1.85); assert.equal(rampLift('bridge', 8.4).y, 0); assert.ok(rampLift('bridge', 6).pitch < 0);
+  p.dispose();
+  const src = await readFile(new URL('minigames/catch-props7.mjs', root), 'utf8'); assert.equal(/^import\s/m.test(src), false, 'Three.js comes in as a parameter');
+});
+
+test('v7 props in the 3D effects: nitro bottles in one instanced draw and the Codex helicopter with a spinning rotor', async () => {
+  const T = await import('../workout/island/vendor/three.module.js');
+  const {PROPS7, parseGlb, buildProps7} = await import('../workout/island/minigames/catch-props7.mjs');
+  const {createChaseFx7} = await import('../workout/island/minigames/catch-chase-fx7.mjs');
+  const files = {}; for (const id of PROPS7.use) files[id] = parseGlb(await readFile(new URL(`assets/catch-v7/models/${id}.glb`, root)));
+  const props7 = buildProps7({T, files}), ch = createChaseEngine6({balance, stage: 6, seed: 4, v7: V7}); for (let i = 0; i < 60 * 3; i++) ch.step(1 / 60); ch.drainEvents();
+  const scene = new T.Scene(), playerCar = new T.Group(), crimCar = new T.Group(); scene.add(playerCar, crimCar);
+  const part = {emit() {}}, tex = () => new T.Texture();
+  const fx = createChaseFx7({T, scene, track: ch.track, chase: ch, playerCar, crimCar, sparks: part, dust: part, gfx: {glowTexture: tex, canvasTexture: tex, netTexture: tex}, props7});
+  assert.deepEqual(fx.stats().pack, {bottles: true, heli: true});
+  const bottles = scene.children.find(o => o.isInstancedMesh && o.name === 'props7:nitro-bottle'); assert.ok(bottles, 'the bottles are one InstancedMesh'); assert.equal(bottles.geometry, props7.geo('nitro-bottle'));
+  const orb = ch.obstacles.find(o => o.kind === 'nitro' && o.s > ch.state.s + 20); ch.state.s = orb.s - 50; ch.state.crim.s = ch.state.s + 12; ch.step(1 / 60); fx.update(1 / 60);
+  assert.ok(bottles.count > 0, 'bottles drawn in the window');
+  ch.gun.raw.marked = 10; for (let i = 0; i < 90; i++) fx.update(1 / 60);
+  let rotor = null; scene.traverse(o => { if (o.name === 'props7:heli-rotor') rotor = o; }); assert.ok(rotor, 'the Codex rotor'); const r0 = rotor.rotation.y; fx.update(1 / 60); assert.notEqual(rotor.rotation.y, r0, 'the rotor spins');
+  assert.equal(fx.stats().heli, true);
+  // without the pack (or ?catchAssets=0) the drawn orbs and helicopter stay
+  const plain = createChaseFx7({T, scene: new T.Scene(), track: ch.track, chase: ch, playerCar, crimCar, sparks: part, dust: part, gfx: {glowTexture: tex, canvasTexture: tex, netTexture: tex}});
+  assert.deepEqual(plain.stats().pack, {bottles: false, heli: false}); plain.dispose(); fx.dispose();
+});
+
+test('v7 sound pack: soft siren while driving, near at a police roadblock, far for the crew, one siren at a time, three pack voices at most, synth fallbacks, ?catchSiren=v6', async () => {
+  const {PACK7} = await import('../workout/island/minigames/catch-audio.mjs');
+  // fake Web Audio: buffer sources remember their sound (by the fetched URL), gains remember their last target
+  const made = [];
+  class Param { constructor() { this.value = 0; this.last = 0; } setValueAtTime(v) { this.value = v; this.last = v; } linearRampToValueAtTime(v) { this.last = v; } exponentialRampToValueAtTime() {} setTargetAtTime(v) { this.last = v; } cancelScheduledValues() {} }
+  class Node { constructor(kind) { this.kind = kind; this.gain = new Param(); this.frequency = new Param(); this.detune = new Param(); this.Q = new Param(); this.threshold = new Param(); this.knee = new Param(); this.ratio = new Param(); this.attack = new Param(); this.release = new Param(); this.playbackRate = new Param(); this.stopped = false; } connect(n) { if (this.kind === 'src' && n?.kind === 'gain') n.src = this; return n || this; } disconnect() {} start() {} stop() { this.stopped = true; } }
+  class Ctx { constructor() { this.currentTime = 0; this.state = 'running'; this.sampleRate = 8000; this.destination = new Node('dest'); } createGain() { const n = new Node('gain'); made.push(n); return n; } createOscillator() { return new Node('osc'); } createBiquadFilter() { return new Node('f'); } createDynamicsCompressor() { return new Node('c'); } createBuffer() { return {getChannelData: () => new Float32Array(8)}; } createBufferSource() { return new Node('src'); } resume() {} close() {} decodeAudioData(b) { return Promise.resolve({duration: 1, id: new TextDecoder().decode(b)}); } }
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async url => ({ok: true, arrayBuffer: async () => new TextEncoder().encode(String(url).split('/').pop().replace(/\.(ogg|mp3).*$/, '')).buffer});
+  globalThis.AudioContext = Ctx;
+  try {
+    const {createCatchAudio} = await import('../workout/island/minigames/catch-audio.mjs');
+    const a = createCatchAudio({sirenScale: SIREN7, pack: 'v7'}); a.cue('engine'); // the context and the decodes start
+    for (let i = 0; i < 20 && a.status().pack.decoded < 9; i++) await new Promise(r => setTimeout(r, 5));
+    assert.equal(a.status().pack.decoded, 9, 'the nine sounds decode');
+    const live = () => made.filter(g => g.src?.buffer && !g.src.stopped && g.src.loop).map(g => ({id: g.src.buffer.id, gain: g.gain.last}));
+    a.cue('siren', {approach: 0}); assert.equal(a.status().pack.siren, 'police-soft');
+    assert.ok(Math.abs(live().find(x => x.id === 'police-soft').gain - PACK7.gain * .025) < 1e-9, 'soft siren gain = calibration x manifest volume');
+    a.cue('siren', {approach: 0, near: true}); assert.equal(a.status().pack.siren, 'siren-near', 'near while a roadblock comes up');
+    assert.equal(live().filter(x => x.id.startsWith('siren') || x.id === 'police-soft').length, 1, 'one siren at a time (the soft one faded out)');
+    a.cue('siren', {crew: true}); assert.equal(a.status().pack.siren, 'siren-far-helicopter', 'the far one for the crew');
+    for (const c of ['shot', 'flat', 'sticky', 'nitroPickup']) a.cue(c);
+    assert.ok(a.status().pack.voices <= PACK7.voices - 1, 'with the siren at most three pack sounds: ' + a.status().pack.voices);
+    a.dispose();
+    // ?catchSiren=v6 (sirenScale 1): the pack does not take the siren
+    const b = createCatchAudio({sirenScale: 1, pack: 'v7'}); b.cue('engine'); for (let i = 0; i < 20 && b.status().pack.decoded < 9; i++) await new Promise(r => setTimeout(r, 5));
+    b.cue('siren', {near: true}); assert.equal(b.status().pack.siren, null); b.dispose();
+    // without the pack the new cues are the v6 sounds (pickup chime, crash), and no pack is reported
+    const c = createCatchAudio({sirenScale: SIREN7}); assert.equal(c.status().pack, undefined); for (const k of ['nitroPickup', 'barrier']) c.cue(k); c.dispose();
+  } finally { globalThis.fetch = realFetch; delete globalThis.AudioContext; }
+  // the measured levels in Chromium (tools/catch-siren7.mjs): the siren that plays while driving 40-50% under v6; the short roadblock
+  // accent louder than it by the manifest but still under v6; the far one for the crew quieter still; still over the engine
+  const db = JSON.parse(await readFile(new URL('verification/catch-v7/siren-db.json', root), 'utf8')).summary;
+  assert.ok(db.sirenChangeDb.v7 <= -4.4 && db.sirenChangeDb.v7 >= -6.1, 'soft siren ' + db.sirenChangeDb.v7 + ' dB');
+  assert.ok(db.nearChangeDb < -2.5 && db.nearChangeDb > db.sirenChangeDb.v7, 'near siren ' + db.nearChangeDb + ' dB');
+  assert.ok(db.crewChangeDb < db.sirenChangeDb.v7, 'far siren for the crew ' + db.crewChangeDb + ' dB'); assert.ok(db.sirenOverEngineDb.v7 > 2, 'the siren still over the engine');
+  assert.equal(db.live.v7.sirenBuffer, 'police-soft'); assert.equal(db.live.v7.sirenLive, true);
 });

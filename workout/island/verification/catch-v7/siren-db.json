@@ -1,10 +1,25 @@
 {
  "summary": {
-  "sirenMeanV6": 0.0998,
-  "sirenMeanV7": 0.0549,
-  "sirenChangeDb": -5.2,
-  "sirenOverEngineDbV6": 8.9,
-  "sirenOverEngineDbV7": 3.7,
+  "sirenMean": {
+   "v6": 0.0998,
+   "v7s": 0.0549,
+   "v7": 0.0508
+  },
+  "sirenChangeDb": {
+   "v7s": -5.2,
+   "v7": -5.9
+  },
+  "sirenChangePct": {
+   "v7s": 45,
+   "v7": 49
+  },
+  "nearChangeDb": -4.8,
+  "crewChangeDb": -11.1,
+  "sirenOverEngineDb": {
+   "v6": 8.9,
+   "v7s": 3.4,
+   "v7": 2.9
+  },
   "live": {
    "v6": {
     "state": "running",
@@ -20,7 +35,7 @@
     "draw": false,
     "limiter": true
    },
-   "v7": {
+   "v7s": {
     "state": "running",
     "sirenBuffer": "twoTone",
     "sirenDecoded": {
@@ -34,10 +49,60 @@
     "boosting": false,
     "draw": false,
     "limiter": true
+   },
+   "v7": {
+    "state": "running",
+    "sirenBuffer": "police-soft",
+    "sirenDecoded": {
+     "twoTone": 5,
+     "yelp": 5
+    },
+    "sirenLive": true,
+    "sirenGain": 0.592,
+    "sirenScale": 0.55,
+    "pack": {
+     "decoded": 9,
+     "of": 9,
+     "siren": "police-soft",
+     "voices": 0,
+     "format": "ogg"
+    },
+    "engine": false,
+    "boosting": false,
+    "draw": false,
+    "limiter": true
+   },
+   "v7near": {
+    "state": "running",
+    "sirenBuffer": "siren-near",
+    "sirenDecoded": {
+     "twoTone": 5,
+     "yelp": 5
+    },
+    "sirenLive": true,
+    "sirenGain": 0.711,
+    "sirenScale": 0.55,
+    "pack": {
+     "decoded": 9,
+     "of": 9,
+     "siren": "siren-near",
+     "voices": 0,
+     "format": "ogg"
+    },
+    "engine": false,
+    "boosting": false,
+    "draw": false,
+    "limiter": true
    }
   },
   "errors": {
    "v6": [],
+   "v7s": [],
+   "v7": []
+  },
+  "failed": {
+   "v6": [],
+   "v7s": [],
    "v7": []
   }
  },
@@ -46,14 +111,19 @@
    "cue": "siren-first-call",
    "v6": {
     "peak": 0.1024,
-    "mean": 0.0881
+    "mean": 0.0895
+   },
+   "v7s": {
+    "peak": 0.0566,
+    "mean": 0.0486
    },
    "v7": {
-    "peak": 0.0568,
-    "mean": 0.0499
+    "peak": 0.0511,
+    "mean": 0.0476
    },
-   "dbPeak": -5.1,
-   "dbMean": -4.9
+   "v7sDbMean": -5.3,
+   "v7DbMean": -5.5,
+   "v7DbPeak": -6
   },
   {
    "cue": "siren-loop-1",
@@ -61,116 +131,305 @@
     "peak": 0.1019,
     "mean": 0.0998
    },
-   "v7": {
+   "v7s": {
     "peak": 0.0561,
     "mean": 0.0549
    },
-   "dbPeak": -5.2,
-   "dbMean": -5.2
+   "v7": {
+    "peak": 0.0511,
+    "mean": 0.0508
+   },
+   "v7sDbMean": -5.2,
+   "v7DbMean": -5.9,
+   "v7DbPeak": -6
+  },
+  {
+   "cue": "siren-near",
+   "v6": {
+    "peak": 0.1017,
+    "mean": 0.1
+   },
+   "v7s": {
+    "peak": 0.056,
+    "mean": 0.0549
+   },
+   "v7": {
+    "peak": 0.0662,
+    "mean": 0.0577
+   },
+   "v7sDbMean": -5.2,
+   "v7DbMean": -4.8,
+   "v7DbPeak": -3.7
   },
   {
    "cue": "siren-far",
    "v6": {
-    "peak": 0.1005,
-    "mean": 0.0678
+    "peak": 0.1013,
+    "mean": 0.0687
    },
-   "v7": {
-    "peak": 0.0549,
+   "v7s": {
+    "peak": 0.0559,
     "mean": 0.0364
    },
-   "dbPeak": -5.3,
-   "dbMean": -5.4
+   "v7": {
+    "peak": 0.0648,
+    "mean": 0.028
+   },
+   "v7sDbMean": -5.5,
+   "v7DbMean": -7.8,
+   "v7DbPeak": -3.9
   },
   {
    "cue": "siren-crew",
    "v6": {
     "peak": 0.1023,
-    "mean": 0.0849
+    "mean": 0.0887
+   },
+   "v7s": {
+    "peak": 0.0564,
+    "mean": 0.0473
    },
    "v7": {
-    "peak": 0.0564,
-    "mean": 0.0471
+    "peak": 0.0266,
+    "mean": 0.0248
    },
-   "dbPeak": -5.2,
-   "dbMean": -5.1
+   "v7sDbMean": -5.5,
+   "v7DbMean": -11.1,
+   "v7DbPeak": -11.7
   },
   {
    "cue": "engine-20",
    "v6": {
-    "peak": 0.0536,
-    "mean": 0.036
+    "peak": 0.0517,
+    "mean": 0.0357
+   },
+   "v7s": {
+    "peak": 0.0527,
+    "mean": 0.037
    },
    "v7": {
-    "peak": 0.052,
-    "mean": 0.0358
+    "peak": 0.0521,
+    "mean": 0.0363
    },
-   "dbPeak": -0.3,
-   "dbMean": 0
+   "v7sDbMean": 0.3,
+   "v7DbMean": 0.1,
+   "v7DbPeak": 0.1
   },
   {
    "cue": "engine-31-boost",
    "v6": {
-    "peak": 0.0555,
-    "mean": 0.0442
+    "peak": 0.0539,
+    "mean": 0.0463
+   },
+   "v7s": {
+    "peak": 0.0559,
+    "mean": 0.0433
    },
    "v7": {
-    "peak": 0.0555,
-    "mean": 0.0432
+    "peak": 0.0545,
+    "mean": 0.0438
    },
-   "dbPeak": 0,
-   "dbMean": -0.2
+   "v7sDbMean": -0.6,
+   "v7DbMean": -0.5,
+   "v7DbPeak": 0.1
   },
   {
    "cue": "engine+siren",
    "v6": {
-    "peak": 0.1185,
-    "mean": 0.1003
+    "peak": 0.1164,
+    "mean": 0.096
+   },
+   "v7s": {
+    "peak": 0.0735,
+    "mean": 0.066
    },
    "v7": {
-    "peak": 0.0751,
-    "mean": 0.0661
+    "peak": 0.0775,
+    "mean": 0.0667
    },
-   "dbPeak": -4,
-   "dbMean": -3.6
+   "v7sDbMean": -3.3,
+   "v7DbMean": -3.2,
+   "v7DbPeak": -3.5
   },
   {
    "cue": "shot",
    "v6": {
-    "peak": 0.0717,
-    "mean": 0.0056
+    "peak": 0.0722,
+    "mean": 0.003
+   },
+   "v7s": {
+    "peak": 0.0716,
+    "mean": 0.007
    },
    "v7": {
-    "peak": 0.0719,
-    "mean": 0.0058
+    "peak": 0.0615,
+    "mean": 0.0094
    },
-   "dbPeak": 0,
-   "dbMean": 0.3
+   "v7sDbMean": 7.4,
+   "v7DbMean": 9.9,
+   "v7DbPeak": -1.4
   },
   {
    "cue": "shotHit",
    "v6": {
     "peak": 0.0499,
-    "mean": 0.0053
+    "mean": 0.0081
    },
-   "v7": {
-    "peak": 0.05,
+   "v7s": {
+    "peak": 0.0502,
     "mean": 0.0048
    },
-   "dbPeak": 0,
-   "dbMean": -0.9
+   "v7": {
+    "peak": 0.0499,
+    "mean": 0.0066
+   },
+   "v7sDbMean": -4.5,
+   "v7DbMean": -1.8,
+   "v7DbPeak": 0
+  },
+  {
+   "cue": "flat",
+   "v6": {
+    "peak": 0.0458,
+    "mean": 0.0143
+   },
+   "v7s": {
+    "peak": 0.0458,
+    "mean": 0.0131
+   },
+   "v7": {
+    "peak": 0.1051,
+    "mean": 0.0221
+   },
+   "v7sDbMean": -0.8,
+   "v7DbMean": 3.8,
+   "v7DbPeak": 7.2
+  },
+  {
+   "cue": "spikes",
+   "v6": {
+    "peak": 0.0193,
+    "mean": 0.0059
+   },
+   "v7s": {
+    "peak": 0.0189,
+    "mean": 0.0052
+   },
+   "v7": {
+    "peak": 0.1031,
+    "mean": 0.0157
+   },
+   "v7sDbMean": -1.1,
+   "v7DbMean": 8.5,
+   "v7DbPeak": 14.6
+  },
+  {
+   "cue": "sticky",
+   "v6": {
+    "peak": 0.0525,
+    "mean": 0.0065
+   },
+   "v7s": {
+    "peak": 0.053,
+    "mean": 0.0085
+   },
+   "v7": {
+    "peak": 0.0681,
+    "mean": 0.0284
+   },
+   "v7sDbMean": 2.3,
+   "v7DbMean": 12.8,
+   "v7DbPeak": 2.3
+  },
+  {
+   "cue": "nitroPickup",
+   "v6": {
+    "peak": 0.0274,
+    "mean": 0.0023
+   },
+   "v7s": {
+    "peak": 0.0276,
+    "mean": 0.004
+   },
+   "v7": {
+    "peak": 0.0807,
+    "mean": 0.052
+   },
+   "v7sDbMean": 4.8,
+   "v7DbMean": 27.1,
+   "v7DbPeak": 9.4
+  },
+  {
+   "cue": "barrier",
+   "v6": {
+    "peak": 0.0434,
+    "mean": 0.0061
+   },
+   "v7s": {
+    "peak": 0.0436,
+    "mean": 0.0034
+   },
+   "v7": {
+    "peak": 0.1518,
+    "mean": 0.0334
+   },
+   "v7sDbMean": -5.1,
+   "v7DbMean": 14.8,
+   "v7DbPeak": 10.9
+  },
+  {
+   "cue": "brake",
+   "v6": {
+    "peak": 0.0217,
+    "mean": 0.0039
+   },
+   "v7s": {
+    "peak": 0.0222,
+    "mean": 0.004
+   },
+   "v7": {
+    "peak": 0.0477,
+    "mean": 0.035
+   },
+   "v7sDbMean": 0.2,
+   "v7DbMean": 19.1,
+   "v7DbPeak": 6.8
+  },
+  {
+   "cue": "skid",
+   "v6": {
+    "peak": 0.057,
+    "mean": 0.0119
+   },
+   "v7s": {
+    "peak": 0.0583,
+    "mean": 0.0116
+   },
+   "v7": {
+    "peak": 0.0696,
+    "mean": 0.0297
+   },
+   "v7sDbMean": -0.2,
+   "v7DbMean": 7.9,
+   "v7DbPeak": 1.7
   },
   {
    "cue": "catch",
    "v6": {
     "peak": 0.0605,
-    "mean": 0.0153
+    "mean": 0.0152
+   },
+   "v7s": {
+    "peak": 0.0605,
+    "mean": 0.0107
    },
    "v7": {
     "peak": 0.0605,
-    "mean": 0.0145
+    "mean": 0.0185
    },
-   "dbPeak": 0,
-   "dbMean": -0.5
+   "v7sDbMean": -3,
+   "v7DbMean": 1.7,
+   "v7DbPeak": 0
   }
  ],
  "runs": {
@@ -179,11 +438,11 @@
     "cues": {
      "siren-first-call": {
       "peak": 0.1024,
-      "mean": 0.0881
+      "mean": 0.0895
      },
      "siren-loop-0": {
-      "peak": 0.1016,
-      "mean": 0.0957
+      "peak": 0.1017,
+      "mean": 0.0901
      },
      "siren-loop-1": {
       "peak": 0.1019,
@@ -191,99 +450,103 @@
      },
      "siren-loop-2": {
       "peak": 0.1015,
-      "mean": 0.0998
+      "mean": 0.0997
+     },
+     "siren-near": {
+      "peak": 0.1017,
+      "mean": 0.1
      },
      "siren-far": {
-      "peak": 0.1005,
-      "mean": 0.0678
+      "peak": 0.1013,
+      "mean": 0.0687
      },
      "siren-crew": {
       "peak": 0.1023,
-      "mean": 0.0849
+      "mean": 0.0887
      },
      "engine-idle-4": {
-      "peak": 0.0436,
-      "mean": 0.0242
+      "peak": 0.0409,
+      "mean": 0.0191
      },
      "engine-20": {
-      "peak": 0.0536,
-      "mean": 0.036
+      "peak": 0.0517,
+      "mean": 0.0357
      },
      "engine-31-boost": {
-      "peak": 0.0555,
-      "mean": 0.0442
+      "peak": 0.0539,
+      "mean": 0.0463
      },
      "engine+siren": {
-      "peak": 0.1185,
-      "mean": 0.1003
+      "peak": 0.1164,
+      "mean": 0.096
      },
      "shot": {
-      "peak": 0.0717,
-      "mean": 0.0056
+      "peak": 0.0722,
+      "mean": 0.003
      },
      "shotHit": {
       "peak": 0.0499,
-      "mean": 0.0053
+      "mean": 0.0081
      },
      "turn": {
-      "peak": 0.0159,
+      "peak": 0.0175,
       "mean": 0.0018
      },
      "flat": {
       "peak": 0.0458,
-      "mean": 0.0133
+      "mean": 0.0143
      },
      "skid": {
-      "peak": 0.0584,
-      "mean": 0.0116
+      "peak": 0.057,
+      "mean": 0.0119
      },
      "twang": {
       "peak": 0.0512,
-      "mean": 0.0046
+      "mean": 0.0047
      },
      "whistle": {
-      "peak": 0.0391,
-      "mean": 0.0071
+      "peak": 0.0384,
+      "mean": 0.0066
      },
      "whoosh": {
-      "peak": 0.0324,
-      "mean": 0.0062
+      "peak": 0.0316,
+      "mean": 0.0079
      },
      "hitBody": {
       "peak": 0.0598,
-      "mean": 0.0065
+      "mean": 0.0059
      },
      "hitHead": {
-      "peak": 0.0448,
+      "peak": 0.045,
       "mean": 0.0112
      },
      "catch": {
       "peak": 0.0605,
-      "mean": 0.0153
+      "mean": 0.0152
      },
      "perfect": {
-      "peak": 0.063,
-      "mean": 0.0242
+      "peak": 0.0631,
+      "mean": 0.0216
      },
      "crash": {
       "peak": 0.0436,
-      "mean": 0.0053
+      "mean": 0.0055
      },
      "scrape": {
-      "peak": 0.0292,
-      "mean": 0.0036
+      "peak": 0.0307,
+      "mean": 0.004
      },
      "ram": {
-      "peak": 0.044,
-      "mean": 0.0038
+      "peak": 0.0435,
+      "mean": 0.008
      },
      "thud": {
       "peak": 0.0648,
-      "mean": 0.0061
+      "mean": 0.0064
      },
      "count": {
-      "peak": 0.0233,
-      "mean": 0.0019
+      "peak": 0.0231,
+      "mean": 0.0021
      },
      "go": {
       "peak": 0.0347,
@@ -291,31 +554,47 @@
      },
      "tool": {
       "peak": 0.0174,
-      "mean": 0.0014
+      "mean": 0.0013
      },
      "miss": {
       "peak": 0.0381,
-      "mean": 0.0045
+      "mean": 0.0042
      },
      "near": {
-      "peak": 0.0345,
-      "mean": 0.004
+      "peak": 0.0337,
+      "mean": 0.0041
      },
      "brake": {
-      "peak": 0.0224,
-      "mean": 0.004
+      "peak": 0.0217,
+      "mean": 0.0039
      },
      "nitro": {
-      "peak": 0.01,
-      "mean": 0.0017
+      "peak": 0.0104,
+      "mean": 0.0016
+     },
+     "nitroPickup": {
+      "peak": 0.0274,
+      "mean": 0.0023
+     },
+     "barrier": {
+      "peak": 0.0434,
+      "mean": 0.0061
+     },
+     "sticky": {
+      "peak": 0.0525,
+      "mean": 0.0065
+     },
+     "spikes": {
+      "peak": 0.0193,
+      "mean": 0.0059
      },
      "draw": {
-      "peak": 0.0271,
-      "mean": 0.0181
+      "peak": 0.0272,
+      "mean": 0.0176
      },
      "stack-shot+siren+engine": {
-      "peak": 0.1193,
-      "mean": 0.0952
+      "peak": 0.119,
+      "mean": 0.0959
      }
     },
     "siren": {},
@@ -376,6 +655,20 @@
       "draw": false,
       "limiter": true
      },
+     "sirenNear": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": true,
+      "sirenGain": 0.62,
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
      "sirenAfterHold": {
       "state": "running",
       "sirenBuffer": "twoTone",
@@ -420,18 +713,19 @@
      }
     }
    },
-   "errors": []
+   "errors": [],
+   "failed": []
   },
-  "v7": {
+  "v7s": {
    "report": {
     "cues": {
      "siren-first-call": {
-      "peak": 0.0568,
-      "mean": 0.0499
+      "peak": 0.0566,
+      "mean": 0.0486
      },
      "siren-loop-0": {
       "peak": 0.0559,
-      "mean": 0.0492
+      "mean": 0.0495
      },
      "siren-loop-1": {
       "peak": 0.0561,
@@ -441,129 +735,149 @@
       "peak": 0.0558,
       "mean": 0.0549
      },
+     "siren-near": {
+      "peak": 0.056,
+      "mean": 0.0549
+     },
      "siren-far": {
-      "peak": 0.0549,
+      "peak": 0.0559,
       "mean": 0.0364
      },
      "siren-crew": {
       "peak": 0.0564,
-      "mean": 0.0471
+      "mean": 0.0473
      },
      "engine-idle-4": {
-      "peak": 0.0428,
-      "mean": 0.0211
+      "peak": 0.0434,
+      "mean": 0.0204
      },
      "engine-20": {
-      "peak": 0.052,
-      "mean": 0.0358
+      "peak": 0.0527,
+      "mean": 0.037
      },
      "engine-31-boost": {
-      "peak": 0.0555,
-      "mean": 0.0432
+      "peak": 0.0559,
+      "mean": 0.0433
      },
      "engine+siren": {
-      "peak": 0.0751,
-      "mean": 0.0661
+      "peak": 0.0735,
+      "mean": 0.066
      },
      "shot": {
-      "peak": 0.0719,
-      "mean": 0.0058
+      "peak": 0.0716,
+      "mean": 0.007
      },
      "shotHit": {
-      "peak": 0.05,
+      "peak": 0.0502,
       "mean": 0.0048
      },
      "turn": {
-      "peak": 0.0166,
-      "mean": 0.0019
+      "peak": 0.017,
+      "mean": 0.0017
      },
      "flat": {
-      "peak": 0.0457,
-      "mean": 0.0134
+      "peak": 0.0458,
+      "mean": 0.0131
      },
      "skid": {
       "peak": 0.0583,
-      "mean": 0.0112
+      "mean": 0.0116
      },
      "twang": {
       "peak": 0.0512,
-      "mean": 0.0047
+      "mean": 0.0044
      },
      "whistle": {
       "peak": 0.0391,
-      "mean": 0.0075
+      "mean": 0.0066
      },
      "whoosh": {
-      "peak": 0.0322,
-      "mean": 0.0063
+      "peak": 0.0298,
+      "mean": 0.0058
      },
      "hitBody": {
-      "peak": 0.0598,
-      "mean": 0.0064
+      "peak": 0.0596,
+      "mean": 0.0062
      },
      "hitHead": {
       "peak": 0.045,
-      "mean": 0.0131
+      "mean": 0.0121
      },
      "catch": {
       "peak": 0.0605,
-      "mean": 0.0145
+      "mean": 0.0107
      },
      "perfect": {
-      "peak": 0.0631,
-      "mean": 0.0238
+      "peak": 0.0629,
+      "mean": 0.0281
      },
      "crash": {
-      "peak": 0.0437,
+      "peak": 0.0436,
       "mean": 0.0057
      },
      "scrape": {
-      "peak": 0.0298,
-      "mean": 0.0035
+      "peak": 0.0317,
+      "mean": 0.0038
      },
      "ram": {
-      "peak": 0.0438,
-      "mean": 0.0045
+      "peak": 0.0439,
+      "mean": 0.0038
      },
      "thud": {
       "peak": 0.0647,
-      "mean": 0.0062
+      "mean": 0.0066
      },
      "count": {
       "peak": 0.0233,
-      "mean": 0.002
+      "mean": 0.0024
      },
      "go": {
       "peak": 0.0344,
-      "mean": 0.0049
+      "mean": 0.0064
      },
      "tool": {
       "peak": 0.0174,
-      "mean": 0.0015
+      "mean": 0.0017
      },
      "miss": {
       "peak": 0.0379,
-      "mean": 0.0046
+      "mean": 0.0037
      },
      "near": {
-      "peak": 0.0344,
-      "mean": 0.0039
+      "peak": 0.0339,
+      "mean": 0.0051
      },
      "brake": {
-      "peak": 0.022,
-      "mean": 0.0041
+      "peak": 0.0222,
+      "mean": 0.004
      },
      "nitro": {
-      "peak": 0.0101,
-      "mean": 0.0019
+      "peak": 0.0105,
+      "mean": 0.0017
+     },
+     "nitroPickup": {
+      "peak": 0.0276,
+      "mean": 0.004
+     },
+     "barrier": {
+      "peak": 0.0436,
+      "mean": 0.0034
+     },
+     "sticky": {
+      "peak": 0.053,
+      "mean": 0.0085
+     },
+     "spikes": {
+      "peak": 0.0189,
+      "mean": 0.0052
      },
      "draw": {
       "peak": 0.027,
-      "mean": 0.018
+      "mean": 0.0175
      },
      "stack-shot+siren+engine": {
-      "peak": 0.0823,
-      "mean": 0.0583
+      "peak": 0.0884,
+      "mean": 0.0611
      }
     },
     "siren": {},
@@ -628,6 +942,21 @@
       "draw": false,
       "limiter": true
      },
+     "sirenNear": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": true,
+      "sirenGain": 0.341,
+      "sirenScale": 0.55,
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
      "sirenAfterHold": {
       "state": "running",
       "sirenBuffer": "twoTone",
@@ -675,7 +1004,355 @@
      }
     }
    },
-   "errors": []
+   "errors": [],
+   "failed": []
+  },
+  "v7": {
+   "report": {
+    "cues": {
+     "siren-first-call": {
+      "peak": 0.0511,
+      "mean": 0.0476
+     },
+     "siren-loop-0": {
+      "peak": 0.051,
+      "mean": 0.0505
+     },
+     "siren-loop-1": {
+      "peak": 0.0511,
+      "mean": 0.0508
+     },
+     "siren-loop-2": {
+      "peak": 0.051,
+      "mean": 0.0478
+     },
+     "siren-near": {
+      "peak": 0.0662,
+      "mean": 0.0577
+     },
+     "siren-far": {
+      "peak": 0.0648,
+      "mean": 0.028
+     },
+     "siren-crew": {
+      "peak": 0.0266,
+      "mean": 0.0248
+     },
+     "engine-idle-4": {
+      "peak": 0.0444,
+      "mean": 0.0202
+     },
+     "engine-20": {
+      "peak": 0.0521,
+      "mean": 0.0363
+     },
+     "engine-31-boost": {
+      "peak": 0.0545,
+      "mean": 0.0438
+     },
+     "engine+siren": {
+      "peak": 0.0775,
+      "mean": 0.0667
+     },
+     "shot": {
+      "peak": 0.0615,
+      "mean": 0.0094
+     },
+     "shotHit": {
+      "peak": 0.0499,
+      "mean": 0.0066
+     },
+     "turn": {
+      "peak": 0.0177,
+      "mean": 0.0013
+     },
+     "flat": {
+      "peak": 0.1051,
+      "mean": 0.0221
+     },
+     "skid": {
+      "peak": 0.0696,
+      "mean": 0.0297
+     },
+     "twang": {
+      "peak": 0.0512,
+      "mean": 0.0062
+     },
+     "whistle": {
+      "peak": 0.0387,
+      "mean": 0.0081
+     },
+     "whoosh": {
+      "peak": 0.0317,
+      "mean": 0.0037
+     },
+     "hitBody": {
+      "peak": 0.0598,
+      "mean": 0.0114
+     },
+     "hitHead": {
+      "peak": 0.045,
+      "mean": 0.0131
+     },
+     "catch": {
+      "peak": 0.0605,
+      "mean": 0.0185
+     },
+     "perfect": {
+      "peak": 0.0628,
+      "mean": 0.0231
+     },
+     "crash": {
+      "peak": 0.0435,
+      "mean": 0.0061
+     },
+     "scrape": {
+      "peak": 0.0307,
+      "mean": 0.0046
+     },
+     "ram": {
+      "peak": 0.0435,
+      "mean": 0.0041
+     },
+     "thud": {
+      "peak": 0.0647,
+      "mean": 0.007
+     },
+     "count": {
+      "peak": 0.0112,
+      "mean": 0.0005
+     },
+     "go": {
+      "peak": 0.0344,
+      "mean": 0.0071
+     },
+     "tool": {
+      "peak": 0.0174,
+      "mean": 0.0016
+     },
+     "miss": {
+      "peak": 0.0379,
+      "mean": 0.0059
+     },
+     "near": {
+      "peak": 0.0342,
+      "mean": 0.0045
+     },
+     "brake": {
+      "peak": 0.0477,
+      "mean": 0.035
+     },
+     "nitro": {
+      "peak": 0.0106,
+      "mean": 0.0019
+     },
+     "nitroPickup": {
+      "peak": 0.0807,
+      "mean": 0.052
+     },
+     "barrier": {
+      "peak": 0.1518,
+      "mean": 0.0334
+     },
+     "sticky": {
+      "peak": 0.0681,
+      "mean": 0.0284
+     },
+     "spikes": {
+      "peak": 0.1031,
+      "mean": 0.0157
+     },
+     "draw": {
+      "peak": 0.0263,
+      "mean": 0.0184
+     },
+     "stack-shot+siren+engine": {
+      "peak": 0.1303,
+      "mean": 0.074
+     }
+    },
+    "siren": {},
+    "status": {
+     "afterGesture": {
+      "state": "running",
+      "sirenBuffer": null,
+      "sirenDecoded": {
+       "twoTone": null,
+       "yelp": null
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 0,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "decoded": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "sirenFirst": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "sirenLoop": {
+      "state": "running",
+      "sirenBuffer": "police-soft",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": true,
+      "sirenGain": 0.592,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": "police-soft",
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "sirenNear": {
+      "state": "running",
+      "sirenBuffer": "siren-near",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": true,
+      "sirenGain": 0.711,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": "siren-near",
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "sirenAfterHold": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": false,
+      "limiter": true
+     },
+     "engine": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": true,
+      "boosting": true,
+      "draw": false,
+      "limiter": true
+     },
+     "final": {
+      "state": "running",
+      "sirenBuffer": "twoTone",
+      "sirenDecoded": {
+       "twoTone": 5,
+       "yelp": 5
+      },
+      "sirenLive": false,
+      "sirenGain": 0,
+      "sirenScale": 0.55,
+      "pack": {
+       "decoded": 9,
+       "of": 9,
+       "siren": null,
+       "voices": 0,
+       "format": "ogg"
+      },
+      "engine": false,
+      "boosting": false,
+      "draw": true,
+      "limiter": true
+     }
+    }
+   },
+   "errors": [],
+   "failed": []
   }
  }
 }

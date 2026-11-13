@@ -12,8 +12,10 @@
 <script type="module">
 import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-12';
 const out = document.getElementById('out'), st = document.getElementById('st'), log = s => { out.textContent += s + '\n'; };
-// ?siren=v7: the v7 level (SIREN7 .55 of the v6 gain), as catch-session6.mjs plays it unless ?catchSiren=v6
-const audio = createCatchAudio(new URLSearchParams(location.search).get('siren') === 'v7' ? {sirenScale: .55} : {}); window.audio = audio;
+// ?siren=v7: the v7 level without the sound pack (SIREN7 .55 of the v6 gain, ?catchAssets=0); ?pack=v7: the v7 sound pack (Codex,
+// PACK7 in catch-audio.mjs), as catch-session6.mjs plays it by default
+const query = new URLSearchParams(location.search), pack = query.get('pack') === 'v7';
+const audio = createCatchAudio(pack ? {sirenScale: .55, pack: 'v7'} : query.get('siren') === 'v7' ? {sirenScale: .55} : {}); window.audio = audio;
 const report = {cues: {}, siren: {}, status: {}};
 let analyser = null, buf = null;
 const tap = () => {
@@ -39,11 +41,14 @@ async function run() {
   report.status.afterGesture = audio.status(); st.textContent = 'state ' + report.status.afterGesture.state;
   audio.cue('engine'); // v5 start cue: also kicks the loop decode
   for (let i = 0; i < 40 && !audio.status().sirenDecoded.twoTone; i++) await sleep(50);
+  for (let i = 0; i < 60 && pack && audio.status().pack?.decoded < audio.status().pack?.of; i++) await sleep(50);
   report.status.decoded = audio.status();
   await measure('siren-first-call', () => audio.cue('siren', {approach: 0}), 900, 1);
   report.status.sirenFirst = audio.status();
   for (let i = 0; i < 3; i++) await measure('siren-loop-' + i, () => audio.cue('siren', {approach: .5}), 800, 1);
   report.status.sirenLoop = audio.status();
+  // v7 pack: the near siren of a police roadblock (the v6 and v7s runs play their one loop here, at the same full level)
+  await measure('siren-near', () => audio.cue('siren', {approach: .5, near: true}), 800, 1); report.status.sirenNear = audio.status();
   await measure('siren-far', () => audio.cue('siren', {approach: -1, level: .5}), 800, 1);
   await sleep(1300); report.status.sirenAfterHold = audio.status();
   await measure('siren-crew', () => audio.cue('siren', {crew: true}), 900, 1); await sleep(1600);
@@ -53,7 +58,7 @@ async function run() {
   report.status.engine = audio.status();
   await measure('engine+siren', () => { audio.cue('siren', {approach: .3}); const iv = setInterval(() => audio.engine(28, true), 50); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
   await sleep(1300);
-  for (const c of ['shot', 'shotHit', 'turn', 'flat', 'skid', 'twang', 'whistle', 'whoosh', 'hitBody', 'hitHead', 'catch', 'perfect', 'crash', 'scrape', 'ram', 'thud', 'count', 'go', 'tool', 'miss', 'near', 'brake', 'nitro']) await measure(c, () => audio.cue(c), c === 'skid' || c === 'flat' ? 1500 : 800);
+  for (const c of ['shot', 'shotHit', 'turn', 'flat', 'skid', 'twang', 'whistle', 'whoosh', 'hitBody', 'hitHead', 'catch', 'perfect', 'crash', 'scrape', 'ram', 'thud', 'count', 'go', 'tool', 'miss', 'near', 'brake', 'nitro', 'nitroPickup', 'barrier', 'sticky', 'spikes']) await measure(c, () => audio.cue(c), c === 'skid' || c === 'flat' ? 1500 : 800);
   await measure('draw', () => { let k = 0; const iv = setInterval(() => { k += .1; audio.cue('draw', Math.min(1, k)); if (k > 1.2) clearInterval(iv); }, 60); }, 900, 1);
   await measure('stack-shot+siren+engine', () => { audio.cue('siren', {approach: .5}); const iv = setInterval(() => audio.engine(30, true), 50); audio.cue('shotHit'); setTimeout(() => audio.cue('shot'), 150); setTimeout(() => audio.cue('flat'), 300); setTimeout(() => { clearInterval(iv); audio.engineStop(); }, 900); }, 1000);
   report.status.final = audio.status();

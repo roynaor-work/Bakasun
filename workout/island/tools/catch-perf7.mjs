@@ -1,4 +1,5 @@
-// Cost of "תפוס את הפושע" v7 per stage against the same session with every v7 flag off (= v22): draw calls, triangles and the
+// Cost of "תפוס את הפושע" v7 per stage against the same session with every v7 flag off (= v22) and v7 with its drawn shapes instead
+// of the Codex prop pack (v7s, ?catchAssets=0): draw calls, triangles and the
 // JS time of chase.step + view.update (software GL, only the relative size means something). Three frames per stage:
 //   chase  3 s after the start (as tools/catch-perf6.mjs)
 //   busy   the heaviest v7 moment: the helicopter and its spotlight (tracker), the sticky net on the car, a spike strip on the
@@ -10,7 +11,8 @@ const [,, stagesArg = '1,5,8,10', base = 'http://127.0.0.1:8765/workout/island/'
 const {chromium} = await import(process.env.ISLAND_PLAYWRIGHT ? pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href : '/opt/node-tools/node_modules/playwright/index.mjs');
 const browser = await chromium.launch({args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--ignore-gpu-blocklist', '--no-proxy-server']});
 const rows = [];
-for (const stage of stagesArg.split(',').map(Number)) for (const [label, q] of [['v22', '&catchWeapons=0&catchElements=0&catchAssist=0&catchSiren=v6'], ['v7', '']]) {
+// v7s = v7 with the drawn shapes (?catchAssets=0), v7 = with the Codex prop pack (the default)
+for (const stage of stagesArg.split(',').map(Number)) for (const [label, q] of [['v22', '&catchWeapons=0&catchElements=0&catchAssist=0&catchSiren=v6'], ['v7s', '&catchAssets=0'], ['v7', '']]) {
   const page = await browser.newPage({viewport: {width: 844, height: 390}, deviceScaleFactor: 1});
   await page.goto(`${base}tools/catch-harness6.html?stage=${stage}&dev=1${q}`); await page.waitForFunction('window.done===true', null, {timeout: 180000});
   await page.waitForFunction(() => session.snapshot.mode === 'chase');
@@ -29,7 +31,7 @@ for (const stage of stagesArg.split(',').map(Number)) for (const [label, q] of [
       c.gun.select('spikes'); d.stepChase(1 / 60); c.gun.raw.locked = true; c.gun.state.perTool.spikes.reload = 0; c.fire(); // a strip on the road
       let shift = 0; if (orb && block) { const lo = Math.min(orb.s, block.s); if (lo - c.state.s > 120) { shift = lo - c.state.s - 100; c.state.s += shift; c.state.crim.s += shift; } }
       for (let i = 0; i < 90; i++) frame();
-      out.busy = v.fx7?.stats?.() || null;
+      out.busy = v.fx7?.stats?.() || null; out.pack = v.props7Stats?.() || null; // which Codex props are in view at the busy moment
       time('busyMs', frame); out.busyCalls = r.info.render.calls; out.busyTris = r.info.render.triangles;
       c.state.s -= shift; c.state.crim.s -= shift; for (let i = 0; i < 3; i++) frame(); // back to the same stretch of road, so the throw compares with v22
     } else { for (let i = 0; i < 90; i++) frame(); time('busyMs', frame); out.busyCalls = r.info.render.calls; out.busyTris = r.info.render.triangles; }
@@ -39,6 +41,6 @@ for (const stage of stagesArg.split(',').map(Number)) for (const [label, q] of [
   rows.push({stage, label, ...sample}); await page.close();
 }
 console.log('stage ver   chase: ms calls tris      busy: ms calls tris      throw: ms calls tris      textures geometries');
-for (const r of rows) console.log(String(r.stage).padStart(3), r.label.padEnd(4), String(r.chaseMs).padStart(9), String(r.chaseCalls).padStart(5), String(r.chaseTris).padStart(8), String(r.busyMs).padStart(10), String(r.busyCalls).padStart(5), String(r.busyTris).padStart(8), String(r.throwMs).padStart(10), String(r.throwCalls).padStart(5), String(r.throwTris).padStart(8), String(r.textures).padStart(9), String(r.geometries).padStart(9), r.busy ? JSON.stringify(r.busy) : '');
+for (const r of rows) console.log(String(r.stage).padStart(3), r.label.padEnd(4), String(r.chaseMs).padStart(9), String(r.chaseCalls).padStart(5), String(r.chaseTris).padStart(8), String(r.busyMs).padStart(10), String(r.busyCalls).padStart(5), String(r.busyTris).padStart(8), String(r.throwMs).padStart(10), String(r.throwCalls).padStart(5), String(r.throwTris).padStart(8), String(r.textures).padStart(9), String(r.geometries).padStart(9), r.busy ? JSON.stringify(r.busy) : '', r.pack ? JSON.stringify(r.pack) : '');
 console.log(JSON.stringify(rows));
 await browser.close();

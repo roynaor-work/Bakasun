@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 1,
+  "sampleRateHz": 48000,
+  "channels": 1,
+  "license": "CC0-1.0",
+  "provenance": "Original mathematical synthesis only; no external samples.",
+  "volumeRange": [
+    0.02,
+    0.04
+  ],
+  "maxSimultaneousVoices": 3,
+  "sirenPolicy": "Use one siren variant at a time; crossfade 80 ms when switching.",
+  "loopPolicy": "Decode once; AudioBufferSourceNode loop=true with exact loop bounds. Ramp start/stop 40 ms.",
+  "loudnessMethod": "BS.1770 via ffmpeg loudnorm input_i; repeat to at least 4 s (including short events).",
+  "assets": [
+    {
+      "id": "police-soft",
+      "label": "סירנת משטרה עדינה",
+      "durationSeconds": 2.0,
+      "loop": true,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": 2.0,
+      "recommendedVolume": 0.025,
+      "targetLufs": -22,
+      "seed": 20261113,
+      "source": "generate.py:synth('police-soft')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "police-soft.ogg",
+          "bytes": 12646,
+          "sha256": "60c63d8da4ec69cf387e1c01ee805122623ce6743b7f22800d4c0767a8e7f855",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -21.99,
+          "truePeakDbtp": -18.11,
+          "spectrumEnergyPct": {
+            "0-200": 2e-05,
+            "200-500": 35.96499,
+            "500-1000": 63.96184,
+            "1000-2000": 0.07315,
+            "2000-5000": 0.0,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -69.02,
+          "seamRmsVsBodyDb": -0.71
+        },
+        "mp3": {
+          "path": "police-soft.mp3",
+          "bytes": 16556,
+          "sha256": "644a73797a1613580547f2bfe3489a132d4e498ad595a2995f04fae7e3e9d947",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -21.99,
+          "truePeakDbtp": -18.31,
+          "spectrumEnergyPct": {
+            "0-200": 0.0,
+            "200-500": 35.96102,
+            "500-1000": 63.96596,
+            "1000-2000": 0.07302,
+            "2000-5000": 0.0,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -103.21,
+          "seamRmsVsBodyDb": -0.71
+        }
+      }
+    },
+    {
+      "id": "siren-far-helicopter",
+      "label": "סירנה רחוקה · מסוק",
+      "durationSeconds": 2.0,
+      "loop": true,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": 2.0,
+      "recommendedVolume": 0.02,
+      "targetLufs": -26,
+      "seed": 20261114,
+      "source": "generate.py:synth('siren-far-helicopter')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "siren-far-helicopter.ogg",
+          "bytes": 12611,
+          "sha256": "26af51ae001920fe81d3cb38952820a7ffe56349895e39b5962a143a9e3d5b56",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -26.02,
+          "truePeakDbtp": -19.58,
+          "spectrumEnergyPct": {
+            "0-200": 0.68472,
+            "200-500": 97.33179,
+            "500-1000": 1.98309,
+            "1000-2000": 0.0004,
+            "2000-5000": 0.0,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -65.25,
+          "seamRmsVsBodyDb": -0.74
+        },
+        "mp3": {
+          "path": "siren-far-helicopter.mp3",
+          "bytes": 16556,
+          "sha256": "531348f38c2dd365a60c90496ac06686f1c8c5c04a2bddef39e9f6ee41afc4f1",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -26.01,
+          "truePeakDbtp": -19.47,
+          "spectrumEnergyPct": {
+            "0-200": 0.67052,
+            "200-500": 97.36022,
+            "500-1000": 1.96879,
+            "1000-2000": 0.00047,
+            "2000-5000": 0.0,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -101.58,
+          "seamRmsVsBodyDb": -0.7
+        }
+      }
+    },
+    {
+      "id": "siren-near",
+      "label": "סירנה קרובה",
+      "durationSeconds": 2.0,
+      "loop": true,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": 2.0,
+      "recommendedVolume": 0.03,
+      "targetLufs": -22,
+      "seed": 20261115,
+      "source": "generate.py:synth('siren-near')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "siren-near.ogg",
+          "bytes": 12651,
+          "sha256": "7ad641de0b235742ef08dd45582e2de736e786af18f3d96e33aac6c307ea07b5",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -21.99,
+          "truePeakDbtp": -17.59,
+          "spectrumEnergyPct": {
+            "0-200": 2e-05,
+            "200-500": 34.53971,
+            "500-1000": 65.18869,
+            "1000-2000": 0.26779,
+            "2000-5000": 0.0038,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -73.71,
+          "seamRmsVsBodyDb": -0.03
+        },
+        "mp3": {
+          "path": "siren-near.mp3",
+          "bytes": 16556,
+          "sha256": "212b84ba5b29ee354137f33350981b8a46dd5b5527aac9722ad98bbf1129e1d5",
+          "decodedSamples": 96000,
+          "decodedDurationSeconds": 2.0,
+          "integratedLufs": -21.98,
+          "truePeakDbtp": -17.7,
+          "spectrumEnergyPct": {
+            "0-200": 0.0,
+            "200-500": 34.57052,
+            "500-1000": 65.15608,
+            "1000-2000": 0.26943,
+            "2000-5000": 0.00396,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -90.29,
+          "seamRmsVsBodyDb": -0.02
+        }
+      }
+    },
+    {
+      "id": "shot-beep",
+      "label": "צפצוף ירי",
+      "durationSeconds": 0.18,
+      "loop": false,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": null,
+      "recommendedVolume": 0.025,
+      "targetLufs": -24,
+      "seed": 20261116,
+      "source": "generate.py:synth('shot-beep')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "shot-beep.ogg",
+          "bytes": 1335,
+          "sha256": "cef9bd3264e1672e7744bc532ef5cd827361fc2727837d8dcc502af5e2b40a57",
+          "decodedSamples": 8640,
+          "decodedDurationSeconds": 0.18,
+          "integratedLufs": -23.99,
+          "truePeakDbtp": -14.69,
+          "spectrumEnergyPct": {
+            "0-200": 0.0002,
+            "200-500": 0.00237,
+            "500-1000": 99.99447,
+            "1000-2000": 0.00273,
+            "2000-5000": 0.00017,
+            "5000-10000": 7e-05,
+            "10000-24000": 0.0
+          }
+        },
+        "mp3": {
+          "path": "shot-beep.mp3",
+          "bytes": 1964,
+          "sha256": "86d1a9becbbd9b3a5f765de5cf4697daa69b6a0c2d006d94bcd1d622eb2dd367",
+          "decodedSamples": 8640,
+          "decodedDurationSeconds": 0.18,
+          "integratedLufs": -24.01,
+          "truePeakDbtp": -14.76,
+          "spectrumEnergyPct": {
+            "0-200": 0.00126,
+            "200-500": 0.00055,
+            "500-1000": 99.99656,
+            "1000-2000": 0.00164,
+            "2000-5000": 0.0,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        }
+      }
+    },
+    {
+      "id": "nitro",
+      "label": "ניטרו עולה",
+      "durationSeconds": 0.8,
+      "loop": false,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": null,
+      "recommendedVolume": 0.035,
+      "targetLufs": -24,
+      "seed": 20261117,
+      "source": "generate.py:synth('nitro')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "nitro.ogg",
+          "bytes": 5148,
+          "sha256": "118eb5d668bed662d1fe6181c9831945356a54a18e46d4cbf1f7b32b4af834b5",
+          "decodedSamples": 38400,
+          "decodedDurationSeconds": 0.8,
+          "integratedLufs": -23.97,
+          "truePeakDbtp": -9.73,
+          "spectrumEnergyPct": {
+            "0-200": 10.25697,
+            "200-500": 37.25924,
+            "500-1000": 34.46537,
+            "1000-2000": 18.01034,
+            "2000-5000": 0.00802,
+            "5000-10000": 6e-05,
+            "10000-24000": 0.0
+          }
+        },
+        "mp3": {
+          "path": "nitro.mp3",
+          "bytes": 6956,
+          "sha256": "2c4e3cefc8a8e31cbf8155cd1fc43cb6bec791c88bbf68dbd9cbccdd8a0ec3dc",
+          "decodedSamples": 38400,
+          "decodedDurationSeconds": 0.8,
+          "integratedLufs": -24.0,
+          "truePeakDbtp": -10.04,
+          "spectrumEnergyPct": {
+            "0-200": 9.98294,
+            "200-500": 36.7298,
+            "500-1000": 34.39378,
+            "1000-2000": 18.88392,
+            "2000-5000": 0.00955,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        }
+      }
+    },
+    {
+      "id": "puncture",
+      "label": "פנצ׳ר",
+      "durationSeconds": 0.4,
+      "loop": false,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": null,
+      "recommendedVolume": 0.03,
+      "targetLufs": -24,
+      "seed": 20261118,
+      "source": "generate.py:synth('puncture')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "puncture.ogg",
+          "bytes": 2845,
+          "sha256": "150e5c788899f4ceaee6393e7ead608447d045eb16af7014c073496a1df824ff",
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4,
+          "integratedLufs": -24.01,
+          "truePeakDbtp": -6.2,
+          "spectrumEnergyPct": {
+            "0-200": 5.8472,
+            "200-500": 34.71208,
+            "500-1000": 41.97359,
+            "1000-2000": 17.46657,
+            "2000-5000": 0.00052,
+            "5000-10000": 2e-05,
+            "10000-24000": 1e-05
+          }
+        },
+        "mp3": {
+          "path": "puncture.mp3",
+          "bytes": 3692,
+          "sha256": "ab25cd6d430b9e3308de9ab0385e2099c2161f91c642366dd3bab5aadcf7d620",
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4,
+          "integratedLufs": -24.02,
+          "truePeakDbtp": -6.1,
+          "spectrumEnergyPct": {
+            "0-200": 5.93494,
+            "200-500": 34.06266,
+            "500-1000": 42.36963,
+            "1000-2000": 17.63247,
+            "2000-5000": 0.0003,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        }
+      }
+    },
+    {
+      "id": "brake-loop",
+      "label": "חריקת בלימה",
+      "durationSeconds": 1.0,
+      "loop": true,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": 1.0,
+      "recommendedVolume": 0.025,
+      "targetLufs": -24,
+      "seed": 20261119,
+      "source": "generate.py:synth('brake-loop')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "brake-loop.ogg",
+          "bytes": 6530,
+          "sha256": "6a7ce426db64fc41fd04f4f5773d8158fb58f96e2d9bd66acf87d34410e5f407",
+          "decodedSamples": 48000,
+          "decodedDurationSeconds": 1.0,
+          "integratedLufs": -24.05,
+          "truePeakDbtp": -11.81,
+          "spectrumEnergyPct": {
+            "0-200": 0.06888,
+            "200-500": 15.85069,
+            "500-1000": 58.64255,
+            "1000-2000": 25.43593,
+            "2000-5000": 0.00191,
+            "5000-10000": 4e-05,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -57.21,
+          "seamRmsVsBodyDb": 0.89
+        },
+        "mp3": {
+          "path": "brake-loop.mp3",
+          "bytes": 8492,
+          "sha256": "86c6e970eaddc1d639e8cfe4c676479028ec85189b8f7bb0538488ff7ea18d4c",
+          "decodedSamples": 48000,
+          "decodedDurationSeconds": 1.0,
+          "integratedLufs": -23.98,
+          "truePeakDbtp": -11.92,
+          "spectrumEnergyPct": {
+            "0-200": 0.06825,
+            "200-500": 15.92312,
+            "500-1000": 58.39824,
+            "1000-2000": 25.60867,
+            "2000-5000": 0.00173,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          },
+          "seamStepDbfs": -79.34,
+          "seamRmsVsBodyDb": 0.83
+        }
+      }
+    },
+    {
+      "id": "net-drop",
+      "label": "רשת נופלת",
+      "durationSeconds": 0.6,
+      "loop": false,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": null,
+      "recommendedVolume": 0.03,
+      "targetLufs": -24,
+      "seed": 20261120,
+      "source": "generate.py:synth('net-drop')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "net-drop.ogg",
+          "bytes": 3812,
+          "sha256": "25afcfdfe061f1c7b42d0b864dffceb98ebff2e30cb05013fd0ff9354c209563",
+          "decodedSamples": 28800,
+          "decodedDurationSeconds": 0.6,
+          "integratedLufs": -24.01,
+          "truePeakDbtp": -10.51,
+          "spectrumEnergyPct": {
+            "0-200": 6.06896,
+            "200-500": 25.87443,
+            "500-1000": 39.39653,
+            "1000-2000": 28.65402,
+            "2000-5000": 0.00598,
+            "5000-10000": 8e-05,
+            "10000-24000": 0.0
+          }
+        },
+        "mp3": {
+          "path": "net-drop.mp3",
+          "bytes": 5228,
+          "sha256": "9ff2666b668bd9d6f7fb8539b3b5fa6a44529f18b443363965c456c31df2b143",
+          "decodedSamples": 28800,
+          "decodedDurationSeconds": 0.6,
+          "integratedLufs": -23.99,
+          "truePeakDbtp": -10.46,
+          "spectrumEnergyPct": {
+            "0-200": 5.95414,
+            "200-500": 25.34873,
+            "500-1000": 39.35501,
+            "1000-2000": 29.33479,
+            "2000-5000": 0.00734,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        }
+      }
+    },
+    {
+      "id": "barrier-break",
+      "label": "מחסום נשבר",
+      "durationSeconds": 0.65,
+      "loop": false,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": null,
+      "recommendedVolume": 0.04,
+      "targetLufs": -24,
+      "seed": 20261121,
+      "source": "generate.py:synth('barrier-break')",
+      "license": "CC0-1.0",
+      "files": {
+        "ogg": {
+          "path": "barrier-break.ogg",
+          "bytes": 4001,
+          "sha256": "4a1f9d867486fa2589ac1c3962af25749fd85267ceff77db26d3b4b92e32a73b",
+          "decodedSamples": 31200,
+          "decodedDurationSeconds": 0.65,
+          "integratedLufs": -24.01,
+          "truePeakDbtp": -8.17,
+          "spectrumEnergyPct": {
+            "0-200": 3.60785,
+            "200-500": 80.01855,
+            "500-1000": 8.41339,
+            "1000-2000": 7.95525,
+            "2000-5000": 0.00496,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        },
+        "mp3": {
+          "path": "barrier-break.mp3",
+          "bytes": 5804,
+          "sha256": "4c5b668824a50ce26730f2c82bb4420548aed3e683e6356f06bac1d19ccb619d",
+          "decodedSamples": 31200,
+          "decodedDurationSeconds": 0.65,
+          "integratedLufs": -24.0,
+          "truePeakDbtp": -7.84,
+          "spectrumEnergyPct": {
+            "0-200": 3.84945,
+            "200-500": 80.40077,
+            "500-1000": 8.15286,
+            "1000-2000": 7.59375,
+            "2000-5000": 0.00316,
+            "5000-10000": 0.0,
+            "10000-24000": 0.0
+          }
+        }
+      }
+    }
+  ]
+}
