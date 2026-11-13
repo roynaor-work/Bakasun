@@ -1,0 +1,403 @@
+{
+  "date": "2026-11-13",
+  "gltfValidator": {
+    "tool": "Khronos glTF Validator",
+    "version": "2.0.0-dev.3.10",
+    "assets": [
+      {
+        "id": "nitro-bottle",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "repair-wheel",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "oil-slick-a",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "oil-slick-b",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "puddle-a",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "puddle-b",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "warning-sign",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "short-ramp",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "jump-bridge",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "police-helicopter",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "civilian-hatchback",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "civilian-sedan",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "taxi",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "motorcycle",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "police-barrel",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "police-barrier",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "construction-barrier",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "traffic-cone",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      {
+        "id": "guardrail",
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      }
+    ]
+  },
+  "structural": {
+    "structuralChecks": "19 standalone GLBs; indexed triangles, one embedded identical 1024 RGBA atlas, no extensions, valid normals/winding/indices, bottom-centred identity roots; all four decals planar at Y=0",
+    "assets": [
+      {
+        "id": "nitro-bottle",
+        "triangles": 328,
+        "bytes": 32536,
+        "sha256": "e191556d56389dc1654a9b1b1c99ac04ac0960bd3b5914347526ff52c4dca1b2",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "repair-wheel",
+        "triangles": 676,
+        "bytes": 59800,
+        "sha256": "6b64c36c0e16fdc411f6dd9727fbc749b66f7ec765420836ae9d64f656a302b2",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "oil-slick-a",
+        "triangles": 54,
+        "bytes": 17352,
+        "sha256": "cf6804e280d2e5ae40a4af8d9acce48dc209ef5d77662e1e4920fdc9d5069e33",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "oil-slick-b",
+        "triangles": 66,
+        "bytes": 18324,
+        "sha256": "665892395a51f20524d41d7af128168b8c0bf5b3547409a7380cfe3bf653377c",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "puddle-a",
+        "triangles": 54,
+        "bytes": 17348,
+        "sha256": "d3d90217d309a43815f7f1c15a98c8ed724aa25182da6b013de6d91e19ae5748",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "puddle-b",
+        "triangles": 66,
+        "bytes": 18320,
+        "sha256": "9e03d809fb12bf9f389f0f4454be4be62d2b78c7a351d5b27a580965d2c25bdd",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "warning-sign",
+        "triangles": 40,
+        "bytes": 15840,
+        "sha256": "d46c015aabdbafefc4b20267ee9f228bf8eadd2fd8de98f422cb075aeaa41943",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "short-ramp",
+        "triangles": 48,
+        "bytes": 16204,
+        "sha256": "0cc92f38f8ee3e90880afd87b5a086f29b48b31d5d0dbde64def49424f2dbc00",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "jump-bridge",
+        "triangles": 240,
+        "bytes": 29692,
+        "sha256": "c62a11af17a3bfbad29b52ad10d040fb86d781afb4b0d0c8583553c2e31fcdb4",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "police-helicopter",
+        "triangles": 590,
+        "bytes": 52432,
+        "sha256": "d74a741935c8527d230c59a7451747d1e8649619fe856d5de5a3f3485dafcbbe",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "civilian-hatchback",
+        "triangles": 680,
+        "bytes": 56120,
+        "sha256": "8a851d0a82effebb285d753f3fc7546bbdf63882d26920b9df804301f2ccb537",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "civilian-sedan",
+        "triangles": 680,
+        "bytes": 56116,
+        "sha256": "9d62adc140d0df6d411545d7446f8242639b1363e44cfd77cf3f6c12faf82208",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "taxi",
+        "triangles": 836,
+        "bytes": 67040,
+        "sha256": "d6ae82db6a1263d8479b7efc6f5084f57edc5fe06efa1d33e8aa47345080e377",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "motorcycle",
+        "triangles": 476,
+        "bytes": 43280,
+        "sha256": "e02c9c26d837a23b5756bfba3b90f804d9c0f11fe87fb9fc07842603979162d2",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "police-barrel",
+        "triangles": 336,
+        "bytes": 32596,
+        "sha256": "b42a507fa88d6425665df871945f2dabbb3a770855fb4f34c060cb7cd3164c04",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "police-barrier",
+        "triangles": 720,
+        "bytes": 55456,
+        "sha256": "ee01ca9bcf1c9e97a7ba58116bc96cd792f7bc7eafaf5268d66627efd72380c9",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "construction-barrier",
+        "triangles": 264,
+        "bytes": 30064,
+        "sha256": "1efef30840d2b8dc55d0583dfb34eaf40967693b962be22a40661230ab5a8f9f",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "traffic-cone",
+        "triangles": 140,
+        "bytes": 21412,
+        "sha256": "714069c862b673b58ab3f94c70acff36896066ea17c381cf6257de511d15205d",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      },
+      {
+        "id": "guardrail",
+        "triangles": 120,
+        "bytes": 21248,
+        "sha256": "8b14e4662dd24e05fdcd6a088057b6d439486363ce00a1e1a4bcc3d5f189a34f",
+        "atlasMatches": true,
+        "bottomAtZero": true,
+        "centeredXZ": true,
+        "degenerateTriangles": 0
+      }
+    ]
+  },
+  "browser": {
+    "browser": "Chromium / Playwright, SwiftShader",
+    "runs": [
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1050,
+        "summary": {
+          "assets": 19,
+          "triangles": 6414,
+          "sharedTextures": 1
+        },
+        "assetSelections": 19,
+        "globalViews": [
+          {
+            "view": "overview",
+            "visibleAssets": 19
+          },
+          {
+            "view": "chase",
+            "visibleAssets": 19
+          }
+        ],
+        "rotorOnlyMotion": true,
+        "wireframe": true,
+        "keyboard": true,
+        "reducedMotion": true,
+        "pageErrors": [],
+        "failedResponses": [],
+        "externalRequests": 0
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "summary": {
+          "assets": 19,
+          "triangles": 6414,
+          "sharedTextures": 1
+        },
+        "assetSelections": 19,
+        "globalViews": [
+          {
+            "view": "overview",
+            "visibleAssets": 19
+          },
+          {
+            "view": "chase",
+            "visibleAssets": 19
+          }
+        ],
+        "rotorOnlyMotion": true,
+        "wireframe": true,
+        "keyboard": true,
+        "reducedMotion": true,
+        "pageErrors": [],
+        "failedResponses": [],
+        "externalRequests": 0
+      }
+    ]
+  },
+  "reproducibility": {
+    "command": "python3 workout/island/design/catch-props-v1/source/build.py",
+    "identicalFiles": 21,
+    "byteIdentical": true
+  }
+}
