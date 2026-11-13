@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>בנייני כיבוי · תצוגת נכסים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="edition" href="REPORT.md"><span class="mark" aria-hidden="true"></span> תיק נכסים <b>01</b></a>
+    <nav aria-label="קישורי החבילה"><a href="REPORT.md">דוח ומפרט</a><a href="LICENSES.md">מקור ורישיון</a></nav>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div><p class="eyebrow">ירי מים למטרה / סדרת בניינים</p><h1 id="title">חמים מבחוץ.<br><span>מוכנים לפעולה.</span></h1></div>
+      <div class="intro-note"><p>שלושה בניינים. חלונות מתחלפים, מטרות נופלות ודלת שאפשר לעבור דרכה.</p>
+        <p class="small">גררו לסיבוב · גללו לקירוב · לחצו על רכיב כדי להפעיל אותו</p>
+        <div class="specs"><span>Low poly</span><span>1024 × 1024</span><span>CC0</span><span>Y ↑ / +Z</span></div>
+      </div>
+    </section>
+    <p id="load-status" class="status" role="status" aria-live="polite">טוען שלושה בניינים…</p>
+    <section id="gallery" class="gallery" aria-label="שלושת דגמי הבניינים"></section>
+    <section id="inspector" class="inspector" aria-labelledby="inspector-title" hidden>
+      <div class="control-panel">
+        <p class="eyebrow">בדיקת מצבים</p><h2 id="inspector-title">כל רכיב, בנפרד.</h2>
+        <label for="model-select">בניין פעיל</label><select id="model-select"></select>
+        <div class="control-row"><button id="burn-all">חלונות שרופים</button><button id="repair-all">חלונות שלמים</button></div>
+        <div class="control-row"><button id="fire-toggle" aria-pressed="false">הדלקת הגג</button><button id="fall-all">הפלת המטרות</button></div>
+        <div class="control-row"><button id="enter">כניסה דרך הדלת</button><button id="reset">איפוס הבניין</button></div>
+        <label for="node-select">הפעלת צומת</label><select id="node-select"></select>
+        <button id="activate-node" class="primary">הפעלת הרכיב שנבחר</button>
+        <p class="small">חלון: שלם / שרוף. מטרה: עומדת / נופלת. אש: דולקת / כבויה. הדלת פותחת את הכניסה ללובי.</p>
+        <p id="action-status" role="status" aria-live="polite">בחרו רכיב או לחצו עליו בתצוגה.</p>
+      </div>
+      <div class="inventory-panel">
+        <div class="inventory-heading"><div><p class="eyebrow">היררכיית GLB</p><h2>רשימת הצמתים</h2></div><span id="node-count" class="pill"></span></div>
+        <label class="filter"><input id="interactive-only" type="checkbox"> רכיבים אינטראקטיביים בלבד</label>
+        <div class="table-scroll" tabindex="0" aria-label="רשימת כל הצמתים בבניין הפעיל">
+          <table><thead><tr><th>צומת</th><th>תפקיד</th><th>מצב</th></tr></thead><tbody id="node-list"></tbody></table>
+        </div>
+        <p class="small">הספירה הארוזה כוללת גם את שני מצבי החלונות ואת כל הלהבות. הספירה הנראית מחושבת מחדש בכל שינוי.</p>
+      </div>
+    </section>
+    <footer><span>גאומטריה ואטלס מקוריים · מטרים · חזית ב־+Z · ללא דחיסה</span><a href="manifest.json">מניפסט נכסים</a></footer>
+  </main>
+  <noscript><p class="status">נדרש JavaScript לתצוגת תלת־ממד. אפשר להוריד את קובצי ה־GLB ישירות מהתיקייה.</p></noscript>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>

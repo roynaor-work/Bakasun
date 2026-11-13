@@ -1,0 +1,1679 @@
+{
+  "format": "fire-building-v1",
+  "license": "CC0-1.0",
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
+  "triangleBudgetPerModel": 8000,
+  "budgetIncludes": "all mesh nodes, alternative states, balconies, props and flame meshes",
+  "atlas": {
+    "path": "warm-atlas-1024.png",
+    "size": [
+      1024,
+      1024
+    ],
+    "embeddedInEachGLB": true,
+    "sha256": "8147327474296961336de9597fd7545f1ffe1204ff98fee58c3153d68931d744"
+  },
+  "models": [
+    {
+      "id": "private-2f",
+      "label": "בית פרטי",
+      "path": "private-2f.glb",
+      "floors": 2,
+      "frontWindows": 6,
+      "trianglesAllStates": 3598,
+      "trianglesDefault": 2866,
+      "bytes": 981588,
+      "sha256": "bec8fb8025abff88127279f6e0898b40ff155728d985e2960d8b4577655032c0",
+      "boundsDefault": {
+        "min": [
+          -4.98,
+          0.0,
+          -3.64
+        ],
+        "max": [
+          4.98,
+          9.73,
+          5.05
+        ]
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "name": "private-2f",
+          "kind": "building"
+        },
+        {
+          "index": 1,
+          "name": "win_1",
+          "kind": "window",
+          "states": {
+            "intact": "win_1_intact",
+            "burnt": "win_1_burnt"
+          }
+        },
+        {
+          "index": 2,
+          "name": "win_1_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 3,
+          "name": "win_1_intact",
+          "kind": "state"
+        },
+        {
+          "index": 4,
+          "name": "win_1_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 5,
+          "name": "win_2",
+          "kind": "window",
+          "states": {
+            "intact": "win_2_intact",
+            "burnt": "win_2_burnt"
+          }
+        },
+        {
+          "index": 6,
+          "name": "win_2_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 7,
+          "name": "win_2_intact",
+          "kind": "state"
+        },
+        {
+          "index": 8,
+          "name": "win_2_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 9,
+          "name": "win_3",
+          "kind": "window",
+          "states": {
+            "intact": "win_3_intact",
+            "burnt": "win_3_burnt"
+          }
+        },
+        {
+          "index": 10,
+          "name": "win_3_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 11,
+          "name": "win_3_intact",
+          "kind": "state"
+        },
+        {
+          "index": 12,
+          "name": "win_3_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 13,
+          "name": "win_4",
+          "kind": "window",
+          "states": {
+            "intact": "win_4_intact",
+            "burnt": "win_4_burnt"
+          }
+        },
+        {
+          "index": 14,
+          "name": "win_4_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 15,
+          "name": "win_4_intact",
+          "kind": "state"
+        },
+        {
+          "index": 16,
+          "name": "win_4_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 17,
+          "name": "win_5",
+          "kind": "window",
+          "states": {
+            "intact": "win_5_intact",
+            "burnt": "win_5_burnt"
+          }
+        },
+        {
+          "index": 18,
+          "name": "win_5_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 19,
+          "name": "win_5_intact",
+          "kind": "state"
+        },
+        {
+          "index": 20,
+          "name": "win_5_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 21,
+          "name": "win_6",
+          "kind": "window",
+          "states": {
+            "intact": "win_6_intact",
+            "burnt": "win_6_burnt"
+          }
+        },
+        {
+          "index": 22,
+          "name": "win_6_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 23,
+          "name": "win_6_intact",
+          "kind": "state"
+        },
+        {
+          "index": 24,
+          "name": "win_6_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 25,
+          "name": "door_main",
+          "kind": "door",
+          "states": {
+            "closed": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "open": {
+              "rotation": [
+                0.0,
+                0.7933533402912352,
+                0.0,
+                0.6087614290087207
+              ]
+            }
+          }
+        },
+        {
+          "index": 26,
+          "name": "entry_spawn",
+          "kind": "entry_point"
+        },
+        {
+          "index": 27,
+          "name": "entry_focus",
+          "kind": "look_point"
+        },
+        {
+          "index": 28,
+          "name": "target_bin_green",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                1.75,
+                3.6250000000000004,
+                4.220000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                0.9999999999999998,
+                0.342,
+                6.75
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 29,
+          "name": "target_bin_ash",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.4499999999999997,
+                3.6250000000000004,
+                4.220000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                1.9,
+                0.342,
+                6.91
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 30,
+          "name": "target_crate",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                3.15,
+                3.6250000000000004,
+                4.220000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                2.8,
+                0.4425,
+                6.75
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 31,
+          "name": "target_barrel",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                3.8499999999999996,
+                3.6250000000000004,
+                4.220000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                3.6999999999999997,
+                0.35216344160553287,
+                6.91
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 32,
+          "name": "target_crate_small",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                3.15,
+                3.6250000000000004,
+                3.45
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                4.6,
+                0.31725,
+                6.75
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 33,
+          "name": "building_shell",
+          "kind": "architecture"
+        },
+        {
+          "index": 34,
+          "name": "balconies",
+          "kind": "architecture"
+        },
+        {
+          "index": 35,
+          "name": "roof_chimney",
+          "kind": "architecture"
+        },
+        {
+          "index": 36,
+          "name": "fire_roof_1",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 37,
+          "name": "fire_roof_1_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 38,
+          "name": "fire_roof_2",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 39,
+          "name": "fire_roof_2_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 40,
+          "name": "fire_roof_3",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 41,
+          "name": "fire_roof_3_flame",
+          "kind": "effect"
+        }
+      ],
+      "animations": [
+        "win_1__burnt",
+        "win_1__intact",
+        "win_2__burnt",
+        "win_2__intact",
+        "win_3__burnt",
+        "win_3__intact",
+        "win_4__burnt",
+        "win_4__intact",
+        "win_5__burnt",
+        "win_5__intact",
+        "win_6__burnt",
+        "win_6__intact",
+        "door_main__open",
+        "door_main__close",
+        "target_bin_green__fall",
+        "target_bin_green__upright",
+        "target_bin_ash__fall",
+        "target_bin_ash__upright",
+        "target_crate__fall",
+        "target_crate__upright",
+        "target_barrel__fall",
+        "target_barrel__upright",
+        "target_crate_small__fall",
+        "target_crate_small__upright",
+        "fire_roof_1__on",
+        "fire_roof_1__off",
+        "fire_roof_2__on",
+        "fire_roof_2__off",
+        "fire_roof_3__on",
+        "fire_roof_3__off"
+      ]
+    },
+    {
+      "id": "residential-3f",
+      "label": "בניין מגורים",
+      "path": "residential-3f.glb",
+      "floors": 3,
+      "frontWindows": 9,
+      "trianglesAllStates": 4990,
+      "trianglesDefault": 4024,
+      "bytes": 1092580,
+      "sha256": "69716e235b7bac7df919370cdf7080e89be9e9dec2a5a3d124e746b0bc1fb566",
+      "boundsDefault": {
+        "min": [
+          -5.88,
+          0.0,
+          -3.94
+        ],
+        "max": [
+          5.88,
+          12.73,
+          5.35
+        ]
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "name": "residential-3f",
+          "kind": "building"
+        },
+        {
+          "index": 1,
+          "name": "win_1",
+          "kind": "window",
+          "states": {
+            "intact": "win_1_intact",
+            "burnt": "win_1_burnt"
+          }
+        },
+        {
+          "index": 2,
+          "name": "win_1_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 3,
+          "name": "win_1_intact",
+          "kind": "state"
+        },
+        {
+          "index": 4,
+          "name": "win_1_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 5,
+          "name": "win_2",
+          "kind": "window",
+          "states": {
+            "intact": "win_2_intact",
+            "burnt": "win_2_burnt"
+          }
+        },
+        {
+          "index": 6,
+          "name": "win_2_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 7,
+          "name": "win_2_intact",
+          "kind": "state"
+        },
+        {
+          "index": 8,
+          "name": "win_2_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 9,
+          "name": "win_3",
+          "kind": "window",
+          "states": {
+            "intact": "win_3_intact",
+            "burnt": "win_3_burnt"
+          }
+        },
+        {
+          "index": 10,
+          "name": "win_3_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 11,
+          "name": "win_3_intact",
+          "kind": "state"
+        },
+        {
+          "index": 12,
+          "name": "win_3_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 13,
+          "name": "win_4",
+          "kind": "window",
+          "states": {
+            "intact": "win_4_intact",
+            "burnt": "win_4_burnt"
+          }
+        },
+        {
+          "index": 14,
+          "name": "win_4_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 15,
+          "name": "win_4_intact",
+          "kind": "state"
+        },
+        {
+          "index": 16,
+          "name": "win_4_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 17,
+          "name": "win_5",
+          "kind": "window",
+          "states": {
+            "intact": "win_5_intact",
+            "burnt": "win_5_burnt"
+          }
+        },
+        {
+          "index": 18,
+          "name": "win_5_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 19,
+          "name": "win_5_intact",
+          "kind": "state"
+        },
+        {
+          "index": 20,
+          "name": "win_5_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 21,
+          "name": "win_6",
+          "kind": "window",
+          "states": {
+            "intact": "win_6_intact",
+            "burnt": "win_6_burnt"
+          }
+        },
+        {
+          "index": 22,
+          "name": "win_6_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 23,
+          "name": "win_6_intact",
+          "kind": "state"
+        },
+        {
+          "index": 24,
+          "name": "win_6_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 25,
+          "name": "win_7",
+          "kind": "window",
+          "states": {
+            "intact": "win_7_intact",
+            "burnt": "win_7_burnt"
+          }
+        },
+        {
+          "index": 26,
+          "name": "win_7_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 27,
+          "name": "win_7_intact",
+          "kind": "state"
+        },
+        {
+          "index": 28,
+          "name": "win_7_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 29,
+          "name": "win_8",
+          "kind": "window",
+          "states": {
+            "intact": "win_8_intact",
+            "burnt": "win_8_burnt"
+          }
+        },
+        {
+          "index": 30,
+          "name": "win_8_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 31,
+          "name": "win_8_intact",
+          "kind": "state"
+        },
+        {
+          "index": 32,
+          "name": "win_8_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 33,
+          "name": "win_9",
+          "kind": "window",
+          "states": {
+            "intact": "win_9_intact",
+            "burnt": "win_9_burnt"
+          }
+        },
+        {
+          "index": 34,
+          "name": "win_9_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 35,
+          "name": "win_9_intact",
+          "kind": "state"
+        },
+        {
+          "index": 36,
+          "name": "win_9_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 37,
+          "name": "door_main",
+          "kind": "door",
+          "states": {
+            "closed": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "open": {
+              "rotation": [
+                0.0,
+                0.7933533402912352,
+                0.0,
+                0.6087614290087207
+              ]
+            }
+          }
+        },
+        {
+          "index": 38,
+          "name": "entry_spawn",
+          "kind": "entry_point"
+        },
+        {
+          "index": 39,
+          "name": "entry_focus",
+          "kind": "look_point"
+        },
+        {
+          "index": 40,
+          "name": "target_bin_green",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.72,
+                3.6250000000000004,
+                4.52
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                1.55,
+                0.342,
+                7.05
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 41,
+          "name": "target_bin_ash",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                3.98,
+                3.6250000000000004,
+                4.52
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                2.45,
+                0.342,
+                7.21
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 42,
+          "name": "target_crate",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.72,
+                6.825,
+                4.52
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                3.35,
+                0.4425,
+                7.05
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 43,
+          "name": "target_barrel",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                3.98,
+                6.825,
+                4.52
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                4.25,
+                0.35216344160553287,
+                7.21
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 44,
+          "name": "target_crate_small",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.72,
+                6.825,
+                3.75
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                5.15,
+                0.31725,
+                7.05
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 45,
+          "name": "building_shell",
+          "kind": "architecture"
+        },
+        {
+          "index": 46,
+          "name": "balconies",
+          "kind": "architecture"
+        },
+        {
+          "index": 47,
+          "name": "roof_chimney",
+          "kind": "architecture"
+        },
+        {
+          "index": 48,
+          "name": "fire_roof_1",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 49,
+          "name": "fire_roof_1_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 50,
+          "name": "fire_roof_2",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 51,
+          "name": "fire_roof_2_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 52,
+          "name": "fire_roof_3",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 53,
+          "name": "fire_roof_3_flame",
+          "kind": "effect"
+        }
+      ],
+      "animations": [
+        "win_1__burnt",
+        "win_1__intact",
+        "win_2__burnt",
+        "win_2__intact",
+        "win_3__burnt",
+        "win_3__intact",
+        "win_4__burnt",
+        "win_4__intact",
+        "win_5__burnt",
+        "win_5__intact",
+        "win_6__burnt",
+        "win_6__intact",
+        "win_7__burnt",
+        "win_7__intact",
+        "win_8__burnt",
+        "win_8__intact",
+        "win_9__burnt",
+        "win_9__intact",
+        "door_main__open",
+        "door_main__close",
+        "target_bin_green__fall",
+        "target_bin_green__upright",
+        "target_bin_ash__fall",
+        "target_bin_ash__upright",
+        "target_crate__fall",
+        "target_crate__upright",
+        "target_barrel__fall",
+        "target_barrel__upright",
+        "target_crate_small__fall",
+        "target_crate_small__upright",
+        "fire_roof_1__on",
+        "fire_roof_1__off",
+        "fire_roof_2__on",
+        "fire_roof_2__off",
+        "fire_roof_3__on",
+        "fire_roof_3__off"
+      ]
+    },
+    {
+      "id": "highrise-5f",
+      "label": "בניין גבוה",
+      "path": "highrise-5f.glb",
+      "floors": 5,
+      "frontWindows": 15,
+      "trianglesAllStates": 7774,
+      "trianglesDefault": 6340,
+      "bytes": 1315328,
+      "sha256": "c8c1ccb2b5fb209bc0feb4acc1ab029b1ee010a4f76c730f10f6b3922d01c4cb",
+      "boundsDefault": {
+        "min": [
+          -6.18,
+          0.0,
+          -4.14
+        ],
+        "max": [
+          6.18,
+          18.78,
+          5.55
+        ]
+      },
+      "nodes": [
+        {
+          "index": 0,
+          "name": "highrise-5f",
+          "kind": "building"
+        },
+        {
+          "index": 1,
+          "name": "win_1",
+          "kind": "window",
+          "states": {
+            "intact": "win_1_intact",
+            "burnt": "win_1_burnt"
+          }
+        },
+        {
+          "index": 2,
+          "name": "win_1_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 3,
+          "name": "win_1_intact",
+          "kind": "state"
+        },
+        {
+          "index": 4,
+          "name": "win_1_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 5,
+          "name": "win_2",
+          "kind": "window",
+          "states": {
+            "intact": "win_2_intact",
+            "burnt": "win_2_burnt"
+          }
+        },
+        {
+          "index": 6,
+          "name": "win_2_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 7,
+          "name": "win_2_intact",
+          "kind": "state"
+        },
+        {
+          "index": 8,
+          "name": "win_2_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 9,
+          "name": "win_3",
+          "kind": "window",
+          "states": {
+            "intact": "win_3_intact",
+            "burnt": "win_3_burnt"
+          }
+        },
+        {
+          "index": 10,
+          "name": "win_3_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 11,
+          "name": "win_3_intact",
+          "kind": "state"
+        },
+        {
+          "index": 12,
+          "name": "win_3_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 13,
+          "name": "win_4",
+          "kind": "window",
+          "states": {
+            "intact": "win_4_intact",
+            "burnt": "win_4_burnt"
+          }
+        },
+        {
+          "index": 14,
+          "name": "win_4_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 15,
+          "name": "win_4_intact",
+          "kind": "state"
+        },
+        {
+          "index": 16,
+          "name": "win_4_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 17,
+          "name": "win_5",
+          "kind": "window",
+          "states": {
+            "intact": "win_5_intact",
+            "burnt": "win_5_burnt"
+          }
+        },
+        {
+          "index": 18,
+          "name": "win_5_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 19,
+          "name": "win_5_intact",
+          "kind": "state"
+        },
+        {
+          "index": 20,
+          "name": "win_5_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 21,
+          "name": "win_6",
+          "kind": "window",
+          "states": {
+            "intact": "win_6_intact",
+            "burnt": "win_6_burnt"
+          }
+        },
+        {
+          "index": 22,
+          "name": "win_6_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 23,
+          "name": "win_6_intact",
+          "kind": "state"
+        },
+        {
+          "index": 24,
+          "name": "win_6_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 25,
+          "name": "win_7",
+          "kind": "window",
+          "states": {
+            "intact": "win_7_intact",
+            "burnt": "win_7_burnt"
+          }
+        },
+        {
+          "index": 26,
+          "name": "win_7_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 27,
+          "name": "win_7_intact",
+          "kind": "state"
+        },
+        {
+          "index": 28,
+          "name": "win_7_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 29,
+          "name": "win_8",
+          "kind": "window",
+          "states": {
+            "intact": "win_8_intact",
+            "burnt": "win_8_burnt"
+          }
+        },
+        {
+          "index": 30,
+          "name": "win_8_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 31,
+          "name": "win_8_intact",
+          "kind": "state"
+        },
+        {
+          "index": 32,
+          "name": "win_8_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 33,
+          "name": "win_9",
+          "kind": "window",
+          "states": {
+            "intact": "win_9_intact",
+            "burnt": "win_9_burnt"
+          }
+        },
+        {
+          "index": 34,
+          "name": "win_9_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 35,
+          "name": "win_9_intact",
+          "kind": "state"
+        },
+        {
+          "index": 36,
+          "name": "win_9_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 37,
+          "name": "win_10",
+          "kind": "window",
+          "states": {
+            "intact": "win_10_intact",
+            "burnt": "win_10_burnt"
+          }
+        },
+        {
+          "index": 38,
+          "name": "win_10_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 39,
+          "name": "win_10_intact",
+          "kind": "state"
+        },
+        {
+          "index": 40,
+          "name": "win_10_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 41,
+          "name": "win_11",
+          "kind": "window",
+          "states": {
+            "intact": "win_11_intact",
+            "burnt": "win_11_burnt"
+          }
+        },
+        {
+          "index": 42,
+          "name": "win_11_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 43,
+          "name": "win_11_intact",
+          "kind": "state"
+        },
+        {
+          "index": 44,
+          "name": "win_11_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 45,
+          "name": "win_12",
+          "kind": "window",
+          "states": {
+            "intact": "win_12_intact",
+            "burnt": "win_12_burnt"
+          }
+        },
+        {
+          "index": 46,
+          "name": "win_12_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 47,
+          "name": "win_12_intact",
+          "kind": "state"
+        },
+        {
+          "index": 48,
+          "name": "win_12_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 49,
+          "name": "win_13",
+          "kind": "window",
+          "states": {
+            "intact": "win_13_intact",
+            "burnt": "win_13_burnt"
+          }
+        },
+        {
+          "index": 50,
+          "name": "win_13_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 51,
+          "name": "win_13_intact",
+          "kind": "state"
+        },
+        {
+          "index": 52,
+          "name": "win_13_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 53,
+          "name": "win_14",
+          "kind": "window",
+          "states": {
+            "intact": "win_14_intact",
+            "burnt": "win_14_burnt"
+          }
+        },
+        {
+          "index": 54,
+          "name": "win_14_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 55,
+          "name": "win_14_intact",
+          "kind": "state"
+        },
+        {
+          "index": 56,
+          "name": "win_14_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 57,
+          "name": "win_15",
+          "kind": "window",
+          "states": {
+            "intact": "win_15_intact",
+            "burnt": "win_15_burnt"
+          }
+        },
+        {
+          "index": 58,
+          "name": "win_15_frame",
+          "kind": "mesh"
+        },
+        {
+          "index": 59,
+          "name": "win_15_intact",
+          "kind": "state"
+        },
+        {
+          "index": 60,
+          "name": "win_15_burnt",
+          "kind": "state"
+        },
+        {
+          "index": 61,
+          "name": "door_main",
+          "kind": "door",
+          "states": {
+            "closed": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "open": {
+              "rotation": [
+                0.0,
+                0.7933533402912352,
+                0.0,
+                0.6087614290087207
+              ]
+            }
+          }
+        },
+        {
+          "index": 62,
+          "name": "entry_spawn",
+          "kind": "entry_point"
+        },
+        {
+          "index": 63,
+          "name": "entry_focus",
+          "kind": "look_point"
+        },
+        {
+          "index": 64,
+          "name": "target_bin_green",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.92,
+                3.6250000000000004,
+                4.720000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                1.7499999999999998,
+                0.342,
+                7.25
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 65,
+          "name": "target_bin_ash",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                4.18,
+                3.6250000000000004,
+                4.720000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                2.65,
+                0.342,
+                7.41
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 66,
+          "name": "target_crate",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.92,
+                13.225000000000001,
+                4.720000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                3.55,
+                0.4425,
+                7.25
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 67,
+          "name": "target_barrel",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                4.18,
+                13.225000000000001,
+                4.720000000000001
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                4.45,
+                0.35216344160553287,
+                7.41
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 68,
+          "name": "target_crate_small",
+          "kind": "target",
+          "states": {
+            "upright": {
+              "translation": [
+                2.92,
+                13.225000000000001,
+                3.95
+              ],
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            "fallen": {
+              "translation": [
+                5.35,
+                0.31725,
+                7.25
+              ],
+              "rotation": [
+                0.7071067811865475,
+                0.0,
+                0.0,
+                0.7071067811865476
+              ]
+            }
+          }
+        },
+        {
+          "index": 69,
+          "name": "building_shell",
+          "kind": "architecture"
+        },
+        {
+          "index": 70,
+          "name": "balconies",
+          "kind": "architecture"
+        },
+        {
+          "index": 71,
+          "name": "roof_chimney",
+          "kind": "architecture"
+        },
+        {
+          "index": 72,
+          "name": "fire_roof_1",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 73,
+          "name": "fire_roof_1_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 74,
+          "name": "fire_roof_2",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 75,
+          "name": "fire_roof_2_flame",
+          "kind": "effect"
+        },
+        {
+          "index": 76,
+          "name": "fire_roof_3",
+          "kind": "fire_anchor"
+        },
+        {
+          "index": 77,
+          "name": "fire_roof_3_flame",
+          "kind": "effect"
+        }
+      ],
+      "animations": [
+        "win_1__burnt",
+        "win_1__intact",
+        "win_2__burnt",
+        "win_2__intact",
+        "win_3__burnt",
+        "win_3__intact",
+        "win_4__burnt",
+        "win_4__intact",
+        "win_5__burnt",
+        "win_5__intact",
+        "win_6__burnt",
+        "win_6__intact",
+        "win_7__burnt",
+        "win_7__intact",
+        "win_8__burnt",
+        "win_8__intact",
+        "win_9__burnt",
+        "win_9__intact",
+        "win_10__burnt",
+        "win_10__intact",
+        "win_11__burnt",
+        "win_11__intact",
+        "win_12__burnt",
+        "win_12__intact",
+        "win_13__burnt",
+        "win_13__intact",
+        "win_14__burnt",
+        "win_14__intact",
+        "win_15__burnt",
+        "win_15__intact",
+        "door_main__open",
+        "door_main__close",
+        "target_bin_green__fall",
+        "target_bin_green__upright",
+        "target_bin_ash__fall",
+        "target_bin_ash__upright",
+        "target_crate__fall",
+        "target_crate__upright",
+        "target_barrel__fall",
+        "target_barrel__upright",
+        "target_crate_small__fall",
+        "target_crate_small__upright",
+        "fire_roof_1__on",
+        "fire_roof_1__off",
+        "fire_roof_2__on",
+        "fire_roof_2__off",
+        "fire_roof_3__on",
+        "fire_roof_3__off"
+      ]
+    }
+  ]
+}
