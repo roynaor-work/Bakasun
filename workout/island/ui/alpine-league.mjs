@@ -89,7 +89,9 @@ export function leagueCard({engine, go, season, shop, refresh}) {
 /** Season table: place, colour chip, name, points; the child's row marked. */
 function table(rows) {
   const t = el('table', 'al-table'), head = el('tr'); for (const h of ['#', '', 'גולש', 'נקודות']) head.append(el('th', '', h)); t.append(head);
-  rows.forEach((r, i) => { const tr = el('tr'); if (r.id === 'player') tr.className = 'mine'; tr.dataset.rider = r.id; const c = el('td'); c.append(chip(r.id)); const p = el('td', 'al-pts'); p.append(num(r.points)); tr.append(el('td', 'al-place', String(i + 1)), c, el('td', 'al-rider', r.name), p); t.append(tr); });
+  // Equal points share a place (1, 2, 2, 4); before anyone has points there is no place yet.
+  const started = rows.some(r => r.points > 0), placeOf = r => started ? String(1 + rows.filter(x => x.points > r.points).length) : '–';
+  rows.forEach(r => { const tr = el('tr'); if (r.id === 'player') tr.className = 'mine'; tr.dataset.rider = r.id; const c = el('td'); c.append(chip(r.id)); const p = el('td', 'al-pts'); p.append(num(r.points)); tr.append(el('td', 'al-place', placeOf(r)), c, el('td', 'al-rider', r.name), p); t.append(tr); });
   return t;
 }
 export function seasonBody({engine, go, refresh}) {
@@ -147,7 +149,8 @@ export function resultBody({engine, result, summary, go, again, season, shop}) {
     li.append(el('span', 'al-check', g.ok ? '✓' : '✗'), el('span', '', goalLine(g)), el('em', '', value)); goals.append(li);
   }
   root.append(goals);
-  const rows = el('div', 'al-rows'), list = [['coins', 'מטבעות ליגה', `+${r.coins}`], ['table', 'מקום בטבלה', `${sum.place} · ${sum.table.find(x => x.id === 'player')?.points ?? 0} נק׳`, true]];
+  const rows = el('div', 'al-rows'), list = [['coins', 'מטבעות ליגה', `+${r.coins}`]];
+  if (sum.table.some(x => x.points > 0)) list.push(['table', 'מקום בטבלה', `${sum.place} · ${sum.table.find(x => x.id === 'player')?.points ?? 0} נק׳`, true]);
   if (r.points) list.splice(1, 0, ['points', 'נקודות בעונה', `+${r.points}`]);
   if (summary?.peakKmh) list.push(['peak', 'מהירות שיא', `${summary.peakKmh} קמ״ש`, true]);
   if (summary?.ghost) list.push(['ghost', 'רוח הרפאים', summary.ghost.saved ? (summary.ghost.previousMs ? `שיא חדש. ${clock(summary.ghost.previousMs)} ← ${clock(r.ms)}` : 'נשמרה. תגלוש איתכם בפעם הבאה') : summary.ghost.previousMs ? `השיא נשאר ${clock(summary.ghost.previousMs)}` : 'נשמרת רק בריצה שהגיעה לסיום', true]);

@@ -8,7 +8,7 @@
  *    league field).
  * 4. The six themes at full size (tools/alpine-league-themes.html: the real session on a stage of each theme), opening and mid-race, with
  *    the Codex art: the files each theme fetched from assets/alpine-themes-v23, the gates and landmarks that loaded, triangles and calls.
- * Usage: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tools/alpine-league-browser.mjs [--skip-themes] [--themes-only]
+ * Usage: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tools/alpine-league-browser.mjs [--skip-themes] [--themes-only] [--theme id] [--island-quality low] [--frame-cap 100]
  * Writes screenshots and browser-proof.json to verification/alpine-league-v23/. SwiftShader on a busy machine can fall to a frame every
  * few seconds (the race clock then runs slower than the wall clock, as on a very slow phone), so the limits are generous: a full stage
  * may take tens of minutes. The stage time in the report is the race clock. */
@@ -75,9 +75,17 @@ try {
   if (!args.has('--themes-only')) {
     // ---------- 1. Fresh island, games menu, the ski league card, season and gear ----------
     const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page);
+    // --frame-cap ms: the page's frame clock advances at most this much per drawn frame (a phone at 1000/ms frames a second). SwiftShader on a
+    // shared machine draws a frame every 1-3 s and the game then steps 0.25 s per frame (its catch-up limit), so a thumb could only act 4 times
+    // a race second; with a cap the race runs slower than the wall clock, as on a slow phone, and the touches keep their meaning. Only the
+    // requestAnimationFrame timestamps change: game state, input and saves are untouched.
+    const frameCap = process.argv.includes('--frame-cap') ? Number(process.argv[process.argv.indexOf('--frame-cap') + 1]) : 0;
+    if (frameCap > 0) { report.frameCapMs = frameCap; await page.addInitScript(cap => { const raf = window.requestAnimationFrame.bind(window); let last = null, t = 0; window.requestAnimationFrame = cb => raf(now => { if (last === null) t = now; else if (now !== last) t += Math.min(now - last, cap); last = now; cb(t); }); }, frameCap); }
     page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
     const touch = await touchKit(page);
-    await page.goto(server.url + '?dev=1&games=1', {waitUntil: 'load'});
+    // --island-quality low: the island's own low-graphics mode (?quality=low, as on a weak phone) for the league flow; the themes stay at full quality.
+    const islandQuality = process.argv.includes('--island-quality') ? process.argv[process.argv.indexOf('--island-quality') + 1] : null;
+    await page.goto(server.url + '?dev=1&games=1' + (islandQuality ? `&quality=${islandQuality}` : ''), {waitUntil: 'load'}); report.islandQuality = islandQuality || 'auto';
     await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 180000});
     await touch.tap('[data-action=avatar-start]');
     await page.waitForSelector('[data-game-library]'); await page.screenshot({path: OUT + '01-games-menu.png'}); step('games menu by touch');
