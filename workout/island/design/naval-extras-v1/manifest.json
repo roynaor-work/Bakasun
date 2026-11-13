@@ -1,0 +1,765 @@
+{
+  "schemaVersion": 1,
+  "id": "naval-extras-v1",
+  "version": "1.0.0",
+  "createdDate": "2026-11-13",
+  "baseBranch": "main",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "assetLicense": "CC0-1.0",
+  "licensesFile": "LICENSES.md",
+  "report": "REPORT.md",
+  "preview": "preview.html",
+  "coordinates": {
+    "handedness": "right",
+    "forward": "+Z",
+    "up": "+Y",
+    "right": "+X",
+    "units": "metres",
+    "waterPlane": "Y=0"
+  },
+  "style": {
+    "audienceAge": 7,
+    "geometry": "warm low poly",
+    "text": false,
+    "brands": false,
+    "nationalInsignia": false
+  },
+  "compression": {
+    "draco": false,
+    "meshopt": false,
+    "requiredExtensions": []
+  },
+  "atlas": {
+    "file": "naval_atlas_1024.png",
+    "bytes": 102891,
+    "sha256": "b980ce75b303847da425cd5e21344e86c1a07bf567b14a911ec777173fbf49ca",
+    "width": 1024,
+    "height": 1024,
+    "colorSpace": "sRGB",
+    "sharing": "One external atlas referenced by all eight GLBs; preserve relative URLs.",
+    "license": "CC0-1.0",
+    "source": "source/build.py::atlas"
+  },
+  "models": [
+    {
+      "id": "supply_buoy",
+      "file": "supply_buoy.glb",
+      "bytes": 44876,
+      "sha256": "1ddb865af083ec1fe8c5cec0f0b26eda417d246ddd7d5efe7f8d429f47e2bae8",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "default": 440
+      },
+      "trianglesAllSceneInstances": 440,
+      "boundsMetres": {
+        "min": [
+          -0.548,
+          -0.25,
+          -0.548
+        ],
+        "max": [
+          0.548,
+          1.05,
+          0.548
+        ],
+        "size": [
+          1.096,
+          1.3,
+          1.096
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "default",
+      "triangleBudget": 800,
+      "light": {
+        "node": "light",
+        "defaultOn": true,
+        "extension": "KHR_lights_punctual",
+        "type": "point",
+        "intensityCandela": 2,
+        "rangeMetres": 2.5,
+        "emissiveMaterial": "amber_lens_on",
+        "emissiveFactor": [
+          1,
+          0.58,
+          0.15
+        ]
+      }
+    },
+    {
+      "id": "ammo_crate",
+      "file": "ammo_crate.glb",
+      "bytes": 31040,
+      "sha256": "51f8867b9b70c4c955ea7a5c21213b84f3f3f88d36474233d7460f92f26386da",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "default": 308
+      },
+      "trianglesAllSceneInstances": 308,
+      "boundsMetres": {
+        "min": [
+          -0.74,
+          -0.21,
+          -0.405
+        ],
+        "max": [
+          0.74,
+          0.81165,
+          0.4245
+        ],
+        "size": [
+          1.48,
+          1.02165,
+          0.8295
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "default"
+    },
+    {
+      "id": "patrol_boat",
+      "file": "patrol_boat.glb",
+      "bytes": 114820,
+      "sha256": "354567ec3757798bf9e4362f2487f06675e774122ab5e6eea0bd403895bf56ff",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "intact": 498,
+        "damaged": 503,
+        "sinking": 503
+      },
+      "trianglesAllSceneInstances": 1504,
+      "boundsMetres": {
+        "min": [
+          -0.73225,
+          -0.31,
+          -1.6189
+        ],
+        "max": [
+          0.73225,
+          1.61218,
+          1.74528
+        ],
+        "size": [
+          1.4645,
+          1.92218,
+          3.36418
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "intact",
+      "states": [
+        "intact",
+        "damaged",
+        "sinking"
+      ],
+      "triangleBudget": 2500,
+      "stateContract": "Select gltf.scenes[model.states.indexOf(state)]; never attach all three scenes at once. Loader scene names may receive suffixes.",
+      "rigLookup": "Within the active scene use node.extras.role (GLTFLoader: object.userData.role). Loaders may suffix duplicate node names across scenes.",
+      "rig": {
+        "turret": {
+          "node": "turret",
+          "axis": "+Y",
+          "yawDegrees": [
+            -150,
+            150
+          ]
+        },
+        "barrel": {
+          "node": "barrel",
+          "axis": "+X",
+          "positiveElevationUsesNegativeRotation": true,
+          "elevationDegrees": [
+            -10,
+            35
+          ]
+        },
+        "muzzle": {
+          "node": "muzzle",
+          "forward": "+Z"
+        }
+      },
+      "sinking": {
+        "scene": "sinking",
+        "animation": "sinking",
+        "durationSeconds": 2.8,
+        "loop": false,
+        "finalRootY": -2.7,
+        "clampWhenFinished": true
+      },
+      "damage": "Dented hull or broken plate, dark impact patch, tilted mast/periscope; no people or gore."
+    },
+    {
+      "id": "small_destroyer",
+      "file": "small_destroyer.glb",
+      "bytes": 136716,
+      "sha256": "54330c8311c1ff5f46ae82818b83afe3e08377bb5618eea2f9b9869c8594c267",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "intact": 574,
+        "damaged": 579,
+        "sinking": 579
+      },
+      "trianglesAllSceneInstances": 1732,
+      "boundsMetres": {
+        "min": [
+          -0.88375,
+          -0.31,
+          -2.34825
+        ],
+        "max": [
+          0.88375,
+          1.61218,
+          2.53611
+        ],
+        "size": [
+          1.7675,
+          1.92218,
+          4.88436
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "intact",
+      "states": [
+        "intact",
+        "damaged",
+        "sinking"
+      ],
+      "triangleBudget": 2500,
+      "stateContract": "Select gltf.scenes[model.states.indexOf(state)]; never attach all three scenes at once. Loader scene names may receive suffixes.",
+      "rigLookup": "Within the active scene use node.extras.role (GLTFLoader: object.userData.role). Loaders may suffix duplicate node names across scenes.",
+      "rig": {
+        "turret": {
+          "node": "turret",
+          "axis": "+Y",
+          "yawDegrees": [
+            -150,
+            150
+          ]
+        },
+        "barrel": {
+          "node": "barrel",
+          "axis": "+X",
+          "positiveElevationUsesNegativeRotation": true,
+          "elevationDegrees": [
+            -10,
+            35
+          ]
+        },
+        "muzzle": {
+          "node": "muzzle",
+          "forward": "+Z"
+        }
+      },
+      "sinking": {
+        "scene": "sinking",
+        "animation": "sinking",
+        "durationSeconds": 2.8,
+        "loop": false,
+        "finalRootY": -2.7,
+        "clampWhenFinished": true
+      },
+      "damage": "Dented hull or broken plate, dark impact patch, tilted mast/periscope; no people or gore."
+    },
+    {
+      "id": "tower_submarine",
+      "file": "tower_submarine.glb",
+      "bytes": 110744,
+      "sha256": "049c04dfc091dd75af1be9803db7f332cbd8ab46cd677ed6cce75b2d5dfc755f",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "intact": 484,
+        "damaged": 489,
+        "sinking": 489
+      },
+      "trianglesAllSceneInstances": 1462,
+      "boundsMetres": {
+        "min": [
+          -0.675,
+          -0.64,
+          -1.93
+        ],
+        "max": [
+          0.675,
+          1.46897,
+          1.94
+        ],
+        "size": [
+          1.35,
+          2.10897,
+          3.87
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "intact",
+      "states": [
+        "intact",
+        "damaged",
+        "sinking"
+      ],
+      "triangleBudget": 2500,
+      "stateContract": "Select gltf.scenes[model.states.indexOf(state)]; never attach all three scenes at once. Loader scene names may receive suffixes.",
+      "rigLookup": "Within the active scene use node.extras.role (GLTFLoader: object.userData.role). Loaders may suffix duplicate node names across scenes.",
+      "rig": {
+        "turret": {
+          "node": "turret",
+          "axis": "+Y",
+          "yawDegrees": [
+            -150,
+            150
+          ]
+        },
+        "barrel": {
+          "node": "barrel",
+          "axis": "+X",
+          "positiveElevationUsesNegativeRotation": true,
+          "elevationDegrees": [
+            -10,
+            35
+          ]
+        },
+        "muzzle": {
+          "node": "muzzle",
+          "forward": "+Z"
+        }
+      },
+      "sinking": {
+        "scene": "sinking",
+        "animation": "sinking",
+        "durationSeconds": 2.8,
+        "loop": false,
+        "finalRootY": -2.7,
+        "clampWhenFinished": true
+      },
+      "damage": "Dented hull or broken plate, dark impact patch, tilted mast/periscope; no people or gore."
+    },
+    {
+      "id": "shell_regular",
+      "file": "shell_regular.glb",
+      "bytes": 11100,
+      "sha256": "0116b0ff4c6e270e71eae779999ea4f57cf953c30f8e8e8ff2834b34312f6678",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "default": 100
+      },
+      "trianglesAllSceneInstances": 100,
+      "boundsMetres": {
+        "min": [
+          -0.07276,
+          -0.0765,
+          -0.17
+        ],
+        "max": [
+          0.07276,
+          0.0765,
+          0.17
+        ],
+        "size": [
+          0.14551,
+          0.153,
+          0.34
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "default",
+      "spawnOrigin": "Geometric center; flight and pointed tip face +Z."
+    },
+    {
+      "id": "shell_heavy",
+      "file": "shell_heavy.glb",
+      "bytes": 11092,
+      "sha256": "1bbf9cd5d8d086c511d9b7a154ac7a9233548bbd3f460f5bf34c231983a475b7",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "default": 100
+      },
+      "trianglesAllSceneInstances": 100,
+      "boundsMetres": {
+        "min": [
+          -0.11641,
+          -0.1224,
+          -0.24
+        ],
+        "max": [
+          0.11641,
+          0.1224,
+          0.24
+        ],
+        "size": [
+          0.23282,
+          0.2448,
+          0.48
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "default",
+      "spawnOrigin": "Geometric center; flight and pointed tip face +Z."
+    },
+    {
+      "id": "landing_flag",
+      "file": "landing_flag.glb",
+      "bytes": 22664,
+      "sha256": "5a52ca7994b14ca074afd3faf2b2dd989e70e423aec83f3e0d4c9cb3f2efdf8c",
+      "license": "CC0-1.0",
+      "source": "source/build.py",
+      "atlas": "naval_atlas_1024.png",
+      "trianglesByScene": {
+        "default": 236
+      },
+      "trianglesAllSceneInstances": 236,
+      "boundsMetres": {
+        "min": [
+          -0.88,
+          -0.13,
+          -0.88
+        ],
+        "max": [
+          0.88,
+          1.24,
+          0.88
+        ],
+        "size": [
+          1.76,
+          1.37,
+          1.76
+        ]
+      },
+      "waterlineY": 0,
+      "defaultScene": "default",
+      "decal": {
+        "node": "landing_decal",
+        "material": "landing_decal_hidden",
+        "shape": "circular annulus",
+        "alphaMode": "BLEND",
+        "defaultOpacity": 0,
+        "suggestedOpacity": 0.55,
+        "plane": "XZ",
+        "yMetres": 0.012,
+        "textureAlternative": "landing_decal.png",
+        "depthWriteWhenEnabled": false
+      }
+    }
+  ],
+  "effects": [
+    {
+      "id": "bow_mist",
+      "file": "bow_mist.png",
+      "bytes": 34423,
+      "sha256": "228f08604e74513422ebe086f19ba8e7ef3f21fab4e1ae0649a1a3553d831dc0",
+      "license": "CC0-1.0",
+      "source": "source/build.py::sprite_frame",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 16,
+      "durationSeconds": 1.0,
+      "frameOrder": "row-major, left-to-right, top-to-bottom",
+      "uvOrigin": "top-left",
+      "colorSpace": "sRGB",
+      "alpha": "straight/unpremultiplied",
+      "blending": "normal",
+      "cellPaddingPixels": 3,
+      "mipmaps": false,
+      "loop": true,
+      "plane": "XZ water plane or camera-facing, per integration",
+      "lastFrameAction": "wrap",
+      "recommendedWorldSizeMetres": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "landing_splash",
+      "file": "landing_splash.png",
+      "bytes": 31841,
+      "sha256": "6a0c60dcd888bb58eca4f05a470bb458d17995607d886e8e9f05605eaaa04412",
+      "license": "CC0-1.0",
+      "source": "source/build.py::sprite_frame",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 24,
+      "durationSeconds": 0.6666666666666666,
+      "frameOrder": "row-major, left-to-right, top-to-bottom",
+      "uvOrigin": "top-left",
+      "colorSpace": "sRGB",
+      "alpha": "straight/unpremultiplied",
+      "blending": "normal",
+      "cellPaddingPixels": 3,
+      "mipmaps": false,
+      "loop": false,
+      "plane": "XZ water plane or camera-facing, per integration",
+      "lastFrameAction": "remove",
+      "recommendedWorldSizeMetres": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "water_explosion",
+      "file": "water_explosion.png",
+      "bytes": 37888,
+      "sha256": "e0403de2eb3bad7ff3e2c6318643729d66ce62edd752c9b20a384e83f932a397",
+      "license": "CC0-1.0",
+      "source": "source/build.py::sprite_frame",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 20,
+      "durationSeconds": 0.8,
+      "frameOrder": "row-major, left-to-right, top-to-bottom",
+      "uvOrigin": "top-left",
+      "colorSpace": "sRGB",
+      "alpha": "straight/unpremultiplied",
+      "blending": "normal",
+      "cellPaddingPixels": 3,
+      "mipmaps": false,
+      "loop": false,
+      "plane": "XZ water plane or camera-facing, per integration",
+      "lastFrameAction": "remove",
+      "recommendedWorldSizeMetres": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "foam",
+      "file": "foam.png",
+      "bytes": 43688,
+      "sha256": "67bbcc25909d82a2a0d1f20fe7e89e944ce09e9238b13d0d5f9c2c284b1debed",
+      "license": "CC0-1.0",
+      "source": "source/build.py::sprite_frame",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 12,
+      "durationSeconds": 1.3333333333333333,
+      "frameOrder": "row-major, left-to-right, top-to-bottom",
+      "uvOrigin": "top-left",
+      "colorSpace": "sRGB",
+      "alpha": "straight/unpremultiplied",
+      "blending": "normal",
+      "cellPaddingPixels": 3,
+      "mipmaps": false,
+      "loop": true,
+      "plane": "XZ water plane or camera-facing, per integration",
+      "lastFrameAction": "wrap",
+      "recommendedWorldSizeMetres": [
+        2,
+        2
+      ]
+    }
+  ],
+  "vulcanMissile": {
+    "id": "vulcan_missile",
+    "file": "vulcan_missile.png",
+    "bytes": 22318,
+    "sha256": "9bb18f9de25361c8edc4aaaee65c32dbe95e1ab46b4288ac1e56d1968c9a4f08",
+    "license": "CC0-1.0",
+    "source": "source/build.py::sprite_frame",
+    "width": 256,
+    "height": 256,
+    "columns": 4,
+    "rows": 4,
+    "frameWidth": 64,
+    "frameHeight": 64,
+    "frameCount": 16,
+    "fps": 32,
+    "durationSeconds": 0.5,
+    "frameOrder": "row-major, left-to-right, top-to-bottom",
+    "uvOrigin": "top-left",
+    "colorSpace": "sRGB",
+    "alpha": "straight/unpremultiplied",
+    "blending": "normal",
+    "cellPaddingPixels": 3,
+    "mipmaps": false,
+    "loop": true,
+    "plane": "camera-facing; missile tip is image top / local +Y",
+    "lastFrameAction": "wrap",
+    "recommendedWorldSizeMetres": [
+      0.4,
+      0.4
+    ]
+  },
+  "landingDecal": {
+    "file": "landing_decal.png",
+    "bytes": 13376,
+    "sha256": "70df703e11d722f78157458789bb286f85b16c61b623c0402ee41d22b022666b",
+    "width": 256,
+    "height": 256,
+    "license": "CC0-1.0",
+    "source": "source/build.py::effects",
+    "alpha": "straight/unpremultiplied",
+    "defaultOpacity": 0,
+    "plane": "XZ"
+  },
+  "audio": [
+    {
+      "id": "supply_collect",
+      "license": "CC0-1.0",
+      "source": "source/build.py::synth",
+      "durationSeconds": 0.72,
+      "targetIntegratedLUFS": -16,
+      "measurementToleranceLU": 0.1,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "files": [
+        {
+          "file": "supply_collect.ogg",
+          "bytes": 11823,
+          "sha256": "68f6cc0e833b5b491ceead33f5f2a9d548ae4ec9102fa0791318edb7088cea0e",
+          "format": "ogg",
+          "mimeType": "audio/ogg",
+          "measuredIntegratedLUFS": -15.97,
+          "measuredTruePeakDBTP": -7.96
+        },
+        {
+          "file": "supply_collect.mp3",
+          "bytes": 18476,
+          "sha256": "96d0c8eb47c586966ba6ca4e3d83facdc6a59f4500e95a4f6f2a8c6dc14ba57d",
+          "format": "mp3",
+          "mimeType": "audio/mpeg",
+          "measuredIntegratedLUFS": -16.01,
+          "measuredTruePeakDBTP": -8.21
+        }
+      ]
+    },
+    {
+      "id": "shell_hit_ship",
+      "license": "CC0-1.0",
+      "source": "source/build.py::synth",
+      "durationSeconds": 0.62,
+      "targetIntegratedLUFS": -16,
+      "measurementToleranceLU": 0.1,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "files": [
+        {
+          "file": "shell_hit_ship.ogg",
+          "bytes": 9757,
+          "sha256": "ca9586fa896050e4dd5f545e5fadc6d87c13ae30fef4672044327a92d5263277",
+          "format": "ogg",
+          "mimeType": "audio/ogg",
+          "measuredIntegratedLUFS": -15.93,
+          "measuredTruePeakDBTP": -2.46
+        },
+        {
+          "file": "shell_hit_ship.mp3",
+          "bytes": 16172,
+          "sha256": "728113fc7e4b0c1b28652a8892b8efc653f34a8942a20f2ce652643aaf6fb05b",
+          "format": "mp3",
+          "mimeType": "audio/mpeg",
+          "measuredIntegratedLUFS": -16.01,
+          "measuredTruePeakDBTP": -2.72
+        }
+      ]
+    },
+    {
+      "id": "base_cannon",
+      "license": "CC0-1.0",
+      "source": "source/build.py::synth",
+      "durationSeconds": 0.76,
+      "targetIntegratedLUFS": -16,
+      "measurementToleranceLU": 0.1,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "files": [
+        {
+          "file": "base_cannon.ogg",
+          "bytes": 11751,
+          "sha256": "b44aa9d9623679e5dea10e8b163e164d344e8538a3a86076cf4a2c5de0ddeed5",
+          "format": "ogg",
+          "mimeType": "audio/ogg",
+          "measuredIntegratedLUFS": -15.95,
+          "measuredTruePeakDBTP": -2.79
+        },
+        {
+          "file": "base_cannon.mp3",
+          "bytes": 19628,
+          "sha256": "9653a403fb045d4ecaf93c5b802d25ddbb9b5a1fc5e3098c010b4ace03c9d5a6",
+          "format": "mp3",
+          "mimeType": "audio/mpeg",
+          "measuredIntegratedLUFS": -16.02,
+          "measuredTruePeakDBTP": -3.0
+        }
+      ]
+    },
+    {
+      "id": "depot_burst",
+      "license": "CC0-1.0",
+      "source": "source/build.py::synth",
+      "durationSeconds": 1.05,
+      "targetIntegratedLUFS": -16,
+      "measurementToleranceLU": 0.1,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "files": [
+        {
+          "file": "depot_burst.ogg",
+          "bytes": 14264,
+          "sha256": "d84644d3ed3ec3da3a2f3974a429996612ef803b6650d3c96bfd18326fb5c4f2",
+          "format": "ogg",
+          "mimeType": "audio/ogg",
+          "measuredIntegratedLUFS": -15.96,
+          "measuredTruePeakDBTP": -3.24
+        },
+        {
+          "file": "depot_burst.mp3",
+          "bytes": 26540,
+          "sha256": "550aa90baf2c7b69fc0beba0a876d161433c4b8cb4f716498725fecc8c317cb6",
+          "format": "mp3",
+          "mimeType": "audio/mpeg",
+          "measuredIntegratedLUFS": -16.04,
+          "measuredTruePeakDBTP": -3.56
+        }
+      ]
+    }
+  ],
+  "integration": {
+    "runtimeModified": false,
+    "stateSwitch": "Keep the GLTFLoader result, select scenes by the ordered model.states array.",
+    "sinking": "Play the sinking clip once on the sinking scene with an AnimationMixer, then remove the entity.",
+    "poolReset": "Stop and uncache the mixer, restore root position/quaternion and rig angles before reuse.",
+    "atlasSampling": "Use default GLTFLoader sRGB base-color handling; sprite textures should not generate mipmaps.",
+    "previewDependencies": [
+      "../../vendor/three.module.js",
+      "../../vendor/GLTFLoader.js",
+      "../../vendor/BufferGeometryUtils.js"
+    ],
+    "previewDependencyLicense": "Existing repository Three.js files are MIT; no third-party file is added to this pack.",
+    "offline": "Serve the repository over HTTP; preview uses only same-origin files."
+  }
+}
