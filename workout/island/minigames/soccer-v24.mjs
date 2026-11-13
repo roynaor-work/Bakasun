@@ -57,15 +57,15 @@ export function soccerKitGoal(pitch,side){
 }
 /** Corner flags (real 1.6 m) on the four corners; the cloth points along the goal line as in the kit preview. */
 export function soccerKitFlags(pitch){const hx=pitch.length/2,hz=pitch.width/2;return [[-hx,-hz],[-hx,hz],[hx,-hz],[hx,hz]].map(([x,z],i)=>({position:[x,0,z],rotationY:i%2?Math.PI:0}));}
-/** Blank boards (real 4 x 1 m) along both touchlines, at the kit's places scaled to the pitch, 2.5 m (scaled) outside the line: at the
- * 28-degree game camera a 1 m board hides at most 1.9 m behind it, which stays outside the touchline. The v8 LED ring they replace ran
- * round the ends too, so two boards stand behind each goal line on either side of the goal, clear of the net (game choice; the kit's
- * preview has the eight long-side boards only). */
+/** Blank boards (real 4 x 1 m) along both touchlines, at the kit's places along the length (scaled with it) and the kit's real 2.5 m
+ * outside the line: at the 28-degree game camera a 1 m board hides at most 1.9 m behind it, which stays outside the touchline (2.5 m
+ * scaled to 1.5 m would hide a ball on the line). The v8 LED ring they replace ran round the ends too, so boards also stand behind each
+ * goal line on either side of the goal, clear of the net (game choice; the kit's preview has the eight long-side boards only). */
 export function soccerKitBoards(pitch){
-  const {sx,sz}=soccerKitScale(pitch),hx=pitch.length/2,hz=pitch.width/2,B=SOCCER_KIT.boards,out=[];
-  for(const x of B.x)for(const side of [-1,1])out.push({position:[round(x*sx),0,round(side*(hz+B.out*sz))],rotationY:side<0?0:Math.PI});
-  const back=Math.max(hx+pitch.goalDepth+1.2,hx+B.out*sx+1),near=pitch.goalWidth/2+B.width/2+1.2;
-  for(const end of [-1,1])for(const z of [-near-B.width-1,-near,near,near+B.width+1])if(Math.abs(z)+B.width/2<=hz+B.out*sz)out.push({position:[round(end*back),0,round(z)],rotationY:end>0?-Math.PI/2:Math.PI/2});
+  const {sx}=soccerKitScale(pitch),hx=pitch.length/2,hz=pitch.width/2,B=SOCCER_KIT.boards,out=[];
+  for(const x of B.x)for(const side of [-1,1])out.push({position:[round(x*sx),0,round(side*(hz+B.out))],rotationY:side<0?0:Math.PI});
+  const back=Math.max(hx+pitch.goalDepth+1.2,hx+B.out),near=pitch.goalWidth/2+B.width/2+1.2;
+  for(const end of [-1,1])for(const z of [-near-B.width-1,-near,near,near+B.width+1])if(Math.abs(z)+B.width/2<=hz+B.out)out.push({position:[round(end*back),0,round(z)],rotationY:end>0?-Math.PI/2:Math.PI/2});
   return out;
 }
 

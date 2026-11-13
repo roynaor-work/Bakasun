@@ -169,7 +169,8 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   // v24 3D fans: loaded beside the match, shown once measured against the tier budget (render below).
   const crowdReady=crowdLayout?Promise.all([v8Ready,createSoccerCrowd3d({T,GLTFLoader,seats:crowdLayout.seats,mode:crowdMode})]).then(([stadiumUp,loaded])=>{
     if(disposed||!stadiumUp){loaded.dispose();crowdState.status=stadiumUp?'disposed':'no-stadium';return false;}
-    crowd3d=loaded;loaded.root.visible=false;loaded.setTeamColors(config.team.colors[0],config.opponent.colors[0]);scene.add(loaded.root);crowdState.status='measuring';return true;
+    // unlit vertex colours: the same grade as the flat cards beside them (soccer-v8-stadium makeCrowd colour), so the rows read as one crowd
+    crowd3d=loaded;loaded.root.visible=false;loaded.setTeamColors(config.team.colors[0],config.opponent.colors[0]);for(const mesh of loaded.batches)mesh.material.color.set('#c5d0d4');scene.add(loaded.root);crowdState.status='measuring';return true;
   }).catch(error=>{crowdState.status='fallback';crowdState.error=String(error?.message||error);return false;}):Promise.resolve(false);
   const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
   // Authored v2 characters first, retaining the previous athlete and kid as fallbacks.
