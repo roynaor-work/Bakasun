@@ -47,3 +47,10 @@
 .game-screen[data-game=navalDuel] .game-controls[data-ammo-level=empty] .naval-picked-count{color:#ff7a66}
 .game-screen[data-game=navalDuel] .game-controls[data-ammo-level=empty] #shoot{filter:saturate(.5) brightness(.8)}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-vulcan{animation:none}}
+/* 13/11/2026 v23 lock-on: the Fire button tells whether one tap will hit the locked hull (green, pulsing), the turret is still turning (amber)
+ * or the hull cannot be hit from here now (orange). Only set while lock-on is on (`?navalLock=0` never sets data-lock). */
+.game-screen[data-game=navalDuel] .game-controls.game-controls[data-lock=ready] #shoot{outline:4px solid #62E6AA;outline-offset:5px;animation:naval-lock-ready 1s ease-in-out infinite}
+.game-screen[data-game=navalDuel] .game-controls.game-controls[data-lock=turning] #shoot{outline:3px dashed #FFD166;outline-offset:5px}
+.game-screen[data-game=navalDuel] .game-controls.game-controls:is([data-lock=far],[data-lock=blocked],[data-lock=miss],[data-lock=dive]) #shoot{outline:3px solid #FF9A5C;outline-offset:5px}
+@keyframes naval-lock-ready{0%,100%{outline-offset:5px}50%{outline-offset:9px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .game-controls.game-controls[data-lock=ready] #shoot{animation:none}}

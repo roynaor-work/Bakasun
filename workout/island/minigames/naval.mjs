@@ -4,6 +4,7 @@ import {createNavalAir,navalAirConfig,navalAirEnabled,navalAirManual} from './na
 import {navalAmmoLimit,navalMagazines,navalSupplyNeeded,navalBuoySpot,navalCollect,navalBuoyReached,navalAmmoState,navalSupplyConfig,navalLoad,navalBuoyDrift} from './naval-supply.mjs?v=island-v2-20261107-11';
 import {createNavalAirAudio} from './naval-air-audio.mjs?v=island-v2-20261107-11';
 import {navalLockedPoint,navalLockRadius} from './naval-lock.mjs?v=island-v2-20261107-11';
+import {navalLockOn,navalLockConfig,navalLockSolve,navalLockSlew,navalLockAligned,navalLockStatus} from './naval-lockon.mjs?v=island-v2-20261107-11';
 import {runCanvasGame} from './canvas-session.mjs?v=island-v2-20261107-11';
 import {oval,drawHealthBar} from './art.mjs?v=island-v2-20261107-11';
 import {createNavalInput,navalSteeringInput} from './naval-controls.mjs?v=island-v2-20261107-11';
@@ -74,6 +75,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  const ballistic=navalBallisticConfig(balance),pressure=navalStagePressure(level),turret={yaw:0,elevation:ballistic.defaultElevation,power:1};let prediction=null,lastShot=null,holdView=-1,quickShots=0,aimSide=1;
  const legacyAim=navalAimLegacy();let aiming=false,lockedTargetIndex=null,selectedTargetIndex=0,wind=navalWind(seed,0,balance),enemyFired=0,moving=false,resupplyTime=0,resupplies=0,shotSerial=0;
  const airCfg=navalAirEnabled()?navalAirConfig(settings,balance):null,airSim=airCfg?createNavalAir(airCfg,balance):null;
+ // 13/11/2026 v23 lock-on (Roy): a long press locks a hull, the turret turns onto it by itself (all the way round) and a tap fires. `?navalLock=0` keeps v22.
+ const lockEnabled=navalLockOn(),lockCfg=navalLockConfig(balance);let homing=null,lockPress=null,locksMade=0,unlocked=null;
  // 11/11/2026 spin aim: the camera follows the turning turret faster and with a smaller lead, so the landing mark stays near the middle.
  const followBalance=navalAimSpin()?{aimControls:{...(balance.aimControls||{}),follow:navalSpinFollow(balance)}}:balance;
  // 11/11/2026 ammo limit (Roy): `ammo` stays the stage's stock; a shell magazine (`loaded`, 12 to 24 rounds) and a Vulcan belt must be
@@ -125,7 +128,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   else{const launch=launchFor();prediction={launch,...navalPredict(launch,ammoIndex===3?[]:contactTargets(ammoIndex),balance,ballistic.previewSamples||28)};}
   aim.x=prediction.end.x;aim.z=prediction.end.z;
   // The camera keeps leaning on the still-hull prediction above (approved 24/10); while aiming the marks, the arc colour and the shot record use the forecast.
-  if(aiming&&prediction.launch&&ammoIndex!==3)prediction=honest(prediction);
+  if((aiming||homing)&&prediction.launch&&ammoIndex!==3)prediction=honest(prediction);
   reticle={x:aim.x,z:aim.z,windX:0,windZ:0,jitter:{x:0,z:0},flight:prediction.flight,contact:prediction.contact,landing:prediction.landing,...navalLockRadius(playerShip,enemies.find(e=>e.index===selectedTargetIndex&&e.hp>0)||enemyShip,balance,level,mode,equipment)};
  }
  /** Honest solver: real turret settings that put the same physics on a point. */
@@ -164,6 +167,25 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(!e)return;
   predict();const from=prediction?.landing||e,pull=Math.max(assist.minPull??.5,(assist.pull??.9)-(assist.pullPerStage??0)*(Math.min(30,level)-1));
   solveTo({x:from.x+(e.x-from.x)*pull,z:from.z+(e.z-from.z)*pull},kind,assist.wind??0);quickShots++;
+ }
+ /** v23 lock-on: the locked hull, its solution (refreshed every `refreshSeconds`, and at once when the weapon changes) and the
+  * queued tap. The turret turns by itself; a tap waits for it to come on target (at most `queueSeconds`), and the shell leaves with
+  * fresh settings solved in that same frame, so what the arc showed is what flies. */
+ const lockTarget=()=>homing?enemies.find(e=>e.index===homing.index&&e.active&&e.hp>0)||null:null;
+ const lockShootable=e=>e.active&&e.hp>0&&navalTargetable(e,ammoIndex,balance);
+ function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation},balance,lockCfg);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
+ function unlock(reason){if(homing)unlocked={index:homing.index,reason,time};homing=null;}
+ /** A miss on a submarine under water reads 'dive' (wait for it to surface, or pick the guided missile or a mine). */
+ const lockWord=status=>{const e=status==='miss'&&lockTarget();return e&&balance.shipTypes[e.kind]?.submarine&&e.depth>balance.combat.submarineHitDepth?'dive':status;};
+ function lockOnto(index){homing={index,at:time,solution:null,solvedAt:-Infinity,kind:ammoIndex,queued:null,aligned:false,status:'turning',shots:0};selectedTargetIndex=index;locksMade++;sound('lock');}
+ function lockFire(){
+  const e=lockTarget(),kind=ammoIndex;if(!e){if(homing)homing.queued=null;return false;}
+  if(ammo[kind]<=0||(kind===0&&loaded<=0)){homing.queued=null;return shoot();}
+  if(cooldowns[kind]>0)return false;
+  const fresh=lockSolve(),aligned=navalLockAligned(turret,fresh,lockCfg,kind);homing.aligned=aligned;homing.status=lockWord(navalLockStatus(aligned,fresh));
+  if(!aligned&&time-homing.queued<lockCfg.queueSeconds)return false;
+  if(aligned&&fresh&&kind!==1&&kind!==5){turret.yaw=fresh.yaw;if(kind!==2)turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,fresh.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,fresh.power));}
+  homing.queued=null;const ok=shoot();if(ok)homing.shots++;return ok;
  }
  function damage(victim,p){
   if(p.owner==='player'){
@@ -296,7 +318,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   beginAim:lock,cancelAim(){aiming=false;lockedTargetIndex=null;},get selectedTargetIndex(){return selectedTargetIndex;},get lockedTargetIndex(){return lockedTargetIndex;},get lockedTarget(){return enemies.find(e=>e.index===lockedTargetIndex)||null;},get reticle(){return reticle&&{...reticle};},
   get missionState(){const ms=navalMissionState(mission,enemies.filter(e=>!e.structure));if(!structures.length)return ms;const main=enemies.filter(e=>e.structure&&e.main!==false),done=main.filter(e=>e.hp<=0).length;return {completed:ms.completed+done,total:ms.total+main.length,complete:ms.complete&&done===main.length,fleet:ms,base:{completed:done,total:main.length}};},get resupplyTime(){return resupplyTime;},get resupplies(){return resupplies;},get lastFeedback(){return lastFeedback;},
   get rangeState(){return navalLockRadius(playerShip,model.lockedTarget||enemies.find(e=>e.index===selectedTargetIndex&&e.active&&e.hp>0)||enemies.find(e=>e.active&&e.hp>0)||enemyShip,balance,level,mode,equipment);},
-  get aiming(){return aiming;},get wind(){return wind;},get moving(){return moving;},get returning(){return false;},get fired(){return fired;},get camera(){return camera;},get triggerDown(){return wasFiring;},get heat(){return 0;},get overheated(){return false;},get enemyFired(){return enemyFired;},get repairLife(){return repairLife;},get lastAction(){return lastAction;},
+  get aiming(){return aiming;},get lockEnabled(){return lockEnabled;},get homing(){return homing&&{index:homing.index,at:homing.at,status:homing.status,aligned:homing.aligned,queued:homing.queued!=null,shots:homing.shots,solution:homing.solution&&{yaw:homing.solution.yaw,elevation:homing.solution.elevation,power:homing.solution.power,reachable:homing.solution.reachable,status:homing.solution.status,contact:homing.solution.contact&&{...homing.solution.contact}}};},get lockPress(){return lockPress;},get locksMade(){return locksMade;},get unlocked(){return unlocked;},get wind(){return wind;},get moving(){return moving;},get returning(){return false;},get fired(){return fired;},get camera(){return camera;},get triggerDown(){return wasFiring;},get heat(){return 0;},get overheated(){return false;},get enemyFired(){return enemyFired;},get repairLife(){return repairLife;},get lastAction(){return lastAction;},
   get enemyShip(){return enemyShip;},get remaining(){return remaining;},get score(){return score;},get lives(){return playerShip.hp;},get maxLives(){return playerShip.maxHp;},get wave(){return wave;},get enemyX(){return enemyShip.x;},get shipScale(){return balance.shipTypes[enemyShip.kind].scale;},get boss(){return enemyShip.boss;},get result(){return result;},get phase(){return phase;},get enemyLives(){return enemyShip.hp;},get time(){return time;},get ammoIndex(){return ammoIndex;},get enemyFleetHp(){return fleetHealth();},get sinkProgress(){return sinkingShip?Math.min(1,(time-sinkingShip.sunkAt)/balance.sinkSeconds):0;},
   get yaw(){return turret.yaw;},get elevation(){return turret.elevation;},get power(){return turret.power;},get turret(){return {...turret};},get prediction(){return prediction;},get lastShot(){return lastShot;},get quickShots(){return quickShots;},get viewHeld(){return time<holdView;},get sway(){return navalSway(seed,time,balance);},get warningId(){return resupplyTime>0?'naval.campaign.resupplying':null;},
   targetAt:(x,y)=>navalWaterAt(x,y,camera,config.width,config.height,balance),screenPoint:(x,z,y=0)=>projectNavalPoint(navalWorldPoint(x,z,balance,y),camera,config.width,config.height),statusValues(){return {round:1,wave,lives:Math.ceil(playerShip.hp),enemyLives:Math.ceil(enemyShip.hp)};},
@@ -316,14 +338,28 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    if(input.ammo&&!wasAmmo){for(let i=1;i<=ammo.length;i++){const next=(ammoIndex+i)%ammo.length;if(ammo[next]>0){ammoIndex=next;break;}}}wasAmmo=Boolean(input.ammo);
    if(Number.isInteger(input.selectTargetIndex)&&enemies.some(e=>e.index===input.selectTargetIndex&&e.active&&e.hp>0)){selectedTargetIndex=input.selectTargetIndex;if(aiming)lock(selectedTargetIndex);}
    if(input.aimSide===1||input.aimSide===-1)aimSide=input.aimSide;
-   if(Number.isFinite(input.aimYaw))turret.yaw=input.aimYaw;
-   if(Number.isFinite(input.aimElevation))turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,input.aimElevation));
-   if(Number.isFinite(input.aimPower))turret.power=Math.max(ballistic.minPower,Math.min(1,input.aimPower));
-   if(!legacyAim&&aiming&&Number.isFinite(input.aimYaw)&&!input.autoAim&&!Number.isFinite(input.targetX)&&!Number.isFinite(input.targetZ))assistAim();
-   if(Number.isFinite(input.targetX)||Number.isFinite(input.targetZ))solveTo({x:Math.max(targeting.minX,Math.min(targetMaxX,Number.isFinite(input.targetX)?input.targetX:aim.x)),z:Math.max(targeting.minZ,Math.min(targeting.maxZ,Number.isFinite(input.targetZ)?input.targetZ:aim.z))});
-   if(input.autoAim){const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(e){solveTo(e);const flight=launchFor().duration;solveTo({x:e.x+(e.vx||0)*flight,z:e.z+(e.vz||0)*flight});}}
+   if(lockEnabled){
+    if(input.lockClear)unlock('clear');
+    if(Number.isInteger(input.lockTarget)){const i=input.lockTarget;if(homing?.index===i)unlock('toggle');else if(enemies.some(e=>e.index===i&&e.active&&e.hp>0))lockOnto(i);}
+    lockPress=input.lockPress&&Number.isInteger(input.lockPress.index)?{index:input.lockPress.index,progress:Math.max(0,Math.min(1,input.lockPress.progress||0))}:null;
+    if(homing&&!lockTarget())unlock('sunk');
+   }
+   if(!homing){
+    if(Number.isFinite(input.aimYaw))turret.yaw=input.aimYaw;
+    if(Number.isFinite(input.aimElevation))turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,input.aimElevation));
+    if(Number.isFinite(input.aimPower))turret.power=Math.max(ballistic.minPower,Math.min(1,input.aimPower));
+    if(!legacyAim&&aiming&&Number.isFinite(input.aimYaw)&&!input.autoAim&&!Number.isFinite(input.targetX)&&!Number.isFinite(input.targetZ))assistAim();
+    if(Number.isFinite(input.targetX)||Number.isFinite(input.targetZ))solveTo({x:Math.max(targeting.minX,Math.min(targetMaxX,Number.isFinite(input.targetX)?input.targetX:aim.x)),z:Math.max(targeting.minZ,Math.min(targeting.maxZ,Number.isFinite(input.targetZ)?input.targetZ:aim.z))});
+    if(input.autoAim){const e=enemies.find(e=>e.index===selectedTargetIndex&&targetable(e))||enemies.find(targetable);if(e){solveTo(e);const flight=launchFor().duration;solveTo({x:e.x+(e.vx||0)*flight,z:e.z+(e.vz||0)*flight});}}
+   }else{
+    // Locked: the turret turns by itself onto the solution (the short way round, whatever the hull's heading); the finger only fires.
+    if(homing.kind!==ammoIndex||time-homing.solvedAt>=lockCfg.refreshSeconds||!homing.solution)lockSolve();
+    const sol=homing.solution;if(sol){const next=navalLockSlew(turret,sol,dt,lockCfg);turret.yaw=next.yaw;turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,next.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,next.power));}
+    homing.aligned=navalLockAligned(turret,sol,lockCfg,ammoIndex);homing.status=lockWord(navalLockStatus(homing.aligned,sol));
+   }
    if(input.aimHeld){if(!aiming||!model.lockedTarget?.hp)lock();aiming=true;}else if(!input.fireRelease&&!input.quickShot){aiming=false;lockedTargetIndex=null;}
    if(input.aimCancel){aiming=false;lockedTargetIndex=null;}
+   if(homing){lockedTargetIndex=homing.index;selectedTargetIndex=homing.index;}
    predict();
    camYaw=legacyAim?turret.yaw:navalFollowYaw(camYaw,sky?sky.yaw:turret.yaw,dt,followBalance,aiming||Boolean(sky));camera=navalCameraPose(playerShip,aim,aiming||Boolean(sky)||time<holdView,balance,camera,dt,framing());
    for(let i=mines.length-1;i>=0;i--){const mine=mines[i];mine.age+=dt;mine.life-=dt;const e=mine.age>=balance.weapons.mineArmSeconds&&enemies.find(e=>e.active&&e.hp>0&&Math.hypot(e.x-mine.x,e.z-mine.z)<=balance.weapons.mineRadius);if(e){mine.targetX=mine.x;mine.targetZ=mine.z;mine.victim=e.index;impact(mine);mines.splice(i,1);}else if(mine.life<=0)mines.splice(i,1);}
@@ -344,11 +380,13 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    }
    if(!useful&&!inFlight){resupplyTime+=dt;if(resupplyTime>=2){ammo[0]=6;if(limited)loaded=6;resupplyTime=0;resupplies++;feedback('resupply',playerShip.x,playerShip.z);}}else resupplyTime=0;
    const pressed=Boolean(input.firing&&!wasFiring);wasFiring=Boolean(input.firing);
-   if(input.quickShot&&!input.aimCancel){if(Number.isInteger(input.releaseTarget?.target))lockedTargetIndex=input.releaseTarget.target;quickAim(ammoIndex);shoot();predict();aiming=false;}
+   if(homing&&ammoIndex!==5&&(input.quickShot||input.fireRelease)&&!input.aimCancel){homing.queued??=time;aiming=false;}
+   else if(input.quickShot&&!input.aimCancel){if(Number.isInteger(input.releaseTarget?.target))lockedTargetIndex=input.releaseTarget.target;quickAim(ammoIndex);shoot();predict();aiming=false;}
    else if(input.fireRelease&&!input.aimCancel){const target=input.releaseTarget;if(Number.isInteger(target?.target))lockedTargetIndex=target.target;shoot(Number.isFinite(target?.x)&&!input.releaseCurrent?target:undefined);predict();aiming=false;}
    else if(pressed)shoot();
+   if(homing?.queued!=null&&lockFire())predict();
   },
-  snapshot(){return {difficulty:mode,air:model.air.map(a=>({...a})),vulcan:model.vulcan&&{...model.vulcan,tracers:model.vulcan.tracers.length},sky:sky&&{...sky},baseHealth:baseHealth(),chainBlast:chainBlast&&{...chainBlast},belt,loaded:model.loaded,buoys:buoys.map(b=>({...b})),supplies,magazines:model.magazines,ammoState:model.ammoState,ammo:[...ammo],selectedTargetIndex,lockedTargetIndex,reticle:model.reticle,rangeState:model.rangeState,mission:{...mission,...model.missionState},resupplyTime,resupplies,lastFeedback:lastFeedback&&{...lastFeedback},wind:{...wind},moving,returning:false,returnTime:0,aiming,camera:JSON.parse(JSON.stringify(camera)),fired,hits,heat:0,overheated:false,enemyFired,enemyShots:enemyShots.map(e=>({...e})),composition:fleet.map(e=>e.kind).join(),yaw:turret.yaw,elevation:turret.elevation,power:turret.power,turret:{...turret},prediction:prediction&&{end:{...prediction.end},landing:{...prediction.landing},contact:prediction.contact&&{...prediction.contact},flight:prediction.flight,points:prediction.points.length,guided:Boolean(prediction.guided),forecast:Boolean(prediction.forecast),safe:prediction.safe,kind:navalMarkKind(prediction),over:prediction.over?{...prediction.over}:null,lead:prediction.lead?JSON.parse(JSON.stringify(prediction.lead)):null},lastShot:lastShot&&JSON.parse(JSON.stringify(lastShot)),quickShots,sway:model.sway,playerPercent:healthPercent(playerShip.hp,playerShip.maxHp),enemyPercent:healthPercent(enemyShip.hp,enemyShip.maxHp),extraShots:extraShots.map(p=>({...p})),mines:mines.map(p=>({...p})),repairLife,lastAction:lastAction&&{...lastAction},warningId:model.warningId,lives:playerShip.hp,maxLives:playerShip.maxHp,enemyLives:enemyShip.hp,phase,round:1,wave,time,enemyX:enemyShip.x,score,result,attacker:enemies[0].index,ball:{...ball},blast:{...blast},hud:model.hud?JSON.parse(JSON.stringify(model.hud)):null,aim:{...aim},playerShip:{...playerShip},enemyShip:{...enemyShip},enemyFleetHp:fleetHealth(),maxEnemyFleet,boss:enemyShip.boss,ammoIndex,ammo:[...ammo],cooldowns:[...cooldowns],remaining,enemies:enemies.map(e=>({...e,attack:e.attack&&{...e.attack}}))};}
+  snapshot(){return {difficulty:mode,homing:model.homing,lockPress:lockPress&&{...lockPress},locksMade,lockEnabled,unlocked:unlocked&&{...unlocked},air:model.air.map(a=>({...a})),vulcan:model.vulcan&&{...model.vulcan,tracers:model.vulcan.tracers.length},sky:sky&&{...sky},baseHealth:baseHealth(),chainBlast:chainBlast&&{...chainBlast},belt,loaded:model.loaded,buoys:buoys.map(b=>({...b})),supplies,magazines:model.magazines,ammoState:model.ammoState,ammo:[...ammo],selectedTargetIndex,lockedTargetIndex,reticle:model.reticle,rangeState:model.rangeState,mission:{...mission,...model.missionState},resupplyTime,resupplies,lastFeedback:lastFeedback&&{...lastFeedback},wind:{...wind},moving,returning:false,returnTime:0,aiming,camera:JSON.parse(JSON.stringify(camera)),fired,hits,heat:0,overheated:false,enemyFired,enemyShots:enemyShots.map(e=>({...e})),composition:fleet.map(e=>e.kind).join(),yaw:turret.yaw,elevation:turret.elevation,power:turret.power,turret:{...turret},prediction:prediction&&{end:{...prediction.end},landing:{...prediction.landing},contact:prediction.contact&&{...prediction.contact},flight:prediction.flight,points:prediction.points.length,guided:Boolean(prediction.guided),forecast:Boolean(prediction.forecast),safe:prediction.safe,kind:navalMarkKind(prediction),over:prediction.over?{...prediction.over}:null,lead:prediction.lead?JSON.parse(JSON.stringify(prediction.lead)):null},lastShot:lastShot&&JSON.parse(JSON.stringify(lastShot)),quickShots,sway:model.sway,playerPercent:healthPercent(playerShip.hp,playerShip.maxHp),enemyPercent:healthPercent(enemyShip.hp,enemyShip.maxHp),extraShots:extraShots.map(p=>({...p})),mines:mines.map(p=>({...p})),repairLife,lastAction:lastAction&&{...lastAction},warningId:model.warningId,lives:playerShip.hp,maxLives:playerShip.maxHp,enemyLives:enemyShip.hp,phase,round:1,wave,time,enemyX:enemyShip.x,score,result,attacker:enemies[0].index,ball:{...ball},blast:{...blast},hud:model.hud?JSON.parse(JSON.stringify(model.hud)):null,aim:{...aim},playerShip:{...playerShip},enemyShip:{...enemyShip},enemyFleetHp:fleetHealth(),maxEnemyFleet,boss:enemyShip.boss,ammoIndex,ammo:[...ammo],cooldowns:[...cooldowns],remaining,enemies:enemies.map(e=>({...e,attack:e.attack&&{...e.attack}}))};}
  };updateFleet(0);turret.yaw=Math.atan2(enemies[0].z-playerShip.z,enemies[0].x-playerShip.x);predict();camera=navalCameraPose(playerShip,aim,false,balance,undefined,0,framing());return model;
 }
 

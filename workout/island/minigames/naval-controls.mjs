@@ -2,6 +2,7 @@ import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-11';
 import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-11';
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-11';
 import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-11';
+import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-11';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -85,10 +86,18 @@ export function createNavalInput(ctx,getModel,getView){
  let side=1;const applyHand=()=>{const right=navalHanded(balance);side=right?1:-1;controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
  fire?.setAttribute?.('aria-describedby','naval-weapon-hint');
  let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false,sky=null;
+ // 13/11/2026 v23 lock-on: a finger that rests on an enemy hull (anywhere but a button) for `holdSeconds` of game time locks it; a finger
+ // that travels more than `movePixels` is a drag (steering, aiming) and never locks. On the aim pad a press that starts on a hull waits
+ // before it becomes an aim: a drag starts the aim from the first point, a quick tap stays v22's quick shot. While a hull is locked the
+ // turret follows the lock, so a hold on Fire only fires (release on the X still cancels). `?navalLock=0` restores v22.
+ const lockOn=navalLockOn(),lc=navalLockConfig(balance);let press=null,lockEvent=null;
+ const onButton=t=>Boolean(t?.closest?.('button,[data-game-control],.naval-weapon-picker'));
+ const pickAt=(x,y)=>{const m=getModel();if(!m)return null;const r=canvas.getBoundingClientRect();return navalLockPick(m.enemies,(px,pz,py)=>project(m,px,pz,py),{x:x-r.left,y:y-r.top},r.width,r.height,lc,balance);};
+ const buzz=()=>{try{if(globalThis.localStorage?.getItem('island.naval.vibration')==='off')return;globalThis.navigator?.vibrate?.(22);}catch{}};
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
  const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
- const reset=()=>{gesture=keyboard=sky=null;queue=[];pendingSelection=null;keyboardClick=false;getModel()?.cancelAim?.();show(false);controls.dataset.sky='false';controls.style?.removeProperty?.('--naval-power');};
+ const reset=()=>{gesture=keyboard=sky=null;queue=[];pendingSelection=null;keyboardClick=false;press=null;lockEvent=null;getModel()?.cancelAim?.();show(false);controls.dataset.sky='false';controls.style?.removeProperty?.('--naval-power');};
  const reachConfig={...balance,ballistics:{...(balance.ballistics||{}),minElevation:navalReachRange(balance).min}};
  const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance,m?.ammoIndex),time:m?.time??0};};
  const startPixels=c.gain?.startPixels??2;
@@ -105,7 +114,14 @@ export function createNavalInput(ctx,getModel,getView){
  const overCancel=(x,y)=>{if(cancel.hidden)return false;const r=cancel.getBoundingClientRect();return x>=r.left-8&&x<=r.right+8&&y>=r.top-8&&y<=r.bottom+8;};
  const finish=(g,x,y,t)=>{settle(g,x,y,t);if(!navalAimLegacy())navalReleaseSample(g,c.assist?.releaseLagMs??0);const s=state(g);if(overCancel(x,y))queue.push({type:'cancel'});else if(!g.engaged&&s.held<=(c.tapSeconds??.22)&&g.moved<=(c.tapPixels??10))queue.push({type:'quick',target:getModel()?.lockedTargetIndex});else queue.push({type:'fire',...s,target:getModel()?.lockedTargetIndex});};
  const begin=e=>{if(gesture||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();m.beginAim?.(m.selectedTargetIndex);const start=startState();gesture={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{yaw:start.yaw,elevation:start.elevation},track:{},engaged:false,lastX:e.clientX,lastY:e.clientY,lastT:e.timeStamp};show(true);};
- fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}begin(e);},options);
+ fire.addEventListener('pointerdown',begin,options);pad.addEventListener('pointerdown',e=>{try{pad.setPointerCapture(e.pointerId);}catch{}if(press?.id===e.pointerId&&press.onPad&&!gesture){press.deferred={pointerId:e.pointerId,clientX:e.clientX,clientY:e.clientY,timeStamp:e.timeStamp,button:0,preventDefault(){}};e.preventDefault?.();return;}begin(e);},options);
+ if(lockOn){
+  // Capture phase: these run before the stick, the pad and the Fire gesture see the event.
+  const capture={signal:abort.signal,capture:true};
+  window.addEventListener('pointerdown',e=>{if(press||e.button>0)return;const m=getModel();if(!m||m.result||onButton(e.target))return;const index=pickAt(e.clientX,e.clientY);if(index===null)return;press={id:e.pointerId,x:e.clientX,y:e.clientY,t0:m.time??0,index,onPad:e.target===pad,deferred:null,done:false};},capture);
+  window.addEventListener('pointermove',e=>{if(!press||press.id!==e.pointerId||press.done)return;if(Math.hypot(e.clientX-press.x,e.clientY-press.y)>lc.movePixels){const d=press.deferred;press=null;if(d)begin(d);}},capture);
+  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(!press||press.id!==e.pointerId)return;const p=press;press=null;if(!p.done&&p.deferred&&type==='pointerup')begin(p.deferred);},capture);
+ }
  // Sky crosshair: starts where the cannon points, at the default pitch; sideways = the same fine/spin turn as the cannon, up/down = pitch.
  const DEG=Math.PI/180,settleSky=(g,x,y,t)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));g.lastX=x;g.lastY=y;g.lastT=t??performance.now();g.aim={yaw:g.start.yaw+navalSpinFine(g.dx,balance)+(g.spin||0),pitch:Math.max(vc.pitchMin*DEG,Math.min(vc.pitchMax*DEG,g.start.pitch-g.dy*vc.pitchPerPx*DEG))};};
  const beginSky=e=>{if(gesture||sky||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();try{vulcan.setPointerCapture?.(e.pointerId);}catch{}const start={yaw:m.turret?.yaw||0,pitch:vc.defaultPitch*DEG};sky={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{...start},spin:0,lastT:e.timeStamp};controls.dataset.sky='true';};
@@ -130,15 +146,22 @@ export function createNavalInput(ctx,getModel,getView){
  fire.addEventListener('click',e=>{const valid=keyboardClick&&e.detail===0&&!['touch','mouse','pen'].includes(e.pointerType);keyboardClick=false;if(valid)queue.push({type:'quick'});},options);
  window.addEventListener('pointerdown',()=>{keyboardClick=false;},options);
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
- return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();vulcan.remove();controls.classList?.remove('left-handed');delete controls.dataset.sky;delete controls.dataset.air;delete controls.dataset.ammoLevel;},sample(input){
+ return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();vulcan.remove();controls.classList?.remove('left-handed');delete controls.dataset.sky;delete controls.dataset.air;delete controls.dataset.ammoLevel;delete controls.dataset.lock;},sample(input){
    const m=getModel(),g=gesture||keyboard,event=queue.shift();
    // Spin mode: while the thumb is held out past the dead band the turret keeps turning, one step per model frame (model time, so pauses add nothing).
    if(gesture&&gesture.engaged&&navalAimSpin()&&m){const now=m.time??0;if(Number.isFinite(gesture.spinT))gesture.spin=navalSpinStep(gesture.spin,gesture.dx,now-gesture.spinT,balance);gesture.spinT=now;gesture.aim={...gesture.aim,yaw:gesture.start.yaw+navalSpinFine(gesture.dx,balance)+(gesture.spin||0)};(gesture.hist||(gesture.hist=[])).push({t:performance.now(),yaw:gesture.aim.yaw,elevation:gesture.aim.elevation});if(gesture.hist.length>40)gesture.hist.shift();}
    if(sky&&m){const now=m.time??0;if(Number.isFinite(sky.spinT))sky.spin=navalSpinStep(sky.spin,sky.dx,now-sky.spinT,balance);sky.spinT=now;settleSky(sky,sky.lastX??sky.x,sky.lastY??sky.y,sky.lastT);}
    const airborne=Boolean(m?.air?.some?.(a=>a.state!=='down'));if(manualAir){vulcan.hidden=!airborne&&!sky;controls.dataset.air=String(airborne);}
+   // Lock-on: the resting finger locks after `holdSeconds` of game time (pauses add nothing); the ring fills from `showAfter`.
+   let lockPressOut=null;
+   if(lockOn&&press&&!press.done&&m){const held=(m.time??0)-press.t0;if(!m.enemies?.some(e=>e.index===press.index&&e.active&&e.hp>0))press=null;else if(held>=lc.holdSeconds){press.done=true;lockEvent=press.index;buzz();}else if(held>=lc.showAfter)lockPressOut={index:press.index,progress:Math.min(1,(held-lc.showAfter)/Math.max(.01,lc.holdSeconds-lc.showAfter))};}
+   const locked=lockOn&&Boolean(m?.homing);
+   // While locked the gesture keeps its start on the turret, so if the lock ends mid-hold the aim continues from where the turret is.
+   if(locked&&g){const t=startState();g.start={...g.start,yaw:t.yaw,elevation:t.elevation};g.aim={yaw:t.yaw,elevation:t.elevation};g.x=g.lastX??g.x;g.y=g.lastY??g.y;g.dx=g.dy=0;g.spin=0;g.hist=[];}
    const live=g?state(g):null;
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
-   const s=event?.type==='fire'?event:live;if(s){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
+   const s=event?.type==='fire'?event:live;if(s&&!locked){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
+   if(lockOn){out.lockTarget=lockEvent;out.lockPress=lockPressOut;lockEvent=null;controls.dataset.lock=m?.homing?.status||'none';}
    if(manualAir){out.skyMode='manual';out.skyHeld=Boolean(sky);if(sky){out.skyYaw=sky.aim.yaw;out.skyPitch=sky.aim.pitch;}}
    if(m?.ammoState)controls.dataset.ammoLevel=m.ammoState.level;
    out.aimSide=side;pendingSelection=null;

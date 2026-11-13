@@ -22,7 +22,7 @@ function diamond(p,x,y,s,u){const h=s/2*u;p.beginPath();p.moveTo(x,y-h*1.25);p.l
  * landing mark: in the aim camera such a landing would sit on the hull's own
  * picture and read as a hit. */
 export function drawNavalAimMarks(p,m,project,balance){
- const pr=m.prediction;if(!m.aiming||!pr||pr.guided)return null;
+ const pr=m.prediction;if(!(m.aiming||m.homing)||!pr||pr.guided)return null;
  const look=balance.aimLook||{},kind=navalMarkKind(pr),spec=look[kind]||{color:'#ffffff',ring:24,diamond:10},u=navalPixelUnit(p),outline=(look.markOutline??2),dark=look.arcOutline||'#103847',green=look.hull?.color||'#62E6AA';
  const out={kind,ring:spec.ring,diamond:spec.diamond};
  p.save();p.lineJoin='round';

@@ -1,6 +1,7 @@
 import {navalLostHealth,navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-11';
 import {navalEdgeHint,navalAimSpin} from './naval-aim-flag.mjs?v=island-v2-20261107-11';
 import {NAVAL_AIR_LIFT,NAVAL_AIR_WING,navalSkyPoint,navalSkyAngles} from './naval-air.mjs?v=island-v2-20261107-11';
+import {drawNavalLockHud} from './naval-lockon-hud.mjs?v=island-v2-20261107-11';
 const TAU=Math.PI*2;
 const percent=(value,max)=>Math.round(Math.max(0,Math.min(1,value/max))*100);
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -157,7 +158,7 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
     p.fillStyle=chosen?'#092a3cee':'#092638c0';panel(p,x-28,y-6,56,10,5);bar(p,x-25,y-3,50,4,enemy.hp,enemy.maxHp,enemy.boss?'#ddbd78':chosen?'#a4ecd8':'#91bcb3');
     const lost=navalLostHealth(enemy,m.time,balance.aimLook?.hit);if(lost){const a=x-25+50*Math.max(0,lost.from/enemy.maxHp),b=x-25+50*Math.min(1,lost.to/enemy.maxHp);p.save();p.globalAlpha=lost.alpha;p.fillStyle=balance.aimLook.hit.lost;p.fillRect(a,y-3,Math.max(1,b-a),4);p.restore();shown.lost=(shown.lost||0)+1;}
     if(priority){p.fillStyle='#e7c77f';p.beginPath();p.moveTo(x-36,y-5);p.lineTo(x-32,y-1);p.lineTo(x-36,y+3);p.lineTo(x-40,y-1);p.closePath();p.fill();}
-    if(chosen){const aim=project(enemy.x,enemy.z,1.1);if(aim.depth>0){p.strokeStyle=m.aiming?'#a4ecd8':'#e7c77f';p.lineWidth=1.6;p.beginPath();for(const [sx,sy]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(aim.x+sx*18,aim.y+sy*6);p.lineTo(aim.x+sx*18,aim.y+sy*11);p.lineTo(aim.x+sx*11,aim.y+sy*11);}p.stroke();}}
+    if(chosen&&!m.homing){const aim=project(enemy.x,enemy.z,1.1);if(aim.depth>0){p.strokeStyle=m.aiming?'#a4ecd8':'#e7c77f';p.lineWidth=1.6;p.beginPath();for(const [sx,sy]of [[-1,-1],[1,-1],[-1,1],[1,1]]){p.moveTo(aim.x+sx*18,aim.y+sy*6);p.lineTo(aim.x+sx*18,aim.y+sy*11);p.lineTo(aim.x+sx*11,aim.y+sy*11);}p.stroke();}}
   }
   const feedback=m.lastFeedback,age=feedback?m.time-feedback.time:Infinity;
   if(m.resupplyTime>0){const u=Math.min(1,m.resupplyTime/2),q={x:width/2,y:height-70};p.save();p.strokeStyle='#e7cf9e';p.lineWidth=3;p.beginPath();p.arc(q.x,q.y,14,-Math.PI/2,-Math.PI/2+u*TAU);p.stroke();feedbackIcon(p,'resupply',{x:q.x,y:q.y+18},0);p.restore();shown.feedback='resupplying';}
@@ -166,12 +167,14 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   const target=project(m.aim.x,m.aim.z),end=project(m.aim.x+m.wind.x,m.aim.z+m.wind.z),angle=Math.atan2(end.y-target.y,end.x-target.x),strength=Math.hypot(m.wind.x,m.wind.z),bars=strength>70?3:strength>45?2:1;
   if(!missionRect||missionRect.x>314){windMark(p,240,40,angle,bars);shown.icons.push('wind');shown.windLines=bars;}p.restore();
   // 11/11/2026 spin aim: when the landing mark leaves the picture (the turret turned faster than the camera), an arrow on the edge says where it is.
-  if(m.aiming&&m.prediction&&!m.prediction.guided&&navalAimSpin()){const pr=m.prediction,at=pr.contact||pr.landing,q=project(at.x,at.z,0),hint=navalEdgeHint(q,width,height,28);if(hint){edgeArrow(p,hint,navalArcColor(navalMarkKind(pr),balance.aimLook||{}),13);shown.landingArrow={x:Math.round(hint.x),y:Math.round(hint.y),behind:hint.behind};}}
+  if((m.aiming||m.homing)&&m.prediction&&!m.prediction.guided&&navalAimSpin()){const pr=m.prediction,at=pr.contact||pr.landing,q=project(at.x,at.z,0),hint=navalEdgeHint(q,width,height,28);if(hint){edgeArrow(p,hint,navalArcColor(navalMarkKind(pr),balance.aimLook||{}),13);shown.landingArrow={x:Math.round(hint.x),y:Math.round(hint.y),behind:hint.behind};}}
   if(m.vulcan)shown.air=drawNavalAirHud(p,m,balance,project,width,height);
   shown.ammo=drawNavalAmmoHud(p,m,balance,project,width,height);shown.sky=drawNavalSkyHud(p,m,balance,project,width,height);
   // 11/11/2026 enemy base: a fortress icon with the base's health bar and the count of main targets left, under the mission panel.
   const bh=m.baseHealth;if(bh&&missionRect){const x=missionRect.x-16,y=missionRect.y+missionRect.h+6,w=missionRect.w+32;glass(p,x,y,w,26,9);p.save();p.translate(x+16,y+13);p.fillStyle='#e3d2a5';p.strokeStyle='#103847';p.lineWidth=1;p.beginPath();p.moveTo(-8,7);p.lineTo(-8,-3);p.lineTo(-5,-3);p.lineTo(-5,-6);p.lineTo(-2,-6);p.lineTo(-2,-3);p.lineTo(2,-3);p.lineTo(2,-6);p.lineTo(5,-6);p.lineTo(5,-3);p.lineTo(8,-3);p.lineTo(8,7);p.closePath();p.fill();p.stroke();p.restore();
    bar(p,x+32,y+9,w-72,8,bh.hp,bh.max,bh.hp/bh.max<.35?'#ff9a5c':'#e39b88');p.fillStyle='#f3e2b3';p.font='bold 12px sans-serif';p.direction='ltr';p.textAlign='right';p.fillText(`${bh.total-bh.left}/${bh.total}`,x+w-8,y+18);shown.base={hp:+(bh.hp/bh.max).toFixed(2),left:bh.left,total:bh.total};}
+  // 13/11/2026 v23 lock-on: the filling ring, the lock brackets and padlock, the edge arrow and the first-lock hint (nothing with `?navalLock=0`).
+  const lock=drawNavalLockHud(p,m,balance,project,width,height);if(lock)shown.lock=lock;
   return shown;
 }
 
