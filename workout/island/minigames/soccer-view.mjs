@@ -167,11 +167,11 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const kitDone=kit?kit.ready.then(ok=>{kitReady=ok&&!disposed;if(kitReady&&kit.lines.use)for(const mesh of gameLines)mesh.visible=false;return kitReady;}):Promise.resolve(false);
   Promise.all([kitDone,v8Ready]).then(([ok,stadiumUp])=>{if(ok&&stadiumUp&&v8&&!disposed)kitHidden=hideV8KitParts(v8);});
   // v24 3D fans: loaded beside the match, shown once measured against the tier budget (render below).
-  const crowdReady=crowdLayout?Promise.all([v8Ready,createSoccerCrowd3d({T,GLTFLoader,seats:crowdLayout.seats,mode:crowdMode})]).then(([stadiumUp,loaded])=>{
+  if(crowdLayout)Promise.all([v8Ready,createSoccerCrowd3d({T,GLTFLoader,seats:crowdLayout.seats,mode:crowdMode})]).then(([stadiumUp,loaded])=>{
     if(disposed||!stadiumUp){loaded.dispose();crowdState.status=stadiumUp?'disposed':'no-stadium';return false;}
     // unlit vertex colours: the same grade as the flat cards beside them (soccer-v8-stadium makeCrowd colour), so the rows read as one crowd
     crowd3d=loaded;loaded.root.visible=false;loaded.setTeamColors(config.team.colors[0],config.opponent.colors[0]);for(const mesh of loaded.batches)mesh.material.color.set('#c5d0d4');scene.add(loaded.root);crowdState.status='measuring';return true;
-  }).catch(error=>{crowdState.status='fallback';crowdState.error=String(error?.message||error);return false;}):Promise.resolve(false);
+  }).catch(error=>{crowdState.status='fallback';crowdState.error=String(error?.message||error);return false;});
   const characters=[],kitMaterials=[],keeperGeometries=new Map(),bounds=new T.Box3(),size=new T.Vector3();
   // Authored v2 characters first, retaining the previous athlete and kid as fallbacks.
   // Comparison flag: ?soccerChars=athlete-old (the Oct 29 athlete path with its own 13 CMU clips) or =kid (illustrated kid-full.glb, Oct 26); athlete (default, shared body)/v7/v5/v4 are handled by the design loader.
@@ -310,9 +310,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   }
   function updateCrowd3d(live,calm){
     if(!crowd3d||!v8)return;
-    const allowed=assetStatus==='ready'&&quality<=crowdSpec.maxQuality&&v8.lod===0&&poseFocus===null;
+    const allowed=assetStatus==='ready'&&quality<=crowdSpec.maxQuality&&v8.lod===0;
     if(crowdState.status==='measuring'){
-      if(!allowed||++crowdState.frames<6)return;
+      if(!allowed||poseFocus!==null||++crowdState.frames<6)return;
       const info=renderer.info.render,limit=soccerCrowdLimit({scene:info.triangles,draws:info.calls,maxTriangles:config.view.maxTriangles,maxDrawCalls:config.view.maxDrawCalls,mode:crowdMode,seats:crowdLayout.seats.length});
       const fans=Math.floor(limit.fans/crowdSpec.fansPerCard)*crowdSpec.fansPerCard;
       crowdState.measured={triangles:info.triangles,draws:info.calls};crowdState.limit={...limit,fans};crowdState.fans=fans;
