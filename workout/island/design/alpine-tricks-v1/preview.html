@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#e7eef1">
+  <title>Alpine Tricks / ספריית תנועות סקי</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M3 33 17 6 25 23 31 13 38 33' fill='none' stroke='%23263e46' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <main id="app">
+    <header class="topbar">
+      <div class="brand" dir="ltr"><svg viewBox="0 0 36 32" aria-hidden="true"><path d="M2 29 15 4 24 22 29 12 35 29M10 14l6 5 5-3"/></svg><span>ALPINE <b>TRICKS</b><small>THE ISLAND · MOTION STUDY 01</small></span></div>
+      <span id="status" role="status">טוען תנועות…</span>
+      <a href="./REPORT.md" class="report-link">דוח המסירה ↗</a>
+    </header>
+    <div class="workspace">
+      <section id="stage" aria-label="גולש תלת־ממדי על שלג">
+        <div class="stage-heading"><span class="eyebrow" dir="ltr">ON THE SNOW</span><h1 id="stage-title">ספריית תנועות סקי</h1><p id="stage-note">תנועה, שיווי משקל וקצב.</p></div>
+        <div class="view-switch" aria-label="זווית מצלמה"><button data-view="three-quarter" class="active" aria-pressed="true">¾</button><button data-view="side" aria-pressed="false">צד</button></div>
+        <span id="capture-label" dir="ltr"></span>
+        <span class="stage-footnote">18 עצמות <i>·</i> 30 הרץ <i>·</i> סקי אלפיני</span>
+      </section>
+      <aside class="controls" aria-label="פקדי אנימציה">
+        <div class="section-label"><span>בחירת תנועה</span><span id="clip-number" dir="ltr">—</span></div>
+        <label class="sr-only" for="clip-select">קליפ</label><select id="clip-select" disabled></select>
+        <div class="playback"><button id="play" disabled aria-label="השהיה">השהיה</button><button id="restart" disabled aria-label="ניגון מההתחלה">↺ התחלה</button><span id="mode-chip">תנועה</span></div>
+        <div class="time-row"><span id="time" dir="ltr">0.00 / 0.00 s</span><span id="phase">—</span></div>
+        <label class="sr-only" for="scrub">מיקום בציר הזמן</label><input id="scrub" type="range" min="0" max="1" step="0.001" value="0" disabled>
+        <div class="contact-heading"><span>מגע עם השלג</span><span id="contact-state">—</span></div>
+        <div id="contact-timeline" aria-label="מקטעי מגע ואוויר"><span id="contact-progress"></span></div>
+        <div class="legend"><span><i class="ground"></i>מגע סקי</span><span><i class="air"></i>אוויר</span><span><i class="recovery"></i>התאוששות</span></div>
+        <div class="speed-row"><span>קצב ניגון</span><div class="segmented" aria-label="קצב ניגון"><button data-speed="0.25">¼</button><button data-speed="0.5">½</button><button data-speed="1" class="active" aria-pressed="true">1×</button></div></div>
+        <p class="clip-note" id="clip-note">הדגימה נשמרת בנכס ה־GLB.</p>
+        <a id="sheet-link" href="./catalog.json">גיליון 8 פריימים ↗</a>
+      </aside>
+    </div>
+    <div id="error" role="alert" hidden></div>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

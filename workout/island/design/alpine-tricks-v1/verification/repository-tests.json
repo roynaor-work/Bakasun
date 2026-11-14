@@ -1,0 +1,27 @@
+{
+  "targeted": {
+    "command": "node --test tests/island-assets.test.mjs",
+    "pass": 4,
+    "fail": 0,
+    "includes": "Every island GLB <=2,000,000 bytes; current final asset1,921,644 bytes"
+  },
+  "fullSuite": {
+    "command": "npm test",
+    "status": "incomplete-environment",
+    "completedPassingAssertionsObserved": 4016,
+    "initialAssetBudgetFailure": "The first pre-optimization6.36MB build exceeded2MB. Fixed by deduplication, constant encoding and Draco; targeted suite rerun PASS on final bytes.",
+    "blocker": {
+      "test": "tests/workout-royiki.test.mjs:91",
+      "reason": "Existing browser test attempts unavailable Playwright bundled Chromium headless shell1234. Launch is outside its cleanup try; its HTTP server stays alive after launch failure, preventing completion.",
+      "executableMissing": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "reproduced": "timeout20s node --test tests/workout-royiki.test.mjs; four static tests passed, browser launch failed, leaked server required timeout."
+    },
+    "stoppedAfterReproducing": true,
+    "existingFilesModified": false
+  },
+  "newAssetQA": {
+    "independent": "54/54 PASS",
+    "originalMotionQA": "54/54 PASS",
+    "browser": "PASS; actual system /usr/bin/chromium;432 frames; zero errors/external requests"
+  }
+}

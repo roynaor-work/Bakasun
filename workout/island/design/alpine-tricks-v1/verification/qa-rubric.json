@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "profile": "motion-qa-v1",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "originalScoringFiles": "SHA-256 provenance in motion-qa-provenance.json; original formulas, thresholds and GLB sampler unchanged.",
+  "scoreMustExceed": 88,
+  "evaluationHz": 120,
+  "localChecksAreSeparateFromOriginalScore": true,
+  "independentLimits": {
+    "contactSlipMetersExclusive": 0.02,
+    "groundPenetrationMeters": 0.003,
+    "quaternionKeyNormError": 2e-05,
+    "loopAndBridgePositionMeters": 0.0001,
+    "loopAndBridgeAngleRadians": 0.0001,
+    "c1PositionVelocityMetersPerSecond": 0.002,
+    "c1AngularVelocityRadiansPerSecond": 0.002,
+    "sharedCubicTangentComponents": 0.002,
+    "sampleTimeSeconds": 3e-06
+  },
+  "independentContactMeasurement": "Actual final GLB FK binding/toe/heel markers compared in full 3D against the authored equipment trajectory at 120Hz and all declared samples. Intended travel is reported separately; original footSliding values are retained unmodified.",
+  "independentGeometryMeasurement": "All actual weighted skin and equipment vertices at each 30Hz source sample; all exact rigid-foot vertices and equipment vertices at 120Hz.",
+  "independentC1Measurement": "Shared per-second cubic tangents at internal keys; source end to bridge start and bridge end to actor-rebased target start, including translation and heading offsets, quaternion values and normalized derivatives.",
+  "negativeControls": [
+    "3cm lateral supported Root shift must fail contact",
+    "0.1 outgoing cubic tangent perturbation must fail C1",
+    "3cm final Hips shift must fail loop closure"
+  ],
+  "limitations": [
+    "Original motion-qa-v1 score is an engineering screening heuristic, not an artistic or biomechanical certification.",
+    "Contact references declare authoring intent; the independent reader measures final decoded transforms and does not infer physics.",
+    "Full weighted body geometry is sampled at30Hz; ski and equipment geometry are sampled at120Hz.",
+    "Playback and final rendered sheets are checked separately; this does not measure a physical phone."
+  ],
+  "constantHoldEncoding": "A static CUBICSPLINE channel may contain only its 0/duration endpoints, equal within1e-7, with exactly zero tangents; all changing channels preserve every30Hz sample. Playback and QA sample holds at30/120Hz."
+}

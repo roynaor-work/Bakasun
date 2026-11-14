@@ -1,0 +1,2687 @@
+{
+  "schemaVersion": 1,
+  "assetSha256": "b0897eed62385e8695f8f65ae67d93413e198116a3806bdc3e6aa6a696b2d25b",
+  "pass": true,
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "framesPerClip": 8,
+  "clipCount": 54,
+  "renderedFrames": 432,
+  "allClipsSelectable": true,
+  "controls": {
+    "viewport": [
+      844,
+      390
+    ],
+    "body": [
+      844,
+      390
+    ],
+    "canvas": [
+      594,
+      340
+    ],
+    "clipCount": 54
+  },
+  "interactive": {
+    "clip": "ski_ready",
+    "time": 0.2633000000000002,
+    "playing": false,
+    "speed": 0.5,
+    "view": "side",
+    "width": 844,
+    "height": 390
+  },
+  "externalRequests": 0,
+  "errors": [],
+  "requests": [
+    {
+      "url": "/workout/island/design/alpine-tricks-v1/preview.html",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/design/alpine-tricks-v1/preview.css",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/design/alpine-tricks-v1/preview.mjs",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/DRACOLoader.js",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/GLTFLoader.js",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/BufferGeometryUtils.js",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/three.module.js",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/design/alpine-tricks-v1/catalog.json",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/design/alpine-tricks-v1/alpine-tricks.glb",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/draco/draco_wasm_wrapper.js",
+      "status": 200
+    },
+    {
+      "url": "/workout/island/vendor/draco/draco_decoder.wasm",
+      "status": 200
+    }
+  ],
+  "clips": [
+    {
+      "id": "ski_ready",
+      "kind": "motion",
+      "contactSheet": "sheets/ski_ready.webp",
+      "sheetSha256": "5d429ca544669997fed59412b3219f864e913a2d8d786fccdadf61a26a66ccf6",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "46bddd88168c0c2a899783711715e865b3614818d2655b221b6dd6e09a3ac8c2"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "4505209495578f67281376437a95349bb8550d36b1175c65a593416b6ad89d8b"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "38dd90fa6f408e9014020f184485127795ec0e22728aab1e8302a1f201a8edec"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "d55b5812ab0a7de47c35114e3f5122713ed3a59fab0ea6dc91dd6452384b8200"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.3714285714285714,
+          "renderedSha256": "8d296cdeb1a986ff262ffa33458c64dac15f8844c95f2b3b728fcb80af6e9bd5"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 1.7142857142857142,
+          "renderedSha256": "f43d5dc833821e786d9903e8e032880a132638346d8264f7c4f34fc15b5fef26"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.057142857142857,
+          "renderedSha256": "a530d57fd2920e844d1673d4f9070f59e29be5f237cacb93af72ecf79b122283"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 2.4,
+          "renderedSha256": "756571f8e695eec4638906f5214b42fef76bb43ca4811b5e609d4e68675046e0"
+        }
+      ]
+    },
+    {
+      "id": "glide",
+      "kind": "motion",
+      "contactSheet": "sheets/glide.webp",
+      "sheetSha256": "f0742786a9c98e6bbfb19c3b7462cd5849488d69c55e871f2c30447ae1676fbe",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "a9761ee8b1b724e4c492e3826d22705238fa42761851b5fcf377453fb3a92657"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "a15654c5eb718c5b86fbc7ed72d2056375ddcf94f3a05571faf3f2fb95a9c6c7"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "99e87e9b1c121394f7a7ac380b7870084e49a297f2994d46e8fd69cf7add37b5"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "d97747130f57233b45455a17a60945a847da173524b4cec83f70b20676edeeef"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.3714285714285714,
+          "renderedSha256": "49faa6325b9a1e516fa2a3f8545935399143bc5d1f6eba2d809eb5490d243890"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 1.7142857142857142,
+          "renderedSha256": "c6d3d5dde59289faf71244499a2dbdc71c51f947832c03f92a4904825b1597ad"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.057142857142857,
+          "renderedSha256": "dd3f8bf2cbb1dda197c303441fdaad45bc819b8ffad747bced2ddbe32370d473"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 2.4,
+          "renderedSha256": "4b8e7c4ecea70942ca74eaabb1c2c4f951dfbd9252b6c34f7047b9c0897bd179"
+        }
+      ]
+    },
+    {
+      "id": "turn_left",
+      "kind": "motion",
+      "contactSheet": "sheets/turn_left.webp",
+      "sheetSha256": "03fa6eb4b6daac8b765c2c050033ca18c00dfbaaeda3e2305728cbb435a9d030",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "7a547da3b8d519a6515b918914172697d5962d1b346b9335672f5fbcd125060e"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.4571428571428572,
+          "renderedSha256": "ba64faf582766cf3611dcef5a8bdf88754c48f068f430536b36a6b6cd423c5ca"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.9142857142857144,
+          "renderedSha256": "24bd3a2a53f804952cfbe3528fb5cd68793b5e4420603fa4dc51e3e31479a5ea"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.3714285714285717,
+          "renderedSha256": "cad88de73fafa7fa9d158d5b06d59e01391fc964f1e3261b669fa49466c6826b"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.8285714285714287,
+          "renderedSha256": "6a3601359361528461dec6ff739a8669fe9ee9893948406d593ce81a09506289"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.2857142857142856,
+          "renderedSha256": "501615b614d4717b577bc189fe915bc56e6f3eaf2259d160d336cd0c9c81c6df"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.7428571428571433,
+          "renderedSha256": "07408b68a3a4bb983be33f3fbfb182c8eca8ea35a32442d17cf498f8cc7e06f3"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 3.2,
+          "renderedSha256": "6b55b1b769317d9b6866468af4bf10eb6dcaba00df31356005928c789e280203"
+        }
+      ]
+    },
+    {
+      "id": "turn_right",
+      "kind": "motion",
+      "contactSheet": "sheets/turn_right.webp",
+      "sheetSha256": "de18741c3336e2373a2c871a8a4b7ff878e87ee5844027ef319ce0be9b6e6765",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "4e6a69d0c6abbd87522bd56d462813159a7505b00ebf2efbd93c46abb5a1429d"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.4571428571428572,
+          "renderedSha256": "ef5fe75bb5f6e42a39c7479e0b89ebd69e229dbde247e6e3ead6860ca4bcd308"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.9142857142857144,
+          "renderedSha256": "1bba7598253fb951d417f8d4a74ff83f33c14d6ac779169070bcb995be60c104"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.3714285714285717,
+          "renderedSha256": "5e93006866fec81bc5df7f632f3a3ba2d3e66c945303130b83ec20e407fbe403"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.8285714285714287,
+          "renderedSha256": "d1d6a485c1a28e140d8ef58a82e101d9afe665e501556373528fd3dce04958e2"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.2857142857142856,
+          "renderedSha256": "9b63c48d6b23738b389d558bc707e80e10a7f80aeaadfdffce5c5eef0aa3fbfe"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.7428571428571433,
+          "renderedSha256": "7d641706de8b3d3448590284c6142fb83cc8882f68f03037bc543d6aa1440e66"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 3.2,
+          "renderedSha256": "a5e8c29507ec3d101aadd1110b3e8e7527c544217bd3ebc38a27026311f5a4e9"
+        }
+      ]
+    },
+    {
+      "id": "brake",
+      "kind": "motion",
+      "contactSheet": "sheets/brake.webp",
+      "sheetSha256": "46a29d957aac7a21146f1748161cc3ad9f8b6fe41b2d89cdd1fb146b4e42a47a",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "e02b90dd4409a74c7bce9f48b826bddd482f14de90b71f30ffafe138c4815d85"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.5142857142857143,
+          "renderedSha256": "91e8424bb31fd302db46dcfb78012c5dbc8c794b81da91f4f424d94518847216"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 1.0285714285714287,
+          "renderedSha256": "2dabfd2843905a43b8e0dfaf1ebfd8d58f6d9e9b977a519a159d277d7576ad0d"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.542857142857143,
+          "renderedSha256": "fd492d71eacab49873a4f1e10d0422e65cec2ef8fa2515860f7b1b5e8f778dd5"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 2.0571428571428574,
+          "renderedSha256": "ec347fc738f6db40df3292c871b4f16bcdb6f210b8e501a10eb5a14eddb08789"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.5714285714285716,
+          "renderedSha256": "49ab4994f88ff1cb74ef630bd9a33ccd4a41442be95a9205704448f0bf5420a1"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 3.085714285714286,
+          "renderedSha256": "93bab4d3b93f44a08dc765d59771510a0cf06ba6ff0defd4cab9f03574a92cba"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 3.6,
+          "renderedSha256": "aa73ffbcca942377a12df1b8f673b37c632714cde5f0a47729a7c3a9a5f6c411"
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "kind": "motion",
+      "contactSheet": "sheets/jump.webp",
+      "sheetSha256": "75f541b378b176987fca7f9263d6cde428ed71eeddd5306d18af582a5aa49e24",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "dee8ef1ca465bc0c17801d4a275cc7fb7a0f2f806ef8ba501f865dec92337d2a"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.5142857142857143,
+          "renderedSha256": "073fc8be01c506acc312069a80f5727d638bede4754ca446b8eb50a13095ee6f"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 1.0285714285714287,
+          "renderedSha256": "cdcc720830a828b302f1e5333e5346d1eba5fa3c08cc06d62dc62c8b10caddae"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.542857142857143,
+          "renderedSha256": "0da8074170c37021b2db37695d96651c0a46a35bd2a4dd9710a56e7c0f51e680"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 2.0571428571428574,
+          "renderedSha256": "4747700e1fd12f8e53cb0c6e7b0b294091b8bb80573606e2880661201bc83268"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.5714285714285716,
+          "renderedSha256": "17eb537692cbc2b099c925f8cd0dcf49962f9de1b166acfb5bed06e529846718"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 3.085714285714286,
+          "renderedSha256": "6fb5d208b473ba09d2e56e6f7317fd38c9c904e4171a73812079842e31685138"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 3.6,
+          "renderedSha256": "7ad9ed43984a2f8133977aaacf8cf3c5b775a05970d6e97ccf2ffc6f753e2a25"
+        }
+      ]
+    },
+    {
+      "id": "air_180",
+      "kind": "motion",
+      "contactSheet": "sheets/air_180.webp",
+      "sheetSha256": "a88fd87491097c56447092d416812b67ea429cf6cff1bd4074149df0d90c6ff0",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "3e16dcf770fc8ff22be071b45eb3d781c3fdd37f0267624f09c951458504fc7e"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.5714285714285714,
+          "renderedSha256": "863bf86a0c44eb2dc58124acaf8995c5014ab07cbb052c33c4f9f8157ddee668"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 1.1428571428571428,
+          "renderedSha256": "7b6c017430eac1349796c346ba3443d83ee91eb630a7cf6e71121c31e50d24be"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.7142857142857142,
+          "renderedSha256": "08512328869079f9d5e0e80a2a15bf563734dfe2253c1c5b33f035537b59249a"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 2.2857142857142856,
+          "renderedSha256": "2857fe153388ae2f91f0f02f091a2d2faf38648b83c916dfccfe78262fadb747"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.857142857142857,
+          "renderedSha256": "1916e1f3bf1294f5a257e6402babf69dd86a53c3e636b540e8d43930ef5b5c33"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 3.4285714285714284,
+          "renderedSha256": "ef2d93eef3e69b2f86a693c5d193e8c84eae784036badaab2026bd2b9a55ec11"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 4,
+          "renderedSha256": "9aa731b74b2e3932a1b9320cc6a23bb1896965f0dc8359bedb16d8cddeebef52"
+        }
+      ]
+    },
+    {
+      "id": "air_360",
+      "kind": "motion",
+      "contactSheet": "sheets/air_360.webp",
+      "sheetSha256": "1534101073f305e895658c89ed53572972d2eea9bbf6d6cb30fee98bc87adce5",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "21b9b173cbac8e5df85f005e0a8f69229a1695f00d6d1aea2a14d8a0d4bf910f"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "d744db9a0378d1fa1de72bc68951d28e59e15a705edaae5fde43507351a81617"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 1.3714285714285714,
+          "renderedSha256": "d595f644c3f8f57ec45294dac64a7d22cff162494d7f3c7341dde1abcca9bcbe"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 2.057142857142857,
+          "renderedSha256": "45e2058c089f605b6e1a8dadbe65041609d07d7b5f9842d9c1414ac605b48424"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 2.742857142857143,
+          "renderedSha256": "b578620c2c2e6d4c559e583d4061824bc5138b3429031af753302493d312414a"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 3.4285714285714284,
+          "renderedSha256": "ada636b7e4edeb55d856b5cb834ee7eda8d37c4b03790e22894819be69ede1ee"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 4.114285714285714,
+          "renderedSha256": "c2915468fd4ee106758c933279e226448dfbae3b60aa813aac050723ffb42115"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 4.8,
+          "renderedSha256": "ac43c5308173870d7a626b86273c22c9c839c989085fbb7fd7463f0964595592"
+        }
+      ]
+    },
+    {
+      "id": "perfect_landing",
+      "kind": "motion",
+      "contactSheet": "sheets/perfect_landing.webp",
+      "sheetSha256": "0de5056ef0c52c3c81a73477ae2e7c0e3130e29a3f86169586c1ac60d78c10c7",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "53d32b88390f86df9f6f3d9cd27ef5cfc149799298ef1a20ffdd12833d65e390"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.39999999999999997,
+          "renderedSha256": "21186d2087874a9e219f8b70f4c85b2952ce00158b3863c47de9bc65ef3d0a71"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.7999999999999999,
+          "renderedSha256": "e17716f5187db984341a0305949e18614ce5485bf6b7d57214e7df5b31a678c4"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.1999999999999997,
+          "renderedSha256": "7f0442812b0436e01ccb938271976d0eb0a695c64619d5423428493797be29e4"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.5999999999999999,
+          "renderedSha256": "b016cb76acaa92f60760e9608346103a1c5f1c0381993ba2190d59bfc955df34"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2,
+          "renderedSha256": "da2a2f6ac3421eac03cb4725ffc26674adc826109f18b10ec9388d62e4884046"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.3999999999999995,
+          "renderedSha256": "cadc66624d7c717ace5949e55d32da95ce665290693df102519df7d732f1efbb"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 2.8,
+          "renderedSha256": "2b97323af1164aeda289f107a49e769600f6880dbba86eaacd8e212dfd6fa3fb"
+        }
+      ]
+    },
+    {
+      "id": "soft_fall_recover",
+      "kind": "motion",
+      "contactSheet": "sheets/soft_fall_recover.webp",
+      "sheetSha256": "a7fa7c4077d18102f1f32c4fe5cedac3ec0e642e95c98464cd28ebf6bf79a11e",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5c14401b3fa9649bd46d4cea1891751b1086340588f957ee89997850b8d4962f"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 1.0285714285714287,
+          "renderedSha256": "86f4ef751c5bdc7e59f40119b82a034d36ede04b75c4f20e21c10c816c5e1a9f"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 2.0571428571428574,
+          "renderedSha256": "ad97be859af7eafa73b75c1e3cf4b79d94dca07a28269dae88c96715cade76e0"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 3.085714285714286,
+          "renderedSha256": "3499e6a37b22cc6eecac739a35b1f43f6cab2c7ecb21061787afd8252a4623f3"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 4.114285714285715,
+          "renderedSha256": "dea3f4df99a878db8069929893ec8ed1a9147c691ba5ef63701444000eb1e6c5"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 5.142857142857143,
+          "renderedSha256": "cb1585532b6cede328fe1d9f629566d02da4fbf119d1e1fa2447bddd6f5e7d5f"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 6.171428571428572,
+          "renderedSha256": "3dc498196276e2bcce2de28f999fe8598cb41d880220d3dad537d035ba1cf6f3"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 7.2,
+          "renderedSha256": "16efa4eec5db72732ebda81352861b9f5f81e82d4d04fbbcd6c675ff36d651d0"
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "kind": "motion",
+      "contactSheet": "sheets/victory.webp",
+      "sheetSha256": "58d1e12d7d44613c48ad891df3b75b462287570011495b7398783b7d37d59709",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "eb463dc71d4e225441f495571d3a691bd6a6bf8c530e0e253bf7bfcb2a15044b"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.5714285714285714,
+          "renderedSha256": "1a9f2b09128d3b63fdb4bc5250d5219cd9f4ab0330b96ea52b2b6dc4ba5a91c0"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 1.1428571428571428,
+          "renderedSha256": "9c9f6965c529479f4a903fbd147c49a831d4af51727cbb15f1ae3b75bd22b8d9"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.7142857142857142,
+          "renderedSha256": "666ead2e4537072c8834e671324910b1cf237c792f2b783833127f2875ed5d4e"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 2.2857142857142856,
+          "renderedSha256": "573fdf2a0cb9c25cc7424ea72a114462d582a868df2e157fe475a38c6afc474e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2.857142857142857,
+          "renderedSha256": "4957fceca8cff8e3f18e9614f717f282f4c8dbbf5b63fce36e575c03b45cd674"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 3.4285714285714284,
+          "renderedSha256": "cde3bd638700f38278a73d837641599f5e10162b0e61a0ccc1315e6174b56a04"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 4,
+          "renderedSha256": "5ab2679bed54dcdbe53c1c95f578ac9d3e78233e217c4955149b1dbf13de1db3"
+        }
+      ]
+    },
+    {
+      "id": "gate_exit",
+      "kind": "motion",
+      "contactSheet": "sheets/gate_exit.webp",
+      "sheetSha256": "e60061d66d60e4c6b8c6fc701ca54d9e3308a5328b89ad5180301f4f2e32613b",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "81024f07e97312b0778a2b4094cb9871f708d1e4d5ae87951fa71ee6ee174365"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.39999999999999997,
+          "renderedSha256": "9b69a1ee044ec6b564f7cad10315fd3c6c70e4326e7c01b0d18c8216aeb76b80"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.7999999999999999,
+          "renderedSha256": "2737880488a5c270b57e2513826f0f8a659feb08c441799bf198153a8d96b7ec"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 1.1999999999999997,
+          "renderedSha256": "642cfd04fdaa12ba65abb88aa1717bc9018a36d5f3d2097e65ab4b574db4011f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 1.5999999999999999,
+          "renderedSha256": "710ee5033f0fe0e2d9759828d4b31a6894fba291cf7e5772a21a9f23bc92d75e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 2,
+          "renderedSha256": "53b70c7fdf4dc0c0559840bea5e7d24f3c5454311db2fdcd8f852885a9cb19d7"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 2.3999999999999995,
+          "renderedSha256": "a363f5f25d81535e5ce79274a3fb30008696bd683c07a3805837e7b84b7ad342"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 2.8,
+          "renderedSha256": "3ab9862092aac70973028735c410b2ba31e444a6683144b99ae79e0e4d7ca1fc"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__glide.webp",
+      "sheetSha256": "a768de58e1b888b91b4ee54de43fd9dc37a564d904af1e6ef8289095154b58dd",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5e513db63222c881730c1d808ab3e9969777c55ef9319986b0e85d562bc46ef1"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "5c77899523aacd9c2bbf963c469a4609677efc1ec4b3b2b54d4f530381da0e2a"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "04dbd17456ed30df7ac13751fc7ccd5f75b974e5495bae62048a4b1f5edf97bc"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6ecec19e9e2e3b4a62680de160898a9c5b8aa8d40347b7802154d6b9128d320f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "f1a3cbae88d9bd7b4b0bb877b5306d8319ce62f8643b0c865f14521342adbbed"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "d7ffbce3a5d49e3a8d535df4c33f35d870b1beb3dc217ef3813452c28500101a"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "45c59f3391c8dca1251c62c172453313976df94f7d7dc4a51f638e815f5311a4"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "ed101993c79c9021e84f956997c26a330ad665ac00a8a2c9a5d79a29bc2d8896"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__ski_ready.webp",
+      "sheetSha256": "adc3d0c33f5b2ca777a06a791307710f64fa32ffedde7f48ec54e03496f15767",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5894cea13d36ed2a28329f53744ac0e4984c7515e4595c4b52143d50e0fe220d"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "8296f9556bc385152211c134bf7389da88c4a4d186bfebedccff7a4100e69861"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "8be2c7a1f2b1b3b29e2c19b7feec04949ae4415108731c23f25445f6698c63ac"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "d7c32e15c6b8f89ff4eef07b001cc194090104090ea064b99779fda10f06487a"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "6c94fce9f3c8da40bae1d44dcbbfdcd29785c1714e06e93eb65585c647732d89"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "54c46365b1adf802330ba8553ef3e7aa11d0cc39812a75b08609da50ce730504"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "f0e28029aa0a48e64a0d843615294e105fa05f4f9de9aa43bc190088a9b183b6"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "7313674461e07beda5896b29e09805b33fb6229408101e9755552d75287c10a4"
+        }
+      ]
+    },
+    {
+      "id": "bridge__turn_left__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__turn_left__ski_ready.webp",
+      "sheetSha256": "bf8f7b10c3296c9dc1404523fd67ed19ed4f4c2a0bc157485c94c858e65328dd",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "ccf428710fe0a969d35da9d267bc29c238f859d872a299762cd8dfd84bdf2d08"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "cd5d30b10222af414f149e3ca1282f53b5ad72a249c420c3203e55f4da20ace7"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "7f9639b4343cac5cbb542b8d461631d85483b97d8be9541ca30df6c5c094e253"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "8080ace9144da08f37e52783bb3a103e4dbf586be6f155085cdcf5eabae06881"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "8cc49f6a17d01e6789b1e8ea450fa5f103d255c1e6b237e7b910e2d2ab16174e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "324c5cb0811411a344fb25f2d14f842b5387340103b072a1b5d6aac5f358d2dc"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "468df1efa5f2d6d788517221908a27e8ce4a58c65439be75712f551b90269ac4"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "ba877be627b63b563c5e790066c1e106ffdfd918e0bd6e6d7825d8f6a367aa27"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__turn_left",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__turn_left.webp",
+      "sheetSha256": "e32d05ed8c2b55c581e3f937a5e0a27331a86c698000727d90b9c1fd75d7ef86",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "9b13473706b794df806da529795cee084d1cf567d2c46840969828b0e4ba7b80"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "582c442bdaf8abcc59d85ad484370ce4447ee7df208eac5d88649781d958ab7f"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "7e05321918828d537aa75e75d06a640b078504b7b5ee07487193d47e9c37bb45"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "2abdbd6be1ad82547ff4ece0ec7460827f5d28cf7e08a52da46792d2a268510b"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "d3e5e0be67e5104a4ff41824de2c1b6ab13cb2f283d8421552cc0204f96cbdaa"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "837fae7ecf58f2341f2b0084d6121013089a1c8b0b1d2804c346ca81262edb32"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "59e4b78de853420cc6de1c1bbe13e2b993f1eb5de8772329b3f979e6dd7fad02"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "b07f3452cc1ea7d9b70ada07359b67cf8613fd0dfb1443aa7fdaee1101394b8e"
+        }
+      ]
+    },
+    {
+      "id": "bridge__turn_left__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__turn_left__glide.webp",
+      "sheetSha256": "e31a78c44ceebbdb9e9c06ff5bc456e8fde6e96fdec40b310516279c345114ab",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "f337d646ed648370cd1f7a66a50758e3dc46a786be925054c9e9dc61a101c012"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "f4ddb94fc99e7801cd38dbc0c309eae8bb54c5e9d07de2a5cb67ffc7f90126fd"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "1034eaff3583fb993138d0d6fee6993fe0ec1546a5911d8be3252ec3b2720df2"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "e94b4e105b09dd826815d45f4f9630bc682caf1ad1ae353f01a6e59e8977d623"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "1c358b85e1ab1ff4df2989cb74f7b5c9903bb3a5de8427d0f1f731900d45fe6a"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "b4803b82454e8a695a894e90842c5bb28780a4e12ecd5635defd81cb31472883"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "5776839fb41fd5f3b4bfee813305f96fc300450a208367ac650fc66ca6876a10"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "7736f1d6c571884d4d8995e6165c271a0a5d62686ac174d20a12c12c251687b4"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__turn_left",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__turn_left.webp",
+      "sheetSha256": "10aaca80833b2a2b523d26f0a9f2a8b007945945312fe219d5f14418d46f2ca9",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "02da6681325b3c314b4e5d42bff8e4fcc9485ddb2b74b9ec35b13e399a4d082c"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "de2694ba9827ddf4f71b42fedaaf0668b0e5ad8b3db8bd18aa0dde69612fc353"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "da910d5a0864a50b6522ea4745ce310de10d80826819627f1d753fac862c5863"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "fc89afd3ba3997ec96a537d3186c3cd377c2ffdf2256a102fa0a7ad07f31ce00"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "57ba3b4d7ece3843262e2cbad88776d2217cefae2950e3632adcc4b77ed74690"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "c5dd1aaf52389d7dff1ffa75575c87e640b9b8b443e379753f40a3760101b028"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "d62043e8945e08637aac37e8531078d129cf8c91f2340950de16a790d54874fc"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "4ce50d5522eb737a20534a51b8c74f8a67a0714502adfc48323ee1a2db6bda7e"
+        }
+      ]
+    },
+    {
+      "id": "bridge__turn_right__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__turn_right__ski_ready.webp",
+      "sheetSha256": "e05d07a761a70f5b08fbfb8f0a62d2454616ba71e8a6e6dd6d7015c48b1a25c9",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "96fa4914d797e9626f6034adbe6c451dabb9ac64adbf75088cc4a05c7cc9c318"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "88640a91cf7ba87a697cc659244afc972a115bfb464be7f202003b21c674d228"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "9e1274850f1891d1e8b5313e016f2671aaa9af9201ddb7f1eb73b5850f7094e3"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "26e7a7d1c07221238e81e15204d4eb2b09b7be565d04c1f97baf30e9d5110208"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "08dd056ac3d0a846f4622397933d8e5d507d0e21fa167fe341e6c262dfb98a05"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "bdeb7e03cd025e5e1a132219caf0d6c5092556c267cfb941ea86b5b36e296574"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "ff99f4502514d69495e72ca68d5d7238e7d6afe456651ad9204f30a33d3ae166"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "6ea1102a7834b13dcf740bea8409345bd031e664103ad2088c090e99e69e5906"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__turn_right",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__turn_right.webp",
+      "sheetSha256": "30eea1a0e68b2771da03f9c8fbce042cda588606987b3a6d89a73e4563128168",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "eef94b486323dff75a520dbbcb919fc52771e26525cb596985b247b6d14038ac"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "512f4aa4d060b3650df6445c51cf46136a4785d7bda15bf21a63d9af223b71ff"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "8b71a73330200a43b845411f25addfc0c30fc37f22d0e6d745f7974d6b6a3ed0"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "29215322862d6448688e67112537297a31ff182a9f585416bb985f98c538a8e4"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "84a685510949e84255706f8fc8d36b4ab0d2875333b5ff16922ed53da44895c2"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "6004ef8eb89c80b480f374496e74e24f8c28f9f52fd23197e546594f9a32dfac"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "426b6ac00459f6bd623c9d70d272d0cc3e4911faf4395837f610d0fac101d3a8"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "7f7fb35ac92f52041c99331d41e65e50082402f62e468084e00eafcf70a25e50"
+        }
+      ]
+    },
+    {
+      "id": "bridge__turn_right__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__turn_right__glide.webp",
+      "sheetSha256": "9c1c42e04161d617ae222fd7090fcca28e9e46adb3f3f7ff08aa112e671e794b",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "2d713dbb9221daeed9396dc9f3d5ec0bb0910e834352ba304cedd3e41543f2e3"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "8e40874825faa042f01f58ce58462bdbd7997c298b5e4206128086adc91556d5"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "5ed2a5f73c18de0b1e5703ec2395c740d183a5f6aea9e05392cb189475d675c2"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "85c703890603bbb70f21e3170f4a3dbc31e1dae476bde7886d75ce44046a8718"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "d5f676499ad2071f35a1b129df5897da04417ddc711bf39563da2dfc2ece23f6"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "e60d9b6cd31a707c5fbc26610502fd5a084bb42eec0e5cc9baeaf23c80958749"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "6953b01057ae54b2fc16d96758fc86cd724905fc8215a96d5f060019c7e4e67f"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "1d1d662f57bec2e7dc3fa2580d2368a8888f886133ea250e98699d37e87662d7"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__turn_right",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__turn_right.webp",
+      "sheetSha256": "24adb7d22e70fb79057415ff98ac8f0e33c6f0b3c5d1ed4ef6b96994a5b0c8cf",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "6ddbc262b425bc372af31e5ccba2c4de686bae6770f1388d6545751b248aa626"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "d06b939f426a150d39b7d7ac0f3bfd8ed3d4535fbc8996ad311e4448307529f1"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "0dc586ab8b8226c7a930d2d81b0f8dce20b137069abe23efb4885a2bc75f97c5"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "892d5bb3c92e56e64dd8728977e984ddd3b406c187f6992836a89551a703cf23"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "1e204538b5d9d745991b5d75b7bbf9289945b0d0832475e019655f82bb30db70"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "6e5c76bec3608c0780adb8a05fecf47b6401d0a8866bf1e46ab229b6068862bb"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "b82450b166f616900b311b468d21dab1422774de999b6fd8e16c94819b089dc0"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "e7f0f883d16b130fdf7dd0b5b217da6e78318ceaf37ed8842437147c7ce46803"
+        }
+      ]
+    },
+    {
+      "id": "bridge__brake__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__brake__ski_ready.webp",
+      "sheetSha256": "8067056b3aad8d555e5f25c9c1282e4f03bb93bc0fa8f8896b8a73848894ed6c",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "0f1714ce46eaf03689a77250c9f03cb165c05558266465c10fa3e7b2cc4181c3"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "29b2374066335715682ad89e268f1f0ce943634cee5003028ab0f9b412ec7670"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "1cfff9d582cf2b60c87ec7e2e5e54c5ad76ca0e45b8f2c9057ba5239819b8053"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6a70e7bd61b6b4a2698d93ecd61b1a6246ec27c21b37b28812336f24ee593287"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "914c04ffaf21afa0acc8d6a0f1f50afb4243a034e8940241d51bd60508a6a044"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "373074a2d414d7343d9b6fafa8a1ef4859952e0ad01a28e31465945eb7b8e13d"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "a6159f6f2531c1373af1de7e44a9ef62c3776f82236bdf393cd57e69d2452281"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "e664da4ec1cb05ada0eb5d91acc84130c71d3fb9ef0c79b9a333dda75abceda0"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__brake",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__brake.webp",
+      "sheetSha256": "8f5606423da3e48015a84e62e8f65dd844e1b8b26c17254c70ffc89e6352e9db",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "ce1b90b978d365e7321ebaece3c387d189e255fea02205e69c9d94cebdc7a1f1"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "45d8aef9dab8b9d4f882fa772bd2395803a8a515f749a9175e6450c6ca75dba6"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "390fcc1fde93218c81c191bfec9644764fe2d4f880b6efd6c4d304346a1b7d1d"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "791a199e6b909c6a54ea48db99ff66133212b0d22ecc8825c88998696df786e1"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "f53f141058c1fe2df6330c02ca0f3016c5219d54286b3a21fa05560173b681cd"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "eedb55095565d43dff3ecda192f67318a80139a28a3e079929c330b1ff82006b"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "0367a38baa9220676a57ebf63d0462eb3eb5907c308744e55ed7542cb24b1d84"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "d595d1db4adbf0655756463884291593fc530b74e21dd5614a44f3de069bae14"
+        }
+      ]
+    },
+    {
+      "id": "bridge__brake__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__brake__glide.webp",
+      "sheetSha256": "cb1b328f4070b84cb62fed26d307611745e69dcf2ae761e1c104f8c4593a1cb0",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "86542cae50032caa96eae112a19caeefdde74a2916ba63f8288b30b063d8237d"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "8f066907f31765c789c26e32e979d56f4c37d01a1a97714d670df9f7cda1f914"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "0749aa3cf27b3614c87a4ab197cf5567c7c42e2432b47741f99c1580f6263a4a"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6cf8939472787d3a4e28c97259dbae284ab27c7019d01d7abc9bae724d375838"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "c4d15cc5672fc6c8a8da30d53877259dee9e8ddc6438873ce1da3816c381fbef"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "3018e561b35d2e641e91cf17a5d844206e7461ad66cd5cff063d71d42e1b4814"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "c962a2979a1999e13b9c2737235d98887312648faab5204aac7c477c6a4a2f72"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "a02925838b73a320e185f31276481b42081cc364d913aa79f92e515d415795c4"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__brake",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__brake.webp",
+      "sheetSha256": "165ca533379b688277ef43bb0ba6c687906d5f0738654efcdc4ac178f5b840bf",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "3ec08f8a2f3efaa92522d438b329a9662d18ec166397741f51f729e46e98cab1"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "5ef2ffdfcf8be8e586798ff00e777df93708dca8847a54f15eea8cf3f31ec7bd"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "7acca9400d4a9a8d8b9ed52ee0cbd2c219f5c3c0f903ad28362d2c1f65173fbb"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "4386360e1ce53836d801236ba9f943fa106370ba2b0dec35cbc6fc74d2434441"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "cb97355b8b3163d20f6fa03a1bb3f73e6010ad3f784842689e538425819f7788"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "3a43627cbc8a5d54f098dd19a2900d85f0b01a9398c685e37293be47ee3dee94"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "51ea792c9f354d252a32afef97c95958cb08905790ecde0ed5dc7c1e7209fdb2"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "c0b7bbf90cf0a12942015fee2e63414e9be2dbdd16d298934d9d91ca61b6d256"
+        }
+      ]
+    },
+    {
+      "id": "bridge__jump__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__jump__ski_ready.webp",
+      "sheetSha256": "44f4eb90d556bc1a502bd1afafcc59a00c76bd4348704d7849dc506951bc3144",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "6bd264a3144fce4962c812165c8b883a0bbd60e25b080b102d5f34ed9a2def2d"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "ebe0301033fe8db6ff0c2ea33f214c2f175ee1f511a305daec7ffb436af59231"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "02cc5d8042f294759e8ccea1136c84c8a65418c5fc9d1478272991b2f13cd569"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "9bf8b8802944be0cd8d0849f63528520718a47c5dffd8adef5a930628692350c"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "61b213906e665019bf4e5400929a51e68bf24c3b6f78733bf98b3c6b63d811f2"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "c84009fbadaad32ae846d387134bee3f6917e21b43b156b1136a25201e4721a1"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "dccb711c6fb7493264ff104243166aeab39e240920ad3d6a344e239f7d178f84"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "2567ea3f5b8e85332e311a620d9df406712ab6d4c54fd4253b76bc4dee5e1afe"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__jump",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__jump.webp",
+      "sheetSha256": "9cba920b2eb125f34b2cb61be63e5b9534ea446afb1a06e352edd2387b2407da",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "667052773bb024ea30b24470b16f0d17137979db48da188b7fb0d6d331ecaffb"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "5a31b88cb506b28e62f0672be29cf1a50aa6d887c3b7e601d56c8f50bdd62e95"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "38fd37893a59416b9e4f4d7de1d409773c9c166b19de1613f4516fbff959ea15"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "017384a0b04152f9de928a8ab569f7dd35970d1b34dd103756869159423423b3"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "23c9aa271b5782296c5f899db6ef51e6b1457f581859362078d4ab4354e0a5f1"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "56a1808cc6908ee7ec327d6bac936751e3910fc87b3fb810e4caddf089457984"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "43e939373ac97e62dfd8224e8633bad48d030d71d9d4faa0cd598e6861f15e3e"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "383dd1856900d0299e2c4ef80a58150cb94fff058523fd6776d063d0af7a6151"
+        }
+      ]
+    },
+    {
+      "id": "bridge__jump__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__jump__glide.webp",
+      "sheetSha256": "07e8070dc26ccb44f4f998bd1ddf00af2d99728f207f92a7be3d910cbd43df5c",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "ccbafa42f5626e74b7ea31ea8d44efeee161649c4d93d83c1929d40dfa430749"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "32d130a56783e9c5e6fd0e1739cef94c40467835afbae48161167efa033145f9"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "1e29eb3638d30fc943cf4cda40c7851553476c7d7242e159e756df182f20c070"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "11278c8a337e4ebd915300eff9df07dea607a4ff1b73aba3e7d8616c26df39e8"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "01ecd298d084344ecb2d84ab8343ae16714c6a7aa97f7c4b0e195d544e42cfcb"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "33cb4197a798185d0b6180804ffbcd7bb231144a4b66e4702520288ca07987c8"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "aea01e932adbb2a9750352cbc44efc90926c0e2aff85e719173e6344eb731c54"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "931d9877aa52433434a672c5ce102ea4bb79366bbd02ccea9376cf4d319c7e3d"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__jump",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__jump.webp",
+      "sheetSha256": "247d88516637297ea3c481235612619e494afe7e220cbf796a5f1e3b372c7ed0",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "c0456e7adb8d4ba9b594cd199347463a8e24195d84ce5b26737c345f556695b2"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "cfc2aa684cfd80cee3043c7f909b5f173635b4490e3e68bca86122bda769cfb5"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "1e31ef69d0e8384bb54a05d9eb33cdf32b7ae23dfa96b9f05f742e525dbc3f65"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "68839a6cd5d3eae8d0b1e1479a99e1c7fb086fa40fdd3f0c12ce98a5db7056c7"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "1b3f1f2b109cf5ee1aab5972bd37af48c08b999a02ea159258c629da53c0d40e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "727cc9252d4158a12e0fda72672a8678fee361c94e1d8611d3508a59471eab07"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "02ea1fb57af59a0d56c75e5a34abc9bda49626309af806ce70f6dd71fc9065bf"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "eb9b1b45d66b8be64c20ec8ef3a0fef2d51ebf756eb449446dc572b72bd8c873"
+        }
+      ]
+    },
+    {
+      "id": "bridge__air_180__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__air_180__ski_ready.webp",
+      "sheetSha256": "be2b9f14621ca1db0e36e03f51368bcdbcf1cb9edae0c0da301c93e2e7479876",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "07005eb46bf98b8b34bdad1947dc7a50aaf3a570d2bdf7c24124c0c592aee200"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "51c64f36c5fa5448bc6b3b608da22cadf07a0654d0db07c95d871df51311c3fc"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "94668de813827958eb8d967c1b4f181f955a1135fc5e9a7ae3782a5e0e78304c"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "42e633c3a66effea93f7d479df9dd5015af3fd6341eeb97853d07cd8e9122e3f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "0b32f93b5ea05c10c58d6a253888f31bed67830ed92a5206082528565f09d84e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "3fcc98646b74082802d8c0df42a5b0c80c1604dba56a353179b4a9683b220c1c"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "d91688abf460d9615710a97377e53598cb71c6e8f0fd4241a37873bdbfa8c223"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "e7117fca7abd83b6d30e9aee428e4892beb076bddde0c6a446c206d55086297f"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__air_180",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__air_180.webp",
+      "sheetSha256": "23a2f8ee0db9477dd7292a23a365875f5df6babc26438cb123f610b8f96d075f",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "adcc9dba7f9c47a76d7e99b84b034ff33dc07a7a926364ab331aaaf7a1d01d6a"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "4fb155b1e4956f10adc43f276a806da24f5d15e0033c18e4987c51e2df87aa5c"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "113d83f6be24770df8c18e3790afd74bea5799d8c3836bca5aa289e1c8a053ae"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "ac6b2b220d36984f409c6d0d3eb692b6e68fd3f0a34c07c69f588e819395cc1b"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "5f36e685682d838452691dd8e83e7be54404a515602b04ecf19e953b47ef77da"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "ec2b78ce10912fc8f76eb2b94f06c92dba5f2728bac0fda04afe4a3e35310321"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "992f4685af1dff41a79e33a71a27ce4b90a2f5fd48586312f9b2ad0b1319b20d"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "d4ad35ee12624c7c4e96f2137519ed5806f1c24a1d6605779bf0850628cd66c0"
+        }
+      ]
+    },
+    {
+      "id": "bridge__air_180__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__air_180__glide.webp",
+      "sheetSha256": "d77b44df7543b5352730af5787074e01bfe0c463f6c9f3cd545333dc5ffd84f8",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "11019f1d2b8e96927b91a91e40648359adda92319ec1613ba518786dbb11816b"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "efb81885ae2a4c17e2008d5072ae4afce5286507d0f08d74265a5b0f52250dd3"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "e6e3d4a2033abd8bf9bdf5415824cf36722eb8d2e4726d58f9843bf6a56ee704"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "b2d86a3a6ed5be33d4d74a34987741a928376a08a684cab9f5432838099ba2a4"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "f2a3610ea5110203cdd6b2427c6db03df5a33c8f062aa0b45e67650c475ad511"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "dc1c9a11d67d2c54e304ba2693ea9973790f8d5cf8179a3ec4fcd05ddea7a594"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "76f3fa4f6809965b17f89e2d0dbd2bd81c9bec005f2bf8f67826df5c2b800c01"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "94cac130d3dca563297b3ad3c545500dde7e9c90915c964d444d2e4aeee56723"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__air_180",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__air_180.webp",
+      "sheetSha256": "663dab3e2c3f89733431b353b8eea413e3e7881ef490b7713c4c02369f61ae64",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5bcc7a37aa70ecb6aa6adb77ca02d826da5efde9eebcef12b5b7ac6618863238"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "05f78bd97883f58a921d410020d1664b0978f47c316683c3c0e474d86022b276"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "99323214f59382ef3f0ed480655f13e09c6291e3a2b0302aa95afb40dde03ee4"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "58d8d030e8f9f8f86bed638c12ad44bd6732401337687d06ab3ad05a2c4e6c0a"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "f964ac54f68fcf4b7bef8e55c6511774178f406fc7a26f75407a472811c6016d"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "a82f99ac37868460c2a731b9a4f12c8e7ccb917c501fc7309667a59bf3dfb08d"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "44d77245565ea173b28f6281881ec0d3e03531cc10c7e0aa43344de58be18a3f"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "2568920032e4f4f7578974fa88fc0b27911aae971ecae27b21626fb4e60b5e21"
+        }
+      ]
+    },
+    {
+      "id": "bridge__air_360__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__air_360__ski_ready.webp",
+      "sheetSha256": "afad48544599a47c647b3b968df99090e26fe46764e690ea99b34ce35cc9bb56",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "26c9b37ceee09078fa53c4f817fde252c2c49419b3a8aca1f5a54fc3b33d2d00"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "bd24a8e477fafdc6a0d8355de4a85b06478fafaf724b8a8802f6109ea261437c"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "8a6be4706b0377ea0ea9f6f4d92c490b2bd8d4d7961da604d4436ef2f38f358f"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "3727f83925cc45d0629b6ae893700faf5e8d421940fc7af3420d9ec4a479326b"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "d39852d9881971c22db03ff186f78797bc15b25bad61543d11e06afdb7659ddd"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "c185c702e26083cc9cf081cae692c3b7d44985b9c8211e84eb283bc642e5f35c"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "be06f0597edc69d8c6416514bd2c9b848a06f3b8f434da7cd1fb89a31fadbcbd"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "c6adcfc028adc809ddc4c59a29a67f6e2ec78645237ff0c2ffe2c7f7da0088f1"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__air_360",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__air_360.webp",
+      "sheetSha256": "5a4e0299343b7eac408a8bc5f1f2018d9cffb160907a32f45fd7167c50e09fd4",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "35750502fd389ebb1704204bbadeb872a671084741cdad991677494b1d3e3036"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "765ba69903a2ae70d861cd231033504c024a83565a2da07087416431bae9d120"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "4e7cc2c01222ed2e5041d84e38367924902cdf7e15b2bddfc1c21a51cf44eb77"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "d9708c5a77e07f5deee68bed647e6aa1831f8dcef2e5291954c539af2cf80d7e"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "e3c925e0e9b10f7a4e30028a678caa2043f49ad55dec2d6609ec4e1222ef7a13"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "dccf1922475b1b25ea962698b57598fb02517392f7b88e725fff741405da4700"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "280519f615f7ff466c743a16ffb4e6413bdc4a685925b01e73d6ae3b9c9212dc"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "66652d9f74b1ff81d94fd8023e406218b096c67aa4d4dc5f006b523272813535"
+        }
+      ]
+    },
+    {
+      "id": "bridge__air_360__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__air_360__glide.webp",
+      "sheetSha256": "03244d1c293f80f2e01eb11ae4cbee30f10a7682ff6db341482b57e8553000ee",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "40e96d1d2218e613aeeb655476740914c1aa279673afb6f9a895c66655cb6820"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "e5ba5fc4afa828701932099d53c7e907d2983051a6b520233160253f0a166864"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "257d7fcc4f810aef158a1ad691aa38ab800747d8874700d0eb513c90fb275eda"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "29f8c0e68d5e68fb9fafa7632e89b51a1d0eabe58f3dbef6779e9f5f582087a7"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "f821be7c894eeaba55f320c3f4678eb4ab2d10dff75a608931cdd71567069c95"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "465e12914a0fbf6a01db1497473003122112b40b224896caa7f729b5e643d195"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "6b36f9d3197a257db5269bb2a858e4a80973b30f44173de352787d7781d50292"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "0169dac6acb16d94da431191ac8302f4d46aa7f99af66f3f63d4cbdcd34436c3"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__air_360",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__air_360.webp",
+      "sheetSha256": "699e2a540800dce08bd58944a6972891fb3775b7c2f47759c2d2db1b36c41452",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "4821f609d21e87da81d59d346ab53c6c30cf64f9d5e3e5e61464f7664e7a4209"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "471fd35f37b6bda870c66a8dc3125fb7b1c73d3cd6bafe4f6ded0d8779e9e6c4"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "ab505a1ce607dd5fa5dc5d5ee50811d77dbed9fab67e20aed74f41b256c4e1e6"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "84bb50aa92cf5981bb4a4921e18fcabcaa4dbfb20d5e0bca3e7be6634fca46bf"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "6123e566ca33b8387e331e0b4fc09e1269d74dc1e2404f621f43de767fe2509a"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "e77c04ddf04902798e1d8447873e0fa3c204a1cea02a2e083b645dc6b04cbf00"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "e9879cdf51d98d6bf57b2a97caf670b4d287e4a81dc78a070ab7d971d9469957"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "ee39a602caa15653e5b10ec7c92f26d95954747842f951db1324c1e0cf5a8a0e"
+        }
+      ]
+    },
+    {
+      "id": "bridge__perfect_landing__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__perfect_landing__ski_ready.webp",
+      "sheetSha256": "0a3cbed1af176bf98a098cddc2746d0d22fe57114d71b5acead947897f289bb7",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "a98888380330ae2156044f58925605e55a819b418f469df2333d787832c96df2"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "d5adea36891c142451b9606d5c9c24f346e29b7079390024ca102b9ddf99eb7d"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "2eb3aae4f0cf48a7b3f22918095c4c485ebfbe4d7e5c04644965017870ff9162"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "2b47632c2dd44575643b6e70ea5474d04844cac385df65113b04c7789248d90f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "0daac526eedf472938cc1d99f63803b29e1fd7207aaeb73d6fe85eab4c6861fb"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "a79256a8e805049d2dafe0ec7f4ecdcc201ff7998652accc35bf1a566d5ecb1b"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "a749e7c7690e5962c5cd8bcbcac15f0594eb102c5eba35d6c53985028b7aeb05"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "ea06a1e20dce32b9c6e61f312e16425c1c49b63516f796708f5764b1eabd5313"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__perfect_landing",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__perfect_landing.webp",
+      "sheetSha256": "b216053f628ed73d91f2c3cd828b4f8dbe3ae53661ca83fe61e4b55c56547c45",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "a155e369a5918cc23497cbf2acc8a9d5920e7c4f7bcac1edfb328c45fb43d8bd"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "d26529a85000d3602345ee534477d3af15bd4030db8aafe5604abd9238b11b91"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "523debc69e843794c910294d696908f1ca1e1e2828be019c97b7550ffa6defcd"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "eef6075482e084c053e90021a4a545e1921cca9b1f9ca5ed73e9d694dab58c38"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "19620431090bcad2e9d324d9f011a298e28945de52f63b8365daf807644add4c"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "48750d10e72e571de11b6015d08918e8d6c5518b12d014ae08013f8cbe646745"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "27fcf64bdafc4c6bdf1123a51ce044a4008ab8dab4bb1d056e896d2ab8e2947a"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "3fe4c75d93275010a252ad486e675f7dfdf58b51ccf17450fd811b30acf5ae5c"
+        }
+      ]
+    },
+    {
+      "id": "bridge__perfect_landing__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__perfect_landing__glide.webp",
+      "sheetSha256": "c0adaf7eac704a88d23b9cd26934fb1bac0e3fba024a1a84f423ad3124f3870a",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5dad421bf916ac8c86fa3c7a2dc4f52cc053ca6dd174e9415e0cf2c7edcca6d8"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "da56b386a5096124d6071b8ac9388ff6fdeedfe11de7224863cf2aa89348c37e"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "cdfad53aae75c721b1b254f58beca80ee6faf016b2e084c01041387a5ee59e23"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6cd6dc334ea8f18d162be7571a3db4b5492286e325ebc70b97bdd91546cbe5b9"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "4ced6f3054ad47f232f8930b06eb81c313bbba5fe30d70ac5dfddffce3a54a76"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "d636386755d6759de8a647cef24715d64750086c8a1daca83603b22bf42a3b9b"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "ae778c82e268126226e134e4d359de19fabab79acc7ba3885f05484b38a98b2a"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "f112542fc87dbd31c94c4b2ad422bfe2f8c99a514402fcd9c50fee8964366a05"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__perfect_landing",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__perfect_landing.webp",
+      "sheetSha256": "74c1290d6095d0f343720910591eb3789beffb2ba9187d4aaafbc8b7d1f1dc52",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "3429eb0d69e1338ced888aed9089a04c02e28147cfb49eb41d40e8e888829a06"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "ded84eecdc3fc1511147459be0443e5e7fab0a0383466cf1b817b6eb2f03c1b9"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "18466d331dc443b85f70aa65b8e974316d8668a2095994e7fb2e6cd318e91a66"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "85470210091357882df5d82cfe57cead9a92d791145435d73a37c618c3558e34"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "475077ed7c1f6b5cdde2588bde60afcca52826320fd1661e9eb78c2854ac5b52"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "58ad2fafaf83b421e00f301d964fd401a5b7592f50a0c7456d61933c69ad09ec"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "3bd3d7163c41283fde914dd9ea7960daeab45249eb4accbc969fe19707bb8fe6"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "f3a6832459d0ff45ba356f7b7df80faba517aa3788b50d4467bb59ac75afd276"
+        }
+      ]
+    },
+    {
+      "id": "bridge__soft_fall_recover__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__soft_fall_recover__ski_ready.webp",
+      "sheetSha256": "868e897d8e7e013198b8d56852c9f13919089eba779c6d6067d0442878547c40",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "6e5002109211e4c22de2c410c8861e4292e9ed0c2121441fa98b49916a8ce296"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "478c6e49acca8681566a86b110a0ca1a67181458a9a66268039b42091ae18c84"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "442a356ce79c27eb6ed5535e9f93dfaee19c65993bc709b74665eb2246b0f7d0"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "ad72f3128e1b913a85fb6536db2738fac30c48a689178bfc18fffa5fdfeef699"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "9340e98308beef927556366ff2c9533eb43b63ed21b167b7c3a06100cbb132d4"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "ed444b0338c65d2a80fd574425e4cab6743ea1d2b8d45d1b7a97b683b0226dd2"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "2d3ce98d3b5bb7b7ef1a70b66d7d4112fc6678499c9a18816c3dcc005e22494e"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "5ed73c66a37a552200224924ebf16d3437abc66c1084c2ddfc5039d957a69b75"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__soft_fall_recover",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__soft_fall_recover.webp",
+      "sheetSha256": "8e683b5693b6f724f6f248acc1914ab87fbe48c74a52d1cb70a22b6b4bc6ae56",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "a1ec35f7165cfd7430e582162370a1e2374d1921a17b810011e8f25f282d84c9"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "5bfe46fa6c4be146fdc905bb7c1225fedb685bcd021a93b50ca60756b55da023"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "3dbac56a6f25f606bfab77d91e6acc3ef56ef61f5eb4be22b638dab6299bc4b9"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "b00954276d499a7e49e50108afe287ce167298699264e48960c1a258cf9ce469"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "09d8089cc6ea9a9cbc19793fbf44d20d5c587c34f706236302c6751741ca3693"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "cde347836cb97fa63351271d865714d0ca4b4cddd93f1ee7f4d417aeb8b76304"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "debfd582da777a218c925d3e04cc60a1547a30ae9d8a86dd65c8ea063e26738d"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "8660618133a9ba44aacb87c176e48a79cc7641604a580a2c783e553b5b5a57d6"
+        }
+      ]
+    },
+    {
+      "id": "bridge__soft_fall_recover__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__soft_fall_recover__glide.webp",
+      "sheetSha256": "8b6fcc39d597cdaf63385fb944f67af26e633239b9cc906281926e5c6b3005ee",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "03fee6295510d8ca219708f957244013851cf71a0b0ffcb9abcf014e79a5805e"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "70e74b7f1afb93f8c01520ac761ace5248120dcd9b2799296dac8b87db705764"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "cf2ad4204ffd396264bca9b62e75de49607c86a682ebf380ad1546cef361d409"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "bb7e811d7ffbf9c65cd76efc9ae5abbc9cfcf2f82cfecbf8e44817c1178e31c2"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "bd33fbf91e2fc516af39af292b4d118b5e1ad7cf0e0e6a6d7fd45b2a14f72b0e"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "10e3749a194076efe8e426c0fe189273e9665fd1c8d740053b413432b18c5e64"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "918fb92d3eca6a5bdb022f15d265762fd554dab9776e4d13cde938c0a6000241"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "9f1a573daf95fe91e1604b7fc3149cf95ca1769d5c989ce825a177150c93cbb1"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__soft_fall_recover",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__soft_fall_recover.webp",
+      "sheetSha256": "6191f0de9d38399e4152b502169e58274d3a27b628fa73e06b5298bdf947c1eb",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "049f9d0aaea26fbf74db99eed36ecc3f5ed42a0bf26e6aae67fbaa253fb4dcfa"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "ddb33965a97807ac0b451655b224889df97c99429a7fc8b7e66b1057fb4b3354"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "55c9a0d8b3c825f43b65667f720108189ef8acb8cea084f162be91f30c3cf21f"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6e9ee16c61e1be6f98821cf9faf3ca01a68af31d0e1445c03926e8524c08c7b2"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "0b2cefb6a156d1dc7c590daf630c4ecac7342c2dec71b4900caa3f187d1fec74"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "1443f5dd8c64b0159a310c4f48bfc905d6dde22afac8376b80619b183489c4ef"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "0190cffd4bea6d32c4de7f5801e0e757ab213ac3a43896fc8243ff043e4f4519"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "563aea466b87f5dc3083bd5eb56848ef3e0e8f6645b941657e8cc0c8d437d610"
+        }
+      ]
+    },
+    {
+      "id": "bridge__victory__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__victory__ski_ready.webp",
+      "sheetSha256": "9a25857da7ebcdaf3a96c59fe5616b0883f9c0ce3f734f2bea79efb45e60213c",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "a4113b9c0b2688d674d5217f4d0cef744f9ddead4ec8311609f8b5c2cf2ffd93"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "d14b4b2b3c5be0597ce5fc0c5f1d1b352d34c74e26a861900f0db1484347d442"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "ca65628f59cfc85fb9aeb81bb41d53307c6be144ec7111790f5b1d6be2cc922e"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "1e51bbb8a2f1b44b30c36c509144a8f356fa6fd31de40f22cf3694ae56ac8f67"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "1a286d44afd291318203dc039291e1c32dd4b2efcff499e5d99bc04198d991a2"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "af121a986d9e0159af6d64d9bcde0a21b0d69400527d21095d0b1110cbb1fcc6"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "0e94cc894fb3680b4e88f9654804a985be04641715a06b745ae9fc3adb191615"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "f81de655c0651d7c49536a97a95cef27dbbe069e3c18b125bc093b5bb0799e47"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__victory",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__victory.webp",
+      "sheetSha256": "722756d3447e88f1cb3ca3c3134a7c33eb4b71d7cd2c9b90b9a96d937026bb83",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "5d769abeda1e8e401ef2d664218b0cbacb8402c54b8ed7ce26fd16043402303c"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "85e35e945ec414dff409024a64e280b3a06d4cbbed32d6270959b9ddf6427969"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "d356d679186f84f85cacc764883f5cbf11605e1293503adf43a354939de0f83d"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "cac717e2285bcef208feed91f50a78c4198277ef5f459852ebba717965259730"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "b8b1f6fb59a732acadc6a86b89fce51613a4c61fa5ee8b2f9c31af31099ff2c5"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "fdcbaf65a965fc9560f5b69a86537296036260c9c2884a4ee5d368fdc07b2ef1"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "e01d327c31a03f53e64d3236f9ea9e46de60fe50803d4820a7351192b0074971"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "c840317aee1a61dc4c683687b8bda3de34bf8a2ea1d3c3165b9cdb812802e27d"
+        }
+      ]
+    },
+    {
+      "id": "bridge__victory__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__victory__glide.webp",
+      "sheetSha256": "dec01323bdb14a511423dfee09319fe74152b7d98c8ffdb7df42da192972a4e3",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "f040080ad563a269969e4ef5ceac466cff03c0ac898b12915c641ee7e9c11b3f"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "4df941b5d2acc888150260482ee06bfdfb97a0e0851a1b83b2ba4667fecfee40"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "536cb3bbeec8ff9c8a1f802b4ce518c6209e260f2f887b4510589ede053fa5be"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "6f04702bda16c00a114ed6fd80277fb129db289e064d3d2b5b2205dad0775160"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "ab45d60b93630575fdbd378bff3fec6ac17c27ce46fccbbd47704bc7b6636dc7"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "952087e9ce9c94feb6934520ed06d802d6719b67c50b59acd6ce894f9ae9ca8d"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "23c8a7b44f23b028adef80473b3f084053fe5532587f8e6f8f12896a479df728"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "7f7f2fa3b6d32e37a64d94d07d322ebe6387881d8ee54c2eb36fe84e4dd30553"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__victory",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__victory.webp",
+      "sheetSha256": "13fd9936a08afd91068f502a95249f4c59560b7b57327da2eb9831d9cf686b7e",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "1f3caf01487675c579ba7297b9735f09039ba12f815aac31980090618d2c6c62"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "820368bd7813b38e5eca662b5a0c8409b7b657d4ca14162c8e7316dc846b8fc3"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "7019a4deec62c8fe85ceb3414ba64ca4f42eb6e7527a21c8e83c9f5eb4ec0c5c"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "a31f3129f9668a334918088a9b32ebe22711c519b0468604b4d280105c80442a"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "4a30c648f8b276f7faeb994fa7eec45290bb13305beb5b4b075b8860adbb2bc6"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "42e17dafa1acebe8e45515472e4c8240b8622b8fea33f660a0c2a0a9224a79d9"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "7d5909137ae105deeeb20725032fa5283d39af8677dcf94cdf74ba8bc6a64ce7"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "c3b13e6420055af1675548c0742f7ef8c5da21b765732ca69d48713caf25a524"
+        }
+      ]
+    },
+    {
+      "id": "bridge__gate_exit__ski_ready",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__gate_exit__ski_ready.webp",
+      "sheetSha256": "4123f22827933d89b1e79397d0c31b375e3417c6ac920fd186050e6ef8516b9c",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "7f0c5b8f8398a0a2f869f4e5ac2fc4c769a8a65c7af00a9bb920e89fbf7ebb2c"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "458a4d121fd9cb885c1445586cdb69a86086e8c8dddc9a33cc77700220f2ba4b"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "ba14b2d3c69da72556ebbae194f26c7f9af03bea1aaedf2a975c9abc2f57b6f5"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "85fbccaf157795d68329525afdded73426e88646ccb0b9e223852ec1e34ac08f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "1ced37bcbabba3a659f17035eee10de09a87f87b7b00643506ce89b196e5e6e2"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "3aa57b93f54c9c750c3d56da76f8708c9f804649d36cba63341f54d84212dc1d"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "1a70fa2a3cd2d7701a523c1692c5cdc2df951b0e017caf09fc2f360e361da71d"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "5ce55ad6e9e4b367c8e6ad6bfef3cfa2d6fc7653a55ca1899958366ce57292f9"
+        }
+      ]
+    },
+    {
+      "id": "bridge__ski_ready__gate_exit",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__ski_ready__gate_exit.webp",
+      "sheetSha256": "6934df7df88cbbf75b9e51bc123ee1958bbb57c2c5c5c269b30ab795b65837af",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "db5528f6d80bf32feeb4de11c9b0e73b74ebc94161e52cd1d416426a3f4c7f66"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "fa68d01b25ad57b94571756e80ef7559d49fc906a44fd30dec1baebd45bf3a1f"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "1397161e73dc770efaf5f45af8930cbc9e495da3d73fd1e826ec154bf5c851c6"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "1a3b295346333619366e21309bb66a95853c8e2610aea42f02ee1bc3c3299c2f"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "60c334fa6b18e03ec69491b160aef6bb271c44c74474ca57fdf5ce3c5053c559"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "eef625aacc10314aac1ca067f5e09e8067df4cd5b17a924c77e2c07e74821936"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "fd239eedd307c87bd46a453a6b0714c10425371e7e9f18aabc1a259bff36a3c6"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "3dcf13154d17cda92a5351a1bc023f99a8cfd4bf322ea98cc1d45cc47c42b0f2"
+        }
+      ]
+    },
+    {
+      "id": "bridge__gate_exit__glide",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__gate_exit__glide.webp",
+      "sheetSha256": "a5dbc99f7aced3695adbaf4f92146de56d5c9282715893d92b3b98ee659cfb40",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "efde7de0ba3888a0ceda899bca9941c9d16baff4cd2bd26fe56ab7cb4148387d"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "f866c8846b23ebd20618a7576f1b82d83abbb7ace6e304bcbcecd1f11ccf46c3"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "d84b60798a71e25311bf4aeb492c58969a4b99259a73a5666b07da2658d48c65"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "5942283ed01251f641e53cdbc2eb3c1621ab8588e20b98705ac21e3343d94acc"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "a58d3ee1ab32c001bea4e6042f9aeaabc3e56977e4e892d742980a664125849b"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "49ea11b62e39ee50b0d83cd3b3408b03bc63332dd3d0008908e4783e39331ac5"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "88b258abc7e63ea7cd9259858beada9938043b9f7dd73b23da28cbd7bd27b990"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "e7289029ad3120716576c857248796673d271dd7c811fb20f6a19603b7e4691f"
+        }
+      ]
+    },
+    {
+      "id": "bridge__glide__gate_exit",
+      "kind": "bridge",
+      "contactSheet": "sheets/bridge__glide__gate_exit.webp",
+      "sheetSha256": "c9cad6506522b276635d5dbcced4665a746252df1c82d4b1988abdf2e1fb58a8",
+      "frames": [
+        {
+          "index": 0,
+          "timeSeconds": 0,
+          "renderedSha256": "c1408009a096f4683b4ced4cb343824eeab664b7f2dda589e48fb362de227a64"
+        },
+        {
+          "index": 1,
+          "timeSeconds": 0.17142857142857143,
+          "renderedSha256": "4e05fdef453d9a25cd2b7b2770ef207601afe87d26921a40f15d772de53d6a0c"
+        },
+        {
+          "index": 2,
+          "timeSeconds": 0.34285714285714286,
+          "renderedSha256": "9553331c49ed2a7e7b55c8442728743c1d64f4523e3ce708cfd272894154f368"
+        },
+        {
+          "index": 3,
+          "timeSeconds": 0.5142857142857142,
+          "renderedSha256": "9db524fd8e601a9604de3349a79177ec2ddd9c7ad72a74fb6eb0bbec42dc9565"
+        },
+        {
+          "index": 4,
+          "timeSeconds": 0.6857142857142857,
+          "renderedSha256": "0ffd101668d81c5ab61f61f4eb1898fdbfc33609e6d20dcee9abc1996ada6080"
+        },
+        {
+          "index": 5,
+          "timeSeconds": 0.8571428571428571,
+          "renderedSha256": "6e211ad9e8f67a2d2bd014b508369a59022a500cdcb551f9e3572e80faa74915"
+        },
+        {
+          "index": 6,
+          "timeSeconds": 1.0285714285714285,
+          "renderedSha256": "cd940290f14ff541da4bf0d32843096938d8b2701fb137e147616673ca903bb6"
+        },
+        {
+          "index": 7,
+          "timeSeconds": 1.2,
+          "renderedSha256": "a54439c33929be2da43ba978567c240a846a8d7cc9c0c4d5015651598ed35fb6"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    "verification/side-jump.png",
+    "verification/side-air_180.png",
+    "verification/side-air_360.png",
+    "verification/side-perfect_landing.png",
+    "verification/side-soft_fall_recover.png",
+    "verification/side-victory.png"
+  ]
+}

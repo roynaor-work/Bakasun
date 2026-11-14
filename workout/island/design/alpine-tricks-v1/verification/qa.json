@@ -1,0 +1,3336 @@
+{
+  "schemaVersion": 1,
+  "kind": "alpine-tricks-final-glb-independent-audit",
+  "sampleHz": 120,
+  "assetSha256": "b0897eed62385e8695f8f65ae67d93413e198116a3806bdc3e6aa6a696b2d25b",
+  "canonical18": {
+    "names": [
+      "Root",
+      "Hips",
+      "Spine",
+      "Chest",
+      "Neck",
+      "Head",
+      "LeftArm",
+      "LeftForeArm",
+      "LeftHand",
+      "RightArm",
+      "RightForeArm",
+      "RightHand",
+      "LeftUpLeg",
+      "LeftLeg",
+      "LeftFoot",
+      "RightUpLeg",
+      "RightLeg",
+      "RightFoot"
+    ],
+    "hierarchyPassed": true
+  },
+  "markerIntegrity": [
+    {
+      "bone": "LeftFoot",
+      "marker": "binding",
+      "bindPosition": [
+        0.13571249566091975,
+        0.005000163899498339,
+        -0.296688364339392
+      ],
+      "rigidVertices": 891,
+      "pass": true
+    },
+    {
+      "bone": "LeftFoot",
+      "marker": "toe",
+      "bindPosition": [
+        0.13571249577190087,
+        0.005000163868209853,
+        -0.0999740887134955
+      ],
+      "rigidVertices": 891,
+      "pass": true
+    },
+    {
+      "bone": "LeftFoot",
+      "marker": "heel",
+      "bindPosition": [
+        0.13571249554993864,
+        0.005000163930786783,
+        -0.4934026399652884
+      ],
+      "rigidVertices": 891,
+      "pass": true
+    },
+    {
+      "bone": "RightFoot",
+      "marker": "binding",
+      "bindPosition": [
+        -0.12150875145559498,
+        0.0049997279444800174,
+        -0.29668900965769696
+      ],
+      "rigidVertices": 883,
+      "pass": true
+    },
+    {
+      "bone": "RightFoot",
+      "marker": "toe",
+      "bindPosition": [
+        -0.12150875237236224,
+        0.0049997276513413375,
+        -0.0999745183747808
+      ],
+      "rigidVertices": 883,
+      "pass": true
+    },
+    {
+      "bone": "RightFoot",
+      "marker": "heel",
+      "bindPosition": [
+        -0.1215087505388277,
+        0.004999728237618767,
+        -0.49340350094061314
+      ],
+      "rigidVertices": 883,
+      "pass": true
+    }
+  ],
+  "khronos": {
+    "errors": 0,
+    "warnings": 0,
+    "messages": [
+      {
+        "code": "UNSUPPORTED_EXTENSION",
+        "message": "Cannot validate an extension as it is not supported by the validator: 'KHR_draco_mesh_compression'.",
+        "severity": 2,
+        "pointer": "/extensionsUsed/0"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/3"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/4"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/5"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/6"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/7"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/8"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/9"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/10"
+      },
+      {
+        "code": "UNUSED_OBJECT",
+        "message": "This object may be unused.",
+        "severity": 2,
+        "pointer": "/bufferViews/11"
+      }
+    ]
+  },
+  "limits": {
+    "contactResidualMetersExclusive": 0.02,
+    "floorMeters": -0.003,
+    "c1PositionMeters": 0.0001,
+    "c1AngleRadians": 0.0001,
+    "c1VelocityMetersPerSecond": 0.002,
+    "c1AngularVelocityRadiansPerSecond": 0.002
+  },
+  "minimumWeightedGeometryY": -2.0259348446766134e-7,
+  "maxContactResidualMeters": 0.00006467609298767423,
+  "clips": [
+    {
+      "id": "ski_ready",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 73,
+      "constantHoldTracks": 9,
+      "evaluatedFrames": 289,
+      "maxQuaternionKeyNormError": 9.890172525395258e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.9091201661311245e-7,
+        "maxNormalResidualMeters": 1.599779546612723e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 1734,
+        "perMarker": {
+          "LeftFoot/binding": 1.2129504715420437e-7,
+          "LeftFoot/toe": 9.242739784758345e-8,
+          "LeftFoot/heel": 1.7201642055313426e-7,
+          "RightFoot/binding": 1.4275880422329199e-7,
+          "RightFoot/toe": 9.942029331585233e-8,
+          "RightFoot/heel": 1.9091201661311245e-7
+        },
+        "worst": {
+          "time": 1.9333333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700008323289286,
+            1.6008705022718672e-7,
+            -0.4934036354593271
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -1.1157056131749776e-7,
+      "minimumWeightedGeometryY": -1.1157056136693738e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "loop": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "glide",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 73,
+      "constantHoldTracks": 8,
+      "evaluatedFrames": 289,
+      "maxQuaternionKeyNormError": 8.372143256440978e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.7870983240132354e-7,
+        "maxNormalResidualMeters": 1.425097183038737e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 1734,
+        "perMarker": {
+          "LeftFoot/binding": 1.3399115182295086e-7,
+          "LeftFoot/toe": 1.210256662465707e-7,
+          "LeftFoot/heel": 1.7870983240132354e-7,
+          "RightFoot/binding": 1.4644387441084479e-7,
+          "RightFoot/toe": 1.266814277102131e-7,
+          "RightFoot/heel": 1.6886264960225482e-7
+        },
+        "worst": {
+          "time": 0.8333333333333334,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700001713120945,
+            -1.3240031324079915e-7,
+            -0.4934025500338033
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -9.124607913690852e-8,
+      "minimumWeightedGeometryY": -9.124607915078631e-8,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "loop": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "turn_left",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 97,
+      "constantHoldTracks": 7,
+      "evaluatedFrames": 385,
+      "maxQuaternionKeyNormError": 9.495561492656179e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000002213200635829753,
+        "maxNormalResidualMeters": 0.0000022115817729928544,
+        "intentionalTravelMeters": 0.002506355099698249,
+        "pointSamples": 2310,
+        "perMarker": {
+          "LeftFoot/binding": 0.0000021871264102182174,
+          "LeftFoot/toe": 0.0000021934302962805244,
+          "LeftFoot/heel": 0.000002181016406146443,
+          "RightFoot/binding": 0.0000021898420518802667,
+          "RightFoot/toe": 0.000002167149825682818,
+          "RightFoot/heel": 0.000002213200635829753
+        },
+        "worst": {
+          "time": 2.216666666666667,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.1270000885912548,
+            0.0023795683275530666,
+            -0.4934036087555819
+          ],
+          "desired": [
+            -0.12700001337156752,
+            0.0023773567457800737,
+            -0.4934035699597774
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -6.059311459527539e-7,
+      "minimumWeightedGeometryY": -1.736622746162375e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "loop": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "turn_right",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 97,
+      "constantHoldTracks": 7,
+      "evaluatedFrames": 385,
+      "maxQuaternionKeyNormError": 9.098968767329296e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000004253754420601753,
+        "maxNormalResidualMeters": 0.0000042517773765973765,
+        "intentionalTravelMeters": 0.005012539913313333,
+        "pointSamples": 2310,
+        "perMarker": {
+          "LeftFoot/binding": 0.000004168725536918524,
+          "LeftFoot/toe": 0.0000041780686508244835,
+          "LeftFoot/heel": 0.000004166971773595079,
+          "RightFoot/binding": 0.000004247359239636818,
+          "RightFoot/toe": 0.000004253754420601753,
+          "RightFoot/heel": 0.000004240980309877397
+        },
+        "worst": {
+          "time": 0.95,
+          "bone": "RightFoot",
+          "marker": "toe",
+          "actual": [
+            -0.12700011958269666,
+            0.004621465431344701,
+            -0.09997460635508104
+          ],
+          "desired": [
+            -0.1269999912604424,
+            0.004617213653968104,
+            -0.0999745876679276
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -6.424148686068332e-7,
+      "minimumWeightedGeometryY": -1.9349197216689262e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "loop": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "brake",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 109,
+      "constantHoldTracks": 5,
+      "evaluatedFrames": 433,
+      "maxQuaternionKeyNormError": 9.777187714998803e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000009975794707917109,
+        "maxNormalResidualMeters": 2.4530127298860727e-7,
+        "intentionalTravelMeters": 0.05370096010344564,
+        "pointSamples": 2598,
+        "perMarker": {
+          "LeftFoot/binding": 0.000002691567998301955,
+          "LeftFoot/toe": 0.000009963393987377868,
+          "LeftFoot/heel": 0.000004684240888059938,
+          "RightFoot/binding": 0.0000027017002013590214,
+          "RightFoot/toe": 0.000009975794707917109,
+          "RightFoot/heel": 0.000004621711564119409
+        },
+        "worst": {
+          "time": 0.5166666666666667,
+          "bone": "RightFoot",
+          "marker": "toe",
+          "actual": [
+            -0.123167864892097,
+            1.3166350024129692e-8,
+            -0.10000192722763479
+          ],
+          "desired": [
+            -0.12315789566658883,
+            1.0661754812346658e-10,
+            -0.10000228896271081
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -1.62065757175478e-7,
+      "minimumWeightedGeometryY": -1.62065757175478e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {}
+    },
+    {
+      "id": "jump",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 109,
+      "constantHoldTracks": 6,
+      "evaluatedFrames": 433,
+      "maxQuaternionKeyNormError": 9.21525011854385e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.00006467609298767423,
+        "maxNormalResidualMeters": 0.00006172962299699769,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 1212,
+        "perMarker": {
+          "LeftFoot/binding": 0.00006377096756061207,
+          "LeftFoot/toe": 0.00006326513994505774,
+          "LeftFoot/heel": 0.00006429950328561954,
+          "RightFoot/binding": 0.00006425554076568127,
+          "RightFoot/toe": 0.00006392630680690753,
+          "RightFoot/heel": 0.00006467609298767423
+        },
+        "worst": {
+          "time": 2.783333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12701641891207763,
+            -0.0000603844150794397,
+            -0.4934199161589684
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -0.00028209073991440625,
+      "minimumWeightedGeometryY": -1.2174881587785624e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {}
+    },
+    {
+      "id": "air_180",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 121,
+      "constantHoldTracks": 4,
+      "evaluatedFrames": 481,
+      "maxQuaternionKeyNormError": 9.760918862067314e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000044410256831496876,
+        "maxNormalResidualMeters": 0.000042126239639062035,
+        "intentionalTravelMeters": 1.6358201120420514e-7,
+        "pointSamples": 1356,
+        "perMarker": {
+          "LeftFoot/binding": 0.00004236629848521224,
+          "LeftFoot/toe": 0.00004147552738541606,
+          "LeftFoot/heel": 0.00004386819357362905,
+          "RightFoot/binding": 0.00004286496073820932,
+          "RightFoot/toe": 0.00004190844723038193,
+          "RightFoot/heel": 0.000044410256831496876
+        },
+        "worst": {
+          "time": 3.075,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270129089439255,
+            -0.00004137733176187708,
+            0.5194132446058383
+          ],
+          "desired": [
+            0.12700000216595858,
+            1.090955104032787e-10,
+            0.5194035702385491
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -0.0002275766688872305,
+      "minimumWeightedGeometryY": -1.3323337188023143e-7,
+      "accumulatedRootHeadingRadians": 3.141592653589793,
+      "continuity": {}
+    },
+    {
+      "id": "air_360",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 145,
+      "constantHoldTracks": 4,
+      "evaluatedFrames": 577,
+      "maxQuaternionKeyNormError": 9.424356428588965e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.00002385765026027052,
+        "maxNormalResidualMeters": 0.000023136455695377256,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 1644,
+        "perMarker": {
+          "LeftFoot/binding": 0.000023210869002495474,
+          "LeftFoot/toe": 0.000022680687050179715,
+          "LeftFoot/heel": 0.000023748334278109134,
+          "RightFoot/binding": 0.000023404442135372288,
+          "RightFoot/toe": 0.000022975860285084316,
+          "RightFoot/heel": 0.00002385765026027052
+        },
+        "worst": {
+          "time": 3.675,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700522513833568,
+            -0.00002277488786858739,
+            -0.49340838743190574
+          ],
+          "desired": [
+            -0.12700000221276478,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -0.00015683082013380478,
+      "minimumWeightedGeometryY": -1.0741715556275566e-7,
+      "accumulatedRootHeadingRadians": 6.283185307179586,
+      "continuity": {}
+    },
+    {
+      "id": "perfect_landing",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 85,
+      "constantHoldTracks": 5,
+      "evaluatedFrames": 337,
+      "maxQuaternionKeyNormError": 9.090327912630869e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.0000037195901911034473,
+        "maxNormalResidualMeters": 0.0000035204602666927265,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 2022,
+        "perMarker": {
+          "LeftFoot/binding": 0.0000034631807555668166,
+          "LeftFoot/toe": 0.000003322113842265831,
+          "LeftFoot/heel": 0.0000036049214450603204,
+          "RightFoot/binding": 0.0000035492788286995517,
+          "RightFoot/toe": 0.0000033828798231666605,
+          "RightFoot/heel": 0.0000037195901911034473
+        },
+        "worst": {
+          "time": 0.275,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700096501868732,
+            -0.000003520351171126812,
+            -0.4934042873965039
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -0.0000035273150940373643,
+      "minimumWeightedGeometryY": -1.712653345817619e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {}
+    },
+    {
+      "id": "soft_fall_recover",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 217,
+      "constantHoldTracks": 1,
+      "evaluatedFrames": 865,
+      "maxQuaternionKeyNormError": 9.523888089280064e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.513696573728086e-7,
+        "maxNormalResidualMeters": 5.025328120300543e-8,
+        "intentionalTravelMeters": 1.5136965726841737e-7,
+        "pointSamples": 888,
+        "perMarker": {
+          "LeftFoot/binding": 4.272046915159303e-8,
+          "LeftFoot/toe": 4.090761909858745e-8,
+          "LeftFoot/heel": 4.9119987117498615e-8,
+          "RightFoot/binding": 1.1059934047582563e-7,
+          "RightFoot/toe": 7.300876161409086e-8,
+          "RightFoot/heel": 1.513696573728086e-7
+        },
+        "worst": {
+          "time": 7.075,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237676891986e-8,
+            -0.043403614918552824
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.04340356995977762
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -0.0002825118112022018,
+      "minimumWeightedGeometryY": 3.934645067225906e-9,
+      "accumulatedRootHeadingRadians": 3.9014499335301186e-23,
+      "continuity": {}
+    },
+    {
+      "id": "victory",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 121,
+      "constantHoldTracks": 7,
+      "evaluatedFrames": 481,
+      "maxQuaternionKeyNormError": 9.297101888350312e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 2.9665145114275784e-7,
+        "maxNormalResidualMeters": 1.901035797391426e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 2886,
+        "perMarker": {
+          "LeftFoot/binding": 2.2827259196636702e-7,
+          "LeftFoot/toe": 1.6051084031679604e-7,
+          "LeftFoot/heel": 2.9665145114275784e-7,
+          "RightFoot/binding": 1.989448785006326e-7,
+          "RightFoot/toe": 1.5736323196906646e-7,
+          "RightFoot/heel": 2.4326115451578634e-7
+        },
+        "worst": {
+          "time": 1,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700028251212597,
+            8.730358549979833e-8,
+            -0.49340270432771477
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -1.397420177906561e-7,
+      "minimumWeightedGeometryY": -1.3974201779672762e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {}
+    },
+    {
+      "id": "gate_exit",
+      "kind": "motion",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 85,
+      "constantHoldTracks": 9,
+      "evaluatedFrames": 337,
+      "maxQuaternionKeyNormError": 8.343515678355118e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 2.2006644191817839e-7,
+        "maxNormalResidualMeters": 1.963212887257093e-7,
+        "intentionalTravelMeters": 1.1196825348647341e-7,
+        "pointSamples": 2022,
+        "perMarker": {
+          "LeftFoot/binding": 1.3136465558367934e-7,
+          "LeftFoot/toe": 1.023993430856064e-7,
+          "LeftFoot/heel": 1.7096798558658887e-7,
+          "RightFoot/binding": 1.5666705343662125e-7,
+          "RightFoot/toe": 1.0782034442693508e-7,
+          "RightFoot/heel": 2.2006644191817839e-7
+        },
+        "worst": {
+          "time": 1.8333333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12699995286365542,
+            -1.9621219315979488e-7,
+            -0.4934034836356452
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.025934844052113e-7,
+      "minimumWeightedGeometryY": -2.0259348446766134e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "loop": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 4.2146848510894035e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__turn_left__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__turn_left",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__turn_left__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__turn_left",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__turn_right__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__turn_right",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__turn_right__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__turn_right",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__brake__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0334628841590643e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000037605450368778515,
+        "maxNormalResidualMeters": 1.8972628727798035e-7,
+        "intentionalTravelMeters": 0.05370091198034178,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 0.000010126311263205908,
+          "LeftFoot/toe": 0.000037605450368778515,
+          "LeftFoot/heel": 0.00001742307999423418,
+          "RightFoot/binding": 0.000010103650500922826,
+          "RightFoot/toe": 0.00003758560464087978,
+          "RightFoot/heel": 0.000017415403647387913
+        },
+        "worst": {
+          "time": 0.2833333333333333,
+          "bone": "LeftFoot",
+          "marker": "toe",
+          "actual": [
+            0.07675290900792657,
+            7.561518459986427e-8,
+            -0.10470946569550917
+          ],
+          "desired": [
+            0.07679000427835056,
+            5.1382419152812275e-11,
+            -0.10470329276267934
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -1.401270485895667e-7,
+      "minimumWeightedGeometryY": -1.380767168275565e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.960464477539063e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__brake",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__brake__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 5,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 8.347320412660508e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 0.000037629160046364963,
+        "maxNormalResidualMeters": 5.097315727495277e-7,
+        "intentionalTravelMeters": 0.05370091198034178,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 0.000010173010522635891,
+          "LeftFoot/toe": 0.00003760937582898162,
+          "LeftFoot/heel": 0.00001756565939024676,
+          "RightFoot/binding": 0.000010212987800053749,
+          "RightFoot/toe": 0.000037629160046364963,
+          "RightFoot/heel": 0.000017517218148802914
+        },
+        "worst": {
+          "time": 0.9166666666666666,
+          "bone": "RightFoot",
+          "marker": "toe",
+          "actual": [
+            -0.1237537113314024,
+            1.2374409154303212e-7,
+            -0.09999425998204975
+          ],
+          "desired": [
+            -0.12371610113597034,
+            1.0661747179563363e-10,
+            -0.099995448089424
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -4.5932471721965573e-7,
+      "minimumWeightedGeometryY": -1.1043933544670897e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.960464477539063e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__brake",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__jump__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__jump",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__jump__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__jump",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__air_180__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.594629973734373e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4836698361713083e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2196517337917406e-7,
+          "LeftFoot/toe": 2.904394037782606e-7,
+          "LeftFoot/heel": 3.594629973734373e-7,
+          "RightFoot/binding": 3.309717096003955e-7,
+          "RightFoot/toe": 3.0794667848614886e-7,
+          "RightFoot/heel": 3.578377012613708e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700000626894384,
+            2.992052806349843e-7,
+            0.5194028683144417
+          ],
+          "desired": [
+            -0.12700000117955038,
+            5.2005372230823355e-11,
+            0.5194026690782441
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 5.364418041720054e-10,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__air_180",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__air_180__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4836698370547525e-7,
+        "maxNormalResidualMeters": 5.025328120300543e-8,
+        "intentionalTravelMeters": 1.4836698361713083e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.213338350089234e-8,
+          "LeftFoot/toe": 2.9758026966539174e-8,
+          "LeftFoot/heel": 4.0188814044477624e-8,
+          "RightFoot/binding": 1.0645853043742754e-7,
+          "RightFoot/toe": 6.661025696668423e-8,
+          "RightFoot/heel": 1.4836698370547525e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700013773431093,
+            5.036237671340871e-8,
+            0.5194036035340657
+          ],
+          "desired": [
+            0.12700000216595858,
+            1.090955104032787e-10,
+            0.5194035702385491
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 5.364418041720054e-10,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__air_180",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__air_360__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.592397135128244e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658758834016e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.216862720402062e-7,
+          "LeftFoot/toe": 2.900954975123948e-7,
+          "LeftFoot/heel": 3.592397135128244e-7,
+          "RightFoot/binding": 3.307555732750777e-7,
+          "RightFoot/toe": 3.076405289413305e-7,
+          "RightFoot/heel": 3.5769833378328543e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865398,
+            5.2005372230823355e-11,
+            -0.49340266894444684
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__air_360",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__air_360__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658767712152e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658758834016e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.173226468088934e-8,
+          "LeftFoot/toe": 2.927271070689659e-8,
+          "LeftFoot/heel": 3.9913795999450934e-8,
+          "RightFoot/binding": 1.0632820858511792e-7,
+          "RightFoot/toe": 6.63853831187702e-8,
+          "RightFoot/heel": 1.4826658767712152e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276478,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__air_360",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__perfect_landing__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__perfect_landing",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__perfect_landing__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__perfect_landing",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__soft_fall_recover__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.659724601616554e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.5136965726841737e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2918561243191916e-7,
+          "LeftFoot/toe": 2.983872442712845e-7,
+          "LeftFoot/heel": 3.659724601616554e-7,
+          "RightFoot/binding": 3.3816825958366573e-7,
+          "RightFoot/toe": 3.1559143136680104e-7,
+          "RightFoot/heel": 3.6456808212068437e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.043402879698928865
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.04340266894444693
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 1.1920928966180355e-8,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__soft_fall_recover",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__soft_fall_recover__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.513696573543794e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.5136965726841737e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 4.272046915159303e-8,
+          "LeftFoot/toe": 4.090761910568525e-8,
+          "LeftFoot/heel": 4.9119987122735456e-8,
+          "RightFoot/binding": 1.1059934050255615e-7,
+          "RightFoot/toe": 7.30087616774692e-8,
+          "RightFoot/heel": 1.513696573543794e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.043403614918552824
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.04340356995977762
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 1.1920928966180355e-8,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__soft_fall_recover",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__victory__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.5923971348366677e-7,
+        "maxNormalResidualMeters": 2.991532752627535e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168627196737885e-7,
+          "LeftFoot/toe": 2.900954974882107e-7,
+          "LeftFoot/heel": 3.5923971348366677e-7,
+          "RightFoot/binding": 3.307555733602099e-7,
+          "RightFoot/toe": 3.076405289676012e-7,
+          "RightFoot/heel": 3.576983338020323e-7
+        },
+        "worst": {
+          "time": 0.775,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700000626894384,
+            2.992052806349843e-7,
+            -0.4934028677779999
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744216643006304e-7,
+      "minimumWeightedGeometryY": -1.5303431707969217e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__victory",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 1.0235806280345372e-7,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 3.59239541148523e-7,
+        "maxNormalResidualMeters": 2.991531137253034e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.2168611605612076e-7,
+          "LeftFoot/toe": 2.9009535429651703e-7,
+          "LeftFoot/heel": 3.59239541148523e-7,
+          "RightFoot/binding": 3.3075536257837876e-7,
+          "RightFoot/toe": 3.076403421113144e-7,
+          "RightFoot/heel": 3.5769809288243617e-7
+        },
+        "worst": {
+          "time": 0.425,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.1270000062689747,
+            2.992051190975342e-7,
+            -0.4934028677779308
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.8744197516639147e-7,
+      "minimumWeightedGeometryY": -1.5303427315215695e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__victory__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__victory",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 2,
+      "constantHoldTracks": 22,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 7.49217059503593e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 1.4826658755027302e-7,
+        "maxNormalResidualMeters": 5.025328114749428e-8,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 3.1732264560865454e-8,
+          "LeftFoot/toe": 2.9272710682766012e-8,
+          "LeftFoot/heel": 3.991379588581053e-8,
+          "RightFoot/binding": 1.0632820854483017e-7,
+          "RightFoot/toe": 6.638538310942915e-8,
+          "RightFoot/heel": 1.4826658755027302e-7
+        },
+        "worst": {
+          "time": 0.15833333333333333,
+          "bone": "RightFoot",
+          "marker": "heel",
+          "actual": [
+            -0.12700013773431093,
+            5.036237671340871e-8,
+            -0.49340360299762387
+          ],
+          "desired": [
+            -0.12700000221276492,
+            1.0909556591442993e-10,
+            -0.49340356995977763
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": 6.569060531647075e-9,
+      "minimumWeightedGeometryY": 6.5690606695575915e-9,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__gate_exit__ski_ready",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 9.890172525395258e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 8.327183359412624e-7,
+        "maxNormalResidualMeters": 8.31385526756101e-7,
+        "intentionalTravelMeters": 1.1196825348647341e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 7.856528337982911e-7,
+          "LeftFoot/toe": 7.399001996244091e-7,
+          "LeftFoot/heel": 8.327183359412624e-7,
+          "RightFoot/binding": 7.785508088696946e-7,
+          "RightFoot/toe": 7.358041670667371e-7,
+          "RightFoot/heel": 8.238035299050209e-7
+        },
+        "worst": {
+          "time": 0.375,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12699997867462975,
+            -8.313335213838702e-7,
+            -0.4934026275850314
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -8.270654999198435e-7,
+      "minimumWeightedGeometryY": -1.708162254646789e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 4.2146848510894035e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__ski_ready__gate_exit",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 9.890172525395258e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 8.327181544272558e-7,
+        "maxNormalResidualMeters": 8.313853482877498e-7,
+        "intentionalTravelMeters": 7.649695905151508e-8,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 7.856526912889582e-7,
+          "LeftFoot/toe": 7.399000952938832e-7,
+          "LeftFoot/heel": 8.327181544272558e-7,
+          "RightFoot/binding": 7.785506842168817e-7,
+          "RightFoot/toe": 7.358040807807052e-7,
+          "RightFoot/heel": 8.238033614780796e-7
+        },
+        "worst": {
+          "time": 0.825,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12699997867459584,
+            -8.31333342915519e-7,
+            -0.49340262758511694
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -8.270653256703397e-7,
+      "minimumWeightedGeometryY": -1.708138205802276e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 4.2146848510894035e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__gate_exit__glide",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 9.20711638041638e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 2.5658589402139365e-7,
+        "maxNormalResidualMeters": 2.4658004477151607e-7,
+        "intentionalTravelMeters": 1.1196825348647341e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 2.2160683202361028e-7,
+          "LeftFoot/toe": 1.924374048261753e-7,
+          "LeftFoot/heel": 2.5658589402139365e-7,
+          "RightFoot/binding": 1.9930043667197356e-7,
+          "RightFoot/toe": 1.7611692637437616e-7,
+          "RightFoot/heel": 2.409309069599377e-7
+        },
+        "worst": {
+          "time": 0.325,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700004280118168,
+            2.4437512857744537e-7,
+            -0.49340273536554413
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.0811587972402457e-7,
+      "minimumWeightedGeometryY": -1.111447736727722e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 4.2146848510894035e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    },
+    {
+      "id": "bridge__glide__gate_exit",
+      "kind": "bridge",
+      "pass": true,
+      "issues": [],
+      "sourceSamples": 37,
+      "constantHoldTracks": 3,
+      "evaluatedFrames": 145,
+      "maxQuaternionKeyNormError": 9.20711638041638e-8,
+      "maxSharedTangentComponentError": 0,
+      "contact": {
+        "maxResidualMeters": 2.5658575633336915e-7,
+        "maxNormalResidualMeters": 2.465785994831826e-7,
+        "intentionalTravelMeters": 1.4826658746149168e-7,
+        "pointSamples": 870,
+        "perMarker": {
+          "LeftFoot/binding": 2.2160671392930978e-7,
+          "LeftFoot/toe": 1.9243736503712317e-7,
+          "LeftFoot/heel": 2.5658575633336915e-7,
+          "RightFoot/binding": 1.9930025761465443e-7,
+          "RightFoot/toe": 1.7611556628900198e-7,
+          "RightFoot/heel": 2.409306692406134e-7
+        },
+        "worst": {
+          "time": 0.875,
+          "bone": "LeftFoot",
+          "marker": "heel",
+          "actual": [
+            0.12700004280113367,
+            2.4437501067176015e-7,
+            -0.493402735365476
+          ],
+          "desired": [
+            0.12700000119865387,
+            5.2005372230823355e-11,
+            -0.4934026689444469
+          ],
+          "mode": "ski-path"
+        },
+        "pass": true
+      },
+      "minimumRigidFootEquipmentY": -2.081158557709628e-7,
+      "minimumWeightedGeometryY": -1.1114426312457126e-7,
+      "accumulatedRootHeadingRadians": 0,
+      "continuity": {
+        "entry": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 5.16191365590357e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        },
+        "exit": {
+          "maxPositionMeters": 0,
+          "maxAngleRadians": 4.2146848510894035e-8,
+          "maxVelocityMetersPerSecond": 0,
+          "maxAngularVelocityRadiansPerSecond": 0,
+          "pass": true
+        }
+      }
+    }
+  ],
+  "negativeControls": {
+    "contactShift3cmRejected": true,
+    "tangentBreakRejected": true,
+    "openLoopRejected": true
+  },
+  "errors": [],
+  "pass": true
+}
