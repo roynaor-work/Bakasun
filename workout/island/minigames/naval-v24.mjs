@@ -6,7 +6,8 @@
  *    its button is held, and the screen shows where the shell will meet the hull (a ring on the forecast hull, green when the shot will
  *    hit). The solver itself is v23's (forecast fleet along its real patrol path, wind included).
  *  - Enemy fire (`?navalEnemyFire=v23`): "the enemies should fire a lot more". Every hull and every shore gun fires more often, from
- *    1.45x at stage 1 to 2.4x from stage 20, later stages add three-shell salvos along the ship's course, every shot is marked by a red
+ *    1.45x at stage 1 to 1.6x from stage 20, and from stage 6 every third shot of a hull is a salvo of three shells along the ship's
+ *    course (about 2.5x the shells of v23 from stage 10, measured), every shot is marked by a red
  *    pulsing decal before it lands, and a hit costs less hull (many lives) so a child is pushed to keep moving, not sunk fast.
  *  - Submarine (`?navalSub=v23`): "when a submarine is under water only a torpedo should hit it; it can stay under water and fire
  *    under water only". A diving submarine is out of reach of shells, missiles and mines (they pass over with a small splash and the
@@ -23,8 +24,8 @@ export const NAVAL_V24_DEFAULTS=Object.freeze({
  // Fire rate multiplier from `rateFirst` (stage 1) to `rateLast` (stage `rateStage` on), on v23's fireSeconds; the warning stays v23's
  // (`telegraphMult` 1, a fair reaction time for a 7-year-old; never under `telegraphMin`), now drawn as a red pulsing decal; `lead` of the ship's velocity times the time to impact is added to the
  // aim point (sailing straight on is not always safe, turning is); hits cost `damageMult` of v23. Salvos from `salvoStage`.
- enemyFire:Object.freeze({rateFirst:1.45,rateLast:2.4,rateStage:20,telegraphMult:1,telegraphMin:1.3,lead:.35,damageMult:.75,errorMult:.8,firstShot:.5,
-  salvoStage:6,salvoShots:3,salvoGap:.32,salvoStep:13,salvoEvery:2,baseReloadMult:.5,baseTelegraphMin:1.4,staggerMult:.6}),
+ enemyFire:Object.freeze({rateFirst:1.45,rateLast:1.6,rateStage:20,telegraphMult:1,telegraphMin:1.3,lead:.35,damageMult:.75,errorMult:.8,firstShot:.5,
+  salvoStage:6,salvoShots:3,salvoGap:.32,salvoStep:13,salvoEvery:3,baseReloadMult:.5,baseTelegraphMin:1.4,staggerMult:.6}),
  sub:Object.freeze({cycle:12,surface:3,torpedoes:Object.freeze([3,5]),firstDive:2.5,enemyTorpedoSeconds:2.6,telegraphMin:1.5,fireMult:1.1})
 });
 export function navalV24Config(balance){const b=balance?.v24||{};return {aim:{...NAVAL_V24_DEFAULTS.aim,...(b.aim||{})},enemyFire:{...NAVAL_V24_DEFAULTS.enemyFire,...(b.enemyFire||{})},sub:{...NAVAL_V24_DEFAULTS.sub,...(b.sub||{})}};}

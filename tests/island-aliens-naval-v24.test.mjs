@@ -145,9 +145,9 @@ test('ships v24 flags: aim, enemy fire and submarine are on by default and each 
  assert.equal(old.aimV24,false);assert.equal(old.enemyFireV24,false);assert.equal(old.subV24,false);assert.equal(naval(3,1,'?navalLock=0').aimV24,false,'v24 aim is built on the lock');
 });
 
-test('enemy-fire rules: 1.45x at stage 1 rising to 2.4x from stage 20, salvos laid along the course (across it when still), the aim leads a sailing ship',()=>{
+test('enemy-fire rules: 1.45x at stage 1, with salvos about 2.5x the shells late, salvos laid along the course (across it when still), the aim leads a sailing ship',()=>{
  const c=NAVAL_V24_DEFAULTS.enemyFire;assert.equal(navalFireRate(1,c),c.rateFirst);assert.equal(navalFireRate(20,c),c.rateLast);assert.equal(navalFireRate(30,c),c.rateLast);
- assert.ok(c.rateFirst>=1.3&&c.rateFirst<=1.6,'30-60% more at the start');assert.ok(c.rateLast>=2&&c.rateLast<=2.5,'2-2.5x late');
+ assert.ok(c.rateFirst>=1.3&&c.rateFirst<=1.6,'30-60% more at the start');const late=c.rateLast*(1+(c.salvoShots-1)/c.salvoEvery);assert.ok(late>=2&&late<=2.8,`about 2-2.5x the shells late (${late.toFixed(2)})`);
  for(let s=1;s<30;s++)assert.ok(navalFireRate(s+1,c)>=navalFireRate(s,c));assert.ok(Math.abs(navalFireSeconds(10.5,1,c)-10.5/1.45)<1e-9);
  const still=navalEnemyAim({x:100,z:0,speed:0,heading:0},{seconds:3,error:0,salvo:3,cfg:c}),moving=navalEnemyAim({x:100,z:0,speed:40,heading:0},{seconds:3,error:0,salvo:3,cfg:c});
  assert.equal(still.length,3);assert.ok(still.every(q=>Math.abs(q.x-100)<1e-9),'still: across the hull');assert.ok(Math.abs(still[2].z-still[0].z-2*c.salvoStep)<1e-9);
