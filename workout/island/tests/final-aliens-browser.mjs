@@ -5,23 +5,33 @@
 // Clock: the shell harness installs a fake page.clock; the game loop advances with tick(ms), so every rate
 // below is shots divided by the model's own elapsed time (snapshot.time), not wall-clock.
 // Run: PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js CHROMIUM_PATH=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome node workout/island/tests/final-aliens-browser.mjs
+// 13/11/2026 (v23): two fire buttons are the default. MODE (env): 'v23' (default) holds and taps #shoot, which is now the steady
+// cannon only, so the two v15 burst checks become "no heat, no burst" on that button (the Vulcan's own heat, taps and lock are proven
+// in aliens-v23-browser.mjs); 'v15' runs ?alienFire=v15 (the v22 single button) with every v15 check exactly as before; 'before' is v20.
+// v23 and v15 write to verification/aliens-v23/ so the v15 evidence of 11-12/11 in final-fix-fable/ stays as it was.
 import {verify} from './night-browser.mjs';
 import {mkdir} from 'node:fs/promises';
-const before=process.env.MODE==='before',part=before?'final-fix-fable/aliens-before':'final-fix-fable/aliens';
-const frames=new URL('../verification/final-fix-fable/frames/',import.meta.url);await mkdir(frames,{recursive:true});
+const mode=process.env.MODE==='before'?'before':process.env.MODE==='v15'?'v15':'v23',before=mode==='before',v23=mode==='v23';
+const part=before?'final-fix-fable/aliens-before':v23?'aliens-v23/final-aliens':'aliens-v23/final-aliens-v15';
+const frames=new URL(before?'../verification/final-fix-fable/frames/':'../verification/aliens-v23/frames/',import.meta.url);await mkdir(frames,{recursive:true});
 const BOT_CAP_SECONDS=Number(process.env.FINAL_ALIENS_BOT_CAP||260);
 let failures=[];
 await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tick,snap,start,exit,nav,assert})=>{
  if(before)await page.evaluate(()=>{globalThis.__alienV15=false;globalThis.__alienMove=false;});
+ if(mode==='v15')await page.evaluate(()=>{globalThis.__alienFire='v15';});
  const client=await context.newCDPSession(page),touch=(type,points=[])=>client.send('Input.dispatchTouchEvent',{type,touchPoints:points});
  const center=async sel=>{const b=await page.locator(sel).boundingBox();return {x:b.x+b.width/2,y:b.y+b.height/2};};
- const capture=name=>page.screenshot({path:new URL(`aliens-${before?'before-':''}${name}.jpg`,frames).pathname,type:'jpeg',quality:80});
- const report={mode:before?'v20 (alienV15 off)':'v15',clock:'fake page.clock; rates use model time'};
+ const capture=name=>page.screenshot({path:new URL(before?`aliens-before-${name}.jpg`:`final-${mode}-${name}.jpg`,frames).pathname,type:'jpeg',quality:80});
+ const report={mode:before?'v20 (alienV15 off)':v23?'v23 (two buttons; #shoot = steady cannon)':'v15 (?alienFire=v15)',clock:'fake page.clock; rates use model time'};
  const alive=()=>page.evaluate(()=>Boolean(window.__island.games.current));
  // The ship is a sitting duck while a button is held, so alien fire can end the round before we leave it.
  const leave=async()=>{if(await alive()){await exit();return;}await tick(1500);await nav();};
  const fresh=async()=>{await start('alienDefense');await page.waitForFunction(()=>window.__island.games.current.session.snapshot.artModels?.loaded===6,{timeout:120000}).catch(()=>{});await tick(1500);};
- const rate=(a,b)=>+((b.fired-a.fired)/Math.max(.001,b.time-a.time)).toFixed(2);
+ const rateAll=(a,b)=>+((b.fired-a.fired)/Math.max(.001,b.time-a.time)).toFixed(2);
+ // v23: the steady cannon fires from the first second, so the v11 laser volleys (2-4 lasers after every 5-6 s of firing) now land
+ // inside these 6 s windows (in v15 the forced 2 s silence paused their clock until about 7 s). The cannon checks below therefore
+ // count the cannon's own shots in v23 (lasers reported apart as withLasers); the cap checks (maxed gear, spread) count everything.
+ const cannon=s=>v23?s.fired-(s.lasersFired||0):s.fired,rate=(a,b)=>+((cannon(b)-cannon(a))/Math.max(.001,b.time-a.time)).toFixed(2);
  const pulls=s=>before?s.fired:s.steadyShots; // v15 counts trigger pulls; v20 has only the projectile count
  const fails=[];const check=(ok,text)=>{if(!ok)fails.push(text);console.log((ok?'PASS ':'FAIL ')+text);};
  /** Hold the real fire button (or Space) for totalMs while the other thumb (or the arrow keys) dodges left and
@@ -43,13 +53,14 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
  // 1. Fresh save, stage 1: hold the real fire button for 6 s. v15: burst 1.2 s, cool 2 s, then a steady 4/s.
  if(!botOnly){
  await fresh();
- {const s0=await snap();const [burst,cooling,s4,s6]=await hold(6000,[900,2200,4000,6000],{onMark:async i=>{if(i===0)await capture('1-burst');if(i===1)await capture('2-cooling');if(i===3)await capture('3-steady');}});
+ {const s0=await snap();const [burst,cooling,s4,s6]=await hold(6000,[900,2200,4000,6000],{onMark:async i=>{if(i===0)await capture(v23?'1-hold-0.9s':'1-burst');if(i===1)await capture(v23?'2-hold-2.2s':'2-cooling');if(i===3)await capture(v23?'3-hold-6s':'3-steady');}});
   if(!s6){check(false,'the round ended during the fresh hold');}else{
-  const r={total6s:s6.fired-s0.fired,secs:+(s6.time-s0.time).toFixed(2),overall:rate(s0,s6),burstPhase:rate(s0,burst),coolingFired:cooling.fired-burst.fired,steady:rate(s4,s6),overheats:s6.overheats-s0.overheats,fireMode:s6.fireMode,heatAtBurst:+burst.heat.toFixed(2),capDropped:s6.capDropped};
+  const r={total6s:s6.fired-s0.fired,secs:+(s6.time-s0.time).toFixed(2),overall:rate(s0,s6),withLasers:rateAll(s0,s6),burstPhase:rate(s0,burst),coolingFired:cooling.fired-burst.fired,steady:rate(s4,s6),overheats:s6.overheats-s0.overheats,fireMode:s6.fireMode,heatAtBurst:+burst.heat.toFixed(2),capDropped:s6.capDropped};
   report.holdFresh=r;console.log('hold-fresh',JSON.stringify(r));
   check(r.overall<=6.5,`fresh hold 6 s: ${r.overall} shots/s overall (target <= 6.5; v14 gave about 10)`);
   check(r.steady>=4.5&&r.steady<=6.5,`steady phase after the burst: ${r.steady} shots/s (target 5-6)`);
-  check(r.overheats===1,`one short burst then cool-down (overheats ${r.overheats})`);}
+  if(v23){check(r.overheats===0,`v23 regular button: no heat, no cool-down (overheats ${r.overheats})`);check(r.burstPhase<=r.steady*1.3,`v23 regular button: no burst, the first 0.9 s (${r.burstPhase}/s) fire like the steady phase (${r.steady}/s)`);}
+  else check(r.overheats===1,`one short burst then cool-down (overheats ${r.overheats})`);}
   await tick(2500);
  }
  // 1b. Ship movement through the real stick (alienMove): top speed, time to 90% of it, lean angle, glide after release.
@@ -65,37 +76,38 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   await tick(500);}
  // 2. Keyboard (Space) uses the same gate.
  if(await alive()){const s0=await snap();const [s1]=await hold(6000,[6000],{keyboard:true});
-  if(s1){const r={overall:rate(s0,s1),fired:s1.fired-s0.fired};report.holdKeyboard=r;console.log('hold-keyboard',JSON.stringify(r));check(r.overall<=6.5,`keyboard hold 6 s: ${r.overall} shots/s (target <= 6.5)`);}await tick(2500);}
+  if(s1){const r={overall:rate(s0,s1),withLasers:rateAll(s0,s1),fired:s1.fired-s0.fired};report.holdKeyboard=r;console.log('hold-keyboard',JSON.stringify(r));check(r.overall<=6.5,`keyboard hold 6 s: ${r.overall} shots/s (target <= 6.5)`);}await tick(2500);}
  // 3. Rapid-fire bonus (a time bonus) active: the floor still holds. fired counts the v11 laser volleys too
  //    (2-4 lasers every 5-6 s); the trigger pulls are what the rapid floor bounds.
  if(await alive()){await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;m.pickups.push({kind:2,x:m.player.x,y:m.player.y,vy:0});});await tick(120);
   const [s0,s1]=await hold(5400,[3400,5400]);
-  if(s1){const r={steady:rate(s0,s1),triggerPulls:+((pulls(s1)-pulls(s0))/(s1.time-s0.time)).toFixed(2),powerup:s1.powerup,fireMode:s1.fireMode};report.rapidBonus=r;console.log('rapid-bonus',JSON.stringify(r));
+  if(s1){const r={steady:rateAll(s0,s1),triggerPulls:+((pulls(s1)-pulls(s0))/(s1.time-s0.time)).toFixed(2),powerup:s1.powerup,fireMode:s1.fireMode};report.rapidBonus=r;console.log('rapid-bonus',JSON.stringify(r));
    check(r.triggerPulls<=8,`rapid bonus steady phase: ${r.triggerPulls} trigger pulls/s, ${r.steady} projectiles/s incl. lasers (floor 7.7/s; v14 gave 16)`);}await tick(1500);}
  await leave();
  // 3b. Taps instead of a hold (12/11/2026, independent QA): a child hammering the real button gets one short burst, the cool-down and the
  //     steady cannon, never an endless Vulcan. Fresh round so the gauge starts cold; three tap speeds through CDP touch on #shoot.
  for(const [down,up] of [[40,60],[64,96],[112,192]]){await fresh();const fire=await center('#shoot');const s0=await snap();let mark=null,elapsed=0;
   while(elapsed<6000&&await alive()){await touch('touchStart',[{...fire,id:2}]);await tick(down);await touch('touchEnd');await tick(up);elapsed+=down+up;if(!mark&&elapsed>=1500)mark=await snap();}
-  const s6=await snap();const r={pattern:`${down}/${up} ms`,overall:rate(s0,s6),after1500:mark?rate(mark,s6):null,overheats:s6.overheats-s0.overheats,fired:s6.fired-s0.fired};
+  const s6=await snap();const r={pattern:`${down}/${up} ms`,overall:rate(s0,s6),withLasers:rateAll(s0,s6),after1500:mark?rate(mark,s6):null,overheats:s6.overheats-s0.overheats,fired:s6.fired-s0.fired};
   (report.taps||(report.taps=[])).push(r);console.log('taps',JSON.stringify(r));
   check(r.overall<=6.5,`taps ${r.pattern} for 6 s: ${r.overall} shots/s overall (target <= 6.5; the first v15 gate and v20 gave 6.1-9.7)`);
   check(r.after1500!==null&&r.after1500<=6.5,`taps ${r.pattern} after the first 1.5 s: ${r.after1500} shots/s`);
-  check(before||r.overheats>=1,`taps ${r.pattern} add up to a burst and a cool-down (overheats ${r.overheats})`);
+  if(v23)check(r.overheats===0,`v23 taps ${r.pattern} on the regular button: no heat at all (Vulcan taps: aliens-v23-browser.mjs)`);
+  else check(before||r.overheats>=1,`taps ${r.pattern} add up to a burst and a cool-down (overheats ${r.overheats})`);
   if(down===40)await capture('3b-taps-10hz');await leave();}
  // 4. Maxed gear (equipment, permanent upgrades, hangar rank 20, power level 3): the cap holds.
  await page.evaluate(()=>{const {engine:e}=window.__island;Object.assign(e.state.minigameEquipment.alienDefense,{damage:3,rate:3,shield:3,weapon:2});for(const k of Object.keys(e.state.alienUpgrades))e.state.alienUpgrades[k]=3;e.state.hangar.rapid=20;e.state.minigameLevels.alienDefense=3;e.state.minigameWins.alienDefense=10;});
  await fresh();
  report.gear=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;return {equipment:m.equipment,upgrades:m.upgrades,hangar:m.snapshot().hangar.rapid};});
  {const s0=await snap();const [s3,s6]=await hold(6000,[3300,6000]);
-  if(s6){const r={overall:rate(s0,s6),steadyRounds:+((pulls(s6)-pulls(s3))/(s6.time-s3.time)).toFixed(2),projectilesSteady:rate(s3,s6),fired:s6.fired-s0.fired,wings:s6.wings.filter(w=>w.active).length,capDropped:s6.capDropped};report.holdMaxed=r;console.log('hold-maxed',JSON.stringify(r));
+  if(s6){const r={overall:rateAll(s0,s6),steadyRounds:+((pulls(s6)-pulls(s3))/(s6.time-s3.time)).toFixed(2),projectilesSteady:rateAll(s3,s6),fired:s6.fired-s0.fired,wings:s6.wings.filter(w=>w.active).length,capDropped:s6.capDropped};report.holdMaxed=r;console.log('hold-maxed',JSON.stringify(r));
    check(r.overall<=15,`maxed gear hold 6 s: ${r.overall} projectiles/s (hard cap 15/s)`);
    check(r.steadyRounds<=6.3,`maxed gear trigger pulls in the steady phase: ${r.steadyRounds}/s (floor 6/s; v14 gave about 13)`);}
   await tick(1500);
   // spread bonus on top: the spawn-point cap bounds projectiles per second whatever the mode.
   if(await alive()){await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;m.pickups.push({kind:0,x:m.player.x,y:m.player.y,vy:0});m.pickups.push({kind:4,x:m.player.x,y:m.player.y,vy:0});});await tick(120);
    const a=await snap();const [b]=await hold(4000,[4000]);
-   if(b){const sp={projectilesPerSec:rate(a,b),spread:b.spreadTime>0||a.spreadTime>0,wings:b.wings.filter(w=>w.active).length,capDropped:b.capDropped-a.capDropped};report.spreadMaxed=sp;console.log('spread-maxed',JSON.stringify(sp));
+   if(b){const sp={projectilesPerSec:rateAll(a,b),spread:b.spreadTime>0||a.spreadTime>0,wings:b.wings.filter(w=>w.active).length,capDropped:b.capDropped-a.capDropped};report.spreadMaxed=sp;console.log('spread-maxed',JSON.stringify(sp));
     check(sp.projectilesPerSec<=16.5,`spread + wings + maxed gear: ${sp.projectilesPerSec} projectiles/s (hard cap 15/s plus the bucket)`);}}
  }
  await leave();
