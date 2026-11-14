@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "date": "2026-11-14",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "browser": "Chromium 151.0.7922.173",
+  "logicalAssets": 17,
+  "svgMasters": 17,
+  "rgbaPngExports": 34,
+  "assetFilesChecked": 51,
+  "maxAssetBytes": 54891,
+  "checks": [
+    "dimensions",
+    "RGBA alpha range and transparent margins",
+    "SHA-256",
+    "editable SVG paths without raster embeds or remote links",
+    "fixed reaction anchors",
+    "three distinct reaction frames",
+    "every file under 500000 bytes",
+    "only new paths in requested directory"
+  ],
+  "layouts": [
+    {
+      "width": 844,
+      "height": 390,
+      "deviceScaleFactor": 1,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "deviceScaleFactor": 2,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    },
+    {
+      "width": 740,
+      "height": 360,
+      "deviceScaleFactor": 1,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "deviceScaleFactor": 1,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "deviceScaleFactor": 1,
+      "horizontalOverflow": false,
+      "allControlsVisible": true,
+      "visiblePowerFrameInsideViewport": true
+    }
+  ],
+  "interactions": [
+    "distance 4m → green",
+    "distance 24m → green",
+    "distance 25m → yellow",
+    "distance 40m → yellow",
+    "distance 41m → red",
+    "distance 60m → red",
+    "power 0% → matching clip and readout",
+    "power 65% → matching clip and readout",
+    "power 100% → matching clip and readout",
+    "pointer drag moves trajectory, endpoint and reticle together",
+    "native touch tap keeps reticle and predicted endpoint aligned",
+    "surprise sequence 01 → 02 → 03 → restore",
+    "hit-spark plays once and disappears",
+    "hit-ring plays once and disappears",
+    "hit-shards plays once and disappears",
+    "miss sand puff plays and disappears",
+    "51 download links resolve; dark/light/checker gallery backgrounds",
+    "keyboard slider, Enter and Escape",
+    "reduced motion: static confirmation and one held reaction frame"
+  ],
+  "screenshots": [
+    {
+      "path": "verification/aim-green-844x390.webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 51578
+    },
+    {
+      "path": "verification/aim-yellow-844x390.webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 52044
+    },
+    {
+      "path": "verification/aim-red-844x390.webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 51092
+    },
+    {
+      "path": "verification/gallery-844x390.webp",
+      "width": 844,
+      "height": 390,
+      "bytes": 22242
+    },
+    {
+      "path": "verification/aim-390x844.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 32844
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "httpErrors": [],
+  "limits": [
+    "Browser viewport checks use Chromium emulation, not a physical phone.",
+    "Prediction curve and 40m effective range are illustrative; game integration is outside this pack."
+  ]
+}

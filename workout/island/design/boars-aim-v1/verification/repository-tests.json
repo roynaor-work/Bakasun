@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "date": "2026-11-14",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "command": "npm test",
+  "node": "v24.19.0",
+  "exitCode": 0,
+  "summary": {
+    "tests": 4082,
+    "suites": 0,
+    "pass": 4018,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 278604.766416
+  },
+  "browser": "System Chromium 151.0.7922.173 through the existing ISLAND_PLAYWRIGHT hook",
+  "reproduce": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/boars-aim-v1/tools/playwright-system.mjs\" npm test",
+  "environmentRetry": {
+    "reason": "Playwright bundled Chromium was absent. The pre-existing workout-royiki browser test failed to launch and left its HTTP server open.",
+    "initialRun": {
+      "pass": 4017,
+      "fail": 1,
+      "skipped": 64
+    },
+    "resolution": "Use the installed system Chromium; isolated workout-royiki rerun passed 5/5, then the entire suite passed. No existing repository file was edited."
+  }
+}

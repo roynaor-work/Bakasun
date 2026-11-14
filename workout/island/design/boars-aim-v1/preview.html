@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'">
+  <title>אי החזירים · כוונת v1</title>
+  <link rel="icon" href="svg/reticle-green.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main class="preview" id="preview">
+    <div class="scene" id="scene" role="group" aria-label="אזור כוונון: נגיעה או גרירה משנה את נקודת הפגיעה">
+      <div class="scene-shade"></div>
+      <img class="boar" id="boar" src="svg/boar-surprise-01.svg" alt="חזיר רובוטי עם שריון כחול־ירוק">
+      <svg id="trajectory" class="trajectory" viewBox="0 0 844 390" preserveAspectRatio="none" aria-hidden="true">
+        <path id="path-shadow" class="path-shadow"/>
+        <path id="path-dots" class="path-dots"/>
+      </svg>
+      <img class="landing" id="landing" src="svg/predicted-impact.svg" alt="">
+      <img class="reticle" id="reticle" src="svg/reticle-green.svg" alt="">
+      <img class="effect" id="effect" src="svg/hit-spark.svg" alt="" hidden>
+      <div class="target-label" id="target-label"><span id="range-symbol" aria-hidden="true">●</span><b id="range-text">בטווח</b><span class="label-divider"></span><span id="distance-value">18 מ׳</span></div>
+      <div class="origin" aria-hidden="true"><i></i><span>נקודת יציאה</span></div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">⌖</span><div><strong>אי החזירים</strong><span>לכוון. לדייק. לפגוע.</span></div></div>
+      <nav class="tabs" aria-label="תצוגת הערכה">
+        <button id="aim-tab" type="button" aria-pressed="true">כוונון</button>
+        <button id="assets-tab" type="button" aria-pressed="false">הנכסים <small>17</small></button>
+      </nav>
+      <span class="edition"><i></i> ערכת קליעה <b dir="ltr">V.01</b></span>
+    </header>
+
+    <aside class="power-readout" aria-label="מד כוח">
+      <div class="power-number"><span id="power-value">65</span><small>%</small></div>
+      <div class="meter-stack" id="meter-stack" aria-hidden="true">
+        <img src="svg/power-frame.svg" alt="">
+        <img src="svg/power-fill.svg" id="meter-fill" alt="">
+        <img src="svg/power-thumb.svg" id="meter-thumb" alt="">
+      </div>
+      <b>כוח</b>
+    </aside>
+
+    <div class="scene-note"><span class="note-line"></span>מסלול חזוי<span>נוגעים בחוף כדי לכוון</span></div>
+    <output id="feedback" class="feedback" aria-live="polite" aria-atomic="true">כוונו אל החזיר ונסו פגיעה</output>
+
+    <footer class="controls" id="controls">
+      <div class="slider-control">
+        <label for="distance">מרחק <output id="distance-output" for="distance">18 מ׳</output></label>
+        <input id="distance" type="range" min="4" max="60" step="1" value="18" aria-label="מרחק במטרים">
+      </div>
+      <div class="slider-control power-control">
+        <label for="power">עוצמה <output id="power-output" for="power">65%</output></label>
+        <input id="power" type="range" min="0" max="100" step="1" value="65" aria-label="עוצמת הירי באחוזים">
+      </div>
+      <button type="button" id="variation" class="secondary" aria-label="בחירת וריאציית פגיעה">ניצוץ <small>01 / 03</small></button>
+      <button type="button" id="surprise" class="secondary">הפתעה <span aria-hidden="true">!</span></button>
+      <button type="button" id="miss" class="secondary">החטאה</button>
+      <button type="button" id="fire" class="fire">פגיעה <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </footer>
+
+    <section class="gallery" id="gallery" aria-labelledby="gallery-title" hidden>
+      <div class="gallery-heading"><div><p>אותה שפה, בכל שכבה</p><h1 id="gallery-title">ערכת הכוונון</h1></div><p>17 נכסים · SVG ו־PNG שקוף<br><span dir="ltr">256 × 256 / 512 × 512</span></p></div>
+      <div class="gallery-tools" aria-label="רקע לבדיקת שקיפות"><span>רקע</span><button data-bg="dark" aria-pressed="true">כהה</button><button data-bg="light" aria-pressed="false">בהיר</button><button data-bg="checker" aria-pressed="false">שקיפות</button></div>
+      <div id="asset-grid" class="asset-grid" data-bg="dark"></div>
+      <p class="gallery-foot">תצוגת עיצוב נפרדת. המרחק מחושב כאן ביחס לטווח הדגמה של 40 מ׳; את החיזוי והטווח בפועל מספק המשחק בזמן החיבור.</p>
+    </section>
+    <noscript><div class="no-script">הפעילו JavaScript לתצוגה האינטראקטיבית. כל הקבצים זמינים בתיקיות svg ו־png.</div></noscript>
+  </main>
+</body>
+</html>

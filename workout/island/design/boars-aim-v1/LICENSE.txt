@@ -1,0 +1,31 @@
+Boars Aim v1 — 2026
+SPDX-License-Identifier: CC0-1.0
+
+To the extent possible under law, the authors waive all copyright and related
+or neighboring rights in the original vector artwork, raster exports, preview
+code, build tools, and documentation in this directory under the Creative
+Commons CC0 1.0 Universal Public Domain Dedication.
+
+You may copy, modify, distribute and use these works, including commercially,
+without permission or attribution. The works are provided without warranty.
+No trademark rights are granted. This dedication applies only to rights the
+authors can waive; it does not assert that AI-generated material is copyrightable.
+
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Provenance:
+- Original vector construction and effects for Bakasun / Island.
+- Existing boarDefense.svg from ../ui-kit-v2/intro/ is the silhouette reference;
+  the original kit is CC0-1.0 (see ../ui-kit-v2/LICENSE.txt).
+- Steel, brass, skin and snout colors follow PAL.scout in the existing game's
+  minigames/boar-island/game.js. No game code or third-party libraries are copied.
+- OpenAI ImageGen supplied a three-frame art-direction reference. The shipped
+  SVGs contain editable vector paths; PNGs are rendered from those same SVGs.
+  No third-party stock art, embedded raster artwork or external fonts are used.
+- preview-scene.webp is a preview-only capture of the existing original game
+  scene, rendered locally. It is not a runtime overlay or a transparent asset.
+  The original game scene's ownership remains with its existing rights holders.
+- verification/*.webp are preview evidence, not transparent runtime sprites.
+
+Pillow, Playwright and Chromium are build/verification tools only. They are
+not redistributed. The preview has no runtime dependencies or remote requests.
