@@ -1,0 +1,322 @@
+{
+ "note": "Each pack off alone does not run faster than the defaults beyond the spread between two runs of the same variant; SwiftShader rasterises on the CPU of a shared container, so this ranks nothing for a phone GPU.",
+ "summary": {
+  "defaults": {
+   "runs": 2,
+   "fps": 1.52,
+   "frameP50": [
+    716.7,
+    633.3
+   ],
+   "glMean": 10.4,
+   "triangles": [
+    126599,
+    125877
+   ],
+   "drawCalls": [
+    79,
+    78
+   ]
+  },
+  "?soccerPitchAssets=0": {
+   "runs": 2,
+   "fps": 1.35,
+   "frameP50": [
+    716.7,
+    750
+   ],
+   "glMean": 7.3,
+   "triangles": [
+    126667,
+    125448
+   ],
+   "drawCalls": [
+    80,
+    79
+   ]
+  },
+  "?soccerFxV1=0": {
+   "runs": 2,
+   "fps": 1.35,
+   "frameP50": [
+    816.6,
+    583.4
+   ],
+   "glMean": 8.5,
+   "triangles": [
+    126684,
+    125837
+   ],
+   "drawCalls": [
+    81,
+    79
+   ]
+  },
+  "?soccerCrowd3d=0": {
+   "runs": 2,
+   "fps": 1.32,
+   "frameP50": [
+    816.7,
+    633.3
+   ],
+   "glMean": 8.0,
+   "triangles": [
+    122075,
+    122301
+   ],
+   "drawCalls": [
+    71,
+    75
+   ]
+  },
+  "?athleteBodyV2=0": {
+   "runs": 2,
+   "fps": 1.63,
+   "frameP50": [
+    549.9,
+    633.4
+   ],
+   "glMean": 12.7,
+   "triangles": [
+    126695,
+    126680
+   ],
+   "drawCalls": [
+    80,
+    81
+   ]
+  }
+ },
+ "runs": [
+  {
+   "run": 1,
+   "variant": "defaults",
+   "fps": 1.4,
+   "frames": 43,
+   "frameP50": 716.7,
+   "frameP95": 1566.7,
+   "glMean": 14.65,
+   "glP95": 39.7,
+   "tickMean": 6.32,
+   "animMean": 6.88,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 78,
+    "ms": 2561,
+    "draw": 1818
+   },
+   "assetReadyMs": 7618,
+   "triangles": 126599,
+   "drawCalls": 79,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 2,
+   "variant": "?soccerPitchAssets=0",
+   "fps": 1.4,
+   "frames": 44,
+   "frameP50": 716.7,
+   "frameP95": 1400,
+   "glMean": 6.19,
+   "glP95": 13.2,
+   "tickMean": 3.4,
+   "animMean": 3.33,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 76,
+    "ms": 3561,
+    "draw": 1204
+   },
+   "assetReadyMs": 8591,
+   "triangles": 126667,
+   "drawCalls": 80,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 3,
+   "variant": "?soccerFxV1=0",
+   "fps": 1.3,
+   "frames": 38,
+   "frameP50": 816.6,
+   "frameP95": 1516.6,
+   "glMean": 11.38,
+   "glP95": 49.3,
+   "tickMean": 1.94,
+   "animMean": 10.83,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 72,
+    "ms": 2380,
+    "draw": 1298
+   },
+   "assetReadyMs": 8317,
+   "triangles": 126684,
+   "drawCalls": 81,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 4,
+   "variant": "?soccerCrowd3d=0",
+   "fps": 1.1,
+   "frames": 35,
+   "frameP50": 816.7,
+   "frameP95": 1749.9,
+   "glMean": 9.47,
+   "glP95": 34.5,
+   "tickMean": 12.2,
+   "animMean": 8.25,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 74,
+    "ms": 2208,
+    "draw": 697
+   },
+   "assetReadyMs": 7386,
+   "triangles": 122075,
+   "drawCalls": 71,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 5,
+   "variant": "?athleteBodyV2=0",
+   "fps": 1.7,
+   "frames": 52,
+   "frameP50": 549.9,
+   "frameP95": 1266.6,
+   "glMean": 15.08,
+   "glP95": 39.7,
+   "tickMean": 3.55,
+   "animMean": 5.03,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 78,
+    "ms": 2180,
+    "draw": 1832
+   },
+   "assetReadyMs": 6530,
+   "triangles": 126695,
+   "drawCalls": 80,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 6,
+   "variant": "?athleteBodyV2=0",
+   "fps": 1.5,
+   "frames": 46,
+   "frameP50": 633.4,
+   "frameP95": 1383.3,
+   "glMean": 9.98,
+   "glP95": 14.7,
+   "tickMean": 1.86,
+   "animMean": 4.84,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 78,
+    "ms": 2544,
+    "draw": 1701
+   },
+   "assetReadyMs": 5750,
+   "triangles": 126680,
+   "drawCalls": 81,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 7,
+   "variant": "?soccerCrowd3d=0",
+   "fps": 1.4,
+   "frames": 44,
+   "frameP50": 633.3,
+   "frameP95": 1466.6,
+   "glMean": 6.77,
+   "glP95": 10.9,
+   "tickMean": 7.27,
+   "animMean": 5.57,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 74,
+    "ms": 2191,
+    "draw": 1145
+   },
+   "assetReadyMs": 6923,
+   "triangles": 122301,
+   "drawCalls": 75,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 8,
+   "variant": "?soccerFxV1=0",
+   "fps": 1.4,
+   "frames": 43,
+   "frameP50": 583.4,
+   "frameP95": 1200,
+   "glMean": 5.89,
+   "glP95": 10.3,
+   "tickMean": 10.34,
+   "animMean": 3.38,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 72,
+    "ms": 2459,
+    "draw": 1263
+   },
+   "assetReadyMs": 7673,
+   "triangles": 125837,
+   "drawCalls": 79,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 9,
+   "variant": "?soccerPitchAssets=0",
+   "fps": 1.2,
+   "frames": 37,
+   "frameP50": 750,
+   "frameP95": 1583.2,
+   "glMean": 8.61,
+   "glP95": 35.5,
+   "tickMean": 4.46,
+   "animMean": 2.88,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 76,
+    "ms": 1840,
+    "draw": 727
+   },
+   "assetReadyMs": 5988,
+   "triangles": 125448,
+   "drawCalls": 79,
+   "quality": 0,
+   "qualityChanges": []
+  },
+  {
+   "run": 10,
+   "variant": "defaults",
+   "fps": 1.6,
+   "frames": 48,
+   "frameP50": 633.3,
+   "frameP95": 1383.3,
+   "glMean": 6.61,
+   "glP95": 16,
+   "tickMean": 9.52,
+   "animMean": 3.43,
+   "programsCompiled": 0,
+   "warmup": {
+    "programs": 78,
+    "ms": 2928,
+    "draw": 2288
+   },
+   "assetReadyMs": 7094,
+   "triangles": 125877,
+   "drawCalls": 78,
+   "quality": 0,
+   "qualityChanges": []
+  }
+ ]
+}
