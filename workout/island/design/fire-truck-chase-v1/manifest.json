@@ -1,0 +1,1617 @@
+{
+  "$schema": "./manifest.schema.json",
+  "schema_version": "1.0.0",
+  "id": "fire-truck-chase-v1",
+  "version": 1,
+  "title": "מרדף הכבאית — נסיעה, כניסה וכיבוי",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/fire-truck-chase-v1",
+  "scope": "Asset/design handoff only; no production game files changed.",
+  "coordinates": {
+    "units": "metres",
+    "up": "+Y",
+    "vehicle_forward": "+Z",
+    "wheel_axle": "+X",
+    "ground_y": 0,
+    "handedness": "right"
+  },
+  "style": {
+    "reference": "Existing island fire-v7 CC0 vehicle geometry and palette",
+    "palette_srgb": {
+      "truck": "#B82535",
+      "truck_shadow": "#791E2D",
+      "cream": "#E9E3CC",
+      "steel": "#9DAEAE",
+      "glass": "#294D61",
+      "rubber": "#202B30"
+    },
+    "brands": false,
+    "lettering_on_models": false
+  },
+  "preview": {
+    "entry": "preview.html",
+    "viewport_px": [
+      844,
+      390
+    ],
+    "serve": "HTTP from this folder or the repository root; no build or CDN",
+    "sequence": [
+      "chase",
+      "arrival",
+      "entry",
+      "extinguish",
+      "success_or_timeout"
+    ],
+    "production_integration": false
+  },
+  "runtime": {
+    "renderer": "three.js r160",
+    "vendor": [
+      {
+        "file": "vendor/BufferGeometryUtils.js",
+        "license": "MIT",
+        "bytes": 31918,
+        "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3"
+      },
+      {
+        "file": "vendor/GLTFLoader.js",
+        "license": "MIT",
+        "bytes": 108527,
+        "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+      },
+      {
+        "file": "vendor/LICENSE.three",
+        "license": "MIT",
+        "bytes": 1081,
+        "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+      },
+      {
+        "file": "vendor/three.module.js",
+        "license": "MIT",
+        "bytes": 670681,
+        "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+      }
+    ],
+    "network": "same-origin local files only",
+    "external_media": false
+  },
+  "integration": {
+    "truck": "Animate named wheel/ladder/nozzle pivots or play the GLB clips. Attach under a gameplay transform parent so clips cannot overwrite world navigation.",
+    "civilian_yield": "Play YieldRight once, clamp at the shoulder. Mirror the gameplay parent for the opposite shoulder only when the lane direction requires it; leave model scale positive.",
+    "fire_states": "Select exactly one of FlamesLow, FlamesMedium, FlamesHigh by group scale/visibility. Set all hidden after extinguishing. State groups are alternatives, not LODs.",
+    "interior": "Hide CutawayFront and Roof for entry view; use the doorway and interior anchors in the environment authoring contract.",
+    "audio": {
+      "decode": "Load each WAV into an AudioBuffer once; use source.loop=true, loopStart=0, loopEnd=duration for looping files.",
+      "ramps": "Fade each source gain over 60-120 ms at start/stop; do not fade individual loop iterations.",
+      "rpm_layers": "Nominal RPMs are 640/1280/1920; interpolate adjacent layer gains with cos(pi*u/2) and sin(pi*u/2). Never play all at unity.",
+      "mix": "All files are -16 LUFS individually. Start with engine gain 0.30, siren 0.26, hose 0.38 and cue 0.45, then set game bus headroom/limiting. Suspend engine/siren on arrival, ramp hose with the valve cue."
+    },
+    "clock": "One mission clock continues across arrival and entry. Pause freezes simulation and suspends audio. Production logic is intentionally separate from this preview."
+  },
+  "authoring_contracts": {
+    "truck": {
+      "asset": "models/fire-truck.glb",
+      "triangles": 2556,
+      "bytes": 165312,
+      "boundsMeters": [
+        [
+          -1.5099999904632568,
+          0.0,
+          -3.369999885559082
+        ],
+        [
+          1.5500000715255737,
+          2.880000352859497,
+          3.4200000762939453
+        ]
+      ],
+      "dimensionsMeters": [
+        3.06,
+        2.88,
+        6.79
+      ],
+      "wheelRadiusMeters": 0.52,
+      "up": "+Y",
+      "forward": "+Z",
+      "groundY": 0,
+      "animationSeconds": {
+        "WheelRoll": 1,
+        "LadderDeploy": 3,
+        "HoseAim": 2,
+        "BeaconFlash": 1
+      },
+      "provenance": "CC0 original geometry, adapted from repository fire-v7 CC0 fictional rescue vehicle style/palette",
+      "generator": "Blender 4.3.2; scripts/generate_truck.py",
+      "restPose": "road-ready, ladder folded, all wheels grounded",
+      "hierarchy": {
+        "FireTruckRoot": [
+          "Body",
+          "WheelFrontLeft",
+          "WheelFrontRight",
+          "WheelRearLeft",
+          "WheelRearRight",
+          "LadderYaw",
+          "HoseReel",
+          "HoseNozzlePivot",
+          "BeaconLeft",
+          "BeaconRight"
+        ],
+        "LadderYaw": [
+          "LadderPitch"
+        ],
+        "LadderPitch": [
+          "LadderBase",
+          "LadderFoldPivot"
+        ],
+        "LadderFoldPivot": [
+          "LadderExtension"
+        ],
+        "LadderExtension": [
+          "LadderUpper"
+        ]
+      },
+      "wheelPivots": {
+        "names": [
+          "WheelFrontLeft",
+          "WheelFrontRight",
+          "WheelRearLeft",
+          "WheelRearRight"
+        ],
+        "radiusMeters": 0.52,
+        "localRollAxis": "X",
+        "forwardRollRadiansPerMeter": 1.923076923076923,
+        "frontAxleZ": 2.1,
+        "rearAxleZ": -1.98,
+        "centerAbsX": 1.12,
+        "centerY": 0.52
+      },
+      "ladderPivots": {
+        "LadderYaw": {
+          "axis": "Y",
+          "restRadians": 0,
+          "clipFinalRadians": 0.16,
+          "suggestedLimitsRadians": [
+            -0.6,
+            0.6
+          ]
+        },
+        "LadderPitch": {
+          "axis": "X",
+          "restRadians": 0,
+          "clipFinalRadians": -0.8,
+          "suggestedLimitsRadians": [
+            -1.05,
+            0
+          ]
+        },
+        "LadderFoldPivot": {
+          "axis": "X",
+          "restRadians": 3.141592653589793,
+          "clipFinalRadians": 0,
+          "limitsRadians": [
+            0,
+            3.141592653589793
+          ]
+        },
+        "LadderExtension": {
+          "axis": "local Z",
+          "restMeters": 0,
+          "clipFinalMeters": 0.5,
+          "limitsMeters": [
+            0,
+            0.5
+          ]
+        }
+      },
+      "animationPlayback": {
+        "WheelRoll": {
+          "loop": true,
+          "durationSeconds": 1,
+          "use": "Optional constant-speed loop; use wheel pivots and distance/.52 for road-matched rolling"
+        },
+        "LadderDeploy": {
+          "loop": false,
+          "clampWhenFinished": true,
+          "durationSeconds": 3,
+          "reverseToStow": true
+        },
+        "HoseAim": {
+          "loop": true,
+          "durationSeconds": 2,
+          "use": "Optional display sweep; direct HoseNozzlePivot aiming may replace it"
+        },
+        "BeaconFlash": {
+          "loop": true,
+          "durationSeconds": 1,
+          "use": "LINEAR scale pulses; restore both nodes to scale1 when driving separate cloned emissive materials",
+          "reducedMotion": "Skip flash clip; keep both lamps steadily emissive"
+        }
+      },
+      "emissiveNodes": [
+        "BeaconLeft",
+        "BeaconRight"
+      ],
+      "beaconMaterialNote": "Clone each node material before independent emissiveIntensity changes; red tail lamps share the source material.",
+      "groundingNote": "Tyres are 12-sided regular cylinders with an exact bottom vertex at Y0; radius .52."
+    },
+    "environment": {
+      "generator": "scripts/generate_environment.py",
+      "source": "Original CC0 geometry informed by fire-v7 original asset palette; no external models.",
+      "axes": {
+        "up": "+Y",
+        "vehicleForward": "+Z",
+        "houseFront": "-Z",
+        "units": "metres"
+      },
+      "roads": {
+        "tileSize": [
+          6,
+          6
+        ],
+        "surfaceY": 0,
+        "carriagewayWidth": 5.2,
+        "laneWidth": 2.6,
+        "laneCenters": [
+          -1.3,
+          1.3
+        ],
+        "incomingDirection": [
+          0,
+          0,
+          1
+        ],
+        "curveRadius": 3,
+        "curveAngleDegrees": 90,
+        "centerlineFormula": {
+          "right": "[3-3*cos(t),0,-3+3*sin(t)], t=0..PI/2",
+          "left": "[-3+3*cos(t),0,-3+3*sin(t)], t=0..PI/2"
+        },
+        "assets": {
+          "road-straight.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                0,
+                0,
+                3
+              ]
+            },
+            "centerlineLength": 6
+          },
+          "road-right.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                3,
+                0,
+                0
+              ]
+            },
+            "centerlineLength": 4.71238898038469
+          },
+          "road-left.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                -3,
+                0,
+                0
+              ]
+            },
+            "centerlineLength": 4.71238898038469
+          },
+          "road-cross.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                0,
+                0,
+                3
+              ],
+              "left": [
+                -3,
+                0,
+                0
+              ],
+              "right": [
+                3,
+                0,
+                0
+              ]
+            },
+            "centerlineLength": 6
+          },
+          "road-bridge.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                0,
+                0,
+                3
+              ]
+            },
+            "centerlineLength": 6
+          },
+          "road-tunnel.glb": {
+            "ports": {
+              "in": [
+                0,
+                0,
+                -3
+              ],
+              "out": [
+                0,
+                0,
+                3
+              ]
+            },
+            "centerlineLength": 6
+          }
+        },
+        "tunnel": {
+          "clearanceY": 3.88,
+          "cutawayHide": [
+            "TunnelRoof"
+          ],
+          "portalNodes": [
+            "PortalFront",
+            "PortalBack"
+          ]
+        },
+        "bridge": {
+          "surfaceY": 0,
+          "supportBottomY": -1.9
+        }
+      },
+      "civilians": {
+        "root": "CivilianRoot",
+        "wheelNodes": [
+          "WheelFrontLeft",
+          "WheelFrontRight",
+          "WheelRearLeft",
+          "WheelRearRight"
+        ],
+        "wheelAxis": "+X",
+        "yieldClip": "YieldRight",
+        "yieldDurationSeconds": 2,
+        "yieldDistance": 1.1,
+        "peakYawRadians": 0.12,
+        "wheelRadius": {
+          "hatch": 0.31,
+          "sedan": 0.31,
+          "compact": 0.31,
+          "van": 0.34
+        },
+        "finish": "ClampWhenFinished/LoopOnce, reverse to return"
+      },
+      "house": {
+        "root": "BurningHouseRoot",
+        "front": "-Z",
+        "doorAnchor": {
+          "node": "Doorway",
+          "position": [
+            0,
+            0.16,
+            -3.15
+          ]
+        },
+        "interiorAnchor": {
+          "node": "InteriorAnchor",
+          "position": [
+            0,
+            0.16,
+            0
+          ]
+        },
+        "truckStopAnchor": {
+          "node": "TruckStop",
+          "position": [
+            0,
+            0,
+            -7.4
+          ]
+        },
+        "cutawayHide": [
+          "CutawayFront",
+          "Roof"
+        ],
+        "interiorHidePrefix": "ExteriorTarget",
+        "flameStateNodes": [
+          "FlamesLow",
+          "FlamesMedium",
+          "FlamesHigh"
+        ],
+        "defaultState": "high",
+        "selection": "Set chosen flame-state scale to 1 and remaining scales to 0.",
+        "targets": [
+          {
+            "node": "FireTarget1",
+            "position": [
+              -1.8,
+              0.2,
+              0.8
+            ],
+            "stateNodes": [
+              "Target1Low",
+              "Target1Medium",
+              "Target1High"
+            ]
+          },
+          {
+            "node": "FireTarget2",
+            "position": [
+              1.7,
+              0.2,
+              1.2
+            ],
+            "stateNodes": [
+              "Target2Low",
+              "Target2Medium",
+              "Target2High"
+            ]
+          },
+          {
+            "node": "FireTarget3",
+            "position": [
+              0,
+              0.2,
+              2.1
+            ],
+            "stateNodes": [
+              "Target3Low",
+              "Target3Medium",
+              "Target3High"
+            ]
+          }
+        ],
+        "flameDesign": "Each target contains interior flames plus an exterior window or roof tongue; hide corresponding target groups in all three states on suppression."
+      }
+    }
+  },
+  "assets": [
+    {
+      "id": "car-compact",
+      "type": "vehicle",
+      "file": "models/car-compact.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 39924,
+      "sha256": "e4a4e4cedc466e3fbc3d0d4192d65cbf9cff6dbe210f517cd13b03a54582b2bd",
+      "triangles_all_nodes": 532,
+      "mesh_count": 18,
+      "node_names": [
+        "CivilianRoot_dark",
+        "CivilianRoot_glass",
+        "CivilianRoot_lamp",
+        "CivilianRoot_orange",
+        "CivilianRoot_red",
+        "CivilianRoot_steel",
+        "WheelFrontLeft_dark",
+        "WheelFrontLeft_rubber",
+        "WheelFrontLeft_steel",
+        "WheelFrontLeft",
+        "WheelFrontRight_dark",
+        "WheelFrontRight_rubber",
+        "WheelFrontRight_steel",
+        "WheelFrontRight",
+        "WheelRearLeft_dark",
+        "WheelRearLeft_rubber",
+        "WheelRearLeft_steel",
+        "WheelRearLeft",
+        "WheelRearRight_dark",
+        "WheelRearRight_rubber",
+        "WheelRearRight_steel",
+        "WheelRearRight",
+        "CivilianRoot"
+      ],
+      "animations": [
+        {
+          "name": "YieldRight",
+          "duration_seconds": 2,
+          "targets": [
+            "CivilianRoot"
+          ]
+        }
+      ],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "car-hatch",
+      "type": "vehicle",
+      "file": "models/car-hatch.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 39916,
+      "sha256": "60a11a840b66a616480c3f96f71f08b6d49c7cb5f8499dcef1170a212f084474",
+      "triangles_all_nodes": 532,
+      "mesh_count": 18,
+      "node_names": [
+        "CivilianRoot_dark",
+        "CivilianRoot_glass",
+        "CivilianRoot_lamp",
+        "CivilianRoot_red",
+        "CivilianRoot_steel",
+        "CivilianRoot_teal",
+        "WheelFrontLeft_dark",
+        "WheelFrontLeft_rubber",
+        "WheelFrontLeft_steel",
+        "WheelFrontLeft",
+        "WheelFrontRight_dark",
+        "WheelFrontRight_rubber",
+        "WheelFrontRight_steel",
+        "WheelFrontRight",
+        "WheelRearLeft_dark",
+        "WheelRearLeft_rubber",
+        "WheelRearLeft_steel",
+        "WheelRearLeft",
+        "WheelRearRight_dark",
+        "WheelRearRight_rubber",
+        "WheelRearRight_steel",
+        "WheelRearRight",
+        "CivilianRoot"
+      ],
+      "animations": [
+        {
+          "name": "YieldRight",
+          "duration_seconds": 2,
+          "targets": [
+            "CivilianRoot"
+          ]
+        }
+      ],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "car-sedan",
+      "type": "vehicle",
+      "file": "models/car-sedan.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 39928,
+      "sha256": "0ea36327513e865e988c3a4d133d1c42355d8c13ca225dfc07f848594ed6d5b1",
+      "triangles_all_nodes": 532,
+      "mesh_count": 18,
+      "node_names": [
+        "CivilianRoot_blue",
+        "CivilianRoot_dark",
+        "CivilianRoot_glass",
+        "CivilianRoot_lamp",
+        "CivilianRoot_red",
+        "CivilianRoot_steel",
+        "WheelFrontLeft_dark",
+        "WheelFrontLeft_rubber",
+        "WheelFrontLeft_steel",
+        "WheelFrontLeft",
+        "WheelFrontRight_dark",
+        "WheelFrontRight_rubber",
+        "WheelFrontRight_steel",
+        "WheelFrontRight",
+        "WheelRearLeft_dark",
+        "WheelRearLeft_rubber",
+        "WheelRearLeft_steel",
+        "WheelRearLeft",
+        "WheelRearRight_dark",
+        "WheelRearRight_rubber",
+        "WheelRearRight_steel",
+        "WheelRearRight",
+        "CivilianRoot"
+      ],
+      "animations": [
+        {
+          "name": "YieldRight",
+          "duration_seconds": 2,
+          "targets": [
+            "CivilianRoot"
+          ]
+        }
+      ],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "car-van",
+      "type": "vehicle",
+      "file": "models/car-van.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 39908,
+      "sha256": "ca7d3c650238b012411efba0ac9b0833972d9326b313f8aa439210e17cec3b55",
+      "triangles_all_nodes": 532,
+      "mesh_count": 18,
+      "node_names": [
+        "CivilianRoot_cream",
+        "CivilianRoot_dark",
+        "CivilianRoot_glass",
+        "CivilianRoot_lamp",
+        "CivilianRoot_red",
+        "CivilianRoot_steel",
+        "WheelFrontLeft_dark",
+        "WheelFrontLeft_rubber",
+        "WheelFrontLeft_steel",
+        "WheelFrontLeft",
+        "WheelFrontRight_dark",
+        "WheelFrontRight_rubber",
+        "WheelFrontRight_steel",
+        "WheelFrontRight",
+        "WheelRearLeft_dark",
+        "WheelRearLeft_rubber",
+        "WheelRearLeft_steel",
+        "WheelRearLeft",
+        "WheelRearRight_dark",
+        "WheelRearRight_rubber",
+        "WheelRearRight_steel",
+        "WheelRearRight",
+        "CivilianRoot"
+      ],
+      "animations": [
+        {
+          "name": "YieldRight",
+          "duration_seconds": 2,
+          "targets": [
+            "CivilianRoot"
+          ]
+        }
+      ],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "cone",
+      "type": "prop",
+      "file": "models/cone.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 7392,
+      "sha256": "ccd74b6062d1d64b43a18f298e97724583e0303e00e6d5a14f799602d5e3b908",
+      "triangles_all_nodes": 96,
+      "mesh_count": 3,
+      "node_names": [
+        "ConeRoot_cream",
+        "ConeRoot_orange",
+        "ConeRoot_rubber",
+        "ConeRoot"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "fire-truck",
+      "type": "vehicle",
+      "file": "models/fire-truck.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 165312,
+      "sha256": "fdaebd5152399e45f07d458684b5a361466a5caa87506b34e814732586d4f727",
+      "triangles_all_nodes": 2556,
+      "mesh_count": 11,
+      "node_names": [
+        "BeaconLeft",
+        "BeaconRight",
+        "Body",
+        "HoseNozzle",
+        "HoseNozzlePivot",
+        "HoseCoil",
+        "HoseReel",
+        "LadderBase",
+        "LadderUpper",
+        "LadderExtension",
+        "LadderFoldPivot",
+        "LadderPitch",
+        "LadderYaw",
+        "TyreFrontLeft",
+        "WheelFrontLeft",
+        "TyreFrontRight",
+        "WheelFrontRight",
+        "TyreRearLeft",
+        "WheelRearLeft",
+        "TyreRearRight",
+        "WheelRearRight",
+        "FireTruckRoot"
+      ],
+      "animations": [
+        {
+          "name": "BeaconFlash",
+          "duration_seconds": 1,
+          "targets": [
+            "BeaconLeft",
+            "BeaconRight"
+          ]
+        },
+        {
+          "name": "HoseAim",
+          "duration_seconds": 2,
+          "targets": [
+            "HoseNozzlePivot"
+          ]
+        },
+        {
+          "name": "LadderDeploy",
+          "duration_seconds": 3,
+          "targets": [
+            "LadderExtension",
+            "LadderFoldPivot",
+            "LadderPitch",
+            "LadderYaw"
+          ]
+        },
+        {
+          "name": "WheelRoll",
+          "duration_seconds": 1,
+          "targets": [
+            "WheelFrontLeft",
+            "WheelFrontRight",
+            "WheelRearLeft",
+            "WheelRearRight"
+          ]
+        }
+      ],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "house-burning",
+      "type": "destination",
+      "file": "models/house-burning.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 344760,
+      "sha256": "255bff2bc482160349d3ff41b4f646f94a12486b0e175b837af4ac08e2554c06",
+      "triangles_all_nodes": 6208,
+      "mesh_count": 70,
+      "node_names": [
+        "BurningHouseRoot_brick",
+        "BurningHouseRoot_curb",
+        "BurningHouseRoot_dark",
+        "BurningHouseRoot_plaster",
+        "BurningHouseRoot_soot",
+        "BurningHouseRoot_wood",
+        "CutawayFront_cream",
+        "CutawayFront_glass",
+        "CutawayFront_plaster",
+        "CutawayFront_soot",
+        "CutawayFront",
+        "DoorHinge_steel",
+        "DoorHinge_wood",
+        "DoorHinge",
+        "Doorway",
+        "FireTarget1",
+        "FireTarget2",
+        "FireTarget3",
+        "ExteriorTarget1High_flame",
+        "ExteriorTarget1High_flameCore",
+        "ExteriorTarget1High_flameLight",
+        "ExteriorTarget1High",
+        "Target1High_flame",
+        "Target1High_flameCore",
+        "Target1High_flameLight",
+        "Target1High",
+        "ExteriorTarget2High_flame",
+        "ExteriorTarget2High_flameCore",
+        "ExteriorTarget2High_flameLight",
+        "ExteriorTarget2High",
+        "Target2High_flame",
+        "Target2High_flameCore",
+        "Target2High_flameLight",
+        "Target2High",
+        "ExteriorTarget3High_flame",
+        "ExteriorTarget3High_flameCore",
+        "ExteriorTarget3High_flameLight",
+        "ExteriorTarget3High",
+        "Target3High_flame",
+        "Target3High_flameCore",
+        "Target3High_flameLight",
+        "Target3High",
+        "FlamesHigh",
+        "ExteriorTarget1Low_flame",
+        "ExteriorTarget1Low_flameCore",
+        "ExteriorTarget1Low_flameLight",
+        "ExteriorTarget1Low",
+        "Target1Low_flame",
+        "Target1Low_flameCore",
+        "Target1Low_flameLight",
+        "Target1Low",
+        "ExteriorTarget2Low_flame",
+        "ExteriorTarget2Low_flameCore",
+        "ExteriorTarget2Low_flameLight",
+        "ExteriorTarget2Low",
+        "Target2Low_flame",
+        "Target2Low_flameCore",
+        "Target2Low_flameLight",
+        "Target2Low",
+        "ExteriorTarget3Low_flame",
+        "ExteriorTarget3Low_flameCore",
+        "ExteriorTarget3Low_flameLight",
+        "ExteriorTarget3Low",
+        "Target3Low_flame",
+        "Target3Low_flameCore",
+        "Target3Low_flameLight",
+        "Target3Low",
+        "FlamesLow",
+        "ExteriorTarget1Medium_flame",
+        "ExteriorTarget1Medium_flameCore",
+        "ExteriorTarget1Medium_flameLight",
+        "ExteriorTarget1Medium",
+        "Target1Medium_flame",
+        "Target1Medium_flameCore",
+        "Target1Medium_flameLight",
+        "Target1Medium",
+        "ExteriorTarget2Medium_flame",
+        "ExteriorTarget2Medium_flameCore",
+        "ExteriorTarget2Medium_flameLight",
+        "ExteriorTarget2Medium",
+        "Target2Medium_flame",
+        "Target2Medium_flameCore",
+        "Target2Medium_flameLight",
+        "Target2Medium",
+        "ExteriorTarget3Medium_flame",
+        "ExteriorTarget3Medium_flameCore",
+        "ExteriorTarget3Medium_flameLight",
+        "ExteriorTarget3Medium",
+        "Target3Medium_flame",
+        "Target3Medium_flameCore",
+        "Target3Medium_flameLight",
+        "Target3Medium",
+        "FlamesMedium",
+        "InteriorAnchor",
+        "Roof_brick",
+        "Roof_roof",
+        "Roof_soot",
+        "Roof_wood",
+        "Roof",
+        "TruckStop",
+        "BurningHouseRoot"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "road-bridge",
+      "type": "road_tile",
+      "file": "models/road-bridge.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 22592,
+      "sha256": "13861bbfc02b6de813dee2e35a61e0e63ea453c0b81f44619df046ae41982dd3",
+      "triangles_all_nodes": 324,
+      "mesh_count": 6,
+      "node_names": [
+        "PortIn",
+        "PortOut",
+        "RoadBridge_asphalt",
+        "RoadBridge_curb",
+        "RoadBridge_dark",
+        "RoadBridge_grass",
+        "RoadBridge_line",
+        "RoadBridge_steel",
+        "RoadBridge"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          0,
+          0,
+          3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "road-cross",
+      "type": "road_tile",
+      "file": "models/road-cross.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 18508,
+      "sha256": "e9966a65a81a4f9f529f63ed169aaa6370efe70b995c4abf595134816fe0608f",
+      "triangles_all_nodes": 276,
+      "mesh_count": 4,
+      "node_names": [
+        "PortIn",
+        "PortOut",
+        "RoadCross_asphalt",
+        "RoadCross_curb",
+        "RoadCross_grass",
+        "RoadCross_line",
+        "RoadCross"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          0,
+          0,
+          3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "ports_m": [
+        [
+          0,
+          0,
+          -3
+        ],
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          -3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "road-left",
+      "type": "road_tile",
+      "file": "models/road-left.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 25316,
+      "sha256": "e9df69c0ec1250ff8d01af3f03db80431625c40fad62b5567a234520d93fea4a",
+      "triangles_all_nodes": 488,
+      "mesh_count": 4,
+      "node_names": [
+        "PortIn",
+        "PortOut",
+        "RoadLeft_asphalt",
+        "RoadLeft_curb",
+        "RoadLeft_grass",
+        "RoadLeft_line",
+        "RoadLeft"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          -3,
+          0,
+          0
+        ],
+        "tangent": [
+          -1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "road-right",
+      "type": "road_tile",
+      "file": "models/road-right.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 25324,
+      "sha256": "ba3ba14a5e74e450eb6521dc6196b1e2d6e2c209fc13fe09dbd5c0de736b2607",
+      "triangles_all_nodes": 488,
+      "mesh_count": 4,
+      "node_names": [
+        "PortIn",
+        "PortOut",
+        "RoadRight_asphalt",
+        "RoadRight_curb",
+        "RoadRight_grass",
+        "RoadRight_line",
+        "RoadRight"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          3,
+          0,
+          0
+        ],
+        "tangent": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "road-straight",
+      "type": "road_tile",
+      "file": "models/road-straight.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 8640,
+      "sha256": "076791f4ad227ef58421c328faefcfa2eef30777995026e9a7ffa4f3f7261c37",
+      "triangles_all_nodes": 96,
+      "mesh_count": 4,
+      "node_names": [
+        "PortIn",
+        "PortOut",
+        "RoadStraight_asphalt",
+        "RoadStraight_curb",
+        "RoadStraight_grass",
+        "RoadStraight_line",
+        "RoadStraight"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          0,
+          0,
+          3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "road-tunnel",
+      "type": "road_tile",
+      "file": "models/road-tunnel.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 35896,
+      "sha256": "12248c4f828c30bcdc499320fc8c94de0f692e06a0a2afca77c7599c722c6044",
+      "triangles_all_nodes": 636,
+      "mesh_count": 9,
+      "node_names": [
+        "PortalBack_curb",
+        "PortalBack",
+        "PortalFront_curb",
+        "PortalFront",
+        "PortIn",
+        "PortOut",
+        "RoadTunnel_asphalt",
+        "RoadTunnel_curb",
+        "RoadTunnel_grass",
+        "RoadTunnel_lamp",
+        "RoadTunnel_line",
+        "TunnelRoof_curb",
+        "TunnelRoof_dark",
+        "TunnelRoof",
+        "RoadTunnel"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": [],
+      "tile_size_m": [
+        6,
+        6
+      ],
+      "surface_y_m": 0,
+      "entry": {
+        "position_m": [
+          0,
+          0,
+          -3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      },
+      "exit": {
+        "position_m": [
+          0,
+          0,
+          3
+        ],
+        "tangent": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "street-lamp",
+      "type": "prop",
+      "file": "models/street-lamp.glb",
+      "format": "glTF 2.0 binary",
+      "license": "CC0-1.0",
+      "bytes": 7996,
+      "sha256": "c3cc7c70a84166fe932f69e8e2dbb07095fa531bf44de7a3c653ec7cdd9c997d",
+      "triangles_all_nodes": 92,
+      "mesh_count": 4,
+      "node_names": [
+        "LightAnchor",
+        "StreetLampRoot_curb",
+        "StreetLampRoot_dark",
+        "StreetLampRoot_lamp",
+        "StreetLampRoot_steel",
+        "StreetLampRoot"
+      ],
+      "animations": [],
+      "embedded_resources": true,
+      "required_extensions": []
+    },
+    {
+      "id": "siren-two-tone-loop",
+      "file": "audio/siren-two-tone-loop.wav",
+      "description": "Soft 370/493 Hz alternating two-tone siren; rounded harmonics, smooth handover.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 384000,
+      "duration_seconds": 8.0,
+      "bytes": 768044,
+      "sha256": "87fb47d0ef4e5db57619b689028e2bb542958fd402a5206add46781ece67ae64",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -12.06,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.01,
+      "sample_peak_dbfs": -12.0635,
+      "dc_offset": 0.0,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 384000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.01934814453125,
+        "splice_curvature_full_scale": 0.00018310546875,
+        "ordinary_curvature_q99_full_scale": 0.001220703125,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "engine-idle-loop",
+      "file": "audio/engine-idle-loop.wav",
+      "description": "Heavy six-cylinder diesel idle layer, nominal 640 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "588eb69992ac77db9ff50147309414c9faab03f1f361182c6dc67b6ce610d5c7",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -5.42,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -5.4235,
+      "dc_offset": 1.6e-08,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.015472412109375,
+        "splice_curvature_full_scale": 3.0517578125e-05,
+        "ordinary_curvature_q99_full_scale": 0.001190185546875,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "engine-cruise-loop",
+      "file": "audio/engine-cruise-loop.wav",
+      "description": "Heavy six-cylinder diesel cruise layer, nominal 1280 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "c2ce6c1ec04e27d292db0631e200eba86f0338b2540cff7b8d2903f650f8ea23",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -8.92,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -25.99,
+      "sample_peak_dbfs": -8.9238,
+      "dc_offset": 3e-09,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.018096923828125,
+        "splice_curvature_full_scale": 6.103515625e-05,
+        "ordinary_curvature_q99_full_scale": 0.0013427734375,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "engine-high-loop",
+      "file": "audio/engine-high-loop.wav",
+      "description": "Heavy six-cylinder diesel high layer, nominal 1920 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "3b04647244416f88870893f6ef02173a495b09449451449c41517f2657119817",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -10.01,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -10.0135,
+      "dc_offset": 9e-09,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.023651123046875,
+        "splice_curvature_full_scale": 0.000335693359375,
+        "ordinary_curvature_q99_full_scale": 0.002288818359375,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "horn",
+      "file": "audio/horn.wav",
+      "description": "Rounded dual air-horn note; short attack and long release.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 60000,
+      "duration_seconds": 1.25,
+      "bytes": 120044,
+      "sha256": "4c0c5e9430c529af07933638a9f37b605ca35674d2b79ecc22b04912d47b3d6f",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -10.25,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -10.2536,
+      "dc_offset": -2.5e-08,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "brakes",
+      "file": "audio/brakes.wav",
+      "description": "Pneumatic braking hiss and falling low mechanical rumble.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 86400,
+      "duration_seconds": 1.8,
+      "bytes": 172844,
+      "sha256": "5d73ee9e1d5ce842a31dad9cba190ae02e7e8054082efc605f9c75fbf7a2d4af",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -5.27,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.59,
+      "sample_peak_dbfs": -5.284,
+      "dc_offset": -5.4e-07,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "hose-water-loop",
+      "file": "audio/hose-water-loop.wav",
+      "description": "Pressurized broad water jet with low turbulent body, no clicks or silence.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "b0b86a34acac2d0c7fdd0524a12e7caa74593323af03b06276f742ca60ca2952",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -10.59,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.01,
+      "sample_peak_dbfs": -10.614,
+      "dc_offset": -2.1e-08,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.17334045410156218,
+        "splice_curvature_full_scale": 0.0316162109375,
+        "ordinary_curvature_q99_full_scale": 0.139404296875,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "arrival",
+      "file": "audio/arrival.wav",
+      "description": "Soft two-note arrival confirmation with settling air hiss.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 72000,
+      "duration_seconds": 1.5,
+      "bytes": 144044,
+      "sha256": "b333fdc62f36e21b398aea9b2f444faa5681c3808422f4c9a003bce671173055",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -3.21,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -27.23,
+      "sample_peak_dbfs": -3.2142,
+      "dc_offset": 3.4e-08,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "firefighting-start",
+      "file": "audio/firefighting-start.wav",
+      "description": "Valve opening/water swell with warm two-note firefighting-start confirmation.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 86400,
+      "duration_seconds": 1.8,
+      "bytes": 172844,
+      "sha256": "825d05396b1b616f1d13aba6ad7e419159fb6882b88f622657d975292cee199a",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -5.04,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.3,
+      "sample_peak_dbfs": -5.0439,
+      "dc_offset": 2.86e-07,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true,
+      "type": "audio",
+      "format": "WAV PCM16",
+      "license": "CC0-1.0"
+    }
+  ],
+  "totals": {
+    "glb_files": 14,
+    "audio_files": 9,
+    "asset_bytes": 3735408
+  },
+  "qa": {
+    "gltf": "verification/assets.json",
+    "audio": "verification/audio.json",
+    "browser": "verification/browser.json",
+    "repository": "verification/repository.json",
+    "loop_regions": "Full buffer: start frame inclusive 0, end frame exclusive frames; 60–120ms start/stop gain ramps.",
+    "lufs_target": -16,
+    "lufs_tolerance_lu": 0.2
+  },
+  "license_notes": "LICENSES.md"
+}

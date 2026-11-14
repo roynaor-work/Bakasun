@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "generator": "scripts/generate_audio.py",
+  "seed": 20261114,
+  "provenance": "Original deterministic additive/subtractive and periodic-noise synthesis; no recordings or external media.",
+  "license": "CC0-1.0",
+  "loudness_method": "FFmpeg loudnorm input measurement (BS.1770 / EBU R128), measured after final PCM16 encoding.",
+  "acceptance": {
+    "integrated_lufs": -16,
+    "tolerance_lu": 0.2,
+    "maximum_true_peak_dbtp": -1,
+    "loop_boundary_delta_maximum_full_scale": 0.001,
+    "loop_boundary_delta_also_at_most": "99th percentile of within-buffer absolute first difference"
+  },
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "integration": {
+    "decode": "Load each WAV into an AudioBuffer once; use source.loop=true, loopStart=0, loopEnd=duration for looping files.",
+    "ramps": "Fade each source gain over 60-120 ms at start/stop; do not fade individual loop iterations.",
+    "rpm_layers": "Nominal RPMs are 640/1280/1920; interpolate adjacent layer gains with cos(pi*u/2) and sin(pi*u/2). Never play all at unity.",
+    "mix": "All files are -16 LUFS individually. Start with engine gain 0.30, siren 0.26, hose 0.38 and cue 0.45, then set game bus headroom/limiting. Suspend engine/siren on arrival, ramp hose with the valve cue."
+  },
+  "assets": [
+    {
+      "id": "siren-two-tone-loop",
+      "file": "audio/siren-two-tone-loop.wav",
+      "description": "Soft 370/493 Hz alternating two-tone siren; rounded harmonics, smooth handover.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 384000,
+      "duration_seconds": 8.0,
+      "bytes": 768044,
+      "sha256": "87fb47d0ef4e5db57619b689028e2bb542958fd402a5206add46781ece67ae64",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -12.06,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.01,
+      "sample_peak_dbfs": -12.0635,
+      "dc_offset": 0.0,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 384000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.01934814453125,
+        "splice_curvature_full_scale": 0.00018310546875,
+        "ordinary_curvature_q99_full_scale": 0.001220703125,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "engine-idle-loop",
+      "file": "audio/engine-idle-loop.wav",
+      "description": "Heavy six-cylinder diesel idle layer, nominal 640 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "588eb69992ac77db9ff50147309414c9faab03f1f361182c6dc67b6ce610d5c7",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -5.42,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -5.4235,
+      "dc_offset": 1.6e-08,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.015472412109375,
+        "splice_curvature_full_scale": 3.0517578125e-05,
+        "ordinary_curvature_q99_full_scale": 0.001190185546875,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "engine-cruise-loop",
+      "file": "audio/engine-cruise-loop.wav",
+      "description": "Heavy six-cylinder diesel cruise layer, nominal 1280 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "c2ce6c1ec04e27d292db0631e200eba86f0338b2540cff7b8d2903f650f8ea23",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -15.99,
+      "true_peak_dbtp": -8.92,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -25.99,
+      "sample_peak_dbfs": -8.9238,
+      "dc_offset": 3e-09,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.018096923828125,
+        "splice_curvature_full_scale": 6.103515625e-05,
+        "ordinary_curvature_q99_full_scale": 0.0013427734375,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "engine-high-loop",
+      "file": "audio/engine-high-loop.wav",
+      "description": "Heavy six-cylinder diesel high layer, nominal 1920 RPM.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "3b04647244416f88870893f6ef02173a495b09449451449c41517f2657119817",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -10.01,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -10.0135,
+      "dc_offset": 9e-09,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.023651123046875,
+        "splice_curvature_full_scale": 0.000335693359375,
+        "ordinary_curvature_q99_full_scale": 0.002288818359375,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "horn",
+      "file": "audio/horn.wav",
+      "description": "Rounded dual air-horn note; short attack and long release.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 60000,
+      "duration_seconds": 1.25,
+      "bytes": 120044,
+      "sha256": "4c0c5e9430c529af07933638a9f37b605ca35674d2b79ecc22b04912d47b3d6f",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -10.25,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.0,
+      "sample_peak_dbfs": -10.2536,
+      "dc_offset": -2.5e-08,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "brakes",
+      "file": "audio/brakes.wav",
+      "description": "Pneumatic braking hiss and falling low mechanical rumble.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 86400,
+      "duration_seconds": 1.8,
+      "bytes": 172844,
+      "sha256": "5d73ee9e1d5ce842a31dad9cba190ae02e7e8054082efc605f9c75fbf7a2d4af",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.0,
+      "true_peak_dbtp": -5.27,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.59,
+      "sample_peak_dbfs": -5.284,
+      "dc_offset": -5.4e-07,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "hose-water-loop",
+      "file": "audio/hose-water-loop.wav",
+      "description": "Pressurized broad water jet with low turbulent body, no clicks or silence.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 192000,
+      "duration_seconds": 4.0,
+      "bytes": 384044,
+      "sha256": "b0b86a34acac2d0c7fdd0524a12e7caa74593323af03b06276f742ca60ca2952",
+      "loop": true,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -10.59,
+      "loudness_range_lu": 0.1,
+      "threshold_lufs": -26.01,
+      "sample_peak_dbfs": -10.614,
+      "dc_offset": -2.1e-08,
+      "loop_region_frames": {
+        "start_inclusive": 0,
+        "end_exclusive": 192000
+      },
+      "loop_qa": {
+        "method": "Periodic Fourier/oscillator synthesis; zero-slope phase-aligned splice; constant-gain normalization; uncompressed PCM.",
+        "boundary_delta_full_scale": 0.0,
+        "boundary_delta_dbfs": null,
+        "boundary_delta_is_digital_zero": true,
+        "ordinary_delta_q99_full_scale": 0.17334045410156218,
+        "splice_curvature_full_scale": 0.0316162109375,
+        "ordinary_curvature_q99_full_scale": 0.139404296875,
+        "passed": true
+      },
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 3,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "arrival",
+      "file": "audio/arrival.wav",
+      "description": "Soft two-note arrival confirmation with settling air hiss.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 72000,
+      "duration_seconds": 1.5,
+      "bytes": 144044,
+      "sha256": "b333fdc62f36e21b398aea9b2f444faa5681c3808422f4c9a003bce671173055",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.02,
+      "true_peak_dbtp": -3.21,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -27.23,
+      "sample_peak_dbfs": -3.2142,
+      "dc_offset": 3.4e-08,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    },
+    {
+      "id": "firefighting-start",
+      "file": "audio/firefighting-start.wav",
+      "description": "Valve opening/water swell with warm two-note firefighting-start confirmation.",
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "encoding": "PCM signed 16-bit little-endian",
+      "frames": 86400,
+      "duration_seconds": 1.8,
+      "bytes": 172844,
+      "sha256": "825d05396b1b616f1d13aba6ad7e419159fb6882b88f622657d975292cee199a",
+      "loop": false,
+      "target_lufs": -16.0,
+      "integrated_lufs": -16.01,
+      "true_peak_dbtp": -5.04,
+      "loudness_range_lu": 0.0,
+      "threshold_lufs": -26.3,
+      "sample_peak_dbfs": -5.0439,
+      "dc_offset": 2.86e-07,
+      "endpoints_digital_zero": true,
+      "independent_ebur128": {
+        "filter": "FFmpeg ebur128=peak=true",
+        "repetitions": 1,
+        "integrated_lufs": -16.0,
+        "passed": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "reproducibility": {
+    "method": "Re-run generator and compare SHA-256 of all 9 final WAVs",
+    "byte_identical": true,
+    "asset_count": 9
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fire-truck-chase-v1/manifest.schema.json",
+  "title": "Fire truck chase asset handoff",
+  "type": "object",
+  "required": ["schema_version", "id", "coordinates", "preview", "assets", "totals", "qa"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "id": {"const": "fire-truck-chase-v1"},
+    "assets": {
+      "type": "array",
+      "minItems": 23,
+      "maxItems": 23,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "file", "bytes", "sha256", "license"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "type": {"enum": ["vehicle", "road_tile", "destination", "prop", "audio"]},
+          "file": {"type": "string", "pattern": "^(models|audio)/[a-z0-9-]+\\.(glb|wav)$"},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "license": {"const": "CC0-1.0"}
+        }
+      }
+    }
+  }
+}

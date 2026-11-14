@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>דרך לאש — מרדף וכיבוי</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main id="app" aria-label="תצוגת שלב נסיעה וכיבוי">
+    <div id="scene" aria-label="סביבת המשחק בתלת־ממד"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="hud">
+      <div class="identity">
+        <svg viewBox="0 0 32 36" aria-hidden="true"><path d="M18 2c2 8-7 10-4 17 1-4 4-5 6-8 6 5 9 9 8 15-1 6-6 9-12 9S4 31 4 25C4 15 13 12 18 2Z" fill="currentColor"/><path d="M17 21c0 4-5 5-4 9 1 3 5 3 7 0 2-3 0-6-3-9Z" fill="#15373a"/></svg>
+        <span><strong>דרך לאש</strong><small>מרדף · כניסה · כיבוי</small></span>
+      </div>
+      <nav class="steps" aria-label="התקדמות המשימה">
+        <span data-step="chase" class="active"><b>01</b> בדרך</span><i></i>
+        <span data-step="entry"><b>02</b> כניסה</span><i></i>
+        <span data-step="extinguish"><b>03</b> כיבוי</span>
+      </nav>
+      <div class="status-cluster">
+        <div class="clock" aria-label="זמן שנותר"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 8v5l3 2M9 2h6M12 2v3"/></svg><strong id="time">01:15</strong></div>
+        <button id="sound" class="icon-button" aria-label="הפעלת צלילים" title="צלילים" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4ZM15 9l6 6m0-6-6 6"/></svg></button>
+        <button id="pause" class="icon-button" aria-label="השהיה" title="השהיה" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button>
+      </div>
+    </header>
+    <div id="route" class="route-pill"><span class="live-dot"></span><span id="route-text">הקריאה התקבלה · בית בקצה הרחוב</span></div>
+    <section id="intro" class="intro">
+      <span class="eyebrow">צוות הכיבוי יוצא לדרך</span>
+      <h1>כל שנייה<br><em>משנה.</em></h1>
+      <p>פנו דרך בכביש, היכנסו לבית<br>וכבו את מוקדי האש לפני שהזמן נגמר.</p>
+      <div class="intro-actions"><button id="start" class="primary" disabled>טוען את הציוד… <span aria-hidden="true">←</span></button><button id="catalogue-open" class="text-button">לספריית הנכסים</button></div>
+      <small class="intro-note">תצוגת שלב רציף · מקלדת או מגע</small>
+    </section>
+    <section id="result" class="result hidden" aria-live="polite">
+      <span class="eyebrow" id="result-eyebrow">המשימה הושלמה</span><h2 id="result-title">הבית בטוח.</h2><p id="result-detail"></p>
+      <button id="retry" class="primary">יוצאים שוב <span aria-hidden="true">←</span></button>
+    </section>
+    <section id="pause-panel" class="pause-panel hidden"><span class="eyebrow">השעון עצר</span><h2>לוקחים נשימה.</h2><button id="resume" class="primary">ממשיכים <span aria-hidden="true">←</span></button><button id="restart" class="text-button">מתחילים מהתחלה</button></section>
+    <div id="target-labels" aria-hidden="true"></div>
+    <div id="reticle" class="reticle hidden" aria-hidden="true"><i></i></div>
+    <footer id="controls" class="controls hidden">
+      <div class="steering" id="steering"><button id="left" aria-label="היגוי שמאלה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></button><button id="right" aria-label="היגוי ימינה"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg></button><button id="horn" class="horn" aria-label="צופר">צופר</button></div>
+      <div class="mission-copy"><strong id="instruction">שמרו על נתיב פנוי</strong><span id="hint">חצים להיגוי · H לצופר · P להשהיה</span><div class="progress-track"><div id="progress"></div></div></div>
+      <button id="action" class="primary action" aria-label="פעולה ראשית">קדימה <span aria-hidden="true">←</span></button>
+    </footer>
+    <section id="catalogue" class="catalogue hidden" aria-label="ספריית נכסים">
+      <div class="catalogue-heading"><span><small>ספריית הציוד</small><strong id="asset-title">משאית כיבוי</strong></span><button id="catalogue-close" class="icon-button" aria-label="חזרה לשלב">×</button></div>
+      <div class="catalogue-tools"><label>נכס <select id="asset-select"></select></label><label id="clip-select-label">תנועה <select id="clip-select"></select></label><button id="animate-asset" class="small-button">הפעלה</button><label id="flame-select-label" class="hidden">להבה <select id="flame-select"><option value="High">גבוהה</option><option value="Medium">בינונית</option><option value="Low">נמוכה</option></select></label><label class="check"><input id="overhead" type="checkbox"> מבט עילי</label></div>
+      <p id="asset-note"></p>
+    </section>
+    <div id="loading" class="loading" role="status"><span></span>מכינים משאית, כביש וציוד…</div>
+    <div id="error" class="error hidden" role="alert"><strong>הציוד לא נטען.</strong><p id="error-message"></p><button class="primary" onclick="location.reload()">טעינה מחדש</button></div>
+    <div class="design-stamp" id="design-stamp">FIRE TRUCK CHASE <span>01</span></div>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+{
+  "generator": "scripts/generate_environment.py",
+  "source": "Original CC0 geometry informed by fire-v7 original asset palette; no external models.",
+  "axes": {
+    "up": "+Y",
+    "vehicleForward": "+Z",
+    "houseFront": "-Z",
+    "units": "metres"
+  },
+  "roads": {
+    "tileSize": [
+      6,
+      6
+    ],
+    "surfaceY": 0,
+    "carriagewayWidth": 5.2,
+    "laneWidth": 2.6,
+    "laneCenters": [
+      -1.3,
+      1.3
+    ],
+    "incomingDirection": [
+      0,
+      0,
+      1
+    ],
+    "curveRadius": 3,
+    "curveAngleDegrees": 90,
+    "centerlineFormula": {
+      "right": "[3-3*cos(t),0,-3+3*sin(t)], t=0..PI/2",
+      "left": "[-3+3*cos(t),0,-3+3*sin(t)], t=0..PI/2"
+    },
+    "assets": {
+      "road-straight.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            0,
+            0,
+            3
+          ]
+        },
+        "centerlineLength": 6
+      },
+      "road-right.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            3,
+            0,
+            0
+          ]
+        },
+        "centerlineLength": 4.71238898038469
+      },
+      "road-left.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            -3,
+            0,
+            0
+          ]
+        },
+        "centerlineLength": 4.71238898038469
+      },
+      "road-cross.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            0,
+            0,
+            3
+          ],
+          "left": [
+            -3,
+            0,
+            0
+          ],
+          "right": [
+            3,
+            0,
+            0
+          ]
+        },
+        "centerlineLength": 6
+      },
+      "road-bridge.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            0,
+            0,
+            3
+          ]
+        },
+        "centerlineLength": 6
+      },
+      "road-tunnel.glb": {
+        "ports": {
+          "in": [
+            0,
+            0,
+            -3
+          ],
+          "out": [
+            0,
+            0,
+            3
+          ]
+        },
+        "centerlineLength": 6
+      }
+    },
+    "tunnel": {
+      "clearanceY": 3.88,
+      "cutawayHide": [
+        "TunnelRoof"
+      ],
+      "portalNodes": [
+        "PortalFront",
+        "PortalBack"
+      ]
+    },
+    "bridge": {
+      "surfaceY": 0,
+      "supportBottomY": -1.9
+    }
+  },
+  "civilians": {
+    "root": "CivilianRoot",
+    "wheelNodes": [
+      "WheelFrontLeft",
+      "WheelFrontRight",
+      "WheelRearLeft",
+      "WheelRearRight"
+    ],
+    "wheelAxis": "+X",
+    "yieldClip": "YieldRight",
+    "yieldDurationSeconds": 2,
+    "yieldDistance": 1.1,
+    "peakYawRadians": 0.12,
+    "wheelRadius": {
+      "hatch": 0.31,
+      "sedan": 0.31,
+      "compact": 0.31,
+      "van": 0.34
+    },
+    "finish": "ClampWhenFinished/LoopOnce, reverse to return"
+  },
+  "house": {
+    "root": "BurningHouseRoot",
+    "front": "-Z",
+    "doorAnchor": {
+      "node": "Doorway",
+      "position": [
+        0,
+        0.16,
+        -3.15
+      ]
+    },
+    "interiorAnchor": {
+      "node": "InteriorAnchor",
+      "position": [
+        0,
+        0.16,
+        0
+      ]
+    },
+    "truckStopAnchor": {
+      "node": "TruckStop",
+      "position": [
+        0,
+        0,
+        -7.4
+      ]
+    },
+    "cutawayHide": [
+      "CutawayFront",
+      "Roof"
+    ],
+    "interiorHidePrefix": "ExteriorTarget",
+    "flameStateNodes": [
+      "FlamesLow",
+      "FlamesMedium",
+      "FlamesHigh"
+    ],
+    "defaultState": "high",
+    "selection": "Set chosen flame-state scale to 1 and remaining scales to 0.",
+    "targets": [
+      {
+        "node": "FireTarget1",
+        "position": [
+          -1.8,
+          0.2,
+          0.8
+        ],
+        "stateNodes": [
+          "Target1Low",
+          "Target1Medium",
+          "Target1High"
+        ]
+      },
+      {
+        "node": "FireTarget2",
+        "position": [
+          1.7,
+          0.2,
+          1.2
+        ],
+        "stateNodes": [
+          "Target2Low",
+          "Target2Medium",
+          "Target2High"
+        ]
+      },
+      {
+        "node": "FireTarget3",
+        "position": [
+          0,
+          0.2,
+          2.1
+        ],
+        "stateNodes": [
+          "Target3Low",
+          "Target3Medium",
+          "Target3High"
+        ]
+      }
+    ],
+    "flameDesign": "Each target contains interior flames plus an exterior window or roof tongue; hide corresponding target groups in all three states on suppression."
+  }
+}

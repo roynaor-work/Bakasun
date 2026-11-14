@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "generatedAtUTC": "2026-11-14T18:37:56.927Z",
+  "viewport": [
+    844,
+    390
+  ],
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium/SwiftShader on CPU; not a physical-phone performance measurement",
+  "checks": [
+    {
+      "name": "Loaded all 14 GLBs at 844x390, muted until user gesture",
+      "passed": true
+    },
+    {
+      "name": "User gesture enables sound and all nine local WAVs decode successfully",
+      "passed": true
+    },
+    {
+      "name": "Keyboard steering changes truck position",
+      "passed": true
+    },
+    {
+      "name": "Pause freezes mission timer and vehicle and suspends the AudioContext",
+      "passed": true
+    },
+    {
+      "name": "Continuous chase → arrival → doorway entry → firefighting with one decreasing clock",
+      "passed": true,
+      "arrivalTime": 57.50020000000098,
+      "entryTime": 55.05020000000112,
+      "firefightingTime": 52.31680000000127,
+      "hits": 0
+    },
+    {
+      "name": "Pointer aim and held water extinguish the selected fire",
+      "passed": true
+    },
+    {
+      "name": "All three fires extinguish and produce success",
+      "passed": true
+    },
+    {
+      "name": "Timeout and retry follow real mission transitions",
+      "passed": true
+    },
+    {
+      "name": "Catalogue renders all 14 assets, truck/car animation controls and three flame states",
+      "passed": true
+    },
+    {
+      "name": "No viewport overflow at requested 844x390",
+      "passed": true
+    },
+    {
+      "name": "Real touch dispatch: steering, aimed water and release at DPR2",
+      "passed": true
+    },
+    {
+      "name": "Reduced-motion mode loads and completes the same entry transitions",
+      "passed": true
+    },
+    {
+      "name": "Missing GLB shows recoverable load error and disables mission start",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript errors, failed normal-load requests or external requests",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "failedRequests": [],
+  "screenshots": [
+    "844x390-intro.png",
+    "844x390-paused.png",
+    "844x390-chase.png",
+    "844x390-arrival.png",
+    "844x390-entry.png",
+    "844x390-extinguish.png",
+    "844x390-success.png",
+    "844x390-timeout.png",
+    "asset-fire-truck.jpg",
+    "asset-road-straight.jpg",
+    "asset-road-right.jpg",
+    "asset-road-left.jpg",
+    "asset-road-cross.jpg",
+    "asset-road-bridge.jpg",
+    "asset-road-tunnel.jpg",
+    "asset-car-hatch.jpg",
+    "asset-car-sedan.jpg",
+    "asset-car-van.jpg",
+    "asset-car-compact.jpg",
+    "asset-cone.jpg",
+    "asset-street-lamp.jpg",
+    "asset-house-burning.jpg",
+    "844x390-flames-low.png",
+    "844x390-flames-medium.png",
+    "844x390-flames-high.png",
+    "844x390-overhead.png",
+    "844x390-touch-dpr2.png",
+    "844x390-reduced-motion.png",
+    "844x390-load-error.png"
+  ],
+  "sourceHashes": {
+    "preview.html": "339f036bcea82b012014aa27d1af30e0a35f1b5f284b06609d753fa04a9b5b76",
+    "preview.css": "b70655a6c9fb62bf60def712e42a7a43ad852662bfd95ab62947ea2f5be24c67",
+    "preview.mjs": "9567f3c2d8fe43fdf70500bf7d6ce55653f8f51d9a592be7f35059d7993d84c7",
+    "models/fire-truck.glb": "fdaebd5152399e45f07d458684b5a361466a5caa87506b34e814732586d4f727",
+    "models/road-straight.glb": "076791f4ad227ef58421c328faefcfa2eef30777995026e9a7ffa4f3f7261c37",
+    "models/road-right.glb": "ba3ba14a5e74e450eb6521dc6196b1e2d6e2c209fc13fe09dbd5c0de736b2607",
+    "models/road-left.glb": "e9df69c0ec1250ff8d01af3f03db80431625c40fad62b5567a234520d93fea4a",
+    "models/road-cross.glb": "e9966a65a81a4f9f529f63ed169aaa6370efe70b995c4abf595134816fe0608f",
+    "models/road-bridge.glb": "13861bbfc02b6de813dee2e35a61e0e63ea453c0b81f44619df046ae41982dd3",
+    "models/road-tunnel.glb": "12248c4f828c30bcdc499320fc8c94de0f692e06a0a2afca77c7599c722c6044",
+    "models/car-hatch.glb": "60a11a840b66a616480c3f96f71f08b6d49c7cb5f8499dcef1170a212f084474",
+    "models/car-sedan.glb": "0ea36327513e865e988c3a4d133d1c42355d8c13ca225dfc07f848594ed6d5b1",
+    "models/car-van.glb": "ca7d3c650238b012411efba0ac9b0833972d9326b313f8aa439210e17cec3b55",
+    "models/car-compact.glb": "e4a4e4cedc466e3fbc3d0d4192d65cbf9cff6dbe210f517cd13b03a54582b2bd",
+    "models/cone.glb": "ccd74b6062d1d64b43a18f298e97724583e0303e00e6d5a14f799602d5e3b908",
+    "models/street-lamp.glb": "c3cc7c70a84166fe932f69e8e2dbb07095fa531bf44de7a3c653ec7cdd9c997d",
+    "models/house-burning.glb": "255bff2bc482160349d3ff41b4f646f94a12486b0e175b837af4ac08e2554c06"
+  }
+}

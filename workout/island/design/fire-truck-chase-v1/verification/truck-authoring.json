@@ -1,0 +1,145 @@
+{
+  "asset": "models/fire-truck.glb",
+  "triangles": 2556,
+  "bytes": 165312,
+  "boundsMeters": [
+    [
+      -1.5099999904632568,
+      0.0,
+      -3.369999885559082
+    ],
+    [
+      1.5500000715255737,
+      2.880000352859497,
+      3.4200000762939453
+    ]
+  ],
+  "dimensionsMeters": [
+    3.06,
+    2.88,
+    6.79
+  ],
+  "wheelRadiusMeters": 0.52,
+  "up": "+Y",
+  "forward": "+Z",
+  "groundY": 0,
+  "animationSeconds": {
+    "WheelRoll": 1,
+    "LadderDeploy": 3,
+    "HoseAim": 2,
+    "BeaconFlash": 1
+  },
+  "provenance": "CC0 original geometry, adapted from repository fire-v7 CC0 fictional rescue vehicle style/palette",
+  "generator": "Blender 4.3.2; scripts/generate_truck.py",
+  "restPose": "road-ready, ladder folded, all wheels grounded",
+  "hierarchy": {
+    "FireTruckRoot": [
+      "Body",
+      "WheelFrontLeft",
+      "WheelFrontRight",
+      "WheelRearLeft",
+      "WheelRearRight",
+      "LadderYaw",
+      "HoseReel",
+      "HoseNozzlePivot",
+      "BeaconLeft",
+      "BeaconRight"
+    ],
+    "LadderYaw": [
+      "LadderPitch"
+    ],
+    "LadderPitch": [
+      "LadderBase",
+      "LadderFoldPivot"
+    ],
+    "LadderFoldPivot": [
+      "LadderExtension"
+    ],
+    "LadderExtension": [
+      "LadderUpper"
+    ]
+  },
+  "wheelPivots": {
+    "names": [
+      "WheelFrontLeft",
+      "WheelFrontRight",
+      "WheelRearLeft",
+      "WheelRearRight"
+    ],
+    "radiusMeters": 0.52,
+    "localRollAxis": "X",
+    "forwardRollRadiansPerMeter": 1.923076923076923,
+    "frontAxleZ": 2.1,
+    "rearAxleZ": -1.98,
+    "centerAbsX": 1.12,
+    "centerY": 0.52
+  },
+  "ladderPivots": {
+    "LadderYaw": {
+      "axis": "Y",
+      "restRadians": 0,
+      "clipFinalRadians": 0.16,
+      "suggestedLimitsRadians": [
+        -0.6,
+        0.6
+      ]
+    },
+    "LadderPitch": {
+      "axis": "X",
+      "restRadians": 0,
+      "clipFinalRadians": -0.8,
+      "suggestedLimitsRadians": [
+        -1.05,
+        0
+      ]
+    },
+    "LadderFoldPivot": {
+      "axis": "X",
+      "restRadians": 3.141592653589793,
+      "clipFinalRadians": 0,
+      "limitsRadians": [
+        0,
+        3.141592653589793
+      ]
+    },
+    "LadderExtension": {
+      "axis": "local Z",
+      "restMeters": 0,
+      "clipFinalMeters": 0.5,
+      "limitsMeters": [
+        0,
+        0.5
+      ]
+    }
+  },
+  "animationPlayback": {
+    "WheelRoll": {
+      "loop": true,
+      "durationSeconds": 1,
+      "use": "Optional constant-speed loop; use wheel pivots and distance/.52 for road-matched rolling"
+    },
+    "LadderDeploy": {
+      "loop": false,
+      "clampWhenFinished": true,
+      "durationSeconds": 3,
+      "reverseToStow": true
+    },
+    "HoseAim": {
+      "loop": true,
+      "durationSeconds": 2,
+      "use": "Optional display sweep; direct HoseNozzlePivot aiming may replace it"
+    },
+    "BeaconFlash": {
+      "loop": true,
+      "durationSeconds": 1,
+      "use": "LINEAR scale pulses; restore both nodes to scale1 when driving separate cloned emissive materials",
+      "reducedMotion": "Skip flash clip; keep both lamps steadily emissive"
+    }
+  },
+  "emissiveNodes": [
+    "BeaconLeft",
+    "BeaconRight"
+  ],
+  "beaconMaterialNote": "Clone each node material before independent emissiveIntensity changes; red tail lamps share the source material.",
+  "groundingNote": "Tyres are 12-sided regular cylinders with an exact bottom vertex at Y0; radius .52."
+}

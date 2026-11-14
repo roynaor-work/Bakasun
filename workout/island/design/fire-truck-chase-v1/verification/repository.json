@@ -1,0 +1,18 @@
+{
+  "base_commit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "branch": "codex/fire-truck-chase-v1",
+  "command": "ISLAND_PLAYWRIGHT=/tmp/fire-chase-playwright.mjs npm test",
+  "result": {
+    "tests": 4082,
+    "suites": 0,
+    "pass": 4018,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 201697.924721
+  },
+  "environment_adapter": "Unmodified repository test helper ISLAND_PLAYWRIGHT points to installed Playwright; launch uses /usr/bin/chromium and --no-sandbox. No repository configuration was changed.",
+  "initial_attempt": "Default Playwright expected a cached Chromium binary absent in the environment; a browser test left an HTTP server open after launch failure. Stopped that test process, then reran the full suite using the installed system Chromium.",
+  "log_sha256": "db35354a0e8bc10dad77de2597457205e4ce5d8c2a93155676d089672bad8814"
+}

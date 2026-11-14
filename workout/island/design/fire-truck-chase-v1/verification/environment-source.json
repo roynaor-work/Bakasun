@@ -1,0 +1,498 @@
+{
+  "generator": "Blender 4.3.2",
+  "units": "metres",
+  "axes": "Y up, +Z forward",
+  "assets": [
+    {
+      "file": "models/road-straight.glb",
+      "triangles": 96,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          0,
+          0,
+          3
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "RoadStraight"
+      ],
+      "bytes": 8640,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          0,
+          0,
+          3
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 6,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/road-right.glb",
+      "triangles": 488,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          3,
+          0,
+          0
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "RoadRight"
+      ],
+      "bytes": 25324,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          3,
+          0,
+          0
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 4.71238898038469,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/road-left.glb",
+      "triangles": 488,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          -3,
+          0,
+          0
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "RoadLeft"
+      ],
+      "bytes": 25316,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          -3,
+          0,
+          0
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 4.71238898038469,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/road-cross.glb",
+      "triangles": 276,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          0,
+          0,
+          3
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "RoadCross"
+      ],
+      "bytes": 18508,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          0,
+          0,
+          3
+        ],
+        "left": [
+          -3,
+          0,
+          0
+        ],
+        "right": [
+          3,
+          0,
+          0
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 6,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/road-bridge.glb",
+      "triangles": 324,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          0,
+          0,
+          3
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "RoadBridge"
+      ],
+      "bytes": 22592,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          0,
+          0,
+          3
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 6,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/road-tunnel.glb",
+      "triangles": 636,
+      "anchors": {
+        "PortIn": [
+          0,
+          0,
+          -3
+        ],
+        "PortOut": [
+          0,
+          0,
+          3
+        ]
+      },
+      "nodeNames": [
+        "PortIn",
+        "PortOut",
+        "PortalBack",
+        "PortalFront",
+        "RoadTunnel",
+        "TunnelRoof"
+      ],
+      "bytes": 35896,
+      "ports": {
+        "in": [
+          0,
+          0,
+          -3
+        ],
+        "out": [
+          0,
+          0,
+          3
+        ]
+      },
+      "roadWidth": 5.2,
+      "laneCenters": [
+        -1.3,
+        1.3
+      ],
+      "centerlineLength": 6,
+      "surfaceY": 0
+    },
+    {
+      "file": "models/car-hatch.glb",
+      "triangles": 532,
+      "anchors": {},
+      "nodeNames": [
+        "CivilianRoot",
+        "WheelFrontLeft",
+        "WheelFrontRight",
+        "WheelRearLeft",
+        "WheelRearRight"
+      ],
+      "bytes": 39916,
+      "dimensions": [
+        1.48,
+        1.32,
+        3.25
+      ],
+      "wheelRadius": 0.31,
+      "animation": {
+        "name": "YieldRight",
+        "duration": 2,
+        "translation": [
+          1.1,
+          0,
+          0
+        ],
+        "finish": "hold last frame; reverse to return"
+      },
+      "axis": "+Z forward"
+    },
+    {
+      "file": "models/car-sedan.glb",
+      "triangles": 532,
+      "anchors": {},
+      "nodeNames": [
+        "CivilianRoot",
+        "WheelFrontLeft",
+        "WheelFrontRight",
+        "WheelRearLeft",
+        "WheelRearRight"
+      ],
+      "bytes": 39928,
+      "dimensions": [
+        1.58,
+        1.27,
+        3.85
+      ],
+      "wheelRadius": 0.31,
+      "animation": {
+        "name": "YieldRight",
+        "duration": 2,
+        "translation": [
+          1.1,
+          0,
+          0
+        ],
+        "finish": "hold last frame; reverse to return"
+      },
+      "axis": "+Z forward"
+    },
+    {
+      "file": "models/car-van.glb",
+      "triangles": 532,
+      "anchors": {},
+      "nodeNames": [
+        "CivilianRoot",
+        "WheelFrontLeft",
+        "WheelFrontRight",
+        "WheelRearLeft",
+        "WheelRearRight"
+      ],
+      "bytes": 39908,
+      "dimensions": [
+        1.66,
+        1.92,
+        3.9
+      ],
+      "wheelRadius": 0.34,
+      "animation": {
+        "name": "YieldRight",
+        "duration": 2,
+        "translation": [
+          1.1,
+          0,
+          0
+        ],
+        "finish": "hold last frame; reverse to return"
+      },
+      "axis": "+Z forward"
+    },
+    {
+      "file": "models/car-compact.glb",
+      "triangles": 532,
+      "anchors": {},
+      "nodeNames": [
+        "CivilianRoot",
+        "WheelFrontLeft",
+        "WheelFrontRight",
+        "WheelRearLeft",
+        "WheelRearRight"
+      ],
+      "bytes": 39924,
+      "dimensions": [
+        1.36,
+        1.4,
+        2.75
+      ],
+      "wheelRadius": 0.31,
+      "animation": {
+        "name": "YieldRight",
+        "duration": 2,
+        "translation": [
+          1.1,
+          0,
+          0
+        ],
+        "finish": "hold last frame; reverse to return"
+      },
+      "axis": "+Z forward"
+    },
+    {
+      "file": "models/cone.glb",
+      "triangles": 96,
+      "anchors": {},
+      "nodeNames": [
+        "ConeRoot"
+      ],
+      "bytes": 7392
+    },
+    {
+      "file": "models/street-lamp.glb",
+      "triangles": 92,
+      "anchors": {
+        "LightAnchor": [
+          0.87,
+          4.62,
+          0
+        ]
+      },
+      "nodeNames": [
+        "LightAnchor",
+        "StreetLampRoot"
+      ],
+      "bytes": 7996
+    },
+    {
+      "file": "models/house-burning.glb",
+      "triangles": 6208,
+      "anchors": {
+        "FireTarget1": [
+          -1.8,
+          0.2,
+          0.8
+        ],
+        "FireTarget2": [
+          1.7,
+          0.2,
+          1.2
+        ],
+        "FireTarget3": [
+          0,
+          0.2,
+          2.1
+        ],
+        "Doorway": [
+          0,
+          0.16,
+          -3.15
+        ],
+        "InteriorAnchor": [
+          0,
+          0.16,
+          0
+        ],
+        "TruckStop": [
+          0,
+          0,
+          -7.4
+        ]
+      },
+      "nodeNames": [
+        "BurningHouseRoot",
+        "CutawayFront",
+        "DoorHinge",
+        "Doorway",
+        "ExteriorTarget1High",
+        "ExteriorTarget1Low",
+        "ExteriorTarget1Medium",
+        "ExteriorTarget2High",
+        "ExteriorTarget2Low",
+        "ExteriorTarget2Medium",
+        "ExteriorTarget3High",
+        "ExteriorTarget3Low",
+        "ExteriorTarget3Medium",
+        "FireTarget1",
+        "FireTarget2",
+        "FireTarget3",
+        "FlamesHigh",
+        "FlamesLow",
+        "FlamesMedium",
+        "InteriorAnchor",
+        "Roof",
+        "Target1High",
+        "Target1Low",
+        "Target1Medium",
+        "Target2High",
+        "Target2Low",
+        "Target2Medium",
+        "Target3High",
+        "Target3Low",
+        "Target3Medium",
+        "TruckStop"
+      ],
+      "bytes": 344760,
+      "flameStates": {
+        "low": "FlamesLow",
+        "medium": "FlamesMedium",
+        "high": "FlamesHigh"
+      },
+      "defaultFlameState": "high",
+      "cutawayHide": [
+        "CutawayFront",
+        "Roof"
+      ],
+      "selectState": "set chosen parent scale to 1; other flame parents to 0",
+      "front": "-Z",
+      "dimensions": [
+        7.5,
+        6,
+        6.8
+      ]
+    }
+  ]
+}
