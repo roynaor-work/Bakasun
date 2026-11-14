@@ -42,11 +42,11 @@ for(const key of order){
  // Go through the chain with the weapon button (real taps) until this weapon is in hand.
  for(let i=0;i<14&&(await frame.evaluate(()=>window.__boar.state.current))!==key;i++){await touch('touchStart',[{...W,id:3}]);await touch('touchEnd',[{...W,id:3}]);await run(80);}
  const cur=await frame.evaluate(()=>window.__boar.state.current);if(cur!==key){rows.push({key,error:'not reached by the weapon button: '+cur});continue;}
- await run(400);await placeBoar();const log0=(await frame.evaluate(()=>window.__boar.fx())).log.length;
+ await run(400);await placeBoar();const tFire=(await frame.evaluate(()=>window.__boar.clock())).t;
  await touch('touchStart',[{...F,id:2}]);const fam=key.replace(/\d$/,'');await run(fam==='cannon'?100:fam==='tesla'?60:50);
  const mid=await frame.evaluate(()=>window.__boar.fx());await page.screenshot({path:`${out}frames/boar-${FX}-${key}.jpg`,type:'jpeg',quality:80});
  await run(fam==='cannon'?500:200);await touch('touchEnd',[{...F,id:2}]);const end=await frame.evaluate(()=>window.__boar.fx());await run(300);
- const shots=end.log.slice(Math.max(0,end.log.length-(end.log.length-log0))).filter(s=>s.key===key);
+ const shots=end.log.filter(s=>s.key===key&&s.t>=tFire-1e-6);
  const arc=mid.shells.filter(s=>s.fx).map(s=>s.vy);
  rows.push({key,shots:shots.length,kinds:[...new Set(shots.map(s=>s.kind))],sounds:[...new Set(shots.map(s=>s.sound))],streaks:mid.streaks,shellsInFlight:mid.shells.length,fxShells:mid.shells.filter(s=>s.fx).length,shellVy:arc});
  log(key,JSON.stringify(rows.at(-1)));

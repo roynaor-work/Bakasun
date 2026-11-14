@@ -27,9 +27,9 @@ export const WEAPON_FX=Object.freeze({
   cannon:{kind:'shell',body:'#c9a24a',nose:'#8a3a2a',tracer:'#ffb04a',radius:.17,length:.9,speed:170,gravity:80,smoke:'#c9c9c9',smokeSize:.9,spin:14,sound:'cannon',whistle:'shellWhistle',casing:'shell'},
   cannon2:{kind:'shell',body:'#b8933c',nose:'#5f2a20',tracer:'#ff8a30',radius:.23,length:1.15,speed:170,gravity:75,smoke:'#a9a9a9',smokeSize:1.25,spin:11,sound:'cannon2',whistle:'shellWhistle',casing:'shell'},
   cannon3:{kind:'shell',body:'#5d6b4a',nose:'#3a4430',tracer:'#ffd06a',radius:.27,length:.75,speed:170,gravity:150,smoke:'#bdbdbd',smokeSize:1.4,spin:0,sound:'cannon3',whistle:'mortarWhistle',casing:'shell',mortar:true},
-  tesla:{kind:'bolt',color:'#7fe3ff',width:.045,strands:1,sound:'tesla'},
-  tesla2:{kind:'bolt',color:'#bff4ff',width:.05,strands:2,sound:'tesla2'},
-  tesla3:{kind:'bolt',color:'#c9a2ff',width:.065,strands:2,orb:'#d9b8ff',sound:'tesla3'}
+  tesla:{kind:'bolt',color:'#7fe3ff',width:.06,strands:1,sound:'tesla'},
+  tesla2:{kind:'bolt',color:'#bff4ff',width:.065,strands:2,sound:'tesla2'},
+  tesla3:{kind:'bolt',color:'#b98aff',width:.085,strands:2,orb:'#d9b8ff',sound:'tesla3'}
 });
 export const weaponFx=key=>WEAPON_FX[key]||WEAPON_FX.mg;
 

@@ -69,8 +69,8 @@ await verify('naval-boars-v241',[{width:844,height:390,isMobile:true}],async({pa
   check(v241.hint&&v241.hint.word===null&&v241.hint.color==='#CFF3FF','v24.1: the aim ring has no word and one neutral colour');check(v24.hint&&typeof v24.hint.word==='string','?navalHint=v24: the v24 word under the ring');}
 
  // R4. The sky at the end of the stage. The session closes when a stage ends, so the end is read from the last snapshot before it closes
- // and from the stage's stars (a win at stage 3 stars it).
- if(want('r4')){const stars=()=>page.evaluate(()=>(window.__island.engine.state.minigameProgress.navalDuel?.stars||[])[2]||0);
+ // and from the island's count of ship wins (state.minigameWins.navalDuel, one more after a won stage).
+ if(want('r4')){const stars=()=>page.evaluate(()=>window.__island.engine.state.minigameWins?.navalDuel||0);
   const sky=async search=>{await page.evaluate(()=>{const a=window.__island.data.config.minigames.navalDuel.levels[2].air;a.from=2;a.kinds=['heli'];a.count=1;a.every=99;a.heli={...(a.heli||{}),leaveAfter:40};});const star0=await stars();await ready(3,search);
    const L=await center('.naval-lock-btn'),F=await center('#shoot');let s=await snap(),last=s,lastLock=-9,lastFire=-9,closed=false;
    const poll=async ms=>{await tick(ms);const now=await snap().catch(()=>null);if(now){last=now;s=now;}else{closed=true;s=null;}return s;};
