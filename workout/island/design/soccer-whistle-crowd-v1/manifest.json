@@ -1,0 +1,1050 @@
+{
+  "schema_version": 1,
+  "pack_id": "soccer-whistle-crowd-v1",
+  "created": "2026-11-14",
+  "license": "MIT",
+  "license_file": "LICENSE.txt",
+  "preview": "listen.html",
+  "generator": {
+    "script": "synthesize.py",
+    "seed": 20261114,
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "source": "Original DSP only; no recordings, samples, TTS, network or models."
+  },
+  "audio": {
+    "master_sample_rate_hz": 48000,
+    "channels": 2,
+    "max_file_bytes": 80000,
+    "normalization": {
+      "method": "Shared BS.1770/EBU R128 gated integrated loudness; linear gain",
+      "target_lufs_i": -23.0,
+      "master_true_peak_ceiling_dbtp": -3.0,
+      "encoded_loudness_tolerance_lu": 0.35,
+      "encoded_true_peak_ceiling_dbtp": -1,
+      "playback_gain_baked_in": false
+    },
+    "formats": {
+      "ogg": {
+        "mime": "audio/ogg; codecs=\"opus\"",
+        "codec": "Opus",
+        "bitrate_bps": 48000
+      },
+      "mp3": {
+        "mime": "audio/mpeg",
+        "codec": "MP3",
+        "bitrate_bps": 48000
+      }
+    }
+  },
+  "integration": {
+    "loop": "Decode once with Web Audio; loopStart=0, loopEnd=12; preserve codec trim metadata.",
+    "gain": "Apply recommended_gain_linear once; then master gain 0.70. Preview does both.",
+    "max_event_voices": 3,
+    "max_crowd_beds": 1,
+    "exclusive_groups": {
+      "referee": [
+        "whistle-kickoff",
+        "whistle-foul",
+        "whistle-halftime",
+        "whistle-fulltime",
+        "whistle-short"
+      ],
+      "crowd-reaction": [
+        "crowd-shot-rise",
+        "crowd-goal",
+        "crowd-miss"
+      ]
+    },
+    "duck_stadium_during_referee_db": -8,
+    "duck_attack_ms": 35,
+    "duck_release_ms": 350,
+    "stop_ramp_ms": 40,
+    "rise_to_reaction_crossfade_ms": 100,
+    "preview_only": true
+  },
+  "assets": [
+    {
+      "id": "whistle-kickoff",
+      "label_he": "שריקת פתיחה",
+      "group": "referee",
+      "description_he": "שריקה יחידה, נקייה ובינונית לפתיחת המשחק או חידושו.",
+      "duration_s": 1.2,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20261114,
+      "recommended_gain_db": -2,
+      "recommended_gain_linear": 0.794328,
+      "source_pcm_sha256": "37802a0ac686d82b94372977f0522c8b89abc6008dd76bb82dd9b3d0cae96986",
+      "normalization_gain_db": -17.0,
+      "master": {
+        "lufs_i": -23.0,
+        "true_peak_dbfs": -20.79
+      },
+      "whistle_pulses": [
+        {
+          "start_s": 0.04,
+          "duration_s": 0.65
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "whistle-kickoff.ogg",
+          "bytes": 7556,
+          "sha256": "91d52bad3b7d45ac4b3154705f344cd4e19366f5dc82bb8e7cc78932110b18f6",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 57600,
+          "decoded_duration_s": 1.2,
+          "lufs_i": -22.92,
+          "true_peak_dbfs": -19.87,
+          "dc_offset": [
+            6.2e-07,
+            1.3e-07
+          ],
+          "stereo_correlation": 0.99748,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "whistle-kickoff.mp3",
+          "bytes": 7680,
+          "sha256": "ba4c70268fb91280022024a32250a3105757cf96c432e0046be559dd6c8e79c9",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 57600,
+          "decoded_duration_s": 1.2,
+          "lufs_i": -23.1,
+          "true_peak_dbfs": -20.34,
+          "dc_offset": [
+            -1.64e-06,
+            -5.1e-06
+          ],
+          "stereo_correlation": 0.99985,
+          "codec_compensation_db": 0.408
+        }
+      }
+    },
+    {
+      "id": "whistle-foul",
+      "label_he": "שריקת עבירה",
+      "group": "referee",
+      "description_he": "שריקה חדה ונחרצת עם התקפה מהירה, שונה משריקת הפתיחה.",
+      "duration_s": 1.35,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20262111,
+      "recommended_gain_db": -2,
+      "recommended_gain_linear": 0.794328,
+      "source_pcm_sha256": "53204ea7a2950afb3b82111046c466e1575b31ba7cd42407f528dbdba2809645",
+      "normalization_gain_db": -16.68,
+      "master": {
+        "lufs_i": -22.99,
+        "true_peak_dbfs": -20.75
+      },
+      "whistle_pulses": [
+        {
+          "start_s": 0.04,
+          "duration_s": 0.82
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "whistle-foul.ogg",
+          "bytes": 8403,
+          "sha256": "2bbe945237ea649b9390f7e43a67cd01b85c6d71fbd6c045865289d174fc8693",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 64800,
+          "decoded_duration_s": 1.35,
+          "lufs_i": -22.98,
+          "true_peak_dbfs": -20.0,
+          "dc_offset": [
+            1.99e-06,
+            1.4e-07
+          ],
+          "stereo_correlation": 0.99779,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "whistle-foul.mp3",
+          "bytes": 8688,
+          "sha256": "7e41273d8fb2d568afb28900151f55cda8d5526492380644bf32d0c0bf540f61",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 64800,
+          "decoded_duration_s": 1.35,
+          "lufs_i": -23.19,
+          "true_peak_dbfs": -20.49,
+          "dc_offset": [
+            1.79e-06,
+            3.08e-06
+          ],
+          "stereo_correlation": 0.99985,
+          "codec_compensation_db": 0.3315
+        }
+      }
+    },
+    {
+      "id": "whistle-halftime",
+      "label_he": "שריקת סיום מחצית",
+      "group": "referee",
+      "description_he": "שתי שריקות: קצרה ואחריה ארוכה.",
+      "duration_s": 1.95,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20263108,
+      "recommended_gain_db": -2,
+      "recommended_gain_linear": 0.794328,
+      "source_pcm_sha256": "612ee2ef91c64cd7275b2b01d3a0e905a13e35fb7659297dd2314080ebcbf815",
+      "normalization_gain_db": -16.51,
+      "master": {
+        "lufs_i": -22.99,
+        "true_peak_dbfs": -20.55
+      },
+      "whistle_pulses": [
+        {
+          "start_s": 0.04,
+          "duration_s": 0.29
+        },
+        {
+          "start_s": 0.54,
+          "duration_s": 0.86
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "whistle-halftime.ogg",
+          "bytes": 12033,
+          "sha256": "46109de462c94c7de505f055750e30085d4e9095531f760448e27076d5d7d436",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 93600,
+          "decoded_duration_s": 1.95,
+          "lufs_i": -22.95,
+          "true_peak_dbfs": -19.67,
+          "dc_offset": [
+            1.38e-06,
+            -5e-08
+          ],
+          "stereo_correlation": 0.99779,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "whistle-halftime.mp3",
+          "bytes": 12288,
+          "sha256": "f9ce45ddc8f8af5f6af38d3abf26bb5ad9ba0abbdc4d4913e12dae230d9b0291",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 93600,
+          "decoded_duration_s": 1.95,
+          "lufs_i": -23.08,
+          "true_peak_dbfs": -19.59,
+          "dc_offset": [
+            9.68e-06,
+            1.058e-05
+          ],
+          "stereo_correlation": 0.9999,
+          "codec_compensation_db": 0.357
+        }
+      }
+    },
+    {
+      "id": "whistle-fulltime",
+      "label_he": "שריקת סיום משחק",
+      "group": "referee",
+      "description_he": "שלוש שריקות מובחנות: קצרה, קצרה וארוכה.",
+      "duration_s": 2.55,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20264105,
+      "recommended_gain_db": -2,
+      "recommended_gain_linear": 0.794328,
+      "source_pcm_sha256": "2eafeeee7716f3773f84933eab40f13198a537036b30f9a21b5f6f1ae3d53a16",
+      "normalization_gain_db": -16.25,
+      "master": {
+        "lufs_i": -22.99,
+        "true_peak_dbfs": -20.13
+      },
+      "whistle_pulses": [
+        {
+          "start_s": 0.04,
+          "duration_s": 0.28
+        },
+        {
+          "start_s": 0.54,
+          "duration_s": 0.28
+        },
+        {
+          "start_s": 1.04,
+          "duration_s": 1.0
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "whistle-fulltime.ogg",
+          "bytes": 15690,
+          "sha256": "522446434a59421a6c37af22a04ab30e9a2d57bac200c36405955dc04f2b622d",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 122400,
+          "decoded_duration_s": 2.55,
+          "lufs_i": -22.96,
+          "true_peak_dbfs": -19.7,
+          "dc_offset": [
+            5.3e-07,
+            -8.6e-07
+          ],
+          "stereo_correlation": 0.99782,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "whistle-fulltime.mp3",
+          "bytes": 15888,
+          "sha256": "6d388aa8eb03ff57d05c44061df72c085c9a2c428ddefcacb6b86d62ffdd9d0a",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 122400,
+          "decoded_duration_s": 2.55,
+          "lufs_i": -23.07,
+          "true_peak_dbfs": -19.74,
+          "dc_offset": [
+            6.91e-06,
+            6.22e-06
+          ],
+          "stereo_correlation": 0.99985,
+          "codec_compensation_db": 0.357
+        }
+      }
+    },
+    {
+      "id": "whistle-short",
+      "label_he": "שריקה קצרה לחטיפה או עבירה קלה",
+      "group": "referee",
+      "description_he": "ציוץ קצר אחד; חטיפה חוקית אינה מחייבת שריקה, לפי כללי המשחק.",
+      "duration_s": 0.65,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20265102,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "source_pcm_sha256": "c9fcbb58e4992ff8671636c8bfe61fce5815c85f43ceb9b3a56fc49072111177",
+      "normalization_gain_db": -16.13,
+      "master": {
+        "lufs_i": -22.97,
+        "true_peak_dbfs": -17.34
+      },
+      "whistle_pulses": [
+        {
+          "start_s": 0.04,
+          "duration_s": 0.16
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "whistle-short.ogg",
+          "bytes": 4141,
+          "sha256": "2f7e00498326e31a4330de3d783a9fe487fdcc889ef7d71d6df97d57ce1022d9",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 31200,
+          "decoded_duration_s": 0.65,
+          "lufs_i": -22.97,
+          "true_peak_dbfs": -16.39,
+          "dc_offset": [
+            7.53e-06,
+            -3.72e-06
+          ],
+          "stereo_correlation": 0.99738,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "whistle-short.mp3",
+          "bytes": 4512,
+          "sha256": "87815edcf972891d0d0d73dd24ebafaac7f7e3c3f8e4217fc3f38509d08f0c1f",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 31200,
+          "decoded_duration_s": 0.65,
+          "lufs_i": -23.15,
+          "true_peak_dbfs": -15.83,
+          "dc_offset": [
+            1.015e-05,
+            9.76e-06
+          ],
+          "stereo_correlation": 0.99984,
+          "codec_compensation_db": 0.544
+        }
+      }
+    },
+    {
+      "id": "crowd-stadium-loop",
+      "label_he": "קהל אצטדיון שקט · לולאה",
+      "group": "crowd",
+      "description_he": "המון רחוק, דיבור עמום וקריאות פזורות ללא שירה או מנגינה.",
+      "duration_s": 12.0,
+      "loop": true,
+      "loop_start_s": 0,
+      "loop_end_s": 12.0,
+      "seed": 20266099,
+      "recommended_gain_db": -14,
+      "recommended_gain_linear": 0.199526,
+      "source_pcm_sha256": "d850ddd6e25973db8f10d80f65d2357a9266c1a459c7d9d471b1b3c5a400ba0f",
+      "normalization_gain_db": -13.44,
+      "master": {
+        "lufs_i": -23.0,
+        "true_peak_dbfs": -14.74
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "crowd-stadium-loop.ogg",
+          "bytes": 73193,
+          "sha256": "448736c9763596754fd4dff21336e28d441936ba1ad7e749f9717c8450690ca5",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 576000,
+          "decoded_duration_s": 12.0,
+          "lufs_i": -23.24,
+          "true_peak_dbfs": -14.11,
+          "dc_offset": [
+            -0.00010612,
+            -2.649e-05
+          ],
+          "stereo_correlation": 0.00706,
+          "seam": {
+            "boundary_step_dbfs": -57.087,
+            "boundary_step_over_p99_delta": 0.0645,
+            "seam_100ms_vs_body_rms_db": 0.099
+          },
+          "codec_compensation_db": 1.3515
+        },
+        "mp3": {
+          "path": "crowd-stadium-loop.mp3",
+          "bytes": 72480,
+          "sha256": "8f8a601be436551045fa0f9a58679aa957a7a2be9b2e55f9eeda5ba652dbbdf2",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 576000,
+          "decoded_duration_s": 12.0,
+          "lufs_i": -23.07,
+          "true_peak_dbfs": -14.85,
+          "dc_offset": [
+            1.54e-06,
+            -2.97e-06
+          ],
+          "stereo_correlation": 0.00937,
+          "seam": {
+            "boundary_step_dbfs": -54.082,
+            "boundary_step_over_p99_delta": 0.0892,
+            "seam_100ms_vs_body_rms_db": -0.472
+          },
+          "codec_compensation_db": 0.255
+        }
+      },
+      "source_seam": {
+        "boundary_step_dbfs": -240.0,
+        "boundary_step_over_p99_delta": 0.0,
+        "seam_100ms_vs_body_rms_db": -0.221
+      }
+    },
+    {
+      "id": "crowd-shot-rise",
+      "label_he": "קהל עולה לקראת בעיטה לשער",
+      "group": "crowd",
+      "description_he": "ציפייה שמתגברת בהדרגה; לעצור עם תוצאת הבעיטה.",
+      "duration_s": 3.6,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20267096,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "source_pcm_sha256": "f9926bdfaaf932cf5a6ca03d8f636ec31dd8e66cef9350739f5afe02757ef0fc",
+      "normalization_gain_db": -13.87,
+      "master": {
+        "lufs_i": -23.0,
+        "true_peak_dbfs": -15.1
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "crowd-shot-rise.ogg",
+          "bytes": 22130,
+          "sha256": "a553a4653a6f545840b7559b484ce0afb6db1a14cd4ebd3c05eec9c60d1131eb",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 172800,
+          "decoded_duration_s": 3.6,
+          "lufs_i": -23.22,
+          "true_peak_dbfs": -13.6,
+          "dc_offset": [
+            -0.00010601,
+            -6.402e-05
+          ],
+          "stereo_correlation": 0.58669,
+          "codec_compensation_db": 1.071
+        },
+        "mp3": {
+          "path": "crowd-shot-rise.mp3",
+          "bytes": 22080,
+          "sha256": "e0370f39d8ab7a8e9ade140780762b3bdbe5e910133435b573e2f0cd3599d9ea",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 172800,
+          "decoded_duration_s": 3.6,
+          "lufs_i": -23.21,
+          "true_peak_dbfs": -14.08,
+          "dc_offset": [
+            -4.28e-06,
+            3.51e-06
+          ],
+          "stereo_correlation": 0.54075,
+          "codec_compensation_db": 0.0
+        }
+      }
+    },
+    {
+      "id": "crowd-goal",
+      "label_he": "גוווול · קהל ענק",
+      "group": "crowd",
+      "description_he": "עשרות גרונות מסונתזים בהתקפה מדורגת, גוווול ממושך ושובל שאגה.",
+      "duration_s": 6.2,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20268093,
+      "recommended_gain_db": 0,
+      "recommended_gain_linear": 1.0,
+      "source_pcm_sha256": "7ca1cf0f3806b408c90411c49e182a8842232f2fd704c65bc716bf72ba389793",
+      "normalization_gain_db": -12.44,
+      "master": {
+        "lufs_i": -23.0,
+        "true_peak_dbfs": -12.89
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "crowd-goal.ogg",
+          "bytes": 37941,
+          "sha256": "f7819ee46c194bccea95c7ef53a9801bc156dfa862ff32c139828c7c535e9bc7",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 297600,
+          "decoded_duration_s": 6.2,
+          "lufs_i": -23.13,
+          "true_peak_dbfs": -10.94,
+          "dc_offset": [
+            -0.00012859,
+            -8.159e-05
+          ],
+          "stereo_correlation": 0.63089,
+          "codec_compensation_db": 0.85
+        },
+        "mp3": {
+          "path": "crowd-goal.mp3",
+          "bytes": 37776,
+          "sha256": "3273ca9256b12f5ed7f1d18f83cfde2f1d415d925bd443350ac1ec306fa8831a",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 297600,
+          "decoded_duration_s": 6.2,
+          "lufs_i": -23.26,
+          "true_peak_dbfs": -11.93,
+          "dc_offset": [
+            5.52e-06,
+            -5.96e-06
+          ],
+          "stereo_correlation": 0.60003,
+          "codec_compensation_db": 0.0
+        }
+      }
+    },
+    {
+      "id": "crowd-miss",
+      "label_he": "אוהו · החטאה",
+      "group": "crowd",
+      "description_he": "אוהו משותף, גלישה מטה ואכזבה שנחלשת.",
+      "duration_s": 3.4,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20269090,
+      "recommended_gain_db": -2,
+      "recommended_gain_linear": 0.794328,
+      "source_pcm_sha256": "062a46301dcec658fcbb740d83d1c070b0b896e50ff98e7db535694cbbf1ba6d",
+      "normalization_gain_db": -13.43,
+      "master": {
+        "lufs_i": -22.98,
+        "true_peak_dbfs": -13.87
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "crowd-miss.ogg",
+          "bytes": 20920,
+          "sha256": "0f27b23f2e165703497298681b80586bfcf666a742ae1436d3dbe9dc5e8e6eb4",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 163200,
+          "decoded_duration_s": 3.4,
+          "lufs_i": -23.03,
+          "true_peak_dbfs": -10.53,
+          "dc_offset": [
+            4.082e-05,
+            3.584e-05
+          ],
+          "stereo_correlation": 0.6508,
+          "codec_compensation_db": 0.595
+        },
+        "mp3": {
+          "path": "crowd-miss.mp3",
+          "bytes": 20928,
+          "sha256": "3b80683fcbbbfc948d961f8e21a301bce1671fff2dad21645204b03934de0992",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 163200,
+          "decoded_duration_s": 3.4,
+          "lufs_i": -23.0,
+          "true_peak_dbfs": -12.64,
+          "dc_offset": [
+            4.051e-05,
+            -4.56e-05
+          ],
+          "stereo_correlation": 0.59702,
+          "codec_compensation_db": 0.272
+        }
+      }
+    },
+    {
+      "id": "crowd-applause",
+      "label_he": "מחיאות כפיים",
+      "group": "crowd",
+      "description_he": "מאות טפיחות כף לא מסונכרנות במרחב האצטדיון.",
+      "duration_s": 3.6,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20270087,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "source_pcm_sha256": "389310cd52889d034df911603fb684f44ecf0d84c33ca67bad714f957456d022",
+      "normalization_gain_db": -15.17,
+      "master": {
+        "lufs_i": -23.0,
+        "true_peak_dbfs": -15.33
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "crowd-applause.ogg",
+          "bytes": 22130,
+          "sha256": "03ef3e10c11821e1e5b5a821661cce699d8d3a5cc68afe82acdfca2fab019657",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 172800,
+          "decoded_duration_s": 3.6,
+          "lufs_i": -22.99,
+          "true_peak_dbfs": -12.41,
+          "dc_offset": [
+            -1.76e-06,
+            -2.032e-05
+          ],
+          "stereo_correlation": 0.70971,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "crowd-applause.mp3",
+          "bytes": 22080,
+          "sha256": "ab15ab9a94a2d2675539743d4ab150fe1cc5b1bea5216d39d6ef095baed57a8b",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 172800,
+          "decoded_duration_s": 3.6,
+          "lufs_i": -23.21,
+          "true_peak_dbfs": -13.16,
+          "dc_offset": [
+            -2.12e-06,
+            -8.38e-06
+          ],
+          "stereo_correlation": 0.59712,
+          "codec_compensation_db": 0.0
+        }
+      }
+    },
+    {
+      "id": "ball-kick-soft",
+      "label_he": "בעיטה חלשה",
+      "group": "ball",
+      "description_he": "מגע רך בכדור עור, בס קצר ומעט חיכוך.",
+      "duration_s": 0.8,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20271084,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "source_pcm_sha256": "7bada9feb74a3ec68e4c646d3476c46a4a1a1285a378084b334614fb565127a4",
+      "normalization_gain_db": -9.69,
+      "master": {
+        "lufs_i": -23.01,
+        "true_peak_dbfs": -9.82
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-kick-soft.ogg",
+          "bytes": 5109,
+          "sha256": "a91c7d72d265f98891f74d14dcea91df1dda5816a1325d161f2f8ad0f9b68db2",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 38400,
+          "decoded_duration_s": 0.8,
+          "lufs_i": -23.1,
+          "true_peak_dbfs": -8.59,
+          "dc_offset": [
+            7.628e-05,
+            6.944e-05
+          ],
+          "stereo_correlation": 0.99975,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "ball-kick-soft.mp3",
+          "bytes": 5376,
+          "sha256": "e2022b326262bb3e0164f88c63ced6a7516dc9d4f1caec4f0a5b2ab89a763e24",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 38400,
+          "decoded_duration_s": 0.8,
+          "lufs_i": -23.23,
+          "true_peak_dbfs": -7.24,
+          "dc_offset": [
+            0.00015483,
+            -8.817e-05
+          ],
+          "stereo_correlation": 0.98271,
+          "codec_compensation_db": 0.0
+        }
+      }
+    },
+    {
+      "id": "ball-kick-medium",
+      "label_he": "בעיטה בינונית",
+      "group": "ball",
+      "description_he": "מכה מלאה ומהירה, תהודת כדור נמוכה וחבטת נעל.",
+      "duration_s": 0.85,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20272081,
+      "recommended_gain_db": -3,
+      "recommended_gain_linear": 0.707946,
+      "source_pcm_sha256": "7cfc811c3cb1c9660d54ca0ea5f4fce3b3556711bd46968aa0d2debc7d7e529a",
+      "normalization_gain_db": -10.23,
+      "master": {
+        "lufs_i": -22.97,
+        "true_peak_dbfs": -10.25
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-kick-medium.ogg",
+          "bytes": 5351,
+          "sha256": "914c45cf5b244c09ccb49ab1418ede1af106890671e888068f9e04c72acd1da4",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 40800,
+          "decoded_duration_s": 0.85,
+          "lufs_i": -23.23,
+          "true_peak_dbfs": -8.96,
+          "dc_offset": [
+            7.835e-05,
+            7.036e-05
+          ],
+          "stereo_correlation": 0.99986,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "ball-kick-medium.mp3",
+          "bytes": 5664,
+          "sha256": "4fc78482d0f12d2550173a08fedb04a9a9cf081ad8f6d24ebae3ce7c1dabf575",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 40800,
+          "decoded_duration_s": 0.85,
+          "lufs_i": -23.16,
+          "true_peak_dbfs": -8.71,
+          "dc_offset": [
+            -4.685e-05,
+            -3.963e-05
+          ],
+          "stereo_correlation": 0.99905,
+          "codec_compensation_db": 0.3145
+        }
+      }
+    },
+    {
+      "id": "ball-kick-hard",
+      "label_he": "בעיטה חזקה",
+      "group": "ball",
+      "description_he": "מכה דחוסה, בס עמוק וחבטה בהירה עם שובל קצר.",
+      "duration_s": 0.95,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20273078,
+      "recommended_gain_db": 0,
+      "recommended_gain_linear": 1.0,
+      "source_pcm_sha256": "166ad1d61be762d6fff57516730efc577a6e9ad1a8778628efb8cbda5b20229e",
+      "normalization_gain_db": -10.79,
+      "master": {
+        "lufs_i": -23.01,
+        "true_peak_dbfs": -10.9
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-kick-hard.ogg",
+          "bytes": 5956,
+          "sha256": "730521fc30ea6950e61bfc563ffcc57e1ed2d8a3fb00fb37783746a38789b11b",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 45600,
+          "decoded_duration_s": 0.95,
+          "lufs_i": -23.27,
+          "true_peak_dbfs": -8.53,
+          "dc_offset": [
+            -0.00011897,
+            -0.00011411
+          ],
+          "stereo_correlation": 0.99968,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "ball-kick-hard.mp3",
+          "bytes": 6240,
+          "sha256": "85ca3a7b9d33a02865d102753f614b3a9c8b41869a7580362d0c6fb0a7d95e69",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 45600,
+          "decoded_duration_s": 0.95,
+          "lufs_i": -23.0,
+          "true_peak_dbfs": -9.41,
+          "dc_offset": [
+            0.00011075,
+            8.883e-05
+          ],
+          "stereo_correlation": 0.99877,
+          "codec_compensation_db": 0.425
+        }
+      }
+    },
+    {
+      "id": "ball-post",
+      "label_he": "כדור בקורה",
+      "group": "ball",
+      "description_he": "חבטת כדור חלולה ותהודות מתכת של עמוד שער.",
+      "duration_s": 1.75,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20274075,
+      "recommended_gain_db": -3,
+      "recommended_gain_linear": 0.707946,
+      "source_pcm_sha256": "0ce97eef43d07400d16af632a9958d6630be8ef220f2168f5b9fe5fdc9762ad2",
+      "normalization_gain_db": -11.76,
+      "master": {
+        "lufs_i": -22.98,
+        "true_peak_dbfs": -12.01
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-post.ogg",
+          "bytes": 10823,
+          "sha256": "7309461f5a2ed707c57d9003f6eb6ab4182365b25ec66146f4ee373b8f3381a6",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 84000,
+          "decoded_duration_s": 1.75,
+          "lufs_i": -23.05,
+          "true_peak_dbfs": -10.02,
+          "dc_offset": [
+            -3.44e-05,
+            -2.124e-05
+          ],
+          "stereo_correlation": 0.9971,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "ball-post.mp3",
+          "bytes": 10992,
+          "sha256": "bc350e46ca2908ac38442c44a6ab9063543a69677c5310fa872b41aa4ee7721f",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 84000,
+          "decoded_duration_s": 1.75,
+          "lufs_i": -23.14,
+          "true_peak_dbfs": -10.54,
+          "dc_offset": [
+            6.16e-06,
+            1.842e-05
+          ],
+          "stereo_correlation": 0.9968,
+          "codec_compensation_db": 0.323
+        }
+      }
+    },
+    {
+      "id": "ball-net",
+      "label_he": "כדור ברשת",
+      "group": "ball",
+      "description_he": "פגיעה רכה ומתיחה מתנפנפת של מיתרי רשת.",
+      "duration_s": 1.1,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20275072,
+      "recommended_gain_db": -4,
+      "recommended_gain_linear": 0.630957,
+      "source_pcm_sha256": "a97d9a8a017fdbb78c8638e2b701f73be0c11a033f3c3f763bd15664beb9a894",
+      "normalization_gain_db": -12.13,
+      "master": {
+        "lufs_i": -23.02,
+        "true_peak_dbfs": -12.19
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-net.ogg",
+          "bytes": 6951,
+          "sha256": "f389fc72cd276a00b620ae3aea4d8015745580db5b738027946d50b51f2aa348",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 52800,
+          "decoded_duration_s": 1.1,
+          "lufs_i": -23.16,
+          "true_peak_dbfs": -10.17,
+          "dc_offset": [
+            -0.00016306,
+            -0.00028191
+          ],
+          "stereo_correlation": 0.92222,
+          "codec_compensation_db": 0.9605
+        },
+        "mp3": {
+          "path": "ball-net.mp3",
+          "bytes": 7104,
+          "sha256": "4b9b73c37ee58ced1a6bffb1048316919c8338a133b15afa1d5f012315f630e3",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 52800,
+          "decoded_duration_s": 1.1,
+          "lufs_i": -22.93,
+          "true_peak_dbfs": -9.91,
+          "dc_offset": [
+            -6.094e-05,
+            -0.00023581
+          ],
+          "stereo_correlation": 0.84694,
+          "codec_compensation_db": 0.0
+        }
+      }
+    },
+    {
+      "id": "ball-grass-bounce",
+      "label_he": "כדור מקפץ על דשא",
+      "group": "ball",
+      "description_he": "ארבע קפיצות דועכות במרווחים מתקצרים, עם רשרוש דשא.",
+      "duration_s": 1.85,
+      "loop": false,
+      "loop_start_s": null,
+      "loop_end_s": null,
+      "seed": 20276069,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "source_pcm_sha256": "04232c0c9321786fd141b2964f2b5990a35a452ab7887e733b422797a3273abd",
+      "normalization_gain_db": -8.78,
+      "master": {
+        "lufs_i": -23.01,
+        "true_peak_dbfs": -8.8
+      },
+      "whistle_pulses": [],
+      "files": {
+        "ogg": {
+          "path": "ball-grass-bounce.ogg",
+          "bytes": 11428,
+          "sha256": "b65a334964692498ec0ce5bad6a6f45c4a403b0b27d44238b20b0a523486afcf",
+          "codec": "opus",
+          "channels": 2,
+          "sample_rate_hz": 48000,
+          "decoded_frames_48000hz": 88800,
+          "decoded_duration_s": 1.85,
+          "lufs_i": -23.26,
+          "true_peak_dbfs": -6.04,
+          "dc_offset": [
+            -1.503e-05,
+            5.112e-05
+          ],
+          "stereo_correlation": 0.99294,
+          "codec_compensation_db": 0.0
+        },
+        "mp3": {
+          "path": "ball-grass-bounce.mp3",
+          "bytes": 11712,
+          "sha256": "5f3c37abd76ff85f7a25f8cae729740bcea7dc1688489f61b679fdd4ca800dac",
+          "codec": "mp3",
+          "channels": 2,
+          "sample_rate_hz": 24000,
+          "decoded_frames_48000hz": 88800,
+          "decoded_duration_s": 1.85,
+          "lufs_i": -22.96,
+          "true_peak_dbfs": -4.74,
+          "dc_offset": [
+            5.81e-06,
+            2.009e-05
+          ],
+          "stereo_correlation": 0.99422,
+          "codec_compensation_db": 0.391
+        }
+      }
+    }
+  ]
+}

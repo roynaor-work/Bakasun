@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="לוח האזנה לחבילת צלילי שופט, קהל וכדור לכדורגל 11 על 11">
+  <link rel="icon" href="data:,">
+  <title>קול המגרש · כדורגל 11 על 11</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #f0f7f4; background: #0a1511;
+      --muted: #b5c8bd; --line: #355246; --green: #a8f0bd; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(1120px, 100%); margin: auto; padding: 32px 20px 80px; }
+    h1 { font-size: clamp(2rem, 6vw, 3.7rem); margin: 12px 0; line-height: 1.15; }
+    h2 { font-size: 1.4rem; margin: 30px 0 16px; }
+    p { line-height: 1.7; color: var(--muted); }
+    .eyebrow { color: var(--green); letter-spacing: .08em; }
+    .toolbar, .scene { display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+      padding: 18px; background: #14271e; border: 1px solid var(--line); border-radius: 16px; }
+    label { display: flex; align-items: center; gap: 8px; }
+    button, select { font: inherit; color: inherit; background: #243e30; border: 1px solid #5b7d69;
+      border-radius: 9px; min-height: 44px; padding: 9px 15px; cursor: pointer; }
+    button:hover, select:hover { background: #34533f; }
+    button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible {
+      outline: 3px solid var(--green); outline-offset: 3px; }
+    button:disabled { opacity: .5; cursor: wait; }
+    .primary { background: var(--green); color: #102419; border-color: var(--green); font-weight: 700; }
+    .primary:hover { background: #ccffda; }
+    .stop { margin-inline-start: auto; }
+    input { accent-color: var(--green); max-width: 125px; }
+    output { min-width: 3ch; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 14px; }
+    article { display: flex; flex-direction: column; padding: 20px; border: 1px solid var(--line);
+      border-radius: 14px; background: #10221a; }
+    article.playing { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+    article h3 { margin: 7px 0 0; font-size: 1.12rem; }
+    article p { margin: 10px 0 18px; font-size: .92rem; flex: 1; }
+    .meta { color: var(--green); font-size: .82rem; font-variant-numeric: tabular-nums; }
+    .actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    a { color: #b7edcb; text-underline-offset: 4px; }
+    .downloads { display: flex; gap: 12px; font-size: .85rem; margin-inline-start: auto; }
+    .status { min-height: 28px; color: var(--green); margin: 15px 0; }
+    .help { border-top: 1px solid var(--line); padding-top: 20px; margin-top: 32px; }
+    code { direction: ltr; unicode-bidi: isolate; }
+    @media (max-width: 600px) { main { padding: 22px 14px 48px; }
+      .toolbar { gap: 16px 10px; } .stop { margin-inline-start: 0; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">חבילת צלילים מקורית · 11 על 11</div>
+    <h1>קול המגרש</h1>
+    <p>חמש שריקות שופט, קהל אצטדיון ואפקטים לכדור. בחרו צליל, או נסו מהלך שלם עם קהל שקט ברקע.</p>
+  </header>
+  <div class="toolbar" aria-label="הגדרות האזנה">
+    <label>פורמט
+      <select id="format"><option value="ogg">Ogg Opus</option><option value="mp3">MP3</option></select>
+    </label>
+    <label for="volume">עוצמה
+      <input id="volume" type="range" min="0" max="100" value="70" aria-label="עוצמת האזנה">
+      <output id="volume-value" for="volume">70%</output>
+    </label>
+    <label><input type="checkbox" id="mix" checked> ערבוב מומלץ</label>
+    <button type="button" id="stop" class="stop">עצירת הכול</button>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite">טוען את רשימת הצלילים…</p>
+  <section aria-labelledby="scene-title">
+    <h2 id="scene-title">מהלך לדוגמה</h2>
+    <div class="scene">
+      <button type="button" id="goal-scene" class="primary" disabled>התקפה ושער</button>
+      <button type="button" id="miss-scene" disabled>התקפה והחטאה</button>
+      <span>קהל שקט ← ציפייה ← בעיטה ← תגובה</span>
+    </div>
+  </section>
+  <div id="catalogue"></div>
+  <noscript><p>יש להפעיל JavaScript כדי להשתמש בלוח ההאזנה. קובצי הצליל זמינים באותה תיקייה.</p></noscript>
+  <section class="help" aria-labelledby="help-title">
+    <h2 id="help-title">להאזנה ולבדיקת הלולאה</h2>
+    <p>אין הפעלה אוטומטית. לחצו על כפתור הקהל השקט והאזינו לפחות 30 שניות כדי לעבור שני חיבורים.
+      לולאת הרקע מנוגנת ברצף, וניתן לשלב מעליה אפקטים. בחירה בפורמט אחר עוצרת את ההשמעה.</p>
+    <p>כל הקבצים מנורמלים לאותה עוצמה. הערבוב המומלץ מנמיך את קהל הרקע ואת הבעיטות הרכות;
+      ביטול הסימון מאפשר להשוות את הקבצים בעוצמה המנורמלת. קולות הקהל מלאכותיים לחלוטין.</p>
+    <p>העמוד פועל דרך שרת מקומי. הוראות הפעלה, תוצאות בדיקות ומגבלות נמצאים ב־<a href="REPORT.md">דוח</a>.
+      <a href="manifest.json">מניפסט</a> · <a href="LICENSE.txt">רישיון</a></p>
+  </section>
+</main>
+<script type="module">
+const $ = id => document.getElementById(id);
+const status = text => { $('status').textContent = text; };
+const cache = new Map();
+const active = new Map();
+const pending = new Map();
+let pack, context, master, generation = 0, sceneGeneration = 0, timers = [], loading = false;
+const assets = new Map();
+const format = () => $('format').value;
+const gainFor = asset => $('mix').checked ? asset.recommended_gain_linear : 1;
+
+async function audioContext() {
+  if (!context) {
+    context = new (window.AudioContext || window.webkitAudioContext)();
+    master = context.createGain();
+    master.gain.value = Number($('volume').value) / 100;
+    master.connect(context.destination);
+  }
+  await context.resume();
+  return context;
+}
+
+async function bufferFor(id, extension) {
+  const key = `${id}.${extension}`;
+  if (!cache.has(key)) {
+    const promise = (async () => {
+      const response = await fetch(assets.get(id).files[extension].path);
+      if (!response.ok) throw new Error(`קובץ חסר: ${key}`);
+      return context.decodeAudioData(await response.arrayBuffer());
+    })();
+    cache.set(key, promise);
+    promise.catch(() => cache.delete(key));
+  }
+  return cache.get(key);
+}
+
+function stopVoice(id, release = .04) {
+  pending.delete(id);
+  const voice = active.get(id);
+  if (!voice) return;
+  const now = context.currentTime;
+  voice.gain.gain.cancelAndHoldAtTime(now);
+  voice.gain.gain.linearRampToValueAtTime(0, now + release);
+  voice.source.stop(now + release + .005);
+  active.delete(id);
+  const card = document.getElementById(id);
+  card?.classList.remove('playing');
+  const button = card?.querySelector('button');
+  if (button) { button.textContent = assets.get(id).loop ? 'הפעלת לולאה' : 'השמעה'; button.setAttribute('aria-pressed', 'false'); }
+}
+
+function stopAll() {
+  generation++;
+  sceneGeneration++;
+  timers.forEach(clearTimeout); timers = [];
+  pending.clear();
+  for (const id of [...active.keys()]) stopVoice(id);
+  status('ההשמעה נעצרה.');
+}
+
+function refreshMix() {
+  if (!context) return;
+  const refereeActive = [...active.keys()].some(id => assets.get(id).group === 'referee');
+  const reactionActive = [...active.keys()].some(id => ['crowd-goal', 'crowd-miss'].includes(id));
+  for (const [id, voice] of active) {
+    const asset = assets.get(id);
+    let gain = gainFor(asset);
+    if (asset.loop && (refereeActive || reactionActive) && $('mix').checked) gain *= 10 ** (-8 / 20);
+    voice.gain.gain.setTargetAtTime(gain, context.currentTime, .035);
+  }
+}
+
+async function play(id, options = {}) {
+  const requestGeneration = generation;
+  const ticket = Symbol(id);
+  const extension = format();
+  pending.set(id, ticket);
+  await audioContext();
+  const buffer = await bufferFor(id, extension);
+  if (generation !== requestGeneration || pending.get(id) !== ticket) return;
+  stopVoice(id);
+  const asset = assets.get(id);
+  const groups = pack.integration.exclusive_groups;
+  for (const group of Object.values(groups)) {
+    if (group.includes(id)) for (const other of group) if (other !== id) stopVoice(other, .10);
+  }
+  // One background plus up to three events, matching the integration contract.
+  const events = [...active.keys()].filter(other => !assets.get(other).loop);
+  if (!asset.loop && events.length >= 3) stopVoice(events[0]);
+  const source = context.createBufferSource();
+  const gain = context.createGain();
+  source.buffer = buffer;
+  source.loop = asset.loop;
+  if (asset.loop) { source.loopStart = 0; source.loopEnd = asset.duration_s; }
+  gain.gain.setValueAtTime(0, context.currentTime);
+  gain.gain.linearRampToValueAtTime(gainFor(asset), context.currentTime + .02);
+  source.connect(gain).connect(master);
+  const voice = {source, gain};
+  active.set(id, voice);
+  source.onended = () => {
+    source.disconnect(); gain.disconnect();
+    if (active.get(id) === voice) {
+      active.delete(id);
+      const card = document.getElementById(id);
+      card?.classList.remove('playing');
+      const button = card?.querySelector('button');
+      if (button) { button.textContent = asset.loop ? 'הפעלת לולאה' : 'השמעה'; button.setAttribute('aria-pressed', 'false'); }
+      refreshMix();
+    }
+  };
+  source.start();
+  const card = document.getElementById(id);
+  card?.classList.add('playing');
+  const button = card?.querySelector('button');
+  if (button) { button.textContent = asset.loop ? 'עצירת לולאה' : 'עצירה'; button.setAttribute('aria-pressed', 'true'); }
+  refreshMix();
+  if (!options.quiet) status(`מתנגן: ${asset.label_he}${asset.loop ? ' · לולאה רציפה, 12 שניות למחזור' : ''}`);
+}
+
+async function scene(goal) {
+  if (loading) return;
+  loading = true;
+  stopAll();
+  const token = sceneGeneration;
+  $('goal-scene').disabled = $('miss-scene').disabled = true;
+  try {
+    await audioContext();
+    const extension = format();
+    const ids = ['crowd-stadium-loop', 'crowd-shot-rise', 'ball-kick-hard',
+      goal ? 'crowd-goal' : 'crowd-miss', goal ? 'ball-net' : 'ball-post'];
+    status('מכין את המהלך…');
+    await Promise.all(ids.map(id => bufferFor(id, extension)));
+    if (token !== sceneGeneration) return;
+    const schedule = (delay, action) => timers.push(setTimeout(() => {
+      if (token === sceneGeneration) action();
+    }, delay));
+    await play('crowd-stadium-loop', {quiet: true});
+    schedule(700, () => safePlay('crowd-shot-rise'));
+    schedule(3250, () => safePlay('ball-kick-hard'));
+    schedule(3520, () => safePlay(goal ? 'ball-net' : 'ball-post'));
+    schedule(3620, () => safePlay(goal ? 'crowd-goal' : 'crowd-miss'));
+    schedule(goal ? 10500 : 7800, stopAll);
+    status(goal ? 'מהלך התקפה ושער מתנגן.' : 'מהלך התקפה והחטאה מתנגן.');
+  } catch (error) { stopAll(); status(error.message); }
+  finally { loading = false; $('goal-scene').disabled = $('miss-scene').disabled = false; }
+}
+
+function safePlay(id) {
+  play(id).catch(error => status(`ההשמעה נכשלה: ${error.message}. אפשר לנסות את הפורמט השני.`));
+}
+
+function render() {
+  for (const [group, heading] of [['referee', 'שריקות שופט'], ['crowd', 'קהל האצטדיון'], ['ball', 'הכדור והמגרש']]) {
+    const section = document.createElement('section');
+    const title = document.createElement('h2');
+    title.textContent = heading; section.append(title);
+    const grid = document.createElement('div'); grid.className = 'grid';
+    for (const asset of pack.assets.filter(item => item.group === group)) {
+      const article = document.createElement('article'); article.id = asset.id;
+      const meta = document.createElement('span'); meta.className = 'meta';
+      meta.textContent = `${asset.duration_s.toFixed(2)} שניות · ${asset.loop ? 'לולאה רציפה' : 'צליל אירוע'} · ${asset.recommended_gain_db} dB`;
+      const h3 = document.createElement('h3'); h3.textContent = asset.label_he;
+      const description = document.createElement('p'); description.textContent = asset.description_he;
+      const actions = document.createElement('div'); actions.className = 'actions';
+      const button = document.createElement('button'); button.type = 'button';
+      button.textContent = asset.loop ? 'הפעלת לולאה' : 'השמעה';
+      button.setAttribute('aria-label', `${button.textContent}: ${asset.label_he}`);
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => {
+        if (active.has(asset.id) || pending.has(asset.id)) { stopVoice(asset.id); refreshMix(); }
+        else safePlay(asset.id);
+      });
+      const downloads = document.createElement('div'); downloads.className = 'downloads';
+      for (const ext of ['ogg', 'mp3']) {
+        const link = document.createElement('a'); link.href = asset.files[ext].path;
+        link.download = asset.files[ext].path; link.textContent = ext.toUpperCase();
+        link.setAttribute('aria-label', `הורדת ${asset.label_he}, ${ext.toUpperCase()}`);
+        downloads.append(link);
+      }
+      actions.append(button, downloads); article.append(meta, h3, description, actions); grid.append(article);
+    }
+    section.append(grid); $('catalogue').append(section);
+  }
+}
+
+$('stop').addEventListener('click', stopAll);
+$('format').addEventListener('change', stopAll);
+$('mix').addEventListener('change', refreshMix);
+$('volume').addEventListener('input', () => {
+  $('volume-value').textContent = `${$('volume').value}%`;
+  if (master) master.gain.setTargetAtTime(Number($('volume').value) / 100, context.currentTime, .02);
+});
+$('goal-scene').addEventListener('click', () => scene(true));
+$('miss-scene').addEventListener('click', () => scene(false));
+window.addEventListener('pagehide', stopAll);
+
+try {
+  const response = await fetch('manifest.json');
+  if (!response.ok) throw new Error('המניפסט לא נמצא');
+  pack = await response.json();
+  for (const asset of pack.assets) assets.set(asset.id, asset);
+  render();
+  $('goal-scene').disabled = $('miss-scene').disabled = false;
+  status('16 צלילים מוכנים להאזנה · עוצמה התחלתית 70%');
+} catch (error) {
+  status(location.protocol === 'file:'
+    ? 'יש לפתוח דרך שרת מקומי. הוראות וקישור נמצאים בדוח שבתיקייה.'
+    : `לא ניתן לטעון את החבילה: ${error.message}`);
+}
+</script>
+</body>
+</html>
