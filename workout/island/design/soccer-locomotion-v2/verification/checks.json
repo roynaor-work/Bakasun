@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing repository checks only; no test source or assertion was changed or added.",
+  "runs": [
+    {
+      "command": "npm test",
+      "passed": 3905,
+      "skipped": 64,
+      "failed": 1,
+      "outcome": "One browser environment failure: the default Playwright Chromium executable was absent. The failed worker left its local server open and was terminated after the reported results.",
+      "failingFile": "tests/workout-royiki.test.mjs"
+    },
+    {
+      "command": "ISLAND_PLAYWRIGHT=/tmp/bakasun-system-playwright.mjs node --test tests/workout-royiki.test.mjs",
+      "passed": 5,
+      "skipped": 0,
+      "failed": 0,
+      "durationMs": 21118.140316,
+      "outcome": "All five original checks in the only failing file passed using installed system Chromium through the existing ISLAND_PLAYWRIGHT configuration.",
+      "browserExecutable": "/usr/lib/chromium/chromium",
+      "playwrightModule": "/opt/codex/runtimes/cua/lib/node_modules/playwright/index.mjs",
+      "temporaryWrapperPath": "/tmp/bakasun-system-playwright.mjs",
+      "temporaryWrapperContents": "import {chromium as engine} from '/opt/codex/runtimes/cua/lib/node_modules/playwright/index.mjs';\nexport const chromium={launch(options={}){return engine.launch({...options,executablePath:'/usr/lib/chromium/chromium',args:[...(options.args??[]),'--no-sandbox']});}};\n"
+    }
+  ],
+  "testSourcesModified": false,
+  "assertionsModified": false,
+  "interpretation": "The original full command had one environment failure. Its only failing file passed on a focused rerun with an installed browser; the full suite was not rerun under that alternate browser configuration. Motion QA, C1 bridges and new-library browser capture are recorded separately."
+}

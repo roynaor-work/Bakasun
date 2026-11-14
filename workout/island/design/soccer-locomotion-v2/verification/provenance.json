@@ -1,0 +1,717 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "sourceRevision": {
+    "kind": "authored-worktree",
+    "gitHeadWhenReportGenerated": "fe61f341ea789669173e69677024f6710815c1d4",
+    "contentIdentity": "The HEAD identifies checkout ancestry; authored asset content is identified by sourceMotionSha256 and each runtime/catalog.json clip SHA-256, not by that pre-commit HEAD."
+  },
+  "license": "CC0-1.0 original contributions; CC0 inherited mesh/rig/player; existing Three.js MIT",
+  "nativeRate": 30,
+  "canonicalBones": 18,
+  "rootMotion": false,
+  "sourceMotionSha256": "9d0be2e6c54e80c27ea1c377f8ea4de97b94e37baaebb88b3bb021bbe5f96edd",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "qaFiles": [
+    {
+      "path": "workout/island/design/motion-qa-v1/run.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 12713,
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 15655,
+      "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.json",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 1709,
+      "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 36189,
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/glb.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 9363,
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/report.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 15342,
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 5947,
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 3539,
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "assertions": {
+    "qaPassed": true,
+    "transitionsPassed": true,
+    "browserPassed": true,
+    "allEvidenceAssetHashesMatch": true,
+    "eightDistinctNativeFramesPerSheet": true
+  },
+  "sourceDependencies": [
+    {
+      "path": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/runtime/player.mjs",
+      "bytes": 6354,
+      "sha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79"
+    },
+    {
+      "path": "workout/island/minigames/athletes-core.mjs",
+      "bytes": 14692,
+      "sha256": "539c465ae9d455c6aa04e5609a6d24d1f95a965356431cdf2eccaad3c900b177"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d"
+    }
+  ],
+  "files": [
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/LICENSES.md",
+      "bytes": 5174,
+      "sha256": "a542f43dc67f4404c8affb3840535ac8408ef563a9978646f56119d409740dc1"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/measure.mjs",
+      "bytes": 13789,
+      "sha256": "c39e9ab599af2f132ea2ba932bba843b1d748d5e7f5e9f5adfff07166887e62d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/preview.css",
+      "bytes": 6028,
+      "sha256": "a5764ff07500f8f201bd9482f2fa8e4c33246727cdf272da270c201104420cee"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/preview.html",
+      "bytes": 3459,
+      "sha256": "0253e503394b816a966e4b6c98076d15695c3e00238aa9d52a0913d8f2d3d2a5"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/preview.mjs",
+      "bytes": 14522,
+      "sha256": "b2b84a575caa10aef8dd35e7037877e9843fadc60adb2339857f4625bc2477bd"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/qa-register.mjs",
+      "bytes": 734,
+      "sha256": "f8870b1889f4921936de229691cca9ab939339f228b5e6540db47748ebcb2665"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/qa-sources.mjs",
+      "bytes": 5900,
+      "sha256": "2ae8cc863429bf2f5a9f1216a8fdae96c3111d6fc1ab1f61997dae7d7bf4594d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/README.md",
+      "bytes": 5844,
+      "sha256": "d4c5ff2196555100f91e75c0908d0f49423eaeb250c2c28fc6182387b2bdb15f"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/REPORT.md",
+      "bytes": 12282,
+      "sha256": "a6e717949d704dff8879b9eabe7d6b66e0846cec381f49c6c205cdfa24506d54"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/catalog.json",
+      "bytes": 520500,
+      "sha256": "09bddeab02fa5eb1d6f4a2208e76ff0d8305cce69636cfa7cf0338b4536ee949"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/idle_relaxed.glb",
+      "bytes": 805528,
+      "sha256": "81c4324076b0a6b1fde1abb3ab184280dd8e2d243e7cbc92ea23fc9b9ce3322c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/idle_scan.glb",
+      "bytes": 805520,
+      "sha256": "fa9759411ddf3fa49c644e484251f36f9f20149cfab4ff0d33028f5c2019f2a0"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/idle_to_run.glb",
+      "bytes": 773568,
+      "sha256": "bd09f8f85891d0905675868e7c787b4cb9a3b132b74b9a3353857a6d1b58da73"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/idle_weight_shift.glb",
+      "bytes": 805536,
+      "sha256": "9f97b4c9b1a22b005a4911d24504efa99a59892ee1735daac20dc355b84465de"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/jog.glb",
+      "bytes": 776912,
+      "sha256": "134a3e73b00fde5cc25d2d8e4461fba157306fd59992ac1199b81e76320cb21d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/run_backward.glb",
+      "bytes": 775712,
+      "sha256": "ea280515e4a772f74b3b6573eb36e091a2018c404436c298edc3ac9ffc03a130"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/run_ball.glb",
+      "bytes": 775704,
+      "sha256": "b10f90eda8e55e6868d60f63c29c6857d06020c5ed162f703b917a3cbfee0be2"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/run_to_idle.glb",
+      "bytes": 773280,
+      "sha256": "830714d5d02bdd727b350c86022e21abbb9b04ca264d0895293780e2cecbff1a"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/run.glb",
+      "bytes": 775696,
+      "sha256": "5c3cc67e5627fbd92281388821579625059847d3b2e0f311d7f8a48e41a18bc7"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/sprint.glb",
+      "bytes": 775092,
+      "sha256": "0002703a98f5b0ace6a8cebc37abb68036efbcb62472fc2c677c66646309748d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/strafe_left.glb",
+      "bytes": 776928,
+      "sha256": "8b9366645f96edff91db6e89322a3f2e5360fd3298d1e45d4e13108ee6a30c48"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/strafe_right.glb",
+      "bytes": 776928,
+      "sha256": "bfe97a8b88ec70315851e487a5b328bb1fd81a70a69e8e9bd425e3d9d9231b0c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_left_180.glb",
+      "bytes": 789096,
+      "sha256": "690cd5bb9efc096db40010c05046c508615fc0da7aca32508286c2e9bfab1138"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_left_45.glb",
+      "bytes": 782400,
+      "sha256": "ba1dad665ac7e2f6e84c1a35bbb27ad6762c649e3ff5b8f40fe22a4c60d138ae"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_left_90.glb",
+      "bytes": 782400,
+      "sha256": "e1e8478c38a267a90c199eeca41a707daef2f69df31332e3fb2f817e42e5642f"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_right_180.glb",
+      "bytes": 789096,
+      "sha256": "884b485d9eca2f663c6c77739c221b79dba0176941176c1811dd2e823aab5158"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_right_45.glb",
+      "bytes": 782404,
+      "sha256": "18ac6f958a84ce9d08ef0cd8425c06d182523f132a6ed22bb19a7ce3eda74e4d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/turn_right_90.glb",
+      "bytes": 782404,
+      "sha256": "822d754ad479534d6dacb2cf69e631bfdc80dd7a4bc312f6ae065900204b65c5"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/clips/walk.glb",
+      "bytes": 778736,
+      "sha256": "29f831cf40537ab5a6f026d51e903f0cb1b2215a111d71b684ace5e21d933f7c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/motions.json",
+      "bytes": 1539316,
+      "sha256": "9d0be2e6c54e80c27ea1c377f8ea4de97b94e37baaebb88b3bb021bbe5f96edd"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/runtime/player.mjs",
+      "bytes": 2562,
+      "sha256": "a06e5edd6ca77fc6f369eb7b0dbb7f97eeb0c214ca299df661725604771baf9b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/source/author.mjs",
+      "bytes": 15738,
+      "sha256": "116093723f89e7578101438166e6bbcb57db6f2dd4ce78654a0c73fe3984e268"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/source/bake.mjs",
+      "bytes": 3180,
+      "sha256": "7ecd62244d168be15b5401e1c5cedd689a40d0c639bf60f48d9e6084210af21c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/source/capture.mjs",
+      "bytes": 6455,
+      "sha256": "ea2988da7ca6b2a83733103d60aa044ede2df29131ed1473c62d5b0ad55e4f7c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/source/measure-transitions.mjs",
+      "bytes": 11731,
+      "sha256": "afee990fb35c92e7a6808d0e3523c6a4563a28ec2d91470be24671bf1b97d3b3"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/source/report.mjs",
+      "bytes": 15258,
+      "sha256": "ffd2a1c449b8e6b0aecda573f7dcd6dfabe60de2ab0cc947441b5e8bae30515c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/browser.json",
+      "bytes": 10833,
+      "sha256": "158a80cd41c15c4864dc589c4a44a76ce6d1dd991b00d2ba55a14703fa8e6cf0"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/checks.json",
+      "bytes": 1768,
+      "sha256": "a5b89a9d531503beb596267b604ac258def333b03bebad339555a4530ebbf6ff"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/preview-desktop.png",
+      "bytes": 168777,
+      "sha256": "5d450b6e88979a95ebc9264bef619b4b53a2ba3734b7d5f44ca07823eb07d1c7"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/preview-mobile.png",
+      "bytes": 72988,
+      "sha256": "90142e30ec923fd8339d92f030082f504fdda2796a6ff1f380ec006cdf6498b0"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_relaxed.html",
+      "bytes": 6014,
+      "sha256": "6af4c7c7c63abf347a26a0142c38e670829ae095a85910036331df7eaa56a715"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_relaxed.json",
+      "bytes": 10190,
+      "sha256": "c038d5fec7b3e76f197c7b977c34c99af32dcb3ddd3b22d9e837c5df49b34b5e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_scan.html",
+      "bytes": 5964,
+      "sha256": "6a930e3d5499e974dcdd21f5f1cb2a4ae8cdc451ba7c165d12fcc5697645eeec"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_scan.json",
+      "bytes": 10189,
+      "sha256": "48cdcaadfce29c4d4fc4cb2f96d392c593b9a195fd259ca78419cc210dd187eb"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_to_run.html",
+      "bytes": 7306,
+      "sha256": "6748ba114334c325b50a5f30178456416038771a29bd0171de19e32d68e64d50"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_to_run.json",
+      "bytes": 17796,
+      "sha256": "bef443b24c9d9d42f3101594fccdcbc19305c813e815436729ae58f06281da75"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_weight_shift.html",
+      "bytes": 6012,
+      "sha256": "a07117c707390dbb55776cc02d8cee9679485882e0ac952e1887ee7971dc4efc"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--idle_weight_shift.json",
+      "bytes": 10207,
+      "sha256": "a704a4fdf2e36e2aca4b432760b2ddf75eed30c85d49b6269c04954b7c2af77e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--jog.html",
+      "bytes": 7016,
+      "sha256": "f58608fff1180b1a4f153689871dfcff78debdcc9dbfcee09524e5cb0ed39c2e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--jog.json",
+      "bytes": 20142,
+      "sha256": "eaf0d428145013582ff49000a3d55108af64db09d2e338099943b968561d4704"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_backward.html",
+      "bytes": 7312,
+      "sha256": "748eb298920f169cec30161562fc78456bc45c09a2ac57abee6aadfec2012162"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_backward.json",
+      "bytes": 19132,
+      "sha256": "79dab4a95e770f374dd701c85e82c090b4c92e78b3612313042762917247e2ec"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_ball.html",
+      "bytes": 8389,
+      "sha256": "3bc92d9602b860962292b873e115281bcba350f0b8d37a567f4fa33eca82d877"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_ball.json",
+      "bytes": 20585,
+      "sha256": "7e50c0b355d53b273b1e6d810b013db51b00769c860b40c2da1c1e8ef1e2c94a"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_to_idle.html",
+      "bytes": 7293,
+      "sha256": "027377cdecad381f835c3f84981a8fdc3ea3ed4efcd2779633cdf5738a488b12"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run_to_idle.json",
+      "bytes": 17587,
+      "sha256": "e0c26e57f9d8dbe084520c95a5df0b8c66db4c5ba2c0d67e50e39e78e5a1b825"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run.html",
+      "bytes": 7258,
+      "sha256": "b5707109a0ca198b07312c96c747211baddf97e0e4501e2d2eebab5b6f4a3455"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--run.json",
+      "bytes": 19335,
+      "sha256": "34cf3e65a999d9b643e2852dd4398f07ace54739deefcec64263939595526e8d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--sprint.html",
+      "bytes": 7289,
+      "sha256": "4d4bb8b02a3ed4384186d37b3635a9b486e821a6eed985a24d60f692971b49fc"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--sprint.json",
+      "bytes": 18782,
+      "sha256": "062093bb38d5067c5bdc5879d2539729969945a72e48f966a9bbc95e6dcc4976"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--strafe_left.html",
+      "bytes": 7097,
+      "sha256": "6fe4d8a03c6032b284a495c92a2b09286915f2a93e0340fef28dfaa6f434f2ed"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--strafe_left.json",
+      "bytes": 19787,
+      "sha256": "e44e767b4e0eaaac391836af8a914be43bcad7464ea480113d425f189d975d76"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--strafe_right.html",
+      "bytes": 7109,
+      "sha256": "47e4a3cf1baa6e4c4fe0690f0897dce862599b8b08b867e151fd21aa053620da"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--strafe_right.json",
+      "bytes": 20032,
+      "sha256": "fd3fc807b2e6f97a44284be2cb2b438539ef3524b655767352d058c26e44ccc9"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_180.html",
+      "bytes": 7883,
+      "sha256": "3f1d8fb5d74c80667a21c1d6467c71fc1cbf4c5926aca6fbd80469c2b49597bb"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_180.json",
+      "bytes": 42622,
+      "sha256": "ea22fc14f3315fa74fcedd6cfab2ed11f231f96bf1ccc2fd7c86cdecf4e4a6a9"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_45.html",
+      "bytes": 7874,
+      "sha256": "fa9a0ce1da1cb401238fd3b7e1b99f404e8f42221de1e73a5f2780cd8bb0cda1"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_45.json",
+      "bytes": 32960,
+      "sha256": "b90cd903c152ee6cd237810315e7e075997089546072bfbb2492ff90991b7fc5"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_90.html",
+      "bytes": 7875,
+      "sha256": "c427c1c8cfeaaa8703d7b671d2ccb32cea6077ed7a59a05c8a1c60b203969f9c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_left_90.json",
+      "bytes": 32902,
+      "sha256": "154015d84f23b471444fd7779fb0a1047356189039e8e3a6033b58de0d01628c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_180.html",
+      "bytes": 7882,
+      "sha256": "a566bfd6bfbe6557c648b3ad88cba730714eca4c2737525c2b385e8cb7be7683"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_180.json",
+      "bytes": 43281,
+      "sha256": "e78df94945858ca997d42bc512ffc1c381c38e7f09f761853033735f9b1fea02"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_45.html",
+      "bytes": 7880,
+      "sha256": "770ebba85e92eb30835d4e3d4703d35d7e84b79c1fdb59671264538442fa6a5a"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_45.json",
+      "bytes": 33435,
+      "sha256": "f132ac4e2c23c6c1c7ff37802c3cc16fe1da95062b8285ddc6faf5737fb3f28b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_90.html",
+      "bytes": 7875,
+      "sha256": "654bf3a83287863522ffd2a463d1e4f542062f0dee33b90df37ddad2f05027d1"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--turn_right_90.json",
+      "bytes": 33383,
+      "sha256": "ccd4e631faf54669a3dc57293c8a813fa568f0362df704b2a7dbbedb27e5f427"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--walk.html",
+      "bytes": 7256,
+      "sha256": "9e9131a7d00687483d945cff2859e520d0a27fbaee7af97dce3457806d009f16"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/clips/soccer-locomotion-v2--walk.json",
+      "bytes": 21673,
+      "sha256": "da45e5bb0c801e0c2ae1fb92b06b86baad59a255f11cb161f64695713f9240a8"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/report.html",
+      "bytes": 16898,
+      "sha256": "68c273e085c28342079b891cdba5b171825a93ddbdef992f3d1c5bfcc936f36e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/report.json",
+      "bytes": 823320,
+      "sha256": "c1dfbe7cb9e0b0b2198f5fe5f7ef2635dd9fe032a4b325dff7084176ce60f54d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--idle_relaxed.svg",
+      "bytes": 26225,
+      "sha256": "8747b9fe4f2862072ff2c5ebf670a6fb61d220012eba214f90d0a4bc6156cfbc"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--idle_scan.svg",
+      "bytes": 26219,
+      "sha256": "0290f8de0764ff2b60e35fe0c63f8df5dc3f088c7852ec121560b7fd89f7aa57"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--idle_to_run.svg",
+      "bytes": 26229,
+      "sha256": "a162ef0ead23b808f788e443543d33a4cf620112b96879e6e94c3f9cf9768f45"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--idle_weight_shift.svg",
+      "bytes": 26235,
+      "sha256": "0a16fc815e394679b6155422f65f25a7237a8689caa9fcd9951fe678f4aad958"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--jog.svg",
+      "bytes": 26223,
+      "sha256": "62e67803cfc883c9b8b3124c4aa36fbf3dbca429ddb319ff1e1a5e764b8f470b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--run_backward.svg",
+      "bytes": 26248,
+      "sha256": "5f0270159f571df8a95005449f1c78a033da62c08901b68b8a2f0b63ad837d00"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--run_ball.svg",
+      "bytes": 26969,
+      "sha256": "d87d7dbb19284f8af078e998818df6681747a58ad855f92171e7411862d2b003"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--run_to_idle.svg",
+      "bytes": 26229,
+      "sha256": "88d63cbd43d2fdf0847eca5c35b3488a89a9711d5526ebf21eeb0ad123bba87b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--run.svg",
+      "bytes": 26223,
+      "sha256": "b6fa7d6d68ef6900840c9b8914d5b25062b9bc36ed9ac6f371ee98cec49d0f23"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--sprint.svg",
+      "bytes": 26229,
+      "sha256": "bc047088f243bd1eef0499cc2b0c974bc03a0f5e3c3e30013e925308930e2a0d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--strafe_left.svg",
+      "bytes": 26239,
+      "sha256": "f91f655249a7c515e578219e2f5bccadde1edcfe89c81bceee659aa640405a1e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--strafe_right.svg",
+      "bytes": 26248,
+      "sha256": "757fcb87d966820003c26fbbe817f4599ce0fde32a7b49808d81a4f345ca1a30"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_left_180.svg",
+      "bytes": 26235,
+      "sha256": "cbad9adfb7752084a60afc834c1b84ed0aea4de8980da0a2f05f2d1d90d71327"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_left_45.svg",
+      "bytes": 26239,
+      "sha256": "732ce4b1083795ad3de48bd638e1ba63f7a0a5e6f0b723641d0fab05b990d2f7"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_left_90.svg",
+      "bytes": 26235,
+      "sha256": "6718ff94d995204668b0b369ce5d0b160a76fdd5bec3979fa8049577123a2f1a"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_right_180.svg",
+      "bytes": 26246,
+      "sha256": "fa8cee18d87a4dcc5b78a250c458f9ec4cd685f5dbaac415e6f59babfc41ecd8"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_right_45.svg",
+      "bytes": 26250,
+      "sha256": "bf53f8b399dc4530bdbd990c758bb3fae28b3aa941336486e74962186da04fb8"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--turn_right_90.svg",
+      "bytes": 26250,
+      "sha256": "99d0ecc1e77c092346017d72113dc5b94688919a6bcc11547d2d289c46300d0c"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/qa/sheets/soccer-locomotion-v2--walk.svg",
+      "bytes": 26221,
+      "sha256": "ae06f31dab10b5e4c175c6d651393251bdbf642e9e221206d1f13955f47ca284"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/requirements.json",
+      "bytes": 162823,
+      "sha256": "7b8a424cc2d355ef2b5d5ac86d01aee2c5f0d664e6b03b87b3c215c3688b1fa1"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/idle_relaxed.png",
+      "bytes": 511678,
+      "sha256": "71dee2c93b92b66125b7dbcdb5829792743b0813e3e126d14917902a47e911c9"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/idle_scan.png",
+      "bytes": 511298,
+      "sha256": "0e5c4a5ebea23f4dab163510da4ed281ec8c2719a1b305725784b8a2267df5d6"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/idle_to_run.png",
+      "bytes": 531323,
+      "sha256": "9c776a943b6a15e4518dc08859db0f63d8a99960d40e8fd0f91e7a7ac7ee88fe"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/idle_weight_shift.png",
+      "bytes": 514452,
+      "sha256": "51d612315daece38ce0d1f0d868a94c8e64007dcf7eec85847d1aef387b5157f"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/jog.png",
+      "bytes": 522634,
+      "sha256": "733d43952bfb3f0e8ae492f6edfc5db00ddfe2bcdc18d68f27220aea37372908"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/run_backward.png",
+      "bytes": 516215,
+      "sha256": "ec2ad80ddd6953306f43ca540659598e28883813ef9bb810ca76103c56660052"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/run_ball.png",
+      "bytes": 538960,
+      "sha256": "3cd560e1c6b4b2029457699123080dafd9a3c786f212d0ee9a189d880237dc88"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/run_to_idle.png",
+      "bytes": 544933,
+      "sha256": "c5c2be2a0b379f674219f895f120e9bc93c63aed929dfc320db38f2ae3290e26"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/run.png",
+      "bytes": 521977,
+      "sha256": "5e616acb4d2f57cab58f0a462c04cf1526ad03982d3fed3e98ec929133c4e1f8"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/sprint.png",
+      "bytes": 540770,
+      "sha256": "f40cafd0c0c6bee1f5fa50d4635155f16b26dfdf985d5ab8610ec2614934751a"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/strafe_left.png",
+      "bytes": 352480,
+      "sha256": "aba3d7a12a8a409d85953e95485c9365d2951fd39e24c6c5907ca2f4ef3e12a2"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/strafe_right.png",
+      "bytes": 353289,
+      "sha256": "9fb3cddac291372220dc5aafe7d2df6be4b8258e831c159da0ea355d0d99b63b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_left_180.png",
+      "bytes": 532369,
+      "sha256": "cf92a787fdeaa97840d5e04de48e2f722a6ff2b3fad6a66980c30fd537e6c83d"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_left_45.png",
+      "bytes": 524008,
+      "sha256": "9a68dd877af2cc7a468f675944acf2619a911999504909295ec76471c54dde50"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_left_90.png",
+      "bytes": 531194,
+      "sha256": "ede7730976897f1d477cade469ca26346a6b1238380507a803f9cfb288fb33aa"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_right_180.png",
+      "bytes": 525735,
+      "sha256": "38953e140646ae9062d33caac63fc126ab6752e2823f8d98516f3e480f3917d9"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_right_45.png",
+      "bytes": 546449,
+      "sha256": "c2aa4a17dade837b22df032a122388cc4d6ae14a4ca398bf5c944581ed61227e"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/turn_right_90.png",
+      "bytes": 542423,
+      "sha256": "8d57fd2561044dcc8fe999e0f166bc1089cfbe37329b22524248d7d4531be66b"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/sheets/walk.png",
+      "bytes": 519763,
+      "sha256": "55fec47388773a3688d85b81488e1d26028e96857af893c1e7bd5f7923078862"
+    },
+    {
+      "path": "workout/island/design/soccer-locomotion-v2/verification/transitions.json",
+      "bytes": 1494939,
+      "sha256": "9dbeca1623b687007df7588c6f59af52ab28fc774447e9fad9bc88549e33d1e3"
+    }
+  ],
+  "inventoryScope": "Every package file except this inventory itself; REPORT.md included after generation. Existing dependencies are hashed separately."
+}
