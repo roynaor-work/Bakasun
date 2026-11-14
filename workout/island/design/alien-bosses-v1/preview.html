@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'">
+  <title>אורחים מהחלל · בוסים v1</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main id="app">
+  <header><div><span class="eyebrow">יומן מסע / 01</span><h1>אורחים מהחלל</h1></div><div class="header-meta"><span class="dot"></span>שלושה בוסים · שלוש הפתעות</div></header>
+  <section id="viewport" aria-label="תצוגת תלת ממד של שלושת הבוסים">
+    <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+    <canvas id="scene" aria-label="חלליות צעצוע עם תותחים, מגן וזחל מקטעים"></canvas>
+    <canvas id="overlay" aria-hidden="true"></canvas>
+    <div id="loading" role="status">החלליות בדרך…</div>
+    <div id="event" role="status" aria-live="polite">בחרו חללית, ואז נסו פגיעה או התקפה</div>
+    <span class="scene-label">סדנת חלליות</span>
+  </section>
+  <section id="cards" aria-label="בחירת בוס">
+    <button class="card" data-boss="mothership" aria-pressed="true"><span class="number">01</span><span><strong>אם־חללית</strong><small>שלושה תותחים, בתור</small></span><span class="swatch pink">▮</span></button>
+    <button class="card" data-boss="cosmic-guardian" aria-pressed="false"><span class="number">02</span><span><strong>מגן קוסמי</strong><small>קודם הגנרטור, אחר כך הליבה</small></span><span class="swatch amber">◎</span></button>
+    <button class="card" data-boss="space-crawler" aria-pressed="false"><span class="number">03</span><span><strong>זחל חלל</strong><small>חמישה מקטעים, כל אחד בנפרד</small></span><span class="swatch orange">◆</span></button>
+  </section>
+  <section class="controls" aria-label="בדיקת נכסים">
+    <label>מצב<select id="state"><option value="intact">שלם</option><option value="damaged">פגוע</option><option value="critical">כמעט שבור</option></select></label>
+    <label>מטרה<select id="target" aria-label="חלק לפגיעה"></select></label>
+    <button id="hit">פגיעה</button><button id="attack" aria-pressed="false">התקפה</button>
+    <button id="entrance">כניסה</button><button id="retreat">נסיגה</button><button id="explode">פיצוץ מקטע</button>
+    <button id="pause" aria-pressed="false">עצירה</button><button id="sound" aria-pressed="false">צליל כבוי</button>
+  </section>
+  <footer><span id="status">טוען נכסים מקומיים</span><a href="REPORT.md">דוח החבילה ↗</a></footer>
+</main>
+<script type="module" src="preview.mjs"></script>
+</body>
+</html>

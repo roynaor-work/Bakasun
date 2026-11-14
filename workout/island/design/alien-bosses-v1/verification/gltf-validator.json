@@ -1,0 +1,127 @@
+[
+  {
+    "id": "mothership",
+    "triangles": 3064,
+    "bytes": 550096,
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/materials/1"
+        }
+      ],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Bakasun alien-bosses-v1 / original geometry",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 518256
+        }
+      ],
+      "animationCount": 6,
+      "materialCount": 2,
+      "hasMorphTargets": true,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 12,
+      "totalVertexCount": 9192,
+      "totalTriangleCount": 3064,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 3
+    }
+  },
+  {
+    "id": "cosmic-guardian",
+    "triangles": 3008,
+    "bytes": 520916,
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Bakasun alien-bosses-v1 / original geometry",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 502464
+        }
+      ],
+      "animationCount": 6,
+      "materialCount": 2,
+      "hasMorphTargets": true,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 7,
+      "totalVertexCount": 9024,
+      "totalTriangleCount": 3008,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 3
+    }
+  },
+  {
+    "id": "space-crawler",
+    "triangles": 2972,
+    "bytes": 541272,
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/materials/1"
+        }
+      ],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Bakasun alien-bosses-v1 / original geometry",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 501960
+        }
+      ],
+      "animationCount": 6,
+      "materialCount": 2,
+      "hasMorphTargets": true,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 15,
+      "totalVertexCount": 8916,
+      "totalTriangleCount": 2972,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 3
+    }
+  }
+]

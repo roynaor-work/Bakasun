@@ -1,0 +1,576 @@
+{
+  "viewport": [
+    844,
+    390
+  ],
+  "checks": [
+    {
+      "name": "three bosses render real GLB mesh geometry",
+      "passed": true
+    },
+    {
+      "name": "all encounters enter active state",
+      "passed": true
+    },
+    {
+      "name": "no horizontal or vertical scroll at requested viewport",
+      "passed": true
+    },
+    {
+      "name": "all control buttons fit viewport",
+      "passed": true
+    },
+    {
+      "name": "mothership: intact applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "mothership: damaged applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "mothership: critical applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "cosmic-guardian: intact applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "cosmic-guardian: damaged applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "cosmic-guardian: critical applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "space-crawler: intact applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "space-crawler: damaged applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "space-crawler: critical applies independent morph targets",
+      "passed": true
+    },
+    {
+      "name": "all 18 embedded clips produce expected states and transforms",
+      "passed": true
+    },
+    {
+      "name": "shield blocks core damage",
+      "passed": true
+    },
+    {
+      "name": "generator explodes and shield disappears",
+      "passed": true
+    },
+    {
+      "name": "core now accepts damage",
+      "passed": true
+    },
+    {
+      "name": "only selected segment disappears",
+      "passed": true
+    },
+    {
+      "name": "remaining segments keep their health",
+      "passed": true
+    },
+    {
+      "name": "mothership emits visible projectiles",
+      "passed": true
+    },
+    {
+      "name": "cosmic-guardian emits visible projectiles",
+      "passed": true
+    },
+    {
+      "name": "space-crawler emits visible projectiles",
+      "passed": true
+    },
+    {
+      "name": "pause freezes simulation clock",
+      "passed": true
+    },
+    {
+      "name": "retreat removes boss and disables combat",
+      "passed": true
+    },
+    {
+      "name": "entrance restores all five parts",
+      "passed": true
+    },
+    {
+      "name": "all 24 OGG/MP3 files decode in Chromium",
+      "passed": true
+    },
+    {
+      "name": "audio opt-in control works",
+      "passed": true
+    },
+    {
+      "name": "controls fit {'width': 740, 'height': 390}",
+      "passed": true
+    },
+    {
+      "name": "controls fit {'width': 390, 'height': 844}",
+      "passed": true
+    },
+    {
+      "name": "reduced motion starts paused with fully visible bosses",
+      "passed": true
+    },
+    {
+      "name": "zero runtime errors",
+      "passed": true
+    },
+    {
+      "name": "zero external requests",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "mothership-intact-844x390.png",
+    "mothership-damaged-844x390.png",
+    "mothership-critical-844x390.png",
+    "cosmic-guardian-intact-844x390.png",
+    "cosmic-guardian-damaged-844x390.png",
+    "cosmic-guardian-critical-844x390.png",
+    "space-crawler-intact-844x390.png",
+    "space-crawler-damaged-844x390.png",
+    "space-crawler-critical-844x390.png"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "clips": [
+    {
+      "boss": "mothership",
+      "clip": "Damage_Intact",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "mothership",
+      "clip": "Damage_Damaged",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "mothership",
+      "clip": "Damage_Critical",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "mothership",
+      "clip": "Entrance",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "mothership",
+      "clip": "Retreat",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "mothership",
+      "clip": "Idle",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Damage_Intact",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Damage_Damaged",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Damage_Critical",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Entrance",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Retreat",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "cosmic-guardian",
+      "clip": "Idle",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Damage_Intact",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Damage_Damaged",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Damage_Critical",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Entrance",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Retreat",
+      "finite": true,
+      "expected": true
+    },
+    {
+      "boss": "space-crawler",
+      "clip": "Idle",
+      "finite": true,
+      "expected": true
+    }
+  ],
+  "attackSnapshots": [
+    {
+      "id": "mothership",
+      "snapshot": {
+        "selected": 0,
+        "paused": false,
+        "attacking": true,
+        "sound": false,
+        "shots": 1,
+        "tells": 0,
+        "effects": 0,
+        "bosses": [
+          {
+            "id": "mothership",
+            "status": "active",
+            "hp": 12,
+            "shield": false,
+            "targets": {
+              "hull": 12,
+              "turret_left": 5,
+              "turret_center": 5,
+              "turret_right": 5
+            }
+          },
+          {
+            "id": "cosmic-guardian",
+            "status": "active",
+            "hp": 11,
+            "shield": false,
+            "targets": {
+              "hull": 11,
+              "generator": 0
+            }
+          },
+          {
+            "id": "space-crawler",
+            "status": "active",
+            "hp": 20,
+            "shield": false,
+            "targets": {
+              "segment_01": 5,
+              "segment_02": 5,
+              "segment_03": 0,
+              "segment_04": 5,
+              "segment_05": 5
+            }
+          }
+        ],
+        "render": {
+          "frame": 268,
+          "calls": 30,
+          "triangles": 7568,
+          "points": 0,
+          "lines": 0
+        }
+      }
+    },
+    {
+      "id": "cosmic-guardian",
+      "snapshot": {
+        "selected": 1,
+        "paused": false,
+        "attacking": true,
+        "sound": false,
+        "shots": 4,
+        "tells": 0,
+        "effects": 0,
+        "bosses": [
+          {
+            "id": "mothership",
+            "status": "active",
+            "hp": 12,
+            "shield": false,
+            "targets": {
+              "hull": 12,
+              "turret_left": 5,
+              "turret_center": 5,
+              "turret_right": 5
+            }
+          },
+          {
+            "id": "cosmic-guardian",
+            "status": "active",
+            "hp": 18,
+            "shield": true,
+            "targets": {
+              "hull": 12,
+              "generator": 6
+            }
+          },
+          {
+            "id": "space-crawler",
+            "status": "active",
+            "hp": 20,
+            "shield": false,
+            "targets": {
+              "segment_01": 5,
+              "segment_02": 5,
+              "segment_03": 0,
+              "segment_04": 5,
+              "segment_05": 5
+            }
+          }
+        ],
+        "render": {
+          "frame": 342,
+          "calls": 35,
+          "triangles": 9008,
+          "points": 0,
+          "lines": 0
+        }
+      }
+    },
+    {
+      "id": "space-crawler",
+      "snapshot": {
+        "selected": 2,
+        "paused": false,
+        "attacking": true,
+        "sound": false,
+        "shots": 1,
+        "tells": 1,
+        "effects": 0,
+        "bosses": [
+          {
+            "id": "mothership",
+            "status": "active",
+            "hp": 12,
+            "shield": false,
+            "targets": {
+              "hull": 12,
+              "turret_left": 5,
+              "turret_center": 5,
+              "turret_right": 5
+            }
+          },
+          {
+            "id": "cosmic-guardian",
+            "status": "active",
+            "hp": 18,
+            "shield": true,
+            "targets": {
+              "hull": 12,
+              "generator": 6
+            }
+          },
+          {
+            "id": "space-crawler",
+            "status": "active",
+            "hp": 25,
+            "shield": false,
+            "targets": {
+              "segment_01": 5,
+              "segment_02": 5,
+              "segment_03": 5,
+              "segment_04": 5,
+              "segment_05": 5
+            }
+          }
+        ],
+        "render": {
+          "frame": 411,
+          "calls": 38,
+          "triangles": 9548,
+          "points": 0,
+          "lines": 0
+        }
+      }
+    }
+  ],
+  "audioDecode": [
+    {
+      "boss": "mothership",
+      "cue": "entrance",
+      "ext": "ogg",
+      "duration": 0.303175
+    },
+    {
+      "boss": "mothership",
+      "cue": "entrance",
+      "ext": "mp3",
+      "duration": 1.1
+    },
+    {
+      "boss": "mothership",
+      "cue": "hit",
+      "ext": "ogg",
+      "duration": 0.072698
+    },
+    {
+      "boss": "mothership",
+      "cue": "hit",
+      "ext": "mp3",
+      "duration": 0.16
+    },
+    {
+      "boss": "mothership",
+      "cue": "explosion",
+      "ext": "ogg",
+      "duration": 0.493152
+    },
+    {
+      "boss": "mothership",
+      "cue": "explosion",
+      "ext": "mp3",
+      "duration": 0.48
+    },
+    {
+      "boss": "mothership",
+      "cue": "death",
+      "ext": "ogg",
+      "duration": 0.346893
+    },
+    {
+      "boss": "mothership",
+      "cue": "death",
+      "ext": "mp3",
+      "duration": 1
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "entrance",
+      "ext": "ogg",
+      "duration": 0.30771
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "entrance",
+      "ext": "mp3",
+      "duration": 1.1
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "hit",
+      "ext": "ogg",
+      "duration": 0.074286
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "hit",
+      "ext": "mp3",
+      "duration": 0.16
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "explosion",
+      "ext": "ogg",
+      "duration": 0.498322
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "explosion",
+      "ext": "mp3",
+      "duration": 0.48
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "death",
+      "ext": "ogg",
+      "duration": 0.351837
+    },
+    {
+      "boss": "cosmic-guardian",
+      "cue": "death",
+      "ext": "mp3",
+      "duration": 1
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "entrance",
+      "ext": "ogg",
+      "duration": 0.32195
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "entrance",
+      "ext": "mp3",
+      "duration": 1.1
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "hit",
+      "ext": "ogg",
+      "duration": 0.071338
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "hit",
+      "ext": "mp3",
+      "duration": 0.16
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "explosion",
+      "ext": "ogg",
+      "duration": 0.495646
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "explosion",
+      "ext": "mp3",
+      "duration": 0.48
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "death",
+      "ext": "ogg",
+      "duration": 0.357052
+    },
+    {
+      "boss": "space-crawler",
+      "cue": "death",
+      "ext": "mp3",
+      "duration": 1
+    }
+  ],
+  "browser": "151.0.7922.173"
+}

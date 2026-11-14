@@ -1,0 +1,236 @@
+[
+  {
+    "id": "mothership",
+    "triangles": 3064,
+    "bytes": 550096,
+    "parts": [
+      {
+        "node": "hull",
+        "role": "core",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "node": "turret_left",
+        "role": "turret",
+        "position": [
+          -1.32,
+          0.08,
+          0.54
+        ]
+      },
+      {
+        "node": "turret_center",
+        "role": "turret",
+        "position": [
+          0,
+          0.08,
+          0.91
+        ]
+      },
+      {
+        "node": "turret_right",
+        "role": "turret",
+        "position": [
+          1.32,
+          0.08,
+          0.54
+        ]
+      }
+    ],
+    "anchors": [
+      {
+        "parent": "turret_left",
+        "name": "turret_left_muzzle",
+        "p": [
+          0,
+          -0.02,
+          0.61
+        ]
+      },
+      {
+        "parent": "turret_center",
+        "name": "turret_center_muzzle",
+        "p": [
+          0,
+          -0.02,
+          0.61
+        ]
+      },
+      {
+        "parent": "turret_right",
+        "name": "turret_right_muzzle",
+        "p": [
+          0,
+          -0.02,
+          0.61
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cosmic-guardian",
+    "triangles": 3008,
+    "bytes": 520916,
+    "parts": [
+      {
+        "node": "hull",
+        "role": "core",
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "node": "generator",
+        "role": "generator",
+        "position": [
+          0,
+          0.04,
+          1.33
+        ]
+      },
+      {
+        "node": "shield",
+        "role": "shield",
+        "position": [
+          0,
+          0.08,
+          0
+        ]
+      }
+    ],
+    "anchors": [
+      {
+        "parent": "hull",
+        "name": "hull_muzzle_left",
+        "p": [
+          -1.35,
+          0.1,
+          0.85
+        ]
+      },
+      {
+        "parent": "hull",
+        "name": "hull_muzzle_right",
+        "p": [
+          1.35,
+          0.1,
+          0.85
+        ]
+      },
+      {
+        "parent": "generator",
+        "name": "generator_hit",
+        "p": [
+          0,
+          0.3,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "space-crawler",
+    "triangles": 2972,
+    "bytes": 541272,
+    "parts": [
+      {
+        "node": "segment_01",
+        "role": "segment",
+        "position": [
+          -1.96,
+          0,
+          0
+        ]
+      },
+      {
+        "node": "segment_02",
+        "role": "segment",
+        "position": [
+          -0.98,
+          0,
+          0.18782010128507318
+        ]
+      },
+      {
+        "node": "segment_03",
+        "role": "segment",
+        "position": [
+          0,
+          0,
+          0.24791620261311714
+        ]
+      },
+      {
+        "node": "segment_04",
+        "role": "segment",
+        "position": [
+          0.98,
+          0,
+          0.13942092934785424
+        ]
+      },
+      {
+        "node": "segment_05",
+        "role": "segment",
+        "position": [
+          1.96,
+          0,
+          -0.0638852755067078
+        ]
+      }
+    ],
+    "anchors": [
+      {
+        "parent": "segment_01",
+        "name": "segment_01_muzzle",
+        "p": [
+          0,
+          -0.05,
+          0.56
+        ]
+      },
+      {
+        "parent": "segment_02",
+        "name": "segment_02_muzzle",
+        "p": [
+          0,
+          -0.05,
+          0.56
+        ]
+      },
+      {
+        "parent": "segment_03",
+        "name": "segment_03_muzzle",
+        "p": [
+          0,
+          -0.05,
+          0.56
+        ]
+      },
+      {
+        "parent": "segment_04",
+        "name": "segment_04_muzzle",
+        "p": [
+          0,
+          -0.05,
+          0.56
+        ]
+      },
+      {
+        "parent": "segment_05",
+        "name": "segment_05_muzzle",
+        "p": [
+          0,
+          -0.05,
+          0.56
+        ]
+      }
+    ]
+  }
+]

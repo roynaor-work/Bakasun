@@ -1,0 +1,1537 @@
+{
+  "schemaVersion": 1,
+  "package": "alien-bosses-v1",
+  "license": "CC0-1.0",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "preview": {
+    "path": "preview.html",
+    "viewport": [
+      844,
+      390
+    ],
+    "serverRequired": true
+  },
+  "coordinates": {
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "meters",
+    "scale": 1
+  },
+  "ageGuidance": {
+    "age": 7,
+    "style": "rounded toy spacecraft; friendly faces; confetti pops; cheerful departure",
+    "minimumTelegraphSeconds": 0.9,
+    "screenShake": false,
+    "fullScreenFlash": false,
+    "homing": false
+  },
+  "playerPaletteReference": {
+    "source": "../../minigames/ultra-alien-effects.mjs",
+    "colors": [
+      "#93dbff",
+      "#65eeff",
+      "#c5b2ff"
+    ],
+    "bossColors": [
+      "#ff668f",
+      "#ffb547",
+      "#f4773d"
+    ],
+    "distinction": "warm hues plus capsule/ring/diamond shapes; player uses cool narrow streaks"
+  },
+  "integration": {
+    "referenceController": "encounter.mjs",
+    "liveGameIntegrated": false,
+    "damage": "Morph weights and painted scuff node scales; no shader or extension required. Set every mesh in the target part only.",
+    "destroyedParts": "Hide the part group and trigger its six-frame explosion at its world position.",
+    "lifecycle": "Do not accept hits or schedule shots during entrance, retreat or gone. One death cue and retreat; no respawn in the reference controller."
+  },
+  "budgets": {
+    "targetTrianglesPerBoss": 3000,
+    "tolerancePercent": 10,
+    "audioBytesPerFile": 80000
+  },
+  "bosses": [
+    {
+      "id": "mothership",
+      "nameHe": "אם־חללית",
+      "subtitleHe": "שלושה תותחים, בתור",
+      "model": "models/mothership.glb",
+      "triangles": 3064,
+      "modelBytes": 550096,
+      "rootNode": "boss_root",
+      "entranceSeconds": 1.2,
+      "retreatSeconds": 1.1,
+      "damageStates": {
+        "intact": {
+          "clip": "Damage_Intact",
+          "weights": [
+            0,
+            0
+          ],
+          "hpRatioAbove": 0.99
+        },
+        "damaged": {
+          "clip": "Damage_Damaged",
+          "weights": [
+            1,
+            0
+          ],
+          "hpRatioAbove": 0.34
+        },
+        "critical": {
+          "clip": "Damage_Critical",
+          "weights": [
+            0,
+            1
+          ],
+          "hpRatioAtMost": 0.34
+        }
+      },
+      "clips": {
+        "idle": "Idle",
+        "entrance": "Entrance",
+        "retreat": "Retreat"
+      },
+      "parts": [
+        {
+          "node": "hull",
+          "role": "core",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "turret_left",
+          "role": "turret",
+          "position": [
+            -1.32,
+            0.08,
+            0.54
+          ]
+        },
+        {
+          "node": "turret_center",
+          "role": "turret",
+          "position": [
+            0,
+            0.08,
+            0.91
+          ]
+        },
+        {
+          "node": "turret_right",
+          "role": "turret",
+          "position": [
+            1.32,
+            0.08,
+            0.54
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "parent": "turret_left",
+          "name": "turret_left_muzzle",
+          "p": [
+            0,
+            -0.02,
+            0.61
+          ]
+        },
+        {
+          "parent": "turret_center",
+          "name": "turret_center_muzzle",
+          "p": [
+            0,
+            -0.02,
+            0.61
+          ]
+        },
+        {
+          "parent": "turret_right",
+          "name": "turret_right_muzzle",
+          "p": [
+            0,
+            -0.02,
+            0.61
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "node": "hull",
+          "maxHp": 12,
+          "required": true,
+          "radius": 1.1,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "turret_left",
+          "maxHp": 5,
+          "required": false,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "turret_center",
+          "maxHp": 5,
+          "required": false,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "turret_right",
+          "maxHp": 5,
+          "required": false,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rules": {
+        "onTurretDestroyed": "hide turret; stop its scheduled attacks",
+        "victory": "hull.hp === 0"
+      },
+      "attack": {
+        "pattern": "alternating-turrets",
+        "cycleSeconds": 4.8,
+        "warningSeconds": 0.9,
+        "projectileSpeedMetersPerSecond": 1.5,
+        "homing": false,
+        "maxConcurrentProjectiles": 12,
+        "anglesUnit": "radians from +Z around Y",
+        "timeline": [
+          {
+            "at": 0,
+            "type": "tell",
+            "node": "turret_left"
+          },
+          {
+            "at": 0.9,
+            "type": "shot",
+            "node": "turret_left",
+            "anchor": "turret_left_muzzle",
+            "angles": [
+              0
+            ]
+          },
+          {
+            "at": 1.1,
+            "type": "tell",
+            "node": "turret_center"
+          },
+          {
+            "at": 2,
+            "type": "shot",
+            "node": "turret_center",
+            "anchor": "turret_center_muzzle",
+            "angles": [
+              -0.16,
+              0,
+              0.16
+            ]
+          },
+          {
+            "at": 2.2,
+            "type": "tell",
+            "node": "turret_right"
+          },
+          {
+            "at": 3.1,
+            "type": "shot",
+            "node": "turret_right",
+            "anchor": "turret_right_muzzle",
+            "angles": [
+              0
+            ]
+          }
+        ]
+      },
+      "projectile": {
+        "path": "sprites/mothership-projectile.png",
+        "width": 64,
+        "height": 64,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "color": "#ff668f",
+        "shape": "capsule",
+        "radiusMeters": 0.11,
+        "forwardImage": "+Y (down)",
+        "blend": "normal",
+        "premultipliedAlpha": false
+      },
+      "effects": {
+        "explosion": {
+          "path": "sprites/mothership-explosion.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 12,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.5
+        },
+        "entrance": {
+          "path": "sprites/mothership-entrance.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        },
+        "retreat": {
+          "path": "sprites/mothership-retreat.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        }
+      },
+      "audio": {
+        "entrance": {
+          "ogg": "audio/mothership-entrance.ogg",
+          "mp3": "audio/mothership-entrance.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "hit": {
+          "ogg": "audio/mothership-hit.ogg",
+          "mp3": "audio/mothership-hit.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "explosion": {
+          "ogg": "audio/mothership-explosion.ogg",
+          "mp3": "audio/mothership-explosion.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "death": {
+          "ogg": "audio/mothership-death.ogg",
+          "mp3": "audio/mothership-death.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        }
+      }
+    },
+    {
+      "id": "cosmic-guardian",
+      "nameHe": "מגן קוסמי",
+      "subtitleHe": "קודם הגנרטור, אחר כך הליבה",
+      "model": "models/cosmic-guardian.glb",
+      "triangles": 3008,
+      "modelBytes": 520916,
+      "rootNode": "boss_root",
+      "entranceSeconds": 1.2,
+      "retreatSeconds": 1.1,
+      "damageStates": {
+        "intact": {
+          "clip": "Damage_Intact",
+          "weights": [
+            0,
+            0
+          ],
+          "hpRatioAbove": 0.99
+        },
+        "damaged": {
+          "clip": "Damage_Damaged",
+          "weights": [
+            1,
+            0
+          ],
+          "hpRatioAbove": 0.34
+        },
+        "critical": {
+          "clip": "Damage_Critical",
+          "weights": [
+            0,
+            1
+          ],
+          "hpRatioAtMost": 0.34
+        }
+      },
+      "clips": {
+        "idle": "Idle",
+        "entrance": "Entrance",
+        "retreat": "Retreat"
+      },
+      "parts": [
+        {
+          "node": "hull",
+          "role": "core",
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "generator",
+          "role": "generator",
+          "position": [
+            0,
+            0.04,
+            1.33
+          ]
+        },
+        {
+          "node": "shield",
+          "role": "shield",
+          "position": [
+            0,
+            0.08,
+            0
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "parent": "hull",
+          "name": "hull_muzzle_left",
+          "p": [
+            -1.35,
+            0.1,
+            0.85
+          ]
+        },
+        {
+          "parent": "hull",
+          "name": "hull_muzzle_right",
+          "p": [
+            1.35,
+            0.1,
+            0.85
+          ]
+        },
+        {
+          "parent": "generator",
+          "name": "generator_hit",
+          "p": [
+            0,
+            0.3,
+            0
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "node": "hull",
+          "maxHp": 12,
+          "required": true,
+          "radius": 1.1,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "generator",
+          "maxHp": 6,
+          "required": true,
+          "radius": 0.34,
+          "localCenter": [
+            0,
+            0.3,
+            0
+          ]
+        }
+      ],
+      "rules": {
+        "invulnerableWhile": "generator.hp > 0",
+        "protectedTargets": [
+          "hull"
+        ],
+        "shieldNode": "shield",
+        "onGeneratorDestroyed": "hide shield; expose hull; do not regenerate"
+      },
+      "attack": {
+        "pattern": "gated-ring-pairs",
+        "cycleSeconds": 4.6,
+        "warningSeconds": 1,
+        "projectileSpeedMetersPerSecond": 1.2,
+        "homing": false,
+        "maxConcurrentProjectiles": 12,
+        "anglesUnit": "radians from +Z around Y",
+        "timeline": [
+          {
+            "at": 0,
+            "type": "tell",
+            "node": "hull"
+          },
+          {
+            "at": 1,
+            "type": "shot",
+            "node": "hull",
+            "anchor": "hull_muzzle_left",
+            "angles": [
+              -0.25,
+              0
+            ]
+          },
+          {
+            "at": 1,
+            "type": "shot",
+            "node": "hull",
+            "anchor": "hull_muzzle_right",
+            "angles": [
+              0,
+              0.25
+            ]
+          }
+        ]
+      },
+      "projectile": {
+        "path": "sprites/cosmic-guardian-projectile.png",
+        "width": 64,
+        "height": 64,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "color": "#ffb547",
+        "shape": "ring",
+        "radiusMeters": 0.11,
+        "forwardImage": "+Y (down)",
+        "blend": "normal",
+        "premultipliedAlpha": false
+      },
+      "effects": {
+        "explosion": {
+          "path": "sprites/cosmic-guardian-explosion.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 12,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.5
+        },
+        "entrance": {
+          "path": "sprites/cosmic-guardian-entrance.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        },
+        "retreat": {
+          "path": "sprites/cosmic-guardian-retreat.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        }
+      },
+      "audio": {
+        "entrance": {
+          "ogg": "audio/cosmic-guardian-entrance.ogg",
+          "mp3": "audio/cosmic-guardian-entrance.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "hit": {
+          "ogg": "audio/cosmic-guardian-hit.ogg",
+          "mp3": "audio/cosmic-guardian-hit.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "explosion": {
+          "ogg": "audio/cosmic-guardian-explosion.ogg",
+          "mp3": "audio/cosmic-guardian-explosion.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "death": {
+          "ogg": "audio/cosmic-guardian-death.ogg",
+          "mp3": "audio/cosmic-guardian-death.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        }
+      }
+    },
+    {
+      "id": "space-crawler",
+      "nameHe": "זחל חלל",
+      "subtitleHe": "חמישה מקטעים, כל אחד בנפרד",
+      "model": "models/space-crawler.glb",
+      "triangles": 2972,
+      "modelBytes": 541272,
+      "rootNode": "boss_root",
+      "entranceSeconds": 1.2,
+      "retreatSeconds": 1.1,
+      "damageStates": {
+        "intact": {
+          "clip": "Damage_Intact",
+          "weights": [
+            0,
+            0
+          ],
+          "hpRatioAbove": 0.99
+        },
+        "damaged": {
+          "clip": "Damage_Damaged",
+          "weights": [
+            1,
+            0
+          ],
+          "hpRatioAbove": 0.34
+        },
+        "critical": {
+          "clip": "Damage_Critical",
+          "weights": [
+            0,
+            1
+          ],
+          "hpRatioAtMost": 0.34
+        }
+      },
+      "clips": {
+        "idle": "Idle",
+        "entrance": "Entrance",
+        "retreat": "Retreat"
+      },
+      "parts": [
+        {
+          "node": "segment_01",
+          "role": "segment",
+          "position": [
+            -1.96,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "segment_02",
+          "role": "segment",
+          "position": [
+            -0.98,
+            0,
+            0.18782010128507318
+          ]
+        },
+        {
+          "node": "segment_03",
+          "role": "segment",
+          "position": [
+            0,
+            0,
+            0.24791620261311714
+          ]
+        },
+        {
+          "node": "segment_04",
+          "role": "segment",
+          "position": [
+            0.98,
+            0,
+            0.13942092934785424
+          ]
+        },
+        {
+          "node": "segment_05",
+          "role": "segment",
+          "position": [
+            1.96,
+            0,
+            -0.0638852755067078
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "parent": "segment_01",
+          "name": "segment_01_muzzle",
+          "p": [
+            0,
+            -0.05,
+            0.56
+          ]
+        },
+        {
+          "parent": "segment_02",
+          "name": "segment_02_muzzle",
+          "p": [
+            0,
+            -0.05,
+            0.56
+          ]
+        },
+        {
+          "parent": "segment_03",
+          "name": "segment_03_muzzle",
+          "p": [
+            0,
+            -0.05,
+            0.56
+          ]
+        },
+        {
+          "parent": "segment_04",
+          "name": "segment_04_muzzle",
+          "p": [
+            0,
+            -0.05,
+            0.56
+          ]
+        },
+        {
+          "parent": "segment_05",
+          "name": "segment_05_muzzle",
+          "p": [
+            0,
+            -0.05,
+            0.56
+          ]
+        }
+      ],
+      "targets": [
+        {
+          "node": "segment_01",
+          "maxHp": 5,
+          "required": true,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "segment_02",
+          "maxHp": 5,
+          "required": true,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "segment_03",
+          "maxHp": 5,
+          "required": true,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "segment_04",
+          "maxHp": 5,
+          "required": true,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "node": "segment_05",
+          "maxHp": 5,
+          "required": true,
+          "radius": 0.48,
+          "localCenter": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "rules": {
+        "onSegmentDestroyed": "hide only that segment; stop only its attacks",
+        "victory": "all five segments.hp === 0"
+      },
+      "attack": {
+        "pattern": "segment-wave",
+        "cycleSeconds": 5.6,
+        "warningSeconds": 1,
+        "projectileSpeedMetersPerSecond": 1.35,
+        "homing": false,
+        "maxConcurrentProjectiles": 12,
+        "anglesUnit": "radians from +Z around Y",
+        "timeline": [
+          {
+            "at": 0,
+            "type": "tell",
+            "node": "segment_01"
+          },
+          {
+            "at": 0.55,
+            "type": "tell",
+            "node": "segment_02"
+          },
+          {
+            "at": 1,
+            "type": "shot",
+            "node": "segment_01",
+            "anchor": "segment_01_muzzle",
+            "angles": [
+              -0.18
+            ]
+          },
+          {
+            "at": 1.1,
+            "type": "tell",
+            "node": "segment_03"
+          },
+          {
+            "at": 1.55,
+            "type": "shot",
+            "node": "segment_02",
+            "anchor": "segment_02_muzzle",
+            "angles": [
+              0.18
+            ]
+          },
+          {
+            "at": 1.6500000000000001,
+            "type": "tell",
+            "node": "segment_04"
+          },
+          {
+            "at": 2.1,
+            "type": "shot",
+            "node": "segment_03",
+            "anchor": "segment_03_muzzle",
+            "angles": [
+              -0.18
+            ]
+          },
+          {
+            "at": 2.2,
+            "type": "tell",
+            "node": "segment_05"
+          },
+          {
+            "at": 2.6500000000000004,
+            "type": "shot",
+            "node": "segment_04",
+            "anchor": "segment_04_muzzle",
+            "angles": [
+              0.18
+            ]
+          },
+          {
+            "at": 3.2,
+            "type": "shot",
+            "node": "segment_05",
+            "anchor": "segment_05_muzzle",
+            "angles": [
+              -0.18
+            ]
+          }
+        ]
+      },
+      "projectile": {
+        "path": "sprites/space-crawler-projectile.png",
+        "width": 64,
+        "height": 64,
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "color": "#f4773d",
+        "shape": "diamond",
+        "radiusMeters": 0.11,
+        "forwardImage": "+Y (down)",
+        "blend": "normal",
+        "premultipliedAlpha": false
+      },
+      "effects": {
+        "explosion": {
+          "path": "sprites/space-crawler-explosion.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 12,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.5
+        },
+        "entrance": {
+          "path": "sprites/space-crawler-entrance.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        },
+        "retreat": {
+          "path": "sprites/space-crawler-retreat.png",
+          "width": 768,
+          "height": 128,
+          "frameWidth": 128,
+          "frameHeight": 128,
+          "frames": [
+            {
+              "x": 0,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 128,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 256,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 384,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 512,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            },
+            {
+              "x": 640,
+              "y": 0,
+              "w": 128,
+              "h": 128
+            }
+          ],
+          "frameCount": 6,
+          "fps": 8,
+          "loop": false,
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "blend": "normal",
+          "premultipliedAlpha": false,
+          "disposeAfterSeconds": 0.75
+        }
+      },
+      "audio": {
+        "entrance": {
+          "ogg": "audio/space-crawler-entrance.ogg",
+          "mp3": "audio/space-crawler-entrance.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "hit": {
+          "ogg": "audio/space-crawler-hit.ogg",
+          "mp3": "audio/space-crawler-hit.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "explosion": {
+          "ogg": "audio/space-crawler-explosion.ogg",
+          "mp3": "audio/space-crawler-explosion.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        },
+        "death": {
+          "ogg": "audio/space-crawler-death.ogg",
+          "mp3": "audio/space-crawler-death.mp3",
+          "gain": 0.45,
+          "maxBytesPerFile": 80000
+        }
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "models/cosmic-guardian.glb",
+      "bytes": 520916,
+      "sha256": "55f447ede6bc8bbe797c2b261f4d9b7262076568ec8e0fdc514abd05afd3637a"
+    },
+    {
+      "path": "models/mothership.glb",
+      "bytes": 550096,
+      "sha256": "9c6ed252e2a02c8700493a61bc1e6495e986472f2f4bed474e792af9bfa45ff8"
+    },
+    {
+      "path": "models/space-crawler.glb",
+      "bytes": 541272,
+      "sha256": "29568c3f4b9182fb901d656cef7ae7713fb5bb9a974e9c3f7aa8d7248edecf10"
+    },
+    {
+      "path": "sprites/cosmic-guardian-entrance.png",
+      "bytes": 21701,
+      "sha256": "28ad28eb85ae7370d0a20188b7db9f77c1e99359033a23da11930b85d82cd392"
+    },
+    {
+      "path": "sprites/cosmic-guardian-explosion.png",
+      "bytes": 20899,
+      "sha256": "3d90ebc95a235ad481136eee902e9c506447c8b565da11380904acd66ce62c93"
+    },
+    {
+      "path": "sprites/cosmic-guardian-projectile.png",
+      "bytes": 3424,
+      "sha256": "7ad6aea818150e3a74d410ed4db27066d3bbe7362cac9ca74411ee56f9645812"
+    },
+    {
+      "path": "sprites/cosmic-guardian-retreat.png",
+      "bytes": 16949,
+      "sha256": "3877cce0960f8516e421f11da38c894b288c7895b1b4ccb5370d1a14d4d67155"
+    },
+    {
+      "path": "sprites/mothership-entrance.png",
+      "bytes": 21691,
+      "sha256": "61faab21769434dec638cb77fb2d26635e8c4895f7aac14d9d421e1e370327aa"
+    },
+    {
+      "path": "sprites/mothership-explosion.png",
+      "bytes": 21180,
+      "sha256": "2f336771167e2891f5769759c644aae2fcdcbd1a212e7ade4b1aadaa27616838"
+    },
+    {
+      "path": "sprites/mothership-projectile.png",
+      "bytes": 1681,
+      "sha256": "5cd0a6e17af5ba2f22a7ccff25eee7ab03b0761c97f43f1e0fccd060ca27d4ac"
+    },
+    {
+      "path": "sprites/mothership-retreat.png",
+      "bytes": 16635,
+      "sha256": "8f64b1daa1aab063fb3d3c7e7406c62d577e9e28d57b915751637e96f780a968"
+    },
+    {
+      "path": "sprites/space-crawler-entrance.png",
+      "bytes": 22884,
+      "sha256": "359fdf09e5b729c0f8ef2d431a768c13c3681d1d925b0e3bcd6a5b9df70ad335"
+    },
+    {
+      "path": "sprites/space-crawler-explosion.png",
+      "bytes": 22321,
+      "sha256": "41543765dbd7415d1fccde10cfae9ab54b01391b5a34c6789326c02b00d4f4a8"
+    },
+    {
+      "path": "sprites/space-crawler-projectile.png",
+      "bytes": 2151,
+      "sha256": "cfbc65fb08e16c085f58f4f97279d3f7849e07d43598f0140cb0c261eb10b2da"
+    },
+    {
+      "path": "sprites/space-crawler-retreat.png",
+      "bytes": 17695,
+      "sha256": "02ac84f082033f8d5e14fc0b67309fa06bd9a56b1724ee4c29335831514d6397"
+    },
+    {
+      "path": "audio/cosmic-guardian-death.mp3",
+      "bytes": 6652,
+      "sha256": "1e90f5a954e6ed8596c1a08d1eeb543c69d5566ffd78eb229754aa7d80794f44"
+    },
+    {
+      "path": "audio/cosmic-guardian-death.ogg",
+      "bytes": 4973,
+      "sha256": "bd665ecd337e51f308271f237c179704a21c462f9c99aa348a13edf4763fb2e1"
+    },
+    {
+      "path": "audio/cosmic-guardian-entrance.mp3",
+      "bytes": 7279,
+      "sha256": "bba83474112f2d16072e3d08729545cdf44d8c507dbac36f609462fe85325215"
+    },
+    {
+      "path": "audio/cosmic-guardian-entrance.ogg",
+      "bytes": 4778,
+      "sha256": "08456891d1c864f79cd9973e3d10a5198b2184f1ca000418dad684223260c5c2"
+    },
+    {
+      "path": "audio/cosmic-guardian-explosion.mp3",
+      "bytes": 3517,
+      "sha256": "ba6ceb05069a757250296085bca7d315df4d7740b390789bf3b04961ba55526f"
+    },
+    {
+      "path": "audio/cosmic-guardian-explosion.ogg",
+      "bytes": 5620,
+      "sha256": "1695f7f19a6a2c554bdff64dfcd75fe67035e318d1fcec8a0b5459fcaded4068"
+    },
+    {
+      "path": "audio/cosmic-guardian-hit.mp3",
+      "bytes": 1636,
+      "sha256": "1583533938a5999db3a3acd06d9d041e5125013acf87f5f0508a1ff473cd8d0c"
+    },
+    {
+      "path": "audio/cosmic-guardian-hit.ogg",
+      "bytes": 3747,
+      "sha256": "5a9c9f263aa5f2f974d20723247073211b56bc230ac6fd3db6a4cf36af7144ab"
+    },
+    {
+      "path": "audio/mothership-death.mp3",
+      "bytes": 6652,
+      "sha256": "036775601cd7ff3356eb30def22832131aa11966bdf054e244f150d3fd5315c9"
+    },
+    {
+      "path": "audio/mothership-death.ogg",
+      "bytes": 4951,
+      "sha256": "287e910444a807fd60858fe280ed70f9848850d065448ab80d70c1f92a779683"
+    },
+    {
+      "path": "audio/mothership-entrance.mp3",
+      "bytes": 7279,
+      "sha256": "7b61413d6db1e4934dd30e6483fe7f27715a5c8f949b6d538e8105ecc1bfc8d9"
+    },
+    {
+      "path": "audio/mothership-entrance.ogg",
+      "bytes": 4758,
+      "sha256": "b6e7f80472a53cf6feb961dc80bd6e029088b5df1e398c33340a7a7e8b9a8dc9"
+    },
+    {
+      "path": "audio/mothership-explosion.mp3",
+      "bytes": 3517,
+      "sha256": "a380404c0eb932bd2aeb89be80c279a10aec4b2dbe75f2f6d4abe7d603d34546"
+    },
+    {
+      "path": "audio/mothership-explosion.ogg",
+      "bytes": 5597,
+      "sha256": "95a5703989f716de6a6c4576f18e7ec71e168ea1d983319c8017dc0fd71b4510"
+    },
+    {
+      "path": "audio/mothership-hit.mp3",
+      "bytes": 1636,
+      "sha256": "6ca5223ed1294ced9cdea491c587baf9caef2ab7a8ef7e56f9ffca8999bcce29"
+    },
+    {
+      "path": "audio/mothership-hit.ogg",
+      "bytes": 3740,
+      "sha256": "60c0c89c1032daf238169889c33166f2e110b25f84564eb6aad99b7476398fdd"
+    },
+    {
+      "path": "audio/space-crawler-death.mp3",
+      "bytes": 6652,
+      "sha256": "a22e124ad4c668eb09f8adf80844677645488e14328d4e8e88bdaa217026d678"
+    },
+    {
+      "path": "audio/space-crawler-death.ogg",
+      "bytes": 4996,
+      "sha256": "88c084ba431a4fa468053af2ec0252892c9a10c8372c5b153252504aba1f94cc"
+    },
+    {
+      "path": "audio/space-crawler-entrance.mp3",
+      "bytes": 7279,
+      "sha256": "9350c4f3c1fc5c3490ac8b761dc94423960985b2fa9e5229515b47f7bf602ed8"
+    },
+    {
+      "path": "audio/space-crawler-entrance.ogg",
+      "bytes": 4841,
+      "sha256": "36936e15745a6b1b850c20e1c510629a2b03d335dfebaf4d132a6306714931a9"
+    },
+    {
+      "path": "audio/space-crawler-explosion.mp3",
+      "bytes": 3517,
+      "sha256": "33d1f55cafa8f5245d98927b38a20e7efe8cc696a4a2762d40675e213047db7d"
+    },
+    {
+      "path": "audio/space-crawler-explosion.ogg",
+      "bytes": 5608,
+      "sha256": "a39847ec75e00f656d9ea40aaf2a1263485b4a1d3c3184f0dfb248918181f337"
+    },
+    {
+      "path": "audio/space-crawler-hit.mp3",
+      "bytes": 1636,
+      "sha256": "4764c4ee3545e84f64b590182dd1c53f896ed2257bc20ecc0b8d14086902d8c6"
+    },
+    {
+      "path": "audio/space-crawler-hit.ogg",
+      "bytes": 3734,
+      "sha256": "e9e137a4c18fdfab274925f20b49027b4104487cbf0c8584db91ff6d66af1df2"
+    }
+  ]
+}

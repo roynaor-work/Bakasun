@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: entrance rejects damage and holds all shots until its telegraph finishes
+ok 1 - entrance rejects damage and holds all shots until its telegraph finishes
+  ---
+  duration_ms: 1.109297
+  type: 'test'
+  ...
+# Subtest: mothership has three attack origins; a destroyed turret permanently stops its shots
+ok 2 - mothership has three attack origins; a destroyed turret permanently stops its shots
+  ---
+  duration_ms: 0.855632
+  type: 'test'
+  ...
+# Subtest: guardian core is gated exclusively by generator and shield never regenerates
+ok 3 - guardian core is gated exclusively by generator and shield never regenerates
+  ---
+  duration_ms: 0.249968
+  type: 'test'
+  ...
+# Subtest: each crawler segment has independent HP, state, visibility event and attack schedule
+ok 4 - each crawler segment has independent HP, state, visibility event and attack schedule
+  ---
+  duration_ms: 0.369822
+  type: 'test'
+  ...
+# Subtest: large and small timesteps yield identical ordered attack events
+ok 5 - large and small timesteps yield identical ordered attack events
+  ---
+  duration_ms: 0.902566
+  type: 'test'
+  ...
+# Subtest: every attack is preceded by at least 0.9s warning for the same target
+ok 6 - every attack is preceded by at least 0.9s warning for the same target
+  ---
+  duration_ms: 1.164016
+  type: 'test'
+  ...
+# Subtest: retreat emits once; no hits, attacks or revival after defeat
+ok 7 - retreat emits once; no hits, attacks or revival after defeat
+  ---
+  duration_ms: 0.315739
+  type: 'test'
+  ...
+# Subtest: invalid damage never heals or corrupts HP; a destroyed part cannot explode twice
+ok 8 - invalid damage never heals or corrupts HP; a destroyed part cannot explode twice
+  ---
+  duration_ms: 0.66796
+  type: 'test'
+  ...
+# Subtest: reset restores independent targets, shield, entry lifecycle and scheduling
+ok 9 - reset restores independent targets, shield, entry lifecycle and scheduling
+  ---
+  duration_ms: 0.45062
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 71.622024

@@ -1,0 +1,43 @@
+{
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "fullSuite": {
+    "command": "npm test",
+    "summary": {
+      "tests": 4082,
+      "pass": 4017,
+      "fail": 1,
+      "skipped": 64,
+      "cancelled": 0
+    },
+    "failureFile": "tests/workout-royiki.test.mjs:91",
+    "failure": "Playwright expected chromium_headless_shell-1234, which was not installed. The test starts a local server before browser launch; the failed file kept its process alive and was terminated after the other files finished."
+  },
+  "retry": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/alien-boss-tools/system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+    "summary": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0,
+      "cancelled": 0
+    },
+    "browserExecutable": "/usr/bin/chromium",
+    "adapter": "Temporary /tmp module exports chromium.launch(options) from installed Playwright with executablePath set to /usr/bin/chromium. No repository test or configuration changes. Uses existing ISLAND_PLAYWRIGHT fallback in tests/helpers/island-browser.mjs.",
+    "output": [
+      "✔ all 50 exercises have a royiki animation, each matching a real exercise (1.732921ms)",
+      "✔ every SVG exists, is local-only, self-contained, and identical to the design source (426.308456ms)",
+      "✔ unique ids keep several copies in one DOM apart (0.561944ms)",
+      "✔ the two design catalogs together list the same 50 animations, with the same durations (42.272074ms)",
+      "✔ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (22178.117713ms)",
+      "ℹ tests 5",
+      "ℹ suites 0",
+      "ℹ pass 5",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 22824.490847"
+    ]
+  },
+  "fullSuiteRepeated": false
+}
