@@ -1,5 +1,5 @@
 {
- "startedAt": "2026-11-14T15:14:15.025Z",
+ "startedAt": "2026-11-14T15:41:19.841Z",
  "viewport": "844x390 hasTouch isMobile, SwiftShader",
  "runs": {
   "stage3": {
@@ -10,80 +10,6 @@
     "shots/stage3-inside-room-card.jpg",
     "shots/stage3-inside-spray-sofa.jpg",
     "shots/stage3-inside-spray-rug.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
-    "shots/stage3-inside-friend.jpg",
-    "shots/stage3-inside-rescue.jpg",
     "shots/stage3-inside-friend.jpg",
     "shots/stage3-inside-rescue.jpg",
     "shots/stage3-inside-back-on-street.jpg",
@@ -106,8 +32,8 @@
      ]
     },
     "doorScreen": {
-     "x": 329,
-     "y": 64.6
+     "x": 329.9,
+     "y": 66
     },
     "markerKind": "arrow",
     "doorDistance": 16.29,
@@ -131,26 +57,26 @@
    },
    "driveTrace": [
     {
-     "time": 0.4,
+     "time": 0.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
     },
     {
-     "time": 1.4,
+     "time": 1.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
     },
     {
-     "time": 2.4,
+     "time": 2.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
     }
    ],
    "arrived": true,
-   "arriveTime": 4.7,
+   "arriveTime": 4.6,
    "insideReady": true,
    "insideMetricsAtStart": {
     "triangles": 11160,
@@ -180,18 +106,18 @@
     "sofa": true,
     "rug": true
    },
-   "friendAfterTap": "waiting",
+   "friendAfterTap": "rescued",
    "renderMetrics": [
     {
-     "triangles": 11384,
-     "drawCalls": 48,
-     "sceneTriangles": 11236,
-     "sceneObjects": 44,
+     "triangles": 11386,
+     "drawCalls": 49,
+     "sceneTriangles": 11238,
+     "sceneObjects": 45,
      "crew": true,
      "friend": true,
      "roomBuilt": false,
      "burnables": 9,
-     "puffs": 15,
+     "puffs": 16,
      "lite": false,
      "width": 844,
      "height": 390,
@@ -208,15 +134,15 @@
      "dpr": 1
     },
     {
-     "triangles": 11232,
-     "drawCalls": 50,
-     "sceneTriangles": 11164,
-     "sceneObjects": 47,
+     "triangles": 11228,
+     "drawCalls": 48,
+     "sceneTriangles": 11160,
+     "sceneObjects": 45,
      "crew": true,
      "friend": true,
      "roomBuilt": false,
      "burnables": 9,
-     "puffs": 13,
+     "puffs": 11,
      "lite": false,
      "width": 844,
      "height": 390,
@@ -237,8 +163,18 @@
      "dpr": 1
     }
    ],
-   "done": false,
-   "insideResult": null,
+   "done": true,
+   "insideResult": {
+    "outcome": "win",
+    "score": 390,
+    "performance": 1,
+    "rescued": 1,
+    "rooms": 1,
+    "seconds": 6.608000000000005,
+    "limit": 50,
+    "handovers": 0,
+    "mistakes": 0
+   },
    "streetTrace": [
     {
      "time": 4.8,
@@ -248,44 +184,61 @@
      "canFinish": false
     },
     {
-     "time": 14.4,
-     "remaining": 45,
-     "water": 37,
-     "active": 1,
+     "time": 18.8,
+     "remaining": 41,
+     "water": 0,
+     "active": 4,
      "canFinish": false
     },
     {
-     "time": 20.4,
-     "remaining": 39,
-     "water": 20,
-     "active": 2,
+     "time": 25.8,
+     "remaining": 34,
+     "water": 0,
+     "active": 6,
      "canFinish": false
     },
     {
-     "time": 24.9,
-     "remaining": 35,
-     "water": 20,
-     "active": 3,
+     "time": 32.8,
+     "remaining": 27,
+     "water": 0,
+     "active": 7,
      "canFinish": false
     },
     {
-     "time": 31,
-     "remaining": 29,
-     "water": 3,
-     "active": 5,
+     "time": 39.8,
+     "remaining": 20,
+     "water": 0,
+     "active": 7,
+     "canFinish": false
+    },
+    {
+     "time": 46.8,
+     "remaining": 13,
+     "water": 0,
+     "active": 7,
+     "canFinish": false
+    },
+    {
+     "time": 53.8,
+     "remaining": 6,
+     "water": 0,
+     "active": 7,
      "canFinish": false
     }
    ],
    "resultCard": true,
    "resultRows": [
-    "ניקוד124",
-    "מטבעות שהרווחת24",
+    "ניקוד62",
+    "מטבעות שהרווחת12",
     "חלקים שהרווחת0",
     "כוכבים בשלב0",
-    "מוקדים שכובו4",
+    "מוקדים שכובו2",
     "אזרחים שחולצו0",
     "מים שנשארו0"
    ],
+   "resultTitle": "אפשר לנסות שוב",
+   "resultWin": false,
+   "resultStarsRow": 0,
    "resultStars": null,
    "saveAfter": {
     "progress": {
@@ -323,7 +276,7 @@
       0
      ]
     },
-    "money": 4924,
+    "money": 4912,
     "certificates": 1
    },
    "badges": [
@@ -406,8 +359,8 @@
      ]
     },
     "doorScreen": {
-     "x": 329,
-     "y": 64.6
+     "x": 329.9,
+     "y": 66
     },
     "markerKind": "arrow",
     "doorDistance": 16.29,
@@ -429,24 +382,24 @@
   "drivingToTheBuildingOpensTheDoorAndTheEnterButton": {
    "pass": true,
    "arrived": true,
-   "doorDistance": 5.69,
+   "doorDistance": 5.49,
    "enterShown": true,
-   "arriveTime": 4.7,
+   "arriveTime": 4.6,
    "trace": [
     {
-     "time": 0.4,
+     "time": 0.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
     },
     {
-     "time": 1.4,
+     "time": 1.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
     },
     {
-     "time": 2.4,
+     "time": 2.3,
      "door": 16.29,
      "state": "drive",
      "marker": "arrow"
@@ -490,23 +443,34 @@
    "hit": true
   },
   "tapOnTheFriendCarriesThemOut": {
-   "pass": false,
-   "friend": "waiting"
+   "pass": true,
+   "friend": "rescued"
   },
   "roomDoneReturnsToTheStreetWithAnInsideResult": {
-   "pass": false,
-   "result": null
+   "pass": true,
+   "result": {
+    "outcome": "win",
+    "score": 390,
+    "performance": 1,
+    "rescued": 1,
+    "rooms": 1,
+    "seconds": 6.608000000000005,
+    "limit": 50,
+    "handovers": 0,
+    "mistakes": 0
+   }
   },
   "streetClockFrozenWhileInside": {
-   "pass": false,
-   "atEnter": 54.32300000000051,
-   "after": 54.195000000000526
+   "pass": true,
+   "atEnter": 54.378000000000505,
+   "after": 54.25000000000052,
+   "insideSeconds": 6.608000000000005
   },
   "insideRenderBudget": {
    "pass": true,
-   "triangles": 11384,
-   "drawCalls": 48,
-   "sceneObjects": 44,
+   "triangles": 11386,
+   "drawCalls": 49,
+   "sceneObjects": 45,
    "fps": [
     63,
     63,
@@ -516,46 +480,66 @@
     63
    ]
   },
-  "stageEndsWithTheResultCardAndStars": {
-   "pass": true,
+  "stageEndsWithAWinCardAndStars": {
+   "pass": false,
+   "title": "אפשר לנסות שוב",
    "rows": [
-    "ניקוד124",
-    "מטבעות שהרווחת24",
+    "ניקוד62",
+    "מטבעות שהרווחת12",
     "חלקים שהרווחת0",
     "כוכבים בשלב0",
-    "מוקדים שכובו4",
+    "מוקדים שכובו2",
     "אזרחים שחולצו0",
     "מים שנשארו0"
    ],
-   "stars": 1,
-   "uiStars": null,
+   "stars": 0,
+   "certificates": 1,
    "trace": [
     {
-     "time": 20.4,
-     "remaining": 39,
-     "water": 20,
-     "active": 2,
+     "time": 32.8,
+     "remaining": 27,
+     "water": 0,
+     "active": 7,
      "canFinish": false
     },
     {
-     "time": 24.9,
-     "remaining": 35,
-     "water": 20,
-     "active": 3,
+     "time": 39.8,
+     "remaining": 20,
+     "water": 0,
+     "active": 7,
      "canFinish": false
     },
     {
-     "time": 31,
-     "remaining": 29,
-     "water": 3,
-     "active": 5,
+     "time": 46.8,
+     "remaining": 13,
+     "water": 0,
+     "active": 7,
+     "canFinish": false
+    },
+    {
+     "time": 53.8,
+     "remaining": 6,
+     "water": 0,
+     "active": 7,
      "canFinish": false
     }
    ]
   },
-  "saveShapeUnchanged": {
+  "saveShapeUnchangedBeyondTheUsualStageWin": {
    "pass": false,
-   "paths": 1534,
+   "changed": [
+    ".fireCertificates[2].careful",
+    ".fireCertificates[2].fast",
+    ".fireCertificates[2].rescue",
+    ".fireCertificates[2].stars",
+    ".highScores.fireRescue",
+    ".instructionsSeen[]1",
+    ".instructionsSeen[]0"
+   ],
+   "foreign": [
+    ".instructionsSeen[]1",
+    ".instructionsSeen[]0"
+   ],
    "version": 19
   },
   "stageMapMarksTheEntryStages": {
@@ -626,6 +610,6 @@
   "codeKB": 86,
   "note": "firefighter GLB and fx sheets are already part of the fire pack; rooms and friends are new"
  },
- "failures": 4,
- "finishedAt": "2026-11-14T15:40:05.474Z"
+ "failures": 2,
+ "finishedAt": "2026-11-14T16:03:36.459Z"
 }

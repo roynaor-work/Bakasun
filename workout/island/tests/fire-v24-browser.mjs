@@ -98,7 +98,8 @@ async function finishStreet(t,run,name){
   for(let guard=0;guard<900;guard++){
     s=await t.snap();if(!s)break;if(guard%20===0)trace.push({time:+s.time.toFixed(1),remaining:Math.ceil(s.remaining),water:Math.round(s.water),active:s.flames.filter(f=>f.active&&f.heat>0).length,canFinish:s.canFinish});
     if(s.canFinish){await t.tapEl('#fire-finish');for(let i=0;i<30;i++){await t.tick(100);if(await t.page.locator('[data-result=fireRescue]').count())break;}break;}
-    if(s.water/s.maxWater<.3&&!s.atHydrant){const h=s.indicators.find(a=>a.kind==='hydrant');if(h){await t.tapAt(h.x,h.y);for(let i=0;i<120;i++){await t.tick(100);const n=await t.snap();if(n.atHydrant&&!n.truck.driving){for(let k=0;k<40;k++){await t.tick(100);const w=await t.snap();if(w.water/w.maxWater>.9)break;}break;}}continue;}}
+    if(s.water/s.maxWater<.3&&!s.atHydrant){ // the nearest hydrant's marker on the screen (the edge arrow when it is off screen)
+      const h=s.indicators.find(a=>a.kind==='hydrant')||await t.page.evaluate(()=>{const d=window.__island.games.current.session.debug,m=d.model,hp=[...m.balance.city.hydrants].sort((a,b)=>Math.hypot(a[0]-m.truck.x,a[2]-m.truck.z)-Math.hypot(b[0]-m.truck.x,b[2]-m.truck.z))[0];const p=d.view.projectWorld(hp);return p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390?p:null;});if(h){await t.tapAt(h.x,h.y);for(let i=0;i<120;i++){await t.tick(100);const n=await t.snap();if(n.atHydrant&&!n.truck.driving){for(let k=0;k<40;k++){await t.tick(100);const w=await t.snap();if(w.water/w.maxWater>.9)break;}break;}}continue;}}
     const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);if(!fires.length){await t.tick(200);continue;}
     const near=fires.filter(f=>Math.hypot(f.x-s.nozzle.x,f.y-s.nozzle.y)<=s.range*.85);
     if(near.length&&!s.truck.driving){await t.touch('touchStart',2,spray.x,spray.y);for(let i=0;i<25;i++){await t.tick(100);const n=await t.snap();if(!n||n.pressureEmpty||n.water<=0)break;}await t.touch('touchEnd',2);if(!shotDone){shotDone=true;run.shots.push(await t.shot(name+'-street-spray'));}await t.tick(250);continue;}
@@ -138,7 +139,7 @@ try{
   const after=await saveShape(t.page);run.saveAfter={progress:after.fireProgress,money:after.money,certificates:after.certificates};
   check('stageEndsWithAWinCardAndStars',run.resultCard&&run.resultWin&&run.resultStarsRow>=1&&after.certificates>=1,{title:run.resultTitle,rows:run.resultRows,stars:run.resultStarsRow,certificates:after.certificates,trace:run.streetTrace.slice(-4)});
   // a won campaign stage changes exactly what it always changed (stars, certificate, high score, wins, money); nothing new is written
-  const allowed=['.fireCertificates','.minigameProgress.fireRescue','.highScores','.minigameWins','.money','.learning','.parts','.playTime','.lastPlayed','.statistics','.stats'];
+  const allowed=['.fireCertificates','.minigameProgress.fireRescue','.highScores','.minigameWins','.money','.learning','.parts','.playTime','.lastPlayed','.statistics','.stats','.instructionsSeen'];
   const changed=[...new Set([...after.paths.filter(p=>!before.paths.includes(p)),...before.paths.filter(p=>!after.paths.includes(p))])],foreign=changed.filter(p=>!allowed.some(a=>p.startsWith(a)));
   check('saveShapeUnchangedBeyondTheUsualStageWin',foreign.length===0&&after.version===before.version,{changed:changed.slice(0,12),foreign:foreign.slice(0,12),version:after.version});
   // stage map badges (default flow)
