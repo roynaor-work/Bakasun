@@ -18,7 +18,7 @@ const base = `http://127.0.0.1:${server.address().port}/`;
 const {chromium} = await import(process.env.ISLAND_PLAYWRIGHT ? pathToFileURL(process.env.ISLAND_PLAYWRIGHT).href : '/opt/node-tools/node_modules/playwright/index.mjs');
 const browser = await chromium.launch({args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required']});
 const runs = {};
-for (const v of ['7', '8']) {
+for (const v of ['7', '8', '8s']) {
   const page = await browser.newPage(), errors = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto(`${base}tools/catch-audio-probe8.html?v=${v}`); await page.waitForFunction('window.done===true', null, {timeout: 300000});
   runs['v' + v] = {report: await page.evaluate(() => window.report), errors}; await page.close();
@@ -34,7 +34,10 @@ const summary = {
   sirenOverEnginePhone: {v7: db(c('v7').siren.phoneMean, c('v7')['engine-cruise'].phoneMean), v8: db(c('v8').siren.phoneMean, c('v8')['engine-cruise'].phoneMean)},
   burstOverSiren: {v7: db(c('v7').shot.peak, c('v7').siren.peak), v8: db(c('v8').shot.peak, c('v8').siren.peak)},
   engine25: {v7: c('v7')['engine-boost'].band['2000-5000'], v8: c('v8')['engine-boost'].band['2000-5000']}, engineLine: {v7: c('v7')['engine-boost'].linePromMax, v8: c('v8')['engine-boost'].linePromMax},
-  status: {v7: runs.v7.report.status, v8: runs.v8.report.status}, errors: {v7: runs.v7.errors, v8: runs.v8.errors},
+  // the v8 synthesis alone (?catchSound8=synth, and the stand-in until the pack decodes): the same figures for the engine and the opening
+  synth: Object.fromEntries(['opening', 'opening-first2s', 'engine-cruise', 'engine-boost', 'engine-slow'].map(k => [k, {v8s: c('v8s')[k], dbVsV7: db(c('v8s')[k].mean, c('v7')[k].mean), dbVsPack: db(c('v8s')[k].mean, c('v8')[k].mean)}])),
+  sirenOverEngineSynth: {all: db(c('v8s').siren.mean, c('v8s')['engine-cruise'].mean), phone: db(c('v8s').siren.phoneMean, c('v8s')['engine-cruise'].phoneMean)},
+  status: {v7: runs.v7.report.status, v8: runs.v8.report.status, v8s: runs.v8s.report.status}, errors: {v7: runs.v7.errors, v8: runs.v8.errors, v8s: runs.v8s.errors},
 };
 console.log(JSON.stringify(summary));
 if (out) await writeFile(out, JSON.stringify({summary, rows}, null, 1) + '\n');

@@ -5,7 +5,7 @@ import {seededRandom} from '../workout/island/minigames/catch-track.mjs';
 import {createChaseEngine6, driveChase6, DRIVING6, CHASE8} from '../workout/island/minigames/catch-chase6.mjs';
 import {createArsenal, ARSENAL, ARSENAL8, STRINGS as TOOL_STRINGS} from '../workout/island/minigames/catch-weapons.mjs';
 import {createCatchAudio, CUE_NAMES} from '../workout/island/minigames/catch-audio.mjs';
-import {AUDIO8, gearFor, rpmIn, startGear, burstRounds} from '../workout/island/minigames/catch-audio8.mjs';
+import {AUDIO8, PACK8, gearFor, rpmIn, startGear, burstRounds, layerMix, createAudio8} from '../workout/island/minigames/catch-audio8.mjs';
 import {BURST8, burstPlan} from '../workout/island/minigames/catch-burst8.mjs';
 import {installArsenalHud, acceptHalfWidth, ringSize} from '../workout/island/minigames/catch-arsenal-hud.mjs';
 import {runCatchSession6, flags8, SIREN7} from '../workout/island/minigames/catch-session6.mjs';
@@ -42,14 +42,15 @@ const V8A = {intro: true, engine: true, siren: true, burst: true};
 
 test('v8 flags: every part on by default, each URL flag brings its v7 part back (and ?catchSiren=v6 the v6 siren)', async () => {
   const p = q => flags8(new URLSearchParams(q));
-  assert.deepEqual(p(''), {intro: true, engine: true, siren: true, weaponsFix: true, burst: true});
+  assert.deepEqual(p(''), {intro: true, engine: true, siren: true, weaponsFix: true, burst: true, pack: true});
   assert.equal(p('catchIntro=v7').intro, false); assert.equal(p('catchEngine=v7').engine, false); assert.equal(p('catchSiren=v7').siren, false);
   assert.equal(p('catchSiren=v6').siren, false); assert.equal(p('catchWeaponsFix=0').weaponsFix, false); assert.equal(p('catchBurst=0').burst, false);
+  assert.equal(p('catchSound8=synth').pack, false, 'the synthesis only, for an A/B on the phone');
   assert.deepEqual(flags8(new URLSearchParams(''), {v8: {burst: false}}).burst, false, 'a test context can switch a part off');
   const s = runCatchSession6({balance, level: 3, seed: 2, t: k => k, finish: () => ({ok: true}), cancel() {}});
-  assert.deepEqual(s.v8, {intro: true, engine: true, siren: true, weaponsFix: true, burst: true}); assert.equal(s.snapshot.v8.weaponsFix, true); s.dispose();
+  assert.deepEqual(s.v8, {intro: true, engine: true, siren: true, weaponsFix: true, burst: true, pack: true}); assert.equal(s.snapshot.v8.weaponsFix, true); s.dispose();
   const src = await readFile(new URL('minigames/catch-session6.mjs', root), 'utf8');
-  for (const flag of ['catchIntro', 'catchEngine', 'catchWeaponsFix', 'catchBurst']) assert.ok(src.includes(`params.get('${flag}')`), flag);
+  for (const flag of ['catchIntro', 'catchEngine', 'catchWeaponsFix', 'catchBurst', 'catchSound8']) assert.ok(src.includes(`params.get('${flag}')`), flag);
   assert.match(src, /createCatchAudio\(\{sirenScale, pack: assets7 \? 'v7' : null, v8: audio8/, 'the audio gets the v8 parts');
   assert.match(src, /createChaseEngine6\(\{[^)]*v8: chase8, v7:/, 'the chase gets the tool fix'); assert.match(src, /createCatchView6\(\{[^)]*burst8: v8\.burst/, 'the view draws the burst');
   assert.match(src, /installArsenalHud\(\{.*fix8: Boolean\(chase8\)\}\)/, 'the HUD shows the v8 ring');
@@ -232,10 +233,54 @@ test('v8 burst changes no rule: one roll and the v7 damage per tap; the view, no
 
 test('v8 strings and offline: every new key is in the island strings (no exclamation marks, no Arabic), the new modules are in the shell', async () => {
   const island = JSON.parse(await readFile(new URL('data/strings.he.json', root), 'utf8'));
-  for (const k of Object.keys(TOOL_STRINGS)) { assert.ok(Object.hasOwn(island, k), k); assert.equal(/[!؀-ۿ]/.test(island[k]), false, k); assert.ok(/[א-ת]/.test(island[k]), k); }
+  for (const k of [...Object.keys(TOOL_STRINGS), 'catch.help8.2']) { assert.ok(Object.hasOwn(island, k), k); assert.equal(/[!؀-ۿ]/.test(island[k]), false, k); assert.ok(/[א-ת]/.test(island[k]), k); }
+  assert.match(island['catch.help8.2'], /הכביש לפניו/, 'the v8 help says where each tool aims');
   const manifest = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8'));
   for (const f of ['minigames/catch-audio8.mjs', 'minigames/catch-burst8.mjs']) assert.ok(manifest.shell.includes(f), f);
   for (const f of ['catch-audio8.mjs', 'catch-burst8.mjs']) { const s = await readFile(new URL('minigames/' + f, root), 'utf8'); assert.equal(/[؀-ۿ]/.test(s), false, f); }
+});
+
+// ----- the Codex pack (14/11, design/catch-audio-v2): the police V6 layers, the gear change and the opening, copied for play to assets/catch-v8 -----
+test('v8 pack: the files are the Codex files byte for byte, offline, only the ones used; their sounds measured clean of whistle lines', async () => {
+  const {createHash} = await import('node:crypto'), {readdir} = await import('node:fs/promises');
+  const man = JSON.parse(await readFile(new URL('design/catch-audio-v2/manifest.json', root), 'utf8')), offline = JSON.parse(await readFile(new URL('offline-manifest.json', root), 'utf8')).games.catch;
+  const files = (await readdir(new URL('assets/catch-v8/audio/', root))).sort();
+  assert.deepEqual(files, Object.keys(PACK8.sounds).flatMap(id => [id + '.mp3', id + '.ogg']).sort(), 'the engine layers, the gear change and the opening, both formats');
+  for (const id of Object.keys(PACK8.sounds)) {
+    const a = man.assets.find(x => x.id === id); assert.ok(a, id);
+    for (const ext of ['ogg', 'mp3']) {
+      const sha = createHash('sha256').update(await readFile(new URL(`assets/catch-v8/audio/${id}.${ext}`, root))).digest('hex');
+      assert.equal(sha, a.files[ext].sha256, `${id}.${ext} is the Codex file`); assert.ok(offline.includes(`assets/catch-v8/audio/${id}.${ext}`), `${id}.${ext} offline`);
+      assert.ok(a.files[ext].band_energy_pct[3] < .01, `${id}.${ext}: nothing in 2-5 kHz`);
+    }
+    assert.ok(Math.abs(PACK8.sounds[id].gain - a.recommended_gain) < 1e-9, id + ': the manifest gain'); if (a.loop) assert.deepEqual(PACK8.sounds[id].loop, [a.loop.start_s, a.loop.end_s], id + ': its loop');
+  }
+  assert.deepEqual(PACK8.layers.map(l => l.rpm), PACK8.layers.map(l => man.assets.find(x => x.id === l.id).rpm), 'the layers at the rpm they were made for');
+  assert.ok(PACK8.layers.every(l => /police/.test(l.id)), 'the police set: the v6-high layer has a 1.05 kHz line at 1.25x (verification/catch-v8/pack-lines.json)');
+  const lines = JSON.parse(await readFile(new URL('verification/catch-v8/pack-lines.json', root), 'utf8'));
+  for (const r of lines.filter(x => /police|gear/.test(x.file))) assert.equal(r.tonal, 0, `${r.file} at ${r.rate}x: no whistle-like frame`);
+  assert.ok(lines.some(x => /v6-high/.test(x.file) && x.rate > 1 && x.tonal > 10), 'and the layer left out does have one');
+  assert.ok(lines.some(x => /siren-near/.test(x.file) && x.tonal > 0), 'the pack siren (not used) has a strong second-harmonic line');
+});
+
+test('v8 pack voice: equal-power layers by rpm, the synthesis until the files decode and then a crossfade to them, the opening and the gear change', () => {
+  for (const r of [700, 1200, 1700, 2200, 3000, 3600, 4800]) { const m = layerMix(r), e = m.reduce((s, x) => s + x.gain * x.gain, 0); assert.ok(Math.abs(e - 1) < 1e-9, r + ' rpm: equal power'); assert.ok(m.every((x, i) => Math.abs(x.rate - Math.min(1.5, Math.max(.6, r / PACK8.layers[i].rpm))) < 1e-9)); }
+  assert.deepEqual(layerMix(1200).map(x => x.gain), [1, 0, 0]); assert.ok(layerMix(2900)[1].gain > 0 && layerMix(2900)[2].gain > 0 && layerMix(2900)[0].gain === 0);
+  const {Ctx, made} = fakeAudio(), ac = new Ctx(), out = ac.createGain(), fake = id => ({id, duration: 2, length: 16000}); let ready = false;
+  const a = createAudio8(ac, out, {flags: V8A, pack: PACK8, buffer: id => (ready ? fake(id) : null)});
+  a.engineState('countdown', false); a.engine(22, false); assert.equal(a.status().voice, 'synth', 'not decoded yet: the synthesized engine');
+  ac.currentTime += .1; a.engine(22, false); ac.currentTime += .6; a.engine(22, false); assert.equal(a.status().intro, 'synth', 'the opening could not wait for the file: the synthesized one');
+  ready = true; ac.currentTime += .1; a.engineState('run', false); a.engine(22, false); assert.equal(a.status().voice, 'pack', 'decoded: the pack takes over');
+  const loops = made.src.filter(s => s.loop && s.buffer?.id?.startsWith('engine-police')); assert.equal(loops.length, 3, 'the three police layers run together');
+  for (let i = 0; i < 90; i++) { ac.currentTime += 1 / 60; a.engine(Math.min(31, 22 + i * .2), i > 10); }
+  assert.ok(loops.every(s => s.playbackRate.targets.length > 10), 'each layer is pitched by the rpm'); assert.ok(made.src.some(s => s.buffer?.id === 'gear-shift'), 'the soft gear change on an upshift or the kickdown');
+  // a fresh voice with the files decoded from the start: the pack opening at the first countdown frame, no dings under it, no second siren at "go"
+  const f2 = fakeAudio(), ac2 = new f2.Ctx(), b = createAudio8(ac2, ac2.createGain(), {flags: V8A, pack: PACK8, buffer: fake});
+  b.engineState('countdown', false); b.engine(22, false); assert.equal(b.status().intro, 'pack'); assert.ok(f2.made.src.some(s => s.buffer?.id === 'chase-start'), 'the engine start and its soft siren');
+  const before = f2.made.osc.length; b.ding(); assert.equal(f2.made.osc.length, before, 'no ding over the opening');
+  b.go(); assert.equal(f2.made.osc.some(o => o.frequency.targets.includes(AUDIO8.whoop.peak)), false, 'no whoop at "go": the opening had its siren');
+  // without the pack (?catchSound8=synth) nothing is fetched and the synthesis plays
+  const f3 = fakeAudio(), ac3 = new f3.Ctx(), c = createAudio8(ac3, ac3.createGain(), {flags: V8A}); c.engineState('countdown', false); c.engine(22, false); assert.equal(c.status().voice, 'synth'); assert.equal(c.status().pack, null);
 });
 
 test('v8 forensics in the real island: v7 had a whistle line during the chase (the turbo whine), v8 has none', async () => {

@@ -17,13 +17,15 @@ export const SIREN7 = .55;
  *  ?catchSiren=v7       the v7 pack siren (a pure sine wail, like an air-raid alert); v8 = a soft two-tone 7 dB under it (v6 still works)
  *  ?catchWeaponsFix=0   the v7 tools; v8 = the police car follows instead of passing him, an honest spike ring, a tap that cannot fire
  *                       says why, a ring sized and named for the tool's target (catch-weapons.mjs ARSENAL8, catch-chase6.mjs CHASE8)
- *  ?catchBurst=0        one beep per tyre shot; v8 = a rapid burst with tracers and muzzle flashes (catch-burst8.mjs), same damage */
+ *  ?catchBurst=0        one beep per tyre shot; v8 = a rapid burst with tracers and muzzle flashes (catch-burst8.mjs), same damage
+ *  ?catchSound8=synth   the v8 engine and opening synthesized only; by default the Codex pack (catch-audio-v2: the police V6 layers, the gear
+ *                       change, the opening) plays once it decodes, with the synthesis as the stand-in and the fallback (catch-audio8.mjs PACK8) */
 export function flags8(params, ctx = {}) {
   const siren = ctx.v7?.siren ?? params.get('catchSiren');
   return {
     intro: ctx.v8?.intro ?? params.get('catchIntro') !== 'v7', engine: ctx.v8?.engine ?? params.get('catchEngine') !== 'v7',
     siren: ctx.v8?.siren ?? (siren !== 'v7' && siren !== 'v6'), weaponsFix: ctx.v8?.weaponsFix ?? params.get('catchWeaponsFix') !== '0',
-    burst: ctx.v8?.burst ?? params.get('catchBurst') !== '0',
+    burst: ctx.v8?.burst ?? params.get('catchBurst') !== '0', pack: ctx.v8?.pack ?? params.get('catchSound8') !== 'synth',
   };
 }
 
@@ -42,6 +44,7 @@ const ICONS = {
 const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS, ...WEAPON_STRINGS,
   'catch.help7.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.',
   'catch.help7.4': 'יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.',
+  'catch.help8.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.',
   'catch.pop.nitro': 'ניטרו', 'catch.pop.nearBonus': 'עקיפה צמודה, עוד ניטרו', 'catch.pop.crimOil': 'הוא החליק על השמן', 'catch.pop.block': 'מחסום משטרה, נשאר נתיב אחד',
   'catch.help6.1': 'מתחילים במרדף: גוררים ימינה ושמאלה כדי להטות את ההגה, ובפניות מחזיקים לכיוון הפנייה. טורבו ובלם בימין.',
   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
@@ -98,7 +101,7 @@ export function runCatchSession6(ctx) {
   const v7 = {weapons: ctx.v7?.weapons ?? params.get('catchWeapons') !== '0', assist: ctx.v7?.assist ?? params.get('catchAssist') !== '0', elements: ctx.v7?.elements ?? params.get('catchElements') !== '0'};
   const sirenScale = (ctx.v7?.siren ?? params.get('catchSiren')) === 'v6' ? 1 : SIREN7;
   const assets7 = (v7.weapons || v7.elements) && (ctx.v7?.assets ?? params.get('catchAssets') !== '0'); // the Codex prop and sound packs
-  const v8 = flags8(params, ctx), chase8 = v8.weaponsFix && v7.weapons ? {weaponsFix: true} : null, audio8 = {intro: v8.intro, engine: v8.engine, siren: v8.siren, burst: v8.burst};
+  const v8 = flags8(params, ctx), chase8 = v8.weaponsFix && v7.weapons ? {weaponsFix: true} : null, audio8 = {intro: v8.intro, engine: v8.engine, siren: v8.siren, burst: v8.burst, pack: v8.pack};
   const balance6 = {...balance, levels: v7.assist ? levels7(balance) : balance.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})}))};
   const makeThrow = mods => createCatchEngine({balance: balance6, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
   const withChase = Boolean(ctx.canvas);
@@ -153,7 +156,7 @@ export function runCatchSession6(ctx) {
   const popup = node('div', 'catch-popup'); popup.setAttribute('role', 'status'); popup.setAttribute('aria-live', 'polite'); hud.append(popup);
   const loading = node('div', 'catch-loading', t('catch.loading')); hud.append(loading);
   const help = node('div', 'catch-help'); help.hidden = true;
-  { const card = node('div', 'catch-help-card'); for (const k of v7.weapons || v7.assist ? ['6.1', v7.weapons ? '7.2' : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] : ['6.1', '6.2', '6.3', '6.4']) card.append(node('p', '', t('catch.help' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help6', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
+  { const card = node('div', 'catch-help-card'); for (const k of v7.weapons || v7.assist ? ['6.1', v7.weapons ? (chase8 ? '8.2' : '7.2') : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] : ['6.1', '6.2', '6.3', '6.4']) card.append(node('p', '', t('catch.help' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help6', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
   const seenHelp = (() => { try { return localStorage.getItem('island.catch.help6') === '1' || localStorage.getItem('island.catch.help2') === '1'; } catch { return true; } })();
   const stars = node('div', 'catch-stars'); stars.hidden = true; hud.append(stars);
 

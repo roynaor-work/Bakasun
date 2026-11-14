@@ -5,7 +5,8 @@
  * target (the first rounds land just short of it on the road, the rest on it); a miss sprays the road around it.
  * The rules do not change: one roll per tap, decided at the tap (catch-weapons.mjs, catch-tyres.mjs); the burst spreads that one result over
  * the rounds, so the damage per tap is the damage of v7. Cartoon only: the targets are car parts. Takes Three.js as a parameter. */
-export const BURST8 = Object.freeze({rounds: 7, rate: 11.5, walk: 2, speed: 140, tracerLen: 2.4, tracerWidth: .1, flash: .04, spread: [.35, 1.1], muzzle: [2.3, .9, -.6], pool: 10, shake: .05});
+// the muzzle sits on the roof by the light bar (the camera rides behind the car: a muzzle at the front bumper, like v6's, is hidden by the body)
+export const BURST8 = Object.freeze({rounds: 7, rate: 11.5, walk: 2, speed: 140, tracerLen: 3, tracerWidth: .16, flash: .05, flashSize: 1.7, spread: [.35, 1.1], muzzle: [1, 1.75, -.45], pool: 10, shake: .05});
 
 /** The rounds of one burst: when each leaves (s from the tap), whether it strikes the target, and where it lands off the target (metres in
  * the getaway car's frame: dx along it, behind negative; dz across). Deterministic for a given rnd. */
@@ -45,7 +46,7 @@ export function createBurstFx({T, scene, playerCar, crimCar, sparks, dust, gfx, 
   function impactPoint(q, out) { q.target(out); out.add(v3.set(q.dx, 0, q.dz).applyQuaternion(crimCar.quaternion)); if (!q.on) out.y = .05; return out; }
   function launch(q) {
     const tr = pool.find(p => !p.busy); rounds++; if (q.on) onTarget++;
-    flash.visible = true; flashT = B.flash; fStar.material.rotation = Math.random() * Math.PI; fGlow.scale.setScalar(1.1 + Math.random() * .7); onRound(q);
+    flash.visible = true; flashT = B.flash; fStar.material.rotation = Math.random() * Math.PI; fGlow.scale.setScalar(B.flashSize * (.8 + Math.random() * .5)); fStar.scale.setScalar(B.flashSize * (.55 + Math.random() * .3)); onRound(q);
     if (!tr) return;
     playerCar.localToWorld(tr.from.set(...B.muzzle)); impactPoint(q, tr.to);
     tr.busy = true; tr.q = q; tr.k = 0; tr.dur = Math.max(.04, tr.from.distanceTo(tr.to) / B.speed); tr.g.visible = true; place(tr);

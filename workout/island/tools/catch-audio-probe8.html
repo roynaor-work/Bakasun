@@ -10,9 +10,10 @@
 <script type="module">
 import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-13';
 const out = document.getElementById('out'), log = s => { out.textContent += s + '\n'; };
-const v8 = new URLSearchParams(location.search).get('v') === '8';
-const audio = createCatchAudio({sirenScale: .55, pack: 'v7', v8: v8 ? {intro: true, engine: true, siren: true, burst: true} : null}); window.audio = audio;
-const report = {version: v8 ? 'v8' : 'v7', cues: {}, status: {}};
+// ?v=7, ?v=8 (the v8 sounds with the Codex pack for the engine and the opening, as the game plays them) or ?v=8s (v8 synthesized only)
+const ver = new URLSearchParams(location.search).get('v') || '7', v8 = ver.startsWith('8');
+const audio = createCatchAudio({sirenScale: .55, pack: 'v7', v8: v8 ? {intro: true, engine: true, siren: true, burst: true, pack: ver !== '8s'} : null}); window.audio = audio;
+const report = {version: 'v' + ver, cues: {}, status: {}};
 let an = null, td = null, fd = null, hz = 0, anP = null, tdP = null;
 // a second tap through a 250 Hz high-pass: roughly what a phone speaker plays (its lows roll off under ~250 Hz)
 const tap = () => { const node = audio.output(); if (!node) return false; const ac = node.context; an = ac.createAnalyser(); an.fftSize = 4096; an.smoothingTimeConstant = 0; node.connect(an); an.connect(ac.destination); td = new Float32Array(an.fftSize); fd = new Float32Array(an.frequencyBinCount); hz = ac.sampleRate / an.fftSize;
@@ -26,17 +27,21 @@ const median = a => { const c = Array.from(a).sort((x, y) => x - y); return c[c.
 async function measure(name, fn, ms, {warm = 0, reps = ms <= 1100 ? 2 : 1} = {}) {
   let best = null;
   for (let r = 0; r < reps; r++) { const m = await measureOnce(fn, ms, warm); if (!best || m.mean > best.mean) best = m; await sleep(250); }
+  // the opening also gives its first 2 s (the countdown: what plays before "go"), from the same pass
+  if (name === 'opening') { const f = best.series.filter(s => s[0] < 2), mean = i => +(f.reduce((a, s) => a + s[i], 0) / Math.max(1, f.length)).toFixed(4);
+    report.cues['opening-first2s'] = {...best, series: undefined, peak: +Math.max(0, ...f.map(s => s[1])).toFixed(4), mean: mean(1), phonePeak: +Math.max(0, ...f.map(s => s[2])).toFixed(4), phoneMean: mean(2)}; }
+  delete best.series;
   report.cues[name] = best;
   log(name.padEnd(16) + ' peak ' + best.peak + ' mean ' + best.mean + ' 2-5k ' + best.band['2000-5000'] + '% line ' + best.linePromMax + 'dB@' + best.linePromHz);
   await sleep(300);
 }
 async function measureOnce(fn, ms, warm) {
-  const pow = new Float64Array(fd.length); let peak = 0, sum = 0, n = 0, frames = 0, maxProm = 0, maxPromHz = 0, pPeak = 0, pSum = 0;
+  const pow = new Float64Array(fd.length); let peak = 0, sum = 0, n = 0, frames = 0, maxProm = 0, maxPromHz = 0, pPeak = 0, pSum = 0; const series = [];
   fn(); if (warm) await sleep(warm);
   const t0 = performance.now();
   while (performance.now() - t0 < ms) {
     an.getFloatTimeDomainData(td); let s = 0; for (const v of td) s += v * v; const r = Math.sqrt(s / td.length); peak = Math.max(peak, r); sum += r; n++;
-    anP.getFloatTimeDomainData(tdP); let sp = 0; for (const v of tdP) sp += v * v; const rp = Math.sqrt(sp / tdP.length); pPeak = Math.max(pPeak, rp); pSum += rp;
+    anP.getFloatTimeDomainData(tdP); let sp = 0; for (const v of tdP) sp += v * v; const rp = Math.sqrt(sp / tdP.length); pPeak = Math.max(pPeak, rp); pSum += rp; series.push([(performance.now() - t0) / 1000, r, rp]);
     an.getFloatFrequencyData(fd); let mx = -Infinity; for (const v of fd) mx = Math.max(mx, v);
     if (mx > -110) {
       frames++; for (let i = 1; i < fd.length; i++) pow[i] += Math.pow(10, fd[i] / 10);
@@ -52,7 +57,7 @@ async function measureOnce(fn, ms, warm) {
   const lo = Math.ceil(2000 / hz), hi = Math.floor(5000 / hz), nb = Math.round(200 / hz); let k = lo; for (let i = lo; i <= hi; i++) if (pow[i] > pow[k]) k = i;
   const db = i => 10 * Math.log10(pow[i] + 1e-30), neigh = []; for (let i = k - nb; i <= k + nb; i++) if (Math.abs(i - k) > 2) neigh.push(db(i));
   let top = 1; for (let i = 1; i < pow.length; i++) if (pow[i] > pow[top]) top = i;
-  return {peak: +peak.toFixed(4), mean: +(sum / Math.max(1, n)).toFixed(4), phonePeak: +pPeak.toFixed(4), phoneMean: +(pSum / Math.max(1, n)).toFixed(4), frames, band, peakHz: Math.round(top * hz), hi25: {hz: Math.round(k * hz), promDb: +(db(k) - median(neigh)).toFixed(1), belowPeakDb: +(db(k) - db(top)).toFixed(1)}, linePromMax: +maxProm.toFixed(1), linePromHz: maxPromHz};
+  return {series, peak: +peak.toFixed(4), mean: +(sum / Math.max(1, n)).toFixed(4), phonePeak: +pPeak.toFixed(4), phoneMean: +(pSum / Math.max(1, n)).toFixed(4), frames, band, peakHz: Math.round(top * hz), hi25: {hz: Math.round(k * hz), promDb: +(db(k) - median(neigh)).toFixed(1), belowPeakDb: +(db(k) - db(top)).toFixed(1)}, linePromMax: +maxProm.toFixed(1), linePromHz: maxPromHz};
 }
 /** Drives the engine as the chase does, 60 times a second: speed by a function of time, the boost and the brake, the phase. */
 const drive = (secs, speedAt, {boost = () => false, brake = () => false, phase = () => 'run', siren = false} = {}) => () => {
@@ -63,6 +68,8 @@ async function run() {
   if (!tap()) { window.report = report; window.done = true; return; }
   audio.cue('countdown'); await sleep(200);
   for (let i = 0; i < 60 && audio.status().pack?.decoded < audio.status().pack?.of; i++) await sleep(50);
+  for (let i = 0; i < 60 && audio.status().v8?.pack8 && audio.status().v8.pack8.decoded < audio.status().v8.pack8.of; i++) await sleep(50);
+  report.status.decoded = audio.status();
   // the opening as the chase plays it: the view is up ('engine'), 2.5 s of countdown (idle, two counts), 'go', then the run with the siren
   await measure('opening', () => {
     audio.cue('engine'); const t0 = performance.now(); let last = -1, said = {};
@@ -72,8 +79,6 @@ async function run() {
       if (run && t - last > .8) { last = t; audio.cue('siren', {approach: 0}); } }, 16);
   }, 5000);
   await sleep(1500);
-  await measure('opening-first2s', () => { audio.cue('engine'); const t0 = performance.now(); const iv = setInterval(() => { const t = (performance.now() - t0) / 1000; if (t > 2) { clearInterval(iv); audio.engineStop(); return; } audio.engineState('countdown', false); audio.engine(22, false); if (t > .5 && t < .52) audio.cue('count'); }, 16); }, 2000);
-  await sleep(1200);
   // continuous sounds: the steady level after a warm-up (the v8 siren fades in over 1.4 s when it starts, the engines over 0.4 s)
   const cues = (n, arg) => () => { for (let i = 0; i < n; i++) setTimeout(() => audio.cue('siren', arg), i * 700); };
   await measure('siren', drive(5, () => 0, {siren: true, phase: () => 'run'}), 3000, {warm: 1800}); audio.engineStop(); await sleep(1500);

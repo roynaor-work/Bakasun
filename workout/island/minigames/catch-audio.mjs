@@ -3,7 +3,7 @@
  * Mix (probe RMS, tools/catch-audio-probe.html): siren bed ~.10 above the engine bed (~.04 idle, ~.06 boost);
  * one-shot cues below the 'catch' chord peak +20%; a gentle limiter before the destination so stacked cues do not clip.
  * v5 (catch-session.mjs) and v6 (catch-session6.mjs) share this file: every cue name that existed keeps working. */
-import {createAudio8} from './catch-audio8.mjs?v=island-v2-20261107-13';
+import {createAudio8, PACK8} from './catch-audio8.mjs?v=island-v2-20261107-13';
 
 const CUE_NAMES = ['tool', 'swing', 'whoosh', 'thud', 'miss', 'catch', 'perfect', 'engine', 'siren', 'count', 'countdown', 'go', 'crash', 'crimCrash', 'pad', 'scrape', 'ram', 'nitro', 'brake', 'near', 'bossHit', 'stars',
   'turn', 'shot', 'shotHit', 'flat', 'skid', 'draw', 'twang', 'whistle', 'hitBody', 'hitHead',
@@ -37,6 +37,8 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
   const SIREN_SCALE = Math.max(0, Math.min(1.5, Number(sirenScale) || 0)), PACK = pack === 'v7' ? PACK7 : null;
   const V8 = v8 ? {intro: Boolean(v8.intro), engine: Boolean(v8.engine), siren: Boolean(v8.siren), burst: Boolean(v8.burst)} : null;
   let a8 = null, engineInfo = {phase: 'run', braking: false};
+  // the v8 Codex pack (catch-audio8.mjs PACK8: the police V6 layers, the gear change, the opening); `v8.pack === false` = synthesis only
+  const P8 = V8 && v8.pack !== false && (V8.engine || V8.intro) ? PACK8 : null;
   let ac = null, master = null, limiter = null, paused = false, disposed = false, unlockBound = false;
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // ----- recorded siren loops: fetched at creation (no context needed), decoded once a context exists -----
@@ -77,8 +79,26 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
       if (packFmt[id] === 'ogg') { packFmt[id] = 'mp3'; packEnc[id] = null; packTries[id] = 0; packFetch(id); } else if (packTries[id] >= 2) packEnc[id] = null;
     });
   };
-  const packDecodeAll = () => { if (PACK) for (const id of Object.keys(PACK.sounds)) packDecode(id); };
+  const packDecodeAll = () => { if (PACK) for (const id of Object.keys(PACK.sounds)) packDecode(id); p8DecodeAll(); };
   if (PACK) for (const id of Object.keys(PACK.sounds)) packFetch(id);
+  // ----- v8 pack: the same fetch at creation, decode with the context, two tries per file and the OGG -> MP3 fallback as the v7 pack -----
+  const p8Enc = {}, p8Buf = {}, p8Decoding = {}, p8Tries = {}, p8Fmt = {};
+  const p8Url = id => new URL(P8.dir + id + '.' + (p8Fmt[id] ||= opusOk() ? 'ogg' : 'mp3'), import.meta.url).href;
+  const p8Fetch = id => {
+    if (!P8 || p8Enc[id] || typeof fetch !== 'function') return;
+    p8Enc[id] = fetch(p8Url(id)).then(r => r.ok ? r.arrayBuffer() : Promise.reject(new Error('pack8'))).catch(() => { p8Enc[id] = null; return null; });
+  };
+  function p8Decode(id) {
+    if (!P8 || p8Buf[id] || p8Decoding[id]) return; const a = ac; if (!a) return;
+    if (!p8Enc[id]) { if ((p8Tries[id] || 0) >= 2) return; p8Fetch(id); if (!p8Enc[id]) return; }
+    p8Tries[id] = (p8Tries[id] || 0) + 1;
+    p8Decoding[id] = p8Enc[id].then(bytes => bytes ? a.decodeAudioData(bytes.slice(0)) : Promise.reject(new Error('pack8'))).then(b => { p8Buf[id] = b; }).catch(() => {
+      p8Decoding[id] = null;
+      if (p8Fmt[id] === 'ogg') { p8Fmt[id] = 'mp3'; p8Enc[id] = null; p8Tries[id] = 0; p8Fetch(id); } else if (p8Tries[id] >= 2) p8Enc[id] = null;
+    });
+  }
+  function p8DecodeAll() { if (P8) for (const id of Object.keys(P8.sounds)) p8Decode(id); }
+  if (P8) for (const id of Object.keys(P8.sounds)) p8Fetch(id);
   const ensure = () => {
     if (disposed) return null;
     if (ac) { if (ac.state === 'suspended' && !paused) { try { ac.resume(); } catch { /* ignore */ } } return ac; }
@@ -105,7 +125,7 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
   const out = () => master;
   const ready = () => { const a = ensure(); return a && !muted() && !paused ? a : null; };
   /** v8 voices (catch-audio8.mjs) on this context and master, built at the first v8 cue; null without v8, muted or paused. */
-  const get8 = () => { if (!V8) return null; const a = ready(); if (!a) return null; if (!a8) { try { a8 = createAudio8(a, master, {flags: V8}); } catch { return null; } } return a8; };
+  const get8 = () => { if (!V8) return null; const a = ready(); if (!a) return null; if (!a8) { try { a8 = createAudio8(a, master, {flags: V8, pack: P8, buffer: id => p8Buf[id] || null}); } catch { return null; } } return a8; };
 
   // ----- primitives -----
   const tone = (freq, dur, {type = 'sine', gain = .12, slide = 0, delay = 0} = {}) => {
@@ -363,7 +383,7 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
         sirenLive: Boolean(live), sirenGain: live ? +live.g.gain.value.toFixed(3) : 0, ...(SIREN_SCALE !== 1 ? {sirenScale: SIREN_SCALE} : {}),
         ...(PACK ? {pack: {decoded: Object.keys(packBuf).length, of: Object.keys(PACK.sounds).length, siren: live?.pack ? live.id : null, voices: voices.length, format: packFmt['police-soft'] || null}} : {}),
         engine: Boolean(eng), boosting: Boolean(eng?.boosting), draw: Boolean(drawOsc), limiter: Boolean(limiter),
-        ...(V8 ? {v8: {...V8, live: a8 ? a8.status() : null}} : {}),
+        ...(V8 ? {v8: {...V8, live: a8 ? a8.status() : null, pack8: P8 ? {decoded: Object.keys(p8Buf).length, of: Object.keys(P8.sounds).length, format: p8Fmt['engine-police-mid'] || null} : null}} : {}),
       };
     },
     /** The node every cue feeds (before the limiter): probes tap it with an AnalyserNode. */
