@@ -7,13 +7,14 @@
  *        [--query=soccerTier=0] [--seconds=30 | --half | --full] [--tag=after] [--stage=2] [--frame=16] */
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {createTouchBot,controlLayout} from './soccer-v23-touch.mjs';
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
 import {waitForGameStart} from '../tests/shell-ready.mjs';
 
 /** As openSoccer of the v23 harness (same browser flags, the island save prepared as a player has it, the match entered through the
  * menu), with long timeouts: on a loaded build machine the island itself can take minutes to come up. */
-async function openFull({query='',stage=2,viewport={width:844,height:390}}={}){
+export async function openFull({query='',stage=2,viewport={width:844,height:390}}={}){
   const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
   const browser=await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
   const context=await browser.newContext({viewport,hasTouch:true,isMobile:true,deviceScaleFactor:1,serviceWorkers:'block'});context.setDefaultTimeout(600000);
@@ -99,4 +100,4 @@ async function main(){
   }
   process.stdout.write(JSON.stringify({tag,gameSeconds:last?.elapsed,score:last?.score,events:counts,shots,errors:h.errors.length})+'\n');
 }
-main().catch(e=>{console.error(e);process.exit(1);});
+if(process.argv[1]===fileURLToPath(import.meta.url))main().catch(e=>{console.error(e);process.exit(1);});
