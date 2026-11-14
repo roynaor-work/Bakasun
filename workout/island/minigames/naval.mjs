@@ -195,7 +195,9 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   * fresh settings solved in that same frame, so what the arc showed is what flies. */
  const lockTarget=()=>homing?enemies.find(e=>e.index===homing.index&&e.active&&e.hp>0)||null:null;
  const lockShootable=e=>e.active&&e.hp>0&&navalTargetable(e,ammoIndex,balance);
- function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation,warm:homing.solution},balance,lockCfgV24);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
+ function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation,warm:homing.solution},balance,lockCfgV24);
+  // v24 submarine: the guided missile and the mine are no answer to a diver either (they would pass over it); the lock says "under water, torpedo only" and waits.
+  if(subStage&&e.subMode==='v24'&&navalSubShield(e,ammoIndex,balance)&&homing.solution?.status==='ready')homing.solution={...homing.solution,status:'miss',contact:null};homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
  /** Locked and on target with no finger on Fire: the arc's end and colour come from the lock's own forecast (refreshed every
   * `refreshSeconds`), re-sampled on the turret's launch, instead of the two forecasts honest() runs on every frame while aiming. */
  function lockPrediction(pr){

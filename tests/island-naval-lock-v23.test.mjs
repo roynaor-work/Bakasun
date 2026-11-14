@@ -118,7 +118,9 @@ test('model: behind the bow, the turret swings round and the shell hits; a tap d
 });
 
 test('model: a locked submarine that will be under water when the shell arrives reads dive, and the guided missile still homes on it',()=>{
- const m=make(11,1);run(m,30);const sub=m.enemies.find(e=>e.active&&e.hp>0&&nb.shipTypes[e.kind].submarine);assert.ok(sub,'stage 11 has a submarine');
+ // v24 (14/11/2026): under water only the torpedo reaches a submarine, the missile no longer homes on a diver (tests/island-aliens-naval-v24.test.mjs);
+ // this v23 check keeps v23's submarine with ?navalSub=v23.
+ const m=make(11,1,'?navalSub=v23');run(m,30);const sub=m.enemies.find(e=>e.active&&e.hp>0&&nb.shipTypes[e.kind].submarine);assert.ok(sub,'stage 11 has a submarine');
  m.update(1/60,{lockTarget:sub.index});const seen=new Set();for(let i=0;i<600;i++){m.playerShip.hp=m.playerShip.maxHp;m.update(1/60,{});if(!m.homing)break;seen.add(m.homing.status);if(seen.has('dive')&&seen.has('ready'))break;}
  assert.ok(seen.has('dive'),`dive seen (${[...seen]})`);assert.ok(!seen.has('miss'),'a submarine miss always reads dive');
  // A tap while it dives is held (the lock says "waiting") and fires by itself once the shell can meet it, and then it hits.

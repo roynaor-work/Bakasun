@@ -93,13 +93,14 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
    check(Number.isInteger(a.homing?.index)&&Number.isInteger(b.homing?.index)&&a.homing.index!==b.homing.index,'Lock button: a tap locks, the next tap moves to the next hull');check(c.homing?.index===a.homing.index,'a swipe goes back');await capture('naval-2-lock-button');await leave();}
   // N3/N4. Accuracy while sailing in a circle, 20 shells per mode, and the enemy fire per minute.
   const accuracy=async(mode)=>{const v24=mode==='v24';await ready(10,v24?'':'&navalAim=v23&navalEnemyFire=v23&navalSub=v23');await page.evaluate(()=>{window.__island.games.current.session.debug.view?.degrade(true);});
-   const S=await stickPoint(),F=await center('#shoot'),L=v24?await center('.naval-lock-btn'):null;let s=await snap();const t0=s.time,f0=s.fired,h0=s.hits,e0=s.enemyFired;let angle=0,decals=0,lastFire=-9,lastTap=-9,stick={x:S.x,y:S.y-40,id:7};
+   // This Chrome's CDP lifts the points a touchEnd lists, so each tap lifts only its own finger and the left thumb keeps the floating stick.
+   const S=await stickPoint(),F=await center('#shoot'),L=v24?await center('.naval-lock-btn'):null;let s=await snap();const t0=s.time,f0=s.fired,h0=s.hits,e0=s.enemyFired;let angle=0,decals=0,lastFire=-9,lastTap=-9,stick={x:S.x,y:S.y,id:7};
    await touch('touchStart',[stick]);
    while(s&&!s.result&&s.fired-f0<SHOTS&&s.time-t0<150){
     angle+=.12;stick={x:S.x+Math.sin(angle)*42,y:S.y-Math.cos(angle)*42,id:7};await touch('touchMove',[stick]);
-    if(v24&&!s.homing&&s.time-lastTap>1){await touch('touchStart',[stick,{...L,id:4}]);await tick(70);await touch('touchEnd',[stick]);lastTap=s.time;}
-    if(!v24&&s.time-lastTap>2.5){const t=await nearestVisible();if(t){await touch('touchStart',[stick,{x:t.q.x,y:t.q.y,id:5}]);await tick(70);await touch('touchEnd',[stick]);lastTap=s.time;}}
-    if(s.time-lastFire>.75){await touch('touchStart',[stick,{...F,id:2}]);await tick(60);await touch('touchEnd',[stick]);lastFire=s.time;}
+    if(v24&&!s.homing&&s.time-lastTap>1){await touch('touchStart',[stick,{...L,id:4}]);await tick(70);await touch('touchEnd',[{...L,id:4}]);lastTap=s.time;}
+    if(!v24&&s.time-lastTap>2.5){const t=await nearestVisible();if(t){await touch('touchStart',[stick,{x:t.q.x,y:t.q.y,id:5}]);await tick(70);await touch('touchEnd',[{x:t.q.x,y:t.q.y,id:5}]);lastTap=s.time;}}
+    if(s.time-lastFire>.75){await touch('touchStart',[stick,{...F,id:2}]);await tick(60);await touch('touchEnd',[{...F,id:2}]);lastFire=s.time;}
     await tick(120);const now=await snap().catch(()=>null);if(!now)break;s=now;const d=s.hud?.v24?.decals||0;if(d>decals){decals=d;if(v24&&d>=2)await capture('naval-4-red-decals');}
    }
    await touch('touchEnd');for(let t=0;t<3000&&(s.ball?.active||s.extraShots?.length);t+=100){await tick(100);const now=await snap().catch(()=>null);if(!now)break;s=now;}

@@ -227,6 +227,8 @@ test('submarine v24 in the model: shells pass over a diver ("under water"), a to
  m.update(FRAME,{lockTarget:sub.index});run(m,30);const hp=sub.hp,f=m.fired;let n=0;
  m.update(FRAME,{fireRelease:true,releaseTarget:{target:sub.index,x:sub.x,z:sub.z},releaseCurrent:false});while(n<240&&m.ball.active){m.update(FRAME,{});n++;}
  if(m.fired>f){assert.equal(sub.hp,hp,'the shell did no harm under water');}
+ // The guided missile locked on the diver waits too ("under water, torpedo only"), nothing is wasted.
+ const ai=m.ammoIndex,fm=m.fired;m.update(FRAME,{ammoIndex:1});run(m,6);if(sub.depth>0){m.update(FRAME,{quickShot:true});run(m,6);assert.equal(m.homing?.status,'dive','missile on a diver: dive');assert.equal(m.fired,fm,'no missile wasted on a diver');}m.update(FRAME,{ammoIndex:ai});
  // The torpedo button.
  const tf=m.snapshot().v24.torpedoesFired,t0=m.torpedoes;let hit=false;for(let k=0;k<6&&!hit&&m.torpedoes>0;k++){if(sub.depth>0){m.update(FRAME,{torpedoShot:true});n=0;while(n<60*5&&!hit){m.update(FRAME,{});n++;if(sub.hp<hp)hit=true;}}else run(m,30);}
  assert.ok(m.snapshot().v24.torpedoesFired>tf&&m.torpedoes<t0,'torpedoes left the tube');assert.ok(hit,'a torpedo hit the diving submarine');
