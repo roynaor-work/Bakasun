@@ -1,4 +1,4 @@
-const VERSION='island-v2-20261107-12';
+const VERSION='island-v2-20261107-13';
 export const G2N_SAMPLES=Object.freeze(['engine','fire','ladder','rescue']);
 /** Fire-only mix: CC0 samples, filtered noise and harmonic envelopes. */
 import {fireV20} from './polish-flag.mjs';

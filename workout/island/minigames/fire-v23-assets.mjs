@@ -3,7 +3,7 @@
  * (fire-building-v1), the three rooms (fire-rooms-v1), the rescue friends (girl/cat/dog, fire-rescue-v1), the fire/smoke/water
  * sheets (fire-fx-v1) and the fire tools (fire-tools). Swapping a file here (same name, same anchors in fire-v23-anchors.mjs)
  * is the whole swap. Pure: URLs, grids and numbers only, no DOM. */
-import {FIRE_V23_ANCHORS} from './fire-v23-anchors.mjs?v=island-v2-20261107-11';
+import {FIRE_V23_ANCHORS} from './fire-v23-anchors.mjs?v=island-v2-20261107-13';
 
 const V23='../assets/fire-v23/',FX=V23+'fx/';
 const base=f=>f.replace(/\.[a-z0-9]+$/i,'');
@@ -61,7 +61,7 @@ export const FIRE_V23_ICONS=Object.freeze({
   person:'M9 21v-7l-4 2m10 5v-7l4 2M6 10l6 3 6-3M12 13v-4m3-4a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
   paw:'M12 13c-3 0-5 3-5 5 0 1.5 1.3 2 2.5 2 1 0 1.6-.6 2.5-.6s1.5.6 2.5.6c1.2 0 2.5-.5 2.5-2 0-2-2-5-5-5ZM7 9a1.6 2 0 1 0 0 .1M17 9a1.6 2 0 1 0 0 .1M10 5a1.6 2 0 1 0 0 .1M14 5a1.6 2 0 1 0 0 .1',
 });
-export function fireV23AssetURL(id,base=import.meta.url){const path=FIRE_V23_IMAGES[id];return path?new URL(path+'?v=island-v2-20261107-11',base).href:null;}
+export function fireV23AssetURL(id,base=import.meta.url){const path=FIRE_V23_IMAGES[id];return path?new URL(path+'?v=island-v2-20261107-13',base).href:null;}
 export const FIRE_V23_ANCHOR_DATA=FIRE_V23_ANCHORS;
 
 const center=r=>({x:(r[0]+r[2])/2,y:(r[1]+r[3])/2,w:r[2]-r[0],h:r[3]-r[1]});
