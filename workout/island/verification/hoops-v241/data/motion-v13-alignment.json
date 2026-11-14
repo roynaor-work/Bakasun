@@ -1,0 +1,181 @@
+{
+ "note": "left sole lowest point (phase of the cycle) of every gait that shares the gait phase, before -> after the whole-frame cyclic shift to 0.33 (hoops-motion-v13.mjs alignGait); per-body gait tables (references x skeleton scale)",
+ "target": 0.33,
+ "v13": {
+  "jog": {
+   "before": 0.231,
+   "after": 0.346
+  },
+  "run": {
+   "before": 0.909,
+   "after": 0.318
+  },
+  "sprint": {
+   "before": 0,
+   "after": 0.35
+  },
+  "dribble_run": {
+   "before": 0.909,
+   "after": 0.318
+  }
+ },
+ "v12": {
+  "walk": {
+   "before": 0.529,
+   "after": 0.324
+  },
+  "sprint_ball": {
+   "before": 0.091,
+   "after": 0.333
+  }
+ },
+ "gaitTables": {
+  "guard": {
+   "refScale": 1.0861,
+   "stand": "dribble_stand",
+   "maxRate": 1.8,
+   "gaits": [
+    {
+     "name": "idle_ready",
+     "ref": 0
+    },
+    {
+     "name": "walk",
+     "ref": 1.345,
+     "max": 1.4528999999999999
+    },
+    {
+     "name": "jog",
+     "ref": 1.792,
+     "max": 1.8
+    },
+    {
+     "name": "run",
+     "ref": 2.389,
+     "max": 1.8
+    },
+    {
+     "name": "sprint",
+     "ref": 3.476,
+     "max": 1.8
+    }
+   ],
+   "dribble": [
+    {
+     "name": "dribble_walk_right",
+     "ref": 1.2,
+     "max": 1.45
+    },
+    {
+     "name": "run_ball",
+     "ref": 2.389,
+     "max": 1.8
+    },
+    {
+     "name": "sprint_ball",
+     "ref": 6.8,
+     "rate": 3.346,
+     "max": 2.9464
+    }
+   ]
+  },
+  "wing": {
+   "refScale": 1.1441,
+   "stand": "dribble_stand",
+   "maxRate": 1.8,
+   "gaits": [
+    {
+     "name": "idle_ready",
+     "ref": 0
+    },
+    {
+     "name": "walk",
+     "ref": 1.345,
+     "max": 1.4528999999999999
+    },
+    {
+     "name": "jog",
+     "ref": 1.888,
+     "max": 1.8
+    },
+    {
+     "name": "run",
+     "ref": 2.517,
+     "max": 1.8
+    },
+    {
+     "name": "sprint",
+     "ref": 3.661,
+     "max": 1.8
+    }
+   ],
+   "dribble": [
+    {
+     "name": "dribble_walk_right",
+     "ref": 1.2,
+     "max": 1.45
+    },
+    {
+     "name": "run_ball",
+     "ref": 2.517,
+     "max": 1.8
+    },
+    {
+     "name": "sprint_ball",
+     "ref": 6.8,
+     "rate": 3.346,
+     "max": 2.9464
+    }
+   ]
+  },
+  "center": {
+   "refScale": 1.2019,
+   "stand": "dribble_stand",
+   "maxRate": 1.8,
+   "gaits": [
+    {
+     "name": "idle_ready",
+     "ref": 0
+    },
+    {
+     "name": "walk",
+     "ref": 1.345,
+     "max": 1.4528999999999999
+    },
+    {
+     "name": "jog",
+     "ref": 1.983,
+     "max": 1.8
+    },
+    {
+     "name": "run",
+     "ref": 2.644,
+     "max": 1.8
+    },
+    {
+     "name": "sprint",
+     "ref": 3.846,
+     "max": 1.8
+    }
+   ],
+   "dribble": [
+    {
+     "name": "dribble_walk_right",
+     "ref": 1.2,
+     "max": 1.45
+    },
+    {
+     "name": "run_ball",
+     "ref": 2.644,
+     "max": 1.8
+    },
+    {
+     "name": "sprint_ball",
+     "ref": 6.8,
+     "rate": 3.346,
+     "max": 2.9464
+    }
+   ]
+  }
+ }
+}
