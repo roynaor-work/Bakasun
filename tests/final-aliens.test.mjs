@@ -19,7 +19,9 @@ import {stage} from '../workout/island/verification/aliens-v14/sim.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url))).minigames,balance=config.alienDefense,cfg=v15Config(balance);
 // v24 (14/11/2026): the Vulcan magazines (?alienRefill=0 restores v23) are measured in tests/island-aliens-naval-v24.test.mjs; the v15 and v23
 // fire checks here keep the fire they were written for (no magazines), as the v15 checks keep ?alienFire=v15.
-const make=(o={},off=false,level=1)=>{const {fire='v15',...rest}=o;globalThis.__alienV15=off?false:undefined;globalThis.__alienFire=fire==='v23'?undefined:'v15';globalThis.__alienRefill='0';try{return createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienV15=undefined;globalThis.__alienFire=undefined;globalThis.__alienRefill=undefined;}};
+// v25 (14/11/2026): the longer, cooling, massive Vulcan (?alienVulcan=v24 restores v24) is measured in tests/island-aliens-v25.test.mjs; the v15 and
+// v23 fire checks here keep the Vulcan they were written for (?alienVulcan=v24), as they keep ?alienRefill=0.
+const make=(o={},off=false,level=1)=>{const {fire='v15',...rest}=o;globalThis.__alienV15=off?false:undefined;globalThis.__alienFire=fire==='v23'?undefined:'v15';globalThis.__alienRefill='0';globalThis.__alienVulcan='v24';try{return createAlienModel({config,balance,level,random:seededRandom(3),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienV15=undefined;globalThis.__alienFire=undefined;globalThis.__alienRefill=undefined;globalThis.__alienVulcan=undefined;}};
 const c23=v23Config(balance);
 /** Inputs per mode: v15 = the single button held; v23 = the regular button alone, or both buttons (regular + Vulcan). */
 const MODES=[{fire:'v15',name:'v15 single button',hold:{firing:true}},{fire:'v23',name:'v23 regular button',hold:{firing:true}},{fire:'v23',name:'v23 both buttons',hold:{firing:true,vulcan:true}}];

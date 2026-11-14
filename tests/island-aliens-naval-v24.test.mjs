@@ -30,7 +30,8 @@ const read=path=>readFile(new URL(path,import.meta.url),'utf8');
 const config=JSON.parse(await read('../workout/island/data/config.json')).minigames,ab=config.alienDefense,nb=config.navalDuel,strings=JSON.parse(await read('../workout/island/data/strings.he.json'));
 const FRAME=1/60,PHONE=(844/390)/(360/480),phone={...config,width:844,height:390},DEG=Math.PI/180;
 /** Alien model under the v24 switches (globals the flag readers use). */
-function alien({refill=true,level=1,seed=3,...rest}={}){globalThis.__alienRefill=refill?undefined:'0';try{return createAlienModel({config,balance:ab,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienRefill=undefined;}}
+// v25 (14/11/2026): the Vulcan's numbers changed on purpose (tests/island-aliens-v25.test.mjs); these v24 refill and balance checks run on ?alienVulcan=v24.
+function alien({refill=true,level=1,seed=3,vulcan='v24',...rest}={}){globalThis.__alienRefill=refill?undefined:'0';globalThis.__alienVulcan=vulcan==='v25'?undefined:'v24';try{return createAlienModel({config,balance:ab,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienRefill=undefined;globalThis.__alienVulcan=undefined;}}
 /** Naval model under a search string (the flag readers use location.search). */
 function naval(stage,seed,search='',balance=nb){globalThis.location={search};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
 const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
