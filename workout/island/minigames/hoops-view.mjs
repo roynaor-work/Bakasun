@@ -2,20 +2,20 @@
  * it never decides points, possession or time. Broadcast side camera in landscape, a closer
  * half-court camera in portrait. Instant replay plays back recorded snapshots only. */
 import * as THREE from '../vendor/three.module.js';
-import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-14';
-import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-14';
+import {buildArena,drawDisplays} from './hoops-arena.mjs?v=island-v2-20261107-15';
+import {loadPlayerAssets,createAvatar} from './hoops-players.mjs?v=island-v2-20261107-15';
 import {hoopsNumbersTexture} from './hoops-athlete.mjs';
 import {dribbleHeight} from './hoops-players-v1.mjs';
 import {replaceArenaAssets} from './hoops-models.mjs';
 import {createHoopsVfx,smootherstep} from './hoops-vfx.mjs';
 import {loadHoopsFeel,createHoopsFeel,sampleHoopsReplayScale} from './hoops-feel.mjs';
-import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-14';
+import {createInterpPool,approach,smoothstep} from './hoops-perf.mjs?v=island-v2-20261107-15';
 import {createFloorReflection,REFLECTION_LAYER} from './hoops-reflection.mjs';
 import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
-import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-14';
+import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-15';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -85,7 +85,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  const search=globalThis.location?.search||'',crowdMode=hoopsCrowd3dMode(search),crowd3dState={mode:crowdMode,status:crowdMode==='off'?'off':models.arenaV8?'loading':'no-v8-hall',error:null};
  let crowd3d=null,crowd3dApi=null,crowdCards=null,viewDisposed=false;
  if(crowdMode!=='off'&&models.arenaV8){
-  Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-14'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
+  Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-15'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
    const seats=C.hoopsCrowdSeats(V.seatingLayout(0)),loader=new G.GLTFLoader();
    const loaded=await C.createHoopsCrowd3d({T:THREE,GLTFLoader:G.GLTFLoader,load:url=>H.loadHoopsGLTF(loader,url),seats,mode:crowdMode,teamColors:[looks[0].primary,looks[1].primary]});
    if(viewDisposed){loaded.dispose();return;}
@@ -96,7 +96,7 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  let referee=null;const refereeState={status:'off',error:null};
  if(quality>=1&&hoopsRefereeEnabled(search)){
   refereeState.status='loading';
-  Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-14'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
+  Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-15'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
    const loader=new G.GLTFLoader(),loaded=await R.createHoopsReferee({T:THREE,load:url=>H.loadHoopsGLTF(loader,url),court});
    if(viewDisposed){loaded.dispose();return;}
    loaded.group.traverse(o=>{if(o.isSkinnedMesh&&reflection)o.layers.enable(REFLECTION_LAYER);});

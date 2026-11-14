@@ -1,4 +1,4 @@
-import {createLeague,validLeague,VERSION} from './alpine-league-core.mjs?v=island-v2-20261107-14';
+import {createLeague,validLeague,VERSION} from './alpine-league-core.mjs?v=island-v2-20261107-15';
 
 /** Ski league v23 save: its own local key, so the island save (island.v1) never changes. Same rules as the ski records
  * (alpine-records.mjs): damaged data is copied aside once under `.corrupt` and the league starts fresh; a newer format is left untouched

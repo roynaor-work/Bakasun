@@ -6,9 +6,9 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-14';
-import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-14';
-import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-14';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-15';
+import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-15';
+import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-15';
 import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);

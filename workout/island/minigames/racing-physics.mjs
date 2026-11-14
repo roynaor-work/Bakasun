@@ -1,8 +1,8 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-14';
-import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-14';
-import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-14';
-import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-14';
-import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-14';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-15';
+import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-15';
+import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-15';
+import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-15';
+import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-15';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);

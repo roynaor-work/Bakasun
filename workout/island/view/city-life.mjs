@@ -1,6 +1,6 @@
 import * as T from '../vendor/three.module.js';
-import {GROUND,primitive} from './environment.mjs?v=island-v2-20261107-14';
-import {surfaceTexture} from '../presentation/surfaces.mjs?v=island-v2-20261107-14';
+import {GROUND,primitive} from './environment.mjs?v=island-v2-20261107-15';
+import {surfaceTexture} from '../presentation/surfaces.mjs?v=island-v2-20261107-15';
 /** One instanced draw follows the engine's exact connected path network.
  * Shallow limestone paving changes neither routes nor walker positions. */
 export function pathMesh(cells,size,config){

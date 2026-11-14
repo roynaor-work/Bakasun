@@ -10,7 +10,7 @@ import * as T from '../vendor/three.module.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {normalizeSoccerBallGeometry} from './soccer-scale.mjs';
-import {SOCCER_KIT,soccerKitScale,soccerKitLines,soccerKitGoal,soccerKitFlags,soccerKitBoards,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-14';
+import {SOCCER_KIT,soccerKitScale,soccerKitLines,soccerKitGoal,soccerKitFlags,soccerKitBoards,soccerV24Url} from './soccer-v24.mjs?v=island-v2-20261107-15';
 
 const LINE_LIFT=.012; // the kit paints its lines 3 mm above the grass; the game's camera has no logarithmic depth, lift them to 15 mm (the game's own lines sit at 18 mm)
 const matrix=(position,rotationY=0,scale=[1,1,1])=>new T.Matrix4().compose(new T.Vector3(...position),new T.Quaternion().setFromAxisAngle(new T.Vector3(0,1,0),rotationY),new T.Vector3(...scale));

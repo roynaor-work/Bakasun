@@ -1,5 +1,5 @@
-import {PreviewProps} from '../view/city-preview-props.mjs?v=island-v2-20261107-14';
-import {PREVIEW_FOOTPRINT,PREVIEW_MODES,previewState,previewPlan} from '../view/city-preview-layout.mjs?v=island-v2-20261107-14';
+import {PreviewProps} from '../view/city-preview-props.mjs?v=island-v2-20261107-15';
+import {PREVIEW_FOOTPRINT,PREVIEW_MODES,previewState,previewPlan} from '../view/city-preview-layout.mjs?v=island-v2-20261107-15';
 
 /** `?cityPreview=full|half|empty` shows a made-up city on top of the real view. Read only:
  * the engine gets a storage that can read but never write, the view is pinned to the
