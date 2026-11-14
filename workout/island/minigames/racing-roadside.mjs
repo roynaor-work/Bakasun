@@ -1,5 +1,6 @@
 /** Original roadside architecture; all dimensions are world metres. No model assets. */
-export function createRacingRoadside({T,parent,track,colors,keep,material,ground,seed=1}){
+// racing-v23: clear>0 (no walls, ?racingWalls=1 = 0): no barrier and no guardrails, and boards, chevrons, lamps, gallery legs and buildings stand that far beyond the asphalt
+export function createRacingRoadside({T,parent,track,colors,keep,material,ground,seed=1,clear:zone=0}){
  const themes={
   coast:{wall:'#d9cbb0',roof:'#a26c54',trim:'#577f80',glass:'#315c66',barrier:'#a7afa0'},
   jungle:{wall:'#73806a',roof:'#4e6854',trim:'#927d58',glass:'#294943',barrier:'#727c68'},
@@ -15,13 +16,16 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  };
  const round=(site,x,y,z,w,h,color,detail=0)=>box('round',site,x,y,z,w,h,w,color,detail);
  const valid=(site,radius)=>track.project(site.x,site.z).distance>track.width/2+radius+1;
+ // racing-v23: the same check every 6 m along a long footprint (a 70 m stand beside a short straight can cut a bend in its middle, between the corners)
+ const clearAlong=(site,hx,hz,margin)=>{for(let z=-hz;z<=hz+.01;z+=Math.max(1,2*hz/Math.ceil(2*hz/6)))if(!clear(site,hx,.01,margin)||!clear({...site,x:site.x+Math.sin(site.angle)*z,z:site.z+Math.cos(site.angle)*z},hx,.01,margin))return false;return true;};
  const clear=(site,hx,hz,margin)=>{const ca=Math.cos(site.angle),sa=Math.sin(site.angle);return [[-hx,-hz],[hx,-hz],[-hx,hz],[hx,hz]].every(([x,z])=>track.project(site.x+ca*x+sa*z,site.z-sa*x+ca*z).distance>track.width/2+margin);};
  const siteAt=(s,lane,angleOffset=0)=>{const p=track.sample(s);return {x:p.x+p.normal.x*lane,y:p.y,z:p.z+p.normal.z*lane,angle:p.heading+angleOffset,p};};
  // Buildings face the road. Their complete footprints stay beyond its shoulder.
  for(const [index,fraction]of [.075,.235,.415,.635,.865].entries()){
-  const side=index%2?1:-1,site=siteAt(track.length*fraction,side*(track.width/2+19+random()*5),side*Math.PI/2);
+  const side=index%2?1:-1,site=siteAt(track.length*fraction,side*(track.width/2+19+(zone?5.5:0)+random()*5),side*Math.PI/2);
   const large=track.theme==='harbor',w=large?17:track.theme==='jungle'?8.5:11,d=large?9:7,h=large?6.6:track.theme==='summit'?5.1:4.2;
-  if(!valid(site,Math.hypot(w/2+1,d/2+4)))continue;site.y=ground(site.x,site.z);buildings++;
+  // racing-v23: with a clear zone the canopy posts of the large harbour sheds (8 m in front of the site) must stay out of it too
+  if(!valid(site,Math.hypot(w/2+1,d/2+4)+(zone?zone-1.6:0)))continue;site.y=ground(site.x,site.z);buildings++;
   box('masonry',site,0,.25,0,w+1,.5,d+1,palette.barrier);
   if(track.theme==='ruins'){
    box('masonry',site,0,1.5,d*.35,w,3,.7,palette.wall);for(const x of [-w*.42,0,w*.42])round(site,x,2.7,-d*.28,.7,5.4,palette.wall);
@@ -59,7 +63,7 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  // inside its triangle budget (30K at quality 0, 12K at quality 2) on every circuit.
  const stretch=Math.max(1,track.length/1750);
  // racing-v9: a continuous low barrier on both edges (inner face 1.2 m from the asphalt) is the wall the car bounces off.
- for(let s=2;s<track.length;s+=8.4*stretch)for(const side of [-1,1]){const site=siteAt(s,side*(track.width/2+1.45)),base=ground(site.x,site.z);
+ for(let s=2;s<track.length&&!zone;s+=8.4*stretch)for(const side of [-1,1]){const site=siteAt(s,side*(track.width/2+1.45)),base=ground(site.x,site.z);
   if(!valid(site,.3))continue;
   // all four corners of the beam must stay beyond the shoulder, so a tight bend never pushes it onto the asphalt
   const beam=8.5*stretch,ca=Math.cos(site.angle),sa=Math.sin(site.angle);if([[-.25,-beam/2],[.25,-beam/2],[-.25,beam/2],[.25,beam/2]].some(([x,z])=>track.project(site.x+ca*x+sa*z,site.z-sa*x+ca*z).distance<=track.width/2+.65))continue;
@@ -72,15 +76,15 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   // racing-deep-m2: with a main straight the two stands sit on the side opposite to the pits (+1), one before and one after the line
   const stands=track.mainStraight&&track.mainStraight.length>=150?[[1,-30],[1,46]]:[[1,-30],[-1,40]];
   for(const [side,from] of stands){
-   const site=siteAt((from+track.length)%track.length,side*(track.width/2+17),side>0?-Math.PI/2:Math.PI/2);if(!clear(site,8,36,4))continue;
+   const site=siteAt((from+track.length)%track.length,side*(track.width/2+17),side>0?-Math.PI/2:Math.PI/2);if(!clear(site,8,36,4)||zone&&!clearAlong(site,8,36,zone))continue;
    for(let row=0;row<4;row++)box('masonry',site,0,.6+row*1.1,-row*1.6,5.2,1.2+row*1.1,70,rowColors[row],1);
    box('roof',site,0,7.4,-5.4,8.5,1.2,72,palette.roof,1);box('metal',site,0,4,-7.6,.3,8,72,palette.trim,1);
   }
   const boards=['#2f6c8f','#c9473f','#e0b23a','#3f8d6a','#8a5aa6'];
-  for(let i=0;i<10;i++){const s=(track.length-70+i*16)%track.length,side=i%2?1:-1,site=siteAt(s,side*(track.width/2+2.3));if(!clear(site,.2,6,.9))continue;site.y=site.p.y;box('masonry',site,0,1.5,0,.18,1.3,12,boards[i%boards.length],1);}
+  for(let i=0;i<10;i++){const s=(track.length-70+i*16)%track.length,side=i%2?1:-1,site=siteAt(s,side*(track.width/2+(zone?zone+.3:2.3)));if(!clear(site,.2,6,zone?zone:.9))continue;site.y=site.p.y;box('masonry',site,0,1.5,0,.18,1.3,12,boards[i%boards.length],1);}
  }
  // Retaining walls and two-height steel rails follow the outside of risky bends.
- for(let s=8;s<track.length;s+=6*stretch){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
+ for(let s=8;s<track.length&&!zone;s+=6*stretch){const p=track.sample(s),next=track.sample(s+17),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));
   if(Math.abs(turn)<.16&&Math.abs(p.tangent.y)<.044)continue;
   const side=turn>.04?-1:turn<-.04?1:Math.floor(s/6)%2?1:-1,site=siteAt(s,side*(track.width/2+2.65));if(!valid(site,.25))continue;
   // racing-deep-m2: the chicanes of the Codex circuits bend down to a 7 m radius; the ends of a straight 6 m beam placed on such a bend reached the asphalt, so every corner is checked
@@ -93,7 +97,7 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  }
  // Large, properly supported chevrons read before a corner reaches the camera.
  for(let s=24;s<track.length&&cornerSigns<10;s+=42){const p=track.sample(s),next=track.sample(s+24),turn=Math.atan2(Math.sin(next.heading-p.heading),Math.cos(next.heading-p.heading));if(Math.abs(turn)<.28)continue;
-  const side=turn>0?-1:1,site=siteAt(s,side*(track.width/2+4.8));if(!valid(site,1.8))continue;cornerSigns++;site.y=p.y;
+  const side=turn>0?-1:1,site=siteAt(s,side*(track.width/2+(zone?zone+2.6:4.8)));if(!valid(site,1.8)||zone&&!clear(site,2.6,.3,zone))continue;cornerSigns++;site.y=p.y;
   box('masonry',site,0,3.8,0,5.2,1.85,.22,'#244249');const bottom=ground(site.x,site.z)-p.y,height=4.3-bottom;
   for(const x of [-2.05,2.05])round(site,x,bottom+height/2,0,.16,height,palette.trim);
   for(const x of [-1.55,0,1.55])for(const arm of [-1,1])box('light',site,x+side*.2,3.8+arm*.28,-.16,.19,1.02,.07,'#f2d28b',0,arm*-side*Math.PI/4);
@@ -104,7 +108,7 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
   // racing-deep-m2: on a tight bend a post 3.6 m off the centre line projects to a different s (up to 12 m away on the Codex chicanes); take the side, or a small shift
   // along the road, where the post really stands at its station, so the 32 lamps keep their uniform spacing
   let side=index%2?1:-1,site=null;
-  for(const [ds,sd] of [[0,side],[0,-side],[3,side],[-3,side],[3,-side],[-3,-side],[6,side],[-6,side]]){const c=siteAt(s+ds,sd*(track.width/2+3.6));if(valid(c,.5)&&Math.abs(((track.project(c.x,c.z).s-s+track.length*1.5)%track.length)-track.length/2)<2.5){site=c;side=sd;break;}}
+  for(const [ds,sd] of [[0,side],[0,-side],[3,side],[-3,side],[3,-side],[-3,-side],[6,side],[-6,side]]){const c=siteAt(s+ds,sd*(track.width/2+(zone?zone+.6:3.6)));if(valid(c,zone?zone-.7:.5)&&Math.abs(((track.project(c.x,c.z).s-s+track.length*1.5)%track.length)-track.length/2)<2.5){site=c;side=sd;break;}}
   if(!site)continue;site.y=site.p.y;lamps++;
   const detail=index%2?1:0,base=ground(site.x,site.z)-site.y,height=Math.max(7.2,7.2-base);
   round(site,0,base+height/2,0,.19,height,palette.trim,detail);round(site,0,base+.23,0,.55,.46,palette.barrier,detail);
@@ -116,10 +120,11 @@ export function createRacingRoadside({T,parent,track,colors,keep,material,ground
  // Open galleries are tall enough for the race camera and never seal the route.
  if(track.theme==='summit'||track.theme==='volcano'||track.theme==='ruins'){
   const start=track.length*(track.theme==='summit'?.57:track.theme==='volcano'?.39:.68),segments=track.theme==='summit'?5:3;
-  for(let i=0;i<segments;i++){const site=siteAt(start+i*7.3,0),half=track.width/2+2.5;
+  for(let i=0;i<segments;i++){const site=siteAt(start+i*7.3,0),half=track.width/2+(zone?zone+.5:2.5),span=2*half+.8;
+   if(zone&&[-1,1].some(side=>!clear({x:site.x+Math.cos(site.angle)*side*half,z:site.z-Math.sin(site.angle)*side*half,angle:site.angle},.33,.45,zone)))continue;   // a leg inside a tight bend: no segment there
    for(const side of [-1,1])box('masonry',site,side*half,3.8,0,.65,7.6,.9,palette.wall);
-   box('metal',site,0,7.8,0,track.width+5.8,.45,.8,palette.trim);
-   if(track.theme==='summit')box('masonry',site,0,8.2,0,track.width+6.3,.48,7.5,palette.wall,1);
+   box('metal',site,0,7.8,0,span,.45,.8,palette.trim);
+   if(track.theme==='summit')box('masonry',site,0,8.2,0,span+.5,.48,7.5,palette.wall,1);
    if(i%2===0)box('light',site,0,7.5,-.45,track.width*.8,.09,.08,'#efdbb1',1);
   }galleries=1;
  }

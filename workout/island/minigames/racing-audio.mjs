@@ -6,7 +6,17 @@
  * launch tap and unpauses from a timer; a browser that honours resume() only inside a tap (Safari/iOS) then kept the engine silent until the next tap on a
  * button (Roy: "the sound works only after switching to manual"). ?racingAudioHold=0 restores the suspend. */
 export const audioHoldEnabled=(search=globalThis.location?.search||'')=>new URLSearchParams(search).get('racingAudioHold')!=='0';
-export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled()}={}){
+/** racing-v23 gear-change sound (Roy after v22: "maybe I would change the sound of the gear shift"). ?racingShift= picks one, the default is 'a'; 'v22' is the sound
+ * until now (a 650 Hz chirp with a 45 ms cut and a burst from the Codex v2 sample, an 18% pitch dip and a noise pop on every upshift, rev blips with crackles down).
+ *  a  clean (seamless, like a modern F1 box): a short 10% rpm step and a soft low thump, no hiss and no pop; a gentle rev blip on the way down
+ *  b  turbo: the Codex v2 blow-off "pssh", cut to 0.32 s, on the upshift (a filtered hiss if the samples are not loaded); the same gentle blip down
+ *  c  sporty: an ignition cut and one exhaust crack (Codex v2 pops, or a procedural crack) up; the Codex rev blips with crackles down, quieter
+ * Every new sound starts and ends on a ramp (tools/racing-shift-audio.mjs measures clicks per style). */
+export const SHIFT_STYLES=Object.freeze(['a','b','c','v22']);
+export const shiftStyle=(search=globalThis.location?.search||'')=>{const v=new URLSearchParams(search).get('racingShift');return SHIFT_STYLES.includes(v)?v:'a';};
+const SHIFT={v22:{dip:.18,len:.14,vol:.3,pop:.09,noise:.055,blip:0},a:{dip:.1,len:.08,vol:.12,pop:0,noise:0,blip:.06},b:{dip:.12,len:.1,vol:.15,pop:0,noise:0,blip:.06},c:{dip:.16,len:.09,vol:.55,pop:0,noise:0,blip:0}};
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle()}={}){
+ const SH=SHIFT[shiftName]||SHIFT.a,style=SHIFT[shiftName]?shiftName:'a';let blipUntil=0,shifts=0;
  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
  const number=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
  const gears=[0,9,18,28,39,52,70];
@@ -74,13 +84,13 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const now=number(context.currentTime),delta=clamp(now-lastTime,1/120,.25);
   const acceleration=clamp((speed-lastSpeed)/delta,-30,25);
   const previousGear=gear,real=extras.rpm!==undefined&&Number.isFinite(Number(extras.rpm));
-  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+.14;popUntil=now+.09;samples?.shiftUp();}else if(gear<lastGear&&!paused&&!disposed)samples?.shiftDown();lastGear=gear;extraVoices();}
+  if(real){gear=clamp(Math.round(number(extras.gear,gear)),1,7);if(gear>lastGear&&!paused&&!disposed){shiftUntil=now+SH.len;popUntil=SH.pop?now+SH.pop:0;upshift(now);}else if(gear<lastGear&&!paused&&!disposed)downshift(now);lastGear=gear;extraVoices();}
   else{
    while(gear<6&&speed>gears[gear]+.8)gear++;
    while(gear>1&&speed<gears[gear-1]-1.6)gear--;
   }
   if(!real&&gear>previousGear&&!paused&&!disposed)shiftUntil=now+.13;
-  const shift=clamp((shiftUntil-now)/.13,0,1);
+  const shift=clamp((shiftUntil-now)/(style==='v22'?.13:SH.len),0,1),blip=clamp((blipUntil-now)/.12,0,1);
   const rpm=clamp((speed-gears[gear-1])/(gears[gear]-gears[gear-1]),0,1);
   const throttle=extras.throttle===undefined?clamp(.45+acceleration/25,.16,1):clamp(number(extras.throttle),0,1);
   const drift=!!extras.drifting&&speed>8,offroad=!!extras.offroad,braking=!!extras.brake&&speed>14&&!drift&&!offroad;  // racing-deep-m3: tyre squeal under hard braking
@@ -91,7 +101,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const top=real&&extras.topVar!==false&&gear>=7?clamp((revs-.72)/.28,0,1):0;
   const hunt=top*(Math.sin(now*2.4)*5.5+Math.sin(now*.9+1)*3.5+Math.sin(now*6*Math.PI*2)*1.1);
   const limiter=top>.6&&(now%2.6)<.09?1:0,rattle=top>.65?1+Math.sin(now*28*Math.PI*2)*.1*top:1;
-  const pitch=real?((40+revs*150)*(1-shift*.18)+(boosting?14:0)+hunt)*(1-limiter*.05):(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
+  const pitch=real?((40+revs*150)*(1-shift*SH.dip)*(1+blip*SH.blip)+(boosting?14:0)+hunt)*(1-limiter*.05):(49+(gear-1)*10+rpm*66)*(1-shift*.2)+(boosting?17:0);
   if(real&&voice2){
    target(voice2.frequency,pitch*.5,now,.05);target(voice3.frequency,pitch*1.5*(1+Math.sin(now*29)*.004),now,.05);
    target(gain2.gain,.35+throttle*.35,now,.08);target(gain3.gain,.12+revs*.3+top*.12,now,.08);
@@ -99,7 +109,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   target(voice.frequency,pitch+Math.sin(now*23)*Math.min(speed/70,.65),now,.045);
   target(filter.frequency,380+rpm*850+speed*8+throttle*190+(boosting?360:0)+top*(260+Math.sin(now*3.1)*140),now,.055);
   // Entire mix remains below the previous .03 gain ceiling, including boosts.
-  const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*.3)*(1-limiter*.55)*rattle:(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
+  const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*SH.vol)*(1-limiter*.55)*rattle:(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
   target(gain.gain,paused||muted||disposed?0:volume,now,paused||muted||disposed?.018:.07);
   if(noiseGain){
    const road=Math.min(speed/55,1)*.045;
@@ -110,7 +120,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
    lastThrottle=throttle;
    if(samples?.ready&&real){if(lastRevs<.95&&revs>=.95&&!paused&&!disposed)samples.shiftBeep?.();lastRevs=revs;}
    if(samples?.ready)samples.update({rpm:real?revs:rpm,throttle,speed,drifting:drift,braking,steer:steering,kerb:number(extras.kerb),offroad,level:paused||muted||disposed?0:1});
-   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*.055+pop+backfire+exhaust+wind),now,boosting?.045:.09);
+   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*SH.noise+pop+backfire+exhaust+wind),now,boosting?.045:.09);
    target(noiseFilter.frequency,(offroad?620:drift?1550+steering*850:braking?1900+speed*10:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
   }
@@ -148,20 +158,43 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
  /** racing-deep-m3 one-shot cues from the race model, procedural (no siren, every cue under the .03 ceiling): 'bump' a soft thud (car to car), 'wall' a scrape
   * scaled by how straight the fence was hit, 'crash' a heavier thud with a rattle and a pitch drop, 'crashRecover' a short restart blip, 'pass' the overtake
   * whoosh (sample layer, or a filtered wind sweep without it). Nothing plays while muted, paused or disposed. */
- const CUES={bump:{gain:.02,length:.09,cut:420,rate:.7},wall:{gain:.024,length:.22,cut:1500,rate:1.1},crash:{gain:.03,length:.42,cut:520,rate:.55},crashRecover:{gain:.012,length:.16,cut:900,rate:1.3},pass:{gain:.016,length:.3,cut:2200,rate:1.4}};
+ const CUES={pssh:{gain:.012,length:.3,cut:1500,rate:1.1,type:'bandpass',attack:.02},crack:{gain:.02,length:.08,cut:800,rate:.9,attack:.014},bump:{gain:.02,length:.09,cut:420,rate:.7},wall:{gain:.024,length:.22,cut:1500,rate:1.1},crash:{gain:.03,length:.42,cut:520,rate:.55},crashRecover:{gain:.012,length:.16,cut:900,rate:1.3},pass:{gain:.016,length:.3,cut:2200,rate:1.4}};
  let lastCue=new Map();
  function cue(name,intensity=1){
   const spec=CUES[name];if(!spec||!context||!noise?.buffer||!context.createBufferSource)return;
-  const now=number(context.currentTime);if(now-(lastCue.get(name)??-9)<(name==='wall'?.25:.4))return;lastCue.set(name,now);
+  const now=number(context.currentTime);if(now-(lastCue.get(name)??-9)<(name==='wall'?.25:name==='crack'||name==='pssh'?.3:.4))return;lastCue.set(name,now);
   try{
    const source=context.createBufferSource(),filter=context.createBiquadFilter(),g=context.createGain(),level=spec.gain*clamp(.35+intensity*.65,.35,1);
-   source.buffer=noise.buffer;if(source.playbackRate)source.playbackRate.value=spec.rate;filter.type=name==='pass'?'bandpass':'lowpass';filter.frequency.value=spec.cut;
-   if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(level,now+.008);g.gain.linearRampToValueAtTime(name==='crash'?level*.5:level*.3,now+spec.length*.45);g.gain.linearRampToValueAtTime(0,now+spec.length);}
+   source.buffer=noise.buffer;if(source.playbackRate)source.playbackRate.value=spec.rate;filter.type=spec.type||(name==='pass'?'bandpass':'lowpass');filter.frequency.value=spec.cut;
+   // racing-v23: the gain starts at 0, not at the default 1: when the source's first frame rounds earlier than the ramp's start, that one frame went out at full
+   // scale (a click on some shifts only: tools/racing-shift-audio.mjs `onset` 12.4 at 9.6 s, 0.2 at 3.2 s)
+   g.gain.value=0;if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(level,now+(spec.attack||.008));g.gain.linearRampToValueAtTime(name==='crash'?level*.5:level*.3,now+spec.length*.45);g.gain.linearRampToValueAtTime(0,now+spec.length);}
    else g.gain.value=level;
    source.gainValue=level;source.connect(filter);filter.connect(g);g.connect(context.destination);source.start(now);source.stop?.(now+spec.length+.02);
    source.onended=()=>{try{source.disconnect();filter.disconnect();g.disconnect();}catch{}};
    if(name==='crash'&&voice){target(voice.frequency,Math.max(30,number(voice.frequency.value)*.6),now,.03);shiftUntil=now+.3;}
   }catch{}
+ }
+ /** racing-v23: the chosen gear-change sound. v22 = the samples as before; a/b/c below. Nothing new while muted (the cue helpers check it too). */
+ function upshift(now){
+  shifts++;if(style==='v22'){samples?.shiftUp();return;}
+  if(muted)return;
+  if(style==='a')thump(now);
+  else if(style==='b'){if(samples?.ready&&samples.turbo)samples.turbo();else cue('pssh',.8);}
+  else if(style==='c'){if(samples?.ready&&samples.crack)samples.crack();else cue('crack',.9);}
+ }
+ function downshift(now){
+  if(style==='v22'){samples?.shiftDown();return;}
+  if(style==='c'){samples?.shiftDownSoft?.();return;}
+  blipUntil=now+.12;
+ }
+ /** a soft low thump (85 -> 55 Hz sine, 90 ms) on a raised-cosine-like ramp: no click at either end */
+ function thump(now){
+  if(!context?.createOscillator||!context.createGain)return;
+  try{const o=context.createOscillator(),g=context.createGain();o.type='sine';
+   if(o.frequency.setValueAtTime&&o.frequency.exponentialRampToValueAtTime){o.frequency.setValueAtTime(85,now);o.frequency.exponentialRampToValueAtTime(55,now+.09);}else o.frequency.value=70;
+   g.gain.value=0;if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.014,now+.015);g.gain.linearRampToValueAtTime(.006,now+.05);g.gain.linearRampToValueAtTime(0,now+.1);}else g.gain.value=.01;
+   o.connect(g);g.connect(context.destination);o.start(now);o.stop?.(now+.12);o.onended=()=>{try{o.disconnect();g.disconnect();}catch{}};}catch{}
  }
  function event(name,details={}){
   readMute();if(paused||muted||disposed)return;
@@ -177,7 +210,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed,contextState:context?.state,gain:gain?.gain?.value}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0)}),
+  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0),shiftStyle:style,shifts}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}
