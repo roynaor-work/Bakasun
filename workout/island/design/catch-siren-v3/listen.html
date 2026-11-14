@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex,nofollow">
+  <title>סירנות וצרורות — מעבדת האזנה</title>
+  <style>
+    :root{--paper:#f5f2e9;--ink:#1d382f;--muted:#607167;--line:#d6ddd2;--white:#fffef9;--green:#285b43;--lime:#d5ec98;--ochre:#e4b068;--red:#a13c2d;--radius:23px}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Arial,"Noto Sans Hebrew",sans-serif}button,input,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button,a{touch-action:manipulation}button{cursor:pointer}a{color:inherit;text-underline-offset:4px}button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a07527;outline-offset:5px}button{border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);min-height:46px;padding:9px 17px;font-weight:700;transition:background .15s,transform .15s}button:hover{background:#e8efdd}button:active{transform:translateY(1px)}button.primary{background:var(--green);border-color:var(--green);color:#fff}button.primary:hover{background:#19442f}button[aria-pressed="true"]{background:var(--lime);color:var(--ink);border-color:#b8cf82}button.stop{color:var(--red);background:transparent;border-color:#bdc4b7}button.stop:hover{background:#fae4db}.wrap{max-width:1160px;margin:auto;padding:28px 38px 30px}.masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700}.brandmark{display:flex;align-items:center;justify-content:center;gap:3px;width:38px;height:38px;background:var(--ink);border-radius:50%}.brandmark i{width:3px;background:var(--lime);border-radius:3px}.brandmark i:nth-child(1){height:10px}.brandmark i:nth-child(2){height:22px}.brandmark i:nth-child(3){height:15px}.version{border:1px solid var(--line);padding:4px 10px;border-radius:50px;color:var(--muted);font-size:12px}.hero{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;padding:39px 0 27px}.eyebrow{margin:0 0 8px;letter-spacing:1px;font-size:12px;font-weight:700;color:var(--green)}h1{font-size:clamp(38px,5.3vw,66px);line-height:1.1;letter-spacing:-2px;margin:0 0 13px;font-weight:800}h1 span{color:var(--green)}.intro{margin:0;color:var(--muted);font-size:17px;max-width:580px}.hero-note{display:flex;align-items:center;gap:17px;font-size:12px;color:var(--muted);padding-bottom:2px}.hero-note strong{display:block;font-size:25px;line-height:1.3;color:var(--ink);font-variant-numeric:tabular-nums}.hero-note>div+div{border-right:1px solid var(--line);padding-right:17px}.console{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--line);border-radius:16px;padding:14px 18px;background:#eeeee3;margin-bottom:12px}.codec{display:flex;align-items:center;gap:14px}.label{font-size:13px;color:var(--muted)}.segmented{display:flex;gap:3px;direction:ltr;border:1px solid var(--line);border-radius:10px;padding:3px;background:#ffffff88}.segmented label{position:relative}.segmented input{position:absolute;opacity:0;width:1px;height:1px}.segmented span{display:block;min-width:61px;text-align:center;padding:5px 12px;border-radius:7px;font-size:13px;font-weight:bold}.segmented input:checked+span{background:var(--ink);color:#fff}.segmented input:focus-visible+span{outline:3px solid #a07527;outline-offset:3px}.level{font-size:13px;color:var(--muted)}.level b{color:var(--ink);font-variant-numeric:tabular-nums}.status{display:flex;align-items:flex-start;gap:9px;min-height:48px;padding:10px 2px;font-size:13px;color:var(--muted)}.status:before{content:"";flex:0 0 7px;height:7px;border-radius:50%;background:#7c947a;margin-top:8px}.status[data-state="playing"]:before{background:#459151;box-shadow:0 0 0 4px #dce8ca}.status[data-state="error"]{color:var(--red)}.status[data-state="error"]:before{background:var(--red)}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:20px 0 13px}h2{font-size:22px;line-height:1.3;letter-spacing:-.5px;margin:0}.section-heading p{font-size:13px;color:var(--muted);margin:0}.sirens{display:grid;grid-template-columns:1fr 1fr;gap:17px}.siren{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px 18px;position:relative;overflow:hidden}.siren[data-active="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}.card-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}.card-heading h3{margin:0;font-size:21px}.tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:50px;padding:2px 8px}.siren p{font-size:13px;color:var(--muted);margin:3px 0 18px}.notes{display:grid;direction:ltr;grid-template-columns:repeat(8,1fr);gap:5px;height:62px;align-items:center;margin:6px 0 19px}.notes i{height:27px;background:var(--green);border-radius:5px;position:relative;align-self:end}.notes i:nth-child(even){background:#a9c8a3;align-self:start}.far .notes i{opacity:.52}.notes i:after{position:absolute;left:0;right:0;top:7px;text-align:center;font-style:normal;font-size:10px;color:#fff;content:"C5"}.notes i:nth-child(even):after{content:"F5";color:var(--ink)}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.actions button{flex:1}.card-foot{border-top:1px solid #e9eade;margin-top:17px;padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.downloads{display:flex;direction:ltr;gap:13px}.downloads a{font-size:11px;font-weight:700;min-height:26px;display:inline-flex;align-items:center;gap:4px}.downloads a:after{content:"↓";font-size:14px}.bursts{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}.burst{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:16px 14px 11px;min-width:0}.burst[data-active="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}.burst-top{display:flex;align-items:center;justify-content:space-between;gap:5px}.burst h3{font-size:17px;margin:0}.index{font:11px/1 monospace;color:#879386}.shots{height:52px;display:flex;direction:ltr;gap:5px;align-items:center;justify-content:center;margin:11px 0 13px}.shots i{flex:1;max-width:12px;background:var(--ochre);border-radius:8px;height:calc(39px - var(--n)*4px);opacity:calc(1 - var(--n)*.095)}.burst:nth-child(2) .shots i{background:#82ab91;border-radius:2px}.burst:nth-child(3) .shots i{background:#b4ab8d;border-radius:8px 8px 2px 2px}.burst:nth-child(4) .shots i{background:#7e9d9b}.burst:nth-child(5) .shots i{background:#a29cba;border-radius:50%}.burst button{width:100%;font-size:13px;padding:7px 6px;min-height:42px}.burst .downloads{justify-content:center;margin-top:10px;gap:20px}.mix{background:var(--ink);color:#fffef3;border-radius:var(--radius);padding:24px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;margin-top:23px}.mix h2{font-size:23px}.mix p{color:#c5d2c4;font-size:13px;margin:6px 0 0;max-width:430px}.mix-actions{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}.mix select{max-width:100%;color:var(--ink);border:0;border-radius:11px;background:#e8eddf;padding:9px 11px;min-height:46px}.mix button{background:var(--lime);border-color:var(--lime);white-space:nowrap}.mix button:hover{background:#e1f5b1}.mix-progress{grid-column:1/-1;display:flex;gap:8px;margin-top:-5px}.mix-progress i{height:4px;flex:1;border-radius:4px;background:#52675b}.mix-progress i[data-active="true"]{background:var(--lime)}.local-panel{border:1px solid #cbd5bf;background:#eaf0df;border-radius:15px;padding:14px 18px;margin:5px 0 14px;font-size:13px}.local-panel p{margin:0 0 10px;color:#476142}.local-panel button{font-size:13px;min-height:41px}.local-actions{display:flex;gap:13px;align-items:center;flex-wrap:wrap}.server details{margin-top:11px}.server summary{cursor:pointer;width:fit-content;color:var(--muted)}.command{display:flex;direction:ltr;gap:10px;align-items:center;flex-wrap:wrap;margin:9px 0}.command code{background:#fffef6;border-radius:8px;padding:8px 10px;font-size:12px;overflow-wrap:anywhere}.command button{padding:5px 10px;font-size:12px}.server a{display:inline-block;direction:ltr}.meta{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-top:1px solid var(--line);margin-top:25px;padding-top:16px;font-size:12px;color:var(--muted)}.meta p{margin:0}.meta nav{display:flex;gap:18px;white-space:nowrap}.technical{margin-top:19px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--muted)}.technical summary{cursor:pointer;min-height:28px}.technical dl{display:grid;grid-template-columns:110px 1fr;gap:7px 13px;margin:10px 0}.technical dt{font-weight:700}.technical dd{margin:0}.latin{direction:ltr;unicode-bidi:isolate;display:inline-block}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+    @media(max-width:850px){.wrap{padding:22px 24px}.hero{grid-template-columns:1fr;gap:21px}.hero-note{gap:23px}.bursts{grid-template-columns:repeat(3,1fr)}.mix{grid-template-columns:1fr}.mix-actions{gap:10px}.mix-progress{margin-top:0}.section-heading{align-items:start}.section-heading p{max-width:230px}.level{font-size:12px}}
+    @media(max-width:530px){.wrap{padding:18px 17px}.masthead{padding-bottom:16px}.brand{font-size:12px;gap:8px}.version{font-size:10px}.masthead .stop{font-size:12px;padding:8px 12px;min-height:42px}.hero{padding:29px 0 23px}.intro{font-size:15px}h1{font-size:46px;letter-spacing:-1.8px}.hero-note strong{font-size:23px}.console{padding:11px 12px;gap:10px;align-items:start;flex-direction:column}.codec{width:100%;justify-content:space-between}.level{border-top:1px solid var(--line);padding-top:8px;width:100%}.sirens{grid-template-columns:1fr;gap:12px}.siren{padding:19px 20px 15px}.notes{height:52px}.section-heading{gap:9px}.section-heading p{font-size:11px;max-width:175px}h2{font-size:20px}.bursts{grid-template-columns:repeat(2,1fr);gap:10px}.burst:last-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.burst:last-child .shots{grid-row:1/3;grid-column:2;margin:4px 0}.burst:last-child .downloads{grid-column:2;margin-top:5px}.burst:last-child button{margin-top:10px}.mix{padding:20px;gap:18px}.mix-actions>select,.mix-actions>button{width:100%}.meta{flex-direction:column;gap:11px}.technical dl{grid-template-columns:87px 1fr}.local-panel{padding:13px 14px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand"><span class="brandmark" aria-hidden="true"><i></i><i></i><i></i></span><span>האי שלי / מעבדת צלילים</span><span class="version">גרסה 03</span></div>
+    <button class="stop" id="stop-all" type="button">■ עצירת הכול</button>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div><p class="eyebrow">תופסים את הסירנה</p><h1 id="title">סירנות.<br><span>צרורות.</span></h1><p class="intro">שני מרחקים, חמישה סוגי ירי. האזנה בנפרד וביחד, באותה עוצמה יחסית שנקבעה בחבילה.</p></div>
+      <div class="hero-note"><div><strong>02</strong>סירנות</div><div><strong>05</strong>צרורות</div><div><strong>1×</strong>עוצמת נכס</div></div>
+    </section>
+    <div class="console">
+      <div class="codec"><span class="label" id="codec-label">פורמט האזנה</span><div class="segmented" role="radiogroup" aria-labelledby="codec-label"><label><input type="radio" name="codec" value="ogg" checked><span lang="en">OGG</span></label><label><input type="radio" name="codec" value="mp3"><span lang="en">MP3</span></label></div></div>
+      <div class="level">עוצמה ראשית <b>70%</b> <span aria-hidden="true">·</span> יחס בין הנכסים <b>1×</b> <span aria-hidden="true">·</span> ללא נרמול בנגן</div>
+    </div>
+    <div id="status" class="status" role="status" aria-live="polite" aria-atomic="true" data-state="idle">מוכנים להאזנה. בחרו סירנה או צרור.</div>
+    <aside class="local-panel server" id="local-panel" hidden aria-label="פתיחה מקומית">
+      <p>הדף נפתח כקובץ מקומי. להאזנה ללא שרת, בחרו את קובצי השמע מתוך תיקיית החבילה. אפשר לצרף גם את קובץ המניפסט כדי לטעון את המדידות.</p>
+      <div class="local-actions"><button type="button" id="pick-files">בחירת קובצי החבילה</button><span id="local-count">טרם נבחרו קבצים.</span></div>
+      <input id="local-files" type="file" multiple accept=".ogg,.mp3,.json,audio/ogg,audio/mpeg,application/json" hidden>
+      <details><summary>פתיחה דרך שרת מקומי</summary><p>פתחו מסוף בתיקיית החבילה, הריצו את הפקודה ואז פתחו את הקישור:</p><div class="command"><code>python3 -m http.server 8765</code><button type="button" id="copy-command">העתקת הפקודה</button></div><a href="http://localhost:8765/listen.html" lang="en">http://localhost:8765/listen.html</a></details>
+    </aside>
+    <section aria-labelledby="sirens-heading">
+      <div class="section-heading"><h2 id="sirens-heading">01 / הסירנות</h2><p>שלוש שניות · שמונה מקטעים מתחלפים</p></div>
+      <div class="sirens">
+        <article class="siren" data-card="siren-near">
+          <div class="card-heading"><h3>סירנה קרובה</h3><span class="tag">קרובה וברורה</span></div><p>שני תווים קבועים, במרחק קרוב.</p>
+          <div class="notes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="actions"><button class="primary" type="button" data-play="siren-near">▷ השמעה אחת</button><button type="button" data-loop="siren-near" aria-pressed="false">↻ לולאה</button></div>
+          <div class="card-foot"><span>3.00 שניות · מונו</span><div class="downloads"><a data-download="siren-near" data-format="ogg" href="siren-near.ogg" download aria-label="הורדת סירנה קרובה בפורמט OGG" lang="en">OGG</a><a data-download="siren-near" data-format="mp3" href="siren-near.mp3" download aria-label="הורדת סירנה קרובה בפורמט MP3" lang="en">MP3</a></div></div>
+        </article>
+        <article class="siren far" data-card="siren-far">
+          <div class="card-heading"><h3>סירנה רחוקה</h3><span class="tag">רחוקה ועדינה</span></div><p>אותו רצף תווים, בעוצמה נמוכה יותר.</p>
+          <div class="notes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="actions"><button class="primary" type="button" data-play="siren-far">▷ השמעה אחת</button><button type="button" data-loop="siren-far" aria-pressed="false">↻ לולאה</button></div>
+          <div class="card-foot"><span>3.00 שניות · מונו</span><div class="downloads"><a data-download="siren-far" data-format="ogg" href="siren-far.ogg" download aria-label="הורדת סירנה רחוקה בפורמט OGG" lang="en">OGG</a><a data-download="siren-far" data-format="mp3" href="siren-far.mp3" download aria-label="הורדת סירנה רחוקה בפורמט MP3" lang="en">MP3</a></div></div>
+        </article>
+      </div>
+    </section>
+    <section aria-labelledby="bursts-heading">
+      <div class="section-heading"><h2 id="bursts-heading">02 / הצרורות</h2><p>0.8 שניות · שבע יריות שדועכות בהדרגה</p></div>
+      <div class="bursts" id="burst-cards"></div>
+    </section>
+    <section class="mix" aria-labelledby="mix-heading">
+      <div><h2 id="mix-heading">איך זה נשמע ביחד?</h2><p>בחרו רקע להשוואה אוטומטית של חמשת הצרורות. אפשר גם להפעיל לולאה למעלה וללחוץ על צרור בזמן שהיא מתנגנת.</p></div>
+      <div class="mix-actions"><label class="sr-only" for="mix-siren">סירנה ברקע</label><select id="mix-siren"><option value="siren-near">עם סירנה קרובה</option><option value="siren-far">עם סירנה רחוקה</option><option value="">בלי סירנה</option></select><button type="button" id="compare">▷ השוואת חמשת הצרורות</button></div>
+      <div class="mix-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </section>
+    <details class="technical"><summary>פרטי ההאזנה והמדידות</summary><dl><dt>סירנות</dt><dd>דו ופה באוקטבה החמישית; החלפה בכל 375 אלפיות שנייה. לולאה של 144,000 דגימות במקור, בקצב של 48,000 דגימות בשנייה.</dd><dt>צרורות</dt><dd>שבע יריות בקצב של 11.5 יריות בשנייה. העוצמה יורדת בכל ירייה.</dd><dt>נגן</dt><dd>פענוח לזיכרון, גבולות לולאה לפי דגימות המקור וכניסה ויציאה רכות של 12 אלפיות שנייה. מעבר פורמט עוצר את הניגון.</dd><dt>מקור המידע</dt><dd id="manifest-status">הרשימה הפנימית זמינה; המדידות מקובץ המניפסט טרם נטענו.</dd></dl></details>
+  </main>
+  <footer class="meta"><p>חבילת האזנה עצמאית · ללא שירותים חיצוניים<br>אפשר להשמיע סירנה אחת וצרור אחד באותו זמן.</p><nav aria-label="קובצי החבילה"><a href="VALIDATION.md">דוח בדיקה</a><a href="manifest.json" lang="en">manifest.json</a></nav></footer>
+</div>
+<script>
+(() => {
+  'use strict';
+  const known = [
+    {id:'siren-near', label:'סירנה קרובה', category:'siren', duration:3},
+    {id:'siren-far', label:'סירנה רחוקה', category:'siren', duration:3},
+    {id:'burst-puncture', label:'פנצ׳ר', category:'burst', duration:.8},
+    {id:'burst-net', label:'רשת', category:'burst', duration:.8},
+    {id:'burst-spikes', label:'קוצים', category:'burst', duration:.8},
+    {id:'burst-mark', label:'סימון', category:'burst', duration:.8},
+    {id:'burst-pulse', label:'פולס', category:'burst', duration:.8}
+  ];
+  const assets = new Map(known.map(a => [a.id, {...a, files:{ogg:{path:a.id+'.ogg'},mp3:{path:a.id+'.mp3'}}, loop:a.category==='siren'?{start_sample:0,end_sample_exclusive:144000,sample_rate_hz:48000}:null}]));
+  const bursts = known.filter(a => a.category==='burst');
+  const $ = s => document.querySelector(s);
+  const status = $('#status');
+  let context, master, siren = null, generation = 0, sirenRequest = 0, burstRequest = 0, sequence = 0;
+  let codec = 'ogg', importedManifest = false;
+  const burstVoices = new Set(), bufferCache = new Map(), localFiles = new Map(), localURLs = new Map(), timers = new Set();
+  const fade = .012;
+  function announce(message, state='idle') { status.textContent = message; status.dataset.state = state; }
+  function display() {
+    document.querySelectorAll('[data-card]').forEach(el => {
+      const id=el.dataset.card;
+      el.dataset.active=String((siren && siren.id===id) || [...burstVoices].some(v=>v.id===id && context && v.start<=context.currentTime && v.end>context.currentTime));
+    });
+    document.querySelectorAll('[data-loop]').forEach(el => el.setAttribute('aria-pressed',String(!!siren && siren.id===el.dataset.loop && siren.loop)));
+  }
+  function clearTimers() { timers.forEach(clearTimeout); timers.clear(); }
+  function later(fn, delay) { const t=setTimeout(()=>{timers.delete(t);fn();},delay);timers.add(t); }
+  function resetProgress() { document.querySelectorAll('.mix-progress i').forEach(el=>el.dataset.active='false'); }
+  function stopVoice(v) {
+    if (!v || v.stopped) return;
+    v.stopped=true;
+    const now=context.currentTime;
+    if (v.start>now) {v.gain.gain.cancelScheduledValues(now);v.gain.gain.setValueAtTime(0,now);try{v.source.stop(now);}catch{};return;}
+    const param=v.gain.gain;
+    if (param.cancelAndHoldAtTime) param.cancelAndHoldAtTime(now);
+    else {const value=param.value;param.cancelScheduledValues(now);param.setValueAtTime(value,now);}
+    param.linearRampToValueAtTime(0,now+fade);
+    try{v.source.stop(now+fade+.002);}catch{}
+  }
+  function stopSiren() {sirenRequest++;if(siren)stopVoice(siren);siren=null;display();}
+  function stopBursts() {burstRequest++;sequence++;clearTimers();burstVoices.forEach(stopVoice);burstVoices.clear();resetProgress();display();}
+  function stopAll(message='הניגון נעצר.') {generation++;stopSiren();stopBursts();announce(message);}
+  function failure(error, g) {if(g!==generation)return;announce(error instanceof Error?error.message:'אירעה שגיאה בהשמעה. נסו שוב.','error');}
+  async function audioContext() {
+    const Constructor=window.AudioContext||window.webkitAudioContext;
+    if (!Constructor) throw new Error('הדפדפן אינו תומך בנגן. אפשר להוריד את קובצי השמע ולהאזין בנגן המכשיר.');
+    if (!context) {
+      context=new Constructor({sampleRate:48000});master=context.createGain();master.gain.value=.7;master.connect(context.destination);
+    }
+    if(context.state==='suspended')await context.resume();
+    if(context.state!=='running')throw new Error('הנגן מושהה. לחצו שוב על כפתור ההשמעה.');
+    return context;
+  }
+  async function bufferFor(id, format) {
+    const asset=assets.get(id), path=asset.files[format].path, filename=path.split('/').pop();
+    const local=localFiles.get(filename), key=format+':'+path;
+    if(bufferCache.has(key))return bufferCache.get(key);
+    const promise=(async()=>{
+      let bytes;
+      if(local) bytes=await local.arrayBuffer();
+      else {
+        if(location.protocol==='file:')throw new Error('כדי להשמיע כאן, לחצו על ״בחירת קובצי החבילה״ ובחרו את קובצי השמע בפורמט שנבחר. אפשר גם לפתוח דרך שרת מקומי.');
+        let response;
+        try{response=await fetch(path);}catch{throw new Error('קובץ השמע לא נטען. ודאו שכל קובצי החבילה נמצאים באותה תיקייה ונסו שוב.');}
+        if(!response.ok)throw new Error('קובץ השמע חסר בחבילה: '+filename);
+        bytes=await response.arrayBuffer();
+      }
+      try{return await context.decodeAudioData(bytes);}catch{throw new Error('הדפדפן לא הצליח לפענח את פורמט השמע שנבחר. נסו את הפורמט השני.');}
+    })();
+    bufferCache.set(key,promise);
+    try{return await promise;}catch(e){if(bufferCache.get(key)===promise)bufferCache.delete(key);throw e;}
+  }
+  function makeVoice(id, buffer, loop, start) {
+    const asset=assets.get(id), source=context.createBufferSource(), gain=context.createGain();
+    source.buffer=buffer;source.connect(gain);gain.connect(master);source.loop=loop;
+    const bounds=asset.loop;
+    const loopStart=bounds?bounds.start_sample/bounds.sample_rate_hz:0;
+    const end=bounds?bounds.end_sample_exclusive/bounds.sample_rate_hz:asset.duration;
+    if(loop){source.loopStart=loopStart;source.loopEnd=end;}
+    const duration=Math.min(end,buffer.duration);
+    const voice={id,source,gain,loop,start,end:loop?Infinity:start+duration,stopped:false};
+    gain.gain.setValueAtTime(0,start);gain.gain.linearRampToValueAtTime(1,start+fade);
+    if(!loop){gain.gain.setValueAtTime(1,Math.max(start+fade,start+duration-fade));gain.gain.linearRampToValueAtTime(0,start+duration);}
+    source.onended=()=>{
+      source.disconnect();gain.disconnect();
+      if(siren===voice)siren=null;
+      burstVoices.delete(voice);display();
+      if(!voice.stopped&&!siren&&!burstVoices.size)announce('ההשמעה הסתיימה. אפשר לבחור צליל נוסף.');
+    };
+    if(loop)source.start(start,loopStart);else{source.start(start,0,duration);source.stop(start+duration+.002);}
+    return voice;
+  }
+  async function playSiren(id, loop) {
+    const g=generation, format=codec;
+    stopSiren();const request=sirenRequest;
+    announce('טוענים '+assets.get(id).label+'…');
+    try {
+      await audioContext();if(g!==generation||request!==sirenRequest||format!==codec)return;
+      const buffer=await bufferFor(id,format);
+      if(g!==generation||request!==sirenRequest||format!==codec)return;
+      siren=makeVoice(id,buffer,loop,context.currentTime+.015);display();
+      announce(assets.get(id).label+(loop?' מתנגנת בלולאה. אפשר להוסיף צרור.':' מתנגנת פעם אחת.'),'playing');
+    }catch(e){if(request===sirenRequest)failure(e,g);}
+  }
+  async function playBurst(id) {
+    const g=generation, format=codec;
+    stopBursts();const request=burstRequest;
+    announce('טוענים צרור '+assets.get(id).label+'…');
+    try {
+      await audioContext();if(g!==generation||request!==burstRequest||format!==codec)return;
+      const buffer=await bufferFor(id,format);
+      if(g!==generation||request!==burstRequest||format!==codec)return;
+      const voice=makeVoice(id,buffer,false,context.currentTime+.015);burstVoices.add(voice);
+      later(display,25);announce('צרור '+assets.get(id).label+(siren?' עם '+assets.get(siren.id).label+'.':'.'),'playing');
+    }catch(e){if(request===burstRequest)failure(e,g);}
+  }
+  async function compare() {
+    stopAll('טוענים את ההשוואה…');
+    const g=generation, format=codec, s=sequence, sr=sirenRequest, br=burstRequest;
+    const background=$('#mix-siren').value;
+    try {
+      await audioContext();if(g!==generation||s!==sequence||format!==codec)return;
+      const ids=[...bursts.map(a=>a.id),...(background?[background]:[])];
+      const buffers=await Promise.all(ids.map(id=>bufferFor(id,format)));
+      if(g!==generation||s!==sequence||sr!==sirenRequest||br!==burstRequest||format!==codec)return;
+      const start=context.currentTime+.06;
+      if(background)siren=makeVoice(background,buffers[buffers.length-1],true,start);
+      bursts.forEach((asset,i)=>{
+        const when=start+i*1.3;
+        const voice=makeVoice(asset.id,buffers[i],false,when);burstVoices.add(voice);
+        later(()=>{
+          if(g!==generation||s!==sequence)return;
+          document.querySelectorAll('.mix-progress i').forEach((el,n)=>el.dataset.active=String(n===i));
+          display();announce('השוואה '+(i+1)+' מתוך 5: '+asset.label+(siren?' עם '+assets.get(siren.id).label+'.':'.'),'playing');
+        },Math.max(0,(when-context.currentTime)*1000));
+      });
+      display();
+      later(()=>{
+        if(g!==generation||s!==sequence)return;
+        resetProgress();announce('ההשוואה הסתיימה.'+(siren?' הסירנה ממשיכה בלולאה; לעצירה לחצו על ״עצירת הכול״.':''),siren?'playing':'idle');
+      },(start+4*1.3+.85-context.currentTime)*1000);
+    }catch(e){if(s===sequence&&sr===sirenRequest&&br===burstRequest)failure(e,g);}
+  }
+  function safePath(value) {return typeof value==='string'&&/^[a-zA-Z0-9_./-]+$/.test(value)&&!value.startsWith('/')&&!value.split('/').includes('..');}
+  function refreshDownloads() {
+    document.querySelectorAll('[data-download]').forEach(a=>{
+      const path=assets.get(a.dataset.download).files[a.dataset.format].path, filename=path.split('/').pop();
+      a.href=localURLs.get(filename)||path;a.download=filename;
+    });
+  }
+  function applyManifest(data) {
+    if(!data||!Array.isArray(data.assets))throw new Error('מבנה המניפסט אינו תקין. הרשימה הפנימית נשארה זמינה.');
+    const updates=[];
+    known.forEach(fallback=>{
+      const item=data.assets.find(a=>a.id===fallback.id);
+      if(!item||!['ogg','mp3'].every(f=>item.files&&item.files[f]&&safePath(item.files[f].path)))throw new Error('במניפסט חסרים נכסים או נתיבים תקינים. הרשימה הפנימית נשארה זמינה.');
+      const merged={...assets.get(fallback.id),files:item.files};
+      if(Number.isFinite(item.duration_s)&&item.duration_s>0)merged.duration=item.duration_s;
+      if(fallback.category==='siren'&&item.loop){
+        const b=item.loop;
+        if(!Number.isInteger(b.start_sample)||!Number.isInteger(b.end_sample_exclusive)||b.start_sample<0||b.end_sample_exclusive<=b.start_sample||b.sample_rate_hz!==48000)throw new Error('גבולות הלולאה במניפסט אינם תקינים.');
+        merged.loop=b;
+      }
+      updates.push(merged);
+    });
+    updates.forEach(a=>assets.set(a.id,a));bufferCache.clear();
+    refreshDownloads();
+    $('#manifest-status').textContent='המניפסט נטען. נתיבי השמע, משכי הנכסים וגבולות הלולאה נקראים ממנו. המדידות המלאות מופיעות בדוח הבדיקה.';
+  }
+  $('#burst-cards').innerHTML=bursts.map((a,i)=>'<article class="burst" data-card="'+a.id+'"><div class="burst-top"><h3>'+a.label+'</h3><span class="index" aria-hidden="true">0'+(i+1)+'</span></div><div class="shots" aria-hidden="true">'+Array.from({length:7},(_,n)=>'<i style="--n:'+n+'"></i>').join('')+'</div><button type="button" data-play="'+a.id+'" aria-label="השמעת צרור '+a.label+'">▷ השמעה</button><div class="downloads"><a href="'+a.id+'.ogg" data-download="'+a.id+'" data-format="ogg" download aria-label="הורדת צרור '+a.label+' בפורמט OGG" lang="en">OGG</a><a href="'+a.id+'.mp3" data-download="'+a.id+'" data-format="mp3" download aria-label="הורדת צרור '+a.label+' בפורמט MP3" lang="en">MP3</a></div></article>').join('');
+  refreshDownloads();
+  document.addEventListener('click',event=>{
+    const play=event.target.closest('[data-play]'), loop=event.target.closest('[data-loop]');
+    if(play){const id=play.dataset.play;if(assets.get(id).category==='siren')playSiren(id,false);else playBurst(id);}
+    if(loop){const id=loop.dataset.loop;if(siren&&siren.id===id&&siren.loop){stopSiren();announce('לולאת הסירנה נעצרה.');}else playSiren(id,true);}
+  });
+  $('#stop-all').addEventListener('click',()=>stopAll());
+  $('#compare').addEventListener('click',compare);
+  document.querySelectorAll('[name="codec"]').forEach(input=>input.addEventListener('change',()=>{codec=input.value;stopAll('הפורמט הוחלף. בחרו צליל להאזנה בפורמט החדש.');}));
+  $('#mix-siren').addEventListener('change',()=>{stopAll('הרקע הוחלף. לחצו על השוואה כדי להתחיל.');});
+  $('#pick-files').addEventListener('click',()=>$('#local-files').click());
+  $('#local-files').addEventListener('change',async event=>{
+    stopAll('טוענים את הקבצים שנבחרו…');const g=generation;
+    const files=[...event.target.files], validNames=new Set(known.flatMap(a=>[a.id+'.ogg',a.id+'.mp3']));
+    files.forEach(file=>{if(validNames.has(file.name)){localFiles.set(file.name,file);if(localURLs.has(file.name))URL.revokeObjectURL(localURLs.get(file.name));localURLs.set(file.name,URL.createObjectURL(file));}});
+    bufferCache.clear();
+    refreshDownloads();
+    $('#local-count').textContent=localFiles.size+' מתוך 14 קובצי שמע זמינים מקומית.';
+    const manifest=files.find(file=>file.name==='manifest.json');
+    if(manifest){
+      try{const data=JSON.parse(await manifest.text());if(g!==generation)return;applyManifest(data);importedManifest=true;}
+      catch(e){failure(e,g);return;}
+    }
+    if(g!==generation)return;
+    announce(localFiles.size?'הקבצים מוכנים. בחרו סירנה או צרור להאזנה.':'לא נבחרו קובצי שמע מזוהים. בחרו קבצים מתוך חבילת הצלילים.');
+  });
+  $('#copy-command').addEventListener('click',async()=>{
+    const command='python3 -m http.server 8765';
+    try{if(!navigator.clipboard)throw new Error();await navigator.clipboard.writeText(command);announce('פקודת השרת הועתקה.');}
+    catch{const range=document.createRange();range.selectNodeContents($('.command code'));const selection=getSelection();selection.removeAllRanges();selection.addRange(range);announce('הפקודה סומנה. אפשר להעתיק אותה באמצעות קיצור ההעתקה במכשיר.');}
+  });
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')stopAll();});
+  window.addEventListener('pagehide',()=>{stopAll();if(context)context.suspend().catch(()=>{});});
+  if(location.protocol==='file:') {
+    $('#local-panel').hidden=false;
+    $('#manifest-status').textContent='מוצגת הרשימה הפנימית. נתוני המדידה מהמניפסט אינם טעונים; אפשר לבחור גם את manifest.json יחד עם קובצי השמע, או לפתוח דרך שרת מקומי.';
+    announce('פתיחה מקומית: בחרו תחילה את קובצי השמע בכפתור שמתחת.');
+  } else {
+    const controller=new AbortController(), timeout=setTimeout(()=>controller.abort(),5000);
+    fetch('manifest.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw new Error();return r.json();}).then(data=>{if(!importedManifest)applyManifest(data);}).catch(()=>{
+      $('#manifest-status').textContent='המניפסט לא נטען. מוצגת הרשימה הפנימית עם המשכים וגבולות הלולאה הקבועים; נתוני המדידה אינם זמינים כאן.';
+    }).finally(()=>clearTimeout(timeout));
+  }
+})();
+</script>
+</body>
+</html>

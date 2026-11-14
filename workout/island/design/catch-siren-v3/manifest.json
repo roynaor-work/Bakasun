@@ -1,0 +1,978 @@
+{
+  "schema_version": 3,
+  "name": "catch-siren-v3",
+  "license": "CC0-1.0",
+  "provenance": "Original procedural synthesis; no recordings or third-party samples.",
+  "source": "synthesize.py",
+  "seed": 20261114,
+  "sample_rate_hz": 48000,
+  "channels": 1,
+  "encoding": {
+    "ogg": "Opus CBR 128k, lowdelay/2.5ms",
+    "mp3": "LAME CBR 192k, Xing/LAME gapless metadata"
+  },
+  "playback": {
+    "master_gain": 0.7,
+    "relative_asset_gain": 1,
+    "max_simultaneous_bursts": 1,
+    "max_simultaneous_sirens": 1,
+    "stop_fade_ms": 12,
+    "loop_playback": "Web Audio decoded buffer, exact sample loop points",
+    "level_note": "Levels are baked into files. Do not independently normalize or apply v2 gains."
+  },
+  "siren_pattern": {
+    "notes": [
+      "C5",
+      "F5"
+    ],
+    "frequencies_hz": [
+      523.2511306011972,
+      698.4564628660078
+    ],
+    "slot_s": 0.375,
+    "slot_count": 8,
+    "edge_ramp_ms": 8,
+    "waveform": "sine only, fixed frequency per slot, no FM, no added harmonics",
+    "near_far_rms_difference_db": 9
+  },
+  "validation": {
+    "domain": "Encoded files decoded by FFmpeg, no post-decode repair",
+    "second_harmonic_limit_dbc": -30,
+    "high_tonal_line_limit_dbc": -40,
+    "high_tonal_line_min_hz": 900,
+    "minimum_burst_margin_db": 6,
+    "minimum_burst_1_to_5khz_energy_pct": 45,
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "assets": [
+    {
+      "id": "siren-near",
+      "label_he": "סירנה — קרוב",
+      "category": "siren",
+      "distance": "near",
+      "duration_s": 3.0,
+      "recommended_gain": 1.0,
+      "loop": {
+        "start_sample": 0,
+        "end_sample_exclusive": 144000,
+        "sample_rate_hz": 48000,
+        "start_s": 0,
+        "end_s": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "siren-near.ogg",
+          "codec": "opus",
+          "bytes": 49497,
+          "sha256": "07cc89372cc1b9aa3b2fab7e4837e43cbec8c3716085c389754105d7f36ce24a",
+          "decoded_samples": 144000,
+          "rms_dbfs": -33.997,
+          "true_peak_4x_dbtp": -30.828,
+          "energy_1_to_5khz_pct": 1e-05,
+          "energy_above_900hz_dbr": -63.525,
+          "spectral_centroid_hz": 610.81,
+          "plateau_count": 16,
+          "pitch_estimates_hz": [
+            523.24814,
+            523.25106,
+            698.45536,
+            698.45636,
+            523.24835,
+            523.25027,
+            698.45549,
+            698.45619,
+            523.24837,
+            523.2503,
+            698.45551,
+            698.45634,
+            523.24835,
+            523.25027,
+            698.45549,
+            698.45619
+          ],
+          "max_pitch_error_hz": 0.00299,
+          "max_within_note_drift_hz": 0.00292,
+          "worst_second_harmonic_dbc": -75.52,
+          "worst_line_above_900hz_dbc": -75.334,
+          "worst_plateau_residual_dbr": -50.265,
+          "seam_jump_dbfs": -73.749,
+          "seam_slope_mismatch_dbfs": -75.773
+        },
+        "mp3": {
+          "path": "siren-near.mp3",
+          "codec": "mp3",
+          "bytes": 73172,
+          "sha256": "c4bc21303698ba4d713bae7113668a02214ec9eb8610d6e6852159ef26471a03",
+          "decoded_samples": 144000,
+          "rms_dbfs": -34.265,
+          "true_peak_4x_dbtp": -31.131,
+          "energy_1_to_5khz_pct": 0.0,
+          "energy_above_900hz_dbr": -64.38,
+          "spectral_centroid_hz": 610.86,
+          "plateau_count": 16,
+          "pitch_estimates_hz": [
+            523.25107,
+            523.25119,
+            698.45644,
+            698.45649,
+            523.2511,
+            523.25112,
+            698.45636,
+            698.45642,
+            523.25107,
+            523.25119,
+            698.45644,
+            698.45649,
+            523.2511,
+            523.25112,
+            698.45636,
+            698.45642
+          ],
+          "max_pitch_error_hz": 0.0001,
+          "max_within_note_drift_hz": 0.00012,
+          "worst_second_harmonic_dbc": -102.736,
+          "worst_line_above_900hz_dbc": -94.339,
+          "worst_plateau_residual_dbr": -79.701,
+          "seam_jump_dbfs": -124.26,
+          "seam_slope_mismatch_dbfs": -121.27
+        }
+      }
+    },
+    {
+      "id": "siren-far",
+      "label_he": "סירנה — רחוק",
+      "category": "siren",
+      "distance": "far",
+      "duration_s": 3.0,
+      "recommended_gain": 1.0,
+      "loop": {
+        "start_sample": 0,
+        "end_sample_exclusive": 144000,
+        "sample_rate_hz": 48000,
+        "start_s": 0,
+        "end_s": 3
+      },
+      "files": {
+        "ogg": {
+          "path": "siren-far.ogg",
+          "codec": "opus",
+          "bytes": 49497,
+          "sha256": "e3c8be5cd193b29c8136eccf4aa7e1542fe104f4c104898c213d661b377f6251",
+          "decoded_samples": 144000,
+          "rms_dbfs": -42.997,
+          "true_peak_4x_dbtp": -39.782,
+          "energy_1_to_5khz_pct": 2e-05,
+          "energy_above_900hz_dbr": -61.677,
+          "spectral_centroid_hz": 610.85,
+          "plateau_count": 16,
+          "pitch_estimates_hz": [
+            523.25057,
+            523.24912,
+            698.45703,
+            698.45565,
+            523.251,
+            523.24841,
+            698.45687,
+            698.45565,
+            523.251,
+            523.24841,
+            698.45689,
+            698.45565,
+            523.251,
+            523.24841,
+            698.45687,
+            698.45565
+          ],
+          "max_pitch_error_hz": 0.00272,
+          "max_within_note_drift_hz": 0.00259,
+          "worst_second_harmonic_dbc": -78.344,
+          "worst_line_above_900hz_dbc": -73.49,
+          "worst_plateau_residual_dbr": -50.242,
+          "seam_jump_dbfs": -69.928,
+          "seam_slope_mismatch_dbfs": -75.62
+        },
+        "mp3": {
+          "path": "siren-far.mp3",
+          "codec": "mp3",
+          "bytes": 73172,
+          "sha256": "c7bc83d436ce2cc314862b5575999d91e585ccacfcd726d685d969e9d225dc56",
+          "decoded_samples": 144000,
+          "rms_dbfs": -43.265,
+          "true_peak_4x_dbtp": -40.13,
+          "energy_1_to_5khz_pct": 0.0,
+          "energy_above_900hz_dbr": -64.421,
+          "spectral_centroid_hz": 610.85,
+          "plateau_count": 16,
+          "pitch_estimates_hz": [
+            523.25103,
+            523.25116,
+            698.45641,
+            698.45643,
+            523.25114,
+            523.25105,
+            698.45643,
+            698.45651,
+            523.25103,
+            523.25116,
+            698.45641,
+            698.45643,
+            523.25114,
+            523.25105,
+            698.45643,
+            698.45651
+          ],
+          "max_pitch_error_hz": 0.0001,
+          "max_within_note_drift_hz": 0.00013,
+          "worst_second_harmonic_dbc": -102.458,
+          "worst_line_above_900hz_dbc": -95.812,
+          "worst_plateau_residual_dbr": -80.156,
+          "seam_jump_dbfs": -135.696,
+          "seam_slope_mismatch_dbfs": -131.079
+        }
+      }
+    },
+    {
+      "id": "burst-puncture",
+      "label_he": "פנצ׳ר",
+      "category": "burst",
+      "tool": "puncture",
+      "duration_s": 0.8,
+      "recommended_gain": 1.0,
+      "timbre": {
+        "crack_band_hz": [
+          1100,
+          4500
+        ],
+        "body_hz": 210,
+        "crack_decay_ms": 12.0,
+        "click_hz": 4000,
+        "ring_hz": 1900,
+        "ring_gain": 0.18
+      },
+      "shot_count": 7,
+      "cadence_hz": 11.5,
+      "shot_onsets_samples": [
+        960,
+        5134,
+        9308,
+        13482,
+        17656,
+        21830,
+        26003
+      ],
+      "shot_onsets_s": [
+        0.02,
+        0.106956522,
+        0.193913043,
+        0.280869565,
+        0.367826087,
+        0.454782609,
+        0.54173913
+      ],
+      "shot_linear_gains": [
+        1.0,
+        0.92,
+        0.84,
+        0.76,
+        0.68,
+        0.6,
+        0.52
+      ],
+      "echo": [
+        {
+          "delay_ms": 38,
+          "gain": 0.13
+        },
+        {
+          "delay_ms": 64,
+          "gain": 0.055
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "burst-puncture.ogg",
+          "codec": "opus",
+          "bytes": 13336,
+          "sha256": "7ac9331f47392ec624f0072ea38b97262846b15113cda6cc96f2b8d5bd162bfd",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.512,
+          "true_peak_4x_dbtp": -4.259,
+          "energy_1_to_5khz_pct": 79.95496,
+          "energy_above_900hz_dbr": -0.664,
+          "spectral_centroid_hz": 2886.71,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.371,
+            0.459,
+            0.545
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -12.775,
+            -13.487,
+            -14.312,
+            -15.215,
+            -16.118,
+            -17.116,
+            -18.619
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -13.813,
+            -14.567,
+            -15.363,
+            -16.276,
+            -17.164,
+            -18.156,
+            -19.683
+          ],
+          "rms_margin_over_near_siren_db": 13.485,
+          "total_energy_margin_over_3s_near_siren_db": 7.744,
+          "quietest_shot_margin_over_near_siren_db": 15.377
+        },
+        "mp3": {
+          "path": "burst-puncture.mp3",
+          "codec": "mp3",
+          "bytes": 20756,
+          "sha256": "6fdc814e470e3b90852f307daec724cf01b2e9807d509463b0e981d1c8d1ed5b",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.767,
+          "true_peak_4x_dbtp": -5.687,
+          "energy_1_to_5khz_pct": 79.92798,
+          "energy_above_900hz_dbr": -0.666,
+          "spectral_centroid_hz": 2886.89,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.371,
+            0.459,
+            0.545
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.05,
+            -13.757,
+            -14.552,
+            -15.423,
+            -16.376,
+            -17.465,
+            -18.723
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -14.1,
+            -14.813,
+            -15.611,
+            -16.48,
+            -17.431,
+            -18.522,
+            -19.777
+          ],
+          "rms_margin_over_near_siren_db": 13.498,
+          "total_energy_margin_over_3s_near_siren_db": 7.758,
+          "quietest_shot_margin_over_near_siren_db": 15.542
+        }
+      }
+    },
+    {
+      "id": "burst-net",
+      "label_he": "רשת",
+      "category": "burst",
+      "tool": "net",
+      "duration_s": 0.8,
+      "recommended_gain": 1.0,
+      "timbre": {
+        "crack_band_hz": [
+          1000,
+          3000
+        ],
+        "body_hz": 170,
+        "crack_decay_ms": 18.0,
+        "click_hz": 2800,
+        "ring_hz": 1200,
+        "ring_gain": 0.18
+      },
+      "shot_count": 7,
+      "cadence_hz": 11.5,
+      "shot_onsets_samples": [
+        960,
+        5134,
+        9308,
+        13482,
+        17656,
+        21830,
+        26003
+      ],
+      "shot_onsets_s": [
+        0.02,
+        0.106956522,
+        0.193913043,
+        0.280869565,
+        0.367826087,
+        0.454782609,
+        0.54173913
+      ],
+      "shot_linear_gains": [
+        1.0,
+        0.92,
+        0.84,
+        0.76,
+        0.68,
+        0.6,
+        0.52
+      ],
+      "echo": [
+        {
+          "delay_ms": 38,
+          "gain": 0.13
+        },
+        {
+          "delay_ms": 64,
+          "gain": 0.055
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "burst-net.ogg",
+          "codec": "opus",
+          "bytes": 13336,
+          "sha256": "dc69b55675d8695109078e73bbd9afd81b2ff76c4968f8415ab4290c64a5634e",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.475,
+          "true_peak_4x_dbtp": -5.831,
+          "energy_1_to_5khz_pct": 88.1929,
+          "energy_above_900hz_dbr": -0.466,
+          "spectral_centroid_hz": 1920.51,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -12.974,
+            -13.646,
+            -14.566,
+            -15.279,
+            -16.225,
+            -17.269,
+            -18.541
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -13.708,
+            -14.382,
+            -15.316,
+            -16.006,
+            -16.953,
+            -17.991,
+            -19.276
+          ],
+          "rms_margin_over_near_siren_db": 13.522,
+          "total_energy_margin_over_3s_near_siren_db": 7.782,
+          "quietest_shot_margin_over_near_siren_db": 15.456
+        },
+        "mp3": {
+          "path": "burst-net.mp3",
+          "codec": "mp3",
+          "bytes": 20756,
+          "sha256": "8ee37548dcb5d99cb24f1fc721b4573c3dbed69f2f3f349412894c30885d2913",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.762,
+          "true_peak_4x_dbtp": -6.659,
+          "energy_1_to_5khz_pct": 88.13595,
+          "energy_above_900hz_dbr": -0.47,
+          "spectral_centroid_hz": 1923.7,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.263,
+            -13.922,
+            -14.735,
+            -15.598,
+            -16.544,
+            -17.645,
+            -18.874
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -13.986,
+            -14.67,
+            -15.476,
+            -16.335,
+            -17.285,
+            -18.385,
+            -19.614
+          ],
+          "rms_margin_over_near_siren_db": 13.503,
+          "total_energy_margin_over_3s_near_siren_db": 7.763,
+          "quietest_shot_margin_over_near_siren_db": 15.392
+        }
+      }
+    },
+    {
+      "id": "burst-spikes",
+      "label_he": "קוצים",
+      "category": "burst",
+      "tool": "spikes",
+      "duration_s": 0.8,
+      "recommended_gain": 1.0,
+      "timbre": {
+        "crack_band_hz": [
+          1800,
+          5000
+        ],
+        "body_hz": 300,
+        "crack_decay_ms": 10.0,
+        "click_hz": 4500,
+        "ring_hz": 3600,
+        "ring_gain": 0.18
+      },
+      "shot_count": 7,
+      "cadence_hz": 11.5,
+      "shot_onsets_samples": [
+        960,
+        5134,
+        9308,
+        13482,
+        17656,
+        21830,
+        26003
+      ],
+      "shot_onsets_s": [
+        0.02,
+        0.106956522,
+        0.193913043,
+        0.280869565,
+        0.367826087,
+        0.454782609,
+        0.54173913
+      ],
+      "shot_linear_gains": [
+        1.0,
+        0.92,
+        0.84,
+        0.76,
+        0.68,
+        0.6,
+        0.52
+      ],
+      "echo": [
+        {
+          "delay_ms": 38,
+          "gain": 0.13
+        },
+        {
+          "delay_ms": 64,
+          "gain": 0.055
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "burst-spikes.ogg",
+          "codec": "opus",
+          "bytes": 13336,
+          "sha256": "5c2cdacf9396fb05bb7cbf7974d64fd7b074e5543420991433f819134e04b224",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.511,
+          "true_peak_4x_dbtp": -3.331,
+          "energy_1_to_5khz_pct": 76.33474,
+          "energy_above_900hz_dbr": -0.787,
+          "spectral_centroid_hz": 3088.69,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.023,
+            0.111,
+            0.197,
+            0.285,
+            0.371,
+            0.459,
+            0.545
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -12.763,
+            -13.449,
+            -14.19,
+            -15.029,
+            -16.114,
+            -17.198,
+            -18.384
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -14.148,
+            -14.883,
+            -15.597,
+            -16.464,
+            -17.596,
+            -18.67,
+            -19.829
+          ],
+          "rms_margin_over_near_siren_db": 13.485,
+          "total_energy_margin_over_3s_near_siren_db": 7.745,
+          "quietest_shot_margin_over_near_siren_db": 15.613
+        },
+        "mp3": {
+          "path": "burst-spikes.mp3",
+          "codec": "mp3",
+          "bytes": 20756,
+          "sha256": "d2faa8c75d19ffdb8507f8f19bc096c919be7ec36845e6033886e2700cc37ac9",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.779,
+          "true_peak_4x_dbtp": -4.428,
+          "energy_1_to_5khz_pct": 76.21836,
+          "energy_above_900hz_dbr": -0.797,
+          "spectral_centroid_hz": 3083.83,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.023,
+            0.111,
+            0.197,
+            0.285,
+            0.371,
+            0.459,
+            0.545
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.021,
+            -13.719,
+            -14.488,
+            -15.335,
+            -16.324,
+            -17.396,
+            -18.65
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -14.405,
+            -15.167,
+            -15.954,
+            -16.791,
+            -17.779,
+            -18.851,
+            -20.112
+          ],
+          "rms_margin_over_near_siren_db": 13.487,
+          "total_energy_margin_over_3s_near_siren_db": 7.746,
+          "quietest_shot_margin_over_near_siren_db": 15.615
+        }
+      }
+    },
+    {
+      "id": "burst-mark",
+      "label_he": "סימון",
+      "category": "burst",
+      "tool": "mark",
+      "duration_s": 0.8,
+      "recommended_gain": 1.0,
+      "timbre": {
+        "crack_band_hz": [
+          1250,
+          4000
+        ],
+        "body_hz": 240,
+        "crack_decay_ms": 14.0,
+        "click_hz": 3100,
+        "ring_hz": 2300,
+        "ring_gain": 0.18
+      },
+      "shot_count": 7,
+      "cadence_hz": 11.5,
+      "shot_onsets_samples": [
+        960,
+        5134,
+        9308,
+        13482,
+        17656,
+        21830,
+        26003
+      ],
+      "shot_onsets_s": [
+        0.02,
+        0.106956522,
+        0.193913043,
+        0.280869565,
+        0.367826087,
+        0.454782609,
+        0.54173913
+      ],
+      "shot_linear_gains": [
+        1.0,
+        0.92,
+        0.84,
+        0.76,
+        0.68,
+        0.6,
+        0.52
+      ],
+      "echo": [
+        {
+          "delay_ms": 38,
+          "gain": 0.13
+        },
+        {
+          "delay_ms": 64,
+          "gain": 0.055
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "burst-mark.ogg",
+          "codec": "opus",
+          "bytes": 13336,
+          "sha256": "f2fe00c38790b0d1414e7307c16117d5015a6a3bd1630185603aef2edb6d6871",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.442,
+          "true_peak_4x_dbtp": -5.263,
+          "energy_1_to_5khz_pct": 84.12599,
+          "energy_above_900hz_dbr": -0.602,
+          "spectral_centroid_hz": 2428.74,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -12.777,
+            -13.477,
+            -14.264,
+            -15.118,
+            -16.183,
+            -17.323,
+            -18.38
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -13.53,
+            -14.225,
+            -14.982,
+            -15.847,
+            -16.929,
+            -18.074,
+            -19.092
+          ],
+          "rms_margin_over_near_siren_db": 13.554,
+          "total_energy_margin_over_3s_near_siren_db": 7.814,
+          "quietest_shot_margin_over_near_siren_db": 15.617
+        },
+        "mp3": {
+          "path": "burst-mark.mp3",
+          "codec": "mp3",
+          "bytes": 20756,
+          "sha256": "c2d418fb62b83c6b62990dca199fa679abc53023941046c6692c09bdde8a06e8",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.764,
+          "true_peak_4x_dbtp": -5.855,
+          "energy_1_to_5khz_pct": 84.04937,
+          "energy_above_900hz_dbr": -0.604,
+          "spectral_centroid_hz": 2430.95,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.104,
+            -13.831,
+            -14.587,
+            -15.487,
+            -16.423,
+            -17.524,
+            -18.782
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -13.848,
+            -14.577,
+            -15.322,
+            -16.231,
+            -17.171,
+            -18.27,
+            -19.525
+          ],
+          "rms_margin_over_near_siren_db": 13.501,
+          "total_energy_margin_over_3s_near_siren_db": 7.761,
+          "quietest_shot_margin_over_near_siren_db": 15.483
+        }
+      }
+    },
+    {
+      "id": "burst-pulse",
+      "label_he": "פולס",
+      "category": "burst",
+      "tool": "pulse",
+      "duration_s": 0.8,
+      "recommended_gain": 1.0,
+      "timbre": {
+        "crack_band_hz": [
+          1000,
+          2400
+        ],
+        "body_hz": 150,
+        "crack_decay_ms": 20.0,
+        "click_hz": 4000,
+        "ring_hz": 1500,
+        "ring_gain": 0.45
+      },
+      "shot_count": 7,
+      "cadence_hz": 11.5,
+      "shot_onsets_samples": [
+        960,
+        5134,
+        9308,
+        13482,
+        17656,
+        21830,
+        26003
+      ],
+      "shot_onsets_s": [
+        0.02,
+        0.106956522,
+        0.193913043,
+        0.280869565,
+        0.367826087,
+        0.454782609,
+        0.54173913
+      ],
+      "shot_linear_gains": [
+        1.0,
+        0.92,
+        0.84,
+        0.76,
+        0.68,
+        0.6,
+        0.52
+      ],
+      "echo": [
+        {
+          "delay_ms": 38,
+          "gain": 0.13
+        },
+        {
+          "delay_ms": 64,
+          "gain": 0.055
+        }
+      ],
+      "files": {
+        "ogg": {
+          "path": "burst-pulse.ogg",
+          "codec": "opus",
+          "bytes": 13336,
+          "sha256": "6d6c68a18b1d7643779a4684201bb6a5937f469fdebc22858fa81cc1d9d27eb4",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.504,
+          "true_peak_4x_dbtp": -6.721,
+          "energy_1_to_5khz_pct": 87.19237,
+          "energy_above_900hz_dbr": -0.492,
+          "spectral_centroid_hz": 1700.73,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.256,
+            -14.124,
+            -14.82,
+            -15.566,
+            -16.762,
+            -17.7,
+            -18.936
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -14.048,
+            -14.949,
+            -15.619,
+            -16.357,
+            -17.588,
+            -18.488,
+            -19.749
+          ],
+          "rms_margin_over_near_siren_db": 13.493,
+          "total_energy_margin_over_3s_near_siren_db": 7.753,
+          "quietest_shot_margin_over_near_siren_db": 15.061
+        },
+        "mp3": {
+          "path": "burst-pulse.mp3",
+          "codec": "mp3",
+          "bytes": 20756,
+          "sha256": "35589656709e4f4a3e568d1494adf3c0db0a2c575c6ff61a604ba1e0478215b4",
+          "decoded_samples": 38400,
+          "rms_dbfs": -20.768,
+          "true_peak_4x_dbtp": -7.107,
+          "energy_1_to_5khz_pct": 87.17975,
+          "energy_above_900hz_dbr": -0.493,
+          "spectral_centroid_hz": 1699.17,
+          "detected_shot_count": 7,
+          "detected_peak_times_s": [
+            0.025,
+            0.111,
+            0.199,
+            0.285,
+            0.373,
+            0.459,
+            0.547
+          ],
+          "max_cadence_interval_error_ms": 1.043,
+          "shot_rms_30ms_dbfs": [
+            -13.513,
+            -14.315,
+            -15.098,
+            -15.969,
+            -16.934,
+            -18.018,
+            -19.248
+          ],
+          "shot_high_band_rms_30ms_dbfs": [
+            -14.31,
+            -15.125,
+            -15.908,
+            -16.779,
+            -17.747,
+            -18.831,
+            -20.058
+          ],
+          "rms_margin_over_near_siren_db": 13.497,
+          "total_energy_margin_over_3s_near_siren_db": 7.757,
+          "quietest_shot_margin_over_near_siren_db": 15.017
+        }
+      }
+    }
+  ]
+}
