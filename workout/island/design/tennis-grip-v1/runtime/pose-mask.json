@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "skeleton": "canonical18",
+  "mode": "rigid closed-hand surface replacing the open hand; body hand bone still animates",
+  "parentBone": "RightHand",
+  "asset": "right-hand-grip.glb",
+  "bodyBonesAdded": 0,
+  "boneMask": [
+    "RightHand"
+  ],
+  "readyBonePose": {
+    "RightHand": {
+      "rotation": [
+        -0.12225664750415967,
+        -0.9250671384218608,
+        0.33890184622548714,
+        0.12020665613013962
+      ]
+    }
+  },
+  "rotationSpace": "absolute parent-local xyzw; readyBonePose is an idle reference, use the supplied animated Hand channel during other clips",
+  "handFromRacket": [
+    0,
+    0,
+    -0.8803408430861305,
+    0.47434164901935494
+  ],
+  "racketMount": {
+    "translation": [
+      -0.05428570253711336,
+      -0.019249999999272134,
+      0.02
+    ],
+    "rotation": [
+      0,
+      0,
+      -0.8803408430861305,
+      0.47434164901935494
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "socketAtTopOfHandle": {
+    "translation": [
+      0.11274722834631237,
+      -0.12925000000151174,
+      0.02
+    ],
+    "rotation": [
+      0,
+      0,
+      -0.8803408430861305,
+      0.47434164901935494
+    ]
+  },
+  "racketGripNode": "grip",
+  "racketHeadNode": "head",
+  "gripToRacketRoot": [
+    0,
+    -0.2,
+    0
+  ],
+  "primaryHandCenterY": 0.065,
+  "leftSupportCenterY": 0.153,
+  "notes": "Keep only one closed-hand surface; hide/replace the original hand triangles. Do not multiply a second Euler rotation into the attached racket."
+}

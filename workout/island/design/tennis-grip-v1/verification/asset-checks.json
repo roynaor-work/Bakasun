@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "measurementRate": 120,
+  "checks": {
+    "canonical18": true,
+    "canonicalBind": true,
+    "noCompression": true,
+    "rigidRacketChannels": true,
+    "all30Hz": true,
+    "rootStationary": true,
+    "noNonuniformBodyScale": true,
+    "racket68cm": true,
+    "gripAtHandleTop": true,
+    "headAtStringCentre": true
+  },
+  "clips": [
+    {
+      "id": "idle",
+      "samples": 289,
+      "nativeFrames": 73,
+      "maxHeadInHandErrorMeters": 6.716404850990597e-16,
+      "maxRacketScaleError": 2.1210781103223385e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 3.572470733339867e-8,
+      "maxRightWristBendDegrees": 43.287883885427064,
+      "pass": true
+    },
+    {
+      "id": "forehand",
+      "samples": 289,
+      "nativeFrames": 73,
+      "maxHeadInHandErrorMeters": 6.38378239159465e-16,
+      "maxRacketScaleError": 2.2507701183630873e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 1.728394550854016e-8,
+      "maxRightWristBendDegrees": 57.82209027456234,
+      "pass": true
+    },
+    {
+      "id": "backhand",
+      "samples": 313,
+      "nativeFrames": 79,
+      "maxHeadInHandErrorMeters": 6.757588526067314e-16,
+      "maxRacketScaleError": 2.0531623078253657e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 0.0006890139577927345,
+      "maxRightWristBendDegrees": 55.02994381057726,
+      "pass": true
+    },
+    {
+      "id": "serve",
+      "samples": 481,
+      "nativeFrames": 121,
+      "maxHeadInHandErrorMeters": 8.458693819981963e-16,
+      "maxRacketScaleError": 2.0014830212433605e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 2.527101367935505e-8,
+      "maxRightWristBendDegrees": 59.617015459888215,
+      "pass": true
+    },
+    {
+      "id": "volley",
+      "samples": 217,
+      "nativeFrames": 55,
+      "maxHeadInHandErrorMeters": 6.291954681424118e-16,
+      "maxRacketScaleError": 1.7377739072730912e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 1.728394550854016e-8,
+      "maxRightWristBendDegrees": 55.00000191464261,
+      "pass": true
+    },
+    {
+      "id": "drop_shot",
+      "samples": 265,
+      "nativeFrames": 67,
+      "maxHeadInHandErrorMeters": 6.726880982267588e-16,
+      "maxRacketScaleError": 2.0380985511143445e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 1.728394550854016e-8,
+      "maxRightWristBendDegrees": 59.61701358046706,
+      "pass": true
+    },
+    {
+      "id": "lob",
+      "samples": 313,
+      "nativeFrames": 79,
+      "maxHeadInHandErrorMeters": 5.031056975836117e-16,
+      "maxRacketScaleError": 2.933174772761872e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 1.728394550854016e-8,
+      "maxRightWristBendDegrees": 59.61701407171424,
+      "pass": true
+    },
+    {
+      "id": "recover",
+      "samples": 241,
+      "nativeFrames": 61,
+      "maxHeadInHandErrorMeters": 5.719012614128092e-16,
+      "maxRacketScaleError": 2.19251479839716e-15,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 0.0014323901027171084,
+      "maxRightWristBendDegrees": 55.00243212168336,
+      "pass": true
+    },
+    {
+      "id": "run_side",
+      "samples": 193,
+      "nativeFrames": 49,
+      "maxHeadInHandErrorMeters": 4.0211174553034495e-16,
+      "maxRacketScaleError": 5.438959822042073e-16,
+      "maxRootError": 0,
+      "maxLeftGripErrorMeters": 1.7283945752401103e-8,
+      "maxRightWristBendDegrees": 42.23469583850296,
+      "pass": true
+    }
+  ],
+  "measuredRacketLengthMeters": 0.6800000072047114,
+  "pass": true
+}

@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 1,
+  "library": "tennis-grip-v1",
+  "asset": "player.glb",
+  "nativeRate": 30,
+  "rootMotion": false,
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "rest": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "rest": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "rest": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "rest": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "rest": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "rest": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "rest": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "rest": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "rest": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "rest": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "rest": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "rest": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "rest": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "rest": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "grip": {
+    "handleCenterInRightHand": [
+      0,
+      -0.055,
+      0.02
+    ],
+    "handFromRacket": [
+      0,
+      0,
+      -0.8803408430861305,
+      0.47434164901935494
+    ],
+    "gripNodeY": 0.2,
+    "primaryHandY": 0.065,
+    "headY": 0.5,
+    "headInRightHand": [
+      0.36329662467145096,
+      -0.2942500000048711,
+      0.02
+    ]
+  },
+  "clips": [
+    {
+      "id": "idle",
+      "label": "היכון · שתי ידיים",
+      "duration": 2.4,
+      "loop": true,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 73,
+      "contactTime": null,
+      "releaseTime": null,
+      "metadata": {
+        "label": "היכון · שתי ידיים",
+        "loop": true,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "forehand",
+      "label": "פורהנד",
+      "duration": 2.4,
+      "contact": 0.54,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 73,
+      "contactTime": 1.3,
+      "releaseTime": null,
+      "metadata": {
+        "label": "פורהנד",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.3,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "backhand",
+      "label": "בקהנד · שתי ידיים",
+      "duration": 2.6,
+      "contact": 0.54,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 79,
+      "contactTime": 1.4,
+      "releaseTime": null,
+      "metadata": {
+        "label": "בקהנד · שתי ידיים",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.4,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "serve",
+      "label": "הגשה · הטלה וחבטה",
+      "duration": 4,
+      "contact": 0.6,
+      "release": 0.33,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 121,
+      "contactTime": 2.4,
+      "releaseTime": 1.3333333333333333,
+      "metadata": {
+        "label": "הגשה · הטלה וחבטה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "release",
+            "time": 1.3333333333333333,
+            "bone": "LeftHand",
+            "local": [
+              0,
+              -0.075,
+              0
+            ],
+            "label": "הטלה"
+          },
+          {
+            "type": "contact",
+            "time": 2.4,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "volley",
+      "label": "וולה",
+      "duration": 1.8,
+      "contact": 0.52,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 55,
+      "contactTime": 0.9333333333333333,
+      "releaseTime": null,
+      "metadata": {
+        "label": "וולה",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 0.9333333333333333,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 1.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "drop_shot",
+      "label": "דרופ שוט",
+      "duration": 2.2,
+      "contact": 0.52,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 67,
+      "contactTime": 1.1333333333333333,
+      "releaseTime": null,
+      "metadata": {
+        "label": "דרופ שוט",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.1333333333333333,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "lob",
+      "label": "לוב",
+      "duration": 2.6,
+      "contact": 0.5,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 79,
+      "contactTime": 1.3,
+      "releaseTime": null,
+      "metadata": {
+        "label": "לוב",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": true,
+        "ballContactExpected": true,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [
+          {
+            "type": "contact",
+            "time": 1.3,
+            "bone": "RightHand",
+            "local": [
+              0.36329662467145096,
+              -0.2942500000048711,
+              0.02
+            ],
+            "label": "מגע במיתרים"
+          }
+        ],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "recover",
+      "label": "חזרה להיכון",
+      "duration": 2,
+      "loop": false,
+      "locomotion": false,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 61,
+      "contactTime": null,
+      "releaseTime": null,
+      "metadata": {
+        "label": "חזרה להיכון",
+        "loop": false,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": false,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "structural",
+        "referenceTravel": null
+      }
+    },
+    {
+      "id": "run_side",
+      "label": "ריצת צד · במקום",
+      "duration": 1.6,
+      "loop": true,
+      "locomotion": true,
+      "nativeRate": 30,
+      "rootMotion": false,
+      "frameCount": 49,
+      "contactTime": null,
+      "releaseTime": null,
+      "metadata": {
+        "label": "ריצת צד · במקום",
+        "loop": true,
+        "role": "tennis",
+        "floorY": 0,
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "locomotion": true,
+        "ballVisible": false,
+        "ballContactExpected": false,
+        "ball": {
+          "radius": 0.0335
+        },
+        "events": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.384,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "LeftFoot",
+            "start": 0.8,
+            "end": 1.184,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.4,
+            "end": 0.784,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 1.2000000000000002,
+            "end": 1.584,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "symmetryMode": "gait",
+        "referenceTravel": {
+          "speed": 0.5,
+          "direction": [
+            1,
+            0,
+            0
+          ],
+          "description": "External simulation travel for this in-place side-running cycle; never baked into Root."
+        }
+      }
+    }
+  ],
+  "sourceMotionSha256": "7f60a77c133e625caa8339adea6ee23853e99526a5b7cfceaf67eccc317f410c",
+  "playerSha256": "6f6a95bae86b471f1194b386f5cca3ef25ac01c341d799c624ad10384a357753",
+  "sourceGeometry": {
+    "path": "../soccer-header-v1/runtime/reference/idle_relaxed.glb",
+    "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+    "license": "CC0-1.0",
+    "removedHandTriangles": 789
+  }
+}
