@@ -1,0 +1,6 @@
+/* Ships v24.1 (14/11/2026): while the radar acquires a hull, the Lock button's rim fills in amber with the acquisition (the same gauge as the
+ * ring on the hull), then turns green when the lock is made (naval-v24.css). `?navalRadar=v24` never sets data-radar=acquiring. */
+.game-screen[data-game=navalDuel] .naval-lock-btn[data-radar=acquiring]{border-color:transparent;color:#fff1c9;background:radial-gradient(circle,#092a3cd6 0 60%,transparent 61%),conic-gradient(#FFD166 calc(var(--naval-radar,0)*360deg),#ffd16633 0);box-shadow:0 0 0 2px #ffd16655,0 4px 14px #00000052}
+.game-screen[data-game=navalDuel] .naval-lock-btn[data-radar=acquiring] svg{animation:naval-radar-blink .45s ease-in-out infinite alternate}
+@keyframes naval-radar-blink{from{opacity:.65}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-lock-btn[data-radar=acquiring] svg{animation:none}}

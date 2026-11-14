@@ -3,25 +3,25 @@
 // two boars measured in the real game (a standing mortar at z -28 and a runner coming from z -60), the machine gun, and the child-like
 // thumb from boar-kid-bot.mjs. Used by tests/island-boars-v24.test.mjs; the browser run (boar-aim-v24-browser.mjs) checks the same numbers
 // with real touch. Game time only.
-import {AIM24,V23,followAnchor,stickCurve,topSpeed as top,createAimAssist} from '../minigames/boar-island/aim-v24.mjs';
+import {AIM24,AIM241,V23,followAnchor,stickCurve,topSpeed as top,createAimAssist} from '../minigames/boar-island/aim-v24.mjs';
 import {createKidBot,rng,gauss} from './boar-kid-bot.mjs';
 
 export const SCREEN={W:844,H:390};
 const FX=(SCREEN.W/2)/(Math.tan(22*Math.PI/180)*SCREEN.W/SCREEN.H),FY=(SCREEN.H/2)/Math.tan(22*Math.PI/180); // px per radian (fov 44)
-/** The stick parameters of a version ('v23' = game.js before v24, 'v24' = AIM24 with optional overrides). */
-export const stickParams=(version,params=null)=>version==='v24'?(params?{...AIM24,...params}:AIM24):V23;
+/** The stick parameters of a version ('v23' = game.js before v24, 'v24' = AIM24, 'v241' = AIM241 (v24.1), each with optional overrides). */
+export const stickParams=(version,params=null)=>version==='v24'||version==='v241'?{...(version==='v241'?AIM241:AIM24),...(params||{})}:V23;
 export const topSpeed=(ux,uy,P=V23)=>top(ux,uy,SCREEN.W,SCREEN.H,P);
 
 /** The left stick. version 'v23' = game.js before v24 (fixed centre, no help); 'v24' = following centre + aim help. */
 export function makeStick(version='v24',{sens=1,params=null,follow=true}={}){
   const P=stickParams(version,params),R=P.R;
-  let s=null;const assist=version==='v24'?createAimAssist(P):null;
+  let s=null;const helped=version==='v24'||version==='v241',assist=helped?createAimAssist(P):null;
   const api={
     P,get held(){return !!s;},get anchor(){return s?{x:s.ox,y:s.oy}:null;},get assist(){return assist;},info:null,
     curve:m=>stickCurve(m,P),speedOf:(ux,uy)=>topSpeed(ux,uy,P)*sens,
     down(x,y){if(!s)s={ox:x,oy:y,vx:0,vy:0,sx:0,sy:0};},
     move(x,y){if(!s)return;let dx,dy,d;
-      if(version==='v24'&&follow)({dx,dy,d}=followAnchor(s,x,y,R));
+      if(helped&&follow)({dx,dy,d}=followAnchor(s,x,y,R));
       else{dx=x-s.ox;dy=y-s.oy;const raw=Math.hypot(dx,dy),k=raw>R?R/raw:1;dx*=k;dy*=k;d=Math.min(raw,R);}
       const mag=stickCurve(d/R,P);s.vx=d?dx/d*mag:0;s.vy=d?dy/d*mag:0;},
     up(){s=null;},

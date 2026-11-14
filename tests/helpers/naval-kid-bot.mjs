@@ -27,7 +27,9 @@ export function kidBot({seed=1,balance,style='lockButton',notice=.7,forget=.15,v
   if(dodge&&t>=dodge.from&&t<dodge.until){const away=Math.atan2(ship.z-dodge.z,ship.x-dodge.x),across=[ship.heading+Math.PI/2,ship.heading-Math.PI/2].sort((a,b)=>Math.abs(wrap(a-away))-Math.abs(wrap(b-away)))[0];Object.assign(input,steer(m,across));if(!dodge.counted){dodge.counted=true;stats.dodges++;}}
   else{
    // 2. Wander (or sail to a buoy when the magazine is low).
-   const buoy=(m.buoys||[])[0],far=m.homing?.status==='far'&&(m.enemies||[]).find(e=>e.index===m.homing.index),near=m.homing?.status==='near'&&(m.enemies||[]).find(e=>e.index===m.homing.index);
+   // v24.1 radar: "out of the radar's range" (a refused or lost lock, shown for a moment) reads like "too far": the child sails toward that hull.
+   const outOfRange=m.radarOn&&m.radarLost&&t-m.radarLost.time<2.5&&(m.enemies||[]).find(e=>e.index===m.radarLost.index&&e.active&&e.hp>0);
+   const buoy=(m.buoys||[])[0],far=(m.homing?.status==='far'&&(m.enemies||[]).find(e=>e.index===m.homing.index))||outOfRange,near=m.homing?.status==='near'&&(m.enemies||[]).find(e=>e.index===m.homing.index);
    if(buoy&&(m.loaded??99)<=4){Object.assign(input,steer(m,Math.atan2(buoy.z-ship.z,buoy.x-ship.x)));}
    // The lock says "too far, get closer": the child sails toward it.
    else if(far){Object.assign(input,steer(m,Math.atan2(far.z-ship.z,far.x-ship.x)));}
@@ -38,8 +40,9 @@ export function kidBot({seed=1,balance,style='lockButton',notice=.7,forget=.15,v
   }
   // 3. Lock (by style), after a human delay; re-lock after a sinking if the model does not do it.
   const live=(m.enemies||[]).filter(e=>e.active&&e.hp>0);
-  if(style==='lockButton'&&!m.homing&&t>=lockAt&&live.length&&m.aimV24){input.lockSmart=true;stats.lockTaps++;lockAt=t+between(.8,1.8);lockedOnce=true;}
-  if(style==='tapShip'&&live.length&&t>=lockAt&&(!m.homing||!m.aimV24)){
+  // v24.1 radar: while the gauge fills (m.radar) the child waits for it, as it waits for the lock itself.
+  if(style==='lockButton'&&!m.homing&&!m.radar&&t>=lockAt&&live.length&&m.aimV24){input.lockSmart=true;stats.lockTaps++;lockAt=t+between(.8,1.8);lockedOnce=true;}
+  if(style==='tapShip'&&live.length&&t>=lockAt&&(!m.homing||!m.aimV24)&&!m.radar){
    const target=live.sort((a,b)=>Math.hypot(a.x-ship.x,a.z-ship.z)-Math.hypot(b.x-ship.x,b.z-ship.z))[0];
    if(m.aimV24)input.lockTap=target.index;else input.selectTargetIndex=target.index;stats.lockTaps++;lockAt=t+between(1,2.2);
   }

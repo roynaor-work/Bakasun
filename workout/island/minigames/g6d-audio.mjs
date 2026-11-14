@@ -20,7 +20,12 @@ export function createNavalAudio({storage,AudioContext=globalThis.AudioContext||
  function chime(){try{const now=context.currentTime,out=context.createGain();out.gain.setValueAtTime(.0001,now);out.gain.exponentialRampToValueAtTime(1.15,now+.008);out.gain.exponentialRampToValueAtTime(.0001,now+.36);out.connect(master);
   const tones=[['triangle',1320,990,1],['sine',2640,1980,.35]].map(([type,from,to,level])=>{const osc=context.createOscillator(),amp=context.createGain();osc.type=type;osc.frequency.setValueAtTime(from,now);osc.frequency.exponentialRampToValueAtTime(to,now+.3);amp.gain.value=level;osc.connect(amp);amp.connect(out);osc.start(now);osc.stop(now+.38);return {osc,amp};});
   tones[0].osc.onended=()=>{for(const {osc,amp} of tones){osc.disconnect();amp.disconnect();}out.disconnect();};return true;}catch{return false;}}
+ /** 14/11/2026 v24.1 radar (naval-v241.mjs): short sine beeps while a hull is acquired (faster as the gauge fills), a higher one when the
+  * acquisition starts and a falling tone when a lock is refused or lost. The lock itself keeps its v23 click. */
+ function beep(freq,dur,level=.5,to=freq){try{const now=context.currentTime,osc=context.createOscillator(),amp=context.createGain();osc.type='sine';osc.frequency.setValueAtTime(freq,now);if(to!==freq)osc.frequency.exponentialRampToValueAtTime(to,now+dur);amp.gain.setValueAtTime(.0001,now);amp.gain.exponentialRampToValueAtTime(level,now+.006);amp.gain.exponentialRampToValueAtTime(.0001,now+dur);osc.connect(amp);amp.connect(master);osc.start(now);osc.stop(now+dur+.02);osc.onended=()=>{osc.disconnect();amp.disconnect();};return true;}catch{return false;}}
+ const RADAR=Object.freeze({radarStart:[1180,.07,.55],radarBeep:[1560,.045,.42],radarLost:[900,.24,.5,420]});
  function play(name){sync();if(disposed||paused||muted||!context||context.state!=='running')return;const now=context.currentTime;if(now-(last.get(name)??-1)<(name==='whistle'?.18:.045))return;last.set(name,now);
+  if(RADAR[name]){if(beep(...RADAR[name]))counts[name]=(counts[name]||0)+1;return;}
   const options={cannon:{gain:1.8,rate:.72,lowpass:950},metal:{gain:.8},explosion:{gain:1.2,rate:.82,lowpass:2800},whistle:{gain:.28},splash:{gain:1.1},torpedo:{gain:.65,rate:.7,lowpass:1000}};
   if(name==='critical'){source('metal',{gain:.9,rate:1.65});if(chime())counts.critical=(counts.critical||0)+1;return;}
   // 13/11/2026 v23 lock-on: a short high click when a hull locks (the metal sample, sped up).

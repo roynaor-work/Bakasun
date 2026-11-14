@@ -16,8 +16,12 @@ import {seededRandom} from '../workout/island/minigames/context.mjs';
 const config=JSON.parse(await readFile(new URL('../workout/island/data/config.json',import.meta.url),'utf8')).minigames,nb=config.navalDuel,DEG=180/Math.PI;
 const phone={...config,width:844,height:390};
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+/** v24.1 (14/11/2026): the lock now waits for a radar acquisition of 0.8-1.5 s (naval-v241.mjs). These tests check the lock itself
+ * (solve, turn, fire, end), so they run with its return switch `?navalRadar=v24` (the lock is made at once); the acquisition has its own
+ * tests in tests/island-naval-boars-v241.test.mjs. */
+const lockNow=search=>{const q=new URLSearchParams(search);if(!q.has('navalRadar'))q.set('navalRadar','v24');return '?'+q;};
 /** The model under a search string (the flags read location.search). */
-function make(stage,seed,search=''){globalThis.location={search};try{return createNavalModel({config:phone,balance:nb,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+function make(stage,seed,search=''){globalThis.location={search:lockNow(search)};try{return createNavalModel({config:phone,balance:nb,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
 const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(1/60,typeof input==='function'?input(m,i):input);};
 const context=m=>({time:m.time,player:m.playerShip,concurrent:m.settings.concurrent,fleetLength:m.enemies.filter(e=>!e.structure).length,drift:m.settings.drift});
 const solve=(m,e,kind=0)=>navalLockSolve({ship:m.playerShip,target:e,enemies:m.enemies,wind:m.wind,kind,pressure:navalStagePressure(m.settings.difficulty),context:context(m),targetable:x=>x.active&&x.hp>0&&navalTargetable(x,kind,nb)},nb,navalLockConfig(nb));
