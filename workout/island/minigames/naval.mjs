@@ -214,7 +214,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   const sol=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:2,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:x=>x.active&&x.hp>0&&navalTargetable(x,2,balance),elevation:turret.elevation},balance,lockCfg);
   if(!sol||!sol.reachable){feedback('far',e.x,e.z);return false;}
   const keep={...turret},keepAmmo=ammoIndex,keepSel=selectedTargetIndex;ammoIndex=2;turret.yaw=sol.yaw;turret.power=sol.power;selectedTargetIndex=e.index;
-  const ok=shoot();Object.assign(turret,keep);ammoIndex=keepAmmo;selectedTargetIndex=keepSel;if(ok){torpedoesFired++;sound('torpedo');}return ok;
+  const ok=shoot();Object.assign(turret,keep);ammoIndex=keepAmmo;selectedTargetIndex=keepSel;if(ok){torpedoesFired++;sound('torpedoLaunch');}return ok;
  }
  /** A miss on a submarine reads 'dive': the forecast has it under water when the shell arrives (wait for it to surface, or pick the guided missile or a mine). */
  const lockWord=status=>{const e=status==='miss'&&lockTarget();if(e&&balance.shipTypes[e.kind]?.submarine)return 'dive';
@@ -262,7 +262,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   // v24: a shell, missile or mine over a diving submarine passes over it (a small splash and the word "under water"); a torpedo that meets it explodes under water.
   const diver=p.owner==='player'&&!victim&&subV24?enemies.find(e=>e.subMode==='v24'&&e.active&&e.hp>0&&navalSubShield(e,p.ammo,balance)&&navalHullContact(point,point,e,balance)):null;
   Object.assign(blast,{...point,y:balance.shipY,life:config.visuals.blastSeconds,at:time,h:victim?(p.h||0):0,hit:Boolean(victim),critical:Boolean(victim&&p.critical),ammo:p.ammo,owner:p.owner,underwater:Boolean(victim&&victim.subMode==='v24'&&p.ammo===2&&victim.depth>0),overDiver:Boolean(diver)});
-  if(diver)underwaterHits++;
+  if(diver)underwaterHits++;if(blast.underwater)sound('underwaterExplosion');
   if(victim){damage(victim,p);sound('metal');sound('explosion');if(p.owner==='player'&&p.critical)sound('critical');feedback(p.owner==='player'?(p.critical?'critical':'hit'):'damage',point.x,point.z);}else{sound('splash');feedback(p.owner==='player'?(diver?'underwater':'miss'):'evaded',point.x,point.z);}
   if(p.owner==='player'){report(p,victim);holdView=time+(balance.aimControls?.returnSeconds??.25);}
   p.active=false;if(p.owner==='player')wind=navalWind(seed,fired,balance);
@@ -360,7 +360,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
    stepNavalPatrol(e.patrol,dt,{obstacles,shellAirborne:ball.active||extraShots.length>0,centreX},balance);
    e.x=e.patrol.x;e.z=e.patrol.z;
    e.vx=age<=dt?Math.cos(e.patrol.heading)*e.patrol.speed:(e.x-oldX)/dt;e.vz=age<=dt?Math.sin(e.patrol.heading)*e.patrol.speed:(e.z-oldZ)/dt;e.heading=e.patrol.heading;
-   e.depth=type.submarine?navalSubDepth(e,age,balance):0;
+   const wasDepth=e.depth;e.depth=type.submarine?navalSubDepth(e,age,balance):0;if(e.subMode==='v24'&&!(wasDepth>0)&&e.depth>0)sound('sonarPing');
    if(!e.attack&&time>=e.fireAt){
     const error=settings.enemyAimError*60;
     if(fireV24||e.subMode==='v24'){
@@ -380,7 +380,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
     if(attack.v24){
      const pts=attack.points||[attack],dmg=settings.damage*type.damage*(guard?balance.combat.heavyDamage:1)*(fireV24?efc.damageMult:1);if(pts.length>1){enemySalvos++;enemyFired+=pts.length-1;}
      pts.forEach((q,i)=>enemyShots.push({x:e.x,z:e.z,fromX:e.x,fromZ:e.z,targetX:q.x,targetZ:q.z,age:0,duration:(attack.flight||1.2)+i*efc.salvoGap,kind:attack.kind,ammo:attack.kind,owner:'enemy',damage:dmg,v24:true,sub:e.subMode==='v24'&&attack.kind===2,salvo:pts.length>1}));
-     sound(attack.kind===2?'incomingTorpedo':'incoming');
+     sound(attack.kind===2?'incomingTorpedo':'incoming');if(e.subMode==='v24'&&attack.kind===2)sound('torpedoLaunch');
     }else enemyShots.push({x:e.x,z:e.z,fromX:e.x,fromZ:e.z,targetX:attack.x,targetZ:attack.z,age:0,duration:type.submarine?1.65:1.2,kind:attack.kind,ammo:attack.kind,owner:'enemy',damage:settings.damage*type.damage*(guard?balance.combat.heavyDamage:1)});
     const gap=tactics.fireSeconds/(flank?1.2:guard?.85:1);
     e.recoil=config.visuals.recoilSeconds;e.attack=null;e.warning=0;e.fireAt=time+(fireV24?navalFireSeconds(gap,level,efc)*(e.subMode==='v24'?v24.sub.fireMult:1):gap);

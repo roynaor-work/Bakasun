@@ -2,8 +2,11 @@
  *  - enemy fire: every shot that is on its way or about to be fired is a red pulsing decal on the water where it will land (the Codex
  *    `water-target.png` from refill-enemyfire-v1, laid flat on the sea by the camera's own projection), pulsing faster as it nears;
  *    a torpedo also draws its bubble line. Replaces the v23 orange outlines (`?navalEnemyFire=v23` keeps them).
- *  - submarine: a diving submarine is a cyan sonar ring with bubbles (so it can be found and locked), a shell that passes over it says
- *    "under water", the player's torpedo leaves a bubble line, and a torpedo hit under water is the Codex `water_explosion.png`.
+ *  - submarine and torpedo (the Codex pack torpedo-sub-v1, 14/11/2026): a diving submarine is its dark shadow on the water under a
+ *    pulsing sonar ring (so it can be found and locked); a shell that passes over it says "under water"; a torpedo leaves the tube
+ *    with a short water flash and runs under the surface as a bubble trail; before an enemy torpedo leaves, an amber dotted line runs
+ *    from the submarine along its course; a torpedo hit under water is a water column (32 frames, 1.6 s). Each picture has a drawn
+ *    fallback while it loads.
  *  - aim: "where to hit": a ring on the hull where the shell will meet it (the forecast fleet), green when the shot will hit, amber while
  *    the turret still turns, orange when it will not land; an arrow from the hull now to that ring; one short word.
  * Nothing is drawn for a part whose switch is off. */
@@ -44,9 +47,24 @@ function bubbleLine(p,project,x0,z0,x1,z1,time,color=NAVAL_V24_COLORS.bubbles){
  for(let i=0;i<=n;i++){const u=i/n,q=project(x0+(x1-x0)*u,z0+(z1-z0)*u,.05);if(!q||!(q.depth>0))continue;const w=Math.sin(time*9+i*1.7);p.globalAlpha=.25+.55*u;p.beginPath();p.arc(q.x+w*1.5,q.y,(1.2+1.6*u)*(1+.2*w),0,TAU);p.fill();}
  p.restore();
 }
+/** One cell of a Codex atlas (row-major, cells w x h, `cols` per row) drawn centred at (x,y) with size (dw,dh) and anchor (ax,ay) in the cell. */
+function cell(p,img,index,cols,w,h,x,y,dw,dh,ax=.5,ay=.5){p.drawImage(img,(index%cols)*w,Math.floor(index/cols)*h,w,h,x-dw*ax,y-dh*ay,dw,dh);}
+/** The Codex bubble trail (8 cells of 256, 12 fps) laid in quads along a path on the water from (x0,z0) to the head (x1,z1). */
+function bubbleTrail(p,project,x0,z0,x1,z1,time,size=26){
+ const img=navalFx('bubble-trail.png'),a=project(x0,z0,.04),b=project(x1,z1,.04);if(!a||!b||!(a.depth>0)||!(b.depth>0))return false;
+ if(!img){bubbleLine(p,project,x0,z0,x1,z1,time);return true;}
+ const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);if(len<4)return false;const n=Math.max(1,Math.min(8,Math.round(len/size))),ang=Math.atan2(dy,dx),frame=Math.floor(time*12)%8;
+ p.save();for(let i=0;i<n;i++){const u=(i+.5)/n,x=a.x+dx*u,y=a.y+dy*u;p.save();p.translate(x,y);p.rotate(ang);p.globalAlpha=.35+.6*u;cell(p,img,(frame+i)%8,4,256,256,0,0,size*1.6,size*1.6);p.restore();}p.restore();return true;
+}
 function pill(p,text,x,y,color){
  p.save();p.font='bold 12px sans-serif';p.direction='rtl';p.textAlign='center';p.textBaseline='middle';const w=Math.ceil(p.measureText(text).width)+18;
  p.fillStyle='#092a3ce8';p.beginPath();p.roundRect(x-w/2,y-10,w,20,10);p.fill();p.strokeStyle=color;p.lineWidth=1.4;p.stroke();p.fillStyle='#f3f0e2';p.fillText(text,x,y+.5);p.restore();return {x:x-w/2,y:y-10,w,h:20};
+}
+function warningLine(p,project,x0,z0,x1,z1,time){
+ const a=project(x0,z0,.06),b=project(x1,z1,.06);if(!a||!b||!(a.depth>0)||!(b.depth>0))return false;const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);if(len<8)return false;
+ const img=navalFx('enemy-warning-line.png'),ang=Math.atan2(dy,dx),tile=56,h=14,shift=(time*.4%1)*tile;p.save();p.translate(a.x,a.y);p.rotate(ang);p.beginPath();p.rect(0,-h,len,h*2);p.clip();
+ if(img)for(let x=-tile+shift;x<len;x+=tile)p.drawImage(img,x,-h/2,tile,h);else{p.strokeStyle='#FFB547';p.lineWidth=3;p.setLineDash([4,8]);p.lineDashOffset=-shift;p.beginPath();p.moveTo(0,0);p.lineTo(len,0);p.stroke();}
+ p.restore();return true;
 }
 function arrow(p,a,b,color){
  const dx=b.x-a.x,dy=b.y-a.y,len=Math.hypot(dx,dy);if(len<14)return false;const ux=dx/len,uy=dy/len,end={x:b.x-ux*14,y:b.y-uy*14};
@@ -60,19 +78,29 @@ export function drawNavalV24(p,m,balance,project,width,height){
  if(m.enemyFireV24||m.subV24){
   const threats=navalV24Threats(m),r=(balance.aim?.hullBeam??16)*1.25;let decals=0,lines=0;
   for(const t of threats){
-   if(t.torpedo&&t.incoming&&Number.isFinite(t.x0)){bubbleLine(p,project,t.fromX,t.fromZ,t.x0,t.z0,time,NAVAL_V24_COLORS.bubbles);lines++;}
+   if(t.torpedo&&t.incoming&&Number.isFinite(t.x0)){if(bubbleTrail(p,project,t.fromX,t.fromZ,t.x0,t.z0,time))lines++;}
+   // Before an enemy torpedo leaves: the Codex amber dotted line (a 256x64 tile, 0.4 cycles a second) from the submarine along its course.
+   if(t.torpedo&&!t.incoming&&Number.isFinite(t.fromX)&&warningLine(p,project,t.fromX,t.fromZ,t.x,t.z,time))out.warningLines=(out.warningLines||0)+1;
    if(m.enemyFireV24||t.torpedo){if(decal(p,project,t,time,r))decals++;}
   }
   out.decals=decals;out.threats=threats.length;out.torpedoLines=lines;
  }
  // Submarines: sonar rings over the divers, the player's torpedo bubbles, the underwater blast, the "under water" word.
  if(m.subV24){
-  let sonar=0;for(const e of m.enemies||[]){if(e.subMode!=='v24'||!e.active||!(e.hp>0)||!(e.depth>0))continue;const q=project(e.x,e.z,0);if(!q||!(q.depth>0))continue;
-   for(let k=0;k<3;k++){const u=((time*.7+k/3)%1);onWater(p,project,e.x,e.z,10+u*26,()=>{p.globalAlpha=(1-u)*.8;p.strokeStyle=NAVAL_V24_COLORS.sonar;p.lineWidth=.07;p.beginPath();p.arc(0,0,1,0,TAU);p.stroke();});}
-   p.globalAlpha=1;bubbleLine(p,project,e.x-Math.cos(e.heading||0)*20,e.z-Math.sin(e.heading||0)*20,e.x,e.z,time,NAVAL_V24_COLORS.sonar);sonar++;}
+  const shadow=navalFx('submarine-shadow.png'),ring=navalFx('sonar-ring.png'),L=(balance.aim?.hullLength??34)*.75;let sonar=0;
+  for(const e of m.enemies||[]){if(e.subMode!=='v24'||!e.active||!(e.hp>0)||!(e.depth>0))continue;const q=project(e.x,e.z,0);if(!q||!(q.depth>0))continue;
+   // The shadow (nose = image top) lies along the hull's heading; the sonar ring (12 cells of 256, 12 fps) pulses around it.
+   onWater(p,project,e.x,e.z,L,()=>{p.rotate((e.heading||0)+Math.PI/2);if(shadow){p.globalAlpha=.6;p.drawImage(shadow,-.5,-1,1,2);}else{p.globalAlpha=.45;p.fillStyle='#1d3a4f';p.beginPath();p.ellipse(0,0,.3,1,0,0,TAU);p.fill();}});
+   onWater(p,project,e.x,e.z,L*1.5,()=>{if(ring){p.globalAlpha=.95;cell(p,ring,Math.floor(time*12)%12,4,256,256,0,0,2.2,2.2);}else for(let k=0;k<3;k++){const u=((time*.7+k/3)%1);p.globalAlpha=(1-u)*.8;p.strokeStyle=NAVAL_V24_COLORS.sonar;p.lineWidth=.05;p.beginPath();p.arc(0,0,.35+u*.65,0,TAU);p.stroke();}});
+   p.globalAlpha=1;sonar++;}
   out.sonar=sonar;
-  for(const s of [...(m.ball?.active?[m.ball]:[]),...(m.extraShots||[])])if(s.active&&s.ammo===2&&s.owner==='player'&&Number.isFinite(s.fromX)){bubbleLine(p,project,s.fromX,s.fromZ,s.x,s.z,time);out.torpedoTrail=(out.torpedoTrail||0)+1;}
-  const b=m.blast;if(b?.underwater&&Number.isFinite(b.at)){const age=time-b.at;if(age>=0&&age<.67){const sheet=navalFx('water_explosion.png'),f=Math.min(15,Math.floor(age*24)),q=project(b.x,b.z,0);if(q&&q.depth>0){const s=120;p.save();if(sheet)p.drawImage(sheet,(f%4)*64,Math.floor(f/4)*64,64,64,q.x-s/2,q.y-s*.85,s,s);else{p.strokeStyle='#e8fbff';p.lineWidth=3;p.globalAlpha=1-age/.67;p.beginPath();p.ellipse(q.x,q.y,14+age*90,6+age*36,0,0,TAU);p.stroke();}p.restore();out.underwaterBlast=true;}}}
+  const flash=navalFx('launch-flash.png'),boom=navalFx('underwater-explosion.png');
+  for(const s of [...(m.ball?.active?[m.ball]:[]),...(m.extraShots||[])])if(s.active&&s.ammo===2&&s.owner==='player'&&Number.isFinite(s.fromX)){bubbleTrail(p,project,s.fromX,s.fromZ,s.x,s.z,time);out.torpedoTrail=(out.torpedoTrail||0)+1;
+   if(s.age<.33&&flash){const q=project(s.fromX,s.fromZ,.1);if(q&&q.depth>0)cell(p,flash,Math.min(7,Math.floor(s.age*24)),4,256,256,q.x,q.y,64,64);}}
+  // An enemy torpedo leaving the submarine: the same short water flash at the tube.
+  for(const s of m.enemyShots||[])if(s.sub&&s.age<.33&&flash){const q=project(s.fromX,s.fromZ,.1);if(q&&q.depth>0)cell(p,flash,Math.min(7,Math.floor(s.age*24)),4,256,256,q.x,q.y,56,56);}
+  // A torpedo hit under water: the Codex water column (32 cells of 128x256, 20 fps, 1.6 s; the water line at 64% of the cell).
+  const b=m.blast;if(b?.underwater&&Number.isFinite(b.at)){const age=time-b.at;if(age>=0&&age<1.6){const q=project(b.x,b.z,0);if(q&&q.depth>0){p.save();if(boom)cell(p,boom,Math.min(31,Math.floor(age*20)),8,128,256,q.x,q.y,72,144,.5,.64);else{p.strokeStyle='#e8fbff';p.lineWidth=3;p.globalAlpha=Math.max(0,1-age/1.6);p.beginPath();p.ellipse(q.x,q.y,14+age*50,6+age*20,0,0,TAU);p.stroke();}p.restore();out.underwaterBlast=true;}}}
   const f=m.lastFeedback;if(f?.kind==='underwater'&&time-f.time<1.6){const q=project(f.x,f.z,1.2);if(q&&q.depth>0){out.word=NAVAL_V24_WORDS.underwater;pill(p,NAVAL_V24_WORDS.underwater,Math.max(80,Math.min(width-80,q.x)),Math.max(90,q.y-28),NAVAL_V24_COLORS.sonar);}}
  }
  // Aim: where the shell will meet the hull (the forecast), coloured by the hit chance, with an arrow from the hull now.

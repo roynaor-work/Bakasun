@@ -237,6 +237,14 @@ test('submarine v24 in the model: shells pass over a diver ("under water"), a to
 });
 
 // ---------------------------------------------------------------- Ships: drawing and input
+test('ships v24 sounds: the torpedo-sub and enemy-fire samples by event; the model sends them (launch, under-water hit, sonar ping on a dive)',async()=>{
+ const {NAVAL_V24_AUDIO}=await import('../workout/island/minigames/naval-v24-audio.mjs');
+ assert.deepEqual(NAVAL_V24_AUDIO,{incoming:'incoming-shell',incomingTorpedo:'bubbles',enemyCannon:'enemy-cannon',torpedoLaunch:'torpedo-launch',underwaterExplosion:'underwater-explosion',sonarPing:'sonar-ping'});
+ const heard=[];globalThis.location={search:''};let m;try{m=createNavalModel({config:phone,balance:nb,level:11,seed:3,random:seededRandom(3),difficulty:11,sound:n=>heard.push(n)});}finally{delete globalThis.location;}
+ const sub=m.enemies.find(e=>e.subMode==='v24');run(m,60*4);assert.ok(heard.includes('sonarPing'),'a ping when the submarine dives');let k=0;while(k<60*8&&!heard.includes('torpedoLaunch')){if(sub.depth>0)m.update(FRAME,{torpedoShot:true});else m.update(FRAME,{});k++;}
+ assert.ok(heard.includes('torpedoLaunch'),'our torpedo leaves the tube');k=0;while(k<60*8&&!heard.includes('underwaterExplosion')){m.update(FRAME,{});k++;}assert.ok(heard.includes('underwaterExplosion'),'it meets the submarine under water');
+});
+
 test('ships v24 HUD: red decals for every threat, sonar rings over divers, the hit ring coloured by chance; nothing when the switches are off',()=>{
  const project=(x,z,y=0)=>({x:422+z*1.2,y:300-(x-60)*.5-y,depth:1});
  const m={time:2,enemyFireV24:true,subV24:true,aimV24:true,result:null,playerShip:{x:60,z:0,heading:0},enemies:[{index:0,active:true,hp:1,x:200,z:10,attack:{x:62,z:2,fireTime:3,points:[{x:62,z:-11},{x:62,z:2},{x:62,z:15}]}},{index:1,active:true,hp:1,x:240,z:-30,subMode:'v24',depth:1,heading:Math.PI}],air:[],enemyShots:[{targetX:70,targetZ:5,duration:1.2,age:.3,kind:2,fromX:240,fromZ:-30,x:150,z:-10}],aimHint:{index:0,from:{x:200,z:10},to:{x:210,z:20},chance:1,status:'ready'},homing:{index:0},blast:null,lastFeedback:null};
@@ -244,6 +252,10 @@ test('ships v24 HUD: red decals for every threat, sonar rings over divers, the h
  const p=recorder(),out=drawNavalV24(p,m,nb,project,844,390);assert.equal(out.decals,4);assert.equal(out.torpedoLines,1);assert.equal(out.sonar,1);assert.equal(out.aim.color,NAVAL_V24_COLORS.hit);
  const miss=drawNavalV24(recorder(),{...m,aimHint:{...m.aimHint,chance:.2,status:'miss'},homing:null},nb,project,844,390);assert.equal(miss.aim.color,NAVAL_V24_COLORS.miss);assert.equal(miss.aim.word,NAVAL_V24_WORDS.miss);
  assert.equal(drawNavalV24(recorder(),{...m,enemyFireV24:false,subV24:false,aimV24:false},nb,project,844,390),null);
+ // torpedo-sub-v1: before a submarine's torpedo leaves, the dotted warning line; the hit under water draws the water column for 1.6 s.
+ const sub={...m,enemies:[{index:1,active:true,hp:1,x:240,z:-30,subMode:'v24',depth:1,heading:Math.PI,attack:{x:70,z:4,fireTime:3,kind:2,flight:2.6}}],enemyShots:[],aimHint:null,blast:{underwater:true,at:1,x:200,z:0}};
+ const w=drawNavalV24(recorder(),sub,nb,project,844,390);assert.equal(w.warningLines,1,'warning line before the launch');assert.equal(w.underwaterBlast,true);assert.equal(w.sonar,1);
+ assert.equal(drawNavalV24(recorder(),{...sub,time:2.7},nb,project,844,390).underwaterBlast,undefined,'the column is gone after 1.6 s');
 });
 
 /** The real input layer on a fake DOM (as the v23 lock tests): elements with listeners, window listeners by phase. */
@@ -288,7 +300,8 @@ test('words, styles and the offline list: help texts describe the magazine, the 
  const manifest=JSON.parse(await read('../workout/island/offline-manifest.json'));
  for(const f of ['minigames/alien-v24.mjs','minigames/alien-v24-draw.mjs','minigames/alien-v24-audio.mjs','minigames/alien-v24.css','minigames/naval-v24.mjs','minigames/naval-v24-hud.mjs','minigames/naval-v24-audio.mjs','minigames/naval-v24.css'])assert.ok(manifest.shell.includes(f),f);
  for(const f of ['assets/alien-v24/vulcan-magazine.png','assets/alien-v24/pickup-burst.png','assets/alien-v24/refill-pickup.ogg','assets/alien-v24/overheat.ogg'])assert.ok(manifest.games.alien.includes(f),f);
- for(const f of ['assets/game-naval/fx/water-target.png','assets/game-naval/fx/water_explosion.png','assets/game-naval/audio/enemy-cannon.ogg','assets/game-naval/audio/incoming-shell.ogg'])assert.ok(manifest.games.naval.includes(f),f);
+ for(const f of ['assets/game-naval/fx/water-target.png','assets/game-naval/audio/enemy-cannon.ogg','assets/game-naval/audio/incoming-shell.ogg','assets/game-naval/fx/sonar-ring.png','assets/game-naval/fx/submarine-shadow.png','assets/game-naval/fx/underwater-explosion.png','assets/game-naval/fx/bubble-trail.png','assets/game-naval/fx/launch-flash.png','assets/game-naval/fx/enemy-warning-line.png','assets/game-naval/audio/torpedo-launch.ogg','assets/game-naval/audio/underwater-explosion.ogg','assets/game-naval/audio/sonar-ping.ogg','assets/game-naval/audio/bubbles.ogg'])assert.ok(manifest.games.naval.includes(f),f);
+ assert.ok(!manifest.games.naval.includes('assets/game-naval/fx/water_explosion.png'),'the replaced splash sheet is gone');assert.match(await read('../workout/island/assets/game-naval/LICENSES.md'),/torpedo-sub-v1/);
  assert.match(await read('../workout/island/assets/alien-v24/LICENSES.md'),/CC0/);assert.match(await read('../workout/island/assets/game-naval/LICENSES.md'),/refill-enemyfire-v1/);
  const release=JSON.parse(await read('../workout/island/release.json'));for(const f of ['alien-v24.mjs','alien-v24-draw.mjs','alien-v24-audio.mjs','naval-v24.mjs','naval-v24-hud.mjs','naval-v24-audio.mjs']){const src=await read('../workout/island/minigames/'+f);for(const m of src.matchAll(/\?v=([\w-]+)/g))assert.equal(m[1],release.version,`${f}: new code uses the current tag`);}
  const css=await read('../workout/island/minigames/naval-v24.css');for(const sel of ['.naval-lock-btn{','.naval-torpedo-btn{'])assert.ok(css.includes(sel),sel);assert.match(css,/width:60px;height:60px/);

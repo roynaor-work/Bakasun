@@ -1,8 +1,10 @@
-/** Ships v24 sounds: CC0 samples from the Codex pack refill-enemyfire-v1 (copies under assets/game-naval/audio, see LICENSES.md there).
- * `incoming` / `incomingTorpedo`: one incoming-shell whoosh per enemy shot or salvo (not per frame), `enemyCannon`: the enemy cannon.
+/** Ships v24 sounds: CC0 samples from the Codex packs refill-enemyfire-v1 and torpedo-sub-v1 (copies under assets/game-naval/audio,
+ * see LICENSES.md there). `incoming`: one incoming-shell whoosh per enemy shot or salvo (not per frame), `enemyCannon`: the enemy cannon,
+ * `incomingTorpedo`: bubbles for an enemy torpedo on its way, `torpedoLaunch`: a torpedo leaves a tube (ours or a submarine's),
+ * `underwaterExplosion`: a torpedo meets a diving submarine, `sonarPing`: a submarine dives.
  * Own small context so the shared naval bank stays untouched; honours the island sound toggle and the pause. Other names are ignored.
  * Created only when the v24 enemy fire or the v24 submarine is on (?navalEnemyFire=v23&navalSub=v23 keep the v23 sounds). */
-export const NAVAL_V24_AUDIO=Object.freeze({incoming:'incoming-shell',incomingTorpedo:'incoming-shell',enemyCannon:'enemy-cannon'});
+export const NAVAL_V24_AUDIO=Object.freeze({incoming:'incoming-shell',incomingTorpedo:'bubbles',enemyCannon:'enemy-cannon',torpedoLaunch:'torpedo-launch',underwaterExplosion:'underwater-explosion',sonarPing:'sonar-ping'});
 export function createNavalV24Audio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetch:fetcher=globalThis.fetch}={}){
  let context,master,paused=false,disposed=false,loaded=false;const buffers=new Map(),counts={},last=new Map();
  const muted=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
@@ -15,7 +17,7 @@ export function createNavalV24Audio({storage,AudioContext=globalThis.AudioContex
   const name=NAVAL_V24_AUDIO[event];if(!name)return false;counts[event]=(counts[event]||0)+1;
   if(disposed||paused||muted()||!context||context.state!=='running'||!buffers.has(name))return false;
   const now=context.currentTime;if(now-(last.get(name)??-1)<.25)return false;last.set(name,now);
-  try{const node=context.createBufferSource(),amp=context.createGain();node.buffer=buffers.get(name);node.playbackRate.value=event==='incomingTorpedo'?.7:1;amp.gain.value=event==='incomingTorpedo'?.7:.9;node.connect(amp);amp.connect(master);node.onended=()=>{node.disconnect();amp.disconnect();};node.start();return true;}catch{return false;}
+  try{const node=context.createBufferSource(),amp=context.createGain();node.buffer=buffers.get(name);amp.gain.value=event==='sonarPing'?.55:event==='incomingTorpedo'?.75:.9;node.connect(amp);amp.connect(master);node.onended=()=>{node.disconnect();amp.disconnect();};node.start();return true;}catch{return false;}
  }
  return {unlock,play,setPaused(value){paused=Boolean(value);if(paused&&context?.state==='running')void context.suspend().catch(()=>{});else if(!paused)unlock();},
   metrics(){return {loaded:[...buffers.keys()],counts:{...counts},state:context?.state||'locked'};},dispose(){disposed=true;buffers.clear();if(context)void context.close().catch(()=>{});}};
