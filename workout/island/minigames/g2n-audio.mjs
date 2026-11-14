@@ -33,6 +33,14 @@ export function createG2nAudio({storage,AudioContext=globalThis.AudioContext||gl
     if(event==='rescue'){sample('rescue',.35);tone(523,659,.28,.18);tone(784,1046,.48,.13);played.add(event);}
     if(event==='timeout'){tone(240,140,.35,.1);tone(180,95,.4,.06);hiss(.15,.07,600);played.add(event);}
     if(event==='siren'){tone(580,920,.7,.17);tone(870,1380,.7,.07);hiss(.2,.05,1200);played.add(event);}
+    // 13/11/2026 fire v23 (water targets, inside the building): only the new modes play these
+    if(event==='spark'){hiss(.06,.32,5200);hiss(.05,.2,3400);tone(1900,700,.09,.05,'square');played.add(event);}
+    if(event==='flare'){hiss(.7,.55,640);hiss(.4,.25,1800);tone(120,60,.55,.12,'sawtooth');played.add(event);}
+    if(event==='clank'){tone(620,410,.14,.12,'square');tone(940,700,.12,.06);hiss(.09,.12,3000);played.add(event);}
+    if(event==='fwump'){hiss(.3,.4,320);tone(90,50,.25,.1,'sine');played.add(event);}
+    if(event==='pop'){tone(300,900,.16,.12);hiss(.25,.35,2000);played.add(event);}
+    if(event==='door'){tone(150,95,.26,.12);hiss(.14,.1,520);played.add(event);}
+    if(event==='tool'){tone(700,980,.07,.08,'sine');played.add(event);}
   }
 
   /** 09/11/2026 better water and fire: the jet is band-passed white noise with a slow flutter plus a low body that grows with pressure;

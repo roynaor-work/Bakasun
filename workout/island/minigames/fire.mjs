@@ -113,4 +113,16 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   };return model;
 }
 export function drawFire(p,m,ctx) {if(!ctx.view?.draw(p))drawFireCity(p,m,ctx);}
-export function startFire(ctx){return runFireSession({...ctx,balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}},createFireModel,drawFire,createFireView);}
+export function startFire(ctx){if(ctx.fireMode)return startFireBonus(ctx);return runFireSession({...ctx,balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}},createFireModel,drawFire,createFireView);}
+/** 13/11/2026 fire v23: the bonus missions (water targets, inside a building) load their own module on first use. Until it runs,
+ * the session says it is loading through the shared `ready` contract, so "stuck? restart" works the same as for every game. */
+export function startFireBonus(ctx,load=()=>import('./fire-bonus-session.mjs?v=island-v2-20261107-11')){
+  let session=null,disposed=false,paused=false,failed=false;
+  const proxy={get ready(){return Boolean(session?.ready);},get loadFailed(){return failed||Boolean(session?.loadFailed);},
+    get snapshot(){return session?session.snapshot:{mode:ctx.fireMode,level:ctx.fireBonusLevel,loading:true};},
+    get debug(){return session?.debug;},cancel:ctx.cancel,
+    setPaused(value){paused=Boolean(value);session?.setPaused(paused);},
+    dispose(){if(disposed)return;disposed=true;session?.dispose();}};
+  load().then(m=>{if(disposed)return;session=m.runFireBonusSession(ctx);session.setPaused(paused);}).catch(()=>{failed=true;});
+  return proxy;
+}
