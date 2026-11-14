@@ -15,7 +15,7 @@ import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
-import {hoopsCrowd3dMode,hoopsV241Flags} from './hoops-v241.mjs?v=island-v2-20261107-14';
+import {hoopsCrowd3dMode,hoopsV241Flags,hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-14';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -94,9 +94,9 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  }
  // v24.1 referee on the far sideline who makes the calls the whistles sound (hoops-referee.mjs); `?hoopsReferee=0` = none. Loaded beside the match.
  let referee=null;const refereeState={status:'off',error:null};
- if(quality>=1){
+ if(quality>=1&&hoopsRefereeEnabled(search)){
+  refereeState.status='loading';
   Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-14'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
-   if(!R.hoopsRefereeEnabled(search))return;refereeState.status='loading';
    const loader=new G.GLTFLoader(),loaded=await R.createHoopsReferee({T:THREE,load:url=>H.loadHoopsGLTF(loader,url),court});
    if(viewDisposed){loaded.dispose();return;}
    loaded.group.traverse(o=>{if(o.isSkinnedMesh&&reflection)o.layers.enable(REFLECTION_LAYER);});
