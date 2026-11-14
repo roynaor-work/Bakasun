@@ -1,0 +1,413 @@
+{
+ "note": "Per-draw timing: a \"first\" draw is the first time that object is drawn. ANGLE/SwiftShader build the pipeline of a material and state at its first draw, not when the program compiles (programsCompiled stayed 0 in every window). Contended container: absolute times are noisy, the first-draw pattern is not.",
+ "runs": [
+  {
+   "run": "before: all five v24 switches 0",
+   "extra": "soccerTier=0&soccerPitchAssets=0&soccerClipsV13=0&soccerFxV1=0&soccerCrowd3d=0&athleteBodyV2=0",
+   "fps": 1.4,
+   "frames": 43,
+   "glMs": {
+    "mean": 55.45,
+    "p50": 6.2,
+    "p95": 16.4,
+    "p99": 2076.5,
+    "max": 2076.5
+   },
+   "frameMs": {
+    "mean": 732.14,
+    "p50": 650,
+    "p95": 1566.5,
+    "p99": 2099.9,
+    "max": 2099.9
+   },
+   "warmup": {
+    "programs": 66,
+    "ms": 983
+   },
+   "assetReadyMs": 6796,
+   "match": {
+    "score": [
+     0,
+     0
+    ],
+    "elapsed": 11.9,
+    "phase": "playing",
+    "events": {
+     "goal": 0,
+     "shot": 0,
+     "pass": 2,
+     "loft": 0,
+     "header": 0,
+     "steal": 0,
+     "save": 0
+    }
+   },
+   "slowDraws": [
+    {
+     "frame": 8,
+     "ms": 172.1,
+     "first": false,
+     "object": "Mesh<Scene [PlaneGeometry v4 dt1 dw0 side0 ro0]",
+     "material": "MeshBasicMaterial",
+     "blending": 1
+    },
+    {
+     "frame": 34,
+     "ms": 2038.5,
+     "first": true,
+     "object": "Mesh<Scene [BufferGeometry v48 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial",
+     "blending": 1
+    }
+   ],
+   "firstDrawStalls": 1,
+   "firstDrawsInWindow": [
+    {
+     "frame": 34,
+     "ms": 2038.5,
+     "object": "Mesh<Scene [BufferGeometry v48 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 34,
+     "ms": 0.9,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 56,
+     "ms": 0,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    }
+   ]
+  },
+  {
+   "run": "after, v24 as of 81451553 (compile-only warm-up)",
+   "extra": "soccerTier=0",
+   "fps": 1.1,
+   "frames": 33,
+   "glMs": {
+    "mean": 214.03,
+    "p50": 6.2,
+    "p95": 2335.2,
+    "p99": 2626.1,
+    "max": 2626.1
+   },
+   "frameMs": {
+    "mean": 929.76,
+    "p50": 766.5,
+    "p95": 2366.6,
+    "p99": 2716.5,
+    "max": 2716.5
+   },
+   "warmup": {
+    "programs": 78,
+    "ms": 1081
+   },
+   "assetReadyMs": 8341,
+   "match": {
+    "score": [
+     1,
+     0
+    ],
+    "elapsed": 7.1,
+    "phase": "goal",
+    "events": {
+     "goal": 1,
+     "shot": 1,
+     "pass": 1,
+     "loft": 0,
+     "header": 0,
+     "steal": 0,
+     "save": 0
+    }
+   },
+   "slowDraws": [
+    {
+     "frame": 12,
+     "ms": 147.9,
+     "first": false,
+     "object": "athlete-body<athlete<Group<Scene [BufferGeometry v4100 map1024x1024 dt1 dw1 side0 ro0 ud:targetNames,regions,originalVertexCount,handVertexRanges]",
+     "material": "MeshDepthMaterial",
+     "blending": 1
+    },
+    {
+     "frame": 32,
+     "ms": 2327.8,
+     "first": true,
+     "object": "Fan3LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral",
+     "blending": 1
+    },
+    {
+     "frame": 34,
+     "ms": 79.8,
+     "first": false,
+     "object": "Halos<Halos<SoccerStadiumV8<Scene [PlaneGeometry v4 map128x128 dt1 dw0 side0 ro0 ud:part]",
+     "material": "MeshBasicMaterial",
+     "blending": 2
+    },
+    {
+     "frame": 35,
+     "ms": 81.9,
+     "first": false,
+     "object": "athlete-body<athlete<Group<Scene [BufferGeometry v4100 map1024x1024 dt1 dw1 side0 ro0 ud:targetNames,regions,originalVertexCount,handVertexRanges]",
+     "material": "MeshDepthMaterial",
+     "blending": 1
+    },
+    {
+     "frame": 43,
+     "ms": 925.7,
+     "first": true,
+     "object": "Mesh<Group<Scene [ConeGeometry v15 dt1 dw1 side2 ro0]",
+     "material": "MeshBasicMaterial",
+     "blending": 1
+    },
+    {
+     "frame": 46,
+     "ms": 732.4,
+     "first": true,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial",
+     "blending": 1
+    },
+    {
+     "frame": 49,
+     "ms": 2605.5,
+     "first": true,
+     "object": "Sprite<Scene [BufferGeometry v4 map512x512 dt1 dw0 side0 ro0]",
+     "material": "SpriteMaterial",
+     "blending": 2
+    }
+   ],
+   "firstDrawStalls": 4,
+   "firstDrawsInWindow": [
+    {
+     "frame": 32,
+     "ms": 2327.8,
+     "object": "Fan3LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 32,
+     "ms": 0.1,
+     "object": "Fan7LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 32,
+     "ms": 0.6,
+     "object": "Fan11LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 41,
+     "ms": 0,
+     "object": "Fan9LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 42,
+     "ms": 0.1,
+     "object": "Fan1LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 42,
+     "ms": 0,
+     "object": "Fan5LOD1<SoccerCrowd3D<Scene [BufferGeometry v198 dt1 dw1 side0 ro0 ud:asset,selected]",
+     "material": "MeshBasicMaterial:vertex-palette-shirt-neutral"
+    },
+    {
+     "frame": 43,
+     "ms": 925.7,
+     "object": "Mesh<Group<Scene [ConeGeometry v15 dt1 dw1 side2 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 43,
+     "ms": 0,
+     "object": "Mesh<Group<Scene [PlaneGeometry v4 dt1 dw1 side2 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 46,
+     "ms": 0,
+     "object": "Crowd_1<Crowd<LOD0<SoccerStadiumV8 [PlaneGeometry v4 map1024x1024 dt1 dw1 side2 ro0 ud:part,section,hideable,total]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 46,
+     "ms": 732.4,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 46,
+     "ms": 0.1,
+     "object": "soccer-v24-fx-trail<Scene [BufferGeometry v18 map256x32 dt1 dw0 side1 ro2]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 49,
+     "ms": 0.1,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 49,
+     "ms": 2605.5,
+     "object": "Sprite<Scene [BufferGeometry v4 map512x512 dt1 dw0 side0 ro0]",
+     "material": "SpriteMaterial"
+    },
+    {
+     "frame": 49,
+     "ms": 5.3,
+     "object": "soccer-v24-fx-landing-turf<Scene [BufferGeometry v4 map256x256 dt1 dw0 side0 ro3]",
+     "material": "SpriteMaterial"
+    },
+    {
+     "frame": 50,
+     "ms": 0.1,
+     "object": "Crowd_7<Crowd<LOD0<SoccerStadiumV8 [PlaneGeometry v4 map1024x1024 dt1 dw1 side2 ro0 ud:part,section,hideable,total]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 50,
+     "ms": 0,
+     "object": "soccer-v24-fx-goal-confetti<Scene [BufferGeometry v4 map512x256 dt1 dw0 side0 ro3]",
+     "material": "SpriteMaterial"
+    },
+    {
+     "frame": 50,
+     "ms": 0.1,
+     "object": "soccer-v24-fx-net-ripple<Scene [PlaneGeometry v4 map1024x128 dt1 dw0 side1 ro3]",
+     "material": "MeshBasicMaterial"
+    }
+   ]
+  },
+  {
+   "run": "after, with the v24 warm draw",
+   "extra": "soccerTier=0",
+   "fps": 1.3,
+   "frames": 39,
+   "glMs": {
+    "mean": 13.97,
+    "p50": 5.1,
+    "p95": 49,
+    "p99": 284,
+    "max": 284
+   },
+   "frameMs": {
+    "mean": 779.03,
+    "p50": 783.3,
+    "p95": 1533.2,
+    "p99": 1849.9,
+    "max": 1849.9
+   },
+   "warmup": {
+    "programs": 78,
+    "ms": 2204,
+    "draw": 1217
+   },
+   "assetReadyMs": 6533,
+   "match": {
+    "score": [
+     1,
+     0
+    ],
+    "elapsed": 10.8,
+    "phase": "goal",
+    "events": {
+     "goal": 1,
+     "shot": 1,
+     "pass": 2,
+     "loft": 0,
+     "header": 0,
+     "steal": 0,
+     "save": 0
+    }
+   },
+   "slowDraws": [
+    {
+     "frame": 25,
+     "ms": 275.1,
+     "first": false,
+     "object": "soccer-v24-ball-mesh<soccer-v24-ball<soccer-ball-root<Scene [BufferGeometry v1584 map1024x1024 dt1 dw1 side0 ro0]",
+     "material": "MeshDepthMaterial",
+     "blending": 1
+    }
+   ],
+   "firstDrawStalls": 0,
+   "firstDrawsInWindow": [
+    {
+     "frame": 28,
+     "ms": 0,
+     "object": "Crowd_1<Crowd<LOD0<SoccerStadiumV8 [PlaneGeometry v4 map1024x1024 dt1 dw1 side2 ro0 ud:part,section,hideable,total]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 28,
+     "ms": 0,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 28,
+     "ms": 0.1,
+     "object": "soccer-v24-fx-trail<Scene [BufferGeometry v18 map256x32 dt1 dw0 side1 ro2]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 50,
+     "ms": 0,
+     "object": "Mesh<Group<Scene [PlaneGeometry v4 dt1 dw1 side2 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 50,
+     "ms": 0,
+     "object": "Mesh<Group<Scene [ConeGeometry v15 dt1 dw1 side2 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 54,
+     "ms": 0.1,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 57,
+     "ms": 0,
+     "object": "Mesh<Scene [RingGeometry v66 dt1 dw0 side1 ro0]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 57,
+     "ms": 0.1,
+     "object": "Sprite<Scene [BufferGeometry v4 map512x512 dt1 dw0 side0 ro0]",
+     "material": "SpriteMaterial"
+    },
+    {
+     "frame": 58,
+     "ms": 0,
+     "object": "Crowd_7<Crowd<LOD0<SoccerStadiumV8 [PlaneGeometry v4 map1024x1024 dt1 dw1 side2 ro0 ud:part,section,hideable,total]",
+     "material": "MeshBasicMaterial"
+    },
+    {
+     "frame": 58,
+     "ms": 0,
+     "object": "soccer-v24-fx-goal-confetti<Scene [BufferGeometry v4 map512x256 dt1 dw0 side0 ro3]",
+     "material": "SpriteMaterial"
+    },
+    {
+     "frame": 58,
+     "ms": 0,
+     "object": "soccer-v24-fx-net-ripple<Scene [PlaneGeometry v4 map1024x128 dt1 dw0 side1 ro3]",
+     "material": "MeshBasicMaterial"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1003 @@
+{
+  "schemaVersion": 1,
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "qaFiles": [
+    {
+      "path": "workout/island/design/motion-qa-v1/run.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+      "bytes": 12713
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+      "bytes": 15655
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sources.json",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+      "bytes": 1709
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "bytes": 36189
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/glb.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "bytes": 9363
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/report.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+      "bytes": 15342
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+      "bytes": 5947
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+      "bytes": 3539
+    }
+  ],
+  "qaInvocation": "Original motion-qa-v1/run.mjs --library soccer-clips-v13 --fps 120; only sources.mjs redirected by Node hook",
+  "compatibility": {
+    "canonicalMainDefinition": true,
+    "motionFixV12": {
+      "commit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "path": "workout/island/design/motion-fix-v12/runtime/soccer-v10/run.motion-fix-v12.glb",
+      "sha256": "9bc4d5e83321b915a3ba6099d0f373ed6d7a54fb2ee083a2107ba5bc33a21919",
+      "matches": true
+    }
+  },
+  "referenceRows": [
+    "idle_relaxed",
+    "idle_keeper"
+  ],
+  "clips": 8,
+  "minimumScore": 89,
+  "redMetrics": 0,
+  "maxHorizontalFootDriftMeters": 0.005792,
+  "maxSupportDrift3DMeters": 0.005792405938061637,
+  "checks": [
+    {
+      "id": "keeper_celebrate",
+      "score": 97.7,
+      "duration": 1.8,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 1.301830355057818e-7,
+        "maxHipsErrorMeters": 3.3010600919425315e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 217,
+          "maxDrift3DMeters": 0.000015199657415822301,
+          "maxFloorErrorMeters": 0.0000151516196646162
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 217,
+          "maxDrift3DMeters": 0.000015227275119275316,
+          "maxFloorErrorMeters": 0.000015079185254548988
+        }
+      ],
+      "contact": null
+    },
+    {
+      "id": "goal_kick",
+      "score": 92.4,
+      "duration": 1.6,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 4.1512981932375316e-7,
+        "maxHipsErrorMeters": 3.64578603972987e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 61,
+          "maxDrift3DMeters": 0.0015805708659975533,
+          "maxFloorErrorMeters": 0.001558609604061137
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.7,
+          "end": 1.27,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            0.065
+          ],
+          "samples": 70,
+          "maxDrift3DMeters": 0.0005407325041360543,
+          "maxFloorErrorMeters": 0.000034982159728677575
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.4,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 25,
+          "maxDrift3DMeters": 3.2584473544885606e-8,
+          "maxFloorErrorMeters": 4.815759721554791e-8
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.57,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 70,
+          "maxDrift3DMeters": 0.003532265986238579,
+          "maxFloorErrorMeters": 0.0015457043832097783
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.37,
+          "end": 1.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 29,
+          "maxDrift3DMeters": 0.0011069450808709337,
+          "maxFloorErrorMeters": 0.00016949395760187946
+        }
+      ],
+      "contact": {
+        "type": "contact",
+        "event": "contact",
+        "time": 1,
+        "frame": 30,
+        "bone": "RightFoot",
+        "local": [
+          0,
+          0.015,
+          0.125
+        ],
+        "position": [
+          -0.13,
+          0.11012186020026335,
+          0.39224022880408826
+        ],
+        "ballCenter": [
+          -0.13,
+          0.11012186020026335,
+          0.5022402288040883
+        ],
+        "contactPoint": [
+          -0.12999999978001528,
+          0.11012188423882663,
+          0.3922402229247175
+        ],
+        "gapMeters": 5.879373363160134e-9
+      }
+    },
+    {
+      "id": "keeper_throw",
+      "score": 94.3,
+      "duration": 1.2,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 2.0087900910461226e-7,
+        "maxHipsErrorMeters": 2.998404870845863e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 145,
+          "maxDrift3DMeters": 0.00019962354750825893,
+          "maxFloorErrorMeters": 0.00009662335955272494
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 145,
+          "maxDrift3DMeters": 0.00021772308707479056,
+          "maxFloorErrorMeters": 0.0000988751057195425
+        }
+      ],
+      "contact": {
+        "type": "release",
+        "event": "release",
+        "time": 0.7,
+        "frame": 21,
+        "bone": "RightHand",
+        "local": [
+          0,
+          -0.065,
+          0.015
+        ],
+        "position": [
+          -0.17835928541405532,
+          1.56383163920392,
+          0.3981243671036131
+        ],
+        "ballCenter": [
+          -0.17835928853870775,
+          1.5638316496417908,
+          0.5081243474893786
+        ],
+        "contactPoint": [
+          -0.17835928333797957,
+          1.563831634769838,
+          0.3981243696115423
+        ],
+        "gapMeters": 2.2122162546267532e-8
+      }
+    },
+    {
+      "id": "slide_tackle",
+      "score": 89,
+      "duration": 1,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 1.407197420673578e-7,
+        "maxHipsErrorMeters": 5.578784090443113e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 13,
+          "maxDrift3DMeters": 0.00017137827861292497,
+          "maxFloorErrorMeters": 0.00017125250449580298
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.33,
+          "end": 0.53,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.13,
+            0,
+            -0.225
+          ],
+          "samples": 26,
+          "maxDrift3DMeters": 0.005792405938061637,
+          "maxFloorErrorMeters": 0.000015274601070661142
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.9,
+          "end": 1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 13,
+          "maxDrift3DMeters": 9.97299811160831e-9,
+          "maxFloorErrorMeters": 3.8468073795816515e-8
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 13,
+          "maxDrift3DMeters": 0.00017165623263044565,
+          "maxFloorErrorMeters": 0.00017028477713301737
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.9,
+          "end": 1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 13,
+          "maxDrift3DMeters": 1.0689659491859518e-8,
+          "maxFloorErrorMeters": 3.82509966201372e-8
+        }
+      ],
+      "contact": {
+        "type": "contact",
+        "event": "contact",
+        "time": 0.4,
+        "frame": 12,
+        "bone": "RightFoot",
+        "local": [
+          0,
+          -0.025,
+          0.125
+        ],
+        "position": [
+          -0.13000000000000003,
+          0.11486209961515034,
+          0.7423719042003981
+        ],
+        "ballCenter": [
+          -0.13000000000000003,
+          0.11486209961515034,
+          0.8523719042003981
+        ],
+        "contactPoint": [
+          -0.13000000432387093,
+          0.11486204772117181,
+          0.7423718997000265
+        ],
+        "gapMeters": 4.500383926631102e-9
+      }
+    },
+    {
+      "id": "lob_pass",
+      "score": 95.9,
+      "duration": 1.2,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 1.6526134060553425e-7,
+        "maxHipsErrorMeters": 2.9297977775510453e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 147,
+          "maxDrift3DMeters": 0.00008582823152217443,
+          "maxFloorErrorMeters": 0.000046883488316870614
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.17,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 22,
+          "maxDrift3DMeters": 0.0027304168973278915,
+          "maxFloorErrorMeters": 0.0007101941266160483
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.03,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 22,
+          "maxDrift3DMeters": 0.002261850497268788,
+          "maxFloorErrorMeters": 0.0011796005163133283
+        }
+      ],
+      "contact": {
+        "type": "contact",
+        "event": "contact",
+        "time": 0.6,
+        "frame": 18,
+        "bone": "RightFoot",
+        "local": [
+          0,
+          0.025,
+          0.125
+        ],
+        "position": [
+          -0.13,
+          0.15000542054115867,
+          0.3565328169854505
+        ],
+        "ballCenter": [
+          -0.13,
+          0.2380054205411587,
+          0.4225328169854505
+        ],
+        "contactPoint": [
+          -0.13000000166344547,
+          0.15000541344233248,
+          0.35653280299106593
+        ],
+        "gapMeters": 1.4075691931458856e-8
+      }
+    },
+    {
+      "id": "chest_control",
+      "score": 98.2,
+      "duration": 1.2,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 4.051269465281623e-8,
+        "maxHipsErrorMeters": 2.7088451668481825e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 145,
+          "maxDrift3DMeters": 0.00007067319535136699,
+          "maxFloorErrorMeters": 0.00006697375976558173
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 145,
+          "maxDrift3DMeters": 0.00007314204614141347,
+          "maxFloorErrorMeters": 0.00007141982139180492
+        }
+      ],
+      "contact": {
+        "type": "receive",
+        "event": "receive",
+        "time": 0.6,
+        "frame": 18,
+        "bone": "Chest",
+        "local": [
+          0,
+          0.055,
+          0.095
+        ],
+        "position": [
+          0,
+          1.2232576595199287,
+          0.03810498051891004
+        ],
+        "ballCenter": [
+          0,
+          1.2232576595199287,
+          0.14810498051891002
+        ],
+        "contactPoint": [
+          0,
+          1.223257658209443,
+          0.03810498313976875
+        ],
+        "gapMeters": 2.620858724489139e-9
+      }
+    },
+    {
+      "id": "volley",
+      "score": 92.8,
+      "duration": 1.2,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 2.3208038314923152e-7,
+        "maxHipsErrorMeters": 2.9297977775510453e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 147,
+          "maxDrift3DMeters": 0.00010821407981321576,
+          "maxFloorErrorMeters": 0.00008409052664659633
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.17,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 22,
+          "maxDrift3DMeters": 0.0027304655781981053,
+          "maxFloorErrorMeters": 0.0007103610618812706
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.03,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 22,
+          "maxDrift3DMeters": 0.0026651035991239564,
+          "maxFloorErrorMeters": 0.0017863405147527933
+        }
+      ],
+      "contact": {
+        "type": "contact",
+        "event": "contact",
+        "time": 0.6,
+        "frame": 18,
+        "bone": "RightFoot",
+        "local": [
+          0,
+          -0.025,
+          0.125
+        ],
+        "position": [
+          -0.14,
+          0.6175964627957528,
+          0.5911566396775206
+        ],
+        "ballCenter": [
+          -0.14,
+          0.6175964627957528,
+          0.7011566396775206
+        ],
+        "contactPoint": [
+          -0.14000000427231057,
+          0.6175964239327837,
+          0.5911565964933906
+        ],
+        "gapMeters": 4.318413697468326e-8
+      }
+    },
+    {
+      "id": "throw_in",
+      "score": 94,
+      "duration": 1.4,
+      "assertions": {
+        "assetHash": true,
+        "motionHash": true,
+        "fullNativePose": true,
+        "canonical18": true,
+        "native30Hz": true,
+        "requestedDuration": true,
+        "fixedRoot": true,
+        "noCompression": true,
+        "score": true,
+        "noRedMetric": true,
+        "completeApplicableMetrics": true,
+        "allSupportSliding": true,
+        "supportsOnFloor": true,
+        "requiredEvents": true,
+        "contactGap": true,
+        "idleBoundary": true,
+        "goalKickGroundBall": true,
+        "volleyAirborne": true,
+        "lobFootBelowBall": true,
+        "slideContactWindow": true,
+        "slideRecovered": true,
+        "overheadTwoHands": true,
+        "throwInBothSoles": true
+      },
+      "nativePoseError": {
+        "maxQuaternionError": 3.669201065582811e-7,
+        "maxHipsErrorMeters": 2.8496287650333108e-8
+      },
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.1299999987317079,
+            2.45136706072957e-8,
+            0.025000010818384485
+          ],
+          "samples": 169,
+          "maxDrift3DMeters": 0.000019116132719371593,
+          "maxFloorErrorMeters": 0.0000176880710513333
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.1299999991119678,
+            2.8197660900675103e-8,
+            -0.024999991747536778
+          ],
+          "samples": 169,
+          "maxDrift3DMeters": 0.000020582761540254757,
+          "maxFloorErrorMeters": 0.00001973556271762933
+        }
+      ],
+      "contact": {
+        "type": "release",
+        "event": "release",
+        "time": 0.8,
+        "frame": 24,
+        "bone": "LeftHand",
+        "local": [
+          0,
+          -0.065,
+          0.015
+        ],
+        "bones": [
+          "LeftHand",
+          "RightHand"
+        ],
+        "position": [
+          0.11199733853762311,
+          1.6255964657003263,
+          0.34351366760458796
+        ],
+        "secondHandPosition": [
+          -0.11199733853762311,
+          1.6255964657003263,
+          0.34351366760458796
+        ],
+        "ballCenter": [
+          0.001997338537623114,
+          1.6255964657003263,
+          0.34351366760458796
+        ],
+        "contactPoint": [
+          0.11199733002966449,
+          1.6255964529151739,
+          0.3435136426205479
+        ],
+        "gapMeters": 8.507955062686534e-9
+      }
+    }
+  ],
+  "failures": [],
+  "passed": true
+}

@@ -167,7 +167,10 @@ function ownColors(T, mesh) {
 /** One player. `cloneRig` clones a skinned hierarchy (soccer-rig cloneSoccerRig / SkeletonUtils clone). `appearance` = {skin: '#hex' | index, hair: '#hex',
  * hairStyle: id}; `kit` the athleteKitFor shape. The root is scaled to `height` metres with the soles on y = 0.
  * Returns {root, meshes: {full, low: []}, materials: {body}, bones, palms, paint(), setLod, lod, lodCount: 1, scale, height, hairStyle, dispose()}. */
-export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearance = {}, kit, style = 'soccer', height = null, track = x => x}) {
+/** `lods` (soccer full match, soccer-full-lod.mjs; absent = one level as before): {body(geometry) -> [middle, far], hair(geometry) -> [middle, null],
+ * farShadows}. The coarser copies are skinned meshes on the same skeleton beside the full ones, with their own colour copy and the same material;
+ * setLod(0|1|2) shows one level (the far level has no hair cap). */
+export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearance = {}, kit, style = 'soccer', height = null, track = x => x, lods = null}) {
   const body = source.bodies[bodyId];
   if (!body) throw Error('Athlete body v22: body not loaded ' + bodyId);
   const root = cloneRig(body.scene), info = body.info;
@@ -177,8 +180,9 @@ export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearanc
   const meshes = [], bones = {};
   root.traverse(o => { if (o.isMesh) meshes.push(o); if (o.isBone) bones[o.name] = o; });
   const geometries = [];
-  const material = source.material;
+  const material = source.material, originals = new Map();
   for (const mesh of meshes) {
+    originals.set(mesh, mesh.geometry);
     geometries.push(track(ownColors(T, mesh)));
     mesh.material = material; mesh.frustumCulled = false; mesh.castShadow = mesh.receiveShadow = true;
     if (mesh.morphTargetInfluences) {
@@ -194,10 +198,29 @@ export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearanc
     const hair = source.hair[hairStyle].clone(true);
     hair.name = 'hair-' + hairStyle; hair.scale.set(info.width, 1, info.depth);
     hair.traverse(o => { if (o.isMesh && !hairMesh) hairMesh = o; });
+    originals.set(hairMesh, hairMesh.geometry);
     geometries.push(track(ownColors(T, hairMesh)));
-    hairMesh.material = material; hairMesh.frustumCulled = false; hairMesh.castShadow = hairMesh.receiveShadow = true;
+    hairMesh.material = material; hairMesh.frustumCulled = false; hairMesh.castShadow = hairMesh.receiveShadow = true; hairMesh.userData.v22Hair = true;
     bones.Head.add(hair);
     meshes.push(hairMesh);
+  }
+  let lod = 0, lodCount = 1;
+  if (lods) {
+    // coarser copies beside every full mesh: same parent, transform, skeleton and bind matrix, so they skin exactly like the full one
+    for (const mesh of [...meshes]) {
+      const chain = mesh.userData.v22Hair ? lods.hair?.(originals.get(mesh)) : lods.body?.(originals.get(mesh));
+      (chain || []).forEach((geometry, i) => {
+        if (!geometry) return;
+        const level = i + 1, low = mesh.isSkinnedMesh ? new T.SkinnedMesh(geometry, mesh.material) : new T.Mesh(geometry, mesh.material);
+        low.name = mesh.name + 'LOD' + level; low.position.copy(mesh.position); low.quaternion.copy(mesh.quaternion); low.scale.copy(mesh.scale);
+        mesh.parent.add(low);
+        if (mesh.isSkinnedMesh) low.bind(mesh.skeleton, mesh.bindMatrix);
+        geometries.push(track(ownColors(T, low)));
+        low.frustumCulled = false; low.castShadow = level < 2 || Boolean(lods.farShadows); low.receiveShadow = true; low.visible = false;
+        low.userData.lod = level; low.userData.v22Hair = Boolean(mesh.userData.v22Hair);
+        meshes.push(low); lodCount = Math.max(lodCount, level + 1);
+      });
+    }
   }
   const current = {skin: appearance.skin, hair: appearance.hair || '#1f1712', kit, style};
   function paint(next = {}) {
@@ -206,7 +229,7 @@ export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearanc
     for (const mesh of meshes) {
       const c = mesh.geometry.attributes.color, regions = mesh.userData.v22Regions;
       if (!c || !regions) continue;
-      paintRegions(c.array, regions, mesh.userData.v22Base, palette, mesh === hairMesh ? V22_REGION.hair : null, c.itemSize);
+      paintRegions(c.array, regions, mesh.userData.v22Base, palette, mesh.userData.v22Hair ? V22_REGION.hair : null, c.itemSize);
       c.needsUpdate = true;
     }
   }
@@ -217,11 +240,17 @@ export function createAthleteV22Instance(T, source, {bodyId, cloneRig, appearanc
     const hand = bones[side + 'Hand'], a = new T.Object3D(); a.name = side + 'Palm';
     a.position.set(side === 'Left' ? 0.03 : -0.03, -0.1, 0.03); hand.add(a); palms[key] = a; palms[key + 'Wrist'] = hand;
   }
-  return {root, meshes: {full: meshes, low: []}, materials: {body: material}, bones, palms, paint, setLod: () => 0, get lod() { return 0; }, lodCount: 1, scale, height: height || info.height, style, bodyId, hairStyle,
+  const setLod = level => {
+    const next = Math.max(0, Math.min(lodCount - 1, Math.floor(level) || 0));
+    if (next === lod) return lod;
+    lod = next; for (const mesh of meshes) mesh.visible = (mesh.userData.lod ?? 0) === lod;
+    return lod;
+  };
+  return {root, meshes: {full: meshes, low: []}, materials: {body: material}, bones, palms, paint, setLod, get lod() { return lod; }, get lodCount() { return lodCount; }, scale, height: height || info.height, style, bodyId, hairStyle,
     dispose() { for (const g of geometries) g.dispose(); root.traverse(o => o.skeleton?.dispose?.()); root.removeFromParent(); }};
 }
 
 /** Triangle count of an instance (full mesh, hair included). */
-export function v22Triangles(inst) {
-  return inst.meshes.full.reduce((n, o) => n + (o.geometry.index?.count || o.geometry.attributes.position.count) / 3, 0);
+export function v22Triangles(inst, level = 0) {
+  return inst.meshes.full.reduce((n, o) => (o.userData.lod ?? 0) === level ? n + (o.geometry.index?.count || o.geometry.attributes.position.count) / 3 : n, 0);
 }

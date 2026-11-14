@@ -1,5 +1,10 @@
 import {whistleFor,whistleAllowedInPhase,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
+import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-12';
 const mixURL=new URL('../design/audio/mix.json',import.meta.url);
+/** v24 Foley (Codex soccer-fx-v1, assets/soccer-v24/fx/audio): mix entries next to the shipped bank, same voice rules. `?soccerFxV1=0` = none. */
+export function soccerV24MixAssets(){
+  return Object.fromEntries(Object.entries(SOCCER_FX_SOUNDS).map(([key,s])=>[key,{file:'../../assets/soccer-v24/fx/audio/'+s.file,label_he:key,loop:false,recommended_gain_db:s.gainDb,recommended_gain_linear:+Math.pow(10,s.gainDb/20).toFixed(6),filters:{},max_voices:s.maxVoices,cooldown_ms:s.cooldownMs,source:{type:'codex-soccer-fx-v1',license:'CC0-1.0'}}]));
+}
 const linear=db=>Math.pow(10,db/20);
 const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
 // The synthetic ambience loop (28 harmonics up to 18 x f0) reads as a 2 kHz hum with whistle-pitched swells: this is the "strange whistle during
@@ -15,13 +20,13 @@ const aliases={kick:'soccer/kick',pass:'soccer/pass',whistle:'soccer/whistle',ne
 /** Soccer's asset mixer. The shell remains the owner of island.sound. */
 /** `show` (soccerShow v1): the goal cheer is a little louder for the child's team and muffled and quiet for a rival goal (the groan the bank has no
  * sample for), and the ambience bed swells with the excitement variable (ball in the box, a goal) instead of staying flat. Same cooldowns, same whistle rules. */
-export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0,bedEnabled=bedOn(),crowdLowpass=crowdHissOn()?null:CROWD_LOWPASS_HZ}={}){
-  let context,master,bedBus,eventBus,bed,loading,disposed=false,paused=false,muted=false,mix=null,excitement=0,lastCrowd=-20,duckUntil=0,duckGain=1,resultPlayed=false,phase=null,bedSwell=1,mood=null;
+export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0,bedEnabled=bedOn(),crowdLowpass=crowdHissOn()?null:CROWD_LOWPASS_HZ,fx=soccerFxV1Enabled(),ballRadius=.11}={}){
+  let context,master,bedBus,eventBus,bed,loading,disposed=false,paused=false,muted=false,mix=null,excitement=0,lastCrowd=-20,duckUntil=0,duckGain=1,resultPlayed=false,phase=null,bedSwell=1,mood=null,lastState=null,previousBallY=null;
   // The whistle gate runs on the wall clock, not context.currentTime: the context
   // is created on the first pointer, after kickoff may already have asked.
   const controller=new AbortController(),buffers=new Map(),voices=new Set(),pending=[],lastPlayed=new Map(),failed=new Set(),inflight=new Map(),counts={},gate=createWhistleGate(WHISTLE_SPACING.soccer);
   const readMute=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
-  const manifest=Promise.resolve().then(()=>fetcher(mixURL,{signal:controller.signal})).then(response=>{if(!response.ok)throw Error('soccer mix unavailable');return response.json();}).then(value=>(mix=value)).catch(()=>null);
+  const manifest=Promise.resolve().then(()=>fetcher(mixURL,{signal:controller.signal})).then(response=>{if(!response.ok)throw Error('soccer mix unavailable');return response.json();}).then(value=>(mix=fx?{...value,assets:{...value.assets,...soccerV24MixAssets()}}:value)).catch(()=>null);
   function fade(param,value,time,seconds){param.cancelScheduledValues(time);param.setTargetAtTime(value,time,Math.max(.005,seconds/3));}
   function sync(force=false){
     const value=readMute(),changed=value!==muted;muted=value;
@@ -58,7 +63,7 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
           if(!mix||disposed)return;
           // Short result cues are ready before the shell disposes a completed
           // session. No other sport's bank is downloaded.
-          await Promise.all(Object.keys(mix.assets).filter(key=>key.startsWith('soccer/')||key.startsWith('scenes/')).map(load));
+          await Promise.all(Object.keys(mix.assets).filter(key=>key.startsWith('soccer/')||key.startsWith('scenes/')||fx&&key.startsWith('v24/')).map(load));
           if(disposed)return;startBed();sync(true);
           const now=context.currentTime;for(const item of pending.splice(0))if(item.expires>=now)voice(item.cue,item.delay,item.priority,{gain:item.scale,lowpass:item.lowpass});
         });
@@ -115,8 +120,11 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
   }
   function event(value){
     if(!value)return;
+    // v24 (soccer-fx-v1): kicks by strength, post and crossbar, the keeper's catch and the net have their own Foley; whistles keep the rules below.
+    const v24=fx&&value.type!=='goal'?soccerFxSound(value,lastState):null;
+    if(v24){play(v24);return;}
     switch(value.type){
-      case 'goal':duck(mix?.layers.soccer_goal);for(const item of mix?.layers.soccer_goal.timeline||[{asset:'soccer/net',at_ms:0},{asset:'soccer/crowd-goal',at_ms:80}])play(item.asset,item.at_ms/1000,3,item.asset==='soccer/crowd-goal'?goalCrowd(value.team):undefined);break;
+      case 'goal':duck(mix?.layers.soccer_goal);for(const item of mix?.layers.soccer_goal.timeline||[{asset:'soccer/net',at_ms:0},{asset:'soccer/crowd-goal',at_ms:80}])play(fx&&item.asset==='soccer/net'?'v24/net-rustle':item.asset,item.at_ms/1000,3,item.asset==='soccer/crowd-goal'?goalCrowd(value.team):undefined);break;
       // Throw-ins, corners and goal kicks stay silent here (whistleFor); play
       // resuming after a goal or half time, half/full time and calls whistle.
       case 'restart':case 'halftime':case 'play':case 'fulltime':case 'kickoff':case 'foul':case 'penalty':whistle(value.type,{detail:value});break;
@@ -127,7 +135,10 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
   return {
     unlock,play,event,whistle,
     update(state,crowdMood=null){
-      if(disposed)return;phase=state?.phase??phase;sync();if(!context||!mix)return;
+      if(disposed)return;phase=state?.phase??phase;lastState=state;
+      // v24: a soft thud when a free ball lands from a real flight (not the dribble's small hops)
+      if(fx&&state?.ball){if(state.phase==='playing'&&soccerBallLanded(previousBallY,state.ball,ballRadius))play('v24/ball-land');previousBallY=state.ball.y;}
+      sync();if(!context||!mix)return;
       const now=context.currentTime;if(duckUntil&&now>=duckUntil){duckUntil=0;duckGain=1;fade(bedBus.gain,1,now,mix.master.duck_release_ms/1000);}
       const ball=state.ball,owner=ball.owner===null?null:state.players[ball.owner],danger=owner?Math.max(0,owner.x*(owner.team===0?state.attackDir:-state.attackDir)/(pitchLength/2)):Math.abs(ball.x)/(pitchLength/2);
       excitement=state.phase==='goal'?1:Math.min(1,danger*.8+(Math.hypot(ball.vx,ball.vz)>10?.2:0));
@@ -139,7 +150,7 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
       if(state.phase==='playing')resultPlayed=false;
     },
     setPaused(value){paused=Boolean(value);pending.length=0;sync(true);if(paused){for(const item of voices)stopVoice(item,0);if(context?.state==='running')void context.suspend().catch(()=>{});}else void unlock();},
-    get snapshot(){return {bank:'design/audio/mix.json',muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),bed:bedEnabled,crowdLowpass,excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
+    get snapshot(){return {bank:'design/audio/mix.json',fxV1:fx,muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),bed:bedEnabled,crowdLowpass,excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
     get ready(){return loading||manifest;},
     dispose({finish=false}={}){
       if(disposed)return;disposed=true;controller.abort();pending.length=0;

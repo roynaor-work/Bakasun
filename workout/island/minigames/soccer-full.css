@@ -1,0 +1,6 @@
+/* Soccer full (11 against 11): the radar in the top right corner, under the HUD, never in the way of a touch. */
+.game-screen[data-game=soccer] .soccer-radar{position:absolute;z-index:2;top:max(10px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:132px;height:86px;border:1px solid #cfe5de40;border-radius:7px;box-shadow:0 4px 14px #0311174d;pointer-events:none;opacity:.94}
+.game-screen[data-game=soccer] .soccer-radar[hidden]{display:none}
+.game-screen[data-game=soccer] .soccer-action-feedback[data-action=advantage]{border-color:#f5e29b8c;color:#fff4c7}
+@media(max-height:380px) and (orientation:landscape){.game-screen[data-game=soccer] .soccer-radar{top:max(8px,env(safe-area-inset-top));width:118px;height:77px}}
+@media(orientation:portrait){.game-screen[data-game=soccer] .soccer-radar{top:calc(112px + env(safe-area-inset-top,0px));width:112px;height:73px}}
