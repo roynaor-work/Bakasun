@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>כדורגל · HUD נקי</title>
+<link rel="icon" href="svg/control-arrow.svg" type="image/svg+xml">
+<link rel="stylesheet" href="preview.css">
+<script src="preview.js" defer></script>
+</head>
+<body>
+<main>
+<header class="review-heading">
+ <p class="eyebrow" dir="ltr">ISLAND / SOCCER / 11 × 11</p>
+ <h1>לראות את המשחק.</h1>
+ <p>שליטה, מסירה וכדור — במבט אחד.</p>
+</header>
+<div class="stage-wrap">
+ <section id="stage" class="stage" aria-label="תצוגת HUD בגודל 844 על 390, פריסת הדגמה של 11 מול 11">
+  <svg class="pitch" viewBox="0 0 844 390" aria-hidden="true">
+   <defs>
+    <linearGradient id="turf" x2="0" y2="1"><stop stop-color="#376954"/><stop offset="1" stop-color="#4e8160"/></linearGradient>
+    <pattern id="stripes" width="156" height="390" patternUnits="userSpaceOnUse"><rect width="78" height="390" fill="#fffdf4" opacity=".035"/></pattern>
+    <radialGradient id="light"><stop stop-color="#e9ba57" stop-opacity=".08"/><stop offset="1" stop-color="#142a35" stop-opacity=".28"/></radialGradient>
+   </defs>
+   <rect width="844" height="390" fill="url(#turf)"/>
+   <rect width="844" height="390" fill="url(#stripes)"/>
+   <path d="M-20 76H864M-62 377H906M410 76l32 301M26 76l-80 301M816 76l80 301" fill="none" stroke="#fffdf4" stroke-width="1.7" opacity=".45"/>
+   <ellipse cx="423" cy="221" rx="88" ry="49" fill="none" stroke="#fffdf4" stroke-width="1.7" opacity=".45"/>
+   <circle cx="423" cy="221" r="2.7" fill="#fffdf4" opacity=".6"/>
+   <path d="M-10 145h119l-10 154H-45M835 145H735l10 154h120M-10 180h45l-7 80h-50M852 180h-45l7 80h50" fill="none" stroke="#fffdf4" stroke-width="1.7" opacity=".4"/>
+   <rect width="844" height="390" fill="url(#light)"/>
+  </svg>
+  <div id="players" aria-label="22 שחקני הדגמה"></div>
+  <div id="ground" class="overlay" aria-hidden="true"></div>
+  <div id="pass-guide" class="overlay" aria-hidden="true"></div>
+  <div id="heads" class="overlay" aria-hidden="true"></div>
+  <div id="ball" class="ball" role="img" aria-label="כדור"></div>
+  <div id="edge" class="overlay" hidden role="img" aria-label="הכדור מחוץ למסך"></div>
+  <div id="scoreboard" class="scoreboard" role="group" aria-label="תוצאה וזמן משחק">
+   <img data-asset="scoreboard-plate" class="score-plate" src="svg/scoreboard-plate.svg" alt="" width="256" height="256">
+   <div class="score-content" dir="ltr"><bdi class="team-name" dir="rtl">בית</bdi><bdi class="score" dir="ltr">1 : 0</bdi><bdi class="team-name" dir="rtl">חוץ</bdi><time id="clock" dir="ltr">34:28</time></div>
+  </div>
+ </section>
+</div>
+<section class="review-tools" aria-label="בקרות תצוגה מקדימה">
+ <div class="toolbar">
+  <label>טבעת <select id="ring"><option value="small">קטנה</option><option value="medium" selected>בינונית</option><option value="large">גדולה</option></select></label>
+  <label>מסירה <select id="pass"><option value="low">חלשה</option><option value="medium" selected>בינונית</option><option value="high">חזקה</option></select></label>
+  <label>מיקום הכדור <select id="ball-position"><option value="inside">בשליטה</option><option value="loose">כדור חופשי</option><option value="right">מחוץ למסך: ימין</option><option value="left">מחוץ למסך: שמאל</option><option value="up">מחוץ למסך: למעלה</option><option value="down">מחוץ למסך: למטה</option><option value="nw">מחוץ למסך: שמאל למעלה</option><option value="ne">מחוץ למסך: ימין למעלה</option><option value="sw">מחוץ למסך: שמאל למטה</option><option value="se">מחוץ למסך: ימין למטה</option></select></label>
+  <label>נשלט <select id="controlled"><option value="h6" selected>קשר</option><option value="h7">חלוץ</option><option value="h3">מגן</option></select></label>
+  <label class="charge-label">בעיטה <input id="charge" type="range" min="0" max="100" value="64"><output id="charge-value" for="charge" dir="ltr">64%</output></label>
+  <label class="check"><input id="open" type="checkbox" checked> שחקן פנוי</label>
+  <button id="format" type="button" aria-pressed="false" dir="ltr">SVG → PNG</button>
+  <button id="lighting" type="button" aria-pressed="false">תאורת ערב</button>
+  <button id="play" type="button" aria-pressed="false">הפעל שעון</button>
+ </div>
+ <p class="legend"><span><i class="dot mint"></i>נשלט</span><span><i class="diamond"></i>חופשי למסירה</span><span><i class="dot paper"></i>קרוב לכדור</span><span><i class="dot gold"></i>כוח בעיטה / כדור מחוץ למסך</span></p>
+ <p class="fixture-note">פריסת שחקנים להמחשת החיוויים · תצוגה עצמאית בגודל <bdi dir="ltr">844 × 390</bdi> · טקסט חי בעברית</p>
+ <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+</section>
+<section class="library" aria-labelledby="library-title">
+ <div class="library-heading"><h2 id="library-title">אותה שפה, בכל חיווי</h2><span dir="ltr">13 ASSETS · SVG + PNG / 256</span></div>
+ <div id="asset-grid" class="asset-grid"></div>
+</section>
+<footer class="review-footer"><a href="manifest.json">מניפסט</a><a href="REPORT.md">דוח ומפרט חיבור</a><a href="LICENSE.txt" dir="ltr">CC0-1.0</a></footer>
+</main>
+</body>
+</html>

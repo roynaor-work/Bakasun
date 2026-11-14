@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-hud-clean-v1",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "scope": "Design assets and standalone preview only",
+  "referenceViewportPx": [
+    844,
+    390
+  ],
+  "radar": false,
+  "canvasPx": [
+    256,
+    256
+  ],
+  "maxFileBytes": 300000,
+  "alpha": "straight RGBA; transparent canvas",
+  "colorSpace": "sRGB",
+  "bakedText": false,
+  "palette": {
+    "ink": "#142a35",
+    "mint": "#b9ddc8",
+    "paper": "#fffdf4",
+    "gold": "#e9ba57",
+    "coral": "#eb947f",
+    "sea": "#24786d"
+  },
+  "styleReferences": [
+    "../../minigames/ultra-soccer-ui.css",
+    "../ui-kit-v2/ui-kit.css",
+    "../../minigames/soccer-view.mjs"
+  ],
+  "coordinates": {
+    "origin": "top-left",
+    "bounds": "[x,y,width,height], canvas pixels",
+    "anchor": "Place anchorPx at the projected target; displayCanvasPx scales the full 256 canvas.",
+    "rotation": "Degrees clockwise, unrotated direction is up for pass/edge arrows; use rotationOriginPx.",
+    "alpha": "Do not add an opaque background. Use premultipliedAlpha=false when uploading straight-alpha textures."
+  },
+  "runtimeText": {
+    "locale": "he",
+    "direction": "rtl",
+    "numbersDirection": "ltr",
+    "strings": {
+      "controlled": "השחקן הנשלט",
+      "open": "חופשי",
+      "nearest": "קרוב לכדור",
+      "shotPower": "עוצמת בעיטה",
+      "offscreen": "הכדור מחוץ למסך",
+      "home": "בית",
+      "away": "חוץ"
+    },
+    "scoreboard": "HTML or game text; isolate each team name with bdi dir=rtl; score and MM:SS in bdi dir=ltr. No text is part of a sprite."
+  },
+  "behavior": {
+    "controlled": "Exactly one ground ring and one overhead arrow. The three ring variants keep the same canvas scale.",
+    "pass": "Show while aiming; low [0,1/3), medium [1/3,2/3), high [2/3,1]. One/two/three tail ticks also encode intensity.",
+    "open": "One suggested eligible teammate at a time; only if unmarked and a clear passing lane. Suppress on controlled player.",
+    "nearest": "Mark the closest visible player to the ball, including opponents; suppress when that player is controlled. Use 0.4m advantage for 150ms before switching.",
+    "shot": "Track and clipped fill beside controlled player only while charging. Clip fill in canvas coordinates; clamp 0..1.",
+    "offscreen": "Hide for visible ball. Intersect direction ray with safe viewport rectangle; do not clamp x/y independently. Clamp center using 34px padding or device safe inset +20px, whichever is larger. Reserve top-left score area and bottom control areas.",
+    "scoreboard": "240x56 logical panel at [16,12]. Clock is a match-state value; paused time does not advance."
+  },
+  "assets": [
+    {
+      "id": "control-ring-small",
+      "role": "controlled-player-ground",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "variant": "small",
+      "layer": 10,
+      "contentBoundsPx": [
+        66,
+        105,
+        124,
+        46
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/control-ring-small.svg",
+          "bytes": 462,
+          "sha256": "78f8b8874e32a6a24cb7216d517fd7e0d7d25241d80b3a8b5446e5ff5e451300"
+        },
+        "png": {
+          "path": "png/control-ring-small.png",
+          "bytes": 5908,
+          "sha256": "e8fe97a5b175d44854cd7cec13761efd2f6952619b4b875d25de95fedf3a5719"
+        }
+      }
+    },
+    {
+      "id": "control-ring-medium",
+      "role": "controlled-player-ground",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "variant": "medium",
+      "layer": 10,
+      "contentBoundsPx": [
+        44,
+        99,
+        168,
+        58
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/control-ring-medium.svg",
+          "bytes": 462,
+          "sha256": "5744d6444416262806ff02a9c8c965da54173e2b77bdaa041ebfe69567888f9d"
+        },
+        "png": {
+          "path": "png/control-ring-medium.png",
+          "bytes": 7724,
+          "sha256": "140731d5ca69356692396cff8d313f7cb52a7140de8abe6de8462b73bd37c5cd"
+        }
+      }
+    },
+    {
+      "id": "control-ring-large",
+      "role": "controlled-player-ground",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "variant": "large",
+      "layer": 10,
+      "contentBoundsPx": [
+        22,
+        93,
+        212,
+        70
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/control-ring-large.svg",
+          "bytes": 446,
+          "sha256": "7ed5d3e249e449a86ad2058a23d3bf5d3d08b4c6c050a52405aa4c82856c7ded"
+        },
+        "png": {
+          "path": "png/control-ring-large.png",
+          "bytes": 9412,
+          "sha256": "f309b0f63bb9fff4af54d823cc81f8a090a72d898c407c698638a2c2c3b7587d"
+        }
+      }
+    },
+    {
+      "id": "control-arrow",
+      "role": "controlled-player-head",
+      "anchorPx": [
+        128,
+        133
+      ],
+      "displayCanvasPx": [
+        88,
+        88
+      ],
+      "layer": 30,
+      "orientation": "down",
+      "contentBoundsPx": [
+        93,
+        91,
+        70,
+        46
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/control-arrow.svg",
+          "bytes": 303,
+          "sha256": "a4d9947edb5416c062302cc351045c9e7c1f3f31890a7af77b8f7fc8e901b283"
+        },
+        "png": {
+          "path": "png/control-arrow.png",
+          "bytes": 3672,
+          "sha256": "bfd75df1dd6a0d345365776ecbf9b13673a6c4697030417a0aed6cdf954d3c3f"
+        }
+      }
+    },
+    {
+      "id": "pass-direction-low",
+      "role": "pass-direction",
+      "anchorPx": [
+        128,
+        234
+      ],
+      "displayCanvasPx": [
+        100,
+        100
+      ],
+      "variant": "low",
+      "strength": 1,
+      "layer": 12,
+      "orientation": "up",
+      "rotationOriginPx": [
+        128,
+        234
+      ],
+      "normalizedStrengthRange": [
+        0,
+        0.3333333333333333
+      ],
+      "contentBoundsPx": [
+        95,
+        60,
+        66,
+        102
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/pass-direction-low.svg",
+          "bytes": 408,
+          "sha256": "4aead11320b12edbbb09639d3a2921dc4635c53637259cec52bc179d1422f496"
+        },
+        "png": {
+          "path": "png/pass-direction-low.png",
+          "bytes": 3757,
+          "sha256": "73234a842b4487eeb975dd3e28ba7bcb69225ab6ffa8812bb5338750f28a87be"
+        }
+      }
+    },
+    {
+      "id": "pass-direction-medium",
+      "role": "pass-direction",
+      "anchorPx": [
+        128,
+        234
+      ],
+      "displayCanvasPx": [
+        100,
+        100
+      ],
+      "variant": "medium",
+      "strength": 2,
+      "layer": 12,
+      "orientation": "up",
+      "rotationOriginPx": [
+        128,
+        234
+      ],
+      "normalizedStrengthRange": [
+        0.3333333333333333,
+        0.6666666666666666
+      ],
+      "contentBoundsPx": [
+        93,
+        58,
+        70,
+        145
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/pass-direction-medium.svg",
+          "bytes": 490,
+          "sha256": "a1328d72d76d7f9dd17c47e8bad861257a9ef17287d07d6b6fb3daa1693a97b0"
+        },
+        "png": {
+          "path": "png/pass-direction-medium.png",
+          "bytes": 4087,
+          "sha256": "f8f373293b497425a19b8edc20e5c3ff0a09f9af998fc792eb6405f2a5402349"
+        }
+      }
+    },
+    {
+      "id": "pass-direction-high",
+      "role": "pass-direction",
+      "anchorPx": [
+        128,
+        234
+      ],
+      "displayCanvasPx": [
+        100,
+        100
+      ],
+      "variant": "high",
+      "strength": 3,
+      "layer": 12,
+      "orientation": "up",
+      "rotationOriginPx": [
+        128,
+        234
+      ],
+      "normalizedStrengthRange": [
+        0.6666666666666666,
+        1
+      ],
+      "contentBoundsPx": [
+        92,
+        57,
+        72,
+        187
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/pass-direction-high.svg",
+          "bytes": 571,
+          "sha256": "bcfaab6783632bad99ae2cb2ffd6dd9ee99be3ab5cf5fc6de1f90900acca4355"
+        },
+        "png": {
+          "path": "png/pass-direction-high.png",
+          "bytes": 3902,
+          "sha256": "59c6951af9c3b0269c554597e2a4669cf812e294f7f1425dce49f66592fa4fa2"
+        }
+      }
+    },
+    {
+      "id": "receiver-open",
+      "role": "unmarked-pass-receiver",
+      "anchorPx": [
+        128,
+        144
+      ],
+      "displayCanvasPx": [
+        82,
+        82
+      ],
+      "layer": 30,
+      "contentBoundsPx": [
+        80,
+        84,
+        96,
+        66
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/receiver-open.svg",
+          "bytes": 405,
+          "sha256": "36c16aa1167bb4c526dff20012944d3f9e883e7a232b14cdbb3ad2a107eea70a"
+        },
+        "png": {
+          "path": "png/receiver-open.png",
+          "bytes": 3199,
+          "sha256": "d06c34929960ba0b74dcbd93aa1d373174305fa0cfa32f20622bd696fbfffb11"
+        }
+      }
+    },
+    {
+      "id": "ball-nearest",
+      "role": "nearest-player-to-ball",
+      "anchorPx": [
+        128,
+        112
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "layer": 11,
+      "contentBoundsPx": [
+        84,
+        80,
+        88,
+        38
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/ball-nearest.svg",
+          "bytes": 396,
+          "sha256": "47f2f7aaf651d138511e657c2eb78cbd5ec9f9e23036ba03a39bfe7617101f52"
+        },
+        "png": {
+          "path": "png/ball-nearest.png",
+          "bytes": 3648,
+          "sha256": "3d908e338960f7bad8e4758335939111b0f74334b63609ccd728d75168393686"
+        }
+      }
+    },
+    {
+      "id": "shot-power-track",
+      "role": "shot-charge-background",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "layer": 30,
+      "fillRectPx": [
+        39,
+        120,
+        178,
+        16
+      ],
+      "contentBoundsPx": [
+        30,
+        111,
+        196,
+        34
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/shot-power-track.svg",
+          "bytes": 322,
+          "sha256": "ba83e800d7d31d69abdbe964fd50f4d8c19a4df890f33c8abf77008638790d17"
+        },
+        "png": {
+          "path": "png/shot-power-track.png",
+          "bytes": 2652,
+          "sha256": "9bb2082ddaf8f7745e655dc1168862e3dc0cc41647d269426c7b98479dff0358"
+        }
+      }
+    },
+    {
+      "id": "shot-power-fill",
+      "role": "shot-charge-fill",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        72,
+        72
+      ],
+      "layer": 31,
+      "fillRectPx": [
+        39,
+        120,
+        178,
+        16
+      ],
+      "clip": "Reveal from x=39 to x=39+178*clamp(charge,0,1); never scale the track.",
+      "contentBoundsPx": [
+        39,
+        120,
+        178,
+        16
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/shot-power-fill.svg",
+          "bytes": 262,
+          "sha256": "d9cad7aec284ce3c60872d0dbbb56201c31f5140e2f09ec42b15223ba102a09b"
+        },
+        "png": {
+          "path": "png/shot-power-fill.png",
+          "bytes": 1269,
+          "sha256": "1cb92825ae1f434b5862f0d8518a95347d84832f759815609867c79fef9930d5"
+        }
+      }
+    },
+    {
+      "id": "ball-offscreen",
+      "role": "offscreen-ball-edge",
+      "anchorPx": [
+        128,
+        128
+      ],
+      "displayCanvasPx": [
+        80,
+        80
+      ],
+      "layer": 40,
+      "orientation": "up",
+      "rotationOriginPx": [
+        128,
+        128
+      ],
+      "contentBoundsPx": [
+        99,
+        64,
+        58,
+        100
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/ball-offscreen.svg",
+          "bytes": 449,
+          "sha256": "f5c621b9fd4e9ee8e4f80c48367aafc136ed86feca6fe0a312379266223a6c97"
+        },
+        "png": {
+          "path": "png/ball-offscreen.png",
+          "bytes": 5392,
+          "sha256": "0a1ca6efcf8acda2d50a4b2e1be97ffec274b2854ab098bbb1d4e9a624446b66"
+        }
+      }
+    },
+    {
+      "id": "scoreboard-plate",
+      "role": "compact-score-and-clock-background",
+      "anchorPx": [
+        8,
+        100
+      ],
+      "displayCanvasPx": [
+        256,
+        256
+      ],
+      "layer": 50,
+      "panelRectPx": [
+        8,
+        100,
+        240,
+        56
+      ],
+      "textSlotsPx": {
+        "home": [
+          30,
+          109,
+          42,
+          36
+        ],
+        "score": [
+          76,
+          109,
+          50,
+          36
+        ],
+        "away": [
+          130,
+          109,
+          30,
+          36
+        ],
+        "clock": [
+          175,
+          109,
+          52,
+          36
+        ]
+      },
+      "contentBoundsPx": [
+        7,
+        99,
+        242,
+        58
+      ],
+      "files": {
+        "svg": {
+          "path": "svg/scoreboard-plate.svg",
+          "bytes": 457,
+          "sha256": "36f888393533d99d82ae599d24e6dc85c80decda84ce9a89ac4ab83a1790097f"
+        },
+        "png": {
+          "path": "png/scoreboard-plate.png",
+          "bytes": 2267,
+          "sha256": "5a82475164594c253749736db5fd74c683bd3db2111f7270623fdec80d090bdf"
+        }
+      }
+    }
+  ]
+}

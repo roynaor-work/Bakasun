@@ -1,0 +1,234 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "viewport": [
+    844,
+    390
+  ],
+  "assets": 13,
+  "assetFiles": 26,
+  "octants": 8,
+  "checks": [
+    "RGBA 256x256",
+    "transparent borders and partial alpha",
+    "SVG has no baked text or external resources",
+    "SHA-256 and byte sizes",
+    "PNG/SVG pixel comparison",
+    "22 player fixture",
+    "unique control/nearest markers",
+    "three ring sizes",
+    "three pass intensities",
+    "open receiver visibility",
+    "power zero/full clipping",
+    "PNG format switch",
+    "paused/running clock",
+    "eight edge directions and reserved areas",
+    "RTL text and LTR numeric isolation",
+    "portrait scaling",
+    "no page errors, missing or external requests",
+    "all files <=300000 bytes"
+  ],
+  "imageMetrics": [
+    {
+      "id": "control-ring-small",
+      "visible": 3201,
+      "clear": 62335,
+      "partial": 497,
+      "border": 0,
+      "bounds": [
+        66,
+        105,
+        124,
+        46
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "control-ring-medium",
+      "visible": 4434,
+      "clear": 61102,
+      "partial": 702,
+      "border": 0,
+      "bounds": [
+        44,
+        99,
+        168,
+        58
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "control-ring-large",
+      "visible": 5664,
+      "clear": 59872,
+      "partial": 880,
+      "border": 0,
+      "bounds": [
+        22,
+        93,
+        212,
+        70
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "control-arrow",
+      "visible": 1609,
+      "clear": 63927,
+      "partial": 209,
+      "border": 0,
+      "bounds": [
+        93,
+        91,
+        70,
+        46
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "pass-direction-low",
+      "visible": 2434,
+      "clear": 63102,
+      "partial": 280,
+      "border": 0,
+      "bounds": [
+        95,
+        60,
+        66,
+        102
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "pass-direction-medium",
+      "visible": 3648,
+      "clear": 61888,
+      "partial": 517,
+      "border": 0,
+      "bounds": [
+        93,
+        58,
+        70,
+        145
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "pass-direction-high",
+      "visible": 4857,
+      "clear": 60679,
+      "partial": 412,
+      "border": 0,
+      "bounds": [
+        92,
+        57,
+        72,
+        187
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "receiver-open",
+      "visible": 2862,
+      "clear": 62674,
+      "partial": 506,
+      "border": 0,
+      "bounds": [
+        80,
+        84,
+        96,
+        66
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "ball-nearest",
+      "visible": 1300,
+      "clear": 64236,
+      "partial": 246,
+      "border": 0,
+      "bounds": [
+        84,
+        80,
+        88,
+        38
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "shot-power-track",
+      "visible": 6422,
+      "clear": 59114,
+      "partial": 6422,
+      "border": 0,
+      "bounds": [
+        30,
+        111,
+        196,
+        34
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "shot-power-fill",
+      "visible": 2816,
+      "clear": 62720,
+      "partial": 60,
+      "border": 0,
+      "bounds": [
+        39,
+        120,
+        178,
+        16
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "ball-offscreen",
+      "visible": 3920,
+      "clear": 61616,
+      "partial": 322,
+      "border": 0,
+      "bounds": [
+        99,
+        64,
+        58,
+        100
+      ],
+      "meanChannelDifference": 0
+    },
+    {
+      "id": "scoreboard-plate",
+      "visible": 13909,
+      "clear": 51627,
+      "partial": 13813,
+      "border": 0,
+      "bounds": [
+        7,
+        99,
+        242,
+        58
+      ],
+      "meanChannelDifference": 0
+    }
+  ],
+  "screenshots": [
+    "verification/preview-844x390.png",
+    "verification/loose-ball-844x390.png",
+    "verification/offscreen-844x390.png"
+  ],
+  "fileAudit": {
+    "excludes": [
+      "verification/checks.json"
+    ],
+    "fileCount": 38,
+    "totalBytes": 666637,
+    "largest": {
+      "path": "verification/loose-ball-844x390.png",
+      "bytes": 194986
+    }
+  },
+  "errors": [],
+  "badRequests": [],
+  "externalRequests": []
+}

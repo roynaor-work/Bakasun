@@ -1,0 +1,31 @@
+{
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "fullRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4083,
+    "passed": 4017,
+    "failed": 1,
+    "cancelled": 1,
+    "skipped": 64,
+    "durationMs": 451168.02648,
+    "failingFile": "tests/workout-royiki.test.mjs",
+    "reason": "Playwright browser executable missing; HTTP server remains open after launch failure; run stopped after collecting results",
+    "browserInstallAttempt": "Official headless shell download returned HTTP 403 Domain forbidden"
+  },
+  "failedFileRerun": {
+    "file": "tests/workout-royiki.test.mjs",
+    "command": "ISLAND_PLAYWRIGHT=/tmp/soccer-hud-tools/system-chromium.mjs node --test tests/workout-royiki.test.mjs",
+    "browser": "/usr/bin/chromium",
+    "exitCode": 0,
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 21310.901561,
+    "configuration": "Temporary adapter sets executablePath on Playwright launch; all test assertions and repository files unchanged"
+  },
+  "fullSuiteRerunAfterEnvironmentFix": false,
+  "hudVerification": "verification/checks.json"
+}
