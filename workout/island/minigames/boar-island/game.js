@@ -62,7 +62,7 @@ function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCa
   weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
 function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
-let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
+let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false,qaHold=false;// qaHold: QA only (__boar.hold), the touch bot stops the clock while it "thinks"
 const SAVE_KEY='boar-island-v1';
 let save;try{save=sanitizeSave(JSON.parse(localStorage.getItem(SAVE_KEY)));}catch{save=freshSave();}
 function persist(){if(benchActive)return;try{localStorage.setItem(SAVE_KEY,JSON.stringify(save));}catch{$('save-note').textContent='השמירה אינה זמינה בדפדפן הזה';}}
@@ -859,7 +859,7 @@ let shakeT=0,basePitch=-.075,frozenCam=false;
 function frame(t){
   if(islandDisposed)return;
   islandFrame=requestAnimationFrame(frame);
-  if(islandPaused){lastTime=t;return;}
+  if(islandPaused||qaHold){lastTime=t;return;}
   frames++;
   if(visible&&lastTime)adapt(t-lastTime);const raw=Math.min(.05,(t-lastTime)/1000||.016);lastTime=t;if(!visible)return;
   slowmo=Math.max(0,slowmo-raw);const dt=raw*(slowmo>0?.35:1);elapsed+=dt;world.update(elapsed);weather.update(raw);
@@ -994,7 +994,8 @@ function installQA(){
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},record(on){trace=on?[]:null;},trace(){const t=trace||[];if(trace)trace=[];return t;},weapon(k){switchWeapon(k);},
     // 14/11/2026 (v24): read-only eyes for the touch bot (what a child sees: the crosshair and the boars on the screen); nothing here changes the game.
-    clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},
+    // hold(true) stops the frame loop (no update, no render; input events still arrive), so a slow test machine adds no input delay in game time
+    hold(on){qaHold=!!on;},clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},
     view(){camera.updateMatrixWorld();const h=castShot(aimRay(),TOUCH?1.35:1),W=innerWidth,H=innerHeight,f=v=>+v.toFixed(1);
       return {t:+elapsed.toFixed(4),frames,mode,shots:roundShots,hits:roundHits,crits:roundCrits,killed,heat:+(wstate[current]?.heat||0).toFixed(1),overheated:!!wstate[current]?.overheated,cx:+((pointer.x*.5+.5)*W).toFixed(2),cy:+((-pointer.y*.5+.5)*H).toFixed(2),
         on:h.e?(h.e.qa||(h.e.qa=++qaSeq)):0,crit:!!h.crit,fireHeld:firePointer!==null,stick:aimStick?{ox:f(aimStick.ox),oy:f(aimStick.oy)}:null,aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,

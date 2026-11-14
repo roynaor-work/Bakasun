@@ -94,6 +94,9 @@ test('boars v24: wired into game.js behind ?boarAim=v23, forwarded by the island
   assert.match(src,/if\(AIM_V24\)\{stickMove24\(e,ring,knob,R\);return;\}/);
   assert.equal((src.match(/aim24\.step\(/g)||[]).length,1,'one call site');assert.doesNotMatch(src,/fireBtn\.addEventListener\([^)]*aim24/,'the fire button never moves the crosshair');
   assert.match(src,/view\(\)\{camera\.updateMatrixWorld\(\);const h=castShot\(aimRay\(\),TOUCH\?1\.35:1\)/,'the QA eyes of the touch bot (read only, under ?qa)');
+  // the bot's clock stop exists only as a QA hook: set in one place (installQA), read in the frame loop
+  assert.deepEqual(src.match(/qaHold=[^;,]*/g),['qaHold=false','qaHold=!!on']);assert.match(src,/if\(islandPaused\|\|qaHold\)\{lastTime=t;return;\}/);
+  assert.ok(src.indexOf('hold(on){qaHold=!!on;}')>src.indexOf('function installQA(){'),'hold() is part of installQA (only with ?qa)');
   assert.match(session,/if\(aim==='v23'\|\|aim==='axes'\)url\.searchParams\.set\('boarAim',aim\);/);
   assert.ok(offline.shell.includes('minigames/boar-island/aim-v24.mjs'),'offline shell lists aim-v24.mjs');
   assert.match(src,/AIM_V24\?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק\. ':''/,'the in-game help tells the child');

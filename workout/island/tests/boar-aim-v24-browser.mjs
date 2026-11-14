@@ -37,8 +37,10 @@ const fingers=new Map();const active=()=>[...fingers.entries()].map(([id,p])=>({
 const down=async(id,p)=>{fingers.set(id,p);await send('touchStart',active());};
 const move=async(id,p)=>{fingers.set(id,p);await send('touchMove',active());};
 const up=async id=>{const p=fingers.get(id);if(!p)return;fingers.delete(id);await send('touchEnd',[{...p,id}]);};
-// wait in the page until game time t, recording per frame which boar the crosshair ray hits; returns the view at the end
-const until=(t,id=0)=>frame.evaluate(([t,id])=>new Promise(res=>{const on=[];const f=()=>{const c=window.__boar.clock();on.push([+c.t.toFixed(4),window.__boar.hit()]);if(c.t>=t||c.mode!=='battle')res({view:window.__boar.view(),on});else requestAnimationFrame(f);};requestAnimationFrame(f);}),[t,id]);
+// run the game in the page until game time t, recording per frame which boar the crosshair ray hits; then stop its clock (__boar.hold) and return
+// the view. The bot decides and its touches arrive while the clock stands, so a slow machine adds no input delay in game time (a phone runs in
+// real time); the child's own delays (seeing, reacting, moving the thumb) are in the bot.
+const until=t=>frame.evaluate(t=>new Promise(res=>{const on=[];window.__boar.hold(false);const f=()=>{const c=window.__boar.clock();on.push([+c.t.toFixed(4),window.__boar.hit()]);if(c.t>=t||c.mode!=='battle'){window.__boar.hold(true);res({view:window.__boar.view(),on});}else requestAnimationFrame(f);};requestAnimationFrame(f);}),t);
 const clock=()=>frame.evaluate(()=>window.__boar.clock());
 await frame.evaluate(()=>window.__boar.sandbox(1));await frame.waitForFunction(()=>!document.getElementById('fire-btn').hidden);
 const env=await frame.evaluate(()=>({flags:window.__boar.state.flags,aimMode:window.__boar.state.aimMode,coarse:matchMedia('(pointer:coarse)').matches,fire:(()=>{const r=document.getElementById('fire-btn').getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})(),W:innerWidth,H:innerHeight}));
@@ -51,6 +53,7 @@ async function speedAt(dx,dy=0,{o={x:150,y:290},settle=.15,span=.25}={}){ // px/
   await setAim(env.W*.3,env.H*.35);await down(1,o);await move(1,{x:o.x+dx,y:o.y+dy});let c=await clock();let a=(await until(c.t+settle)).view;const b=(await until(a.t+span)).view;await up(1);await until(b.t+.06);
   return {vx:+((b.cx-a.cx)/(b.t-a.t)).toFixed(1),vy:+((b.cy-a.cy)/(b.t-a.t)).toFixed(1)};}
 await frame.evaluate(()=>window.__boar.killAll());
+if(!process.env.SKIP_STICK){
 {const S={};for(const d of [5,7,9,12,16,24,40,60,80,100])S[d]=(await speedAt(d)).vx;results.stick.speedRight=S;
  S.up80=(await speedAt(0,-80)).vy;S.diag80=await speedAt(57,-57);log('speeds px/s',JSON.stringify(S));
  const dz=[5,7,9,12].find(d=>Math.abs(S[d])>.5)??null;results.stick.deadZonePx=dz;}
@@ -67,6 +70,7 @@ await frame.evaluate(()=>window.__boar.killAll());
  const st=await frame.evaluate(()=>window.__boar.state);
  results.stick.fastFlick={cxAtComeBack:b.cx,cxAfter:samples.map(s=>s.cx),wrongWayPx:+(Math.max(...samples.map(s=>s.cx))-b.cx).toFixed(1),turnsBackAfter:turn?turn.t:null};
  log('fast flick',JSON.stringify(results.stick.fastFlick));}
+}
 // ---------------- B. the child bot, one boar at a time ----------------
 const P=AIM==='v24'?AIM24:V23,speedOf=(ux,uy)=>topSpeed(ux,uy,env.W,env.H,P),curve=m=>stickCurve(m,P);
 let anchor=null;const bot=createKidBot({seed:SEED,sigmaDeg:SIGMA,speedOf,curve,R:P.R,anchor:()=>anchor});
@@ -74,6 +78,8 @@ const r=rng(SEED*7919+13);let thumbDown=false,fireDown=false;
 async function apply(d){
   if(d.thumb&&!thumbDown){await down(1,d.thumb);thumbDown=true;}else if(d.thumb)await move(1,d.thumb);else if(thumbDown){await up(1);thumbDown=false;}
   if(d.fire&&!fireDown){await down(2,env.fire);fireDown=true;}else if(!d.fire&&fireDown){await up(2);fireDown=false;}}
+// the game records the crosshair every frame while the bot aims (not over the set-up placement): the largest per-frame speed shows whether the help ever makes it jump
+const frameSpeeds=[];const collect=tr=>{for(let i=1;i<tr.length;i++){const dt=tr[i].dt;if(!tr[i].s||!tr[i-1].s||dt<=0)continue;frameSpeeds.push(Math.hypot((tr[i].x-tr[i-1].x)*env.W/2,(tr[i].y-tr[i-1].y)*env.H/2)/dt);}};
 for(let n=0;n<TRIALS;n++){
   const kind=n%2?'moving':'standing';await frame.evaluate(()=>window.__boar.killAll());if(fireDown){await up(2);fireDown=false;}
   let c=await clock();let v=(await until(c.t+.4)).view;// pause between boars, no target (the bot may lift its thumb)
@@ -81,17 +87,20 @@ for(let n=0;n<TRIALS;n++){
   await frame.evaluate(([k,z])=>window.__boar.spawn(k,z),kind==='standing'?['mortar',-28]:['runner',-60]);
   v=(await until(v.t+.1)).view;const tg0=v.targets[0];if(!tg0){log('no target');continue;}const id=tg0.id;
   for(let k=0;k<50;k++){const a=r()*Math.PI*2,d=140+r()*180,x=tg0.x+Math.cos(a)*d,y=tg0.y+Math.sin(a)*d*.6;if(x>30&&x<env.W-30&&y>40&&y<env.H-40){await setAim(x,y);break;}}
-  v=(await until(v.t+.05)).view;const t0=v.t,shots0=v.shots,hits0=v.hits;let tMove=null,tOn=null,onRun=0,lastT=t0,killed=false,strokes=null;
+  v=(await until(v.t+.05)).view;await frame.evaluate(()=>window.__boar.record(true));const t0=v.t,shots0=v.shots,hits0=v.hits;let tMove=null,tOn=null,onRun=0,lastT=t0,killed=false,strokes=null;
   while(v.t-t0<6){const tg=v.targets.find(t=>t.id===id);if(!tg){killed=true;break;}
     anchor=v.stick?{x:v.stick.ox,y:v.stick.oy}:null;
     const rb=Math.max(...tg.zones.map(z=>z.r));const d=bot.tick({t:v.t,cx:v.cx,cy:v.cy,target:{id,x:tg.x,y:tg.y,rv:rb/1.35}});await apply(d);
     if(tMove===null&&bot.moved)tMove=v.t;
+    if(process.env.DEBUG)log(`  t${(v.t-t0).toFixed(2)} c(${v.cx.toFixed(0)},${v.cy.toFixed(0)}) tg(${tg.x.toFixed(0)},${tg.y.toFixed(0)}) r${rb.toFixed(1)} D${Math.hypot(tg.x-v.cx,tg.y-v.cy).toFixed(0)} thumb${d.thumb?`(${d.thumb.x.toFixed(0)},${d.thumb.y.toFixed(0)})`:'-'} anc${anchor?`(${anchor.x.toFixed(0)},${anchor.y.toFixed(0)})`:'-'} fire${d.fire?1:0} on${v.on===id?1:0} ${JSON.stringify(v.assist)}`);
     const w=await until(v.t+bot.step);
     for(const [t,on] of w.on){if(t<=lastT)continue;onRun=on===id?onRun+(t-lastT):0;lastT=t;if(tOn===null&&onRun>=.1){tOn=t;strokes=bot.strokes;}}
     v=w.view;if(v.mode!=='battle')break;}
   const row={kind,aimTime:tOn===null?null:+(tOn-.1-(tMove??t0)).toFixed(3),totalTime:tOn===null?null:+(tOn-.1-t0).toFixed(3),strokes,shots:v.shots-shots0,hits:v.hits-hits0,killed,gameTime:+(v.t-t0).toFixed(2)};
+  collect(await frame.evaluate(()=>{const t=window.__boar.trace();window.__boar.record(false);return t;}));
   results.trials.push(row);log('trial',n,JSON.stringify(row));}
 if(fireDown)await up(2);if(thumbDown)await up(1);
+{results.stick.trialFrames={frames:frameSpeeds.length,maxPxPerS:+Math.max(0,...frameSpeeds).toFixed(1),p99PxPerS:+([...frameSpeeds].sort((a,b)=>a-b)[Math.floor(frameSpeeds.length*.99)]||0).toFixed(1)};log('trial frames',JSON.stringify(results.stick.trialFrames));}
 // summary
 const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0),med=a=>{const s=[...a].sort((x,y)=>x-y);return s.length?s.length%2?s[(s.length-1)/2]:(s[s.length/2-1]+s[s.length/2])/2:null;};
 results.summary={};for(const k of ['all','standing','moving']){const rs=results.trials.filter(x=>k==='all'||x.kind===k);if(!rs.length)continue;const shots=sum(rs,x=>x.shots),hits=sum(rs,x=>x.hits),aim=rs.map(x=>x.aimTime??6);
