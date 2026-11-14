@@ -95,23 +95,27 @@ async function playRoom(t,run,name){
 /** The rest of the street stage: fires one by one (tap the marker, drive, hold the hose in bursts), the hydrant when water is low, finish. */
 async function finishStreet(t,run,name){
   let s=await t.snap();const spray=await t.center('#shoot');const trace=[];let shotDone=false;
+  const hydrantPoint=()=>t.page.evaluate(()=>{const d=window.__island.games.current?.session.debug;if(!d)return null;const m=d.model,hp=[...m.balance.city.hydrants].sort((a,b)=>Math.hypot(a[0]-m.truck.x,a[2]-m.truck.z)-Math.hypot(b[0]-m.truck.x,b[2]-m.truck.z))[0];const p=d.view.projectWorld(hp);return p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390?p:null;});
   for(let guard=0;guard<900;guard++){
-    s=await t.snap();if(!s)break;if(guard%20===0)trace.push({time:+s.time.toFixed(1),remaining:Math.ceil(s.remaining),water:Math.round(s.water),active:s.flames.filter(f=>f.active&&f.heat>0).length,canFinish:s.canFinish});
+    s=await t.snap();if(!s)break;if(guard%15===0)trace.push({time:+s.time.toFixed(1),remaining:Math.ceil(s.remaining),water:Math.round(s.water),active:s.flames.filter(f=>f.active&&f.heat>0).length,canFinish:s.canFinish});
     if(s.canFinish){await t.tapEl('#fire-finish');for(let i=0;i<30;i++){await t.tick(100);if(await t.page.locator('[data-result=fireRescue]').count())break;}break;}
-    if(s.water/s.maxWater<.3&&!s.atHydrant){ // the nearest hydrant's marker on the screen (the edge arrow when it is off screen)
-      const h=s.indicators.find(a=>a.kind==='hydrant')||await t.page.evaluate(()=>{const d=window.__island.games.current.session.debug,m=d.model,hp=[...m.balance.city.hydrants].sort((a,b)=>Math.hypot(a[0]-m.truck.x,a[2]-m.truck.z)-Math.hypot(b[0]-m.truck.x,b[2]-m.truck.z))[0];const p=d.view.projectWorld(hp);return p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390?p:null;});if(h){await t.tapAt(h.x,h.y);for(let i=0;i<120;i++){await t.tick(100);const n=await t.snap();if(n.atHydrant&&!n.truck.driving){for(let k=0;k<40;k++){await t.tick(100);const w=await t.snap();if(w.water/w.maxWater>.9)break;}break;}}continue;}}
-    const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);if(!fires.length){await t.tick(200);continue;}
+    const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);
     const near=fires.filter(f=>Math.hypot(f.x-s.nozzle.x,f.y-s.nozzle.y)<=s.range*.85);
-    if(near.length&&!s.truck.driving){await t.touch('touchStart',2,spray.x,spray.y);for(let i=0;i<25;i++){await t.tick(100);const n=await t.snap();if(!n||n.pressureEmpty||n.water<=0)break;}await t.touch('touchEnd',2);if(!shotDone){shotDone=true;run.shots.push(await t.shot(name+'-street-spray'));}await t.tick(250);continue;}
+    // hold the hose on a near fire (the aim follows the nearest flame); a short release when the pump is empty
+    if(near.length&&!s.truck.driving&&s.water>0){await t.touch('touchStart',2,spray.x,spray.y);for(let i=0;i<60;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.pressureEmpty){await t.touch('touchEnd',2);await t.tick(400);await t.touch('touchStart',2,spray.x,spray.y);}
+        if(n.water<=0||!n.flames.some(f=>f.active&&f.heat>0&&Math.hypot(f.x-n.nozzle.x,f.y-n.nozzle.y)<=n.range*.85))break;}await t.touch('touchEnd',2);if(!shotDone){shotDone=true;run.shots.push(await t.shot(name+'-street-spray'));}await t.tick(150);continue;}
+    if(s.water/s.maxWater<.25&&!s.atHydrant){const h=s.indicators.find(a=>a.kind==='hydrant')||await hydrantPoint();
+      if(h){await t.tapAt(h.x,h.y);let at=false;for(let i=0;i<150;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.atHydrant&&!n.truck.driving){at=true;break;}if(!n.navigation.active&&i>30)break;}
+        if(at)for(let k=0;k<60;k++){await t.tick(100);const w=await t.snap();if(!w||w.water/w.maxWater>.85)break;}continue;}}
+    if(!fires.length){await t.tick(200);continue;}
     const f=fires.sort((a,b)=>Math.hypot(a.x-s.nozzle.x,a.y-s.nozzle.y)-Math.hypot(b.x-s.nozzle.x,b.y-s.nozzle.y))[0];
     const marker=inView(s.flameScreens[f.i])?s.flameScreens[f.i]:s.indicators.find(a=>a.kind==='fire'&&a.index===f.i);
-    if(marker){await t.tapAt(marker.x,marker.y);for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||!n.navigation.active||n.flames[f.i].heat<=0)break;}}else await t.tick(300);
+    if(marker){await t.tapAt(marker.x,marker.y);for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||!n.navigation.active||n.flames[f.i].heat<=0)break;if(n.flames.some(x=>x.active&&x.heat>0&&Math.hypot(x.x-n.nozzle.x,x.y-n.nozzle.y)<=n.range*.85)&&!n.truck.driving)break;}}else await t.tick(300);
   }
   run.streetTrace=trace;
   run.resultCard=await t.page.locator('[data-result=fireRescue]').count()>0;if(run.resultCard)run.shots.push(await t.shot(name+'-result'));
   run.resultRows=await t.page.evaluate(()=>[...document.querySelectorAll('[data-result=fireRescue] .result-row')].map(r=>r.textContent.trim()));
   run.resultTitle=await t.page.evaluate(()=>document.querySelector('[data-result=fireRescue] h2')?.textContent.trim()||null);run.resultWin=run.resultTitle==='הצלחת!';run.resultStarsRow=Number((run.resultRows.find(r=>r.startsWith('כוכבים'))||'').replace(/\D/g,''))||0;
-  run.resultStars=await t.page.evaluate(()=>{const n=document.querySelector('[data-result=fireRescue] [data-stars]');return n?Number(n.dataset.stars):null;});
 }
 
 try{
