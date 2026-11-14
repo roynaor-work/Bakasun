@@ -102,7 +102,7 @@ function initScript(){
           const neigh=[...bins.subarray(Math.max(floor,khi-nb),Math.max(floor,khi-2)),...bins.subarray(khi+3,Math.min(bins.length,khi+nb))];
           const band=[];for(let k=0;k<6;k++){let e=0;for(let i=Math.max(floor,edges[k]);i<edges[k+1];i++)e+=Math.pow(10,bins[i]/10);band.push(+(e/tot).toFixed(4));}
           let ld=0,ar=0,nf=0;for(let i=f2;i<f8;i++){ld+=bins[i];ar+=Math.pow(10,bins[i]/10);nf++;}const flat=nf&&ar>0?Math.pow(10,ld/nf/10)/(ar/nf):0;
-          F.frames.push({t:+(performance.now()/1000).toFixed(3),ct:+ctx.currentTime.toFixed(2),ctx:meta.id,lvl:+bins[kmax].toFixed(1),dom:Math.round(kmax*hz),s25:+(e25/tot).toFixed(3),s12:+(e12/tot).toFixed(3),hi:{f:Math.round(khi*hz),db:+bins[khi].toFixed(1),prom:+(bins[khi]-med(neigh)).toFixed(1),rel:+(bins[khi]-bins[kmax]).toFixed(1)},ph:window.__phaseProbe?.()??null,bands:band,flat:+flat.toFixed(3),sp:window.__speedProbe?.()??null});
+          F.frames.push({t:+(performance.now()/1000).toFixed(3),ct:+ctx.currentTime.toFixed(2),ctx:meta.id,lvl:+bins[kmax].toFixed(1),dom:Math.round(kmax*hz),s25:+(e25/tot).toFixed(3),s12:+(e12/tot).toFixed(3),hi:{f:Math.round(khi*hz),db:+bins[khi].toFixed(1),prom:+(bins[khi]-med(neigh)).toFixed(1),rel:+(bins[khi]-bins[kmax]).toFixed(1)},ph:window.__phaseProbe?.()??null,bands:band,flat:+flat.toFixed(3),tot:+(10*Math.log10(tot)).toFixed(1),sp:window.__speedProbe?.()??null});
         },50);
       }catch(e){meta.tapError=String(e);}
     }

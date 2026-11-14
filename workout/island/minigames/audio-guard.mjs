@@ -67,12 +67,17 @@ export function hissLike(frames,{share=.15,flatness=.35,seconds=2,minLevelDb=-95
  }
  close();return out;
 }
-/** Mean band shares, flatness and level per speed bucket (standing < 1 m/s, slow < 12, fast) for the frames of the given phases (all when none). */
+/** Mean band shares, flatness and level per speed bucket (standing < 1 m/s, slow < 12, fast) for the frames of the given phases (all when none). Frames that carry
+ * `tot` (the total energy in dB) also give the energy of each band in dB (`db`, the mean energy of the frames, so before/after runs compare on one scale) and of all
+ * the bands above 2 kHz (`above2kDb`). */
 export function summarizeBands(frames,phases=null){
  const live=phases?new Set(phases):null,by={};
- for(const f of frames){if(!f.bands||(live&&!live.has(f.ph)))continue;const k=!Number.isFinite(f.sp)?'all':f.sp<1?'standing':f.sp<12?'slow':'fast',s=by[k]||(by[k]={frames:0,bands:[0,0,0,0,0,0],flat:0,lvl:0,above2k:0});
-  s.frames++;f.bands.forEach((v,i)=>s.bands[i]+=v);s.flat+=f.flat||0;s.lvl+=f.lvl;s.above2k+=f.bands[3]+f.bands[4]+f.bands[5];}
- for(const s of Object.values(by)){s.bands=s.bands.map(v=>+(v/s.frames).toFixed(4));s.flat=+(s.flat/s.frames).toFixed(3);s.lvl=+(s.lvl/s.frames).toFixed(1);s.above2k=+(s.above2k/s.frames).toFixed(4);}
+ for(const f of frames){if(!f.bands||(live&&!live.has(f.ph)))continue;const k=!Number.isFinite(f.sp)?'all':f.sp<1?'standing':f.sp<12?'slow':'fast',s=by[k]||(by[k]={frames:0,bands:[0,0,0,0,0,0],flat:0,lvl:0,above2k:0,energy:[0,0,0,0,0,0],withTot:0});
+  s.frames++;f.bands.forEach((v,i)=>s.bands[i]+=v);s.flat+=f.flat||0;s.lvl+=f.lvl;s.above2k+=f.bands[3]+f.bands[4]+f.bands[5];
+  if(Number.isFinite(f.tot)){const e=Math.pow(10,f.tot/10);f.bands.forEach((v,i)=>s.energy[i]+=e*v);s.withTot++;}}
+ const db=e=>e>0?+(10*Math.log10(e)).toFixed(1):null;
+ for(const s of Object.values(by)){s.bands=s.bands.map(v=>+(v/s.frames).toFixed(4));s.flat=+(s.flat/s.frames).toFixed(3);s.lvl=+(s.lvl/s.frames).toFixed(1);s.above2k=+(s.above2k/s.frames).toFixed(4);
+  if(s.withTot){const mean=s.energy.map(e=>e/s.withTot);s.db=mean.map(db);s.above2kDb=db(mean[3]+mean[4]+mean[5]);}delete s.energy;delete s.withTot;}
  return by;
 }
 

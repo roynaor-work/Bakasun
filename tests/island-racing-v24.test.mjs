@@ -207,3 +207,16 @@ test('offline: the v24 packages are listed one by one, each file byte-identical 
   for(const f of p.licence)assert.ok((await readFile(new URL(`assets/${dir}/${f}`,island))).equals(await readFile(new URL((p.licenceDesign||p.design)+f,island))),`${dir}/${f}`);
  }
 });
+
+test('hiss classifier (tools/audio-forensics --hiss): a steady noise bed above 2 kHz is a hiss segment, a harmonic engine or a short burst is not; the band summary gives dB per band',async()=>{
+ const {hissLike,summarizeBands}=await import('../workout/island/minigames/audio-guard.mjs');
+ const frames=(from,seconds,f)=>Array.from({length:Math.round(seconds/.05)},(_,i)=>({t:+(from+i*.05).toFixed(3),ph:'racing',lvl:-40,...f}));
+ const noise={bands:[.2,.2,.1,.25,.15,.1],flat:.6,tot:-20,sp:0},engine={bands:[.6,.3,.08,.015,.004,.001],flat:.05,tot:-12,sp:30};
+ const bed=hissLike(frames(0,3,noise));assert.equal(bed.length,1);assert.equal(bed[0].kind,'hiss');assert.ok(bed[0].seconds>=2.8&&bed[0].share===.5&&bed[0].flat===.6);
+ assert.equal(hissLike(frames(0,6,engine)).length,0,'a harmonic engine is not a hiss');assert.equal(hissLike(frames(0,1.5,noise)).length,0,'shorter than 2 s');
+ const masked=frames(0,3,noise);masked[30]={...masked[30],flat:.1};assert.equal(hissLike(masked).length,1,'one masked frame does not split it');
+ assert.equal(hissLike(frames(0,3,{...noise,bands:undefined})).length,0,'frames without bands never match');
+ const sum=summarizeBands([...frames(0,3,noise),...frames(3,3,engine)],['racing']);
+ assert.equal(sum.standing.frames,60);assert.equal(sum.standing.above2k,.5);assert.equal(sum.standing.above2kDb,-23,'-20 dB in all, half of it above 2 kHz');
+ assert.deepEqual(sum.standing.db.map(v=>Math.round(v)),[-27,-27,-30,-26,-28,-30]);assert.equal(sum.fast.above2kDb,-29);assert.ok(sum.fast.db[0]>-15,'the engine sits low');
+});
