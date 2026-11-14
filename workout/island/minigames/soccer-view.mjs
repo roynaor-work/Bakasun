@@ -453,7 +453,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       }else if(character.athlete){
         if(nearCount>0&&nearDetail&&quality<config.view.athlete.lodFromQuality&&character.lodCount>1)character.setLod(nearDetail.has(p.id)||p.id===s.controlled||p.id===poseFocus?0:1);
         const {pivot,bones}=character,animation=playerAnimation(p,s,config),wanted=Math.atan2(p.fx,p.fz),ad=config.view.athlete.motion;if(animation.mode==='dejected')animation.mode='idle'; // the show's keeper stance exists only in the design state machine
-        const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive'].includes(animation.mode));character.yaw=bodyState.yaw;
+        const body=character.body||=createAthleteBody(T,character,ad),bodyState=body.orient(p,wanted,dt,Boolean(p.restartMotion)||['slide','kick','throw','dive','volley','scissor'].includes(animation.mode));character.yaw=bodyState.yaw;
         const sliding=animation.mode==='slide'||animation.mode==='recover',roll=animation.mode==='dive'?animation.roll:sliding?animation.roll*ad.slideRollScale:bodyState.roll;
         const lift=animation.mode==='dive'?Math.sin(Math.PI*Math.min(1,Math.max(0,1-p.diveTime/config.goalkeeping.diveSeconds)))*ad.diveLift:0;
         const ease=1-Math.exp(-dt/ad.rollEase);character.roll+=(roll-character.roll)*ease;character.lift+=(lift-character.lift)*ease;
@@ -462,7 +462,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
         const marking=Boolean(owner&&owner.team!==p.team&&hypot2(s.ball.x-p.x,s.ball.z-p.z)<ad.markDistance);
         const motion=character.motion.update(p,s,animation.mode,dt*(s.phase==='goal'&&animation.mode!=='celebrate'?config.rules.goalSlowMotion:1),{charge,chargeKind:s.chargeKind,slide:sliding?slideWeight(p,config):0,marking,turnRate:bodyState.rate});
         character.mode=animation.mode;character.active=motion.oneShot||'locomotion';
-        character.lookWeight+=((['celebrate','slide','recover','dive','throw'].includes(animation.mode)||p.hands?0:1)-character.lookWeight)*(1-Math.exp(-dt/ad.lookEase));athleteLook(T,character,s.ball,dt,ad);
+        character.lookWeight+=((['celebrate','slide','recover','dive','throw','fouled','volley','scissor'].includes(animation.mode)||p.hands?0:1)-character.lookWeight)*(1-Math.exp(-dt/ad.lookEase));athleteLook(T,character,s.ball,dt,ad);
         if(p.hands&&!p.restartMotion)holdSoccerBall(T,character,p,config);
         if(animation.head&&bones.Head.bone)bones.Head.bone.rotation.x+=animation.head*ad.headNod;
         body.plant(pivot,dt,motion.oneShot||sliding||charge>0||p.hands||!['idle','run','sprint','steal'].includes(animation.mode)?0:1,motion.warp);

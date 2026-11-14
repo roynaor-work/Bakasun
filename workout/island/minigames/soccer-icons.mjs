@@ -5,5 +5,8 @@ export function actionIcon(kind){
   paths.switch='M5 7h14l-4-4M19 17H5l4 4M19 7l-4 4M5 17l4-4';
   paths.lob='M3 19C6 6 15 4 21 12M17 11l4 1-1 4M3 19h4M19 18a2 2 0 1 0 .1 0';
   paths.header='M8 21v-4c-3-2-4-6-2-9 2-4 8-4 10-1l1 4 3 2-3 1v3h-4v4M5 4l2 2M11 1v3M17 3l-2 3M13 10h.1';
+  // v24.1: a volley (the kicking leg up to a ball in the air) and the backward scissor (the body back, the leg over the head)
+  paths.volley='M9 4a2 2 0 1 0 .1 0M9 8l-1 6-3 6M9 8l2 5 6-3M8 14l4 2M19 7a2 2 0 1 0 .1 0';
+  paths.scissor='M15 15a2 2 0 1 0 .1 0M13 13l-5-2-3 2M8 11l-3-7M8 11l4-6M12 5l3-1M6 4a2 2 0 1 0 .1 0';
   const path=document.createElementNS(svg.namespaceURI,'path');path.setAttribute('d',paths[kind]);path.setAttribute('fill','none');path.setAttribute('stroke','currentColor');path.setAttribute('stroke-width','1.8');path.setAttribute('stroke-linecap','round');path.setAttribute('stroke-linejoin','round');svg.append(path);return svg;
 }

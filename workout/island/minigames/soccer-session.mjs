@@ -24,6 +24,8 @@ import {soccerShowEnabled} from './soccer-show.mjs';
 import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-14';
 // Soccer full (14/11): 11 against 11 on the 105 x 68 m pitch, the radar in the corner, the advantage call. `?soccerFull=0` = the v24 small match.
 import {soccerFullEnabled,applySoccerFull,soccerRadarLayout,drawSoccerRadar} from './soccer-full.mjs?v=island-v2-20261107-14';
+// v24.1 (14/11): no radar (Roy: "לא צריך אחד כזה", `?soccerRadar=1` brings it back); volley / header / scissor on the kick and fourth buttons.
+import {soccerRadarEnabled,soccerAirChoiceEnabled,SOCCER_AIR_LABELS} from './soccer-r241.mjs?v=island-v2-20261107-14';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -78,6 +80,11 @@ export function startSoccer(ctx) {
   const airOn=soccerAirVersion()==='v23';
   const lobMode=s=>airOn&&!context.drill&&s.role!=='keeper'&&s.phase==='playing'&&s.mode==='attack'&&s.ball.owner===s.controlled&&!s.players[s.controlled]?.hands;
   const airPrompt=s=>airOn&&!context.drill&&s.role!=='keeper'&&s.phase==='playing'&&s.ball.owner===null&&(Boolean(s.headerArm)||Boolean(s.ball.flight||s.ball.y>.6)&&soccerShotIcon(s,balance)!=='header'&&airPromptMeet(s));
+  // v24.1 (`?soccerAirChoice=0` = v24): the engine's own choice for the high ball (state.airOptions): {primary, alt} by its height on arrival.
+  const airChoiceOn=airOn&&!context.drill&&soccerAirChoiceEnabled();
+  const airChoice=s=>airChoiceOn&&s.role!=='keeper'&&s.phase==='playing'&&s.ball.owner===null?s.airOptions||null:null;
+  // A press on the fourth button that began as the second choice stays that until the finger lifts (it never turns into a switch).
+  let trickAlt=false;
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
   let view,input,frame,last=0,hud=0,paused=false,disposed=false,handed=true,hudSignature='',mode='',started=false,contracts=null,contractsReady=!canvas,contractsError=null,reported=false;
@@ -143,7 +150,7 @@ export function startSoccer(ctx) {
     const fixture=element('div','soccer-fixture'),stageLabel=element('span'),objectiveLabel=element('span','soccer-objective');fixture.append(stageLabel,objectiveLabel);canvas.after(fixture);fixture.hidden=Boolean(context.drill);
     const feedback=element('div','soccer-action-feedback');feedback.hidden=true;feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');canvas.after(feedback);let feedbackTime=0;
     // Full match radar (top right): the whole pitch, both teams, the ball, the selected player ringed and what the camera shows; 10 Hz with the HUD.
-    const radarSize=balance.full?.radar||{width:132,height:86},radarScale=Math.min(2,globalThis.devicePixelRatio||1),radar=fullOn?element('canvas','soccer-radar'):null;
+    const radarSize=balance.full?.radar||{width:132,height:86},radarScale=Math.min(2,globalThis.devicePixelRatio||1),radar=fullOn&&soccerRadarEnabled()?element('canvas','soccer-radar'):null;
     if(radar){radar.width=Math.round(radarSize.width*radarScale);radar.height=Math.round(radarSize.height*radarScale);radar.setAttribute('role','img');radar.setAttribute('aria-label','מפת המגרש: איפה הכדור והשחקנים');canvas.after(radar);}
     const radarContext=radar?.getContext('2d')||null,radarLayout=radar?soccerRadarLayout(radarSize.width,radarSize.height,balance.pitch):null;
     function drawRadar(){
@@ -164,6 +171,7 @@ export function startSoccer(ctx) {
       // Full match: the referee lets play go on after a foul (Law 5); the free kick comes back only if the ball is lost within a few seconds.
       if(event.type==='advantage'){feedback.textContent='יתרון · ממשיכים';feedback.dataset.action='advantage';feedback.hidden=false;feedbackTime=1.6;return;}
       if(event.team===1||event.player!==undefined&&model.getState().players[event.player]?.team===1)return;
+      if(event.type==='shot'&&event.aerial&&SOCCER_AIR_LABELS[event.aerial]){feedback.textContent=SOCCER_AIR_LABELS[event.aerial]+'!';feedback.dataset.action='shot';feedback.hidden=false;feedbackTime=1.1;return;}
       const key={pass:'pass',loft:'loft',shot:'shot',header:'header',clearance:'header',steal:event.won?'steal':'blocked','slide-contact':event.won?'steal':'blocked',possession:'received',switch:'switch','heavy-touch':'heavyTouch',dive:'dive'}[event.type];
       if(!key)return;
       // Ordinary AI touches stay quiet; the selected player's actions get a cue.
@@ -174,19 +182,21 @@ export function startSoccer(ctx) {
     const plans=new Map(),icons={shot:'shoot',pass:'pass',sprint:'sprint',slide:'slide',switch:'switch',tackle:'steal',throw:'pass',corner:'pass',short:'pass',goal_kick:'shoot',free_kick:'shoot',dive:'slide',rush:'sprint',roll:'pass',punt:'shoot'};
     function syncControls(s){
       if(!contractsReady||!input)return;
-      const key=soccerDesignControlState(s),lob=lobMode(s),prompt=key==='attack'&&!lob&&airPrompt(s);
-      const cacheKey=key+':'+(s.role==='keeper'?'keeper':'field'),header=key==='attack'&&(soccerShotIcon(s,balance)==='header'||prompt),signature=cacheKey+':'+header+':'+lob;
+      const key=soccerDesignControlState(s),lob=lobMode(s),prompt=key==='attack'&&!lob&&airPrompt(s),air=key==='attack'&&!lob?airChoice(s):null;
+      const cacheKey=key+':'+(s.role==='keeper'?'keeper':'field'),header=key==='attack'&&(air?air.primary==='header':soccerShotIcon(s,balance)==='header'||prompt),signature=cacheKey+':'+header+':'+lob+':'+(air?air.primary+'/'+(air.alt||''):'');
       if(mode===signature)return;mode=signature;
       let plan=plans.get(cacheKey);if(!plan){plan=soccerDesignControlPlan(s,contracts.controls);plans.set(cacheKey,plan);}
       input.setPlan(plan);controls.dataset.mode=s.mode;controls.dataset.controlState=key;controls.setAttribute('aria-label',plan.label);
       for(const slot of ['primary','secondary','sprint','trick']){
         const node=nodes[slot],entry=plan.slots[slot];node.hidden=!entry;node.disabled=!entry||Boolean(entry.disabled);node.setAttribute('aria-disabled',String(node.disabled));
         if(!entry){if(document.activeElement===node)canvas.focus();continue;}
-        const isHeader=header&&slot==='primary',isLob=lob&&slot==='trick',label=isHeader?t('soccer.header'):isLob?'הגבהה':entry.label,icon=isHeader?'header':isLob?'lob':icons[entry.id];
-        node.dataset.air=isHeader&&airOn?'header':isLob?'lob':'';
+        // v24.1: the kick button shows the first way to meet the high ball (עף / נגיחה), the fourth button the second (נגיחה / עף / מספרת).
+        const airKind=air?(slot==='primary'?air.primary:slot==='trick'?air.alt:null):null;
+        const isHeader=header&&slot==='primary'&&!airKind,isLob=lob&&slot==='trick',label=airKind?SOCCER_AIR_LABELS[airKind]:isHeader?t('soccer.header'):isLob?'הגבהה':entry.label,icon=airKind||(isHeader?'header':isLob?'lob':icons[entry.id]);
+        node.dataset.air=airKind?(slot==='trick'?'alt-'+airKind:airKind):isHeader&&airOn?'header':isLob?'lob':'';
         node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring,staminaBar);
         labelNode(node,label,slot==='primary'?balance.controls.kickKey:slot==='secondary'?balance.controls.passKey:slot==='sprint'?balance.controls.sprintKeys[0]:balance.controls.switchKey);
-        node.setAttribute('aria-label',isHeader?label:isLob?'מסירה גבוהה':entry.aria_label||label);
+        node.setAttribute('aria-label',airKind||isHeader?label:isLob?'מסירה גבוהה':entry.aria_label||label);
       }
       stick.setAttribute('aria-label',plan.slots.stick?.aria_label||'תנועה');
       if(nodes.pause)nodes.pause.setAttribute('aria-label',contracts.controls.controls.pause.aria_label);
@@ -216,7 +226,7 @@ export function startSoccer(ctx) {
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
       // soccerShow v1: while the view holds (replay, celebration) the model is not stepped and the frame's input is dropped (a tap skips the replay).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(lobMode(model.getState())&&sampled.switchPlayer){sampled.lobPressed=true;sampled.switchPlayer=false;}if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(lobMode(model.getState())&&sampled.switchPlayer){sampled.lobPressed=true;sampled.switchPlayer=false;}else if(sampled.switchPlayer&&(trickAlt||airChoice(model.getState())?.alt)){trickAlt=true;sampled.airAlt=true;sampled.switchPlayer=false;}if(!sampled.switchPlayer&&!sampled.airAlt)trickAlt=false;if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':'';
