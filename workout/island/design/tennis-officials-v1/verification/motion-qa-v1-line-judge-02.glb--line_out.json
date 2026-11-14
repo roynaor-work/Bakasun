@@ -1,0 +1,263 @@
+{
+  "id": "line_out",
+  "duration": 3.200000047683716,
+  "samples": 385,
+  "embeddedSamplerKeyCounts": [
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97
+  ],
+  "idleReference": "line_idle",
+  "metadata": {
+    "supports": [
+      {
+        "bone": "LeftFoot",
+        "start": 0,
+        "end": 3.2,
+        "local": [
+          0,
+          -0.09579774,
+          0
+        ]
+      },
+      {
+        "bone": "RightFoot",
+        "start": 0,
+        "end": 3.2,
+        "local": [
+          0,
+          -0.09579774,
+          0
+        ]
+      }
+    ],
+    "soleLocal": [
+      0,
+      -0.09579774,
+      0
+    ],
+    "floorY": 0,
+    "loop": false,
+    "locomotion": false,
+    "symmetryMode": "structural",
+    "checkHingeDirection": true,
+    "ballVisible": false,
+    "idle": "line_idle",
+    "floorProbeKind": "minimum over every decoded skinned vertex plus all skeletal joint centers",
+    "coordinateSpace": "decoded GLB world in metres"
+  },
+  "endpointRepresentationAdjustments": [],
+  "ballIndependence": {
+    "exists": false,
+    "independent": false
+  },
+  "fullSkinFloor": {
+    "minimumY": 0.020702239239489523,
+    "maximumPenetrationMeters": 0,
+    "worst": {
+      "t": 2.8333332538604736,
+      "position": [
+        0.12454269698872295,
+        0.020702239239489523,
+        -0.0285702962770467
+      ]
+    },
+    "vertexSamples": 318010,
+    "method": "Every decoded skinned vertex at every 120Hz sample and embedded key time; linear blend skinning with decoded normalized weights and inverse binds."
+  },
+  "supportPlane": null,
+  "activeLocomotionDiagnostic": null,
+  "score": 98.2,
+  "coverage": 1,
+  "metrics": {
+    "footSliding": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "coordinateSpace": "decoded GLB world in metres",
+        "supportSource": "declared",
+        "windows": 2,
+        "samples": 770,
+        "maxDriftMeters": 0,
+        "p95SpeedMetersPerSecond": 0.000001,
+        "worst": {
+          "bone": "RightFoot",
+          "t": 2.266667,
+          "start": 0,
+          "end": 3.2,
+          "driftMeters": 0
+        }
+      }
+    },
+    "floorPenetration": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "samples": 7315,
+        "floorY": 0,
+        "probeKind": "minimum over every decoded skinned vertex plus all skeletal joint centers",
+        "maxDepthMeters": 0,
+        "worst": {
+          "t": 0,
+          "bone": "full-decoded-skin-minimum",
+          "depthMeters": 0,
+          "y": 0.020702
+        }
+      }
+    },
+    "posePops": {
+      "value": 0.396829,
+      "status": "green",
+      "score": 92.06,
+      "evidence": {
+        "adjacentPairs": 384,
+        "observations": 6528,
+        "maxDegrees60Hz": 5.952436,
+        "maxMarkerStepHeight60Hz": 0.013103,
+        "maxRootStepHeight60Hz": 0,
+        "worst": {
+          "ratio": 0.3968290383595615,
+          "t": 0.8,
+          "previousTime": 0.791667,
+          "bone": "LeftForeArm",
+          "markerStepHeight60Hz": 0.003467,
+          "degrees60Hz": 5.952436
+        }
+      }
+    },
+    "anatomy": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "testedFrames": 385,
+        "affectedFrames": 0,
+        "checks": 6545,
+        "maxLimbFlexionDegrees": 95.12472,
+        "maxRelativeSegmentLengthChange": 0,
+        "hingeDirectionChecked": true,
+        "axialTwistChecked": false,
+        "violations": []
+      }
+    },
+    "ballContact": {
+      "value": null,
+      "status": "not-applicable",
+      "score": null,
+      "reason": "This action explicitly has no visible ball or declared ball contact.",
+      "evidence": {}
+    },
+    "continuity": {
+      "value": 0.000084,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "entry": {
+          "ratio": 0.00008360348122822034,
+          "t": 0,
+          "idleTime": 1.208333,
+          "markers": 17,
+          "rmsPositionHeight": 0.000001,
+          "rmsRotationDegrees": 0.000347,
+          "rmsVelocityHeightPerSecond": 0.000063,
+          "velocityEvaluated": true
+        },
+        "exit": {
+          "ratio": 0.00008360309900995389,
+          "t": 3.2,
+          "idleTime": 2.4,
+          "markers": 17,
+          "rmsPositionHeight": 0,
+          "rmsRotationDegrees": 0.000001,
+          "rmsVelocityHeightPerSecond": 0.000063,
+          "velocityEvaluated": true
+        },
+        "worstEndpoint": "entry",
+        "alignment": "horizontal root translation; raw asset poses used when provided"
+      }
+    },
+    "bodySliding": {
+      "value": null,
+      "status": "not-applicable",
+      "score": null,
+      "reason": "This action is not declared locomotion.",
+      "evidence": {}
+    },
+    "symmetry": {
+      "value": 0.000001,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "mode": "structural",
+        "modeSource": "declared",
+        "structuralMismatch": 0.000001,
+        "segments": [
+          {
+            "segment": "Arm-ForeArm",
+            "mismatch": 0
+          },
+          {
+            "segment": "ForeArm-Hand",
+            "mismatch": 0.000001
+          },
+          {
+            "segment": "UpLeg-Leg",
+            "mismatch": 0.000001
+          },
+          {
+            "segment": "Leg-Foot",
+            "mismatch": 0.000001
+          }
+        ],
+        "motionRmsHeight": null,
+        "worstMotion": null,
+        "bilateralPoseRmsHeightUnscored": 0.010255,
+        "note": "One-sided authored actions are checked for structural symmetry only."
+      }
+    }
+  },
+  "reasons": [],
+  "scoring": {
+    "kind": "weighted reproducible screening proxy",
+    "applicableWeight": 79,
+    "measuredWeight": 79,
+    "missingApplicableMetricsScoreZero": true
+  },
+  "clipId": "line_out",
+  "sport": "tennis"
+}

@@ -1,0 +1,34 @@
+{
+  "status": "עברו לאחר תיקון סביבת הדפדפן והרצה חוזרת של קובץ הבדיקה שנכשל",
+  "passed": 4018,
+  "failed": 0,
+  "skipped": 64,
+  "uniqueTests": 4082,
+  "initial": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4082,
+    "pass": 4017,
+    "fail": 1,
+    "skipped": 64,
+    "failure": "tests/workout-royiki.test.mjs: missing Playwright chromium_headless_shell-1234 executable; test server remained open until its process was terminated."
+  },
+  "retry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/tennis-officials-browser-cache node --test --test-timeout=300000 tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "environmentFix": "Temporary /tmp Playwright cache links to installed /usr/bin/chromium; no repository changes."
+  },
+  "note": "בסבב npm test המקורי עברו 4,017 בדיקות, בדיקה אחת נכשלה עקב נתיב Chromium חסר ו־64 דולגו. לאחר הפניה זמנית בדיסק /tmp ל־Chromium המותקן, קובץ הבדיקה שנכשל הורץ מחדש וכל חמש בדיקותיו עברו. הספירה המוצגת משלבת את שני הסבבים ללא ספירה כפולה.",
+  "assetChecks": {
+    "motionQA": true,
+    "minimumScore": 90.1,
+    "originalEvaluatorTests": 30,
+    "browserPreviewCases": 10,
+    "portraitLayoutCase": 1,
+    "rebakeSha256Identical": 8
+  }
+}

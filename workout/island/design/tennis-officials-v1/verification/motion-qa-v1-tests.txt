@@ -1,0 +1,38 @@
+✔ GLB reader validates magic, declared size, and truncated chunks (4.156218ms)
+✔ accessor reader respects interleaved byteStride and accessor offset (16.327625ms)
+✔ accessor reader cannot read beyond its declared bufferView (0.541911ms)
+✔ sparse accessors apply indexed overrides to implicit zero values (0.868596ms)
+✔ normalized integer accessors preserve signed limits (0.44258ms)
+✔ linear animation samples parent world transforms and exact endpoint (8.211033ms)
+✔ STEP animation holds each pose until its next key (3.094709ms)
+✔ CUBICSPLINE uses glTF tangents, including segment duration (2.620272ms)
+✔ unknown animation names fail visibly (0.479971ms)
+✔ animation data is sampled without WebAssembly (1.491672ms)
+✔ slightly nonunit Float32 quaternions interpolate before normalization (2.656748ms)
+✔ uniform and Float32 key times merge within one microsecond (2.160542ms)
+✔ all requested metrics expose reproducible thresholds and bounded score (62.25019ms)
+✔ supported foot drift is measured rather than hidden by static root (119.178393ms)
+✔ floor intrusion uses supplied sole surface points (81.629047ms)
+✔ isolated adjacent-frame jump produces a pose-pop warning (85.523433ms)
+✔ impossible folded elbows produce anatomical violations (30.346311ms)
+✔ ball metric measures radius-adjusted gap at declared contact time (85.915256ms)
+✔ entry and exit mismatch against idle degrades continuity (44.115343ms)
+✔ body travel without stance sweep flags body sliding (32.948619ms)
+✔ unequal bilateral limb lengths flag structural asymmetry (162.152102ms)
+✔ missing contact and idle data remain explicitly unmeasured (52.804612ms)
+✔ contact offsets rotate with the sampled world bone quaternion (24.506944ms)
+✔ held contact windows detect gaps between their endpoints (79.92815ms)
+✔ calibrated knee hinge direction catches reverse bend below flexion limit (22.533949ms)
+✔ gait symmetry detects one-sided motion even when limb lengths stay equal (64.961468ms)
+✔ invalid nonfinite poses, duplicate times, and zero quaternions fail visibly (7.129475ms)
+✔ metric grading remains invariant under uniform character scale (54.088157ms)
+✔ ball-less action contact cue is not a missing ball measurement (42.913048ms)
+✔ non-foot joint intrusion remains visible alongside valid sole probes (25.856547ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1255.897725

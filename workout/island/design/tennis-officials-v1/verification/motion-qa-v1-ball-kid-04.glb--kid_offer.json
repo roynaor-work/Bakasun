@@ -1,0 +1,651 @@
+{
+  "id": "kid_offer",
+  "duration": 3.200000047683716,
+  "samples": 385,
+  "embeddedSamplerKeyCounts": [
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97,
+    97
+  ],
+  "idleReference": "kid_idle",
+  "metadata": {
+    "supports": [
+      {
+        "bone": "LeftFoot",
+        "start": 0,
+        "end": 3.2,
+        "local": [
+          0,
+          -0.09579774,
+          0
+        ]
+      },
+      {
+        "bone": "RightFoot",
+        "start": 0,
+        "end": 3.2,
+        "local": [
+          0,
+          -0.09579774,
+          0
+        ]
+      }
+    ],
+    "soleLocal": [
+      0,
+      -0.09579774,
+      0
+    ],
+    "floorY": 0,
+    "loop": false,
+    "locomotion": false,
+    "symmetryMode": "structural",
+    "checkHingeDirection": true,
+    "ballVisible": true,
+    "idle": "kid_idle",
+    "ball": {
+      "radius": 0.0335
+    },
+    "ballContactExpected": true,
+    "contacts": [],
+    "ballContacts": [
+      {
+        "start": 0,
+        "end": 3.2,
+        "bone": "RightHand",
+        "local": [
+          -0.07,
+          0,
+          0.03
+        ]
+      }
+    ],
+    "floorProbeKind": "minimum over every decoded skinned vertex plus all skeletal joint centers",
+    "coordinateSpace": "decoded GLB world in metres"
+  },
+  "endpointRepresentationAdjustments": [],
+  "ballIndependence": {
+    "exists": true,
+    "ancestors": [],
+    "independent": true,
+    "ownTranslationTrack": true
+  },
+  "fullSkinFloor": {
+    "minimumY": 0.020702239239489523,
+    "maximumPenetrationMeters": 0,
+    "worst": {
+      "t": 2.8333332538604736,
+      "position": [
+        0.12454269698872295,
+        0.020702239239489523,
+        -0.0285702962770467
+      ]
+    },
+    "vertexSamples": 318010,
+    "method": "Every decoded skinned vertex at every 120Hz sample and embedded key time; linear blend skinning with decoded normalized weights and inverse binds."
+  },
+  "supportPlane": null,
+  "activeLocomotionDiagnostic": null,
+  "score": 96,
+  "coverage": 1,
+  "metrics": {
+    "footSliding": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "coordinateSpace": "decoded GLB world in metres",
+        "supportSource": "declared",
+        "windows": 2,
+        "samples": 770,
+        "maxDriftMeters": 0,
+        "p95SpeedMetersPerSecond": 0.000001,
+        "worst": {
+          "bone": "RightFoot",
+          "t": 2.266667,
+          "start": 0,
+          "end": 3.2,
+          "driftMeters": 0
+        }
+      }
+    },
+    "floorPenetration": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "samples": 7315,
+        "floorY": 0,
+        "probeKind": "minimum over every decoded skinned vertex plus all skeletal joint centers",
+        "maxDepthMeters": 0,
+        "worst": {
+          "t": 0,
+          "bone": "full-decoded-skin-minimum",
+          "depthMeters": 0,
+          "y": 0.020702
+        }
+      }
+    },
+    "posePops": {
+      "value": 0.75484,
+      "status": "green",
+      "score": 84.9,
+      "evidence": {
+        "adjacentPairs": 384,
+        "observations": 6528,
+        "maxDegrees60Hz": 11.322601,
+        "maxMarkerStepHeight60Hz": 0.015372,
+        "maxRootStepHeight60Hz": 0,
+        "worst": {
+          "ratio": 0.7548400779006263,
+          "t": 2.5,
+          "previousTime": 2.491667,
+          "bone": "RightForeArm",
+          "markerStepHeight60Hz": 0.006756,
+          "degrees60Hz": 11.322601
+        }
+      }
+    },
+    "anatomy": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "testedFrames": 385,
+        "affectedFrames": 0,
+        "checks": 6545,
+        "maxLimbFlexionDegrees": 146.173334,
+        "maxRelativeSegmentLengthChange": 0,
+        "hingeDirectionChecked": true,
+        "axialTwistChecked": false,
+        "violations": []
+      }
+    },
+    "ballContact": {
+      "value": 0.001266,
+      "status": "green",
+      "score": 98.31,
+      "evidence": {
+        "radiusMeters": 0.0335,
+        "samples": 385,
+        "missed": [],
+        "contacts": [
+          {
+            "t": 0.683333,
+            "bone": "RightHand",
+            "gapMeters": 0.002299,
+            "signedGapMeters": -0.002299,
+            "centerDistanceMeters": 0.031201,
+            "contactPoint": [
+              -0.281081,
+              1.270656,
+              0.163358
+            ],
+            "ballCenter": [
+              -0.28,
+              1.270802,
+              0.19454
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.516667,
+            "bone": "RightHand",
+            "gapMeters": 0.002299,
+            "signedGapMeters": -0.002299,
+            "centerDistanceMeters": 0.031201,
+            "contactPoint": [
+              -0.281081,
+              1.270656,
+              0.163358
+            ],
+            "ballCenter": [
+              -0.28,
+              1.270802,
+              0.19454
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.716667,
+            "bone": "RightHand",
+            "gapMeters": 0.002209,
+            "signedGapMeters": -0.002209,
+            "centerDistanceMeters": 0.031291,
+            "contactPoint": [
+              -0.281568,
+              1.324699,
+              0.165988
+            ],
+            "ballCenter": [
+              -0.28,
+              1.324799,
+              0.19724
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.483333,
+            "bone": "RightHand",
+            "gapMeters": 0.002209,
+            "signedGapMeters": -0.002209,
+            "centerDistanceMeters": 0.031291,
+            "contactPoint": [
+              -0.281568,
+              1.324699,
+              0.165988
+            ],
+            "ballCenter": [
+              -0.28,
+              1.324799,
+              0.19724
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.675,
+            "bone": "RightHand",
+            "gapMeters": 0.001727,
+            "signedGapMeters": -0.001727,
+            "centerDistanceMeters": 0.031773,
+            "contactPoint": [
+              -0.280803,
+              1.257358,
+              0.162114
+            ],
+            "ballCenter": [
+              -0.28,
+              1.257528,
+              0.193876
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.525,
+            "bone": "RightHand",
+            "gapMeters": 0.001727,
+            "signedGapMeters": -0.001727,
+            "centerDistanceMeters": 0.031773,
+            "contactPoint": [
+              -0.280803,
+              1.257358,
+              0.162114
+            ],
+            "ballCenter": [
+              -0.28,
+              1.257528,
+              0.193876
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.691667,
+            "bone": "RightHand",
+            "gapMeters": 0.001726,
+            "signedGapMeters": -0.001726,
+            "centerDistanceMeters": 0.031774,
+            "contactPoint": [
+              -0.280818,
+              1.284027,
+              0.16344
+            ],
+            "ballCenter": [
+              -0.28,
+              1.284076,
+              0.195204
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.508333,
+            "bone": "RightHand",
+            "gapMeters": 0.001726,
+            "signedGapMeters": -0.001726,
+            "centerDistanceMeters": 0.031774,
+            "contactPoint": [
+              -0.280818,
+              1.284027,
+              0.16344
+            ],
+            "ballCenter": [
+              -0.28,
+              1.284076,
+              0.195204
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.725,
+            "bone": "RightHand",
+            "gapMeters": 0.001681,
+            "signedGapMeters": -0.001681,
+            "centerDistanceMeters": 0.031819,
+            "contactPoint": [
+              -0.281156,
+              1.33852,
+              0.166129
+            ],
+            "ballCenter": [
+              -0.28,
+              1.338523,
+              0.197926
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.475,
+            "bone": "RightHand",
+            "gapMeters": 0.001681,
+            "signedGapMeters": -0.001681,
+            "centerDistanceMeters": 0.031819,
+            "contactPoint": [
+              -0.281156,
+              1.338521,
+              0.166129
+            ],
+            "ballCenter": [
+              -0.28,
+              1.338523,
+              0.197926
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.708333,
+            "bone": "RightHand",
+            "gapMeters": 0.001643,
+            "signedGapMeters": -0.001643,
+            "centerDistanceMeters": 0.031857,
+            "contactPoint": [
+              -0.281194,
+              1.310927,
+              0.16472
+            ],
+            "ballCenter": [
+              -0.28,
+              1.311074,
+              0.196554
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.491667,
+            "bone": "RightHand",
+            "gapMeters": 0.001643,
+            "signedGapMeters": -0.001643,
+            "centerDistanceMeters": 0.031857,
+            "contactPoint": [
+              -0.281194,
+              1.310927,
+              0.16472
+            ],
+            "ballCenter": [
+              -0.28,
+              1.311074,
+              0.196554
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.65,
+            "bone": "RightHand",
+            "gapMeters": 0.0016,
+            "signedGapMeters": -0.0016,
+            "centerDistanceMeters": 0.0319,
+            "contactPoint": [
+              -0.280951,
+              1.219057,
+              0.160073
+            ],
+            "ballCenter": [
+              -0.28,
+              1.219173,
+              0.191959
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.55,
+            "bone": "RightHand",
+            "gapMeters": 0.0016,
+            "signedGapMeters": -0.0016,
+            "centerDistanceMeters": 0.0319,
+            "contactPoint": [
+              -0.280951,
+              1.219057,
+              0.160073
+            ],
+            "ballCenter": [
+              -0.28,
+              1.219173,
+              0.191959
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.75,
+            "bone": "RightHand",
+            "gapMeters": 0.001283,
+            "signedGapMeters": -0.001283,
+            "centerDistanceMeters": 0.032217,
+            "contactPoint": [
+              -0.281957,
+              1.379839,
+              0.167843
+            ],
+            "ballCenter": [
+              -0.28,
+              1.38,
+              0.2
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.45,
+            "bone": "RightHand",
+            "gapMeters": 0.001283,
+            "signedGapMeters": -0.001283,
+            "centerDistanceMeters": 0.032217,
+            "contactPoint": [
+              -0.281957,
+              1.379839,
+              0.167843
+            ],
+            "ballCenter": [
+              -0.28,
+              1.38,
+              0.2
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.641667,
+            "bone": "RightHand",
+            "gapMeters": 0.001207,
+            "signedGapMeters": -0.001207,
+            "centerDistanceMeters": 0.032293,
+            "contactPoint": [
+              -0.280701,
+              1.206508,
+              0.159046
+            ],
+            "ballCenter": [
+              -0.28,
+              1.206633,
+              0.191332
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.558333,
+            "bone": "RightHand",
+            "gapMeters": 0.001207,
+            "signedGapMeters": -0.001207,
+            "centerDistanceMeters": 0.032293,
+            "contactPoint": [
+              -0.280701,
+              1.206508,
+              0.159046
+            ],
+            "ballCenter": [
+              -0.28,
+              1.206633,
+              0.191332
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 0.658333,
+            "bone": "RightHand",
+            "gapMeters": 0.001197,
+            "signedGapMeters": -0.001197,
+            "centerDistanceMeters": 0.032303,
+            "contactPoint": [
+              -0.280725,
+              1.231663,
+              0.160291
+            ],
+            "ballCenter": [
+              -0.28,
+              1.231714,
+              0.192586
+            ],
+            "declaredLocalPoint": true
+          },
+          {
+            "t": 2.541667,
+            "bone": "RightHand",
+            "gapMeters": 0.001197,
+            "signedGapMeters": -0.001197,
+            "centerDistanceMeters": 0.032303,
+            "contactPoint": [
+              -0.280725,
+              1.231663,
+              0.160291
+            ],
+            "ballCenter": [
+              -0.28,
+              1.231714,
+              0.192586
+            ],
+            "declaredLocalPoint": true
+          }
+        ],
+        "contactDetailsTruncated": true,
+        "coordinateSpace": "decoded GLB world in metres"
+      }
+    },
+    "continuity": {
+      "value": 0.389542,
+      "status": "green",
+      "score": 92.21,
+      "evidence": {
+        "entry": {
+          "ratio": 0.3895419025815418,
+          "t": 0,
+          "idleTime": 0,
+          "markers": 17,
+          "rmsPositionHeight": 0.015582,
+          "rmsRotationDegrees": 6.410899,
+          "rmsVelocityHeightPerSecond": 0.000063,
+          "velocityEvaluated": true
+        },
+        "exit": {
+          "ratio": 0.3895419025825156,
+          "t": 3.2,
+          "idleTime": 0,
+          "markers": 17,
+          "rmsPositionHeight": 0.015582,
+          "rmsRotationDegrees": 6.410899,
+          "rmsVelocityHeightPerSecond": 0.000225,
+          "velocityEvaluated": true
+        },
+        "worstEndpoint": "exit",
+        "alignment": "horizontal root translation; raw asset poses used when provided"
+      }
+    },
+    "bodySliding": {
+      "value": null,
+      "status": "not-applicable",
+      "score": null,
+      "reason": "This action is not declared locomotion.",
+      "evidence": {}
+    },
+    "symmetry": {
+      "value": 0.000001,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "mode": "structural",
+        "modeSource": "declared",
+        "structuralMismatch": 0.000001,
+        "segments": [
+          {
+            "segment": "Arm-ForeArm",
+            "mismatch": 0
+          },
+          {
+            "segment": "ForeArm-Hand",
+            "mismatch": 0.000001
+          },
+          {
+            "segment": "UpLeg-Leg",
+            "mismatch": 0.000001
+          },
+          {
+            "segment": "Leg-Foot",
+            "mismatch": 0.000001
+          }
+        ],
+        "motionRmsHeight": null,
+        "worstMotion": null,
+        "bilateralPoseRmsHeightUnscored": 0.153263,
+        "note": "One-sided authored actions are checked for structural symmetry only."
+      }
+    }
+  },
+  "reasons": [],
+  "scoring": {
+    "kind": "weighted reproducible screening proxy",
+    "applicableWeight": 92,
+    "measuredWeight": 92,
+    "missingApplicableMetricsScoreZero": true
+  },
+  "clipId": "kid_offer",
+  "sport": "tennis"
+}

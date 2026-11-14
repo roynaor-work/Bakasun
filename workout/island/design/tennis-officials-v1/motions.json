@@ -1,0 +1,2897 @@
+{
+  "schemaVersion": 1,
+  "sampleRate": 30,
+  "rig": "rig.json",
+  "ballRadius": 0.0335,
+  "authorship": "Original keyframing; independent sphere paths drive author-time hand IK; no runtime IK required.",
+  "models": [
+    {
+      "id": "chair-umpire",
+      "file": "models/chair-umpire.glb",
+      "clips": [
+        {
+          "id": "chair_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "chair_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "chair_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "chair_seated",
+          "label": "ישיבה בכיסא הגבוה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "chair_seated",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "chair_seated",
+            "supportPlaneY": 1.12420226
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "chair_score",
+          "label": "הכרזה על ניקוד",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "chair_seated",
+          "events": [
+            {
+              "type": "score_call",
+              "time": 1.2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "chair_seated",
+            "supportPlaneY": 1.12420226
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "chair_good",
+          "label": "סימון טוב",
+          "duration": 3,
+          "frames": 91,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "chair_seated",
+          "events": [
+            {
+              "type": "good",
+              "time": 1.2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "chair_seated",
+            "supportPlaneY": 1.12420226
+          },
+          "maxReachClampMeters": 0.09448760790875721
+        },
+        {
+          "id": "chair_nod",
+          "label": "הנהון",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "chair_seated",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "chair_seated",
+            "supportPlaneY": 1.12420226
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "line-judge-01",
+      "file": "models/line-judge-01.glb",
+      "clips": [
+        {
+          "id": "line_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "line_out",
+          "label": "אאוט — ידיים פרושות",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [
+            {
+              "type": "out",
+              "time": 1.2,
+              "sound": "line-out"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "line_good",
+          "label": "טוב — ידיים למטה",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [
+            {
+              "type": "good",
+              "time": 1.2,
+              "sound": "line-good"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "line-judge-02",
+      "file": "models/line-judge-02.glb",
+      "clips": [
+        {
+          "id": "line_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "line_out",
+          "label": "אאוט — ידיים פרושות",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [
+            {
+              "type": "out",
+              "time": 1.2,
+              "sound": "line-out"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "line_good",
+          "label": "טוב — ידיים למטה",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "line_idle",
+          "events": [
+            {
+              "type": "good",
+              "time": 1.2,
+              "sound": "line-good"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "line_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "ball-kid-01",
+      "file": "models/ball-kid-01.glb",
+      "clips": [
+        {
+          "id": "kid_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_bend",
+          "label": "רכינה לאיסוף",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0.01075149672711817
+        },
+        {
+          "id": "kid_run_collect",
+          "label": "רץ לאסוף כדור",
+          "duration": 5.6,
+          "frames": 169,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "contact",
+              "time": 4,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ]
+            },
+            {
+              "type": "pickup",
+              "time": 4.15
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 0.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.55,
+                "end": 0.95,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.35,
+                "end": 1.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.15,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.55,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.95,
+                "end": 1.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.75,
+                "end": 2.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.55,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 4,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 4,
+                "end": 5.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.011038226602540946
+        },
+        {
+          "id": "kid_roll",
+          "label": "מגלגל כדור",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "release",
+              "time": 1.6,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ],
+              "sound": "ball-roll"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.010866757352561485
+        },
+        {
+          "id": "kid_offer",
+          "label": "מניף כדור לשחקן",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "offer",
+              "time": 1.3
+            },
+            {
+              "type": "receive_ready",
+              "time": 2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 3.2,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_return",
+          "label": "חוזר למקום",
+          "duration": 4.2,
+          "frames": 127,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "home",
+              "time": 4
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.75,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.3,
+                "end": 1.7,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.1,
+                "end": 2.5,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.9,
+                "end": 3.45,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 3.75,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.75,
+                "end": 1.3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.7,
+                "end": 2.1,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.5,
+                "end": 2.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 3.3,
+                "end": 3.8,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 4.1,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.65,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "ball-kid-02",
+      "file": "models/ball-kid-02.glb",
+      "clips": [
+        {
+          "id": "kid_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_bend",
+          "label": "רכינה לאיסוף",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0.01075149672711817
+        },
+        {
+          "id": "kid_run_collect",
+          "label": "רץ לאסוף כדור",
+          "duration": 5.6,
+          "frames": 169,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "contact",
+              "time": 4,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ]
+            },
+            {
+              "type": "pickup",
+              "time": 4.15
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 0.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.55,
+                "end": 0.95,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.35,
+                "end": 1.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.15,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.55,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.95,
+                "end": 1.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.75,
+                "end": 2.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.55,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 4,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 4,
+                "end": 5.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.011038226602540946
+        },
+        {
+          "id": "kid_roll",
+          "label": "מגלגל כדור",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "release",
+              "time": 1.6,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ],
+              "sound": "ball-roll"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.010866757352561485
+        },
+        {
+          "id": "kid_offer",
+          "label": "מניף כדור לשחקן",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "offer",
+              "time": 1.3
+            },
+            {
+              "type": "receive_ready",
+              "time": 2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 3.2,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_return",
+          "label": "חוזר למקום",
+          "duration": 4.2,
+          "frames": 127,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "home",
+              "time": 4
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.75,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.3,
+                "end": 1.7,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.1,
+                "end": 2.5,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.9,
+                "end": 3.45,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 3.75,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.75,
+                "end": 1.3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.7,
+                "end": 2.1,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.5,
+                "end": 2.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 3.3,
+                "end": 3.8,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 4.1,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.65,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "ball-kid-03",
+      "file": "models/ball-kid-03.glb",
+      "clips": [
+        {
+          "id": "kid_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_bend",
+          "label": "רכינה לאיסוף",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0.01075149672711817
+        },
+        {
+          "id": "kid_run_collect",
+          "label": "רץ לאסוף כדור",
+          "duration": 5.6,
+          "frames": 169,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "contact",
+              "time": 4,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ]
+            },
+            {
+              "type": "pickup",
+              "time": 4.15
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 0.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.55,
+                "end": 0.95,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.35,
+                "end": 1.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.15,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.55,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.95,
+                "end": 1.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.75,
+                "end": 2.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.55,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 4,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 4,
+                "end": 5.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.011038226602540946
+        },
+        {
+          "id": "kid_roll",
+          "label": "מגלגל כדור",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "release",
+              "time": 1.6,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ],
+              "sound": "ball-roll"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.010866757352561485
+        },
+        {
+          "id": "kid_offer",
+          "label": "מניף כדור לשחקן",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "offer",
+              "time": 1.3
+            },
+            {
+              "type": "receive_ready",
+              "time": 2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 3.2,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_return",
+          "label": "חוזר למקום",
+          "duration": 4.2,
+          "frames": 127,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "home",
+              "time": 4
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.75,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.3,
+                "end": 1.7,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.1,
+                "end": 2.5,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.9,
+                "end": 3.45,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 3.75,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.75,
+                "end": 1.3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.7,
+                "end": 2.1,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.5,
+                "end": 2.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 3.3,
+                "end": 3.8,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 4.1,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.65,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    },
+    {
+      "id": "ball-kid-04",
+      "file": "models/ball-kid-04.glb",
+      "clips": [
+        {
+          "id": "kid_idle",
+          "label": "עמידה",
+          "duration": 2.4,
+          "frames": 73,
+          "fps": 30,
+          "loop": true,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 2.4,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": true,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_bend",
+          "label": "רכינה לאיסוף",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0.01075149672711817
+        },
+        {
+          "id": "kid_run_collect",
+          "label": "רץ לאסוף כדור",
+          "duration": 5.6,
+          "frames": 169,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "contact",
+              "time": 4,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ]
+            },
+            {
+              "type": "pickup",
+              "time": 4.15
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 0.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.55,
+                "end": 0.95,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.35,
+                "end": 1.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.15,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.55,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.95,
+                "end": 1.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.75,
+                "end": 2.15,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.55,
+                "end": 5.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 4,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 4,
+                "end": 5.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.011038226602540946
+        },
+        {
+          "id": "kid_roll",
+          "label": "מגלגל כדור",
+          "duration": 3.6,
+          "frames": 109,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "release",
+              "time": 1.6,
+              "bone": "RightHand",
+              "local": [
+                -0.07,
+                0,
+                0.03
+              ],
+              "sound": "ball-roll"
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.6,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [
+              {
+                "time": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 1.6,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0.010866757352561485
+        },
+        {
+          "id": "kid_offer",
+          "label": "מניף כדור לשחקן",
+          "duration": 3.2,
+          "frames": 97,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": false,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "offer",
+              "time": 1.3
+            },
+            {
+              "type": "receive_ready",
+              "time": 2
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 3.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": false,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": true,
+            "idle": "kid_idle",
+            "ball": {
+              "radius": 0.0335
+            },
+            "ballContactExpected": true,
+            "contacts": [],
+            "ballContacts": [
+              {
+                "start": 0,
+                "end": 3.2,
+                "bone": "RightHand",
+                "local": [
+                  -0.07,
+                  0,
+                  0.03
+                ]
+              }
+            ]
+          },
+          "maxReachClampMeters": 0
+        },
+        {
+          "id": "kid_return",
+          "label": "חוזר למקום",
+          "duration": 4.2,
+          "frames": 127,
+          "fps": 30,
+          "loop": false,
+          "rootMotion": true,
+          "idle": "kid_idle",
+          "events": [
+            {
+              "type": "home",
+              "time": 4
+            }
+          ],
+          "motionQA": {
+            "supports": [
+              {
+                "bone": "LeftFoot",
+                "start": 0.75,
+                "end": 0.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 1.3,
+                "end": 1.7,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.1,
+                "end": 2.5,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 2.9,
+                "end": 3.45,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 3.75,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "LeftFoot",
+                "start": 0.3,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.75,
+                "end": 1.3,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 1.7,
+                "end": 2.1,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 2.5,
+                "end": 2.9,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 3.3,
+                "end": 3.8,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 4.1,
+                "end": 4.2,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0,
+                "end": 0.35,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              },
+              {
+                "bone": "RightFoot",
+                "start": 0.65,
+                "end": 0.75,
+                "local": [
+                  0,
+                  -0.09579774,
+                  0
+                ]
+              }
+            ],
+            "soleLocal": [
+              0,
+              -0.09579774,
+              0
+            ],
+            "floorY": 0,
+            "loop": false,
+            "locomotion": true,
+            "symmetryMode": "structural",
+            "checkHingeDirection": true,
+            "ballVisible": false,
+            "idle": "kid_idle"
+          },
+          "maxReachClampMeters": 0
+        }
+      ]
+    }
+  ]
+}
