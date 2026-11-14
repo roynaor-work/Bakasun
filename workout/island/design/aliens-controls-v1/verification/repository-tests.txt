@@ -1,0 +1,54 @@
+Repository validation — 2026-11-14
+Base: 19d9cdc5e3718236df5a2fc4d8b8c26c72007575
+
+Command: npm test
+Exit code: 1
+Tests: 4082
+Passed: 4017
+Failed: 1
+Skipped: 64
+Cancelled: 0
+Duration: 777122.703065 ms
+
+Failure:
+tests/workout-royiki.test.mjs:91
+exercise screen shows the royiki animation, counts reps, falls back and the style choice persists
+browserType.launch: Executable doesn't exist at
+/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+
+The test's HTTP server remained open after the browser launch failed (launch
+occurs before its try/finally block). The owned test child was terminated to
+allow the runner to finish and report its actual results. No repository file
+was modified to fix or suppress this environment failure.
+
+Targeted rerun with the system Chromium:
+Command:
+node --import /tmp/aliens-controls-system-chromium.mjs --test tests/workout-royiki.test.mjs
+
+Temporary hook contents (not a repository modification):
+import {islandChromium} from '/workspace/Bakasun/tests/helpers/island-browser.mjs';
+const chromium=await islandChromium();
+const launch=chromium.launch.bind(chromium);
+chromium.launch=options=>launch({...options,executablePath:'/usr/bin/chromium'});
+
+Exit code: 0
+Tests: 5
+Passed: 5
+Failed: 0
+Skipped: 0
+Duration: 23871.85333 ms
+
+Passed tests:
+- all 50 exercises have a royiki animation, each matching a real exercise
+- every SVG exists, is local-only, self-contained, and identical to the design source
+- unique ids keep several copies in one DOM apart
+- the two design catalogs together list the same 50 animations, with the same durations
+- exercise screen shows the royiki animation, counts reps, falls back and the style choice persists
+
+The original complete run remains a nonzero run. The targeted rerun verifies
+its sole failure with an available browser. Its four passing unit tests overlap
+the original run and must not be added to the original pass count.
+
+Package-specific verification: 159 checks passed; see results.json.
+JavaScript syntax checks: preview.js and preview-assets.js passed node --check.
+Git scope check: only added files under workout/island/design/aliens-controls-v1/.

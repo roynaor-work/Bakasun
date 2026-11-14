@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>חלליות · ערכת שליטה 01</title>
+<link rel="icon" href="svg/fire-normal.svg" type="image/svg+xml">
+<link rel="stylesheet" href="preview.css">
+<script src="preview-assets.js" defer></script>
+<script src="preview.js" defer></script>
+<body>
+  <main>
+    <header class="intro">
+      <p class="eyebrow"><span class="live-dot"></span> BAKASUN / ALIENS <span class="edition">CONTROL STUDY · 01</span></p>
+      <h1>כל החלל לשחק.</h1>
+      <p>שליטה קטנה בשוליים. פעולה גדולה במרכז.</p>
+    </header>
+    <section class="demo" aria-label="תצוגת ערכת השליטה על רקע חלל">
+      <div class="stage" id="stage" tabindex="-1">
+        <canvas id="space" aria-hidden="true"></canvas>
+        <div class="scene-meta" aria-hidden="true"><span>SECTOR 07</span><span>ORBITAL FIELD</span></div>
+        <div class="resource-rail" aria-label="משאבי החללית">
+          <div class="resource" data-resource="energy"><div class="resource-art" role="meter" aria-label="אנרגיה" aria-valuemin="0" aria-valuemax="100" aria-valuenow="82"></div><span>אנרגיה</span></div>
+          <div class="resource" data-resource="shield"><div class="resource-art" role="meter" aria-label="מגן" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64"></div><span>מגן</span></div>
+        </div>
+        <div class="weapon-rail" aria-label="נשקים">
+          <div class="weapon"><button class="control" data-action="fire" aria-label="ירי רגיל" aria-keyshortcuts="Space"><span class="control-art" aria-hidden="true"></span></button><span class="weapon-label">ירי</span></div>
+          <div class="weapon"><button class="control" data-action="vulcan" aria-label="וולקן, חימום 36 אחוז" aria-keyshortcuts="Z"><span class="control-art" aria-hidden="true"></span></button><span class="weapon-label" id="vulcan-label">וולקן</span></div>
+          <div class="weapon"><button class="control" data-action="missile" aria-label="טיל, 3 זמינים" aria-keyshortcuts="M"><span class="control-art" aria-hidden="true"></span></button><span class="weapon-label">טיל <b id="ammo">3</b></span></div>
+          <div class="weapon"><button class="control" data-action="bomb" aria-label="פצצה, זמינה" aria-keyshortcuts="B"><span class="control-art" aria-hidden="true"></span></button><span class="weapon-label" id="bomb-label">פצצה</span></div>
+        </div>
+        <p class="stage-caption">להחזיק לירי · לשחרר לקירור</p>
+      </div>
+      <div class="demo-footer"><span><bdi>844 × 390</bdi> · תצוגת מובייל לרוחב</span><span>יעד מגע <bdi>56 × 56</bdi> · שוליים פנויים</span></div>
+    </section>
+    <section class="lab" aria-label="אפשרויות תצוגה">
+      <div class="lab-top"><h2>לנסות את התחושה</h2><button id="reset" class="text-button">איפוס</button></div>
+      <div class="lab-controls">
+        <label>חימום וולקן <output id="heat-output">36%</output><input id="heat" aria-label="חימום וולקן" type="range" min="0" max="100" value="36"></label>
+        <label>אנרגיה <output id="energy-output">82%</output><input id="energy" aria-label="ערך אנרגיה" type="range" min="0" max="100" value="82"></label>
+        <label>מגן <output id="shield-output">64%</output><input id="shield" aria-label="ערך מגן" type="range" min="0" max="100" value="64"></label>
+      </div>
+      <div class="lab-options"><label><input id="offline" type="checkbox"> השבתת נשקים</label><label><input id="bright" type="checkbox"> רקע בהיר לבדיקת ניגודיות</label><label><input id="safe-area" type="checkbox"> הדמיית אזור בטוח</label></div>
+      <p class="hint">מקלדת: רווח לירי · Z לוולקן · M לטיל · B לפצצה. אחרי התחממות מלאה משחררים את הוולקן לקירור.</p>
+      <p class="feedback" id="feedback" role="status" aria-live="polite">מוכן לניסוי</p>
+    </section>
+    <section class="catalog" aria-labelledby="catalog-title">
+      <div class="section-heading"><div><p class="eyebrow">THE ASSET SET</p><h2 id="catalog-title">אותה שפה. שלושה מצבים.</h2></div><div class="format-switch" role="group" aria-label="פורמט התצוגה"><button data-format="svg" aria-pressed="true">SVG</button><button data-format="png" aria-pressed="false">PNG 128</button></div></div>
+      <div class="catalog-scroll"><table><thead><tr><th scope="col">רכיב</th><th scope="col">רגיל</th><th scope="col">לחוץ</th><th scope="col">מושבת</th></tr></thead><tbody id="asset-rows"></tbody></table></div>
+      <p class="hint">המדים לקריאה בלבד; מצב ״לחוץ״ משמש בהם להדגשת משוב. מספרי החימום והמשאבים בנכסים הם דוגמאות סטטיות.</p>
+    </section>
+    <footer class="page-footer"><span>עיצוב מקורי · MIT · ללא תלות ברשת</span><nav aria-label="קבצי הערכה"><a href="manifest.json">מניפסט</a><a href="REPORT.md">דוח</a><a href="LICENSE.txt">רישיון</a></nav></footer>
+  </main>
+</body>
+</html>

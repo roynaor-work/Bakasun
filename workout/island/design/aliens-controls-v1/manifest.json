@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "id": "aliens-controls-v1",
+  "version": "1.0.0",
+  "created": "2026-11-14",
+  "license": "MIT",
+  "licenseFile": "LICENSE.txt",
+  "source": "Original geometric vector artwork; no external images, fonts or icon libraries.",
+  "preview": "preview.html",
+  "pngSize": {
+    "width": 128,
+    "height": 128
+  },
+  "svgViewBox": [
+    0,
+    0,
+    128,
+    128
+  ],
+  "states": [
+    "normal",
+    "pressed",
+    "disabled"
+  ],
+  "tokens": {
+    "surface": "#07131F",
+    "normalSurfaceOpacity": 0.72,
+    "pressedSurfaceOpacity": 0.9,
+    "disabledSurfaceOpacity": 0.78,
+    "icon": "#F2F8FC",
+    "edge": "#B2C5CF",
+    "disabledIcon": "#A9BAC5",
+    "targetCssPx": 56,
+    "gapCssPx": 8,
+    "edgeInsetCssPx": 16
+  },
+  "components": [
+    {
+      "id": "fire",
+      "label": "ירי רגיל",
+      "name": "Regular fire",
+      "kind": "button",
+      "accent": "#E8F6FF",
+      "targetCssPx": 56,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/fire-normal.svg",
+            "bytes": 670,
+            "sha256": "4cc812aea9504ec296d7245cd10a89450cdb4d2836e9907c709b2bcb5f606dee"
+          },
+          "png": {
+            "path": "png/fire-normal.png",
+            "bytes": 3763,
+            "sha256": "b78e219b5efbb67cf7039ffb9115d4efd2359d4639dae8162ead4b284e4834c0"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/fire-pressed.svg",
+            "bytes": 826,
+            "sha256": "2f7d459f6ca626577c949236ead5bac9ead9dd0654ac796ababa5d9fc269d6e4"
+          },
+          "png": {
+            "path": "png/fire-pressed.png",
+            "bytes": 5499,
+            "sha256": "eef3c8e2708cd3476937a024edacd071bcdd9367fac9b8a5c7a1a39a0f3638c1"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/fire-disabled.svg",
+            "bytes": 708,
+            "sha256": "a8749393053f57f22e07bd113cbbb91710fd1c5836f4ee28bdbbe9522d7bc731"
+          },
+          "png": {
+            "path": "png/fire-disabled.png",
+            "bytes": 4312,
+            "sha256": "3aa9f703ddc0a59bfa6960dd2cf0310561ee05c07de61b5653cee69367d18e18"
+          }
+        }
+      }
+    },
+    {
+      "id": "vulcan",
+      "label": "וולקן",
+      "name": "Vulcan",
+      "kind": "button",
+      "accent": "#FFD28A",
+      "targetCssPx": 56,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/vulcan-normal.svg",
+            "bytes": 1281,
+            "sha256": "55fc09bb735dd14341cdbaef3589c64eb3f97f00d1abe358c9463e2ce5403f28"
+          },
+          "png": {
+            "path": "png/vulcan-normal.png",
+            "bytes": 7036,
+            "sha256": "9ba1f31ee6c7bf1eb753a883a35eb9c4377bd19576e24b31a46dd23b1feba654"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/vulcan-pressed.svg",
+            "bytes": 1347,
+            "sha256": "08553e16e711d690ddf44d2c92dce63679aad5038e4f151f54fbf2df92054859"
+          },
+          "png": {
+            "path": "png/vulcan-pressed.png",
+            "bytes": 8337,
+            "sha256": "7e475629d8a8ee3cfb4269d5c06eb2bf41616816107df2b75a546170fd3e9494"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/vulcan-disabled.svg",
+            "bytes": 1502,
+            "sha256": "43964827658d198202de730fe9f410f4ea3ffba43657d806caab4660965bbaf1"
+          },
+          "png": {
+            "path": "png/vulcan-disabled.png",
+            "bytes": 7247,
+            "sha256": "434a67339ef45a3e5693a0fc86c1f9caf67edd69eae254cabacba634dcd660d8"
+          }
+        }
+      }
+    },
+    {
+      "id": "missile",
+      "label": "טיל",
+      "name": "Missile",
+      "kind": "button",
+      "accent": "#B5C7FF",
+      "targetCssPx": 56,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/missile-normal.svg",
+            "bytes": 769,
+            "sha256": "2cdc3685c905f0d16677f7ffc1c0373f1bc43d2c38bd8391ebf85f7f6139ddad"
+          },
+          "png": {
+            "path": "png/missile-normal.png",
+            "bytes": 6728,
+            "sha256": "2de8fd559ba4e5cbc000c3420896691bc1395c199afe8fe960791ff0bd29c62e"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/missile-pressed.svg",
+            "bytes": 925,
+            "sha256": "5d7a75bd6bc29ff53b3e8048a869f26cdd0c10f4a7d6e17ada2a3e28c4cf2c95"
+          },
+          "png": {
+            "path": "png/missile-pressed.png",
+            "bytes": 8206,
+            "sha256": "3f61294146d652a2daa38c1046a7ff8bd0da7112776893beacb71a6c8f5c8e54"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/missile-disabled.svg",
+            "bytes": 807,
+            "sha256": "2f10b1013ef5db62ed989c151751ec7f798d7d264f9fcc6dd15aa9fb58da8379"
+          },
+          "png": {
+            "path": "png/missile-disabled.png",
+            "bytes": 7190,
+            "sha256": "cebb37e4d48ba99b3210c9bc326255a8786509f4c71c9918a6be8fdc81f8537d"
+          }
+        }
+      }
+    },
+    {
+      "id": "bomb",
+      "label": "פצצה",
+      "name": "Bomb",
+      "kind": "button",
+      "accent": "#FFB7AA",
+      "targetCssPx": 56,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/bomb-normal.svg",
+            "bytes": 703,
+            "sha256": "f3851c95b756d6cb3123728683d59cd11d8d8294b2b1d7edd0aa1d08ce6c6029"
+          },
+          "png": {
+            "path": "png/bomb-normal.png",
+            "bytes": 6375,
+            "sha256": "54cdef5d9982922984f6d6cf0be321269ff99dfedaa557e6e7d54d2c363a4816"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/bomb-pressed.svg",
+            "bytes": 859,
+            "sha256": "20953c8632295ca4be1dcd949204dd6dc5e755ef42be0abdc7505bb924e2a066"
+          },
+          "png": {
+            "path": "png/bomb-pressed.png",
+            "bytes": 8097,
+            "sha256": "b3e2154834ff8f1b9f51d533fc6ee644664a64a04b97de3cf4209c9de22cbeb8"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/bomb-disabled.svg",
+            "bytes": 741,
+            "sha256": "26f77429a865fe627fff7fce6f4db33e54c77b0726b5590ddb11166cf17b7121"
+          },
+          "png": {
+            "path": "png/bomb-disabled.png",
+            "bytes": 6841,
+            "sha256": "f3c12478ef20be43bb67034ab67fd63aedf536de5acf242398c05ea87d18769a"
+          }
+        }
+      }
+    },
+    {
+      "id": "energy",
+      "label": "אנרגיה",
+      "name": "Energy",
+      "kind": "meter",
+      "accent": "#A4F0CD",
+      "targetCssPx": null,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/energy-normal.svg",
+            "bytes": 1225,
+            "sha256": "eaca6c58082f105b63c16396680dc00c926be8180549ccd837bf8472c0f29a6a"
+          },
+          "png": {
+            "path": "png/energy-normal.png",
+            "bytes": 7473,
+            "sha256": "8b86d3b4a807cbf7c4ccc603991b41c93c350761d11305d4049deb9e1b377128"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/energy-pressed.svg",
+            "bytes": 1381,
+            "sha256": "4fad5a814b8bd5c2a25c3968cb8d46185da98945b7e85adca389b6b42e8a7570"
+          },
+          "png": {
+            "path": "png/energy-pressed.png",
+            "bytes": 8982,
+            "sha256": "a0ce93666594c8cd53fd372b09a2d8107056daf638e5c0c9e9224e76a187870e"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/energy-disabled.svg",
+            "bytes": 1154,
+            "sha256": "05a9db2020154b51d2ef24085f0a19462b49647e2b1c9a91fd93cc693337a4a2"
+          },
+          "png": {
+            "path": "png/energy-disabled.png",
+            "bytes": 7414,
+            "sha256": "6da4024f6e07e477fd2df0b7f3975f347bd82f64f5a44c4c738e0c5467f13ee6"
+          }
+        }
+      }
+    },
+    {
+      "id": "shield",
+      "label": "מגן",
+      "name": "Shield",
+      "kind": "meter",
+      "accent": "#A8DEFF",
+      "targetCssPx": null,
+      "displayCssPx": 56,
+      "states": {
+        "normal": {
+          "svg": {
+            "path": "svg/shield-normal.svg",
+            "bytes": 1217,
+            "sha256": "35ba0387d1019f8c2346cf92fbf80634dd913b3c06f743ea15ad34eef09614a4"
+          },
+          "png": {
+            "path": "png/shield-normal.png",
+            "bytes": 8397,
+            "sha256": "23eb3de08eabd46cd6ca1cc01f5c7ef4af24d73b0da85111547701446acefd95"
+          }
+        },
+        "pressed": {
+          "svg": {
+            "path": "svg/shield-pressed.svg",
+            "bytes": 1373,
+            "sha256": "41a048e71b689f1311c08c29c7aecd62be8b46c11b5159620f4cbf83ef5059c0"
+          },
+          "png": {
+            "path": "png/shield-pressed.png",
+            "bytes": 9963,
+            "sha256": "ea360a6532bdc704098bab156c9035ff01f65c05784d5ef2465b7a0e7a18b29c"
+          }
+        },
+        "disabled": {
+          "svg": {
+            "path": "svg/shield-disabled.svg",
+            "bytes": 1187,
+            "sha256": "257df67541a85819382bea309c746a9d769f8e94e3ceaa65fcc1e02d7e448846"
+          },
+          "png": {
+            "path": "png/shield-disabled.png",
+            "bytes": 8323,
+            "sha256": "3573c202fab84724ed970481796b5dd8ef5b84d10e54f8587cc1e12606ecc681"
+          }
+        }
+      }
+    }
+  ],
+  "layout": {
+    "referenceViewport": {
+      "width": 844,
+      "height": 390
+    },
+    "coordinateSystem": "Physical left/top CSS pixels; never mirror with RTL; add safe-area insets.",
+    "buttons": {
+      "fire": {
+        "x": 772,
+        "y": 71,
+        "width": 56,
+        "height": 56
+      },
+      "vulcan": {
+        "x": 772,
+        "y": 135,
+        "width": 56,
+        "height": 56
+      },
+      "missile": {
+        "x": 772,
+        "y": 199,
+        "width": 56,
+        "height": 56
+      },
+      "bomb": {
+        "x": 772,
+        "y": 263,
+        "width": 56,
+        "height": 56
+      }
+    },
+    "meters": {
+      "energy": {
+        "x": 16,
+        "y": 111,
+        "width": 56,
+        "height": 56
+      },
+      "shield": {
+        "x": 16,
+        "y": 211,
+        "width": 56,
+        "height": 56
+      }
+    },
+    "unobstructedPlayfield": {
+      "x": 88,
+      "y": 0,
+      "width": 668,
+      "height": 390
+    }
+  },
+  "dynamicValues": {
+    "units": "SVG user units; heat and resource values are clamped to 0–100.",
+    "ringSelector": "#value-ring",
+    "ringUpdate": "set stroke-dasharray to '<value> 100'; pathLength is 100.",
+    "digitsSelector": "#value-digits",
+    "digitsUpdate": "Replace vector digits or use a 10px DOM numeric label at the same badge position; never scale the hit target.",
+    "heat": {
+      "component": "vulcan",
+      "normalSample": 36,
+      "pressedSample": 72,
+      "disabledSample": 100,
+      "thresholds": [
+        50,
+        80,
+        100
+      ],
+      "colors": [
+        "#A4F0CD",
+        "#FFD28A",
+        "#FFAE9E"
+      ],
+      "locked": "Use actual model.vulcanLocked; keep disabled while cooling even below 100. No blinking is required."
+    },
+    "resources": {
+      "energy": 82,
+      "shield": 64
+    },
+    "png": "PNGs are static state samples. Draw the current heat/resource ring and digits separately in a canvas integration.",
+    "meterStateMeaning": {
+      "normal": "available",
+      "pressed": "highlighted feedback only; meters are read-only",
+      "disabled": "unavailable, shown as --"
+    }
+  },
+  "integration": {
+    "status": "Design package only; live game files are untouched.",
+    "knownModelFields": {
+      "fire": "input.firing",
+      "vulcan": "input.vulcan",
+      "heat": "model.vulcanHeat (0–1)",
+      "locked": "model.vulcanLocked",
+      "missile": "input.nova / model.novaCharges"
+    },
+    "unmapped": [
+      "bomb",
+      "energy",
+      "shield resource"
+    ],
+    "unmappedNote": "Require an explicit game adapter. Do not invent or change gameplay/state/persistence.",
+    "pointer": "Keep 56×56 target stationary. Release/cancel/lost capture/blur/hidden/resize/disable clears held input. Each pointer owns its button.",
+    "accessibility": "Native buttons with Hebrew accessible names; disabled attribute for unavailable actions; meters use role=meter and aria-valuenow. Keep labels/numbers alongside color. Focus outline is outside the asset.",
+    "safeArea": "right/left: calc(16px + env(safe-area-inset-right/left)); use top/bottom insets for the usable rail height."
+  },
+  "rebuild": "python3 workout/island/design/aliens-controls-v1/tools/build.py"
+}
