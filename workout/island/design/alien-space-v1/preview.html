@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>חלל עמוק · 30 שלבים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script src="manifest-data.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main aria-label="תצוגת רקעי חלל">
+    <canvas id="space" width="844" height="390" role="img" aria-label="רקע חלל עם שלוש שכבות פרלקסה"></canvas>
+    <header class="chrome topline">
+      <div class="identity"><span class="eyebrow">מסע בין כוכבים</span><h1 id="theme-name">חלל עמוק</h1></div>
+      <div class="top-actions"><span class="stage-pill" id="stage-label" aria-live="polite">01 / 30</span><button id="tools" aria-haspopup="dialog">כלים <span aria-hidden="true">☷</span></button></div>
+    </header>
+    <nav class="chrome dock" aria-label="בחירת נושא" id="themes"></nav>
+    <div class="chrome bottom-note"><span>שלוש שכבות עומק</span><span>844 × 390</span></div>
+    <p id="error" role="alert" hidden></p>
+    <button id="restore" class="restore" hidden>הצגת כלים</button>
+  </main>
+  <dialog id="inspector" aria-labelledby="inspector-title">
+    <div class="dialog-heading"><div><span class="eyebrow">תצוגת הנכסים</span><h2 id="inspector-title">בקרת טיסה</h2></div><button id="close" aria-label="סגירת הכלים">×</button></div>
+    <label class="field">שלב <select id="level" aria-label="בחירת שלב"></select></label>
+    <div class="actions"><button id="previous" aria-label="לשלב הקודם">→</button><button id="pause" aria-pressed="false">השהיה</button><button id="next" aria-label="לשלב הבא">←</button></div>
+    <fieldset><legend>שכבות</legend><label><input type="checkbox" data-layer="far" checked> רחוק · כוכבים</label><label><input type="checkbox" data-layer="mid" checked> אמצע · נושא</label><label><input type="checkbox" data-layer="near" checked> קרוב · ענני גז</label></fieldset>
+    <fieldset>
+      <legend>אפקטים</legend>
+      <label><input id="effects" type="checkbox" checked> כוכבים נופלים ופיצוצים</label>
+      <label class="field">פריים פיצוץ
+        <select id="explosion-frame">
+          <option value="auto">ניגון אוטומטי</option>
+          <option value="0">1 · הצתה</option>
+          <option value="1">2 · התרחבות</option>
+          <option value="2">3 · גל הדף</option>
+          <option value="3">4 · דעיכה</option>
+        </select>
+      </label>
+      <button id="shooting-star" aria-pressed="false">הצגת כוכב נופל לבדיקה</button>
+    </fieldset>
+    <p class="metric" id="budget"></p><p class="help" id="motion-note">הזזת העכבר משנה את נקודת המבט. H להסתרת הממשק.</p>
+    <button id="clean">תצוגה נקייה</button>
+  </dialog>
+  <noscript>להצגת השכבות והתנועה יש להפעיל JavaScript.</noscript>
+</body>
+</html>

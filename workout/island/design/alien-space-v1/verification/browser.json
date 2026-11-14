@@ -1,0 +1,175 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "viewport": [
+    844,
+    390
+  ],
+  "checks": [
+    "30 levels rendered at 844×390; 30 distinct pixel hashes",
+    "temporal parallax changes rendered pixels",
+    "theme/stage picker, all layer toggles, effects toggle and shooting-star inspection operate",
+    "all four explosion frames inspected through UI; exact 100/140/200/280ms playback boundaries",
+    "pause freezes the full timeline; resume advances it",
+    "reduced motion freezes pixels and omits automatic explosions and shooting stars",
+    "390×844 layout has no horizontal overflow; dialog supports keyboard Escape",
+    "no JavaScript errors, external requests or failed HTTP responses",
+    "missing PNG produces a visible asset-specific error"
+  ],
+  "consoleErrors": [],
+  "externalRequests": [],
+  "badResponses": [],
+  "levelRenders": [
+    {
+      "level": 1,
+      "theme": "purple-nebula",
+      "sha256": "923316c6ed08006a6f3de95243d44a64c0e2e646ecfe74183d0ba2022eaea75b"
+    },
+    {
+      "level": 2,
+      "theme": "purple-nebula",
+      "sha256": "6c3d804bd78b4d32fa59a83e676aa4f4226c24f7d866180a2f5ca0606aadbf4d"
+    },
+    {
+      "level": 3,
+      "theme": "purple-nebula",
+      "sha256": "d5fbbf7dc6e78919065135f711af60410e69456d6015c3ba73a7083cc2b597a1"
+    },
+    {
+      "level": 4,
+      "theme": "purple-nebula",
+      "sha256": "0fa426a059ada730bf2bea9e651273d47113e6eb3818fa75a6a36bc78fa34a7d"
+    },
+    {
+      "level": 5,
+      "theme": "purple-nebula",
+      "sha256": "8da03826ed72e949b45b125144f10d5313174102f88dee64777b17bc1e6c0f80"
+    },
+    {
+      "level": 6,
+      "theme": "ringed-planet",
+      "sha256": "deaa8b9e59fc1418d57ff50c2993691c6a76924620dd40b7df8932ccb097551c"
+    },
+    {
+      "level": 7,
+      "theme": "ringed-planet",
+      "sha256": "868f59dd3aa8314e01a24bb0740a5e6e4f229597fa15496ca25b36c02d094df3"
+    },
+    {
+      "level": 8,
+      "theme": "ringed-planet",
+      "sha256": "879a64b7f2e20bd73dd6f1d8be90edbae7632491142b8686550e36dd4cce24aa"
+    },
+    {
+      "level": 9,
+      "theme": "ringed-planet",
+      "sha256": "a4ae6af244312357c7ad292913760b0dba0ad1960f029651180f9e9d34228863"
+    },
+    {
+      "level": 10,
+      "theme": "ringed-planet",
+      "sha256": "d60ede34f1d272a6395e694215cbcce0f5d249562dbaa846cfee6b5774e12c0a"
+    },
+    {
+      "level": 11,
+      "theme": "asteroid-field",
+      "sha256": "b8cb80afc3b93886275d98cfb36facd8dec22a88f6539023ec9ded6548a801ef"
+    },
+    {
+      "level": 12,
+      "theme": "asteroid-field",
+      "sha256": "734083853c17bf857b5e62fb6f47467889ecc614da2b2635bbf4dadebd4ef02c"
+    },
+    {
+      "level": 13,
+      "theme": "asteroid-field",
+      "sha256": "315f4e28008ba8a5515318e21be9ee7d9762edd2c7da28f5c9ca629ef6f176f8"
+    },
+    {
+      "level": 14,
+      "theme": "asteroid-field",
+      "sha256": "4616a682e4a040a6baeb1fa5ba151273117c44b1c55c3a252782608fa6f664b9"
+    },
+    {
+      "level": 15,
+      "theme": "asteroid-field",
+      "sha256": "bb2719ebd33f14024b6a0ed26a17b6b0bfdd301b22030cff0a04e3fe2d55958c"
+    },
+    {
+      "level": 16,
+      "theme": "earth-moon",
+      "sha256": "3b929d4e0810024ada0e184672a6ddf8930c958571cc2d82c92e7c087141cfd3"
+    },
+    {
+      "level": 17,
+      "theme": "earth-moon",
+      "sha256": "e50ca7ced8090c7e25b231a8438e3d3ba6f5af9b92fdacd210766f4297c46297"
+    },
+    {
+      "level": 18,
+      "theme": "earth-moon",
+      "sha256": "71d14698db4b4f0292f8e20ce4fa390310f7d403904989097b5d1fb671e76391"
+    },
+    {
+      "level": 19,
+      "theme": "earth-moon",
+      "sha256": "1889263e5ae2a1a4d0503cb0e40e54ec9b177787f8b4f6dcfefc5a2285c4fe9f"
+    },
+    {
+      "level": 20,
+      "theme": "earth-moon",
+      "sha256": "dfa347e6f0493db7ef6a2f531261e1b84cd006970a809a0c1cf13b7a2d461bf2"
+    },
+    {
+      "level": 21,
+      "theme": "sun-corona",
+      "sha256": "d28ffdf82114c01005d412003a5ca52350b2e6fffc50a0ad7f11f5e29900dd2a"
+    },
+    {
+      "level": 22,
+      "theme": "sun-corona",
+      "sha256": "611f35381577163241f691cc0353529a4198350ee972e67c27b545c6d992926c"
+    },
+    {
+      "level": 23,
+      "theme": "sun-corona",
+      "sha256": "dfd6bfebe35ae3d8ae58491187be92578c72c6a58967483d3935dc9ee029d8d1"
+    },
+    {
+      "level": 24,
+      "theme": "sun-corona",
+      "sha256": "9696974c656f9fd1e29545096ce4c80ce855112a820b1fd1df29aaf6deeafac4"
+    },
+    {
+      "level": 25,
+      "theme": "sun-corona",
+      "sha256": "c03ef650f27c47aa5ac8292408e1d39e3faf02bb94de7451a7a45c71af6d98a2"
+    },
+    {
+      "level": 26,
+      "theme": "galaxy",
+      "sha256": "bc7335ed1c8f7e40c3fe133b0f75f4503c0a0a1f9cb8b04ebf1e8939540f08d6"
+    },
+    {
+      "level": 27,
+      "theme": "galaxy",
+      "sha256": "5e8e27d7b4699f4917e9cfad8e7864b749de0ee65e0b582a189fcf96dccae820"
+    },
+    {
+      "level": 28,
+      "theme": "galaxy",
+      "sha256": "1c5ebb3c85496bbffa401644165ffde2d47ed0b8b6ce526be8dec2e74eff9807"
+    },
+    {
+      "level": 29,
+      "theme": "galaxy",
+      "sha256": "9afe34629af4715a7ddbfbe11f901f478250cbd065cb8a4fb1c76ac10b93e8a0"
+    },
+    {
+      "level": 30,
+      "theme": "galaxy",
+      "sha256": "4c5fd3e4cb5c0aa27e1e45bb996799bbae325058a661365d906dea5a1026c243"
+    }
+  ],
+  "fileUrl": "Direct file URL was blocked by environment browser policy; verified via a local HTTP server."
+}

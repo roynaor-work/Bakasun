@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "themes": 6,
+  "levels": 30,
+  "pngFiles": 20,
+  "sharedEffectBytes": 35637,
+  "uniqueTextureBytes": 1825132,
+  "budgets": [
+    {
+      "id": "purple-nebula",
+      "levels": [
+        1,
+        5
+      ],
+      "bytes": 336517,
+      "limit": 800000,
+      "passed": true
+    },
+    {
+      "id": "ringed-planet",
+      "levels": [
+        6,
+        10
+      ],
+      "bytes": 321588,
+      "limit": 800000,
+      "passed": true
+    },
+    {
+      "id": "asteroid-field",
+      "levels": [
+        11,
+        15
+      ],
+      "bytes": 313050,
+      "limit": 800000,
+      "passed": true
+    },
+    {
+      "id": "earth-moon",
+      "levels": [
+        16,
+        20
+      ],
+      "bytes": 328433,
+      "limit": 800000,
+      "passed": true
+    },
+    {
+      "id": "sun-corona",
+      "levels": [
+        21,
+        25
+      ],
+      "bytes": 374285,
+      "limit": 800000,
+      "passed": true
+    },
+    {
+      "id": "galaxy",
+      "levels": [
+        26,
+        30
+      ],
+      "bytes": 329444,
+      "limit": 800000,
+      "passed": true
+    }
+  ],
+  "checks": [
+    "PNG dimensions and checksums",
+    "real straight alpha",
+    "transparent outer layer margins",
+    "far horizontal seam pixel equality",
+    "20 PNGs and no text metadata",
+    "all 30 level mappings and five configurations per theme",
+    "complete theme budget including full shared atlases",
+    "four untrimmed explosion frames and duration",
+    "preview companion equals JSON manifest"
+  ]
+}

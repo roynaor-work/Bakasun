@@ -1,0 +1,63 @@
+{
+  "repository": "roynaor-work/Bakasun",
+  "baseCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "branch": "codex/alien-space-v1",
+  "fullRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "summary": {
+      "tests": 4200,
+      "suites": 0,
+      "pass": 4135,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 64,
+      "todo": 0,
+      "duration_ms": 1131252.273532
+    },
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Playwright bundled chromium_headless_shell-1234 executable is not installed in the environment",
+      "serverLeak": "The existing test opens its server before browser launch and does not close it when launch fails. Only this stalled test process was terminated after the failure was reproduced."
+    }
+  },
+  "isolatedReproduction": {
+    "command": "node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "exitCode": 1,
+    "summary": {
+      "tests": 5,
+      "suites": 0,
+      "pass": 4,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 822.068633
+    },
+    "sameFailure": "missing bundled browser executable"
+  },
+  "isolatedSystemBrowserRun": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/alien-space-system-playwright.mjs node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "summary": {
+      "tests": 5,
+      "suites": 0,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 23713.255586
+    },
+    "configuration": "Temporary external launcher uses installed Playwright 1.57.0 and /usr/bin/chromium 151.0.7922.173; no existing repository file was changed."
+  },
+  "scope": {
+    "allowedDirectory": "workout/island/design/alien-space-v1/",
+    "existingFilesChanged": 0,
+    "filesOutsideAllowedDirectory": 0,
+    "newFiles": 37
+  },
+  "assetChecks": "verification/assets.json",
+  "previewChecks": "verification/browser.json"
+}

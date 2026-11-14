@@ -1,0 +1,1071 @@
+{
+  "schemaVersion": 1,
+  "id": "alien-space-v1",
+  "version": "1.0.0",
+  "created": "2026-11-14",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/alien-space-v1",
+  "baseCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "runtimeIntegration": "design-package-only",
+  "license": "CC0-1.0",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "textureSize": {
+    "width": 1024,
+    "height": 512
+  },
+  "budget": {
+    "maxBytesPerTheme": 800000,
+    "unit": "decimal-bytes",
+    "includes": "all-three-layers-plus-both-complete-shared-effect-atlases",
+    "excludes": "preview-tools-documentation-and-verification"
+  },
+  "sampling": {
+    "format": "image/png",
+    "colorSpace": "sRGB",
+    "filter": "linear",
+    "mipmaps": false,
+    "premultipliedAlpha": false,
+    "wrap": "clamp-to-edge-unless-repeat-x"
+  },
+  "coordinates": "top-left pixels; layer origin is viewport minus texture size divided by two; frames are untrimmed row-major rectangles",
+  "camera": {
+    "inputRange": [
+      -1,
+      1
+    ],
+    "layerTranslation": "camera * maxCameraShiftPx + bounded sinusoidal drift; far scroll wraps on x",
+    "maxVerticalShiftPx": 6
+  },
+  "accessibility": {
+    "reducedMotion": "freeze layers and omit shooting stars and explosions",
+    "pause": "freeze full scene including effects",
+    "backgroundOnly": true
+  },
+  "effects": {
+    "shooting-stars": {
+      "path": "effects/shooting-stars.png",
+      "width": 512,
+      "height": 128,
+      "bytes": 12898,
+      "sha256": "fef489c8e433804ee7483888adef998ccaf9c5d75519935a004d5c297a7073bd",
+      "alpha": "straight",
+      "frameWidth": 256,
+      "frameHeight": 128,
+      "frameCount": 2,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 256,
+          "height": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "width": 256,
+          "height": 128
+        }
+      ],
+      "framesAre": "independent-color-variants-not-animation",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "blend": "source-over",
+      "drawSize": [
+        190,
+        95
+      ],
+      "velocityPxPerSecond": [
+        350,
+        72
+      ],
+      "lifetimeMs": 1800,
+      "intervalSeconds": [
+        4.8,
+        9.2
+      ],
+      "opacity": 0.65,
+      "zIndex": 4
+    },
+    "explosion": {
+      "path": "effects/explosion.png",
+      "width": 512,
+      "height": 128,
+      "bytes": 22739,
+      "sha256": "59d9b9408d693abf2fa84a24effb9f9cde021af31e9583f0f9f662a7ff68db2e",
+      "alpha": "straight",
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frameCount": 4,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "width": 128,
+          "height": 128
+        }
+      ],
+      "frameDurationsMs": [
+        100,
+        140,
+        200,
+        280
+      ],
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "blend": "source-over",
+      "drawSize": [
+        82,
+        82
+      ],
+      "opacity": 0.55,
+      "intervalSeconds": [
+        12,
+        18
+      ],
+      "depth": 0.12,
+      "zIndex": 1
+    }
+  },
+  "themes": [
+    {
+      "id": "purple-nebula",
+      "name": "נבולה סגולה",
+      "accent": "#be85ff",
+      "backgroundColor": "#0d071b",
+      "stages": [
+        1,
+        5
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/purple-nebula/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 166621,
+          "sha256": "5148f151194ed50d645299208c9b56ba6fc6a27b97deb1df465ca3bc00e3cecf",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/purple-nebula/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 75358,
+          "sha256": "ef13e1ead47dde2fa5726cf7fc989b2a567d50eff3f289f1ba62eb14f33b2f78",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/purple-nebula/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 58901,
+          "sha256": "a51a2207e7a0f4fcff08ac82c478b3a5455d25ac75ca41d51fc0d6b9c9336a28",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 300880,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 336517
+    },
+    {
+      "id": "ringed-planet",
+      "name": "כוכב לכת טבעות",
+      "accent": "#e7c88d",
+      "backgroundColor": "#0d101a",
+      "stages": [
+        6,
+        10
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/ringed-planet/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 169214,
+          "sha256": "5bc6a79cef40199c11472d4bb0c4a2e197a83242ad5c37b445e4d3f5989e1fff",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/ringed-planet/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 56372,
+          "sha256": "7a1a4307e30f4c0d0c0ad8655a336565d69cdcdba60929f57b232e634ad6ed20",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/ringed-planet/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 60365,
+          "sha256": "f1d3548a3edf1143d09d6673ad7f0f8680e2c4808f3f37022059dfb47823f015",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 285951,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 321588
+    },
+    {
+      "id": "asteroid-field",
+      "name": "שדה אסטרואידים",
+      "accent": "#8fbedc",
+      "backgroundColor": "#07131d",
+      "stages": [
+        11,
+        15
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/asteroid-field/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 168474,
+          "sha256": "26eba72c45064efe54bd52a6bc67e7edd2571db522221b464818a03e23d59cbb",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/asteroid-field/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 45087,
+          "sha256": "b851223c10dbb0feca85e3934e18b3eed6e8bf0127a7b3a2dd9cac91996ee655",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/asteroid-field/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 63852,
+          "sha256": "235cef2f7265087dee40363286afef0a0399cddf321b4d5aa72f85f30d9fd42f",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 277413,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 313050
+    },
+    {
+      "id": "earth-moon",
+      "name": "ירח וכדור הארץ",
+      "accent": "#70cdf5",
+      "backgroundColor": "#061222",
+      "stages": [
+        16,
+        20
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/earth-moon/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 170448,
+          "sha256": "2dbeceaf57eecb910ff6fcbd8a1757777fa9e89db9fb973c9cf7f936b06256ab",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/earth-moon/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 69903,
+          "sha256": "74e07da40cf3663fe57a25e0d9aff8c6496f4722f2c2ba8be99beef83a236168",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/earth-moon/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 52445,
+          "sha256": "2da19e240a42db8b8d2496df256ecdbaba65023ebee505a4eb83a306e242338b",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 292796,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 328433
+    },
+    {
+      "id": "sun-corona",
+      "name": "שמש וקורונה",
+      "accent": "#ffb15d",
+      "backgroundColor": "#1a0b0b",
+      "stages": [
+        21,
+        25
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/sun-corona/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 169048,
+          "sha256": "77ccef82fbd78df1be7438a7d1ce31fce943b50b1e68c71a91e0faf8d9fd0426",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/sun-corona/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 113358,
+          "sha256": "230ca9b33b0ec7d90f37be640a796ab8bb7d59c251118efb71a0923a4e058e2d",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/sun-corona/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 56242,
+          "sha256": "dda0a3be4317a2963f6e80a1fbe9b81872400d0e045ba5d14ccc7a6f34a4f930",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 338648,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 374285
+    },
+    {
+      "id": "galaxy",
+      "name": "גלקסיה",
+      "accent": "#a79aff",
+      "backgroundColor": "#090c23",
+      "stages": [
+        26,
+        30
+      ],
+      "layers": [
+        {
+          "id": "far",
+          "path": "themes/galaxy/far.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 168915,
+          "sha256": "cd5e3c364edaf859d534c4553c0bf2b1bba1ba367bddf1107e0312ddf691d3da",
+          "alpha": "opaque",
+          "zIndex": 0,
+          "repeat": "x",
+          "depth": 0.06,
+          "opacity": 1,
+          "role": "distant-starfield",
+          "maxCameraShiftPx": 2,
+          "driftAmplitudePx": 0,
+          "driftPeriodSeconds": 0,
+          "scrollPxPerSecond": 1.6
+        },
+        {
+          "id": "mid",
+          "path": "themes/galaxy/mid.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 72563,
+          "sha256": "d060009ad8fd1a0c778268824fc0e206befbbe9295ccbd9b5d4b8eefd8e9a1bf",
+          "alpha": "straight",
+          "zIndex": 2,
+          "repeat": "none",
+          "depth": 0.32,
+          "opacity": 0.88,
+          "role": "celestial-landmark",
+          "maxCameraShiftPx": 12,
+          "driftAmplitudePx": 3,
+          "driftPeriodSeconds": 66,
+          "scrollPxPerSecond": 0
+        },
+        {
+          "id": "near",
+          "path": "themes/galaxy/near.png",
+          "width": 1024,
+          "height": 512,
+          "bytes": 52329,
+          "sha256": "82c28a08ee93539541e409b0abbca5388f9bc475c97a9e63680b8ad61371ef44",
+          "alpha": "straight",
+          "zIndex": 3,
+          "repeat": "none",
+          "depth": 0.8,
+          "opacity": 0.26,
+          "role": "gas-clouds",
+          "maxCameraShiftPx": 30,
+          "driftAmplitudePx": 16,
+          "driftPeriodSeconds": 42,
+          "scrollPxPerSecond": 0
+        }
+      ],
+      "effects": [
+        "shooting-stars",
+        "explosion"
+      ],
+      "gasClouds": {
+        "layer": "near",
+        "animated": "bounded-drift"
+      },
+      "ownTextureBytes": 293807,
+      "sharedTextureBytes": 35637,
+      "totalTextureBytes": 329444
+    }
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "theme": "purple-nebula",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 2,
+      "theme": "purple-nebula",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 3,
+      "theme": "purple-nebula",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 4,
+      "theme": "purple-nebula",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 5,
+      "theme": "purple-nebula",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 12
+    },
+    {
+      "level": 6,
+      "theme": "ringed-planet",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 7,
+      "theme": "ringed-planet",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 8,
+      "theme": "ringed-planet",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 9,
+      "theme": "ringed-planet",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 10,
+      "theme": "ringed-planet",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 12
+    },
+    {
+      "level": 11,
+      "theme": "asteroid-field",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 12,
+      "theme": "asteroid-field",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 13,
+      "theme": "asteroid-field",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 14,
+      "theme": "asteroid-field",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 15,
+      "theme": "asteroid-field",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 12
+    },
+    {
+      "level": 16,
+      "theme": "earth-moon",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 17,
+      "theme": "earth-moon",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 18,
+      "theme": "earth-moon",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 19,
+      "theme": "earth-moon",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 20,
+      "theme": "earth-moon",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 12
+    },
+    {
+      "level": 21,
+      "theme": "sun-corona",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 22,
+      "theme": "sun-corona",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 23,
+      "theme": "sun-corona",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 24,
+      "theme": "sun-corona",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 25,
+      "theme": "sun-corona",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 0,
+      "explosionIntervalSeconds": 12
+    },
+    {
+      "level": 26,
+      "theme": "galaxy",
+      "variant": 1,
+      "camera": [
+        -0.22,
+        -0.1
+      ],
+      "phaseSeconds": 0,
+      "driftSpeed": 0.78,
+      "gasOpacity": 0.18,
+      "shootingStarIntervalSeconds": 9.2,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 18
+    },
+    {
+      "level": 27,
+      "theme": "galaxy",
+      "variant": 2,
+      "camera": [
+        0.18,
+        -0.12
+      ],
+      "phaseSeconds": 8.7,
+      "driftSpeed": 0.9,
+      "gasOpacity": 0.22,
+      "shootingStarIntervalSeconds": 8.1,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 16.5
+    },
+    {
+      "level": 28,
+      "theme": "galaxy",
+      "variant": 3,
+      "camera": [
+        0,
+        0.15
+      ],
+      "phaseSeconds": 17.4,
+      "driftSpeed": 1,
+      "gasOpacity": 0.26,
+      "shootingStarIntervalSeconds": 7,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 15
+    },
+    {
+      "level": 29,
+      "theme": "galaxy",
+      "variant": 4,
+      "camera": [
+        -0.15,
+        0.08
+      ],
+      "phaseSeconds": 26.099999999999998,
+      "driftSpeed": 1.12,
+      "gasOpacity": 0.29,
+      "shootingStarIntervalSeconds": 5.9,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 13.5
+    },
+    {
+      "level": 30,
+      "theme": "galaxy",
+      "variant": 5,
+      "camera": [
+        0.24,
+        -0.04
+      ],
+      "phaseSeconds": 34.8,
+      "driftSpeed": 1.23,
+      "gasOpacity": 0.32,
+      "shootingStarIntervalSeconds": 4.8,
+      "shootingStarVariant": 1,
+      "explosionIntervalSeconds": 12
+    }
+  ]
+}

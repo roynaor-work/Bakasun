@@ -1,0 +1,45 @@
+:root { color-scheme:dark; font-family:Arial,"Noto Sans Hebrew",sans-serif; --accent:#be85ff; --ink:#edf0ff; }
+* { box-sizing:border-box; }
+body { margin:0; background:#02040c; color:var(--ink); overflow:hidden; }
+main { height:100vh; height:100dvh; position:relative; overflow:hidden; }
+canvas { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; }
+button,select { font:inherit; color:inherit; background:#141628; border:1px solid #ffffff24; border-radius:10px; min-height:44px; padding:9px 15px; cursor:pointer; }
+button:hover,select:hover { border-color:var(--accent); background:#242139; }
+button:disabled { opacity:.45; cursor:default; }
+button:focus-visible,select:focus-visible,input:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.topline { position:absolute; inset:24px 30px auto; display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
+.top-actions { display:flex; align-items:center; gap:12px; pointer-events:auto; }
+.identity { text-shadow:0 2px 12px #000; }
+.eyebrow { font-size:10px; letter-spacing:1.5px; color:#b0b9d4; }
+h1 { font-size:25px; letter-spacing:-.7px; font-weight:400; margin:5px 0 0; }
+.stage-pill { font-size:11px; font-variant-numeric:tabular-nums; letter-spacing:2px; direction:ltr; border:1px solid #ffffff24; padding:9px 13px; border-radius:22px; background:#080a18b8; }
+#tools { font-size:12px; backdrop-filter:blur(14px); background:#0b0e1db3; }
+#tools span { margin-right:10px; font-size:18px; }
+.dock { position:absolute; bottom:35px; left:50%; transform:translateX(-50%); display:flex; padding:5px; gap:3px; background:#0b0e1dcc; border:1px solid #ffffff18; border-radius:18px; backdrop-filter:blur(18px); max-width:96vw; }
+.theme { background:transparent; border-color:transparent; font-size:11px; white-space:nowrap; min-height:52px; padding:8px 12px; display:flex; align-items:center; gap:8px; }
+.theme[aria-pressed="true"] { background:#ffffff0c; border-color:#ffffff23; }
+.swatch { width:22px; height:22px; border-radius:50%; background:radial-gradient(circle at 35% 30%,var(--swatch),#101322 80%); box-shadow:0 0 15px color-mix(in srgb,var(--swatch) 12%,transparent); }
+.bottom-note { position:absolute; bottom:13px; left:30px; right:30px; display:flex; justify-content:space-between; color:#818ba9; font-size:9px; letter-spacing:.5px; pointer-events:none; }
+dialog { width:350px; max-width:calc(100vw - 24px); max-height:calc(100dvh - 24px); background:#0d1020f5; color:var(--ink); border:1px solid #ffffff26; border-radius:20px; padding:22px; box-shadow:0 25px 100px #000b; }
+dialog::backdrop { background:#01020b8c; backdrop-filter:blur(5px); }
+.dialog-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+h2 { font-size:23px; font-weight:400; margin:6px 0 0; }
+#close { font-size:23px; padding:0; min-width:44px; background:transparent; }
+.field { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:12px 0; font-size:12px; }
+select { max-width:220px; font-size:12px; }
+.actions { display:flex; gap:7px; }
+#pause { flex:1; }
+fieldset { border:1px solid #ffffff19; border-radius:12px; margin:16px 0; padding:10px 13px; }
+legend { font-size:11px; color:#a3aecb; padding:0 7px; }
+fieldset label { display:flex; gap:8px; align-items:center; min-height:35px; font-size:12px; }
+input { accent-color:var(--accent); width:17px; height:17px; }
+#shooting-star { width:100%; font-size:11px; background:#171b2e; }
+.metric { color:var(--accent); font-size:11px; margin:0; }
+.help { color:#98a4c1; font-size:11px; line-height:1.8; }
+#clean { width:100%; }
+.clean .chrome { display:none; }
+.restore { position:absolute; top:12px; left:12px; opacity:.15; font-size:10px; }
+.restore:hover,.restore:focus-visible { opacity:1; }
+#error { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:#251222; border:1px solid #fa9191; border-radius:12px; padding:20px; max-width:80%; text-align:center; }
+@media(max-width:700px) { .topline { inset:15px 18px auto; } h1 { font-size:21px; } .dock { gap:0; padding:3px; bottom:28px; } .theme { flex-direction:column; gap:5px; padding:7px; font-size:8px; } .swatch { width:17px; height:17px; } .bottom-note { left:18px; right:18px; bottom:9px; font-size:8px; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }
