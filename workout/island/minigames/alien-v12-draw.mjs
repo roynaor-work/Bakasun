@@ -1,5 +1,6 @@
 /** v12 presentation: two wing-mounted rotary cannons (local drawing, no logos), muzzle flashes with
  * stars and sparks, and thin tracer bullets. Reads existing model state (player, cannonLast, spinAngle). */
+import {fxFor,drawFxFlames} from './alien-fx-draw.mjs?v=island-v2-20261107-11';
 const TAU=Math.PI*2;
 function cannon(p,side,m,scale,flashAge,flashLen,flashOnly=false){
  p.save();p.translate(side*m.cannonOffset*(m._aspect||1),flashOnly?0:-3*scale);
@@ -24,14 +25,17 @@ function cannon(p,side,m,scale,flashAge,flashLen,flashOnly=false){
  }
  p.restore();
 }
-/** Two cannons, one per wing; each flashes when it fired in the last `flashSeconds`. */
+/** Two cannons, one per wing; each flashes when it fired in the last `flashSeconds`.
+ * v24 (alien-fx-v1): with the effects loaded the Codex flames replace the drawn flash (the regular shot's flame, the Vulcan's burst); ?alienFx=0 draws it as before. */
 export function drawV12Cannons(p,m,aspect=1,scale=1){
  if(!m.v12)return;
- const view={...m,_aspect:aspect};
+ const view={...m,_aspect:aspect},fx=Boolean(fxFor(m)?.image('cannon'));
  p.save();p.translate(m.player.x,m.player.y);p.scale(1/aspect,1);
  const flash=m.flashSeconds||.045;
- const only=Boolean(m.shipV13);cannon(p,-1,view,scale,m.time-m.cannonLast[0],flash,only);cannon(p,1,view,scale,m.time-m.cannonLast[1],flash,only);
+ const only=Boolean(m.shipV13);
+ if(!(fx&&only)){cannon(p,-1,view,scale,fx?Infinity:m.time-m.cannonLast[0],flash,only);cannon(p,1,view,scale,fx?Infinity:m.time-m.cannonLast[1],flash,only);}
  p.restore();
+ if(fx)drawFxFlames(p,m,aspect,scale);
 }
 /** A small bright tracer; no glow (dozens are on screen at once). */
 export function drawV12Tracer(p,s,aspect=1,scale=1){

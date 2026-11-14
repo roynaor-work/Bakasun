@@ -1,0 +1,9 @@
+/* Aliens v24 (Codex alien-fx-v1): the Vulcan button's heat ring in the colours of the meter next to the ship (the stops of the sprite's fill gradient),
+ * so the ring and the bar read as one gauge. Only while the effects are on (data-alien-fx on the controls); ?alienFx=0 keeps the v23 colours. */
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=green]{--vulcan-color:#41e892}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=yellow]{--vulcan-color:#ffdc46}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=red],.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=lock]{--vulcan-color:#ff555a}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=lock]{border-color:#ff555a}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=lock] .alien-vulcan-ring{border-color:#ff555a;box-shadow:0 0 14px #ff555a88}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=lock][data-blink=on]{--vulcan-color:#ffffff;border-color:#ffffff}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-fire=v23][data-alien-fx=v1] #vulcan[data-level=lock][data-blink=on] .alien-vulcan-ring{border-color:#ffffff;box-shadow:0 0 18px #ff555acc}

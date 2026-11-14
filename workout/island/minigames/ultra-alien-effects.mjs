@@ -4,6 +4,7 @@ import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons,drawV12Tracer} from './alien-v12-draw.mjs';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
+import {drawFxLaser,drawFxEffects} from './alien-fx-draw.mjs?v=island-v2-20261107-11';
 const TAU=Math.PI*2;
 const threatColors={needle:'#ff8298',orb:'#ffbf8b',diamond:'#ffabd0',fork:'#dc9fff',ring:'#ffa58c'};
 const rgba=(hex,a)=>{const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`;};
@@ -27,8 +28,10 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  for(const a of m.aliens)if(a.y>0&&a.y<config.height){thruster(p,a.x,a.y-a.radius*.8,m.time+a.phase,pixelAspect,true,a.boss?.8:.33);if(a.hitTime>0)glow(p,a.x,a.y,19,'#fff2b7',pixelAspect,a.hitTime/balance.hitFlashSeconds*.5);}
  if(m.v11)drawV11Tells(p,m,pixelAspect,screenScale);
  for(const s of m.shots){
-  if(s.kind===2){drawV11Laser(p,s,pixelAspect,screenScale);continue;}
+  // v24 (alien-v16): the laser beam sprite for the laser volley and the laser bonus; ?alienFx=0 or not loaded = the drawn beams
+  if(s.kind===2){if(!drawFxLaser(p,m,s,pixelAspect,screenScale))drawV11Laser(p,s,pixelAspect,screenScale);continue;}
   if(m.v12&&s.kind===0){drawV12Tracer(p,s,pixelAspect,screenScale);continue;}
+  if(s.kind===1&&!s.wing&&drawFxLaser(p,m,s,pixelAspect,screenScale))continue;
   const laser=s.kind===1,color=s.wing?'#c5b2ff':laser?'#65eeff':'#93dbff';glow(p,s.x,s.y,laser?17:11,color,pixelAspect,laser?.72:.55);
   p.save();p.translate(s.x,s.y);p.scale(1/pixelAspect,1);p.rotate(Math.atan2(s.vx,-s.vy));
   const length=laser?24:13,g=p.createLinearGradient(0,-length,0,laser?28:16);g.addColorStop(0,'#ffffff');g.addColorStop(.28,color);g.addColorStop(1,rgba(color,0));p.strokeStyle=g;p.lineWidth=laser?5:2.5;p.beginPath();p.moveTo(0,-length);p.lineTo(0,laser?28:16);p.stroke();
@@ -63,6 +66,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
   glow(p,n.x,n.y,r,'#ffbc7f',pixelAspect,(1-t)*.8);p.save();p.translate(n.x,n.y);p.scale(1/pixelAspect,1);p.globalAlpha=(1-t)**2;p.strokeStyle='#bcefff';p.lineWidth=4*(1-t)+.5;p.beginPath();p.arc(0,0,r,0,TAU);p.stroke();p.strokeStyle='#ffbd7e';p.lineWidth=1;p.beginPath();p.arc(0,0,r*.78,0,TAU);p.stroke();p.restore();
  }
  p.restore();
+ drawFxEffects(p,m,pixelAspect,screenScale);   // v24: shield ring, impacts, explosions, the boss explosion, v16 sparks and muzzle flash (nothing with ?alienFx=0)
  for(const d of m.loot){
   const color=d.kind?'#b7a1f6':'#e7c78c';glow(p,d.x,d.y,18,color,pixelAspect,.5);
   p.save();p.translate(d.x,d.y);p.scale(1/pixelAspect,1);p.strokeStyle=color;p.fillStyle='#0b2131';p.lineWidth=1.4;p.beginPath();

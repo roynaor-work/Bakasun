@@ -1,4 +1,5 @@
 import {drawV10Pickup} from './alien-v10-draw.mjs';
+import {fxReplaces} from './alien-fx-draw.mjs?v=island-v2-20261107-11';
 const TAU=Math.PI*2;
 const clamp=(n,lo=0,hi=1)=>Math.max(lo,Math.min(hi,Number.isFinite(n)?n:lo));
 export const ALIEN_PICKUPS=Object.freeze([
@@ -149,8 +150,9 @@ export function drawAlienFeedback(p,m,balance,aspect=1,config={width:640,height:
  bossGuardField(p,m,aspect,config,scale,balance.balance?.minBossSeconds??16);
  telegraphs(p,m,aspect,scale);
  for(const pickup of m.pickups||[]){if(m.v10)drawV10Pickup(p,pickup,m.time||0,aspect,scale,drawAlienPickupGlyph);else drawAlienPickupGlyph(p,pickup.kind,pickup.x,pickup.y,12*scale,aspect);}
- let guardImpact=false;for(const event of alienFeedbackEvents(m)){
-  if(event.kind==='player-hit'||event.kind==='enemy-hit'||event.kind==='shield-hit')impact(p,event,aspect,scale);
+ let guardImpact=false;const fxHits=fxReplaces(m,'enemy-hit');for(const event of alienFeedbackEvents(m)){
+  // v24: with the Codex impact sparks on every hit (alien-fx-v1) the drawn 'enemy-hit' strokes are left out; ?alienFx=0 draws them
+  if(event.kind==='player-hit'||(event.kind==='enemy-hit'&&!fxHits)||event.kind==='shield-hit')impact(p,event,aspect,scale);
   if(event.kind==='boss-guard'&&!guardImpact){impact(p,event,aspect,scale);guardImpact=true;}
   if(event.kind==='pickup'){
    const pickup=alienPickup(event.value),alpha=clamp(event.life/(event.maxLife||1.1));

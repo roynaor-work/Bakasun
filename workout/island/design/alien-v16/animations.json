@@ -1,0 +1,224 @@
+{
+  "license": "CC0-1.0",
+  "origin": "top-left",
+  "order": "left-to-right",
+  "alpha": "straight/unassociated",
+  "colorSpace": "sRGB",
+  "animations": {
+    "player-laser": {
+      "sheet": "sprites/player-laser.png",
+      "frames": [
+        "sprites/frames/player-laser-00.png",
+        "sprites/frames/player-laser-01.png",
+        "sprites/frames/player-laser-02.png",
+        "sprites/frames/player-laser-03.png"
+      ],
+      "frameWidth": 128,
+      "frameHeight": 64,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 24,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+X"
+    },
+    "muzzle-flash": {
+      "sheet": "sprites/muzzle-flash.png",
+      "frames": [
+        "sprites/frames/muzzle-flash-00.png",
+        "sprites/frames/muzzle-flash-01.png",
+        "sprites/frames/muzzle-flash-02.png",
+        "sprites/frames/muzzle-flash-03.png"
+      ],
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 30,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "impact-spark": {
+      "sheet": "sprites/impact-spark.png",
+      "frames": [
+        "sprites/frames/impact-spark-00.png",
+        "sprites/frames/impact-spark-01.png",
+        "sprites/frames/impact-spark-02.png",
+        "sprites/frames/impact-spark-03.png",
+        "sprites/frames/impact-spark-04.png",
+        "sprites/frames/impact-spark-05.png"
+      ],
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "count": 6,
+      "columns": 6,
+      "rows": 1,
+      "fps": 30,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    "plasma-scout": {
+      "sheet": "sprites/plasma-scout.png",
+      "frames": [
+        "sprites/frames/plasma-scout-00.png",
+        "sprites/frames/plasma-scout-01.png",
+        "sprites/frames/plasma-scout-02.png",
+        "sprites/frames/plasma-scout-03.png"
+      ],
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 20,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+Y",
+      "color": "#a1e5f5"
+    },
+    "plasma-heavy": {
+      "sheet": "sprites/plasma-heavy.png",
+      "frames": [
+        "sprites/frames/plasma-heavy-00.png",
+        "sprites/frames/plasma-heavy-01.png",
+        "sprites/frames/plasma-heavy-02.png",
+        "sprites/frames/plasma-heavy-03.png"
+      ],
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 20,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+Y",
+      "color": "#edb865"
+    },
+    "plasma-weaver": {
+      "sheet": "sprites/plasma-weaver.png",
+      "frames": [
+        "sprites/frames/plasma-weaver-00.png",
+        "sprites/frames/plasma-weaver-01.png",
+        "sprites/frames/plasma-weaver-02.png",
+        "sprites/frames/plasma-weaver-03.png"
+      ],
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 20,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+Y",
+      "color": "#c985ed"
+    },
+    "plasma-splitter": {
+      "sheet": "sprites/plasma-splitter.png",
+      "frames": [
+        "sprites/frames/plasma-splitter-00.png",
+        "sprites/frames/plasma-splitter-01.png",
+        "sprites/frames/plasma-splitter-02.png",
+        "sprites/frames/plasma-splitter-03.png"
+      ],
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 20,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+Y",
+      "color": "#a5e68a"
+    },
+    "plasma-carrier": {
+      "sheet": "sprites/plasma-carrier.png",
+      "frames": [
+        "sprites/frames/plasma-carrier-00.png",
+        "sprites/frames/plasma-carrier-01.png",
+        "sprites/frames/plasma-carrier-02.png",
+        "sprites/frames/plasma-carrier-03.png"
+      ],
+      "frameWidth": 64,
+      "frameHeight": 128,
+      "count": 4,
+      "columns": 4,
+      "rows": 1,
+      "fps": 20,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "direction": "+Y",
+      "color": "#f58da5"
+    },
+    "timer-ring": {
+      "sheet": "icons/timer-ring.png",
+      "frames": [
+        "icons/frames/timer-ring-00.png",
+        "icons/frames/timer-ring-01.png",
+        "icons/frames/timer-ring-02.png",
+        "icons/frames/timer-ring-03.png",
+        "icons/frames/timer-ring-04.png",
+        "icons/frames/timer-ring-05.png",
+        "icons/frames/timer-ring-06.png",
+        "icons/frames/timer-ring-07.png",
+        "icons/frames/timer-ring-08.png",
+        "icons/frames/timer-ring-09.png",
+        "icons/frames/timer-ring-10.png",
+        "icons/frames/timer-ring-11.png"
+      ],
+      "frameWidth": 96,
+      "frameHeight": 96,
+      "count": 12,
+      "columns": 12,
+      "rows": 1,
+      "fps": 0,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "remainingFraction": [
+        1.0,
+        0.90909091,
+        0.81818182,
+        0.72727273,
+        0.63636364,
+        0.54545455,
+        0.45454545,
+        0.36363636,
+        0.27272727,
+        0.18181818,
+        0.09090909,
+        0.0
+      ]
+    }
+  }
+}

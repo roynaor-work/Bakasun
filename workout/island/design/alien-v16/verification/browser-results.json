@@ -1,0 +1,105 @@
+{
+  "license": "CC0-1.0",
+  "status": "pass",
+  "desktop": [
+    1200,
+    980
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "overflow": false,
+  "errors": [],
+  "failed": [],
+  "fleet": [
+    {
+      "name": "boss-01-scout",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "boss-02-heavy",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "boss-03-weaver",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "boss-04-splitter",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "boss-05-carrier",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "name": "boss-06-carrier-elite",
+      "nodes": [
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "images": 15,
+  "timer": "Step 12 / 12",
+  "sounds": [
+    {
+      "name": "laser-zap",
+      "duration": 0.15,
+      "expectedDuration": 0.15,
+      "samples": 7200,
+      "sampleRate": 48000,
+      "seamDelta": 0.00043994112638756633,
+      "maxAdjacentDelta": 0.13973286747932434
+    },
+    {
+      "name": "laser-hum-loop",
+      "duration": 1,
+      "expectedDuration": 1,
+      "samples": 48000,
+      "sampleRate": 48000,
+      "seamDelta": 0.011333264876157045,
+      "maxAdjacentDelta": 0.009280693251639605
+    },
+    {
+      "name": "plasma-shot",
+      "duration": 0.2,
+      "expectedDuration": 0.2,
+      "samples": 9600,
+      "sampleRate": 48000,
+      "seamDelta": 0.0005751116077590268,
+      "maxAdjacentDelta": 0.10543982684612274
+    },
+    {
+      "name": "boss-alarm",
+      "duration": 1,
+      "expectedDuration": 1,
+      "samples": 48000,
+      "sampleRate": 48000,
+      "seamDelta": 0.0008586333569837734,
+      "maxAdjacentDelta": 0.052724771201610565
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 /** v11 presentation: laser burst beams, small/big explosions, bonus timer ring, stronger shot warning.
  * Reads existing entities only (shots, model.blasts, telegraphs). */
+import {fxReplaces} from './alien-fx-draw.mjs?v=island-v2-20261107-11';
 const TAU=Math.PI*2;
 const kindColor=['#88e7be','#77e9ff','#ffd17b','#8dbdff','#c4a2ff','#ffbb88'];
 /** A thin glowing beam, clearly different from the round missile and the short standard bullets. */
@@ -12,6 +13,7 @@ export function drawV11Laser(p,s,aspect=1,scale=1){
 }
 /** Short shock ring + sparks. Small ones are brief; the boss gets two rings and a bright flash. */
 export function drawV11Blasts(p,m,aspect=1,scale=1){
+ if(fxReplaces(m,'blasts'))return;   // v24: the Codex explosion of every kill (alien-fx-v1) replaces the drawn blast; ?alienFx=0 draws it
  for(const b of m.blasts||[]){
   const u=Math.min(1,b.t/b.life),r=b.size*scale*(.35+.9*u);
   p.save();p.translate(b.x,b.y);p.scale(1/aspect,1);

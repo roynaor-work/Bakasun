@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0; original preview, see LICENSES.md. -->
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>אפקטים מהחלל · Alien FX v1</title>
+<link rel="stylesheet" href="preview.css">
+<body>
+<header class="shell header"><a class="brand" href="preview.html" aria-label="אפקטים מהחלל"><span class="orb" aria-hidden="true"></span> אפקטים מהחלל <span class="version">01</span></a><a class="file-link" href="REPORT.md">דוח החבילה</a></header>
+<main class="shell">
+  <div class="intro"><div><p class="eyebrow">מעבדת האפקטים</p><h1>קצת אש.<br><span>המון חלל.</span></h1><p>להבות זהובות, פיצוצים צבעוניים ומגן של אור.<br>לחיצה לירי רגיל. לחיצה ממושכת לוולקן.</p></div><div class="intro-note"><span class="live-dot"></span> כל הנכסים מקוריים<br><small>רקע שקוף · ללא טקסט בגרפיקה · CC0</small></div></div>
+  <section class="demo" aria-label="תצוגת אפקטים אינטראקטיבית">
+    <div class="stage-header"><span class="stage-tag">טיסת ניסיון</span><div class="stage-options"><button id="sound" aria-pressed="false">צליל כבוי</button><button id="shield" aria-pressed="true">מגן פעיל</button></div></div>
+    <div class="space" id="space"><canvas id="stage" width="960" height="520" aria-label="חללית, חייזר ואפקטים. הירי מופעל בכפתורים שמתחת לתצוגה."></canvas><div id="status" class="status" role="status" aria-live="polite">מוכנים להמראה</div></div>
+    <div class="cockpit"><div class="heat-wrap"><canvas id="heat" width="256" height="32" role="meter" aria-label="חום הוולקן" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></canvas><span id="heat-label">הוולקן מוכן</span></div><div class="triggers"><button id="regular" class="trigger regular"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 5 9h-4v11h-2V11H7Z"/></svg>ירי רגיל</button><button id="vulcan" class="trigger vulcan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 2 3 8H8v11H6V10H4Zm10 0 3 8h-2v11h-2V10h-2Z"/></svg>וולקן <small>לחיצה ממושכת</small></button></div><button id="boss" class="boss-button">פיצוץ בוס</button></div>
+  </section>
+  <section class="gallery-section" aria-labelledby="gallery-title"><div class="section-heading"><div><p class="eyebrow">מבט מקרוב</p><h2 id="gallery-title">כל רגע, בכל פריים.</h2></div><button id="pause" aria-pressed="false">עצירת אנימציה</button></div><div id="gallery" class="gallery"></div></section>
+  <section class="inspector"><div><p class="eyebrow">בדיקת פריימים</p><h2>תופסים את הרגע.</h2><label for="inspect">אפקט</label><select id="inspect"></select><label for="frame">פריים <output id="frame-number">1</output></label><input id="frame" type="range" min="0" max="3" value="0" step="1"><a id="atlas-link" class="file-link" href="sprites/cannon-regular.png" target="_blank" rel="noopener">פתיחת האטלס</a></div><canvas id="detail" width="480" height="300" aria-label="פריים נבחר על רקע משובץ לבדיקת שקיפות"></canvas></section>
+  <section class="audio-section" aria-labelledby="audio-title"><div class="section-heading"><div><p class="eyebrow">שומעים את ההבדל</p><h2 id="audio-title">שלושה צלילים מהחלל.</h2></div><span class="spec" dir="ltr">−16 LUFS / 48 kHz</span></div><div id="sounds" class="sounds"></div><p id="audio-status" class="audio-status" role="status" aria-live="polite">הניגון מתחיל רק בלחיצה.</p></section>
+  <p id="load-status" class="load-status" role="status">טוענים את האפקטים…</p>
+</main>
+<footer class="shell"><span>מקורי. צבעוני. מוכן להרכבה.</span><nav aria-label="קובצי חבילה"><a href="manifest.json">Manifest</a><a href="LICENSES.md">מקורות ורישיונות</a><a href="REPORT.md">דוח</a></nav></footer>
+<script src="preview-data.js"></script><script src="preview.js"></script>
+</body></html>

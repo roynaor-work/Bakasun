@@ -3,7 +3,10 @@
  * a warning mark on top. Hidden when the gauge is cold and the Vulcan is open. The steady cannon never shows here: it
  * has no heat. Reads model state only (vulcanHeat, vulcanLocked, time). */
 import {vulcanLevel,vulcanBlink,VULCAN_COLORS} from './alien-v23.mjs?v=island-v2-20261107-11';
+import {drawFxHeat} from './alien-fx-draw.mjs?v=island-v2-20261107-11';
 export function drawV23Heat(p,m,aspect=1,scale=1){
+ // v24 (alien-fx-v1): the Codex meter (sprite bar and shutdown frames) when it has loaded; ?alienFx=0 keeps this bar
+ if(drawFxHeat(p,m,aspect,scale))return;
  const locked=Boolean(m.vulcanLocked),heat=Math.max(0,Math.min(1,m.vulcanHeat||0));
  if(!locked&&!(heat>.03))return;
  const w=8*scale,h=42*scale,x=40*scale,y=16*scale,level=vulcanLevel(heat,locked),blink=vulcanBlink(m.time||0,locked);

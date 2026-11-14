@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8"><title>חלליות v24: האפקטים דרך קוד הציור של המשחק</title>
+<style>html,body{margin:0;background:#06111f;color:#d8ecf7;font:14px system-ui,sans-serif}canvas{display:block}</style></head>
+<body><canvas id="c" width="844" height="390"></canvas>
+<script type="module">
+// Aliens v24 review sheet: every effect drawn by the game's own functions (alien-fx-draw.mjs, drawV23Heat, drawV12Cannons) on a fake model at the
+// phone's proportions (844x390, the 360x480 model stretched like the session does). For the boss explosion, which needs a whole stage in the game.
+import {createAlienFx,attachFx,FX_SPRITES} from '../minigames/alien-fx.mjs?v=island-v2-20261107-11';
+import {drawFxEffects,drawFxLaser} from '../minigames/alien-fx-draw.mjs?v=island-v2-20261107-11';
+import {drawV23Heat} from '../minigames/alien-v23-draw.mjs?v=island-v2-20261107-11';
+import {drawV12Cannons} from '../minigames/alien-v12-draw.mjs?v=island-v2-20261107-11';
+const c=document.getElementById('c'),p=c.getContext('2d'),W=360,H=480,aspect=(844/390)/(W/H),scale=H/390;
+const fx=createAlienFx({audio:false});
+const model=(o)=>({time:0,player:{x:180,y:441.6},aliens:[],cannonLast:[-1,-1],vulcanOn:false,vulcanLocked:false,vulcanHeat:0,feedback:{id:0,life:0},muzzleForward:28,cannonOffset:11.3,shipV13:true,v12:true,v23:true,flashSeconds:.045,powerup:0,invulnerable:0,...o});
+const label=(t,x,y)=>{p.save();p.setTransform(1,0,0,1,0,0);p.fillStyle='#d8ecf7';p.font='600 13px system-ui';p.textAlign='center';p.fillText(t,x,y);p.restore();};
+async function ready(){for(let i=0;i<200;i++){fx.track(model({aliens:[{id:99,boss:true,x:0,y:0,radius:1,hitTime:0}]}));if(Object.keys(FX_SPRITES).every(k=>fx.image(k)))return;await new Promise(r=>setTimeout(r,50));}}
+await ready();
+p.fillStyle='#071b39';p.fillRect(0,0,844,390);p.setTransform(844/W,0,0,390/H,0,0);
+// 1. boss explosion at 40% and an alien explosion at 30%, an impact, a spark (left half)
+{const m=model({time:10});attachFx(m,fx);const tr=fx.tracker;tr.reset();tr.track(m);
+ tr.effects.push({kind:'boss',x:60,y:120,t:10-.6,size:28},{kind:'explosion',x:150,y:110,t:10-.2,size:15.5},{kind:'impact',x:110,y:210,t:10-.08,size:15.5},{kind:'spark',x:160,y:220,t:10-.07});
+ drawFxEffects(p,m,aspect,scale);}
+label('פיצוץ בוס',70*844/W,210*390/H);label('פיצוץ חייזר',150*844/W,165*390/H);label('פגיעה · ניצוץ מגן',135*844/W,250*390/H);
+// 2. the ship with the shield ring, the Vulcan burst flames and the meter in yellow (centre); the locked meter (right)
+{const m=model({time:5,vulcanOn:true,vulcanHeat:.62,powerup:3,player:{x:205,y:441.6}});attachFx(m,fx);const tr=fx.tracker;tr.reset();tr.track({...m,vulcanOn:false});tr.track(m);
+ drawFxEffects(p,m,aspect,scale);drawV12Cannons(p,m,aspect,scale);drawV23Heat(p,m,aspect,scale);}
+{const m=model({time:5,vulcanLocked:true,vulcanHeat:.55,player:{x:40,y:441.6}});attachFx(m,fx);fx.tracker.reset();drawV23Heat(p,m,aspect,scale);}
+label('מגן · להבות וולקן · מד חום',205*844/W,370*390/H);label('נעילה (פריים 3 מ-6)',75*844/W,410*390/H);
+// 3. lasers (v16) with the muzzle flash, a regular cannon flame (top right)
+{const m=model({time:3.2,player:{x:290,y:300},cannonLast:[3.19,-1]});attachFx(m,fx);const tr=fx.tracker;tr.reset();tr.track({...m,cannonLast:[-1,-1],time:3.1});tr.track(m);tr.muzzle(m);
+ for(const dx of [-14,14])drawFxLaser(p,m,{kind:2,x:290+dx,y:200,vx:0,vy:-700},aspect,scale);drawFxEffects(p,m,aspect,scale);drawV12Cannons(p,m,aspect,scale);}
+label('לייזר v16 · הבזק · להבת תותח',290*844/W,140*390/H);
+window.__done=true;
+</script></body></html>
