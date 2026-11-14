@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>בתוך הבניין · השוואת שלושה סגנונות (כיבוי אש v24)</title>
+  <style>
+    html,body{margin:0;background:#0d1b26;color:#f2f6f8;font-family:system-ui,sans-serif}
+    body{direction:rtl;text-align:right;unicode-bidi:embed;padding:12px}
+    h1{font-size:18px;margin:0 0 10px}
+    .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .panel{background:#122331;border-radius:14px;padding:8px;min-width:0}
+    .panel h2{font-size:15px;margin:0 0 6px}
+    .panel p{font-size:12px;color:#b9c8d1;margin:0 0 6px;line-height:1.35}
+    canvas{display:block;width:100%;aspect-ratio:844/390;background:#1d1a22;border-radius:10px}
+    .en{direction:ltr;display:inline-block}
+    pre{font-size:11px;color:#9fb3c0;white-space:pre-wrap}
+  </style>
+</head>
+<body>
+  <h1>בתוך הבניין: שלושה סגנונות זה לצד זה (אותו סלון, אותה אש)</h1>
+  <div class="row">
+    <section class="panel"><h2>1. דו-ממד (v23)</h2><p>תמונת חדר אחת, ספרייטים של אש מעליה. מהיר מאוד, בלי עומק ובלי תנועת מצלמה.</p><canvas id="c2d" width="844" height="390"></canvas><pre id="m2d"></pre></section>
+    <section class="panel"><h2>2. 2.5D עם פרלקסה</h2><p>אותה תמונה בשלוש שכבות שזזות בקצב שונה, עשן ואש בשכבות. עומק מדומה, המצלמה לא באמת נעה.</p><canvas id="c25" width="844" height="390"></canvas><pre id="m25"></pre></section>
+    <section class="panel"><h2>3. תלת-ממד (v24, נבחר)</h2><p>חדר <span class="en">GLB</span> של Codex, להבות ועשן בתלת-ממד, מים בקשת, כבאי וחבר לחילוץ, מצלמה שנושמת ומתקרבת.</p><canvas id="c3d" width="844" height="390"></canvas><pre id="m3d"></pre></section>
+  </div>
+  <script type="module" src="fire-v24-styles.mjs"></script>
+</body>
+</html>
