@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>מרדף · האזנה לצלילים עדינים</title>
+  <style>
+    :root{font-family:system-ui,sans-serif;color:#e9efff;background:#101728;line-height:1.65}
+    *{box-sizing:border-box}body{margin:0}main{max-width:1050px;margin:auto;padding:28px 20px 60px}
+    h1{font-size:clamp(1.7rem,5vw,2.8rem);line-height:1.2;margin:8px 0 16px}h2{font-size:1.15rem;margin:0}
+    p{max-width:70ch;color:#c2cde4}a{color:#a4d9ff}header{margin-bottom:26px}
+    .tag{color:#a0e6cd;letter-spacing:.07em;font-size:.85rem}.toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:18px 0}
+    button,select{font:inherit;min-height:46px;border-radius:10px;border:1px solid #587193;padding:8px 16px;background:#22334e;color:#fff}
+    button{cursor:pointer}button:hover{background:#304869}button:disabled{opacity:.5;cursor:wait}
+    button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #a0e6cd;outline-offset:4px}
+    #stop{background:#5a3040}#status{min-height:2em;padding:8px 0;color:#a0e6cd}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+    article{background:#19243a;border:1px solid #354662;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px}
+    article[data-playing="true"]{border-color:#a0e6cd;box-shadow:0 0 0 1px #a0e6cd}
+    .meta{font-size:.9rem;color:#b6c5df}.volume{display:flex;gap:10px;align-items:center;flex-wrap:wrap}input{flex:1;min-width:90px;accent-color:#a0e6cd}
+    output{font-variant-numeric:tabular-nums}article button{margin-top:auto;width:100%}footer{margin-top:28px;font-size:.9rem;color:#b6c5df}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="tag">מרדף משטרה · חבילת צלילים 01</div>
+    <h1>אותו מרדף. צליל עדין יותר.</h1>
+    <p>שלוש סירנות ושישה אפקטים קצרים. בחרו צליל כדי לשמוע אותו בעוצמה המומלצת למשחק. הסירנות וחריקת הבלימה חוזרות בלולאה עד לעצירה.</p>
+    <div class="toolbar">
+      <label for="format">פורמט להאזנה</label>
+      <select id="format"><option value="ogg">OGG · Opus</option><option value="mp3">MP3</option></select>
+      <button id="stop" type="button">עצירת הצליל</button>
+      <a href="REPORT.md">דוח מדידות</a>
+      <a href="LICENSES.md">מקורות ורישיונות</a>
+      <a href="manifest.json">מניפסט</a>
+    </div>
+    <div id="status" role="status" aria-live="polite">טוען את רשימת הצלילים…</div>
+  </header>
+  <noscript><p>יש להפעיל JavaScript כדי להאזין בדף זה. אפשר גם לפתוח את קובצי הקול ישירות מהתיקייה.</p></noscript>
+  <section class="grid" id="sounds" aria-label="צלילים להאזנה"></section>
+  <footer>סינתזה מקורית בלבד · CC0 1.0 · ללא ניגון אוטומטי. תחילת ניגון ועצירה הדרגתיות; צליל אחד בכל פעם.</footer>
+</main>
+<script type="module">
+  const status = document.querySelector('#status');
+  const format = document.querySelector('#format');
+  const cards = document.querySelector('#sounds');
+  const cache = new Map();
+  let context, active, request = 0;
+
+  function retire() {
+    if (!active) return;
+    const { source, gain, card } = active;
+    const now = context.currentTime;
+    gain.gain.cancelAndHoldAtTime(now);
+    gain.gain.linearRampToValueAtTime(0, now + .04);
+    source.stop(now + .04);
+    card.dataset.playing = 'false';
+    active = null;
+  }
+
+  function stop() {
+    request++;
+    retire();
+    status.textContent = 'הניגון נעצר.';
+  }
+  document.querySelector('#stop').addEventListener('click', stop);
+  format.addEventListener('change', stop);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+
+  async function bufferFor(file) {
+    if (cache.has(file.path)) return cache.get(file.path);
+    const response = await fetch(file.path);
+    if (!response.ok) throw new Error('לא ניתן לטעון את קובץ הצליל.');
+    const buffer = await context.decodeAudioData(await response.arrayBuffer());
+    cache.set(file.path, buffer);
+    return buffer;
+  }
+
+  async function play(asset, card, slider) {
+    const ticket = ++request;
+    retire();
+    try {
+      context ??= new AudioContext({ sampleRate: 48000 });
+      await context.resume();
+      status.textContent = `טוען: ${asset.label}…`;
+      const chosenFormat = format.value;
+      const buffer = await bufferFor(asset.files[chosenFormat]);
+      if (ticket !== request) return;
+      const source = context.createBufferSource();
+      const gain = context.createGain();
+      source.buffer = buffer;
+      source.loop = asset.loop;
+      if (asset.loop) {
+        source.loopStart = asset.loopStartSeconds;
+        source.loopEnd = asset.loopEndSeconds;
+      }
+      source.connect(gain).connect(context.destination);
+      const start = context.currentTime + .045;
+      // Previous sound finishes its 40 ms ramp before this one starts.
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(Number(slider.value), start + .04);
+      active = { source, gain, card, slider };
+      card.dataset.playing = 'true';
+      source.addEventListener('ended', () => {
+        source.disconnect();
+        gain.disconnect();
+        if (active?.source === source) {
+          active = null;
+          card.dataset.playing = 'false';
+          status.textContent = 'הצליל הסתיים.';
+        }
+      }, { once: true });
+      source.start(start);
+      status.textContent = `מנגן: ${asset.label} · ${chosenFormat.toUpperCase()}${asset.loop ? ' · בלולאה' : ''}`;
+    } catch (error) {
+      if (ticket === request) status.textContent = `${error.message} אפשר לבחור בפורמט השני ולנסות שוב.`;
+    }
+  }
+
+  try {
+    const response = await fetch('manifest.json');
+    if (!response.ok) throw new Error('manifest unavailable');
+    const manifest = await response.json();
+    for (const asset of manifest.assets) {
+      const card = document.createElement('article');
+      card.dataset.id = asset.id;
+      const title = document.createElement('h2');
+      title.textContent = asset.label;
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = `${asset.durationSeconds.toFixed(2)} שניות · ${asset.loop ? 'לולאה' : 'פעם אחת'} · ${asset.targetLufs} LUFS`;
+      const volume = document.createElement('label');
+      volume.className = 'volume';
+      volume.append('עוצמה');
+      const slider = document.createElement('input');
+      slider.type = 'range'; slider.min = '.02'; slider.max = '.04'; slider.step = '.001';
+      slider.value = asset.recommendedVolume;
+      slider.setAttribute('aria-label', `עוצמת ${asset.label}`);
+      const value = document.createElement('output');
+      value.dir = 'ltr'; value.textContent = Number(slider.value).toFixed(3);
+      slider.addEventListener('input', () => {
+        value.textContent = Number(slider.value).toFixed(3);
+        if (active?.slider === slider) {
+          const now = context.currentTime;
+          active.gain.gain.cancelAndHoldAtTime(now);
+          active.gain.gain.linearRampToValueAtTime(Number(slider.value), now + .04);
+        }
+      });
+      volume.append(slider, value);
+      const button = document.createElement('button');
+      button.type = 'button'; button.textContent = `האזנה · ${asset.label}`;
+      button.addEventListener('click', () => play(asset, card, slider));
+      card.append(title, meta, volume, button);
+      cards.append(card);
+    }
+    status.textContent = 'מוכנים. בחרו צליל להאזנה.';
+  } catch {
+    status.textContent = 'לא ניתן לטעון את החבילה. יש לפתוח את הדף דרך שרת HTTP מקומי, משורש המאגר: python -m http.server 8765';
+  }
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import * as T from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-12';
-import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261107-12';
-import {navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-12';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-13';
+import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261107-13';
+import {navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-13';
 
 /** The archery-style arc, drawn from the model's own prediction: a continuous
  * camera-facing ribbon with a dark outline, stopping at the first predicted
@@ -36,7 +36,7 @@ export function createNavalAimArc(scene,model,balance){
  }
  return {
   update(camera){
-   if(disposed)return;const p=model.prediction,active=model.aiming&&p&&!model.result;
+   if(disposed)return;const p=model.prediction,active=(model.aiming||model.homing)&&p&&!model.result;
    shown=0;visible=false;outline.mesh.visible=core.mesh.visible=false;movers.count=0;if(!active)return;
    const now=navalMarkKind(p);if(now!==kind){kind=now;core.material.color.set(navalArcColor(kind,look));}
    // Sample the shared ballistic launch up to the first contact (or the landing).

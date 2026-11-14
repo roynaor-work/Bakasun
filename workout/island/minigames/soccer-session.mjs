@@ -1,23 +1,27 @@
 import {createSoccerDesignAudio} from './soccer-design-audio.mjs';
-import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-12';
-import {createSoccer} from './soccer.mjs?v=island-v2-20261107-12';
-import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-12';
-import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-12';
-import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-12';
-import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-12';
-import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-12';
-import {createControls} from './controls.mjs?v=island-v2-20261107-12';
+import {actionIcon} from './soccer-icons.mjs?v=island-v2-20261107-13';
+import {createSoccer} from './soccer.mjs?v=island-v2-20261107-13';
+import {soccerShotIcon} from './soccer-presentation.mjs?v=island-v2-20261107-13';
+import {aerialMeet,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-13';
+/** Air v23 prompt: a high ball the controlled player can meet within the header window. */
+const airPromptMeet=s=>{const p=s.players[s.controlled];return Boolean(p&&aerialMeet(p,s.ball,{aerial:{minHeight:.8,maxHeight:2.4,reach:1.9},physics:{ballRadius:.11},ball:{gravity:12}},{horizon:SOCCER_LOB.promptSeconds,speed:5.6}));};
+import {stageObjective} from './soccer-campaign.mjs?v=island-v2-20261107-13';
+import {createSoccerPenalties} from './soccer-penalties.mjs?v=island-v2-20261107-13';
+import {createSoccerDrill} from './soccer-drill.mjs?v=island-v2-20261107-13';
+import {createSoccerView} from './soccer-view.mjs?v=island-v2-20261107-13';
+import {createControls} from './controls.mjs?v=island-v2-20261107-13';
 import {withSoccerV7Kits} from './soccer-v7.mjs';
-import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-12';
-import {gameContext} from './context.mjs?v=island-v2-20261107-12';
+import {soccerViewConfig} from '../activity/soccer-team.mjs?v=island-v2-20261107-13';
+import {gameContext} from './context.mjs?v=island-v2-20261107-13';
 import {expandSoccerConfig} from './soccer-squad.mjs';
 import {soccerMotionLoadReport} from './soccer-design-character.mjs';
 import {applySoccerTeams,resolveSoccerTeams,SOCCER_PRODUCT_TEAMS} from './soccer-teams.mjs';
 import {createSoccerTelemetry} from './soccer-telemetry.mjs';
-import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-12';
+import {manualReportLines} from '../ui/load-report.mjs?v=island-v2-20261107-13';
 import {loadSoccerDesignContracts} from './soccer-design-contracts.mjs';
 import {createSoccerDesignInput,soccerDesignControlPlan,soccerDesignControlState,applySoccerDesignLayout,soccerPadRect} from './soccer-design-controls.mjs';
 import {soccerShowEnabled} from './soccer-show.mjs';
+import {applySoccerPitchV23,applySoccerControlV23,soccerAirVersion} from './soccer-v23.mjs?v=island-v2-20261107-13';
 
 /** Native focused buttons support the same hold/release contract as touch.
  * This adapter is soccer-only; the shared pointer/arrow controls stay separate. */
@@ -58,7 +62,7 @@ export function soccerActionLabels(state,config){
 
 /** Uses the island's modal/result lifecycle; owns only this round's renderer and input. */
 export function startSoccer(ctx) {
-  const {balance:sourceBalance,canvas,controls,status,t}=ctx,teamsKey=resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS),balance=expandSoccerConfig(applySoccerTeams(sourceBalance,teamsKey));
+  const {balance:sourceBalance,canvas,controls,status,t}=ctx,teamsKey=resolveSoccerTeams(undefined,SOCCER_PRODUCT_TEAMS),balance=applySoccerControlV23(applySoccerPitchV23(expandSoccerConfig(applySoccerTeams(sourceBalance,teamsKey))));
   const defaults=gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed??0,'soccer',ctx.level);
   const context={...defaults,...ctx},seed=context.seed>>>0,viewConfig=withSoccerV7Kits(soccerViewConfig(context,balance)),{team,opponent}=viewConfig;
   let model=(context.drill?createSoccerDrill:createSoccer)({config:balance,kind:context.drill,stage:context.level,seed,random:context.random,team,difficulty:context.difficulty,card:context.soccerCard,role:context.role,league:!context.drill});
@@ -66,6 +70,11 @@ export function startSoccer(ctx) {
   const telemetry=context.drill?null:createSoccerTelemetry({teams:teamsKey,stage:context.level,difficulty:context.difficulty,pitch:[balance.pitch.length,balance.pitch.width]});
   // soccerShow v1 (M4 broadcast): the view holds the model during the replay and the celebration, the audio gets the home/rival goal crowd and the swell.
   const showOn=soccerShowEnabled(balance.show?.version),audio=createSoccerDesignAudio({storage,pitchLength:balance.pitch.length,show:showOn});
+  // Air v23 (soccer-v23.mjs): with the ball the switch slot is "הגבהה" (a high pass, like the lofted-kick button of mobile football games:
+  // in attack you play the carrier, so a switch has nothing to do); a high ball on its way shows "נגיחה" on the kick button. `?soccerAir=v22`.
+  const airOn=soccerAirVersion()==='v23';
+  const lobMode=s=>airOn&&!context.drill&&s.role!=='keeper'&&s.phase==='playing'&&s.mode==='attack'&&s.ball.owner===s.controlled&&!s.players[s.controlled]?.hands;
+  const airPrompt=s=>airOn&&!context.drill&&s.role!=='keeper'&&s.phase==='playing'&&s.ball.owner===null&&(Boolean(s.headerArm)||Boolean(s.ball.flight||s.ball.y>.6)&&soccerShotIcon(s,balance)!=='header'&&airPromptMeet(s));
   // Bonus penalties follow every league match; the match result is kept untouched.
   let shootout=null,shootoutWait=0;const penaltiesOn=!context.drill&&!!balance.league?.penalties&&!!balance.league?.leagues?.length;
   let view,input,frame,last=0,hud=0,paused=false,disposed=false,handed=true,hudSignature='',mode='',started=false,contracts=null,contractsReady=!canvas,contractsError=null,reported=false;
@@ -87,9 +96,9 @@ export function startSoccer(ctx) {
   if(typeof location!=='undefined'&&new URLSearchParams(location.search).get('dev')==='1')session.debug={get model(){return model;},get view(){return view;},qualitySample:(...args)=>view?.qualitySample(...args),poseCamera:(...args)=>view?.poseCamera(...args)};
   // Engine tests can exercise a full model round without DOM/WebGL.
   if(!canvas)return session;
-  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-12',import.meta.url).href;
+  const styleURL=new URL('./g3h-soccer.css?v=island-v2-20261107-13',import.meta.url).href;
   if(!document.querySelector('link[data-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=styleURL;link.dataset.soccerStyle='';document.head.append(link);}
-  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-12',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
+  if(!document.querySelector('link[data-g3j-soccer-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./g3j-soccer.css?v=island-v2-20261107-13',import.meta.url).href;link.dataset.g3jSoccerStyle='';document.head.append(link);}
   if(!document.querySelector('link[data-soccer-controls-assets]')){const link=document.createElement('link');link.rel='stylesheet';link.href=new URL('./soccer-controls-assets.css',import.meta.url).href;link.dataset.soccerControlsAssets='';document.head.append(link);}
   const element=(tag,cls,text)=>{const node=document.createElement(tag);node.className=cls||'';if(text)node.textContent=text;return node;};
   try {
@@ -151,17 +160,19 @@ export function startSoccer(ctx) {
     const plans=new Map(),icons={shot:'shoot',pass:'pass',sprint:'sprint',slide:'slide',switch:'switch',tackle:'steal',throw:'pass',corner:'pass',short:'pass',goal_kick:'shoot',free_kick:'shoot',dive:'slide',rush:'sprint',roll:'pass',punt:'shoot'};
     function syncControls(s){
       if(!contractsReady||!input)return;
-      const key=soccerDesignControlState(s),cacheKey=key+':'+(s.role==='keeper'?'keeper':'field'),header=key==='attack'&&soccerShotIcon(s,balance)==='header',signature=cacheKey+':'+header;
+      const key=soccerDesignControlState(s),lob=lobMode(s),prompt=key==='attack'&&!lob&&airPrompt(s);
+      const cacheKey=key+':'+(s.role==='keeper'?'keeper':'field'),header=key==='attack'&&(soccerShotIcon(s,balance)==='header'||prompt),signature=cacheKey+':'+header+':'+lob;
       if(mode===signature)return;mode=signature;
       let plan=plans.get(cacheKey);if(!plan){plan=soccerDesignControlPlan(s,contracts.controls);plans.set(cacheKey,plan);}
       input.setPlan(plan);controls.dataset.mode=s.mode;controls.dataset.controlState=key;controls.setAttribute('aria-label',plan.label);
       for(const slot of ['primary','secondary','sprint','trick']){
         const node=nodes[slot],entry=plan.slots[slot];node.hidden=!entry;node.disabled=!entry||Boolean(entry.disabled);node.setAttribute('aria-disabled',String(node.disabled));
         if(!entry){if(document.activeElement===node)canvas.focus();continue;}
-        const isHeader=header&&slot==='primary',label=isHeader?t('soccer.header'):entry.label,icon=isHeader?'header':icons[entry.id];
+        const isHeader=header&&slot==='primary',isLob=lob&&slot==='trick',label=isHeader?t('soccer.header'):isLob?'הגבהה':entry.label,icon=isHeader?'header':isLob?'lob':icons[entry.id];
+        node.dataset.air=isHeader&&airOn?'header':isLob?'lob':'';
         node.dataset.designAction=entry.id;node.replaceChildren(actionIcon(icon));if(node===sprint)node.append(ring,staminaBar);
         labelNode(node,label,slot==='primary'?balance.controls.kickKey:slot==='secondary'?balance.controls.passKey:slot==='sprint'?balance.controls.sprintKeys[0]:balance.controls.switchKey);
-        node.setAttribute('aria-label',isHeader?label:entry.aria_label||label);
+        node.setAttribute('aria-label',isHeader?label:isLob?'מסירה גבוהה':entry.aria_label||label);
       }
       stick.setAttribute('aria-label',plan.slots.stick?.aria_label||'תנועה');
       if(nodes.pause)nodes.pause.setAttribute('aria-label',contracts.controls.controls.pause.aria_label);
@@ -191,7 +202,7 @@ export function startSoccer(ctx) {
       // stadium every frame compiled its shaders for nothing and starved the main
       // thread that decodes the real assets (measured 01/11/2026: 6.7 s to 3.4 s).
       // soccerShow v1: while the view holds (replay, celebration) the model is not stepped and the frame's input is dropped (a tap skips the replay).
-      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
+      if(!paused&&!document.hidden&&!loading){if(!started){started=true;void audio.unlock();audio.whistle('kickoff',{force:true});}if(dt>0){const sampled=input.sample(model.getState().attackDir);if(lobMode(model.getState())&&sampled.switchPlayer){sampled.lobPressed=true;sampled.switchPlayer=false;}if(!view.hold)model.update(dt,sampled);}view.render(model.renderState?.()??model.getState(),dt,frameMs);hud+=dt;}else if(!loading)view.render(model.renderState?.()??model.getState(),0);
       pad.style.pointerEvents=view.replaying?'none':'';banner.hidden=model.getState().phase!=='goal';
       const s=model.getState();
       const phaseText=s.drill?`${s.drill.attempts+1}/${balance.training.drillAttempts} · ${s.drill.hits}`:view.replaying?'שידור חוזר · נגיעה במגרש לדילוג':s.phase.startsWith('restart')?{throwIn:'🙌',corner:'🚩',goalKick:'🥅',freeKick:'בעיטה חופשית',penalty:'פנדל'}[s.restart.type]:s.phase==='halftime'?'↔':'';

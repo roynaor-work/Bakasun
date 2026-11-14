@@ -1,5 +1,5 @@
-import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-v2-20261107-12';
-export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-teamplay.mjs?v=island-v2-20261107-12';
+import {passLaneClearance,teamFormation,teamPresser} from './soccer-teamplay.mjs?v=island-v2-20261107-13';
+export {selectTeamPass,keeperTarget,hasShootingLane,teamPassPoint,passLaneClearance,meetPoint} from './soccer-teamplay.mjs?v=island-v2-20261107-13';
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 /** First element under a comparator: the same choice as sort(compare)[0], without the sort or its copies. */
@@ -25,7 +25,7 @@ export function fieldTarget(p,s,c){
   const w=a.wideAttack,wide=w&&Math.abs(owner.z)>=w.width&&hx-owner.x*d<=w.range;
   if(wide){
    const runner=first(mates,byStriker(d),q=>q.id!==owner.id);
-   if(runner?.id===p.id){x=d*(hx-c.pitch.penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
+   if(runner?.id===p.id){x=d*(hx-(c.pitch.play||c.pitch).penaltySpot-w.boxDepth);z=-Math.sign(owner.z)*w.farPost;duty='box-run';}
    else{x=owner.x-d*w.squareBack;z=owner.z*w.squareInside;duty='square';}
   }
   // A pressed carrier gets a safe outlet: the support player drops diagonally behind,

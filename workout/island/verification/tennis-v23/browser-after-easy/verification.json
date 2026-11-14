@@ -1,0 +1,951 @@
+{
+ "mode": "after",
+ "difficulty": "easy",
+ "viewport": {
+  "width": 844,
+  "height": 390
+ },
+ "browser": "Chromium / SwiftShader",
+ "browserVersion": "153.0.8010.12",
+ "physicalPhone": false,
+ "touch": "CDP Input.dispatchTouchEvent",
+ "checks": {
+  "tappedReturns": {
+   "ok": true,
+   "detail": "tapped returns 7"
+  },
+  "serveMeterSeen": {
+   "ok": true,
+   "detail": "{\"visible\":true,\"mode\":\"serve\",\"place\":\"side\",\"idle\":\"false\",\"opacity\":1,\"fading\":false,\"rect\":{\"x\":596,\"y\":202,\"w\":24,\"h\":156},\"needleBottom\":\"31.5315%\",\"green\":true,\"yellow\":true}"
+  },
+  "barOnEveryIncomingBall": {
+   "ok": true,
+   "detail": "7/7"
+  },
+  "barColoursLikeServe": {
+   "ok": true,
+   "detail": "7/7"
+  },
+  "needleSweeps": {
+   "ok": true,
+   "detail": "[57,58,44,57,94,92,45]"
+  },
+  "greenTapIsGood": {
+   "ok": true,
+   "detail": "[[\"green\",\"good\",\"perfect\"],[\"green\",\"good\",\"good\"],[\"green\",\"good\",\"good\"],[\"green\",\"good\",\"good\"]]"
+  },
+  "barBigEnough": {
+   "ok": true,
+   "detail": "24,24,24,24,24,24,24 x 156,156,156,156,156,156,156"
+  },
+  "greenAtLeast40px": {
+   "ok": true,
+   "detail": "43,43,43,43,43,43,43"
+  },
+  "barNeverOnButtonsOrScore": {
+   "ok": true,
+   "detail": "0/1595 frames"
+  },
+  "barNeverOnCourt": {
+   "ok": true,
+   "detail": "0/1595 frames"
+  },
+  "barNeverOnPlayer": {
+   "ok": true,
+   "detail": "0/1595 frames"
+  },
+  "barDimWhenNotInUse": {
+   "ok": true,
+   "detail": "993/993 idle frames dimmed"
+  },
+  "barOpaqueInUse": {
+   "ok": true,
+   "detail": "510/510 in-use frames opaque (92 frames mid-fade not counted)"
+  },
+  "portraitWaitsBehindRotate": {
+   "ok": true,
+   "detail": "{\"blocked\":\"true\",\"overlay\":true,\"meterOnTop\":false,\"meterInside\":false}"
+  },
+  "rightHandedBarLeftOfPad": {
+   "ok": true,
+   "detail": "{\"meter\":{\"x\":596,\"y\":202,\"w\":24,\"h\":156},\"pad\":{\"x\":636,\"w\":184},\"hits\":[]}"
+  },
+  "leftHandedBarRightOfPad": {
+   "ok": true,
+   "detail": "{\"meter\":{\"x\":216,\"y\":202,\"w\":24,\"h\":156},\"pad\":{\"x\":16,\"w\":184},\"hits\":[]}"
+  },
+  "dropsPlayed": {
+   "ok": true,
+   "detail": "drops 3"
+  },
+  "dropFloats": {
+   "ok": true,
+   "detail": "[1.724999999999902,1.6833333333332376,1.7499999999999005]"
+  },
+  "dropBouncesHigh": {
+   "ok": true,
+   "detail": "[0.9898369134732774,0.7902788416490732,0.9987013905544303]"
+  },
+  "dropNeverOutOfTheAir": {
+   "ok": true,
+   "detail": "[[null,null],[1.9249999999998906,true],[null,null]]"
+  },
+  "dropNotOneSecondWin": {
+   "ok": true,
+   "detail": "[2.5749999999998536,null,2.608333333333185]"
+  },
+  "noPageErrors": {
+   "ok": true,
+   "detail": "[]"
+  }
+ },
+ "frames": [
+  "serve-meter.jpg",
+  "bar-idle.jpg",
+  "return-incoming.jpg",
+  "return-tap.jpg",
+  "drop-flight-1.jpg",
+  "drop-bounce-1.jpg",
+  "dead-ball-1.jpg",
+  "drop-flight-2.jpg",
+  "drop-flight-3.jpg",
+  "drop-bounce-3.jpg",
+  "dead-ball-3.jpg",
+  "portrait.jpg",
+  "left-handed-layout.jpg"
+ ],
+ "search": "?dev=1",
+ "tennisDifficulty": "easy",
+ "keepOut": {
+  "#shoot": {
+   "x": 736,
+   "y": 288,
+   "w": 84,
+   "h": 84,
+   "cx": 778,
+   "cy": 330
+  },
+  "#pass": {
+   "x": 656,
+   "y": 304,
+   "w": 64,
+   "h": 64,
+   "cx": 688,
+   "cy": 336
+  },
+  "#sprint": {
+   "x": 752,
+   "y": 208,
+   "w": 64,
+   "h": 64,
+   "cx": 784,
+   "cy": 240
+  },
+  "#drop": {
+   "x": 656,
+   "y": 208,
+   "w": 64,
+   "h": 64,
+   "cx": 688,
+   "cy": 240
+  },
+  "#shoot .tennis-control-caption": {
+   "x": 764.484375,
+   "y": 346.5,
+   "w": 27.046875,
+   "h": 12,
+   "cx": 778.0078125,
+   "cy": 352.5
+  },
+  "#pass .tennis-control-caption": {
+   "x": 674.921875,
+   "y": 347.5,
+   "w": 26.171875,
+   "h": 12,
+   "cx": 688.0078125,
+   "cy": 353.5
+  },
+  "#sprint .tennis-control-caption": {
+   "x": 768.265625,
+   "y": 251.5,
+   "w": 31.46875,
+   "h": 12,
+   "cx": 784,
+   "cy": 257.5
+  },
+  "#drop .tennis-control-caption": {
+   "x": 649.921875,
+   "y": 251.5,
+   "w": 76.15625,
+   "h": 12,
+   "cx": 688,
+   "cy": 257.5
+  },
+  ".soccer-actions": {
+   "x": 636,
+   "y": 188,
+   "w": 184,
+   "h": 184,
+   "cx": 728,
+   "cy": 280
+  },
+  ".tennis-board": {
+   "x": 12,
+   "y": 10,
+   "w": 142,
+   "h": 64,
+   "cx": 83,
+   "cy": 42
+  },
+  "[data-action=game-pause]": {
+   "x": 780,
+   "y": 8,
+   "w": 56,
+   "h": 56,
+   "cx": 808,
+   "cy": 36
+  }
+ },
+ "deadBalls": [
+  {
+   "start": {
+    "x": 3.776680622306082,
+    "z": -3.616230187192629
+   },
+   "moved": 1.3507518960811453,
+   "maxY": 0.350442197401146,
+   "bounces": 2,
+   "frames": 34,
+   "oppGap": 1.6061307456280407,
+   "oppRunning": true
+  },
+  {
+   "start": {
+    "x": 0.02033476427941038,
+    "z": -2.9292112856567187
+   },
+   "moved": 1.2188129010813964,
+   "maxY": 0.3506267009558481,
+   "bounces": 2,
+   "frames": 34,
+   "oppGap": 1.5938905404489212,
+   "oppRunning": true
+  }
+ ],
+ "portrait": {
+  "blocked": "true",
+  "overlay": true,
+  "meterOnTop": false,
+  "meterInside": false
+ },
+ "leftHanded": {
+  "meter": {
+   "x": 216,
+   "y": 202,
+   "w": 24,
+   "h": 156
+  },
+  "pad": {
+   "x": 16,
+   "w": 184
+  },
+  "hits": []
+ },
+ "rightHanded": {
+  "meter": {
+   "x": 596,
+   "y": 202,
+   "w": 24,
+   "h": 156
+  },
+  "pad": {
+   "x": 636,
+   "w": 184
+  },
+  "hits": []
+ },
+ "points": [
+  {
+   "n": 1,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 3,
+   "elapsed": 4.9583333333333695
+  },
+  {
+   "n": 2,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 1,
+   "elapsed": 8.225000000000174
+  },
+  {
+   "n": 3,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 3,
+   "elapsed": 14.691666666666473
+  },
+  {
+   "n": 4,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 1,
+   "elapsed": 17.949999999999623
+  },
+  {
+   "n": 5,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 8,
+   "elapsed": 35.11666666666532
+  },
+  {
+   "n": 6,
+   "winner": 0,
+   "reason": "doubleBounce",
+   "rallyHits": 2,
+   "elapsed": 42.60833333333156
+  }
+ ],
+ "framesRun": 1595,
+ "place": {
+  "frames": 1595,
+  "onButtons": 0,
+  "onCourt": 0,
+  "onPlayer": 0,
+  "activeFrames": 510,
+  "activeOpaque": 510,
+  "idleFrames": 993,
+  "idleDim": 993,
+  "fadingFrames": 92,
+  "rects": [
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": false,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 0.38
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   },
+   {
+    "x": 596,
+    "y": 202,
+    "w": 24,
+    "h": 156,
+    "inUse": true,
+    "opacity": 1
+   }
+  ]
+ },
+ "serveMeter": {
+  "visible": true,
+  "mode": "serve",
+  "place": "side",
+  "idle": "false",
+  "opacity": 1,
+  "fading": false,
+  "rect": {
+   "x": 596,
+   "y": 202,
+   "w": 24,
+   "h": 156
+  },
+  "background": "linear-gradient(to top, rgb(240, 105, 96) 0%, rgb(240, 105, 96) 17%, rgb(239, 195, 85) 17%, rgb(239, 195, 85) 27%, rgb(103, 211, 152) 27%, rgb(103, 211, 152) 73%, rgb(239, 195, 85) 73%, rgb(239, 195, 85) 83%, rgb(240, 105, 96) 83%)",
+  "needleBottom": "31.5315%",
+  "green": true,
+  "yellow": true
+ },
+ "returns": [
+  {
+   "plan": "green",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "47.9488%"
+   },
+   "needleMoves": 57,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "grade": "good",
+    "zone": "green",
+    "rating": "perfect",
+    "drop": false
+   },
+   "miss": null
+  },
+  {
+   "plan": "drop",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "47.9324%"
+   },
+   "needleMoves": 58,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "zone": "green",
+    "rating": "perfect",
+    "drop": true
+   },
+   "miss": null
+  },
+  {
+   "plan": "green",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "46.4871%"
+   },
+   "needleMoves": 44,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "grade": "good",
+    "zone": "green",
+    "rating": "good",
+    "drop": false
+   },
+   "miss": null
+  },
+  {
+   "plan": "drop",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "47.7075%"
+   },
+   "needleMoves": 57,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "zone": "green",
+    "rating": "good",
+    "drop": true
+   },
+   "miss": null
+  },
+  {
+   "plan": "green",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "47.7042%"
+   },
+   "needleMoves": 94,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "grade": "good",
+    "zone": "green",
+    "rating": "good",
+    "drop": false
+   },
+   "miss": null
+  },
+  {
+   "plan": "drop",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "47.8398%"
+   },
+   "needleMoves": 92,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "zone": "green",
+    "rating": "good",
+    "drop": true
+   },
+   "miss": null
+  },
+  {
+   "plan": "green",
+   "visibleBeforeTap": true,
+   "meterAtTap": {
+    "visible": true,
+    "mode": "hit",
+    "place": "side",
+    "idle": "false",
+    "opacity": 1,
+    "fading": false,
+    "rect": {
+     "x": 596,
+     "y": 202,
+     "w": 24,
+     "h": 156
+    },
+    "needleBottom": "46.0444%"
+   },
+   "needleMoves": 45,
+   "greenBand": true,
+   "yellowBand": true,
+   "hit": {
+    "grade": "good",
+    "zone": "green",
+    "rating": "good",
+    "drop": false
+   },
+   "miss": null
+  }
+ ],
+ "drops": [
+  {
+   "at": 12.11666666666662,
+   "soft": true,
+   "apex": 4.359776786810011,
+   "b1": 1.724999999999902,
+   "bounceTop": 0.9898369134732774,
+   "touch": null,
+   "touchBounced": null,
+   "end": 2.5749999999998536,
+   "oppStartZ": -7.741256863275751,
+   "oppBackMost": -9.168647558787436,
+   "plan": {
+    "reach": false,
+    "readAt": 13.183500713588238
+   },
+   "winner": 0,
+   "reason": "doubleBounce",
+   "oppBackpedal": 1.43
+  },
+  {
+   "at": 26.108333333332492,
+   "soft": true,
+   "apex": 4.0892440543177315,
+   "b1": 1.6833333333332376,
+   "bounceTop": 0.7902788416490732,
+   "touch": 1.9249999999998906,
+   "touchBounced": true,
+   "end": null,
+   "oppStartZ": -7.611357731893017,
+   "oppBackMost": -7.828081669453351,
+   "plan": {
+    "reach": true,
+    "readAt": 26.33666666666583
+   },
+   "touchY": 0.8172384910525785,
+   "reason": "answered",
+   "oppBackpedal": 0.22
+  },
+  {
+   "at": 32.50833333333213,
+   "soft": true,
+   "apex": 4.3564138065688445,
+   "b1": 1.7499999999999005,
+   "bounceTop": 0.9987013905544303,
+   "touch": null,
+   "touchBounced": null,
+   "end": 2.608333333333185,
+   "oppStartZ": -7.866486922973295,
+   "oppBackMost": -9.396935638757414,
+   "plan": {
+    "reach": false,
+    "readAt": 33.667304755249525
+   },
+   "winner": 0,
+   "reason": "doubleBounce",
+   "oppBackpedal": 1.53
+  }
+ ],
+ "greenPixels": [
+  43,
+  43,
+  43,
+  43,
+  43,
+  43,
+  43
+ ],
+ "csp": {
+  "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "htmlResponsesSeen": 1,
+  "violations": [],
+  "policyErrors": [],
+  "workers": [
+   {
+    "url": "http://127.0.0.1:42305/workout/island/minigames/tennis-draco-worker.mjs",
+    "hooked": true,
+    "closed": true,
+    "waitingForDebugger": true,
+    "domains": {
+     "Log.enable": true,
+     "Audits.enable": true
+    }
+   }
+  ]
+ }
+}

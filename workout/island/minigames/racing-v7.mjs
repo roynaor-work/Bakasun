@@ -67,15 +67,15 @@ export const CROWD_REFRESH=12;
 const lcg=seed=>{let v=seed>>>0;return()=>((v=(Math.imul(v,1664525)+1013904223)>>>0)/4294967296);};
 /** Where the standing spectators go: small groups on the grass behind the lamp line, facing the road. Deterministic for
  * (track, seed); every site is checked against the road so nobody stands on it. groundAt(x,z) gives the grass height. */
-export function crowdSites(track,groundAt,seed=1){
+export function crowdSites(track,groundAt,seed=1,clear=0){
  const random=lcg((seed>>>0)^0x5ec7a70),sites=[],width=track.width;
  const groups=[[.04,1],[.17,-1],[.31,1],[.47,-1],[.58,1],[.71,-1],[.86,1]];
  for(const [fraction,side] of groups){
   const p=track.sample(track.length*fraction),tx=p.tangent.x,tz=p.tangent.z,len=Math.hypot(tx,tz)||1;
   for(let row=0;row<2;row++)for(let col=0;col<7;col++){
-   const lateral=side*(width/2+8.2+row*1.5+random()*.5),along=(col-3)*1.25+(random()-.5)*.5;
+   const lateral=side*(width/2+(clear?Math.max(8.2,clear+1.2):8.2)+row*1.5+random()*.5),along=(col-3)*1.25+(random()-.5)*.5;
    const x=p.x+p.normal.x*lateral+tx/len*along,z=p.z+p.normal.z*lateral+tz/len*along;
-   if(track.project(x,z).distance<width/2+7)continue;
+   if(track.project(x,z).distance<width/2+(clear?clear+.6:7))continue;
    const dx=-side*p.normal.x,dz=-side*p.normal.z;
    sites.push({x,y:groundAt(x,z),z,yaw:Math.atan2(dx,dz)+(random()-.5)*.5,scale:.92+random()*.13,variant:sites.length%3});
   }

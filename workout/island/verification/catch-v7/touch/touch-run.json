@@ -1,0 +1,60 @@
+{
+ "stage": 1,
+ "quality": "low",
+ "taps": {
+  "[data-action=avatar-start]": 1,
+  "[data-action=game-enter][data-game-id=catchCriminal]": 1,
+  "[data-action=game-play]": 1,
+  "[data-action=stage-play] >> nth=0": 1,
+  "[data-action=game-understood]": 1,
+  ".catch-help-ok": 1,
+  ".catch-fire": 5,
+  ".catch-weapon": 15
+ },
+ "tools": {
+  "tyres": 3,
+  "net": 1,
+  "spikes": 1
+ },
+ "events": [],
+ "shots": [
+  "00-intro",
+  "01-help",
+  "02-chase-green",
+  "02-close-time",
+  "03-tool-button-net",
+  "02-nitro-orbs",
+  "03-sticky-net",
+  "04-spike-strip",
+  "06-car-down",
+  "07-aim-sight",
+  "08-catch",
+  "08-catch-2",
+  "09-result"
+ ],
+ "v7": {
+  "weapons": true,
+  "assist": true,
+  "elements": true,
+  "siren": 0.55
+ },
+ "chase": {
+  "how": "caught",
+  "byWeapons": true,
+  "seconds": 22.8,
+  "shots": 5,
+  "toolHits": 5,
+  "damage": 1,
+  "nitro": 4,
+  "nearMisses": 0,
+  "closeness": 1
+ },
+ "throw": {
+  "throws": 2
+ },
+ "result": {
+  "stage": 2,
+  "stars": 2
+ },
+ "seconds": 376.223
+}
