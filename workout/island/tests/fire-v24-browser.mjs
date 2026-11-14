@@ -73,13 +73,13 @@ async function playRoom(t,run,name){
   let s=await t.snap();const inside=()=>s?.v24?.interior;
   // the lesson card (first entry stage), then the room card
   s=await waitInside(t,x=>x?.v24?.interior?.tutorialOpen||x?.v24?.interior?.phase==='intro',200);
-  if(inside()?.tutorialOpen){run.lessonShown=true;run.shots.push(await t.shot(name+'-lesson'));await t.tapEl('.fv24-card',3);await t.tick(150);}
+  if(inside()?.tutorialOpen){run.lessonShown=true;for(let i=0;i<8;i++)await t.tick(100);run.shots.push(await t.shot(name+'-lesson'));await t.tapEl('.fv24-card',3);await t.tick(150);}
   s=await waitInside(t,x=>x?.v24?.interior?.phase==='intro',60);run.roomCard=await t.page.locator('.fv24-card').evaluate(n=>n.hidden?null:n.textContent.trim()).catch(()=>null);run.shots.push(await t.shot(name+'-room-card'));
   await t.tapEl('.fv24-card',3);s=await waitInside(t,x=>x?.v24?.interior?.phase==='play',40);run.playStarted=inside()?.phase==='play';run.clockAtStart=inside()?.room?.remaining;
   const metrics=[];
   for(let guard=0;guard<40;guard++){
     s=await t.snap();const it=inside();if(!it||it.phase!=='play')break;
-    const spot=it.screen.spots.find(x=>!x.done);const friend=it.room.friend;
+    const spot=it.screen.spots.find(x=>!x.done);const friend={...it.screen.friend,state:it.room.friend.state};
     if(spot){ // hold the finger on the fire until it is out (the water lands where the finger is)
       await t.touch('touchStart',1,spot.x,spot.y);let out=false;
       for(let i=0;i<140;i++){await t.tick(100);s=await t.snap();const now=inside();if(!now||now.phase!=='play'){break;}const sp=now.room.spots.find(x=>x.id===spot.id);if(i===6){metrics.push(now.renderMetrics);run.shots.push(await t.shot(name+'-spray-'+spot.id));run.sprayingSeen=run.sprayingSeen||now.spraying;run.hitSeen=run.hitSeen||now.hitSpot===spot.id;}

@@ -1,0 +1,195 @@
+{
+ "startedAt": "2026-11-14T15:08:00.920Z",
+ "viewport": "844x390 hasTouch isMobile, SwiftShader",
+ "runs": {
+  "stage3": {
+   "shots": [
+    "shots/stage3-street-start.jpg",
+    "shots/stage3-street-arrived.jpg",
+    "shots/stage3-inside-lesson.jpg",
+    "shots/stage3-inside-room-card.jpg",
+    "shots/stage3-inside-spray-sofa.jpg",
+    "shots/stage3-inside-spray-rug.jpg",
+    "shots/stage3-inside-friend.jpg"
+   ],
+   "renderMode": "three",
+   "v24AtStart": {
+    "state": "drive",
+    "inside": false,
+    "done": false,
+    "level": 3,
+    "building": {
+     "index": 4,
+     "door": [
+      0,
+      0.1,
+      2.85
+     ]
+    },
+    "doorScreen": {
+     "x": 328.9,
+     "y": 64.5
+    },
+    "markerKind": "arrow",
+    "doorDistance": 16.29,
+    "plan": {
+     "rooms": [
+      "living"
+     ],
+     "tools": [
+      "water"
+     ],
+     "tutorial": true
+    },
+    "result": null,
+    "interior": null,
+    "enterButton": false
+   },
+   "entryFlame": 2,
+   "navigationAfterTap": {
+    "active": false,
+    "kind": null
+   },
+   "driveTrace": [
+    {
+     "time": 0.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 1.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 2.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    }
+   ],
+   "arrived": true,
+   "arriveTime": 4.7,
+   "insideReady": true,
+   "insideMetricsAtStart": {
+    "triangles": 11160,
+    "drawCalls": 24,
+    "sceneTriangles": 10996,
+    "sceneObjects": 20,
+    "crew": true,
+    "friend": true,
+    "roomBuilt": false,
+    "burnables": 9,
+    "puffs": 0,
+    "lite": false,
+    "width": 844,
+    "height": 390,
+    "ready": true,
+    "loadFailed": false,
+    "fps": [],
+    "dpr": 1
+   },
+   "lessonShown": true,
+   "roomCard": "סלוןסלון. מכבים את האש ומחלצים את הכלב50 שניות על השעוןנוגעים כדי להתחיל",
+   "playStarted": true,
+   "clockAtStart": 49.79200000000002,
+   "sprayingSeen": true,
+   "hitSeen": true,
+   "spots": {
+    "sofa": true,
+    "rug": true
+   }
+  }
+ },
+ "checks": {
+  "entryStageStartsOnTheStreetWithADoorMarker": {
+   "pass": true,
+   "v24": {
+    "state": "drive",
+    "inside": false,
+    "done": false,
+    "level": 3,
+    "building": {
+     "index": 4,
+     "door": [
+      0,
+      0.1,
+      2.85
+     ]
+    },
+    "doorScreen": {
+     "x": 328.9,
+     "y": 64.5
+    },
+    "markerKind": "arrow",
+    "doorDistance": 16.29,
+    "plan": {
+     "rooms": [
+      "living"
+     ],
+     "tools": [
+      "water"
+     ],
+     "tutorial": true
+    },
+    "result": null,
+    "interior": null,
+    "enterButton": false
+   },
+   "mode": "three"
+  },
+  "drivingToTheBuildingOpensTheDoorAndTheEnterButton": {
+   "pass": true,
+   "arrived": true,
+   "doorDistance": 6.07,
+   "enterShown": true,
+   "arriveTime": 4.7,
+   "trace": [
+    {
+     "time": 0.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 1.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 2.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    }
+   ]
+  },
+  "enterLoadsTheRoomIn3DOverTheFrozenStreet": {
+   "pass": true,
+   "metrics": {
+    "triangles": 11160,
+    "drawCalls": 24,
+    "sceneTriangles": 10996,
+    "sceneObjects": 20,
+    "crew": true,
+    "friend": true,
+    "roomBuilt": false,
+    "burnables": 9,
+    "puffs": 0,
+    "lite": false,
+    "width": 844,
+    "height": 390,
+    "ready": true,
+    "loadFailed": false,
+    "fps": [],
+    "dpr": 1
+   }
+  }
+ },
+ "error": "cdpSession.send: Protocol error (Input.dispatchTouchEvent): Invalid parameters\n    at touch (/home/user/Bakasun/workout/island/tests/fire-v24-browser.mjs:30:70)\n    at Object.tapAt (/home/user/Bakasun/workout/island/tests/fire-v24-browser.mjs:32:45)\n    at playRoom (/home/user/Bakasun/workout/island/tests/fire-v24-browser.mjs:88:87)\n    at async file:///home/user/Bakasun/workout/island/tests/fire-v24-browser.mjs:127:5",
+ "failures": 1,
+ "finishedAt": "2026-11-14T15:11:11.086Z"
+}
