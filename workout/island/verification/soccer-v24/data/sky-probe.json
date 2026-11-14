@@ -1,0 +1,106 @@
+{
+ "note": "Moving the ball to the east goal mouth scores, and the goal replay camera (soccerShow) frames the sky above the far stand: the backdrop shows with v24 off as with it on. A spot reads 0 when no replay is running at the screenshot.",
+ "runs": [
+  {
+   "run": "look-v10 spots, 844x390, v24 off",
+   "query": "soccerPitchAssets=0&soccerClipsV13=0&soccerFxV1=0&soccerCrowd3d=0&athleteBodyV2=0",
+   "viewport": [
+    844,
+    390
+   ],
+   "backdropShare": {
+    "corner NW": 0,
+    "corner SE": 0,
+    "goal east": 0.0303,
+    "south touchline": 0,
+    "centre": 0
+   },
+   "box": {
+    "goal east": [
+     10,
+     0,
+     674,
+     40
+    ]
+   },
+   "errors": []
+  },
+  {
+   "run": "v8 spots, 844x390, v24 off",
+   "query": "soccerPitchAssets=0&soccerClipsV13=0&soccerFxV1=0&soccerCrowd3d=0&athleteBodyV2=0",
+   "viewport": [
+    844,
+    390
+   ],
+   "backdropShare": {
+    "corner NW": 0,
+    "corner NE": 0,
+    "corner SW": 0,
+    "corner SE": 0,
+    "goal west": 0,
+    "goal east": 0.0987,
+    "north touchline": 0,
+    "south touchline": 0,
+    "centre": 0
+   },
+   "box": {
+    "goal east": [
+     0,
+     0,
+     843,
+     90
+    ]
+   },
+   "errors": []
+  },
+  {
+   "run": "v8 spots, 844x390, v24 defaults",
+   "query": "",
+   "viewport": [
+    844,
+    390
+   ],
+   "backdropShare": {
+    "corner NW": 0,
+    "corner NE": 0,
+    "corner SW": 0,
+    "corner SE": 0,
+    "goal west": 0,
+    "goal east": 0.1175,
+    "north touchline": 0,
+    "south touchline": 0,
+    "centre": 0
+   },
+   "box": {
+    "goal east": [
+     0,
+     0,
+     843,
+     101
+    ]
+   },
+   "errors": []
+  },
+  {
+   "run": "v8 spots, 390x844, v24 defaults",
+   "query": "",
+   "viewport": [
+    390,
+    844
+   ],
+   "backdropShare": {
+    "corner NW": 0,
+    "corner NE": 0,
+    "corner SW": 0,
+    "corner SE": 0,
+    "goal west": 0,
+    "goal east": 0,
+    "north touchline": 0,
+    "south touchline": 0,
+    "centre": 0
+   },
+   "box": {},
+   "errors": []
+  }
+ ]
+}
