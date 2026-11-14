@@ -56,10 +56,10 @@ const inView=p=>p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390;
 const entryFlame=t=>t.page.evaluate(()=>{const d=window.__island.games.current.session.debug,b=d.flow.building,sites=d.model.balance.render.sites;let best=-1,dist=Infinity;sites.forEach((s,i)=>{if(!d.model.flames[i]?.active)return;const dd=Math.hypot(s[0]-b.x,s[2]-b.z);if(dd<dist){dist=dd;best=i;}});return best;});
 /** Drive to the building: a tap on its fire marker (the engine drives the roads); if parked short of the door, nudge with the stick. */
 async function driveToBuilding(t,run){
-  let s=await t.snap();const flame=await entryFlame(t);run.entryFlame=flame;
+  let s=await t.snap();const flame=await entryFlame(t);run.entryFlame=flame;const box=await t.page.locator('.minigame-canvas').first().boundingBox();
   const target=inView(s.flameScreens[flame])?s.flameScreens[flame]:s.indicators.find(a=>a.kind==='fire'&&a.index===flame);
   if(!target)throw Error('no marker for the building fire');
-  await t.tapAt(target.x,target.y);await t.tick(100);s=await t.snap();run.navigationAfterTap={active:s.navigation.active,kind:s.navigation.kind};
+  await t.tapAt(box.x+target.x,box.y+target.y);await t.tick(100);s=await t.snap();run.navigationAfterTap={active:s.navigation.active,kind:s.navigation.kind};
   let arrived=false;const trace=[];
   for(let i=0;i<450;i++){await t.tick(100);s=await t.snap();if(i%10===0)trace.push({time:+s.time.toFixed(1),door:s.v24.doorDistance,state:s.v24.state,marker:s.v24.markerKind});if(s.v24.state==='ready'){arrived=true;break;}
     if(!s.navigation.active&&!s.truck.driving&&i>20){ // parked short: steer toward the door with the stick
@@ -94,7 +94,7 @@ async function playRoom(t,run,name){
 }
 /** The rest of the street stage: fires one by one (tap the marker, drive, hold the hose in bursts), the hydrant when water is low, finish. */
 async function finishStreet(t,run,name){
-  let s=await t.snap();const spray=await t.center('#shoot');const trace=[];let shotDone=false;
+  let s=await t.snap();const spray=await t.center('#shoot');const trace=[];let shotDone=false;const box=await t.page.locator('.minigame-canvas').first().boundingBox();const tapCanvas=(x,y)=>t.tapAt(box.x+x,box.y+y);
   const hydrantPoint=()=>t.page.evaluate(()=>{const d=window.__island.games.current?.session.debug;if(!d)return null;const m=d.model,hp=[...m.balance.city.hydrants].sort((a,b)=>Math.hypot(a[0]-m.truck.x,a[2]-m.truck.z)-Math.hypot(b[0]-m.truck.x,b[2]-m.truck.z))[0];const p=d.view.projectWorld(hp);return p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390?p:null;});
   const nearOf=n=>n.flames.filter(f=>f.active&&f.heat>0&&Math.hypot(f.x-n.nozzle.x,f.y-n.nozzle.y)<=n.range*.88); // the game's own "in reach" rule
   for(let guard=0;guard<900;guard++){
@@ -107,12 +107,12 @@ async function finishStreet(t,run,name){
     if(s.water/s.maxWater<.4){
       if(s.atHydrant){for(let k=0;k<90;k++){await t.tick(100);const w=await t.snap();if(!w||w.water/w.maxWater>.9||(nearOf(w).length&&w.water>20))break;}continue;}
       const h=s.indicators.find(a=>a.kind==='hydrant')||await hydrantPoint();
-      if(h){await t.tapAt(h.x,h.y);for(let i=0;i<150;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.atHydrant&&!n.truck.driving)break;if(!n.navigation.active&&!n.truck.driving&&i>15)break;}continue;}}
+      if(h){await tapCanvas(h.x,h.y);for(let i=0;i<150;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.atHydrant&&!n.truck.driving)break;if(!n.navigation.active&&!n.truck.driving&&i>15)break;}continue;}}
     // 3. drive to the nearest burning window
     const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);if(!fires.length){await t.tick(200);continue;}
     const f=fires.sort((a,b)=>Math.hypot(a.x-s.nozzle.x,a.y-s.nozzle.y)-Math.hypot(b.x-s.nozzle.x,b.y-s.nozzle.y))[0];
     const marker=inView(s.flameScreens[f.i])?s.flameScreens[f.i]:s.indicators.find(a=>a.kind==='fire'&&a.index===f.i);
-    if(marker){await t.tapAt(marker.x,marker.y);for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||n.flames[f.i].heat<=0)break;if(nearOf(n).length&&!n.truck.driving)break;if(!n.navigation.active&&!n.truck.driving&&i>10)break;}}else await t.tick(300);
+    if(marker){await tapCanvas(marker.x,marker.y);for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||n.flames[f.i].heat<=0)break;if(nearOf(n).length&&!n.truck.driving)break;if(!n.navigation.active&&!n.truck.driving&&i>10)break;}}else await t.tick(300);
   }
   run.streetTrace=trace;
   run.resultCard=await t.page.locator('[data-result=fireRescue]').count()>0;if(run.resultCard)run.shots.push(await t.shot(name+'-result'));
