@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>מוזיקת האי · חדר האזנה</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #17392e; background: #f4f7ee; accent-color: #246c50; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 30px 22px 210px; }
+    main, header, .dock-inner { max-width: 1080px; margin: auto; }
+    header { padding: 18px 0 26px; }
+    .eyebrow { font-size: .76rem; font-weight: 750; letter-spacing: .16em; color: #466853; }
+    h1 { font-size: clamp(2.3rem, 6vw, 4.5rem); letter-spacing: -.06em; margin: 8px 0; line-height: 1.12; }
+    header p { max-width: 680px; line-height: 1.8; color: #45624e; margin: 14px 0 20px; }
+    .facts { display: flex; gap: 9px; flex-wrap: wrap; }
+    .facts span { padding: 6px 12px; border: 1px solid #cedbc8; border-radius: 99px; font-size: .82rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    article { position: relative; padding: 24px; background: #fffef9; border: 1px solid #d7e2cf; border-radius: 20px; }
+    article.active { border-color: #246c50; box-shadow: inset 0 0 0 1px #246c50; }
+    article h2 { font-size: 1.35rem; margin: 4px 0 6px; }
+    .number { font-size: .74rem; letter-spacing: .12em; color: #66735b; }
+    .title { color: #3f654e; font-weight: 650; margin: 0 0 8px; }
+    article p { line-height: 1.6; margin: 8px 0; font-size: .9rem; }
+    .meta { color: #5c6d59; font-size: .8rem; display: flex; flex-wrap: wrap; gap: 14px; margin: 14px 0; }
+    button, select { font: inherit; min-height: 44px; border: 1px solid #bacbb6; border-radius: 10px; padding: 9px 13px; cursor: pointer; background: #fffef9; color: #17392e; }
+    button.primary { color: white; background: #246c50; border-color: #246c50; }
+    button:hover { filter: brightness(.95); }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #bd6907; outline-offset: 3px; }
+    button:disabled { opacity: .5; cursor: default; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .files { display: flex; gap: 16px; font-size: .78rem; margin-top: 15px; }
+    a { color: #286549; text-underline-offset: 3px; }
+    .dock { position: fixed; inset: auto 0 0; background: #f4f7eef5; border-top: 1px solid #c6d4bf; padding: 13px 22px max(14px, env(safe-area-inset-bottom)); backdrop-filter: blur(12px); z-index: 2; }
+    .status-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 46px; }
+    #status { font-size: .87rem; line-height: 1.5; }
+    #status.error { color: #a32d20; }
+    #progress { width: 100%; height: 5px; display: block; margin: 8px 0 14px; }
+    .controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 22px; font-size: .82rem; }
+    .controls label { display: flex; align-items: center; gap: 8px; }
+    .intensity { display: flex; flex-wrap: wrap; gap: 5px; }
+    .intensity button { font-size: .8rem; padding: 7px 11px; }
+    .intensity button[aria-pressed="true"] { color: white; background: #17392e; border-color: #17392e; }
+    #volume { width: 90px; }
+    #details { margin-top: 26px; font-size: .85rem; color: #45624e; line-height: 1.8; }
+    code { direction: ltr; unicode-bidi: embed; }
+    @media (max-width: 680px) {
+      body { padding: 12px 14px 285px; }
+      .grid { grid-template-columns: 1fr; }
+      article { padding: 20px; }
+      .dock { padding-inline: 14px; }
+      .controls { gap: 12px; }
+      .intensity { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">ISLAND / MUSIC LOOPS V1</div>
+    <h1>לכל משחק, הקצב שלו.</h1>
+    <p>עשרה עולמות קטנים ושמחים. בחרו משחק, עברו בין מקצב רגוע לנמרץ, ושמעו גם רגע קצר של ניצחון.</p>
+    <div class="facts"><span>10 משחקים</span><span>20 קטעים מקוריים</span><span>בלי מילים</span><span>60–77 שניות ללופ</span></div>
+  </header>
+  <main>
+    <div id="tracks" class="grid" aria-label="בחירת מוזיקה"></div>
+    <div id="details">
+      <p>״מסלול מלא״ מנגן רצף של רגוע ← בינוני ← נמרץ ← בינוני. בחירה בעוצמה מסוימת חוזרת על האזור המתאים; המעבר מתבצע בתחילת התיבה הבאה. ״חיבור לופ״ משמיע את התיבה האחרונה ואת החזרה להתחלה. הניצחון מתנגן פעם אחת.</p>
+      <p><a href="REPORT.md">דוח ומדידות</a> · <a href="manifest.json">רשימת הקטעים</a> · <a href="LICENSE.txt">רישיון חופשי</a></p>
+      <p id="serve-tip" hidden>כדי להאזין מקומית, הפעילו שרת בתיקיית המאגר ופתחו את הדף דרך כתובת HTTP. ההוראות המלאות בדוח.</p>
+    </div>
+    <noscript>יש להפעיל JavaScript כדי להשתמש בנגן.</noscript>
+  </main>
+  <aside class="dock" aria-label="שליטה בנגן">
+    <div class="dock-inner">
+      <div class="status-row"><div id="status" role="status" aria-live="polite">טוען את רשימת הקטעים…</div><button id="stop" disabled>עצירה</button></div>
+      <progress id="progress" max="1" value="0" aria-label="התקדמות בקטע"></progress>
+      <div class="controls">
+        <div class="intensity" role="group" aria-label="עוצמת המקצב">
+          <button data-level="full" aria-pressed="true">מסלול מלא</button>
+          <button data-level="low" aria-pressed="false">רגוע</button>
+          <button data-level="medium" aria-pressed="false">בינוני</button>
+          <button data-level="high" aria-pressed="false">נמרץ</button>
+        </div>
+        <label>פורמט <select id="format"><option value="auto">אוטומטי</option><option value="ogg">OGG</option><option value="mp3">MP3</option></select></label>
+        <label>עוצמת שמע <input id="volume" type="range" min="0" max="100" value="55"></label>
+      </div>
+    </div>
+  </aside>
+  <script type="module">
+    import { LoopPlayer } from './player.mjs';
+    const player = new LoopPlayer();
+    const $ = selector => document.querySelector(selector);
+    const names = { full: 'מסלול מלא', low: 'רגוע', medium: 'בינוני', high: 'נמרץ' };
+    let manifest, level = 'full', error = '';
+    const time = seconds => `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+    function refresh() {
+      const track = player.track;
+      $('#stop').disabled = !track && !player.loading;
+      $('#status').classList.toggle('error', Boolean(error));
+      const pending = player.pending ? ` · ${names[player.pending.level]} בתחילת התיבה הבאה` : '';
+      $('#status').textContent = error || (player.loading ? `טוען: ${track.game_name}…` : player.voice ?
+        `${track.game_name} · ${track.kind === 'victory' ? 'ניצחון' : names[player.voice.region.id] || names[level]} · ${player.actualFormat.toUpperCase()}${pending}` : 'מוכנים להאזין. בחרו משחק.');
+      document.querySelectorAll('article').forEach(card => card.classList.toggle('active', card.dataset.game === track?.game_id));
+    }
+    player.addEventListener('change', refresh);
+    async function start(track, seam = false) {
+      error = '';
+      if (seam) selectLevel('full');
+      try { await player.play(track, { format: $('#format').value, level, startBar: seam ? 31 : 0 }); }
+      catch (e) { error = `הניגון נכשל: ${e.message}. אפשר לנסות פורמט אחר.`; refresh(); }
+    }
+    function selectLevel(value) {
+      level = value;
+      document.querySelectorAll('[data-level]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.level === value)));
+      player.setIntensity(value);
+      refresh();
+    }
+    document.querySelectorAll('[data-level]').forEach(button => button.addEventListener('click', () => selectLevel(button.dataset.level)));
+    $('#stop').addEventListener('click', () => { error = ''; player.stop(); refresh(); });
+    $('#volume').addEventListener('input', event => player.setVolume(event.target.value / 100));
+    $('#format').addEventListener('change', () => { if (player.track) start(player.track); });
+    window.addEventListener('pagehide', () => player.stop());
+    function animate() {
+      const position = player.position();
+      $('#progress').value = position === null ? 0 : position / player.track.duration_seconds;
+      if (position !== null) $('#progress').setAttribute('aria-valuetext', `${time(position)} / ${time(player.track.duration_seconds)}`);
+      requestAnimationFrame(animate);
+    }
+    animate();
+    try {
+      const response = await fetch('./manifest.json');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      manifest = await response.json();
+      const games = manifest.tracks.filter(track => track.kind === 'gameplay');
+      games.forEach((track, index) => {
+        const victory = manifest.tracks.find(item => item.game_id === track.game_id && item.kind === 'victory');
+        const card = document.createElement('article');
+        card.dataset.game = track.game_id;
+        // All strings come from the checked-in, original-content manifest.
+        card.innerHTML = `<div class="number">${String(index + 1).padStart(2, '0')} / 10</div><h2>${track.game_name}</h2><div class="title">${track.name.split(' · ')[0]}</div><p>${track.description}</p><div class="meta"><span>${track.duration_seconds.toFixed(1)} שניות</span><span dir="ltr">${track.bpm} BPM</span><span>ניצחון 6 שניות</span></div><div class="actions"><button class="primary" data-action="gameplay" aria-label="נגינת משחק: ${track.game_name}">ניגון משחק</button><button data-action="victory" aria-label="נגינת ניצחון: ${track.game_name}">ניצחון</button><button data-action="seam" aria-label="בדיקת חיבור לופ: ${track.game_name}">חיבור לופ</button></div><div class="files"><a href="${track.files.ogg.path}" download>משחק OGG</a><a href="${track.files.mp3.path}" download>משחק MP3</a><a href="${victory.files.ogg.path}" download>ניצחון OGG</a><a href="${victory.files.mp3.path}" download>ניצחון MP3</a></div>`;
+        card.querySelector('[data-action="gameplay"]').onclick = () => start(track);
+        card.querySelector('[data-action="victory"]').onclick = () => start(victory);
+        card.querySelector('[data-action="seam"]').onclick = () => start(track, true);
+        $('#tracks').append(card);
+      });
+      refresh();
+    } catch (e) {
+      error = 'לא ניתן לטעון את רשימת הקטעים. פתחו את הדף דרך שרת HTTP מקומי כמוסבר בדוח.';
+      $('#serve-tip').hidden = false;
+      refresh();
+    }
+    // Read-only hooks for the reproducible browser audit, using the real player.
+    window.musicPreview = { player, get manifest() { return manifest; } };
+  </script>
+</body>
+</html>

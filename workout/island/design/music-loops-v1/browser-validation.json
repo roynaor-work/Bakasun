@@ -1,0 +1,1061 @@
+{
+  "passed": true,
+  "browser": "Chromium",
+  "errors": [],
+  "ui_checks": [
+    "10 games, 20 tracks, 40 download links",
+    "No horizontal overflow: 390x844",
+    "No horizontal overflow: 844x390",
+    "No horizontal overflow: 1280x900",
+    "All 20 play buttons start and stop real OGG audio",
+    "All 20 play buttons start and stop real MP3 audio",
+    "End-to-start wrap plays through the real seam button",
+    "Low/medium/high/full: phase-preserving bar transitions, rapid replacement, volume",
+    "Stop during loading cancels playback",
+    "Automatic OGG to MP3 fallback",
+    "Victory stops naturally after six seconds"
+  ],
+  "files": [
+    {
+      "id": "soccer-gameplay",
+      "format": "ogg",
+      "frames": 2194284,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -65.71696682498288,
+          "before_dbfs": -21.85883913706927,
+          "after_dbfs": -11.808049588240749
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -68.99334204031344,
+          "before_dbfs": -21.809935862814392,
+          "after_dbfs": -11.808049588240749
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -54.4694315761063,
+          "before_dbfs": -21.8368391049135,
+          "after_dbfs": -11.871019605732725
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -56.53138271875456,
+          "before_dbfs": -21.826745613195612,
+          "after_dbfs": -11.88213029764432
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -66.92175643827042,
+          "before_dbfs": -21.85883913706927,
+          "after_dbfs": -11.80768657916908
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.1143206004612605,
+        "max_sample_step_dbfs": -24.28616080362261
+      }
+    },
+    {
+      "id": "soccer-gameplay",
+      "format": "mp3",
+      "frames": 2194284,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -67.44507146194648,
+          "before_dbfs": -21.896356773639212,
+          "after_dbfs": -11.902230143154123
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -65.75090430622222,
+          "before_dbfs": -21.896038438057968,
+          "after_dbfs": -11.902230143154123
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -88.92007757504574,
+          "before_dbfs": -21.89602769063071,
+          "after_dbfs": -11.901280639740111
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -124.25636760249135,
+          "before_dbfs": -21.896193460618044,
+          "after_dbfs": -11.90258473746531
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -78.73358458857444,
+          "before_dbfs": -21.896356773639212,
+          "after_dbfs": -11.897658536599929
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.101766247384046,
+        "max_sample_step_dbfs": -24.158117204854022
+      }
+    },
+    {
+      "id": "soccer-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "soccer-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "hoops-gameplay",
+      "format": "ogg",
+      "frames": 2275556,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -67.8293079649964,
+          "before_dbfs": -22.951612105827888,
+          "after_dbfs": -12.46069570200931
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -53.594407686987395,
+          "before_dbfs": -22.948816455691702,
+          "after_dbfs": -12.46069570200931
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -39.37256413755366,
+          "before_dbfs": -23.05429769703317,
+          "after_dbfs": -12.444624698966209
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -43.28638164761034,
+          "before_dbfs": -22.967672007147655,
+          "after_dbfs": -12.400994762101288
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -54.38447609716006,
+          "before_dbfs": -22.951612105827888,
+          "after_dbfs": -12.389159077414691
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.790526112920491,
+        "max_sample_step_dbfs": -29.23990409866144
+      }
+    },
+    {
+      "id": "hoops-gameplay",
+      "format": "mp3",
+      "frames": 2275556,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -88.51756948089414,
+          "before_dbfs": -23.018985341028685,
+          "after_dbfs": -12.487146989017951
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -77.63510431008298,
+          "before_dbfs": -23.019376742880272,
+          "after_dbfs": -12.487146989017951
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -95.20372210656497,
+          "before_dbfs": -23.01953075907263,
+          "after_dbfs": -12.487720341295569
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -90.11481665059728,
+          "before_dbfs": -23.019181610237936,
+          "after_dbfs": -12.48796427516752
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -82.64349719379715,
+          "before_dbfs": -23.018985341028685,
+          "after_dbfs": -12.48856784809185
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.742293377288592,
+        "max_sample_step_dbfs": -29.08761750929152
+      }
+    },
+    {
+      "id": "hoops-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "hoops-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "tennis-gameplay",
+      "format": "ogg",
+      "frames": 2118620,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -53.591336714128545,
+          "before_dbfs": -22.391704736720335,
+          "after_dbfs": -12.104099408222606
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -76.7860100068375,
+          "before_dbfs": -22.447848663505706,
+          "after_dbfs": -12.104099408222606
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -66.79011852892673,
+          "before_dbfs": -22.386366221389878,
+          "after_dbfs": -12.077155682470194
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -73.09166382344861,
+          "before_dbfs": -22.39457162999811,
+          "after_dbfs": -12.066038095056388
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -53.42197134188437,
+          "before_dbfs": -22.391704736720335,
+          "after_dbfs": -12.083297355696912
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.622523737483805,
+        "max_sample_step_dbfs": -21.26497297433579
+      }
+    },
+    {
+      "id": "tennis-gameplay",
+      "format": "mp3",
+      "frames": 2118620,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -66.63686627779246,
+          "before_dbfs": -22.46624840358404,
+          "after_dbfs": -12.123570451099706
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -68.56452080754883,
+          "before_dbfs": -22.46639522817039,
+          "after_dbfs": -12.123570451099706
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -122.93324483127003,
+          "before_dbfs": -22.466703492238913,
+          "after_dbfs": -12.12869854509471
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -117.59519894095965,
+          "before_dbfs": -22.466369555354685,
+          "after_dbfs": -12.123270362559904
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -79.79263631095309,
+          "before_dbfs": -22.46624840358404,
+          "after_dbfs": -12.127791415767938
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.6586610061907847,
+        "max_sample_step_dbfs": -21.14973760224295
+      }
+    },
+    {
+      "id": "tennis-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "tennis-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "racing-gameplay",
+      "format": "ogg",
+      "frames": 1920000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -54.98122153293227,
+          "before_dbfs": -22.396032801310405,
+          "after_dbfs": -11.993970291165885
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -40.15666170267437,
+          "before_dbfs": -22.37200946451441,
+          "after_dbfs": -11.993970291165885
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -85.34644290905581,
+          "before_dbfs": -22.37200946451441,
+          "after_dbfs": -12.030294801939863
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -85.34644290905581,
+          "before_dbfs": -22.37200946451441,
+          "after_dbfs": -12.030294801939863
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -38.66795349390585,
+          "before_dbfs": -22.396032801310405,
+          "after_dbfs": -12.030294801939863
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -5.576966457252938,
+        "max_sample_step_dbfs": -26.93789530347636
+      }
+    },
+    {
+      "id": "racing-gameplay",
+      "format": "mp3",
+      "frames": 1920000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -73.28149527262141,
+          "before_dbfs": -22.442239491642916,
+          "after_dbfs": -12.088486992639286
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -68.0275141397809,
+          "before_dbfs": -22.44236948983047,
+          "after_dbfs": -12.088486992639286
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -96.308286458773,
+          "before_dbfs": -22.442223603706886,
+          "after_dbfs": -12.089833211673236
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -101.78835883976916,
+          "before_dbfs": -22.442442980972107,
+          "after_dbfs": -12.088342644421772
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -74.62425393183253,
+          "before_dbfs": -22.442239491642916,
+          "after_dbfs": -12.088378209226033
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -5.467748587286656,
+        "max_sample_step_dbfs": -27.012069076694978
+      }
+    },
+    {
+      "id": "racing-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "racing-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "alpine-gameplay",
+      "format": "ogg",
+      "frames": 2363076,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -63.01794458468582,
+          "before_dbfs": -22.274464743576303,
+          "after_dbfs": -11.4129568698848
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -68.39304792370291,
+          "before_dbfs": -22.328542853964546,
+          "after_dbfs": -11.4129568698848
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -54.02320770045531,
+          "before_dbfs": -22.265875395856384,
+          "after_dbfs": -11.41290560505425
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -64.61402461532943,
+          "before_dbfs": -22.29601064682525,
+          "after_dbfs": -11.41912312628952
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -61.791785283241296,
+          "before_dbfs": -22.274464743576303,
+          "after_dbfs": -11.399878596784067
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -6.744771178581182,
+        "max_sample_step_dbfs": -36.10903065640284
+      }
+    },
+    {
+      "id": "alpine-gameplay",
+      "format": "mp3",
+      "frames": 2363076,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -75.85346713037845,
+          "before_dbfs": -22.34800382369147,
+          "after_dbfs": -11.485256625291067
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -72.07215874017727,
+          "before_dbfs": -22.34707715781952,
+          "after_dbfs": -11.485256625291067
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -97.1836785293214,
+          "before_dbfs": -22.34813681123908,
+          "after_dbfs": -11.483960157473462
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -100.11437713311763,
+          "before_dbfs": -22.347032942060714,
+          "after_dbfs": -11.486417436833651
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -82.22276179191597,
+          "before_dbfs": -22.34800382369147,
+          "after_dbfs": -11.484239278599516
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -6.825807469944516,
+        "max_sample_step_dbfs": -36.218956839622756
+      }
+    },
+    {
+      "id": "alpine-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "alpine-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "aliens-gameplay",
+      "format": "ogg",
+      "frames": 2048000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -63.510011336789816,
+          "before_dbfs": -23.039492485143704,
+          "after_dbfs": -11.267259650862123
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -92.6793392528238,
+          "before_dbfs": -23.013342519554723,
+          "after_dbfs": -11.267259650862123
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -102.72198747706062,
+          "before_dbfs": -23.013342519554723,
+          "after_dbfs": -11.267259352720448
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -102.72198747706062,
+          "before_dbfs": -23.013342519554723,
+          "after_dbfs": -11.267259352720448
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -63.305312903182354,
+          "before_dbfs": -23.039492485143704,
+          "after_dbfs": -11.267259352720448
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.521038399895504,
+        "max_sample_step_dbfs": -23.478590660546622
+      }
+    },
+    {
+      "id": "aliens-gameplay",
+      "format": "mp3",
+      "frames": 2048000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -60.94766736416442,
+          "before_dbfs": -23.09494344247307,
+          "after_dbfs": -11.301959892663989
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -59.796314101850385,
+          "before_dbfs": -23.09519464651435,
+          "after_dbfs": -11.301959892663989
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -90.86481201041298,
+          "before_dbfs": -23.095132752839802,
+          "after_dbfs": -11.300553628715859
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -109.50039610565261,
+          "before_dbfs": -23.09446050515117,
+          "after_dbfs": -11.305717115093397
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -76.17020110254474,
+          "before_dbfs": -23.09494344247307,
+          "after_dbfs": -11.30300948064908
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.613361302802465,
+        "max_sample_step_dbfs": -23.14760866997114
+      }
+    },
+    {
+      "id": "aliens-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "aliens-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "naval-gameplay",
+      "format": "ogg",
+      "frames": 2457600,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -64.99370576865229,
+          "before_dbfs": -23.401668438079113,
+          "after_dbfs": -11.44875236723177
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -57.35929933038243,
+          "before_dbfs": -23.348103220155522,
+          "after_dbfs": -11.44875236723177
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -98.27895563911086,
+          "before_dbfs": -23.348103220155522,
+          "after_dbfs": -11.448760934084884
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -98.27895563911086,
+          "before_dbfs": -23.348103220155522,
+          "after_dbfs": -11.448760934084884
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -62.154117794055985,
+          "before_dbfs": -23.401668438079113,
+          "after_dbfs": -11.448760934084884
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.058176032249486,
+        "max_sample_step_dbfs": -25.9622531345274
+      }
+    },
+    {
+      "id": "naval-gameplay",
+      "format": "mp3",
+      "frames": 2457600,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -75.40824530140466,
+          "before_dbfs": -23.481985919234802,
+          "after_dbfs": -11.532721860072254
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -72.41477429455284,
+          "before_dbfs": -23.48160691417292,
+          "after_dbfs": -11.532721860072254
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -111.97114063370059,
+          "before_dbfs": -23.481895214130112,
+          "after_dbfs": -11.530357342585745
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -103.50837145625214,
+          "before_dbfs": -23.481715255038825,
+          "after_dbfs": -11.530905262834462
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -82.14726761619751,
+          "before_dbfs": -23.481985919234802,
+          "after_dbfs": -11.532495460142101
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.0918065288287515,
+        "max_sample_step_dbfs": -26.135341904841354
+      }
+    },
+    {
+      "id": "naval-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "naval-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "fire-gameplay",
+      "format": "ogg",
+      "frames": 2048000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -48.27475894840278,
+          "before_dbfs": -22.0584160331857,
+          "after_dbfs": -12.359519796351467
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -43.74250482879965,
+          "before_dbfs": -22.03455366283384,
+          "after_dbfs": -12.359519796351467
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -66.14590433843298,
+          "before_dbfs": -22.03455366283384,
+          "after_dbfs": -12.377762700710859
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -66.14590433843298,
+          "before_dbfs": -22.03455366283384,
+          "after_dbfs": -12.377762700710859
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -50.074831396769625,
+          "before_dbfs": -22.0584160331857,
+          "after_dbfs": -12.377762700710859
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.474436378791518,
+        "max_sample_step_dbfs": -27.975375102522374
+      }
+    },
+    {
+      "id": "fire-gameplay",
+      "format": "mp3",
+      "frames": 2048000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -71.53375347493765,
+          "before_dbfs": -22.141475508485307,
+          "after_dbfs": -12.420705150002345
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -82.081451078712,
+          "before_dbfs": -22.141947427076154,
+          "after_dbfs": -12.420705150002345
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -110.92906428039436,
+          "before_dbfs": -22.141918029348176,
+          "after_dbfs": -12.421064404200733
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -98.57869774778642,
+          "before_dbfs": -22.141706819743394,
+          "after_dbfs": -12.419913593793465
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -74.99713251990485,
+          "before_dbfs": -22.141475508485307,
+          "after_dbfs": -12.419150976374214
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -4.492534995175016,
+        "max_sample_step_dbfs": -27.860520994935083
+      }
+    },
+    {
+      "id": "fire-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "fire-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "police-gameplay",
+      "format": "ogg",
+      "frames": 1981936,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -57.507551019340816,
+          "before_dbfs": -23.39386423551999,
+          "after_dbfs": -13.066072274781131
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -44.57211275600795,
+          "before_dbfs": -23.254774355381052,
+          "after_dbfs": -13.066072274781131
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -39.66203693694746,
+          "before_dbfs": -23.257120540956887,
+          "after_dbfs": -13.289872006544199
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -53.71820427397684,
+          "before_dbfs": -23.296007128264833,
+          "after_dbfs": -13.146391671403242
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -82.63428634126987,
+          "before_dbfs": -23.39386423551999,
+          "after_dbfs": -13.312269833736037
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -6.6388191173781665,
+        "max_sample_step_dbfs": -30.32629863112178
+      }
+    },
+    {
+      "id": "police-gameplay",
+      "format": "mp3",
+      "frames": 1981936,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -102.4662268101533,
+          "before_dbfs": -23.35719439443801,
+          "after_dbfs": -13.15431531169116
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -78.1413074498789,
+          "before_dbfs": -23.35701535930984,
+          "after_dbfs": -13.15431531169116
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -157.7537967451682,
+          "before_dbfs": -23.357801116425627,
+          "after_dbfs": -13.155811245044596
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -97.68385030436413,
+          "before_dbfs": -23.356894661577616,
+          "after_dbfs": -13.154785216933782
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -79.44090510547555,
+          "before_dbfs": -23.35719439443801,
+          "after_dbfs": -13.154734639439173
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -6.6866672990246485,
+        "max_sample_step_dbfs": -30.28333946631153
+      }
+    },
+    {
+      "id": "police-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "police-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "boar-gameplay",
+      "format": "ogg",
+      "frames": 2318492,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -61.1929893773835,
+          "before_dbfs": -22.282635004228347,
+          "after_dbfs": -9.953696949067893
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -89.78230298186595,
+          "before_dbfs": -22.219324900452797,
+          "after_dbfs": -9.953696949067893
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -38.139154812691835,
+          "before_dbfs": -22.239693237290865,
+          "after_dbfs": -9.982170190639492
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -37.514312799393615,
+          "before_dbfs": -22.242725717273302,
+          "after_dbfs": -9.920651878753242
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -59.41148697602799,
+          "before_dbfs": -22.282635004228347,
+          "after_dbfs": -9.932029675585236
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.186762095161584,
+        "max_sample_step_dbfs": -23.975038585205326
+      }
+    },
+    {
+      "id": "boar-gameplay",
+      "format": "mp3",
+      "frames": 2318492,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [
+        {
+          "id": "full",
+          "seam_step_dbfs": -71.93327724210573,
+          "before_dbfs": -22.27991590781376,
+          "after_dbfs": -10.00490571446427
+        },
+        {
+          "id": "low",
+          "seam_step_dbfs": -69.57631316028443,
+          "before_dbfs": -22.279863783884956,
+          "after_dbfs": -10.00490571446427
+        },
+        {
+          "id": "medium",
+          "seam_step_dbfs": -109.1195480793053,
+          "before_dbfs": -22.279978011820162,
+          "after_dbfs": -10.00672761961209
+        },
+        {
+          "id": "high",
+          "seam_step_dbfs": -104.96301497522828,
+          "before_dbfs": -22.280069253182404,
+          "after_dbfs": -10.005771127954475
+        },
+        {
+          "id": "medium-return",
+          "seam_step_dbfs": -81.92884113559096,
+          "before_dbfs": -22.27991590781376,
+          "after_dbfs": -10.005666813157234
+        }
+      ],
+      "intensity_crossfade": {
+        "peak_dbfs": -3.0178637411867255,
+        "max_sample_step_dbfs": -24.011628662740463
+      }
+    },
+    {
+      "id": "boar-victory",
+      "format": "ogg",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    },
+    {
+      "id": "boar-victory",
+      "format": "mp3",
+      "frames": 192000,
+      "sample_rate_hz": 32000,
+      "channels": 1,
+      "loops": [],
+      "after_six_seconds_peak_dbfs": -300
+    }
+  ],
+  "browser_version": "151.0.7922.173"
+}

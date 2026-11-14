@@ -1,0 +1,1351 @@
+{
+  "schema_version": 1,
+  "package": "music-loops-v1",
+  "license": "CC0-1.0",
+  "sample_rate_hz": 32000,
+  "channels": 1,
+  "loudness_target_lufs": -18.0,
+  "max_file_bytes": 600000,
+  "music_source": "Original procedural additive synthesis; no samples or quoted melodies",
+  "playback": {
+    "preferred_format": "ogg",
+    "fallback_format": "mp3",
+    "master_gain": 0.55,
+    "bar_transition_crossfade_seconds": 0.02,
+    "intensity": "low / medium / high; density changes at constant BPM",
+    "timing": "Use frame counts; encoder delay/padding is removed by gapless decoding",
+    "victory": "6-second one-shot with a resolved ending; do not repeat"
+  },
+  "tracks": [
+    {
+      "id": "soccer-gameplay",
+      "game_id": "soccer",
+      "game_name": "כדורגל",
+      "name": "מסירות בשמש · משחק",
+      "kind": "gameplay",
+      "bpm": 112,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 68.571375,
+      "frames": 2194284,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2194284,
+        "start_seconds": 0,
+        "end_seconds": 68.571375
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 548571,
+          "start_seconds": 0.0,
+          "end_seconds": 17.14284375
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 548571,
+          "end_frame": 1097142,
+          "start_seconds": 17.14284375,
+          "end_seconds": 34.2856875
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1097142,
+          "end_frame": 1645713,
+          "start_seconds": 34.2856875,
+          "end_seconds": 51.42853125
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1645713,
+          "end_frame": 2194284,
+          "start_seconds": 51.42853125,
+          "end_seconds": 68.571375
+        }
+      ],
+      "description": "מרימבה חמימה, בס קופצני ותופי יד",
+      "files": {
+        "ogg": {
+          "path": "soccer-gameplay.ogg",
+          "bytes": 226929,
+          "sha256": "b84317efcc50174ced36930692fe6f7108621803124cbb0b3a04ff3b08d874de",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.08,
+          "decoded_frames": 2194284,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "soccer-gameplay.mp3",
+          "bytes": 480584,
+          "sha256": "a5681f946398a37ac4895c2cf4ac483e1f099d38173cfd10e898e2639bda8d20",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.17,
+          "decoded_frames": 2194284,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "soccer-victory",
+      "game_id": "soccer",
+      "game_name": "כדורגל",
+      "name": "מסירות בשמש · ניצחון",
+      "kind": "victory",
+      "bpm": 112,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "מרימבה חמימה, בס קופצני ותופי יד",
+      "files": {
+        "ogg": {
+          "path": "soccer-victory.ogg",
+          "bytes": 19023,
+          "sha256": "6ae3caae16c540d0f29a1bf708cd62dd6e30111f32c7a8a870b89f45f97aabfc",
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -3.09,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "soccer-victory.mp3",
+          "bytes": 42608,
+          "sha256": "5b67c1f0da3cb55ecf4c99368fb769abecca144fcac3dea1405bdb0e8b1c7540",
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -3.14,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "hoops-gameplay",
+      "game_id": "hoops",
+      "game_name": "כדורסל",
+      "name": "קפיצה לפרקט · משחק",
+      "kind": "gameplay",
+      "bpm": 108,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 71.111125,
+      "frames": 2275556,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2275556,
+        "start_seconds": 0,
+        "end_seconds": 71.111125
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 568889,
+          "start_seconds": 0.0,
+          "end_seconds": 17.77778125
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 568889,
+          "end_frame": 1137778,
+          "start_seconds": 17.77778125,
+          "end_seconds": 35.5555625
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1137778,
+          "end_frame": 1706667,
+          "start_seconds": 35.5555625,
+          "end_seconds": 53.33334375
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1706667,
+          "end_frame": 2275556,
+          "start_seconds": 53.33334375,
+          "end_seconds": 71.111125
+        }
+      ],
+      "description": "קלידים עגולים, סווינג קל ובס גמיש",
+      "files": {
+        "ogg": {
+          "path": "hoops-gameplay.ogg",
+          "bytes": 243681,
+          "sha256": "ecf0efbd2ad0c0fe4afd7124ee37c36f828f92785f64dc6f87a4cae7e200a460",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -2.92,
+          "decoded_frames": 2275556,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "hoops-gameplay.mp3",
+          "bytes": 498476,
+          "sha256": "808a934a971060a1604f6e274d9ec662ac23080d8e293b57178a8a11157445a8",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.92,
+          "decoded_frames": 2275556,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "hoops-victory",
+      "game_id": "hoops",
+      "game_name": "כדורסל",
+      "name": "קפיצה לפרקט · ניצחון",
+      "kind": "victory",
+      "bpm": 108,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "קלידים עגולים, סווינג קל ובס גמיש",
+      "files": {
+        "ogg": {
+          "path": "hoops-victory.ogg",
+          "bytes": 21093,
+          "sha256": "a4c6fd16667f49d8acb68c35c71a9469eba22d583c440b1e89482723f1de86af",
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -3.47,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "hoops-victory.mp3",
+          "bytes": 42608,
+          "sha256": "04c2e83fc8e5b3d330d27c4e322c6730617b5a19ff574b159ff29958f6bd8b61",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.5,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "tennis-gameplay",
+      "game_id": "tennis",
+      "game_name": "טניס",
+      "name": "הלוך וחבוט · משחק",
+      "kind": "gameplay",
+      "bpm": 116,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 66.206875,
+      "frames": 2118620,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2118620,
+        "start_seconds": 0,
+        "end_seconds": 66.206875
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 529655,
+          "start_seconds": 0.0,
+          "end_seconds": 16.55171875
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 529655,
+          "end_frame": 1059310,
+          "start_seconds": 16.55171875,
+          "end_seconds": 33.1034375
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1059310,
+          "end_frame": 1588965,
+          "start_seconds": 33.1034375,
+          "end_seconds": 49.65515625
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1588965,
+          "end_frame": 2118620,
+          "start_seconds": 49.65515625,
+          "end_seconds": 66.206875
+        }
+      ],
+      "description": "פריטות קצרות ודיאלוג צלילים כמו חילופי חבטות",
+      "files": {
+        "ogg": {
+          "path": "tennis-gameplay.ogg",
+          "bytes": 230148,
+          "sha256": "f994cf320c50c85efef6657e4a524d6d6cc7f54435f8e1ec4c03a18f83bee675",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.11,
+          "decoded_frames": 2118620,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "tennis-gameplay.mp3",
+          "bytes": 464204,
+          "sha256": "215aa3eae14084d03e17f5acfec3a13ed190f557fc2a2541bd94ddacae0ad711",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.14,
+          "decoded_frames": 2118620,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "tennis-victory",
+      "game_id": "tennis",
+      "game_name": "טניס",
+      "name": "הלוך וחבוט · ניצחון",
+      "kind": "victory",
+      "bpm": 116,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "פריטות קצרות ודיאלוג צלילים כמו חילופי חבטות",
+      "files": {
+        "ogg": {
+          "path": "tennis-victory.ogg",
+          "bytes": 18203,
+          "sha256": "743830d24e73ca820381356eb4e77d5e0ca7fab9a6bcd48e7e749e528135acba",
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -4.35,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "tennis-victory.mp3",
+          "bytes": 42608,
+          "sha256": "b2a81a3d887735b64348b3d5f33808c2b8ec58f7db14bf1abfdec07733c9a3c2",
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -4.36,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "racing-gameplay",
+      "game_id": "racing",
+      "game_name": "מרוצים",
+      "name": "סיבוב כתום · משחק",
+      "kind": "gameplay",
+      "bpm": 128,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 60.0,
+      "frames": 1920000,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 1920000,
+        "start_seconds": 0,
+        "end_seconds": 60.0
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 480000,
+          "start_seconds": 0.0,
+          "end_seconds": 15.0
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 480000,
+          "end_frame": 960000,
+          "start_seconds": 15.0,
+          "end_seconds": 30.0
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 960000,
+          "end_frame": 1440000,
+          "start_seconds": 30.0,
+          "end_seconds": 45.0
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1440000,
+          "end_frame": 1920000,
+          "start_seconds": 45.0,
+          "end_seconds": 60.0
+        }
+      ],
+      "description": "סינתיסייזר רך, ארפג׳יו ופעימה יציבה",
+      "files": {
+        "ogg": {
+          "path": "racing-gameplay.ogg",
+          "bytes": 205064,
+          "sha256": "932ac308a25d1d204901362f6c20a5b14f81affdcb789edf4dea170c3f8cb0f1",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.55,
+          "decoded_frames": 1920000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "racing-gameplay.mp3",
+          "bytes": 420608,
+          "sha256": "2cd1baeb107aa5a031cb4d560c20f393f9a2af30f4d34a982602dbb97b716fdf",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.67,
+          "decoded_frames": 1920000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "racing-victory",
+      "game_id": "racing",
+      "game_name": "מרוצים",
+      "name": "סיבוב כתום · ניצחון",
+      "kind": "victory",
+      "bpm": 128,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "סינתיסייזר רך, ארפג׳יו ופעימה יציבה",
+      "files": {
+        "ogg": {
+          "path": "racing-victory.ogg",
+          "bytes": 21594,
+          "sha256": "2584610418541f445ecaac3210a5432b08c1fd8e91fcf006b86680456a318fcc",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -5.02,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "racing-victory.mp3",
+          "bytes": 42608,
+          "sha256": "74c330ee9dc754d9fe9bd2d5a14c54e4b2b3c8d6e491bee9cb9d4c0f81bc2754",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.89,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "alpine-gameplay",
+      "game_id": "alpine",
+      "game_name": "סקי",
+      "name": "גלישה בענן · משחק",
+      "kind": "gameplay",
+      "bpm": 104,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 73.846125,
+      "frames": 2363076,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2363076,
+        "start_seconds": 0,
+        "end_seconds": 73.846125
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 590769,
+          "start_seconds": 0.0,
+          "end_seconds": 18.46153125
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 590769,
+          "end_frame": 1181538,
+          "start_seconds": 18.46153125,
+          "end_seconds": 36.9230625
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1181538,
+          "end_frame": 1772307,
+          "start_seconds": 36.9230625,
+          "end_seconds": 55.38459375
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1772307,
+          "end_frame": 2363076,
+          "start_seconds": 55.38459375,
+          "end_seconds": 73.846125
+        }
+      ],
+      "description": "פעמונים נמוכים, כרית צליל אוורירית ותנועה גולשת",
+      "files": {
+        "ogg": {
+          "path": "alpine-gameplay.ogg",
+          "bytes": 283294,
+          "sha256": "e2e6882bb12b71aceda216f74eaa8547e70936aa469911ffeec0c294df839ae2",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -4.59,
+          "decoded_frames": 2363076,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 6
+          }
+        },
+        "mp3": {
+          "path": "alpine-gameplay.mp3",
+          "bytes": 517628,
+          "sha256": "f233b9476a3b7d1cce8e27407f08623954fe0f7e8eb075bd000ca6f940425b9c",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.6,
+          "decoded_frames": 2363076,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "alpine-victory",
+      "game_id": "alpine",
+      "game_name": "סקי",
+      "name": "גלישה בענן · ניצחון",
+      "kind": "victory",
+      "bpm": 104,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "פעמונים נמוכים, כרית צליל אוורירית ותנועה גולשת",
+      "files": {
+        "ogg": {
+          "path": "alpine-victory.ogg",
+          "bytes": 27398,
+          "sha256": "b221deda2414e0f80f8d2dff6d1a684c18eb366e71b5da8a63cdd947b020bc61",
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -5.21,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 6
+          }
+        },
+        "mp3": {
+          "path": "alpine-victory.mp3",
+          "bytes": 42608,
+          "sha256": "d7ed58a8d6433c18ea600aaed4b5902385d2525131911bcd73b9607311acfeea",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -5.38,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "aliens-gameplay",
+      "game_id": "aliens",
+      "game_name": "חלליות",
+      "name": "כוכב סוכר · משחק",
+      "kind": "gameplay",
+      "bpm": 120,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 64.0,
+      "frames": 2048000,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2048000,
+        "start_seconds": 0,
+        "end_seconds": 64.0
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 512000,
+          "start_seconds": 0.0,
+          "end_seconds": 16.0
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 512000,
+          "end_frame": 1024000,
+          "start_seconds": 16.0,
+          "end_seconds": 32.0
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1024000,
+          "end_frame": 1536000,
+          "start_seconds": 32.0,
+          "end_seconds": 48.0
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1536000,
+          "end_frame": 2048000,
+          "start_seconds": 48.0,
+          "end_seconds": 64.0
+        }
+      ],
+      "description": "צלילי חלל עגולים וארפג׳יו נוצץ בעדינות",
+      "files": {
+        "ogg": {
+          "path": "aliens-gameplay.ogg",
+          "bytes": 224636,
+          "sha256": "79d037042aa81d27161fef7a6f5272ee82a098dc08de3b6d5dfbffaa324dfb16",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.3,
+          "decoded_frames": 2048000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "aliens-gameplay.mp3",
+          "bytes": 448580,
+          "sha256": "ca016a6b3706d59318fc474a9a874a4374125798c913896a28379e8949c36f46",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.44,
+          "decoded_frames": 2048000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "aliens-victory",
+      "game_id": "aliens",
+      "game_name": "חלליות",
+      "name": "כוכב סוכר · ניצחון",
+      "kind": "victory",
+      "bpm": 120,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "צלילי חלל עגולים וארפג׳יו נוצץ בעדינות",
+      "files": {
+        "ogg": {
+          "path": "aliens-victory.ogg",
+          "bytes": 21888,
+          "sha256": "dfa27118419d0435dd994963c617c177fde4cd86c666c8fad6f742b07b6be35e",
+          "integrated_lufs": -17.99,
+          "true_peak_dbtp": -3.55,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "aliens-victory.mp3",
+          "bytes": 42608,
+          "sha256": "973bd8c655c1e76eb23e8875dd16564f021a9b11c587782d36db24c24e27bcd8",
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -3.76,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "naval-gameplay",
+      "game_id": "naval",
+      "game_name": "ספינות",
+      "name": "מפרש של חיוך · משחק",
+      "kind": "gameplay",
+      "bpm": 100,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 76.8,
+      "frames": 2457600,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2457600,
+        "start_seconds": 0,
+        "end_seconds": 76.8
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 614400,
+          "start_seconds": 0.0,
+          "end_seconds": 19.2
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 614400,
+          "end_frame": 1228800,
+          "start_seconds": 19.2,
+          "end_seconds": 38.4
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1228800,
+          "end_frame": 1843200,
+          "start_seconds": 38.4,
+          "end_seconds": 57.6
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1843200,
+          "end_frame": 2457600,
+          "start_seconds": 57.6,
+          "end_seconds": 76.8
+        }
+      ],
+      "description": "קנה רך, פריטות ותיפוף מתנדנד בשלישיות",
+      "files": {
+        "ogg": {
+          "path": "naval-gameplay.ogg",
+          "bytes": 241898,
+          "sha256": "58196512fb74340e401fc8f950f935defe62487d46346f3916fb37c4d49d613f",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -3.59,
+          "decoded_frames": 2457600,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "naval-gameplay.mp3",
+          "bytes": 538292,
+          "sha256": "c304e4934224257d84da9b79f3a371b0a8c0de33f8fc63cde19a4ac6c2132986",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.8,
+          "decoded_frames": 2457600,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "naval-victory",
+      "game_id": "naval",
+      "game_name": "ספינות",
+      "name": "מפרש של חיוך · ניצחון",
+      "kind": "victory",
+      "bpm": 100,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "קנה רך, פריטות ותיפוף מתנדנד בשלישיות",
+      "files": {
+        "ogg": {
+          "path": "naval-victory.ogg",
+          "bytes": 19840,
+          "sha256": "2e84b5ee84845a224fd4a6268fcd3531b0460d0e2fb47dba99d751cd7e775ba3",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -4.69,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "naval-victory.mp3",
+          "bytes": 42608,
+          "sha256": "05466a26756e38c9fd601d714d6fd5a1e31601ef779a092728c0ad4aa1ad7dfe",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.67,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "fire-gameplay",
+      "game_id": "fire",
+      "game_name": "כיבוי אש",
+      "name": "צוות של גיבורים · משחק",
+      "kind": "gameplay",
+      "bpm": 120,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 64.0,
+      "frames": 2048000,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2048000,
+        "start_seconds": 0,
+        "end_seconds": 64.0
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 512000,
+          "start_seconds": 0.0,
+          "end_seconds": 16.0
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 512000,
+          "end_frame": 1024000,
+          "start_seconds": 16.0,
+          "end_seconds": 32.0
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1024000,
+          "end_frame": 1536000,
+          "start_seconds": 32.0,
+          "end_seconds": 48.0
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1536000,
+          "end_frame": 2048000,
+          "start_seconds": 48.0,
+          "end_seconds": 64.0
+        }
+      ],
+      "description": "כלי הקשה מעץ, אקורדים חמימים ודחיפה מעודדת",
+      "files": {
+        "ogg": {
+          "path": "fire-gameplay.ogg",
+          "bytes": 218715,
+          "sha256": "1ddc3c701f8d66fb3e9120a4ca53c80ffd2e3d854feb1e71f84889e177389b0c",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.16,
+          "decoded_frames": 2048000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "fire-gameplay.mp3",
+          "bytes": 448580,
+          "sha256": "1b05dd511b83f92f6d0af2d5bbe5cae05077407ab6b521cadfedc1400dd08842",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.22,
+          "decoded_frames": 2048000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "fire-victory",
+      "game_id": "fire",
+      "game_name": "כיבוי אש",
+      "name": "צוות של גיבורים · ניצחון",
+      "kind": "victory",
+      "bpm": 120,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "כלי הקשה מעץ, אקורדים חמימים ודחיפה מעודדת",
+      "files": {
+        "ogg": {
+          "path": "fire-victory.ogg",
+          "bytes": 21082,
+          "sha256": "951625300d134f382c8a87c16f6d43890540e9fb12de737a9af62d8e8e16afae",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -1.84,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "fire-victory.mp3",
+          "bytes": 42608,
+          "sha256": "d4d2c943c253b855ecb019216a06160a20f08ae83b186f0ea3f9d4c91fa74199",
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -1.88,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "police-gameplay",
+      "game_id": "police",
+      "game_name": "תפוס את הפושע",
+      "name": "צעד שובב · משחק",
+      "kind": "gameplay",
+      "bpm": 124,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 61.9355,
+      "frames": 1981936,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 1981936,
+        "start_seconds": 0,
+        "end_seconds": 61.9355
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 495484,
+          "start_seconds": 0.0,
+          "end_seconds": 15.483875
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 495484,
+          "end_frame": 990968,
+          "start_seconds": 15.483875,
+          "end_seconds": 30.96775
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 990968,
+          "end_frame": 1486452,
+          "start_seconds": 30.96775,
+          "end_seconds": 46.451625
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1486452,
+          "end_frame": 1981936,
+          "start_seconds": 46.451625,
+          "end_seconds": 61.9355
+        }
+      ],
+      "description": "פיציקטו שובב, קנה נמוך ומקצב מרדף ידידותי",
+      "files": {
+        "ogg": {
+          "path": "police-gameplay.ogg",
+          "bytes": 219063,
+          "sha256": "4d3dab584b87a7fc74de4f39bc7d71c50e31ff7b035d220fa0c933828e37425a",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -3.75,
+          "decoded_frames": 1981936,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "police-gameplay.mp3",
+          "bytes": 434216,
+          "sha256": "7092e00a4769692cb5752fc11585529ee9c0173ec30b4f0565421b09da51dd33",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.04,
+          "decoded_frames": 1981936,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "police-victory",
+      "game_id": "police",
+      "game_name": "תפוס את הפושע",
+      "name": "צעד שובב · ניצחון",
+      "kind": "victory",
+      "bpm": 124,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "פיציקטו שובב, קנה נמוך ומקצב מרדף ידידותי",
+      "files": {
+        "ogg": {
+          "path": "police-victory.ogg",
+          "bytes": 19786,
+          "sha256": "5a59618e651d318d84b5fe432c377ac05838618543233cebead27b3b6bf31e0c",
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -4.79,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "police-victory.mp3",
+          "bytes": 42608,
+          "sha256": "b714c2611d60a894b94625b6a84f00a6ffaf75b0cd3ac6d5bae78cf93e8a3754",
+          "integrated_lufs": -18.04,
+          "true_peak_dbtp": -4.64,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "boar-gameplay",
+      "game_id": "boar",
+      "game_name": "חזירים",
+      "name": "מסיבת חוטמים · משחק",
+      "kind": "gameplay",
+      "bpm": 106,
+      "time_signature": "4/4",
+      "bars": 32,
+      "duration_seconds": 72.452875,
+      "frames": 2318492,
+      "loop": {
+        "enabled": true,
+        "start_frame": 0,
+        "end_frame": 2318492,
+        "start_seconds": 0,
+        "end_seconds": 72.452875
+      },
+      "intensity_regions": [
+        {
+          "id": "low",
+          "start_bar": 0,
+          "bars": 8,
+          "start_frame": 0,
+          "end_frame": 579623,
+          "start_seconds": 0.0,
+          "end_seconds": 18.11321875
+        },
+        {
+          "id": "medium",
+          "start_bar": 8,
+          "bars": 8,
+          "start_frame": 579623,
+          "end_frame": 1159246,
+          "start_seconds": 18.11321875,
+          "end_seconds": 36.2264375
+        },
+        {
+          "id": "high",
+          "start_bar": 16,
+          "bars": 8,
+          "start_frame": 1159246,
+          "end_frame": 1738869,
+          "start_seconds": 36.2264375,
+          "end_seconds": 54.33965625
+        },
+        {
+          "id": "medium-return",
+          "start_bar": 24,
+          "bars": 8,
+          "start_frame": 1738869,
+          "end_frame": 2318492,
+          "start_seconds": 54.33965625,
+          "end_seconds": 72.452875
+        }
+      ],
+      "description": "כלי עץ נמוכים, בס מצחיק וקפיצות קלות",
+      "files": {
+        "ogg": {
+          "path": "boar-gameplay.ogg",
+          "bytes": 221489,
+          "sha256": "12b1ad05ab9afa8a2d510897516d9e87a37dfa764858c91366d8001c27a41037",
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.11,
+          "decoded_frames": 2318492,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "boar-gameplay.mp3",
+          "bytes": 507800,
+          "sha256": "870883b7c33c8bb5fd681f9e6eea3e72179b21cc9a40dbcce4417090366b4258",
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.12,
+          "decoded_frames": 2318492,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    },
+    {
+      "id": "boar-victory",
+      "game_id": "boar",
+      "game_name": "חזירים",
+      "name": "מסיבת חוטמים · ניצחון",
+      "kind": "victory",
+      "bpm": 106,
+      "time_signature": "4/4",
+      "bars": null,
+      "duration_seconds": 6.0,
+      "frames": 192000,
+      "loop": {
+        "enabled": false,
+        "start_frame": 0,
+        "end_frame": 192000,
+        "start_seconds": 0,
+        "end_seconds": 6.0
+      },
+      "intensity_regions": [],
+      "description": "כלי עץ נמוכים, בס מצחיק וקפיצות קלות",
+      "files": {
+        "ogg": {
+          "path": "boar-victory.ogg",
+          "bytes": 19155,
+          "sha256": "3d53ab6d3fc4280ed0fdc5992b47f3c683868ba1e51b5b2703f1eae2d1a9cb9c",
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -2.52,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "vorbis",
+            "quality": 4
+          }
+        },
+        "mp3": {
+          "path": "boar-victory.mp3",
+          "bytes": 42608,
+          "sha256": "ada0e3177ea337c5f0a57dcb3229c9f6adedc22eb52056773ae30d6a5a9f33a0",
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -2.6,
+          "decoded_frames": 192000,
+          "encoding": {
+            "codec": "mp3",
+            "bitrate_kbps": 56,
+            "gapless_tag": "Xing/LAME"
+          }
+        }
+      }
+    }
+  ]
+}

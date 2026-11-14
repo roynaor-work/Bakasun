@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "base_revision": "f5f2b40814fc0e2186daed1ac100a8d806dd3a7d",
+  "command": "ISLAND_PLAYWRIGHT=/tmp/music-loops-v1-playwright.mjs npm test",
+  "runtime": {
+    "node": "24.19.0",
+    "chromium": "151.0.7922.173",
+    "executable": "/usr/bin/chromium",
+    "adapter": "A temporary module outside the repository re-exports Playwright chromium and sets executablePath to /usr/bin/chromium in launch(). Tests are unchanged."
+  },
+  "counts": {
+    "tests": 3334,
+    "pass": 3278,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 56,
+    "todo": 0
+  },
+  "duration_ms": 210069.241053,
+  "log_sha256": "22be34f36f6d124f9c6d72e233f6735c4b8fb5dc95ad4064e0dcfd9686d0e6b3",
+  "default_attempt": {
+    "passed": false,
+    "reason": "Playwright bundled chromium_headless_shell-1234 executable is absent in this environment; the existing workout-royiki browser test failed at launch. The completed rerun uses installed system Chromium."
+  },
+  "source_scope": "Only new files in workout/island/design/music-loops-v1/ are included in this branch."
+}

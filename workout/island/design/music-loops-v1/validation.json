@@ -1,0 +1,1578 @@
+{
+  "schema_version": 1,
+  "package": "music-loops-v1",
+  "passed": true,
+  "measurement": "Decoded delivery files; FFmpeg loudnorm/BS.1770, SciPy Welch",
+  "tolerances": {
+    "loudness_lu": 0.15,
+    "max_true_peak_dbtp": -1.5,
+    "max_bytes": 600000,
+    "max_high_band_energy_db": -45,
+    "max_high_tone_dbfs": -60,
+    "max_seam_step_dbfs": -35,
+    "max_seam_step_to_local_p99": 1.5
+  },
+  "tracks": [
+    {
+      "id": "soccer-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 226929,
+          "sha256": "b84317efcc50174ced36930692fe6f7108621803124cbb0b3a04ff3b08d874de",
+          "decoded_frames": 2194284,
+          "decoded_duration_seconds": 68.571375,
+          "container_duration_seconds": 68.571375,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -2.09,
+          "energy_above_4khz_db": -102.7,
+          "strongest_tone_above_4khz_dbfs": -137.83,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.08,
+          "loudness_range_lu": 0.8,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -65.72,
+              "step_to_local_p99": 0.0118,
+              "rms_before_dbfs": -18.0,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "low",
+              "step_dbfs": -68.99,
+              "step_to_local_p99": 0.0081,
+              "rms_before_dbfs": -18.0,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -54.47,
+              "step_to_local_p99": 0.0438,
+              "rms_before_dbfs": -17.98,
+              "rms_after_dbfs": -12.71
+            },
+            {
+              "id": "high",
+              "step_dbfs": -56.53,
+              "step_to_local_p99": 0.034,
+              "rms_before_dbfs": -18.01,
+              "rms_after_dbfs": -12.72
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -66.92,
+              "step_to_local_p99": 0.0105,
+              "rms_before_dbfs": -18.0,
+              "rms_after_dbfs": -12.67
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 480584,
+          "sha256": "a5681f946398a37ac4895c2cf4ac483e1f099d38173cfd10e898e2639bda8d20",
+          "decoded_frames": 2194284,
+          "decoded_duration_seconds": 68.571375,
+          "container_duration_seconds": 68.616,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -2.18,
+          "energy_above_4khz_db": -99.55,
+          "strongest_tone_above_4khz_dbfs": -131.59,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.17,
+          "loudness_range_lu": 0.8,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -67.45,
+              "step_to_local_p99": 0.0098,
+              "rms_before_dbfs": -18.05,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "low",
+              "step_dbfs": -65.75,
+              "step_to_local_p99": 0.0119,
+              "rms_before_dbfs": -18.05,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -88.91,
+              "step_to_local_p99": 0.0008,
+              "rms_before_dbfs": -18.05,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "high",
+              "step_dbfs": -124.37,
+              "step_to_local_p99": 0.0,
+              "rms_before_dbfs": -18.05,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -78.73,
+              "step_to_local_p99": 0.0027,
+              "rms_before_dbfs": -18.05,
+              "rms_after_dbfs": -12.77
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "soccer-victory",
+      "files": {
+        "ogg": {
+          "bytes": 19023,
+          "sha256": "6ae3caae16c540d0f29a1bf708cd62dd6e30111f32c7a8a870b89f45f97aabfc",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.1,
+          "energy_above_4khz_db": -103.78,
+          "strongest_tone_above_4khz_dbfs": -136.3,
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -3.09,
+          "loudness_range_lu": 23.8,
+          "opening_5ms_peak_dbfs": -27.99,
+          "ending_50ms_peak_dbfs": -300.0,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "5b67c1f0da3cb55ecf4c99368fb769abecca144fcac3dea1405bdb0e8b1c7540",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.17,
+          "energy_above_4khz_db": -98.93,
+          "strongest_tone_above_4khz_dbfs": -129.37,
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -3.14,
+          "loudness_range_lu": 23.8,
+          "opening_5ms_peak_dbfs": -27.34,
+          "ending_50ms_peak_dbfs": -98.4,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "hoops-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 243681,
+          "sha256": "ecf0efbd2ad0c0fe4afd7124ee37c36f828f92785f64dc6f87a4cae7e200a460",
+          "decoded_frames": 2275556,
+          "decoded_duration_seconds": 71.111125,
+          "container_duration_seconds": 71.111125,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -2.92,
+          "energy_above_4khz_db": -102.79,
+          "strongest_tone_above_4khz_dbfs": -138.89,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -2.92,
+          "loudness_range_lu": 0.9,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -67.83,
+              "step_to_local_p99": 0.0122,
+              "rms_before_dbfs": -18.96,
+              "rms_after_dbfs": -12.78
+            },
+            {
+              "id": "low",
+              "step_dbfs": -53.59,
+              "step_to_local_p99": 0.0629,
+              "rms_before_dbfs": -18.98,
+              "rms_after_dbfs": -12.78
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -39.37,
+              "step_to_local_p99": 0.324,
+              "rms_before_dbfs": -18.98,
+              "rms_after_dbfs": -12.76
+            },
+            {
+              "id": "high",
+              "step_dbfs": -43.29,
+              "step_to_local_p99": 0.2106,
+              "rms_before_dbfs": -19.0,
+              "rms_after_dbfs": -12.74
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -54.38,
+              "step_to_local_p99": 0.0571,
+              "rms_before_dbfs": -18.96,
+              "rms_after_dbfs": -12.75
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 498476,
+          "sha256": "808a934a971060a1604f6e274d9ec662ac23080d8e293b57178a8a11157445a8",
+          "decoded_frames": 2275556,
+          "decoded_duration_seconds": 71.111125,
+          "container_duration_seconds": 71.172,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -2.92,
+          "energy_above_4khz_db": -99.4,
+          "strongest_tone_above_4khz_dbfs": -132.58,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.92,
+          "loudness_range_lu": 0.9,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -88.52,
+              "step_to_local_p99": 0.0011,
+              "rms_before_dbfs": -19.05,
+              "rms_after_dbfs": -12.81
+            },
+            {
+              "id": "low",
+              "step_dbfs": -77.64,
+              "step_to_local_p99": 0.0039,
+              "rms_before_dbfs": -19.05,
+              "rms_after_dbfs": -12.81
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -95.19,
+              "step_to_local_p99": 0.0005,
+              "rms_before_dbfs": -19.05,
+              "rms_after_dbfs": -12.8
+            },
+            {
+              "id": "high",
+              "step_dbfs": -90.11,
+              "step_to_local_p99": 0.0009,
+              "rms_before_dbfs": -19.05,
+              "rms_after_dbfs": -12.81
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -82.64,
+              "step_to_local_p99": 0.0022,
+              "rms_before_dbfs": -19.05,
+              "rms_after_dbfs": -12.81
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "hoops-victory",
+      "files": {
+        "ogg": {
+          "bytes": 21093,
+          "sha256": "a4c6fd16667f49d8acb68c35c71a9469eba22d583c440b1e89482723f1de86af",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.49,
+          "energy_above_4khz_db": -104.1,
+          "strongest_tone_above_4khz_dbfs": -134.53,
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -3.47,
+          "loudness_range_lu": 18.7,
+          "opening_5ms_peak_dbfs": -25.85,
+          "ending_50ms_peak_dbfs": -300.0,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "04c2e83fc8e5b3d330d27c4e322c6730617b5a19ff574b159ff29958f6bd8b61",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.5,
+          "energy_above_4khz_db": -99.08,
+          "strongest_tone_above_4khz_dbfs": -129.95,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.5,
+          "loudness_range_lu": 18.6,
+          "opening_5ms_peak_dbfs": -26.01,
+          "ending_50ms_peak_dbfs": -94.06,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "tennis-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 230148,
+          "sha256": "f994cf320c50c85efef6657e4a524d6d6cc7f54435f8e1ec4c03a18f83bee675",
+          "decoded_frames": 2118620,
+          "decoded_duration_seconds": 66.206875,
+          "container_duration_seconds": 66.206875,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -2.11,
+          "energy_above_4khz_db": -104.1,
+          "strongest_tone_above_4khz_dbfs": -139.77,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.11,
+          "loudness_range_lu": 0.8,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -53.59,
+              "step_to_local_p99": 0.0297,
+              "rms_before_dbfs": -18.24,
+              "rms_after_dbfs": -13.01
+            },
+            {
+              "id": "low",
+              "step_dbfs": -76.79,
+              "step_to_local_p99": 0.0021,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.01
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -66.79,
+              "step_to_local_p99": 0.0063,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -12.96
+            },
+            {
+              "id": "high",
+              "step_dbfs": -73.09,
+              "step_to_local_p99": 0.0031,
+              "rms_before_dbfs": -18.2,
+              "rms_after_dbfs": -12.96
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -53.42,
+              "step_to_local_p99": 0.03,
+              "rms_before_dbfs": -18.24,
+              "rms_after_dbfs": -12.97
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 464204,
+          "sha256": "215aa3eae14084d03e17f5acfec3a13ed190f557fc2a2541bd94ddacae0ad711",
+          "decoded_frames": 2118620,
+          "decoded_duration_seconds": 66.206875,
+          "container_duration_seconds": 66.276,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -2.14,
+          "energy_above_4khz_db": -99.4,
+          "strongest_tone_above_4khz_dbfs": -131.15,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.14,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -66.64,
+              "step_to_local_p99": 0.0065,
+              "rms_before_dbfs": -18.29,
+              "rms_after_dbfs": -13.03
+            },
+            {
+              "id": "low",
+              "step_dbfs": -68.56,
+              "step_to_local_p99": 0.0052,
+              "rms_before_dbfs": -18.29,
+              "rms_after_dbfs": -13.03
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -123.14,
+              "step_to_local_p99": 0.0,
+              "rms_before_dbfs": -18.28,
+              "rms_after_dbfs": -13.03
+            },
+            {
+              "id": "high",
+              "step_dbfs": -117.33,
+              "step_to_local_p99": 0.0,
+              "rms_before_dbfs": -18.28,
+              "rms_after_dbfs": -13.03
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -79.79,
+              "step_to_local_p99": 0.0014,
+              "rms_before_dbfs": -18.29,
+              "rms_after_dbfs": -13.03
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "tennis-victory",
+      "files": {
+        "ogg": {
+          "bytes": 18203,
+          "sha256": "743830d24e73ca820381356eb4e77d5e0ca7fab9a6bcd48e7e749e528135acba",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -4.35,
+          "energy_above_4khz_db": -102.72,
+          "strongest_tone_above_4khz_dbfs": -135.9,
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -4.35,
+          "loudness_range_lu": 23.0,
+          "opening_5ms_peak_dbfs": -26.84,
+          "ending_50ms_peak_dbfs": -300.0,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "b2a81a3d887735b64348b3d5f33808c2b8ec58f7db14bf1abfdec07733c9a3c2",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.36,
+          "energy_above_4khz_db": -98.82,
+          "strongest_tone_above_4khz_dbfs": -130.18,
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -4.36,
+          "loudness_range_lu": 23.0,
+          "opening_5ms_peak_dbfs": -27.04,
+          "ending_50ms_peak_dbfs": -105.83,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "racing-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 205064,
+          "sha256": "932ac308a25d1d204901362f6c20a5b14f81affdcb789edf4dea170c3f8cb0f1",
+          "decoded_frames": 1920000,
+          "decoded_duration_seconds": 60.0,
+          "container_duration_seconds": 60.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.55,
+          "energy_above_4khz_db": -103.21,
+          "strongest_tone_above_4khz_dbfs": -138.24,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.55,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -54.98,
+              "step_to_local_p99": 0.0455,
+              "rms_before_dbfs": -18.37,
+              "rms_after_dbfs": -12.88
+            },
+            {
+              "id": "low",
+              "step_dbfs": -40.16,
+              "step_to_local_p99": 0.2505,
+              "rms_before_dbfs": -18.36,
+              "rms_after_dbfs": -12.88
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -85.35,
+              "step_to_local_p99": 0.0014,
+              "rms_before_dbfs": -18.36,
+              "rms_after_dbfs": -12.89
+            },
+            {
+              "id": "high",
+              "step_dbfs": -85.35,
+              "step_to_local_p99": 0.0014,
+              "rms_before_dbfs": -18.36,
+              "rms_after_dbfs": -12.89
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -38.67,
+              "step_to_local_p99": 0.3026,
+              "rms_before_dbfs": -18.37,
+              "rms_after_dbfs": -12.89
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 420608,
+          "sha256": "2cd1baeb107aa5a031cb4d560c20f393f9a2af30f4d34a982602dbb97b716fdf",
+          "decoded_frames": 1920000,
+          "decoded_duration_seconds": 60.0,
+          "container_duration_seconds": 60.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.67,
+          "energy_above_4khz_db": -99.43,
+          "strongest_tone_above_4khz_dbfs": -134.45,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.67,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -73.28,
+              "step_to_local_p99": 0.0056,
+              "rms_before_dbfs": -18.41,
+              "rms_after_dbfs": -12.95
+            },
+            {
+              "id": "low",
+              "step_dbfs": -68.03,
+              "step_to_local_p99": 0.0103,
+              "rms_before_dbfs": -18.41,
+              "rms_after_dbfs": -12.95
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -96.31,
+              "step_to_local_p99": 0.0004,
+              "rms_before_dbfs": -18.41,
+              "rms_after_dbfs": -12.96
+            },
+            {
+              "id": "high",
+              "step_dbfs": -101.79,
+              "step_to_local_p99": 0.0002,
+              "rms_before_dbfs": -18.41,
+              "rms_after_dbfs": -12.95
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -74.62,
+              "step_to_local_p99": 0.0048,
+              "rms_before_dbfs": -18.41,
+              "rms_after_dbfs": -12.95
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "racing-victory",
+      "files": {
+        "ogg": {
+          "bytes": 21594,
+          "sha256": "2584610418541f445ecaac3210a5432b08c1fd8e91fcf006b86680456a318fcc",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -5.02,
+          "energy_above_4khz_db": -108.7,
+          "strongest_tone_above_4khz_dbfs": -141.81,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -5.02,
+          "loudness_range_lu": 14.4,
+          "opening_5ms_peak_dbfs": -23.43,
+          "ending_50ms_peak_dbfs": -78.25,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "74c330ee9dc754d9fe9bd2d5a14c54e4b2b3c8d6e491bee9cb9d4c0f81bc2754",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.89,
+          "energy_above_4khz_db": -99.3,
+          "strongest_tone_above_4khz_dbfs": -130.74,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.89,
+          "loudness_range_lu": 14.5,
+          "opening_5ms_peak_dbfs": -23.71,
+          "ending_50ms_peak_dbfs": -80.82,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "alpine-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 283294,
+          "sha256": "e2e6882bb12b71aceda216f74eaa8547e70936aa469911ffeec0c294df839ae2",
+          "decoded_frames": 2363076,
+          "decoded_duration_seconds": 73.846125,
+          "container_duration_seconds": 73.846125,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -4.59,
+          "energy_above_4khz_db": -104.76,
+          "strongest_tone_above_4khz_dbfs": -139.03,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -4.59,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -63.02,
+              "step_to_local_p99": 0.0503,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.64
+            },
+            {
+              "id": "low",
+              "step_dbfs": -68.39,
+              "step_to_local_p99": 0.0271,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.64
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -54.02,
+              "step_to_local_p99": 0.1398,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.63
+            },
+            {
+              "id": "high",
+              "step_dbfs": -64.61,
+              "step_to_local_p99": 0.0413,
+              "rms_before_dbfs": -18.6,
+              "rms_after_dbfs": -13.62
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -61.79,
+              "step_to_local_p99": 0.0579,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.63
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 517628,
+          "sha256": "f233b9476a3b7d1cce8e27407f08623954fe0f7e8eb075bd000ca6f940425b9c",
+          "decoded_frames": 2363076,
+          "decoded_duration_seconds": 73.846125,
+          "container_duration_seconds": 73.908,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.6,
+          "energy_above_4khz_db": -99.42,
+          "strongest_tone_above_4khz_dbfs": -132.22,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.6,
+          "loudness_range_lu": 0.8,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -75.85,
+              "step_to_local_p99": 0.0115,
+              "rms_before_dbfs": -18.68,
+              "rms_after_dbfs": -13.7
+            },
+            {
+              "id": "low",
+              "step_dbfs": -72.07,
+              "step_to_local_p99": 0.0178,
+              "rms_before_dbfs": -18.68,
+              "rms_after_dbfs": -13.7
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -97.19,
+              "step_to_local_p99": 0.001,
+              "rms_before_dbfs": -18.68,
+              "rms_after_dbfs": -13.7
+            },
+            {
+              "id": "high",
+              "step_dbfs": -100.1,
+              "step_to_local_p99": 0.0007,
+              "rms_before_dbfs": -18.68,
+              "rms_after_dbfs": -13.7
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -82.22,
+              "step_to_local_p99": 0.0055,
+              "rms_before_dbfs": -18.68,
+              "rms_after_dbfs": -13.7
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "alpine-victory",
+      "files": {
+        "ogg": {
+          "bytes": 27398,
+          "sha256": "b221deda2414e0f80f8d2dff6d1a684c18eb366e71b5da8a63cdd947b020bc61",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -5.22,
+          "energy_above_4khz_db": -133.21,
+          "strongest_tone_above_4khz_dbfs": -165.74,
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -5.21,
+          "loudness_range_lu": 5.0,
+          "opening_5ms_peak_dbfs": -32.29,
+          "ending_50ms_peak_dbfs": -91.1,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "d7ed58a8d6433c18ea600aaed4b5902385d2525131911bcd73b9607311acfeea",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -5.39,
+          "energy_above_4khz_db": -99.29,
+          "strongest_tone_above_4khz_dbfs": -132.81,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -5.38,
+          "loudness_range_lu": 4.9,
+          "opening_5ms_peak_dbfs": -33.18,
+          "ending_50ms_peak_dbfs": -91.13,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "aliens-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 224636,
+          "sha256": "79d037042aa81d27161fef7a6f5272ee82a098dc08de3b6d5dfbffaa324dfb16",
+          "decoded_frames": 2048000,
+          "decoded_duration_seconds": 64.0,
+          "container_duration_seconds": 64.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.31,
+          "energy_above_4khz_db": -102.58,
+          "strongest_tone_above_4khz_dbfs": -138.4,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.3,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -63.51,
+              "step_to_local_p99": 0.0131,
+              "rms_before_dbfs": -18.39,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "low",
+              "step_dbfs": -92.68,
+              "step_to_local_p99": 0.0005,
+              "rms_before_dbfs": -18.38,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -102.72,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.38,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "high",
+              "step_dbfs": -102.72,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.38,
+              "rms_after_dbfs": -12.7
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -63.31,
+              "step_to_local_p99": 0.0134,
+              "rms_before_dbfs": -18.39,
+              "rms_after_dbfs": -12.7
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 448580,
+          "sha256": "ca016a6b3706d59318fc474a9a874a4374125798c913896a28379e8949c36f46",
+          "decoded_frames": 2048000,
+          "decoded_duration_seconds": 64.0,
+          "container_duration_seconds": 64.044,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.44,
+          "energy_above_4khz_db": -99.54,
+          "strongest_tone_above_4khz_dbfs": -131.81,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.44,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -60.95,
+              "step_to_local_p99": 0.0175,
+              "rms_before_dbfs": -18.45,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "low",
+              "step_dbfs": -59.8,
+              "step_to_local_p99": 0.02,
+              "rms_before_dbfs": -18.45,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -90.87,
+              "step_to_local_p99": 0.0006,
+              "rms_before_dbfs": -18.45,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "high",
+              "step_dbfs": -109.5,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.45,
+              "rms_after_dbfs": -12.77
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -76.17,
+              "step_to_local_p99": 0.003,
+              "rms_before_dbfs": -18.45,
+              "rms_after_dbfs": -12.77
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "aliens-victory",
+      "files": {
+        "ogg": {
+          "bytes": 21888,
+          "sha256": "dfa27118419d0435dd994963c617c177fde4cd86c666c8fad6f742b07b6be35e",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.55,
+          "energy_above_4khz_db": -101.17,
+          "strongest_tone_above_4khz_dbfs": -136.09,
+          "integrated_lufs": -17.99,
+          "true_peak_dbtp": -3.55,
+          "loudness_range_lu": 18.0,
+          "opening_5ms_peak_dbfs": -27.63,
+          "ending_50ms_peak_dbfs": -300.0,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "973bd8c655c1e76eb23e8875dd16564f021a9b11c587782d36db24c24e27bcd8",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.76,
+          "energy_above_4khz_db": -99.12,
+          "strongest_tone_above_4khz_dbfs": -130.34,
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -3.76,
+          "loudness_range_lu": 18.1,
+          "opening_5ms_peak_dbfs": -27.8,
+          "ending_50ms_peak_dbfs": -106.54,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "naval-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 241898,
+          "sha256": "58196512fb74340e401fc8f950f935defe62487d46346f3916fb37c4d49d613f",
+          "decoded_frames": 2457600,
+          "decoded_duration_seconds": 76.8,
+          "container_duration_seconds": 76.8,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.59,
+          "energy_above_4khz_db": -105.14,
+          "strongest_tone_above_4khz_dbfs": -141.47,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -3.59,
+          "loudness_range_lu": 1.5,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -64.99,
+              "step_to_local_p99": 0.0147,
+              "rms_before_dbfs": -19.34,
+              "rms_after_dbfs": -12.56
+            },
+            {
+              "id": "low",
+              "step_dbfs": -57.36,
+              "step_to_local_p99": 0.0353,
+              "rms_before_dbfs": -19.33,
+              "rms_after_dbfs": -12.56
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -98.28,
+              "step_to_local_p99": 0.0003,
+              "rms_before_dbfs": -19.33,
+              "rms_after_dbfs": -12.56
+            },
+            {
+              "id": "high",
+              "step_dbfs": -98.28,
+              "step_to_local_p99": 0.0003,
+              "rms_before_dbfs": -19.33,
+              "rms_after_dbfs": -12.56
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -62.15,
+              "step_to_local_p99": 0.0203,
+              "rms_before_dbfs": -19.34,
+              "rms_after_dbfs": -12.56
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 538292,
+          "sha256": "c304e4934224257d84da9b79f3a371b0a8c0de33f8fc63cde19a4ac6c2132986",
+          "decoded_frames": 2457600,
+          "decoded_duration_seconds": 76.8,
+          "container_duration_seconds": 76.86,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.8,
+          "energy_above_4khz_db": -99.4,
+          "strongest_tone_above_4khz_dbfs": -130.9,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.8,
+          "loudness_range_lu": 1.4,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -75.41,
+              "step_to_local_p99": 0.0045,
+              "rms_before_dbfs": -19.43,
+              "rms_after_dbfs": -12.64
+            },
+            {
+              "id": "low",
+              "step_dbfs": -72.41,
+              "step_to_local_p99": 0.0063,
+              "rms_before_dbfs": -19.43,
+              "rms_after_dbfs": -12.64
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -112.01,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -19.43,
+              "rms_after_dbfs": -12.64
+            },
+            {
+              "id": "high",
+              "step_dbfs": -103.53,
+              "step_to_local_p99": 0.0002,
+              "rms_before_dbfs": -19.43,
+              "rms_after_dbfs": -12.64
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -82.15,
+              "step_to_local_p99": 0.0021,
+              "rms_before_dbfs": -19.43,
+              "rms_after_dbfs": -12.64
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "naval-victory",
+      "files": {
+        "ogg": {
+          "bytes": 19840,
+          "sha256": "2e84b5ee84845a224fd4a6268fcd3531b0460d0e2fb47dba99d751cd7e775ba3",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -4.7,
+          "energy_above_4khz_db": -108.78,
+          "strongest_tone_above_4khz_dbfs": -138.62,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -4.69,
+          "loudness_range_lu": 17.3,
+          "opening_5ms_peak_dbfs": -32.25,
+          "ending_50ms_peak_dbfs": -78.54,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "05466a26756e38c9fd601d714d6fd5a1e31601ef779a092728c0ad4aa1ad7dfe",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.68,
+          "energy_above_4khz_db": -99.7,
+          "strongest_tone_above_4khz_dbfs": -131.65,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.67,
+          "loudness_range_lu": 17.4,
+          "opening_5ms_peak_dbfs": -32.44,
+          "ending_50ms_peak_dbfs": -81.64,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "fire-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 218715,
+          "sha256": "1ddc3c701f8d66fb3e9120a4ca53c80ffd2e3d854feb1e71f84889e177389b0c",
+          "decoded_frames": 2048000,
+          "decoded_duration_seconds": 64.0,
+          "container_duration_seconds": 64.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.16,
+          "energy_above_4khz_db": -103.13,
+          "strongest_tone_above_4khz_dbfs": -139.66,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -3.16,
+          "loudness_range_lu": 1.3,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -48.27,
+              "step_to_local_p99": 0.1173,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.31
+            },
+            {
+              "id": "low",
+              "step_dbfs": -43.74,
+              "step_to_local_p99": 0.1976,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.31
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -66.15,
+              "step_to_local_p99": 0.0149,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.35
+            },
+            {
+              "id": "high",
+              "step_dbfs": -66.15,
+              "step_to_local_p99": 0.0149,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.35
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -50.07,
+              "step_to_local_p99": 0.095,
+              "rms_before_dbfs": -18.22,
+              "rms_after_dbfs": -13.35
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 448580,
+          "sha256": "1b05dd511b83f92f6d0af2d5bbe5cae05077407ab6b521cadfedc1400dd08842",
+          "decoded_frames": 2048000,
+          "decoded_duration_seconds": 64.0,
+          "container_duration_seconds": 64.044,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -3.22,
+          "energy_above_4khz_db": -99.44,
+          "strongest_tone_above_4khz_dbfs": -133.62,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -3.22,
+          "loudness_range_lu": 1.2,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -71.53,
+              "step_to_local_p99": 0.0082,
+              "rms_before_dbfs": -18.26,
+              "rms_after_dbfs": -13.38
+            },
+            {
+              "id": "low",
+              "step_dbfs": -82.08,
+              "step_to_local_p99": 0.0024,
+              "rms_before_dbfs": -18.26,
+              "rms_after_dbfs": -13.38
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -110.98,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.26,
+              "rms_after_dbfs": -13.38
+            },
+            {
+              "id": "high",
+              "step_dbfs": -98.59,
+              "step_to_local_p99": 0.0004,
+              "rms_before_dbfs": -18.26,
+              "rms_after_dbfs": -13.38
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -75.0,
+              "step_to_local_p99": 0.0055,
+              "rms_before_dbfs": -18.26,
+              "rms_after_dbfs": -13.38
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "fire-victory",
+      "files": {
+        "ogg": {
+          "bytes": 21082,
+          "sha256": "951625300d134f382c8a87c16f6d43890540e9fb12de737a9af62d8e8e16afae",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -1.84,
+          "energy_above_4khz_db": -108.45,
+          "strongest_tone_above_4khz_dbfs": -146.72,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -1.84,
+          "loudness_range_lu": 17.7,
+          "opening_5ms_peak_dbfs": -28.39,
+          "ending_50ms_peak_dbfs": -84.27,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "d4d2c943c253b855ecb019216a06160a20f08ae83b186f0ea3f9d4c91fa74199",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -1.89,
+          "energy_above_4khz_db": -99.41,
+          "strongest_tone_above_4khz_dbfs": -128.67,
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -1.88,
+          "loudness_range_lu": 17.6,
+          "opening_5ms_peak_dbfs": -28.86,
+          "ending_50ms_peak_dbfs": -82.26,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "police-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 219063,
+          "sha256": "4d3dab584b87a7fc74de4f39bc7d71c50e31ff7b035d220fa0c933828e37425a",
+          "decoded_frames": 1981936,
+          "decoded_duration_seconds": 61.9355,
+          "container_duration_seconds": 61.9355,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -3.76,
+          "energy_above_4khz_db": -102.38,
+          "strongest_tone_above_4khz_dbfs": -135.55,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -3.75,
+          "loudness_range_lu": 0.8,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -57.51,
+              "step_to_local_p99": 0.0466,
+              "rms_before_dbfs": -18.56,
+              "rms_after_dbfs": -13.43
+            },
+            {
+              "id": "low",
+              "step_dbfs": -44.57,
+              "step_to_local_p99": 0.2066,
+              "rms_before_dbfs": -18.54,
+              "rms_after_dbfs": -13.43
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -39.66,
+              "step_to_local_p99": 0.3638,
+              "rms_before_dbfs": -18.55,
+              "rms_after_dbfs": -13.48
+            },
+            {
+              "id": "high",
+              "step_dbfs": -53.72,
+              "step_to_local_p99": 0.0719,
+              "rms_before_dbfs": -18.54,
+              "rms_after_dbfs": -13.42
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -82.63,
+              "step_to_local_p99": 0.0026,
+              "rms_before_dbfs": -18.56,
+              "rms_after_dbfs": -13.5
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 434216,
+          "sha256": "7092e00a4769692cb5752fc11585529ee9c0173ec30b4f0565421b09da51dd33",
+          "decoded_frames": 1981936,
+          "decoded_duration_seconds": 61.9355,
+          "container_duration_seconds": 61.992,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.05,
+          "energy_above_4khz_db": -99.43,
+          "strongest_tone_above_4khz_dbfs": -133.06,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -4.04,
+          "loudness_range_lu": 0.7,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -102.49,
+              "step_to_local_p99": 0.0003,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.48
+            },
+            {
+              "id": "low",
+              "step_dbfs": -78.14,
+              "step_to_local_p99": 0.0043,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.48
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -158.94,
+              "step_to_local_p99": 0.0,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.48
+            },
+            {
+              "id": "high",
+              "step_dbfs": -97.67,
+              "step_to_local_p99": 0.0005,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.48
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -79.44,
+              "step_to_local_p99": 0.0037,
+              "rms_before_dbfs": -18.61,
+              "rms_after_dbfs": -13.48
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "police-victory",
+      "files": {
+        "ogg": {
+          "bytes": 19786,
+          "sha256": "5a59618e651d318d84b5fe432c377ac05838618543233cebead27b3b6bf31e0c",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -4.79,
+          "energy_above_4khz_db": -103.58,
+          "strongest_tone_above_4khz_dbfs": -136.87,
+          "integrated_lufs": -17.96,
+          "true_peak_dbtp": -4.79,
+          "loudness_range_lu": 16.4,
+          "opening_5ms_peak_dbfs": -29.42,
+          "ending_50ms_peak_dbfs": -300.0,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "b714c2611d60a894b94625b6a84f00a6ffaf75b0cd3ac6d5bae78cf93e8a3754",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -4.64,
+          "energy_above_4khz_db": -99.13,
+          "strongest_tone_above_4khz_dbfs": -130.17,
+          "integrated_lufs": -18.04,
+          "true_peak_dbtp": -4.64,
+          "loudness_range_lu": 16.4,
+          "opening_5ms_peak_dbfs": -30.04,
+          "ending_50ms_peak_dbfs": -103.61,
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "boar-gameplay",
+      "files": {
+        "ogg": {
+          "bytes": 221489,
+          "sha256": "12b1ad05ab9afa8a2d510897516d9e87a37dfa764858c91366d8001c27a41037",
+          "decoded_frames": 2318492,
+          "decoded_duration_seconds": 72.452875,
+          "container_duration_seconds": 72.452875,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -2.11,
+          "energy_above_4khz_db": -104.84,
+          "strongest_tone_above_4khz_dbfs": -140.92,
+          "integrated_lufs": -17.98,
+          "true_peak_dbtp": -2.11,
+          "loudness_range_lu": 1.3,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -61.19,
+              "step_to_local_p99": 0.0201,
+              "rms_before_dbfs": -18.88,
+              "rms_after_dbfs": -11.47
+            },
+            {
+              "id": "low",
+              "step_dbfs": -89.78,
+              "step_to_local_p99": 0.0007,
+              "rms_before_dbfs": -18.86,
+              "rms_after_dbfs": -11.47
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -38.14,
+              "step_to_local_p99": 0.2813,
+              "rms_before_dbfs": -18.86,
+              "rms_after_dbfs": -11.48
+            },
+            {
+              "id": "high",
+              "step_dbfs": -37.51,
+              "step_to_local_p99": 0.3006,
+              "rms_before_dbfs": -18.84,
+              "rms_after_dbfs": -11.45
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -59.41,
+              "step_to_local_p99": 0.0243,
+              "rms_before_dbfs": -18.88,
+              "rms_after_dbfs": -11.49
+            }
+          ],
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 507800,
+          "sha256": "870883b7c33c8bb5fd681f9e6eea3e72179b21cc9a40dbcce4417090366b4258",
+          "decoded_frames": 2318492,
+          "decoded_duration_seconds": 72.452875,
+          "container_duration_seconds": 72.504,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -2.12,
+          "energy_above_4khz_db": -99.31,
+          "strongest_tone_above_4khz_dbfs": -132.32,
+          "integrated_lufs": -18.03,
+          "true_peak_dbtp": -2.12,
+          "loudness_range_lu": 1.3,
+          "loop_seams": [
+            {
+              "id": "full",
+              "step_dbfs": -71.93,
+              "step_to_local_p99": 0.0058,
+              "rms_before_dbfs": -18.92,
+              "rms_after_dbfs": -11.52
+            },
+            {
+              "id": "low",
+              "step_dbfs": -69.58,
+              "step_to_local_p99": 0.0076,
+              "rms_before_dbfs": -18.92,
+              "rms_after_dbfs": -11.52
+            },
+            {
+              "id": "medium",
+              "step_dbfs": -109.02,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.92,
+              "rms_after_dbfs": -11.52
+            },
+            {
+              "id": "high",
+              "step_dbfs": -104.99,
+              "step_to_local_p99": 0.0001,
+              "rms_before_dbfs": -18.92,
+              "rms_after_dbfs": -11.52
+            },
+            {
+              "id": "medium-return",
+              "step_dbfs": -81.93,
+              "step_to_local_p99": 0.0018,
+              "rms_before_dbfs": -18.92,
+              "rms_after_dbfs": -11.52
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "boar-victory",
+      "files": {
+        "ogg": {
+          "bytes": 19155,
+          "sha256": "3d53ab6d3fc4280ed0fdc5992b47f3c683868ba1e51b5b2703f1eae2d1a9cb9c",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.0,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "vorbis",
+          "sample_peak_dbfs": -2.53,
+          "energy_above_4khz_db": -111.74,
+          "strongest_tone_above_4khz_dbfs": -148.03,
+          "integrated_lufs": -17.97,
+          "true_peak_dbtp": -2.52,
+          "loudness_range_lu": 17.3,
+          "opening_5ms_peak_dbfs": -25.08,
+          "ending_50ms_peak_dbfs": -75.36,
+          "errors": []
+        },
+        "mp3": {
+          "bytes": 42608,
+          "sha256": "ada0e3177ea337c5f0a57dcb3229c9f6adedc22eb52056773ae30d6a5a9f33a0",
+          "decoded_frames": 192000,
+          "decoded_duration_seconds": 6.0,
+          "container_duration_seconds": 6.048,
+          "sample_rate_hz": 32000,
+          "channels": 1,
+          "codec": "mp3",
+          "sample_peak_dbfs": -2.6,
+          "energy_above_4khz_db": -99.78,
+          "strongest_tone_above_4khz_dbfs": -129.06,
+          "integrated_lufs": -18.02,
+          "true_peak_dbtp": -2.6,
+          "loudness_range_lu": 17.4,
+          "opening_5ms_peak_dbfs": -24.79,
+          "ending_50ms_peak_dbfs": -75.1,
+          "errors": []
+        }
+      }
+    }
+  ],
+  "errors": []
+}

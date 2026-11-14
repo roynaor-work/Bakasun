@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "check": "Independent rebuild of the longest sustained voice, both formats, same pinned toolchain",
+  "files": [
+    {
+      "path": "alpine-gameplay.ogg",
+      "sha256": "e2e6882bb12b71aceda216f74eaa8547e70936aa469911ffeec0c294df839ae2",
+      "matches": true
+    },
+    {
+      "path": "alpine-gameplay.mp3",
+      "sha256": "f233b9476a3b7d1cce8e27407f08623954fe0f7e8eb075bd000ca6f940425b9c",
+      "matches": true
+    }
+  ]
+}
