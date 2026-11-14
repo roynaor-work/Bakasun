@@ -30,11 +30,11 @@ const box=await frameEl.boundingBox(),cdp=await ctx.newCDPSession(page);await cd
 const touch=(type,pts)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:pts.map(p=>({x:p.x+box.x,y:p.y+box.y,id:p.id}))});
 const centre=sel=>frame.evaluate(s=>{const r=document.querySelector(s)?.getBoundingClientRect();return r&&r.width?{x:r.x+r.width/2,y:r.y+r.height/2}:null;},sel);
 // Set-up: the sandbox wave, the twelve weapons bought, a standing boar, the crosshair on it.
-await frame.evaluate(()=>{const s=window.__boar.state.save;window.__boar.sandbox(1);});
+await frame.evaluate(()=>window.__boar.sandbox(1));
 await frame.evaluate(()=>{const b=window.__boar,save=JSON.parse(JSON.stringify(b.state.save));for(const k of ['mg','shotgun','cannon','tesla','mg2','shotgun2','cannon2','tesla2','mg3','shotgun3','cannon3','tesla3'])save.weapons[k]=10;b.setSave(save);});
 await frame.waitForFunction(()=>!document.getElementById('fire-btn').hidden);
 const run=ms=>frame.evaluate(ms=>new Promise(res=>{window.__boar.hold(false);const t0=window.__boar.clock().t;const f=()=>{if(window.__boar.clock().t-t0>=ms/1000){window.__boar.hold(true);res(window.__boar.clock().t);}else requestAnimationFrame(f);};requestAnimationFrame(f);}),ms);
-const placeBoar=async()=>{await frame.evaluate(()=>{window.__boar.killAll();window.__boar.spawn('mortar',-28);});await run(200);const v=await frame.evaluate(()=>window.__boar.view());const t=v.targets[0];if(t)await frame.evaluate(([x,y,W,H])=>window.__boar.aim(x/W*2-1,-(y/H*2-1)),[t.x,t.y,v.W||844,v.H||390]);return t;};
+const placeBoar=async()=>{await frame.evaluate(()=>{window.__boar.killAll();window.__boar.spawn('mortar',-28);});await run(200);return frame.evaluate(()=>{const t=window.__boar.view().targets[0];if(t)window.__boar.aim(t.x/innerWidth*2-1,-(t.y/innerHeight*2-1));return t||null;});};
 const env=await frame.evaluate(()=>({flags:window.__boar.state.flags,current:window.__boar.state.current}));log('env',JSON.stringify(env));
 const W=await centre('#weapon-btn'),F=await centre('#fire-btn');if(!W||!F)throw Error('no weapon or fire button');
 const order=['mg','shotgun','cannon','tesla','mg2','shotgun2','cannon2','tesla2','mg3','shotgun3','cannon3','tesla3'],rows=[];
@@ -43,7 +43,7 @@ for(const key of order){
  for(let i=0;i<14&&(await frame.evaluate(()=>window.__boar.state.current))!==key;i++){await touch('touchStart',[{...W,id:3}]);await touch('touchEnd',[{...W,id:3}]);await run(80);}
  const cur=await frame.evaluate(()=>window.__boar.state.current);if(cur!==key){rows.push({key,error:'not reached by the weapon button: '+cur});continue;}
  await run(400);await placeBoar();const log0=(await frame.evaluate(()=>window.__boar.fx())).log.length;
- await touch('touchStart',[{...F,id:2}]);const fam=key.replace(/\d$/,'');await run(fam==='cannon'?160:fam==='tesla'?60:110);
+ await touch('touchStart',[{...F,id:2}]);const fam=key.replace(/\d$/,'');await run(fam==='cannon'?100:fam==='tesla'?60:50);
  const mid=await frame.evaluate(()=>window.__boar.fx());await page.screenshot({path:`${out}frames/boar-${FX}-${key}.jpg`,type:'jpeg',quality:80});
  await run(fam==='cannon'?500:200);await touch('touchEnd',[{...F,id:2}]);const end=await frame.evaluate(()=>window.__boar.fx());await run(300);
  const shots=end.log.slice(Math.max(0,end.log.length-(end.log.length-log0))).filter(s=>s.key===key);

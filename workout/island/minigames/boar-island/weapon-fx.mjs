@@ -14,17 +14,19 @@
 // the whistle of the shell in flight. Only the look and the sound change: damage, rate, spread, hit tests and timing stay the weapon's own.
 // Pure description plus a tiny ballistic helper (no DOM, no Three.js): game.js draws it with its own pools. `?boarFx=v24` keeps the v24 look.
 
-/** One look per weapon of the chain (chain.mjs WEAPON_ORDER). kind: bullet | pellet | shell | bolt. Colours: core (hot centre) and glow. */
+/** One look per weapon of the chain (chain.mjs WEAPON_ORDER). kind: bullet | pellet | shell | bolt. Colours: core (hot centre) and glow.
+ *  Sizes in world units: at 40 units from the camera one unit is about 10 px on a 390 px tall phone, so a glow of 0.38 still reads as a
+ *  round of light far out (v24's streak was 0.07 wide: under a pixel there, so it was seen only next to the gun). */
 export const WEAPON_FX=Object.freeze({
-  mg:{kind:'bullet',core:'#fff6d8',glow:'#ffc94a',len:1.5,width:.075,glowWidth:.2,speed:300,pair:false,sound:'mg',casing:'brass'},
-  mg2:{kind:'bullet',core:'#fff2c4',glow:'#ff9d2e',len:1.7,width:.085,glowWidth:.24,speed:310,pair:true,sound:'mg2',casing:'brass'},
-  mg3:{kind:'bullet',core:'#ffffff',glow:'#ffe680',len:2.6,width:.06,glowWidth:.15,speed:380,pair:false,sound:'mg3',casing:'brass'},
-  shotgun:{kind:'pellet',core:'#fff1d6',glow:'#ffb35c',len:.42,width:.11,glowWidth:.26,speed:230,sound:'shotgun',casing:'shell'},
-  shotgun2:{kind:'pellet',core:'#ffe0c4',glow:'#ff6a3c',len:.5,width:.15,glowWidth:.34,speed:220,sound:'shotgun2',casing:'shell'},
-  shotgun3:{kind:'pellet',core:'#f2fbff',glow:'#9fd8ff',len:1.1,width:.05,glowWidth:.14,speed:280,sound:'shotgun3',casing:'shell',dart:true},
-  cannon:{kind:'shell',body:'#c9a24a',nose:'#8a3a2a',tracer:'#ffb04a',radius:.17,length:.9,speed:170,gravity:55,smoke:'#c9c9c9',smokeSize:.9,spin:14,sound:'cannon',whistle:'shellWhistle',casing:'shell'},
-  cannon2:{kind:'shell',body:'#b8933c',nose:'#5f2a20',tracer:'#ff8a30',radius:.23,length:1.15,speed:170,gravity:50,smoke:'#a9a9a9',smokeSize:1.25,spin:11,sound:'cannon2',whistle:'shellWhistle',casing:'shell'},
-  cannon3:{kind:'shell',body:'#5d6b4a',nose:'#3a4430',tracer:'#ffd06a',radius:.27,length:.75,speed:170,gravity:110,smoke:'#bdbdbd',smokeSize:1.4,spin:0,sound:'cannon3',whistle:'mortarWhistle',casing:'shell',mortar:true},
+  mg:{kind:'bullet',core:'#fff6d8',glow:'#ffc94a',len:2.6,width:.12,glowWidth:.38,speed:300,pair:false,sound:'mg',casing:'brass'},
+  mg2:{kind:'bullet',core:'#fff2c4',glow:'#ff9d2e',len:2.8,width:.14,glowWidth:.44,speed:310,pair:true,sound:'mg2',casing:'brass'},
+  mg3:{kind:'bullet',core:'#ffffff',glow:'#ffe680',len:3.8,width:.1,glowWidth:.3,speed:380,pair:false,sound:'mg3',casing:'brass'},
+  shotgun:{kind:'pellet',core:'#fff1d6',glow:'#ffb35c',len:.6,width:.16,glowWidth:.4,speed:230,sound:'shotgun',casing:'shell'},
+  shotgun2:{kind:'pellet',core:'#ffe0c4',glow:'#ff6a3c',len:.7,width:.21,glowWidth:.52,speed:220,sound:'shotgun2',casing:'shell'},
+  shotgun3:{kind:'pellet',core:'#f2fbff',glow:'#9fd8ff',len:1.6,width:.08,glowWidth:.24,speed:280,sound:'shotgun3',casing:'shell',dart:true},
+  cannon:{kind:'shell',body:'#c9a24a',nose:'#8a3a2a',tracer:'#ffb04a',radius:.17,length:.9,speed:170,gravity:80,smoke:'#c9c9c9',smokeSize:.9,spin:14,sound:'cannon',whistle:'shellWhistle',casing:'shell'},
+  cannon2:{kind:'shell',body:'#b8933c',nose:'#5f2a20',tracer:'#ff8a30',radius:.23,length:1.15,speed:170,gravity:75,smoke:'#a9a9a9',smokeSize:1.25,spin:11,sound:'cannon2',whistle:'shellWhistle',casing:'shell'},
+  cannon3:{kind:'shell',body:'#5d6b4a',nose:'#3a4430',tracer:'#ffd06a',radius:.27,length:.75,speed:170,gravity:150,smoke:'#bdbdbd',smokeSize:1.4,spin:0,sound:'cannon3',whistle:'mortarWhistle',casing:'shell',mortar:true},
   tesla:{kind:'bolt',color:'#7fe3ff',width:.045,strands:1,sound:'tesla'},
   tesla2:{kind:'bolt',color:'#bff4ff',width:.05,strands:2,sound:'tesla2'},
   tesla3:{kind:'bolt',color:'#c9a2ff',width:.065,strands:2,orb:'#d9b8ff',sound:'tesla3'}

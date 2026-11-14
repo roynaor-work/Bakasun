@@ -77,7 +77,9 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
 
  // ------------------------------------------------------------------ Ships (phone landscape only)
  if(phone&&!portrait&&want('naval')){
-  const ready=async(stage,search='')=>{await page.evaluate(q=>{history.replaceState(null,'',location.pathname+'?dev=1'+q);},search);await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded,{timeout:120000}).catch(()=>{});await tick(400);};
+  // v24.1 (14/11/2026): the lock now waits for a radar acquisition and the submarine never surfaces (naval-v241.mjs); these v24 checks run
+  // with the return switches (the v24.1 behaviour is proven by naval-v241-browser.mjs).
+  const ready=async(stage,search='')=>{search='&navalRadar=v24&navalSub=v24&navalHint=v24'+search;await page.evaluate(q=>{history.replaceState(null,'',location.pathname+'?dev=1'+q);},search);await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded,{timeout:120000}).catch(()=>{});await tick(400);};
   const screenOf=index=>page.evaluate(i=>{const s=window.__island.games.current.session,e=s.debug.model.enemies.find(e=>e.index===i);if(!e)return null;const q=s.debug.view.projectTarget(e.x,e.z,1.5);return q&&{x:q.x,y:q.y,depth:q.depth};},index);
   const visible=q=>q&&q.depth>0&&q.x>=40&&q.x<=viewport.width-40&&q.y>=75&&q.y<=viewport.height-30;
   const nearestVisible=async()=>{const s=await snap().catch(()=>null);if(!s?.enemies)return null;const live=s.enemies.filter(e=>e.active&&e.hp>0).sort((a,b)=>Math.hypot(a.x-s.playerShip.x,a.z-s.playerShip.z)-Math.hypot(b.x-s.playerShip.x,b.z-s.playerShip.z));for(const e of live){const q=await screenOf(e.index);if(visible(q))return {index:e.index,q};}return null;};

@@ -68,24 +68,31 @@ await verify('naval-boars-v241',[{width:844,height:390,isMobile:true}],async({pa
   const v241=await aim(''),v24=await aim('&navalHint=v24');report.hint={v241,v24};console.log('hint',JSON.stringify(report.hint));
   check(v241.hint&&v241.hint.word===null&&v241.hint.color==='#CFF3FF','v24.1: the aim ring has no word and one neutral colour');check(v24.hint&&typeof v24.hint.word==='string','?navalHint=v24: the v24 word under the ring');}
 
- // R4. The sky at the end of the stage.
- if(want('r4')){const sky=async search=>{await page.evaluate(()=>{const a=window.__island.data.config.minigames.navalDuel.levels[2].air;a.from=2;a.kinds=['heli'];a.count=1;a.every=99;a.heli={...(a.heli||{}),leaveAfter:40};});await ready(3,search);
-   const L=await center('.naval-lock-btn'),F=await center('#shoot');let s=await snap(),lastLock=-9,lastFire=-9;
-   for(let k=0;k<900&&s&&!s.result&&!s.mission?.complete;k++){if(!s.homing&&!s.v241?.radar&&s.time-lastLock>1.2){await tapAt(L,4,70);lastLock=s.time;}if(s.homing&&s.time-lastFire>.7){await tapAt(F,2,60);lastFire=s.time;}await tick(120);s=await snap().catch(()=>null);}
-   const upAtEnd=Boolean(s?.air?.some(a=>a.state!=='down')),r={search:search||'default',fleetDown:Boolean(s?.mission?.complete),heliUp:upAtEnd,ended:null,waited:null,clock:null,banner:null,shotDown:null};
+ // R4. The sky at the end of the stage. The session closes when a stage ends, so the end is read from the last snapshot before it closes
+ // and from the stage's stars (a win at stage 3 stars it).
+ if(want('r4')){const stars=()=>page.evaluate(()=>(window.__island.engine.state.minigameProgress.navalDuel?.stars||[])[2]||0);
+  const sky=async search=>{await page.evaluate(()=>{const a=window.__island.data.config.minigames.navalDuel.levels[2].air;a.from=2;a.kinds=['heli'];a.count=1;a.every=99;a.heli={...(a.heli||{}),leaveAfter:40};});const star0=await stars();await ready(3,search);
+   const L=await center('.naval-lock-btn'),F=await center('#shoot');let s=await snap(),last=s,lastLock=-9,lastFire=-9,closed=false;
+   const poll=async ms=>{await tick(ms);const now=await snap().catch(()=>null);if(now){last=now;s=now;}else{closed=true;s=null;}return s;};
+   for(let k=0;k<900&&s&&!s.result&&!s.mission?.complete;k++){if(!s.homing&&!s.v241?.radar&&s.time-lastLock>1.2){await tapAt(L,4,70);lastLock=s.time;}if(s.homing&&s.time-lastFire>.7){await tapAt(F,2,60);lastFire=s.time;}await poll(120);}
+   const r={search:search||'default',fleetDown:Boolean(last?.mission?.complete),heliUp:Boolean(last?.air?.some(a=>a.state!=='down')),ended:null,waited:null,clock:null,banner:null,shotDown:null,kills:0};
    if(!r.fleetDown){await leave();return r;}
-   const t0=s.time,rem0=s.remaining;for(let k=0;k<30;k++){await tick(200);s=await snap().catch(()=>null);if(!s||s.result)break;}
-   r.waited=s&&!s.result?+(s.time-t0).toFixed(1):0;r.clock=s&&!s.result?+(rem0-s.remaining).toFixed(2):null;r.banner=s?.hud?.v241?.air?.word||null;r.finale=s?.v241?.airFinale;if(!search&&s&&!s.result)await capture('5-air-finale-banner');
-   if(s&&!s.result){const V=await center('.naval-vulcan');if(V){await touch('touchStart',[{...V,id:6}]);for(let k=0;k<60;k++){await tick(150);s=await snap().catch(()=>null);if(!s||s.result||(s.vulcan?.kills||0)>0)break;}await touch('touchEnd',[{...V,id:6}]);}
-    for(let k=0;k<60&&s&&!s.result;k++){await tick(200);s=await snap().catch(()=>null);}r.shotDown=(s?.vulcan?.kills||0)>0;}
-   r.ended=s?.result?.outcome||null;await leave();return r;};
+   const t0=last.time,rem0=last.remaining;for(let k=0;k<30&&!closed&&!s?.result;k++)await poll(200);
+   r.waited=closed||s?.result?0:+(last.time-t0).toFixed(1);r.clock=closed?null:+(rem0-last.remaining).toFixed(2);r.banner=last?.hud?.v241?.air?.word||null;r.finale=last?.v241?.airFinale;if(!search&&!closed)await capture('5-air-finale-banner');
+   // The Vulcan held (its crosshair locks on an aircraft within 42 degrees of the turret's bearing, v24), then, if still up, a drag toward it.
+   if(!closed&&!s?.result){const V=await center('.naval-vulcan');if(V){await touch('touchStart',[{...V,id:6}]);let dx=0;
+     for(let k=0;k<80&&!closed&&!s?.result&&!(last.vulcan?.kills>0);k++){await poll(150);if(k===10&&!search)await capture('5b-air-finale-vulcan');
+      if(k>12&&!(last.vulcan?.hits>0)){const a=last.air?.find(x=>x.state!=='down');if(a){const q=await page.evaluate(([x,z,h])=>window.__island.games.current?.session.debug.view.projectTarget(x,z,h),[a.x,a.z,Math.max(0,a.h)*.32]).catch(()=>null);if(q){dx=Math.max(-160,Math.min(160,dx+(q.x-viewport.width/2)*.08));await touch('touchMove',[{x:V.x+dx,y:V.y,id:6}]);}}}}
+     await touch('touchEnd',[{x:V.x+dx,y:V.y,id:6}]);}
+    r.kills=last.vulcan?.kills||0;for(let k=0;k<250&&!closed&&!s?.result;k++)await poll(200);}
+   r.shotDown=(last.vulcan?.kills||0)>0;r.ended=last.result?.outcome||(closed&&(await stars())>star0?'win':closed?'closed':null);r.closedAt=last.time&&+last.time.toFixed(1);await leave();return r;};
   const v241=await sky(''),v24=await sky('&navalAirEnd=v24');report.sky={v241,v24};console.log('sky',JSON.stringify(report.sky));
   check(v241.fleetDown&&v241.heliUp&&v241.waited>=5.5&&Math.abs(v241.clock)<.01&&v241.banner,`the fleet down with the helicopter up: the stage waits ${v241.waited} s, the clock stands still (${v241.clock}), banner "${v241.banner}"`);
-  check(v241.shotDown&&v241.ended==='win','the Vulcan brings the helicopter down and the stage is won');check(v24.fleetDown&&v24.heliUp&&v24.waited===0&&v24.ended==='win','?navalAirEnd=v24: the stage ends with the helicopter up (v24)');}
+  check(v241.ended==='win',`the stage is won once the sky is clear (${v241.shotDown?'shot down by the Vulcan':'the helicopter flew away'})`);check(v24.fleetDown&&v24.heliUp&&v24.waited===0&&v24.ended==='win','?navalAirEnd=v24: the stage ends with the helicopter up (v24)');}
 
  // R5. The deep submarine.
  if(want('r5')){const deep=async search=>{await ready(11,search);let s=await snap(),samples=0,surfaced=0,seen=false;const T=await center('.naval-torpedo-btn');
-   for(let k=0;k<200&&s&&!s.result&&s.time<42;k++){await tick(200);s=await snap().catch(()=>null);if(!s)break;const sub=s.enemies.find(e=>e.subMode==='v24');if(sub?.active&&sub.hp>0){samples++;if(!(sub.depth>0))surfaced++;if(!seen&&visible(await screenOf(sub.index))){seen=true;await tick(300);await capture(search?'7-submarine-v24-surfacing-cycle':'6-submarine-deep-periscope');}}}
+   for(let k=0;k<200&&s&&!s.result&&s.time<42;k++){await tick(200);s=await snap().catch(()=>null);if(!s)break;const sub=s.enemies.find(e=>e.subMode==='v24');if(sub?.active&&sub.hp>0){samples++;if(!(sub.depth>0))surfaced++;if(!seen){const q=await screenOf(sub.index),others=await Promise.all(s.enemies.filter(e=>e.active&&e.hp>0&&e.index!==sub.index).map(e=>screenOf(e.index)));if(visible(q)&&others.every(o=>!o||Math.hypot(o.x-q.x,o.y-q.y)>90)){seen=true;await capture(search?'7-submarine-v24-surfacing-cycle':'6-submarine-deep-periscope');}}}}
    let hit=null;if(!search&&T){const sub=s.enemies.find(e=>e.subMode==='v24'&&e.hp>0),hp=sub?.hp;hit=false;for(let k=0;k<4&&!hit&&sub;k++){await tapAt(await center('.naval-torpedo-btn'),8,60);for(let t=0;t<40&&!hit;t++){await tick(120);s=await snap().catch(()=>null)||s;const x=s.enemies.find(y=>y.index===sub.index);if(!x||x.hp<hp)hit=true;}}}
    const r={search:search||'default',samples,surfaced,deep:s?.v241?.subDeep,torpedoHit:hit,torpedoes:s?.v24?.torpedoes};await leave();return r;};
   const v241=await deep(''),v24=await deep('&navalSub=v24');report.submarine={v241,v24};console.log('submarine',JSON.stringify(report.submarine));

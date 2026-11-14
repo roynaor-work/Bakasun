@@ -201,7 +201,7 @@ function fxShellMesh(key,look){
   else{mesh(g,geo('fxCase'+key,()=>new THREE.CylinderGeometry(r,r,L*.62,14).rotateX(Math.PI/2)),mat(look.body,.95,.28),[0,0,-L*.12]);
     mesh(g,geo('fxNose'+key,()=>new THREE.ConeGeometry(r,L*.42,14).rotateX(Math.PI/2)),mat(look.nose,.6,.4),[0,0,L*.4]);
     mesh(g,geo('fxBand'+key,()=>new THREE.CylinderGeometry(r*1.04,r*1.04,L*.07,14).rotateX(Math.PI/2)),mat('#c27b3d',1,.3),[0,0,L*.12]);}
-  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX.fire,color:look.tracer,transparent:true,depthWrite:false,blending:add,toneMapped:false}));glow.scale.setScalar(r*7);glow.position.z=look.mortar?-r*1.7:-L*.46;g.add(glow);g.userData.glow=glow;
+  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX.fire,color:look.tracer,transparent:true,depthWrite:false,blending:add,toneMapped:false}));glow.scale.setScalar(r*9);glow.position.z=look.mortar?-r*1.7:-L*.46;g.add(glow);g.userData.glow=glow;
   g.traverse(o=>{if(o.isMesh)o.castShadow=false;});return g;
 }
 function fxNote(key,kind,sound){if(QA){fxLog.push({key,kind,sound,t:+elapsed.toFixed(3)});if(fxLog.length>80)fxLog.shift();}}

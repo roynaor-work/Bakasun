@@ -146,6 +146,7 @@ test('v24.1 HUD: the radar gauge fills on the hull, a refused or lost lock says 
  assert.equal(out.radar.progress,.4);assert.equal(out.radar.offscreen,false);assert.ok(p.calls.some(c=>c[0]==='arc'),'the gauge');assert.equal(texts(p).length,0,'no words on an acquisition');
  const lost=drawNavalV241(recorder(),{...base,radarLost:{index:0,reason:'range',time:4.8}},nb,project,844,390);assert.equal(lost.lost.word,NAVAL_V241_WORDS.range);assert.equal(lost.rangeRing,NAVAL_V241_DEFAULTS.radar.range);
  assert.equal(drawNavalV241(recorder(),{...base,radarLost:{index:0,reason:'lost',time:4.8}},nb,project,844,390).lost.word,NAVAL_V241_WORDS.lost);
+ const half=(x,z,y=0)=>({x:422+z*1.2,y:300-(x-60)*.5-y,depth:x>40?1:-1});assert.equal(drawNavalV241(recorder(),{...base,radarLost:{index:0,reason:'lost',time:4.8}},nb,half,844,390).rangeRing,NAVAL_V241_DEFAULTS.radar.range,'the part of the ring in front of the camera is drawn even when the rest passes behind it');
  assert.equal(drawNavalV241(recorder(),{...base,radarLost:{index:0,reason:'lost',time:1}},nb,project,844,390),null,'the reason fades');
  const sky=drawNavalV241(recorder(),{...base,airFinale:true,air:[{id:1,kind:'heli',state:'in',x:150,z:0,h:14}]},nb,project,844,390);assert.equal(sky.air.word,NAVAL_V241_WORDS.air);
  assert.equal(drawNavalV241(recorder(),{...base,radarOn:false,radar:{index:0,progress:.5}},nb,project,844,390),null);

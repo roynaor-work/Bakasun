@@ -244,7 +244,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   const e=enemies.find(x=>x.index===index&&x.active&&x.hp>0);if(!e)return;
   if(!navalRadarInRange(rangeTo(e),ammoIndex,false,v241.radar)){radarLost={index,reason:'range',time};radarRefused++;sound('radarLost');return;}
   if(homing)unlock('switch');
-  radar={index,at:time,need:navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0};radarBeepAt=time;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
+  radar={index,at:time,need:navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0};radarBeepAt=time+v241.radar.beepFirst;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
  }
  /** One frame of the radar: the gauge fills; out of reach (past the margin, longer than the grace) the acquisition breaks; full = locked. */
  function radarStep(dt){

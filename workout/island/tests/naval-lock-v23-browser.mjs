@@ -14,7 +14,8 @@
 import {verify} from './night-browser.mjs';
 import {mkdir} from 'node:fs/promises';
 const before=process.env.MODE==='before',SHOTS=Number(process.env.SHOTS||20),only=(process.env.ONLY||'').split(',').filter(Boolean),want=k=>!only.length||only.includes(k);
-const part=before?'naval-lock-v23-before':'naval-lock-v23',flag=before?'&navalLock=0':'';
+// v24.1 (14/11/2026): the lock now waits for a radar acquisition (naval-v241.mjs); the v23 lock checks run with its return switch.
+const part=before?'naval-lock-v23-before':'naval-lock-v23',flag=before?'&navalLock=0':'&navalRadar=v24';
 const frames=new URL(`../verification/${part}/`,import.meta.url);await mkdir(frames,{recursive:true});
 const DEG=180/Math.PI,wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
 try{
