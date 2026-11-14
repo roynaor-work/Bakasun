@@ -1,8 +1,8 @@
 import * as T from '../vendor/three.module.js';
-import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-13';
-import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261107-13';
-import {navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-13';
-import {navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-13';
+import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-14';
+import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261107-14';
+import {navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-14';
+import {navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-14';
 
 /** The archery-style arc, drawn from the model's own prediction: a continuous
  * camera-facing ribbon with a dark outline, stopping at the first predicted

@@ -1,12 +1,12 @@
 /** 13/11/2026 fire v23: one session for both bonus missions (water targets, inside the building). Loaded on first use by
  * fire.mjs startFireBonus. Owns its HUD and controls inside the game dialog; the shared shell (pause, sound, "stuck? restart") is
  * untouched. The pure models are fire-targets.mjs and fire-interior.mjs; pictures come from fire-v23-assets.mjs. */
-import {createTargetsModel} from './fire-targets.mjs?v=island-v2-20261107-13';
-import {createInteriorModel,TOOLS,rescueCovered} from './fire-interior.mjs?v=island-v2-20261107-13';
-import {TARGET_STAGES,INTERIOR_STAGES,fireBonusNumber} from './fire-bonus.mjs?v=island-v2-20261107-13';
-import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,fireV23AssetURL,fireV23ModeImages,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-13';
-import {createBonusPainter} from './fire-bonus-draw.mjs?v=island-v2-20261107-13';
-import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-13';
+import {createTargetsModel} from './fire-targets.mjs?v=island-v2-20261107-14';
+import {createInteriorModel,TOOLS,rescueCovered} from './fire-interior.mjs?v=island-v2-20261107-14';
+import {TARGET_STAGES,INTERIOR_STAGES,fireBonusNumber} from './fire-bonus.mjs?v=island-v2-20261107-14';
+import {FIRE_V23_IMAGES,FIRE_V23_NEEDS,FIRE_V23_ICONS,fireV23AssetURL,fireV23ModeImages,spriteBox} from './fire-v23-assets.mjs?v=island-v2-20261107-14';
+import {createBonusPainter} from './fire-bonus-draw.mjs?v=island-v2-20261107-14';
+import {createG2nAudio} from './g2n-audio.mjs?v=island-v2-20261107-14';
 
 const NS='http://www.w3.org/2000/svg';
 function icon(name){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');const p=document.createElementNS(NS,'path');p.setAttribute('d',FIRE_V23_ICONS[name]||FIRE_V23_ICONS.star);svg.append(p);return svg;}
@@ -27,7 +27,7 @@ export function runFireBonusSession(ctx){
   Promise.all(needs.map(loadOne)).then(results=>{if(disposed)return;if(results.filter(Boolean).length<Math.ceil(needs.length*.6))loadFailed=true;ready=true;for(const id of all)if(!images.has(id))loadOne(id);});
   const painter=createBonusPainter(images);
   // ---- styles and HUD -------------------------------------------------------------------------------------------------------------
-  const links=['./fire.css?v=island-v2-20261107-13','./fire-v23.css?v=island-v2-20261107-13'].map(href=>{const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(href,import.meta.url).href;document.head.append(link);return link;});
+  const links=['./fire.css?v=island-v2-20261107-14','./fire-v23.css?v=island-v2-20261107-14'].map(href=>{const link=document.createElement('link');link.rel='stylesheet';link.href=new URL(href,import.meta.url).href;document.head.append(link);return link;});
   dialog.classList.add('fire-play','fire-v23','fire-v23-'+mode);ctx.status.hidden=true;if(ctx.warning)ctx.warning.hidden=true;
   const pause=dialog.querySelector('[data-action=game-pause]');if(pause){const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 24 24');const p=document.createElementNS(NS,'path');p.setAttribute('d','M8 5v14M16 5v14');svg.append(p);pause.replaceChildren(svg);}
   controls.replaceChildren();const pad=el('div','fv-pad');controls.append(pad); // not direct children of .game-controls: the shell's button skin stays off

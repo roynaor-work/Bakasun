@@ -1,5 +1,5 @@
 import {whistleFor,whistleAllowedInPhase,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
-import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-12';
+import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-14';
 const mixURL=new URL('../design/audio/mix.json',import.meta.url);
 /** v24 Foley (Codex soccer-fx-v1, assets/soccer-v24/fx/audio): mix entries next to the shipped bank, same voice rules. `?soccerFxV1=0` = none. */
 export function soccerV24MixAssets(){
