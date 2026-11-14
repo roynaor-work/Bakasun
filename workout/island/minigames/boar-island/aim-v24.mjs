@@ -6,8 +6,11 @@
 // old way until the thumb travelled all the way back ("אחרי הזזת אגודל מהירה").
 // v24 keeps the v23 stick (dead zone, curve, smoothing, top speeds, precision finger, sensitivity) and adds, only while the thumb is on the
 // stick: a ring that follows the thumb past its edge, a slowdown over a boar, a gentle pull to the eyes of the boar closest to the crosshair,
-// and following the boar that is under the crosshair. A push away from the boar switches the pull off, so it never holds the crosshair
-// against the thumb. With the thumb off the stick nothing moves the crosshair, and the fire button never moves it.
+// and following the boar that is under the crosshair. Any push away from the boar fades the pull and the follow out, so the crosshair always
+// leaves (a light push more slowly than in v23, because of the slowdown; only a touch inside the first few px past the dead zone stays on
+// the eyes). With the thumb off the stick nothing moves the crosshair, and the fire button never moves it.
+// Tried and dropped in the model: faster top speeds or a steeper curve, acceleration on a long full push, leading a walking boar, no slowdown
+// when leaving (all gave less or the same).
 // Pure module (no DOM, no Three.js): CSS px and seconds. game.js gives it the boars as circles on the screen; the tests and the touch model
 // use it as is. `?boarAim=v23` on the island URL turns all of it off.
 
