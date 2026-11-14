@@ -189,7 +189,7 @@ let failures=0;
 for(const game of GAMES){
   const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
   await context.addInitScript(initScript);
-  const page=await context.newPage(),errors=[],consoleAudio=[];
+  const page=await context.newPage(),errors=[],consoleAudio=[];page.setDefaultTimeout(180000); // a loaded machine can take over 30 s to boot the island
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(/audio|sound|whistle/i.test(m.text()))consoleAudio.push(m.text());});
   const log={game,errors,consoleAudio,frames:[],nodes:[],decoded:[],contexts:[],timeline:[]};
   const t0=Date.now(),mark=what=>log.timeline.push({at:+((Date.now()-t0)/1000).toFixed(1),what});

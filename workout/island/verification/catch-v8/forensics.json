@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-14T15:43:34.770Z",
+ "generatedAt": "2026-11-14T16:37:20.756Z",
  "tool": "node workout/island/tools/audio-forensics.mjs <dir> --games=catchCriminal --seconds=150 --assert --query=quality=low[&v7 flags]",
  "classifier": "minigames/audio-guard.mjs whistleLike: tone (a 1.5-5 kHz line held 0.6 s), glide (a line sliding 0.25 s, top over 1.5 kHz), hum (a bright 1.5-5 kHz bed for 2 s); live = the chase phase run",
  "v7": {
@@ -229,61 +229,67 @@
  },
  "v8": {
   "query": "quality=low",
-  "runSeconds": 84,
-  "countdownSeconds": 40.3,
+  "runSeconds": 55.7,
+  "countdownSeconds": 56.6,
   "liveTones": 0,
   "liveHums": 0,
   "liveGlides": 0,
   "segments": [],
   "sources": [
    "osc:sine",
+   "assets/catch-v8/audio/engine-police-low.ogg",
+   "assets/catch-v8/audio/engine-police-mid.ogg",
+   "assets/catch-v8/audio/engine-police-high.ogg",
+   "assets/catch-v8/audio/chase-start.ogg",
    "osc:custom",
-   "generated:44100@44100",
-   "generated:88200@44100",
    "osc:square",
+   "assets/catch-v8/audio/gear-shift.ogg",
    "generated:14112@44100",
    "generated:17640@44100",
+   "generated:44100@44100",
    "osc:triangle",
    "generated:9702@44100",
    "assets/catch-v7/audio/puncture.ogg",
-   "generated:2205@44100",
-   "assets/catch-v7/audio/net-drop.ogg"
+   "generated:2205@44100"
   ],
   "sourceCounts": {
-   "osc:sine": 87,
-   "osc:custom": 37,
-   "generated:44100@44100": 88,
-   "generated:88200@44100": 1,
-   "osc:square": 35,
+   "osc:sine": 47,
+   "assets/catch-v8/audio/engine-police-low.ogg": 1,
+   "assets/catch-v8/audio/engine-police-mid.ogg": 1,
+   "assets/catch-v8/audio/engine-police-high.ogg": 1,
+   "assets/catch-v8/audio/chase-start.ogg": 1,
+   "osc:custom": 28,
+   "osc:square": 28,
+   "assets/catch-v8/audio/gear-shift.ogg": 5,
    "generated:14112@44100": 1,
-   "generated:17640@44100": 2,
-   "osc:triangle": 6,
-   "generated:9702@44100": 5,
-   "assets/catch-v7/audio/puncture.ogg": 4,
-   "generated:2205@44100": 28,
-   "assets/catch-v7/audio/net-drop.ogg": 1
+   "generated:17640@44100": 1,
+   "generated:44100@44100": 42,
+   "osc:triangle": 2,
+   "generated:9702@44100": 2,
+   "assets/catch-v7/audio/puncture.ogg": 2,
+   "generated:2205@44100": 14
   },
   "runEnergy2to5k": 0.001,
   "runStrongestHighBins": [
    {
-    "hz": 1375,
-    "frames": 530
+    "hz": 925,
+    "frames": 200
    },
    {
     "hz": 1075,
-    "frames": 503
+    "frames": 196
    },
    {
     "hz": 1025,
-    "frames": 245
+    "frames": 109
    },
    {
-    "hz": 925,
-    "frames": 113
+    "hz": 900,
+    "frames": 99
    },
    {
-    "hz": 1400,
-    "frames": 55
+    "hz": 950,
+    "frames": 83
    }
   ],
   "errors": []
