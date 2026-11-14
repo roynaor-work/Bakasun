@@ -1,0 +1,35 @@
+Alpine Start Lights v1 — source and usage notes
+Prepared for the Bakasun repository on 2026-11-14.
+
+ORIGINAL VECTOR ART, CODE AND DOCUMENTATION
+source/build.mjs, source/svg/*.svg, the corresponding png/512 and
+png/1024 sprites, the preview, manifest, verification tools and report
+were created specifically for this task with AI assistance. They use
+generic geometric shapes, alpine symbols and a palette referenced from
+the repository's existing ui-kit-v2/tokens.json. No third-party artwork,
+font files, logos, athlete likenesses or stock assets were copied.
+Use is governed by the repository owner's permissions and applicable
+project terms. This file does not grant a new license over existing
+repository materials or claim exclusive rights in AI-assisted output.
+
+GENERATED BADGE
+source/badge-master.webp is a lossless working copy of the original
+image_gen output generated for this task. png/{512,1024}/alpine-badge.png are resized RGBA exports with
+transparent safety padding. The prompt and source SHA-256 are recorded
+in source/provenance.json. Use is subject to the applicable OpenAI terms
+and the repository owner's permissions; no exclusivity is asserted.
+
+PREVIEW AND EVIDENCE
+verification/*.webp are renders of this pack and its local demonstration.
+Their displayed words/numbers are live HTML text captured in screenshots.
+The delivered sprite PNGs contain no baked words, numbers or unit labels.
+Preview participant labels and times are explicitly synthetic.
+
+BUILD TOOLS (NOT DISTRIBUTED IN THE PACK)
+Node.js: MIT. sharp: Apache-2.0 (with its upstream runtime dependencies).
+Playwright: Apache-2.0. Chromium: Chromium's upstream licenses.
+These tools are build/verification dependencies, not bundled game code.
+Their licenses do not relicense the artwork. The preview uses system fonts.
+
+No new CC0 declaration, trademark license or license for unrelated
+repository content is made by this delivery.

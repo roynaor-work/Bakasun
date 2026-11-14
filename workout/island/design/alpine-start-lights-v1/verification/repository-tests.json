@@ -1,0 +1,47 @@
+{
+  "standardRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "status": "failed: existing browser environment is missing Playwright headless Chromium 1234",
+    "tests": 4082,
+    "suites": 0,
+    "pass": 4017,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 727696.669903,
+    "failure": {
+      "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "file": "tests/workout-royiki.test.mjs",
+      "line": 91,
+      "error": "browserType.launch: Executable does not exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "scope": "Existing test and all existing repository files are unchanged.",
+      "stalledChildTerminated": true,
+      "terminationReason": "The test starts its HTTP server before launching the missing browser and leaves the server open after launch rejects. All other test files had finished; terminating this child allowed the runner to emit the failure and complete."
+    }
+  },
+  "isolatedReproduction": {
+    "command": "timeout 20s node --test --test-name-pattern='exercise screen shows the royiki' tests/workout-royiki.test.mjs",
+    "exitCode": 124,
+    "confirmedMissingExecutable": true,
+    "evidence": "repository-test-failure.txt"
+  },
+  "focusedAlpine": {
+    "command": "node --test tests/island-alpine.test.mjs tests/island-alpine-v7.test.mjs tests/island-alpine-ski-assets.test.mjs tests/island-alpine-feel.test.mjs",
+    "exitCode": 0,
+    "tests": 40,
+    "suites": 0,
+    "pass": 38,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 2,
+    "todo": 0,
+    "duration_ms": 3965.105814
+  },
+  "packChecks": {
+    "assetReport": "assets.json",
+    "browserReport": "browser.json",
+    "bothPassed": true
+  }
+}

@@ -1,0 +1,36 @@
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (30.982219ms)
+
+Interrupted while running:
+
+⚠ tests/workout-royiki.test.mjs (tests/workout-royiki.test.mjs:1:1)
+✖ tests/workout-royiki.test.mjs (19948.21384ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 1
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19960.355938
+
+✖ failing tests:
+
+test at tests/workout-royiki.test.mjs:91:1
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (30.982219ms)
+  browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/Bakasun/tests/workout-royiki.test.mjs:93:34) {
+    name: 'Error',
+    log: []
+  }
+
+test at tests/workout-royiki.test.mjs:1:1
+✖ tests/workout-royiki.test.mjs (19948.21384ms)
+  'Promise resolution is still pending but the event loop has already resolved'

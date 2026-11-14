@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>ערכת זינוק אלפינית · תצוגה מקדימה</title>
+  <link rel="icon" href="png/512/alpine-badge.png" type="image/png">
+  <link rel="stylesheet" href="source/preview.css">
+  <script defer src="source/catalog.js"></script>
+  <script defer src="source/preview.js"></script>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <img class="brand" src="png/512/alpine-badge.png" alt="סמל הרים מושלגים ושמש">
+    <div><p class="eyebrow">האי שלי / סקי</p><h1>על קו הזינוק</h1><p>מהאור הראשון ועד לדגל הסיום. ערכה מצוירת עם מקום למילים שלכם.</p></div>
+    <span class="pill">גרסה 1 · שקוף · 512 / 1024</span>
+  </header>
+  <section class="workspace" aria-label="הדגמת הערכה">
+    <div class="scene" data-surface="snow" aria-label="מסלול סקי להדגמה">
+      <svg class="landscape" viewBox="0 0 960 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M0 250 173 45 312 204 457 10 671 235 803 65 960 230V620H0Z" fill="#B9DDC8"/>
+        <path d="m110 120 63-75 79 91-61-19-20-28-24 40Zm276-26 71-84 100 105-72-24-31-39-30 48ZM757 119l46-54 63 66-49-17-17-18-16 25Z" fill="#FFFCF4"/>
+        <path d="M0 320Q170 243 359 307T960 289V620H0Z" fill="#D9EEE5"/>
+        <path d="M0 420Q241 309 405 377T960 372V620H0Z" fill="#EDF7F1"/>
+        <path d="M480 290Q330 420 487 490T489 680" fill="none" stroke="#FFFCF4" stroke-width="160"/>
+        <g fill="#24786D" stroke="#173E40" stroke-width="4" stroke-linejoin="round">
+          <path d="m70 284 33-65 33 65h-15l29 47H57l29-47Zm747 12 39-77 39 77h-18l35 56H800l35-56ZM19 403l44-88 44 88H87l40 63H0l40-63Z"/>
+        </g>
+        <g fill="#FFFCF4"><path d="m85 253 18-34 18 34-18-9Zm751 2 20-36 20 36-20-8ZM40 360l23-45 23 45-23-12Z"/></g>
+      </svg>
+      <div class="scene-heading"><span class="tag">פסגת הקרח</span><span class="tag">הדגמה</span></div>
+      <div class="race-clock"><span>זמן מירוץ</span><bdi id="clock" dir="ltr">00:00.00</bdi></div>
+      <div class="sprite gate"><img id="gate" src="png/512/start-gate-closed.png" alt="שער זינוק סגור"><span class="overlay gate-title">זינוק</span></div>
+      <div class="sprite lights"><img id="lights" src="png/512/start-lights-idle.png" alt="ארבעת אורות הזינוק כבויים"></div>
+      <div class="sprite countdown" hidden><img src="png/512/countdown-disc.png" alt=""><span id="countdown" class="overlay count-value" dir="ltr">3</span></div>
+      <div class="sprite ready"><img src="png/512/ready-sign.png" alt=""><span class="overlay ready-title">מוכנים</span></div>
+      <div class="sprite progress" role="progressbar" aria-label="התקדמות במסלול" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <img src="png/512/progress-rail.png" alt="">
+        <img id="progress-fill" class="layer" src="png/512/progress-fill.png" alt="">
+        <img id="progress-marker" class="layer" src="png/512/progress-marker.png" alt="">
+        <span id="progress-label" class="progress-label" dir="ltr">0%</span>
+      </div>
+      <div class="sprite speed"><img src="png/512/speedometer-base.png" alt=""><img id="needle" class="layer" src="png/512/speedometer-needle.png" alt=""><span class="overlay speed-value" id="speed-value" dir="ltr">0</span><span class="overlay speed-unit">קמ״ש</span></div>
+      <div class="sprite flag" hidden><img id="flag" src="png/512/finish-flag-01.png" alt="דגל סיום משובץ"></div>
+      <div id="finish-message" class="finish-message" hidden>כל הכבוד!</div>
+      <div id="results" class="results sprite" hidden aria-label="לוח תוצאות לדוגמה">
+        <img src="png/512/results-board.png" alt="">
+        <div id="results-text"></div>
+      </div>
+      <span class="scene-status" id="scene-status" role="status" aria-live="polite">מוכנים לזינוק</span>
+    </div>
+    <aside class="controls">
+      <p class="eyebrow">נסיעת מבחן</p><h2>אדום. אדום. אדום. ירוק.</h2>
+      <p>האור הירוק פותח את המוט. המסלול מתקדם עד להופעת התוצאות.</p>
+      <div class="buttons"><button id="play" type="button">הפעלת ההדגמה</button><button id="reset" type="button" class="secondary">איפוס</button></div>
+      <label for="state">תצוגת מצב</label>
+      <select id="state"><option value="ready">מוכנים</option><option value="red-1">אדום ראשון · 3</option><option value="red-2">אדום שני · 2</option><option value="red-3">אדום שלישי · 1</option><option value="green">ירוק · צאו!</option><option value="racing">במסלול</option><option value="finish">סיום</option><option value="results">תוצאות</option></select>
+      <label for="progress">התקדמות <output id="progress-output" for="progress">0%</output></label><input id="progress" type="range" min="0" max="100" value="0">
+      <label for="speed">מהירות <output id="speed-output" for="speed">0 קמ״ש</output></label><input id="speed" type="range" min="0" max="140" value="0">
+      <div class="options"><div><label for="size">רזולוציה</label><select id="size"><option value="512">512 × 512</option><option value="1024">1024 × 1024</option></select></div><div><label for="surface">רקע</label><select id="surface"><option value="snow">שלג</option><option value="checker">משבצות שקיפות</option><option value="dark">כהה</option></select></div></div>
+      <p class="hint">הכיתובים, הספירה, השמות והזמנים הם שכבת טקסט חיה. התמונות עצמן נקיות מטקסט.</p>
+      <p id="motion-note" class="hint" hidden>מצב תנועה מופחתת: פתיחת השער מיידית והדגל קבוע.</p>
+    </aside>
+  </section>
+  <section class="inventory" aria-labelledby="inventory-title">
+    <div class="section-title"><div><p class="eyebrow">חלקים להרכבה</p><h2 id="inventory-title">כל הנכסים וכל הפריימים</h2></div><p id="asset-count"></p></div>
+    <p>התמונות בגלריה מוצגות ללא שכבת הטקסט. בכל כרטיס אפשר לפתוח את שני הגדלים.</p>
+    <div id="gallery" class="gallery"></div>
+  </section>
+  <footer><a href="manifest.json">מפרט ונקודות עיגון</a><a href="REPORT.md">דוח המסירה</a><a href="LICENSE.txt">מקורות ותנאי שימוש</a><span>נתוני התוצאות סינתטיים לצורכי תצוגה.</span></footer>
+</main>
+</body>
+</html>

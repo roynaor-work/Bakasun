@@ -1,0 +1,678 @@
+{
+  "passed": true,
+  "assets": 27,
+  "pngs": 54,
+  "totalBytes": 2332013,
+  "maxBytes": 468849,
+  "limitBytes": 1000000,
+  "animations": {
+    "countdown": {
+      "frames": 4,
+      "durationMs": 3500,
+      "loop": false,
+      "stableAnchors": true
+    },
+    "gateOpen": {
+      "frames": 7,
+      "durationMs": 460,
+      "loop": false,
+      "stableAnchors": true
+    },
+    "finishFlag": {
+      "frames": 6,
+      "durationMs": 720,
+      "loop": true,
+      "stableAnchors": true
+    }
+  },
+  "checks": [
+    {
+      "file": "png/512/start-lights-idle.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 22646,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-lights-idle.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 48035,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-lights-red-1.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 24591,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-lights-red-1.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 53847,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-lights-red-2.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 26383,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-lights-red-2.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 59535,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-lights-red-3.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 28127,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-lights-red-3.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 65007,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-lights-green.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 24908,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-lights-green.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 54672,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-closed.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 21194,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-closed.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 44456,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-opening-01.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 28037,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-opening-01.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 58992,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-opening-02.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 31425,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-opening-02.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 66758,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-opening-03.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 32929,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-opening-03.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 69515,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-opening-04.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 31428,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-opening-04.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 66407,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-opening-05.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 26690,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-opening-05.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 57011,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/start-gate-open.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 20752,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/start-gate-open.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 43555,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/ready-sign.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 21299,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/ready-sign.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 44642,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/results-board.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 21536,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/results-board.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 46313,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/progress-rail.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 11095,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/progress-rail.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 25082,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/progress-fill.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 1899,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/progress-fill.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 5871,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/progress-marker.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 3755,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/progress-marker.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 9405,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/speedometer-base.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 52854,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/speedometer-base.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 111307,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/speedometer-needle.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 6093,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/speedometer-needle.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 14597,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-01.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14392,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-01.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27567,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-02.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14108,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-02.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27122,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-03.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14385,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-03.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27694,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-04.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14540,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-04.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27883,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-05.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14416,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-05.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27693,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/finish-flag-06.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 14266,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/finish-flag-06.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 27633,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/countdown-disc.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 28691,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/countdown-disc.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 62061,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/512/alpine-badge.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "bytes": 138065,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    },
+    {
+      "file": "png/1024/alpine-badge.png",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "bytes": 468849,
+      "channels": 4,
+      "transparent": true,
+      "unclipped": true,
+      "sha256Matches": true
+    }
+  ]
+}

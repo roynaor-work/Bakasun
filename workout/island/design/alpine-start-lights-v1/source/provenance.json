@@ -1,0 +1,22 @@
+{
+  "created": "2026-11-14",
+  "vectorArtwork": {
+    "source": "build.mjs",
+    "exports": "svg/*.svg and ../png/{512,1024}/*.png except alpine-badge.png",
+    "method": "Original geometric vector drawing for this task, rendered with sharp; no SVG text or font glyphs.",
+    "styleReference": "../../ui-kit-v2/tokens.json",
+    "thirdPartyArtworkCopied": false
+  },
+  "badge": {
+    "source": "badge-master.webp",
+    "originalPngSha256": "2fb78d4380dbf083a1cfdb1204f5768276b4e066e6a949aff1f8d2298f1c3fb9",
+    "sourceSha256": "86dc83a0add3a52db96062d13143109cb658ccaca68bf1e96cbfaa50e59605e1",
+    "sourceEncoding": "Lossless WebP working copy; the generated PNG original is outside the repository. All delivered PNG files are 512 or 1024 square.",
+    "tool": "image_gen.imagegen",
+    "transparentBackground": true,
+    "exports": "../png/{512,1024}/alpine-badge.png",
+    "processing": "Resize to 480/960 px within a 512/1024 px RGBA canvas; 16/32 px transparent safety padding. No content retouching.",
+    "prompt": "Create a single small game UI badge asset for an alpine ski race game. Transparent RGBA background. ONE isolated emblem centered on a square canvas with generous transparent margins. Flat colorful cartoon vector illustration, beautifully clean, very thick rounded dark teal outlines (#173E40), cel shading, no grain or photographic detail. A stylized pair of snowy mountain peaks inside a chunky gold (#E9BA57) rounded circular medallion, mint (#B9DDC8) and sea teal (#24786D) mountain faces, cream (#FFFCF4) snowcaps, small coral (#EB947F) rising sun behind the peaks. Small dark teal dimensional lower edge, a few crisp cream highlights, polished playful mobile game icon. Bold simple silhouettes readable at 48px. Front view. No words, letters, digits, captions, logos, watermark, scenery, ground plane or drop shadow outside the medallion. This is a reusable text-free pictogram for start gates and ski results screens."
+  },
+  "tools": {"sharp": "0.35.4", "playwright": "1.57.0", "chromium": "151.0.7922.173"}
+}
