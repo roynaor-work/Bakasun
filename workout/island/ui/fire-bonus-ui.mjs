@@ -3,6 +3,7 @@
  * so the cards show no stars; they open with campaign progress. `?fireTargets=0` / `?fireInterior=0` hide each mode. */
 import {fireBonusCards,fireBonusOn,TARGET_STAGES,INTERIOR_STAGES,fireBonusUnlocked,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-13';
 import {kitStageLabel,kitResultPanel,kitPrimary} from './ui-kit.mjs?v=island-v2-20261107-13';
+import {fireFlowV24,isEntryStage} from '../minigames/fire-v24.mjs?v=island-v2-20261107-13';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -13,8 +14,15 @@ export function launchFireBonus(activity,mode,level){
   if(activity.requireDaily?.('fireRescue'))return;if(activity.requireBuilding?.('fireRescue'))return;
   activity.launch('fireRescue',undefined,1,{fireMode:mode,level});
 }
+/** 14/11/2026 fire v24: a small door badge on the campaign stages that drive into the building (3, 6, ...). Display only. */
+export function markEntryStages(activity,dialog){
+  if(!fireFlowV24())return 0;const count=activity.data.config.minigames.fireRescue.levels.length;let n=0;
+  for(const node of dialog.querySelectorAll('.stage-map [data-stage]')){const stage=Number(node.dataset.stage);if(!isEntryStage(stage,count))continue;node.dataset.fireEntry='true';const badge=el('small','stage-feature fire-entry-badge',activity.t('fire.v24.badge'));node.append(badge);n++;}
+  return n;
+}
 /** The section under the campaign's stage map. */
 export function fireBonusMap(activity,dialog){
+  markEntryStages(activity,dialog);
   const progress=activity.engine.state.minigameProgress.fireRescue,count=activity.data.config.minigames.fireRescue.levels.length,cards=fireBonusCards(progress?.stage,undefined,count);
   if(!cards.length)return null;
   const box=el('section','fire-bonus-map');box.dataset.fireBonusMap='true';box.append(el('h3','',activity.t('fire.v23.section')),el('p','fire-bonus-hint',activity.t('fire.v23.sectionHint')));
