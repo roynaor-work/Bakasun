@@ -1,5 +1,6 @@
 import {navalAdvanceShot,navalBallisticPoint,navalBallisticConfig,navalHullDistance,navalLanding} from './naval-ballistics.mjs?v=island-v2-20261107-13';
 import {stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles,navalPatrolConfig} from './naval-patrol.mjs?v=island-v2-20261107-13';
+import {navalSubDepth} from './naval-v24.mjs?v=island-v2-20261107-13';
 /** Honest aim (29/10/2026). Where a shot really goes: the shell flies its
  * fixed launch while every hull sails on under the same patrol rules as the
  * live fleet (naval-patrol: station, flank drift, yielding, the early-stage
@@ -12,7 +13,7 @@ export function navalForecastConfig(balance){
  const f=balance.aim?.forecast||{};
  return {reactionSeconds:f.reactionSeconds??.25,stepSeconds:f.stepSeconds??1/60,leadFromStage:f.leadFromStage??3};
 }
-const copy=e=>({index:e.index,x:e.x,z:e.z,heading:e.heading||0,hp:e.hp,active:e.active,slot:e.slot,behavior:e.behavior,spawnTime:e.spawnTime,hullScale:e.hullScale,kind:e.kind,depth:e.depth||0,patrol:e.patrol?{...e.patrol}:null});
+const copy=e=>({index:e.index,x:e.x,z:e.z,heading:e.heading||0,hp:e.hp,active:e.active,slot:e.slot,behavior:e.behavior,spawnTime:e.spawnTime,hullScale:e.hullScale,kind:e.kind,depth:e.depth||0,subMode:e.subMode,patrol:e.patrol?{...e.patrol}:null});
 /** `delay`: seconds the fleet sails on before the shell leaves (the reaction
  * margin); nothing is airborne during it. `targetable(e)` mirrors the live
  * contact filter. Returns the contact, the landing, the end the mark shows,
@@ -27,7 +28,8 @@ export function navalForecast(launch,enemies,{time=0,player={x:0,z:0},concurrent
    const centreX=navalPatrolCentre(e,fleet,{time:t,concurrent,fleetLength,drift},balance);
    stepNavalPatrol(e.patrol,dt,{obstacles:navalPatrolObstacles(e,fleet,player),shellAirborne:airborne,centreX,config:patrol},balance);
    e.x=e.patrol.x;e.z=e.patrol.z;e.heading=e.patrol.heading;
-   if(types[e.kind]?.submarine)e.depth=(t-e.spawnTime)%combat.submarineCycle>combat.submarineSurface?1:0;
+   // v24 submarines dive on their own cycle (naval-v24.mjs); v23 hulls keep this one.
+   if(types[e.kind]?.submarine)e.depth=e.subMode==='v24'?navalSubDepth(e,t-e.spawnTime,balance):(t-e.spawnTime)%combat.submarineCycle>combat.submarineSurface?1:0;
   }
  };
  for(let waited=0;waited<delay-1e-9;waited+=step)move(Math.min(step,delay-waited),false);

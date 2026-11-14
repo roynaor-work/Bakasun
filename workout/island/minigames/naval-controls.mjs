@@ -3,6 +3,7 @@ import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin
 import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-13';
 import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-13';
 import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-13';
+import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-13';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -82,7 +83,14 @@ export function createNavalInput(ctx,getModel,getView){
  pad.className='naval-aim-zone';pad.setAttribute('aria-hidden','true');
  cancel.type='button';cancel.className='naval-aim-cancel';cancel.hidden=true;cancel.setAttribute('aria-label',ctx.t?.('naval.aim.cancel')||'ביטול כיוון');cancel.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
  gauge.className='naval-aim-gauge';gauge.setAttribute('aria-hidden','true');gauge.innerHTML='<span class="naval-aim-arc"></span><span class="naval-aim-needle"></span>';
- controls.prepend?.(pad);controls.append?.(cancel,gauge,vulcan);
+ // 14/11/2026 v24 (?navalAim=v23 keeps v23): a Lock button next to Fire (a tap locks the most dangerous or nearest hull, the next tap the next one,
+ // a swipe on it moves the lock along the fleet) and, with the v24 submarine (?navalSub=v23 keeps v23), a Torpedo button while a submarine is out.
+ const aimV24=navalLockOn()&&navalAimV24(),subV24=navalSubV24(),v24c=navalV24Config(balance).aim,lockBtn=element('button'),torpBtn=element('button');
+ lockBtn.type='button';lockBtn.className='naval-lock-btn';lockBtn.hidden=!aimV24;lockBtn.setAttribute('aria-label','נעילה על מטרה');
+ lockBtn.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M24 5v7M24 36v7M5 24h7M36 24h7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><rect x="18" y="23" width="12" height="9" rx="2" fill="currentColor"/><path d="M20.5 23v-3a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+ torpBtn.type='button';torpBtn.className='naval-torpedo-btn';torpBtn.hidden=true;torpBtn.setAttribute('aria-label','טורפדו נגד צוללת');
+ torpBtn.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 24c0-3 3-5 7-5h17l6 5-6 5H15c-4 0-7-2-7-5z" fill="currentColor"/><path d="M38 19l4-4M38 29l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="9" cy="34" r="1.8" fill="currentColor"/><circle cx="15" cy="37" r="1.3" fill="currentColor"/><circle cx="5" cy="38" r="1.1" fill="currentColor"/></svg><span class="naval-torpedo-count">0</span>';
+ controls.prepend?.(pad);controls.append?.(cancel,gauge,vulcan,lockBtn,torpBtn);
  let side=1;const applyHand=()=>{const right=navalHanded(balance);side=right?1:-1;controls.dataset.movementSide=right?'left':'right';controls.dataset.actionSide=right?'right':'left';controls.classList?.toggle('left-handed',!right);return right;};applyHand();
  fire?.setAttribute?.('aria-describedby','naval-weapon-hint');
  let gesture=null,keyboard=null,queue=[],pendingSelection=null,keyboardClick=false,sky=null;
@@ -90,14 +98,14 @@ export function createNavalInput(ctx,getModel,getView){
  // that travels more than `movePixels` is a drag (steering, aiming) and never locks. On the aim pad a press that starts on a hull waits
  // before it becomes an aim: a drag starts the aim from the first point, a quick tap stays v22's quick shot. While a hull is locked the
  // turret follows the lock, so a hold on Fire only fires (release on the X still cancels). `?navalLock=0` restores v22.
- const lockOn=navalLockOn(),lc=navalLockConfig(balance);let press=null,lockEvent=null;
+ const lockOn=navalLockOn(),lc=navalLockConfig(balance);let press=null,lockEvent=null,lockTapEvent=null,lockSmartEvent=false,lockCycleEvent=0,torpedoEvent=false,lockSwipe=null;
  const onButton=t=>Boolean(t?.closest?.('button,[data-game-control],.naval-weapon-picker'));
  const pickAt=(x,y)=>{const m=getModel();if(!m)return null;const r=canvas.getBoundingClientRect();return navalLockPick(m.enemies,(px,pz,py)=>project(m,px,pz,py),{x:x-r.left,y:y-r.top},r.width,r.height,lc,balance);};
  const buzz=()=>{try{if(globalThis.localStorage?.getItem('island.naval.vibration')==='off')return;globalThis.navigator?.vibrate?.(22);}catch{}};
  const project=(m,x,z,y=0)=>getView()?.projectTarget(x,z,y)||m.screenPoint(x,z,y);
  const choose=point=>{const m=getModel(),r=canvas.getBoundingClientRect();return m&&navalVisibleTarget(m,(x,z,y)=>project(m,x,z,y),r.width,r.height,point,m.selectedTargetIndex);};
  const show=held=>{controls.dataset.aiming=String(held);cancel.hidden=!held;};
- const reset=()=>{gesture=keyboard=sky=null;queue=[];pendingSelection=null;keyboardClick=false;press=null;lockEvent=null;getModel()?.cancelAim?.();show(false);controls.dataset.sky='false';controls.style?.removeProperty?.('--naval-power');};
+ const reset=()=>{gesture=keyboard=sky=null;queue=[];pendingSelection=null;keyboardClick=false;press=null;lockEvent=null;lockTapEvent=null;lockSmartEvent=false;lockCycleEvent=0;torpedoEvent=false;lockSwipe=null;getModel()?.cancelAim?.();show(false);controls.dataset.sky='false';controls.style?.removeProperty?.('--naval-power');};
  const reachConfig={...balance,ballistics:{...(balance.ballistics||{}),minElevation:navalReachRange(balance).min}};
  const startState=()=>{const m=getModel(),t=m?.turret||{yaw:0,elevation:14,power:1};return {yaw:t.yaw,elevation:navalReachOf(t,balance,m?.ammoIndex),time:m?.time??0};};
  const startPixels=c.gain?.startPixels??2;
@@ -122,12 +130,27 @@ export function createNavalInput(ctx,getModel,getView){
   // A deferred pad press becomes the v22 gesture from its first point and its first moment (so a tap or a hold reads as it did in v22).
   const resume=p=>{begin(p.deferred);if(gesture?.id===p.id)gesture.start.time=p.t0;};
   window.addEventListener('pointermove',e=>{if(!press||press.id!==e.pointerId||press.done)return;if(Math.hypot(e.clientX-press.x,e.clientY-press.y)>lc.movePixels){const p=press;press=null;if(p.deferred)resume(p);}},capture);
-  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(!press||press.id!==e.pointerId)return;const p=press;press=null;if(!p.done&&p.deferred&&type==='pointerup')resume(p);},capture);
+  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(!press||press.id!==e.pointerId)return;const p=press;press=null;
+   // v24: a short tap on a hull locks it (a tap on the locked hull fires); no quick shot from that tap.
+   if(aimV24&&!p.done&&type==='pointerup'&&((getModel()?.time??0)-p.t0)<=v24c.tapSeconds){lockTapEvent=p.index;buzz();return;}
+   if(!p.done&&p.deferred&&type==='pointerup')resume(p);},capture);
  }
  // Sky crosshair: starts where the cannon points, at the default pitch; sideways = the same fine/spin turn as the cannon, up/down = pitch.
  const DEG=Math.PI/180,settleSky=(g,x,y,t)=>{g.dx=x-g.x;g.dy=y-g.y;g.moved=Math.max(g.moved,Math.hypot(g.dx,g.dy));g.lastX=x;g.lastY=y;g.lastT=t??performance.now();g.aim={yaw:g.start.yaw+navalSpinFine(g.dx,balance)+(g.spin||0),pitch:Math.max(vc.pitchMin*DEG,Math.min(vc.pitchMax*DEG,g.start.pitch-g.dy*vc.pitchPerPx*DEG))};};
  const beginSky=e=>{if(gesture||sky||e.button>0)return;const m=getModel();if(!m||m.result)return;e.preventDefault?.();try{vulcan.setPointerCapture?.(e.pointerId);}catch{}const start={yaw:m.turret?.yaw||0,pitch:vc.defaultPitch*DEG};sky={id:e.pointerId,x:e.clientX,y:e.clientY,dx:0,dy:0,moved:0,start,aim:{...start},spin:0,lastT:e.timeStamp};controls.dataset.sky='true';};
  vulcan.addEventListener('pointerdown',beginSky,options);
+ if(aimV24){
+  lockBtn.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault?.();try{lockBtn.setPointerCapture?.(e.pointerId);}catch{}lockSwipe={id:e.pointerId,x:e.clientX,dx:0};},options);
+  lockBtn.addEventListener('pointermove',e=>{if(lockSwipe?.id===e.pointerId)lockSwipe.dx=e.clientX-lockSwipe.x;},options);
+  // The swipe is read from the last move as well as from the lift (a browser that turns a sideways drag into a cancel still swipes);
+  // a cancel without a swipe does nothing. The window listener catches a lift that lands off the button.
+  const endLock=(e,type)=>{if(lockSwipe?.id!==e.pointerId)return;const g=lockSwipe;lockSwipe=null;const dx=Math.abs(g.dx)>Math.abs(Number.isFinite(e.clientX)?e.clientX-g.x:0)?g.dx:(Number.isFinite(e.clientX)?e.clientX-g.x:g.dx);
+   if(Math.abs(dx)>=v24c.swipePixels)lockCycleEvent=dx>0?1:-1;else if(type==='pointerup')lockSmartEvent=true;else return;buzz();};
+  for(const type of ['pointerup','pointercancel'])lockBtn.addEventListener(type,e=>endLock(e,type),options);
+  window.addEventListener('pointermove',e=>{if(lockSwipe?.id===e.pointerId)lockSwipe.dx=e.clientX-lockSwipe.x;},{signal:abort.signal,capture:true});
+  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>endLock(e,type),{signal:abort.signal,capture:true});
+ }
+ if(subV24)torpBtn.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault?.();torpedoEvent=true;buzz();},options);
  window.addEventListener('pointermove',e=>{if(sky?.id===e.pointerId)settleSky(sky,e.clientX,e.clientY,e.timeStamp);},options);
  // Capture phase: the pointer ends on the captured Vulcan button, and a button-level handler in the shell stops the bubble (the fire gesture ends over the pad, so it never met this).
  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{if(sky?.id===e.pointerId){sky=null;controls.dataset.sky='false';}},{signal:abort.signal,capture:true});
@@ -148,7 +171,7 @@ export function createNavalInput(ctx,getModel,getView){
  fire.addEventListener('click',e=>{const valid=keyboardClick&&e.detail===0&&!['touch','mouse','pen'].includes(e.pointerType);keyboardClick=false;if(valid)queue.push({type:'quick'});},options);
  window.addEventListener('pointerdown',()=>{keyboardClick=false;},options);
  window.addEventListener('blur',reset,options);document.addEventListener('visibilitychange',reset,options);
- return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();vulcan.remove();controls.classList?.remove('left-handed');delete controls.dataset.sky;delete controls.dataset.air;delete controls.dataset.ammoLevel;delete controls.dataset.lock;},sample(input){
+ return {reset,applyHand,dispose(){reset();abort.abort();pad.remove();cancel.remove();gauge.remove();vulcan.remove();lockBtn.remove();torpBtn.remove();delete controls.dataset.torpedo;controls.classList?.remove('left-handed');delete controls.dataset.sky;delete controls.dataset.air;delete controls.dataset.ammoLevel;delete controls.dataset.lock;},sample(input){
    const m=getModel(),g=gesture||keyboard,event=queue.shift();
    // Spin mode: while the thumb is held out past the dead band the turret keeps turning, one step per model frame (model time, so pauses add nothing).
    if(gesture&&gesture.engaged&&navalAimSpin()&&m){const now=m.time??0;if(Number.isFinite(gesture.spinT))gesture.spin=navalSpinStep(gesture.spin,gesture.dx,now-gesture.spinT,balance);gesture.spinT=now;gesture.aim={...gesture.aim,yaw:gesture.start.yaw+navalSpinFine(gesture.dx,balance)+(gesture.spin||0)};(gesture.hist||(gesture.hist=[])).push({t:performance.now(),yaw:gesture.aim.yaw,elevation:gesture.aim.elevation});if(gesture.hist.length>40)gesture.hist.shift();}
@@ -164,6 +187,8 @@ export function createNavalInput(ctx,getModel,getView){
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s&&!locked){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    if(lockOn){out.lockTarget=lockEvent;out.lockPress=lockPressOut;lockEvent=null;controls.dataset.lock=m?.homing?.status||'none';}
+   if(aimV24){out.lockTap=lockTapEvent;out.lockSmart=lockSmartEvent;out.lockCycle=lockCycleEvent;lockTapEvent=null;lockSmartEvent=false;lockCycleEvent=0;lockBtn.dataset.locked=String(Boolean(m?.homing));lockBtn.dataset.status=m?.homing?.status||'none';}
+   if(subV24){const subs=m?.subV24?(m.enemies||[]).filter(e=>e.subMode==='v24'&&e.active&&e.hp>0):[];torpBtn.hidden=!subs.length;controls.dataset.torpedo=String(subs.length>0);torpBtn.dataset.dive=String(subs.some(e=>e.depth>0));torpBtn.dataset.empty=String(!(m?.torpedoes>0));const count=torpBtn.querySelector?.('.naval-torpedo-count');if(count&&count.textContent!==String(m?.torpedoes??0))count.textContent=String(m?.torpedoes??0);out.torpedoShot=torpedoEvent;torpedoEvent=false;}
    if(manualAir){out.skyMode='manual';out.skyHeld=Boolean(sky);if(sky){out.skyYaw=sky.aim.yaw;out.skyPitch=sky.aim.pitch;}}
    if(m?.ammoState)controls.dataset.ammoLevel=m.ammoState.level;
    out.aimSide=side;pendingSelection=null;

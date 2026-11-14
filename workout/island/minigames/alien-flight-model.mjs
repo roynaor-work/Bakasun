@@ -8,6 +8,7 @@ import {alienV14Enabled,gearFactor,heatStep} from './alien-v14.mjs';
 import {alienV15Enabled,v15Config,fireGate,fireInterval,shotDamage,createSpawnCap,v15RateCap,convergeVx} from './alien-v15.mjs?v=island-v2-20261107-13';
 import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=island-v2-20261107-13';
 import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-13';
+import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-13';
 import {alienV11Enabled,blastRule} from './alien-v11.mjs';
 import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
@@ -20,11 +21,14 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  if(v15)settings.seconds=Math.round(settings.seconds*v15.secondsMult);
  // v23 (13/11/2026): two weapons on two buttons (steady cannon on input.firing, Vulcan on input.vulcan). Built on v15; ?alienFire=v15 keeps the v22 gate.
  const v23=v15&&alienFireV23Enabled()?v23Config(balance):null;
+ // v24 (14/11/2026): Vulcan magazines drop from downed aliens; flying into one empties the gauge and keeps the barrels cold a few seconds. ?alienRefill=0 keeps v23.
+ const refillCfg=v23&&alienRefillEnabled()?v24Config(balance).refill:null;
  const rateK=v12?(v14?v14.rateMult:v12.rateMult):1,dmgK=v12?(v14?v14.rateMult*v14.damageTrim:v12.rateMult*v12.damageTrim):1;
  if(v12)settings.shotSeconds*=rateK;
  const hpGear14=v14?Math.pow(gearFactor({rateCap:v15?v15RateCap(v15):settings.shotSeconds/v14.minInterval,equipment,permanentUpgrades,hangar,power,rankRate:balance.hangar.rankRate,stacks:{damage:alienStack(campaign,'damage',permanentUpgrades.damage||0),rapid:alienStack(campaign,'rapid',permanentUpgrades.rapid||0),laser:alienStack(campaign,'laser',permanentUpgrades.laser||0)}}),v15?v15.gearExp:v14.gearExp):1;
  let heat=0,coolLeft=0,overheats=0,shotsBurst=0,gate={heat:0,cool:0,spent:false},fireMode='idle',burstShots=0,steadyShots=0;const spawnCap=v15?createSpawnCap(v15):null;
  let vgate={heat:0,lock:0,rest:0},vulcanTime=0,vulcanSide=1,shotMode='normal',regularOn=false,vulcanOn=false,regularFired=0,vulcanFired=0;
+ const refills=[];let refillCold=0,refillsDropped=0,refillsCollected=0,overheatsSinceRefill=0,lastRefillDropAt=-Infinity,lastVulcanAt=-Infinity,refillSerial=0,refillPicked=null;
  const behavior={motion:'drift',shoots:true,shield:0,warningSeconds:.7,bulletCap:12,fireCadence:settings.boltSeconds,diveEverySeconds:balance.tactics.diveEverySeconds,...balance.stageBehaviors[level-1]};
  if(v9)behavior.fireCadence*=v9.boltSecondsMult||1;
  if(v10&&v10.earlyBolt[level-1])behavior.fireCadence*=v10.earlyBolt[level-1];
@@ -83,6 +87,11 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   if(invulnerable>0)return false;playerHits++;if(powerup===3){signal('shield-hit',x,y,0,.35);return false;}
   lives--;invulnerable=balance.invulnerableSeconds;burst(player.x,player.y);signal('player-hit',player.x,player.y,lives,1.1);sound('hit');return true;
  }
+ /** v24: a Vulcan magazine falls from (x,y) when the drop rule allows it (big ship, boss phase, or a kill after the Vulcan was used). */
+ function dropRefill(x,y,info){
+  if(!refillCfg||!refillShouldDrop({...info,time,lastDropAt:lastRefillDropAt,lastVulcanAt,heat:vgate.heat,locked:vgate.lock>0,overheatsSince:overheatsSinceRefill,onScreen:refills.length,random},refillCfg))return false;
+  refills.push({id:++refillSerial,x:clamp(x,20,config.width-20),y,vy:refillCfg.speed,born:time});lastRefillDropAt=time;refillsDropped++;overheatsSinceRefill=0;return true;
+ }
  function dropBonus(){if(!pendingBonuses||pickups.length)return;const rotation=balance.pickups.rotation,d=pp.take(bonusX,bonusY,0,balance.pickups.speed,0,rotation[dropSerial%rotation.length]);if(d){pendingBonuses--;dropSerial++;sinceBonusKills=0;sinceBonusTime=0;pickups.push(d);}}
  function destroy(index,split=true,missile=false){
   const a=aliens[index],{x,y}=a,type=balance.enemyTypes[a.kind],children=split&&!a.child&&!a.boss?(type.children||0):0;
@@ -91,6 +100,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   else if(!missile)sound('explosion');
   if(a.reward){combo=comboTime>0?combo+1:1;comboTime=campaign.comboSeconds;if(combo%campaign.comboMilestone===0){celebration=campaign.celebrationSeconds;score+=combo*campaign.comboBonus;}
    const kind=a.boss||type.loot==='crystal'?1:type.loot==='coin'?0:-1;if(kind>=0){const d=lp.take(x,y,0,campaign.lootSpeed,0,kind);if(d)loot.push(d);}}
+  if(refillCfg)dropRefill(x,y,{kind:a.kind,boss:a.boss,child:a.child});
   if(kills%Math.round(settings.killsPerBonus*(v9?.bonusKillsMult||1))===0||(v11&&!pendingBonuses&&!pickups.length&&(sinceBonusKills>=v11.pityKills||sinceBonusTime>=v11.pitySeconds))){pendingBonuses++;bonusX=x;bonusY=y;}releaseAt(aliens,index,ap);
   for(let i=0;i<children;i++)spawn(clamp(x+(i-.5)*30,25,config.width-25),y,0,true);dropBonus();
  }
@@ -143,8 +153,9 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   if(!vgate.firing)vulcanTime=Math.max(vulcanTime,0);
   for(let rounds=0;vgate.firing&&vulcanTime<=0&&rounds<3;rounds++){
    if(wantRegular&&shotTime<=0){v23Round('ride');shotTime+=interval();}else v23Round('vulcan');
-   vgate=vulcanShot(vgate,v23);vulcanTime+=v23.vulcanInterval;
-   if(vgate.lock>0){overheats++;vulcanTime=Math.max(vulcanTime,0);break;}
+   // v24: a fresh magazine keeps the barrels cold (no heat) for refillCold seconds.
+   lastVulcanAt=time;if(!(refillCold>0))vgate=vulcanShot(vgate,v23);vulcanTime+=v23.vulcanInterval;
+   if(vgate.lock>0){overheats++;overheatsSinceRefill++;if(refillCfg)sound('overheat');vulcanTime=Math.max(vulcanTime,0);break;}
   }
   if(!vgate.firing)for(let rounds=0;wantRegular&&shotTime<=0&&rounds<3;rounds++){v23Round('regular');shotTime+=interval();}
   regularOn=wantRegular;vulcanOn=vgate.firing;heat=vgate.heat;coolLeft=vgate.lock;
@@ -173,11 +184,12 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  formation();
  const model={settings,behavior,player,aliens,shots,bolts,sparks,pickups,nova,equipment,upgrades,choices,wings,loot,feedback,telegraphs,chooseUpgrade,resetInput(){novaPressed=false;},
   get maxLives(){return maxLives;},get choosing(){return choosing;},get combo(){return combo;},get celebration(){return celebration;},get coins(){return coins;},get crystals(){return crystals;},get pattern(){return pattern();},get remaining(){return Math.max(0,settings.seconds-time);},statusId:'minigame.alienStatus',
-  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get v23(){return Boolean(v23);},get vulcanHeat(){return vgate.heat;},get vulcanLocked(){return Boolean(v23&&vgate.lock>0);},get vulcanLockLeft(){return vgate.lock;},get vulcanOn(){return vulcanOn;},get regularOn(){return regularOn;},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
+  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get v23(){return Boolean(v23);},get refillOn(){return Boolean(refillCfg);},refills,get refillCold(){return refillCold;},get refillColdMax(){return refillCfg?refillCfg.coldSeconds:0;},get refillPicked(){return refillPicked;},get vulcanHeat(){return vgate.heat;},get vulcanLocked(){return Boolean(v23&&vgate.lock>0);},get vulcanLockLeft(){return vgate.lock;},get vulcanOn(){return vulcanOn;},get regularOn(){return regularOn;},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
   statusValues(){Object.assign(status,{score,lives,wave,nova:novaCharges});return status;},
   update(dt,input=EMPTY){
    if(result||dt<=0||choosing)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;formationAge+=dt;feedback.life=Math.max(0,feedback.life-dt);invulnerable=Math.max(0,invulnerable-dt);nova.life=Math.max(0,nova.life-dt);comboTime=Math.max(0,comboTime-dt);if(!comboTime)combo=0;celebration=Math.max(0,celebration-dt);
    sinceBonusTime+=dt;blastCool=Math.max(0,blastCool-dt);for(let i=blasts.length-1;i>=0;i--){blasts[i].t+=dt;if(blasts[i].t>=blasts[i].life)blasts.splice(i,1);}
+   if(refillCfg)refillCold=Math.max(0,refillCold-dt);
    wingTime=Math.max(0,wingTime-dt);spreadTime=Math.max(0,spreadTime-dt);spreadCooldown=Math.max(0,spreadCooldown-dt);powerTime=Math.max(0,powerTime-dt);if(!powerTime)powerup=-1;
    if(move)alienMoveStep(player,input,dt,balance,config.width,move);else moveAlienPlayer(player,input,dt,balance,config.width);
    for(let i=0;i<wings.length;i++){const w=wings[i];w.active=(v10?wingTime>0:(wingTime>0||powerup===4||upgrades.wing>0||(equipment.weapon||0)>0))&&i<Math.min(campaign.maxWings,wingRank());w.x=clamp(player.x+w.side*campaign.wingOffset,campaign.wingRadius,config.width-campaign.wingRadius);w.y=player.y-10+Math.sin(time*3+i)*3;}
@@ -203,7 +215,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    if(!aliens.length){if(time>=settings.seconds){finish(wave>=settings.waves||completion==='survival'?'win':'lose');return;}nextWave+=dt;if(nextWave>=(v9?.wavePauseSeconds??balance.wavePauseSeconds)){while(bolts.length)releaseAt(bolts,bolts.length-1,bp);if(wave>=settings.waves){finish('win');return;}if(offerUpgrade())return;wave++;formation();}return;}
    for(const a of aliens){a.age+=dt;a.hitTime=Math.max(0,a.hitTime-dt);a.shieldCool=Math.max(0,(a.shieldCool||0)-dt);a.sparkCool=Math.max(0,(a.sparkCool||0)-dt);a.entry=Math.max(0,a.entry-dt);const type=balance.enemyTypes[a.kind];bossGuard(a);
     const healthPhase=a.hp<=a.maxHp/3?3:a.hp<=a.maxHp*2/3?2:1,phaseStep=(balance.balance?.minBossSeconds||0)/3;
-    const phase=a.boss?Math.min(healthPhase,phaseStep?1+Math.min(2,Math.floor(Math.max(0,a.age-2)/phaseStep)):3):1;if(phase!==a.bossPhase){a.bossPhase=phase;a.tellTime=0;a.attackTime=1.1;signal('boss-phase',a.x,a.y,phase,1.2);}
+    const phase=a.boss?Math.min(healthPhase,phaseStep?1+Math.min(2,Math.floor(Math.max(0,a.age-2)/phaseStep)):3):1;if(phase!==a.bossPhase){a.bossPhase=phase;a.tellTime=0;a.attackTime=1.1;signal('boss-phase',a.x,a.y,phase,1.2);if(refillCfg&&phase>1)dropRefill(a.x,a.y+a.radius,{phase:true});}
     const moving=behavior.motion!=='static',speed=behavior.motion==='surge'?1.7:1;
     const sway=behavior.motion==='zigzag'?Math.asin(Math.sin(a.age*.7))*12:Math.sin(a.age*(behavior.motion==='surge'?1.1:.65))*balance.formation.sway;
     const motionBlend=Math.min(1,a.age/.6);
@@ -233,6 +245,9 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=pickups.length-1;i>=0;i--){const d=pickups[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
     if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){const sec=v11?v11.bonusSeconds:balance.spread.seconds;spreadTime=powerMax=sec;spreadCooldown=sec+balance.spread.cooldownSeconds;}}else if(v10&&d.kind===4){wingTime=wingMax=v11?v11.bonusSeconds:v10.wingSeconds;}else{powerup=d.kind;powerTime=powerMax=v11?v11.bonusSeconds:balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30)releaseAt(pickups,i,pp);}
    dropBonus();
+   // v24 Vulcan magazines: fall and home on the ship like a bonus; the pick-up empties the gauge, ends a lock and keeps the barrels cold.
+   for(let i=refills.length-1;i>=0;i--){const d=refills[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
+    if(dist<refillCfg.radius+balance.playerRadius){const r=refillApply(vgate,refillCfg);vgate={heat:r.gate.heat,lock:r.gate.lock,rest:r.gate.rest};refillCold=r.cold;heat=0;coolLeft=0;refillsCollected++;refillPicked={at:time,x:player.x,y:player.y,id:d.id};sound('refill');signal('refill',player.x,player.y,refillCold,1.6);refills.splice(i,1);}else if(d.y>config.height+30)refills.splice(i,1);}
    for(let i=loot.length-1;i>=0;i--){const d=loot[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}if(dist<balance.pickups.radius+balance.playerRadius){sound('bonus');if(d.kind)crystals++;else coins++;score+=d.kind?campaign.crystalPoints:campaign.coinPoints;releaseAt(loot,i,lp);}else if(d.y>config.height)releaseAt(loot,i,lp);}
    for(let i=bolts.length-1;i>=0;i--){const b=bolts[i],x0=b.x,y0=b.y;b.x+=(b.vx||0)*dt;b.y+=(b.vy||settings.boltSpeed)*dt;if(segmentContact(x0,y0,b.x,b.y,player.x,player.y,balance.playerRadius*.62+balance.boltRadius*.55,aspect())!==null){releaseAt(bolts,i,bp);damagePlayer(player.x,player.y);}else if(b.y>config.height+20||b.x<-40||b.x>config.width+40)releaseAt(bolts,i,bp);}
    for(let i=sparks.length-1;i>=0;i--){const s=sparks[i];s.x+=s.vx*dt;s.y+=s.vy*dt;s.life-=dt;if(s.life<=0)releaseAt(sparks,i,fp);}
@@ -240,6 +255,6 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(!a.boss&&a.diveAge<0&&a.y-a.radius>player.y+20){releaseAt(aliens,i,ap);damagePlayer(player.x,player.y);}}
    if(lives<=0)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');else if(time>=settings.seconds)finish(completion==='survival'&&!settings.boss?'win':'lose');
   },
-  snapshot(){return{...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
+  snapshot(){return{...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),...(refillCfg?{refill:{dropped:refillsDropped,collected:refillsCollected,cold:refillCold,onScreen:refills.length,overheatsSince:overheatsSinceRefill,picked:refillPicked&&{...refillPicked}},refills:refills.map(d=>({...d}))}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
  };return model;
 }

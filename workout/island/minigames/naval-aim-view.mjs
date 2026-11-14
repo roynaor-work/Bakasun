@@ -2,6 +2,7 @@ import * as T from '../vendor/three.module.js';
 import {navalWorldPoint} from './naval-camera.mjs?v=island-v2-20261107-13';
 import {navalBallisticPoint} from './naval-ballistics.mjs?v=island-v2-20261107-13';
 import {navalMarkKind,navalArcColor} from './naval-marks.mjs?v=island-v2-20261107-13';
+import {navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-13';
 
 /** The archery-style arc, drawn from the model's own prediction: a continuous
  * camera-facing ribbon with a dark outline, stopping at the first predicted
@@ -23,7 +24,7 @@ export function createNavalAimArc(scene,model,balance){
  const moverGeometry=new T.SphereGeometry(1,8,6),moverMaterial=new T.MeshBasicMaterial({color:'#ffffff',transparent:true,opacity:.95,depthWrite:false,toneMapped:false}),movers=new T.InstancedMesh(moverGeometry,moverMaterial,Math.max(1,look.movers??3));
  movers.count=0;movers.frustumCulled=false;movers.instanceMatrix.setUsage(T.DynamicDrawUsage);movers.renderOrder=7;movers.userData.noReflect=true;scene.add(movers);
  const points=Array.from({length:samples},()=>new T.Vector3()),view=new T.Vector3(),tangent=new T.Vector3(),side=new T.Vector3(),toCamera=new T.Vector3(),dummy=new T.Object3D();
- let disposed=false,shown=0,visible=false,kind='water';
+ let disposed=false,shown=0,visible=false,kind='water',color='';
  const world=p=>navalWorldPoint(p.x,p.z,balance,(p.h||0)*r.worldScale+.05);
  // World size of n screen pixels at a point (390 is the logical canvas height).
  const pixels=(camera,point,n)=>{view.copy(point).applyMatrix4(camera.matrixWorldInverse);return n*2*Math.max(.5,-view.z)*Math.tan(camera.fov*Math.PI/360)/390;};
@@ -38,7 +39,8 @@ export function createNavalAimArc(scene,model,balance){
   update(camera){
    if(disposed)return;const p=model.prediction,active=(model.aiming||model.homing)&&p&&!model.result;
    shown=0;visible=false;outline.mesh.visible=core.mesh.visible=false;movers.count=0;if(!active)return;
-   const now=navalMarkKind(p);if(now!==kind){kind=now;core.material.color.set(navalArcColor(kind,look));}
+   // v24 (?navalAim=v23 keeps the mark colours): the arc is green when the shot will hit, amber while the lock turns, orange for a miss.
+   kind=navalMarkKind(p);const want=model.aimV24&&model.aimHint?navalChanceColor(model.aimHint.chance):navalArcColor(kind,look);if(want!==color){color=want;core.material.color.set(want);}
    // Sample the shared ballistic launch up to the first contact (or the landing).
    const end=p.end?.t??p.flight;let count=samples;
    if(p.launch)for(let i=0;i<samples;i++){const q=navalBallisticPoint(p.launch,end*i/(samples-1)),w=world(q);points[i].set(w.x,w.y,w.z);}
