@@ -771,6 +771,14 @@
     },
     "geometry": {
       "report": "verification/geometry.json"
+    },
+    "repository": {
+      "report": "verification/repository-checks.json",
+      "fullRunPass": 4017,
+      "fullRunSkipped": 64,
+      "environmentFailureResolvedByTargetedRerun": true,
+      "retryTestsPass": 5,
+      "remainingFailures": 0
     }
   },
   "preview": {
