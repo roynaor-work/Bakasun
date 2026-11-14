@@ -1,0 +1,191 @@
+{
+  "textures": [
+    {
+      "id": "cannon-regular",
+      "dimensions": [
+        512,
+        128
+      ],
+      "uniqueFrames": 4,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "vulcan-burst",
+      "dimensions": [
+        1024,
+        128
+      ],
+      "uniqueFrames": 8,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "heat-bar",
+      "dimensions": [
+        256,
+        32
+      ],
+      "uniqueFrames": 1,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "heat-icon",
+      "dimensions": [
+        32,
+        32
+      ],
+      "uniqueFrames": 1,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "overheat-shutdown",
+      "dimensions": [
+        1536,
+        32
+      ],
+      "uniqueFrames": 6,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "alien-impact",
+      "dimensions": [
+        768,
+        128
+      ],
+      "uniqueFrames": 6,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "alien-explosion",
+      "dimensions": [
+        512,
+        512
+      ],
+      "uniqueFrames": 8,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "boss-explosion",
+      "dimensions": [
+        1024,
+        1024
+      ],
+      "uniqueFrames": 64,
+      "edgeAlpha": 0
+    },
+    {
+      "id": "shield-ring",
+      "dimensions": [
+        1024,
+        128
+      ],
+      "uniqueFrames": 8,
+      "edgeAlpha": 0,
+      "shieldInteriorAlpha": 0
+    }
+  ],
+  "browser": [
+    {
+      "name": "desktop",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "pageErrors": [],
+      "externalRequests": [],
+      "heatCooldown": "passed",
+      "frameScrubbing": "passed",
+      "audioFormats": "ogg and mp3 playback passed",
+      "decoded": [
+        {
+          "path": "audio/vulcan-burst.ogg",
+          "duration": 0.49997732426303854,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/vulcan-burst.mp3",
+          "duration": 0.49997732426303854,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/overheat.ogg",
+          "duration": 0.4,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/overheat.mp3",
+          "duration": 0.4,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/boss-explosion.ogg",
+          "duration": 1.5,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/boss-explosion.mp3",
+          "duration": 1.5,
+          "channels": 1,
+          "sampleRate": 44100
+        }
+      ]
+    },
+    {
+      "name": "mobile",
+      "viewport": [
+        390,
+        844
+      ],
+      "pageErrors": [],
+      "externalRequests": [],
+      "heatCooldown": "passed",
+      "frameScrubbing": "passed",
+      "audioFormats": "ogg and mp3 playback passed",
+      "decoded": [
+        {
+          "path": "audio/vulcan-burst.ogg",
+          "duration": 0.49997732426303854,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/vulcan-burst.mp3",
+          "duration": 0.49997732426303854,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/overheat.ogg",
+          "duration": 0.4,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/overheat.mp3",
+          "duration": 0.4,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/boss-explosion.ogg",
+          "duration": 1.5,
+          "channels": 1,
+          "sampleRate": 44100
+        },
+        {
+          "path": "audio/boss-explosion.mp3",
+          "duration": 1.5,
+          "channels": 1,
+          "sampleRate": 44100
+        }
+      ]
+    }
+  ],
+  "reducedMotion": "automatic gallery paused",
+  "localFileNavigation": "ERR_BLOCKED_BY_ADMINISTRATOR in managed Chromium; HTTP localhost verified",
+  "validatedAt": "2026-11-13T12:48:56.827Z"
+}

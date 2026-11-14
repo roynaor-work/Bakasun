@@ -1,0 +1,1099 @@
+{
+  "schemaVersion": 1,
+  "id": "alien-fx-v1",
+  "created": "2026-11-13",
+  "repository": "roynaor-work/Bakasun",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "license": "CC0-1.0",
+  "runtimeIntegration": "not-connected",
+  "coordinates": "pixels, origin top-left, row-major, no rotation or trimming at runtime",
+  "sampling": {
+    "filter": "linear",
+    "mipmaps": false,
+    "wrap": "clamp-to-edge",
+    "colorSpace": "sRGB",
+    "premultipliedAlpha": false
+  },
+  "textures": [
+    {
+      "id": "cannon-regular",
+      "path": "sprites/cannon-regular.png",
+      "width": 512,
+      "height": 128,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 4,
+      "rows": 1,
+      "frameCount": 4,
+      "frameDurationsMs": [
+        45,
+        45,
+        45,
+        45
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.92
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "direction": "up",
+      "loop": false
+    },
+    {
+      "id": "vulcan-burst",
+      "path": "sprites/vulcan-burst.png",
+      "width": 1024,
+      "height": 128,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 1,
+      "frameCount": 8,
+      "frameDurationsMs": [
+        62.5,
+        62.5,
+        62.5,
+        62.5,
+        62.5,
+        62.5,
+        62.5,
+        62.5
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.92
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "direction": "up",
+      "loop": false
+    },
+    {
+      "id": "heat-bar",
+      "path": "sprites/heat-bar.png",
+      "width": 256,
+      "height": 32,
+      "frameWidth": 256,
+      "frameHeight": 32,
+      "columns": 1,
+      "rows": 1,
+      "frameCount": 1,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        }
+      ],
+      "frameDurationsMs": [
+        0
+      ],
+      "playback": "static",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0,
+        0
+      ],
+      "fillRect": {
+        "x": 38,
+        "y": 8,
+        "w": 208,
+        "h": 16
+      },
+      "iconRect": {
+        "x": 4,
+        "y": 3,
+        "w": 26,
+        "h": 26
+      },
+      "fillDirection": "left-to-right",
+      "thresholds": {
+        "green": 0,
+        "yellow": 0.5,
+        "red": 1
+      }
+    },
+    {
+      "id": "heat-icon",
+      "path": "sprites/heat-icon.png",
+      "width": 32,
+      "height": 32,
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "columns": 1,
+      "rows": 1,
+      "frameCount": 1,
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 32,
+          "h": 32
+        }
+      ],
+      "frameDurationsMs": [
+        0
+      ],
+      "playback": "static",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "overheat-shutdown",
+      "path": "sprites/overheat-shutdown.png",
+      "width": 1536,
+      "height": 32,
+      "frameWidth": 256,
+      "frameHeight": 32,
+      "columns": 6,
+      "rows": 1,
+      "frameCount": 6,
+      "frameDurationsMs": [
+        200,
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        },
+        {
+          "x": 1024,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        },
+        {
+          "x": 1280,
+          "y": 0,
+          "w": 256,
+          "h": 32
+        }
+      ],
+      "loop": false,
+      "flashPeaksPerSecond": 2.5
+    },
+    {
+      "id": "alien-impact",
+      "path": "sprites/alien-impact.png",
+      "width": 768,
+      "height": 128,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 6,
+      "rows": 1,
+      "frameCount": 6,
+      "frameDurationsMs": [
+        35,
+        40,
+        50,
+        65,
+        80,
+        90
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "loop": false
+    },
+    {
+      "id": "alien-explosion",
+      "path": "sprites/alien-explosion.png",
+      "width": 512,
+      "height": 512,
+      "frameWidth": 128,
+      "frameHeight": 256,
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "frameDurationsMs": [
+        45,
+        55,
+        65,
+        80,
+        90,
+        105,
+        120,
+        140
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 128,
+          "y": 256,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "w": 128,
+          "h": 256
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 128,
+          "h": 256
+        }
+      ],
+      "loop": false,
+      "artworkBounds": {
+        "x": 8,
+        "y": 78,
+        "w": 112,
+        "h": 100
+      }
+    },
+    {
+      "id": "boss-explosion",
+      "path": "sprites/boss-explosion.png",
+      "width": 1024,
+      "height": 1024,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 8,
+      "frameCount": 64,
+      "frameDurationsMs": [
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375,
+        23.4375
+      ],
+      "playback": "once",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 128,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 256,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 384,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 512,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 640,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 768,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 0,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 896,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "loop": false,
+      "shockwave": true
+    },
+    {
+      "id": "shield-ring",
+      "path": "sprites/shield-ring.png",
+      "width": 1024,
+      "height": 128,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 1,
+      "frameCount": 8,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "playback": "loop",
+      "alpha": "straight",
+      "blend": "source-over",
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 128,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 256,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 512,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 640,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 768,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        },
+        {
+          "x": 896,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      ],
+      "loop": true,
+      "interior": "transparent"
+    }
+  ],
+  "sounds": [
+    {
+      "id": "vulcan-burst",
+      "durationSeconds": 0.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/vulcan-burst.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16,
+          "truePeakDbtp": -2.49,
+          "decodedSamples": 24000,
+          "decodedDurationSeconds": 0.5
+        },
+        {
+          "path": "audio/vulcan-burst.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.03,
+          "truePeakDbtp": -2.75,
+          "decodedSamples": 24000,
+          "decodedDurationSeconds": 0.5
+        }
+      ]
+    },
+    {
+      "id": "overheat",
+      "durationSeconds": 0.4,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/overheat.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.01,
+          "truePeakDbtp": -3.34,
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4
+        },
+        {
+          "path": "audio/overheat.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -3.71,
+          "decodedSamples": 19200,
+          "decodedDurationSeconds": 0.4
+        }
+      ]
+    },
+    {
+      "id": "boss-explosion",
+      "durationSeconds": 1.5,
+      "sampleRate": 48000,
+      "channels": 1,
+      "targetLufs": -16,
+      "loop": false,
+      "variants": [
+        {
+          "path": "audio/boss-explosion.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -2.98,
+          "decodedSamples": 72000,
+          "decodedDurationSeconds": 1.5
+        },
+        {
+          "path": "audio/boss-explosion.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.03,
+          "truePeakDbtp": -3.63,
+          "decodedSamples": 72000,
+          "decodedDurationSeconds": 1.5
+        }
+      ]
+    }
+  ],
+  "heatMeter": {
+    "background": "#243e52",
+    "emptyFillRect": {
+      "x": 38,
+      "y": 8,
+      "w": 208,
+      "h": 16
+    },
+    "drawing": "Draw heat-bar once; cover the unfilled right part of fillRect with background. Preserve icon, frame and dividers.",
+    "overheat": "Play overheat-shutdown once at full heat; disable vulcan until game cooldown completes. Timing here is presentation only."
+  },
+  "documentation": [
+    "REPORT.md",
+    "LICENSES.md",
+    "source/PROMPTS.md"
+  ],
+  "inventory": "FILE-SIZES.csv",
+  "preview": "preview.html"
+}
