@@ -11,6 +11,7 @@ import {ROOM_FIRE_ANCHORS} from '../workout/island/minigames/fire-v24-anchors.mj
 import {V24_ASSETS,v24AssetFiles} from '../workout/island/minigames/fire-v24-scene.mjs';
 import {drawDoorMarker} from '../workout/island/minigames/fire-v24-flow.mjs';
 import {fireScenario} from '../workout/island/minigames/fire-campaign.mjs';
+import {gameResult} from '../workout/island/minigames/result.mjs';
 
 const root=new URL('../workout/island/',import.meta.url);
 const data=await loadData(root,async url=>({ok:true,json:async()=>JSON.parse(await readFile(url,'utf8'))}));
@@ -127,6 +128,11 @@ test('merged result: scores add up to the campaign cap, performance is the weigh
   const merged=mergeResults(street,inside,balance);
   assert.equal(merged.score,800);assert.ok(Math.abs(merged.performance-.8)<1e-9);assert.deepEqual(merged.summary,{out:4,rescued:3,water:30,rooms:2,insideSeconds:30,insideStars:3});assert.deepEqual(merged.certificate,{won:true});
   assert.equal(mergeResults({...street,score:900},inside,balance).score,balance.maximumScore);
+  // the engine's own star rule on the merged raw result (stage 3): full inside + a fair street = 3 stars, a slow inside drops a star
+  const ctx={level:3,engine:{data:{config:data.config}}};
+  assert.deepEqual(gameResult(merged,ctx,balance),{stars:3,outcome:'win',score:800,money:Math.floor(800/balance.pointsPerCoin)+balance.levels[2].winMoney});
+  assert.equal(gameResult(mergeResults(street,{...inside,performance:.4},balance),ctx,balance).stars,2);
+  assert.equal(gameResult(mergeResults({...street,performance:.2},{...inside,performance:.2},balance),ctx,balance).stars,1);
   const lost={outcome:'lose',score:10};assert.equal(mergeResults(lost,inside,balance),lost);assert.equal(mergeResults(street,null,balance),street);
   assert.equal(timeScore(10,50),1);assert.equal(timeScore(25,50),1);assert.ok(Math.abs(timeScore(37.5,50)-.5)<1e-9);assert.equal(timeScore(60,50),0);
   assert.equal(insideStars(1),3);assert.equal(insideStars(.5),2);assert.equal(insideStars(.1),1);
