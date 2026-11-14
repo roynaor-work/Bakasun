@@ -135,3 +135,9 @@
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side] .tennis-serve-needle{left:-8px;width:36px;height:6px}
 .game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side][data-idle=true] .tennis-serve-needle{visibility:hidden}
 @media(prefers-reduced-motion:reduce){.game-screen[data-game=tennis] .game-stage .tennis-serve-meter[data-place=side]{transition:none}}
+/* v25: the out sign (Codex sign-out.png background, live Hebrew text over the text area of the art) for 1.5 s, top centre under the score; and the
+   one-line hint while the child picks where to stand for the opponent's serve (?tennisOut=v24 / ?tennisReceive=0 never show them). */
+.game-screen[data-game=tennis] .tennis-out-sign{position:absolute;z-index:6;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:166px;height:60px;background-repeat:no-repeat;background-size:166px 166px;background-position:0 -53px;pointer-events:none}
+.game-screen[data-game=tennis] .tennis-out-sign bdi{position:absolute;left:18px;top:13px;width:91px;height:31px;display:grid;place-items:center;font:700 21px/1 system-ui,sans-serif;color:#f6efd8;direction:rtl;text-shadow:0 1px 2px #0008}
+.game-screen[data-game=tennis] .tennis-out-sign[hidden],.game-screen[data-game=tennis] .tennis-receive-hint[hidden]{display:none}
+.game-screen[data-game=tennis] .tennis-receive-hint{position:absolute;z-index:6;left:50%;bottom:calc(max(12px,env(safe-area-inset-bottom)) + 6px);transform:translateX(-50%);padding:6px 14px;border-radius:14px;background:#0d2a24d9;color:#f3ecd2;font:600 15px/1.2 system-ui,sans-serif;direction:rtl;white-space:nowrap;pointer-events:none;box-shadow:0 2px 8px #0006}

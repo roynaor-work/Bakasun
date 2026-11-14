@@ -39,7 +39,7 @@ export function predictLanding(ball, config) {
   const t = Math.max(0, (ball.vy + Math.sqrt(Math.max(0, ball.vy ** 2 + 2 * g * (ball.y - c.radius)))) / g);
   return { x: ball.x + ball.vx * t, z: ball.z + ball.vz * t, seconds: t };
 }
-export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false,bar=config.v9?.meter?.bar!==false,returnMeter=false,softDrop=false } = {}) {
+export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false,bar=config.v9?.meter?.bar!==false,returnMeter=false,softDrop=false,receiveChoice=false,stopDead=false } = {}) {
   // `returnMeter` (v15) stays off at the model level so the v9-v14 measurements and tests keep their meaning; the session turns it on from config.v9.returnMeter.enabled (?tennisReturn=v14 turns it off).
   stage = clamp(Math.trunc(Number(stage) || 1), 1, config.levels.length);
   seed = Number(seed) >>> 0;
@@ -57,6 +57,14 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
   // ball as a lob, steps back, then sprints in and arrives just after the second bounce, while the dead ball keeps bouncing. The opponent's own drop
   // floats the same way, so the child gets the same time to run in.
   const SD=Boolean(V9&&softDrop&&config.v9.softDrop),sdc=config.v9.softDrop||{};let lastKidDrop=false;
+  // v25 (Roy, 14/11/2026) - both off at the model level like `returnMeter` and `softDrop`, the session turns them on:
+  //  receiveChoice (?tennisReceive=0 off): before the opponent's serve the child picks where to stand on the baseline of the receiving half, one of three
+  //   spots (left, middle, right on the screen; the middle one is the old fixed spot). A push of the stick moves one spot (held: one more every
+  //   `repeat` s), or input.receiveSlot. The opponent waits `extraWait` longer before the toss, and for the child to arrive (at most `maxWait`).
+  //  stopDead (?tennisOut=v24 off): after a point the ball stops where the point ended (no dead ball bouncing on after a soft drop), and every
+  //   mark (out / net) carries an id, so the view shows the red X on the landing point for its own 1.5 s.
+  const RC=Boolean(receiveChoice),rcc={slots:[.55,1.65,3.05],extraWait:1,arriveWait:.35,maxWait:3.2,flick:.55,release:.25,repeat:.45,...(config.v9?.receive||{})},SDB=Boolean(stopDead);let receiveLatch=0,markSerial=0;
+  const receiveSlots=side=>side>0?rcc.slots.slice():rcc.slots.map(x=>-x).reverse();
   const softOf=shot=>SD&&Boolean(shot?.soft),bounceOf=shot=>softOf(shot)?(sdc.bounce??.45):shot?.drop?config.drop.bounce:c.bounce,hBounceOf=shot=>softOf(shot)?(sdc.horizontalBounce??.4):config.drop.horizontalBounce;
   const ZONE_GRADE={green:'good',yellow:'medium',red:'weak'};
   // v-deep: the computer misses less in the early stages (so there are rallies) and the player's racket walks to the ball for them.
@@ -113,13 +121,15 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     state.serveMeter=0;state.serveMeterDirection=1;state.tossProgress=0;state.serveZone='red';state.manualMovement=false;if(!state.faults)state.faultMark=null;
     state.players.forEach(player=>{player.assistTravel=0;player.swing=0;player.contactPoint=null;player.preparing=false;player.running=false;player.serving=false;});
     Object.assign(state.ball, { x: 0, y: c.serveHeight, z: state.players[state.server].z, vx: 0, vy: 0, vz: 0, bounces: 0, lastHitter: state.server });
-    state.landing = null; state.contact = null; state.shot = null;if(M)state.hitMeter=hitMeter(null,false); emit('ready');
+    state.landing = null; state.contact = null; state.shot = null;if(M)state.hitMeter=hitMeter(null,false);
+    if(RC){const slots=receiveSlots(state.serveSide);state.receive={active:state.server===1,slot:1,slots,x:slots[1],moved:false,arrived:true,changedAt:0,changes:0};receiveLatch=0;}
+    emit('ready');
   }
   function point(winner, reason) {
     if (!['rally','serve','toss'].includes(state.phase)) return;
     const ace = state.rallyHits === 1 && state.ball.lastHitter === state.server && winner === state.server && reason !== 'out' && reason !== 'net';
     // v23: after a soft drop's second bounce the dead ball keeps bouncing and rolling, and the players run out their last steps, instead of freezing.
-    if(SD&&reason==='doubleBounce'&&softOf(state.shot)&&sdc.deadBall!==false){const b=state.ball,f=sdc.deadFriction??.8;b.vy=Math.abs(b.vy)*(sdc.deadBounce??.5);b.vx*=f;b.vz*=f;state.deadBall=true;state.deadBounces=0;}
+    if(SD&&!SDB&&reason==='doubleBounce'&&softOf(state.shot)&&sdc.deadBall!==false){const b=state.ball,f=sdc.deadFriction??.8;b.vy=Math.abs(b.vy)*(sdc.deadBounce??.5);b.vx*=f;b.vz*=f;state.deadBall=true;state.deadBounces=0;}
     else{state.ball.vx = state.ball.vy = state.ball.vz = 0;
     state.players.forEach(player=>{player.running=false;player.vx=player.vz=0;});}
     const transition = awardPoint(score, winner, rules);
@@ -276,7 +286,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     b.vx = (targetX - b.x) / flight; b.vz = (targetZ - b.z) / flight;
     b.vy = (c.radius - b.y + 0.5 * gravity * flight ** 2) / flight;
     b.bounces = 0; b.lastHitter = side;
-    state.faultMark=null;state.phase = 'rally'; state.phaseTime = 0; state.rallyHits++; shotTime = 0;
+    state.faultMark=null;state.phase = 'rally'; state.phaseTime = 0; state.rallyHits++; shotTime = 0;if(state.receive)state.receive.active=false;
     const player=state.players[side];
     player.stroke=(b.x-player.x)*(side===0?-1:1)>=0?'forehand':'backhand';
     player.lob=isLob;player.serving=serving;player.preparing=false;
@@ -296,7 +306,7 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     state.charge=0;if(side===1)returnStart=state.elapsed;
     planContact(); emit('hit', { side, serving, timing, power,quality,edge:quality<.55,grade:v9info?.grade,error:v9info?.error,zone:judged?.zone,needle:judged?judged.value:undefined,rating:(D&&side===0&&!serving)?(judged?(perfectR?'perfect':judged.zone==='green'?'good':judged.value<.5?'early':'late'):held?(needleAcc>=.8?'perfect':needleAcc>=.5?'good':(charge<powerGuide(aim).need?'early':'late')):(Math.abs(timing)<config.v9.deep.rating.perfect?'perfect':Math.abs(timing)<config.v9.deep.rating.good?'good':timing<0?'early':'late')):undefined }); pendingTap = null;
   }
-  function faultOrPoint(reason){const mark={x:state.ball.x,z:state.ball.z,reason};if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);state.faultMark=mark;return;}state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
+  function faultOrPoint(reason){const mark={x:state.ball.x,z:state.ball.z,reason,...(SDB?{id:++markSerial}:{})};if(!state.shot?.serving){point(1-state.ball.lastHitter,reason);state.faultMark=mark;return;}state.faults++;if(state.faults>=2)point(1-state.server,'doubleFault');else{prepareServe();emit('fault',{reason});}state.faultMark=mark;state.event.impact=reason;}
   function serve(){if(state.server!==0)return;if(state.phase==='serve'){state.phase='toss';state.phaseTime=0;emit('toss');}else if(state.phase==='toss')shoot(0);}
   function contactStatus(side=0){
     const b=state.ball,player=state.players[side],reach=side===0?attributes.reach:p.reach*1.25,distance=Math.hypot(player.x-b.x,player.z-b.z),minH=side===1?aiMinHeight():contactConfig.minHeight;
@@ -346,6 +356,23 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     else{const roll=Math.exp(-(sdc.roll??1.4)*dt);b.vx*=roll;b.vz*=roll;}
     state.players.forEach((player,index)=>{const v=Math.hypot(player.vx||0,player.vz||0);if(v>0){const k=Math.max(0,v-(p.braking||18)*dt)/v;player.vx*=k;player.vz*=k;player.x=clamp(player.x+player.vx*dt,-court.playerLimit,court.playerLimit);player.z=clamp(player.z+player.vz*dt,index===0?p.contactOffsetZ:-court.halfLength-p.reach,index===0?court.halfLength+p.reach:-p.contactOffsetZ);}player.running=Math.hypot(player.vx||0,player.vz||0)>.12;});
   }
+  // v25: the opponent tosses after the usual wait, plus `extraWait` while the child may pick a spot, and once a child who moved has arrived (cap `maxWait`).
+  function opponentTossReady(){
+    const base=Math.max(.25,rules.serveWait-config.serve.tossSeconds*.45),r=state.receive;
+    if(!RC||!r?.active)return state.phaseTime>=base;
+    if(state.phaseTime>=rcc.maxWait)return true;
+    return state.phaseTime>=base+rcc.extraWait&&r.arrived&&state.phaseTime>=r.changedAt+rcc.arriveWait;
+  }
+  // v25: the child's receiving spot. A push of the stick past `flick` moves one spot; held, one more every `repeat` s; back under `release` re-arms.
+  function receiveStep(dt,input){
+    const r=state.receive,kid=state.players[0],n=r.slots.length,set=i=>{i=clamp(i,0,n-1);if(i!==r.slot){r.slot=i;r.moved=true;r.changedAt=state.phaseTime;r.changes++;}};
+    if(Number.isInteger(input.receiveSlot))set(input.receiveSlot);
+    const mx=input.move||0;
+    if(Math.abs(mx)>=rcc.flick){if(receiveLatch<=0){set(r.slot+Math.sign(mx));receiveLatch=rcc.repeat;}else receiveLatch-=dt;}
+    else if(Math.abs(mx)<=rcc.release)receiveLatch=0;
+    r.x=r.slots[r.slot];movePlayer(0,r.x,court.halfLength+config.serve.baselineMargin,attributes.speed,dt);
+    r.arrived=Math.abs(kid.x-r.x)<.06;
+  }
   function step(dt, input) {
     state.feedback.age+=dt;if(!(state.server===0&&['serve','toss'].includes(state.phase)))state.elapsed+=dt;state.phaseTime+=dt; cooldown = Math.max(0, cooldown - dt);
     state.players.forEach(player => { player.swing = Math.max(0, player.swing - dt); });
@@ -357,13 +384,14 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     }
     if (['serve','toss'].includes(state.phase)) {
       const b=state.ball,server=state.players[state.server];b.x=server.x;b.z=server.z;
+      if(RC&&state.server===1&&state.receive?.active)receiveStep(dt,input);
       if(state.phase==='toss'){
         const t=state.phaseTime%config.serve.tossSeconds;b.z=server.z-(state.server===0?1:-1)*p.contactOffsetZ*Math.min(1,t/.4);b.y=Math.max(config.serve.handHeight,config.serve.handHeight+config.serve.tossVelocity*t-c.gravity*t*t/2);
         const meter=serveMeterAt(state.phaseTime,config.serve.tossSeconds);state.serveMeter=meter.value;state.serveMeterDirection=meter.direction;state.tossProgress=t/config.serve.tossSeconds;
         const green=config.serve.green[difficulty]+(safeRanks.serve-1)*config.serve.rankGreenBonus,distance=Math.abs(state.serveMeter-.5);
         state.serveZone=distance<=green/2?'green':distance<=(green+config.serve.yellowWidth)/2?'yellow':'red';
         if(state.server===1&&state.phaseTime>=config.serve.tossSeconds*.45){shoot(1);if(M)state.hitMeter=hitMeter(input.aim,input.prepare);/* the bar for the serve return starts clean on the very first rally frame, not with the previous rally's needle */}
-      }else{b.y=config.serve.handHeight;if(state.server===1&&state.phaseTime>=Math.max(.25,rules.serveWait-config.serve.tossSeconds*.45)){state.phase='toss';state.phaseTime=0;emit('toss');}}
+      }else{b.y=config.serve.handHeight;if(state.server===1&&opponentTossReady()){state.phase='toss';state.phaseTime=0;emit('toss');}}
       return;
     }
     if(V9)state.powerGuide=powerGuide(input.aim);
