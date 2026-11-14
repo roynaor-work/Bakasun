@@ -1,0 +1,1572 @@
+{
+  "schemaVersion": 1,
+  "id": "torpedo-sub-v1",
+  "license": "CC0-1.0",
+  "licenseFile": "LICENSES.md",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "handedness": "right",
+  "style": "warm low-poly; fictional, unbranded, no baked text",
+  "compression": "none; no Draco, Meshopt, KTX or external model resources",
+  "models": [
+    {
+      "id": "torpedo-player",
+      "file": "models/torpedo-player.glb",
+      "bytes": 33176,
+      "sha256": "d494ac743c0af6d3cf606829f78e4d02dacebaa2633680f48314bbdebe48ddc9",
+      "triangles": 356,
+      "dimensionsMeters": [
+        0.92,
+        0.92,
+        3.23
+      ],
+      "paletteSrgb": [
+        "e9be69",
+        "258b8a",
+        "fff0cc",
+        "354c58"
+      ],
+      "propeller": {
+        "node": "propeller",
+        "axis": "+Z",
+        "pivotMeters": [
+          0,
+          0,
+          -1.55
+        ],
+        "clip": "propeller_spin",
+        "durationSeconds": 0.5,
+        "loop": true
+      },
+      "anchors": {
+        "nose": [
+          0,
+          0,
+          1.55
+        ],
+        "wake": [
+          0,
+          0,
+          -1.72
+        ]
+      }
+    },
+    {
+      "id": "torpedo-enemy",
+      "file": "models/torpedo-enemy.glb",
+      "bytes": 33172,
+      "sha256": "a2c7156fab513c87dc850cb9187acfbb6e97308c328b6da3dcceb2139f99f7ee",
+      "triangles": 356,
+      "dimensionsMeters": [
+        0.92,
+        0.92,
+        3.23
+      ],
+      "paletteSrgb": [
+        "dc7758",
+        "733e54",
+        "ffe3b0",
+        "354251"
+      ],
+      "propeller": {
+        "node": "propeller",
+        "axis": "+Z",
+        "pivotMeters": [
+          0,
+          0,
+          -1.55
+        ],
+        "clip": "propeller_spin",
+        "durationSeconds": 0.5,
+        "loop": true
+      },
+      "anchors": {
+        "nose": [
+          0,
+          0,
+          1.55
+        ],
+        "wake": [
+          0,
+          0,
+          -1.72
+        ]
+      }
+    }
+  ],
+  "sprites": [
+    {
+      "id": "bubble-trail",
+      "file": "sprites/bubble-trail.png",
+      "bytes": 163306,
+      "sha256": "4c2186e1640100e4b70f8ffaaf99f81694014f673d8aebcd2c017ddaec010e29",
+      "imageSize": [
+        1024,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "frameSize": [
+        256,
+        256
+      ],
+      "frameCount": 8,
+      "fps": 12,
+      "durationSeconds": 0.6666666666666666,
+      "loop": true,
+      "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+      "alpha": "straight",
+      "blend": "normal",
+      "colorSpace": "sRGB",
+      "paddingPixels": 4,
+      "mipmaps": false,
+      "filter": "linear/clamp",
+      "plane": "billboard below water; local +U is +Z",
+      "sizeMeters": [
+        3,
+        0.8
+      ],
+      "pivotNormalizedTopLeft": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.5,
+            0.25,
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bubbles-rise",
+      "file": "sprites/bubbles-rise.png",
+      "bytes": 135250,
+      "sha256": "fd8aac9fae22d7c1d19d3fc6c0fb44ae4a743331002b11311c11e284cdfb7379",
+      "imageSize": [
+        1024,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "frameSize": [
+        256,
+        256
+      ],
+      "frameCount": 8,
+      "fps": 12,
+      "durationSeconds": 0.6666666666666666,
+      "loop": true,
+      "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+      "alpha": "straight",
+      "blend": "normal",
+      "colorSpace": "sRGB",
+      "paddingPixels": 4,
+      "mipmaps": false,
+      "filter": "linear/clamp",
+      "plane": "vertical billboard; motion +Y",
+      "sizeMeters": [
+        1.5,
+        2.8
+      ],
+      "pivotNormalizedTopLeft": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.5,
+            0.25,
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sonar-ring",
+      "file": "sprites/sonar-ring.png",
+      "bytes": 253132,
+      "sha256": "24dae61b8689189edb6f127694baa509b03e4f231c2235db5d3a0140284d3664",
+      "imageSize": [
+        1024,
+        768
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "frameSize": [
+        256,
+        256
+      ],
+      "frameCount": 12,
+      "fps": 12,
+      "durationSeconds": 1.0,
+      "loop": true,
+      "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+      "alpha": "straight",
+      "blend": "normal",
+      "colorSpace": "sRGB",
+      "paddingPixels": 4,
+      "mipmaps": false,
+      "filter": "linear/clamp",
+      "plane": "XZ water surface",
+      "sizeMeters": [
+        8,
+        8
+      ],
+      "pivotNormalizedTopLeft": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.3333333333333333,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.3333333333333333,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.3333333333333333,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.3333333333333333,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 8,
+          "rect": [
+            0,
+            512,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.6666666666666666,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 9,
+          "rect": [
+            256,
+            512,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.6666666666666666,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 10,
+          "rect": [
+            512,
+            512,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.6666666666666666,
+            0.25,
+            0.3333333333333333
+          ]
+        },
+        {
+          "index": 11,
+          "rect": [
+            768,
+            512,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.6666666666666666,
+            0.25,
+            0.3333333333333333
+          ]
+        }
+      ]
+    },
+    {
+      "id": "underwater-explosion",
+      "file": "sprites/underwater-explosion.png",
+      "bytes": 388121,
+      "sha256": "34cc913e73d85d06a97a3d2abed13e9ae15973fa0eafa226ed8ddb6d1a3484d3",
+      "imageSize": [
+        1024,
+        1024
+      ],
+      "grid": [
+        8,
+        4
+      ],
+      "frameSize": [
+        128,
+        256
+      ],
+      "frameCount": 32,
+      "fps": 20,
+      "durationSeconds": 1.6,
+      "loop": false,
+      "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+      "alpha": "straight",
+      "blend": "normal",
+      "colorSpace": "sRGB",
+      "paddingPixels": 4,
+      "mipmaps": false,
+      "filter": "linear/clamp",
+      "plane": "vertical billboard crossing water surface",
+      "sizeMeters": [
+        5,
+        10
+      ],
+      "pivotNormalizedTopLeft": [
+        0.5,
+        0.64
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            128,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            256,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            384,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            512,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            640,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            768,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            896,
+            0,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 8,
+          "rect": [
+            0,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 9,
+          "rect": [
+            128,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 10,
+          "rect": [
+            256,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 11,
+          "rect": [
+            384,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 12,
+          "rect": [
+            512,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 13,
+          "rect": [
+            640,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 14,
+          "rect": [
+            768,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 15,
+          "rect": [
+            896,
+            256,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 16,
+          "rect": [
+            0,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 17,
+          "rect": [
+            128,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 18,
+          "rect": [
+            256,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 19,
+          "rect": [
+            384,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 20,
+          "rect": [
+            512,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 21,
+          "rect": [
+            640,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 22,
+          "rect": [
+            768,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 23,
+          "rect": [
+            896,
+            512,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 24,
+          "rect": [
+            0,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 25,
+          "rect": [
+            128,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 26,
+          "rect": [
+            256,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 27,
+          "rect": [
+            384,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 28,
+          "rect": [
+            512,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 29,
+          "rect": [
+            640,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 30,
+          "rect": [
+            768,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 31,
+          "rect": [
+            896,
+            768,
+            128,
+            256
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.75,
+            0.125,
+            0.25
+          ]
+        }
+      ]
+    },
+    {
+      "id": "launch-flash",
+      "file": "sprites/launch-flash.png",
+      "bytes": 75950,
+      "sha256": "1c44dd3e1608115e22eee7fa7a7217b18db7e810e67e4a747b64f428804a1059",
+      "imageSize": [
+        1024,
+        512
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "frameSize": [
+        256,
+        256
+      ],
+      "frameCount": 8,
+      "fps": 24,
+      "durationSeconds": 0.3333333333333333,
+      "loop": false,
+      "frameOrder": "row-major, left-to-right, top-to-bottom, zero-based",
+      "alpha": "straight",
+      "blend": "normal",
+      "colorSpace": "sRGB",
+      "paddingPixels": 4,
+      "mipmaps": false,
+      "filter": "linear/clamp",
+      "plane": "billboard at submerged tube muzzle",
+      "sizeMeters": [
+        1.6,
+        1.6
+      ],
+      "pivotNormalizedTopLeft": [
+        0.5,
+        0.5
+      ],
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            256,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            512,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.5,
+            0.25,
+            0.5
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            768,
+            256,
+            256,
+            256
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.5,
+            0.25,
+            0.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "submarine-shadow",
+      "file": "sprites/submarine-shadow.png",
+      "bytes": 14262,
+      "sha256": "d74b76b16635442cf8ce8b3c12cfe0a8a321354ef5f37a2c4e9f03f034347afc",
+      "imageSize": [
+        256,
+        512
+      ],
+      "frameCount": 1,
+      "grid": [
+        1,
+        1
+      ],
+      "frameSize": [
+        256,
+        512
+      ],
+      "alpha": "straight",
+      "blend": "normal",
+      "plane": "XZ surface decal",
+      "sizeMeters": [
+        3.5,
+        7
+      ],
+      "noseDirection": "image top maps to world +Z",
+      "mipmaps": false
+    },
+    {
+      "id": "enemy-warning-line",
+      "file": "sprites/enemy-warning-line.png",
+      "bytes": 832,
+      "sha256": "8cce719c16b8518a238484ec08c8c51042364be3a6430f64787ad4b2e992642c",
+      "imageSize": [
+        256,
+        64
+      ],
+      "frameCount": 1,
+      "grid": [
+        1,
+        1
+      ],
+      "frameSize": [
+        256,
+        64
+      ],
+      "alpha": "straight",
+      "blend": "normal",
+      "plane": "XZ water surface",
+      "sizeMeters": [
+        8,
+        0.65
+      ],
+      "repeatU": true,
+      "scrollCyclesPerSecond": 0.4,
+      "recommendedWarningSeconds": 1.25,
+      "mipmaps": false
+    }
+  ],
+  "audio": [
+    {
+      "id": "torpedo-launch",
+      "durationSeconds": 0.9,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "loopStartSeconds": null,
+      "loopEndSeconds": null,
+      "targetLufs": -16,
+      "formats": [
+        {
+          "file": "audio/torpedo-launch.ogg",
+          "bytes": 13377,
+          "sha256": "0b6ebb0dee1a1b7da0e332c23a06b2036c2e447935d52940fad6ad0b8413b1a6",
+          "codec": "libvorbis",
+          "integratedLufs": -15.98,
+          "truePeakDbtp": -1.01,
+          "decodedSamples": 43072,
+          "decodedSeconds": 0.8973333333333333
+        },
+        {
+          "file": "audio/torpedo-launch.mp3",
+          "bytes": 23084,
+          "sha256": "b6a69a3219d373ce70963d38a8c6d4b6e87cad6826b0d19df72170118297dda1",
+          "codec": "libmp3lame",
+          "integratedLufs": -15.98,
+          "truePeakDbtp": -1.21,
+          "decodedSamples": 43200,
+          "decodedSeconds": 0.9
+        }
+      ]
+    },
+    {
+      "id": "torpedo-engine-loop",
+      "durationSeconds": 4,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": true,
+      "loopStartSeconds": 0,
+      "loopEndSeconds": 4,
+      "targetLufs": -16,
+      "formats": [
+        {
+          "file": "audio/torpedo-engine-loop.ogg",
+          "bytes": 24449,
+          "sha256": "c64ea855752e86ca7998e9e9c5c887b3a2bf067501cd1866072da3dd261b97fe",
+          "codec": "libvorbis",
+          "integratedLufs": -15.98,
+          "truePeakDbtp": -8.76,
+          "decodedSamples": 192000,
+          "decodedSeconds": 4.0,
+          "seamStep": 0.0025084996595978737,
+          "largestInternalStep": 0.011764012277126312
+        },
+        {
+          "file": "audio/torpedo-engine-loop.mp3",
+          "bytes": 97388,
+          "sha256": "46f90b3476099f7e3504cb9ecc355f0cb034cacdcbb39f3c6220e453663bcefa",
+          "codec": "libmp3lame",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -8.84,
+          "decodedSamples": 192000,
+          "decodedSeconds": 4.0,
+          "seamStep": 0.008698796853423119,
+          "largestInternalStep": 0.011720418930053711
+        }
+      ]
+    },
+    {
+      "id": "underwater-explosion",
+      "durationSeconds": 2.2,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "loopStartSeconds": null,
+      "loopEndSeconds": null,
+      "targetLufs": -16,
+      "formats": [
+        {
+          "file": "audio/underwater-explosion.ogg",
+          "bytes": 25416,
+          "sha256": "0aa3ed3a7be94c87f17d1ff816b2047bd8404398ebcebdb534bb1961a6807388",
+          "codec": "libvorbis",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -1.8,
+          "decodedSamples": 105600,
+          "decodedSeconds": 2.2
+        },
+        {
+          "file": "audio/underwater-explosion.mp3",
+          "bytes": 54188,
+          "sha256": "0b79e812cc0613917ad0980bf5ad04e4ea646fd8c8400d7b4fd2de789bb68297",
+          "codec": "libmp3lame",
+          "integratedLufs": -16.04,
+          "truePeakDbtp": -1.95,
+          "decodedSamples": 105600,
+          "decodedSeconds": 2.2
+        }
+      ]
+    },
+    {
+      "id": "sonar-ping",
+      "durationSeconds": 1.4,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "loopStartSeconds": null,
+      "loopEndSeconds": null,
+      "targetLufs": -16,
+      "formats": [
+        {
+          "file": "audio/sonar-ping.ogg",
+          "bytes": 8678,
+          "sha256": "2330464d07fb4acdd26adfcb60dbb3b4479eb20b0b7e7c5be57f866a1e1eda31",
+          "codec": "libvorbis",
+          "integratedLufs": -16.02,
+          "truePeakDbtp": -3.33,
+          "decodedSamples": 67200,
+          "decodedSeconds": 1.4
+        },
+        {
+          "file": "audio/sonar-ping.mp3",
+          "bytes": 35180,
+          "sha256": "aa52459c8e9bedae14b07a9a9381511f6961edbad9e2455d9d4a09d0d898c0a5",
+          "codec": "libmp3lame",
+          "integratedLufs": -16.02,
+          "truePeakDbtp": -3.31,
+          "decodedSamples": 67200,
+          "decodedSeconds": 1.4
+        }
+      ]
+    },
+    {
+      "id": "bubbles",
+      "durationSeconds": 1.8,
+      "sampleRate": 48000,
+      "channels": 1,
+      "loop": false,
+      "loopStartSeconds": null,
+      "loopEndSeconds": null,
+      "targetLufs": -16,
+      "formats": [
+        {
+          "file": "audio/bubbles.ogg",
+          "bytes": 20414,
+          "sha256": "0e0841c098dab44af1bb25bb27a2ab16208b08ece693675bf88e4842b01c3520",
+          "codec": "libvorbis",
+          "integratedLufs": -16.0,
+          "truePeakDbtp": -5.76,
+          "decodedSamples": 86400,
+          "decodedSeconds": 1.8
+        },
+        {
+          "file": "audio/bubbles.mp3",
+          "bytes": 44396,
+          "sha256": "20503485e3b8fea9d9fe73536ec9d4adcfd3b0d8921eee4195c1dff6695fe805",
+          "codec": "libmp3lame",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -5.73,
+          "decodedSamples": 86400,
+          "decodedSeconds": 1.8
+        }
+      ]
+    }
+  ],
+  "integration": {
+    "scope": "assets and isolated preview only; runtime game changes deferred",
+    "submergedDamageAcceptedFrom": [
+      "torpedo"
+    ],
+    "submergedDamageRejectedFrom": [
+      "shell",
+      "bullet",
+      "missile"
+    ],
+    "canStaySubmerged": true,
+    "submergedWeapon": "torpedo",
+    "waterlineY": 0,
+    "torpedoSuggestedCenterY": -1.2,
+    "surfaceDecalY": 0.025,
+    "depthWriteForTransparentSprites": false,
+    "enemySequenceSeconds": {
+      "warning": 0,
+      "launch": 1.25,
+      "warningEnds": 1.25
+    },
+    "engineLoopHint": "decodeAudioData + AudioBufferSourceNode.loop; use decoded sample range",
+    "atlasUvHint": "rectangles use top-left image coordinates; invert V for bottom-left APIs; never repeat the entire atlas"
+  },
+  "authoring": {
+    "source": "source/build_assets.py",
+    "mediaSources": "original procedural geometry, vector/raster shapes and audio synthesis; no external samples"
+  }
+}
