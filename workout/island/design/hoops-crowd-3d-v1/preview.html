@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+<title>קהל כדורסל · 3D V1</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<header><div><span class="eyebrow">BAKASUN / DESIGN LAB / 01</span><h1>היציע מתעורר<span>.</span></h1><p>800 אוהדים. נפח אמיתי. תגובה לכל סל.</p></div><div class="stamp">HOOPS<br><strong>CROWD 3D</strong><br>V1 / CC0</div></header>
+<main>
+<section class="toolbar" aria-label="בקרי תצוגה">
+<div class="seg"><button id="after" aria-pressed="true">קהל תלת־ממדי</button><button id="before" aria-pressed="false">לפני · קהל שטוח</button></div>
+<label>מצלמה <select id="camera"><option value="game">מצלמת המשחק</option><option value="wide">האולם המלא</option><option value="side">מהצד</option><option value="rear">מאחור</option><option value="gallery">12 הווריאציות</option><option value="levels">שלוש רמות פירוט</option></select></label>
+<button id="basket">סל! חגיגת הקהל</button>
+<button id="pause" aria-pressed="false">השהיה</button>
+</section>
+<section class="stage"><canvas id="scene" aria-label="תצוגה תלת ממדית של קהל כדורסל"></canvas><div class="scene-top"><span id="view-label">מצלמת המשחק</span><span class="live">● 800 FANS</span></div><div id="status" role="status">טוענים את היציע…</div><div id="gallery-caption" hidden>ישיבה 01–06 · עמידה 07–12 · ידיים למטה / למעלה / מוחאות</div></section>
+<section class="metrics" aria-label="מדדים חיים"><div><span>אוהדים</span><strong id="fans">800</strong></div><div><span>משולשי קהל</span><strong id="triangles">—</strong><small>תקציב 70,000</small></div><div><span>קריאות ציור · קהל</span><strong id="draws">—</strong></div><div><span>FPS מקומי</span><strong id="fps">—</strong><small>תלוי מכשיר ורזולוציה</small></div><div><span>LOD 0 / 1 / 2</span><strong id="lod">—</strong><small id="overlap">כולל מופעים במעבר</small></div></section>
+<section class="details">
+<label>תנוחה <select id="pose"><option value="-1">ערבוב טבעי</option><option value="0">ידיים למטה</option><option value="1">ידיים למעלה</option><option value="2">מחיאות כפיים</option></select></label>
+<label>בית <input type="color" id="home" value="#e55b3e"></label><label>חוץ <input type="color" id="away" value="#40aab6"></label>
+<label><input type="checkbox" id="reduced">תנועה מופחתת</label>
+<label>וריאציה להשוואת LOD <select id="variant"></select></label>
+<label>סיבוב בגלריה <input type="range" id="yaw" min="0" max="360" value="15"></label>
+</section>
+<section class="measure"><div><span class="eyebrow">SAME CAMERA / SAME 800 SEATS</span><h2>לפני ואחרי, באותה סצנה</h2><p>הקהל השטוח משחזר את אטלס הכדורסל הקיים. המדידה מריצה לפני–אחרי–אחרי–לפני; כוללת עדכון וציור. נתוני תוכנה מצורפים בדוח, ותוצאה מקומית תופיע כאן.</p></div><div><button id="benchmark">מדידת FPS מקומית</button><button id="download" disabled>הורדת המדידה</button></div><output id="result" aria-live="polite"></output></section>
+<footer>36 GLB · 210 / 90 / 24 משולשים · ללא Draco · חבילת סקירה עצמאית, החיבור למשחק נפרד · <a href="REPORT.md">דוח ומדידות</a> · <a href="LICENSES.md">רישיון ומקורות</a></footer>
+</main><script type="module" src="preview.mjs"></script>
+</html>
