@@ -88,7 +88,8 @@ for(let n=0;n<TRIALS;n++){
   v=(await until(v.t+.1)).view;const tg0=v.targets[0];if(!tg0){log('no target');continue;}const id=tg0.id;
   for(let k=0;k<50;k++){const a=r()*Math.PI*2,d=140+r()*180,x=tg0.x+Math.cos(a)*d,y=tg0.y+Math.sin(a)*d*.6;if(x>30&&x<env.W-30&&y>40&&y<env.H-40){await setAim(x,y);break;}}
   v=(await until(v.t+.05)).view;await frame.evaluate(()=>window.__boar.record(true));const t0=v.t,shots0=v.shots,hits0=v.hits;let tMove=null,tOn=null,onRun=0,lastT=t0,killed=false,strokes=null;
-  while(v.t-t0<6){const tg=v.targets.find(t=>t.id===id);if(!tg){killed=true;break;}
+  let last=tg0;// a boar whose circles are all under a wave for a frame is not in view().targets; the child keeps aiming where it saw it
+  while(v.t-t0<6){const seen=v.targets.find(t=>t.id===id);if(!seen&&!v.alive.includes(id)){killed=true;break;}const tg=seen||last;last=tg;
     anchor=v.stick?{x:v.stick.ox,y:v.stick.oy}:null;
     const rb=Math.max(...tg.zones.map(z=>z.r));const d=bot.tick({t:v.t,cx:v.cx,cy:v.cy,target:{id,x:tg.x,y:tg.y,rv:rb/1.35}});await apply(d);
     if(tMove===null&&bot.moved)tMove=v.t;

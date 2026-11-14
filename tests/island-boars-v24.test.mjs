@@ -52,6 +52,17 @@ test('boars v24: the aim help works only while the thumb is on the stick and nev
   assert.equal(edgeDistance(boss,420,260,AIM24.FRICTION_MAX_R)>AIM24.FRICTION_PAD,true);assert.ok(magnetRadius(boss)<=AIM24.MAGNET_MAX_R);
 });
 
+test('boars v24: a push away always leaves the boar (the help never traps the crosshair), a firm push almost as fast as v23', ()=>{
+  const leave=(version,r,tilt)=>{const st=makeStick(version),c={x:400,y:200},tg={id:1,x:400,y:200,zones:[{x:400.3,y:200.5,r},{x:400,y:200,r:r*.3,crit:true}]};st.down(100,300);st.move(100+tilt*80,300);
+    for(let i=1;i<=60*6;i++){st.step(1/60,c,version==='v24'?[tg]:[]);if(c.x-400>r+AIM24.FRICTION_PAD)return i/60;}return Infinity;};
+  for(const r of [7,15,25])for(const tilt of [.2,.3,.4,.6,1]){const a=leave('v23',r,tilt),b=leave('v24',r,tilt);
+    assert.ok(Number.isFinite(b),`r${r} tilt ${tilt}: stuck`);assert.ok(b<=a*1.6+.05,`r${r} tilt ${tilt}: v24 ${b.toFixed(2)} s vs v23 ${a.toFixed(2)} s`);
+    if(tilt>=.4)assert.ok(b<=.65,`r${r} tilt ${tilt}: a firm push leaves within 0.65 s (${b.toFixed(2)})`);}
+  // a walking boar does not drag the crosshair against a thumb that pushes the other way
+  const A=createAimAssist();let x=400;const c={x:400,y:200};for(let i=0;i<60;i++){x+=1.5;const o=A.step({dt:1/60,cx:c.x,cy:c.y,vx:-60,vy:0,held:true,tilt:.2,targets:[boar(9,x,200)]});c.x+=o.vx/60;}
+  assert.ok(c.x<400,'pushed left while the boar walks right: the crosshair goes left '+c.x.toFixed(1));
+});
+
 test('boars v24: the crosshair follows a walking boar it is on, and stays put with the thumb off', ()=>{
   const A=createAimAssist();let x=400,info=null;const c={x:400,y:200};
   for(let i=0;i<30;i++){x+=1;const o=A.step({dt:1/60,cx:c.x,cy:c.y,vx:0,vy:0,held:true,tilt:0,targets:[boar(7,x,200)]});c.x+=o.vx/60;c.y+=o.vy/60;info=o.info;}

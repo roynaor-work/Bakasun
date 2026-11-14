@@ -998,7 +998,7 @@ function installQA(){
     hold(on){qaHold=!!on;},clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},
     view(){camera.updateMatrixWorld();const h=castShot(aimRay(),TOUCH?1.35:1),W=innerWidth,H=innerHeight,f=v=>+v.toFixed(1);
       return {t:+elapsed.toFixed(4),frames,mode,shots:roundShots,hits:roundHits,crits:roundCrits,killed,heat:+(wstate[current]?.heat||0).toFixed(1),overheated:!!wstate[current]?.overheated,cx:+((pointer.x*.5+.5)*W).toFixed(2),cy:+((-pointer.y*.5+.5)*H).toFixed(2),
-        on:h.e?(h.e.qa||(h.e.qa=++qaSeq)):0,crit:!!h.crit,fireHeld:firePointer!==null,stick:aimStick?{ox:f(aimStick.ox),oy:f(aimStick.oy)}:null,aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,
+        on:h.e?(h.e.qa||(h.e.qa=++qaSeq)):0,crit:!!h.crit,fireHeld:firePointer!==null,stick:aimStick?{ox:f(aimStick.ox),oy:f(aimStick.oy)}:null,aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,alive:enemies.filter(e=>!e.dead).map(e=>e.qa||(e.qa=++qaSeq)),
         targets:screenTargets().map(t=>({id:t.id,kind:t.kind,x:f(t.x),y:f(t.y),hp:Math.round(t.e.hp),z:+t.e.root.position.z.toFixed(1),zones:t.zones.map(z=>({x:f(z.x),y:f(z.y),r:f(z.r),c:z.crit?1:0,s:z.shield?1:0}))}))};},
     bot(on,opts={}){bot=on?{...opts}:false;if(!on)setFiring(false,'none');},speed(n){timeScale=n;},
     rocket,frost,fury:()=>{fury=100;activateFury();},killAll(){for(const e of [...enemies])damageEnemy(e,1e6,{explosive:true});},
