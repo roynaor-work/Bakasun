@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="תצוגת שש תנועות כדורגל: בעיטות עף, מספרת ונגיחה.">
+  <title>משחק באוויר · תנועות כדורגל</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./preview.css">
+</head>
+<body>
+  <header class="page-head"><div class="brand"><span class="brand-mark" aria-hidden="true">◌</span><div><h1>משחק באוויר</h1><p>בעיטות עף, מספרת ונגיחה</p></div></div><a href="./REPORT.md">דוח החבילה</a></header>
+  <main class="layout">
+    <aside class="library" aria-label="בחירת תנועה"><div class="library-title"><span>ספריית התנועות</span><small>01—06</small></div><nav id="clips" class="clip-list" aria-label="שש תנועות כדורגל"></nav><button id="sequence" class="sequence" type="button">מספרת ונחיתה ברצף</button></aside>
+    <section class="workspace" aria-label="תצוגת התנועה">
+      <div class="stage-wrap"><canvas id="stage" aria-label="שחקן כדורגל בתלת ממד"></canvas><div class="stage-top"><div><h2 id="title">טוען תנועות…</h2><p id="description"></p></div><output id="phase">הכנה</output></div><div class="view-controls" aria-label="זווית צפייה"><button data-view="three" type="button" aria-pressed="true">¾</button><button data-view="front" type="button" aria-pressed="false">מלפנים</button><button data-view="side" type="button" aria-pressed="false">מהצד</button></div><div class="stage-bottom"><span id="height">כדור באוויר</span><label><input id="skeleton" type="checkbox"> שלד</label></div><p id="error" role="alert" hidden></p></div>
+      <div class="transport"><div class="transport-main"><button id="play" class="play" type="button" aria-label="השהיה">השהיה</button><button id="restart" type="button" title="חזרה להתחלה" aria-label="חזרה להתחלה">↺</button><label class="speed-label">מהירות <select id="speed" aria-label="מהירות ניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select></label><div id="events" class="events" aria-label="אירועי התנועה"></div><output id="time">0.00 / 0.00</output></div><div class="timeline"><input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="פריים בתנועה"><div id="markers"></div></div><div class="timeline-caption"><span id="frame">פריים 0</span><span id="contact-detail">מגע מסומן בזהב</span></div></div>
+    </section>
+  </main>
+  <footer><span>6 תנועות · 30 הרץ · 18 עצמות</span><a href="./LICENSES.md">מקורות ורישיונות</a></footer>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "selfHashOmitted": true,
+  "totalFiles": 65,
+  "totalBytesExcludingInventory": 11347978,
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3530,
+      "sha256": "809f207c9e15bc60d87f06680a96f518072b9751638d3b79bba4c695e2eabee1",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3875,
+      "sha256": "2d41924410f99842e6e8e43927382d52379961b48ca771b7b74ecc109d573602",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 6354,
+      "sha256": "8f6906aad567d7532e6ed033f87ae348a195e96a9fa200722b7c87d6a230603a",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "catalog.json",
+      "bytes": 106306,
+      "sha256": "4ac6c242ec1a83eac30bf63ea4cac75f2506cb74aaf510e264ac392c11e1f22a",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/header_jump_neutral.glb",
+      "bytes": 883564,
+      "sha256": "c482ab666fcb516f0d96f9dc98321f350655d415c9c05e21b2a5c37ec6dfb14f",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/header_prepare.glb",
+      "bytes": 881012,
+      "sha256": "1de46fc9cf8374ebf1bca738eaa3ea38aed8c1917c2ce913b4233b060f490e62",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/scissor_backward.glb",
+      "bytes": 886052,
+      "sha256": "31aa1118736a6cc2b48b149f8304f06e8507e474c63053373bb6b95f44113ddc",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/scissor_land_getup.glb",
+      "bytes": 878664,
+      "sha256": "ad7566612b30b604324c1aa2af10206f25c1cfb4ad0c60ad555fe905d822bfac",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/volley_left.glb",
+      "bytes": 893836,
+      "sha256": "cc61a1c0db582fd73e0c1f3248d7be825c8f8b7a4311cf7138db2a1395081c19",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "clips/volley_right.glb",
+      "bytes": 893860,
+      "sha256": "c3fa7cf8a462c878b189f74250bb01fc35ec42d8f6f558d236f692668d5428ca",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "motions.json",
+      "bytes": 523508,
+      "sha256": "8542de6e08a4c09bd17a6d14532891fda6308e5ff9d03e5e9882eb33f323824b",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "player.mjs",
+      "bytes": 3814,
+      "sha256": "6d0e05d774054232141af81d50dbe87434408bad8c5ab4fd55390965a55b4326",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 8848,
+      "sha256": "683e1b3ce0e89700144200609fa86230ed8182d92e757b5eccb4ac15c2444e3f",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3043,
+      "sha256": "7a4013bf337cb6ba7ceafe6377cf781c42586b1733634b3bcaeac3fe51f008fc",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 14465,
+      "sha256": "41327c6bd68d197ccf44cd7147bd1c58dac077e436bc3e583ce2fcfc3cc8e8e8",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "reference/idle_relaxed.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "reference/locomotion_idle.glb",
+      "bytes": 805528,
+      "sha256": "81c4324076b0a6b1fde1abb3ab184280dd8e2d243e7cbc92ea23fc9b9ce3322c",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "reference/locomotion_run.glb",
+      "bytes": 775696,
+      "sha256": "5c3cc67e5627fbd92281388821579625059847d3b2e0f311d7f8a48e41a18bc7",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "reference/run.glb",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "sheets/header_jump_neutral.webp",
+      "bytes": 62174,
+      "sha256": "cd131aca8f12503660e0eac1b915b2f707d9a720900f9c363763ea022d26188d",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/header_prepare.webp",
+      "bytes": 61402,
+      "sha256": "a90f9fdd8929c96ede8484d1c30b71114350d49b73284a630a9649cc651fa88e",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/manifest.json",
+      "bytes": 77280,
+      "sha256": "9d53267b4f01f1ba32a8868c5068d3ff7689fbf222dc8edc01374d3375ae7bc4",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/scissor_backward.webp",
+      "bytes": 60110,
+      "sha256": "352344fe0ab62e2bf6e60fe65f6c14bc87969956dc8bec817b266a76d007c611",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/scissor_land_getup.webp",
+      "bytes": 52030,
+      "sha256": "e2165ecd390a9c42cc794a072097ec28a39c89fa197692af4aa645bbae4045cc",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/volley_left.webp",
+      "bytes": 58350,
+      "sha256": "845beca34770a074c20bc6134307baaebe48f9f55333edc79f1b8a8af2c36fe0",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "sheets/volley_right.webp",
+      "bytes": 58932,
+      "sha256": "c2d2e59c4b3123f6f5f7da7d09f79a322ab0bf95defb58136c8ec5cbbaa93728",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/author.mjs",
+      "bytes": 18021,
+      "sha256": "aa4485b76c6959d49bec616024a66c05fcbff65fd95737e179be112314bb0563",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/bake.mjs",
+      "bytes": 4757,
+      "sha256": "e94798333619352c0f33ea773e74fd3a64640d59c7e87db2a38a04e65cfde0c2",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 12622,
+      "sha256": "a37b17fae285bab2ce7fe36d291ad8037e050c32970ceec081dd3c25d5b6838c",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/finalize.mjs",
+      "bytes": 10750,
+      "sha256": "dc2c53d02d0c204136b93f1d6e2bfc1a40fd50d48b3915370a725caa60335fa0",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "source/hermite.mjs",
+      "bytes": 6354,
+      "sha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "source/mesh-floor.mjs",
+      "bytes": 1959,
+      "sha256": "e1766683fd88d9084294b39363f9723eac2a12ec8afc61349d042646fd6f8958",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5195,
+      "sha256": "22ec591a951abbe0124c68944975e2fc1ddc55dbc1385e90307398d2e67ba408",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "source/validate-assets.mjs",
+      "bytes": 2982,
+      "sha256": "224f0bc33f82f61a5699408a1c1a343425425ad28a2178d38a7c9ac6178f4ab0",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/verify-transitions.mjs",
+      "bytes": 18492,
+      "sha256": "313c2c8528999d192f336c57912ea90764a5f29c1f46cf7dd39e3337662deed6",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "source/verify.mjs",
+      "bytes": 14377,
+      "sha256": "73d4ededeab91ec5e321ee469ade11834f2b113d479a8ecf0c81f8c11edba704",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "vendor/BufferGeometryUtils.js",
+      "bytes": 31918,
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "license": "MIT",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "license": "MIT",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "vendor/LICENSE.three",
+      "bytes": 1081,
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "license": "MIT",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "vendor/qa/glb.mjs",
+      "bytes": 9331,
+      "sha256": "c1db8a829134622d3e3f97ff965915bb6c342c059b620c3d1857a9dfba8e2516",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "vendor/qa/metrics.mjs",
+      "bytes": 36189,
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "license": "CC0-1.0",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "license": "MIT",
+      "origin": "Pinned source; see provenance.json"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 6244,
+      "sha256": "f758a487d405ba6cea2579338ac1229edb1e54e88ebba7582dbfc0716f2ae379",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 9219,
+      "sha256": "b074e5c04628dbc3eaa6b2f25de2bec750ce9f7969508f2b3e4c31665af6c6bc",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/preview-1280x800.png",
+      "bytes": 127566,
+      "sha256": "bda912470de1e49b9fc3a1c5f42cab9111361f016ecd79ad1bc8c0502beffdb1",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 72043,
+      "sha256": "1f9b0ca8b56c72f6b41ed0e1debb6e36f2bea1c463f2db8feef2ab0bb08848e0",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 61836,
+      "sha256": "84a87fb01fc54e33a6d5037abb1622abd4bf03f8ee404c3895bb6351394e744b",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/provenance.json",
+      "bytes": 6668,
+      "sha256": "cb190e2fbdfdac9baf7c89d89e827aa6aed2649677f3de4b2842f8cc2e16b203",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/header_jump_neutral-120hz.json",
+      "bytes": 8548,
+      "sha256": "bad34d10b03f7b2b097b78785a57fdf2b2ccb63058bc850e2edbae16b74e44b1",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/header_jump_neutral-60hz.json",
+      "bytes": 8542,
+      "sha256": "d18bf4741550cb8ff4054f97e820cf52b543b801106f4d3eb8ad9d957744ddc6",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/header_prepare-120hz.json",
+      "bytes": 6114,
+      "sha256": "c9ef8b2ac979130494a3c4ad490303a808716eca5f98a18bb7bac63d9b431e3c",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/header_prepare-60hz.json",
+      "bytes": 6110,
+      "sha256": "be0a79d5dc6f2b2fed439618beb9fb05227f7ef3574c241a1bfba278bef508e3",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "bytes": 131674,
+      "sha256": "36873052aa7354c94af05019a856ce77b6656850f3be471b1d8fee9b8b8a2ff2",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/scissor_backward-120hz.json",
+      "bytes": 8048,
+      "sha256": "5353c6a1878fbfb3d793b93a0698cca0bde0275ca9b74913a3d60c30a2c72f79",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/scissor_backward-60hz.json",
+      "bytes": 8048,
+      "sha256": "f7e365e087bdd6dff9a28e1c6ef3f4d89072d3a370c253a72cdd0fa61186454d",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/scissor_land_getup-120hz.json",
+      "bytes": 7325,
+      "sha256": "a5180367aa8a8606ab81de5a2492161b6b70a0adba94f7b91e670c558b8633dd",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/scissor_land_getup-60hz.json",
+      "bytes": 7316,
+      "sha256": "e8a1cf6715d5ad47a61f3aadabb3520c43fcc3bb037f90d68f1fb0d9a55708ca",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/volley_left-120hz.json",
+      "bytes": 8508,
+      "sha256": "c7beb406a221832b60c96d72ec4ba254e728d04997478839cc816da15e73d6de",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/volley_left-60hz.json",
+      "bytes": 8502,
+      "sha256": "29813a936434cba1fa46c89bc5d2785a3084cd0ebbe810056c770b64317cdbc4",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/volley_right-120hz.json",
+      "bytes": 8526,
+      "sha256": "87fb92e1bca98a1586241eb4f2646b18f95140324a2b232a09f3e70de08459ef",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/qa/volley_right-60hz.json",
+      "bytes": 8520,
+      "sha256": "ebf0787377de5a42eac29810bbdb62c2ed6c8df43499bc761809d6dad3ee173a",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 2000,
+      "sha256": "54f78b0ad136fbd180be1b341bf9f7ab5a1407e574e3bb34b726ebc83ca136fb",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    },
+    {
+      "path": "verification/transitions.json",
+      "bytes": 308981,
+      "sha256": "aec25b5b8a004ed92d2c14124bb40f59193ebf97ff67843ea8b15c6b3b1cdc52",
+      "license": "CC0-1.0",
+      "origin": "Original task output or derived from the documented CC0 sources"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "dependencies": [
+    {
+      "path": "reference/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-kicks-v2/runtime/reference/idle_relaxed.glb",
+      "sourceSha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "reference/run.glb",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-kicks-v2/runtime/reference/run.glb",
+      "sourceSha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "reference/locomotion_idle.glb",
+      "license": "CC0-1.0",
+      "commit": "ec6c73949fb5820826b4c082972f5d4f1136641f",
+      "sourcePath": "workout/island/design/soccer-locomotion-v2/runtime/clips/idle_relaxed.glb",
+      "sourceSha256": "81c4324076b0a6b1fde1abb3ab184280dd8e2d243e7cbc92ea23fc9b9ce3322c",
+      "sha256": "81c4324076b0a6b1fde1abb3ab184280dd8e2d243e7cbc92ea23fc9b9ce3322c",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "reference/locomotion_run.glb",
+      "license": "CC0-1.0",
+      "commit": "ec6c73949fb5820826b4c082972f5d4f1136641f",
+      "sourcePath": "workout/island/design/soccer-locomotion-v2/runtime/clips/run.glb",
+      "sourceSha256": "5c3cc67e5627fbd92281388821579625059847d3b2e0f311d7f8a48e41a18bc7",
+      "sha256": "5c3cc67e5627fbd92281388821579625059847d3b2e0f311d7f8a48e41a18bc7",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "source/rig.mjs",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "sourceSha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "sha256": "22ec591a951abbe0124c68944975e2fc1ddc55dbc1385e90307398d2e67ba408",
+      "unchanged": false,
+      "adaptation": "Local dependency import paths only"
+    },
+    {
+      "path": "source/glb.mjs",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-header-v1/source/glb.mjs",
+      "sourceSha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "source/hermite.mjs",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-header-v1/runtime/player.mjs",
+      "sourceSha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79",
+      "sha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "player.mjs",
+      "license": "CC0-1.0",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-kicks-v2/runtime/player.mjs",
+      "sourceSha256": "03fda73aa0eeb61c1f9133a66f4877a5b7804fff544b2d1df0c154c09a08e5c8",
+      "sha256": "6d0e05d774054232141af81d50dbe87434408bad8c5ab4fd55390965a55b4326",
+      "unchanged": false,
+      "adaptation": "Local dependency import paths only"
+    },
+    {
+      "path": "vendor/qa/metrics.mjs",
+      "license": "CC0-1.0",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sourcePath": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sourceSha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "vendor/qa/glb.mjs",
+      "license": "CC0-1.0",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sourcePath": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sourceSha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "sha256": "c1db8a829134622d3e3f97ff965915bb6c342c059b620c3d1857a9dfba8e2516",
+      "unchanged": false,
+      "adaptation": "Local dependency import paths only"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "license": "MIT",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+      "sourceSha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "vendor/GLTFLoader.js",
+      "license": "MIT",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/GLTFLoader.js",
+      "sourceSha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "vendor/BufferGeometryUtils.js",
+      "license": "MIT",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "sourceSha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "unchanged": true,
+      "adaptation": null
+    },
+    {
+      "path": "vendor/LICENSE.three",
+      "license": "MIT",
+      "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+      "sourcePath": "workout/island/design/soccer-motion-v8/runtime/vendor/LICENSE.three",
+      "sourceSha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "unchanged": true,
+      "adaptation": null
+    }
+  ],
+  "geometry": "Existing fictional canonical18 CC0 player; positions, inverse binds, skin weights and materials retained. Tangents derived from existing normals and UVs for glTF portability. Degenerate UVs receive deterministic orthogonal unit tangents."
+}

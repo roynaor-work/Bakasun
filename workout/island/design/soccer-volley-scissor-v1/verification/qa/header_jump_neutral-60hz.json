@@ -1,0 +1,329 @@
+{
+  "id": "header_jump_neutral",
+  "fps": 60,
+  "durationSeconds": 1.7999999523162842,
+  "heightProxyMeters": 1.6900000000000002,
+  "score": 96.4,
+  "coverage": 1,
+  "metrics": {
+    "footSliding": {
+      "value": 0.000038,
+      "status": "green",
+      "score": 99.92,
+      "evidence": {
+        "coordinateSpace": "native GLB metres; explicitly declared reference travel applied once",
+        "supportSource": "declared",
+        "windows": 4,
+        "samples": 148,
+        "maxDriftMeters": 0.000064,
+        "p95SpeedMetersPerSecond": 0.002925,
+        "worst": {
+          "bone": "RightFoot",
+          "t": 0.283333,
+          "start": 0,
+          "end": 0.5,
+          "driftMeters": 0.000064
+        }
+      }
+    },
+    "floorPenetration": {
+      "value": 0.000199,
+      "status": "green",
+      "score": 99.2,
+      "evidence": {
+        "samples": 2180,
+        "floorY": 0,
+        "probeKind": "declared sole probes plus skeletal joint centers (no mesh surfaces)",
+        "maxDepthMeters": 0.000337,
+        "worst": {
+          "t": 0.45,
+          "bone": "LeftFoot",
+          "depthMeters": 0.000337,
+          "y": -0.000337
+        }
+      }
+    },
+    "posePops": {
+      "value": 0.865899,
+      "status": "green",
+      "score": 82.68,
+      "evidence": {
+        "adjacentPairs": 108,
+        "observations": 1836,
+        "maxDegrees60Hz": 12.98848,
+        "maxMarkerStepHeight60Hz": 0.033699,
+        "maxRootStepHeight60Hz": 0,
+        "worst": {
+          "ratio": 0.8658986362682918,
+          "t": 0.95,
+          "previousTime": 0.933333,
+          "bone": "LeftForeArm",
+          "markerStepHeight60Hz": 0.033699,
+          "degrees60Hz": 12.98848
+        }
+      }
+    },
+    "anatomy": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "testedFrames": 109,
+        "affectedFrames": 0,
+        "checks": 1853,
+        "maxLimbFlexionDegrees": 100.95549,
+        "maxRelativeSegmentLengthChange": 0,
+        "hingeDirectionChecked": true,
+        "axialTwistChecked": false,
+        "violations": []
+      }
+    },
+    "ballContact": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "radiusMeters": 0.11,
+        "samples": 1,
+        "missed": [],
+        "contacts": [
+          {
+            "t": 0.8,
+            "bone": "Head",
+            "gapMeters": 0,
+            "signedGapMeters": 0,
+            "centerDistanceMeters": 0.11,
+            "contactPoint": [
+              -0.000013,
+              1.748773,
+              0.385488
+            ],
+            "ballCenter": [
+              -0.000013,
+              1.692531,
+              0.480023
+            ],
+            "declaredLocalPoint": true
+          }
+        ],
+        "contactDetailsTruncated": false,
+        "coordinateSpace": "native GLB metres; explicitly declared reference travel applied once"
+      }
+    },
+    "continuity": {
+      "value": 0.021796,
+      "status": "green",
+      "score": 99.56,
+      "evidence": {
+        "entry": {
+          "ratio": 0.021637844046316065,
+          "t": 0,
+          "idleTime": 2.2,
+          "markers": 17,
+          "rmsPositionHeight": 0.000855,
+          "rmsRotationDegrees": 0.220983,
+          "rmsVelocityHeightPerSecond": 0.016228,
+          "velocityEvaluated": true
+        },
+        "exit": {
+          "ratio": 0.02179579902756472,
+          "t": 1.8,
+          "idleTime": 1.4,
+          "markers": 17,
+          "rmsPositionHeight": 0.000855,
+          "rmsRotationDegrees": 0.220983,
+          "rmsVelocityHeightPerSecond": 0.016347,
+          "velocityEvaluated": true
+        },
+        "worstEndpoint": "exit",
+        "alignment": "horizontal root translation; raw asset poses used when provided"
+      }
+    },
+    "bodySliding": {
+      "value": null,
+      "status": "not-applicable",
+      "score": null,
+      "reason": "This action is not declared locomotion.",
+      "evidence": {}
+    },
+    "symmetry": {
+      "value": 0,
+      "status": "green",
+      "score": 100,
+      "evidence": {
+        "mode": "structural",
+        "modeSource": "declared",
+        "structuralMismatch": 0,
+        "segments": [
+          {
+            "segment": "Arm-ForeArm",
+            "mismatch": 0
+          },
+          {
+            "segment": "ForeArm-Hand",
+            "mismatch": 0
+          },
+          {
+            "segment": "UpLeg-Leg",
+            "mismatch": 0
+          },
+          {
+            "segment": "Leg-Foot",
+            "mismatch": 0
+          }
+        ],
+        "motionRmsHeight": null,
+        "worstMotion": null,
+        "bilateralPoseRmsHeightUnscored": 0.014316,
+        "note": "One-sided authored actions are checked for structural symmetry only."
+      }
+    }
+  },
+  "scoring": {
+    "kind": "weighted reproducible screening proxy",
+    "applicableWeight": 92,
+    "measuredWeight": 92,
+    "missingApplicableMetricsScoreZero": true
+  },
+  "reasons": [],
+  "checks": {
+    "scoreAbove88": true,
+    "completeApplicableMetrics": true,
+    "native30Hz": true,
+    "canonical18": true,
+    "noCompression": true,
+    "assetHashMatches": true,
+    "sourceMotionHashMatches": true,
+    "sourcePoseMatchesGLB": true,
+    "ballContactPresent": true,
+    "ballContactWithinRequestedHeight": true,
+    "ballSurfaceContactWithin2mm": true,
+    "contactTimeMarkedOnNativeFrame": true,
+    "catalogContactPointMatchesGLB": true,
+    "requestedGetupDuration": true,
+    "measuredPlantedSupport": true,
+    "plantedSlideBelow2cm": true,
+    "plantedSoleWithin2cmOfFloor": true
+  },
+  "contacts": [
+    {
+      "timeSeconds": 0.8,
+      "bone": "Head",
+      "boneLocalPointMeters": [
+        -0.000012818158276582323,
+        0.1808561001594471,
+        0.1177554968434827
+      ],
+      "contactPointMeters": [
+        -0.000012818158276582321,
+        1.7487731569678022,
+        0.3854881480560882
+      ],
+      "contactPointFromPelvisMeters": [
+        -0.000012818158276582321,
+        0.6787318614158682,
+        0.3604881481180106
+      ],
+      "contactPointPelvisLocalMeters": [
+        -0.000012818158276582323,
+        0.7267683186158621,
+        0.24987287906228428
+      ],
+      "ballCenterMeters": [
+        -0.000012818158276582323,
+        1.692530943833374,
+        0.4800228501313409
+      ],
+      "ballCenterHeightMeters": 1.692530943833374,
+      "ballSurfaceGapMeters": 1.62058410441146e-8,
+      "requestedBallCenterHeightRangeMeters": [
+        1.5,
+        2.2
+      ]
+    }
+  ],
+  "supportWindows": [
+    {
+      "bone": "LeftFoot",
+      "start": 0,
+      "end": 0.5,
+      "local": [
+        0,
+        -0.08,
+        0
+      ],
+      "anchor": [
+        0.1299999987317079,
+        2.45136706072957e-8,
+        0.025000010818384485
+      ],
+      "sampleCount": 31,
+      "maxDriftMeters3D": 0.0003384152375099746,
+      "maxDriftMetersHorizontal": 0.00003473174019034963,
+      "maxFloorDistanceMeters": 0.0003365987656413355
+    },
+    {
+      "bone": "LeftFoot",
+      "start": 1.1,
+      "end": 1.8,
+      "local": [
+        0,
+        -0.08,
+        0
+      ],
+      "anchor": [
+        0.1299999987317079,
+        2.45136706072957e-8,
+        0.025000010818384485
+      ],
+      "sampleCount": 43,
+      "maxDriftMeters3D": 0.000047863145568602676,
+      "maxDriftMetersHorizontal": 0.000006420663678005689,
+      "maxFloorDistanceMeters": 0.000047664843989783656
+    },
+    {
+      "bone": "RightFoot",
+      "start": 0,
+      "end": 0.5,
+      "local": [
+        0,
+        -0.08,
+        0
+      ],
+      "anchor": [
+        -0.1299999991119678,
+        2.8197660900675103e-8,
+        -0.024999991747536778
+      ],
+      "sampleCount": 31,
+      "maxDriftMeters3D": 0.0003403251962554395,
+      "maxDriftMetersHorizontal": 0.00006431481881543097,
+      "maxFloorDistanceMeters": 0.0003342345820158271
+    },
+    {
+      "bone": "RightFoot",
+      "start": 1.1,
+      "end": 1.8,
+      "local": [
+        0,
+        -0.08,
+        0
+      ],
+      "anchor": [
+        -0.1299999991119678,
+        2.8197660900675103e-8,
+        -0.024999991747536778
+      ],
+      "sampleCount": 43,
+      "maxDriftMeters3D": 0.000047986568693217454,
+      "maxDriftMetersHorizontal": 0.000009751883727166283,
+      "maxFloorDistanceMeters": 0.00004727712470095624
+    }
+  ],
+  "sourcePoseError": {
+    "maxHipsErrorMeters": 1.0334443648811189e-7,
+    "maxQuaternionError": 1.5360743419803778e-7
+  },
+  "asset": "clips/header_jump_neutral.glb",
+  "sha256": "c482ab666fcb516f0d96f9dc98321f350655d415c9c05e21b2a5c37ec6dfb14f"
+}

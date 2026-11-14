@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "validator": {
+    "name": "Khronos glTF Validator",
+    "version": "2.0.0-dev.3.10"
+  },
+  "method": "Validate the final GLB bytes. Evaluate all mesh vertices with their exact inverse bind matrices and exported parent-local rotations at 120Hz, plus event/support boundaries. Floor tolerance 5mm accounts for skin seams; no root correction is applied.",
+  "summary": {
+    "clips": 6,
+    "errors": 0,
+    "warnings": 0,
+    "minimumSkinYMeters": 0.002071870014791699,
+    "passed": true
+  },
+  "clips": [
+    {
+      "id": "volley_right",
+      "asset": "clips/volley_right.glb",
+      "sha256": "c3fa7cf8a462c878b189f74250bb01fc35ec42d8f6f558d236f692668d5428ca",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 361,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.005106078217494467,
+        "atTimeSeconds": 0.5166666666666667,
+        "lowestVertex": 1461,
+        "influences": [
+          {
+            "bone": "LeftFoot",
+            "weight": 1,
+            "local": [
+              -0.028581462800502777,
+              -0.0748719866387546,
+              -0.02665894478559494
+            ]
+          }
+        ]
+      },
+      "events": [
+        {
+          "time": 1.3,
+          "frame": 39,
+          "ballCenterHeightMeters": 0.8115796369811658,
+          "declaredHeightRangeMeters": [
+            0.5,
+            1.2
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "volley_left",
+      "asset": "clips/volley_left.glb",
+      "sha256": "cc61a1c0db582fd73e0c1f3248d7be825c8f8b7a4311cf7138db2a1395081c19",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 361,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.005106935923902739,
+        "atTimeSeconds": 1.0833333333333333,
+        "lowestVertex": 1211,
+        "influences": [
+          {
+            "bone": "RightFoot",
+            "weight": 1,
+            "local": [
+              -0.028584234416484833,
+              -0.0748719866387546,
+              -0.02665894478559494
+            ]
+          }
+        ]
+      },
+      "events": [
+        {
+          "time": 1.3,
+          "frame": 39,
+          "ballCenterHeightMeters": 0.8115796369811658,
+          "declaredHeightRangeMeters": [
+            0.5,
+            1.2
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "scissor_backward",
+      "asset": "clips/scissor_backward.glb",
+      "sha256": "31aa1118736a6cc2b48b149f8304f06e8507e474c63053373bb6b95f44113ddc",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 253,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.005046049399202196,
+        "atTimeSeconds": 0.4166666666666667,
+        "lowestVertex": 1195,
+        "influences": [
+          {
+            "bone": "RightFoot",
+            "weight": 1,
+            "local": [
+              -0.028584234416484833,
+              -0.0748719866387546,
+              0.17834824323654175
+            ]
+          }
+        ]
+      },
+      "events": [
+        {
+          "time": 1.3,
+          "frame": 39,
+          "ballCenterHeightMeters": 2.0443113626219835,
+          "declaredHeightRangeMeters": [
+            1.8,
+            2.4
+          ]
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "scissor_land_getup",
+      "asset": "clips/scissor_land_getup.glb",
+      "sha256": "ad7566612b30b604324c1aa2af10206f25c1cfb4ad0c60ad555fe905d822bfac",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 181,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.002071870014791699,
+        "atTimeSeconds": 0.5166666666666667,
+        "lowestVertex": 1211,
+        "influences": [
+          {
+            "bone": "RightFoot",
+            "weight": 1,
+            "local": [
+              -0.028584234416484833,
+              -0.0748719866387546,
+              -0.02665894478559494
+            ]
+          }
+        ]
+      },
+      "events": [],
+      "passed": true
+    },
+    {
+      "id": "header_prepare",
+      "asset": "clips/header_prepare.glb",
+      "sha256": "1de46fc9cf8374ebf1bca738eaa3ea38aed8c1917c2ce913b4233b060f490e62",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 217,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.005088726014987277,
+        "atTimeSeconds": 0.38333333333333336,
+        "lowestVertex": 1195,
+        "influences": [
+          {
+            "bone": "RightFoot",
+            "weight": 1,
+            "local": [
+              -0.028584234416484833,
+              -0.0748719866387546,
+              0.17834824323654175
+            ]
+          }
+        ]
+      },
+      "events": [],
+      "passed": true
+    },
+    {
+      "id": "header_jump_neutral",
+      "asset": "clips/header_jump_neutral.glb",
+      "sha256": "c482ab666fcb516f0d96f9dc98321f350655d415c9c05e21b2a5c37ec6dfb14f",
+      "validation": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "skin": {
+        "fps": 120,
+        "frames": 217,
+        "vertexCount": 5899,
+        "minimumYMeters": 0.004790931955359484,
+        "atTimeSeconds": 0.45,
+        "lowestVertex": 1445,
+        "influences": [
+          {
+            "bone": "LeftFoot",
+            "weight": 1,
+            "local": [
+              -0.028581462800502777,
+              -0.0748719866387546,
+              0.17834824323654175
+            ]
+          }
+        ]
+      },
+      "events": [
+        {
+          "time": 0.8,
+          "frame": 24,
+          "ballCenterHeightMeters": 1.692530943833374,
+          "declaredHeightRangeMeters": [
+            1.5,
+            2.2
+          ]
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

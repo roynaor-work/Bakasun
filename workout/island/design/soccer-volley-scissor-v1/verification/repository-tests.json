@@ -1,0 +1,44 @@
+{
+  "status": "environment_failure_resolved_by_focused_rerun",
+  "summary": "3,893 בדיקות עברו ו־64 דולגו בהרצה המלאה; כשל סביבתי יחיד עקב נתיב Chromium חסר נפתר בהרצה ממוקדת: 5/5 עברו",
+  "nodeVersion": "v24.19.0",
+  "chromiumVersion": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "fullSuite": {
+    "command": "node --test --test-force-exit tests/*.mjs",
+    "logSha256": "7fb1dd023ef46790d5fd33b690312b20222ed60c69b802b1ebc2be9e649c9640",
+    "stats": {
+      "tests": 3958,
+      "suites": 0,
+      "pass": 3893,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 64,
+      "todo": 0,
+      "duration_ms": 437325.287722
+    },
+    "exitCode": 1,
+    "failedTest": "tests/workout-royiki.test.mjs:91",
+    "reason": "Playwright runtime was available, but its bundled chromium_headless_shell-1234 executable was absent. No assertion failure in the animation package."
+  },
+  "focusedRetry": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/soccer-volley-playwright.mjs node --test tests/workout-royiki.test.mjs",
+    "logSha256": "2b05060930810290e7ac6e8584198f9e36e0e067b0d659bc463218e5cadbdaeb",
+    "stats": {
+      "tests": 5,
+      "suites": 0,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 24971.426397
+    },
+    "exitCode": 0,
+    "environment": "Temporary external module exposes the installed Playwright chromium with launch.executablePath=/usr/bin/chromium. All original test assertions and options are retained. No existing repository files changed."
+  },
+  "initialRun": {
+    "command": "npm test",
+    "status": "did_not_terminate_after_test_output",
+    "note": "The preexisting browser test starts an HTTP server before launching Chromium, outside its cleanup try/finally. Missing browser launch left an open handle. The full suite was repeated with the Node test runner force-exit option to obtain an explicit result."
+  }
+}

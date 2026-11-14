@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "renderer": "Chromium WebGL via SwiftShader; actual delivered GLBs",
+  "webAssemblyBlocked": true,
+  "networkOrigins": [
+    "http://127.0.0.1:44309"
+  ],
+  "wasmRequests": [],
+  "errors": [],
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollHeight": 390,
+      "stage": {
+        "x": 21,
+        "y": 72,
+        "width": 594,
+        "height": 206,
+        "top": 72,
+        "right": 615,
+        "bottom": 278,
+        "left": 21
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "stage": {
+        "x": 13,
+        "y": 208,
+        "width": 364,
+        "height": 509,
+        "top": 208,
+        "right": 377,
+        "bottom": 717,
+        "left": 13
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "scrollWidth": 1280,
+      "scrollHeight": 800,
+      "stage": {
+        "x": 52.1875,
+        "y": 105,
+        "width": 899.625,
+        "height": 553,
+        "top": 105,
+        "right": 951.8125,
+        "bottom": 658,
+        "left": 52.1875
+      }
+    }
+  ],
+  "checks": [
+    {
+      "name": "volley_right: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "volley_right: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "volley_right: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "volley_right: reused exact contact frame",
+      "passed": true
+    },
+    {
+      "name": "volley_left: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "volley_left: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "volley_left: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "volley_left: reused exact contact frame",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: reused exact contact frame",
+      "passed": true
+    },
+    {
+      "name": "scissor_land_getup: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "scissor_land_getup: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "scissor_land_getup: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "header_prepare: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "header_prepare: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "header_prepare: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: reused sheets match current GLB",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: reused eight frames",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: recorded native 18-bone snapshots",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: reused exact contact frame",
+      "passed": true
+    },
+    {
+      "name": "844x390: no overflow",
+      "passed": true,
+      "layout": {
+        "width": 844,
+        "height": 390,
+        "scrollWidth": 844,
+        "scrollHeight": 390,
+        "stage": {
+          "x": 21,
+          "y": 72,
+          "width": 594,
+          "height": 206,
+          "top": 72,
+          "right": 615,
+          "bottom": 278,
+          "left": 21
+        }
+      }
+    },
+    {
+      "name": "390x844: no overflow",
+      "passed": true,
+      "layout": {
+        "width": 390,
+        "height": 844,
+        "scrollWidth": 390,
+        "scrollHeight": 844,
+        "stage": {
+          "x": 13,
+          "y": 208,
+          "width": 364,
+          "height": 509,
+          "top": 208,
+          "right": 377,
+          "bottom": 717,
+          "left": 13
+        }
+      }
+    },
+    {
+      "name": "1280x800: no overflow",
+      "passed": true,
+      "layout": {
+        "width": 1280,
+        "height": 800,
+        "scrollWidth": 1280,
+        "scrollHeight": 800,
+        "stage": {
+          "x": 52.1875,
+          "y": 105,
+          "width": 899.625,
+          "height": 553,
+          "top": 105,
+          "right": 951.8125,
+          "bottom": 658,
+          "left": 52.1875
+        }
+      }
+    },
+    {
+      "name": "volley_right: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "volley_right: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "volley_left: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "volley_left: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "scissor_backward: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "scissor_land_getup: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "scissor_land_getup: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "header_prepare: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "header_prepare: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: clip button selects actual asset",
+      "passed": true
+    },
+    {
+      "name": "header_jump_neutral: timeline seeks via keyboard",
+      "passed": true
+    },
+    {
+      "name": "camera: front",
+      "passed": true
+    },
+    {
+      "name": "camera: side",
+      "passed": true
+    },
+    {
+      "name": "camera: three",
+      "passed": true
+    },
+    {
+      "name": "speed control",
+      "passed": true
+    },
+    {
+      "name": "skeleton control",
+      "passed": true
+    },
+    {
+      "name": "sequence starts with scissor",
+      "passed": true
+    },
+    {
+      "name": "sequence continues into landing",
+      "passed": true
+    },
+    {
+      "name": "offline assets only",
+      "passed": true
+    },
+    {
+      "name": "no decoder requests",
+      "passed": true
+    },
+    {
+      "name": "no browser errors",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "sheets": [
+    {
+      "id": "volley_right",
+      "view": "three",
+      "sourceAsset": "clips/volley_right.glb",
+      "sourceAssetSha256": "c3fa7cf8a462c878b189f74250bb01fc35ec42d8f6f558d236f692668d5428ca",
+      "sourceAssetBytes": 893860,
+      "sheet": "sheets/volley_right.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 58932,
+      "sha256": "c2d2e59c4b3123f6f5f7da7d09f79a322ab0bf95defb58136c8ec5cbbaa93728",
+      "frames": 8
+    },
+    {
+      "id": "volley_left",
+      "view": "three",
+      "sourceAsset": "clips/volley_left.glb",
+      "sourceAssetSha256": "cc61a1c0db582fd73e0c1f3248d7be825c8f8b7a4311cf7138db2a1395081c19",
+      "sourceAssetBytes": 893836,
+      "sheet": "sheets/volley_left.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 58350,
+      "sha256": "845beca34770a074c20bc6134307baaebe48f9f55333edc79f1b8a8af2c36fe0",
+      "frames": 8
+    },
+    {
+      "id": "scissor_backward",
+      "view": "side",
+      "sourceAsset": "clips/scissor_backward.glb",
+      "sourceAssetSha256": "31aa1118736a6cc2b48b149f8304f06e8507e474c63053373bb6b95f44113ddc",
+      "sourceAssetBytes": 886052,
+      "sheet": "sheets/scissor_backward.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 60110,
+      "sha256": "352344fe0ab62e2bf6e60fe65f6c14bc87969956dc8bec817b266a76d007c611",
+      "frames": 8
+    },
+    {
+      "id": "scissor_land_getup",
+      "view": "side",
+      "sourceAsset": "clips/scissor_land_getup.glb",
+      "sourceAssetSha256": "ad7566612b30b604324c1aa2af10206f25c1cfb4ad0c60ad555fe905d822bfac",
+      "sourceAssetBytes": 878664,
+      "sheet": "sheets/scissor_land_getup.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 52030,
+      "sha256": "e2165ecd390a9c42cc794a072097ec28a39c89fa197692af4aa645bbae4045cc",
+      "frames": 8
+    },
+    {
+      "id": "header_prepare",
+      "view": "three",
+      "sourceAsset": "clips/header_prepare.glb",
+      "sourceAssetSha256": "1de46fc9cf8374ebf1bca738eaa3ea38aed8c1917c2ce913b4233b060f490e62",
+      "sourceAssetBytes": 881012,
+      "sheet": "sheets/header_prepare.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 61402,
+      "sha256": "a90f9fdd8929c96ede8484d1c30b71114350d49b73284a630a9649cc651fa88e",
+      "frames": 8
+    },
+    {
+      "id": "header_jump_neutral",
+      "view": "three",
+      "sourceAsset": "clips/header_jump_neutral.glb",
+      "sourceAssetSha256": "c482ab666fcb516f0d96f9dc98321f350655d415c9c05e21b2a5c37ec6dfb14f",
+      "sourceAssetBytes": 883564,
+      "sheet": "sheets/header_jump_neutral.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 62174,
+      "sha256": "cd131aca8f12503660e0eac1b915b2f707d9a720900f9c363763ea022d26188d",
+      "frames": 8
+    }
+  ]
+}

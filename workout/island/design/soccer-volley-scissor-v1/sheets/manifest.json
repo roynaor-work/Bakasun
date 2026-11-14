@@ -1,0 +1,3160 @@
+{
+  "schemaVersion": 1,
+  "nativeRate": 30,
+  "framesPerClip": 8,
+  "renderer": "actual delivered GLB AnimationMixer, LINEAR translation and quaternion slerp",
+  "clips": [
+    {
+      "id": "volley_right",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "motion",
+          "frame": 23,
+          "time": 0.7666666666666667
+        },
+        {
+          "stage": "back",
+          "frame": 24,
+          "time": 0.8
+        },
+        {
+          "stage": "contact",
+          "frame": 39,
+          "time": 1.3
+        },
+        {
+          "stage": "motion",
+          "frame": 45,
+          "time": 1.5
+        },
+        {
+          "stage": "follow",
+          "frame": 51,
+          "time": 1.7
+        },
+        {
+          "stage": "motion",
+          "frame": 68,
+          "time": 2.2666666666666666
+        },
+        {
+          "stage": "exit",
+          "frame": 90,
+          "time": 3
+        }
+      ],
+      "view": "three",
+      "sourceAsset": "clips/volley_right.glb",
+      "sourceAssetSha256": "c3fa7cf8a462c878b189f74250bb01fc35ec42d8f6f558d236f692668d5428ca",
+      "sourceAssetBytes": 893860,
+      "snapshots": [
+        {
+          "id": "volley_right",
+          "time": 0,
+          "frame": 0,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.32508262174056207,
+            2.3715795797607067,
+            5.098847548459178
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352798286,
+              0.01191090309019547
+            ],
+            "LeftFoot": [
+              0.12999999643553514,
+              0.08000003296897357,
+              0.025000004085817873
+            ],
+            "RightFoot": [
+              -0.1299999995761083,
+              0.08000002789026744,
+              -0.02499998100552503
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 0.7666666666666667,
+          "frame": 23,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.23308262174056207,
+            1.4515795797607067,
+            2.4921808817925113
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0.03751585283119477,
+              0.7405733463414494,
+              0
+            ],
+            "Head": [
+              0.0667729546401245,
+              1.3461182443867072,
+              -0.06392264754407552
+            ],
+            "LeftFoot": [
+              0.12999999908242454,
+              0.08000004097800545,
+              0.025000002995680837
+            ],
+            "RightFoot": [
+              -0.21885333968160883,
+              0.376177778229788,
+              -0.2570059385878447
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 0.8,
+          "frame": 24,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.22908262174056207,
+            1.4115795797607067,
+            2.378847548459178
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0.03799999860496076,
+              0.7400000097417843,
+              0
+            ],
+            "Head": [
+              0.06799001291970641,
+              1.3454295788183004,
+              -0.0645762135578271
+            ],
+            "LeftFoot": [
+              0.12999999732882658,
+              0.08000003896977198,
+              0.024999993931979325
+            ],
+            "RightFoot": [
+              -0.22000000461011626,
+              0.3799999789488843,
+              -0.2599999845883357
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 1.3,
+          "frame": 39,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.16908262174056207,
+            0.8115795797607067,
+            0.6788475484591782
+          ],
+          "contactMarker": [
+            -0.17866968293608462,
+            0.8268303770135501,
+            0.5703326340996628
+          ],
+          "joints": {
+            "Hips": [
+              0.015199999935428152,
+              0.7670000199302639,
+              0.02500000023179664
+            ],
+            "Head": [
+              0.01322128734620656,
+              1.3769796500428342,
+              0.02066725379664372
+            ],
+            "LeftFoot": [
+              0.13000000495777378,
+              0.08000004379778414,
+              0.02500002905467974
+            ],
+            "RightFoot": [
+              -0.18999993460426057,
+              0.8300000167236665,
+              0.44000006418265203
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 1.5,
+          "frame": 45,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.030917378259437883,
+            1.0753795797607066,
+            3.4788475484591777
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0.009499999694526196,
+              0.7737500071525574,
+              0.02250000089406967
+            ],
+            "Head": [
+              0.011263980951999182,
+              1.383738550363792,
+              0.025606305007138085
+            ],
+            "LeftFoot": [
+              0.12999999133353382,
+              0.08000003120013949,
+              0.02499998268734327
+            ],
+            "RightFoot": [
+              0.0170833473278012,
+              0.8213889016469095,
+              0.4772222672119706
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 1.7,
+          "frame": 51,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.23091737825943784,
+            0.9467795797607068,
+            6.278847548459177
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0.0038000003849454813,
+              0.7804999943748508,
+              0.01999999969369755
+            ],
+            "Head": [
+              0.010566874851187232,
+              1.3903727177157639,
+              0.0297958102524537
+            ],
+            "LeftFoot": [
+              0.13000001078130194,
+              0.08000001987087285,
+              0.025000040035993654
+            ],
+            "RightFoot": [
+              0.16999997625951496,
+              0.7599999940182697,
+              0.4199999971958303
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 2.2666666666666666,
+          "frame": 68,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.7975840449261045,
+            0.11,
+            14.21218088179251
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3950000262260436,
+              0
+            ],
+            "LeftFoot": [
+              0.12999999880021645,
+              0.08000004778149555,
+              0.02500002875006721
+            ],
+            "RightFoot": [
+              -0.12999999954048602,
+              0.08000005644293257,
+              -0.02500000750408865
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_right",
+          "time": 3,
+          "frame": 90,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            1.5309173782594379,
+            0.11,
+            24.47884754845918
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352832166,
+              0.011910902911441437
+            ],
+            "LeftFoot": [
+              0.12999999643553603,
+              0.08000003297165925,
+              0.025000004150812744
+            ],
+            "RightFoot": [
+              -0.12999999957610847,
+              0.08000002788834559,
+              -0.02499998094051223
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        }
+      ],
+      "sheet": "sheets/volley_right.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 58932,
+      "sha256": "c2d2e59c4b3123f6f5f7da7d09f79a322ab0bf95defb58136c8ec5cbbaa93728"
+    },
+    {
+      "id": "volley_left",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "motion",
+          "frame": 23,
+          "time": 0.7666666666666667
+        },
+        {
+          "stage": "back",
+          "frame": 24,
+          "time": 0.8
+        },
+        {
+          "stage": "contact",
+          "frame": 39,
+          "time": 1.3
+        },
+        {
+          "stage": "motion",
+          "frame": 45,
+          "time": 1.5
+        },
+        {
+          "stage": "follow",
+          "frame": 51,
+          "time": 1.7
+        },
+        {
+          "stage": "motion",
+          "frame": 68,
+          "time": 2.2666666666666666
+        },
+        {
+          "stage": "exit",
+          "frame": 90,
+          "time": 3
+        }
+      ],
+      "view": "three",
+      "sourceAsset": "clips/volley_left.glb",
+      "sourceAssetSha256": "cc61a1c0db582fd73e0c1f3248d7be825c8f8b7a4311cf7138db2a1395081c19",
+      "sourceAssetBytes": 893836,
+      "snapshots": [
+        {
+          "id": "volley_left",
+          "time": 0,
+          "frame": 0,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.013082621740562073,
+            2.3715795797607067,
+            5.098847548459178
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352798286,
+              0.01191090309019547
+            ],
+            "LeftFoot": [
+              0.12999999643553514,
+              0.08000003296897357,
+              0.025000004085817873
+            ],
+            "RightFoot": [
+              -0.1299999995761083,
+              0.08000002789026744,
+              -0.02499998100552503
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 0.7666666666666667,
+          "frame": 23,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.10508262174056207,
+            1.4515795797607067,
+            2.4921808817925113
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              -0.03751585283119477,
+              0.7405733463414494,
+              0
+            ],
+            "Head": [
+              -0.0667729546401245,
+              1.3461182443867072,
+              -0.06392264754407552
+            ],
+            "LeftFoot": [
+              0.21885331020031293,
+              0.37617782083635465,
+              -0.25636890552327474
+            ],
+            "RightFoot": [
+              -0.13000000403143117,
+              0.08000005324165638,
+              -0.025000003052633363
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 0.8,
+          "frame": 24,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.10908262174056207,
+            1.4115795797607067,
+            2.378847548459178
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              -0.03799999860496076,
+              0.7400000097417843,
+              0
+            ],
+            "Head": [
+              -0.06799001291970641,
+              1.3454295788183004,
+              -0.0645762135578271
+            ],
+            "LeftFoot": [
+              0.22000000461083682,
+              0.37999997894748616,
+              -0.2599999843609399
+            ],
+            "RightFoot": [
+              -0.12999999263289833,
+              0.08000003178965903,
+              -0.024999987780169514
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 1.3,
+          "frame": 39,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.16908262174056207,
+            0.8115795797607067,
+            0.6788475484591782
+          ],
+          "contactMarker": [
+            0.17866968293608462,
+            0.8268303770135501,
+            0.5703326340996628
+          ],
+          "joints": {
+            "Hips": [
+              -0.015199999935428152,
+              0.7670000199302639,
+              0.02500000023179664
+            ],
+            "Head": [
+              -0.01322128734620656,
+              1.3769796500428342,
+              0.02066725379664372
+            ],
+            "LeftFoot": [
+              0.18999993460426057,
+              0.8300000167236665,
+              0.44000006418265203
+            ],
+            "RightFoot": [
+              -0.13000000078495735,
+              0.0800000458089784,
+              -0.025000000813302475
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 1.5,
+          "frame": 45,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.030917378259437883,
+            1.0753795797607066,
+            3.4788475484591777
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              -0.009499999694526196,
+              0.7737500071525574,
+              0.02250000089406967
+            ],
+            "Head": [
+              -0.011263980951999182,
+              1.383738550363792,
+              0.025606305007138085
+            ],
+            "LeftFoot": [
+              -0.0170833473278012,
+              0.8213889016469095,
+              0.4772222672119706
+            ],
+            "RightFoot": [
+              -0.13000000197096626,
+              0.08000004071661454,
+              -0.02499998048858726
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 1.7,
+          "frame": 51,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.23091737825943784,
+            0.9467795797607068,
+            6.278847548459177
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              -0.0038000003849454813,
+              0.7804999943748508,
+              0.01999999969369755
+            ],
+            "Head": [
+              -0.010566874851187232,
+              1.3903727177157639,
+              0.0297958102524537
+            ],
+            "LeftFoot": [
+              -0.16999997625951496,
+              0.7599999940182697,
+              0.4199999971958303
+            ],
+            "RightFoot": [
+              -0.12999999453034564,
+              0.08000002538103129,
+              -0.0249999889533237
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 2.2666666666666666,
+          "frame": 68,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.7975840449261045,
+            0.11,
+            14.21218088179251
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3950000262260436,
+              0
+            ],
+            "LeftFoot": [
+              0.12999999880021645,
+              0.08000004778149555,
+              0.02500002875006721
+            ],
+            "RightFoot": [
+              -0.12999999954048602,
+              0.08000005644293257,
+              -0.02500000750408865
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        },
+        {
+          "id": "volley_left",
+          "time": 3,
+          "frame": 90,
+          "duration": 3,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -1.5309173782594379,
+            0.11,
+            24.47884754845918
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352832166,
+              0.011910902911441437
+            ],
+            "LeftFoot": [
+              0.12999999643553603,
+              0.08000003297165925,
+              0.025000004150812744
+            ],
+            "RightFoot": [
+              -0.12999999957610847,
+              0.08000002788834559,
+              -0.02499998094051223
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 3
+        }
+      ],
+      "sheet": "sheets/volley_left.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 58350,
+      "sha256": "845beca34770a074c20bc6134307baaebe48f9f55333edc79f1b8a8af2c36fe0"
+    },
+    {
+      "id": "scissor_backward",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "motion",
+          "frame": 16,
+          "time": 0.5333333333333333
+        },
+        {
+          "stage": "takeoff",
+          "frame": 18,
+          "time": 0.6
+        },
+        {
+          "stage": "back",
+          "frame": 27,
+          "time": 0.9
+        },
+        {
+          "stage": "motion",
+          "frame": 32,
+          "time": 1.0666666666666667
+        },
+        {
+          "stage": "contact",
+          "frame": 39,
+          "time": 1.3
+        },
+        {
+          "stage": "follow",
+          "frame": 48,
+          "time": 1.6
+        },
+        {
+          "stage": "exit",
+          "frame": 63,
+          "time": 2.1
+        }
+      ],
+      "view": "side",
+      "sourceAsset": "clips/scissor_backward.glb",
+      "sourceAssetSha256": "31aa1118736a6cc2b48b149f8304f06e8507e474c63053373bb6b95f44113ddc",
+      "sourceAssetBytes": 886052,
+      "snapshots": [
+        {
+          "id": "scissor_backward",
+          "time": 0,
+          "frame": 0,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            3.5393113077857103,
+            2.898750708318934
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352798286,
+              0.01191090309019547
+            ],
+            "LeftFoot": [
+              0.12999999643553514,
+              0.08000003296897357,
+              0.025000004085817873
+            ],
+            "RightFoot": [
+              -0.1299999995761083,
+              0.08000002789026744,
+              -0.02499998100552503
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 0.5333333333333333,
+          "frame": 16,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.925977974452377,
+            1.458750708318934
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7194650256462013,
+              0
+            ],
+            "Head": [
+              0,
+              1.289930755635268,
+              -0.2125074653775786
+            ],
+            "LeftFoot": [
+              0.1299999973852363,
+              0.08000002392657818,
+              0.024999994574760848
+            ],
+            "RightFoot": [
+              -0.12999999989227656,
+              0.08000002218341246,
+              -0.02500000732211788
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 0.6,
+          "frame": 18,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.8493113077857104,
+            1.278750708318934
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7099999803820067,
+              0
+            ],
+            "Head": [
+              0,
+              1.2695809709007362,
+              -0.23943380267615785
+            ],
+            "LeftFoot": [
+              0.12999999796451797,
+              0.08000000680038682,
+              0.025000005210584902
+            ],
+            "RightFoot": [
+              -0.1299999989987497,
+              0.08000000422719072,
+              -0.024999981839903984
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 0.9,
+          "frame": 27,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.50431130778571,
+            0.46875070831893373
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              1.1000000275009227,
+              0.01999999983443178
+            ],
+            "Head": [
+              0,
+              1.4708334073840148,
+              -0.4630566747595161
+            ],
+            "LeftFoot": [
+              0.07353040756072303,
+              0.8554272845939038,
+              0.5883389792164415
+            ],
+            "RightFoot": [
+              -0.0819048335007916,
+              0.8601513897395294,
+              0.4609765752147637
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 1.0666666666666667,
+          "frame": 32,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.3126446411190438,
+            0.018750708318933884
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              1.1978008239856217,
+              0.027523144903014458
+            ],
+            "Head": [
+              0,
+              1.447470798539894,
+              -0.5282050371073523
+            ],
+            "LeftFoot": [
+              0.07539368864944083,
+              0.897007647393167,
+              0.5406018944651799
+            ],
+            "RightFoot": [
+              -0.07249032392242193,
+              1.496371840606004,
+              0.5842280414547135
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 1.3,
+          "frame": 39,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.0443113077857102,
+            -0.6112492916810663
+          ],
+          "contactMarker": [
+            -0.0554926028105307,
+            2.015933544099642,
+            -0.5050898321893995
+          ],
+          "joints": {
+            "Hips": [
+              0,
+              1.3600000025313956,
+              0.03999999321907077
+            ],
+            "Head": [
+              0,
+              1.376558514616448,
+              -0.5691765026633557
+            ],
+            "LeftFoot": [
+              0.07854225792723787,
+              0.9900000380764601,
+              0.4494381318714939
+            ],
+            "RightFoot": [
+              -0.06099223780209566,
+              1.996877798152044,
+              -0.375739020204143
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 1.6,
+          "frame": 48,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            2.14286130778571,
+            -4.811249291681067
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              1.1200000106552521,
+              -0.07999999526842036
+            ],
+            "Head": [
+              0,
+              1.1128445459043574,
+              -0.689937529654818
+            ],
+            "LeftFoot": [
+              0.08355410646351294,
+              1.0072330785658967,
+              0.3820470229394394
+            ],
+            "RightFoot": [
+              -0.06484962731107156,
+              1.8019651334573048,
+              -0.31070362695629367
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        },
+        {
+          "id": "scissor_backward",
+          "time": 2.1,
+          "frame": 63,
+          "duration": 2.1,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": [
+            -0.05050693404571141,
+            0.34511130778571,
+            -11.811249291681067
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.36000001430511475,
+              -0.30000001192092896
+            ],
+            "Head": [
+              0,
+              0.3600000351845252,
+              -0.9099999910415184
+            ],
+            "LeftFoot": [
+              0.15999999843820234,
+              0.2200000070867476,
+              0.19999995814910396
+            ],
+            "RightFoot": [
+              -0.15999999843820234,
+              0.2200000070867476,
+              0.19999995814910396
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 2.0999999046325684
+        }
+      ],
+      "sheet": "sheets/scissor_backward.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 60110,
+      "sha256": "352344fe0ab62e2bf6e60fe65f6c14bc87969956dc8bec817b266a76d007c611"
+    },
+    {
+      "id": "scissor_land_getup",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "back_land",
+          "frame": 9,
+          "time": 0.3
+        },
+        {
+          "stage": "motion",
+          "frame": 11,
+          "time": 0.36666666666666664
+        },
+        {
+          "stage": "motion",
+          "frame": 23,
+          "time": 0.7666666666666667
+        },
+        {
+          "stage": "getup_complete",
+          "frame": 27,
+          "time": 0.9
+        },
+        {
+          "stage": "motion",
+          "frame": 34,
+          "time": 1.1333333333333333
+        },
+        {
+          "stage": "recover",
+          "frame": 36,
+          "time": 1.2
+        },
+        {
+          "stage": "exit",
+          "frame": 45,
+          "time": 1.5
+        }
+      ],
+      "view": "side",
+      "sourceAsset": "clips/scissor_land_getup.glb",
+      "sourceAssetSha256": "ad7566612b30b604324c1aa2af10206f25c1cfb4ad0c60ad555fe905d822bfac",
+      "sourceAssetBytes": 878664,
+      "snapshots": [
+        {
+          "id": "scissor_land_getup",
+          "time": 0,
+          "frame": 0,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.36000001430511475,
+              -0.30000001192092896
+            ],
+            "Head": [
+              0,
+              0.3600000351845252,
+              -0.9099999910415184
+            ],
+            "LeftFoot": [
+              0.15999999843820234,
+              0.2200000070867476,
+              0.19999995814910396
+            ],
+            "RightFoot": [
+              -0.15999999843820234,
+              0.2200000070867476,
+              0.19999995814910396
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 0.3,
+          "frame": 9,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.15999999949708707,
+              -0.30000001192092896
+            ],
+            "Head": [
+              0,
+              0.16000002037649755,
+              -0.9099999910415184
+            ],
+            "LeftFoot": [
+              0.1600000040062233,
+              0.07999998725010882,
+              0.199999957629807
+            ],
+            "RightFoot": [
+              -0.1600000040062233,
+              0.07999998725010882,
+              0.199999957629807
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 0.36666666666666664,
+          "frame": 11,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.18111998978138266,
+              -0.2824000149726873
+            ],
+            "Head": [
+              0,
+              0.42455188412149636,
+              -0.8321674432431801
+            ],
+            "LeftFoot": [
+              0.16000000452216953,
+              0.07999997745342774,
+              0.19999997281598747
+            ],
+            "RightFoot": [
+              -0.16000000452216953,
+              0.07999997745342774,
+              0.19999997281598747
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 0.7666666666666667,
+          "frame": 23,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.6057064811551863,
+              -0.01251028625011129
+            ],
+            "Head": [
+              0,
+              1.2040312575963885,
+              0.10430380459109387
+            ],
+            "LeftFoot": [
+              0.16000000127766137,
+              0.08000001509047894,
+              0.20000004261922907
+            ],
+            "RightFoot": [
+              -0.13895999843072324,
+              0.13376000482399436,
+              0.08700000081486547
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 0.9,
+          "frame": 27,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7599999910764831,
+              0
+            ],
+            "Head": [
+              0,
+              1.3691390251280953,
+              0.03144309050850141
+            ],
+            "LeftFoot": [
+              0.15999999579766794,
+              0.07999999722826368,
+              0.19999998602209473
+            ],
+            "RightFoot": [
+              -0.13000000075890034,
+              0.08000001335787454,
+              -0.024999975203377822
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 1.1333333333333333,
+          "frame": 34,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7818449741119627,
+              0
+            ],
+            "Head": [
+              0,
+              1.3909840081635747,
+              0.03144309050850141
+            ],
+            "LeftFoot": [
+              0.13625514190448845,
+              0.10085047688318,
+              0.05627571251083782
+            ],
+            "RightFoot": [
+              -0.1299999977100183,
+              0.08000001574885035,
+              -0.02499998497034442
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 1.2,
+          "frame": 36,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000249995933,
+              0
+            ],
+            "Head": [
+              0,
+              1.3941390590512053,
+              0.03144309050850141
+            ],
+            "LeftFoot": [
+              0.13000000170681134,
+              0.08000005317749903,
+              0.025000039591058065
+            ],
+            "RightFoot": [
+              -0.1299999994356113,
+              0.08000005374538421,
+              -0.024999999217113433
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        },
+        {
+          "id": "scissor_land_getup",
+          "time": 1.5,
+          "frame": 45,
+          "duration": 1.5,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "side",
+          "ball": null,
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352783438,
+              0.01191090315204938
+            ],
+            "LeftFoot": [
+              0.12999999643553634,
+              0.08000003296897162,
+              0.025000004085828337
+            ],
+            "RightFoot": [
+              -0.1299999995761085,
+              0.08000002789026772,
+              -0.024999981005524502
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.5
+        }
+      ],
+      "sheet": "sheets/scissor_land_getup.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 52030,
+      "sha256": "e2165ecd390a9c42cc794a072097ec28a39c89fa197692af4aa645bbae4045cc"
+    },
+    {
+      "id": "header_prepare",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "motion",
+          "frame": 7,
+          "time": 0.23333333333333334
+        },
+        {
+          "stage": "motion",
+          "frame": 14,
+          "time": 0.4666666666666667
+        },
+        {
+          "stage": "prepare",
+          "frame": 18,
+          "time": 0.6
+        },
+        {
+          "stage": "motion",
+          "frame": 27,
+          "time": 0.9
+        },
+        {
+          "stage": "motion",
+          "frame": 41,
+          "time": 1.3666666666666667
+        },
+        {
+          "stage": "recover",
+          "frame": 48,
+          "time": 1.6
+        },
+        {
+          "stage": "exit",
+          "frame": 54,
+          "time": 1.8
+        }
+      ],
+      "view": "three",
+      "sourceAsset": "clips/header_prepare.glb",
+      "sourceAssetSha256": "1de46fc9cf8374ebf1bca738eaa3ea38aed8c1917c2ce913b4233b060f490e62",
+      "sourceAssetBytes": 881012,
+      "snapshots": [
+        {
+          "id": "header_prepare",
+          "time": 0,
+          "frame": 0,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.45
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352798286,
+              0.01191090309019547
+            ],
+            "LeftFoot": [
+              0.12999999643553514,
+              0.08000003296897357,
+              0.025000004085817873
+            ],
+            "RightFoot": [
+              -0.1299999995761083,
+              0.08000002789026744,
+              -0.02499998100552503
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 0.23333333333333334,
+          "frame": 7,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.408
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7837210894012134,
+              -0.000550925889863046
+            ],
+            "Head": [
+              0,
+              1.392951689749094,
+              0.02923956202804289
+            ],
+            "LeftFoot": [
+              0.12999999788820482,
+              0.08000004951012435,
+              0.02499999373811157
+            ],
+            "RightFoot": [
+              -0.13000000071121506,
+              0.0800000474998449,
+              -0.024999995494774968
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 0.4666666666666667,
+          "frame": 14,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.3659999999999999
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7368518714665377,
+              -0.02074073980610679
+            ],
+            "Head": [
+              0,
+              1.3457682456291367,
+              -0.05156642955222892
+            ],
+            "LeftFoot": [
+              0.1299999993468876,
+              0.08000004974356079,
+              0.02499999921977275
+            ],
+            "RightFoot": [
+              -0.12999999837777448,
+              0.08000004837652219,
+              -0.024999987322768175
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 0.6,
+          "frame": 18,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.3419999999999999
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.720000029524953,
+              -0.028000000470213556
+            ],
+            "Head": [
+              0,
+              1.327059543231044,
+              -0.08053936545774518
+            ],
+            "LeftFoot": [
+              0.12999999950782923,
+              0.08000005405785726,
+              0.025000009574565357
+            ],
+            "RightFoot": [
+              -0.12999999769096093,
+              0.08000005957124295,
+              -0.024999963636751832
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 0.9,
+          "frame": 27,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.288
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7200000286102295,
+              -0.02800000086426735
+            ],
+            "Head": [
+              0,
+              1.3270595421905969,
+              -0.08053936702782331
+            ],
+            "LeftFoot": [
+              0.12999999950771515,
+              0.08000005405985178,
+              0.02500000957370957
+            ],
+            "RightFoot": [
+              -0.1299999976908297,
+              0.08000005957334594,
+              -0.024999963637322875
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 1.3666666666666667,
+          "frame": 41,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.204
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7557451709531888,
+              -0.01260207473834859
+            ],
+            "Head": [
+              0,
+              1.3656478668546126,
+              -0.019004023725639026
+            ],
+            "LeftFoot": [
+              0.12999999909346718,
+              0.08000000585417322,
+              0.02500000611504921
+            ],
+            "RightFoot": [
+              -0.1299999994661645,
+              0.08000001530090156,
+              -0.024999988435484732
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 1.6,
+          "frame": 48,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.162
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000256337063,
+              -2.551611139882026e-10
+            ],
+            "Head": [
+              0,
+              1.3941390597289578,
+              0.03144308948801137
+            ],
+            "LeftFoot": [
+              0.12999999895678593,
+              0.08000004444025943,
+              0.025000025920212388
+            ],
+            "RightFoot": [
+              -0.12999999943547763,
+              0.08000005374706926,
+              -0.024999999216636593
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_prepare",
+          "time": 1.8,
+          "frame": 54,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.08,
+            1.85,
+            1.126
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352707936,
+              0.011910903524487735
+            ],
+            "LeftFoot": [
+              0.12999999643553606,
+              0.08000003296897168,
+              0.02500000408583175
+            ],
+            "RightFoot": [
+              -0.12999999957610836,
+              0.08000002789026756,
+              -0.024999981005522864
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        }
+      ],
+      "sheet": "sheets/header_prepare.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 61402,
+      "sha256": "a90f9fdd8929c96ede8484d1c30b71114350d49b73284a630a9649cc651fa88e"
+    },
+    {
+      "id": "header_jump_neutral",
+      "frames": [
+        {
+          "stage": "entry",
+          "frame": 0,
+          "time": 0
+        },
+        {
+          "stage": "back",
+          "frame": 11,
+          "time": 0.36666666666666664
+        },
+        {
+          "stage": "takeoff",
+          "frame": 15,
+          "time": 0.5
+        },
+        {
+          "stage": "contact",
+          "frame": 24,
+          "time": 0.8
+        },
+        {
+          "stage": "motion",
+          "frame": 27,
+          "time": 0.9
+        },
+        {
+          "stage": "follow",
+          "frame": 28,
+          "time": 0.9333333333333333
+        },
+        {
+          "stage": "land",
+          "frame": 33,
+          "time": 1.1
+        },
+        {
+          "stage": "exit",
+          "frame": 54,
+          "time": 1.8
+        }
+      ],
+      "view": "three",
+      "sourceAsset": "clips/header_jump_neutral.glb",
+      "sourceAssetSha256": "c482ab666fcb516f0d96f9dc98321f350655d415c9c05e21b2a5c37ec6dfb14f",
+      "sourceAssetBytes": 883564,
+      "snapshots": [
+        {
+          "id": "header_jump_neutral",
+          "time": 0,
+          "frame": 0,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.07998718184172343,
+            2.132530943833374,
+            2.9600228501313413
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352798286,
+              0.01191090309019547
+            ],
+            "LeftFoot": [
+              0.12999999643553514,
+              0.08000003296897357,
+              0.025000004085817873
+            ],
+            "RightFoot": [
+              -0.1299999995761083,
+              0.08000002789026744,
+              -0.02499998100552503
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 0.36666666666666664,
+          "frame": 11,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.04332051517505676,
+            1.9308642771667075,
+            1.8233561834646743
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.6857407715341141,
+              0
+            ],
+            "Head": [
+              0,
+              1.2943437330815668,
+              0.025308739232139155
+            ],
+            "LeftFoot": [
+              0.12999999856567276,
+              0.08000004500807945,
+              0.025000025032163947
+            ],
+            "RightFoot": [
+              -0.12999999997588046,
+              0.0800000536583218,
+              -0.024999978854825494
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 0.5,
+          "frame": 15,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            0.029987181841723422,
+            1.857530943833374,
+            1.410022850131341
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7612396478652954,
+              0
+            ],
+            "Head": [
+              0,
+              1.3703786819169075,
+              0.03144309050850141
+            ],
+            "LeftFoot": [
+              0.12999999928702735,
+              0.07999999970941424,
+              0.025000004794038133
+            ],
+            "RightFoot": [
+              -0.13000000046175023,
+              0.08000000153658104,
+              -0.024999989173265763
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 0.8,
+          "frame": 24,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.000012818158276582323,
+            1.692530943833374,
+            0.4800228501313409
+          ],
+          "contactMarker": [
+            -0.000012818158276582323,
+            1.7487731594605496,
+            0.3854881408753957
+          ],
+          "joints": {
+            "Hips": [
+              0,
+              1.070041295551934,
+              0.024999999938077586
+            ],
+            "Head": [
+              0,
+              1.6535518363655715,
+              0.19181783951305154
+            ],
+            "LeftFoot": [
+              0.1299999984262704,
+              0.4099999983982127,
+              -0.04999996539662083
+            ],
+            "RightFoot": [
+              -0.13000000025531533,
+              0.40999999768784606,
+              -0.10000000049251612
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 0.9,
+          "frame": 27,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.000012818158276582323,
+            1.703480943833374,
+            1.0800228501313407
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              1.024793370101761,
+              0.018671874981373716
+            ],
+            "Head": [
+              0,
+              1.6181115410772253,
+              0.15199196931440168
+            ],
+            "LeftFoot": [
+              0.12999999874947207,
+              0.3700000022420983,
+              -0.04999997042217805
+            ],
+            "RightFoot": [
+              -0.12999999982192945,
+              0.37000000202588595,
+              -0.09999996708366576
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 0.9333333333333333,
+          "frame": 28,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.000012818158276582323,
+            1.6853309438333741,
+            1.2800228501313407
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              1.0019238022410355,
+              0.017500000214204163
+            ],
+            "Head": [
+              0,
+              1.5968154091068074,
+              0.14454310064244325
+            ],
+            "LeftFoot": [
+              0.1299999990201291,
+              0.34851856362927297,
+              -0.0444444647043844
+            ],
+            "RightFoot": [
+              -0.12999999888759742,
+              0.3485185542973128,
+              -0.09444442073794987
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 1.1,
+          "frame": 33,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.000012818158276582323,
+            1.4310809438333738,
+            2.280022850131341
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7300000345444322,
+              0.008059850063539464
+            ],
+            "Head": [
+              0,
+              1.3347484623164454,
+              0.08387892050506364
+            ],
+            "LeftFoot": [
+              0.12999999815072713,
+              0.08000005500986784,
+              0.024999997750490527
+            ],
+            "RightFoot": [
+              -0.12999999836696288,
+              0.08000006087667538,
+              -0.0250000144595606
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        },
+        {
+          "id": "header_jump_neutral",
+          "time": 1.8,
+          "frame": 54,
+          "duration": 1.8,
+          "ready": true,
+          "playing": false,
+          "pairMode": false,
+          "view": "three",
+          "ball": [
+            -0.000012818158276582323,
+            0.11,
+            6.480022850131341
+          ],
+          "contactMarker": null,
+          "joints": {
+            "Hips": [
+              0,
+              0.7850000262260437,
+              0
+            ],
+            "Head": [
+              0,
+              1.3948726352707936,
+              0.011910903524487735
+            ],
+            "LeftFoot": [
+              0.12999999643553606,
+              0.08000003296897168,
+              0.02500000408583175
+            ],
+            "RightFoot": [
+              -0.12999999957610836,
+              0.08000002789026756,
+              -0.024999981005522864
+            ]
+          },
+          "bones": [
+            "Root",
+            "Hips",
+            "Spine",
+            "Chest",
+            "Neck",
+            "Head",
+            "LeftArm",
+            "LeftForeArm",
+            "LeftHand",
+            "RightArm",
+            "RightForeArm",
+            "RightHand",
+            "LeftUpLeg",
+            "LeftLeg",
+            "LeftFoot",
+            "RightUpLeg",
+            "RightLeg",
+            "RightFoot"
+          ],
+          "clipDuration": 1.7999999523162842
+        }
+      ],
+      "sheet": "sheets/header_jump_neutral.webp",
+      "width": 1600,
+      "height": 770,
+      "bytes": 62174,
+      "sha256": "cd131aca8f12503660e0eac1b915b2f707d9a720900f9c363763ea022d26188d"
+    }
+  ]
+}
