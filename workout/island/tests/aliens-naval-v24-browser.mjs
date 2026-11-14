@@ -108,7 +108,12 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
    if(v24)await capture('naval-3-sailing-locked');await leave();return r;};
   if(want('n3')){const v23=await accuracy('v23'),v24=await accuracy('v24');report.accuracy={v23,v24};console.log('accuracy',JSON.stringify(report.accuracy));
    check(v24.shells>=Math.min(SHOTS,10)&&v24.hitPercent>=85,`v24 while sailing: ${v24.hits}/${v24.shells} hits (${v24.hitPercent}%)`);check(v24.hitPercent>v23.hitPercent,`v23 (tap on the ship, no long press): ${v23.hits}/${v23.shells} (${v23.hitPercent}%)`);
-   check(v24.enemyPerMinute>v23.enemyPerMinute,`enemy shots per minute ${v23.enemyPerMinute} -> ${v24.enemyPerMinute}`);check(v24.maxDecals>=1,`red decals on the water (up to ${v24.maxDecals} at once)`);}
+   check(v24.maxDecals>=1,`red decals on the water (up to ${v24.maxDecals} at once)`);}
+  // N4. Enemy fire over a fixed 45 s window, sailing in a circle and never firing (the accuracy runs end after about 16 s, too short for a rate).
+  if(want('n4')){const fire=async v24=>{await ready(10,v24?'':'&navalAim=v23&navalEnemyFire=v23&navalSub=v23');await page.evaluate(()=>{window.__island.games.current.session.debug.view?.degrade(true);});const S=await stickPoint();let s=await snap();const t0=s.time,e0=s.enemyFired,hp0=s.lives;let angle=0,decals=0;
+    await touch('touchStart',[{x:S.x,y:S.y,id:7}]);while(s&&!s.result&&s.time-t0<45){angle+=.1;await touch('touchMove',[{x:S.x+Math.sin(angle)*42,y:S.y-Math.cos(angle)*42,id:7}]);await tick(150);const now=await snap().catch(()=>null);if(!now)break;s=now;decals=Math.max(decals,s.hud?.v24?.decals||0);}
+    await touch('touchEnd');const r={seconds:+(s.time-t0).toFixed(1),enemyShots:s.enemyFired-e0,perMinute:+(60*(s.enemyFired-e0)/Math.max(1,s.time-t0)).toFixed(1),hpLost:+(hp0-s.lives).toFixed(2),maxDecals:decals};await leave();return r;};
+   const v23=await fire(false),v24=await fire(true);report.enemyFire={v23,v24};console.log('enemy fire',JSON.stringify(report.enemyFire));check(v24.perMinute>=1.5*v23.perMinute,`enemy shots per minute over 45 s: ${v23.perMinute} -> ${v24.perMinute}`);check(v24.maxDecals>=1,`red decals while sailing (up to ${v24.maxDecals})`);}
   // N5. The Vulcan held with no drag at a helicopter.
   if(want('n5')){const vulcanRun=async search=>{await page.evaluate(()=>{const a=window.__island.data.config.minigames.navalDuel.levels[2].air;a.from=2;a.kinds=['heli','plane'];});await ready(3,search);
     for(let t=0;t<9000;t+=200){await tick(200);const s=await snap();if(s.air?.some(a=>a.state!=='down'))break;}

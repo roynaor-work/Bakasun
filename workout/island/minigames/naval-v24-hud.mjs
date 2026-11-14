@@ -90,8 +90,11 @@ export function drawNavalV24(p,m,balance,project,width,height){
   const shadow=navalFx('submarine-shadow.png'),ring=navalFx('sonar-ring.png'),L=(balance.aim?.hullLength??34)*.75;let sonar=0;
   for(const e of m.enemies||[]){if(e.subMode!=='v24'||!e.active||!(e.hp>0)||!(e.depth>0))continue;const q=project(e.x,e.z,0);if(!q||!(q.depth>0))continue;
    // The shadow (nose = image top) lies along the hull's heading; the sonar ring (12 cells of 256, 12 fps) pulses around it.
-   onWater(p,project,e.x,e.z,L,()=>{p.rotate((e.heading||0)+Math.PI/2);if(shadow){p.globalAlpha=.6;p.drawImage(shadow,-.5,-1,1,2);}else{p.globalAlpha=.45;p.fillStyle='#1d3a4f';p.beginPath();p.ellipse(0,0,.3,1,0,0,TAU);p.fill();}});
-   onWater(p,project,e.x,e.z,L*1.5,()=>{if(ring){p.globalAlpha=.95;cell(p,ring,Math.floor(time*12)%12,4,256,256,0,0,2.2,2.2);}else for(let k=0;k<3;k++){const u=((time*.7+k/3)%1);p.globalAlpha=(1-u)*.8;p.strokeStyle=NAVAL_V24_COLORS.sonar;p.lineWidth=.05;p.beginPath();p.arc(0,0,.35+u*.65,0,TAU);p.stroke();}});
+   onWater(p,project,e.x,e.z,L,()=>{p.rotate((e.heading||0)+Math.PI/2);if(shadow){p.globalAlpha=.75;p.drawImage(shadow,-.5,-1,1,2);}else{p.globalAlpha=.45;p.fillStyle='#1d3a4f';p.beginPath();p.ellipse(0,0,.3,1,0,0,TAU);p.fill();}
+    // A thin cyan outline around the shadow, so it reads on dark water too.
+    p.globalAlpha=.7;p.strokeStyle=NAVAL_V24_COLORS.sonar;p.lineWidth=.05;p.setLineDash([.12,.08]);p.beginPath();p.ellipse(0,.05,.36,1.02,0,0,TAU);p.stroke();p.setLineDash([]);});
+   // Two pulses of the sonar ring, half a second apart, added on the water so they stay visible on any sea colour.
+   onWater(p,project,e.x,e.z,L*2.2,()=>{const k=Math.floor(time*12)%12;if(ring){p.globalCompositeOperation='lighter';p.globalAlpha=1;cell(p,ring,k,4,256,256,0,0,2.2,2.2);cell(p,ring,(k+6)%12,4,256,256,0,0,2.2,2.2);p.globalCompositeOperation='source-over';}else for(let j=0;j<3;j++){const u=((time*.7+j/3)%1);p.globalAlpha=(1-u)*.8;p.strokeStyle=NAVAL_V24_COLORS.sonar;p.lineWidth=.04;p.beginPath();p.arc(0,0,.25+u*.75,0,TAU);p.stroke();}});
    p.globalAlpha=1;sonar++;}
   out.sonar=sonar;
   const flash=navalFx('launch-flash.png'),boom=navalFx('underwater-explosion.png');
