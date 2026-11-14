@@ -1,0 +1,464 @@
+{
+  "id": "tennis-courts-v1",
+  "version": 1,
+  "license": "CC0-1.0",
+  "units": "meters",
+  "up": "+Y",
+  "forward": "+Z",
+  "origin": "court center at ground level; +Z toward near baseline",
+  "compression": "adaptive RGB palette / RGBA PNG; no WASM or decoder",
+  "compatibility": {
+    "package": "tennis-crowd-3d-v1",
+    "referenceCommit": "950f6650bc2dd4b2216c66228ceceb7476949b9b",
+    "assetIndex": "assets.json",
+    "adapter": "createCourt({T,base,surface,time,lod})",
+    "crowdAdapter": "createCrowd({T,GLTFLoader,seats,base})",
+    "seats": 600,
+    "seatSpacing": 0.7,
+    "rowRise": 0.42,
+    "rowSetback": 0.88,
+    "footToSeatHeight": 0.5
+  },
+  "court": {
+    "worldSize": [
+      16,
+      28
+    ],
+    "singlesWidth": 8.23,
+    "doublesWidth": 10.97,
+    "length": 18,
+    "serviceLength": 4.5,
+    "gameScale": true,
+    "note": "Game dimensions from config; decorative doubles alleys are not a gameplay change.",
+    "net": {
+      "width": 11.3,
+      "postHeight": 1.07,
+      "centerHeight": 0.914
+    }
+  },
+  "stands": {
+    "tiers": [
+      "lower",
+      "upper"
+    ],
+    "rows": 5,
+    "lowerRows": 2,
+    "upperRows": 3,
+    "modules": 10,
+    "lods": [
+      "high",
+      "low"
+    ]
+  },
+  "preview": {
+    "viewport": [
+      844,
+      390
+    ],
+    "cameras": {
+      "game": {
+        "position": [
+          0,
+          12.8,
+          25
+        ],
+        "target": [
+          0,
+          0.4,
+          -0.7
+        ],
+        "fov": 40.3
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "runtime/textures/shared/court-lines.png",
+      "role": "court-lines",
+      "width": 512,
+      "height": 1024,
+      "bytes": 4675,
+      "sha256": "267e22adba24c126e4a93d781ae17aa3d3382cef9841b68da5287e411badc02c",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "worldSize": [
+        16,
+        28
+      ]
+    },
+    {
+      "file": "runtime/textures/clay/surface-tile.png",
+      "role": "surface-tile",
+      "width": 256,
+      "height": 256,
+      "bytes": 34498,
+      "sha256": "052f19618a3244789f60d37d48d2d206d1fb8309cc898c54c390e9ccdcea4e31",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "clay",
+      "transparency": false,
+      "wrap": "repeat",
+      "seamless": true,
+      "worldSize": [
+        2,
+        2
+      ]
+    },
+    {
+      "file": "runtime/textures/clay/court.png",
+      "role": "court",
+      "width": 512,
+      "height": 1024,
+      "bytes": 283657,
+      "sha256": "3c5264de23b37db79d6a813b8b9ee06ea0c3d13e85ac2cba2314b4d33d17dc01",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "clay",
+      "transparency": false,
+      "wrap": "clamp",
+      "worldSize": [
+        16,
+        28
+      ],
+      "markingsBaked": true
+    },
+    {
+      "file": "runtime/textures/grass/surface-tile.png",
+      "role": "surface-tile",
+      "width": 256,
+      "height": 256,
+      "bytes": 34637,
+      "sha256": "5870a4ecd5ca868b7c75e6b1b937d134771fa3f89c3bd0f575d841e2218ae097",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "grass",
+      "transparency": false,
+      "wrap": "repeat",
+      "seamless": true,
+      "worldSize": [
+        2,
+        2
+      ]
+    },
+    {
+      "file": "runtime/textures/grass/court.png",
+      "role": "court",
+      "width": 512,
+      "height": 1024,
+      "bytes": 229960,
+      "sha256": "bbc8d83b7e5029c1893a7e29779a1dbfa141bc02d1c4cee8ef4bb46d3a2f8590",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "grass",
+      "transparency": false,
+      "wrap": "clamp",
+      "worldSize": [
+        16,
+        28
+      ],
+      "markingsBaked": true
+    },
+    {
+      "file": "runtime/textures/hard/surface-tile.png",
+      "role": "surface-tile",
+      "width": 256,
+      "height": 256,
+      "bytes": 22897,
+      "sha256": "4e71345e349f3ea47c9f12c4d79b2eb533fcadc4e44f1d62a865833624bf663c",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "hard",
+      "transparency": false,
+      "wrap": "repeat",
+      "seamless": true,
+      "worldSize": [
+        2,
+        2
+      ]
+    },
+    {
+      "file": "runtime/textures/hard/court.png",
+      "role": "court",
+      "width": 512,
+      "height": 1024,
+      "bytes": 157318,
+      "sha256": "d7adaf2e42f573c9bcfc748670df1b8a7f3f22e3e43e62d8beb886ee7c2ed5bf",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "surface": "hard",
+      "transparency": false,
+      "wrap": "clamp",
+      "worldSize": [
+        16,
+        28
+      ],
+      "markingsBaked": true
+    },
+    {
+      "file": "runtime/textures/shared/net.png",
+      "role": "net",
+      "width": 1024,
+      "height": 128,
+      "bytes": 1060,
+      "sha256": "ff6b4a54f9a244c607d2d9ece5f4265abe778865e907975fb0b6577c40261271",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "worldSize": [
+        11.3,
+        1.07
+      ],
+      "sagCenter": 0.156
+    },
+    {
+      "file": "runtime/textures/shared/ball-shadow.png",
+      "role": "ball-shadow",
+      "width": 128,
+      "height": 128,
+      "bytes": 2908,
+      "sha256": "65c6b10efee74921f6f6381e137af9cc946d84950d63193ead22d2cabf87022c",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "pivot": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "file": "runtime/textures/shared/stand-lower.png",
+      "role": "stand-lower",
+      "width": 512,
+      "height": 128,
+      "bytes": 975,
+      "sha256": "bc89ac8de93956fbc1b451687e35c47b72f2ece07823f772da238801de864d4b",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "tiers": 2
+    },
+    {
+      "file": "runtime/textures/shared/stand-upper.png",
+      "role": "stand-upper",
+      "width": 512,
+      "height": 128,
+      "bytes": 973,
+      "sha256": "e7d9558c7b0933c7362f3c919591f568e5c6577b2b2706b6031eccd2a272af4d",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "tiers": 2
+    },
+    {
+      "file": "runtime/textures/shared/blank-signs.png",
+      "role": "blank-signs",
+      "width": 512,
+      "height": 128,
+      "bytes": 903,
+      "sha256": "a295f4de3bc921519f1f495e4a74b70d6a81a81a4c26c5fad13e59a4a8fd99ba",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "frames": 4,
+      "frameSize": [
+        128,
+        128
+      ],
+      "gutter": 3
+    },
+    {
+      "file": "runtime/textures/shared/clay-dust.png",
+      "role": "clay-dust",
+      "width": 768,
+      "height": 128,
+      "bytes": 27022,
+      "sha256": "23ec2d7f6c6b05f5c91bb6339e172c468dbf4575792045cc3967d459f7ce9b72",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "frames": 6,
+      "frameSize": [
+        128,
+        128
+      ],
+      "pivot": [
+        0.5,
+        0.78
+      ],
+      "duration": 0.6
+    },
+    {
+      "file": "runtime/textures/shared/grass-spray.png",
+      "role": "grass-spray",
+      "width": 768,
+      "height": 128,
+      "bytes": 4438,
+      "sha256": "05385e67bd7b548ab6977c38ed3734022489c97a72b9d8f6209742efece4e35f",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "frames": 6,
+      "frameSize": [
+        128,
+        128
+      ],
+      "pivot": [
+        0.5,
+        0.78
+      ],
+      "duration": 0.6
+    },
+    {
+      "file": "runtime/textures/shared/sky-day.png",
+      "role": "sky",
+      "width": 1024,
+      "height": 512,
+      "bytes": 12104,
+      "sha256": "259c7a241adc5a5db1e7ce475e89ca56746db6972f37db3a0a04af0f8c2c6b71",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "time": "day",
+      "transparency": false,
+      "wrap": "repeat-x",
+      "seamlessX": true
+    },
+    {
+      "file": "runtime/textures/shared/sky-sunset.png",
+      "role": "sky",
+      "width": 1024,
+      "height": 512,
+      "bytes": 12311,
+      "sha256": "220fe9015d5f4ddb14dae85553c3f9fec33f24dac54a90e719e997eb225d0dc5",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "time": "sunset",
+      "transparency": false,
+      "wrap": "repeat-x",
+      "seamlessX": true
+    },
+    {
+      "file": "runtime/textures/shared/sky-night.png",
+      "role": "sky",
+      "width": 1024,
+      "height": 512,
+      "bytes": 7456,
+      "sha256": "4d5d5a76f748309843f808d9bdd00d01d85c8d544de68a4ec2314764f6de0c5e",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "time": "night",
+      "transparency": false,
+      "wrap": "repeat-x",
+      "seamlessX": true
+    },
+    {
+      "file": "runtime/textures/shared/floodlight-beam.png",
+      "role": "floodlight-beam",
+      "width": 256,
+      "height": 512,
+      "bytes": 7862,
+      "sha256": "041a00cdb74b4501e143744e9b8ddd6961489483996420f207d2ddb0c4f0d82c",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp",
+      "pivot": [
+        0.5,
+        0
+      ],
+      "blend": "additive"
+    },
+    {
+      "file": "runtime/textures/shared/floodlight-lamp.png",
+      "role": "floodlight-lamp",
+      "width": 256,
+      "height": 128,
+      "bytes": 631,
+      "sha256": "dc287fe00aa7eec693598bf544aec61ae79a00bbab39d8b1e280d8eba2c917db",
+      "license": "CC0-1.0",
+      "colorSpace": "sRGB",
+      "transparency": true,
+      "wrap": "clamp"
+    }
+  ],
+  "sets": [
+    {
+      "id": "clay",
+      "files": [
+        "runtime/textures/shared/court-lines.png",
+        "runtime/textures/shared/net.png",
+        "runtime/textures/shared/ball-shadow.png",
+        "runtime/textures/shared/stand-lower.png",
+        "runtime/textures/shared/stand-upper.png",
+        "runtime/textures/shared/blank-signs.png",
+        "runtime/textures/shared/clay-dust.png",
+        "runtime/textures/shared/grass-spray.png",
+        "runtime/textures/shared/sky-day.png",
+        "runtime/textures/shared/sky-sunset.png",
+        "runtime/textures/shared/sky-night.png",
+        "runtime/textures/shared/floodlight-beam.png",
+        "runtime/textures/shared/floodlight-lamp.png",
+        "runtime/textures/clay/surface-tile.png",
+        "runtime/textures/clay/court.png"
+      ],
+      "payloadBytes": 401473,
+      "budgetBytes": 800000,
+      "effect": "clay-dust"
+    },
+    {
+      "id": "grass",
+      "files": [
+        "runtime/textures/shared/court-lines.png",
+        "runtime/textures/shared/net.png",
+        "runtime/textures/shared/ball-shadow.png",
+        "runtime/textures/shared/stand-lower.png",
+        "runtime/textures/shared/stand-upper.png",
+        "runtime/textures/shared/blank-signs.png",
+        "runtime/textures/shared/clay-dust.png",
+        "runtime/textures/shared/grass-spray.png",
+        "runtime/textures/shared/sky-day.png",
+        "runtime/textures/shared/sky-sunset.png",
+        "runtime/textures/shared/sky-night.png",
+        "runtime/textures/shared/floodlight-beam.png",
+        "runtime/textures/shared/floodlight-lamp.png",
+        "runtime/textures/grass/surface-tile.png",
+        "runtime/textures/grass/court.png"
+      ],
+      "payloadBytes": 347915,
+      "budgetBytes": 800000,
+      "effect": "grass-spray"
+    },
+    {
+      "id": "hard",
+      "files": [
+        "runtime/textures/shared/court-lines.png",
+        "runtime/textures/shared/net.png",
+        "runtime/textures/shared/ball-shadow.png",
+        "runtime/textures/shared/stand-lower.png",
+        "runtime/textures/shared/stand-upper.png",
+        "runtime/textures/shared/blank-signs.png",
+        "runtime/textures/shared/clay-dust.png",
+        "runtime/textures/shared/grass-spray.png",
+        "runtime/textures/shared/sky-day.png",
+        "runtime/textures/shared/sky-sunset.png",
+        "runtime/textures/shared/sky-night.png",
+        "runtime/textures/shared/floodlight-beam.png",
+        "runtime/textures/shared/floodlight-lamp.png",
+        "runtime/textures/hard/surface-tile.png",
+        "runtime/textures/hard/court.png"
+      ],
+      "payloadBytes": 263533,
+      "budgetBytes": 800000,
+      "effect": null
+    }
+  ],
+  "payloadBytes": 846285
+}

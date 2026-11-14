@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/tennis-courts-browsers npm test",
+  "exitCode": 0,
+  "counts": {
+    "tests": 4200,
+    "pass": 4136,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 268033.620467
+  },
+  "browserSetup": "Playwright 1234 cache paths in /tmp point to the installed /usr/bin/chromium (151.0.7922.173); repository files untouched.",
+  "initialAttempt": "Default Playwright browser binary was missing. An idle worker left a server open after launch failure; that attempt was stopped, then the entire suite rerun with the installed browser.",
+  "logSha256": "77af486c5980cc9efc97291a4cbabf58ee11acf99781bf52c186f6d45b25d0cd",
+  "nodeSyntaxChecks": [
+    "runtime/court.mjs",
+    "preview.mjs"
+  ],
+  "diffWhitespaceCheck": true,
+  "baseCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "changedExistingFiles": 0
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; worker-src 'none'">
+<title>מגרשי האי · טניס</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main>
+  <canvas id="view" aria-label="מגרש טניס בשלושה משטחים, עם שני מפלסי יציע"></canvas>
+  <header><div class="edition">האי שלי / אוסף מגרשים 01</div><h1>משחק. בכל משטח.</h1><p id="description">חימר חם, קווים נקיים ואבק קפיצה.</p></header>
+  <div class="surface-tabs" role="group" aria-label="משטח">
+    <button data-surface="clay" aria-pressed="true"><i class="clay"></i>חימר</button>
+    <button data-surface="grass" aria-pressed="false"><i class="grass"></i>דשא</button>
+    <button data-surface="hard" aria-pressed="false"><i class="hard"></i>קשיח</button>
+  </div>
+  <aside aria-label="הגדרות תצוגה">
+    <label>אור<select id="time"><option value="day">יום</option><option value="sunset">שקיעה</option><option value="night">לילה</option></select></label>
+    <label>מבט<select id="camera"><option value="game">משחק</option><option value="court">מגרש</option><option value="side">יציע</option></select></label>
+    <label>פירוט<select id="lod"><option value="high">מלא</option><option value="low">קל</option></select></label>
+    <button id="pause" aria-pressed="false">השהיה</button><button id="impact">קפיצת כדור</button>
+    <label class="crowd"><input id="crowd" type="checkbox">קהל תואם</label>
+  </aside>
+  <footer><span id="status" role="status">מכינים את המגרש…</span><a href="REPORT.md">דוח</a><a href="manifest.json">מפרט</a></footer>
+  <p id="error" role="alert" hidden></p>
+</main>
+<script type="module" src="preview.mjs"></script>
+</body></html>
