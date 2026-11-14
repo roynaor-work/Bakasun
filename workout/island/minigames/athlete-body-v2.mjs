@@ -133,11 +133,12 @@ export function loadAthleteV2({T,GLTFLoader,retry=fn=>fn()}){
 export function resetAthleteV2(){cache=null;}
 
 /** Numbers, gloves and the number / glove colours on one v22 instance of the v2 body. `kit` and `skin`/`hair` are the instance's own
- * (the number takes the kit's trim colour, the gloves its shorts colour, as the pack's appearance adapter does). Returns a controller. */
-export function decorateAthleteV2(T,inst,{number=null,gloves=false,kit,appearance={},style='soccer'}){
+ * (the number takes the kit's trim colour, the gloves its shorts colour, as the pack's appearance adapter does). `shape` is the body's width and
+ * depth in the pack's rest space (BODY_SHAPES of the pack; basketball v24.1 passes the guard / wing / centre ones). Returns a controller. */
+export function decorateAthleteV2(T,inst,{number=null,gloves=false,kit,appearance={},style='soccer',shape=SHAPE}){
   const colors=v22Colors({skin:appearance.skin,hair:appearance.hair,kit,style});
   const uniforms={athleteNumber:{value:0},athleteNumbers:{value:0},athleteCrest:{value:0},athleteGloves:{value:gloves?1:0},
-    athleteTrim:{value:new T.Color(colors[V22_REGION.trim])},athleteSecondary:{value:new T.Color(colors[V22_REGION.shorts])},athleteShape:{value:new T.Vector2(...SHAPE)}};
+    athleteTrim:{value:new T.Color(colors[V22_REGION.trim])},athleteSecondary:{value:new T.Color(colors[V22_REGION.shorts])},athleteShape:{value:new T.Vector2(...shape)}};
   const owned=[];let decorated=0;
   for(const mesh of inst.meshes.full){
     if(!mesh.isSkinnedMesh||!mesh.geometry.attributes._glove)continue; // the hair cap keeps the shared material

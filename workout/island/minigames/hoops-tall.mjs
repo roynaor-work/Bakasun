@@ -70,7 +70,8 @@ const DRIBBLE_GAITS=[['dribble_walk_right',1.2],['jog_ball',2.7],['run_ball',4.6
  * 12% hysteresis around the current choice so it does not flicker at the edges. `list` is GAITS or DRIBBLE_GAITS. */
 export function pickGait(list,speed,current=null){
  const idleEdge=current==='idle_ready'||current==='idle_ready_ball'?.5:.3;
- if(list===GAITS&&speed<idleEdge)return 'idle_ready';
+ // a table that starts with a standing entry (reference 0: GAITS, or the v24.1 v13 table) stands below the idle edge
+ if(list[0]?.[1]===0&&speed<idleEdge)return list[0][0];
  let best=list[0][0],bd=Infinity;
  for(const [name,ref] of list){if(!ref)continue;const d=Math.abs(Math.log(Math.max(.05,speed)/ref))*(name===current?.88:1);if(d<bd){bd=d;best=name;}}
  return best;
@@ -144,17 +145,23 @@ export function chooseTallMotion(pack,p,ctx,st){
   if(!p.hasBall)return {kind:'loop',clip:'defensive_slide_'+(lat>0?'left':'right'),rate:clamp(speed/.55,.8,1.7),group:'def',sideways:true};
   if(p.dribbling!==false&&!st.guardLocked&&speed<3.5)return {kind:'loop',clip:'dribble_'+(lat>0?'left':'right'),rate:clamp(speed/1.05,.6,1.4),group:'dribble',dribble:true,sideways:true};
  }
+ // v24.1 hoops-motion-v13 (hoops-motion-v13.mjs): `ctx.gaits13` = this body's gait tables, the references already scaled to its stride
+ const G13=ctx.gaits13;
  if(p.hasBall){
   if(p.dribbling!==false&&!st.guardLocked){
-   if(speed<.3)return {kind:'layer',upper:'dribble_right',lower:'idle_ready_ball',rate:1,group:'dribble'};
+   if(speed<.3)return G13?.stand?{kind:'loop',clip:G13.stand,rate:1,group:'dribble',dribble:true}:{kind:'layer',upper:'dribble_right',lower:'idle_ready_ball',rate:1,group:'dribble'};
+   if(G13){const e=pickEntry(G13.dribble,speed,st.dribbleGait);return {kind:'loop',clip:e.name,rate:gaitRate(speed,e.rate??e.ref,e.max),group:e.name==='dribble_walk_right'?'dribble':'gait',dribble:true};}
    const g=pickGait(DRIBBLE_GAITS,speed,st.dribbleGait);return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,DRIBBLE_GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:g==='dribble_walk_right'?'dribble':'gait',dribble:true};
   }
   if(speed<.3)return {kind:'loop',clip:'idle_ready_ball',rate:1,group:'idle'};
  }
+ if(G13){const e=pickEntry(G13.gaits,speed,st.gait);if(e.ref===0)return {kind:'loop',clip:e.name,rate:1,group:'idle'};return {kind:'loop',clip:e.name,rate:gaitRate(speed,e.rate??e.ref,e.max),group:'gait'};}
  const g=pickGait(GAITS,speed,st.gait);
  if(g==='idle_ready')return {kind:'loop',clip:'idle_ready',rate:1,group:'idle'};
  return {kind:'loop',clip:g,rate:gaitRate(speed,clipRef(pack,g,GAITS.find(x=>x[0]===g)[1]),clipMax(pack,g)),group:'gait'};
 }
+/** pickGait over a table of {name, ref, rate?, max} entries (the v24.1 per-body tables). */
+function pickEntry(table,speed,current){const name=pickGait(table.map(e=>[e.name,e.ref]),speed,current);return table.find(e=>e.name===name);}
 
 /** Ball-bounce phase for the view (floor contact at u = 0.42, the convention of the dribble code), from the clip's own events. */
 export function bouncePhase(clip,t){
@@ -264,7 +271,8 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
  let gaitPhase=0,state='idle',statePhase=0,lastAct=null,dribbleSrc=null,ownsJump=false;
  const dur=name=>clipSet.get(name)?.duration||1;
  function easeWeights(map,name,tau,dt){const k=1-Math.exp(-dt/tau);let sum=0;for(const n of new Set([...Object.keys(map),...(name?[name]:[])])){const g=n===name?1:0,v=(map[n]||0)+(g-(map[n]||0))*k;if(v<.004&&g===0)delete map[n];else{map[n]=v;sum+=v;}}return sum;}
- const av={root,hands,mixer,actions,mats,card,kind:body?'athlete':'tall',role:profile,scale,dribblePump:0,dribbleCtx:null,layupSideFor:layupSide,body,
+ let bodyScaleNode=1;root.traverse(o=>{if(o.name==='BodyScale')bodyScaleNode=o.scale.x;});
+ const av={root,hands,mixer,actions,mats,card,kind:body?'athlete':'tall',role:profile,scale,dribblePump:0,dribbleCtx:null,layupSideFor:layupSide,body,canonicalBallScale:bodyScaleNode,
   setLod(level){return body?body.setLod(level):0;},get lod(){return body?body.lod:0;},
   applyKit(kit){
    if(body){body.applyKit(kit);return;}
@@ -282,7 +290,9 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   /** The authored ball of the current dribble (the bounce reaches the floor, hand and floor in step), world space; null when no dribble clip plays. */
   dribbleBallWorld(out){
    if(!dribbleSrc)return null;const l=ballAt(dribbleSrc.clip,dribbleSrc.t);if(!l)return null;
-   out.set(l[0],l[1],l[2]);return root.localToWorld(out);
+   // a canonical (v13) ball track is in canonical metres: this body's skeleton is BodyScale x the root, the root scale comes from localToWorld
+   const k=dribbleSrc.clip.canonical?av.canonicalBallScale:1;
+   out.set(l[0]*k,l[1]*k,l[2]*k);return root.localToWorld(out);
   },
   dispose(){mixer.stopAllAction();mixer.uncacheRoot(root);if(body){body.dispose();return;}for(const m of mats)m.dispose();geometry.dispose();},
  };
@@ -295,7 +305,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   if(p.act==='spin'&&lastAct!=='spin')st.spin=!st.spin;
   lastAct=p.act;
   const catching=ctx.catching||performance.now()<(st.catchUntil||0);
-  const plan=chooseTallMotion(pack,p,{...ctx,catching,v8pack:assets.v8,v8s,dt},st);
+  const plan=chooseTallMotion(pack,p,{...ctx,catching,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null},st);
   // weights and times: a layered plan is the upper and lower halves of two clips; everything else is one clip (full-body)
   const layered=plan.kind==='layer';
   cur.mix+=((layered?0:1)-cur.mix)*(1-Math.exp(-dt/(plan.kind==='loop'?.12:.07)));

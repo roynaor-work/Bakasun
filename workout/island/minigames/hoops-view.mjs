@@ -15,6 +15,7 @@ import {v4ArenaEnabled} from './hoops-v4.mjs';
 import {v5Enabled} from './hoops-v5.mjs';
 import {v8ArenaEnabled,passFlightSpeed} from './hoops-v8-motion.mjs';
 import {showEnabled,SHOW,replayTriggers,contactFrame,cutTimeline,segmentAt,skipWall,baselineCamera,chaseCamera,backBlend,crowdReaction,castCelebration} from './hoops-show.mjs';
+import {hoopsCrowd3dMode,hoopsV241Flags} from './hoops-v241.mjs?v=island-v2-20261107-14';
 
 function releaseScene(scene){
  const geometries=new Set(),materials=new Set(),textures=new Set(),skeletons=new Set();
@@ -78,6 +79,30 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  let crowd=null;
  if(!models.crowd3d)try{crowd=await buildCrowd(dyn.crowdSpots,new URL(config.assets.crowd,assetBase).href,config.assets.crowdGrid,quality);scene.add(crowd.mesh);}catch(e){crowd=null;}
  mark('crowd');
+ // v24.1 (Roy: "the crowd is cardboard"): 3D fans on the v8 hall's lower tier in place of its cards (hoops-crowd3d.mjs, Codex hoops-crowd-3d-v1).
+ // Loaded beside the match (the first frames show the cards), within a triangle budget per quality tier and the hall's frame-time governor;
+ // `?hoopsCrowd3d=0` keeps the cards, `?hoopsCrowd3d=full` is Codex's own 70K budget for a comparison. Any failure keeps the cards.
+ const search=globalThis.location?.search||'',crowdMode=hoopsCrowd3dMode(search),crowd3dState={mode:crowdMode,status:crowdMode==='off'?'off':models.arenaV8?'loading':'no-v8-hall',error:null};
+ let crowd3d=null,crowd3dApi=null,crowdCards=null,viewDisposed=false;
+ if(crowdMode!=='off'&&models.arenaV8){
+  Promise.all([import('./hoops-crowd3d.mjs?v=island-v2-20261107-14'),import('./hoops-v8-venue.mjs'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([C,V,G,H])=>{
+   const seats=C.hoopsCrowdSeats(V.seatingLayout(0)),loader=new G.GLTFLoader();
+   const loaded=await C.createHoopsCrowd3d({T:THREE,GLTFLoader:G.GLTFLoader,load:url=>H.loadHoopsGLTF(loader,url),seats,mode:crowdMode,teamColors:[looks[0].primary,looks[1].primary]});
+   if(viewDisposed){loaded.dispose();return;}
+   crowd3d=loaded;crowd3dApi=C;scene.add(loaded.root);crowd3dState.status='ready';
+  }).catch(error=>{crowd3dState.status='fallback';crowd3dState.error=String(error?.message||error);});
+ }
+ // v24.1 referee on the far sideline who makes the calls the whistles sound (hoops-referee.mjs); `?hoopsReferee=0` = none. Loaded beside the match.
+ let referee=null;const refereeState={status:'off',error:null};
+ if(quality>=1){
+  Promise.all([import('./hoops-referee.mjs?v=island-v2-20261107-14'),import('../vendor/GLTFLoader.js'),import('./hoops-gltf.mjs')]).then(async([R,G,H])=>{
+   if(!R.hoopsRefereeEnabled(search))return;refereeState.status='loading';
+   const loader=new G.GLTFLoader(),loaded=await R.createHoopsReferee({T:THREE,load:url=>H.loadHoopsGLTF(loader,url),court});
+   if(viewDisposed){loaded.dispose();return;}
+   loaded.group.traverse(o=>{if(o.isSkinnedMesh&&reflection)o.layers.enable(REFLECTION_LAYER);});
+   referee=loaded;scene.add(loaded.group);refereeState.status='ready';
+  }).catch(error=>{refereeState.status='fallback';refereeState.error=String(error?.message||error);});
+ }
  const assets=await loadPlayerAssets(config.assets,assetBase,onProgress,{params,onFallback,quality});assets.engineAnim=config.anim;loadingAssets=assets;mark('playerAssets');
  // avatars: the ten on the floor are built before the first frame; the bench is built one per
  // half second during stoppages (or on the spot when a substitute appears), not all 25 at load
@@ -298,6 +323,15 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   const feedback=feel.update(presentationDt,s);
   if(!state.override){if(!state.replay)camera.fov+=feedback.fov;camera.updateMatrixWorld();const e=camera.matrixWorld.elements,depth=Math.max(1,camera.position.distanceTo(ball.position)),span=2*depth*Math.tan(camera.fov*Math.PI/360);camera.position.x+=(e[0]*feedback.x+e[4]*feedback.y)*span;camera.position.y+=(e[1]*feedback.x+e[5]*feedback.y)*span;camera.position.z+=(e[2]*feedback.x+e[6]*feedback.y)*span;camera.updateProjectionMatrix();}
   models.arenaV8?.update(camera,now/1000,presentationDt||dt||1/60,state.cheer||0,mood);
+  // v24.1 3D fans: the budget follows the quality tier and the hall's level (its governor steps down on slow frames); no budget = the cards again
+  if(crowd3d){
+   const budget=state.crowdCards?null:crowd3dApi.hoopsCrowdBudget({mode:crowdMode,quality,arenaLod:models.arenaV8?.lod??0});
+   if(budget&&!crowdCards)crowdCards=crowd3dApi.hideCardsUnder(THREE,models.arenaV8.spectators,crowd3d.seats);
+   else if(!budget&&crowdCards){crowdCards.restore();crowdCards=null;}
+   crowd3d.update({seconds:now/1000,celebration:show?(mood?.stand||0):(state.cheer||0)*.85,ballPosition:ball.position,camera,budget,reducedMotion:vfx.reducedMotion});
+  }
+  // the referee follows the live ball (hidden during a replay: he is not in the recording)
+  referee?.update(presentationDt||dt,{ball:ball.position,visible:!state.replay});
   vfx.update(dt,{ball,camera,snapshot:s,replaying:!!state.replay});
   // metrics: `calls`/`triangles` stay the main pass (comparable with earlier measurements; three.js
   // resets its counters after the shadow pass); the reflection pass is counted separately
@@ -368,10 +402,11 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   feel.effects(events,snapshot||state.lastSnapshot);
   const snap=snapshot||state.lastSnapshot,triggers=show?replayTriggers(events,snap,{userTeam}):[];
   for(const e of events){
+   referee?.event(e);
    if(e.playerId&&(e.type!=='control'||(snapshot||state.lastSnapshot)?.players.find(p=>p.id===e.playerId)?.team!==(snapshot||state.lastSnapshot)?.possession))avatars.get(e.playerId)?.event(e);
    if(e.type==='final'&&snapshot){const winner=e.won?0:1;for(const p of snapshot.players)if(p.team===winner)avatars.get(p.id)?.event('result_success');}
    if(!vfx.reducedMotion&&e.type==='shotStart'&&(e.shotType==='dunk'||e.shotType==='layup'))state.punch=e.shotType==='dunk'?1:0.6;
-   if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;}
+   if(e.type==='score'){const n=dyn.nets.find(n=>Math.sign(n.side)===Math.sign((e.side)??1));for(const n2 of dyn.nets)n2.swing=1;state.cheer=1;if(e.shotType==='dunk'&&!vfx.reducedMotion)state.shake=1;crowd3d?.onBasket({seconds:performance.now()/1000,team:e.team});}
    if(!vfx.reducedMotion&&(e.type==='block'||e.type==='contact'&&e.what==='rim'&&e.speed>3))state.shake=Math.max(state.shake,0.4);
    if(!show||!snap)continue;
    // show: the nearest teammate and the dunked-on defender react, the losers at the final (2.2 s clips, view only, the engine clock runs on)
@@ -399,7 +434,8 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
   return {rx:rx/rl,rz:rz/rl,ux:ux/ul,uz:uz/ul};
  }
  function project(x,y,z,out={}){v.set(x,y,z).project(camera);out.x=(v.x+1)/2*state.w;out.y=(1-v.y)/2*state.h;out.visible=v.z<1&&v.z>-1;return out;}
- function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),show:show?{...showCounts,stand:+(state.stand||0).toFixed(2),groan:+(state.groan||0).toFixed(2),wave:state.waveT!=null,cut:!!state.cut}:null,motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState)};}
+ function metrics(){const i=renderer.info.render;let vis=0;for(const a of avatars.values())if(a.root.visible)vis++;return {calls:i.calls,triangles:i.triangles,frameMs:+state.lastFrameMs.toFixed(2),players:vis,avatars:avatars.size,pending:pending.length,crowd:crowd?.count||models.crowdV5?.count||models.arenaV8?.crowdCount||0,crowdLevel:models.crowdV5?.level??models.arenaV8?.lod??null,v5:!!models.v5,v8:!!models.v8,v8Motion:!!assets.v8,tall:!!assets.tall,quality,textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,landscape:state.landscape,dpr:renderer.getPixelRatio(),bufferWidth:canvas.width,bufferHeight:canvas.height,style:'v2-broadcast',characterVersion:assets.athlete?10:assets.tall?9:assets.v7?7:assets.v2?2:assets.v4?4:1,athleteBody:!!assets.athlete,motionSource:assets.motionSource||null,dunks:assets.dunks||null,retargetMs:assets.retargetMs??null,lods:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.lod??0),arenaSource:models.venue,crowd3d:!!models.crowd3d,v4Fallbacks:fallbacks.slice(),clipCount:assets.clips.size,loadTimes,arenaVersion:models.version,baked:models.baked,reflection:reflection?{...reflection.size,calls:state.reflCalls||0,triangles:state.reflTris||0}:null,feel:feel.metrics(),vfx:vfx.metrics(),show:show?{...showCounts,stand:+(state.stand||0).toFixed(2),groan:+(state.groan||0).toFixed(2),wave:state.waveT!=null,cut:!!state.cut}:null,motion:[...avatars.values()].filter(a=>a.root.visible).map(a=>a.motionState),
+  v241:{flags:hoopsV241Flags(search),crowd3d:{...crowd3dState,...(crowd3d?crowd3d.metrics:{}),visible:!!crowd3d?.visible,cardsHidden:crowdCards?.hidden||0},bodyV2:!!assets.bodyV2,motionV13:assets.motionV13||null,referee:{...refereeState,...(referee?{...referee.metrics,x:+referee.x.toFixed(2),gesture:referee.gesture}:{})}}};}
  function startReplay(frames,done,speed=0.6){
   if(!frames?.length)return false;
   let shooter=null,side=1,start=0,contact=0,best=Infinity;
@@ -418,11 +454,14 @@ export async function createHoopsView(canvas,config,{court,teams,quality=2,asset
  }
  function skipReplay(){const r=state.replay;if(!r?.show||r.seg?.cam==='back')return false;r.skip=true;showCounts.skipped++;return true;}
  function dispose(){
+  viewDisposed=true;crowd3d?.dispose();crowd3d=null;referee?.dispose();referee=null;
   for(const av of avatars.values())av.dispose();assets.dispose();models.dispose();vfx.dispose();feel.dispose();reflection?.dispose();
   releaseScene(scene);envTarget.dispose();renderer.dispose();pm.dispose();
  }
  function setCameraOverride(pos,look,fov){state.override=pos?{pos:new THREE.Vector3(pos.x,pos.y,pos.z),look:new THREE.Vector3(look.x,look.y,look.z),fov}:null;}
- return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,render,resize,effects,screenBasis,project,metrics,startReplay,startShowReplay,skipReplay,dispose,get replaying(){return !!state.replay;},get replayInfo(){const r=state.replay;return r?{show:!!r.show,reason:r.trigger?.reason||null,cam:r.seg?.cam||null,scale:r.scale??1,wall:r.wallElapsed||0,frames:r.frames.length,contact:r.timeline?.contactT??null,total:r.timeline?.wall??null}:null;},get show(){return show;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
+ /** Measurement only (tools/hoops-v241-perf.mjs): true shows the v24 cards in place of the 3D fans on the next frame, false gives them back. */
+ function showCrowdCards(value){state.crowdCards=!!value;}
+ return {setPaused(value){if(value)feel.pause();},setKit(team,kit){kits.set(team,kit);for(const p of teams[team].players)avatars.get(p.id)?.applyKit(kit);},snapCamera(){state.snap=true;},setCameraOverride,showCrowdCards,render,resize,effects,screenBasis,project,metrics,startReplay,startShowReplay,skipReplay,dispose,get replaying(){return !!state.replay;},get replayInfo(){const r=state.replay;return r?{show:!!r.show,reason:r.trigger?.reason||null,cam:r.seg?.cam||null,scale:r.scale??1,wall:r.wallElapsed||0,frames:r.frames.length,contact:r.timeline?.contactT??null,total:r.timeline?.wall??null}:null;},get show(){return show;},renderer,scene,camera,avatars,reflection,get celebrationSeconds(){return vfx.reducedMotion?0:vfx.celebrationSeconds;}};
  }catch(error){
   loadingFeel?.dispose();loadingVfx?.dispose();loadingAssets?.dispose();loadingModels?.dispose();releaseScene(loadingScene);loadingEnv?.dispose();loadingPm?.dispose();renderer.dispose();throw error;
  }

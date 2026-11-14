@@ -198,6 +198,8 @@ export async function replaceArenaAssetsV8(arena,dyn,court,{assetBase,quality=2,
   }
   const api={
    get lod(){return current;},get crowdCount(){return populations[current].count;},
+   /** The card spectators of each level (InstancedMesh, one per level): v24.1's 3D fans hide the cards on their seats (hoops-crowd3d.mjs). */
+   get spectators(){return populations.map(p=>p.group.getObjectByName('spectators'));},
    /** Distance picks the level; two seconds under about 28 fps step it down, twelve good seconds step it back. */
    update(camera,time,delta,cheer=0,mood=null){
     if(disposed)return;
