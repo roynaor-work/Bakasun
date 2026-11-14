@@ -1,0 +1,291 @@
+{
+ "generatedAt": "2026-11-14T15:43:34.770Z",
+ "tool": "node workout/island/tools/audio-forensics.mjs <dir> --games=catchCriminal --seconds=150 --assert --query=quality=low[&v7 flags]",
+ "classifier": "minigames/audio-guard.mjs whistleLike: tone (a 1.5-5 kHz line held 0.6 s), glide (a line sliding 0.25 s, top over 1.5 kHz), hum (a bright 1.5-5 kHz bed for 2 s); live = the chase phase run",
+ "v7": {
+  "query": "quality=low&catchIntro=v7&catchEngine=v7&catchSiren=v7&catchBurst=0&catchWeaponsFix=0",
+  "runSeconds": 63.2,
+  "countdownSeconds": 38.1,
+  "liveTones": 6,
+  "liveHums": 0,
+  "liveGlides": 2,
+  "segments": [
+   {
+    "kind": "tone",
+    "hz": 2304,
+    "fromHz": 2196,
+    "toHz": 2304,
+    "seconds": 1.614,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop"
+    ]
+   },
+   {
+    "kind": "tone",
+    "hz": 2304,
+    "fromHz": 2304,
+    "toHz": 2304,
+    "seconds": 0.849,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop"
+    ]
+   },
+   {
+    "kind": "tone",
+    "hz": 2304,
+    "fromHz": 2304,
+    "toHz": 2304,
+    "seconds": 4.247,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop",
+     "osc sine 440Hz"
+    ]
+   },
+   {
+    "kind": "tone",
+    "hz": 2304,
+    "fromHz": 2304,
+    "toHz": 2304,
+    "seconds": 0.624,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop"
+    ]
+   },
+   {
+    "kind": "tone",
+    "hz": 2304,
+    "fromHz": 2304,
+    "toHz": 2304,
+    "seconds": 0.654,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop"
+    ]
+   },
+   {
+    "kind": "glide",
+    "hz": 2304,
+    "fromHz": 2089,
+    "toHz": 2304,
+    "seconds": 2.501,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "osc sine 440Hz",
+     "generated:2205@44100"
+    ]
+   },
+   {
+    "kind": "glide",
+    "hz": 2304,
+    "fromHz": 1970,
+    "toHz": 2304,
+    "seconds": 2.649,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop"
+    ]
+   },
+   {
+    "kind": "tone",
+    "hz": 2293,
+    "fromHz": 2272,
+    "toHz": 2304,
+    "seconds": 0.968,
+    "live": true,
+    "phases": [
+     "run"
+    ],
+    "sources": [
+     "osc sawtooth 60Hz",
+     "osc square 60Hz",
+     "osc sine 30Hz",
+     "osc sine 900Hz",
+     "osc sine 9Hz",
+     "generated:44100@44100 loop",
+     "assets/catch-v7/audio/police-soft.ogg loop"
+    ]
+   }
+  ],
+  "sources": [
+   "osc:sine",
+   "osc:sawtooth",
+   "osc:square",
+   "generated:44100@44100",
+   "osc:triangle",
+   "assets/catch-v7/audio/police-soft.ogg",
+   "generated:12349@44100",
+   "generated:17640@44100",
+   "generated:9702@44100",
+   "assets/catch-v7/audio/puncture.ogg",
+   "generated:2205@44100",
+   "assets/catch-v7/audio/shot-beep.ogg",
+   "assets/catch-v7/audio/nitro.ogg"
+  ],
+  "sourceCounts": {
+   "osc:sine": 30,
+   "osc:sawtooth": 2,
+   "osc:square": 1,
+   "generated:44100@44100": 1,
+   "osc:triangle": 7,
+   "assets/catch-v7/audio/police-soft.ogg": 41,
+   "generated:12349@44100": 1,
+   "generated:17640@44100": 1,
+   "generated:9702@44100": 3,
+   "assets/catch-v7/audio/puncture.ogg": 3,
+   "generated:2205@44100": 21,
+   "assets/catch-v7/audio/shot-beep.ogg": 1,
+   "assets/catch-v7/audio/nitro.ogg": 1
+  },
+  "runEnergy2to5k": 0.012,
+  "runStrongestHighBins": [
+   {
+    "hz": 2300,
+    "frames": 461
+   },
+   {
+    "hz": 1075,
+    "frames": 348
+   },
+   {
+    "hz": 1050,
+    "frames": 147
+   },
+   {
+    "hz": 1100,
+    "frames": 52
+   },
+   {
+    "hz": 1325,
+    "frames": 50
+   }
+  ],
+  "errors": []
+ },
+ "v8": {
+  "query": "quality=low",
+  "runSeconds": 84,
+  "countdownSeconds": 40.3,
+  "liveTones": 0,
+  "liveHums": 0,
+  "liveGlides": 0,
+  "segments": [],
+  "sources": [
+   "osc:sine",
+   "osc:custom",
+   "generated:44100@44100",
+   "generated:88200@44100",
+   "osc:square",
+   "generated:14112@44100",
+   "generated:17640@44100",
+   "osc:triangle",
+   "generated:9702@44100",
+   "assets/catch-v7/audio/puncture.ogg",
+   "generated:2205@44100",
+   "assets/catch-v7/audio/net-drop.ogg"
+  ],
+  "sourceCounts": {
+   "osc:sine": 87,
+   "osc:custom": 37,
+   "generated:44100@44100": 88,
+   "generated:88200@44100": 1,
+   "osc:square": 35,
+   "generated:14112@44100": 1,
+   "generated:17640@44100": 2,
+   "osc:triangle": 6,
+   "generated:9702@44100": 5,
+   "assets/catch-v7/audio/puncture.ogg": 4,
+   "generated:2205@44100": 28,
+   "assets/catch-v7/audio/net-drop.ogg": 1
+  },
+  "runEnergy2to5k": 0.001,
+  "runStrongestHighBins": [
+   {
+    "hz": 1375,
+    "frames": 530
+   },
+   {
+    "hz": 1075,
+    "frames": 503
+   },
+   {
+    "hz": 1025,
+    "frames": 245
+   },
+   {
+    "hz": 925,
+    "frames": 113
+   },
+   {
+    "hz": 1400,
+    "frames": 55
+   }
+  ],
+  "errors": []
+ }
+}

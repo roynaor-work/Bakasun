@@ -6,7 +6,7 @@
  * measured sample spectra in. No audio graph here. */
 export const WHISTLE_BAND={lowHz:1500,highHz:5000};
 /** Live-play phases per game: a tone during these is the bug, a tone at kickoff is not. */
-export const LIVE_PHASES={soccer:['playing'],streetSlam:['live'],tennis:['rally','serve','toss'],alpineRush:['racing'],islandRacing:['racing']};
+export const LIVE_PHASES={soccer:['playing'],streetSlam:['live'],tennis:['rally','serve','toss'],alpineRush:['racing'],islandRacing:['racing'],catchCriminal:['run']};
 
 /** frames: [{t, hi:{f,db,prom,rel}}] in time order, t in seconds. `hi` is the
  * strongest bin inside WHISTLE_BAND: prom = dB above the median of its +-200 Hz

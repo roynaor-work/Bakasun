@@ -14,6 +14,9 @@ import {ASSIST7, levels7, leadPoint, idealAim, assistInfo, assistRelease, pick} 
 const config = JSON.parse(await readFile(new URL('../data/config.json', import.meta.url), 'utf8'));
 export const BALANCE = config.minigames.catchCriminal;
 export const KID = Object.freeze({sigma: [8, 12], rt: [.3, .6], think: [.35, .9], hazardMiss: .25, slideComp: .85, tryOther: .18});
+/** v8: a child who does not brake for a thief he cannot see (behind the camera after the police car drove past him), and who taps
+ * fire now and then while the ring is gone ("is it broken?"). The plain KID above brakes the moment the gap is negative. */
+export const KID_BLIND = Object.freeze({...KID, brakeBehind: false, tapBlind: 1.5});
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const gauss = r => { let u = 0; while (!u) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r()); };
 const between = (r, [a, b]) => a + (b - a) * r();
@@ -24,13 +27,15 @@ export const VERSIONS = {
   v22: {chase: null, levels: b => b.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})})), assist: false},
   v7: {chase: {weapons: true, assist: true, elements: true}, levels: b => levels7(b), assist: true},
   v7noassist: {chase: {weapons: true, assist: false, elements: true}, levels: b => b.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})})), assist: false},
+  v8: {chase: {weapons: true, assist: true, elements: true}, chase8: {weaponsFix: true}, levels: b => levels7(b), assist: true}, // the v8 tool fix (follow, honest spike ring, dry taps)
 };
 
 /** A child driving the chase: steers for lanes at his reaction pace, lines up on the zone with the noise, taps fire late. */
 export function kidDrive(chase, rnd, kid = KID) {
   const dt = 1 / 60, C = chase.C, st = chase.state, gun = chase.gun, W7 = Boolean(chase.v7?.weapons);
-  const out = {shots: 0, hits: 0, byTool: {}, firstShotAt: null, closes: 0, cycles: 0};
-  let timer = 0, want = 0, fireAt = -1, guard = 0;
+  const out = {shots: 0, hits: 0, byTool: {}, firstShotAt: null, closes: 0, cycles: 0, behind: 0, blindTaps: 0, dry: 0, spikeGreen: 0, spikeGreenHit: 0};
+  let timer = 0, want = 0, fireAt = -1, guard = 0, blindFor = 0;
+  const greenStrips = new Set();
   const tally = (tool, hit) => { const b = out.byTool[tool] ||= {shots: 0, hits: 0}; b.shots++; out.shots++; if (hit) { b.hits++; out.hits++; } };
   while (st.phase !== 'end' && guard++ < 60 * 160) {
     timer -= dt;
@@ -56,18 +61,27 @@ export function kidDrive(chase, rnd, kid = KID) {
     let near = 99; for (const o of chase.obstacles) { if (o.kind === 'pad' || o.kind === 'nitro') continue; const os = chase.obstacleS(o, st.t) - st.s; if (os > 0 && os < near && Math.abs(o.d - st.d) < 2.2) near = os; }
     const kAhead = Math.abs(chase.track.curvatureAt(st.s + 25));
     chase.setBoost(st.tank > .15 && gap > 7 && near > 18 && kAhead < 1 / 110);
-    chase.setBrake(gap < -1.5 || (kAhead > 1 / 60 && st.v > C.baseSpeed + 2));
+    chase.setBrake((kid.brakeBehind !== false && gap < -1.5) || (kAhead > 1 / 60 && st.v > C.baseSpeed + 2));
+    if (st.phase === 'run' && gap < 0) out.behind += dt;
     // the fire button: when the reticle shows and the tool is ready, a tap after the reaction time
     if (st.phase === 'run' && g.locked && g.reload <= 0 && g.ammo > 0 && fireAt < 0) fireAt = st.t + between(rnd, kid.rt);
-    if (fireAt >= 0 && st.t >= fireAt) { fireAt = -1; if (chase.fire() && out.firstShotAt === null) out.firstShotAt = st.t; }
+    if (fireAt >= 0 && st.t >= fireAt) {
+      fireAt = -1; const green = W7 && g.weapon === 'spikes' && g.locked && g.quality === 'green', before = W7 ? gun.raw.stripId : 0;
+      if (chase.fire() && out.firstShotAt === null) out.firstShotAt = st.t;
+      if (green && gun.raw.stripId > before) { out.spikeGreen++; greenStrips.add(gun.raw.stripId); }
+    }
+    // KID_BLIND: no ring for a while (out of range, or the thief behind him): he taps anyway now and then
+    blindFor = st.phase === 'run' && !g.locked && g.ammo > 0 ? blindFor + dt : 0;
+    if (kid.tapBlind && blindFor >= kid.tapBlind) { blindFor = 0; out.blindTaps++; chase.fire(); }
     if (W7 && st.phase === 'run') { // the tool button: an empty tool is swapped, and now and then he tries another one
       const s2 = gun.state; if ((s2.ammo <= 0 && s2.reload <= 0) || (fireAt < 0 && s2.reload > 0 && rnd() < kid.tryOther * dt)) { chase.cycle(); out.cycles++; }
     }
     chase.step(dt);
     for (const e of chase.drainEvents()) {
       if (e.type === 'shot') tally(e.weapon || 'tyres', e.hit);
-      else if (e.type === 'wshot') tally(e.weapon, e.hit);
+      else if (e.type === 'wshot') { tally(e.weapon, e.hit); if (e.weapon === 'spikes' && e.hit && greenStrips.has(e.strip)) out.spikeGreenHit++; }
       else if (e.type === 'closeTime') out.closes++;
+      else if (e.type === 'dry') out.dry++;
     }
   }
   return {...chase.result(), kid: out};
@@ -111,7 +125,7 @@ export function kidThrow(engine, rnd, stage, {assist = false, kid = KID, A = ASS
 
 export function playKid(stage, seed, version = 'v7', balance = BALANCE, kid = KID) {
   const V = VERSIONS[version], rnd = seededRandom(seed * 7919 + stage * 31 + 5);
-  const chase = kidDrive(createChaseEngine6({balance, stage, seed, v7: V.chase}), rnd, kid);
+  const chase = kidDrive(createChaseEngine6({balance, stage, seed, v8: V.chase8, v7: V.chase}), rnd, kid);
   const engine = createCatchEngine({balance: {...balance, levels: V.levels(balance)}, stage, seed, v2: true, mods: chase.mods, feel: true, arch: true});
   const thr = kidThrow(engine, rnd, stage, {assist: V.assist, kid});
   return {chase, thr};
@@ -122,10 +136,11 @@ export function measureKid(games, stages, versions = ['v22', 'v7'], balance = BA
   const out = {};
   for (const v of versions) {
     out[v] = stages.map(stage => {
-      const r = {stage, games, shots: 0, hits: 0, throws: 0, throwHits: 0, wins: 0, stops: 0, chaseSec: 0, firstShot: 0, firstShotN: 0, locks: 0, closes: 0, byTool: {}, nitro: 0, nearMisses: 0};
+      const r = {stage, games, shots: 0, hits: 0, throws: 0, throwHits: 0, wins: 0, stops: 0, chaseSec: 0, firstShot: 0, firstShotN: 0, locks: 0, closes: 0, byTool: {}, nitro: 0, nearMisses: 0, behind: 0, blindTaps: 0, dry: 0, spikeGreen: 0, spikeGreenHit: 0};
       for (let g = 1; g <= games; g++) {
         const {chase, thr} = playKid(stage, g, v, balance, kid);
         r.shots += chase.kid.shots; r.hits += chase.kid.hits; r.chaseSec += chase.seconds; if (chase.byTyres) r.stops++;
+        for (const k of ['behind', 'blindTaps', 'dry', 'spikeGreen', 'spikeGreenHit']) r[k] += chase.kid[k] || 0;
         if (chase.kid.firstShotAt !== null) { r.firstShot += chase.kid.firstShotAt; r.firstShotN++; }
         r.closes += chase.kid.closes; r.nitro += chase.nitro || 0; r.nearMisses += chase.nearMisses || 0;
         for (const [k, b] of Object.entries(chase.kid.byTool)) { const t = r.byTool[k] ||= {shots: 0, hits: 0}; t.shots += b.shots; t.hits += b.hits; }
@@ -143,12 +158,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2), games = Number(args.find(a => /^\d+$/.test(a))) || 150;
   const sArg = args.find(a => a.startsWith('--stages=')), vArg = args.find(a => a.startsWith('--versions='));
   const stages = sArg ? sArg.slice(9).split(',').map(Number) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], versions = vArg ? vArg.slice(11).split(',') : ['v22', 'v7'];
-  const t0 = Date.now(), res = measureKid(games, stages, versions);
+  const t0 = Date.now(), res = measureKid(games, stages, versions, BALANCE, args.includes('--blind') ? KID_BLIND : KID);
   const pc = x => (x * 100).toFixed(0).padStart(3), ci = c => `${pc(c[0])}-${pc(c[1]).trim()}`;
   console.log('games per stage:', games, 'seconds:', ((Date.now() - t0) / 1000).toFixed(1));
   for (const v of versions) {
     console.log(`\n[${v}] stage | chase shots/g hit% (95% CI) | first shot s | chase s | stop% | throws/g hit% (95% CI) | all hit% | win%`);
-    for (const r of res[v]) console.log(`  ${String(r.stage).padStart(2)} | ${r.shotsPerGame.toFixed(1).padStart(4)} ${pc(r.shotHit)} (${ci(r.shotCI)}) n=${r.shots} | ${r.firstShotAvg === null ? '  -' : r.firstShotAvg.toFixed(1).padStart(4)} | ${r.chaseSecAvg.toFixed(0).padStart(3)} | ${pc(r.stopRate)} | ${r.throwsPerGame.toFixed(1)} ${pc(r.throwHit)} (${ci(r.throwCI)}) n=${r.throws} | ${pc(r.allHit)} | ${pc(r.winRate)}  tools ${Object.entries(r.byTool).map(([k, b]) => `${k} ${b.hits}/${b.shots}`).join(', ')}`);
+    for (const r of res[v]) console.log(`  ${String(r.stage).padStart(2)} | ${r.shotsPerGame.toFixed(1).padStart(4)} ${pc(r.shotHit)} (${ci(r.shotCI)}) n=${r.shots} | ${r.firstShotAvg === null ? '  -' : r.firstShotAvg.toFixed(1).padStart(4)} | ${r.chaseSecAvg.toFixed(0).padStart(3)} | ${pc(r.stopRate)} | ${r.throwsPerGame.toFixed(1)} ${pc(r.throwHit)} (${ci(r.throwCI)}) n=${r.throws} | ${pc(r.allHit)} | ${pc(r.winRate)}  tools ${Object.entries(r.byTool).map(([k, b]) => `${k} ${b.hits}/${b.shots}`).join(', ')} | behind ${(r.behind / games).toFixed(1)} s/g, blind taps ${(r.blindTaps / games).toFixed(1)}/g (dry hint ${(r.dry / games).toFixed(1)}), green spikes ${r.spikeGreenHit}/${r.spikeGreen}`);
   }
   const j = args.indexOf('--json'); if (j >= 0) await writeFile(args[j + 1], JSON.stringify({games, kid: KID, result: res}, null, 1));
 }

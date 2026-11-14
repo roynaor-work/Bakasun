@@ -1,0 +1,101 @@
+<!doctype html>
+<meta charset="utf-8"><title>catch audio probe v8</title>
+<!-- "תפוס את הפושע" v8 against v7 in a real browser (tools/catch-audio8.mjs runs it twice: ?v=7 and ?v=8). For each sound: the loudest
+     46 ms RMS window ("peak") and the mean RMS over the span ("mean"), tapped from audio.output() before the limiter, and the spectrum
+     summed over the span: energy share per band, the strongest bin in 2-5 kHz with its prominence over its +-200 Hz neighbourhood (a pure
+     whistle line stands 30-60 dB proud, a noise burst a few dB), and the per-frame maximum of that prominence in 1.5-5 kHz.
+     v7 = the game as v23 plays it (Codex pack, SIREN7); v8 = the same with the v8 flags of catch-session6.mjs (catch-audio8.mjs). -->
+<style>body{font:14px system-ui;margin:16px;background:#111;color:#eee}pre{white-space:pre-wrap}</style>
+<body><pre id="out"></pre>
+<script type="module">
+import {createCatchAudio} from '../minigames/catch-audio.mjs?v=island-v2-20261107-13';
+const out = document.getElementById('out'), log = s => { out.textContent += s + '\n'; };
+const v8 = new URLSearchParams(location.search).get('v') === '8';
+const audio = createCatchAudio({sirenScale: .55, pack: 'v7', v8: v8 ? {intro: true, engine: true, siren: true, burst: true} : null}); window.audio = audio;
+const report = {version: v8 ? 'v8' : 'v7', cues: {}, status: {}};
+let an = null, td = null, fd = null, hz = 0, anP = null, tdP = null;
+// a second tap through a 250 Hz high-pass: roughly what a phone speaker plays (its lows roll off under ~250 Hz)
+const tap = () => { const node = audio.output(); if (!node) return false; const ac = node.context; an = ac.createAnalyser(); an.fftSize = 4096; an.smoothingTimeConstant = 0; node.connect(an); an.connect(ac.destination); td = new Float32Array(an.fftSize); fd = new Float32Array(an.frequencyBinCount); hz = ac.sampleRate / an.fftSize;
+  const hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 250; hp.Q.value = .7; anP = ac.createAnalyser(); anP.fftSize = 2048; node.connect(hp).connect(anP); tdP = new Float32Array(anP.fftSize); return true; };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const BANDS = [[0, 200], [200, 500], [500, 1000], [1000, 2000], [2000, 5000], [5000, 24000]];
+const median = a => { const c = Array.from(a).sort((x, y) => x - y); return c[c.length >> 1]; };
+/** Runs fn and samples for ms (after `warm` ms, for the steady level of a continuous sound): RMS windows and the summed power spectrum
+ * (frames below -110 dBFS skipped). Short sounds are measured twice and the louder pass is kept (headless Chromium stalls its timers now
+ * and then, and a 46 ms window can miss a click). */
+async function measure(name, fn, ms, {warm = 0, reps = ms <= 1100 ? 2 : 1} = {}) {
+  let best = null;
+  for (let r = 0; r < reps; r++) { const m = await measureOnce(fn, ms, warm); if (!best || m.mean > best.mean) best = m; await sleep(250); }
+  report.cues[name] = best;
+  log(name.padEnd(16) + ' peak ' + best.peak + ' mean ' + best.mean + ' 2-5k ' + best.band['2000-5000'] + '% line ' + best.linePromMax + 'dB@' + best.linePromHz);
+  await sleep(300);
+}
+async function measureOnce(fn, ms, warm) {
+  const pow = new Float64Array(fd.length); let peak = 0, sum = 0, n = 0, frames = 0, maxProm = 0, maxPromHz = 0, pPeak = 0, pSum = 0;
+  fn(); if (warm) await sleep(warm);
+  const t0 = performance.now();
+  while (performance.now() - t0 < ms) {
+    an.getFloatTimeDomainData(td); let s = 0; for (const v of td) s += v * v; const r = Math.sqrt(s / td.length); peak = Math.max(peak, r); sum += r; n++;
+    anP.getFloatTimeDomainData(tdP); let sp = 0; for (const v of tdP) sp += v * v; const rp = Math.sqrt(sp / tdP.length); pPeak = Math.max(pPeak, rp); pSum += rp;
+    an.getFloatFrequencyData(fd); let mx = -Infinity; for (const v of fd) mx = Math.max(mx, v);
+    if (mx > -110) {
+      frames++; for (let i = 1; i < fd.length; i++) pow[i] += Math.pow(10, fd[i] / 10);
+      // the strongest bin in 1.5-5 kHz of this frame and how far it stands over its neighbourhood
+      const lo = Math.ceil(1500 / hz), hi = Math.floor(5000 / hz), nb = Math.round(200 / hz); let k = lo; for (let i = lo; i <= hi; i++) if (fd[i] > fd[k]) k = i;
+      const prom = fd[k] - median([...fd.subarray(k - nb, k - 2), ...fd.subarray(k + 3, k + nb)]);
+      if (fd[k] > mx - 30 && prom > maxProm) { maxProm = prom; maxPromHz = Math.round(k * hz); }
+    }
+    await sleep(15);
+  }
+  let tot = 0; for (let i = 1; i < pow.length; i++) tot += pow[i];
+  const band = Object.fromEntries(BANDS.map(([a, b]) => { let e = 0; for (let i = Math.max(1, Math.ceil(a / hz)); i < Math.min(pow.length, b / hz); i++) e += pow[i]; return [`${a}-${b}`, +(e / (tot || 1) * 100).toFixed(1)]; }));
+  const lo = Math.ceil(2000 / hz), hi = Math.floor(5000 / hz), nb = Math.round(200 / hz); let k = lo; for (let i = lo; i <= hi; i++) if (pow[i] > pow[k]) k = i;
+  const db = i => 10 * Math.log10(pow[i] + 1e-30), neigh = []; for (let i = k - nb; i <= k + nb; i++) if (Math.abs(i - k) > 2) neigh.push(db(i));
+  let top = 1; for (let i = 1; i < pow.length; i++) if (pow[i] > pow[top]) top = i;
+  return {peak: +peak.toFixed(4), mean: +(sum / Math.max(1, n)).toFixed(4), phonePeak: +pPeak.toFixed(4), phoneMean: +(pSum / Math.max(1, n)).toFixed(4), frames, band, peakHz: Math.round(top * hz), hi25: {hz: Math.round(k * hz), promDb: +(db(k) - median(neigh)).toFixed(1), belowPeakDb: +(db(k) - db(top)).toFixed(1)}, linePromMax: +maxProm.toFixed(1), linePromHz: maxPromHz};
+}
+/** Drives the engine as the chase does, 60 times a second: speed by a function of time, the boost and the brake, the phase. */
+const drive = (secs, speedAt, {boost = () => false, brake = () => false, phase = () => 'run', siren = false} = {}) => () => {
+  const t0 = performance.now(); let lastSiren = -1;
+  const iv = setInterval(() => { const t = (performance.now() - t0) / 1000; if (t > secs) { clearInterval(iv); audio.engineStop(); return; } audio.engineState(phase(t), brake(t)); audio.engine(speedAt(t), boost(t)); if (siren && t - lastSiren > .8) { lastSiren = t; audio.cue('siren', {approach: 0}); } }, 16);
+};
+async function run() {
+  if (!tap()) { window.report = report; window.done = true; return; }
+  audio.cue('countdown'); await sleep(200);
+  for (let i = 0; i < 60 && audio.status().pack?.decoded < audio.status().pack?.of; i++) await sleep(50);
+  // the opening as the chase plays it: the view is up ('engine'), 2.5 s of countdown (idle, two counts), 'go', then the run with the siren
+  await measure('opening', () => {
+    audio.cue('engine'); const t0 = performance.now(); let last = -1, said = {};
+    const iv = setInterval(() => { const t = (performance.now() - t0) / 1000; if (t > 5) { clearInterval(iv); audio.engineStop(); return; }
+      const run = t >= 2.5; audio.engineState(run ? 'run' : 'countdown', false); audio.engine(22, false);
+      if (!said.a && t >= .5) { said.a = 1; audio.cue('count'); } if (!said.b && t >= 1.5) { said.b = 1; audio.cue('count'); } if (!said.go && run) { said.go = 1; audio.cue('go'); }
+      if (run && t - last > .8) { last = t; audio.cue('siren', {approach: 0}); } }, 16);
+  }, 5000);
+  await sleep(1500);
+  await measure('opening-first2s', () => { audio.cue('engine'); const t0 = performance.now(); const iv = setInterval(() => { const t = (performance.now() - t0) / 1000; if (t > 2) { clearInterval(iv); audio.engineStop(); return; } audio.engineState('countdown', false); audio.engine(22, false); if (t > .5 && t < .52) audio.cue('count'); }, 16); }, 2000);
+  await sleep(1200);
+  // continuous sounds: the steady level after a warm-up (the v8 siren fades in over 1.4 s when it starts, the engines over 0.4 s)
+  const cues = (n, arg) => () => { for (let i = 0; i < n; i++) setTimeout(() => audio.cue('siren', arg), i * 700); };
+  await measure('siren', drive(5, () => 0, {siren: true, phase: () => 'run'}), 3000, {warm: 1800}); audio.engineStop(); await sleep(1500);
+  report.status.siren = audio.status();
+  await measure('siren-near', cues(7, {approach: 0, near: true}), 2400, {warm: 1800}); await sleep(1500);
+  await measure('siren-crew', cues(7, {crew: true}), 2400, {warm: 1800}); await sleep(1800);
+  await measure('engine-cruise', drive(3, () => 22), 2000, {warm: 800}); await sleep(600);
+  await measure('engine-boost', drive(3.4, t => t < .8 ? 22 : Math.min(31, 22 + 9 * (t - .8) / 1.2), {boost: t => t >= .8 && t < 3.2}), 2600, {warm: 800}); await sleep(600);
+  report.status.engineBoost = audio.status();
+  await measure('engine-slow', drive(3, t => t < .8 ? 31 : Math.max(9, 31 - 22 * (t - .8) / 1.6), {brake: t => t >= .8 && t < 2.4}), 2200, {warm: 800}); await sleep(600);
+  await measure('engine+siren', drive(3.3, t => t < 1.8 ? 22 : Math.min(31, 22 + 9 * (t - 1.8) / 1.2), {boost: t => t >= 1.8, siren: true}), 1500, {warm: 1800}); audio.engineStop(); await sleep(1500);
+  await measure('shot', () => audio.cue('shot'), 1100);
+  await measure('shot+hit', () => { audio.cue(v8 ? 'shot' : 'shotHit'); if (v8) audio.cue('shotHit', {delay: .12}); }, 1100);
+  await measure('mark', () => audio.cue(v8 ? 'burst' : 'shot', v8 ? {rounds: 4} : undefined), 900);
+  await measure('net-launch', () => audio.cue(v8 ? 'launch' : 'shot'), 800);
+  await measure('emp-charge', () => audio.cue(v8 ? 'charge' : 'shot'), 800);
+  await measure('dry', () => audio.cue('dry'), 400);
+  await measure('flat', () => audio.cue('flat'), 1500);
+  await measure('stack-burst+siren+engine', () => { drive(3.6, () => 24, {siren: true})(); setTimeout(() => audio.cue('shot'), 2100); }, 1600, {warm: 1800, reps: 1});
+  await sleep(1800);
+  report.status.final = audio.status();
+  window.report = report; window.done = true; log(JSON.stringify(report.status));
+}
+run();
+</script>

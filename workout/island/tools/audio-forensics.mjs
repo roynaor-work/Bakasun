@@ -152,6 +152,22 @@ const bots={
       const target=frame<wallUntil?pipe.lip:best;if(!player.airborne)tricked=false;let trick=null;if(player.airborne&&!player.trick&&!tricked){trick='grab';tricked=true;}
       return {steer:clamp((target-x)*.8-(player.lean??0)*.2,-1,1),boost:!player.airborne,trick};};
     window.__phaseProbe=()=>engine.phase;window.__alpineKick=()=>{if(engine.phase==='menu')session.start();};window.__alpineKick();},
+  // catch v8 (14/11): the chase pilot of tests/catch-v7-touch.mjs, applied by wrapping chase.step (the session sets steer, boost and brake from the
+  // fingers every frame; the wrapper runs inside the step, so its inputs win). It fires on a green ring and switches tools when one is empty.
+  // The phase is the chase phase (countdown, run, skid, end) while the chase is on, else the session mode (loading, bail, throw).
+  catchCriminal:()=>{const cur=()=>window.__island.games.current?.session,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    document.querySelector('.catch-help:not([hidden]) .catch-help-ok')?.click();
+    const c=cur().chase,step=c.step.bind(c);let cool=0;
+    c.step=dt=>{const st=c.state;
+      if(st.phase==='run'){const g=c.gun.state,a=c.gun.aimInfo?.();
+        const freeOf=lane=>{let f=60;for(const o of c.obstacles){if(o.kind==='pad'||o.kind==='nitro'||o.kind==='oil')continue;const os=c.obstacleS(o,st.t)-st.s;if(os>-2&&os<60&&Math.abs(o.d-lane)<2.2)f=Math.min(f,os);}return f;};
+        let best=0,bs=-1e9;for(const lane of c.C.lanes){const sc=freeOf(lane)-Math.abs(lane-st.d)*1.5;if(sc>bs){bs=sc;best=lane;}}
+        const zone=g.locked&&a?(a.weapon==='spikes'?a.predD:a.zoneD):st.crim.d,want=freeOf(clamp(zone,-3.6,3.6))>22?zone:best;
+        c.setSteer(clamp((want-st.d)*.55-st.slide/5.6,-1,1));c.setBoost(st.tank>.15&&Math.abs(c.track.curvatureAt(st.s+30))<1/110&&st.gap>7);c.setBrake(st.gap<-1.5);
+        cool-=dt;if(g.locked&&g.quality==='green'&&g.reload<=0&&g.ammo>0&&cool<=0){cool=.3;c.fire();}
+        if(g.ammo<=0&&g.reload<=0)c.cycle?.();}
+      return step(dt);};
+    window.__phaseProbe=()=>{const x=cur(),m=x?.snapshot?.mode;return m==='chase'?(x.chase?.state.phase||m):m||null;};},
   // Pure pursuit on the centre line, as in tools/perf-racing-page.mjs.
   islandRacing:()=>{const d=window.__island.games.current.session.debug,model=d.model,track=model.track,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
     d.input.sample=()=>{const p=model.state.player,pr=track.project(p.x,p.z,p.s),tg=track.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);return {steer:clamp(err*1.7,-1,1),throttle:1,autoAccelerate:true,brake:false,drift:Math.abs(err)>.22&&p.speed>14,nitro:p.nitro>70&&Math.abs(err)<.08};};
@@ -162,7 +178,8 @@ const ready={
   streetSlam:()=>{const c=window.__island.games.current;return !!(c?.session.debug?.view&&c.session.snapshot.renderMetrics);},
   tennis:()=>!!window.__island.games.current?.session.ready,
   alpineRush:()=>!!window.__island.games.current?.session.snapshot?.loaded,
-  islandRacing:()=>(window.__island.games.current?.session.snapshot?.renderMetrics?.frames??0)>1
+  islandRacing:()=>(window.__island.games.current?.session.snapshot?.renderMetrics?.frames??0)>1,
+  catchCriminal:()=>window.__island.games.current?.session?.snapshot?.mode==='chase'
 };
 
 const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
