@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self'; object-src 'none'; base-uri 'none'">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <title>תוספות לצי · תצוגת נכסים</title>
+</head>
+<body>
+<header>
+  <div><span class="eyebrow">הרפתקה בים</span><h1>צי קטן. הרפתקה גדולה.</h1><p>ספינות, אוצרות קטנים ואפקטים שעושים גלים.</p></div>
+  <a href="manifest.json" class="manifest">מפרט הנכסים <span class="arrow-icon" aria-hidden="true"></span></a>
+</header>
+<main>
+  <section class="workbench" aria-label="תצוגת תלת ממד">
+    <div id="stage" class="stage">
+      <div class="stage-heading"><span class="pill">תלת ממד חי</span><h2 id="model-title">הצי החדש</h2></div>
+      <div class="stage-foot"><span>גרירה לסיבוב · גלילה לקירוב</span><button id="reset-view">מבט התחלתי</button></div>
+      <p id="load-status" role="status">טוען את הצי…</p>
+    </div>
+    <aside>
+      <div class="section-label"><span>01</span><h2>בוחרים נכס</h2></div>
+      <div id="asset-list" class="asset-list" role="group" aria-label="בחירת נכס"></div>
+      <div id="ship-controls" hidden>
+        <div class="section-label"><span>02</span><h2>מצב הספינה</h2></div>
+        <div class="segmented" id="states" role="group" aria-label="מצב הספינה">
+          <button data-state="intact" aria-pressed="true">שלמה</button>
+          <button data-state="damaged" aria-pressed="false">פגועה</button>
+          <button data-state="sinking" aria-pressed="false">שוקעת</button>
+        </div>
+        <button id="replay-sinking" hidden>שקיעה מהתחלה</button>
+        <label class="slider">סיבוב הצריח<input id="yaw" type="range" min="-150" max="150" value="0"></label>
+        <label class="slider">הגבהת הקנה<input id="pitch" type="range" min="-10" max="35" value="0"></label>
+      </div>
+      <div id="buoy-controls" hidden><label class="toggle"><input id="beacon" type="checkbox" checked>אור המצוף דולק</label></div>
+      <div id="flag-controls" hidden><label class="toggle"><input id="decal" type="checkbox">הצגת עיגול נחיתה</label></div>
+      <label class="toggle pause"><input id="paused" type="checkbox">השהיית תנועה ואפקטים</label>
+      <p class="model-note" id="model-note"></p>
+      <a id="model-download" class="download" hidden download>הורדת הדגם <span aria-hidden="true">↓</span></a>
+    </aside>
+  </section>
+  <section class="effects-section" aria-labelledby="fx-heading">
+    <div class="section-head"><div><span class="eyebrow">קצת תנועה, הרבה אופי</span><h2 id="fx-heading">עושים גלים</h2></div><label class="toggle"><input id="atlas-view" type="checkbox">גיליון מלא</label></div>
+    <div id="effects" class="effects"></div>
+  </section>
+  <section class="sounds-section" aria-labelledby="sound-heading">
+    <div class="section-head"><div><span class="eyebrow">צלילים קצרים למשחק</span><h2 id="sound-heading">שומעים את ההרפתקה</h2></div><span class="sound-note">לחיצה לניגון · ללא ניגון אוטומטי</span></div>
+    <div id="sounds" class="sounds"></div>
+    <div class="audio-player"><audio id="audio" controls preload="none" aria-label="נגן האפקט הנבחר"></audio><span id="audio-status" role="status"></span></div>
+  </section>
+</main>
+<footer><span>יצירה מקורית · ללא כיתוב או סמלים על הנכסים</span><nav><a href="REPORT.md">דוח מסירה</a><a href="LICENSES.md">מקור ורישיונות</a><a href="source/build.py">מקור היצירה</a></nav></footer>
+<script type="module" src="preview.js"></script>
+</body>
+</html>

@@ -371,6 +371,7 @@
   "minigames/naval-air-audio.mjs",
   "minigames/naval-air-view.mjs",
   "minigames/naval-air.mjs",
+  "minigames/naval-assets.mjs",
   "minigames/naval-ballistics.mjs",
   "minigames/naval-base-view.mjs",
   "minigames/naval-camera.mjs",
@@ -383,6 +384,8 @@
   "minigames/naval-icons.mjs",
   "minigames/naval-impacts.mjs",
   "minigames/naval-lock.mjs",
+  "minigames/naval-lockon-hud.mjs",
+  "minigames/naval-lockon.mjs",
   "minigames/naval-marks.mjs",
   "minigames/naval-patrol.mjs",
   "minigames/naval-projectiles.mjs",
@@ -1114,7 +1117,11 @@
    "assets/naval-v7/textures/fleet-tide-1024.png",
    "assets/game-naval/audio/vulcan-spin-up.ogg",
    "assets/game-naval/audio/vulcan-fire-loop.ogg",
-   "assets/game-naval/audio/vulcan-spin-down.ogg"
+   "assets/game-naval/audio/vulcan-spin-down.ogg",
+   "assets/game-naval/models/plane.glb",
+   "assets/game-naval/models/helicopter.glb",
+   "assets/game-naval/models/supply_buoy.glb",
+   "assets/game-naval/models/naval_atlas_1024.png"
   ],
   "fire": [
    "assets/fire-v23/crew-0.webp",

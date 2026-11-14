@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#112d40">
+  <meta name="robots" content="noindex">
+  <title>כנפיים מעל האי · דגמי אוויר v1</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./preview.css">
+  <script type="module" src="./preview.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><svg class="brand-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20 20 4M7 4h13v13" stroke="currentColor" stroke-width="1.5"/></svg><span>האי שלי <span class="brand-divider">/</span> סדנת הדגמים</span></div>
+    <span class="edition" dir="ltr">NAVAL AIR · 01</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div><p class="eyebrow">זוג דגמי תלת־ממד מקוריים</p><h1 id="title">כנפיים מעל האי</h1><p class="lede">מטוס ומסוק למשחק הספינות. סובבו, הביטו מכל כיוון ונסו את התנועה.</p></div>
+      <div class="direction-note"><span class="dot"></span><span>חרטום <b dir="ltr">+Z</b><span class="separator">·</span>מעלה <b dir="ltr">+Y</b><br><small>מרכז הגוף בראשית הצירים</small></span></div>
+    </section>
+    <section class="toolbar" aria-label="בקרי תצוגה משותפים">
+      <div class="control-group"><span class="control-label">תנועה</span><div class="button-group" id="clips"><button type="button" data-clip="rest" aria-pressed="true">מנוחה</button><button type="button" data-clip="fly" aria-pressed="false">טיסה <small dir="ltr">fly</small></button><button type="button" data-clip="bank" aria-pressed="false">הטיה <small dir="ltr">bank</small></button><button type="button" data-clip="down" aria-pressed="false">ירידה <small dir="ltr">down</small></button></div></div>
+      <div class="control-group"><span class="control-label">מבט</span><div class="button-group" id="views"><button type="button" data-view="three-quarter" aria-pressed="true">תלת־רבע</button><button type="button" data-view="top" aria-pressed="false">מלמעלה</button><button type="button" data-view="side" aria-pressed="false">מהצד</button><button type="button" data-view="front" aria-pressed="false">מלפנים</button></div></div>
+      <div class="utility-controls"><button type="button" id="pause" aria-pressed="false">השהה</button><label><input type="checkbox" id="spin" checked> סיבוב להבים</label><label><input type="checkbox" id="wireframe"> רשת</label><label><input type="checkbox" id="axes"> צירים</label></div>
+    </section>
+    <section class="models" aria-label="הדגמים">
+      <article class="model-card" data-model="plane">
+        <div class="card-top"><div><p class="model-number" dir="ltr">01 / FIXED WING</p><h2>מטוס תקיפה קל</h2></div><span class="swatch plane-swatch" aria-label="גוף אפור כחלחל"></span></div>
+        <div class="viewport" id="plane-viewport"><canvas aria-label="תצוגה אינטראקטיבית של מטוס עם כנפיים ישרות ומדחף"></canvas><p class="loading" role="status">טוען את המטוס…</p><span class="viewport-corner" dir="ltr">+Y ↑ · +Z NOSE</span><span class="clip-badge">מנוחה</span></div>
+        <div class="specs"><div><span>אורך</span><strong dir="ltr">5.6 <small>יח׳</small></strong></div><div><span>מוטת כנפיים</span><strong dir="ltr">8.6 <small>יח׳</small></strong></div><div><span>חומר</span><strong>אחד</strong></div></div>
+        <details><summary>פרטי הדגם</summary><dl class="diagnostics" id="plane-stats"><dt>מצב</dt><dd>בטעינה</dd></dl><a class="download" href="./plane.glb" download>הורדת המטוס <span dir="ltr">GLB ↓</span></a></details>
+      </article>
+      <article class="model-card" data-model="helicopter">
+        <div class="card-top"><div><p class="model-number" dir="ltr">02 / ROTARY WING</p><h2>מסוק</h2></div><span class="swatch helicopter-swatch" aria-label="גוף ירוק זית"></span></div>
+        <div class="viewport" id="helicopter-viewport"><canvas aria-label="תצוגה אינטראקטיבית של מסוק עם רוטור ראשי, רוטור זנב ומגלשים"></canvas><p class="loading" role="status">טוען את המסוק…</p><span class="viewport-corner" dir="ltr">+Y ↑ · +Z NOSE</span><span class="clip-badge">מנוחה</span></div>
+        <div class="specs"><div><span>אורך הגוף והזנב</span><strong dir="ltr">4.4 <small>יח׳</small></strong></div><div><span>קוטר רוטור</span><strong dir="ltr">7.6 <small>יח׳</small></strong></div><div><span>חומר</span><strong>אחד</strong></div></div>
+        <details><summary>פרטי הדגם</summary><dl class="diagnostics" id="helicopter-stats"><dt>מצב</dt><dd>בטעינה</dd></dl><a class="download" href="./helicopter.glb" download>הורדת המסוק <span dir="ltr">GLB ↓</span></a></details>
+      </article>
+    </section>
+    <div class="viewer-notes"><p>גרירה לסיבוב המבט · גלגלת לקירוב · כפתורי המבט מאפסים את המצלמה</p><p id="animation-status" role="status" aria-live="polite">תנוחת מנוחה. אפשר לבחור תנועה בשורת הבקרים.</p></div>
+    <footer><span>נכסים עצמאיים לביקורת וחיבור למשחק</span><a href="./LICENSES.md">מקורות ורישיונות</a><span dir="ltr">GLB 2.0 · LOCAL THREE.JS</span></footer>
+  </main>
+  <noscript><p class="fatal">לתצוגת הדגמים נדרש JavaScript. אפשר להוריד את קובצי ה־GLB ישירות.</p></noscript>
+</body>
+</html>
