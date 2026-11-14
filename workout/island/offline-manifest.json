@@ -205,6 +205,10 @@
   "minigames/alien-v23-ui.mjs",
   "minigames/alien-v23.css",
   "minigames/alien-v23.mjs",
+  "minigames/alien-v24-audio.mjs",
+  "minigames/alien-v24-draw.mjs",
+  "minigames/alien-v24.css",
+  "minigames/alien-v24.mjs",
   "minigames/alien-v7.mjs",
   "minigames/alien-v9.mjs",
   "minigames/alien-view.mjs",
@@ -399,6 +403,10 @@
   "minigames/naval-supply.mjs",
   "minigames/naval-upgrades.css",
   "minigames/naval-upgrades.mjs",
+  "minigames/naval-v24-audio.mjs",
+  "minigames/naval-v24-hud.mjs",
+  "minigames/naval-v24.css",
+  "minigames/naval-v24.mjs",
   "minigames/naval-v7.mjs",
   "minigames/naval-view.mjs",
   "minigames/naval-water.mjs",
@@ -1126,7 +1134,11 @@
    "assets/game-naval/models/plane.glb",
    "assets/game-naval/models/helicopter.glb",
    "assets/game-naval/models/supply_buoy.glb",
-   "assets/game-naval/models/naval_atlas_1024.png"
+   "assets/game-naval/models/naval_atlas_1024.png",
+   "assets/game-naval/fx/water-target.png",
+   "assets/game-naval/fx/water_explosion.png",
+   "assets/game-naval/audio/enemy-cannon.ogg",
+   "assets/game-naval/audio/incoming-shell.ogg"
   ],
   "fire": [
    "assets/fire-v23/crew-0.webp",
@@ -1228,7 +1240,11 @@
    "assets/defense-v7/alien-carrier-lod1.glb",
    "assets/defense-v7/alien-manta-lod1.glb",
    "assets/defense-v7/alien-scout-lod1.glb",
-   "assets/defense-v7/defender-plane.glb"
+   "assets/defense-v7/defender-plane.glb",
+   "assets/alien-v24/vulcan-magazine.png",
+   "assets/alien-v24/pickup-burst.png",
+   "assets/alien-v24/refill-pickup.ogg",
+   "assets/alien-v24/overheat.ogg"
   ],
   "city": [
    "assets/models/city/01-small-house-red-roof.glb",

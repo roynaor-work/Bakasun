@@ -49,6 +49,8 @@ export function navalSubDepth(e,age,balance){
  if(e?.subMode==='v24'){const c={...NAVAL_V24_DEFAULTS.sub,...(balance?.v24?.sub||{})},a=Math.max(0,age);if(a<c.firstDive)return 0;return ((a-c.firstDive)%c.cycle)<c.cycle-c.surface?1:0;}
  const combat=balance?.combat||{};return age%combat.submarineCycle>combat.submarineSurface?1:0;
 }
+/** Seconds a v24 submarine stays under water from `age` (0 when it is up): it only starts a torpedo run it can finish under water. */
+export function navalSubDiveLeft(e,age,balance){const c={...NAVAL_V24_DEFAULTS.sub,...(balance?.v24?.sub||{})},a=Math.max(0,age);if(e?.subMode!=='v24'||a<c.firstDive)return 0;const phase=(a-c.firstDive)%c.cycle;return Math.max(0,c.cycle-c.surface-phase);}
 /** v24 rule: a diving submarine can only be hit by a torpedo (ammo 2). */
 export function navalSubShield(e,ammoIndex,balance){return e?.subMode==='v24'&&balance?.shipTypes?.[e.kind??0]?.submarine&&e.depth>(balance.combat?.submarineHitDepth??.3)&&ammoIndex!==2;}
 /** Torpedoes for a stage with the v24 submarine: the stock clamped to 3..5. */

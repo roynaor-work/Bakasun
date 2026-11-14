@@ -17,7 +17,7 @@ import {drawNavalAimMarks,drawNavalShellTracers,drawNavalHitFeedback,navalMarkKi
 import {createNavalPatrol,stepNavalPatrol,navalPatrolCentre,navalPatrolObstacles} from './naval-patrol.mjs?v=island-v2-20261107-13';
 import {navalForecast,navalForecastConfig} from './naval-forecast.mjs?v=island-v2-20261107-13';
 import {navalLaunch,navalPredict,navalAdvanceShot,navalBallisticPoint,navalSolveLaunch,navalBallisticConfig,navalLanding,navalMuzzle} from './naval-ballistics.mjs?v=island-v2-20261107-13';
-import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-13';
+import {navalAimV24,navalEnemyFireV24,navalSubV24,navalV24Config,navalFireSeconds,navalTelegraph,navalEnemyAim,navalSubDepth,navalSubDiveLeft,navalSubShield,navalTorpedoStock,navalLockOrder,navalLockNext,navalHitChance} from './naval-v24.mjs?v=island-v2-20261107-13';
 import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-13';
 import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-13';
 import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-13';
@@ -226,6 +226,9 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   // A submarine under water: the gun holds the shot (the lock says "waiting") and fires by itself when the shell can meet it.
   if(homing.status==='dive')return false;
   if(!aligned&&time-homing.queued<lockCfg.queueSeconds)return false;
+  // v24: a locked gun does not waste a shell it cannot land (too far, another hull in the way, a miss): after the wait the tap is dropped,
+  // the reason word stays on the lock, and the child sails or waits for green (the challenge is the sailing, not the aim).
+  if(aimV24&&fresh&&fresh.status!=='ready'){homing.queued=null;return false;}
   if(aligned&&fresh&&kind!==1&&kind!==5){turret.yaw=fresh.yaw;if(kind!==2)turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,fresh.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,fresh.power));}
   // v24: a locked shell always meets the hull but never counts as the weak centre (the gold star x1.75 stays a hand-aimed shot), so a lock
   // does not end a stage in seconds; the challenge moves to sailing out of the enemy fire.
@@ -358,7 +361,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
     if(fireV24||e.subMode==='v24'){
      // v24: a v24 submarine fires torpedoes from under water only (a bubble line you can sail away from); every hull leads the ship a
      // little, and from `salvoStage` every other shot of a surface hull is a salvo of three along the ship's course.
-     const sub=e.subMode==='v24',torpedo=Boolean(type.submarine),wait=sub&&!(e.depth>0);
+     const sub=e.subMode==='v24',torpedo=Boolean(type.submarine),wait=sub&&(!(e.depth>0)||navalSubDiveLeft(e,age,balance)<Math.max(v24.sub.telegraphMin,tactics.telegraphSeconds)+.15);
      if(wait){e.fireAt=time+.5;}else{
       const tele=sub?Math.max(v24.sub.telegraphMin,tactics.telegraphSeconds*(fireV24?efc.telegraphMult:1)):fireV24?navalTelegraph(tactics.telegraphSeconds,efc):tactics.telegraphSeconds;
       const flight=torpedo?(sub?v24.sub.enemyTorpedoSeconds:1.65):1.2,salvo=fireV24&&!torpedo&&level>=efc.salvoStage&&((e.fired||0)%efc.salvoEvery===efc.salvoEvery-1)?efc.salvoShots:1;
