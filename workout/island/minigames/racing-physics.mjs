@@ -1,5 +1,8 @@
 import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-14';
 import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-14';
+import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-14';
+import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-14';
+import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-14';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
@@ -54,6 +57,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // racing-grid-v1: extraRivals more cars share the grid with the player and the four scoring drivers (league standings, rank contract and result stay on those five).
   const extra=Math.max(0,Math.min(11,Math.floor(finite(config.extraRivals,0)))),crashOn=config.crash!==false;
   const offTrackOn=!!OFF&&!walls&&crashOn;
+  // racing-v24 (racing-v24.mjs; each one off unless the config asks, the session asks unless the address says v23 or 0): recover = one roll where the car left,
+  // then a vanish and a soft drop on the centre line; offSlow = a slow car can always drive back (and is set back softly when lost); shiftInput=false = the shift
+  // points no longer move with the steering and the brake; cornerSlow=false = no speed bled by the turn itself; bump = a knock that bounces the cars apart; pit = tyres and stops
+  const recoverV24=config.recover==='v24'&&offTrackOn,offSlowOn=!!config.offSlow&&!walls,shiftInputOn=config.shiftInput!==false,cornerSlowOn=config.cornerSlow!==false,bumpV24=config.bump==='v24';
   const EXTRA_NAMES=['נועה','רום','דור','ים','אור','שקד','גל','טל','לב','עמית','פז'];
   // racing-deep-m2: a staggered two-by-N grid on the main straight (track.gridSlots); the player's slot is stage.grid (3rd or 5th). config.grid=false (?racingGrid=0) keeps the old line-up.
   const gridOn=config.grid!==false,count=1+stage.opponents+extra,slots=gridOn?track.gridSlots(count):null,playerSlot=Math.min(count-1,stage.grid-1);
@@ -69,7 +76,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       nitro:65*nitroUpgrade,boostTime:0,boosting:false,driftCharge:0,drifting:false,slipAngle:0,offroad:false,
       lateral:lane,offroadTime:0,recoveryTime:0,recoveries:0,finished:false,finishTime:null,
       distanceDriven:0,wallHits:0,wallCooldown:0,draft:0,lapTimes:[],gear:1,gearT:1,gearInit:false,rpm:.2,shiftT:0,charging:0,ersRate:0,ersUsed:0,ersHarvested:0,pickups:0,padCooldown:0,lane,targetLane:lane,laneHold:0,aiBias:(random()-.5)*1.4,
-      number:RACING_NUMBERS[index%RACING_NUMBERS.length],gridSlot:slot,grindT:0,passing:null,passes:0,braking:false,aiStyle:random(),farT:0,offTracks:0,offFlight:null,postHits:0,
+      number:RACING_NUMBERS[index%RACING_NUMBERS.length],gridSlot:slot,grindT:0,passing:null,passes:0,braking:false,aiStyle:random(),farT:0,offTracks:0,offFlight:null,postHits:0,kx:0,kz:0,slowOffT:0,hidden:false,dropY:0,
       maxSpeed:stage.aiSpeed*skill*(index>stage.opponents?.93+random()*.07:drivers&&index>0&&drivers[index-1]?drivers[index-1].rating:.96+random()*.075),collisionCooldown:0};
   });
   const player=cars[0];
@@ -95,6 +102,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   // track, 9 m/s. The flight lasts CRASH_FX_MIN..CRASH_FX_MAX seconds (crashDur) and never crosses the next gate, so a crash still never grants one.
   const crashFx=config.crashFx!==false,CRASH_FX_MIN=.6,CRASH_FX_MAX=1.1,CRASH_FX_PEAK=1.6,CRASH_FX_DECAY=3;
   const restartLane=car=>clamp(car.isPlayer?0:car.lane*.5,-track.width*.2,track.width*.2);
+  // racing-v24: the recovery after leaving the track (racing-recover.mjs) and the pit crew (racing-pit.mjs: tyre wear and stops in races of 3+ laps)
+  const recovery=createRecovery({track,sector,event,restartLane,crashFx,minStrength:OFF?.minStrength??.5,fx:{min:CRASH_FX_MIN,max:CRASH_FX_MAX,peak:CRASH_FX_PEAK,time:CRASH_TIME}});
+  const pitCrew=createPitCrew({track,stage,cars,random,event,passGates,sector,enabled:!!config.pit});
   function startCrash(car,reason) {
     if(!crashOn||car.crashT>0||car.finished)return;
     car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.grindT=0;car.passing=null;car.laneHold=0;
@@ -126,7 +136,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
    * moving the car in a straight eased line from where it is to the landing point, so the chase camera follows without a cut; the revs settle to idle on the way, so
    * the engine has no jump at the landing. Same rule for the computer drivers (they land on their own restart lane). */
   function startOffTrack(car,why) {
-    if(!offTrackOn||car.crashT>0||car.finished)return;
+    if(!offTrackOn||car.crashT>0||car.finished||car.offFlight||car.pit)return;
+    if(recoverV24){recovery.startTumble(car,why);return;}   // racing-v24: the roll where the car is, then a vanish and a soft drop (racing-recover.mjs)
     // the nearest centre-line point, as a race distance in routeS's own lap (routeS can lag the projection by a few metres after a bumpy excursion)
     const k=Math.max(OFF.minStrength,clamp((car.speed-4)/26,0,1)),q=track.project(car.x,car.z,car.s),near=racingAngle((q.s-car.routeS)/track.length*Math.PI*2)/(Math.PI*2)*track.length;
     const gate=car.nextCheckpoint*sector-.5,r1=Math.min(gate,car.routeS+near+Math.min(4,car.speed*.2)),lane=car.isPlayer?0:restartLane(car),p=track.sample(r1);
@@ -196,8 +207,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const error=racingAngle(Math.atan2(tx-car.x,tz-car.z)-car.heading);
     const turnRate=2*Math.sin(error)*Math.max(10,car.speed)/Math.max(8,look);
     // corner speed with a braking distance: the sharpest corner within 100 m limits the speed now (brake point), the closest one the speed in it
-    const aLat=stage.aiCorner||13.5,aBrake=15+2*car.aiStyle;
-    let targetSpeed=car.maxSpeed;
+    const aLat=(stage.aiCorner||13.5)*pitCrew.aiCornerOf(car),aBrake=15+2*car.aiStyle;   // racing-v24: worn tyres corner slower (1 without pits)
+    let targetSpeed=car.maxSpeed*pitCrew.topOf(car);
     for(let d=4;d<=104;d+=10){const c=Math.abs(track.headingAt(p.s+d+9)-track.headingAt(p.s+d-3))/12;if(c<.0025)continue;const vc=Math.sqrt(aLat/c),allowed=Math.sqrt(vc*vc+2*aBrake*Math.max(0,d-6));targetSpeed=Math.min(targetSpeed,allowed);}
     // following: no running into the car ahead unless this is the pass; keep about 0.4 s of gap
     if(ahead&&car.passing!==ahead.o.id&&Math.abs(ahead.dl)<3){const g=ahead.gap-4.2;if(g<car.speed*.45)targetSpeed=Math.min(targetSpeed,Math.max(6,ahead.o.speed-(g<2.5?4:0)));}
@@ -239,6 +250,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   function integrate(car,input,dt) {
     if(car.finished) {car.speed=moveToward(car.speed,0,dt*12);return;}
     if(!Number.isFinite(car.x+car.z+car.heading+car.speed))recoverCar(car);
+    if(car.pit&&pitCrew.drive(car,dt))return;   // racing-v24: a car in the pits is driven by the stop
+    if(recovery.step(car,dt))return;            // racing-v24: tumble, rest, vanish, drop (or the soft return of a slow car)
     if(car.crashT>0){
       // flipping: the car slides on and stops (no wall or gate logic), then endCrash() restarts it on the track
       car.crashT=Math.max(0,car.crashT-dt);
@@ -259,7 +272,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const feel=car.isPlayer&&config.feel!==false,speedF=clamp((car.speed-28)/17,0,1);
     const steerIn=feel?steer*(1-.3*speedF*(1-Math.abs(steer))):steer;
     car.steer+= (steerIn-car.steer)*(1-Math.exp(-dt*(feel?16:11)));
-    car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);
+    car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);if(car.ghostT>0)car.ghostT=Math.max(0,car.ghostT-dt);
     car.padCooldown=Math.max(0,car.padCooldown-dt);car.boostTime=Math.max(0,car.boostTime-dt);
     const drifting=!!input.drift&&car.speed>12&&!car.offroad&&Math.abs(car.steer)>.16;
     if(drifting)car.driftCharge=clamp(car.driftCharge+dt*(.55+Math.abs(car.steer)*.55),0,2.7);
@@ -279,19 +292,19 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       if(gap>3&&gap<22&&Math.abs(other.lateral-car.lateral)<2.4&&other.speed>car.speed*.7)draft=Math.max(draft,(1-(gap-3)/19)*(1-Math.abs(other.lateral-car.lateral)/2.4));
     }
     car.draft+=(draft-car.draft)*(1-Math.exp(-dt*(draft>car.draft?2.2:4)));
-    const maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*(1+.07*car.draft*aeroUp)+(car.boosting?12:0);
+    const tyreTop=pitCrew.topOf(car),maxSpeed=(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*tyreTop*(1+.07*car.draft*aeroUp)+(car.boosting?12:0);
     const offLimit=car.offroad?19:Infinity;
     const target= Math.min(offLimit,maxSpeed)*(throttle?1:0);
     const acceleration=(car.boosting?17:12.5)*(1+.4*car.draft);
     if(engineModel){
       // racing-v11 gearbox: seven gears share the speed range. Thrust is highest at the start of each gear and fades towards the next shift,
       // every shift cuts the drive for a moment, and the pull weakens as the speed nears the top: reaching the top takes about 20-25 s.
-      const top=Math.max(8,(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)),ratio=clamp(car.speed/top,0,.999);
+      const top=Math.max(8,(car.isPlayer?stage.playerSpeed*engine:car.maxSpeed)*tyreTop),ratio=clamp(car.speed/top,0,.999);
       // racing-ers-v1: shifts have hysteresis and a dwell time. Without them a speed hovering at a shift point flipped gears several times a second
       // (6>7>6 within 0.1 s in the player run), every flip played a shift sound and cut the drive: the "unclear noise" at shifts.
       // racing-grid-v1: more corners = earlier upshifts (up to 12% lower shift points on a twisty circuit, a little more while steering or braking); the sound is unchanged,
       // only the speed at which each gear is left moves. config.shiftMap=false (or ?racingShiftMap=0) keeps the fixed points.
-      const scale=shiftMapOn?1-.12*clamp(track.cornerFraction/.5,0,1)-(car.isPlayer?.04*Math.min(1,Math.abs(car.steer))+(input.brake?.03:0):0):1,B=GEAR_BOUNDS;
+      const scale=shiftMapOn?1-.12*clamp(track.cornerFraction/.5,0,1)-(car.isPlayer&&shiftInputOn?.04*Math.min(1,Math.abs(car.steer))+(input.brake?.03:0):0):1,B=GEAR_BOUNDS;   // racing-v24 shiftInput=false: the steering and the brake no longer move the shift points (a forced gear change after every corner)
       let up=1;while(up<GEARS&&ratio>=B[up]*scale)up++;
       let down=1;while(down<GEARS&&ratio+.035>=B[down]*scale)down++;
       car.gearT+=dt;let g=car.gear;
@@ -314,14 +327,17 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     } else car.speed=moveToward(car.speed,target,dt*(throttle?acceleration:5));
     if(input.brake&&!drifting)car.speed=Math.max(0,car.speed-dt*27*(car.isPlayer?brakeUp:1));
     if(drifting)car.speed=Math.max(0,car.speed-dt*2.2);
-    if(car.offroad)car.speed=Math.max(0,car.speed-dt*8);
+    // racing-v24 offSlow: the grass drag fades out at walking pace (8 m/s^2 at 20 m/s and more), so the engine can always move a slow car (v23: it held a standing car)
+    if(car.offroad)car.speed=Math.max(0,car.speed-dt*8*(offSlowOn?Math.min(1,car.speed/OFF_SLOW.dragFull):1));
     let yaw=car.steer*steeringRate(car.speed,drifting)*(car.isPlayer?grip*steerUp:1);
     // Soft cap on cornering force at speed (about 4 g): full lock stops snapping the car around at 40+ m/s but keeps its authority.
-    if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp/car.speed;yaw=limit*Math.tanh(yaw/limit);}
+    if(feel&&car.speed>10&&!drifting){const limit=LAT_CAP*aeroUp*pitCrew.gripOf(car)/car.speed;yaw=limit*Math.tanh(yaw/limit);}
     // racing-look-v1 cornering scrub (player only; ?racingLook=0 or config.scrub=false removes it): lateral acceleration above 20 m/s^2 bleeds speed (a drift bleeds at half the rate),
     // so a corner of radius R settles near sqrt(20 R). Without it the car held top speed round every bend (Roy: the engine sound stuck at the top).
     let scrubbed=0;
-    if(RACING_LOOK&&config.scrub!==false&&car.isPlayer&&!car.offroad){const over=Math.abs(yaw)*car.speed-20;if(over>0){car.speed=Math.max(8,car.speed-over*(drifting?.35:.4)*dt);scrubbed=over;}}
+    if(RACING_LOOK&&config.scrub!==false&&car.isPlayer&&!car.offroad){const over=Math.abs(yaw)*car.speed-20*pitCrew.gripOf(car);if(over>0){if(cornerSlowOn)car.speed=Math.max(8,car.speed-over*(drifting?.35:.4)*dt);scrubbed=over;}}
+    // racing-v24 cornerSlow=false (Roy: "slow down only when the brake is pressed, not automatically when the car turns"): the turn bleeds no speed; the corner still charges the ERS
+    pitCrew.wear(car,{yaw,brake:!!input.brake},dt);
     // racing-ers-v1 energy recovery (the player only; config.ers=false or ?racingErs=0 removes it): braking, the energy a corner scrubs, drifting and a clean centred
     // line charge the same meter nitro spends. Like an F1 ERS the car recharges while it drives and spends the charge on demand.
     if(ersOn&&car.isPlayer){
@@ -341,6 +357,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       const look=track.sample(before.s+12), error=racingAngle(look.heading-car.heading);
       yaw+=clamp(error*.65,-.26,.26);
     }
+    // racing-v24 offSlow: off the asphalt at low speed the car turns gently back towards the road (the wheel can overrule it)
+    if(offSlowOn&&car.offroad&&car.speed>.3&&car.speed<OFF_SLOW.slow*1.5){const side=Math.sign(before.lateral)||1,edge=side*(track.width/2-1.2),tg=track.sample(before.s+6+car.speed*.6),err=racingAngle(Math.atan2(tg.x+tg.normal.x*edge-car.x,tg.z+tg.normal.z*edge-car.z)-car.heading),w=(1-car.speed/(OFF_SLOW.slow*1.5))*(car.isPlayer?1-.6*Math.abs(steer):1);yaw+=clamp(err*OFF_SLOW.pull,-.6,.6)*w;}
     car.heading=racingAngle(car.heading+yaw*dt);
     // Heading is the physical body orientation; slip is its angle to the velocity.
     // Tyre grip builds and returns progressively instead of snapping on button release.
@@ -348,6 +366,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     car.slipAngle+=(targetSlip-car.slipAngle)*(1-Math.exp(-dt*(drifting?5.5:3.8)));
     const motionHeading=car.heading-car.slipAngle;
     car.x+=Math.sin(motionHeading)*car.speed*dt;car.z+=Math.cos(motionHeading)*car.speed*dt;
+    if(bumpV24&&(car.kx||car.kz)){car.x+=car.kx*dt;car.z+=car.kz*dt;const k=Math.exp(-dt*5);car.kx*=k;car.kz*=k;if(Math.hypot(car.kx,car.kz)<.05)car.kx=car.kz=0;}   // racing-v24: the knock of a contact
+    if(offSlowOn&&car.offroad&&car.speed>.3&&car.speed<OFF_SLOW.slow){const side=Math.sign(before.lateral)||1,k=OFF_SLOW.nudge*(1-car.speed/OFF_SLOW.slow)*Math.min(1,car.speed/1.5)*dt;car.x-=before.normal.x*side*k;car.z-=before.normal.z*side*k;}   // racing-v24: a slight pull to the road at low speed
     car.distanceDriven+=car.speed*dt;
     const after=track.project(car.x,car.z,before.s);
     car.y=after.y;car.s=after.s;car.lateral=after.lateral;
@@ -392,7 +412,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     if(crashOn&&state.phase==='racing'&&state.time>4&&car.recoveryTime<=0&&car.crashT<=0){
       const trying=!car.isPlayer||input.autoAccelerate!==false||finite(input.throttle)>0||input.nitro;
       if(trying&&car.speed<2.5)car.stuckT+=dt;else car.stuckT=Math.max(0,car.stuckT-dt*2);
-      if(car.stuckT>STUCK_TIME)startCrash(car,'stuck');
+      if(car.stuckT>STUCK_TIME&&!(offSlowOn&&offTrackOn&&car.offroad))startCrash(car,'stuck');   // racing-v24 offSlow: stuck off the asphalt = the soft return below
     }
     car.offroadTime=car.offroad?car.offroadTime+dt:Math.max(0,car.offroadTime-dt*2);
     const physicalGateDistance=Math.abs(racingAngle((after.s-wrapRacingDistance(car.nextCheckpoint*sector,track.length))/track.length*Math.PI*2))*track.length/(Math.PI*2);
@@ -404,10 +424,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     if((plausible&&delta>0&&physicalGateDistance<maxDelta+1&&car.routeS>=gate&&car.previousS<gate||crossed)&&
       Math.abs(before.lateral)<gateLat&&Math.abs(after.lateral)<gateLat&&Math.abs(racingAngle(after.heading-car.heading))<1.3) {
       if(offTrackOn)car.routeS=Math.max(car.routeS,gate);
-      car.checkpoints++;car.nextCheckpoint++;
-      car.lap=Math.min(stage.laps,1+Math.floor(car.checkpoints/track.checkpoints.length));
-      if(car.checkpoints%track.checkpoints.length===0){const lapTime=state.time-(car.lapStart||0);car.lapStart=state.time;car.lapTimes.push(lapTime);event('lap',car,{lap:car.lap,lapTime});}
-      if(car.checkpoints>=track.checkpoints.length*stage.laps){car.finished=true;car.finishTime=state.time;event('finish',car);}
+      gatePassed(car);
     }
     car.previousS=car.routeS;
     car.progress=car.checkpoints*sector+clamp(car.routeS-car.checkpoints*sector,-sector,sector-.01);
@@ -418,10 +435,18 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       const beyond=Math.abs(car.lateral)-track.width/2;
       if(state.phase==='racing'&&car.crashT<=0&&car.recoveryTime<=0&&!car.finished){
         car.farT=beyond>OFF.soft?car.farT+dt:Math.max(0,car.farT-dt*2);
-        const why=beyond>OFF.hard?'hard':car.farT>OFF.dwell?'far':car.offroadTime>OFF.long?'long':null;if(why)startOffTrack(car,why);
+        const why=beyond>OFF.hard?'hard':car.farT>OFF.dwell?'far':car.offroadTime>OFF.long?'long':null;
+        // racing-v24 offSlow (Roy: "it goes off the track, but not fast, and there is no way to drive back"): a slow car never flips for being out. Past the gravel it is
+        // set back at once; lost off the asphalt for OFF_SLOW.returnAfter seconds (twice as fast when stuck with the gas on) it is set back softly; a fast exit flips as before
+        if(offSlowOn&&car.speed<OFF_SLOW.slow){
+          const trying=!car.isPlayer||input.autoAccelerate!==false||finite(input.throttle)>0||input.nitro;
+          car.slowOffT=car.offroad?car.slowOffT+dt*(trying&&car.speed<2.5?OFF_SLOW.stuckRate:1):Math.max(0,car.slowOffT-dt*2);
+          if(why==='hard')recovery.startSoft(car,'edge');else if(car.slowOffT>OFF_SLOW.returnAfter)recovery.startSoft(car,'slow');
+        }else{if(offSlowOn&&!car.offroad)car.slowOffT=Math.max(0,car.slowOffT-dt*2);if(why)startOffTrack(car,why);}
       }else if(car.crashT<=0)car.farT=0;
     }
     if((!offTrackOn||car.crashT<=0)&&(lost||car.routeS>car.nextCheckpoint*sector+sector*.8))recoverCar(car);
+    pitCrew.watch(car);   // racing-v24: into the pit lane at the entry when this car stops on this lap
     if(car.padCooldown<=0&&!car.offroad&&car.recoveryTime<=0)for(const pad of track.boostPads) {
       const distance=Math.abs(racingAngle((after.s-pad.s)/track.length*Math.PI*2))*track.length/(Math.PI*2);
       if(distance<pad.length*.5&&Math.abs(car.lateral)<track.width*.36){car.boostTime=Math.max(car.boostTime,1.1);car.padCooldown=2;event('boostPad',car);break;}
@@ -430,6 +455,29 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       const px=pickup.x+pickup.normal.x*pickup.lane,pz=pickup.z+pickup.normal.z*pickup.lane;
       if(pickup.active&&Math.hypot(car.x-px,car.z-pz)<3.4){pickup.active=false;pickup.respawnAt=state.time+8;car.nitro=Math.min(100*nitroUpgrade,car.nitro+31);car.pickups++;event('pickup',car,{pickup:pickup.id});}
     }
+  }
+  /** one verified gate: the counters, the lap (with its time) and the finish */
+  function gatePassed(car){
+    car.checkpoints++;car.nextCheckpoint++;
+    car.lap=Math.min(stage.laps,1+Math.floor(car.checkpoints/track.checkpoints.length));
+    if(car.checkpoints%track.checkpoints.length===0){const lapTime=state.time-(car.lapStart||0);car.lapStart=state.time;car.lapTimes.push(lapTime);event('lap',car,{lap:car.lap,lapTime});}
+    if(car.checkpoints>=track.checkpoints.length*stage.laps){car.finished=true;car.finishTime=state.time;event('finish',car);}
+  }
+  /** racing-v24 pits: every gate the car's race distance passed (the pit lane is a legal path: the line is crossed in it) */
+  function passGates(car){let n=0;while(!car.finished&&car.routeS>=car.nextCheckpoint*sector&&n++<4)gatePassed(car);car.previousS=car.routeS;}
+  /** racing-v24 contact (Roy: "when cars hit each other, more ricochet of a hit and a slow-down"): the closing speed along the contact line (restitution .45) throws both
+   * cars apart with a knock (kx, kz) that dies in about 0.4 s, turns the noses away a little and costs speed: the car behind 12-32% on a rear-end hit (the one in front gets
+   * a small push), both 5-15% side by side. The event reports the player as the car when the player is in it. ?racingBump=v23 keeps the old nudge. */
+  function knock(a,b,nx,nz,along,rear,front){
+    const va={x:Math.sin(a.heading)*a.speed+a.kx,z:Math.cos(a.heading)*a.speed+a.kz},vb={x:Math.sin(b.heading)*b.speed+b.kx,z:Math.cos(b.heading)*b.speed+b.kz};
+    const closing=Math.max(0,-((vb.x-va.x)*nx+(vb.z-va.z)*nz)),intensity=clamp(closing/8,.15,1),J=clamp(1.45*closing/2,1.6,7),rearEnd=along>.7;
+    a.kx-=nx*J;a.kz-=nz*J;b.kx+=nx*J;b.kz+=nz*J;
+    const turn=(c,tx,tz)=>{const s=Math.cos(c.heading)*tx-Math.sin(c.heading)*tz;c.heading=racingAngle(c.heading-(Math.sign(s)||1)*(rearEnd?.02+.05*intensity:.04+.1*intensity));};
+    turn(a,nx,nz);turn(b,-nx,-nz);
+    if(rearEnd){rear.speed*=1-(.12+.2*intensity);front.speed=Math.min(front.speed+1.5*intensity,front.maxSpeed||front.speed+1.5);}
+    else{a.speed*=1-(.05+.1*intensity);b.speed*=1-(.05+.1*intensity);}
+    a.collisionCooldown=.35;b.collisionCooldown=.35;a.drifting=b.drifting=false;a.driftCharge=b.driftCharge=0;
+    const who=b.isPlayer?b:a,other=who===a?b:a;event('bump',who,{with:other.id,along,intensity:+intensity.toFixed(2),side:!rearEnd});
   }
   function updateRanks() {
     const sorted=[...cars].sort((a,b)=>a.finished&&b.finished?a.finishTime-b.finishTime:a.finished?-1:b.finished?1:b.progress-a.progress);
@@ -453,7 +501,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     for(let index=1;index<cars.length;index++)integrate(cars[index],aiInput(cars[index]),FIXED_STEP);
     for(let a=0;a<cars.length;a++)for(let b=a+1;b<cars.length;b++) {
       const first=cars[a],second=cars[b],dx=second.x-first.x,dz=second.z-first.z,d=Math.hypot(dx,dz);
-      if(d>0.01&&d<2.55&&!first.finished&&!second.finished) {
+      if(d>0.01&&d<2.55&&!first.finished&&!second.finished&&!first.pit&&!second.pit&&!first.offFlight?.v24&&!second.offFlight?.v24&&!(first.ghostT>0)&&!(second.ghostT>0)) {   // racing-v24: a car in the pits, in its v24 recovery (rolling, hidden, settling) or just set back (ghostT) does not collide
         const nx=dx/d,nz=dz/d;
         if(aiOn){
           // racing-deep-m2 contact: the two cars move apart at once (the whole overlap, more of it on the car behind), a rear-end hit costs the car behind its speed and
@@ -463,8 +511,9 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
           rear.x+=sign*nx*pr;rear.z+=sign*nz*pr;front.x-=sign*nx*pf;front.z-=sign*nz*pf;
           const tan=track.sample(front.s),along=Math.abs(nx*tan.tangent.x+nz*tan.tangent.z);
           if(first.collisionCooldown<=0&&second.collisionCooldown<=0){
-            if(along>.7){rear.speed*=.88;front.speed=Math.min(front.speed+1.2,front.maxSpeed||front.speed+1.2);}else{first.speed*=.95;second.speed*=.95;}
-            first.collisionCooldown=.5;second.collisionCooldown=.5;event('bump',first,{with:second.id,along});
+            if(bumpV24)knock(first,second,nx,nz,along,rear,front);   // racing-v24: the ricochet
+            else{if(along>.7){rear.speed*=.88;front.speed=Math.min(front.speed+1.2,front.maxSpeed||front.speed+1.2);}else{first.speed*=.95;second.speed*=.95;}
+            first.collisionCooldown=.5;second.collisionCooldown=.5;event('bump',first,{with:second.id,along});}
           }
           if(first.speed<4&&second.speed<4){const side=Math.sign((second.lateral-first.lateral)||(first.id<second.id?1:-1));
             first.x-=tan.normal.x*side*.05;first.z-=tan.normal.z*side*.05;second.x+=tan.normal.x*side*.05;second.z+=tan.normal.z*side*.05;}
@@ -493,6 +542,10 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     setObstacles(list){obstacles=Array.isArray(list)?list.filter(o=>o&&Number.isFinite(Number(o.x))&&Number.isFinite(Number(o.z))&&Number(o.r)>0).map(o=>({x:Number(o.x),z:Number(o.z),r:Math.min(3,Number(o.r))})):[];return obstacles.length;},
     get obstacles(){return obstacles.map(o=>({...o}));},
     get offTrack(){return OFF&&offTrackOn?{...OFF}:null;},
+    /** racing-v24 pits: is the pit stop on in this race, the lane; the pit button (a stop at the next entry) and the tyre-change tap */
+    get pit(){return pitCrew.info();},
+    requestPit(){return state.phase==='racing'&&pitCrew.request(player);},
+    pitTap(){return pitCrew.tap(player);},
     dispose(){state.disposed=true;state.events=[];accumulator=0;}
   };
 }

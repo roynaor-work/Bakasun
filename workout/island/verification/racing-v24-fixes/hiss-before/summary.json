@@ -1,0 +1,657 @@
+{
+ "generatedAt": "2026-11-14T17:20:24.109Z",
+ "seconds": 300,
+ "games": {
+  "islandRacing": {
+   "game": "islandRacing",
+   "seconds": 300,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 41186,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:39021/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:39021/workout/island/ui/activity.mjs:41:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 41308,
+     "stack": "new W (<anonymous>:74:113) < Object.unlock (http://127.0.0.1:39021/workout/island/minigames/racing-audio.mjs:59:13) < unlock (http://127.0.0.1:39021/workout/island/minigames/racing-unlock.mjs:6:31)"
+    }
+   ],
+   "frames": 5219,
+   "phases": {
+    "(none)": {
+     "frames": 38,
+     "s25": 0.111,
+     "s12": 0.057,
+     "maxDb": -54.5,
+     "audible": 37
+    },
+    "countdown": {
+     "frames": 762,
+     "s25": 0.014,
+     "s12": 0.008,
+     "maxDb": -52.4,
+     "audible": 762
+    },
+    "racing": {
+     "frames": 4419,
+     "s25": 0.062,
+     "s12": 0.06,
+     "maxDb": -49,
+     "audible": 4414
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 12,
+     "live": 11,
+     "loop": 0,
+     "phases": {
+      "null": 1,
+      "racing": 11
+     }
+    },
+    "osc:custom": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "generated:61739@44100": {
+     "count": 6,
+     "live": 5,
+     "loop": 1,
+     "phases": {
+      "null": 1,
+      "racing": 5
+     }
+    },
+    "assets/racing-audio-v2/tyre-squeal.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v2/wind-speed.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/racing-audio-v3/brake-squeal-loop.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 1,
+     "phases": {
+      "null": 1
+     }
+    },
+    "osc:sawtooth": {
+     "count": 5,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 5
+     }
+    },
+    "osc:triangle": {
+     "count": 3,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "null": 1,
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v2/pass-whoosh.ogg": {
+     "count": 2,
+     "live": 2,
+     "loop": 0,
+     "phases": {
+      "racing": 2
+     }
+    },
+    "assets/racing-audio-v3/car-bump.ogg": {
+     "count": 5,
+     "live": 5,
+     "loop": 0,
+     "phases": {
+      "racing": 5
+     }
+    },
+    "assets/racing-audio-v2/turbo-blowoff.ogg": {
+     "count": 3,
+     "live": 3,
+     "loop": 0,
+     "phases": {
+      "racing": 3
+     }
+    }
+   },
+   "oscillators": 21,
+   "filters": 11,
+   "segments": [
+    {
+     "kind": "hiss",
+     "start": 217.676,
+     "end": 220.69,
+     "seconds": 3.014,
+     "share": 0.197,
+     "flat": 0.377,
+     "maxDb": -49.9,
+     "frames": 51,
+     "phases": [
+      "racing"
+     ],
+     "speed": 33.1,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop",
+      "assets/racing-audio-v2/wind-speed.ogg loop",
+      "assets/racing-audio-v3/brake-squeal-loop.ogg loop",
+      "osc sawtooth 440Hz",
+      "osc triangle 440Hz"
+     ],
+     "restart": false,
+     "live": true
+    },
+    {
+     "kind": "hiss",
+     "start": 220.826,
+     "end": 222.827,
+     "seconds": 2.001,
+     "share": 0.211,
+     "flat": 0.377,
+     "maxDb": -49.3,
+     "frames": 29,
+     "phases": [
+      "racing"
+     ],
+     "speed": 32.8,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop",
+      "assets/racing-audio-v2/wind-speed.ogg loop",
+      "assets/racing-audio-v3/brake-squeal-loop.ogg loop",
+      "osc sawtooth 440Hz",
+      "osc triangle 440Hz"
+     ],
+     "restart": false,
+     "live": true
+    }
+   ],
+   "restartWhistles": 0,
+   "liveTones": [],
+   "liveGlides": [],
+   "liveHums": [],
+   "liveHiss": [
+    {
+     "kind": "hiss",
+     "start": 217.676,
+     "end": 220.69,
+     "seconds": 3.014,
+     "share": 0.197,
+     "flat": 0.377,
+     "maxDb": -49.9,
+     "frames": 51,
+     "phases": [
+      "racing"
+     ],
+     "speed": 33.1,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop",
+      "assets/racing-audio-v2/wind-speed.ogg loop",
+      "assets/racing-audio-v3/brake-squeal-loop.ogg loop",
+      "osc sawtooth 440Hz",
+      "osc triangle 440Hz"
+     ],
+     "restart": false,
+     "live": true
+    },
+    {
+     "kind": "hiss",
+     "start": 220.826,
+     "end": 222.827,
+     "seconds": 2.001,
+     "share": 0.211,
+     "flat": 0.377,
+     "maxDb": -49.3,
+     "frames": 29,
+     "phases": [
+      "racing"
+     ],
+     "speed": 32.8,
+     "sources": [
+      "osc custom 440Hz",
+      "generated:61739@44100 loop",
+      "assets/racing-audio-v2/tyre-squeal.ogg loop",
+      "assets/racing-audio-v2/wind-speed.ogg loop",
+      "assets/racing-audio-v3/brake-squeal-loop.ogg loop",
+      "osc sawtooth 440Hz",
+      "osc triangle 440Hz"
+     ],
+     "restart": false,
+     "live": true
+    }
+   ],
+   "bands": {
+    "standing": {
+     "frames": 521,
+     "bands": [
+      0.8183,
+      0.1213,
+      0.0202,
+      0.0371,
+      0.0031,
+      0.0001
+     ],
+     "flat": 0.194,
+     "lvl": -59.9,
+     "above2k": 0.0402,
+     "db": [
+      -53.8,
+      -62.5,
+      -70.8,
+      -68.2,
+      -78.9,
+      -97.1
+     ],
+     "above2kDb": -67.8
+    },
+    "slow": {
+     "frames": 797,
+     "bands": [
+      0.7478,
+      0.1859,
+      0.0266,
+      0.0349,
+      0.0047,
+      0.0002
+     ],
+     "flat": 0.237,
+     "lvl": -55.3,
+     "above2k": 0.0398,
+     "db": [
+      -49.4,
+      -55.6,
+      -64.1,
+      -63.5,
+      -71.2,
+      -84.1
+     ],
+     "above2kDb": -62.8
+    },
+    "fast": {
+     "frames": 3101,
+     "bands": [
+      0.648,
+      0.1858,
+      0.0759,
+      0.0726,
+      0.0173,
+      0.0005
+     ],
+     "flat": 0.32,
+     "lvl": -53.5,
+     "above2k": 0.0903,
+     "db": [
+      -47.9,
+      -53.4,
+      -56.3,
+      -57.2,
+      -63.1,
+      -78.3
+     ],
+     "above2kDb": -56.2
+    }
+   },
+   "bandsAll": {
+    "all": {
+     "frames": 38,
+     "bands": [
+      0.6504,
+      0.1721,
+      0.0573,
+      0.1107,
+      0.0093,
+      0.0002
+     ],
+     "flat": 0.195,
+     "lvl": -67.4,
+     "above2k": 0.1202,
+     "db": [
+      -58.6,
+      -66.3,
+      -71.3,
+      -68.5,
+      -79.2,
+      -97.1
+     ],
+     "above2kDb": -68.1
+    },
+    "standing": {
+     "frames": 1283,
+     "bands": [
+      0.8634,
+      0.0983,
+      0.0128,
+      0.0235,
+      0.002,
+      0
+     ],
+     "flat": 0.194,
+     "lvl": -56.3,
+     "above2k": 0.0255,
+     "db": [
+      -51.2,
+      -61.2,
+      -70.8,
+      -68.1,
+      -78.9,
+      -101
+     ],
+     "above2kDb": -67.8
+    },
+    "slow": {
+     "frames": 797,
+     "bands": [
+      0.7478,
+      0.1859,
+      0.0266,
+      0.0349,
+      0.0047,
+      0.0002
+     ],
+     "flat": 0.237,
+     "lvl": -55.3,
+     "above2k": 0.0398,
+     "db": [
+      -49.4,
+      -55.6,
+      -64.1,
+      -63.5,
+      -71.2,
+      -84.1
+     ],
+     "above2kDb": -62.8
+    },
+    "fast": {
+     "frames": 3101,
+     "bands": [
+      0.648,
+      0.1858,
+      0.0759,
+      0.0726,
+      0.0173,
+      0.0005
+     ],
+     "flat": 0.32,
+     "lvl": -53.5,
+     "above2k": 0.0903,
+     "db": [
+      -47.9,
+      -53.4,
+      -56.3,
+      -57.2,
+      -63.1,
+      -78.3
+     ],
+     "above2kDb": -56.2
+    }
+   },
+   "errors": [],
+   "timeline": [
+    {
+     "at": 86.5,
+     "what": "ready"
+    },
+    {
+     "at": 86.6,
+     "what": "intro closed {\"phase\":\"countdown\",\"paused\":false,\"intro\":false}"
+    },
+    {
+     "at": 86.8,
+     "what": "bot running"
+    },
+    {
+     "at": 92.2,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":5,\"starting\":\"false\"}"
+    },
+    {
+     "at": 97.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":9,\"starting\":\"false\"}"
+    },
+    {
+     "at": 103.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":15,\"starting\":\"false\"}"
+    },
+    {
+     "at": 109,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":17,\"starting\":\"false\"}"
+    },
+    {
+     "at": 114.3,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":23,\"starting\":\"false\"}"
+    },
+    {
+     "at": 119.7,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":26,\"starting\":\"false\"}"
+    },
+    {
+     "at": 125,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":30,\"starting\":\"false\"}"
+    },
+    {
+     "at": 130.7,
+     "what": "race {\"phase\":\"countdown\",\"time\":0,\"paused\":false,\"hidden\":false,\"frames\":34,\"starting\":\"false\"}"
+    },
+    {
+     "at": 137.5,
+     "what": "race {\"phase\":\"racing\",\"time\":0.3,\"paused\":false,\"hidden\":false,\"frames\":39,\"starting\":\"false\"}"
+    },
+    {
+     "at": 141.9,
+     "what": "race {\"phase\":\"racing\",\"time\":0.6,\"paused\":false,\"hidden\":false,\"frames\":42,\"starting\":\"false\"}"
+    },
+    {
+     "at": 147,
+     "what": "race {\"phase\":\"racing\",\"time\":1,\"paused\":false,\"hidden\":false,\"frames\":46,\"starting\":\"false\"}"
+    },
+    {
+     "at": 152.2,
+     "what": "race {\"phase\":\"racing\",\"time\":1.3,\"paused\":false,\"hidden\":false,\"frames\":49,\"starting\":\"false\"}"
+    },
+    {
+     "at": 157.8,
+     "what": "race {\"phase\":\"racing\",\"time\":1.8,\"paused\":false,\"hidden\":false,\"frames\":54,\"starting\":\"false\"}"
+    },
+    {
+     "at": 162.9,
+     "what": "race {\"phase\":\"racing\",\"time\":2.1,\"paused\":false,\"hidden\":false,\"frames\":58,\"starting\":\"false\"}"
+    },
+    {
+     "at": 168.5,
+     "what": "race {\"phase\":\"racing\",\"time\":2.5,\"paused\":false,\"hidden\":false,\"frames\":62,\"starting\":\"false\"}"
+    },
+    {
+     "at": 173.9,
+     "what": "race {\"phase\":\"racing\",\"time\":2.9,\"paused\":false,\"hidden\":false,\"frames\":66,\"starting\":\"false\"}"
+    },
+    {
+     "at": 179.2,
+     "what": "race {\"phase\":\"racing\",\"time\":3.2,\"paused\":false,\"hidden\":false,\"frames\":69,\"starting\":\"false\"}"
+    },
+    {
+     "at": 184.5,
+     "what": "race {\"phase\":\"racing\",\"time\":3.6,\"paused\":false,\"hidden\":false,\"frames\":73,\"starting\":\"false\"}"
+    },
+    {
+     "at": 190.2,
+     "what": "race {\"phase\":\"racing\",\"time\":3.9,\"paused\":false,\"hidden\":false,\"frames\":76,\"starting\":\"false\"}"
+    },
+    {
+     "at": 195.4,
+     "what": "race {\"phase\":\"racing\",\"time\":4.4,\"paused\":false,\"hidden\":false,\"frames\":81,\"starting\":\"false\"}"
+    },
+    {
+     "at": 200.7,
+     "what": "race {\"phase\":\"racing\",\"time\":4.6,\"paused\":false,\"hidden\":false,\"frames\":83,\"starting\":\"false\"}"
+    },
+    {
+     "at": 205.9,
+     "what": "race {\"phase\":\"racing\",\"time\":5.1,\"paused\":false,\"hidden\":false,\"frames\":89,\"starting\":\"false\"}"
+    },
+    {
+     "at": 211.4,
+     "what": "race {\"phase\":\"racing\",\"time\":5.4,\"paused\":false,\"hidden\":false,\"frames\":92,\"starting\":\"false\"}"
+    },
+    {
+     "at": 216.6,
+     "what": "race {\"phase\":\"racing\",\"time\":5.7,\"paused\":false,\"hidden\":false,\"frames\":96,\"starting\":\"false\"}"
+    },
+    {
+     "at": 221.8,
+     "what": "race {\"phase\":\"racing\",\"time\":6.1,\"paused\":false,\"hidden\":false,\"frames\":101,\"starting\":\"false\"}"
+    },
+    {
+     "at": 227.3,
+     "what": "race {\"phase\":\"racing\",\"time\":6.5,\"paused\":false,\"hidden\":false,\"frames\":105,\"starting\":\"false\"}"
+    },
+    {
+     "at": 233.7,
+     "what": "race {\"phase\":\"racing\",\"time\":6.9,\"paused\":false,\"hidden\":false,\"frames\":109,\"starting\":\"false\"}"
+    },
+    {
+     "at": 238.4,
+     "what": "race {\"phase\":\"racing\",\"time\":7.3,\"paused\":false,\"hidden\":false,\"frames\":113,\"starting\":\"false\"}"
+    },
+    {
+     "at": 243.7,
+     "what": "race {\"phase\":\"racing\",\"time\":7.8,\"paused\":false,\"hidden\":false,\"frames\":118,\"starting\":\"false\"}"
+    },
+    {
+     "at": 249.2,
+     "what": "race {\"phase\":\"racing\",\"time\":8.1,\"paused\":false,\"hidden\":false,\"frames\":121,\"starting\":\"false\"}"
+    },
+    {
+     "at": 254.2,
+     "what": "race {\"phase\":\"racing\",\"time\":8.6,\"paused\":false,\"hidden\":false,\"frames\":127,\"starting\":\"false\"}"
+    },
+    {
+     "at": 260,
+     "what": "race {\"phase\":\"racing\",\"time\":9.1,\"paused\":false,\"hidden\":false,\"frames\":134,\"starting\":\"false\"}"
+    },
+    {
+     "at": 265.4,
+     "what": "race {\"phase\":\"racing\",\"time\":9.7,\"paused\":false,\"hidden\":false,\"frames\":140,\"starting\":\"false\"}"
+    },
+    {
+     "at": 271,
+     "what": "race {\"phase\":\"racing\",\"time\":10.1,\"paused\":false,\"hidden\":false,\"frames\":145,\"starting\":\"false\"}"
+    },
+    {
+     "at": 276.7,
+     "what": "race {\"phase\":\"racing\",\"time\":10.9,\"paused\":false,\"hidden\":false,\"frames\":153,\"starting\":\"false\"}"
+    },
+    {
+     "at": 285,
+     "what": "race {\"phase\":\"racing\",\"time\":11.5,\"paused\":false,\"hidden\":false,\"frames\":159,\"starting\":\"false\"}"
+    },
+    {
+     "at": 287.8,
+     "what": "race {\"phase\":\"racing\",\"time\":11.7,\"paused\":false,\"hidden\":false,\"frames\":161,\"starting\":\"false\"}"
+    },
+    {
+     "at": 292.5,
+     "what": "race {\"phase\":\"racing\",\"time\":12.1,\"paused\":false,\"hidden\":false,\"frames\":166,\"starting\":\"false\"}"
+    },
+    {
+     "at": 297.9,
+     "what": "race {\"phase\":\"racing\",\"time\":12.5,\"paused\":false,\"hidden\":false,\"frames\":170,\"starting\":\"false\"}"
+    },
+    {
+     "at": 303.6,
+     "what": "race {\"phase\":\"racing\",\"time\":13,\"paused\":false,\"hidden\":false,\"frames\":176,\"starting\":\"false\"}"
+    },
+    {
+     "at": 308.8,
+     "what": "race {\"phase\":\"racing\",\"time\":13.4,\"paused\":false,\"hidden\":false,\"frames\":180,\"starting\":\"false\"}"
+    },
+    {
+     "at": 314.2,
+     "what": "race {\"phase\":\"racing\",\"time\":13.9,\"paused\":false,\"hidden\":false,\"frames\":185,\"starting\":\"false\"}"
+    },
+    {
+     "at": 319.4,
+     "what": "race {\"phase\":\"racing\",\"time\":14.3,\"paused\":false,\"hidden\":false,\"frames\":190,\"starting\":\"false\"}"
+    },
+    {
+     "at": 324.5,
+     "what": "race {\"phase\":\"racing\",\"time\":14.8,\"paused\":false,\"hidden\":false,\"frames\":195,\"starting\":\"false\"}"
+    },
+    {
+     "at": 329.7,
+     "what": "race {\"phase\":\"racing\",\"time\":15.3,\"paused\":false,\"hidden\":false,\"frames\":200,\"starting\":\"false\"}"
+    },
+    {
+     "at": 335,
+     "what": "race {\"phase\":\"racing\",\"time\":15.6,\"paused\":false,\"hidden\":false,\"frames\":204,\"starting\":\"false\"}"
+    },
+    {
+     "at": 340.1,
+     "what": "race {\"phase\":\"racing\",\"time\":15.9,\"paused\":false,\"hidden\":false,\"frames\":207,\"starting\":\"false\"}"
+    },
+    {
+     "at": 345.2,
+     "what": "race {\"phase\":\"racing\",\"time\":16.3,\"paused\":false,\"hidden\":false,\"frames\":211,\"starting\":\"false\"}"
+    },
+    {
+     "at": 350.5,
+     "what": "race {\"phase\":\"racing\",\"time\":16.7,\"paused\":false,\"hidden\":false,\"frames\":215,\"starting\":\"false\"}"
+    },
+    {
+     "at": 356,
+     "what": "race {\"phase\":\"racing\",\"time\":17.1,\"paused\":false,\"hidden\":false,\"frames\":219,\"starting\":\"false\"}"
+    },
+    {
+     "at": 361.9,
+     "what": "race {\"phase\":\"racing\",\"time\":17.7,\"paused\":false,\"hidden\":false,\"frames\":225,\"starting\":\"false\"}"
+    },
+    {
+     "at": 367.2,
+     "what": "race {\"phase\":\"racing\",\"time\":18.2,\"paused\":false,\"hidden\":false,\"frames\":230,\"starting\":\"false\"}"
+    },
+    {
+     "at": 373.3,
+     "what": "race {\"phase\":\"racing\",\"time\":18.8,\"paused\":false,\"hidden\":false,\"frames\":236,\"starting\":\"false\"}"
+    },
+    {
+     "at": 378.7,
+     "what": "race {\"phase\":\"racing\",\"time\":19.3,\"paused\":false,\"hidden\":false,\"frames\":241,\"starting\":\"false\"}"
+    },
+    {
+     "at": 383.9,
+     "what": "race {\"phase\":\"racing\",\"time\":19.7,\"paused\":false,\"hidden\":false,\"frames\":245,\"starting\":\"false\"}"
+    },
+    {
+     "at": 387.1,
+     "what": "done"
+    }
+   ]
+  }
+ }
+}

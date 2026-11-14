@@ -1,0 +1,102 @@
+{
+ "generatedAt": "2026-11-14T16:51:50.600Z",
+ "recover": {
+  "n": 1000,
+  "landed": 1000,
+  "secondRolls": 0,
+  "maxBeyond": 9.4,
+  "maxRollBackIn": 0.68,
+  "maxDropRises": 0,
+  "totals": [
+   1.83,
+   1.98
+  ],
+  "maxLandingLateral": 0,
+  "maxHeadingError": 0,
+  "maxLandingSpeed": 0,
+  "gatesGranted": 0,
+  "pastNextGate": 0,
+  "nan": 0,
+  "minSpeedAfter3s": 16.9,
+  "sample": [
+   {
+    "stage": 1,
+    "seed": 2745,
+    "why": "hard",
+    "speedAtTrigger": 14.2,
+    "latAtTrigger": 17.04,
+    "maxBeyond": 9.4,
+    "nan": false,
+    "secondRolls": 0,
+    "minAbsLatWhileRolling": 17.04,
+    "restLat": 17.4,
+    "hidden": 0.42,
+    "dropMax": 0.35,
+    "dropRises": 0,
+    "phases": "tumble>rest>vanish>drop>done",
+    "total": 1.83,
+    "landing": {
+     "speed": 0,
+     "lateral": 0,
+     "headingError": 0,
+     "gateGranted": false,
+     "beforeNextGate": true,
+     "soft": true
+    },
+    "speedAfter3s": 17
+   },
+   {
+    "stage": 2,
+    "seed": 3643,
+    "why": "hard",
+    "speedAtTrigger": 16.4,
+    "latAtTrigger": 17.21,
+    "maxBeyond": 9.4,
+    "nan": false,
+    "secondRolls": 0,
+    "minAbsLatWhileRolling": 17.21,
+    "restLat": 17.4,
+    "hidden": 0.42,
+    "dropMax": 0.35,
+    "dropRises": 0,
+    "phases": "tumble>rest>vanish>drop>done",
+    "total": 1.83,
+    "landing": {
+     "speed": 0,
+     "lateral": 0,
+     "headingError": 0,
+     "gateGranted": false,
+     "beforeNextGate": true,
+     "soft": true
+    },
+    "speedAfter3s": 16.9
+   },
+   {
+    "stage": 3,
+    "seed": 8705,
+    "why": "hard",
+    "speedAtTrigger": 14.8,
+    "latAtTrigger": 17.15,
+    "maxBeyond": 9.4,
+    "nan": false,
+    "secondRolls": 0,
+    "minAbsLatWhileRolling": 17.15,
+    "restLat": 17.4,
+    "hidden": 0.42,
+    "dropMax": 0.35,
+    "dropRises": 0,
+    "phases": "tumble>rest>vanish>drop>done",
+    "total": 1.83,
+    "landing": {
+     "speed": 0,
+     "lateral": 0,
+     "headingError": 0,
+     "gateGranted": false,
+     "beforeNextGate": true,
+     "soft": true
+    },
+    "speedAfter3s": 17
+   }
+  ]
+ }
+}

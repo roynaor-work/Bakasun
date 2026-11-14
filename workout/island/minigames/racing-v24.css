@@ -1,0 +1,39 @@
+/* racing-v24: the tyre wear meter, the pit button, the tyre change button and the "פיטס" tag in the timing tower (racing-pit-ui.mjs). Loaded by the race session. */
+.game-screen[data-game=islandRacing] .racing-tyres{
+ position:absolute;right:calc(var(--race-edge) + 318px);bottom:var(--race-bottom);z-index:3;display:flex;align-items:center;gap:5px;direction:ltr;
+ padding:3px 7px 3px 4px;border-radius:4px;background:#0b1624c8;border:1px solid #c1e5f133;color:#eef6fb;font:700 11px/1 system-ui,sans-serif;pointer-events:none;
+}
+.game-screen[data-game=islandRacing] .racing-tyres[hidden]{display:none}
+.game-screen[data-game=islandRacing] .racing-tyre-icon{width:20px;height:20px;flex:none;display:block}
+.game-screen[data-game=islandRacing] .racing-tyre-bar{display:block;width:48px;height:6px;border-radius:1px;background:#18232f;overflow:hidden;transform:skewX(-14deg)}
+.game-screen[data-game=islandRacing] .racing-tyre-fill{display:block;width:100%;height:100%;background:#4fd27d;transform-origin:left;transition:transform .25s linear}
+.game-screen[data-game=islandRacing] .racing-tyres[data-level=mid] .racing-tyre-fill{background:#f5cf42}
+.game-screen[data-game=islandRacing] .racing-tyres[data-level=low] .racing-tyre-fill{background:#ff6b4a}
+.game-screen[data-game=islandRacing] .racing-tyres[data-level=low] .racing-tyre-value{color:#ffb39f}
+.game-screen[data-game=islandRacing] .racing-tyre-value{min-width:30px;text-align:right;font-variant-numeric:tabular-nums}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button{
+ position:absolute;right:max(var(--race-edge),env(safe-area-inset-right));bottom:calc(var(--race-bottom) + 155px);width:96px;min-width:96px;height:40px;min-height:40px;
+ display:grid;grid-template-columns:auto auto;grid-template-rows:auto auto;column-gap:5px;align-items:center;justify-content:center;padding:3px 6px;border-radius:4px;border:1px solid #f5cf4299;background:#1d1a0ce6;color:var(--race-yellow);
+ font:900 14px/1 system-ui,sans-serif;pointer-events:auto;touch-action:none;direction:rtl
+}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[hidden]{display:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button .racing-pit-icon{grid-row:1/3;width:24px;height:24px;display:block}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change .racing-pit-change-icon{width:30px;height:30px;display:block}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button .racing-pit-sub{font-size:9px;font-weight:700;color:#e9e1bd}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button .racing-pit-sub:empty{display:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=requested]{background:var(--race-yellow);color:#101b29;border-color:#ffe877;box-shadow:0 0 0 3px #f5cf422b}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=requested] .racing-pit-sub{color:#2b2508}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change{
+ position:absolute;left:calc(50% + 14px);top:38%;width:196px;min-height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+ border-radius:8px;border:2px solid #ffe877;background:var(--race-yellow);color:#101b29;font:900 19px/1.1 system-ui,sans-serif;pointer-events:auto;touch-action:none;z-index:8;
+ box-shadow:0 0 0 4px #f5cf4233,0 8px 22px #0007;direction:rtl
+}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change[hidden]{display:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change[data-phase=change]{background:#132232f2;color:#eef6fb;border-color:#f5cf4299}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change .racing-pit-change-hint{font-size:11px;font-weight:700}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change .racing-pit-change-hint:empty{display:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-progress{display:block;width:150px;height:6px;border-radius:2px;background:#0b1624;overflow:hidden}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-change[data-phase=stop] .racing-pit-progress{display:none}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-progress-fill{display:block;width:100%;height:100%;background:#4fd27d;transform-origin:left;transform:scaleX(0)}
+.game-screen[data-game=islandRacing] .racing-tower .rt-row[data-pit] .rt-gap{color:#ffe877;font-weight:900}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-tyre-fill{transition:none}}

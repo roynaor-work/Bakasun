@@ -35,6 +35,8 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
   const t=tyres[tyreCursor++%TYRES],side=c.lateral>0?-1:1,a=c.heading+side*1.3;t.on=true;t.x=c.x+Math.cos(c.heading)*side*.9;t.y=c.y+.4;t.z=c.z-Math.sin(c.heading)*side*.9;t.dx=Math.sin(a)*3.4+Math.sin(c.heading)*c.speed*.35;t.dz=Math.cos(a)*3.4+Math.cos(c.heading)*c.speed*.35;t.dy=4.2;t.age=0;t.roll=0;t.heading=c.heading;t.ground=c.y;
  }
  function crashLand(c){for(let i=0;i<5;i++){const a=i*1.26;smokeAt(c.x+Math.sin(a)*.7,c.y+.3,c.z+Math.cos(a)*.7,Math.sin(a)*2.2,Math.cos(a)*2.2,1.0,.9);}for(let i=0;i<8;i++)sparkAt(c.x,c.y+.3,c.z,Math.sin(c.heading+i*.79)*3,1.2+(i%2)*.6,Math.cos(c.heading+i*.79)*3);}
+ // racing-v24: the car set back on the road after a vanish touches down softly: a little dust, no sparks
+ function softLand(c){for(let i=0;i<4;i++){const a=i*1.57+.4;smokeAt(c.x+Math.sin(a)*.9,c.y+.15,c.z+Math.cos(a)*.9,Math.sin(a)*1.1,Math.cos(a)*1.1,.7,.6);}}
  function putSmoke(p,side){const x=p.x+Math.cos(p.heading)*side-Math.sin(p.heading)*1.55,z=p.z-Math.sin(p.heading)*side-Math.cos(p.heading)*1.55;smoke[smokeCursor++%32]={x,y:p.y+.26,z,age:0,life:.9,size:.55,dx:Math.sin(p.heading)*-1.8+side*.25,dz:Math.cos(p.heading)*-1.8};}
  function putMark(p,side){const x=p.x+Math.cos(p.heading)*side-Math.sin(p.heading)*1.4,z=p.z-Math.sin(p.heading)*side-Math.cos(p.heading)*1.4;marks[markCursor++%128]={x,y:track.project(x,z,p.s).y+.065,z,heading:p.heading,age:0};}
  function update(state,dt,camera,quality=0){if(disposed)return;const p=state.player;
@@ -43,7 +45,7 @@ export function createRacingEffects({T,scene,track,keep,night=false,carColors=nu
     // racing-deep-m2: a flip (any car) throws dust and sparks from where it happened
     if(e.type==='crash'){const list=state.cars||[],index=list.findIndex(x=>x.id===e.car),c=index>=0?list[index]:(e.car==='player'?p:null);if(!c)continue;for(let i=0;i<6;i++)smoke[smokeCursor++%32]={atlas:true,x:c.x+Math.sin(i*1.05)*.8,y:c.y+.4,z:c.z+Math.cos(i*1.05)*.8,age:0,life:1.4,size:1.1,dx:Math.sin(i*1.05)*1.6,dz:Math.cos(i*1.05)*1.6};for(let i=0;i<10;i++)sparks[sparkCursor++%20]={x:c.x,y:c.y+.4,z:c.z,age:0,dx:Math.sin(c.heading+i*.63)*3.5,dz:Math.cos(c.heading+i*.63)*3.5,dy:1.5+(i%3)*.6};
      if(crashFx&&c.crashDur>0&&(c===p||Math.hypot(c.x-p.x,c.z-p.z)<NEAR))crashStart(c,Math.max(0,index));continue;}
-    if(e.type==='crashRecover'&&crashFx){const c=(state.cars||[]).find(x=>x.id===e.car)||(e.car==='player'?p:null);if(c&&(c===p||Math.hypot(c.x-p.x,c.z-p.z)<NEAR))crashLand(c);continue;}
+    if((e.type==='crashRecover'||e.type==='crashRest')&&crashFx){const c=(state.cars||[]).find(x=>x.id===e.car)||(e.car==='player'?p:null);if(c&&(c===p||Math.hypot(c.x-p.x,c.z-p.z)<NEAR))(e.soft?softLand:crashLand)(c);continue;}   // racing-v24: crashRest = the landing of the roll in the gravel
     if(e.car!=='player'||(e.type!=='bump'&&e.type!=='wall')||state.time===lastImpact)continue;lastImpact=state.time;for(let i=0;i<(e.type==='wall'?14:8);i++)sparks[sparkCursor++%20]={x:p.x,y:p.y+.25,z:p.z,age:0,dx:Math.sin(p.heading+i*.73)*3,dz:Math.cos(p.heading+i*.73)*3,dy:1+(i%3)*.5};}
    // the smoke trail of a flying car (every 70 ms, from the car's height in the arc)
    if(crashFx&&state.cars)for(let i=0;i<state.cars.length&&i<16;i++){const c=state.cars[i];if(!(c.crashT>0&&c.crashDur>0)||!(c===p||Math.hypot(c.x-p.x,c.z-p.z)<NEAR)){trail[i]=0;continue;}trail[i]+=dt;if(trail[i]>.07){trail[i]=0;smokeAt(c.x,c.y+.45+(c.crashAir||0),c.z,-Math.sin(c.heading)*1.2,-Math.cos(c.heading)*1.2,.7,.8);}}

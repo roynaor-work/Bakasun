@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="תצוגת נכסי פיטס מקוריים: שבעה אנשי צוות, ציוד, סימנים, תנועה וצליל.">
+  <title>תחנת הפיטס · תצוגת נכסים</title>
+  <link rel="icon" href="icons/wheel_change.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="identity" href="#main"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>תחנת הפיטס<span class="edition">01</span></a>
+    <a class="quiet-link" href="REPORT.md">דוח המסירה <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="main">
+    <section class="intro">
+      <div><p class="eyebrow">פורמולה בילדים / חבילת נכסים מקורית</p><h1>נכנסים. מחליפים.<br><span>חוזרים למרוץ.</span></h1></div>
+      <p class="intro-copy">שבעה אנשי צוות. ארבעה גלגלים חדשים.<br>עצירת פיטס שלמה, מוכנה לסיבוב הבא.</p>
+    </section>
+    <section class="studio" aria-label="תצוגת תלת־ממד אינטראקטיבית">
+      <div class="studio-toolbar">
+        <div class="segmented" aria-label="תצוגה">
+          <button data-mode="sequence" aria-pressed="true">העצירה</button>
+          <button data-mode="crew" aria-pressed="false">הצוות</button>
+          <button data-mode="equipment" aria-pressed="false">הציוד</button>
+        </div>
+        <div class="team-colors" aria-label="צבעי הקבוצה">
+          <button data-color="#18b6bd" style="--swatch:#18b6bd" aria-label="אוקיינוס" aria-pressed="true"></button>
+          <button data-color="#d93228" style="--swatch:#d93228" aria-label="להבה" aria-pressed="false"></button>
+          <button data-color="#d6aa3b" style="--swatch:#d6aa3b" aria-label="זהב" aria-pressed="false"></button>
+          <button data-color="#b7c2ca" style="--swatch:#b7c2ca" aria-label="כסף" aria-pressed="false"></button>
+          <button data-color="#7ac05a" style="--swatch:#7ac05a" aria-label="יער" aria-pressed="false"></button>
+          <button data-color="#a05fc4" style="--swatch:#a05fc4" aria-label="לילה" aria-pressed="false"></button>
+        </div>
+      </div>
+      <div class="viewport" id="viewport">
+        <canvas id="scene" aria-label="תחנת פיטס עם מכונית פורמולה ושבעה אנשי צוות. גרירה לסיבוב, גלילה לקירוב."></canvas>
+        <div class="scene-label"><span class="live-dot"></span><span id="stage-label">מכינים את התחנה</span></div>
+        <div id="loading" class="loading" role="status">טוען את תחנת הפיטס…</div>
+        <div class="view-tools">
+          <button id="reset-camera" aria-label="איפוס המצלמה" title="איפוס המצלמה">↺</button>
+          <button id="sound-toggle" aria-pressed="false" aria-label="הפעלת צלילי העצירה" title="צלילי העצירה">♪</button>
+          <button id="fullscreen" aria-label="מסך מלא" title="מסך מלא">⛶</button>
+        </div>
+        <p class="orbit-hint">גרירה לסיבוב · גלילה לקירוב</p>
+      </div>
+      <div class="transport">
+        <button id="play" class="play-button" disabled aria-label="ניגון עצירת פיטס"><span id="play-glyph" aria-hidden="true">▶</span><span id="play-label">הפעלת העצירה</span></button>
+        <div class="scrubber"><input id="timeline" type="range" min="0" max="1000" value="0" aria-label="זמן העצירה"><div class="scrubber-label"><span id="current-stage">המתנה</span><output id="time-display">0.0 / 21.8</output></div></div>
+        <label class="speed-control">קצב<select id="speed" aria-label="מהירות התצוגה"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select></label>
+      </div>
+      <div class="stage-list" id="stage-list" aria-label="שלבי העצירה"></div>
+      <div class="clip-panel" id="clip-panel" hidden>
+        <label>איש צוות<select id="actor-select" aria-label="בחירת איש צוות"></select></label>
+        <label>תנועה<select id="clip-select" aria-label="בחירת קליפ תנועה"></select></label>
+        <p id="actor-info"></p>
+      </div>
+      <div class="equipment-panel" id="equipment-panel" hidden>
+        <label>נכס<select id="equipment-select" aria-label="בחירת ציוד"></select></label>
+        <div class="segmented" id="lamp-controls" aria-label="מצב הרמזור"><button data-lamp="red" aria-pressed="true">אדום</button><button data-lamp="amber" aria-pressed="false">צהוב</button><button data-lamp="green" aria-pressed="false">ירוק</button></div>
+        <p id="equipment-info"></p>
+      </div>
+    </section>
+    <section class="inventory" aria-label="תכולת החבילה">
+      <div><strong>07</strong><span>אנשי צוות</span></div><div><strong>18</strong><span>עצמות לדמות</span></div><div><strong>10</strong><span>קליפים לדמות</span></div><div><strong>≤1,208</strong><span>משולשים לדמות</span></div>
+    </section>
+    <section class="asset-section"><div class="section-title"><h2>הרמז הקטן לסיבוב הבא</h2><span>אייקונים מקוריים · 96 × 96</span></div><div class="icon-grid">
+      <a href="icons/tire_wear_0.svg" download><img src="icons/tire_wear_0.svg" width="96" height="96" alt="צמיג חדש"><span>חדש</span></a>
+      <a href="icons/tire_wear_1.svg" download><img src="icons/tire_wear_1.svg" width="96" height="96" alt="בלאי קל"><span>בלאי קל</span></a>
+      <a href="icons/tire_wear_2.svg" download><img src="icons/tire_wear_2.svg" width="96" height="96" alt="בלאי גבוה"><span>בלאי גבוה</span></a>
+      <a href="icons/tire_wear_3.svg" download><img src="icons/tire_wear_3.svg" width="96" height="96" alt="צמיג שחוק"><span>שחוק</span></a>
+      <a href="icons/pit_entry.svg" download><img src="icons/pit_entry.svg" width="96" height="96" alt="כניסה לפיטס"><span>לפיטס</span></a>
+      <a href="icons/wheel_change.svg" download><img src="icons/wheel_change.svg" width="96" height="96" alt="החלפת גלגל"><span>החלפה</span></a>
+      <a href="icons/wear_gauge.svg" download><img src="icons/wear_gauge.svg" width="96" height="96" alt="מד בלאי"><span>מד בלאי</span></a>
+    </div></section>
+    <section class="asset-section"><div class="section-title"><h2>שומעים את העבודה</h2><span>שבעה צלילים · OGG + MP3 · ‎−16 LUFS</span></div><div class="audio-grid" id="audio-grid"></div></section>
+    <footer><p>נכסים מקוריים ברישיון CC0. ללא מותגים או כיתוב בנכסים.</p><div><a href="manifest.json">מניפסט</a><a href="LICENSES.md">רישיון ומקור</a><a href="verification/motion-qa.json">ציוני התנועה</a></div></footer>
+  </main>
+  <noscript><p class="noscript">יש להפעיל JavaScript כדי לצפות במודלים ובתנועה. האייקונים וקישורי הקבצים זמינים גם ללא הפעלה.</p></noscript>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

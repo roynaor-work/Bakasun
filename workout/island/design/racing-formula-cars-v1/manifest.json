@@ -1,0 +1,174 @@
+{
+  "license": "CC0-1.0",
+  "source": "source/build.py",
+  "lengthMetres": 5.2,
+  "up": "+Y",
+  "forward": "+Z",
+  "driverLeft": "+X",
+  "textures": 0,
+  "compression": "none",
+  "materials": [
+    "body_team",
+    "wing_team",
+    "secondary",
+    "tire",
+    "alloy",
+    "helmet",
+    "visor"
+  ],
+  "lods": [
+    {
+      "level": 0,
+      "file": "assets/formula-lod0.glb",
+      "triangles": 4608,
+      "budget": 6000,
+      "bytes": 265892,
+      "sha256": "c62e2f62e94a6b5b5cf2910cc433b9788bfa1e50719d065a39715bc9272d0043",
+      "bounds": {
+        "min": [
+          -1.04,
+          0.0,
+          -2.6
+        ],
+        "max": [
+          1.04,
+          1.07,
+          2.6
+        ]
+      },
+      "nodes": [
+        "formula_car",
+        "chassis",
+        "wing_front",
+        "wing_rear",
+        "engine",
+        "helmet",
+        "steer_front",
+        "mirror_l",
+        "mirror_r",
+        "steer_fl",
+        "wheel_fl",
+        "steer_fr",
+        "wheel_fr",
+        "wheel_rl",
+        "wheel_rr"
+      ],
+      "trianglesByPart": {
+        "chassis": 668,
+        "wing_front": 84,
+        "wing_rear": 72,
+        "engine": 224,
+        "helmet": 224,
+        "mirror_l": 36,
+        "mirror_r": 36,
+        "wheel_fl": 816,
+        "wheel_fr": 816,
+        "wheel_rl": 816,
+        "wheel_rr": 816
+      },
+      "primitives": 30
+    },
+    {
+      "level": 1,
+      "file": "assets/formula-lod1.glb",
+      "triangles": 1604,
+      "budget": 2000,
+      "bytes": 104744,
+      "sha256": "efd0466fb346be7e5b3f9248df792223210ac56c6521d36404e55bb2addcedbe",
+      "bounds": {
+        "min": [
+          -1.04,
+          0.0,
+          -2.6
+        ],
+        "max": [
+          1.04,
+          1.07,
+          2.6
+        ]
+      },
+      "nodes": [
+        "formula_car",
+        "chassis",
+        "wing_front",
+        "wing_rear",
+        "engine",
+        "helmet",
+        "steer_front",
+        "mirror_l",
+        "mirror_r",
+        "steer_fl",
+        "wheel_fl",
+        "steer_fr",
+        "wheel_fr",
+        "wheel_rl",
+        "wheel_rr"
+      ],
+      "trianglesByPart": {
+        "chassis": 612,
+        "wing_front": 48,
+        "wing_rear": 48,
+        "engine": 72,
+        "helmet": 80,
+        "mirror_l": 36,
+        "mirror_r": 36,
+        "wheel_fl": 168,
+        "wheel_fr": 168,
+        "wheel_rl": 168,
+        "wheel_rr": 168
+      },
+      "primitives": 28
+    },
+    {
+      "level": 2,
+      "file": "assets/formula-lod2.glb",
+      "triangles": 472,
+      "budget": 500,
+      "bytes": 39512,
+      "sha256": "6f244b438a33982a6d10ba9c88cf14b9a956342de929f376da80826580c5ab69",
+      "bounds": {
+        "min": [
+          -1.04,
+          0.0,
+          -2.6
+        ],
+        "max": [
+          1.04,
+          1.07,
+          2.6
+        ]
+      },
+      "nodes": [
+        "formula_car",
+        "chassis",
+        "wing_front",
+        "wing_rear",
+        "engine",
+        "helmet",
+        "steer_front",
+        "mirror_l",
+        "mirror_r",
+        "steer_fl",
+        "wheel_fl",
+        "steer_fr",
+        "wheel_fr",
+        "wheel_rl",
+        "wheel_rr"
+      ],
+      "trianglesByPart": {
+        "chassis": 82,
+        "wing_front": 36,
+        "wing_rear": 36,
+        "engine": 28,
+        "helmet": 24,
+        "mirror_l": 1,
+        "mirror_r": 1,
+        "wheel_fl": 66,
+        "wheel_fr": 66,
+        "wheel_rl": 66,
+        "wheel_rr": 66
+      },
+      "primitives": 18
+    }
+  ]
+}
