@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>טורפדו · מתחת לפני המים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">חבילת נכסים מקורית · 01</div>
+    <h1>מתחת לפני המים<span>טורפדו, בועות וסונאר.</span></h1>
+    <p>טורפדו חם ופשוט לקריאה, אפקטים רכים וצלילים עמומים למשחק הספינות.</p>
+    <div class="chips"><span>חזית +Z · למעלה Y · מטרים</span><span>נכסים ללא כיתוב או מותגים</span><span>CC0</span></div>
+  </header>
+
+  <section class="hero" aria-label="תצוגת הטורפדו">
+    <div class="viewer-wrap">
+      <canvas id="model-view" aria-label="מודל טורפדו תלת ממדי. ניתן לגרור לסיבוב ולהשתמש בגלגלת לקירוב"></canvas>
+      <div class="viewer-caption"><span id="model-label">טורפדו שחקן</span><span>גרירה לסיבוב · גלגלת לקירוב</span></div>
+      <output id="model-status" role="status">טוען את המודל…</output>
+    </div>
+    <aside>
+      <div class="eyebrow">שני צבעים · צללית אחת</div>
+      <h2>קטן, עגול,<br>ברור גם בתנועה.</h2>
+      <p>גוף בגוון דבש ונגיעות טורקיז לשחקן. אלמוג ושזיף לאויב. מדחף נפרד מסתובב סביב ציר האורך.</p>
+      <div class="segmented" role="group" aria-label="בחירת גרסה">
+        <button id="player" aria-pressed="true"><i class="swatch player"></i>שחקן</button>
+        <button id="enemy" aria-pressed="false"><i class="swatch enemy"></i>אויב</button>
+      </div>
+      <button id="spin" aria-pressed="true">עצירת המדחף</button>
+      <button id="reset-view" class="quiet">איפוס מבט</button>
+      <p class="detail" id="model-detail"></p>
+      <a href="models/torpedo-player.glb" download>הורדת טורפדו שחקן ↗</a>
+      <a href="models/torpedo-enemy.glb" download>הורדת טורפדו אויב ↗</a>
+    </aside>
+  </section>
+
+  <section aria-labelledby="sequence-title">
+    <div class="section-heading"><div><div class="eyebrow">על המים ומתחתיהם</div><h2 id="sequence-title">רואים את האזהרה. עוקבים אחרי הבועות.</h2></div><button id="replay">שיגור אויב מחדש</button></div>
+    <div class="sequence-wrap"><canvas id="sequence" width="1000" height="380" aria-label="הדגמת סימון צוללת, אזהרת ירי טורפדו ופיצוץ"></canvas><output id="sequence-state" aria-live="off"></output></div>
+    <p class="note">צללית וסונאר מסמנים את הצוללת השקועה. קו נקודות מזהיר לפני השיגור; אחריו מופיעים הבזק, שובל בועות ופיצוץ מים. זוהי הדגמת הנכסים בלבד.</p>
+  </section>
+
+  <section aria-labelledby="effects-title">
+    <div class="section-heading"><div><div class="eyebrow">שקיפות מלאה · ללא רקע אפוי</div><h2 id="effects-title">כל האפקטים, מקרוב.</h2></div><button id="pause" aria-pressed="false">השהיית האפקטים</button></div>
+    <label class="scrub">פריים בפיצוץ <input id="scrub" type="range" min="0" max="31" value="0"><output id="frame-number">0 / 31</output></label>
+    <div class="effects" id="effects"></div>
+  </section>
+
+  <section aria-labelledby="sound-title">
+    <div class="section-heading"><div><div class="eyebrow">סינתזה מקורית · ללא דגימות</div><h2 id="sound-title">צליל מעומק הים.</h2></div><button id="stop-audio">עצירת צלילים</button></div>
+    <p class="note">חמש פעולות, שני פורמטים. עוצמת הקבצים מכוונת ל־‎−16 LUFS. הניגון מתחיל בלחיצה בלבד.</p>
+    <div class="sounds" id="sounds"></div>
+    <output id="audio-status" role="status"></output>
+  </section>
+
+  <footer><p>קבצים חדשים בלבד. חיבור חוקי הפגיעה והשיגור למשחק נשאר לשלב האינטגרציה.</p><nav><a href="manifest.json">מניפסט</a><a href="REPORT.md">דוח מסירה</a><a href="LICENSES.md">מקור ורישיון</a><a href="source/build_assets.py">מקור הנכסים</a></nav></footer>
+</main>
+<script type="module" src="preview.js"></script>
+</body>
+</html>
