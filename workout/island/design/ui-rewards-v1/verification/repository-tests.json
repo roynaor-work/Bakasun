@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-14",
+  "baseCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "status": "verified_with_runtime_retry",
+  "fullSuite": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4200,
+    "pass": 4135,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "setupFailure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "line": 93,
+      "reason": "Playwright Chromium headless shell was absent from its default browser cache. The test starts its HTTP server before launching the browser, leaving the process open after launch failure; that child process was terminated to complete the run."
+    }
+  },
+  "affectedFileRetry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/ui-rewards-v1-browsers node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "runtime": "Temporary browser-cache symlinks under /tmp point to the installed /usr/bin/chromium. No repository files were changed for the retry."
+  },
+  "distinctTestsPassedAcrossRuns": 4136,
+  "note": "The full command was not rerun after supplying Chromium; only the affected test file was rerun. The 64 skips from the full run remain skips."
+}

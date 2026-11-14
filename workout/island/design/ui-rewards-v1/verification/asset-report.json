@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "assetPairs": 39,
+  "exports": 78,
+  "pngDimensions": [
+    256,
+    256
+  ],
+  "frameCounts": {
+    "star-light": 8,
+    "gift-open": 8
+  },
+  "maxAllowedFileBytes": 300000,
+  "largestAssetBytes": 21877,
+  "checks": [
+    "required inventory",
+    "SVG XML safety and no embedded text",
+    "PNG RGBA dimensions and transparency",
+    "unclipped icons and animation with 4px minimum canvas margin",
+    "SHA-256 and byte counts",
+    "eight distinct animation frames",
+    "identical animation endpoints",
+    "right-to-left half star",
+    "nine-slice insets",
+    "all delivery files <= 300000 bytes"
+  ]
+}

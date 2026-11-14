@@ -1,0 +1,1193 @@
+{
+  "schemaVersion": 1,
+  "id": "ui-rewards-v1",
+  "version": "1.0.0",
+  "date": "2026-11-14",
+  "descriptionHe": "ערכת סיום ופרסים לאי, לגיל 7. נכסי עיצוב בלבד; חיבור ללוגיקת המשחק בנפרד.",
+  "license": "CC0-1.0",
+  "preview": {
+    "path": "preview.html",
+    "width": 844,
+    "height": 390,
+    "direction": "rtl",
+    "language": "he"
+  },
+  "constraints": {
+    "maxFileBytes": 300000,
+    "pngSize": [
+      256,
+      256
+    ],
+    "minimumTouchTargetPx": 56,
+    "embeddedText": false
+  },
+  "provenance": {
+    "method": "Original SVG geometry and local Chromium rasterization; no generated raster imagery or third-party downloads.",
+    "styleReference": "../ui-kit-v2/tokens.json (CC0-1.0)",
+    "runtimeDependencies": []
+  },
+  "tokens": {
+    "colors": {
+      "ink": "#173E40",
+      "paper": "#FFFCF4",
+      "sea": "#24786D",
+      "mint": "#B9DDC8",
+      "gold": "#E9BA57",
+      "coral": "#EB947F"
+    },
+    "fontFamily": "Arial, DejaVu Sans, sans-serif",
+    "minTouchPx": 56,
+    "focusRing": "3px solid #173E40",
+    "focusOffsetPx": 3
+  },
+  "integration": {
+    "icons": "Use contain. Do not stretch or mirror reward icons.",
+    "surfaces": "Use nineSlice.insets in top/right/bottom/left source pixels with CSS border-image, including fill. Use borderWidthPx as destination CSS pixels. Layer panel-border above panel-background.",
+    "progress": "Clip fill from the right; hide fill entirely at 0%. At widths below 14px reduce fill border-image-width to min(7px, half the fill width).",
+    "text": "Render captions and values in HTML, lang=he dir=rtl; isolate numbers with bdi. Badge has no baked-in caption.",
+    "rating": "Three independent star slots, starting at the right. Example 2.5 = full, full, half. Half is filled on the right. Announce the total once.",
+    "motion": "Preload all eight frames, play once on an explicit result/reward event, hold finalAsset. Respect prefers-reduced-motion. Cancel previous runs on replay.",
+    "sampleValues": "Preview values are invented UI fixtures, not scoring or economy rules."
+  },
+  "assets": [
+    {
+      "id": "star-empty",
+      "role": "rating-star",
+      "labelHe": "כוכב ריק",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-empty.svg",
+        "png": "png/star-empty.png"
+      },
+      "fillOrigin": null,
+      "minDisplayPx": 32,
+      "exports": {
+        "svg": {
+          "bytes": 782,
+          "sha256": "aa56202d938fc92c9268daec871d249a3b16df2567063d2b56a2e0c7eb651457"
+        },
+        "png": {
+          "bytes": 6733,
+          "sha256": "a7ce3986cf301a04b959ed8a22b027dfc85362b89e11a2ca5d651c195f1bf0f8"
+        }
+      }
+    },
+    {
+      "id": "star-half",
+      "role": "rating-star",
+      "labelHe": "חצי כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-half.svg",
+        "png": "png/star-half.png"
+      },
+      "fillOrigin": "right",
+      "minDisplayPx": 32,
+      "exports": {
+        "svg": {
+          "bytes": 1341,
+          "sha256": "f948e03e827210786b4cd73496e52be105dd0b48a282ce670ab95d92a380453f"
+        },
+        "png": {
+          "bytes": 9052,
+          "sha256": "ffb34fc064174f10986db7604297ef63bd4cba3f4c561ce43cc8673577a71d74"
+        }
+      }
+    },
+    {
+      "id": "star-full",
+      "role": "rating-star",
+      "labelHe": "כוכב מלא",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-full.svg",
+        "png": "png/star-full.png"
+      },
+      "fillOrigin": null,
+      "minDisplayPx": 32,
+      "exports": {
+        "svg": {
+          "bytes": 909,
+          "sha256": "189063741621cd57ef5b4477558f1c26475985615d0dc2a931f1656adb5fdaa6"
+        },
+        "png": {
+          "bytes": 9176,
+          "sha256": "cb8168a52d9c9135f989952f18126859226fda4906ff062aba36e16fa8c7f520"
+        }
+      }
+    },
+    {
+      "id": "star-light-00",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-00.svg",
+        "png": "png/star-light-00.png"
+      },
+      "frameIndex": 0,
+      "exports": {
+        "svg": {
+          "bytes": 782,
+          "sha256": "aa56202d938fc92c9268daec871d249a3b16df2567063d2b56a2e0c7eb651457"
+        },
+        "png": {
+          "bytes": 6733,
+          "sha256": "a7ce3986cf301a04b959ed8a22b027dfc85362b89e11a2ca5d651c195f1bf0f8"
+        }
+      }
+    },
+    {
+      "id": "star-light-01",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-01.svg",
+        "png": "png/star-light-01.png"
+      },
+      "frameIndex": 1,
+      "exports": {
+        "svg": {
+          "bytes": 1256,
+          "sha256": "3f3a5f8cb33f73fa0b582d829b11e3dcd5e26587e563a202a090e8213b7d3ff4"
+        },
+        "png": {
+          "bytes": 11630,
+          "sha256": "e58f14058b08e64ac753f49562d15bc665a9b4df2d755f39e86e2056822cea0d"
+        }
+      }
+    },
+    {
+      "id": "star-light-02",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-02.svg",
+        "png": "png/star-light-02.png"
+      },
+      "frameIndex": 2,
+      "exports": {
+        "svg": {
+          "bytes": 1255,
+          "sha256": "37a6c6732a569770437813f4d603dda0b21bd63c7c2e73d1270842bd800afaa5"
+        },
+        "png": {
+          "bytes": 11985,
+          "sha256": "8ef7b1439e8dc1d120410c5d5872ec28870ad26b048aced2cf7bdf2ba517e74f"
+        }
+      }
+    },
+    {
+      "id": "star-light-03",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-03.svg",
+        "png": "png/star-light-03.png"
+      },
+      "frameIndex": 3,
+      "exports": {
+        "svg": {
+          "bytes": 1435,
+          "sha256": "7df7e8584283137920579aee7ead233e6fa376cb63c1400e5abcf24beee3deb1"
+        },
+        "png": {
+          "bytes": 10861,
+          "sha256": "c130946c02cb46b6f3ea092039126588cb828a692c4c89a514d98e8ff2b2aca1"
+        }
+      }
+    },
+    {
+      "id": "star-light-04",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-04.svg",
+        "png": "png/star-light-04.png"
+      },
+      "frameIndex": 4,
+      "exports": {
+        "svg": {
+          "bytes": 1435,
+          "sha256": "9bc0774cd52c840a2e3cb5ad4562464de67690b4c81f9a235e7d7189c6a173da"
+        },
+        "png": {
+          "bytes": 11310,
+          "sha256": "5caac18aa10e0130777158efc4e97d75712d464827be3601b7e6049ab73070ad"
+        }
+      }
+    },
+    {
+      "id": "star-light-05",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-05.svg",
+        "png": "png/star-light-05.png"
+      },
+      "frameIndex": 5,
+      "exports": {
+        "svg": {
+          "bytes": 1435,
+          "sha256": "507ce0553bf438b67ffbb2bf2e1329499dda0c55eb96c13d619a4fb58fabe832"
+        },
+        "png": {
+          "bytes": 10596,
+          "sha256": "c6dbe98c1b2440406471ab701f1d12c91a0c941653ac71bd0650e122558c6328"
+        }
+      }
+    },
+    {
+      "id": "star-light-06",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-06.svg",
+        "png": "png/star-light-06.png"
+      },
+      "frameIndex": 6,
+      "exports": {
+        "svg": {
+          "bytes": 1253,
+          "sha256": "dc161e03ff4236849f23bae94c980917b4445ee2eafa93d2399d462a73fcc415"
+        },
+        "png": {
+          "bytes": 11140,
+          "sha256": "142916096c8d2506087649fc80caf1b45882c700b0d364d4d37c096a18723ca3"
+        }
+      }
+    },
+    {
+      "id": "star-light-07",
+      "role": "animation-frame",
+      "labelHe": "הדלקת כוכב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/star-light-07.svg",
+        "png": "png/star-light-07.png"
+      },
+      "frameIndex": 7,
+      "exports": {
+        "svg": {
+          "bytes": 909,
+          "sha256": "189063741621cd57ef5b4477558f1c26475985615d0dc2a931f1656adb5fdaa6"
+        },
+        "png": {
+          "bytes": 9176,
+          "sha256": "cb8168a52d9c9135f989952f18126859226fda4906ff062aba36e16fa8c7f520"
+        }
+      }
+    },
+    {
+      "id": "medal-bronze",
+      "role": "medal",
+      "labelHe": "ארד",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/medal-bronze.svg",
+        "png": "png/medal-bronze.png"
+      },
+      "minDisplayPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 1420,
+          "sha256": "b138434bc4e7d8f43c7f2c4cb70569c317163526f01460196451fd43a8b2f10a"
+        },
+        "png": {
+          "bytes": 17688,
+          "sha256": "7d5afc74df80481a8e7a72b4ac57be33658a651aa1bfbb21f7fff11500915bf1"
+        }
+      }
+    },
+    {
+      "id": "medal-silver",
+      "role": "medal",
+      "labelHe": "כסף",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/medal-silver.svg",
+        "png": "png/medal-silver.png"
+      },
+      "minDisplayPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 1449,
+          "sha256": "802970543c704bc46ee949d24bb7ad191eefd0a024a58e66b9beb57869abf31e"
+        },
+        "png": {
+          "bytes": 18462,
+          "sha256": "2bcb74db8310a03c5310d64f22c3d44658fa5f2f4cefc6c7ee6e9446ce9cf647"
+        }
+      }
+    },
+    {
+      "id": "medal-gold",
+      "role": "medal",
+      "labelHe": "זהב",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/medal-gold.svg",
+        "png": "png/medal-gold.png"
+      },
+      "minDisplayPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 1648,
+          "sha256": "d3843e556dddc4fe3f261c5f8d725de547852ff1af02db80cb3096e3332119f4"
+        },
+        "png": {
+          "bytes": 18681,
+          "sha256": "bbdcc5512e47bd0a36360a5ee665f88fc54d7e97471a34b760b311ae4822608f"
+        }
+      }
+    },
+    {
+      "id": "medal-diamond",
+      "role": "medal",
+      "labelHe": "יהלום",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/medal-diamond.svg",
+        "png": "png/medal-diamond.png"
+      },
+      "minDisplayPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 1550,
+          "sha256": "85c806289a582c49654ea484ce6d102e0bac74a1e4041b98f1a76ce256af8cda"
+        },
+        "png": {
+          "bytes": 20855,
+          "sha256": "d932e05c081aa144c27248c5a69d8199e7dd597f4bad05352219ff972ec9eb64"
+        }
+      }
+    },
+    {
+      "id": "trophy",
+      "role": "reward",
+      "labelHe": "גביע",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/trophy.svg",
+        "png": "png/trophy.png"
+      },
+      "minDisplayPx": 64,
+      "exports": {
+        "svg": {
+          "bytes": 1710,
+          "sha256": "e0a3f4df2f864522bef6f4bc8230b6d65ca91c7e5cb99e17c4b56352f3d34843"
+        },
+        "png": {
+          "bytes": 13173,
+          "sha256": "22dd1413737007f75ba46d72b2979c2953bcde10c015e03feaec3c320e1353d1"
+        }
+      }
+    },
+    {
+      "id": "badge-new-record",
+      "role": "text-surface",
+      "labelHe": "שיא חדש",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/badge-new-record.svg",
+        "png": "png/badge-new-record.png"
+      },
+      "nineSlice": {
+        "insets": [
+          72,
+          72,
+          72,
+          72
+        ],
+        "borderWidthPx": 16
+      },
+      "textColor": "#173E40",
+      "contentInsetPx": 18,
+      "exports": {
+        "svg": {
+          "bytes": 790,
+          "sha256": "9a112717ab217556223c2588cbfd23ed75533bc870f3c43433bb8bd53382d90a"
+        },
+        "png": {
+          "bytes": 9043,
+          "sha256": "aeaaf1a7741a628bfba77941d3199c35954e08ff207c28c079fe083177e88d57"
+        }
+      }
+    },
+    {
+      "id": "progress-track",
+      "role": "progress-track",
+      "labelHe": "מסילת התקדמות",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/progress-track.svg",
+        "png": "png/progress-track.png"
+      },
+      "nineSlice": {
+        "insets": [
+          120,
+          120,
+          120,
+          120
+        ],
+        "borderWidthPx": 10
+      },
+      "direction": "rtl",
+      "exports": {
+        "svg": {
+          "bytes": 723,
+          "sha256": "59e6b74c99012c40ed191c5dba5d1dfa1728a035cba71f4d916c9aea6fd14597"
+        },
+        "png": {
+          "bytes": 10010,
+          "sha256": "7506f75c59b27828565101ac2f3b0a688552cb3189bd7ecb18314ea4b13d9c75"
+        }
+      }
+    },
+    {
+      "id": "progress-fill",
+      "role": "progress-fill",
+      "labelHe": "מילוי התקדמות",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/progress-fill.svg",
+        "png": "png/progress-fill.png"
+      },
+      "nineSlice": {
+        "insets": [
+          120,
+          120,
+          120,
+          120
+        ],
+        "borderWidthPx": 7
+      },
+      "direction": "rtl",
+      "exports": {
+        "svg": {
+          "bytes": 684,
+          "sha256": "728423303cf6ccbee43990e67058f25d85340ca946f7485947bbcf1046403dc6"
+        },
+        "png": {
+          "bytes": 7705,
+          "sha256": "fc647eb9eac4c771ed4ee6a477bc6b9c271902c6a9b74c1ed8ab66c72a44beb9"
+        }
+      }
+    },
+    {
+      "id": "button-primary-default",
+      "role": "button-surface",
+      "labelHe": "ראשי",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-primary-default.svg",
+        "png": "png/button-primary-default.png"
+      },
+      "kind": "primary",
+      "state": "default",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#FFFCF4",
+      "exports": {
+        "svg": {
+          "bytes": 783,
+          "sha256": "117b3b472e690a6e5a081fba95e41635e45b5025aa6c8957829f0f2dc2553374"
+        },
+        "png": {
+          "bytes": 4877,
+          "sha256": "66934a5a5ea2d688c8b345e2b19a6911757925dae2a89f72422c2b16dbf17fe8"
+        }
+      }
+    },
+    {
+      "id": "button-primary-pressed",
+      "role": "button-surface",
+      "labelHe": "ראשי",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-primary-pressed.svg",
+        "png": "png/button-primary-pressed.png"
+      },
+      "kind": "primary",
+      "state": "pressed",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#FFFCF4",
+      "exports": {
+        "svg": {
+          "bytes": 784,
+          "sha256": "e237e9cd726150545d671d2c24e2e027d019b707a4c9163b9e56cc8a3646d9d8"
+        },
+        "png": {
+          "bytes": 4525,
+          "sha256": "91daa77f730c1b5cb21c008c799cb4e7e41443a0c379624741acff03c2437685"
+        }
+      }
+    },
+    {
+      "id": "button-primary-disabled",
+      "role": "button-surface",
+      "labelHe": "ראשי",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-primary-disabled.svg",
+        "png": "png/button-primary-disabled.png"
+      },
+      "kind": "primary",
+      "state": "disabled",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#52685D",
+      "exports": {
+        "svg": {
+          "bytes": 783,
+          "sha256": "ebed466aef307fd1a0025b4e42eab102b1f6c2bf0d92e0112b256f8fab89b7db"
+        },
+        "png": {
+          "bytes": 4835,
+          "sha256": "9f63167be3a818353cb0bf307e731164f7b67148f989e55939e67f741cdbd6ab"
+        }
+      }
+    },
+    {
+      "id": "button-secondary-default",
+      "role": "button-surface",
+      "labelHe": "משני",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-secondary-default.svg",
+        "png": "png/button-secondary-default.png"
+      },
+      "kind": "secondary",
+      "state": "default",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#173E40",
+      "exports": {
+        "svg": {
+          "bytes": 783,
+          "sha256": "d3406b74e7341fa7784a41bc0be2f2f658d63facd2fc59fb848b17ccf18cfffd"
+        },
+        "png": {
+          "bytes": 5115,
+          "sha256": "83d66569296973bcd170ef6ff708a4fdf4a3cfc884b80db07f22e66eeaf3879b"
+        }
+      }
+    },
+    {
+      "id": "button-secondary-pressed",
+      "role": "button-surface",
+      "labelHe": "משני",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-secondary-pressed.svg",
+        "png": "png/button-secondary-pressed.png"
+      },
+      "kind": "secondary",
+      "state": "pressed",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#173E40",
+      "exports": {
+        "svg": {
+          "bytes": 784,
+          "sha256": "ed963e06d948742c88602dfda66a8216419198efe307eb813dab5361888f7738"
+        },
+        "png": {
+          "bytes": 5007,
+          "sha256": "a144f17c1b459c897492af121d492dafb9b7ba1c66037dcb9fb83ec9ee3da1e4"
+        }
+      }
+    },
+    {
+      "id": "button-secondary-disabled",
+      "role": "button-surface",
+      "labelHe": "משני",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/button-secondary-disabled.svg",
+        "png": "png/button-secondary-disabled.png"
+      },
+      "kind": "secondary",
+      "state": "disabled",
+      "nineSlice": {
+        "insets": [
+          64,
+          64,
+          64,
+          64
+        ],
+        "borderWidthPx": 16
+      },
+      "minTouchPx": 56,
+      "textColor": "#52685D",
+      "exports": {
+        "svg": {
+          "bytes": 783,
+          "sha256": "00534c5b2608c7b6b2e2113d36e8f9020378ee6a80b264713f492acea4d61c3f"
+        },
+        "png": {
+          "bytes": 4797,
+          "sha256": "4986c44057c958640ec28830eeb46a97ce438b51c17fd1bf32cf88e52b726241"
+        }
+      }
+    },
+    {
+      "id": "panel-background",
+      "role": "panel-background",
+      "labelHe": "רקע פאנל תוצאה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/panel-background.svg",
+        "png": "png/panel-background.png"
+      },
+      "nineSlice": {
+        "insets": [
+          56,
+          56,
+          56,
+          56
+        ],
+        "borderWidthPx": 24
+      },
+      "exports": {
+        "svg": {
+          "bytes": 670,
+          "sha256": "6a402cf0a49e31ea62616a448cb886dbd8b961fcc3bd67bf0cf37acaae9cf2e8"
+        },
+        "png": {
+          "bytes": 3324,
+          "sha256": "78aa5c7b9316d3a5b308363c54675387689b4e0f2629cf086566c9cc6667ca53"
+        }
+      }
+    },
+    {
+      "id": "panel-border",
+      "role": "panel-border",
+      "labelHe": "קו פאנל תוצאה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/panel-border.svg",
+        "png": "png/panel-border.png"
+      },
+      "nineSlice": {
+        "insets": [
+          56,
+          56,
+          56,
+          56
+        ],
+        "borderWidthPx": 24
+      },
+      "exports": {
+        "svg": {
+          "bytes": 697,
+          "sha256": "c81688f93474a5a9be7c6ee91d57aad7f6ad0eab551f3b6685c43f479b1d47cf"
+        },
+        "png": {
+          "bytes": 4100,
+          "sha256": "e82df448f433875a9eccea0dc8ab1736d2ab6e802c9b5477c6bbb21ef2b5fffa"
+        }
+      }
+    },
+    {
+      "id": "coin",
+      "role": "currency",
+      "labelHe": "מטבע",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/coin.svg",
+        "png": "png/coin.png"
+      },
+      "minDisplayPx": 32,
+      "exports": {
+        "svg": {
+          "bytes": 1217,
+          "sha256": "4eb2623168d19926bd408a9bc5d563c08c08fbe0c636744a08a396590b648e05"
+        },
+        "png": {
+          "bytes": 17186,
+          "sha256": "a22e3ccf6d63a3588f81d36399a71c994ccf29a19a269db474042a44b1933ce8"
+        }
+      }
+    },
+    {
+      "id": "coins",
+      "role": "currency",
+      "labelHe": "מטבעות",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/coins.svg",
+        "png": "png/coins.png"
+      },
+      "minDisplayPx": 40,
+      "exports": {
+        "svg": {
+          "bytes": 2000,
+          "sha256": "a58e401ae1090c9a3ee20a324827133be55ccde3dc75ea158d095137210c892d"
+        },
+        "png": {
+          "bytes": 21877,
+          "sha256": "5e895bf211fdec167986d03322d1f6d68a3faa4670cd17a3876e88a7446cc7ed"
+        }
+      }
+    },
+    {
+      "id": "gift-closed",
+      "role": "reward",
+      "labelHe": "מתנה סגורה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-closed.svg",
+        "png": "png/gift-closed.png"
+      },
+      "minDisplayPx": 64,
+      "minTouchPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 1447,
+          "sha256": "edbaecb511fea982c76a4859cfdb9f7d35e88caf5aadcc37af11eed8e65ab920"
+        },
+        "png": {
+          "bytes": 9700,
+          "sha256": "5919c5d1bc10c2ac1450ed6ba899ba9e5c3c7f3057b765f98029dafb3fbf1609"
+        }
+      }
+    },
+    {
+      "id": "gift-open",
+      "role": "reward",
+      "labelHe": "מתנה פתוחה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open.svg",
+        "png": "png/gift-open.png"
+      },
+      "minDisplayPx": 64,
+      "minTouchPx": 56,
+      "exports": {
+        "svg": {
+          "bytes": 2147,
+          "sha256": "cbb22664682c3e6da5230adec631cc4d9faa8bd19de95f00e459926fda645171"
+        },
+        "png": {
+          "bytes": 19543,
+          "sha256": "fc160bf7b4e3e85e497ff9a7072f62c4d49fea2fb8a1cf2aac5be95bb9d85fd4"
+        }
+      }
+    },
+    {
+      "id": "gift-open-00",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-00.svg",
+        "png": "png/gift-open-00.png"
+      },
+      "frameIndex": 0,
+      "exports": {
+        "svg": {
+          "bytes": 1447,
+          "sha256": "edbaecb511fea982c76a4859cfdb9f7d35e88caf5aadcc37af11eed8e65ab920"
+        },
+        "png": {
+          "bytes": 9700,
+          "sha256": "5919c5d1bc10c2ac1450ed6ba899ba9e5c3c7f3057b765f98029dafb3fbf1609"
+        }
+      }
+    },
+    {
+      "id": "gift-open-01",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-01.svg",
+        "png": "png/gift-open-01.png"
+      },
+      "frameIndex": 1,
+      "exports": {
+        "svg": {
+          "bytes": 1449,
+          "sha256": "7320fd89a64d9954ada8d02da56b6909485f48e01a6e812b1ca4e02244c45840"
+        },
+        "png": {
+          "bytes": 13818,
+          "sha256": "e57d03def577ce7f8ef8e010e3cc36b157b0a5bf1015a3c0ed8840d56ed49ab3"
+        }
+      }
+    },
+    {
+      "id": "gift-open-02",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-02.svg",
+        "png": "png/gift-open-02.png"
+      },
+      "frameIndex": 2,
+      "exports": {
+        "svg": {
+          "bytes": 1449,
+          "sha256": "c01abc348204b03963222e9885c4b0ce7df628475e4ca65b5df8b2ad54ce458c"
+        },
+        "png": {
+          "bytes": 14812,
+          "sha256": "bf4dbaaa75d89e2d2c36d6b40b878db345e754ec06ae495bf5e62bc35e19923b"
+        }
+      }
+    },
+    {
+      "id": "gift-open-03",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-03.svg",
+        "png": "png/gift-open-03.png"
+      },
+      "frameIndex": 3,
+      "exports": {
+        "svg": {
+          "bytes": 2163,
+          "sha256": "9715110ce7c9f39b3bc5a6120085043218ca3399a8449b6c5e44881a2a442d4d"
+        },
+        "png": {
+          "bytes": 17217,
+          "sha256": "e923b7c205853e7eda7689aebc584e0a50a0938d739ad58141f16dd08d011149"
+        }
+      }
+    },
+    {
+      "id": "gift-open-04",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-04.svg",
+        "png": "png/gift-open-04.png"
+      },
+      "frameIndex": 4,
+      "exports": {
+        "svg": {
+          "bytes": 2164,
+          "sha256": "977076896f5381333d2799c1373472197224817f847bbd6f02fc0e5bfc157196"
+        },
+        "png": {
+          "bytes": 19217,
+          "sha256": "85abac7b7421579b9a9fb8e6bbafb2b836b1e91e03751dbd4d6d81de821b3b1b"
+        }
+      }
+    },
+    {
+      "id": "gift-open-05",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-05.svg",
+        "png": "png/gift-open-05.png"
+      },
+      "frameIndex": 5,
+      "exports": {
+        "svg": {
+          "bytes": 2147,
+          "sha256": "18e38fbd8c3abae2719de8c927e48291c81c3f9f583f6e13ae7e846e1f53717a"
+        },
+        "png": {
+          "bytes": 20183,
+          "sha256": "f0f8f45eedad8064e9dae13ea60703d267ade2b49a61e1778de5c7e3226e5824"
+        }
+      }
+    },
+    {
+      "id": "gift-open-06",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-06.svg",
+        "png": "png/gift-open-06.png"
+      },
+      "frameIndex": 6,
+      "exports": {
+        "svg": {
+          "bytes": 2147,
+          "sha256": "23da0dded5942d45ece84544e0ae09794e5f02707652bbbb582f854b3d167622"
+        },
+        "png": {
+          "bytes": 20020,
+          "sha256": "800b3436ebf55d51f3316886756ad5dec30fa708ce49f9e053564e48ca9a135a"
+        }
+      }
+    },
+    {
+      "id": "gift-open-07",
+      "role": "animation-frame",
+      "labelHe": "פתיחת מתנה",
+      "width": 256,
+      "height": 256,
+      "textEmbedded": false,
+      "mirrorInRTL": false,
+      "license": "CC0-1.0",
+      "files": {
+        "svg": "svg/gift-open-07.svg",
+        "png": "png/gift-open-07.png"
+      },
+      "frameIndex": 7,
+      "exports": {
+        "svg": {
+          "bytes": 2147,
+          "sha256": "cbb22664682c3e6da5230adec631cc4d9faa8bd19de95f00e459926fda645171"
+        },
+        "png": {
+          "bytes": 19543,
+          "sha256": "fc160bf7b4e3e85e497ff9a7072f62c4d49fea2fb8a1cf2aac5be95bb9d85fd4"
+        }
+      }
+    }
+  ],
+  "animations": {
+    "star-light": {
+      "frames": [
+        "star-light-00",
+        "star-light-01",
+        "star-light-02",
+        "star-light-03",
+        "star-light-04",
+        "star-light-05",
+        "star-light-06",
+        "star-light-07"
+      ],
+      "frameDurationMs": 60,
+      "durationMs": 480,
+      "iterations": 1,
+      "finalAsset": "star-full",
+      "reducedMotionAsset": "star-full"
+    },
+    "gift-open": {
+      "frames": [
+        "gift-open-00",
+        "gift-open-01",
+        "gift-open-02",
+        "gift-open-03",
+        "gift-open-04",
+        "gift-open-05",
+        "gift-open-06",
+        "gift-open-07"
+      ],
+      "frameDurationMs": 80,
+      "durationMs": 640,
+      "iterations": 1,
+      "finalAsset": "gift-open",
+      "reducedMotionAsset": "gift-open"
+    }
+  },
+  "totals": {
+    "assetPairs": 39,
+    "svgFiles": 39,
+    "pngFiles": 39,
+    "assetBytes": 514162,
+    "largestAssetBytes": 21877
+  }
+}

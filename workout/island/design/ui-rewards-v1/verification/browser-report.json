@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "browser": "Chromium 151.0.7922.173",
+  "transport": "http",
+  "viewport": [
+    844,
+    390
+  ],
+  "portraitViewport": [
+    390,
+    844
+  ],
+  "starFramesObserved": [
+    "star-light-00",
+    "star-light-01",
+    "star-light-02",
+    "star-light-03",
+    "star-light-04",
+    "star-light-05",
+    "star-light-06",
+    "star-light-07"
+  ],
+  "giftFramesObserved": [
+    "gift-open-00",
+    "gift-open-01",
+    "gift-open-02",
+    "gift-open-03",
+    "gift-open-04",
+    "gift-open-05",
+    "gift-open-06",
+    "gift-open-07"
+  ],
+  "svgPngMeanRgbDifference": 0.54,
+  "checks": [
+    "844x390 no page overflow",
+    "three RTL rating slots",
+    "all exported skins rendered",
+    "minimum 56x56 targets",
+    "progress accessible value",
+    "visible keyboard focus",
+    "keyboard pressed/default skins",
+    "eight star frames and final 2.5 rating",
+    "eight gift frames",
+    "repeated gift input guarded",
+    "gift final pose and live announcement",
+    "replay cancels gift",
+    "format switch cancels animation",
+    "PNG image and skin mode",
+    "secondary action",
+    "39 catalog entries",
+    "two disabled button samples",
+    "scrollable animation contact sheets",
+    "reduced motion immediate final poses",
+    "390x844 portrait fallback without horizontal overflow",
+    "SVG/PNG visual consistency mean RGB difference < 8/255",
+    "no browser errors or external requests"
+  ],
+  "browserErrors": [],
+  "externalRequests": []
+}

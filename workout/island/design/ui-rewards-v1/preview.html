@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>האי שלי — ערכת סיום ופרסים</title>
+  <link rel="icon" href="svg/star-full.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+  <script src="catalog.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main class="stage" aria-label="תצוגת ערכת פרסים">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>האי שלי<small>כל צעד הוא הישג</small></span></div>
+      <nav aria-label="תצוגות הערכה">
+        <button id="result-tab" class="tab" aria-current="page" aria-controls="result-view">מסך סיום</button>
+        <button id="kit-tab" class="tab" aria-controls="kit-view">ערכת פרסים</button>
+      </nav>
+      <button id="format" class="format" aria-label="הצגת נכסי PNG במקום SVG" aria-pressed="false"><bdi>SVG</bdi></button>
+    </header>
+
+    <section id="result-view" class="result-layout" aria-label="דוגמת מסך סיום">
+      <div class="result-panel panel">
+        <div class="headline"><div><p class="eyebrow">איזה אימון נהדר</p><h1>כל הכבוד, אלוף!</h1></div><span class="record skin" data-skin="badge-new-record">שיא חדש</span></div>
+        <div id="rating" class="rating" role="img" aria-label="שניים וחצי מתוך שלושה כוכבים">
+          <img data-asset="star-full" class="rating-star" alt="" width="70" height="70">
+          <img data-asset="star-full" class="rating-star middle" alt="" width="82" height="82">
+          <img data-asset="star-half" class="rating-star" alt="" width="70" height="70">
+        </div>
+        <p class="encouragement">התמדת, זזת והתקדמת. יש על מה לחייך.</p>
+        <div class="progress-section">
+          <div class="progress-label"><span>בדרך למדליה הבאה</span><bdi id="progress-text">75%</bdi></div>
+          <div id="progress" class="progress skin" data-skin="progress-track" role="progressbar" aria-label="התקדמות למדליה הבאה" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75"><span class="progress-fill skin" data-skin="progress-fill"></span></div>
+        </div>
+        <div class="actions"><button id="replay" class="reward-button primary skin" data-skin="button-primary-default">נחגוג שוב <span aria-hidden="true">✦</span></button><button id="island" class="reward-button secondary skin" data-skin="button-secondary-default">לאי שלי <span aria-hidden="true">←</span></button></div>
+      </div>
+
+      <aside class="reward-panel" aria-label="הפרסים שלך">
+        <div class="trophy-wrap"><img class="hero-trophy" data-asset="trophy" alt="גביע ההישג שלך" width="116" height="116"><img class="earned-medal" data-asset="medal-gold" alt="מדליית זהב" width="60" height="60"></div>
+        <h2>הרווחת את זה!</h2>
+        <div class="coin-total"><img data-asset="coins" alt="" width="43" height="43"><span><bdi>+50</bdi> מטבעות</span></div>
+        <button id="gift" class="gift-button" aria-label="פתיחת המתנה" aria-describedby="gift-hint"><img id="gift-image" data-asset="gift-closed" alt="" width="84" height="84"><span id="gift-hint">מחכה לך מתנה</span></button>
+      </aside>
+    </section>
+
+    <section id="kit-view" class="kit-view" hidden aria-label="כל רכיבי הערכה">
+      <div class="kit-intro"><h1>אוסף של רגעים טובים</h1><p>כוכבים, הישגים וכל מה שביניהם</p></div>
+      <div id="catalog" class="catalog"></div>
+    </section>
+    <p id="status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+  </main>
+</body>
+</html>
