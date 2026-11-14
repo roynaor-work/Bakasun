@@ -61,7 +61,8 @@ export function selectTeamPass(p,s,c){
   const destination=teamPassPoint(member,c);
   const range=distance(p,destination);let clearance=6,lane=5,movingLane=5;
   for(const o of opponents){clearance=Math.min(clearance,distance(o,destination));lane=Math.min(lane,passLaneClearance(o,p,destination));movingLane=Math.min(movingLane,passInterceptionClearance(o,p,destination,c.passing.groundTravelSeconds));}
-  const advance=clamp((destination.x-p.x)*d,-6,10);
+  // ai.passAdvanceCap (soccer full, 105 m): a pass that gains more than 10 m is worth more there; the small match keeps 10
+  const advance=clamp((destination.x-p.x)*d,-6,c.ai.passAdvanceCap??10);
   const tooClose=Math.max(0,c.ai.requestDistance-range),tooFar=Math.max(0,range-maxDistance);
   const value=lane*2.7+clearance*1.15+advance*c.ai.passSelectionAdvanceWeight-range*.09-tooClose*3-tooFar*2-Math.max(0,lane-movingLane)*.8;
   if(value>best||value===best&&member.id<target.id){target=member;best=value;}

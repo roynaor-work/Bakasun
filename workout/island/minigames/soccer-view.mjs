@@ -36,6 +36,8 @@ import {createSoccerPitchKit,hideV8KitParts} from './soccer-v24-pitch.mjs?v=isla
 import {createSoccerFxV1} from './soccer-v24-fx.mjs?v=island-v2-20261107-12';
 import {createSoccerCrowd3d,soccerCrowdLimit} from './soccer-v24-crowd.mjs?v=island-v2-20261107-12';
 import {crowdPlacements,LEVELS as V8_LEVELS,TIERS as V8_TIERS} from './soccer-v8-layout.mjs';
+// Soccer full (14/11): the 11 against 11 broadcast camera and the distance LOD / off-camera culling of the 22 bodies (`?soccerFull=0` = none of it).
+import {soccerFullCamera,soccerFullLodLevel} from './soccer-full.mjs?v=island-v2-20261107-12';
 const FX_REPLACED=new Set(['confetti','landing-dust']);
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 
@@ -53,7 +55,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const roster=config.players.roster;let poseFocus=null,poseMode=null,poses=[];
   const renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio||1,config.view.maxPixelRatio));adventureRenderer(renderer,.98);
-  const scene=new T.Scene();scene.background=new T.Color('#7d9592');scene.fog=new T.Fog('#7d9592',48,125);
+  const scene=new T.Scene();scene.background=new T.Color('#7d9592');scene.fog=config.full?new T.Fog('#7d9592',80,230):new T.Fog('#7d9592',48,125);
   const camera=new T.PerspectiveCamera(config.view.camera.fovDegrees,1,config.view.camera.nearPlane,config.view.camera.farPlane),target=new T.Vector3(),dummy=new T.Object3D(),color=new T.Color();
   const resources=new Set(),track=o=>(resources.add(o),o);
   const mat=(c,extra={})=>track(new T.MeshLambertMaterial({color:c,...extra}));
@@ -127,6 +129,8 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   const releaseBlend={x:0,y:0,z:0,ox:0,oy:0,oz:0,held:false,age:-1}; // v24: the shown ball after a Codex v13 throw clip lets go
   const ballRoot=new T.Group(),ballDrift={x:0,z:0,vx:0,vz:0},ballShown={x:0,y:0,z:0,valid:false},glitchV23=soccerGlitchVersion()==='v23';ballRoot.name='soccer-ball-root';const fallbackBall=new T.Mesh(track(new T.IcosahedronGeometry(config.physics.ballRadius,1)),mat('#fff3da'));fallbackBall.castShadow=true;ballRoot.add(fallbackBall);scene.add(ballRoot);
   const trailConfig=config.view.trail,trail=new T.InstancedMesh(track(new T.SphereGeometry(trailConfig.radius,trailConfig.radialSegments,trailConfig.heightSegments)),track(new T.MeshBasicMaterial({color:'#fff8d6',transparent:true,opacity:trailConfig.opacity,depthWrite:false})),trailConfig.count);trail.frustumCulled=false;scene.add(trail);
+  // Soccer full: per-player LOD plan and frustum test (allocated once), and the camera's footprint on the grass for the radar.
+  const fullLodCfg=config.full?.lod||null,fullFrustum=new T.Frustum(),fullProj=new T.Matrix4(),fullSphere=new T.Sphere(new T.Vector3(),1.25),fullRay=new T.Vector3(),fullLevels=[],fullVisible=[],fullDistance=[],fullOrder=[],groundFrame=[{x:0,z:0},{x:0,z:0},{x:0,z:0},{x:0,z:0}];let fullStats=null;
   let probeBackground=null,nearDetail=null,v7Full=null,v7Cap=SOCCER_V7_FULL_DETAIL,disposed=false,lastEvent=0,time=0,goalPulse=0,goalTeam=0,quality=0,lastWidth=0,lastHeight=0,assetStatus='loading',assetStats=null,cameraState=null,framing=null;
   const loadStart=globalThis.performance?.now?.()??0,loadReport={characters:null,characterError:null,athleteError:null,sceneError:null,ms:null};
   let designSceneReady=false;
@@ -373,7 +377,7 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     let changed=numbersShown.length!==s.players.length;for(let i=0;i<s.players.length&&!changed;i++)changed=numbersShown[i]!==s.players[i].card.number;
     if(changed){numbersShown.length=s.players.length;for(let i=0;i<s.players.length;i++)numbersShown[i]=s.players[i].card.number;numberSignature=numbersShown.join(',');numberContext.clearRect(0,0,numberCanvas.width,64);numberContext.font='bold 46px sans-serif';numberContext.textAlign='center';numberContext.textBaseline='middle';numberContext.fillStyle='#fff7da';numberContext.strokeStyle='#243d59';numberContext.lineWidth=3;for(const p of s.players){numberContext.strokeText(String(p.card.number),p.id*64+32,32);numberContext.fillText(String(p.card.number),p.id*64+32,32);}numberTexture.needsUpdate=true;}
     const c=config.view.camera,elevation=soccerElevationDegrees(camera.aspect,config),angle=elevation*Math.PI/180;
-    cameraState=soccerCamera(s,camera.aspect,config,cameraState,dt,show?showCfg.camera.boxZoom:0);
+    cameraState=config.full?soccerFullCamera(s,camera.aspect,config,cameraState,dt):soccerCamera(s,camera.aspect,config,cameraState,dt,show?showCfg.camera.boxZoom:0);
     camera.position.set(cameraState.x,cameraState.distance*Math.sin(angle),cameraState.z+s.attackDir*cameraState.distance*Math.cos(angle));camera.lookAt(cameraState.x,0,cameraState.z);camera.updateMatrixWorld();if(poseFocus!==null){const p=s.players[poseFocus];camera.position.set(p.x,1.9,p.z+5.5);camera.lookAt(p.x,.8,p.z);camera.updateMatrixWorld();}
     const ballProjection=projectSoccerPoint(s.ball,cameraState,camera.aspect,config),playerProjection=projectSoccerPoint(s.players[s.controlled],cameraState,camera.aspect,config);
     framing=framingShown;framing.ball=ballProjection;framing.controlled=playerProjection;Object.assign(framing.camera,cameraState);framing.elevationDegrees=elevation;
@@ -410,6 +414,27 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     function box(x,y,z,sx,sy,sz,c,angle=0){dummy.position.set(x,y,z);dummy.rotation.set(0,angle,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();boxes.setMatrixAt(boxIndex,dummy.matrix);boxes.setColorAt(boxIndex++,color.set(c));}
     function sphere(x,y,z,sx,sy,sz,c){dummy.position.set(x,y,z);dummy.rotation.set(0,0,0);dummy.scale.set(sx,sy,sz);dummy.updateMatrix();spheres.setMatrixAt(sphereIndex,dummy.matrix);spheres.setColorAt(sphereIndex++,color.set(c));}
     const receiver=passReceiver(s,config);poses.length=s.players.length;let turfAt=0;
+    // Soccer full: one LOD per player from his distance to the camera (soccerFullLodLevel, with hysteresis); the players in an action stay
+    // near; at most lod.maxFull full bodies; a body outside the camera's frustum is not drawn (it keeps animating, only the draw is skipped).
+    if(fullLodCfg&&characters[0]?.design){
+      camera.updateMatrixWorld();fullProj.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);fullFrustum.setFromProjectionMatrix(fullProj);
+      fullOrder.length=0;const farEdge=(fullLodCfg.qualityFar?.[quality]??fullLodCfg.far)*1.25;
+      for(const p of s.players){
+        fullSphere.center.set(p.x,.95,p.z);const seen=fullFrustum.intersectsSphere(fullSphere)||p.id===poseFocus,dist=Math.hypot(camera.position.x-p.x,camera.position.y-1,camera.position.z-p.z);
+        let level=soccerFullLodLevel(dist,fullLevels[p.id]??1,quality,fullLodCfg);
+        const actor=p.id===s.controlled||p.id===s.ball.owner||Boolean(p.restartMotion)||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0||p.id===poseFocus;
+        if(actor&&level>0&&dist<farEdge)level=0;
+        fullLevels[p.id]=level;fullVisible[p.id]=seen;fullDistance[p.id]=actor?-1:dist;if(level===0&&seen)fullOrder.push(p.id);
+      }
+      const maxFull=fullLodCfg.qualityMaxFull?.[quality]??fullLodCfg.maxFull;if(fullOrder.length>maxFull){fullOrder.sort((a,b)=>fullDistance[a]-fullDistance[b]);for(let i=maxFull;i<fullOrder.length;i++)fullLevels[fullOrder[i]]=1;}
+      const stats=fullStats||(fullStats={full:0,middle:0,far:0,hidden:0});stats.full=stats.middle=stats.far=stats.hidden=0;
+      for(const p of s.players){if(!fullVisible[p.id])stats.hidden++;else if(fullLevels[p.id]===0)stats.full++;else if(fullLevels[p.id]===1)stats.middle++;else stats.far++;}
+      // the four screen corners on the grass (bottom-left, bottom-right, top-right, top-left); above the horizon: 400 m out
+      const corners=[[-1,-1],[1,-1],[1,1],[-1,1]];
+      for(let i=0;i<4;i++){fullRay.set(corners[i][0],corners[i][1],.5).unproject(camera).sub(camera.position);const out=groundFrame[i];
+        if(fullRay.y<-1e-4){const t=Math.min(-camera.position.y/fullRay.y,400/Math.max(1e-6,Math.hypot(fullRay.x,fullRay.z)));out.x=camera.position.x+fullRay.x*t;out.z=camera.position.z+fullRay.z*t;}
+        else{const l=Math.hypot(fullRay.x,fullRay.z)||1;out.x=camera.position.x+fullRay.x/l*400;out.z=camera.position.z+fullRay.z/l*400;}}
+    }
     const nearCount=config.view.nearDetailPlayers??0;if(nearCount>0&&quality<config.view.athlete.lodFromQuality)nearDetail=nearDetailPlayers(s.players,cameraState||{x:s.ball.x,z:s.ball.z},nearCount,nearDetail);
     restartStrike=null;
     // GPT v7 characters: LOD0 is 35K triangles, so at most `fullDetail` players show it (priority actors first,
@@ -419,10 +444,10 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
       // Authored characters remain visible. Foreground/actions retain their
       // detail while distant geometry stays within the mobile triangle budget.
       const character=characters[p.id],useModel=Boolean(character);
-      if(character)character.pivot.visible=Boolean(useModel);
+      if(character)character.pivot.visible=Boolean(useModel)&&(!fullStats||fullVisible[p.id]!==false);
       if(useModel){if(character.design){
         const contactActor=p.id===s.controlled||p.id===s.ball.owner||p.restartMotion||p.kickTime>0||p.headerTime>0||p.slideTime>0||p.diveTime>0;
-        const wantedLod=(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0),actorLod=character.setLod(v7Full&&wantedLod===0&&!v7Full.has(p.id)?1:wantedLod);
+        const wantedLod=(p.id===poseFocus||contactActor&&quality<config.view.athlete.lodFromQuality?0:quality>=3?(contactActor?1:2):quality>=config.view.athlete.lodFromQuality?1:nearCount>0&&nearDetail&&!nearDetail.has(p.id)?1:0),actorLod=character.setLod(fullStats?fullLevels[p.id]:v7Full&&wantedLod===0&&!v7Full.has(p.id)?1:wantedLod);
         const animation=playerAnimation(p,s,config);character.update(p,s,animation,dt*rate);
         const pose=poses[p.id]||(poses[p.id]={id:p.id});pose.mode=character.mode;pose.clip=character.active;pose.yaw=character.yaw;pose.lod=actorLod;
       }else if(character.athlete){
@@ -543,7 +568,9 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
     /** Test hook: backdrop meshes off and the clear colour magenta, so any pixel the scenery fails to cover shows. */
     get scene(){return scene;},get characters(){return characters;},
     skyProbe(on,surroundOn=true){if(on&&!probeBackground)probeBackground=scene.background;scene.background=on?new T.Color('#ff00ff'):probeBackground||new T.Color('#7d9592');if(!on)probeBackground=null;scene.traverse(o=>{if(o.renderOrder===-1000)o.visible=!on;});if(v8)v8.root.visible=surroundOn;else surround.root.visible=surroundOn;},
-    metrics:()=>({v24:v24Metrics(),v8:{...v8Report,lod:v8?.lod??null,roofCutaway:v8?.roofCutawayActive??null,parts:v8?.metrics().parts??null,triangles:v8?.metrics().total??null},triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:v8?'Soccer v8 evening stadium':designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),show:show?.metrics()||null,assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
+    /** Soccer full: the camera's footprint on the grass (radar), null in the small match. */
+    groundFrame:()=>fullStats?groundFrame:null,
+    metrics:()=>({full:fullStats?{...fullStats,camera:cameraState?{x:+cameraState.x.toFixed(2),z:+cameraState.z.toFixed(2),distance:+cameraState.distance.toFixed(2),zoom:+(cameraState.zoom??cameraState.distance).toFixed(2)}:null}:null,v24:v24Metrics(),v8:{...v8Report,lod:v8?.lod??null,roofCutaway:v8?.roofCutawayActive??null,parts:v8?.metrics().parts??null,triangles:v8?.metrics().total??null},triangles:renderer.info.render.triangles,drawCalls:renderer.info.render.calls,programs:renderer.info.programs?.length||0,warmup:warmed,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,quality,pixelRatio:renderer.getPixelRatio(),crowdCount:crowd.count,shadows:shadows.visible,lighting:lighting.metrics(),turf:designSceneReady?{turfStatus:'ready',turfMaps:1,source:'design/environment'}:stadium.metrics(),turfSet:stadium.metrics().turfSet,stadium:v8?'Soccer v8 evening stadium':designSceneReady?'Island Design Stadium':stadium.identity,designScene:designScene?.metrics()||{status:'disabled'},effects:effects.metrics(),designVfx:designVfx.metrics(),replay:replay.metrics(),show:show?.metrics()||null,assetStatus,assetStats,restartAttachment,restartStrike,ballPosition:{x:ballRoot.position.x,y:ballRoot.position.y,z:ballRoot.position.z},kit:selectedKit?.id||null,modelCount:characters.filter(c=>c.pivot.visible).length,fallbackCount:roster.length-characters.filter(c=>c.pivot.visible).length,shirtNumbers:numberSignature.split(',').map(Number),appearances:config.view.appearance,aimVisible:aimArrow.visible,aimColor:aimMaterial.color.getHexString(),crowd3D:true,animations:characters.map(c=>c.mode),poses,landingVisible:landing.visible,arcDots:arcDots.count,framing,pitchBounds:pitchBounds(),width:lastWidth,height:lastHeight}),
     dispose(){if(disposed)return;disposed=true;kit?.dispose();fx?.dispose();crowd3d?.dispose();v8?.dispose();show?.dispose();replay.dispose();designVfx.dispose();designScene?.dispose();designSceneLoader?.dispose();stadium.dispose();lighting.dispose();observer.disconnect();canvas.removeEventListener('webglcontextlost',lost);canvas.removeEventListener('pointerdown',skipReplay);for(const c of characters){if(c.design)c.dispose();else{c.mixer.stopAllAction();c.mixer.uncacheRoot(c.root);c.root.traverse(o=>o.skeleton?.dispose());}}characters.length=0;for(const resource of resources)resource.dispose();resources.clear();scene.clear();renderer.dispose();renderer.forceContextLoss();}
   };
 }

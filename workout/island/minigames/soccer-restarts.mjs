@@ -135,6 +135,10 @@ export function createRestartLayout(r,s,c){
   const put=(p,x,z,duty)=>{targets[p.id]={x:clamp(x,-hx+inset,hx-inset),z:clamp(z,-hz+inset,hz-inset),duty};};
   const mates=s.players.filter(p=>p.team===r.team&&p.id!==r.player&&p.role!=='keeper');
   mates.sort((a,b)=>r.type==='throwIn'?distance(a,r)-distance(b,r)||a.id-b.id:(b.role==='striker')-(a.role==='striker')||a.id-b.id);
+  // Soccer full (soccer-full.mjs): eleven a side. Only the players the set piece needs get a spot (the nearest at a throw-in, the box at a
+  // corner, the outlets of a goal kick); the others hold the tactics package's restart shape (no target here = fieldTarget).
+  const take=c.full?.restartPlayers?.[r.type];
+  if(Number.isInteger(take)){if(r.type!=='throwIn')mates.sort((a,b)=>distance(a,r)-distance(b,r)||a.id-b.id);if(r.type==='corner')mates.sort((a,b)=>(b.role==='striker')-(a.role==='striker')||distance(a,r)-distance(b,r)||a.id-b.id);mates.length=Math.min(mates.length,take);}
   for(const p of s.players)if(p.role==='keeper'&&p.id!==r.player){const pd=s.attackDir*(p.team===0?1:-1);put(p,-pd*(hx-c.ai.keeperInset),clamp(r.z*.15,-c.pitch.goalWidth/3,c.pitch.goalWidth/3),'restart-keeper');}
   if(r.type==='penalty'){
     // Rules v1: only the taker and the keeper stay in the area; both teams line the edge of the box.
@@ -167,6 +171,8 @@ export function createRestartLayout(r,s,c){
   }
   const rivals=s.players.filter(p=>p.team!==r.team&&p.role!=='keeper');
   rivals.sort((a,b)=>a.id-b.id);
+  // Full match: the markers are the rivals nearest to the set piece's spots (by id, a marker could come from the far end of 105 m).
+  if(Number.isInteger(take)){const near=p=>Math.min(Infinity,...mates.map(q=>distance(p,targets[q.id]||r)));rivals.sort((a,b)=>near(a)-near(b)||a.id-b.id);}
   const available=mates.slice(),space=r.type==='throwIn'?(c.restarts.opponentSpace||3.5):r.type==='corner'?3:r.type==='freeKick'?(c.rules.freeKickSpace||9.15):0;
   for(const p of rivals){
     let mark=null,cost=Infinity;
@@ -175,7 +181,7 @@ export function createRestartLayout(r,s,c){
       if(r.type==='goalKick')x=d*Math.max(x*d,-hx+c.pitch.penaltyDepth+2.2);
       const dx=x-r.x,dz=z-r.z,l=Math.hypot(dx,dz);if(space&&l<space){x=r.x+(l?dx/l:-d)*space;z=r.z+(l?dz/l:inward)*space;}
       put(p,x,z,'restart-mark');
-    }else put(p,r.x+d*Math.max(space,4+targets.filter(Boolean).length*.15),r.z*.3,'restart-zone');
+    }else if(!Number.isInteger(take))put(p,r.x+d*Math.max(space,4+targets.filter(Boolean).length*.15),r.z*.3,'restart-zone');
   }
   return targets;
 }
