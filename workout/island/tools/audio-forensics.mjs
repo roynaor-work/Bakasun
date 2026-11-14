@@ -186,7 +186,7 @@ for(const game of GAMES){
   const t0=Date.now(),mark=what=>log.timeline.push({at:+((Date.now()-t0)/1000).toFixed(1),what});
   try{
     const query=['dev=1',game==='streetSlam'?'hoopsAuto=1':'',EXTRA].filter(Boolean).join('&');
-    await page.goto(`${server.url}?${query}`,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island);
+    await page.goto(`${server.url}?${query}`,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island,null,{timeout:300000});
     await page.evaluate(typeId=>{const {engine:e}=window.__island;e.setAvatar({name:'בדיקה',created:true});e.skipTutorial();e.state.money=100000;e.state.learning.required=false;if(typeId&&!e.state.buildings.some(b=>b.typeId===typeId))e.state.buildings.push({id:'t-'+typeId,typeId,x:0,y:0,level:1});},BUILDING[game]||null);
     const seconds=game==='city'?CITY_SECONDS:SECONDS;
     if(game==='city'){
@@ -196,6 +196,8 @@ for(const game of GAMES){
       await page.evaluate(id=>window.__island.games.start(id,undefined,1),game);
       if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
       await page.waitForFunction(ready[game],null,{timeout:300000});mark('ready');
+      // racing-v24: the race intro card (racing-broadcast) holds the race until its button is pressed; without it the race stayed in its countdown
+      if(game==='islandRacing'){await page.evaluate(()=>{const intro=document.querySelector('.racing-intro');if(intro)intro.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));});mark('intro closed '+JSON.stringify(await page.evaluate(()=>{const s=window.__island.games.current?.session?.snapshot;return {phase:s?.phase,paused:s?.paused,intro:!!document.querySelector('.racing-intro')};})));}
       await page.evaluate(bots[game],game==='islandRacing'?STOPS:undefined);
       // Audio unlocks on a gesture in every session; tap the canvas and press a key.
       const canvas=page.locator('.minigame-canvas').first();await canvas.click({position:{x:60,y:60},force:true}).catch(()=>{});await page.keyboard.press('Shift');
@@ -205,7 +207,8 @@ for(const game of GAMES){
     while(Date.now()<until){
       await page.waitForTimeout(1000);
       if(game==='alpineRush')await page.evaluate(()=>window.__alpineKick?.()).catch(()=>{});
-      if(Date.now()-lastPull>5000){lastPull=Date.now();const d=await page.evaluate(()=>window.__audioForensics.drain());log.frames.push(...d.frames);}
+      if(Date.now()-lastPull>5000){lastPull=Date.now();const d=await page.evaluate(()=>window.__audioForensics.drain());log.frames.push(...d.frames);
+        if(game==='islandRacing')mark('race '+JSON.stringify(await page.evaluate(()=>{const s=window.__island.games.current?.session?.snapshot;return {phase:s?.phase,time:+(s?.time||0).toFixed(1),paused:s?.paused,hidden:document.hidden,frames:s?.renderMetrics?.frames,starting:document.querySelector('.game-screen')?.dataset.starting};})));}
     }
     const rest=await page.evaluate(()=>{const F=window.__audioForensics;return {frames:F.frames.splice(0),nodes:F.nodesSnapshot(),decoded:F.decoded,contexts:F.contexts.map(c=>({id:c.id,kind:c.kind,sampleRate:c.sampleRate,createdAt:c.createdAt,stack:c.stack,tapError:c.tapError})),fetches:F.fetches};});
     log.frames.push(...rest.frames);Object.assign(log,{nodes:rest.nodes,decoded:rest.decoded,contexts:rest.contexts,fetches:rest.fetches});mark('done');

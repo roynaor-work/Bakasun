@@ -188,3 +188,22 @@ test('session, view, effects and offline list carry v24',async()=>{
  for(const f of ['assets/racing-pit-v1/models/wheel_front_left.glb','assets/racing-pit-v1/audio/crew_cheer.ogg','assets/racing-pit-v1/icons/tire_wear_3.svg','assets/racing-formula-cars-v1/formula-lod0.glb','assets/racing-formula-cars-v1/formula-lod1.glb','assets/racing-formula-cars-v1/formula-lod2.glb','assets/racing-audio-v4/brake-loop-hard.ogg','assets/racing-audio-v4/car-bump-hard.mp3','assets/racing-audio-v4/side-scrape.ogg'])
   {assert.ok(m.games.racing.includes(f),f);await access(new URL(f,island));}
 });
+
+// the three v24 Codex packages, one by one: the offline racing group carries exactly these runtime files (racing-v7.test.mjs counts them as a block), each byte-identical
+// to the Codex original in design/, and the licence text travels with each package
+const V24_PACKS={
+ 'racing-audio-v4':{design:'design/racing-audio-v4/',files:['brake-loop-hard','brake-loop-light','brake-loop-medium','car-bump-hard','car-bump-soft','side-scrape'].flatMap(f=>[f+'.mp3',f+'.ogg']),licence:['LICENSE.txt','DEDICATION.txt']},
+ 'racing-formula-cars-v1':{design:'design/racing-formula-cars-v1/assets/',files:['formula-lod0.glb','formula-lod1.glb','formula-lod2.glb'],licence:['LICENSES.md'],licenceDesign:'design/racing-formula-cars-v1/'},
+ 'racing-pit-v1':{design:'design/racing-pit-v1/',files:[...['crew_cheer','engine_exit','jack','wheel_attach','wheel_drop','wheel_gun_loosen','wheel_gun_tighten'].flatMap(f=>['audio/'+f+'.mp3','audio/'+f+'.ogg']),
+  ...['pit_entry','tire_wear_0','tire_wear_1','tire_wear_2','tire_wear_3','wheel_change'].map(f=>'icons/'+f+'.svg'),
+  ...['jack_operator','light_controller','pit_light_exit','tire_stack','wheel_front_left','wheel_front_right','wheel_rear_left','wheel_rear_right'].map(f=>'models/'+f+'.glb')],licence:['LICENSES.md']}
+};
+test('offline: the v24 packages are listed one by one, each file byte-identical to its Codex original, with the licence',async()=>{
+ const m=JSON.parse(await read('offline-manifest.json')),listed=m.games.racing.filter(p=>/^assets\/(racing-audio-v4|racing-formula-cars-v1|racing-pit-v1)\//.test(p)).sort();
+ const expected=Object.entries(V24_PACKS).flatMap(([dir,p])=>p.files.map(f=>`assets/${dir}/${f}`)).sort();
+ assert.equal(expected.length,43);assert.deepEqual(listed,expected,'exactly the runtime files, no licence text and no review files');
+ for(const [dir,p] of Object.entries(V24_PACKS)){
+  for(const f of p.files)assert.ok((await readFile(new URL(`assets/${dir}/${f}`,island))).equals(await readFile(new URL(p.design+f,island))),`${dir}/${f} differs from ${p.design}${f}`);
+  for(const f of p.licence)assert.ok((await readFile(new URL(`assets/${dir}/${f}`,island))).equals(await readFile(new URL((p.licenceDesign||p.design)+f,island))),`${dir}/${f}`);
+ }
+});
