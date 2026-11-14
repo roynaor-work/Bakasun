@@ -29,6 +29,8 @@ const view=(name,search)=>hasPage(search)&&master(search)&&read(name,search)!=='
 export const soccerWhistleV1Enabled=search=>view('soccerWhistleV1',search);
 export const soccerTackleV2Enabled=search=>view('soccerTackleV2',search);
 export const soccerKicksV2Enabled=search=>view('soccerKicksV2',search);
+/** Codex soccer-locomotion-v2 for the standing and walking players (`?soccerLocoV2=0` = the v10 idles and the v9 walk). */
+export const soccerLocoV2Enabled=search=>view('soccerLocoV2',search);
 /** Engine rules: an explicit option wins (true/false or 'v241'/'v24'), then the page's flags (on unless switched off), and without a page
  * (node) off unless asked. */
 function engineRule(option,name,offValue,search){
@@ -44,12 +46,12 @@ export const soccerFoulsV241Enabled=(option,search)=>engineRule(option,'soccerFo
 export const soccerSlideRecoverV241Enabled=(option,search)=>engineRule(option,'soccerTackleV2','v24',search);
 /** One object for the engine: which v24.1 rules this match plays (options win over the page). */
 export function soccerV241Rules(options={},search){
-  const v=options===true||options===false?{air:options,fouls:options,recover:options}:options||{};
-  return {air:soccerAirChoiceEnabled(v.air,search),fouls:soccerFoulsV241Enabled(v.fouls,search),recover:soccerSlideRecoverV241Enabled(v.recover,search)};
+  const v=options===true||options===false?{air:options,fouls:options,recover:options,level:options}:options||{};
+  return {air:soccerAirChoiceEnabled(v.air,search),fouls:soccerFoulsV241Enabled(v.fouls,search),recover:soccerSlideRecoverV241Enabled(v.recover,search),level:soccerLevelV241Enabled(v.level,search)};
 }
 /** One line of every switch for the load report and the tests. */
 export function soccerV241Flags(search){
-  return {radar:soccerRadarEnabled(search),whistleV1:soccerWhistleV1Enabled(search),tackleV2:soccerTackleV2Enabled(search),kicksV2:soccerKicksV2Enabled(search),...soccerV241Rules({},search)};
+  return {radar:soccerRadarEnabled(search),whistleV1:soccerWhistleV1Enabled(search),tackleV2:soccerTackleV2Enabled(search),kicksV2:soccerKicksV2Enabled(search),locoV2:soccerLocoV2Enabled(search),...soccerV241Rules({},search)};
 }
 export const soccerV241Url=path=>new URL('../assets/soccer-v241/'+path,import.meta.url).href;
 
@@ -161,6 +163,22 @@ export const soccerFouledSeconds=(F=SOCCER_FOULS_V241)=>round(F.fallSeconds/F.fa
 /** The same deterministic roll the slide fouls use (tick, player, seed): the shared RNG sequence is never touched. */
 export function soccerFoulRoll(tick,id,seed,salt=0){return ((Math.imul((tick*197+id+salt*7919)^seed,2654435761)>>>0)%10000)/10000;}
 
+// ---- 2b. the rival's level (Roy after v24: "רמת המשחק צריכה לעלות / הסידור של המשחק והרמה של הקבוצה צריכה לעלות") --------------------
+/** Measured in the headless 11 v 11 (tools/soccer-gameplay-sim.mjs, human bot, stages 2/4/5): the rival kept the ball 3.1-3.7 s a spell with
+ * 0.9-1.5 passes, shot 0.25-1.25 times a match, and 72% of its spells ended in the child's standing tackle (tools/soccer-v241-sim.mjs
+ * spells): its carrier ran straight into the press and passed only when nobody was near. From `fromStage` the rival carrier now swerves away
+ * from a presser inside `evadeRange` and, pressed inside `escapeRange`, lays the ball off to a free team-mate (clear by `mateClearance`, a
+ * lane `laneClearance` wide) at `escapeRate` per second; both grow with the stage up to `maxStage`. The pass budget per spell is
+ * `buildPasses` (v24: 3) and the shooting corridor `shotCorridor` goals wide (v24 full: 1.7). Stage 1 (the first match) is unchanged. */
+export const SOCCER_LEVEL_V241=Object.freeze({fromStage:2,maxStage:7,evadeRange:3.4,evade:Object.freeze([.55,1]),evadeForward:4,escapeRange:2.8,escapeHold:.25,escapeRate:Object.freeze([1.6,5.5]),mateClearance:1.1,laneClearance:.35,maxBack:8,forwardWeight:.12,shootRange:Object.freeze([20,24]),buildPasses:6,shotCorridor:2.2});
+export const soccerLevelV241Enabled=(option,search)=>engineRule(option,'soccerLevel','v24',search);
+/** The stage's values (null below fromStage): linear from the first to the second number of each pair between fromStage and maxStage. */
+export function soccerLevelV241(stage,L=SOCCER_LEVEL_V241){
+  if(!(stage>=L.fromStage))return null;
+  const u=clamp((stage-L.fromStage)/Math.max(1,L.maxStage-L.fromStage),0,1),mix=([a,b])=>round(a+(b-a)*u);
+  return {evadeRange:L.evadeRange,evade:mix(L.evade),evadeForward:L.evadeForward,escapeRange:L.escapeRange,escapeHold:L.escapeHold,escapeRate:mix(L.escapeRate),mateClearance:L.mateClearance,laneClearance:L.laneClearance,maxBack:L.maxBack,forwardWeight:L.forwardWeight,shootRange:mix(L.shootRange)};
+}
+
 // ---- 3. slide recovery ----------------------------------------------------------------------------------------------------------------
 /** Full match: v24 added 0.5 s to every slide's get-up so the old fall-and-rise clip would not pop (soccer-full slideRecoverExtra). With the
  * Codex slide + quick get-up (1.6 s of clip, contact at 0.5) the get-up needs only `extra` (0.8 s recovery for a won slide, 0.25 s sooner on
@@ -170,7 +188,7 @@ export const SOCCER_SLIDE_V241=Object.freeze({extra:.2});
 // ---- 4. clips (Codex packs, assets/soccer-v241/clips/*.json, tools/soccer-v241-clips.mjs) ---------------------------------------------
 export const SOCCER_V241_PREFIX='v241_';
 /** The runtime files (every one carries only the clips the game plays). */
-export const SOCCER_V241_CLIP_FILES=Object.freeze({tackle:'clips/tackle.json',aerial:'clips/aerial.json',kicks:'clips/kicks.json'});
+export const SOCCER_V241_CLIP_FILES=Object.freeze({tackle:'clips/tackle.json',aerial:'clips/aerial.json',kicks:'clips/kicks.json',loco:'clips/loco.json'});
 /** Slide: Codex slide_tackle (contact 0.5, on the side 0.8) + getup_fast (0.6 s) joined at their matching pose: one 1.6 s timeline. */
 export const SOCCER_V241_SLIDE=Object.freeze({clip:'v241_slide',contact:.5,end:1.6,lead:.06});
 /** Time on the slide timeline: the slide clock runs to the contact, the recovery clock the rest (fall, side, quick get-up). */
@@ -219,8 +237,13 @@ export function soccerV241KickClip({event:e,player:p,ball,attackDir=1,pitch,spee
   }
   return null;
 }
+/** Locomotion-v2 (Codex, QA 99.9-100 for the idles, 91.8 the walk): the arms hang 5-6 cm outside the shoulder line and open 4.7-7 degrees,
+ * where the shipped v10 idles open 12-14 degrees (hands 9.5-10 cm out) and the v9 walk 15 degrees (athletes-core gaitMetrics, measured).
+ * The walk replaces the ladder's first rung at the same 1 m/s and foot phase (left strike at 0, right at half the cycle). Its jog, run and
+ * sprint are not used: cycles of 1.65 / 2.2 / 3.2 m/s where the game runs 2.6 / 4.5 / 7.2 m/s (the legs would race or the feet skate). */
+export const SOCCER_V241_IDLES=Object.freeze(['v241_idle_relaxed','v241_idle_scan','v241_idle_weight_shift']),SOCCER_V241_WALK='v241_walk';
 /** One-shot clips the state machine plays through their contact; a player who sets off again leaves them `follow` after it. */
-export const soccerV241Held=state=>typeof state==='string'&&state.startsWith(SOCCER_V241_PREFIX)&&!state.startsWith(SOCCER_V241_PREFIX+'keeper_dive')&&state!==SOCCER_V241_SLIDE.clip&&state!==SOCCER_V241_FALL.clip;
+export const soccerV241Held=state=>typeof state==='string'&&state.startsWith(SOCCER_V241_PREFIX)&&!state.startsWith(SOCCER_V241_PREFIX+'keeper_dive')&&state!==SOCCER_V241_SLIDE.clip&&state!==SOCCER_V241_FALL.clip&&!SOCCER_V241_IDLES.includes(state)&&state!==SOCCER_V241_WALK;
 /** Validate and prefix one runtime file (schema 1, states with keyframes, the 18 canonical bones). */
 export function soccerV241ClipStates(json,expected=[]){
   if(!json||json.schemaVersion!==1||!json.states)throw Error('Soccer v24.1 clips: unexpected file');
@@ -231,6 +254,7 @@ export const SOCCER_V241_EXPECTED=Object.freeze({
   tackle:Object.freeze(['slide','stumble','fall_foul','keeper_dive_low_left','keeper_dive_low_right','keeper_dive_mid_left','keeper_dive_mid_right','keeper_dive_high_left','keeper_dive_high_right']),
   aerial:Object.freeze(['volley_right','volley_left','scissor']),
   kicks:Object.freeze(['power_landing','inside_curve','outside_kick','placed_kick','weak_foot','chip','running_kick','short_inside_pass','long_pass','through_pass','lift_pass','wing_cross']),
+  loco:Object.freeze(['idle_relaxed','idle_weight_shift','idle_scan','walk','strafe_left','strafe_right','run_backward']),
 });
 
 // ---- 5. whistles (Codex soccer-whistle-crowd-v1) -------------------------------------------------------------------------------------

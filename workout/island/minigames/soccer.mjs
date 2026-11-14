@@ -20,7 +20,7 @@ import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideR
 import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-14';
 import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-14';
 // v24.1 (soccer-r241.mjs): fouls on standing tackles and the carrier's fall or stumble, volley / header / scissor on a high ball, the shorter slide get-up.
-import {soccerV241Rules,soccerAirOptions,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-14';
+import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-14';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -65,6 +65,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   const airV23=soccerAirVersion(airVersion)==='v23';
   // v24.1 (soccer-r241.mjs): in a page on unless `?soccerV241=0` / its own flag; in node off unless asked (every v24 contract stays v24).
   const v241=soccerV241Rules(v241Option),airChoice=v241.air&&airV23,fouls241=v241.fouls&&rulesV1;
+  // v24.1 level (full match only; the small match `?soccerFull=0` stays v24): a rival that builds and escapes the press (soccerLevelV241).
+  const level241=v241.level&&Boolean(config.full)?soccerLevelV241(stage):null;
+  if(v241.level&&config.full)config={...config,ai:{...config.ai,rivalBuildPasses:SOCCER_LEVEL_V241.buildPasses,shotCorridor:SOCCER_LEVEL_V241.shotCorridor}};
   if(config.squad&&!config.tactics.designController)config={...config,tactics:{...config.tactics,designController:compileSoccerTactics(SOCCER_TACTICS_DATA,config)}};
   const attack=config.ai.attack[difficulty];
   // Rival build-up and pass-lane safety were measured from stage 2 up; the tutorial stage keeps the original rival.
@@ -124,6 +127,19 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   }
   function passTarget(p) {
     return selectTeamPass(p,s,config)||nearest(p.team,p,p.id);
+  }
+  /** v24.1 level: the free team-mate a pressed rival carrier lays the ball off to (clear of markers, an open lane, forward preferred). */
+  function escapeMate(p,L){
+    const d=direction(p.team),laneConfig={...config,ai:{...config.ai,passLaneClearance:L.laneClearance}},max=config.passing.maxDistance,presser=nearest(1-p.team,p);let best=null,score=-Infinity;
+    const px=presser.x-p.x,pz=presser.z-p.z,pl=Math.hypot(px,pz)||1;
+    for(const q of players){
+      if(q.team!==p.team||q.id===p.id||q.role==='keeper'||q.recover>0)continue;
+      const range=distance(q,p),clear=distance(nearest(1-p.team,q),q);
+      // never through the presser: the lay-off goes at least 60 degrees away from him
+      const ahead=(q.x-p.x)*d,away=((q.x-p.x)*px+(q.z-p.z)*pz)/(Math.max(1e-6,range)*pl);if(range<4||range>max||ahead<-L.maxBack||away>.5||clear<L.mateClearance||!aiPassLaneOpen(p,q,players,s.ball,laneConfig))continue;
+      const value=clear*.5-range*.03+ahead*L.forwardWeight;if(value>score){score=value;best=q;}
+    }
+    return best;
   }
   function kick(p,power=0,pass=false,forceLoft=false,release=false,toward=null) {
     if(s.ball.owner!==p.id)return;
@@ -316,6 +332,13 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
       if(Number.isFinite(aiConfig.wingWidth)&&p.role==='wing'&&p.id!==s.controlled&&(p.team===0||stage>=(aiConfig.crossFromStage??Infinity))){const side=Math.sign(p.z)||(p.id%2?1:-1);tz=side*Math.min(hz-config.tactics.sideInset,aiConfig.wingWidth);}
       const blocker=nearest(1-p.team,p);
       if(p.team===0&&distance(blocker,p)<aiConfig.passPressure)tz=clamp(p.z+(p.id%2?1:-1)*config.tactics.evadeWidth,-hz+config.tactics.sideInset,hz-config.tactics.sideInset);
+      // v24.1 level: the rival carrier swerves away from the presser and, pressed, lays the ball off to a free team-mate before the tackle lands
+      // (deterministic per-tick roll at escapeRate; the shared RNG sequence is untouched).
+      if(level241&&p.team===1&&p.role!=='keeper'){
+        const gap=distance(blocker,p);
+        if(gap<level241.evadeRange){const side=Math.sign(p.z-blocker.z)||(p.id%2?1:-1);tz=clamp(p.z+side*config.tactics.evadeWidth*level241.evade,-hz+config.tactics.sideInset,hz-config.tactics.sideInset);tx=clamp(p.x+d*level241.evadeForward,-hx+1,hx-1);}
+        if(gap<level241.escapeRange&&p.hold>level241.escapeHold&&p.cooldown<=0&&soccerFoulRoll(tickCount,p.id,seed,3)<1-Math.exp(-level241.escapeRate*dt)){const mate=escapeMate(p,level241);if(mate){kick(p,0,true,false,false,mate);p.think=Math.min(opponent.thinkSeconds,attack.thinkSeconds);return;}}
+      }
       if(p.team===0&&role==='keeper'&&distance(blocker,p)<aiConfig.passPressure*1.3){
         const side=Math.sign(p.z-blocker.z)||(p.z?-Math.sign(p.z):p.id%2?1:-1);
         tx=p.x+d*3.5;tz=clamp(p.z+side*config.tactics.evadeWidth,-hz+config.tactics.sideInset,hz-config.tactics.sideInset);
@@ -332,7 +355,10 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
           // A shooting lane wins over recycling possession under pressure.
           // Outside that lane, pass only after a real dribble or to escape a press.
           const range=hx-p.x*d;
-          if(p.role==='keeper'||(canPass&&rivalPasses<rivalPassBudget(aiConfig,rivalV2)&&range>config.ai.attackCombinationDistance&&p.hold>attack.passHold))kick(p,0,true);
+          // v24.1 level: inside the shooting zone with a lane to goal the rival shoots before he recycles the ball (with the longer pass budget
+          // he otherwise kept passing from 14-24 m and stopped shooting at all: 0 shots a match in the simulation).
+          if(level241&&p.role!=='keeper'&&p.cooldown<=0&&s.elapsed>=nextRivalShot&&range<level241.shootRange&&Math.abs(p.z)<(config.pitch.play||config.pitch).goalWidth*(aiConfig.shotCorridor??1)&&p.hold>attack.shotHold){kick(p,aiConfig.opponentShotPower+stage*aiConfig.opponentPowerPerStage);nextRivalShot=s.elapsed+attack.shotIntervalSeconds;}
+          else if(p.role==='keeper'||(canPass&&rivalPasses<rivalPassBudget(aiConfig,rivalV2)&&range>config.ai.attackCombinationDistance&&p.hold>attack.passHold))kick(p,0,true);
           else if(p.cooldown<=0&&s.elapsed>=nextRivalShot&&range<attack.shootDistance&&Math.abs(p.z)<(config.pitch.play||config.pitch).goalWidth*(aiConfig.shotCorridor??1)&&p.hold>(rivalPasses?attack.shotHold:Math.max(attack.shotHold,attack.passHold))){kick(p,aiConfig.opponentShotPower+stage*aiConfig.opponentPowerPerStage);nextRivalShot=s.elapsed+attack.shotIntervalSeconds;}
           else if(canPass&&p.hold>attack.passHold&&((teammate.x-p.x)*d>aiConfig.passAheadMargin&&pressure<aiConfig.passPressure||p.hold>attack.buildSeconds))kick(p,0,true);
         }else if(role==='keeper'){

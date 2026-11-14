@@ -17,7 +17,7 @@ import {fileURLToPath} from 'node:url';
 import {SOCCER_V241_EXPECTED,SOCCER_WHISTLE_V1} from '../minigames/soccer-r241.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),args=process.argv.slice(2);
 const design=path.resolve(args.includes('--design')?args[args.indexOf('--design')+1]:path.join(here,'../design')),out=path.join(here,'../assets/soccer-v241');
-const COMMITS={'soccer-tackle-keeper-v2':'1bd4ccb5d53a8ff21bb03930ad3b26e7c4815e17','soccer-volley-scissor-v1':'8277a659f43315036eed250bda2f53f44f8613bb','soccer-kicks-v2':'d4a27a94dd63127dd9f38fc641db414bd09bac35','soccer-whistle-crowd-v1':'9478aa43b018d9aa2690a0f493006a3e52216af1'};
+const COMMITS={'soccer-locomotion-v2':'ec6c73949fb5820826b4c082972f5d4f1136641f','soccer-tackle-keeper-v2':'1bd4ccb5d53a8ff21bb03930ad3b26e7c4815e17','soccer-volley-scissor-v1':'8277a659f43315036eed250bda2f53f44f8613bb','soccer-kicks-v2':'d4a27a94dd63127dd9f38fc641db414bd09bac35','soccer-whistle-crowd-v1':'9478aa43b018d9aa2690a0f493006a3e52216af1'};
 const round=(v,n=5)=>Math.round(v*10**n)/10**n,REST_HIPS=[0,.86,0],FPS=30;
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const ang=(a,b)=>2*Math.acos(Math.min(1,Math.abs(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3])))*180/Math.PI;
@@ -46,7 +46,7 @@ function join(parts,{id,category,from=0}){
   return {clip:id,group:'action',category,durationSeconds:duration,loop:false,maxKeyDeg:round(maxKeyDeg,1),timeScale:1,parts:parts.map(p=>({id:p.id,durationSeconds:round(durationOf(p),4)})),events:events.sort((a,b)=>a.timeSeconds-b.timeSeconds),
     ballContacts:contact?[{time:round(contact.time/duration,6),atSeconds:round(contact.time,4),event:'visual_contact',kind:contact.type,bone:contact.bone}]:[],standSeconds:duration,keyframes};
 }
-const states={tackle:{},aerial:{},kicks:{}};
+const states={tackle:{},aerial:{},kicks:{},loco:{}};
 // ---- tackle-keeper-v2 ----
 {const m=JSON.parse(await readPack('soccer-tackle-keeper-v2','runtime/motions.json'));await readPack('soccer-tackle-keeper-v2','runtime/catalog.json');
  const by=id=>{const c=m.clips.find(x=>x.id===id);if(!c)throw Error('tackle-keeper-v2 lacks '+id);return c;};
@@ -61,6 +61,10 @@ const states={tackle:{},aerial:{},kicks:{}};
  states.aerial.volley_right=join([by('volley_right')],{id:'volley_right',category:'aerial'});
  states.aerial.volley_left=join([by('volley_left')],{id:'volley_left',category:'aerial'});
  states.aerial.scissor=join([by('scissor_backward'),by('scissor_land_getup')],{id:'scissor',category:'aerial'});}
+// ---- locomotion-v2 (only the clips authored near the game's own speeds: the three idles, the walk, the side steps and the run backwards;
+// its jog, run and sprint are cycles of 1.65 / 2.2 / 3.2 m/s where the game runs 2.6 / 4.5 / 7.2+ m/s) ----
+{const m=JSON.parse(await readPack('soccer-locomotion-v2','runtime/motions.json'));await readPack('soccer-locomotion-v2','runtime/catalog.json');
+ for(const id of SOCCER_V241_EXPECTED.loco){const c=m.clips.find(x=>x.id===id);if(!c)throw Error('locomotion-v2 lacks '+id);const st=join([c],{id,category:c.category||'locomotion'});st.loop=Boolean(c.loop);st.speedMps=c.speedMps??0;st.group=c.loop?'locomotion':'action';states.loco[id]=st;}}
 // ---- kicks-v2 ----
 {const m=JSON.parse(await readPack('soccer-kicks-v2','runtime/motions.json'));await readPack('soccer-kicks-v2','runtime/catalog.json');
  for(const id of SOCCER_V241_EXPECTED.kicks){const c=m.clips.find(x=>x.id===id);if(!c)throw Error('kicks-v2 lacks '+id);const contact=(c.events||[]).find(e=>(e.type??e.event)==='contact');
@@ -68,12 +72,12 @@ const states={tackle:{},aerial:{},kicks:{}};
   states.kicks[id]=join([c],{id,category:c.category||'kick',from:Math.max(0,Math.floor((eventTime(contact)-.4)*FPS)/FPS)});}}
 for(const [file,expected] of Object.entries(SOCCER_V241_EXPECTED))for(const id of expected)if(!states[file][id])throw Error(`missing ${file}/${id}`);
 await mkdir(path.join(out,'clips'),{recursive:true});await mkdir(path.join(out,'audio'),{recursive:true});
-const sources={tackle:'design/soccer-tackle-keeper-v2 (Codex, CC0)',aerial:'design/soccer-volley-scissor-v1 (Codex, CC0)',kicks:'design/soccer-kicks-v2 (Codex, CC0)'};
+const sources={loco:'design/soccer-locomotion-v2 (Codex, CC0)',tackle:'design/soccer-tackle-keeper-v2 (Codex, CC0)',aerial:'design/soccer-volley-scissor-v1 (Codex, CC0)',kicks:'design/soccer-kicks-v2 (Codex, CC0)'};
 for(const [file,s] of Object.entries(states))await writeFile(path.join(out,'clips',file+'.json'),JSON.stringify({schemaVersion:1,source:sources[file]+', joined at matching poses where the pack chains a recovery',fps:FPS,states:s}));
 // ---- whistles ----
 for(const {file} of Object.values(SOCCER_WHISTLE_V1)){await readPack('soccer-whistle-crowd-v1',file);await copyFile(path.join(design,'soccer-whistle-crowd-v1',file),path.join(out,'audio',file));}
 // ---- licences ----
-const licences=[];for(const [pack,name] of [['soccer-tackle-keeper-v2','LICENSES.md'],['soccer-volley-scissor-v1','LICENSES.md'],['soccer-kicks-v2','LICENSES.md'],['soccer-whistle-crowd-v1','LICENSE.txt']])licences.push(`## ${pack} (codex/${pack} ${COMMITS[pack]})\n\n`+(await readPack(pack,name)).toString('utf8').trim());
+const licences=[];for(const [pack,name] of [['soccer-locomotion-v2','LICENSES.md'],['soccer-tackle-keeper-v2','LICENSES.md'],['soccer-volley-scissor-v1','LICENSES.md'],['soccer-kicks-v2','LICENSES.md'],['soccer-whistle-crowd-v1','LICENSE.txt']])licences.push(`## ${pack} (codex/${pack} ${COMMITS[pack]})\n\n`+(await readPack(pack,name)).toString('utf8').trim());
 await writeFile(path.join(out,'LICENSES.md'),`# soccer v24.1 runtime copies\n\nConverted from the Codex packs below by tools/soccer-v241-clips.mjs (keyframes only; no mesh, texture or GLB is shipped). Each pack's own licence follows.\n\n${licences.join('\n\n')}\n`);
 await writeFile(path.join(out,'provenance.json'),JSON.stringify({tool:'workout/island/tools/soccer-v241-clips.mjs',inputs:provenance},null,1));
 for(const [file,s] of Object.entries(states))for(const [id,st] of Object.entries(s))console.log(file.padEnd(7),id.padEnd(22),String(st.durationSeconds).padEnd(6)+'s',String(st.keyframes.length).padEnd(4)+'k',String(st.maxKeyDeg).padEnd(6)+'deg/key',st.events.map(e=>e.name.slice(7)+'@'+e.timeSeconds).join(' '));

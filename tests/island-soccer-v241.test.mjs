@@ -9,7 +9,7 @@ import {expandSoccerConfig} from '../workout/island/minigames/soccer-squad.mjs';
 import {applySoccerFull} from '../workout/island/minigames/soccer-full.mjs';
 import {applySoccerPitchV23,applySoccerControlV23} from '../workout/island/minigames/soccer-v23.mjs';
 import {playerAnimation} from '../workout/island/minigames/soccer-presentation.mjs';
-import {soccerRadarEnabled,soccerAirChoiceEnabled,soccerFoulsV241Enabled,soccerSlideRecoverV241Enabled,soccerWhistleV1Enabled,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerV241Rules,soccerV241Flags,
+import {soccerLevelV241Enabled,soccerLevelV241,SOCCER_LEVEL_V241,soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerRadarEnabled,soccerAirChoiceEnabled,soccerFoulsV241Enabled,soccerSlideRecoverV241Enabled,soccerWhistleV1Enabled,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerV241Rules,soccerV241Flags,
   SOCCER_AIR_V241,soccerAirChoice,soccerAirOptions,soccerAirMeet,soccerAirContact,soccerAirAim,soccerVolleyFoot,soccerStandingFoul,SOCCER_FOULS_V241,soccerFouledSeconds,soccerFoulRoll,
   SOCCER_SLIDE_V241,SOCCER_V241_SLIDE,soccerV241SlideTime,soccerV241DiveClip,soccerV241KickClip,soccerV241Held,soccerV241ClipStates,SOCCER_V241_EXPECTED,SOCCER_V241_CLIP_FILES,soccerWhistleCue,SOCCER_WHISTLE_V1,SOCCER_V241_TAG} from '../workout/island/minigames/soccer-r241.mjs';
 import {soccerV241WhistleAssets} from '../workout/island/minigames/soccer-design-audio.mjs';
@@ -21,15 +21,15 @@ const withLocation=(search,fn)=>{const had=Object.getOwnPropertyDescriptor(globa
 const asset=path=>new URL('../workout/island/assets/soccer-v241/'+path,import.meta.url);
 
 test('switches: on a page every v24.1 change is on, its own flag or ?soccerV241=0 gives back v24, node keeps v24 unless asked',()=>{
-  withLocation('',()=>{assert.deepEqual(soccerV241Flags(),{radar:false,whistleV1:true,tackleV2:true,kicksV2:true,air:true,fouls:true,recover:true});});
-  withLocation('?soccerV241=0',()=>assert.deepEqual(soccerV241Flags(),{radar:true,whistleV1:false,tackleV2:false,kicksV2:false,air:false,fouls:false,recover:false}));
+  withLocation('',()=>{assert.deepEqual(soccerV241Flags(),{radar:false,whistleV1:true,tackleV2:true,kicksV2:true,locoV2:true,air:true,fouls:true,recover:true,level:true});});
+  withLocation('?soccerV241=0',()=>assert.deepEqual(soccerV241Flags(),{radar:true,whistleV1:false,tackleV2:false,kicksV2:false,locoV2:false,air:false,fouls:false,recover:false,level:false}));
   withLocation('?soccerRadar=1',()=>{assert.equal(soccerRadarEnabled(),true);assert.equal(soccerAirChoiceEnabled(),true,'flags are independent');});
-  for(const [fn,q] of [[soccerAirChoiceEnabled,'?soccerAirChoice=0'],[soccerFoulsV241Enabled,'?soccerFouls=v24'],[soccerSlideRecoverV241Enabled,'?soccerTackleV2=0']])withLocation(q,()=>assert.equal(fn(),false,q));
-  for(const [fn,q] of [[soccerWhistleV1Enabled,'?soccerWhistleV1=0'],[soccerTackleV2Enabled,'?soccerTackleV2=0'],[soccerKicksV2Enabled,'?soccerKicksV2=0']])withLocation(q,()=>assert.equal(fn(),false,q));
+  for(const [fn,q] of [[soccerAirChoiceEnabled,'?soccerAirChoice=0'],[soccerFoulsV241Enabled,'?soccerFouls=v24'],[soccerSlideRecoverV241Enabled,'?soccerTackleV2=0'],[soccerLevelV241Enabled,'?soccerLevel=v24']])withLocation(q,()=>assert.equal(fn(),false,q));
+  for(const [fn,q] of [[soccerWhistleV1Enabled,'?soccerWhistleV1=0'],[soccerTackleV2Enabled,'?soccerTackleV2=0'],[soccerKicksV2Enabled,'?soccerKicksV2=0'],[soccerLocoV2Enabled,'?soccerLocoV2=0']])withLocation(q,()=>assert.equal(fn(),false,q));
   // node (no location): the v24 contracts stay as written
-  assert.deepEqual(soccerV241Rules(),{air:false,fouls:false,recover:false});assert.equal(soccerRadarEnabled(),false);assert.equal(soccerWhistleV1Enabled(),false);
-  assert.deepEqual(soccerV241Rules(true),{air:true,fouls:true,recover:true});assert.deepEqual(soccerV241Rules({air:true}),{air:true,fouls:false,recover:false});
-  withLocation('',()=>assert.deepEqual(soccerV241Rules(false),{air:false,fouls:false,recover:false},'an option wins over the page'));
+  assert.deepEqual(soccerV241Rules(),{air:false,fouls:false,recover:false,level:false});assert.equal(soccerRadarEnabled(),false);assert.equal(soccerWhistleV1Enabled(),false);
+  assert.deepEqual(soccerV241Rules(true),{air:true,fouls:true,recover:true,level:true});assert.deepEqual(soccerV241Rules({air:true}),{air:true,fouls:false,recover:false,level:false});
+  withLocation('',()=>assert.deepEqual(soccerV241Rules(false),{air:false,fouls:false,recover:false,level:false},'an option wins over the page'));
   assert.equal(SOCCER_V241_TAG,JSON.parse(readFileSync(new URL('../workout/island/release.json',import.meta.url),'utf8')).version,'new imports carry the current release tag');
 });
 
@@ -169,6 +169,22 @@ test('fouls: over whole simulated matches the rival is whistled for tackles too 
   assert.ok(rival>rival24,`rival fouls v24.1 ${rival} vs v24 ${rival24}`);assert.ok(fallen>0&&fallen<=fouls,`${fallen} fallen for ${fouls} fouls (a penalty or a keeper never falls)`);
 });
 
+test('level: the rival builds and escapes the press from stage 2 (v24 below; the small match never), stronger with the stage',()=>{
+  assert.equal(soccerLevelV241(1),null,'the first match is unchanged');
+  const a=soccerLevelV241(2),b=soccerLevelV241(SOCCER_LEVEL_V241.maxStage),c=soccerLevelV241(30);
+  assert.ok(a.escapeRate<b.escapeRate&&a.evade<b.evade);assert.deepEqual(b,c,'capped at maxStage');
+  // config: the full match plays with the longer pass budget and the wider shooting corridor; the small match and v24 keep theirs
+  const g=createSoccer({config:full(true),seed:3,stage:4,v241:{level:true}});assert.ok(g);
+});
+test('level: over simulated full matches the rival passes about twice as often and keeps the ball longer (v24 rival: 1 pass a spell)',async()=>{
+  const {playMatch}=await import('../workout/island/tools/soccer-gameplay-metrics.mjs');
+  const run=v241=>{let passes=0,spells=0,possession=0;for(const seed of [1000,1001,1002,1003]){const r=playMatch({config:base,seed,stage:5,full:'442',pitch:'v23',control:'v23',airVersion:'v23',switchVersion:'v23',maxSeconds:200,...(v241?{v241:'level'}:{})});passes+=r.team[1].passes;spells+=r.team[1].spells;possession+=r.team[0].possession;}return {passes:passes/4,perSpell:passes/Math.max(1,spells),possession:possession/4};};
+  const before=run(false),after=run(true);
+  assert.ok(after.passes>before.passes*1.4,`rival passes ${before.passes} -> ${after.passes}`);
+  assert.ok(after.perSpell>before.perSpell*1.4,`passes a spell ${before.perSpell.toFixed(2)} -> ${after.perSpell.toFixed(2)}`);
+  assert.ok(after.possession<before.possession,`home possession ${before.possession} -> ${after.possession}`);
+});
+
 test('slide: the full match gets up 0.3 s sooner with the quick get-up clip (recovery 0.8 s, v24: 1.1 s); the small match untouched',()=>{
   const a=applySoccerFull(base,{v241:true}),b=applySoccerFull(base,{v241:false});
   assert.equal(a.slide.recoverSeconds,+(base.slide.recoverSeconds+SOCCER_SLIDE_V241.extra).toFixed(3));assert.equal(b.slide.recoverSeconds,+(base.slide.recoverSeconds+.5).toFixed(3));
@@ -215,6 +231,16 @@ test('clips: which clip for the situation (dives by height, kicks by event, held
   const shots=new Set();for(let id=0;id<20;id++)for(const z of [0,20])shots.add(soccerV241KickClip({event:{type:'shot',player:4,power:.4,id},player:p,ball:{x:38,z},pitch,keeper:{x:52}},has));
   assert.ok(shots.size>=3,'variety in the finishes: '+[...shots].join());
   assert.equal(soccerV241Held('v241_volley_right'),true);assert.equal(soccerV241Held('v241_slide'),false);assert.equal(soccerV241Held('v241_keeper_dive_low_left'),false);assert.equal(soccerV241Held('v9_run'),false);
+});
+
+test('locomotion-v2: the standing and walking arms hang closer to the body than the shipped v10 idles and v9 walk, at the same walk speed',async()=>{
+  const C=await import('../workout/island/minigames/athletes-core.mjs');
+  const states=f=>JSON.parse(readFileSync(new URL('../workout/island/assets/'+f,import.meta.url),'utf8')).states,loco=states('soccer-v241/clips/loco.json'),v10=states('soccer-v10/clips.json'),v9=states('soccer-v9/clips.json');
+  const stand=st=>{const clip=C.normaliseSoccerClip('x',st);let abd=0,out=0;for(let i=0;i<40;i++){const m=C.poseMeasures(C.sampleCanonical(clip,i/40*clip.dur));abd=Math.max(abd,m.LeftAbd,m.RightAbd);out=Math.max(out,m.LeftHandOut,m.RightHandOut);}return {abd,out};};
+  for(const id of ['idle_relaxed','idle_scan','idle_weight_shift']){const a=stand(loco[id]),b=stand(v10[id]);assert.ok(a.abd<b.abd-4&&a.out<b.out-.02,`${id}: ${a.abd.toFixed(1)} deg / ${(a.out*100).toFixed(1)} cm vs v10 ${b.abd.toFixed(1)} / ${(b.out*100).toFixed(1)}`);assert.deepEqual(C.checkStand({armAbdMax:a.abd}),[]);}
+  const walk=C.gaitMetrics(C.normaliseSoccerClip('walk',loco.walk)),old=C.gaitMetrics(C.normaliseSoccerClip('v9_walk',v9.walk));
+  assert.ok(walk.armAbdMax<old.armAbdMax&&walk.handOutMax<old.handOutMax,'narrower walking arms');assert.deepEqual(C.checkGait(walk,'walk'),[],'meets the athlete standard');
+  assert.ok(Math.abs(loco.walk.speedMps-1)<.06,'authored at the 1 m/s of the rung it replaces');assert.equal(SOCCER_V241_WALK,'v241_walk');assert.equal(SOCCER_V241_IDLES.length,3);
 });
 
 test('whistles: the referee blows a short blast for a standing-tackle foul, a sharp one for a slide or a penalty, two and three at half and full time',()=>{

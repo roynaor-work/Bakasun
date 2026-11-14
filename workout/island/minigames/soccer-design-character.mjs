@@ -22,7 +22,7 @@ import {GLTFLoader} from '../vendor/GLTFLoader.js';
 // v24 (13/11): Codex body v2 (?athleteBodyV2=0), clips v13 (?soccerClipsV13=0)
 import {athleteBodyV2Enabled,soccerClipsV13Enabled,soccerV24ClipsUrl,soccerV24ClipStates,soccerV24RestartClip,SOCCER_V24_SLIDE,soccerV24SlideTime,soccerV24LobClip,soccerV24ChestClip,SOCCER_V24_CHEST,SOCCER_V24_HELD,soccerV24Held} from './soccer-v24.mjs?v=island-v2-20261107-14';
 // v24.1 (14/11): Codex tackle-keeper-v2 (?soccerTackleV2=0), volley-scissor-v1 (?soccerAirChoice=0), kicks-v2 (?soccerKicksV2=0); `?soccerV241=0` = all off
-import {soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-14';
+import {soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerAirChoiceEnabled,soccerV241Url,soccerV241ClipStates,SOCCER_V241_CLIP_FILES,SOCCER_V241_EXPECTED,SOCCER_V241_SLIDE,soccerV241SlideTime,SOCCER_V241_FALL,SOCCER_V241_STUMBLE,soccerV241DiveClip,SOCCER_V241_AIR_CLIPS,soccerVolleyFoot,soccerV241KickClip,SOCCER_V241_KICK,soccerV241Held} from './soccer-r241.mjs?v=island-v2-20261107-14';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrap=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -200,8 +200,11 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
   }));
   // Codex v9: walk and jog replace the slowed-down runs of the v7 ladder when the library loaded.
   const codexRuns=Boolean(actions.v9_walk&&actions.v9_jog&&actions.v9_run&&actions.v9_sprint)&&soccerCodexRunEnabled(config),codex=codexRuns||Boolean(actions.v9_walk&&actions.v9_jog&&actions.run_4&&actions.run_5&&actions.sprint);
-  const v10=codexRuns&&Boolean(actions.v10_run&&actions.v10_idle_relaxed),idles=v10?SOCCER_V10_IDLES:SOCCER_CODEX_IDLES,idleHome=v10?'v10_idle_relaxed':'v9_idle_relaxed';
-  const ladderDef=codexRuns?soccerRunLadder(v10):codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER,ladderBounds=codexRuns?SOCCER_CODEX_RUN_BOUNDS:codex?SOCCER_CODEX_BOUNDS:null;
+  const v10=codexRuns&&Boolean(actions.v10_run&&actions.v10_idle_relaxed);
+  // v24.1 (`?soccerLocoV2=0`): Codex locomotion-v2 idles and walk (natural arms) in place of the v10 idles and the v9 walk, same speeds.
+  const loco241=codexRuns&&soccerLocoV2Enabled()&&SOCCER_V241_IDLES.every(n=>actions[n])&&Boolean(actions[SOCCER_V241_WALK]);
+  const idles=loco241?SOCCER_V241_IDLES:v10?SOCCER_V10_IDLES:SOCCER_CODEX_IDLES,idleHome=loco241?SOCCER_V241_IDLES[0]:v10?'v10_idle_relaxed':'v9_idle_relaxed';
+  const ladderDef=codexRuns?(loco241?Object.freeze(soccerRunLadder(v10).map(([name,speed])=>[name==='v9_walk'?SOCCER_V241_WALK:name,speed])):soccerRunLadder(v10)):codex?SOCCER_CODEX_LADDER:SOCCER_V7_LADDER,ladderBounds=codexRuns?SOCCER_CODEX_RUN_BOUNDS:codex?SOCCER_CODEX_BOUNDS:null;
   const ladder=ladderDef.map(([name])=>name),hasLadder=Boolean(actions.sprint&&actions.run_3)||codex,isLadder=name=>ladder.includes(name);
   // Codex header clips (v22, see soccer-headers.mjs): present only when the pack loaded and `?soccerHeaders` is not 0.
   const headersOn=soccerHeadersEnabled(config)&&Boolean(actions.v22_header_stand_goal&&actions.v22_header_jump_goal);
@@ -504,7 +507,7 @@ export function createSoccerDesignMotion(mixer,clips,data,config) {
       if(dive&&state===dive.name)actions[state].setEffectiveTimeScale(actions[state].time>=dive.contact?dive.settleRate:dive.rate);
       else if(dive&&state!==dive.name)dive=null;
       if(['run','dribble_run','defensive_jockey'].includes(state))actions[state].setEffectiveTimeScale(clamp(speed/(config.view.animation.runSpeed||4.5),.55,1.7));
-      else if(isLadder(state))actions[state].setEffectiveTimeScale(clamp(speed/ladderDef[ladder.indexOf(state)][1],state==='v9_walk'?.6:.5,state==='v9_walk'?1.6:1.4));
+      else if(isLadder(state)){const walk=state==='v9_walk'||state===SOCCER_V241_WALK;actions[state].setEffectiveTimeScale(clamp(speed/ladderDef[ladder.indexOf(state)][1],walk?.6:.5,walk?1.6:1.4));}
       if(codex&&p.role!=='keeper'&&idles.includes(state)&&!moving){idleAge+=dt;if(idleAge>=soccerCodexIdleHold(p.id||0)){idleAge=0;change(idles[(idles.indexOf(state)+1)%idles.length],'idle_variety',true,{fadeSeconds:.35});}}else idleAge=0;
       previousMode=mode;previousSpeed=speed;previousYaw=yaw;kickTimer=p.kickTime||0;stealTimer=p.stealTime||0;headerTimer=p.headerTime||0;touchTimer=p.receiveTime||0;
       // An armed touch is spent by the arrival (or by any other clip taking over); the next pass arms again.
@@ -654,7 +657,7 @@ async function loadMotionPacks(){
   if(soccerClipsV13Enabled()){try{v24=soccerV24ClipStates(await fetchJson(soccerV24ClipsUrl()));}catch(error){lastV24ClipsError=String(error?.message||error);}}
   // Codex v24.1 packs (soccer-r241.mjs): tackle-keeper-v2, volley-scissor-v1, kicks-v2, each behind its own switch; a failure keeps v24's clips.
   let v241={};lastV241Error=null;
-  const v241Packs=[['tackle',soccerTackleV2Enabled()],['aerial',soccerAirChoiceEnabled()],['kicks',soccerKicksV2Enabled()]].filter(([,on])=>on);
+  const v241Packs=[['tackle',soccerTackleV2Enabled()],['aerial',soccerAirChoiceEnabled()],['kicks',soccerKicksV2Enabled()],['loco',soccerLocoV2Enabled()]].filter(([,on])=>on);
   await Promise.all(v241Packs.map(async([key])=>{try{Object.assign(v241,soccerV241ClipStates(await fetchJson(soccerV241Url(SOCCER_V241_CLIP_FILES[key])),SOCCER_V241_EXPECTED[key]));}catch(error){lastV241Error=(lastV241Error?lastV241Error+'; ':'')+key+': '+String(error?.message||error);}}));
   motionCounts={v8:Object.keys(v8).length,v9:Object.keys(v9).length,v10:Object.keys(v10).length,v11:Object.keys(v11).length,v12:lastV12,headers:Object.keys(v22).length,v24:Object.keys(v24).length,v241:Object.keys(v241).length};
   const states={...extra.states,...v8,...v9,...v10,...v11,...v22,...v24};Object.assign(states,v241);
