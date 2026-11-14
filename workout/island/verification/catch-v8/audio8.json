@@ -1,0 +1,1507 @@
+{
+ "summary": {
+  "sirenDb": -7.4,
+  "sirenNearDb": -6.8,
+  "sirenCrewDb": -6.6,
+  "sirenOverEngine": {
+   "v7": 3.3,
+   "v8": 2.7
+  },
+  "sirenOverEnginePhone": {
+   "v7": 7.7,
+   "v8": 9.4
+  },
+  "burstOverSiren": {
+   "v7": -2.2,
+   "v8": 11
+  },
+  "engine25": {
+   "v7": 2.6,
+   "v8": 0
+  },
+  "engineLine": {
+   "v7": 64.1,
+   "v8": 0
+  },
+  "synth": {
+   "opening": {
+    "v8s": {
+     "peak": 0.0389,
+     "mean": 0.0186,
+     "phonePeak": 0.0402,
+     "phoneMean": 0.0134,
+     "frames": 216,
+     "band": {
+      "0-200": 46.8,
+      "200-500": 11.3,
+      "500-1000": 41.7,
+      "1000-2000": 0.1,
+      "2000-5000": 0,
+      "5000-24000": 0
+     },
+     "peakHz": 118,
+     "hi25": {
+      "hz": 2056,
+      "promDb": 8.7,
+      "belowPeakDb": -50.7
+     },
+     "linePromMax": 18.3,
+     "linePromHz": 1507
+    },
+    "dbVsV7": -8.9,
+    "dbVsPack": -1.7
+   },
+   "opening-first2s": {
+    "v8s": {
+     "peak": 0.0247,
+     "mean": 0.0084,
+     "phonePeak": 0.0291,
+     "phoneMean": 0.0044,
+     "frames": 216,
+     "band": {
+      "0-200": 46.8,
+      "200-500": 11.3,
+      "500-1000": 41.7,
+      "1000-2000": 0.1,
+      "2000-5000": 0,
+      "5000-24000": 0
+     },
+     "peakHz": 118,
+     "hi25": {
+      "hz": 2056,
+      "promDb": 8.7,
+      "belowPeakDb": -50.7
+     },
+     "linePromMax": 18.3,
+     "linePromHz": 1507
+    },
+    "dbVsV7": -12.9,
+    "dbVsPack": -8.5
+   },
+   "engine-cruise": {
+    "v8s": {
+     "peak": 0.0213,
+     "mean": 0.0179,
+     "phonePeak": 0.0114,
+     "phoneMean": 0.0092,
+     "frames": 104,
+     "band": {
+      "0-200": 84.6,
+      "200-500": 15.3,
+      "500-1000": 0.1,
+      "1000-2000": 0,
+      "2000-5000": 0,
+      "5000-24000": 0
+     },
+     "peakHz": 97,
+     "hi25": {
+      "hz": 2110,
+      "promDb": 2.1,
+      "belowPeakDb": -71.7
+     },
+     "linePromMax": 0,
+     "linePromHz": 0
+    },
+    "dbVsV7": -7,
+    "dbVsPack": -0.2
+   },
+   "engine-boost": {
+    "v8s": {
+     "peak": 0.0339,
+     "mean": 0.0262,
+     "phonePeak": 0.0286,
+     "phoneMean": 0.0189,
+     "frames": 139,
+     "band": {
+      "0-200": 58,
+      "200-500": 32.7,
+      "500-1000": 9.1,
+      "1000-2000": 0.1,
+      "2000-5000": 0,
+      "5000-24000": 0
+     },
+     "peakHz": 205,
+     "hi25": {
+      "hz": 2110,
+      "promDb": 1.8,
+      "belowPeakDb": -50.8
+     },
+     "linePromMax": 0,
+     "linePromHz": 0
+    },
+    "dbVsV7": -5.3,
+    "dbVsPack": -0.5
+   },
+   "engine-slow": {
+    "v8s": {
+     "peak": 0.0212,
+     "mean": 0.0159,
+     "phonePeak": 0.0142,
+     "phoneMean": 0.0086,
+     "frames": 106,
+     "band": {
+      "0-200": 78.5,
+      "200-500": 20.4,
+      "500-1000": 1.1,
+      "1000-2000": 0,
+      "2000-5000": 0,
+      "5000-24000": 0
+     },
+     "peakHz": 129,
+     "hi25": {
+      "hz": 2186,
+      "promDb": 1.2,
+      "belowPeakDb": -73.8
+     },
+     "linePromMax": 0,
+     "linePromHz": 0
+    },
+    "dbVsV7": -7.7,
+    "dbVsPack": 1
+   }
+  },
+  "sirenOverEngineSynth": {
+   "all": 3.9,
+   "phone": 9
+  },
+  "status": {
+   "v7": {
+    "decoded": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true
+    },
+    "siren": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true
+    },
+    "engineBoost": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true
+    },
+    "final": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true
+    }
+   },
+   "v8": {
+    "decoded": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": null,
+       "pack": {
+        "ready": true,
+        "opening": true,
+        "shift": true
+       },
+       "gear": 6,
+       "rpm": 820,
+       "throttle": 0.15
+      },
+      "pack8": {
+       "decoded": 5,
+       "of": 5,
+       "format": "ogg"
+      }
+     }
+    },
+    "siren": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "pack",
+       "pack": {
+        "ready": true,
+        "opening": true,
+        "shift": true
+       },
+       "gear": 5,
+       "rpm": 854,
+       "throttle": 0.12
+      },
+      "pack8": {
+       "decoded": 5,
+       "of": 5,
+       "format": "ogg"
+      }
+     }
+    },
+    "engineBoost": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "pack",
+       "pack": {
+        "ready": true,
+        "opening": true,
+        "shift": true
+       },
+       "gear": 5,
+       "rpm": 3354,
+       "throttle": 0.43
+      },
+      "pack8": {
+       "decoded": 5,
+       "of": 5,
+       "format": "ogg"
+      }
+     }
+    },
+    "final": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "pack",
+       "pack": {
+        "ready": true,
+        "opening": true,
+        "shift": true
+       },
+       "gear": 5,
+       "rpm": 2549,
+       "throttle": 0.28
+      },
+      "pack8": {
+       "decoded": 5,
+       "of": 5,
+       "format": "ogg"
+      }
+     }
+    }
+   },
+   "v8s": {
+    "decoded": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": null,
+       "pack": null,
+       "gear": 6,
+       "rpm": 820,
+       "throttle": 0.15
+      },
+      "pack8": null
+     }
+    },
+    "siren": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "synth",
+       "pack": null,
+       "gear": 5,
+       "rpm": 853,
+       "throttle": 0.12
+      },
+      "pack8": null
+     }
+    },
+    "engineBoost": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "synth",
+       "pack": null,
+       "gear": 5,
+       "rpm": 3419,
+       "throttle": 0.49
+      },
+      "pack8": null
+     }
+    },
+    "final": {
+     "state": "running",
+     "sirenBuffer": "twoTone",
+     "sirenDecoded": {
+      "twoTone": 5,
+      "yelp": 5
+     },
+     "sirenLive": false,
+     "sirenGain": 0,
+     "sirenScale": 0.55,
+     "pack": {
+      "decoded": 9,
+      "of": 9,
+      "siren": null,
+      "voices": 0,
+      "format": "ogg"
+     },
+     "engine": false,
+     "boosting": false,
+     "draw": false,
+     "limiter": true,
+     "v8": {
+      "intro": true,
+      "engine": true,
+      "siren": true,
+      "burst": true,
+      "live": {
+       "siren": null,
+       "sirenGain": 0,
+       "engine": false,
+       "voice": null,
+       "intro": "synth",
+       "pack": null,
+       "gear": 5,
+       "rpm": 2549,
+       "throttle": 0.28
+      },
+      "pack8": null
+     }
+    }
+   }
+  },
+  "errors": {
+   "v7": [],
+   "v8": [],
+   "v8s": []
+  }
+ },
+ "rows": [
+  {
+   "cue": "opening-first2s",
+   "v7": {
+    "peak": 0.0556,
+    "mean": 0.0369,
+    "phonePeak": 0.0352,
+    "phoneMean": 0.0212,
+    "frames": 256,
+    "band": {
+     "0-200": 46.3,
+     "200-500": 16.9,
+     "500-1000": 35.6,
+     "1000-2000": 1.2,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 19.4,
+     "belowPeakDb": -35.2
+    },
+    "linePromMax": 65.9,
+    "linePromHz": 3510
+   },
+   "v8": {
+    "peak": 0.0326,
+    "mean": 0.0223,
+    "phonePeak": 0.0272,
+    "phoneMean": 0.014,
+    "frames": 267,
+    "band": {
+     "0-200": 54.8,
+     "200-500": 16.7,
+     "500-1000": 28.4,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 11.3,
+     "belowPeakDb": -51.1
+    },
+    "linePromMax": 17.2,
+    "linePromHz": 1507
+   },
+   "dbMean": -4.4,
+   "dbPeak": -4.6,
+   "dbPhone": -3.6
+  },
+  {
+   "cue": "opening",
+   "v7": {
+    "peak": 0.0761,
+    "mean": 0.0516,
+    "phonePeak": 0.0667,
+    "phoneMean": 0.0408,
+    "frames": 256,
+    "band": {
+     "0-200": 46.3,
+     "200-500": 16.9,
+     "500-1000": 35.6,
+     "1000-2000": 1.2,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 19.4,
+     "belowPeakDb": -35.2
+    },
+    "linePromMax": 65.9,
+    "linePromHz": 3510
+   },
+   "v8": {
+    "peak": 0.0407,
+    "mean": 0.0225,
+    "phonePeak": 0.0316,
+    "phoneMean": 0.0165,
+    "frames": 267,
+    "band": {
+     "0-200": 54.8,
+     "200-500": 16.7,
+     "500-1000": 28.4,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 11.3,
+     "belowPeakDb": -51.1
+    },
+    "linePromMax": 17.2,
+    "linePromHz": 1507
+   },
+   "dbMean": -7.2,
+   "dbPeak": -5.4,
+   "dbPhone": -7.9
+  },
+  {
+   "cue": "siren",
+   "v7": {
+    "peak": 0.0668,
+    "mean": 0.0586,
+    "phonePeak": 0.0644,
+    "phoneMean": 0.0571,
+    "frames": 124,
+    "band": {
+     "0-200": 23.3,
+     "200-500": 21.6,
+     "500-1000": 55,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 54,
+    "hi25": {
+     "hz": 2013,
+     "promDb": 9,
+     "belowPeakDb": -61.7
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0262,
+    "mean": 0.0251,
+    "phonePeak": 0.0263,
+    "phoneMean": 0.026,
+    "frames": 126,
+    "band": {
+     "0-200": 12.1,
+     "200-500": 1.6,
+     "500-1000": 86.2,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 538,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 16.6,
+     "belowPeakDb": -50.3
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -7.4,
+   "dbPeak": -8.1,
+   "dbPhone": -6.8
+  },
+  {
+   "cue": "siren-near",
+   "v7": {
+    "peak": 0.0659,
+    "mean": 0.061,
+    "phonePeak": 0.0781,
+    "phoneMean": 0.068,
+    "frames": 119,
+    "band": {
+     "0-200": 0,
+     "200-500": 29,
+     "500-1000": 70.7,
+     "1000-2000": 0.3,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 700,
+    "hi25": {
+     "hz": 2089,
+     "promDb": 3.8,
+     "belowPeakDb": -41.1
+    },
+    "linePromMax": 53.7,
+    "linePromHz": 1518
+   },
+   "v8": {
+    "peak": 0.0285,
+    "mean": 0.0279,
+    "phonePeak": 0.0307,
+    "phoneMean": 0.0305,
+    "frames": 116,
+    "band": {
+     "0-200": 0,
+     "200-500": 0.2,
+     "500-1000": 99.7,
+     "1000-2000": 0.2,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 689,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 23.5,
+     "belowPeakDb": -49.5
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -6.8,
+   "dbPeak": -7.3,
+   "dbPhone": -7
+  },
+  {
+   "cue": "siren-crew",
+   "v7": {
+    "peak": 0.0264,
+    "mean": 0.0258,
+    "phonePeak": 0.032,
+    "phoneMean": 0.0304,
+    "frames": 90,
+    "band": {
+     "0-200": 0.6,
+     "200-500": 95.4,
+     "500-1000": 4,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 345,
+    "hi25": {
+     "hz": 4242,
+     "promDb": 14.5,
+     "belowPeakDb": -94.3
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0121,
+    "mean": 0.012,
+    "phonePeak": 0.0136,
+    "phoneMean": 0.0132,
+    "frames": 138,
+    "band": {
+     "0-200": 0,
+     "200-500": 0.2,
+     "500-1000": 99.8,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 538,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 21.8,
+     "belowPeakDb": -56.7
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -6.6,
+   "dbPeak": -6.8,
+   "dbPhone": -7.2
+  },
+  {
+   "cue": "engine-cruise",
+   "v7": {
+    "peak": 0.0564,
+    "mean": 0.0403,
+    "phonePeak": 0.0316,
+    "phoneMean": 0.0234,
+    "frames": 86,
+    "band": {
+     "0-200": 78.1,
+     "200-500": 13.1,
+     "500-1000": 6.8,
+     "1000-2000": 1.9,
+     "2000-5000": 0.1,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 52.4,
+     "belowPeakDb": -34.7
+    },
+    "linePromMax": 58.1,
+    "linePromHz": 1820
+   },
+   "v8": {
+    "peak": 0.0225,
+    "mean": 0.0183,
+    "phonePeak": 0.0111,
+    "phoneMean": 0.0088,
+    "frames": 110,
+    "band": {
+     "0-200": 88.3,
+     "200-500": 10.8,
+     "500-1000": 0.9,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 97,
+    "hi25": {
+     "hz": 2153,
+     "promDb": 2.5,
+     "belowPeakDb": -69.4
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -6.9,
+   "dbPeak": -8,
+   "dbPhone": -8.5
+  },
+  {
+   "cue": "engine-boost",
+   "v7": {
+    "peak": 0.0627,
+    "mean": 0.0485,
+    "phonePeak": 0.039,
+    "phoneMean": 0.03,
+    "frames": 137,
+    "band": {
+     "0-200": 77.8,
+     "200-500": 10.9,
+     "500-1000": 5.3,
+     "1000-2000": 3.4,
+     "2000-5000": 2.6,
+     "5000-24000": 0
+    },
+    "peakHz": 151,
+    "hi25": {
+     "hz": 2304,
+     "promDb": 26.1,
+     "belowPeakDb": -14.8
+    },
+    "linePromMax": 64.1,
+    "linePromHz": 2304
+   },
+   "v8": {
+    "peak": 0.0461,
+    "mean": 0.0278,
+    "phonePeak": 0.03,
+    "phoneMean": 0.0165,
+    "frames": 78,
+    "band": {
+     "0-200": 72.7,
+     "200-500": 25.1,
+     "500-1000": 2.1,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2035,
+     "promDb": 5,
+     "belowPeakDb": -58.2
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -4.8,
+   "dbPeak": -2.7,
+   "dbPhone": -5.2
+  },
+  {
+   "cue": "engine-slow",
+   "v7": {
+    "peak": 0.0573,
+    "mean": 0.0384,
+    "phonePeak": 0.0326,
+    "phoneMean": 0.0222,
+    "frames": 110,
+    "band": {
+     "0-200": 78.7,
+     "200-500": 13.5,
+     "500-1000": 6,
+     "1000-2000": 1.8,
+     "2000-5000": 0.1,
+     "5000-24000": 0
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2239,
+     "promDb": 5.8,
+     "belowPeakDb": -38.5
+    },
+    "linePromMax": 65,
+    "linePromHz": 1647
+   },
+   "v8": {
+    "peak": 0.0183,
+    "mean": 0.0141,
+    "phonePeak": 0.0122,
+    "phoneMean": 0.0079,
+    "frames": 103,
+    "band": {
+     "0-200": 78.4,
+     "200-500": 19.3,
+     "500-1000": 2.2,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2003,
+     "promDb": 1.3,
+     "belowPeakDb": -61.1
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -8.7,
+   "dbPeak": -9.9,
+   "dbPhone": -9
+  },
+  {
+   "cue": "engine+siren",
+   "v7": {
+    "peak": 0.0797,
+    "mean": 0.0684,
+    "phonePeak": 0.0687,
+    "phoneMean": 0.0625,
+    "frames": 82,
+    "band": {
+     "0-200": 34.5,
+     "200-500": 14.1,
+     "500-1000": 49,
+     "1000-2000": 1.3,
+     "2000-5000": 1.2,
+     "5000-24000": 0
+    },
+    "peakHz": 140,
+    "hi25": {
+     "hz": 2293,
+     "promDb": 15.7,
+     "belowPeakDb": -14.1
+    },
+    "linePromMax": 63.6,
+    "linePromHz": 2304
+   },
+   "v8": {
+    "peak": 0.0408,
+    "mean": 0.0362,
+    "phonePeak": 0.0333,
+    "phoneMean": 0.0307,
+    "frames": 78,
+    "band": {
+     "0-200": 48.9,
+     "200-500": 9.6,
+     "500-1000": 41.4,
+     "1000-2000": 0.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 538,
+    "hi25": {
+     "hz": 2056,
+     "promDb": 14.9,
+     "belowPeakDb": -51
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "dbMean": -5.5,
+   "dbPeak": -5.8,
+   "dbPhone": -6.2
+  },
+  {
+   "cue": "shot",
+   "v7": {
+    "peak": 0.0518,
+    "mean": 0.0167,
+    "phonePeak": 0.0652,
+    "phoneMean": 0.0162,
+    "frames": 16,
+    "band": {
+     "0-200": 0,
+     "200-500": 0,
+     "500-1000": 100,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 872,
+    "hi25": {
+     "hz": 3370,
+     "promDb": 5.6,
+     "belowPeakDb": -65.3
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0925,
+    "mean": 0.0455,
+    "phonePeak": 0.0602,
+    "phoneMean": 0.0189,
+    "frames": 50,
+    "band": {
+     "0-200": 88.5,
+     "200-500": 5.4,
+     "500-1000": 0.6,
+     "1000-2000": 2.4,
+     "2000-5000": 2.3,
+     "5000-24000": 0.9
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2509,
+     "promDb": 1.2,
+     "belowPeakDb": -28.4
+    },
+    "linePromMax": 14.5,
+    "linePromHz": 1615
+   },
+   "dbMean": 8.7,
+   "dbPeak": 5,
+   "dbPhone": 1.3
+  },
+  {
+   "cue": "shot+hit",
+   "v7": {
+    "peak": 0.0375,
+    "mean": 0.0049,
+    "phonePeak": 0.0471,
+    "phoneMean": 0.0039,
+    "frames": 16,
+    "band": {
+     "0-200": 0,
+     "200-500": 0,
+     "500-1000": 0,
+     "1000-2000": 0.3,
+     "2000-5000": 92.5,
+     "5000-24000": 7.2
+    },
+    "peakHz": 2509,
+    "hi25": {
+     "hz": 2509,
+     "promDb": 6.5,
+     "belowPeakDb": 0
+    },
+    "linePromMax": 21.2,
+    "linePromHz": 1712
+   },
+   "v8": {
+    "peak": 0.084,
+    "mean": 0.0454,
+    "phonePeak": 0.0552,
+    "phoneMean": 0.0191,
+    "frames": 38,
+    "band": {
+     "0-200": 86.8,
+     "200-500": 4.1,
+     "500-1000": 0.7,
+     "1000-2000": 1.7,
+     "2000-5000": 5.4,
+     "5000-24000": 1.3
+    },
+    "peakHz": 118,
+    "hi25": {
+     "hz": 2358,
+     "promDb": 2.8,
+     "belowPeakDb": -22.4
+    },
+    "linePromMax": 13.3,
+    "linePromHz": 2283
+   },
+   "dbMean": 19.3,
+   "dbPeak": 7,
+   "dbPhone": 13.8
+  },
+  {
+   "cue": "mark",
+   "v7": {
+    "peak": 0.0516,
+    "mean": 0.007,
+    "phonePeak": 0.0594,
+    "phoneMean": 0.006,
+    "frames": 14,
+    "band": {
+     "0-200": 0,
+     "200-500": 0,
+     "500-1000": 100,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 829,
+    "hi25": {
+     "hz": 3370,
+     "promDb": 5.7,
+     "belowPeakDb": -65.4
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0808,
+    "mean": 0.0262,
+    "phonePeak": 0.0617,
+    "phoneMean": 0.0104,
+    "frames": 51,
+    "band": {
+     "0-200": 86.9,
+     "200-500": 6.1,
+     "500-1000": 0.9,
+     "1000-2000": 2.9,
+     "2000-5000": 2.6,
+     "5000-24000": 0.7
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2272,
+     "promDb": 3.3,
+     "belowPeakDb": -25.6
+    },
+    "linePromMax": 17,
+    "linePromHz": 1593
+   },
+   "dbMean": 11.5,
+   "dbPeak": 3.9,
+   "dbPhone": 4.8
+  },
+  {
+   "cue": "net-launch",
+   "v7": {
+    "peak": 0.0516,
+    "mean": 0.013,
+    "phonePeak": 0.0633,
+    "phoneMean": 0.012,
+    "frames": 14,
+    "band": {
+     "0-200": 0,
+     "200-500": 0,
+     "500-1000": 100,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 872,
+    "hi25": {
+     "hz": 3370,
+     "promDb": 5.2,
+     "belowPeakDb": -65.5
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0679,
+    "mean": 0.0143,
+    "phonePeak": 0.041,
+    "phoneMean": 0.0059,
+    "frames": 23,
+    "band": {
+     "0-200": 95.5,
+     "200-500": 2.1,
+     "500-1000": 0.4,
+     "1000-2000": 1.1,
+     "2000-5000": 0.7,
+     "5000-24000": 0.3
+    },
+    "peakHz": 140,
+    "hi25": {
+     "hz": 2358,
+     "promDb": 5.1,
+     "belowPeakDb": -33.1
+    },
+    "linePromMax": 10.6,
+    "linePromHz": 2143
+   },
+   "dbMean": 0.8,
+   "dbPeak": 2.4,
+   "dbPhone": -6.2
+  },
+  {
+   "cue": "emp-charge",
+   "v7": {
+    "peak": 0.0516,
+    "mean": 0.0154,
+    "phonePeak": 0.0655,
+    "phoneMean": 0.0147,
+    "frames": 14,
+    "band": {
+     "0-200": 0,
+     "200-500": 0,
+     "500-1000": 100,
+     "1000-2000": 0,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 872,
+    "hi25": {
+     "hz": 3370,
+     "promDb": 5.6,
+     "belowPeakDb": -65.7
+    },
+    "linePromMax": 0,
+    "linePromHz": 0
+   },
+   "v8": {
+    "peak": 0.0197,
+    "mean": 0.0057,
+    "phonePeak": 0.0253,
+    "phoneMean": 0.0059,
+    "frames": 20,
+    "band": {
+     "0-200": 0,
+     "200-500": 56.4,
+     "500-1000": 40.5,
+     "1000-2000": 3.1,
+     "2000-5000": 0.1,
+     "5000-24000": 0
+    },
+    "peakHz": 377,
+    "hi25": {
+     "hz": 2003,
+     "promDb": -0.6,
+     "belowPeakDb": -33.7
+    },
+    "linePromMax": 12,
+    "linePromHz": 1647
+   },
+   "dbMean": -8.6,
+   "dbPeak": -8.4,
+   "dbPhone": -7.9
+  },
+  {
+   "cue": "dry",
+   "v7": {
+    "peak": 0.0043,
+    "mean": 0.0012,
+    "phonePeak": 0.0059,
+    "phoneMean": 0.0009,
+    "frames": 8,
+    "band": {
+     "0-200": 13.2,
+     "200-500": 84.7,
+     "500-1000": 1.9,
+     "1000-2000": 0.2,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 237,
+    "hi25": {
+     "hz": 2153,
+     "promDb": 10.7,
+     "belowPeakDb": -39
+    },
+    "linePromMax": 2.3,
+    "linePromHz": 1658
+   },
+   "v8": {
+    "peak": 0.0049,
+    "mean": 0.0015,
+    "phonePeak": 0.0066,
+    "phoneMean": 0.0011,
+    "frames": 8,
+    "band": {
+     "0-200": 12.4,
+     "200-500": 79,
+     "500-1000": 5.4,
+     "1000-2000": 3,
+     "2000-5000": 0.3,
+     "5000-24000": 0
+    },
+    "peakHz": 226,
+    "hi25": {
+     "hz": 2089,
+     "promDb": 7.1,
+     "belowPeakDb": -33.4
+    },
+    "linePromMax": 7.8,
+    "linePromHz": 1561
+   },
+   "dbMean": 1.9,
+   "dbPeak": 1.1,
+   "dbPhone": 1.7
+  },
+  {
+   "cue": "flat",
+   "v7": {
+    "peak": 0.0892,
+    "mean": 0.0294,
+    "phonePeak": 0.1104,
+    "phoneMean": 0.0175,
+    "frames": 58,
+    "band": {
+     "0-200": 35.6,
+     "200-500": 23.7,
+     "500-1000": 28.4,
+     "1000-2000": 12.2,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 75,
+    "hi25": {
+     "hz": 2035,
+     "promDb": 0.8,
+     "belowPeakDb": -49.5
+    },
+    "linePromMax": 10.1,
+    "linePromHz": 1550
+   },
+   "v8": {
+    "peak": 0.0877,
+    "mean": 0.0287,
+    "phonePeak": 0.1121,
+    "phoneMean": 0.0164,
+    "frames": 51,
+    "band": {
+     "0-200": 34.1,
+     "200-500": 26.1,
+     "500-1000": 27.7,
+     "1000-2000": 12.1,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 75,
+    "hi25": {
+     "hz": 2013,
+     "promDb": 1.4,
+     "belowPeakDb": -47.4
+    },
+    "linePromMax": 11,
+    "linePromHz": 1550
+   },
+   "dbMean": -0.2,
+   "dbPeak": -0.1,
+   "dbPhone": -0.6
+  },
+  {
+   "cue": "stack-burst+siren+engine",
+   "v7": {
+    "peak": 0.0765,
+    "mean": 0.0669,
+    "phonePeak": 0.068,
+    "phoneMean": 0.0617,
+    "frames": 52,
+    "band": {
+     "0-200": 32.5,
+     "200-500": 17.1,
+     "500-1000": 49.4,
+     "1000-2000": 0.9,
+     "2000-5000": 0,
+     "5000-24000": 0
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2164,
+     "promDb": 53.6,
+     "belowPeakDb": -35.1
+    },
+    "linePromMax": 59.8,
+    "linePromHz": 1658
+   },
+   "v8": {
+    "peak": 0.1004,
+    "mean": 0.0481,
+    "phonePeak": 0.0581,
+    "phoneMean": 0.0333,
+    "frames": 73,
+    "band": {
+     "0-200": 71.3,
+     "200-500": 5.5,
+     "500-1000": 20.3,
+     "1000-2000": 1.2,
+     "2000-5000": 1.3,
+     "5000-24000": 0.5
+    },
+    "peakHz": 129,
+    "hi25": {
+     "hz": 2466,
+     "promDb": 1.9,
+     "belowPeakDb": -31
+    },
+    "linePromMax": 7.9,
+    "linePromHz": 2315
+   },
+   "dbMean": -2.9,
+   "dbPeak": 2.4,
+   "dbPhone": -5.4
+  }
+ ]
+}

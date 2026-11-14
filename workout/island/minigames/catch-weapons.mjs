@@ -46,6 +46,16 @@ export const ARSENAL = Object.freeze({
   rampFrom: .6, rampSeconds: [14, 14, 15, 15, 16, 16, 17, 17, 18, 18], // early hits count less: firing starts at once, yet a sharp player still drives the bends (QA 11/11: a car stopped in 10 s made the track feel straight)
   wobbleAmp: .3,
 });
+/** v8 fix (14/11, Roy after v23: "when you switch to the spikes and the other things it does not work"; ?catchWeaponsFix=0 = v7). Measured
+ * by real touch (the session spied read-only): the spike ring went green by an angle (13.5 degrees at gap + 15 m, i.e. up to ~6 m off his
+ * path) while the strip still had to land within 2.1 m of him, so a green tap missed; and a tap with nothing in range did nothing at all.
+ *  spikeWindow  metres between the dot and his path that still put the strip under him (the assist snaps it onto his path)
+ *  commit       a strip this close ahead in his lane: he holds the lane (unless he rolled the dodge at the throw), so green = a hit
+ *  dodgeScale   the strip lands 15 m ahead of him (0.7 s): he spots it half as often as v7 rolled, so the ring can go green on stage 10
+ *  a tap that cannot fire says why: a 'dry' event (behind / far / near / side) for the click and the hint */
+export const ARSENAL8 = Object.freeze({
+  spikeWindow: [1.9, 1.85, 1.8, 1.7, 1.65, 1.6, 1.5, 1.4, 1.35, 1.3], commit: 30, dodgeScale: .5,
+});
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEG = 180 / Math.PI;
 
@@ -59,6 +69,12 @@ export const STRINGS = Object.freeze({
   'catch.pop.spikesMiss': 'הוא עקף את הקוצים', 'catch.pop.emp': 'פולס, הרכב נעצר לרגע', 'catch.pop.mark': 'מסומן, המסוק עוקב',
   'catch.pop.close': 'זמן קרוב, הוא מאט', 'catch.pop.toolMiss': 'החטאה, מתקרבים ומנסים שוב', 'catch.pop.toolEmpty': 'אין עוד, מחליפים כלי',
   'catch.chase.down': 'הרכב נפל, הפושע בורח ברגל. זריקות: {throws}',
+  // v8: what each tool aims at (under the ring), why a tap did not fire, and the switch line
+  'catch.target.tyres': 'גלגל', 'catch.target.net': 'גג', 'catch.target.spikes': 'הכביש לפניו', 'catch.target.emp': 'כל הרכב', 'catch.target.mark': 'תא המטען',
+  'catch.range.far': 'רחוק מדי', 'catch.range.near': 'קרוב מדי', 'catch.range.side': 'לא בקו', 'catch.range.behind': 'הוא מאחוריך',
+  'catch.dry.far': 'רחוק מדי לכלי הזה, מתקרבים אליו', 'catch.dry.near': 'קרוב מדי לכלי הזה', 'catch.dry.side': 'נכנסים לנתיב שלו ומנסים שוב', 'catch.dry.behind': 'עקפת אותו, לוחצים בלם',
+  'catch.aim.tyres': 'לגלגל האחורי', 'catch.aim.net': 'לגג', 'catch.aim.spikes': 'לכביש לפניו', 'catch.aim.emp': 'לכל הרכב, מקרוב', 'catch.aim.mark': 'לתא המטען',
+  'catch.weapon.next8': 'עכשיו {name}, מכוונים {aim}',
 });
 
 /** The chance of a shot with the aim assist: error `e` (degrees) inside `allowed` = on target; it fades out beyond it. */
@@ -70,8 +86,8 @@ export function assistChance(e, allowed, core, {falloff = ARSENAL.falloff, fadeT
 /** The reticle colour for a chance, the same thresholds as v6 (catch-fire-hud.mjs reticleQuality). */
 export const quality7 = c => c > .6 ? 'green' : c > .3 ? 'yellow' : 'grey';
 
-export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level = {}, assist = true, addDamage = () => {}} = {}) {
-  const A = {...ARSENAL, ...(balance.arsenal || {})}, T6 = {...TYRES, ...(balance.tyres || {})}, i = clamp(stage, 1, 10) - 1;
+export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level = {}, assist = true, addDamage = () => {}, fix8 = false} = {}) {
+  const A = {...ARSENAL, ...(balance.arsenal || {})}, T6 = {...TYRES, ...(balance.tyres || {})}, i = clamp(stage, 1, 10) - 1, A8 = {...ARSENAL8, ...(balance.arsenal8 || {})};
   const pick = arr => Array.isArray(arr) ? arr[Math.min(arr.length - 1, i)] : arr;
   const ids = (level.weapons || A.order).filter(id => A.tools[id]);
   const per = Object.fromEntries(ids.map(id => { const d = A.tools[id]; return [id, {id, ammo: d.ammo, ammoMax: d.ammo, reload: 0, trickle: d.trickle, shots: 0, hits: 0}]; }));
@@ -103,11 +119,18 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
       const curveF = 1 - Math.min(.5, Math.abs(ctx.curvature || 0) * 25), swerveF = 1 - .3 * Math.abs(ctx.thiefSwerve || 0);
       return {inRange, chance: clamp(pick(T6.baseChance) * gapF * latF * steadyF * curveF * swerveF, .05, .98), allowed: 0};
     }
+    if (fix8 && d.zone.lane) { // v8 spikes: on target while the dot is within the window of his path (the strip is then put under him); only the dodge misses
+      const win = pick(A8.spikeWindow), sure = pick(A.core) * (1 - pick(A.dodge) * A8.dodgeScale), off = geo.off;
+      const chance = off <= win ? sure : off <= win * A.falloff ? sure * .8 + (A.outside - sure * .8) * (off - win) / (win * (A.falloff - 1)) : A.outside;
+      return {inRange, chance: clamp(chance, .03, .99), allowed: Math.atan2(win, geo.dist) * DEG, window: win};
+    }
     const allowed = Math.max(pick(A.cone) * (g.marked > 0 && id !== 'mark' ? A.tools.mark.markCone : 1), Math.atan2(d.zone.w * pick(A.widen), geo.dist) * DEG);
     const distF = gap <= A.nearGap ? 1 : 1 - (1 - A.farF) * (gap - A.nearGap) / Math.max(1, rmax - A.nearGap);
     const condF = ((ctx.stun || 0) > 0 ? .55 : ctx.scraping ? .78 : 1) * (1 - Math.min(.22, Math.abs(ctx.curvature || 0) * 11)) * (g.closeT > 0 ? 1 : 1 - .12 * Math.abs(ctx.thiefSwerve || 0));
     return {inRange, chance: clamp(assistChance(geo.e, allowed, pick(A.core)) * distF * condF, .03, .99), allowed};
   }
+  /** v8: why the tool in hand cannot fire now (shown under the grey ring, and said on a tap). */
+  function outReason(id, geo) { const [rmin, rmax] = rangeOf(A.tools[id]); return geo.gap <= 0 ? 'behind' : geo.gap <= rmin ? 'near' : geo.gap >= rmax ? 'far' : 'side'; }
   /** Lock, chance and reticle of the tool in hand for this frame (also right after a switch, so a tap at once fires the new tool). */
   function evaluate(ctx) {
     const geo = geometry(g.current, ctx), c = chanceFor(g.current, geo, ctx);
@@ -115,6 +138,7 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     g.hitChance = locked ? c.chance : 0; g.quality = quality7(g.hitChance); g.inRange = c.inRange; g.e = geo.e; g.allowed = c.allowed;
     g.lockWheel = g.current === 'tyres' && locked ? (geo.lat > 0 ? 'RL' : 'RR') : null;
     g.aim = {...geo, weapon: g.current, chance: g.hitChance, quality: g.quality, inRange: c.inRange, allowed: c.allowed, assist};
+    if (fix8) { g.aim.window = c.window ?? null; g.aim.reason = c.inRange || g.stopped ? null : outReason(g.current, geo); }
     if (locked !== g.locked) { g.locked = locked; events.push({type: 'lock', on: locked}); }
     return locked;
   }
@@ -130,7 +154,7 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     g.flats[wheel] = true; g.flatCount++; events.push({type: 'flat', wheel, flatCount: g.flatCount}); return wheel;
   }
   const api = {
-    ids, tools: A.tools, A, hitsToStop,
+    ids, tools: A.tools, A, hitsToStop, fix8, A8,
     /** The tool in hand merged with the shared numbers: what catch-tyres.mjs exposed, so the v6 HUD helpers read it. */
     get state() { const w = per[g.current]; return {...w, weapon: g.current, locked: g.locked, hitChance: g.hitChance, quality: g.quality, flats: g.flats, flatCount: g.flatCount, lockWheel: g.lockWheel, damage: g.damage, stopped: g.stopped, armed: true, armIn: 0, shots: g.shots, hits: g.hits, closeT: g.closeT, marked: g.marked, flatsToStop: 99, t: g.t, perTool: per}; },
     get balance() { const d = A.tools[g.current]; return {reloadSeconds: d.reload, trickleSeconds: d.trickle}; },
@@ -164,12 +188,14 @@ export function createArsenal({balance = {}, stage = 1, rnd = Math.random, level
     },
     fire() {
       const w = per[g.current], d = A.tools[g.current];
-      if (g.stopped || w.reload > 0 || !g.locked) return false;
+      if (g.stopped || w.reload > 0 || !g.locked) { if (fix8 && !g.stopped && w.reload <= 0 && !g.locked) events.push({type: 'dry', weapon: g.current, reason: g.aim?.reason || 'far'}); return false; }
       if (w.ammo <= 0) { events.push({type: 'noAmmo', weapon: g.current}); return false; }
       w.ammo--; w.reload = d.reload; w.shots++; g.shots++;
       const id = g.current, geo = g.aim || geometry(id, last);
       if (id === 'spikes') { // the strip flies over the car and lands ahead in the officer's lane: decided when he gets there
-        const st = {id: ++g.stripId, s: (last.sThief ?? 0) + A.stripAhead, d: geo.zoneD, state: 'live', age: 0, dodge: rnd() < pick(A.dodge)};
+        // v8: a dot within the window puts the strip on his path (where the ring is), as the green ring promised
+        const snap = fix8 && assist && Number.isFinite(geo.predD) && geo.off <= pick(A8.spikeWindow);
+        const st = {id: ++g.stripId, s: (last.sThief ?? 0) + A.stripAhead, d: snap ? geo.predD : geo.zoneD, state: 'live', age: 0, dodge: rnd() < pick(A.dodge) * (fix8 ? A8.dodgeScale : 1), ...(fix8 ? {snap} : {})};
         g.strips.push(st); events.push({type: 'spikesOut', strip: st.id, s: st.s, d: st.d}); return true;
       }
       const hit = rnd() < g.hitChance;

@@ -3,9 +3,11 @@
  * Mix (probe RMS, tools/catch-audio-probe.html): siren bed ~.10 above the engine bed (~.04 idle, ~.06 boost);
  * one-shot cues below the 'catch' chord peak +20%; a gentle limiter before the destination so stacked cues do not clip.
  * v5 (catch-session.mjs) and v6 (catch-session6.mjs) share this file: every cue name that existed keeps working. */
+import {createAudio8, PACK8} from './catch-audio8.mjs?v=island-v2-20261107-13';
+
 const CUE_NAMES = ['tool', 'swing', 'whoosh', 'thud', 'miss', 'catch', 'perfect', 'engine', 'siren', 'count', 'countdown', 'go', 'crash', 'crimCrash', 'pad', 'scrape', 'ram', 'nitro', 'brake', 'near', 'bossHit', 'stars',
   'turn', 'shot', 'shotHit', 'flat', 'skid', 'draw', 'twang', 'whistle', 'hitBody', 'hitHead',
-  'pickup', 'toolSwap', 'sticky', 'spikes', 'zap', 'tracker', 'slowmo', 'nitroPickup', 'barrier'];
+  'pickup', 'toolSwap', 'sticky', 'spikes', 'zap', 'tracker', 'slowmo', 'nitroPickup', 'barrier', 'burst', 'launch', 'charge', 'dry'];
 export {CUE_NAMES};
 
 /** v7 sound pack (Codex, design/catch-audio-v1, CC0: mono 48 kHz, OGG Opus and MP3), copied for play to assets/catch-v7/audio.
@@ -27,9 +29,16 @@ export const PACK7 = Object.freeze({
 /** `sirenScale` (v7: .55, about -5.2 dB) turns the police siren down so the engine and the other cues are heard; 1 = v6.
  * `pack` 'v7': the Codex sounds (PACK7) for the siren (soft, near at a police roadblock, far for the crew), the shots,
  * the punctures, the net, the nitro bottles, the barriers and the brakes; every cue falls back to its synth while the pack decodes.
- * With `sirenScale` 1 (?catchSiren=v6) the v6 siren loop plays at the v6 level even when the pack is on. */
-export function createCatchAudio({muted = () => false, sirenScale = 1, pack = null} = {}) {
+ * With `sirenScale` 1 (?catchSiren=v6) the v6 siren loop plays at the v6 level even when the pack is on.
+ * `v8` {intro, engine, siren, burst} (14/11, Roy after v23; catch-audio8.mjs, all synthesized): a quiet opening, a V6 engine instead of the
+ * buzz and its turbo whine, a soft two-tone siren 7 dB under the v7 one, and a rapid burst on every tyre shot. Each flag off (or no `v8`)
+ * is the v7 sound exactly; the session's flags are ?catchIntro=v7, ?catchEngine=v7, ?catchSiren=v7 and ?catchBurst=0. */
+export function createCatchAudio({muted = () => false, sirenScale = 1, pack = null, v8 = null} = {}) {
   const SIREN_SCALE = Math.max(0, Math.min(1.5, Number(sirenScale) || 0)), PACK = pack === 'v7' ? PACK7 : null;
+  const V8 = v8 ? {intro: Boolean(v8.intro), engine: Boolean(v8.engine), siren: Boolean(v8.siren), burst: Boolean(v8.burst)} : null;
+  let a8 = null, engineInfo = {phase: 'run', braking: false};
+  // the v8 Codex pack (catch-audio8.mjs PACK8: the police V6 layers, the gear change, the opening); `v8.pack === false` = synthesis only
+  const P8 = V8 && v8.pack !== false && (V8.engine || V8.intro) ? PACK8 : null;
   let ac = null, master = null, limiter = null, paused = false, disposed = false, unlockBound = false;
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   // ----- recorded siren loops: fetched at creation (no context needed), decoded once a context exists -----
@@ -70,8 +79,26 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
       if (packFmt[id] === 'ogg') { packFmt[id] = 'mp3'; packEnc[id] = null; packTries[id] = 0; packFetch(id); } else if (packTries[id] >= 2) packEnc[id] = null;
     });
   };
-  const packDecodeAll = () => { if (PACK) for (const id of Object.keys(PACK.sounds)) packDecode(id); };
+  const packDecodeAll = () => { if (PACK) for (const id of Object.keys(PACK.sounds)) packDecode(id); p8DecodeAll(); };
   if (PACK) for (const id of Object.keys(PACK.sounds)) packFetch(id);
+  // ----- v8 pack: the same fetch at creation, decode with the context, two tries per file and the OGG -> MP3 fallback as the v7 pack -----
+  const p8Enc = {}, p8Buf = {}, p8Decoding = {}, p8Tries = {}, p8Fmt = {};
+  const p8Url = id => new URL(P8.dir + id + '.' + (p8Fmt[id] ||= opusOk() ? 'ogg' : 'mp3'), import.meta.url).href;
+  const p8Fetch = id => {
+    if (!P8 || p8Enc[id] || typeof fetch !== 'function') return;
+    p8Enc[id] = fetch(p8Url(id)).then(r => r.ok ? r.arrayBuffer() : Promise.reject(new Error('pack8'))).catch(() => { p8Enc[id] = null; return null; });
+  };
+  function p8Decode(id) {
+    if (!P8 || p8Buf[id] || p8Decoding[id]) return; const a = ac; if (!a) return;
+    if (!p8Enc[id]) { if ((p8Tries[id] || 0) >= 2) return; p8Fetch(id); if (!p8Enc[id]) return; }
+    p8Tries[id] = (p8Tries[id] || 0) + 1;
+    p8Decoding[id] = p8Enc[id].then(bytes => bytes ? a.decodeAudioData(bytes.slice(0)) : Promise.reject(new Error('pack8'))).then(b => { p8Buf[id] = b; }).catch(() => {
+      p8Decoding[id] = null;
+      if (p8Fmt[id] === 'ogg') { p8Fmt[id] = 'mp3'; p8Enc[id] = null; p8Tries[id] = 0; p8Fetch(id); } else if (p8Tries[id] >= 2) p8Enc[id] = null;
+    });
+  }
+  function p8DecodeAll() { if (P8) for (const id of Object.keys(P8.sounds)) p8Decode(id); }
+  if (P8) for (const id of Object.keys(P8.sounds)) p8Fetch(id);
   const ensure = () => {
     if (disposed) return null;
     if (ac) { if (ac.state === 'suspended' && !paused) { try { ac.resume(); } catch { /* ignore */ } } return ac; }
@@ -97,6 +124,8 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
   bindUnlock();
   const out = () => master;
   const ready = () => { const a = ensure(); return a && !muted() && !paused ? a : null; };
+  /** v8 voices (catch-audio8.mjs) on this context and master, built at the first v8 cue; null without v8, muted or paused. */
+  const get8 = () => { if (!V8) return null; const a = ready(); if (!a) return null; if (!a8) { try { a8 = createAudio8(a, master, {flags: V8, pack: P8, buffer: id => p8Buf[id] || null}); } catch { return null; } } return a8; };
 
   // ----- primitives -----
   const tone = (freq, dur, {type = 'sine', gain = .12, slide = 0, delay = 0} = {}) => {
@@ -254,23 +283,34 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
   };
   const cues = {
     // ----- chase -----
-    engine: () => { decodeLoop('twoTone'); decodeLoop('yelp'); packDecodeAll(); tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160}); },
+    // v8 intro: no raw saw sweep at the start, the engine bed fades in at idle instead; `rev` (the thief getting away) is a short V6 rev
+    engine: arg => {
+      decodeLoop('twoTone'); decodeLoop('yelp'); packDecodeAll();
+      if (arg?.rev) { if (V8?.engine && get8()) { a8.rev(); return; } }
+      else if (V8?.intro && get8()) { a8.engineIn(); return; }
+      tone(80, 1.2, {type: 'sawtooth', gain: .06, slide: 160});
+    },
     // Police siren: two alternating notes ("wee-woo"), each with a small glide, softened by a low-pass.
     // `approach` -1..1 gives a light Doppler shift: higher while the cars close in, lower when they pull apart.
     // Real siren loops (Codex, CC0). The loop plays while the cue keeps arriving and fades out a moment after the last one.
     // `level` 0..1 (optional) scales the loop: the chase can turn it down while the thief is far ahead.
     // v7 pack (unless ?catchSiren=v6): the soft siren while driving, the near one with `near` (a police roadblock coming up), the far one
     // for the crew arriving at the catch (no engine then, so it is still heard).
+    // v8 (unless ?catchSiren=v7 or v6): the soft two-tone of catch-audio8.mjs, the same voice louder at a roadblock and muffled for the crew
     siren: arg => {
+      if (V8?.siren && get8()?.siren(arg || {})) return;
       const k = 1 + .055 * clamp(Number(arg?.approach) || 0, -1, 1), level = arg?.level == null ? 1 : clamp(Number(arg.level) || 0, .25, 1);
       if (PACK && SIREN_SCALE !== 1 && packSiren(arg?.crew ? 'siren-far-helicopter' : arg?.near ? 'siren-near' : 'police-soft', k, arg?.crew ? 1500 : 1100, level)) return;
       if (!sirenLoop(arg?.crew ? 'yelp' : 'twoTone', k, arg?.crew ? 1500 : 1100, level)) { siren(960 * k, 800 * k, 0); siren(740 * k, 880 * k, .4); }
     },
     // tyre squeal for hard steering in a bend: short, soft, rate-limited
-    turn: () => { const now = Date.now(); if (now - lastTurn < 300) return; lastTurn = now; noise(.28, {gain: .16, from: 1700, to: 2300, q: 3}); tone(1500, .22, {type: 'sine', gain: .024, slide: 400}); },
+    // v8 engine: a soft broad tyre scrub instead of the narrow 1.7-2.3 kHz squeal and its 1.5-1.9 kHz sine (a gliding line, one per bend)
+    turn: () => { const now = Date.now(); if (now - lastTurn < 300) return; lastTurn = now; if (V8?.engine) { noise(.32, {gain: .07, from: 900, to: 700, q: .7}); return; } noise(.28, {gain: .16, from: 1700, to: 2300, q: 3}); tone(1500, .22, {type: 'sine', gain: .024, slide: 400}); },
     // tyre shots: a cartoon pop (a paintball thump, never a real firearm), a metallic clink with a sparks fizz on a hit
-    shot: () => { if (!packVoice('shot-beep')) synth.shot(); },
-    shotHit: () => { tone(2600, .16, {type: 'triangle', gain: .12, slide: -900}); tone(3900, .12, {type: 'sine', gain: .065, delay: .02, slide: -1400}); noise(.22, {gain: .06, from: 6000, to: 3500, q: .8, delay: .04}); },
+    // v8 (unless ?catchBurst=0): a tap is a rapid burst of rounds with a short echo (catch-audio8.mjs), not one beep
+    shot: () => { if (V8?.burst && get8()) { a8.burst(); return; } if (!packVoice('shot-beep')) synth.shot(); },
+    shotHit: arg => { const d = Math.max(0, Number(arg?.delay) || 0); tone(2600, .16, {type: 'triangle', gain: .12, slide: -900, delay: d}); tone(3900, .12, {type: 'sine', gain: .065, delay: .02 + d, slide: -1400}); noise(.22, {gain: .06, from: 6000, to: 3500, q: .8, delay: .04 + d}); },
+    burst: arg => { if (V8?.burst && get8()) { a8.burst({rounds: Number(arg?.rounds) || undefined}); return; } if (!packVoice('shot-beep')) synth.shot(); },
     // a flat tyre: a hiss, then a flap-flap that slows down for about 1.2 s
     flat: () => { if (packVoice('puncture')) flap(.3); else synth.flat(); },
     // the stop: a long screech (pack: the brake loop), a thud, and a hubcap ting that wobbles out
@@ -290,9 +330,10 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
     miss: () => { tone(260, .28, {type: 'triangle', gain: .09, slide: -140}); },
     catch: () => { [523, 659, 784].forEach((f, i) => tone(f, .2, {type: 'triangle', gain: .16, delay: i * .08})); noise(.2, {gain: .06, from: 3200, to: 1200}); },
     perfect: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .22, {type: 'triangle', gain: .16, delay: i * .07})); noise(.3, {gain: .07, from: 4200, to: 1500}); },
-    count: () => tone(520, .12, {type: 'triangle', gain: .07}),
-    countdown: () => tone(520, .12, {type: 'triangle', gain: .07}),
-    go: () => { tone(780, .3, {type: 'triangle', gain: .08}); tone(1170, .3, {type: 'triangle', gain: .055, delay: .06}); },
+    // v8 intro: soft dings and a soft chord, the siren whoop and a short throttle at "go" (catch-audio8.mjs)
+    count: () => { if (V8?.intro && get8()) { a8.ding(); return; } tone(520, .12, {type: 'triangle', gain: .07}); },
+    countdown: () => { if (V8?.intro && get8()) { a8.ding(); return; } tone(520, .12, {type: 'triangle', gain: .07}); },
+    go: () => { if (V8?.intro && get8()) { a8.go(); return; } tone(780, .3, {type: 'triangle', gain: .08}); tone(1170, .3, {type: 'triangle', gain: .055, delay: .06}); },
     crash: () => synth.crash(),
     crimCrash: () => synth.crimCrash(),
     // v7: a barrier hit (pack: the barrier breaking; `far` = the thief's car, softer); without the pack the v6 crash sounds
@@ -315,12 +356,24 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
     zap: () => { tone(1800, .22, {type: 'sawtooth', gain: .05, slide: -1500}); noise(.2, {gain: .06, from: 6000, to: 2500, q: 3, delay: .03}); },
     tracker: () => { tone(1320, .07, {type: 'sine', gain: .07}); tone(1320, .07, {type: 'sine', gain: .07, delay: .12}); },
     slowmo: () => { tone(520, .45, {type: 'sine', gain: .05, slide: -260}); noise(.4, {gain: .035, from: 1600, to: 400}); },
+    // ----- v8: the launcher (net, spike strip), the pulse charging, and a tap with nothing in range (a soft click) -----
+    launch: () => { if (V8 && get8()) { a8.launch(); return; } noise(.22, {gain: .05, from: 700, to: 1600}); },
+    charge: () => { if (V8 && get8()) { a8.charge(); return; } tone(420, .2, {type: 'sine', gain: .04, slide: 500}); },
+    dry: () => { if (V8 && get8()) { a8.dry(); return; } tone(240, .05, {type: 'triangle', gain: .03}); },
   };
   return {
     cue(name, arg) { try { cues[name]?.(arg); } catch { /* audio is optional */ } },
     /** Continuous engine note: call every frame of the chase with the speed (m/s) and whether the boost is on. */
-    engine(v, boosting) { try { if (muted() || paused || disposed) { engineStop(); return; } engineSet(v, boosting); } catch { /* audio is optional */ } },
-    engineStop() { try { engineStop(); } catch { /* ignore */ } },
+    engine(v, boosting) {
+      try {
+        if (muted() || paused || disposed) { engineStop(); a8?.engineStop(); return; }
+        if (V8?.engine) { const x = get8(); if (x) { x.engineState(engineInfo.phase, engineInfo.braking); x.engine(v, boosting); } return; }
+        engineSet(v, boosting);
+      } catch { /* audio is optional */ }
+    },
+    engineStop() { try { engineStop(); a8?.engineStop(); } catch { /* ignore */ } },
+    /** v8: the chase phase (the V6 idles through the countdown) and the brake; the session calls it every frame before engine(). */
+    engineState(phase, braking) { engineInfo = {phase: phase || 'run', braking: Boolean(braking)}; },
     /** Read-only: which recorded siren is decoded and whether it is the one playing (null + sirenLive=false means the synth fallback). */
     status() {
       return {
@@ -330,6 +383,7 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
         sirenLive: Boolean(live), sirenGain: live ? +live.g.gain.value.toFixed(3) : 0, ...(SIREN_SCALE !== 1 ? {sirenScale: SIREN_SCALE} : {}),
         ...(PACK ? {pack: {decoded: Object.keys(packBuf).length, of: Object.keys(PACK.sounds).length, siren: live?.pack ? live.id : null, voices: voices.length, format: packFmt['police-soft'] || null}} : {}),
         engine: Boolean(eng), boosting: Boolean(eng?.boosting), draw: Boolean(drawOsc), limiter: Boolean(limiter),
+        ...(V8 ? {v8: {...V8, live: a8 ? a8.status() : null, pack8: P8 ? {decoded: Object.keys(p8Buf).length, of: Object.keys(P8.sounds).length, format: p8Fmt['engine-police-mid'] || null} : null}} : {}),
       };
     },
     /** The node every cue feeds (before the limiter): probes tap it with an AnalyserNode. */
@@ -339,7 +393,7 @@ export function createCatchAudio({muted = () => false, sirenScale = 1, pack = nu
     setPaused(v) { paused = Boolean(v); if (ac) { try { paused ? ac.suspend() : ac.resume(); } catch { /* ignore */ } } },
     dispose() {
       if (disposed) return; disposed = true; clearTimeout(killTimer); clearTimeout(lastDraw); unbindUnlock();
-      try { engineStop(); } catch { /* ignore */ } live = null; drawOsc = null; voices.length = 0;
+      try { engineStop(); a8?.dispose(); } catch { /* ignore */ } live = null; drawOsc = null; voices.length = 0; a8 = null;
       try { ac?.close(); } catch { /* ignore */ } ac = null; master = null; limiter = null;
     },
   };
