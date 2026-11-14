@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "browser": "Chromium 151.0.7922.173",
+  "viewport": [
+    844,
+    390
+  ],
+  "otherViewports": [
+    [
+      390,
+      844
+    ],
+    [
+      1440,
+      960
+    ]
+  ],
+  "deviceScaleFactor": 1,
+  "effectReviews": [
+    {
+      "effect": "turbo-low",
+      "frame": 2,
+      "screenshot": "turbo-low-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "turbo-medium",
+      "frame": 2,
+      "screenshot": "turbo-medium-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "turbo-high",
+      "frame": 2,
+      "screenshot": "turbo-high-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "tire-drift",
+      "frame": 2,
+      "screenshot": "tire-drift-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "tire-brake",
+      "frame": 2,
+      "screenshot": "tire-brake-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "skid-marks",
+      "frame": 0,
+      "screenshot": "skid-marks-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "wall-sparks",
+      "frame": 2,
+      "screenshot": "wall-sparks-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "road-dust",
+      "frame": 2,
+      "screenshot": "road-dust-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "gear-shift",
+      "frame": 2,
+      "screenshot": "gear-shift-844x390.png",
+      "ready": true
+    },
+    {
+      "effect": "grass-rustle",
+      "frame": 2,
+      "screenshot": "grass-rustle-844x390.png",
+      "ready": true
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "checks": [
+    "landscape viewport fit",
+    "all 10 atlases decode and render",
+    "all effect selectors and frame scrubbing",
+    "pause freezes clock; resume advances",
+    "three backgrounds",
+    "three quality tiers",
+    "manual reduced motion",
+    "OS reduced motion",
+    "portrait no horizontal overflow",
+    "desktop filmstrip",
+    "download paths"
+  ],
+  "limits": "Browser verification only. Managed Chromium blocks file:// with ERR_BLOCKED_BY_ADMINISTRATOR, so preview was verified over localhost HTTP. No physical phone, FPS, GPU timing or live-game integration measured."
+}

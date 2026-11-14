@@ -1,0 +1,261 @@
+{
+  "status": "PASS",
+  "atlasCount": 10,
+  "frameCount": 61,
+  "totalAtlasBytes": 1334776,
+  "totalFrameBytes": 1311582,
+  "maxAtlasBytes": 253590,
+  "checks": [
+    "PNG format, RGBA8 and exact sizes",
+    "SHA-256 and byte counts",
+    "61 distinct authored frames",
+    "pixel-identical atlas extraction",
+    "8px transparent gutters",
+    "empty unused cells",
+    "clear gear-shift center",
+    "cloud dissipation",
+    "turbo intensity ordering and cyclic seam",
+    "matching browser manifest",
+    "mobile resident GPU/instance budgets"
+  ],
+  "effects": [
+    {
+      "id": "turbo-low",
+      "frames": 8,
+      "atlasBytes": 131332,
+      "budgetUsedPercent": 21.89,
+      "alphaMassPerFrame": [
+        496868,
+        504250,
+        501904,
+        492108,
+        481251,
+        474712,
+        475762,
+        484713
+      ],
+      "loopSeamMeanAlphaDifference": 2.6110687255859375,
+      "adjacentMeanAlphaDifferences": [
+        2.81903076171875,
+        2.6322021484375,
+        2.2635498046875,
+        1.9230804443359375,
+        1.9737396240234375,
+        2.1500244140625,
+        2.3770294189453125
+      ]
+    },
+    {
+      "id": "turbo-medium",
+      "frames": 8,
+      "atlasBytes": 192810,
+      "budgetUsedPercent": 32.13,
+      "alphaMassPerFrame": [
+        915730,
+        929701,
+        925187,
+        906258,
+        885230,
+        872702,
+        874975,
+        892397
+      ],
+      "loopSeamMeanAlphaDifference": 3.8628387451171875,
+      "adjacentMeanAlphaDifferences": [
+        4.1581573486328125,
+        3.913360595703125,
+        3.3296356201171875,
+        2.8389892578125,
+        2.935455322265625,
+        3.1729278564453125,
+        3.522430419921875
+      ]
+    },
+    {
+      "id": "turbo-high",
+      "frames": 8,
+      "atlasBytes": 253590,
+      "budgetUsedPercent": 42.27,
+      "alphaMassPerFrame": [
+        1446357,
+        1469040,
+        1462249,
+        1431806,
+        1397686,
+        1377195,
+        1380720,
+        1408640
+      ],
+      "loopSeamMeanAlphaDifference": 5.2064056396484375,
+      "adjacentMeanAlphaDifferences": [
+        5.5765533447265625,
+        5.2499542236328125,
+        4.4653472900390625,
+        3.867523193359375,
+        4.0032806396484375,
+        4.2549896240234375,
+        4.744476318359375
+      ]
+    },
+    {
+      "id": "tire-drift",
+      "frames": 6,
+      "atlasBytes": 107474,
+      "budgetUsedPercent": 17.91,
+      "alphaMassPerFrame": [
+        348960,
+        578958,
+        688906,
+        619451,
+        361512,
+        63695
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        5.472930908203125,
+        5.92919921875,
+        5.7318878173828125,
+        5.4282989501953125,
+        4.5849761962890625
+      ]
+    },
+    {
+      "id": "tire-brake",
+      "frames": 6,
+      "atlasBytes": 127073,
+      "budgetUsedPercent": 21.18,
+      "alphaMassPerFrame": [
+        398906,
+        652511,
+        766065,
+        679872,
+        390649,
+        67574
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        6.0297393798828125,
+        6.40032958984375,
+        6.1543121337890625,
+        5.8939971923828125,
+        4.9740142822265625
+      ]
+    },
+    {
+      "id": "skid-marks",
+      "frames": 1,
+      "atlasBytes": 40496,
+      "budgetUsedPercent": 6.75,
+      "alphaMassPerFrame": [
+        1086069
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": []
+    },
+    {
+      "id": "wall-sparks",
+      "frames": 4,
+      "atlasBytes": 143552,
+      "budgetUsedPercent": 23.93,
+      "alphaMassPerFrame": [
+        839857,
+        689394,
+        859238,
+        891146
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        13.216018676757812,
+        11.418060302734375,
+        12.4241943359375
+      ]
+    },
+    {
+      "id": "road-dust",
+      "frames": 8,
+      "atlasBytes": 149120,
+      "budgetUsedPercent": 24.85,
+      "alphaMassPerFrame": [
+        278226,
+        381532,
+        470339,
+        526734,
+        535858,
+        479685,
+        333492,
+        44410
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        2.94293212890625,
+        3.1552276611328125,
+        3.1693572998046875,
+        3.1051025390625,
+        3.0095062255859375,
+        3.1105804443359375,
+        4.411041259765625
+      ]
+    },
+    {
+      "id": "gear-shift",
+      "frames": 4,
+      "atlasBytes": 45697,
+      "budgetUsedPercent": 7.62,
+      "alphaMassPerFrame": [
+        77218,
+        163069,
+        116840,
+        35104
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        1.5206146240234375,
+        1.2068328857421875,
+        1.3043212890625
+      ]
+    },
+    {
+      "id": "grass-rustle",
+      "frames": 8,
+      "atlasBytes": 143632,
+      "budgetUsedPercent": 23.94,
+      "alphaMassPerFrame": [
+        662107,
+        793844,
+        820129,
+        727002,
+        623554,
+        542037,
+        562104,
+        660962
+      ],
+      "loopSeamMeanAlphaDifference": null,
+      "adjacentMeanAlphaDifferences": [
+        9.882064819335938,
+        6.5535430908203125,
+        9.054031372070312,
+        9.35272216796875,
+        6.8659210205078125,
+        4.7666168212890625,
+        8.147979736328125
+      ]
+    }
+  ],
+  "qualityTiers": {
+    "low": {
+      "downloadBytes": 298901,
+      "residentGpuMiB": 12,
+      "maxActiveInstances": 12
+    },
+    "balanced": {
+      "downloadBytes": 760525,
+      "residentGpuMiB": 24,
+      "maxActiveInstances": 20
+    },
+    "high": {
+      "downloadBytes": 1010634,
+      "residentGpuMiB": 32,
+      "maxActiveInstances": 28
+    }
+  }
+}

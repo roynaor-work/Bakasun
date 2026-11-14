@@ -1,0 +1,38 @@
+{
+  "overall": "Environment issue in original npm test; focused rerun passed",
+  "initialRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "stats": {
+      "tests": 3334,
+      "suites": 0,
+      "pass": 3277,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 56,
+      "todo": 0,
+      "duration_ms": 492319.230778
+    },
+    "failure": "tests/workout-royiki.test.mjs: browserType.launch: missing chromium_headless_shell-1234 executable",
+    "intervention": "The test left its HTTP server open after launch failed; only its worker was terminated after the run stalled. The runner then reported the original missing-executable error."
+  },
+  "focusedRerun": {
+    "command": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/racing-v7/source/playwright-system.mjs\" node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "stats": {
+      "tests": 5,
+      "suites": 0,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "duration_ms": 25399.916023
+    },
+    "browser": "Existing repository adapter selecting /usr/bin/chromium"
+  },
+  "assetValidation": "PASS; verification/assets.json",
+  "previewValidation": "PASS; verification/browser.json",
+  "javascriptSyntax": "PASS; node --check preview.js and manifest.js",
+  "existingFilesModified": false
+}

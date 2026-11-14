@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10191d">
+  <title>מרוצים · מעבדת אפקטים 02</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script src="manifest.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main class="lab">
+    <header class="mast">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">〰</span><div><p class="eyebrow">ISLAND / MOTION STUDIES</p><h1>מרוצים <span>אפקטים 02</span></h1></div></div>
+      <div class="header-end"><span class="live"><i></i> תצוגה חיה</span><a href="REPORT.md">דוח</a><a href="manifest.json">מניפסט</a></div>
+    </header>
+    <aside class="library" aria-label="ספריית האפקטים">
+      <div class="section-title"><h2>ספריית אפקטים</h2><span id="effectCount">10</span></div>
+      <label class="quality-label" for="quality">תקציב נייד</label>
+      <select id="quality"><option value="review">סקירת כל הנכסים</option><option value="low">נייד חלש · 12 MiB</option><option value="balanced">מאוזן · 24 MiB</option><option value="high">חזק · 32 MiB</option></select>
+      <nav id="effects" aria-label="בחירת אפקט"></nav>
+      <p class="library-foot">מקורי. שקוף. ללא מותגים.<br><span>256px / 1024px atlas</span></p>
+    </aside>
+    <section class="workspace" aria-labelledby="selectedTitle">
+      <div class="scene-heading"><div><p id="selectedKind" class="eyebrow">EXHAUST / LOOP</p><h2 id="selectedTitle">להבת טורבו · נמוכה</h2></div><div class="backgrounds" role="group" aria-label="רקע לבדיקה"><button data-bg="asphalt" aria-pressed="true" title="אספלט">אספלט</button><button data-bg="checker" aria-pressed="false" title="רשת שקיפות">רשת</button><button data-bg="light" aria-pressed="false" title="רקע בהיר">בהיר</button></div></div>
+      <div class="stage"><canvas id="stage" width="844" height="390" role="img" aria-label="תצוגת האפקט הנבחר על רקע אספלט"></canvas><span class="stage-caption">תצוגת נכס · ללא חיבור למשחק</span><span id="status" class="stage-status" role="status">טוען…</span></div>
+      <div class="transport"><button id="play" aria-label="השהיית הניגון" aria-pressed="false">השהיה</button><button id="restart" aria-label="ניגון מהתחלה">מהתחלה</button><label class="motion"><input id="reduced" type="checkbox"> תנועה מופחתת</label><output id="frameLabel">01 / 08</output></div>
+      <div class="timeline"><label for="frame">פריים</label><input id="frame" type="range" min="0" max="7" value="0" step="1"><span id="playback">24 FPS · LOOP</span></div>
+      <div class="details"><div><span>אטלס PNG</span><strong id="size">—</strong></div><div><span>שילוב</span><strong id="blend">ADDITIVE</strong></div><div><span>עוגן מקומי</span><strong id="pivot">34, 128</strong></div><a id="download" href="atlases/turbo-low.png" download>הורדת אטלס <span aria-hidden="true">↙</span></a></div>
+      <div class="filmstrip" id="filmstrip" aria-label="פריימים ברצף"></div>
+      <p class="footnote" id="tierNote">בסקירה נטען אטלס אחד בכל רגע. המשקלים מתייחסים לקובץ; כל אטלס תופס 4 MiB ב־RGBA8.</p>
+    </section>
+    <footer><span>RACING FX V2 <i>/</i> 14.11.2026</span><span>STRAIGHT ALPHA <i>/</i> sRGB <i>/</i> NO MIPMAPS</span></footer>
+  </main>
+</body>
+</html>

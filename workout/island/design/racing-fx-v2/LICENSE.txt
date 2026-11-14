@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 Bakasun contributors
+
+Applies only to the original PNG sprites, atlases, metadata, documentation,
+preview and authoring/validation code in this racing-fx-v2 directory.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Provenance
+----------
+All effect artwork is newly authored deterministic procedural artwork defined
+in tools/build_assets.py. No downloaded photographs, third-party sprite packs,
+AI image outputs, existing repository images, fonts, car models or logos were
+used as image inputs. The preview draws only a simple material test surface
+and an exhaust attachment fixture, not a car or a game scene. It uses system
+fonts and native browser APIs. Python/numpy/Pillow and Playwright are optional
+authoring/verification dependencies and are not bundled or needed at runtime.
+
+No brand assets or trademark permissions are included. This license does not
+relicense any existing files elsewhere in the repository.
