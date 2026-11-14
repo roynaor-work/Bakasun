@@ -8,7 +8,7 @@
  *    league field).
  * 4. The six themes at full size (tools/alpine-league-themes.html: the real session on a stage of each theme), opening and mid-race, with
  *    the Codex art: the files each theme fetched from assets/alpine-themes-v23, the gates and landmarks that loaded, triangles and calls.
- * Usage: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tools/alpine-league-browser.mjs [--skip-themes] [--themes-only] [--theme id] [--island-quality low] [--frame-cap 100]
+ * Usage: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/google-chrome node workout/island/tools/alpine-league-browser.mjs [--skip-themes] [--themes-only] [--theme id] [--island-quality low] [--lockstep 100] [--attempts 3] [--lights | --lights-only]
  * Writes screenshots and browser-proof.json to verification/alpine-league-v23/. SwiftShader on a busy machine can fall to a frame every
  * few seconds (the race clock then runs slower than the wall clock, as on a very slow phone), so the limits are generous: a full stage
  * may take tens of minutes. The stage time in the report is the race clock. */
@@ -20,6 +20,7 @@ import {THEMES} from '../minigames/alpine-league-core.mjs';
 
 const OUT = fileURLToPath(new URL('../verification/alpine-league-v23/', import.meta.url));
 const W = 844, H = 390, args = new Set(process.argv.slice(2));
+const lightsOnly = args.has('--lights-only');
 await mkdir(OUT, {recursive: true});
 const report = {when: new Date().toISOString(), viewport: [W, H], touch: 'CDP Input.dispatchTouchEvent', steps: [], themes: [], errors: []};
 const step = (name, data = {}) => { report.steps.push({name, ...data}); console.error(`· ${name}`, Object.keys(data).length ? JSON.stringify(data) : ''); };
@@ -37,10 +38,30 @@ async function touchKit(page) {
     async tap(selector) { const [x, y] = await center(selector); await send('touchStart', [[1, x, y]]); await page.waitForTimeout(60); await send('touchEnd', []); await page.waitForTimeout(120); },
     async tapAt(x, y) { await send('touchStart', [[1, x, y]]); await page.waitForTimeout(60); await send('touchEnd', []); }};
 }
+/** --lockstep ms: a frame clock in steps, installed before the page loads. While a race is ridden, each frame of the page waits until the
+ * thumb has acted on the previous one and then advances exactly `ms` of game time (a phone at 1000/ms frames a second, never slower).
+ * Why: SwiftShader on a shared machine draws a frame every 1-3 s and reading the race through CDP takes about as long, so on the wall clock
+ * the game stepped 0.25 s (its catch-up limit) between two touches, a thumb four times slower than the headless measurement (the same bot at
+ * 4 decisions a race second passes stage 1 about 25% of the time instead of 92%). Only requestAnimationFrame timing changes: the game state,
+ * the touches (real, through CDP) and the saves are untouched. Outside a ride (menus, loading, results) frames run freely. */
+const LOCKSTEP_INIT = step => {
+  const raf = window.requestAnimationFrame.bind(window), gate = window.__frameGate = {locked: false, allow: 0, frames: 0};
+  let t = null, frameNow = null;
+  window.requestAnimationFrame = cb => raf(function run(now) {
+    if (now !== frameNow) {
+      if (gate.locked && gate.allow <= 0) { raf(run); return; }
+      if (gate.locked) gate.allow--;
+      t = t === null ? now : t + (gate.locked ? step : Math.min(now - frameNow, step)); frameNow = now; gate.frames++;
+    }
+    cb(t);
+  });
+};
+/** Lets one frame of a locked page run and waits until it has. */
+const nextFrame = page => page.evaluate(() => new Promise(resolve => { const g = window.__frameGate, before = g.frames; g.allow = 1; const check = () => g.frames > before ? resolve() : setTimeout(check, 8); check(); }));
 /** The child-like bot, playing through touches: thumb 1 holds the floating stick in the left half of the slope, finger 2 taps boost or a trick.
  * CDP keeps a second finger down until a touchEnd, which lifts every finger: a tap of finger 2 is therefore "lift all, put the thumb back on
  * its landing point, press the button, slide the thumb to its steering offset", and the next frame lifts the button the same way. */
-async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds = 260, shotAt = null, shotPath = null, shots = [], stopAt = null} = {}) {
+async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds = 260, shotAt = null, shotPath = null, shots = [], stopAt = null, lockstep = false} = {}) {
   const pending = [...(shotAt ? [[shotAt, shotPath]] : []), ...shots].sort((a, b) => a[0] - b[0]), taken = [];
   const stick = await page.locator('.alpine-joystick').boundingBox(), reach = Math.max(10, (stick.width / 2 - 8) * .62);
   const boost = await touch.center('.alpine-boost'), grab = await touch.center('.alpine-trick[data-trick=grab]');
@@ -49,12 +70,13 @@ async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds
   const bot = createKidBot({seed, physics}); let down = false, extra = null, presses = {boost: 0, trick: 0}, polls = 0;
   const regrip = async (thumb, button) => { await touch.send('touchEnd', []); await touch.send('touchStart', [[1, ...origin]]); if (button) await touch.send('touchStart', [[1, ...origin], [2, ...button]]); await touch.send('touchMove', button ? [thumb, [2, ...button]] : [thumb]); };
   const t0 = Date.now();
+  if (lockstep) await page.evaluate(() => { window.__frameGate.locked = true; });
   while (Date.now() - t0 < maxSeconds * 1000) {
     snap = await readSnapshot(); polls++;
     if (!snap || !snap.frame) break;
     const f = snap.frame;
     if (f.result || snap.phase === 'finished' || snap.disposed) break;
-    if (f.phase !== 'racing') { await page.waitForTimeout(40); continue; }
+    if (f.phase !== 'racing') { if (lockstep) await nextFrame(page); else await page.waitForTimeout(40); continue; }
     if (!down) { await touch.send('touchStart', [[1, ...origin]]); down = true; }
     const d = bot.decide(f), thumb = [1, origin[0] + d.steer * reach, origin[1]];
     if (extra) { await regrip(thumb, null); extra = null; }
@@ -63,24 +85,21 @@ async function rideWithTouches(page, touch, readSnapshot, {seed = 11, maxSeconds
     else await touch.send('touchMove', [thumb]);
     while (pending.length && f.timeMs > pending[0][0]) { const [, path] = pending.shift(); await page.screenshot({path}); taken.push({path: path.split('/').pop(), raceMs: f.timeMs}); }
     if (stopAt && f.timeMs > stopAt) break;
-    await page.waitForTimeout(30);
+    if (lockstep) await nextFrame(page); else await page.waitForTimeout(30);
   }
   if (down) await touch.send('touchEnd', []);
+  if (lockstep) await page.evaluate(() => { window.__frameGate.locked = false; });
   return {presses, polls, shots: taken, wallSeconds: +((Date.now() - t0) / 1000).toFixed(1)};
 }
 /** Read-only: the race snapshot of the session the island is running (exposed by ?dev=1). */
 const islandSnapshot = page => page.evaluate(() => { const s = window.__island?.ui?.activityInterface?.current?.session?.snapshot; return s ? {phase: s.phase, disposed: s.disposed, frame: s.frame, league: s.league} : null; });
 
 try {
-  if (!args.has('--themes-only')) {
+  if (!args.has('--themes-only') && !lightsOnly) {
     // ---------- 1. Fresh island, games menu, the ski league card, season and gear ----------
     const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page);
-    // --frame-cap ms: the page's frame clock advances at most this much per drawn frame (a phone at 1000/ms frames a second). SwiftShader on a
-    // shared machine draws a frame every 1-3 s and the game then steps 0.25 s per frame (its catch-up limit), so a thumb could only act 4 times
-    // a race second; with a cap the race runs slower than the wall clock, as on a slow phone, and the touches keep their meaning. Only the
-    // requestAnimationFrame timestamps change: game state, input and saves are untouched.
-    const frameCap = process.argv.includes('--frame-cap') ? Number(process.argv[process.argv.indexOf('--frame-cap') + 1]) : 0;
-    if (frameCap > 0) { report.frameCapMs = frameCap; await page.addInitScript(cap => { const raf = window.requestAnimationFrame.bind(window); let last = null, t = 0; window.requestAnimationFrame = cb => raf(now => { if (last === null) t = now; else if (now !== last) t += Math.min(now - last, cap); last = now; cb(t); }); }, frameCap); }
+    const lockstep = process.argv.includes('--lockstep') ? Number(process.argv[process.argv.indexOf('--lockstep') + 1]) : 0;
+    if (lockstep > 0) { report.lockstepMs = lockstep; await page.addInitScript(LOCKSTEP_INIT, lockstep); }
     page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
     const touch = await touchKit(page);
     // --island-quality low: the island's own low-graphics mode (?quality=low, as on a weak phone) for the league flow; the themes stay at full quality.
@@ -100,7 +119,8 @@ try {
 
     // ---------- 2. League stage 1: instructions, a full race by touch, the result ----------
     let attempt = 0, result = null;
-    while (attempt < 3 && !(result?.passed)) {
+    const attempts = process.argv.includes('--attempts') ? Number(process.argv[process.argv.indexOf('--attempts') + 1]) : 3;
+    while (attempt < attempts && !(result?.passed)) {
       attempt++;
       if (attempt === 1) { await touch.tap('[data-action=alpine-league-go]'); await touch.tap('[data-action=game-understood]'); }
       else await touch.tap('[data-action=alpine-league-again]');
@@ -109,7 +129,7 @@ try {
       if (attempt === 1) { await page.screenshot({path: OUT + '05-stage-opening.png'}); step('stage opening (goals on the card)', opening); }
       const physics = await page.evaluate(async () => (await (await fetch('data/config.json')).json()).minigames.alpineRush.physics);
       const startWall = Date.now(); await touch.tap('[data-action=alpine-start]');
-      const ride = await rideWithTouches(page, touch, async () => { const s = await islandSnapshot(page); return s && {...s, physics}; }, {seed: 40 + attempt, maxSeconds: 3600, shotAt: 20000, shotPath: OUT + `06-race-${attempt}.png`});
+      const ride = await rideWithTouches(page, touch, async () => { const s = await islandSnapshot(page); return s && {...s, physics}; }, {seed: 40 + attempt, maxSeconds: 3600, shotAt: 20000, shotPath: OUT + `06-race-${attempt}.png`, lockstep: lockstep > 0});
       await page.waitForSelector('[data-alpine-league-result]', {timeout: 600000});
       result = await page.evaluate(() => { const r = document.querySelector('[data-alpine-league-result]'); return {passed: r.dataset.passed === 'true', headline: r.querySelector('h4')?.textContent, stars: r.querySelectorAll('.al-result-top .al-stars i.on').length, goals: [...r.querySelectorAll('.al-goal-check li')].map(li => ({goal: li.dataset.goal, ok: li.dataset.ok === 'true', text: li.textContent})), rows: [...r.querySelectorAll('.result-row')].map(x => x.textContent)}; });
       const league = await page.evaluate(() => JSON.parse(localStorage.getItem('island.alpine.league.v1') || 'null'));
@@ -133,7 +153,7 @@ try {
     await page.close();
   }
   // ---------- 4. Six themes ----------
-  if (!args.has('--skip-themes')) {
+  if (!args.has('--skip-themes') && !lightsOnly) {
     const picks = {pine: 2, ice: 7, lava: 13, aurora: 17, village: 22, peak: 28};
     const only = process.argv.includes('--theme') ? process.argv[process.argv.indexOf('--theme') + 1] : null;
     for (const theme of THEMES.filter(t => !only || t.id === only)) {
@@ -155,6 +175,35 @@ try {
       await page.close();
     }
   }
+  // ---------- 5. Start lights (Formula 1): five red lamps one by one, then green; ?alpineStartLights=0 keeps the big number ----------
+  if (lightsOnly || args.has('--lights')) {
+    report.lights = {frameMs: 100, trace: [], shots: []};
+    const page = await context.newPage(), errors = []; page.setDefaultTimeout(600000); await csp.attachPage(page); await page.addInitScript(LOCKSTEP_INIT, 100);
+    page.on('pageerror', e => errors.push(e.message)); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
+    const touch = await touchKit(page);
+    await page.goto(server.url + 'tools/alpine-league-themes.html?stage=1&seed=5', {waitUntil: 'load'});
+    await page.waitForFunction(() => window.__theme?.ready || window.__theme?.error, null, {timeout: 600000});
+    await touch.tap('[data-action=alpine-start]'); await page.evaluate(() => { window.__frameGate.locked = true; });
+    const read = () => page.evaluate(() => { const f = window.__theme.session.snapshot.frame, n = document.querySelector('.alpine-lights'); return {phase: f?.phase, countdownMs: f?.countdownMs, timeMs: f?.timeMs, state: n?.dataset.state, lit: n?.dataset.lit, hidden: n?.hidden, count: n?.querySelector('.alpine-lights-count')?.textContent, lamps: [...(n?.querySelectorAll('.alpine-lamp') || [])].map(l => l.dataset.on).join(','), bigNumberHidden: document.querySelector('.alpine-countdown')?.hidden}; });
+    const wanted = [['lights-1-two.png', s => s.phase === 'countdown' && s.lit === '2'], ['lights-2-five.png', s => s.phase === 'countdown' && s.lit === '5'], ['lights-3-green.png', s => s.state === 'green' && s.timeMs >= 200]];
+    let last = '';
+    for (let i = 0; i < 120 && wanted.length; i++) {
+      const st = await read(), key = `${st.phase}:${st.state}:${st.lit}:${st.count}`;
+      if (key !== last) { report.lights.trace.push(st); last = key; }
+      if (wanted[0][1](st)) { await page.screenshot({path: OUT + wanted[0][0]}); report.lights.shots.push({shot: wanted[0][0], ...st}); wanted.shift(); }
+      await nextFrame(page);
+    }
+    await page.evaluate(() => { window.__frameGate.locked = false; }); report.lights.errors = errors; await page.close();
+    const off = await context.newPage(), offErrors = []; off.setDefaultTimeout(600000); await csp.attachPage(off); off.on('pageerror', e => offErrors.push(e.message));
+    const offTouch = await touchKit(off);
+    await off.goto(server.url + 'tools/alpine-league-themes.html?stage=1&seed=5&alpineStartLights=0', {waitUntil: 'load'});
+    await off.waitForFunction(() => window.__theme?.ready || window.__theme?.error, null, {timeout: 600000});
+    await offTouch.tap('[data-action=alpine-start]');
+    await off.waitForFunction(() => { const c = document.querySelector('.alpine-countdown'); return c && !c.hidden && c.textContent; }, null, {timeout: 600000});
+    report.lights.flagOff = await off.evaluate(() => ({gantry: !!document.querySelector('.alpine-lights'), bigNumber: document.querySelector('.alpine-countdown')?.textContent, bigNumberHidden: document.querySelector('.alpine-countdown')?.hidden}));
+    await off.screenshot({path: OUT + 'lights-off-number.png'}); report.lights.flagOffErrors = offErrors; await off.close();
+    step('start lights', {shots: report.lights.shots.map(x => `${x.shot} ${x.state} lit ${x.lit} count ${x.count}`), flagOff: report.lights.flagOff});
+  }
   report.csp = await csp.assertClean().then(() => 'clean').catch(e => String(e.message || e));
 } catch (error) { report.errors.push(String(error?.stack || error)); console.error(error); }
-finally { await writeFile(OUT + 'browser-proof.json', JSON.stringify(report, null, 1) + '\n'); await browser.close(); await csp.dispose?.(); await server.close(); }
+finally { await writeFile(OUT + (lightsOnly ? 'lights-proof.json' : 'browser-proof.json'), JSON.stringify(report, null, 1) + '\n'); await browser.close(); await csp.dispose?.(); await server.close(); }

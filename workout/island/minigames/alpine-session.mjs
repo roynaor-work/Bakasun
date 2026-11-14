@@ -10,6 +10,7 @@ import {leagueBalance} from './alpine-league-stages.mjs?v=island-v2-20261107-12'
 import {createGhostRecorder,loadGhost,saveGhost,ghostTimeAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-12';
 import {THEME_LOOKS} from './alpine-league-theme.mjs?v=island-v2-20261107-12';
 import {THEMES} from './alpine-league-core.mjs?v=island-v2-20261107-12';
+import {createStartLights,startLightsEnabled} from './alpine-start-lights.mjs?v=island-v2-20261107-12';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const BRAND = '<path d="M2 28 15 5l6 11 5-8 13 20H2Z"/><path d="m10 15 5-10 6 11-5-4-6 3Z" class="snow"/>';
@@ -162,6 +163,10 @@ export function runAlpineSession(ctx) {
   }
   const worldLabel = el('div', 'alpine-world-label'); worldLabel.setAttribute('aria-hidden', 'true'); worldLabel.append(el('span', '', '46°35′ N   08°02′ E'), el('b', '', 'ABOVE THE ORDINARY.'), el('span', '', '2,840 M / ALPINE CIRCUIT'));
   const countdown = el('div', 'alpine-countdown'); countdown.setAttribute('aria-live', 'assertive');
+  // Start lights (Formula 1 style) instead of the big number; ?alpineStartLights=0 keeps the number. A beep for every lamp and the start
+  // cue at green replace the per-second countdown cues.
+  const lightsOn = startLightsEnabled(), lights = lightsOn ? createStartLights(doc, {totalMs: balance.physics.countdownSeconds * 1000, onLamp: () => { audio.cue('countdown'); ctx.sound?.('button'); }}) : null;
+  const lightsCss = lightsOn ? el('link') : null; if (lightsCss) { lightsCss.rel = 'stylesheet'; lightsCss.href = new URL('./alpine-start-lights.css?v=island-v2-20261107-12', import.meta.url).href; }
   const callout = el('div', 'alpine-callout'), calloutKicker = el('span'), calloutLine = el('b'); callout.append(calloutKicker, calloutLine); callout.hidden = true;
   const loading = el('div', 'alpine-loading'), loadingText = el('p', '', t('alpine.loading')); loading.append(el('span', 'alpine-spinner'), loadingText);
   // Footer controls (inside the island controls region)
@@ -191,9 +196,10 @@ export function runAlpineSession(ctx) {
   const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
   const center = el('div', 'alpine-center'); center.append(speed, hint);
   footer.append(joystick, center, actions);
-  stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading);
+  stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading); if (lights) stage.append(lights.node);
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);
   dom = {app, nodes: [vignette, brand, hud, intro, worldLabel, countdown, callout, loading, footer, css, polish, screenCss, kitCss, feelCss, cleanCss, app]};
+  if (lights) { screen.append(lightsCss); dom.nodes.push(lights.node, lightsCss); app.dataset.startLights = 'true'; }
   if (league) { const leagueCss = el('link'); leagueCss.rel = 'stylesheet'; leagueCss.href = new URL('./alpine-league.css?v=island-v2-20261107-12', import.meta.url).href; screen.append(leagueCss); dom.nodes.push(leagueCss); }
   screen.dataset.alpineDusk = String(!!track.visual?.dusk);
   const setPhase = phase => { app.dataset.phase = phase; screen.dataset.alpinePhase = phase; };
@@ -234,7 +240,7 @@ export function runAlpineSession(ctx) {
   let coinPulse = 0;
   function handleEvents(snap, now) {
     for (const e of engine.drainEvents()) {
-      if (e.type === 'countdown') { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); continue; }
+      if (e.type === 'countdown') { if (lightsOn) { if (e.value === 0) audio.cue('go'); } else { audio.cue(e.value > 0 ? 'countdown' : 'go'); if (e.value > 0) ctx.sound?.('button'); } continue; }
       if (e.riderId !== 'player') { if (e.type === 'overtake' && e.objectId === 'player') status.textContent = t('alpine.status.overtaken', {rank: snap.rank}); continue; }
       if (e.type === 'boost-start') { audio.cue('boost'); showCallout(e.objectId ? CALLOUTS.pad : CALLOUTS.boost, now); }
       else if (e.type === 'collision') { audio.cue('hit'); /* the fall itself is the feedback: no banner text */ }
@@ -262,7 +268,8 @@ export function runAlpineSession(ctx) {
     trickCaption.dataset.ready = String(!!snap.trickReady);
     boostButton.classList.toggle('active', !!snap.player.boosting); const boostReady = String(!!snap.boostReady); if (boostButton.dataset.ready !== boostReady) boostButton.dataset.ready = boostReady;
     const tank = (snap.boostFraction ?? 0).toFixed(3); if (tank !== shownTank) { shownTank = tank; boostButton.style.setProperty('--tank', tank); }
-    const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count; }
+    const count = snap.phase === 'countdown' ? String(snap.countdown) : ''; if (count !== shownCount) { shownCount = count; countdown.textContent = count; countdown.hidden = !count || lightsOn; }
+    lights?.update(snap);
     setData('boosting', String(!!snap.player.boosting)); setData('hit', String(!!snap.player.hit));
     hint.hidden = snap.timeMs > 6000;
     const score = (snap.score ?? 0).toLocaleString('en-US'); if (score !== shownScore) { shownScore = score; scoreValue.textContent = score; }

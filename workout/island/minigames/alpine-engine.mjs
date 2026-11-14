@@ -524,7 +524,7 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         return {
         schemaVersion: 1, phase, timeMs: 0, distanceM: 0, remainingM: course.length, rank: RIDER_IDS.length, totalRiders: RIDER_IDS.length,
         speedKmh: 0, player, rivals: [], obstacles: [],
-        countdown: Math.ceil(physics.countdownSeconds), boostFraction: physics.boostStartTank, trackLength: course.length, score: 0, coins: 0, coinTotal: course.coins || 0,
+        countdown: Math.ceil(physics.countdownSeconds), countdownMs: Math.round(physics.countdownSeconds * 1000), boostFraction: physics.boostStartTank, trackLength: course.length, score: 0, coins: 0, coinTotal: course.coins || 0,
         };
       }
       const ranked = standings();
@@ -541,6 +541,8 @@ export function createAlpineEngine({ balance, stage = 1, seed = 1, equipment = {
         rank: ranked.indexOf(p) + 1, totalRiders: riders.length, speedKmh: Math.round(p.speed * 3.6),
         player, rivals, obstacles,
         countdown: phase === 'countdown' ? Math.max(1, Math.ceil(countdownTicks * step - 1e-9)) : 0,
+        // Remaining countdown in ms (the start lights follow it; read-only, nothing in the race depends on it).
+        countdownMs: phase === 'countdown' ? Math.max(0, Math.round(countdownTicks * step * 1000)) : 0,
         boostFraction: p.boostTime > 0 ? Math.min(1, p.boostTime / (physics.boostSeconds * tankSize)) : p.tank,
         boostReady: p.boostTime <= 0 && p.tank >= physics.boostMinimum,
         trickReady: p.airborne && !p.trick && p.crashTime <= 0,
