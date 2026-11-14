@@ -1,0 +1,226 @@
+{
+  "url": "http://127.0.0.1:8765/workout/island/design/hoops-ref-scoreboard-v1/preview.html",
+  "browser": "system Chromium; headless ANGLE/SwiftShader",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "horizontalOverflow": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "six embedded clip IDs",
+      "pass": true
+    },
+    {
+      "name": "select and seek idle",
+      "pass": true
+    },
+    {
+      "name": "selected clip control idle",
+      "pass": true
+    },
+    {
+      "name": "select and seek run",
+      "pass": true
+    },
+    {
+      "name": "selected clip control run",
+      "pass": true
+    },
+    {
+      "name": "select and seek whistle",
+      "pass": true
+    },
+    {
+      "name": "selected clip control whistle",
+      "pass": true
+    },
+    {
+      "name": "select and seek foul",
+      "pass": true
+    },
+    {
+      "name": "selected clip control foul",
+      "pass": true
+    },
+    {
+      "name": "select and seek three_points",
+      "pass": true
+    },
+    {
+      "name": "selected clip control three_points",
+      "pass": true
+    },
+    {
+      "name": "select and seek direction",
+      "pass": true
+    },
+    {
+      "name": "selected clip control direction",
+      "pass": true
+    },
+    {
+      "name": "game clock elapsed delta",
+      "pass": true
+    },
+    {
+      "name": "shot clock elapsed delta",
+      "pass": true
+    },
+    {
+      "name": "pause preserves both clocks",
+      "pass": true
+    },
+    {
+      "name": "24 second reset",
+      "pass": true
+    },
+    {
+      "name": "expiration stops at zero with red lamp",
+      "pass": true
+    },
+    {
+      "name": "52 live atlas digit quads",
+      "pass": true
+    },
+    {
+      "name": "UI game reset clears lamp and stops clock",
+      "pass": true
+    },
+    {
+      "name": "UI 14-second reset",
+      "pass": true
+    },
+    {
+      "name": "UI lamp test",
+      "pass": true
+    },
+    {
+      "name": "no horizontal overflow 390",
+      "pass": true
+    },
+    {
+      "name": "no horizontal overflow 844",
+      "pass": true
+    },
+    {
+      "name": "no uncaught browser exceptions",
+      "pass": true
+    },
+    {
+      "name": "no failed resource requests",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "clockProbe": {
+    "playing": {
+      "home": 108,
+      "away": 99,
+      "gameSeconds": 63.75,
+      "shotSeconds": 12.75,
+      "period": 3,
+      "running": false,
+      "redRemaining": 0,
+      "lastEvent": null
+    },
+    "shown": {
+      "home": "108",
+      "away": "099",
+      "game": "01:04",
+      "shot": "13",
+      "period": 3,
+      "digits": {
+        "period0": 3,
+        "home0": 1,
+        "home1": 0,
+        "home2": 8,
+        "away0": 0,
+        "away1": 9,
+        "away2": 9,
+        "game0": 0,
+        "game1": 1,
+        "game2": 0,
+        "game3": 4,
+        "shot0": 1,
+        "shot1": 3
+      }
+    },
+    "paused": {
+      "home": 108,
+      "away": 99,
+      "gameSeconds": 63.75,
+      "shotSeconds": 12.75,
+      "period": 3,
+      "running": false,
+      "redRemaining": 0,
+      "lastEvent": null
+    },
+    "reset": {
+      "home": 108,
+      "away": 99,
+      "gameSeconds": 63.75,
+      "shotSeconds": 24,
+      "period": 3,
+      "running": false,
+      "redRemaining": 0,
+      "lastEvent": null
+    },
+    "expired": {
+      "home": 108,
+      "away": 99,
+      "gameSeconds": 8.99,
+      "shotSeconds": 0,
+      "period": 3,
+      "running": false,
+      "redRemaining": 1.99,
+      "lastEvent": "shot-clock-expired"
+    },
+    "lamps": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "fields": [
+      0.0625,
+      0.0625,
+      0.0625,
+      0.0625
+    ],
+    "digits": 52
+  },
+  "render": {
+    "frame": 100,
+    "calls": 310,
+    "triangles": 1665,
+    "points": 0,
+    "lines": 572
+  },
+  "pass": true
+}

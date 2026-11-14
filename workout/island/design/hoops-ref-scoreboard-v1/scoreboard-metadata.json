@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "asset": "models/scoreboard.glb",
+  "generator": "source/build-scoreboard.py",
+  "units": "meters",
+  "axes": {
+    "up": "+Y",
+    "front": "+Z"
+  },
+  "housingBounds": {
+    "min": [
+      -1.86,
+      0.065,
+      -1.86
+    ],
+    "max": [
+      1.86,
+      2.25,
+      1.86
+    ]
+  },
+  "completeBounds": {
+    "min": [
+      -1.86,
+      0.065,
+      -1.86
+    ],
+    "max": [
+      1.86,
+      4.2,
+      1.86
+    ]
+  },
+  "placement": "Set root position to court centre at desired floor clearance; lowest point is local y0.065.",
+  "triangles": 344,
+  "bytes": 134424,
+  "faces": 4,
+  "digitQuadsPerFace": 13,
+  "digitTriangles": 104,
+  "textureCount": 1,
+  "atlas": {
+    "file": "textures/digits.png",
+    "embedded": true,
+    "width": 1024,
+    "height": 512,
+    "columns": 16,
+    "digitRowV": [
+      0,
+      0.25
+    ],
+    "cells": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "blank": 10,
+      "colon": 11
+    },
+    "labelsBaked": [
+      "ISLAND ARENA",
+      "HOME",
+      "AWAY",
+      "GAME",
+      "SHOT",
+      "PERIOD"
+    ]
+  },
+  "digitNodes": [
+    {
+      "name": "digit_front_home0",
+      "field": "home0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_front_home1",
+      "field": "home1",
+      "initialDigit": 7
+    },
+    {
+      "name": "digit_front_home2",
+      "field": "home2",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_front_away0",
+      "field": "away0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_front_away1",
+      "field": "away1",
+      "initialDigit": 6
+    },
+    {
+      "name": "digit_front_away2",
+      "field": "away2",
+      "initialDigit": 8
+    },
+    {
+      "name": "digit_front_game0",
+      "field": "game0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_front_game1",
+      "field": "game1",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_front_game2",
+      "field": "game2",
+      "initialDigit": 1
+    },
+    {
+      "name": "digit_front_game3",
+      "field": "game3",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_front_shot0",
+      "field": "shot0",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_front_shot1",
+      "field": "shot1",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_front_period0",
+      "field": "period0",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_right_home0",
+      "field": "home0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_right_home1",
+      "field": "home1",
+      "initialDigit": 7
+    },
+    {
+      "name": "digit_right_home2",
+      "field": "home2",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_right_away0",
+      "field": "away0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_right_away1",
+      "field": "away1",
+      "initialDigit": 6
+    },
+    {
+      "name": "digit_right_away2",
+      "field": "away2",
+      "initialDigit": 8
+    },
+    {
+      "name": "digit_right_game0",
+      "field": "game0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_right_game1",
+      "field": "game1",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_right_game2",
+      "field": "game2",
+      "initialDigit": 1
+    },
+    {
+      "name": "digit_right_game3",
+      "field": "game3",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_right_shot0",
+      "field": "shot0",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_right_shot1",
+      "field": "shot1",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_right_period0",
+      "field": "period0",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_back_home0",
+      "field": "home0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_back_home1",
+      "field": "home1",
+      "initialDigit": 7
+    },
+    {
+      "name": "digit_back_home2",
+      "field": "home2",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_back_away0",
+      "field": "away0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_back_away1",
+      "field": "away1",
+      "initialDigit": 6
+    },
+    {
+      "name": "digit_back_away2",
+      "field": "away2",
+      "initialDigit": 8
+    },
+    {
+      "name": "digit_back_game0",
+      "field": "game0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_back_game1",
+      "field": "game1",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_back_game2",
+      "field": "game2",
+      "initialDigit": 1
+    },
+    {
+      "name": "digit_back_game3",
+      "field": "game3",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_back_shot0",
+      "field": "shot0",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_back_shot1",
+      "field": "shot1",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_back_period0",
+      "field": "period0",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_left_home0",
+      "field": "home0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_left_home1",
+      "field": "home1",
+      "initialDigit": 7
+    },
+    {
+      "name": "digit_left_home2",
+      "field": "home2",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_left_away0",
+      "field": "away0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_left_away1",
+      "field": "away1",
+      "initialDigit": 6
+    },
+    {
+      "name": "digit_left_away2",
+      "field": "away2",
+      "initialDigit": 8
+    },
+    {
+      "name": "digit_left_game0",
+      "field": "game0",
+      "initialDigit": 0
+    },
+    {
+      "name": "digit_left_game1",
+      "field": "game1",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_left_game2",
+      "field": "game2",
+      "initialDigit": 1
+    },
+    {
+      "name": "digit_left_game3",
+      "field": "game3",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_left_shot0",
+      "field": "shot0",
+      "initialDigit": 2
+    },
+    {
+      "name": "digit_left_shot1",
+      "field": "shot1",
+      "initialDigit": 4
+    },
+    {
+      "name": "digit_left_period0",
+      "field": "period0",
+      "initialDigit": 4
+    }
+  ],
+  "lampNodes": [
+    "lamp_front_top",
+    "lamp_front_bottom",
+    "lamp_front_left",
+    "lamp_front_right",
+    "lamp_right_top",
+    "lamp_right_bottom",
+    "lamp_right_left",
+    "lamp_right_right",
+    "lamp_back_top",
+    "lamp_back_bottom",
+    "lamp_back_left",
+    "lamp_back_right",
+    "lamp_left_top",
+    "lamp_left_bottom",
+    "lamp_left_left",
+    "lamp_left_right"
+  ],
+  "initial": {
+    "home": 72,
+    "away": 68,
+    "gameSeconds": 134,
+    "shotSeconds": 24,
+    "period": 4,
+    "running": false
+  },
+  "api": "runtime/scoreboard.mjs: createClock(initial,onEvent), createScoreboard({THREE,root,initial,onEvent})",
+  "provenance": {
+    "geometry": "Original authored primitive meshes; no third-party model",
+    "glyphs": "Original seven-segment polygon atlas",
+    "labels": "Open Sans Semibold rasterized from the installed Debian fonts-open-sans package; Apache-2.0, Google Corporation 2010-2011. No font binary embedded; see vendor/LICENSE.OpenSans and vendor/LICENSE.Apache-2.0."
+  }
+}

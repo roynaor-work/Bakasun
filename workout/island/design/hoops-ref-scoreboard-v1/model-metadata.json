@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "workout/island/design/hoops-v7/characters/models/referee-lod1.glb",
+    "sha256": "7799703bd700636030d15cfd87726f069564c3a9c28f52496da371d50cb95edc",
+    "provenance": "MakeHuman/MPFB repository asset; see source package LICENSES.md and island/ASSETS.md"
+  },
+  "method": "Decode existing realistic referee; visible-anatomy regional budget; weight-aware per-limb rebind to canonical rest; meshoptimizer simplification; original fitted striped clothing, whistle, collar loop and opaque shoe cores.",
+  "canonicalSkeleton": "workout/island/design/naval-v7/assets/crew/canonical-skeleton.json",
+  "boneCount": 18,
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "units": "meters",
+  "triangles": 1225,
+  "primitiveCounts": [
+    {
+      "material": "eyes",
+      "triangles": 64
+    },
+    {
+      "material": "compression",
+      "triangles": 24
+    },
+    {
+      "material": "hair",
+      "triangles": 49
+    },
+    {
+      "material": "official_trousers",
+      "triangles": 150
+    },
+    {
+      "material": "human_shoes",
+      "triangles": 108
+    },
+    {
+      "material": "human_surface",
+      "triangles": 299
+    },
+    {
+      "material": "human_surface",
+      "triangles": 52
+    },
+    {
+      "material": "human_surface",
+      "triangles": 50
+    },
+    {
+      "material": "human_surface",
+      "triangles": 43
+    },
+    {
+      "material": "human_surface",
+      "triangles": 51
+    },
+    {
+      "material": "human_surface",
+      "triangles": 49
+    },
+    {
+      "material": "human_surface",
+      "triangles": 42
+    },
+    {
+      "material": "official_uniform",
+      "triangles": 96
+    },
+    {
+      "material": "official_uniform",
+      "triangles": 32
+    },
+    {
+      "material": "official_uniform",
+      "triangles": 32
+    },
+    {
+      "material": "whistle_body",
+      "triangles": 12
+    },
+    {
+      "material": "whistle_mouthpiece",
+      "triangles": 12
+    },
+    {
+      "material": "human_shoes",
+      "triangles": 12
+    },
+    {
+      "material": "human_shoes",
+      "triangles": 12
+    },
+    {
+      "material": "lanyard",
+      "triangles": 36
+    }
+  ],
+  "simplification": [
+    {
+      "material": "eyes",
+      "sourceTriangles": 64,
+      "triangles": 64
+    },
+    {
+      "material": "compression",
+      "sourceTriangles": 44,
+      "triangles": 24
+    },
+    {
+      "material": "hair",
+      "sourceTriangles": 851,
+      "triangles": 49
+    },
+    {
+      "material": "official_trousers",
+      "sourceTriangles": 1485,
+      "triangles": 150
+    },
+    {
+      "material": "human_shoes",
+      "sourceTriangles": 308,
+      "triangles": 108
+    },
+    {
+      "material": "human_face",
+      "sourceTriangles": 1308,
+      "triangles": 299
+    },
+    {
+      "material": "human_upper_9",
+      "sourceTriangles": 302,
+      "triangles": 52
+    },
+    {
+      "material": "human_hand_11",
+      "sourceTriangles": 490,
+      "triangles": 50
+    },
+    {
+      "material": "human_forearm_10",
+      "sourceTriangles": 165,
+      "triangles": 43
+    },
+    {
+      "material": "human_upper_6",
+      "sourceTriangles": 297,
+      "triangles": 51
+    },
+    {
+      "material": "human_hand_8",
+      "sourceTriangles": 493,
+      "triangles": 49
+    },
+    {
+      "material": "human_forearm_7",
+      "sourceTriangles": 162,
+      "triangles": 42
+    }
+  ],
+  "bounds": {
+    "min": [
+      -0.2409999966621399,
+      0.0035000001080334187,
+      -0.11147279292345047
+    ],
+    "max": [
+      0.2409999966621399,
+      1.6585477590560913,
+      0.18579433858394623
+    ]
+  },
+  "whistle": {
+    "joint": "RightHand",
+    "centerOffsetMeters": [
+      0,
+      -0.025,
+      0.035
+    ],
+    "mouthpieceOffsetMeters": [
+      0,
+      -0.025,
+      0.01
+    ],
+    "handWorldQuaternionAtBlow": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "lipLandmarkHeadLocalMeters": [
+      -0.0023,
+      0.0357,
+      0.1198
+    ]
+  },
+  "textures": {
+    "baseColor": "textures/referee-atlas.png",
+    "embedded": true,
+    "dimensions": [
+      512,
+      512
+    ]
+  },
+  "runtimeExtensionsRequired": [],
+  "limitations": [
+    "Collar loop is rigid equipment skinned to Chest; a simulated connecting cord is intentionally omitted.",
+    "At approximately 1200 triangles, finger detail derives from simplified source anatomy; gesture readability is primarily arm silhouette."
+  ],
+  "soleContact": {
+    "method": "All shoe vertices rigidly weighted to corresponding Foot; baseline calibrated after simplification.",
+    "bindClearanceMeters": 0.0035,
+    "reason": "Allowance for subframe quaternion interpolation below nominal 30Hz sole target."
+  }
+}

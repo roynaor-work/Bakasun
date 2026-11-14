@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "summary": "4,018 בדיקות עברו, 64 דולגו, 0 נכשלו; npm test עם דפדפן Chromium המותקן דרך מתאם ISLAND_PLAYWRIGHT",
+  "original": {
+    "command": "npm test",
+    "pass": 4017,
+    "fail": 1,
+    "skipped": 64,
+    "failure": "Playwright expected browser cache is absent; workout-royiki browser launch failed and retained an open server. The stopped child allowed suite to finish.",
+    "log": "initial-repository-tests.log.gz"
+  },
+  "isolatedEnvironmentRetest": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/hoops-ref-system-chromium.mjs node --test --test-force-exit tests/workout-royiki.test.mjs",
+    "pass": 5,
+    "fail": 0,
+    "log": "royiki-system-chromium.log"
+  },
+  "systemBrowser": "/usr/bin/chromium",
+  "adapter": "../source/system-chromium.mjs",
+  "existingFilesChanged": false,
+  "pass": true,
+  "final": {
+    "command": "ISLAND_PLAYWRIGHT=/tmp/hoops-ref-system-chromium.mjs npm test",
+    "replayCommand": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/hoops-ref-scoreboard-v1/source/system-chromium.mjs\" npm test",
+    "exitCode": 0,
+    "counts": {
+      "tests": 4082,
+      "suites": 0,
+      "pass": 4018,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 64,
+      "todo": 0,
+      "duration_ms": 442484.769878
+    },
+    "log": "repository-tests.log.gz",
+    "uncompressedLogSha256": "cf9c762bc1d369c85f89e194ddc43f9726560631967392565a1613dfe471997c"
+  },
+  "clockTests": {
+    "command": "node --test workout/island/design/hoops-ref-scoreboard-v1/source/scoreboard.test.mjs",
+    "pass": 16,
+    "fail": 0
+  }
+}

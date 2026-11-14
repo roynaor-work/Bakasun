@@ -1,0 +1,639 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-ref-scoreboard-v1",
+  "fps": 30,
+  "authorship": {
+    "license": "CC0-1.0",
+    "method": "Original analytic IK choreography, baked to native GLB at 30Hz; no third-party motion clips."
+  },
+  "sourceSkeleton": {
+    "path": "workout/island/design/motion2/hoops.json",
+    "sha256": "6eed7f4d1e57822838ca9a41ce4f79a5ba1f0f3620f8bd4f7a6cdfe09ef4ea8d"
+  },
+  "skeleton": {
+    "rotationFormat": "quaternion-xyzw",
+    "rotationSpace": "parent-local",
+    "rotationMeaning": "absolute canonical local rotation; retarget to target bind before export",
+    "axes": {
+      "up": "+Y",
+      "forward": "+Z",
+      "anatomicalLeft": "+X"
+    },
+    "units": "meters",
+    "bones": [
+      {
+        "name": "Root",
+        "parent": null,
+        "restTranslationMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Hips",
+        "parent": "Root",
+        "restTranslationMeters": [
+          0,
+          0.86,
+          0
+        ]
+      },
+      {
+        "name": "Spine",
+        "parent": "Hips",
+        "restTranslationMeters": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      {
+        "name": "Chest",
+        "parent": "Spine",
+        "restTranslationMeters": [
+          0,
+          0.18,
+          0
+        ]
+      },
+      {
+        "name": "Neck",
+        "parent": "Chest",
+        "restTranslationMeters": [
+          0,
+          0.1,
+          0
+        ]
+      },
+      {
+        "name": "Head",
+        "parent": "Neck",
+        "restTranslationMeters": [
+          0,
+          0.13,
+          0
+        ]
+      },
+      {
+        "name": "LeftArm",
+        "parent": "Chest",
+        "restTranslationMeters": [
+          0.16,
+          0.06,
+          0
+        ]
+      },
+      {
+        "name": "LeftForeArm",
+        "parent": "LeftArm",
+        "restTranslationMeters": [
+          0,
+          -0.27,
+          0
+        ]
+      },
+      {
+        "name": "LeftHand",
+        "parent": "LeftForeArm",
+        "restTranslationMeters": [
+          0,
+          -0.24,
+          0
+        ]
+      },
+      {
+        "name": "RightArm",
+        "parent": "Chest",
+        "restTranslationMeters": [
+          -0.16,
+          0.06,
+          0
+        ]
+      },
+      {
+        "name": "RightForeArm",
+        "parent": "RightArm",
+        "restTranslationMeters": [
+          0,
+          -0.27,
+          0
+        ]
+      },
+      {
+        "name": "RightHand",
+        "parent": "RightForeArm",
+        "restTranslationMeters": [
+          0,
+          -0.24,
+          0
+        ]
+      },
+      {
+        "name": "LeftUpLeg",
+        "parent": "Hips",
+        "restTranslationMeters": [
+          0.1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "LeftLeg",
+        "parent": "LeftUpLeg",
+        "restTranslationMeters": [
+          0,
+          -0.41,
+          0
+        ]
+      },
+      {
+        "name": "LeftFoot",
+        "parent": "LeftLeg",
+        "restTranslationMeters": [
+          0,
+          -0.37,
+          0
+        ]
+      },
+      {
+        "name": "RightUpLeg",
+        "parent": "Hips",
+        "restTranslationMeters": [
+          -0.1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "RightLeg",
+        "parent": "RightUpLeg",
+        "restTranslationMeters": [
+          0,
+          -0.41,
+          0
+        ]
+      },
+      {
+        "name": "RightFoot",
+        "parent": "RightLeg",
+        "restTranslationMeters": [
+          0,
+          -0.37,
+          0
+        ]
+      }
+    ],
+    "designBoneMap": {
+      "Root": "root",
+      "Hips": "hips",
+      "Spine": "spine",
+      "Chest": "chest",
+      "Neck": "neck",
+      "Head": "head",
+      "LeftArm": "upper_arm.L",
+      "LeftForeArm": "forearm.L",
+      "LeftHand": "hand.L",
+      "RightArm": "upper_arm.R",
+      "RightForeArm": "forearm.R",
+      "RightHand": "hand.R",
+      "LeftUpLeg": "thigh.L",
+      "LeftLeg": "shin.L",
+      "LeftFoot": "foot.L",
+      "RightUpLeg": "thigh.R",
+      "RightLeg": "shin.R",
+      "RightFoot": "foot.R"
+    }
+  },
+  "clips": [
+    {
+      "id": "idle",
+      "label": "עמידה דרוכה",
+      "asset": "motion/idle.glb",
+      "duration": 2.4,
+      "frameCount": 73,
+      "fps": 30,
+      "bytes": 29004,
+      "sha256": "8da52299b4c98b65bcd0846c49ee0f39931fd27510566ff4b1889be01e47bf6b",
+      "rootMotion": false,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ],
+      "metadata": {
+        "label": "עמידה דרוכה",
+        "kind": "officiating",
+        "role": "referee",
+        "duration": 2.4,
+        "loop": true,
+        "fps": 30,
+        "locomotion": false,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Small breathing and glance; both soles planted."
+      }
+    },
+    {
+      "id": "run",
+      "label": "ריצה לאורך קו המגרש",
+      "asset": "motion/run.glb",
+      "duration": 0.8,
+      "frameCount": 25,
+      "fps": 30,
+      "bytes": 13804,
+      "sha256": "72387a00b7fdd1ea960910d253e3135b6b2f2de57a96703e9d02226472dd0102",
+      "rootMotion": true,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        1.28
+      ],
+      "metadata": {
+        "label": "ריצה לאורך קו המגרש",
+        "kind": "locomotion",
+        "role": "referee",
+        "duration": 0.8,
+        "loop": true,
+        "fps": 30,
+        "locomotion": true,
+        "symmetryMode": "gait",
+        "rootMotion": true,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.336,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.4,
+            "end": 0.736,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 0,
+            "type": "plant",
+            "bone": "LeftFoot"
+          },
+          {
+            "time": 0.336,
+            "type": "release",
+            "bone": "LeftFoot"
+          },
+          {
+            "time": 0.4,
+            "type": "plant",
+            "bone": "RightFoot"
+          },
+          {
+            "time": 0.736,
+            "type": "release",
+            "bone": "RightFoot"
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Alternating flight and planted support, contralateral bent-arm swing, forward torso lean. Native Root travels +Z at 1.6m/s; extract cycle displacement for looping integration."
+      }
+    },
+    {
+      "id": "whistle",
+      "label": "שריקה",
+      "asset": "motion/whistle.glb",
+      "duration": 2.4,
+      "frameCount": 73,
+      "fps": 30,
+      "bytes": 29008,
+      "sha256": "53b1f164bba5398906f2d720e3b006ac09ea5aa1ecffe74148ab8f1e9747648d",
+      "rootMotion": false,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ],
+      "metadata": {
+        "label": "שריקה",
+        "kind": "officiating",
+        "role": "referee",
+        "duration": 2.4,
+        "loop": false,
+        "fps": 30,
+        "locomotion": false,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 0.648,
+            "type": "signal_start"
+          },
+          {
+            "time": 1.68,
+            "type": "signal_end"
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Right hand carries whistle to the lips, holds the signal, and returns."
+      }
+    },
+    {
+      "id": "foul",
+      "label": "עצירת משחק — עבירה",
+      "asset": "motion/foul.glb",
+      "duration": 2.8,
+      "frameCount": 85,
+      "fps": 30,
+      "bytes": 32800,
+      "sha256": "ae0ec32269bfac3ca446b038c7264e732dc5962c30fd87ce05235f51c5e75029",
+      "rootMotion": false,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ],
+      "metadata": {
+        "label": "עצירת משחק — עבירה",
+        "kind": "officiating",
+        "role": "referee",
+        "duration": 2.8,
+        "loop": false,
+        "fps": 30,
+        "locomotion": false,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 0.756,
+            "type": "signal_start"
+          },
+          {
+            "time": 1.9599999999999997,
+            "type": "signal_end"
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Single right arm raised vertically in a stop-clock foul signal; left arm stays low."
+      }
+    },
+    {
+      "id": "three_points",
+      "label": "אישור סל לשלוש נקודות",
+      "asset": "motion/three_points.glb",
+      "duration": 3.2,
+      "frameCount": 97,
+      "fps": 30,
+      "bytes": 36600,
+      "sha256": "3b5f71ab3d699b6be4ffb2ad97dfd3f5a2cc6245252d79ff9ef9570b21f4bb56",
+      "rootMotion": false,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ],
+      "metadata": {
+        "label": "אישור סל לשלוש נקודות",
+        "kind": "officiating",
+        "role": "referee",
+        "duration": 3.2,
+        "loop": false,
+        "fps": 30,
+        "locomotion": false,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 0.8640000000000001,
+            "type": "signal_start"
+          },
+          {
+            "time": 2.2399999999999998,
+            "type": "signal_end"
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Both arms rise overhead for a successful three-point signal; return to neutral."
+      }
+    },
+    {
+      "id": "direction",
+      "label": "כיוון הוצאת חוץ",
+      "asset": "motion/direction.glb",
+      "duration": 2.8,
+      "frameCount": 85,
+      "fps": 30,
+      "bytes": 32804,
+      "sha256": "e5723a0d5c9faab8acc33366a6365477d3fa05d964e8bf72f7fbbbdbdd8d756f",
+      "rootMotion": false,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ],
+      "metadata": {
+        "label": "כיוון הוצאת חוץ",
+        "kind": "officiating",
+        "role": "referee",
+        "duration": 2.8,
+        "loop": false,
+        "fps": 30,
+        "locomotion": false,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "rootMotionApplied": true,
+        "ballVisible": false,
+        "ballContacts": [],
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.8,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "time": 0.756,
+            "type": "signal_start"
+          },
+          {
+            "time": 1.9599999999999997,
+            "type": "signal_end"
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "floorY": 0,
+        "coordinateSpace": "native exported GLB world in canonical metres; no reference travel injected",
+        "notes": "Right arm extends sideways toward the awarded possession direction; head follows."
+      }
+    }
+  ]
+}

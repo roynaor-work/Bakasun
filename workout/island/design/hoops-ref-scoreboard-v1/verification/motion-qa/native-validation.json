@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "asset": "models/referee.glb",
+  "sha256": "1f0ca6130ec76f5fc5e29f25bab6deb71cd1bb528c3b0e1572394270d1f1a8dd",
+  "bytes": 562524,
+  "pass": true,
+  "assertions": {
+    "canonicalNames": true,
+    "canonicalDefinition": true,
+    "canonicalHierarchy": true,
+    "canonicalRest": true,
+    "whistleMeetsLip": true
+  },
+  "clips": [
+    {
+      "id": "idle",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 2.4000000953674316,
+      "frameCount": 73,
+      "sampledFrames": 289,
+      "maxQuaternionLengthError": 2.9692391434466003e-8,
+      "endpointJointDeltaMeters": 6.695497841523467e-11,
+      "endpointRotationDelta": 8.165241270150569e-11,
+      "neutralEndpointErrorMeters": 6.695497841523467e-11,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "run",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 0.800000011920929,
+      "frameCount": 25,
+      "sampledFrames": 99,
+      "maxQuaternionLengthError": 3.6755505639085584e-8,
+      "endpointJointDeltaMeters": 6.327705908644916e-8,
+      "endpointRotationDelta": 2.9589968094960654e-8,
+      "neutralEndpointErrorMeters": null,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        1.28
+      ]
+    },
+    {
+      "id": "whistle",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 2.4000000953674316,
+      "frameCount": 73,
+      "sampledFrames": 289,
+      "maxQuaternionLengthError": 3.621925825925132e-8,
+      "endpointJointDeltaMeters": 3.0419586139801957e-9,
+      "endpointRotationDelta": 4.420231647121303e-9,
+      "neutralEndpointErrorMeters": 3.0419586139801957e-9,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "foul",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 2.799999952316284,
+      "frameCount": 85,
+      "sampledFrames": 337,
+      "maxQuaternionLengthError": 3.9862955381053666e-8,
+      "endpointJointDeltaMeters": 0,
+      "endpointRotationDelta": 0,
+      "neutralEndpointErrorMeters": 0,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "three_points",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 3.200000047683716,
+      "frameCount": 97,
+      "sampledFrames": 385,
+      "maxQuaternionLengthError": 3.0405790329979254e-8,
+      "endpointJointDeltaMeters": 7.340797690856394e-10,
+      "endpointRotationDelta": 7.161980432813648e-10,
+      "neutralEndpointErrorMeters": 7.340797690856394e-10,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "direction",
+      "pass": true,
+      "checks": {
+        "native30Hz": true,
+        "channelCount": true,
+        "allSkeletonRotations": true,
+        "identicalChannels": true,
+        "maxQuaternionLengthError": true,
+        "closedBodyPose": true,
+        "neutralEndpoints": true
+      },
+      "duration": 2.799999952316284,
+      "frameCount": 85,
+      "sampledFrames": 337,
+      "maxQuaternionLengthError": 3.96333486030187e-8,
+      "endpointJointDeltaMeters": 0,
+      "endpointRotationDelta": 0,
+      "neutralEndpointErrorMeters": 0,
+      "cycleDisplacementMeters": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "measurements": {
+    "whistleHoldHandMeters": [
+      -0.002300005058305951,
+      1.5106999696502732,
+      0.10979999347744657
+    ],
+    "whistleHoldHandWorldQuaternion": [
+      -1.5910874609156852e-8,
+      2.6222368373907127e-8,
+      1.0291388224253906e-8,
+      0.9999999999999993
+    ],
+    "lipLandmarkHeadLocalMeters": [
+      -0.0023,
+      0.0357,
+      0.1198
+    ],
+    "lipLandmarkSource": "Measured source face UV mouth landmark, approximately atlas UV (.913,.375); model rebind preserves Head-local position.",
+    "whistleMouthpieceMeters": [
+      -0.002300005058305951,
+      1.4856999696502733,
+      0.11979999347744656
+    ],
+    "lipLandmarkMeters": [
+      -0.0023,
+      1.4856999737739562,
+      0.1198
+    ],
+    "whistleMouthpieceToLipMeters": 9.226858814055713e-9,
+    "runNativeSpeedMetersPerSecond": 1.599999940395398
+  },
+  "limitations": [
+    "Checks exported skeleton and animation channels; motion-qa-v1 evaluates skeletal probes, while visual/mesh checks are separate.",
+    "Run closes its body pose modulo 1.28m forward Root travel; runtime must extract displacement rather than resetting world position without accounting for it."
+  ]
+}

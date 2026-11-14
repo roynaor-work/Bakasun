@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 1,
+  "method": "Independent unmodified Khronos glTF Validator + explicit binary accessor, canonical rig, keyframe and full-vertex linear blend skin audit",
+  "validatorVersion": "2.0.0-dev.3.10",
+  "limits": {
+    "refereeTriangleRange": [
+      1050,
+      1350
+    ],
+    "maxActualSkinnedFloorPenetrationMeters": 0.003,
+    "nativeKeyframeRateHz": 30,
+    "fullVertexAuditRateHz": 120
+  },
+  "pass": true,
+  "findings": [],
+  "assets": [
+    {
+      "path": "models/referee.glb",
+      "bytes": 562524,
+      "sha256": "1f0ca6130ec76f5fc5e29f25bab6deb71cd1bb528c3b0e1572394270d1f1a8dd",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "geometry": {
+        "triangles": 1225,
+        "vertices": 1062,
+        "degenerate": 0,
+        "minDoubleArea": 0.000009773764146356468,
+        "maxWeightSumError": 3.073364496231079e-8,
+        "invalidWeights": 0
+      },
+      "selfContained": true,
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "restTranslationMeters": [
+            0,
+            0,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "restTranslationMeters": [
+            0,
+            0.86,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "restTranslationMeters": [
+            0,
+            0.2,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "restTranslationMeters": [
+            0,
+            0.18,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "restTranslationMeters": [
+            0,
+            0.1,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "restTranslationMeters": [
+            0,
+            0.13,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "restTranslationMeters": [
+            0.16,
+            0.06,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "restTranslationMeters": [
+            0,
+            -0.27,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "restTranslationMeters": [
+            0,
+            -0.24,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "restTranslationMeters": [
+            -0.16,
+            0.06,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "restTranslationMeters": [
+            0,
+            -0.27,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "restTranslationMeters": [
+            0,
+            -0.24,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "restTranslationMeters": [
+            0.1,
+            0,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "restTranslationMeters": [
+            0,
+            -0.41,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "restTranslationMeters": [
+            0,
+            -0.37,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "restTranslationMeters": [
+            -0.1,
+            0,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "restTranslationMeters": [
+            0,
+            -0.41,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "restTranslationMeters": [
+            0,
+            -0.37,
+            0
+          ],
+          "error": 0,
+          "pass": true
+        }
+      ],
+      "animations": [
+        {
+          "id": "idle",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            73
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 2.0662943522181676e-7,
+          "maxQuaternionNormError": 2.9692391434466003e-8,
+          "bodyEndpointAngleRadians": 0.0006815755783285628,
+          "bodyEndpointTranslationMeters": 0
+        },
+        {
+          "id": "run",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            25
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 3.178914387974574e-8,
+          "maxQuaternionNormError": 3.6755505639085584e-8,
+          "bodyEndpointAngleRadians": 0.0006243150469102313,
+          "bodyEndpointTranslationMeters": 0
+        },
+        {
+          "id": "whistle",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            73
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 2.0662943522181676e-7,
+          "maxQuaternionNormError": 3.621925825925132e-8,
+          "bodyEndpointAngleRadians": 0.0006815755783285628,
+          "bodyEndpointTranslationMeters": 0
+        },
+        {
+          "id": "foul",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            85
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 2.0662943522181676e-7,
+          "maxQuaternionNormError": 3.9862955381053666e-8,
+          "bodyEndpointAngleRadians": 0.0006815755783285628,
+          "bodyEndpointTranslationMeters": 0
+        },
+        {
+          "id": "three_points",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            97
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 2.0662943522181676e-7,
+          "maxQuaternionNormError": 3.0405790329979254e-8,
+          "bodyEndpointAngleRadians": 0.0006815755783285628,
+          "bodyEndpointTranslationMeters": 0
+        },
+        {
+          "id": "direction",
+          "sampleRateHz": 30,
+          "sampleCounts": [
+            85
+          ],
+          "matchesAnimationOnlySource": true,
+          "maxSampleStepError": 2.0662943522181676e-7,
+          "maxQuaternionNormError": 3.96333486030187e-8,
+          "bodyEndpointAngleRadians": 0.0006815755783285628,
+          "bodyEndpointTranslationMeters": 0
+        }
+      ],
+      "skin": {
+        "inverseBindMaxError": 5.7220459037665705e-8,
+        "clips": [
+          {
+            "id": "idle",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 289,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0034999738084046726,
+            "maximumSkinnedY": 1.6400967634675316,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 1.64065211618041,
+            "nonFiniteVertices": 0,
+            "supportSamples": 578,
+            "minimumSupportingSoleY": 0.0034999738084046726,
+            "maximumSupportingSoleY": 0.0034999738111150093,
+            "worstSupportingSole": {}
+          },
+          {
+            "id": "run",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 99,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0022376313114936186,
+            "maximumSkinnedY": 1.5767345728760702,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 2.1150211154128113,
+            "nonFiniteVertices": 0,
+            "supportSamples": 84,
+            "minimumSupportingSoleY": 0.0022376313114936186,
+            "maximumSupportingSoleY": 0.003985165914056207,
+            "worstSupportingSole": {}
+          },
+          {
+            "id": "whistle",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 289,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0034999738084046726,
+            "maximumSkinnedY": 1.638547704219818,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 1.639669882371962,
+            "nonFiniteVertices": 0,
+            "supportSamples": 578,
+            "minimumSupportingSoleY": 0.0034999738084046726,
+            "maximumSupportingSoleY": 0.0034999738111150093,
+            "worstSupportingSole": {}
+          },
+          {
+            "id": "foul",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 337,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0034999738084046726,
+            "maximumSkinnedY": 1.9454225826768963,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 1.9628565607238173,
+            "nonFiniteVertices": 0,
+            "supportSamples": 674,
+            "minimumSupportingSoleY": 0.0034999738084046726,
+            "maximumSupportingSoleY": 0.0034999738111150093,
+            "worstSupportingSole": {}
+          },
+          {
+            "id": "three_points",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 385,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0034999738084046726,
+            "maximumSkinnedY": 1.9439955818719716,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 1.966054861565101,
+            "nonFiniteVertices": 0,
+            "supportSamples": 770,
+            "minimumSupportingSoleY": 0.0034999738084046726,
+            "maximumSupportingSoleY": 0.0034999738111150093,
+            "worstSupportingSole": {}
+          },
+          {
+            "id": "direction",
+            "sampleRateHz": 120,
+            "additionalSamples": "Exact authored support boundaries",
+            "frameCount": 337,
+            "verticesPerFrame": 1062,
+            "minimumSkinnedY": 0.0034999738084046726,
+            "maximumSkinnedY": 1.638547704219818,
+            "maximumFloorPenetrationMeters": 0,
+            "maximumVertexDistanceFromOrigin": 1.639669882374413,
+            "nonFiniteVertices": 0,
+            "supportSamples": 674,
+            "minimumSupportingSoleY": 0.0034999738084046726,
+            "maximumSupportingSoleY": 0.0034999738111150093,
+            "worstSupportingSole": {}
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "path": "models/scoreboard.glb",
+      "bytes": 134424,
+      "sha256": "2e778806f79c2a3c93ec870d7fb3da9a22c19b8d4ec411fdbcd2a2e182bc5727",
+      "validator": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 20,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/12/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/33/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/34/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/35/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/36/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/37/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/58/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/59/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/60/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/61/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/62/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/83/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/84/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/85/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/86/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/87/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/108/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/109/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/110/primitives/0/attributes/TEXCOORD_0"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/111/primitives/0/attributes/TEXCOORD_0"
+          }
+        ]
+      },
+      "geometry": {
+        "triangles": 344,
+        "vertices": 688,
+        "degenerate": 0,
+        "minDoubleArea": 0.000676000027894974,
+        "maxWeightSumError": 0,
+        "invalidWeights": 0
+      },
+      "selfContained": true,
+      "scoreboard": {
+        "faces": [
+          {
+            "face": "front",
+            "digitCount": 13
+          },
+          {
+            "face": "right",
+            "digitCount": 13
+          },
+          {
+            "face": "back",
+            "digitCount": 13
+          },
+          {
+            "face": "left",
+            "digitCount": 13
+          }
+        ],
+        "digitQuads": 52,
+        "textureCount": 1,
+        "imageCount": 1,
+        "lampCount": 16
+      },
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "id": "hoops-ref-scoreboard-v1",
+  "version": 1,
+  "branch": "codex/hoops-ref-scoreboard-v1",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "scope": {
+    "newFilesOnly": true,
+    "prefix": "workout/island/design/hoops-ref-scoreboard-v1/",
+    "completion": "canonical18 referee around1200 triangles; six native30Hz clips strictly above88; suspended atlas-digit scoreboard, timers,redlight; QA,report,push"
+  },
+  "units": "meters",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "preview": "preview.html",
+  "licenses": "LICENSES.md",
+  "report": "REPORT.md",
+  "referee": {
+    "asset": "models/referee.glb",
+    "triangles": 1225,
+    "boneCount": 18,
+    "skeleton": "motion/skeleton.json",
+    "textures": [
+      "textures/referee-atlas.png"
+    ],
+    "embeddedTextures": true,
+    "requiredExtensions": [],
+    "source": {
+      "path": "workout/island/design/hoops-v7/characters/models/referee-lod1.glb",
+      "sha256": "7799703bd700636030d15cfd87726f069564c3a9c28f52496da371d50cb95edc",
+      "provenance": "MakeHuman/MPFB repository asset; see source package LICENSES.md and island/ASSETS.md"
+    },
+    "clips": [
+      {
+        "id": "idle",
+        "label": "עמידה דרוכה",
+        "durationSeconds": 2.4,
+        "frames": 73,
+        "sampleRateHz": 30,
+        "loop": true,
+        "asset": "models/referee.glb",
+        "animation": "idle",
+        "standalone": "motion/idle.glb",
+        "qaScore": 100,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "run",
+        "label": "ריצה לאורך קו המגרש",
+        "durationSeconds": 0.8,
+        "frames": 25,
+        "sampleRateHz": 30,
+        "loop": true,
+        "asset": "models/referee.glb",
+        "animation": "run",
+        "standalone": "motion/run.glb",
+        "qaScore": 92.4,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          1.28
+        ]
+      },
+      {
+        "id": "whistle",
+        "label": "שריקה",
+        "durationSeconds": 2.4,
+        "frames": 73,
+        "sampleRateHz": 30,
+        "loop": false,
+        "asset": "models/referee.glb",
+        "animation": "whistle",
+        "standalone": "motion/whistle.glb",
+        "qaScore": 96.8,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "foul",
+        "label": "עצירת משחק — עבירה",
+        "durationSeconds": 2.8,
+        "frames": 85,
+        "sampleRateHz": 30,
+        "loop": false,
+        "asset": "models/referee.glb",
+        "animation": "foul",
+        "standalone": "motion/foul.glb",
+        "qaScore": 96.2,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "three_points",
+        "label": "אישור סל לשלוש נקודות",
+        "durationSeconds": 3.2,
+        "frames": 97,
+        "sampleRateHz": 30,
+        "loop": false,
+        "asset": "models/referee.glb",
+        "animation": "three_points",
+        "standalone": "motion/three_points.glb",
+        "qaScore": 96.7,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": "direction",
+        "label": "כיוון הוצאת חוץ",
+        "durationSeconds": 2.8,
+        "frames": 85,
+        "sampleRateHz": 30,
+        "loop": false,
+        "asset": "models/referee.glb",
+        "animation": "direction",
+        "standalone": "motion/direction.glb",
+        "qaScore": 95.6,
+        "qaCoverage": 1,
+        "rootCycleDisplacementMeters": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "scoreboard": {
+    "asset": "models/scoreboard.glb",
+    "triangles": 344,
+    "faces": 4,
+    "digitQuads": 52,
+    "trianglesPerDigit": 2,
+    "textureCount": 1,
+    "atlas": {
+      "file": "textures/digits.png",
+      "embedded": true,
+      "width": 1024,
+      "height": 512,
+      "columns": 16,
+      "digitRowV": [
+        0,
+        0.25
+      ],
+      "cells": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "blank": 10,
+        "colon": 11
+      },
+      "labelsBaked": [
+        "ISLAND ARENA",
+        "HOME",
+        "AWAY",
+        "GAME",
+        "SHOT",
+        "PERIOD"
+      ]
+    },
+    "embeddedTextures": true,
+    "runtime": "runtime/scoreboard.mjs",
+    "metadata": "scoreboard-metadata.json",
+    "initial": {
+      "home": 72,
+      "away": 68,
+      "gameSeconds": 134,
+      "shotSeconds": 24,
+      "period": 4,
+      "running": false
+    },
+    "placement": "Set root position to court centre at desired floor clearance; lowest point is local y0.065.",
+    "completeBounds": {
+      "min": [
+        -1.86,
+        0.065,
+        -1.86
+      ],
+      "max": [
+        1.86,
+        4.2,
+        1.86
+      ]
+    }
+  },
+  "qa": {
+    "tool": "motion-qa-v1",
+    "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "minimumExclusive": 88,
+    "nativeSampleRateHz": 30,
+    "evaluationSampleRateHz": 120,
+    "summary": "verification/motion-qa/summary.json",
+    "html": "verification/motion-qa/output/report.html",
+    "raw": "verification/motion-qa/output/report.json",
+    "native": "verification/motion-qa/native-validation.json",
+    "skinAndGLTF": "verification/assets.json",
+    "browser": "verification/browser.json",
+    "repoTests": "verification/repository-tests.json",
+    "allClipsPassed": true
+  },
+  "runtimeContract": {
+    "run": "Root travels1.28m forward per0.8s cycle (1.6m/s). Extract displacement into actor movement; review scene zeroes horizontal Root for treadmill playback.",
+    "gestures": "One-shot clips begin and end at common idle; use short animation blending. Run-to-idle requires blending.",
+    "time": "tick(dt) receives elapsed simulationseconds. Host owns suspension on visibility change. Either clock reachingzero stops both and fires redlight for2s.",
+    "scoreboardFactory": "createScoreboard({THREE,root,initial,onEvent})",
+    "clockFactory": "createClock(initial,onEvent)",
+    "methods": [
+      "setState(patch)",
+      "start()",
+      "pause()",
+      "tick(dt)",
+      "resetGame(seconds)",
+      "resetShot(14|24)",
+      "flashRed(seconds)",
+      "snapshot()",
+      "display()",
+      "dispose()"
+    ]
+  },
+  "files": [
+    {
+      "path": "models/referee.glb",
+      "bytes": 562524,
+      "sha256": "1f0ca6130ec76f5fc5e29f25bab6deb71cd1bb528c3b0e1572394270d1f1a8dd"
+    },
+    {
+      "path": "models/scoreboard.glb",
+      "bytes": 134424,
+      "sha256": "2e778806f79c2a3c93ec870d7fb3da9a22c19b8d4ec411fdbcd2a2e182bc5727"
+    },
+    {
+      "path": "motion/idle.glb",
+      "bytes": 29004,
+      "sha256": "8da52299b4c98b65bcd0846c49ee0f39931fd27510566ff4b1889be01e47bf6b"
+    },
+    {
+      "path": "motion/run.glb",
+      "bytes": 13804,
+      "sha256": "72387a00b7fdd1ea960910d253e3135b6b2f2de57a96703e9d02226472dd0102"
+    },
+    {
+      "path": "motion/whistle.glb",
+      "bytes": 29008,
+      "sha256": "53b1f164bba5398906f2d720e3b006ac09ea5aa1ecffe74148ab8f1e9747648d"
+    },
+    {
+      "path": "motion/foul.glb",
+      "bytes": 32800,
+      "sha256": "ae0ec32269bfac3ca446b038c7264e732dc5962c30fd87ce05235f51c5e75029"
+    },
+    {
+      "path": "motion/three_points.glb",
+      "bytes": 36600,
+      "sha256": "3b5f71ab3d699b6be4ffb2ad97dfd3f5a2cc6245252d79ff9ef9570b21f4bb56"
+    },
+    {
+      "path": "motion/direction.glb",
+      "bytes": 32804,
+      "sha256": "e5723a0d5c9faab8acc33366a6365477d3fa05d964e8bf72f7fbbbdbdd8d756f"
+    },
+    {
+      "path": "textures/referee-atlas.png",
+      "bytes": 308284,
+      "sha256": "2304945d9785f23fdb71c66dba766d48f00031742486bf9e6d00b5f2b4848095"
+    },
+    {
+      "path": "textures/digits.png",
+      "bytes": 14253,
+      "sha256": "1d5ca2fffbc95be62d7b2f955e9865ac65c252cf8919046236b535e9e2f25d9e"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>על המגרש · שופט ולוח תוצאות</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <header class="masthead"><div><p class="eyebrow">ISLAND / BASKETBALL</p><h1>על המגרש<span>שופט ולוח תוצאות</span></h1></div><a href="REPORT.md">דוח המסירה <span aria-hidden="true">↗</span></a></header>
+    <div class="workspace">
+      <section class="stage" aria-label="תצוגה תלת ממדית של המגרש">
+        <canvas id="scene" aria-label="מגרש כדורסל, שופט ולוח תלוי. גרירה מסובבת את המצלמה וגלילה מקרבת." tabindex="0"></canvas>
+        <div class="stage-top"><span class="live-dot"></span><span id="status" role="status">טוען את המגרש…</span></div>
+        <div class="views" aria-label="זווית צפייה"><button data-view="court" aria-pressed="true">המגרש</button><button data-view="referee" aria-pressed="false">השופט</button><button data-view="board" aria-pressed="false">הלוח</button></div>
+        <p class="orbit-hint">גרירה לסיבוב · גלילה לקירוב</p>
+        <div class="stage-caption"><span>OFFICIAL COURTSIDE</span><strong id="action-label">עמידה</strong></div>
+        <div id="load-error" role="alert" hidden></div>
+      </section>
+      <aside class="controls">
+        <section class="panel"><div class="section-heading"><h2>תנועות השופט</h2><span>01 / 02</span></div>
+          <div id="clips" class="clip-grid">
+            <button data-clip="idle" aria-pressed="true"><span>01</span><strong>עמידה</strong><small>דריכות ונשימה</small></button>
+            <button data-clip="run" aria-pressed="false"><span>02</span><strong>ריצה</strong><small>תנועה על הקו</small></button>
+            <button data-clip="whistle" aria-pressed="false"><span>03</span><strong>שריקה</strong><small>עצירת המשחק</small></button>
+            <button data-clip="foul" aria-pressed="false"><span>04</span><strong>עבירה</strong><small>אגרוף מורם</small></button>
+            <button data-clip="three_points" aria-pressed="false"><span>05</span><strong>שלוש נקודות</strong><small>שתי ידיים מעלה</small></button>
+            <button data-clip="direction" aria-pressed="false"><span>06</span><strong>כיוון התקפה</strong><small>הצבעה הצדה</small></button>
+          </div>
+          <div class="transport"><button id="motion-toggle" aria-label="השהיית התנועה">השהיה</button><label for="speed">מהירות</label><select id="speed"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select><output id="clip-time" dir="ltr">0.00 / 0.00</output></div>
+          <label class="scrub-label" for="scrub">מיקום בקליפ</label><input id="scrub" type="range" min="0" max="1" step="0.001" value="0" aria-label="מיקום בקליפ">
+        </section>
+        <section class="panel clock-panel"><div class="section-heading"><h2>שולחן המזכירות</h2><span>02 / 02</span></div>
+          <div class="clock-readout" dir="ltr"><div><span>GAME CLOCK</span><output id="game-time">02:14</output></div><div><span>SHOT CLOCK</span><output id="shot-time">24</output></div></div>
+          <div class="clock-actions"><button id="clock-toggle" class="primary">הפעלת שעונים</button><button id="reset-game">איפוס משחק</button></div>
+          <div class="shot-actions"><span>שעון זריקה</span><button id="shot-24">24 שנ׳</button><button id="shot-14">14 שנ׳</button></div>
+          <div class="score-controls"><div><label for="home-score">בית</label><input id="home-score" type="number" min="0" max="999" value="72"></div><span>—</span><div><label for="away-score">אורחת</label><input id="away-score" type="number" min="0" max="999" value="68"></div><div><label for="period">רבע</label><input id="period" type="number" min="1" max="9" value="4"></div></div>
+          <div class="test-actions"><button id="red-test">בדיקת נורה אדומה</button><button id="expiration-test">סיום זריקה בעוד 3 שנ׳</button></div><p id="clock-status" role="status">השעונים מושהים</p>
+        </section>
+      </aside>
+    </div>
+    <footer><span>HOOPS / REFEREE + SCOREBOARD / V1</span><a href="manifest.json">מפרט נכסים</a><a href="LICENSES.md">מקורות ורישיונות</a></footer>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>
