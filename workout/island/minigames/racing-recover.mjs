@@ -5,7 +5,8 @@
 //          along its own direction, its sideways speed dies fast and it never goes past RECOVER.maxBeyond (the clear zone starts at 10.6 m), so it never rolls back in
 //  rest    it lies on its wheels for a moment (dust and sparks: event 'crashRest')
 //  vanish  it disappears (car.hidden) while its position glides to the nearest centre-line point, so the chase camera follows without a cut
-//  drop    it reappears on the centre line, along the road, and settles 35 cm onto its wheels (car.dropY), no rotation at all; speed 0, first gear, idle revs
+//  drop    it reappears on the centre line, along the road, and settles 35 cm onto its wheels (car.dropY), no rotation at all; speed 0, first gear, idle revs;
+//          for RECOVER.ghost seconds after it the traffic passes through it (car.ghostT), so a car set down at speed 0 on the racing line is not rear-ended at once
 // A slow car that is lost off the track (config.offSlow) gets the same return without the flip: rest, vanish, drop (startSoft).
 // The landing point never passes the next gate, so a recovery never grants one. Pure: positions, timers and events only.
 import {RECOVER} from './racing-v24.mjs?v=island-v2-20261107-13';
@@ -60,7 +61,7 @@ export function createRecovery({track,sector,event,restartLane,crashFx=true,minS
   if(f.phase==='drop'){
    const u=clamp(f.t/RECOVER.drop,0,1);car.speed=0;car.dropY=RECOVER.dropHeight*(1-u*u);   // falls like a dropped car: slow first, 2.3 m/s at the touch-down
    if(u>=1){car.dropY=0;car.hidden=false;car.previousS=car.routeS;car.speed=0;car.steer=0;car.slipAngle=0;car.gear=1;car.gearT=1;car.gearInit=true;car.rpm=Math.min(car.rpm,.22);car.shiftT=0;
-    car.offroad=false;car.offroadTime=0;car.farT=0;car.stuckT=0;car.slowOffT=0;car.recoveryTime=1.2;car.wallCooldown=.5;car.crashT=0;car.crashAir=0;car.crashDur=0;car.offFlight=null;
+    car.offroad=false;car.offroadTime=0;car.farT=0;car.stuckT=0;car.slowOffT=0;car.recoveryTime=1.2;car.wallCooldown=.5;car.crashT=0;car.crashAir=0;car.crashDur=0;car.offFlight=null;car.ghostT=RECOVER.ghost;
     event('crashRecover',car,{reason:'offtrack',soft:true,recover:'v24',why:f.why||null});}
    return true;
   }

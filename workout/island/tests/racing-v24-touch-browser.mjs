@@ -27,7 +27,8 @@ function audioLog(){
  const fp=ab=>{const u=new Uint8Array(ab);let h=u.length>>>0;const step=Math.max(1,Math.floor(u.length/97));for(let i=0;i<u.length;i+=step)h=(Math.imul(h,31)+u[i])>>>0;return u.length+':'+h;};
  const byFp=new Map(),byBuffer=new WeakMap(),tag=new WeakMap(),owner=new WeakMap();const short=url=>{try{return new URL(url,location.href).pathname.replace(/^.*\/assets\//,'');}catch{return String(url);}};
  const fetch0=window.fetch;window.fetch=function(input,init){const url=typeof input==='string'?input:input?.url||String(input);return fetch0.call(this,input,init).then(res=>{const ab=res.arrayBuffer.bind(res);res.arrayBuffer=()=>ab().then(buf=>{try{byFp.set(fp(buf),short(url));}catch{}return buf;});return res;});};
- const connect0=AudioNode.prototype.connect;AudioNode.prototype.connect=function(dest,...a){const t=tag.get(this);if(t&&dest instanceof AudioNode&&!tag.get(dest))tag.set(dest,t);return connect0.call(this,dest,...a);};
+ // the game connects a loop to its gain before it starts it, so the source is tagged here from its buffer (the start wrapper tags it again)
+ const connect0=AudioNode.prototype.connect;AudioNode.prototype.connect=function(dest,...a){let t=tag.get(this);if(!t&&this instanceof AudioBufferSourceNode&&this.buffer){t={url:byBuffer.get(this.buffer)||`generated:${this.buffer.length}`,loop:this.loop};tag.set(this,t);}if(t&&dest instanceof AudioNode&&!tag.get(dest))tag.set(dest,t);return connect0.call(this,dest,...a);};
  const st0=AudioParam.prototype.setTargetAtTime;AudioParam.prototype.setTargetAtTime=function(v,...a){const g=owner.get(this);if(g){const t=tag.get(g);if(t&&t.loop){const k=t.url,prev=L.last.get(k)??0;if((v>.0005)!==(prev>.0005)||Math.abs(v-prev)>Math.max(.002,prev*.25)){L.last.set(k,v);L.levels.push({t:+now().toFixed(3),url:k,v:+v.toFixed(4)});}}}return st0.call(this,v,...a);};
  const wrap=C=>{if(!C)return C;const W=function(...a){const ctx=new C(...a);
    const dec=ctx.decodeAudioData.bind(ctx);ctx.decodeAudioData=function(buf,ok,err){let url=null;try{url=byFp.get(fp(buf))||null;}catch{}const p=dec(buf).then(b=>{byBuffer.set(b,url||'untagged');return b;});if(ok)p.then(ok,err);return p;};
@@ -128,8 +129,11 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   const v0=(await log()).speed;await setWheel(.85);const turn=[];for(let i=0;i<FPS;i++){await tick(FRAME);turn.push(await log());}
   report.turn={from:v0,to:turn.at(-1).speed,loss:+(v0-turn.at(-1).speed).toFixed(2),lossPerSecond:+((v0-turn.at(-1).speed)).toFixed(2)};await frame('1-turn');
   await setWheel(0);for(let i=0;i<Math.round(1.5*FPS);i++){await drive({brakes:false});await log();}
-  const v1=(await log()).speed;await setGas(false);await setBrake(true);const br=[];for(let i=0;i<Math.round(.6*FPS);i++){await tick(FRAME);br.push(await log());}
-  report.brake={from:v1,to:br.at(-1).speed,decel:+((v1-br.at(-1).speed)/.6).toFixed(1)};await frame('2-brake');await setBrake(false);await pullAudio();
+  const v1s=await log(),v1=v1s.speed;await pullAudio();await setGas(false);await setBrake(true);const br=[];for(let i=0;i<Math.round(.6*FPS);i++){await tick(FRAME);br.push(await log());}
+  report.brake={from:v1,to:br.at(-1).speed,decel:+((v1-br.at(-1).speed)/.6).toFixed(1),t0:v1s.t,t1:br.at(-1).t};await frame('2-brake');await setBrake(false);await tick(FRAME*3);await pullAudio();
+  // which looping layers the game turned up while the brake was held (the audio log: the gain the loop feeds, set by the game every frame)
+  report.brake.audible=[...new Set(audio.levels.filter(l=>l.t>=report.brake.t0-.05&&l.t<=report.brake.t1+.05&&l.v>.0005).map(l=>l.url))];
+  report.brake.levels=audio.levels.filter(l=>l.t>=report.brake.t0-.05&&l.t<=report.brake.t1+.1);
  }
  else if(scenario==='brake'){
   await setGas(true);for(let i=0;i<Math.round(14*FPS);i++){await drive({brakes:false});const s=await log();if(s.speed>34)break;}
@@ -150,9 +154,11 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   const until=Number(process.env.RV24_SECONDS)||170;let k=0,tapped=false,changed=0;const pitShots=new Set();
   while(true){const s0=await state();
    if(s0.pit&&['entry','lane','stop','change','exit','merge'].includes(s0.pit)){await setBrake(false);await setGas(false);if(wheelOn){await up(2);wheelOn=false;}
-    if(s0.pit==='stop'&&!changed){const b=await box('[data-action=racing-pit-change]');if(b){await page.waitForTimeout(10);await down(5,b.x+b.width/2,b.y+b.height/2);await tick(FRAME);await up(5);changed++;report.changeTap=await state();}}
-    if(!pitShots.has(s0.pit)){pitShots.add(s0.pit);await frame('pit-'+s0.pit);}await tick(FRAME);await log();k++;if(k%30===0)await pullAudio();continue;}
-   const q=await drive({aLat:15,aBrake:15});const s=await log();
+    if(s0.pit==='stop'&&!changed){const b=await box('[data-action=racing-pit-change]');if(b){await page.waitForTimeout(10);await down(5,b.x+b.width/2,b.y+b.height/2);await tick(FRAME);await up(5);changed++;report.changeTap={...(await state()),button:b,crew:await page.evaluate(()=>window.__island.games.current.session.snapshot.renderMetrics?.pitCrew||null)};}}
+    if(s0.pit==='change'&&!report.crewAtChange)report.crewAtChange=await page.evaluate(()=>window.__island.games.current.session.snapshot.renderMetrics?.pitCrew||null);
+    if(!pitShots.has(s0.pit)){pitShots.add(s0.pit);await frame('pit-'+s0.pit);}else if(['stop','change','leave'].includes(s0.pit)&&k%4===0)await frame('pit-'+s0.pit+'-'+String(k).padStart(5,'0'));
+    await tick(FRAME);await log();k++;if(k%30===0)await pullAudio();continue;}
+   const q=await drive({aLat:Number(process.env.RV24_ALAT)||15,aBrake:Number(process.env.RV24_ABRAKE)||15});const s=await log();
    if(!tapped&&s.t>Number(process.env.RV24_TAP||20)){const b=await box('[data-action=racing-pit]');if(b){await down(4,b.x+b.width/2,b.y+b.height/2);await tick(FRAME);await up(4);tapped=true;report.pitTap={...(await state()),button:b};await frame('pit-button');}}
    if(k%150===0)await frame('race-'+String(k).padStart(5,'0'));if(k%30===0)await pullAudio();k++;if(s.t>until||s.phase!=='racing')break;}
   report.pitEvents=await page.evaluate(()=>window.__log.filter(e=>/^pit/.test(e.type)));report.tower=await page.evaluate(()=>[...document.querySelectorAll('.rt-row')].filter(r=>r.style.display!=='none').map(r=>({id:r.dataset.id,pos:r.querySelector('.rt-pos')?.textContent,gap:r.querySelector('.rt-gap')?.textContent,pit:r.dataset.pit||null})));

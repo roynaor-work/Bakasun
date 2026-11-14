@@ -272,7 +272,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     const feel=car.isPlayer&&config.feel!==false,speedF=clamp((car.speed-28)/17,0,1);
     const steerIn=feel?steer*(1-.3*speedF*(1-Math.abs(steer))):steer;
     car.steer+= (steerIn-car.steer)*(1-Math.exp(-dt*(feel?16:11)));
-    car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);
+    car.recoveryTime=Math.max(0,car.recoveryTime-dt);car.collisionCooldown=Math.max(0,car.collisionCooldown-dt);if(car.ghostT>0)car.ghostT=Math.max(0,car.ghostT-dt);
     car.padCooldown=Math.max(0,car.padCooldown-dt);car.boostTime=Math.max(0,car.boostTime-dt);
     const drifting=!!input.drift&&car.speed>12&&!car.offroad&&Math.abs(car.steer)>.16;
     if(drifting)car.driftCharge=clamp(car.driftCharge+dt*(.55+Math.abs(car.steer)*.55),0,2.7);
@@ -501,7 +501,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     for(let index=1;index<cars.length;index++)integrate(cars[index],aiInput(cars[index]),FIXED_STEP);
     for(let a=0;a<cars.length;a++)for(let b=a+1;b<cars.length;b++) {
       const first=cars[a],second=cars[b],dx=second.x-first.x,dz=second.z-first.z,d=Math.hypot(dx,dz);
-      if(d>0.01&&d<2.55&&!first.finished&&!second.finished&&!first.pit&&!second.pit&&!first.offFlight?.v24&&!second.offFlight?.v24) {   // racing-v24: a car in the pits or in its v24 recovery (rolling, hidden, settling) does not collide
+      if(d>0.01&&d<2.55&&!first.finished&&!second.finished&&!first.pit&&!second.pit&&!first.offFlight?.v24&&!second.offFlight?.v24&&!(first.ghostT>0)&&!(second.ghostT>0)) {   // racing-v24: a car in the pits, in its v24 recovery (rolling, hidden, settling) or just set back (ghostT) does not collide
         const nx=dx/d,nz=dz/d;
         if(aiOn){
           // racing-deep-m2 contact: the two cars move apart at once (the whole overlap, more of it on the car behind), a rear-end hit costs the car behind its speed and

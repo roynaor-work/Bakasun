@@ -20,7 +20,7 @@ export const shiftStyle=(search=globalThis.location?.search||'')=>{const v=new U
  * and no wind loop standing still or slow (Roy: "a background noise, like air or a hiss"; ?racingHiss=v23). v4: the Codex v4 brake loops, bumps and scrape replace the
  * squeals under braking ("a metal noise instead of a braking noise"; ?racingAudioV4=0). */
 const SHIFT={v22:{dip:.18,len:.14,vol:.3,pop:.09,noise:.055,blip:0},a:{dip:.1,len:.08,vol:.12,pop:0,noise:0,blip:.06},b:{dip:.12,len:.1,vol:.15,pop:0,noise:0,blip:.06},c:{dip:.16,len:.09,vol:.55,pop:0,noise:0,blip:0}};
-export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle(),blowoff:blowoffOn=racingV24Flags().turbo==='v23',hiss:hissMode=racingV24Flags().hiss,v4:v4On=racingV24Flags().audioV4}={}){
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle(),blowoff:blowoffOn=racingV24Flags().turbo==='v23',hiss:hissMode=racingV24Flags().hiss,v4:v4On=racingV24Flags().audioV4,pit:pitOn=false}={}){
  const SH=SHIFT[shiftName]||SHIFT.a,style=SHIFT[shiftName]?shiftName:'a';let blipUntil=0,shifts=0,blowoffs=0,noiseLevel=0;
  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
  const number=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
@@ -70,7 +70,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();
     createNoise();lastTime=context.currentTime;
     // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
-    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-13').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
+    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-13').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}
@@ -213,8 +213,9 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
  function event(name,details={}){
   readMute();if(paused||muted||disposed)return;
   if(name==='pass'){if(samples?.ready)samples.pass();else cue('pass',1);return;}
-  if(name==='pit'){wheelGun();return;}
-  if(samples?.ready)samples.event?.(name,clamp(number(details?.intensity,1),0,1),details);   // racing-audio-v3 layer (a no-op until its files decoded); the procedural cue below always plays
+  if(name==='pit'){if(!samples?.pitCue?.(details?.type,details?.seconds||2)&&details?.type==='pitChange')wheelGun();return;}   // racing-v24: the Codex pit sounds, or the procedural guns
+  if(samples?.ready&&details?.side)samples.contactSide?.();   // racing-v24: the next bump was side by side (the v4 scrape joins it)
+  if(samples?.ready)samples.event?.(name,clamp(number(details?.intensity,1),0,1));   // racing-audio-v3 layer (a no-op until its files decoded); the procedural cue below always plays
   cue(name,clamp(number(details?.intensity,1),0,1));
  }
  return {unlock,sync,setOpponents,event,

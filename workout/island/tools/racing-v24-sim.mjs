@@ -35,10 +35,12 @@ function turbo(cfg,flags,{stages=[1,2,3,4,5,6],seconds=60}={}){
  const sum=k=>+rows.reduce((n,r)=>n+r[k],0).toFixed(2);return {rows,driftBoosts:sum('driftBoosts'),boostSeconds:sum('boostSeconds'),gearChanges:sum('gearChanges'),afterCorner:sum('gearChangesWithin2_5sAfterBrake')};
 }
 /** one hard exit with the given recovery; v24 records the roll window, the sideways path while rolling and the soft drop */
-export function recoverExit(stage,seed,{drive=4,side=1,lock=1,cfg=V24}={}){
- const race=createRacing({stage,seed,config:{countdown:0,extraRivals:5,walls:false,offTrack:true,...cfg}}),p=race.state.player,tr=race.track,half=tr.width/2,st={};
+export function recoverExit(stage,seed,{drive=4,side=1,lock=1,cfg=V24,rivals=0}={}){
+ const race=createRacing({stage,seed,config:{countdown:0,extraRivals:rivals,walls:false,offTrack:true,...cfg}}),p=race.state.player,tr=race.track,half=tr.width/2,st={};
  let trigger=null,maxBeyond=0,nan=false;
- for(let n=0;n<drive*60;n++)race.step(1/60,playerInput(pilot(race,p,st),racingV24Flags('')));
+ // a light pursuit before and after (the corner-speed pilot costs 16 track samples a step; 1,000 exits)
+ const pursue=()=>{const pr=tr.project(p.x,p.z,p.s),tg=tr.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading),curv=Math.abs(wrap(tr.sample(pr.s+26).heading-tr.sample(pr.s+6).heading));return {steer:clamp(err*1.7,-1,1),throttle:1,autoAccelerate:true,brake:curv>.62&&p.speed>24};};
+ for(let n=0;n<drive*60;n++)race.step(1/60,pursue());
  for(let k=0;k<20*60&&!trigger;k++){race.step(1/60,{steer:side*lock,throttle:1,autoAccelerate:true});maxBeyond=Math.max(maxBeyond,Math.abs(p.lateral)-half);if(!finite(p))nan=true;
   for(const e of race.state.events)if(e.car==='player'&&e.type==='crash'&&e.reason==='offtrack')trigger={...e,checkpoints:p.checkpoints,routeS:p.routeS,nextGate:p.nextCheckpoint*tr.length/tr.checkpoints.length,lat:p.lateral};}
  if(!trigger){race.dispose();return {stage,seed,trigger:null,maxBeyond:+maxBeyond.toFixed(2)};}
@@ -48,7 +50,7 @@ export function recoverExit(stage,seed,{drive=4,side=1,lock=1,cfg=V24}={}){
   if(p.hidden)hiddenSteps++;const d=p.dropY||0;dropMax=Math.max(dropMax,d);if(lastDrop>0&&d>lastDrop+1e-9)dropUp++;lastDrop=d;   // a rise after the drop began (the set to 35 cm at its start is not one)
   const ph=p.offFlight?.phase||'done';if(phases.at(-1)!==ph)phases.push(ph);
   for(const e of race.state.events)if(e.car==='player'){if(e.type==='crashRest')rest={lat:p.lateral,t:race.state.time};if(e.type==='crashRecover')landing={speed:p.speed,lateral:p.lateral,heading:wrap(p.heading-tr.sample(p.s).heading),checkpoints:p.checkpoints,routeS:p.routeS,soft:!!e.soft};}}
- for(let k=0;k<3*60;k++)race.step(1/60,playerInput(pilot(race,p,st),racingV24Flags('')));
+ for(let k=0;k<3*60;k++)race.step(1/60,pursue());
  const out={stage,seed,why:trigger.why,speedAtTrigger:+trigger.speed.toFixed(1),latAtTrigger:+Math.abs(trigger.lat).toFixed(2),maxBeyond:+maxBeyond.toFixed(2),nan,secondRolls:rollWindows,
   minAbsLatWhileRolling:+minAbsLatRolling.toFixed(2),restLat:rest?+Math.abs(rest.lat).toFixed(2):null,hidden:+(hiddenSteps/60).toFixed(2),dropMax:+dropMax.toFixed(2),dropRises:dropUp,phases:phases.join('>'),total:+(steps/60).toFixed(2),
   landing:landing&&{speed:+landing.speed.toFixed(2),lateral:+landing.lateral.toFixed(3),headingError:+landing.heading.toFixed(4),gateGranted:landing.checkpoints>trigger.checkpoints,beforeNextGate:landing.routeS<trigger.nextGate,soft:landing.soft},speedAfter3s:+p.speed.toFixed(1)};

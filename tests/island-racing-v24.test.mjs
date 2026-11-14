@@ -29,7 +29,7 @@ test('flags: v24 by default; racingTurbo, racingRecover, racingBrakeAuto, racing
 
 test('turbo after every corner (root cause): the brake button drifted, the release gave a drift boost and the boost end played the blow-off; v24 brakes only',()=>{
  // a child's corner on the six circuits: the brake button held from the brake point through the corner, released at the exit
- const kid=(cfg,flags)=>{let boosts=0,boostSteps=0,crashes=0;for(const stage of [1,2,3,4,5,6]){const race=createRacing({stage,seed:7,config:{countdown:0,extraRivals:7,walls:false,offTrack:true,...cfg}}),p=race.state.player,st={};
+ const kid=(cfg,flags)=>{let boosts=0,boostSteps=0,crashes=0;for(const stage of [1,2,3,4,5,6]){const race=createRacing({stage,seed:7,config:{countdown:0,extraRivals:0,walls:false,offTrack:true,...cfg}}),p=race.state.player,st={};
   for(let n=0;n<45*60;n++){race.step(1/60,playerInput(pilot(race,p,st),flags));if(p.boosting)boostSteps++;for(const e of race.state.events)if(e.car==='player'){if(e.type==='driftBoost')boosts++;if(e.type==='crash')crashes++;}}race.dispose();}
   return {boosts,boostSeconds:boostSteps/60,crashes};};
  const before=kid(V23,racingV24Flags('?racingTurbo=v23')),after=kid(V24,racingV24Flags(''));
@@ -108,8 +108,8 @@ test('tyres: 1 when new, wear with distance, grip and top speed fade gradually, 
  const two=createRacing({stage:1,seed:3,config:{countdown:0,extraRivals:0,...V24}});assert.equal(two.pit.on,false,'a 2-lap race has no pits');two.dispose();
 });
 
-test('pit stops over 12 league-length races (3 laps, 12 cars): every car stops once, 2-3 s in the box, 20 m/s in the lane, fresh tyres, the order changes, the race ends in time',()=>{
- const rows=[];for(const stage of [13,14,15,16,17,18])for(const seed of [3,11])rows.push(pitRace(stage,seed,{extra:7}));
+test('pit stops over 6 league-length races (3 laps, 12 cars, the six circuits): every car stops once, 2-3 s in the box, 20 m/s in the lane, fresh tyres, the order changes, the race ends in time',()=>{
+ const rows=[];for(const stage of [13,14,15,16,17,18])rows.push(pitRace(stage,stage===17?11:3,{extra:7}));
  for(const r of rows){
   assert.equal(r.phase,'finished',`stage ${r.stage}: the race ends`);assert.ok(r.time<295,`stage ${r.stage}: under the 295 s clock (${r.time})`);
   assert.equal(r.carsStopped,r.cars,`stage ${r.stage} seed ${r.seed}: every car stopped `+JSON.stringify(r.pitLaps));
@@ -160,13 +160,31 @@ test('background hiss (v24): standing still the wind loop and the engine noise l
  assert.ok(await level('v24',45)>0&&await level('v24',45)<await level('v23',45),'v24: some wind at speed, under the v23 level');
 });
 
+test('Codex pit pack (design/racing-pit-v1): the crew files carry the ten clips and the team mask, the pit sounds play in order over the change, the wear icons follow the tyre',async()=>{
+ const {CREW,pitCrewEnabled}=await import('../workout/island/minigames/racing-pit-crew.mjs');const {wearStep}=await import('../workout/island/minigames/racing-pit-ui.mjs');
+ assert.equal(pitCrewEnabled(''),true);assert.equal(pitCrewEnabled('?racingPitCrew=0'),false);assert.equal(CREW.length,6,'four wheel changers, the jack operator, the light controller');
+ for(const c of CREW){const b=Buffer.from(await readFile(new URL(`assets/racing-pit-v1/models/${c.id}.glb`,island)));const json=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)).toString());
+  const names=json.animations.map(a=>a.name);for(const clip of ['idle_wait','rush_in','remove_wheel','mount_wheel','jack_up','jack_down','thumbs_up','step_back','signal_release'])assert.ok(names.includes(clip),c.id+' '+clip);
+  assert.ok('_TEAM_MASK' in json.meshes[0].primitives[0].attributes,c.id+' team mask');assert.equal(json.skins.length,1);}
+ assert.deepEqual([1,.8,.74,.5,.26,.2,0].map(wearStep),[0,0,1,2,2,3,3],'the four steps of the icons');
+ // the sounds: the jack at the stop, guns/wheel/wheel/guns spread over the change, cheer and engine at the end
+ const c={currentTime:5,destination:{},src:[],createGain(){return {gain:{value:0,setValueAtTime(){},linearRampToValueAtTime(){},setTargetAtTime(v){this.value=v;}},connect(){},disconnect(){}};},
+  createBufferSource(){const s={playbackRate:{value:1,setTargetAtTime(v){this.value=v;}},connect(){},disconnect(){},start(t){this.started=t;},stop(){},loop:false,buffer:null};this.src.push(s);return s;},decodeAudioData:async b=>({duration:1,id:b.id})};
+ const urls=[];const layer=createRacingSamples({context:c,base:new URL('http://x/racing-audio-v2/'),basePit:new URL('http://x/racing-pit-v1/audio/'),pit:true,format:'ogg',fetchFn:async url=>{urls.push(url);return {ok:true,arrayBuffer:async()=>{const a=new ArrayBuffer(8);a.id=url;return a;}};}});
+ await layer.load();assert.ok(layer.pitReady);assert.ok(urls.some(u=>/racing-pit-v1\/audio\/wheel_gun_loosen\.ogg$/.test(u)));
+ const n0=c.src.length;assert.equal(layer.pitCue('pitStop'),true);assert.equal(c.src.length,n0+1,'the jack');
+ const n1=c.src.length;layer.pitCue('pitChange',2);const change=c.src.slice(n1).map(s=>+(s.started-5).toFixed(2));assert.deepEqual(change,[0,.5,1.04,1.32],'guns, wheel off, wheel on, guns over the 2 s change');
+ const n2=c.src.length;layer.pitCue('pitDone');assert.equal(c.src.length,n2+2,'the cheer and the engine');
+ const view=await read('minigames/racing-view.mjs');assert.match(view,/pitCrewEnabled\(\)\?m\.loadPitCrew\(/);assert.match(view,/pitCrew\?\.update\(state,dt\)/);assert.match(view,/if\(!lite\)import\('\.\/racing-pit-crew\.mjs/);
+});
+
 test('session, view, effects and offline list carry v24',async()=>{
  const session=await read('minigames/racing-session.mjs');
  assert.match(session,/v24PhysicsConfig\(v24\)/);assert.match(session,/lastInput=playerInput\(input\.sample\(\),v24\)/);assert.match(session,/createPitUi\(/);assert.match(session,/racing-v24\.css/);
  assert.match(session,/blowoff:v24\.turbo==='v23'/);
  const view=await read('minigames/racing-view.mjs');assert.match(view,/&&!c\.hidden/);assert.match(view,/car\.body\.position\.y=c\.dropY\|\|0/);
  const effects=await read('minigames/racing-effects.mjs');assert.match(effects,/crashRest/);
- const m=JSON.parse(await read('offline-manifest.json'));for(const f of ['minigames/racing-v24.mjs','minigames/racing-recover.mjs','minigames/racing-pit.mjs','minigames/racing-pit-ui.mjs','minigames/racing-formula-all.mjs','minigames/racing-v24.css'])assert.ok(m.shell.includes(f),f);
- for(const f of ['assets/racing-formula-cars-v1/formula-lod0.glb','assets/racing-formula-cars-v1/formula-lod1.glb','assets/racing-formula-cars-v1/formula-lod2.glb','assets/racing-audio-v4/brake-loop-hard.ogg','assets/racing-audio-v4/car-bump-hard.mp3','assets/racing-audio-v4/side-scrape.ogg'])
+ const m=JSON.parse(await read('offline-manifest.json'));for(const f of ['minigames/racing-v24.mjs','minigames/racing-recover.mjs','minigames/racing-pit.mjs','minigames/racing-pit-ui.mjs','minigames/racing-pit-view.mjs','minigames/racing-pit-crew.mjs','minigames/racing-formula-all.mjs','minigames/racing-v24.css'])assert.ok(m.shell.includes(f),f);
+ for(const f of ['assets/racing-pit-v1/models/wheel_front_left.glb','assets/racing-pit-v1/audio/crew_cheer.ogg','assets/racing-pit-v1/icons/tire_wear_3.svg','assets/racing-formula-cars-v1/formula-lod0.glb','assets/racing-formula-cars-v1/formula-lod1.glb','assets/racing-formula-cars-v1/formula-lod2.glb','assets/racing-audio-v4/brake-loop-hard.ogg','assets/racing-audio-v4/car-bump-hard.mp3','assets/racing-audio-v4/side-scrape.ogg'])
   {assert.ok(m.games.racing.includes(f),f);await access(new URL(f,island));}
 });

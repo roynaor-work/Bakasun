@@ -10,7 +10,6 @@
 //         car's own box (working lane, 9 m out), a 2.2-2.8 s stop for the computer; the player taps the tyre change (2 s; it starts by itself after 0.8 s), then the
 //         lane and the exit ramp back onto the road. The line is crossed inside the pit lane, gates count as usual; a stop never starts on the last lap.
 import {PIT,pitLane,tyreWorn,ease,easeSlope} from './racing-v24.mjs?v=island-v2-20261107-13';
-import {racingAngle} from './racing-tracks.mjs?v=island-v2-20261107-13';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function createPitCrew({track,stage,cars,random,event,passGates,sector,enabled=true}){
  const lane=pitLane(track),laps=stage.laps,on=!!enabled&&laps>=PIT.minLaps,L=track.length,n=cars.length;
@@ -36,17 +35,23 @@ export function createPitCrew({track,stage,cars,random,event,passGates,sector,en
   if(car.lap===car.pitPlan-1&&car.tyre<.65)for(const o of cars){if(o===car||!o.pit||o.pitEntryLap!==car.lap)continue;const gap=((o.routeS-car.routeS)%L+L)%L;if(gap<40)return true;}
   return false;
  }
- /** per fixed step, after the car moved on the road: start the stop when it reaches the entry */
+ /** per fixed step, after the car moved on the road: decide once per entry (in the last 80 m before it), start the stop inside the entry window. The decided entry is
+  * kept (car.pitEntryAt): recomputing "the next entry" every step jumped a lap ahead the moment the car passed the entry, and a car at 40 m/s (0.67 m a step) could
+  * step over a 0.5 m window and miss its stop. A stop missed because the car was flipping or off the track is decided again at the next entry. */
  function watch(car){
   if(!on||car.pit||car.finished||car.crashT>0||car.offFlight)return;
-  const at=entryAhead(car);
-  if(car.pitEntryAt!==at&&car.routeS>=at-80){car.pitEntryAt=at;car.pitGo=wants(car);}
-  if(car.pitGo&&car.pitEntryAt===at&&car.routeS>=at-.5&&car.routeS<at+lane.lane0-lane.entry){
-   const base=at-lane.entry,lat0=car.lateral;car.pitGo=false;
-   car.pit={phase:'entry',t:0,base,lat0,lat:lat0,box:base+lane.boxS(car.boxIndex,n),stop:car.isPlayer?0:PIT.stopAI[0]+(PIT.stopAI[1]-PIT.stopAI[0])*random(),tapped:false};
-   car.pitEntryLap=car.lap;car.pitRequest=false;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.farT=0;car.slowOffT=0;car.passing=null;car.laneHold=0;
-   event('pitIn',car,{lap:car.lap,auto:!!car.pitAuto});car.pitAuto=false;
+  const target=car.pitEntryAt;
+  if(car.pitGo&&target!=null&&car.routeS>=target-.5){
+   if(car.routeS<target+lane.lane0-lane.entry){
+    const base=target-lane.entry,lat0=car.lateral;car.pitGo=false;
+    car.pit={phase:'entry',t:0,base,lat0,lat:lat0,box:base+lane.boxS(car.boxIndex,n),stop:car.isPlayer?0:PIT.stopAI[0]+(PIT.stopAI[1]-PIT.stopAI[0])*random(),tapped:false};
+    car.pitEntryLap=car.lap;car.pitRequest=false;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.farT=0;car.slowOffT=0;car.passing=null;car.laneHold=0;
+    event('pitIn',car,{lap:car.lap,auto:!!car.pitAuto});car.pitAuto=false;return;
+   }
+   car.pitGo=false;
   }
+  const at=entryAhead(car);
+  if(car.pitEntryAt!==at&&car.routeS>=at-80&&!(car.pitGo&&target!=null&&car.routeS<target)){car.pitEntryAt=at;car.pitGo=wants(car);}
  }
  function pose(car,lat,slope){
   const p=track.sample(car.routeS);car.x=p.x+p.normal.x*lat;car.z=p.z+p.normal.z*lat;car.y=p.y;car.s=p.s;car.lateral=lat;

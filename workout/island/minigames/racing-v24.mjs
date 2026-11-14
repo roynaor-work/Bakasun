@@ -6,7 +6,7 @@
 //  ?racingRecover=v23    the off-track flip flies back to the centre line while it rolls ("it flips back onto the track"); v24 rolls once where it is, then the car vanishes
 //                        for a moment and is set down softly on its wheels on the centre line
 //  ?racingOffSlow=0      the grass stops a slow car (8 m/s^2 of drag beats the engine at low speed: "off the track not fast, no way to drive back") and no pull or soft return
-//  ?racingPit=0          no tyre wear and no pit stops
+//  ?racingPit=0          no tyre wear and no pit stops (?racingPitCrew=0 keeps the stops but not the Codex crew at the player's box)
 //  ?racingFormulaAll=0   two rivals with the formula model, the rest the light silhouette ("look like a toy")
 //  ?racingBrakeAuto=v23  the turn itself bleeds speed (the cornering scrub); v24 slows only on the brake
 //  ?racingBump=v23       the old soft contact; v24 bounces the cars apart with a knock and costs both of them speed
@@ -29,7 +29,7 @@ export function playerInput(sample,flags=racingV24Flags()){
 }
 
 // ---- recovery after the off-track flip (v24): one roll where the car is, a short rest, a vanish while the camera glides to the road, a soft drop on the wheels
-export const RECOVER=Object.freeze({rest:.25,vanish:.4,drop:.3,dropHeight:.35,maxBeyond:9.4,sideDecay:7,alongDecay:3.2});
+export const RECOVER=Object.freeze({rest:.25,vanish:.4,drop:.3,dropHeight:.35,maxBeyond:9.4,sideDecay:7,alongDecay:3.2,ghost:1});
 // ---- slow off-track (v24): drag that never beats the engine at walking pace, a pull towards the road, and a soft return after a while
 export const OFF_SLOW=Object.freeze({slow:8,dragFull:20,pull:.9,nudge:.45,returnAfter:6,stuckRate:2});
 // ---- tyres and pits (v24): wear per metre, how much grip and top speed a worn tyre costs, the pit lane speed, the stop

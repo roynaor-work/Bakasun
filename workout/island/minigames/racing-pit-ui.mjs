@@ -1,17 +1,22 @@
 // racing-v24 pit stop HUD (DOM only; the stop itself is racing-pit.mjs): a tyre wear meter next to the speedometer, a "פיטס" button with the controls, the big tyre
 // change button while the car stands in its box (a tap starts the 2 s change; after 0.8 s it starts by itself, so a 7-year-old is never stuck there), and a "פיטס"
 // tag on the cars of the timing tower that are in the pit lane. Off with the race (?racingPit=0, or a race of fewer than 3 laps: nothing is created).
+// racing-v24: the Codex icons (design/racing-pit-v1, CC0; assets/racing-pit-v1/icons): four tyre wear steps, the pit entry and the wheel change
+const ICONS=new URL('../assets/racing-pit-v1/icons/',import.meta.url),icon=name=>new URL(name+'.svg',ICONS).href;
+/** the wear step of the icon: 0 = new .. 3 = worn (the package's thresholds: a quarter of the tyre each) */
+export const wearStep=tyre=>Math.max(0,Math.min(3,Math.floor((1-Math.max(0,Math.min(1,Number.isFinite(tyre)?tyre:1)))*4)));
 const PHASE_TEXT={entry:'כניסה לפיטס',lane:'נתיב הפיטס',stop:'עצירה',change:'מחליפים צמיגים',leave:'יציאה מהפיטס',exit:'חזרה למסלול'};
 export function createPitUi({stage,controls,document:doc=stage.ownerDocument,onRequest,onTap,signal}){
  const node=(tag,cls,text='')=>{const n=doc.createElement(tag);n.className=cls;n.textContent=text;return n;};
  const meter=node('div','racing-tyres');meter.setAttribute('role','meter');meter.setAttribute('aria-label','בלאי צמיגים');meter.setAttribute('aria-valuemin','0');meter.setAttribute('aria-valuemax','100');
- const ring=doc.createElementNS('http://www.w3.org/2000/svg','svg');ring.setAttribute('viewBox','0 0 20 20');ring.setAttribute('aria-hidden','true');ring.classList.add('racing-tyre-icon');
- ring.innerHTML='<circle cx="10" cy="10" r="8.2" class="tyre-rubber"/><circle cx="10" cy="10" r="4" class="tyre-rim"/><path d="M10 1.8v3M10 15.2v3M1.8 10h3M15.2 10h3" class="tyre-tread"/>';
+ const ring=doc.createElement('img');ring.className='racing-tyre-icon';ring.alt='';ring.setAttribute('aria-hidden','true');ring.src=icon('tire_wear_0');ring.draggable=false;let step=0;
  const bar=node('span','racing-tyre-bar'),fill=node('i','racing-tyre-fill'),value=node('bdi','racing-tyre-value','100%');bar.append(fill);meter.append(ring,bar,value);stage.append(meter);
  const button=node('button','racing-pit-button');button.type='button';button.dataset.action='racing-pit';button.dataset.state='idle';button.setAttribute('aria-label','כניסה לפיטס להחלפת צמיגים');
- const label=node('span','racing-pit-label','פיטס'),sub=node('small','racing-pit-sub','');button.append(label,sub);controls.append(button);
+ const pitIcon=doc.createElement('img');pitIcon.className='racing-pit-icon';pitIcon.alt='';pitIcon.setAttribute('aria-hidden','true');pitIcon.src=icon('pit_entry');pitIcon.draggable=false;
+ const label=node('span','racing-pit-label','פיטס'),sub=node('small','racing-pit-sub','');button.append(pitIcon,label,sub);controls.append(button);
  const change=node('button','racing-pit-change');change.type='button';change.dataset.action='racing-pit-change';change.hidden=true;change.setAttribute('aria-label','החלפת צמיגים');
- const changeText=node('strong','racing-pit-change-text','החלפת צמיגים'),changeHint=node('small','racing-pit-change-hint','לחצו'),progress=node('span','racing-pit-progress'),progressFill=node('i','racing-pit-progress-fill');progress.append(progressFill);change.append(changeText,changeHint,progress);controls.append(change);
+ const changeIcon=doc.createElement('img');changeIcon.className='racing-pit-change-icon';changeIcon.alt='';changeIcon.setAttribute('aria-hidden','true');changeIcon.src=icon('wheel_change');changeIcon.draggable=false;
+ const changeText=node('strong','racing-pit-change-text','החלפת צמיגים'),changeHint=node('small','racing-pit-change-hint','לחצו'),progress=node('span','racing-pit-progress'),progressFill=node('i','racing-pit-progress-fill');progress.append(progressFill);change.append(changeIcon,changeText,changeHint,progress);controls.append(change);
  const press=(el,fn)=>el.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();fn();},{signal});
  press(button,()=>{if(button.dataset.state==='idle')onRequest?.();});press(change,()=>onTap?.());
  let lastState='',lastTyre=-1;
@@ -19,7 +24,7 @@ export function createPitUi({stage,controls,document:doc=stage.ownerDocument,onR
  function update(state,{on=true}={}){
   const p=state.player;if(!on){meter.hidden=button.hidden=change.hidden=true;return;}
   const pct=Math.round(Math.max(0,Math.min(1,p.tyre??1))*100);
-  if(pct!==lastTyre){lastTyre=pct;value.textContent=pct+'%';fill.style.transform=`scaleX(${pct/100})`;meter.setAttribute('aria-valuenow',String(pct));meter.dataset.level=pct>60?'good':pct>35?'mid':'low';}
+  if(pct!==lastTyre){lastTyre=pct;value.textContent=pct+'%';fill.style.transform=`scaleX(${pct/100})`;meter.setAttribute('aria-valuenow',String(pct));meter.dataset.level=pct>60?'good':pct>35?'mid':'low';const st=wearStep(pct/100);if(st!==step){step=st;ring.src=icon('tire_wear_'+st);}}
   const phase=p.pit?.phase||'',last=p.lap>=state.laps,done=(p.pits||0)>0&&!p.pit;
   const st=phase?'busy':done?'done':last?'last':p.pitRequest?'requested':'idle';
   if(st!==lastState){lastState=st;button.dataset.state=st;button.hidden=st==='busy'||st==='done'||st==='last';sub.textContent=st==='requested'?'בהקפה הזו':'';}

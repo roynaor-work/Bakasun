@@ -32,10 +32,13 @@ export const V4_LOOPS=Object.freeze([{id:'brake-loop-light',gain:.016},{id:'brak
 export const V4_SHOTS=Object.freeze({'car-bump-soft':.022,'car-bump-hard':.04,'side-scrape':.02});
 /** racing-v24 wind (Roy: "a background noise, like air or a hiss"): the v2 wind loop played at .012 standing still and .07 at speed, over the whole engine; now silent
  * under 12 m/s and at most .03 at the top. hiss='v23' keeps the old curve. */
+/** racing-v24 pit stop sounds (Codex package design/racing-pit-v1, CC0; assets/racing-pit-v1/audio): the jack at the stop, the wheel guns loosening, a wheel dropped and a
+ * wheel attached, the guns tightening during the 2 s change, the crew's cheer and the engine leaving at the end. Loaded only in a race with stops (pit=true). */
+export const PIT_SHOTS=Object.freeze({wheel_gun_loosen:.03,wheel_gun_tighten:.03,jack:.026,wheel_drop:.024,wheel_attach:.024,crew_cheer:.026,engine_exit:.028});
 export function windGain(speed,hiss='v24'){if(hiss==='v23')return Math.min(.07,.012+speed/55*.055);return speed<12?0:Math.min(.03,Math.pow((speed-12)/38,1.5)*.03);}
-export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23'}){
+export function createRacingSamples({context,destination=context?.destination,base,fetchFn=globalThis.fetch,format,engineLoops=engineLoopsOn(),v3=false,beep=false,base3=base?new URL('../racing-audio-v3/',base):null,v4=false,base4=base?new URL('../racing-audio-v4/',base):null,hiss='v23',pit=false,basePit=base?new URL('../racing-pit-v1/audio/',base):null}){
   const ext=format||((()=>{try{return new Audio().canPlayType('audio/ogg; codecs="vorbis"')?'ogg':'mp3';}catch{return 'mp3';}})());
-  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0]};   // racing-v24: the levels last set (levels())
+  const buffers=new Map(),loops=new Map(),nodes=[];let ready=false,disposed=false,pop=0,v3Ready=false,v4Ready=false,pitReady=false,sideNext=false;const lastShot=new Map(),lv={wind:0,squeal:0,brakeSqueal:0,brake:[0,0,0]};   // racing-v24: the levels last set (levels())
   const bus=context.createGain();bus.gain.value=0;bus.connect(destination);nodes.push(bus);
   const target=(param,value,time,k=.06)=>{try{if(typeof param.setTargetAtTime==='function')param.setTargetAtTime(value,time,k);else param.value=value;}catch{}};
   async function load(){
@@ -53,6 +56,12 @@ export function createRacingSamples({context,destination=context?.destination,ba
     ready=true;
     if(v3)await loadV3().catch(()=>{});   // v3 is extra: any failure leaves the v2 layer (already ready) as it was
     if(v4)await loadV4().catch(()=>{});   // racing-v24: the same, for the v4 brake loops and contact shots
+    if(pit)await loadPit().catch(()=>{});   // racing-v24: the pit stop sounds, all or nothing
+  }
+  async function loadPit(){
+    const got=new Map();
+    await Promise.all(Object.keys(PIT_SHOTS).map(async id=>{const response=await fetchFn(new URL(`${id}.${ext}`,basePit).href);if(!response.ok)throw new Error('sample '+id);got.set(id,await context.decodeAudioData(await response.arrayBuffer()));}));
+    if(disposed)return;for(const [id,buffer] of got)buffers.set(id,buffer);pitReady=true;
   }
   async function loadV4(){
     const ids=[...V4_LOOPS.map(l=>l.id),...Object.keys(V4_SHOTS)],got=new Map();
@@ -77,8 +86,8 @@ export function createRacingSamples({context,destination=context?.destination,ba
   }
   let lastGearbox=-9;const GEARBOX=new Set(['shift-up','shift-down','exhaust-pop-1','exhaust-pop-2','exhaust-pop-3','turbo-blowoff',...Object.keys(V3_SHOTS)]);
   // length (racing-v23): play only the first `length` seconds, with a 70 ms fade at the end (the shift 'pssh' is the start of the 0.75 s blow-off)
-  function shot(id,gain=.1,rate=1,minGap=.12,length=0){
-    if(!ready||disposed)return;const now=context.currentTime;if(now-(lastShot.get(id)||-9)<minGap)return;
+  function shot(id,gain=.1,rate=1,minGap=.12,length=0,delay=0){
+    if(!ready||disposed)return;const now=context.currentTime+delay;if(now-(lastShot.get(id)||-9)<minGap)return;
     // one gearbox/exhaust sound per 0.45 s: a shift never stacks a shift sound, a pop and a blow-off on top of each other
     if(GEARBOX.has(id)){if(now-lastGearbox<.45)return;lastGearbox=now;}lastShot.set(id,now);
     // 12 ms attack ramp: the samples start at full scale and a hard onset is a click (measured by tools/racing-shift-audio.mjs).
@@ -115,14 +124,22 @@ export function createRacingSamples({context,destination=context?.destination,ba
     /** racing-v23 shift styles (racing-audio ?racingShift=b|c): the blow-off cut to its first 0.32 s, one exhaust crack, the down blips quieter */
     turbo(){shot('turbo-blowoff',.028,1.2,.45,.32);},crack(){shot(`exhaust-pop-${1+(pop++%3)}`,.03,1.05,.45);},shiftDownSoft(){shot('shift-down',.02,1,.45);},
     backfire(){shot(`exhaust-pop-${1+(pop++%3)}`,.04,1,.45);},blowoff(){shot('turbo-blowoff',.04,1,.6);},pass(){shot('pass-whoosh',.07,1,1.2);},
-    get v3Ready(){return v3Ready;},get v4Ready(){return v4Ready;},
+    get v3Ready(){return v3Ready;},get v4Ready(){return v4Ready;},get pitReady(){return pitReady;},
+    /** racing-v24: the next 'bump' was a side-by-side contact (the engine marks it before the event) */
+    contactSide(){sideNext=true;},
+    /** racing-v24: the sounds of one step of the player's stop: 'pitStop' the jack, 'pitChange' guns, wheel off, wheel on, guns (over `seconds`), 'pitDone' the cheer and the engine */
+    pitCue(type,seconds=2){if(!pitReady||disposed)return false;const S=PIT_SHOTS;
+      if(type==='pitStop')shot('jack',S.jack,1,.5);
+      else if(type==='pitChange'){shot('wheel_gun_loosen',S.wheel_gun_loosen,1.15,.5);shot('wheel_drop',S.wheel_drop,1,.5,0,seconds*.25);shot('wheel_attach',S.wheel_attach,1,.5,0,seconds*.52);shot('wheel_gun_tighten',S.wheel_gun_tighten,1.15,.5,0,seconds*.66);}
+      else if(type==='pitDone'){shot('crew_cheer',S.crew_cheer,1,.5);shot('engine_exit',S.engine_exit,1,.5,0,.25);}
+      else return false;return true;},
     /** the levels the layer last set (for tests and the audio log): wind, the v2 tyre squeal, the v3 brake squeal, the three v4 brake loops */
     levels:()=>({wind:lv.wind,squeal:lv.squeal,brakeSqueal:lv.brakeSqueal,brake:[...lv.brake]}),
     /** a game event by the audio engine's names ('bump', 'wall', 'crash', 'crashRecover'); intensity 0..1. Does nothing until v3 is ready. */
     event(name,intensity=1,details={}){
       if(disposed)return;
       // racing-v24 contacts: the hard bump from intensity .5, the soft one under it, a side scrape when the cars touched side by side (or a post); the v3 roll and restart stay
-      if(v4Ready&&(name==='bump'||name==='wall')){if(name==='bump')shot(intensity>=.5?'car-bump-hard':'car-bump-soft',intensity>=.5?V4_SHOTS['car-bump-hard']:V4_SHOTS['car-bump-soft'],1,.15);if(name==='wall'||details?.side)shot('side-scrape',V4_SHOTS['side-scrape']*(.6+.4*intensity),1,.2);return;}
+      if(v4Ready&&(name==='bump'||name==='wall')){const side=name==='wall'||details?.side||sideNext;sideNext=false;if(name==='bump')shot(intensity>=.5?'car-bump-hard':'car-bump-soft',intensity>=.5?V4_SHOTS['car-bump-hard']:V4_SHOTS['car-bump-soft'],1,.15);if(side)shot('side-scrape',V4_SHOTS['side-scrape']*(.6+.4*intensity),1,.2);return;}
       if(!v3Ready)return;
       if(name==='bump')shot('car-bump',V3_SHOTS['car-bump'],1,.2);
       else if(name==='wall')shot(intensity>=.5?'wall-scrape-long':'wall-scrape-short',V3_SHOTS['wall-scrape-short'],1,.25);

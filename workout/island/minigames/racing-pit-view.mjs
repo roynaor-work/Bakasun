@@ -5,7 +5,7 @@ import {pitLane,PIT,racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-
 export function pitBoxesOn(stage,search){return racingV24Flags(search).pit&&(stage?.laps||0)>=PIT.minLaps;}
 export function paintPitBoxes({T,scene,track,keep=x=>x,count=12,colors=[]}){
  const lane=pitLane(track),rows=[],white='#f2f2ee';
- for(let i=0;i<count;i++){const s=lane.boxS(i,count),q=track.sample(s),color=colors[i]||'#f5cf42';
+ for(let i=0;i<count;i++){const s=lane.boxS(i,count),color=colors[i]||'#f5cf42';
   const at=(ds,dl)=>{const p=track.sample(s+ds);return {x:p.x+p.normal.x*(lane.boxLat+dl),y:p.y+.06,z:p.z+p.normal.z*(lane.boxLat+dl),heading:p.heading};};
   for(const side of [-1,1])rows.push({...at(0,side*1.35),sx:.12,sz:5.4,color});   // the two side lines along the car
   rows.push({...at(2.75,0),sx:2.82,sz:.14,color:white});                            // the stop bar at the nose
