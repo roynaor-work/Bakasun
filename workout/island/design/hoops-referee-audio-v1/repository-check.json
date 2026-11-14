@@ -1,0 +1,33 @@
+{
+  "summary": "ההרצה הרגילה: 4,017 עברו, 64 דולגו, בדיקת דפדפן קיימת אחת נכשלה מחוסר Chromium Headless Shell; אותה בדיקה וארבע בדיקות הקובץ עברו בהרצה חוזרת עם Chromium המותקן, ללא עריכת קבצים קיימים",
+  "default_run": {
+    "command": "npm test",
+    "exit_code": 1,
+    "tests": 4082,
+    "passed": 4017,
+    "failed": 1,
+    "skipped": 64,
+    "failure": "tests/workout-royiki.test.mjs:93 requires a Playwright-managed Chromium Headless Shell that is not installed",
+    "unrelated_to_audio_pack": true,
+    "cleanup": "stopped the failed worker after it left its local HTTP server open"
+  },
+  "recovery_run": {
+    "file": "tests/workout-royiki.test.mjs",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "browser_executable": "/usr/bin/chromium",
+    "configuration": "Temporarily set chromium.launch executablePath in the invoking Node process; imported and ran the existing test file without editing it",
+    "command": "node --input-type=module <<'JS'\nimport { islandChromium } from './tests/helpers/island-browser.mjs';\nconst chromium = await islandChromium();\nconst launch = chromium.launch.bind(chromium);\nchromium.launch = options => launch({ ...options, executablePath: '/usr/bin/chromium' });\nawait import('./tests/workout-royiki.test.mjs');\nJS"
+  },
+  "effective_unique_tests": {
+    "passed": 4018,
+    "skipped": 64,
+    "unresolved_failures": 0
+  },
+  "redundant_rerun": "A second broad run was stopped after the initial full run and successful isolated recovery already covered every test; it is not counted as validation evidence",
+  "audio_pack": "All 28 encoded files and all browser audio paths passed separate checks",
+  "existing_files_modified": false,
+  "pass_after_browser_configuration": true
+}

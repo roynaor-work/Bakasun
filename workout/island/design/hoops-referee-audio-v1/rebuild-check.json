@@ -1,0 +1,159 @@
+{
+  "pass": true,
+  "summary": "שחזור בתיקייה ריקה מסקריפט יחיד יצר את כל 35 קובצי הליבה; 28 קובצי השמע וחמשת קובצי הליווי שנבדקו זהים בינארית",
+  "input_files": [
+    "synthesize.py"
+  ],
+  "core_files_present": 35,
+  "binary_identical_audio_files": 28,
+  "binary_identical_companion_files": [
+    "manifest.json",
+    "verification.json",
+    "listen.html",
+    "LICENSE.txt",
+    "loop-check.png"
+  ],
+  "report_difference": "REPORT.md includes local test evidence when available; the clean build has no prior test evidence",
+  "audio_files": [
+    {
+      "file": "arena-ambience-loop.mp3",
+      "sha256": "3b863fc8026fd095d94513e4135e333a3dd0d6b6f14f633b5a14cf363153b1b0",
+      "binary_identical": true
+    },
+    {
+      "file": "arena-ambience-loop.ogg",
+      "sha256": "0c32a2deb7bbf228c885e3f974a13ae4b12ef14982abcd102839b7f6f6a66ebd",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-hard.mp3",
+      "sha256": "33436d432cbd560e2101b84757980648f5a1b38249032354c0217e21acef8c9b",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-hard.ogg",
+      "sha256": "5008205d72535d427079e7fbfa4b9f923fd70ff4882f7f3c3fbd889fd38a6082",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-medium.mp3",
+      "sha256": "6d13d7f28813b32cda4e7652a8fd6f7fc2b283caf1ce32b0f33679ba1b8eda8d",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-medium.ogg",
+      "sha256": "511533564dd43372a6cea101959039737b4ce23a4cd59699769daa4a24bfd176",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-soft.mp3",
+      "sha256": "1651a39602d5ee31fd92aa49be1c1701215ec6ff2808783732130bcd42b7c218",
+      "binary_identical": true
+    },
+    {
+      "file": "ball-parquet-soft.ogg",
+      "sha256": "43bd919f665f3dc96d40cc088c1a08848c7851bf11f1fbe798af979d0739b4cd",
+      "binary_identical": true
+    },
+    {
+      "file": "crowd-basket-cheer.mp3",
+      "sha256": "316f748608c4e2362fd577fc3710e988ab1a3def23894fcfdb8187b6cc17c967",
+      "binary_identical": true
+    },
+    {
+      "file": "crowd-basket-cheer.ogg",
+      "sha256": "eb163d2020fbb5511b5e1af535a4e9dec9178ed9beb2b3adf008a91cd44108ef",
+      "binary_identical": true
+    },
+    {
+      "file": "crowd-miss-ooh.mp3",
+      "sha256": "7d8a7350897651e798913fad85f1b9bacb8eff516081dee82889b4b513318b66",
+      "binary_identical": true
+    },
+    {
+      "file": "crowd-miss-ooh.ogg",
+      "sha256": "1fb4358a2394b090f76ad47c72605ad7b721e7a56154708ca6dc3ef2c273de92",
+      "binary_identical": true
+    },
+    {
+      "file": "net-swish.mp3",
+      "sha256": "b5d3c6c91a103b3b53d7a1ff6c61001e9d6c3be679bf7dba71590f784c65cfc7",
+      "binary_identical": true
+    },
+    {
+      "file": "net-swish.ogg",
+      "sha256": "2251208bbf0d93305e09b0d73869f683738484a98c4e73347ddf10fddcce4065",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-01.mp3",
+      "sha256": "6a59c974cede47c54e98643371809f72350035cfafae77051d3abe2b4420ac6a",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-01.ogg",
+      "sha256": "4fc9b0ae0962b576d07f27f6bd602005a0154ba80ecf1b81f5ddab9ad44d3d71",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-02.mp3",
+      "sha256": "d76334f2223985397ed30df31c5340617fb9f1219d6015a87bf24311932a4678",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-02.ogg",
+      "sha256": "b1c35c03ce7337b67862c637fc53f978654e8a47f0611c1eed446ece3c3ab39f",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-03.mp3",
+      "sha256": "de5759000ceb5210685218fc4cb809fac7f515aed360d6f9cb82c97db73d1df6",
+      "binary_identical": true
+    },
+    {
+      "file": "shoe-squeak-03.ogg",
+      "sha256": "8026572a78adbbd8746b0384bd4f55a005aa4a23d14671061836424de04af784",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-foul-long.mp3",
+      "sha256": "122ffc9db618b531acbe32279410f85ac41e20bcaa04f9f71a5ebb1971e112da",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-foul-long.ogg",
+      "sha256": "3bc0608a379bf0cb4b0179cd074835e78b7fca9432a492c73b8fe57b4cae4756",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-quarter-end.mp3",
+      "sha256": "d891aaf30a26c8f5ac2640442d922f1645ae5481a6dcf1e695ab53113bc9a2bf",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-quarter-end.ogg",
+      "sha256": "ca28544a7648e761b6f20473ed798db23f68390954d156ba535a1e683c836288",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-quarter-start.mp3",
+      "sha256": "89d37d90ce31809b0bdfc628d92aaa013c39fcfc6d38cd50ae9fb96defce0228",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-quarter-start.ogg",
+      "sha256": "efacd623996426da503794d9e7352d15e892d99603e775859df07a9bc40dc99a",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-steal-short.mp3",
+      "sha256": "9129a1c58f51360b1bb78e1d4f9d8a9e616ac81ef54f7d44e4bf23e286c80e3c",
+      "binary_identical": true
+    },
+    {
+      "file": "whistle-steal-short.ogg",
+      "sha256": "71a961271c119aca553e701899939fd2b24a03db18bba27f7da72a51abb784e6",
+      "binary_identical": true
+    }
+  ]
+}

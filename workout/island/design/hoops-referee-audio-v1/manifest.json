@@ -1,0 +1,379 @@
+{
+  "schema_version": 1,
+  "pack": "hoops-referee-audio-v1",
+  "license": "CC0-1.0",
+  "sample_rate_hz": 24000,
+  "channels": 1,
+  "normalization_lufs": -23.0,
+  "max_true_peak_dbtp": -2,
+  "max_file_bytes": 60000,
+  "volume_unit": "linear amplitude multiplier after normalization",
+  "loop_start_seconds": 0,
+  "loop_end_seconds": 8,
+  "sounds": [
+    {
+      "id": "whistle-steal-short",
+      "name": "שריקה קצרה — חטיפה",
+      "duration_seconds": 0.55,
+      "loop": false,
+      "recommended_volume": 0.46,
+      "event": "steal",
+      "seed": 101,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "whistle-steal-short.ogg",
+          "bytes": 5424,
+          "sha256": "71a961271c119aca553e701899939fd2b24a03db18bba27f7da72a51abb784e6",
+          "lufs": -22.93,
+          "true_peak_dbtp": -13.19
+        },
+        "mp3": {
+          "file": "whistle-steal-short.mp3",
+          "bytes": 3792,
+          "sha256": "9129a1c58f51360b1bb78e1d4f9d8a9e616ac81ef54f7d44e4bf23e286c80e3c",
+          "lufs": -23.0,
+          "true_peak_dbtp": -13.0
+        }
+      }
+    },
+    {
+      "id": "whistle-foul-long",
+      "name": "שריקה ארוכה — עבירה",
+      "duration_seconds": 1.45,
+      "loop": false,
+      "recommended_volume": 0.46,
+      "event": "foul",
+      "seed": 102,
+      "source_lufs": -22.98,
+      "files": {
+        "ogg": {
+          "file": "whistle-foul-long.ogg",
+          "bytes": 9032,
+          "sha256": "3bc0608a379bf0cb4b0179cd074835e78b7fca9432a492c73b8fe57b4cae4756",
+          "lufs": -22.92,
+          "true_peak_dbtp": -16.54
+        },
+        "mp3": {
+          "file": "whistle-foul-long.mp3",
+          "bytes": 9264,
+          "sha256": "122ffc9db618b531acbe32279410f85ac41e20bcaa04f9f71a5ebb1971e112da",
+          "lufs": -23.03,
+          "true_peak_dbtp": -16.46
+        }
+      }
+    },
+    {
+      "id": "whistle-quarter-start",
+      "name": "שריקת פתיחת רבע",
+      "duration_seconds": 0.95,
+      "loop": false,
+      "recommended_volume": 0.48,
+      "event": "quarter_start",
+      "seed": 103,
+      "source_lufs": -23.02,
+      "files": {
+        "ogg": {
+          "file": "whistle-quarter-start.ogg",
+          "bytes": 7054,
+          "sha256": "efacd623996426da503794d9e7352d15e892d99603e775859df07a9bc40dc99a",
+          "lufs": -23.03,
+          "true_peak_dbtp": -14.14
+        },
+        "mp3": {
+          "file": "whistle-quarter-start.mp3",
+          "bytes": 6240,
+          "sha256": "89d37d90ce31809b0bdfc628d92aaa013c39fcfc6d38cd50ae9fb96defce0228",
+          "lufs": -23.09,
+          "true_peak_dbtp": -14.98
+        }
+      }
+    },
+    {
+      "id": "whistle-quarter-end",
+      "name": "שריקת סיום רבע",
+      "duration_seconds": 1.75,
+      "loop": false,
+      "recommended_volume": 0.48,
+      "event": "quarter_end",
+      "seed": 104,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "whistle-quarter-end.ogg",
+          "bytes": 10497,
+          "sha256": "ca28544a7648e761b6f20473ed798db23f68390954d156ba535a1e683c836288",
+          "lufs": -22.94,
+          "true_peak_dbtp": -15.56
+        },
+        "mp3": {
+          "file": "whistle-quarter-end.mp3",
+          "bytes": 10992,
+          "sha256": "d891aaf30a26c8f5ac2640442d922f1645ae5481a6dcf1e695ab53113bc9a2bf",
+          "lufs": -23.05,
+          "true_peak_dbtp": -15.47
+        }
+      }
+    },
+    {
+      "id": "arena-ambience-loop",
+      "name": "רחש אולם ספורט",
+      "duration_seconds": 8.0,
+      "loop": true,
+      "recommended_volume": 0.14,
+      "event": "ambience",
+      "seed": 201,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "arena-ambience-loop.ogg",
+          "bytes": 36122,
+          "sha256": "0c32a2deb7bbf228c885e3f974a13ae4b12ef14982abcd102839b7f6f6a66ebd",
+          "lufs": -23.0,
+          "true_peak_dbtp": -9.65
+        },
+        "mp3": {
+          "file": "arena-ambience-loop.mp3",
+          "bytes": 48576,
+          "sha256": "3b863fc8026fd095d94513e4135e333a3dd0d6b6f14f633b5a14cf363153b1b0",
+          "lufs": -22.99,
+          "true_peak_dbtp": -9.48
+        }
+      }
+    },
+    {
+      "id": "crowd-miss-ooh",
+      "name": "קהל אוּוּ אחרי החטאה",
+      "duration_seconds": 2.1,
+      "loop": false,
+      "recommended_volume": 0.43,
+      "event": "miss",
+      "seed": 301,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "crowd-miss-ooh.ogg",
+          "bytes": 11936,
+          "sha256": "1fb4358a2394b090f76ad47c72605ad7b721e7a56154708ca6dc3ef2c273de92",
+          "lufs": -22.93,
+          "true_peak_dbtp": -9.35
+        },
+        "mp3": {
+          "file": "crowd-miss-ooh.mp3",
+          "bytes": 13152,
+          "sha256": "7d8a7350897651e798913fad85f1b9bacb8eff516081dee82889b4b513318b66",
+          "lufs": -23.05,
+          "true_peak_dbtp": -8.9
+        }
+      }
+    },
+    {
+      "id": "crowd-basket-cheer",
+      "name": "שמחת קהל אחרי סל",
+      "duration_seconds": 2.65,
+      "loop": false,
+      "recommended_volume": 0.55,
+      "event": "basket",
+      "seed": 302,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "crowd-basket-cheer.ogg",
+          "bytes": 16701,
+          "sha256": "eb163d2020fbb5511b5e1af535a4e9dec9178ed9beb2b3adf008a91cd44108ef",
+          "lufs": -22.91,
+          "true_peak_dbtp": -8.77
+        },
+        "mp3": {
+          "file": "crowd-basket-cheer.mp3",
+          "bytes": 16464,
+          "sha256": "316f748608c4e2362fd577fc3710e988ab1a3def23894fcfdb8187b6cc17c967",
+          "lufs": -22.98,
+          "true_peak_dbtp": -8.93
+        }
+      }
+    },
+    {
+      "id": "net-swish",
+      "name": "רחש רשת — סווש",
+      "duration_seconds": 0.65,
+      "loop": false,
+      "recommended_volume": 0.55,
+      "event": "swish",
+      "seed": 401,
+      "source_lufs": -23.02,
+      "files": {
+        "ogg": {
+          "file": "net-swish.ogg",
+          "bytes": 6206,
+          "sha256": "2251208bbf0d93305e09b0d73869f683738484a98c4e73347ddf10fddcce4065",
+          "lufs": -22.99,
+          "true_peak_dbtp": -5.95
+        },
+        "mp3": {
+          "file": "net-swish.mp3",
+          "bytes": 4512,
+          "sha256": "b5d3c6c91a103b3b53d7a1ff6c61001e9d6c3be679bf7dba71590f784c65cfc7",
+          "lufs": -23.07,
+          "true_peak_dbtp": -5.73
+        }
+      }
+    },
+    {
+      "id": "ball-parquet-soft",
+      "name": "כדור על פרקט — חלש",
+      "duration_seconds": 0.6,
+      "loop": false,
+      "recommended_volume": 0.32,
+      "event": "bounce_soft",
+      "seed": 501,
+      "source_lufs": -22.94,
+      "files": {
+        "ogg": {
+          "file": "ball-parquet-soft.ogg",
+          "bytes": 5125,
+          "sha256": "43bd919f665f3dc96d40cc088c1a08848c7851bf11f1fbe798af979d0739b4cd",
+          "lufs": -22.94,
+          "true_peak_dbtp": -2.43
+        },
+        "mp3": {
+          "file": "ball-parquet-soft.mp3",
+          "bytes": 4080,
+          "sha256": "1651a39602d5ee31fd92aa49be1c1701215ec6ff2808783732130bcd42b7c218",
+          "lufs": -22.94,
+          "true_peak_dbtp": -2.43
+        }
+      }
+    },
+    {
+      "id": "ball-parquet-medium",
+      "name": "כדור על פרקט — בינוני",
+      "duration_seconds": 0.6,
+      "loop": false,
+      "recommended_volume": 0.48,
+      "event": "bounce_medium",
+      "seed": 502,
+      "source_lufs": -22.99,
+      "files": {
+        "ogg": {
+          "file": "ball-parquet-medium.ogg",
+          "bytes": 5441,
+          "sha256": "511533564dd43372a6cea101959039737b4ce23a4cd59699769daa4a24bfd176",
+          "lufs": -22.99,
+          "true_peak_dbtp": -4.03
+        },
+        "mp3": {
+          "file": "ball-parquet-medium.mp3",
+          "bytes": 4080,
+          "sha256": "6d13d7f28813b32cda4e7652a8fd6f7fc2b283caf1ce32b0f33679ba1b8eda8d",
+          "lufs": -23.0,
+          "true_peak_dbtp": -4.23
+        }
+      }
+    },
+    {
+      "id": "ball-parquet-hard",
+      "name": "כדור על פרקט — חזק",
+      "duration_seconds": 0.65,
+      "loop": false,
+      "recommended_volume": 0.68,
+      "event": "bounce_hard",
+      "seed": 503,
+      "source_lufs": -22.96,
+      "files": {
+        "ogg": {
+          "file": "ball-parquet-hard.ogg",
+          "bytes": 5524,
+          "sha256": "5008205d72535d427079e7fbfa4b9f923fd70ff4882f7f3c3fbd889fd38a6082",
+          "lufs": -22.97,
+          "true_peak_dbtp": -2.47
+        },
+        "mp3": {
+          "file": "ball-parquet-hard.mp3",
+          "bytes": 4512,
+          "sha256": "33436d432cbd560e2101b84757980648f5a1b38249032354c0217e21acef8c9b",
+          "lufs": -22.96,
+          "true_peak_dbtp": -2.27
+        }
+      }
+    },
+    {
+      "id": "shoe-squeak-01",
+      "name": "חריקת נעל — סיבוב קצר",
+      "duration_seconds": 0.6,
+      "loop": false,
+      "recommended_volume": 0.36,
+      "event": "squeak_1",
+      "seed": 601,
+      "source_lufs": -22.97,
+      "files": {
+        "ogg": {
+          "file": "shoe-squeak-01.ogg",
+          "bytes": 6151,
+          "sha256": "4fc9b0ae0962b576d07f27f6bd602005a0154ba80ecf1b81f5ddab9ad44d3d71",
+          "lufs": -22.92,
+          "true_peak_dbtp": -13.2
+        },
+        "mp3": {
+          "file": "shoe-squeak-01.mp3",
+          "bytes": 4080,
+          "sha256": "6a59c974cede47c54e98643371809f72350035cfafae77051d3abe2b4420ac6a",
+          "lufs": -22.99,
+          "true_peak_dbtp": -12.59
+        }
+      }
+    },
+    {
+      "id": "shoe-squeak-02",
+      "name": "חריקת נעל — בלימה",
+      "duration_seconds": 0.75,
+      "loop": false,
+      "recommended_volume": 0.36,
+      "event": "squeak_2",
+      "seed": 602,
+      "source_lufs": -23.0,
+      "files": {
+        "ogg": {
+          "file": "shoe-squeak-02.ogg",
+          "bytes": 6950,
+          "sha256": "b1c35c03ce7337b67862c637fc53f978654e8a47f0611c1eed446ece3c3ab39f",
+          "lufs": -22.99,
+          "true_peak_dbtp": -12.89
+        },
+        "mp3": {
+          "file": "shoe-squeak-02.mp3",
+          "bytes": 5088,
+          "sha256": "d76334f2223985397ed30df31c5340617fb9f1219d6015a87bf24311932a4678",
+          "lufs": -23.04,
+          "true_peak_dbtp": -13.54
+        }
+      }
+    },
+    {
+      "id": "shoe-squeak-03",
+      "name": "חריקת נעל — שינוי כיוון",
+      "duration_seconds": 0.75,
+      "loop": false,
+      "recommended_volume": 0.36,
+      "event": "squeak_3",
+      "seed": 603,
+      "source_lufs": -23.02,
+      "files": {
+        "ogg": {
+          "file": "shoe-squeak-03.ogg",
+          "bytes": 7061,
+          "sha256": "8026572a78adbbd8746b0384bd4f55a005aa4a23d14671061836424de04af784",
+          "lufs": -23.02,
+          "true_peak_dbtp": -13.38
+        },
+        "mp3": {
+          "file": "shoe-squeak-03.mp3",
+          "bytes": 5088,
+          "sha256": "de5759000ceb5210685218fc4cb809fac7f515aed360d6f9cb82c97db73d1df6",
+          "lufs": -23.05,
+          "true_peak_dbtp": -13.2
+        }
+      }
+    }
+  ]
+}
