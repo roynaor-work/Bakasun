@@ -121,6 +121,8 @@ test('HUD v25 stylesheet and wiring: the same ring sizes from the bottom corner 
  assert.doesNotMatch(css,/#shoot\{[^}]*width/,'the sizes stay the v24 ones');assert.match(css,/\.alien-special-switch\{[^}]*width:46px/);
  // The controls layer is pointer-events:none (styles.css); without its own pointer-events:auto the switch let touches through to the canvas (caught in the browser).
  assert.match(css,/\.alien-special-switch\{[^}]*pointer-events:auto/);
+ // The shared rule `[data-game-control] small:not(.alien-ammo){font-size:0!important}` hid the switch's count (seen in the browser frame).
+ assert.match(css,/\.alien-switch-count\{[^}]*font-size:10px!important/);
  assert.match(css,/\.alien-flight-hud\[data-low=on\] \.alien-flight-control,[^{]*\.alien-flight-weapon\{display:none!important\}/);
  assert.match(session,/const hudV25=hudV24&&alienHudV25Enabled\(\);if\(hudV25\)\{ensureAlienV25Style\(\);controls\.dataset\.alienLow='on';\}/);assert.match(session,/hudRoot\.dataset\.low='on'/);
  assert.match(session,/if\(model\.arsenalOn\)\{ensureAlienV25Style\(\);specialSwitch=createAlienSpecialSwitch/);

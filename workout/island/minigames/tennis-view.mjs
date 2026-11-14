@@ -234,7 +234,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     // v25: where the child will stand to receive: the arrow in front of the chosen spot (pointing at the net) and three dots on the baseline.
     const rc=state.receive,choosing=Boolean(rc?.active)&&['serve','toss'].includes(state.phase)&&state.server===1;
     const arrowTex=choosing?decalTex[['serve-arrow-left','serve-arrow-center','serve-arrow-right'][rc.slot]]:null;receiveArrow.visible=Boolean(arrowTex);
-    if(arrowTex){if(receiveArrow.material.map!==arrowTex){receiveArrow.material.map=arrowTex;receiveArrow.material.needsUpdate=true;}const z=config.court.halfLength+config.serve.baselineMargin-1.15;receiveArrow.position.set(rc.x,.1,z);}
+    if(arrowTex){if(receiveArrow.material.map!==arrowTex){receiveArrow.material.map=arrowTex;receiveArrow.material.needsUpdate=true;}const z=config.court.halfLength+config.serve.baselineMargin-1.75;receiveArrow.position.set(rc.x,.1,z);}
     receiveDots.forEach((d,k)=>{d.visible=choosing;if(choosing){d.position.set(rc.slots[k],.1,config.court.halfLength+config.serve.baselineMargin+.05);d.material.opacity=k===rc.slot?.95:.45;d.scale.setScalar(k===rc.slot?1.25:1);}});
     environment.render(state,dt);stadium12?.update(state,dt);effects.update(state,dt,camera);
     if(state.event.id!==lastEvent){lastEvent=state.event.id;if(state.event.ace||state.event.type==='complete'&&state.result?.won)burst(state.players[0].x,state.players[0].z);}

@@ -30,6 +30,8 @@ await verify('tennis-aliens-v24-1/'+(only.join('-')||'all'),[{width:844,height:3
  // ------------------------------------------------------------------ Aliens
  if(want('aliens')){
   // Each group of checks starts its own stage (a stage can end while the Vulcan mows the fleet down).
+  // Stage 2 (heavy ships, so ammo tokens fall) is unlocked the way the v24 harness unlocks it; nothing else is changed.
+  await page.evaluate(()=>{const p=window.__island.engine.state.minigameProgress;p.alienDefense=p.alienDefense||{};p.alienDefense.stage=Math.max(p.alienDefense.stage||1,3);});
   const open=async(mode,stage=1)=>{await setSearch(mode==='before'?V24.aliens:'');await start('alienDefense',stage);
    await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.artModels?.loaded===6,{timeout:120000}).catch(()=>{});await tick(800);
    // The shared machine is slow: the 3D layer at its lowest tier (as the v24 harness does); the HUD and the canvas effects are unchanged.
