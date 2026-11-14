@@ -129,7 +129,8 @@ export function drawNavalHud(p,m,{config,balance,art,t},project){
   const width=config.width,height=config.height,index=m.aiming?m.lockedTargetIndex:m.selectedTargetIndex,selected=m.enemies.find(e=>e.index===index&&e.active&&e.hp>0)||m.enemies.find(e=>e.active&&e.hp>0);
   const marks=navalDangerMarks(m,balance,project,width,height),mission=m.mission||{id:'fleet'},missionState=m.missionState||{completed:0,total:m.enemies.length},shown={marks:marks.length,icons:[],selected:selected?.index??null,feedback:null,texts:[]};
   const text=(value,x,y,maxWidth)=>{shown.texts.push(String(value));if(maxWidth)clippedText(p,value,x,y,maxWidth);else p.fillText(value,x,y);};
-  drawDanger(p,marks,m.time,width,height);
+  // 14/11/2026 v24: enemy fire is shown as red pulsing decals by naval-v24-hud.mjs (?navalEnemyFire=v23 keeps these orange outlines).
+  if(!m.enemyFireV24)drawDanger(p,marks,m.time,width,height);
   // Health: our hull silhouette, a shield and a thick bar; the percentage is secondary.
   p.save();glass(p,16,16,196,50,12);p.save();p.translate(40,38);p.scale(1.15,1.15);vesselMark(p,0,0);p.restore();
   const shield=m.playerShip?.maxShield>0?m.playerShip.shield/m.playerShip.maxShield:0;shieldMark(p,72,40,shield);

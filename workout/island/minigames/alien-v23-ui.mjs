@@ -52,7 +52,9 @@ export function createAlienVulcan({controls,cfg=V23_DEFAULTS,label='וולקן',
   get held(){return pointer!==null||keyHeld;},
   /** Ring on the button: fill = heat, colour = band, red blink while locked (same phase as the bar next to the ship). */
   update(model){
-   const locked=Boolean(model.vulcanLocked),heat=Math.max(0,Math.min(1,model.vulcanHeat||0)),level=vulcanLevel(heat,locked,cfg),blink=vulcanBlink(model.time||0,locked)?'on':'off',pct=Math.round(heat*100);
+   // v24: while a Vulcan magazine keeps the barrels cold the ring is cyan and drains with the cold time (refillCold is 0 with ?alienRefill=0).
+   const cold=model.refillCold>0&&model.refillColdMax>0?model.refillCold/model.refillColdMax:0;
+   const locked=Boolean(model.vulcanLocked),heat=Math.max(0,Math.min(1,model.vulcanHeat||0)),level=cold>0?'cold':vulcanLevel(heat,locked,cfg),blink=vulcanBlink(model.time||0,locked)?'on':'off',pct=Math.round((cold>0?Math.min(1,cold):heat)*100);
    if(level!==lastLevel){button.dataset.level=lastLevel=level;}
    if(blink!==lastBlink){button.dataset.blink=lastBlink=blink;}
    if(pct!==lastPct){lastPct=pct;button.style.setProperty('--heat',`${pct}%`);}

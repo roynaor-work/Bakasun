@@ -197,7 +197,8 @@ test('input layer while locked: a tap on Fire fires the lock (no aim values sent
 });
 
 test('input layer on the aim pad (the right side of the screen): a press over a hull waits; a hold locks without aiming or firing, a quick tap is v22\'s quick shot, a drag is v22\'s aim',()=>{
- const m=make(3,1);run(m,30);const f=fakeInput(m);
+ // v24 (14/11/2026): a quick tap on a hull locks it (tests/island-aliens-naval-v24.test.mjs); this v23 check keeps v23's quick shot with ?navalAim=v23.
+ const m=make(3,1,'?navalAim=v23');run(m,30);const f=fakeInput(m,'?navalAim=v23');
  try{
   assert.equal(f.pad.className,'naval-aim-zone','the first element the layer makes is the aim pad');const e=m.enemies[0];let q=m.screenPoint(e.x,e.z,1.5);
   f.down(1,q.x,q.y,f.pad);let outs=f.step(40);assert.ok(outs.every(o=>!o.aimHeld),'no aim while the finger rests on the hull');assert.equal(f.controls.dataset.aiming,undefined);assert.ok(outs.some(o=>o.lockTarget===e.index),'locked');

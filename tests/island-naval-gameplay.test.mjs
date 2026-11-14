@@ -84,7 +84,8 @@ test('Naval first simulation step does not teleport the visible opening fleet',(
 
 test('Naval enemy telegraph fixes its impact point before firing and leaves time to evade',()=>{
  const balance=structuredClone(b);balance.levels[0].enemyTactics={...balance.levels[0].enemyTactics,fireSeconds:.2,telegraphSeconds:1.8};
- const m=make(1,0,{balance});advance(m,.22);const e=m.enemies[0];assert.ok(e.warning>1.7);assert.equal(m.enemyFired,0);
+ // v24 (14/11/2026) fires sooner and more (tests/island-aliens-naval-v24.test.mjs); this v23 timing check keeps ?navalEnemyFire=v23.
+ globalThis.location={search:'?navalEnemyFire=v23'};let m;try{m=make(1,0,{balance});}finally{delete globalThis.location;}advance(m,.22);const e=m.enemies[0];assert.ok(e.warning>1.7);assert.equal(m.enemyFired,0);
  const target={x:e.attack.x,z:e.attack.z},hp=m.lives;advance(m,.8,{moveX:1});assert.deepEqual({x:e.attack.x,z:e.attack.z},target);
  assert.equal(m.enemyFired,0);advance(m,1.05,{moveX:1});assert.equal(m.enemyFired,1);assert.ok(m.enemyShots.length>0);
  assert.deepEqual({x:m.enemyShots[0].targetX,z:m.enemyShots[0].targetZ},target);
