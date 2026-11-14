@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173f36">
+  <title>טניס באי — חיוויים ואפקטים</title>
+  <link rel="icon" href="svg/line-hit-ring.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main>
+  <div class="stage-shell">
+  <section class="stage" aria-label="מגרש הדגמה אינטראקטיבי, 844 על 390">
+    <svg class="court" viewBox="0 0 844 390" aria-hidden="true">
+      <defs>
+        <linearGradient id="surround" x2="0" y2="1"><stop stop-color="#72998b"/><stop offset="1" stop-color="#b5bca1"/></linearGradient>
+        <linearGradient id="clay" x2="0" y2="1"><stop stop-color="#a85e42"/><stop offset="1" stop-color="#c07a57"/></linearGradient>
+        <pattern id="mesh" width="8" height="7" patternUnits="userSpaceOnUse"><path d="M0 0h8v7" fill="none" stroke="#f5efdc" stroke-opacity=".22" stroke-width=".7"/></pattern>
+      </defs>
+      <path fill="url(#surround)" d="M0 0h844v390H0z"/>
+      <g fill="#f5efdc" opacity=".35"><path d="m209 100 47 10-93 222-58-16ZM635 100l-47 10 93 222 58-16Z"/><path d="m202 121 42 9-9 20-43-10Zm-16 38 41 9-9 20-43-10Zm-16 38 41 9-9 20-43-10Zm-16 38 41 9-9 20-43-10Zm-16 38 41 9-9 20-43-10Zm504-152-42 9 9 20 43-10Zm16 38-41 9 9 20 43-10Zm16 38-41 9 9 20 43-10Zm16 38-41 9 9 20 43-10Zm16 38-41 9 9 20 43-10Z"/></g>
+      <path d="M314 57h216l105 285H209Z" fill="#87563d"/>
+      <path d="M334 76h176l83 245H251Z" fill="url(#clay)"/>
+      <g class="court-lines" fill="none" stroke="#f5efdc" stroke-width="2" opacity=".86">
+        <path d="M344 86h156l77 226H267ZM357 86l-62 226M487 86l62 226M321 171h202M300 252h244M422 171v81M418 312h8"/>
+      </g>
+      <path d="M312 181q110 9 220 0v17q-110 8-220 0Z" fill="#102e29" opacity=".2"/>
+      <path d="M309 163q113 10 226 0v23q-113 8-226 0Z" fill="#173f36" opacity=".75"/>
+      <path d="M309 163q113 10 226 0v23q-113 8-226 0Z" fill="url(#mesh)"/>
+      <path d="M308 162q114 10 228 0" fill="none" stroke="#f5efdc" stroke-width="3"/>
+      <path d="M308 160v30m228-30v30" stroke="#173f36" stroke-width="5"/>
+      <g fill="#f5efdc" stroke="#173f36" stroke-width="2"><circle cx="333" cy="252" r="4"/><circle cx="422" cy="252" r="4"/><circle cx="511" cy="252" r="4"/></g>
+    </svg>
+    <div class="scene-label"><span class="eyebrow">טורניר האי</span><h1>כל מגע משאיר סימן.</h1><span class="live-note">תצוגת נכסים · חימר</span></div>
+    <button id="pause" class="pause" type="button" aria-label="השהיית ההדגמה" aria-pressed="false"><span aria-hidden="true"></span></button>
+    <div class="ground-layer" aria-hidden="true">
+      <img class="ground shadow" id="shadow-low" data-asset="ball-shadow-low" alt="" width="64" height="64">
+      <img class="ground shadow" id="shadow-mid" data-asset="ball-shadow-mid" alt="" width="64" height="64">
+      <img class="ground shadow" id="shadow-high" data-asset="ball-shadow-high" alt="" width="64" height="64">
+      <img class="ground ring" id="ring" data-asset="line-hit-ring" alt="" width="64" height="64" hidden>
+      <img class="ground dust" id="dust" data-asset="clay-dust-01" alt="" width="96" height="96" hidden>
+      <img class="ground cross" id="cross" data-asset="out-cross" alt="" width="48" height="48" hidden>
+      <img class="ground arrow" id="serve-arrow" data-asset="serve-arrow-center" alt="" width="64" height="64">
+      <span class="ball" id="ball"></span>
+    </div>
+    <div class="event-sign" id="event-sign" hidden><img id="sign-art" data-asset="sign-out" width="192" height="192" alt=""><span id="sign-text"></span></div>
+    <span class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true"></span>
+    <div class="power-ui">
+      <span class="power-label">כוח דרופ</span>
+      <div class="power-stack" aria-hidden="true"><img data-asset="drop-meter-track" width="176" height="176" alt=""><img id="power-fill" data-asset="drop-meter-fill" width="176" height="176" alt=""><img id="power-needle" data-asset="drop-meter-needle" width="176" height="176" alt=""></div>
+      <output id="power-readout">42%</output>
+    </div>
+    <div class="serve-ui"><span>מיקום ההגשה</span><div class="serve-row"><button id="move-left" type="button" aria-label="הזזה שמאלה">←</button><output id="serve-readout">מרכז</output><button id="move-right" type="button" aria-label="הזזה ימינה">→</button></div></div>
+    <div class="events" aria-label="הפעלת חיוויים"><button type="button" data-event="out">אאוט</button><button type="button" data-event="line">על הקו</button><button type="button" data-event="dust">אבק</button><button type="button" data-event="net">נטו</button><button id="auto" type="button" aria-pressed="false">הדגמה</button></div>
+    <button id="drop-hold" class="drop-hold" type="button">החזקת דרופ</button>
+  </section>
+  </div>
+  <div class="compact-controls" aria-label="שליטה בתצוגת הנייד">
+    <button type="button" data-event="out">אאוט</button><button type="button" data-event="line">על הקו</button><button type="button" data-event="dust">אבק</button><button type="button" data-event="net">נטו</button>
+    <button type="button" data-serve="-1" aria-label="הזזה שמאלה">←</button><button type="button" data-serve="1" aria-label="הזזה ימינה">→</button><button type="button" data-drop>דרופ</button><button type="button" data-pause aria-pressed="false">השהיה</button>
+  </div>
+
+  <section class="inspector" aria-labelledby="inspector-title">
+    <header class="inspector-head"><div><span class="eyebrow">ערכת טניס · 01</span><h2 id="inspector-title">חיוויים שמרגישים חלק מהמגרש.</h2><p>סימנים נקיים, אבק חימר וטקסט חי. בחרו פורמט ובדקו את הפרטים.</p></div><label class="format-label">פורמט התצוגה<select id="format"><option value="svg">SVG</option><option value="256">PNG · 256</option><option value="512">PNG · 512</option></select></label></header>
+    <div class="tuning"><label for="height">גובה הכדור <output id="height-readout">1.2 מ׳</output><input id="height" type="range" min="0" max="3" step="0.01" value="1.2"></label><label for="power">עוצמת דרופ <output id="power-value">42%</output><input id="power" type="range" min="0" max="1" step="0.01" value="0.42"></label><p>חצים במקלדת להזזת ההגשה. החזיקו את כפתור הדרופ או את מקש הרווח כשהוא ממוקד. כפתור ההשהיה עוצר גם את תזמון האפקטים.</p></div>
+    <div class="asset-grid">
+      <article class="asset-card"><div class="card-meta"><span>01 / מגע במשטח</span><span>עיגון למגרש</span></div><div class="contact-art checker"><img data-asset="out-cross" alt="סימן איקס אדום עם קו מפריד בהיר" width="128" height="128"><img data-asset="line-hit-ring" alt="טבעת שמנת עם סימון מרכז" width="128" height="128"></div><h3>אאוט, או בדיוק על הקו.</h3><p>האיקס נשאר 1.5 שניות בנקודת הנחיתה. טבעת הפגיעה מסמנת מגע חוקי בקו.</p></article>
+      <article class="asset-card"><div class="card-meta"><span>02 / בחירת מיקום</span><span>3 מצבים</span></div><div class="triple checker"><figure><img data-asset="serve-arrow-left" alt="חץ מיקום שמאל" width="100" height="100"><figcaption>שמאל</figcaption></figure><figure><img data-asset="serve-arrow-center" alt="חץ מיקום מרכז" width="100" height="100"><figcaption>מרכז</figcaption></figure><figure><img data-asset="serve-arrow-right" alt="חץ מיקום ימין" width="100" height="100"><figcaption>ימין</figcaption></figure></div><h3>אותו חץ, שלושה מקומות.</h3><p>העוגן נשאר על קו ההגשה. התנועה ימינה ושמאלה פיזית, גם בממשק עברי.</p></article>
+      <article class="asset-card dust-card"><div class="card-meta"><span>03 / אבק חימר</span><span>6 × 60ms</span></div><div class="filmstrip checker" id="filmstrip"></div><h3>נחיתה קטנה. ענן שנפתח ונעלם.</h3><p>שישה פריימים עם עוגן משותף; 360 אלפיות שנייה, ניגון יחיד.</p></article>
+      <article class="asset-card"><div class="card-meta"><span>04 / עוצמת דרופ</span><span>מילוי מלמטה למעלה</span></div><div class="meter-samples checker" id="meter-samples"></div><h3>יותר כוח, בלי לתפוס את מרכז המסך.</h3><p>מסילה, מילוי ומחט נפרדים. העוצמה וטווח הדיוק מגיעים מהמשחק.</p></article>
+      <article class="asset-card"><div class="card-meta"><span>05 / גובה הכדור</span><span>צל מעוגן לקרקע</span></div><div class="triple shadow-samples checker"><figure><span class="sample-ball low"></span><img data-asset="ball-shadow-low" alt="צל נמוך, קטן וכהה" width="100" height="100"><figcaption>נמוך · 0 מ׳</figcaption></figure><figure><span class="sample-ball mid"></span><img data-asset="ball-shadow-mid" alt="צל בינוני, רחב יותר" width="100" height="100"><figcaption>ביניים · 1.5 מ׳</figcaption></figure><figure><span class="sample-ball high"></span><img data-asset="ball-shadow-high" alt="צל גבוה, רחב ובהיר" width="100" height="100"><figcaption>גבוה · 3 מ׳</figcaption></figure></div><h3>הגובה נקרא גם על הקרקע.</h3><p>ככל שהכדור עולה, הצל מתרחב ומתרכך. המעבר בין שלוש הדגימות רציף.</p></article>
+      <article class="asset-card"><div class="card-meta"><span>06 / שלטי שיפוט</span><span>טקסט חי</span></div><div class="sign-samples checker"><div class="sample-sign"><img data-asset="sign-out" alt="" width="192" height="192"><span>אאוט</span></div><div class="sample-sign"><img data-asset="sign-net" alt="" width="192" height="192"><span>נטו</span></div></div><h3>המילים נשארות חדות, בכל שפה.</h3><p>הרקע והסמל בנכס; הכיתוב הוא שכבת טקסט נפרדת, ניתנת לתרגום ולהקראה.</p></article>
+    </div>
+    <footer><span>19 נכסים · SVG + PNG שקוף · 256 / 512</span><nav aria-label="קובצי החבילה"><a href="manifest.json">מפרט ועיגון</a><a href="REPORT.md">דוח בדיקות</a><a href="LICENSE.txt">רישיון CC0</a></nav></footer>
+  </section>
+</main>
+<script id="fx-manifest" type="application/json"><!-- MANIFEST --></script>
+<script src="preview.js"></script>
+</body>
+</html>

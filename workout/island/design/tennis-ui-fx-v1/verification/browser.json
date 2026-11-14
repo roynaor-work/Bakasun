@@ -1,0 +1,90 @@
+{
+  "status": "pass",
+  "browser": "151.0.7922.173",
+  "device": "Chromium viewport/touch emulation; no physical-phone performance claim",
+  "checks": [
+    "844×390: exact court bounds, no horizontal overflow, every scene touch target ≥48px, idle RAF stopped",
+    "Serve: real clicks + keyboard; left/center/right, physical directions in RTL, clamped endpoints",
+    "Out: anchored and fully opaque through 1490ms, cleared on first rendered frame after 1500ms",
+    "Simulation clock: pause freezes timers and RAF; resumes remaining duration; new effects survive long idle gaps",
+    "Dust: all six actual exported frames 0..5 at 60ms intervals, cleared after 360ms, no loop",
+    "Line contact: 550ms one-shot ring plus clay landing",
+    "Shadow: 0–3m continuous crossfade, weights sum to one, all shadows stay on the same ground point",
+    "Drop power: 0/42/100% bottom-up clip; keyboard hold and real pointer capture charge/release, landing and dust",
+    "Every image loads in SVG, PNG-256 and PNG-512; identical dimensions and anchoring across formats",
+    "Signs: live Hebrew DOM text, out/net icons, aria-live event announcement; image unchanged when text changes",
+    "Desktop 1200px: stage scales from the top-left with all edges and controls inside the frame",
+    "390×844: no horizontal overflow, separate ≥48px touch controls, real touch moves the selector",
+    "Reduced motion: static dust frame 3 for 180ms, no arrow transition, full 1500ms out lifetime retained",
+    "No console errors, failed resources or remote network requests"
+  ],
+  "outBoundary": {
+    "startTime": 8,
+    "endTime": 1512,
+    "presentAtMs": 1490,
+    "absentAtMs": 1525
+  },
+  "dustFramesSeen": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "shadowSamples": [
+    {
+      "height": 0,
+      "weights": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "height": 0.75,
+      "weights": [
+        0.5,
+        0.5,
+        0
+      ]
+    },
+    {
+      "height": 1.5,
+      "weights": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "height": 2.25,
+      "weights": [
+        0,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "height": 3,
+      "weights": [
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "powerClipSamples": [
+    "inset(86.7188% 0px 13.2812%)",
+    "inset(55.5469% 0px 13.2812%)",
+    "inset(12.5% 0px 13.2812%)"
+  ],
+  "errors": [],
+  "remoteRequests": [],
+  "screenshots": [
+    "preview-844x390.webp",
+    "effects-844x390.webp",
+    "overview-1200.webp",
+    "preview-390x844.webp"
+  ]
+}

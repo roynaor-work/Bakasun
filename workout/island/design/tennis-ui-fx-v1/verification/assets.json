@@ -1,0 +1,457 @@
+{
+  "status": "pass",
+  "assets": 19,
+  "svg": 19,
+  "png": 38,
+  "resolutions": [
+    256,
+    512
+  ],
+  "maxAssetBytes": 36661,
+  "allPackageFilesUnder400KB": true,
+  "scope": "only additions inside workout/island/design/tennis-ui-fx-v1/",
+  "dustFrameWidths": [
+    66,
+    112,
+    155,
+    187,
+    215,
+    235
+  ],
+  "shadowCenterAlpha": [
+    140,
+    81,
+    40
+  ],
+  "checks": [
+    "SVG allowlist; no text, handlers, raster, fonts or external references",
+    "SHA-256 and exact dimensions for all 57 exports",
+    "RGBA and clear transparent border on all 38 PNGs",
+    "6 distinct registered dust frames; expanding cloud",
+    "Height shadows grow and become lighter",
+    "1500ms out duration and no early fade",
+    "Embedded preview manifest equals manifest.json",
+    "No remote dependencies or persistent storage",
+    "Git diff contains additions only in requested directory"
+  ],
+  "pngDetails": [
+    {
+      "id": "out-cross",
+      "size": 256,
+      "bytes": 6059,
+      "alphaBounds": [
+        61,
+        61,
+        195,
+        195
+      ]
+    },
+    {
+      "id": "out-cross",
+      "size": 512,
+      "bytes": 12347,
+      "alphaBounds": [
+        122,
+        122,
+        390,
+        390
+      ]
+    },
+    {
+      "id": "line-hit-ring",
+      "size": 256,
+      "bytes": 17337,
+      "alphaBounds": [
+        36,
+        36,
+        220,
+        220
+      ]
+    },
+    {
+      "id": "line-hit-ring",
+      "size": 512,
+      "bytes": 36661,
+      "alphaBounds": [
+        73,
+        73,
+        439,
+        439
+      ]
+    },
+    {
+      "id": "serve-arrow-left",
+      "size": 256,
+      "bytes": 5811,
+      "alphaBounds": [
+        54,
+        43,
+        186,
+        202
+      ]
+    },
+    {
+      "id": "serve-arrow-left",
+      "size": 512,
+      "bytes": 13050,
+      "alphaBounds": [
+        109,
+        87,
+        371,
+        404
+      ]
+    },
+    {
+      "id": "serve-arrow-center",
+      "size": 256,
+      "bytes": 5750,
+      "alphaBounds": [
+        70,
+        43,
+        186,
+        202
+      ]
+    },
+    {
+      "id": "serve-arrow-center",
+      "size": 512,
+      "bytes": 13063,
+      "alphaBounds": [
+        141,
+        87,
+        371,
+        404
+      ]
+    },
+    {
+      "id": "serve-arrow-right",
+      "size": 256,
+      "bytes": 5815,
+      "alphaBounds": [
+        70,
+        43,
+        202,
+        202
+      ]
+    },
+    {
+      "id": "serve-arrow-right",
+      "size": 512,
+      "bytes": 13054,
+      "alphaBounds": [
+        141,
+        87,
+        403,
+        404
+      ]
+    },
+    {
+      "id": "drop-meter-track",
+      "size": 256,
+      "bytes": 3334,
+      "alphaBounds": [
+        91,
+        6,
+        165,
+        246
+      ]
+    },
+    {
+      "id": "drop-meter-track",
+      "size": 512,
+      "bytes": 7361,
+      "alphaBounds": [
+        182,
+        13,
+        330,
+        492
+      ]
+    },
+    {
+      "id": "drop-meter-fill",
+      "size": 256,
+      "bytes": 1205,
+      "alphaBounds": [
+        111,
+        32,
+        132,
+        222
+      ]
+    },
+    {
+      "id": "drop-meter-fill",
+      "size": 512,
+      "bytes": 2758,
+      "alphaBounds": [
+        222,
+        64,
+        264,
+        444
+      ]
+    },
+    {
+      "id": "drop-meter-needle",
+      "size": 256,
+      "bytes": 1063,
+      "alphaBounds": [
+        110,
+        118,
+        165,
+        138
+      ]
+    },
+    {
+      "id": "drop-meter-needle",
+      "size": 512,
+      "bytes": 1975,
+      "alphaBounds": [
+        221,
+        237,
+        329,
+        275
+      ]
+    },
+    {
+      "id": "clay-dust-01",
+      "size": 256,
+      "bytes": 2697,
+      "alphaBounds": [
+        96,
+        144,
+        162,
+        173
+      ]
+    },
+    {
+      "id": "clay-dust-01",
+      "size": 512,
+      "bytes": 6160,
+      "alphaBounds": [
+        193,
+        289,
+        323,
+        345
+      ]
+    },
+    {
+      "id": "clay-dust-02",
+      "size": 256,
+      "bytes": 4176,
+      "alphaBounds": [
+        74,
+        120,
+        186,
+        175
+      ]
+    },
+    {
+      "id": "clay-dust-02",
+      "size": 512,
+      "bytes": 9298,
+      "alphaBounds": [
+        149,
+        241,
+        372,
+        350
+      ]
+    },
+    {
+      "id": "clay-dust-03",
+      "size": 256,
+      "bytes": 5485,
+      "alphaBounds": [
+        54,
+        95,
+        209,
+        176
+      ]
+    },
+    {
+      "id": "clay-dust-03",
+      "size": 512,
+      "bytes": 11848,
+      "alphaBounds": [
+        108,
+        190,
+        418,
+        352
+      ]
+    },
+    {
+      "id": "clay-dust-04",
+      "size": 256,
+      "bytes": 6123,
+      "alphaBounds": [
+        39,
+        74,
+        226,
+        173
+      ]
+    },
+    {
+      "id": "clay-dust-04",
+      "size": 512,
+      "bytes": 13163,
+      "alphaBounds": [
+        78,
+        149,
+        451,
+        346
+      ]
+    },
+    {
+      "id": "clay-dust-05",
+      "size": 256,
+      "bytes": 6552,
+      "alphaBounds": [
+        25,
+        58,
+        240,
+        169
+      ]
+    },
+    {
+      "id": "clay-dust-05",
+      "size": 512,
+      "bytes": 13808,
+      "alphaBounds": [
+        51,
+        117,
+        480,
+        338
+      ]
+    },
+    {
+      "id": "clay-dust-06",
+      "size": 256,
+      "bytes": 6153,
+      "alphaBounds": [
+        16,
+        45,
+        251,
+        164
+      ]
+    },
+    {
+      "id": "clay-dust-06",
+      "size": 512,
+      "bytes": 12713,
+      "alphaBounds": [
+        32,
+        91,
+        501,
+        328
+      ]
+    },
+    {
+      "id": "ball-shadow-low",
+      "size": 256,
+      "bytes": 2664,
+      "alphaBounds": [
+        93,
+        116,
+        163,
+        140
+      ]
+    },
+    {
+      "id": "ball-shadow-low",
+      "size": 512,
+      "bytes": 9576,
+      "alphaBounds": [
+        186,
+        232,
+        326,
+        280
+      ]
+    },
+    {
+      "id": "ball-shadow-mid",
+      "size": 256,
+      "bytes": 3650,
+      "alphaBounds": [
+        74,
+        110,
+        182,
+        146
+      ]
+    },
+    {
+      "id": "ball-shadow-mid",
+      "size": 512,
+      "bytes": 9939,
+      "alphaBounds": [
+        148,
+        220,
+        364,
+        292
+      ]
+    },
+    {
+      "id": "ball-shadow-high",
+      "size": 256,
+      "bytes": 3943,
+      "alphaBounds": [
+        53,
+        101,
+        203,
+        155
+      ]
+    },
+    {
+      "id": "ball-shadow-high",
+      "size": 512,
+      "bytes": 7857,
+      "alphaBounds": [
+        106,
+        203,
+        406,
+        309
+      ]
+    },
+    {
+      "id": "sign-out",
+      "size": 256,
+      "bytes": 2361,
+      "alphaBounds": [
+        11,
+        83,
+        245,
+        173
+      ]
+    },
+    {
+      "id": "sign-out",
+      "size": 512,
+      "bytes": 5459,
+      "alphaBounds": [
+        22,
+        166,
+        490,
+        346
+      ]
+    },
+    {
+      "id": "sign-net",
+      "size": 256,
+      "bytes": 2242,
+      "alphaBounds": [
+        11,
+        83,
+        245,
+        173
+      ]
+    },
+    {
+      "id": "sign-net",
+      "size": 512,
+      "bytes": 5435,
+      "alphaBounds": [
+        22,
+        166,
+        490,
+        346
+      ]
+    }
+  ]
+}

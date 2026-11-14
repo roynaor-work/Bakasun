@@ -1,0 +1,1196 @@
+{
+  "schemaVersion": 1,
+  "id": "tennis-ui-fx-v1",
+  "version": "1.0.0",
+  "created": "2026-11-14",
+  "locale": "he-IL",
+  "license": "CC0-1.0",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "maxFileBytes": 400000,
+  "units": {
+    "artboard": [
+      256,
+      256
+    ],
+    "pngSizes": [
+      256,
+      512
+    ],
+    "anchorOrigin": "top-left",
+    "anchorConvention": "position = ground/screen point minus anchor * displaySize / 256",
+    "rectConvention": "[x,y,width,height] in 256-unit artboard",
+    "time": "milliseconds; delta from active simulation, pause aware"
+  },
+  "palette": {
+    "ink": "#173f36",
+    "deep": "#102e29",
+    "cream": "#f5efdc",
+    "brass": "#d4bf82",
+    "clay": "#b76c4c",
+    "red": "#e15c4f",
+    "redDark": "#7c322d",
+    "dust": "#e8b68b",
+    "dustLight": "#f3d4ac",
+    "lime": "#d8df91"
+  },
+  "style": {
+    "reference": "../../minigames/tennis.css",
+    "description": "Quiet tournament UI: forest green, cream, brass and clay. Rounded clean strokes, small warm highlights, red only for out/overpower.",
+    "provenance": "Original hand-authored SVG geometry; PNGs rasterized from the exact SVG, no external artwork or fonts."
+  },
+  "integration": {
+    "scope": "Asset package and isolated preview only; no gameplay files changed.",
+    "textures": {
+      "transparent": true,
+      "colorSpace": "sRGB",
+      "alpha": "straight/unpremultiplied PNG; use renderer-managed premultiplication",
+      "depthWrite": false
+    },
+    "ground": {
+      "threeJS": "For already-flattened art (dust/shadow), use screen-projected ground anchors. For out/ring/arrow use an XZ plane at courtY + 0.008 with depthTest:true, depthWrite:false, polygonOffset enabled; reproject the anchor after camera movement.",
+      "order": [
+        "ball-shadow",
+        "line-hit-ring",
+        "clay-dust",
+        "out-cross",
+        "ball",
+        "hud"
+      ]
+    },
+    "eventPolicy": "Consume authoritative simulation results. Do not infer out, line hit or net from preview coordinates or change scoring. Preview events are manual demonstrations.",
+    "rtl": "Court left/right are physical screen/world directions; never mirror the selection order in RTL.",
+    "noTextBaked": true,
+    "preload": "Preload the selected PNG resolution before starting a timed event; hold no frame for network loading.",
+    "reducedMotion": "Keep the out cross for 1500ms; use dust frame 3 as a static 180ms stamp; snap arrows and remove cosmetic ball motion."
+  },
+  "effects": {
+    "out": {
+      "asset": "out-cross",
+      "durationMs": 1500,
+      "fadeOutMs": 0,
+      "loop": false,
+      "clock": "active simulation time; hidden at age >= 1500ms",
+      "anchorSpace": "court-ground",
+      "movement": "fixed contact point, reproject every rendered frame"
+    },
+    "lineHit": {
+      "asset": "line-hit-ring",
+      "durationMs": 550,
+      "scale": [
+        0.82,
+        1.12
+      ],
+      "opacity": [
+        1,
+        0
+      ],
+      "loop": false,
+      "anchorSpace": "court-ground"
+    },
+    "serve": {
+      "states": [
+        {
+          "id": "left",
+          "asset": "serve-arrow-left",
+          "xM": -2.75
+        },
+        {
+          "id": "center",
+          "asset": "serve-arrow-center",
+          "xM": 0
+        },
+        {
+          "id": "right",
+          "asset": "serve-arrow-right",
+          "xM": 2.75
+        }
+      ],
+      "nearServiceLineZM": 6.4,
+      "transitionMs": 180,
+      "wrap": false,
+      "input": "ArrowLeft/ArrowRight or touch; clamp index to 0..2. Values are placement suggestions, not service legality rules."
+    },
+    "dropPower": {
+      "track": "drop-meter-track",
+      "fill": "drop-meter-fill",
+      "needle": "drop-meter-needle",
+      "range": [
+        0,
+        1
+      ],
+      "fillRect": [
+        111,
+        32,
+        21,
+        190
+      ],
+      "clip": "[111, 222 - 190*p, 21, 190*p]",
+      "needleDeltaY": "222 - 190*p - 128",
+      "previewSweetRange": [
+        0.32,
+        0.52
+      ],
+      "sweetRangePolicy": "Illustrative only. Integrator must supply the real drop-shot range.",
+      "placement": "screen edge, respecting safe area; mirror HUD position for left-handed controls, not the scale direction"
+    },
+    "clayDust": {
+      "frames": [
+        {
+          "asset": "clay-dust-01",
+          "index": 0,
+          "durationMs": 60
+        },
+        {
+          "asset": "clay-dust-02",
+          "index": 1,
+          "durationMs": 60
+        },
+        {
+          "asset": "clay-dust-03",
+          "index": 2,
+          "durationMs": 60
+        },
+        {
+          "asset": "clay-dust-04",
+          "index": 3,
+          "durationMs": 60
+        },
+        {
+          "asset": "clay-dust-05",
+          "index": 4,
+          "durationMs": 60
+        },
+        {
+          "asset": "clay-dust-06",
+          "index": 5,
+          "durationMs": 60
+        }
+      ],
+      "frameCount": 6,
+      "totalDurationMs": 360,
+      "fps": 16.666666666666668,
+      "loop": false,
+      "clearAtEnd": true,
+      "surfaces": [
+        "clay"
+      ],
+      "anchor": [
+        128,
+        176
+      ]
+    },
+    "ballShadow": {
+      "samples": [
+        {
+          "asset": "ball-shadow-low",
+          "heightM": 0
+        },
+        {
+          "asset": "ball-shadow-mid",
+          "heightM": 1.5
+        },
+        {
+          "asset": "ball-shadow-high",
+          "heightM": 3
+        }
+      ],
+      "heightRangeM": [
+        0,
+        3
+      ],
+      "interpolation": "Clamp height, linearly crossfade adjacent samples (weights sum to 1). All use displaySize 64 and the same ground anchor.",
+      "groundLocked": true,
+      "hideWhenBallHidden": true
+    },
+    "signs": {
+      "out": {
+        "asset": "sign-out",
+        "labelHe": "אאוט"
+      },
+      "net": {
+        "asset": "sign-net",
+        "labelHe": "נטו"
+      },
+      "text": {
+        "inAsset": false,
+        "direction": "rtl",
+        "font": "system-ui, sans-serif",
+        "weight": 750,
+        "color": "#f5efdc",
+        "minFontSizePx": 18,
+        "region": [
+          28,
+          102,
+          140,
+          48
+        ],
+        "center": [
+          98,
+          126
+        ],
+        "ariaLive": "polite; announce once per actual event"
+      },
+      "durationMs": 1500
+    }
+  },
+  "assets": [
+    {
+      "id": "out-cross",
+      "svg": {
+        "path": "svg/out-cross.svg",
+        "bytes": 475,
+        "sha256": "74774a484d8feb42b57db46545d2933b2e869a6cb9c61d44d62dd3421ddab79c",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/out-cross.png",
+          "bytes": 6059,
+          "sha256": "f5a0c8b7c728c4c0ff9ac12484797c2463f04c49c9b23de2b6121a7b7c4aeb09",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/out-cross.png",
+          "bytes": 12347,
+          "sha256": "5330d62455a0b5b726d9dd7a92a639147bd93fc8126ed657a24993ffc9947ca0",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "court-decal",
+      "contentRect": [
+        61,
+        61,
+        134,
+        134
+      ],
+      "displaySizePx": [
+        48,
+        48
+      ],
+      "durationMs": 1500,
+      "fadeOutMs": 0,
+      "placement": "Actual out bounce (ball.x, ground, ball.z); fixed to the court until 1500ms, not attached to the ball."
+    },
+    {
+      "id": "line-hit-ring",
+      "svg": {
+        "path": "svg/line-hit-ring.svg",
+        "bytes": 561,
+        "sha256": "15fd8d79ed2add3795de35e2b6dd65e7e8d5a62125d64fe7a8a81901b17395fa",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/line-hit-ring.png",
+          "bytes": 17337,
+          "sha256": "52da2edfc52bdde2227d212ff099f6cbf4610b9b328ae3395fcc253adadda3ce",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/line-hit-ring.png",
+          "bytes": 36661,
+          "sha256": "e9922626ebd492dbc840771ed939f28fcc2e3dfbe0edacbd1fbc0f7284d73a9e",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "court-decal",
+      "contentRect": [
+        36,
+        36,
+        184,
+        184
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "durationMs": 550,
+      "placement": "Center on the actual line contact. A line hit is in; never use this as an out marker."
+    },
+    {
+      "id": "serve-arrow-left",
+      "svg": {
+        "path": "svg/serve-arrow-left.svg",
+        "bytes": 712,
+        "sha256": "76212dd30af655bf5143f59971a3fcc4e56b89364646364c3f2ff74079e76686",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/serve-arrow-left.png",
+          "bytes": 5811,
+          "sha256": "5cc13db826ce62bc57bad58aebb8ddec0a2270631229b69b70364855a102997d",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/serve-arrow-left.png",
+          "bytes": 13050,
+          "sha256": "f763110806baab8e808110098e8b8fcfffa016b247fe7f46961c2fa4a19cf086",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-selector",
+      "contentRect": [
+        52,
+        43,
+        152,
+        160
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "state": "left",
+      "stateIndex": 0,
+      "placement": "Anchor at the selected service-line position; move the whole asset horizontally, never move the anchor within the image."
+    },
+    {
+      "id": "serve-arrow-center",
+      "svg": {
+        "path": "svg/serve-arrow-center.svg",
+        "bytes": 710,
+        "sha256": "52db6ab422e75cee4a473c842f9506457b81c6b7fa79c27e50643b431510bf46",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/serve-arrow-center.png",
+          "bytes": 5750,
+          "sha256": "196f76425f374c20945c5d8fbf770465e63bbf89a824f076be6cec680ba523dc",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/serve-arrow-center.png",
+          "bytes": 13063,
+          "sha256": "cb4ba01b851f2ea8547a6a69b9387a8de710ddaad89bd95dcd42946e30be74d6",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-selector",
+      "contentRect": [
+        52,
+        43,
+        152,
+        160
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "state": "center",
+      "stateIndex": 1,
+      "placement": "Anchor at the selected service-line position; move the whole asset horizontally, never move the anchor within the image."
+    },
+    {
+      "id": "serve-arrow-right",
+      "svg": {
+        "path": "svg/serve-arrow-right.svg",
+        "bytes": 712,
+        "sha256": "b28456db1dc79112b4363ffbb74a6c58c271f6ea75443feaf3f942904e6ed096",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/serve-arrow-right.png",
+          "bytes": 5815,
+          "sha256": "730fbcd4fc041d63a3a5f62a206ec715f9f3d3b1291b42971068d066ee7dbeef",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/serve-arrow-right.png",
+          "bytes": 13054,
+          "sha256": "0b44cab5d93e03fd21d44142739d3eb870ed66f188e757f956663fb0700c0dab",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-selector",
+      "contentRect": [
+        52,
+        43,
+        152,
+        160
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "state": "right",
+      "stateIndex": 2,
+      "placement": "Anchor at the selected service-line position; move the whole asset horizontally, never move the anchor within the image."
+    },
+    {
+      "id": "drop-meter-track",
+      "svg": {
+        "path": "svg/drop-meter-track.svg",
+        "bytes": 708,
+        "sha256": "bd2a13efb5eea67885f0d6fe2ea121639bce7a686b1d3da32b340a9cc780754d",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/drop-meter-track.png",
+          "bytes": 3334,
+          "sha256": "99f2a45d66f30917018b2d255d4d32a6351cf10d75b44b66b69d4946b1af031c",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/drop-meter-track.png",
+          "bytes": 7361,
+          "sha256": "570e1777382e5a1158c10c8fbf011f15661cc732bda579c34e6ed98e39a239e6",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 244,
+        "normalized": [
+          0.5,
+          0.953125
+        ]
+      },
+      "frames": 1,
+      "role": "hud-meter",
+      "contentRect": [
+        91,
+        6,
+        74,
+        240
+      ],
+      "displaySizePx": [
+        176,
+        176
+      ],
+      "fillRect": [
+        111,
+        32,
+        21,
+        190
+      ],
+      "placement": "Vertical at the screen edge, above controls. Square transparent export; visible rail is 44px wide at the recommended size."
+    },
+    {
+      "id": "drop-meter-fill",
+      "svg": {
+        "path": "svg/drop-meter-fill.svg",
+        "bytes": 574,
+        "sha256": "03524d51e6871a98601b7e56be60f2fda0456952d313afd2a57fd7d6aac3c4f7",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/drop-meter-fill.png",
+          "bytes": 1205,
+          "sha256": "5c620d7d5b92658a80cc3b30a5a773067d287af9b65410b66ed951ec5e8d4014",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/drop-meter-fill.png",
+          "bytes": 2758,
+          "sha256": "c35b56cc45977d82a72e48ffcbad4b3d26c9c68935e92a0bdfdbd0886bcf0946",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 244,
+        "normalized": [
+          0.5,
+          0.953125
+        ]
+      },
+      "frames": 1,
+      "role": "hud-meter-fill",
+      "contentRect": [
+        111,
+        32,
+        21,
+        190
+      ],
+      "displaySizePx": [
+        176,
+        176
+      ],
+      "clipRect": [
+        111,
+        32,
+        21,
+        190
+      ],
+      "placement": "Stack exactly over drop-meter-track. Clip the fill from its bottom y=222 upward; do not resize the SVG/PNG or the track."
+    },
+    {
+      "id": "drop-meter-needle",
+      "svg": {
+        "path": "svg/drop-meter-needle.svg",
+        "bytes": 297,
+        "sha256": "fa8f3472fd69bd2392092b5044d1e272b0f6562c621aac0dc8ad2ff8dd775280",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/drop-meter-needle.png",
+          "bytes": 1063,
+          "sha256": "879dba6f14d44fe5a6caf2e29a915fe8b4caf6fc1ab21d6f94a8e4bf6f3ea4fe",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/drop-meter-needle.png",
+          "bytes": 1975,
+          "sha256": "2154fbec0f975448edd70d2f9ac1b81dbbc46a38a05d7552f3a100c898c31b4d",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "hud-meter-needle",
+      "contentRect": [
+        110,
+        118,
+        55,
+        20
+      ],
+      "displaySizePx": [
+        176,
+        176
+      ],
+      "placement": "Its reference tip is (135,128). Translate Y by (222 - 190 * power) - 128 in the 256-unit coordinate system."
+    },
+    {
+      "id": "clay-dust-01",
+      "svg": {
+        "path": "svg/clay-dust-01.svg",
+        "bytes": 1151,
+        "sha256": "8c1c25976e538f3812e0d14fe82208fe0f8d9ce3083824e2a0d156510d1fd859",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-01.png",
+          "bytes": 2697,
+          "sha256": "4ed5866eb6e093cc9b3ea9bfc1a2c96e8e7fb1fe958e259b1857c774035a7c11",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-01.png",
+          "bytes": 6160,
+          "sha256": "742fd3bffbdf33d7025399e43deab9963ae2901d3534a5756f76d8b3c84b60c5",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 0,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "clay-dust-02",
+      "svg": {
+        "path": "svg/clay-dust-02.svg",
+        "bytes": 1149,
+        "sha256": "89079ad1a28be4ecc220717c674be0907188e9845147c5ff3f27166e8fbc7720",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-02.png",
+          "bytes": 4176,
+          "sha256": "af97a2e33fc59201bb98e1bba4ab28274cb0223208b7eef7c358265bcdec0b78",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-02.png",
+          "bytes": 9298,
+          "sha256": "311dfe27299ee7f2a7c1371e6ef4d023aad18d1effc3eda327a3a7d1dd659104",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 1,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "clay-dust-03",
+      "svg": {
+        "path": "svg/clay-dust-03.svg",
+        "bytes": 1150,
+        "sha256": "97d68dea5ead3eff2406a6b37774270dfeed9cbc53e007fd2a496b0bc6fd6aab",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-03.png",
+          "bytes": 5485,
+          "sha256": "72d96413a37b997a1c372684ffe1f6a78e29d48d7f27284ca9c710448bedf73b",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-03.png",
+          "bytes": 11848,
+          "sha256": "e1012e4f6895196b67a57137c22e87162bc2b812ecb27383b15f73a6e2caab51",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 2,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "clay-dust-04",
+      "svg": {
+        "path": "svg/clay-dust-04.svg",
+        "bytes": 1144,
+        "sha256": "14bde3f4db1e0307d9216dc9d051fc5a374298851e035622e84b2ac98d36608e",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-04.png",
+          "bytes": 6123,
+          "sha256": "7f500d64d7c6d1414a6d75113c65961483c004ccd8bcbc1068aa741fab1284f7",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-04.png",
+          "bytes": 13163,
+          "sha256": "b8df4c8bcc668f4406ea23609e676f5f5e42e14a458f3684d42ea2b649842f98",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 3,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "clay-dust-05",
+      "svg": {
+        "path": "svg/clay-dust-05.svg",
+        "bytes": 1146,
+        "sha256": "cfd5cb2b5b43e3cbc27a58fb8a97f8db5b50d69eec3e72e73c02384d190794a4",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-05.png",
+          "bytes": 6552,
+          "sha256": "a658bf65361d641b21eeb03b013b73454832c351a80746ac25d2ced83f90d62e",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-05.png",
+          "bytes": 13808,
+          "sha256": "54680d1f8e83177eb48512874d547a533fa111189856c8f63d864277526749cf",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 4,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "clay-dust-06",
+      "svg": {
+        "path": "svg/clay-dust-06.svg",
+        "bytes": 1144,
+        "sha256": "d8a30b9a8aa8c3740b13f20365488fe4ae8f490ffcd604389d3608e1e19c300d",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/clay-dust-06.png",
+          "bytes": 6153,
+          "sha256": "89b6fe7e2a3bca0010d8f5db05d23a9bd3965dfed90045766a08616d84134bc3",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/clay-dust-06.png",
+          "bytes": 12713,
+          "sha256": "418e03d7afe1a4eaf6651a9b317382cb439958ed878330734c20de0f73bc1c9a",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 176,
+        "normalized": [
+          0.5,
+          0.6875
+        ]
+      },
+      "frames": 1,
+      "role": "court-particle",
+      "contentRect": [
+        4,
+        35,
+        248,
+        154
+      ],
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "frameIndex": 5,
+      "durationMs": 60,
+      "placement": "All six images share the same ground anchor. Advance by elapsed milliseconds; clear the sprite at 360ms."
+    },
+    {
+      "id": "ball-shadow-low",
+      "svg": {
+        "path": "svg/ball-shadow-low.svg",
+        "bytes": 517,
+        "sha256": "6a78ab97c72951bfd58776f46bc5146d0fb8dbe2ca76484adbc941260c816359",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/ball-shadow-low.png",
+          "bytes": 2664,
+          "sha256": "d21d966e6b92ac9d2e5e679dc4d52b9812847e0d432cd859c67ce5bddc851df0",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/ball-shadow-low.png",
+          "bytes": 9576,
+          "sha256": "3b67aa5c3dc363294231901af709b100395a53ec1e607669f5c815c56264d362",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "ground-shadow",
+      "contentRect": [
+        93,
+        116,
+        70,
+        24
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "heightM": 0,
+      "centerAlpha": 0.56,
+      "placement": "Always projected onto ground under the ball. Crossfade adjacent height samples; alpha and softness are already baked, no additional opacity curve."
+    },
+    {
+      "id": "ball-shadow-mid",
+      "svg": {
+        "path": "svg/ball-shadow-mid.svg",
+        "bytes": 504,
+        "sha256": "a03f6a4fbe37924cbccc89275200b86bf2a8c13b0d6eb4b5e54fa2ec7fc1a0a7",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/ball-shadow-mid.png",
+          "bytes": 3650,
+          "sha256": "80d9024cf42ab2e587fdd067ab238802fd3a52f93fa30555e81a866b9b866eff",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/ball-shadow-mid.png",
+          "bytes": 9939,
+          "sha256": "5e5048f0c5d419d5a753c22eddfe95df00a18c7631323435fa3d9b54ba3e851b",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "ground-shadow",
+      "contentRect": [
+        74,
+        110,
+        108,
+        36
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "heightM": 1.5,
+      "centerAlpha": 0.32,
+      "placement": "Always projected onto ground under the ball. Crossfade adjacent height samples; alpha and softness are already baked, no additional opacity curve."
+    },
+    {
+      "id": "ball-shadow-high",
+      "svg": {
+        "path": "svg/ball-shadow-high.svg",
+        "bytes": 504,
+        "sha256": "d9e5633f41afc312be9202c2452c0940f9e4a2e0729b2c194fdb0b4ba8ddebcb",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/ball-shadow-high.png",
+          "bytes": 3943,
+          "sha256": "edb0d7a8d936a2b7ce5b5ffdfe53349b990957960d6b6498f1e4b12b4bfe1e3f",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/ball-shadow-high.png",
+          "bytes": 7857,
+          "sha256": "28ff3f99fbdd3d045b1c35edf4f0b4e8b5e84f3f6db80df6b6d2f7a50d2297f2",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "ground-shadow",
+      "contentRect": [
+        52,
+        101,
+        152,
+        54
+      ],
+      "displaySizePx": [
+        64,
+        64
+      ],
+      "heightM": 3,
+      "centerAlpha": 0.16,
+      "placement": "Always projected onto ground under the ball. Crossfade adjacent height samples; alpha and softness are already baked, no additional opacity curve."
+    },
+    {
+      "id": "sign-out",
+      "svg": {
+        "path": "svg/sign-out.svg",
+        "bytes": 639,
+        "sha256": "9ad102ada9d6c223b6f012870925b8a4da3bd8e796a88e667fc0cad79fd13670",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/sign-out.png",
+          "bytes": 2361,
+          "sha256": "ddbc9999e979d968be76ba74bc95dc81db99110a9779809bcc1d6b11e6d6de6b",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/sign-out.png",
+          "bytes": 5459,
+          "sha256": "f479969bc3fbc8261d859fcbb681b2e4e467c9ab1ca8b4c296aa12a6d1e4536b",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "hud-sign",
+      "contentRect": [
+        11,
+        82,
+        234,
+        91
+      ],
+      "displaySizePx": [
+        192,
+        192
+      ],
+      "textInAsset": false,
+      "labelKey": "tennis.out",
+      "labelHe": "אאוט",
+      "textRect": [
+        28,
+        102,
+        140,
+        48
+      ],
+      "textAnchor": [
+        98,
+        126
+      ],
+      "placement": "Decorative background only. Overlay a live DOM span or a separate runtime text layer in textRect; no outlined or rasterized lettering."
+    },
+    {
+      "id": "sign-net",
+      "svg": {
+        "path": "svg/sign-net.svg",
+        "bytes": 757,
+        "sha256": "edb8dbb776033fc018520e10302330c74b091109d2042d229e3361e672df20d5",
+        "width": 256,
+        "height": 256
+      },
+      "png": {
+        "256": {
+          "path": "png/256/sign-net.png",
+          "bytes": 2242,
+          "sha256": "1679d594613caf0869ed0879cf1b59d9c72a3ebb343a8269e8ae7352dbea8b0c",
+          "width": 256,
+          "height": 256
+        },
+        "512": {
+          "path": "png/512/sign-net.png",
+          "bytes": 5435,
+          "sha256": "c4a9567cdb8fa02803192062abf6db23f911bed8786a631887893a5750e05020",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "anchor": {
+        "x": 128,
+        "y": 128,
+        "normalized": [
+          0.5,
+          0.5
+        ]
+      },
+      "frames": 1,
+      "role": "hud-sign",
+      "contentRect": [
+        11,
+        82,
+        234,
+        91
+      ],
+      "displaySizePx": [
+        192,
+        192
+      ],
+      "textInAsset": false,
+      "labelKey": "tennis.net",
+      "labelHe": "נטו",
+      "textRect": [
+        28,
+        102,
+        140,
+        48
+      ],
+      "textAnchor": [
+        98,
+        126
+      ],
+      "placement": "Decorative background only. Overlay a live DOM span or a separate runtime text layer in textRect; no outlined or rasterized lettering."
+    }
+  ]
+}
