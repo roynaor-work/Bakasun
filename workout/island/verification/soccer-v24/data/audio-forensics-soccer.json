@@ -1,0 +1,115 @@
+{
+ "generatedAt": "2026-11-13T15:27:22.108Z",
+ "seconds": 75,
+ "games": {
+  "soccer": {
+   "game": "soccer",
+   "seconds": 75,
+   "contexts": [
+    {
+     "id": 1,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 25826,
+     "stack": "new W (<anonymous>:70:113) < Object.unlock (http://127.0.0.1:44275/workout/island/minigames/sound.mjs:11:28) < ActivityInterface.document.addEventListener.capture (http://127.0.0.1:44275/workout/island/ui/activity.mjs:40:64)"
+    },
+    {
+     "id": 2,
+     "kind": "AudioContext",
+     "sampleRate": 44100,
+     "createdAt": 29221,
+     "stack": "new W (<anonymous>:70:113) < unlock (http://127.0.0.1:44275/workout/island/minigames/soccer-design-audio.mjs:61:17) < Object.setPaused (http://127.0.0.1:44275/workout/island/minigames/soccer-design-audio.mjs:152:204)"
+    }
+   ],
+   "frames": 158,
+   "phases": {
+    "playing": {
+     "frames": 100,
+     "s25": 0.003,
+     "s12": 0.053,
+     "maxDb": -34.7,
+     "audible": 94
+    },
+    "goal": {
+     "frames": 58,
+     "s25": 0.002,
+     "s12": 0.081,
+     "maxDb": -45.9,
+     "audible": 49
+    }
+   },
+   "sources": {
+    "osc:sine": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "design/audio/soccer/whistle.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "null": 1
+     }
+    },
+    "assets/soccer-v24/fx/audio/kick-soft.ogg": {
+     "count": 7,
+     "live": 7,
+     "loop": 0,
+     "phases": {
+      "playing": 7
+     }
+    },
+    "design/audio/soccer/crowd-excited.ogg": {
+     "count": 1,
+     "live": 1,
+     "loop": 0,
+     "phases": {
+      "playing": 1
+     }
+    },
+    "assets/soccer-v24/fx/audio/net-rustle.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "goal": 1
+     }
+    },
+    "design/audio/soccer/crowd-goal.ogg": {
+     "count": 1,
+     "live": 0,
+     "loop": 0,
+     "phases": {
+      "goal": 1
+     }
+    }
+   },
+   "oscillators": 1,
+   "filters": 6,
+   "segments": [],
+   "restartWhistles": 0,
+   "liveTones": [],
+   "liveGlides": [],
+   "liveHums": [],
+   "errors": [],
+   "timeline": [
+    {
+     "at": 61.9,
+     "what": "ready"
+    },
+    {
+     "at": 62.7,
+     "what": "bot running"
+    },
+    {
+     "at": 138.8,
+     "what": "done"
+    }
+   ]
+  }
+ }
+}

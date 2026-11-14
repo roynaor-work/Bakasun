@@ -1,5 +1,6 @@
 import {passLaneClearance} from './soccer-teamplay.mjs';
 import {passInterceptPoint,spaceAhead} from './soccer-feel.mjs';
+import {soccerFullAnchor,soccerFullMarkable} from './soccer-full.mjs?v=island-v2-20261107-14';
 
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const finite=(value,fallback=0)=>Number.isFinite(value)?value:fallback;
@@ -19,7 +20,11 @@ export function compileSoccerTactics(data,c){
  if(!formation)throw Error('Unknown soccer formation: '+selected);
  const available=new Set(formation.roles),striker=available.has('CF')?'CF':'LST',wide=available.has('LW')?'LW':available.has('LM')?'LM':'LWB';
  // Six-a-side uses the six roles below. Larger squads add RW, LCM, LB, RB, DM (4-3-3 only), in that order.
- const teamSize=Math.max(6,c.players.roster.filter(entry=>entry.team===0).length),selectedRoles=[striker,'RCM','GK',wide,'LCB','RCB',...['RW','LCM','LB','RB','DM'].slice(0,Math.max(0,teamSize-6))];
+ // Soccer full (soccer-full.mjs, c.full): the eleven roles of the chosen formation come with the config (4-4-2 has no RW / DM).
+ const full=c.full?.version?c.full:null;
+ const teamSize=Math.max(6,c.players.roster.filter(entry=>entry.team===0).length),selectedRoles=full&&Array.isArray(c.squad?.roles)?[...c.squad.roles]:[striker,'RCM','GK',wide,'LCB','RCB',...['RW','LCM','LB','RB','DM'].slice(0,Math.max(0,teamSize-6))];
+ // The mirrored roles of the full match (second striker, the other wide player) for the attacking runs.
+ const second=full&&available.has('RST')?'RST':null,wide2=full?(available.has('RM')&&wide==='LM'?'RM':available.has('RW')&&wide==='LW'?'RW':null):null,holder=full?(available.has('DM')?'DM':'LCM'):null;
  if(selectedRoles.some(role=>!available.has(role)))throw Error('Soccer formation lacks a reduced-side role');
  const aliases={CF:striker,LW:wide},rules=new Map((data.rules||[]).map(rule=>[rule.id,rule])),restarts=new Map((data.restartPolicies||[]).map(rule=>[rule.id,rule]));
  const number=(rule,key,fallback)=>metric(rules.get(rule),key,fallback);
@@ -121,6 +126,8 @@ export function compileSoccerTactics(data,c){
  }
  function anchor(node,team,state){
   const phase=phases[team.phase],profile=profiles[team.phase],d=direction(team.team,state),point=phase.positions[node.role],ball=state.ball;
+  // Full match: the open-play phases move as one block (back line with the ball, lines compacted to it, narrowed and shifted to the ball side).
+  if(full&&profile){const block=soccerFullAnchor(node.role,team.phase,phase,ball,d,length,width,full.shape);if(block)return block;}
   let nx=point.x,ny=point.y;
   if(profile){
    const group=profile.byRole[node.role],dx=.5+ball.z/width-profile.reference.x,dy=.5+ball.x*d/length-profile.reference.y;
@@ -207,7 +214,7 @@ export function compileSoccerTactics(data,c){
     const away=-(Math.sign(b.z)||(node.player.id%2?1:-1));
     node.z=(node.z+away*Math.min((c.pitch.play||c.pitch).goalWidth,Math.abs(b.z)*.5+(c.pitch.play||c.pitch).goalWidth*.5))/2;
     node.duty=burst>0?'run':'lead';runners++;
-   }else if(node.role===wide){
+   }else if(node.role===wide||wide2&&node.role===wide2){
     const wingSide=Math.sign(node.z)||-1,ballSide=Math.sign(b.z);
     if(finalThird&&wideBall&&ballSide!==wingSide){node.x=d*(hx-(c.pitch.play||c.pitch).penaltyDepth+run(1.2));node.z=wingSide*((c.pitch.play||c.pitch).penaltyWidth/2-c.players.radius*2);node.duty='box-run';runners++;}
     else if(wideBall&&ballSide===wingSide&&node.player.x*d<b.x*d+run(1.5)){node.x=d*Math.min(hx-(c.pitch.play||c.pitch).penaltyDepth*.4,b.x*d+run(parameters.overlapRun));node.z=wingSide*(hz-c.tactics.sideInset-.6);node.duty='overlap';runners++;}
@@ -218,9 +225,19 @@ export function compileSoccerTactics(data,c){
     const side=nearest?Math.sign(owner.z-nearest.z)||(owner.z>0?-1:1):(owner.z>0?-1:1),angle=parameters.supportAngle*Math.PI/180,reach=run(parameters.supportDistance);
     let z=owner.z+side*Math.sin(angle)*reach;if(Math.abs(z)>hz-c.tactics.sideInset)z=owner.z-side*Math.sin(angle)*reach;
     node.x=owner.x+d*Math.cos(angle)*reach;node.z=z;node.duty='support';
+   }else if(second&&node.role===second){
+    // Full match, 4-4-2: the second striker plays off the first, between the lines on the other channel (not a runner).
+    const first=team.nodes.find(other=>other.role===striker),side=-(Math.sign(first?.z??b.z)||(node.player.id%2?1:-1));
+    node.x=d*clamp(lastLine-run(full.runs.secondStrikerDrop),b.x*d+run(3),hx-(c.pitch.play||c.pitch).penaltyDepth*.55);
+    node.z=side*Math.min(hz-c.tactics.sideInset,(c.pitch.play||c.pitch).goalWidth*.9+Math.abs(b.z)*.25);node.duty='support';
+   }else if(full&&(node.role==='LB'||node.role==='RB')){
+    // Full match: the ball-side full back overlaps a wide carrier in the rivals' half; the other one keeps the rest defence (plan).
+    const side=Math.sign(node.z)||(node.role==='LB'?-1:1);
+    if(wideBall&&Math.sign(b.z)===side&&b.x*d>-hx*.1&&owner.role==='wing'&&Math.sign(owner.z)===side){node.x=d*Math.min(hx-(c.pitch.play||c.pitch).penaltyDepth*.45,b.x*d+run(parameters.overlapRun));node.z=side*(hz-c.tactics.sideInset-.6);node.duty='overlap';runners++;}
    }
   }
-  if(runners>parameters.maxForwardRunners)for(const node of team.nodes)if(node.duty==='overlap'&&runners>parameters.maxForwardRunners){const point=anchor(node,team,state);node.x=point.x;node.z=point.z;node.duty='support';runners--;}
+  const maxRunners=full?full.runs.maxForwardRunners:parameters.maxForwardRunners;
+  if(runners>maxRunners)for(const node of team.nodes)if(node.duty==='overlap'&&runners>maxRunners){const point=anchor(node,team,state);node.x=point.x;node.z=point.z;node.duty='support';runners--;}
   const clearance=run(parameters.overlapClearance);
   for(const node of team.nodes){
    if(node.fixed||node.role==='GK')continue;
@@ -249,6 +266,11 @@ export function compileSoccerTactics(data,c){
     node.maxDepth=b.x*d-Math.min((c.pitch.play||c.pitch).penaltyDepth,parameters.behindBall*scale);
     if(team.team===0){let restLine=Infinity;for(const o of team.observed)if(o.player.role!=='keeper'&&o.player.id!==owner.id)restLine=Math.min(restLine,o.x*d-c.players.radius*2-.6);
     node.x=d*Math.min(restLine,Math.max(node.x*d,b.x*d-parameters.behindBall));}
+   }
+   if(full&&ours&&!restart&&node.player.id!==owner.id){
+    // Full match rest defence: the far-side full back stays a few metres behind the ball, the holding midfielder screens behind it.
+    if((node.role==='LB'||node.role==='RB')&&(Math.sign(node.z)||(node.role==='LB'?-1:1))!==(Math.sign(b.z)||1))node.maxDepth=b.x*d-run(full.runs.fullbackBehind);
+    if(node.role===holder&&b.x*d>-hx*.35){node.x=d*Math.min(node.x*d,b.x*d-run(full.runs.holdBehind));node.z=(node.z+b.z*.45)/2;node.duty='hold';}
    }
    if(ours&&!restart&&node.role==='RCM'){
     let nearest=null,range=Infinity;for(const rival of state.players)if(rival.team!==team.team&&rival.role!=='keeper'){const at=distance(rival,owner);if(at<range){range=at;nearest=rival;}}
@@ -279,8 +301,10 @@ export function compileSoccerTactics(data,c){
    if(team.react){const receiver=state.players.find(p=>p.id===state.passTarget.player);if(receiver&&receiver.team!==team.team)threats.sort((a,b)=>(a===receiver?-1:b===receiver?1:0)||(a.x-b.x)*d||a.id-b.id);}
    for(const threat of threats){
     if(marked.size>=limit)break;
-    let marker=null,best=Infinity;for(const node of defenders)if(node.markId==null){const at=distance(node.player,threat);if(at<best-1e-10||Math.abs(at-best)<=1e-10&&node.player.id<(marker?.player.id??Infinity)){marker=node;best=at;}}
-    if(!marker)break;
+    // Full match: zonal outside the danger area; a marker is never pulled more than marking.reach metres off his spot.
+    if(full&&!soccerFullMarkable(threat,b,d,hx,full.marking))continue;
+    let marker=null,best=Infinity;for(const node of defenders)if(node.markId==null){const at=distance(node.player,threat);if(full&&at>full.marking.reach)continue;if(at<best-1e-10||Math.abs(at-best)<=1e-10&&node.player.id<(marker?.player.id??Infinity)){marker=node;best=at;}}
+    if(!marker){if(full)continue;break;}
     const depth=Math.min(parameters.goalSideDepth,opponentClearance),lateral=Math.sqrt(Math.max(0,opponentClearance**2-depth**2));
     marker.x=threat.x-d*depth;marker.z=threat.z+(Math.sign(marker.z-threat.z)||(marker.player.id%2?1:-1))*lateral;marker.maxDepth=threat.x*d-.2;marker.markId=threat.id;marker.duty='mark';marked.add(threat.id);
     const point=inBounds(marker,marker.x,marker.z,d);marker.x=point.x;marker.z=point.z;

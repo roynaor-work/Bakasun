@@ -9,12 +9,16 @@
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
-import {whistleLike,summarizeFrames,LIVE_PHASES,liveEntries,restartWhistle} from '../minigames/audio-guard.mjs';
+import {whistleLike,summarizeFrames,LIVE_PHASES,liveEntries,restartWhistle,hissLike,summarizeBands} from '../minigames/audio-guard.mjs';
 
 const args=process.argv.slice(2),outDir=args.find(a=>!a.startsWith('--'))||'audio-forensics-out';
 const opt=(name,fallback)=>{const hit=args.find(a=>a.startsWith(`--${name}=`));return hit?hit.slice(name.length+3):fallback;};
 const GAMES=opt('games','streetSlam,soccer,tennis,alpineRush,islandRacing,city').split(',').filter(Boolean);
 const SECONDS=Number(opt('seconds',180)),CITY_SECONDS=Number(opt('city-seconds',30)),ASSERT=args.includes('--assert'),EXTRA=opt('query','');
+// racing-v24: --hiss also fails the assert on a steady noise bed in live play (hissLike: 'like air or a hiss'); --stops makes the racing bot brake to a stop for 3 s every 15 s
+const HISS=args.includes('--hiss'),STOPS=args.includes('--stops');
+// --viewport=WxH (racing-v24): a smaller page renders faster on a busy machine (the game loop, and with it the race, keeps pace); the sound does not depend on it
+const [VW,VH]=opt('viewport','844x390').split('x').map(Number);
 // config.minigames[id].requiresBuilding: alpine and racing need none (a fake typeId breaks the city view).
 const BUILDING={streetSlam:'basketball',soccer:'soccer',tennis:'tennis'};
 await mkdir(outDir,{recursive:true});
@@ -23,7 +27,7 @@ await mkdir(outDir,{recursive:true});
  * to re-run the classifier on saved logs after a threshold change. */
 function classify(game,log,seconds){
   const t0s=log.frames[0]?.t??0;if(!log.normalized){for(const f of log.frames)f.t=+(f.t-t0s).toFixed(3);for(const n of log.nodes)if(n.wall!==undefined)n.wall=+(n.wall-t0s).toFixed(3);log.normalized=true;}
-  const segments=whistleLike(log.frames),live=new Set(LIVE_PHASES[game]||[]),entries=liveEntries(log.frames,live);
+  const segments=[...whistleLike(log.frames),...hissLike(log.frames)].sort((a,b)=>a.start-b.start),live=new Set(LIVE_PHASES[game]||[]),entries=liveEntries(log.frames,live);
   for(const s of segments){
     // Sources sounding while the segment sounded: the evidence that names the file.
     s.sources=log.nodes.filter(n=>n.wall!==undefined&&n.kind!=='filter'&&n.wall<=s.end&&(n.endedAt===undefined?true:(n.wall+(n.endedAt-n.startedAt))>=s.start)).map(n=>n.kind==='oscillator'?`osc ${n.type} ${n.frequency}Hz`:`${n.url}${n.loop?' loop':''}`).filter((v,i,a)=>a.indexOf(v)===i).slice(0,8);
@@ -32,7 +36,7 @@ function classify(game,log,seconds){
   const byUrl={};for(const n of log.nodes){if(n.kind==='filter'||n.wall===undefined)continue;const k=n.kind==='oscillator'?`osc:${n.type}`:n.url||'?';const e=byUrl[k]||(byUrl[k]={count:0,live:0,loop:0,phases:{}});e.count++;if(n.loop)e.loop++;if(live.has(n.ph))e.live++;e.phases[n.ph]=(e.phases[n.ph]||0)+1;}
   const oscillators=log.nodes.filter(n=>n.kind==='oscillator'&&n.wall!==undefined).map(n=>({type:n.type,frequency:n.frequency,automation:n.automation.slice(0,6),path:n.path,ph:n.ph}));
   const filters=log.nodes.filter(n=>n.kind==='filter').map(n=>({type:n.type,frequency:n.frequency,Q:n.Q,automation:n.automation.slice(0,4)}));
-  const result={game,seconds,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,restartWhistles:segments.filter(s=>s.restart).length,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),liveHums:segments.filter(s=>s.live&&s.kind==='hum'),errors:log.errors,timeline:log.timeline};
+  const result={game,seconds,contexts:log.contexts,frames:log.frames.length,phases:summarizeFrames(log.frames),sources:byUrl,oscillators:oscillators.length,filters:filters.length,segments,restartWhistles:segments.filter(s=>s.restart).length,liveTones:segments.filter(s=>s.live&&s.kind==='tone'),liveGlides:segments.filter(s=>s.live&&s.kind==='glide'),liveHums:segments.filter(s=>s.live&&s.kind==='hum'),liveHiss:segments.filter(s=>s.live&&s.kind==='hiss'),bands:summarizeBands(log.frames,LIVE_PHASES[game]||null),bandsAll:summarizeBands(log.frames),errors:log.errors,timeline:log.timeline};
   return {result,file:{...result,oscillatorDetail:oscillators.slice(0,40),filterDetail:filters.slice(0,40),decoded:log.decoded,nodes:log.nodes,frames:log.frames,normalized:true}};
 }
 const FROM=opt('from','');
@@ -89,6 +93,8 @@ function initScript(){
         const bins=new Float32Array(an.frequencyBinCount),hz=ctx.sampleRate/an.fftSize,nb=Math.round(200/hz);
         // hi = strongest bin in 0.9-5 kHz (the squeak starts at 1.08 kHz); the classifier decides the band.
         const lo=Math.ceil(900/hz),hi=Math.floor(5000/hz),b2=Math.ceil(2000/hz),b1=Math.ceil(1000/hz),floor=Math.ceil(60/hz);
+        // racing-v24: band shares (60-300, 300-1k, 1-2k, 2-5k, 5-10k, 10k+) and the flatness of 2-8 kHz (noise about 0.5, a harmonic engine near 0)
+        const edges=[60,300,1000,2000,5000,10000,ctx.sampleRate/2].map(f=>Math.min(bins.length,Math.round(f/hz))),f2=Math.round(2000/hz),f8=Math.min(bins.length,Math.round(8000/hz));
         const med=(arr)=>{const c=Array.from(arr).sort((a,b)=>a-b);return c[c.length>>1];};
         meta.timer=setInterval(()=>{
           if(ctx.state!=='running')return;an.getFloatFrequencyData(bins);
@@ -96,7 +102,9 @@ function initScript(){
           for(let i=floor;i<bins.length;i++){const e=Math.pow(10,bins[i]/10);tot+=e;if(i>=b2&&i<=hi)e25+=e;else if(i>=b1&&i<b2)e12+=e;if(bins[i]>bins[kmax])kmax=i;if(i>=lo&&i<=hi&&bins[i]>bins[khi])khi=i;}
           if(!(bins[kmax]>-110))return; // silence: nothing to classify
           const neigh=[...bins.subarray(Math.max(floor,khi-nb),Math.max(floor,khi-2)),...bins.subarray(khi+3,Math.min(bins.length,khi+nb))];
-          F.frames.push({t:+(performance.now()/1000).toFixed(3),ct:+ctx.currentTime.toFixed(2),ctx:meta.id,lvl:+bins[kmax].toFixed(1),dom:Math.round(kmax*hz),s25:+(e25/tot).toFixed(3),s12:+(e12/tot).toFixed(3),hi:{f:Math.round(khi*hz),db:+bins[khi].toFixed(1),prom:+(bins[khi]-med(neigh)).toFixed(1),rel:+(bins[khi]-bins[kmax]).toFixed(1)},ph:window.__phaseProbe?.()??null});
+          const band=[];for(let k=0;k<6;k++){let e=0;for(let i=Math.max(floor,edges[k]);i<edges[k+1];i++)e+=Math.pow(10,bins[i]/10);band.push(+(e/tot).toFixed(4));}
+          let ld=0,ar=0,nf=0;for(let i=f2;i<f8;i++){ld+=bins[i];ar+=Math.pow(10,bins[i]/10);nf++;}const flat=nf&&ar>0?Math.pow(10,ld/nf/10)/(ar/nf):0;
+          F.frames.push({t:+(performance.now()/1000).toFixed(3),ct:+ctx.currentTime.toFixed(2),ctx:meta.id,lvl:+bins[kmax].toFixed(1),dom:Math.round(kmax*hz),s25:+(e25/tot).toFixed(3),s12:+(e12/tot).toFixed(3),hi:{f:Math.round(khi*hz),db:+bins[khi].toFixed(1),prom:+(bins[khi]-med(neigh)).toFixed(1),rel:+(bins[khi]-bins[kmax]).toFixed(1)},ph:window.__phaseProbe?.()??null,bands:band,flat:+flat.toFixed(3),tot:+(10*Math.log10(tot)).toFixed(1),sp:window.__speedProbe?.()??null});
         },50);
       }catch(e){meta.tapError=String(e);}
     }
@@ -152,17 +160,36 @@ const bots={
       const target=frame<wallUntil?pipe.lip:best;if(!player.airborne)tricked=false;let trick=null;if(player.airborne&&!player.trick&&!tricked){trick='grab';tricked=true;}
       return {steer:clamp((target-x)*.8-(player.lean??0)*.2,-1,1),boost:!player.airborne,trick};};
     window.__phaseProbe=()=>engine.phase;window.__alpineKick=()=>{if(engine.phase==='menu')session.start();};window.__alpineKick();},
+  // catch v8 (14/11): the chase pilot of tests/catch-v7-touch.mjs, applied by wrapping chase.step (the session sets steer, boost and brake from the
+  // fingers every frame; the wrapper runs inside the step, so its inputs win). It fires on a green ring and switches tools when one is empty.
+  // The phase is the chase phase (countdown, run, skid, end) while the chase is on, else the session mode (loading, bail, throw).
+  catchCriminal:()=>{const cur=()=>window.__island.games.current?.session,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+    document.querySelector('.catch-help:not([hidden]) .catch-help-ok')?.click();
+    const c=cur().chase,step=c.step.bind(c);let cool=0;
+    c.step=dt=>{const st=c.state;
+      if(st.phase==='run'){const g=c.gun.state,a=c.gun.aimInfo?.();
+        const freeOf=lane=>{let f=60;for(const o of c.obstacles){if(o.kind==='pad'||o.kind==='nitro'||o.kind==='oil')continue;const os=c.obstacleS(o,st.t)-st.s;if(os>-2&&os<60&&Math.abs(o.d-lane)<2.2)f=Math.min(f,os);}return f;};
+        let best=0,bs=-1e9;for(const lane of c.C.lanes){const sc=freeOf(lane)-Math.abs(lane-st.d)*1.5;if(sc>bs){bs=sc;best=lane;}}
+        const zone=g.locked&&a?(a.weapon==='spikes'?a.predD:a.zoneD):st.crim.d,want=freeOf(clamp(zone,-3.6,3.6))>22?zone:best;
+        c.setSteer(clamp((want-st.d)*.55-st.slide/5.6,-1,1));c.setBoost(st.tank>.15&&Math.abs(c.track.curvatureAt(st.s+30))<1/110&&st.gap>7);c.setBrake(st.gap<-1.5);
+        cool-=dt;if(g.locked&&g.quality==='green'&&g.reload<=0&&g.ammo>0&&cool<=0){cool=.3;c.fire();}
+        if(g.ammo<=0&&g.reload<=0)c.cycle?.();}
+      return step(dt);};
+    window.__phaseProbe=()=>{const x=cur(),m=x?.snapshot?.mode;return m==='chase'?(x.chase?.state.phase||m):m||null;};},
   // Pure pursuit on the centre line, as in tools/perf-racing-page.mjs.
-  islandRacing:()=>{const d=window.__island.games.current.session.debug,model=d.model,track=model.track,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
-    d.input.sample=()=>{const p=model.state.player,pr=track.project(p.x,p.z,p.s),tg=track.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading);return {steer:clamp(err*1.7,-1,1),throttle:1,autoAccelerate:true,brake:false,drift:Math.abs(err)>.22&&p.speed>14,nitro:p.nitro>70&&Math.abs(err)<.08};};
-    window.__phaseProbe=()=>model.state.phase;}
+  islandRacing:stops=>{const d=window.__island.games.current.session.debug,model=d.model,track=model.track,clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+    // --stops (racing-v24): every 15 s of race time the bot brakes to a stop and waits 3 s, so the standing-still sound is measured too
+    d.input.sample=()=>{const p=model.state.player,pr=track.project(p.x,p.z,p.s),tg=track.sample(pr.s+10+p.speed*.5),err=wrap(Math.atan2(tg.x-p.x,tg.z-p.z)-p.heading),stop=stops&&model.state.time%15>11.5;
+     return {steer:clamp(err*1.7,-1,1),throttle:stop?0:1,autoAccelerate:!stop,brake:stop,drift:!stop&&Math.abs(err)>.22&&p.speed>14,nitro:!stop&&p.nitro>70&&Math.abs(err)<.08};};
+    window.__phaseProbe=()=>model.state.phase;window.__speedProbe=()=>+model.state.player.speed.toFixed(1);}
 };
 const ready={
   soccer:()=>{const s=window.__island.games.current?.session.snapshot;return s?.contractsStatus==='ready'&&s.renderMetrics?.assetStatus==='ready';},
   streetSlam:()=>{const c=window.__island.games.current;return !!(c?.session.debug?.view&&c.session.snapshot.renderMetrics);},
   tennis:()=>!!window.__island.games.current?.session.ready,
   alpineRush:()=>!!window.__island.games.current?.session.snapshot?.loaded,
-  islandRacing:()=>(window.__island.games.current?.session.snapshot?.renderMetrics?.frames??0)>1
+  islandRacing:()=>(window.__island.games.current?.session.snapshot?.renderMetrics?.frames??0)>1,
+  catchCriminal:()=>window.__island.games.current?.session?.snapshot?.mode==='chase'
 };
 
 const chromium=await islandChromium(),server=await serveIsland('/workout/island/');
@@ -170,15 +197,15 @@ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||u
 const summary={generatedAt:new Date().toISOString(),seconds:SECONDS,games:{}};
 let failures=0;
 for(const game of GAMES){
-  const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
+  const context=await browser.newContext({viewport:{width:VW||844,height:VH||390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
   await context.addInitScript(initScript);
-  const page=await context.newPage(),errors=[],consoleAudio=[];
+  const page=await context.newPage(),errors=[],consoleAudio=[];page.setDefaultTimeout(180000); // a loaded machine can take over 30 s to boot the island
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(/audio|sound|whistle/i.test(m.text()))consoleAudio.push(m.text());});
   const log={game,errors,consoleAudio,frames:[],nodes:[],decoded:[],contexts:[],timeline:[]};
   const t0=Date.now(),mark=what=>log.timeline.push({at:+((Date.now()-t0)/1000).toFixed(1),what});
   try{
     const query=['dev=1',game==='streetSlam'?'hoopsAuto=1':'',EXTRA].filter(Boolean).join('&');
-    await page.goto(`${server.url}?${query}`,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island);
+    await page.goto(`${server.url}?${query}`,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.__island,null,{timeout:300000});
     await page.evaluate(typeId=>{const {engine:e}=window.__island;e.setAvatar({name:'בדיקה',created:true});e.skipTutorial();e.state.money=100000;e.state.learning.required=false;if(typeId&&!e.state.buildings.some(b=>b.typeId===typeId))e.state.buildings.push({id:'t-'+typeId,typeId,x:0,y:0,level:1});},BUILDING[game]||null);
     const seconds=game==='city'?CITY_SECONDS:SECONDS;
     if(game==='city'){
@@ -188,7 +215,9 @@ for(const game of GAMES){
       await page.evaluate(id=>window.__island.games.start(id,undefined,1),game);
       if(await page.locator('[data-action=game-understood]').count())await page.locator('[data-action=game-understood]').click();
       await page.waitForFunction(ready[game],null,{timeout:300000});mark('ready');
-      await page.evaluate(bots[game]);
+      // racing-v24: the race intro card (racing-broadcast) holds the race until its button is pressed; without it the race stayed in its countdown
+      if(game==='islandRacing'){await page.evaluate(()=>{const intro=document.querySelector('.racing-intro');if(intro)intro.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));});mark('intro closed '+JSON.stringify(await page.evaluate(()=>{const s=window.__island.games.current?.session?.snapshot;return {phase:s?.phase,paused:s?.paused,intro:!!document.querySelector('.racing-intro')};})));}
+      await page.evaluate(bots[game],game==='islandRacing'?STOPS:undefined);
       // Audio unlocks on a gesture in every session; tap the canvas and press a key.
       const canvas=page.locator('.minigame-canvas').first();await canvas.click({position:{x:60,y:60},force:true}).catch(()=>{});await page.keyboard.press('Shift');
       mark('bot running');
@@ -197,7 +226,8 @@ for(const game of GAMES){
     while(Date.now()<until){
       await page.waitForTimeout(1000);
       if(game==='alpineRush')await page.evaluate(()=>window.__alpineKick?.()).catch(()=>{});
-      if(Date.now()-lastPull>5000){lastPull=Date.now();const d=await page.evaluate(()=>window.__audioForensics.drain());log.frames.push(...d.frames);}
+      if(Date.now()-lastPull>5000){lastPull=Date.now();const d=await page.evaluate(()=>window.__audioForensics.drain());log.frames.push(...d.frames);
+        if(game==='islandRacing')mark('race '+JSON.stringify(await page.evaluate(()=>{const s=window.__island.games.current?.session?.snapshot;return {phase:s?.phase,time:+(s?.time||0).toFixed(1),paused:s?.paused,hidden:document.hidden,frames:s?.renderMetrics?.frames,starting:document.querySelector('.game-screen')?.dataset.starting};})));}
     }
     const rest=await page.evaluate(()=>{const F=window.__audioForensics;return {frames:F.frames.splice(0),nodes:F.nodesSnapshot(),decoded:F.decoded,contexts:F.contexts.map(c=>({id:c.id,kind:c.kind,sampleRate:c.sampleRate,createdAt:c.createdAt,stack:c.stack,tapError:c.tapError})),fetches:F.fetches};});
     log.frames.push(...rest.frames);Object.assign(log,{nodes:rest.nodes,decoded:rest.decoded,contexts:rest.contexts,fetches:rest.fetches});mark('done');
@@ -207,10 +237,10 @@ for(const game of GAMES){
   // Classification: whistle-like segments overall and inside live-play phases.
   const {result,file}=classify(game,log,game==='city'?CITY_SECONDS:SECONDS);
   // --assert: a sustained tone or a steady bright hum in live play fails, and so do three or more squeak glides (a repeat is a pattern, one may be a stray).
-  summary.games[game]=result;if(result.liveTones.length||result.liveHums.length||result.liveGlides.length>=3)failures++;
+  summary.games[game]=result;if(result.liveTones.length||result.liveHums.length||result.liveGlides.length>=3||(HISS&&result.liveHiss.length))failures++;
   await writeFile(path.join(outDir,`${game}.json`),JSON.stringify(file));
-  console.log(JSON.stringify({game,contexts:log.contexts.length,frames:log.frames.length,phases:result.phases,sources:result.sources,segments:result.segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,live:s.live,phases:s.phases,sources:s.sources})),errors}));
+  console.log(JSON.stringify({game,contexts:log.contexts.length,frames:log.frames.length,phases:result.phases,sources:result.sources,bands:result.bands,segments:result.segments.map(s=>({kind:s.kind,hz:s.hz,from:s.fromHz,to:s.toHz,seconds:s.seconds,share:s.share,flat:s.flat,speed:s.speed,live:s.live,phases:s.phases,sources:s.sources})),errors}));
 }
 await browser.close();await server.close();
 await writeFile(path.join(outDir,'summary.json'),JSON.stringify(summary,null,1));
-if(ASSERT&&failures){console.error(`audio-forensics: whistle-like sound during live play in ${failures} game(s)`);process.exit(1);}
+if(ASSERT&&failures){console.error(`audio-forensics: whistle-like${HISS?' or hiss-like':''} sound during live play in ${failures} game(s)`);process.exit(1);}

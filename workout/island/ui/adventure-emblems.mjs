@@ -1,5 +1,5 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-13';
-import {kitGameIcon,kitIntro} from './ui-kit.mjs?v=island-v2-20261107-13';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-14';
+import {kitGameIcon,kitIntro} from './ui-kit.mjs?v=island-v2-20261107-14';
 /** Frames captured from the real game scenes. Replace the WebP files to
  * update the library after a game-art delivery; no UI changes are needed. */
 const ARTWORK=Object.freeze({

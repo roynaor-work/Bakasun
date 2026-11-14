@@ -1,0 +1,131 @@
+{
+ "when": "2026-11-14T14:09:58.525Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "steps": [
+  {
+   "name": "games menu by touch"
+  },
+  {
+   "name": "league card",
+   "title": "ליגת הסקי · שלבים 4 עד 33",
+   "go": "לשלב 4",
+   "stages": [
+    "next",
+    "locked",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "themes": [
+    "יער אורנים0/15 כוכבים",
+    "מערת קרחנעול",
+    "הר געשנעול",
+    "לילה עם אורורהנעול",
+    "כפר אלפינינעול",
+    "פסגה וענניםנעול"
+   ]
+  },
+  {
+   "name": "season screen"
+  },
+  {
+   "name": "gear screen",
+   "buttons": 3
+  },
+  {
+   "name": "stage opening (goals on the card)",
+   "heading": "ליגת הסקי · שלב 4 · יער אורנים · שלב 1",
+   "eyebrow": "יער אורנים · שלב 1 מתוך 5",
+   "goals": [
+    "לסיים במקום 3 ומעלה (חובה)",
+    "לסיים עד 1:01",
+    "לעבור 6 שערים מתוך 10"
+   ],
+   "stage": "4"
+  },
+  {
+   "name": "league stage 1, attempt 1",
+   "passed": true,
+   "headline": "עברתם את שלב 4. שלב 5 נפתח",
+   "stars": 3,
+   "goals": [
+    {
+     "goal": "place",
+     "ok": true,
+     "text": "✓לסיים במקום 3 ומעלה (חובה)מקום 2"
+    },
+    {
+     "goal": "time",
+     "ok": true,
+     "text": "✓לסיים עד 1:010:58.90"
+    },
+    {
+     "goal": "gates",
+     "ok": true,
+     "text": "✓לעבור 6 שערים מתוך 109 שערים"
+    }
+   ],
+   "rows": [
+    "מטבעות ליגה+85",
+    "נקודות בעונה+8",
+    "מקום בטבלה2 · 8 נק׳",
+    "מהירות שיא112 קמ״ש",
+    "רוח הרפאיםנשמרה. תגלוש איתכם בפעם הבאה"
+   ],
+   "stageMs": 58899,
+   "wallSeconds": 1278.2,
+   "place": 2,
+   "ride": {
+    "presses": {
+     "boost": 6,
+     "trick": 2
+    },
+    "polls": 617,
+    "settles": 41,
+    "shots": [
+     {
+      "path": "unlock-06-race-1.png",
+      "raceMs": 20100
+     }
+    ],
+    "wallSeconds": 1254.7
+   }
+  },
+  {
+   "name": "back to the league",
+   "stages": [
+    "done",
+    "next",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "go": "לשלב 5",
+   "status": "יער אורנים · מקום 2 בטבלה · 3 כוכבים מתוך 90"
+  },
+  {
+   "name": "reload: the league comes back from its own key",
+   "stages": [
+    "done",
+    "next",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "go": "לשלב 5",
+   "same": true,
+   "islandSaveHasLeagueField": false,
+   "ghostBytes": 2009
+  }
+ ],
+ "themes": [],
+ "errors": [],
+ "lockstepMs": 100,
+ "islandQuality": "low",
+ "csp": "clean",
+ "pilot": "child-like (tools/alpine-league-bot.mjs KID)"
+}

@@ -1,0 +1,186 @@
+{
+ "when": "2026-11-14T13:22:54.511Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "steps": [
+  {
+   "name": "start lights",
+   "shots": [
+    "lights-1-two.png count lit 2 count 3",
+    "lights-2-five.png count lit 5 count 1",
+    "lights-3-green.png green lit 0 count "
+   ],
+   "flagOff": {
+    "gantry": false,
+    "bigNumber": "3",
+    "bigNumberHidden": false
+   }
+  }
+ ],
+ "themes": [],
+ "errors": [],
+ "lights": {
+  "frameMs": 100,
+  "trace": [
+   {
+    "phase": "countdown",
+    "countdownMs": 3000,
+    "timeMs": 0,
+    "state": "off",
+    "lit": "0",
+    "hidden": true,
+    "count": "",
+    "lamps": "false,false,false,false,false",
+    "bigNumberHidden": false
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 3000,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "0",
+    "hidden": false,
+    "count": "3",
+    "lamps": "false,false,false,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 2700,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "1",
+    "hidden": false,
+    "count": "3",
+    "lamps": "true,false,false,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 2200,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "2",
+    "hidden": false,
+    "count": "3",
+    "lamps": "true,true,false,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 2000,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "2",
+    "hidden": false,
+    "count": "2",
+    "lamps": "true,true,false,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 1700,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "3",
+    "hidden": false,
+    "count": "2",
+    "lamps": "true,true,true,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 1200,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "4",
+    "hidden": false,
+    "count": "2",
+    "lamps": "true,true,true,true,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 1000,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "4",
+    "hidden": false,
+    "count": "1",
+    "lamps": "true,true,true,true,false",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "countdown",
+    "countdownMs": 700,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "5",
+    "hidden": false,
+    "count": "1",
+    "lamps": "true,true,true,true,true",
+    "bigNumberHidden": true
+   },
+   {
+    "phase": "racing",
+    "countdownMs": 0,
+    "timeMs": 0,
+    "state": "green",
+    "lit": "0",
+    "hidden": false,
+    "count": "",
+    "lamps": "green,green,green,green,green",
+    "bigNumberHidden": true
+   }
+  ],
+  "shots": [
+   {
+    "shot": "lights-1-two.png",
+    "phase": "countdown",
+    "countdownMs": 2200,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "2",
+    "hidden": false,
+    "count": "3",
+    "lamps": "true,true,false,false,false",
+    "bigNumberHidden": true
+   },
+   {
+    "shot": "lights-2-five.png",
+    "phase": "countdown",
+    "countdownMs": 700,
+    "timeMs": 0,
+    "state": "count",
+    "lit": "5",
+    "hidden": false,
+    "count": "1",
+    "lamps": "true,true,true,true,true",
+    "bigNumberHidden": true
+   },
+   {
+    "shot": "lights-3-green.png",
+    "phase": "racing",
+    "countdownMs": 0,
+    "timeMs": 200,
+    "state": "green",
+    "lit": "0",
+    "hidden": false,
+    "count": "",
+    "lamps": "green,green,green,green,green",
+    "bigNumberHidden": true
+   }
+  ],
+  "errors": [],
+  "flagOff": {
+   "gantry": false,
+   "bigNumber": "3",
+   "bigNumberHidden": false
+  },
+  "flagOffErrors": []
+ },
+ "csp": "clean"
+}

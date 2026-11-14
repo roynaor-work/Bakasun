@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "units": "meters; camera, ball and seats in crowd root local coordinates",
+  "instances": 1200,
+  "crowdTriangleLimit": 80000,
+  "packageByteLimit": 600000,
+  "levels": [
+    {"name": "LOD0", "triangles": 210, "maxTriangles": 220, "directory": "runtime/lod0"},
+    {"name": "LOD1", "triangles": 90, "maxTriangles": 90, "directory": "runtime/lod1"},
+    {"name": "LOD2", "triangles": 24, "maxTriangles": 24, "directory": "runtime/lod2"}
+  ],
+  "distanceThresholds": [24, 42],
+  "transition": {"method": "one opaque LOD per fan; discrete replacement at scaled distance thresholds; no blending or duplicate geometry"},
+  "budgetGuard": {"enabled": true, "method": "monotone cost 24 -> 90 -> 210 per fan; common distance scale capped before the first unaffordable promotion"},
+  "animation": {"headYawLimitRadians": 0.87, "goalJumpMeters": 0.12, "morphTargets": ["arms-up", "clap"]},
+  "teamColors": {"home": "#2868ee", "away": "#e94d51", "source": "data/config.json minigames.soccer team.colors[0] / opponents.teams[0].colors[0]"},
+  "camera": {"source": "minigames/soccer-presentation.mjs soccerCamera, soccerElevationDegrees; soccer-view.mjs placement", "fovDegrees": 42, "landscape": {"distance": 15, "elevationDegrees": 28}, "portrait": {"distance": 21, "elevationDegrees": 40}, "focus": [0, 0, -12], "note": "Static ball and controlled-player focus near the far touchline; no velocity lead or box zoom. Other camera presets are asset inspection views."},
+  "assetsManifest": "assets.json"
+}

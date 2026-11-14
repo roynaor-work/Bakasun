@@ -1,0 +1,563 @@
+{
+ "when": "2026-11-13T16:01:38.202Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "steps": [
+  {
+   "name": "games menu by touch"
+  },
+  {
+   "name": "league card",
+   "title": "ליגת הסקי · שלבים 4 עד 33",
+   "go": "לשלב 4",
+   "stages": [
+    "next",
+    "locked",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "themes": [
+    "יער אורנים0/15 כוכבים",
+    "מערת קרחנעול",
+    "הר געשנעול",
+    "לילה עם אורורהנעול",
+    "כפר אלפינינעול",
+    "פסגה וענניםנעול"
+   ]
+  },
+  {
+   "name": "season screen"
+  },
+  {
+   "name": "gear screen",
+   "buttons": 3
+  },
+  {
+   "name": "stage opening (goals on the card)",
+   "heading": "ליגת הסקי · שלב 4 · יער אורנים · שלב 1",
+   "eyebrow": "יער אורנים · שלב 1 מתוך 5",
+   "goals": [
+    "לסיים במקום 3 ומעלה (חובה)",
+    "לסיים עד 1:01",
+    "לעבור 6 שערים מתוך 10"
+   ],
+   "stage": "4"
+  },
+  {
+   "name": "league stage 1, attempt 1",
+   "passed": false,
+   "headline": "שלב 4 עוד לא עבר. צריך מקום 3 ומעלה",
+   "stars": 0,
+   "goals": [
+    {
+     "goal": "place",
+     "ok": false,
+     "text": "✗לסיים במקום 3 ומעלה (חובה)מקום 6"
+    },
+    {
+     "goal": "time",
+     "ok": false,
+     "text": "✗לסיים עד 1:011:04.92"
+    },
+    {
+     "goal": "gates",
+     "ok": false,
+     "text": "✗לעבור 6 שערים מתוך 103 שערים"
+    }
+   ],
+   "rows": [
+    "מטבעות ליגה+9",
+    "מהירות שיא112 קמ״ש",
+    "רוח הרפאיםנשמרה. תגלוש איתכם בפעם הבאה"
+   ],
+   "stageMs": 64923,
+   "wallSeconds": 839.5,
+   "place": 6,
+   "ride": {
+    "presses": {
+     "boost": 5,
+     "trick": 1
+    },
+    "polls": 678,
+    "shots": [
+     {
+      "path": "06-race-1.png",
+      "raceMs": 20100
+     }
+    ],
+    "wallSeconds": 824.1
+   }
+  },
+  {
+   "name": "league stage 1, attempt 2",
+   "passed": false,
+   "headline": "שלב 4 עוד לא עבר. צריך מקום 3 ומעלה",
+   "stars": 0,
+   "goals": [
+    {
+     "goal": "place",
+     "ok": false,
+     "text": "✗לסיים במקום 3 ומעלה (חובה)מקום 5"
+    },
+    {
+     "goal": "time",
+     "ok": false,
+     "text": "✗לסיים עד 1:011:01.44"
+    },
+    {
+     "goal": "gates",
+     "ok": true,
+     "text": "✓לעבור 6 שערים מתוך 107 שערים"
+    }
+   ],
+   "rows": [
+    "מטבעות ליגה+11",
+    "מהירות שיא112 קמ״ש",
+    "רוח הרפאיםשיא חדש. 1:04.92 ← 1:01.44"
+   ],
+   "stageMs": 61436,
+   "wallSeconds": 624.9,
+   "place": 5,
+   "ride": {
+    "presses": {
+     "boost": 6,
+     "trick": 0
+    },
+    "polls": 641,
+    "shots": [
+     {
+      "path": "06-race-2.png",
+      "raceMs": 20067
+     }
+    ],
+    "wallSeconds": 615.4
+   }
+  },
+  {
+   "name": "back to the league",
+   "stages": [
+    "next",
+    "locked",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "go": "לשלב 4",
+   "status": "יער אורנים · העונה מתחילה · 0 כוכבים מתוך 90"
+  },
+  {
+   "name": "reload: the league comes back from its own key",
+   "stages": [
+    "next",
+    "locked",
+    "locked",
+    "locked",
+    "locked"
+   ],
+   "go": "לשלב 4",
+   "same": true,
+   "islandSaveHasLeagueField": false,
+   "ghostBytes": 2076
+  }
+ ],
+ "themes": [
+  {
+   "theme": "pine",
+   "name": "יער אורנים",
+   "stage": 2,
+   "league": {
+    "theme": "pine",
+    "layers": [],
+    "ghost": null
+   },
+   "triangles": 388579,
+   "calls": 104,
+   "quality": "high",
+   "environment": "fog",
+   "phase": "racing",
+   "timeMs": 14333,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 0,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "pine/gate-coral.glb",
+    "pine/gate-teal.glb",
+    "pine/ground.webp",
+    "pine/pine-round.glb",
+    "pine/pine-tall.glb",
+    "pine/pine-young.glb",
+    "pine/ramp.glb",
+    "pine/sky.webp",
+    "pine/snow.webp"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 1,
+     "trick": 0
+    },
+    "polls": 274,
+    "shots": [
+     {
+      "path": "theme-pine.png",
+      "raceMs": 3750
+     },
+     {
+      "path": "theme-pine-course.png",
+      "raceMs": 12050
+     }
+    ],
+    "wallSeconds": 91.2
+   },
+   "errors": []
+  },
+  {
+   "theme": "ice",
+   "name": "מערת קרח",
+   "stage": 7,
+   "league": {
+    "theme": "ice",
+    "layers": [
+     "landmarks",
+     "sparkles"
+    ],
+    "landmarks": {
+     "landmarks": 5,
+     "total": 32
+    },
+    "sparkles": {
+     "sparkles": 40
+    },
+    "ghost": null
+   },
+   "triangles": 346102,
+   "calls": 90,
+   "quality": "high",
+   "environment": "fog",
+   "phase": "racing",
+   "timeMs": 14733,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 1,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "ice/gate-coral.glb",
+    "ice/gate-teal.glb",
+    "ice/ground.webp",
+    "ice/ice-arch.glb",
+    "ice/ice-cluster.glb",
+    "ice/ice-spire.glb",
+    "ice/ramp.glb",
+    "ice/sky.webp",
+    "ice/snow.webp",
+    "ice/sparkle.png"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 1,
+     "trick": 0
+    },
+    "polls": 288,
+    "shots": [
+     {
+      "path": "theme-ice.png",
+      "raceMs": 3950
+     },
+     {
+      "path": "theme-ice-course.png",
+      "raceMs": 12467
+     }
+    ],
+    "wallSeconds": 88.4
+   },
+   "errors": []
+  },
+  {
+   "theme": "lava",
+   "name": "הר געש",
+   "stage": 13,
+   "league": {
+    "theme": "lava",
+    "layers": [],
+    "ghost": null
+   },
+   "triangles": 372297,
+   "calls": 113,
+   "quality": "high",
+   "environment": "sunset",
+   "phase": "racing",
+   "timeMs": 16000,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 0,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "lava/basalt-stack.glb",
+    "lava/gate-coral.glb",
+    "lava/gate-teal.glb",
+    "lava/glow-stones.glb",
+    "lava/ground.webp",
+    "lava/ramp.glb",
+    "lava/sky.webp",
+    "lava/snow.webp",
+    "lava/soot-boulder.glb"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 2,
+     "trick": 0
+    },
+    "polls": 266,
+    "shots": [
+     {
+      "path": "theme-lava.png",
+      "raceMs": 4033
+     },
+     {
+      "path": "theme-lava-course.png",
+      "raceMs": 12433
+     }
+    ],
+    "wallSeconds": 96.6
+   },
+   "errors": []
+  },
+  {
+   "theme": "aurora",
+   "name": "לילה עם אורורה",
+   "stage": 17,
+   "league": {
+    "theme": "aurora",
+    "layers": [
+     "aurora"
+    ],
+    "aurora": true,
+    "ghost": null
+   },
+   "triangles": 359177,
+   "calls": 112,
+   "quality": "high",
+   "environment": "night-floodlit",
+   "phase": "racing",
+   "timeMs": 15133,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 0,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "aurora/frost-boulder.glb",
+    "aurora/gate-coral.glb",
+    "aurora/gate-teal.glb",
+    "aurora/ground.webp",
+    "aurora/moon-crystal.glb",
+    "aurora/night-pine.glb",
+    "aurora/ramp.glb",
+    "aurora/sky.webp",
+    "aurora/snow.webp"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 1,
+     "trick": 0
+    },
+    "polls": 285,
+    "shots": [
+     {
+      "path": "theme-aurora.png",
+      "raceMs": 3850
+     },
+     {
+      "path": "theme-aurora-course.png",
+      "raceMs": 12100
+     }
+    ],
+    "wallSeconds": 98.2
+   },
+   "errors": []
+  },
+  {
+   "theme": "village",
+   "name": "כפר אלפיני",
+   "stage": 22,
+   "league": {
+    "theme": "village",
+    "layers": [
+     "landmarks",
+     "lanterns"
+    ],
+    "landmarks": {
+     "landmarks": 6,
+     "total": 47
+    },
+    "lanterns": {
+     "lanterns": 64
+    },
+    "ghost": null
+   },
+   "triangles": 386110,
+   "calls": 107,
+   "quality": "high",
+   "environment": "sunset",
+   "phase": "racing",
+   "timeMs": 14500,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 1,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "village/chalet.glb",
+    "village/garden-boulder.glb",
+    "village/gate-coral.glb",
+    "village/gate-teal.glb",
+    "village/ground.webp",
+    "village/ramp.glb",
+    "village/sky.webp",
+    "village/snow-fir.glb",
+    "village/snow.webp",
+    "village/village-pine.glb"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 1,
+     "trick": 0
+    },
+    "polls": 293,
+    "shots": [
+     {
+      "path": "theme-village.png",
+      "raceMs": 3600
+     },
+     {
+      "path": "theme-village-course.png",
+      "raceMs": 12433
+     }
+    ],
+    "wallSeconds": 96.3
+   },
+   "errors": []
+  },
+  {
+   "theme": "peak",
+   "name": "פסגה ועננים",
+   "stage": 28,
+   "league": {
+    "theme": "peak",
+    "layers": [
+     "clouds"
+    ],
+    "clouds": {
+     "clouds": 8
+    },
+    "ghost": null
+   },
+   "triangles": 358225,
+   "calls": 103,
+   "quality": "high",
+   "environment": "fog",
+   "phase": "racing",
+   "timeMs": 14600,
+   "codex": {
+    "themeGates": 2,
+    "landmarks": 0,
+    "pack": [
+     "finish-gate",
+     "ice-wall",
+     "mogul",
+     "rock-large",
+     "rock-small",
+     "snow-sign",
+     "start-gate"
+    ],
+    "textures": 4
+   },
+   "codexFiles": [
+    "peak/cloud-boulder.glb",
+    "peak/gate-coral.glb",
+    "peak/gate-teal.glb",
+    "peak/granite-slab.glb",
+    "peak/ground.webp",
+    "peak/ramp.glb",
+    "peak/sky.webp",
+    "peak/snow-spire.glb",
+    "peak/snow.webp"
+   ],
+   "ride": {
+    "presses": {
+     "boost": 1,
+     "trick": 0
+    },
+    "polls": 257,
+    "shots": [
+     {
+      "path": "theme-peak.png",
+      "raceMs": 3767
+     },
+     {
+      "path": "theme-peak-course.png",
+      "raceMs": 12600
+     }
+    ],
+    "wallSeconds": 90
+   },
+   "errors": []
+  }
+ ],
+ "errors": [],
+ "lockstepMs": 100,
+ "islandQuality": "low",
+ "csp": "clean"
+}

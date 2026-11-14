@@ -6,6 +6,7 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-14';
 import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);
@@ -38,6 +39,10 @@ const STICK_V21=AIMSTICK&&new URLSearchParams(location.search).get('boarStick')!
 // the crosshair moves with a compositor transform, and the adaptive resolution never changes while the stick is held (each change re-sizes the renderer = a hitch).
 const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_LIN=.3,STICK_TAU=.045,STICK_PRECISE=.35,AIM_SPEED_X=1.6,AIM_SPEED_Y=1.3;
 let trace=null,moveCount=0,resChanges=0;
+// 14/11/2026 (Roy after v22.1: "היכולת להזיז את הכיוון ירי לא מספיק טובה ... לכוון מדויק יותר ולהזיז בקלות יותר"): v24 aim, see aim-v24.mjs. `?boarAim=v23` restores v23.
+const AIM_V24=STICK_V21&&AIM_TRUE&&new URLSearchParams(location.search).get('boarAim')!=='v23';
+const AIM_MODE=AIM_V24?'v24':STICK_V21?(AIM_TRUE?'v23':'axes'):AIMSTICK?'v20':'mouse';
+const aim24=AIM_V24?createAimAssist():null;let aim24State=null;
 const AIM_SENS={low:.7,mid:1,high:1.4},AIM_SENS_NAME={low:'נמוכה',mid:'בינונית',high:'גבוהה'};
 let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AIM_SENS)aimSens=v;}catch{}
 function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ)));return STICK_V21?mag*(STICK_LIN+(1-STICK_LIN)*mag):mag;}
@@ -57,7 +62,7 @@ function updateWeaponBtn(){if(!weaponBtn)return;const w=WEAPONS[current],ws=wsCa
   weaponBtn.classList.toggle('hot',!!s.overheated||s.reload>0);}
 function releaseFire(){pointer.down=false;fireSource='none';firePointer=null;fireBtn?.classList.remove('held');}
 function lowPulse(){if(LEGACY||mode!=='battle'||hp<=0||hp/stats(save).hp>.3)return 0;return .16+.1*Math.sin(elapsed*6);}
-let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false;
+let islandPaused=false,islandDisposed=false,islandFrame,islandReady=false,qaHold=false;// qaHold: QA only (__boar.hold), the touch bot stops the clock while it "thinks"
 const SAVE_KEY='boar-island-v1';
 let save;try{save=sanitizeSave(JSON.parse(localStorage.getItem(SAVE_KEY)));}catch{save=freshSave();}
 function persist(){if(benchActive)return;try{localStorage.setItem(SAVE_KEY,JSON.stringify(save));}catch{$('save-note').textContent='השמירה אינה זמינה בדפדפן הזה';}}
@@ -204,7 +209,7 @@ function init(){
   if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
   // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
   // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
-  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.';
+  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.';
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
@@ -559,6 +564,18 @@ function castShot(ray,assist=1){
     return {miss:true,point:p,water:groundY(p.x,p.z)<seaY(p.x,p.z)};}
   return {miss:true,point:ray.at(220,new THREE.Vector3()),sky:true};
 }
+// 14/11/2026 (v24): the live enemies as circles on the screen (CSS px): every hittable zone with the same radius the shot test uses (touch assist
+// included), and the aim point the bot and the turret pick (eyes first). Used by the v24 aim assist and, read-only, by the QA view.
+const camUp=new THREE.Vector3(),zoneP=new THREE.Vector3();let qaSeq=0;
+function screenTargets(){
+  const W=innerWidth,H=innerHeight,assist=TOUCH?1.35:1,out=[];camUp.set(0,1,0).applyQuaternion(camera.quaternion);
+  for(const e of enemies){if(e.dead||e.state==='retreat')continue;const sc=e.root.scale.x,zs=[];
+    for(const z of e.zones){if(!zoneHittable(e,z))continue;z.obj.getWorldPosition(zoneP);projected.copy(zoneP).project(camera);if(projected.z>1||projected.z<-1)continue;
+      const x=(projected.x*.5+.5)*W,y=(-projected.y*.5+.5)*H,rr=z.r*sc*(z.crit?Math.min(assist,1.15):assist);projected.copy(zoneP).addScaledVector(camUp,rr).project(camera);
+      zs.push({x,y,r:Math.hypot((projected.x*.5+.5)*W-x,(-projected.y*.5+.5)*H-y),crit:!!z.crit,part:!!z.part,shield:!!z.shield});}
+    if(!zs.length)continue;const a=zs.find(z=>z.crit)||zs.find(z=>z.part)||zs.find(z=>!z.shield)||zs[0];out.push({e,id:e.qa||(e.qa=++qaSeq),kind:e.kind,x:a.x,y:a.y,zones:zs});}
+  return out;
+}
 function muzzleWorld(model,i){return model.muzzles[i%model.muzzles.length].getWorldPosition(new THREE.Vector3());}
 function flashMuzzle(model,i,scale=1){const f=model.flashes[i%Math.max(1,model.flashes.length)];if(f){f.visible=true;f.rotation.z=rand(0,6.28);f.scale.setScalar(scale*rand(.8,1.2));f.userData.until=elapsed+.045;}muzzleLight.intensity=18*scale;model.muzzles[i%model.muzzles.length].getWorldPosition(tmp);camera.worldToLocal(muzzleLight.position.copy(tmp));}
 function ejectCasing(model,type){
@@ -754,9 +771,9 @@ function buildAimControls(){
   fireBtn=document.createElement('button');fireBtn.id='fire-btn';fireBtn.type='button';fireBtn.setAttribute('aria-label','ירי');fireBtn.innerHTML='<b>◎</b><span>ירי</span>';
   g.append(aimZone,fireBtn);aimZone.hidden=fireBtn.hidden=true;
   const R=STICK_R;if(STICK_V21){ring.classList.add('v21');g.classList.add('stickv21');const arrow=document.createElement('u');$('crosshair').append(arrow);aimSensButton();}
-  aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle')return;e.preventDefault();if(aimStick){if(STICK_V21&&aimStick.precise===null){aimStick.precise=e.pointerId;ring.classList.add('precise');try{aimZone.setPointerCapture(e.pointerId);}catch{}}return;}aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0,sx:0,sy:0,precise:null};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';try{aimZone.setPointerCapture(e.pointerId);}catch{}});
-  aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;moveCount++;let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,mag=stickMag(m);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
-  for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&aimStick.precise===e.pointerId){aimStick.precise=null;ring.classList.remove('precise');return;}if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on','precise');rest.hidden=false;$('crosshair').classList.remove('moving');});
+  aimZone.addEventListener('pointerdown',e=>{if(mode!=='battle')return;e.preventDefault();if(aimStick){if(STICK_V21&&aimStick.precise===null){aimStick.precise=e.pointerId;ring.classList.add('precise');try{aimZone.setPointerCapture(e.pointerId);}catch{}}return;}aimStick={id:e.pointerId,ox:e.clientX,oy:e.clientY,vx:0,vy:0,sx:0,sy:0,precise:null};const r=aimZone.getBoundingClientRect();ring.style.left=`${e.clientX-r.left}px`;ring.style.top=`${e.clientY-r.top}px`;ring.classList.add('on');rest.hidden=true;knob.style.transform='';if(AIM_V24){aimStick.lx=e.clientX;aimStick.ly=e.clientY;ring.style.transform='';aim24.reset();}try{aimZone.setPointerCapture(e.pointerId);}catch{}});
+  aimZone.addEventListener('pointermove',e=>{if(!aimStick||aimStick.id!==e.pointerId)return;moveCount++;if(AIM_V24){stickMove24(e,ring,knob,R);return;}let dx=e.clientX-aimStick.ox,dy=e.clientY-aimStick.oy;const d=Math.hypot(dx,dy),k=d>R?R/d:1;dx*=k;dy*=k;knob.style.transform=`translate(${dx}px,${dy}px)`;const m=Math.hypot(dx,dy)/R,mag=stickMag(m);aimStick.vx=d?dx/Math.max(d*k,1e-6)*mag:0;aimStick.vy=d?dy/Math.max(d*k,1e-6)*mag:0;});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])aimZone.addEventListener(ev,e=>{if(aimStick&&aimStick.precise===e.pointerId){aimStick.precise=null;ring.classList.remove('precise');return;}if(aimStick&&e.pointerId!==aimStick.id)return;aimStick=null;ring.classList.remove('on','precise');rest.hidden=false;$('crosshair').classList.remove('moving');if(AIM_V24){aim24.reset();aim24State=null;ring.style.transform='';}});
   fireBtn.addEventListener('pointerdown',e=>{if(mode!=='battle'||firePointer!==null)return;e.preventDefault();sfx.init();firePointer=e.pointerId;setFiring(true,'button');fireBtn.classList.add('held');try{fireBtn.setPointerCapture(e.pointerId);}catch{}});
   for(const ev of ['pointerup','pointercancel','lostpointercapture'])fireBtn.addEventListener(ev,e=>{if(firePointer!==null&&e.pointerId!==firePointer)return;releaseFire();});
   if(FIRE_V21){for(const el of [aimZone,fireBtn])el.addEventListener('contextmenu',e=>e.preventDefault());
@@ -767,9 +784,23 @@ function aimStickStep(dt){if(!AIMSTICK||!aimStick)return;
   if(!STICK_V21){pointer.x=clamp(pointer.x+aimStick.vx*dt*AIM_SPEED_X,-.95,.95);pointer.y=clamp(pointer.y-aimStick.vy*dt*AIM_SPEED_Y,-.85,.85);return;}
   const k=1-Math.exp(-dt/STICK_TAU);aimStick.sx+=(aimStick.vx-aimStick.sx)*k;aimStick.sy+=(aimStick.vy-aimStick.sy)*k;
   const g=AIM_SENS[aimSens]*(aimStick.precise!==null?STICK_PRECISE:1);
-  if(AIM_TRUE){const W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(aimStick.sx,aimStick.sy);if(m>1e-6){const ux=aimStick.sx/m,uy=aimStick.sy/m,px=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g*dt;pointer.x=clamp(pointer.x+ux*px/W,-.95,.95);pointer.y=clamp(pointer.y-uy*px/H,-.85,.85);}}
+  if(AIM_V24)aimStep24(dt,g);
+  else if(AIM_TRUE){const W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(aimStick.sx,aimStick.sy);if(m>1e-6){const ux=aimStick.sx/m,uy=aimStick.sy/m,px=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g*dt;pointer.x=clamp(pointer.x+ux*px/W,-.95,.95);pointer.y=clamp(pointer.y-uy*px/H,-.85,.85);}}
   else{pointer.x=clamp(pointer.x+aimStick.sx*dt*AIM_SPEED_X*g,-.95,.95);pointer.y=clamp(pointer.y-aimStick.sy*dt*AIM_SPEED_Y*g,-.85,.85);}
   const moving=Math.hypot(aimStick.sx,aimStick.sy)>.02,ch=$('crosshair');ch.classList.toggle('moving',moving);if(moving)ch.style.setProperty('--dir',`${Math.atan2(aimStick.sx,-aimStick.sy)*180/Math.PI}deg`);}
+// 14/11/2026 (v24, aim-v24.mjs): the same stick, then the aim help on its velocity in screen px (slowdown over a boar, a pull to its eyes,
+// following a walking boar), only while the thumb is on the stick; and the ring follows the thumb past its edge.
+function aimStep24(dt,g){
+  const s=aimStick,W=Math.max(1,innerWidth/2),H=Math.max(1,innerHeight/2),m=Math.hypot(s.sx,s.sy);let vx=0,vy=0;
+  if(m>1e-6){const ux=s.sx/m,uy=s.sy/m,sp=Math.hypot(AIM_SPEED_X*W*ux,AIM_SPEED_Y*H*uy)*m*g;vx=ux*sp;vy=uy*sp;}
+  const o=aim24.step({dt,cx:(pointer.x*.5+.5)*innerWidth,cy:(-pointer.y*.5+.5)*innerHeight,vx,vy,held:true,tilt:m,targets:screenTargets()});aim24State=o.info;
+  pointer.x=clamp(pointer.x+o.vx*dt/W,-.95,.95);pointer.y=clamp(pointer.y-o.vy*dt/H,-.85,.85);
+}
+function stickMove24(e,ring,knob,R){
+  const s=aimStick,{dx,dy,d,moved}=followAnchor(s,e.clientX,e.clientY,R);
+  if(moved)ring.style.transform=`translate3d(${(s.ox-s.lx).toFixed(1)}px,${(s.oy-s.ly).toFixed(1)}px,0)`;
+  knob.style.transform=`translate(${dx}px,${dy}px)`;const mag=stickMag(d/R);s.vx=d?dx/d*mag:0;s.vy=d?dy/d*mag:0;
+}
 function buildWeaponBar(){
   const bar=$('weapons');bar.replaceChildren();bar.classList.toggle('many',WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).length>5);
   WEAPON_ORDER.filter(k=>save.weapons[k]||BASE_WEAPONS.includes(k)).forEach((k,i)=>{const w=WEAPONS[k],lv=save.weapons[k];const b=document.createElement('button');b.className='wslot'+(k===current?' active':'')+(lv?'':' locked');b.dataset.key=k;b.setAttribute('aria-label',`${w.name}${lv?'':' · נעול'}`);
@@ -828,7 +859,7 @@ let shakeT=0,basePitch=-.075,frozenCam=false;
 function frame(t){
   if(islandDisposed)return;
   islandFrame=requestAnimationFrame(frame);
-  if(islandPaused){lastTime=t;return;}
+  if(islandPaused||qaHold){lastTime=t;return;}
   frames++;
   if(visible&&lastTime)adapt(t-lastTime);const raw=Math.min(.05,(t-lastTime)/1000||.016);lastTime=t;if(!visible)return;
   slowmo=Math.max(0,slowmo-raw);const dt=raw*(slowmo>0?.35:1);elapsed+=dt;world.update(elapsed);weather.update(raw);
@@ -958,10 +989,17 @@ async function runBench(){
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY},frames,elapsed:+elapsed.toFixed(3),aimSens,stickR:STICK_R,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY,AIM_V24},aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,anchor:aimStick?{x:+aimStick.ox.toFixed(1),y:+aimStick.oy.toFixed(1)}:null,frames,elapsed:+elapsed.toFixed(3),aimSens,stickR:STICK_R,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},record(on){trace=on?[]:null;},trace(){const t=trace||[];if(trace)trace=[];return t;},weapon(k){switchWeapon(k);},
+    // 14/11/2026 (v24): read-only eyes for the touch bot (what a child sees: the crosshair and the boars on the screen); nothing here changes the game.
+    // hold(true) stops the frame loop (no update, no render; input events still arrive), so a slow test machine adds no input delay in game time
+    hold(on){qaHold=!!on;},clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},
+    view(){camera.updateMatrixWorld();const h=castShot(aimRay(),TOUCH?1.35:1),W=innerWidth,H=innerHeight,f=v=>+v.toFixed(1);
+      return {t:+elapsed.toFixed(4),frames,mode,shots:roundShots,hits:roundHits,crits:roundCrits,killed,heat:+(wstate[current]?.heat||0).toFixed(1),overheated:!!wstate[current]?.overheated,cx:+((pointer.x*.5+.5)*W).toFixed(2),cy:+((-pointer.y*.5+.5)*H).toFixed(2),
+        on:h.e?(h.e.qa||(h.e.qa=++qaSeq)):0,crit:!!h.crit,fireHeld:firePointer!==null,stick:aimStick?{ox:f(aimStick.ox),oy:f(aimStick.oy)}:null,aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,alive:enemies.filter(e=>!e.dead).map(e=>e.qa||(e.qa=++qaSeq)),
+        targets:screenTargets().map(t=>({id:t.id,kind:t.kind,x:f(t.x),y:f(t.y),hp:Math.round(t.e.hp),z:+t.e.root.position.z.toFixed(1),zones:t.zones.map(z=>({x:f(z.x),y:f(z.y),r:f(z.r),c:z.crit?1:0,s:z.shield?1:0}))}))};},
     bot(on,opts={}){bot=on?{...opts}:false;if(!on)setFiring(false,'none');},speed(n){timeScale=n;},
     rocket,frost,fury:()=>{fury=100;activateFury();},killAll(){for(const e of [...enemies])damageEnemy(e,1e6,{explosive:true});},
     sim(sec,step=1/30){camera.updateMatrixWorld();let n=Math.round(sec/step);while(n-->0&&mode==='battle'){elapsed+=step;updateBattle(step);updateEffects(step);}return mode;},

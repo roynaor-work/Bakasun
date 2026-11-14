@@ -1,3 +1,4 @@
+import {racingV24Flags} from './racing-v24.mjs?v=island-v2-20261107-14';
 /** Procedural sport engine; no downloaded samples. Shared app mute is authoritative.
  * sync(speed, boosting, {drifting, offroad, steer, throttle}) keeps the two-argument API.
  * Noise and custom harmonics are optional so minimal/headless audio contexts still work.
@@ -14,9 +15,13 @@ export const audioHoldEnabled=(search=globalThis.location?.search||'')=>new URLS
  * Every new sound starts and ends on a ramp (tools/racing-shift-audio.mjs measures clicks per style). */
 export const SHIFT_STYLES=Object.freeze(['a','b','c','v22']);
 export const shiftStyle=(search=globalThis.location?.search||'')=>{const v=new URLSearchParams(search).get('racingShift');return SHIFT_STYLES.includes(v)?v:'a';};
+/** racing-v24 (Roy after v23: "after every corner a second of turbo and then a noise"): the turbo was the drift boost the brake button gave in every braked corner, the noise
+ * the blow-off sample at the end of that boost (blowoff=false, the default; ?racingTurbo=v23 brings both back). The gear sound stays 'a'. hiss='v24': no engine noise layer
+ * and no wind loop standing still or slow (Roy: "a background noise, like air or a hiss"; ?racingHiss=v23). v4: the Codex v4 brake loops, bumps and scrape replace the
+ * squeals under braking ("a metal noise instead of a braking noise"; ?racingAudioV4=0). */
 const SHIFT={v22:{dip:.18,len:.14,vol:.3,pop:.09,noise:.055,blip:0},a:{dip:.1,len:.08,vol:.12,pop:0,noise:0,blip:.06},b:{dip:.12,len:.1,vol:.15,pop:0,noise:0,blip:.06},c:{dip:.16,len:.09,vol:.55,pop:0,noise:0,blip:0}};
-export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle()}={}){
- const SH=SHIFT[shiftName]||SHIFT.a,style=SHIFT[shiftName]?shiftName:'a';let blipUntil=0,shifts=0;
+export function createRacingAudio({storage=globalThis.localStorage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,samples:useSamples=false,holdContext=audioHoldEnabled(),shift:shiftName=shiftStyle(),blowoff:blowoffOn=racingV24Flags().turbo==='v23',hiss:hissMode=racingV24Flags().hiss,v4:v4On=racingV24Flags().audioV4,pit:pitOn=false}={}){
+ const SH=SHIFT[shiftName]||SHIFT.a,style=SHIFT[shiftName]?shiftName:'a';let blipUntil=0,shifts=0,blowoffs=0,noiseLevel=0;
  const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
  const number=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
  const gears=[0,9,18,28,39,52,70];
@@ -65,7 +70,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
     voice.connect(filter);filter.connect(gain);gain.connect(context.destination);voice.start();
     createNoise();lastTime=context.currentTime;
     // racing-v11 samples (Codex racing-audio-v2): loaded after the first unlock, layered over the procedural engine; any failure leaves the procedural sound alone.
-    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-13').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled()});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
+    if(useSamples)import('./racing-samples.mjs?v=island-v2-20261107-14').then(m=>{if(disposed||!context)return;const layer=m.createRacingSamples({context,base:new URL('../assets/racing-audio-v2/',import.meta.url),base3:new URL('../assets/racing-audio-v3/',import.meta.url),v3:m.audioV3Enabled(),beep:m.shiftBeepEnabled(),v4:v4On,base4:new URL('../assets/racing-audio-v4/',import.meta.url),hiss:hissMode,pit:pitOn,basePit:new URL('../assets/racing-pit-v1/audio/',import.meta.url)});samples=layer;return layer.load().catch(()=>{layer.dispose();if(samples===layer)samples=null;});}).catch(()=>{samples=null;});
    }
    if(context.state==='suspended')resume();
   }catch{}
@@ -112,15 +117,17 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   const volume=real?(.007+Math.min(speed/50,1)*.01+throttle*.0045+revs*.003)*(1-shift*SH.vol)*(1-limiter*.55)*rattle:(.006+Math.min(speed/50,1)*.011+throttle*.002)*(1-shift*.16);
   target(gain.gain,paused||muted||disposed?0:volume,now,paused||muted||disposed?.018:.07);
   if(noiseGain){
-   const road=Math.min(speed/55,1)*.045;
-   const air=boosting?.33:0,slip=drift?.11+steering*.1:braking?.05+Math.min(speed/40,1)*.05:0,gravel=offroad?.2:0;
-   const wind=top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(.02+throttle*revs*.07):0;
+   // racing-v24 hiss: the road noise grows with the square of the speed, the exhaust noise only with throttle and revs (v23: a floor of .02 that hissed standing still)
+   const quiet=hissMode!=='v23',road=quiet?Math.pow(Math.min(speed/55,1),2)*.03:Math.min(speed/55,1)*.045;
+   const air=boosting?.33:0,brakeNoise=braking&&!(v4On&&samples?.v4Ready),slip=drift?.11+steering*.1:brakeNoise?.05+Math.min(speed/40,1)*.05:0,gravel=offroad?.2:0;
+   const wind=top*.05,pop=real&&now<popUntil?.12:0,backfire=real&&lastThrottle>.7&&throttle<.25&&revs>.55?.1:0,exhaust=real?(quiet?throttle*revs*.035:.02+throttle*revs*.07):0;
    if(backfire&&!paused&&!disposed)samples?.backfire();
-   if(wasBoosting&&!boosting&&!paused&&!disposed)samples?.blowoff();wasBoosting=boosting;
+   if(wasBoosting&&!boosting&&!paused&&!disposed&&blowoffOn){blowoffs++;samples?.blowoff();}wasBoosting=boosting;
    lastThrottle=throttle;
    if(samples?.ready&&real){if(lastRevs<.95&&revs>=.95&&!paused&&!disposed)samples.shiftBeep?.();lastRevs=revs;}
-   if(samples?.ready)samples.update({rpm:real?revs:rpm,throttle,speed,drifting:drift,braking,steer:steering,kerb:number(extras.kerb),offroad,level:paused||muted||disposed?0:1});
-   target(noiseGain.gain,paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*SH.noise+pop+backfire+exhaust+wind),now,boosting?.045:.09);
+   if(samples?.ready)samples.update({rpm:real?revs:rpm,throttle,speed,drifting:drift,braking,brakePedal:!!extras.brake&&!drift&&!offroad,steer:steering,kerb:number(extras.kerb),offroad,level:paused||muted||disposed?0:1});
+   noiseLevel=paused||muted||disposed?0:Math.min(.56,road+air+slip+gravel+shift*SH.noise+pop+backfire+exhaust+wind);
+   target(noiseGain.gain,noiseLevel,now,boosting?.045:.09);
    target(noiseFilter.frequency,(offroad?620:drift?1550+steering*850:braking?1900+speed*10:boosting?1200+speed*13:760+speed*12)+top*500,now,.07);
    target(noise.playbackRate,.8+Math.min(speed/65,1)*.45,now,.1);
   }
@@ -188,6 +195,13 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   if(style==='c'){samples?.shiftDownSoft?.();return;}
   blipUntil=now+.12;
  }
+ /** racing-v24 pit stop: the wheel guns, four short rattles of band-passed noise over half a second (each one ramps in and out: no click) */
+ function wheelGun(){
+  if(!context||!noise?.buffer||!context.createBufferSource)return;const now=number(context.currentTime);
+  for(let k=0;k<4;k++){try{const t=now+k*.13,source=context.createBufferSource(),f=context.createBiquadFilter(),g=context.createGain();source.buffer=noise.buffer;if(source.playbackRate)source.playbackRate.value=1.5+k*.05;f.type='bandpass';f.frequency.value=1500;if(f.Q)f.Q.value=1.1;
+   g.gain.value=0;if(g.gain.setValueAtTime&&g.gain.linearRampToValueAtTime){g.gain.setValueAtTime(0,t);for(let j=0;j<4;j++){g.gain.linearRampToValueAtTime(.011,t+j*.022+.006);g.gain.linearRampToValueAtTime(.002,t+j*.022+.016);}g.gain.linearRampToValueAtTime(0,t+.1);}
+   source.connect(f);f.connect(g);g.connect(context.destination);source.start(t);source.stop?.(t+.12);source.onended=()=>{try{source.disconnect();f.disconnect();g.disconnect();}catch{}};}catch{}}
+ }
  /** a soft low thump (85 -> 55 Hz sine, 90 ms) on a raised-cosine-like ramp: no click at either end */
  function thump(now){
   if(!context?.createOscillator||!context.createGain)return;
@@ -199,6 +213,8 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
  function event(name,details={}){
   readMute();if(paused||muted||disposed)return;
   if(name==='pass'){if(samples?.ready)samples.pass();else cue('pass',1);return;}
+  if(name==='pit'){if(!samples?.pitCue?.(details?.type,details?.seconds||2)&&details?.type==='pitChange')wheelGun();return;}   // racing-v24: the Codex pit sounds, or the procedural guns
+  if(samples?.ready&&details?.side)samples.contactSide?.();   // racing-v24: the next bump was side by side (the v4 scrape joins it)
   if(samples?.ready)samples.event?.(name,clamp(number(details?.intensity,1),0,1));   // racing-audio-v3 layer (a no-op until its files decoded); the procedural cue below always plays
   cue(name,clamp(number(details?.intensity,1),0,1));
  }
@@ -210,7 +226,7 @@ export function createRacingAudio({storage=globalThis.localStorage,AudioContext=
   },
   metrics:()=>({unlocked:!!context,paused,muted,disposed,contextState:context?.state,gain:gain?.gain?.value}),
   /** Last values the engine voice was driven with (for tests and the HUD). */
-  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0),shiftStyle:style,shifts}),
+  engine:()=>({gear,contextState:context?.state,pitch:voice?.frequency?.value,rivalVoices:rivals.length+(pack?1:0),shiftStyle:style,shifts,blowoffs,noise:noiseLevel,hiss:hissMode,blowoff:blowoffOn,v4:v4On,samples:samples?.levels?.()||null}),
   dispose(){
    if(disposed)return;disposed=true;
    if(context){target(gain?.gain,0,context.currentTime,.01);target(noiseGain?.gain,0,context.currentTime,.01);}

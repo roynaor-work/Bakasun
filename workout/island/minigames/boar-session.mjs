@@ -1,4 +1,4 @@
-import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-13';
+import {DATA_VERSION} from '../release.mjs?v=island-v2-20261107-14';
 
 /** A local frame preserves the original game's CSS, Three.js and campaign.
  * The island still owns fullscreen, Back, visibility, pause, mute and exit. */
@@ -31,6 +31,8 @@ export function runBoarSession(ctx) {
   if(new URLSearchParams(globalThis.location?.search).get('boarFire')==='v20')url.searchParams.set('boarFire','v20');
   if(new URLSearchParams(globalThis.location?.search).get('boarHud')==='v20')url.searchParams.set('boarHud','v20');
   if(new URLSearchParams(globalThis.location?.search).get('boarStick')==='v20')url.searchParams.set('boarStick','v20');
+  // 14/11/2026: `?boarAim=v23` (the v23 stick, no v24 aim help) and `?boarAim=axes` (the per-axis speeds before QA 3) reach the frame too.
+  {const aim=new URLSearchParams(globalThis.location?.search).get('boarAim');if(aim==='v23'||aim==='axes')url.searchParams.set('boarAim',aim);}
   // QA only: `?adapt=1` on the island URL keeps the game's adaptive resolution running under `?qa=1` (it is off there by default), to measure re-size hitches.
   if(new URLSearchParams(globalThis.location?.search).get('adapt')==='1')url.searchParams.set('adapt','1');
   const failed=()=>{if(disposed)return;error='reason.gameStart';ctx.warning.hidden=false;ctx.warning.textContent=ctx.t('boar.loadError');};

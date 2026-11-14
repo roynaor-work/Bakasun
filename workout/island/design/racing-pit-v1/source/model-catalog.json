@@ -1,0 +1,318 @@
+{
+  "crew": [
+    {
+      "id": "wheel_front_left",
+      "role": "wheel_changer",
+      "station": "front_left",
+      "file": "models/wheel_front_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f2cb59",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "wheel_front_right",
+      "role": "wheel_changer",
+      "station": "front_right",
+      "file": "models/wheel_front_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f2cb59",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "wheel_rear_left",
+      "role": "wheel_changer",
+      "station": "rear_left",
+      "file": "models/wheel_rear_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f4a569",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "wheel_rear_right",
+      "role": "wheel_changer",
+      "station": "rear_right",
+      "file": "models/wheel_rear_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f4a569",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "jack_operator",
+      "role": "jack_operator",
+      "station": "nose",
+      "file": "models/jack_operator.glb",
+      "triangles": 1180,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#c5e585",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "screen_cleaner",
+      "role": "screen_cleaner",
+      "station": "cockpit",
+      "file": "models/screen_cleaner.glb",
+      "triangles": 1192,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#b0c6f0",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    },
+    {
+      "id": "light_controller",
+      "role": "light_controller",
+      "station": "exit",
+      "file": "models/light_controller.glb",
+      "triangles": 1200,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#e4b2d7",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true
+    }
+  ],
+  "props": [
+    {
+      "id": "spare_wheel",
+      "file": "models/spare_wheel.glb",
+      "triangles": 504,
+      "nodes": [
+        "Wheel"
+      ],
+      "radiusMeters": 0.34,
+      "widthMeters": 0.3,
+      "axle": "+X",
+      "origin": "axle center; place Y=.34 at floor"
+    },
+    {
+      "id": "tire_stack",
+      "file": "models/tire_stack.glb",
+      "triangles": 1808,
+      "nodes": [
+        "Tires"
+      ],
+      "count": 4,
+      "origin": "ground center"
+    },
+    {
+      "id": "wheel_gun",
+      "file": "models/wheel_gun.glb",
+      "triangles": 144,
+      "nodes": [
+        "WheelGun"
+      ],
+      "gripLocalMeters": [
+        0,
+        -0.07,
+        -0.02
+      ],
+      "socketLocalMeters": [
+        0,
+        0,
+        0.28
+      ],
+      "forward": "+Z"
+    },
+    {
+      "id": "jack",
+      "file": "models/jack.glb",
+      "triangles": 368,
+      "nodes": [
+        "Base",
+        "LiftArm",
+        "LiftPad",
+        "Handle"
+      ],
+      "liftRangeMeters": [
+        0.19,
+        0.35
+      ],
+      "liftNode": "LiftPad",
+      "handleNode": "Handle"
+    },
+    {
+      "id": "stop_star",
+      "file": "models/stop_star.glb",
+      "triangles": 112,
+      "nodes": [
+        "StopStar"
+      ],
+      "meaning": "stop at pit box; no lettering"
+    },
+    {
+      "id": "pit_light_entry",
+      "file": "models/pit_light_entry.glb",
+      "triangles": 456,
+      "nodes": [
+        "Housing",
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ],
+      "states": [
+        "red",
+        "amber",
+        "green"
+      ],
+      "forward": "+Z",
+      "lampNodes": [
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ]
+    },
+    {
+      "id": "pit_light_exit",
+      "file": "models/pit_light_exit.glb",
+      "triangles": 456,
+      "nodes": [
+        "Housing",
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ],
+      "states": [
+        "red",
+        "amber",
+        "green"
+      ],
+      "forward": "+Z",
+      "lampNodes": [
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ]
+    },
+    {
+      "id": "pit_lane_arrows",
+      "file": "models/pit_lane_arrows.glb",
+      "triangles": 72,
+      "nodes": [
+        "Sign"
+      ],
+      "lettering": false,
+      "forward": "+Z"
+    },
+    {
+      "id": "speed_limit_symbol",
+      "file": "models/speed_limit_symbol.glb",
+      "triangles": 105,
+      "nodes": [
+        "Sign"
+      ],
+      "lettering": false,
+      "forward": "+Z"
+    },
+    {
+      "id": "cleaning_cloth",
+      "file": "models/cleaning_cloth.glb",
+      "triangles": 24,
+      "nodes": [
+        "Cloth"
+      ],
+      "gripLocalMeters": [
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

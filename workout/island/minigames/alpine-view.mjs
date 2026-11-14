@@ -1,7 +1,7 @@
 import {loadAlpineFeel,createAlpineFeel} from './alpine-feel.mjs';
 import * as THREE from '../vendor/three.module.js';
-import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-13';
-import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-13';
+import {GLTFLoader} from '../vendor/GLTFLoader.js?v=island-v2-20261107-14';
+import {mergeGeometries} from '../vendor/BufferGeometryUtils.js?v=island-v2-20261107-14';
 import {createAlpineVfx,inertAlpineVfx} from './alpine-vfx.mjs';
 import {loadAlpineWorld} from './alpine-design-world.mjs';
 import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs';
@@ -11,7 +11,8 @@ import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
 import {bodyTarget,followBody,carvePose} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
-import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-13';
+import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-14';
+import {ghostAt} from './alpine-league-ghost.mjs?v=island-v2-20261107-14';
 
 /** Alpine Rush presentation (Codex design package view, rebuilt for the curved halfpipe).
  * Renders a SkiFrame only: positions, collisions, tricks and results belong to the engine.
@@ -20,7 +21,7 @@ import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island
  * profile, with procedural snow, 3D fir branches, granite/snow cliffs, a close chase
  * camera and grooves recording engine positions. The Mixamo rig has authored sport outerwear; attribution is in ASSETS.md.
  * This local candidate includes a separately reviewed engine feel proposal; it is not a released build. */
-export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}, v7 = null} = {}) {
+export async function createSkiView(host, {canvas, modelUrl = new URL('../design/skier3/skier.glb', import.meta.url).href, rockTextureUrl = new URL('../assets/alpine-rush/granite-v5.webp',import.meta.url).href, maxPlayerSpeedKmh = null, quality: initialQuality = 'high', mobileProfile: forcedMobile = null, maxDpr = 1.7, lowDpr = 1, isDisposed = () => false, course, physics, visual = {}, v7 = null, ghost = null} = {}) {
   if (!course?.path || !physics) throw new Error('alpine.view.course');
   const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false, powerPreference: 'high-performance'});
   let vfx=null,feel=null;
@@ -50,6 +51,10 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const sun = new THREE.DirectionalLight(dusk ? '#f0c5b1' : '#ffe2ba', 2.65 * look.light); sun.castShadow = true; sun.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
   Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 120}); sun.shadow.bias = -.0005; scene.add(sun, sun.target);
   if (env) { const e = env.json; hemi.color.set(e.hemisphere.sky); hemi.groundColor.set(e.hemisphere.ground); hemi.intensity = e.hemisphere.intensity * look.light; sun.color.set(e.sun.color); sun.intensity = e.sun.intensity * look.light; renderer.toneMappingExposure = e.exposure; }
+  // Ski league v23: a league stage names its theme (visual.theme); its look module grades the scene and adds the theme layers.
+  // Regular stages never load it. Any failure keeps the regular look.
+  let leagueLook = null, theme = null, themeLayers = null, disposeBackplate = null;
+  if (visual.theme) { try { leagueLook = await import('./alpine-league-look.mjs?v=island-v2-20261107-14'); theme = leagueLook.themeOf(visual.theme); if (theme) leagueLook.gradeLights(theme, {scene, renderer, hemi, sun, look}); } catch { leagueLook = theme = null; } }
   const mat = (c, roughness = .8) => new THREE.MeshStandardMaterial({color: c, roughness,envMapIntensity:.2});
   const trackMats=[],snow=snowMaterial(),ice=mat('#90b5c4',.5),navy=mat('#263f4a'),orange=mat('#c97550'),white=mat('#e4e3d7'),stone=rockMaterial(),green=mat('#254e40'),red=mat('#b65e48',.8),gold=new THREE.MeshStandardMaterial({color:'#f3cb77',emissive:'#9c6f23',emissiveIntensity:.15,roughness:.28,metalness:.55});
   function mesh(geo, material, parent, x = 0, y = 0, z = 0) { const m = new THREE.Mesh(geo, material); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; parent.add(m); return m; }
@@ -58,7 +63,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const canvasTexture = (w, h, draw) => { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex; };
 
   let designWorld;
-  try { feel=createAlpineFeel(await loadAlpineFeel(),{maxSpeedKmh:maxPlayerSpeedKmh||physics.boostSpeed*3.6,reducedMotion:reduced}); designWorld=await loadAlpineWorld({isDisposed,skipBackgrounds:!!env}); }
+  try { feel=createAlpineFeel(await loadAlpineFeel(),{maxSpeedKmh:maxPlayerSpeedKmh||physics.boostSpeed*3.6,reducedMotion:reduced}); designWorld=await loadAlpineWorld({isDisposed,skipBackgrounds:!!env,assets:theme?.assets||null}); }
   catch(error) {
     // This await precedes course/actor construction. The complete scene
     // disposer below is not initialized yet, so release the boot resources.
@@ -123,6 +128,11 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     if (env.snowNormal) { env.snowNormal.repeat.set(1.5, 2); terrainMat.normalMap = env.snowNormal; terrainMat.normalScale.set(env.json.surface.normalScale, env.json.surface.normalScale); }
     if (env.snowRough && !mobile) { env.snowRough.repeat.set(1.5, 2); terrainMat.roughnessMap = env.snowRough; }
   }
+  if (theme) {
+    // The theme's snow and ground tiles carry their own colours: the environment's snow tint is replaced by the grade's colour.
+    leagueLook.tintMaterials(theme, [[terrainMat, 'snow'], [pipeMat !== snow ? pipeMat : snow, 'snow']]);
+    leagueLook.tintPalette(theme, designWorld.palette); if (env) disposeBackplate = leagueLook.themeBackplate(theme, env);
+  }
   // Side terrain: deck level near the pipe, a bumpy bank, then a long fall away into fog.
   const TX=[0,2,5,10,18,30,50,90],TY=[0,.5,2,6,11,19,9,-35];
   function terrainY(s, ax, side) {
@@ -176,6 +186,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   }
   const art=designWorld.createArtWorld(scene,{course,deckEdge,terrainY,place,frameAt,snow,stone,dusk,mobile,density:look.trees,env});
   if (env) { try { envRig = createEnvRig(scene, env, {course, deckEdge, terrainY, place, worldPoint, frameAt, mobile, reduced}); envRig.setQuality(quality); } catch { envRig = null; } }
+  if (theme) { try { themeLayers = await leagueLook.createThemeLayers(theme, {scene, course, place, worldPoint, terrainY, frameAt, deckEdge, mobile, reduced, designWorld, isDisposed}); themeLayers.setQuality(quality); } catch { themeLayers = null; } }
   const scenery={update(){},dispose(){}};
   const mountains=new THREE.Group(),field=new THREE.Group();
   const treeMeshes=[],flagPole=new THREE.Group(),flagCloth=new THREE.Group();
@@ -194,7 +205,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     renderer.setPixelRatio(Math.min(globalThis.devicePixelRatio || 1, quality === 'low' ? lowDpr : highDpr));
     const t1 = performance.now(), size = quality === 'low' ? Math.min(512, SHADOW_SIZE) : SHADOW_SIZE;
     if (sun.shadow.mapSize.x !== size) { sun.shadow.mapSize.set(size, size); if (sun.shadow.map) { sun.shadow.map.dispose(); sun.shadow.map = null; } }
-    coins.castShadow = quality !== 'low'; art.setQuality(quality); envRig?.setQuality(quality);
+    coins.castShadow = quality !== 'low'; art.setQuality(quality); envRig?.setQuality(quality); themeLayers?.setQuality(quality);
     lastSwitch = {quality, pixelRatioMs: +(t1 - t0).toFixed(2), shadowMs: +(performance.now() - t1).toFixed(2), resizeMs: 0, totalMs: +(performance.now() - t0).toFixed(2)};
   }
   applyQuality();
@@ -230,6 +241,11 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     sign.position.set(0, 2.45, 0); sign.rotation.z = Math.PI / 4; sign.rotation.y = Math.PI; g.add(sign); return g;
   }
   const makers = {rock:()=>designWorld.prop('rock',physics), gate:()=>designWorld.prop('gate',physics), boost: pad, ramp: kickerMat ? kickerRamp : woodRamp, warn}, pools = {rock: [], gate: [], boost: [], ramp: [], warn: []};
+  // Ski league v23: a theme with two gate colours alternates them along the course (by first sight, so a gate keeps its colour).
+  const gateColours = designWorld.gateVariants?.() > 1 ? new Map() : null;
+  if (gateColours) { makers.gateB = () => designWorld.prop('gate', physics, 1); pools.gateB = []; }
+  const gateType = id => { if (!gateColours) return 'gate'; if (!gateColours.has(id)) gateColours.set(id, gateColours.size % 2); return gateColours.get(id) ? 'gateB' : 'gate'; };
+  const unused = () => Object.fromEntries(Object.keys(makers).map(type => [type, 0]));
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
     return canvasTexture(1024, 96, (ctx, w, h) => { ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h); ctx.fillStyle = fg; ctx.font = '900 64px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(label, w / 2, h / 2 + 3); ctx.fillStyle = '#ff643b'; ctx.fillRect(0, 0, w, 8); ctx.fillRect(0, h - 8, w, 8); });
@@ -271,13 +287,16 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const r={root,pivot,inner,body:actor.body,shadow:actor.shadow,actor,bones:{},air:0,squash:0,grab:0,roll:0,crashAt:-1,hitAt:-10,wasHit:false};riders.set(id,r);return r;
   }
   for (const [id, color] of [['player', '#ce6545'], ['rival-1', '#bd974e'], ['rival-2', '#498b9d'], ['rival-3', '#746b96'], ['rival-4', '#a95d5b'], ['rival-5', '#7b8d5b']]) rider(id, color);
+  // League record ghost: the same rider asset, see-through (alpine-league-look ghostify), driven by the stored best run; never a collider.
+  let ghostRider = null; const GHOST = {};
+  if (ghost && leagueLook && gltf) { try { ghostRider = rider('ghost', '#9fdcff'); riders.delete('ghost'); ghostRider.shadow.visible = false; ghostRider.root.visible = false; leagueLook.ghostify(ghostRider.root); } catch { ghostRider = null; } }
 
   // ---------- Weather and effects ----------
   const dot = canvasTexture(32, 32, (ctx, w) => { const g = ctx.createRadialGradient(w / 2, w / 2, 0, w / 2, w / 2, w / 2); g.addColorStop(0, '#ffffffff'); g.addColorStop(.45, '#ffffffcc'); g.addColorStop(1, '#ffffff00'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, w); });
   const SNOW_MAX = Math.round(450 * Math.max(.2, look.snow)), snowOffsets = new Float32Array(SNOW_MAX * 3), snowPos = new Float32Array(SNOW_MAX * 3);
   for (let i = 0; i < SNOW_MAX; i++) { const a = rnd() * Math.PI * 2, d = 3 + rnd() * 27; snowOffsets[i * 3] = Math.cos(a) * d; snowOffsets[i * 3 + 1] = rnd() * 24 - 5; snowOffsets[i * 3 + 2] = Math.sin(a) * d; }
   const snowGeo = new THREE.BufferGeometry(); snowGeo.setAttribute('position', new THREE.BufferAttribute(snowPos, 3));
-  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
+  const snowfall = new THREE.Points(snowGeo, new THREE.PointsMaterial({color: look.snowColor || '#ffffff', map: dot, size: .045 + look.snow * .1, transparent: true, opacity: .95, depthWrite: false})); snowfall.frustumCulled = false; snowfall.userData.perf = 'effects'; scene.add(snowfall);
   const snowSpeed = 1.6 + look.snow * 2.6, wind = look.snow > .8 ? 3.2 : .6;
   const trailGeo = new THREE.BufferGeometry(), trailPositions = new Float32Array(140 * 3),trailAge=new Float32Array(140); trailGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));trailGeo.setAttribute('powderAge',new THREE.BufferAttribute(trailAge,1));
   const powderMat=new THREE.PointsMaterial({color:'#f2f7fa',map:dot,size:.23,transparent:true,opacity:.55,depthWrite:false});powderMat.onBeforeCompile=s=>{s.vertexShader='attribute float powderAge; varying float vPowderAge;\n'+s.vertexShader;s.vertexShader=s.vertexShader.replace('gl_PointSize = size;','vPowderAge=powderAge;gl_PointSize=size*(.55+powderAge*1.4);');s.fragmentShader='varying float vPowderAge;\n'+s.fragmentShader;s.fragmentShader=s.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );','vec4 diffuseColor=vec4(diffuse,opacity*pow(1.-vPowderAge,1.7));');};powderMat.customProgramCacheKey=()=> 'alpine-powder-v7';
@@ -335,7 +354,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   ro = typeof ResizeObserver === 'function' ? new ResizeObserver(resize) : null; ro?.observe(host); resize();
   // Warm the shader cache while the loading card is up: every material in the scene, including the
   // props and coins that first appear mid-race, compiles now rather than on the first racing frame.
-  for (const type of Object.keys(makers)) prop(type, {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0});
+  for (const type of Object.keys(makers)) prop(type, unused());
   for (const list of Object.values(pools)) for (const g of list) g.visible = false;
   vfx.warmUp();
   try { if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera); } catch {}
@@ -357,7 +376,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     worldPoint(0, 0, 0, P); sun.target.position.copy(P); sun.position.set(P.x - 32, P.y + 25, P.z - 38);
     worldPoint(-6, .4, 2.6, camera.position); worldPoint(12, 0, 1, target); camera.lookAt(target); camera.updateProjectionMatrix();
     let i = 0; for (const r of riders.values()) { r.root.visible = r.shadow.visible = true; place(r.root, 4 + i * 1.5, (i % 3 - 1) * 2.4, .03); place(r.shadow, 4 + i * 1.5, (i % 3 - 1) * 2.4, .05); r.shadow.rotateX(-Math.PI / 2); if (r.actor) r.actor.pose(0, .3, .5, .2, .4); i++; }
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0}; let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
+    if (ghostRider) { ghostRider.root.visible = true; place(ghostRider.root, 6, 1.2, .03); ghostRider.actor?.pose?.(0, .2, 0, 0, 0); leagueLook.ghostify(ghostRider.root); }
+    const used = unused(); let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
     for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
     coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
     for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
@@ -366,6 +386,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     renderer.render(scene, camera);
     spray.visible = false; coins.count = 0; for (const list of Object.values(pools)) for (const g of list) g.visible = false;
     for (const r of riders.values()) r.root.visible = r.shadow.visible = false;
+    if (ghostRider) ghostRider.root.visible = false;
   }
   function render(canonicalState, presentation = canonicalState.presentation) {
     if (disposed) return;
@@ -420,8 +441,19 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       r.shadow.material.opacity = .2 / (1 + height * .7); r.shadow.scale.set(.75 / (1 + height * .15), 1.4 / (1 + height * .15), 1);
       if(r.sf){const a = r.sf.geometry.attributes.position; for (let i = 0; i < a.count; i++) a.setZ(i, Math.sin(i * .9 + t * 10) * .05 * (i % 11 / 10)); a.needsUpdate = true;}
     }
+    // League ghost: where the record run was at this race time; hidden behind the player (it would fill the chase camera) and after its finish.
+    if (ghostRider) {
+      const g = ghostAt(ghost, state.timeMs, GHOST), gz = ps - g.s, block = gz > 1.2 || (gz > .4 && Math.abs(g.x - player.x) < 2.4);
+      const show = playing && state.phase !== 'countdown' && !g.finished && gz > -look.fogFar && !block; ghostRider.root.visible = show; ghostRider.shadow.visible = false;
+      if (show) {
+        const gs = surfaceHeight(g.x, pipe); place(ghostRider.root, g.s, g.x, gs + g.height + .03, g.airborne ? 0 : (Math.sign(g.x) || 1) * wallAngle(g.x, pipe), 0, 0);
+        ghostRider.actor?.setDistance?.(camera.position.distanceTo(ghostRider.root.position));
+        ghostRider.actor?.update?.({id: 'ghost', s: g.s, x: g.x, z: gz, height: g.height, lean: g.lean, intent: g.lean, airborne: g.airborne, airKind: g.airborne ? 'ramp' : null, landing: false, crashed: false, boosting: false, hit: false, trick: null}, {phase: state.phase, time: t, dt, speedKmh: state.speedKmh});
+        leagueLook.ghostify(ghostRider.root);
+      }
+    }
     // Obstacles and coins from the frame.
-    const used = {rock: 0, gate: 0, boost: 0, ramp: 0, warn: 0};
+    const used = unused();
     for (const list of Object.values(pools)) for (const g of list) g.visible = false;
     let coinCount = 0; const seen = new Map();
     for (const o of state.obstacles ?? []) {
@@ -435,7 +467,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
         seen.set(o.id, {s: os, x: o.x, h: o.h ?? .85}); continue;
       }
       if (!makers[o.type]) continue;
-      const g = prop(o.type, used); place(g, os, o.x, 0);
+      const g = prop(o.type === 'gate' ? gateType(o.id) : o.type, used); place(g, os, o.x, 0);
       if (o.type === 'rock') g.scale.setScalar((o.radius ?? .7) / .7);
     }
     coins.count = coinCount; coins.instanceMatrix.clearUpdateRanges(); if (coinCount) { coins.instanceMatrix.addUpdateRange(0, coinCount * 16); coins.instanceMatrix.needsUpdate = true; }
@@ -471,15 +503,18 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     if (playing && !reduced) camera.rotateZ(feedback.bank);
     camAt.copy(camera.position);
     mountains.position.set(camAt.x, camAt.y - 48, camAt.z); field.position.set(camAt.x, camAt.y - 78, camAt.z);
-    worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);envRig?.update(ps,camera,wdt);
+    worldPoint(ps, px, 0, P); sun.target.position.copy(P); sun.position.set(P.x-32,P.y+25,P.z-38);art.update(ps,look.fogFar,camera,quality);envRig?.update(ps,camera,wdt);themeLayers?.update(ps,camera,wdt,wall);
     // Board spray and falling snow.
     frameAt(ps, FR); const dx = Math.sin(FR.theta), dz = -Math.cos(FR.theta), rx = Math.cos(FR.theta), rz = Math.sin(FR.theta);
     worldPoint(ps, px, absY, P);
     spray.visible=false;
     const count = quality === 'low' ? Math.round(SNOW_MAX * .35) : SNOW_MAX;
+    // League courses: a side gust (state.wind) blows the falling snow across the run, so the wind is seen before it is felt.
+    const gust = state.wind?.v || 0, gx = gust * rx * 2.2, gz = gust * rz * 2.2;
     for (let i = 0; i < count; i++) {
       let y = snowOffsets[i * 3 + 1] - snowSpeed * wdt, x = snowOffsets[i * 3] + wind * wdt;
       if (y < -5) y += 24; if (x > 30) x -= 57;
+      if (gust) { x += gx * wdt; if (x < -27) x += 57; else if (x > 30) x -= 57; let z = snowOffsets[i * 3 + 2] + gz * wdt; if (z < -30) z += 60; else if (z > 30) z -= 60; snowOffsets[i * 3 + 2] = z; }
       snowOffsets[i * 3] = x; snowOffsets[i * 3 + 1] = y;
       snowPos[i * 3] = camAt.x + x; snowPos[i * 3 + 1] = camAt.y + y; snowPos[i * 3 + 2] = camAt.z + snowOffsets[i * 3 + 2];
     }
@@ -492,6 +527,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const materials = new Set(), geometries = new Set();
     scene.traverse(o => { if (o.geometry) geometries.add(o.geometry); if (o.material) for (const m of [].concat(o.material)) materials.add(m); });
     geometries.forEach(g => g.dispose()); materials.forEach(m => { for (const v of Object.values(m)) if (v?.isTexture) v.dispose(); m.dispose(); });
+    themeLayers?.dispose();disposeBackplate?.();if(ghostRider)leagueLook?.disposeGhost(ghostRider.root);
     vfx?.dispose();gltf?.dispose();scene.background?.dispose?.();scenery.dispose();art.dispose();envRig?.dispose();env?.dispose();designWorld.dispose();contactTex.dispose();granite.dispose();
     for (const m of [...treeMeshes, flagPole, flagCloth, coins]) m.dispose?.();
     sun.shadow.map?.dispose();envTarget.dispose(); renderer.renderLists.dispose(); renderer.dispose();renderer.forceContextLoss();
@@ -520,6 +556,6 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     get modelError() { return modelError; },
     get rockTextureError(){return rockTextureError;},
     mode: 'alpine-feel-v9',
-    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),designAssets:{...designWorld.metrics(),powderActive:powder?.active?.()??0},environment:envRig?.metrics()??null,quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
+    metrics() { return {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures, props: Object.values(pools).reduce((n, l) => n + l.length, 0), chunks: chunks.length, visibleChunks: chunks.filter(c => c.visible).length, coins: coins.count, ...art.metrics(),designAssets:{...designWorld.metrics(),powderActive:powder?.active?.()??0},environment:envRig?.metrics()??null,...(theme?{league:{...(themeLayers?.metrics()??{theme:theme.id,layers:[]}),ghost:ghostRider?{visible:ghostRider.root.visible,lod:ghostRider.actor?.lod??null}:null}}:{}),quality, disposed, mode: gltf ? 'model' : 'primitive',grooves:'paired-skis',grooveCapacity:trackCapacity,feel:feel.metrics(),vfx:vfx.metrics(),character:gltf?.metrics(),motion:riders.get('player')?.actor?.metrics?.(),rockTexture:granite.image?'loaded':'procedural',mobileProfile:mobile,pixelRatio:renderer.getPixelRatio(),fov:+fov.toFixed(3),interpolation:!!canonicalPresentation,lastSwitch}; },
   };
 }

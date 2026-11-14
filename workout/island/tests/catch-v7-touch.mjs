@@ -56,7 +56,8 @@ const nextFrame = async f => page.waitForFunction(f => (window.__island.ui.activ
 
 try {
   await mkdir(OUT, {recursive: true});
-  await page.goto(server.url + `?dev=1&games=1&quality=${QUALITY}`, {waitUntil: 'networkidle'}); console.log('island loaded', secs());
+  // v8 (14/11) is the default now: this script keeps checking v7 through the v8 flags that bring it back (catch-v8-touch.mjs checks v8)
+  await page.goto(server.url + `?dev=1&games=1&quality=${QUALITY}&catchIntro=v7&catchEngine=v7&catchSiren=v7&catchWeaponsFix=0&catchBurst=0`, {waitUntil: 'networkidle'}); console.log('island loaded', secs());
   await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded);
   await tap('[data-action=avatar-start]');
   // the island's own gates (tutorial, daily lesson) are opened the way every island browser test opens them

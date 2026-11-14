@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "package": "racing-audio-v4",
+  "license": "CC0-1.0",
+  "license_file": "LICENSE.txt",
+  "dedication_file": "DEDICATION.txt",
+  "origin": "Original deterministic procedural synthesis; no external samples",
+  "generator": "source/synthesize.py",
+  "seed": 20261114,
+  "base_commit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "normalization": {
+    "integrated_target_lufs": -16.0,
+    "tolerance_lu": 0.15,
+    "true_peak_ceiling_dbtp": -1
+  },
+  "spectrum": {
+    "band_edges_hz": [
+      0,
+      250,
+      1000,
+      2000,
+      4000,
+      8000,
+      24000.0
+    ],
+    "method": "Unweighted one-sided whole-clip periodogram; percent total energy",
+    "brake_4000_8000_hz_max_percent": 10
+  },
+  "budget": {
+    "max_package_bytes": 300000,
+    "audio_bytes": 192879
+  },
+  "playback": {
+    "preferred_format": "ogg",
+    "fallback_format": "mp3",
+    "master_gain_db": -3,
+    "brake_layers": "Select one level, never sum all three; crossfade changes over 50 ms",
+    "loop_player": "AudioBufferSourceNode; loopStart=0; loopEnd=2; playbackRate=1",
+    "loop_note": "10 ms shoulders meet at silence; a brief 20 ms amplitude dip remains at each join",
+    "codec_note": "Use intended duration, not MP3 container duration; decode may expose encoder padding",
+    "onset_stop_fade_ms": 10,
+    "limiter_ceiling_dbtp": -1
+  },
+  "assets": [
+    {
+      "id": "brake-loop-light",
+      "label_he": "בלימה קלה",
+      "duration_seconds": 2.0,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 10,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 2.0,
+      "recommended_gain_db": -13,
+      "recommended_gain_linear": 0.223872,
+      "exclusive_group": "brake",
+      "max_voices": 1,
+      "cooldown_ms": 0,
+      "seed": 20261114,
+      "files": {
+        "ogg": {
+          "path": "brake-loop-light.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 15998,
+          "sha256": "e2c6ca1ff1b58d1ded8aa30062993ed81f5a09a95296bd04e42f7198a9543d29",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.0,
+          "true_peak_dbtp": -6.75,
+          "oversampled_peak_dbfs": -6.746,
+          "spectrum_energy_percent": [
+            4.008558696869421,
+            44.81471709831037,
+            40.141585100381434,
+            11.035136730500403,
+            2.2686254502125654e-06,
+            1.0531192249682997e-07
+          ],
+          "boundary_step_dbfs": -50.46
+        },
+        "mp3": {
+          "path": "brake-loop-light.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 24867,
+          "sha256": "5ec3c65e29ec02d7cc64b0d2b35ffc999ff39917da6f0bbfe654f1c5846bde4b",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.0,
+          "true_peak_dbtp": -6.72,
+          "oversampled_peak_dbfs": -6.713,
+          "spectrum_energy_percent": [
+            4.009293079358256,
+            44.995973313056425,
+            39.963497046639205,
+            11.031235261381314,
+            1.2883361318491532e-06,
+            1.1228608052304574e-08
+          ],
+          "boundary_step_dbfs": -75.81
+        }
+      }
+    },
+    {
+      "id": "brake-loop-medium",
+      "label_he": "בלימה בינונית",
+      "duration_seconds": 2.0,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 10,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 2.0,
+      "recommended_gain_db": -9,
+      "recommended_gain_linear": 0.354813,
+      "exclusive_group": "brake",
+      "max_voices": 1,
+      "cooldown_ms": 0,
+      "seed": 20261115,
+      "files": {
+        "ogg": {
+          "path": "brake-loop-medium.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 16161,
+          "sha256": "dfe09fe02e99b3d748608d61837a52e6fb65d0446a4e56138a36501f95a54e90",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.01,
+          "true_peak_dbtp": -6.53,
+          "oversampled_peak_dbfs": -6.527,
+          "spectrum_energy_percent": [
+            3.765800878295124,
+            45.5574028826104,
+            36.01336162659794,
+            14.66343182748391,
+            2.39917362328763e-06,
+            3.8583544323222536e-07
+          ],
+          "boundary_step_dbfs": -45.69
+        },
+        "mp3": {
+          "path": "brake-loop-medium.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 24868,
+          "sha256": "1c48104daea4330e20aa174a153e0a283d77ebc7a5a31a3056c3a593048d97dd",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.01,
+          "true_peak_dbtp": -6.72,
+          "oversampled_peak_dbfs": -6.721,
+          "spectrum_energy_percent": [
+            3.7670430616143755,
+            45.473512091423174,
+            36.07539455550649,
+            14.684048798609593,
+            1.4814659346697994e-06,
+            1.1380392539067013e-08
+          ],
+          "boundary_step_dbfs": -73.94
+        }
+      }
+    },
+    {
+      "id": "brake-loop-hard",
+      "label_he": "בלימה חזקה",
+      "duration_seconds": 2.0,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 10,
+      "loop": true,
+      "loop_start_seconds": 0,
+      "loop_end_seconds": 2.0,
+      "recommended_gain_db": -6,
+      "recommended_gain_linear": 0.501187,
+      "exclusive_group": "brake",
+      "max_voices": 1,
+      "cooldown_ms": 0,
+      "seed": 20261116,
+      "files": {
+        "ogg": {
+          "path": "brake-loop-hard.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 16491,
+          "sha256": "7aa1d86620ced8f095dbdd65ee223d5c7dad4451b3eea008c70b4f22a80f3f2d",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.02,
+          "true_peak_dbtp": -5.78,
+          "oversampled_peak_dbfs": -5.778,
+          "spectrum_energy_percent": [
+            3.3001428395505723,
+            43.21042904737781,
+            36.40970321616195,
+            17.079721456078,
+            3.329468675078094e-06,
+            1.1136196033626263e-07
+          ],
+          "boundary_step_dbfs": -49.62
+        },
+        "mp3": {
+          "path": "brake-loop-hard.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 24866,
+          "sha256": "3f436ca55639902d9f3792ac67899c92d01d6f9b0f4d8a692f6b3051520b5ed9",
+          "decoded_samples": 96000,
+          "decoded_duration_seconds": 2.0,
+          "integrated_lufs": -16.02,
+          "true_peak_dbtp": -6.17,
+          "oversampled_peak_dbfs": -6.167,
+          "spectrum_energy_percent": [
+            3.316543618702982,
+            43.08063734078112,
+            36.412353502862665,
+            17.190463840849674,
+            1.6858018422067848e-06,
+            1.1001453254964301e-08
+          ],
+          "boundary_step_dbfs": -78.65
+        }
+      }
+    },
+    {
+      "id": "tyre-squeal-corner",
+      "label_he": "חריקת צמיגים בפנייה",
+      "duration_seconds": 0.9,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 35,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -8,
+      "recommended_gain_linear": 0.398107,
+      "exclusive_group": null,
+      "max_voices": 2,
+      "cooldown_ms": 120,
+      "seed": 20261117,
+      "files": {
+        "ogg": {
+          "path": "tyre-squeal-corner.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 7791,
+          "sha256": "424ff0ba7d9fb452ea675c525e8703d2ecf1604fa5cfcbde78e154f6b702eb23",
+          "decoded_samples": 43200,
+          "decoded_duration_seconds": 0.9,
+          "integrated_lufs": -15.98,
+          "true_peak_dbtp": -7.0,
+          "oversampled_peak_dbfs": -6.998,
+          "spectrum_energy_percent": [
+            3.4476906315095768,
+            33.31263235872596,
+            45.78900258332433,
+            17.450669163527273,
+            5.2604557015079885e-06,
+            2.4571023559070072e-09
+          ],
+          "boundary_step_dbfs": -71.79
+        },
+        "mp3": {
+          "path": "tyre-squeal-corner.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 11621,
+          "sha256": "9cf522d80edaef966f20dd7a2452fb194fa9a444cd7f4584a1d82696d7d2f1db",
+          "decoded_samples": 43200,
+          "decoded_duration_seconds": 0.9,
+          "integrated_lufs": -16.02,
+          "true_peak_dbtp": -7.07,
+          "oversampled_peak_dbfs": -7.062,
+          "spectrum_energy_percent": [
+            3.4596712375668757,
+            33.532555575004984,
+            45.37225928352596,
+            17.63551154277794,
+            2.3503212408582326e-06,
+            1.0802246548591867e-08
+          ],
+          "boundary_step_dbfs": -99.58
+        }
+      }
+    },
+    {
+      "id": "car-bump-hard",
+      "label_he": "התנגשות חזקה וריקושט",
+      "duration_seconds": 0.4,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 35,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -5,
+      "recommended_gain_linear": 0.562341,
+      "exclusive_group": null,
+      "max_voices": 2,
+      "cooldown_ms": 120,
+      "seed": 20261118,
+      "files": {
+        "ogg": {
+          "path": "car-bump-hard.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 3922,
+          "sha256": "8136b7368ff0720c70215376a75d7b924ce0355acda1619615c033b044805681",
+          "decoded_samples": 19200,
+          "decoded_duration_seconds": 0.4,
+          "integrated_lufs": -15.95,
+          "true_peak_dbtp": -2.27,
+          "oversampled_peak_dbfs": -2.262,
+          "spectrum_energy_percent": [
+            83.4813966165178,
+            4.784149261050821,
+            6.235118890543528,
+            5.499295485439807,
+            3.97427842763401e-05,
+            3.663582586255322e-09
+          ],
+          "boundary_step_dbfs": -70.34
+        },
+        "mp3": {
+          "path": "car-bump-hard.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 5568,
+          "sha256": "5e815ad18f3f9e9eec699bbdc8c1517820a49dc4cc04e67af0b5be834878fc22",
+          "decoded_samples": 19200,
+          "decoded_duration_seconds": 0.4,
+          "integrated_lufs": -15.95,
+          "true_peak_dbtp": -2.7,
+          "oversampled_peak_dbfs": -2.696,
+          "spectrum_energy_percent": [
+            83.50453360665806,
+            4.782061553704523,
+            6.272147295379447,
+            5.441251931101085,
+            5.601957128751355e-06,
+            1.1199592265387966e-08
+          ],
+          "boundary_step_dbfs": -74.6
+        }
+      }
+    },
+    {
+      "id": "car-bump-soft",
+      "label_he": "התנגשות קלה וריקושט",
+      "duration_seconds": 0.4,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 35,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -10,
+      "recommended_gain_linear": 0.316228,
+      "exclusive_group": null,
+      "max_voices": 2,
+      "cooldown_ms": 120,
+      "seed": 20261119,
+      "files": {
+        "ogg": {
+          "path": "car-bump-soft.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 3681,
+          "sha256": "f749b5d2eae445efbde8821c5b77c5a1fc197dacefd82bc9bf19c21e59bb56bf",
+          "decoded_samples": 19200,
+          "decoded_duration_seconds": 0.4,
+          "integrated_lufs": -16.05,
+          "true_peak_dbtp": -2.87,
+          "oversampled_peak_dbfs": -2.868,
+          "spectrum_energy_percent": [
+            93.68192938077341,
+            2.896325321614192,
+            3.120011396686972,
+            0.3017336868689817,
+            1.4871361706197513e-07,
+            6.533974461264424e-08
+          ],
+          "boundary_step_dbfs": -57.34
+        },
+        "mp3": {
+          "path": "car-bump-soft.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 5568,
+          "sha256": "04f22fc982a72d6d0fca5787d278cefffbb0850ecae65f8e24fe5c0bea215eeb",
+          "decoded_samples": 19200,
+          "decoded_duration_seconds": 0.4,
+          "integrated_lufs": -15.95,
+          "true_peak_dbtp": -2.88,
+          "oversampled_peak_dbfs": -2.871,
+          "spectrum_energy_percent": [
+            93.74238022435645,
+            2.8475368346844623,
+            3.1166694803322033,
+            0.29341339926920845,
+            5.172547410507527e-08,
+            9.632198471912518e-09
+          ],
+          "boundary_step_dbfs": -85.43
+        }
+      }
+    },
+    {
+      "id": "side-scrape",
+      "label_he": "שפשוף צד ברכב",
+      "duration_seconds": 0.6,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 35,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -10,
+      "recommended_gain_linear": 0.316228,
+      "exclusive_group": null,
+      "max_voices": 2,
+      "cooldown_ms": 120,
+      "seed": 20261120,
+      "files": {
+        "ogg": {
+          "path": "side-scrape.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 5793,
+          "sha256": "6b32fbacc55021e54d9bb5e6279f81768f998816211c669c87a89473bc1ea88d",
+          "decoded_samples": 28800,
+          "decoded_duration_seconds": 0.6,
+          "integrated_lufs": -16.04,
+          "true_peak_dbtp": -6.85,
+          "oversampled_peak_dbfs": -6.846,
+          "spectrum_energy_percent": [
+            1.8603935934415137,
+            29.131617507800776,
+            34.885024200218226,
+            34.12291559484567,
+            4.910277892625431e-05,
+            9.149144107940377e-10
+          ],
+          "boundary_step_dbfs": -81.75
+        },
+        "mp3": {
+          "path": "side-scrape.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 7870,
+          "sha256": "7d581c2626e64e64710a17d19437bd67e9b11aacdffc7247afca0de844c3a2ad",
+          "decoded_samples": 28800,
+          "decoded_duration_seconds": 0.6,
+          "integrated_lufs": -16.04,
+          "true_peak_dbtp": -6.7,
+          "oversampled_peak_dbfs": -6.689,
+          "spectrum_energy_percent": [
+            1.8604082094234524,
+            29.163387060581304,
+            34.786929161643705,
+            34.18925971954903,
+            1.5838019274507978e-05,
+            1.078305603854405e-08
+          ],
+          "boundary_step_dbfs": -93.83
+        }
+      }
+    },
+    {
+      "id": "rubber-skid",
+      "label_he": "החלקת גומי על דשא",
+      "duration_seconds": 0.8,
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "attack_ms": 10,
+      "release_ms": 35,
+      "loop": false,
+      "loop_start_seconds": null,
+      "loop_end_seconds": null,
+      "recommended_gain_db": -11,
+      "recommended_gain_linear": 0.281838,
+      "exclusive_group": null,
+      "max_voices": 2,
+      "cooldown_ms": 120,
+      "seed": 20261121,
+      "files": {
+        "ogg": {
+          "path": "rubber-skid.ogg",
+          "mime": "audio/ogg",
+          "codec": "opus",
+          "bytes": 7352,
+          "sha256": "bab5fd3a5955f8698f67f9880050ae55465cab4d8bc33a00cbf214fd142e7bc0",
+          "decoded_samples": 38400,
+          "decoded_duration_seconds": 0.8,
+          "integrated_lufs": -16.07,
+          "true_peak_dbtp": -5.95,
+          "oversampled_peak_dbfs": -5.945,
+          "spectrum_energy_percent": [
+            24.299909154696987,
+            59.05897456311347,
+            14.640653763000511,
+            2.000462167559749,
+            3.4481360687001357e-07,
+            6.815517451452254e-09
+          ],
+          "boundary_step_dbfs": -66.47
+        },
+        "mp3": {
+          "path": "rubber-skid.mp3",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bytes": 10462,
+          "sha256": "1aebe9406bdbe4112b36202708a714e48ab28c674e2e4ab701f76ba6eb8f8f20",
+          "decoded_samples": 38400,
+          "decoded_duration_seconds": 0.8,
+          "integrated_lufs": -15.99,
+          "true_peak_dbtp": -6.29,
+          "oversampled_peak_dbfs": -6.285,
+          "spectrum_energy_percent": [
+            24.240046941287428,
+            59.35478421691131,
+            14.407793273718385,
+            1.9973750622370492,
+            4.948887612158318e-07,
+            1.0957056753551655e-08
+          ],
+          "boundary_step_dbfs": -98.1
+        }
+      }
+    }
+  ]
+}

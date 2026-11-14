@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="שישה עולמות מקוריים למשחק סקי, שלושים מסלולים, סגנון low poly חם.">
+  <title>מסע בין הפסגות — שישה עולמות סקי</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <header class="page-head">
+      <div class="identity"><span class="mountain-mark" aria-hidden="true"></span><span>מסע בין הפסגות <small>ספריית עולמות · 01</small></span></div>
+      <a class="report-link" href="REPORT.md">דוח הנכסים <span class="external-arrow" aria-hidden="true"></span></a>
+    </header>
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow">ליגה קטנה. הרפתקה גדולה.</p><h1 id="page-title">כל חמישה שלבים,<br>עולם חדש.</h1></div>
+      <div class="intro-side"><p>מהשלג הרך ביער ועד הפסגה שמעל העננים.<br>שישה נושאים באותו סגנון חם, פשוט ומלא דמיון.</p><div class="summary"><span><b>06</b> עולמות</span><span><b>30</b> שלבים</span><span><b>800</b> תקרת משולשים למודל</span></div></div>
+    </section>
+    <nav id="theme-nav" class="theme-nav" aria-label="בחירת עולם"></nav>
+    <section class="world" aria-labelledby="world-title">
+      <div class="world-top"><div><p id="world-range" class="eyebrow">שלבים 1–5</p><h2 id="world-title">יער האורנים</h2><p id="world-subtitle"></p></div><div id="palette" class="palette" aria-label="צבעי העולם"></div></div>
+      <div class="viewport" id="viewport">
+        <canvas id="scene" aria-label="תצוגת תלת ממד של המסלול מאחורי הגולש"></canvas>
+        <div class="view-note" id="view-note">מבט מאחורי הגולש</div>
+        <div class="scene-caption" aria-hidden="true"><span id="scene-number">01</span><span>ההרפתקה מתחילה כאן</span></div>
+        <div id="loading" class="loading" role="status">מכינים את השלג…</div>
+      </div>
+      <div class="world-bottom">
+        <div class="stage-control"><span id="stage-label">שלב</span><div id="stage-nav" aria-labelledby="stage-label"></div></div>
+        <div class="view-controls"><button id="motion" type="button" aria-pressed="false">הפעלת חלקיקים</button><button id="mode" type="button" aria-pressed="false">בדיקת מודל</button></div>
+      </div>
+      <div id="inspector" class="inspector" hidden><label for="asset-select">מודל</label><select id="asset-select"></select><a id="asset-download" download>הורדת GLB</a><output id="asset-stats"></output></div>
+      <div class="metrics" aria-label="תקציב גאומטריה"><div><strong id="scene-tris">—</strong><span>משולשים בסצנה</span></div><div><strong id="max-tris">—</strong><span>המודל הכבד ביותר / 800</span></div><div><strong id="model-count">—</strong><span>מודלים בעולם הזה</span></div><p id="status" role="status">טוענים נכסים מקומיים</p></div>
+    </section>
+    <section class="collection" aria-labelledby="collection-title"><div class="section-title"><h2 id="collection-title">שש תחנות בדרך למעלה</h2><span>אותם דגלים. אור אחר בכל עולם.</span></div><div class="cards" id="cards"></div></section>
+    <section class="materials" aria-labelledby="materials-title"><div class="section-title"><h2 id="materials-title">מתקרבים לפרטים</h2><span>משטחים מחזוריים · חלקיקים שקופים</span></div><div id="swatches" class="swatches"></div></section>
+    <footer><p>נכסים מקוריים · CC0 · בלי סימני מסחר ובלי כיתוב בנכסים</p><div><a href="LICENSES.md">מקורות ורישיונות</a><a href="manifest.json">מפרט נכסים</a><a href="levels.json">30 המסלולים</a></div></footer>
+  </main>
+  <noscript><p>יש להפעיל JavaScript כדי להציג את המודלים. כל קובצי המקור זמינים במפרט הנכסים.</p></noscript>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

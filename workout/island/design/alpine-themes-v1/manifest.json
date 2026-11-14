@@ -1,0 +1,1551 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "-Z",
+  "style": "warm low poly / soft matte / coral and teal flags",
+  "integration": "design assets only; no gameplay code changed",
+  "modelTriangleLimit": 800,
+  "textureColorSpace": "sRGB",
+  "themes": [
+    {
+      "id": "01-pine",
+      "name": "יער האורנים",
+      "subtitle": "שלג רך ושמש בין העצים",
+      "levelRange": [
+        1,
+        5
+      ],
+      "palette": {
+        "snow": "#f4f1df",
+        "ground": "#c6dbd6",
+        "rock": "#7f9b90",
+        "accent": "#e8ba77",
+        "fog": "#d7e4d9",
+        "sky": [
+          "#78bccc",
+          "#fff0cc"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/01-pine/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/01-pine/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/01-pine/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/01-pine/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/01-pine/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/01-pine/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/01-pine/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/01-pine/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/01-pine/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "pine-tall",
+        "pine-round",
+        "pine-young"
+      ],
+      "models": {
+        "pine-tall": {
+          "path": "themes/01-pine/models/pine-tall.glb",
+          "triangles": 108,
+          "bytes": 15196,
+          "bounds": {
+            "min": [
+              -1.55,
+              0.0,
+              -1.55
+            ],
+            "max": [
+              1.55,
+              5.1065,
+              1.55
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "pine-round": {
+          "path": "themes/01-pine/models/pine-round.glb",
+          "triangles": 108,
+          "bytes": 15192,
+          "bounds": {
+            "min": [
+              -1.65,
+              0.0,
+              -1.65
+            ],
+            "max": [
+              1.65,
+              3.7576,
+              1.65
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "pine-young": {
+          "path": "themes/01-pine/models/pine-young.glb",
+          "triangles": 108,
+          "bytes": 15204,
+          "bounds": {
+            "min": [
+              -1.05,
+              0.0,
+              -1.05
+            ],
+            "max": [
+              1.05,
+              2.6978,
+              1.05
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/01-pine/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/01-pine/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/01-pine/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4824,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/01-pine/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7496,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/01-pine/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4180,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/01-pine/effects.json",
+      "preview": "previews/01-pine.png"
+    },
+    {
+      "id": "02-ice",
+      "name": "מערת הקרח",
+      "subtitle": "קשתות כחולות ונצנוץ שקט",
+      "levelRange": [
+        6,
+        10
+      ],
+      "palette": {
+        "snow": "#e2f4f4",
+        "ground": "#7ac1db",
+        "rock": "#5094c0",
+        "accent": "#c8e9f1",
+        "fog": "#a8d4e3",
+        "sky": [
+          "#244c82",
+          "#b8edf0"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/02-ice/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/02-ice/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/02-ice/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/02-ice/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/02-ice/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/02-ice/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/02-ice/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/02-ice/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/02-ice/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "ice-cluster",
+        "ice-arch",
+        "ice-spire"
+      ],
+      "models": {
+        "ice-cluster": {
+          "path": "themes/02-ice/models/ice-cluster.glb",
+          "triangles": 128,
+          "bytes": 15352,
+          "bounds": {
+            "min": [
+              -1.2898,
+              0.0,
+              -1.0686
+            ],
+            "max": [
+              1.1293,
+              3.5,
+              0.6501
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ice-arch": {
+          "path": "themes/02-ice/models/ice-arch.glb",
+          "triangles": 216,
+          "bytes": 23756,
+          "bounds": {
+            "min": [
+              -6.3,
+              0.0,
+              -0.78
+            ],
+            "max": [
+              6.3,
+              6.8,
+              0.7794
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ice-spire": {
+          "path": "themes/02-ice/models/ice-spire.glb",
+          "triangles": 96,
+          "bytes": 12276,
+          "bounds": {
+            "min": [
+              -1.2898,
+              0.0,
+              -0.6467
+            ],
+            "max": [
+              1.1293,
+              4.55,
+              0.6501
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/02-ice/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/02-ice/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/02-ice/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4824,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/02-ice/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7496,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/02-ice/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4180,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/02-ice/effects.json",
+      "preview": "previews/02-ice.png"
+    },
+    {
+      "id": "03-volcano",
+      "name": "ההר הזוהר",
+      "subtitle": "סלעים כהים ושלג מפויח",
+      "levelRange": [
+        11,
+        15
+      ],
+      "palette": {
+        "snow": "#dddde2",
+        "ground": "#9d99ac",
+        "rock": "#555361",
+        "accent": "#efbc7c",
+        "fog": "#b9aab8",
+        "sky": [
+          "#827e9b",
+          "#f4d1b2"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/03-volcano/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/03-volcano/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/03-volcano/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/03-volcano/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/03-volcano/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/03-volcano/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/03-volcano/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/03-volcano/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/03-volcano/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "basalt-stack",
+        "soot-boulder",
+        "glow-stones"
+      ],
+      "models": {
+        "basalt-stack": {
+          "path": "themes/03-volcano/models/basalt-stack.glb",
+          "triangles": 76,
+          "bytes": 10432,
+          "bounds": {
+            "min": [
+              -1.8251,
+              0.0,
+              -1.5631
+            ],
+            "max": [
+              1.6175,
+              1.8,
+              1.2398
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "soot-boulder": {
+          "path": "themes/03-volcano/models/soot-boulder.glb",
+          "triangles": 76,
+          "bytes": 10436,
+          "bounds": {
+            "min": [
+              -1.9601,
+              0.0,
+              -1.7299
+            ],
+            "max": [
+              2.3198,
+              1.3,
+              1.5389
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "glow-stones": {
+          "path": "themes/03-volcano/models/glow-stones.glb",
+          "triangles": 76,
+          "bytes": 10432,
+          "bounds": {
+            "min": [
+              -1.2568,
+              0.0,
+              -1.0506
+            ],
+            "max": [
+              1.4453,
+              3.4,
+              0.908
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/03-volcano/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/03-volcano/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/03-volcano/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4832,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/03-volcano/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7500,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/03-volcano/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4180,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/03-volcano/effects.json",
+      "preview": "previews/03-volcano.png"
+    },
+    {
+      "id": "04-aurora",
+      "name": "ליל הזוהר",
+      "subtitle": "כוכבים ואורורה מעל השלג",
+      "levelRange": [
+        16,
+        20
+      ],
+      "palette": {
+        "snow": "#d9e4ec",
+        "ground": "#859dad",
+        "rock": "#63758e",
+        "accent": "#a7ded1",
+        "fog": "#758fa6",
+        "sky": [
+          "#172943",
+          "#7b9eae"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/04-aurora/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/04-aurora/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/04-aurora/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/04-aurora/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/04-aurora/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/04-aurora/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/04-aurora/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/04-aurora/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/04-aurora/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "night-pine",
+        "frost-boulder",
+        "moon-crystal"
+      ],
+      "models": {
+        "night-pine": {
+          "path": "themes/04-aurora/models/night-pine.glb",
+          "triangles": 108,
+          "bytes": 15200,
+          "bounds": {
+            "min": [
+              -1.55,
+              0.0,
+              -1.55
+            ],
+            "max": [
+              1.55,
+              5.1065,
+              1.55
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "frost-boulder": {
+          "path": "themes/04-aurora/models/frost-boulder.glb",
+          "triangles": 52,
+          "bytes": 7144,
+          "bounds": {
+            "min": [
+              -2.2055,
+              0.0,
+              -1.6689
+            ],
+            "max": [
+              2.0162,
+              1.3,
+              1.7826
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "moon-crystal": {
+          "path": "themes/04-aurora/models/moon-crystal.glb",
+          "triangles": 96,
+          "bytes": 12284,
+          "bounds": {
+            "min": [
+              -1.2898,
+              0.0,
+              -0.6467
+            ],
+            "max": [
+              1.1293,
+              4.55,
+              0.6501
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/04-aurora/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/04-aurora/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14968,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/04-aurora/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4824,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/04-aurora/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7496,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/04-aurora/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4176,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/04-aurora/effects.json",
+      "preview": "previews/04-aurora.png"
+    },
+    {
+      "id": "05-village",
+      "name": "הכפר האלפיני",
+      "subtitle": "בקתות עץ וחבלים בין האורנים",
+      "levelRange": [
+        21,
+        25
+      ],
+      "palette": {
+        "snow": "#f6efdc",
+        "ground": "#d9d9c9",
+        "rock": "#ab9d8e",
+        "accent": "#dca87b",
+        "fog": "#e9dfcd",
+        "sky": [
+          "#8bc9ce",
+          "#ffe9c9"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/05-village/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/05-village/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/05-village/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/05-village/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/05-village/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/05-village/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/05-village/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/05-village/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/05-village/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "village-pine",
+        "garden-boulder",
+        "snow-fir"
+      ],
+      "models": {
+        "village-pine": {
+          "path": "themes/05-village/models/village-pine.glb",
+          "triangles": 108,
+          "bytes": 15204,
+          "bounds": {
+            "min": [
+              -1.55,
+              0.0,
+              -1.55
+            ],
+            "max": [
+              1.55,
+              5.1065,
+              1.55
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "garden-boulder": {
+          "path": "themes/05-village/models/garden-boulder.glb",
+          "triangles": 52,
+          "bytes": 7148,
+          "bounds": {
+            "min": [
+              -1.7412,
+              0.0,
+              -1.6039
+            ],
+            "max": [
+              2.1907,
+              1.3,
+              1.4332
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "snow-fir": {
+          "path": "themes/05-village/models/snow-fir.glb",
+          "triangles": 108,
+          "bytes": 15200,
+          "bounds": {
+            "min": [
+              -1.05,
+              0.0,
+              -1.05
+            ],
+            "max": [
+              1.05,
+              2.6978,
+              1.05
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/05-village/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/05-village/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/05-village/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4828,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/05-village/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7500,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/05-village/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4180,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "chalet": {
+          "path": "themes/05-village/models/chalet.glb",
+          "triangles": 260,
+          "bytes": 32496,
+          "bounds": {
+            "min": [
+              -2.65,
+              0.0,
+              -2.25
+            ],
+            "max": [
+              2.65,
+              4.2,
+              2.25
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "rope-fence": {
+          "path": "themes/05-village/models/rope-fence.glb",
+          "triangles": 400,
+          "bytes": 41420,
+          "bounds": {
+            "min": [
+              -2.6171,
+              0.0,
+              -0.1267
+            ],
+            "max": [
+              2.63,
+              1.22,
+              0.1267
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/05-village/effects.json",
+      "preview": "previews/05-village.png"
+    },
+    {
+      "id": "06-summit",
+      "name": "פסגת העננים",
+      "subtitle": "הר עצום, עננים ואוויר בהיר",
+      "levelRange": [
+        26,
+        30
+      ],
+      "palette": {
+        "snow": "#f1f3eb",
+        "ground": "#b9cbd4",
+        "rock": "#829aaa",
+        "accent": "#edca8e",
+        "fog": "#cbdde4",
+        "sky": [
+          "#609fbf",
+          "#e5eef0"
+        ]
+      },
+      "textures": {
+        "snow": {
+          "path": "themes/06-summit/textures/snow.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-a": {
+          "path": "themes/06-summit/textures/ground-a.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "ground-b": {
+          "path": "themes/06-summit/textures/ground-b.png",
+          "size": [
+            1024,
+            1024
+          ],
+          "seamless": true
+        },
+        "sky": {
+          "path": "themes/06-summit/textures/sky.png",
+          "size": [
+            2048,
+            1024
+          ],
+          "seamless": false
+        },
+        "snowflake": {
+          "path": "themes/06-summit/textures/snowflake.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "sparkle": {
+          "path": "themes/06-summit/textures/sparkle.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "powder": {
+          "path": "themes/06-summit/textures/powder.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "glow": {
+          "path": "themes/06-summit/textures/glow.png",
+          "size": [
+            256,
+            256
+          ],
+          "seamless": false
+        },
+        "particles": {
+          "path": "themes/06-summit/textures/particles.png",
+          "size": [
+            1024,
+            256
+          ],
+          "seamless": false
+        }
+      },
+      "environment": [
+        "granite-slab",
+        "snow-spire",
+        "cloud-boulder"
+      ],
+      "models": {
+        "granite-slab": {
+          "path": "themes/06-summit/models/granite-slab.glb",
+          "triangles": 52,
+          "bytes": 7144,
+          "bounds": {
+            "min": [
+              -1.6699,
+              0.0,
+              -1.3635
+            ],
+            "max": [
+              2.0333,
+              1.8,
+              1.353
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "snow-spire": {
+          "path": "themes/06-summit/models/snow-spire.glb",
+          "triangles": 52,
+          "bytes": 7140,
+          "bounds": {
+            "min": [
+              -1.9151,
+              0.0,
+              -1.4952
+            ],
+            "max": [
+              1.8764,
+              1.3,
+              1.5982
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "cloud-boulder": {
+          "path": "themes/06-summit/models/cloud-boulder.glb",
+          "triangles": 52,
+          "bytes": 7144,
+          "bounds": {
+            "min": [
+              -1.2531,
+              0.0,
+              -1.1209
+            ],
+            "max": [
+              1.2305,
+              3.4,
+              1.0178
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-coral": {
+          "path": "themes/06-summit/models/gate-coral.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "gate-teal": {
+          "path": "themes/06-summit/models/gate-teal.glb",
+          "triangles": 116,
+          "bytes": 14972,
+          "bounds": {
+            "min": [
+              -3.4,
+              0.0,
+              -0.2
+            ],
+            "max": [
+              3.4,
+              2.8,
+              0.2
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "ramp": {
+          "path": "themes/06-summit/models/ramp.glb",
+          "triangles": 12,
+          "bytes": 4824,
+          "bounds": {
+            "min": [
+              -1.6,
+              0.0,
+              -2.3
+            ],
+            "max": [
+              1.6,
+              1.058,
+              2.3
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "arrow-sign": {
+          "path": "themes/06-summit/models/arrow-sign.glb",
+          "triangles": 48,
+          "bytes": 7496,
+          "bounds": {
+            "min": [
+              -0.85,
+              0.0,
+              -0.12
+            ],
+            "max": [
+              0.85,
+              2.57,
+              0.12
+            ]
+          },
+          "license": "CC0-1.0"
+        },
+        "terrain-tile": {
+          "path": "themes/06-summit/models/terrain-tile.glb",
+          "triangles": 32,
+          "bytes": 4180,
+          "bounds": {
+            "min": [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            "max": [
+              4.0,
+              0.0,
+              4.0
+            ]
+          },
+          "license": "CC0-1.0"
+        }
+      },
+      "effects": "themes/06-summit/effects.json",
+      "preview": "previews/06-summit.png"
+    }
+  ],
+  "levels": "levels.json",
+  "referenceSkier": "shared/reference-skier.glb",
+  "referenceSkierInfo": {
+    "path": "shared/reference-skier.glb",
+    "triangles": 392,
+    "bytes": 45032,
+    "bounds": {
+      "min": [
+        -0.5829,
+        0.01,
+        -0.95
+      ],
+      "max": [
+        0.5815,
+        1.42,
+        0.95
+      ]
+    },
+    "license": "CC0-1.0"
+  }
+}

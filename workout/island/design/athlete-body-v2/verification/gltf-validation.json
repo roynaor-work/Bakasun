@@ -1,0 +1,77 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "results": [
+    {
+      "model": "soccer",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 1,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "model": "guard",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 1,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "model": "wing",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 1,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "model": "center",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 1,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "URI_GLB",
+            "message": "URI is used in GLB container.",
+            "severity": 2,
+            "pointer": "/images/0/uri"
+          }
+        ],
+        "truncated": false
+      }
+    }
+  ]
+}

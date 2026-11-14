@@ -1,0 +1,37 @@
+{
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "assetCommit": "da77552117b6765590b314e40a23d3fad5bea1ae",
+  "existingCodeAndTestsModified": false,
+  "fullRun": {
+    "command": "node --test tests/*.mjs",
+    "exitCode": 1,
+    "tests": 4082,
+    "passed": 4017,
+    "failed": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "durationMs": 1038561.021409,
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Playwright default Chromium executable is not installed in the environment. The existing test starts an HTTP server before launch and leaves it open on launch failure; that idle worker was terminated after its failure to let the suite finish."
+    }
+  },
+  "targetedRetry": {
+    "file": "tests/workout-royiki.test.mjs",
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/racing-pit-browsers node --test tests/workout-royiki.test.mjs",
+    "setup": "Temporary Playwright browser directory points to the installed /usr/bin/chromium. No repository or test file is changed.",
+    "exitCode": 0,
+    "tests": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "durationMs": 24309.301581
+  },
+  "result": {
+    "allExecutedTestsHaveAPassingResult": true,
+    "remainingFailures": 0,
+    "note": "The original full-run exit code is retained above. The single environment failure was resolved and the entire affected file passed on retry. Four retry unit cases were already included in the full-run pass count."
+  }
+}

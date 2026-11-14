@@ -9,6 +9,7 @@ import {createSoccer} from '../minigames/soccer.mjs';
 import {applySoccerTeams} from '../minigames/soccer-teams.mjs';
 import {applySoccerPitchV23,applySoccerControlV23} from '../minigames/soccer-v23.mjs';
 import {expandSoccerConfig} from '../minigames/soccer-squad.mjs';
+import {applySoccerFull} from '../minigames/soccer-full.mjs';
 import {hasShootingLane,selectTeamPass} from '../minigames/soccer-tactics.mjs';
 
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
@@ -75,14 +76,17 @@ function anchor(p,s,c){
 const makeTeam=()=>({
   possessionTicks:0,passes:0,passDone:0,passOther:0,passIntercepted:0,passOut:0,passLoft:0,
   shots:0,shotsOnTarget:0,goals:0,shotDistance:0,tackles:0,turnoversLoose:0,restarts:{throwIn:0,corner:0,goalKick:0,freeKick:0,penalty:0},fouls:0,slides:0,slideWins:0,through:0,throughDone:0,
+  lineOwn:0,lineOwnN:0,lineMid:0,lineMidN:0,lineAtt:0,lineAttN:0,
   anchorSum:0,anchorN:0,farFromRole:0,pressSum:0,pressN:0,multiPress:0,carrierPressureSum:0,carrierPressureN:0,
   headers:0,clearances:0,posts:0,saves:0,heavy:0,shotsCtrl:0,shotsMate:0,shotsFar:0,spells:0,spellTicks:0,spellPasses:0,spellBuilt:0,stillN:0,stillOff:0,offN:0,lenSum:0,widSum:0,shapeN:0,crowdN:0,crowdPairs:0,coverSum:0,coverN:0,unmarked:0,unmarkedN:0
 });
 const blankInput=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
 /** bot 'idle' = no input at all; with help (stage rows forced to help:true, difficulty easy) the model's own
  * beginner helper drives the selected player, so both sides are pure model AI. */
-export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion}){
-  if(teams)config=applySoccerTeams(config,teams,tune||{});
+export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion,full}){
+  // Soccer full (soccer-full.mjs): --full 442|433 is the session's 11 against 11 (it brings its own teams preset; --pitch/--control v23 still apply).
+  if(full)config=applySoccerFull(config,{formation:String(full).replace(/-/g,'')==='433'?'4-3-3':'4-4-2'});
+  else if(teams)config=applySoccerTeams(config,teams,tune||{});
   // v23 markings (soccer-v23.mjs) exactly as the session applies them after the team preset; 'v22' (or absent) keeps the old pitch.
   if(pitch==='v23')config=applySoccerPitchV23(expandSoccerConfig(config),'v23');
   if(control==='v23')config=applySoccerControlV23(config,'v23');
@@ -206,6 +210,9 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
           let mnx=Infinity,mxx=-Infinity,mnz=Infinity,mxz=-Infinity;
           for(const q of mates){mnx=Math.min(mnx,q.x);mxx=Math.max(mxx,q.x);mnz=Math.min(mnz,q.z);mxz=Math.max(mxz,q.z);}
           T[t].lenSum+=mxx-mnx;T[t].widSum+=mxz-mnz;T[t].shapeN++;
+          // Full match evidence: the back line (four deepest outfield players, metres from the own goal line) by where the ball is (own / middle / far third).
+          {const depths=mates.map(q=>q.x*d+hx).sort((a,b)=>a-b).slice(0,4),line=depths.reduce((a,v)=>a+v,0)/Math.max(1,depths.length),u=(b.x*d+hx)/L;
+            if(u<1/3){T[t].lineOwn+=line;T[t].lineOwnN++;}else if(u<2/3){T[t].lineMid+=line;T[t].lineMidN++;}else{T[t].lineAtt+=line;T[t].lineAttN++;}}
           for(let i=0;i<mates.length;i++)for(let j=i+1;j<mates.length;j++){T[t].crowdN++;if(dist(mates[i],mates[j])<2.2)T[t].crowdPairs++;}
           if(owner&&owner.team===t){for(const q of mates){if(q.id===owner.id||(t===0&&q.id===cur.controlled))continue;T[t].offN++;if(Math.hypot(q.vx,q.vz)<.3)T[t].stillOff++;}}
           if(owner&&owner.team!==t){let side=0;for(const q of mates)if(q.x*d<b.x*d-.5)side++;T[t].coverSum+=side;T[t].coverN++;
@@ -230,6 +237,7 @@ export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel
     headers:t.headers,clearances:t.clearances,posts:t.posts,saves:t.saves,heavyTouches:t.heavy,
     shotsCtrl:t.shotsCtrl,shotsMate:t.shotsMate,shotsFar:t.shotsFar,conversion:t.shots?t.goals/t.shots:null,saveRate:(t.saves+o.goals)?t.saves/(t.saves+o.goals):null,saves:t.saves,conceded:o.goals,
     spells:t.spells,spellSeconds:t.spells?t.spellTicks*step/t.spells:null,passesPerSpell:t.spells?t.spellPasses/t.spells:null,builtSpells:t.spells?t.spellBuilt/t.spells:null,
+    lineOwn:t.lineOwnN?t.lineOwn/t.lineOwnN:null,lineMid:t.lineMidN?t.lineMid/t.lineMidN:null,lineAtt:t.lineAttN?t.lineAtt/t.lineAttN:null,
     stillOffBall:t.offN?t.stillOff/t.offN:null,teamLength:t.shapeN?t.lenSum/t.shapeN:null,teamWidth:t.shapeN?t.widSum/t.shapeN:null,crowd:t.crowdN?t.crowdPairs/t.crowdN:null,
     goalSideCover:t.coverN?t.coverSum/t.coverN:null,unmarkedThreat:t.unmarkedN?t.unmarked/t.unmarkedN:null
   };};

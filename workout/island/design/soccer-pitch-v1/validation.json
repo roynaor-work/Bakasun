@@ -1,0 +1,1047 @@
+{
+  "license": "CC0-1.0",
+  "date": "2026-11-13",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "measurementMethod": "Independent GLB binary accessor inspection, not just extras metadata",
+  "toleranceMetres": 1e-05,
+  "geometryChecks": [
+    {
+      "name": "ad_board.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        3256
+      ],
+      "expected": [
+        1179937895,
+        2,
+        3256
+      ],
+      "passed": true
+    },
+    {
+      "name": "ad_board.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "ad_board.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "ball.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        39956
+      ],
+      "expected": [
+        1179937895,
+        2,
+        39956
+      ],
+      "passed": true
+    },
+    {
+      "name": "ball.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "ball.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "bench.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        9944
+      ],
+      "expected": [
+        1179937895,
+        2,
+        9944
+      ],
+      "passed": true
+    },
+    {
+      "name": "bench.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "bench.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "corner_flag.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        4264
+      ],
+      "expected": [
+        1179937895,
+        2,
+        4264
+      ],
+      "passed": true
+    },
+    {
+      "name": "corner_flag.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "corner_flag.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "goal.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        20524
+      ],
+      "expected": [
+        1179937895,
+        2,
+        20524
+      ],
+      "passed": true
+    },
+    {
+      "name": "goal.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "goal.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "pitch.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        58132
+      ],
+      "expected": [
+        1179937895,
+        2,
+        58132
+      ],
+      "passed": true
+    },
+    {
+      "name": "pitch.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "pitch.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference_player.glb glTF 2 header",
+      "measured": [
+        1179937895,
+        2,
+        168788
+      ],
+      "expected": [
+        1179937895,
+        2,
+        168788
+      ],
+      "passed": true
+    },
+    {
+      "name": "reference_player.glb mesh compression extensions",
+      "measured": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "reference_player.glb single atlas",
+      "measured": [
+        "atlas.png"
+      ],
+      "expected": [
+        "atlas.png"
+      ],
+      "passed": true
+    },
+    {
+      "name": "pitch minimum",
+      "measured": [
+        -52.5,
+        0,
+        -34
+      ],
+      "expected": [
+        -52.5,
+        0,
+        -34
+      ],
+      "passed": true
+    },
+    {
+      "name": "pitch maximum",
+      "measured": [
+        52.5,
+        0.003000000026077032,
+        34
+      ],
+      "expected": [
+        52.5,
+        0.003,
+        34
+      ],
+      "passed": true
+    },
+    {
+      "name": "grass and lines are distinct nodes",
+      "measured": [
+        "grass",
+        "lines"
+      ],
+      "expected": [
+        "grass",
+        "lines"
+      ],
+      "passed": true
+    },
+    {
+      "name": "line material exists",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "all paint at 3 mm",
+      "measured": 2.6077032026783353e-11,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "halfway paint +/- 0.06",
+      "measured": [
+        true,
+        true
+      ],
+      "expected": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "penalty area -1: outside corners",
+      "measured": [
+        true,
+        true,
+        true
+      ],
+      "expected": [
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "goal area -1: outside corners",
+      "measured": [
+        true,
+        true,
+        true
+      ],
+      "expected": [
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "penalty spot -1",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "penalty arc -1: outside area",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "penalty arc -1: outer radius",
+      "measured": 9.150001525878906,
+      "expected": 9.15,
+      "passed": true
+    },
+    {
+      "name": "penalty arc -1: shared clip plane",
+      "measured": 36,
+      "expected": 36,
+      "passed": true
+    },
+    {
+      "name": "penalty area 1: outside corners",
+      "measured": [
+        true,
+        true,
+        true
+      ],
+      "expected": [
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "goal area 1: outside corners",
+      "measured": [
+        true,
+        true,
+        true
+      ],
+      "expected": [
+        true,
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "name": "penalty spot 1",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "penalty arc 1: outside area",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "penalty arc 1: outer radius",
+      "measured": 9.150001525878906,
+      "expected": 9.15,
+      "passed": true
+    },
+    {
+      "name": "penalty arc 1: shared clip plane",
+      "measured": 36,
+      "expected": 36,
+      "passed": true
+    },
+    {
+      "name": "kickoff point",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "centre circle outer radius",
+      "measured": 9.150000251723325,
+      "expected": 9.15,
+      "passed": true
+    },
+    {
+      "name": "centre circle inner radius",
+      "measured": 9.029999732971191,
+      "expected": 9.03,
+      "passed": true
+    },
+    {
+      "name": "corner -52.5,-34: outer radius",
+      "measured": 1.0000013919770343,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "corner -52.5,-34: inner radius",
+      "measured": 0.8799989245436991,
+      "expected": 0.88,
+      "passed": true
+    },
+    {
+      "name": "corner -52.5,34: outer radius",
+      "measured": 1.0000013919770343,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "corner -52.5,34: inner radius",
+      "measured": 0.8799989245436991,
+      "expected": 0.88,
+      "passed": true
+    },
+    {
+      "name": "corner 52.5,-34: outer radius",
+      "measured": 1.0000013919770343,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "corner 52.5,-34: inner radius",
+      "measured": 0.8799989245436991,
+      "expected": 0.88,
+      "passed": true
+    },
+    {
+      "name": "corner 52.5,34: outer radius",
+      "measured": 1.0000013919770343,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "name": "corner 52.5,34: inner radius",
+      "measured": 0.8799989245436991,
+      "expected": 0.88,
+      "passed": true
+    },
+    {
+      "name": "actual clear goal width",
+      "measured": 7.320000171661377,
+      "expected": 7.32,
+      "passed": true
+    },
+    {
+      "name": "actual underside crossbar",
+      "measured": 2.440000057220459,
+      "expected": 2.44,
+      "passed": true
+    },
+    {
+      "name": "actual post thickness",
+      "measured": 0.11999999731779099,
+      "expected": 0.12,
+      "passed": true
+    },
+    {
+      "name": "actual overall goal depth",
+      "measured": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "actual overall goal width",
+      "measured": 7.559999942779541,
+      "expected": 7.56,
+      "passed": true
+    },
+    {
+      "name": "actual overall goal height",
+      "measured": 2.559999942779541,
+      "expected": 2.56,
+      "passed": true
+    },
+    {
+      "name": "separate net node",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "net alpha mask",
+      "measured": "MASK",
+      "expected": "MASK",
+      "passed": true
+    },
+    {
+      "name": "net two-sided",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "net back plane",
+      "measured": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "name": "ball diameter XYZ",
+      "measured": [
+        0.2199999988079071,
+        0.2199999988079071,
+        0.2199999988079071
+      ],
+      "expected": [
+        0.22,
+        0.22,
+        0.22
+      ],
+      "passed": true
+    },
+    {
+      "name": "ball radial error",
+      "measured": 4.3507142610810234e-09,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "player height",
+      "measured": 1.75,
+      "expected": 1.75,
+      "passed": true
+    },
+    {
+      "name": "player feet at ground",
+      "measured": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "name": "flag height",
+      "measured": 1.600000023841858,
+      "expected": 1.6,
+      "passed": true
+    },
+    {
+      "name": "bench height",
+      "measured": 0.949999988079071,
+      "expected": 0.95,
+      "passed": true
+    },
+    {
+      "name": "bench seat top",
+      "measured": 0.44999998807907104,
+      "expected": 0.45,
+      "passed": true
+    },
+    {
+      "name": "ad board width",
+      "measured": 4,
+      "expected": 4,
+      "passed": true
+    },
+    {
+      "name": "atlas size",
+      "measured": [
+        1024,
+        1024
+      ],
+      "expected": [
+        1024,
+        1024
+      ],
+      "passed": true
+    },
+    {
+      "name": "unique triangle count",
+      "measured": 1716,
+      "expected": 1716,
+      "passed": true
+    },
+    {
+      "name": "full placed kit count",
+      "measured": 2286,
+      "expected": 2286,
+      "passed": true
+    },
+    {
+      "name": "full preview count including 1604 player and 2 apron",
+      "measured": 3892,
+      "expected": 3892,
+      "passed": true
+    },
+    {
+      "name": "full preview below 4000",
+      "measured": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "name": "pitch.glb manifest hash",
+      "measured": "b6ac63fb3d7e3141fdd9e70b8e03c6d0315665737acaa5412a3420ce064c9729",
+      "expected": "b6ac63fb3d7e3141fdd9e70b8e03c6d0315665737acaa5412a3420ce064c9729",
+      "passed": true
+    },
+    {
+      "name": "goal.glb manifest hash",
+      "measured": "05a0978a03b61dbc8339d576f539f69e9b120fc93d87b905fcf56cc3d980ed5a",
+      "expected": "05a0978a03b61dbc8339d576f539f69e9b120fc93d87b905fcf56cc3d980ed5a",
+      "passed": true
+    },
+    {
+      "name": "corner_flag.glb manifest hash",
+      "measured": "66a682ec4015b1963b9b6034d621f1e7d2c84de0f352c9a4393f5c3af4d599bf",
+      "expected": "66a682ec4015b1963b9b6034d621f1e7d2c84de0f352c9a4393f5c3af4d599bf",
+      "passed": true
+    },
+    {
+      "name": "bench.glb manifest hash",
+      "measured": "67827c8e8b552d7f7fe7c94ea81ee5fbfd0a02a704da6c380cfa518528a5f276",
+      "expected": "67827c8e8b552d7f7fe7c94ea81ee5fbfd0a02a704da6c380cfa518528a5f276",
+      "passed": true
+    },
+    {
+      "name": "ad_board.glb manifest hash",
+      "measured": "d2545aa28382fc72bf4aab3c1b18026fee597a65d21ca5233059ae27209ac621",
+      "expected": "d2545aa28382fc72bf4aab3c1b18026fee597a65d21ca5233059ae27209ac621",
+      "passed": true
+    },
+    {
+      "name": "ball.glb manifest hash",
+      "measured": "ecac1590b59a69dc07724a2ee256ee48e46291fcb1df75af351c16b6c2ebef04",
+      "expected": "ecac1590b59a69dc07724a2ee256ee48e46291fcb1df75af351c16b6c2ebef04",
+      "passed": true
+    },
+    {
+      "name": "reference_player.glb manifest hash",
+      "measured": "2add80d2a97e38e0be7300945839c53f4e8f9c7eff3b46903e1a326f276cdacf",
+      "expected": "2add80d2a97e38e0be7300945839c53f4e8f9c7eff3b46903e1a326f276cdacf",
+      "passed": true
+    },
+    {
+      "name": "atlas manifest hash",
+      "measured": "deeeaa9a405c05ce3b9b9d493d7a7f479fb92934be4a74f7b1a7f472858112f3",
+      "expected": "deeeaa9a405c05ce3b9b9d493d7a7f479fb92934be4a74f7b1a7f472858112f3",
+      "passed": true
+    }
+  ],
+  "assets": {
+    "ad_board.glb": {
+      "triangles": 14,
+      "bounds": {
+        "min": [
+          -2,
+          0,
+          -0.15000000596046448
+        ],
+        "max": [
+          2,
+          1,
+          0.1509999930858612
+        ]
+      }
+    },
+    "ball.glb": {
+      "triangles": 528,
+      "bounds": {
+        "min": [
+          -0.10999999940395355,
+          -0.10999999940395355,
+          -0.10999999940395355
+        ],
+        "max": [
+          0.10999999940395355,
+          0.10999999940395355,
+          0.10999999940395355
+        ]
+      }
+    },
+    "bench.glb": {
+      "triangles": 96,
+      "bounds": {
+        "min": [
+          -2,
+          0,
+          -0.3100000023841858
+        ],
+        "max": [
+          2,
+          0.949999988079071,
+          0.3449999988079071
+        ]
+      }
+    },
+    "corner_flag.glb": {
+      "triangles": 32,
+      "bounds": {
+        "min": [
+          -0.019999999552965164,
+          0,
+          -0.019999999552965164
+        ],
+        "max": [
+          0.4699999988079071,
+          1.600000023841858,
+          0.03999999910593033
+        ]
+      }
+    },
+    "goal.glb": {
+      "triangles": 280,
+      "bounds": {
+        "min": [
+          0,
+          0,
+          -3.7799999713897705
+        ],
+        "max": [
+          2,
+          2.559999942779541,
+          3.7799999713897705
+        ]
+      }
+    },
+    "pitch.glb": {
+      "triangles": 766,
+      "bounds": {
+        "min": [
+          -52.5,
+          0,
+          -34
+        ],
+        "max": [
+          52.5,
+          0.003000000026077032,
+          34
+        ]
+      }
+    },
+    "reference_player.glb": {
+      "triangles": 1604,
+      "bounds": {
+        "min": [
+          -0.25260910391807556,
+          0,
+          -0.2436128407716751
+        ],
+        "max": [
+          0.25260910391807556,
+          1.75,
+          0.2436128407716751
+        ]
+      }
+    }
+  },
+  "budget": {
+    "uniqueKit": 1716,
+    "fullPlacedKit": 2286,
+    "fullPreview": 3892,
+    "limit": 4000
+  },
+  "gltfValidator": {
+    "version": "2.0.0-dev.3.10",
+    "files": [
+      {
+        "file": "ad_board.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "ball.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "bench.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "corner_flag.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "goal.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "pitch.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      },
+      {
+        "file": "reference_player.glb",
+        "errors": 0,
+        "warnings": 0,
+        "infos": [
+          "URI_GLB"
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "engine": "Chromium / ANGLE SwiftShader",
+    "version": "151.0.7922.173",
+    "physicalDevice": false,
+    "records": [
+      {
+        "viewport": [
+          1440,
+          1000
+        ],
+        "mode": "desktop",
+        "initial": {
+          "ready": true,
+          "triangles": {
+            "kit": 2286,
+            "fullPreview": 3892,
+            "unique": 1716,
+            "limit": 4000
+          },
+          "playerHeight": 1.75,
+          "pitchBounds": {
+            "min": [
+              -52.5,
+              0,
+              -34
+            ],
+            "max": [
+              52.5,
+              0.003,
+              34
+            ]
+          },
+          "atlas": [
+            1024,
+            1024
+          ],
+          "view": "game",
+          "camera": {
+            "fov": 42,
+            "position": [
+              49.8,
+              7.042073441788362,
+              13.244213892883906
+            ],
+            "near": 0.1,
+            "far": 240
+          },
+          "netVisible": true,
+          "renderTriangles": 3226,
+          "textureCount": 1
+        },
+        "allFourViewsPassed": true,
+        "goalEnvelopeFullyInGameCamera": true,
+        "netTogglePassed": true,
+        "wireframePassed": true,
+        "noHorizontalOverflow": true,
+        "errors": [],
+        "httpFailures": [],
+        "externalRequests": [],
+        "loadedAssets": [
+          "ad_board.glb",
+          "ball.glb",
+          "bench.glb",
+          "corner_flag.glb",
+          "goal.glb",
+          "pitch.glb",
+          "reference_player.glb"
+        ],
+        "screenshots": [
+          "desktop-game.png",
+          "desktop-goal.png",
+          "desktop-overview.png",
+          "desktop-ball.png"
+        ]
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "mode": "portrait",
+        "initial": {
+          "ready": true,
+          "triangles": {
+            "kit": 2286,
+            "fullPreview": 3892,
+            "unique": 1716,
+            "limit": 4000
+          },
+          "playerHeight": 1.75,
+          "pitchBounds": {
+            "min": [
+              -52.5,
+              0,
+              -34
+            ],
+            "max": [
+              52.5,
+              0.003,
+              34
+            ]
+          },
+          "atlas": [
+            1024,
+            1024
+          ],
+          "view": "game",
+          "camera": {
+            "fov": 42,
+            "position": [
+              51.5,
+              13.498539803417325,
+              16.086933305498537
+            ],
+            "near": 0.1,
+            "far": 240
+          },
+          "netVisible": true,
+          "renderTriangles": 3180,
+          "textureCount": 1
+        },
+        "allFourViewsPassed": true,
+        "goalEnvelopeFullyInGameCamera": true,
+        "netTogglePassed": true,
+        "wireframePassed": true,
+        "noHorizontalOverflow": true,
+        "errors": [],
+        "httpFailures": [],
+        "externalRequests": [],
+        "loadedAssets": [
+          "ad_board.glb",
+          "ball.glb",
+          "bench.glb",
+          "corner_flag.glb",
+          "goal.glb",
+          "pitch.glb",
+          "reference_player.glb"
+        ],
+        "screenshots": [
+          "portrait-game.png",
+          "portrait-goal.png"
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "mode": "landscape",
+        "initial": {
+          "ready": true,
+          "triangles": {
+            "kit": 2286,
+            "fullPreview": 3892,
+            "unique": 1716,
+            "limit": 4000
+          },
+          "playerHeight": 1.75,
+          "pitchBounds": {
+            "min": [
+              -52.5,
+              0,
+              -34
+            ],
+            "max": [
+              52.5,
+              0.003,
+              34
+            ]
+          },
+          "atlas": [
+            1024,
+            1024
+          ],
+          "view": "game",
+          "camera": {
+            "fov": 42,
+            "position": [
+              49.8,
+              7.042073441788362,
+              13.244213892883906
+            ],
+            "near": 0.1,
+            "far": 240
+          },
+          "netVisible": true,
+          "renderTriangles": 3226,
+          "textureCount": 1
+        },
+        "allFourViewsPassed": true,
+        "goalEnvelopeFullyInGameCamera": true,
+        "netTogglePassed": true,
+        "wireframePassed": true,
+        "noHorizontalOverflow": true,
+        "errors": [],
+        "httpFailures": [],
+        "externalRequests": [],
+        "loadedAssets": [
+          "ad_board.glb",
+          "ball.glb",
+          "bench.glb",
+          "corner_flag.glb",
+          "goal.glb",
+          "pitch.glb",
+          "reference_player.glb"
+        ],
+        "screenshots": [
+          "landscape-game.png"
+        ]
+      }
+    ]
+  },
+  "existingRepositorySuite": {
+    "command": "npm test",
+    "passed": 3905,
+    "failed": 1,
+    "skipped": 64,
+    "failure": "tests/workout-royiki.test.mjs:91: browserType.launch could not find chromium_headless_shell-1234",
+    "note": "Existing test launches its default Playwright binary before loading application code. Kit browser checks explicitly use /usr/bin/chromium. No existing tests or application files were edited."
+  }
+}

@@ -4,13 +4,13 @@
  * on the button (green, yellow, red; red blink while locked). sample() is read once per simulation frame, and a press
  * that starts and ends between two frames still counts once. Only created when the model runs v23 (?alienFire=v15 keeps
  * the single v22 button). */
-import {vulcanLevel,vulcanBlink,V23_DEFAULTS} from './alien-v23.mjs?v=island-v2-20261107-13';
+import {vulcanLevel,vulcanBlink,V23_DEFAULTS} from './alien-v23.mjs?v=island-v2-20261107-14';
 
 const VULCAN_ICON='M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0M10.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M15.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M12.9 16.33a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M7.9 16.33a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M5.4 12a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M7.9 7.67a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0M12.9 7.67a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0';
 let styled=false;
 function ensureStyle(doc){
  if(styled||!doc?.head)return;styled=true;
- const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v23.css?v=island-v2-20261107-13',import.meta.url).href;doc.head.append(link);
+ const link=doc.createElement('link');link.rel='stylesheet';link.href=new URL('./alien-v23.css?v=island-v2-20261107-14',import.meta.url).href;doc.head.append(link);
 }
 export function vulcanIcon(doc=globalThis.document){
  const svg=doc.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');
@@ -52,7 +52,9 @@ export function createAlienVulcan({controls,cfg=V23_DEFAULTS,label='וולקן',
   get held(){return pointer!==null||keyHeld;},
   /** Ring on the button: fill = heat, colour = band, red blink while locked (same phase as the bar next to the ship). */
   update(model){
-   const locked=Boolean(model.vulcanLocked),heat=Math.max(0,Math.min(1,model.vulcanHeat||0)),level=vulcanLevel(heat,locked,cfg),blink=vulcanBlink(model.time||0,locked)?'on':'off',pct=Math.round(heat*100);
+   // v24: while a Vulcan magazine keeps the barrels cold the ring is cyan and drains with the cold time (refillCold is 0 with ?alienRefill=0).
+   const cold=model.refillCold>0&&model.refillColdMax>0?model.refillCold/model.refillColdMax:0;
+   const locked=Boolean(model.vulcanLocked),heat=Math.max(0,Math.min(1,model.vulcanHeat||0)),level=cold>0?'cold':vulcanLevel(heat,locked,cfg),blink=vulcanBlink(model.time||0,locked)?'on':'off',pct=Math.round((cold>0?Math.min(1,cold):heat)*100);
    if(level!==lastLevel){button.dataset.level=lastLevel=level;}
    if(blink!==lastBlink){button.dataset.blink=lastBlink=blink;}
    if(pct!==lastPct){lastPct=pct;button.style.setProperty('--heat',`${pct}%`);}

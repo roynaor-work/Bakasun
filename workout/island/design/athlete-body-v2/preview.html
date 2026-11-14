@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <title>גוף האתלט · ידיים, כפפות ומדים</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <main>
+    <header>
+      <p class="eyebrow">מעבדת הדמויות / 02</p>
+      <h1>אותו שחקן.<br><span>יותר פרטים.</span></h1>
+      <p class="intro">ידיים עם אגודל ושתי קבוצות אצבעות, כפפות שוער, מספרי מדים וסמל גיאומטרי. השוו את גוף v22 הקיים לגרסה החדשה באותה תנוחה.</p>
+      <div class="facts"><span>18 עצמות</span><span>+108 משולשים</span><span>475 קליפים</span><a href="REPORT.md">דוח המדידות ↗</a></div>
+    </header>
+    <section class="controls" aria-label="בקרת תצוגה">
+      <label>מבנה גוף<select id="body"><option value="soccer">כדורגל · 1.80 מ׳</option><option value="guard">רכז · 1.78 מ׳</option><option value="wing">קיצוני · 1.94 מ׳</option><option value="center">סנטר · 2.08 מ׳</option></select></label>
+      <label>תנועה<select id="clip"><option>טוען קליפים…</option></select></label>
+      <label>מספר<input id="number" type="number" min="0" max="99" step="1" value="23"></label>
+      <label>צבע ראשי<input id="primary" type="color" value="#187e83"></label>
+      <label>צבע משני / כפפות<input id="secondary" type="color" value="#ec8454"></label>
+      <label>פסים / מספר / סמל<input id="trim" type="color" value="#fff0cc"></label>
+      <label>תלבושת<select id="sport"><option value="soccer">כדורגל</option><option value="basketball">כדורסל</option><option value="hockey">הוקי</option><option value="tennis">טניס</option></select></label>
+      <label class="check"><input type="checkbox" id="keeper">כפפות בדמות המלאה</label>
+      <label class="check"><input type="checkbox" id="detailMotion">תנועה גם בתקריבים</label>
+      <div class="timeline"><button id="play" type="button">עצירה</button><label for="time">פריים</label><input id="time" type="range" min="0" max="1" step=".001" value="0"><output id="seconds">0.00 שנ׳</output></div>
+      <p id="status" role="status">טוען את גוף המקור ואת הגרסה החדשה…</p>
+    </section>
+    <section id="comparisons" aria-label="השוואות לפני ואחרי"></section>
+    <footer>נכסי עיצוב לבדיקה. <a href="LICENSES.md">מקורות ורישיונות CC0</a> · <a href="body-manifest.json">נתוני הדגמים</a></footer>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

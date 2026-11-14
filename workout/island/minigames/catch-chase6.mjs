@@ -8,9 +8,9 @@
  * with a catch, the car skids to a halt and the throw stage (archery) starts where it stopped. Ramming still fills a
  * damage meter as a slower second way. When the time runs out the thief reaches the roadblock and bails out further away.
  * Deterministic from (seed, stage, inputs) so tools/catch-sim.mjs can drive it. */
-import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-13';
-import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-13';
-import {createArsenal} from './catch-weapons.mjs?v=island-v2-20261107-13';
+import {buildTrack, seededRandom} from './catch-track.mjs?v=island-v2-20261107-14';
+import {createTyreGun} from './catch-tyres.mjs?v=island-v2-20261107-14';
+import {createArsenal} from './catch-weapons.mjs?v=island-v2-20261107-14';
 
 /** v7 additions (13/11, Roy: "the chase is great, improve it, maybe more elements"), all opt-in through `v7` so v6 stays exact:
  *  weapons  the arsenal of catch-weapons.mjs from the first second (no 14 s wait), every hit fills the damage meter
@@ -24,6 +24,14 @@ export const CHASE7 = Object.freeze({
   nearBonus: .12,                                                              // boost tank for each close overtake
   pull: [1.5, 1.45, 1.4, 1.2, 1.15, 1.1, 1, .9, .85, .8], pullRate: 1.7,     // m/s toward the zone while the reticle is on
 });
+
+/** v8 fix of the tools (14/11, Roy after v23: "when you switch to the spikes and other things it does not work"; ?catchWeaponsFix=0 = v7),
+ * on top of v7 weapons. With real touch the police car drove past him after a hit had slowed him (net x.72, pulse x.55, strip x.65): the
+ * thief was then behind the camera, every tool out of range and the fire button grey ("distance 0 m"). Now:
+ *  follow   without the boost the police car settles about followGap metres behind him instead of passing, and drops back when it is
+ *           ahead (followBack m/s per metre short of the gap); the boost still closes in and rams
+ *  commit   a spike strip within ARSENAL8.commit metres ahead in his lane (he did not roll the dodge): he holds his lane */
+export const CHASE8 = Object.freeze({followGap: 7, followBack: .6});
 
 export const CHASE6 = Object.freeze({
   countdownSeconds: 2.5, startGap: 30, catchGap: 7,
@@ -98,17 +106,18 @@ function layout7(C, K, spec, rnd, track, length, list, stage) {
   return list;
 }
 
-export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}, track: givenTrack = null, v7 = null} = {}) {
+export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}, track: givenTrack = null, v8 = null, v7 = null} = {}) {
   const C = {...CHASE6, ...(balance.chase6 || {})}, level = balance.levels[stage - 1], spec = level?.chase;
   if (!spec) throw Error('catch: stage ' + stage + ' has no chase');
   const W7 = Boolean(v7?.weapons), A7 = W7 && v7?.assist !== false, E7 = Boolean(v7?.elements), K = {...CHASE7, ...(balance.chase7 || {})}, si = Math.min(9, Math.max(0, stage - 1));
+  const F8 = W7 && Boolean(v8?.weaponsFix), K8 = {...CHASE8, ...(balance.chase8 || {})};
   const rnd = seededRandom((seed * 2246822519 + stage * 131 + 7) >>> 0);
   const length = spec.seconds * (C.baseSpeed + C.boostSpeed) + 200;
   const track = givenTrack || buildTrack({seed: seed * 31 + stage, length, curve: spec.curve ?? .5});
   const obstacles = layout(C, spec, rnd, track, length);
   if (E7) layout7(C, K, spec, seededRandom((seed * 40503 + stage * 977 + 11) >>> 0), track, length, obstacles, stage);
   // the arsenal fills the same damage meter as ramming (s.damage, declared below; called only while the chase runs)
-  const gun = W7 ? createArsenal({balance, stage, rnd, level: level.v7 || {}, assist: A7, addDamage: x => { s.damage = Math.min(1, s.damage + x); return s.damage; }}) : createTyreGun({balance, stage, rnd, level});
+  const gun = W7 ? createArsenal({balance, stage, rnd, level: level.v7 || {}, assist: A7, fix8: F8, addDamage: x => { s.damage = Math.min(1, s.damage + x); return s.damage; }}) : createTyreGun({balance, stage, rnd, level});
   const tankScale = 1 + ((Number(equipment.net) || 1) - 1) * 2;
   const crimTop = Math.max(spec.crimSpeed, C.baseSpeed + C.crimLead + (stage - 1) * C.crimLeadPerStage);
   const armAt = W7 ? 0 : (C.gunArmSeconds || 0) + (stage - 1) * (C.gunArmPerStage || 0); // v7: every tool is ready from the start
@@ -128,6 +137,8 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
     c.retarget = .3;
     let bestLane = c.targetD, bestScore = -1e9;
     const calm = W7 && gun.calm(), strips = W7 ? gun.stripsAhead(c.s) : [];
+    // v8: a strip he did not spot, close ahead in his lane: he holds the lane and drives over it (the green ring promised a hit)
+    if (F8 && strips.some(st => !st.dodge && st.s - c.s < gun.A8.commit && Math.abs(st.d - c.targetD) < gun.A.stripHit)) return;
     for (const lane of C.lanes) {
       const free = freeAhead(c.s, lane, 60, s.t);
       let score = free - Math.abs(lane - c.d) * 2 + (lane === c.targetD ? 4 : 0) + rnd() * 4 * (1 - spec.skill);
@@ -151,7 +162,7 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
   }
 
   const api = {
-    balance, level, spec, obstacles, track, gun, state: s, input, length, obstacleS, C, K, v7: {weapons: W7, assist: A7, elements: E7},
+    balance, level, spec, obstacles, track, gun, state: s, input, length, obstacleS, C, K, v7: {weapons: W7, assist: A7, elements: E7}, v8: {weaponsFix: F8},
     setSteer(v) { input.steer = clamp(Number(v) || 0, -1, 1); },
     setBoost(v) { input.boost = Boolean(v); },
     setBrake(v) { input.brake = Boolean(v); },
@@ -199,7 +210,9 @@ export function createChaseEngine6({balance, stage = 1, seed = 1, equipment = {}
       s.boosting = Boolean(input.boost) && s.tank > 0 && s.stun <= 0;
       s.braking = Boolean(input.brake) && !s.boosting;
       if (s.boosting) s.tank = Math.max(0, s.tank - dt / C.boostSeconds); else s.tank = Math.min(tankMax, s.tank + dt * C.rechargePerSecond);
-      const target = s.boosting ? C.baseSpeed + C.boostSpeed : s.braking ? C.brakeSpeed : C.baseSpeed;
+      let target = s.boosting ? C.baseSpeed + C.boostSpeed : s.braking ? C.brakeSpeed : C.baseSpeed;
+      // v8 follow: settle behind him (the tools' range) instead of driving past, drop back when ahead; the boost still closes in
+      if (F8 && !s.boosting && !s.braking) { const gapNow = c.s - s.s; if (gapNow < K8.followGap) target = Math.min(target, Math.max(C.brakeSpeed, c.v - K8.followBack * (K8.followGap - gapNow))); }
       const rate = target < s.v ? C.decel : C.accel;
       s.v += clamp(target - s.v, -rate * dt, rate * dt);
       s.s += s.v * dt;

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#081421">
+  <meta name="color-scheme" content="dark">
+  <title>מילוי וולקן ואש אויב · תצוגת נכסים</title>
+  <link rel="icon" href="icons/energy.png">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main>
+    <header class="masthead"><span class="brand"><i></i> האי שלי <span>/</span> מעבדת נכסים</span><a href="REPORT.md">דוח מסירה</a></header>
+    <section class="intro">
+      <div><p class="eyebrow">וולקן / קרב ימי</p><h1>מילוי. תנועה.<br><span>אש חוזרת.</span></h1><p class="lede">שלוש דרכים לחזור לקרב. אזהרה ברורה לפני הפגיעה.<br>נכסים מקוריים, מוכנים לחיבור למשחק.</p></div>
+      <div class="intro-aside"><span class="badge">CC0 · מקורי</span><p>תצוגת נכסים עצמאית<br>גרסה 01 / ללא שינוי במשחק</p><a href="manifest.json">מפת נכסים</a></div>
+    </section>
+    <section class="showcase">
+      <div class="panel battle-panel">
+        <div class="panel-top"><span><i class="live-dot"></i> רצף אש ואיסוף</span><div class="controls"><button id="pause" aria-pressed="false">השהיה</button><button id="sound" aria-pressed="false">צליל כבוי</button></div></div>
+        <canvas id="battle" width="1000" height="520" aria-label="הדגמת ירי משני צדי הים, סימון נחיתה, אזהרה ואיסוף מילוי"></canvas>
+        <div class="timeline"><span id="phase" role="status">ממתין לירי</span><div><i id="time-progress"></i></div><span class="mono">04.0s</span></div>
+      </div>
+      <div class="panel carousel-panel">
+        <p class="eyebrow">מלאי מילוי</p><div class="icon-orbit"><img id="active-icon" src="icons/coolant.png" width="96" height="96" alt="מצנן"><img id="active-ring" src="vfx/frames/refill-ring/06.png" width="128" height="128" alt="טבעת מילוי"></div>
+        <h2 id="active-label">מצנן</h2><p id="active-description">מוריד חום. מחזיר את הוולקן לקצב.</p>
+        <div id="carousel" role="group" aria-label="סוג המילוי"></div>
+        <label class="range-label">מצב המילוי <output id="fill-output">6 / 11</output><input id="fill" type="range" min="0" max="11" value="6" aria-label="שלב המילוי"></label>
+        <div class="card-meta"><span>96 × 96 · PNG</span><span>זוהר מובנה / ללא טקסט</span></div>
+      </div>
+    </section>
+    <section class="section-block"><div class="section-heading"><div><p class="eyebrow">על קו המים</p><h2>אספקה צפה</h2></div><p>גררו לסיבוב · שלושה מודלים מקוריים · 600 משולשים לכל מודל</p></div><div id="models" class="model-grid"></div></section>
+    <section class="section-block"><div class="section-heading"><div><p class="eyebrow">כל רגע קריא</p><h2>אפקטים ושכבות</h2></div><p>רקע שקוף · אטלסים ופריימים בודדים</p></div><div id="effects" class="effect-grid"></div></section>
+    <section class="section-block audio-section"><div class="section-heading"><div><p class="eyebrow">לשמוע את המהלך הבא</p><h2>צלילים מקוריים</h2></div><p>OGG + MP3 · עוצמה מכוילת ל־‎−16 LUFS</p></div><div id="audio" class="audio-grid"></div></section>
+    <p id="error" role="alert" hidden></p>
+    <footer><span>REFILL / ENEMY FIRE — 01</span><span>מקור, רישיון ומדידות ב־<a href="REPORT.md">REPORT</a> · <a href="LICENSE.txt">CC0 1.0</a></span></footer>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

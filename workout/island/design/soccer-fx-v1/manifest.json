@@ -1,0 +1,1888 @@
+{
+  "id": "soccer-fx-v1",
+  "version": 1,
+  "license": "CC0-1.0",
+  "provenance": "LICENSES.md",
+  "generator": "source/build_assets.py",
+  "images": {
+    "format": "image/png",
+    "colorSpace": "sRGB",
+    "alpha": "straight",
+    "premultipliedAlpha": false,
+    "frameOrder": "row-major, top-left first",
+    "uvOrigin": "bottom-left (Three.js TextureLoader default flipY=true)",
+    "minFilter": "LinearFilter",
+    "magFilter": "LinearFilter",
+    "generateMipmaps": false,
+    "depthWrite": false,
+    "transparent": true,
+    "toneMapped": false,
+    "uvInsetPixels": 0.5,
+    "atlasWrap": "ClampToEdgeWrapping"
+  },
+  "sprites": [
+    {
+      "id": "landing-turf",
+      "file": "sprites/landing-turf.png",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 24,
+      "durationSeconds": 0.6667,
+      "loop": false,
+      "blend": "NormalBlending",
+      "anchor": [
+        0.5,
+        0.6875
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            128,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            192,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 8,
+          "rect": [
+            0,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 9,
+          "rect": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 10,
+          "rect": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 11,
+          "rect": [
+            192,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 12,
+          "rect": [
+            0,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 13,
+          "rect": [
+            64,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 14,
+          "rect": [
+            128,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 15,
+          "rect": [
+            192,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.25,
+            0.25
+          ]
+        }
+      ],
+      "bytes": 19352,
+      "sha256": "5804b064cab572cbef04fd4a2a2768b52c49cd4b679f505bb482dc769213060a"
+    },
+    {
+      "id": "slide-turf",
+      "file": "sprites/slide-turf.png",
+      "width": 256,
+      "height": 256,
+      "columns": 4,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 16,
+      "fps": 24,
+      "durationSeconds": 0.6667,
+      "loop": false,
+      "blend": "NormalBlending",
+      "anchor": [
+        0.5,
+        0.6875
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.75,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            0,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            128,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            192,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.5,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 8,
+          "rect": [
+            0,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 9,
+          "rect": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 10,
+          "rect": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 11,
+          "rect": [
+            192,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.25,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 12,
+          "rect": [
+            0,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 13,
+          "rect": [
+            64,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 14,
+          "rect": [
+            128,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "index": 15,
+          "rect": [
+            192,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.25,
+            0.25
+          ]
+        }
+      ],
+      "bytes": 19111,
+      "sha256": "9e9e9428e5124e75b2f9d1c7dabf435c2c5e297ca0a22cd152f8274a8815173e"
+    },
+    {
+      "id": "goal-confetti",
+      "file": "sprites/goal-confetti.png",
+      "width": 512,
+      "height": 256,
+      "columns": 8,
+      "rows": 4,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 32,
+      "fps": 24,
+      "durationSeconds": 1.3333,
+      "loop": false,
+      "blend": "AdditiveBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 8,
+          "rect": [
+            0,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 9,
+          "rect": [
+            64,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 10,
+          "rect": [
+            128,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 11,
+          "rect": [
+            192,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 12,
+          "rect": [
+            256,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 13,
+          "rect": [
+            320,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 14,
+          "rect": [
+            384,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 15,
+          "rect": [
+            448,
+            64,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 16,
+          "rect": [
+            0,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 17,
+          "rect": [
+            64,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 18,
+          "rect": [
+            128,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 19,
+          "rect": [
+            192,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 20,
+          "rect": [
+            256,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 21,
+          "rect": [
+            320,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 22,
+          "rect": [
+            384,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 23,
+          "rect": [
+            448,
+            128,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 24,
+          "rect": [
+            0,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 25,
+          "rect": [
+            64,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 26,
+          "rect": [
+            128,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 27,
+          "rect": [
+            192,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 28,
+          "rect": [
+            256,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 29,
+          "rect": [
+            320,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 30,
+          "rect": [
+            384,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 31,
+          "rect": [
+            448,
+            192,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.0,
+            0.125,
+            0.25
+          ]
+        }
+      ],
+      "bytes": 68314,
+      "sha256": "7b0a6969dfd5b7f47a6f35ca01dec4ef5d7455de5f012499fea71ee694a1e1fc"
+    },
+    {
+      "id": "goal-net-ripple",
+      "file": "sprites/goal-net-ripple.png",
+      "width": 1024,
+      "height": 128,
+      "columns": 8,
+      "rows": 1,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frameCount": 8,
+      "fps": 16,
+      "durationSeconds": 0.5,
+      "loop": false,
+      "blend": "NormalBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.125,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.375,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            512,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            640,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.625,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            768,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            896,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.875,
+            0.0,
+            0.125,
+            1.0
+          ]
+        }
+      ],
+      "bytes": 46887,
+      "sha256": "280778a69d0825b10ee50d6f18ecc9311bd058ed52e481cfba9511fb209c1cf2"
+    },
+    {
+      "id": "ball-trail",
+      "file": "sprites/ball-trail.png",
+      "width": 256,
+      "height": 32,
+      "columns": 1,
+      "rows": 1,
+      "frameWidth": 256,
+      "frameHeight": 32,
+      "frameCount": 1,
+      "fps": 0,
+      "loop": true,
+      "blend": "AdditiveBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "wrapS": "RepeatWrapping",
+      "wrapT": "ClampToEdgeWrapping",
+      "scrollUPerSecond": -2,
+      "seam": "first and last RGBA columns identical",
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            32
+          ],
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "bytes": 1819,
+      "sha256": "78b6ec3c688e9e4c19ed8c9382d7f1ea9444cd0ddeb967fdf0778db70b5d1ba8"
+    },
+    {
+      "id": "selected-player-ring",
+      "file": "sprites/selected-player-ring.png",
+      "width": 512,
+      "height": 64,
+      "columns": 8,
+      "rows": 1,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 8,
+      "fps": 8,
+      "durationSeconds": 1.0,
+      "loop": true,
+      "blend": "NormalBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.0,
+            0.125,
+            1.0
+          ]
+        }
+      ],
+      "bytes": 21210,
+      "sha256": "fb9d1c9c2a3fc08c75a325861a82a064818ae2a8636f5985b86af33f6459513b"
+    },
+    {
+      "id": "click-ring",
+      "file": "sprites/click-ring.png",
+      "width": 512,
+      "height": 64,
+      "columns": 8,
+      "rows": 1,
+      "frameWidth": 64,
+      "frameHeight": 64,
+      "frameCount": 8,
+      "fps": 20,
+      "durationSeconds": 0.4,
+      "loop": false,
+      "blend": "NormalBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            64,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.125,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            128,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.25,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            192,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.375,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            256,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            320,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.625,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            384,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.75,
+            0.0,
+            0.125,
+            1.0
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            448,
+            0,
+            64,
+            64
+          ],
+          "uv": [
+            0.875,
+            0.0,
+            0.125,
+            1.0
+          ]
+        }
+      ],
+      "bytes": 14670,
+      "sha256": "cc836ef3c86c97a43dcb507ed4479a560ba09c2a04baac98a720841d72072a70"
+    },
+    {
+      "id": "power-kick",
+      "file": "sprites/power-kick.png",
+      "width": 768,
+      "height": 128,
+      "columns": 6,
+      "rows": 1,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frameCount": 6,
+      "fps": 30,
+      "durationSeconds": 0.2,
+      "loop": false,
+      "blend": "AdditiveBlending",
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "paddingPixels": 2,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.0,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.16666666666666666,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.3333333333333333,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.5,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            512,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.6666666666666666,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            640,
+            0,
+            128,
+            128
+          ],
+          "uv": [
+            0.8333333333333334,
+            0.0,
+            0.16666666666666666,
+            1.0
+          ]
+        }
+      ],
+      "bytes": 23873,
+      "sha256": "13b0f408088bb4ec88e81b84a6ce2dbb602239c0efec39d85a11bc94ac896646"
+    }
+  ],
+  "audio": [
+    {
+      "id": "kick-soft",
+      "loop": false,
+      "sourceDurationSeconds": 0.65,
+      "files": [
+        {
+          "file": "audio/kick-soft.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.08,
+          "truePeakDbtp": -1.84,
+          "energy2To5KhzPercent": 5e-05,
+          "decodedDurationSeconds": 0.64733,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 6181,
+          "sha256": "b3687215264ba143a243b2c53c29216f7af715ad77920f98a1d53d5a985ebfb9"
+        },
+        {
+          "file": "audio/kick-soft.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.06,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 6e-05,
+          "decodedDurationSeconds": 0.65,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 17324,
+          "sha256": "fe376215c03eedc472d293b32b45cdedfb6921c89458420a9fa8e527e58c15ef"
+        }
+      ]
+    },
+    {
+      "id": "kick-strong",
+      "loop": false,
+      "sourceDurationSeconds": 0.8,
+      "files": [
+        {
+          "file": "audio/kick-strong.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.0,
+          "truePeakDbtp": -2.47,
+          "energy2To5KhzPercent": 0.0001,
+          "decodedDurationSeconds": 0.79733,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 6811,
+          "sha256": "1c84807a313e83451abb99cb8904f907f8a1cacc1c8a65e333eed485efc90689"
+        },
+        {
+          "file": "audio/kick-strong.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.05,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 0.00011,
+          "decodedDurationSeconds": 0.8,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 20780,
+          "sha256": "ea05328c4ca5140fd183fdd295c466f4934379d657868da6159b93197919c55f"
+        }
+      ]
+    },
+    {
+      "id": "post-hit",
+      "loop": false,
+      "sourceDurationSeconds": 1.0,
+      "files": [
+        {
+          "file": "audio/post-hit.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -1.79,
+          "energy2To5KhzPercent": 0.00019,
+          "decodedDurationSeconds": 1.0,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 7190,
+          "sha256": "519cc200c31e0cbf6b23abf8d294f0062c75d7f0377d428a8a6ac811b07e56c9"
+        },
+        {
+          "file": "audio/post-hit.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.04,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 0.00021,
+          "decodedDurationSeconds": 1.0,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 25388,
+          "sha256": "7368c4fe1ef84774d0526841f0f8d5bf92ea680d8444759bd3e59a435e51fd14"
+        }
+      ]
+    },
+    {
+      "id": "crossbar-hit",
+      "loop": false,
+      "sourceDurationSeconds": 1.2,
+      "files": [
+        {
+          "file": "audio/crossbar-hit.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -15.99,
+          "truePeakDbtp": -1.82,
+          "energy2To5KhzPercent": 0.00013,
+          "decodedDurationSeconds": 1.2,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 7637,
+          "sha256": "7d8a79b3735492aba105d97f699c505805b557bdfe614541ba179e432a9d6cae"
+        },
+        {
+          "file": "audio/crossbar-hit.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.05,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 0.00016,
+          "decodedDurationSeconds": 1.2,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 29996,
+          "sha256": "ad520087abad4223faf5b1befaa1d7f2c352ce1103775446ee5ec7360f80aa9f"
+        }
+      ]
+    },
+    {
+      "id": "ball-land",
+      "loop": false,
+      "sourceDurationSeconds": 0.75,
+      "files": [
+        {
+          "file": "audio/ball-land.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.07,
+          "truePeakDbtp": -1.74,
+          "energy2To5KhzPercent": 8e-05,
+          "decodedDurationSeconds": 0.74733,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 6552,
+          "sha256": "cb4fad3e79e062b13b14f7c17957b97acdca9694b51a667aea0a13defe89a6bb"
+        },
+        {
+          "file": "audio/ball-land.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.07,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 9e-05,
+          "decodedDurationSeconds": 0.75,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 19628,
+          "sha256": "1ce2893b406fe0de1a7e039cccfe3544a568b0f47f5f6323fb8d497f07a68317"
+        }
+      ]
+    },
+    {
+      "id": "net-rustle",
+      "loop": false,
+      "sourceDurationSeconds": 1.0,
+      "files": [
+        {
+          "file": "audio/net-rustle.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.06,
+          "truePeakDbtp": -1.74,
+          "energy2To5KhzPercent": 0.00099,
+          "decodedDurationSeconds": 1.0,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 7762,
+          "sha256": "b4621a19d001befe883736c1efa084e2c35f77744065654912268a4594eba2b6"
+        },
+        {
+          "file": "audio/net-rustle.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.08,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 0.00105,
+          "decodedDurationSeconds": 1.0,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 25388,
+          "sha256": "7e031f20de3977a3d42575e03a13eb19318d3cab05d9168c88d2010f02ee315c"
+        }
+      ]
+    },
+    {
+      "id": "keeper-catch",
+      "loop": false,
+      "sourceDurationSeconds": 0.85,
+      "files": [
+        {
+          "file": "audio/keeper-catch.ogg",
+          "mimeType": "audio/ogg",
+          "codec": "vorbis",
+          "integratedLufs": -16.05,
+          "truePeakDbtp": -1.82,
+          "energy2To5KhzPercent": 0.00028,
+          "decodedDurationSeconds": 0.84733,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 7228,
+          "sha256": "57f76f0921aaff1d7cdb415270cc453ed39fb4895ae498875cca89870acb9d5f"
+        },
+        {
+          "file": "audio/keeper-catch.mp3",
+          "mimeType": "audio/mpeg",
+          "codec": "mp3",
+          "integratedLufs": -16.07,
+          "truePeakDbtp": -2.26,
+          "energy2To5KhzPercent": 0.00032,
+          "decodedDurationSeconds": 0.85,
+          "sampleRate": 48000,
+          "channels": 1,
+          "bytes": 21932,
+          "sha256": "eac3dde8a04732e966b5e68515d2734c8cc3a1088f8412a75fb17234bae1f778"
+        }
+      ]
+    }
+  ],
+  "audioPolicy": {
+    "targetIntegratedLufs": -16,
+    "lufsTolerance": 0.1,
+    "maxTruePeakDbtp": -1,
+    "maxEnergy2To5KhzPercent": 8,
+    "energyMethod": "one-sided Parseval-weighted FFT of the entire decoded mono signal; 2000 <= f <= 5000 divided by DC-to-Nyquist energy; no window",
+    "loudnessMethod": "FFmpeg loudnorm input_i (EBU R128 / ITU-R BS.1770), measured after decoding each deliverable",
+    "whistles": false,
+    "speech": false,
+    "music": false
+  }
+}

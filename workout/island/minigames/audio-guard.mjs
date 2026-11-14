@@ -6,7 +6,7 @@
  * measured sample spectra in. No audio graph here. */
 export const WHISTLE_BAND={lowHz:1500,highHz:5000};
 /** Live-play phases per game: a tone during these is the bug, a tone at kickoff is not. */
-export const LIVE_PHASES={soccer:['playing'],streetSlam:['live'],tennis:['rally','serve','toss'],alpineRush:['racing'],islandRacing:['racing']};
+export const LIVE_PHASES={soccer:['playing'],streetSlam:['live'],tennis:['rally','serve','toss'],alpineRush:['racing'],islandRacing:['racing'],catchCriminal:['run']};
 
 /** frames: [{t, hi:{f,db,prom,rel}}] in time order, t in seconds. `hi` is the
  * strongest bin inside WHISTLE_BAND: prom = dB above the median of its +-200 Hz
@@ -50,6 +50,35 @@ export function whistleLike(frames,{minSeconds=.6,glideSeconds=.25,humSeconds=2,
     hum.end=f.t;hum.freqs.push(f.hi.f);hum.share+=f.s25;hum.maxDb=Math.max(hum.maxDb,f.lvl);if(f.ph)hum.phases.add(f.ph);
   }
   closeHum();return segments.sort((a,b)=>a.start-b.start);
+}
+
+/** racing-v24 (Roy: "a background noise for some reason, like air or a hiss"): a steady NOISE bed, not a line. Frames carry `bands` (energy shares of 60-300 Hz,
+ * 0.3-1, 1-2, 2-5, 5-10 and 10+ kHz) and `flat` (spectral flatness of 2-8 kHz: about 0.5 for noise, near 0 for a harmonic engine). A frame is hissy when the
+ * share above 2 kHz is at least `share`, that band is noise-like (flat >= `flatness`) and the frame is audible; `seconds` of them in a row (one masked frame
+ * allowed) make a 'hiss' segment. Old frames without bands never match. */
+export function hissLike(frames,{share=.15,flatness=.35,seconds=2,minLevelDb=-95}={}){
+ const out=[];let run=null,gap=false;
+ const close=()=>{if(run&&run.end-run.start+1e-6>=seconds)out.push({kind:'hiss',start:+run.start.toFixed(3),end:+run.end.toFixed(3),seconds:+(run.end-run.start).toFixed(3),share:+(run.share/run.n).toFixed(3),flat:+(run.flat/run.n).toFixed(3),maxDb:+run.maxDb.toFixed(1),frames:run.n,phases:[...run.phases],speed:run.speed.length?+(run.speed.reduce((a,b)=>a+b,0)/run.speed.length).toFixed(1):null});run=null;};
+ for(const f of frames){
+  const b=f.bands,hi=b?b[3]+b[4]+b[5]:0,hissy=!!b&&hi>=share&&(f.flat??0)>=flatness&&(f.lvl??-Infinity)>=minLevelDb;
+  if(!hissy){if(run&&!gap){gap=true;continue;}close();gap=false;continue;}
+  if(!run)run={start:f.t,end:f.t,n:0,share:0,flat:0,maxDb:-Infinity,phases:new Set(),speed:[]};
+  gap=false;run.end=f.t;run.n++;run.share+=hi;run.flat+=f.flat;run.maxDb=Math.max(run.maxDb,f.lvl);if(f.ph)run.phases.add(f.ph);if(Number.isFinite(f.sp))run.speed.push(f.sp);
+ }
+ close();return out;
+}
+/** Mean band shares, flatness and level per speed bucket (standing < 1 m/s, slow < 12, fast) for the frames of the given phases (all when none). Frames that carry
+ * `tot` (the total energy in dB) also give the energy of each band in dB (`db`, the mean energy of the frames, so before/after runs compare on one scale) and of all
+ * the bands above 2 kHz (`above2kDb`). */
+export function summarizeBands(frames,phases=null){
+ const live=phases?new Set(phases):null,by={};
+ for(const f of frames){if(!f.bands||(live&&!live.has(f.ph)))continue;const k=!Number.isFinite(f.sp)?'all':f.sp<1?'standing':f.sp<12?'slow':'fast',s=by[k]||(by[k]={frames:0,bands:[0,0,0,0,0,0],flat:0,lvl:0,above2k:0,energy:[0,0,0,0,0,0],withTot:0});
+  s.frames++;f.bands.forEach((v,i)=>s.bands[i]+=v);s.flat+=f.flat||0;s.lvl+=f.lvl;s.above2k+=f.bands[3]+f.bands[4]+f.bands[5];
+  if(Number.isFinite(f.tot)){const e=Math.pow(10,f.tot/10);f.bands.forEach((v,i)=>s.energy[i]+=e*v);s.withTot++;}}
+ const db=e=>e>0?+(10*Math.log10(e)).toFixed(1):null;
+ for(const s of Object.values(by)){s.bands=s.bands.map(v=>+(v/s.frames).toFixed(4));s.flat=+(s.flat/s.frames).toFixed(3);s.lvl=+(s.lvl/s.frames).toFixed(1);s.above2k=+(s.above2k/s.frames).toFixed(4);
+  if(s.withTot){const mean=s.energy.map(e=>e/s.withTot);s.db=mean.map(db);s.above2kDb=db(mean[3]+mean[4]+mean[5]);}delete s.energy;delete s.withTot;}
+ return by;
 }
 
 /** Times (frame t) at which the phase enters a live-play phase from a stoppage or from nothing: kickoff, the restart after a goal or

@@ -111,7 +111,7 @@ test('Naval v20: far-off-bow aiming is reachable: smooth, monotone, reversible, 
 
 test('Naval v20 air: aircraft arrive on stages 12, 20 and 27, every shot is telegraphed, and the Vulcan brings them down in bursts (heat-limited)',()=>{
  for(const stage of [12,20,27]){
-  const m=createNavalModel({config,balance:nb,level:stage,seed:5,random:seededRandom(5)});let seenAir=0,tele=[],maxHeat=0,overheated=false;const marks=new Map();
+  globalThis.location={search:'?navalEnemyFire=v23&navalSub=v23'};/* v24 (14/11): enemy fire changed on purpose; this v20 air check keeps v23 */const m=(()=>{try{return createNavalModel({config,balance:nb,level:stage,seed:5,random:seededRandom(5)});}finally{delete globalThis.location;}})();let seenAir=0,tele=[],maxHeat=0,overheated=false;const marks=new Map();
   for(let i=0;i<9000&&!m.result;i++){m.update(.02,{});seenAir=Math.max(seenAir,m.air.length);
    for(const a of m.air)if(a.attack&&!marks.has(a.attack))marks.set(a.attack,{first:m.time,fire:a.attack.fireTime});
    const v=m.vulcan;maxHeat=Math.max(maxHeat,v.heat);overheated=overheated||v.overheated;}

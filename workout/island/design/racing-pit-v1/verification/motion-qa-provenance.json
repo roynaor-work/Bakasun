@@ -1,0 +1,59 @@
+{
+  "upstreamRepository": "https://github.com/roynaor-work/Bakasun",
+  "upstreamBranch": "codex/motion-qa-v1",
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamEntryPoint": "workout/island/design/motion-qa-v1/run.mjs",
+  "upstreamFiles": [
+    {
+      "file": "workout/island/design/motion-qa-v1/run.mjs",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/report.mjs",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "upstreamUnmodified": true,
+  "inputAdapter": {
+    "file": "source/qa-sources.mjs",
+    "sha256": "342328b8718fbc1af0f83a15e8afc822b48df160f98fe90faec729fa6ace9130"
+  },
+  "loader": {
+    "file": "source/qa-loader.mjs",
+    "sha256": "31cac17e571d79f41054e187f28f771004cfdd4715c3e1268191130ddf907562"
+  },
+  "vendor": {
+    "file": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+    "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+    "license": "MIT; temporary verification dependency only"
+  },
+  "assetsGitCommit": "da77552117b6765590b314e40a23d3fad5bea1ae",
+  "scoring": "all upstream metric definitions, thresholds and weights unchanged",
+  "scope": "70 clips read from all seven delivered GLBs; 60 Hz plus exact key/event/support times",
+  "minimumRequired": 88,
+  "minimumObserved": 94.6,
+  "coverage": 1,
+  "insufficientDataMetrics": 0,
+  "nonApplicable": [
+    "ball contact on all clips",
+    "body sliding on stationary clips"
+  ],
+  "passed": true,
+  "cliStdout": "{\"libraries\":1,\"clips\":70,\"elapsedSeconds\":4.35,\"report\":\"/tmp/racing-pit-upstream-WqSJaS/output/report.html\"}"
+}

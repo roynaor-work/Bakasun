@@ -1,0 +1,676 @@
+{
+ "games": 60,
+ "kid": {
+  "sigma": [
+   8,
+   12
+  ],
+  "rt": [
+   0.3,
+   0.6
+  ],
+  "think": [
+   0.35,
+   0.9
+  ],
+  "hazardMiss": 0.25,
+  "slideComp": 0.85,
+  "tryOther": 0.18
+ },
+ "result": {
+  "v7": [
+   {
+    "stage": 1,
+    "games": 60,
+    "shots": 306,
+    "hits": 231,
+    "throws": 156,
+    "throwHits": 119,
+    "wins": 59,
+    "stops": 5,
+    "chaseSec": 1880.9999999999711,
+    "firstShot": 74.06666666666668,
+    "firstShotN": 60,
+    "locks": 156,
+    "closes": 145,
+    "byTool": {
+     "tyres": {
+      "shots": 222,
+      "hits": 169
+     },
+     "net": {
+      "shots": 63,
+      "hits": 46
+     },
+     "spikes": {
+      "shots": 15,
+      "hits": 11
+     },
+     "emp": {
+      "shots": 3,
+      "hits": 2
+     },
+     "mark": {
+      "shots": 3,
+      "hits": 3
+     }
+    },
+    "nitro": 253,
+    "nearMisses": 8,
+    "behind": 1220.083333333335,
+    "blindTaps": 849,
+    "dry": 0,
+    "spikeGreen": 15,
+    "spikeGreenHit": 11,
+    "shotHit": 0.7549019607843137,
+    "shotCI": [
+     0.7037411401813476,
+     0.799741929877676
+    ],
+    "throwHit": 0.7628205128205128,
+    "throwCI": [
+     0.6902602805404401,
+     0.8227475972585807
+    ],
+    "allHit": 0.7575757575757576,
+    "allCI": [
+     0.7164768352353554,
+     0.7944264417583695
+    ],
+    "winRate": 0.9833333333333333,
+    "stopRate": 0.08333333333333333,
+    "chaseSecAvg": 31.34999999999952,
+    "firstShotAvg": 1.2344444444444447,
+    "shotsPerGame": 5.1,
+    "throwsPerGame": 2.6
+   },
+   {
+    "stage": 3,
+    "games": 60,
+    "shots": 294,
+    "hits": 226,
+    "throws": 163,
+    "throwHits": 118,
+    "wins": 58,
+    "stops": 3,
+    "chaseSec": 2142.016666666623,
+    "firstShot": 63.350000000000065,
+    "firstShotN": 60,
+    "locks": 163,
+    "closes": 150,
+    "byTool": {
+     "tyres": {
+      "shots": 223,
+      "hits": 174
+     },
+     "net": {
+      "shots": 46,
+      "hits": 37
+     },
+     "spikes": {
+      "shots": 16,
+      "hits": 12
+     },
+     "emp": {
+      "shots": 4,
+      "hits": 2
+     },
+     "mark": {
+      "shots": 5,
+      "hits": 1
+     }
+    },
+    "nitro": 285,
+    "nearMisses": 24,
+    "behind": 1506.266666666655,
+    "blindTaps": 1041,
+    "dry": 0,
+    "spikeGreen": 17,
+    "spikeGreenHit": 12,
+    "shotHit": 0.7687074829931972,
+    "shotCI": [
+     0.7172286210979335,
+     0.8132546962089839
+    ],
+    "throwHit": 0.7239263803680982,
+    "throwCI": [
+     0.6507381974761808,
+     0.7868025597450399
+    ],
+    "allHit": 0.7527352297592997,
+    "allCI": [
+     0.7111824305637352,
+     0.7900744004168011
+    ],
+    "winRate": 0.9666666666666667,
+    "stopRate": 0.05,
+    "chaseSecAvg": 35.70027777777705,
+    "firstShotAvg": 1.0558333333333345,
+    "shotsPerGame": 4.9,
+    "throwsPerGame": 2.716666666666667
+   },
+   {
+    "stage": 5,
+    "games": 60,
+    "shots": 345,
+    "hits": 216,
+    "throws": 298,
+    "throwHits": 173,
+    "wins": 54,
+    "stops": 2,
+    "chaseSec": 2389.8333333332744,
+    "firstShot": 71.61666666666672,
+    "firstShotN": 60,
+    "locks": 298,
+    "closes": 168,
+    "byTool": {
+     "tyres": {
+      "shots": 225,
+      "hits": 138
+     },
+     "net": {
+      "shots": 76,
+      "hits": 48
+     },
+     "spikes": {
+      "shots": 26,
+      "hits": 16
+     },
+     "emp": {
+      "shots": 8,
+      "hits": 6
+     },
+     "mark": {
+      "shots": 10,
+      "hits": 8
+     }
+    },
+    "nitro": 379,
+    "nearMisses": 35,
+    "behind": 1599.499999999982,
+    "blindTaps": 1127,
+    "dry": 0,
+    "spikeGreen": 23,
+    "spikeGreenHit": 14,
+    "shotHit": 0.6260869565217392,
+    "shotCI": [
+     0.5739050746576474,
+     0.6754917862671964
+    ],
+    "throwHit": 0.5805369127516778,
+    "throwCI": [
+     0.5238315577968027,
+     0.6351922480669352
+    ],
+    "allHit": 0.6049766718506998,
+    "allCI": [
+     0.5666743981479467,
+     0.6420320301337221
+    ],
+    "winRate": 0.9,
+    "stopRate": 0.03333333333333333,
+    "chaseSecAvg": 39.830555555554575,
+    "firstShotAvg": 1.1936111111111118,
+    "shotsPerGame": 5.75,
+    "throwsPerGame": 4.966666666666667
+   },
+   {
+    "stage": 8,
+    "games": 60,
+    "shots": 269,
+    "hits": 131,
+    "throws": 424,
+    "throwHits": 102,
+    "wins": 2,
+    "stops": 0,
+    "chaseSec": 2760.9999999999213,
+    "firstShot": 99.24999999999991,
+    "firstShotN": 60,
+    "locks": 424,
+    "closes": 91,
+    "byTool": {
+     "tyres": {
+      "shots": 199,
+      "hits": 94
+     },
+     "net": {
+      "shots": 48,
+      "hits": 19
+     },
+     "spikes": {
+      "shots": 17,
+      "hits": 15
+     },
+     "emp": {
+      "shots": 3,
+      "hits": 2
+     },
+     "mark": {
+      "shots": 2,
+      "hits": 1
+     }
+    },
+    "nitro": 343,
+    "nearMisses": 59,
+    "behind": 2147.2999999999556,
+    "blindTaps": 1453,
+    "dry": 0,
+    "spikeGreen": 11,
+    "spikeGreenHit": 11,
+    "shotHit": 0.48698884758364314,
+    "shotCI": [
+     0.42786233963636566,
+     0.5464817486551558
+    ],
+    "throwHit": 0.24056603773584906,
+    "throwCI": [
+     0.20232654309543763,
+     0.28346445992998115
+    ],
+    "allHit": 0.3362193362193362,
+    "allCI": [
+     0.30203440807969867,
+     0.37221006871387957
+    ],
+    "winRate": 0.03333333333333333,
+    "stopRate": 0,
+    "chaseSecAvg": 46.01666666666536,
+    "firstShotAvg": 1.6541666666666652,
+    "shotsPerGame": 4.483333333333333,
+    "throwsPerGame": 7.066666666666666
+   },
+   {
+    "stage": 10,
+    "games": 60,
+    "shots": 275,
+    "hits": 134,
+    "throws": 411,
+    "throwHits": 79,
+    "wins": 9,
+    "stops": 0,
+    "chaseSec": 3060.999999999903,
+    "firstShot": 261.63333333333287,
+    "firstShotN": 60,
+    "locks": 411,
+    "closes": 87,
+    "byTool": {
+     "tyres": {
+      "shots": 207,
+      "hits": 102
+     },
+     "net": {
+      "shots": 46,
+      "hits": 18
+     },
+     "spikes": {
+      "shots": 18,
+      "hits": 11
+     },
+     "emp": {
+      "shots": 2,
+      "hits": 2
+     },
+     "mark": {
+      "shots": 2,
+      "hits": 1
+     }
+    },
+    "nitro": 433,
+    "nearMisses": 73,
+    "behind": 2258.049999999949,
+    "blindTaps": 1662,
+    "dry": 0,
+    "spikeGreen": 10,
+    "spikeGreenHit": 8,
+    "shotHit": 0.48727272727272725,
+    "shotCI": [
+     0.42877909737967923,
+     0.546117044372484
+    ],
+    "throwHit": 0.1922141119221411,
+    "throwCI": [
+     0.15703846746850275,
+     0.2330901985090656
+    ],
+    "allHit": 0.3104956268221574,
+    "allCI": [
+     0.2770063241283278,
+     0.3460955589706328
+    ],
+    "winRate": 0.15,
+    "stopRate": 0,
+    "chaseSecAvg": 51.01666666666505,
+    "firstShotAvg": 4.360555555555548,
+    "shotsPerGame": 4.583333333333333,
+    "throwsPerGame": 6.85
+   }
+  ],
+  "v8": [
+   {
+    "stage": 1,
+    "games": 60,
+    "shots": 577,
+    "hits": 430,
+    "throws": 145,
+    "throwHits": 119,
+    "wins": 59,
+    "stops": 60,
+    "chaseSec": 1257.5500000000045,
+    "firstShot": 74.06666666666668,
+    "firstShotN": 60,
+    "locks": 145,
+    "closes": 240,
+    "byTool": {
+     "tyres": {
+      "shots": 274,
+      "hits": 214
+     },
+     "net": {
+      "shots": 138,
+      "hits": 101
+     },
+     "spikes": {
+      "shots": 86,
+      "hits": 62
+     },
+     "emp": {
+      "shots": 34,
+      "hits": 29
+     },
+     "mark": {
+      "shots": 45,
+      "hits": 24
+     }
+    },
+    "nitro": 139,
+    "nearMisses": 0,
+    "behind": 0,
+    "blindTaps": 3,
+    "dry": 11,
+    "spikeGreen": 51,
+    "spikeGreenHit": 47,
+    "shotHit": 0.7452339688041595,
+    "shotCI": [
+     0.7081389605737963,
+     0.7790850950034903
+    ],
+    "throwHit": 0.8206896551724138,
+    "throwCI": [
+     0.7502301957374464,
+     0.8745951219156827
+    ],
+    "allHit": 0.760387811634349,
+    "allCI": [
+     0.7279258558944501,
+     0.7900935025991935
+    ],
+    "winRate": 0.9833333333333333,
+    "stopRate": 1,
+    "chaseSecAvg": 20.959166666666743,
+    "firstShotAvg": 1.2344444444444447,
+    "shotsPerGame": 9.616666666666667,
+    "throwsPerGame": 2.4166666666666665
+   },
+   {
+    "stage": 3,
+    "games": 60,
+    "shots": 693,
+    "hits": 503,
+    "throws": 158,
+    "throwHits": 119,
+    "wins": 59,
+    "stops": 59,
+    "chaseSec": 1453.366666666661,
+    "firstShot": 63.350000000000065,
+    "firstShotN": 60,
+    "locks": 158,
+    "closes": 285,
+    "byTool": {
+     "tyres": {
+      "shots": 330,
+      "hits": 251
+     },
+     "net": {
+      "shots": 158,
+      "hits": 110
+     },
+     "spikes": {
+      "shots": 88,
+      "hits": 64
+     },
+     "emp": {
+      "shots": 47,
+      "hits": 39
+     },
+     "mark": {
+      "shots": 70,
+      "hits": 39
+     }
+    },
+    "nitro": 146,
+    "nearMisses": 5,
+    "behind": 0,
+    "blindTaps": 8,
+    "dry": 17,
+    "spikeGreen": 53,
+    "spikeGreenHit": 49,
+    "shotHit": 0.7258297258297258,
+    "shotCI": [
+     0.6914393623943216,
+     0.7577301475775284
+    ],
+    "throwHit": 0.7531645569620253,
+    "throwCI": [
+     0.6804546886408303,
+     0.8138557976618261
+    ],
+    "allHit": 0.7309048178613397,
+    "allCI": [
+     0.7001189267660826,
+     0.7596153678681516
+    ],
+    "winRate": 0.9833333333333333,
+    "stopRate": 0.9833333333333333,
+    "chaseSecAvg": 24.222777777777686,
+    "firstShotAvg": 1.0558333333333345,
+    "shotsPerGame": 11.55,
+    "throwsPerGame": 2.6333333333333333
+   },
+   {
+    "stage": 5,
+    "games": 60,
+    "shots": 773,
+    "hits": 498,
+    "throws": 288,
+    "throwHits": 176,
+    "wins": 56,
+    "stops": 60,
+    "chaseSec": 1665.9833333333156,
+    "firstShot": 71.61666666666672,
+    "firstShotN": 60,
+    "locks": 288,
+    "closes": 323,
+    "byTool": {
+     "tyres": {
+      "shots": 351,
+      "hits": 227
+     },
+     "net": {
+      "shots": 174,
+      "hits": 110
+     },
+     "spikes": {
+      "shots": 109,
+      "hits": 68
+     },
+     "emp": {
+      "shots": 56,
+      "hits": 40
+     },
+     "mark": {
+      "shots": 83,
+      "hits": 53
+     }
+    },
+    "nitro": 200,
+    "nearMisses": 8,
+    "behind": 0.3,
+    "blindTaps": 13,
+    "dry": 25,
+    "spikeGreen": 60,
+    "spikeGreenHit": 52,
+    "shotHit": 0.6442432082794308,
+    "shotCI": [
+     0.6098563602918385,
+     0.6772034470099333
+    ],
+    "throwHit": 0.6111111111111112,
+    "throwCI": [
+     0.5536980481560965,
+     0.6655989951715169
+    ],
+    "allHit": 0.6352497643732328,
+    "allCI": [
+     0.6058453457592833,
+     0.6636783092143766
+    ],
+    "winRate": 0.9333333333333333,
+    "stopRate": 1,
+    "chaseSecAvg": 27.766388888888592,
+    "firstShotAvg": 1.1936111111111118,
+    "shotsPerGame": 12.883333333333333,
+    "throwsPerGame": 4.8
+   },
+   {
+    "stage": 8,
+    "games": 60,
+    "shots": 1091,
+    "hits": 495,
+    "throws": 319,
+    "throwHits": 168,
+    "wins": 49,
+    "stops": 50,
+    "chaseSec": 2350.583333333276,
+    "firstShot": 99.24999999999991,
+    "firstShotN": 60,
+    "locks": 319,
+    "closes": 387,
+    "byTool": {
+     "tyres": {
+      "shots": 480,
+      "hits": 225
+     },
+     "net": {
+      "shots": 244,
+      "hits": 96
+     },
+     "emp": {
+      "shots": 82,
+      "hits": 39
+     },
+     "spikes": {
+      "shots": 160,
+      "hits": 100
+     },
+     "mark": {
+      "shots": 125,
+      "hits": 35
+     }
+    },
+    "nitro": 231,
+    "nearMisses": 16,
+    "behind": 0,
+    "blindTaps": 36,
+    "dry": 63,
+    "spikeGreen": 63,
+    "spikeGreenHit": 57,
+    "shotHit": 0.4537121906507791,
+    "shotCI": [
+     0.4243837085607053,
+     0.4833655037454401
+    ],
+    "throwHit": 0.5266457680250783,
+    "throwCI": [
+     0.47186324860397766,
+     0.5807941536638838
+    ],
+    "allHit": 0.4702127659574468,
+    "allCI": [
+     0.4442767899642697,
+     0.4963106138863455
+    ],
+    "winRate": 0.8166666666666667,
+    "stopRate": 0.8333333333333334,
+    "chaseSecAvg": 39.176388888887935,
+    "firstShotAvg": 1.6541666666666652,
+    "shotsPerGame": 18.183333333333334,
+    "throwsPerGame": 5.316666666666666
+   },
+   {
+    "stage": 10,
+    "games": 60,
+    "shots": 1195,
+    "hits": 534,
+    "throws": 372,
+    "throwHits": 158,
+    "wins": 44,
+    "stops": 50,
+    "chaseSec": 2678.6499999999246,
+    "firstShot": 261.63333333333287,
+    "firstShotN": 60,
+    "locks": 372,
+    "closes": 404,
+    "byTool": {
+     "tyres": {
+      "shots": 498,
+      "hits": 227
+     },
+     "net": {
+      "shots": 280,
+      "hits": 114
+     },
+     "spikes": {
+      "shots": 178,
+      "hits": 114
+     },
+     "emp": {
+      "shots": 99,
+      "hits": 35
+     },
+     "mark": {
+      "shots": 140,
+      "hits": 44
+     }
+    },
+    "nitro": 280,
+    "nearMisses": 27,
+    "behind": 0,
+    "blindTaps": 179,
+    "dry": 206,
+    "spikeGreen": 65,
+    "spikeGreenHit": 63,
+    "shotHit": 0.44686192468619246,
+    "shotCI": [
+     0.4188881532332477,
+     0.4751762502709349
+    ],
+    "throwHit": 0.42473118279569894,
+    "throwCI": [
+     0.3755203753399096,
+     0.47548068468112054
+    ],
+    "allHit": 0.4416081684747926,
+    "allCI": [
+     0.4171934051192579,
+     0.46630853422332136
+    ],
+    "winRate": 0.7333333333333333,
+    "stopRate": 0.8333333333333334,
+    "chaseSecAvg": 44.64416666666541,
+    "firstShotAvg": 4.360555555555548,
+    "shotsPerGame": 19.916666666666668,
+    "throwsPerGame": 6.2
+   }
+  ]
+ }
+}

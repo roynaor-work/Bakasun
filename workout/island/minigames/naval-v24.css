@@ -1,0 +1,18 @@
+/* Ships v24 (14/11/2026): the Lock button next to Fire (a tap locks the most dangerous or nearest hull, the next tap the next one, a swipe
+ * moves the lock along the fleet) and, while a submarine is out, the Torpedo button with its count. Thin dark-glass rings like the
+ * rest of the cockpit, above the weapon picker and left of the Vulcan's place, so nothing covers the Fire button or the stick. */
+.game-screen[data-game=navalDuel] :is(.naval-lock-btn,.naval-torpedo-btn){position:absolute;z-index:3;width:60px;height:60px;min-width:60px;min-height:60px;padding:0;border-radius:50%;display:grid;place-items:center;border:1.5px solid #e3d2a5a8;background:radial-gradient(circle,#092a3cc7 0 62%,#092a3c5c 74%);color:#f3e2b3;box-shadow:0 4px 14px #00000052;touch-action:none;pointer-events:auto;font-size:0;-webkit-tap-highlight-color:transparent;transition:border-color .15s,box-shadow .15s}
+.game-screen[data-game=navalDuel] :is(.naval-lock-btn,.naval-torpedo-btn) svg{width:32px;height:32px;filter:drop-shadow(0 1px 2px #0008)}
+.game-screen[data-game=navalDuel] .naval-lock-btn{right:max(118px,calc(env(safe-area-inset-right) + 96px));bottom:max(146px,calc(env(safe-area-inset-bottom) + 124px))}
+.game-screen[data-game=navalDuel] .naval-torpedo-btn{right:max(188px,calc(env(safe-area-inset-right) + 166px));bottom:max(146px,calc(env(safe-area-inset-bottom) + 124px));color:#c9f4ff;border-color:#7fe8ffa8}
+.game-screen[data-game=navalDuel] :is(.naval-lock-btn,.naval-torpedo-btn)[hidden]{display:none}
+.game-screen[data-game=navalDuel] .naval-lock-btn[data-locked=true]{border-color:#62E6AA;color:#d9ffe9;box-shadow:0 0 0 3px #62e6aa33,0 4px 14px #00000052}
+.game-screen[data-game=navalDuel] .naval-lock-btn[data-locked=true][data-status=turning]{border-color:#FFD166;color:#fff1c9;box-shadow:0 0 0 3px #ffd16633,0 4px 14px #00000052}
+.game-screen[data-game=navalDuel] .naval-lock-btn[data-locked=true]:is([data-status=far],[data-status=near],[data-status=blocked],[data-status=miss],[data-status=dive]){border-color:#FF9A5C;color:#ffd9c2}
+.game-screen[data-game=navalDuel] .naval-torpedo-btn[data-dive=true]{animation:naval-torpedo-pulse 1.2s ease-in-out infinite}
+.game-screen[data-game=navalDuel] .naval-torpedo-btn[data-empty=true]{opacity:.45;filter:saturate(.4);animation:none}
+.game-screen[data-game=navalDuel] .naval-torpedo-count{position:absolute;right:-4px;bottom:-4px;min-width:20px;height:20px;padding:0 4px;border-radius:7px;display:grid;place-items:center;font:700 12px/1 sans-serif!important;color:#e8fbff;background:#0b3348;border:1px solid #7fe8ff88;font-variant-numeric:tabular-nums}
+.game-screen[data-game=navalDuel] .naval-adventure-controls[data-weapon-menu=true] :is(.naval-lock-btn,.naval-torpedo-btn){visibility:hidden}
+@keyframes naval-torpedo-pulse{0%,100%{box-shadow:0 0 0 0 #7fe8ff00,0 4px 14px #00000052}50%{box-shadow:0 0 0 6px #7fe8ff44,0 4px 14px #00000052}}
+@media(max-height:350px){.game-screen[data-game=navalDuel] :is(.naval-lock-btn,.naval-torpedo-btn){bottom:128px;width:56px;height:56px;min-width:56px;min-height:56px}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=navalDuel] .naval-torpedo-btn[data-dive=true]{animation:none}}

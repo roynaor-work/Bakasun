@@ -1,9 +1,9 @@
-import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-13';
-import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-13';
-import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-13';
-import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-13';
-import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-13';
-import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-13';
+import {createCatchEngine} from './catch-engine.mjs?v=island-v2-20261107-14';
+import {createChaseEngine6, STRINGS as CHASE_STRINGS} from './catch-chase6.mjs?v=island-v2-20261107-14';
+import {STRINGS as TYRE_STRINGS} from './catch-tyres.mjs?v=island-v2-20261107-14';
+import {createCatchAudio} from './catch-audio.mjs?v=island-v2-20261107-14';
+import {STRINGS as WEAPON_STRINGS} from './catch-weapons.mjs?v=island-v2-20261107-14';
+import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-14';
 
 /** v7 (13/11, Roy after v22): a softer siren, tools from the first second, aim assist. Flags:
  * ?catchSiren=v6 the v6 siren, ?catchWeapons=0 the v6 tyre gun (armed after 14 s), ?catchAssist=0 the v6/v22 hitting
@@ -11,6 +11,23 @@ import {assistRelease, levels7} from './catch-assist.mjs?v=island-v2-20261107-13
  * ?catchAssets=0 the v7 drawn shapes and synth sounds instead of the Codex packs (props: catch-props7.mjs, sounds: catch-audio.mjs
  * PACK7; the pack siren is 5.9 dB under the v6 siren, without the pack the v6 siren loop plays at SIREN7 = .55, -5.2 dB). */
 export const SIREN7 = .55;
+/** v8 (14/11, Roy after v23), each part on by default with its own way back to v7:
+ *  ?catchIntro=v7       the v7 opening (the saw "vroom", beeps); v8 = the engine idles in, soft dings, one siren whoop at "go"
+ *  ?catchEngine=v7      the v7 engine buzz with its turbo whine; v8 = a V6 with gears (catch-audio8.mjs)
+ *  ?catchSiren=v7       the v7 pack siren (a pure sine wail, like an air-raid alert); v8 = a soft two-tone 7 dB under it (v6 still works)
+ *  ?catchWeaponsFix=0   the v7 tools; v8 = the police car follows instead of passing him, an honest spike ring, a tap that cannot fire
+ *                       says why, a ring sized and named for the tool's target (catch-weapons.mjs ARSENAL8, catch-chase6.mjs CHASE8)
+ *  ?catchBurst=0        one beep per tyre shot; v8 = a rapid burst with tracers and muzzle flashes (catch-burst8.mjs), same damage
+ *  ?catchSound8=synth   the v8 engine and opening synthesized only; by default the Codex pack (catch-audio-v2: the police V6 layers, the gear
+ *                       change, the opening) plays once it decodes, with the synthesis as the stand-in and the fallback (catch-audio8.mjs PACK8) */
+export function flags8(params, ctx = {}) {
+  const siren = ctx.v7?.siren ?? params.get('catchSiren');
+  return {
+    intro: ctx.v8?.intro ?? params.get('catchIntro') !== 'v7', engine: ctx.v8?.engine ?? params.get('catchEngine') !== 'v7',
+    siren: ctx.v8?.siren ?? (siren !== 'v7' && siren !== 'v6'), weaponsFix: ctx.v8?.weaponsFix ?? params.get('catchWeaponsFix') !== '0',
+    burst: ctx.v8?.burst ?? params.get('catchBurst') !== '0', pack: ctx.v8?.pack ?? params.get('catchSound8') !== 'synth',
+  };
+}
 
 const SVG = 'http://www.w3.org/2000/svg';
 const ICONS = {
@@ -27,6 +44,7 @@ const ICONS = {
 const LOCAL = {...CHASE_STRINGS, ...TYRE_STRINGS, ...WEAPON_STRINGS,
   'catch.help7.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון. מכניסים את הנקודה לעיגול על הרכב, וכשהוא ירוק לוחצים ירי. כל פגיעה ממלאת את מד הנזק, ומד מלא מפיל את הרכב.',
   'catch.help7.4': 'יש כמה זריקות וצריך כמה פגיעות. כשהכוונת קרובה אליו היא נמשכת אליו והוא מאט לרגע, והעיגול המקווקו מראה לאן הוא רץ.',
+  'catch.help8.2': 'אפשר לירות מההתחלה. כפתור הכלי מחליף בין פנצ׳ר, רשת דבק, קוצים, פולס וסימון, והעיגול מראה למה מכוונים: גלגל, גג, הכביש לפניו, כל הרכב או תא המטען. מכניסים את הנקודה לעיגול, וכשהוא ירוק לוחצים ירי. עיגול אפור אומר למה אי אפשר לירות עכשיו.',
   'catch.pop.nitro': 'ניטרו', 'catch.pop.nearBonus': 'עקיפה צמודה, עוד ניטרו', 'catch.pop.crimOil': 'הוא החליק על השמן', 'catch.pop.block': 'מחסום משטרה, נשאר נתיב אחד',
   'catch.help6.1': 'מתחילים במרדף: גוררים ימינה ושמאלה כדי להטות את ההגה, ובפניות מחזיקים לכיוון הפנייה. טורבו ובלם בימין.',
   'catch.help6.2': 'כשהרכב הנמלט קרוב וישר לפניכם מופיעה כוונת. כשהיא ירוקה לוחצים ירי ופוגעים בגלגל. שני פנצ׳רים והרכב נעצר.',
@@ -83,13 +101,14 @@ export function runCatchSession6(ctx) {
   const v7 = {weapons: ctx.v7?.weapons ?? params.get('catchWeapons') !== '0', assist: ctx.v7?.assist ?? params.get('catchAssist') !== '0', elements: ctx.v7?.elements ?? params.get('catchElements') !== '0'};
   const sirenScale = (ctx.v7?.siren ?? params.get('catchSiren')) === 'v6' ? 1 : SIREN7;
   const assets7 = (v7.weapons || v7.elements) && (ctx.v7?.assets ?? params.get('catchAssets') !== '0'); // the Codex prop and sound packs
+  const v8 = flags8(params, ctx), chase8 = v8.weaponsFix && v7.weapons ? {weaponsFix: true} : null, audio8 = {intro: v8.intro, engine: v8.engine, siren: v8.siren, burst: v8.burst, pack: v8.pack};
   const balance6 = {...balance, levels: v7.assist ? levels7(balance) : balance.levels.map(l => ({...l, obstacles: [], movers: [], ...(l.v6 || {})}))};
   const makeThrow = mods => createCatchEngine({balance: balance6, stage, seed: ctx.seed, equipment: ctx.equipment, city, v2: true, mods, feel: true, arch: true});
   const withChase = Boolean(ctx.canvas);
-  const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment, v7: (v7.weapons || v7.elements) ? v7 : null}) : null;
+  const chase = withChase ? createChaseEngine6({balance, stage, seed: ctx.seed, equipment: ctx.equipment, v8: chase8, v7: (v7.weapons || v7.elements) ? v7 : null}) : null;
   let engine = withChase ? null : makeThrow({});
   let mode = withChase ? 'loading' : 'throw';
-  let blockSirenUntil = 0, scrapeSaid = false, nearSaid = false, nearAt = -9, blockSaid = false, toolSaid = {}, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
+  let dryAt = -9, blockSirenUntil = 0, scrapeSaid = false, nearSaid = false, nearAt = -9, blockSaid = false, toolSaid = {}, view = null, audio = null, hud = null, disposed = false, paused = false, finished = false, helpOpen = false, raf = 0, last = 0, acc = 0, slow = 0, error = null, finishTimer = 0, bailTimer = 0, sirenAt = 0, fireHud = null, bowHud = null, frame6 = null;
   const abort = new AbortController(), hudNodes = {};
   const session = {
     setPaused(value) { paused = Boolean(value); last = 0; audio?.setPaused?.(paused); },
@@ -99,16 +118,16 @@ export function runCatchSession6(ctx) {
       try { audio?.engineStop?.(); } catch { /* optional */ } audio?.dispose?.(); fireHud?.dispose?.(); bowHud?.dispose?.(); hud?.remove();
       ctx.controls?.removeAttribute('hidden');
     },
-    get snapshot() { return {ready: Boolean(view) || !ctx.canvas, paused, disposed, error, mode, v2: true, v6: true, v7: {...v7, siren: sirenScale, assets: assets7, props: Boolean(view?.props7), sounds: audio?.status?.().pack || null}, phase: engine?.state.phase || mode, throwsLeft: engine?.state.throwsLeft ?? null, tool: chase?.v7?.weapons ? chase.gun.current : null, damage: chase?.state.damage ?? null}; },
-    get engine() { return engine; }, get chase() { return chase; }, city, v2: true, v6: true, v7,
+    get snapshot() { return {ready: Boolean(view) || !ctx.canvas, paused, disposed, error, mode, v2: true, v6: true, v7: {...v7, siren: sirenScale, assets: assets7, props: Boolean(view?.props7), sounds: audio?.status?.().pack || null}, v8: {...v8, weaponsFix: chase ? Boolean(chase.v8?.weaponsFix) : Boolean(v8.weaponsFix && v7.weapons), audio: audio?.status?.().v8 || null, burstFx: Boolean(view?.burst8)}, phase: engine?.state.phase || mode, throwsLeft: engine?.state.throwsLeft ?? null, tool: chase?.v7?.weapons ? chase.gun.current : null, damage: chase?.state.damage ?? null}; },
+    get engine() { return engine; }, get chase() { return chase; }, city, v2: true, v6: true, v7, v8,
   };
   if (params.get('dev') === '1' || ctx.debug) session.debug = {get engine() { return engine; }, chase, view: () => view, release: () => (ctx.canvas ? release() : (engine.release() && undefined)), setAim: a => engine?.setAim(a), step: dt => stepThrow(dt), stepChase: dt => stepChase(dt), skipChase: () => { if (mode === 'chase') { chase.state.phase = 'run'; if (chase.v7?.weapons) chase.forceDown(); else { chase.gun.state.hitChance = 1; chase.gun.state.locked = true; while (!chase.gun.state.stopped) { chase.gun.state.reload = 0; chase.fire(); } } while (chase.state.phase !== 'end') { chase.step(1 / 60); } handleChase(chase.drainEvents()); } }, cycle: () => chase?.cycle?.(), fire: () => chase?.fire(), held: () => ({boostHeld, brakeHeld, frames: frameCount})};
   if (!ctx.canvas) return session;
 
   const {canvas, controls} = ctx, stageEl = canvas.parentElement, doc = canvas.ownerDocument;
-  try { audio = createCatchAudio({sirenScale, pack: assets7 ? 'v7' : null, muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
+  try { audio = createCatchAudio({sirenScale, pack: assets7 ? 'v7' : null, v8: audio8, muted: () => { try { return globalThis.localStorage?.getItem('island.sound') === 'off'; } catch { return false; } }}); } catch { audio = null; }
   controls?.setAttribute('hidden', '');
-  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-13', import.meta.url).href; stageEl.append(css);
+  const css = doc.createElement('link'); css.rel = 'stylesheet'; css.href = new URL('./catch.css?v=island-v2-20261107-14', import.meta.url).href; stageEl.append(css);
   const style6 = doc.createElement('style'); style6.textContent = STYLE6; stageEl.append(style6);
   canvas.setAttribute('aria-label', t('catch.canvas'));
 
@@ -137,7 +156,7 @@ export function runCatchSession6(ctx) {
   const popup = node('div', 'catch-popup'); popup.setAttribute('role', 'status'); popup.setAttribute('aria-live', 'polite'); hud.append(popup);
   const loading = node('div', 'catch-loading', t('catch.loading')); hud.append(loading);
   const help = node('div', 'catch-help'); help.hidden = true;
-  { const card = node('div', 'catch-help-card'); for (const k of v7.weapons || v7.assist ? ['6.1', v7.weapons ? '7.2' : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] : ['6.1', '6.2', '6.3', '6.4']) card.append(node('p', '', t('catch.help' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help6', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
+  { const card = node('div', 'catch-help-card'); for (const k of v7.weapons || v7.assist ? ['6.1', v7.weapons ? (chase8 ? '8.2' : '7.2') : '6.2', '6.3', v7.assist ? '7.4' : '6.4'] : ['6.1', '6.2', '6.3', '6.4']) card.append(node('p', '', t('catch.help' + k))); const ok = node('button', 'catch-help-ok', t('catch.help.dismiss')); ok.type = 'button'; ok.addEventListener('click', () => { help.hidden = true; helpOpen = false; try { localStorage.setItem('island.catch.help6', '1'); } catch { /* private mode */ } }); card.append(ok); help.append(card); hud.append(help); }
   const seenHelp = (() => { try { return localStorage.getItem('island.catch.help6') === '1' || localStorage.getItem('island.catch.help2') === '1'; } catch { return true; } })();
   const stars = node('div', 'catch-stars'); stars.hidden = true; hud.append(stars);
 
@@ -182,6 +201,7 @@ export function runCatchSession6(ctx) {
     chase.step(dt); const events = chase.drainEvents();
     if (events.length) handleChase(events);
     if (mode === 'chase' && chase.state.phase === 'run' && performance.now() - sirenAt > 800) { sirenAt = performance.now(); audio?.cue('siren', {approach: clamp((chase.state.v - chase.state.crim.v) / 8, -1, 1), near: performance.now() < blockSirenUntil}); }
+    audio?.engineState?.(chase.state.phase, chase.state.braking); // v8: the V6 idles through the countdown and lifts off the throttle on the brake
     audio?.engine?.(chase.state.v, chase.state.boosting);
   }
   function handleChase(events) {
@@ -195,9 +215,10 @@ export function runCatchSession6(ctx) {
       else if (e.type === 'nitro') { audio?.cue('nitroPickup'); if (e.count === 1) say('catch.pop.nitro', 'good'); }
       else if (e.type === 'crimOil') { audio?.cue('scrape'); say('catch.pop.crimOil', 'good'); }
       else if (e.type === 'block') { blockSirenUntil = performance.now() + 3500; if (!blockSaid) { blockSaid = true; say('catch.pop.block', 'warn'); } } // the pack's near siren while the police roadblock comes up
-      else if (e.type === 'weapon') { audio?.cue('toolSwap'); if (!toolSaid[e.id]) { toolSaid[e.id] = true; say('catch.weapon.' + e.id + '.hint', 'warn'); } else say('catch.weapon.next', '', {name: t('catch.weapon.' + e.id)}); }
-      else if (e.type === 'wshot') { if (!e.late) audio?.cue('shot'); if (!e.hit) { if (e.late) say('catch.pop.spikesMiss', 'warn'); else say('catch.pop.toolMiss', 'warn'); } }
-      else if (e.type === 'spikesOut') { audio?.cue('swing'); say('catch.pop.spikesOut', 'warn'); }
+      else if (e.type === 'weapon') { audio?.cue('toolSwap'); if (!toolSaid[e.id]) { toolSaid[e.id] = true; say('catch.weapon.' + e.id + '.hint', 'warn'); } else if (chase8) say('catch.weapon.next8', '', {name: t('catch.weapon.' + e.id), aim: t('catch.aim.' + e.id)}); else say('catch.weapon.next', '', {name: t('catch.weapon.' + e.id)}); }
+      else if (e.type === 'wshot') { if (!e.late) { if (!v8.burst) audio?.cue('shot'); else if (e.weapon === 'mark') audio?.cue('burst', {rounds: 4}); else if (e.weapon === 'emp') audio?.cue('charge'); else audio?.cue('launch'); } if (!e.hit) { if (e.late) say('catch.pop.spikesMiss', 'warn'); else say('catch.pop.toolMiss', 'warn'); } }
+      else if (e.type === 'spikesOut') { if (v8.burst) audio?.cue('launch'); else audio?.cue('swing'); say('catch.pop.spikesOut', 'warn'); }
+      else if (e.type === 'dry') { audio?.cue('dry'); const now = performance.now(); if (now - dryAt > 1500) { dryAt = now; say('catch.dry.' + e.reason, 'warn'); } } // v8: a tap that could not fire says why
       else if (e.type === 'spikes') { audio?.cue('spikes'); say('catch.pop.spikes', 'good'); bump(); }
       else if (e.type === 'netted') { audio?.cue('sticky'); say('catch.pop.net', 'good'); bump(); }
       else if (e.type === 'emp') { audio?.cue('zap'); say('catch.pop.emp', 'good'); bump(); }
@@ -209,7 +230,7 @@ export function runCatchSession6(ctx) {
       else if (e.type === 'turn') { audio?.cue('turn'); bend.hidden = false; bendIcon.replaceChildren(svg(e.dir > 0 ? 'turnL' : 'turnR', 26)); bendText.textContent = t(e.dir > 0 ? 'catch.pop.turnLeft' : 'catch.pop.turnRight'); }
       else if (e.type === 'ram') { audio?.cue('ram'); }
       else if (e.type === 'crimBoost') { audio?.cue('nitro'); say('catch.pop.crimBoost', 'warn'); }
-      else if (e.type === 'shot') { audio?.cue(e.hit ? 'shotHit' : 'shot'); if (!e.hit) say('catch.pop.shotMiss', 'warn'); }
+      else if (e.type === 'shot') { if (v8.burst) { audio?.cue('shot'); if (e.hit) audio?.cue('shotHit', {delay: .12}); } else audio?.cue(e.hit ? 'shotHit' : 'shot'); if (!e.hit) say('catch.pop.shotMiss', 'warn'); }
       else if (e.type === 'flat') { audio?.cue('flat'); say('catch.pop.flat', 'good'); bump(); }
       else if (e.type === 'stopped') { audio?.cue('skid'); say(chase.v7?.weapons ? 'catch.pop.down' : 'catch.pop.stopped', 'good'); }
       else if (e.type === 'noAmmo') { say(chase.v7?.weapons ? 'catch.pop.toolEmpty' : 'catch.pop.noAmmo', 'warn'); }
@@ -236,7 +257,7 @@ export function runCatchSession6(ctx) {
   /** The archery HUD of catch-bow-hud.mjs when it exists; otherwise the v5 drag aim stays usable. */
   async function installBow() {
     try {
-      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-13');
+      const m = await import('./catch-bow-hud.mjs?v=island-v2-20261107-14');
       bowHud = m.installBowHud({hud, stageEl, doc, t, engine: () => engine, balance, onRelease: release, audio, stage: () => view?.bow, project: (x, y, z) => view.project(x, y, z), level: stage, assist: v7.assist ? {} : null});
       bowHud.show?.(true);
     } catch { bowHud = null; }
@@ -253,7 +274,7 @@ export function runCatchSession6(ctx) {
       else if (e.type === 'miss') { if (e.near) { audio?.cue('near'); say('catch.pop.near', 'warn'); slow = .5; } else { audio?.cue('miss'); say('catch.pop.miss', 'bad'); } }
       else if (e.type === 'hidden') { audio?.cue('miss'); say('catch.pop.hidden', 'bad'); }
       else if (e.type === 'flee') { if (!e.boss) say('catch.pop.flee', 'warn'); }
-      else if (e.type === 'escape') { audio?.cue('engine'); say('catch.pop.escape', 'bad'); }
+      else if (e.type === 'escape') { audio?.cue('engine', {rev: true}); say('catch.pop.escape', 'bad'); }
       else if (e.type === 'turn') { hud.dataset.phase = 'aim'; }
       else if (e.type === 'done') finish();
     }
@@ -412,13 +433,13 @@ export function runCatchSession6(ctx) {
     refreshHud();
   }
 
-  import('./catch-view6.mjs?v=island-v2-20261107-13').then(async ({createCatchView6}) => {
+  import('./catch-view6.mjs?v=island-v2-20261107-14').then(async ({createCatchView6}) => {
     const quality = params.get('quality') === 'low' || ctx.lite ? 'low' : 'high';
-    view = await createCatchView6({canvas, balance, stage, chase, quality, assets7, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
+    view = await createCatchView6({canvas, balance, stage, chase, quality, assets7, burst8: v8.burst, maxDpr: balance.render.maxDpr, lowDpr: balance.render.lowDpr, signal: abort.signal, onProgress: p => { loading.dataset.progress = String(Math.round(p * 100)); }});
     if (disposed) { view.dispose(); view = null; return; }
     try {
-      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-13'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run'}); }
-      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-13'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
+      if (chase.v7?.weapons) { const m = await import('./catch-arsenal-hud.mjs?v=island-v2-20261107-14'); fireHud = m.installArsenalHud({hud: chaseBox, stageEl, t, chase: () => chase, project: (x, y, z) => view.project(x, y, z), onFire: fireNow, onCycle: cycleNow, active: () => chase.state.phase === 'run', fix8: Boolean(chase8)}); }
+      else { const m = await import('./catch-fire-hud.mjs?v=island-v2-20261107-14'); fireHud = m.installFireHud({hud: chaseBox, stageEl, t, gun: () => chase.gun, project: (x, y, z) => view.project(x, y, z), crimWorld: () => view.crimWorld(), onFire: fireNow, active: () => chase.state.phase === 'run'}); }
       fireButton.hidden = true; ammo.hidden = true; reticle.hidden = true;
     } catch { fireHud = null; }
     loading.hidden = true;
