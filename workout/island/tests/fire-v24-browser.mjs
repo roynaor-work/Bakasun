@@ -97,14 +97,14 @@ async function finishStreet(t,run,name){
   let s=await t.snap();const spray=await t.center('#shoot');const trace=[];let shotDone=false;
   const hydrantPoint=()=>t.page.evaluate(()=>{const d=window.__island.games.current?.session.debug;if(!d)return null;const m=d.model,hp=[...m.balance.city.hydrants].sort((a,b)=>Math.hypot(a[0]-m.truck.x,a[2]-m.truck.z)-Math.hypot(b[0]-m.truck.x,b[2]-m.truck.z))[0];const p=d.view.projectWorld(hp);return p&&p.x>=0&&p.x<=844&&p.y>=0&&p.y<=390?p:null;});
   for(let guard=0;guard<900;guard++){
-    s=await t.snap();if(!s)break;if(guard%15===0)trace.push({time:+s.time.toFixed(1),remaining:Math.ceil(s.remaining),water:Math.round(s.water),active:s.flames.filter(f=>f.active&&f.heat>0).length,canFinish:s.canFinish});
+    s=await t.snap();if(!s)break;trace.push({time:+s.time.toFixed(1),remaining:Math.ceil(s.remaining),water:Math.round(s.water),active:s.flames.filter(f=>f.active&&f.heat>0).length,near:s.flames.filter(f=>f.active&&f.heat>0&&Math.hypot(f.x-s.nozzle.x,f.y-s.nozzle.y)<=s.range*.85).length,driving:s.truck.driving,nav:s.navigation.active,hydrant:+s.hydrantDistance.toFixed(1),at:s.atHydrant,canFinish:s.canFinish});if(trace.length>400)trace.shift();
     if(s.canFinish){await t.tapEl('#fire-finish');for(let i=0;i<30;i++){await t.tick(100);if(await t.page.locator('[data-result=fireRescue]').count())break;}break;}
     const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);
     const near=fires.filter(f=>Math.hypot(f.x-s.nozzle.x,f.y-s.nozzle.y)<=s.range*.85);
     // hold the hose on a near fire (the aim follows the nearest flame); a short release when the pump is empty
     if(near.length&&!s.truck.driving&&s.water>0){await t.touch('touchStart',2,spray.x,spray.y);for(let i=0;i<60;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.pressureEmpty){await t.touch('touchEnd',2);await t.tick(400);await t.touch('touchStart',2,spray.x,spray.y);}
         if(n.water<=0||!n.flames.some(f=>f.active&&f.heat>0&&Math.hypot(f.x-n.nozzle.x,f.y-n.nozzle.y)<=n.range*.85))break;}await t.touch('touchEnd',2);if(!shotDone){shotDone=true;run.shots.push(await t.shot(name+'-street-spray'));}await t.tick(150);continue;}
-    if(s.water/s.maxWater<.25&&!s.atHydrant){const h=s.indicators.find(a=>a.kind==='hydrant')||await hydrantPoint();
+    if(s.water/s.maxWater<.35&&!s.atHydrant){const h=s.indicators.find(a=>a.kind==='hydrant')||await hydrantPoint();
       if(h){await t.tapAt(h.x,h.y);let at=false;for(let i=0;i<150;i++){await t.tick(100);const n=await t.snap();if(!n)break;if(n.atHydrant&&!n.truck.driving){at=true;break;}if(!n.navigation.active&&i>30)break;}
         if(at)for(let k=0;k<60;k++){await t.tick(100);const w=await t.snap();if(!w||w.water/w.maxWater>.85)break;}continue;}}
     if(!fires.length){await t.tick(200);continue;}
@@ -169,6 +169,8 @@ try{
   const k=await open('&fireFlow=v23');s=await startStage(k,3);
   const noEntry=!('v24' in s)&&await k.page.locator('#fire-enter').count()===0;
   check('fireFlowV23RestoresThePreviousStage',noEntry,{keys:Object.keys(s).filter(x=>x==='v24'),enter:await k.page.locator('#fire-enter').count()});
+  const control={shots:[]};report.runs.controlV23=control;await finishStreet(k,control,'control-v23');
+  check('controlV23StreetOutcomeRecorded',typeof control.resultWin==='boolean',{win:control.resultWin,rows:control.resultRows,trace:(control.streetTrace||[]).slice(-6)});
   check('v23NoPageErrors',k.errors.length===0,{errors:k.errors.slice(0,6)});
   await k.context.close();
   // ---- download size of the inside (stage 3 plan and the whole set) ---------------------------------------------------------------------
