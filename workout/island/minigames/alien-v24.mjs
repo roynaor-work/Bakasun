@@ -3,8 +3,8 @@
  *  - HUD: the three fire buttons (steady cannon, Vulcan, missile) become thin, half-transparent rings with an icon in one column at
  *    the right edge, above the ship's lane and far from the stick, so they cover neither the aliens nor the ship. Touch targets stay
  *    at least 56 px. The Vulcan's heat is a thin arc around its ring. `?alienHud=v23` restores the v23 row of big buttons.
- *  - Refill: a Vulcan magazine drops from downed aliens (always from the big ships: heavy, carrier, the boss at a phase change;
- *    sometimes from the others once the Vulcan has been used) and falls toward the ship like a bonus. Flying into it empties the gauge,
+ *  - Refill: a Vulcan magazine drops from downed aliens (the boss at a phase change; while the Vulcan is in use, always from the big
+ *    ships, heavy and carrier, and sometimes from the others) and falls toward the ship like a bonus. Flying into it empties the gauge,
  *    ends a lock at once and keeps the barrels cold for `coldSeconds` (the Vulcan heats no more meanwhile). The steady cannon is never
  *    touched and the Vulcan button never leaves the screen. `?alienRefill=0` restores v23 (no magazines).
  * Pure helpers (no DOM, no clock, random passed in) so tests and sims can import them. Numbers: config.json alienDefense.v24
@@ -32,17 +32,18 @@ export const V24_DEFAULTS=Object.freeze({
 });
 export function v24Config(balance){const b=balance?.v24||{};return {...V24_DEFAULTS,...b,refill:{...V24_DEFAULTS.refill,...(b.refill||{})}};}
 /** Should this kill drop a Vulcan magazine? state={kind,boss,child,phase,time,lastDropAt,lastVulcanAt,heat,locked,overheatsSince,onScreen,
- * random}. Big ships and boss phase changes always drop (gap and screen cap allowing); other kills drop by chance once the Vulcan has been
- * used, and the pity rule guarantees one after `pityOverheats` locks. */
+ * random}. Boss phase changes always drop (gap and screen cap allowing); otherwise only while the Vulcan is in use (fired in the last
+ * `usedSeconds`, warm or locked): big ships always, the pity rule after `pityOverheats` locks, other kills by chance. */
 export function refillShouldDrop(state,cfg=V24_DEFAULTS.refill){
  const s=state||{},c=cfg||V24_DEFAULTS.refill,time=Number(s.time)||0;
  if((s.onScreen||0)>=c.maxOnScreen)return false;
  if(time-(Number.isFinite(s.lastDropAt)?s.lastDropAt:-Infinity)<c.gapSeconds)return false;
  if(s.phase||s.boss)return true;
+ // A magazine only for a Vulcan in use: a child who plays with the steady cannon alone is not sent chasing tokens it does not need.
+ const used=s.locked||(s.heat||0)>.05||time-(Number.isFinite(s.lastVulcanAt)?s.lastVulcanAt:-Infinity)<=c.usedSeconds;if(!used)return false;
  if(!s.child&&c.bigKinds.includes(s.kind))return true;
  if((s.overheatsSince||0)>=c.pityOverheats)return true;
- const used=s.locked||(s.heat||0)>.05||time-(Number.isFinite(s.lastVulcanAt)?s.lastVulcanAt:-Infinity)<=c.usedSeconds;
- return used&&(typeof s.random==='function'?s.random():1)<c.chance;
+ return (typeof s.random==='function'?s.random():1)<c.chance;
 }
 /** A magazine was picked up: the gauge empties, a lock ends, and the barrels stay cold for `coldSeconds`. */
 export function refillApply(vgate,cfg=V24_DEFAULTS.refill){return {gate:{...(vgate||{}),heat:0,lock:0,rest:0,mode:'idle',firing:false},cold:cfg.coldSeconds};}

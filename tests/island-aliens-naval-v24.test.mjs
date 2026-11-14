@@ -47,14 +47,15 @@ test('aliens v24 flags: HUD and refill on by default; ?alienHud=v23 and ?alienRe
  globalThis.__alienFire='v15';try{assert.equal(createAlienModel({config,balance:ab,level:1,random:seededRandom(3)}).refillOn,false,'refill is part of the two-button fire');}finally{globalThis.__alienFire=undefined;}
 });
 
-test('refill drop rule: big ships and boss phases always (gap and one on screen allowing), others by chance only after the Vulcan was used, pity after locks',()=>{
- const c=v24Config(ab).refill,never=()=>.99,always=()=>0;
- assert.equal(refillShouldDrop({kind:1,time:20,lastDropAt:-Infinity,random:never},c),true,'heavy');assert.equal(refillShouldDrop({kind:4,time:20,random:never},c),true,'carrier');
- assert.equal(refillShouldDrop({phase:true,time:20,random:never},c),true,'boss phase');assert.equal(refillShouldDrop({kind:1,child:true,time:20,random:never},c),false,'a launched child is not a big ship');
- assert.equal(refillShouldDrop({kind:1,time:20,lastDropAt:20-c.gapSeconds+.1,random:never},c),false,'gap');assert.equal(refillShouldDrop({kind:1,time:20,onScreen:c.maxOnScreen,random:never},c),false,'one at a time');
+test('refill drop rule: boss phases always; while the Vulcan is in use big ships always, others by chance, pity after locks (gap and one on screen allowing); never for a Vulcan not in use',()=>{
+ const c=v24Config(ab).refill,never=()=>.99,always=()=>0,used={lastVulcanAt:16};
+ assert.equal(refillShouldDrop({kind:1,time:20,lastDropAt:-Infinity,random:never,...used},c),true,'heavy');assert.equal(refillShouldDrop({kind:4,time:20,random:never,...used},c),true,'carrier');
+ assert.equal(refillShouldDrop({kind:1,time:20,random:never},c),false,'a big ship drops nothing for a Vulcan not in use');assert.equal(refillShouldDrop({kind:1,time:20,heat:.4,random:never},c),true,'a warm gauge counts as in use');
+ assert.equal(refillShouldDrop({phase:true,time:20,random:never},c),true,'boss phase');assert.equal(refillShouldDrop({kind:1,child:true,time:20,random:never,...used},c),false,'a launched child is not a big ship');
+ assert.equal(refillShouldDrop({kind:1,time:20,lastDropAt:20-c.gapSeconds+.1,random:never,...used},c),false,'gap');assert.equal(refillShouldDrop({kind:1,time:20,onScreen:c.maxOnScreen,random:never,...used},c),false,'one at a time');
  assert.equal(refillShouldDrop({kind:0,time:20,lastVulcanAt:-Infinity,random:always},c),false,'Vulcan never used: a scout drops nothing');
  assert.equal(refillShouldDrop({kind:0,time:20,lastVulcanAt:15,random:always},c),true,'Vulcan used: by chance');assert.equal(refillShouldDrop({kind:0,time:20,lastVulcanAt:15,random:never},c),false);
- assert.equal(refillShouldDrop({kind:0,time:20,overheatsSince:c.pityOverheats,random:never},c),true,'pity after locks');
+ assert.equal(refillShouldDrop({kind:0,time:20,overheatsSince:c.pityOverheats,random:never,...used},c),true,'pity after locks');
  const r=refillApply({heat:1,lock:1.4,rest:0},c);assert.equal(r.gate.heat,0);assert.equal(r.gate.lock,0);assert.equal(r.cold,c.coldSeconds);
  assert.equal(refillLevel('red',1),'cold');assert.equal(refillLevel('red',0),'red');
 });
