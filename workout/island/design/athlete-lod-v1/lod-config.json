@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "athlete-lod-v1",
+  "units": "meters",
+  "distanceMetric": "camera world position to athlete world-space bounding-sphere center",
+  "referenceView": {"verticalFovDegrees": 50, "viewportHeightCssPixels": 1080, "athleteHeightMeters": 1.8},
+  "levels": [
+    {"id": "LOD0", "nominalMinMeters": 0, "nominalMaxMeters": 12, "bodyTriangleBudget": 5080, "source": "../../assets/athlete-body-v22/models/{body}.glb"},
+    {"id": "LOD1", "nominalMinMeters": 12, "nominalMaxMeters": 30, "triangleBudgetIncludingNumberMask": 1500, "source": "models/{body}-lod1.glb"},
+    {"id": "LOD2", "nominalMinMeters": 30, "nominalMaxMeters": null, "triangleBudgetIncludingNumberMask": 400, "source": "models/{body}-lod2.glb"}
+  ],
+  "transitions": [
+    {"from": "LOD0", "to": "LOD1", "thresholdMeters": 12, "overlapStartMeters": 10.8, "overlapEndMeters": 13.2},
+    {"from": "LOD1", "to": "LOD2", "thresholdMeters": 30, "overlapStartMeters": 27, "overlapEndMeters": 33}
+  ],
+  "overlap": {
+    "fractionOfThreshold": 0.2,
+    "definition": "Full overlap width is 20% of threshold: threshold * [0.9, 1.1].",
+    "blend": "smoothstep(startMeters, endMeters, distanceMeters)",
+    "renderRecommendation": "Complementary screen-space dither; near coverage 1-blend, far coverage blend. Both meshes share the same posed skeleton and morph weights.",
+    "hardSwitchFallback": "Move outward only past overlapEndMeters; move inward only below overlapStartMeters (hysteresis).",
+    "maximumSimultaneousLevels": 2,
+    "accountForBothMeshesInTransitionBudget": true
+  },
+  "bodies": ["guard", "wing", "center", "soccer"],
+  "skeleton": {"jointCount": 18, "identityBoneMap": true, "preserveSourceBodyScale": true},
+  "appearance": {
+    "regionAttribute": "_REGION",
+    "colorAttribute": "COLOR_0",
+    "uniform_primary": 1,
+    "uniform_secondary": 2,
+    "uniform_trim": 3,
+    "numberMaterial": "back_number_mask",
+    "numberMask": "textures/number-23-mask.png",
+    "numberRecolorRegion": 3,
+    "sportMorphs": ["basketball", "hockey", "tennis"],
+    "lod2Hands": "one closed mitten volume per hand, no separate fingers",
+    "hair": "Separate optional accessory; excluded from body budgets. Budget or simplify separately before attachment."
+  },
+  "recommendation": "Starting distances for the reference camera, to tune against actual game framing; no runtime integration in this asset-only package.",
+  "compression": "none",
+  "license": "CC0-1.0"
+}
