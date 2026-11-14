@@ -1,0 +1,200 @@
+[
+  {
+    "path": "models/firefighter-equipment.glb",
+    "version": "2.0.0-dev.3.10",
+    "uri": "models/firefighter-equipment.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "validatedAt": "2026-11-14T15:33:40.395Z",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/40"
+        }
+      ],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Original firefighter-v1 authoring tools",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 186996
+        }
+      ],
+      "animationCount": 1,
+      "materialCount": 2,
+      "hasMorphTargets": false,
+      "hasSkins": true,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 24,
+      "totalVertexCount": 4375,
+      "totalTriangleCount": 1452,
+      "maxUVs": 0,
+      "maxInfluences": 4,
+      "maxAttributes": 6
+    }
+  },
+  {
+    "path": "models/oxygen-mask.glb",
+    "version": "2.0.0-dev.3.10",
+    "uri": "models/oxygen-mask.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "validatedAt": "2026-11-14T15:33:40.404Z",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Original firefighter-v1 authoring tools",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 7200
+        }
+      ],
+      "animationCount": 0,
+      "materialCount": 1,
+      "hasMorphTargets": false,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 2,
+      "totalVertexCount": 180,
+      "totalTriangleCount": 60,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 4
+    }
+  },
+  {
+    "path": "models/rescue-cat.glb",
+    "version": "2.0.0-dev.3.10",
+    "uri": "models/rescue-cat.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "validatedAt": "2026-11-14T15:33:40.409Z",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Original firefighter-v1 authoring tools",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 28548
+        }
+      ],
+      "animationCount": 1,
+      "materialCount": 1,
+      "hasMorphTargets": false,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 3,
+      "totalVertexCount": 648,
+      "totalTriangleCount": 216,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 4
+    }
+  },
+  {
+    "path": "motions/firefighter-clips.glb",
+    "version": "2.0.0-dev.3.10",
+    "uri": "motions/firefighter-clips.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "validatedAt": "2026-11-14T15:33:40.440Z",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 5,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/5"
+        },
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/8"
+        },
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/11"
+        },
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/14"
+        },
+        {
+          "code": "NODE_EMPTY",
+          "message": "Empty node encountered.",
+          "severity": 2,
+          "pointer": "/nodes/17"
+        }
+      ],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Original firefighter-v1 authoring tools",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 286672
+        }
+      ],
+      "animationCount": 13,
+      "materialCount": 0,
+      "hasMorphTargets": false,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 0,
+      "totalVertexCount": 0,
+      "totalTriangleCount": 0,
+      "maxUVs": 0,
+      "maxInfluences": 0,
+      "maxAttributes": 0
+    }
+  }
+]

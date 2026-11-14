@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "image": "water-atlas.png",
+  "width": 2048,
+  "height": 512,
+  "cellWidth": 256,
+  "cellHeight": 128,
+  "alpha": "straight RGBA; transparent background; 2px minimum safe border",
+  "origin": "top-left; Three texture flipY=true, offsetY=1-(row+1)/4",
+  "effects": {
+    "water_arc": {
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            1024,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            1280,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            1536,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.0,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            1792,
+            0,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.0,
+            0.125,
+            0.25
+          ]
+        }
+      ],
+      "frameCount": 8,
+      "fps": 16,
+      "loop": true,
+      "sheet": "water_arc-sheet.png",
+      "sprite": "water_arc.png",
+      "anchorPx": [
+        16,
+        96
+      ]
+    },
+    "droplets": {
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            1024,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            1280,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            1536,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.25,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            1792,
+            128,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.25,
+            0.125,
+            0.25
+          ]
+        }
+      ],
+      "frameCount": 8,
+      "fps": 16,
+      "loop": true,
+      "sheet": "droplets-sheet.png",
+      "sprite": "droplets.png",
+      "anchorPx": [
+        128,
+        96
+      ]
+    },
+    "object_splash": {
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            1024,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            1280,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 6,
+          "rect": [
+            1536,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.75,
+            0.5,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 7,
+          "rect": [
+            1792,
+            256,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.875,
+            0.5,
+            0.125,
+            0.25
+          ]
+        }
+      ],
+      "frameCount": 8,
+      "fps": 20,
+      "loop": false,
+      "sheet": "object_splash-sheet.png",
+      "sprite": "object_splash.png",
+      "anchorPx": [
+        128,
+        96
+      ]
+    },
+    "steam": {
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            0,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.0,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 1,
+          "rect": [
+            256,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.125,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 2,
+          "rect": [
+            512,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.25,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 3,
+          "rect": [
+            768,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.375,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 4,
+          "rect": [
+            1024,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.5,
+            0.75,
+            0.125,
+            0.25
+          ]
+        },
+        {
+          "index": 5,
+          "rect": [
+            1280,
+            384,
+            256,
+            128
+          ],
+          "uvTopLeft": [
+            0.625,
+            0.75,
+            0.125,
+            0.25
+          ]
+        }
+      ],
+      "frameCount": 6,
+      "fps": 10,
+      "loop": false,
+      "sheet": "steam-sheet.png",
+      "sprite": "steam.png",
+      "anchorPx": [
+        128,
+        96
+      ]
+    }
+  },
+  "source": "../source/sprites.py",
+  "sha256": "2a79fe5783a327d00efc8e54ea68f0982656d7771b297bab6daf8951e0a791c8"
+}

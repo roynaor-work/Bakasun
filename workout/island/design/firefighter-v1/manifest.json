@@ -1,0 +1,1263 @@
+{
+  "schemaVersion": 1,
+  "id": "firefighter-v1",
+  "license": "CC0-1.0",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "authoring": "Original low-poly equipment, original analytic 30Hz animation and original vector water VFX. No brands, real people, external media, Draco or Meshopt.",
+  "body": {
+    "path": "../../assets/athlete-body-v22/models/soccer.glb",
+    "manifest": "../../assets/athlete-body-v22/body-manifest.json",
+    "license": "CC0-1.0",
+    "canonicalBones": 18,
+    "fit": "Canonical metres under BodyScale; scale rigid parts in local X/Z by bodyShape.width/depth for guard/wing/center. Bind jacket to the actor canonical skeleton.",
+    "variants": [
+      "soccer",
+      "guard",
+      "wing",
+      "center"
+    ],
+    "sourceTriangles": 5080
+  },
+  "equipment": {
+    "path": "models/firefighter-equipment.glb",
+    "bytes": 219464,
+    "sha256": "af785022577b7d6c89afce12da78cec74778d694b094fffc5632d96f114bb198",
+    "triangles": 1452,
+    "triangleBudget": 1500,
+    "includesInBudget": [
+      "all worn parts",
+      "oxygen mask",
+      "air backpack",
+      "nozzle",
+      "hose surface"
+    ],
+    "lineSegments": 18,
+    "parts": [
+      {
+        "node": "jacket",
+        "attachmentBone": null,
+        "triangles": 140,
+        "vertices": 420,
+        "skinned": true,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_details",
+        "attachmentBone": "Chest",
+        "triangles": 72,
+        "vertices": 216,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_collar",
+        "attachmentBone": "Neck",
+        "triangles": 28,
+        "vertices": 84,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "pants_waist",
+        "attachmentBone": "Hips",
+        "triangles": 28,
+        "vertices": 84,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_sleeve_left_upper",
+        "attachmentBone": "LeftArm",
+        "triangles": 32,
+        "vertices": 96,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_sleeve_left_lower",
+        "attachmentBone": "LeftForeArm",
+        "triangles": 64,
+        "vertices": 192,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "pants_left_upper",
+        "attachmentBone": "LeftUpLeg",
+        "triangles": 32,
+        "vertices": 96,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "pants_left_lower",
+        "attachmentBone": "LeftLeg",
+        "triangles": 64,
+        "vertices": 192,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "glove_left",
+        "attachmentBone": "LeftHand",
+        "triangles": 56,
+        "vertices": 168,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "boot_left",
+        "attachmentBone": "LeftFoot",
+        "triangles": 60,
+        "vertices": 180,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_sleeve_right_upper",
+        "attachmentBone": "RightArm",
+        "triangles": 32,
+        "vertices": 96,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "jacket_sleeve_right_lower",
+        "attachmentBone": "RightForeArm",
+        "triangles": 64,
+        "vertices": 192,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "pants_right_upper",
+        "attachmentBone": "RightUpLeg",
+        "triangles": 32,
+        "vertices": 96,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "pants_right_lower",
+        "attachmentBone": "RightLeg",
+        "triangles": 64,
+        "vertices": 192,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "glove_right",
+        "attachmentBone": "RightHand",
+        "triangles": 56,
+        "vertices": 168,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "boot_right",
+        "attachmentBone": "RightFoot",
+        "triangles": 60,
+        "vertices": 180,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "helmet",
+        "attachmentBone": "Head",
+        "triangles": 132,
+        "vertices": 396,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "helmet_visor",
+        "attachmentBone": "Head",
+        "triangles": 12,
+        "vertices": 36,
+        "skinned": false,
+        "material": "visor_vertex_glass"
+      },
+      {
+        "node": "oxygen_mask",
+        "attachmentBone": "Head",
+        "triangles": 48,
+        "vertices": 144,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "mask_regulator",
+        "attachmentBone": "Head",
+        "triangles": 12,
+        "vertices": 36,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "air_backpack",
+        "attachmentBone": "Chest",
+        "triangles": 96,
+        "vertices": 288,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "nozzle",
+        "attachmentBone": "RightHand",
+        "triangles": 88,
+        "vertices": 264,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      },
+      {
+        "node": "hose_surface",
+        "attachmentBone": null,
+        "triangles": 180,
+        "vertices": 540,
+        "skinned": false,
+        "material": "equipment_vertex_regions"
+      }
+    ],
+    "regions": {
+      "red": {
+        "id": 0,
+        "srgb": "#e54935"
+      },
+      "red_dark": {
+        "id": 1,
+        "srgb": "#ad2d29"
+      },
+      "reflective_lime": {
+        "id": 2,
+        "srgb": "#e8f067"
+      },
+      "reflective_silver": {
+        "id": 3,
+        "srgb": "#edf7f1"
+      },
+      "helmet_yellow": {
+        "id": 4,
+        "srgb": "#ffcc39"
+      },
+      "charcoal": {
+        "id": 5,
+        "srgb": "#243747"
+      },
+      "rubber": {
+        "id": 6,
+        "srgb": "#132534"
+      },
+      "metal": {
+        "id": 7,
+        "srgb": "#a6c4cd"
+      },
+      "glass": {
+        "id": 8,
+        "srgb": "#89dce5"
+      },
+      "hose": {
+        "id": 9,
+        "srgb": "#dba76c"
+      },
+      "cat": {
+        "id": 10,
+        "srgb": "#e9ad66"
+      },
+      "cat_cream": {
+        "id": 11,
+        "srgb": "#fff0d1"
+      },
+      "eyes": {
+        "id": 12,
+        "srgb": "#193847"
+      }
+    },
+    "regionEncoding": "COLOR_0 linear RGB float32; _REGION uint8 scalar",
+    "separateMask": [
+      "oxygen_mask",
+      "mask_regulator"
+    ],
+    "independentMask": {
+      "path": "models/oxygen-mask.glb",
+      "bytes": 10172,
+      "sha256": "34e088c07c9b42a4317df20dc7f17bd1ca0e4635e514b021e639fc64c34f75d7",
+      "attachBone": "Head",
+      "usage": "Alternative independent item; hide the two kit mask nodes to avoid drawing it twice."
+    },
+    "nozzleNode": "nozzle",
+    "waterEmitterNode": "water_emitter",
+    "vibrationClip": "nozzle_spray_vibration",
+    "vibrationOnlyDuringSpray": true
+  },
+  "hose": {
+    "surfaceNode": "hose_surface",
+    "lineNode": "hose_centerline",
+    "pathSamples": 19,
+    "radialSegments": 5,
+    "radiusMeters": 0.014,
+    "triangles": 180,
+    "start": {
+      "bone": "Chest",
+      "local": [
+        0,
+        -0.24,
+        -0.24
+      ]
+    },
+    "end": {
+      "node": "nozzle",
+      "local": [
+        0,
+        -0.045,
+        0.035
+      ]
+    },
+    "updateModule": "runtime/equipment.mjs",
+    "representations": [
+      "triangle tube surface",
+      "LINE_STRIP centerline"
+    ],
+    "space": "actor BodyScale canonical local"
+  },
+  "motions": {
+    "path": "motions/firefighter-clips.glb",
+    "poses": "motions/poses.json",
+    "bytes": 375392,
+    "sha256": "10e392014bf2e9e61aa7c5b0ef9e6882ef223c27c1fc5330b8bb0bc6ae0c3bf7",
+    "nativeRate": 30,
+    "skeleton": [
+      {
+        "name": "Root",
+        "parent": null,
+        "rest": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "Hips",
+        "parent": "Root",
+        "rest": [
+          0,
+          0.86,
+          0
+        ]
+      },
+      {
+        "name": "Spine",
+        "parent": "Hips",
+        "rest": [
+          0,
+          0.2,
+          0
+        ]
+      },
+      {
+        "name": "Chest",
+        "parent": "Spine",
+        "rest": [
+          0,
+          0.18,
+          0
+        ]
+      },
+      {
+        "name": "Neck",
+        "parent": "Chest",
+        "rest": [
+          0,
+          0.1,
+          0
+        ]
+      },
+      {
+        "name": "Head",
+        "parent": "Neck",
+        "rest": [
+          0,
+          0.13,
+          0
+        ]
+      },
+      {
+        "name": "LeftArm",
+        "parent": "Chest",
+        "rest": [
+          0.16,
+          0.06,
+          0
+        ]
+      },
+      {
+        "name": "LeftForeArm",
+        "parent": "LeftArm",
+        "rest": [
+          0,
+          -0.27,
+          0
+        ]
+      },
+      {
+        "name": "LeftHand",
+        "parent": "LeftForeArm",
+        "rest": [
+          0,
+          -0.24,
+          0
+        ]
+      },
+      {
+        "name": "RightArm",
+        "parent": "Chest",
+        "rest": [
+          -0.16,
+          0.06,
+          0
+        ]
+      },
+      {
+        "name": "RightForeArm",
+        "parent": "RightArm",
+        "rest": [
+          0,
+          -0.27,
+          0
+        ]
+      },
+      {
+        "name": "RightHand",
+        "parent": "RightForeArm",
+        "rest": [
+          0,
+          -0.24,
+          0
+        ]
+      },
+      {
+        "name": "LeftUpLeg",
+        "parent": "Hips",
+        "rest": [
+          0.1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "LeftLeg",
+        "parent": "LeftUpLeg",
+        "rest": [
+          0,
+          -0.41,
+          0
+        ]
+      },
+      {
+        "name": "LeftFoot",
+        "parent": "LeftLeg",
+        "rest": [
+          0,
+          -0.37,
+          0
+        ]
+      },
+      {
+        "name": "RightUpLeg",
+        "parent": "Hips",
+        "rest": [
+          -0.1,
+          0,
+          0
+        ]
+      },
+      {
+        "name": "RightLeg",
+        "parent": "RightUpLeg",
+        "rest": [
+          0,
+          -0.41,
+          0
+        ]
+      },
+      {
+        "name": "RightFoot",
+        "parent": "RightLeg",
+        "rest": [
+          0,
+          -0.37,
+          0
+        ]
+      }
+    ],
+    "requiredClips": [
+      "idle_ready",
+      "walk",
+      "run",
+      "crouch_walk",
+      "spray_stand",
+      "spray_crouch",
+      "open_door",
+      "carry_child",
+      "carry_cat",
+      "wave_victory",
+      "rescued_handoff"
+    ],
+    "clips": [
+      {
+        "id": "idle_ready",
+        "label": "מוכנים להצלה",
+        "duration": 2.4,
+        "nativeRate": 30,
+        "frameCount": 73,
+        "loop": true,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "animation": "idle_ready",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "walk",
+        "label": "הליכה",
+        "duration": 1.2,
+        "nativeRate": 30,
+        "frameCount": 37,
+        "loop": true,
+        "locomotion": true,
+        "speed": 0.6048387096774194,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.744,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.144,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.6,
+            "end": 1.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "gait",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "carried": null,
+        "animation": "walk",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "run",
+        "label": "ריצה",
+        "duration": 0.8,
+        "nativeRate": 30,
+        "frameCount": 25,
+        "loop": true,
+        "locomotion": true,
+        "speed": 1.9318181818181817,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.35200000000000004,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.4,
+            "end": 0.752,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "gait",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "carried": null,
+        "animation": "run",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "crouch_walk",
+        "label": "הליכה נמוכה מתחת לעשן",
+        "duration": 1.6,
+        "nativeRate": 30,
+        "frameCount": 49,
+        "loop": true,
+        "locomotion": true,
+        "speed": 0.26654411764705876,
+        "role": "crouch",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 1.088,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.2880000000000001,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.8,
+            "end": 1.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "gait",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "carried": null,
+        "animation": "crouch_walk",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "carry_child",
+        "label": "נשיאת ילד",
+        "duration": 1.4,
+        "nativeRate": 30,
+        "frameCount": 43,
+        "loop": true,
+        "locomotion": true,
+        "speed": 0.367965367965368,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.9239999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.22400000000000003,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.7,
+            "end": 1.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "gait",
+        "rootMotion": false,
+        "nozzle": "backpack",
+        "carried": "child",
+        "animation": "carry_child",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "carry_cat",
+        "label": "נשיאת חתול",
+        "duration": 1.4,
+        "nativeRate": 30,
+        "frameCount": 43,
+        "loop": true,
+        "locomotion": true,
+        "speed": 0.367965367965368,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 0.9239999999999999,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.22400000000000003,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0.7,
+            "end": 1.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "gait",
+        "rootMotion": false,
+        "nozzle": "backpack",
+        "carried": "cat",
+        "animation": "carry_cat",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "idle_crouch",
+        "label": "מוכנים במצב נמוך",
+        "duration": 2.4,
+        "nativeRate": 30,
+        "frameCount": 73,
+        "loop": true,
+        "locomotion": false,
+        "speed": 0,
+        "role": "crouch",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 2.4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "supplemental": true,
+        "animation": "idle_crouch",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "spray_stand",
+        "label": "ריסוס בעמידה",
+        "duration": 3.2,
+        "nativeRate": 30,
+        "frameCount": 97,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "spray_start",
+            "time": 0.6
+          },
+          {
+            "type": "spray_stop",
+            "time": 2.6
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "sprayWindow": [
+          0.6,
+          2.6
+        ],
+        "animation": "spray_stand",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "spray_crouch",
+        "label": "ריסוס נמוך",
+        "duration": 4,
+        "nativeRate": 30,
+        "frameCount": 121,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 4,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "spray_start",
+            "time": 1
+          },
+          {
+            "type": "spray_stop",
+            "time": 3
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "hand",
+        "sprayWindow": [
+          1,
+          3
+        ],
+        "animation": "spray_crouch",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "open_door",
+        "label": "פתיחת דלת בבעיטה",
+        "duration": 2.6,
+        "nativeRate": 30,
+        "frameCount": 79,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 0.3,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 1.9,
+            "end": 2.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "door_kick",
+            "time": 1.0333333333333334,
+            "bone": "RightFoot"
+          },
+          {
+            "type": "recover",
+            "time": 1.9
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "backpack",
+        "animation": "open_door",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "wave_victory",
+        "label": "ניצחון ושלום",
+        "duration": 3.2,
+        "nativeRate": 30,
+        "frameCount": 97,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "wave",
+            "time": 0.8
+          },
+          {
+            "type": "celebrate",
+            "time": 2.2
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "backpack",
+        "animation": "wave_victory",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "rescued_handoff",
+        "label": "מסירה בטוחה",
+        "duration": 3.6,
+        "nativeRate": 30,
+        "frameCount": 109,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.6,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "receive_ready",
+            "time": 0.7
+          },
+          {
+            "type": "handoff",
+            "time": 2.2
+          },
+          {
+            "type": "hands_clear",
+            "time": 2.9
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "backpack",
+        "carried": "child",
+        "handoffWindow": [
+          0,
+          2.2
+        ],
+        "animation": "rescued_handoff",
+        "maximumReachErrorMeters": 0
+      },
+      {
+        "id": "child_reassured",
+        "label": "הילד נרגע ומנופף לכבאי",
+        "duration": 3.2,
+        "nativeRate": 30,
+        "frameCount": 97,
+        "loop": false,
+        "locomotion": false,
+        "speed": 0,
+        "role": "firefighter",
+        "supports": [
+          {
+            "bone": "LeftFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          },
+          {
+            "bone": "RightFoot",
+            "start": 0,
+            "end": 3.2,
+            "local": [
+              0,
+              -0.08,
+              0
+            ]
+          }
+        ],
+        "events": [
+          {
+            "type": "look_at_firefighter",
+            "time": 0.8
+          },
+          {
+            "type": "thank_you",
+            "time": 1.6
+          }
+        ],
+        "soleLocal": [
+          0,
+          -0.08,
+          0
+        ],
+        "checkHingeDirection": true,
+        "symmetryMode": "structural",
+        "rootMotion": false,
+        "nozzle": "none",
+        "optional": true,
+        "supplemental": true,
+        "animation": "child_reassured",
+        "maximumReachErrorMeters": 0
+      }
+    ],
+    "locomotion": "In-place assets. Consumer moves at clip.speed canonical m/s times actor scale. QA adds that same reference path before measuring support drift.",
+    "transition": "One-shots start/end at idle_ready. Low gait uses the explicit idle_crouch stance. Blend 0.25s with world foot IK in the eventual game consumer."
+  },
+  "optionalRescue": {
+    "cat": {
+      "path": "models/rescue-cat.glb",
+      "triangles": 216,
+      "animation": "cat_reassured",
+      "nativeRate": 30
+    },
+    "child": {
+      "body": "../../assets/athlete-body-v22/models/soccer.glb",
+      "scale": 0.43,
+      "animation": "child_reassured",
+      "triangles": 5080
+    },
+    "previewTriangleBudget": 12000,
+    "policy": "Preview admits an optional subject only when the entire scene, including effects and stage, fits the selected triangle budget. Disable reactions to omit both optional subjects."
+  },
+  "sprites": {
+    "manifest": "sprites/atlas.json",
+    "atlas": "sprites/water-atlas.png",
+    "standalone": "sprites/water-arc.png",
+    "sheet": "sprites/water-contact-sheet.png",
+    "alpha": "straight, transparent",
+    "origin": "top-left"
+  },
+  "preview": "preview.html",
+  "qa": {
+    "runner": "measure.mjs",
+    "report": "verification/qa/report.json",
+    "minimumRequiredScore": 88,
+    "redMetricsAllowed": 0,
+    "pinnedCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+  },
+  "source": {
+    "builder": "source/build.mjs",
+    "sprites": "source/sprites.py",
+    "reusedCC0IK": "../soccer-header-v1/source/rig.mjs",
+    "existingMITMath": "../soccer-motion-v8/runtime/vendor/three.module.js"
+  }
+}

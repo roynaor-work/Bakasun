@@ -1,0 +1,491 @@
+{
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "qaFiles": [
+    {
+      "file": "run.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 12713,
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056"
+    },
+    {
+      "file": "sources.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 15655,
+      "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0"
+    },
+    {
+      "file": "sources.json",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 1709,
+      "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684"
+    },
+    {
+      "file": "metrics.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 36189,
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7"
+    },
+    {
+      "file": "glb.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 9363,
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+    },
+    {
+      "file": "report.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 15342,
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def"
+    },
+    {
+      "file": "sheets.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 5947,
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "file": "licenses.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "bytes": 3539,
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411"
+    }
+  ],
+  "adapter": "Only sources.mjs is redirected. All animation frames come from the delivered GLB through the unchanged glb.mjs sampler. All metric formulas, weights and thresholds remain original.",
+  "sampleRate": 120,
+  "nativeRate": 30,
+  "requiredCount": 11,
+  "minimumScore": 89.7,
+  "redMetrics": 0,
+  "coverage": [
+    {
+      "id": "idle_ready",
+      "score": 100,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.003582,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "walk",
+      "score": 93.5,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000966,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000084,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.442111,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 2.082278,
+          "status": "yellow"
+        },
+        "bodySliding": {
+          "value": 0.003628,
+          "status": "green"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "run",
+      "score": 89.7,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.001073,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.0014,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.817799,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 2.832161,
+          "status": "yellow"
+        },
+        "bodySliding": {
+          "value": 0.002658,
+          "status": "green"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "crouch_walk",
+      "score": 96.5,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000264,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.00002,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.380728,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0.787288,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": 0.001539,
+          "status": "green"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "spray_stand",
+      "score": 99.8,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000001,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000001,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.039412,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0.005524,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "spray_crouch",
+      "score": 98.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000057,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000082,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.299283,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0.040324,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "open_door",
+      "score": 97,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000006,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000012,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.617405,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0.050959,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "carry_child",
+      "score": 94.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000241,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000034,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.310054,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 1.811407,
+          "status": "yellow"
+        },
+        "bodySliding": {
+          "value": 0.0012,
+          "status": "green"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "carry_cat",
+      "score": 94.9,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0.000241,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000034,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.310054,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 1.811407,
+          "status": "yellow"
+        },
+        "bodySliding": {
+          "value": 0.0012,
+          "status": "green"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "wave_victory",
+      "score": 97.2,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.568476,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 0.069232,
+          "status": "green"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    },
+    {
+      "id": "rescued_handoff",
+      "score": 95.4,
+      "coverage": 1,
+      "metrics": {
+        "footSliding": {
+          "value": 0,
+          "status": "green"
+        },
+        "floorPenetration": {
+          "value": 0.000001,
+          "status": "green"
+        },
+        "posePops": {
+          "value": 0.168569,
+          "status": "green"
+        },
+        "anatomy": {
+          "value": 0,
+          "status": "green"
+        },
+        "ballContact": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "continuity": {
+          "value": 1.661827,
+          "status": "yellow"
+        },
+        "bodySliding": {
+          "value": null,
+          "status": "not-applicable"
+        },
+        "symmetry": {
+          "value": 0,
+          "status": "green"
+        }
+      }
+    }
+  ],
+  "passed": true
+}
