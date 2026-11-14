@@ -58,19 +58,19 @@ export function runTrials({version='v24',sigmaDeg=10,seed=1,trials=60,kinds=['st
     const kind=kinds[n%kinds.length],path=boarPath(kind,r),t0=t,off=r()*1.5;id++;
     // the crosshair starts 140-320 px from the boar (as after the previous boar)
     {const p=onScreen(path(off));for(let k=0;k<50;k++){const a=r()*Math.PI*2,d=140+r()*180,x=p.x+Math.cos(a)*d,y=p.y+Math.sin(a)*d*.6;if(x>30&&x<SCREEN.W-30&&y>40&&y<SCREEN.H-40){c.x=x;c.y=y;break;}}}
-    let hp=HP[kind],shots=0,hits=0,onFor=0,tOn=null,tMove=null,strokesAtOn=null,nextTick=t,killedAt=null;
+    let hp=HP[kind],shots=0,hits=0,onFor=0,tOn=null,tIn=null,tHit=null,tMove=null,strokesAtOn=null,nextTick=t,killedAt=null;
     while(t-t0<timeout&&hp>0){
       const p=onScreen(path(off+t-t0)),tg={id,x:p.x,y:p.y,zones:p.zones};
       if(t>=nextTick){const rb=Math.max(...p.zones.map(z=>z.r));apply(bot.tick({t,cx:c.x,cy:c.y,target:{id,x:p.x,y:p.y,rv:rb/1.35}}));nextTick=t+bot.step;if(tMove===null&&bot.moved)tMove=t;}
       stick.step(dt,c,[tg]);camStep();
-      const inside=p.zones.some(z=>Math.hypot(c.x-z.x,c.y-z.y)<z.r);onFor=inside?onFor+dt:0;if(tOn===null&&onFor>=.1){tOn=t-.1+dt;strokesAtOn=bot.strokes;}
+      const inside=p.zones.some(z=>Math.hypot(c.x-z.x,c.y-z.y)<z.r);onFor=inside?onFor+dt:0;if(inside&&tIn===null)tIn=t;if(tOn===null&&onFor>=.1){tOn=t-.1+dt;strokesAtOn=bot.strokes;}
       // machine gun: 9 shots/s, heat +27.9/s while firing, -21/s otherwise, overheat at 100 until under 25
       const firing=bot.fire&&!hot;heat=Math.max(0,Math.min(100,heat+(firing?27.9:-21)*dt));if(heat>=100)hot=true;if(hot&&heat<25)hot=false;cool-=dt;
       if(firing&&cool<=0){cool+=1/9;shots++;const jx=c.x+gauss(r)*1.2*(1+heat/100*1.6),jy=c.y+gauss(r)*1.2*(1+heat/100*1.6);
-        const z=p.zones.filter(z=>Math.hypot(jx-z.x,jy-z.y)<z.r);if(z.length){hits++;const crit=z.some(q=>q.crit);hp-=15*(crit?2:1)*(1-ARMOR[kind]*(crit?.5:1));}}
+        const z=p.zones.filter(z=>Math.hypot(jx-z.x,jy-z.y)<z.r);if(z.length){hits++;if(tHit===null)tHit=t;const crit=z.some(q=>q.crit);hp-=15*(crit?2:1)*(1-ARMOR[kind]*(crit?.5:1));}}
       if(!firing&&cool<0)cool=0;
       t+=dt;if(hp<=0)killedAt=t;}
-    rows.push({kind,shots,hits,aimTime:tOn===null?null:+(tOn-(tMove??t0)).toFixed(3),totalTime:tOn===null?null:+(tOn-t0).toFixed(3),strokes:strokesAtOn,killed:killedAt!==null,killTime:killedAt===null?null:+(killedAt-t0).toFixed(3)});
+    const since=x=>x===null?null:+(x-(tMove??t0)).toFixed(3);rows.push({kind,shots,hits,firstIn:since(tIn),firstHit:since(tHit),aimTime:tOn===null?null:+(tOn-(tMove??t0)).toFixed(3),totalTime:tOn===null?null:+(tOn-t0).toFixed(3),strokes:strokesAtOn,killed:killedAt!==null,killTime:killedAt===null?null:+(killedAt-t0).toFixed(3)});
     // between boars: a short pause with no target
     const tEnd=t+.4;while(t<tEnd){if(t>=nextTick){apply(bot.tick({t,cx:c.x,cy:c.y,target:null}));nextTick=t+bot.step;}stick.step(dt,c,[]);camStep();heat=Math.max(0,heat-21*dt);if(hot&&heat<25)hot=false;t+=dt;}
   }
@@ -82,7 +82,9 @@ export function summarize(rows,timeout=6){
   const by=k=>rows.filter(x=>!k||x.kind===k),out={};
   for(const k of [null,'standing','moving']){const rs=by(k);if(!rs.length)continue;const shots=sum(rs,x=>x.shots),hits=sum(rs,x=>x.hits);
     const aim=rs.map(x=>x.aimTime??timeout),tot=rs.map(x=>x.totalTime??timeout),on=rs.filter(x=>x.strokes!==null);
+    const fin=rs.map(x=>x.firstIn??timeout),fhit=rs.map(x=>x.firstHit??timeout),kill=rs.map(x=>x.killTime??timeout);
     out[k||'all']={n:rs.length,hitRate:shots?+(hits/shots).toFixed(4):null,shots,hits,aimMedian:+med(aim).toFixed(3),aimMean:+(sum(aim,x=>x)/aim.length).toFixed(3),totalMedian:+med(tot).toFixed(3),
+      firstInMedian:+med(fin).toFixed(3),firstHitMedian:+med(fhit).toFixed(3),firstHitMean:+(sum(fhit,x=>x)/fhit.length).toFixed(3),killMedian:+med(kill).toFixed(3),
       reached:+(on.length/rs.length).toFixed(3),strokes:on.length?+(sum(on,x=>x.strokes)/on.length).toFixed(2):null,killed:+(rs.filter(x=>x.killed).length/rs.length).toFixed(3)};}
   return out;
 }

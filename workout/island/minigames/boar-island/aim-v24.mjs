@@ -20,7 +20,7 @@ export const AIM24=Object.freeze({
   MAGNET_SCALE:2.6,MAGNET_MIN:44,MAGNET_MAX_R:70, // pull radius around the aim point: 2.6 x the boar's hit radius, 44 to 70 px
   MAGNET_K:4,MAGNET_SPEED:260,MAGNET_FAST:.4, // pull speed 4/s x the distance (at most 260 px/s), 40% weaker while the thumb pushes hard
   AWAY_COS:-.2,AWAY_TILT:.15,            // a push more than about 100 degrees away from the boar (15% of the speed or more) switches the pull off
-  TRACK:.9,TRACK_PAD:6,TRACK_SPEED:420,  // over a boar the crosshair follows 90% of its movement on the screen (at most 420 px/s)
+  TRACK:.9,TRACK_PAD:6,TRACK_SPEED:420,  // over a boar the crosshair follows 90% of the boar's movement that the thumb does not follow already (at most 420 px/s)
   VEL_TAU:.08,SWITCH:.7                  // the boar's speed is smoothed over 80 ms; another boar must be 30% closer to take over
 });
 
@@ -83,8 +83,9 @@ export function createAimAssist(P=AIM24){
         if(dt>0)pull=Math.min(pull,dc/dt);ox+=dx/dc*pull;oy+=dy/dc*pull;}
       // 3. follow the boar that is under the crosshair
       const s=seen.get(t.id);
-      if(s&&s.n>1&&edge<P.TRACK_PAD){follow=P.TRACK*(1-smooth01(Math.max(0,edge)/P.TRACK_PAD));let tx=s.vx*follow,ty=s.vy*follow;const ts=Math.hypot(tx,ty);
-        if(ts>P.TRACK_SPEED){tx*=P.TRACK_SPEED/ts;ty*=P.TRACK_SPEED/ts;}ox+=tx;oy+=ty;}
+      if(s&&s.n>1&&edge<P.TRACK_PAD){follow=P.TRACK*(1-smooth01(Math.max(0,edge)/P.TRACK_PAD));const bv=Math.hypot(s.vx,s.vy);
+        if(bv>1e-6){const ux=s.vx/bv,uy=s.vy/bv,own=Math.max(0,(vx*ux+vy*uy)*f);// only the part of the boar's speed the thumb does not already follow
+          const tv=Math.min(P.TRACK_SPEED,follow*Math.max(0,bv-own));ox+=ux*tv;oy+=uy*tv;}}
       info={id:t.id,edge:+edge.toFixed(1),friction:+f.toFixed(3),pull:+pull.toFixed(1),follow:+follow.toFixed(2),away};
       return {vx:ox,vy:oy,info};
     }
