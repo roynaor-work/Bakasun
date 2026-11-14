@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "branch": "codex/soccer-tackle-keeper-v2",
+  "license": "CC0-1.0",
+  "original": [
+    "New authored phase poses and recoveries; not motion capture",
+    "C1 transition helper adapted from soccer-header-v1/runtime/player.mjs, adding a zero-tangent visual pelvis clearance arc",
+    "New animation-only GLBs, preview, screenshots and measurement records"
+  ],
+  "copied": [
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "source": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "bytes": 791120,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "source": "workout/island/design/soccer-header-v1/runtime/reference/run.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "bytes": 775408,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/keeper.glb",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/runtime/keeper.glb",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "56ccc07410c485d5cc99fa4ce4303c9a2621b1da643e5c16055f62fe2778d33b",
+      "bytes": 800224,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "runtime/keeper-open.glb",
+      "source": "workout/island/design/motion-fix-v12/runtime/models/canonical-keeper.glb",
+      "sourceCommit": "5d71491ea9a3b44b5fe6139e516c1d2e5577e9ad",
+      "sha256": "2314b1942ef5bc2534c25adb5ed40b2a8e9e406ab064096cdccacc1aa1fb13b9",
+      "bytes": 786928,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/rig.mjs",
+      "source": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "bytes": 5223,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/rig.json",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/source/rig.json",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "4fafafe448028f3e4ba07a5d18448f3a0c336b1fb9d203541bc925c0bc2ec5f3",
+      "bytes": 5082,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/glb-writer.mjs",
+      "source": "workout/island/design/soccer-keeper-crowd-v1/source/glb-writer.mjs",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "46eed61301dcb808dab2bd2f62c5738271d8affe6fd0334fc4d2fe7262c8d79c",
+      "bytes": 4664,
+      "license": "CC0-1.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "license": "MIT"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/GLTFLoader.js",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "license": "MIT"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "license": "MIT"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/LICENSE.three",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "license": "MIT"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/runtime/motions.json",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "e48149767cfa2b4b0c1fab5b12c5395bacbdb017d1f7988677f4bc6753aede44",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/glb.mjs",
+      "sourceCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "license": "CC0-1.0"
+    }
+  ],
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24"
+}

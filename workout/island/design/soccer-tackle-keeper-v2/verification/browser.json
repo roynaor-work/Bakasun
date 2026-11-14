@@ -1,0 +1,4324 @@
+{
+  "method": "Native GLB tracks on the unchanged canonical reference mesh through Three AnimationMixer; no IK or floor correction",
+  "clips": [
+    "slide_tackle",
+    "getup_fast",
+    "stumble_light",
+    "fall_soft",
+    "getup_soft",
+    "fall_foul",
+    "getup_foul",
+    "dive_left",
+    "dive_low_left",
+    "dive_high_left",
+    "getup_keeper_left",
+    "dive_right",
+    "dive_low_right",
+    "dive_high_right",
+    "getup_keeper_right",
+    "catch_chest",
+    "catch_high",
+    "punch",
+    "save_with_foot"
+  ],
+  "framesPerSheet": 8,
+  "uniformSampleTimes": true,
+  "checks": [
+    {
+      "id": "slide_tackle",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.14285714285714285,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.2857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.42857142857142855,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.7142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 0.8571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "slide_tackle",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.08571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.17142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.2571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.34285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.42857142857142855,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.5142857142857142,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_fast",
+      "time": 0.6,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.07142857142857142,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.14285714285714285,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.21428571428571427,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.2857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.35714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.42857142857142855,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "stumble_light",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.04285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.08571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.12857142857142856,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.17142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.21428571428571427,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.2571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_soft",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.05714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.17142857142857146,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.2285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.2857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.3428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_soft",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0.17142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0.34285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0.5142857142857142,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0.6857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 0.8571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 1.0285714285714285,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "fall_foul",
+      "time": 1.2,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.2285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.3428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.4571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.6857142857142858,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "getup_foul",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "id": "dive_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.15714285714285717,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.31428571428571433,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.4714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.6285714285714287,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.7857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 0.942857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_left",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.14285714285714285,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.2857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.42857142857142855,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.7142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 0.8571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_left",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0.18571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0.37142857142857144,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0.5571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0.7428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 0.9285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 1.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_left",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.2285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.3428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.4571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.6857142857142858,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_left",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.15714285714285717,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.31428571428571433,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.4714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.6285714285714287,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.7857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 0.942857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_right",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.14285714285714285,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.2857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.42857142857142855,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.7142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 0.8571428571428571,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_low_right",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0.18571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0.37142857142857144,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0.5571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0.7428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 0.9285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 1.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "dive_high_right",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.2285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.3428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.4571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.5714285714285714,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.6857142857142858,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "getup_keeper_right",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.15714285714285717,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.31428571428571433,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.4714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.6285714285714287,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.7857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 0.942857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_chest",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0.18571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0.37142857142857144,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0.5571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0.7428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 0.9285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 1.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "catch_high",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0.18571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0.37142857142857144,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0.5571428571428572,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0.7428571428571429,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 0.9285714285714286,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 1.1142857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "punch",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.15714285714285717,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.31428571428571433,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.4714285714285715,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.6285714285714287,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.7857142857142857,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 0.942857142857143,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "id": "save_with_foot",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "root": [
+        0,
+        0,
+        0
+      ],
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "slide_tackle",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "slide_tackle",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "slide_tackle",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "slide_tackle",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "slide_tackle",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_fast",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_fast",
+      "time": 0.15,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_fast",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_fast",
+      "time": 0.44999999999999996,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_fast",
+      "time": 0.6,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "stumble_light",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "stumble_light",
+      "time": 0.125,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "stumble_light",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "stumble_light",
+      "time": 0.375,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "stumble_light",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_soft",
+      "time": 0.075,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_soft",
+      "time": 0.15,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_soft",
+      "time": 0.22499999999999998,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_soft",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_soft",
+      "time": 0.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_soft",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_soft",
+      "time": 0.30000000000000004,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_soft",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_foul",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_foul",
+      "time": 0.6,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_foul",
+      "time": 0.8999999999999999,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "fall_foul",
+      "time": 1.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_foul",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_foul",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_foul",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_foul",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_left",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_left",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_left",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_left",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_left",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_left",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_left",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_left",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_left",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_left",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_left",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_left",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_left",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_left",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_left",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_left",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_right",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_right",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_right",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_right",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_right",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_right",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_right",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_low_right",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_right",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_right",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_right",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "dive_high_right",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_right",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_right",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_right",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "getup_keeper_right",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_chest",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_chest",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_chest",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_chest",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_chest",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_high",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_high",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_high",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_high",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "catch_high",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "punch",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "punch",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "punch",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "punch",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "punch",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "save_with_foot",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "save_with_foot",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "save_with_foot",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "save_with_foot",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "id": "save_with_foot",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "slide_tackle",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "slide_tackle",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "slide_tackle",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "slide_tackle",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "slide_tackle",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_fast",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_fast",
+      "time": 0.15,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_fast",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_fast",
+      "time": 0.44999999999999996,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_fast",
+      "time": 0.6,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "stumble_light",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "stumble_light",
+      "time": 0.125,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "stumble_light",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "stumble_light",
+      "time": 0.375,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "stumble_light",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_soft",
+      "time": 0.075,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_soft",
+      "time": 0.15,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_soft",
+      "time": 0.22499999999999998,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_soft",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_soft",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_soft",
+      "time": 0.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_soft",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_soft",
+      "time": 0.30000000000000004,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_soft",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_foul",
+      "time": 0.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_foul",
+      "time": 0.6,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_foul",
+      "time": 0.8999999999999999,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "fall_foul",
+      "time": 1.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_foul",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_foul",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_foul",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_foul",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_foul",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "reference/idle_relaxed.glb",
+      "keeperTint": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_left",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_left",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_left",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_left",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_left",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_left",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_left",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_left",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_left",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_left",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_left",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_left",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_left",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_left",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_left",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_left",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_left",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_right",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_right",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_right",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_right",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_right",
+      "time": 0.25,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_right",
+      "time": 0.5,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_right",
+      "time": 0.75,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_low_right",
+      "time": 1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_right",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_right",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_right",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "dive_high_right",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_right",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_right",
+      "time": 0.2,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_right",
+      "time": 0.4,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_right",
+      "time": 0.6000000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "getup_keeper_right",
+      "time": 0.8,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_chest",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_chest",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_chest",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_chest",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_chest",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_high",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_high",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_high",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_high",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "catch_high",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "punch",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "punch",
+      "time": 0.325,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "punch",
+      "time": 0.65,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "punch",
+      "time": 0.9750000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "punch",
+      "time": 1.3,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "save_with_foot",
+      "time": 0,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "save_with_foot",
+      "time": 0.275,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "save_with_foot",
+      "time": 0.55,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "save_with_foot",
+      "time": 0.8250000000000001,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "id": "save_with_foot",
+      "time": 1.1,
+      "finite": true,
+      "bones": 18,
+      "modelAsset": "keeper-open.glb",
+      "keeperTint": true
+    }
+  ],
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "captures": [
+    "sheets/slide_tackle.png",
+    "sheets/getup_fast.png",
+    "sheets/stumble_light.png",
+    "sheets/fall_soft.png",
+    "sheets/getup_soft.png",
+    "sheets/fall_foul.png",
+    "sheets/getup_foul.png",
+    "sheets/dive_left.png",
+    "sheets/dive_low_left.png",
+    "sheets/dive_high_left.png",
+    "sheets/getup_keeper_left.png",
+    "sheets/dive_right.png",
+    "sheets/dive_low_right.png",
+    "sheets/dive_high_right.png",
+    "sheets/getup_keeper_right.png",
+    "sheets/catch_chest.png",
+    "sheets/catch_high.png",
+    "sheets/punch.png",
+    "sheets/save_with_foot.png",
+    "sheets/preview-844x390.png",
+    "sheets/preview-390x844.png"
+  ],
+  "errors": [],
+  "wasmBlocked": true,
+  "disallowedRequests": [],
+  "networkOrigins": [
+    "http://127.0.0.1:8767"
+  ],
+  "pass": true
+}

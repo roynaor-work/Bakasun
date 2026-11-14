@@ -1,0 +1,2584 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-tackle-keeper-v2",
+  "license": "CC0-1.0",
+  "fps": 30,
+  "units": "meters",
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "rotationSpace": "parent-local",
+  "quaternionOrder": "xyzw",
+  "rootMotion": false,
+  "model": "reference/idle_relaxed.glb",
+  "keeperModel": "keeper-open.glb",
+  "idleReference": {
+    "id": "idle_relaxed",
+    "asset": "reference/idle_relaxed.glb"
+  },
+  "runReference": {
+    "id": "run",
+    "asset": "reference/run.glb"
+  },
+  "transitions": {
+    "idleBlendSeconds": 0.2,
+    "runBlendSeconds": 0.3,
+    "clearanceLiftMeters": 0.065,
+    "curve": "C1 Hermite; preserve currently displayed pose and its velocity",
+    "bridgeModule": "player.mjs",
+    "seams": "action to next recovery joins directly; never blend a standing pose into a grounded recovery"
+  },
+  "interaction": {
+    "contactSource": "slide_tackle/contact",
+    "tacklerReadySeconds": 1.6,
+    "nonFoulPreferredReaction": "stumble_light",
+    "optionalSoftFall": {
+      "activeMotionSeconds": 0.7,
+      "getupSeconds": 0.4,
+      "minimumVictimReadyAfterTacklerSeconds": 0.1,
+      "holdPolicy": "Hold the side contact pose before getup_soft until max(fallEnd, tacklerReady + .1 - getupDuration), then play getup_soft. Example: fallEnd=.8, holdUntil=1.3, victimReady=1.7, tacklerReady=1.6. This is game scheduling, not extra baked recovery motion."
+    },
+    "events": "presentation-only; game collision/foul/ball ownership remains authoritative"
+  },
+  "clips": [
+    {
+      "id": "slide_tackle",
+      "label": "גליץ מלא",
+      "duration": 1,
+      "next": "getup_fast",
+      "events": [
+        {
+          "type": "support_release",
+          "time": 0.2,
+          "presentationOnly": true
+        },
+        {
+          "type": "contact",
+          "time": 0.5,
+          "bone": "LeftFoot",
+          "presentationOnly": true,
+          "local": [
+            0,
+            -0.035,
+            0.12
+          ]
+        },
+        {
+          "type": "side_land",
+          "time": 0.8,
+          "presentationOnly": true
+        },
+        {
+          "type": "ready_for_getup",
+          "time": 1,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Left leg leads with an open sole, right knee folds, trailing hand controls the side landing. Visual motion only; the game supplies travel.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670773829155e-8,
+            0.025000010818384818
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536754
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.2554802266749966,
+              0.267798660566007,
+              2.101665863312208
+            ]
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0.2554802266749966,
+              0.267798660566007,
+              0.9016658633122081
+            ]
+          },
+          {
+            "time": 1,
+            "position": [
+              1.0054802266749965,
+              0.342798660566007,
+              1.8016658633122082
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.5,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.035,
+            0.12
+          ]
+        }
+      ],
+      "asset": "clips/slide_tackle.glb",
+      "frameCount": 31,
+      "bytes": 15740,
+      "sha256": "e6dcf2956c447b4dc706d6669af8c222443e2d7af9f17af3d279043efd059071",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "getup_fast",
+      "label": "קימה מהירה מהגליץ",
+      "duration": 0.6,
+      "preceding": "slide_tackle",
+      "events": [
+        {
+          "type": "hand_push",
+          "time": 0.2,
+          "bone": "LeftHand",
+          "presentationOnly": true
+        },
+        {
+          "type": "feet_under_body",
+          "time": 0.28,
+          "presentationOnly": true
+        },
+        {
+          "type": "recovered",
+          "time": 0.6,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Six-tenths of a second: supported roll to a compact crouch and standing. No lying delay is baked in.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.3333333333333333,
+          "end": 0.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384766
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3333333333333333,
+          "end": 0.6,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/getup_fast.glb",
+      "frameCount": 19,
+      "bytes": 11912,
+      "sha256": "ebe96e4f21a0cfac57de4812bed58954151f68e008a87da15cd4acff283581c8",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "stumble_light",
+      "label": "מעידה קלה והמשך",
+      "duration": 0.5,
+      "events": [
+        {
+          "type": "balance_lost",
+          "time": 0.1,
+          "presentationOnly": true
+        },
+        {
+          "type": "balance_recovered",
+          "time": 0.4,
+          "presentationOnly": true
+        },
+        {
+          "type": "continue",
+          "time": 0.5,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Small pelvis sway, open arms and a restrained counter-sway; stays on feet. The continuing run phase uses the C1 transition bridge.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670773829155e-8,
+            0.025000010818384818
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536754
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/stumble_light.glb",
+      "frameCount": 16,
+      "bytes": 9532,
+      "sha256": "a611f4d90e6c5fd43cdac6532efe46c49c58c07c5832a553766cc5502f603160",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "fall_soft",
+      "label": "נפילה קלה על הצד",
+      "duration": 0.3,
+      "next": "getup_soft",
+      "events": [
+        {
+          "type": "balance_lost",
+          "time": 0,
+          "presentationOnly": true
+        },
+        {
+          "type": "side_land",
+          "time": 0.3,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Light side collapse, protected head and compact limbs; pair directly with getup_soft, total active motion .7 seconds.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            0.00199999999999996,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196786,
+            0.0020000036839902396,
+            -0.024999991747536917
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/fall_soft.glb",
+      "frameCount": 10,
+      "bytes": 9384,
+      "sha256": "ea7872fd49d4b92900f1209dcd10a2da0d571f9c6b8080c4acd2ad2a149ff681",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "getup_soft",
+      "label": "קימה מנפילה קלה",
+      "duration": 0.4,
+      "preceding": "fall_soft",
+      "events": [
+        {
+          "type": "hand_push",
+          "time": 0.1,
+          "bone": "LeftHand",
+          "presentationOnly": true
+        },
+        {
+          "type": "recovered",
+          "time": 0.4,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Side-to-crouch-to-stand, no pause. fall_soft + getup_soft = .7 seconds.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.3333333333333333,
+          "end": 0.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384766
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3333333333333333,
+          "end": 0.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/getup_soft.glb",
+      "frameCount": 13,
+      "bytes": 10180,
+      "sha256": "2dc3ab93666c782844cab25981dbd720a7edeaf0b7be19996a55a32694b23949",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "fall_foul",
+      "label": "נפילה בפאול",
+      "duration": 1.2,
+      "next": "getup_foul",
+      "events": [
+        {
+          "type": "foul_reaction",
+          "time": 0,
+          "presentationOnly": true
+        },
+        {
+          "type": "side_land",
+          "time": 0.95,
+          "presentationOnly": true
+        },
+        {
+          "type": "ready_for_getup",
+          "time": 1.2,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "More visible loss of balance and a controlled side landing; restrained head and arms, no flailing.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            0.00199999999999996,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.03333333333333333,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196786,
+            0.0020000036839902396,
+            -0.024999991747536917
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/fall_foul.glb",
+      "frameCount": 37,
+      "bytes": 16772,
+      "sha256": "47144219fe658bd1c9c9fe975b1f2856e64a9bab072e148e223477b2a90a8d0c",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "getup_foul",
+      "label": "קימה אחרי פאול",
+      "duration": 0.8,
+      "preceding": "fall_foul",
+      "events": [
+        {
+          "type": "hand_push",
+          "time": 0.15,
+          "bone": "LeftHand",
+          "presentationOnly": true
+        },
+        {
+          "type": "recovered",
+          "time": 0.8,
+          "presentationOnly": true
+        }
+      ],
+      "notes": "Optional supported recovery from fall_foul, supplied so the contextual seam is reproducible.",
+      "role": "field",
+      "fps": 30,
+      "loop": false,
+      "rootMotion": false,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0.4666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384766
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.4666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/getup_foul.glb",
+      "frameCount": 25,
+      "bytes": 13468,
+      "sha256": "f702fef6772b0088e09f15cc5f7c4de80edd2a89e452a33001317448c9fa7361",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_left",
+      "label": "זינוק שמאלה · אמצע",
+      "duration": 1.1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.16666666666666666
+        },
+        {
+          "type": "contact",
+          "time": 0.5333333333333333,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 0.8333333333333334,
+          "bone": "LeftArm"
+        },
+        {
+          "type": "settled",
+          "time": 0.9333333333333333,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 0.9333333333333333,
+          "end": 1.1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_left",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.16666666666666666,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.9457635663768859,
+              0.8759521982031836,
+              1.4713609378977237
+            ]
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0.9457635663768859,
+              0.8759521982031836,
+              0.19136093789772357
+            ]
+          },
+          {
+            "time": 1.1,
+            "position": [
+              1.7390968997102192,
+              1.074285531536517,
+              1.3246942712310572
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftHand",
+          "start": 0.5333333333333333,
+          "end": 0.5333333333333333,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_left.glb",
+      "frameCount": 34,
+      "bytes": 16360,
+      "sha256": "b0f074356e79722e70c7c73ee39923291b81f3da35fa0d5202e2537ea6ffb5ec",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_low_left",
+      "label": "זינוק שמאלה · נמוך",
+      "duration": 1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.1
+        },
+        {
+          "type": "contact",
+          "time": 0.5,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 0.7333333333333333,
+          "bone": "LeftArm"
+        },
+        {
+          "type": "settled",
+          "time": 0.8333333333333334,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 0.8333333333333334,
+          "end": 1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_left",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.1,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.9027305405197353,
+              0.25240961964777603,
+              1.551975994039819
+            ]
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0.9027305405197353,
+              0.25240961964777603,
+              0.35197599403981916
+            ]
+          },
+          {
+            "time": 1,
+            "position": [
+              1.6027305405197354,
+              0.427409619647776,
+              1.3519759940398193
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftHand",
+          "start": 0.5,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_low_left.glb",
+      "frameCount": 31,
+      "bytes": 15468,
+      "sha256": "275c8881ba7970a2aadea6ca894323fa6ed654a7615a6211a2398b85f3713132",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_high_left",
+      "label": "זינוק שמאלה · גבוה",
+      "duration": 1.3,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.2
+        },
+        {
+          "type": "contact",
+          "time": 0.6666666666666666,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 1.0333333333333334,
+          "bone": "LeftArm"
+        },
+        {
+          "type": "settled",
+          "time": 1.1333333333333333,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1.1333333333333333,
+          "end": 1.3,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_left",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.2,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.8907297739686997,
+              1.3654269188074417,
+              1.8109419714422308
+            ]
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              0.8907297739686997,
+              1.3654269188074417,
+              0.2109419714422308
+            ]
+          },
+          {
+            "time": 1.3,
+            "position": [
+              1.7773964406353664,
+              1.5870935854741084,
+              1.4776086381088978
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftHand",
+          "start": 0.6666666666666666,
+          "end": 0.6666666666666666,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_high_left.glb",
+      "frameCount": 40,
+      "bytes": 17844,
+      "sha256": "4bddf3d92bad8af7858ae95f7305de46dfebc0df628dbfedf2a3324efb0b2033",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "getup_keeper_left",
+      "label": "קימה משכיבה שמאלה",
+      "duration": 0.8,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "ground_plant",
+          "time": 0.1,
+          "bone": "LeftHand"
+        },
+        {
+          "type": "ground_release",
+          "time": 0.23333333333333334,
+          "bone": "LeftHand"
+        },
+        {
+          "type": "ground_release",
+          "time": 0.23333333333333334,
+          "bone": "Hips"
+        },
+        {
+          "type": "plant",
+          "time": 0.5666666666666667,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "type": "plant",
+          "time": 0.5666666666666667,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "type": "recovered",
+          "time": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "bone": "LeftHand",
+          "start": 0.1,
+          "end": 0.23333333333333334,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0.3,
+            0.07629373775102377,
+            0.3
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.5666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.5666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "notes": "Roll from the side onto the lower forearm, place the same glove beside the hip and push from the ground before releasing into a kneel. Feet then plant under the pelvis for the final rise. Exact .8s; matches every same-side save endpoint.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "preceding": "dive_left",
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/getup_keeper_left.glb",
+      "frameCount": 25,
+      "bytes": 14124,
+      "sha256": "75ce96dd11d8dbf9a39cb2cf4e8917e51d2b5de6b4f9c4a0f3bcaa90e6ec24a8",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_right",
+      "label": "זינוק ימינה · אמצע",
+      "duration": 1.1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.16666666666666666
+        },
+        {
+          "type": "contact",
+          "time": 0.5333333333333333,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 0.8333333333333334,
+          "bone": "RightArm"
+        },
+        {
+          "type": "settled",
+          "time": 0.9333333333333333,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 0.9333333333333333,
+          "end": 1.1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_right",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.16666666666666666,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              -0.9457635663768859,
+              0.8759521982031836,
+              1.4713609378977237
+            ]
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              -0.9457635663768859,
+              0.8759521982031836,
+              0.19136093789772357
+            ]
+          },
+          {
+            "time": 1.1,
+            "position": [
+              -1.7390968997102192,
+              1.074285531536517,
+              1.3246942712310572
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "RightHand",
+          "start": 0.5333333333333333,
+          "end": 0.5333333333333333,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_right.glb",
+      "frameCount": 34,
+      "bytes": 16372,
+      "sha256": "ac90f0ccdb18f15899396e7083c2c7cd7f02bf75b25c526a37b2f734b69b769d",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_low_right",
+      "label": "זינוק ימינה · נמוך",
+      "duration": 1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.1
+        },
+        {
+          "type": "contact",
+          "time": 0.5,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 0.7333333333333333,
+          "bone": "RightArm"
+        },
+        {
+          "type": "settled",
+          "time": 0.8333333333333334,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 0.8333333333333334,
+          "end": 1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.1,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_right",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.1,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              -0.9027305405197353,
+              0.25240961964777603,
+              1.551975994039819
+            ]
+          },
+          {
+            "time": 0.5,
+            "position": [
+              -0.9027305405197353,
+              0.25240961964777603,
+              0.35197599403981916
+            ]
+          },
+          {
+            "time": 1,
+            "position": [
+              -1.6027305405197354,
+              0.427409619647776,
+              1.3519759940398193
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "RightHand",
+          "start": 0.5,
+          "end": 0.5,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_low_right.glb",
+      "frameCount": 31,
+      "bytes": 15480,
+      "sha256": "2f4319878e8877949f157574e4c8cccc85ef2599a1cd4820066c8df8658ba2aa",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "dive_high_right",
+      "label": "זינוק ימינה · גבוה",
+      "duration": 1.3,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.2
+        },
+        {
+          "type": "contact",
+          "time": 0.6666666666666666,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "land",
+          "time": 1.0333333333333334,
+          "bone": "RightArm"
+        },
+        {
+          "type": "settled",
+          "time": 1.1333333333333333,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1.1333333333333333,
+          "end": 1.3,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_right",
+      "notes": "Loaded outside leg, coordinated hip/shoulder roll, soft forearm/side absorption, protected head and compact cradle. Game applies lateral travel; no animated Root.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.2,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              -0.8907297739686997,
+              1.3654269188074417,
+              1.8109419714422308
+            ]
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              -0.8907297739686997,
+              1.3654269188074417,
+              0.2109419714422308
+            ]
+          },
+          {
+            "time": 1.3,
+            "position": [
+              -1.7773964406353664,
+              1.5870935854741084,
+              1.4776086381088978
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "RightHand",
+          "start": 0.6666666666666666,
+          "end": 0.6666666666666666,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/dive_high_right.glb",
+      "frameCount": 40,
+      "bytes": 17852,
+      "sha256": "344c6ca2cc807723edc09fb854eaaace26a630cf651e9c07c83abdaf44d594d5",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "getup_keeper_right",
+      "label": "קימה משכיבה ימינה",
+      "duration": 0.8,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "ground_plant",
+          "time": 0.1,
+          "bone": "RightHand"
+        },
+        {
+          "type": "ground_release",
+          "time": 0.23333333333333334,
+          "bone": "RightHand"
+        },
+        {
+          "type": "ground_release",
+          "time": 0.23333333333333334,
+          "bone": "Hips"
+        },
+        {
+          "type": "plant",
+          "time": 0.5666666666666667,
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "type": "plant",
+          "time": 0.5666666666666667,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "type": "recovered",
+          "time": 0.8
+        }
+      ],
+      "supports": [
+        {
+          "bone": "RightHand",
+          "start": 0.1,
+          "end": 0.23333333333333334,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            -0.3,
+            0.07629373775102377,
+            0.3
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.5666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.5666666666666667,
+          "end": 0.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "notes": "Roll from the side onto the lower forearm, place the same glove beside the hip and push from the ground before releasing into a kneel. Feet then plant under the pelvis for the final rise. Exact .8s; matches every same-side save endpoint.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "preceding": "dive_right",
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "asset": "clips/getup_keeper_right.glb",
+      "frameCount": 25,
+      "bytes": 14132,
+      "sha256": "cb36d45162be2398bd67f411ba1616c7dcc46422c1a4b632a2b8d14d6359c901",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "catch_chest",
+      "label": "קליטת חזה ונפילת איסוף",
+      "duration": 1.1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "contact",
+          "time": 0.3,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "secure",
+          "time": 0.3,
+          "bone": "RightHand"
+        },
+        {
+          "type": "land",
+          "time": 0.9,
+          "bone": "LeftArm"
+        },
+        {
+          "type": "settled",
+          "time": 1,
+          "bone": "Hips"
+        },
+        {
+          "type": "support_release",
+          "time": 0.4
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1,
+          "end": 1.1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_left",
+      "notes": "Both gloves gather at the sternum. A compact controlled side fall protects the gathered ball; no exaggerated backward flop.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.4,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.17885169022666647,
+              1.1182134041364338,
+              1.250063482457059
+            ]
+          },
+          {
+            "time": 0.3,
+            "position": [
+              0.17885169022666647,
+              1.1182134041364338,
+              0.5300634824570589
+            ]
+          },
+          {
+            "time": 0.3333333333333333,
+            "position": [
+              0.15345858332284146,
+              1.1178825108400057,
+              0.5198050438091814
+            ]
+          },
+          {
+            "time": 0.36666666666666664,
+            "position": [
+              0.10036390525120732,
+              1.1171906430383833,
+              0.4983555811818009
+            ]
+          },
+          {
+            "time": 0.4,
+            "position": [
+              0.05419461997152543,
+              1.1165890188630598,
+              0.4797038745492962
+            ]
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0.04722754169442284,
+              1.1166165842577245,
+              0.47613812245025516
+            ]
+          },
+          {
+            "time": 0.4666666666666667,
+            "position": [
+              0.06445632565062376,
+              1.116409250672145,
+              0.47869739642548154
+            ]
+          },
+          {
+            "time": 0.5,
+            "position": [
+              0.10051149178141076,
+              1.109571683206666,
+              0.4835138786021719
+            ]
+          },
+          {
+            "time": 0.5333333333333333,
+            "position": [
+              0.15150882419285797,
+              1.085180487418974,
+              0.4889888888774786
+            ]
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0.20818413641006964,
+              1.0358057499126403,
+              0.49297702294488044
+            ]
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0.2601066316078634,
+              0.9599941929674505,
+              0.49425561670788454
+            ]
+          },
+          {
+            "time": 0.6333333333333333,
+            "position": [
+              0.2997243911011924,
+              0.8774904574327443,
+              0.4932404396892167
+            ]
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              0.3242349635560971,
+              0.8127540666908719,
+              0.49146855062376965
+            ]
+          },
+          {
+            "time": 0.7,
+            "position": [
+              0.33500588073872484,
+              0.7803640334868429,
+              0.4903405844356531
+            ]
+          },
+          {
+            "time": 0.7333333333333333,
+            "position": [
+              0.33682476462931804,
+              0.7746082841092206,
+              0.49012594536026216
+            ]
+          },
+          {
+            "time": 0.7666666666666667,
+            "position": [
+              0.34032932114213926,
+              0.7704431180317661,
+              0.48854965574375525
+            ]
+          },
+          {
+            "time": 0.8,
+            "position": [
+              0.35901810789396205,
+              0.7454193442141005,
+              0.47992422887876457
+            ]
+          },
+          {
+            "time": 0.8333333333333334,
+            "position": [
+              0.39347558218783035,
+              0.6780052167517439,
+              0.4629150263302017
+            ]
+          },
+          {
+            "time": 0.8666666666666667,
+            "position": [
+              0.433354749363166,
+              0.5541298476743756,
+              0.44085609811945586
+            ]
+          },
+          {
+            "time": 0.9,
+            "position": [
+              0.46628512554023543,
+              0.39508828614927904,
+              0.4195662073009642
+            ]
+          },
+          {
+            "time": 0.9333333333333333,
+            "position": [
+              0.4861696124436074,
+              0.2683280161200807,
+              0.4041718996313747
+            ]
+          },
+          {
+            "time": 0.9666666666666667,
+            "position": [
+              0.49441802334177826,
+              0.22016002000531099,
+              0.39670515971873266
+            ]
+          },
+          {
+            "time": 1,
+            "position": [
+              0.4957894341758684,
+              0.21493525773952404,
+              0.39536579036582975
+            ]
+          },
+          {
+            "time": 1.0333333333333334,
+            "position": [
+              0.4957894341758687,
+              0.2149352577395237,
+              0.39536579036582975
+            ]
+          },
+          {
+            "time": 1.0666666666666667,
+            "position": [
+              0.49578943417586874,
+              0.21493525773952415,
+              0.39536579036582997
+            ]
+          },
+          {
+            "time": 1.1,
+            "position": [
+              0.49578943417586874,
+              0.21493525773952415,
+              0.39536579036582997
+            ]
+          }
+        ],
+        "note": "Authored presentation trajectory: independent approach, then baked two-glove gather/chest carry. No hand parenting and no game physics."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftHand",
+          "start": 0.3,
+          "end": 0.3,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/catch_chest.glb",
+      "frameCount": 34,
+      "bytes": 18404,
+      "sha256": "0c809ed7e77bacd9233b8a72a50db1b915a1f85118cc7018afc24e6ac38c4808",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "catch_high",
+      "label": "קליטה גבוהה ונחיתת צד",
+      "duration": 1.3,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.2
+        },
+        {
+          "type": "contact",
+          "time": 0.5666666666666667,
+          "bone": "LeftHand",
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        },
+        {
+          "type": "secure",
+          "time": 0.5666666666666667,
+          "bone": "RightHand"
+        },
+        {
+          "type": "land",
+          "time": 1.1,
+          "bone": "LeftArm"
+        },
+        {
+          "type": "settled",
+          "time": 1.2,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1.2,
+          "end": 1.3,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_left",
+      "notes": "Small loaded hop, two gloves above the forehead, ball brought to chest before side/forearm absorption.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.2,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.2041128235327344,
+              1.972705903400551,
+              1.5232178397683422
+            ]
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              0.2041128235327344,
+              1.972705903400551,
+              0.16321783976834242
+            ]
+          },
+          {
+            "time": 0.6,
+            "position": [
+              0.191125078419909,
+              1.9745312119396095,
+              0.15284404004269084
+            ]
+          },
+          {
+            "time": 0.6333333333333333,
+            "position": [
+              0.1639688840930922,
+              1.9783477661576405,
+              0.13115336788905574
+            ]
+          },
+          {
+            "time": 0.6666666666666666,
+            "position": [
+              0.14035480206977324,
+              1.9816665089559289,
+              0.11229191384241649
+            ]
+          },
+          {
+            "time": 0.7,
+            "position": [
+              0.14353005916517353,
+              1.9761609728667964,
+              0.11641176414199896
+            ]
+          },
+          {
+            "time": 0.7333333333333333,
+            "position": [
+              0.18884684674996582,
+              1.9372118974493446,
+              0.1613845473703056
+            ]
+          },
+          {
+            "time": 0.7666666666666667,
+            "position": [
+              0.27317491205924865,
+              1.8377478194802288,
+              0.24614361449904604
+            ]
+          },
+          {
+            "time": 0.8,
+            "position": [
+              0.3636516300022404,
+              1.6642117090159338,
+              0.340934290857926
+            ]
+          },
+          {
+            "time": 0.8333333333333334,
+            "position": [
+              0.41930248997395203,
+              1.4471349394479076,
+              0.4051293447669098
+            ]
+          },
+          {
+            "time": 0.8666666666666667,
+            "position": [
+              0.43159841513577707,
+              1.2505087138322322,
+              0.4231214085473802
+            ]
+          },
+          {
+            "time": 0.9,
+            "position": [
+              0.42380902478172966,
+              1.1198766395066504,
+              0.41368312996730894
+            ]
+          },
+          {
+            "time": 0.9333333333333333,
+            "position": [
+              0.41684786909594185,
+              1.0609076356048033,
+              0.40307867510570755
+            ]
+          },
+          {
+            "time": 0.9666666666666667,
+            "position": [
+              0.4154697162228199,
+              1.050773396352773,
+              0.40081812901411645
+            ]
+          },
+          {
+            "time": 1,
+            "position": [
+              0.4189482398525924,
+              1.0315992513096555,
+              0.40081077302837487
+            ]
+          },
+          {
+            "time": 1.0333333333333334,
+            "position": [
+              0.43590801684683933,
+              0.930944750096639,
+              0.40066278878228645
+            ]
+          },
+          {
+            "time": 1.0666666666666667,
+            "position": [
+              0.4617124700542673,
+              0.7438445572659014,
+              0.3999419879050117
+            ]
+          },
+          {
+            "time": 1.1,
+            "position": [
+              0.48303457028919145,
+              0.5198123528486855,
+              0.3984270153962026
+            ]
+          },
+          {
+            "time": 1.1333333333333333,
+            "position": [
+              0.49312443829634034,
+              0.329486675850021,
+              0.3966822600735237
+            ]
+          },
+          {
+            "time": 1.1666666666666667,
+            "position": [
+              0.49556569516972815,
+              0.22583906606477178,
+              0.3955860236929907
+            ]
+          },
+          {
+            "time": 1.2,
+            "position": [
+              0.4957894341758684,
+              0.21493525773952404,
+              0.39536579036582975
+            ]
+          },
+          {
+            "time": 1.2333333333333334,
+            "position": [
+              0.4957894341758687,
+              0.21493525773952382,
+              0.39536579036582975
+            ]
+          },
+          {
+            "time": 1.2666666666666666,
+            "position": [
+              0.49578943417586874,
+              0.21493525773952404,
+              0.39536579036582997
+            ]
+          },
+          {
+            "time": 1.3,
+            "position": [
+              0.49578943417586874,
+              0.21493525773952404,
+              0.39536579036582997
+            ]
+          }
+        ],
+        "note": "Authored presentation trajectory: independent approach, then baked two-glove gather/chest carry. No hand parenting and no game physics."
+      },
+      "ballContacts": [
+        {
+          "bone": "LeftHand",
+          "start": 0.5666666666666667,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.045,
+            0.065
+          ]
+        }
+      ],
+      "asset": "clips/catch_high.glb",
+      "frameCount": 40,
+      "bytes": 19784,
+      "sha256": "3706abf78af452e6ff95f879cdb44bbec2399e71e3e148fe79e47c13e52f8139",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "punch",
+      "label": "אגרוף לכדור ונחיתה נשלטת",
+      "duration": 1.3,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.2
+        },
+        {
+          "type": "contact",
+          "time": 0.5666666666666667,
+          "bone": "RightHand",
+          "local": [
+            0,
+            -0.06,
+            0.06
+          ]
+        },
+        {
+          "type": "land",
+          "time": 1.1,
+          "bone": "RightArm"
+        },
+        {
+          "type": "settled",
+          "time": 1.2,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1.2,
+          "end": 1.3,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_right",
+      "notes": "Dominant right fist meets the ball above the brow; the other glove guards the chest. Retract before landing on the right side.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.2,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "model": "keeper.glb",
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              -0.5219803746119046,
+              1.8268602272954375,
+              1.558421890244788
+            ]
+          },
+          {
+            "time": 0.5666666666666667,
+            "position": [
+              -0.5219803746119046,
+              1.8268602272954375,
+              0.19842189024478812
+            ]
+          },
+          {
+            "time": 1.3,
+            "position": [
+              -0.5219803746119046,
+              3.8801935606287707,
+              1.958421890244788
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "RightHand",
+          "start": 0.5666666666666667,
+          "end": 0.5666666666666667,
+          "local": [
+            0,
+            -0.06,
+            0.06
+          ]
+        }
+      ],
+      "asset": "clips/punch.glb",
+      "frameCount": 40,
+      "bytes": 17780,
+      "sha256": "5995722276a81e555405b0684dd2aa4bcd5da00a1f8aa2e0b09b562dd1b7b48b",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    },
+    {
+      "id": "save_with_foot",
+      "label": "הצלה בכף רגל ומעבר לצד",
+      "duration": 1.1,
+      "role": "keeper",
+      "loop": false,
+      "fps": 30,
+      "rootMotion": false,
+      "events": [
+        {
+          "type": "support_release",
+          "time": 0.16666666666666666,
+          "bone": "RightFoot"
+        },
+        {
+          "type": "contact",
+          "time": 0.43333333333333335,
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.03,
+            0.14
+          ]
+        },
+        {
+          "type": "land",
+          "time": 0.9,
+          "bone": "RightArm"
+        },
+        {
+          "type": "settled",
+          "time": 1,
+          "bone": "Hips"
+        }
+      ],
+      "supports": [
+        {
+          "bone": "Hips",
+          "start": 1,
+          "end": 1.1,
+          "local": [
+            0,
+            0,
+            0
+          ],
+          "anchor": [
+            0,
+            0.17748432766475458,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            0.12999999873170792,
+            2.4513670718318004e-8,
+            0.025000010818384762
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.16666666666666666,
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "anchor": [
+            -0.12999999911196783,
+            2.8197660997819618e-8,
+            -0.024999991747536837
+          ]
+        }
+      ],
+      "next": "getup_keeper_right",
+      "notes": "Compact seated block with the right sole and a folded support leg, then controlled right hip/forearm contact. No acrobatic split or joint snapping.",
+      "groundContactMode": "side-body",
+      "coordinateSpace": "canonical parent-local absolute xyzw; visual pelvis only; fixed Root",
+      "loadedStance": {
+        "start": 0,
+        "end": 0.16666666666666666,
+        "reference": "idle_relaxed FK ankle positions and world foot orientation",
+        "method": "Two-bone fixed-length leg IK at every native 30Hz sample, after authored pose interpolation."
+      },
+      "surfaceClearance": "Baked against all vertices of the declared model, with eight substeps per native interval. No runtime correction.",
+      "ball": {
+        "radius": 0.11,
+        "samples": [
+          {
+            "time": 0,
+            "position": [
+              0.10612685236854115,
+              0.111,
+              1.7639289076108144
+            ]
+          },
+          {
+            "time": 0.43333333333333335,
+            "position": [
+              0.10612685236854115,
+              0.111,
+              0.7239289076108144
+            ]
+          },
+          {
+            "time": 1.1,
+            "position": [
+              -0.8272064809647922,
+              0.3443333333333333,
+              2.057262240944148
+            ]
+          }
+        ],
+        "note": "Independent piecewise demonstration trajectory with an outgoing deflection at contact; not game physics and not an attached ball."
+      },
+      "ballContacts": [
+        {
+          "bone": "RightFoot",
+          "start": 0.43333333333333335,
+          "end": 0.43333333333333335,
+          "local": [
+            0,
+            -0.03,
+            0.14
+          ]
+        }
+      ],
+      "asset": "clips/save_with_foot.glb",
+      "frameCount": 34,
+      "bytes": 16320,
+      "sha256": "2d6284be7362a5683389ae83b1f0d930168cfb74346cd060f4c87f23cd4b5b6f",
+      "compression": "none",
+      "checkHingeDirection": true,
+      "locomotion": false,
+      "referenceTravelKnown": false
+    }
+  ]
+}
