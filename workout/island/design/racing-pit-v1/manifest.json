@@ -1,0 +1,1133 @@
+{
+  "schemaVersion": 1,
+  "id": "racing-pit-v1",
+  "kind": "original-game-asset-pack",
+  "baseBranch": "main",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "branch": "codex/racing-pit-v1",
+  "scope": "new files only under workout/island/design/racing-pit-v1; preview and asset contracts, no game integration",
+  "license": {
+    "id": "CC0-1.0",
+    "file": "LICENSES.md",
+    "legalCode": "https://creativecommons.org/publicdomain/zero/1.0/legalcode"
+  },
+  "entryPoint": "preview.html",
+  "report": "REPORT.md",
+  "rig": "rig.json",
+  "coordinateSystem": {
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X",
+    "floorY": 0
+  },
+  "constraints": {
+    "maxCrewTriangles": 1500,
+    "maxObservedCrewTriangles": 1208,
+    "canonicalJoints": 18,
+    "compression": "none",
+    "draco": false,
+    "textures": 0,
+    "brands": 0,
+    "visibleTextInAssets": false
+  },
+  "crew": [
+    {
+      "id": "wheel_front_left",
+      "role": "wheel_changer",
+      "station": "front_left",
+      "file": "models/wheel_front_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f2cb59",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 94.6,
+      "qaRequiredClipsMinimum": 94.6,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "wheel_front_right",
+      "role": "wheel_changer",
+      "station": "front_right",
+      "file": "models/wheel_front_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f2cb59",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 94.6,
+      "qaRequiredClipsMinimum": 94.6,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "wheel_rear_left",
+      "role": "wheel_changer",
+      "station": "rear_left",
+      "file": "models/wheel_rear_left.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f4a569",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 94.6,
+      "qaRequiredClipsMinimum": 94.6,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "wheel_rear_right",
+      "role": "wheel_changer",
+      "station": "rear_right",
+      "file": "models/wheel_rear_right.glb",
+      "triangles": 1208,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#f4a569",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 94.6,
+      "qaRequiredClipsMinimum": 94.6,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "jack_operator",
+      "role": "jack_operator",
+      "station": "nose",
+      "file": "models/jack_operator.glb",
+      "triangles": 1180,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#c5e585",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 96.2,
+      "qaRequiredClipsMinimum": 96.2,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "screen_cleaner",
+      "role": "screen_cleaner",
+      "station": "cockpit",
+      "file": "models/screen_cleaner.glb",
+      "triangles": 1192,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#b0c6f0",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 96.2,
+      "qaRequiredClipsMinimum": 96.2,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    },
+    {
+      "id": "light_controller",
+      "role": "light_controller",
+      "station": "exit",
+      "file": "models/light_controller.glb",
+      "triangles": 1200,
+      "joints": 18,
+      "clips": [
+        "idle_wait",
+        "rush_in",
+        "remove_wheel",
+        "mount_wheel",
+        "jack_up",
+        "jack_down",
+        "thumbs_up",
+        "step_back",
+        "wipe_screen",
+        "signal_release"
+      ],
+      "accent": "#e4b2d7",
+      "heightMeters": 1.6675,
+      "teamColor": "#18b6bd",
+      "vertexColor": true,
+      "qaMinimum": 96.2,
+      "qaRequiredClipsMinimum": 96.2,
+      "rig": "rig.json",
+      "material": "white PBR factor, linear COLOR_0 vertex colors; no texture",
+      "teamMask": "_TEAM_MASK: 1=suit/crown; 0=skin-independent details",
+      "skinning": "articulated rigid-segment skin, normalized single-bone weights, 18 canonical joints"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "spare_wheel",
+      "file": "models/spare_wheel.glb",
+      "triangles": 504,
+      "nodes": [
+        "Wheel"
+      ],
+      "radiusMeters": 0.34,
+      "widthMeters": 0.3,
+      "axle": "+X",
+      "origin": "axle center; place Y=.34 at floor"
+    },
+    {
+      "id": "tire_stack",
+      "file": "models/tire_stack.glb",
+      "triangles": 1808,
+      "nodes": [
+        "Tires"
+      ],
+      "count": 4,
+      "origin": "ground center"
+    },
+    {
+      "id": "wheel_gun",
+      "file": "models/wheel_gun.glb",
+      "triangles": 144,
+      "nodes": [
+        "WheelGun"
+      ],
+      "gripLocalMeters": [
+        0,
+        -0.07,
+        -0.02
+      ],
+      "socketLocalMeters": [
+        0,
+        0,
+        0.28
+      ],
+      "forward": "+Z"
+    },
+    {
+      "id": "jack",
+      "file": "models/jack.glb",
+      "triangles": 368,
+      "nodes": [
+        "Base",
+        "LiftArm",
+        "LiftPad",
+        "Handle"
+      ],
+      "liftRangeMeters": [
+        0.19,
+        0.35
+      ],
+      "liftNode": "LiftPad",
+      "handleNode": "Handle"
+    },
+    {
+      "id": "stop_star",
+      "file": "models/stop_star.glb",
+      "triangles": 112,
+      "nodes": [
+        "StopStar"
+      ],
+      "meaning": "stop at pit box; no lettering"
+    },
+    {
+      "id": "pit_light_entry",
+      "file": "models/pit_light_entry.glb",
+      "triangles": 456,
+      "nodes": [
+        "Housing",
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ],
+      "states": [
+        "red",
+        "amber",
+        "green"
+      ],
+      "forward": "+Z",
+      "lampNodes": [
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ]
+    },
+    {
+      "id": "pit_light_exit",
+      "file": "models/pit_light_exit.glb",
+      "triangles": 456,
+      "nodes": [
+        "Housing",
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ],
+      "states": [
+        "red",
+        "amber",
+        "green"
+      ],
+      "forward": "+Z",
+      "lampNodes": [
+        "LampRed",
+        "LampAmber",
+        "LampGreen"
+      ]
+    },
+    {
+      "id": "pit_lane_arrows",
+      "file": "models/pit_lane_arrows.glb",
+      "triangles": 72,
+      "nodes": [
+        "Sign"
+      ],
+      "lettering": false,
+      "forward": "+Z"
+    },
+    {
+      "id": "speed_limit_symbol",
+      "file": "models/speed_limit_symbol.glb",
+      "triangles": 105,
+      "nodes": [
+        "Sign"
+      ],
+      "lettering": false,
+      "forward": "+Z"
+    },
+    {
+      "id": "cleaning_cloth",
+      "file": "models/cleaning_cloth.glb",
+      "triangles": 24,
+      "nodes": [
+        "Cloth"
+      ],
+      "gripLocalMeters": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "motion": {
+    "contract": "motions/clips.json",
+    "integrationProposal": "motions/pit-sequence.json",
+    "requiredClips": [
+      "idle_wait",
+      "rush_in",
+      "remove_wheel",
+      "mount_wheel",
+      "jack_up",
+      "jack_down",
+      "thumbs_up",
+      "step_back"
+    ],
+    "additionalClips": [
+      "wipe_screen",
+      "signal_release"
+    ],
+    "bakedKeyRateHz": 30,
+    "interpolation": "LINEAR; shortest arc quaternion interpolation",
+    "rootMotion": {
+      "rush_in": [
+        0,
+        0,
+        0.96
+      ],
+      "step_back": [
+        0,
+        0,
+        -0.64
+      ],
+      "handling": "baked, apply once"
+    },
+    "defaultBlendSeconds": 0.18,
+    "loopingClips": [
+      "idle_wait"
+    ]
+  },
+  "teamPalette": {
+    "default": "#18b6bd",
+    "presets": [
+      "#18b6bd",
+      "#d93228",
+      "#d6aa3b",
+      "#b7c2ca",
+      "#7ac05a",
+      "#a05fc4"
+    ],
+    "reference": "../racing-league/README.md",
+    "implementation": "COLOR_0 linear RGB; _TEAM_MASK selects recolorable vertices"
+  },
+  "icons": [
+    {
+      "id": "pit_entry",
+      "file": "icons/pit_entry.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "tire_wear_0",
+      "file": "icons/tire_wear_0.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "tire_wear_1",
+      "file": "icons/tire_wear_1.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "tire_wear_2",
+      "file": "icons/tire_wear_2.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "tire_wear_3",
+      "file": "icons/tire_wear_3.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "wear_gauge",
+      "file": "icons/wear_gauge.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    },
+    {
+      "id": "wheel_change",
+      "file": "icons/wheel_change.svg",
+      "width": 96,
+      "height": 96,
+      "format": "svg",
+      "embeddedText": false
+    }
+  ],
+  "sounds": [
+    {
+      "id": "wheel_gun_loosen",
+      "durationSeconds": 1.2,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/wheel_gun_loosen.ogg",
+          "bytes": 19633,
+          "sha256": "4d9a9f59cd6e37393fc0c3cf06e479b1b7e8996238220185cd4b8f07293262b3",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.2,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -4.39,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.0
+        },
+        {
+          "file": "audio/wheel_gun_loosen.mp3",
+          "bytes": 25004,
+          "sha256": "68cd6c00c858d653a830df92e4d62d4f8a1a9e435858c16fa6dc29defd3ba765",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.224,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -4.39,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.0
+        }
+      ]
+    },
+    {
+      "id": "wheel_gun_tighten",
+      "durationSeconds": 1.15,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/wheel_gun_tighten.ogg",
+          "bytes": 18649,
+          "sha256": "2db8260246aeb7abd934ec72997682e8225ff82805c3a4dbd0f491b5bec884cc",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.15,
+          "integratedLUFS": -16.01,
+          "truePeakDBTP": -3.58,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.01
+        },
+        {
+          "file": "audio/wheel_gun_tighten.mp3",
+          "bytes": 24044,
+          "sha256": "ea45e81ee8f900ca3f288b334406a5fc12cf4157a76ea85a5d6b043485a9026c",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.176,
+          "integratedLUFS": -16.01,
+          "truePeakDBTP": -3.81,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.01
+        }
+      ]
+    },
+    {
+      "id": "jack",
+      "durationSeconds": 1.65,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/jack.ogg",
+          "bytes": 24055,
+          "sha256": "48df86f2ae500bd85d7ab6b1825ea302d905f358af835a74b119441d0974c226",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.65,
+          "integratedLUFS": -15.97,
+          "truePeakDBTP": -4.57,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -25.97
+        },
+        {
+          "file": "audio/jack.mp3",
+          "bytes": 34124,
+          "sha256": "7cf66e00456b0d1b71be87f1668dcd14f5a649722f3c69ba8c9d2cbe055ce6bc",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.68,
+          "integratedLUFS": -16.02,
+          "truePeakDBTP": -4.17,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.02
+        }
+      ]
+    },
+    {
+      "id": "wheel_drop",
+      "durationSeconds": 1.25,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/wheel_drop.ogg",
+          "bytes": 17828,
+          "sha256": "416db1d14d5b21d71bc03988c693061fe958c6620b183ccd657e4bf4f14a4e03",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.25,
+          "integratedLUFS": -16.01,
+          "truePeakDBTP": -3.79,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.01
+        },
+        {
+          "file": "audio/wheel_drop.mp3",
+          "bytes": 26444,
+          "sha256": "839d963ea2effbe9222e861fe5b19e85aee96f0ef0967e8dec03658e4b6def3b",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 1.296,
+          "integratedLUFS": -16.01,
+          "truePeakDBTP": -4.23,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.01
+        }
+      ]
+    },
+    {
+      "id": "crew_cheer",
+      "durationSeconds": 2.8,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/crew_cheer.ogg",
+          "bytes": 41808,
+          "sha256": "08d3e7272d695a7f6ce8490ca56100297bc9e46fe98828d14e3fa201e476282c",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 2.8,
+          "integratedLUFS": -15.99,
+          "truePeakDBTP": -6.54,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.58
+        },
+        {
+          "file": "audio/crew_cheer.mp3",
+          "bytes": 57164,
+          "sha256": "af15ae4461296416db60b37c5b1e73eb0ea9a8c47f6b13b0a45752738ec2e63d",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 2.832,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -6.33,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.58
+        }
+      ]
+    },
+    {
+      "id": "wheel_attach",
+      "durationSeconds": 0.85,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/wheel_attach.ogg",
+          "bytes": 13286,
+          "sha256": "41e4134bc4414ee2fdb711f017f9727e1965908602ed616787ddfb2585ddeff9",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 0.85,
+          "integratedLUFS": -16.04,
+          "truePeakDBTP": -3.4,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.04
+        },
+        {
+          "file": "audio/wheel_attach.mp3",
+          "bytes": 18284,
+          "sha256": "fb84b1c9836192db1d82503c5f12de1694940637d0e2f6ac1c58eddd1bc61286",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 0.888,
+          "integratedLUFS": -16.04,
+          "truePeakDBTP": -3.55,
+          "loudnessRangeLU": 0.0,
+          "thresholdLUFS": -26.04
+        }
+      ]
+    },
+    {
+      "id": "engine_exit",
+      "durationSeconds": 3.4,
+      "loop": false,
+      "origin": "original deterministic wordless synthesis; no recordings",
+      "files": [
+        {
+          "file": "audio/engine_exit.ogg",
+          "bytes": 52822,
+          "sha256": "6f8dac0eede6df6d19fb232cd553bb99f232479a8cc298cda044a3aeaa5ee7f5",
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 3.4,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -9.63,
+          "loudnessRangeLU": 0.5,
+          "thresholdLUFS": -26.28
+        },
+        {
+          "file": "audio/engine_exit.mp3",
+          "bytes": 69164,
+          "sha256": "03c385a60a00917b3ac2a47ebead0fdfb8f00f6cdceb588367d596bd4439be42",
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 2,
+          "decodedDurationSeconds": 3.432,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -9.51,
+          "loudnessRangeLU": 0.5,
+          "thresholdLUFS": -26.28
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "motion": {
+      "report": "verification/motion-qa.json",
+      "provenance": "verification/motion-qa-provenance.json",
+      "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "inputAdapter": "source/qa-sources.mjs",
+      "cli": "node source/run-qa.mjs",
+      "scoreMinimum": 94.6,
+      "scoreAverage": 97.49,
+      "clipCount": 70,
+      "minimumRequired": 88,
+      "coverageOfApplicableMetrics": 1,
+      "insufficientDataMetrics": 0,
+      "redMetrics": 0,
+      "limitations": "skeletal diagnostic heuristic; sole probes do not replace full visual or runtime evaluation"
+    },
+    "gltf": {
+      "report": "verification/glb-validator.json",
+      "validator": "2.0.0-dev.3.10",
+      "errors": 0,
+      "warnings": 0
+    },
+    "audio": {
+      "report": "verification/audio.json",
+      "targetLUFS": -16,
+      "toleranceLU": 0.2,
+      "measurementAfterCodecDecode": true
+    },
+    "browser": {
+      "report": "verification/browser.json",
+      "physicalPhoneVerified": false
+    },
+    "geometry": {
+      "report": "verification/geometry.json"
+    },
+    "repository": {
+      "report": "verification/repository-checks.json",
+      "fullRunPass": 4017,
+      "fullRunSkipped": 64,
+      "environmentFailureResolvedByTargetedRerun": true,
+      "retryTestsPass": 5,
+      "remainingFailures": 0
+    }
+  },
+  "preview": {
+    "durationSeconds": 21.8,
+    "productionLogic": false,
+    "dependencies": [
+      {
+        "file": "../racing-v7/vendor/three.module.js",
+        "license": "MIT",
+        "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+        "copiedOrModified": false
+      },
+      {
+        "file": "../racing-v7/vendor/GLTFLoader.js",
+        "license": "MIT",
+        "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+        "copiedOrModified": false
+      },
+      {
+        "file": "../racing-v7/vendor/BufferGeometryUtils.js",
+        "license": "MIT",
+        "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+        "copiedOrModified": false
+      },
+      {
+        "file": "../racing-v7/vendor/SkeletonUtils.js",
+        "license": "MIT",
+        "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d",
+        "copiedOrModified": false
+      },
+      {
+        "file": "../racing-formula/formula.glb",
+        "license": "CC0-1.0",
+        "sha256": "0fafed905c2d8a1274aad64bd9f569bcd303fc6365cec8086da4d1f1cb95883f",
+        "copiedOrModified": false
+      }
+    ],
+    "network": "local repository resources only; serve the repository over HTTP",
+    "screenshots": [
+      "verification/preview-desktop.png",
+      "verification/preview-mobile.png",
+      "verification/crew-detail.png",
+      "verification/pit-stop.png",
+      "verification/equipment-light.png"
+    ]
+  },
+  "rebuild": {
+    "models": "python3 source/build_models.py",
+    "icons": "python3 source/build_icons.py",
+    "audio": "python3 source/build_audio.py",
+    "motionQA": "node source/run-qa.mjs",
+    "manifest": "python3 source/build_manifest.py",
+    "dependencies": [
+      "Python 3",
+      "NumPy",
+      "SciPy",
+      "FFmpeg with libvorbis/libmp3lame",
+      "Node.js 22+",
+      "Git"
+    ]
+  },
+  "assetCount": 41,
+  "assets": [
+    {
+      "file": "audio/crew_cheer.mp3",
+      "bytes": 57164,
+      "sha256": "af15ae4461296416db60b37c5b1e73eb0ea9a8c47f6b13b0a45752738ec2e63d",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/crew_cheer.ogg",
+      "bytes": 41808,
+      "sha256": "08d3e7272d695a7f6ce8490ca56100297bc9e46fe98828d14e3fa201e476282c",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/engine_exit.mp3",
+      "bytes": 69164,
+      "sha256": "03c385a60a00917b3ac2a47ebead0fdfb8f00f6cdceb588367d596bd4439be42",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/engine_exit.ogg",
+      "bytes": 52822,
+      "sha256": "6f8dac0eede6df6d19fb232cd553bb99f232479a8cc298cda044a3aeaa5ee7f5",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/jack.mp3",
+      "bytes": 34124,
+      "sha256": "7cf66e00456b0d1b71be87f1668dcd14f5a649722f3c69ba8c9d2cbe055ce6bc",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/jack.ogg",
+      "bytes": 24055,
+      "sha256": "48df86f2ae500bd85d7ab6b1825ea302d905f358af835a74b119441d0974c226",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_attach.mp3",
+      "bytes": 18284,
+      "sha256": "fb84b1c9836192db1d82503c5f12de1694940637d0e2f6ac1c58eddd1bc61286",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_attach.ogg",
+      "bytes": 13286,
+      "sha256": "41e4134bc4414ee2fdb711f017f9727e1965908602ed616787ddfb2585ddeff9",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_drop.mp3",
+      "bytes": 26444,
+      "sha256": "839d963ea2effbe9222e861fe5b19e85aee96f0ef0967e8dec03658e4b6def3b",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_drop.ogg",
+      "bytes": 17828,
+      "sha256": "416db1d14d5b21d71bc03988c693061fe958c6620b183ccd657e4bf4f14a4e03",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_gun_loosen.mp3",
+      "bytes": 25004,
+      "sha256": "68cd6c00c858d653a830df92e4d62d4f8a1a9e435858c16fa6dc29defd3ba765",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_gun_loosen.ogg",
+      "bytes": 19633,
+      "sha256": "4d9a9f59cd6e37393fc0c3cf06e479b1b7e8996238220185cd4b8f07293262b3",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_gun_tighten.mp3",
+      "bytes": 24044,
+      "sha256": "ea45e81ee8f900ca3f288b334406a5fc12cf4157a76ea85a5d6b043485a9026c",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "audio/wheel_gun_tighten.ogg",
+      "bytes": 18649,
+      "sha256": "2db8260246aeb7abd934ec72997682e8225ff82805c3a4dbd0f491b5bec884cc",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/pit_entry.svg",
+      "bytes": 342,
+      "sha256": "7ab4f625a91a8a1c219d57b9f142258ddd2afbf6a871a7ee423d94668a53b351",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/tire_wear_0.svg",
+      "bytes": 881,
+      "sha256": "d7c60cedce87e8bf07d956fde588ba726fb239262252a87ff6b063e3164c06ba",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/tire_wear_1.svg",
+      "bytes": 809,
+      "sha256": "2cf5ea33632bf0bd096bf19ce25fec8fe830f56c06f2648c799979d45d6bbc35",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/tire_wear_2.svg",
+      "bytes": 790,
+      "sha256": "c5ae4d5a0e4522f13a2729691d920ceb88cf4a23408d3a9b712d600f1b51e1ae",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/tire_wear_3.svg",
+      "bytes": 719,
+      "sha256": "17dce88871ae17095f935fb844218218c32939bde219822cb0c281c7734782e4",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/wear_gauge.svg",
+      "bytes": 613,
+      "sha256": "51a9b5b88ba5cac1ffa445190463c71ce824df9c4f2229fdb3a246411c13bcfd",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "icons/wheel_change.svg",
+      "bytes": 438,
+      "sha256": "9042ffd84a00a000e228d06daf2979647586d3df72ddf1a10a752bf339be00e6",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/cleaning_cloth.glb",
+      "bytes": 4088,
+      "sha256": "a838b906343b125b515b794c0a58efa97dcf00f98e44f933ec8c566fac90cf79",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/jack.glb",
+      "bytes": 49404,
+      "sha256": "5cff483e929bca105a41b27a9d10b5685629a967c43d61d97a8675c11969e652",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/jack_operator.glb",
+      "bytes": 529552,
+      "sha256": "2f28f9c735a393a8512706ff6cc7d0713357db5b6efc3b2e68ab54639964675c",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/light_controller.glb",
+      "bytes": 533640,
+      "sha256": "b9565590379f50f73b09820d205f056c6f81320d7511e78a5beaec4d6e09384f",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/pit_lane_arrows.glb",
+      "bytes": 9840,
+      "sha256": "c1cdc7dc7391a6b9f46b3597423bc0d1f50ea7103447e6047915d988e4dcc906",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/pit_light_entry.glb",
+      "bytes": 58600,
+      "sha256": "4c7e825d504ac76c7253bc234ca8b5fadca4e3c40571ce9cd538b1b6f111b636",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/pit_light_exit.glb",
+      "bytes": 58600,
+      "sha256": "c087a7f6b3fbbdc83432a8455644908e7ac0b6d871f0a1716e68ead88e568203",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/screen_cleaner.glb",
+      "bytes": 532004,
+      "sha256": "475d2d736f7bab89f45b57118901a55c24219977862f58d1053357102fb2c2f0",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/spare_wheel.glb",
+      "bytes": 61764,
+      "sha256": "06612121e956c03685faf6451c9871d5a224909157e45868e046821ad6d2a6f1",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/speed_limit_symbol.glb",
+      "bytes": 13804,
+      "sha256": "de6c1c0995a16b16ff61db9853a208d0765737b08ddeb7a318fa7118c04b888a",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/stop_star.glb",
+      "bytes": 14652,
+      "sha256": "6d7daff4fc4aa6ce752dcce2552dcdf7d2f493589e155190e2b7b1020b453546",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/tire_stack.glb",
+      "bytes": 218184,
+      "sha256": "9ec27a7c30286aaf57e904231028fdd354cb5b42c69fdee92a767b2a46300ee0",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/wheel_front_left.glb",
+      "bytes": 535276,
+      "sha256": "e377bdde3cb7a99f1791b8e6b27a3193d07a65dc99b84d7650523cc2b0c54f6c",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/wheel_front_right.glb",
+      "bytes": 535276,
+      "sha256": "62728e1f1bac7be4c88fb745711861212b2fa17620a30901d53e81cf0bd48e1f",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/wheel_gun.glb",
+      "bytes": 18536,
+      "sha256": "2de3c1cd3d4030c6586be92a803dc2f95657613ff9a932fd8cfa57554a27a6ba",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/wheel_rear_left.glb",
+      "bytes": 535272,
+      "sha256": "0237d759ed47b9825624bea9e625174ef7ed5d77d5b71bba1692fbb58da93d8c",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "models/wheel_rear_right.glb",
+      "bytes": 535276,
+      "sha256": "c85d92e15ee327868e3feb6664404b5797b35a8d369934327b84e00f92353278",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "motions/clips.json",
+      "bytes": 12672,
+      "sha256": "f16a2c8f5680249f04519d0266efdfc412b9bcca069ef4fafca4c6a31b8bac46",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "motions/pit-sequence.json",
+      "bytes": 2567,
+      "sha256": "5883aa6daa7548805d58d03fbcd003c29e631f1e8c7a3a661999d09a26108a87",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    },
+    {
+      "file": "rig.json",
+      "bytes": 2807,
+      "sha256": "bebd815656ba59a275df2405d911416735abd281c6d42b985be0bbaa52e22475",
+      "license": "CC0-1.0",
+      "source": "original; see LICENSES.md and source/"
+    }
+  ]
+}
