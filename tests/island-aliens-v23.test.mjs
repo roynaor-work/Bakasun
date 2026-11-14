@@ -19,7 +19,8 @@ const read=path=>readFile(new URL(path,import.meta.url),'utf8');
 const config=JSON.parse(await read('../workout/island/data/config.json')).minigames,balance=config.alienDefense,cfg=v23Config(balance),c15=v15Config(balance);
 const strings=JSON.parse(await read('../workout/island/data/strings.he.json'));
 const FRAME=1/60,REGULAR_RATE=1/c15.normalInterval;
-const make=(o={})=>{const {fire='v23',...rest}=o;globalThis.__alienFire=fire==='v15'?'v15':undefined;try{return createAlienModel({config,balance,level:1,random:seededRandom(3),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienFire=undefined;}};
+// v25 (14/11/2026) changed the Vulcan's numbers on purpose (tests/island-aliens-v25.test.mjs); these v23 checks run on ?alienVulcan=v24, the v23 Vulcan.
+const make=(o={})=>{const {fire='v23',...rest}=o;globalThis.__alienFire=fire==='v15'?'v15':undefined;globalThis.__alienVulcan='v24';globalThis.__alienEnemyFire='v24';globalThis.__alienArsenal='0';try{return createAlienModel({config,balance,level:1,random:seededRandom(3),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienFire=undefined;globalThis.__alienVulcan=undefined;globalThis.__alienEnemyFire=undefined;globalThis.__alienArsenal=undefined;}};
 const run=(m,s,input={})=>{for(let i=0;i<Math.round(s/FRAME);i++)m.update(FRAME,input);};
 /** Per-frame trace of the fire counters (the model's own clock). */
 function trace(m,seconds,inputAt){const out=[];let t=0;for(let i=0;i<Math.round(seconds/FRAME);i++){m.update(FRAME,inputAt(t));t+=FRAME;const s=m.snapshot();out.push({t:m.time,heat:m.vulcanHeat,locked:m.vulcanLocked,rf:s.regularFired??s.steadyShots,vf:s.vulcanFired??0,pulls:s.steadyShots+s.burstShots,oh:s.overheats,mode:m.fireMode,spin:m.firing});}return out;}

@@ -1,0 +1,287 @@
+{
+ "link": "9 Mbit/s, 85 ms RTT (CDP)",
+ "cpuSlowdown": 4,
+ "browser": "Chromium / SwiftShader, 844x390 mobile, service worker blocked",
+ "note": "machine shared with other jobs: A/B interleaved, medians",
+ "summary": {
+  "before": {
+   "runs": 3,
+   "readyMs": 17476,
+   "crowd3dMs": 17476,
+   "kidModelStartMs": 14857,
+   "mbBeforeReady": 2.9,
+   "longestTaskMs": 7114
+  },
+  "after": {
+   "runs": 3,
+   "readyMs": 9318,
+   "crowd3dMs": 11837,
+   "kidModelStartMs": 4596,
+   "mbBeforeReady": 3.57,
+   "longestTaskMs": 4574
+  }
+ },
+ "rows": [
+  {
+   "round": 0,
+   "variant": "before",
+   "search": "",
+   "progress": "טוענים… הגיעו 61 קבצים (2.5 MB) · 10 שניות",
+   "ready": 19703,
+   "firstFrame": 19703,
+   "crowd3d": 19703,
+   "filesBeforeReady": 78,
+   "mbBeforeReady": 2.9,
+   "filesTotal": 78,
+   "kidModel": [
+    16874,
+    18386
+   ],
+   "court": [
+    8839,
+    9231
+   ],
+   "stand": [
+    10577,
+    10907
+   ],
+   "lastFan": 16679,
+   "longestTaskMs": 8398,
+   "longTasksMs": 12793,
+   "metrics": {
+    "load": null,
+    "triangles": 88936,
+    "drawCalls": 92,
+    "crowd": "3d-lod",
+    "grip": null
+   },
+   "errors": []
+  },
+  {
+   "round": 0,
+   "variant": "after",
+   "search": "",
+   "progress": "טוענים… הגיעו 24 קבצים (0.8 MB) · 3 שניות",
+   "ready": 9534,
+   "firstFrame": 9534,
+   "motion": 12988,
+   "crowd3d": 15306,
+   "filesBeforeReady": 86,
+   "mbBeforeReady": 3.57,
+   "filesTotal": 86,
+   "kidModel": [
+    4963,
+    7360
+   ],
+   "court": [
+    5619,
+    6351
+   ],
+   "stand": [
+    5179,
+    5704
+   ],
+   "lastFan": 8762,
+   "longestTaskMs": 4949,
+   "longTasksMs": 12310,
+   "metrics": {
+    "load": {
+     "mode": "v25",
+     "venueMs": 2984,
+     "charactersMs": 3192,
+     "prefetched": 8,
+     "crowd": "3d-lod",
+     "crowdLate": "ready"
+    },
+    "triangles": 99224,
+    "drawCalls": 90,
+    "crowd": "3d-lod",
+    "grip": [
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     },
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     }
+    ]
+   },
+   "errors": []
+  },
+  {
+   "round": 1,
+   "variant": "after",
+   "search": "",
+   "progress": "טוענים… הגיעו 28 קבצים (0.8 MB) · 3 שניות",
+   "ready": 9318,
+   "firstFrame": 9318,
+   "motion": 11786,
+   "crowd3d": 11837,
+   "filesBeforeReady": 86,
+   "mbBeforeReady": 3.57,
+   "filesTotal": 86,
+   "kidModel": [
+    4596,
+    7007
+   ],
+   "court": [
+    5184,
+    5934
+   ],
+   "stand": [
+    4788,
+    5330
+   ],
+   "lastFan": 8579,
+   "longestTaskMs": 4574,
+   "longTasksMs": 8852,
+   "metrics": {
+    "load": {
+     "mode": "v25",
+     "venueMs": 2996,
+     "charactersMs": 3321,
+     "prefetched": 8,
+     "crowd": "3d-lod",
+     "crowdLate": "ready"
+    },
+    "triangles": 82424,
+    "drawCalls": 67,
+    "crowd": "3d-lod",
+    "grip": [
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     },
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     }
+    ]
+   },
+   "errors": []
+  },
+  {
+   "round": 1,
+   "variant": "before",
+   "search": "",
+   "progress": "טוענים… הגיעו 61 קבצים (2.5 MB) · 10 שניות",
+   "ready": 14986,
+   "firstFrame": 14986,
+   "crowd3d": 14986,
+   "filesBeforeReady": 78,
+   "mbBeforeReady": 2.9,
+   "filesTotal": 78,
+   "kidModel": [
+    11964,
+    13389
+   ],
+   "court": [
+    4292,
+    4828
+   ],
+   "stand": [
+    5918,
+    6251
+   ],
+   "lastFan": 11760,
+   "longestTaskMs": 3874,
+   "longTasksMs": 8501,
+   "metrics": {
+    "load": null,
+    "triangles": 88936,
+    "drawCalls": 91,
+    "crowd": "3d-lod",
+    "grip": null
+   },
+   "errors": []
+  },
+  {
+   "round": 2,
+   "variant": "before",
+   "search": "",
+   "progress": "טוענים… הגיעו 61 קבצים (2.5 MB) · 9 שניות",
+   "ready": 17476,
+   "firstFrame": 17476,
+   "crowd3d": 17476,
+   "filesBeforeReady": 78,
+   "mbBeforeReady": 2.9,
+   "filesTotal": 78,
+   "kidModel": [
+    14857,
+    16300
+   ],
+   "court": [
+    7621,
+    8115
+   ],
+   "stand": [
+    8988,
+    9321
+   ],
+   "lastFan": 14670,
+   "longestTaskMs": 7114,
+   "longTasksMs": 12353,
+   "metrics": {
+    "load": null,
+    "triangles": 88936,
+    "drawCalls": 91,
+    "crowd": "3d-lod",
+    "grip": null
+   },
+   "errors": []
+  },
+  {
+   "round": 2,
+   "variant": "after",
+   "search": "",
+   "progress": "טוענים… הגיעו 23 קבצים (0.8 MB) · 3 שניות",
+   "ready": 8303,
+   "firstFrame": 8303,
+   "motion": 10306,
+   "crowd3d": 10489,
+   "filesBeforeReady": 82,
+   "mbBeforeReady": 3.55,
+   "filesTotal": 86,
+   "kidModel": [
+    4354,
+    6720
+   ],
+   "court": [
+    5004,
+    5779
+   ],
+   "stand": [
+    4718,
+    5235
+   ],
+   "lastFan": 8305,
+   "longestTaskMs": 4316,
+   "longTasksMs": 7311,
+   "metrics": {
+    "load": {
+     "mode": "v25",
+     "venueMs": 2818,
+     "charactersMs": 2933,
+     "prefetched": 8,
+     "crowd": "3d-lod",
+     "crowdLate": "ready"
+    },
+    "triangles": 82424,
+    "drawCalls": 67,
+    "crowd": "3d-lod",
+    "grip": [
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     },
+     {
+      "curled": 5,
+      "racket": "tennis-grip-v1"
+     }
+    ]
+   },
+   "errors": []
+  }
+ ]
+}
