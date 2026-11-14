@@ -1,0 +1,22 @@
+SPDX-License-Identifier: CC0-1.0
+
+Athlete LOD v1: original adaptation of the CC0 athlete-body-v22 assets,
+original number-mask artwork, build scripts, preview, configuration and report.
+
+To the extent possible under law, the authors have waived all copyright and
+related or neighboring rights to the new work in this directory under the
+Creative Commons CC0 1.0 Universal Public Domain Dedication.
+
+Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Source provenance:
+- workout/island/assets/athlete-body-v22/body-manifest.json declares CC0-1.0.
+- Each source GLB declares CC0-1.0 in asset.copyright.
+- The original source atlas is referenced, not duplicated or relabeled.
+- Existing motion data is read from its original repository location.
+- No external character mesh, font artwork, captured motion or Draco input.
+
+Build-time dependencies are not distributed here: meshoptimizer (MIT),
+NumPy (BSD-3-Clause).
+The preview imports the repository's existing Three.js (MIT) installation;
+its notice remains at ../../vendor/LICENSE.three.
