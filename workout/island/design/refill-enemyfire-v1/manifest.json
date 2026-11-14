@@ -1,0 +1,1018 @@
+{
+  "schemaVersion": 1,
+  "package": "refill-enemyfire-v1",
+  "baseBranch": "main",
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "license": "CC0-1.0",
+  "provenance": "Original procedural geometry, supersampled raster art and synthesized audio. No stock, samples, fonts, logos or external assets.",
+  "runtimeIntegration": false,
+  "textInArtwork": false,
+  "preview": "preview.html",
+  "coordinateSystem": {
+    "units": "meters",
+    "up": "+Y",
+    "forward": "+Z",
+    "waterline": 0
+  },
+  "palette": {
+    "coolant": "#55edff",
+    "vulcan-magazine": "#ffbd50",
+    "energy": "#bd8aff"
+  },
+  "icons": {
+    "frameWidth": 96,
+    "frameHeight": 96,
+    "alpha": "straight",
+    "glow": "baked",
+    "order": [
+      "coolant",
+      "vulcan-magazine",
+      "energy"
+    ],
+    "carousel": {
+      "file": "icons/refill-carousel.png",
+      "columns": 3,
+      "rows": 1,
+      "frameCount": 3
+    },
+    "items": {
+      "coolant": {
+        "file": "icons/coolant.png",
+        "color": "#55edff",
+        "model": "models/coolant.glb"
+      },
+      "vulcan-magazine": {
+        "file": "icons/vulcan-magazine.png",
+        "color": "#ffbd50",
+        "model": "models/vulcan-magazine.glb"
+      },
+      "energy": {
+        "file": "icons/energy.png",
+        "color": "#bd8aff",
+        "model": "models/energy.glb"
+      }
+    }
+  },
+  "models": {
+    "coolant": {
+      "file": "models/coolant.glb",
+      "triangles": 600,
+      "bytes": 44384,
+      "bounds": {
+        "min": [
+          -0.54,
+          -0.09,
+          -0.54
+        ],
+        "max": [
+          0.54,
+          0.8,
+          0.54
+        ]
+      },
+      "primitives": 2
+    },
+    "vulcan-magazine": {
+      "file": "models/vulcan-magazine.glb",
+      "triangles": 600,
+      "bytes": 45272,
+      "bounds": {
+        "min": [
+          -0.54,
+          -0.09,
+          -0.54
+        ],
+        "max": [
+          0.54,
+          0.76,
+          0.54
+        ]
+      },
+      "primitives": 2
+    },
+    "energy": {
+      "file": "models/energy.glb",
+      "triangles": 600,
+      "bytes": 45716,
+      "bounds": {
+        "min": [
+          -0.54,
+          -0.09,
+          -0.54
+        ],
+        "max": [
+          0.54,
+          0.85,
+          0.54
+        ]
+      },
+      "primitives": 2
+    }
+  },
+  "floatIdle": {
+    "pivot": "waterline",
+    "bobAmplitudeMeters": 0.035,
+    "bobFrequencyHz": 0.8,
+    "tiltAmplitudeRadians": 0.045,
+    "yawRadiansPerSecond": 0.24
+  },
+  "sprites": {
+    "pickup-burst": {
+      "file": "vfx/pickup-burst.png",
+      "frameCount": 6,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 6,
+      "rows": 1,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/pickup-burst/00.png",
+        "vfx/frames/pickup-burst/01.png",
+        "vfx/frames/pickup-burst/02.png",
+        "vfx/frames/pickup-burst/03.png",
+        "vfx/frames/pickup-burst/04.png",
+        "vfx/frames/pickup-burst/05.png"
+      ]
+    },
+    "refill-ring": {
+      "file": "vfx/refill-ring.png",
+      "frameCount": 12,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 12,
+      "rows": 1,
+      "fps": 0,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/refill-ring/00.png",
+        "vfx/frames/refill-ring/01.png",
+        "vfx/frames/refill-ring/02.png",
+        "vfx/frames/refill-ring/03.png",
+        "vfx/frames/refill-ring/04.png",
+        "vfx/frames/refill-ring/05.png",
+        "vfx/frames/refill-ring/06.png",
+        "vfx/frames/refill-ring/07.png",
+        "vfx/frames/refill-ring/08.png",
+        "vfx/frames/refill-ring/09.png",
+        "vfx/frames/refill-ring/10.png",
+        "vfx/frames/refill-ring/11.png"
+      ],
+      "mode": "state",
+      "progressValues": [
+        0.0,
+        0.090909,
+        0.181818,
+        0.272727,
+        0.363636,
+        0.454545,
+        0.545455,
+        0.636364,
+        0.727273,
+        0.818182,
+        0.909091,
+        1.0
+      ],
+      "frameFormula": "round(clamp(progress, 0, 1) * 11)",
+      "emptyFrame": 0,
+      "fullFrame": 11
+    },
+    "enemy-shell": {
+      "file": "vfx/enemy-shell.png",
+      "frameCount": 4,
+      "frameWidth": 128,
+      "frameHeight": 64,
+      "columns": 4,
+      "rows": 1,
+      "fps": 16,
+      "loop": true,
+      "anchor": [
+        0.75,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/enemy-shell/00.png",
+        "vfx/frames/enemy-shell/01.png",
+        "vfx/frames/enemy-shell/02.png",
+        "vfx/frames/enemy-shell/03.png"
+      ],
+      "forward": "+X",
+      "rotationOrigin": "anchor",
+      "tipPixels": [
+        111,
+        32
+      ]
+    },
+    "water-target": {
+      "file": "vfx/water-target.png",
+      "frameCount": 8,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 1,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/water-target/00.png",
+        "vfx/frames/water-target/01.png",
+        "vfx/frames/water-target/02.png",
+        "vfx/frames/water-target/03.png",
+        "vfx/frames/water-target/04.png",
+        "vfx/frames/water-target/05.png",
+        "vfx/frames/water-target/06.png",
+        "vfx/frames/water-target/07.png"
+      ],
+      "plane": "XZ",
+      "worldUp": "+Y",
+      "depthWrite": false,
+      "depthTest": true,
+      "surfaceOffsetMeters": 0.035
+    },
+    "edge-warning": {
+      "file": "vfx/edge-warning.png",
+      "frameCount": 8,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 1,
+      "fps": 8,
+      "loop": true,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/edge-warning/00.png",
+        "vfx/frames/edge-warning/01.png",
+        "vfx/frames/edge-warning/02.png",
+        "vfx/frames/edge-warning/03.png",
+        "vfx/frames/edge-warning/04.png",
+        "vfx/frames/edge-warning/05.png",
+        "vfx/frames/edge-warning/06.png",
+        "vfx/frames/edge-warning/07.png"
+      ],
+      "sourceDirection": "left",
+      "points": "outward toward incoming source",
+      "rotationRadiansClockwise": {
+        "left": 0,
+        "top": 1.5707963267948966,
+        "right": 3.141592653589793,
+        "bottom": -1.5707963267948966
+      }
+    },
+    "muzzle-flash": {
+      "file": "vfx/muzzle-flash.png",
+      "frameCount": 6,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 6,
+      "rows": 1,
+      "fps": 30,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/muzzle-flash/00.png",
+        "vfx/frames/muzzle-flash/01.png",
+        "vfx/frames/muzzle-flash/02.png",
+        "vfx/frames/muzzle-flash/03.png",
+        "vfx/frames/muzzle-flash/04.png",
+        "vfx/frames/muzzle-flash/05.png"
+      ]
+    },
+    "shockwave": {
+      "file": "vfx/shockwave.png",
+      "frameCount": 8,
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "columns": 8,
+      "rows": 1,
+      "fps": 20,
+      "loop": false,
+      "anchor": [
+        0.5,
+        0.5
+      ],
+      "blend": "normal",
+      "alpha": "straight",
+      "transparentGuardPx": 2,
+      "sampler": {
+        "wrap": "clamp-to-edge",
+        "minFilter": "linear",
+        "magFilter": "linear",
+        "mipmaps": false,
+        "uvInsetTexels": 0.5
+      },
+      "frames": [
+        "vfx/frames/shockwave/00.png",
+        "vfx/frames/shockwave/01.png",
+        "vfx/frames/shockwave/02.png",
+        "vfx/frames/shockwave/03.png",
+        "vfx/frames/shockwave/04.png",
+        "vfx/frames/shockwave/05.png",
+        "vfx/frames/shockwave/06.png",
+        "vfx/frames/shockwave/07.png"
+      ]
+    }
+  },
+  "audio": {
+    "refill-pickup": {
+      "loop": false,
+      "originalSynthesis": true,
+      "targetLUFS": -16,
+      "toleranceLU": 0.2,
+      "truePeakCeilingDBTP": -1,
+      "measurement": "FFmpeg loudnorm input_i/input_tp of decoded final delivery file; EBU R128 / ITU-R BS.1770",
+      "files": {
+        "ogg": {
+          "file": "audio/refill-pickup.ogg",
+          "bytes": 12471,
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 0.92,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -5.48,
+          "loudnessRangeLU": 0.0
+        },
+        "mp3": {
+          "file": "audio/refill-pickup.mp3",
+          "bytes": 19724,
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 0.96,
+          "integratedLUFS": -16.0,
+          "truePeakDBTP": -5.36,
+          "loudnessRangeLU": 0.0
+        }
+      }
+    },
+    "incoming-shell": {
+      "loop": false,
+      "originalSynthesis": true,
+      "targetLUFS": -16,
+      "toleranceLU": 0.2,
+      "truePeakCeilingDBTP": -1,
+      "measurement": "FFmpeg loudnorm input_i/input_tp of decoded final delivery file; EBU R128 / ITU-R BS.1770",
+      "files": {
+        "ogg": {
+          "file": "audio/incoming-shell.ogg",
+          "bytes": 17025,
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 1.2,
+          "integratedLUFS": -16.01,
+          "truePeakDBTP": -3.73,
+          "loudnessRangeLU": 0.0
+        },
+        "mp3": {
+          "file": "audio/incoming-shell.mp3",
+          "bytes": 25004,
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 1.224,
+          "integratedLUFS": -15.99,
+          "truePeakDBTP": -3.96,
+          "loudnessRangeLU": 0.0
+        }
+      }
+    },
+    "enemy-cannon": {
+      "loop": false,
+      "originalSynthesis": true,
+      "targetLUFS": -16,
+      "toleranceLU": 0.2,
+      "truePeakCeilingDBTP": -1,
+      "measurement": "FFmpeg loudnorm input_i/input_tp of decoded final delivery file; EBU R128 / ITU-R BS.1770",
+      "files": {
+        "ogg": {
+          "file": "audio/enemy-cannon.ogg",
+          "bytes": 17501,
+          "codec": "vorbis",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 1.35,
+          "integratedLUFS": -16.03,
+          "truePeakDBTP": -2.59,
+          "loudnessRangeLU": 0.0
+        },
+        "mp3": {
+          "file": "audio/enemy-cannon.mp3",
+          "bytes": 28364,
+          "codec": "mp3",
+          "sampleRateHz": 48000,
+          "channels": 1,
+          "durationSeconds": 1.392,
+          "integratedLUFS": -16.14,
+          "truePeakDBTP": -2.88,
+          "loudnessRangeLU": 0.0
+        }
+      }
+    }
+  },
+  "previewSequence": {
+    "cycleSeconds": 4,
+    "warningAtSeconds": 0.35,
+    "shotAtSeconds": 1.15,
+    "impactAtSeconds": 2.35,
+    "pickupAtSeconds": 2.95,
+    "sourceAlternates": true
+  },
+  "integrationNotes": [
+    "Cooldown, magazine and energy silhouettes are distinct without color.",
+    "Assets only: actual Vulcan refill and enemy fire rates are unchanged.",
+    "Water target is a circular texture: rotate plane onto XZ; camera perspective supplies foreshortening.",
+    "One warning sound per incoming salvo; do not retrigger each animation loop.",
+    "refill-ring is state-driven, not a looping animation."
+  ],
+  "assetFiles": [
+    {
+      "file": "icons/coolant.png",
+      "bytes": 11509,
+      "sha256": "e52ace0bf161cc71f64f37658c67f074ff2c0343bea246e2ea10f6f7bccb0635",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "icons/energy.png",
+      "bytes": 10071,
+      "sha256": "93e8f986b78f6bfdd0735610b3d76def4d9fe89251da70ef680ca96db7cabecd",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "icons/refill-carousel.png",
+      "bytes": 30221,
+      "sha256": "f5ad3cff14e49f7cb42fbdd5165fe2996365ac93f6f55e8f4a51af9b0293823c",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "icons/vulcan-magazine.png",
+      "bytes": 9909,
+      "sha256": "bec72413f65c9abe47179a3679a202236e13b663394967025f1e6252cc3847d0",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/edge-warning.png",
+      "bytes": 28802,
+      "sha256": "4326ba7c36e71ebf1ee53f8bc108d9bdda1835d403868398da1449d0c038cd7b",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/enemy-shell.png",
+      "bytes": 21023,
+      "sha256": "43a0fb3605211a33d72e9eb3d310329594ae6c29c508fb813d48bd491b51a2fc",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/00.png",
+      "bytes": 5614,
+      "sha256": "a8be5719d4a4ce0bfbaa1b3762462ef5e4263e918516c7625847d730ee38d2fa",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/01.png",
+      "bytes": 5265,
+      "sha256": "d509039441a13d41d605b881c67f83209066462123d45a7547af6a2d59ae0801",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/02.png",
+      "bytes": 5273,
+      "sha256": "75ce3c587fedaace6194b5426442b7ec92d9efe08563d5e16646cee66596a2b2",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/03.png",
+      "bytes": 5265,
+      "sha256": "d509039441a13d41d605b881c67f83209066462123d45a7547af6a2d59ae0801",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/04.png",
+      "bytes": 5614,
+      "sha256": "a8be5719d4a4ce0bfbaa1b3762462ef5e4263e918516c7625847d730ee38d2fa",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/05.png",
+      "bytes": 5621,
+      "sha256": "5ec1f950cd03aba93622c924bb39f2046f266dfbe9a2af9959863040f3c58ff1",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/06.png",
+      "bytes": 5389,
+      "sha256": "c3caafe2c087019f76893a1d1ee3458d844e7643f769abf9f203aeb29cec0876",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/edge-warning/07.png",
+      "bytes": 5621,
+      "sha256": "5ec1f950cd03aba93622c924bb39f2046f266dfbe9a2af9959863040f3c58ff1",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/enemy-shell/00.png",
+      "bytes": 6801,
+      "sha256": "863f6edbf22c829607dca84db1ed6d0d0c4ebfd0a744bc450fb2700ad86853e7",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/enemy-shell/01.png",
+      "bytes": 6758,
+      "sha256": "331c69add8815af89b99275401ad6a7060b66c9fbffd9e022cb4d748db8e11f1",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/enemy-shell/02.png",
+      "bytes": 6777,
+      "sha256": "c09cb19dd0ef9595eb551019d7d80fb1499265248fe93a5acaf8fbf5408f6b59",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/enemy-shell/03.png",
+      "bytes": 6661,
+      "sha256": "f6191da8d763392e8a95c0f69b1fafb0c060120af0a93fcc3af3033aab0b87ee",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/00.png",
+      "bytes": 4316,
+      "sha256": "ac57c510ef82fcc8640f67b9e4145955c2cb6bbf78e389efdfe0e5ec21b79820",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/01.png",
+      "bytes": 14019,
+      "sha256": "b714fa9f297774212411cc07bea4c3bf7637f16a8d6713aae63327b2a0d48171",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/02.png",
+      "bytes": 16631,
+      "sha256": "8b14d2aa7f7b6ea3af49c02d654e0ff21be23e13bb429d40c3f2ef4d3f358eba",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/03.png",
+      "bytes": 12633,
+      "sha256": "036846d73383f857d52866f04e37350aed535b7e68abc3984ec11fda40fe7360",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/04.png",
+      "bytes": 7181,
+      "sha256": "cf155ef0837afa5ec141c84610ef912f221078d40995c9bf9db5b68eab57b8df",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/muzzle-flash/05.png",
+      "bytes": 1861,
+      "sha256": "d1b13ada1adcbcc3f433df5e5b1cc1304fe4e19148d0a33fd652e216d4c210fc",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/00.png",
+      "bytes": 4545,
+      "sha256": "d090ed023f1a7028f085ce7e052f9fb5b6313df363ceed42e67606dbf950b6e9",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/01.png",
+      "bytes": 8731,
+      "sha256": "416de295e49233785df6bca8730849f250952d3e99961d5548bb62febfc544d9",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/02.png",
+      "bytes": 12686,
+      "sha256": "063733320e6c7c0e7bf1b347c9be37c025771532167c2f76ae050eafb4eb3b2a",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/03.png",
+      "bytes": 14843,
+      "sha256": "5d3f3dc4cd01aeef4ac8d2737044f5b9ffa847e3836fb59e17efb76dd38554d0",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/04.png",
+      "bytes": 15244,
+      "sha256": "82f21e0167ab8c480e81637f544690ec6fe6ee5d55702ff80780e48cfa52aacf",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/pickup-burst/05.png",
+      "bytes": 143,
+      "sha256": "06ab142c3bad172a564f50931dd667c07af918ed7298107b0c41f79cd761cc8f",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/00.png",
+      "bytes": 8369,
+      "sha256": "91787f40ba4a3fcd173f4d9b69008cf5ef5b2f62c4066f941bcadf118826bd32",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/01.png",
+      "bytes": 9232,
+      "sha256": "52bd14f4916714027538464d39c131a93ecfabf29453cbf025d11f7502c53eff",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/02.png",
+      "bytes": 10175,
+      "sha256": "911b1d6d6b6efb40c4e7af1bc9b5a72a9c80890344ae88944d9f46eee443c095",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/03.png",
+      "bytes": 10844,
+      "sha256": "ff34b154753f2689ac95f1782f7d4234906d62ca9f003f8f84c7a7f701a90bf8",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/04.png",
+      "bytes": 11571,
+      "sha256": "4bc4431ba6477ef2b940663738bf8eab4c8d0e03c280c4710c3afecc43628d83",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/05.png",
+      "bytes": 12380,
+      "sha256": "227b1eb18923aae9c97d614e0a64108a6be8d7b9caa6b1b455dbe35a70768dfb",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/06.png",
+      "bytes": 12951,
+      "sha256": "5f4a7a0ab2a3cb9387a09b392049fd968ed22f470f634b74b53cdc244145751a",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/07.png",
+      "bytes": 13713,
+      "sha256": "d9bbb7eafcde43dd506874f364cc7e2de552cd2fd96dbdab6939873ada46bc62",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/08.png",
+      "bytes": 14318,
+      "sha256": "fb9f5dcb1f7c27fd27600c357b0aba889e2b94b585208b6755ecbec945063f91",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/09.png",
+      "bytes": 14861,
+      "sha256": "f33e5c20ef8fe7b6fa65b93346a16fd676914d3b2d36f70e33ce70ac813791d1",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/10.png",
+      "bytes": 15620,
+      "sha256": "527b37a497687a6ea25e4b1ab8f88584f9ff571eeb5d1620d00fe503a5c94846",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/refill-ring/11.png",
+      "bytes": 18677,
+      "sha256": "c8d5e5ece4f21f8c1dd85680cc78892e453740b7093c6baf3e95b111abab8288",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/00.png",
+      "bytes": 2669,
+      "sha256": "030290ce5238bf8c71cf9758b6ee87093d3fd1db803283fcb16a4d09a78e75c6",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/01.png",
+      "bytes": 4722,
+      "sha256": "2e4c56f27098e36c1c7403f8725234b416829ae50d571ce446aade780463300b",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/02.png",
+      "bytes": 7030,
+      "sha256": "e04e2cc430a5a035e274ef99d7328a180394a1597519fb079c0f343385f47505",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/03.png",
+      "bytes": 9562,
+      "sha256": "f9971913ac098596a3402be17556ca9cb426f45b5d1c442102409f4ba6d759f0",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/04.png",
+      "bytes": 12307,
+      "sha256": "3d950ff0a223073463bd94e19be05537f4392388fc112b9d7ecb8cfad343b554",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/05.png",
+      "bytes": 14406,
+      "sha256": "5f6274f1c123409c705de488c0df0c09d9f52a70a2dd7724069639e348b2dcff",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/06.png",
+      "bytes": 15095,
+      "sha256": "f79be50af1e0302a2266b15c7d45fc9d74ee9448023bdcd91892de1d74b2085a",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/shockwave/07.png",
+      "bytes": 143,
+      "sha256": "06ab142c3bad172a564f50931dd667c07af918ed7298107b0c41f79cd761cc8f",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/00.png",
+      "bytes": 18324,
+      "sha256": "c4819fbd3bb072aebbd2d60353c4334f989a0e4554c6cab31699ab09f16dff13",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/01.png",
+      "bytes": 19913,
+      "sha256": "6a37e21e5d413cb821bee638bb4fd4820c9580518823f70b715582187d6d6839",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/02.png",
+      "bytes": 20316,
+      "sha256": "055e9e72172dbc654fa4077e99316f2dc2174598434139c5a89ec4dc7d1a4e55",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/03.png",
+      "bytes": 19913,
+      "sha256": "6a37e21e5d413cb821bee638bb4fd4820c9580518823f70b715582187d6d6839",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/04.png",
+      "bytes": 18324,
+      "sha256": "c4819fbd3bb072aebbd2d60353c4334f989a0e4554c6cab31699ab09f16dff13",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/05.png",
+      "bytes": 16778,
+      "sha256": "91c5cd0f8ebe2e6ee4f58c5f9c692405183f6aef9ff5cd7fe9f45a235bc49109",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/06.png",
+      "bytes": 15900,
+      "sha256": "ce77d2fc8bb094ff7c5ad6f975db0244816c181600d45888bd8155a774301338",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/frames/water-target/07.png",
+      "bytes": 16778,
+      "sha256": "91c5cd0f8ebe2e6ee4f58c5f9c692405183f6aef9ff5cd7fe9f45a235bc49109",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/muzzle-flash.png",
+      "bytes": 55707,
+      "sha256": "735b67991823c4df8dc3355209fa24d7a05acf616636f80eabab0858d7186d73",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/pickup-burst.png",
+      "bytes": 56484,
+      "sha256": "056331c64cee18f893f2fd3f6dbeb539d163378fb008a81b5adb9b8de6bcbca8",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/refill-ring.png",
+      "bytes": 46486,
+      "sha256": "2b6bc7ad58fc329c2595aa376c9304a454a97856fee8c505948c8824cb4ffe6d",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/shockwave.png",
+      "bytes": 66123,
+      "sha256": "e51089bb6f70dc06dcca4db676dfbeaf2a2a917baa901da30869d295b31e2265",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "vfx/water-target.png",
+      "bytes": 82765,
+      "sha256": "451e2235a943b8f87978efc0d2dfe86025cba8caf7c6dc75d4e7086be1109e27",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "models/coolant.glb",
+      "bytes": 44384,
+      "sha256": "330ce0ead4b010cf0e3b4f22fa46cb51d162f67cdbfd3e3dea0aa33fe8c3b5b6",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "models/energy.glb",
+      "bytes": 45716,
+      "sha256": "6816aef9aa7495f55f2056999d5e59fd7588db8918fff3f25d489fec25aeb46f",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "models/vulcan-magazine.glb",
+      "bytes": 45272,
+      "sha256": "7c5b370e1f8b84abad357f36c082823f6910b7761ad35ed95a43fba13e6ebab4",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/enemy-cannon.mp3",
+      "bytes": 28364,
+      "sha256": "d3da98f86db7d306b2cde6507a854a9ea1b7a7d76d3522781635f68cd68c19cd",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/enemy-cannon.ogg",
+      "bytes": 17501,
+      "sha256": "ae1a4065f137d74fe33a075b3e472bbe1718912b1f472f64d7f5e0985da3f0f8",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/incoming-shell.mp3",
+      "bytes": 25004,
+      "sha256": "da11c9179afd1722fca5e2be66fad122153e117945593339fc23c028702b348c",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/incoming-shell.ogg",
+      "bytes": 17025,
+      "sha256": "c405325e0c7a639bbd7e331ce5c9f6c9d61bb5fe4e837ab6f31657a838109841",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/refill-pickup.mp3",
+      "bytes": 19724,
+      "sha256": "49bee02e87930311e765c2d0e0d30b11a8faa06ee73e8c0b6f8a2af23499d7b2",
+      "license": "CC0-1.0",
+      "origin": "original"
+    },
+    {
+      "file": "audio/refill-pickup.ogg",
+      "bytes": 12471,
+      "sha256": "96bd03825b0f4a576f3b25b3831d5d573880f8aa6b9c00a781573641e5c24ffc",
+      "license": "CC0-1.0",
+      "origin": "original"
+    }
+  ],
+  "assetFileCount": 72,
+  "assetTotalBytes": 1222944,
+  "source": [
+    "source/build_assets.py",
+    "source/build_audio.py",
+    "source/index_assets.py"
+  ]
+}
