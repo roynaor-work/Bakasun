@@ -76,7 +76,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
   // to receive the serve (state.receive, ?tennisReceive=0 has none). Textures load in the background; until then the drawn mark stands in.
   const decalUrl=name=>new URL(`../assets/tennis-ui-fx-v1/${name}.png?v=island-v2-20261107-14`,import.meta.url).href,texLoader=new T.TextureLoader();
   const decal=(size,order)=>{const m=new T.Mesh(keep(new T.PlaneGeometry(size,size)),keep(new T.MeshBasicMaterial({transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2,toneMapped:false})));m.rotation.x=-Math.PI/2;m.renderOrder=order;m.visible=false;scene.add(m);return m;};
-  const outX=decal(1.25,3),receiveArrow=decal(1.5,3),decalTex={};let outShown=null,outAge=0;
+  const outX=decal(1.9,3),receiveArrow=decal(1.5,3),decalTex={};let outShown=null,outAge=0,lastMarkId=null;
   for(const name of ['out-cross','serve-arrow-left','serve-arrow-center','serve-arrow-right'])texLoader.loadAsync(decalUrl(name)).then(t=>{if(disposed){t.dispose();return;}t.colorSpace=T.SRGBColorSpace;decalTex[name]=keep(t);}).catch(()=>{v7Fallbacks.push('tennis decal '+name);});
   const receiveDots=[0,1,2].map(()=>{const d=new T.Mesh(keep(new T.RingGeometry(.12,.2,20)),keep(new T.MeshBasicMaterial({color:'#f3ecd2',transparent:true,opacity:.75,depthWrite:false})));d.rotation.x=-Math.PI/2;d.visible=false;scene.add(d);return d;});
   // Fixed particle pool: one draw, no geometry creation during play.
@@ -227,7 +227,7 @@ export async function createTennisView(canvas,config,{onQuality=()=>{},character
     // Rally/toss coordinates, contact IK and all shot timing stay model-owned.
     if(state.phase==='serve'&&characters[state.server]){characters[state.server].bones.Hand_L.getWorldPosition(ball.position);ball.position.y+=config.ball.radius*.65;}
     // v25: a mark with an id (stopDead) shows the Codex X on an out's landing point for its own 1.5 s; v24 marks keep the drawn X until the next shot.
-    const mark=state.faultMark;if(mark?.id!==undefined&&mark.id!==outShown?.id){outShown=mark.reason==='out'?{...mark}:null;outAge=0;}
+    const mark=state.faultMark;if(mark?.id!==undefined&&mark.id!==lastMarkId){lastMarkId=mark.id;outShown=mark.reason==='out'?{...mark}:null;outAge=0;}/* each mark once: the model keeps it through the second serve */
     if(outShown){outAge+=dt;if(outAge>=1.5)outShown=null;}
     const xTex=decalTex['out-cross'],showX=Boolean(outShown);outX.visible=showX&&Boolean(xTex);if(outX.visible){outX.material.map=xTex;outX.material.needsUpdate=outX.material.map!==outX.userData.map;outX.userData.map=xTex;outX.position.set(outShown.x,.1,outShown.z);}
     faultMark.visible=mark?.id!==undefined?showX&&!xTex:Boolean(mark);if(faultMark.visible){const at=mark?.id!==undefined?outShown:mark;faultMark.position.set(at.x,.13,at.z);}

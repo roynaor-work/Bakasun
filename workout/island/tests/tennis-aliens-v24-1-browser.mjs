@@ -29,47 +29,54 @@ await verify('tennis-aliens-v24-1/'+(only.join('-')||'all'),[{width:844,height:3
  const model=()=>page.evaluate(()=>window.__island.games.current?.session.debug?.model);
  // ------------------------------------------------------------------ Aliens
  if(want('aliens')){
-  const aliens=async(mode)=>{
-   await setSearch(mode==='before'?V24.aliens:'');await start('alienDefense',1);
+  // Each group of checks starts its own stage (a stage can end while the Vulcan mows the fleet down).
+  const open=async(mode,stage=1)=>{await setSearch(mode==='before'?V24.aliens:'');await start('alienDefense',stage);
    await page.waitForFunction(()=>window.__island.games.current?.session.snapshot.artModels?.loaded===6,{timeout:120000}).catch(()=>{});await tick(800);
    // The shared machine is slow: the 3D layer at its lowest tier (as the v24 harness does); the HUD and the canvas effects are unchanged.
-   await page.evaluate(()=>{window.__island.games.current.session.debug?.view?.degrade(true);});await tick(200);
-   const out={mode};
-   // A2. The HUD.
+   await page.evaluate(()=>{window.__island.games.current.session.debug?.view?.degrade(true);});await tick(200);};
+  const live=async()=>{const now=await snap().catch(()=>null);return now&&!now.result?now:null;};
+  const aliens=async(mode)=>{
+   const out={mode};let s;
+   // Group 1: the HUD, the arsenal (v25), the Vulcan held to the lock and the gauge after the finger lifts.
+   await open(mode);
    const [fire,vulcan,missile,text,sw]=await Promise.all(['#shoot','#vulcan','#pass','.alien-flight-control','#special-switch'].map(box));
    out.hud={fire,vulcan,missile,textByStick:text?.visible??false,switch:sw?.visible??false,hud:(await snap()).hud};
    await capture(`aliens-${mode}-hud`);
-   // A4. Enemy fire: 20 s of play, the ship drifting left and right with the stick, no firing.
-   const S=await center('.soccer-stick-zone')||{x:120,y:300};let s=await snap();const t0=s.time,b0=s.boltsFired;
-   await touch('touchStart',[{...S,id:7}]);for(let k=0;k<50&&!s.result;k++){await touch('touchMove',[{x:S.x+Math.round(Math.sin(k/4)*30),y:S.y,id:7}]);await tick(400);s=await snap();}await touch('touchEnd',[{...S,id:7}]);
-   out.enemy={seconds:+(s.time-t0).toFixed(1),bolts:s.boltsFired-b0,perMinute:+(60*(s.boltsFired-b0)/Math.max(1,s.time-t0)).toFixed(1)};
-   // A1. The Vulcan held by a finger until it locks.
-   const V=await center('#vulcan');await tick(2500);s=await snap();let f0=s.vulcanFired,v0=s.time,lockAt=null,heatPath=[];
-   await touch('touchStart',[{...V,id:3}]);for(let k=0;k<80&&lockAt===null;k++){await tick(100);s=await snap();heatPath.push(+s.vulcan.heat.toFixed(2));if(s.vulcan.locked)lockAt=s.time;}
-   await touch('touchEnd',[{...V,id:3}]);out.vulcan={lockAfter:lockAt&&+(lockAt-v0).toFixed(2),bullets:s.vulcanFired-f0,perSecond:lockAt?+((s.vulcanFired-f0)/(lockAt-v0)).toFixed(1):null};
-   if(mode==='after'){await touch('touchStart',[{...V,id:3}]);await tick(300);await capture('aliens-after-vulcan-plasma');await touch('touchEnd',[{...V,id:3}]);}
-   // The gauge after the finger lifts at about 60%.
-   for(let k=0;k<40&&(await snap()).vulcan.heat>.02;k++)await tick(250);
-   await touch('touchStart',[{...V,id:3}]);let h=0;for(let k=0;k<60&&h<.6;k++){await tick(50);h=(await snap()).vulcan.heat;}await touch('touchEnd',[{...V,id:3}]);
-   const hRelease=(await snap()).vulcan.heat;await tick(300);const h03=(await snap()).vulcan.heat;await tick(700);const h10=(await snap()).vulcan.heat;
-   out.cooling={atRelease:+hRelease.toFixed(2),after03:+h03.toFixed(2),after10:+h10.toFixed(2)};
-   // A3. The arsenal by touch: switch to the lightning and fire it, then the shockwave.
    if(mode==='after'){
-    const P=await center('#pass'),W=await center('#special-switch');let a=(await snap()).special;out.arsenal={start:a};
+    const P=await center('#pass'),W=await center('#special-switch');let a=(await snap()).special;out.arsenal={start:a?.selected};
     await touch('touchStart',[{...W,id:5}]);await tick(80);await touch('touchEnd',[{...W,id:5}]);await tick(120);a=(await snap()).special;out.arsenal.afterSwitch=a?.selected;
     const l0=(await snap()).arsenal?.lightningsFired||0;await touch('touchStart',[{...P,id:6}]);await tick(60);await touch('touchEnd',[{...P,id:6}]);await tick(80);await capture('aliens-after-lightning');await tick(200);
     s=await snap();out.arsenal.lightning={fired:(s.arsenal?.lightningsFired||0)-l0,hits:s.arsenal?.lightningHits||0,ammo:s.arsenal?.ammo};
     await touch('touchStart',[{...W,id:5}]);await tick(80);await touch('touchEnd',[{...W,id:5}]);await tick(120);out.arsenal.afterSecondSwitch=(await snap()).special?.selected;
     const w0=(await snap()).arsenal?.wavesFired||0;await touch('touchStart',[{...P,id:6}]);await tick(60);await touch('touchEnd',[{...P,id:6}]);await tick(260);await capture('aliens-after-shockwave');await tick(600);
     s=await snap();out.arsenal.shockwave={fired:(s.arsenal?.wavesFired||0)-w0,hits:s.arsenal?.waveHits||0,bulletsWiped:s.arsenal?.waveBolts||0};
-    // An ammo token, taken by flying into it with a finger on the flight surface (both fire buttons held so aliens fall).
-    const F=await center('#shoot');s=await snap();const perPx=s.viewport.modelWidth/viewport.width,ship0=s.player.x,finger=x=>({x:Math.max(2,Math.min(viewport.width-2,Math.round(422+(x-ship0)/perPx))),y:150,id:1});
-    await touch('touchStart',[finger(ship0)]);await touch('touchStart',[finger(ship0),{...F,id:2}]);await touch('touchStart',[finger(ship0),{...F,id:2},{...V,id:3}]);const c0=s.arsenal?.collected||0,tt0=s.time;let seen=false;
-    while(s&&!s.result&&s.time-tt0<40&&(s.arsenal?.collected||0)===c0){const plan=await page.evaluate(()=>{const m=window.__island.games.current?.session.debug?.model;if(!m)return null;const d=m.ammoDrops?.[0],t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];return {want:d?d.x:t?t.x:m.player.x,token:Boolean(d)};});if(!plan)break;if(plan.token&&!seen){seen=true;await capture('aliens-after-ammo-token');}
-     await touch('touchMove',[finger(plan.want),{...F,id:2},{...V,id:3}]);await tick(200);s=await snap();}
-    await touch('touchEnd');out.arsenal.ammo={seen,collected:(s.arsenal?.collected||0)-c0,seconds:+(s.time-tt0).toFixed(1),ammoNow:s.arsenal?.ammo};
    }
-   await leave();return out;};
+   const V=await center('#vulcan');await tick(1200);s=await live();let f0=s.vulcanFired,v0=s.time,lockAt=null;
+   await touch('touchStart',[{...V,id:3}]);for(let k=0;k<80&&lockAt===null;k++){await tick(100);const now=await live();if(!now)break;s=now;if(s.vulcan.locked)lockAt=s.time;}
+   await touch('touchEnd',[{...V,id:3}]);out.vulcan={lockAfter:lockAt&&+(lockAt-v0).toFixed(2),bullets:s.vulcanFired-f0,perSecond:lockAt?+((s.vulcanFired-f0)/(lockAt-v0)).toFixed(1):null};
+   if(mode==='after'&&await live()){await touch('touchStart',[{...V,id:3}]);await tick(300);await capture('aliens-after-vulcan-plasma');await touch('touchEnd',[{...V,id:3}]);}
+   // The gauge after the finger lifts at about 60% (a fresh stage, so the fleet is still there).
+   await leave();await open(mode);
+   await touch('touchStart',[{...V,id:3}]);let h=0;for(let k=0;k<80&&h<.6;k++){await tick(50);h=(await live())?.vulcan.heat??h;}await touch('touchEnd',[{...V,id:3}]);
+   const hRelease=(await snap()).vulcan.heat;await tick(300);const h03=(await snap()).vulcan.heat;await tick(700);const h10=(await snap()).vulcan.heat;
+   out.cooling={atRelease:+hRelease.toFixed(2),after03:+h03.toFixed(2),after10:+h10.toFixed(2)};
+   await leave();
+   // Group 2: enemy fire, 20 s of play on a fresh stage, the ship drifting left and right with the stick, no firing.
+   await open(mode);
+   const S=await center('.soccer-stick-zone')||{x:120,y:300};s=await snap();const t0=s.time,b0=s.boltsFired;
+   await touch('touchStart',[{...S,id:7}]);for(let k=0;k<50;k++){await touch('touchMove',[{x:S.x+Math.round(Math.sin(k/4)*30),y:S.y,id:7}]);await tick(400);const now=await live();if(!now)break;s=now;}await touch('touchEnd',[{...S,id:7}]);
+   out.enemy={seconds:+(s.time-t0).toFixed(1),bolts:s.boltsFired-b0,perMinute:+(60*(s.boltsFired-b0)/Math.max(1,s.time-t0)).toFixed(1)};
+   await leave();
+   // Group 3 (v25): an ammo token, taken by flying into it with a finger on the flight surface (both fire buttons held so aliens fall).
+   if(mode==='after'){
+    await open(mode,2);const F=await center('#shoot');s=await snap();const perPx=s.viewport.modelWidth/viewport.width,ship0=s.player.x,finger=x=>({x:Math.max(2,Math.min(viewport.width-2,Math.round(422+(x-ship0)/perPx))),y:150,id:1});
+    await touch('touchStart',[finger(ship0)]);await touch('touchStart',[finger(ship0),{...F,id:2}]);await touch('touchStart',[finger(ship0),{...F,id:2},{...V,id:3}]);const c0=s.arsenal?.collected||0,tt0=s.time;let seen=false;
+    while(s.time-tt0<45&&(s.arsenal?.collected||0)===c0){const plan=await page.evaluate(()=>{const m=window.__island.games.current?.session.debug?.model;if(!m)return null;const d=m.ammoDrops?.[0],t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];return {want:d?d.x:t?t.x:m.player.x,token:Boolean(d)};});if(!plan)break;if(plan.token&&!seen){seen=true;await capture('aliens-after-ammo-token');}
+     await touch('touchMove',[finger(plan.want),{...F,id:2},{...V,id:3}]);await tick(200);const now=await live();if(!now)break;s=now;}
+    await touch('touchEnd');out.arsenal.ammo={seen,collected:(s.arsenal?.collected||0)-c0,seconds:+(s.time-tt0).toFixed(1),ammoNow:s.arsenal?.ammo??null};
+    await leave();
+   }
+   return out;};
   const before=await aliens('before'),after=await aliens('after');report.aliens={before,after};console.log('aliens',JSON.stringify(report.aliens));
   check(before.vulcan.lockAfter&&after.vulcan.lockAfter>=3*before.vulcan.lockAfter-.3,`Vulcan held to the lock: ${before.vulcan.lockAfter} s -> ${after.vulcan.lockAfter} s`);
   check(after.vulcan.perSecond>=before.vulcan.perSecond*1.3,`Vulcan bullets per second: ${before.vulcan.perSecond} -> ${after.vulcan.perSecond}`);
