@@ -244,7 +244,8 @@ export function createNavalView(ctx,model,adapters={}) {
 
         for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active){animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);if(balance.shipTypes[e.kind].submarine){v.root.position.y-=e.depth*fx.submergedY;v.periscope.visible=e.hp>0;}}}
         const hulls=[{x:player.root.position.x,z:player.root.position.z,yaw:player.root.rotation.y,length:player.modelLength||11,speed:(model.playerShip.speed||0)*r.worldScale,visible:true}];
-        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];hulls.push({x:v.root.position.x,z:v.root.position.z,yaw:v.root.rotation.y,length:v.modelLength||9*(e.hullScale||1),speed:Math.hypot(e.vx||0,e.vz||0)*r.worldScale,visible:e.active&&e.hp>0&&!(balance.shipTypes[e.kind].submarine&&e.depth>0)});}
+        // v24.1: a deep submarine (never up, naval-v241.mjs) leaves a short feather of foam at its periscope instead of a hull's wake.
+        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i],under=balance.shipTypes[e.kind].submarine&&e.depth>0;hulls.push({x:v.root.position.x,z:v.root.position.z,yaw:v.root.rotation.y,length:under&&e.subDeep?2.4:v.modelLength||9*(e.hullScale||1),speed:Math.hypot(e.vx||0,e.vz||0)*r.worldScale,visible:e.active&&e.hp>0&&(!under||Boolean(e.subDeep))});}
         const b=model.blast;dressing.update(hulls,model.time,{life:b.life,critical:b.critical,wx:b.z*r.enemySpacing/balance.combat.laneSpacing,wz:-(b.x-balance.shipX)*r.worldScale},config.visuals.blastSeconds);
         projectiles.update(camera);airView.update();supplyView.update();impacts.update(camera);arc.update(camera);
         aimLine.visible=false;

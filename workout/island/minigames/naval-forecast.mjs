@@ -13,7 +13,7 @@ export function navalForecastConfig(balance){
  const f=balance.aim?.forecast||{};
  return {reactionSeconds:f.reactionSeconds??.25,stepSeconds:f.stepSeconds??1/60,leadFromStage:f.leadFromStage??3};
 }
-const copy=e=>({index:e.index,x:e.x,z:e.z,heading:e.heading||0,hp:e.hp,active:e.active,slot:e.slot,behavior:e.behavior,spawnTime:e.spawnTime,hullScale:e.hullScale,kind:e.kind,depth:e.depth||0,subMode:e.subMode,patrol:e.patrol?{...e.patrol}:null});
+const copy=e=>({index:e.index,x:e.x,z:e.z,heading:e.heading||0,hp:e.hp,active:e.active,slot:e.slot,behavior:e.behavior,spawnTime:e.spawnTime,hullScale:e.hullScale,kind:e.kind,depth:e.depth||0,subMode:e.subMode,subDeep:e.subDeep,patrol:e.patrol?{...e.patrol}:null});
 /** `delay`: seconds the fleet sails on before the shell leaves (the reaction
  * margin); nothing is airborne during it. `targetable(e)` mirrors the live
  * contact filter. Returns the contact, the landing, the end the mark shows,

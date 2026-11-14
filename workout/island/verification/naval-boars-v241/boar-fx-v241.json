@@ -1,0 +1,230 @@
+{
+ "fx": "v241",
+ "env": {
+  "flags": {
+   "TOUCH": true,
+   "AIMSTICK": true,
+   "FIRE_V21": true,
+   "HUD_V21": true,
+   "STICK_V21": true,
+   "LEGACY": false,
+   "AIM_V24": true,
+   "AIM_V241": true,
+   "FX_V241": true
+  },
+  "current": "mg"
+ },
+ "rows": [
+  {
+   "key": "mg",
+   "shots": 3,
+   "kinds": [
+    "bullet"
+   ],
+   "sounds": [
+    "mg"
+   ],
+   "streaks": {
+    "#ffc94a": 1,
+    "#fff6d8": 1
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "shotgun",
+   "shots": 1,
+   "kinds": [
+    "pellet"
+   ],
+   "sounds": [
+    "shotgun"
+   ],
+   "streaks": {
+    "#ffb35c": 8,
+    "#fff1d6": 8
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "cannon",
+   "shots": 2,
+   "kinds": [
+    "shell"
+   ],
+   "sounds": [
+    "cannon"
+   ],
+   "streaks": {},
+   "shellsInFlight": 1,
+   "fxShells": 1,
+   "shellVy": [
+    -21.6
+   ]
+  },
+  {
+   "key": "tesla",
+   "shots": 5,
+   "kinds": [
+    "bolt"
+   ],
+   "sounds": [
+    "tesla"
+   ],
+   "streaks": {
+    "#7fe3ff": 7,
+    "#ffffff": 7
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "mg2",
+   "shots": 6,
+   "kinds": [
+    "bullet"
+   ],
+   "sounds": [
+    "mg2"
+   ],
+   "streaks": {
+    "#ff9d2e": 2,
+    "#fff2c4": 2
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "shotgun2",
+   "shots": 1,
+   "kinds": [
+    "pellet"
+   ],
+   "sounds": [
+    "shotgun2"
+   ],
+   "streaks": {
+    "#ff6a3c": 10,
+    "#ffe0c4": 10
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "cannon2",
+   "shots": 2,
+   "kinds": [
+    "shell"
+   ],
+   "sounds": [
+    "cannon2"
+   ],
+   "streaks": {},
+   "shellsInFlight": 1,
+   "fxShells": 1,
+   "shellVy": [
+    -21.9
+   ]
+  },
+  {
+   "key": "tesla2",
+   "shots": 5,
+   "kinds": [
+    "bolt"
+   ],
+   "sounds": [
+    "tesla2"
+   ],
+   "streaks": {
+    "#bff4ff": 14,
+    "#ffffff": 7
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "mg3",
+   "shots": 5,
+   "kinds": [
+    "bullet"
+   ],
+   "sounds": [
+    "mg3"
+   ],
+   "streaks": {
+    "#ffe680": 1,
+    "#ffffff": 1
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "shotgun3",
+   "shots": 1,
+   "kinds": [
+    "pellet"
+   ],
+   "sounds": [
+    "shotgun3"
+   ],
+   "streaks": {
+    "#9fd8ff": 12,
+    "#f2fbff": 12
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  },
+  {
+   "key": "cannon3",
+   "shots": 2,
+   "kinds": [
+    "shell"
+   ],
+   "sounds": [
+    "cannon3"
+   ],
+   "streaks": {},
+   "shellsInFlight": 1,
+   "fxShells": 1,
+   "shellVy": [
+    -18.4
+   ]
+  },
+  {
+   "key": "tesla3",
+   "shots": 5,
+   "kinds": [
+    "bolt"
+   ],
+   "sounds": [
+    "tesla3"
+   ],
+   "streaks": {
+    "#b98aff": 14,
+    "#ffffff": 7
+   },
+   "shellsInFlight": 0,
+   "fxShells": 0,
+   "shellVy": []
+  }
+ ],
+ "shotsBy": {
+  "button": 38,
+  "scene": 0,
+  "keyboard": 0,
+  "mouse": 0,
+  "auto": 0,
+  "qa": 0,
+  "unknown": 0
+ },
+ "errors": []
+}

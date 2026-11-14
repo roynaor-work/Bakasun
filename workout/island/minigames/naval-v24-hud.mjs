@@ -11,6 +11,7 @@
  *    the turret still turns, orange when it will not land; an arrow from the hull now to that ring; one short word.
  * Nothing is drawn for a part whose switch is off. */
 import {NAVAL_V24_COLORS,navalChanceColor} from './naval-v24.mjs?v=island-v2-20261107-14';
+import {NAVAL_V241_COLORS} from './naval-v241.mjs?v=island-v2-20261107-14';
 const TAU=Math.PI*2;
 const images=new Map();
 /** Lazy picture under assets/game-naval/fx; null outside a browser, false until decoded. */
@@ -109,13 +110,15 @@ export function drawNavalV24(p,m,balance,project,width,height){
  // Aim: where the shell will meet the hull (the forecast), coloured by the hit chance, with an arrow from the hull now.
  const h=m.aimV24?m.aimHint:null;
  if(h&&!m.result){
-  const color=navalChanceColor(h.chance),a=project(h.from.x,h.from.z,0),b=project(h.to.x,h.to.z,0);
+  // v24.1 (Roy: "there is no need to show hit or not"; `?navalHint=v24` keeps the v24 words and colours): one neutral colour, no word;
+  // the ring and the arrow only show where the hull will be when the shell gets there.
+  const neutral=Boolean(m.hintV241),color=neutral?NAVAL_V241_COLORS.aim:navalChanceColor(h.chance),a=project(h.from.x,h.from.z,0),b=project(h.to.x,h.to.z,0);
   if(b&&b.depth>0&&b.x>-30&&b.x<width+30&&b.y>-30&&b.y<height+30){
    const moved=a&&a.depth>0?arrow(p,a,b,color):false,pulse=1+.12*Math.sin(time*7);
    onWater(p,project,h.to.x,h.to.z,(balance.aim?.hullBeam??16)*1.1*pulse,()=>{p.strokeStyle='#103847';p.lineWidth=.16;p.beginPath();p.arc(0,0,1,0,TAU);p.stroke();p.strokeStyle=color;p.lineWidth=.09;p.beginPath();p.arc(0,0,1,0,TAU);p.stroke();p.beginPath();p.arc(0,0,.45,0,TAU);p.stroke();});
    const word=h.chance>=.95?NAVAL_V24_WORDS.hit:h.status==='turning'?NAVAL_V24_WORDS.turning:h.status==='far'?NAVAL_V24_WORDS.far:h.status==='near'?NAVAL_V24_WORDS.near:NAVAL_V24_WORDS.miss;
-   if(!m.homing)pill(p,word,Math.max(60,Math.min(width-60,b.x)),Math.min(height-24,b.y+30),color);
-   out.aim={index:h.index,x:Math.round(b.x),y:Math.round(b.y),color,chance:h.chance,arrow:moved,word};
+   if(!m.homing&&!neutral)pill(p,word,Math.max(60,Math.min(width-60,b.x)),Math.min(height-24,b.y+30),color);
+   out.aim={index:h.index,x:Math.round(b.x),y:Math.round(b.y),color,chance:neutral?null:h.chance,arrow:moved,word:neutral?null:word};
   }
  }
  p.restore();return Object.keys(out).length?out:null;

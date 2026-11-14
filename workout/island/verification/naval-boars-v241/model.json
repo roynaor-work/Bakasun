@@ -1,0 +1,235 @@
+{
+ "date": "2026-11-14",
+ "ships": {
+  "lockSeconds": [
+   {
+    "stage": 1,
+    "seed": 1,
+    "distance": 280,
+    "seconds": 1.15
+   },
+   {
+    "stage": 1,
+    "seed": 2,
+    "distance": 280,
+    "seconds": 1.15
+   },
+   {
+    "stage": 5,
+    "seed": 1,
+    "distance": 248,
+    "seconds": 1.12
+   },
+   {
+    "stage": 5,
+    "seed": 2,
+    "distance": 249,
+    "seconds": 1.12
+   },
+   {
+    "stage": 10,
+    "seed": 1,
+    "distance": 219,
+    "seconds": 1.12
+   },
+   {
+    "stage": 10,
+    "seed": 2,
+    "distance": 223,
+    "seconds": 1.12
+   },
+   {
+    "stage": 15,
+    "seed": 1,
+    "distance": 279,
+    "seconds": 1.27
+   },
+   {
+    "stage": 15,
+    "seed": 2,
+    "distance": 223,
+    "seconds": 1.17
+   },
+   {
+    "stage": 20,
+    "seed": 1,
+    "distance": 279,
+    "seconds": 1.3
+   },
+   {
+    "stage": 20,
+    "seed": 2,
+    "distance": 224,
+    "seconds": 1.2
+   },
+   {
+    "stage": 25,
+    "seed": 1,
+    "distance": 218,
+    "seconds": 1.23
+   },
+   {
+    "stage": 25,
+    "seed": 2,
+    "distance": 279,
+    "seconds": 1.35
+   },
+   {
+    "stage": 30,
+    "seed": 1,
+    "distance": 279,
+    "seconds": 1.4
+   },
+   {
+    "stage": 30,
+    "seed": 2,
+    "distance": 224,
+    "seconds": 1.28
+   }
+  ],
+  "lockedShells": {
+   "v24": {
+    "lockedShells": 500,
+    "intoTheSea": 59,
+    "hitPercent": 88.2
+   },
+   "v241": {
+    "lockedShells": 326,
+    "intoTheSea": 0,
+    "hitPercent": 100
+   }
+  },
+  "kidBot": [
+   {
+    "stage": 1,
+    "mode": "v24",
+    "hitPercent": 100,
+    "shells": 6,
+    "wins": 3,
+    "meanSeconds": 4.2
+   },
+   {
+    "stage": 1,
+    "mode": "v241",
+    "hitPercent": 100,
+    "shells": 6,
+    "wins": 3,
+    "meanSeconds": 5.1
+   },
+   {
+    "stage": 5,
+    "mode": "v24",
+    "hitPercent": 97.2,
+    "shells": 71,
+    "wins": 3,
+    "meanSeconds": 30.9
+   },
+   {
+    "stage": 5,
+    "mode": "v241",
+    "hitPercent": 100,
+    "shells": 64,
+    "wins": 3,
+    "meanSeconds": 37.1
+   },
+   {
+    "stage": 10,
+    "mode": "v24",
+    "hitPercent": 100,
+    "shells": 60,
+    "wins": 3,
+    "meanSeconds": 25.6
+   },
+   {
+    "stage": 10,
+    "mode": "v241",
+    "hitPercent": 100,
+    "shells": 60,
+    "wins": 3,
+    "meanSeconds": 29.9
+   },
+   {
+    "stage": 11,
+    "mode": "v24",
+    "hitPercent": 92.9,
+    "shells": 14,
+    "wins": 3,
+    "meanSeconds": 9.3
+   },
+   {
+    "stage": 11,
+    "mode": "v241",
+    "hitPercent": 100,
+    "shells": 20,
+    "wins": 3,
+    "meanSeconds": 10.6
+   }
+  ]
+ },
+ "boars": {
+  "childModel": {
+   "v23": {
+    "hitRate": 0.456,
+    "aimMedian": 1.409,
+    "aimMean": 1.536,
+    "strokes": 6.619,
+    "firstHitMedian": 1.771,
+    "killMedian": 2.704
+   },
+   "v24": {
+    "hitRate": 0.652,
+    "aimMedian": 0.721,
+    "aimMean": 0.961,
+    "strokes": 4.285,
+    "firstHitMedian": 1.223,
+    "killMedian": 1.942
+   },
+   "v241": {
+    "hitRate": 0.69,
+    "aimMedian": 0.662,
+    "aimMean": 0.878,
+    "strokes": 3.987,
+    "firstHitMedian": 1.072,
+    "killMedian": 1.827
+   }
+  },
+  "speedPxPerS": {
+   "1": {
+    "v24": 675.2,
+    "v241": 675.2,
+    "overBoarV24": 405.1,
+    "overBoarV241": 337.6
+   },
+   "0.15": {
+    "v24": 18.1,
+    "v241": 25.3,
+    "overBoarV24": 10.9,
+    "overBoarV241": 12.7
+   },
+   "0.2": {
+    "v24": 34.5,
+    "v241": 45.9,
+    "overBoarV24": 20.7,
+    "overBoarV241": 22.9
+   },
+   "0.3": {
+    "v24": 75.5,
+    "v241": 93.9,
+    "overBoarV24": 45.3,
+    "overBoarV241": 47
+   },
+   "0.5": {
+    "v24": 191,
+    "v241": 216.1,
+    "overBoarV24": 114.6,
+    "overBoarV241": 108
+   },
+   "0.75": {
+    "v24": 398.2,
+    "v241": 418.2,
+    "overBoarV24": 238.9,
+    "overBoarV241": 209.1
+   }
+  }
+ }
+}

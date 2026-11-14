@@ -14,7 +14,10 @@ const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:tru
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(180000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 const log=(...a)=>console.error('['+MODE+']',...a);
-const query='?dev=1&adapt=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20&boarStick=v20':'');// adapt=1 keeps the adaptive resolution on under qa, as on the phone
+// 14/11/2026 v24.1: Roy asked for a slightly more sensitive stick (aim-v24.mjs AIM241), which lifts the 20%-tilt speed past this v21
+// acceptance on purpose; the v21 stick checks run on the stick they were written for with its return switch `?boarAim=v24`
+// (the v24.1 stick is measured by boar-aim-v24-browser.mjs, AIM=v241 against AIM=v24).
+const query='?dev=1&adapt=1'+(MODE==='before'?'&boar=v1':MODE==='v20'?'&boarFire=v20&boarHud=v20&boarStick=v20':'&boarAim=v24');// adapt=1 keeps the adaptive resolution on under qa, as on the phone
 await page.goto(server.url+query,{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
 await page.locator('[data-action=avatar-start]').tap();

@@ -66,7 +66,7 @@ export function drawNavalLockHud(p,m,balance,project,width,height){
   }
  }
  // Until the first lock of the stage: a small hint over the nearest hull (open water only, never while aiming or pressing).
- if(!h&&!pressed&&!m.aiming&&(m.locksMade||0)===0&&(m.time??0)<9){
+ if(!h&&!pressed&&!m.aiming&&!m.radar&&(m.locksMade||0)===0&&(m.time??0)<9){
   const e=find(m.selectedTargetIndex)||(m.enemies||[]).find(x=>x.active&&x.hp>0),b=e&&navalLockBox(e,project,balance);
   if(b&&b.y>70&&b.y<height-40){const y=Math.max(58,b.y-b.h/2-30),pulse=.5+.5*Math.sin((m.time??0)*5);p.globalAlpha=.75+.25*pulse;
    const box=pill(p,m.aimV24?NAVAL_LOCK_WORDS.tap:NAVAL_LOCK_WORDS.hint,b.x,y,NAVAL_LOCK_COLORS.turning);padlock(p,box.x-10,y,NAVAL_LOCK_COLORS.turning,.8);p.globalAlpha=1;out.hint={x:Math.round(b.x),y:Math.round(y)};}

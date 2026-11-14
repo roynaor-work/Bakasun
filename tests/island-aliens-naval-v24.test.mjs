@@ -179,19 +179,22 @@ test('smart lock order and hit chance: a hull about to fire first, then the near
 });
 
 // ---------------------------------------------------------------- Ships: model
+// v24.1 (14/11/2026): a lock now waits for a radar acquisition (naval-v241.mjs). The v24 lock tests below check the lock itself, so they
+// run with its return switch (the lock is made at once); the acquisition is tested in tests/island-naval-boars-v241.test.mjs.
+const LOCK_NOW='?navalRadar=v24';
 test('aim v24 in the model: a tap locks, a tap on the locked hull fires; the Lock button picks the order and the next; a swipe goes back',()=>{
- const m=naval(10,2);run(m,60);const live=m.enemies.filter(e=>e.active&&e.hp>0&&!e.structure);
+ const m=naval(10,2,LOCK_NOW);run(m,60);const live=m.enemies.filter(e=>e.active&&e.hp>0&&!e.structure);
  m.update(FRAME,{lockTap:live[1].index});assert.equal(m.homing.index,live[1].index,'tap = lock');assert.equal(m.locksMade,1);
  run(m,40);const f=m.fired;m.update(FRAME,{lockTap:live[1].index});run(m,3);assert.equal(m.fired,f+1,'a tap on the locked hull fires');assert.equal(m.homing.index,live[1].index,'and keeps the lock');
  const order=navalLockOrder(m.enemies,m.playerShip,{time:m.time,canHit:e=>navalTargetable(e,m.ammoIndex,nb)});
- const g=naval(10,2);run(g,60);g.update(FRAME,{lockSmart:true});assert.equal(g.homing.index,navalLockOrder(g.enemies,g.playerShip,{time:g.time,canHit:e=>navalTargetable(e,0,nb)})[0],'first tap: the top of the order');
+ const g=naval(10,2,LOCK_NOW);run(g,60);g.update(FRAME,{lockSmart:true});assert.equal(g.homing.index,navalLockOrder(g.enemies,g.playerShip,{time:g.time,canHit:e=>navalTargetable(e,0,nb)})[0],'first tap: the top of the order');
  const first=g.homing.index;g.update(FRAME,{lockSmart:true});assert.notEqual(g.homing.index,first,'second tap: the next');const second=g.homing.index;g.update(FRAME,{lockCycle:-1});assert.equal(g.homing.index,first,'swipe back');
  assert.ok(order.length>=2);assert.equal(naval(10,2,'?navalAim=v23').aimV24,false);const old=naval(10,2,'?navalAim=v23');run(old,60);old.update(FRAME,{lockTap:0,lockSmart:true});assert.equal(old.homing,null,'?navalAim=v23 ignores the v24 inputs');
  void second;
 });
 
 test('aim v24: the lock moves on by itself after a sinking; locked shells never count as the weak centre (the gold star is a hand-aimed shot); a ready lock fires at once',()=>{
- const m=naval(10,2);run(m,30);m.update(FRAME,{lockSmart:true});const first=m.homing.index;let n=0,crit=0,shells=0,last=null;
+ const m=naval(10,2,LOCK_NOW);run(m,30);m.update(FRAME,{lockSmart:true});const first=m.homing.index;let n=0,crit=0,shells=0,last=null;
  while(n<60*60&&!m.result){m.update(FRAME,n%30===0?{quickShot:true}:{});n++;const ls=m.lastShot;if(ls&&ls.shotId!==last){last=ls.shotId;shells++;if(ls.actual.critical)crit++;}if(m.enemies[first].hp<=0&&m.homing&&m.homing.index!==first)break;}
  assert.ok(m.enemies[first].hp<=0,'the first hull sank');assert.ok(m.homing&&m.homing.index!==first,'the lock moved on to another hull');assert.equal(m.unlocked.reason,'sunk');
  assert.ok(shells>=2);assert.equal(crit,0,'no locked shell is a weak-centre hit');
@@ -273,7 +276,7 @@ function fakeInput(m,search=''){
   step(n=1,raw={}){const outs=[];for(let i=0;i<n;i++){ms+=1000/60;const out=input.sample(raw);outs.push(out);m.update(FRAME,out);}return outs;},dispose(){input.dispose();delete globalThis.window;delete globalThis.document;delete globalThis.location;}};
 }
 test('input layer v24: a short tap on a hull locks it on the canvas and on the aim pad (no quick shot); the Lock button taps and swipes; the Torpedo button while a submarine is out; ?navalAim=v23 keeps v23',()=>{
- const m=naval(10,2);run(m,30);const f=fakeInput(m);
+ const m=naval(10,2,LOCK_NOW);run(m,30);const f=fakeInput(m);
  try{
   const e=m.enemies.find(x=>x.active&&x.hp>0),q=m.screenPoint(e.x,e.z,1.5),fired=m.fired;
   f.down(1,q.x,q.y,f.pad);f.step(4);f.up(1,q.x,q.y);const outs=f.step(3);assert.ok(outs.some(o=>o.lockTap===e.index),'tap = lock');assert.equal(m.homing?.index,e.index);assert.ok(!outs.some(o=>o.quickShot),'no quick shot');assert.equal(m.fired,fired);
