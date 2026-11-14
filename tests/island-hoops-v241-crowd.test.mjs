@@ -21,6 +21,8 @@ test('crowd seats: the lower tier of the v8 hall without the stand under the cam
   assert.ok(seats.every(s=>HOOPS_CROWD_VARIANTS.includes(s.variant)&&(s.team===0||s.team===1)));
   const home=seats.filter(s=>s.team===0).length/seats.length,raised=seats.filter(s=>s.variant%3===1).length/seats.length;
   assert.ok(home>.62&&home<.78,'home share '+home);assert.ok(raised>.08&&raised<.22,'arms up at rest '+raised);
+  const own=seats.filter(s=>s.shirt===-1).length/seats.length;assert.ok(own>.4&&own<.65,'team shirts '+own);
+  assert.ok(seats.every(s=>s.shirt===-1||Number.isInteger(s.shirt)&&s.shirt>=0&&s.shirt<10),'everyday shirt index');
   assert.deepEqual(hoopsCrowdSeats(layout),seats,'deterministic');
 });
 

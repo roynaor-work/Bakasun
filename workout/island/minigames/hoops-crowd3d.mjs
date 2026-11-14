@@ -1,8 +1,9 @@
 /** Basketball v24.1 3D fans (Codex hoops-crowd-3d-v1, CC0; runtime copy in assets/hoops-v241/crowd) in the v8 hall, in place of the flat
- * cards Roy called cardboard. The shader is the pack's runtime/crowd.mjs (team shirts, arms-up and clap morphs, heads that follow the ball,
- * a staggered jump for the scoring team, screen-door blends between levels; one InstancedMesh per figure and level, nothing per fan on the
- * CPU) and the level policy is the pack's runtime/lod-policy.mjs, unchanged. What the game adds, because the pack measured 21.6 against
- * 27.6 FPS for its 800 fans (58K triangles) at 844x390 in SwiftShader:
+ * cards Roy called cardboard. The shader is the pack's runtime/crowd.mjs (arms-up and clap morphs, heads that follow the ball, a staggered
+ * jump for the scoring team, screen-door blends between levels; one InstancedMesh per figure and level, nothing per fan on the CPU) with one
+ * change: a shirt colour per fan (team shirts for about half, everyday shirts for the rest; all-team shirts read as one blue block), and the
+ * level policy is the pack's runtime/lod-policy.mjs, unchanged. What the game adds, because the pack measured 21.6 against 27.6 FPS for its
+ * 800 fans (58K triangles) at 844x390 in SwiftShader:
  *  - seats: the hall's own lower tier (hoops-v8-venue seatingLayout level 0) without the near sideline, the stand under the broadcast camera
  *    (measured: never on screen in landscape), 796 fans; the cards stay on the upper deck and behind the camera;
  *  - the six seated figures only (12 draw calls at most instead of 36), with more fans at rest than with raised arms;
@@ -23,6 +24,9 @@ export const HOOPS_CROWD_MODES=Object.freeze({
 });
 /** Unlit vertex colours under the hall light: the grade of the lit cards beside them (measured on the v8 card crowd in the game camera). */
 export const HOOPS_CROWD_TINT='#a9b3bf';
+/** Everyday shirts beside the team shirts: with every fan in the team colour the stand read as one blue block (first browser check); the pack's
+ * shader takes one shirt colour per fan here (`fanShirt`) instead of the two team colours. About half the fans wear their team's colour. */
+export const HOOPS_CROWD_SHIRTS=Object.freeze(['#e6e6e2','#8b9097','#2b2d31','#2d3b5c','#b23a3e','#3d6e48','#c8b28d','#6f2c37','#7ea5c8','#d9cf9f']);
 
 const hash=n=>{let x=(n+1)*2654435761>>>0;x^=x>>>15;x=Math.imul(x,2246822519)>>>0;x^=x>>>13;return (x>>>0)/4294967296;};
 /** Seats with 3D fans: level-0 seats of the v8 hall, lower tier, all but the near sideline (`angle` 0 = the stand under the camera).
@@ -31,8 +35,10 @@ export function hoopsCrowdSeats(layout,{homeShare=.7,max=800}={}){
   const out=[];
   for(let i=0;i<layout.length&&out.length<max;i++){
     const s=layout[i];if(s.tier!==0||Math.abs(s.angle)<1e-6)continue;
-    const r=hash(i),pose=r<.6?0:r<.85?2:1,variant=pose+(hash(i+7919)<.5?0:3);
-    out.push({id:i,x:s.x,y:s.y,z:s.z,yaw:s.angle,row:s.row,variant,team:hash(i+104729)<homeShare?0:1});
+    const r=hash(i),pose=r<.6?0:r<.85?2:1,variant=pose+(hash(i+7919)<.5?0:3),team=hash(i+104729)<homeShare?0:1;
+    // the team's own shirt for about half the fans (-1), an everyday shirt for the rest (index into HOOPS_CROWD_SHIRTS)
+    const own=hash(i+2971)<(team===0?.5:.55),shirt=own?-1:Math.floor(hash(i+6113)*HOOPS_CROWD_SHIRTS.length);
+    out.push({id:i,x:s.x,y:s.y,z:s.z,yaw:s.angle,row:s.row,variant,team,shirt});
   }
   return out;
 }
@@ -85,13 +91,14 @@ export async function createHoopsCrowd3d({T,GLTFLoader,load=url=>new GLTFLoader(
       ['armsUp','clapOpen','clapClose'].forEach((name,i)=>g.setAttribute(name,g.morphAttributes.position[i]));
       g.morphAttributes={};g.setAttribute('partMask',g.getAttribute('_part'));
       g.setAttribute('fanData',new T.InstancedBufferAttribute(new Float32Array(Math.max(1,selected.length)*2),2).setUsage(T.DynamicDrawUsage));
+      g.setAttribute('fanShirt',new T.InstancedBufferAttribute(new Float32Array(Math.max(1,selected.length)*3),3).setUsage(T.DynamicDrawUsage));
       g.setAttribute('lodInterval',new T.InstancedBufferAttribute(new Float32Array(Math.max(1,selected.length)*2),2).setUsage(T.DynamicDrawUsage));
       const material=source.material.clone();material.color?.set(tint);
-      // the pack's shader (runtime/crowd.mjs), unchanged: team shirt, arms-up / clap morphs, head yaw and pitch toward the ball, basket jump,
-      // and the complementary screen-door between two levels during a blend
+      // the pack's shader (runtime/crowd.mjs): arms-up / clap morphs, head yaw and pitch toward the ball, basket jump, the complementary
+      // screen-door between two levels during a blend; one change: the shirt takes the fan's own colour (fanShirt) instead of home / away
       material.onBeforeCompile=shader=>{
         Object.assign(shader.uniforms,uniforms,{headPivot:{value:new T.Vector3(...asset.headPivot)},restPose:{value:asset.variant%3}});
-        shader.vertexShader=`attribute vec3 armsUp,clapOpen,clapClose;
+        shader.vertexShader=`attribute vec3 armsUp,clapOpen,clapClose,fanShirt;
 attribute vec4 partMask; attribute vec2 fanData,lodInterval;
 varying vec2 vInterval; varying float vSeed;
 uniform float crowdTime,crowdCheer,basketTime,basketTeam,reducedMotion,poseOverride,restPose;
@@ -99,7 +106,7 @@ uniform float headYawLimit,headPitchLimit,basketDuration,jumpHeight,reactionStag
 uniform vec3 crowdBall,headPivot,teamHome,teamAway;
 `+shader.vertexShader;
         shader.vertexShader=shader.vertexShader.replace('#include <color_vertex>',`#include <color_vertex>
-vColor.rgb*=mix(vec3(1.0),mix(teamHome,teamAway,fanData.y),partMask.y);
+vColor.rgb*=mix(vec3(1.0),fanShirt,partMask.y);
 `);
         shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`
 vInterval=lodInterval;vSeed=fanData.x;
@@ -141,8 +148,11 @@ if(noise<vInterval.x||noise>=vInterval.y)discard;
   }catch(error){dispose();throw error;}
   metrics.status='ready';
   const viewProj=new T.Matrix4(),camPos=new T.Vector3(),camDir=new T.Vector3(),lastPos=new T.Vector3(),lastDir=new T.Vector3();
+  const everyday=HOOPS_CROWD_SHIRTS.map(h=>new T.Color(h)),shirtOf=s=>s.shirt>=0?everyday[s.shirt%everyday.length]:s.team===1?uniforms.teamAway.value:uniforms.teamHome.value;
+  const clock=()=>globalThis.performance?.now?.()??Date.now();
   /** Redo the level plan for `camera` and `budget` (the pack's planCrowd on the seats in view). */
   function plan(camera,budget){
+    const t0=clock();
     camera.updateMatrixWorld();viewProj.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);
     camera.getWorldPosition(camPos);camera.getWorldDirection(camDir);lastPos.copy(camPos);lastDir.copy(camDir);
     const inView=budget.cull?seatsInView(seats,viewProj.elements):null,used=inView?seats.filter((s,i)=>inView[i]):seats;
@@ -151,24 +161,25 @@ if(noise<vInterval.x||noise>=vInterval.y)discard;
     const p=used.length?planCrowd(used,camPos.toArray(),cfg,camDir.toArray()):{assignments:[],submitted:[0,0,0],triangles:0,scale:1};
     const weightsOf=new Map(used.map((s,i)=>[s.id,p.assignments[i].weights]));let draws=0;
     for(const mesh of batches){
-      const {asset,selected}=mesh.userData,interval=mesh.geometry.getAttribute('lodInterval'),data=mesh.geometry.getAttribute('fanData');let count=0;
+      const {asset,selected}=mesh.userData,interval=mesh.geometry.getAttribute('lodInterval'),data=mesh.geometry.getAttribute('fanData'),shirt=mesh.geometry.getAttribute('fanShirt');let count=0;
       for(const s of selected){
         const w=weightsOf.get(s.id);if(!w||w[asset.level]<=0)continue;
         const low=w.slice(0,asset.level).reduce((a,b)=>a+b,0);
         interval.setXY(count,low,asset.level===2?1:low+w[asset.level]);
         data.setXY(count,(s.id*.61803398875%1)*Math.PI*2,s.team??s.id%2);
+        const c=shirtOf(s);shirt.setXYZ(count,c.r,c.g,c.b);
         dummy.position.set(s.x,s.y,s.z);dummy.rotation.set(0,s.yaw,0);
         dummy.scale.set(.94+(s.id*37%11)/140,.96+(s.id*19%9)/130,.96+(s.id*11%9)/130);
         dummy.updateMatrix();mesh.setMatrixAt(count++,dummy.matrix);
       }
       mesh.count=count;mesh.visible=count>0;
-      if(count){draws++;mesh.instanceMatrix.needsUpdate=true;interval.needsUpdate=true;data.needsUpdate=true;}
+      if(count){draws++;mesh.instanceMatrix.needsUpdate=true;interval.needsUpdate=true;data.needsUpdate=true;shirt.needsUpdate=true;}
     }
-    plans++;Object.assign(metrics,{submitted:p.submitted,instances:used.length,triangles:p.triangles,draws,inView:used.length,scale:+(+p.scale).toFixed(4),tier:budget.tier,limit:cfg.crowdTriangleLimit,plans});
+    plans++;Object.assign(metrics,{submitted:p.submitted,instances:used.length,triangles:p.triangles,draws,inView:used.length,scale:+(+p.scale).toFixed(4),tier:budget.tier,limit:cfg.crowdTriangleLimit,plans,planMs:+(clock()-t0).toFixed(2)});
   }
   return {root,batches,metrics,config,seats,
     get visible(){return root.visible;},
-    setTeamColors(home,away){uniforms.teamHome.value.set(home);uniforms.teamAway.value.set(away);},
+    setTeamColors(home,away){uniforms.teamHome.value.set(home);uniforms.teamAway.value.set(away);lastPlan=-1;},
     /** The scoring team's fans react (staggered jump, arms up) for the pack's 3.2 s; team -1: everyone. */
     onBasket({seconds=uniforms.crowdTime.value,team=-1}={}){uniforms.basketTime.value=seconds;uniforms.basketTeam.value=team===0||team===1?team:-1;},
     /** One frame. `budget` from hoopsCrowdBudget (null hides the fans: the caller shows the cards). Re-plans at most every
