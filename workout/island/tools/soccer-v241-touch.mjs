@@ -34,7 +34,7 @@ function readV241(){
     air:{prompt:shoot?.dataset.air||'',slot:swap?.dataset.air||'',primaryLabel:shoot?.querySelector('.soccer-action-label')?.textContent||'',slotLabel:swap?.querySelector('.soccer-action-label')?.textContent||'',armed:s.headerArm?(s.headerArm.kind||'header'):'',options:s.airOptions?{primary:s.airOptions.primary,alt:s.airOptions.alt}:null},
     radar:Boolean(document.querySelector('.soccer-radar'))};
 }
-const final=()=>{const session=window.__island.games.current?.session;return {audio:session?.snapshot?.audio?.counts||null,whistleV1:session?.snapshot?.audio?.whistleV1??null,loaded:(session?.snapshot?.audio?.loaded||[]).filter(k=>/whistle/.test(k)),motion:null};};
+const final=()=>{const session=window.__island.games.current?.session,m=session?.snapshot?.renderMetrics;return {audio:session?.snapshot?.audio?.counts||null,whistleV1:session?.snapshot?.audio?.whistleV1??null,loaded:(session?.snapshot?.audio?.loaded||[]).filter(k=>/whistle/.test(k)),referee:m?.referee??null,triangles:m?.triangles??null,drawCalls:m?.drawCalls??null,quality:m?.quality??null};};
 
 async function main(){
   const args=process.argv.slice(2),out=path.resolve(args.find(a=>!a.startsWith('--'))||'soccer-v241-out');
@@ -64,6 +64,9 @@ async function main(){
       if(f.air.options){const key=f.air.options.primary+'/'+(f.air.options.alt||'');if(!prompts.length||prompts.at(-1).key!==key||f.elapsed-prompts.at(-1).at>2)prompts.push({key,at:f.elapsed,shown:[f.air.primaryLabel,f.air.slotLabel],dataAir:[f.air.prompt,f.air.slot]});if(!pending.has('prompt'))pending.set('prompt',i+1);if(f.air.slot.startsWith('alt-')&&!pending.has('prompt-alt'))pending.set('prompt-alt',i+1);}
       // the v24.1 high-ball habit: press the kick button for the first way, the fourth button for the second way every other time
       since+=frameMs/1000;
+      // the buttons as the child sees them, before the press (a pressed button shows its held colour)
+      if(f.air.options&&shots.prompt===undefined){pending.delete('prompt');await shot('prompt',f);}
+      if(f.air.slot.startsWith('alt-')&&shots['prompt-alt']===undefined){pending.delete('prompt-alt');await shot('prompt-alt',f);}
       if(f.phase==='playing'&&!f.air.armed&&since>.3&&f.air.options){
         const useAlt=f.air.slot.startsWith('alt-')&&(altTurn++%2===0),r=useAlt?layout.switch:layout.shoot;
         if(r&&!h.touch.held(BUTTON)){since=0;await h.touch.down(BUTTON,r.x+r.width/2,r.y+r.height/2);await h.page.clock.runFor(frameMs);await h.touch.up(BUTTON);process.stderr.write(`${tag} pressed ${useAlt?'alt':'primary'} (${f.air.options.primary}/${f.air.options.alt}) at ${f.elapsed}\n`);continue;}

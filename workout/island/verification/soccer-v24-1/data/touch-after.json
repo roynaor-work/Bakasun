@@ -1,0 +1,319 @@
+{
+ "tag": "after",
+ "query": "",
+ "stage": 4,
+ "frameMs": 33,
+ "loadSeconds": 42.186,
+ "wallSeconds": 1135.891,
+ "gameSeconds": 51.95,
+ "score": [
+  1,
+  0
+ ],
+ "radar": false,
+ "events": {
+  "loft": 5,
+  "possession": 16,
+  "switch": 3,
+  "pass": 12,
+  "steal": 3,
+  "header-armed": 7,
+  "shot": 3,
+  "goal": 1,
+  "play": 1,
+  "slide": 2,
+  "distribution-windup": 2,
+  "header": 1
+ },
+ "prompts": [
+  {
+   "key": "volley/header",
+   "at": 12.783,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 13.25,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "volley/header",
+   "at": 13.267,
+   "shown": [
+    "נגיחה",
+    "עף"
+   ],
+   "dataAir": [
+    "header",
+    "alt-volley"
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 13.4,
+   "shown": [
+    "נגיחה",
+    "עף"
+   ],
+   "dataAir": [
+    "header",
+    "alt-volley"
+   ]
+  },
+  {
+   "key": "volley/header",
+   "at": 13.767,
+   "shown": [
+    "נגיחה",
+    "עף"
+   ],
+   "dataAir": [
+    "header",
+    "alt-volley"
+   ]
+  },
+  {
+   "key": "header/",
+   "at": 13.8,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "volley/header",
+   "at": 28.233,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 28.483,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "volley/header",
+   "at": 28.817,
+   "shown": [
+    "נגיחה",
+    "עף"
+   ],
+   "dataAir": [
+    "header",
+    "alt-volley"
+   ]
+  },
+  {
+   "key": "header/",
+   "at": 28.883,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  },
+  {
+   "key": "header/",
+   "at": 38.45,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  },
+  {
+   "key": "header/scissor",
+   "at": 38.517,
+   "shown": [
+    "נגיחה",
+    "מספרת"
+   ],
+   "dataAir": [
+    "header",
+    "alt-scissor"
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 49.283,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  },
+  {
+   "key": "volley/header",
+   "at": 49.533,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "header/volley",
+   "at": 49.9,
+   "shown": [
+    "עף",
+    "נגיחה"
+   ],
+   "dataAir": [
+    "volley",
+    "alt-header"
+   ]
+  },
+  {
+   "key": "header/",
+   "at": 50.267,
+   "shown": [
+    "נגיחה",
+    "החלפה"
+   ],
+   "dataAir": [
+    "header",
+    ""
+   ]
+  }
+ ],
+ "strikes": [
+  {
+   "type": "shot",
+   "team": 0,
+   "player": 20,
+   "kind": null,
+   "aerial": "volley",
+   "restart": null,
+   "penalty": null,
+   "won": null,
+   "elapsed": 13.78
+  },
+  {
+   "type": "shot",
+   "team": 0,
+   "player": 10,
+   "kind": null,
+   "aerial": "volley",
+   "restart": null,
+   "penalty": null,
+   "won": null,
+   "elapsed": 28.87
+  },
+  {
+   "type": "header",
+   "team": 0,
+   "player": 0,
+   "kind": null,
+   "aerial": null,
+   "restart": null,
+   "penalty": null,
+   "won": null,
+   "elapsed": 50.25
+  }
+ ],
+ "fouls": [],
+ "audio": {
+  "audio": {
+   "v241/whistle-kickoff": 2,
+   "whistle": 2,
+   "v24/kick-soft": 19,
+   "excited": 14,
+   "v24/kick-strong": 2,
+   "v24/net-rustle": 1,
+   "soccer/crowd-goal": 1,
+   "v24/keeper-catch": 2
+  },
+  "whistleV1": true,
+  "loaded": [
+   "soccer/whistle",
+   "v241/whistle-foul",
+   "v241/whistle-kickoff",
+   "v241/whistle-short",
+   "v241/whistle-fulltime",
+   "v241/whistle-halftime"
+  ],
+  "motion": null
+ },
+ "clips": {
+  "v10": 9986,
+  "v9": 5944,
+  "decelerate": 1587,
+  "turn_left": 651,
+  "turn_right": 598,
+  "defensive_jockey": 593,
+  "dribble_run": 478,
+  "v241_walk": 201,
+  "v22": 143,
+  "v24": 95,
+  "v241_slide": 68,
+  "v241_through_pass": 54,
+  "v241_long_pass": 52,
+  "v241_idle_relaxed": 47,
+  "v241_volley_right": 27,
+  "v241_stumble": 19,
+  "v241_running_kick": 10,
+  "v8": 9,
+  "v241_keeper_dive_low_left": 1
+ },
+ "pops": {
+  "over20": 10503,
+  "over30": 4759,
+  "over45": 1009,
+  "frames": 20551,
+  "max": 177.2,
+  "over30PerMinute": 481.75,
+  "over45PerMinute": 102.14
+ },
+ "churnPerPlayerMinute": 94.04,
+ "shots": {
+  "kickoff": 0.667,
+  "prompt": 12.817,
+  "prompt-alt": 12.85,
+  "strike-volley": 13.967,
+  "strike-header": 50.433
+ },
+ "errors": []
+}
