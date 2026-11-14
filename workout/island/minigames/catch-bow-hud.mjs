@@ -2,10 +2,12 @@
  * drag = move the sight (yaw from the horizontal movement, pitch from the vertical, dragging up raises the aim);
  * the sight sways a little while you hold, more the longer you hold; lift the finger = the net flies. A tap that is too short cancels.
  * Keyboard: arrows move the sight, space or enter releases the net. Pure helpers (dragToAim, holdSway) are exported for tests. */
+import {assistInfo, ASSIST7, pick as pickStage, STRINGS as ASSIST_STRINGS} from './catch-assist.mjs?v=island-v2-20261107-12';
 export const BOW_CONTROLS = Object.freeze({yawPerPx: .11, anglePerPx: .11, finePerPx: .045, fineBelowPxPerSec: 60, minHoldSeconds: .15, cancelPx: 4, swayAfter: 1.8, swayMax: .9, swayAngleK: .7});
 export const STRINGS = Object.freeze({
   'catch.bow.hint': 'נוגעים ומחזיקים כדי למתוח, גוררים כדי לכוון, ומשחררים כדי לזרוק',
   'catch.bow.distance': 'מרחק {m} מ׳', 'catch.bow.drawn': 'מתוח', 'catch.bow.ready': 'מוכן',
+  'catch.bow.lead': ASSIST_STRINGS['catch.assist.lead'], 'catch.bow.close': ASSIST_STRINGS['catch.assist.close'],
 });
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
@@ -52,9 +54,17 @@ const STYLE = `
 .catch-bow-dist{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));padding:6px 12px;border-radius:14px;background:#0c1830b8;border:1px solid #ffffff30;font-size:14px;font-weight:700;color:#ffe08a}
 .catch-bow-hint{position:absolute;left:50%;top:60%;transform:translateX(-50%);padding:6px 14px;border-radius:16px;background:#0c1830c4;border:1px dashed #8fdcffaa;font-size:13px;font-weight:700;white-space:nowrap}
 .catch-hud[data-v6] .catch-tools{bottom:max(60px,calc(env(safe-area-inset-bottom) + 46px))}
+.catch-bow-lead{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:2px dashed #8fdcff;pointer-events:none;box-shadow:0 0 8px #0009;transition:opacity .15s}
+.catch-bow-lead b{position:absolute;left:50%;top:100%;transform:translate(-50%,4px);font-size:11px;font-weight:800;color:#d8f3ff;white-space:nowrap;text-shadow:0 1px 3px #000c;direction:rtl}
+.catch-bow-lead[hidden],.catch-bow-close[hidden]{display:none}
+.catch-bow-sight[data-lock=true]{border-color:#7dffb0;box-shadow:0 0 18px #7dffb0cc,inset 0 0 8px #0006}
+.catch-bow-sight[data-lock=true]::after{background:#7dffb0}
+.catch-bow-close{position:absolute;left:50%;top:calc(max(8px,env(safe-area-inset-top)) + 50px);transform:translateX(-50%);padding:4px 14px;border-radius:14px;background:#0b2a4ad8;border:2px solid #8fdcff;color:#d8f3ff;font-size:14px;font-weight:800;white-space:nowrap}
 `;
 
-export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, balance, onRelease, audio, stage: getStage = () => null, project = null, level = 1}) {
+/** `assist` (v7, null = v6): the lead marker, a sticky sight inside the cone, green when the release is pulled all the way, and
+ * the close time (engine.closeTime) the first time the sight comes into the cone in a turn. */
+export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, balance, onRelease, audio, stage: getStage = () => null, project = null, level = 1, assist = null}) {
   const C = {...BOW_CONTROLS, ...(balance?.bow || {})};
   const t = (key, vars) => { let v = tOuter ? tOuter(key, vars) : undefined; if (v == null || v === key) { const str = STRINGS[key]; if (str) v = str.replace(/{(\w+)}/g, (_, x) => vars?.[x] ?? `{${x}}`); } return v ?? key; };
   const node = (tag, cls, text) => { const n = doc.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
@@ -64,6 +74,10 @@ export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, 
   const draw = node('div', 'catch-bow-draw'), drawFill = node('i'); draw.append(drawFill); draw.hidden = true; hud.append(draw);
   const dist = node('div', 'catch-bow-dist'); hud.append(dist);
   const hint = node('div', 'catch-bow-hint', t('catch.bow.hint')); hud.append(hint);
+  const lead = node('div', 'catch-bow-lead'); lead.append(node('b', '', t('catch.bow.lead'))); lead.hidden = true; hud.append(lead);
+  const closeChip = node('div', 'catch-bow-close', t('catch.bow.close')); closeChip.hidden = true; hud.append(closeChip);
+  const A = assist ? {...ASSIST7, ...(assist.A || {})} : null; let info = null, infoAt = -1;
+  const helpNow = e => { if (!A || !e || e.state.phase !== 'aim') return null; if (infoAt !== e.clock) { infoAt = e.clock; try { info = assistInfo(e, level, {A}); } catch { info = null; } } return info; };
   const abort = new AbortController();
   let drag = null, held = 0, shown = true, enabled = true, sway = {yaw: 0, angle: 0}, lastT = 0;
   const aiming = () => { const e = engine(); return e && e.state.phase === 'aim' && enabled && shown; };
@@ -81,7 +95,8 @@ export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, 
     const e = engine(); if (!e) return;
     const now = performance.now(), ddx = ev.clientX - (drag.lx ?? drag.x), ddy = ev.clientY - (drag.ly ?? drag.y), dts = (now - (drag.lt ?? now - 16)) / 1000;
     drag.lx = ev.clientX; drag.ly = ev.clientY; drag.lt = now;
-    const a = stepAim(drag.base || drag, ddx, ddy, dts, C); drag.base = a; e.setAim({yaw: a.yaw - sway.yaw, angle: a.angle - sway.angle});
+    const k = A && helpNow(e)?.inCone ? A.sticky : 1; // inside the cone the sight moves slower: easier to settle on him
+    const a = stepAim(drag.base || drag, ddx * k, ddy * k, dts, C); drag.base = a; e.setAim({yaw: a.yaw - sway.yaw, angle: a.angle - sway.angle});
   }, {signal: abort.signal});
   const end = ev => {
     if (!drag || ev.pointerId !== drag.id) return;
@@ -98,12 +113,16 @@ export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, 
     else if (ev.key === 'ArrowDown') { e.setAim({angle: e.aim.angle - 1}); ev.preventDefault(); }
   }, {signal: abort.signal});
   const api = {
-    show(v) { shown = Boolean(v); for (const el of [sight, draw, dist, hint]) if (!v) el.hidden = true; if (v) { dist.hidden = false; hint.hidden = false; } },
+    show(v) { shown = Boolean(v); for (const el of [sight, draw, dist, hint, lead, closeChip]) if (!v) el.hidden = true; if (v) { dist.hidden = false; hint.hidden = false; } },
     setEnabled(v) { enabled = Boolean(v); },
     /** Called by the session loop with the frame time: the hold sway and the drawn string. */
     tick(dt) {
       const e = engine(); if (!e) return;
       const st = getStage();
+      const h = helpNow(e);
+      if (h && h.locked && e.closeTime?.(pickStage(A.closeSeconds, level), pickStage(A.closeRate, level))) { audio?.cue?.('slowmo'); closeChip.hidden = false; }
+      if (drag && e.state.phase === 'aim' && h?.inCone) { const base = drag.base || drag, w = clamp(h.pull / Math.max(.01, pickStage(A.pull, level)), 0, 1) * A.stickyPull * dt; drag.base = {yaw: base.yaw - h.yaw * w, angle: base.angle - h.pitch * w}; } // the sight drifts onto him
+      if (closeChip.hidden === false && !e.inCloseTime?.()) closeChip.hidden = true;
       if (drag && e.state.phase === 'aim') { held += dt; lastT += dt; const s = holdSway(held, lastT, level, C); sway = s; const base = drag.base || drag; e.setAim({yaw: base.yaw - s.yaw, angle: base.angle - s.angle}); drawFill.style.width = Math.round(clamp(held / .6, 0, 1) * 100) + '%'; if (audio?.cue && Math.floor(held * 10) !== Math.floor((held - dt) * 10)) audio.cue('draw', clamp(held / .6, 0, 1)); }
       const k = drag && e.state.phase === 'aim' ? clamp(held / .6, 0, 1) : 0;
       vignette.style.opacity = String(k * .6);
@@ -116,15 +135,21 @@ export function installBowHud({hud, stageEl, doc = document, t: tOuter, engine, 
       const sp = st?.sightWorld?.();
       if (sp && project && e.state.phase === 'aim') { const p = project(sp.x, sp.y, sp.z); sight.hidden = !p.visible; sight.style.left = p.x + 'px'; sight.style.top = p.y + 'px'; sight.dataset.hit = String(Boolean(e.preview().hit)); }
       else sight.hidden = true;
+      // v7: the lead marker where he will be when the net arrives (shown while he runs), green sight when the release will be pulled all the way
+      const h = helpNow(e), lw = h && st?.toWorld ? st.toWorld(h.lead.x, h.lead.z) : null;
+      sight.dataset.lock = String(Boolean(h?.full));
+      if (lw && project && Math.abs(h.lead.z - h.lead.now.z) > .45 && !h.full) { const p = project(lw.x, h.lead.y, lw.z); lead.hidden = !p.visible; lead.style.left = p.x + 'px'; lead.style.top = p.y + 'px'; } else lead.hidden = true;
       hint.hidden = Boolean(drag) || e.state.phase !== 'aim' || e.state.thrown > 0;
     },
     handle(events) {
       for (const e of events) {
-        if (e.type === 'turn') settle();
+        if (e.type === 'turn') { settle(); closeChip.hidden = true; }
         else if (e.type === 'catch' || e.type === 'bossHit') { const chip = hud.querySelector('.catch-chip'); if (chip) { chip.classList.remove('catch-bow-pulse'); void chip.offsetWidth; chip.classList.add('catch-bow-pulse'); } vignette.style.opacity = '0'; }
       }
     },
-    dispose() { abort.abort(); for (const el of [sight, draw, dist, hint, vignette, style]) el.remove(); },
+    /** For tests: the assist reading of this frame (null without the assist). */
+    assistNow() { return helpNow(engine()); },
+    dispose() { abort.abort(); for (const el of [sight, draw, dist, hint, vignette, style, lead, closeChip]) el.remove(); },
   };
   return api;
 }

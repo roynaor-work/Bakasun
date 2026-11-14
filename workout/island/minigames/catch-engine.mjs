@@ -96,6 +96,10 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
 
   const move = () => { const m = isArch ? level.zmove : level.move; return m ? {...m, phase: turn.phase} : null; };
   const pop = () => level.pop ? {...level.pop, phase: turn.popPhase} : null;
+  // v7 "close time": while the sight is locked on him the thief moves slower for a moment. A window [a, b] at rate r warps
+  // his movement clock only, so every flight resolved at release still sees exactly where he will be. None = v6 timing.
+  const slowmo = [];
+  const warp = t => { let w = t; for (const z of slowmo) w -= (1 - z.r) * clamp(t - z.a, 0, z.b - z.a); return w; };
 
   /** Thief state at an absolute clock time; during a flee the base slides forward. */
   function criminalAt(t) {
@@ -107,7 +111,7 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
       running = u < 1; mode = running ? 'run' : 'idle'; if (u >= 1 && s.phase === 'escape') mode = 'gone';
     } else if (s.phase === 'caught') { mode = 'caught'; x = s.flight?.catchX ?? s.baseX; z = s.flight?.contact?.criminalZ ?? 0; }
     else {
-      const tt = Math.max(0, t - turn.start), m = moveOffset(move(), tt);
+      const tt = Math.max(0, (slowmo.length ? warp(t) - warp(turn.start) : t - turn.start)), m = moveOffset(move(), tt);
       if (isArch) z = m.offset; else x += m.offset;
       running = m.running; exposed = isExposed(pop(), tt);
       mode = !exposed ? 'hide' : running ? 'run' : 'idle';
@@ -193,6 +197,14 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
       if (s.phase !== 'aim' || !tools.some(t => t.id === id)) return false;
       aim.tool = id; return true;
     },
+    /** v7: open one close-time window in this turn (the thief moves at `rate` of his speed for `seconds`). False if not aiming or used. */
+    closeTime(seconds = 1.2, rate = .35) {
+      if (s.phase !== 'aim' || turn.closed === turn.index + ':' + s.crimIndex) return false;
+      turn.closed = turn.index + ':' + s.crimIndex; slowmo.length = 0; slowmo.push({a: s.clock, b: s.clock + seconds, r: clamp(rate, .05, 1)});
+      events.push({type: 'closeTime', seconds, rate}); return true;
+    },
+    /** True while a close-time window is running. */
+    inCloseTime(t = s.clock) { return slowmo.some(z => t >= z.a && t < z.b); },
     /** What the officer is allowed to see: the arc without wind and without the thief,
      * cut to the stage's preview fraction of the flight. */
     preview() {
@@ -249,9 +261,9 @@ export function createCatchEngine({balance, stage = 1, seed = 1, equipment = {},
           events.push({type: 'escape', from: s.fromX, to: s.toX});
         }
       } else if (s.phase === 'rearm' && since >= P.rearmSeconds) {
-        s.phase = 'aim'; s.phaseAt = s.clock; s.flight = null; events.push({type: 'turn', index: turn.index, wind: turn.wind, crew: true});
+        slowmo.length = 0; s.phase = 'aim'; s.phaseAt = s.clock; s.flight = null; events.push({type: 'turn', index: turn.index, wind: turn.wind, crew: true});
       } else if (s.phase === 'flee' && since >= P.fleeSeconds) {
-        s.baseX = s.toX; turn.index++; turn.start = s.clock; turn.phase = rnd() * Math.PI * 2; turn.popPhase = rnd() * 3;
+        slowmo.length = 0; s.baseX = s.toX; turn.index++; turn.start = s.clock; turn.phase = rnd() * Math.PI * 2; turn.popPhase = rnd() * 3;
         rollWind(); s.phase = 'aim'; s.phaseAt = s.clock; s.flight = null;
         events.push({type: 'turn', index: turn.index, wind: turn.wind});
       } else if (s.phase === 'caught' && since >= P.caughtSeconds) { s.phase = 'done'; events.push({type: 'done', won: true}); }
