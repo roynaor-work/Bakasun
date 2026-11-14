@@ -141,10 +141,10 @@ export function runAlpineSession(ctx) {
   let sectionCue = null, magnetChip = null, shieldChip = null;
   if (v241) {
     sectionCue = el('div', 'alpine-section-cue'); sectionCue.setAttribute('role', 'status'); sectionCue.dir = 'rtl'; sectionCue.hidden = true;
-    const powers = el('div', 'alpine-powers'); powers.dir = 'rtl';
+    // the chips sit in the score/coin row, which grows toward the free middle (a row of their own ran into the trick buttons)
     magnetChip = el('span', 'alpine-power'); magnetChip.dataset.power = 'magnet'; magnetChip.append(svg(MAGNET_ICON), el('b')); magnetChip.setAttribute('aria-label', 'מגנט');
     shieldChip = el('span', 'alpine-power'); shieldChip.dataset.power = 'shield'; shieldChip.append(svg(SHIELD_ICON), el('b', '', 'מגן'));
-    magnetChip.hidden = shieldChip.hidden = true; powers.append(magnetChip, shieldChip); hud.append(sectionCue, powers);
+    magnetChip.hidden = shieldChip.hidden = true; tally.append(magnetChip, shieldChip); hud.append(sectionCue);
   }
   // Opening card
   const intro = el('section', 'alpine-intro'); intro.setAttribute('aria-label', t('alpine.opening'));

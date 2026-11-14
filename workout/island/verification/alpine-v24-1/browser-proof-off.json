@@ -1,0 +1,80 @@
+{
+ "when": "2026-11-14T23:25:48.100Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "frameMs": 150,
+ "runs": [
+  {
+   "label": "v24-stage1",
+   "probes": {
+    "firstMoveMs": 100,
+    "laneOvershootM": 0.82,
+    "laneStopMs": 250,
+    "brake": {
+     "kmhBefore": 72,
+     "kmhAfter1s": 72,
+     "mid": {
+      "kmh": 72,
+      "braking": null,
+      "joystick": null,
+      "hud": null
+     },
+     "kmhAfterRelease": 72
+    },
+    "turnDrift": {
+     "atS": 310,
+     "curvature": -0.0066,
+     "driftM": 1.21,
+     "wall": false,
+     "lip": false,
+     "kmh": 72
+    }
+   },
+   "shots": {
+    "countdown": {
+     "file": "v24-stage1-countdown.png",
+     "raceMs": 0,
+     "s": 0,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "",
+      "braking": null
+     }
+    },
+    "brake": {
+     "file": "v24-stage1-brake.png",
+     "raceMs": 6800,
+     "s": 105,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "OVERTAKEעוד אחד מאחוריך.OVERTAKEעוד אחד מאחוריך.",
+      "braking": null
+     }
+    }
+   },
+   "frames": 321,
+   "final": {
+    "timeMs": 26100,
+    "distanceM": 508,
+    "rank": 6,
+    "score": 0,
+    "coins": 5,
+    "result": null
+   },
+   "v241": false,
+   "renderMetrics": {
+    "triangles": 183073,
+    "calls": 91,
+    "quality": "low",
+    "props": 13
+   },
+   "errors": []
+  }
+ ],
+ "csp": "clean"
+}

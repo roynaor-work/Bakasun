@@ -316,7 +316,8 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       else { for (const dx of [-24, 18]) { ctx.beginPath(); ctx.moveTo(cx + dx - 22, cy - 34); ctx.lineTo(cx + dx + 14, cy); ctx.lineTo(cx + dx - 22, cy + 34); ctx.stroke(); } }
     };
     for (const z of course.sections || []) {
-      const g = new THREE.Group(), colour = SECTION_LOOK[z.kind] || '#ff8a3d', half = pipe.lip + .7, poleM = v2mat(colour, {roughness: .5});
+      // poles well outside the lip: the chase camera follows a rider up the wall to about lip + 0.5 and must never pass through one
+      const g = new THREE.Group(), colour = SECTION_LOOK[z.kind] || '#ff8a3d', half = pipe.lip + 2.2, poleM = v2mat(colour, {roughness: .5});
       for (const x of [-half, half]) box(.32, 6, .32, poleM, g, x, pipe.lipHeight + 3, 0);
       const tex = canvasTexture(512, 128, (ctx, w, h) => { ctx.fillStyle = colour; ctx.fillRect(0, 0, w, h); ctx.fillStyle = '#ffffff33'; for (let x = -h; x < w; x += 64) { ctx.beginPath(); ctx.moveTo(x, h); ctx.lineTo(x + 32, h); ctx.lineTo(x + 32 + h, 0); ctx.lineTo(x + h, 0); ctx.fill(); } icon(z.kind, ctx, w, h); });
       const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .3, 1.2, .18), v2mat('#ffffff', {map: tex, roughness: .7})); banner.position.set(0, pipe.lipHeight + 5.4, 0); banner.castShadow = true; g.add(banner);
