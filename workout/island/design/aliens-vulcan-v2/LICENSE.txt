@@ -1,0 +1,36 @@
+SPDX-License-Identifier: CC0-1.0
+
+Aliens Vulcan v2 — original effects and audio for Bakasun, 2026-11-14.
+
+To the extent permitted by law, the authors dedicate all original material in
+this directory to the public domain under the Creative Commons CC0 1.0
+Universal Public Domain Dedication. You may copy, modify, redistribute and use
+it for any purpose, including commercial use, without requesting permission
+or providing attribution. No warranty is provided.
+
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+CC0 summary: https://creativecommons.org/publicdomain/zero/1.0/
+
+Provenance
+----------
+plasma-{256,512}.png: original layered plasma shapes; synthesize.py:plasma.
+muzzle-{256,512}.png: original six-vane rotating flash; synthesize.py:muzzle.
+heat-{256,512}.png: original segmented state rings; synthesize.py:heat.
+steam-{256,512}.png: seeded translucent air puffs; synthesize.py:steam.
+impact-{256,512}.png: four original impact silhouettes with four temporal
+frames each; synthesize.py:impact.
+
+fire-loop.{ogg,mp3}, spin-up.{ogg,mp3}, spin-down.{ogg,mp3},
+overheat.{ogg,mp3}, cooldown.{ogg,mp3}: original mathematical synthesis from
+oscillators and seeded noise; synthesize.py:sources. No third-party recordings,
+samples, music, voice, trademarks or generative service outputs are included.
+
+synthesize.py, preview.html, preview.css, preview.js, verify_preview.py,
+manifest.json, verification.json, browser-verification.json, repository-tests.json, REPORT.md, and
+the preview screenshots: original code, documentation or generated evidence;
+also dedicated under CC0-1.0. Screenshot targets are abstract test plates,
+not external character art. The preview has no outside runtime dependencies.
+
+Python, Pillow, NumPy, SciPy, FFmpeg and Playwright are build/verification
+tools only. Their code, fonts and executables are not redistributed here;
+their licenses remain with their respective authors.

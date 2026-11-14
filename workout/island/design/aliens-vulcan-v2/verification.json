@@ -1,0 +1,1707 @@
+{
+  "generatorSeed": 231114,
+  "imageMetrics": {
+    "plasma-256.png": {
+      "bytes": 22862,
+      "size": [
+        256,
+        256
+      ],
+      "frames": 3
+    },
+    "plasma-512.png": {
+      "bytes": 67168,
+      "size": [
+        512,
+        512
+      ],
+      "frames": 3
+    },
+    "muzzle-256.png": {
+      "bytes": 30633,
+      "size": [
+        256,
+        256
+      ],
+      "frames": 8
+    },
+    "muzzle-512.png": {
+      "bytes": 90402,
+      "size": [
+        512,
+        512
+      ],
+      "frames": 8
+    },
+    "heat-256.png": {
+      "bytes": 36133,
+      "size": [
+        256,
+        256
+      ],
+      "frames": 4
+    },
+    "heat-512.png": {
+      "bytes": 103971,
+      "size": [
+        512,
+        512
+      ],
+      "frames": 4
+    },
+    "steam-256.png": {
+      "bytes": 11871,
+      "size": [
+        256,
+        256
+      ],
+      "frames": 6
+    },
+    "steam-512.png": {
+      "bytes": 38866,
+      "size": [
+        512,
+        512
+      ],
+      "frames": 6
+    },
+    "impact-256.png": {
+      "bytes": 53420,
+      "size": [
+        256,
+        256
+      ],
+      "frames": 16
+    },
+    "impact-512.png": {
+      "bytes": 156082,
+      "size": [
+        512,
+        512
+      ],
+      "frames": 16
+    }
+  },
+  "audioMetrics": {
+    "fire-loop.ogg": {
+      "decodedSamples": 66150,
+      "decodedSeconds": 1.5,
+      "peakDbFS": -2.856,
+      "truePeakDbFS": -2.851,
+      "rmsDbFS": -12.065,
+      "dc": 0.00103189,
+      "energyAbove4kHzDb": -91.579,
+      "boundaryStep": 8.96e-05,
+      "interiorStepP99": 0.0532073,
+      "first5msPeak": 0.0279347,
+      "last5msPeak": 0.038453,
+      "bytes": 9286
+    },
+    "fire-loop.mp3": {
+      "decodedSamples": 66150,
+      "decodedSeconds": 1.5,
+      "peakDbFS": -3.49,
+      "truePeakDbFS": -3.484,
+      "rmsDbFS": -12.49,
+      "dc": 0.00013052,
+      "energyAbove4kHzDb": -92.872,
+      "boundaryStep": 0.0001314,
+      "interiorStepP99": 0.0531454,
+      "first5msPeak": 0.0254506,
+      "last5msPeak": 0.01772,
+      "bytes": 18828
+    },
+    "spin-up.ogg": {
+      "decodedSamples": 17640,
+      "decodedSeconds": 0.4,
+      "peakDbFS": -8.13,
+      "truePeakDbFS": -8.124,
+      "rmsDbFS": -16.179,
+      "dc": 2.139e-05,
+      "energyAbove4kHzDb": -91.986,
+      "boundaryStep": 0.0006,
+      "interiorStepP99": 0.0161052,
+      "first5msPeak": 0.0167005,
+      "last5msPeak": 0.1217315,
+      "bytes": 4922
+    },
+    "spin-up.mp3": {
+      "decodedSamples": 17640,
+      "decodedSeconds": 0.4,
+      "peakDbFS": -8.449,
+      "truePeakDbFS": -8.443,
+      "rmsDbFS": -16.658,
+      "dc": -8.507e-05,
+      "energyAbove4kHzDb": -85.673,
+      "boundaryStep": 2.42e-05,
+      "interiorStepP99": 0.0154009,
+      "first5msPeak": 0.0155583,
+      "last5msPeak": 0.1163979,
+      "bytes": 5662
+    },
+    "spin-down.ogg": {
+      "decodedSamples": 17640,
+      "decodedSeconds": 0.4,
+      "peakDbFS": -8.229,
+      "truePeakDbFS": -8.223,
+      "rmsDbFS": -16.165,
+      "dc": -0.00063125,
+      "energyAbove4kHzDb": -97.993,
+      "boundaryStep": 0.0002937,
+      "interiorStepP99": 0.0164451,
+      "first5msPeak": 0.1470625,
+      "last5msPeak": 0.0043486,
+      "bytes": 4967
+    },
+    "spin-down.mp3": {
+      "decodedSamples": 17640,
+      "decodedSeconds": 0.4,
+      "peakDbFS": -8.718,
+      "truePeakDbFS": -8.713,
+      "rmsDbFS": -16.638,
+      "dc": -0.00058875,
+      "energyAbove4kHzDb": -86.218,
+      "boundaryStep": 2.35e-05,
+      "interiorStepP99": 0.0156845,
+      "first5msPeak": 0.1363411,
+      "last5msPeak": 0.002815,
+      "bytes": 5662
+    },
+    "overheat.ogg": {
+      "decodedSamples": 21168,
+      "decodedSeconds": 0.48,
+      "peakDbFS": -3.267,
+      "truePeakDbFS": -3.262,
+      "rmsDbFS": -18.727,
+      "dc": -0.00068332,
+      "energyAbove4kHzDb": -89.125,
+      "boundaryStep": 0.0003342,
+      "interiorStepP99": 0.0144337,
+      "first5msPeak": 0.1021033,
+      "last5msPeak": 0.0020251,
+      "bytes": 5516
+    },
+    "overheat.mp3": {
+      "decodedSamples": 21168,
+      "decodedSeconds": 0.48,
+      "peakDbFS": -3.715,
+      "truePeakDbFS": -3.71,
+      "rmsDbFS": -19.236,
+      "dc": -0.00068988,
+      "energyAbove4kHzDb": -83.213,
+      "boundaryStep": 1e-07,
+      "interiorStepP99": 0.0135787,
+      "first5msPeak": 0.0931001,
+      "last5msPeak": 0.0018063,
+      "bytes": 6602
+    },
+    "cooldown.ogg": {
+      "decodedSamples": 31752,
+      "decodedSeconds": 0.72,
+      "peakDbFS": -2.686,
+      "truePeakDbFS": -2.672,
+      "rmsDbFS": -18.725,
+      "dc": -0.00102646,
+      "energyAbove4kHzDb": -81.407,
+      "boundaryStep": 0.0017933,
+      "interiorStepP99": 0.065205,
+      "first5msPeak": 0.1498445,
+      "last5msPeak": 0.00894,
+      "bytes": 6875
+    },
+    "cooldown.mp3": {
+      "decodedSamples": 31752,
+      "decodedSeconds": 0.72,
+      "peakDbFS": -3.445,
+      "truePeakDbFS": -3.44,
+      "rmsDbFS": -19.043,
+      "dc": -0.00094101,
+      "energyAbove4kHzDb": -84.715,
+      "boundaryStep": 2.65e-05,
+      "interiorStepP99": 0.0634201,
+      "first5msPeak": 0.1433819,
+      "last5msPeak": 0.0076504,
+      "bytes": 9424
+    }
+  },
+  "passed": 369,
+  "failed": 0,
+  "checks": [
+    {
+      "check": "plasma-256.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png: 256 square",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/small: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/small: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/small: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/medium: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/medium: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/medium: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/large: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/large: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png/large: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: 512 square",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/small: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/small: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/small: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/medium: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/medium: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/medium: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/large: bounds",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/large: nonempty",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png/large: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: 256 square",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-4: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-4: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-4: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-5: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-5: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-5: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-6: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-6: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-6: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-7: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-7: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png/spin-7: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: 512 square",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-4: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-4: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-4: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-5: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-5: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-5: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-6: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-6: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-6: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-7: bounds",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-7: nonempty",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png/spin-7: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: 256 square",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/cold: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/cold: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/cold: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/hot: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/hot: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/hot: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/near-lock: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/near-lock: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/near-lock: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/locked: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/locked: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png/locked: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: 512 square",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/cold: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/cold: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/cold: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/hot: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/hot: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/hot: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/near-lock: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/near-lock: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/near-lock: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/locked: bounds",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/locked: nonempty",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png/locked: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: 256 square",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-4: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-4: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-4: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-5: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-5: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png/vent-5: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: 512 square",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-4: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-4: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-4: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-5: bounds",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-5: nonempty",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png/vent-5: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: 256 square",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fan-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/crown-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/fracture-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png/shatter-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: <=600,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: 512 square",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: transparent with visible content",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fan-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/crown-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/fracture-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-0: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-0: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-0: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-1: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-1: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-1: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-2: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-2: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-2: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-3: bounds",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-3: nonempty",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png/shatter-3: transparent gutter",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: SHA-256",
+      "pass": true
+    },
+    {
+      "check": "fire-loop: ogg + mp3 together <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: loop boundary <0.001 FS (-60 dBFS)",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: seam quieter than normal signal steps",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: loop boundary <0.001 FS (-60 dBFS)",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: seam quieter than normal signal steps",
+      "pass": true
+    },
+    {
+      "check": "spin-up: ogg + mp3 together <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "spin-down: ogg + mp3 together <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "overheat: ogg + mp3 together <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "cooldown: ogg + mp3 together <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: <=80,000 bytes",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: exact requested decoded sample count",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: no clipping incl. 4x true peak",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: high-frequency energy below -45 dB",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: no DC bias",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: faded start and end",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "heat-256.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "heat-512.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "impact-256.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "impact-512.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "muzzle-256.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "muzzle-512.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "plasma-256.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "plasma-512.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "steam-256.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "steam-512.png: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: manifest hash",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: manifest bytes",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: manifest hash",
+      "pass": true
+    }
+  ]
+}

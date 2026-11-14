@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vulcan v2 · מעבדת ירי</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <main id="lab" aria-label="תצוגת נכסי וולקן 2">
+    <header>
+      <div class="brand" dir="ltr"><b>VULCAN<span> / 02</span></b><small>ROTARY PLASMA SYSTEM</small></div>
+      <div class="header-tools">
+        <span id="load" role="status">טוען נכסים…</span>
+        <button id="sound" aria-pressed="false" disabled>סאונד כבוי</button>
+        <label class="volume">עוצמה <input id="volume" type="range" min="0" max="100" value="55" aria-label="עוצמת סאונד"></label>
+      </div>
+    </header>
+    <section class="stage" aria-label="השוואת ירי רגיל לוולקן">
+      <canvas id="scene" width="844" height="250" aria-label="ירי רגיל דליל בכחול מול צרור וולקן כתום, טבעת חום וקיטור"></canvas>
+      <div class="panel-label normal"><span>01 / STANDARD</span><b>ירי רגיל</b><small>קליע בודד · 5.6 לשנייה</small></div>
+      <div class="panel-label vulcan"><span>02 / VULCAN</span><b>מכונת ירייה כבדה</b><small>10 צרורות לשנייה · פלזמה צפופה</small></div>
+      <div class="heat-status"><span id="state" role="status" aria-live="polite">קר · מוכן לירי</span><b id="percent">0%</b></div>
+      <div id="atlas-view" hidden><canvas id="atlas" width="844" height="250" aria-label="כל פריימי החבילה"></canvas></div>
+    </section>
+    <section class="controls" aria-label="בקרי הדגמה">
+      <button id="trigger" class="primary" disabled>לחצו והחזיקו לירי <kbd>Space</kbd></button>
+      <button id="demo" aria-pressed="true" disabled>מחזור אוטומטי</button>
+      <button id="pause" aria-pressed="false" disabled>השהיה</button>
+      <button id="gallery" aria-pressed="false" disabled>כל הפריימים</button>
+      <label>גודל <select id="size" aria-label="גודל פלזמה"><option value="0">קטן</option><option value="1" selected>בינוני</option><option value="2">גדול</option></select></label>
+      <label>PNG <select id="resolution" aria-label="רזולוציית אטלסים"><option value="512">512</option><option value="256">256</option></select></label>
+    </section>
+    <footer>
+      <span>קר ← חם ← כמעט נעול ← נעול ← קירור</span>
+      <div><button id="audio-menu" aria-expanded="false">בדיקת צלילים</button><a href="REPORT.md">דוח</a><a href="manifest.json">Manifest</a><span dir="ltr">844 × 390 · CC0</span></div>
+    </footer>
+    <div id="audio-panel" hidden aria-label="בדיקת חמשת הצלילים">
+      <b>בדיקת צלילים</b>
+      <button data-cue="spin-up">עליית סל״ד · 0.4s</button>
+      <button data-cue="fire-loop">לופ ירי · 1.5s × 3</button>
+      <button data-cue="spin-down">ירידת סל״ד · 0.4s</button>
+      <button data-cue="overheat">התחממות יתר</button>
+      <button data-cue="cooldown">פסיקה ושחרור אוויר</button>
+      <button id="stop-audio">עצירת בדיקה</button>
+    </div>
+    <div id="error" role="alert" hidden></div>
+  </main>
+  <script type="module" src="preview.js"></script>
+</body>
+</html>

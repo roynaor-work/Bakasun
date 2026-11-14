@@ -1,0 +1,35 @@
+{
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "command": "npm test",
+  "initialRun": {
+    "tests": 4082.0,
+    "pass": 4017.0,
+    "fail": 1.0,
+    "cancelled": 0.0,
+    "skipped": 64.0,
+    "duration_ms": 599273.151748
+  },
+  "initialFailure": {
+    "file": "tests/workout-royiki.test.mjs",
+    "cause": "Playwright default Chromium headless binary was absent; failed browser launch left its test server open.",
+    "cleanup": "Only the stuck test child was terminated after all other files completed, allowing the full runner summary to finish."
+  },
+  "retry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/vulcan-browsers node --test tests/workout-royiki.test.mjs",
+    "result": {
+      "tests": 5.0,
+      "pass": 5.0,
+      "fail": 0.0,
+      "cancelled": 0.0,
+      "skipped": 0.0,
+      "duration_ms": 23140.952502
+    },
+    "environment": "Temporary Playwright browser directory symlinks its expected binary to /usr/bin/chromium. No repository files were modified."
+  },
+  "combinedDistinctTests": {
+    "passed": 4018,
+    "failed": 0,
+    "skipped": 64,
+    "note": "4017 originally passed; the sole failing test passed on targeted retry. This is a full-suite run plus a targeted retry, not a second full npm test run."
+  }
+}

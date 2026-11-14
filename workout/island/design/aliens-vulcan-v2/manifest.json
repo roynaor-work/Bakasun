@@ -1,0 +1,1452 @@
+{
+  "schemaVersion": 1,
+  "id": "aliens-vulcan-v2",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/aliens-vulcan-v2",
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "created": "2026-11-14",
+  "license": "CC0-1.0",
+  "runtimeIntegration": "not-connected",
+  "generator": "synthesize.py",
+  "seed": 231114,
+  "preview": {
+    "path": "preview.html",
+    "width": 844,
+    "height": 390
+  },
+  "limits": {
+    "atlasBytes": 600000,
+    "audioFileBytes": 80000,
+    "audioPairBytes": 80000
+  },
+  "coordinates": {
+    "origin": "top-left",
+    "rect": "x,y,width,height; pixels",
+    "pivot": "normalized; centered",
+    "projectileForward": "negative Y",
+    "rotation": "clockwise radians in Canvas2D",
+    "textureFiltering": "linear; no mipmaps; clamp-to-edge"
+  },
+  "atlases": {
+    "plasma": {
+      "loop": false,
+      "blend": "lighter",
+      "alpha": "straight",
+      "variants": {
+        "256": {
+          "path": "plasma-256.png",
+          "size": [
+            256,
+            256
+          ],
+          "frames": [
+            {
+              "name": "small",
+              "rect": [
+                0,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "medium",
+              "rect": [
+                128,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "large",
+              "rect": [
+                0,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            }
+          ]
+        },
+        "512": {
+          "path": "plasma-512.png",
+          "size": [
+            512,
+            512
+          ],
+          "frames": [
+            {
+              "name": "small",
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "medium",
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "large",
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            }
+          ]
+        }
+      }
+    },
+    "muzzle": {
+      "loop": true,
+      "blend": "lighter",
+      "alpha": "straight",
+      "variants": {
+        "256": {
+          "path": "muzzle-256.png",
+          "size": [
+            256,
+            256
+          ],
+          "frames": [
+            {
+              "name": "spin-0",
+              "rect": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-1",
+              "rect": [
+                64,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-2",
+              "rect": [
+                128,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-3",
+              "rect": [
+                192,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-4",
+              "rect": [
+                0,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-5",
+              "rect": [
+                64,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-6",
+              "rect": [
+                128,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-7",
+              "rect": [
+                192,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            }
+          ]
+        },
+        "512": {
+          "path": "muzzle-512.png",
+          "size": [
+            512,
+            512
+          ],
+          "frames": [
+            {
+              "name": "spin-0",
+              "rect": [
+                0,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-1",
+              "rect": [
+                128,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-2",
+              "rect": [
+                256,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-3",
+              "rect": [
+                384,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-4",
+              "rect": [
+                0,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-5",
+              "rect": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-6",
+              "rect": [
+                256,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            },
+            {
+              "name": "spin-7",
+              "rect": [
+                384,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 40
+            }
+          ]
+        }
+      }
+    },
+    "heat": {
+      "loop": false,
+      "blend": "source-over",
+      "alpha": "straight",
+      "variants": {
+        "256": {
+          "path": "heat-256.png",
+          "size": [
+            256,
+            256
+          ],
+          "frames": [
+            {
+              "name": "cold",
+              "rect": [
+                0,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "hot",
+              "rect": [
+                128,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "near-lock",
+              "rect": [
+                0,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "locked",
+              "rect": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            }
+          ]
+        },
+        "512": {
+          "path": "heat-512.png",
+          "size": [
+            512,
+            512
+          ],
+          "frames": [
+            {
+              "name": "cold",
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "hot",
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "near-lock",
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            },
+            {
+              "name": "locked",
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 0
+            }
+          ]
+        }
+      }
+    },
+    "steam": {
+      "loop": false,
+      "blend": "source-over",
+      "alpha": "straight",
+      "variants": {
+        "256": {
+          "path": "steam-256.png",
+          "size": [
+            256,
+            256
+          ],
+          "frames": [
+            {
+              "name": "vent-0",
+              "rect": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-1",
+              "rect": [
+                64,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-2",
+              "rect": [
+                128,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-3",
+              "rect": [
+                192,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-4",
+              "rect": [
+                0,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-5",
+              "rect": [
+                64,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            }
+          ]
+        },
+        "512": {
+          "path": "steam-512.png",
+          "size": [
+            512,
+            512
+          ],
+          "frames": [
+            {
+              "name": "vent-0",
+              "rect": [
+                0,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-1",
+              "rect": [
+                128,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-2",
+              "rect": [
+                256,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-3",
+              "rect": [
+                384,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-4",
+              "rect": [
+                0,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            },
+            {
+              "name": "vent-5",
+              "rect": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 83.33333333333333
+            }
+          ]
+        }
+      }
+    },
+    "impact": {
+      "loop": false,
+      "blend": "lighter",
+      "alpha": "straight",
+      "variants": {
+        "256": {
+          "path": "impact-256.png",
+          "size": [
+            256,
+            256
+          ],
+          "frames": [
+            {
+              "name": "fan-0",
+              "rect": [
+                0,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-1",
+              "rect": [
+                64,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-2",
+              "rect": [
+                128,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-3",
+              "rect": [
+                192,
+                0,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-0",
+              "rect": [
+                0,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-1",
+              "rect": [
+                64,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-2",
+              "rect": [
+                128,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-3",
+              "rect": [
+                192,
+                64,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-0",
+              "rect": [
+                0,
+                128,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-1",
+              "rect": [
+                64,
+                128,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-2",
+              "rect": [
+                128,
+                128,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-3",
+              "rect": [
+                192,
+                128,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-0",
+              "rect": [
+                0,
+                192,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-1",
+              "rect": [
+                64,
+                192,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-2",
+              "rect": [
+                128,
+                192,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-3",
+              "rect": [
+                192,
+                192,
+                64,
+                64
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            }
+          ]
+        },
+        "512": {
+          "path": "impact-512.png",
+          "size": [
+            512,
+            512
+          ],
+          "frames": [
+            {
+              "name": "fan-0",
+              "rect": [
+                0,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-1",
+              "rect": [
+                128,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-2",
+              "rect": [
+                256,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fan-3",
+              "rect": [
+                384,
+                0,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-0",
+              "rect": [
+                0,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-1",
+              "rect": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-2",
+              "rect": [
+                256,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "crown-3",
+              "rect": [
+                384,
+                128,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-0",
+              "rect": [
+                0,
+                256,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-1",
+              "rect": [
+                128,
+                256,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-2",
+              "rect": [
+                256,
+                256,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "fracture-3",
+              "rect": [
+                384,
+                256,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-0",
+              "rect": [
+                0,
+                384,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-1",
+              "rect": [
+                128,
+                384,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-2",
+              "rect": [
+                256,
+                384,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            },
+            {
+              "name": "shatter-3",
+              "rect": [
+                384,
+                384,
+                128,
+                128
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "durationMs": 45
+            }
+          ]
+        }
+      },
+      "animations": {
+        "fan": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "crown": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fracture": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "shatter": [
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    }
+  },
+  "audio": {
+    "fire-loop": {
+      "sources": {
+        "ogg": "fire-loop.ogg",
+        "mp3": "fire-loop.mp3"
+      },
+      "seconds": 1.5,
+      "samples": 66150,
+      "sampleRate": 44100,
+      "channels": 1,
+      "loop": true,
+      "gain": 1.0,
+      "description": "Heavy rotary plasma fire; 15 ticks, 45 low barrel pulses",
+      "crossfadeMs": 40,
+      "loopStart": 0,
+      "loopEnd": 1.5,
+      "playback": "decoded AudioBufferSourceNode; loop=true",
+      "mp3Note": "Decode with encoder delay/padding applied; do not loop an HTMLAudio element."
+    },
+    "spin-up": {
+      "sources": {
+        "ogg": "spin-up.ogg",
+        "mp3": "spin-up.mp3"
+      },
+      "seconds": 0.4,
+      "samples": 17640,
+      "sampleRate": 44100,
+      "channels": 1,
+      "loop": false,
+      "gain": 0.85,
+      "description": "Rotor RPM rises",
+      "crossfadeMs": 40
+    },
+    "spin-down": {
+      "sources": {
+        "ogg": "spin-down.ogg",
+        "mp3": "spin-down.mp3"
+      },
+      "seconds": 0.4,
+      "samples": 17640,
+      "sampleRate": 44100,
+      "channels": 1,
+      "loop": false,
+      "gain": 0.85,
+      "description": "Rotor RPM falls",
+      "crossfadeMs": 40
+    },
+    "overheat": {
+      "sources": {
+        "ogg": "overheat.ogg",
+        "mp3": "overheat.mp3"
+      },
+      "seconds": 0.48,
+      "samples": 21168,
+      "sampleRate": 44100,
+      "channels": 1,
+      "loop": false,
+      "gain": 0.9,
+      "description": "Dull thermal clutch / lock, no piercing alarm",
+      "crossfadeMs": 40
+    },
+    "cooldown": {
+      "sources": {
+        "ogg": "cooldown.ogg",
+        "mp3": "cooldown.mp3"
+      },
+      "seconds": 0.72,
+      "samples": 31752,
+      "sampleRate": 44100,
+      "channels": 1,
+      "loop": false,
+      "gain": 0.8,
+      "description": "Mechanical shutoff followed by a soft compressed-air burst",
+      "crossfadeMs": 40
+    }
+  },
+  "presentation": {
+    "regularTicksPerSecond": 5.6,
+    "vulcanTicksPerSecond": 10,
+    "cosmeticPelletsPerTick": 3,
+    "spreadDegrees": [
+      -2,
+      0,
+      2
+    ],
+    "trailSpeedPxPerSecond": 520,
+    "plasmaDisplaySizes": [
+      44,
+      53,
+      62
+    ],
+    "muzzleDisplaySize": 64,
+    "muzzleFPS": 25,
+    "muzzleRotationCycleMs": 320,
+    "heatDisplaySize": 106,
+    "heatThresholds": [
+      0,
+      0.5,
+      0.8,
+      1
+    ],
+    "lockedPriority": true,
+    "steamFPS": 12,
+    "steamLifetimeMs": 500,
+    "impactFPS": 22.22222222222222,
+    "impactLifetimeMs": 180,
+    "v23HeatShots": 12,
+    "v23LockSeconds": 2,
+    "v23RestSeconds": 0.5,
+    "v23CoolSeconds": 2,
+    "note": "Three visual pellets represent one existing v23 tick. Keep all existing hitboxes, damage, cadence and heat rules."
+  },
+  "integration": {
+    "shotFlag": "shot.vulcan (v23)",
+    "heat": "model.vulcanHeat",
+    "locked": "model.vulcanLocked",
+    "vulcanActive": "model.vulcanOn",
+    "statePriority": [
+      "locked",
+      "near-lock",
+      "hot",
+      "cold"
+    ],
+    "audioStart": "spin-up; loop fades in over 40 ms from t=0.36 s",
+    "audioStop": "fade loop to zero over 40 ms; spin-down 0.4 s",
+    "overheat": "stop/fade loop; overheat once on lock edge; cooldown air cue; steam once",
+    "resume": "allow next trigger only after lock ends; do not repeat lock cue every frame",
+    "loop": "decode file into AudioBuffer; exact loop duration = decoded buffer.duration; master gain ramps",
+    "fallback": "OGG preferred, MP3 if decoding OGG fails; do not play both",
+    "lifecycle": "release sources on pagehide/visibility hidden/pause; audio unlocked by user gesture"
+  },
+  "files": [
+    {
+      "path": "heat-256.png",
+      "bytes": 36133,
+      "sha256": "2d8b09e06e8cb3a4504ea313677caae6e0d3949eff6414e0bee9a0ffdeb24604"
+    },
+    {
+      "path": "heat-512.png",
+      "bytes": 103971,
+      "sha256": "6aa3f8607211b52987bb56d04098f8eb8b14aeabf711d6a12daaf4c320fc414c"
+    },
+    {
+      "path": "impact-256.png",
+      "bytes": 53420,
+      "sha256": "194eef1193035c825c78d40b03e2213274b71670db502787907efdd55bd1f207"
+    },
+    {
+      "path": "impact-512.png",
+      "bytes": 156082,
+      "sha256": "be80c3088fad1f78b104ce2c18fa264812af3b33ce4d7ff5cb8ef00751a3da33"
+    },
+    {
+      "path": "muzzle-256.png",
+      "bytes": 30633,
+      "sha256": "d84ea43e3a67663d8b7e3652e55e9669e47d5e3daf1b741dbc192da5671f2f61"
+    },
+    {
+      "path": "muzzle-512.png",
+      "bytes": 90402,
+      "sha256": "ad8a01c085ed5073a66e557711b2f6561e112dc34a22b27d790062a9c95bf385"
+    },
+    {
+      "path": "plasma-256.png",
+      "bytes": 22862,
+      "sha256": "4c0629c215165fd9629fb5714913fe3c70ae28ad0a506fcfaa540d0a7a6f9a2c"
+    },
+    {
+      "path": "plasma-512.png",
+      "bytes": 67168,
+      "sha256": "6d964bea965be3ab7d744c8ea476bbfea302864dc1db534bcefa8d56b4adde02"
+    },
+    {
+      "path": "steam-256.png",
+      "bytes": 11871,
+      "sha256": "d1fb98517ac995ad35fa3665ec7985be8ee3f612d2e55003b91f003c7ad02116"
+    },
+    {
+      "path": "steam-512.png",
+      "bytes": 38866,
+      "sha256": "c43de4e0485828348cace7bc2bd20ae297afa65f61b3f00fa06cc71d831a5695"
+    },
+    {
+      "path": "cooldown.ogg",
+      "bytes": 6875,
+      "sha256": "e325ab4b2895b1944d06f0c6a838dd47002b09d7546c0eead2d902f2d0b931e7"
+    },
+    {
+      "path": "fire-loop.ogg",
+      "bytes": 9286,
+      "sha256": "4c3293d12c5c877e74655a8d01775b2104de5796f18e5581036240902dce7b18"
+    },
+    {
+      "path": "overheat.ogg",
+      "bytes": 5516,
+      "sha256": "7940085391f4e84b500ddf5e03827a75c2f598324c6dc1df0d9b49d4666b4859"
+    },
+    {
+      "path": "spin-down.ogg",
+      "bytes": 4967,
+      "sha256": "077a1625e1403fe830b48b4ae5ca1666f6313b4c348818ebb746b00ee68994df"
+    },
+    {
+      "path": "spin-up.ogg",
+      "bytes": 4922,
+      "sha256": "0e1d78c6ceb0e5fc8b73df957de7f02d3dfd5379296ba481ca457b1137132e7d"
+    },
+    {
+      "path": "cooldown.mp3",
+      "bytes": 9424,
+      "sha256": "72dbe57f9f95c319a5a5b0e222327784fb265035659fbe366977abc3d5ead9ba"
+    },
+    {
+      "path": "fire-loop.mp3",
+      "bytes": 18828,
+      "sha256": "a43a18cd56906703d1482f47c96246bd28a95723b8825288247ae49418f903ab"
+    },
+    {
+      "path": "overheat.mp3",
+      "bytes": 6602,
+      "sha256": "3a50eaa2ed95ca346979218877528a717b47843b97e7a95a6559f57b48c41f22"
+    },
+    {
+      "path": "spin-down.mp3",
+      "bytes": 5662,
+      "sha256": "2192ce64493ea00b2be0ebd8980aed281e22d3de1a541516a447f5aed5816a6b"
+    },
+    {
+      "path": "spin-up.mp3",
+      "bytes": 5662,
+      "sha256": "577e4f8d237ae1c9ccd5233c0382770668281b724df3b7e131e7d4b65ed5056d"
+    }
+  ]
+}

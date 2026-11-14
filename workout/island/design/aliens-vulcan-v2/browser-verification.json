@@ -1,0 +1,339 @@
+{
+  "viewport": [
+    844,
+    390
+  ],
+  "checks": [
+    {
+      "check": "844x390: complete preview without overflow",
+      "pass": true
+    },
+    {
+      "check": "no audio context or sound before user gesture",
+      "pass": true
+    },
+    {
+      "check": "dense Vulcan stream and hot state rendered",
+      "pass": true
+    },
+    {
+      "check": "near-lock state reached",
+      "pass": true
+    },
+    {
+      "check": "lock stops Vulcan and starts steam once",
+      "pass": true
+    },
+    {
+      "check": "lock prevents new rounds while heat drains",
+      "pass": true
+    },
+    {
+      "check": "unlocks after two seconds",
+      "pass": true
+    },
+    {
+      "check": "all four heat states visited",
+      "pass": true
+    },
+    {
+      "check": "automatic demo can be disabled",
+      "pass": true
+    },
+    {
+      "check": "pointer hold starts manual Vulcan",
+      "pass": true
+    },
+    {
+      "check": "pointer capture releases outside the fire button",
+      "pass": true
+    },
+    {
+      "check": "early release cools gradually to cold",
+      "pass": true
+    },
+    {
+      "check": "pause freezes simulation",
+      "pass": true
+    },
+    {
+      "check": "Space keyboard control fires",
+      "pass": true
+    },
+    {
+      "check": "Space release stops firing",
+      "pass": true
+    },
+    {
+      "check": "large plasma and 256 atlas selectable",
+      "pass": true
+    },
+    {
+      "check": "all frame atlas gallery opens",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.ogg: two actual rendered loop joins below -60 dBFS",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "fire-loop.mp3: two actual rendered loop joins below -60 dBFS",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "spin-up.ogg: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "spin-up.mp3: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "spin-down.ogg: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "spin-down.mp3: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "overheat.ogg: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "overheat.mp3: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "cooldown.ogg: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: browser decodes exact requested duration",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: browser decoding does not clip",
+      "pass": true
+    },
+    {
+      "check": "cooldown.mp3: browser decoded endpoints faded",
+      "pass": true
+    },
+    {
+      "check": "explicit gesture unlocks audio",
+      "pass": true
+    },
+    {
+      "check": "manual hold starts spin-up and loop",
+      "pass": true
+    },
+    {
+      "check": "release fades loop and starts spin-down",
+      "pass": true
+    },
+    {
+      "check": "release disposes all audio sources",
+      "pass": true
+    },
+    {
+      "check": "rapid taps leave no future or orphan audio sources after the thermal cue",
+      "pass": true
+    },
+    {
+      "check": "soundboard plays the three-repeat seam audition",
+      "pass": true
+    },
+    {
+      "check": "soundboard stop disposes sources",
+      "pass": true
+    },
+    {
+      "check": "pagehide releases input and suspends sound",
+      "pass": true
+    },
+    {
+      "check": "landscape touch hold fires",
+      "pass": true
+    },
+    {
+      "check": "touch release clears trigger",
+      "pass": true
+    },
+    {
+      "check": "reduced motion starts paused",
+      "pass": true
+    },
+    {
+      "check": "real animation clock reaches thermal lock",
+      "pass": true
+    },
+    {
+      "check": "no JavaScript errors",
+      "pass": true
+    },
+    {
+      "check": "all preview and media HTTP requests succeed",
+      "pass": true
+    },
+    {
+      "check": "no outside runtime requests",
+      "pass": true
+    }
+  ],
+  "passed": 62,
+  "failed": 0,
+  "browserAudio": {
+    "fire-loop.ogg": {
+      "samples": 66150,
+      "seconds": 1.5,
+      "seam": 8.960729460039119e-05,
+      "peak": 0.7197765111923218,
+      "rms": 0.24930442351337653,
+      "renderedSeams": [
+        8.960729460039119e-05,
+        8.960729460039119e-05
+      ]
+    },
+    "fire-loop.mp3": {
+      "samples": 66150,
+      "seconds": 1.5,
+      "seam": 0.00013141426643414889,
+      "peak": 0.6691170930862427,
+      "rms": 0.2374118804860321,
+      "renderedSeams": [
+        0.00013141426643414889,
+        0.00013141426643414889
+      ]
+    },
+    "spin-up.ogg": {
+      "samples": 17640,
+      "seconds": 0.4,
+      "seam": 0.0006000212379149161,
+      "peak": 0.3922012746334076,
+      "rms": 0.1552524339800726
+    },
+    "spin-up.mp3": {
+      "samples": 17640,
+      "seconds": 0.4,
+      "seam": 2.4237040406660526e-05,
+      "peak": 0.3780632019042969,
+      "rms": 0.14692029240866783
+    },
+    "spin-down.ogg": {
+      "samples": 17640,
+      "seconds": 0.4,
+      "seam": 0.00029365619411692023,
+      "peak": 0.3877530097961426,
+      "rms": 0.1555139559977842
+    },
+    "spin-down.mp3": {
+      "samples": 17640,
+      "seconds": 0.4,
+      "seam": 2.3530865746579366e-05,
+      "peak": 0.3665109872817993,
+      "rms": 0.14726888943164396
+    },
+    "overheat.ogg": {
+      "samples": 21168,
+      "seconds": 0.48,
+      "seam": 0.00033418877865187824,
+      "peak": 0.6864789724349976,
+      "rms": 0.1157782979365088
+    },
+    "overheat.mp3": {
+      "samples": 21168,
+      "seconds": 0.48,
+      "seam": 6.714481060043909e-08,
+      "peak": 0.6519830822944641,
+      "rms": 0.10920021040579932
+    },
+    "cooldown.ogg": {
+      "samples": 31752,
+      "seconds": 0.72,
+      "seam": 0.0017933357012225315,
+      "peak": 0.7340188026428223,
+      "rms": 0.11580614875964733
+    },
+    "cooldown.mp3": {
+      "samples": 31752,
+      "seconds": 0.72,
+      "seam": 2.6498462830204517e-05,
+      "peak": 0.6725658774375916,
+      "rms": 0.11165192824853198
+    }
+  },
+  "errors": []
+}
