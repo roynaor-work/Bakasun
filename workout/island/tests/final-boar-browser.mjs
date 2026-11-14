@@ -89,6 +89,10 @@ await cool();await step('fireButtonHold',async()=>{if(!hasBtn)return noBtn;const
 //    kinematics as a 60 fps phone: fine-aim speed at a 20% tilt, time to a target with a full tilt, overshoot after release (the crosshair must stop at once), and the
 //    precision finger (second finger on the stick zone slows the crosshair).
 const speedOver=async(n,axis)=>{const s0=await framesLater(1);if(!s0)return null;const s1=await framesLater(n);if(!s1||s1.elapsed<=s0.elapsed)return null;return +((s1.aim[axis]-s0.aim[axis])/(s1.elapsed-s0.elapsed)).toFixed(3);};
+// 14/11/2026 (v24): near a boar the v24 aim help slows, pulls and follows on purpose (aim-v24.mjs), so the stick's own kinematics (L, M) are measured
+// with no boar on the field, as the thresholds below assume (in v21-v23 a boar near the crosshair changed nothing). The firing checks above ran with
+// boars in range. A sandbox wave (empty plan) keeps the battle running; `__boar.sandbox` is QA set-up, nothing is aimed or fired by it.
+if(!dead)await frame.evaluate(()=>window.__boar.sandbox(1)).catch(()=>{dead=true;});
 await cool();await resetAim();await step('stickPrecision',async()=>{if(!hasBtn)return noBtn;const R=(await st()).stickR;const o={x:150,y:290};
  // fine aim: 20% tilt to the right; let the smoothing settle for 3 frames, then measure over 4 frames
  await touch('touchStart',[{...o,id:1}]);await touch('touchMove',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(3);const fine=await speedOver(4,'x');await touch('touchEnd',[{x:o.x+Math.round(R*.2),y:o.y,id:1}]);await framesLater(1);
