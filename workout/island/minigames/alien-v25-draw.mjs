@@ -4,6 +4,7 @@
  * barrels for half a second when the gauge locks. While a picture is still loading (or in a test) a drawn fallback keeps the same size.
  * Only with v25 on (?alienVulcan=v24 draws nothing here and the v24 tracers stay). */
 import {pelletOffsets,V25_DEFAULTS,VULCAN_V25_ASSETS} from './alien-v25.mjs?v=island-v2-20261107-14';
+import {boltPoints,ARSENAL_DEFAULTS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-14';
 const TAU=Math.PI*2;
 const images=new Map();
 /** Lazy picture next to this module (assets/alien-v25); null outside a browser, false until decoded. */
@@ -57,5 +58,33 @@ export function drawV25Fx(p,m,aspect=1,scale=1){
    if(atlas){const [sx,sy]=cell64(frame);p.drawImage(atlas,sx,sy,CELL,CELL,-size/2,-size/2,size,size);}
    else{p.globalAlpha=1-age/.18;p.strokeStyle='#ffc46b';p.lineWidth=2*scale;p.beginPath();p.arc(0,0,(5+age*60)*scale,0,TAU);p.stroke();}
    p.restore();drawn++;}}
+ return drawn;
+}
+/** v25 arsenal presentation: the lightning bolt (a jagged white core in a blue glow, re-jagged every 40 ms, fading over its 0.32 s), the
+ * shockwave (a cyan double ring rolling up from the ship), and the falling ammo tokens (missile crate amber, battery blue, cell cyan), each a
+ * token with its own drawn symbol on a halo so it reads as "take me". Only with the arsenal on (?alienArsenal=0 draws nothing here). */
+export const AMMO_COLORS=Object.freeze(['#ffb547','#7fb8ff','#6fe3ff']);
+function bolt(p,pts,width,color,alpha){p.globalAlpha=alpha;p.strokeStyle=color;p.lineWidth=width;p.lineJoin='round';p.beginPath();pts.forEach((q,i)=>{i?p.lineTo(q.x,q.y):p.moveTo(q.x,q.y);});p.stroke();}
+function ammoSymbol(p,kind,s){
+ p.lineWidth=1.6*s/10;p.strokeStyle='#0b1620';p.fillStyle='#0b1620';
+ if(kind===0){p.beginPath();p.moveTo(0,-s*.55);p.quadraticCurveTo(s*.22,-s*.3,s*.18,s*.3);p.lineTo(s*.34,s*.5);p.lineTo(-s*.34,s*.5);p.lineTo(-s*.18,s*.3);p.quadraticCurveTo(-s*.22,-s*.3,0,-s*.55);p.fill();}
+ else if(kind===1){p.beginPath();p.moveTo(s*.12,-s*.55);p.lineTo(-s*.28,s*.08);p.lineTo(-s*.02,s*.08);p.lineTo(-s*.14,s*.55);p.lineTo(s*.3,-s*.1);p.lineTo(s*.04,-s*.1);p.closePath();p.fill();}
+ else{for(const r of [s*.22,s*.46]){p.beginPath();p.arc(0,0,r,0,TAU);p.stroke();}}
+}
+export function drawV25Arsenal(p,m,aspect=1,scale=1){
+ if(!m.arsenalOn)return 0;let drawn=0;const t=m.time||0,cfg=m.arsenalCfg||ARSENAL_DEFAULTS;
+ const fx=m.lightningFx;if(fx){const age=t-fx.at,life=cfg.lightning.seconds;if(age>=0&&age<life){const k=1-age/life,seed=fx.seed+Math.floor(age/.04);let from=fx.from;
+  p.save();p.globalCompositeOperation='lighter';
+  for(let i=0;i<fx.points.length;i++){const to=fx.points[i],pts=boltPoints(from,to,seed+i*31,8,10*scale);
+   bolt(p,pts,9*scale,'#3d7dff',.35*k);bolt(p,pts,4*scale,'#9fd0ff',.8*k);bolt(p,pts,1.6*scale,'#ffffff',k);
+   p.globalAlpha=k;const g=p.createRadialGradient(to.x,to.y,0,to.x,to.y,16*scale);g.addColorStop(0,'rgba(214,236,255,.95)');g.addColorStop(1,'rgba(80,140,255,0)');p.fillStyle=g;p.beginPath();p.arc(to.x,to.y,16*scale,0,TAU);p.fill();from=to;drawn++;}
+  p.restore();}}
+ for(const ring of m.shockwaves||[]){const k=1-ring.r/cfg.shockwave.maxRadius;p.save();p.translate(ring.x,ring.y);p.scale(1/aspect,1);p.globalCompositeOperation='lighter';
+  // The hit test stretches x by the aspect, so the ring that hits is a circle on the screen: radius r in this scaled frame.
+  p.globalAlpha=Math.max(0,k);p.strokeStyle='#6fe3ff';p.lineWidth=6*scale;p.beginPath();p.arc(0,0,ring.r,Math.PI,TAU);p.stroke();
+  p.strokeStyle='#e6fbff';p.lineWidth=2*scale;p.beginPath();p.arc(0,0,Math.max(0,ring.r-7*scale),Math.PI,TAU);p.stroke();p.restore();drawn++;}
+ for(const d of m.ammoDrops||[]){const bob=Math.sin(t*4+d.id)*2*scale,size=20*scale,color=AMMO_COLORS[d.kind]||'#ffffff';
+  p.save();p.translate(d.x,d.y+bob);p.scale(1/aspect,1);p.globalCompositeOperation='lighter';const g=p.createRadialGradient(0,0,0,0,0,size*1.4);g.addColorStop(0,color+'99');g.addColorStop(1,color+'00');p.fillStyle=g;p.fillRect(-size*1.4,-size*1.4,size*2.8,size*2.8);
+  p.globalCompositeOperation='source-over';p.fillStyle=color;p.strokeStyle='#f6fbff';p.lineWidth=1.5*scale;p.beginPath();p.arc(0,0,size*.62,0,TAU);p.fill();p.stroke();ammoSymbol(p,d.kind,size*.9);p.restore();drawn++;}
  return drawn;
 }

@@ -1253,6 +1253,7 @@
    }
   },
   "alienDefense": {
+   "arsenal25": {"missile": {"max": 4, "refill": 1}, "lightning": {"charges": 3, "max": 5, "refill": 1, "damage": 2, "falloff": 0.85, "jumps": 3, "firstRange": 460, "jumpRange": 160, "seconds": 0.32}, "shockwave": {"charges": 1, "max": 3, "refill": 1, "damage": 1.4, "speed": 520, "maxRadius": 420, "seconds": 0.8}, "drops": {"chance": 0.12, "bigChance": 0.45, "bigKinds": [1, 4], "gapSeconds": 7, "pitySeconds": 16, "speed": 100, "radius": 24, "maxOnScreen": 1}, "enemyFire": {"cadence": 0.8, "bulletCapAdd": 2}},
    "v25": {"vulcanInterval": 0.0666667, "heatShots": 54, "lockSeconds": 2, "restSeconds": 0.15, "coolSeconds": 1.6, "vulcanDamage": 0.4, "pellets": 3, "pelletSpread": 0.035, "capPerSecond": 18, "capBurst": 4, "wingEvery": 3},
    "v24": {"refill": {"bigKinds": [1, 4], "chance": 0.12, "usedSeconds": 10, "pityOverheats": 3, "gapSeconds": 8, "maxOnScreen": 1, "speed": 105, "radius": 24, "coldSeconds": 5, "hudSeconds": 6}},
    "v23": {"vulcanInterval": 0.1, "heatShots": 12, "lockSeconds": 2, "restSeconds": 0.5, "coolSeconds": 2, "regularDamage": 0.8, "vulcanDamage": 0.45, "yellowAt": 0.5, "redAt": 0.8, "vulcanKey": "KeyZ"},

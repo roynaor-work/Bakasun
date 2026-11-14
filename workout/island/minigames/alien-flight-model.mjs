@@ -10,6 +10,7 @@ import {alienMoveEnabled,moveConfig,alienMoveStep} from './alien-move.mjs?v=isla
 import {alienFireV23Enabled,v23Config,vulcanGate,vulcanShot} from './alien-v23.mjs?v=island-v2-20261107-14';
 import {alienRefillEnabled,v24Config,refillShouldDrop,refillApply} from './alien-v24.mjs?v=island-v2-20261107-14';
 import {alienVulcanV25Enabled,v25Config} from './alien-v25.mjs?v=island-v2-20261107-14';
+import {alienArsenalEnabled,alienEnemyFireV25Enabled,arsenalConfig,nextSpecial,ammoDropKind,shouldDropAmmo,ammoRefill,lightningChain,SPECIALS} from './alien-v25-arsenal.mjs?v=island-v2-20261107-14';
 import {alienV11Enabled,blastRule} from './alien-v11.mjs';
 import {alienV10Enabled,nearestAlien,steerMissile} from './alien-v10.mjs';
 import {createAlienEntity,separateAliens,alienStack,segmentContact} from './alien-flight-combat.mjs';
@@ -26,17 +27,23 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  const refillCfg=v23&&alienRefillEnabled()?v24Config(balance).refill:null;
  // v25 (14/11/2026): a longer, cooling, massive Vulcan on the same gate (3.6 s to the lock, cools 0.15 s after release, 15 bullets/s, own cap). ?alienVulcan=v24 keeps v24.
  const v25=v23&&alienVulcanV25Enabled()?v25Config(balance):null,vc=v25||v23;
+ // v25 arsenal (?alienArsenal=0 keeps the missile alone) and a little more enemy fire (?alienEnemyFire=v24); both on the two-button fire.
+ const arsenal=v23&&alienArsenalEnabled()?arsenalConfig(balance):null,enemyFire25=v23&&alienEnemyFireV25Enabled()?arsenalConfig(balance).enemyFire:null;
  const rateK=v12?(v14?v14.rateMult:v12.rateMult):1,dmgK=v12?(v14?v14.rateMult*v14.damageTrim:v12.rateMult*v12.damageTrim):1;
  if(v12)settings.shotSeconds*=rateK;
  const hpGear14=v14?Math.pow(gearFactor({rateCap:v15?v15RateCap(v15):settings.shotSeconds/v14.minInterval,equipment,permanentUpgrades,hangar,power,rankRate:balance.hangar.rankRate,stacks:{damage:alienStack(campaign,'damage',permanentUpgrades.damage||0),rapid:alienStack(campaign,'rapid',permanentUpgrades.rapid||0),laser:alienStack(campaign,'laser',permanentUpgrades.laser||0)}}),v15?v15.gearExp:v14.gearExp):1;
  let heat=0,coolLeft=0,overheats=0,shotsBurst=0,gate={heat:0,cool:0,spent:false},fireMode='idle',burstShots=0,steadyShots=0;const spawnCap=v15?createSpawnCap(v15):null,vulcanCap=v25?createSpawnCap(v25):null;
  let vulcanTicks=0,lockAt=-Infinity,impactSerial=0;const impacts=[];
  let vgate={heat:0,lock:0,rest:0},vulcanTime=0,vulcanSide=1,shotMode='normal',regularOn=false,vulcanOn=false,regularFired=0,vulcanFired=0,vulcanMain=false;
+ // v25 arsenal state: the selected special (0 missile, 1 lightning, 2 shockwave), charges, falling ammo tokens, the bolt and the rings on screen.
+ let special=0,switchPressed=false,lightningAmmo=arsenal?arsenal.lightning.charges:0,waveAmmo=arsenal?arsenal.shockwave.charges:0,lastAmmoDropAt=-Infinity,ammoSerial=0,ammoDropped=0,ammoCollected=0,lightningsFired=0,lightningHits=0,wavesFired=0,waveHits=0,waveBolts=0,lightningFx=null;
+ const ammoDrops=[],shockwaves=[],emptySince=[-1,-1,-1];
  const refills=[];let refillCold=0,refillsDropped=0,refillsCollected=0,overheatsSinceRefill=0,lastRefillDropAt=-Infinity,lastVulcanAt=-Infinity,refillSerial=0,refillPicked=null;
  const behavior={motion:'drift',shoots:true,shield:0,warningSeconds:.7,bulletCap:12,fireCadence:settings.boltSeconds,diveEverySeconds:balance.tactics.diveEverySeconds,...balance.stageBehaviors[level-1]};
  if(v9)behavior.fireCadence*=v9.boltSecondsMult||1;
  if(v10&&v10.earlyBolt[level-1])behavior.fireCadence*=v10.earlyBolt[level-1];
  if(v11&&v11.earlyBolt[level-1]){behavior.fireCadence*=v11.earlyBolt[level-1];behavior.bulletCap=Math.max(behavior.bulletCap,v11.bulletCap[level-1]);}
+ if(enemyFire25){behavior.fireCadence*=enemyFire25.cadence;behavior.bulletCap+=enemyFire25.bulletCapAdd;}
  const player={x:config.width/2,y:config.height-balance.playerBottom,vx:0,bank:0,recoil:0};
  const aliens=[],shots=[],bolts=[],sparks=[],pickups=[],loot=[],telegraphs=[];
  const ap=createPool(balance.maxAliens),sp=createPool(balance.maxShots*(v12?v12.maxShotsMult:1)),bp=createPool(balance.maxBolts),fp=createPool(balance.maxSparks),pp=createPool(balance.pickups.max),lp=createPool(campaign.maxLoot);
@@ -96,6 +103,26 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   if(!refillCfg||!refillShouldDrop({...info,time,lastDropAt:lastRefillDropAt,lastVulcanAt,heat:vgate.heat,locked:vgate.lock>0,overheatsSince:overheatsSinceRefill,onScreen:refills.length,random},refillCfg))return false;
   refills.push({id:++refillSerial,x:clamp(x,20,config.width-20),y,vy:refillCfg.speed,born:time});lastRefillDropAt=time;refillsDropped++;overheatsSinceRefill=0;return true;
  }
+ const specialAmmo=()=>[novaCharges,lightningAmmo,waveAmmo],specialMax=()=>[arsenal.missile.max,arsenal.lightning.max,arsenal.shockwave.max];
+ /** v25: an ammo token for the emptiest special weapon (big ships often, others by chance, pity for a weapon empty a while). */
+ function dropAmmo(x,y,info){
+  const ammo=specialAmmo(),emptyFor=Math.max(0,...ammo.map((n,i)=>n<=0&&emptySince[i]>=0?time-emptySince[i]:0));
+  if(!shouldDropAmmo({...info,time,lastDropAt:lastAmmoDropAt,onScreen:ammoDrops.length,emptyFor,random},arsenal.drops))return false;
+  const kind=ammoDropKind(ammo,specialMax(),special);if(kind<0)return false;
+  ammoDrops.push({id:++ammoSerial,kind,x:clamp(x,20,config.width-20),y,vy:arsenal.drops.speed,born:time});lastAmmoDropAt=time;ammoDropped++;return true;
+ }
+ /** v25: fire the selected special weapon other than the missile (the missile keeps its own code below). */
+ function fireSpecial(){
+  const scale=1+Math.min(level-1,8)*balance.hpPerStage;
+  if(special===1&&lightningAmmo>0){
+   const from={x:player.x,y:player.y-balance.playerRadius},chain=lightningChain(aliens,from,arsenal.lightning,aspect());if(!chain.length)return false;
+   lightningAmmo--;lightningsFired++;lightningFx={at:time,from,points:chain.map(c=>({x:c.x,y:c.y})),seed:lightningsFired*7919};sound('lightning');
+   for(const hit of chain){const index=aliens.findIndex(a=>a.id===hit.id);if(index<0)continue;const a=aliens[index];damageAlien(a,hit.damage*scale*(1-(balance.enemyTypes[a.kind].novaResistance||0)));a.hitTime=balance.hitFlashSeconds;burst(a.x,a.y);lightningHits++;if(a.hp<=0)destroy(index,false,true);}
+   return true;
+  }
+  if(special===2&&waveAmmo>0&&!shockwaves.length){waveAmmo--;wavesFired++;shockwaves.push({id:wavesFired,x:player.x,y:player.y-balance.playerRadius*.5,r:0,at:time,hit:new Set()});sound('shockwave');return true;}
+  return false;
+ }
  function dropBonus(){if(!pendingBonuses||pickups.length)return;const rotation=balance.pickups.rotation,d=pp.take(bonusX,bonusY,0,balance.pickups.speed,0,rotation[dropSerial%rotation.length]);if(d){pendingBonuses--;dropSerial++;sinceBonusKills=0;sinceBonusTime=0;pickups.push(d);}}
  function destroy(index,split=true,missile=false){
   const a=aliens[index],{x,y}=a,type=balance.enemyTypes[a.kind],children=split&&!a.child&&!a.boss?(type.children||0):0;
@@ -105,6 +132,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
   if(a.reward){combo=comboTime>0?combo+1:1;comboTime=campaign.comboSeconds;if(combo%campaign.comboMilestone===0){celebration=campaign.celebrationSeconds;score+=combo*campaign.comboBonus;}
    const kind=a.boss||type.loot==='crystal'?1:type.loot==='coin'?0:-1;if(kind>=0){const d=lp.take(x,y,0,campaign.lootSpeed,0,kind);if(d)loot.push(d);}}
   if(refillCfg)dropRefill(x,y,{kind:a.kind,boss:a.boss,child:a.child});
+  if(arsenal&&!(refills.length&&refills.at(-1).born===time))dropAmmo(x,y,{kind:a.kind,boss:a.boss,child:a.child});
   if(kills%Math.round(settings.killsPerBonus*(v9?.bonusKillsMult||1))===0||(v11&&!pendingBonuses&&!pickups.length&&(sinceBonusKills>=v11.pityKills||sinceBonusTime>=v11.pitySeconds))){pendingBonuses++;bonusX=x;bonusY=y;}releaseAt(aliens,index,ap);
   for(let i=0;i<children;i++)spawn(clamp(x+(i-.5)*30,25,config.width-25),y,0,true);dropBonus();
  }
@@ -191,7 +219,7 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
  formation();
  const model={settings,behavior,player,aliens,shots,bolts,sparks,pickups,nova,equipment,upgrades,choices,wings,loot,feedback,telegraphs,chooseUpgrade,resetInput(){novaPressed=false;},
   get maxLives(){return maxLives;},get choosing(){return choosing;},get combo(){return combo;},get celebration(){return celebration;},get coins(){return coins;},get crystals(){return crystals;},get pattern(){return pattern();},get remaining(){return Math.max(0,settings.seconds-time);},statusId:'minigame.alienStatus',
-  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get v23(){return Boolean(v23);},get v25(){return Boolean(v25);},get vulcanCfg(){return v25||undefined;},get vulcanImpacts(){return v25?impacts:undefined;},get vulcanLockAt(){return lockAt;},get refillOn(){return Boolean(refillCfg);},refills,get refillCold(){return refillCold;},get refillColdMax(){return refillCfg?refillCfg.coldSeconds:0;},get refillPicked(){return refillPicked;},get vulcanHeat(){return vgate.heat;},get vulcanLocked(){return Boolean(v23&&vgate.lock>0);},get vulcanLockLeft(){return vgate.lock;},get vulcanOn(){return vulcanOn;},get regularOn(){return regularOn;},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
+  get spreadTime(){return spreadTime;},get wingTime(){return wingTime;},get powerMax(){return powerMax;},get v12(){return Boolean(v12);},get v14(){return Boolean(v14);},get v15(){return Boolean(v15);},get v23(){return Boolean(v23);},get v25(){return Boolean(v25);},get arsenalOn(){return Boolean(arsenal);},get special(){return special;},get specialAmmo(){return arsenal?specialAmmo():[novaCharges];},get specialMax(){return arsenal?specialMax():[balance.nova.charges];},ammoDrops,shockwaves,get lightningFx(){return lightningFx;},get arsenalCfg(){return arsenal||undefined;},get enemyFireV25(){return Boolean(enemyFire25);},get vulcanCfg(){return v25||undefined;},get vulcanImpacts(){return v25?impacts:undefined;},get vulcanLockAt(){return lockAt;},get refillOn(){return Boolean(refillCfg);},refills,get refillCold(){return refillCold;},get refillColdMax(){return refillCfg?refillCfg.coldSeconds:0;},get refillPicked(){return refillPicked;},get vulcanHeat(){return vgate.heat;},get vulcanLocked(){return Boolean(v23&&vgate.lock>0);},get vulcanLockLeft(){return vgate.lock;},get vulcanOn(){return vulcanOn;},get regularOn(){return regularOn;},get moveV15(){return Boolean(move);},get recoilOffset(){return move?(player.recoil||0)*move.recoilPixels:0;},get fireMode(){return fireMode;},get gunsWarm(){return Boolean(v15&&gate.spent&&!(gate.cool>0));},get heat(){return heat;},get overheated(){return coolLeft>0;},get firing(){return Boolean(v12)&&time-lastShotAt<.12;},get spinAngle(){return spinAngle;},get cannonOffset(){return v12?(v13&&model.shipV13?v13.cannonOffset:v12.cannonOffset):0;},get muzzleForward(){return v13&&model.shipV13?v13.muzzleForward:balance.playerRadius+4;},shipV13:false,cannonLast,get flashSeconds(){return v12?v12.flashSeconds:0;},blasts,get v11(){return Boolean(v11);},get wingMax(){return wingMax;},get v10(){return Boolean(v10);},get spreadCooldown(){return spreadCooldown;},get score(){return score;},get lives(){return lives;},get wave(){return wave;},get result(){return result;},get time(){return time;},get invulnerable(){return invulnerable;},get powerup(){return powerup;},get powerTime(){return powerTime;},get novaCharges(){return novaCharges;},
   statusValues(){Object.assign(status,{score,lives,wave,nova:novaCharges});return status;},
   update(dt,input=EMPTY){
    if(result||dt<=0||choosing)return;dt=Math.min(dt,config.maxFrameSeconds);time+=dt;formationAge+=dt;feedback.life=Math.max(0,feedback.life-dt);invulnerable=Math.max(0,invulnerable-dt);nova.life=Math.max(0,nova.life-dt);comboTime=Math.max(0,comboTime-dt);if(!comboTime)combo=0;celebration=Math.max(0,celebration-dt);
@@ -202,7 +230,10 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    if(move)alienMoveStep(player,input,dt,balance,config.width,move);else moveAlienPlayer(player,input,dt,balance,config.width);
    for(let i=0;i<wings.length;i++){const w=wings[i];w.active=(v10?wingTime>0:(wingTime>0||powerup===4||upgrades.wing>0||(equipment.weapon||0)>0))&&i<Math.min(campaign.maxWings,wingRank());w.x=clamp(player.x+w.side*campaign.wingOffset,campaign.wingRadius,config.width-campaign.wingRadius);w.y=player.y-10+Math.sin(time*3+i)*3;}
    const previousFlight=nova.flight;
-   if(input.nova&&!novaPressed&&novaCharges>0&&!nova.flight&&!nova.life&&aliens.length){nova.x=nova.fromX=player.x;nova.y=nova.fromY=player.y;nova.hitId=null;novaCharges--;nova.flight=balance.nova.throwSeconds*(v10?v10.missileFlightMult:1);nova.flightMax=nova.flight;nova.angle=-Math.PI/2;nova.trail.length=0;missilesFired++;const lock=v10?nearestAlien(aliens,nova.x,nova.y,aspect()):null;nova.targetId=lock?.id??null;sound('missileLaunch');}novaPressed=Boolean(input.nova);
+   // v25: the switch picks the special weapon; the special button fires it (the missile keeps its v24 code).
+   if(arsenal){if(input.switchSpecial&&!switchPressed)special=nextSpecial(special,SPECIALS.length);switchPressed=Boolean(input.switchSpecial);}
+   if(arsenal&&special!==0){if(input.nova&&!novaPressed&&aliens.length)fireSpecial();}
+   else if(input.nova&&!novaPressed&&novaCharges>0&&!nova.flight&&!nova.life&&aliens.length){nova.x=nova.fromX=player.x;nova.y=nova.fromY=player.y;nova.hitId=null;novaCharges--;nova.flight=balance.nova.throwSeconds*(v10?v10.missileFlightMult:1);nova.flightMax=nova.flight;nova.angle=-Math.PI/2;nova.trail.length=0;missilesFired++;const lock=v10?nearestAlien(aliens,nova.x,nova.y,aspect()):null;nova.targetId=lock?.id??null;sound('missileLaunch');}novaPressed=Boolean(input.nova);
    if(previousFlight>0&&v10)flyMissile(dt);else if(previousFlight>0){const y0=nova.y,nextY=Math.max(nova.stopY,nova.y-(nova.fromY-nova.stopY)/balance.nova.throwSeconds*dt);let hit=null,tMin=1;
     for(const a of aliens){const t=segmentContact(nova.x,y0,nova.x,nextY,a.x,a.y,a.radius+balance.nova.projectileRadius,aspect());if(t!==null&&(!hit||t<tMin)){hit=a;tMin=t;}}
     nova.y=y0+(nextY-y0)*tMin;nova.flight=Math.max(0,(nova.y-nova.stopY)/(nova.fromY-nova.stopY)*balance.nova.throwSeconds);
@@ -256,6 +287,18 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=pickups.length-1;i>=0;i--){const d=pickups[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
     if(dist<balance.pickups.radius+balance.playerRadius){const coolingFan=d.kind===0&&spreadCooldown>0;sound('bonus');signal(coolingFan?'spread-cooldown':'pickup',player.x,player.y,coolingFan?spreadCooldown:d.kind,1.5);if(d.kind===5)novaCharges++;else if(d.kind===0){if(!coolingFan){const sec=v11?v11.bonusSeconds:balance.spread.seconds;spreadTime=powerMax=sec;spreadCooldown=sec+balance.spread.cooldownSeconds;}}else if(v10&&d.kind===4){wingTime=wingMax=v11?v11.bonusSeconds:v10.wingSeconds;}else{powerup=d.kind;powerTime=powerMax=v11?v11.bonusSeconds:balance.pickups.seconds;}releaseAt(pickups,i,pp);}else if(d.y>config.height+30)releaseAt(pickups,i,pp);}
    dropBonus();
+   // v25 arsenal: the rings roll up (each alien hit once, enemy bullets in the ring wiped out); ammo tokens fall and home on the ship like a bonus.
+   if(arsenal){
+    if(lightningFx&&time-lightningFx.at>arsenal.lightning.seconds)lightningFx=null;
+    for(let w=shockwaves.length-1;w>=0;w--){const ring=shockwaves[w];ring.r+=arsenal.shockwave.speed*dt;const scale=1+Math.min(level-1,8)*balance.hpPerStage;
+     for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(ring.hit.has(a.id)||a.y>ring.y+20)continue;if(Math.hypot((a.x-ring.x)*aspect(),a.y-ring.y)<=ring.r+a.radius){ring.hit.add(a.id);damageAlien(a,arsenal.shockwave.damage*scale*(1-(balance.enemyTypes[a.kind].novaResistance||0)));a.hitTime=balance.hitFlashSeconds;waveHits++;if(a.hp<=0)destroy(i,false,true);}}
+     for(let i=bolts.length-1;i>=0;i--)if(Math.hypot((bolts[i].x-ring.x)*aspect(),bolts[i].y-ring.y)<=ring.r){releaseAt(bolts,i,bp);waveBolts++;}
+     if(ring.r>=arsenal.shockwave.maxRadius)shockwaves.splice(w,1);}
+    const ammo=specialAmmo();for(let i=0;i<3;i++){if(ammo[i]<=0){if(emptySince[i]<0)emptySince[i]=time;}else emptySince[i]=-1;}
+    for(let i=ammoDrops.length-1;i>=0;i--){const d=ammoDrops[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
+     if(dist<arsenal.drops.radius+balance.playerRadius){const add=ammoRefill(d.kind,arsenal);if(d.kind===0)novaCharges=Math.min(arsenal.missile.max,novaCharges+add);else if(d.kind===1)lightningAmmo=Math.min(arsenal.lightning.max,lightningAmmo+add);else waveAmmo=Math.min(arsenal.shockwave.max,waveAmmo+add);ammoCollected++;sound('ammo');signal('ammo',player.x,player.y,d.kind,1.4);ammoDrops.splice(i,1);}
+     else if(d.y>config.height+30)ammoDrops.splice(i,1);}
+   }
    // v24 Vulcan magazines: fall and home on the ship like a bonus; the pick-up empties the gauge, ends a lock and keeps the barrels cold.
    for(let i=refills.length-1;i>=0;i--){const d=refills[i];d.y+=d.vy*dt;const dx=player.x-d.x,dy=player.y-d.y,dist=Math.hypot(dx*aspect(),dy);if(dist<balance.pickups.magnetRadius&&dist>0){d.x+=dx/dist*balance.pickups.magnetSpeed*dt;d.y+=dy/dist*balance.pickups.magnetSpeed*dt;}
     if(dist<refillCfg.radius+balance.playerRadius){const r=refillApply(vgate,refillCfg);vgate={heat:r.gate.heat,lock:r.gate.lock,rest:r.gate.rest};refillCold=r.cold;heat=0;coolLeft=0;refillsCollected++;refillPicked={at:time,x:player.x,y:player.y,id:d.id};sound('refill');signal('refill',player.x,player.y,refillCold,1.6);refills.splice(i,1);}else if(d.y>config.height+30)refills.splice(i,1);}
@@ -266,6 +309,6 @@ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,powe
    for(let i=aliens.length-1;i>=0;i--){const a=aliens[i];if(!a.boss&&a.diveAge<0&&a.y-a.radius>player.y+20){releaseAt(aliens,i,ap);damagePlayer(player.x,player.y);}}
    if(lives<=0)finish('lose');else if(!aliens.length&&wave>=settings.waves)finish('win');else if(time>=settings.seconds)finish(completion==='survival'&&!settings.boss?'win':'lose');
   },
-  snapshot(){return{...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),...(v25?{v25:{ticks:vulcanTicks,impacts:impacts.length,lockAt,capDropped:vulcanCap.dropped,fireSeconds:v25.heatShots*v25.vulcanInterval}}:{}),...(refillCfg?{refill:{dropped:refillsDropped,collected:refillsCollected,cold:refillCold,onScreen:refills.length,overheatsSince:overheatsSinceRefill,picked:refillPicked&&{...refillPicked}},refills:refills.map(d=>({...d}))}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
+  snapshot(){return{...(v23?{v23:true,regularOn,vulcanOn,regularFired,vulcanFired,vulcan:{heat:vgate.heat,lock:vgate.lock,locked:vgate.lock>0,firing:vulcanOn}}:{}),...(v25?{v25:{ticks:vulcanTicks,impacts:impacts.length,lockAt,capDropped:vulcanCap.dropped,fireSeconds:v25.heatShots*v25.vulcanInterval}}:{}),...(arsenal?{arsenal:{special,ammo:specialAmmo(),dropped:ammoDropped,collected:ammoCollected,lightningsFired,lightningHits,wavesFired,waveHits,waveBolts,onScreen:ammoDrops.length},ammoDrops:ammoDrops.map(d=>({...d}))}:{}),...(refillCfg?{refill:{dropped:refillsDropped,collected:refillsCollected,cold:refillCold,onScreen:refills.length,overheatsSince:overheatsSinceRefill,picked:refillPicked&&{...refillPicked}},refills:refills.map(d=>({...d}))}:{}),overheats,heat,fireMode,burstShots,steadyShots,capDropped:spawnCap?spawnCap.dropped:0,v15:Boolean(v15),cannonSide,lasersFired,blastsMade,bonusPity:{sinceBonusKills,sinceBonusTime},boltsFired,playerHits,missilesFired,missilesHit,wingTime,hangar:{...hangar},spreadTime,spreadCooldown,kills,pendingBonuses,bonusesDropped:dropSerial,score,lives,maxLives,wave,time,choosing,choices:[...choices],upgrades:{...upgrades},wings:wings.map(w=>({...w})),combo,coins,crystals,pattern:pattern(),remaining:model.remaining,loot:loot.map(d=>({...d})),result:result?{...result}:null,player:{...player},aliens:aliens.map(a=>({...a})),shots:shots.map(s=>({...s})),bolts:bolts.map(b=>({...b})),pickups:pickups.map(d=>({...d})),powerup,powerTime,novaCharges,nova:{...nova},feedback:{...feedback},telegraphs:telegraphs.map(t=>({...t})),fired,hits,level};}
  };return model;
 }

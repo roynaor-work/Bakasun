@@ -20,7 +20,8 @@ const read=path=>readFile(new URL(path,import.meta.url),'utf8');
 const config=JSON.parse(await read('../workout/island/data/config.json')).minigames,balance=config.alienDefense,cfg=v25Config(balance),c23=v23Config(balance),c15=v15Config(balance);
 const FRAME=1/60,PHONE=(844/390)/(360/480);
 /** The model under a Vulcan mode ('v25' default, 'v24' = ?alienVulcan=v24); refill magazines on as shipped unless refill=false. */
-function make({vulcan='v25',refill=true,level=1,seed=3,...rest}={}){globalThis.__alienVulcan=vulcan==='v24'?'v24':undefined;globalThis.__alienRefill=refill?undefined:'0';try{return createAlienModel({config,balance,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienVulcan=undefined;globalThis.__alienRefill=undefined;}}
+// The Vulcan is measured alone: the v25 enemy fire and arsenal (tests/island-aliens-v25-arsenal.test.mjs) are switched back to v24 here.
+function make({vulcan='v25',refill=true,level=1,seed=3,...rest}={}){globalThis.__alienVulcan=vulcan==='v24'?'v24':undefined;globalThis.__alienRefill=refill?undefined:'0';globalThis.__alienEnemyFire='v24';globalThis.__alienArsenal='0';try{return createAlienModel({config,balance,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienVulcan=undefined;globalThis.__alienRefill=undefined;globalThis.__alienEnemyFire=undefined;globalThis.__alienArsenal=undefined;}}
 const run=(m,s,input={})=>{for(let i=0;i<Math.round(s/FRAME);i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
 function lockAfter(m){let t=0;for(let i=0;i<60*8;i++){m.update(FRAME,{vulcan:true});t+=FRAME;if(m.vulcanLocked)return t;}return null;}
 function cooling(m,releaseAt){while(m.vulcanHeat<releaseAt)m.update(FRAME,{vulcan:true});const h0=m.vulcanHeat;let t=0,first=null,empty=null;for(let i=0;i<60*6&&empty===null;i++){m.update(FRAME,{});t+=FRAME;if(first===null&&m.vulcanHeat<h0-1e-9)first=t;if(m.vulcanHeat<.01)empty=t;}return {h0,first,empty,locked:m.vulcanLocked};}
@@ -126,7 +127,7 @@ test('v25 sound: the rotary loop follows vulcanOn (spin-up, loop, spin-down), th
 
 test('wiring and offline: the session preloads the plasma, hands the Vulcan stream to the loop once it is decoded, the assets are listed and licensed',async()=>{
  const session=await read('../workout/island/minigames/alien-session.mjs');
- assert.match(session,/if\(model\.v25\)\{v25Audio=createAlienV25Audio\(\);preloadAlienV25\(\);\}/);assert.match(session,/event==='shot'&&v25Audio\?\.ready\)return/);assert.match(session,/event==='overheat'&&v25Audio/);assert.match(session,/v25Audio\?\.update\(model\)/);assert.match(session,/v25Audio\?\.dispose\(\)/);
+ assert.match(session,/if\(model\.v25\|\|model\.arsenalOn\)\{v25Audio=createAlienV25Audio\(\);if\(model\.v25\)preloadAlienV25\(\);\}/);assert.match(session,/event==='shot'&&vulcan25&&v25Audio\?\.ready\)return/);assert.match(session,/event==='overheat'&&vulcan25&&v25Audio/);assert.match(session,/v25Audio\?\.update\(model\)/);assert.match(session,/v25Audio\?\.dispose\(\)/);
  const manifest=JSON.parse(await read('../workout/island/offline-manifest.json'));
  for(const f of ['minigames/alien-v25.mjs','minigames/alien-v25-draw.mjs','minigames/alien-v25-audio.mjs'])assert.ok(manifest.shell.includes(f),f);
  for(const f of ['plasma-256.png','muzzle-256.png','impact-256.png','steam-256.png','fire-loop.ogg','fire-loop.mp3','spin-up.ogg','spin-down.ogg','overheat.ogg','cooldown.ogg'])assert.ok(manifest.games.alien.includes('assets/alien-v25/'+f),f);
