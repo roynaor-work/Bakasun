@@ -1,0 +1,778 @@
+{
+  "schemaVersion": 1,
+  "renderer": "actual GLB AnimationMixer with LINEAR/slerp",
+  "nativeRate": 30,
+  "framesPerClip": 8,
+  "clips": [
+    {
+      "id": "power_landing",
+      "sheet": "sheets/power_landing.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "d7e1a887a3b1ee6db5d3ce76af44d2ad4bfad9f6d2bec7ce14f223789e394a10",
+      "bytes": 61828,
+      "view": "three",
+      "sourceAsset": "runtime/clips/power_landing.glb",
+      "sourceAssetSha256": "c758246304cb05c5bd354070cc81486a7d0c3d3587049a5eabeeb727bcd85d67",
+      "declaredSourceAssetSha256": "c758246304cb05c5bd354070cc81486a7d0c3d3587049a5eabeeb727bcd85d67",
+      "sourceAssetBytes": 799392,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "airborne",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "stage": "landing",
+          "time": 0.6,
+          "frame": 18
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "contact",
+          "time": 1.3,
+          "frame": 39
+        },
+        {
+          "stage": "follow",
+          "time": 1.6666666666666667,
+          "frame": 50
+        },
+        {
+          "stage": "recovery",
+          "time": 2.433333333333333,
+          "frame": 73
+        },
+        {
+          "stage": "exit",
+          "time": 3.2,
+          "frame": 96
+        }
+      ]
+    },
+    {
+      "id": "inside_curve",
+      "sheet": "sheets/inside_curve.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "d1a8d51f08153f01659a7e539bfab33d5e57bfc87501fb7bc2f6bb6b684882ee",
+      "bytes": 61326,
+      "view": "three",
+      "sourceAsset": "runtime/clips/inside_curve.glb",
+      "sourceAssetSha256": "c7c7eb3127479b60d9ec22ba458981219e128f8176713a240ab0bca83ff2e5ee",
+      "declaredSourceAssetSha256": "c7c7eb3127479b60d9ec22ba458981219e128f8176713a240ab0bca83ff2e5ee",
+      "sourceAssetBytes": 799080,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.36666666666666664,
+          "frame": 11
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "approach",
+          "time": 1.0666666666666667,
+          "frame": 32
+        },
+        {
+          "stage": "contact",
+          "time": 1.3,
+          "frame": 39
+        },
+        {
+          "stage": "follow",
+          "time": 1.7,
+          "frame": 51
+        },
+        {
+          "stage": "recovery",
+          "time": 2.3333333333333335,
+          "frame": 70
+        },
+        {
+          "stage": "exit",
+          "time": 3.2,
+          "frame": 96
+        }
+      ]
+    },
+    {
+      "id": "outside_kick",
+      "sheet": "sheets/outside_kick.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "1b01e15f10a825cac354a3bb7eb577b1d3ce648e1da7ab3410c7436da6da4a5e",
+      "bytes": 61246,
+      "view": "three",
+      "sourceAsset": "runtime/clips/outside_kick.glb",
+      "sourceAssetSha256": "630749fac72070c1da35e315f88f489dd03877871459295de74c8d81832f8838",
+      "declaredSourceAssetSha256": "630749fac72070c1da35e315f88f489dd03877871459295de74c8d81832f8838",
+      "sourceAssetBytes": 797256,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "stage": "backswing",
+          "time": 0.7,
+          "frame": 21
+        },
+        {
+          "stage": "approach",
+          "time": 0.9666666666666667,
+          "frame": 29
+        },
+        {
+          "stage": "contact",
+          "time": 1.2,
+          "frame": 36
+        },
+        {
+          "stage": "follow",
+          "time": 1.6,
+          "frame": 48
+        },
+        {
+          "stage": "recovery",
+          "time": 2.2,
+          "frame": 66
+        },
+        {
+          "stage": "exit",
+          "time": 3,
+          "frame": 90
+        }
+      ]
+    },
+    {
+      "id": "placed_kick",
+      "sheet": "sheets/placed_kick.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "b2b66723d0dff5a1bafc88360ed2b638dce449ad0d524b48f2dd17063bf0a058",
+      "bytes": 60958,
+      "view": "three",
+      "sourceAsset": "runtime/clips/placed_kick.glb",
+      "sourceAssetSha256": "73cae5df00bab1f9fe7322975e3153e2a07520e4d3b9c5f4a8bbde546633b7a6",
+      "declaredSourceAssetSha256": "73cae5df00bab1f9fe7322975e3153e2a07520e4d3b9c5f4a8bbde546633b7a6",
+      "sourceAssetBytes": 795488,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.36666666666666664,
+          "frame": 11
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "approach",
+          "time": 1,
+          "frame": 30
+        },
+        {
+          "stage": "contact",
+          "time": 1.2,
+          "frame": 36
+        },
+        {
+          "stage": "follow",
+          "time": 1.5666666666666667,
+          "frame": 47
+        },
+        {
+          "stage": "recovery",
+          "time": 2.066666666666667,
+          "frame": 62
+        },
+        {
+          "stage": "exit",
+          "time": 2.8,
+          "frame": 84
+        }
+      ]
+    },
+    {
+      "id": "weak_foot",
+      "sheet": "sheets/weak_foot.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "889c87dcb9f431b4aca04361dacf6075b3db2af75097f075f718748c1cc7a73b",
+      "bytes": 61102,
+      "view": "three",
+      "sourceAsset": "runtime/clips/weak_foot.glb",
+      "sourceAssetSha256": "7fe480484a7cf775e858e94686bc6350ea541c3eb5deca920b70a51a0b420de2",
+      "declaredSourceAssetSha256": "7fe480484a7cf775e858e94686bc6350ea541c3eb5deca920b70a51a0b420de2",
+      "sourceAssetBytes": 798136,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.36666666666666664,
+          "frame": 11
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "approach",
+          "time": 1.0666666666666667,
+          "frame": 32
+        },
+        {
+          "stage": "contact",
+          "time": 1.3,
+          "frame": 39
+        },
+        {
+          "stage": "follow",
+          "time": 1.7,
+          "frame": 51
+        },
+        {
+          "stage": "recovery",
+          "time": 2.3,
+          "frame": 69
+        },
+        {
+          "stage": "exit",
+          "time": 3.1,
+          "frame": 93
+        }
+      ]
+    },
+    {
+      "id": "volley",
+      "sheet": "sheets/volley.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "fbf88ee39d5167be5d6d09fabcbca61cfbfa4c8b2ef765e0a1a7ea5af6f6e160",
+      "bytes": 59706,
+      "view": "three",
+      "sourceAsset": "runtime/clips/volley.glb",
+      "sourceAssetSha256": "c1818ac9ccae49152724762373f1a2cdbbf5d35e0d15dce375507f2b7941492e",
+      "declaredSourceAssetSha256": "c1818ac9ccae49152724762373f1a2cdbbf5d35e0d15dce375507f2b7941492e",
+      "sourceAssetBytes": 799024,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "stage": "backswing",
+          "time": 0.9,
+          "frame": 27
+        },
+        {
+          "stage": "approach",
+          "time": 1.1666666666666667,
+          "frame": 35
+        },
+        {
+          "stage": "contact",
+          "time": 1.4,
+          "frame": 42
+        },
+        {
+          "stage": "follow",
+          "time": 1.8,
+          "frame": 54
+        },
+        {
+          "stage": "recovery",
+          "time": 2.4,
+          "frame": 72
+        },
+        {
+          "stage": "exit",
+          "time": 3.2,
+          "frame": 96
+        }
+      ]
+    },
+    {
+      "id": "scissors",
+      "sheet": "sheets/scissors.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "61c0fd74af052cf8cf73b9d84c034c5bd129402d8c318c7bbeb847f1b4fccba1",
+      "bytes": 55114,
+      "view": "side",
+      "sourceAsset": "runtime/clips/scissors.glb",
+      "sourceAssetSha256": "c4778adebe78e01472d79137bd003ca127fefef7a0ba7f9ffd1689ecb26ca208",
+      "declaredSourceAssetSha256": "c4778adebe78e01472d79137bd003ca127fefef7a0ba7f9ffd1689ecb26ca208",
+      "sourceAssetBytes": 810308,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.4666666666666667,
+          "frame": 14
+        },
+        {
+          "stage": "backswing",
+          "time": 1,
+          "frame": 30
+        },
+        {
+          "stage": "approach",
+          "time": 1.2,
+          "frame": 36
+        },
+        {
+          "stage": "contact",
+          "time": 1.4,
+          "frame": 42
+        },
+        {
+          "stage": "follow",
+          "time": 1.8,
+          "frame": 54
+        },
+        {
+          "stage": "landing",
+          "time": 2.2,
+          "frame": 66
+        },
+        {
+          "stage": "exit",
+          "time": 4.4,
+          "frame": 132
+        }
+      ]
+    },
+    {
+      "id": "chip",
+      "sheet": "sheets/chip.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "6bb52fea6cf719e72ed34cbc98424a26228ea466fb327a4cf46eb5a34b09445e",
+      "bytes": 59766,
+      "view": "three",
+      "sourceAsset": "runtime/clips/chip.glb",
+      "sourceAssetSha256": "32013275e851b18198415c2848852924f80cbba4fbcbaa99b72d7bd2d3dd6192",
+      "declaredSourceAssetSha256": "32013275e851b18198415c2848852924f80cbba4fbcbaa99b72d7bd2d3dd6192",
+      "sourceAssetBytes": 796288,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.36666666666666664,
+          "frame": 11
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "approach",
+          "time": 1,
+          "frame": 30
+        },
+        {
+          "stage": "contact",
+          "time": 1.2,
+          "frame": 36
+        },
+        {
+          "stage": "follow",
+          "time": 1.6,
+          "frame": 48
+        },
+        {
+          "stage": "recovery",
+          "time": 2.1333333333333333,
+          "frame": 64
+        },
+        {
+          "stage": "exit",
+          "time": 2.9,
+          "frame": 87
+        }
+      ]
+    },
+    {
+      "id": "running_kick",
+      "sheet": "sheets/running_kick.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "2f82c08251f56b4775492cfcbbe2424ca095dd8678cd565064220aae7327aa0f",
+      "bytes": 60660,
+      "view": "three",
+      "sourceAsset": "runtime/clips/running_kick.glb",
+      "sourceAssetSha256": "b2a8d4e2ecb965ffa3b9cbf96cee4cfb2cd8d945b8b5f5ebef50a1e8bc898014",
+      "declaredSourceAssetSha256": "b2a8d4e2ecb965ffa3b9cbf96cee4cfb2cd8d945b8b5f5ebef50a1e8bc898014",
+      "sourceAssetBytes": 784460,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.23333333333333334,
+          "frame": 7
+        },
+        {
+          "stage": "backswing",
+          "time": 0.5,
+          "frame": 15
+        },
+        {
+          "stage": "approach",
+          "time": 0.6,
+          "frame": 18
+        },
+        {
+          "stage": "contact",
+          "time": 0.7,
+          "frame": 21
+        },
+        {
+          "stage": "follow",
+          "time": 0.8,
+          "frame": 24
+        },
+        {
+          "stage": "recovery",
+          "time": 1.2,
+          "frame": 36
+        },
+        {
+          "stage": "exit",
+          "time": 1.6,
+          "frame": 48
+        }
+      ]
+    },
+    {
+      "id": "short_inside_pass",
+      "sheet": "sheets/short_inside_pass.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "c7dc11ff23cb034efb49f70b0b0f02c0e2b7d6413f058942cbbe10947f39c446",
+      "bytes": 61768,
+      "view": "three",
+      "sourceAsset": "runtime/clips/short_inside_pass.glb",
+      "sourceAssetSha256": "4343fb24cf5a8fae3fe45978f573f73f067b29bfe13d07ba434148b09770c578",
+      "declaredSourceAssetSha256": "4343fb24cf5a8fae3fe45978f573f73f067b29bfe13d07ba434148b09770c578",
+      "sourceAssetBytes": 791912,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "stage": "backswing",
+          "time": 0.6666666666666666,
+          "frame": 20
+        },
+        {
+          "stage": "approach",
+          "time": 0.8333333333333334,
+          "frame": 25
+        },
+        {
+          "stage": "contact",
+          "time": 1,
+          "frame": 30
+        },
+        {
+          "stage": "follow",
+          "time": 1.3666666666666667,
+          "frame": 41
+        },
+        {
+          "stage": "recovery",
+          "time": 1.7666666666666666,
+          "frame": 53
+        },
+        {
+          "stage": "exit",
+          "time": 2.4,
+          "frame": 72
+        }
+      ]
+    },
+    {
+      "id": "long_pass",
+      "sheet": "sheets/long_pass.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "f94e9a774987d4b03a5eec72ec1b0ebb8341e57b954836a6425c1df4817120ac",
+      "bytes": 61590,
+      "view": "three",
+      "sourceAsset": "runtime/clips/long_pass.glb",
+      "sourceAssetSha256": "cd3f875ee4103304ed47dcd774ee5671f02548e9065fb6b531359d5fcf5c0b50",
+      "declaredSourceAssetSha256": "cd3f875ee4103304ed47dcd774ee5671f02548e9065fb6b531359d5fcf5c0b50",
+      "sourceAssetBytes": 799960,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "stage": "backswing",
+          "time": 0.9,
+          "frame": 27
+        },
+        {
+          "stage": "approach",
+          "time": 1.1666666666666667,
+          "frame": 35
+        },
+        {
+          "stage": "contact",
+          "time": 1.4,
+          "frame": 42
+        },
+        {
+          "stage": "follow",
+          "time": 1.8,
+          "frame": 54
+        },
+        {
+          "stage": "recovery",
+          "time": 2.433333333333333,
+          "frame": 73
+        },
+        {
+          "stage": "exit",
+          "time": 3.3,
+          "frame": 99
+        }
+      ]
+    },
+    {
+      "id": "through_pass",
+      "sheet": "sheets/through_pass.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "f3fded8383820984f60c32befe689cd1ce51d5b7b61ad6fffd1a2e9ea3562e72",
+      "bytes": 61510,
+      "view": "three",
+      "sourceAsset": "runtime/clips/through_pass.glb",
+      "sourceAssetSha256": "57e559a33143693c001d3189a8e8eacfd11aa90424c546c267ad0bf1cbf5c2b0",
+      "declaredSourceAssetSha256": "57e559a33143693c001d3189a8e8eacfd11aa90424c546c267ad0bf1cbf5c2b0",
+      "sourceAssetBytes": 794580,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.3,
+          "frame": 9
+        },
+        {
+          "stage": "backswing",
+          "time": 0.7,
+          "frame": 21
+        },
+        {
+          "stage": "approach",
+          "time": 0.9,
+          "frame": 27
+        },
+        {
+          "stage": "contact",
+          "time": 1.1,
+          "frame": 33
+        },
+        {
+          "stage": "follow",
+          "time": 1.4666666666666666,
+          "frame": 44
+        },
+        {
+          "stage": "recovery",
+          "time": 1.9666666666666666,
+          "frame": 59
+        },
+        {
+          "stage": "exit",
+          "time": 2.7,
+          "frame": 81
+        }
+      ]
+    },
+    {
+      "id": "lift_pass",
+      "sheet": "sheets/lift_pass.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "f1c60e64bb0b6868531fe1d3c4f9234afac3c16c0f4fade82586dcd98ce8e6a4",
+      "bytes": 60932,
+      "view": "three",
+      "sourceAsset": "runtime/clips/lift_pass.glb",
+      "sourceAssetSha256": "5db57a8ba1b0220e7873a74a35b3de5aea4a0aed7ec200a1862f1951063eb4d9",
+      "declaredSourceAssetSha256": "5db57a8ba1b0220e7873a74a35b3de5aea4a0aed7ec200a1862f1951063eb4d9",
+      "sourceAssetBytes": 797308,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.4,
+          "frame": 12
+        },
+        {
+          "stage": "backswing",
+          "time": 0.8666666666666667,
+          "frame": 26
+        },
+        {
+          "stage": "approach",
+          "time": 1.1,
+          "frame": 33
+        },
+        {
+          "stage": "contact",
+          "time": 1.3,
+          "frame": 39
+        },
+        {
+          "stage": "follow",
+          "time": 1.7,
+          "frame": 51
+        },
+        {
+          "stage": "recovery",
+          "time": 2.2333333333333334,
+          "frame": 67
+        },
+        {
+          "stage": "exit",
+          "time": 3,
+          "frame": 90
+        }
+      ]
+    },
+    {
+      "id": "wing_cross",
+      "sheet": "sheets/wing_cross.webp",
+      "width": 1600,
+      "height": 776,
+      "sha256": "0e04b97e05dc7bf38afee819617b2f94b2e3c797bb6333e8b26c45e9e9c7e58f",
+      "bytes": 62206,
+      "view": "three",
+      "sourceAsset": "runtime/clips/wing_cross.glb",
+      "sourceAssetSha256": "031e839e78c1de9bdd253549650afb93abcbe3bf88e30000c3a549f5941c8c46",
+      "declaredSourceAssetSha256": "031e839e78c1de9bdd253549650afb93abcbe3bf88e30000c3a549f5941c8c46",
+      "sourceAssetBytes": 801948,
+      "frames": [
+        {
+          "stage": "entry",
+          "time": 0,
+          "frame": 0
+        },
+        {
+          "stage": "preparation",
+          "time": 0.43333333333333335,
+          "frame": 13
+        },
+        {
+          "stage": "backswing",
+          "time": 0.9666666666666667,
+          "frame": 29
+        },
+        {
+          "stage": "approach",
+          "time": 1.2333333333333334,
+          "frame": 37
+        },
+        {
+          "stage": "contact",
+          "time": 1.5,
+          "frame": 45
+        },
+        {
+          "stage": "follow",
+          "time": 1.9666666666666666,
+          "frame": 59
+        },
+        {
+          "stage": "recovery",
+          "time": 2.6,
+          "frame": 78
+        },
+        {
+          "stage": "exit",
+          "time": 3.5,
+          "frame": 105
+        }
+      ]
+    }
+  ]
+}
