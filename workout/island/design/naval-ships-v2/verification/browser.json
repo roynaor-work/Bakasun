@@ -1,0 +1,761 @@
+{
+  "pass": true,
+  "browser": "151.0.7922.173",
+  "renderer": "Chromium SwiftShader",
+  "testedViewports": [
+    [
+      844,
+      390
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "rigChecks": [
+    {
+      "id": "destroyer",
+      "team": "player",
+      "visible": [
+        "destroyer-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.1799999999999997,
+        -0.15
+      ],
+      "initialPivot": [
+        0,
+        2.1799999999999997,
+        -0.15
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 1874
+    },
+    {
+      "id": "cruiser",
+      "team": "player",
+      "visible": [
+        "cruiser-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.7,
+        -0.12
+      ],
+      "initialPivot": [
+        0,
+        2.7,
+        -0.12
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2394
+    },
+    {
+      "id": "light-carrier",
+      "team": "player",
+      "visible": [
+        "light-carrier-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0.88,
+        2.55,
+        -0.8
+      ],
+      "initialPivot": [
+        0.88,
+        2.55,
+        -0.8
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2122
+    },
+    {
+      "id": "cargo-ship",
+      "team": "player",
+      "visible": [
+        "cargo-ship-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.5700000000000003,
+        -2.02
+      ],
+      "initialPivot": [
+        0,
+        2.5700000000000003,
+        -2.02
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2248
+    },
+    {
+      "id": "speedboat",
+      "team": "player",
+      "visible": [
+        "speedboat-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        1.3,
+        -0.24
+      ],
+      "initialPivot": [
+        0,
+        1.3,
+        -0.24
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2114
+    },
+    {
+      "id": "base-ship",
+      "team": "player",
+      "visible": [
+        "base-ship-player"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.6,
+        -1.3
+      ],
+      "initialPivot": [
+        0,
+        2.6,
+        -1.3
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2212
+    },
+    {
+      "id": "destroyer",
+      "team": "enemy",
+      "visible": [
+        "destroyer-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.1799999999999997,
+        -0.15
+      ],
+      "initialPivot": [
+        0,
+        2.1799999999999997,
+        -0.15
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 1874
+    },
+    {
+      "id": "cruiser",
+      "team": "enemy",
+      "visible": [
+        "cruiser-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.7,
+        -0.12
+      ],
+      "initialPivot": [
+        0,
+        2.7,
+        -0.12
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2394
+    },
+    {
+      "id": "light-carrier",
+      "team": "enemy",
+      "visible": [
+        "light-carrier-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0.88,
+        2.55,
+        -0.8
+      ],
+      "initialPivot": [
+        0.88,
+        2.55,
+        -0.8
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2122
+    },
+    {
+      "id": "cargo-ship",
+      "team": "enemy",
+      "visible": [
+        "cargo-ship-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.5700000000000003,
+        -2.02
+      ],
+      "initialPivot": [
+        0,
+        2.5700000000000003,
+        -2.02
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2248
+    },
+    {
+      "id": "speedboat",
+      "team": "enemy",
+      "visible": [
+        "speedboat-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        1.3,
+        -0.24
+      ],
+      "initialPivot": [
+        0,
+        1.3,
+        -0.24
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2114
+    },
+    {
+      "id": "base-ship",
+      "team": "enemy",
+      "visible": [
+        "base-ship-enemy"
+      ],
+      "start": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "quarter": [
+        0,
+        0.7071067690849304,
+        0,
+        0.7071067690849304
+      ],
+      "loop": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pivot": [
+        0,
+        2.6,
+        -1.3
+      ],
+      "initialPivot": [
+        0,
+        2.6,
+        -1.3
+      ],
+      "stableHull": true,
+      "clipped": 0,
+      "vertices": 2212
+    }
+  ],
+  "angles": {
+    "barrel": -0.4363323129985824,
+    "yaw": 1.1344640137963145,
+    "aft": [
+      0,
+      0.8433914458128857,
+      0,
+      -0.5372996083468239
+    ]
+  },
+  "normalAutoplay": true,
+  "reducedMotionStartsPaused": true,
+  "interactions": [
+    "team switch",
+    "all six ships in both teams",
+    "radar quarter turn and loop",
+    "radar pause",
+    "turret yaw",
+    "barrel pitch",
+    "light toggle",
+    "wireframe",
+    "top view",
+    "pointer orbit",
+    "wheel zoom"
+  ],
+  "desktopLayout": {
+    "width": 844,
+    "height": 390,
+    "scrollWidth": 844,
+    "scrollHeight": 390,
+    "controls": [
+      {
+        "text": "שחקן",
+        "x": 106,
+        "y": 16,
+        "w": 78,
+        "h": 32
+      },
+      {
+        "text": "אויב",
+        "x": 21,
+        "y": 16,
+        "w": 78,
+        "h": 32
+      },
+      {
+        "text": "כל הצי",
+        "x": 574.984375,
+        "y": 77,
+        "w": 59.015625,
+        "h": 32
+      },
+      {
+        "text": "מכ״ם מסתובב",
+        "x": 746.234375,
+        "y": 161.59375,
+        "w": 82.765625,
+        "h": 32
+      },
+      {
+        "text": "אורות דולקים",
+        "x": 662,
+        "y": 161.59375,
+        "w": 79.234375,
+        "h": 32
+      },
+      {
+        "text": "yaw",
+        "x": 662,
+        "y": 218.203125,
+        "w": 167,
+        "h": 12
+      },
+      {
+        "text": "pitch",
+        "x": 662,
+        "y": 254.796875,
+        "w": 167,
+        "h": 12
+      },
+      {
+        "text": "מבט על",
+        "x": 748,
+        "y": 275.40625,
+        "w": 81,
+        "h": 32
+      },
+      {
+        "text": "רשת",
+        "x": 662,
+        "y": 275.40625,
+        "w": 81,
+        "h": 32
+      },
+      {
+        "text": "מפרט וקובצי הצי ↓",
+        "x": 662,
+        "y": 316,
+        "w": 167,
+        "h": 16
+      },
+      {
+        "text": "משחתת",
+        "x": 700.84375,
+        "y": 349,
+        "w": 133.15625,
+        "h": 34
+      },
+      {
+        "text": "סיירת",
+        "x": 562.671875,
+        "y": 349,
+        "w": 133.171875,
+        "h": 34
+      },
+      {
+        "text": "נושאת מטוסים קטנה",
+        "x": 424.515625,
+        "y": 349,
+        "w": 133.15625,
+        "h": 34
+      },
+      {
+        "text": "ספינת משא",
+        "x": 286.34375,
+        "y": 349,
+        "w": 133.171875,
+        "h": 34
+      },
+      {
+        "text": "סירה מהירה",
+        "x": 148.171875,
+        "y": 349,
+        "w": 133.171875,
+        "h": 34
+      },
+      {
+        "text": "ספינת בסיס",
+        "x": 10,
+        "y": 349,
+        "w": 133.171875,
+        "h": 34
+      }
+    ]
+  },
+  "mobileLayout": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "controls": [
+      {
+        "text": "שחקן",
+        "x": 76,
+        "y": 16,
+        "w": 60.859375,
+        "h": 32
+      },
+      {
+        "text": "אויב",
+        "x": 12,
+        "y": 16,
+        "w": 60,
+        "h": 32
+      },
+      {
+        "text": "כל הצי",
+        "x": 318.984375,
+        "y": 77,
+        "w": 59.015625,
+        "h": 32
+      },
+      {
+        "text": "מכ״ם מסתובב",
+        "x": 103.75,
+        "y": 615.953125,
+        "w": 84.75,
+        "h": 32
+      },
+      {
+        "text": "אורות דולקים",
+        "x": 14,
+        "y": 615.953125,
+        "w": 84.75,
+        "h": 32
+      },
+      {
+        "text": "yaw",
+        "x": 202.5,
+        "y": 692.1875,
+        "w": 174.5,
+        "h": 12
+      },
+      {
+        "text": "pitch",
+        "x": 14,
+        "y": 692.1875,
+        "w": 174.5,
+        "h": 12
+      },
+      {
+        "text": "מבט על",
+        "x": 103.75,
+        "y": 713.453125,
+        "w": 84.75,
+        "h": 34.546875
+      },
+      {
+        "text": "רשת",
+        "x": 14,
+        "y": 713.453125,
+        "w": 84.75,
+        "h": 34.546875
+      },
+      {
+        "text": "מפרט וקובצי הצי ↓",
+        "x": 202.5,
+        "y": 722.71875,
+        "w": 174.5,
+        "h": 16
+      },
+      {
+        "text": "משחתת",
+        "x": 259,
+        "y": 763,
+        "w": 124,
+        "h": 37.5
+      },
+      {
+        "text": "סיירת",
+        "x": 133,
+        "y": 763,
+        "w": 124,
+        "h": 37.5
+      },
+      {
+        "text": "נושאת מטוסים קטנה",
+        "x": 7,
+        "y": 763,
+        "w": 124,
+        "h": 37.5
+      },
+      {
+        "text": "ספינת משא",
+        "x": 259,
+        "y": 802.5,
+        "w": 124,
+        "h": 37.5
+      },
+      {
+        "text": "סירה מהירה",
+        "x": 133,
+        "y": 802.5,
+        "w": 124,
+        "h": 37.5
+      },
+      {
+        "text": "ספינת בסיס",
+        "x": 7,
+        "y": 802.5,
+        "w": 124,
+        "h": 37.5
+      }
+    ]
+  },
+  "screenshots": [
+    "fleet-player-844x390.png",
+    "destroyer-player-844x390.png",
+    "cruiser-player-844x390.png",
+    "light-carrier-player-844x390.png",
+    "cargo-ship-player-844x390.png",
+    "speedboat-player-844x390.png",
+    "base-ship-player-844x390.png",
+    "destroyer-enemy-844x390.png",
+    "cruiser-enemy-844x390.png",
+    "light-carrier-enemy-844x390.png",
+    "cargo-ship-enemy-844x390.png",
+    "speedboat-enemy-844x390.png",
+    "base-ship-enemy-844x390.png",
+    "fleet-enemy-844x390.png",
+    "cruiser-rig-wire-844x390.png",
+    "cruiser-top-844x390.png",
+    "fleet-player-390x844.png",
+    "light-carrier-player-390x844.png"
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "failedRequests": []
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#183f49">
+<title>ספינות — דור 2</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<header>
+  <div class="heading"><span class="eyebrow">האי · אוסף ימי</span><h1>שישה תפקידים. צי אחד.</h1></div>
+  <div class="teams" role="group" aria-label="צבעי קבוצה">
+    <button id="player" aria-pressed="true"><i class="player"></i>שחקן</button>
+    <button id="enemy" aria-pressed="false"><i class="enemy"></i>אויב</button>
+  </div>
+</header>
+<main>
+  <section class="viewport" aria-label="תצוגת הספינות בתלת ממד">
+    <canvas id="scene" aria-label="גרירה לסיבוב, גלילה לקירוב"></canvas>
+    <div id="status" role="status">טוענים את הצי…</div>
+    <span class="gesture">גרירה לסיבוב · גלילה לקירוב</span>
+    <button id="fleet" class="fleet">כל הצי</button>
+  </section>
+  <aside>
+    <div class="details"><span class="eyebrow" id="subtitle">טורקיז וזהב</span><h2 id="title">כל הצי</h2><p id="details">שש צלליות · סגנון משותף</p></div>
+    <div class="toggles">
+      <button id="radar" aria-pressed="true">מכ״ם מסתובב</button>
+      <button id="lights" aria-pressed="true">אורות דולקים</button>
+    </div>
+    <div class="slider" id="yaw-control"><label for="yaw">כיוון תותח <output id="yaw-value">0°</output></label>
+    <input id="yaw" type="range" min="-150" max="150" value="0" aria-label="כיוון תותח"></div>
+    <div class="slider" id="pitch-control"><label for="pitch">הגבהת קנה <output id="pitch-value">0°</output></label>
+    <input id="pitch" type="range" min="0" max="35" value="0" aria-label="הגבהת קנה"></div>
+    <div class="tools"><button id="top" aria-pressed="false">מבט על</button><button id="wire" aria-pressed="false">רשת</button></div>
+    <a id="download" href="manifest.json" download>קובצי הצי ↓</a>
+  </aside>
+</main>
+<nav id="ships" aria-label="בחירת ספינה"></nav>
+<script type="module" src="preview.js"></script>
+</html>

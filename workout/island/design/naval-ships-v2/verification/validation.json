@@ -1,0 +1,906 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "models": [
+    {
+      "file": "models/destroyer-player.glb",
+      "triangles": 1106,
+      "drawCalls": 9,
+      "bytes": 83020,
+      "sha256": "4a96b276c7d4062c21d3d363c8c83d34192faf8b15fd7f9e553c93059c363644",
+      "boundsMetres": {
+        "min": [
+          -0.78663,
+          -0.323,
+          -3.1465
+        ],
+        "max": [
+          0.78663,
+          2.5,
+          3.1465
+        ],
+        "size": [
+          1.57325,
+          2.823,
+          6.293
+        ]
+      },
+      "minimumTriangleArea": 0.00009385938098992494,
+      "maximumNormalError": 3.6791965474236576e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/destroyer-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.515Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 72256
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 1874,
+          "totalTriangleCount": 1106,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/destroyer-enemy.glb",
+      "triangles": 1106,
+      "drawCalls": 9,
+      "bytes": 83024,
+      "sha256": "8ba383635927d741cac8ada0d0a7967409ba44a52dccc14dac6759d8d5e16385",
+      "boundsMetres": {
+        "min": [
+          -0.78663,
+          -0.323,
+          -3.1465
+        ],
+        "max": [
+          0.78663,
+          2.5,
+          3.1465
+        ],
+        "size": [
+          1.57325,
+          2.823,
+          6.293
+        ]
+      },
+      "minimumTriangleArea": 0.00009385938098992494,
+      "maximumNormalError": 3.6791965474236576e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/destroyer-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.527Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 72256
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 1874,
+          "totalTriangleCount": 1106,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/cruiser-player.glb",
+      "triangles": 1434,
+      "drawCalls": 11,
+      "bytes": 106128,
+      "sha256": "0c4c575d4087ca408ee672bb48c1c228cbd670198f2320cb23365bc678ee6138",
+      "boundsMetres": {
+        "min": [
+          -0.96425,
+          -0.399,
+          -3.70475
+        ],
+        "max": [
+          0.96425,
+          3.02,
+          3.70475
+        ],
+        "size": [
+          1.9285,
+          3.419,
+          7.4095
+        ]
+      },
+      "minimumTriangleArea": 0.00008053786685115354,
+      "maximumNormalError": 3.163665063254939e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/cruiser-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.540Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 92944
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 11,
+          "totalVertexCount": 2394,
+          "totalTriangleCount": 1434,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/cruiser-enemy.glb",
+      "triangles": 1434,
+      "drawCalls": 11,
+      "bytes": 106132,
+      "sha256": "e03d5b8ad527a4e11c38287403f52d25c6559612903bfe16e4c3997378b8dd60",
+      "boundsMetres": {
+        "min": [
+          -0.96425,
+          -0.399,
+          -3.70475
+        ],
+        "max": [
+          0.96425,
+          3.02,
+          3.70475
+        ],
+        "size": [
+          1.9285,
+          3.419,
+          7.4095
+        ]
+      },
+      "minimumTriangleArea": 0.00008053786685115354,
+      "maximumNormalError": 3.163665063254939e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/cruiser-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.551Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 92944
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 11,
+          "totalVertexCount": 2394,
+          "totalTriangleCount": 1434,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/light-carrier-player.glb",
+      "triangles": 1258,
+      "drawCalls": 9,
+      "bytes": 92916,
+      "sha256": "915a522652956552219a3c83d6ceabe8919741b1c6da87b5161181376683e5cc",
+      "boundsMetres": {
+        "min": [
+          -1.425,
+          -0.418,
+          -4.1615
+        ],
+        "max": [
+          1.425,
+          2.87,
+          4.1615
+        ],
+        "size": [
+          2.85,
+          3.288,
+          8.323
+        ]
+      },
+      "minimumTriangleArea": 0.00003261443147001275,
+      "maximumNormalError": 2.853428426874416e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/light-carrier-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.560Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 82096
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2122,
+          "totalTriangleCount": 1258,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/light-carrier-enemy.glb",
+      "triangles": 1258,
+      "drawCalls": 9,
+      "bytes": 92916,
+      "sha256": "cc014cbc56d6ac5096841046fbfe83c60edf76d8aa2117e36476da88d81468cd",
+      "boundsMetres": {
+        "min": [
+          -1.425,
+          -0.418,
+          -4.1615
+        ],
+        "max": [
+          1.425,
+          2.87,
+          4.1615
+        ],
+        "size": [
+          2.85,
+          3.288,
+          8.323
+        ]
+      },
+      "minimumTriangleArea": 0.00003261443147001275,
+      "maximumNormalError": 2.853428426874416e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/light-carrier-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.569Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 82096
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2122,
+          "totalTriangleCount": 1258,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/cargo-ship-player.glb",
+      "triangles": 1322,
+      "drawCalls": 9,
+      "bytes": 97768,
+      "sha256": "f02a405aa82a547f7ca0d064bca47bf901eca0dc0097308f9358453238741a5e",
+      "boundsMetres": {
+        "min": [
+          -1.015,
+          -0.38,
+          -3.451
+        ],
+        "max": [
+          1.015,
+          2.89,
+          3.451
+        ],
+        "size": [
+          2.03,
+          3.27,
+          6.902
+        ]
+      },
+      "minimumTriangleArea": 0.000024970518616260972,
+      "maximumNormalError": 2.9427770442680412e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/cargo-ship-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.578Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 87016
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2248,
+          "totalTriangleCount": 1322,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/cargo-ship-enemy.glb",
+      "triangles": 1322,
+      "drawCalls": 9,
+      "bytes": 97772,
+      "sha256": "f459068e3ac2b458b60c183073ec374f72aec13b765fa2e8f7c6ad0200cbe1fa",
+      "boundsMetres": {
+        "min": [
+          -1.015,
+          -0.38,
+          -3.451
+        ],
+        "max": [
+          1.015,
+          2.89,
+          3.451
+        ],
+        "size": [
+          2.03,
+          3.27,
+          6.902
+        ]
+      },
+      "minimumTriangleArea": 0.000024970518616260972,
+      "maximumNormalError": 2.9427770442680412e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/cargo-ship-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.618Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 87016
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2248,
+          "totalTriangleCount": 1322,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/speedboat-player.glb",
+      "triangles": 1286,
+      "drawCalls": 9,
+      "bytes": 92776,
+      "sha256": "05261c36d76baa22e1a87358d99c3ea2b9154a0c4881f4369cc9c2c3acabedcd",
+      "boundsMetres": {
+        "min": [
+          -0.63437,
+          -0.228,
+          -1.99
+        ],
+        "max": [
+          0.63437,
+          1.62,
+          1.9285
+        ],
+        "size": [
+          1.26875,
+          1.848,
+          3.9185
+        ]
+      },
+      "minimumTriangleArea": 0.000017482632637122464,
+      "maximumNormalError": 4.005070008972211e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/speedboat-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.629Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 81976
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2114,
+          "totalTriangleCount": 1286,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/speedboat-enemy.glb",
+      "triangles": 1286,
+      "drawCalls": 9,
+      "bytes": 92780,
+      "sha256": "050367c7f9b1e532fec246b5666fec697e5659dcb962c7f464a7cab942e7448c",
+      "boundsMetres": {
+        "min": [
+          -0.63437,
+          -0.228,
+          -1.99
+        ],
+        "max": [
+          0.63437,
+          1.62,
+          1.9285
+        ],
+        "size": [
+          1.26875,
+          1.848,
+          3.9185
+        ]
+      },
+      "minimumTriangleArea": 0.000017482632637122464,
+      "maximumNormalError": 4.005070008972211e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/speedboat-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.638Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 81976
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2114,
+          "totalTriangleCount": 1286,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/base-ship-player.glb",
+      "triangles": 1324,
+      "drawCalls": 9,
+      "bytes": 96444,
+      "sha256": "43f4a49646d2483801476706b25ea39c7e799869d01e581bb36c8d2affc4098a",
+      "boundsMetres": {
+        "min": [
+          -1.675,
+          -0.361,
+          -3.5525
+        ],
+        "max": [
+          1.675,
+          2.92,
+          3.5525
+        ],
+        "size": [
+          3.35,
+          3.281,
+          7.105
+        ]
+      },
+      "minimumTriangleArea": 0.00008424002895712768,
+      "maximumNormalError": 3.020103112039152e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/base-ship-player.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.647Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 85732
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2212,
+          "totalTriangleCount": 1324,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    },
+    {
+      "file": "models/base-ship-enemy.glb",
+      "triangles": 1324,
+      "drawCalls": 9,
+      "bytes": 96448,
+      "sha256": "a9c4c90228bf1eca7ca8631cd2c5b1ef0bdc01c7a3445a6765fbda5196236997",
+      "boundsMetres": {
+        "min": [
+          -1.675,
+          -0.361,
+          -3.5525
+        ],
+        "max": [
+          1.675,
+          2.92,
+          3.5525
+        ],
+        "size": [
+          3.35,
+          3.281,
+          7.105
+        ]
+      },
+      "minimumTriangleArea": 0.00008424002895712768,
+      "maximumNormalError": 3.020103112039152e-8,
+      "checks": {
+        "completeScene": true,
+        "budget": true,
+        "rig": true,
+        "teamGeometryMatch": true,
+        "unitNormals": true,
+        "winding": true,
+        "noDegenerates": true,
+        "noExternalResources": true,
+        "radarLoop": true
+      },
+      "khronos": {
+        "uri": "models/base-ship-enemy.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "validatedAt": "2026-11-14T19:09:15.656Z",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 0,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "Bakasun naval-ships-v2 original geometry",
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 85732
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 4,
+          "hasMorphTargets": false,
+          "hasSkins": false,
+          "hasTextures": false,
+          "hasDefaultScene": true,
+          "drawCallCount": 9,
+          "totalVertexCount": 2212,
+          "totalTriangleCount": 1324,
+          "maxUVs": 0,
+          "maxInfluences": 0,
+          "maxAttributes": 3
+        }
+      }
+    }
+  ],
+  "pass": true
+}

@@ -1,0 +1,1082 @@
+{
+  "schemaVersion": 1,
+  "id": "naval-ships-v2",
+  "version": "2.0.0",
+  "createdDate": "2026-11-14",
+  "license": "CC0-1.0",
+  "licenseFile": "LICENSES.md",
+  "report": "REPORT.md",
+  "preview": {
+    "file": "preview.html",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  "coordinates": {
+    "units": "metres",
+    "handedness": "right",
+    "up": "+Y",
+    "forward": "+Z",
+    "right": "+X",
+    "waterlineY": 0,
+    "origin": "midships at the waterline"
+  },
+  "style": {
+    "geometry": "warm low poly, flat normals",
+    "text": false,
+    "brands": false,
+    "references": [
+      {
+        "branch": "codex/torpedo-sub-v1",
+        "commit": "aab3372c088b5bbf67d387ba4655c707b86e5196"
+      },
+      {
+        "branch": "codex/naval-extras-v1",
+        "commit": "bfc24132de75646f42e71512c9ff1fa7a906c6cd"
+      }
+    ]
+  },
+  "palettesSrgb": {
+    "player": {
+      "hull": "258b8a",
+      "shade": "2c6569",
+      "trim": "e9be69",
+      "cream": "fff0cc",
+      "dark": "354c58",
+      "glass": "a4dbdc",
+      "wood": "b97b50",
+      "cargo": "76b1a2"
+    },
+    "enemy": {
+      "hull": "733e54",
+      "shade": "354251",
+      "trim": "dc7758",
+      "cream": "ffe3b0",
+      "dark": "354251",
+      "glass": "a4dbdc",
+      "wood": "815442",
+      "cargo": "b97b50"
+    }
+  },
+  "compression": "none",
+  "requiredExtensions": [],
+  "externalModelResources": false,
+  "triangleBudgetPerSceneInstance": [
+    600,
+    1500
+  ],
+  "ships": [
+    {
+      "id": "destroyer",
+      "labelHe": "משחתת",
+      "lengthMetres": 6.2,
+      "beamMetres": 1.55,
+      "deckY": 0.48,
+      "variants": {
+        "player": "models/destroyer-player.glb",
+        "enemy": "models/destroyer-enemy.glb"
+      }
+    },
+    {
+      "id": "cruiser",
+      "labelHe": "סיירת",
+      "lengthMetres": 7.3,
+      "beamMetres": 1.9,
+      "deckY": 0.58,
+      "variants": {
+        "player": "models/cruiser-player.glb",
+        "enemy": "models/cruiser-enemy.glb"
+      }
+    },
+    {
+      "id": "light-carrier",
+      "labelHe": "נושאת מטוסים קטנה",
+      "lengthMetres": 8.2,
+      "beamMetres": 2.6,
+      "deckY": 0.62,
+      "variants": {
+        "player": "models/light-carrier-player.glb",
+        "enemy": "models/light-carrier-enemy.glb"
+      }
+    },
+    {
+      "id": "cargo-ship",
+      "labelHe": "ספינת משא",
+      "lengthMetres": 6.8,
+      "beamMetres": 2.0,
+      "deckY": 0.55,
+      "variants": {
+        "player": "models/cargo-ship-player.glb",
+        "enemy": "models/cargo-ship-enemy.glb"
+      }
+    },
+    {
+      "id": "speedboat",
+      "labelHe": "סירה מהירה",
+      "lengthMetres": 3.8,
+      "beamMetres": 1.25,
+      "deckY": 0.29,
+      "variants": {
+        "player": "models/speedboat-player.glb",
+        "enemy": "models/speedboat-enemy.glb"
+      }
+    },
+    {
+      "id": "base-ship",
+      "labelHe": "ספינת בסיס",
+      "lengthMetres": 7.0,
+      "beamMetres": 3.4,
+      "deckY": 0.6,
+      "variants": {
+        "player": "models/base-ship-player.glb",
+        "enemy": "models/base-ship-enemy.glb"
+      }
+    }
+  ],
+  "rig": {
+    "turret": {
+      "axis": "+Y",
+      "yawLimitsDegrees": [
+        -150,
+        150
+      ]
+    },
+    "barrel": {
+      "axis": "+X",
+      "pitchLimitsDegrees": [
+        -35,
+        5
+      ]
+    },
+    "muzzle": {
+      "parent": "barrel",
+      "forward": "+Z"
+    },
+    "funnel": {
+      "anchor": "exhaust"
+    },
+    "radar": {
+      "clip": "radar_spin",
+      "axis": "+Y",
+      "periodSeconds": 4
+    },
+    "lights": {
+      "children": [
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light"
+      ],
+      "type": "emissive mesh; no punctual lights; toggle group.visible"
+    },
+    "cruiserAdditionalRig": [
+      "turret_aft",
+      "barrel_aft",
+      "muzzle_aft"
+    ]
+  },
+  "source": {
+    "file": "source/build.py",
+    "requires": [
+      "Python 3",
+      "NumPy"
+    ]
+  },
+  "integration": {
+    "runtimeModified": false,
+    "loader": "standard GLTFLoader, no decoders",
+    "previewDependencies": [
+      "../../vendor/three.module.js",
+      "../../vendor/GLTFLoader.js"
+    ],
+    "offline": "serve the repository over HTTP; all resources are same-origin",
+    "animation": "AnimationMixer.clipAction(radar_spin).play(); update mixer with seconds",
+    "scale": "preserve metre units; ships have deliberately stylized proportions",
+    "poolReset": "stop mixer, restore rest transforms (including aft turret yaw PI) and lights visibility"
+  },
+  "models": [
+    {
+      "id": "destroyer-player",
+      "ship": "destroyer",
+      "team": "player",
+      "file": "models/destroyer-player.glb",
+      "bytes": 83020,
+      "sha256": "4a96b276c7d4062c21d3d363c8c83d34192faf8b15fd7f9e553c93059c363644",
+      "triangles": 1106,
+      "boundsMetres": {
+        "min": [
+          -0.78663,
+          -0.323,
+          -3.1465
+        ],
+        "max": [
+          0.78663,
+          2.5,
+          3.1465
+        ],
+        "size": [
+          1.57325,
+          2.823,
+          6.293
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.48,
+          1.65
+        ],
+        "funnel": [
+          0,
+          0.48,
+          -1.25
+        ],
+        "radar": [
+          0,
+          2.1799999999999997,
+          -0.15
+        ],
+        "lights": [
+          0,
+          0.48,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "destroyer",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "destroyer-enemy",
+      "ship": "destroyer",
+      "team": "enemy",
+      "file": "models/destroyer-enemy.glb",
+      "bytes": 83024,
+      "sha256": "8ba383635927d741cac8ada0d0a7967409ba44a52dccc14dac6759d8d5e16385",
+      "triangles": 1106,
+      "boundsMetres": {
+        "min": [
+          -0.78663,
+          -0.323,
+          -3.1465
+        ],
+        "max": [
+          0.78663,
+          2.5,
+          3.1465
+        ],
+        "size": [
+          1.57325,
+          2.823,
+          6.293
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.48,
+          1.65
+        ],
+        "funnel": [
+          0,
+          0.48,
+          -1.25
+        ],
+        "radar": [
+          0,
+          2.1799999999999997,
+          -0.15
+        ],
+        "lights": [
+          0,
+          0.48,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "destroyer",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "cruiser-player",
+      "ship": "cruiser",
+      "team": "player",
+      "file": "models/cruiser-player.glb",
+      "bytes": 106128,
+      "sha256": "0c4c575d4087ca408ee672bb48c1c228cbd670198f2320cb23365bc678ee6138",
+      "triangles": 1434,
+      "boundsMetres": {
+        "min": [
+          -0.96425,
+          -0.399,
+          -3.70475
+        ],
+        "max": [
+          0.96425,
+          3.02,
+          3.70475
+        ],
+        "size": [
+          1.9285,
+          3.419,
+          7.4095
+        ]
+      },
+      "drawCalls": 11,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.58,
+          2.18
+        ],
+        "funnel": [
+          0,
+          0.8799999999999999,
+          -0.94
+        ],
+        "radar": [
+          0,
+          2.7,
+          -0.12
+        ],
+        "lights": [
+          0,
+          0.58,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "cruiser",
+        "turret",
+        "barrel",
+        "muzzle",
+        "turret_aft",
+        "barrel_aft",
+        "muzzle_aft",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "cruiser-enemy",
+      "ship": "cruiser",
+      "team": "enemy",
+      "file": "models/cruiser-enemy.glb",
+      "bytes": 106132,
+      "sha256": "e03d5b8ad527a4e11c38287403f52d25c6559612903bfe16e4c3997378b8dd60",
+      "triangles": 1434,
+      "boundsMetres": {
+        "min": [
+          -0.96425,
+          -0.399,
+          -3.70475
+        ],
+        "max": [
+          0.96425,
+          3.02,
+          3.70475
+        ],
+        "size": [
+          1.9285,
+          3.419,
+          7.4095
+        ]
+      },
+      "drawCalls": 11,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.58,
+          2.18
+        ],
+        "funnel": [
+          0,
+          0.8799999999999999,
+          -0.94
+        ],
+        "radar": [
+          0,
+          2.7,
+          -0.12
+        ],
+        "lights": [
+          0,
+          0.58,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "cruiser",
+        "turret",
+        "barrel",
+        "muzzle",
+        "turret_aft",
+        "barrel_aft",
+        "muzzle_aft",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "light-carrier-player",
+      "ship": "light-carrier",
+      "team": "player",
+      "file": "models/light-carrier-player.glb",
+      "bytes": 92916,
+      "sha256": "915a522652956552219a3c83d6ceabe8919741b1c6da87b5161181376683e5cc",
+      "triangles": 1258,
+      "boundsMetres": {
+        "min": [
+          -1.425,
+          -0.418,
+          -4.1615
+        ],
+        "max": [
+          1.425,
+          2.87,
+          4.1615
+        ],
+        "size": [
+          2.85,
+          3.288,
+          8.323
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          -1.1,
+          0.8200000000000001,
+          2.65
+        ],
+        "funnel": [
+          0.9,
+          0.8200000000000001,
+          -1.9
+        ],
+        "radar": [
+          0.88,
+          2.55,
+          -0.8
+        ],
+        "lights": [
+          0,
+          0.62,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "light-carrier",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "light-carrier-enemy",
+      "ship": "light-carrier",
+      "team": "enemy",
+      "file": "models/light-carrier-enemy.glb",
+      "bytes": 92916,
+      "sha256": "cc014cbc56d6ac5096841046fbfe83c60edf76d8aa2117e36476da88d81468cd",
+      "triangles": 1258,
+      "boundsMetres": {
+        "min": [
+          -1.425,
+          -0.418,
+          -4.1615
+        ],
+        "max": [
+          1.425,
+          2.87,
+          4.1615
+        ],
+        "size": [
+          2.85,
+          3.288,
+          8.323
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          -1.1,
+          0.8200000000000001,
+          2.65
+        ],
+        "funnel": [
+          0.9,
+          0.8200000000000001,
+          -1.9
+        ],
+        "radar": [
+          0.88,
+          2.55,
+          -0.8
+        ],
+        "lights": [
+          0,
+          0.62,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "light-carrier",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "cargo-ship-player",
+      "ship": "cargo-ship",
+      "team": "player",
+      "file": "models/cargo-ship-player.glb",
+      "bytes": 97768,
+      "sha256": "f02a405aa82a547f7ca0d064bca47bf901eca0dc0097308f9358453238741a5e",
+      "triangles": 1322,
+      "boundsMetres": {
+        "min": [
+          -1.015,
+          -0.38,
+          -3.451
+        ],
+        "max": [
+          1.015,
+          2.89,
+          3.451
+        ],
+        "size": [
+          2.03,
+          3.27,
+          6.902
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.55,
+          2.6
+        ],
+        "funnel": [
+          0.53,
+          0.8,
+          -2.82
+        ],
+        "radar": [
+          0,
+          2.5700000000000003,
+          -2.02
+        ],
+        "lights": [
+          0,
+          0.55,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "cargo-ship",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "cargo-ship-enemy",
+      "ship": "cargo-ship",
+      "team": "enemy",
+      "file": "models/cargo-ship-enemy.glb",
+      "bytes": 97772,
+      "sha256": "f459068e3ac2b458b60c183073ec374f72aec13b765fa2e8f7c6ad0200cbe1fa",
+      "triangles": 1322,
+      "boundsMetres": {
+        "min": [
+          -1.015,
+          -0.38,
+          -3.451
+        ],
+        "max": [
+          1.015,
+          2.89,
+          3.451
+        ],
+        "size": [
+          2.03,
+          3.27,
+          6.902
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.55,
+          2.6
+        ],
+        "funnel": [
+          0.53,
+          0.8,
+          -2.82
+        ],
+        "radar": [
+          0,
+          2.5700000000000003,
+          -2.02
+        ],
+        "lights": [
+          0,
+          0.55,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "cargo-ship",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "speedboat-player",
+      "ship": "speedboat",
+      "team": "player",
+      "file": "models/speedboat-player.glb",
+      "bytes": 92776,
+      "sha256": "05261c36d76baa22e1a87358d99c3ea2b9154a0c4881f4369cc9c2c3acabedcd",
+      "triangles": 1286,
+      "boundsMetres": {
+        "min": [
+          -0.63437,
+          -0.228,
+          -1.99
+        ],
+        "max": [
+          0.63437,
+          1.62,
+          1.9285
+        ],
+        "size": [
+          1.26875,
+          1.848,
+          3.9185
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.29,
+          1.12
+        ],
+        "funnel": [
+          0,
+          0.29,
+          -1.32
+        ],
+        "radar": [
+          0,
+          1.3,
+          -0.24
+        ],
+        "lights": [
+          0,
+          0.29,
+          0.45
+        ]
+      },
+      "nodes": [
+        "speedboat",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "speedboat-enemy",
+      "ship": "speedboat",
+      "team": "enemy",
+      "file": "models/speedboat-enemy.glb",
+      "bytes": 92780,
+      "sha256": "050367c7f9b1e532fec246b5666fec697e5659dcb962c7f464a7cab942e7448c",
+      "triangles": 1286,
+      "boundsMetres": {
+        "min": [
+          -0.63437,
+          -0.228,
+          -1.99
+        ],
+        "max": [
+          0.63437,
+          1.62,
+          1.9285
+        ],
+        "size": [
+          1.26875,
+          1.848,
+          3.9185
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.29,
+          1.12
+        ],
+        "funnel": [
+          0,
+          0.29,
+          -1.32
+        ],
+        "radar": [
+          0,
+          1.3,
+          -0.24
+        ],
+        "lights": [
+          0,
+          0.29,
+          0.45
+        ]
+      },
+      "nodes": [
+        "speedboat",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "base-ship-player",
+      "ship": "base-ship",
+      "team": "player",
+      "file": "models/base-ship-player.glb",
+      "bytes": 96444,
+      "sha256": "43f4a49646d2483801476706b25ea39c7e799869d01e581bb36c8d2affc4098a",
+      "triangles": 1324,
+      "boundsMetres": {
+        "min": [
+          -1.675,
+          -0.361,
+          -3.5525
+        ],
+        "max": [
+          1.675,
+          2.92,
+          3.5525
+        ],
+        "size": [
+          3.35,
+          3.281,
+          7.105
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.8,
+          2.35
+        ],
+        "funnel": [
+          0.95,
+          0.6,
+          -1.2
+        ],
+        "radar": [
+          0,
+          2.6,
+          -1.3
+        ],
+        "lights": [
+          0,
+          0.6,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "base-ship",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    },
+    {
+      "id": "base-ship-enemy",
+      "ship": "base-ship",
+      "team": "enemy",
+      "file": "models/base-ship-enemy.glb",
+      "bytes": 96448,
+      "sha256": "a9c4c90228bf1eca7ca8631cd2c5b1ef0bdc01c7a3445a6765fbda5196236997",
+      "triangles": 1324,
+      "boundsMetres": {
+        "min": [
+          -1.675,
+          -0.361,
+          -3.5525
+        ],
+        "max": [
+          1.675,
+          2.92,
+          3.5525
+        ],
+        "size": [
+          3.35,
+          3.281,
+          7.105
+        ]
+      },
+      "drawCalls": 9,
+      "pivotsMetres": {
+        "turret": [
+          0,
+          0.8,
+          2.35
+        ],
+        "funnel": [
+          0.95,
+          0.6,
+          -1.2
+        ],
+        "radar": [
+          0,
+          2.6,
+          -1.3
+        ],
+        "lights": [
+          0,
+          0.6,
+          -0.2
+        ]
+      },
+      "nodes": [
+        "base-ship",
+        "turret",
+        "barrel",
+        "muzzle",
+        "funnel",
+        "exhaust",
+        "radar",
+        "hull",
+        "lights",
+        "port_light",
+        "starboard_light",
+        "mast_light",
+        "stern_light",
+        "bow",
+        "wake"
+      ],
+      "animation": {
+        "name": "radar_spin",
+        "node": "radar",
+        "axis": "+Y",
+        "durationSeconds": 4,
+        "loop": true
+      }
+    }
+  ]
+}

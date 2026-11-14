@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "command": "ISLAND_PLAYWRIGHT=<temporary system Chromium adapter> npm test",
+  "exitCode": 0,
+  "summary": {
+    "tests": 4200,
+    "suites": 0,
+    "pass": 4136,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 193088.866704
+  },
+  "environmentAdjustment": {
+    "reason": "The default Playwright Chromium executable is absent in this environment.",
+    "systemChromium": "/usr/bin/chromium",
+    "adapterSource": "import {chromium as installed} from '/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs';\nexport const chromium=new Proxy(installed,{get(target,key){\n  if(key==='launch')return options=>target.launch({...options,executablePath:options?.executablePath||'/usr/bin/chromium'});\n  const value=Reflect.get(target,key);return typeof value==='function'?value.bind(target):value;\n}});\n",
+    "existingRepositoryFilesModified": false
+  },
+  "scope": {
+    "onlyAddedFilesUnder": "workout/island/design/naval-ships-v2/",
+    "existingFilesModified": 0,
+    "existingFilesDeleted": 0
+  }
+}

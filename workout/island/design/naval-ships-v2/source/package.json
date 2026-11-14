@@ -1,0 +1,10 @@
+{
+  "name": "bakasun-naval-ships-v2-tools",
+  "private": true,
+  "type": "module",
+  "scripts": { "validate": "node validate.mjs", "check-preview": "node check-preview.mjs" },
+  "devDependencies": {
+    "gltf-validator": "2.0.0-dev.3.10",
+    "playwright": "1.62.1"
+  }
+}
