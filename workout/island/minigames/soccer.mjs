@@ -470,7 +470,7 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
   /** v24.1: the header contact the armed header of the child's player uses (canHead with the team-mate cross values). */
   function airHeader(){const a=crossConfig.aerial;return {min:a.minHeight,max:a.maxHeight,reach:Math.min(a.reach,Math.max(0,crossConfig.assistance?.contact?.headReach??1.2))};}
   /** v24.1: arm a volley, a header or a scissor kick for the high ball on its way (kept until it arrives, like the v23 header press). */
-  function armAir(kind,options){s.headerArm={player:s.controlled,until:s.elapsed+Math.min(SOCCER_AIR_V241.armSeconds,options.arrival.t+.35),at:s.elapsed,kind};event('header-armed',{player:s.controlled,team:0,t:options.arrival.t,kind});}
+  function armAir(kind,options){const meet=options.meets?.[kind]||options.arrival;s.headerArm={player:s.controlled,until:s.elapsed+Math.min(SOCCER_AIR_V241.armSeconds,meet.t+.35),at:s.elapsed,kind};event('header-armed',{player:s.controlled,team:0,t:meet.t,kind});}
   /** v24.1: the volley / backward scissor strike: a shot at goal from the air (the scissor kicker has his back to goal and lies on it for
    * SOCCER_AIR_V241.scissor.recover afterwards). The ball is aimed to cross the goal line at a catchable height, like a header. */
   function airKick(p,kind){

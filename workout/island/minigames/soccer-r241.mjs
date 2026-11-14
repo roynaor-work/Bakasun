@@ -208,7 +208,7 @@ export function soccerV241DiveClip(left,ballHeight,has){
  * authored contact (the simulation has just struck), `follow` = the part after the contact a player who sets off again keeps. */
 export const SOCCER_V241_AIR_CLIPS=Object.freeze({
   volley:Object.freeze({right:'v241_volley_right',left:'v241_volley_left',lead:.14,follow:.38,rate:1.15}),
-  scissor:Object.freeze({clip:'v241_scissor',lead:.22,rate:1.35}),
+  scissor:Object.freeze({clip:'v241_scissor',lead:.22,rate:1.2}),
 });
 /** Kicks and passes (Codex soccer-kicks-v2): the clip for the simulation's event, read from the state at the strike (presentation only).
  * Shots: a hard one (power >= powerShot) lands on the kicking foot, a shot on the run keeps running; otherwise the angle to goal picks the
@@ -254,8 +254,39 @@ export const SOCCER_V241_EXPECTED=Object.freeze({
   tackle:Object.freeze(['slide','stumble','fall_foul','keeper_dive_low_left','keeper_dive_low_right','keeper_dive_mid_left','keeper_dive_mid_right','keeper_dive_high_left','keeper_dive_high_right']),
   aerial:Object.freeze(['volley_right','volley_left','scissor']),
   kicks:Object.freeze(['power_landing','inside_curve','outside_kick','placed_kick','weak_foot','chip','running_kick','short_inside_pass','long_pass','through_pass','lift_pass','wing_cross']),
-  loco:Object.freeze(['idle_relaxed','idle_weight_shift','idle_scan','walk','strafe_left','strafe_right','run_backward']),
+  loco:Object.freeze(['idle_relaxed','idle_weight_shift','idle_scan','walk']),
 });
+
+// ---- 4b. the referee (Codex soccer-referee-v1, QA 93.7-100: idle, jog, whistle, point_penalty, advantage, yellow_card, goal_signal) ------
+/** `?soccerReferee=0` = no referee on the pitch (v24). Full match only. The referee keeps the diagonal: `behind` metres behind the ball
+ * (the attack's way), `far` metres on the far side from the broadcast camera so he never stands between the camera and play, inside the
+ * pitch by `inset`; he jogs at most `maxSpeed` (the pack's jog is authored at `jogSpeed`; played up to `maxRate` times) and stops for a call.
+ * A call: a foul = the whistle (a late or rear slide = the yellow card), a penalty = he points to the spot, an advantage = both arms
+ * forward, a goal = the goal signal; each held `hold` seconds facing where it happened. */
+export const soccerRefereeEnabled=search=>view('soccerReferee',search);
+export const SOCCER_REFEREE=Object.freeze({height:1.8,behind:9,far:12,inset:2.5,maxSpeed:2.6,accel:3.5,jogSpeed:1,maxRate:2.6,arrive:1.2,fade:.25,
+  hold:Object.freeze({whistle:2.2,yellow_card:3.4,point_penalty:2.8,advantage:2.4,goal_signal:2.8})});
+export const soccerRefereeUrl=()=>soccerV241Url('referee/referee.glb');
+/** Where the referee wants to be: behind the ball and on the far side of play from the camera (camera z = ball z + attackDir * distance). */
+export function soccerRefereeTarget(ball,attackDir,pitch,R=SOCCER_REFEREE){
+  const hx=pitch.length/2-R.inset,hz=pitch.width/2-R.inset,lead=Math.sign(finite(ball.vx))||attackDir||1;
+  return {x:clamp(finite(ball.x)-lead*R.behind,-hx,hx),z:clamp(finite(ball.z)-(attackDir||1)*R.far,-hz,hz)};
+}
+/** One step of the referee toward `target`: capped acceleration and speed, no move while a call is held. Returns the new {x, z, vx, vz}. */
+export function soccerRefereeStep(ref,target,dt,{hold=false}={},R=SOCCER_REFEREE){
+  if(!(dt>0))return {...ref};
+  const dx=target.x-ref.x,dz=target.z-ref.z,dist=Math.hypot(dx,dz),want=hold||dist<R.arrive?0:Math.min(R.maxSpeed,dist*1.2);
+  const wx=dist>1e-6?dx/dist*want:0,wz=dist>1e-6?dz/dist*want:0,ax=wx-ref.vx,az=wz-ref.vz,a=Math.hypot(ax,az),cap=R.accel*dt,k=a>cap?cap/a:1;
+  const vx=ref.vx+ax*k,vz=ref.vz+az*k;return {x:ref.x+vx*dt,z:ref.z+vz*dt,vx,vz};
+}
+/** The gesture for a match event (null: none). */
+export function soccerRefereeCall(event){
+  if(!event)return null;
+  if(event.type==='foul')return event.penalty?'point_penalty':event.kind==='slide'&&(event.late||event.behind)?'yellow_card':'whistle';
+  if(event.type==='advantage')return 'advantage';
+  if(event.type==='goal')return 'goal_signal';
+  return null;
+}
 
 // ---- 5. whistles (Codex soccer-whistle-crowd-v1) -------------------------------------------------------------------------------------
 /** The referee's whistle for each call. The files are -23 LUFS like the shipped soccer bank; played at the shipped whistle's gain. A standing

@@ -243,6 +243,20 @@ test('locomotion-v2: the standing and walking arms hang closer to the body than 
   assert.ok(Math.abs(loco.walk.speedMps-1)<.06,'authored at the 1 m/s of the rung it replaces');assert.equal(SOCCER_V241_WALK,'v241_walk');assert.equal(SOCCER_V241_IDLES.length,3);
 });
 
+test('referee: on the diagonal behind the ball and on the far side from the camera, inside the pitch, stops for the call that fits',async()=>{
+  const R=await import('../workout/island/minigames/soccer-r241.mjs'),pitch={length:105,width:68};
+  withLocation('',()=>assert.equal(R.soccerRefereeEnabled(),true));withLocation('?soccerReferee=0',()=>assert.equal(R.soccerRefereeEnabled(),false));withLocation('?soccerV241=0',()=>assert.equal(R.soccerRefereeEnabled(),false));
+  const t=R.soccerRefereeTarget({x:20,z:0,vx:5},1,pitch);assert.ok(t.x<20&&t.z<0,'behind the attack, away from the camera (camera at +z when attackDir = 1)');
+  const edge=R.soccerRefereeTarget({x:52,z:-33,vx:-1},-1,pitch);assert.ok(Math.abs(edge.x)<=52.5-R.SOCCER_REFEREE.inset&&Math.abs(edge.z)<=34-R.SOCCER_REFEREE.inset);
+  let ref={x:0,z:0,vx:0,vz:0};for(let i=0;i<600;i++)ref=R.soccerRefereeStep(ref,{x:30,z:0},1/60);assert.ok(Math.hypot(ref.vx,ref.vz)<=R.SOCCER_REFEREE.maxSpeed+1e-9&&ref.x>15,'he jogs there at most at his pace');
+  const held=R.soccerRefereeStep({x:0,z:0,vx:0,vz:0},{x:30,z:0},1/60,{hold:true});assert.equal(held.x,0,'no step during a call');
+  assert.equal(R.soccerRefereeCall({type:'foul',kind:'steal'}),'whistle');assert.equal(R.soccerRefereeCall({type:'foul',kind:'slide',behind:true}),'yellow_card');assert.equal(R.soccerRefereeCall({type:'foul',penalty:true}),'point_penalty');
+  assert.equal(R.soccerRefereeCall({type:'advantage'}),'advantage');assert.equal(R.soccerRefereeCall({type:'goal'}),'goal_signal');assert.equal(R.soccerRefereeCall({type:'pass'}),null);
+  const glb=readFileSync(asset('referee/referee.glb'));assert.equal(glb.subarray(0,4).toString(),'glTF');
+  const view=readFileSync(new URL('../workout/island/minigames/soccer-view.mjs',import.meta.url),'utf8');
+  assert.ok(view.includes("refereeStatus=config.full&&soccerRefereeEnabled()?'loading':'off'"),'full match only, behind its switch');assert.ok(view.includes('referee?.noteEvent(event)')&&view.includes('referee?.update(s,dt)')&&view.includes('referee?.dispose()'));
+});
+
 test('whistles: the referee blows a short blast for a standing-tackle foul, a sharp one for a slide or a penalty, two and three at half and full time',()=>{
   assert.equal(soccerWhistleCue('foul',{kind:'steal'}),'v241/whistle-short');assert.equal(soccerWhistleCue('foul',{kind:'slide'}),'v241/whistle-foul');assert.equal(soccerWhistleCue('foul',{kind:'steal',penalty:true}),'v241/whistle-foul');
   assert.equal(soccerWhistleCue('halftime'),'v241/whistle-halftime');assert.equal(soccerWhistleCue('fulltime'),'v241/whistle-fulltime');assert.equal(soccerWhistleCue('kickoff'),'v241/whistle-kickoff');assert.equal(soccerWhistleCue('advantage'),null,'advantage: arms, no whistle');

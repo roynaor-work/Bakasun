@@ -17,7 +17,7 @@ import {fileURLToPath} from 'node:url';
 import {SOCCER_V241_EXPECTED,SOCCER_WHISTLE_V1} from '../minigames/soccer-r241.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url)),args=process.argv.slice(2);
 const design=path.resolve(args.includes('--design')?args[args.indexOf('--design')+1]:path.join(here,'../design')),out=path.join(here,'../assets/soccer-v241');
-const COMMITS={'soccer-locomotion-v2':'ec6c73949fb5820826b4c082972f5d4f1136641f','soccer-tackle-keeper-v2':'1bd4ccb5d53a8ff21bb03930ad3b26e7c4815e17','soccer-volley-scissor-v1':'8277a659f43315036eed250bda2f53f44f8613bb','soccer-kicks-v2':'d4a27a94dd63127dd9f38fc641db414bd09bac35','soccer-whistle-crowd-v1':'9478aa43b018d9aa2690a0f493006a3e52216af1'};
+const COMMITS={'soccer-referee-v1':'ac6b6a47d02c24c60e80adb5660b27ced92255b1','soccer-locomotion-v2':'ec6c73949fb5820826b4c082972f5d4f1136641f','soccer-tackle-keeper-v2':'1bd4ccb5d53a8ff21bb03930ad3b26e7c4815e17','soccer-volley-scissor-v1':'8277a659f43315036eed250bda2f53f44f8613bb','soccer-kicks-v2':'d4a27a94dd63127dd9f38fc641db414bd09bac35','soccer-whistle-crowd-v1':'9478aa43b018d9aa2690a0f493006a3e52216af1'};
 const round=(v,n=5)=>Math.round(v*10**n)/10**n,REST_HIPS=[0,.86,0],FPS=30;
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
 const ang=(a,b)=>2*Math.acos(Math.min(1,Math.abs(a[0]*b[0]+a[1]*b[1]+a[2]*b[2]+a[3]*b[3])))*180/Math.PI;
@@ -26,7 +26,7 @@ async function readPack(pack,relative){const file=path.join(design,pack,relative
 const eventTime=e=>e.timeSeconds??e.atSeconds??e.time??(e.frame??0)/FPS;
 const durationOf=c=>c.durationSeconds??c.duration;
 /** One clip or several joined at matching poses (the packs' `next` chain): absolute times, events and the first contact. */
-function join(parts,{id,category,from=0}){
+function join(parts,{id,category,from=0,stride=1}){
   const frames=[],events=[];let offset=0,contact=null;
   for(let k=0;k<parts.length;k++){
     const part=parts[k],d=durationOf(part);
@@ -38,6 +38,8 @@ function join(parts,{id,category,from=0}){
   }
   // `from`: the lead-in the game never shows (it enters a kick just before its contact) is dropped; times start at 0 again.
   if(from>0){const kept=frames.filter(f=>f.time>=from-1e-6);for(const f of kept)f.time-=from;frames.length=0;frames.push(...kept);for(const e of events)e.timeSeconds=round(e.timeSeconds-from,4);events.splice(0,events.length,...events.filter(e=>e.timeSeconds>=0));if(contact)contact.time-=from;offset-=from;}
+  // `stride`: a slow loop (the idles turn 1.6 degrees a key at 30 Hz) keeps every n-th key and its last one; the mixer slerps between them
+  if(stride>1){const kept=frames.filter((f,i)=>i%stride===0||i===frames.length-1);frames.length=0;frames.push(...kept);}
   if(frames.length<10)throw Error(id+': too few frames');
   const bones=Object.keys(frames[0].rotations);if(bones.length!==18)throw Error(id+': expected 18 bones, got '+bones.length);
   const duration=round(offset,4),keyframes=frames.map(f=>({time:round(f.time/duration),rotations:Object.fromEntries(bones.map(b=>[b,f.rotations[b].map(v=>round(v,4))])),hipsOffsetMeters:f.hips.map((v,k)=>round(v-REST_HIPS[k],4))}));
@@ -61,10 +63,11 @@ const states={tackle:{},aerial:{},kicks:{},loco:{}};
  states.aerial.volley_right=join([by('volley_right')],{id:'volley_right',category:'aerial'});
  states.aerial.volley_left=join([by('volley_left')],{id:'volley_left',category:'aerial'});
  states.aerial.scissor=join([by('scissor_backward'),by('scissor_land_getup')],{id:'scissor',category:'aerial'});}
-// ---- locomotion-v2 (only the clips authored near the game's own speeds: the three idles, the walk, the side steps and the run backwards;
+// ---- locomotion-v2 (only the clips the game plays: the three idles and the walk, authored at the game's own 1 m/s; the side steps and the run
+// backwards have no simulation state (the body always faces where it runs); 
 // its jog, run and sprint are cycles of 1.65 / 2.2 / 3.2 m/s where the game runs 2.6 / 4.5 / 7.2+ m/s) ----
 {const m=JSON.parse(await readPack('soccer-locomotion-v2','runtime/motions.json'));await readPack('soccer-locomotion-v2','runtime/catalog.json');
- for(const id of SOCCER_V241_EXPECTED.loco){const c=m.clips.find(x=>x.id===id);if(!c)throw Error('locomotion-v2 lacks '+id);const st=join([c],{id,category:c.category||'locomotion'});st.loop=Boolean(c.loop);st.speedMps=c.speedMps??0;st.group=c.loop?'locomotion':'action';states.loco[id]=st;}}
+ for(const id of SOCCER_V241_EXPECTED.loco){const c=m.clips.find(x=>x.id===id);if(!c)throw Error('locomotion-v2 lacks '+id);const st=join([c],{id,category:c.category||'locomotion',stride:/^idle/.test(id)?2:1});st.loop=Boolean(c.loop);st.speedMps=c.speedMps??0;st.group=c.loop?'locomotion':'action';states.loco[id]=st;}}
 // ---- kicks-v2 ----
 {const m=JSON.parse(await readPack('soccer-kicks-v2','runtime/motions.json'));await readPack('soccer-kicks-v2','runtime/catalog.json');
  for(const id of SOCCER_V241_EXPECTED.kicks){const c=m.clips.find(x=>x.id===id);if(!c)throw Error('kicks-v2 lacks '+id);const contact=(c.events||[]).find(e=>(e.type??e.event)==='contact');
@@ -76,8 +79,10 @@ const sources={loco:'design/soccer-locomotion-v2 (Codex, CC0)',tackle:'design/so
 for(const [file,s] of Object.entries(states))await writeFile(path.join(out,'clips',file+'.json'),JSON.stringify({schemaVersion:1,source:sources[file]+', joined at matching poses where the pack chains a recovery',fps:FPS,states:s}));
 // ---- whistles ----
 for(const {file} of Object.values(SOCCER_WHISTLE_V1)){await readPack('soccer-whistle-crowd-v1',file);await copyFile(path.join(design,'soccer-whistle-crowd-v1',file),path.join(out,'audio',file));}
+// ---- referee (soccer-referee-v1: the main referee's GLB with its eight clips, 1,227 triangles; the assistants are not shipped) ----
+await mkdir(path.join(out,'referee'),{recursive:true});await readPack('soccer-referee-v1','models/referee.glb');await copyFile(path.join(design,'soccer-referee-v1','models/referee.glb'),path.join(out,'referee','referee.glb'));
 // ---- licences ----
-const licences=[];for(const [pack,name] of [['soccer-locomotion-v2','LICENSES.md'],['soccer-tackle-keeper-v2','LICENSES.md'],['soccer-volley-scissor-v1','LICENSES.md'],['soccer-kicks-v2','LICENSES.md'],['soccer-whistle-crowd-v1','LICENSE.txt']])licences.push(`## ${pack} (codex/${pack} ${COMMITS[pack]})\n\n`+(await readPack(pack,name)).toString('utf8').trim());
+const licences=[];for(const [pack,name] of [['soccer-referee-v1','LICENSES.md'],['soccer-locomotion-v2','LICENSES.md'],['soccer-tackle-keeper-v2','LICENSES.md'],['soccer-volley-scissor-v1','LICENSES.md'],['soccer-kicks-v2','LICENSES.md'],['soccer-whistle-crowd-v1','LICENSE.txt']])licences.push(`## ${pack} (codex/${pack} ${COMMITS[pack]})\n\n`+(await readPack(pack,name)).toString('utf8').trim());
 await writeFile(path.join(out,'LICENSES.md'),`# soccer v24.1 runtime copies\n\nConverted from the Codex packs below by tools/soccer-v241-clips.mjs (keyframes only; no mesh, texture or GLB is shipped). Each pack's own licence follows.\n\n${licences.join('\n\n')}\n`);
 await writeFile(path.join(out,'provenance.json'),JSON.stringify({tool:'workout/island/tools/soccer-v241-clips.mjs',inputs:provenance},null,1));
 for(const [file,s] of Object.entries(states))for(const [id,st] of Object.entries(s))console.log(file.padEnd(7),id.padEnd(22),String(st.durationSeconds).padEnd(6)+'s',String(st.keyframes.length).padEnd(4)+'k',String(st.maxKeyDeg).padEnd(6)+'deg/key',st.events.map(e=>e.name.slice(7)+'@'+e.timeSeconds).join(' '));
