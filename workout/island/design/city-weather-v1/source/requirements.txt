@@ -1,0 +1,4 @@
+Pillow==12.3.0
+numpy==2.3.5
+# Only for capture_city.py and check_preview.py; not needed by build.py.
+playwright>=1.55,<2

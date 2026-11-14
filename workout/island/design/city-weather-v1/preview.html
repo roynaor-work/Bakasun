@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>העיר שלי · מזג אוויר וחגיגות</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script defer src="preview-data.js"></script>
+  <script defer src="preview.js"></script>
+</head>
+<body>
+  <main id="viewport" aria-label="תצוגת מזג אוויר לעיר שלי">
+    <div id="stage">
+      <canvas id="scene" width="844" height="390" aria-label="העיר הקיימת עם שכבות מזג אוויר וחגיגות"></canvas>
+      <header class="heading">
+        <span class="eyebrow">העיר שלי <span class="divider">/</span> אוסף אטמוספירה 01</span>
+        <h1 id="scene-title">שעה של זהב</h1>
+        <p id="scene-description">אור חם, עננים רכים ועיר שנושמת.</p>
+      </header>
+      <div class="actions">
+        <button id="pause" type="button" aria-pressed="false" title="השהיית האנימציה">השהיה</button>
+        <button id="customize" type="button" aria-expanded="false" aria-controls="settings">התאמה</button>
+      </div>
+      <span class="edition">CITY WEATHER <b>V.01</b></span>
+      <aside id="settings" hidden aria-label="התאמת האפקטים">
+        <div class="panel-heading"><b>פרטים קטנים</b><button id="close-settings" type="button" aria-label="סגירת ההתאמה">×</button></div>
+        <label>עוצמת הגשם<select id="rain-intensity"><option value="light">קל</option><option value="medium" selected>בינוני</option><option value="heavy">כבד</option></select></label>
+        <label>זיקוקים<select id="firework"><option value="peony-gold">אדמונית זהובה</option><option value="chrysanthemum-coral">חרצית קורל</option><option value="ring-teal">טבעת טורקיז</option><option value="willow-gold">ערבה זהובה</option><option value="heart-coral">לב קורל</option></select></label>
+        <div class="toggles"><label><input id="clouds" type="checkbox" checked>עננים</label><label><input id="birds" type="checkbox" checked>ציפורים</label><label><input id="butterflies" type="checkbox" checked>פרפרים</label><label><input id="balloons" type="checkbox">בלונים</label><label><input id="confetti" type="checkbox">קונפטי</label></div>
+        <label>צבע החגיגה<select id="celebration-color"><option value="all">שלושת הצבעים</option><option value="coral">קורל</option><option value="gold">זהב</option><option value="teal">טורקיז</option></select></label>
+        <button id="burst" type="button">שיגור זיקוק</button>
+      </aside>
+      <div id="load-status" role="status">טוען את השמים…</div>
+      <footer class="dock">
+        <div class="dock-intro"><b>האווירה בעיר</b><span>רגע קטן, עולם אחר</span></div>
+        <nav aria-label="בחירת מזג אוויר">
+          <button data-scene="clear" type="button" aria-pressed="false"><i class="icon sun"></i><span>יום בהיר</span></button>
+          <button data-scene="rain" type="button" aria-pressed="false"><i class="icon rain"></i><span>גשם</span></button>
+          <button data-scene="snow" type="button" aria-pressed="false"><i class="icon snow"></i><span>שלג</span></button>
+          <button data-scene="fog" type="button" aria-pressed="false"><i class="icon fog"></i><span>ערפל</span></button>
+          <button data-scene="sunset" type="button" aria-pressed="true"><i class="icon sunset"></i><span>שקיעה</span></button>
+          <button data-scene="night" type="button" aria-pressed="false"><i class="icon night"></i><span>ליל כוכבים</span></button>
+          <button data-scene="celebration" type="button" aria-pressed="false"><i class="icon celebration"></i><span>חגיגה</span></button>
+        </nav>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

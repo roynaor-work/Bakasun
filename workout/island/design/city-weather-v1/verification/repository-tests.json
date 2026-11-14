@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "exitCode": 0,
+  "command": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/city-weather-v1/source/playwright-system.mjs\" CHROMIUM_PATH=/usr/bin/chromium npm test",
+  "testedBaseCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "scope": "Existing repository tests against unchanged application files plus the new asset directory",
+  "initialAttempt": "Stopped after confirming the bundled Playwright browser was absent; rerun with the existing system Chromium through the documented adapter",
+  "counts": {
+    "tests": 4200,
+    "suites": 0,
+    "pass": 4136,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 265596.75522
+  }
+}

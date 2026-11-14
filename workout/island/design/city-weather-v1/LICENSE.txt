@@ -1,0 +1,64 @@
+CITY WEATHER V1 — LICENSING AND PROVENANCE
+Created 2026-11-14 for roynaor-work/Bakasun.
+
+1. ORIGINAL EFFECT ART
+
+All PNG files in atlases/ and sprites/ are original, deterministic artwork
+authored by source/build.py for this package. No stock art, external animal
+illustrations, fonts, brands, downloaded textures or image-model outputs are
+included in those directories. The palette follows the existing city renderer.
+
+To the extent any copyright or related rights exist in this original effect
+art, they are waived under CC0 1.0 Universal. You may copy, modify, distribute
+and use it, including commercially, without attribution. No trademark,
+publicity or patent rights are granted. The art is provided without warranty.
+
+CC0 1.0 Universal legal text:
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+SPDX-License-Identifier: CC0-1.0
+
+2. CODE AND METADATA
+
+The source/, preview.html, preview.css, preview.js, preview-data.js, manifest
+and atlas metadata authored for this package are provided under the MIT License:
+
+Copyright (c) 2026 roynaor-work/Bakasun contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+3. EXISTING CITY — REVIEW CONTEXT ONLY
+
+preview/city-reference.png is a fresh transparent render of this repository's
+existing fictional city, captured through its read-only cityPreview=full mode
+at commit 11fef2fb98eec4173381346caee94f2930f9cffa. It includes the existing
+Meshy city buildings and coastal palms. Their original rights and licensing
+remain with the existing repository assets and their respective owners.
+This file is a review backdrop, not an independently licensed weather asset;
+the CC0 dedication in section 1 does not apply to it or to its depiction in
+verification screenshots. No existing city model is copied into this package.
+
+Existing sources (read, not modified):
+  workout/island/view/environment.mjs (city palette and coastal environment)
+  workout/island/view/city-models.mjs
+  workout/island/assets/models/city/catalog.json
+  workout/island/assets/models/palm-tree-512.glb
+  workout/island/ui/city-preview.mjs
+
+Pillow, NumPy and Playwright are build/verification tools only. Their code is
+not redistributed. The review page has no third-party runtime dependencies.

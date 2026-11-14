@@ -1,0 +1,3396 @@
+{
+  "schemaVersion": 1,
+  "id": "city-weather-v1",
+  "version": "1.0.0",
+  "referenceCommit": "11fef2fb98eec4173381346caee94f2930f9cffa",
+  "preview": {
+    "file": "preview.html",
+    "viewport": [
+      844,
+      390
+    ],
+    "cityReference": "preview/city-reference.png",
+    "referenceOnly": true,
+    "requiresIntegration": true
+  },
+  "license": "LICENSE.txt",
+  "colorSpace": "sRGB",
+  "alphaMode": "straight",
+  "premultiplyAlphaOnUpload": false,
+  "atlasSize": [
+    1024,
+    1024
+  ],
+  "maxAtlasBytes": 600000,
+  "paddingPx": 2,
+  "extrudedEdges": true,
+  "texture": {
+    "filter": "linear",
+    "wrap": "clamp-to-edge",
+    "mipmaps": false
+  },
+  "coordinateSystem": "top-left; rect = [x,y,width,height]; pivot normalized to the untrimmed frame",
+  "palette": {
+    "grass": "#789f67",
+    "sand": "#e8d3a6",
+    "sea": "#237e87",
+    "stone": "#b5ab8e",
+    "cream": "#fff4dc",
+    "teal": "#287a83",
+    "coral": "#c68469",
+    "gold": "#eac276",
+    "ink": "#314c59"
+  },
+  "layerOrder": [
+    "background",
+    "sky-detail",
+    "clouds",
+    "city",
+    "life",
+    "fireworks",
+    "haze",
+    "precipitation",
+    "celebration",
+    "ui"
+  ],
+  "integration": {
+    "sky": "Draw opaque gradients behind the city, or use the gradient stops in the existing sky shader.",
+    "tiling": "Repeat cropped frame content, never the entire atlas. Display sizes are CSS pixels at 844x390.",
+    "time": "Loop frame = floor(elapsedSeconds * fps) % frames.length. Once: stop after frames.length/fps seconds.",
+    "fog": "Crossfade adjacent frames. Use a shallow horizon/depth mask to keep buildings readable.",
+    "motion": "Honor prefers-reduced-motion: use static weather and omit fireworks, confetti and balloon drift.",
+    "depth": "Birds and butterflies are ambient billboards. Apply world/depth occlusion if placed among buildings.",
+    "gpu": "All textures use normal source-over; disable depthWrite for translucent billboards. Keep UI above effects.",
+    "memory": "Each RGBA8 atlas occupies 4 MiB decoded. Load weather + ambient on demand; only load a selected firework and sky when needed."
+  },
+  "atlases": {
+    "weather": {
+      "file": "atlases/weather.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 205315,
+      "sha256": "8c60e645063e2f51afed03dac97fdbd6df88973be788d1941bc9d82bf07a64a9",
+      "format": "RGBA8 PNG",
+      "frames": 40,
+      "metadata": "atlases/weather.json"
+    },
+    "ambient": {
+      "file": "atlases/ambient.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 176820,
+      "sha256": "4d4534ab032651e98f390b7602c7a9b1fbf50558b5f2a52fc7b8fd233e0171cc",
+      "format": "RGBA8 PNG",
+      "frames": 71,
+      "metadata": "atlases/ambient.json"
+    },
+    "sky": {
+      "file": "atlases/sky.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 11682,
+      "sha256": "cdd4d29fd08aaa1a22a2393d022b37a46200698fc0c5c2702bcaf3380a9bbc3d",
+      "format": "RGBA8 PNG",
+      "frames": 2,
+      "metadata": "atlases/sky.json"
+    },
+    "fireworks-01": {
+      "file": "atlases/fireworks-01.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 256675,
+      "sha256": "20a340eaca472e390e4edd6eff2af1fcdbceecc469233cf096fbe5780f9a469f",
+      "format": "RGBA8 PNG",
+      "frames": 12,
+      "metadata": "atlases/fireworks-01.json"
+    },
+    "fireworks-02": {
+      "file": "atlases/fireworks-02.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 241914,
+      "sha256": "17eeb586545920160dae0715717d4a47872f7aa757fae17b69720d4b79b40b66",
+      "format": "RGBA8 PNG",
+      "frames": 12,
+      "metadata": "atlases/fireworks-02.json"
+    },
+    "fireworks-03": {
+      "file": "atlases/fireworks-03.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 209175,
+      "sha256": "edaff9904ed55042a69055f4538d570062919f83c575bffe1302e7d71eb12869",
+      "format": "RGBA8 PNG",
+      "frames": 12,
+      "metadata": "atlases/fireworks-03.json"
+    },
+    "fireworks-04": {
+      "file": "atlases/fireworks-04.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 215309,
+      "sha256": "806d0d7349cdc2f261faeecc3b3aaa025d45df24ec5e2c3b5697b4c87232309e",
+      "format": "RGBA8 PNG",
+      "frames": 12,
+      "metadata": "atlases/fireworks-04.json"
+    },
+    "fireworks-05": {
+      "file": "atlases/fireworks-05.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "bytes": 199101,
+      "sha256": "3aa2617d91ef83be0d427895cc19065835166a3e5c185f79be52fb95f07ceaea",
+      "format": "RGBA8 PNG",
+      "frames": 12,
+      "metadata": "atlases/fireworks-05.json"
+    }
+  },
+  "effects": {
+    "rain-light": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "rain-light/00",
+          "rect": [
+            2,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/01",
+          "rect": [
+            130,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/02",
+          "rect": [
+            258,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/03",
+          "rect": [
+            386,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/04",
+          "rect": [
+            514,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/05",
+          "rect": [
+            642,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/06",
+          "rect": [
+            770,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-light/07",
+          "rect": [
+            898,
+            2,
+            124,
+            124
+          ],
+          "file": "sprites/rain-light/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "precipitation",
+      "blend": "source-over",
+      "tile": true,
+      "particlesPerTile": 14,
+      "recommendedOpacity": 0.65,
+      "displayTileSize": [
+        186,
+        186
+      ]
+    },
+    "rain-medium": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "rain-medium/00",
+          "rect": [
+            2,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/01",
+          "rect": [
+            130,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/02",
+          "rect": [
+            258,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/03",
+          "rect": [
+            386,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/04",
+          "rect": [
+            514,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/05",
+          "rect": [
+            642,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/06",
+          "rect": [
+            770,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-medium/07",
+          "rect": [
+            898,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/rain-medium/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "precipitation",
+      "blend": "source-over",
+      "tile": true,
+      "particlesPerTile": 36,
+      "recommendedOpacity": 0.78,
+      "displayTileSize": [
+        186,
+        186
+      ]
+    },
+    "rain-heavy": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "rain-heavy/00",
+          "rect": [
+            2,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/01",
+          "rect": [
+            130,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/02",
+          "rect": [
+            258,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/03",
+          "rect": [
+            386,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/04",
+          "rect": [
+            514,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/05",
+          "rect": [
+            642,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/06",
+          "rect": [
+            770,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "rain-heavy/07",
+          "rect": [
+            898,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/rain-heavy/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "precipitation",
+      "blend": "source-over",
+      "tile": true,
+      "particlesPerTile": 72,
+      "recommendedOpacity": 0.9,
+      "displayTileSize": [
+        186,
+        186
+      ]
+    },
+    "snow": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "snow/00",
+          "rect": [
+            2,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/01",
+          "rect": [
+            130,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/02",
+          "rect": [
+            258,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/03",
+          "rect": [
+            386,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/04",
+          "rect": [
+            514,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/05",
+          "rect": [
+            642,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/06",
+          "rect": [
+            770,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "snow/07",
+          "rect": [
+            898,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/snow/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 4,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "precipitation",
+      "blend": "source-over",
+      "tile": true,
+      "displayTileSize": [
+        186,
+        186
+      ],
+      "recommendedOpacity": 0.8
+    },
+    "fog": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "fog/00",
+          "rect": [
+            2,
+            514,
+            500,
+            124
+          ],
+          "file": "sprites/fog/00.png",
+          "sourceSize": [
+            500,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fog/01",
+          "rect": [
+            514,
+            514,
+            500,
+            124
+          ],
+          "file": "sprites/fog/01.png",
+          "sourceSize": [
+            500,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fog/02",
+          "rect": [
+            2,
+            642,
+            500,
+            124
+          ],
+          "file": "sprites/fog/02.png",
+          "sourceSize": [
+            500,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fog/03",
+          "rect": [
+            514,
+            642,
+            500,
+            124
+          ],
+          "file": "sprites/fog/03.png",
+          "sourceSize": [
+            500,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 1,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "haze",
+      "blend": "source-over",
+      "tile": true,
+      "crossfade": true,
+      "displayTileSize": [
+        844,
+        210
+      ],
+      "recommendedOpacity": 0.68
+    },
+    "stars": {
+      "atlas": "weather",
+      "frames": [
+        {
+          "id": "stars/00",
+          "rect": [
+            2,
+            770,
+            252,
+            252
+          ],
+          "file": "sprites/stars/00.png",
+          "sourceSize": [
+            252,
+            252
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "stars/01",
+          "rect": [
+            258,
+            770,
+            252,
+            252
+          ],
+          "file": "sprites/stars/01.png",
+          "sourceSize": [
+            252,
+            252
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "stars/02",
+          "rect": [
+            514,
+            770,
+            252,
+            252
+          ],
+          "file": "sprites/stars/02.png",
+          "sourceSize": [
+            252,
+            252
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "stars/03",
+          "rect": [
+            770,
+            770,
+            252,
+            252
+          ],
+          "file": "sprites/stars/03.png",
+          "sourceSize": [
+            252,
+            252
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 2,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "sky-detail",
+      "blend": "source-over",
+      "tile": true,
+      "displayTileSize": [
+        252,
+        252
+      ],
+      "recommendedOpacity": 0.7
+    },
+    "sky-sunset": {
+      "atlas": "sky",
+      "frames": [
+        {
+          "id": "sky-sunset/00",
+          "rect": [
+            2,
+            2,
+            844,
+            390
+          ],
+          "file": "sprites/sky-sunset/00.png",
+          "sourceSize": [
+            844,
+            390
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 0,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "background",
+      "blend": "source-over",
+      "gradientStops": [
+        [
+          0,
+          "#537585"
+        ],
+        [
+          0.25,
+          "#b6a296"
+        ],
+        [
+          0.46,
+          "#efc59e"
+        ],
+        [
+          0.7,
+          "#e8d3a6"
+        ],
+        [
+          1,
+          "#e8d3a6"
+        ]
+      ],
+      "opaqueContent": true
+    },
+    "sky-night": {
+      "atlas": "sky",
+      "frames": [
+        {
+          "id": "sky-night/00",
+          "rect": [
+            2,
+            398,
+            844,
+            390
+          ],
+          "file": "sprites/sky-night/00.png",
+          "sourceSize": [
+            844,
+            390
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 0,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "background",
+      "blend": "source-over",
+      "gradientStops": [
+        [
+          0,
+          "#122936"
+        ],
+        [
+          0.28,
+          "#244653"
+        ],
+        [
+          0.54,
+          "#40656b"
+        ],
+        [
+          1,
+          "#65887f"
+        ]
+      ],
+      "opaqueContent": true
+    },
+    "cloud-1": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "cloud-1/00",
+          "rect": [
+            2,
+            2,
+            252,
+            124
+          ],
+          "file": "sprites/cloud-1/00.png",
+          "sourceSize": [
+            252,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 0,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "clouds",
+      "blend": "source-over",
+      "recommendedWidth": 190
+    },
+    "cloud-2": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "cloud-2/00",
+          "rect": [
+            258,
+            2,
+            252,
+            124
+          ],
+          "file": "sprites/cloud-2/00.png",
+          "sourceSize": [
+            252,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 0,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "clouds",
+      "blend": "source-over",
+      "recommendedWidth": 190
+    },
+    "cloud-3": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "cloud-3/00",
+          "rect": [
+            514,
+            2,
+            252,
+            124
+          ],
+          "file": "sprites/cloud-3/00.png",
+          "sourceSize": [
+            252,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 0,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "clouds",
+      "blend": "source-over",
+      "recommendedWidth": 190
+    },
+    "birds": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "birds/00",
+          "rect": [
+            2,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/01",
+          "rect": [
+            130,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/02",
+          "rect": [
+            258,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/03",
+          "rect": [
+            386,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/04",
+          "rect": [
+            514,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/05",
+          "rect": [
+            642,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/06",
+          "rect": [
+            770,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "birds/07",
+          "rect": [
+            898,
+            130,
+            124,
+            124
+          ],
+          "file": "sprites/birds/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 10,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "life",
+      "blend": "source-over",
+      "recommendedWidth": 39
+    },
+    "butterflies-coral": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "butterflies-coral/00",
+          "rect": [
+            2,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/01",
+          "rect": [
+            130,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/02",
+          "rect": [
+            258,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/03",
+          "rect": [
+            386,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/04",
+          "rect": [
+            514,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/05",
+          "rect": [
+            642,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/06",
+          "rect": [
+            770,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-coral/07",
+          "rect": [
+            898,
+            258,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-coral/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "life",
+      "blend": "source-over",
+      "recommendedWidth": 27,
+      "color": "#c68469"
+    },
+    "butterflies-gold": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "butterflies-gold/00",
+          "rect": [
+            2,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/01",
+          "rect": [
+            130,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/02",
+          "rect": [
+            258,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/03",
+          "rect": [
+            386,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/04",
+          "rect": [
+            514,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/05",
+          "rect": [
+            642,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/06",
+          "rect": [
+            770,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-gold/07",
+          "rect": [
+            898,
+            386,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-gold/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "life",
+      "blend": "source-over",
+      "recommendedWidth": 27,
+      "color": "#eac276"
+    },
+    "butterflies-teal": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "butterflies-teal/00",
+          "rect": [
+            2,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/01",
+          "rect": [
+            130,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/02",
+          "rect": [
+            258,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/03",
+          "rect": [
+            386,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/04",
+          "rect": [
+            514,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/04.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/05",
+          "rect": [
+            642,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/05.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/06",
+          "rect": [
+            770,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/06.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "butterflies-teal/07",
+          "rect": [
+            898,
+            514,
+            124,
+            124
+          ],
+          "file": "sprites/butterflies-teal/07.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "life",
+      "blend": "source-over",
+      "recommendedWidth": 27,
+      "color": "#287a83"
+    },
+    "balloons-coral": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "balloons-coral/00",
+          "rect": [
+            2,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-coral/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-coral/01",
+          "rect": [
+            130,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-coral/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-coral/02",
+          "rect": [
+            258,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-coral/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-coral/03",
+          "rect": [
+            386,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-coral/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 3,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 66,
+      "color": "#c68469"
+    },
+    "balloons-gold": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "balloons-gold/00",
+          "rect": [
+            514,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-gold/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-gold/01",
+          "rect": [
+            642,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-gold/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-gold/02",
+          "rect": [
+            770,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-gold/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-gold/03",
+          "rect": [
+            898,
+            642,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-gold/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 3,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 66,
+      "color": "#eac276"
+    },
+    "balloons-teal": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "balloons-teal/00",
+          "rect": [
+            2,
+            770,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-teal/00.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-teal/01",
+          "rect": [
+            130,
+            770,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-teal/01.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-teal/02",
+          "rect": [
+            258,
+            770,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-teal/02.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "balloons-teal/03",
+          "rect": [
+            386,
+            770,
+            124,
+            124
+          ],
+          "file": "sprites/balloons-teal/03.png",
+          "sourceSize": [
+            124,
+            124
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 3,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 66,
+      "color": "#287a83"
+    },
+    "confetti-coral": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "confetti-coral/00",
+          "rect": [
+            2,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/00.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/01",
+          "rect": [
+            66,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/01.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/02",
+          "rect": [
+            130,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/02.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/03",
+          "rect": [
+            194,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/03.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/04",
+          "rect": [
+            258,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/04.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/05",
+          "rect": [
+            322,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/05.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/06",
+          "rect": [
+            386,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/06.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-coral/07",
+          "rect": [
+            450,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-coral/07.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 10,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 42,
+      "color": "#c68469"
+    },
+    "confetti-gold": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "confetti-gold/00",
+          "rect": [
+            514,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/00.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/01",
+          "rect": [
+            578,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/01.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/02",
+          "rect": [
+            642,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/02.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/03",
+          "rect": [
+            706,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/03.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/04",
+          "rect": [
+            770,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/04.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/05",
+          "rect": [
+            834,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/05.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/06",
+          "rect": [
+            898,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/06.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-gold/07",
+          "rect": [
+            962,
+            898,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-gold/07.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 10,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 42,
+      "color": "#eac276"
+    },
+    "confetti-teal": {
+      "atlas": "ambient",
+      "frames": [
+        {
+          "id": "confetti-teal/00",
+          "rect": [
+            2,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/00.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/01",
+          "rect": [
+            66,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/01.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/02",
+          "rect": [
+            130,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/02.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/03",
+          "rect": [
+            194,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/03.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/04",
+          "rect": [
+            258,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/04.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/05",
+          "rect": [
+            322,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/05.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/06",
+          "rect": [
+            386,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/06.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "confetti-teal/07",
+          "rect": [
+            450,
+            962,
+            60,
+            60
+          ],
+          "file": "sprites/confetti-teal/07.png",
+          "sourceSize": [
+            60,
+            60
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 10,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "celebration",
+      "blend": "source-over",
+      "recommendedWidth": 42,
+      "color": "#287a83"
+    },
+    "fireworks-peony-gold": {
+      "atlas": "fireworks-01",
+      "frames": [
+        {
+          "id": "fireworks-peony-gold/00",
+          "rect": [
+            2,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/00.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/01",
+          "rect": [
+            258,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/01.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/02",
+          "rect": [
+            514,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/02.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/03",
+          "rect": [
+            770,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/03.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/04",
+          "rect": [
+            2,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/04.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/05",
+          "rect": [
+            258,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/05.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/06",
+          "rect": [
+            514,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/06.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/07",
+          "rect": [
+            770,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/07.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/08",
+          "rect": [
+            2,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/08.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/09",
+          "rect": [
+            258,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/09.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/10",
+          "rect": [
+            514,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/10.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-peony-gold/11",
+          "rect": [
+            770,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-peony-gold/11.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "fireworks",
+      "blend": "source-over",
+      "color": "#eac276",
+      "recommendedWidth": 206,
+      "durationMs": 1000,
+      "minRepeatIntervalMs": 3000
+    },
+    "fireworks-chrysanthemum-coral": {
+      "atlas": "fireworks-02",
+      "frames": [
+        {
+          "id": "fireworks-chrysanthemum-coral/00",
+          "rect": [
+            2,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/00.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/01",
+          "rect": [
+            258,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/01.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/02",
+          "rect": [
+            514,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/02.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/03",
+          "rect": [
+            770,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/03.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/04",
+          "rect": [
+            2,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/04.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/05",
+          "rect": [
+            258,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/05.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/06",
+          "rect": [
+            514,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/06.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/07",
+          "rect": [
+            770,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/07.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/08",
+          "rect": [
+            2,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/08.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/09",
+          "rect": [
+            258,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/09.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/10",
+          "rect": [
+            514,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/10.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-chrysanthemum-coral/11",
+          "rect": [
+            770,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-chrysanthemum-coral/11.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "fireworks",
+      "blend": "source-over",
+      "color": "#df947d",
+      "recommendedWidth": 206,
+      "durationMs": 1000,
+      "minRepeatIntervalMs": 3000
+    },
+    "fireworks-ring-teal": {
+      "atlas": "fireworks-03",
+      "frames": [
+        {
+          "id": "fireworks-ring-teal/00",
+          "rect": [
+            2,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/00.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/01",
+          "rect": [
+            258,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/01.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/02",
+          "rect": [
+            514,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/02.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/03",
+          "rect": [
+            770,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/03.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/04",
+          "rect": [
+            2,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/04.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/05",
+          "rect": [
+            258,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/05.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/06",
+          "rect": [
+            514,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/06.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/07",
+          "rect": [
+            770,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/07.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/08",
+          "rect": [
+            2,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/08.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/09",
+          "rect": [
+            258,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/09.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/10",
+          "rect": [
+            514,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/10.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-ring-teal/11",
+          "rect": [
+            770,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-ring-teal/11.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "fireworks",
+      "blend": "source-over",
+      "color": "#75c9bd",
+      "recommendedWidth": 206,
+      "durationMs": 1000,
+      "minRepeatIntervalMs": 3000
+    },
+    "fireworks-willow-gold": {
+      "atlas": "fireworks-04",
+      "frames": [
+        {
+          "id": "fireworks-willow-gold/00",
+          "rect": [
+            2,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/00.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/01",
+          "rect": [
+            258,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/01.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/02",
+          "rect": [
+            514,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/02.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/03",
+          "rect": [
+            770,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/03.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/04",
+          "rect": [
+            2,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/04.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/05",
+          "rect": [
+            258,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/05.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/06",
+          "rect": [
+            514,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/06.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/07",
+          "rect": [
+            770,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/07.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/08",
+          "rect": [
+            2,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/08.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/09",
+          "rect": [
+            258,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/09.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/10",
+          "rect": [
+            514,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/10.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-willow-gold/11",
+          "rect": [
+            770,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-willow-gold/11.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "fireworks",
+      "blend": "source-over",
+      "color": "#d9b76e",
+      "recommendedWidth": 206,
+      "durationMs": 1000,
+      "minRepeatIntervalMs": 3000
+    },
+    "fireworks-heart-coral": {
+      "atlas": "fireworks-05",
+      "frames": [
+        {
+          "id": "fireworks-heart-coral/00",
+          "rect": [
+            2,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/00.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/01",
+          "rect": [
+            258,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/01.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/02",
+          "rect": [
+            514,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/02.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/03",
+          "rect": [
+            770,
+            2,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/03.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/04",
+          "rect": [
+            2,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/04.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/05",
+          "rect": [
+            258,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/05.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/06",
+          "rect": [
+            514,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/06.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/07",
+          "rect": [
+            770,
+            258,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/07.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/08",
+          "rect": [
+            2,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/08.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/09",
+          "rect": [
+            258,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/09.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/10",
+          "rect": [
+            514,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/10.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        },
+        {
+          "id": "fireworks-heart-coral/11",
+          "rect": [
+            770,
+            514,
+            248,
+            248
+          ],
+          "file": "sprites/fireworks-heart-coral/11.png",
+          "sourceSize": [
+            248,
+            248
+          ],
+          "trimmed": false,
+          "rotated": false
+        }
+      ],
+      "fps": 12,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "layer": "fireworks",
+      "blend": "source-over",
+      "color": "#df947d",
+      "recommendedWidth": 206,
+      "durationMs": 1000,
+      "minRepeatIntervalMs": 3000
+    }
+  }
+}
