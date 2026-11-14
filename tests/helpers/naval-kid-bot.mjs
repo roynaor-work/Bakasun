@@ -2,7 +2,8 @@
 // calibration in workout/island/verification/aliens-naval-v24 (numbers in the session report). It plays through the model's real inputs
 // (the same fields the touch layer sends), reads the model only, and never edits its state.
 //  - sees an incoming shot (a decal) with probability `notice` after a reaction of 0.45-1.0 s, and then turns across its course and
-//    sails out for about 1.3 s; otherwise it wanders (sails in a random direction 55% of the time, changes every 1.5-4 s);
+//    sails out for about 1.3 s; otherwise it wanders (sails in a random direction 55% of the time, changes every 1.5-4 s), and when the
+//    lock says "too far" it sails toward the locked hull;
 //  - aim style: 'lockButton' (v24: taps the Lock button), 'tapShip' (taps the ship: a lock in v24, a selection and quick shots in v23),
 //    'longPress' (v23's long press, 0.45 s), 'quick' (no lock: quick shots where the turret points); it taps Fire every 0.5-1.6 s
 //    whether the lock is green or not (a child does not wait), and now and then (`forget`) taps Fire with no lock at all;
@@ -26,8 +27,12 @@ export function kidBot({seed=1,balance,style='lockButton',notice=.7,forget=.15,v
   if(dodge&&t>=dodge.from&&t<dodge.until){const away=Math.atan2(ship.z-dodge.z,ship.x-dodge.x),across=[ship.heading+Math.PI/2,ship.heading-Math.PI/2].sort((a,b)=>Math.abs(wrap(a-away))-Math.abs(wrap(b-away)))[0];Object.assign(input,steer(m,across));if(!dodge.counted){dodge.counted=true;stats.dodges++;}}
   else{
    // 2. Wander (or sail to a buoy when the magazine is low).
-   const buoy=(m.buoys||[])[0];
+   const buoy=(m.buoys||[])[0],far=m.homing?.status==='far'&&(m.enemies||[]).find(e=>e.index===m.homing.index),near=m.homing?.status==='near'&&(m.enemies||[]).find(e=>e.index===m.homing.index);
    if(buoy&&(m.loaded??99)<=4){Object.assign(input,steer(m,Math.atan2(buoy.z-ship.z,buoy.x-ship.x)));}
+   // The lock says "too far, get closer": the child sails toward it.
+   else if(far){Object.assign(input,steer(m,Math.atan2(far.z-ship.z,far.x-ship.x)));}
+   // "Too close, back off": the child sails away from it.
+   else if(near){Object.assign(input,steer(m,Math.atan2(ship.z-near.z,ship.x-near.x)));}
    else{if(t>=wanderUntil){wanderUntil=t+between(1.5,4);wanderHeading=r()<.55?between(-Math.PI,Math.PI):null;}
     if(wanderHeading!==null){let h=wanderHeading;if(ship.x<60)h=0;else if(ship.x>360)h=Math.PI;if(ship.z<-150)h=Math.PI/2;else if(ship.z>150)h=-Math.PI/2;Object.assign(input,steer(m,h));}}
   }

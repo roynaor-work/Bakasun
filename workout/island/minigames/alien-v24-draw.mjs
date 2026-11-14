@@ -22,11 +22,13 @@ export function drawV24Refills(p,m,aspect=1,scale=1){
  const list=m.refills||[];if(!list.length&&!m.refillPicked)return 0;
  const icon=alienV24Image('vulcan-magazine.png');let drawn=0;
  for(const d of list){
-  const bob=Math.sin((m.time||0)*4+d.x*.05)*2*scale,size=34*scale,pulse=.65+.25*Math.sin((m.time||0)*6+d.id);
+  const bob=Math.sin((m.time||0)*4+d.x*.05)*2*scale,size=46*scale,pulse=.7+.25*Math.sin((m.time||0)*6+d.id);
   p.save();p.translate(d.x,d.y+bob);p.scale(1/aspect,1);
   p.globalCompositeOperation='lighter';const g=p.createRadialGradient(0,0,0,0,0,size);g.addColorStop(0,REFILL_COLORS.halo+'aa');g.addColorStop(.45,REFILL_COLORS.halo+'44');g.addColorStop(1,REFILL_COLORS.halo+'00');p.globalAlpha=pulse;p.fillStyle=g;p.fillRect(-size,-size,size*2,size*2);
   p.globalCompositeOperation='source-over';p.globalAlpha=1;p.rotate(Math.sin((m.time||0)*2+d.id)*.18);
-  if(icon)p.drawImage(icon,-size*.62,-size*.62,size*1.24,size*1.24);else magazineGlyph(p,size*.48);
+  // A thin amber ring (the bonus look of the game) around the Codex magazine icon, so it reads as "take me" next to the explosions.
+  p.strokeStyle=REFILL_COLORS.token;p.lineWidth=2*scale;p.globalAlpha=.9;p.beginPath();p.arc(0,0,size*.62,0,TAU);p.stroke();p.globalAlpha=1;
+  if(icon)p.drawImage(icon,-size*.55,-size*.55,size*1.1,size*1.1);else magazineGlyph(p,size*.44);
   p.restore();drawn++;
  }
  // Pick-up burst: the Codex 6-frame sheet (128 px cells, 20 fps, once) over the ship.

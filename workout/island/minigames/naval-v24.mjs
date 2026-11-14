@@ -20,7 +20,7 @@ export const navalSubV24=search=>polishValue('navalSub',search)!=='v23';
 export const NAVAL_V24_DEFAULTS=Object.freeze({
  // snapDeg: a ready lock within this many degrees fires at once (the turret snaps the rest). A locked shell is never the weak centre
  // (the gold star x1.75 stays a hand-aimed shot), so a lock does not end a stage in seconds.
- aim:Object.freeze({tapSeconds:.32,tapPixels:12,stickySeconds:.7,swipePixels:26,dangerSeconds:3,skyMagnetDeg:42,skyRate:16,snapDeg:3}),
+ aim:Object.freeze({tapSeconds:.32,tapPixels:12,stickySeconds:.7,swipePixels:26,dangerSeconds:3,skyMagnetDeg:42,skyRate:16,snapDeg:3,nearRange:150}),
  // Fire rate multiplier from `rateFirst` (stage 1) to `rateLast` (stage `rateStage` on), on v23's fireSeconds; the warning stays v23's
  // (`telegraphMult` 1, a fair reaction time for a 7-year-old; never under `telegraphMin`), now drawn as a red pulsing decal; `lead` of the ship's velocity times the time to impact is added to the
  // aim point (sailing straight on is not always safe, turning is); hits cost `damageMult` of v23. Salvos from `salvoStage`.
@@ -68,7 +68,7 @@ export function navalLockNext(order,current,dir=1){if(!order.length)return null;
 /** How likely the shell is to meet the hull, for the colour of the ring on the forecast hull: 1 ready (safe hit), .6 while the lock turns
  * or the aim is near, .2 a miss, 0 out of reach. */
 export function navalHitChance(prediction,homing){
- if(homing){const s=homing.status;return s==='ready'?1:s==='turning'?.6:s==='far'?0:.2;}
+ if(homing){const s=homing.status;return s==='ready'?1:s==='turning'?.6:s==='far'||s==='near'?0:.2;}
  if(!prediction)return 0;if(prediction.contact&&prediction.safe!==false)return 1;if(prediction.contact)return .6;return .2;
 }
 export const NAVAL_V24_COLORS=Object.freeze({hit:'#5CF29A',maybe:'#FFD166',miss:'#FF8A5C',decal:'#FF3B30',sonar:'#7FE8FF',bubbles:'#E8FBFF'});

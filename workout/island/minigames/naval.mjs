@@ -91,6 +91,8 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
  // its own switch back to v23: ?navalAim=v23, ?navalEnemyFire=v23, ?navalSub=v23 (naval-v24.mjs).
  const v24=navalV24Config(balance),aimV24=lockEnabled&&navalAimV24(),fireV24=navalEnemyFireV24(),subV24=navalSubV24(),efc=v24.enemyFire;
  let stickyAt=null,lastLockIndex=null,skyLock=null,underwaterHits=0,torpedoesFired=0,aimHint=null,enemySalvos=0,lockShotNext=false;
+ // v24: the lock also tries the two lowest powers, so a hull close by (down to about 60 units) can still be reached by a steep shot.
+ const lockCfgV24=aimV24?{...lockCfg,powers:[...lockCfg.powers,.41,.35]}:lockCfg;
  // 11/11/2026 spin aim: the camera follows the turning turret faster and with a smaller lead, so the landing mark stays near the middle.
  const followBalance=navalAimSpin()?{aimControls:{...(balance.aimControls||{}),follow:navalSpinFollow(balance)}}:balance;
  // 11/11/2026 ammo limit (Roy): `ammo` stays the stage's stock; a shell magazine (`loaded`, 12 to 24 rounds) and a Vulcan belt must be
@@ -193,7 +195,7 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   * fresh settings solved in that same frame, so what the arc showed is what flies. */
  const lockTarget=()=>homing?enemies.find(e=>e.index===homing.index&&e.active&&e.hp>0)||null:null;
  const lockShootable=e=>e.active&&e.hp>0&&navalTargetable(e,ammoIndex,balance);
- function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation,warm:homing.solution},balance,lockCfg);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
+ function lockSolve(){const e=lockTarget();if(!e)return null;homing.solution=navalLockSolve({ship:playerShip,target:e,enemies,wind,kind:ammoIndex,pressure,context:{time,player:playerShip,concurrent:settings.concurrent,fleetLength:fleet.length,drift:settings.drift},targetable:lockShootable,elevation:turret.elevation,warm:homing.solution},balance,lockCfgV24);homing.solvedAt=time;homing.kind=ammoIndex;return homing.solution;}
  /** Locked and on target with no finger on Fire: the arc's end and colour come from the lock's own forecast (refreshed every
   * `refreshSeconds`), re-sampled on the turret's launch, instead of the two forecasts honest() runs on every frame while aiming. */
  function lockPrediction(pr){
@@ -215,7 +217,9 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   const ok=shoot();Object.assign(turret,keep);ammoIndex=keepAmmo;selectedTargetIndex=keepSel;if(ok){torpedoesFired++;sound('torpedo');}return ok;
  }
  /** A miss on a submarine reads 'dive': the forecast has it under water when the shell arrives (wait for it to surface, or pick the guided missile or a mine). */
- const lockWord=status=>{const e=status==='miss'&&lockTarget();return e&&balance.shipTypes[e.kind]?.submarine?'dive':status;};
+ const lockWord=status=>{const e=status==='miss'&&lockTarget();if(e&&balance.shipTypes[e.kind]?.submarine)return 'dive';
+  // v24: out of reach because it is too close says so ("too close, back off"), not "too far".
+  if(aimV24&&status==='far'){const t=lockTarget();if(t&&Math.hypot(t.x-playerShip.x,t.z-playerShip.z)<v24.aim.nearRange)return 'near';}return status;};
  function lockOnto(index){homing={index,at:time,solution:null,solvedAt:-Infinity,kind:ammoIndex,queued:null,aligned:false,status:'turning',shots:0};selectedTargetIndex=index;lastLockIndex=index;stickyAt=null;locksMade++;sound('lock');}
  function lockFire(){
   const e=lockTarget(),kind=ammoIndex;if(!e){if(homing)homing.queued=null;return false;}
@@ -226,9 +230,10 @@ export function createNavalModel({config,balance,level,random=()=>.5,power=1,equ
   // A submarine under water: the gun holds the shot (the lock says "waiting") and fires by itself when the shell can meet it.
   if(homing.status==='dive')return false;
   if(!aligned&&time-homing.queued<lockCfg.queueSeconds)return false;
-  // v24: a locked gun does not waste a shell it cannot land (too far, another hull in the way, a miss): after the wait the tap is dropped,
-  // the reason word stays on the lock, and the child sails or waits for green (the challenge is the sailing, not the aim).
-  if(aimV24&&fresh&&fresh.status!=='ready'){homing.queued=null;return false;}
+  // v24: a locked gun does not waste a shell that cannot land on anything (beyond reach, or a clean miss): after the wait the tap is dropped,
+  // the reason word stays on the lock ("too far, get closer") and the child sails in. A shell that meets another enemy hull on the way
+  // ('blocked') still flies: it hits that one.
+  if(aimV24&&fresh&&(fresh.status==='far'||fresh.status==='miss')){homing.queued=null;return false;}
   if(aligned&&fresh&&kind!==1&&kind!==5){turret.yaw=fresh.yaw;if(kind!==2)turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,fresh.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,fresh.power));}
   // v24: a locked shell always meets the hull but never counts as the weak centre (the gold star x1.75 stays a hand-aimed shot), so a lock
   // does not end a stage in seconds; the challenge moves to sailing out of the enemy fire.

@@ -65,11 +65,11 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
    let falling=false,picked=null,after=null;const t0=s.time;
    while(s&&!s.result&&s.time-t0<150&&!after){
     const plan=await page.evaluate(()=>{const g=window.__island.games.current;if(!g)return null;const m=g.session.debug.model;const r=m.refills?.[0],t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0];return {want:r?r.x:t?t.x:m.player.x,px:m.player.x,refill:Boolean(r),picked:m.refillPicked};});
-    if(!plan)break;if(plan.refill&&!falling){falling=true;await capture('aliens-4-magazine-falling');}
+    if(!plan)break;if(plan.refill&&!falling){falling=s.time;}if(falling&&falling!==true&&s.time-falling>=.6&&plan.refill){falling=true;await capture('aliens-4-magazine-falling');}
     await touch('touchMove',[finger(plan.want),{...F,id:2},{...V,id:3}]);await tick(100);s=await snap();
     if(plan.picked&&!picked){picked=plan.picked;await tick(80);after=await page.evaluate(()=>{const g=window.__island.games.current,m=g.session.debug.model,v=document.querySelector('#vulcan');return {level:v.dataset.level,heat:v.style.getPropertyValue('--heat'),locked:m.vulcanLocked,cold:m.refillCold,gauge:m.vulcanHeat,snapshot:m.snapshot().refill};});await capture('aliens-5-magazine-taken-cold');}}
    await touch('touchEnd');report.aliensRefill={falling,picked,after,seconds:+(s?.time-t0).toFixed(1)};console.log('aliens refill',JSON.stringify(report.aliensRefill));
-   check(falling,'a magazine fell (seen on the screen)');check(Boolean(after&&after.snapshot.collected>=1),'the ship took it through the real controls');
+   check(Boolean(falling),'a magazine fell (seen on the screen)');check(Boolean(after&&after.snapshot.collected>=1),'the ship took it through the real controls');
    check(after?.level==='cold'&&after.locked===false&&after.gauge<.01&&after.cold>3,`after the pick-up: cyan ring (${after?.level}), no lock, empty gauge, cold ${after?.cold?.toFixed?.(1)} s`);
    await leave();}
   if(portrait)await page.setViewportSize({width:viewport.width,height:viewport.height});
@@ -80,11 +80,11 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
   const ready=async(stage,search='')=>{await page.evaluate(q=>{history.replaceState(null,'',location.pathname+'?dev=1'+q);},search);await start('navalDuel',stage);await page.waitForFunction(()=>window.__island.games.current.session.snapshot.renderMetrics?.playerLoaded,{timeout:120000}).catch(()=>{});await tick(400);};
   const screenOf=index=>page.evaluate(i=>{const s=window.__island.games.current.session,e=s.debug.model.enemies.find(e=>e.index===i);if(!e)return null;const q=s.debug.view.projectTarget(e.x,e.z,1.5);return q&&{x:q.x,y:q.y,depth:q.depth};},index);
   const visible=q=>q&&q.depth>0&&q.x>=40&&q.x<=viewport.width-40&&q.y>=75&&q.y<=viewport.height-30;
-  const nearestVisible=async()=>{const s=await snap();const live=s.enemies.filter(e=>e.active&&e.hp>0).sort((a,b)=>Math.hypot(a.x-s.playerShip.x,a.z-s.playerShip.z)-Math.hypot(b.x-s.playerShip.x,b.z-s.playerShip.z));for(const e of live){const q=await screenOf(e.index);if(visible(q))return {index:e.index,q};}return null;};
+  const nearestVisible=async()=>{const s=await snap().catch(()=>null);if(!s?.enemies)return null;const live=s.enemies.filter(e=>e.active&&e.hp>0).sort((a,b)=>Math.hypot(a.x-s.playerShip.x,a.z-s.playerShip.z)-Math.hypot(b.x-s.playerShip.x,b.z-s.playerShip.z));for(const e of live){const q=await screenOf(e.index);if(visible(q))return {index:e.index,q};}return null;};
   const tapAt=async(q,id=1,ms=90)=>{await touch('touchStart',[{x:q.x,y:q.y,id}]);await tick(ms);await touch('touchEnd');await tick(60);};
   const stickPoint=async()=>{const z=await page.locator('.naval-stick-zone').boundingBox();return {x:z.x+z.width*.45,y:z.y+z.height*.6};};
   // N1. A short tap on a hull locks it.
-  if(want('n1')){await ready(10);const t=await nearestVisible();const f0=(await snap()).fired;await tapAt(t.q);await tick(200);const s=await snap();
+  if(want('n1')){await ready(10);let t=await nearestVisible();for(let i=0;i<10&&!t;i++){await tick(300);t=await nearestVisible();}const f0=(await snap()).fired;await tapAt(t.q);await tick(200);const s=await snap();
    check(s.homing?.index===t.index&&s.fired===f0,`a short tap (90 ms) on hull ${t.index} locks it and fires nothing (lock ${s.homing?.index}, shells ${s.fired-f0})`);await tick(500);await capture('naval-1-tap-lock');
    // N2. The Lock button.
    const L=await center('.naval-lock-btn');await tapAt(L,4,80);let a=await snap();await tapAt(L,4,80);let b=await snap();
@@ -100,9 +100,9 @@ await verify('aliens-naval-v24',[{width:844,height:390,isMobile:true},{width:390
     if(v24&&!s.homing&&s.time-lastTap>1){await touch('touchStart',[stick,{...L,id:4}]);await tick(70);await touch('touchEnd',[stick]);lastTap=s.time;}
     if(!v24&&s.time-lastTap>2.5){const t=await nearestVisible();if(t){await touch('touchStart',[stick,{x:t.q.x,y:t.q.y,id:5}]);await tick(70);await touch('touchEnd',[stick]);lastTap=s.time;}}
     if(s.time-lastFire>.75){await touch('touchStart',[stick,{...F,id:2}]);await tick(60);await touch('touchEnd',[stick]);lastFire=s.time;}
-    await tick(120);s=await snap().catch(()=>null)||s;const d=s.hud?.v24?.decals||0;if(d>decals){decals=d;if(v24&&d>=2)await capture('naval-4-red-decals');}
+    await tick(120);const now=await snap().catch(()=>null);if(!now)break;s=now;const d=s.hud?.v24?.decals||0;if(d>decals){decals=d;if(v24&&d>=2)await capture('naval-4-red-decals');}
    }
-   await touch('touchEnd');for(let t=0;t<3000&&(s.ball?.active||s.extraShots?.length);t+=100){await tick(100);s=await snap().catch(()=>null)||s;}
+   await touch('touchEnd');for(let t=0;t<3000&&(s.ball?.active||s.extraShots?.length);t+=100){await tick(100);const now=await snap().catch(()=>null);if(!now)break;s=now;}
    const shells=s.fired-f0,hits=s.hits-h0,r={mode,shells,hits,hitPercent:shells?Math.round(100*hits/shells):null,seconds:+(s.time-t0).toFixed(1),enemyShots:s.enemyFired-e0,enemyPerMinute:+(60*(s.enemyFired-e0)/Math.max(1,s.time-t0)).toFixed(1),maxDecals:decals,hpLeft:+(s.lives/s.maxLives).toFixed(2),outcome:s.result?.outcome||'running'};
    if(v24)await capture('naval-3-sailing-locked');await leave();return r;};
   if(want('n3')){const v23=await accuracy('v23'),v24=await accuracy('v24');report.accuracy={v23,v24};console.log('accuracy',JSON.stringify(report.accuracy));

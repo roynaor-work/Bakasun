@@ -142,7 +142,13 @@ export function createNavalInput(ctx,getModel,getView){
  if(aimV24){
   lockBtn.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault?.();try{lockBtn.setPointerCapture?.(e.pointerId);}catch{}lockSwipe={id:e.pointerId,x:e.clientX,dx:0};},options);
   lockBtn.addEventListener('pointermove',e=>{if(lockSwipe?.id===e.pointerId)lockSwipe.dx=e.clientX-lockSwipe.x;},options);
-  for(const type of ['pointerup','pointercancel'])lockBtn.addEventListener(type,e=>{if(lockSwipe?.id!==e.pointerId)return;const g=lockSwipe;lockSwipe=null;if(type==='pointercancel')return;const dx=Number.isFinite(e.clientX)?e.clientX-g.x:g.dx;if(Math.abs(dx)>=v24c.swipePixels)lockCycleEvent=dx>0?1:-1;else lockSmartEvent=true;buzz();},options);
+  // The swipe is read from the last move as well as from the lift (a browser that turns a sideways drag into a cancel still swipes);
+  // a cancel without a swipe does nothing. The window listener catches a lift that lands off the button.
+  const endLock=(e,type)=>{if(lockSwipe?.id!==e.pointerId)return;const g=lockSwipe;lockSwipe=null;const dx=Math.abs(g.dx)>Math.abs(Number.isFinite(e.clientX)?e.clientX-g.x:0)?g.dx:(Number.isFinite(e.clientX)?e.clientX-g.x:g.dx);
+   if(Math.abs(dx)>=v24c.swipePixels)lockCycleEvent=dx>0?1:-1;else if(type==='pointerup')lockSmartEvent=true;else return;buzz();};
+  for(const type of ['pointerup','pointercancel'])lockBtn.addEventListener(type,e=>endLock(e,type),options);
+  window.addEventListener('pointermove',e=>{if(lockSwipe?.id===e.pointerId)lockSwipe.dx=e.clientX-lockSwipe.x;},{signal:abort.signal,capture:true});
+  for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>endLock(e,type),{signal:abort.signal,capture:true});
  }
  if(subV24)torpBtn.addEventListener('pointerdown',e=>{if(e.button>0)return;e.preventDefault?.();torpedoEvent=true;buzz();},options);
  window.addEventListener('pointermove',e=>{if(sky?.id===e.pointerId)settleSky(sky,e.clientX,e.clientY,e.timeStamp);},options);

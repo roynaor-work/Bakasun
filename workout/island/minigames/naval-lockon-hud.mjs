@@ -5,10 +5,10 @@
  * hint over the nearest hull. Nothing is drawn unless lock-on is on (`?navalLock=0` keeps the v22 screen). */
 import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-13';
 const TAU=Math.PI*2;
-export const NAVAL_LOCK_COLORS=Object.freeze({ready:'#62E6AA',turning:'#FFD166',far:'#FF9A5C',blocked:'#FF9A5C',miss:'#FF9A5C',dive:'#FF9A5C',press:'#FFFFFF',outline:'#103847'});
+export const NAVAL_LOCK_COLORS=Object.freeze({ready:'#62E6AA',turning:'#FFD166',far:'#FF9A5C',near:'#FF9A5C',blocked:'#FF9A5C',miss:'#FF9A5C',dive:'#FF9A5C',press:'#FFFFFF',outline:'#103847'});
 export const NAVAL_LOCK_WORDS=Object.freeze({far:'רחוק מדי · מתקרבים',blocked:'מטרה אחרת בדרך',dive:'מתחת למים · מחכים',hint:'החזיקו אצבע על ספינה',
  // v24 (14/11/2026): a tap locks, and a diving submarine is reached by the torpedo only (?navalAim=v23 / ?navalSub=v23 keep the v23 words).
- tap:'געו בספינה או בכפתור הנעילה',diveTorpedo:'מתחת למים · רק טורפדו'});
+ tap:'געו בספינה או בכפתור הנעילה',diveTorpedo:'מתחת למים · רק טורפדו',near:'קרוב מדי · מתרחקים'});
 /** The hull's box on screen: its bow, stern and centre on the water and at the bar height. */
 export function navalLockBox(e,project,balance){
  const L=(balance?.aim?.hullLength??34)*(e.hullScale||1)*.8,h=e.heading||0,lift=balance?.render?.effects?.healthLift??4.2;

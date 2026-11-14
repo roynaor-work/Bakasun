@@ -16,7 +16,7 @@ export function navalFx(name){
  if(!entry){const img=new Image();entry={img,ok:false};img.onload=()=>{entry.ok=true;};img.src=new URL(`../assets/game-naval/fx/${name}?v=island-v2-20261107-13`,import.meta.url).href;images.set(name,entry);}
  return entry.ok?entry.img:false;
 }
-export const NAVAL_V24_WORDS=Object.freeze({hit:'פגיעה',turning:'מכוון…',far:'רחוק מדי',miss:'לא יפגע',underwater:'מתחת למים · רק טורפדו',torpedo:'טורפדו'});
+export const NAVAL_V24_WORDS=Object.freeze({hit:'פגיעה',turning:'מכוון…',far:'רחוק מדי',near:'קרוב מדי',miss:'לא יפגע',underwater:'מתחת למים · רק טורפדו',torpedo:'טורפדו'});
 /** Every enemy threat with a landing point: about to be fired (a hull's attack, a salvo's points, a shore gun, an aircraft) or on its way. */
 export function navalV24Threats(m){
  const out=[],now=m.time??0;
@@ -82,7 +82,7 @@ export function drawNavalV24(p,m,balance,project,width,height){
   if(b&&b.depth>0&&b.x>-30&&b.x<width+30&&b.y>-30&&b.y<height+30){
    const moved=a&&a.depth>0?arrow(p,a,b,color):false,pulse=1+.12*Math.sin(time*7);
    onWater(p,project,h.to.x,h.to.z,(balance.aim?.hullBeam??16)*1.1*pulse,()=>{p.strokeStyle='#103847';p.lineWidth=.16;p.beginPath();p.arc(0,0,1,0,TAU);p.stroke();p.strokeStyle=color;p.lineWidth=.09;p.beginPath();p.arc(0,0,1,0,TAU);p.stroke();p.beginPath();p.arc(0,0,.45,0,TAU);p.stroke();});
-   const word=h.chance>=.95?NAVAL_V24_WORDS.hit:h.status==='turning'?NAVAL_V24_WORDS.turning:h.status==='far'?NAVAL_V24_WORDS.far:NAVAL_V24_WORDS.miss;
+   const word=h.chance>=.95?NAVAL_V24_WORDS.hit:h.status==='turning'?NAVAL_V24_WORDS.turning:h.status==='far'?NAVAL_V24_WORDS.far:h.status==='near'?NAVAL_V24_WORDS.near:NAVAL_V24_WORDS.miss;
    if(!m.homing)pill(p,word,Math.max(60,Math.min(width-60,b.x)),Math.min(height-24,b.y+30),color);
    out.aim={index:h.index,x:Math.round(b.x),y:Math.round(b.y),color,chance:h.chance,arrow:moved,word};
   }
