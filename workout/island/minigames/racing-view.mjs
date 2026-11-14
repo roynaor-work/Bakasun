@@ -27,7 +27,7 @@ export function shakeAmount(shakeT,shakeA,flying,crashT,crashDur){
 
 /** Local assets only. Meshy originals stay unchanged; the attributed sports
  * coupe has prepared geometry and separate paint materials for each racer. */
-export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7:v7Config=null,lite=false,cars:carInfo=null}={}){
+export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7:v7Config=null,lite=false,cars:carInfo=null,pits:pitsOn}={}){
  // v7 (design/racing-v7): five cars with LODs, spectators, props, asphalt maps, tire-smoke sprite. Off with ?racingV7=0 or v7.enabled=false;
  // any load problem keeps the previous coupe, trees and procedural textures (see the v7 block below the ribbons).
  const v7On=v7Enabled(v7Config,new URLSearchParams(globalThis.location?.search||''));let v7=null,v7Reason=v7On?'':'off';
@@ -255,10 +255,11 @@ const FORMULA_CARS=3; // the player and the two nearest rivals; the other cars k
  if(!disposed&&carCount>1){try{const fa=await import('./racing-formula-all.mjs?v=island-v2-20261107-14');if(fa.formulaAllEnabled()){const templates=await fa.loadFormulaAll({T,GLTFLoader});
   if(disposed){for(const t of templates){t.body.dispose();for(const w of t.wheels)w.geometry.dispose();}}else formulaAll=fa.attachFormulaAll({T,cars,templates,colors:carColors,accents:cars.map((_,i)=>teamOf(i).accent),keep,minLod:lite?1:0,shadows:quality===0});}}
   catch(e){failures.push('formula-all');console.warn('formula all',e?.message||e);}}
- // racing-v24 pits: a painted box for every car in the pit lane (racing-pit-view.mjs), only in a race with stops
+ // racing-v24 pits: a painted box for every car in the pit lane (racing-pit-view.mjs), only in a race with stops (racing-v24.1: the session passes the model's
+ // answer, `pits`, since two-lap races stop too; without it the v24 rule of 3 laps and more)
  // and the Codex pit crew at the player's box (racing-pit-crew.mjs, 3.5 MB): loaded in the background, never on a weak device, ?racingPitCrew=0 never
  let pitCrew=null;
- if(f1Look&&!disposed){try{const pv=await import('./racing-pit-view.mjs?v=island-v2-20261107-14');if(pv.pitBoxesOn(stage)){pv.paintPitBoxes({T,scene,track,keep,count:carCount,colors:carColors});
+ if(f1Look&&!disposed){try{const pv=await import('./racing-pit-view.mjs?v=island-v2-20261107-14');if(pitsOn!==undefined?pitsOn:pv.pitBoxesOn(stage)){pv.paintPitBoxes({T,scene,track,keep,count:carCount,colors:carColors});
   if(!lite)import('./racing-pit-crew.mjs?v=island-v2-20261107-14').then(m=>m.pitCrewEnabled()?m.loadPitCrew({T,GLTFLoader,track,count:carCount,team:carColors[0],keep}):null).then(c=>{if(!c)return;if(disposed){c.dispose();return;}pitCrew=c;scene.add(c.root);}).catch(e=>{failures.push('pit-crew');console.warn('pit crew',e?.message||e);});}}
   catch(e){failures.push('pit-boxes');console.warn('pit boxes',e?.message||e);}}
  const nearRank=new Map(),FULL_RIVALS=4;

@@ -9,12 +9,16 @@
 //  stop   kinematic and identical for everybody: the entry ramp from the end of the last corner into the pit lane (fast lane 6.2 m beyond the asphalt) at 20 m/s, the
 //         car's own box (working lane, 9 m out), a 2.2-2.8 s stop for the computer; the player taps the tyre change (2 s; it starts by itself after 0.8 s), then the
 //         lane and the exit ramp back onto the road. The line is crossed inside the pit lane, gates count as usual; a stop never starts on the last lap.
-import {PIT,pitLane,tyreWorn,ease,easeSlope} from './racing-v24.mjs?v=island-v2-20261107-14';
+import {PIT,PIT_AUTO,autoStopLap,pitLane,tyreWorn,ease,easeSlope} from './racing-v24.mjs?v=island-v2-20261107-14';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-export function createPitCrew({track,stage,cars,random,event,passGates,sector,enabled=true}){
- const lane=pitLane(track),laps=stage.laps,on=!!enabled&&laps>=PIT.minLaps,L=track.length,n=cars.length;
- const planLap=car=>{if(laps<=3)return random()<.25?1:2;const mid=Math.max(1,Math.floor(laps/2));return clamp(mid+(car.aiStyle>.62?0:car.aiStyle<.3?1:random()<.5?0:1),1,laps-1);};
- cars.forEach((car,i)=>{car.tyre=1;car.pits=0;car.pitLaps=[];car.pit=null;car.pitRequest=false;car.pitAuto=false;car.pitPlan=on&&!car.isPlayer?planLap(car):0;car.boxIndex=i;car.pitEntryAt=null;});
+// racing-v24.1 (`auto`: the model's config.pitAuto, which the session sets unless ?racingPitAuto=0): stops in every race of PIT_AUTO.distance metres or more (two
+// laps are enough; a two-lap race stops at the end of lap 1, the computer drivers too), and the player's car is pitted at the end of autoStopLap(laps) without a
+// tap: armed once from the start of that lap (event pitRequest auto), cancelled by the pit button until the car is committed 80 m before the entry (pitCancel).
+// Without `auto` everything below is v24: races of PIT.minLaps laps or more, the player's stop when asked or at the last possible lap.
+export function createPitCrew({track,stage,cars,random,event,passGates,sector,enabled=true,auto=false}){
+ const lane=pitLane(track),laps=stage.laps,L=track.length,n=cars.length,on=!!enabled&&(auto?laps>=2&&laps*L>=PIT_AUTO.distance:laps>=PIT.minLaps),stopLap=autoStopLap(laps);
+ const planLap=car=>{if(auto&&laps===2)return 1;if(laps<=3)return random()<.25?1:2;const mid=Math.max(1,Math.floor(laps/2));return clamp(mid+(car.aiStyle>.62?0:car.aiStyle<.3?1:random()<.5?0:1),1,laps-1);};
+ cars.forEach((car,i)=>{car.tyre=1;car.pits=0;car.pitLaps=[];car.pit=null;car.pitRequest=false;car.pitAuto=false;car.pitCancelled=false;car.pitPlan=on&&!car.isPlayer?planLap(car):0;car.boxIndex=i;car.pitEntryAt=null;});
  const entryAhead=car=>lane.entry+Math.ceil((car.routeS-lane.entry+1e-6)/L)*L;   // the next pit entry at or after the car, in the car's own unwrapped metres
  /** per fixed step, for a car on the road: tyre wear */
  function wear(car,{yaw=0,brake=false},dt){
@@ -26,6 +30,7 @@ export function createPitCrew({track,stage,cars,random,event,passGates,sector,en
  function wants(car){
   if(car.lap>=laps||car.finished)return false;
   if(car.isPlayer){
+   if(auto)return car.pitRequest;   // racing-v24.1: armed at the start of the stop lap (arm) or asked with the button, and a cancel holds
    if(!car.pitRequest&&car.pits===0&&(car.tyre<PIT.autoTyre||car.lap===laps-1)){car.pitRequest=true;car.pitAuto=true;event('pitRequest',car,{auto:true});}
    return car.pitRequest;}
   if(car.tyre<PIT.autoTyre)return true;
@@ -38,8 +43,14 @@ export function createPitCrew({track,stage,cars,random,event,passGates,sector,en
  /** per fixed step, after the car moved on the road: decide once per entry (in the last 80 m before it), start the stop inside the entry window. The decided entry is
   * kept (car.pitEntryAt): recomputing "the next entry" every step jumped a lap ahead the moment the car passed the entry, and a car at 40 m/s (0.67 m a step) could
   * step over a 0.5 m window and miss its stop. A stop missed because the car was flipping or off the track is decided again at the next entry. */
- function watch(car){
+ /** racing-v24.1: the player's automatic stop is asked for once, from the start of its lap and after the start (PIT_AUTO.armAfter s of race time) */
+ function arm(car,time){
+  if(!auto||!car.isPlayer||car.pitRequest||car.pitCancelled||car.pits>0||car.lap!==stopLap||car.lap>=laps||!(time>=PIT_AUTO.armAfter))return;
+  car.pitRequest=true;car.pitAuto=true;event('pitRequest',car,{auto:true,lap:car.lap});
+ }
+ function watch(car,time=Infinity){
   if(!on||car.pit||car.finished||car.crashT>0||car.offFlight)return;
+  arm(car,time);
   const target=car.pitEntryAt;
   if(car.pitGo&&target!=null&&car.routeS>=target-.5){
    if(car.routeS<target+lane.lane0-lane.entry){
@@ -96,7 +107,9 @@ export function createPitCrew({track,stage,cars,random,event,passGates,sector,en
  return {on,lane,wear,watch,drive,topOf,gripOf,aiCornerOf,
   /** the pit button: a stop at the next pit entry (not on the last lap; one request at a time) */
   request(car){if(!on||car.pit||car.finished||car.lap>=laps||car.pitRequest)return false;car.pitRequest=true;event('pitRequest',car,{auto:false});return true;},
+  /** racing-v24.1: the pit button while a stop is asked for: cancel it (an automatic one is not asked again in this race) until the car is committed to its entry */
+  cancel(car){if(!auto||!on||!car.pitRequest||car.pit||car.pitGo)return false;car.pitRequest=false;if(car.pitAuto)car.pitCancelled=true;car.pitAuto=false;event('pitCancel',car,{lap:car.lap});return true;},
   /** the tyre-change tap while the player's car stands in its box */
   tap(car){if(!car.pit||car.pit.phase!=='stop')return false;car.pit.tapped=true;return true;},
-  info:()=>({on,laps,lane:{...lane}})};
+  info:()=>({on,laps,auto,stopLap:auto?stopLap:null,lane:{...lane}})};
 }

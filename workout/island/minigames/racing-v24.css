@@ -23,6 +23,10 @@
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-button .racing-pit-sub:empty{display:none}
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=requested]{background:var(--race-yellow);color:#101b29;border-color:#ffe877;box-shadow:0 0 0 3px #f5cf422b}
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=requested] .racing-pit-sub{color:#2b2508}
+/* racing-v24.1: the automatic stop of this lap, announced on the button (a tap cancels it): the requested look and a slow pulse, so it is noticed */
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=auto]{background:var(--race-yellow);color:#101b29;border-color:#ffe877;box-shadow:0 0 0 3px #f5cf422b;animation:racing-pit-auto 1.6s ease-in-out infinite}
+.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=auto] .racing-pit-sub{color:#2b2508}
+@keyframes racing-pit-auto{0%,100%{box-shadow:0 0 0 3px #f5cf422b}50%{box-shadow:0 0 0 7px #f5cf4255}}
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-change{
  position:absolute;left:calc(50% + 14px);top:38%;width:196px;min-height:78px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
  border-radius:8px;border:2px solid #ffe877;background:var(--race-yellow);color:#101b29;font:900 19px/1.1 system-ui,sans-serif;pointer-events:auto;touch-action:none;z-index:8;
@@ -36,4 +40,4 @@
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-change[data-phase=stop] .racing-pit-progress{display:none}
 .game-screen[data-game=islandRacing] .game-controls .racing-pit-progress-fill{display:block;width:100%;height:100%;background:#4fd27d;transform-origin:left;transform:scaleX(0)}
 .game-screen[data-game=islandRacing] .racing-tower .rt-row[data-pit] .rt-gap{color:#ffe877;font-weight:900}
-@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-tyre-fill{transition:none}}
+@media(prefers-reduced-motion:reduce){.game-screen[data-game=islandRacing] .racing-tyre-fill{transition:none}.game-screen[data-game=islandRacing] .game-controls .racing-pit-button[data-state=auto]{animation:none}}
