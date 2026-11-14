@@ -16,7 +16,7 @@ import {runAlpineSession} from '../workout/island/minigames/alpine-session.mjs';
 import {buildShell} from '../workout/island/tools/offline-shell.mjs';
 
 /** Ski v24.1 (Roy: the control and what is on the course, so it does not repeat itself). Node part; the real-touch browser proof is
- * workout/island/tools/alpine-v241-browser.mjs and its report is workout/island/verification/alpine-v24-1/REPORT.md. */
+ * workout/island/tools/alpine-v241-browser.mjs (screenshots and measurements in workout/island/verification/alpine-v24-1/). */
 const root = new URL('../workout/island/', import.meta.url);
 const data = await loadData(root, async url => ({ok: true, json: async () => JSON.parse(await readFile(url, 'utf8'))}));
 const base = data.config.minigames.alpineRush, V24 = withoutV241(base), P = base.physics, PIPE = pipeProfile(P), DT = 1 / 60;

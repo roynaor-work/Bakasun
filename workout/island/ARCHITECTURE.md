@@ -79,7 +79,7 @@
 | `minigames/alpine-controls.mjs` | ג׳ויסטיק משוך למטה = בלם (אזור מת 35%, אגודל שזז בעיקר לצדדים לא בולם), חץ למטה / S |
 | `minigames/alpine-view.mjs`, `alpine-steer.mjs`, `alpine-character.mjs`, `alpine-v241.css` | אביזרים לכל סוג חדש, קשת לכל קטע, בועת מגן וטבעת מגנט, הסקי מכוונים לכיוון התנועה (`travelYaw`) ונטייה לתוך הפנייה (`curveBank`), מחרשה בבלימה; גלולת הקטע ושבבי הכוח ב־HUD |
 
-מדידה: `tools/alpine-v241-measure.mjs` (שליטה ותוכן, `--root` לעץ ישן, `--off` לדגל), הוכחת דפדפן `tools/alpine-v241-browser.mjs`, דוח `verification/alpine-v24-1/REPORT.md`.
+מדידה: `tools/alpine-v241-measure.mjs` (שליטה ותוכן, `--root` לעץ ישן, `--off` לדגל), הוכחת דפדפן `tools/alpine-v241-browser.mjs`; המדידות, סימולציית הליגה והצילומים ב־`verification/alpine-v24-1/`.
 
 ## תפוס את הפושע (catchCriminal)
 

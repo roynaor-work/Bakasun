@@ -16,7 +16,7 @@ import {createKidBot} from './alpine-league-bot.mjs';
 
 const OUT = fileURLToPath(new URL('../verification/alpine-v24-1/', import.meta.url));
 const W = 844, H = 390, argv = process.argv.slice(2), opt = name => { const i = argv.indexOf(name); return i >= 0 ? argv[i + 1] : null; };
-const only = opt('--only'), FRAME = Number(opt('--frame') || 100);
+const only = opt('--only'), FRAME = Number(opt('--frame') || 100), THEMES = opt('--themes')?.split(',') || null;
 await mkdir(OUT, {recursive: true});
 const report = {when: new Date().toISOString(), viewport: [W, H], touch: 'CDP Input.dispatchTouchEvent', frameMs: FRAME, runs: []};
 const log = (...a) => console.error('·', ...a);
@@ -57,13 +57,14 @@ const pathOf = (page, theme) => page.evaluate(theme => { const s = theme ? windo
  * rides until `until(frame)`, and `shots` (name -> test(snapshot)) are photographed the first time they hold. */
 async function ride(page, touch, read, {label, probes = true, kappa = null, until = () => false, shots = {}, maxFrames = 4000, seed = 7}) {
   const out = {label, probes: {}, shots: {}, frames: 0}, stick = await page.locator('.alpine-joystick').boundingBox(), reach = Math.max(10, (stick.width / 2 - 8) * .62);
+  report.runs.push(out);   // filled as the run goes, so a later failure still leaves the probes and shots in the report
   const boostAt = await touch.center('.alpine-boost'), grabAt = await touch.center('.alpine-trick[data-trick=grab]'), origin = [Math.round(W / 2 * .62), Math.round(H * .55)];
   let snap = await read(); const physics = await page.evaluate(async () => (await (await fetch(new URL('data/config.json', document.baseURI.includes('/tools/') ? new URL('../', document.baseURI) : document.baseURI))).json()).minigames.alpineRush.physics);
   const bot = createKidBot({seed, physics}); let down = false, extra = null;
   const step = async () => { await nextFrame(page); out.frames++; snap = await read(); return snap; };
   const thumb = async (dx, dy = 0) => { if (!down) { await touch.send('touchStart', [[1, ...origin]]); down = true; } await touch.send('touchMove', [[1, origin[0] + dx, origin[1] + dy]]); };
   const lift = async () => { if (down) { await touch.send('touchEnd', []); down = false; } };
-  const regrip = async (t, button) => { await touch.send('touchEnd', []); await touch.send('touchStart', [[1, ...origin]]); if (button) await touch.send('touchStart', [[1, ...origin], [2, ...button]]); await touch.send('touchMove', button ? [t, [2, ...button]] : [t]); down = true; };
+  const regrip = async (t, button) => { if (down) await touch.send('touchEnd', []); await touch.send('touchStart', [[1, ...origin]]); if (button) await touch.send('touchStart', [[1, ...origin], [2, ...button]]); await touch.send('touchMove', button ? [t, [2, ...button]] : [t]); down = true; };
   const shoot = async name => { if (out.shots[name]) return; const f = snap.frame, file = `${label}-${name}.png`; await page.screenshot({path: OUT + file}); out.shots[name] = {file, raceMs: f?.timeMs, s: Math.round(f?.distanceM ?? 0), hud: snap.hud}; log(label, 'shot', name, f?.timeMs); };
   await page.evaluate(() => { window.__frameGate.locked = true; });
   while (snap?.frame?.phase !== 'racing' && out.frames < 400) { if (snap?.frame?.phase === 'countdown' && shots.countdown && snap.frame.countdownMs < 1800) await shoot('countdown'); await step(); }
@@ -147,7 +148,7 @@ async function islandRun(label, query, {toFinish}) {
     result.islandResult = await page.evaluate(() => ({text: (document.querySelector('dialog[open], .modal[open], .result-dialog') || document.body).innerText.slice(0, 400), stillRunning: !!window.__island.ui.activityInterface.current}));
   }
   result.renderMetrics = await page.evaluate(() => { const m = window.__island?.ui?.activityInterface?.current?.session?.snapshot?.renderMetrics; return m ? {triangles: m.triangles, calls: m.calls, quality: m.quality, props: m.props} : null; }).catch(() => null);
-  result.errors = errors; report.runs.push(result); log(label, JSON.stringify({probes: result.probes, shots: Object.keys(result.shots), final: result.final, errors}));
+  result.errors = errors; log(label, JSON.stringify({probes: result.probes, shots: Object.keys(result.shots), final: result.final, errors}));
   await page.close();
 }
 async function themeRun(label, stage, wanted, maxMs) {
@@ -158,7 +159,7 @@ async function themeRun(label, stage, wanted, maxMs) {
   await page.waitForFunction(() => window.__theme?.ready || window.__theme?.error, null, {timeout: 600000});
   await touch.tap('[data-action=alpine-start]');
   const result = await ride(page, touch, reader(page, true), {label, probes: false, shots: wanted, until: (f, o) => f.timeMs > maxMs || Object.keys(wanted).every(k => o.shots[k]), maxFrames: Math.ceil(maxMs / FRAME) + 120, seed: stage});
-  result.errors = errors; result.stage = stage; report.runs.push(result); log(label, JSON.stringify({shots: Object.keys(result.shots), final: result.final, errors}));
+  result.errors = errors; result.stage = stage; log(label, JSON.stringify({shots: Object.keys(result.shots), final: result.final, errors}));
   await page.close();
 }
 try {
@@ -166,16 +167,17 @@ try {
   if (!only || only === 'off') await islandRun('v24-stage1', '&alpineV241=0', {toFinish: false});
   if (!only || only === 'themes') {
     for (const [label, stage, wanted, maxMs] of [
-      ['league5-jumps', 5, {'bigramp-ahead': ahead(['bigramp'], -28, -10), 'ring-ahead': ahead(['ring'], -20, -4), 'air-trick': s => !!s.frame.player.trick, 'section-active': s => !!s.frame.section?.active}, 26000],
+      ['league5-jumps', 5, {countdown: () => true, 'bigramp-ahead': ahead(['bigramp'], -28, -10), 'ring-ahead': ahead(['ring'], -20, -4), 'air-trick': s => !!s.frame.player.trick, 'section-active': s => !!s.frame.section?.active}, 26000],
       ['league7-penguins', 7, {'penguins-ahead': ahead(['mover-penguin'], -26, -8), 'section-active': s => s.frame.section?.active && s.frame.section.kind === 'movers'}, 26000],
       ['league24-powder', 24, {'powder-ahead': ahead(['powder'], -30, -6), 'in-powder': s => s.frame.player.surface === 'powder'}, 22000],
       ['league10-ice', 10, {'ice-ahead': ahead(['ice'], -30, -6), 'on-ice': s => s.frame.player.surface === 'ice'}, 34000],
       ['league6-stars', 6, {'stars-ahead': ahead(['star'], -26, -6), 'magnet-chip': s => s.hud.powers.length > 0, 'section-active': s => s.frame.section?.active && s.frame.section.kind === 'stars'}, 24000]]) {
+      if (THEMES && !THEMES.includes(label)) continue;   // --themes a,b: only these (two browsers can share the list)
       await themeRun(label, stage, wanted, maxMs);
     }
   }
 } finally {
   report.csp = await csp.assertClean().then(() => 'clean').catch(e => String(e.message || e));
-  await writeFile(OUT + (only ? `browser-proof-${only}.json` : 'browser-proof.json'), JSON.stringify(report, null, 1) + '\n');
+  await writeFile(OUT + (only ? `browser-proof-${only}${THEMES ? '-' + THEMES.length + '-' + THEMES[0] : ''}.json` : 'browser-proof.json'), JSON.stringify(report, null, 1) + '\n');
   await browser.close(); await csp.dispose(); await server.close();
 }
