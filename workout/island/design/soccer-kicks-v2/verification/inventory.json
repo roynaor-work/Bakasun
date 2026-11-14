@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 3645,
+      "sha256": "ef71d05a67113b52fa8c6866daad85a9d527d06c05a06d2988a6eb019a963970"
+    },
+    {
+      "path": "README.md",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 2402,
+      "sha256": "aae90e32d0bc635cba775056d4e15e59bf6afacc8ac1ef09c6744f2cba1a325d"
+    },
+    {
+      "path": "REPORT.md",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 10847,
+      "sha256": "8637e169f142b6fb0b7d206b7184966afe82d8fdd975c70e55eb6bc382b5af9d"
+    },
+    {
+      "path": "measure.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 13502,
+      "sha256": "cd181266683c3177b24558aced17c7d8aec919d1cb42fffc36eca57b65bb0f55"
+    },
+    {
+      "path": "preview.css",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 8773,
+      "sha256": "6c77286099fff6597b42f694e48cfda01955164fa16d9be54932bdca5383cf5b"
+    },
+    {
+      "path": "preview.html",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 3991,
+      "sha256": "ce5a884930957699314d87f12b1a89abec5c9baeebd81013e03046aa3fed986b"
+    },
+    {
+      "path": "preview.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 16684,
+      "sha256": "3d15309c3d3a42cdd2b6a0b9aaec291807de057d724e442144a7a71fdfe94a35"
+    },
+    {
+      "path": "qa-register.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 716,
+      "sha256": "1a2f6e47c20292844435d52d709cc5629c17739715fb705c04d2aadeb099e09a"
+    },
+    {
+      "path": "qa-report.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 4403,
+      "sha256": "d43684d9718b4562697462ef99cf31afcb74ef4fd356f9d9a3445e4926df3abe"
+    },
+    {
+      "path": "qa-sources.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 7136,
+      "sha256": "1dd0b33444a906781e93044483b963534403c491615db182a4309f771e484215"
+    },
+    {
+      "path": "runtime/catalog.json",
+      "license": "CC0-1.0",
+      "origin": "Original authored canonical18 poses, event catalog or transition helper; reused CC0 mathematics identified in provenance.",
+      "bytes": 319711,
+      "sha256": "fab8a968f174d5c610292f3cf5a480f3555792e1eb205e1a29a7830685ceaf41"
+    },
+    {
+      "path": "runtime/clips/chip.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 796288,
+      "sha256": "32013275e851b18198415c2848852924f80cbba4fbcbaa99b72d7bd2d3dd6192"
+    },
+    {
+      "path": "runtime/clips/inside_curve.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 799080,
+      "sha256": "c7c7eb3127479b60d9ec22ba458981219e128f8176713a240ab0bca83ff2e5ee"
+    },
+    {
+      "path": "runtime/clips/lift_pass.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 797308,
+      "sha256": "5db57a8ba1b0220e7873a74a35b3de5aea4a0aed7ec200a1862f1951063eb4d9"
+    },
+    {
+      "path": "runtime/clips/long_pass.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 799960,
+      "sha256": "cd3f875ee4103304ed47dcd774ee5671f02548e9065fb6b531359d5fcf5c0b50"
+    },
+    {
+      "path": "runtime/clips/outside_kick.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 797256,
+      "sha256": "630749fac72070c1da35e315f88f489dd03877871459295de74c8d81832f8838"
+    },
+    {
+      "path": "runtime/clips/placed_kick.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 795488,
+      "sha256": "73cae5df00bab1f9fe7322975e3153e2a07520e4d3b9c5f4a8bbde546633b7a6"
+    },
+    {
+      "path": "runtime/clips/power_landing.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 799392,
+      "sha256": "c758246304cb05c5bd354070cc81486a7d0c3d3587049a5eabeeb727bcd85d67"
+    },
+    {
+      "path": "runtime/clips/running_kick.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 784460,
+      "sha256": "b2a8d4e2ecb965ffa3b9cbf96cee4cfb2cd8d945b8b5f5ebef50a1e8bc898014"
+    },
+    {
+      "path": "runtime/clips/scissors.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 810308,
+      "sha256": "c4778adebe78e01472d79137bd003ca127fefef7a0ba7f9ffd1689ecb26ca208"
+    },
+    {
+      "path": "runtime/clips/short_inside_pass.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 791912,
+      "sha256": "4343fb24cf5a8fae3fe45978f573f73f067b29bfe13d07ba434148b09770c578"
+    },
+    {
+      "path": "runtime/clips/through_pass.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 794580,
+      "sha256": "57e559a33143693c001d3189a8e8eacfd11aa90424c546c267ad0bf1cbf5c2b0"
+    },
+    {
+      "path": "runtime/clips/volley.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 799024,
+      "sha256": "c1818ac9ccae49152724762373f1a2cdbbf5d35e0d15dce375507f2b7941492e"
+    },
+    {
+      "path": "runtime/clips/weak_foot.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 798136,
+      "sha256": "7fe480484a7cf775e858e94686bc6350ea541c3eb5deca920b70a51a0b420de2"
+    },
+    {
+      "path": "runtime/clips/wing_cross.glb",
+      "license": "CC0-1.0",
+      "origin": "Original choreography baked by source/author.mjs and source/bake.mjs with inherited fictional CC0 geometry.",
+      "bytes": 801948,
+      "sha256": "031e839e78c1de9bdd253549650afb93abcbe3bf88e30000c3a549f5941c8c46"
+    },
+    {
+      "path": "runtime/motions.json",
+      "license": "CC0-1.0",
+      "origin": "Original authored canonical18 poses, event catalog or transition helper; reused CC0 mathematics identified in provenance.",
+      "bytes": 1780247,
+      "sha256": "1dd879996d12907252fa2ddee88e21416c13673c076142add4aebe8846134eda"
+    },
+    {
+      "path": "runtime/player.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original authored canonical18 poses, event catalog or transition helper; reused CC0 mathematics identified in provenance.",
+      "bytes": 3877,
+      "sha256": "03fda73aa0eeb61c1f9133a66f4877a5b7804fff544b2d1df0c154c09a08e5c8"
+    },
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "license": "CC0-1.0",
+      "origin": "Byte-identical CC0 reference GLB copied from soccer-header-v1; see provenance.",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "license": "CC0-1.0",
+      "origin": "Byte-identical CC0 reference GLB copied from soccer-header-v1; see provenance.",
+      "bytes": 775408,
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934"
+    },
+    {
+      "path": "sheets/chip.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 59766,
+      "sha256": "6bb52fea6cf719e72ed34cbc98424a26228ea466fb327a4cf46eb5a34b09445e"
+    },
+    {
+      "path": "sheets/inside_curve.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61326,
+      "sha256": "d1a8d51f08153f01659a7e539bfab33d5e57bfc87501fb7bc2f6bb6b684882ee"
+    },
+    {
+      "path": "sheets/lift_pass.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 60932,
+      "sha256": "f1c60e64bb0b6868531fe1d3c4f9234afac3c16c0f4fade82586dcd98ce8e6a4"
+    },
+    {
+      "path": "sheets/long_pass.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61590,
+      "sha256": "f94e9a774987d4b03a5eec72ec1b0ebb8341e57b954836a6425c1df4817120ac"
+    },
+    {
+      "path": "sheets/manifest.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 19182,
+      "sha256": "53d87a9d6e487dea2a5c4d908399639526c6127b4d1df1d2007cc52e4014e523"
+    },
+    {
+      "path": "sheets/outside_kick.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61246,
+      "sha256": "1b01e15f10a825cac354a3bb7eb577b1d3ce648e1da7ab3410c7436da6da4a5e"
+    },
+    {
+      "path": "sheets/placed_kick.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 60958,
+      "sha256": "b2b66723d0dff5a1bafc88360ed2b638dce449ad0d524b48f2dd17063bf0a058"
+    },
+    {
+      "path": "sheets/power_landing.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61828,
+      "sha256": "d7e1a887a3b1ee6db5d3ce76af44d2ad4bfad9f6d2bec7ce14f223789e394a10"
+    },
+    {
+      "path": "sheets/running_kick.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 60660,
+      "sha256": "2f82c08251f56b4775492cfcbbe2424ca095dd8678cd565064220aae7327aa0f"
+    },
+    {
+      "path": "sheets/scissors.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 55114,
+      "sha256": "61c0fd74af052cf8cf73b9d84c034c5bd129402d8c318c7bbeb847f1b4fccba1"
+    },
+    {
+      "path": "sheets/short_inside_pass.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61768,
+      "sha256": "c7dc11ff23cb034efb49f70b0b0f02c0e2b7d6413f058942cbbe10947f39c446"
+    },
+    {
+      "path": "sheets/through_pass.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61510,
+      "sha256": "f3fded8383820984f60c32befe689cd1ce51d5b7b61ad6fffd1a2e9ea3562e72"
+    },
+    {
+      "path": "sheets/volley.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 59706,
+      "sha256": "fbf88ee39d5167be5d6d09fabcbca61cfbfa4c8b2ef765e0a1a7ea5af6f6e160"
+    },
+    {
+      "path": "sheets/weak_foot.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 61102,
+      "sha256": "889c87dcb9f431b4aca04361dacf6075b3db2af75097f075f718748c1cc7a73b"
+    },
+    {
+      "path": "sheets/wing_cross.webp",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 62206,
+      "sha256": "0e04b97e05dc7bf38afee819617b2f94b2e3c797bb6333e8b26c45e9e9c7e58f"
+    },
+    {
+      "path": "source/author.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 20051,
+      "sha256": "33498a41a2e6dbb5555f841cbcf12efb0ce6a864f2c4ff0c19de28180b6e3cbc"
+    },
+    {
+      "path": "source/bake.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 3302,
+      "sha256": "b945cf6408284df1449807d942979d4c98c0f02b4f6c908b3173d1e9418c5031"
+    },
+    {
+      "path": "source/capture.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 8037,
+      "sha256": "0901be2ee5b7951f1ee7bd69e2147af624608af19fae4648b1a01c478259d4a7"
+    },
+    {
+      "path": "source/measure-transitions.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 13595,
+      "sha256": "a308add05ef895fd42446d12cdd49b497d9475686141df63489bf9c8c38bff2d"
+    },
+    {
+      "path": "source/report.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 21324,
+      "sha256": "2fd2c8546871f5268222a39ba4a67afba27cc9c0817916af555df0ec4e45e7c0"
+    },
+    {
+      "path": "source/sheets.mjs",
+      "license": "CC0-1.0",
+      "origin": "Original CC0 source, documentation or review design created for this task.",
+      "bytes": 2793,
+      "sha256": "74de07b63beef2915cd0704fff08c45620b546532af8671cf7b4fbe41e8da7c8"
+    },
+    {
+      "path": "verification/browser.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6953,
+      "sha256": "c9d46a94bd459b76c3ec27bf2433f2fd8b89ae2f21c84bbeffe11021ea6c1fa4"
+    },
+    {
+      "path": "verification/preview-desktop.png",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 155825,
+      "sha256": "774f4afeb185f53ca9f2a4b88c9a1941f892f8593982b7213e4d02b48b8d015e"
+    },
+    {
+      "path": "verification/preview-mobile.png",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 94768,
+      "sha256": "94f455a01dc21675adb5d429e5a131309e6a7454f45a812b471c023e1c443c44"
+    },
+    {
+      "path": "verification/provenance.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 5245,
+      "sha256": "a0161b8a3463fcdc77cb3dd4b7c0dd3b5c35f147f18443787ee900c54b2943d1"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--chip.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6766,
+      "sha256": "c6673c75d76a0189323357c37956f52b0da7538920179637293a07bb260cd3d0"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--chip.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12428,
+      "sha256": "092ee4956f5a8986a04ec435d493cdba029930d9b346a8bf60855802ffb3d645"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--idle_relaxed.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6239,
+      "sha256": "945a4bc2849611a53521fe05d1e88abf553c7dbb8326ed50c99eaa45d8e100b8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--idle_relaxed.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 9278,
+      "sha256": "912191105f0a365bad76e78ce5f2447e67a08e6cbf63913f6bd5d5b0a6ea7d26"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--idle_run_reference.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 7170,
+      "sha256": "7a27ffa0872d614a985d365cc094e52678cb5e1fc674702212f2431cd150536f"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--idle_run_reference.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 11156,
+      "sha256": "b9255937de7c9a2717237d5dfac2ce267bb4ba0b6f0ddf0a556bdf29750ee0ae"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--inside_curve.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6806,
+      "sha256": "11f1bebf715e37b9281423833c30f5fac62876ca13ee8079eb2817dcf9f18ceb"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--inside_curve.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12422,
+      "sha256": "997717b30a4c2c98253dbd2bc1be7eb696aebb1fc2c3135ae52eed3f85809a01"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--lift_pass.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6783,
+      "sha256": "9dd0a14ab950b5c384f95131f46aa98b7b5e425145489d0557cdc00527872df9"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--lift_pass.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12502,
+      "sha256": "ec6a2df232552015db4198a57de7ddc8e46588e16201403d4c3f8c6f229c2909"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--long_pass.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6790,
+      "sha256": "d9ec1d1dc370df714e1f391b4eace6fb74adbe7d8aa6fa082bbd1caffd3ed805"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--long_pass.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12451,
+      "sha256": "80e4394c26c1bac2d2fdfada534e8ff04df86feea92339bc871170ee9dd8010e"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--outside_kick.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6798,
+      "sha256": "424bd15c2e7aa419fbdcc84b777eeb186d8d9feca5280d8a2cb8306d13f7cb18"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--outside_kick.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12408,
+      "sha256": "35bbe2b17d9904de56c2ff8ead178c255d4522679322f9ae29860103bf867498"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--placed_kick.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6802,
+      "sha256": "b42f3cd866c7232134ca7a1ac9416fc57680a3b30b5c648d10306897788c1564"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--placed_kick.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12203,
+      "sha256": "2c6b5c3677fcfe2447446ce95dbcc3b5df20140077baf34a753eda6bba7eba09"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--power_landing.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6827,
+      "sha256": "3bcf62bb86a2b1a8a127cfcac10f4847a93967605e6e30def087ce0c2329cafe"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--power_landing.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12736,
+      "sha256": "df01fd6814c6d6197876853840d2d3819162687a76dcb588657f8f9d8ca170d9"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--running_kick.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 8521,
+      "sha256": "19e5ce0ee69e3f8a404c4b9ab01a10ccc36d4cf9d5985fdf2793950004d61270"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--running_kick.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 14376,
+      "sha256": "facf45751c5d80fc72c5a7749a646c112fd9c9e48fd3c8e02a444f828ab9580b"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--scissors.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6790,
+      "sha256": "9f844ecfc8e75f702b480272c57bb2e0ee92303653b3c4aa48755db355e7046b"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--scissors.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 13206,
+      "sha256": "f853b170f9bad76a4c21de1442d803e42420c73f3dc2c2f4debcea98748b0a60"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--short_inside_pass.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6824,
+      "sha256": "868f863de8b8b51895534f809a86e973ebc442a53edbfc9b1b792f6c9a351ede"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--short_inside_pass.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12475,
+      "sha256": "257dbe22a6e6df7296199ac68e910cdea5ce487fdb30533f739ac979d9e7aa07"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--through_pass.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6804,
+      "sha256": "73ab6d689c65aaa21615c6aa8a2862c4731130d0f308e858261e0f568472bc87"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--through_pass.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12428,
+      "sha256": "18a21ccfebfc2a0970e032eeaf367fd4ead6f7808a76581b600e3560c171d68b"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--volley.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6770,
+      "sha256": "b791d4c770d61d7a7ff5a371a7e04d41b8271ed92cbae07fe738b88f57fd4932"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--volley.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12906,
+      "sha256": "8bd833a4d5b12d6b80de9b9ad7493576399ed383f7b39992a00b950874055daa"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--weak_foot.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6789,
+      "sha256": "b49623576ed573cbed1fc1458c604c55f9688404e9488bc98c1173292c150b36"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--weak_foot.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12487,
+      "sha256": "ac3f85b3dcc5c08a2d15ec3cab14919672b72503d714b573158684b4470545a1"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--wing_cross.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 6797,
+      "sha256": "a2e0c3fc057f7e6f8539c153252759587600d456e0a742b0223d775182e804d5"
+    },
+    {
+      "path": "verification/qa/clips/soccer-kicks-v2--wing_cross.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 12402,
+      "sha256": "e2a8c323358959f18880689022e6ebe31d71b6a7e2007836c135ee75ac64980d"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 14567,
+      "sha256": "f80905c84163ed0ed8528da11854e9485f296c984e4e839ba39902563bbd008e"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 220180,
+      "sha256": "179d41c473c005991fd54de2ac9092bd1fa2ef41eb0165978205dd022293ff31"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--chip.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26953,
+      "sha256": "082266848af3186409a7ad393ba1d034c2a19390fad533cd1f1fd5172cba31d8"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--idle_relaxed.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26225,
+      "sha256": "5ab6591ba1fd3b0a8f647a44be4da5b85dc5ff88a85a29ff4bf03cc14f5aa391"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--idle_run_reference.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26253,
+      "sha256": "0896a79f5e33fdd6a1f3acad838c48734c0f7afe0552d50cc8fe240b49bd9682"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--inside_curve.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26969,
+      "sha256": "06d22711b91568f5fe10929046e6912046e56e82ff6933f2852ee677a359b513"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--lift_pass.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26963,
+      "sha256": "a15a15a01abcdcc26c05f10f163408d899b6fb6366817dfc51d2dd5ff0747d24"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--long_pass.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26963,
+      "sha256": "663fa8ade2c66e7e1d5638b1906aad5602aa72fdf65fdc884c6880fa9d00a368"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--outside_kick.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26969,
+      "sha256": "561609c5befe7e3736a204a454891903cd119379c4c022bec439ccdf24312f04"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--placed_kick.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26967,
+      "sha256": "0fedda6d5952efbb340afb998606148aafa65b0d22c483ae856d21c6122862e7"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--power_landing.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26971,
+      "sha256": "0ff7b6c94648124ddee9cbbc142107afc04c21fabc92cdda806cec6aee5386ea"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--running_kick.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26969,
+      "sha256": "19b6f51579ede3f95f5782ab987cffbf3489fa08ecc3875992547e90ae336fa2"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--scissors.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26961,
+      "sha256": "04d1e1b1d8e93f80b24441f83e27c845f57a3a4848e7d512fa55a8294f13d62c"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--short_inside_pass.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26979,
+      "sha256": "e3cd798afe02cb1fe9ce2c46c2689700418decba947cb5b557315edf7c736918"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--through_pass.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26969,
+      "sha256": "4e2ddf5b26b16e3563ccd17b712b354182246d46d5f3279875a61e88d42438d1"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--volley.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26957,
+      "sha256": "b036b437ae9ead7c4ecc28f4e88087295d9b6b38e1e1450bcadc14cbb060e357"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--weak_foot.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26963,
+      "sha256": "b0aee18abd4254792edb56aee544c87d72719e1602b0002c410433af98cb08c9"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-kicks-v2--wing_cross.svg",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 26965,
+      "sha256": "1e9bff644109a7ff091b7a7e16335e00a8b7aebc4ad6a1ecda5197f705c77063"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 1847,
+      "sha256": "b903e80aa270b77c564f667f87c0f96f887a0f87558b2c2f3c4900bb8298201a"
+    },
+    {
+      "path": "verification/requirements.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 77153,
+      "sha256": "a58a6ab8b8326992476428cadb43a486f5059de5d76919bf220fab1e19eb56f9"
+    },
+    {
+      "path": "verification/transitions.json",
+      "license": "CC0-1.0",
+      "origin": "Generated measurement, actual GLB rendering or content provenance for this delivery; source method recorded in the file/report.",
+      "bytes": 235422,
+      "sha256": "22e654a35e3f6a0690020c3369d98bc9dab0015d4f6e358ed947c7a8a13ad10e"
+    },
+    {
+      "path": "verification/inventory.json",
+      "license": "CC0-1.0",
+      "origin": "Original generated inventory; its own hash is intentionally omitted."
+    }
+  ]
+}

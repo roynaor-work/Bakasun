@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "branch": "codex/soccer-kicks-v2",
+  "authorship": "Original choreography, ball paths, review UI, bridge floor projection and documentation dedicated under CC0-1.0.",
+  "references": [
+    {
+      "path": "runtime/reference/idle_relaxed.glb",
+      "source": "../soccer-header-v1/runtime/reference/idle_relaxed.glb",
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+      "bytes": 791120,
+      "license": "CC0-1.0",
+      "copiedUnchanged": true
+    },
+    {
+      "path": "runtime/reference/run.glb",
+      "source": "../soccer-header-v1/runtime/reference/run.glb",
+      "sha256": "71576c2d48fdbed1361a1cc8281b23330702c836caad524654f2b49f8b4db934",
+      "bytes": 775408,
+      "license": "CC0-1.0",
+      "copiedUnchanged": true
+    }
+  ],
+  "geometry": "Uncompressed fictional CC0 MakeHuman hm08 athlete and system assets, via soccer-motion-v8 -> soccer-motion-v10 -> soccer-header-v1; full source license chain linked in LICENSES.md.",
+  "dependencies": [
+    {
+      "path": "../soccer-header-v1/source/rig.mjs",
+      "license": "CC0-1.0",
+      "origin": "Canonical18 IK mathematics; originally from soccer-motion-v10/v9.",
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d",
+      "bytes": 5223
+    },
+    {
+      "path": "../soccer-header-v1/source/glb.mjs",
+      "license": "CC0-1.0",
+      "origin": "Uncompressed binary glTF read/write helpers.",
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0",
+      "bytes": 5643
+    },
+    {
+      "path": "../soccer-header-v1/runtime/player.mjs",
+      "license": "CC0-1.0",
+      "origin": "Canonical sampleMotion and Hermite C1 mathematics.",
+      "sha256": "f7014c7df9a37ec0df09acee21cc0c3c511000fef85d4f28cbbc3d69ddc2fd79",
+      "bytes": 6354
+    },
+    {
+      "path": "../soccer-motion-v8/runtime/vendor/three.module.js",
+      "license": "MIT",
+      "origin": "Existing three.js r160; Three.js authors.",
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6",
+      "bytes": 670681
+    },
+    {
+      "path": "../soccer-motion-v8/runtime/vendor/GLTFLoader.js",
+      "license": "MIT",
+      "origin": "Existing three.js r160 GLTFLoader; Three.js authors.",
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e",
+      "bytes": 108527
+    },
+    {
+      "path": "../soccer-motion-v8/runtime/vendor/BufferGeometryUtils.js",
+      "license": "MIT",
+      "origin": "Existing GLTFLoader transitive utility; Three.js authors.",
+      "sha256": "3a6701d824adfe05dc28c09b6c1d64aeab9a183bc3b944d85f15f596e5c6c2b3",
+      "bytes": 31918
+    },
+    {
+      "path": "../soccer-motion-v8/runtime/vendor/LICENSE.three",
+      "license": "MIT",
+      "origin": "Existing dependency license, retained unchanged.",
+      "sha256": "852e0e8699169bf9f6fdc6bda3e682d078dcbc738b5d33e74df594721bff271d",
+      "bytes": 1081
+    }
+  ],
+  "qa": {
+    "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+    "files": [
+      {
+        "path": "workout/island/design/motion-qa-v1/run.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+        "bytes": 12713
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/sources.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+        "bytes": 15655
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/sources.json",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+        "bytes": 1709
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/metrics.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+        "bytes": 36189
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/glb.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+        "bytes": 9363
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/report.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+        "bytes": 15342
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/sheets.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+        "bytes": 5947
+      },
+      {
+        "path": "workout/island/design/motion-qa-v1/licenses.mjs",
+        "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+        "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+        "bytes": 3539
+      }
+    ],
+    "loader": "qa-register.mjs replaces only sources.mjs; original sampler/formulas/thresholds unchanged."
+  }
+}

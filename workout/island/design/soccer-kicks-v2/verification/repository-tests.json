@@ -1,0 +1,37 @@
+{
+  "command": "npm test",
+  "exitCode": 1,
+  "baseCommit": "d759582c171600dd7c7df7906c2fb38ae7f8b88a",
+  "status": "בדיקות המאגר הושלמו; כשל הדפדפן הסביבתי עבר בהרצה חוזרת",
+  "summary": "בסוויטת npm test: 3,905 עברו, 64 דולגו, ואחת נכשלה משום שדפדפן Playwright אינו מותקן בנתיב ברירת המחדל. אותה בדיקת workout-royiki.test.mjs הורצה שוב ללא שינוי קוד הבדיקה, עם Chromium המותקן דרך ISLAND_PLAYWRIGHT: כל 5 הבדיקות עברו, כולל בדיקת הדפדפן. הסוויטה המלאה לא הורצה שוב. בדיקת הנכסים העצמאית עברה עם /usr/bin/chromium.",
+  "counts": {
+    "tests": 3970,
+    "pass": 3905,
+    "fail": 1,
+    "skipped": 64
+  },
+  "logSha256": "f3c268596ece5fa7346b7baf11d09fa3e1788c3572561d50cbfc060811b8cc92",
+  "failure": {
+    "file": "tests/workout-royiki.test.mjs",
+    "line": 93,
+    "reason": "browserType.launch: Executable does not exist at chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+  },
+  "assetChecks": {
+    "motionQA": true,
+    "canonical18And30Hz": true,
+    "transitions112": true,
+    "rendered112Frames": true,
+    "browserChromium": "/usr/bin/chromium"
+  },
+  "retry": {
+    "command": "ISLAND_PLAYWRIGHT=<temporary environment adapter selecting installed /usr/bin/chromium> node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "durationMilliseconds": 26112.254461,
+    "logSha256": "c9ebd3c801769f49067bc82e55d4dced1fbd42300d9494fd64b4b80f3cefcafa",
+    "changesToExistingTests": false,
+    "adapter": "Re-exports installed Playwright chromium and sets only executablePath=/usr/bin/chromium when launch() is called."
+  }
+}
