@@ -108,26 +108,32 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   await setGas(true);await tick(1500);report.after=await log();await frame('drive-on');await pullAudio();
  }
  else if(scenario==='offslow'){
-  // slowly off the road: a little gas to about 9 m/s, then a gentle turn to the right off the asphalt onto the run-off and the grass, gas off: the car rolls to a stop there
-  await setGas(true);for(let i=0;i<60;i++){await tick(FRAME);const s=await log();if(s.speed>9)break;}await setGas(false);
-  await setWheel(.55);for(let i=0;i<200;i++){await tick(FRAME);const s=await log();if(Math.abs(s.lateral)>(await page.evaluate(()=>window.__island.games.current.session.debug.model.track.width/2))+4.5)break;}
-  await setWheel(0);for(let i=0;i<120;i++){await tick(FRAME);const s=await log();if(s.speed<.6)break;}await frame('1-stopped-off');report.stopped=await log();
-  // try to drive back: the wheel towards the road and the gas held for 4 s
-  const side=Math.sign(report.stopped.lateral)||1;await setWheel(side*.9);await setGas(true);const tries=[];
-  for(let i=0;i<Math.round(4*FPS);i++){await tick(FRAME);const s=await log();tries.push(s);if(i%Math.round(FPS/2)===0)await frame('2-drive-back-'+String(i).padStart(3,'0'));}
-  report.driveBack={start:report.stopped,end:tries.at(-1),maxSpeed:Math.max(...tries.map(s=>s.speed)),minAbsLateral:Math.min(...tries.map(s=>Math.abs(s.lateral))),events:await page.evaluate(()=>window.__log.filter(e=>e.car==='player'&&e.t>window.__rv24t()-4.2&&e.type!=='pass'))};
-  // then: off again and left alone (no gas): how long until it is back on the road, and how
-  await setGas(false);await setWheel(0);await up(2);wheelOn=false;
-  const r2=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model;return {t:m.state.time,lateral:m.state.player.lateral};});report.alone={from:r2};const alone=[];
-  for(let i=0;i<Math.round(9*FPS);i++){await tick(FRAME);const s=await log();alone.push(s);if(i%FPS===0)await frame('3-alone-'+String(i).padStart(3,'0'));}
-  report.alone.events=await page.evaluate(t=>window.__log.filter(e=>e.car==='player'&&e.t>=t&&e.type!=='pass'),r2.t);report.alone.end=alone.at(-1);
+  // slowly off the road: the wheel finger follows the pilot, which aims 7 m beyond the asphalt on the side without the pit lane, the gas finger holds about 8 m/s;
+  // once the car is well on the grass the fingers lift and it rolls to a stop there. (The first version turned a fixed wheel: at walking pace the car drove in circles
+  // on the road and never left it.)
+  const half=await page.evaluate(()=>window.__island.games.current.session.debug.model.track.width/2);report.half=half;
+  const goOff=async label=>{let s=await log();const from=s.t;
+   for(let i=0;i<Math.round(20*FPS);i++){await drive({lane:half+7,brakes:false,gas:s.speed<8});s=await log();if(s.offroad&&Math.abs(s.lateral)>half+3)break;}
+   await setGas(false);await setWheel(0);
+   for(let i=0;i<Math.round(8*FPS);i++){await tick(FRAME);s=await log();if(s.speed<.6)break;}
+   await frame(label);return {...s,events:await page.evaluate(t=>window.__log.filter(e=>e.car==='player'&&e.t>=t&&e.type!=='pass'),from)};};
+  // 1) off and left alone (no finger) for 9 s: does it ever get back on the road, how, and when
+  report.stopped=await goOff('1-stopped-off');await up(2);wheelOn=false;const alone=[];
+  for(let i=0;i<Math.round(9*FPS);i++){await tick(FRAME);const s=await log();alone.push(s);if(i%FPS===0)await frame('2-alone-'+String(i).padStart(3,'0'));}
+  report.alone={from:report.stopped,end:alone.at(-1),backOnRoadAt:alone.find(s=>!s.offroad)?.t??null,events:await page.evaluate(t=>window.__log.filter(e=>e.car==='player'&&e.t>=t&&e.type!=='pass'),report.stopped.t)};
+  // 2) off again, then drive back like a child: the wheel towards the road (the pilot aims at the centre line) and the gas held for 5 s
+  report.stopped2=await goOff('3-stopped-off-again');const tries=[];
+  for(let i=0;i<Math.round(5*FPS);i++){await drive({lane:0,brakes:false});const s=await log();tries.push(s);if(i%Math.round(FPS/2)===0)await frame('4-drive-back-'+String(i).padStart(3,'0'));}
+  report.driveBack={start:report.stopped2,end:tries.at(-1),maxSpeed:Math.max(...tries.map(s=>s.speed)),backOnRoadAt:tries.find(s=>!s.offroad)?.t??null,minAbsLateral:Math.min(...tries.map(s=>Math.abs(s.lateral))),
+   events:await page.evaluate(t=>window.__log.filter(e=>e.car==='player'&&e.t>=t&&e.type!=='pass'),report.stopped2.t)};
   await pullAudio();
  }
  else if(scenario==='corner'){
-  // the turn alone: on the straight at speed, full lock without the brake for 1 s (a few corners' worth of steering); then straight; then the brake alone for 0.6 s
+  // the turn alone: on the straight at speed, full lock without the brake for 0.5 s (as tools/racing-v24-sim.mjs cornerTest: the car stays on the asphalt; a whole
+  // second at 30 m/s took the first run onto the grass and into the flip); then straight; then the brake alone for 0.6 s
   await setGas(true);for(let i=0;i<Math.round(14*FPS);i++){await drive({brakes:false});const s=await log();if(s.speed>36)break;}
-  const v0=(await log()).speed;await setWheel(.85);const turn=[];for(let i=0;i<FPS;i++){await tick(FRAME);turn.push(await log());}
-  report.turn={from:v0,to:turn.at(-1).speed,loss:+(v0-turn.at(-1).speed).toFixed(2),lossPerSecond:+((v0-turn.at(-1).speed)).toFixed(2)};await frame('1-turn');
+  const v0=(await log()).speed;await setWheel(.85);const turn=[];for(let i=0;i<Math.round(FPS/2);i++){await tick(FRAME);turn.push(await log());}
+  report.turn={from:v0,to:turn.at(-1).speed,loss:+(v0-turn.at(-1).speed).toFixed(2),seconds:+(turn.length/FPS).toFixed(2),maxLateral:Math.max(...turn.map(s=>Math.abs(s.lateral))),offroad:turn.some(s=>s.offroad)};await frame('1-turn');
   await setWheel(0);for(let i=0;i<Math.round(1.5*FPS);i++){await drive({brakes:false});await log();}
   const v1s=await log(),v1=v1s.speed;await pullAudio();await setGas(false);await setBrake(true);const br=[];for(let i=0;i<Math.round(.6*FPS);i++){await tick(FRAME);br.push(await log());}
   report.brake={from:v1,to:br.at(-1).speed,decel:+((v1-br.at(-1).speed)/.6).toFixed(1),t0:v1s.t,t1:br.at(-1).t};await frame('2-brake');await setBrake(false);await tick(FRAME*3);await pullAudio();
@@ -143,9 +149,12 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   report.audible=[...new Set(audio.levels.filter(l=>l.v>.0005).map(l=>l.url))];
  }
  else if(scenario==='bump'){
-  // launch and steer into the car beside on the grid (the player starts in slot 3: the car to the side is one row ahead/behind), then hold the line
-  await setGas(true);const side=Number(process.env.RV24_SIDE)||1;await setWheel(side*.45);let hit=null;
-  for(let i=0;i<Math.round(6*FPS)&&!hit;i++){await tick(FRAME);await log();hit=await page.evaluate(()=>window.__log.find(e=>e.type==='bump'&&(e.car==='player'||e.with==='player'))||null);if(i%3===0)await frame('launch-'+String(i).padStart(3,'0'));}
+  // launch and steer into the nearest car on the grid: the wheel finger follows the pilot aimed at that car's line (a fixed wheel in the first run steered the player,
+  // who starts on the outside of the grid, off the road and into a flip without touching anybody), then hold the line
+  report.target=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model,p=m.state.player;return m.state.cars.filter(c=>c!==p).map(c=>({id:c.id,lateral:+c.lateral.toFixed(2),d:+Math.hypot(c.x-p.x,c.z-p.z).toFixed(2)})).sort((a,b)=>a.d-b.d)[0];});
+  await setGas(true);let hit=null;
+  for(let i=0;i<Math.round(6*FPS)&&!hit;i++){const lane=await page.evaluate(id=>window.__island.games.current.session.debug.model.state.cars.find(c=>c.id===id)?.lateral??0,report.target.id);
+   await drive({lane,brakes:false});await log();hit=await page.evaluate(()=>window.__log.find(e=>e.type==='bump'&&(e.car==='player'||e.with==='player'))||null);if(i%3===0)await frame('launch-'+String(i).padStart(3,'0'));}
   report.hit=hit;await setWheel(0);for(let k=0;k<Math.round(1.2*FPS);k++){await tick(FRAME);await log();if(k%3===0)await frame('after-hit-'+String(k).padStart(3,'0'));}
   report.bumpEvents=await page.evaluate(()=>window.__log.filter(e=>e.type==='bump'));await pullAudio();
  }

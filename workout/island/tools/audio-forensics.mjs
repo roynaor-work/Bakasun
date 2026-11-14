@@ -17,6 +17,8 @@ const GAMES=opt('games','streetSlam,soccer,tennis,alpineRush,islandRacing,city')
 const SECONDS=Number(opt('seconds',180)),CITY_SECONDS=Number(opt('city-seconds',30)),ASSERT=args.includes('--assert'),EXTRA=opt('query','');
 // racing-v24: --hiss also fails the assert on a steady noise bed in live play (hissLike: 'like air or a hiss'); --stops makes the racing bot brake to a stop for 3 s every 15 s
 const HISS=args.includes('--hiss'),STOPS=args.includes('--stops');
+// --viewport=WxH (racing-v24): a smaller page renders faster on a busy machine (the game loop, and with it the race, keeps pace); the sound does not depend on it
+const [VW,VH]=opt('viewport','844x390').split('x').map(Number);
 // config.minigames[id].requiresBuilding: alpine and racing need none (a fake typeId breaks the city view).
 const BUILDING={streetSlam:'basketball',soccer:'soccer',tennis:'tennis'};
 await mkdir(outDir,{recursive:true});
@@ -178,7 +180,7 @@ const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||u
 const summary={generatedAt:new Date().toISOString(),seconds:SECONDS,games:{}};
 let failures=0;
 for(const game of GAMES){
-  const context=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
+  const context=await browser.newContext({viewport:{width:VW||844,height:VH||390},hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
   await context.addInitScript(initScript);
   const page=await context.newPage(),errors=[],consoleAudio=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(/audio|sound|whistle/i.test(m.text()))consoleAudio.push(m.text());});
