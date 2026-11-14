@@ -112,7 +112,10 @@ async function finishStreet(t,run,name){
     const fires=s.flames.map((f,i)=>({...f,i})).filter(f=>f.active&&f.heat>0);if(!fires.length){await t.tick(200);continue;}
     const f=fires.sort((a,b)=>Math.hypot(a.x-s.nozzle.x,a.y-s.nozzle.y)-Math.hypot(b.x-s.nozzle.x,b.y-s.nozzle.y))[0];
     const marker=inView(s.flameScreens[f.i])?s.flameScreens[f.i]:s.indicators.find(a=>a.kind==='fire'&&a.index===f.i);
-    if(marker){await tapCanvas(marker.x,marker.y);for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||n.flames[f.i].heat<=0)break;if(nearOf(n).length&&!n.truck.driving)break;if(!n.navigation.active&&!n.truck.driving&&i>10)break;}}else await t.tick(300);
+    if(marker){await tapCanvas(marker.x,marker.y);let drove=false;for(let i=0;i<200;i++){await t.tick(100);const n=await t.snap();if(!n||n.flames[f.i].heat<=0)break;if(nearOf(n).length&&!n.truck.driving)break;if(n.navigation.active||n.truck.driving)drove=true;if(!n.navigation.active&&!n.truck.driving&&i>6)break;}
+      if(!drove){ // the tap did not start a drive: push the stick toward the window for a moment (closed loop on the screen positions)
+        const stick=await t.center('#joystick');if(stick){await t.touch('touchStart',4,stick.x,stick.y);for(let j=0;j<18;j++){const n=await t.snap();if(!n)break;if(nearOf(n).length)break;const p=inView(n.flameScreens[f.i])?n.flameScreens[f.i]:n.indicators.find(a=>a.kind==='fire'&&a.index===f.i),tr=n.truckScreen;if(!p||!tr)break;const dx=p.x-tr.x,dy=p.y-tr.y,l=Math.hypot(dx,dy)||1;await t.touch('touchMove',4,stick.x+dx/l*62,stick.y+dy/l*62);await t.tick(100);}await t.touch('touchEnd',4);await t.tick(300);}}}
+    else await t.tick(300);
   }
   run.streetTrace=trace;
   run.resultCard=await t.page.locator('[data-result=fireRescue]').count()>0;if(run.resultCard)run.shots.push(await t.shot(name+'-result'));
