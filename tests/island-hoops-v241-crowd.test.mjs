@@ -28,8 +28,8 @@ test('crowd seats: the lower tier of the v8 hall without the stand under the cam
 
 test('crowd budget per tier: 24K / levels 1-2 at quality 2, 10K / level 2 at quality 1 or after one governor step, cards after two; full = Codex 70K',()=>{
   assert.equal(hoopsCrowdBudget({mode:'off'}),null);
-  assert.deepEqual(hoopsCrowdBudget({quality:2,arenaLod:0}),{levels:[1,2],triangles:24000,cull:true,replanSeconds:.25,tier:'high'});
-  assert.deepEqual(hoopsCrowdBudget({quality:1,arenaLod:0}),{levels:[2],triangles:10000,cull:true,replanSeconds:.25,tier:'low'});
+  assert.deepEqual(hoopsCrowdBudget({quality:2,arenaLod:0}),{levels:[1,2],triangles:24000,cull:true,replanSeconds:.25,overlap:.02,tier:'high'});
+  assert.deepEqual(hoopsCrowdBudget({quality:1,arenaLod:0}),{levels:[2],triangles:10000,cull:true,replanSeconds:.25,overlap:.02,tier:'low'});
   assert.equal(hoopsCrowdBudget({quality:2,arenaLod:1}).tier,'low');
   assert.equal(hoopsCrowdBudget({quality:2,arenaLod:2}),null);assert.equal(hoopsCrowdBudget({quality:0}),null);
   assert.deepEqual(hoopsCrowdBudget({mode:'full'}).levels,[0,1,2]);assert.equal(hoopsCrowdBudget({mode:'full'}).triangles,70000);
@@ -69,6 +69,8 @@ test('crowd 3D: seats out of the broadcast view are not drawn, the triangles sta
       assert.ok(m.inView>80&&m.inView<seats.length,'in view at x='+x+': '+m.inView);
       assert.ok(m.triangles<=24000,'triangles '+m.triangles);assert.ok(m.draws<=12,'draws '+m.draws);
       assert.equal(m.submitted[0],0,'no level 0');
+      // the narrow blend band: few fans drawn at two levels (measured 2-18 of ~390; with the pack's 20% band 110-153, permanently checkered)
+      assert.ok(m.submitted[1]+m.submitted[2]-m.inView<=24,'fans in a blend: '+(m.submitted[1]+m.submitted[2]-m.inView));
       const view=seatsInView(seats,new T.Matrix4().multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse).elements);
       assert.equal(m.inView,view.reduce((a,b)=>a+b,0),'exactly the seats in view');
     }

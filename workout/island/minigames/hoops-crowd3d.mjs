@@ -18,9 +18,12 @@ export const HOOPS_CROWD_BASE=()=>new URL('../assets/hoops-v241/crowd/',import.m
 /** The six seated figures of the pack (variant 0-5: pose down, up, clap, down, up, clap). */
 export const HOOPS_CROWD_VARIANTS=Object.freeze([0,1,2,3,4,5]);
 export const HOOPS_CROWD_LEVEL_TRIANGLES=Object.freeze([210,90,24]);
+/** `overlap`: the band of distances where a fan is drawn at two levels with complementary screen-door masks. The pack's 20% band left a few
+ * dozen fans permanently checkered in the game camera (the plan moves in quarter-second steps, so the masks do not animate); the budget mode
+ * keeps a 2% band (a fan 30 m away changes level with a small step instead). */
 export const HOOPS_CROWD_MODES=Object.freeze({
-  budget:Object.freeze({levels:Object.freeze([1,2]),triangles:24000,lowTriangles:10000,cull:true,replanSeconds:.25}),
-  full:Object.freeze({levels:Object.freeze([0,1,2]),triangles:70000,cull:false,replanSeconds:.25}),
+  budget:Object.freeze({levels:Object.freeze([1,2]),triangles:24000,lowTriangles:10000,cull:true,replanSeconds:.25,overlap:.02}),
+  full:Object.freeze({levels:Object.freeze([0,1,2]),triangles:70000,cull:false,replanSeconds:.25,overlap:null}),
 });
 /** Unlit vertex colours under the hall light: the grade of the lit cards beside them (measured on the v8 card crowd in the game camera). */
 export const HOOPS_CROWD_TINT='#a9b3bf';
@@ -48,8 +51,8 @@ export function hoopsCrowdBudget({mode='budget',quality=2,arenaLod=0}={}){
   if(mode==='full')return {...HOOPS_CROWD_MODES.full,levels:[...HOOPS_CROWD_MODES.full.levels],tier:'full'};
   if(arenaLod>=2||quality<1)return null;
   const b=HOOPS_CROWD_MODES.budget;
-  if(quality<2||arenaLod===1)return {levels:[2],triangles:b.lowTriangles,cull:true,replanSeconds:b.replanSeconds,tier:'low'};
-  return {levels:[...b.levels],triangles:b.triangles,cull:true,replanSeconds:b.replanSeconds,tier:'high'};
+  if(quality<2||arenaLod===1)return {levels:[2],triangles:b.lowTriangles,cull:true,replanSeconds:b.replanSeconds,overlap:b.overlap,tier:'low'};
+  return {levels:[...b.levels],triangles:b.triangles,cull:true,replanSeconds:b.replanSeconds,overlap:b.overlap,tier:'high'};
 }
 /** Which seats a view-projection matrix (column-major 16 numbers, as three.js elements) shows: the fan's chest (y + 0.7) inside the screen
  * widened by `margin` in clip space, in front of the camera. Pure. */
@@ -157,7 +160,8 @@ if(noise<vInterval.x||noise>=vInterval.y)discard;
     camera.getWorldPosition(camPos);camera.getWorldDirection(camDir);lastPos.copy(camPos);lastDir.copy(camDir);
     const inView=budget.cull?seatsInView(seats,viewProj.elements):null,used=inView?seats.filter((s,i)=>inView[i]):seats;
     const levels=budget.levels,thresholds=[levels.includes(0)?config.distanceThresholds[0]:0,levels.includes(1)?config.distanceThresholds[1]:0];
-    const cfg={...config,distanceThresholds:thresholds,crowdTriangleLimit:Math.max(used.length*HOOPS_CROWD_LEVEL_TRIANGLES[2],budget.triangles)};
+    const cfg={...config,distanceThresholds:thresholds,crowdTriangleLimit:Math.max(used.length*HOOPS_CROWD_LEVEL_TRIANGLES[2],budget.triangles),
+      transition:budget.overlap?{...config.transition,overlapFraction:budget.overlap}:config.transition};
     const p=used.length?planCrowd(used,camPos.toArray(),cfg,camDir.toArray()):{assignments:[],submitted:[0,0,0],triangles:0,scale:1};
     const weightsOf=new Map(used.map((s,i)=>[s.id,p.assignments[i].weights]));let draws=0;
     for(const mesh of batches){
