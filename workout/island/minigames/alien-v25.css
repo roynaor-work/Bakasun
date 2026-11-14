@@ -12,8 +12,8 @@
 .game-screen[data-game=alienDefense] .alien-controls .alien-special-switch[data-next=shockwave]{color:#a6f2ff;border-color:#6fe3ffaa}
 .game-screen[data-game=alienDefense] .alien-controls .alien-special-switch[data-next=missile]{color:#efd5ae;border-color:#d4b589aa}
 .game-screen[data-game=alienDefense] .alien-controls .alien-special-switch .alien-switch-count{position:absolute;left:-5px;bottom:-4px;min-width:16px;height:16px;border-radius:5px;font:700 10px/16px system-ui,sans-serif;text-align:center;color:#f2f7fb;background:#0c1a29d9;border:1px solid #d2ba9466}
-.game-screen[data-game=alienDefense] .alien-controls[data-alien-special=lightning] #pass{--alien-ring:#7fb8ffb0;color:#b9d8ff}
-.game-screen[data-game=alienDefense] .alien-controls[data-alien-special=shockwave] #pass{--alien-ring:#6fe3ffb0;color:#b8f4ff}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-special=lightning] #pass{--alien-ring:#7fb8ffb0;color:#b9d8ff}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-special=shockwave] #pass{--alien-ring:#6fe3ffb0;color:#b8f4ff}
 .game-screen[data-game=alienDefense] .alien-controls[data-alien-special=lightning] #pass svg,.game-screen[data-game=alienDefense] .alien-controls[data-alien-special=shockwave] #pass svg{width:24px;height:24px}
 /* No text next to the stick: the always-on lines go, the short notices move to the top centre under the hearts. */
 .game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on] .alien-flight-control,.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on] .alien-flight-weapon{display:none!important}
