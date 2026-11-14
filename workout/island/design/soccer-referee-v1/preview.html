@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101d20">
+  <title>צוות השיפוט · כדורגל</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="identity"><span class="mark" aria-hidden="true">⚑</span><div><p class="eyebrow">על המגרש</p><h1>צוות השיפוט</h1></div></div>
+    <div class="header-note"><span class="live-dot" aria-hidden="true"></span><span>שופט ראשי ושני קוונים</span></div>
+  </header>
+  <main>
+    <section class="stage-panel" aria-label="מגרש התצוגה">
+      <div class="stage-top"><span id="stage-caption">עמידת מוצא</span><div class="camera-control" role="group" aria-label="זווית צפייה"><button type="button" data-view="front" aria-pressed="true">חזית</button><button type="button" data-view="threeQuarter" aria-pressed="false">זווית</button><button type="button" data-view="wide" aria-pressed="false">מגרש</button></div></div>
+      <div id="stage"><canvas id="canvas" aria-label="שופט במרכז המגרש וקוונים בשני קווי החוץ"></canvas><div id="loading" role="status">צוות השיפוט עולה למגרש…</div><div class="pitch-tag">צוות אחד. החלטות ברורות.</div></div>
+      <div class="timeline"><button id="play" type="button" aria-label="השהיה" title="השהיה"><svg id="pause-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4v12M14 4v12"/></svg><svg id="play-icon" viewBox="0 0 20 20" aria-hidden="true" hidden><path d="m6 3 10 7-10 7z"/></svg></button><input id="seek" type="range" min="0" max="1" step="0.001" value="0" aria-label="מיקום בזמן האנימציה"><output id="time" dir="ltr">0.00 / 0.00</output><button id="restart" type="button" aria-label="התחלה מחדש" title="התחלה מחדש">↻</button></div>
+    </section>
+    <aside class="control-panel" aria-label="בחירת תנועות ומדים">
+      <div class="panel-title"><h2>תנועות השופט</h2><span class="count">08</span></div>
+      <div class="clip-grid" id="main-clips">
+        <button type="button" data-clip="idle" aria-pressed="true"><span class="clip-symbol">·</span>עמידת מוצא</button>
+        <button type="button" data-clip="jog" aria-pressed="false"><span class="clip-symbol">↗</span>ריצה קלה</button>
+        <button type="button" data-clip="whistle" aria-pressed="false"><span class="clip-symbol">◌</span>שריקה</button>
+        <button type="button" data-clip="point_penalty" aria-pressed="false"><span class="clip-symbol">➝</span>בעיטת עונשין</button>
+        <button type="button" data-clip="advantage" aria-pressed="false"><span class="clip-symbol">⇉</span>יתרון</button>
+        <button type="button" data-clip="goal_signal" aria-pressed="false"><span class="clip-symbol">✓</span>אישור שער</button>
+        <button type="button" data-clip="yellow_card" aria-pressed="false"><span class="card-symbol yellow" aria-hidden="true"></span>כרטיס צהוב</button>
+        <button type="button" data-clip="red_card" aria-pressed="false"><span class="card-symbol red" aria-hidden="true"></span>כרטיס אדום</button>
+      </div>
+      <div class="panel-title assistant-title"><h2>תנועות הקוונים</h2><span class="count">02</span></div>
+      <div class="clip-grid assistant-grid"><button type="button" data-clip="assistant_run" aria-pressed="false"><span class="clip-symbol">⚑</span>ריצה עם דגל</button><button type="button" data-clip="assistant_offside" aria-pressed="false"><span class="clip-symbol">⚐</span>נבדל</button></div>
+      <div class="uniform-row"><span>חולצת שיפוט</span><div class="swatches" role="group" aria-label="צבע חולצת השיפוט"><button type="button" data-shirt="yellow" class="yellow-swatch" aria-label="צהוב" aria-pressed="true"></button><button type="button" data-shirt="black" class="black-swatch" aria-label="שחור" aria-pressed="false"></button></div><label class="context-option"><input id="context" type="checkbox"><span>11 מול 11</span></label></div>
+      <p id="status" role="status">טוען את צוות השיפוט</p>
+    </aside>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

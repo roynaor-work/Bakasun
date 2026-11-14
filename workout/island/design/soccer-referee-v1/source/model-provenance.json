@@ -1,0 +1,248 @@
+{
+  "license": "CC0-1.0",
+  "method": "Existing fictional MakeHuman hm08 anatomy, face, hands, hair, boots and weights rebuilt with soccer-v6 source; per-part Blender decimation with concealed seam skin removed; newly authored continuous fitted sportswear and thigh bands, cards, whistle, shirt trim and checkerboard assistant flag; custom exact-bind glTF export.",
+  "sourceLicenseReferences": [
+    "soccer-v6/characters/ASSETS.md#\u05de\u05e7\u05d5\u05e8\u05d5\u05ea-\u05d5\u05e8\u05d9\u05e9\u05d5\u05d9",
+    "soccer-v6/characters/source/makehuman/LICENSE.ASSETS.md",
+    "soccer-v6/characters/source/makehuman/official-system-assets.md",
+    "soccer-v6/characters/source/makehuman/SOURCE-RESEARCH.md"
+  ],
+  "canonicalContract": "motion2/soccer.json",
+  "tool": "Blender 4.3.2 + NumPy + Pillow; no runtime dependency",
+  "inputs": [
+    {
+      "path": "soccer-v6/characters/source/build-characters.py",
+      "sha256": "339254ceb71a4856a23a64fe9e3cbf8ddd902d4329ca27b8484ee209b22d67a8",
+      "bytes": 33967
+    },
+    {
+      "path": "soccer-v6/characters/textures/referee-referee-basecolor.png",
+      "sha256": "b93958e2ea4e55a9ed5cd0096d497fd6690e9c6312f544534156c01a853eb89a",
+      "bytes": 538328
+    },
+    {
+      "path": "motion2/soccer.json",
+      "sha256": "e8db0b0e6300c261e61db60407054793776bba7f4552a5cc757b45b4a5202076",
+      "bytes": 1557297
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/LICENSE.ASSETS.md",
+      "sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "bytes": 6962
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/LICENSE.md",
+      "sha256": "edd99571ca62698f78c943fd4fffb159a413c315fa0d4819d3cec5cadaf8b4f1",
+      "bytes": 3598
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/SOURCE-RESEARCH.md",
+      "sha256": "9d565cb168808945e3b835f43a40d60a745ee9a6d1fadb9bc8d1e25a6f2ea1dc",
+      "bytes": 5433
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/african-male-young.target",
+      "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+      "bytes": 406170
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/asian-male-young.target",
+      "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+      "bytes": 421040
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/base.obj",
+      "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+      "bytes": 1749303
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/caucasian-male-young.target",
+      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+      "bytes": 396479
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/afro01/afro01.mhclo",
+      "sha256": "7ab4f15afcf53b4a0e45a215ae81a74e3331fcc37061c5e2ef58b1735a6f4d9b",
+      "bytes": 150124
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/afro01/afro01.obj",
+      "sha256": "d82bfa64bead1b164d54d655c2211a2fe0f59526da03575737a89612e5f47c1c",
+      "bytes": 166310
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/afro01/afro_diffuse.png",
+      "sha256": "14df28d804cb46fe7d25c6334140b5b5589f15734b3c7bd4fa7e2797a4646d9e",
+      "bytes": 1401024
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short01/short01.mhclo",
+      "sha256": "389c2e84f5daa4d5fab19e55edf7f6e7d92207eadb3864c5b32ecaf6d8c7c325",
+      "bytes": 202138
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short01/short01.obj",
+      "sha256": "9ada607454a3abdb336e6b5d0b944e342c5ef55bc26c08b5f04fee3f4ba36a46",
+      "bytes": 233787
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short01/short01_diffuse.png",
+      "sha256": "fd4b9e9a54f9361dd206a2cfa64cce062e240f9828e3f4502d14ee63056b044c",
+      "bytes": 1047680
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short02/short02.mhclo",
+      "sha256": "e379e5a370c4a61a45d7787955324c08cd5fb9e3a8cf13d970350553722fb8f4",
+      "bytes": 119790
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short02/short02.obj",
+      "sha256": "f89527df7598b98aff9dfba7b96b416968bc2bee334bcb90b7414eb13e32a42e",
+      "bytes": 163755
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short02/short02_diffuse.png",
+      "sha256": "e715e366708e36f366f0d2a40ea4ddde967cca2c8c051b283dbeaed1cbc053ad",
+      "bytes": 975798
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short02/short02_normal.png",
+      "sha256": "acf697c010ba28244a9af3c8a3469d2860446faa601c1c5713513614a5f347f3",
+      "bytes": 467352
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short03/short03.mhclo",
+      "sha256": "4c618b130e2f045e4144a386d84d1195c77cd7814fc98b953c2865cfba89dde8",
+      "bytes": 69598
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short03/short03.obj",
+      "sha256": "f1f866a3726c2ec067d1c9ddc1d977809f7fca41ee9a69c1a82b9be1ecca69c9",
+      "bytes": 87865
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short03/short03_diffuse.png",
+      "sha256": "d99eb8b12897279acc77ee973fd387317d785933811e2815e582a5e8b8176571",
+      "bytes": 828062
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short04/short04.mhclo",
+      "sha256": "65c1ce5f74f43cdcdbfa75d97191a3aa02970e446260fb47220499df59312254",
+      "bytes": 59745
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short04/short04.obj",
+      "sha256": "ad658fc72338c2b01f40aa69bd2d3eaa15fba73606ec65bc7cfb081533034c8b",
+      "bytes": 66209
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/hair/short04/short04_diffuse.png",
+      "sha256": "1f060d01d3edab37b9dc6c0c24758a0bc9305f1fcf1e3d003fab3d7328eacbef",
+      "bytes": 875507
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/head-oval.target",
+      "sha256": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d",
+      "bytes": 36452
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/head-rectangular.target",
+      "sha256": "bbfcbd4d6334df18515e73abb707b8a948adb74e0aba88a728c8e146dd5f4e4b",
+      "bytes": 10633
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/head-scale-horiz-decr.target",
+      "sha256": "cadb55b340cb94e96131860beb68b2e46204fccc7ee8f963f66cc9d22b03af0c",
+      "bytes": 81690
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/head-scale-vert-incr.target",
+      "sha256": "d9560ee80b9125da34cc95ece61192a295ab53c50a314c0084ddb3b0f38cc7d6",
+      "bytes": 78317
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/head-square.target",
+      "sha256": "001d0d135d964daf4ad99ba46a0f77c5bc2378f04e53c2b5a20242ab19cbf265",
+      "bytes": 12618
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/mouth-scale-horiz-incr.target",
+      "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+      "bytes": 15657
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/nose-scale-depth-incr.target",
+      "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+      "bytes": 5762
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/nose-width1-incr.target",
+      "sha256": "d340bc76601f9061826849d2fc9146ba6fbf7ee0604799849a417c934f53bea0",
+      "bytes": 1507
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/official-system-assets.md",
+      "sha256": "f33900d0cd0c101b7a18b9c14569c3df93c62e8b0d23c9ed9a1bfba388538b8c",
+      "bytes": 14028
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/skin-dark-diffuse.png",
+      "sha256": "6c7822f62eb45fbc658592fc2ec6291f4b01279b638d5940a7fa2dedbafbd525",
+      "bytes": 865136
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/skin-diffuse.png",
+      "sha256": "ef5cde3401a5eaa19d8fdd73718a98f969fb481a434f8a1eb77e7b47c89315b4",
+      "bytes": 1025533
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/universal-male-young-averagemuscle-minweight.target",
+      "sha256": "fac0d53b7051f4d1f06230d0b419e916eb5bae5ce67c031a9998fdde05229755",
+      "bytes": 147071
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/universal-male-young-maxmuscle-averageweight.target",
+      "sha256": "c171ff9cc95e96273beb3e3b1969a01988c2d4982ebc6fe04bf81cf72ee3b295",
+      "bytes": 147110
+    },
+    {
+      "path": "soccer-v6/characters/source/makehuman/universal-male-young-maxmuscle-minweight.target",
+      "sha256": "5873f11edc96fde72a79ec35fa1d292a6a1a594b5eadfd82d59faf48834561de",
+      "bytes": 150179
+    }
+  ],
+  "budgets": {
+    "sourceFaceTriangles": 600,
+    "sourceForearmsHandsBodyTriangles": 180,
+    "retainedExtrasTriangles": 284,
+    "actualRefereeTriangles": 1227,
+    "actualAssistantTriangles": 1187,
+    "embeddedAtlasDimension": 512
+  },
+  "outputs": [
+    {
+      "path": "source/base/assistant-left.glb",
+      "sha256": "b34a7b1240e83e3a808d909dcdf0d85d4cf6368d1a248c05560ff008712925fc",
+      "bytes": 281424,
+      "triangles": 1187
+    },
+    {
+      "path": "source/base/assistant-right.glb",
+      "sha256": "70ac0bb75e90b441d580f8b8740d0304dc491780bb4e020e812f8925c0cd45ee",
+      "bytes": 270828,
+      "triangles": 1187
+    },
+    {
+      "path": "source/base/referee.glb",
+      "sha256": "54c079e7094ee7d2235e3a320ece25663a3119becc63d089683da76cfa2e2811",
+      "bytes": 283048,
+      "triangles": 1227
+    }
+  ],
+  "cardRestRotationQuaternion": [
+    0,
+    0,
+    1,
+    0
+  ]
+}

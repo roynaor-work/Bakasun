@@ -1,0 +1,49 @@
+Initial: npm test
+ℹ tests 4082
+ℹ suites 0
+ℹ pass 4017
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 64
+ℹ todo 0
+ℹ duration_ms 1193388.840963
+
+✖ failing tests:
+
+test at tests/workout-royiki.test.mjs:91:1
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (43.51908ms)
+  browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/Bakasun/tests/workout-royiki.test.mjs:93:34) {
+    name: 'Error',
+    log: []
+  }
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+Resolved: ISLAND_PLAYWRIGHT=<package>/source/playwright-system.mjs node --test tests/workout-royiki.test.mjs
+✔ all 50 exercises have a royiki animation, each matching a real exercise (488.81891ms)
+✔ every SVG exists, is local-only, self-contained, and identical to the design source (62.980332ms)
+✔ unique ids keep several copies in one DOM apart (0.68492ms)
+✔ the two design catalogs together list the same 50 animations, with the same durations (61.494451ms)
+✔ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (24955.007523ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25769.779288
+
+Unique final result: 4018 passed, 0 unresolved failures, 64 skipped.

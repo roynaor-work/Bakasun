@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "command": "npm test",
+  "initialRun": {
+    "exitCode": 1,
+    "counts": {
+      "tests": 4082,
+      "pass": 4017,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 64,
+      "duration_ms": 1193388.840963
+    },
+    "failureFile": "tests/workout-royiki.test.mjs",
+    "failure": "Playwright bundled Chromium was absent; launch failed before the existing test server cleanup. The hanging test process was terminated after the other files finished.",
+    "logSha256": "b9dcc3bee53b411322d0955bd67b11c769dec2d09e2406abe0b4c24d51dd993a"
+  },
+  "resolvedRun": {
+    "command": "PLAYWRIGHT_MODULE=<installed playwright> ISLAND_PLAYWRIGHT=<package>/source/playwright-system.mjs node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "counts": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 25769.779288
+    },
+    "browser": "/usr/bin/chromium",
+    "adapter": "source/playwright-system.mjs",
+    "adapterSha256": "00b4309e854ff4e5008ff7b0792ac299f14ad8dbd97c2a549c8e1bb13eafdfc3",
+    "logSha256": "39fffea76705f99c0f2c5276646ad348b3b961c89a4ae4d9f67c49762519ea8d"
+  },
+  "allFailuresResolved": true,
+  "passed": 4018,
+  "failed": 0,
+  "skipped": 64,
+  "uniqueTestCases": 4082,
+  "method": "The entire repository suite ran once. Its sole failed browser-launch case passed when its file was rerun with system Chromium. Four already-passing cases in that file are counted once; test source/assertions and existing repository files were not changed."
+}

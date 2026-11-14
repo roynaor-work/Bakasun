@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 1,
+  "validator": "Independent GLB accessor decode and CPU skinning",
+  "generatedAt": "2026-11-14T17:43:11.291Z",
+  "sampleHz": 30,
+  "checks": 57927,
+  "failures": [],
+  "models": [
+    {
+      "id": "referee",
+      "asset": "models/referee.glb",
+      "bytes": 579788,
+      "sha256": "b0d5aa58ab463e0240218f66027f65760b15d653ee2874e99d1b01cd5298c588",
+      "triangles": 1227,
+      "vertexRecords": 2028,
+      "skinnedVertices": 1920,
+      "maxWeightSumError": 0,
+      "embeddedTextures": 1,
+      "clips": [
+        {
+          "id": "idle",
+          "frameCount": 73,
+          "durationSeconds": 2.4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 73,
+          "supportSamples": 146,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          },
+          "footLiftMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          }
+        },
+        {
+          "id": "jog",
+          "frameCount": 31,
+          "durationSeconds": 1,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 31,
+          "supportSamples": 28,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.0021503,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0.5090573,
+            "RightFoot": 0.5090573
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0.0999624,
+            "RightFoot": 0.0999624
+          }
+        },
+        {
+          "id": "whistle",
+          "frameCount": 91,
+          "durationSeconds": 3,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 91,
+          "supportSamples": 182,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        },
+        {
+          "id": "point_penalty",
+          "frameCount": 103,
+          "durationSeconds": 3.4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 103,
+          "supportSamples": 206,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        },
+        {
+          "id": "advantage",
+          "frameCount": 103,
+          "durationSeconds": 3.4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 103,
+          "supportSamples": 206,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        },
+        {
+          "id": "yellow_card",
+          "frameCount": 121,
+          "durationSeconds": 4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 121,
+          "supportSamples": 242,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        },
+        {
+          "id": "red_card",
+          "frameCount": 121,
+          "durationSeconds": 4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 121,
+          "supportSamples": 242,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        },
+        {
+          "id": "goal_signal",
+          "frameCount": 109,
+          "durationSeconds": 3.6,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 109,
+          "supportSamples": 218,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "assistant-left",
+      "asset": "models/assistant-left.glb",
+      "bytes": 359392,
+      "sha256": "3d05660c9af1c482ff60c26a32f43b0a0c2b16695b8d5117f164206394845635",
+      "triangles": 1187,
+      "vertexRecords": 1948,
+      "skinnedVertices": 1920,
+      "maxWeightSumError": 0,
+      "embeddedTextures": 1,
+      "clips": [
+        {
+          "id": "idle",
+          "frameCount": 73,
+          "durationSeconds": 2.4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 73,
+          "supportSamples": 146,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          },
+          "footLiftMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          }
+        },
+        {
+          "id": "assistant_run",
+          "frameCount": 31,
+          "durationSeconds": 1,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 31,
+          "supportSamples": 28,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.0021503,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0.5854159,
+            "RightFoot": 0.5854159
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0.0999624,
+            "RightFoot": 0.0999624
+          }
+        },
+        {
+          "id": "assistant_offside",
+          "frameCount": 109,
+          "durationSeconds": 3.6,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 109,
+          "supportSamples": 218,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "assistant-right",
+      "asset": "models/assistant-right.glb",
+      "bytes": 348796,
+      "sha256": "86eb1d227062df09d4270f9be9766f8153725007af0e9cce65eef1b1feb6fa99",
+      "triangles": 1187,
+      "vertexRecords": 1948,
+      "skinnedVertices": 1920,
+      "maxWeightSumError": 0,
+      "embeddedTextures": 1,
+      "clips": [
+        {
+          "id": "idle",
+          "frameCount": 73,
+          "durationSeconds": 2.4,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 73,
+          "supportSamples": 146,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          },
+          "footLiftMeters": {
+            "LeftFoot": 1e-7,
+            "RightFoot": 1e-7
+          }
+        },
+        {
+          "id": "assistant_run",
+          "frameCount": 31,
+          "durationSeconds": 1,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 31,
+          "supportSamples": 28,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.0021503,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0.5854159,
+            "RightFoot": 0.5854159
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0.0999624,
+            "RightFoot": 0.0999624
+          }
+        },
+        {
+          "id": "assistant_offside",
+          "frameCount": 109,
+          "durationSeconds": 3.6,
+          "maxQuaternionNormError": 0,
+          "maxRuntimeValueError": 0,
+          "sampledFrames": 109,
+          "supportSamples": 218,
+          "minSoleY": 0,
+          "maxSupportFloorError": 0,
+          "maxSupportDrift": 0,
+          "minMeshY": 0.002,
+          "maxMeshMinimumY": 0.002,
+          "maxSkinnedShoeSupportError": 0.002,
+          "strideMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "footLiftMeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          }
+        }
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "asset": "clips/idle.glb",
+      "bytes": 312828,
+      "sha256": "72ae4c2f340d6cfcc6aafb2b3601cfdb49a7ced8e8bf09d636e530e9c800952d",
+      "frameCount": 73,
+      "durationSeconds": 2.4,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "jog",
+      "asset": "clips/jog.glb",
+      "bytes": 298532,
+      "sha256": "870df945a55176c7a1f65ba090fd634af12b16fa2ced8589d2810eca9badfd98",
+      "frameCount": 31,
+      "durationSeconds": 1,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "whistle",
+      "asset": "clips/whistle.glb",
+      "bytes": 318956,
+      "sha256": "58a587bda566e97672dde4c4155c17689901f3ebd3d41ea8a94951108f4a0649",
+      "frameCount": 91,
+      "durationSeconds": 3,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "point_penalty",
+      "asset": "clips/point_penalty.glb",
+      "bytes": 323080,
+      "sha256": "174c9690bbd0e5202fe4370639a016b615ea296e1c006eab665275385ba4768d",
+      "frameCount": 103,
+      "durationSeconds": 3.4,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "advantage",
+      "asset": "clips/advantage.glb",
+      "bytes": 323060,
+      "sha256": "0c87542fff07547e2d270f47bcf15f3f31b193dcfc0d1ae4f0187a3c5e616f68",
+      "frameCount": 103,
+      "durationSeconds": 3.4,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "yellow_card",
+      "asset": "clips/yellow_card.glb",
+      "bytes": 329192,
+      "sha256": "258810d4819e6103365880b93dceabd8805a9fddd7a1018821d3d0430e2e6676",
+      "frameCount": 121,
+      "durationSeconds": 4,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "red_card",
+      "asset": "clips/red_card.glb",
+      "bytes": 329188,
+      "sha256": "07f70a1b573d05b58826d23377e6859fdd34fa2ef46de36c45e8ead52ff15435",
+      "frameCount": 121,
+      "durationSeconds": 4,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "goal_signal",
+      "asset": "clips/goal_signal.glb",
+      "bytes": 325112,
+      "sha256": "160ca4e83fe7fb8f245ddfa8f0895586acbc825e16d178069538dd6ac89481a3",
+      "frameCount": 109,
+      "durationSeconds": 3.6,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "assistant_run",
+      "asset": "clips/assistant_run.glb",
+      "bytes": 295132,
+      "sha256": "0f20738b82512cac82e5e1b51201b902db60a3536873e601704b4fb2085eac9c",
+      "frameCount": 31,
+      "durationSeconds": 1,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    },
+    {
+      "id": "assistant_offside",
+      "asset": "clips/assistant_offside.glb",
+      "bytes": 318884,
+      "sha256": "03f2d642a164426fdd677260050738a3e3a0eb947f59d8d6f8479e48f2f4286b",
+      "frameCount": 109,
+      "durationSeconds": 3.6,
+      "maxQuaternionNormError": 0,
+      "maxRuntimeValueError": 0
+    }
+  ],
+  "semantics": [
+    {
+      "model": "models/referee.glb",
+      "clip": "jog",
+      "sampleTimeSeconds": 0.5,
+      "pass": true,
+      "metrics": {
+        "LeftFoot": 0.5090573,
+        "RightFoot": 0.5090573,
+        "LeftFootLift": 0.0999624,
+        "RightFootLift": 0.0999624
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "whistle",
+      "sampleTimeSeconds": 1.5,
+      "pass": true,
+      "metrics": {
+        "handMouthDistance": 0.0404475,
+        "whistleTipMouthDistance": 1e-7,
+        "whistleTipFaceSurfaceDistance": 0.0090997,
+        "whistleTipWorld": [
+          0,
+          1.5080294,
+          0.1500937
+        ],
+        "mouthLandmarkWorld": [
+          0,
+          1.5080293,
+          0.1500937
+        ]
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "point_penalty",
+      "sampleTimeSeconds": 1.7,
+      "pass": true,
+      "metrics": {
+        "handBelowShoulder": 0.2249803,
+        "handForward": 0.4210207
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "advantage",
+      "sampleTimeSeconds": 1.7,
+      "pass": true,
+      "metrics": {
+        "rightForward": 0.4310207,
+        "leftForward": 0.4310207
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "yellow_card",
+      "sampleTimeSeconds": 2,
+      "pass": true,
+      "metrics": {
+        "handAboveHead": 0.2950363,
+        "handAboveSkinnedHead": 0.0120618
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "red_card",
+      "sampleTimeSeconds": 2,
+      "pass": true,
+      "metrics": {
+        "handAboveHead": 0.2950363,
+        "handAboveSkinnedHead": 0.0120618
+      }
+    },
+    {
+      "model": "models/referee.glb",
+      "clip": "goal_signal",
+      "sampleTimeSeconds": 1.8,
+      "pass": true,
+      "metrics": {
+        "rightOutward": 0.41,
+        "leftBelowRight": 0.54
+      }
+    },
+    {
+      "model": "models/assistant-left.glb",
+      "clip": "assistant_run",
+      "sampleTimeSeconds": 0.5,
+      "pass": true,
+      "metrics": {
+        "LeftFoot": 0.5854159,
+        "RightFoot": 0.5854159,
+        "LeftFootLift": 0.0999624,
+        "RightFootLift": 0.0999624
+      }
+    },
+    {
+      "model": "models/assistant-left.glb",
+      "clip": "assistant_offside",
+      "sampleTimeSeconds": 1.8,
+      "pass": true,
+      "metrics": {
+        "handAboveHead": 0.2850363,
+        "poleUpward": 0.5,
+        "tipAboveHead": 0.8300363
+      }
+    },
+    {
+      "model": "models/assistant-right.glb",
+      "clip": "assistant_run",
+      "sampleTimeSeconds": 0.5,
+      "pass": true,
+      "metrics": {
+        "LeftFoot": 0.5854159,
+        "RightFoot": 0.5854159,
+        "LeftFootLift": 0.0999624,
+        "RightFootLift": 0.0999624
+      }
+    },
+    {
+      "model": "models/assistant-right.glb",
+      "clip": "assistant_offside",
+      "sampleTimeSeconds": 1.8,
+      "pass": true,
+      "metrics": {
+        "handAboveHead": 0.2850363,
+        "poleUpward": 0.5,
+        "tipAboveHead": 0.8300363
+      }
+    }
+  ],
+  "limits": {
+    "triangles": [
+      900,
+      1500
+    ],
+    "quaternionNormError": 0.000002,
+    "soleFloorMeters": 0.008,
+    "meshFloorMeters": 0.012,
+    "supportDriftMeters": 0.008,
+    "sourceFloatError": 0.000001,
+    "whistleTipLipMeters": 0.01
+  },
+  "pass": true
+}

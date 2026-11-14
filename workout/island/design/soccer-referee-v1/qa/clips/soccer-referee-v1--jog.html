@@ -1,0 +1,129 @@
+<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>jog · QA</title><style>body{font:16px system-ui;line-height:1.7;max-width:980px;margin:24px auto;padding:0 20px;color:#16303b;background:#eef4f5}a{color:#075a9b}img{width:100%;height:auto}section{background:white;padding:8px 18px;margin:12px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><main><h1 dir="ltr">jog</h1><p><a href="../report.html">כל הקליפים</a> · <a href="soccer-referee-v1--jog.json">JSON מקורי</a> · <a href="../../preview.html">תצוגת הדמויות</a></p><p>ציון 94.3; כיסוי 100%; 120 דגימות לשנייה וזמני האירועים המדויקים.</p><img src="../sheets/soccer-referee-v1--jog.svg" alt="שמונה פוזות מתוך הקליפ"><section><h2>החלקת רגליים: ירוק</h2><p dir="ltr">0.000205 height ratio</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;coordinateSpace&quot;: &quot;Decoded native canonical GLB plus the declared external reference travel; raw asset joints and rotations retained separately.&quot;,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;windows&quot;: 2,
+  &quot;samples&quot;: 114,
+  &quot;maxDriftMeters&quot;: 0.000346,
+  &quot;p95SpeedMetersPerSecond&quot;: 0.011914,
+  &quot;worst&quot;: {
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;t&quot;: 0.46,
+    &quot;start&quot;: 0,
+    &quot;end&quot;: 0.46,
+    &quot;driftMeters&quot;: 0.000346
+  }
+}</pre></details></section><section><h2>חדירה לרצפה: ירוק</h2><p dir="ltr">0.000233 height ratio</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;samples&quot;: 2460,
+  &quot;floorY&quot;: 0,
+  &quot;probeKind&quot;: &quot;declared sole probes plus skeletal joint centers (no mesh surfaces)&quot;,
+  &quot;maxDepthMeters&quot;: 0.000393,
+  &quot;worst&quot;: {
+    &quot;t&quot;: 0.016667,
+    &quot;bone&quot;: &quot;LeftFoot&quot;,
+    &quot;depthMeters&quot;: 0.000393,
+    &quot;y&quot;: -0.000393
+  }
+}</pre></details></section><section><h2>קפיצות פוזה: ירוק</h2><p dir="ltr">0.43826 discontinuity ratio</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;adjacentPairs&quot;: 122,
+  &quot;observations&quot;: 2074,
+  &quot;maxDegrees60Hz&quot;: 4.000549,
+  &quot;maxMarkerStepHeight60Hz&quot;: 0.01753,
+  &quot;maxRootStepHeight60Hz&quot;: 0.009862,
+  &quot;worst&quot;: {
+    &quot;ratio&quot;: 0.438260310926678,
+    &quot;t&quot;: 0.208333,
+    &quot;previousTime&quot;: 0.2,
+    &quot;bone&quot;: &quot;RightFoot&quot;,
+    &quot;markerStepHeight60Hz&quot;: 0.01753,
+    &quot;degrees60Hz&quot;: 0.000042
+  }
+}</pre></details></section><section><h2>חריגות אנטומיות: ירוק</h2><p dir="ltr">0 % affected frames</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;testedFrames&quot;: 123,
+  &quot;affectedFrames&quot;: 0,
+  &quot;checks&quot;: 2091,
+  &quot;maxLimbFlexionDegrees&quot;: 127.100767,
+  &quot;maxRelativeSegmentLengthChange&quot;: 0,
+  &quot;hingeDirectionChecked&quot;: true,
+  &quot;axialTwistChecked&quot;: false,
+  &quot;violations&quot;: []
+}</pre></details></section><section><h2>מגע בכדור: לא חל</h2><p dir="ltr"> height ratio</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{}</pre></details></section><section><h2>כניסה ויציאה מול המתנה: צהוב</h2><p dir="ltr">1.791237 continuity ratio</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;entry&quot;: {
+    &quot;ratio&quot;: 1.791236649393781,
+    &quot;t&quot;: 0,
+    &quot;idleTime&quot;: 0.6,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.071649,
+    &quot;rmsRotationDegrees&quot;: 34.843542,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.258895,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;exit&quot;: {
+    &quot;ratio&quot;: 1.791236649393781,
+    &quot;t&quot;: 1,
+    &quot;idleTime&quot;: 0.6,
+    &quot;markers&quot;: 17,
+    &quot;rmsPositionHeight&quot;: 0.071649,
+    &quot;rmsRotationDegrees&quot;: 34.843542,
+    &quot;rmsVelocityHeightPerSecond&quot;: 0.235713,
+    &quot;velocityEvaluated&quot;: true
+  },
+  &quot;worstEndpoint&quot;: &quot;entry&quot;,
+  &quot;alignment&quot;: &quot;horizontal root translation; raw asset poses used when provided&quot;
+}</pre></details></section><section><h2>מהירות גוף מול צעדים: ירוק</h2><p dir="ltr">0.000753 relative speed error</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;rootSource&quot;: &quot;sampled presented root&quot;,
+  &quot;rootSpeedMetersPerSecond&quot;: 1,
+  &quot;observedRootSpeedMetersPerSecond&quot;: 1,
+  &quot;referenceRootSpeedMetersPerSecond&quot;: 1,
+  &quot;supportSource&quot;: &quot;declared&quot;,
+  &quot;backwardSweepSpeedMetersPerSecond&quot;: 0.999247,
+  &quot;cadenceStepsPerSecond&quot;: 2,
+  &quot;impliedStrideMeters&quot;: 0.999247,
+  &quot;rootStrideMeters&quot;: 1,
+  &quot;supportSweeps&quot;: [
+    {
+      &quot;bone&quot;: &quot;LeftFoot&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 0.46,
+      &quot;duration&quot;: 0.46,
+      &quot;sweepMeters&quot;: 0.459654,
+      &quot;speedMetersPerSecond&quot;: 0.999247
+    },
+    {
+      &quot;bone&quot;: &quot;RightFoot&quot;,
+      &quot;start&quot;: 0.5,
+      &quot;end&quot;: 0.96,
+      &quot;duration&quot;: 0.46,
+      &quot;sweepMeters&quot;: 0.459654,
+      &quot;speedMetersPerSecond&quot;: 0.999247
+    }
+  ]
+}</pre></details></section><section><h2>סימטריה: ירוק</h2><p dir="ltr">0 relative mismatch</p><details><summary>ראיות המדידה</summary><pre dir="ltr">{
+  &quot;mode&quot;: &quot;gait&quot;,
+  &quot;modeSource&quot;: &quot;declared&quot;,
+  &quot;structuralMismatch&quot;: 0,
+  &quot;segments&quot;: [
+    {
+      &quot;segment&quot;: &quot;Arm-ForeArm&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;ForeArm-Hand&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;UpLeg-Leg&quot;,
+      &quot;mismatch&quot;: 0
+    },
+    {
+      &quot;segment&quot;: &quot;Leg-Foot&quot;,
+      &quot;mismatch&quot;: 0
+    }
+  ],
+  &quot;motionRmsHeight&quot;: 0,
+  &quot;worstMotion&quot;: {
+    &quot;t&quot;: 0.766667,
+    &quot;errorHeight&quot;: 0
+  },
+  &quot;bilateralPoseRmsHeightUnscored&quot;: 0.10762,
+  &quot;note&quot;: &quot;Motion is mirrored in a pelvis-centred body basis.&quot;
+}</pre></details></section></main></html>

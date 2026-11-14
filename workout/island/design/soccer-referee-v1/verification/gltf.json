@@ -1,0 +1,1054 @@
+{
+  "validator": "Khronos glTF Validator",
+  "version": "2.0.0-dev.3.10",
+  "pass": true,
+  "files": 16,
+  "errors": 0,
+  "warnings": 0,
+  "records": [
+    {
+      "file": "models/assistant-left.glb",
+      "sha256": "3d05660c9af1c482ff60c26a32f43b0a0c2b16695b8d5117f164206394845635",
+      "bytes": 359392,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 334540
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 3,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "models/assistant-right.glb",
+      "sha256": "86eb1d227062df09d4270f9be9766f8153725007af0e9cce65eef1b1feb6fa99",
+      "bytes": 348796,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 323944
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 3,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "models/referee.glb",
+      "sha256": "b0d5aa58ab463e0240218f66027f65760b15d653ee2874e99d1b01cd5298c588",
+      "bytes": 579788,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 527628
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 8,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/advantage.glb",
+      "sha256": "0c87542fff07547e2d270f47bcf15f3f31b193dcfc0d1ae4f0187a3c5e616f68",
+      "bytes": 323060,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 306968
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/assistant_offside.glb",
+      "sha256": "03f2d642a164426fdd677260050738a3e3a0eb947f59d8d6f8479e48f2f4286b",
+      "bytes": 318884,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 302924
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/assistant_run.glb",
+      "sha256": "0f20738b82512cac82e5e1b51201b902db60a3536873e601704b4fb2085eac9c",
+      "bytes": 295132,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 279212
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/goal_signal.glb",
+      "sha256": "160ca4e83fe7fb8f245ddfa8f0895586acbc825e16d178069538dd6ac89481a3",
+      "bytes": 325112,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 309008
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/idle.glb",
+      "sha256": "72ae4c2f340d6cfcc6aafb2b3601cfdb49a7ced8e8bf09d636e530e9c800952d",
+      "bytes": 312828,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 296768
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/jog.glb",
+      "sha256": "870df945a55176c7a1f65ba090fd634af12b16fa2ced8589d2810eca9badfd98",
+      "bytes": 298532,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 282488
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/point_penalty.glb",
+      "sha256": "174c9690bbd0e5202fe4370639a016b615ea296e1c006eab665275385ba4768d",
+      "bytes": 323080,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 306968
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/red_card.glb",
+      "sha256": "07f70a1b573d05b58826d23377e6859fdd34fa2ef46de36c45e8ead52ff15435",
+      "bytes": 329188,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 313088
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/whistle.glb",
+      "sha256": "58a587bda566e97672dde4c4155c17689901f3ebd3d41ea8a94951108f4a0649",
+      "bytes": 318956,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 302888
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "clips/yellow_card.glb",
+      "sha256": "258810d4819e6103365880b93dceabd8805a9fddd7a1018821d3d0430e2e6676",
+      "bytes": 329192,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 313088
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 1,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "source/base/assistant-left.glb",
+      "sha256": "b34a7b1240e83e3a808d909dcdf0d85d4cf6368d1a248c05560ff008712925fc",
+      "bytes": 281424,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 269788
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 0,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "source/base/assistant-right.glb",
+      "sha256": "70ac0bb75e90b441d580f8b8740d0304dc491780bb4e020e812f8925c0cd45ee",
+      "bytes": 270828,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 3,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/3"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/4"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/5"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 259192
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 0,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 9,
+        "totalVertexCount": 1948,
+        "totalTriangleCount": 1187,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    },
+    {
+      "file": "source/base/referee.glb",
+      "sha256": "54c079e7094ee7d2235e3a320ece25663a3119becc63d089683da76cfa2e2811",
+      "bytes": 283048,
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 2,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/6"
+          },
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/materials/7"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "soccer-referee-v1 CC0 v6 anatomy reduction",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 271948
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 512,
+              "height": 512,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 0,
+        "materialCount": 9,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 7,
+        "totalVertexCount": 2028,
+        "totalTriangleCount": 1227,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 5
+      }
+    }
+  ]
+}
