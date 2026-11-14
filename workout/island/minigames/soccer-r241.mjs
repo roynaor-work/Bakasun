@@ -72,6 +72,8 @@ export const SOCCER_AIR_V241=Object.freeze({
   scissorApex:3,scissorCap:2.2,
   /** a press keeps the action armed this long at most (s), like SOCCER_LOB.headerWindow; the buttons show a choice this long ahead */
   armSeconds:1.15,prompt:1.1,
+  /** a second way that drops out stays on the fourth button this long (s) while the first way holds (soccerAirSteady) */
+  altGrace:.2,
 });
 /** Labels and icons the buttons show (the session owns the DOM). */
 export const SOCCER_AIR_LABELS=Object.freeze({volley:'עף',header:'נגיחה',scissor:'מספרת'});
@@ -95,6 +97,24 @@ export function soccerAirOptions(player,ball,c,{speed=5.3,horizon=SOCCER_AIR_V24
   const meets={header:soccerAirMeet('header',player,ball,c,{horizon,speed,header}),volley:soccerAirMeet('volley',player,ball,c,{horizon,speed}),scissor:soccerAirApex(ball,c)>=SOCCER_AIR_V241.scissorApex?soccerAirMeet('scissor',player,ball,c,{horizon,speed}):null};
   const choice=soccerAirChoice(meets);if(!choice)return null;
   return {...choice,arrival:meets[choice.primary],meets};
+}
+/** The buttons hold still while the ball comes down: the way shown first stays first while he can still meet the ball that way, and the second
+ * way stays second while it is still possible (a way he can no longer reach gives its place to the fresh choice). Measured in 11 v 11
+ * (tools/soccer-v241-sim.mjs --n 6 --stages 2,4 --press 0: 34 high balls while the child bot runs on its own): without this the kick button
+ * changed between "עף" and "נגיחה" in 15 of them, because the earliest header meet crosses 1.2 m back and forth as he runs (the real-touch
+ * run saw 6 changes in one second on one ball); with it 3, each when the first way went out of reach. `prev` = last tick's options for the
+ * same player (null starts afresh); the second way keeps soccerAirChoice's pairs (a diving header next to a volley only from its height, the
+ * scissor kick only next to a header). A second way that drops out stays on the fourth button `altGrace` seconds more while the first way
+ * holds (fourth-button changes 58 → 37 in those balls, back and forth inside a quarter second 6 → 3, mostly at the 2.2 m scissor reach); a
+ * press in that time arms it toward the first way's meeting point (armAir). `now` = the match clock; the result carries `altSeen`. */
+export function soccerAirSteady(prev,next,{now=0}={},A=SOCCER_AIR_V241){
+  if(!next)return null;
+  if(!prev)return {...next,altSeen:next.alt?now:null};
+  const m=next.meets||{},can=k=>Boolean(k&&m[k]),primary=can(prev.primary)?prev.primary:next.primary;
+  const ok=k=>k!==primary&&can(k)&&!(primary==='volley'&&k==='header'&&m.header.y<A.divingHeaderMin)&&!(k==='scissor'&&primary!=='header');
+  let alt=ok(prev.alt)?prev.alt:[next.primary,next.alt].find(ok)??null,altSeen=alt?now:null;
+  if(!alt&&prev.alt&&primary===prev.primary&&prev.altSeen!=null&&now-prev.altSeen<A.altGrace){alt=prev.alt;altSeen=prev.altSeen;}
+  return {...next,primary,alt,arrival:m[primary],altSeen};
 }
 /** The highest point of the ball's path from now on (its flight's apex, or the free arc's), metres above the grass. */
 export function soccerAirApex(ball,c){

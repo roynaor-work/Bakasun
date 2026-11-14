@@ -20,7 +20,7 @@ import {chooseSlideKind,slideVariant,slideVelocityScale,sweptSlideContact,slideR
 import {soccerSwitchVersion,switchSnapMotion,goalKickSpot,soccerAirVersion,aerialMeet,headerAim,SOCCER_LOB} from './soccer-v23.mjs?v=island-v2-20261107-14';
 import {soccerAdvantage} from './soccer-full.mjs?v=island-v2-20261107-14';
 // v24.1 (soccer-r241.mjs): fouls on standing tackles and the carrier's fall or stumble, volley / header / scissor on a high ball, the shorter slide get-up.
-import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-14';
+import {soccerLevelV241,SOCCER_LEVEL_V241,soccerV241Rules,soccerAirOptions,soccerAirSteady,soccerAirContact,soccerAirMeet,soccerAirAim,SOCCER_AIR_V241,soccerStandingFoul,soccerFoulRoll,soccerFouledSeconds,SOCCER_FOULS_V241} from './soccer-r241.mjs?v=island-v2-20261107-14';
 // Pure simulation. No browser, Three.js, storage, wall clock or Math.random.
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const distance = (a,b) => Math.hypot(a.x-b.x,a.z-b.z);
@@ -879,7 +879,9 @@ export function createSoccer({config,seed=1,stage=1,team=config.team,random,diff
     s.actionAim=input.kickAim?.manual?input.kickAim:input.passAim?.manual?input.passAim:null;
     s.mode=mode();
     // v24.1: what the kick and fourth buttons offer for a high ball on its way to the controlled player (the session draws them from this).
-    if(airChoice)s.airOptions=s.mode==='attack'&&role!=='keeper'&&s.ball.owner===null&&p.recover<=0&&p.slideTime<=0&&(s.ball.flight||s.ball.y>.6||s.ball.vy>2)?soccerAirOptions(p,s.ball,config,{speed:airSpeed(p),header:airHeader()}):null;
+    // The way shown first stays first while he can still meet the ball that way (soccerAirSteady: no flicker between "עף" and "נגיחה").
+    if(airChoice){const fresh=s.mode==='attack'&&role!=='keeper'&&s.ball.owner===null&&p.recover<=0&&p.slideTime<=0&&(s.ball.flight||s.ball.y>.6||s.ball.vy>2)?soccerAirOptions(p,s.ball,config,{speed:airSpeed(p),header:airHeader()}):null;
+      s.airOptions=fresh?{...soccerAirSteady(s.airOptions?.player===p.id?s.airOptions:null,fresh,{now:s.elapsed}),player:p.id}:null;}
     resolveAction(input,p);
     if(pendingAirAlt){pendingAirAlt=false;const o=s.airOptions;if(o?.alt)armAir(o.alt,o);}
     if(airV23&&pendingLob){pendingLob=false;if(s.mode==='attack'&&s.ball.owner===p.id&&!p.hands&&p.recover<=0&&p.slideTime<=0&&p.cooldown<=0){s.charging=false;s.charge=0;s.chargeKind=null;kick(p,lobPower(p),true);}}

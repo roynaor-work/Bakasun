@@ -10,7 +10,7 @@ import {applySoccerFull} from '../workout/island/minigames/soccer-full.mjs';
 import {applySoccerPitchV23,applySoccerControlV23} from '../workout/island/minigames/soccer-v23.mjs';
 import {playerAnimation} from '../workout/island/minigames/soccer-presentation.mjs';
 import {soccerLevelV241Enabled,soccerLevelV241,SOCCER_LEVEL_V241,soccerLocoV2Enabled,SOCCER_V241_IDLES,SOCCER_V241_WALK,soccerRadarEnabled,soccerAirChoiceEnabled,soccerFoulsV241Enabled,soccerSlideRecoverV241Enabled,soccerWhistleV1Enabled,soccerTackleV2Enabled,soccerKicksV2Enabled,soccerV241Rules,soccerV241Flags,
-  SOCCER_AIR_V241,soccerAirChoice,soccerAirOptions,soccerAirMeet,soccerAirContact,soccerAirAim,soccerVolleyFoot,soccerStandingFoul,SOCCER_FOULS_V241,soccerFouledSeconds,soccerFoulRoll,
+  SOCCER_AIR_V241,soccerAirChoice,soccerAirOptions,soccerAirSteady,soccerAirMeet,soccerAirContact,soccerAirAim,soccerVolleyFoot,soccerStandingFoul,SOCCER_FOULS_V241,soccerFouledSeconds,soccerFoulRoll,
   SOCCER_SLIDE_V241,SOCCER_V241_SLIDE,soccerV241SlideTime,soccerV241DiveClip,soccerV241KickClip,soccerV241Held,soccerV241ClipStates,SOCCER_V241_EXPECTED,SOCCER_V241_CLIP_FILES,soccerWhistleCue,SOCCER_WHISTLE_V1,SOCCER_V241_TAG} from '../workout/island/minigames/soccer-r241.mjs';
 import {soccerV241WhistleAssets} from '../workout/island/minigames/soccer-design-audio.mjs';
 
@@ -66,6 +66,27 @@ test('air choice: options from the ball path (a lob coming down near him, a high
   assert.equal(soccerVolleyFoot({x:0,z:0,fx:1,fz:0},{x:0,z:-.5}),'right');assert.equal(soccerVolleyFoot({x:0,z:0,fx:1,fz:0},{x:0,z:.5}),'left');
 });
 
+test('air choice: the buttons hold still while the ball drops (the first way stays while he can meet it; a lost second way lingers 0.2 s)',()=>{
+  const m=(y,t=.5)=>({t,x:0,z:0,y}),opt=meets=>({...soccerAirChoice(meets),arrival:null,meets});
+  // the earliest header meet dips under 1.2 m: the fresh choice turns volley-first, the one shown stays header-first
+  let o=soccerAirSteady(null,opt({header:m(1.25),volley:m(1),scissor:null}),{now:0});assert.deepEqual([o.primary,o.alt],['header','volley']);
+  o=soccerAirSteady(o,opt({header:m(1.15),volley:m(1),scissor:null}),{now:.02});assert.deepEqual([o.primary,o.alt],['header','volley'],'no flip to the volley');
+  assert.equal(o.arrival.y,1.15,'the meeting point of the way shown');
+  // the header goes out of reach: the volley takes over (the only change)
+  o=soccerAirSteady(o,opt({header:null,volley:m(.9),scissor:null}),{now:.04});assert.deepEqual([o.primary,o.alt],['volley',null]);
+  // the scissor kick drops out for a moment at its reach: it stays on the fourth button for altGrace
+  let h=soccerAirSteady(null,opt({header:m(2.2),volley:m(1),scissor:m(2.1)}),{now:1});assert.deepEqual([h.primary,h.alt],['header','scissor']);
+  h=soccerAirSteady(h,opt({header:m(2.2),volley:null,scissor:null}),{now:1.1});assert.deepEqual([h.primary,h.alt],['header','scissor'],'still offered 0.1 s later');
+  h=soccerAirSteady(h,opt({header:m(2.2),volley:null,scissor:m(2.05)}),{now:1.15});assert.equal(h.alt,'scissor');assert.equal(h.altSeen,1.15);
+  h=soccerAirSteady(h,opt({header:m(2.2),volley:null,scissor:null}),{now:1.15+SOCCER_AIR_V241.altGrace+.01});assert.equal(h.alt,null,'gone after the grace');
+  // the pairs stay as in soccerAirChoice: a diving header next to a volley (from its height), no scissor kick next to a volley
+  let v=soccerAirSteady(null,opt({header:null,volley:m(.7),scissor:null}),{now:2});
+  v=soccerAirSteady(v,opt({header:m(2.2),volley:m(.7),scissor:m(2)}),{now:2.02});assert.deepEqual([v.primary,v.alt],['volley','header']);
+  v=soccerAirSteady(v,opt({header:m(.75),volley:m(.7),scissor:null}),{now:2.04});assert.deepEqual([v.primary,v.alt],['volley','header'],'lingers');
+  v=soccerAirSteady(v,opt({header:m(.75),volley:m(.7),scissor:null}),{now:2.3});assert.deepEqual([v.primary,v.alt],['volley',null],'too low for a diving header');
+  assert.equal(soccerAirSteady(v,null,{now:2.32}),null,'no high ball: nothing to show');
+});
+
 /** A lob from a team-mate coming down near the controlled player in the rival half (the full match, v24.1 rules). */
 function incoming(config,{height=2.3,duration=1.15,age=.2,seed=7,v241=true}={}){
   const g=createSoccer({config,seed,stage:4,difficulty:'normal',airVersion:'v23',v241}),s=g.getState();
@@ -106,6 +127,20 @@ test('engine: the fourth button takes the second way: a volley instead of the he
    assert.ok(s.ball.vx*s.attackDir>5,'over his head toward the goal');assert.ok(me.fx*s.attackDir<0,'his back to the goal');
    for(let i=0;i<Math.round(SOCCER_AIR_V241.scissor.seconds/dt)+5;i++)g.update(dt,idle);assert.equal(playerAnimation(me,s,config).mode,'scissor','still the scissor clip while he gets up');
    for(let i=0;i<120;i++)g.update(dt,idle);assert.equal(me.aerialKind,null,'over');}
+});
+test('engine: while the ball drops and he runs to it the kick button keeps its way as long as he can meet the ball that way',()=>{
+  const config=full(true);let offers=0,held=0;
+  for(const seed of [3,5,7,9,11])for(const age of [.05,.2]){
+    const {g,s,me}=incoming(config,{seed,age});let prev=null;
+    for(let i=0;i<70;i++){
+      const f=s.ball.flight,toward=f?Math.sign(f.x-me.x)*.8:0;g.update(dt,{moveX:toward,moveZ:f?Math.sign(f.z-me.z)*.3:0});const o=s.airOptions;
+      if(o){offers++;assert.equal(o.player,me.id);
+        if(prev&&o.meets[prev.primary]){assert.equal(o.primary,prev.primary,'no flicker between the labels');held++;}
+        if(prev?.alt&&!o.alt)assert.ok(o.primary!==prev.primary||s.elapsed-prev.altSeen>=SOCCER_AIR_V241.altGrace-1e-9,'a lost second way lingers');}
+      prev=o;
+    }
+  }
+  assert.ok(offers>40&&held>30,`offers ${offers}, held ${held}`);
 });
 test('engine: v24 (no v24.1 rules) keeps the v23 header press and has no air options',()=>{
   const config=full(false),{g,s}=incoming(config,{v241:false});

@@ -32,6 +32,13 @@
       "header": 0,
       "scissor": 0
      },
+     "flips": {
+      "primary": 0,
+      "alt": 0,
+      "altBounce": 0,
+      "offersFlipped": 0,
+      "maxPerOffer": 0
+     },
      "struck": {
       "volley": 0,
       "header": 0,
@@ -60,44 +67,51 @@
     "matches": 6,
     "perMatch": {
      "foulsSlide": [
-      0.3333333333333333,
+      0.5,
       0
      ],
      "foulsSteal": [
-      0.8333333333333334,
+      1.1666666666666667,
       0
      ],
-     "advantages": 1.1666666666666667,
+     "advantages": 1.8333333333333333,
      "fallen": 0.5,
-     "stumbles": 9.666666666666666,
+     "stumbles": 9.166666666666666,
      "slides": 19,
      "offers": {
-      "volley": 0.8333333333333334,
-      "header": 5,
+      "volley": 0,
+      "header": 2,
       "scissor": 0
      },
      "alts": {
-      "volley": 1.3333333333333333,
-      "header": 0.5,
-      "scissor": 1
+      "volley": 1.1666666666666667,
+      "header": 0,
+      "scissor": 0.6666666666666666
+     },
+     "flips": {
+      "primary": 0,
+      "alt": 1.5,
+      "altBounce": 0,
+      "offersFlipped": 0,
+      "maxPerOffer": 0
      },
      "struck": {
-      "volley": 0.5,
-      "header": 1.1666666666666667,
+      "volley": 0,
+      "header": 1.3333333333333333,
       "scissor": 0
      },
-     "aerialGoals": 0.8333333333333334,
+     "aerialGoals": 0.5,
      "goals": [
-      5.833333333333333,
+      5.333333333333333,
       0.16666666666666666
      ],
      "shots": [
-      9.833333333333334,
-      0.3333333333333333
+      9.5,
+      0.6666666666666666
      ]
     },
     "slideDown": {
-     "mean": 1.253,
+     "mean": 1.251,
      "p50": 1.3,
      "p90": 1.3,
      "max": 1.383,
@@ -132,6 +146,13 @@
       "header": 0,
       "scissor": 0
      },
+     "flips": {
+      "primary": 0,
+      "alt": 0,
+      "altBounce": 0,
+      "offersFlipped": 0,
+      "maxPerOffer": 0
+     },
      "struck": {
       "volley": 0,
       "header": 0,
@@ -160,48 +181,55 @@
     "matches": 6,
     "perMatch": {
      "foulsSlide": [
-      0.5,
+      0.6666666666666666,
       0
      ],
      "foulsSteal": [
-      0.3333333333333333,
+      0,
       0
      ],
-     "advantages": 1.3333333333333333,
-     "fallen": 0.16666666666666666,
-     "stumbles": 6.5,
-     "slides": 17.666666666666668,
+     "advantages": 1,
+     "fallen": 0,
+     "stumbles": 6.833333333333333,
+     "slides": 18.333333333333332,
      "offers": {
-      "volley": 1.1666666666666667,
-      "header": 8.166666666666666,
+      "volley": 0.16666666666666666,
+      "header": 3.5,
       "scissor": 0
      },
      "alts": {
-      "volley": 2,
-      "header": 0.6666666666666666,
-      "scissor": 1.1666666666666667
+      "volley": 2.1666666666666665,
+      "header": 0,
+      "scissor": 1.5
+     },
+     "flips": {
+      "primary": 0,
+      "alt": 3.5,
+      "altBounce": 0,
+      "offersFlipped": 0,
+      "maxPerOffer": 0
      },
      "struck": {
-      "volley": 0.8333333333333334,
-      "header": 1.3333333333333333,
+      "volley": 0.16666666666666666,
+      "header": 2,
       "scissor": 0
      },
-     "aerialGoals": 1.1666666666666667,
+     "aerialGoals": 1,
      "goals": [
       3.1666666666666665,
-      0.5
+      0.16666666666666666
      ],
      "shots": [
-      8,
-      0.8333333333333334
+      6.833333333333333,
+      0.6666666666666666
      ]
     },
     "slideDown": {
-     "mean": 1.276,
+     "mean": 1.281,
      "p50": 1.3,
      "p90": 1.3,
      "max": 1.383,
-     "count": 105
+     "count": 110
     },
     "errors": 0
    }
