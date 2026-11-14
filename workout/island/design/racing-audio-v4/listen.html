@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Racing audio v4 — האזנה</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101820;color:#edf4f7;font:17px/1.6 system-ui,sans-serif}main{max-width:1050px;margin:auto;padding:30px 20px 60px}h1{font-size:clamp(28px,5vw,45px);line-height:1.2;margin:10px 0}h2{font-size:20px;margin:0 0 8px}.eyebrow{color:#70dac0;letter-spacing:2px}p{max-width:80ch;color:#b9cbd4}a{color:#84e7d2}.toolbar{position:sticky;top:0;z-index:1;display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:16px;background:#182731;border:1px solid #37505d;border-radius:12px}button,select{background:#263f4b;border:1px solid #72929f;border-radius:7px;color:#fff;font:inherit;padding:8px 14px;min-height:44px;cursor:pointer}button:hover{background:#355b64}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #8cebd5;outline-offset:3px}button[aria-pressed=true]{background:#216354}input{accent-color:#70dac0;max-width:140px;vertical-align:middle}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;margin-top:22px}article{background:#18242d;border:1px solid #37505d;border-radius:12px;padding:20px}article p{margin:5px 0;font-size:15px}audio{display:block;width:100%;margin:18px 0 12px}.id{direction:ltr;text-align:right;font:13px ui-monospace,monospace;color:#83b8c5;overflow-wrap:anywhere}.tag{color:#8cebd5;font-size:14px}.downloads{display:flex;gap:16px;font-size:14px}#status{min-height:1.6em;color:#8cebd5}footer{margin-top:30px;border-top:1px solid #37505d;padding-top:14px;font-size:14px}
+</style>
+<main>
+<div class="eyebrow" dir="ltr">RACING / AUDIO V4</div>
+<h1>יותר צמיגים. יותר ריקושט.</h1>
+<p>שלוש דרגות בלימה, חריקה בפנייה, חבטות עם מכה חוזרת, שפשוף צד והחלקה על דשא. סינתזה מקורית, ברישיון CC0. התחלה רכה של 10 מ״ש, ‎−16 LUFS בכל הקבצים.</p>
+<div class="toolbar">
+<label>פורמט <select id="format"><option value="ogg">OGG · Opus</option><option value="mp3">MP3</option></select></label>
+<label>עוצמה כללית <input id="master" aria-label="עוצמה כללית" type="range" min="0" max="1" step="0.01" value="0.71"></label>
+<label><input id="recommended" type="checkbox" checked> עוצמות מומלצות</label>
+<button id="stop" type="button">עצור הכול</button>
+</div>
+<p id="status" role="status" aria-live="polite">בחרו צליל להאזנה. כפתורי הלופ משמיעים בלימה רציפה.</p>
+<div class="grid" id="cards"></div>
+<noscript>דף ההאזנה דורש JavaScript. אפשר לפתוח את קובצי האודיו ישירות בתיקייה.</noscript>
+<footer><a href="manifest.json">מניפסט ומדידות</a> · <a href="REPORT.md">דוח ספקטרום</a> · <a href="LICENSE.txt">CC0 1.0 Universal</a><p>הגישו את התיקייה בשרת HTTP כדי להשתמש בלופים. בכל חיבור לופ יש ירידת עוצמה קצרה של כ־20 מ״ש. הנכסים מיועדים לבחינה לפני חיבור למשחק.</p></footer>
+</main>
+<script>
+'use strict';
+const clips = [
+  ['brake-loop-light','בלימה קלה',2,-13,'חיכוך אספלט רך, חריקה נמוכה ורחבה.'],
+  ['brake-loop-medium','בלימה בינונית',2,-9,'יותר אחיזה ושחרור של הגומי, עם חספוס.'],
+  ['brake-loop-hard','בלימה חזקה',2,-6,'חריקת צמיג מודגשת, גבוהים מרוסנים.'],
+  ['tyre-squeal-corner','חריקה בפנייה',.9,-8,'חריקה שעולה בקשת ושוככת ביציאה מהפנייה.'],
+  ['car-bump-hard','התנגשות חזקה',.4,-5,'חבטת גוף, קראנץ׳ וריקושט קצר בשתי מכות חוזרות.'],
+  ['car-bump-soft','התנגשות קלה',.4,-10,'מכה מרופדת עם ריקושט קטן והחזר דועך.'],
+  ['side-scrape','שפשוף צד',.6,-10,'מגע מחוספס ומקוטע לאורך מרכב הרכב.'],
+  ['rubber-skid','החלקה על דשא',.8,-11,'חיכוך גומי כהה, רשרוש דשא וקרקע רכה.']
+];
+const format = document.querySelector('#format'), master = document.querySelector('#master');
+const recommended = document.querySelector('#recommended'), status = document.querySelector('#status');
+const cache = new Map();
+let context, active, pending = 0;
+function level(clip) { return Number(master.value) * (recommended.checked ? 10 ** (clip[3] / 20) : 1); }
+function stopLoop() {
+  if (!active) return;
+  const {source,gain,button} = active, now = context.currentTime;
+  gain.gain.cancelScheduledValues(now);
+  gain.gain.setValueAtTime(gain.gain.value,now);
+  gain.gain.linearRampToValueAtTime(0,now+.010);
+  source.stop(now+.012);
+  source.onended=()=>{source.disconnect();gain.disconnect();};
+  button.setAttribute('aria-pressed','false');
+  button.textContent='הפעל לופ רציף';
+  active=undefined;
+}
+function stopAll() {
+  pending++;
+  stopLoop();
+  for (const player of document.querySelectorAll('audio')) { player.pause(); player.currentTime=0; }
+}
+async function toggleLoop(clip,button) {
+  if (active?.button===button) {stopAll();status.textContent='הלופ נעצר.';return;}
+  stopAll();
+  const ticket=pending;
+  try {
+    context ??= new (window.AudioContext||window.webkitAudioContext)();
+    await context.resume();
+    const key=`${clip[0]}.${format.value}`;
+    status.textContent='טוען לופ…';
+    let buffer=cache.get(key);
+    if (!buffer) {
+      const response=await fetch(key);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      buffer=await context.decodeAudioData(await response.arrayBuffer());
+      cache.set(key,buffer);
+    }
+    if (ticket!==pending) return;
+    const source=context.createBufferSource(), gain=context.createGain();
+    source.buffer=buffer;source.loop=true;source.loopStart=0;source.loopEnd=clip[2];
+    const now=context.currentTime;
+    gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(level(clip),now+.010);
+    source.connect(gain);gain.connect(context.destination);source.start();
+    active={source,gain,button,clip};
+    button.setAttribute('aria-pressed','true');button.textContent='עצור לופ';
+    status.textContent=`${clip[1]} — לופ רציף, ${format.value.toUpperCase()}`;
+  } catch(error) {
+    if (ticket===pending) status.textContent='לא ניתן לטעון לופ. פתחו דרך שרת HTTP ונסו את הפורמט השני.';
+  }
+}
+for (const clip of clips) {
+  const [id,label,duration,db,description]=clip;
+  const card=document.createElement('article');
+  card.innerHTML=`<h2>${label}</h2><div class="id">${id}</div><p>${description}</p><div class="tag">${duration} שנ׳ · ${db} dB מומלץ</div><audio controls preload="none" aria-label="${label}"><source src="${id}.ogg" type="audio/ogg"><source src="${id}.mp3" type="audio/mpeg"></audio><div class="downloads"><a href="${id}.ogg" download>הורדת OGG</a><a href="${id}.mp3" download>הורדת MP3</a></div>`;
+  const player=card.querySelector('audio');
+  player.volume=level(clip);player.dataset.id=id;
+  player.addEventListener('play',()=>{
+    pending++;stopLoop();
+    for(const other of document.querySelectorAll('audio')) if(other!==player) other.pause();
+    status.textContent=`${label} — ${format.value.toUpperCase()}`;
+  });
+  player.addEventListener('error',()=>{status.textContent=`לא ניתן לנגן ${label}; נסו את הפורמט השני או את קישור ההורדה.`;});
+  if(id.startsWith('brake-loop')) {
+    const button=document.createElement('button');
+    button.type='button';button.textContent='הפעל לופ רציף';button.setAttribute('aria-pressed','false');
+    button.style.marginTop='16px';button.addEventListener('click',()=>toggleLoop(clip,button));
+    card.append(button);
+  }
+  document.querySelector('#cards').append(card);
+}
+function updateVolume() {
+  for(const [index,player] of [...document.querySelectorAll('audio')].entries()) player.volume=level(clips[index]);
+  if(active) active.gain.gain.setTargetAtTime(level(active.clip),context.currentTime,.010);
+}
+master.addEventListener('input',updateVolume);recommended.addEventListener('change',updateVolume);
+format.addEventListener('change',()=>{
+  stopAll();
+  for(const player of document.querySelectorAll('audio')) {
+    player.src=`${player.dataset.id}.${format.value}`;player.load();
+  }
+  status.textContent=`נבחר ${format.value.toUpperCase()}. בחרו צליל להאזנה.`;
+});
+document.querySelector('#stop').addEventListener('click',()=>{stopAll();status.textContent='כל הצלילים נעצרו.';});
+document.addEventListener('visibilitychange',()=>{if(document.hidden) stopAll();});
+window.addEventListener('pagehide',stopAll);
+</script>
+</html>
