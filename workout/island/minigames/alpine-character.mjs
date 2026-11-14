@@ -95,7 +95,7 @@ export function createAlpineMotionPlayer(baked, bones) {
   // applied as model-space rotations on the already posed bones, and fades out in falls, menus and results.
   let boneByName = Object.fromEntries(baked.names.map((n, i) => [n, bones[i]]));
   const order = ['Hips', 'Spine', 'Chest', 'Neck', 'Head', 'LeftArm', 'RightArm', 'LeftForeArm', 'RightForeArm', 'LeftUpLeg', 'RightUpLeg', 'LeftLeg', 'RightLeg', 'LeftFoot', 'RightFoot'].filter(n => boneByName[n]);
-  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0, rate: 0, prevLean: 0};
+  const ride = {w: 0, speed: 0, lean: 0, phase: 0, bob: 0, boost: 0, arms: 0, rate: 0, prevLean: 0, plough: 0};
   let frameBone = bones[0]; const qFrame = new T.Quaternion(), qParent = new T.Quaternion(), qWork = new T.Quaternion(), qDelta = new T.Quaternion(), euler = new T.Euler();
   const AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), AZ = new T.Vector3(0, 0, 1);
   function rideTargets() {
@@ -108,7 +108,8 @@ export function createAlpineMotionPlayer(baked, bones) {
     const hipsPitch = crouch * .35 + bump * .5, torso = hipsPitch + crouch * (.4 + .3); // forward pitch of the pelvis and of the chest, rad
     const turn = Math.max(-1, Math.min(1, ride.rate * .12)); // 1 = swinging hard from one side to the other
     const sway = Math.sin(t * 1.7) * (.02 + .03 * sp);       // slow weight shift while going straight
-    return {crouch, knee, bump, swing, lean, a, b, hipsPitch, torso, turn, sway};
+    const pl = ride.plough;                                   // v24.1 brake: 0..1 snowplough (ski tips together, tails and knees apart)
+    return {crouch, knee: knee + .12 * pl, bump, swing, lean, a, b, hipsPitch, torso, turn, sway, pl};
   }
   function applyRide() {
     if ((ride.w < .01 && ride.arms < .01) || !frameBone?.parent) return;
@@ -122,9 +123,9 @@ export function createAlpineMotionPlayer(baked, bones) {
       Head: [-k.crouch * .15, k.turn * .1, -k.lean * .1 + k.sway * .6],
       LeftArm: [k.swing + k.b * (1.4 - k.torso), 0, -.52 + k.a * .1 + k.turn * .18 + k.lean * .12], RightArm: [-k.swing + k.b * (1.4 - k.torso), 0, .52 - k.a * .1 + k.turn * .18 + k.lean * .12],
       LeftForeArm: [-.6 - k.swing * .5 - .55 * k.b, 0, 0], RightForeArm: [-.6 + k.swing * .5 - .55 * k.b, 0, 0],
-      LeftUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, 0], RightUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, 0],
-      LeftLeg: [(k.knee + k.bump) * 2, 0, 0], RightLeg: [(k.knee + k.bump) * 2, 0, 0],
-      LeftFoot: [-(k.knee + k.bump), 0, 0], RightFoot: [-(k.knee + k.bump), 0, 0]
+      LeftUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean > 0 ? k.a * .1 : -k.a * .08), 0, .17 * k.pl], RightUpLeg: [-(k.knee + k.bump) - k.hipsPitch - (k.lean < 0 ? k.a * .1 : -k.a * .08), 0, -.17 * k.pl],
+      LeftLeg: [(k.knee + k.bump) * 2, 0, -.08 * k.pl], RightLeg: [(k.knee + k.bump) * 2, 0, .08 * k.pl],
+      LeftFoot: [-(k.knee + k.bump), -.42 * k.pl, 0], RightFoot: [-(k.knee + k.bump), .42 * k.pl, 0]
     };
     for (const name of order) {
       const bone = boneByName[name], d = delta[name]; if (!d) continue;
@@ -172,7 +173,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     state = baked.initialState || 'idle'; time = 0; fadeTime = 1; fadeDuration = 0;
     sample(state, 0, outgoing); shown.set(outgoing); target.set(outgoing);
     lastTime = null; lastPhase = null; lastS = null; lastSpeed = 0;
-    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = ride.arms = ride.rate = ride.prevLean = 0;
+    ride.w = ride.speed = ride.lean = ride.phase = ride.boost = ride.arms = ride.rate = ride.prevLean = ride.plough = 0;
     lastCrash = lastAir = lastBoost = resultSeen = clipFinished = false;
     carveHeld = false; carveStrength = 0;
     display(0);
@@ -198,6 +199,7 @@ export function createAlpineMotionPlayer(baked, bones) {
     if (dt > 0) ride.rate += (((ride.lean - ride.prevLean) / dt) - ride.rate) * (1 - Math.exp(-9 * dt)); ride.prevLean = ride.lean;
     ride.arms += (((state === 'fall' || state === 'recover' || state === 'celebrate') ? 0 : 1) - ride.arms) * (1 - Math.exp(-7 * dt));
     ride.boost += ((frame.boosting && rideWeight > 0 && !frame.airborne ? 1 : 0) - ride.boost) * (1 - Math.exp(-9 * dt));
+    ride.plough += ((rideWeight > 0 && !frame.airborne && !frame.crashed ? Math.min(1, Number(frame.braking) || 0) : 0) - ride.plough) * (1 - Math.exp(-11 * dt));
     ride.phase += dt;
     const clip = clipOf(state);
     const events = [];

@@ -13,6 +13,7 @@ import {loadLeague, saveLeague, createLeagueStore, LEAGUE_KEY} from '../workout/
 import {createGhostRecorder, decodeGhost, ghostAt, ghostTimeAt, saveGhost, loadGhost, validGhost, GHOST_KEY} from '../workout/island/minigames/alpine-league-ghost.mjs';
 import {ALPINE_THEME_ASSETS as ALPINE_THEMES, THEME_LOOKS, THEME_IDS, THEME_DIR, themeAssetFiles, themePackFiles} from '../workout/island/minigames/alpine-league-theme.mjs';
 import {createKidBot} from '../workout/island/tools/alpine-league-bot.mjs';
+import {withoutV241} from '../workout/island/minigames/alpine-v241.mjs';
 import {buildShell} from '../workout/island/tools/offline-shell.mjs';
 import {leagueOfflineFiles} from '../workout/island/tools/alpine-league-offline.mjs';
 import {OFFLINE_GAMES} from '../workout/island/ui/offline.mjs';
@@ -84,6 +85,8 @@ test('every league course is fair: a free corridor in every row, reachable from 
 
 test('the three ski stages are exactly v22.1: same courses (no wind key) and the same races, to the millisecond', () => {
   // Fingerprints taken from origin/main (v22.1) with the same scripted pilot: objects, sums of s and x, coins; rank, time, coins, falls.
+  // v24.1 added sections, pickups and the new steering to the three stages on purpose: the v22.1 game is the v24 balance (?alpineV241=0).
+  const base = withoutV241(data.config.minigames.alpineRush), P = base.physics;
   const COURSES = {'ice-peak': [172, 14505249, -5107, 125], 'frost-forest': [213, 18977979, 8201, 130], 'storm-ridge': [210, 21315562, -7474, 95]};
   for (const [id, t] of Object.entries(base.tracks)) {
     const c = generateCourse({...t, id}, P), want = COURSES[id];

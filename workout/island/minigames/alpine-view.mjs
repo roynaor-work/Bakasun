@@ -8,7 +8,7 @@ import {loadAlpineEnv,createEnvRig,resolveEnvironmentId} from './alpine-env.mjs'
 import {padChevrons} from './alpine-arrows.mjs';
 import {loadAlpineCharacters} from './alpine-character.mjs';
 import {presentationFrame,dampWeight} from './alpine-presentation.mjs';
-import {bodyTarget,followBody,carvePose} from './alpine-steer.mjs';
+import {bodyTarget,followBody,carvePose,travelYaw,curveBank} from './alpine-steer.mjs';
 import {createProRider as createFallbackRider} from './rider-fallback.mjs';
 import {snowMaterial,rockMaterial,createArtWorld} from './alpine-art.mjs';
 import {pipeProfile, surfaceHeight, wallAngle} from './alpine-track.mjs?v=island-v2-20261107-14';
@@ -245,6 +245,84 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   const gateColours = designWorld.gateVariants?.() > 1 ? new Map() : null;
   if (gateColours) { makers.gateB = () => designWorld.prop('gate', physics, 1); pools.gateB = []; }
   const gateType = id => { if (!gateColours) return 'gate'; if (!gateColours.has(id)) gateColours.set(id, gateColours.size % 2); return gateColours.get(id) ? 'gateB' : 'gate'; };
+  // ---------- v24.1 props (physics.v241 only; with ?alpineV241=0 none of these exist and the scene is v24's) ----------
+  const V241 = !!physics.v241, v241Mats = [];
+  const v2mat = (c, o = {}) => { const m = new THREE.MeshStandardMaterial({color: c, roughness: .6, envMapIntensity: .25, ...o}); v241Mats.push(m); return m; };
+  let stars = null, STAR_POOL = 0, shieldBubble = null, magnetRing = null;
+  if (V241) {
+    const big = {width: 4.6, length: 7.5, height: 2.1, ...physics.v241.bigRamp}, lip = v2mat('#ff8a3d', {roughness: .5, emissive: '#7a2e08', emissiveIntensity: .2});
+    const glow = v2mat('#ffd34d', {emissive: '#ff9e1f', emissiveIntensity: .6, roughness: .3, metalness: .35}), redM = v2mat('#d2483f', {roughness: .45}), steel = v2mat('#dfe7ee', {roughness: .25, metalness: .7});
+    const blue = v2mat('#4fb3ff', {emissive: '#1f6fb2', emissiveIntensity: .45, transparent: true, opacity: .62, roughness: .2}), black = v2mat('#1b2330', {roughness: .7}), belly = v2mat('#f4f6f8', {roughness: .8}), beak = v2mat('#ff9a2e', {roughness: .5});
+    const carrot = v2mat('#ff7a1a', {roughness: .5}), coal = v2mat('#22262c', {roughness: .9}), scarf = v2mat('#c8323c', {roughness: .7}), dark = v2mat('#4a4744', {roughness: .9}), snowWhite = v2mat('#ffffff', {roughness: .95});
+    const iceMat = v2mat('#9fdcff', {transparent: true, opacity: .55, roughness: .08, metalness: .25, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2});
+    const powderMat = v2mat('#ffffff', {roughness: 1, polygonOffset: true, polygonOffsetFactor: -1});
+    /** Big kicker: the pack's kicker (or the wooden one) at the v24.1 size, with an orange lip so it reads as the big jump. */
+    function bigKicker() {
+      const g = new THREE.Group();
+      if (kickerMat) { const m = new THREE.Mesh(kickerGeo, kickerMat); m.castShadow = m.receiveShadow = true; m.position.set(0, 0, big.length / 2); m.rotation.y = Math.PI; m.scale.set(big.width / 4, big.height / 1.8, big.length / 6); g.add(m); }
+      else { const geo = new THREE.BufferGeometry(), W = big.width / 2, L = big.length / 2, H = big.height; geo.setAttribute('position', new THREE.Float32BufferAttribute([-W, 0, L, W, 0, L, -W, H, -L, W, 0, L, W, H, -L, -W, H, -L], 3)); geo.computeVertexNormals(); mesh(geo, snow, g); }
+      box(big.width + .1, .12, .35, lip, g, 0, big.height + .02, -big.length / 2 + .1);
+      for (const x of [-1, 1]) { const s = box(.14, .1, big.length, lip, g, x * big.width / 2, big.height / 2, 0); s.rotation.x = Math.atan(big.height / big.length); }
+      return g;
+    }
+    function ring() { const g = new THREE.Group(), t = mesh(new THREE.TorusGeometry(physics.v241.ring?.radius ?? 1.25, .09, 10, 40), glow, g); t.castShadow = false; return g; }
+    function magnet() { const g = new THREE.Group(), body = new THREE.Group(); g.add(body); body.position.y = .95; const u = mesh(new THREE.TorusGeometry(.3, .1, 8, 18, Math.PI), redM, body); u.rotation.z = Math.PI; for (const x of [-.3, .3]) mesh(new THREE.CylinderGeometry(.1, .1, .16, 10), steel, body, x, .08, 0); g.userData.spin = body; return g; }
+    function shield() { const g = new THREE.Group(), body = new THREE.Group(); g.add(body); body.position.y = .95; mesh(new THREE.IcosahedronGeometry(.42, 1), blue, body); const t = mesh(new THREE.TorusGeometry(.5, .04, 6, 28), steel, body); t.rotation.x = Math.PI / 2; g.userData.spin = body; return g; }
+    function snowman() {
+      const g = new THREE.Group(); mesh(new THREE.SphereGeometry(.55, 18, 12), snowWhite, g, 0, .5, 0); mesh(new THREE.SphereGeometry(.42, 16, 12), snowWhite, g, 0, 1.25, 0); mesh(new THREE.SphereGeometry(.3, 14, 10), snowWhite, g, 0, 1.86, 0);
+      const nose = mesh(new THREE.ConeGeometry(.06, .3, 8), carrot, g, 0, 1.86, .38); nose.rotation.x = Math.PI / 2;
+      for (const x of [-.1, .1]) mesh(new THREE.SphereGeometry(.035, 6, 4), coal, g, x, 1.95, .27);
+      mesh(new THREE.CylinderGeometry(.2, .22, .32, 12), coal, g, 0, 2.2, 0); mesh(new THREE.CylinderGeometry(.32, .32, .04, 14), coal, g, 0, 2.05, 0);
+      const sc = mesh(new THREE.TorusGeometry(.33, .07, 6, 16), scarf, g, 0, 1.58, 0); sc.rotation.x = Math.PI / 2;
+      for (const x of [-1, 1]) { const arm = mesh(new THREE.CylinderGeometry(.025, .03, .7, 5), dark, g, x * .62, 1.4, 0); arm.rotation.z = x * 1.05; }
+      return g; // built facing +Z: placed with no turn it faces up the slope, toward the rider
+    }
+    function penguin() {
+      const g = new THREE.Group(), body = new THREE.Group(); g.add(body);
+      const b = mesh(new THREE.CapsuleGeometry(.3, .45, 6, 12), black, body, 0, .58, 0); b.scale.set(1, 1, .85);
+      const front = mesh(new THREE.SphereGeometry(.26, 14, 10), belly, body, 0, .55, .12); front.scale.set(1, 1.5, .6);
+      mesh(new THREE.SphereGeometry(.21, 14, 10), black, body, 0, 1.08, 0);
+      const bk = mesh(new THREE.ConeGeometry(.06, .18, 8), beak, body, 0, 1.06, .22); bk.rotation.x = Math.PI / 2;
+      for (const x of [-.08, .08]) mesh(new THREE.SphereGeometry(.03, 6, 4), belly, body, x, 1.13, .18);
+      for (const x of [-.12, .12]) box(.12, .05, .2, beak, body, x, .03, .06);
+      for (const x of [-1, 1]) { const w = box(.06, .42, .2, black, body, x * .32, .62, 0); w.rotation.z = x * .25; }
+      g.userData.waddle = body; return g;
+    }
+    function rollingBall(material, radius, lumpy) { const g = new THREE.Group(), geo = new THREE.IcosahedronGeometry(radius, lumpy ? 2 : 1), p = geo.attributes.position; for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), n = 1 + (lumpy ? .07 : .12) * Math.sin(x * 9 + z * 5) * Math.cos(y * 7); p.setXYZ(i, x * n, y * n, z * n); } geo.computeVertexNormals(); const m = mesh(geo, material, g, 0, radius, 0); g.userData.roll = m; g.userData.radius = radius; return g; }
+    function icePatch() { const g = new THREE.Group(), m = mesh(new THREE.PlaneGeometry(1, 1), iceMat, g, 0, .035, 0); m.rotation.x = -Math.PI / 2; m.castShadow = false; m.receiveShadow = false; return g; }
+    function powderPatch() {
+      const g = new THREE.Group(), geo = new THREE.PlaneGeometry(1, 1, 10, 10), p = geo.attributes.position;
+      for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), edge = Math.min(1, (.5 - Math.abs(x)) * 6, (.5 - Math.abs(y)) * 6); p.setZ(i, Math.max(0, edge) * (.1 + .07 * Math.sin(x * 23 + y * 11) * Math.cos(y * 17))); }
+      geo.computeVertexNormals(); const m = mesh(geo, powderMat, g, 0, .02, 0); m.rotation.x = -Math.PI / 2; m.castShadow = false; return g;
+    }
+    Object.assign(makers, {rampBig: bigKicker, ring, magnet, shield, snowman, 'mover-penguin': penguin, 'mover-snowball': () => rollingBall(snow, .8, true), 'mover-boulder': () => rollingBall(stone, .85, false), ice: icePatch, powder: powderPatch});
+    for (const key of ['rampBig', 'ring', 'magnet', 'shield', 'snowman', 'mover-penguin', 'mover-snowball', 'mover-boulder', 'ice', 'powder']) pools[key] = [];
+    // Stars: one instanced mesh (like the coins), spinning and glowing.
+    const sh = new THREE.Shape(); for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 - Math.PI / 2, r = i % 2 ? .18 : .42, x = Math.cos(a) * r, y = -Math.sin(a) * r; if (i) sh.lineTo(x, y); else sh.moveTo(x, y); } sh.closePath();
+    const starGeo = new THREE.ExtrudeGeometry(sh, {depth: .1, bevelEnabled: true, bevelThickness: .03, bevelSize: .025, bevelSegments: 1}); starGeo.center();
+    STAR_POOL = 48; stars = new THREE.InstancedMesh(starGeo, glow, STAR_POOL); stars.castShadow = false; stars.frustumCulled = false; stars.count = 0; stars.userData.perf = 'coins'; scene.add(stars);
+    // The player's shield (a see-through bubble) and magnet (a pulsing ring on the snow).
+    shieldBubble = new THREE.Mesh(new THREE.SphereGeometry(1.05, 20, 14), v2mat('#6fc3ff', {transparent: true, opacity: .2, emissive: '#2f86d6', emissiveIntensity: .5, depthWrite: false})); shieldBubble.visible = false; shieldBubble.userData.perf = 'effects'; scene.add(shieldBubble);
+    magnetRing = new THREE.Mesh(new THREE.TorusGeometry(1.3, .05, 6, 40), v2mat('#ff5a4f', {emissive: '#d2483f', emissiveIntensity: .8, transparent: true, opacity: .8})); magnetRing.visible = false; magnetRing.userData.perf = 'effects'; scene.add(magnetRing);
+    // A section arch at the start of every section: a banner across the run in the section's colour, with its picture (no text).
+    const SECTION_LOOK = {jumps: '#ff8a3d', movers: '#ff5d73', ice: '#4fb3ff', powder: '#9fb7c9', stars: '#f2b630', speed: '#4caf50'};
+    const icon = (kind, ctx, w, h) => {
+      ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; const cx = w / 2, cy = h / 2;
+      if (kind === 'jumps') { ctx.beginPath(); ctx.moveTo(cx - 90, cy + 34); ctx.lineTo(cx + 10, cy + 34); ctx.lineTo(cx + 10, cy - 8); ctx.closePath(); ctx.fill(); ctx.beginPath(); ctx.arc(cx + 50, cy - 10, 26, Math.PI, 0); ctx.stroke(); }
+      else if (kind === 'movers') { ctx.beginPath(); ctx.ellipse(cx, cy + 8, 26, 36, 0, 0, 7); ctx.fill(); ctx.beginPath(); ctx.arc(cx, cy - 34, 18, 0, 7); ctx.fill(); ctx.beginPath(); ctx.moveTo(cx - 70, cy); ctx.lineTo(cx - 44, cy); ctx.moveTo(cx + 44, cy); ctx.lineTo(cx + 70, cy); ctx.stroke(); }
+      else if (kind === 'ice') { for (let k = 0; k < 3; k++) { const a = k * Math.PI / 3; ctx.beginPath(); ctx.moveTo(cx - Math.cos(a) * 44, cy - Math.sin(a) * 44); ctx.lineTo(cx + Math.cos(a) * 44, cy + Math.sin(a) * 44); ctx.stroke(); } }
+      else if (kind === 'powder') { ctx.beginPath(); ctx.arc(cx - 30, cy + 8, 26, 0, 7); ctx.arc(cx + 2, cy - 12, 32, 0, 7); ctx.arc(cx + 36, cy + 8, 24, 0, 7); ctx.fill(); ctx.fillRect(cx - 56, cy + 8, 116, 26); }
+      else if (kind === 'stars') { ctx.beginPath(); for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 - Math.PI / 2, r = i % 2 ? 18 : 44; const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r; if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); } ctx.closePath(); ctx.fill(); }
+      else { for (const dx of [-24, 18]) { ctx.beginPath(); ctx.moveTo(cx + dx - 22, cy - 34); ctx.lineTo(cx + dx + 14, cy); ctx.lineTo(cx + dx - 22, cy + 34); ctx.stroke(); } }
+    };
+    for (const z of course.sections || []) {
+      const g = new THREE.Group(), colour = SECTION_LOOK[z.kind] || '#ff8a3d', half = pipe.lip + .7, poleM = v2mat(colour, {roughness: .5});
+      for (const x of [-half, half]) box(.32, 6, .32, poleM, g, x, pipe.lipHeight + 3, 0);
+      const tex = canvasTexture(512, 128, (ctx, w, h) => { ctx.fillStyle = colour; ctx.fillRect(0, 0, w, h); ctx.fillStyle = '#ffffff33'; for (let x = -h; x < w; x += 64) { ctx.beginPath(); ctx.moveTo(x, h); ctx.lineTo(x + 32, h); ctx.lineTo(x + 32 + h, 0); ctx.lineTo(x + h, 0); ctx.fill(); } icon(z.kind, ctx, w, h); });
+      const banner = new THREE.Mesh(new THREE.BoxGeometry(half * 2 + .3, 1.2, .18), v2mat('#ffffff', {map: tex, roughness: .7})); banner.position.set(0, pipe.lipHeight + 5.4, 0); banner.castShadow = true; g.add(banner);
+      g.userData.perf = 'finish'; scene.add(g); place(g, z.s0, 0, 0);
+    }
+  }
   const unused = () => Object.fromEntries(Object.keys(makers).map(type => [type, 0]));
   function prop(type, used) { const list = pools[type], i = used[type]++; if (!list[i]) { const g = makers[type](); g.userData.perf = 'props'; scene.add(g); list.push(g); } list[i].visible = true; return list[i]; }
   function textTexture(label, bg = '#ff643b', fg = '#ffffff') {
@@ -365,7 +443,23 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
   // for pending uploads/draw setup; racing frames never wait on the GPU.
   vfx.warmUp(true); warmUp(); renderer.getContext().finish(); vfx.reset();
   let canonicalPresentation=false;
-  let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0;
+  let lastT = 0, fov = 50, camLat = 0, camRise = 0, lastCoins = new Map(), snowAt = 0, lastStars = new Map(), lastSnowmen = new Map(), brakePuffAt = 0;
+  /** v24.1 objects other than stars and patches: big kickers, air rings, power-ups (spinning, bobbing), snowmen and movers (a penguin
+   * waddling the way it walks, a snowball or boulder rolling). Returns false for anything that is not a v24.1 object. */
+  function v241Prop(o, os, used, wall) {
+    if (o.type === 'ramp' && o.big) { place(prop('rampBig', used), os, o.x, 0); return true; }
+    if (o.type === 'ring') { place(prop('ring', used), os, o.x, o.h ?? 4); return true; }
+    if (o.type === 'magnet' || o.type === 'shield') { const g = prop(o.type, used); place(g, os, o.x, 0); const b = g.userData.spin; b.rotation.y = wall * 2.4; b.position.y = .95 + Math.sin(wall * 3 + os) * .08; return true; }
+    if (o.type === 'snowman') { const g = prop('snowman', used); place(g, os, o.x, 0); g.scale.setScalar((o.radius ?? .72) / .72); return true; }
+    if (o.type === 'mover') {
+      const key = `mover-${makers['mover-' + o.kind] ? o.kind : 'snowball'}`, g = prop(key, used), dir = o.dir || 1;
+      // the penguin is built facing +Z (uphill, toward the camera); a quarter turn faces it the way it walks (+X is to the right)
+      if (key === 'mover-penguin') { place(g, os, o.x, 0, 0, dir > 0 ? Math.PI / 2 : -Math.PI / 2); const w = g.userData.waddle; w.rotation.z = Math.sin(wall * 9) * .2; w.position.y = Math.abs(Math.sin(wall * 9)) * .06; }
+      else { place(g, os, o.x, 0); g.userData.roll.rotation.z = -o.x / g.userData.radius; }
+      return true;
+    }
+    return false;
+  }
   const ease = p => p < .5 ? 2 * p * p : 1 - (2 - 2 * p) ** 2 / 2;
   const crashSeconds = physics.crashSeconds ?? 1.4;
 
@@ -380,11 +474,13 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     const used = unused(); let k = 0; for (const type of Object.keys(makers)) { const g = prop(type, used); place(g, 10 + k * 4, (k % 2 ? 1 : -1) * 3, 0); k++; }
     for (let c = 0; c < COIN_POOL; c++) { worldPoint(6 + c * .2, (c % 5 - 2) * .8, .9, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); coins.setMatrixAt(c, matrix); }
     coins.count = COIN_POOL; coins.instanceMatrix.needsUpdate = true; worldPoint(4, 0, .4, P); burst(P, sparkleColor, 8, 1); burst(P, puffColor, 8, 1); stepBursts(1 / 60);
+    if (V241) { for (let c = 0; c < 8; c++) { worldPoint(7 + c * .4, (c % 4 - 1.5) * .9, 1, vec); matrix.compose(vec, quat.setFromEuler(euler.set(0, c, 0)), scl.setScalar(1)); stars.setMatrixAt(c, matrix); } stars.count = 8; stars.instanceMatrix.needsUpdate = true; worldPoint(5, 0, 1, shieldBubble.position); shieldBubble.visible = true; place(magnetRing, 5, 0, .07); magnetRing.visible = true; }
     for (let n = 0; n < 140; n++) { worldPoint(4 - n * .02, 0, .1, vec); trailPositions.set([vec.x, vec.y, vec.z], n * 3); trailAge[n] = n / 140; }
     trailGeo.attributes.position.needsUpdate = true; trailGeo.attributes.powderAge.needsUpdate = true; spray.visible = true;
     art.update(0, look.fogFar, camera, quality); for (const c of chunks) c.visible = c.userData.s1 > -70 && c.userData.s0 < look.fogFar + 30;
     renderer.render(scene, camera);
     spray.visible = false; coins.count = 0; for (const list of Object.values(pools)) for (const g of list) g.visible = false;
+    if (V241) { stars.count = 0; shieldBubble.visible = magnetRing.visible = false; }
     for (const r of riders.values()) r.root.visible = r.shadow.visible = false;
     if (ghostRider) ghostRider.root.visible = false;
   }
@@ -402,6 +498,7 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     if(trackFull){trackAttr.clearUpdateRanges();trackAttr.needsUpdate=true;trackFull=false;}
     placeScenery(ps, wall);scenery.update(ps,look.fogFar);
     for (const c of chunks) c.visible = c.userData.s1 > ps - 70 && c.userData.s0 < ps + look.fogFar + 30;
+    if (V241) shieldBubble.visible = magnetRing.visible = false;
     for (const [id, r] of riders) {
       const s = id === 'player' ? player : state.rivals?.find(x => x.id === id), z = id === 'player' ? 0 : s?.z ?? 0;
       // Riders just behind the player sit between the chase camera and the player; they are hidden so they never fill the screen.
@@ -417,8 +514,16 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
       r.roll += (rollTarget - r.roll) * dampWeight(11,wdt);
       // Body first: the tilt follows the stick intent, then the carve banks the board into the turn (more at speed).
       r.tilt = followBody(r.tilt ?? 0, s.airborne && s.airKind === 'pipe' ? 0 : bodyTarget(s), wdt);
-      const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll;
-      place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, carve.yaw, s.airKind === 'ramp' ? r.air * .12 : 0);
+      const carve = carvePose(r.tilt, Math.min(1, (state.speedKmh ?? 0) / 90)), bank = s.airborne || s.crashed ? 0 : carve.roll + (V241 ? curveBank(s.curve) : 0);
+      // v24.1: the skis point where the rider really goes (travelYaw) and the body banks into the course's turns (curveBank).
+      const yawShown = V241 && !s.crashed ? travelYaw(r.tilt, s, s.v ?? (state.speedKmh ?? 0) / 3.6, physics.lateralSpeed) : carve.yaw;
+      place(r.root, s.s ?? ps - z, s.x, surf + height + .03, r.roll + bank, yawShown, s.airKind === 'ramp' ? r.air * .12 : 0);
+      if (V241 && id === 'player') {
+        // The shield bubble around the rider, the magnet ring on the snow, and a spray of snow from the skis while braking.
+        shieldBubble.visible = (s.shield || 0) > 0; if (shieldBubble.visible) { worldPoint(s.s ?? ps, s.x, surf + height + .95, shieldBubble.position); shieldBubble.scale.setScalar(1 + Math.sin(wall * 5) * .04); }
+        magnetRing.visible = (s.magnet || 0) > 0 && !s.airborne; if (magnetRing.visible) { place(magnetRing, s.s ?? ps, s.x, surf + .07); magnetRing.rotateX(Math.PI / 2); magnetRing.scale.setScalar(1 + (wall * 1.6 % 1) * .5); magnetRing.material.opacity = .85 - (wall * 1.6 % 1) * .6; }
+        if ((s.braking || 0) > .1 && !s.airborne && !s.crashed && wall > brakePuffAt && !reduced) { brakePuffAt = wall + .05; for (const side of [-.25, .25]) { worldPoint((s.s ?? ps) + .6, s.x + side, surf + .1, P); burst(P, puffColor, 2, 1.4 + s.braking); } }
+      }
       r.actor?.setDistance?.(camera.position.distanceTo(r.root.position)); // alpine-v7: rider LOD by camera distance
       // Tricks spin, flip or both around the centre of mass; a crash tumbles onto the side.
       let yaw = 0, flip = 0, roll = 0, drop = 0, lift = 0;
@@ -455,11 +560,20 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     // Obstacles and coins from the frame.
     const used = unused();
     for (const list of Object.values(pools)) for (const g of list) g.visible = false;
-    let coinCount = 0; const seen = new Map();
+    let coinCount = 0, starCount = 0; const seen = new Map(), seenStars = new Map(), seenSnowmen = new Map();
     for (const o of state.obstacles ?? []) {
       const os = o.s ?? ps - o.z;
+      // v24.1 patches (ice, deep snow) stay drawn until their far end has passed, so the snow under the rider never vanishes.
+      if (V241 && (o.type === 'ice' || o.type === 'powder')) { if (os + (o.len || 0) / 2 < ps - 1.5) continue; const g = prop(o.type, used); place(g, os, o.x, 0); g.scale.set(o.w || 1, 1, o.len || 1); continue; }
       // Anything already behind the player would sit between it and the chase camera.
       if (os < ps - 1.5) continue;
+      if (V241 && o.type === 'star') {
+        if (starCount >= STAR_POOL) continue;
+        worldPoint(os, o.x, (o.h ?? .9) + Math.sin(wall * 3 + os) * .07, vec); frameAt(os, FR);
+        matrix.compose(vec, quat.setFromEuler(euler.set(0, -FR.theta + wall * 2.6 + os * .3, 0)), scl.setScalar(1)); stars.setMatrixAt(starCount++, matrix);
+        seenStars.set(o.id, {s: os, x: o.x, h: o.h ?? .9}); continue;
+      }
+      if (V241 && v241Prop(o, os, used, wall)) { if (o.type === 'snowman') seenSnowmen.set(o.id, {s: os, x: o.x}); continue; }
       if (o.type === 'coin') {
         if (coinCount >= COIN_POOL) continue;
         worldPoint(os, o.x, (o.h ?? .85) + Math.sin(wall * 3 + os) * .06, vec); frameAt(os, FR);
@@ -474,6 +588,13 @@ export async function createSkiView(host, {canvas, modelUrl = new URL('../design
     // A coin that vanishes beside the player was collected: sparkle where it was.
     for (const [id, c] of lastCoins) if (!seen.has(id) && Math.abs(c.s - ps) < 4 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 9, 2.4); }
     lastCoins = seen;
+    if (V241) {
+      stars.count = starCount; stars.instanceMatrix.clearUpdateRanges(); if (starCount) { stars.instanceMatrix.addUpdateRange(0, starCount * 16); stars.instanceMatrix.needsUpdate = true; }
+      for (const [id, c] of lastStars) if (!seenStars.has(id) && Math.abs(c.s - ps) < 5 && playing) { worldPoint(c.s, c.x, c.h, P); burst(P, sparkleColor, 12, 2.8); }
+      // A snowman that disappears beside the player was smashed: a burst of snow.
+      for (const [id, c] of lastSnowmen) if (!seenSnowmen.has(id) && Math.abs(c.s - ps) < 5 && playing) { worldPoint(c.s, c.x, 1.1, P); burst(P, puffColor, reduced ? 10 : 30, 3.4); }
+      lastStars = seenStars; lastSnowmen = seenSnowmen;
+    }
     stepBursts(dt); powder?.update(wdt);
 
     // Camera: a chase rig along the path that rises with the rider on walls and in the air.

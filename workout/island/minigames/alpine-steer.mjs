@@ -29,3 +29,13 @@ export function followBody(current, target, dt) {
 export function carvePose(tilt, speed01 = 0) {
   return {yaw: tilt * .24, roll: -tilt * (.07 + .11 * clamp(speed01, 0, 1))};
 }
+
+/** v24.1: root yaw that points the skis where the rider is really going (the sideways share of the speed: lean = vx / lateralSpeed), plus a
+ * small lead toward the stick so a turn shows the moment it is asked for. v24's tilt * 0.24 pointed the skis up to 9 degrees off the
+ * travel line in a slalom, which reads as sliding sideways. */
+export function travelYaw(tilt, frame = {}, speed = 20, lateralSpeed = 8.5) {
+  const lean = clamp(frame.lean, -1, 1), heading = Math.atan2(lean * lateralSpeed, Math.max(4, Number(speed) || 0));
+  return heading + (clamp(tilt, -1, 1) - lean) * .1;
+}
+/** v24.1: the whole body banks into a turn of the course (lateral acceleration v^2 * curvature, signed: + is a right turn). */
+export function curveBank(curve = 0) { return -Math.atan(clamp(curve, -12, 12) / 9.8) * .55; }

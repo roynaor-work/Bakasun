@@ -2,6 +2,7 @@ import {leagueEnabled,leagueSummary,stageSetup,applyStage,buyGear,stageInfo,STAG
 import {createLeagueStore} from './alpine-league-store.mjs?v=island-v2-20261107-14';
 import {alpineLeagueResult} from './alpine-league-result.mjs?v=island-v2-20261107-14';
 import {stageGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-20261107-14';
+import {balanceForPage} from './alpine-v241.mjs?v=island-v2-20261107-14';
 
 /** Ski league v23 on the island engine: `engine.alpineLeague`. The league state lives in its own key (alpine-league-store.mjs), so
  * nothing here reads or writes the island save. A league run starts through engine.startMinigame('alpineRush', {alpineLeague: n}) and
@@ -9,7 +10,8 @@ import {stageGoals,courseFacts} from './alpine-league-stages.mjs?v=island-v2-202
  * a game runs (busy), like the racing league. `?alpineLeague=0` (or the alpineRush / minigames flags off): enabled() is false and the
  * engine never builds a league run. */
 export function installAlpineLeague(engine, {storage, config, flags = {}, busy = () => null, notify = () => {}}) {
-  const base = config.minigames.alpineRush, store = createLeagueStore(storage);
+  // v24.1: ?alpineV241=0 gives the league its v24 courses, rivals and goals (the session strips the same way).
+  const base = balanceForPage(config.minigames.alpineRush), store = createLeagueStore(storage);
   const api = {
     enabled: () => leagueEnabled() && !!flags.minigames && flags.alpineRush !== false && engine.registry.minigames.has('alpineRush'),
     get state() { return store.state; },

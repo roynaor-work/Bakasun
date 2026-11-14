@@ -7,15 +7,18 @@ import {fileURLToPath} from 'node:url';
 import {readFile} from 'node:fs/promises';
 import {createAlpineEngine} from '../minigames/alpine-engine.mjs';
 import {STAGE_COUNT, engineStageOf, equipmentFor} from '../minigames/alpine-league-core.mjs';
-import {leagueBalance, leagueAi} from '../minigames/alpine-league-stages.mjs';
+import {leagueBalance, leagueAi, CURVE, CURVE_V241} from '../minigames/alpine-league-stages.mjs';
+import {withoutV241} from '../minigames/alpine-v241.mjs';
 import {createKidBot} from './alpine-league-bot.mjs';
 import {gearByProgress} from './alpine-league-sim.mjs';
 
 const arg = (name, fallback) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : fallback; };
-const base = JSON.parse(await readFile(fileURLToPath(new URL('../data/config.json', import.meta.url)), 'utf8')).minigames.alpineRush;
+// v24.1: the config carries physics.v241, so this calibrates AI_STRENGTH_V241 on CURVE_V241; --v24 calibrates the v24 table (AI_STRENGTH).
+const config = JSON.parse(await readFile(fileURLToPath(new URL('../data/config.json', import.meta.url)), 'utf8')).minigames.alpineRush;
+const base = process.argv.includes('--v24') ? withoutV241(config) : config, curve = base.physics.v241 ? CURVE_V241 : CURVE;
 export const TARGET = n => n <= 5 ? 85 : 85 - (n - 5) * 2;
 export function passAt(n, s, runs) {
-  const b0 = leagueBalance(base, n), es = engineStageOf(n), balance = {...b0, levels: b0.levels.map((l, i) => i === es - 1 ? {...l, ai: leagueAi(n, base.aiCaps, s)} : l)};
+  const b0 = leagueBalance(base, n), es = engineStageOf(n), balance = {...b0, levels: b0.levels.map((l, i) => i === es - 1 ? {...l, ai: leagueAi(n, base.aiCaps, s, curve)} : l)};
   const target = balance.levels[es - 1].targetRank; let pass = 0;
   for (let k = 0; k < runs; k++) {
     const e = createAlpineEngine({balance, stage: es, seed: 1000 + k * 7919 + n * 31, equipment: equipmentFor(gearByProgress(n)), power: 1});

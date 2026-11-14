@@ -5,7 +5,9 @@ const SAMPLE_CUES = {boost: 'ski/wind', takeoff: 'ski/jump', land: 'ski/landing'
 const LAYERS = {takeoff: 'ski_air', land: 'ski_landing', hit: 'ski_fall', crash: 'ski_fall', finish: 'victory', opening: 'opening', defeat: 'defeat'};
 // Short interface cues have no corresponding design sample. These also keep
 // sound usable when audio decoding is unavailable, without network fallbacks.
-const TONES = {countdown: [660, 660, .12], go: [880, 1320, .3], boost: [380, 1400, .5], gate: [990, 1480, .16], takeoff: [500, 900, .18], land: [180, 70, .2], hit: [140, 55, .28], overtake: [740, 990, .14], finish: [523, 1046, .7], trickStart: [420, 640, .12], trick: [660, 1320, .38], crash: [240, 55, .5], coin: [1320, 1980, .09], opening: [523, 784, .5], defeat: [330, 165, .5]};
+const TONES = {countdown: [660, 660, .12], go: [880, 1320, .3], boost: [380, 1400, .5], gate: [990, 1480, .16], takeoff: [500, 900, .18], land: [180, 70, .2], hit: [140, 55, .28], overtake: [740, 990, .14], finish: [523, 1046, .7], trickStart: [420, 640, .12], trick: [660, 1320, .38], crash: [240, 55, .5], coin: [1320, 1980, .09], opening: [523, 784, .5], defeat: [330, 165, .5],
+  // v24.1 (stars, air rings, magnet and shield pickups, the shield saving a fall, a new section of the course)
+  star: [1760, 2640, .08], ring: [880, 1760, .3], power: [520, 1560, .34], shield: [300, 900, .3], section: [700, 1050, .22]};
 const linear = db => Math.pow(10, db / 20);
 const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, Number(n) || 0));
 
