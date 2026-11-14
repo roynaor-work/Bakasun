@@ -44,6 +44,13 @@ try{
  await tap('[data-action=game-play]','שחקו');await page.locator('[data-action=racing-league-go]').waitFor({state:'visible'});
  const leagueChips=await page.evaluate(()=>[...document.querySelectorAll('.rl-chip')].map(c=>({no:Number(c.textContent.trim()),team:getComputedStyle(c).getPropertyValue('--team').trim()})));
  report.leagueCardChips=leagueChips;await shot('1-league-card');
+ // the season screen: the drivers' table (twelve chips) and the teams' table, by taps, then back to the league card
+ await tap('[data-action=racing-league-season]','העונה');await page.locator('[data-racing-season] .rl-table').first().waitFor({state:'visible'});await page.waitForTimeout(800);
+ const season=await page.evaluate(()=>({drivers:[...document.querySelectorAll('[data-racing-season] .rl-table tr[data-driver] .rl-chip')].map(c=>({no:Number(c.textContent.trim()),team:getComputedStyle(c).getPropertyValue('--team').trim()})),
+  teams:[...document.querySelectorAll('[data-racing-season] .rl-teams tr[data-team]')].map(r=>({team:r.dataset.team,crest:r.querySelector('img')?.getAttribute('src')||''}))}));
+ report.season=season;await page.locator('[data-racing-season] .rl-table').first().scrollIntoViewIfNeeded();await page.waitForTimeout(400);await shot('1b-season-table');
+ assert.equal(season.drivers.length,12,'twelve drivers in the table');for(const c of season.drivers)assert.equal(hex(c.team),expect(c.no),'season table chip #'+c.no);
+ await tap('[data-action=racing-league-back]','חזרה לליגה');await page.locator('[data-action=racing-league-go]').waitFor({state:'visible'});
  await tap('[data-action=racing-league-go]','לליגה: המרוץ הבא');
  if(await page.locator('[data-action=game-understood]').count())await tap('[data-action=game-understood]','הבנתי');
  await page.waitForFunction(()=>window.__island?.games?.current?.session?.snapshot?.renderMetrics?.frames>1,null,{timeout:600000});report.steps.push({at:clock(),view:'ready'});
@@ -106,7 +113,7 @@ try{
   assert.ok(podium.table.length>=8);for(const r of podium.table)assert.equal(hex(r.team),expect(r.no),'classification #'+r.no);
   await tap('.racing-podium','podium: continue');
   // 5. the league result screen: the table chips in the expected colours, the race recorded
-  await page.locator('[data-racing-league-result]').waitFor({state:'visible',timeout:300000});
+  await page.locator('[data-racing-league-result]').waitFor({state:'visible',timeout:300000});await page.waitForTimeout(1500);
   const result=await page.evaluate(()=>({chips:[...document.querySelectorAll('[data-racing-league-result] .rl-chip')].map(c=>({no:Number(c.textContent.trim()),team:getComputedStyle(c).getPropertyValue('--team').trim()})),league:(({race,history})=>({race,history:history.length,last:history.at(-1)}))(window.__island.engine.state.islandRacingLeague)}));
   report.leagueResult=result;await shot('6-league-result');
   assert.equal(result.league.race,1,'the race is recorded in the league');assert.equal(result.league.history,1);

@@ -1,0 +1,244 @@
+[
+ {
+  "seconds": 108.16,
+  "frames": 60,
+  "fps": 0.55,
+  "loadMs": 12226,
+  "fixedStep": true,
+  "stage": 1,
+  "seed": 7,
+  "hold": false,
+  "frameMs": {
+   "avg": 1802.15,
+   "p50": 1700,
+   "p95": 3283.2,
+   "max": 4416.5
+  },
+  "tickMs": {
+   "avg": 57.7,
+   "p50": 5.8,
+   "p95": 26.4
+  },
+  "calls": {
+   "avg": 208.93,
+   "p50": 215,
+   "max": 215
+  },
+  "triangles": {
+   "avg": 156866,
+   "p50": 164482,
+   "max": 164906
+  },
+  "allocMBps": 0.12,
+  "progress": {
+   "lap": 1,
+   "s": 2083,
+   "speed": 18.83
+  },
+  "render": {
+   "mode": "webgl",
+   "quality": 1,
+   "frames": 310,
+   "frameMilliseconds": 33.33333333333394,
+   "cameraBad": 0,
+   "cameraFinite": true,
+   "drawCalls": 178,
+   "triangles": 117940,
+   "countsIncludeShadowPasses": true,
+   "shadowsEnabled": false,
+   "visibleTrees": 14,
+   "treeLimit": 18,
+   "scenery": {
+    "quality": 1,
+    "draws": 13,
+    "instances": 512,
+    "triangles": 10226,
+    "triangleBudget": 30000,
+    "mounds": 16,
+    "cornerSigns": 5,
+    "roadside": {
+     "quality": 1,
+     "triangles": 4492,
+     "draws": 6,
+     "instances": 295,
+     "buildings": 4,
+     "galleries": 0,
+     "lamps": 32,
+     "guardrailSections": 0,
+     "barrierSections": 0,
+     "cornerSigns": 5,
+     "disposed": false
+    },
+    "disposed": false
+   },
+   "effects": {
+    "smoke": 0,
+    "skidMarks": 0,
+    "sparks": 0,
+    "debris": 0,
+    "tyres": 0,
+    "capacity": {
+     "smoke": 32,
+     "skidMarks": 128,
+     "sparks": 20,
+     "debris": 24,
+     "tyres": 4
+    },
+    "crashAssets": true,
+    "disposed": false
+   },
+   "crashAssets": true,
+   "gantry": {
+    "parts": 6,
+    "lit": 0
+   },
+   "f1": {
+    "triangles": 7006,
+    "draws": 6,
+    "boxes": 28,
+    "tyreStacks": 116
+   },
+   "envV2": {
+    "triangles": 24518,
+    "draws": 8,
+    "perModel": {
+     "grandstand": 2,
+     "pit-building": 1,
+     "start-gantry": 3,
+     "control-tower": 1,
+     "tire-barrier": 1,
+     "chainlink-fence": 1,
+     "sponsor-board": 2
+    }
+   },
+   "v7": {
+    "enabled": true,
+    "active": true,
+    "reason": "",
+    "lods": [
+     -1,
+     -1,
+     -1,
+     2,
+     2,
+     -1,
+     -1,
+     -1,
+     -1,
+     -1
+    ],
+    "spectators": {
+     "visible": 30,
+     "capacity": 128,
+     "triangles": 13860
+    }
+   },
+   "modelLoaded": true,
+   "carAsset": "racing-v7",
+   "liveries": {
+    "enabled": true,
+    "active": true,
+    "reason": "",
+    "cars": 3,
+    "plates": 3
+   },
+   "vegetationLoaded": true,
+   "failures": [],
+   "disposed": false,
+   "geometries": 201,
+   "textures": 24
+  },
+  "viewport": {
+   "w": 844,
+   "h": 390,
+   "dpr": 1
+  },
+  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+  "params": "?dur=900&frames=60&behind=1&dev=1",
+  "transfer": {
+   "totalMB": 4.52,
+   "assetsMB": 3.02,
+   "files": 111,
+   "assetFiles": 71,
+   "byFile": {
+    "design/racing-tracks-v2/tracks.mjs": 71868,
+    "assets/racing-league-v1/teams/ocean.svg": 656,
+    "assets/racing-league-v1/teams/gold.svg": 633,
+    "assets/racing-league-v1/teams/flame.svg": 621,
+    "assets/racing-league-v1/teams/silver.svg": 601,
+    "assets/racing-league-v1/teams/forest.svg": 572,
+    "assets/racing-league-v1/teams/night.svg": 574,
+    "assets/racing-broadcast-v1/card-frame.svg": 750,
+    "assets/racing-audio-v2/engine-idle.ogg": 121900,
+    "assets/racing-audio-v2/engine-low.ogg": 55244,
+    "assets/racing-audio-v2/engine-high.ogg": 57641,
+    "assets/racing-audio-v2/tyre-squeal.ogg": 44209,
+    "assets/racing-audio-v2/engine-mid.ogg": 57294,
+    "assets/racing-audio-v2/engine-redline.ogg": 59411,
+    "assets/racing-audio-v2/wind-speed.ogg": 47352,
+    "assets/racing-audio-v2/shift-up.ogg": 9859,
+    "assets/racing-audio-v2/shift-down.ogg": 12053,
+    "assets/racing-audio-v2/turbo-blowoff.ogg": 13735,
+    "assets/racing-audio-v2/exhaust-pop-1.ogg": 7713,
+    "assets/racing-audio-v2/exhaust-pop-2.ogg": 8055,
+    "assets/racing-audio-v2/pass-whoosh.ogg": 20214,
+    "assets/racing-audio-v2/kerb-rumble.ogg": 13907,
+    "assets/racing-audio-v2/exhaust-pop-3.ogg": 8485,
+    "assets/racing-audio-v3/car-bump.ogg": 5642,
+    "assets/racing-audio-v3/brake-squeal-loop.ogg": 21677,
+    "assets/racing-audio-v3/engine-restart.ogg": 8100,
+    "assets/racing-audio-v3/crash-roll.ogg": 13818,
+    "assets/racing-audio-v3/wall-scrape-short.ogg": 6795,
+    "assets/racing-audio-v3/wall-scrape-long.ogg": 12269,
+    "assets/racing-v7/textures/asphalt-color.webp": 245584,
+    "assets/racing-v7/textures/tire-smoke.png": 2866,
+    "assets/racing-v7/textures/asphalt-normal.png": 236649,
+    "assets/racing-v7/textures/asphalt-orm.webp": 13655,
+    "assets/racing-v7/cars/velour-lod1.glb": 57752,
+    "assets/racing-v7/cars/apex-lod1.glb": 57884,
+    "assets/racing-v7/cars/apex-lod2.glb": 29084,
+    "assets/racing-v7/cars/apex-lod0.glb": 93704,
+    "assets/racing-v7/cars/velour-lod2.glb": 29756,
+    "assets/racing-v7/cars/prism-lod2.glb": 29796,
+    "assets/racing-v7/cars/prism-lod1.glb": 58236,
+    "assets/racing-v7/cars/solis-lod1.glb": 52356,
+    "assets/racing-v7/cars/solis-lod2.glb": 29556,
+    "assets/racing-v7/cars/vector-lod1.glb": 61316,
+    "assets/racing-v7/cars/vector-lod2.glb": 31008,
+    "assets/racing-v7/crowd/spectator.glb": 7727,
+    "assets/racing-v7/props/props.glb": 30616,
+    "vendor/draco/draco_decoder.wasm": 192604,
+    "vendor/draco/draco_wasm_wrapper.js": 58638,
+    "assets/racing-broadcast-v1/start-gantry.glb": 132725,
+    "design/racing-environment-v2/textures/asphalt-skid.webp": 23947,
+    "design/racing-environment-v2/textures/asphalt-pits.webp": 25421,
+    "design/racing-environment-v2/textures/gravel-runoff.webp": 22089,
+    "design/racing-environment-v2/runtime/pit-building.glb": 133357,
+    "design/racing-environment-v2/runtime/control-tower.glb": 97684,
+    "design/racing-environment-v2/runtime/tire-barrier.glb": 146313,
+    "design/racing-environment-v2/runtime/chainlink-fence.glb": 62072,
+    "design/racing-environment-v2/runtime/start-gantry.glb": 110089,
+    "design/racing-environment-v2/runtime/sponsor-board.glb": 14552,
+    "assets/racing-crash-fx-v1/sparks-atlas.png": 13244,
+    "assets/racing-crash-fx-v1/smoke-dust-atlas.png": 34898,
+    "assets/racing-formula/formula.glb": 337049,
+    "assets/racing-liveries-v1/manifest.json": 2169,
+    "assets/racing-liveries-v1/palettes/ocean.json": 857,
+    "assets/racing-liveries-v1/palettes/gold.json": 841,
+    "assets/racing-liveries-v1/palettes/flame.json": 842,
+    "assets/racing-liveries-v1/palettes/silver.json": 847,
+    "assets/racing-liveries-v1/palettes/forest.json": 843,
+    "assets/racing-liveries-v1/palettes/night.json": 846,
+    "assets/racing-liveries-v1/numbers/flame-1.png": 2667,
+    "assets/racing-liveries-v1/numbers/ocean-16.png": 3283,
+    "assets/racing-liveries-v1/numbers/gold-44.png": 3372
+   }
+  },
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "viewportLabel": "844x390"
+ }
+]
