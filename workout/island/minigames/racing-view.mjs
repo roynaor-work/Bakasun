@@ -72,7 +72,9 @@ export async function createRacingView(canvas,track,{stage=track.stage,seed=1,v7
  // racing-look-v1: Formula 1 trackside (run-off, gravel, tyre walls, pit building, start lights) on the F1 circuits only; ?racingLook=0 skips it
  const lookOn=racingLookEnabled(),f1Look=lookOn&&track.f1?createRacingF1({T,scene,track,keep,night,clear}):null;
  const vergeHeight=(y,distance)=>Math.max(-1.2,y-.07-Math.max(0,distance-track.width/2-2.1)*.18);
- const carGround=c=>Math.abs(c.lateral||0)>track.width/2+2.1?vergeHeight(c.y,Math.abs(c.lateral)):c.y;
+ // racing-v24: a car in the pit lane (c.pit, racing-pit.mjs) stands on the painted pit lane of racing-f1.mjs, which lies flat at the track's height over the
+ // sloping verge; on the verge height the car sank 1.2 m under it in its box (the browser proof showed the crew around an empty box)
+ const carGround=c=>c.pit?c.y:Math.abs(c.lateral||0)>track.width/2+2.1?vergeHeight(c.y,Math.abs(c.lateral)):c.y;
  function ribbon(left,right,material,offset=.02,berm=false){const pos=[],uv=[],ind=[];for(let i=0;i<=steps;i++){const p=track.sample(i/steps*track.length);for(const lane of [left,right]){const y=berm?vergeHeight(p.y,Math.abs(lane)):p.y+offset;pos.push(p.x+p.normal.x*lane,y,p.z+p.normal.z*lane);uv.push((lane-left)/(right-left),i/steps);}}for(let i=0;i<steps;i++){const j=i*2;ind.push(j,j+2,j+1,j+1,j+2,j+3);}const g=keep(new T.BufferGeometry());g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(ind);g.computeVertexNormals();const o=new T.Mesh(g,material);o.receiveShadow=true;scene.add(o);return o;}
  // Banked verges blend the elevated road into an island, with readable edges.
  ribbon(-track.width/2-25,-track.width/2-2.1,scenery.grassMaterial,-.2,true);ribbon(track.width/2+2.1,track.width/2+25,scenery.grassMaterial,-.2,true);

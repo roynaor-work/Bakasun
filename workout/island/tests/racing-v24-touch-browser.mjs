@@ -129,11 +129,14 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   await pullAudio();
  }
  else if(scenario==='corner'){
-  // the turn alone: on the straight at speed, full lock without the brake for 0.5 s (as tools/racing-v24-sim.mjs cornerTest: the car stays on the asphalt; a whole
-  // second at 30 m/s took the first run onto the grass and into the flip); then straight; then the brake alone for 0.6 s
-  await setGas(true);for(let i=0;i<Math.round(14*FPS);i++){await drive({brakes:false});const s=await log();if(s.speed>36)break;}
-  const v0=(await log()).speed;await setWheel(.85);const turn=[];for(let i=0;i<Math.round(FPS/2);i++){await tick(FRAME);turn.push(await log());}
-  report.turn={from:v0,to:turn.at(-1).speed,loss:+(v0-turn.at(-1).speed).toFixed(2),seconds:+(turn.length/FPS).toFixed(2),maxLateral:Math.max(...turn.map(s=>Math.abs(s.lateral))),offroad:turn.some(s=>s.offroad)};await frame('1-turn');
+  // the turn alone: full lock without the brake for 0.5 s (as tools/racing-v24-sim.mjs cornerTest: the car stays on the asphalt); then straight; then the brake
+  // alone for 0.6 s. Alone on the road: the player waits 4 s on the grid until the field has gone (in the second run a rival knocked the car during the turn and
+  // off the road, so the brake was on the grass), then the main straight up to 20 m/s. (A whole second of lock at 30 m/s, the first run, ended on the grass too.)
+  for(let i=0;i<Math.round(4*FPS);i++){await tick(FRAME);await log();}
+  await setGas(true);for(let i=0;i<Math.round(10*FPS);i++){await drive({brakes:false});const s=await log();if(s.speed>20)break;}
+  const v0s=await log(),v0=v0s.speed;await setWheel(.85);const turn=[];for(let i=0;i<Math.round(FPS/2);i++){await tick(FRAME);turn.push(await log());}
+  report.turn={from:v0,to:turn.at(-1).speed,loss:+(v0-turn.at(-1).speed).toFixed(2),seconds:+(turn.length/FPS).toFixed(2),maxLateral:Math.max(...turn.map(s=>Math.abs(s.lateral))),offroad:turn.some(s=>s.offroad),
+   contacts:await page.evaluate(([a,b])=>window.__log.filter(e=>e.type==='bump'&&(e.car==='player'||e.with==='player')&&e.t>=a&&e.t<=b).length,[v0s.t,turn.at(-1).t])};await frame('1-turn');
   await setWheel(0);for(let i=0;i<Math.round(1.5*FPS);i++){await drive({brakes:false});await log();}
   const v1s=await log(),v1=v1s.speed;await pullAudio();await setGas(false);await setBrake(true);const br=[];for(let i=0;i<Math.round(.6*FPS);i++){await tick(FRAME);br.push(await log());}
   report.brake={from:v1,to:br.at(-1).speed,decel:+((v1-br.at(-1).speed)/.6).toFixed(1),t0:v1s.t,t1:br.at(-1).t};await frame('2-brake');await setBrake(false);await tick(FRAME*3);await pullAudio();
@@ -149,13 +152,18 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
   report.audible=[...new Set(audio.levels.filter(l=>l.v>.0005).map(l=>l.url))];
  }
  else if(scenario==='bump'){
-  // launch and steer into the nearest car on the grid: the wheel finger follows the pilot aimed at that car's line (a fixed wheel in the first run steered the player,
-  // who starts on the outside of the grid, off the road and into a flip without touching anybody), then hold the line
-  report.target=await page.evaluate(()=>{const m=window.__island.games.current.session.debug.model,p=m.state.player;return m.state.cars.filter(c=>c!==p).map(c=>({id:c.id,lateral:+c.lateral.toFixed(2),d:+Math.hypot(c.x-p.x,c.z-p.z).toFixed(2)})).sort((a,b)=>a.d-b.d)[0];});
-  await setGas(true);let hit=null;
-  for(let i=0;i<Math.round(6*FPS)&&!hit;i++){const lane=await page.evaluate(id=>window.__island.games.current.session.debug.model.state.cars.find(c=>c.id===id)?.lateral??0,report.target.id);
-   await drive({lane,brakes:false});await log();hit=await page.evaluate(()=>window.__log.find(e=>e.type==='bump'&&(e.car==='player'||e.with==='player'))||null);if(i%3===0)await frame('launch-'+String(i).padStart(3,'0'));}
-  report.hit=hit;await setWheel(0);for(let k=0;k<Math.round(1.2*FPS);k++){await tick(FRAME);await log();if(k%3===0)await frame('after-hit-'+String(k).padStart(3,'0'));}
+  // the start like a child: the gas and the wheel finger following the pilot to the centre line, which runs the player from the outside of the grid into the car
+  // ahead (the turbo run met ai-2 at 2.4 s; a fixed wheel or aiming at a car's line missed everybody: the computer cars pull away at the start). The first contact
+  // of the player, then 1.2 s more of the same driving: both cars' speed just before, at and after the contact, and how far apart they are
+  const speeds=()=>page.evaluate(()=>Object.fromEntries(window.__island.games.current.session.debug.model.state.cars.map(c=>[c.id,+c.speed.toFixed(2)])));
+  const pair=h=>page.evaluate(h=>{const m=window.__island.games.current.session.debug.model,cs=[h.car,h.with].map(id=>m.state.cars.find(c=>c.id===id));
+   return {t:+m.state.time.toFixed(3),cars:cs.map(c=>({id:c.id,speed:+c.speed.toFixed(2),lateral:+c.lateral.toFixed(2)})),gap:+Math.hypot(cs[0].x-cs[1].x,cs[0].z-cs[1].z).toFixed(2)};},h);
+  await setGas(true);let hit=null,prev=null;
+  for(let i=0;i<Math.round(6*FPS)&&!hit;i++){prev=await speeds();await drive({brakes:false});await log();hit=await page.evaluate(()=>window.__log.find(e=>e.type==='bump'&&(e.car==='player'||e.with==='player'))||null);if(i%3===0||hit)await frame('launch-'+String(i).padStart(3,'0'));}
+  report.hit=hit;
+  if(hit){report.contact={before:{[hit.car]:prev[hit.car],[hit.with]:prev[hit.with]},at:await pair(hit)};
+   for(let k=0;k<Math.round(1.2*FPS);k++){await drive({brakes:false});await log();if(k%3===0)await frame('after-hit-'+String(k).padStart(3,'0'));if(k===Math.round(.5*FPS))report.contact.half=await pair(hit);}
+   report.contact.after=await pair(hit);}
   report.bumpEvents=await page.evaluate(()=>window.__log.filter(e=>e.type==='bump'));await pullAudio();
  }
  else if(scenario==='pit'){

@@ -183,6 +183,8 @@ test('session, view, effects and offline list carry v24',async()=>{
  assert.match(session,/v24PhysicsConfig\(v24\)/);assert.match(session,/lastInput=playerInput\(input\.sample\(\),v24\)/);assert.match(session,/createPitUi\(/);assert.match(session,/racing-v24\.css/);
  assert.match(session,/blowoff:v24\.turbo==='v23'/);
  const view=await read('minigames/racing-view.mjs');assert.match(view,/&&!c\.hidden/);assert.match(view,/car\.body\.position\.y=c\.dropY\|\|0/);
+ // a car in the pit lane stands on the painted lane (track height): on the sloping verge height it sank 1.2 m under the lane in its box (browser proof, v24 first run)
+ assert.match(view,/const carGround=c=>c\.pit\?c\.y:/);{const track=createTrack('coast'),lane=pitLane(track),drop=Math.max(0,Math.abs(lane.boxLat)-track.width/2-2.1)*.18+.07;assert.ok(drop>1,'the verge at the box is '+drop.toFixed(2)+' m below the lane');}
  const effects=await read('minigames/racing-effects.mjs');assert.match(effects,/crashRest/);
  const m=JSON.parse(await read('offline-manifest.json'));for(const f of ['minigames/racing-v24.mjs','minigames/racing-recover.mjs','minigames/racing-pit.mjs','minigames/racing-pit-ui.mjs','minigames/racing-pit-view.mjs','minigames/racing-pit-crew.mjs','minigames/racing-formula-all.mjs','minigames/racing-v24.css'])assert.ok(m.shell.includes(f),f);
  for(const f of ['assets/racing-pit-v1/models/wheel_front_left.glb','assets/racing-pit-v1/audio/crew_cheer.ogg','assets/racing-pit-v1/icons/tire_wear_3.svg','assets/racing-formula-cars-v1/formula-lod0.glb','assets/racing-formula-cars-v1/formula-lod1.glb','assets/racing-formula-cars-v1/formula-lod2.glb','assets/racing-audio-v4/brake-loop-hard.ogg','assets/racing-audio-v4/car-bump-hard.mp3','assets/racing-audio-v4/side-scrape.ogg'])
