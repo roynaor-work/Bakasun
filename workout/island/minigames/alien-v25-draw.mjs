@@ -63,7 +63,7 @@ export function drawV25Fx(p,m,aspect=1,scale=1){
 /** v25 arsenal presentation: the lightning bolt (a jagged white core in a blue glow, re-jagged every 40 ms, fading over its 0.32 s), the
  * shockwave (a cyan double ring rolling up from the ship), and the falling ammo tokens (missile crate amber, battery blue, cell cyan), each a
  * token with its own drawn symbol on a halo so it reads as "take me". Only with the arsenal on (?alienArsenal=0 draws nothing here). */
-export const AMMO_COLORS=Object.freeze(['#ffb547','#7fb8ff','#6fe3ff']);
+export const AMMO_COLORS=Object.freeze(['#ff9c6b','#7fb8ff','#6fe3ff']);/* coral, not the Vulcan magazine's amber */
 function bolt(p,pts,width,color,alpha){p.globalAlpha=alpha;p.strokeStyle=color;p.lineWidth=width;p.lineJoin='round';p.beginPath();pts.forEach((q,i)=>{i?p.lineTo(q.x,q.y):p.moveTo(q.x,q.y);});p.stroke();}
 function ammoSymbol(p,kind,s){
  p.lineWidth=1.6*s/10;p.strokeStyle='#0b1620';p.fillStyle='#0b1620';
@@ -85,6 +85,7 @@ export function drawV25Arsenal(p,m,aspect=1,scale=1){
   p.strokeStyle='#e6fbff';p.lineWidth=2*scale;p.beginPath();p.arc(0,0,Math.max(0,ring.r-7*scale),Math.PI,TAU);p.stroke();p.restore();drawn++;}
  for(const d of m.ammoDrops||[]){const bob=Math.sin(t*4+d.id)*2*scale,size=20*scale,color=AMMO_COLORS[d.kind]||'#ffffff';
   p.save();p.translate(d.x,d.y+bob);p.scale(1/aspect,1);p.globalCompositeOperation='lighter';const g=p.createRadialGradient(0,0,0,0,0,size*1.4);g.addColorStop(0,color+'99');g.addColorStop(1,color+'00');p.fillStyle=g;p.fillRect(-size*1.4,-size*1.4,size*2.8,size*2.8);
-  p.globalCompositeOperation='source-over';p.fillStyle=color;p.strokeStyle='#f6fbff';p.lineWidth=1.5*scale;p.beginPath();p.arc(0,0,size*.62,0,TAU);p.fill();p.stroke();ammoSymbol(p,d.kind,size*.9);p.restore();drawn++;}
+  // A rounded crate (the Vulcan magazine is a round token), the weapon's colour and symbol on it.
+  p.globalCompositeOperation='source-over';p.fillStyle=color;p.strokeStyle='#f6fbff';p.lineWidth=1.5*scale;const h=size*.6,r=size*.18;p.beginPath();p.moveTo(-h+r,-h);p.lineTo(h-r,-h);p.quadraticCurveTo(h,-h,h,-h+r);p.lineTo(h,h-r);p.quadraticCurveTo(h,h,h-r,h);p.lineTo(-h+r,h);p.quadraticCurveTo(-h,h,-h,h-r);p.lineTo(-h,-h+r);p.quadraticCurveTo(-h,-h,-h+r,-h);p.closePath();p.fill();p.stroke();ammoSymbol(p,d.kind,size*.9);p.restore();drawn++;}
  return drawn;
 }
