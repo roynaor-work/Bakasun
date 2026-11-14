@@ -1,0 +1,1917 @@
+{
+ "tag": "after",
+ "query": "",
+ "frames": 1203,
+ "gameSeconds": 19.2,
+ "wallSeconds": 1310,
+ "last": {
+  "phase": "dead",
+  "score": [
+   0,
+   0
+  ],
+  "quarter": 1,
+  "clock": 75.52
+ },
+ "events": {
+  "tip": 1,
+  "possession": 6,
+  "stealTry": 5,
+  "stealMiss": 5,
+  "passStart": 4,
+  "pass": 4,
+  "bounce": 1,
+  "catch": 4,
+  "shotStart": 1,
+  "jump": 3,
+  "release": 1,
+  "contact": 2,
+  "miss": 1,
+  "rebound": 1,
+  "foul": 2,
+  "inbound": 1,
+  "move": 1,
+  "moveResult": 1
+ },
+ "steals": [],
+ "audioByUrl": {
+  "osc:sine": 14,
+  "design/audio/scenes/opening.ogg": 1,
+  "assets/audio/g3h/whistle.ogg": 1,
+  "design/audio/basketball/bounce.ogg": 18,
+  "assets/audio/g3h/pass.ogg": 5,
+  "design/audio/basketball/rim.ogg": 1,
+  "assets/audio/g3h/kick.ogg": 1,
+  "assets/hoops-v241/referee-audio/whistle-foul-long.ogg": 2
+ },
+ "audio": [
+  {
+   "frame": 0,
+   "t": 22300,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 24166,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 24897,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 25062,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 28646,
+   "kind": "buffer",
+   "url": "design/audio/scenes/opening.ogg",
+   "loop": false,
+   "ctx": 0.392,
+   "when": 0.392
+  },
+  {
+   "frame": 0,
+   "t": 39120,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/whistle.ogg",
+   "loop": false,
+   "ctx": 23.432,
+   "when": 23.432
+  },
+  {
+   "frame": 48,
+   "t": 42144,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 32.821,
+   "when": 32.821
+  },
+  {
+   "frame": 81,
+   "t": 42672,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 34.94,
+   "when": 34.94
+  },
+  {
+   "frame": 114,
+   "t": 43200,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 37.222,
+   "when": 37.222
+  },
+  {
+   "frame": 147,
+   "t": 43728,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 106.403,
+   "when": 106.403
+  },
+  {
+   "frame": 180,
+   "t": 44256,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 164.952,
+   "when": 164.952
+  },
+  {
+   "frame": 188,
+   "t": 44371,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 213,
+   "t": 44784,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 256.572,
+   "when": 256.572
+  },
+  {
+   "frame": 217,
+   "t": 44835,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 246,
+   "t": 45299,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 246,
+   "t": 45312,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 346.503,
+   "when": 346.503
+  },
+  {
+   "frame": 273,
+   "t": 45744,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 350.412,
+   "when": 350.412
+  },
+  {
+   "frame": 316,
+   "t": 46432,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 357.532,
+   "when": 357.532
+  },
+  {
+   "frame": 349,
+   "t": 46960,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 390.15,
+   "when": 390.15
+  },
+  {
+   "frame": 354,
+   "t": 47027,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 382,
+   "t": 47488,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 418.723,
+   "when": 418.723
+  },
+  {
+   "frame": 383,
+   "t": 47491,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 386,
+   "t": 47552,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 419.701,
+   "when": 419.701
+  },
+  {
+   "frame": 438,
+   "t": 48384,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 535.87,
+   "when": 535.87
+  },
+  {
+   "frame": 471,
+   "t": 48912,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 574.45,
+   "when": 574.45
+  },
+  {
+   "frame": 474,
+   "t": 48960,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 574.482,
+   "when": 574.482
+  },
+  {
+   "frame": 560,
+   "t": 50336,
+   "kind": "buffer",
+   "url": "design/audio/basketball/rim.ogg",
+   "loop": false,
+   "ctx": 612.632,
+   "when": 612.632
+  },
+  {
+   "frame": 564,
+   "t": 50400,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/kick.ogg",
+   "loop": false,
+   "ctx": 612.682,
+   "when": 612.682
+  },
+  {
+   "frame": 649,
+   "t": 51760,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 638.412,
+   "when": 638.412
+  },
+  {
+   "frame": 654,
+   "t": 51827,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 662,
+   "t": 51968,
+   "kind": "buffer",
+   "url": "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
+   "loop": false,
+   "ctx": 640.502,
+   "when": 640.502
+  },
+  {
+   "frame": 861,
+   "t": 55152,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 801.1,
+   "when": 801.1
+  },
+  {
+   "frame": 894,
+   "t": 55667,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 896,
+   "t": 55712,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 849.38,
+   "when": 849.38
+  },
+  {
+   "frame": 923,
+   "t": 56131,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 929,
+   "t": 56240,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 904.6,
+   "when": 904.6
+  },
+  {
+   "frame": 952,
+   "t": 56595,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 958,
+   "t": 56704,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 1024.253,
+   "when": 1024.253
+  },
+  {
+   "frame": 1048,
+   "t": 58144,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 1094.702,
+   "when": 1094.702
+  },
+  {
+   "frame": 1081,
+   "t": 58672,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 1102.962,
+   "when": 1102.962
+  },
+  {
+   "frame": 1100,
+   "t": 58963,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 1114,
+   "t": 59200,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 1130.432,
+   "when": 1130.432
+  },
+  {
+   "frame": 1123,
+   "t": 59344,
+   "kind": "buffer",
+   "url": "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
+   "loop": false,
+   "ctx": 1130.513,
+   "when": 1130.513
+  }
+ ],
+ "clips": {
+  "idle_ready": 3606,
+  "defensive_stance": 1082,
+  "dribble_stand": 393,
+  "walk": 773,
+  "jog": 352,
+  "dribble_walk_right": 31,
+  "defensive_slide_right": 441,
+  "run": 461,
+  "defensive_slide_left": 639,
+  "dribble_right": 39,
+  "sprint": 3159,
+  "run_ball": 20,
+  "sprint_ball": 126,
+  "steal_poke": 399,
+  "v8:pass_bounce": 25,
+  "v8:receive_two_hands": 147,
+  "v8:pass_chest": 25,
+  "jump_shot": 90,
+  "block_two_hands": 48,
+  "rebound_jump": 96,
+  "v8:receive_moving": 14,
+  "dribble_left": 6,
+  "dribble_crossover_left": 24,
+  "get_up_front": 9,
+  "v8:pass_overhead": 25
+ },
+ "pops": {
+  "samples": 12000,
+  "over30": 26,
+  "over45": 16,
+  "worst": [
+   {
+    "frame": 407,
+    "id": "stars-1",
+    "pop": 178.2,
+    "bone": "RightHand",
+    "clip": "defensive_slide_left",
+    "act": null,
+    "speed": 2.01
+   },
+   {
+    "frame": 380,
+    "id": "stars-1",
+    "pop": 168.9,
+    "bone": "LeftHand",
+    "clip": "v8:pass_chest",
+    "act": "pass",
+    "speed": 0
+   },
+   {
+    "frame": 266,
+    "id": "stars-3",
+    "pop": 167.9,
+    "bone": "LeftHand",
+    "clip": "v8:pass_bounce",
+    "act": "pass",
+    "speed": 1.57
+   },
+   {
+    "frame": 267,
+    "id": "stars-3",
+    "pop": 135.6,
+    "bone": "RightHand",
+    "clip": "v8:pass_bounce",
+    "act": "pass",
+    "speed": 1.63
+   },
+   {
+    "frame": 898,
+    "id": "stars-1",
+    "pop": 101.4,
+    "bone": "RightHand",
+    "clip": "dribble:run_ball",
+    "act": null,
+    "speed": 2.01
+   },
+   {
+    "frame": 976,
+    "id": "stars-1",
+    "pop": 96.1,
+    "bone": "LeftArm",
+    "clip": "sprint",
+    "act": null,
+    "speed": 3.12
+   },
+   {
+    "frame": 955,
+    "id": "stars-1",
+    "pop": 81.7,
+    "bone": "LeftArm",
+    "clip": "v8:pass_overhead",
+    "act": "pass",
+    "speed": 3.08
+   },
+   {
+    "frame": 386,
+    "id": "stars-1",
+    "pop": 81.1,
+    "bone": "RightForeArm",
+    "clip": "v8:pass_chest",
+    "act": "pass",
+    "speed": 0.58
+   },
+   {
+    "frame": 958,
+    "id": "stars-1",
+    "pop": 80.6,
+    "bone": "LeftForeArm",
+    "clip": "v8:pass_overhead",
+    "act": "pass",
+    "speed": 2.74
+   },
+   {
+    "frame": 986,
+    "id": "stars-1",
+    "pop": 71.6,
+    "bone": "RightArm",
+    "clip": "sprint",
+    "act": null,
+    "speed": 5.07
+   },
+   {
+    "frame": 868,
+    "id": "stars-1",
+    "pop": 67.2,
+    "bone": "LeftHand",
+    "clip": "v8:receive_two_hands",
+    "act": null,
+    "speed": 1.29
+   },
+   {
+    "frame": 956,
+    "id": "stars-1",
+    "pop": 66.9,
+    "bone": "RightForeArm",
+    "clip": "v8:pass_overhead",
+    "act": "pass",
+    "speed": 2.81
+   }
+  ],
+  "byClip": {
+   "idle_ready": {
+    "samples": 3576,
+    "over30": 0,
+    "over45": 0
+   },
+   "sprint": {
+    "samples": 3159,
+    "over30": 2,
+    "over45": 2
+   },
+   "defensive_stance": {
+    "samples": 1082,
+    "over30": 0,
+    "over45": 0
+   },
+   "walk": {
+    "samples": 773,
+    "over30": 0,
+    "over45": 0
+   },
+   "defensive_slide_left": {
+    "samples": 639,
+    "over30": 1,
+    "over45": 1
+   },
+   "run": {
+    "samples": 461,
+    "over30": 0,
+    "over45": 0
+   },
+   "defensive_slide_right": {
+    "samples": 441,
+    "over30": 0,
+    "over45": 0
+   },
+   "steal_poke": {
+    "samples": 399,
+    "over30": 0,
+    "over45": 0
+   },
+   "dribble_stand": {
+    "samples": 393,
+    "over30": 0,
+    "over45": 0
+   },
+   "jog": {
+    "samples": 352,
+    "over30": 0,
+    "over45": 0
+   },
+   "v8:receive_two_hands": {
+    "samples": 147,
+    "over30": 4,
+    "over45": 1
+   },
+   "sprint_ball": {
+    "samples": 126,
+    "over30": 0,
+    "over45": 0
+   },
+   "rebound_jump": {
+    "samples": 96,
+    "over30": 0,
+    "over45": 0
+   },
+   "jump_shot": {
+    "samples": 90,
+    "over30": 1,
+    "over45": 0
+   },
+   "block_two_hands": {
+    "samples": 48,
+    "over30": 0,
+    "over45": 0
+   },
+   "dribble_right": {
+    "samples": 39,
+    "over30": 0,
+    "over45": 0
+   },
+   "dribble_walk_right": {
+    "samples": 31,
+    "over30": 0,
+    "over45": 0
+   }
+  }
+ },
+ "soles": {
+  "samples": 11289,
+  "min": -0.107,
+  "p05": -0.052,
+  "p50": -0.001,
+  "p95": 0.018,
+  "max": 0.233,
+  "below0": 3839,
+  "above8cm": 14
+ },
+ "solesByClip": {
+  "idle_ready": {
+   "samples": 3606,
+   "min": -0.072,
+   "p05": -0.019,
+   "p50": 0,
+   "p95": 0,
+   "max": 0.012,
+   "below0": 375,
+   "above8cm": 0
+  },
+  "sprint": {
+   "samples": 3159,
+   "min": -0.107,
+   "p05": -0.062,
+   "p50": -0.008,
+   "p95": 0.027,
+   "max": 0.044,
+   "below0": 1460,
+   "above8cm": 0
+  },
+  "defensive_stance": {
+   "samples": 1082,
+   "min": -0.068,
+   "p05": -0.026,
+   "p50": 0,
+   "p95": 0.02,
+   "max": 0.02,
+   "below0": 152,
+   "above8cm": 0
+  },
+  "walk": {
+   "samples": 773,
+   "min": -0.084,
+   "p05": -0.058,
+   "p50": -0.021,
+   "p95": 0.013,
+   "max": 0.037,
+   "below0": 555,
+   "above8cm": 0
+  },
+  "defensive_slide_left": {
+   "samples": 639,
+   "min": -0.096,
+   "p05": -0.064,
+   "p50": -0.023,
+   "p95": 0.023,
+   "max": 0.2,
+   "below0": 447,
+   "above8cm": 7
+  },
+  "run": {
+   "samples": 461,
+   "min": -0.095,
+   "p05": -0.066,
+   "p50": -0.011,
+   "p95": 0.013,
+   "max": 0.038,
+   "below0": 241,
+   "above8cm": 0
+  },
+  "defensive_slide_right": {
+   "samples": 441,
+   "min": -0.093,
+   "p05": -0.064,
+   "p50": -0.021,
+   "p95": 0.02,
+   "max": 0.024,
+   "below0": 289,
+   "above8cm": 0
+  },
+  "dribble_stand": {
+   "samples": 393,
+   "min": -0.042,
+   "p05": -0.004,
+   "p50": 0,
+   "p95": 0.004,
+   "max": 0.04,
+   "below0": 13,
+   "above8cm": 0
+  },
+  "jog": {
+   "samples": 352,
+   "min": -0.082,
+   "p05": -0.06,
+   "p50": -0.011,
+   "p95": 0.011,
+   "max": 0.032,
+   "below0": 185,
+   "above8cm": 0
+  },
+  "v8:receive_two_hands": {
+   "samples": 147,
+   "min": -0.005,
+   "p05": -0.004,
+   "p50": 0.001,
+   "p95": 0.001,
+   "max": 0.004,
+   "below0": 0,
+   "above8cm": 0
+  },
+  "sprint_ball": {
+   "samples": 126,
+   "min": -0.06,
+   "p05": -0.038,
+   "p50": -0.006,
+   "p95": 0.072,
+   "max": 0.083,
+   "below0": 56,
+   "above8cm": 3
+  },
+  "dribble_right": {
+   "samples": 39,
+   "min": -0.056,
+   "p05": -0.054,
+   "p50": -0.018,
+   "p95": 0.005,
+   "max": 0.006,
+   "below0": 25,
+   "above8cm": 0
+  },
+  "dribble_walk_right": {
+   "samples": 31,
+   "min": -0.081,
+   "p05": -0.076,
+   "p50": -0.016,
+   "p95": 0.155,
+   "max": 0.233,
+   "below0": 17,
+   "above8cm": 4
+  }
+ },
+ "render": [
+  {
+   "frame": 0,
+   "phase": "jumpball",
+   "calls": 61,
+   "triangles": 94212,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      166,
+      219
+     ],
+     "instances": 377,
+     "triangles": 20196,
+     "draws": 12,
+     "inView": 377,
+     "scale": 0.968,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 3,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": 0,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 120,
+   "phase": "live",
+   "calls": 63,
+   "triangles": 94677,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      136,
+      351
+     ],
+     "instances": 479,
+     "triangles": 20664,
+     "draws": 12,
+     "inView": 479,
+     "scale": 1,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 11,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": -1.83,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 240,
+   "phase": "live",
+   "calls": 62,
+   "triangles": 94852,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      138,
+      351
+     ],
+     "instances": 480,
+     "triangles": 20844,
+     "draws": 12,
+     "inView": 480,
+     "scale": 0.9568,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 18,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": -6.13,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 360,
+   "phase": "live",
+   "calls": 62,
+   "triangles": 94396,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      154,
+      272
+     ],
+     "instances": 419,
+     "triangles": 20388,
+     "draws": 12,
+     "inView": 419,
+     "scale": 0.925,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 26,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": -4.83,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 480,
+   "phase": "live",
+   "calls": 60,
+   "triangles": 94274,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      172,
+      200
+     ],
+     "instances": 353,
+     "triangles": 20280,
+     "draws": 12,
+     "inView": 353,
+     "scale": 0.8994,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 33,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": -6.15,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 600,
+   "phase": "live",
+   "calls": 60,
+   "triangles": 94562,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      156,
+      272
+     ],
+     "instances": 413,
+     "triangles": 20568,
+     "draws": 12,
+     "inView": 413,
+     "scale": 0.847,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 41,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {},
+     "triangles": 1225,
+     "draws": 2,
+     "x": -10.23,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 720,
+   "phase": "dead",
+   "calls": 60,
+   "triangles": 94748,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      153,
+      291
+     ],
+     "instances": 426,
+     "triangles": 20754,
+     "draws": 12,
+     "inView": 426,
+     "scale": 0.8547,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 48,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {
+      "foul": 1
+     },
+     "triangles": 1225,
+     "draws": 2,
+     "x": -9.92,
+     "gesture": "foul"
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 840,
+   "phase": "inbound",
+   "calls": 60,
+   "triangles": 94868,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      137,
+      356
+     ],
+     "instances": 485,
+     "triangles": 20874,
+     "draws": 12,
+     "inView": 485,
+     "scale": 0.9134,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 56,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {
+      "foul": 1
+     },
+     "triangles": 1225,
+     "draws": 2,
+     "x": -9.92,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 960,
+   "phase": "live",
+   "calls": 62,
+   "triangles": 94930,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      137,
+      358
+     ],
+     "instances": 483,
+     "triangles": 20922,
+     "draws": 12,
+     "inView": 483,
+     "scale": 0.9174,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 63,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {
+      "foul": 1
+     },
+     "triangles": 1225,
+     "draws": 2,
+     "x": -7.86,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 1080,
+   "phase": "live",
+   "calls": 60,
+   "triangles": 94328,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      171,
+      206
+     ],
+     "instances": 357,
+     "triangles": 20334,
+     "draws": 12,
+     "inView": 357,
+     "scale": 0.8617,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 71,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {
+      "foul": 1
+     },
+     "triangles": 1225,
+     "draws": 2,
+     "x": -10.05,
+     "gesture": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 1200,
+   "phase": "dead",
+   "calls": 60,
+   "triangles": 94070,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": true,
+     "crowd3d": "budget",
+     "bodyV2": true,
+     "motionV13": true,
+     "referee": true
+    },
+    "crowd3d": {
+     "mode": "budget",
+     "status": "ready",
+     "error": null,
+     "fans": 796,
+     "submitted": [
+      0,
+      178,
+      169
+     ],
+     "instances": 329,
+     "triangles": 20076,
+     "draws": 12,
+     "inView": 329,
+     "scale": 0.8667,
+     "tier": "high",
+     "limit": 24000,
+     "plans": 78,
+     "files": 12,
+     "planMs": 0,
+     "visible": true,
+     "cardsHidden": 1876
+    },
+    "bodyV2": true,
+    "motionV13": {
+     "clips": [
+      "idle_ready",
+      "idle_ready_ball",
+      "jog",
+      "run",
+      "sprint",
+      "jog_ball",
+      "run_ball",
+      "dribble_stand",
+      "jump_shot",
+      "three_point"
+     ],
+     "aligned": {
+      "jog": {
+       "before": 0.231,
+       "after": 0.346
+      },
+      "run": {
+       "before": 0.909,
+       "after": 0.318
+      },
+      "sprint": {
+       "before": 0,
+       "after": 0.35
+      },
+      "dribble_run": {
+       "before": 0.909,
+       "after": 0.318
+      }
+     },
+     "shared": {
+      "walk": {
+       "before": 0.529,
+       "after": 0.324
+      },
+      "sprint_ball": {
+       "before": 0.091,
+       "after": 0.333
+      }
+     },
+     "refScale": {
+      "guard": 1.0864,
+      "wing": 1.1442,
+      "center": 1.202
+     }
+    },
+    "referee": {
+     "status": "ready",
+     "error": null,
+     "gestures": {
+      "foul": 2
+     },
+     "triangles": 1225,
+     "draws": 2,
+     "x": -10.26,
+     "gesture": "foul"
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  }
+ ],
+ "shots": {
+  "crowd": 422
+ },
+ "errors": []
+}

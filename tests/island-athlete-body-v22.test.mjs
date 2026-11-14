@@ -163,7 +163,9 @@ test('offline list: the Codex files are cached for soccer and basketball, and th
   const pre = 'assets/athlete-body-v22/';
   for (const list of [soccer, hoops]) { assert.ok(list.includes(pre + 'textures/athlete-atlas.png')); for (const h of V22_HAIR) assert.ok(list.includes(pre + 'hair/' + h + '.glb'), h); assert.ok(list.includes('assets/athlete/athlete.glb'), 'the previous athlete stays cached for the flag'); }
   assert.ok(soccer.includes(pre + 'models/soccer.glb'));
-  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(pre + `models/${b}.glb`));
+  // basketball v24.1 (14/11): the default bodies are the athlete-body-v2 guard / wing / centre (assets/hoops-v241/body), cached in their place;
+  // the v22 basketball bodies stay the online fallback (?hoopsBodyV2=0), so the island's offline download stays under its 80 MB cap
+  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(`assets/hoops-v241/body/models/${b}.glb`) && !hoops.includes(pre + `models/${b}.glb`), b);
   assert.ok(!hoops.includes(pre + 'models/soccer.glb') && !soccer.includes(pre + 'models/guard.glb'), 'each game downloads only its bodies');
   for (const list of [soccer, hoops]) for (const p of list.filter(p => p.startsWith(pre))) assert.ok((await stat(path.join(island, p))).size > 0, p);
   assert.ok(manifest.shell.includes('minigames/athlete-body-v22.mjs'));

@@ -1,0 +1,231 @@
+{
+ "v12": {
+  "idle_ready": {
+   "duration": 2.4,
+   "refSpeed": 0,
+   "frames": 72,
+   "Left": {
+    "lowPhase": 0.542,
+    "min": 0.003,
+    "max": 0.003
+   },
+   "Right": {
+    "lowPhase": 0.458,
+    "min": 0.003,
+    "max": 0.003
+   }
+  },
+  "walk": {
+   "duration": 1.138,
+   "refSpeed": 1.345,
+   "frames": 34,
+   "Left": {
+    "lowPhase": 0.529,
+    "min": 0.004,
+    "max": 0.067
+   },
+   "Right": {
+    "lowPhase": 0.971,
+    "min": 0.004,
+    "max": 0.067
+   }
+  },
+  "jog": {
+   "duration": 0.806,
+   "refSpeed": 2.68,
+   "frames": 24,
+   "Left": {
+    "lowPhase": 0.333,
+    "min": 0.006,
+    "max": 0.135
+   },
+   "Right": {
+    "lowPhase": 0.875,
+    "min": 0.005,
+    "max": 0.136
+   }
+  },
+  "run": {
+   "duration": 0.831,
+   "refSpeed": 3.693,
+   "frames": 25,
+   "Left": {
+    "lowPhase": 0.32,
+    "min": 0.005,
+    "max": 0.201
+   },
+   "Right": {
+    "lowPhase": 0.84,
+    "min": 0.005,
+    "max": 0.204
+   }
+  },
+  "sprint": {
+   "duration": 1.084,
+   "refSpeed": 3.346,
+   "frames": 33,
+   "Left": {
+    "lowPhase": 0.091,
+    "min": -0.001,
+    "max": 0.265
+   },
+   "Right": {
+    "lowPhase": 0.576,
+    "min": -0.001,
+    "max": 0.294
+   }
+  },
+  "dribble_walk_right": {
+   "duration": 1.2,
+   "refSpeed": 1.2,
+   "frames": 36,
+   "Left": {
+    "lowPhase": 0.972,
+    "min": 0.004,
+    "max": 0.071
+   },
+   "Right": {
+    "lowPhase": 0.5,
+    "min": 0.004,
+    "max": 0.071
+   }
+  },
+  "jog_ball": {
+   "duration": 0.806,
+   "refSpeed": 2.68,
+   "frames": 24,
+   "Left": {
+    "lowPhase": 0.333,
+    "min": 0.006,
+    "max": 0.135
+   },
+   "Right": {
+    "lowPhase": 0.875,
+    "min": 0.005,
+    "max": 0.136
+   }
+  },
+  "run_ball": {
+   "duration": 0.83,
+   "refSpeed": 3.693,
+   "frames": 25,
+   "Left": {
+    "lowPhase": 0.32,
+    "min": 0.005,
+    "max": 0.201
+   },
+   "Right": {
+    "lowPhase": 0.84,
+    "min": 0.005,
+    "max": 0.204
+   }
+  },
+  "sprint_ball": {
+   "duration": 1.084,
+   "refSpeed": 3.346,
+   "frames": 33,
+   "Left": {
+    "lowPhase": 0.091,
+    "min": -0.001,
+    "max": 0.265
+   },
+   "Right": {
+    "lowPhase": 0.576,
+    "min": -0.001,
+    "max": 0.294
+   }
+  }
+ },
+ "v13": {
+  "jog": {
+   "duration": 0.867,
+   "refSpeed": 1.65,
+   "frames": 26,
+   "Left": {
+    "lowPhase": 0.231,
+    "min": 0.004,
+    "max": 0.194
+   },
+   "Right": {
+    "lowPhase": 0.731,
+    "min": 0.004,
+    "max": 0.194
+   }
+  },
+  "run": {
+   "duration": 0.733,
+   "refSpeed": 2.2,
+   "frames": 22,
+   "Left": {
+    "lowPhase": 0.909,
+    "min": 0.004,
+    "max": 0.252
+   },
+   "Right": {
+    "lowPhase": 0.409,
+    "min": 0.004,
+    "max": 0.252
+   }
+  },
+  "sprint": {
+   "duration": 0.667,
+   "refSpeed": 3.2,
+   "frames": 20,
+   "Left": {
+    "lowPhase": 0,
+    "min": 0.004,
+    "max": 0.273
+   },
+   "Right": {
+    "lowPhase": 0.5,
+    "min": 0.004,
+    "max": 0.273
+   }
+  },
+  "idle": {
+   "duration": 4,
+   "refSpeed": 0,
+   "frames": 120,
+   "Left": {
+    "lowPhase": 0.05,
+    "min": 0,
+    "max": 0
+   },
+   "Right": {
+    "lowPhase": 0.95,
+    "min": 0,
+    "max": 0
+   }
+  },
+  "dribble_run": {
+   "duration": 0.733,
+   "refSpeed": 2.2,
+   "frames": 22,
+   "Left": {
+    "lowPhase": 0.909,
+    "min": 0.004,
+    "max": 0.252
+   },
+   "Right": {
+    "lowPhase": 0.409,
+    "min": 0.004,
+    "max": 0.252
+   }
+  },
+  "dribble_stand": {
+   "duration": 1.6,
+   "refSpeed": 0,
+   "frames": 48,
+   "Left": {
+    "lowPhase": 0.292,
+    "min": 0,
+    "max": 0
+   },
+   "Right": {
+    "lowPhase": 0.208,
+    "min": 0,
+    "max": 0
+   }
+  }
+ }
+}

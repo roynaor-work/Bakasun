@@ -262,10 +262,11 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
     // The shared athlete body (11/11, sports-deep-fable M1/M2): the default basketball players are assets/athlete/athlete.glb with its textures and
     // the repaired v12 motion pack, under the production CSP, from assets/ only; two draw calls per body (skin, kit).
     const tallBase='tools/perf-hoops.html?dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242';
+    // v24.1 (14/11) changed the default bodies (athlete-body-v2), motion (v13), crowd and referee: this v24 check pins them off with ?hoopsV241=0
     const athlete=await fixture('hoops-athlete-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       const requests=[];athlete.page.on('request',r=>requests.push(r.url()));
-      await athlete.page.goto(server.url+tallBase,{waitUntil:'load'});
+      await athlete.page.goto(server.url+tallBase+'&hoopsV241=0',{waitUntil:'load'});
       const live=await hoopsReady(athlete.page);
       assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.athleteBody,true);assert.equal(live.m.characterVersion,10);assert.equal(live.m.motionSource,'v12');assert.deepEqual(live.m.v4Fallbacks,[]);
       assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the shared body (v22, Codex)');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/')),'its textures');
@@ -274,11 +275,31 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.ok(live.m.calls<=52,'two draw calls per body: '+live.m.calls);
       await athlete.csp.assertClean();reports.push({name:'hoops-athlete-session-start-result',...live.m,loadTimes:undefined});
     }finally{await athlete.close();await athlete.csp.assertClean();}
-    // ?athleteBody=0: the tall bodies + the v9 library (08/11, Codex) as before.
+    // v24.1 defaults: the athlete-body-v2 bodies, the v13 clips, the 3D fans, the referee and the referee whistles, all from assets/hoops-v241
+    // under the production CSP (nothing from the unpublished design folder), the cards replaced on the hall's lower tier, a bounded draw count.
+    const v241=await fixture('hoops-v241-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
+    try{
+      const requests=[];v241.page.on('request',r=>requests.push(r.url()));
+      await v241.page.goto(server.url+tallBase,{waitUntil:'load'});
+      const live=await hoopsReady(v241.page);
+      assert.equal(live.error,null);assert.equal(live.m.athleteBody,true);assert.equal(live.m.v241.bodyV2,true);assert.deepEqual(live.m.v4Fallbacks,[]);
+      assert.ok(live.m.v241.motionV13?.clips?.includes('run'),'v13 clips: '+JSON.stringify(live.m.v241.motionV13));
+      for(const f of ['body/models/guard.glb','motion/motion-v13.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-v241/'+f)),f);
+      assert.ok(!requests.some(u=>u.includes('assets/athlete-body-v22/models/')),'the v22 bodies are not downloaded');assert.ok(requests.some(u=>u.includes('assets/athlete-body-v22/textures/athlete-atlas.png')),'the one shared atlas');
+      await v241.page.waitForFunction(()=>{const v=window.__session?.snapshot?.renderMetrics?.v241;return v&&v.crowd3d.status!=='loading'&&v.referee.status!=='loading';},null,{timeout:120000});
+      const m=await v241.page.evaluate(()=>window.__session.snapshot.renderMetrics);
+      assert.equal(m.v241.crowd3d.status,'ready');assert.ok(m.v241.crowd3d.cardsHidden>=796,'cards replaced: '+m.v241.crowd3d.cardsHidden);assert.equal(m.v241.referee.status,'ready');
+      assert.ok(requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod2/')),'crowd level 2');assert.ok(!requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod0/')),'no level 0 in the budget mode');
+      assert.ok(!requests.some(u=>/\/design\/hoops-(crowd-3d|motion-v13|ref-scoreboard|referee-audio)/.test(u)),'nothing is read from the unpublished design folder');
+      assert.ok(m.calls<=52+15,'the 3D fans (12 calls at most) and the referee (two meshes and his shadow): '+m.calls);
+      await v241.csp.assertClean();reports.push({name:'hoops-v241-session-start-result',...m,loadTimes:undefined});
+    }finally{await v241.close();await v241.csp.assertClean();}
+    // ?athleteBody=0: the tall bodies + the v9 library (08/11, Codex) as before. Its draw-call ceiling is the v24 scene: ?hoopsV241=0 (the
+    // v24.1 fans and referee add their own calls, measured in the check above)
     const tall=await fixture('hoops-tall-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       const requests=[];tall.page.on('request',r=>requests.push(r.url()));
-      await tall.page.goto(server.url+tallBase+'&athleteBody=0',{waitUntil:'load'});
+      await tall.page.goto(server.url+tallBase+'&athleteBody=0&hoopsV241=0',{waitUntil:'load'});
       const live=await hoopsReady(tall.page);
       assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.characterVersion,9);assert.deepEqual(live.m.v4Fallbacks,[]);
       for(const f of ['guard.glb','wing.glb','center.glb','motion.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-tall/'+f)),f);

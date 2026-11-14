@@ -16,6 +16,10 @@ import {decodeTallPack,buildTallClips,TALL_PROFILES,TALL_REQUIRED,tallEnabled} f
 import {loadV8Motion,buildV8Clips,v8MotionEnabled} from './hoops-v8-motion.mjs';
 import {athletesEnabled,unifyTallPack} from './athletes-gait.mjs';
 import {athleteBodyV22Enabled,loadAthleteV22,createAthleteV22Instance,v22HairFor,V22_MAP,V22_LEG_RATIO,V22_BODIES} from './athlete-body-v22.mjs?v=island-v2-20261107-14';
+import {decorateAthleteV2} from './athlete-body-v2.mjs?v=island-v2-20261107-14';
+import {loadHoopsBodyV2,HOOPS_V2_BODY_SHAPES} from './hoops-body-v2.mjs?v=island-v2-20261107-14';
+import {hoopsBodyV2Enabled,hoopsMotionV13Enabled} from './hoops-v241.mjs?v=island-v2-20261107-14';
+import {v13Url,prepareV13,alignSharedV12,hoopsV13Gaits,V13_USE} from './hoops-motion-v13.mjs?v=island-v2-20261107-14';
 
 /** The athlete body is used when the tall library is on and the flag does not say otherwise. */
 export function hoopsAthleteEnabled(cfg,params,quality=2){return athleteBodyEnabled(params?.toString?.()?'?'+params.toString():'')&&tallEnabled(cfg,params,quality);}
@@ -90,8 +94,11 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  for(const n of TALL_REQUIRED)if(!pack.clips[n])throw Error('Basketball tall clip missing: '+n);
  // v22 (12/11): the Codex shared body (athlete-body-v22.mjs), canonical 18-bone rig: the packs play on it through an identity map. Any failure keeps the previous athlete.
  let v22=null;
- if(athleteBodyV22Enabled(params?.toString?.()?'?'+params.toString():'')){
-  try{v22=await loadAthleteV22(url=>loadHoopsGLTF(loader,url),{T:THREE,bodies:TALL_PROFILES});}
+ const search=params?.toString?.()?'?'+params.toString():'';
+ if(athleteBodyV22Enabled(search)){
+  // v24.1: the athlete-body-v2 guard / wing / centre first (hands, number on the back and shorts; same rig as v22), the v22 bodies if they fail
+  if(hoopsBodyV2Enabled(search)){try{v22=await loadHoopsBodyV2({T:THREE,GLTFLoader,load:(l,url)=>loadHoopsGLTF(l,url)});}catch(error){v22=null;onFallback?.('athlete-body-v2',error);}}
+  if(!v22)try{v22=await loadAthleteV22(url=>loadHoopsGLTF(loader,url),{T:THREE,bodies:TALL_PROFILES});}
   catch(error){v22=null;onFallback?.('athlete-body-v22',error);}
  }
  const source=v22?v22.bodies[TALL_PROFILES[0]]:await loadAthleteSource(url=>loadHoopsGLTF(loader,url),{url:new URL(cfg.athlete?.url||'assets/athlete/athlete.glb',base).href,T:THREE,prepare:scene=>athleteSources(THREE,scene)});tick();
@@ -101,6 +108,13 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   catch(error){unified=null;onFallback?.('athletes',error);}
  }
  tick();
+ // v24.1 hoops-motion-v13 (hoops-motion-v13.mjs): canonical-rig clips, so only on the v22 / v2 bodies (that very rig); after the gait
+ // unification (the v13 arms are the pack's own), the gaits that share a phase turned to one footfall. Any failure keeps v12.
+ let v13=null,motionV13=null;
+ if(v22&&hoopsMotionV13Enabled(search)){
+  try{const r=await fetch(v13Url());if(!r.ok)throw Error('Basketball v13 motion pack '+r.status);v13=prepareV13(await r.json(),decodeTallPack);motionV13={clips:[...v13.byGame.keys()],aligned:v13.aligned,shared:alignSharedV12(pack,V22_LEG_RATIO.wing)};}
+  catch(error){v13=null;motionV13=null;onFallback?.('motion v13',error);}
+ }
  let v8=null;
  if(v8MotionEnabled(cfg,params)){try{v8=await loadV8Motion(cfg,base);}catch(error){v8=null;onFallback?.('v8 motion',error);}}
  const map=v22?null:athleteRetargetMap(source.rig,CANON_REST),clipSets={};
@@ -112,11 +126,25 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
   // v22: each profile has its own body; Hips and Root translations are rest-relative and scaled by canonical / source leg length (Codex motion-manifest)
   const body=v22?v22.bodies[p]:source,pmap=v22?{...athleteRetargetMap(body.rig,CANON_REST,V22_MAP,{tweaks:{}}),motionScale:V22_LEG_RATIO[p]}:map;
   clipSets[p]=retargetClipMap(canonical,rest,body.rig,pmap);
+  // v24.1: the v13 clips under the game's names (one copy per name), canonical hips offsets (motionScale 1: the body is the canonical rig scaled)
+  if(v13){
+   const built=buildTallClips(v13.pack,'canonical'),renamed=new Map();
+   for(const [game,id] of Object.entries(V13_USE)){const c=built.get(id).clone();c.name=game;renamed.set(game,c);}
+   for(const [n,c] of retargetClipMap(renamed,v13.pack.profiles.canonical.hips,body.rig,{...pmap,motionScale:1}))clipSets[p].set(n,c);
+  }
   dunks[p]=calibrateAthleteDunks(body,clipSets[p],{height:(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100,bulk:v22?1:ATHLETE_BULK[p]||1});
+ }
+ // the plan reads clip data by game name (durations, events, ball tracks): the v13 data replaces v12's for the connected names; each body's
+ // gait table has the v13 references x its skeleton scale (BodyScale x height / natural height)
+ let gaits13=null;
+ if(v13){
+  gaits13=Object.fromEntries(TALL_PROFILES.map(p=>{const body=v22.bodies[p];let s=1;body.scene.traverse(o=>{if(o.name==='BodyScale')s=o.scale.x;});const h=(heights[p]||ATHLETE_HEIGHTS.basketball[p]*100)/100;return [p,hoopsV13Gaits(v13.pack,s*h/body.height,pack.clips)];}));
+  for(const [game,data] of v13.byGame)pack.clips[game]=data;
+  motionV13.refScale=Object.fromEntries(Object.entries(gaits13).map(([p,g])=>[p,g.refScale]));
  }
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
- return {tall:true,athlete:true,v22:!!v22,bodyVersion:v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,
+ return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
    if(v22){
@@ -125,13 +153,15 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
     const kit22=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
     if(look?.shortsBase)kit22.shorts=look.shortsBase;
     const inst=createAthleteV22Instance(THREE,v22,{bodyId:profile,cloneRig:cloneSkinned,appearance:{skin:pr.skin,hair:pr.hair,hairStyle:v22HairFor(pr,card.number??cell)},kit:kit22,style:'basketball',height:h22,track});
-    inst.root.userData.characterVersion=11;
+    inst.root.userData.characterVersion=v22.v2?12:11;
     const palmPack=pack.profiles[profile].palms;
     for(const [side,key] of [['Left','l'],['Right','r']]){const pp=palmPack?.[side+'Hand']?.palmPoint;if(pp)inst.palms[key].position.fromArray(pp);}
-    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,
-     applyKit(k){inst.paint({kit:{...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'}});},
+    // v24.1 body v2: the player's number on the back and the shorts in the kit's trim colour (the soccer v24 decoration, the body's own width)
+    const decoration=v22.v2?decorateAthleteV2(THREE,inst,{number:card.number??null,gloves:false,kit:kit22,appearance:{skin:pr.skin,hair:pr.hair},style:'basketball',shape:HOOPS_V2_BODY_SHAPES[profile]}):null;
+    return {root:inst.root,mats:[inst.materials.body],palms:inst.palms,instance:inst,decoration,
+     applyKit(k){const next={...kit22,primary:k.base||'#5b38c9',secondary:k.accent||'#f4d377',shorts:k.shorts||k.base||'#5b38c9',shortsTrim:k.accent||'#f4d377',bootAccent:k.accent||'#f4d377'};inst.paint({kit:next});if(decoration){decoration.uniforms.athleteTrim.value.set(next.secondary);decoration.uniforms.athleteSecondary.value.set(next.shorts);}},
      setLod:level=>inst.setLod(level),get lod(){return inst.lod;},
-     dispose(){inst.dispose();}};
+     dispose(){decoration?.dispose();inst.dispose();}};
    }
    const height=(heights[profile]||ATHLETE_HEIGHTS.basketball[profile]*100)/100;
    const kit=athleteKitFor('basketball',[look?.primary||'#5b38c9',look?.trim||look?.secondary||'#f4d377'],{accent:look?.trim||look?.secondary||null});
