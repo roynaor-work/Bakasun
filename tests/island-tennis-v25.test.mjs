@@ -104,7 +104,7 @@ test('grip asset: the package racket is 68 cm with grip and head nodes, no decod
 
 test('the out X and the receive arrow: Codex decals on the court, 1.5 s for the X (view clock), the arrow on the chosen spot; the drawn X stays for ?tennisOut=v24',async()=>{
  const view=await read('../workout/island/minigames/tennis-view.mjs'),session=await read('../workout/island/minigames/tennis-session.mjs'),css=await read('../workout/island/minigames/tennis.css');
- assert.match(view,/tennis-ui-fx-v1/);assert.match(view,/if\(outAge>=1\.5\)outShown=null/);assert.match(view,/outShown=mark\.reason==='out'\?\{\.\.\.mark\}:null/);
+ assert.match(view,/tennis-ui-fx-v1/);assert.match(view,/if\(outAge>=1\.5\)outShown=null/);assert.match(view,/mark\.id!==lastMarkId\)\{lastMarkId=mark\.id;/,'each mark once (the model keeps it through the second serve; caught in the browser)');assert.match(view,/outShown=mark\.reason==='out'\?\{\.\.\.mark\}:null/);
  assert.match(view,/faultMark\.visible=mark\?\.id!==undefined\?showX&&!xTex:Boolean\(mark\)/,'v24 marks (no id) keep the drawn X');assert.match(view,/serve-arrow-left','serve-arrow-center','serve-arrow-right'\]\[rc\.slot\]/);
  assert.match(session,/outText\.textContent=t\('tennis\.out'\)/);assert.match(session,/receiveHint\.textContent=t\('tennis\.receiveHint'\)/);assert.match(css,/\.tennis-out-sign\{/);assert.match(css,/\.tennis-receive-hint\{/);
  const strings=JSON.parse(await read('../workout/island/data/strings.he.json'));assert.equal(strings['tennis.out'],'אאוט');assert.match(strings['tennis.receiveHint'],/ג׳ויסטיק/);

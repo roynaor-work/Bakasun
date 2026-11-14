@@ -119,6 +119,8 @@ test('HUD v25 stylesheet and wiring: the same ring sizes from the bottom corner 
  const b=['#shoot','#vulcan','#pass'].map(bottom);assert.deepEqual(b,[0,76,146],'14 px, then 76 and 146 px above it');
  const v24bottom=sel=>Number(v24.match(new RegExp(`\\[data-alien-hud=v24\\] ${sel}\\{[^}]*bottom:calc\\(16\\.4% \\+ (\\d+)px\\)`))[1]);assert.ok(v24bottom('#shoot')+60>b[0]+14,'lower than v24 (above the 16.4% lane)');
  assert.doesNotMatch(css,/#shoot\{[^}]*width/,'the sizes stay the v24 ones');assert.match(css,/\.alien-special-switch\{[^}]*width:46px/);
+ // The controls layer is pointer-events:none (styles.css); without its own pointer-events:auto the switch let touches through to the canvas (caught in the browser).
+ assert.match(css,/\.alien-special-switch\{[^}]*pointer-events:auto/);
  assert.match(css,/\.alien-flight-hud\[data-low=on\] \.alien-flight-control,[^{]*\.alien-flight-weapon\{display:none!important\}/);
  assert.match(session,/const hudV25=hudV24&&alienHudV25Enabled\(\);if\(hudV25\)\{ensureAlienV25Style\(\);controls\.dataset\.alienLow='on';\}/);assert.match(session,/hudRoot\.dataset\.low='on'/);
  assert.match(session,/if\(model\.arsenalOn\)\{ensureAlienV25Style\(\);specialSwitch=createAlienSpecialSwitch/);
