@@ -269,13 +269,29 @@ export function createSoccerView({canvas,config,lite=false,playArea,layoutNodes=
   let warmed=null;
   function warm(){
     if(disposed||warmed)return;globalThis.performance?.mark?.('soccer:warm-start');const hidden=[];scene.traverse(o=>{if((o.isMesh||o.isPoints||o.isLine||o.isSprite)&&!o.visible){o.visible=true;hidden.push(o);}});
-    const level=quality,shadowless=Math.max(level,config.view.athlete.lodFromQuality),t0=performance.now();let programs=0;
+    const level=quality,shadowless=Math.max(level,config.view.athlete.lodFromQuality),t0=performance.now();let programs=0,drawn=null;
     try{
       for(const tier of [shadowless,level]){lighting.setQuality(tier);renderer.compile(scene,camera);programs=renderer.info.programs?.length||0;}
       scene.traverse(o=>{for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[])for(const key of ['map','normalMap','roughnessMap','emissiveMap','alphaMap'])if(m[key]?.isTexture)renderer.initTexture(m[key]);});
+      if(kit||fx||crowd3d)drawn=warmDraw();
     }catch{/* warming is an optimisation only; the match still starts */}
     finally{for(const o of hidden)o.visible=false;lighting.setQuality(level);}
-    warmed={programs,ms:Math.round(performance.now()-t0)};globalThis.performance?.mark?.('soccer:warm-end');
+    warmed={programs,ms:Math.round(performance.now()-t0),...(drawn===null?null:{draw:drawn})};globalThis.performance?.mark?.('soccer:warm-end');
+  }
+  /** v24 (only with a v24 pack on): one real draw of the whole scene while the loading panel still covers the canvas, with the hidden
+   * cues shown, frustum culling off, empty instanced batches at one instance and the 3D fans' root shown. ANGLE (Metal on iOS, Vulkan on
+   * Android) and SwiftShader build a material's pipeline at its first draw, not when the program compiles: measured in SwiftShader, every
+   * first draw during play cost 0.7-2.6 s (the fans, the aim arrow, the landing ring, the effect sprites), four in 30 s against one before
+   * v24. Everything goes back as it was before the first frame. Returns the draw's milliseconds. */
+  function warmDraw(){
+    const undo=[],t=performance.now();
+    scene.traverse(o=>{
+      if((o.isMesh||o.isSprite||o.isPoints||o.isLine)&&o.frustumCulled){o.frustumCulled=false;undo.push(()=>{o.frustumCulled=true;});}
+      if(o.isInstancedMesh&&o.count<1){const count=o.count;o.count=1;undo.push(()=>{o.count=count;});}
+    });
+    for(const group of [aimArrow,crowd3d?.root])if(group&&!group.visible){group.visible=true;undo.push(()=>{group.visible=false;});}
+    try{renderer.render(scene,camera);}finally{for(const restore of undo.reverse())restore();}
+    return Math.round(performance.now()-t);
   }
   function disposeObject(root){root.traverse(o=>{o.geometry?.dispose();o.skeleton?.dispose();for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){m.map?.dispose();m.dispose();}});}
   const observer=new ResizeObserver(resize);for(const node of [canvas,...layoutNodes])observer.observe(node);

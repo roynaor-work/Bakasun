@@ -220,6 +220,16 @@ test('crowd 3D: seats stand in for exactly the cards they replace, face the pitc
   assert.ok(view.includes("const allowed=assetStatus==='ready'&&quality<=crowdSpec.maxQuality&&v8.lod===0;"),'tiers 2-3: cards only');
 });
 
+test('v24 warm draw: with a v24 pack on, the loading warm-up also draws once (hidden cues, no culling, empty batches, the fans) and puts it all back; switches off keep the compile-only warm-up',async()=>{
+  // measured in SwiftShader (verification/soccer-v24/data/first-draw-stalls.json): a pipeline is built at a material's first draw, 0.7-2.6 s each
+  const view=await read('minigames/soccer-view.mjs');
+  assert.ok(view.includes('if(kit||fx||crowd3d)drawn=warmDraw();'),'only when a v24 pack built something (kit, effects, fans)');
+  const body=view.slice(view.indexOf('function warmDraw(){'),view.indexOf('return Math.round(performance.now()-t);'));
+  assert.ok(body.includes('o.frustumCulled=false')&&body.includes('o.count=1')&&body.includes('[aimArrow,crowd3d?.root]')&&body.includes('renderer.render(scene,camera)'));
+  assert.ok(body.includes('finally{for(const restore of undo.reverse())restore();}'),'culling, counts and visibility come back even if the draw throws');
+  assert.ok(view.indexOf('drawn=warmDraw()')<view.indexOf('finally{for(const o of hidden)o.visible=false;'),'drawn while the hidden cues are still shown');
+});
+
 test('body v2: hands with the glove morph on the canonical rig; numbers 0-99 and gloves on a v22 instance, one material per player on one program',async()=>{
   const glb=await glbJson('assets/soccer-v24/body/models/soccer.glb');
   const names=glb.nodes.map(n=>n.name);for(const bone of ['Root','Hips','Spine','Chest','Neck','Head','LeftHand','RightHand','LeftFoot','RightFoot'])assert.ok(names.includes(bone),bone);

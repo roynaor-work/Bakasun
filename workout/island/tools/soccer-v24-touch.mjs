@@ -32,7 +32,7 @@ async function main(){
   const wanted=new Set((opt('shots',SHOTS.join(','))||'').split(',').filter(Boolean)),taken={};
   await mkdir(out,{recursive:true});
   const h=await openSoccer({query,stage});const t0=Date.now(),frames=[],clipEntries=[],eventCounts={},samples=[];
-  let previousClips=new Map(),lastEvents=[],half=1;const pending={};
+  let previousClips=new Map(),lastEvents=[],half=1,lastV=null;const pending={};
   /** Summary so far (written every 1,200 frames and at the end, so a long run that is stopped still leaves its evidence). */
   const summarize=last=>{
     const audio=frames.flatMap(f=>f.audio||[]),buffers={},oscillators=[];
@@ -42,7 +42,11 @@ async function main(){
       halves:[...new Set(frames.map(f=>f.half).filter(Boolean))],events:eventCounts,clipEntries:clipsByName,clipDetail:clipEntries,shots:taken,audioBuffers:buffers,oscillators:oscillators.length,oscillatorDetail:oscillators.slice(0,20),
       v24:last?.v24??null,bodies:last?.bodies??null,samples,qualityMax:Math.max(0,...frames.map(f=>f.quality??0)),errors:h.errors};
   };
-  const shot=async(name,f)=>{if(!wanted.has(name)||taken[name]!==undefined)return;taken[name]=f.elapsed;try{await h.page.screenshot({path:path.join(out,`${tag}-${name}.png`),timeout:90000});}catch(e){process.stderr.write(`${tag} screenshot ${name} failed: ${e.message}\n`);}process.stderr.write(`${tag} shot ${name} at ${f.elapsed}\n`);};
+  // one retry after one more 60 Hz frame (a screenshot waits for a frame; under load the first wait can time out)
+  const shot=async(name,f)=>{if(!wanted.has(name)||taken[name]!==undefined)return;taken[name]=f.elapsed;const file=path.join(out,`${tag}-${name}.png`);
+    try{await h.page.screenshot({path:file,timeout:90000});}catch(e){process.stderr.write(`${tag} screenshot ${name} failed, retry: ${e.message.split('\n')[0]}\n`);
+      try{await h.page.clock.runFor(FRAME_MS);await h.page.screenshot({path:file,timeout:120000});}catch(e2){process.stderr.write(`${tag} screenshot ${name} failed: ${e2.message.split('\n')[0]}\n`);}}
+    process.stderr.write(`${tag} shot ${name} at ${f.elapsed}\n`);};
   try{
     let layout=await controlLayout(h);
     // every set piece and action shows up: kicks out for throw-ins / goal kicks / corners, lofted passes and headers, switches in defence
@@ -58,11 +62,11 @@ async function main(){
         for(const c of v.clips)if(previousClips.get(c.id)!==c.clip)clipEntries.push({at:f.elapsed,player:c.id,clip:c.clip,restart:c.restart,mode:c.mode,setPiece:v.restart?.type??null,recent:lastEvents});
         previousClips=now;
         if(i%120===0)samples.push({at:f.elapsed,phase:f.phase,triangles:v.triangles,draws:v.draws,quality:v.quality,crowd:v.v24?.crowd&&{status:v.v24.crowd.status,fans:v.v24.crowd.fans,on:v.v24.crowd.on,triangles:v.v24.crowd.triangles,draws:v.v24.crowd.draws},fx:v.v24?.fx?.counts});
-        f.v24=v;
+        f.v24=v;lastV=v;
       }
       if(f.phase==='halftime')half=2;
       frames.push({elapsed:f.elapsed,phase:f.phase,half,score:f.score,quality:f.quality,audio:f.audio,events:f.events,buttons:f.buttons?.length||0});
-      if(i%1200===1199)await writeFile(path.join(out,`${tag}.json`),JSON.stringify(summarize(v),null,1));
+      if(i%1200===1199)await writeFile(path.join(out,`${tag}.json`),JSON.stringify(summarize(v||lastV),null,1));
       // screenshots (each once)
       if(!f.hold&&!f.replaying){
         if(f.phase==='playing'&&f.elapsed>.3)await shot('kickoff',f);
