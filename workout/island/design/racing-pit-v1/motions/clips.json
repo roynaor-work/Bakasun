@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 1,
+  "kind": "embedded-glb-motion-contract",
+  "rig": "../rig.json",
+  "sampleRateHz": 30,
+  "clips": {
+    "idle_wait": {
+      "duration": 2.4,
+      "loop": true,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "rush_in": {
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": true,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.22399999999999998,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.6159999999999999,
+          "end": 1.008,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.4,
+          "end": 1.7919999999999996,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 2.1839999999999997,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.6159999999999999,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.008,
+          "end": 1.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.7919999999999996,
+          "end": 2.1839999999999997,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 2.5759999999999996,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0.96
+      ],
+      "events": [],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "remove_wheel": {
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "gun_loosen",
+          "time": 1.184
+        },
+        {
+          "type": "wheel_detach",
+          "time": 1.856
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "mount_wheel": {
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "wheel_attach",
+          "time": 1.472
+        },
+        {
+          "type": "gun_tighten",
+          "time": 1.92
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "jack_up": {
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "lift_start",
+          "time": 0.84
+        },
+        {
+          "type": "car_raised",
+          "time": 1.96
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "jack_down": {
+      "duration": 2.8,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.8,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "lower_start",
+          "time": 0.84
+        },
+        {
+          "type": "car_grounded",
+          "time": 1.96
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "thumbs_up": {
+      "duration": 2.4,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "ready",
+          "time": 1.2
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "step_back": {
+      "duration": 2.4,
+      "loop": false,
+      "locomotion": true,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.192,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.696,
+          "end": 1.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.704,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.696,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.2,
+          "end": 1.704,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 2.2079999999999997,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        -0.64
+      ],
+      "events": [],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "wipe_screen": {
+      "duration": 3.2,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 3.2,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "screen_clean",
+          "time": 2.24
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    },
+    "signal_release": {
+      "duration": 2.4,
+      "loop": false,
+      "locomotion": false,
+      "floorY": 0,
+      "soleLocal": [
+        0,
+        -0.08,
+        0
+      ],
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "local": [
+            0,
+            -0.08,
+            0
+          ]
+        }
+      ],
+      "ballVisible": false,
+      "checkHingeDirection": true,
+      "symmetryMode": "structural",
+      "rootMotion": "baked translation; consume once; do not add reference travel",
+      "rootDeltaMeters": [
+        0,
+        0,
+        0
+      ],
+      "events": [
+        {
+          "type": "release",
+          "time": 1.32
+        }
+      ],
+      "intent": "intentional bilateral work / asymmetric role gestures; structural symmetry only"
+    }
+  },
+  "integration": {
+    "blendSeconds": 0.18,
+    "rootMotion": "baked local +Z, consume exactly once",
+    "sequence": [
+      "idle_wait",
+      "rush_in",
+      "jack_up",
+      "remove_wheel",
+      "mount_wheel",
+      "jack_down",
+      "thumbs_up",
+      "step_back"
+    ],
+    "roleExtras": {
+      "screen_cleaner": "wipe_screen",
+      "light_controller": "signal_release"
+    }
+  }
+}
