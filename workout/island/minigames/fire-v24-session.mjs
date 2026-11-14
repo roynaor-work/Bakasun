@@ -48,7 +48,10 @@ export function runFireV24Interior(ctx,{plan,tutorial=false,onDone,createScene=c
     if(model.phase==='intro'){input.skip=true;return;}aimAt(local(e));},options);
   canvas.addEventListener('pointermove',e=>{if(e.pointerId!==pointerId)return;if(Math.hypot(e.clientX-downPoint.x,e.clientY-downPoint.y)>14)moved=true;if(model.phase==='play')aimAt(local(e));},options);
   for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,e=>{if(e.pointerId!==pointerId)return;pointerId=null;
-    if(type==='pointerup'&&!moved&&performance.now()-downAt<320){const world=scene.pick(local(e).x,local(e).y);if(world)input.tap=world;}delete input.aim;delete input.aimRaw;},options);
+    if(type==='pointerup'&&!moved&&performance.now()-downAt<320){const l=local(e),r=model.room,f=r?.friend;
+      // a tap near the friend on the screen is a tap on the friend (the pick ray would land on the floor behind them)
+      if(f&&f.state==='waiting'){const feet=scene.project([f.pos[0],0,f.pos[2]]),head=scene.project([f.pos[0],f.height,f.pos[2]]),cy=(feet.y+head.y)/2,radius=Math.max(44,Math.abs(feet.y-head.y)*.6);if(Math.hypot(l.x-feet.x,l.y-cy)<=radius)input.tap=[f.pos[0],.5,f.pos[2]];}
+      if(!input.tap){const world=scene.pick(l.x,l.y);if(world)input.tap=world;}}delete input.aim;delete input.aimRaw;},options);
   card.addEventListener('pointerdown',e=>{e.preventDefault();if(paused)return;if(!tutorialDone){tutorialDone=true;card.hidden=true;return;}input.skip=true;},options);
   for(const type of ['contextmenu','selectstart','dragstart'])root.addEventListener(type,e=>e.preventDefault(),options);
   const clear=()=>{for(const k of Object.keys(input))delete input[k];pointerId=null;};

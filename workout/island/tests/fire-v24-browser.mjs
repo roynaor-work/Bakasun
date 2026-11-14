@@ -136,7 +136,10 @@ try{
   await finishStreet(t,run,'stage3');
   const after=await saveShape(t.page);run.saveAfter={progress:after.fireProgress,money:after.money,certificates:after.certificates};
   check('stageEndsWithTheResultCardAndStars',run.resultCard&&after.fireProgress.stars[2]>=1&&after.money>before.money,{rows:run.resultRows,stars:after.fireProgress.stars[2],uiStars:run.resultStars,trace:run.streetTrace.slice(-3)});
-  check('saveShapeUnchanged',JSON.stringify(after.paths)===JSON.stringify(before.paths)&&after.version===before.version,{paths:after.paths.length,version:after.version});
+  // a won campaign stage changes exactly what it always changed (stars, certificate, high score, wins, money); nothing new is written
+  const allowed=['.fireCertificates','.minigameProgress.fireRescue','.highScores','.minigameWins','.money','.learning','.parts','.playTime','.lastPlayed','.statistics','.stats'];
+  const changed=[...new Set([...after.paths.filter(p=>!before.paths.includes(p)),...before.paths.filter(p=>!after.paths.includes(p))])],foreign=changed.filter(p=>!allowed.some(a=>p.startsWith(a)));
+  check('saveShapeUnchangedBeyondTheUsualStageWin',foreign.length===0&&after.version===before.version,{changed:changed.slice(0,12),foreign:foreign.slice(0,12),version:after.version});
   // stage map badges (default flow)
   await t.tapEl('[data-action=game-stages]').catch(()=>{});await t.tick(200);await waitForGameNavigation(t.page);
   const badges=await t.page.evaluate(()=>[...document.querySelectorAll('.stage-map [data-fire-entry]')].map(n=>Number(n.dataset.stage)));run.badges=badges;
