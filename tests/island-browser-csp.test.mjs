@@ -291,14 +291,15 @@ test('actual island CSP blocks inline/blob workers, monitors frames/report-only 
       assert.equal(m.v241.crowd3d.status,'ready');assert.ok(m.v241.crowd3d.cardsHidden>=796,'cards replaced: '+m.v241.crowd3d.cardsHidden);assert.equal(m.v241.referee.status,'ready');
       assert.ok(requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod2/')),'crowd level 2');assert.ok(!requests.some(u=>u.includes('assets/hoops-v241/crowd/runtime/lod0/')),'no level 0 in the budget mode');
       assert.ok(!requests.some(u=>/\/design\/hoops-(crowd-3d|motion-v13|ref-scoreboard|referee-audio)/.test(u)),'nothing is read from the unpublished design folder');
-      assert.ok(m.calls<=52+14,'the 3D fans (12 calls at most) and the referee (2): '+m.calls);
+      assert.ok(m.calls<=52+15,'the 3D fans (12 calls at most) and the referee (two meshes and his shadow): '+m.calls);
       await v241.csp.assertClean();reports.push({name:'hoops-v241-session-start-result',...m,loadTimes:undefined});
     }finally{await v241.close();await v241.csp.assertClean();}
-    // ?athleteBody=0: the tall bodies + the v9 library (08/11, Codex) as before.
+    // ?athleteBody=0: the tall bodies + the v9 library (08/11, Codex) as before. Its draw-call ceiling is the v24 scene: ?hoopsV241=0 (the
+    // v24.1 fans and referee add their own calls, measured in the check above)
     const tall=await fixture('hoops-tall-session-start',{contextOptions:{viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1}});
     try{
       const requests=[];tall.page.on('request',r=>requests.push(r.url()));
-      await tall.page.goto(server.url+tallBase+'&athleteBody=0',{waitUntil:'load'});
+      await tall.page.goto(server.url+tallBase+'&athleteBody=0&hoopsV241=0',{waitUntil:'load'});
       const live=await hoopsReady(tall.page);
       assert.equal(live.error,null);assert.equal(live.m.tall,true);assert.equal(live.m.characterVersion,9);assert.deepEqual(live.m.v4Fallbacks,[]);
       for(const f of ['guard.glb','wing.glb','center.glb','motion.json'])assert.ok(requests.some(u=>u.includes('assets/hoops-tall/'+f)),f);
