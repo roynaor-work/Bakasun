@@ -42,7 +42,7 @@ const setStep = (page, ms) => page.evaluate(ms => { window.__frameGate.step = ms
 async function touchKit(page) {
   const cdp = await context.newCDPSession(page);
   const send = (type, points) => cdp.send('Input.dispatchTouchEvent', {type, touchPoints: points.map(([id, x, y]) => ({id, x: Math.round(x), y: Math.round(y), radiusX: 9, radiusY: 9, force: .6}))});
-  const center = async selector => { const loc = page.locator(selector).first(); await loc.waitFor({state: 'visible', timeout: 180000}); const b = await loc.boundingBox(); return [b.x + b.width / 2, b.y + b.height / 2]; };
+  const center = async selector => { const loc = page.locator(selector).first(); await loc.waitFor({state: 'visible', timeout: 600000}); await loc.scrollIntoViewIfNeeded(); const b = await loc.boundingBox(); return [b.x + b.width / 2, b.y + b.height / 2]; };
   return {send, center, async tap(selector) { const [x, y] = await center(selector); await send('touchStart', [[1, x, y]]); await page.waitForTimeout(60); await send('touchEnd', []); await page.waitForTimeout(150); }};
 }
 /** Read-only race snapshot of the island session (?dev=1) or of the theme page. */
@@ -121,13 +121,17 @@ async function islandRun(label, query, {toFinish}) {
   page.on('pageerror', e => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/Failed to load resource/.test(m.text())) errors.push(m.text()); }); page.on('response', r => { if (r.status() >= 400) errors.push(`${r.status()} ${new URL(r.url()).pathname}`); });
   const touch = await touchKit(page);
   await page.goto(server.url + '?dev=1&games=1' + query, {waitUntil: 'load'});
-  await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 240000});
+  await page.waitForFunction(() => window.__island?.view.metrics().avatarLoaded, null, {timeout: 900000, polling: 1000});
   await touch.tap('[data-action=avatar-start]'); await page.waitForSelector('[data-game-library]');
   await touch.tap('[data-action=game-enter][data-game-id=alpineRush]'); await page.waitForSelector('[data-game-home=alpineRush]');
   await touch.tap('[data-action=game-play]'); await page.waitForSelector('[data-action=stage-play]');
   await touch.tap('[data-action=stage-play]');
+  // the game's instructions may come first (once per game); then the ski opening card with its start button
+  try { await page.waitForFunction(() => document.querySelector('[data-action=game-understood]') || document.querySelector('[data-action=alpine-start]'), null, {timeout: 900000, polling: 1000}); }
+  catch (error) { await page.screenshot({path: OUT + `${label}-stuck.png`}).catch(() => {}); throw error; }
   if (await page.locator('[data-action=game-understood]').count()) await touch.tap('[data-action=game-understood]');
-  await page.waitForFunction(() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled; }, null, {timeout: 300000});
+  try { await page.waitForFunction(() => { const b = document.querySelector('[data-action=alpine-start]'); return b && !b.disabled; }, null, {timeout: 1500000, polling: 1000}); }
+  catch (error) { await page.screenshot({path: OUT + `${label}-stuck.png`}).catch(() => {}); throw error; }
   await page.screenshot({path: OUT + `${label}-opening.png`});
   const kappa = await pathOf(page, false);
   await touch.tap('[data-action=alpine-start]');

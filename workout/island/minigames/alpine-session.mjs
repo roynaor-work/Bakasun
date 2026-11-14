@@ -192,7 +192,8 @@ export function runAlpineSession(ctx) {
   const maxPlayerSpeedKmh=balance.physics.boostSpeed*3.6*Math.max(1,Math.min(1.1,Number(ctx.equipment?.wax)||1));
   kitHud=createAlpineHud({speed,callout,kicker:calloutKicker,line:calloutLine,maxSpeedKmh:maxPlayerSpeedKmh});
   const hint = el('div', 'alpine-steer-hint'); hint.append(el('span', '', '‹'), el('span', '', t('alpine.dragHint')), el('span', '', '›')); hint.setAttribute('aria-hidden', 'true');
-  if (v241) hint.append(el('span', 'alpine-brake-hint', '↓ למטה מאטים'));
+  // v24.1: a second line under the steering hint (its own element: the hint's first and last spans are its big arrows)
+  const brakeHint = v241 ? el('div', 'alpine-brake-hint', '↓ למטה מאטים') : null; if (brakeHint) brakeHint.setAttribute('aria-hidden', 'true');
   const boostButton = el('button', 'alpine-boost'); boostButton.type = 'button'; boostButton.dataset.gameControl = 'boost'; boostButton.dataset.action = 'alpine-boost';
   boostButton.setAttribute('aria-label', t('alpine.boost')); boostButton.setAttribute('aria-keyshortcuts', 'Space');
   boostButton.append(svg(BOLT), el('b', '', t('alpine.boost')), el('small', '', 'SPACE'));
@@ -212,7 +213,7 @@ export function runAlpineSession(ctx) {
   const boostCaption = el('span', 'alpine-boost-caption', t('alpine.boostReady')); boostCaption.setAttribute('aria-hidden', 'true'); boostCaption.hidden = true;
   actions.append(boostArrow, boostCaption);
   const trickCaption = el('span', 'alpine-trick-caption', t('alpine.tricks')); trickCaption.setAttribute('aria-hidden', 'true'); actions.append(trickCaption);
-  const center = el('div', 'alpine-center'); center.append(speed, hint);
+  const center = el('div', 'alpine-center'); center.append(speed, hint, ...(brakeHint ? [brakeHint] : []));
   footer.append(joystick, center, actions);
   stage.append(vignette, brand, hud, intro, worldLabel, countdown, callout, loading); if (lights) stage.append(lights.node);
   controls.classList.add('alpine-controls'); controls.append(footer); screen.append(css, polish, screenCss, kitCss, feelCss, cleanCss); stage.append(app); setTheme(theme);

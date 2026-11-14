@@ -55,10 +55,10 @@ export const CURVE_V241 = Object.freeze({...CURVE,
     boostChance: [.35, .92], boostTank: [.9, .5], trickChance: [.3, .6], trickMargin: [.35, .28], padDesire: [4, 7], rampDesire: [2, 4], gateDesire: [1, 6], windComp: [.82, .95]}
 });
 /** Rival strength of each stage on v24.1 (CURVE_V241.ai), calibrated with tools/alpine-league-calibrate.mjs to the same targets as v24
- * (14/11/2026: bisection, 32 races a stage on common seeds, gear as gearByProgress). Stages 1, 2, 7, 10 and 29 stay at 1: the strongest
- * rivals the curve allows, the bot passes at or a little above the target there. */
-export const AI_STRENGTH_V241 = Object.freeze([1, 1, .969, .938, .875, .766, 1, .797, .75, 1, .938, .969, .969, .906, .969,
-  .719, .75, .781, .688, .5, .375, .438, .891, .625, .5, .875, .516, .594, 1, .609]);
+ * (14/11/2026, on the final v24.1 rules: bisection, 40 races a stage on common seeds, gear as gearByProgress). Stages 1, 2, 7, 10 and 26
+ * stay at 1: the strongest rivals the curve allows, the bot passes at or a little above the target there. */
+export const AI_STRENGTH_V241 = Object.freeze([1, 1, .969, .969, .938, .688, 1, .813, .703, 1, .969, .906, .875, .875, .969,
+  .625, .531, .781, .641, .375, .5, .438, .438, .625, .469, 1, .438, .563, .938, .75]);
 
 const difficultyOf = n => Math.min(1, (n - 1) / (STAGE_COUNT - 1) + (stageInfo(n)?.boss ? .02 : 0));
 const LETTERS = 'abcd';

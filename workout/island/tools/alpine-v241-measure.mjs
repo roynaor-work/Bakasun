@@ -58,6 +58,12 @@ function laneChange({target = 3, boost = false} = {}) {
   return {overshootM: round(peak - target, 2), settleMs: round(settled * MS), turnDistanceM: round(sReach - s0, 1), settleDistanceM: null};
 }
 C.laneChange = laneChange(); C.laneChangeBoost = laneChange({boost: true});
+// The same 3 m move with the stick pulled down first (0.6 s of brake, then down-and-across): the turn distance when the child slows down.
+{
+  const e = bench(); for (let n = 0; n < 36; n++) { e.command({type: 'steer', value: 0}); e.command({type: 'brake', value: 1}); e.step(DT); }
+  const s0 = me(e).s; for (let n = 0; n < 240 && me(e).x < 3; n++) { e.command({type: 'steer', value: 1}); e.command({type: 'brake', value: 1}); e.step(DT); }
+  C.brakingTurnDistanceM = round(me(e).s - s0, 1);
+}
 { const e = bench(), s0 = me(e).s; for (let n = 0; n < 240 && me(e).x < 1.7; n++) { e.command({type: 'steer', value: 1}); e.step(DT); } C.dodgeDistanceM = round(me(e).s - s0, 1); }
 // 3. The bot's proportional steering (gain .7) to a lane 3 m across: overshoot and time inside +-0.25 m.
 {
