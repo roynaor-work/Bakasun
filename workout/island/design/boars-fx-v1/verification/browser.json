@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "browser": "151.0.7922.173",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "sprites": 45,
+  "atlases": 3,
+  "animations": [
+    "muzzle",
+    "projectile-gold",
+    "projectile-aqua",
+    "projectile-comet",
+    "hit-dust",
+    "hit-stars",
+    "hit-burst",
+    "hit-pop",
+    "miss-dust",
+    "miss-pebbles",
+    "miss-sand",
+    "boar-idle",
+    "boar-fall",
+    "boar-side-hit"
+  ],
+  "audioDecodedAndPlayed": [
+    "shot-cork.ogg",
+    "shot-pew.ogg",
+    "shot-bubble.ogg",
+    "hit-dust.ogg",
+    "hit-stars.ogg",
+    "hit-burst.ogg",
+    "hit-pop.ogg",
+    "miss-sand.ogg",
+    "fall-squeak-roll.ogg",
+    "pig-oink.ogg",
+    "pig-double.ogg",
+    "pig-snort.ogg",
+    "pig-hiccup.ogg",
+    "pig-chuckle.ogg",
+    "shot-cork.mp3",
+    "shot-pew.mp3",
+    "shot-bubble.mp3",
+    "hit-dust.mp3",
+    "hit-stars.mp3",
+    "hit-burst.mp3",
+    "hit-pop.mp3",
+    "miss-sand.mp3",
+    "fall-squeak-roll.mp3",
+    "pig-oink.mp3",
+    "pig-double.mp3",
+    "pig-snort.mp3",
+    "pig-hiccup.mp3",
+    "pig-chuckle.mp3"
+  ],
+  "mp3FallbackVerified": true,
+  "expectedFallbackRequestErrors": 1,
+  "touch": true,
+  "keyboard": true,
+  "artFrameStep": true,
+  "mutedStartup": true,
+  "muteStopsActiveAudio": true,
+  "extraViewports": [
+    {
+      "width": 740,
+      "height": 360
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "strictCsp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'none'",
+  "errors": [],
+  "httpErrors": [],
+  "external": [],
+  "csp": [],
+  "physicalPhone": false,
+  "subjectiveListening": false
+}

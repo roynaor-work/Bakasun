@@ -1,0 +1,330 @@
+{
+  "seed": 7112026,
+  "method": "Original additive, FM-like chirp and filtered-noise synthesis",
+  "sampleRate": 22050,
+  "channels": 1,
+  "sounds": [
+    {
+      "id": "shot-cork",
+      "group": "shot",
+      "labelHe": "פקק קופץ",
+      "recipe": "Cork pop + rounded air",
+      "durationMs": 196,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.13,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/shot-cork.ogg",
+          "bytes": 3970,
+          "sha256": "53dd5dcbef1214ccabd0a475fddd26513282a5249155b71139da674850c3e4fd"
+        },
+        "mp3": {
+          "path": "audio/shot-cork.mp3",
+          "bytes": 1769,
+          "sha256": "340eb8721e4ac9f685464910d23519775cfd0067a4e667ec5c2940acdbf86bb6"
+        }
+      }
+    },
+    {
+      "id": "shot-pew",
+      "group": "shot",
+      "labelHe": "פיו קפיצי",
+      "recipe": "Falling sine chirp + soft spring",
+      "durationMs": 236,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.33,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/shot-pew.ogg",
+          "bytes": 3917,
+          "sha256": "312a755f664838b2aad6db13f115c494c36a7637817582afedd5ad1d3f29c07c"
+        },
+        "mp3": {
+          "path": "audio/shot-pew.mp3",
+          "bytes": 2083,
+          "sha256": "19786512f8e87f6f1e2ac7c6624d786aea9689cff405ac4e8125ebf2cd11096e"
+        }
+      }
+    },
+    {
+      "id": "shot-bubble",
+      "group": "shot",
+      "labelHe": "בועה מהירה",
+      "recipe": "Two hollow bubble pulses",
+      "durationMs": 216,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.33,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/shot-bubble.ogg",
+          "bytes": 3981,
+          "sha256": "12af83b9f2581f7460c537a29ba8015d68dcf1d0ebd1e937ca72e332ce31cbc4"
+        },
+        "mp3": {
+          "path": "audio/shot-bubble.mp3",
+          "bytes": 1926,
+          "sha256": "0b0cad3af6a7f943701529b797b2f105995583ab760e41f6a25fadf460421d51"
+        }
+      }
+    },
+    {
+      "id": "hit-dust",
+      "group": "hit",
+      "labelHe": "פוף אבק",
+      "recipe": "Filtered puff + wood-like low tap",
+      "durationMs": 286,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -6.94,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/hit-dust.ogg",
+          "bytes": 4299,
+          "sha256": "1521c6415e5fe934fea4121e95c93d90be6c8fb67370f1c6fab95f7f1e06d59f"
+        },
+        "mp3": {
+          "path": "audio/hit-dust.mp3",
+          "bytes": 2239,
+          "sha256": "e15ebdb87b98b9605c8650ba5d8d2055fc8507e1b5121980f16102f3a628a03b"
+        }
+      }
+    },
+    {
+      "id": "hit-stars",
+      "group": "hit",
+      "labelHe": "כוכבים מצחיקים",
+      "recipe": "Three soft ascending bell partials",
+      "durationMs": 356,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.13,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/hit-stars.ogg",
+          "bytes": 4366,
+          "sha256": "6ad5b379c781e8204c8945fe1b91fa3743c05c6f07443e0a008b81337412e9c0"
+        },
+        "mp3": {
+          "path": "audio/hit-stars.mp3",
+          "bytes": 2710,
+          "sha256": "139442504897082b2ac97f6e4f2a290d22a410a89b55371f4c9b3dfd160a7878"
+        }
+      }
+    },
+    {
+      "id": "hit-burst",
+      "group": "hit",
+      "labelHe": "בום קטן",
+      "recipe": "Rounded low drum + airy tail",
+      "durationMs": 306,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -6.74,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/hit-burst.ogg",
+          "bytes": 4317,
+          "sha256": "27270b678e53dce4331bc8fe184775f14abeeda09d8282023ed36d797cfd7fae"
+        },
+        "mp3": {
+          "path": "audio/hit-burst.mp3",
+          "bytes": 2396,
+          "sha256": "276f170ff1e83dfef9e493a82e92afdf02391b7f0ba24a14947f55299630e8bf"
+        }
+      }
+    },
+    {
+      "id": "hit-pop",
+      "group": "hit",
+      "labelHe": "פופ גומי",
+      "recipe": "Rubbery pop + short upward wobble",
+      "durationMs": 256,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.13,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/hit-pop.ogg",
+          "bytes": 4087,
+          "sha256": "4b00081ce90e9797f873a5c7744a5b6bdd2f646c20577d19569e10e7743880ba"
+        },
+        "mp3": {
+          "path": "audio/hit-pop.mp3",
+          "bytes": 2083,
+          "sha256": "4f710fac5c3724a3afd33c2c99d2fc6b832be9719aac999637876252bb1da58b"
+        }
+      }
+    },
+    {
+      "id": "miss-sand",
+      "group": "miss",
+      "labelHe": "חול מתפזר",
+      "recipe": "Quiet sandy scrape and tiny tick",
+      "durationMs": 326,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -9.9,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/miss-sand.ogg",
+          "bytes": 4367,
+          "sha256": "9352498650914c44af7bfad4ca2b3a70e2f411e9fb173a2ef31584d7d7ca615d"
+        },
+        "mp3": {
+          "path": "audio/miss-sand.mp3",
+          "bytes": 2553,
+          "sha256": "b219797007236d28c15abcf48b7f47565afee2038e8f904f19311a7d6304ef4e"
+        }
+      }
+    },
+    {
+      "id": "fall-squeak-roll",
+      "group": "fall",
+      "labelHe": "חריקה וגלגול",
+      "recipe": "Rubber squeak, then four slowing soft rolling taps",
+      "durationMs": 916,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -7.33,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/fall-squeak-roll.ogg",
+          "bytes": 6117,
+          "sha256": "e37597342a2e465c3dd92772fa20ad7747f8be40f20e2d6f8b77934d2e7dddcc"
+        },
+        "mp3": {
+          "path": "audio/fall-squeak-roll.mp3",
+          "bytes": 6158,
+          "sha256": "e53619bde4889526de7e3c678b4d8b4bfba721f7586c9ec2c9212549631ea23e"
+        }
+      }
+    },
+    {
+      "id": "pig-oink",
+      "group": "voice",
+      "labelHe": "אוינק",
+      "recipe": "Nasal descending oink",
+      "durationMs": 316,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.4,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/pig-oink.ogg",
+          "bytes": 4495,
+          "sha256": "154c6e0fb864d9036581718ba3e56352c3a20a1925ee59b3b0f78de83b29d9b4"
+        },
+        "mp3": {
+          "path": "audio/pig-oink.mp3",
+          "bytes": 2553,
+          "sha256": "19b97c1a820eb9da7c894eac96af85b99d8c32df74f103592d7c77a9d2dd82e6"
+        }
+      }
+    },
+    {
+      "id": "pig-double",
+      "group": "voice",
+      "labelHe": "אוינק אוינק",
+      "recipe": "Two bouncy nasal pulses",
+      "durationMs": 446,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.64,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/pig-double.ogg",
+          "bytes": 4886,
+          "sha256": "5a341cb7cb2c09df9b031799034748230a882c8d7d0832fd3316ac711ec5ff01"
+        },
+        "mp3": {
+          "path": "audio/pig-double.mp3",
+          "bytes": 3336,
+          "sha256": "54122a23d325c82b82d71c0b43c32937fb511eb40cd7ee8364ba440c35c5b3ea"
+        }
+      }
+    },
+    {
+      "id": "pig-snort",
+      "group": "voice",
+      "labelHe": "נחרה קטנה",
+      "recipe": "Low breathy snort",
+      "durationMs": 296,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.87,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/pig-snort.ogg",
+          "bytes": 4358,
+          "sha256": "18ef7db5cc6b24280ad134014bdeea7acb2bd5ab4cc67e5ecc6117c55c279aca"
+        },
+        "mp3": {
+          "path": "audio/pig-snort.mp3",
+          "bytes": 2396,
+          "sha256": "b5499d9297e10eded59c08469113c5a8429a41ef2fff479a3a10eafde48b446d"
+        }
+      }
+    },
+    {
+      "id": "pig-hiccup",
+      "group": "voice",
+      "labelHe": "היק!",
+      "recipe": "Short hiccupping upward chirp",
+      "durationMs": 256,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.64,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/pig-hiccup.ogg",
+          "bytes": 4419,
+          "sha256": "4626cd4d81d4a0f6784e84d5e33c232b8a096469781e61ea89d8fb0510a7a3dd"
+        },
+        "mp3": {
+          "path": "audio/pig-hiccup.mp3",
+          "bytes": 2083,
+          "sha256": "814571465561e799bd44d7d0f4e4fbfa4b4152b878bafb36d865169a07c19ad5"
+        }
+      }
+    },
+    {
+      "id": "pig-chuckle",
+      "group": "voice",
+      "labelHe": "צחקוק חזירי",
+      "recipe": "Three gentle wobbling chuckles",
+      "durationMs": 496,
+      "sampleRate": 22050,
+      "channels": 1,
+      "sourcePeakDbFS": -8.64,
+      "gain": 1,
+      "formats": {
+        "ogg": {
+          "path": "audio/pig-chuckle.ogg",
+          "bytes": 4942,
+          "sha256": "2958cd9680c1229b485f848d05e7d0bd55ecf0037627238e98074a975f24ad2a"
+        },
+        "mp3": {
+          "path": "audio/pig-chuckle.mp3",
+          "bytes": 3493,
+          "sha256": "c1f0dea65047888f80ea2009f2c7503efa56aef85f54ad3c6925476a309bbcbb"
+        }
+      }
+    }
+  ]
+}

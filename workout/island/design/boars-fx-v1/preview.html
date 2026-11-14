@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="robots" content="noindex">
+  <title>אי החזירים · מעבדת אפקטים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script type="module" src="preview.js"></script>
+</head>
+<body>
+  <main class="lab" aria-label="תצוגה מקדימה של אפקטים לאי החזירים">
+    <header>
+      <div class="identity"><span class="mark" aria-hidden="true">✦</span><div><h1>אי החזירים</h1><p>קצת פוף. הרבה כיף.</p></div></div>
+      <div class="header-actions"><span class="edition">מעבדת אפקטים · 01</span><button id="mute" aria-pressed="true">צליל כבוי ♫</button></div>
+    </header>
+    <section class="workspace">
+      <aside>
+        <nav aria-label="סוג תצוגה">
+          <button data-tab="play" aria-selected="true">משחקון</button>
+          <button data-tab="art" aria-selected="false">נכסים</button>
+          <button data-tab="audio" aria-selected="false">צלילים</button>
+        </nav>
+        <section id="play-panel" class="panel">
+          <div class="eyebrow">בחרו איך זה מרגיש</div>
+          <h2>כל פגיעה, חיוך.</h2>
+          <div class="hit-grid" aria-label="סוג פגיעה">
+            <button data-hit="stars" aria-pressed="true"><img src="png/hit-stars-02.png" alt=""><span>כוכבים</span></button>
+            <button data-hit="dust" aria-pressed="false"><img src="png/hit-dust-02.png" alt=""><span>אבק</span></button>
+            <button data-hit="burst" aria-pressed="false"><img src="png/hit-burst-02.png" alt=""><span>בום קטן</span></button>
+            <button data-hit="pop" aria-pressed="false"><img src="png/hit-pop-02.png" alt=""><span>פופ!</span></button>
+          </div>
+          <label class="field">השובל שלי <select id="projectile"><option value="gold">זהב</option><option value="aqua">בועה תכולה</option><option value="comet">כוכב שביט</option></select></label>
+          <label class="check"><input type="checkbox" id="auto"> הדגמה חוזרת</label>
+          <p class="hint">חזיר = פגיעה · חול = החטאה</p>
+        </section>
+        <section id="art-panel" class="panel" hidden>
+          <div class="eyebrow">כל הפריימים, מקרוב</div><h2>על רקע שקוף</h2>
+          <label class="field">רצף <select id="animation"></select></label>
+          <div class="art-actions"><button id="pause" aria-pressed="false">השהיה</button><button id="step">פריים הבא</button></div>
+          <label class="field">קצב <select id="speed"><option value="1">רגיל</option><option value="0.35">איטי</option></select></label>
+          <p id="frame-info" class="hint" dir="ltr"></p>
+          <p class="hint">האטלס והקובץ הבודד מופיעים<br>זה לצד זה לצורך השוואה.</p>
+        </section>
+        <section id="audio-panel" class="panel" hidden>
+          <div class="eyebrow">נוצרו מסינתזה מקורית</div><h2>איך נשמע חיוך?</h2>
+          <label class="field">קבוצה <select id="sound-group"><option value="shot">ירי · 3</option><option value="hit">פגיעה · 4</option><option value="miss">החטאה · 1</option><option value="fall">נפילה · 1</option><option value="voice">קול חזירי · 5</option></select></label>
+          <div id="sounds" class="sounds"></div>
+          <label class="field">פורמט <select id="format"><option value="auto">אוטומטי</option><option value="ogg">Ogg Vorbis</option><option value="mp3">MP3</option></select></label>
+        </section>
+      </aside>
+      <div class="arena">
+        <div class="stage"><canvas id="scene" width="600" height="278" tabindex="0" role="button" aria-label="מגרש ניסוי. לחצו על החזיר לפגיעה או על החול להחטאה. מקש רווח יורה."></canvas>
+          <div id="badge" class="badge">מוכנים? בואו נעשה פוף.</div>
+          <div id="loading" role="status">טוענים את הכיף…</div>
+        </div>
+        <div class="controls"><button id="fire" class="primary">✦ ירי ופגיעה</button><button id="fall">נפילה</button><button id="miss">החטאה</button><button id="voice" aria-label="נגן קול מצחיק של חזיר">אוינק!</button></div>
+      </div>
+    </section>
+    <footer><span id="status" role="status" aria-live="polite">טוענים…</span><span>חבילת סקירה עצמאית · <bdi>844 × 390</bdi></span></footer>
+  </main>
+</body>
+</html>

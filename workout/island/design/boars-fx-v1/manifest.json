@@ -1,0 +1,1758 @@
+{
+  "schemaVersion": 1,
+  "id": "boars-fx-v1",
+  "titleHe": "אי החזירים — אפקטים שמרגישים",
+  "version": "1.0.0",
+  "created": "2026-11-14",
+  "license": "CC0-1.0",
+  "baseUrl": "./",
+  "scope": "Review-only standalone assets; no gameplay files changed.",
+  "budgets": {
+    "spritePixels": 256,
+    "atlasPixels": 1024,
+    "pngMaxBytes": 600000,
+    "atlasMaxBytes": 600000,
+    "audioMaxBytesPerFile": 60000,
+    "audioMaxBytesPerCuePair": 60000
+  },
+  "rendering": {
+    "colorSpace": "sRGB",
+    "alpha": "straight",
+    "frameSize": [
+      256,
+      256
+    ],
+    "atlasLayout": "4x4 untrimmed 256px cells; no rotation",
+    "filter": "linear",
+    "mipmaps": false,
+    "transparentMarginPixelsMin": 4,
+    "uvOrigin": "top-left",
+    "pivotUnits": "normalized, top-left origin",
+    "muzzleDirection": "+X",
+    "projectileDirection": "+X",
+    "boarFacing": "left",
+    "groundPivot": [
+      0.5,
+      0.84375
+    ],
+    "depthWrite": false
+  },
+  "atlases": [
+    {
+      "id": "boars-fx-01",
+      "path": "atlases/boars-fx-01.png",
+      "bytes": 33616,
+      "sha256": "a7d889cd93623a282cc726dd5e71447d544a4cd5d65d1e47b9814359426e2f2e",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "boars-fx-02",
+      "path": "atlases/boars-fx-02.png",
+      "bytes": 36394,
+      "sha256": "0fb4cd8df30e258fde5406abc51ad3e990a5d217701c014049795f9fc3584920",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "id": "boars-fx-03",
+      "path": "atlases/boars-fx-03.png",
+      "bytes": 131959,
+      "sha256": "92bd61e716477096c9cbb767fbe321147cf42c22b6c32c2f3880d3cc5e403d95",
+      "width": 1024,
+      "height": 1024
+    }
+  ],
+  "frames": {
+    "muzzle-01": {
+      "path": "png/muzzle-01.png",
+      "bytes": 2308,
+      "sha256": "666784bb82ebf2ea46fdb49ce6cdab9dd2e7c61bd6fecfbcea0a2e35cda70269",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "muzzle-02": {
+      "path": "png/muzzle-02.png",
+      "bytes": 3883,
+      "sha256": "21db41d43f7c24118fb819812d608919ece6a18db7054dba81b4f33364b3fe88",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "muzzle-03": {
+      "path": "png/muzzle-03.png",
+      "bytes": 4146,
+      "sha256": "96f12acb14167f7d70031902f558eb4b62c747c1803b54480b44910dc1c11d2a",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "muzzle-04": {
+      "path": "png/muzzle-04.png",
+      "bytes": 3707,
+      "sha256": "63c74bd658a6d9666a314b812077dd21004e2547c25825568838f3cd116a6ddb",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "muzzle-05": {
+      "path": "png/muzzle-05.png",
+      "bytes": 2734,
+      "sha256": "fc799be2674ec9daf5dea98f0c64f05cea5024039ac84ae189e660e4a7adb169",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "muzzle-06": {
+      "path": "png/muzzle-06.png",
+      "bytes": 2040,
+      "sha256": "116662cbd53e8adf1c0caeb3cd9458a63b39428f325c7018f0afb1826b121455",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "projectile-gold-01": {
+      "path": "png/projectile-gold-01.png",
+      "bytes": 1937,
+      "sha256": "0ddc4100a61fb8f952a886dd259375051ff30809d8b8faea0689b15d4fb5b243",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "projectile-aqua-01": {
+      "path": "png/projectile-aqua-01.png",
+      "bytes": 2192,
+      "sha256": "e097bdde9651e065f2be4177b0efb8f532114321e73a1a5c83153d91ee034ae1",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "projectile-comet-01": {
+      "path": "png/projectile-comet-01.png",
+      "bytes": 2615,
+      "sha256": "02e2bcbd0f97736136919368e7533ecae58198c8a55a1910d725c39cf564b00c",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-dust-01": {
+      "path": "png/hit-dust-01.png",
+      "bytes": 3493,
+      "sha256": "6099f37ed09b182cdba2c215115b38acc2bb01f350d0f225a6f54d857347e57d",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-dust-02": {
+      "path": "png/hit-dust-02.png",
+      "bytes": 3959,
+      "sha256": "1f9ecdaff97b5a4dfdcea6bcb7bb5d4eda227ccdf23853a30e55b0a22cd960d4",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-dust-03": {
+      "path": "png/hit-dust-03.png",
+      "bytes": 4245,
+      "sha256": "2800317b73159d60e8f9102bae4adf757c8048df6031ff19913e6879295120c0",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-dust-04": {
+      "path": "png/hit-dust-04.png",
+      "bytes": 3570,
+      "sha256": "5d79069b36e8ee5806d7dde2aeec5fbcb725cd7dbdffc3005ec84bdbe34f1a39",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-stars-01": {
+      "path": "png/hit-stars-01.png",
+      "bytes": 3413,
+      "sha256": "46b605a80ad0d785ebf8f21550d6fcb72112910e232571ca895d7ac413017eb6",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 256,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-stars-02": {
+      "path": "png/hit-stars-02.png",
+      "bytes": 4104,
+      "sha256": "211bd06e4cf39727d5e9878a4595210ae4ad6acc8d1f279cc97963e29c84d619",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-stars-03": {
+      "path": "png/hit-stars-03.png",
+      "bytes": 3461,
+      "sha256": "d1e6294c7ab856c9d3995450330ad26aa9d71f4c800efae67fb46efeda4774f2",
+      "atlas": "boars-fx-01",
+      "rect": {
+        "x": 768,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-stars-04": {
+      "path": "png/hit-stars-04.png",
+      "bytes": 2733,
+      "sha256": "6198a971b098d06e655b414be1ca21b5aa4f76e29e6220b2cd1d6106037990aa",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-burst-01": {
+      "path": "png/hit-burst-01.png",
+      "bytes": 2801,
+      "sha256": "916ece91f1d7d3e76a240d6ac696933e8ca0bbc1e474ba5b8db24280924f2acd",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-burst-02": {
+      "path": "png/hit-burst-02.png",
+      "bytes": 3523,
+      "sha256": "dde16bfdbb86fa955aab96650a12c0b2eb6103ae2a10f20809a1c74401b72175",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-burst-03": {
+      "path": "png/hit-burst-03.png",
+      "bytes": 4377,
+      "sha256": "d1b201d62a79f5c1cdb374a17da1c26ece43dbe67cb851ab70cc57af1a52a241",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-burst-04": {
+      "path": "png/hit-burst-04.png",
+      "bytes": 4603,
+      "sha256": "3b771667d000cbf404b971e54524e31b08962a1ddfbc18fa744f3a0ea64475e3",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-pop-01": {
+      "path": "png/hit-pop-01.png",
+      "bytes": 2989,
+      "sha256": "b6428fe936aeec1e4457198d344178718e6a5ca466ca1edabdb5f225b4e4da8d",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-pop-02": {
+      "path": "png/hit-pop-02.png",
+      "bytes": 3822,
+      "sha256": "67d0babb349ab36ee6b3d65727ed927170853d69d32dcf825ddf8a6e9d34488b",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-pop-03": {
+      "path": "png/hit-pop-03.png",
+      "bytes": 3946,
+      "sha256": "90f78edd8ea1d55ca9078bc69d5409b191091eba8d0eeed7d0a90b24631e7955",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "hit-pop-04": {
+      "path": "png/hit-pop-04.png",
+      "bytes": 3916,
+      "sha256": "76b27d2ece9528ec4ba9d42d2132d16a0ce0e08ec73db121fed6b2e7ae96139b",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-dust-01": {
+      "path": "png/miss-dust-01.png",
+      "bytes": 2513,
+      "sha256": "9b8e75827bf29e17e3b95eccab9c18910c6f652eccd410a134198f4756cd08b5",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-dust-02": {
+      "path": "png/miss-dust-02.png",
+      "bytes": 2879,
+      "sha256": "7bc6888a490d45ccd3f3619c6e42f7e2e32b2eb51dff2c2f09f98c6f29aff3b5",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-dust-03": {
+      "path": "png/miss-dust-03.png",
+      "bytes": 3345,
+      "sha256": "415d68dbfe56c2ed4379287eadcf4b50702085941549bfd3a98647837ae0ae1c",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-dust-04": {
+      "path": "png/miss-dust-04.png",
+      "bytes": 3196,
+      "sha256": "d82e85b84d1d10da78238e572b6784df25611af5074f19d415dff451c7bd2891",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-pebbles-01": {
+      "path": "png/miss-pebbles-01.png",
+      "bytes": 2881,
+      "sha256": "07d7830457be9b5d3e85494cf88382604f026e07cda98260d5a19153bce20868",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 256,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-pebbles-02": {
+      "path": "png/miss-pebbles-02.png",
+      "bytes": 3323,
+      "sha256": "e44d534ccda3ee7d657e2b42875525efb7a7566a3ee352050901bccde4e33013",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-pebbles-03": {
+      "path": "png/miss-pebbles-03.png",
+      "bytes": 3531,
+      "sha256": "e2411ca9f0465f48326e40f60f460e3e75360fb44dc54f987f522b7202ccef2b",
+      "atlas": "boars-fx-02",
+      "rect": {
+        "x": 768,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-pebbles-04": {
+      "path": "png/miss-pebbles-04.png",
+      "bytes": 2689,
+      "sha256": "1c85fc667af306d42d2a4e165764498bcd96f8169d877b4306d9c337508e5f63",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-sand-01": {
+      "path": "png/miss-sand-01.png",
+      "bytes": 2438,
+      "sha256": "cf0b98ba3b8902ee72083e3276d8522453679a75d5024a7ecf87a6136708d20e",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-sand-02": {
+      "path": "png/miss-sand-02.png",
+      "bytes": 2849,
+      "sha256": "8e15f2c6f5264a4835f512b7df3eb1299bf8affb7546314755edfacc934310f5",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-sand-03": {
+      "path": "png/miss-sand-03.png",
+      "bytes": 3043,
+      "sha256": "8087336fd50776f65f23d3926134a7c1fa54dfcf0ad32f5c7dfe27aad40eb716",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "miss-sand-04": {
+      "path": "png/miss-sand-04.png",
+      "bytes": 2551,
+      "sha256": "c543e470be8d590b21d75a3c051136d829a8c0afb6166be6232047a5c531b75e",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-idle-01": {
+      "path": "png/boar-idle-01.png",
+      "bytes": 16658,
+      "sha256": "ce4156d84e9c59916842265a1a701d1a794b7283fee5ba889dd1a39cbacdde05",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-fall-01": {
+      "path": "png/boar-fall-01.png",
+      "bytes": 16675,
+      "sha256": "35507db85f2e24ec361c584c3ac175e0c970e1571366fc5852296a42a5926203",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-fall-02": {
+      "path": "png/boar-fall-02.png",
+      "bytes": 17608,
+      "sha256": "ca092cfddc3961dc8b4684c0bc08880dfa84c7c8aa66cea46cd11521536d42ae",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-fall-03": {
+      "path": "png/boar-fall-03.png",
+      "bytes": 14428,
+      "sha256": "c19f6ee6b07d58569ff549bda917b1f3c0194219464bdafc370dd967291bb9b7",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-fall-04": {
+      "path": "png/boar-fall-04.png",
+      "bytes": 15334,
+      "sha256": "6b417bf5a322b992c39f5da39cd7a4d9ab626a79a6584f662b38eb9d3517c573",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-side-hit-01": {
+      "path": "png/boar-side-hit-01.png",
+      "bytes": 16728,
+      "sha256": "134136eb2cabccdddff59d999bf7682c83219002ad3eca0449b9fedb5a0961d7",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-side-hit-02": {
+      "path": "png/boar-side-hit-02.png",
+      "bytes": 16675,
+      "sha256": "35507db85f2e24ec361c584c3ac175e0c970e1571366fc5852296a42a5926203",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    },
+    "boar-side-hit-03": {
+      "path": "png/boar-side-hit-03.png",
+      "bytes": 16722,
+      "sha256": "4b8976ca0983c7b9f622021dbe5c8761dc187ae6f61d8e0592844576cabf08ac",
+      "atlas": "boars-fx-03",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "trimmed": false,
+      "rotated": false
+    }
+  },
+  "animations": {
+    "muzzle": {
+      "frames": [
+        "muzzle-01",
+        "muzzle-02",
+        "muzzle-03",
+        "muzzle-04",
+        "muzzle-05",
+        "muzzle-06"
+      ],
+      "frameDurationsMs": [
+        18,
+        22,
+        25,
+        25,
+        30,
+        30
+      ],
+      "durationMs": 150,
+      "loop": false,
+      "pivot": [
+        0.1796875,
+        0.5
+      ],
+      "blend": "additive",
+      "sound": "shot-cork"
+    },
+    "projectile-gold": {
+      "frames": [
+        "projectile-gold-01"
+      ],
+      "frameDurationsMs": [
+        100
+      ],
+      "durationMs": 100,
+      "loop": true,
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "blend": "normal",
+      "sound": null
+    },
+    "projectile-aqua": {
+      "frames": [
+        "projectile-aqua-01"
+      ],
+      "frameDurationsMs": [
+        100
+      ],
+      "durationMs": 100,
+      "loop": true,
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "blend": "normal",
+      "sound": null
+    },
+    "projectile-comet": {
+      "frames": [
+        "projectile-comet-01"
+      ],
+      "frameDurationsMs": [
+        100
+      ],
+      "durationMs": 100,
+      "loop": true,
+      "pivot": [
+        0.84375,
+        0.5
+      ],
+      "blend": "normal",
+      "sound": null
+    },
+    "hit-dust": {
+      "frames": [
+        "hit-dust-01",
+        "hit-dust-02",
+        "hit-dust-03",
+        "hit-dust-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        65,
+        90,
+        110
+      ],
+      "durationMs": 310,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "blend": "normal",
+      "sound": "hit-dust"
+    },
+    "hit-stars": {
+      "frames": [
+        "hit-stars-01",
+        "hit-stars-02",
+        "hit-stars-03",
+        "hit-stars-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        65,
+        90,
+        110
+      ],
+      "durationMs": 310,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "blend": "normal",
+      "sound": "hit-stars"
+    },
+    "hit-burst": {
+      "frames": [
+        "hit-burst-01",
+        "hit-burst-02",
+        "hit-burst-03",
+        "hit-burst-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        65,
+        90,
+        110
+      ],
+      "durationMs": 310,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "blend": "normal",
+      "sound": "hit-burst"
+    },
+    "hit-pop": {
+      "frames": [
+        "hit-pop-01",
+        "hit-pop-02",
+        "hit-pop-03",
+        "hit-pop-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        65,
+        90,
+        110
+      ],
+      "durationMs": 310,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.53125
+      ],
+      "blend": "normal",
+      "sound": "hit-pop"
+    },
+    "miss-dust": {
+      "frames": [
+        "miss-dust-01",
+        "miss-dust-02",
+        "miss-dust-03",
+        "miss-dust-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        75,
+        95,
+        115
+      ],
+      "durationMs": 330,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "blend": "normal",
+      "sound": "miss-sand"
+    },
+    "miss-pebbles": {
+      "frames": [
+        "miss-pebbles-01",
+        "miss-pebbles-02",
+        "miss-pebbles-03",
+        "miss-pebbles-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        75,
+        95,
+        115
+      ],
+      "durationMs": 330,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "blend": "normal",
+      "sound": "miss-sand"
+    },
+    "miss-sand": {
+      "frames": [
+        "miss-sand-01",
+        "miss-sand-02",
+        "miss-sand-03",
+        "miss-sand-04"
+      ],
+      "frameDurationsMs": [
+        45,
+        75,
+        95,
+        115
+      ],
+      "durationMs": 330,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.71875
+      ],
+      "blend": "normal",
+      "sound": "miss-sand"
+    },
+    "boar-idle": {
+      "frames": [
+        "boar-idle-01"
+      ],
+      "frameDurationsMs": [
+        1000
+      ],
+      "durationMs": 1000,
+      "loop": true,
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "blend": "normal",
+      "sound": null
+    },
+    "boar-fall": {
+      "frames": [
+        "boar-fall-01",
+        "boar-fall-02",
+        "boar-fall-03",
+        "boar-fall-04"
+      ],
+      "frameDurationsMs": [
+        90,
+        120,
+        170,
+        360
+      ],
+      "durationMs": 740,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "blend": "normal",
+      "sound": "fall-squeak-roll"
+    },
+    "boar-side-hit": {
+      "frames": [
+        "boar-side-hit-01",
+        "boar-side-hit-02",
+        "boar-side-hit-03"
+      ],
+      "frameDurationsMs": [
+        65,
+        95,
+        160
+      ],
+      "durationMs": 320,
+      "loop": false,
+      "pivot": [
+        0.5,
+        0.84375
+      ],
+      "blend": "normal",
+      "sound": "hit-pop"
+    }
+  },
+  "audio": {
+    "sampleRate": 22050,
+    "channels": 1,
+    "prefer": "ogg",
+    "fallback": "mp3",
+    "polyphony": 6,
+    "masterGain": 0.72,
+    "voiceCooldownMs": 800,
+    "randomPolicy": "shuffle bag; avoid immediate repeats",
+    "sounds": {
+      "shot-cork": {
+        "id": "shot-cork",
+        "group": "shot",
+        "labelHe": "פקק קופץ",
+        "recipe": "Cork pop + rounded air",
+        "durationMs": 196,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.13,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/shot-cork.ogg",
+            "bytes": 3970,
+            "sha256": "53dd5dcbef1214ccabd0a475fddd26513282a5249155b71139da674850c3e4fd"
+          },
+          "mp3": {
+            "path": "audio/shot-cork.mp3",
+            "bytes": 1769,
+            "sha256": "340eb8721e4ac9f685464910d23519775cfd0067a4e667ec5c2940acdbf86bb6"
+          }
+        }
+      },
+      "shot-pew": {
+        "id": "shot-pew",
+        "group": "shot",
+        "labelHe": "פיו קפיצי",
+        "recipe": "Falling sine chirp + soft spring",
+        "durationMs": 236,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.33,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/shot-pew.ogg",
+            "bytes": 3917,
+            "sha256": "312a755f664838b2aad6db13f115c494c36a7637817582afedd5ad1d3f29c07c"
+          },
+          "mp3": {
+            "path": "audio/shot-pew.mp3",
+            "bytes": 2083,
+            "sha256": "19786512f8e87f6f1e2ac7c6624d786aea9689cff405ac4e8125ebf2cd11096e"
+          }
+        }
+      },
+      "shot-bubble": {
+        "id": "shot-bubble",
+        "group": "shot",
+        "labelHe": "בועה מהירה",
+        "recipe": "Two hollow bubble pulses",
+        "durationMs": 216,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.33,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/shot-bubble.ogg",
+            "bytes": 3981,
+            "sha256": "12af83b9f2581f7460c537a29ba8015d68dcf1d0ebd1e937ca72e332ce31cbc4"
+          },
+          "mp3": {
+            "path": "audio/shot-bubble.mp3",
+            "bytes": 1926,
+            "sha256": "0b0cad3af6a7f943701529b797b2f105995583ab760e41f6a25fadf460421d51"
+          }
+        }
+      },
+      "hit-dust": {
+        "id": "hit-dust",
+        "group": "hit",
+        "labelHe": "פוף אבק",
+        "recipe": "Filtered puff + wood-like low tap",
+        "durationMs": 286,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -6.94,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/hit-dust.ogg",
+            "bytes": 4299,
+            "sha256": "1521c6415e5fe934fea4121e95c93d90be6c8fb67370f1c6fab95f7f1e06d59f"
+          },
+          "mp3": {
+            "path": "audio/hit-dust.mp3",
+            "bytes": 2239,
+            "sha256": "e15ebdb87b98b9605c8650ba5d8d2055fc8507e1b5121980f16102f3a628a03b"
+          }
+        }
+      },
+      "hit-stars": {
+        "id": "hit-stars",
+        "group": "hit",
+        "labelHe": "כוכבים מצחיקים",
+        "recipe": "Three soft ascending bell partials",
+        "durationMs": 356,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.13,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/hit-stars.ogg",
+            "bytes": 4366,
+            "sha256": "6ad5b379c781e8204c8945fe1b91fa3743c05c6f07443e0a008b81337412e9c0"
+          },
+          "mp3": {
+            "path": "audio/hit-stars.mp3",
+            "bytes": 2710,
+            "sha256": "139442504897082b2ac97f6e4f2a290d22a410a89b55371f4c9b3dfd160a7878"
+          }
+        }
+      },
+      "hit-burst": {
+        "id": "hit-burst",
+        "group": "hit",
+        "labelHe": "בום קטן",
+        "recipe": "Rounded low drum + airy tail",
+        "durationMs": 306,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -6.74,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/hit-burst.ogg",
+            "bytes": 4317,
+            "sha256": "27270b678e53dce4331bc8fe184775f14abeeda09d8282023ed36d797cfd7fae"
+          },
+          "mp3": {
+            "path": "audio/hit-burst.mp3",
+            "bytes": 2396,
+            "sha256": "276f170ff1e83dfef9e493a82e92afdf02391b7f0ba24a14947f55299630e8bf"
+          }
+        }
+      },
+      "hit-pop": {
+        "id": "hit-pop",
+        "group": "hit",
+        "labelHe": "פופ גומי",
+        "recipe": "Rubbery pop + short upward wobble",
+        "durationMs": 256,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.13,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/hit-pop.ogg",
+            "bytes": 4087,
+            "sha256": "4b00081ce90e9797f873a5c7744a5b6bdd2f646c20577d19569e10e7743880ba"
+          },
+          "mp3": {
+            "path": "audio/hit-pop.mp3",
+            "bytes": 2083,
+            "sha256": "4f710fac5c3724a3afd33c2c99d2fc6b832be9719aac999637876252bb1da58b"
+          }
+        }
+      },
+      "miss-sand": {
+        "id": "miss-sand",
+        "group": "miss",
+        "labelHe": "חול מתפזר",
+        "recipe": "Quiet sandy scrape and tiny tick",
+        "durationMs": 326,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -9.9,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/miss-sand.ogg",
+            "bytes": 4367,
+            "sha256": "9352498650914c44af7bfad4ca2b3a70e2f411e9fb173a2ef31584d7d7ca615d"
+          },
+          "mp3": {
+            "path": "audio/miss-sand.mp3",
+            "bytes": 2553,
+            "sha256": "b219797007236d28c15abcf48b7f47565afee2038e8f904f19311a7d6304ef4e"
+          }
+        }
+      },
+      "fall-squeak-roll": {
+        "id": "fall-squeak-roll",
+        "group": "fall",
+        "labelHe": "חריקה וגלגול",
+        "recipe": "Rubber squeak, then four slowing soft rolling taps",
+        "durationMs": 916,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -7.33,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/fall-squeak-roll.ogg",
+            "bytes": 6117,
+            "sha256": "e37597342a2e465c3dd92772fa20ad7747f8be40f20e2d6f8b77934d2e7dddcc"
+          },
+          "mp3": {
+            "path": "audio/fall-squeak-roll.mp3",
+            "bytes": 6158,
+            "sha256": "e53619bde4889526de7e3c678b4d8b4bfba721f7586c9ec2c9212549631ea23e"
+          }
+        }
+      },
+      "pig-oink": {
+        "id": "pig-oink",
+        "group": "voice",
+        "labelHe": "אוינק",
+        "recipe": "Nasal descending oink",
+        "durationMs": 316,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -8.4,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/pig-oink.ogg",
+            "bytes": 4495,
+            "sha256": "154c6e0fb864d9036581718ba3e56352c3a20a1925ee59b3b0f78de83b29d9b4"
+          },
+          "mp3": {
+            "path": "audio/pig-oink.mp3",
+            "bytes": 2553,
+            "sha256": "19b97c1a820eb9da7c894eac96af85b99d8c32df74f103592d7c77a9d2dd82e6"
+          }
+        }
+      },
+      "pig-double": {
+        "id": "pig-double",
+        "group": "voice",
+        "labelHe": "אוינק אוינק",
+        "recipe": "Two bouncy nasal pulses",
+        "durationMs": 446,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -8.64,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/pig-double.ogg",
+            "bytes": 4886,
+            "sha256": "5a341cb7cb2c09df9b031799034748230a882c8d7d0832fd3316ac711ec5ff01"
+          },
+          "mp3": {
+            "path": "audio/pig-double.mp3",
+            "bytes": 3336,
+            "sha256": "54122a23d325c82b82d71c0b43c32937fb511eb40cd7ee8364ba440c35c5b3ea"
+          }
+        }
+      },
+      "pig-snort": {
+        "id": "pig-snort",
+        "group": "voice",
+        "labelHe": "נחרה קטנה",
+        "recipe": "Low breathy snort",
+        "durationMs": 296,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -8.87,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/pig-snort.ogg",
+            "bytes": 4358,
+            "sha256": "18ef7db5cc6b24280ad134014bdeea7acb2bd5ab4cc67e5ecc6117c55c279aca"
+          },
+          "mp3": {
+            "path": "audio/pig-snort.mp3",
+            "bytes": 2396,
+            "sha256": "b5499d9297e10eded59c08469113c5a8429a41ef2fff479a3a10eafde48b446d"
+          }
+        }
+      },
+      "pig-hiccup": {
+        "id": "pig-hiccup",
+        "group": "voice",
+        "labelHe": "היק!",
+        "recipe": "Short hiccupping upward chirp",
+        "durationMs": 256,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -8.64,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/pig-hiccup.ogg",
+            "bytes": 4419,
+            "sha256": "4626cd4d81d4a0f6784e84d5e33c232b8a096469781e61ea89d8fb0510a7a3dd"
+          },
+          "mp3": {
+            "path": "audio/pig-hiccup.mp3",
+            "bytes": 2083,
+            "sha256": "814571465561e799bd44d7d0f4e4fbfa4b4152b878bafb36d865169a07c19ad5"
+          }
+        }
+      },
+      "pig-chuckle": {
+        "id": "pig-chuckle",
+        "group": "voice",
+        "labelHe": "צחקוק חזירי",
+        "recipe": "Three gentle wobbling chuckles",
+        "durationMs": 496,
+        "sampleRate": 22050,
+        "channels": 1,
+        "sourcePeakDbFS": -8.64,
+        "gain": 1,
+        "formats": {
+          "ogg": {
+            "path": "audio/pig-chuckle.ogg",
+            "bytes": 4942,
+            "sha256": "2958cd9680c1229b485f848d05e7d0bd55ecf0037627238e98074a975f24ad2a"
+          },
+          "mp3": {
+            "path": "audio/pig-chuckle.mp3",
+            "bytes": 3493,
+            "sha256": "c1f0dea65047888f80ea2009f2c7503efa56aef85f54ad3c6925476a309bbcbb"
+          }
+        }
+      }
+    }
+  },
+  "events": {
+    "shot": {
+      "visual": [
+        "muzzle"
+      ],
+      "projectileVariants": [
+        "projectile-gold",
+        "projectile-aqua",
+        "projectile-comet"
+      ],
+      "soundVariants": [
+        "shot-cork",
+        "shot-pew",
+        "shot-bubble"
+      ],
+      "projectileSpeedPxPerSec": 1100
+    },
+    "hit": {
+      "visualVariants": [
+        "hit-dust",
+        "hit-stars",
+        "hit-burst",
+        "hit-pop"
+      ],
+      "soundVariants": [
+        "hit-dust",
+        "hit-stars",
+        "hit-burst",
+        "hit-pop"
+      ],
+      "reaction": "boar-side-hit",
+      "pairByIndex": true
+    },
+    "miss": {
+      "visualVariants": [
+        "miss-dust",
+        "miss-pebbles",
+        "miss-sand"
+      ],
+      "sound": "miss-sand"
+    },
+    "fall": {
+      "visual": "boar-fall",
+      "sound": "fall-squeak-roll",
+      "holdLastFrameMs": 360,
+      "note": "Keep final resting pose until despawn; do not snap to standing."
+    },
+    "voice": {
+      "soundVariants": [
+        "pig-oink",
+        "pig-double",
+        "pig-snort",
+        "pig-hiccup",
+        "pig-chuckle"
+      ]
+    }
+  },
+  "provenance": {
+    "effects": "Original deterministic shapes in build_assets.py",
+    "boar": {
+      "method": "OpenAI image generation, followed by background-removal edit",
+      "source": {
+        "path": "source/boar-poses.webp",
+        "bytes": 347362,
+        "sha256": "3b94c434b5361eab522ca4f196e14a0dd32333a2da8ff81082c00be3f32dba24"
+      },
+      "generationIds": [
+        "80c8a1eb-6de7-438d-a4c4-6086d6c40145",
+        "1c86ce35-143c-49e6-9605-eb00a1177c03"
+      ],
+      "processing": "Mechanical 4x2 crop, uniform resize and foot alignment. No external character asset."
+    },
+    "audio": {
+      "method": "Original additive, FM-like chirp and filtered-noise synthesis",
+      "seed": 7112026,
+      "recordings": false
+    }
+  }
+}

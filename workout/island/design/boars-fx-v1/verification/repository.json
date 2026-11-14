@@ -1,0 +1,38 @@
+{
+  "baseCommit": "19d9cdc5e3718236df5a2fc4d8b8c26c72007575",
+  "branch": "codex/boars-fx-v1",
+  "allowedPrefix": "workout/island/design/boars-fx-v1/",
+  "fullRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4082,
+    "pass": 4017,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "onlyFailure": "tests/workout-royiki.test.mjs: default Playwright Chromium installation absent; test left HTTP server open; its worker was stopped after diagnosis"
+  },
+  "focusedRerun": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/boars-fx-playwright node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "environmentFix": "Temporary browser-path symlinks to installed /usr/bin/chromium; no repository configuration or existing files changed"
+  },
+  "originalFullRunFailureResolvedByFocusedRerun": true,
+  "scope": {
+    "newFilesOnly": true,
+    "existingTrackedFilesChanged": 0,
+    "outsideAllowedPrefix": []
+  },
+  "syntaxChecks": [
+    "node --check preview.js",
+    "node --check verification/verify-preview.mjs"
+  ],
+  "assetValidation": "verification/assets.json",
+  "browserValidation": "verification/browser.json",
+  "reproducibility": "verification/reproducibility.json"
+}
