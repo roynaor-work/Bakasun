@@ -22,3 +22,8 @@
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone{z-index:1}
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-stick-zone .soccer-joystick{transition:opacity 80ms ease}
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] .soccer-actions{z-index:3}
+/* Air v23 (soccer-v23.mjs): "נגיחה" pulses while a high ball is on its way; "הגבהה" takes the switch slot while the child has the ball. */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header]{animation:soccer-air-pulse .55s ease-in-out infinite alternate;box-shadow:0 0 0 3px #ffe37a,0 0 18px 4px #ffe37acc}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=lob]{background:linear-gradient(180deg,#2f7fbf,#1d5a8c);color:#fff}
+@keyframes soccer-air-pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header]{animation:none}}

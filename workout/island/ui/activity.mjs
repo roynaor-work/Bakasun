@@ -1,26 +1,27 @@
-import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-12';
-import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-12';
-import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-12';
-import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-12';
-import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-12';
-import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-12';
-import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-12';
-import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-12';
-import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-12';
-import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-12';
-import {gameContext} from '../minigames/context.mjs?v=island-v2-20261107-12';
-import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-12';
-import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261107-12';
-import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261107-12';
-import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261107-12';
-import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-12';
-import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-12';
-import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261107-12';
-import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261107-12';
-import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-12';
-import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-12';
-import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-12';
-import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-12';
+import {gameEmblem,gameArtwork} from './adventure-emblems.mjs?v=island-v2-20261107-11';
+import {kitIntro,kitIcon,kitStageLabel,kitResultPanel,kitPrimary,kitRating} from './ui-kit.mjs?v=island-v2-20261107-11';
+import {navalUpgradePanel,ensureNavalTheme} from '../minigames/naval-upgrades.mjs?v=island-v2-20261107-11';
+import {hangarAction} from '../activity/hangar.mjs?v=island-v2-20261107-11';
+import {hangarPreview} from './hangar-preview.mjs?v=island-v2-20261107-11';
+import {createSound} from '../minigames/sound.mjs?v=island-v2-20261107-11';
+import {soccerQuietButton} from '../minigames/soccer-v23.mjs?v=island-v2-20261107-11';
+import {gameIcon,upgradeCard} from '../minigames/icons.mjs?v=island-v2-20261107-11';
+import {availableAlienUpgrades} from '../activity/alien-upgrades.mjs?v=island-v2-20261107-11';
+import {createAmmoVisual} from '../minigames/art.mjs?v=island-v2-20261107-11';
+import {equipmentOffer} from '../activity/equipment.mjs?v=island-v2-20261107-11';
+import {gameContext} from '../minigames/context.mjs?v=island-v2-20261107-11';
+import {gameAvailability} from '../activity/availability.mjs?v=island-v2-20261107-11';
+import {GameNavigation,GameShell,gamePresentation} from './game-shell.mjs?v=island-v2-20261107-11';
+import {playerCard,rosterCard} from './soccer-card.mjs?v=island-v2-20261107-11';
+import {offlinePanel} from './offline-panel.mjs?v=island-v2-20261107-11';
+import {rosterCards} from '../activity/soccer-roster.mjs?v=island-v2-20261107-11';
+import {leagueMatch} from '../minigames/soccer-campaign.mjs?v=island-v2-20261107-11';
+import {soccerTeam} from '../activity/soccer-team.mjs?v=island-v2-20261107-11';
+import {hoopsClubPanel,hoopsStartCard} from './hoops-club.mjs?v=island-v2-20261107-11';
+import {watchLoading,RESCUE_GAMES} from './load-rescue.mjs?v=island-v2-20261107-11';
+import {noteManualRestart} from './load-report.mjs?v=island-v2-20261107-11';
+import {clearGameAssets} from './offline.mjs?v=island-v2-20261107-11';
+import {isLowQuality,sampleGameFps} from './device-tier.mjs?v=island-v2-20261107-11';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};
@@ -34,7 +35,9 @@ export class ActivityInterface {
     this.navigation=new GameNavigation({onGameBack:()=>this.shell?.pause('exit'),onMenuBack:()=>this.ui.closeModal(),onMapBack:()=>this.confirmMapExit()});
     let storage;try{storage=window.localStorage;}catch{}
     this.sound=createSound({storage,soccerVoices:data.config.minigames.soccer.sound});this.soundEvents=new AbortController();
-    document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
+    // Soccer v23 (`?soccerTapSound=v22` restores): the action buttons of the match do not chirp; the 580->740 Hz button glide on every steal
+    // and slide press was the "kind of whistle when there is a steal" (verification/soccer-v23). Menus and every other button keep it.
+    document.addEventListener('pointerdown',event=>{this.sound.unlock();if(event.target.closest('button')&&ui.modalRoot.contains(event.target)&&!soccerQuietButton(event.target))this.sound.play('button');},{capture:true,signal:this.soundEvents.signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)this.sound.suspend();},{signal:this.soundEvents.signal});
     ui.activityInterface=this;
     this.openButton=button(t('minigame.open'),'open-games',()=>this.menu());

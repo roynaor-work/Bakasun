@@ -97,7 +97,7 @@ export function compileSoccerTactics(data,c){
  function inBounds(node,x,z,d,out={}){
   x=clamp(x,-hx+boundary,hx-boundary);z=clamp(z,-hz+boundary,hz-boundary);
   if(node.role==='GK'){
-   const inset=c.goalkeeping.areaInset;x=d*clamp(x*d,-hx+inset,-hx+c.pitch.penaltyDepth-inset);z=clamp(z,-c.pitch.penaltyWidth/2+inset,c.pitch.penaltyWidth/2-inset);
+   const inset=c.goalkeeping.areaInset;x=d*clamp(x*d,-hx+inset,-hx+(c.pitch.play||c.pitch).penaltyDepth-inset);z=clamp(z,-(c.pitch.play||c.pitch).penaltyWidth/2+inset,(c.pitch.play||c.pitch).penaltyWidth/2-inset);
   }else if(Number.isFinite(node.maxDepth))x=d*Math.min(x*d,Math.max(-hx+boundary,node.maxDepth));
   out.x=x;out.z=z;return out;
  }
@@ -197,22 +197,22 @@ export function compileSoccerTactics(data,c){
  function attackRuns(team,state,owner,d){
   const b=state.ball,hold=finite(owner.hold);
   let lastLine=-hx;for(const o of team.observed)if(o.player.role!=='keeper')lastLine=Math.max(lastLine,o.x*d);
-  const shoulder=clamp(lastLine-c.players.radius,b.x*d+run(3),hx-c.pitch.penaltyDepth*.55),wideBall=Math.abs(b.z)>=parameters.wideThreshold*width,finalThird=.5+b.x*d/length>=parameters.finalThird;
+  const shoulder=clamp(lastLine-c.players.radius,b.x*d+run(3),hx-(c.pitch.play||c.pitch).penaltyDepth*.55),wideBall=Math.abs(b.z)>=parameters.wideThreshold*width,finalThird=.5+b.x*d/length>=parameters.finalThird;
   let runners=0;
   for(const node of team.nodes){
    if(node.fixed||node.role==='GK'||node.duty==='box-run'||node.duty==='square'||node.duty==='outlet')continue;
    if(node.role===striker){
     const burst=clamp((hold-parameters.thirdManDelay)/.6,0,1)*run(parameters.thirdManRun);
-    node.x=d*Math.min(hx-c.pitch.penaltyDepth*.45,shoulder+burst);
+    node.x=d*Math.min(hx-(c.pitch.play||c.pitch).penaltyDepth*.45,shoulder+burst);
     const away=-(Math.sign(b.z)||(node.player.id%2?1:-1));
-    node.z=(node.z+away*Math.min(c.pitch.goalWidth,Math.abs(b.z)*.5+c.pitch.goalWidth*.5))/2;
+    node.z=(node.z+away*Math.min((c.pitch.play||c.pitch).goalWidth,Math.abs(b.z)*.5+(c.pitch.play||c.pitch).goalWidth*.5))/2;
     node.duty=burst>0?'run':'lead';runners++;
    }else if(node.role===wide){
     const wingSide=Math.sign(node.z)||-1,ballSide=Math.sign(b.z);
-    if(finalThird&&wideBall&&ballSide!==wingSide){node.x=d*(hx-c.pitch.penaltyDepth+run(1.2));node.z=wingSide*(c.pitch.penaltyWidth/2-c.players.radius*2);node.duty='box-run';runners++;}
-    else if(wideBall&&ballSide===wingSide&&node.player.x*d<b.x*d+run(1.5)){node.x=d*Math.min(hx-c.pitch.penaltyDepth*.4,b.x*d+run(parameters.overlapRun));node.z=wingSide*(hz-c.tactics.sideInset-.6);node.duty='overlap';runners++;}
-    else if(finalThird&&!wideBall){node.x=d*(hx-c.pitch.penaltyDepth+run(1.2));node.z=wingSide*(c.pitch.goalWidth/2+1.2);node.duty='box-run';runners++;}
-    else if(!wideBall&&b.x*d>-hx*.2){node.x=d*Math.min(hx-c.pitch.penaltyDepth*.6,Math.max(node.x*d,b.x*d+run(6)));node.z=wingSide*Math.max(Math.abs(node.z)*.7,c.pitch.penaltyWidth/2+.8);node.duty='run';runners++;}
+    if(finalThird&&wideBall&&ballSide!==wingSide){node.x=d*(hx-(c.pitch.play||c.pitch).penaltyDepth+run(1.2));node.z=wingSide*((c.pitch.play||c.pitch).penaltyWidth/2-c.players.radius*2);node.duty='box-run';runners++;}
+    else if(wideBall&&ballSide===wingSide&&node.player.x*d<b.x*d+run(1.5)){node.x=d*Math.min(hx-(c.pitch.play||c.pitch).penaltyDepth*.4,b.x*d+run(parameters.overlapRun));node.z=wingSide*(hz-c.tactics.sideInset-.6);node.duty='overlap';runners++;}
+    else if(finalThird&&!wideBall){node.x=d*(hx-(c.pitch.play||c.pitch).penaltyDepth+run(1.2));node.z=wingSide*((c.pitch.play||c.pitch).goalWidth/2+1.2);node.duty='box-run';runners++;}
+    else if(!wideBall&&b.x*d>-hx*.2){node.x=d*Math.min(hx-(c.pitch.play||c.pitch).penaltyDepth*.6,Math.max(node.x*d,b.x*d+run(6)));node.z=wingSide*Math.max(Math.abs(node.z)*.7,(c.pitch.play||c.pitch).penaltyWidth/2+.8);node.duty='run';runners++;}
    }else if(node.role==='RCM'){
     let nearest=null,range=Infinity;for(const o of team.observed)if(o.player.role!=='keeper'){const at=Math.hypot(o.x-owner.x,o.z-owner.z);if(at<range){range=at;nearest=o;}}
     const side=nearest?Math.sign(owner.z-nearest.z)||(owner.z>0?-1:1):(owner.z>0?-1:1),angle=parameters.supportAngle*Math.PI/180,reach=run(parameters.supportDistance);
@@ -246,7 +246,7 @@ export function compileSoccerTactics(data,c){
     // Rest defence stays goal-side of every rival attacker, yet connected to the
     // play: between the design depth and the full behindBall distance, so a
     // lost ball meets a line rather than a defender thirty metres away.
-    node.maxDepth=b.x*d-Math.min(c.pitch.penaltyDepth,parameters.behindBall*scale);
+    node.maxDepth=b.x*d-Math.min((c.pitch.play||c.pitch).penaltyDepth,parameters.behindBall*scale);
     if(team.team===0){let restLine=Infinity;for(const o of team.observed)if(o.player.role!=='keeper'&&o.player.id!==owner.id)restLine=Math.min(restLine,o.x*d-c.players.radius*2-.6);
     node.x=d*Math.min(restLine,Math.max(node.x*d,b.x*d-parameters.behindBall));}
    }
@@ -257,7 +257,7 @@ export function compileSoccerTactics(data,c){
     if(nearest&&range<Math.min(parameters.pressureDistance,c.ai.passPressure+.6)){const side=Math.sign(owner.z-nearest.z)||(node.player.id%2?1:-1);node.x=owner.x-d*run(parameters.outletBack);node.z=owner.z+side*run(parameters.outletSide);node.duty='outlet';}
    }
    if(ours&&!restart&&(crossCorridor||.5+b.x*d/length>=parameters.finalThird&&Math.abs(b.z/width)>=parameters.wideThreshold)){
-    if(node.role===striker){node.x=d*(hx-c.pitch.penaltySpot);node.z=-Math.sign(b.z)*Math.min(parameters.farPost,c.pitch.goalWidth/2-c.players.radius);node.duty='box-run';}
+    if(node.role===striker){node.x=d*(hx-(c.pitch.play||c.pitch).penaltySpot);node.z=-Math.sign(b.z)*Math.min(parameters.farPost,(c.pitch.play||c.pitch).goalWidth/2-c.players.radius);node.duty='box-run';}
     else if(node.role==='RCM'){node.x=owner.x-d*parameters.cutback;node.z=owner.z*.25;node.duty='square';}
    }
    if(restart&&state.restart.team!==team.team&&node.role!=='GK')node.clearance=state.restart.type==='throwIn'?parameters.throwClearance:state.restart.type==='goalKick'?0:parameters.cornerClearance;
