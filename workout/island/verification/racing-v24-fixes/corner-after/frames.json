@@ -1,0 +1,9627 @@
+{
+ "scenario": "corner",
+ "query": "",
+ "fps": 15,
+ "frames": [
+  {
+   "name": "1-turn",
+   "wall": 1794678359674,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.433,
+   "phase": "racing",
+   "speed": 21.82,
+   "gear": 4,
+   "rpm": 0.847,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.85,
+   "lateral": 1.36,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.994,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null
+  },
+  {
+   "name": "2-brake",
+   "wall": 1794678361818,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.567,
+   "phase": "racing",
+   "speed": 7.24,
+   "gear": 4,
+   "rpm": 0.144,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.74,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.987,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null
+  }
+ ],
+ "events": [
+  {
+   "t": 0.05,
+   "type": "start",
+   "car": "player"
+  },
+  {
+   "t": 1.467,
+   "type": "bump",
+   "car": "player",
+   "intensity": 0.7,
+   "with": "ai-4"
+  },
+  {
+   "t": 1.8,
+   "type": "bump",
+   "car": "player",
+   "intensity": 0.41,
+   "with": "ai-4"
+  },
+  {
+   "t": 2.2,
+   "type": "bump",
+   "car": "ai-4",
+   "intensity": 0.3,
+   "with": "ai-5"
+  },
+  {
+   "t": 2.6,
+   "type": "bump",
+   "car": "ai-7",
+   "intensity": 0.84,
+   "with": "ai-8"
+  },
+  {
+   "t": 3.133,
+   "type": "bump",
+   "car": "ai-7",
+   "intensity": 0.27,
+   "with": "ai-8"
+  },
+  {
+   "t": 3.667,
+   "type": "bump",
+   "car": "player",
+   "intensity": 0.72,
+   "with": "ai-9"
+  },
+  {
+   "t": 4.067,
+   "type": "bump",
+   "car": "player",
+   "intensity": 0.43,
+   "with": "ai-9"
+  },
+  {
+   "t": 6.017,
+   "type": "bump",
+   "car": "ai-6",
+   "intensity": 0.64,
+   "with": "ai-10"
+  }
+ ],
+ "samples": [],
+ "controls": {
+  "gas": {
+   "x": 681,
+   "y": 253,
+   "width": 50,
+   "height": 50
+  },
+  "pad": {
+   "x": 0,
+   "y": 0,
+   "width": 422,
+   "height": 390
+  },
+  "brake": {
+   "x": 678,
+   "y": 314,
+   "width": 59,
+   "height": 59
+  },
+  "brakeLabel": "בלם"
+ },
+ "turn": {
+  "from": 20.02,
+  "to": 21.82,
+  "loss": -1.8,
+  "seconds": 0.53,
+  "maxLateral": 1.36,
+  "offroad": false,
+  "contacts": 0
+ },
+ "brake": {
+  "from": 26.44,
+  "to": 7.24,
+  "decel": 32,
+  "t0": 9.967,
+  "t1": 10.567,
+  "audible": [
+   "generated:61739",
+   "racing-audio-v2/tyre-squeal.ogg",
+   "racing-audio-v4/brake-loop-medium.ogg",
+   "racing-audio-v2/wind-speed.ogg",
+   "racing-audio-v4/brake-loop-light.ogg"
+  ],
+  "levels": [
+   {
+    "t": 9.967,
+    "url": "generated:61739",
+    "v": 0.0191
+   },
+   {
+    "t": 9.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.967,
+    "url": "generated:61739",
+    "v": 0.0338
+   },
+   {
+    "t": 10.033,
+    "url": "generated:61739",
+    "v": 0.0141
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v4/brake-loop-medium.ogg",
+    "v": 0.024
+   },
+   {
+    "t": 10.033,
+    "url": "generated:61739",
+    "v": 0.1079
+   },
+   {
+    "t": 10.1,
+    "url": "generated:61739",
+    "v": 0.013
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0042
+   },
+   {
+    "t": 10.1,
+    "url": "generated:61739",
+    "v": 0.0062
+   },
+   {
+    "t": 10.167,
+    "url": "generated:61739",
+    "v": 0.0125
+   },
+   {
+    "t": 10.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.167,
+    "url": "generated:61739",
+    "v": 0.0052
+   },
+   {
+    "t": 10.233,
+    "url": "generated:61739",
+    "v": 0.012
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0018
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.016
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v4/brake-loop-medium.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.233,
+    "url": "generated:61739",
+    "v": 0.0044
+   },
+   {
+    "t": 10.3,
+    "url": "generated:61739",
+    "v": 0.0113
+   },
+   {
+    "t": 10.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.3,
+    "url": "generated:61739",
+    "v": 0.0033
+   },
+   {
+    "t": 10.367,
+    "url": "generated:61739",
+    "v": 0.0107
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0003
+   },
+   {
+    "t": 10.367,
+    "url": "generated:61739",
+    "v": 0.0025
+   },
+   {
+    "t": 10.433,
+    "url": "generated:61739",
+    "v": 0.0102
+   },
+   {
+    "t": 10.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.433,
+    "url": "generated:61739",
+    "v": 0.0019
+   },
+   {
+    "t": 10.5,
+    "url": "generated:61739",
+    "v": 0.0098
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.0086
+   },
+   {
+    "t": 10.5,
+    "url": "generated:61739",
+    "v": 0.0014
+   },
+   {
+    "t": 10.567,
+    "url": "generated:61739",
+    "v": 0.0093
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.0052
+   },
+   {
+    "t": 10.567,
+    "url": "generated:61739",
+    "v": 0.001
+   },
+   {
+    "t": 10.633,
+    "url": "generated:61739",
+    "v": 0.0088
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.633,
+    "url": "generated:61739",
+    "v": 0.0005
+   }
+  ]
+ },
+ "timeline": [
+  {
+   "wall": 1794678351433,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.183,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.147,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351500,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.25,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.143,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351567,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.317,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.141,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351634,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.383,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.141,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351701,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.45,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351768,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.517,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351835,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.583,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351902,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.65,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678351969,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.717,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352036,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.8,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352103,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.867,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352170,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 0.933,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352237,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 3,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352304,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.067,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352371,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.133,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352438,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.2,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352505,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.267,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352572,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.333,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352639,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.4,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352706,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.467,
+   "phase": "racing",
+   "speed": 0.8,
+   "gear": 1,
+   "rpm": 0.179,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.35,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352773,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.533,
+   "phase": "racing",
+   "speed": 0.46,
+   "gear": 1,
+   "rpm": 0.191,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.4,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352840,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.6,
+   "phase": "racing",
+   "speed": 0.13,
+   "gear": 1,
+   "rpm": 0.179,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.43,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352907,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.667,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.159,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.46,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678352974,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.733,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.149,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.48,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353041,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.8,
+   "phase": "racing",
+   "speed": 0.53,
+   "gear": 1,
+   "rpm": 0.154,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.57,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353108,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.867,
+   "phase": "racing",
+   "speed": 0.2,
+   "gear": 1,
+   "rpm": 0.166,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.67,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353175,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 1.933,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.155,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.73,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353242,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.147,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.78,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 4,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353309,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.067,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.143,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.82,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 5,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353376,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.133,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.141,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.84,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 5,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353443,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.2,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.141,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.86,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 6,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353510,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.267,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.87,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 6,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353577,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.333,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.88,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 6,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353644,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.4,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.89,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 6,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353711,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.467,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.89,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 6,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353778,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.533,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353845,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.6,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353912,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.667,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678353979,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.733,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354046,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.8,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354113,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.867,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354180,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 2.933,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 7,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354247,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 8,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354314,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.067,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 8,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354381,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.133,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 8,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354448,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.2,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 8,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354515,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.267,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354582,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.333,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354649,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.4,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354716,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.467,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354783,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.533,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354850,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.6,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354917,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.667,
+   "phase": "racing",
+   "speed": 1.09,
+   "gear": 1,
+   "rpm": 0.14,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 9,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678354984,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.733,
+   "phase": "racing",
+   "speed": 0.75,
+   "gear": 1,
+   "rpm": 0.187,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.02,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355051,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.8,
+   "phase": "racing",
+   "speed": 0.42,
+   "gear": 1,
+   "rpm": 0.192,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355118,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.867,
+   "phase": "racing",
+   "speed": 0.09,
+   "gear": 1,
+   "rpm": 0.177,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355185,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 3.933,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.158,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.2,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355252,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4,
+   "phase": "racing",
+   "speed": 0,
+   "gear": 1,
+   "rpm": 0.148,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.25,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355319,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.067,
+   "phase": "racing",
+   "speed": 0.47,
+   "gear": 1,
+   "rpm": 0.161,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.36,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355386,
+   "input": {
+    "steer": 0,
+    "throttle": 0,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.15,
+   "phase": "racing",
+   "speed": 0.06,
+   "gear": 1,
+   "rpm": 0.164,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 4.48,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": false,
+   "brake": false
+  },
+  {
+   "wall": 1794678355453,
+   "input": {
+    "steer": -0.88,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.217,
+   "phase": "racing",
+   "speed": 0.77,
+   "gear": 1,
+   "rpm": 0.214,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.58,
+   "lateral": 4.55,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355520,
+   "input": {
+    "steer": -0.88,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.283,
+   "phase": "racing",
+   "speed": 1.43,
+   "gear": 1,
+   "rpm": 0.292,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.78,
+   "lateral": 4.6,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355587,
+   "input": {
+    "steer": -0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.35,
+   "phase": "racing",
+   "speed": 2.03,
+   "gear": 1,
+   "rpm": 0.378,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.82,
+   "lateral": 4.64,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355654,
+   "input": {
+    "steer": -0.73,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.417,
+   "phase": "racing",
+   "speed": 2.58,
+   "gear": 1,
+   "rpm": 0.463,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.76,
+   "lateral": 4.66,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355721,
+   "input": {
+    "steer": -0.67,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.483,
+   "phase": "racing",
+   "speed": 3.08,
+   "gear": 1,
+   "rpm": 0.544,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.7,
+   "lateral": 4.68,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355788,
+   "input": {
+    "steer": -0.67,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.55,
+   "phase": "racing",
+   "speed": 3.55,
+   "gear": 1,
+   "rpm": 0.62,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.68,
+   "lateral": 4.68,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 10,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355855,
+   "input": {
+    "steer": -0.6,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.617,
+   "phase": "racing",
+   "speed": 3.98,
+   "gear": 1,
+   "rpm": 0.69,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.63,
+   "lateral": 4.66,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355922,
+   "input": {
+    "steer": -0.46,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.683,
+   "phase": "racing",
+   "speed": 4.38,
+   "gear": 1,
+   "rpm": 0.756,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.52,
+   "lateral": 4.64,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678355989,
+   "input": {
+    "steer": -0.46,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.75,
+   "phase": "racing",
+   "speed": 4.77,
+   "gear": 1,
+   "rpm": 0.816,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.48,
+   "lateral": 4.6,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356056,
+   "input": {
+    "steer": -0.4,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.817,
+   "phase": "racing",
+   "speed": 5.16,
+   "gear": 1,
+   "rpm": 0.875,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.43,
+   "lateral": 4.54,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356123,
+   "input": {
+    "steer": -0.34,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.883,
+   "phase": "racing",
+   "speed": 5.48,
+   "gear": 2,
+   "rpm": 0.636,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.37,
+   "lateral": 4.47,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356190,
+   "input": {
+    "steer": -0.22,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 4.95,
+   "phase": "racing",
+   "speed": 5.51,
+   "gear": 2,
+   "rpm": 0.263,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.27,
+   "lateral": 4.39,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356257,
+   "input": {
+    "steer": -0.22,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.017,
+   "phase": "racing",
+   "speed": 5.55,
+   "gear": 2,
+   "rpm": 0.217,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.24,
+   "lateral": 4.3,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356324,
+   "input": {
+    "steer": -0.17,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.083,
+   "phase": "racing",
+   "speed": 6.17,
+   "gear": 2,
+   "rpm": 0.235,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.2,
+   "lateral": 4.2,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356391,
+   "input": {
+    "steer": -0.09,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.15,
+   "phase": "racing",
+   "speed": 6.75,
+   "gear": 2,
+   "rpm": 0.289,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.13,
+   "lateral": 4.09,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 1,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356458,
+   "input": {
+    "steer": -0.05,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.217,
+   "phase": "racing",
+   "speed": 7.28,
+   "gear": 2,
+   "rpm": 0.355,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.07,
+   "lateral": 3.97,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356525,
+   "input": {
+    "steer": -0.05,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.283,
+   "phase": "racing",
+   "speed": 7.77,
+   "gear": 2,
+   "rpm": 0.423,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.06,
+   "lateral": 3.83,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356592,
+   "input": {
+    "steer": -0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.35,
+   "phase": "racing",
+   "speed": 8.24,
+   "gear": 2,
+   "rpm": 0.49,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.04,
+   "lateral": 3.7,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356659,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.417,
+   "phase": "racing",
+   "speed": 8.67,
+   "gear": 2,
+   "rpm": 0.555,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.01,
+   "lateral": 3.56,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356726,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.483,
+   "phase": "racing",
+   "speed": 9.07,
+   "gear": 2,
+   "rpm": 0.615,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.42,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356793,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.55,
+   "phase": "racing",
+   "speed": 9.45,
+   "gear": 2,
+   "rpm": 0.672,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.28,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356860,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.617,
+   "phase": "racing",
+   "speed": 9.8,
+   "gear": 2,
+   "rpm": 0.725,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.15,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356927,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.683,
+   "phase": "racing",
+   "speed": 10.13,
+   "gear": 2,
+   "rpm": 0.775,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 3.01,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678356994,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.75,
+   "phase": "racing",
+   "speed": 10.45,
+   "gear": 2,
+   "rpm": 0.822,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 2.87,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357061,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.817,
+   "phase": "racing",
+   "speed": 10.78,
+   "gear": 2,
+   "rpm": 0.867,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 2.74,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357128,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.883,
+   "phase": "racing",
+   "speed": 11.12,
+   "gear": 2,
+   "rpm": 0.913,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 2.61,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357195,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 5.95,
+   "phase": "racing",
+   "speed": 11.38,
+   "gear": 3,
+   "rpm": 0.658,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.48,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357262,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.017,
+   "phase": "racing",
+   "speed": 11.41,
+   "gear": 3,
+   "rpm": 0.274,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.35,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357329,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.083,
+   "phase": "racing",
+   "speed": 11.44,
+   "gear": 3,
+   "rpm": 0.226,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.24,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357396,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.15,
+   "phase": "racing",
+   "speed": 11.95,
+   "gear": 3,
+   "rpm": 0.24,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.12,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.999,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357463,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.217,
+   "phase": "racing",
+   "speed": 12.43,
+   "gear": 3,
+   "rpm": 0.284,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.01,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357530,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.283,
+   "phase": "racing",
+   "speed": 12.88,
+   "gear": 3,
+   "rpm": 0.339,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.9,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357597,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.35,
+   "phase": "racing",
+   "speed": 13.31,
+   "gear": 3,
+   "rpm": 0.397,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.8,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357664,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.417,
+   "phase": "racing",
+   "speed": 13.7,
+   "gear": 3,
+   "rpm": 0.454,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.69,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357731,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.483,
+   "phase": "racing",
+   "speed": 14.08,
+   "gear": 3,
+   "rpm": 0.509,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.59,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357798,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.55,
+   "phase": "racing",
+   "speed": 14.43,
+   "gear": 3,
+   "rpm": 0.561,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.5,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357865,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.617,
+   "phase": "racing",
+   "speed": 14.76,
+   "gear": 3,
+   "rpm": 0.61,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.41,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357932,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.683,
+   "phase": "racing",
+   "speed": 15.07,
+   "gear": 3,
+   "rpm": 0.657,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.32,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678357999,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.75,
+   "phase": "racing",
+   "speed": 15.37,
+   "gear": 3,
+   "rpm": 0.701,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.24,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358066,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.817,
+   "phase": "racing",
+   "speed": 15.65,
+   "gear": 3,
+   "rpm": 0.743,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.998,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358133,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.883,
+   "phase": "racing",
+   "speed": 15.92,
+   "gear": 3,
+   "rpm": 0.783,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.08,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358200,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 6.95,
+   "phase": "racing",
+   "speed": 16.18,
+   "gear": 3,
+   "rpm": 0.82,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 1.01,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358267,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.017,
+   "phase": "racing",
+   "speed": 16.44,
+   "gear": 3,
+   "rpm": 0.857,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 0.94,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358334,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.083,
+   "phase": "racing",
+   "speed": 16.71,
+   "gear": 3,
+   "rpm": 0.893,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.88,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358401,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.15,
+   "phase": "racing",
+   "speed": 16.98,
+   "gear": 3,
+   "rpm": 0.93,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.82,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358468,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.217,
+   "phase": "racing",
+   "speed": 17.18,
+   "gear": 4,
+   "rpm": 0.663,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.76,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358535,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.283,
+   "phase": "racing",
+   "speed": 17.21,
+   "gear": 4,
+   "rpm": 0.273,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.71,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358602,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.35,
+   "phase": "racing",
+   "speed": 17.23,
+   "gear": 4,
+   "rpm": 0.223,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.66,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.997,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 11,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358669,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.417,
+   "phase": "racing",
+   "speed": 17.65,
+   "gear": 4,
+   "rpm": 0.234,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.62,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358736,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.5,
+   "phase": "racing",
+   "speed": 18.13,
+   "gear": 4,
+   "rpm": 0.283,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.56,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358803,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.567,
+   "phase": "racing",
+   "speed": 18.49,
+   "gear": 4,
+   "rpm": 0.331,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.52,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358870,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.633,
+   "phase": "racing",
+   "speed": 18.83,
+   "gear": 4,
+   "rpm": 0.381,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 0.48,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678358937,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.7,
+   "phase": "racing",
+   "speed": 19.15,
+   "gear": 4,
+   "rpm": 0.431,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 0.45,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359004,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.767,
+   "phase": "racing",
+   "speed": 19.46,
+   "gear": 4,
+   "rpm": 0.478,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0,
+   "lateral": 0.41,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359071,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.833,
+   "phase": "racing",
+   "speed": 19.74,
+   "gear": 4,
+   "rpm": 0.524,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.38,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.996,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359138,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.9,
+   "phase": "racing",
+   "speed": 20.02,
+   "gear": 4,
+   "rpm": 0.567,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.35,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359138,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.9,
+   "phase": "racing",
+   "speed": 20.02,
+   "gear": 4,
+   "rpm": 0.567,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.35,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359205,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 7.967,
+   "phase": "racing",
+   "speed": 20.28,
+   "gear": 4,
+   "rpm": 0.608,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.32,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359272,
+   "input": {
+    "steer": 0.01,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.033,
+   "phase": "racing",
+   "speed": 20.53,
+   "gear": 4,
+   "rpm": 0.647,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.29,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359339,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.1,
+   "phase": "racing",
+   "speed": 20.77,
+   "gear": 4,
+   "rpm": 0.685,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 0.26,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359406,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.167,
+   "phase": "racing",
+   "speed": 21,
+   "gear": 4,
+   "rpm": 0.72,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.56,
+   "lateral": 0.27,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359473,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.233,
+   "phase": "racing",
+   "speed": 21.21,
+   "gear": 4,
+   "rpm": 0.754,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.75,
+   "lateral": 0.37,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.995,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359540,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.3,
+   "phase": "racing",
+   "speed": 21.42,
+   "gear": 4,
+   "rpm": 0.786,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.82,
+   "lateral": 0.58,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.994,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359607,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.367,
+   "phase": "racing",
+   "speed": 21.62,
+   "gear": 4,
+   "rpm": 0.817,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.84,
+   "lateral": 0.91,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.994,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359674,
+   "input": {
+    "steer": 0.85,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.433,
+   "phase": "racing",
+   "speed": 21.82,
+   "gear": 4,
+   "rpm": 0.847,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.85,
+   "lateral": 1.36,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.994,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359741,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.5,
+   "phase": "racing",
+   "speed": 22.02,
+   "gear": 4,
+   "rpm": 0.877,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.29,
+   "lateral": 1.88,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.994,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359808,
+   "input": {
+    "steer": -0.79,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.567,
+   "phase": "racing",
+   "speed": 22.23,
+   "gear": 4,
+   "rpm": 0.907,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.42,
+   "lateral": 2.41,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.993,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359875,
+   "input": {
+    "steer": -0.79,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.633,
+   "phase": "racing",
+   "speed": 22.43,
+   "gear": 4,
+   "rpm": 0.936,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.66,
+   "lateral": 2.88,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.993,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678359942,
+   "input": {
+    "steer": -0.72,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.7,
+   "phase": "racing",
+   "speed": 22.59,
+   "gear": 5,
+   "rpm": 0.66,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.7,
+   "lateral": 3.25,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.993,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360009,
+   "input": {
+    "steer": -0.63,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.767,
+   "phase": "racing",
+   "speed": 22.61,
+   "gear": 5,
+   "rpm": 0.264,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.66,
+   "lateral": 3.51,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.993,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360076,
+   "input": {
+    "steer": -0.63,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.833,
+   "phase": "racing",
+   "speed": 22.63,
+   "gear": 5,
+   "rpm": 0.214,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.64,
+   "lateral": 3.68,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.992,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360143,
+   "input": {
+    "steer": -0.43,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.9,
+   "phase": "racing",
+   "speed": 22.94,
+   "gear": 5,
+   "rpm": 0.222,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.51,
+   "lateral": 3.75,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.992,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360210,
+   "input": {
+    "steer": -0.34,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 8.967,
+   "phase": "racing",
+   "speed": 23.24,
+   "gear": 5,
+   "rpm": 0.253,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.4,
+   "lateral": 3.74,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.992,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360277,
+   "input": {
+    "steer": -0.34,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.033,
+   "phase": "racing",
+   "speed": 23.53,
+   "gear": 5,
+   "rpm": 0.292,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.36,
+   "lateral": 3.67,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.992,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360344,
+   "input": {
+    "steer": -0.26,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.1,
+   "phase": "racing",
+   "speed": 23.8,
+   "gear": 5,
+   "rpm": 0.333,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.29,
+   "lateral": 3.54,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.991,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360411,
+   "input": {
+    "steer": -0.11,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.167,
+   "phase": "racing",
+   "speed": 24.06,
+   "gear": 5,
+   "rpm": 0.375,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.17,
+   "lateral": 3.36,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.991,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360478,
+   "input": {
+    "steer": -0.05,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.233,
+   "phase": "racing",
+   "speed": 24.31,
+   "gear": 5,
+   "rpm": 0.416,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.1,
+   "lateral": 3.16,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.991,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360545,
+   "input": {
+    "steer": -0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.3,
+   "phase": "racing",
+   "speed": 24.54,
+   "gear": 5,
+   "rpm": 0.455,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.05,
+   "lateral": 2.95,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.991,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360612,
+   "input": {
+    "steer": -0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.367,
+   "phase": "racing",
+   "speed": 24.77,
+   "gear": 5,
+   "rpm": 0.493,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.03,
+   "lateral": 2.74,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.991,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360679,
+   "input": {
+    "steer": 0,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.433,
+   "phase": "racing",
+   "speed": 24.98,
+   "gear": 5,
+   "rpm": 0.529,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": -0.03,
+   "lateral": 2.53,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.99,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360746,
+   "input": {
+    "steer": 0.02,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.5,
+   "phase": "racing",
+   "speed": 25.19,
+   "gear": 5,
+   "rpm": 0.563,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.01,
+   "lateral": 2.33,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.99,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360813,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.567,
+   "phase": "racing",
+   "speed": 25.39,
+   "gear": 5,
+   "rpm": 0.596,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.02,
+   "lateral": 2.13,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.99,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360880,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.633,
+   "phase": "racing",
+   "speed": 25.58,
+   "gear": 5,
+   "rpm": 0.627,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.95,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.99,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678360947,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.7,
+   "phase": "racing",
+   "speed": 25.76,
+   "gear": 5,
+   "rpm": 0.658,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.78,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.99,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361014,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.767,
+   "phase": "racing",
+   "speed": 25.94,
+   "gear": 5,
+   "rpm": 0.687,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.62,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361081,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.833,
+   "phase": "racing",
+   "speed": 26.11,
+   "gear": 5,
+   "rpm": 0.715,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.47,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361148,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.9,
+   "phase": "racing",
+   "speed": 26.27,
+   "gear": 5,
+   "rpm": 0.742,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.33,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361215,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.967,
+   "phase": "racing",
+   "speed": 26.44,
+   "gear": 5,
+   "rpm": 0.769,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.21,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361215,
+   "input": {
+    "steer": 0.03,
+    "throttle": 1,
+    "brake": false,
+    "drift": false
+   },
+   "t": 9.967,
+   "phase": "racing",
+   "speed": 26.44,
+   "gear": 5,
+   "rpm": 0.769,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.21,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": true,
+   "brake": false
+  },
+  {
+   "wall": 1794678361282,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.033,
+   "phase": "racing",
+   "speed": 24.3,
+   "gear": 5,
+   "rpm": 0.58,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.1,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.989,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361349,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.1,
+   "phase": "racing",
+   "speed": 22.17,
+   "gear": 5,
+   "rpm": 0.381,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 1.01,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.988,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361416,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.167,
+   "phase": "racing",
+   "speed": 20.04,
+   "gear": 4,
+   "rpm": 0.359,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.94,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.988,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361483,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.233,
+   "phase": "racing",
+   "speed": 17.9,
+   "gear": 4,
+   "rpm": 0.339,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.88,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.988,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361550,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.3,
+   "phase": "racing",
+   "speed": 15.77,
+   "gear": 4,
+   "rpm": 0.239,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.83,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.988,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361617,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.367,
+   "phase": "racing",
+   "speed": 13.64,
+   "gear": 4,
+   "rpm": 0.185,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.8,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.988,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361684,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.433,
+   "phase": "racing",
+   "speed": 11.5,
+   "gear": 4,
+   "rpm": 0.16,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.77,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.987,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361751,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.5,
+   "phase": "racing",
+   "speed": 9.37,
+   "gear": 4,
+   "rpm": 0.149,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.76,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.987,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  },
+  {
+   "wall": 1794678361818,
+   "input": {
+    "steer": 0.03,
+    "throttle": 0,
+    "brake": true,
+    "drift": true
+   },
+   "t": 10.567,
+   "phase": "racing",
+   "speed": 7.24,
+   "gear": 4,
+   "rpm": 0.144,
+   "boosting": false,
+   "boostTime": 0,
+   "drifting": false,
+   "steer": 0.03,
+   "lateral": 0.74,
+   "crashT": 0,
+   "air": 0,
+   "offroad": false,
+   "lap": 1,
+   "checkpoints": 0,
+   "tyre": 0.987,
+   "pit": null,
+   "hidden": false,
+   "drop": 0,
+   "rank": 12,
+   "rollZ": null,
+   "gas": false,
+   "brake": true
+  }
+ ],
+ "audio": {
+  "shots": [
+   {
+    "t": 1.467,
+    "url": "racing-audio-v4/car-bump-hard.ogg",
+    "rate": 1
+   },
+   {
+    "t": 1.467,
+    "url": "generated:61739",
+    "rate": 0.7
+   },
+   {
+    "t": 1.8,
+    "url": "racing-audio-v4/car-bump-soft.ogg",
+    "rate": 1
+   },
+   {
+    "t": 1.8,
+    "url": "generated:61739",
+    "rate": 0.7
+   },
+   {
+    "t": 3.667,
+    "url": "racing-audio-v4/car-bump-hard.ogg",
+    "rate": 1
+   },
+   {
+    "t": 3.667,
+    "url": "generated:61739",
+    "rate": 0.7
+   },
+   {
+    "t": 4.067,
+    "url": "racing-audio-v4/car-bump-soft.ogg",
+    "rate": 1
+   },
+   {
+    "t": 4.067,
+    "url": "generated:61739",
+    "rate": 0.7
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v2/exhaust-pop-1.ogg",
+    "rate": 1
+   }
+  ],
+  "levels": [
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": -1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": -1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.05,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 0.05,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.05,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.05,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.117,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 0.117,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.117,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.117,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.183,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.183,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.183,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.183,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.25,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.25,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.25,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.25,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.317,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.317,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.317,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.317,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.383,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.383,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.383,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.383,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.45,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.45,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.45,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.45,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.517,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.517,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.517,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.517,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.583,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.583,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.583,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.583,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.65,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.65,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.65,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.65,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.717,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.717,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.717,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.717,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.8,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.8,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.867,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.867,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 0.933,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 0.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 0.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 0.933,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.067,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.067,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.133,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.133,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.2,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.2,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.267,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.267,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.333,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.333,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.4,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.4,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.467,
+    "url": "generated:61739",
+    "v": 0.0077
+   },
+   {
+    "t": 1.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.467,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.533,
+    "url": "generated:61739",
+    "v": 0.0077
+   },
+   {
+    "t": 1.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.533,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.6,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 1.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.6,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.667,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 1.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.667,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.733,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 1.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.733,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.8,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 1.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.8,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.867,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 1.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.867,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 1.933,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 1.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 1.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 1.933,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.067,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.067,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.133,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.133,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.2,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.2,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.267,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.267,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.333,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.333,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.4,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.4,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.467,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.467,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.533,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.533,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.6,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.6,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.667,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.667,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.733,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.733,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.8,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.8,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.867,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.867,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 2.933,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 2.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 2.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 2.933,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.067,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.067,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.133,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.133,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.133,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.2,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.2,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.2,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.267,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.267,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.267,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.333,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.333,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.333,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.4,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.4,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.467,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.467,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.467,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.533,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.533,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.533,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.6,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 3.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.6,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.6,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.667,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 3.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.667,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.667,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.733,
+    "url": "generated:61739",
+    "v": 0.0077
+   },
+   {
+    "t": 3.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.733,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.733,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.8,
+    "url": "generated:61739",
+    "v": 0.0077
+   },
+   {
+    "t": 3.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.8,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.8,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.867,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 3.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.867,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.867,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 3.933,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 3.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 3.933,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 3.933,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 4,
+    "url": "generated:61739",
+    "v": 0.0074
+   },
+   {
+    "t": 4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 4.067,
+    "url": "generated:61739",
+    "v": 0.0076
+   },
+   {
+    "t": 4.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.067,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.067,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 4.15,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 4.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.15,
+    "url": "generated:61739",
+    "v": 0
+   },
+   {
+    "t": 4.217,
+    "url": "generated:61739",
+    "v": 0.0123
+   },
+   {
+    "t": 4.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.217,
+    "url": "generated:61739",
+    "v": 0.0075
+   },
+   {
+    "t": 4.283,
+    "url": "generated:61739",
+    "v": 0.0127
+   },
+   {
+    "t": 4.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.417,
+    "url": "generated:61739",
+    "v": 0.0163
+   },
+   {
+    "t": 4.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.55,
+    "url": "generated:61739",
+    "v": 0.0218
+   },
+   {
+    "t": 4.617,
+    "url": "generated:61739",
+    "v": 0.0144
+   },
+   {
+    "t": 4.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.617,
+    "url": "generated:61739",
+    "v": 0.0243
+   },
+   {
+    "t": 4.683,
+    "url": "generated:61739",
+    "v": 0.0146
+   },
+   {
+    "t": 4.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.683,
+    "url": "generated:61739",
+    "v": 0.0266
+   },
+   {
+    "t": 4.75,
+    "url": "generated:61739",
+    "v": 0.0149
+   },
+   {
+    "t": 4.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.75,
+    "url": "generated:61739",
+    "v": 0.0288
+   },
+   {
+    "t": 4.817,
+    "url": "generated:61739",
+    "v": 0.0152
+   },
+   {
+    "t": 4.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.817,
+    "url": "generated:61739",
+    "v": 0.0309
+   },
+   {
+    "t": 4.883,
+    "url": "generated:61739",
+    "v": 0.0128
+   },
+   {
+    "t": 4.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.883,
+    "url": "generated:61739",
+    "v": 0.0226
+   },
+   {
+    "t": 4.95,
+    "url": "generated:61739",
+    "v": 0.0134
+   },
+   {
+    "t": 4.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 4.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 4.95,
+    "url": "generated:61739",
+    "v": 0.0095
+   },
+   {
+    "t": 5.017,
+    "url": "generated:61739",
+    "v": 0.0133
+   },
+   {
+    "t": 5.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.017,
+    "url": "generated:61739",
+    "v": 0.0079
+   },
+   {
+    "t": 5.083,
+    "url": "generated:61739",
+    "v": 0.0134
+   },
+   {
+    "t": 5.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.083,
+    "url": "generated:61739",
+    "v": 0.0086
+   },
+   {
+    "t": 5.15,
+    "url": "generated:61739",
+    "v": 0.0137
+   },
+   {
+    "t": 5.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.35,
+    "url": "generated:61739",
+    "v": 0.0178
+   },
+   {
+    "t": 5.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.483,
+    "url": "generated:61739",
+    "v": 0.0223
+   },
+   {
+    "t": 5.55,
+    "url": "generated:61739",
+    "v": 0.0154
+   },
+   {
+    "t": 5.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.55,
+    "url": "generated:61739",
+    "v": 0.0244
+   },
+   {
+    "t": 5.617,
+    "url": "generated:61739",
+    "v": 0.0156
+   },
+   {
+    "t": 5.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.617,
+    "url": "generated:61739",
+    "v": 0.0263
+   },
+   {
+    "t": 5.683,
+    "url": "generated:61739",
+    "v": 0.0158
+   },
+   {
+    "t": 5.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.683,
+    "url": "generated:61739",
+    "v": 0.0281
+   },
+   {
+    "t": 5.75,
+    "url": "generated:61739",
+    "v": 0.0161
+   },
+   {
+    "t": 5.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.75,
+    "url": "generated:61739",
+    "v": 0.0298
+   },
+   {
+    "t": 5.817,
+    "url": "generated:61739",
+    "v": 0.0163
+   },
+   {
+    "t": 5.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.817,
+    "url": "generated:61739",
+    "v": 0.0315
+   },
+   {
+    "t": 5.883,
+    "url": "generated:61739",
+    "v": 0.0165
+   },
+   {
+    "t": 5.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.883,
+    "url": "generated:61739",
+    "v": 0.0332
+   },
+   {
+    "t": 5.95,
+    "url": "generated:61739",
+    "v": 0.0139
+   },
+   {
+    "t": 5.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 5.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 5.95,
+    "url": "generated:61739",
+    "v": 0.0243
+   },
+   {
+    "t": 6.017,
+    "url": "generated:61739",
+    "v": 0.0146
+   },
+   {
+    "t": 6.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.017,
+    "url": "generated:61739",
+    "v": 0.0109
+   },
+   {
+    "t": 6.083,
+    "url": "generated:61739",
+    "v": 0.0145
+   },
+   {
+    "t": 6.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.083,
+    "url": "generated:61739",
+    "v": 0.0092
+   },
+   {
+    "t": 6.15,
+    "url": "generated:61739",
+    "v": 0.0146
+   },
+   {
+    "t": 6.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.15,
+    "url": "generated:61739",
+    "v": 0.0098
+   },
+   {
+    "t": 6.217,
+    "url": "generated:61739",
+    "v": 0.0148
+   },
+   {
+    "t": 6.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.483,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.483,
+    "url": "generated:61739",
+    "v": 0.0198
+   },
+   {
+    "t": 6.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.55,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.617,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.617,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0006
+   },
+   {
+    "t": 6.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.683,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.683,
+    "url": "generated:61739",
+    "v": 0.0253
+   },
+   {
+    "t": 6.75,
+    "url": "generated:61739",
+    "v": 0.0167
+   },
+   {
+    "t": 6.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.75,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.75,
+    "url": "generated:61739",
+    "v": 0.0269
+   },
+   {
+    "t": 6.817,
+    "url": "generated:61739",
+    "v": 0.0169
+   },
+   {
+    "t": 6.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.817,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.817,
+    "url": "generated:61739",
+    "v": 0.0284
+   },
+   {
+    "t": 6.883,
+    "url": "generated:61739",
+    "v": 0.017
+   },
+   {
+    "t": 6.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.883,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.883,
+    "url": "generated:61739",
+    "v": 0.0299
+   },
+   {
+    "t": 6.95,
+    "url": "generated:61739",
+    "v": 0.0172
+   },
+   {
+    "t": 6.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 6.95,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 6.95,
+    "url": "generated:61739",
+    "v": 0.0313
+   },
+   {
+    "t": 7.017,
+    "url": "generated:61739",
+    "v": 0.0174
+   },
+   {
+    "t": 7.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.017,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.017,
+    "url": "generated:61739",
+    "v": 0.0327
+   },
+   {
+    "t": 7.083,
+    "url": "generated:61739",
+    "v": 0.0175
+   },
+   {
+    "t": 7.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.083,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.083,
+    "url": "generated:61739",
+    "v": 0.034
+   },
+   {
+    "t": 7.15,
+    "url": "generated:61739",
+    "v": 0.0177
+   },
+   {
+    "t": 7.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.15,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.15,
+    "url": "generated:61739",
+    "v": 0.0354
+   },
+   {
+    "t": 7.217,
+    "url": "generated:61739",
+    "v": 0.0149
+   },
+   {
+    "t": 7.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.217,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.217,
+    "url": "generated:61739",
+    "v": 0.0261
+   },
+   {
+    "t": 7.283,
+    "url": "generated:61739",
+    "v": 0.0158
+   },
+   {
+    "t": 7.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.283,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.35,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.35,
+    "url": "generated:61739",
+    "v": 0.0108
+   },
+   {
+    "t": 7.417,
+    "url": "generated:61739",
+    "v": 0.0157
+   },
+   {
+    "t": 7.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.417,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.417,
+    "url": "generated:61739",
+    "v": 0.0113
+   },
+   {
+    "t": 7.5,
+    "url": "generated:61739",
+    "v": 0.016
+   },
+   {
+    "t": 7.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.767,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0026
+   },
+   {
+    "t": 7.767,
+    "url": "generated:61739",
+    "v": 0.0205
+   },
+   {
+    "t": 7.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 7.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 7.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.033,
+    "url": "generated:61739",
+    "v": 0.0268
+   },
+   {
+    "t": 8.1,
+    "url": "generated:61739",
+    "v": 0.0177
+   },
+   {
+    "t": 8.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.1,
+    "url": "generated:61739",
+    "v": 0.0282
+   },
+   {
+    "t": 8.167,
+    "url": "generated:61739",
+    "v": 0.0179
+   },
+   {
+    "t": 8.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.167,
+    "url": "generated:61739",
+    "v": 0.0296
+   },
+   {
+    "t": 8.233,
+    "url": "generated:61739",
+    "v": 0.018
+   },
+   {
+    "t": 8.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.233,
+    "url": "generated:61739",
+    "v": 0.0309
+   },
+   {
+    "t": 8.3,
+    "url": "generated:61739",
+    "v": 0.0181
+   },
+   {
+    "t": 8.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.3,
+    "url": "generated:61739",
+    "v": 0.0321
+   },
+   {
+    "t": 8.367,
+    "url": "generated:61739",
+    "v": 0.0183
+   },
+   {
+    "t": 8.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.367,
+    "url": "generated:61739",
+    "v": 0.0332
+   },
+   {
+    "t": 8.433,
+    "url": "generated:61739",
+    "v": 0.0184
+   },
+   {
+    "t": 8.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.433,
+    "url": "generated:61739",
+    "v": 0.0344
+   },
+   {
+    "t": 8.5,
+    "url": "generated:61739",
+    "v": 0.0185
+   },
+   {
+    "t": 8.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.5,
+    "url": "generated:61739",
+    "v": 0.0355
+   },
+   {
+    "t": 8.567,
+    "url": "generated:61739",
+    "v": 0.0187
+   },
+   {
+    "t": 8.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.567,
+    "url": "generated:61739",
+    "v": 0.0366
+   },
+   {
+    "t": 8.633,
+    "url": "generated:61739",
+    "v": 0.0188
+   },
+   {
+    "t": 8.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.633,
+    "url": "generated:61739",
+    "v": 0.0378
+   },
+   {
+    "t": 8.7,
+    "url": "generated:61739",
+    "v": 0.0158
+   },
+   {
+    "t": 8.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.7,
+    "url": "generated:61739",
+    "v": 0.0282
+   },
+   {
+    "t": 8.767,
+    "url": "generated:61739",
+    "v": 0.0168
+   },
+   {
+    "t": 8.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.833,
+    "url": "generated:61739",
+    "v": 0.0126
+   },
+   {
+    "t": 8.9,
+    "url": "generated:61739",
+    "v": 0.0168
+   },
+   {
+    "t": 8.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 8.9,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0046
+   },
+   {
+    "t": 8.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 8.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.3,
+    "url": "generated:61739",
+    "v": 0.0219
+   },
+   {
+    "t": 9.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.633,
+    "url": "generated:61739",
+    "v": 0.0284
+   },
+   {
+    "t": 9.7,
+    "url": "generated:61739",
+    "v": 0.0186
+   },
+   {
+    "t": 9.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.7,
+    "url": "generated:61739",
+    "v": 0.0296
+   },
+   {
+    "t": 9.767,
+    "url": "generated:61739",
+    "v": 0.0187
+   },
+   {
+    "t": 9.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.767,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0067
+   },
+   {
+    "t": 9.767,
+    "url": "generated:61739",
+    "v": 0.0307
+   },
+   {
+    "t": 9.833,
+    "url": "generated:61739",
+    "v": 0.0189
+   },
+   {
+    "t": 9.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.833,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.833,
+    "url": "generated:61739",
+    "v": 0.0318
+   },
+   {
+    "t": 9.9,
+    "url": "generated:61739",
+    "v": 0.019
+   },
+   {
+    "t": 9.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.9,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.9,
+    "url": "generated:61739",
+    "v": 0.0328
+   },
+   {
+    "t": 9.967,
+    "url": "generated:61739",
+    "v": 0.0191
+   },
+   {
+    "t": 9.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 9.967,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 9.967,
+    "url": "generated:61739",
+    "v": 0.0338
+   },
+   {
+    "t": 10.033,
+    "url": "generated:61739",
+    "v": 0.0141
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.033,
+    "url": "racing-audio-v4/brake-loop-medium.ogg",
+    "v": 0.024
+   },
+   {
+    "t": 10.033,
+    "url": "generated:61739",
+    "v": 0.1079
+   },
+   {
+    "t": 10.1,
+    "url": "generated:61739",
+    "v": 0.013
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.1,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0042
+   },
+   {
+    "t": 10.1,
+    "url": "generated:61739",
+    "v": 0.0062
+   },
+   {
+    "t": 10.167,
+    "url": "generated:61739",
+    "v": 0.0125
+   },
+   {
+    "t": 10.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.167,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.167,
+    "url": "generated:61739",
+    "v": 0.0052
+   },
+   {
+    "t": 10.233,
+    "url": "generated:61739",
+    "v": 0.012
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0018
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.016
+   },
+   {
+    "t": 10.233,
+    "url": "racing-audio-v4/brake-loop-medium.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.233,
+    "url": "generated:61739",
+    "v": 0.0044
+   },
+   {
+    "t": 10.3,
+    "url": "generated:61739",
+    "v": 0.0113
+   },
+   {
+    "t": 10.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.3,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.3,
+    "url": "generated:61739",
+    "v": 0.0033
+   },
+   {
+    "t": 10.367,
+    "url": "generated:61739",
+    "v": 0.0107
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.367,
+    "url": "racing-audio-v2/wind-speed.ogg",
+    "v": 0.0003
+   },
+   {
+    "t": 10.367,
+    "url": "generated:61739",
+    "v": 0.0025
+   },
+   {
+    "t": 10.433,
+    "url": "generated:61739",
+    "v": 0.0102
+   },
+   {
+    "t": 10.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.433,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.433,
+    "url": "generated:61739",
+    "v": 0.0019
+   },
+   {
+    "t": 10.5,
+    "url": "generated:61739",
+    "v": 0.0098
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.5,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.0086
+   },
+   {
+    "t": 10.5,
+    "url": "generated:61739",
+    "v": 0.0014
+   },
+   {
+    "t": 10.567,
+    "url": "generated:61739",
+    "v": 0.0093
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.567,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0.0052
+   },
+   {
+    "t": 10.567,
+    "url": "generated:61739",
+    "v": 0.001
+   },
+   {
+    "t": 10.633,
+    "url": "generated:61739",
+    "v": 0.0088
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.633,
+    "url": "racing-audio-v4/brake-loop-light.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.633,
+    "url": "generated:61739",
+    "v": 0.0005
+   },
+   {
+    "t": 10.7,
+    "url": "generated:61739",
+    "v": 0.0087
+   },
+   {
+    "t": 10.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.7,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.7,
+    "url": "generated:61739",
+    "v": 0.0004
+   },
+   {
+    "t": 10.767,
+    "url": "generated:61739",
+    "v": 0.0087
+   },
+   {
+    "t": 10.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 1
+   },
+   {
+    "t": 10.767,
+    "url": "racing-audio-v2/tyre-squeal.ogg",
+    "v": 0
+   },
+   {
+    "t": 10.767,
+    "url": "generated:61739",
+    "v": 0.0004
+   }
+  ],
+  "osc": [
+   {
+    "t": 4.883,
+    "type": "sine",
+    "f": 440
+   },
+   {
+    "t": 5.95,
+    "type": "sine",
+    "f": 440
+   },
+   {
+    "t": 7.217,
+    "type": "sine",
+    "f": 440
+   },
+   {
+    "t": 8.7,
+    "type": "sine",
+    "f": 440
+   }
+  ]
+ },
+ "wallSeconds": 463,
+ "summary": {
+  "driftBoosts": 0,
+  "boostSeconds": 0,
+  "blowoffs": 0,
+  "backfires": 1,
+  "shiftShots": 0,
+  "thumps": 4,
+  "gearChanges": 5,
+  "crashes": 0,
+  "recoveries": 0
+ }
+}
