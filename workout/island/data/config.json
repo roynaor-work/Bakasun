@@ -12707,6 +12707,7 @@
     "lipKick": 2.6,
     "pipeReturnSpeed": 6,
     "aiWallCost": 1.2,
+    "v241": {"curveAssist": 0.9, "grip": 1.8, "brake": {"cut": 0.45, "decel": 15, "min": 9, "deadzone": 0.35}},
     "tricks": {
      "grab": {
       "seconds": 0.45,
@@ -12834,6 +12835,7 @@
       "light": 1,
       "trees": 1
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"stars": 1.2, "jumps": 1.2, "movers": 0.8}, "length": [70, 95]}, "mover": "snowball", "moverAmp": [2, 2.4], "moverPeriod": [3.8, 4.6], "snowmen": 0.1, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.35},
      "opening": [
       "gate",
       "pad",
@@ -12911,6 +12913,7 @@
       "light": 0.92,
       "trees": 1.7
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"ice": 1.3, "movers": 1.1, "stars": 0.8, "powder": 0.6}, "length": [75, 100]}, "mover": "penguin", "moverAmp": [2.3, 2.8], "moverPeriod": [3.4, 4.2], "snowmen": 0.15, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.3},
      "opening": [
       "gate",
       "rocks"
@@ -12990,6 +12993,7 @@
       "light": 0.72,
       "trees": 1.2
      },
+     "content": {"sections": {"count": [3, 3], "kinds": {"jumps": 1.2, "speed": 1.1, "powder": 1, "movers": 0.9}, "length": [75, 105]}, "mover": "snowball", "moverAmp": [2.5, 3], "moverPeriod": [3, 3.8], "snowmen": 0, "powerups": {"magnet": 1, "shield": 2}, "stars": 0.3},
      "opening": [
       "pad",
       "ramp"

@@ -1,0 +1,103 @@
+{
+ "when": "2026-11-14T23:46:33.102Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "frameMs": 150,
+ "runs": [
+  {
+   "label": "league10-ice",
+   "probes": {},
+   "shots": {
+    "ice-ahead": {
+     "file": "league10-ice-ice-ahead.png",
+     "raceMs": 21900,
+     "s": 504,
+     "hud": {
+      "section": "בעוד 19 מ׳: קרח חלק",
+      "powers": [],
+      "callout": "BOOST PADמשטח האצה.BOOST PADמשטח האצה.",
+      "braking": "false"
+     }
+    },
+    "on-ice": {
+     "file": "league10-ice-on-ice.png",
+     "raceMs": 22650,
+     "s": 528,
+     "hud": {
+      "section": "קרח חלק · עוד 97 מ׳",
+      "powers": [],
+      "callout": "קרח חלקמחליקים, מתחילים לפנות מוקדםקרח חלקמחליקים, מתחילים לפנות מוקדם",
+      "braking": "false"
+     }
+    }
+   },
+   "frames": 169,
+   "final": {
+    "timeMs": 22800,
+    "distanceM": 532,
+    "rank": 5,
+    "score": 650,
+    "coins": 8,
+    "result": null
+   },
+   "errors": [],
+   "stage": 10
+  },
+  {
+   "label": "league6-stars",
+   "probes": {},
+   "shots": {
+    "stars-ahead": {
+     "file": "league6-stars-stars-ahead.png",
+     "raceMs": 11950,
+     "s": 260,
+     "hud": {
+      "section": "בעוד 16 מ׳: גשם כוכבים",
+      "powers": [],
+      "callout": "OVERTAKEעוד אחד מאחוריך.OVERTAKEעוד אחד מאחוריך.",
+      "braking": "false"
+     }
+    },
+    "section-active": {
+     "file": "league6-stars-section-active.png",
+     "raceMs": 12700,
+     "s": 277,
+     "hud": {
+      "section": "גשם כוכבים · עוד 99 מ׳",
+      "powers": [],
+      "callout": "גשם כוכביםאוספים כמה שיותרגשם כוכביםאוספים כמה שיותר",
+      "braking": "false"
+     }
+    },
+    "magnet-chip": {
+     "file": "league6-stars-magnet-chip.png",
+     "raceMs": 12850,
+     "s": 280,
+     "hud": {
+      "section": "גשם כוכבים · עוד 96 מ׳",
+      "powers": [
+       "8"
+      ],
+      "callout": "מגנטמטבעות וכוכבים נמשכים אליכםמגנטמטבעות וכוכבים נמשכים אליכם",
+      "braking": "false"
+     }
+    }
+   },
+   "frames": 104,
+   "final": {
+    "timeMs": 13000,
+    "distanceM": 283,
+    "rank": 2,
+    "score": 0,
+    "coins": 5,
+    "result": null
+   },
+   "errors": [],
+   "stage": 6
+  }
+ ],
+ "csp": "clean"
+}

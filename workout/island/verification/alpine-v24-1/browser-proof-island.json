@@ -1,0 +1,166 @@
+{
+ "when": "2026-11-14T23:25:48.120Z",
+ "viewport": [
+  844,
+  390
+ ],
+ "touch": "CDP Input.dispatchTouchEvent",
+ "frameMs": 150,
+ "runs": [
+  {
+   "label": "v241-stage1",
+   "probes": {
+    "firstMoveMs": 100,
+    "laneOvershootM": 0.51,
+    "laneStopMs": 150,
+    "brake": {
+     "kmhBefore": 72,
+     "kmhAfter1s": 40,
+     "mid": {
+      "kmh": 42,
+      "braking": 1,
+      "joystick": "true",
+      "hud": "true"
+     },
+     "kmhAfterRelease": 72
+    },
+    "turnDrift": {
+     "atS": 310,
+     "curvature": -0.0066,
+     "driftM": 0.06,
+     "wall": false,
+     "lip": false,
+     "kmh": 72
+    }
+   },
+   "shots": {
+    "countdown": {
+     "file": "v241-stage1-countdown.png",
+     "raceMs": 0,
+     "s": 0,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "",
+      "braking": "false"
+     }
+    },
+    "brake": {
+     "file": "v241-stage1-brake.png",
+     "raceMs": 6800,
+     "s": 103,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "OVERTAKEעוד אחד מאחוריך.OVERTAKEעוד אחד מאחוריך.",
+      "braking": "true"
+     }
+    },
+    "shield-ahead": {
+     "file": "v241-stage1-shield-ahead.png",
+     "raceMs": 20250,
+     "s": 352,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "FULL SENDכל הדרך למטה.FULL SENDכל הדרך למטה.",
+      "braking": "false"
+     }
+    },
+    "shield-chip": {
+     "file": "v241-stage1-shield-chip.png",
+     "raceMs": 21000,
+     "s": 374,
+     "hud": {
+      "section": "",
+      "powers": [
+       "מגן"
+      ],
+      "callout": "מגןהנפילה הבאה לא תפילמגןהנפילה הבאה לא תפיל",
+      "braking": "false"
+     }
+    },
+    "star-ahead": {
+     "file": "v241-stage1-star-ahead.png",
+     "raceMs": 21750,
+     "s": 397,
+     "hud": {
+      "section": "",
+      "powers": [],
+      "callout": "המגן הצילממשיכים לגלושהמגן הצילממשיכים לגלוש",
+      "braking": "false"
+     }
+    },
+    "section-cue": {
+     "file": "v241-stage1-section-cue.png",
+     "raceMs": 36900,
+     "s": 716,
+     "hud": {
+      "section": "בעוד 88 מ׳: גשם כוכבים",
+      "powers": [],
+      "callout": "",
+      "braking": "false"
+     }
+    },
+    "section-active": {
+     "file": "v241-stage1-section-active.png",
+     "raceMs": 40350,
+     "s": 807,
+     "hud": {
+      "section": "גשם כוכבים · עוד 80 מ׳",
+      "powers": [],
+      "callout": "גשם כוכביםאוספים כמה שיותרגשם כוכביםאוספים כמה שיותר",
+      "braking": "false"
+     }
+    },
+    "magnet-chip": {
+     "file": "v241-stage1-magnet-chip.png",
+     "raceMs": 40500,
+     "s": 810,
+     "hud": {
+      "section": "גשם כוכבים · עוד 77 מ׳",
+      "powers": [
+       "8"
+      ],
+      "callout": "מגנטמטבעות וכוכבים נמשכים אליכםמגנטמטבעות וכוכבים נמשכים אליכם",
+      "braking": "false"
+     }
+    },
+    "trick": {
+     "file": "v241-stage1-trick.png",
+     "raceMs": 47550,
+     "s": 988,
+     "hud": {
+      "section": "",
+      "powers": [
+       "1"
+      ],
+      "callout": "AIR TIMEמעל כולם.AIR TIMEמעל כולם.",
+      "braking": "false"
+     }
+    },
+    "mover-ahead": {
+     "file": "v241-stage1-mover-ahead.png",
+     "raceMs": 53700,
+     "s": 1152,
+     "hud": {
+      "section": "בעוד 10 מ׳: מפריעים בדרך",
+      "powers": [],
+      "callout": "",
+      "braking": "false"
+     }
+    }
+   },
+   "frames": 627,
+   "final": null,
+   "v241": null,
+   "islandResult": {
+    "text": "●\n1,583\nמשימות\n⌂\n⋯\nמפה\nלטיול\n+\n−\nבנייה\nמשחקים\nהדירוג שלי\nאימון\nלמידה\n×\nהצלחת!\n\nהעיר מחכה לך. אפשר לנסות שוב בכל רגע.\n\nצליל\n03\nמרוץ סנובורד\n\nניקוד\n4\n\nמטבעות שהרווחת\n63\n\nחלקים שהרווחת\n0\n\nכוכבים בשלב\n1\n\nמקום בסיום\n3 / 6\n\nזמן\n01:11.95\n\nמהירות שיא (קמ״ש)\n112\n\nניקוד טריקים\n2,950\n\nמטבעות שנאספו במסלול\n19 / 105\n\nשיא חדש במסלול\n01:11.95\n\nאפשר לשדרג\nמיכל האצה\n\nיש לך מספיק\n\nהמחיר\n60\nיש לך\n1,583\nמטבעות\n\nאפשר ",
+    "stillRunning": false
+   },
+   "renderMetrics": null,
+   "errors": []
+  }
+ ],
+ "csp": "clean"
+}

@@ -6,6 +6,8 @@
  * The same decide() runs in tools/alpine-league-sim.mjs (headless, engine commands) and tools/alpine-league-browser.mjs (real touches).
  * Pure: no DOM, no engine import. */
 export const KID = Object.freeze({reaction: .4, look: 30, noise: .45, miss: .1, missBright: .03, gain: .7, windDelay: .5, windComp: .7, boostClear: 26, boostAt: .98, trickChance: .55, gateDesire: 5});
+/** v24.1 big kicker width (alpine-v241.mjs V241_DEFAULTS.bigRamp); the bot reads only the snapshot, which marks such a ramp `big`. */
+const BIG_RAMP_WIDTH = 4.6;
 
 export function createKidBot({seed = 1, physics, ...options} = {}) {
   const o = {...KID, ...options}, P = physics, half = P.pipe.flatHalf, board = P.board.halfWidth;
@@ -33,7 +35,15 @@ export function createKidBot({seed = 1, physics, ...options} = {}) {
           if (Math.abs(off - P.gateHalfWidth) < postReach || crosses) cost += 100 * near; else if (off < P.gateHalfWidth - board - .2) cost -= o.gateDesire * near;
         }
         else if (ob.type === 'boost') { if (off < P.pad.width / 2 - .3) cost -= 4 * near; }
-        else if (ob.type === 'ramp') { if (off < 1.1) cost -= 3 * near; else if (off < P.ramp.width / 2 + board) cost += 60 * near; }
+        else if (ob.type === 'ramp') { if (off < 1.1) cost -= 3 * near; else if (off < (ob.big ? BIG_RAMP_WIDTH : P.ramp.width) / 2 + board) cost += 60 * near; }
+        // v24.1 objects (only on v24.1 courses): a snowman is a rock; a mover's whole sweep is avoided (a child keeps to the free side);
+        // deep snow and ice a little; stars on the snow and power-ups are wanted.
+        else if (ob.type === 'snowman') { const reach = ob.radius * P.rockHitScale + board + .3; if (off < reach || (sweeping && ob.x > lo - reach && ob.x < hi + reach)) cost += 100 * near; }
+        else if (ob.type === 'mover') { const a = (ob.centre ?? ob.x) - (ob.amp ?? 0) - ob.radius - board - .2, b = (ob.centre ?? ob.x) + (ob.amp ?? 0) + ob.radius + board + .2; if ((cx > a && cx < b) || (sweeping && hi > a && lo < b)) cost += 100 * near; }
+        else if (ob.type === 'powder') { if (off < ob.w / 2) cost += 6 * near; }
+        else if (ob.type === 'ice') { if (off < ob.w / 2) cost += 1.5 * near; }
+        else if (ob.type === 'star') { if (off < .9 && ob.h < 2) cost -= 1 * near; }
+        else if (ob.type === 'magnet' || ob.type === 'shield') { if (off < .9) cost -= 4 * near; }
       }
       if (cost < bestCost - 1e-9) { bestCost = cost; best = cx; }
     }
