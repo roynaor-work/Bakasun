@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<title>סקי · אנימציות v7</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font:13px/1.5 system-ui,sans-serif;color:#eaf2f8;background:#0b1320}main{position:relative;display:grid;grid-template-columns:228px minmax(0,1fr);height:100%;max-width:1400px;margin:auto}aside{z-index:1;background:#101e2d;padding:12px 15px 9px;display:flex;flex-direction:column;gap:5px;border-left:1px solid #284052}h1{font-size:20px;line-height:1.2;margin:0 0 4px;font-weight:700}p{margin:0;color:#afc5d5}.eyebrow{font-size:10px;letter-spacing:.12em;color:#79dccc;direction:ltr;text-align:right}label{display:block;color:#afc5d5;font-size:11px}select,button,input{font:inherit}select,button{border:1px solid #3a5568;border-radius:6px;background:#1a3042;color:#eaf2f8;min-height:30px;padding:4px 8px}select{width:100%}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #82eddb;outline-offset:2px}button[aria-pressed=true]{border-color:#7de3cf;background:#244e54}.row{display:flex;gap:5px;align-items:center}.row>*{min-width:0;flex:1}.views button{font-size:11px;padding:4px}input[type=range]{width:100%;accent-color:#7de3cf;margin:0;direction:ltr;cursor:pointer}#readout{font-size:11px;font-variant-numeric:tabular-nums;color:#d8e4eb;direction:ltr;text-align:left;min-height:16px}#details{font-size:11px;min-height:18px}#stage{position:relative;min-width:0;direction:ltr}canvas{display:block;width:100%;height:100%;outline:none}.badge{position:absolute;top:15px;left:17px;background:#0b1827bf;border:1px solid #345264;border-radius:6px;padding:5px 9px;color:#cadbe7;font-size:11px;pointer-events:none;direction:rtl}#status{position:absolute;bottom:15px;left:17px;right:17px;font-size:11px;color:#d4e5ef;direction:rtl;pointer-events:none;background:#102033d9;border-radius:5px;padding:5px 8px}footer{margin-top:auto;display:flex;gap:10px;font-size:11px}a{color:#87ddce;text-decoration:none}a:hover{text-decoration:underline}.check{font-size:11px;color:#afc5d5;display:flex;gap:6px;align-items:center}.check input{accent-color:#7de3cf;margin:0}@media(max-width:650px){main{grid-template-columns:188px minmax(0,1fr)}aside{padding:10px;gap:6px}h1{font-size:17px}.badge{max-width:160px;left:8px;top:8px}footer{font-size:10px}}
+</style>
+<main>
+<aside aria-label="בקרת תצוגה">
+<header><div class="eyebrow">ALPINE / MOTION STUDY 01</div><h1>סקי · תנועה בלבד</h1><p>שלד הגולש המקורי · v7</p></header>
+<select id="clip" disabled aria-label="בחירת קליפ"></select>
+<p id="details"></p>
+<div class="row"><button id="play" disabled aria-label="השהיית הניגון">השהיה</button><label>מהירות<select id="speed" aria-label="מהירות הניגון"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="1" selected>×1</option></select></label></div>
+<input id="scrub" type="range" min="0" max="1" step="0.033333333" value="0" disabled aria-label="זמן הקליפ">
+<output id="readout">טוען…</output>
+<div class="row views"><button data-view="front">חזית</button><button data-view="side">צד</button><button data-view="three" aria-pressed="true">אלכסון</button></div>
+<label class="check"><input id="bones" type="checkbox">הצגת שלד</label>
+<footer><a href="REPORT.md">דוח</a><a href="catalog.json">קטלוג</a><a href="LICENSES.md">רישיונות</a></footer>
+</aside>
+<section id="stage" aria-label="הדגמת תנועת הגולש" aria-busy="true"><canvas id="canvas" aria-label="הגולש המקורי מגרסה v7 בתנועה"></canvas><div class="badge">ניגון ב־30 הרץ · ללא גוף חדש</div><div id="status" role="status">טוען את הגולש הקיים ואת הקליפים…</div></section>
+</main>
+<script type="module" src="preview.mjs"></script>
+</html>
