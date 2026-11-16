@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": [
+    "finite positions on raised ground",
+    "bounded particles and trails",
+    "teleport resets the trail",
+    "lower intensity immediately respects cap",
+    "large dt is clamped",
+    "reset clears all history",
+    "NaN and negative dt do not create particles",
+    "double disposal is safe",
+    "post-disposal update is safe",
+    "caller retains shared texture ownership"
+  ]
+}

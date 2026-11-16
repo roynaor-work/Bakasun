@@ -1,0 +1,884 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "glbCount": 28,
+  "khronosErrors": 0,
+  "khronosWarnings": 0,
+  "records": [
+    {
+      "id": "falling-tree",
+      "triangles": 280,
+      "bytes": 23176,
+      "bounds": {
+        "min": [
+          -2.1,
+          0.23999999463558197,
+          -0.6846944093704224
+        ],
+        "max": [
+          2.1300000190734862,
+          0.8899999856948853,
+          0.24727469682693481
+        ]
+      },
+      "maxNormalError": 2.762300055358935e-8,
+      "animations": [
+        {
+          "name": "fall",
+          "durationSeconds": 1.2999999523162842,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "boulder",
+      "triangles": 128,
+      "bytes": 11044,
+      "bounds": {
+        "min": [
+          -1.1299999952316284,
+          -0.07000000029802322,
+          -0.7688322067260742
+        ],
+        "max": [
+          1.0299999713897705,
+          1.4700000286102295,
+          0.7688322067260742
+        ]
+      },
+      "maxNormalError": 2.5278825255270476e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "deep-snow",
+      "triangles": 224,
+      "bytes": 17972,
+      "bounds": {
+        "min": [
+          -1.6167961359024048,
+          -0.38999998569488525,
+          -1.1888206005096436
+        ],
+        "max": [
+          1.6167961359024048,
+          0.5699999928474426,
+          1.1888206005096436
+        ]
+      },
+      "maxNormalError": 2.5387329571913142e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "fence",
+      "triangles": 276,
+      "bytes": 23060,
+      "bounds": {
+        "min": [
+          -1.9299038648605347,
+          0,
+          -0.11249999701976776
+        ],
+        "max": [
+          1.9299038648605347,
+          1.2400000095367432,
+          0.11249999701976776
+        ]
+      },
+      "maxNormalError": 2.853428426874416e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "warning-sign",
+      "triangles": 120,
+      "bytes": 12532,
+      "bounds": {
+        "min": [
+          -0.5799999833106995,
+          0,
+          -0.12124355882406235
+        ],
+        "max": [
+          0.5799999833106995,
+          2.259999990463257,
+          0.14249999821186066
+        ]
+      },
+      "maxNormalError": 2.853428426874416e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "ice-patch",
+      "triangles": 256,
+      "bytes": 21024,
+      "bounds": {
+        "min": [
+          -1.5944486856460571,
+          -0.06499999761581421,
+          -1.2000000476837158
+        ],
+        "max": [
+          1.5499999523162842,
+          0.15000000596046448,
+          1.2000000476837158
+        ]
+      },
+      "maxNormalError": 3.046860774791327e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "snow-hole",
+      "triangles": 276,
+      "bytes": 22424,
+      "bounds": {
+        "min": [
+          -1.350000023841858,
+          -0.7200000286102295,
+          -1.350000023841858
+        ],
+        "max": [
+          1.350000023841858,
+          0.10000000149011612,
+          1.350000023841858
+        ]
+      },
+      "maxNormalError": 2.1174568543003147e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "spring-pad",
+      "triangles": 444,
+      "bytes": 35804,
+      "bounds": {
+        "min": [
+          -0.6499999761581421,
+          0,
+          -0.6499999761581421
+        ],
+        "max": [
+          0.6499999761581421,
+          1.2200000035762786,
+          0.6499999761581421
+        ]
+      },
+      "maxNormalError": 2.5410112902690685e-8,
+      "animations": [
+        {
+          "name": "bounce",
+          "durationSeconds": 0.6499999761581421,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "high-ramp",
+      "triangles": 312,
+      "bytes": 25576,
+      "bounds": {
+        "min": [
+          -1.284999966621399,
+          0,
+          -2.02410626411438
+        ],
+        "max": [
+          1.284999966621399,
+          2.1353750228881836,
+          2.0017478466033936
+        ]
+      },
+      "maxNormalError": 2.8459297363170322e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "trick-ramp",
+      "triangles": 312,
+      "bytes": 25624,
+      "bounds": {
+        "min": [
+          -1.534999966621399,
+          0,
+          -1.4223191738128662
+        ],
+        "max": [
+          1.534999966621399,
+          1.3569601774215698,
+          1.4015235900878906
+        ]
+      },
+      "maxNormalError": 2.4716169000349453e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "narrow-passage",
+      "triangles": 216,
+      "bytes": 20036,
+      "bounds": {
+        "min": [
+          -2.5,
+          -0.05000000074505806,
+          -1.600000023841858
+        ],
+        "max": [
+          2.5,
+          2.0899999141693115,
+          1.600000023841858
+        ]
+      },
+      "maxNormalError": 3.1188810201143724e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "bridge",
+      "triangles": 536,
+      "bytes": 41540,
+      "bounds": {
+        "min": [
+          -1.2739230394363403,
+          0,
+          -2.5
+        ],
+        "max": [
+          1.2739230394363403,
+          1.159999966621399,
+          2.5
+        ]
+      },
+      "maxNormalError": 2.48683462711341e-8,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "star",
+      "triangles": 120,
+      "bytes": 10912,
+      "bounds": {
+        "min": [
+          -0.6086761951446533,
+          0.28222912549972534,
+          -0.1472243219614029
+        ],
+        "max": [
+          0.6086761951446533,
+          1.440000057220459,
+          0.2150000035762787
+        ]
+      },
+      "maxNormalError": 2.3275521732202265e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "magnet",
+      "triangles": 192,
+      "bytes": 15932,
+      "bounds": {
+        "min": [
+          -0.6000000238418579,
+          0.3499999940395355,
+          -0.125
+        ],
+        "max": [
+          0.6000000238418579,
+          1.3799999952316284,
+          0.125
+        ]
+      },
+      "maxNormalError": 2.853428426874416e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "shield",
+      "triangles": 108,
+      "bytes": 10760,
+      "bounds": {
+        "min": [
+          -0.6000000238418579,
+          0.17000000178813934,
+          -0.16124355792999268
+        ],
+        "max": [
+          0.6000000238418579,
+          1.5,
+          0.1899999976158142
+        ]
+      },
+      "maxNormalError": 3.5310507628949495e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "boost",
+      "triangles": 104,
+      "bytes": 10428,
+      "bounds": {
+        "min": [
+          -0.8399999737739563,
+          0.15000000596046448,
+          -0.1985640674829483
+        ],
+        "max": [
+          0.5,
+          1.5499999523162842,
+          0.16500000655651093
+        ]
+      },
+      "maxNormalError": 3.241141588450347e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "clock",
+      "triangles": 220,
+      "bytes": 20144,
+      "bounds": {
+        "min": [
+          -0.6100000143051147,
+          0.2199999988079071,
+          -0.12999999523162842
+        ],
+        "max": [
+          0.6100000143051147,
+          1.5700000524520874,
+          0.2150000035762787
+        ]
+      },
+      "maxNormalError": 2.8842144561558314e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "double-coin",
+      "triangles": 312,
+      "bytes": 24756,
+      "bounds": {
+        "min": [
+          -0.7200000286102295,
+          0.2800000011920929,
+          -0.23999999463558197
+        ],
+        "max": [
+          0.7200000286102295,
+          1.3600000143051147,
+          0.33250001072883606
+        ]
+      },
+      "maxNormalError": 2.8842144561558314e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "magic-wand",
+      "triangles": 116,
+      "bytes": 11420,
+      "bounds": {
+        "min": [
+          -0.4399999976158142,
+          0.05130597949028015,
+          -0.09000000357627869
+        ],
+        "max": [
+          0.8899999856948853,
+          1.9900000095367432,
+          0.09000000357627869
+        ]
+      },
+      "maxNormalError": 2.941666776834495e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "heart",
+      "triangles": 104,
+      "bytes": 10480,
+      "bounds": {
+        "min": [
+          -0.6200000047683716,
+          0.2199999988079071,
+          -0.125
+        ],
+        "max": [
+          0.6200000047683716,
+          1.3600000143051147,
+          0.21165063977241516
+        ]
+      },
+      "maxNormalError": 2.7650983169813514e-8,
+      "animations": [
+        {
+          "name": "collect",
+          "durationSeconds": 2,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "bear",
+      "triangles": 340,
+      "bytes": 31248,
+      "bounds": {
+        "min": [
+          -0.47999998927116394,
+          0.08499997138977056,
+          -1.1699999570846558
+        ],
+        "max": [
+          0.47999998927116394,
+          1.7100000381469727,
+          0.7608451843261719
+        ]
+      },
+      "maxNormalError": 3.144822668943448e-8,
+      "animations": [
+        {
+          "name": "amble",
+          "durationSeconds": 1.399999976158142,
+          "channels": 4
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "deer",
+      "triangles": 340,
+      "bytes": 34964,
+      "bounds": {
+        "min": [
+          -0.3869740068912506,
+          0.0750000023841858,
+          -1.1399999856948853
+        ],
+        "max": [
+          0.3869740068912506,
+          2.491215229034424,
+          0.9200000166893005
+        ]
+      },
+      "maxNormalError": 2.8063080526052886e-8,
+      "animations": [
+        {
+          "name": "bound",
+          "durationSeconds": 0.8799999952316284,
+          "channels": 5
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "rival-skier",
+      "triangles": 392,
+      "bytes": 45552,
+      "bounds": {
+        "min": [
+          -0.5828501582145691,
+          0.009999999776482582,
+          -0.949999988079071
+        ],
+        "max": [
+          0.5815056562423706,
+          1.4199999570846558,
+          0.949999988079071
+        ]
+      },
+      "maxNormalError": 3.973867190865121e-8,
+      "animations": [
+        {
+          "name": "carve",
+          "durationSeconds": 1.600000023841858,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 8,
+        "hints": 0
+      }
+    },
+    {
+      "id": "snowman",
+      "triangles": 414,
+      "bytes": 34908,
+      "bounds": {
+        "min": [
+          -0.8733968734741211,
+          -0.009999999776482582,
+          -0.6200000047683716
+        ],
+        "max": [
+          0.8765594363212585,
+          2.25,
+          0.4522542357444763
+        ]
+      },
+      "maxNormalError": 2.87603327819852e-8,
+      "animations": [
+        {
+          "name": "wobble",
+          "durationSeconds": 1.600000023841858,
+          "channels": 1
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "snow-spray-light",
+      "triangles": 112,
+      "bytes": 32868,
+      "bounds": {
+        "min": [
+          -0.42648423314820794,
+          0.14599558763754575,
+          0.004305385646270948
+        ],
+        "max": [
+          0.41871109065130163,
+          0.9506676232463896,
+          0.718737249799341
+        ]
+      },
+      "maxNormalError": 6.692867371427269e-10,
+      "animations": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.8999999761581421,
+          "channels": 28
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "snow-spray-medium",
+      "triangles": 224,
+      "bytes": 65416,
+      "bounds": {
+        "min": [
+          -0.5062438570597354,
+          0.2529257988316325,
+          0.08545736339149348
+        ],
+        "max": [
+          0.5252474208628699,
+          1.1614904083480186,
+          0.8707968134891196
+        ]
+      },
+      "maxNormalError": 6.692867371427269e-10,
+      "animations": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.8999999761581421,
+          "channels": 56
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "snow-spray-heavy",
+      "triangles": 384,
+      "bytes": 111916,
+      "bounds": {
+        "min": [
+          -0.6374331039491768,
+          0.22235800560320684,
+          0.024680799246815474
+        ],
+        "max": [
+          0.5609228673091267,
+          1.4258849487012775,
+          1.0642187235800267
+        ]
+      },
+      "maxNormalError": 6.692867371427269e-10,
+      "animations": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.8999999761581421,
+          "channels": 96
+        }
+      ],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    },
+    {
+      "id": "skier-trail",
+      "triangles": 224,
+      "bytes": 17792,
+      "bounds": {
+        "min": [
+          -0.4198640286922455,
+          0.014000000432133675,
+          0
+        ],
+        "max": [
+          0.4194566011428833,
+          0.014000000432133675,
+          3.9200000762939453
+        ]
+      },
+      "maxNormalError": 0,
+      "animations": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "hints": 0
+      }
+    }
+  ],
+  "browser": {
+    "engine": "Chromium / SwiftShader",
+    "layouts": [
+      {
+        "width": 844,
+        "height": 390,
+        "noHorizontalOverflow": true
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "noHorizontalOverflow": true
+      },
+      {
+        "width": 1440,
+        "height": 900,
+        "noHorizontalOverflow": true
+      }
+    ],
+    "inspected": [
+      "falling-tree",
+      "boulder",
+      "deep-snow",
+      "fence",
+      "warning-sign",
+      "ice-patch",
+      "snow-hole",
+      "spring-pad",
+      "high-ramp",
+      "trick-ramp",
+      "narrow-passage",
+      "bridge",
+      "star",
+      "magnet",
+      "shield",
+      "boost",
+      "clock",
+      "double-coin",
+      "magic-wand",
+      "heart",
+      "bear",
+      "deer",
+      "rival-skier",
+      "snowman",
+      "snow-spray-light",
+      "snow-spray-medium",
+      "snow-spray-heavy",
+      "skier-trail"
+    ],
+    "effectStats": [
+      {
+        "particles": 10,
+        "cap": 24,
+        "trailSegments": 56,
+        "disposed": false
+      },
+      {
+        "particles": 27,
+        "cap": 48,
+        "trailSegments": 56,
+        "disposed": false
+      },
+      {
+        "particles": 50,
+        "cap": 96,
+        "trailSegments": 56,
+        "disposed": false
+      }
+    ],
+    "controls": true,
+    "reducedMotionStartsPaused": true,
+    "externalRequests": [],
+    "errors": []
+  }
+}

@@ -1,0 +1,1629 @@
+{
+  "schemaVersion": 1,
+  "id": "alpine-content-v1",
+  "created": "2026-11-16",
+  "license": "CC0-1.0",
+  "designOnly": true,
+  "units": "metres",
+  "upAxis": "+Y",
+  "forwardAxis": "-Z",
+  "cameraAxis": "+Z",
+  "png": {
+    "size": [
+      320,
+      320
+    ],
+    "alpha": "straight",
+    "colorSpace": "sRGB",
+    "purpose": "transparent 3D render; sprite fallback or catalogue"
+  },
+  "style": {
+    "reference": "../alpine-themes-v1/manifest.json",
+    "referenceCommit": "c918a88f9c6b1d2b66f6cd97cbac9b741e7e6ef9",
+    "description": "warm low poly / soft matte / coral and teal",
+    "palette": {
+      "snow": "#f4f1df",
+      "coral": "#df8963",
+      "teal": "#579f9c",
+      "gold": "#edbd79",
+      "rock": "#7f9b90"
+    },
+    "themePalettes": [
+      {
+        "id": "01-pine",
+        "palette": {
+          "snow": "#f4f1df",
+          "ground": "#c6dbd6",
+          "rock": "#7f9b90",
+          "accent": "#e8ba77",
+          "fog": "#d7e4d9",
+          "sky": [
+            "#78bccc",
+            "#fff0cc"
+          ]
+        }
+      },
+      {
+        "id": "02-ice",
+        "palette": {
+          "snow": "#e2f4f4",
+          "ground": "#7ac1db",
+          "rock": "#5094c0",
+          "accent": "#c8e9f1",
+          "fog": "#a8d4e3",
+          "sky": [
+            "#244c82",
+            "#b8edf0"
+          ]
+        }
+      },
+      {
+        "id": "03-volcano",
+        "palette": {
+          "snow": "#dddde2",
+          "ground": "#9d99ac",
+          "rock": "#555361",
+          "accent": "#efbc7c",
+          "fog": "#b9aab8",
+          "sky": [
+            "#827e9b",
+            "#f4d1b2"
+          ]
+        }
+      },
+      {
+        "id": "04-aurora",
+        "palette": {
+          "snow": "#d9e4ec",
+          "ground": "#859dad",
+          "rock": "#63758e",
+          "accent": "#a7ded1",
+          "fog": "#758fa6",
+          "sky": [
+            "#172943",
+            "#7b9eae"
+          ]
+        }
+      },
+      {
+        "id": "05-village",
+        "palette": {
+          "snow": "#f6efdc",
+          "ground": "#d9d9c9",
+          "rock": "#ab9d8e",
+          "accent": "#dca87b",
+          "fog": "#e9dfcd",
+          "sky": [
+            "#8bc9ce",
+            "#ffe9c9"
+          ]
+        }
+      },
+      {
+        "id": "06-summit",
+        "palette": {
+          "snow": "#f1f3eb",
+          "ground": "#b9cbd4",
+          "rock": "#829aaa",
+          "accent": "#edca8e",
+          "fog": "#cbdde4",
+          "sky": [
+            "#609fbf",
+            "#e5eef0"
+          ]
+        }
+      }
+    ]
+  },
+  "limits": {
+    "packageBytes": 3000000,
+    "modelTriangles": [
+      100,
+      600
+    ]
+  },
+  "counts": {
+    "obstacles": 12,
+    "bonuses": 8,
+    "enemies": 4,
+    "effects": 4
+  },
+  "assets": [
+    {
+      "id": "falling-tree",
+      "name": "עץ נופל",
+      "category": "obstacle",
+      "glb": "models/falling-tree.glb",
+      "png": "png/falling-tree.png",
+      "triangles": 280,
+      "bytes": 23176,
+      "sha256": "5c2b8f7fae07a6f07ba6edaf838a57e9315f218825d0164dbd461cc1fe516f85",
+      "bounds": {
+        "min": [
+          -2.1,
+          0.24,
+          -0.68469
+        ],
+        "max": [
+          2.13,
+          0.89,
+          0.24727
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "jump-or-avoid",
+      "clips": [
+        {
+          "name": "fall",
+          "durationSeconds": 1.3
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "box",
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "halfExtents": [
+          2.1,
+          0.32,
+          0.7
+        ]
+      },
+      "animationMode": "once-clamp",
+      "animatedSweepRadiusMetres": 4.5,
+      "animationBounds": {
+        "min": [
+          -3.2,
+          -0.2,
+          -0.85
+        ],
+        "max": [
+          2.4,
+          4.5,
+          0.35
+        ]
+      },
+      "pngBytes": 9197,
+      "pngSha256": "5c6282d79231e42f6d96afc7165d49ef8d9d99d2f01f6474ae1c4cc39ba37bda",
+      "pngAlphaBounds": [
+        61,
+        125,
+        247,
+        201
+      ]
+    },
+    {
+      "id": "boulder",
+      "name": "סלע",
+      "category": "obstacle",
+      "glb": "models/boulder.glb",
+      "png": "png/boulder.png",
+      "triangles": 128,
+      "bytes": 11044,
+      "sha256": "8c2c901b921ac9360c52ff25347d3eecc46c6d0d35dba8bc5f47c1125805ce88",
+      "bounds": {
+        "min": [
+          -1.13,
+          -0.07,
+          -0.76883
+        ],
+        "max": [
+          1.03,
+          1.47,
+          0.76883
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "avoid",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "sphere",
+        "center": [
+          0,
+          0.7,
+          0
+        ],
+        "radius": 1.05
+      },
+      "pngBytes": 10469,
+      "pngSha256": "8abe73bdcbeee5ebe550f3e24cfb9ce7a717f308d1ad71def389b89278a6f615",
+      "pngAlphaBounds": [
+        43,
+        76,
+        255,
+        262
+      ]
+    },
+    {
+      "id": "deep-snow",
+      "name": "שלג כבד",
+      "category": "obstacle",
+      "glb": "models/deep-snow.glb",
+      "png": "png/deep-snow.png",
+      "triangles": 224,
+      "bytes": 17972,
+      "sha256": "979478f42b8d121d2f06ad56e73c9c2f0054a6d2b4cbf16084a58e439a57acf9",
+      "bounds": {
+        "min": [
+          -1.6168,
+          -0.39,
+          -1.18882
+        ],
+        "max": [
+          1.6168,
+          0.57,
+          1.18882
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "slow-zone",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "zone",
+        "halfExtents": [
+          1.7,
+          0.5,
+          1.25
+        ]
+      },
+      "suggestedSpeedMultiplier": 0.62,
+      "pngBytes": 8561,
+      "pngSha256": "b14ea4e1edc4298b642a2a283d2c2afee488bf9ede6d22599bc828bc61755de5",
+      "pngAlphaBounds": [
+        64,
+        113,
+        256,
+        206
+      ]
+    },
+    {
+      "id": "fence",
+      "name": "גדר",
+      "category": "obstacle",
+      "glb": "models/fence.glb",
+      "png": "png/fence.png",
+      "triangles": 276,
+      "bytes": 23060,
+      "sha256": "938b22c0d5fecafcab57d235c047bd9a84e0b6a44d6d2d7b78838a1d0ad9fdc3",
+      "bounds": {
+        "min": [
+          -1.9299,
+          0.0,
+          -0.1125
+        ],
+        "max": [
+          1.9299,
+          1.24,
+          0.1125
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "jump-or-avoid",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "box",
+        "center": [
+          0,
+          0.6,
+          0
+        ],
+        "halfExtents": [
+          1.95,
+          0.62,
+          0.16
+        ]
+      },
+      "pngBytes": 9388,
+      "pngSha256": "4872dc5ebadc8f296fe7e47cbb21e37a742eff51538a20e2d1e30b19efc2b121",
+      "pngAlphaBounds": [
+        74,
+        104,
+        246,
+        218
+      ]
+    },
+    {
+      "id": "warning-sign",
+      "name": "שלט",
+      "category": "obstacle",
+      "glb": "models/warning-sign.glb",
+      "png": "png/warning-sign.png",
+      "triangles": 120,
+      "bytes": 12532,
+      "sha256": "dee7fa6e8aaea848e84227e7e03fde0afa679b5ea648ac236c70b2ce9bd01edd",
+      "bounds": {
+        "min": [
+          -0.58,
+          0.0,
+          -0.12124
+        ],
+        "max": [
+          0.58,
+          2.26,
+          0.1425
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "avoid",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "box",
+        "center": [
+          0,
+          1.1,
+          0
+        ],
+        "halfExtents": [
+          0.59,
+          1.12,
+          0.16
+        ]
+      },
+      "pngBytes": 6976,
+      "pngSha256": "a39366f167675d00f98fba98f05821faa532f4de5ca66c7273a8e2333cc18d9f",
+      "pngAlphaBounds": [
+        113,
+        61,
+        208,
+        259
+      ]
+    },
+    {
+      "id": "ice-patch",
+      "name": "קרח",
+      "category": "obstacle",
+      "glb": "models/ice-patch.glb",
+      "png": "png/ice-patch.png",
+      "triangles": 256,
+      "bytes": 21024,
+      "sha256": "056128d918529b8dab0fa3e48ae8660c4f626a86f5e8ca6d9e51740d992d9c92",
+      "bounds": {
+        "min": [
+          -1.59445,
+          -0.065,
+          -1.2
+        ],
+        "max": [
+          1.55,
+          0.15,
+          1.2
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "slippery-zone",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "zone",
+        "halfExtents": [
+          1.55,
+          0.12,
+          1.2
+        ]
+      },
+      "suggestedGripMultiplier": 0.35,
+      "pngBytes": 7876,
+      "pngSha256": "94f78b4ae67d16f200ca1f454f763519e4bba1f5f7c66b81fdb2340c325e9518",
+      "pngAlphaBounds": [
+        61,
+        124,
+        261,
+        199
+      ]
+    },
+    {
+      "id": "snow-hole",
+      "name": "חור",
+      "category": "obstacle",
+      "glb": "models/snow-hole.glb",
+      "png": "png/snow-hole.png",
+      "triangles": 276,
+      "bytes": 22424,
+      "sha256": "44c178da14fd3d9889aa5e9748581e9cb4a32f785fb7b360fd37babc7a673dbd",
+      "bounds": {
+        "min": [
+          -1.35,
+          -0.72,
+          -1.35
+        ],
+        "max": [
+          1.35,
+          0.1,
+          1.35
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "jump-or-avoid",
+      "clips": [],
+      "license": "CC0-1.0",
+      "terrainCutout": {
+        "shape": "circle",
+        "radius": 1.08,
+        "required": true
+      },
+      "collision": {
+        "type": "pit",
+        "radius": 1.07,
+        "depth": 0.72
+      },
+      "pngBytes": 10353,
+      "pngSha256": "5cc9919f0ab0cbe755ce142412a7f895971cd10d0cea7328e72fc8e67833cb35",
+      "pngAlphaBounds": [
+        54,
+        86,
+        266,
+        210
+      ]
+    },
+    {
+      "id": "spring-pad",
+      "name": "קפיץ",
+      "category": "obstacle",
+      "glb": "models/spring-pad.glb",
+      "png": "png/spring-pad.png",
+      "triangles": 444,
+      "bytes": 35804,
+      "sha256": "5c9f343e795f1e1e9bc9ff5f5bc35e8f6d30cddbbeeffef5ed6d7a9782242bbb",
+      "bounds": {
+        "min": [
+          -0.65,
+          0.0,
+          -0.65
+        ],
+        "max": [
+          0.65,
+          1.22,
+          0.65
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "bounce",
+      "clips": [
+        {
+          "name": "bounce",
+          "durationSeconds": 0.65
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "zone",
+        "halfExtents": [
+          0.65,
+          0.98,
+          0.65
+        ]
+      },
+      "animationMode": "once-clamp",
+      "pngBytes": 14332,
+      "pngSha256": "08270a92778756fc3f829e281fa6f716480544152042f3460dfbd7bbee787f1d",
+      "pngAlphaBounds": [
+        12,
+        52,
+        307,
+        312
+      ]
+    },
+    {
+      "id": "high-ramp",
+      "name": "רמפה גבוהה",
+      "category": "obstacle",
+      "glb": "models/high-ramp.glb",
+      "png": "png/high-ramp.png",
+      "triangles": 312,
+      "bytes": 25576,
+      "sha256": "ef23b20ae26fcc68e9fd36e82c653cd51797250c1e617fdea0bcc68eb50476e5",
+      "bounds": {
+        "min": [
+          -1.285,
+          0.0,
+          -2.02411
+        ],
+        "max": [
+          1.285,
+          2.13537,
+          2.00175
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "launch-high",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "ramp",
+        "width": 2.5,
+        "length": 4,
+        "exitHeight": 2.08,
+        "profile": "quadratic",
+        "downhillAxis": "-Z"
+      },
+      "launchAnchor": [
+        0,
+        2.08,
+        -2.0
+      ],
+      "pngBytes": 9419,
+      "pngSha256": "8872e0dfc89c0a24566616813abbea4625f9d19a352945d06ead24fb108afe80",
+      "pngAlphaBounds": [
+        43,
+        58,
+        276,
+        263
+      ]
+    },
+    {
+      "id": "trick-ramp",
+      "name": "רמפת טריקים",
+      "category": "obstacle",
+      "glb": "models/trick-ramp.glb",
+      "png": "png/trick-ramp.png",
+      "triangles": 312,
+      "bytes": 25624,
+      "sha256": "74dcc398e970ac5c334156fcdde0bebb5cc4faf0adc806a8a1c61359161120aa",
+      "bounds": {
+        "min": [
+          -1.535,
+          0.0,
+          -1.42232
+        ],
+        "max": [
+          1.535,
+          1.35696,
+          1.40152
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "launch-trick",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "ramp",
+        "width": 3.0,
+        "length": 2.8,
+        "exitHeight": 1.3,
+        "profile": "quadratic",
+        "downhillAxis": "-Z"
+      },
+      "launchAnchor": [
+        0,
+        1.3,
+        -1.4
+      ],
+      "pngBytes": 10478,
+      "pngSha256": "c646719d8712847e1fc4b0caa1eb98acca02b58e96c5529866753689857328b1",
+      "pngAlphaBounds": [
+        18,
+        60,
+        301,
+        261
+      ]
+    },
+    {
+      "id": "narrow-passage",
+      "name": "מעבר צר",
+      "category": "obstacle",
+      "glb": "models/narrow-passage.glb",
+      "png": "png/narrow-passage.png",
+      "triangles": 216,
+      "bytes": 20036,
+      "sha256": "5592370a6281805baeac6dea2c7913b64cbe295eb64a5f58a4bea6c60b8816f7",
+      "bounds": {
+        "min": [
+          -2.5,
+          -0.05,
+          -1.6
+        ],
+        "max": [
+          2.5,
+          2.09,
+          1.6
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "thread-gap",
+      "clips": [],
+      "license": "CC0-1.0",
+      "clearanceMetres": 1.6,
+      "collision": {
+        "type": "compound",
+        "boxes": [
+          {
+            "center": [
+              -1.65,
+              1,
+              0
+            ],
+            "halfExtents": [
+              0.85,
+              1.1,
+              1.6
+            ]
+          },
+          {
+            "center": [
+              1.65,
+              1,
+              0
+            ],
+            "halfExtents": [
+              0.85,
+              1.1,
+              1.6
+            ]
+          }
+        ]
+      },
+      "pngBytes": 8897,
+      "pngSha256": "e94cb82134be1d38fbb28c7571026030bc82ec0535a0bc418ecd6ae5349f54b6",
+      "pngAlphaBounds": [
+        55,
+        92,
+        265,
+        223
+      ]
+    },
+    {
+      "id": "bridge",
+      "name": "גשר",
+      "category": "obstacle",
+      "glb": "models/bridge.glb",
+      "png": "png/bridge.png",
+      "triangles": 536,
+      "bytes": 41540,
+      "sha256": "9c54a3fa3eff3605815e7f9cd36f375643855b83ddd8dd3e6fbd529661480fad",
+      "bounds": {
+        "min": [
+          -1.27392,
+          0.0,
+          -2.5
+        ],
+        "max": [
+          1.27392,
+          1.16,
+          2.5
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "balance-crossing",
+      "clips": [],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "bridge",
+        "deckHalfExtents": [
+          1.1,
+          0.1,
+          2.5
+        ],
+        "deckY": 0.4,
+        "railX": 1.17
+      },
+      "entryAnchor": [
+        0,
+        0.4,
+        2.5
+      ],
+      "exitAnchor": [
+        0,
+        0.4,
+        -2.5
+      ],
+      "pngBytes": 14363,
+      "pngSha256": "d070dff212e642311dd1cf468aebb83948c50f5b9d9c3de872186f451a0ae33f",
+      "pngAlphaBounds": [
+        55,
+        91,
+        265,
+        230
+      ]
+    },
+    {
+      "id": "star",
+      "name": "כוכב",
+      "category": "bonus",
+      "glb": "models/star.glb",
+      "png": "png/star.png",
+      "triangles": 120,
+      "bytes": 10912,
+      "sha256": "0e970626de38b8eb7175ab35dabefb0831eb20faf1c537eb3f3a29900618c14b",
+      "bounds": {
+        "min": [
+          -0.60868,
+          0.28223,
+          -0.14722
+        ],
+        "max": [
+          0.60868,
+          1.44,
+          0.215
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "score",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 9411,
+      "pngSha256": "3ac61c510dd7d80d58b6df4b5977cfdeccfde995cbf0a7e00a6ccc7751c7142d",
+      "pngAlphaBounds": [
+        67,
+        61,
+        260,
+        272
+      ]
+    },
+    {
+      "id": "magnet",
+      "name": "מגנט",
+      "category": "bonus",
+      "glb": "models/magnet.glb",
+      "png": "png/magnet.png",
+      "triangles": 192,
+      "bytes": 15932,
+      "sha256": "bf358f9d34a8e0d6479671465c1785048c691de254db2803e3144d2c0c1b86db",
+      "bounds": {
+        "min": [
+          -0.6,
+          0.35,
+          -0.125
+        ],
+        "max": [
+          0.6,
+          1.38,
+          0.125
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "attract",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 10765,
+      "pngSha256": "7386067f78d1a77b9d613ffa4dd6756ba4263e384cbeffcb88e9f4298233e8c2",
+      "pngAlphaBounds": [
+        62,
+        44,
+        258,
+        253
+      ]
+    },
+    {
+      "id": "shield",
+      "name": "מגן",
+      "category": "bonus",
+      "glb": "models/shield.glb",
+      "png": "png/shield.png",
+      "triangles": 108,
+      "bytes": 10760,
+      "sha256": "c54fa8f88714968c442b23f99bf2a96e44f0094ed5c8f8482580ff148c32dd26",
+      "bounds": {
+        "min": [
+          -0.6,
+          0.17,
+          -0.16124
+        ],
+        "max": [
+          0.6,
+          1.5,
+          0.19
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "protect",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 8950,
+      "pngSha256": "9b041fe4834ad81953f82b3d07f2a61d375ad70e08a826633ac8f75b25485bcd",
+      "pngAlphaBounds": [
+        74,
+        58,
+        249,
+        261
+      ]
+    },
+    {
+      "id": "boost",
+      "name": "האצה",
+      "category": "bonus",
+      "glb": "models/boost.glb",
+      "png": "png/boost.png",
+      "triangles": 104,
+      "bytes": 10428,
+      "sha256": "551eb77a97f06fddcb0cfc0e75db8468f3d86d44a14c2342ed228354bb8db80a",
+      "bounds": {
+        "min": [
+          -0.84,
+          0.15,
+          -0.19856
+        ],
+        "max": [
+          0.5,
+          1.55,
+          0.165
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "speed",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 9652,
+      "pngSha256": "39395fefa50ec22e77e8f6adc908474d1f31cba2720257f2b2cb7002f271f54d",
+      "pngAlphaBounds": [
+        77,
+        61,
+        251,
+        260
+      ]
+    },
+    {
+      "id": "clock",
+      "name": "שעון",
+      "category": "bonus",
+      "glb": "models/clock.glb",
+      "png": "png/clock.png",
+      "triangles": 220,
+      "bytes": 20144,
+      "sha256": "1dd9693d5302d64ae432117f1eb169f772c047a83c24ee1771fff2dd2981cd8e",
+      "bounds": {
+        "min": [
+          -0.61,
+          0.22,
+          -0.13
+        ],
+        "max": [
+          0.61,
+          1.57,
+          0.215
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "time",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 10091,
+      "pngSha256": "73af61d02cae941501f0368bd04585e9390da356f51f3686597cd9932a75ec71",
+      "pngAlphaBounds": [
+        75,
+        54,
+        253,
+        263
+      ]
+    },
+    {
+      "id": "double-coin",
+      "name": "מטבע כפול",
+      "category": "bonus",
+      "glb": "models/double-coin.glb",
+      "png": "png/double-coin.png",
+      "triangles": 312,
+      "bytes": 24756,
+      "sha256": "08485d15c147d13ca45effd8aadc55ae3e5b8432213df6343b5c49137007d462",
+      "bounds": {
+        "min": [
+          -0.72,
+          0.28,
+          -0.24
+        ],
+        "max": [
+          0.72,
+          1.36,
+          0.3325
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "score-multiplier",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 10452,
+      "pngSha256": "28e1db3dc572701ad0b8ecbdb109debcf560b7b2e31ff19355c940b150c12a07",
+      "pngAlphaBounds": [
+        79,
+        65,
+        248,
+        251
+      ]
+    },
+    {
+      "id": "magic-wand",
+      "name": "מטה קסמים",
+      "category": "bonus",
+      "glb": "models/magic-wand.glb",
+      "png": "png/magic-wand.png",
+      "triangles": 116,
+      "bytes": 11420,
+      "sha256": "64c8ccb803535898b58b788382371db682e1b173f728cecf5c72d8983d93421c",
+      "bounds": {
+        "min": [
+          -0.44,
+          0.05131,
+          -0.09
+        ],
+        "max": [
+          0.89,
+          1.99,
+          0.09
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "clear-path",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 7658,
+      "pngSha256": "279d62425b10c9c71d67ada0a4d9926a87f2448edaf2c09ca9064f10226174fb",
+      "pngAlphaBounds": [
+        101,
+        76,
+        219,
+        244
+      ]
+    },
+    {
+      "id": "heart",
+      "name": "לב",
+      "category": "bonus",
+      "glb": "models/heart.glb",
+      "png": "png/heart.png",
+      "triangles": 104,
+      "bytes": 10480,
+      "sha256": "3803acbe26e9e8e34506a3e5281393bb2b4853756cb60b6cd2790299739deaa8",
+      "bounds": {
+        "min": [
+          -0.62,
+          0.22,
+          -0.125
+        ],
+        "max": [
+          0.62,
+          1.36,
+          0.21165
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "life",
+      "clips": [
+        {
+          "name": "collect",
+          "durationSeconds": 2
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "collect-sphere",
+        "center": [
+          0,
+          0.85,
+          0
+        ],
+        "radius": 0.72
+      },
+      "floatHeightMetres": 0.65,
+      "animationMode": "loop",
+      "pngBytes": 9683,
+      "pngSha256": "ce6d37a6f28bcf55651ed24685996f49e04b01867e506922894c0fded7699ead",
+      "pngAlphaBounds": [
+        67,
+        47,
+        262,
+        253
+      ]
+    },
+    {
+      "id": "bear",
+      "name": "דוב",
+      "category": "enemy",
+      "glb": "models/bear.glb",
+      "png": "png/bear.png",
+      "triangles": 340,
+      "bytes": 31248,
+      "sha256": "f3989d9c2bb4de6d5a6d9bc797f56ebb5ed1e8da9acc87044b69fe45eb05f0ea",
+      "bounds": {
+        "min": [
+          -0.48,
+          0.085,
+          -1.17
+        ],
+        "max": [
+          0.48,
+          1.71,
+          0.76085
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "amble-across",
+      "clips": [
+        {
+          "name": "amble",
+          "durationSeconds": 1.4
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "capsule",
+        "radius": 0.5,
+        "height": 1.55,
+        "length": 2.15
+      },
+      "animationMode": "loop",
+      "movementHint": "translate root laterally; clip animates feet only",
+      "pngBytes": 13078,
+      "pngSha256": "6af8d33f7958166f6939d1a0f9539e25deb3c1e9d3763f6f15fa8aee9a46731b",
+      "pngAlphaBounds": [
+        67,
+        88,
+        234,
+        273
+      ]
+    },
+    {
+      "id": "deer",
+      "name": "צבי",
+      "category": "enemy",
+      "glb": "models/deer.glb",
+      "png": "png/deer.png",
+      "triangles": 340,
+      "bytes": 34964,
+      "sha256": "e90bcc11652c68263887c40048413a89b3a2c3e564918678105662d87531bcae",
+      "bounds": {
+        "min": [
+          -0.38697,
+          0.075,
+          -1.14
+        ],
+        "max": [
+          0.38697,
+          2.49122,
+          0.92
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "bound-across",
+      "clips": [
+        {
+          "name": "bound",
+          "durationSeconds": 0.88
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "capsule",
+        "radius": 0.33,
+        "height": 1.9,
+        "length": 1.9
+      },
+      "animationMode": "loop",
+      "pngBytes": 11917,
+      "pngSha256": "ae703a4e76797e98135d5f754b24ebeba2b94c6a32cf953b22840359e4a9b96e",
+      "pngAlphaBounds": [
+        106,
+        67,
+        217,
+        271
+      ]
+    },
+    {
+      "id": "rival-skier",
+      "name": "גולש מתחרה",
+      "category": "enemy",
+      "glb": "models/rival-skier.glb",
+      "png": "png/rival-skier.png",
+      "triangles": 392,
+      "bytes": 45552,
+      "sha256": "14e2b2d9e78d19a3d237f3e53de4063c00753c6fbf8938aec77b489289f06250",
+      "bounds": {
+        "min": [
+          -0.5828501582145691,
+          0.009999999776482582,
+          -0.949999988079071
+        ],
+        "max": [
+          0.5815056562423706,
+          1.4199999570846558,
+          0.949999988079071
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "overtake",
+      "clips": [
+        {
+          "name": "carve",
+          "durationSeconds": 1.6
+        }
+      ],
+      "collision": {
+        "type": "capsule",
+        "radius": 0.42,
+        "height": 1.7
+      },
+      "animationMode": "loop",
+      "license": "CC0-1.0",
+      "source": "../alpine-themes-v1/shared/reference-skier.glb",
+      "sourceSha256": "74a2ff1ed861a0fe8a4a9748836232967677a06f9d3734e9ea8e388493814b99",
+      "pngBytes": 15502,
+      "pngSha256": "91099b5273de7c9440eb999ffe5f20f450b9e94b95e85d10473807059a10109c",
+      "pngAlphaBounds": [
+        69,
+        84,
+        251,
+        276
+      ]
+    },
+    {
+      "id": "snowman",
+      "name": "אדם שלג",
+      "category": "enemy",
+      "glb": "models/snowman.glb",
+      "png": "png/snowman.png",
+      "triangles": 414,
+      "bytes": 34908,
+      "sha256": "28b918e299ac01ecebf80fcc1a85dd30abd68db2b94eb757a94aee6333196b6a",
+      "bounds": {
+        "min": [
+          -0.8734,
+          -0.01,
+          -0.62
+        ],
+        "max": [
+          0.87656,
+          2.25,
+          0.45225
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "wobble",
+      "clips": [
+        {
+          "name": "wobble",
+          "durationSeconds": 1.6
+        }
+      ],
+      "license": "CC0-1.0",
+      "collision": {
+        "type": "capsule",
+        "radius": 0.6,
+        "height": 2.25
+      },
+      "animationMode": "loop",
+      "pngBytes": 12118,
+      "pngSha256": "979883838629a563f8c17af5c2ef22e78d6d046201dfd1c42536b91c27c4deab",
+      "pngAlphaBounds": [
+        88,
+        52,
+        223,
+        257
+      ]
+    },
+    {
+      "id": "snow-spray-light",
+      "name": "שלג קל",
+      "category": "effect",
+      "glb": "models/snow-spray-light.glb",
+      "png": "png/snow-spray-light.png",
+      "triangles": 112,
+      "bytes": 32868,
+      "sha256": "6762b4f6e92e0355417ed62fcc871192aef4afa1b59489167acdb793ed7b0c49",
+      "bounds": {
+        "min": [
+          -0.42648,
+          0.146,
+          0.00431
+        ],
+        "max": [
+          0.41871,
+          0.95067,
+          0.71874
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "snow-spray",
+      "clips": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.9
+        }
+      ],
+      "license": "CC0-1.0",
+      "animationMode": "once-clamp",
+      "particleCount": 14,
+      "durationSeconds": 0.9,
+      "maxConcurrent": 4,
+      "pngBytes": 9499,
+      "pngSha256": "8f5793d82c8df52c1f77e54473c08422ff2543d540b799d590639476a13880b5",
+      "pngAlphaBounds": [
+        69,
+        98,
+        225,
+        243
+      ]
+    },
+    {
+      "id": "snow-spray-medium",
+      "name": "שלג בינוני",
+      "category": "effect",
+      "glb": "models/snow-spray-medium.glb",
+      "png": "png/snow-spray-medium.png",
+      "triangles": 224,
+      "bytes": 65416,
+      "sha256": "9fd41fb97f49e9fe445497201af6833e29b82957c72e4e0067eb7fc3b2e3921c",
+      "bounds": {
+        "min": [
+          -0.50624,
+          0.25293,
+          0.08546
+        ],
+        "max": [
+          0.52525,
+          1.16149,
+          0.8708
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "snow-spray",
+      "clips": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.9
+        }
+      ],
+      "license": "CC0-1.0",
+      "animationMode": "once-clamp",
+      "particleCount": 28,
+      "durationSeconds": 0.9,
+      "maxConcurrent": 3,
+      "pngBytes": 13426,
+      "pngSha256": "41d9333ccd38328ec2f2af6ef21396cae46bf4f4582acd987df425c48bb82758",
+      "pngAlphaBounds": [
+        42,
+        56,
+        263,
+        281
+      ]
+    },
+    {
+      "id": "snow-spray-heavy",
+      "name": "שלג חזק",
+      "category": "effect",
+      "glb": "models/snow-spray-heavy.glb",
+      "png": "png/snow-spray-heavy.png",
+      "triangles": 384,
+      "bytes": 111916,
+      "sha256": "b8fe3ff0baf327d96a15d1f55ed3bf1077c1acb6292079a3235e10e3828ced70",
+      "bounds": {
+        "min": [
+          -0.63743,
+          0.22236,
+          0.02468
+        ],
+        "max": [
+          0.56092,
+          1.42588,
+          1.06422
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "snow-spray",
+      "clips": [
+        {
+          "name": "spray",
+          "durationSeconds": 0.9
+        }
+      ],
+      "license": "CC0-1.0",
+      "animationMode": "once-clamp",
+      "particleCount": 48,
+      "durationSeconds": 0.9,
+      "maxConcurrent": 2,
+      "pngBytes": 18516,
+      "pngSha256": "9999d32e931b2570cd1d16d03810e488aa09ff26ca707174c80438949b6b3481",
+      "pngAlphaBounds": [
+        31,
+        20,
+        278,
+        270
+      ]
+    },
+    {
+      "id": "skier-trail",
+      "name": "שובל גולש",
+      "category": "effect",
+      "glb": "models/skier-trail.glb",
+      "png": "png/skier-trail.png",
+      "triangles": 224,
+      "bytes": 17792,
+      "sha256": "2aa42deedbeae67bc230593b75dc3e5b82e386fded5cb512198adbf6aded4116",
+      "bounds": {
+        "min": [
+          -0.41986,
+          0.014,
+          0.0
+        ],
+        "max": [
+          0.41946,
+          0.014,
+          3.92
+        ]
+      },
+      "pivot": [
+        0,
+        0,
+        0
+      ],
+      "behavior": "ski-trail",
+      "clips": [],
+      "license": "CC0-1.0",
+      "staticSample": true,
+      "runtimeModule": "effects/runtime.mjs",
+      "surfaceOffsetMetres": 0.014,
+      "lifetimeSeconds": 1.15,
+      "maxSegmentsPerSki": 28,
+      "pngBytes": 5942,
+      "pngSha256": "05f8b03c93b1080fcc34b3dab5fb0c6472dbd96e45e380daa6a83a1e2a3183e3",
+      "pngAlphaBounds": [
+        87,
+        120,
+        235,
+        201
+      ]
+    }
+  ],
+  "effects": {
+    "runtimeModule": "effects/runtime.mjs",
+    "particleTexture": "effects/powder-particle.png",
+    "trailTexture": "effects/trail-strip.png",
+    "intensities": [
+      {
+        "id": "light",
+        "emitPerSecond": 18,
+        "maxParticles": 24
+      },
+      {
+        "id": "medium",
+        "emitPerSecond": 42,
+        "maxParticles": 48
+      },
+      {
+        "id": "heavy",
+        "emitPerSecond": 78,
+        "maxParticles": 96
+      }
+    ],
+    "trail": {
+      "segmentsPerSki": 28,
+      "lifetimeSeconds": 1.15,
+      "widthMetres": 0.12,
+      "surfaceOffsetMetres": 0.014
+    }
+  },
+  "integrationNotes": [
+    "GLBs embed all geometry and materials; no decoder, textures or external URI required.",
+    "Collision entries and suggested multipliers are design metadata, not active gameplay.",
+    "snow-hole requires the host terrain to cut out a 1.08m radius circle; it is not a dark decal.",
+    "falling-tree fall clip starts upright and ends fallen; widen collision during its 4.5m sweep.",
+    "Enemy animation loops do not move through the course; translate the root externally.",
+    "Use one AnimationMixer per independently animated instance.",
+    "PNG renders are normalized to fit; use GLB metre bounds for gameplay scale.",
+    "Static skier-trail.glb demonstrates the shape; runtime.mjs builds a moving trail from actual ski positions."
+  ]
+}

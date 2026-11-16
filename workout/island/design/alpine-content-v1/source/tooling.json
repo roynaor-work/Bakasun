@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "gltf-validator": "2.0.0-dev.3.10",
+    "playwright": "1.62.1"
+  },
+  "note": "Install outside the delivery directory. Set ISLAND_PLAYWRIGHT, ALPINE_VALIDATOR and ALPINE_CHROMIUM when necessary. Chromium 151.0.7922.173 was used for the delivered captures."
+}

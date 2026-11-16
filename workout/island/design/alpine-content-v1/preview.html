@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f4f1df">
+  <link rel="icon" href="data:,">
+  <title>עוד הרפתקה בשלג · Alpine Content</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <header><div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>עוד הרפתקה בשלג</strong><small>ALPINE CONTENT / VOL. 01</small></div></div><div class="summary"><b>12</b> מכשולים <i>·</i> <b>8</b> בונוסים <i>·</i> <b>4</b> מפריעים</div><a href="REPORT.md">דוח החבילה</a></header>
+  <main>
+    <aside aria-label="ספריית נכסים">
+      <div class="catalogue-head"><span class="eyebrow">הספרייה האלפינית</span><div class="tabs" role="group" aria-label="מצב תצוגה"><button id="scene-mode" aria-pressed="true">במסלול</button><button id="asset-mode" aria-pressed="false">מקרוב</button></div></div>
+      <label class="group-label" for="category">מה פוגשים בדרך?</label><select id="category"><option value="obstacle">מכשולים / 12</option><option value="bonus">בונוסים / 8</option><option value="enemy">מפריעים / 4</option><option value="effect">שלג ושובל / 4</option></select>
+      <div id="asset-list" role="group" aria-label="בחירת נכס"></div>
+      <div class="catalogue-foot"><span class="status-dot"></span><span id="status" role="status">מכינים את המסלול…</span></div>
+    </aside>
+    <section class="stage" aria-label="תצוגת תלת ממד">
+      <canvas id="view" aria-label="מסלול סקי עם מכשולים ובונוסים"></canvas>
+      <div class="stage-heading"><span class="eyebrow" id="scene-kicker">מסלול של הפתעות</span><h1 id="asset-title">בכל פנייה, משהו חדש.</h1><p id="asset-detail">שלג רך, צבע חם והרפתקה קטנה בדרך לפסגה.</p></div>
+      <div class="top-tools"><label for="theme" class="sr-only">סביבת צבע</label><select id="theme"><option value="0">יער האורנים</option><option value="1">מערת הקרח</option><option value="2">ההר הזוהר</option><option value="3">ליל הזוהר</option><option value="4">הכפר האלפיני</option><option value="5">פסגת העננים</option></select></div>
+      <div class="stage-bottom"><div class="play-tools"><button id="motion" aria-pressed="false">תנועה</button><label for="intensity" class="sr-only">עוצמת שלג</label><select id="intensity"><option value="0">שלג קל</option><option value="1" selected>שלג בינוני</option><option value="2">שלג חזק</option></select><button id="angle">זווית</button></div><div id="downloads" hidden><a id="glb-link" download>GLB ↓</a><a id="png-link" download>PNG ↓</a></div><span id="model-stats" class="model-stats">מט / אלמוג / טורקיז</span></div>
+      <div id="failure" role="alert" hidden></div>
+    </section>
+  </main>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

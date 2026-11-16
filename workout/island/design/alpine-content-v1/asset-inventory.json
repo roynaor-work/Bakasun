@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "license": "CC0-1.0",
+  "note": "All files are listed except this inventory itself, to avoid a recursive digest. No external media or libraries are bundled.",
+  "files": [
+    {
+      "path": "LICENSES.md",
+      "bytes": 3760,
+      "sha256": "319954a8738b72109202d8e0827fb09786d4ecc8d7306c6d041303b9f220d872",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 14782,
+      "sha256": "025510639f0c894808ae7376a596054949f2ffdd0ead25f3d73d7579759c16cd",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "effects/powder-particle.png",
+      "bytes": 1370,
+      "sha256": "8d5589686854a47ad73dc68b9938283907c3cb02e26e72313c9ed941c3d894d4",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "effects/runtime.mjs",
+      "bytes": 4586,
+      "sha256": "1563fd6f104ceb0e5445c5916741c41a17fe79210f607acdb6851e3eb0934618",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "effects/trail-strip.png",
+      "bytes": 1306,
+      "sha256": "debbb98aa1b25e804dd120d36ada39f9b3a43b53e41d96a93e9909f4b40a5184",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 34710,
+      "sha256": "a61299f890d8b0c4f5d9e4de402af641ecb4825d92ac4b1718f5ba1d794771cd",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/bear.glb",
+      "bytes": 31248,
+      "sha256": "f3989d9c2bb4de6d5a6d9bc797f56ebb5ed1e8da9acc87044b69fe45eb05f0ea",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/boost.glb",
+      "bytes": 10428,
+      "sha256": "551eb77a97f06fddcb0cfc0e75db8468f3d86d44a14c2342ed228354bb8db80a",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/boulder.glb",
+      "bytes": 11044,
+      "sha256": "8c2c901b921ac9360c52ff25347d3eecc46c6d0d35dba8bc5f47c1125805ce88",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/bridge.glb",
+      "bytes": 41540,
+      "sha256": "9c54a3fa3eff3605815e7f9cd36f375643855b83ddd8dd3e6fbd529661480fad",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/clock.glb",
+      "bytes": 20144,
+      "sha256": "1dd9693d5302d64ae432117f1eb169f772c047a83c24ee1771fff2dd2981cd8e",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/deep-snow.glb",
+      "bytes": 17972,
+      "sha256": "979478f42b8d121d2f06ad56e73c9c2f0054a6d2b4cbf16084a58e439a57acf9",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/deer.glb",
+      "bytes": 34964,
+      "sha256": "e90bcc11652c68263887c40048413a89b3a2c3e564918678105662d87531bcae",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/double-coin.glb",
+      "bytes": 24756,
+      "sha256": "08485d15c147d13ca45effd8aadc55ae3e5b8432213df6343b5c49137007d462",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/falling-tree.glb",
+      "bytes": 23176,
+      "sha256": "5c2b8f7fae07a6f07ba6edaf838a57e9315f218825d0164dbd461cc1fe516f85",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/fence.glb",
+      "bytes": 23060,
+      "sha256": "938b22c0d5fecafcab57d235c047bd9a84e0b6a44d6d2d7b78838a1d0ad9fdc3",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/heart.glb",
+      "bytes": 10480,
+      "sha256": "3803acbe26e9e8e34506a3e5281393bb2b4853756cb60b6cd2790299739deaa8",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/high-ramp.glb",
+      "bytes": 25576,
+      "sha256": "ef23b20ae26fcc68e9fd36e82c653cd51797250c1e617fdea0bcc68eb50476e5",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/ice-patch.glb",
+      "bytes": 21024,
+      "sha256": "056128d918529b8dab0fa3e48ae8660c4f626a86f5e8ca6d9e51740d992d9c92",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/magic-wand.glb",
+      "bytes": 11420,
+      "sha256": "64c8ccb803535898b58b788382371db682e1b173f728cecf5c72d8983d93421c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/magnet.glb",
+      "bytes": 15932,
+      "sha256": "bf358f9d34a8e0d6479671465c1785048c691de254db2803e3144d2c0c1b86db",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/narrow-passage.glb",
+      "bytes": 20036,
+      "sha256": "5592370a6281805baeac6dea2c7913b64cbe295eb64a5f58a4bea6c60b8816f7",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/rival-skier.glb",
+      "bytes": 45552,
+      "sha256": "14e2b2d9e78d19a3d237f3e53de4063c00753c6fbf8938aec77b489289f06250",
+      "source": "../alpine-themes-v1/shared/reference-skier.glb + source/build_assets.py (animation)",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/shield.glb",
+      "bytes": 10760,
+      "sha256": "c54fa8f88714968c442b23f99bf2a96e44f0094ed5c8f8482580ff148c32dd26",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/skier-trail.glb",
+      "bytes": 17792,
+      "sha256": "2aa42deedbeae67bc230593b75dc3e5b82e386fded5cb512198adbf6aded4116",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/snow-hole.glb",
+      "bytes": 22424,
+      "sha256": "44c178da14fd3d9889aa5e9748581e9cb4a32f785fb7b360fd37babc7a673dbd",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/snow-spray-heavy.glb",
+      "bytes": 111916,
+      "sha256": "b8fe3ff0baf327d96a15d1f55ed3bf1077c1acb6292079a3235e10e3828ced70",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/snow-spray-light.glb",
+      "bytes": 32868,
+      "sha256": "6762b4f6e92e0355417ed62fcc871192aef4afa1b59489167acdb793ed7b0c49",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/snow-spray-medium.glb",
+      "bytes": 65416,
+      "sha256": "9fd41fb97f49e9fe445497201af6833e29b82957c72e4e0067eb7fc3b2e3921c",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/snowman.glb",
+      "bytes": 34908,
+      "sha256": "28b918e299ac01ecebf80fcc1a85dd30abd68db2b94eb757a94aee6333196b6a",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/spring-pad.glb",
+      "bytes": 35804,
+      "sha256": "5c9f343e795f1e1e9bc9ff5f5bc35e8f6d30cddbbeeffef5ed6d7a9782242bbb",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/star.glb",
+      "bytes": 10912,
+      "sha256": "0e970626de38b8eb7175ab35dabefb0831eb20faf1c537eb3f3a29900618c14b",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/trick-ramp.glb",
+      "bytes": 25624,
+      "sha256": "74dcc398e970ac5c334156fcdde0bebb5cc4faf0adc806a8a1c61359161120aa",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "models/warning-sign.glb",
+      "bytes": 12532,
+      "sha256": "dee7fa6e8aaea848e84227e7e03fde0afa679b5ea648ac236c70b2ce9bd01edd",
+      "source": "source/build_assets.py",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/bear.png",
+      "bytes": 13078,
+      "sha256": "6af8d33f7958166f6939d1a0f9539e25deb3c1e9d3763f6f15fa8aee9a46731b",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/boost.png",
+      "bytes": 9652,
+      "sha256": "39395fefa50ec22e77e8f6adc908474d1f31cba2720257f2b2cb7002f271f54d",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/boulder.png",
+      "bytes": 10469,
+      "sha256": "8abe73bdcbeee5ebe550f3e24cfb9ce7a717f308d1ad71def389b89278a6f615",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/bridge.png",
+      "bytes": 14363,
+      "sha256": "d070dff212e642311dd1cf468aebb83948c50f5b9d9c3de872186f451a0ae33f",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/clock.png",
+      "bytes": 10091,
+      "sha256": "73af61d02cae941501f0368bd04585e9390da356f51f3686597cd9932a75ec71",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/deep-snow.png",
+      "bytes": 8561,
+      "sha256": "b14ea4e1edc4298b642a2a283d2c2afee488bf9ede6d22599bc828bc61755de5",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/deer.png",
+      "bytes": 11917,
+      "sha256": "ae703a4e76797e98135d5f754b24ebeba2b94c6a32cf953b22840359e4a9b96e",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/double-coin.png",
+      "bytes": 10452,
+      "sha256": "28e1db3dc572701ad0b8ecbdb109debcf560b7b2e31ff19355c940b150c12a07",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/falling-tree.png",
+      "bytes": 9197,
+      "sha256": "5c6282d79231e42f6d96afc7165d49ef8d9d99d2f01f6474ae1c4cc39ba37bda",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/fence.png",
+      "bytes": 9388,
+      "sha256": "4872dc5ebadc8f296fe7e47cbb21e37a742eff51538a20e2d1e30b19efc2b121",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/heart.png",
+      "bytes": 9683,
+      "sha256": "ce6d37a6f28bcf55651ed24685996f49e04b01867e506922894c0fded7699ead",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/high-ramp.png",
+      "bytes": 9419,
+      "sha256": "8872e0dfc89c0a24566616813abbea4625f9d19a352945d06ead24fb108afe80",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/ice-patch.png",
+      "bytes": 7876,
+      "sha256": "94f78b4ae67d16f200ca1f454f763519e4bba1f5f7c66b81fdb2340c325e9518",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/magic-wand.png",
+      "bytes": 7658,
+      "sha256": "279d62425b10c9c71d67ada0a4d9926a87f2448edaf2c09ca9064f10226174fb",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/magnet.png",
+      "bytes": 10765,
+      "sha256": "7386067f78d1a77b9d613ffa4dd6756ba4263e384cbeffcb88e9f4298233e8c2",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/narrow-passage.png",
+      "bytes": 8897,
+      "sha256": "e94cb82134be1d38fbb28c7571026030bc82ec0535a0bc418ecd6ae5349f54b6",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/rival-skier.png",
+      "bytes": 15502,
+      "sha256": "91099b5273de7c9440eb999ffe5f20f450b9e94b95e85d10473807059a10109c",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/shield.png",
+      "bytes": 8950,
+      "sha256": "9b041fe4834ad81953f82b3d07f2a61d375ad70e08a826633ac8f75b25485bcd",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/skier-trail.png",
+      "bytes": 5942,
+      "sha256": "05f8b03c93b1080fcc34b3dab5fb0c6472dbd96e45e380daa6a83a1e2a3183e3",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/snow-hole.png",
+      "bytes": 10353,
+      "sha256": "5cc9919f0ab0cbe755ce142412a7f895971cd10d0cea7328e72fc8e67833cb35",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/snow-spray-heavy.png",
+      "bytes": 18516,
+      "sha256": "9999d32e931b2570cd1d16d03810e488aa09ff26ca707174c80438949b6b3481",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/snow-spray-light.png",
+      "bytes": 9499,
+      "sha256": "8f5793d82c8df52c1f77e54473c08422ff2543d540b799d590639476a13880b5",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/snow-spray-medium.png",
+      "bytes": 13426,
+      "sha256": "41d9333ccd38328ec2f2af6ef21396cae46bf4f4582acd987df425c48bb82758",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/snowman.png",
+      "bytes": 12118,
+      "sha256": "979883838629a563f8c17af5c2ef22e78d6d046201dfd1c42536b91c27c4deab",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/spring-pad.png",
+      "bytes": 14332,
+      "sha256": "08270a92778756fc3f829e281fa6f716480544152042f3460dfbd7bbee787f1d",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/star.png",
+      "bytes": 9411,
+      "sha256": "3ac61c510dd7d80d58b6df4b5977cfdeccfde995cbf0a7e00a6ccc7751c7142d",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/trick-ramp.png",
+      "bytes": 10478,
+      "sha256": "c646719d8712847e1fc4b0caa1eb98acca02b58e96c5529866753689857328b1",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "png/warning-sign.png",
+      "bytes": 6976,
+      "sha256": "a39366f167675d00f98fba98f05821faa532f4de5ca66c7273a8e2333cc18d9f",
+      "source": "source/verify.mjs + delivered GLB",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 5860,
+      "sha256": "c28936d9bc6fe8ad69d6fa334e682e04ab4300e9718b41ebd67d5bba62f91acf",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3245,
+      "sha256": "48c056203b943c70196e2ca0a7a24ee909f15d64f1b8a89e7df057c958d30002",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 12348,
+      "sha256": "9428921c399b5ecd62e2e567bbe27c5a0341b6bcb38b045572c29345f5f073d6",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/build_assets.py",
+      "bytes": 28340,
+      "sha256": "0009875f62b11829f45bee39860563efd7c75ef66b6b7d2f5e9c2af43cf8302a",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/catalogue.py",
+      "bytes": 2891,
+      "sha256": "1097bd959314947288f4800cfbd29357867abc70cc6af2488b92bc6e1cae674f",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/check-runtime.mjs",
+      "bytes": 2149,
+      "sha256": "3a1a266c0ada23b9d9445fc1ee8caf0c5290baf5bc0d053875fcde5b7dc9f260",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/requirements.txt",
+      "bytes": 28,
+      "sha256": "e32056a5263b5972e789540468f3d3e1e8e2d1649d21ef65e814317727be4897",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/tooling.json",
+      "bytes": 324,
+      "sha256": "12d6c4d86d6b9d8e5a817c598d35729e747bd44c9fa0201fff4df41407209638",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "source/verify.mjs",
+      "bytes": 9200,
+      "sha256": "c4ea7e0d7607a87d3372421bc4394a852c08cc9af1f0175e3cc4ad4961bf706c",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/contact-sheet.png",
+      "bytes": 166543,
+      "sha256": "4e8d816e765351a3d6aa7c4330f4e61e88338112d6dc35427b9d7b9a860b4c0e",
+      "source": "source/catalogue.py + delivered PNG",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/deer-844x390.png",
+      "bytes": 50131,
+      "sha256": "71d4cae130e2903089d106cd4199f9b058f8c93a96f75aed45b42053206c3d1a",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-1440x900.png",
+      "bytes": 220248,
+      "sha256": "c0c098eb3dc7b506c6341cf5e784a5a4222b2fc175baa1f4570439a200bb040c",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 96576,
+      "sha256": "2ebb8474c9228c7b64548eb1c631d1ada87ccb11c73e20132749c9661fdae81c",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 90920,
+      "sha256": "11bfc5d90b010024d627d3ceedf67548fa27967b853cd5ea2a0e1d80adac7c25",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1583,
+      "sha256": "35e26e9b2a23be8672b65a202ebee325a0630eb205f64fc595015679dc3d3af9",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/runtime-contract.json",
+      "bytes": 421,
+      "sha256": "7f9d7357e0bc4a819b002d20db4ac9438fc438c16a37d2aaccf588f127600d68",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "verification/validation.json",
+      "bytes": 18055,
+      "sha256": "54e5b175d49e15ee6a440f594a8a22a6ed2d41ebba5fd13cb7f9e337b657fd6e",
+      "source": "original source or verification output",
+      "license": "CC0-1.0"
+    }
+  ]
+}
