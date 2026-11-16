@@ -11,6 +11,8 @@
 //  bump     steer into the car alongside at the start: contact, ricochet and slow-down
 //  pit      tap the pit button, the car drives into the pit lane, stops, a tap changes the tyres, out again; the computer drivers pit too (whole race)
 //  grid     the grid and the pack from behind: how the rivals look (formula or toy), draw calls and triangles
+//  pitauto  racing-v24.1: no tap on the pit button; the automatic stop is announced, taken at the end of lap 2 (lap 1 of a two-lap race) and the change runs by
+//           itself; RV24_CANCEL=1 taps the announced button once to cancel; RV24_STAGE=N races the quick race of stage N (1-12: two laps) instead of the league
 // Usage: CHROMIUM_PATH=/opt/pw-browsers/chromium PLAYWRIGHT_MODULE=/opt/node-tools/node_modules/playwright/index.js RV24_SCENARIO=turbo RV24_PART=racing-v24-fixes/turbo-after \
 //        [RV24_QUERY='racingTurbo=v23'] [RV24_FPS=30] node workout/island/tests/racing-v24-touch-browser.mjs
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -44,8 +46,10 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
  await page.evaluate(q=>{history.replaceState(null,'',location.pathname+'?dev=1'+(q?'&'+q:''));},extra);
  await page.evaluate(()=>{const {engine,data,games}=window.__island;engine.tick=()=>({ok:true});data.featureFlags.events=false;games.now=()=>0;try{localStorage.setItem('island.sound','on');}catch{}});
  await page.evaluate(audioLog);
- await page.evaluate(()=>window.__island.games.stages('islandRacing'));await tick(60);await page.waitForFunction(()=>document.querySelector('[data-action=racing-league-go]'));
- await page.evaluate(()=>window.__island.games.racingLeagueGo());await tick(100);
+ // racing-v24.1: RV24_STAGE=N starts the quick race of stage N (stages 1-12 run two laps) instead of the next league race (three laps)
+ if(process.env.RV24_STAGE){const n=Number(process.env.RV24_STAGE);await page.evaluate(n=>{const e=window.__island.engine;e.state.money=Math.max(e.state.money||0,100000);window.__island.games.start('islandRacing',undefined,n);},n);await tick(100);}
+ else{await page.evaluate(()=>window.__island.games.stages('islandRacing'));await tick(60);await page.waitForFunction(()=>document.querySelector('[data-action=racing-league-go]'));
+  await page.evaluate(()=>window.__island.games.racingLeagueGo());await tick(100);}
  if(await page.locator('[data-action=game-understood]').count()){await tick(32);await page.locator('[data-action=game-understood]').tap();}
  for(let i=0;i<400&&!await page.evaluate(()=>window.__island.games.current?.session?.snapshot?.renderMetrics?.frames>1);i++){await tick(100);await page.waitForTimeout(100);}
  await ready();await tick(100);await nav();
@@ -180,6 +184,28 @@ await verify(part,[{width:844,height:390,isMobile:true}],async({page,context,tic
    if(k%150===0)await frame('race-'+String(k).padStart(5,'0'));if(k%30===0)await pullAudio();k++;if(s.t>until||s.phase!=='racing')break;}
   report.pitEvents=await page.evaluate(()=>window.__log.filter(e=>/^pit/.test(e.type)));report.tower=await page.evaluate(()=>[...document.querySelectorAll('.rt-row')].filter(r=>r.style.display!=='none').map(r=>({id:r.dataset.id,pos:r.querySelector('.rt-pos')?.textContent,gap:r.querySelector('.rt-gap')?.textContent,pit:r.dataset.pit||null})));
   report.cars=await page.evaluate(()=>window.__island.games.current.session.debug.model.state.cars.map(c=>({id:c.id,rank:c.rank,lap:c.lap,tyre:c.tyre!==undefined?+c.tyre.toFixed(3):null,pits:c.pits??null,pitLaps:c.pitLaps??null})));await pullAudio();
+ }
+ else if(scenario==='pitauto'){
+  // racing-v24.1 (Roy after v24: "the goal is that it goes in for the tyre change automatically after two laps"): no finger on the pit button at all. The automatic
+  // stop is announced at the start of its lap (the button pulses "אוטומטי · לביטול", a toast), the car goes in at the end of that lap (lap 2 of 3, lap 1 of 2), the
+  // change starts by itself and the car comes out on new tyres. RV24_CANCEL=1: one tap on the pulsing button cancels, and the car drives past the pit entry.
+  const until=Number(process.env.RV24_SECONDS)||220,cancel=process.env.RV24_CANCEL==='1';let k=0,exitAt=null,lapAfterCancel=null;const pitShots=new Set();
+  const hud=()=>page.evaluate(()=>{const b=document.querySelector('[data-action=racing-pit]'),t=document.querySelector('.racing-toast');return {button:b?{state:b.dataset.state,hidden:b.hidden,sub:b.querySelector('.racing-pit-sub')?.textContent||''}:null,toast:t&&!t.hidden?t.textContent:'',tyres:document.querySelector('.racing-tyre-value')?.textContent||null};});
+  report.pitInfo=await page.evaluate(()=>{const p=window.__island.games.current.session.debug.model.pit;return {on:p.on,laps:p.laps,auto:p.auto,stopLap:p.stopLap};});report.hudAtStart=await hud();
+  while(true){const s0=await state();
+   if(s0.pit){await setBrake(false);await setGas(false);if(wheelOn){await up(2);wheelOn=false;}
+    if(s0.pit==='change'&&!report.crewAtChange)report.crewAtChange=await page.evaluate(()=>window.__island.games.current.session.snapshot.renderMetrics?.pitCrew||null);
+    if(!pitShots.has(s0.pit)){pitShots.add(s0.pit);await frame('pit-'+s0.pit);if(s0.pit==='entry')report.hudAtEntry=await hud();}else if(['stop','change','leave'].includes(s0.pit)&&k%4===0)await frame('pit-'+s0.pit+'-'+String(k).padStart(5,'0'));
+    await tick(FRAME);await log();k++;if(k%30===0)await pullAudio();continue;}
+   await drive({aLat:Number(process.env.RV24_ALAT)||15,aBrake:Number(process.env.RV24_ABRAKE)||15});const s=await log();
+   if(!report.armed){const h=await hud();if(h.button?.state==='auto'){report.armed={...s,hud:h};await frame('pit-armed');}}
+   if(cancel&&report.armed&&!report.cancelled&&s.t>report.armed.t+2){const b=await box('[data-action=racing-pit]');if(b){await down(4,b.x+b.width/2,b.y+b.height/2);await tick(FRAME);await up(4);report.cancelled={...(await state()),button:b,hud:await hud()};await frame('pit-cancelled');}}
+   if(report.cancelled&&lapAfterCancel===null&&s.lap>report.cancelled.lap){lapAfterCancel=s.t;report.passedEntry={...s,hud:await hud()};await frame('past-pit-entry');}
+   if(exitAt===null&&pitShots.has('exit'))exitAt=s.t;
+   if(k%150===0)await frame('race-'+String(k).padStart(5,'0'));if(k%30===0)await pullAudio();k++;
+   if(s.t>until||s.phase!=='racing'||(exitAt!==null&&s.t>exitAt+2)||(lapAfterCancel!==null&&s.t>lapAfterCancel+3))break;}
+  report.pitEvents=await page.evaluate(()=>window.__log.filter(e=>/^pit/.test(e.type)));
+  report.cars=await page.evaluate(()=>window.__island.games.current.session.debug.model.state.cars.map(c=>({id:c.id,rank:c.rank,lap:c.lap,tyre:c.tyre!==undefined?+c.tyre.toFixed(3):null,pits:c.pits??null,pitLaps:c.pitLaps??null,cancelled:!!c.pitCancelled})));await pullAudio();
  }
  else if(scenario==='grid'){
   await frame('0-grid');report.gridMetrics=await page.evaluate(()=>{const m=window.__island.games.current.session.snapshot.renderMetrics;return {drawCalls:m.drawCalls,triangles:m.triangles,formulaAll:m.formulaAll||null,carAsset:m.carAsset};});

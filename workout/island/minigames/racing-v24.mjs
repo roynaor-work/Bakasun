@@ -36,6 +36,15 @@ export const OFF_SLOW=Object.freeze({slow:8,dragFull:20,pull:.9,nudge:.45,return
 export const PIT=Object.freeze({minLaps:3,speed:20,entryDecel:14,stopDecel:9,leaveAccel:8,exitAccel:9,stopAI:[2.2,2.8],tapWait:.8,change:2,
  wear:1.05e-4,cornerWear:.9,brakeWear:.6,wornAt:.75,topLoss:.07,gripLoss:.2,aiCornerLoss:.22,autoTyre:.3,
  entryBefore:20,entryLength:55,exitLength:55,boxMargin:45});
+// ---- racing-v24.1 (Roy after v24: "a tyre change on only one track ... the goal is that it goes in for the tyre change automatically after two laps"). v24 had
+// stops only in races of 3 laps or more, so the 2-lap races (quick races of the first two tiers, the league sprints, the "short races" setting) never showed one,
+// and the player's own stop came only when asked or on the last possible lap, decided 80 m before the pit entry without a word. v24.1: every race of
+// PIT_AUTO.distance metres or more has the stop (today all of them: 2-3 laps of 2.0-2.3 km); the player's car goes in by itself at the end of lap 2 (lap 1 in
+// a two-lap race), announced from the start of that lap, and the pit button cancels it. ?racingPitAuto=0 brings v24 back.
+export const PIT_AUTO=Object.freeze({distance:3500,armAfter:5});
+export const pitAutoEnabled=search=>read(search).get('racingPitAuto')!=='0';
+/** The lap at the end of which the player's car is pitted automatically (v24.1): 2, or 1 in a two-lap race (the second lap ends at the finish). */
+export const autoStopLap=laps=>laps>=3?2:1;
 /** Tyre state 0..1 (1 = new) -> how worn, 0 (fresh) .. 1 (finished). Grip and top speed fade gradually from PIT.wornAt down. */
 export const tyreWorn=tyre=>Math.max(0,Math.min(1,(PIT.wornAt-(Number.isFinite(tyre)?tyre:1))/PIT.wornAt));
 /** The pit lane of a circuit, the same one racing-f1.mjs paints: along the main straight on the side -1 (negative lateral), the lane line at 7.6 m beyond the asphalt.

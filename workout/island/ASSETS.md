@@ -1,5 +1,14 @@
 # נכסים ורישיונות — האי שלי
 
+## כדורסל v24.1 · 14.11.2026
+
+עותקי ריצה של חבילות Codex ב-`assets/hoops-v241/`, כל אחד עם קובץ הרישיון של החבילה לידו, בלי שינוי בבתים (הגיבובים נבדקים ב-`tests/island-hoops-v241*.test.mjs`):
+- `referee-audio/`: שתי שריקות (קצרה לחטיפה, ארוכה לעבירה), OGG ו-MP3, מתוך `codex/hoops-referee-audio-v1` (סינתזה מקורית, CC0-1.0).
+- `crowd/`: ששת האוהדים היושבים בשלוש רמות, `assets.json`, `lod-config.json` ו-`runtime/lod-policy.mjs` ללא שינוי, מתוך `codex/hoops-crowd-3d-v1` (CC0-1.0). רמה 0 לא נשמרת במכשיר (רק מצב ההשוואה `?hoopsCrowd3d=full`).
+- `body/`: גופי guard / wing / center של `design/athlete-body-v2` (נגזרת CC0 של גופי v22; ידיים ומורף כפפות). האטלס הוא האטלס של v22, זהה בבתים.
+- `motion/motion-v13.json`: שמונת הקליפים שהמשחק מנגן מתוך `runtime/motion.json` של `codex/hoops-motion-v13` (CC0-1.0), רשומות הקליפים כפי שהן; המקור והגיבוב בשדה `source`.
+- `referee/referee.glb`: השופט ושש התנועות של `codex/hoops-ref-scoreboard-v1`. התנועות, הלבוש והשריקה CC0-1.0; הבסיס האנטומי מהשופט הקיים במאגר (MakeHuman/MPFB, כפי שמתועד ב-`LICENSES.md` שליד הקובץ). לוח התוצאות של החבילה לא חובר.
+
 ## דגמי העיר (מעבדת העיר, 07.11.2026)
 
 58 דגמי Meshy מ-`workout/city-lab` (מקור ללא שינוי, 137MB) נדחסו לשימוש האי ב-`assets/models/city/NN-name.glb`: טקסטורת JPEG 512 (איכות 80), כימות גאומטריה (`KHR_mesh_quantization`, נקרא ישירות ב-GLTFLoader), בלי meshopt ובלי Draco. הסיבה: מדיניות ה-CSP של האי (`script-src 'self'`) חוסמת קומפילציה של WebAssembly, ופענח meshopt דורש אותה. סה"כ 11.09MB (ממוצע 191KB, מקסימום 288KB). נבנים ב-`tools/city-models-compress.mjs` (תלויות בנייה בלבד, לא נשלחות). `assets/models/city/catalog.json` = מספר, שם, קטגוריה, בתים לפני ואחרי, משולשים, גודל מנורמל וגודל מוצע במטרים. הרישיון והמקור כמו בדוח מעבדת העיר. הטעינה והמיפוי: `view/city-models.mjs`; דגל כיבוי `?cityModels=0`. הבדיקות: `tests/island-city-models.test.mjs`. דוח: `verification/city-models/REPORT.md`.

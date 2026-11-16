@@ -7,9 +7,9 @@
  * The shader below is the pack's runtime/appearance.mjs masks, applied to the v22 instance instead of a deep clone of the whole scene
  * (decorateAthlete clones every attribute and the four morphs per player: about 0.7 MB a player; here only the colour attribute is
  * per player, as in v22). The chest crest mask is off (no team mark yet). */
-import {V22_BASE,V22_HAIR,V22_BODIES,V22_REGION,v22Colors} from './athlete-body-v22.mjs?v=island-v2-20261107-14';
+import {V22_BASE,V22_HAIR,V22_BODIES,V22_REGION,v22Colors} from './athlete-body-v22.mjs?v=island-v2-20261107-15';
 import {athleteRig} from './athlete-body.mjs';
-import {soccerV24Url,soccerShirtNumber} from './soccer-v24.mjs?v=island-v2-20261107-14';
+import {soccerV24Url,soccerShirtNumber} from './soccer-v24.mjs?v=island-v2-20261107-15';
 
 export const V2_BODY_URL=()=>soccerV24Url('body/models/soccer.glb');
 const CANON18=['Root','Hips','Spine','Chest','Neck','Head','LeftArm','LeftForeArm','LeftHand','RightArm','RightForeArm','RightHand','LeftUpLeg','LeftLeg','LeftFoot','RightUpLeg','RightLeg','RightFoot'];
@@ -133,11 +133,12 @@ export function loadAthleteV2({T,GLTFLoader,retry=fn=>fn()}){
 export function resetAthleteV2(){cache=null;}
 
 /** Numbers, gloves and the number / glove colours on one v22 instance of the v2 body. `kit` and `skin`/`hair` are the instance's own
- * (the number takes the kit's trim colour, the gloves its shorts colour, as the pack's appearance adapter does). Returns a controller. */
-export function decorateAthleteV2(T,inst,{number=null,gloves=false,kit,appearance={},style='soccer'}){
+ * (the number takes the kit's trim colour, the gloves its shorts colour, as the pack's appearance adapter does). `shape` is the body's width and
+ * depth in the pack's rest space (BODY_SHAPES of the pack; basketball v24.1 passes the guard / wing / centre ones). Returns a controller. */
+export function decorateAthleteV2(T,inst,{number=null,gloves=false,kit,appearance={},style='soccer',shape=SHAPE}){
   const colors=v22Colors({skin:appearance.skin,hair:appearance.hair,kit,style});
   const uniforms={athleteNumber:{value:0},athleteNumbers:{value:0},athleteCrest:{value:0},athleteGloves:{value:gloves?1:0},
-    athleteTrim:{value:new T.Color(colors[V22_REGION.trim])},athleteSecondary:{value:new T.Color(colors[V22_REGION.shorts])},athleteShape:{value:new T.Vector2(...SHAPE)}};
+    athleteTrim:{value:new T.Color(colors[V22_REGION.trim])},athleteSecondary:{value:new T.Color(colors[V22_REGION.shorts])},athleteShape:{value:new T.Vector2(...shape)}};
   const owned=[];let decorated=0;
   for(const mesh of inst.meshes.full){
     if(!mesh.isSkinnedMesh||!mesh.geometry.attributes._glove)continue; // the hair cap keeps the shared material

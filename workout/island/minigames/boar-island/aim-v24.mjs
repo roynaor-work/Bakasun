@@ -28,6 +28,13 @@ export const AIM24=Object.freeze({
   VEL_TAU:.08,SWITCH:.7                  // the boar's speed is smoothed over 80 ms; another boar must be 30% closer to take over
 });
 
+// v24.1 (14/11/2026), Roy after v24: "הירי מדויק וטוב / אבל אולי טיפה לשפר עוד את הרגישות בכיוון". A more sensitive stick for small pushes
+// (the linear start of the curve 0.3 -> 0.45: +33% crosshair speed at a 20% push, +24% at 30%, +13% at 50%, full tilt unchanged) together
+// with a firmer slowdown over a boar (60% -> 50% of the speed), so the crosshair travels sooner and still stops on the boar. Measured in the
+// child model (8-12 deg aim noise, 2400 boars a version): hits +6%, median time onto a new boar -8%, corrections -7%, first hit -12%; a push
+// away still leaves the boar at least as fast as in v24 below 60% tilt. `?boarAim=v24` keeps AIM24.
+export const AIM241=Object.freeze({...AIM24,LIN:.45,FRICTION_MIN:.5});
+
 const smooth01=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
 
 /** The ring follows the thumb: when the thumb is further than R from the centre, the centre is dragged along the line to the thumb.

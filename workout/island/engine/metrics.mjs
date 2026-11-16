@@ -1,4 +1,4 @@
-import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-14';
+import {cityConnections} from './city-connections.mjs?v=island-v2-20261107-15';
 
 export function buildingCenter(building, registry) {
   const type = registry.buildings.get(building.typeId);

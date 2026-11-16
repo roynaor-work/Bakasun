@@ -1,6 +1,7 @@
 // Boar aiming, v23 against v24, through the REAL island shell with real touch (14/11/2026).
 // Run: ISLAND_PLAYWRIGHT=/opt/node22/lib/node_modules/playwright/index.mjs node workout/island/tests/boar-aim-v24-browser.mjs
-//   AIM=v24 (default) the new aim;  AIM=v23  `?boarAim=v23` on the island URL (the code before v24).
+//   AIM=v241 (default, v24.1: the more sensitive stick start with a firmer slowdown over a boar);  AIM=v24  `?boarAim=v24` (the v24 stick);
+//   AIM=v23  `?boarAim=v23` on the island URL (the code before v24).
 //   TRIALS=16 boars for the child bot (half a standing mortar at z -28, half a runner coming from z -60), SIGMA=10 (deg), SEED=1, OUT=<file.json>.
 // Chromium with hasTouch + isMobile at 844x390 opens index.html?dev=1&adapt=1 and starts the game as a tap in the city would. Every input is
 // CDP Input.dispatchTouchEvent on the controls inside the frame: finger 1 = the left thumb on the stick, finger 2 = the fire button.
@@ -10,16 +11,16 @@
 // the kinematics match a phone, frame rate aside. The same child (boar-kid-bot.mjs) runs in the offline model in tests/island-boars-v24.test.mjs.
 import {serveIsland,islandChromium} from '../../../tests/helpers/island-browser.mjs';
 import {createKidBot,rng} from './boar-kid-bot.mjs';
-import {stickCurve,topSpeed,V23,AIM24} from '../minigames/boar-island/aim-v24.mjs';
+import {stickCurve,topSpeed,V23,AIM24,AIM241} from '../minigames/boar-island/aim-v24.mjs';
 import {writeFile} from 'node:fs/promises';
-const AIM=process.env.AIM||'v24',TRIALS=+(process.env.TRIALS||16),SIGMA=+(process.env.SIGMA||10),SEED=+(process.env.SEED||1),T0=Date.now();
+const AIM=process.env.AIM||'v241',TRIALS=+(process.env.TRIALS||16),SIGMA=+(process.env.SIGMA||10),SEED=+(process.env.SEED||1),T0=Date.now();
 const log=(...a)=>console.error(`[${AIM} ${((Date.now()-T0)/1000).toFixed(0)}s]`,...a);
 const server=await serveIsland('/workout/island/'),chromium=await islandChromium();
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader']});
 const ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,deviceScaleFactor:1});
 await ctx.addInitScript(()=>{try{localStorage.setItem('boar-island-quality','normal');localStorage.setItem('island.sound','off');}catch{}});
 const page=await ctx.newPage();page.setDefaultTimeout(600000);const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-await page.goto(server.url+'?dev=1&adapt=1'+(AIM==='v23'?'&boarAim=v23':''),{waitUntil:'networkidle'});
+await page.goto(server.url+'?dev=1&adapt=1'+(AIM==='v23'?'&boarAim=v23':AIM==='v24'?'&boarAim=v24':''),{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__island?.view.metrics().avatarLoaded);
 await page.locator('[data-action=avatar-start]').tap();
 await page.evaluate(()=>{const {engine:e,data}=window.__island;e.skipTutorial();e.tick=()=>({ok:true});data.featureFlags.events=false;e.state.money=100000;});
@@ -72,7 +73,7 @@ if(!process.env.SKIP_STICK){
  log('fast flick',JSON.stringify(results.stick.fastFlick));}
 }
 // ---------------- B. the child bot, one boar at a time ----------------
-const P=AIM==='v24'?AIM24:V23,speedOf=(ux,uy)=>topSpeed(ux,uy,env.W,env.H,P),curve=m=>stickCurve(m,P);
+const P=AIM==='v241'?AIM241:AIM==='v24'?AIM24:V23,speedOf=(ux,uy)=>topSpeed(ux,uy,env.W,env.H,P),curve=m=>stickCurve(m,P);
 let anchor=null;const bot=createKidBot({seed:SEED,sigmaDeg:SIGMA,speedOf,curve,R:P.R,anchor:()=>anchor});
 const r=rng(SEED*7919+13);let thumbDown=false,fireDown=false;
 async function apply(d){

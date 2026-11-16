@@ -9,10 +9,12 @@ import {createAlpineEngine} from '../minigames/alpine-engine.mjs';
 import {STAGE_COUNT, engineStageOf, stageInfo, equipmentFor, GEAR, MAX_LEVEL} from '../minigames/alpine-league-core.mjs';
 import {leagueBalance, stageGoals, judgeGoals, courseFacts} from '../minigames/alpine-league-stages.mjs';
 import {createKidBot} from './alpine-league-bot.mjs';
+import {withoutV241} from '../minigames/alpine-v241.mjs';
 
 const arg = (name, fallback) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : fallback; };
 const config = JSON.parse(await readFile(fileURLToPath(new URL('../data/config.json', import.meta.url)), 'utf8'));
-const base = config.minigames.alpineRush, DT = 1 / 60;
+// --v24 measures the league as ?alpineV241=0 plays it (the v24 balance); without it, the v24.1 game.
+const base = process.argv.includes('--v24') ? withoutV241(config.minigames.alpineRush) : config.minigames.alpineRush, DT = 1 / 60;
 
 /** One race of league stage n by the bot. Returns the verified-run facts the league uses. */
 export function raceStage(n, {seed = 1, botSeed = seed, gear = 0, bot: botOptions = {}, maxFrames = 60 * 260} = {}) {

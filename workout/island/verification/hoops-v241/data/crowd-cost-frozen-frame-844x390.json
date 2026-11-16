@@ -1,0 +1,90 @@
+{
+ "order": "ABBAABBAABBAABBAABBAABBA",
+ "A": {
+  "n": 60,
+  "median": 413.4,
+  "trimmedMean": 640.08,
+  "mean": 847.57,
+  "p10": 2.4,
+  "p90": 2373,
+  "calls": 48,
+  "triangles": 73646,
+  "crowd3d": {
+   "mode": "budget",
+   "status": "ready",
+   "error": null,
+   "fans": 796,
+   "submitted": [
+    0,
+    180,
+    268
+   ],
+   "instances": 324,
+   "triangles": 22632,
+   "draws": 12,
+   "inView": 324,
+   "scale": 0.9159,
+   "tier": null,
+   "limit": 24000,
+   "plans": 63,
+   "files": 12,
+   "planMs": 2.7,
+   "visible": false,
+   "cardsHidden": 0
+  }
+ },
+ "B": {
+  "n": 60,
+  "median": 968,
+  "trimmedMean": 958.26,
+  "mean": 1186.09,
+  "p10": 2.5,
+  "p90": 2577.1,
+  "calls": 60,
+  "triangles": 96278,
+  "crowd3d": {
+   "mode": "budget",
+   "status": "ready",
+   "error": null,
+   "fans": 796,
+   "submitted": [
+    0,
+    180,
+    268
+   ],
+   "instances": 324,
+   "triangles": 22632,
+   "draws": 12,
+   "inView": 324,
+   "scale": 0.9159,
+   "tier": "high",
+   "limit": 24000,
+   "plans": 63,
+   "files": 12,
+   "planMs": 2.7,
+   "visible": true,
+   "cardsHidden": 1876
+  }
+ },
+ "quality": 2,
+ "flags": {
+  "whistle": true,
+  "crowd3d": "budget",
+  "bodyV2": true,
+  "motionV13": true,
+  "referee": true
+ },
+ "cost": {
+  "medianMs": 554.6,
+  "trimmedMs": 318.18,
+  "relativeMedian": 1.342,
+  "relativeTrimmed": 0.497,
+  "triangles": 22632,
+  "calls": 12,
+  "planMs": 2.7
+ },
+ "viewport": "844x390",
+ "query": "",
+ "errors": [],
+ "renderer": "Chromium SwiftShader (software WebGL): CPU cost, not a phone GPU"
+}

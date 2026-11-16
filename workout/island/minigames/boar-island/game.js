@@ -6,7 +6,9 @@ import {createWorld} from './world.js';
 import {createGuns} from './guns.js';
 import {makeShark,makeManta,makeCrab,makeTurtle,makeLeviathan} from './creatures.js';
 import {createWeather} from './weather.js';
-import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-14';
+import {followAnchor,createAimAssist} from './aim-v24.mjs?v=island-v2-20261107-15';
+import {AIM24,AIM241} from './aim-v24.mjs?v=island-v2-20261107-15';
+import {weaponFx,shellLaunch,shellAt} from './weapon-fx.mjs?v=island-v2-20261107-15';
 import {freshSave,sanitizeSave,stats,weaponStats,WEAPONS,WEAPON_ORDER,WEAPON_MAX,BASE_WEAPONS,fam,weaponMax,weaponLocked,setLegacy,UPGRADE_DEFS,PERKS,ENEMIES,buyUpgrade,upgradeCost,buyWeapon,weaponCost,wavePlan,enemyStats,tickHeat,computeDamage,waveBonus,sustainedDps,isBoss,waveWeather,WEATHER} from './chain.mjs';
 
 const $=id=>document.getElementById(id);
@@ -41,11 +43,17 @@ const STICK_R=STICK_V21?80:62,STICK_DZ=STICK_V21?.08:.12,STICK_LIN=.3,STICK_TAU=
 let trace=null,moveCount=0,resChanges=0;
 // 14/11/2026 (Roy after v22.1: "היכולת להזיז את הכיוון ירי לא מספיק טובה ... לכוון מדויק יותר ולהזיז בקלות יותר"): v24 aim, see aim-v24.mjs. `?boarAim=v23` restores v23.
 const AIM_V24=STICK_V21&&AIM_TRUE&&new URLSearchParams(location.search).get('boarAim')!=='v23';
-const AIM_MODE=AIM_V24?'v24':STICK_V21?(AIM_TRUE?'v23':'axes'):AIMSTICK?'v20':'mouse';
-const aim24=AIM_V24?createAimAssist():null;let aim24State=null;
+// 14/11/2026 (v24.1, Roy: "אולי טיפה לשפר עוד את הרגישות בכיוון"): a more sensitive start of the stick curve with a firmer slowdown over a boar
+// (AIM241 in aim-v24.mjs). `?boarAim=v24` keeps the v24 stick (AIM24).
+const AIM_V241=AIM_V24&&new URLSearchParams(location.search).get('boarAim')!=='v24';
+const AIM_MODE=AIM_V241?'v241':AIM_V24?'v24':STICK_V21?(AIM_TRUE?'v23':'axes'):AIMSTICK?'v20':'mouse';
+const aim24=AIM_V24?createAimAssist(AIM_V241?AIM241:AIM24):null;let aim24State=null;
+// 14/11/2026 (v24.1, Roy: "לכל נשק צריך שיהיה משהו שונה / נגיד לקלע כדורים של ירי / בתותח פגזים"): every weapon its own round, look and sound
+// (weapon-fx.mjs: bullets, pellets, shells on an arc, bolts). Only the look and the sound change. `?boarFx=v24` keeps the v24 tracers and sounds.
+const FX_V241=!LEGACY&&new URLSearchParams(location.search).get('boarFx')!=='v24';const fxLog=[];
 const AIM_SENS={low:.7,mid:1,high:1.4},AIM_SENS_NAME={low:'נמוכה',mid:'בינונית',high:'גבוהה'};
 let aimSens='mid';try{const v=localStorage.getItem('boar-island-aim');if(v in AIM_SENS)aimSens=v;}catch{}
-function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ)));return STICK_V21?mag*(STICK_LIN+(1-STICK_LIN)*mag):mag;}
+function stickMag(m){const mag=Math.max(0,Math.min(1,(m-STICK_DZ)/(1-STICK_DZ))),lin=AIM_V241?AIM241.LIN:STICK_LIN;return STICK_V21?mag*(lin+(1-lin)*mag):mag;}
 function aimSensButton(){const b=document.createElement('button');b.className='text-btn';b.id='aim-sens';const label=()=>{b.textContent=`רגישות כוונון: ${AIM_SENS_NAME[aimSens]}`;};label();
   b.onclick=()=>{const keys=Object.keys(AIM_SENS);aimSens=keys[(keys.indexOf(aimSens)+1)%keys.length];try{localStorage.setItem('boar-island-aim',aimSens);}catch{}label();};document.querySelector('.menu-links').append(b);}
 function nextWeapon(){const owned=WEAPON_ORDER.filter(k=>save.weapons[k]);if(owned.length<2){toast('נשק נוסף נפתח במוסך');return;}switchWeapon(owned[(owned.indexOf(current)+1)%owned.length]);}
@@ -94,12 +102,23 @@ const sfx={ctx:null,master:null,noise:null,last:{},teslaNode:null,
     this.rainGain.gain.value=.11*level;},
   play(type,vol=1){
     if(!soundEnabled)return;try{this.init();if(!this.ctx)return;if(this.ctx.state==='suspended')this.ctx.resume();const t=this.ctx.currentTime;
-      const gap={mg:.045,hit:.04,ping:.05,tesla:.06,splash:.08,crit:.05}[type]||0;if(gap&&t-(this.last[type]||0)<gap)return;this.last[type]=t;const p=rand(.92,1.08);
+      const gap={mg:.045,mg2:.05,mg3:.035,hit:.04,ping:.05,tesla:.06,tesla2:.06,tesla3:.06,splash:.08,crit:.05,shellWhistle:.25,mortarWhistle:.3}[type]||0;if(gap&&t-(this.last[type]||0)<gap)return;this.last[type]=t;const p=rand(.92,1.08);
       switch(type){
         case 'mg':this.noiseHit(t,.07,'bandpass',2200*p,700,.42*vol,.7);this.tone(t,.08,'sine',140*p,45,.38*vol);this.noiseHit(t,.025,'highpass',5000,3000,.12*vol);break;
         case 'shotgun':this.noiseHit(t,.32,'lowpass',3200,420,.85*vol);this.tone(t,.2,'sine',95,32,.7*vol);this.noiseHit(t+.32,.03,'highpass',2600,2000,.25);this.noiseHit(t+.42,.035,'highpass',1900,1500,.25);break;
         case 'cannon':this.tone(t,.55,'sine',70,24,.95*vol);this.noiseHit(t,.5,'lowpass',1400,160,.75*vol);this.noiseHit(t,.04,'highpass',6000,4000,.3*vol);break;
         case 'tesla':this.noiseHit(t,.05,'highpass',3200*p,6000,.13*vol);this.tone(t,.06,'sawtooth',90*p,60,.06*vol);break;
+        // v24.1 (weapon-fx.mjs): a sound of its own for every weapon of the chain, and the whistle of a shell in flight.
+        case 'mg2':this.noiseHit(t,.09,'bandpass',1500*p,520,.5*vol,.8);this.tone(t,.1,'sine',105*p,38,.45*vol);this.noiseHit(t+.035,.06,'bandpass',1700*p,600,.3*vol,.8);break;
+        case 'mg3':this.noiseHit(t,.04,'bandpass',3400*p,1500,.32*vol,1.2);this.tone(t,.045,'square',210*p,120,.07*vol);break;
+        case 'shotgun2':this.noiseHit(t,.42,'lowpass',2400,300,.95*vol);this.tone(t,.28,'sine',72,26,.85*vol);this.noiseHit(t+.4,.035,'highpass',2400,1900,.25);this.noiseHit(t+.52,.04,'highpass',1700,1400,.25);break;
+        case 'shotgun3':this.noiseHit(t,.18,'bandpass',4200,1200,.7*vol,.9);this.tone(t,.12,'triangle',180,70,.4*vol);this.noiseHit(t+.06,.12,'highpass',6500,4200,.18*vol);break;
+        case 'cannon2':this.tone(t,.75,'sine',52,18,1*vol);this.noiseHit(t,.7,'lowpass',1000,120,.85*vol);this.noiseHit(t,.05,'highpass',5000,3500,.3*vol);break;
+        case 'cannon3':this.tone(t,.32,'sine',140,48,.8*vol);this.noiseHit(t,.26,'lowpass',900,160,.6*vol);this.tone(t+.03,.08,'square',90,60,.08*vol);break;
+        case 'tesla2':this.noiseHit(t,.06,'highpass',2600*p,5200,.15*vol);this.tone(t,.07,'sawtooth',70*p,52,.08*vol);this.tone(t+.02,.05,'square',1800*p,2600,.03*vol);break;
+        case 'tesla3':this.noiseHit(t,.12,'bandpass',1800*p,4800,.22*vol,.6);this.tone(t,.1,'sawtooth',55*p,40,.1*vol);this.noiseHit(t+.05,.18,'lowpass',900,200,.2*vol);break;
+        case 'shellWhistle':this.tone(t+.05,.9,'sine',1250,620,.05*vol);this.tone(t+.05,.9,'sine',1880,930,.018*vol);break;
+        case 'mortarWhistle':this.tone(t+.35,1.1,'sine',1500,480,.055*vol);break;
         case 'ping':this.tone(t,.22,'sine',2300*p,2100,.11*vol);this.tone(t,.16,'sine',3400*p,3300,.06*vol);break;
         case 'hit':this.tone(t,.06,'triangle',320*p,120,.12*vol);break;
         case 'crit':this.tone(t,.09,'square',880*p,1500,.06*vol);this.tone(t,.12,'sine',1320,1800,.07*vol);break;
@@ -159,15 +178,33 @@ function ring(pos,radius,life,color='#ffffff',opacity=.8){
   const m=new THREE.Mesh(geo('ring',()=>new THREE.RingGeometry(.82,1,40).rotateX(-Math.PI/2)),new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,side:THREE.DoubleSide}));
   m.position.copy(pos);m.scale.setScalar(.2);scene.add(m);rings.push({m,life,max:life,radius,opacity});
 }
-function tracer(from,to,{speed=320,len=7,width=.07,kind='tracer',life=1}={}){
+function tracer(from,to,{speed=320,len=7,width=.07,kind='tracer',life=1,mat=null}={}){
   const dir=tmp.copy(to).sub(from);const dist=dir.length();if(dist<.5)return;dir.normalize();
-  const m=new THREE.Mesh(PGEO,PMAT[kind]);m.quaternion.setFromUnitVectors(ZAX,dir);scene.add(m);
+  const m=new THREE.Mesh(PGEO,mat||PMAT[kind]);m.quaternion.setFromUnitVectors(ZAX,dir);scene.add(m);
   tracers.push({m,sx:from.x,sy:from.y,sz:from.z,dx:dir.x,dy:dir.y,dz:dir.z,dist,travel:0,speed,len,width,life});
 }
-function bolt(from,to,kind='tracerTesla',width=.09){ // jagged lightning made of short glowing segments, lives one tick
+function bolt(from,to,kind='tracerTesla',width=.09,mat=null){ // jagged lightning made of short glowing segments, lives one tick
   const n=7;let prev=from.clone();const dist=from.distanceTo(to);
-  for(let i=1;i<=n;i++){const p=from.clone().lerp(to,i/n);if(i<n)p.add(new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).multiplyScalar(dist*.035));tracer(prev,p,{speed:1e5,len:999,width,kind,life:.07});prev=p;}
+  for(let i=1;i<=n;i++){const p=from.clone().lerp(to,i/n);if(i<n)p.add(new THREE.Vector3(rand(-1,1),rand(-1,1),rand(-1,1)).multiplyScalar(dist*.035));tracer(prev,p,{speed:1e5,len:999,width,kind,life:.07,mat});prev=p;}
 }
+// ---------- v24.1 weapon looks (weapon-fx.mjs) ----------
+const FXMAT=new Map();
+function fxMat(color,opacity=1){const k=color+opacity;if(!FXMAT.has(k))FXMAT.set(k,new THREE.MeshBasicMaterial({color,transparent:true,opacity,depthWrite:false,blending:add,toneMapped:false}));return FXMAT.get(k);}
+/** A bullet, a pellet or a dart: a coloured glow and a white-hot core flying together (one round). */
+function fxRound(look,from,to){tracer(from,to,{speed:look.speed,len:look.len*1.35,width:look.glowWidth,mat:fxMat(look.glow,.55)});tracer(from,to,{speed:look.speed,len:look.len,width:look.width,mat:fxMat(look.core)});}
+/** A shell for the cannon family: a case, a pointed nose (a finned round bomb for the mortar) and a burning tracer at the base. */
+function fxShellMesh(key,look){
+  const g=new THREE.Group(),r=look.radius,L=look.length;
+  // Object3D.lookAt turns a mesh's +Z toward the point, so the nose is at +Z (the flight direction) and the tracer burns at -Z.
+  if(look.mortar){mesh(g,geo('fxMortar'+key,()=>new THREE.SphereGeometry(r,14,10).scale(1,1,1.35)),mat(look.body,.5,.45),[0,0,0]);
+    for(let i=0;i<4;i++){const a=i*Math.PI/2,f=mesh(g,geo('fxFin'+key,()=>new THREE.BoxGeometry(r*.1,r*.9,r*1.0)),mat(look.nose,.4,.5),[Math.cos(a)*r*.5,Math.sin(a)*r*.5,-r*1.35]);f.rotation.z=a+Math.PI/2;}}
+  else{mesh(g,geo('fxCase'+key,()=>new THREE.CylinderGeometry(r,r,L*.62,14).rotateX(Math.PI/2)),mat(look.body,.95,.28),[0,0,-L*.12]);
+    mesh(g,geo('fxNose'+key,()=>new THREE.ConeGeometry(r,L*.42,14).rotateX(Math.PI/2)),mat(look.nose,.6,.4),[0,0,L*.4]);
+    mesh(g,geo('fxBand'+key,()=>new THREE.CylinderGeometry(r*1.04,r*1.04,L*.07,14).rotateX(Math.PI/2)),mat('#c27b3d',1,.3),[0,0,L*.12]);}
+  const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX.fire,color:look.tracer,transparent:true,depthWrite:false,blending:add,toneMapped:false}));glow.scale.setScalar(r*9);glow.position.z=look.mortar?-r*1.7:-L*.46;g.add(glow);g.userData.glow=glow;
+  g.traverse(o=>{if(o.isMesh)o.castShadow=false;});return g;
+}
+function fxNote(key,kind,sound){if(QA){fxLog.push({key,kind,sound,t:+elapsed.toFixed(3)});if(fxLog.length>80)fxLog.shift();}}
 function floatText(pos,text,cls=''){
   const el=document.createElement('div');el.className='dmg '+cls;el.textContent=text;$('enemy-labels').append(el);
   floaters.push({el,pos:pos.clone(),life:.8,max:.8,vx:rand(-.6,.6)});if(floaters.length>36){const f=floaters.shift();f.el.remove();}
@@ -209,7 +246,7 @@ function init(){
   if(AIMSTICK)buildAimControls();if(HUD_V21)buildCompactHud();
   // 12/11/2026 (QA 3): the in-game help describes the touch controls the child actually has (it still described dragging anywhere to aim and fire).
   // Set here because index.html keeps the shipped bytes (tests/island-boar-integration); the first help paragraph is the controls one.
-  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.';
+  const helpAim=$('help-screen')?.querySelector('.help-panel p');if(FIRE_V21&&helpAim)helpAim.textContent='בטלפון: הג׳ויסטיק משמאל מזיז את הכוונת, ורק כפתור הירי הכתום מימין יורה. '+(AIM_V24?'כשהכוונת מגיעה לחזיר היא מאטה, נמשכת לעיניים שלו והולכת איתו, כל עוד האגודל על הג׳ויסטיק. ':'')+'אצבע שנייה על אזור הג׳ויסטיק = כיוון עדין. הכפתור הקטן ליד הירי מחליף נשק.'+(FX_V241?' לכל נשק קליע וצליל משלו: המקלע יורה כדורים זוהרים, הרסס ענן כדוריות, התותח פגז שעף בקשת, והברק קרן חשמל.':'');
   if(QA)installQA();
   if(window.BOAR_BENCH||location.hash==='#bench')installBench();
   islandFrame=requestAnimationFrame(frame);
@@ -597,17 +634,24 @@ function fireWeapon(){
   const furyMul=furyTimer>0?1.5:1;const assist=TOUCH?1.35:1;
   if(fam(current)==='cannon'){
     const ray=aimRay(ws.spread);const from=muzzleWorld(model,0);const target=castShot(ray,assist).point;const dir=target.clone().sub(from).normalize();
+    // v24.1: a real shell on a visible arc that is solved to land where the crosshair points (weapon-fx.mjs); v24's capsule flew straight.
+    if(FX_V241){const look=weaponFx(current),shell=fxShellMesh(current,look),v=shellLaunch(from,target,look.speed,look.gravity);shell.position.copy(from);scene.add(shell);
+      projectiles.push({mesh:shell,vel:new THREE.Vector3(v.vx,v.vy,v.vz),g:look.gravity,look,spin:0,life:0,ws,furyMul,fx:true,from:from.clone(),v0:v});
+      flashMuzzle(model,0,look.mortar?1.2:1.6+look.radius);recoil+=.55;recoilRot+=.12;trauma=Math.min(1,trauma+.18);sfx.play(look.sound);sfx.play(look.whistle,.9);ejectCasing(model,'shell');fxNote(current,'shell',look.sound);return;}
     const shell=new THREE.Group();mesh(shell,geo('cshell',()=>new THREE.CapsuleGeometry(.14,.35,4,8).rotateX(Math.PI/2)),mat('#ffcf7a',.4,.3,'#ff8a2a',2.5));shell.position.copy(from);scene.add(shell);
     projectiles.push({mesh:shell,vel:dir.multiplyScalar(170),life:0,ws,furyMul});
     flashMuzzle(model,0,1.6);recoil+=.55;recoilRot+=.12;trauma=Math.min(1,trauma+.18);sfx.play('cannon');ejectCasing(model,'shell');
     return;
   }
   if(fam(current)==='tesla'){teslaTick(ws,furyMul,assist);return;}
+  const look=FX_V241?weaponFx(current):null;
   const pellets=ws.pellets;let anyHit=false;const perEnemy=new Map();
   const mi=model.muzzleIndex++;const from=muzzleWorld(model,mi);
   for(let i=0;i<pellets;i++){
     const ray=aimRay(ws.spread*(pellets>1?1:1+heatSpread()));const hit=castShot(ray,assist);
-    if(fam(current)==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
+    // v24.1: a bullet per shot (the double gun a pair, one per barrel), every pellet of a shotgun visible; v24: one streak (every other pellet).
+    if(look){fxRound(look,from,hit.point);if(look.pair&&i===0)fxRound(look,muzzleWorld(model,mi+1),hit.point);}
+    else if(fam(current)==='mg'||i%2===0)tracer(from,hit.point,{speed:pellets>1?260:340,len:pellets>1?3.5:7,width:pellets>1?.05:.07});
     if(hit.e){anyHit=true;const prev=perEnemy.get(hit.e)||{dmg:0,crit:false,point:hit.point};prev.dmg+=ws.damage*furyMul*(hit.shield?.25:1);prev.crit=prev.crit||hit.crit;perEnemy.set(hit.e,prev);}
     if(i<4||hit.e||hit.shell)impactFx(hit,current);
   }
@@ -615,32 +659,41 @@ function fireWeapon(){
     if(perk==='chain'&&shotCount%4===0&&!tgt.dead){const n=enemies.find(o=>o!==tgt&&!o.dead&&o.root.position.distanceTo(tgt.root.position)<22);if(n){bolt(v.point,n.zones[0].obj.getWorldPosition(new THREE.Vector3()));damageEnemy(n,v.dmg*.8,{quiet:true});}}}
   if(anyHit)roundHits++;
   flashMuzzle(model,mi,fam(current)==='shotgun'?1.4:1);
-  if(fam(current)==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play('mg');ejectCasing(model,'brass');}
-  else{recoil+=.38;recoilRot+=.09;trauma=Math.min(1,trauma+.15);sfx.play('shotgun');ejectCasing(model,'shell');}
+  if(fam(current)==='mg'){recoil+=.07;recoilRot+=.012;trauma=Math.min(1,trauma+.035);sfx.play(look?look.sound:'mg');ejectCasing(model,'brass');}
+  else{recoil+=.38;recoilRot+=.09;trauma=Math.min(1,trauma+.15);sfx.play(look?look.sound:'shotgun');ejectCasing(model,'shell');}
+  if(look)fxNote(current,look.kind,look.sound);
 }
 function heatSpread(){const s=wstate[current];return s?s.heat/100*1.6:0;}
 function teslaTick(ws,furyMul,assist){
   const model=gunModels.tesla;const ray=aimRay(0);let hit=castShot(ray,assist*2.3);let target=hit.e;
   if(!target){let bestA=.07;for(const e of enemies){if(e.dead)continue;e.zones[0].obj.getWorldPosition(tmp);const a=tmp.sub(ray.origin).normalize().angleTo(ray.direction);if(a<bestA){bestA=a;target=e;}}if(target){target.zones[0].obj.getWorldPosition(tmp);hit={e:target,point:tmp.clone(),crit:false};}}
   const from=muzzleWorld(model,0);model.glow.scale.setScalar(rand(.5,.8));
-  if(!target||hit.shell){const end=hit.point.clone();if(from.distanceTo(end)>40)end.copy(from).add(ray.direction.clone().multiplyScalar(40));bolt(from,end,'tracerTesla',.03);if(hit.shell){destroyShell(hit.shell,true);explode(hit.point,.6,{light:false});}sfx.play('tesla',.6);return;}
-  roundHits++;bolt(from,hit.point,'tracerTesla',.045);bolt(from,hit.point,'tracerTesla',.022);sparks(hit.point,3,'blue',5,.07);
+  // v24.1: each lightning weapon its own colour, strands and sound (weapon-fx.mjs); the storm leaves a plasma ball where it strikes.
+  const look=FX_V241?weaponFx(current):null,bm=look?fxMat(look.color,.9):null,snd=look?look.sound:'tesla';if(look)fxNote(current,'bolt',snd);
+  if(!target||hit.shell){const end=hit.point.clone();if(from.distanceTo(end)>40)end.copy(from).add(ray.direction.clone().multiplyScalar(40));bolt(from,end,'tracerTesla',.03,bm);if(hit.shell){destroyShell(hit.shell,true);explode(hit.point,.6,{light:false});}sfx.play(snd,.6);return;}
+  roundHits++;if(look){for(let k=0;k<look.strands;k++)bolt(from,hit.point,'tracerTesla',look.width*(k?.55:1),bm);bolt(from,hit.point,'tracerTesla',look.width*.45,fxMat('#ffffff',.9));if(look.orb&&Math.random()<.35)sprite(TEX.glow,hit.point,1.6,.18,{color:look.orb,grow:1.4});}
+  else{bolt(from,hit.point,'tracerTesla',.045);bolt(from,hit.point,'tracerTesla',.022);}sparks(hit.point,3,'blue',5,.07);
   const done=new Set([target]);damageEnemy(target,ws.damage*furyMul,{crit:hit.crit,point:hit.point,shield:hit.shield&&Math.random()<.5});fury=clamp(fury+(perk==='charge'?1.6:.8),0,100);
   let src=hit.point.clone();let srcE=target;for(let c=0;c<ws.chain;c++){let n=null,nd=18;for(const e of enemies){if(e.dead||done.has(e))continue;const d=e.root.position.distanceTo(srcE.root.position);if(d<nd){nd=d;n=e;}}if(!n)break;done.add(n);const np=n.zones[0].obj.getWorldPosition(new THREE.Vector3());bolt(src,np,'tracerTesla',.05);damageEnemy(n,ws.damage*.6*furyMul,{point:np});src=np;srcE=n;}
-  if(hit.crit)sfx.play('crit');sfx.play('tesla');$('hit-marker').className=hit.crit?'crit':'';$('hit-marker').style.opacity=1;hitUntil=elapsed+.08;
+  if(hit.crit)sfx.play('crit');sfx.play(snd);$('hit-marker').className=hit.crit?'crit':'';$('hit-marker').style.opacity=1;hitUntil=elapsed+.08;
 }
 function updateProjectiles(dt){
-  for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i];const prev=p.mesh.position.clone();p.vel.y-=6*dt;p.mesh.position.addScaledVector(p.vel,dt);p.mesh.lookAt(tmp.copy(p.mesh.position).add(p.vel));p.life+=dt;
-    if(Math.random()<.7)sprite(TEX.smoke,prev,.7,.35,{additive:false,grow:1.6,opacity:.35,color:'#d8d8d8'});
-    const seg=new THREE.Ray(prev,p.vel.clone().normalize());const segLen=prev.distanceTo(p.mesh.position);let hitE=null,crit=false,hitShell=null;
+  for(let i=projectiles.length-1;i>=0;i--){const p=projectiles[i];const prev=p.mesh.position.clone();
+    // v24.1 shells fly their launch exactly (shellAt: the same landing point at any frame rate); v24's capsule keeps its frame step.
+    if(p.fx){const q=shellAt(p.from,p.v0,p.g,p.life+dt);p.mesh.position.set(q.x,q.y,q.z);p.vel.set(q.vx,q.vy,q.vz);}else{p.vel.y-=6*dt;p.mesh.position.addScaledVector(p.vel,dt);}
+    p.mesh.lookAt(tmp.copy(p.mesh.position).add(p.vel));p.life+=dt;
+    // v24.1 shell: it spins about its own axis, its tracer flickers, and its smoke trail is the weapon's own (bigger for the heavy shells).
+    if(p.fx){p.spin+=(p.look.spin||0)*dt;p.mesh.rotateZ(p.spin);const gl=p.mesh.userData.glow;if(gl)gl.material.opacity=.75+.25*Math.random();if(Math.random()<.85)sprite(TEX.smoke,prev,p.look.smokeSize,.5,{additive:false,grow:1.9,opacity:.42,color:p.look.smoke});}
+    else if(Math.random()<.7)sprite(TEX.smoke,prev,.7,.35,{additive:false,grow:1.6,opacity:.35,color:'#d8d8d8'});
+    const seg=new THREE.Ray(prev,p.fx?p.mesh.position.clone().sub(prev).normalize():p.vel.clone().normalize());const segLen=prev.distanceTo(p.mesh.position);let hitE=null,crit=false,hitShell=null;
     for(const e of enemies){if(e.dead)continue;const sc=e.root.scale.x;for(const z of e.zones){z.obj.getWorldPosition(tmp);const along=tmp2.copy(tmp).sub(prev).dot(seg.direction);if(along<-1||along>segLen+1)continue;if(seg.distanceSqToPoint(tmp)<(z.r*sc*1.1)**2){hitE=e;crit=crit||z.crit;}}if(hitE)break;}
     if(!hitE)for(const s of shells)if(s.mesh.position.distanceTo(p.mesh.position)<2){hitShell=s;break;}
     const pos=p.mesh.position;const below=pos.y<surfaceY(pos.x,pos.z);
     if(hitE||hitShell||below||p.life>3){
-      const ws=p.ws;explode(pos.clone(),1.5);if(below&&groundY(pos.x,pos.z)<seaY(pos.x,pos.z))splash(pos,true);
+      const ws=p.ws;explode(pos.clone(),p.fx?1.5*Math.max(1,ws.splash/6.5):1.5);if(below&&groundY(pos.x,pos.z)<seaY(pos.x,pos.z))splash(pos,true);
       if(hitShell)destroyShell(hitShell,true);let hits=0;
       for(const e of [...enemies]){if(e.dead)continue;e.zones[0].obj.getWorldPosition(tmp);const d=Math.max(0,tmp.distanceTo(pos)-e.zones[0].r*e.root.scale.x);if(e===hitE||d<ws.splash){hits++;const fall=e===hitE?1:1-.5*d/ws.splash;damageEnemy(e,ws.damage*p.furyMul*fall,{explosive:true,crit:e===hitE&&crit,point:e===hitE?pos.clone():tmp.clone()});}}
-      if(hits)roundHits++;if(hitE&&crit)roundCrits++;scene.remove(p.mesh);projectiles.splice(i,1);}
+      if(hits)roundHits++;if(hitE&&crit)roundCrits++;scene.remove(p.mesh);p.mesh.userData.glow?.material.dispose();projectiles.splice(i,1);}
   }
 }
 function updateShells(dt){
@@ -989,10 +1042,12 @@ async function runBench(){
 }
 function installQA(){
   window.__three={scene,renderer,camera,sea,sun};
-  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY,AIM_V24},aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,anchor:aimStick?{x:+aimStick.ox.toFixed(1),y:+aimStick.oy.toFixed(1)}:null,frames,elapsed:+elapsed.toFixed(3),aimSens,stickR:STICK_R,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
+  window.__boar={get state(){return {shots:roundShots,aim:{x:+pointer.x.toFixed(3),y:+pointer.y.toFixed(3)},firing:pointer.down,fireSource,shotsBy:{...shotsBy},stickNoButton,abilityBy:{...abilityBy},abilityFromLeft,stick:!!aimStick,fireHeld:firePointer!==null,flags:{TOUCH,AIMSTICK,FIRE_V21,HUD_V21,STICK_V21,LEGACY,AIM_V24,AIM_V241,FX_V241},aimMode:AIM_MODE,assist:aim24State?{...aim24State}:null,anchor:aimStick?{x:+aimStick.ox.toFixed(1),y:+aimStick.oy.toFixed(1)}:null,frames,elapsed:+elapsed.toFixed(3),aimSens,stickR:STICK_R,stickInfo:aimStick?{sx:+aimStick.sx.toFixed(3),sy:+aimStick.sy.toFixed(3),vx:+aimStick.vx.toFixed(3),vy:+aimStick.vy.toFixed(3),precise:aimStick.precise!==null,R:STICK_R}:null,overheated:!!wstate[current]?.overheated,cool:+(wstate[current]?.cool||0).toFixed(3),swapTimer:+swapTimer.toFixed(3),paused:islandPaused,mode,wave,hp,coins:save.coins,killed,remaining:remaining(),enemies:enemies.map(e=>({kind:e.kind,hp:Math.round(e.hp),z:+e.root.position.z.toFixed(1)})),current,heat:wstate[current]?.heat,ammo:wstate[current]?.ammo,boss:boss?.kind||null,shells:shells.length,shots:roundShots,hits:roundHits,crits:roundCrits,fury,sound:soundEnabled,audio:sfx.ctx?.state||'none',save:JSON.parse(JSON.stringify(save))};},
     setSave(o){save=sanitizeSave(o);persist();refreshWeaponCache();buildWeaponBar();showWeapon(current);updateStartLabel();},
     start(n){save.nextWave=n;beginWave();},spawn(k,z){const e=spawn(k);if(z!==undefined)e.root.position.z=z;return enemies.length;},
     aim(x,y){pointer.x=x;pointer.y=y;},fire(on){setFiring(on,'qa');},record(on){trace=on?[]:null;},trace(){const t=trace||[];if(trace)trace=[];return t;},weapon(k){switchWeapon(k);},
+    // v24.1 (read only): which round and sound each shot used, and what flies now (bullet/pellet streaks by colour, shells with their height).
+    fx(){const streaks={};for(const t of tracers){const c='#'+t.m.material.color.getHexString();streaks[c]=(streaks[c]||0)+1;}return {on:FX_V241,log:fxLog.slice(-40),streaks,shells:projectiles.map(p=>({fx:!!p.fx,y:+p.mesh.position.y.toFixed(2),z:+p.mesh.position.z.toFixed(1),vy:+p.vel.y.toFixed(1)}))};},
     // 14/11/2026 (v24): read-only eyes for the touch bot (what a child sees: the crosshair and the boars on the screen); nothing here changes the game.
     // hold(true) stops the frame loop (no update, no render; input events still arrive), so a slow test machine adds no input delay in game time
     hold(on){qaHold=!!on;},clock(){return {t:elapsed,frames,mode};},hit(){const h=castShot(aimRay(),TOUCH?1.35:1);return h.e?(h.e.qa||(h.e.qa=++qaSeq)):0;},

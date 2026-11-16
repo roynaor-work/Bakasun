@@ -83,16 +83,18 @@ const makeTeam=()=>({
 const blankInput=()=>({moveX:0,moveZ:0,kickHeld:false,passHeld:false,passPressed:false,sprintHeld:false,switchPlayer:false});
 /** bot 'idle' = no input at all; with help (stage rows forced to help:true, difficulty easy) the model's own
  * beginner helper drives the selected player, so both sides are pure model AI. */
-export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion,full}){
+export function playMatch({config,seed,stage=5,difficulty='normal',ai,rules,feel,latency=9,maxSeconds=400,bot:botKind='human',helpAll=false,trace=false,teams,tune,profile='typical',pitch,switchVersion,control,airVersion,full,v241}){
   // Soccer full (soccer-full.mjs): --full 442|433 is the session's 11 against 11 (it brings its own teams preset; --pitch/--control v23 still apply).
-  if(full)config=applySoccerFull(config,{formation:String(full).replace(/-/g,'')==='433'?'4-3-3':'4-4-2'});
+  // v24.1 (soccer-r241.mjs): --v241 all|level|fouls|air (the engine rules are off in node unless asked; `all` also takes the shorter slide get-up).
+  const v241Rules=v241===undefined||v241===false?undefined:v241===true||v241==='all'?true:Object.fromEntries(String(v241).split(',').map(k=>[k,true]));
+  if(full)config=applySoccerFull(config,{formation:String(full).replace(/-/g,'')==='433'?'4-3-3':'4-4-2',v241:v241Rules===true||Boolean(v241Rules?.recover)});
   else if(teams)config=applySoccerTeams(config,teams,tune||{});
   // v23 markings (soccer-v23.mjs) exactly as the session applies them after the team preset; 'v22' (or absent) keeps the old pitch.
   if(pitch==='v23')config=applySoccerPitchV23(expandSoccerConfig(config),'v23');
   if(control==='v23')config=applySoccerControlV23(config,'v23');
   const shotLog=[];let openShot=null;
   if(helpAll)config={...config,stages:config.stages.map(row=>({...row,help:true}))};
-  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{}),...(feel?{feelVersion:feel}:{}),...(switchVersion?{switchVersion}:{}),...(airVersion?{airVersion}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
+  const game=createSoccer({config,seed,stage,difficulty,role:'field',...(ai?{aiVersion:ai}:{}),...(rules?{rulesVersion:rules}:{}),...(feel?{feelVersion:feel}:{}),...(switchVersion?{switchVersion}:{}),...(airVersion?{airVersion}:{}),...(v241Rules!==undefined?{v241:v241Rules}:{})}),bot=botKind==='idle'?()=>blankInput():createHumanBot(seed,{latency,profile});
   const step=config.match.fixedStep,hx=config.pitch.length/2,L=config.pitch.length;
   const T=[makeTeam(),makeTeam()];
   const m={playingTicks:0,deadTicks:0,restTicks:0,stuckWindows:0,windows:0,maxStuck:0,thirds:[0,0,0],swings:0,progress10:0,progressN:0,coverage:0,coverageN:0,

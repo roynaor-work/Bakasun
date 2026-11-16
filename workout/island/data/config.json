@@ -1253,6 +1253,8 @@
    }
   },
   "alienDefense": {
+   "arsenal25": {"missile": {"max": 4, "refill": 1}, "lightning": {"charges": 3, "max": 5, "refill": 1, "damage": 2, "falloff": 0.85, "jumps": 3, "firstRange": 460, "jumpRange": 160, "seconds": 0.32}, "shockwave": {"charges": 1, "max": 3, "refill": 1, "damage": 1.4, "speed": 520, "maxRadius": 420, "seconds": 0.8}, "drops": {"chance": 0.12, "bigChance": 0.45, "bigKinds": [1, 4], "gapSeconds": 7, "pitySeconds": 16, "speed": 100, "radius": 24, "maxOnScreen": 1}, "enemyFire": {"cadence": 0.8, "bulletCapAdd": 2}},
+   "v25": {"vulcanInterval": 0.0666667, "heatShots": 54, "lockSeconds": 2, "restSeconds": 0.15, "coolSeconds": 1.6, "vulcanDamage": 0.4, "pellets": 3, "pelletSpread": 0.035, "capPerSecond": 18, "capBurst": 4, "wingEvery": 3},
    "v24": {"refill": {"bigKinds": [1, 4], "chance": 0.12, "usedSeconds": 10, "pityOverheats": 3, "gapSeconds": 8, "maxOnScreen": 1, "speed": 105, "radius": 24, "coldSeconds": 5, "hudSeconds": 6}},
    "v23": {"vulcanInterval": 0.1, "heatShots": 12, "lockSeconds": 2, "restSeconds": 0.5, "coolSeconds": 2, "regularDamage": 0.8, "vulcanDamage": 0.45, "yellowAt": 0.5, "redAt": 0.8, "vulcanKey": "KeyZ"},
    "v15": {"normalInterval": 0.18, "minInterval": 0.167, "rapidMinInterval": 0.13, "burstInterval": 0.1, "burstSeconds": 1.2, "coolSeconds": 2, "rechargeSeconds": 1.5, "restSeconds": 1, "pressShots": 1, "warmHeat": 0.35, "normalDamage": 0.8, "burstDamage": 0.5, "capPerSecond": 15, "capBurst": 6, "gearExp": 1.15, "secondsMult": 1.5, "convergeDistance": 300},
@@ -11338,6 +11340,7 @@
     "hold": {"enabled": true, "carry": {"enabled": true, "releaseWait": 1.6, "needleWeight": 0.7, "needlePower": 0.3}, "seconds": 3, "tapSeconds": 0.45, "needShort": 0.12, "needDefault": 0.45, "needDeep": 0.85, "metresPerCharge": 10, "tolerance": {"easy": 0.28, "normal": 0.24, "hard": 0.18}},
     "meter": {"enabled": true, "bar": true, "place": "side", "yellow": 0.2, "error": {"good": 0.085, "medium": 0.42, "weak": 0.55}},
     "returnMeter": {"enabled": true, "widthScale": 0.6, "wait": 1.1, "power": {"green": 0.3, "yellow": 0, "red": -0.15}, "shortError": {"green": 0, "yellow": 0.15, "red": 0.45}},
+    "receive": {"enabled": true, "slots": [0.55, 1.65, 3.05], "extraWait": 1, "arriveWait": 0.35, "maxWait": 3.2, "flick": 0.55, "release": 0.25, "repeat": 0.45},
     "softDrop": {"enabled": true, "flight": {"easy": 1.8, "normal": 1.75, "hard": 1.7}, "flightJitter": 0.1, "depth": [1.3, 2.1], "bounce": 0.45, "horizontalBounce": 0.4, "reach": {"easy": 0.9, "normal": 0.6, "hard": 0.4}, "zoneReach": {"green": 0, "yellow": 0.2, "red": 0.35}, "readRepeat": 0.35, "putAwaySide": 0.55, "putAwayDepth": 3.9, "putAwayPower": 0.35, "aiHitVy": 0.4, "aiMinHeight": 0.3, "spare": 0.25, "maxRun": 7.5, "fakeBack": 0.7, "fakeSpeed": 1.3, "lateMargin": 0.3, "deadBall": true, "deadBounce": 0.5, "deadFriction": 0.8, "deadStop": 0.7, "roll": 1.4},
     "opponent": {"lowMinHeight": 0.1, "shortZ": 5},
     "shortRun": {"easy": {"mul": 1, "min": 2.1, "max": 3.1}, "normal": {"mul": 1, "min": 2.6, "max": 3.5}, "hard": {"mul": 1, "min": 3, "max": 4}},
@@ -11793,6 +11796,7 @@
       "knee": 0.16
      }
     ],
+    "grip": {"scale": 1.15, "tilt": 0.6, "palm": [0.012, -0.074, 0], "palmSide": 1, "inset": 0.028, "handY": 0.065, "curl": 1.35, "thumb": 0.75},
     "racket": {
      "headOffset": [
       0,
@@ -12703,6 +12707,7 @@
     "lipKick": 2.6,
     "pipeReturnSpeed": 6,
     "aiWallCost": 1.2,
+    "v241": {"curveAssist": 0.9, "grip": 1.8, "brake": {"cut": 0.45, "decel": 15, "min": 9, "deadzone": 0.35}},
     "tricks": {
      "grab": {
       "seconds": 0.45,
@@ -12830,6 +12835,7 @@
       "light": 1,
       "trees": 1
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"stars": 1.2, "jumps": 1.2, "movers": 0.8}, "length": [70, 95]}, "mover": "snowball", "moverAmp": [2, 2.4], "moverPeriod": [3.8, 4.6], "snowmen": 0.1, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.35},
      "opening": [
       "gate",
       "pad",
@@ -12907,6 +12913,7 @@
       "light": 0.92,
       "trees": 1.7
      },
+     "content": {"sections": {"count": [2, 2], "kinds": {"ice": 1.3, "movers": 1.1, "stars": 0.8, "powder": 0.6}, "length": [75, 100]}, "mover": "penguin", "moverAmp": [2.3, 2.8], "moverPeriod": [3.4, 4.2], "snowmen": 0.15, "powerups": {"magnet": 1, "shield": 1}, "stars": 0.3},
      "opening": [
       "gate",
       "rocks"
@@ -12986,6 +12993,7 @@
       "light": 0.72,
       "trees": 1.2
      },
+     "content": {"sections": {"count": [3, 3], "kinds": {"jumps": 1.2, "speed": 1.1, "powder": 1, "movers": 0.9}, "length": [75, 105]}, "mover": "snowball", "moverAmp": [2.5, 3], "moverPeriod": [3, 3.8], "snowmen": 0, "powerups": {"magnet": 1, "shield": 2}, "stars": 0.3},
      "opening": [
       "pad",
       "ramp"

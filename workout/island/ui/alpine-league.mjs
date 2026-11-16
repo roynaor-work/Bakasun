@@ -3,8 +3,8 @@
  * league stage (place, the three goals as stars, coins, table, record ghost, season podium at a boss).
  * Loaded on demand from ui/activity.mjs the first time the ski menu opens. Every change goes through engine.alpineLeague (checks,
  * saves its own key, refuses while a game runs). Hebrew, 56px targets, numbers as LTR islands, nothing hidden. */
-import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-14';
-import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-14';
+import {THEMES,RIVALS,PLAYER_COLOR,GEAR,GEAR_COST,MAX_LEVEL,POINTS,BOSS_FACTOR,PRIZE,STAR_COINS,SEASON_PRIZE,PER_THEME,STAGE_COUNT,BASE_STAGES,equipmentFor,engineStageOf,stageInfo} from '../minigames/alpine-league-core.mjs?v=island-v2-20261107-15';
+import {THEME_LOOKS} from '../minigames/alpine-league-theme.mjs?v=island-v2-20261107-15';
 
 const el = (tag, cls = '', text = '') => { const n = document.createElement(tag); n.className = cls; if (text !== '') n.textContent = text; return n; };
 const button = (text, action, fn, cls = 'secondary-button') => { const n = el('button', cls, text); n.type = 'button'; n.dataset.action = action; n.onclick = fn; return n; };
@@ -22,7 +22,7 @@ export function goalLine(g) {
 }
 export function ensureStyle(root = document.head) {
   if (document.querySelector('link[data-alpine-league-css]')) return;
-  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-14', import.meta.url).href; root.append(link);
+  const link = el('link'); link.rel = 'stylesheet'; link.dataset.alpineLeagueCss = 'true'; link.href = new URL('./alpine-league.css?v=island-v2-20261107-15', import.meta.url).href; root.append(link);
 }
 const accent = (node, themeId) => { node.style.setProperty('--al-accent', THEME_LOOKS[themeId]?.accent || '#3f8f5a'); node.dataset.theme = themeId; return node; };
 function starsRow(count, label) { const s = el('span', 'al-stars'); s.setAttribute('role', 'img'); s.setAttribute('aria-label', label ?? `${count} כוכבים מתוך 3`); for (let i = 0; i < 3; i++) s.append(el('i', i < count ? 'on' : '', '★')); return s; }

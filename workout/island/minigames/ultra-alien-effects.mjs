@@ -2,6 +2,7 @@ import {drawAlienFeedback} from './ultra-alien-feedback.mjs';
 export {drawAlienFallbackFeedback} from './ultra-alien-feedback.mjs';
 import {drawV14Heat} from './alien-v14-draw.mjs';
 import {drawV12Cannons,drawV12Tracer} from './alien-v12-draw.mjs';
+import {drawV25Shot} from './alien-v25-draw.mjs?v=island-v2-20261107-15';
 import {drawV11Laser,drawV11Blasts,drawV11BonusTimer,drawV11Tells} from './alien-v11-draw.mjs';
 import {drawV10Bolts,drawV10Missile,drawV10WingTimer} from './alien-v10-draw.mjs';
 const TAU=Math.PI*2;
@@ -28,6 +29,7 @@ export function drawUltraAlienEffects(p,m,balance,pixelAspect=1,config={height:4
  if(m.v11)drawV11Tells(p,m,pixelAspect,screenScale);
  for(const s of m.shots){
   if(s.kind===2){drawV11Laser(p,s,pixelAspect,screenScale);continue;}
+  if(m.v25&&s.vulcan){drawV25Shot(p,s,m,pixelAspect,screenScale);continue;}/* v25: plasma pellets for the Vulcan (?alienVulcan=v24: the tracer) */
   if(m.v12&&s.kind===0){drawV12Tracer(p,s,pixelAspect,screenScale);continue;}
   const laser=s.kind===1,color=s.wing?'#c5b2ff':laser?'#65eeff':'#93dbff';glow(p,s.x,s.y,laser?17:11,color,pixelAspect,laser?.72:.55);
   p.save();p.translate(s.x,s.y);p.scale(1/pixelAspect,1);p.rotate(Math.atan2(s.vx,-s.vy));

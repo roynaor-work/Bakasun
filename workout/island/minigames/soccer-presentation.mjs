@@ -1,4 +1,4 @@
-import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261107-14';
+import {passDestination,soccerPassAim,canHead} from './soccer.mjs?v=island-v2-20261107-15';
 import {createLoftFlight} from './soccer-loft.mjs';
 const hypot2=(x,z)=>Math.sqrt(x*x+z*z); // Math.hypot is a non-inlined builtin that boxes its result on every call
 /** Pure presentation decisions; the simulation never imports this module. */
@@ -13,8 +13,11 @@ export function playerAnimation(player,state,config){
   // soccerShow v1: the presentation copy carries the celebration cast (state.show.roles); without it the scorer celebrates in place as before.
   const role=state.show?.roles?.[player.id]||null;
   const a=config.view.animation,speed=hypot2(player.vx,player.vz),celebrating=role?role.role==='celebrate':state.phase==='goal'&&state.ball.lastPlayer===player.id,sprinting=player.id===state.controlled?state.sprint.active:player.sprinting;
-  const mode=role?.role==='dejected'?'dejected':celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':player.headerTime>0?'header':player.slideTime>0?'slide':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
-  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks',dejected:'stand'}[mode];
+  // v24.1 (soccer-r241.mjs): a volley / scissor kick (aerialKind; the scissor kicker lies on his back through his recovery), the fouled carrier
+  // down and getting up (fouledTime), the carrier who lost a clean tackle stumbling on (stumbleTime). Absent fields = the v24 modes exactly.
+  const aerial=player.aerialKind&&(player.headerTime>0||player.aerialKind==='scissor'&&player.recover>0)?player.aerialKind:null;
+  const mode=role?.role==='dejected'?'dejected':celebrating?'celebrate':player.throwTime>0?'throw':player.hands?'catch':player.diveTime>0?'dive':player.catchTime>0?'catch':aerial?aerial:player.headerTime>0?'header':player.slideTime>0?'slide':player.fouledTime>0?'fouled':player.recover>0?'recover':player.stealTime>0?'steal':player.kickTime>0?'kick':player.stumbleTime>0?'stumble':speed<=a.idleSpeed?'idle':sprinting?'sprint':'run';
+  const clip=mode==='catch'&&player.hands&&speed>a.idleSpeed?'run':{idle:'stand',run:'run',sprint:'run',kick:'kick',steal:'stand',throw:'stand',dive:'stand',catch:'stand',slide:'stand',recover:'stand',header:'stand',celebrate:'jumping-jacks',dejected:'stand',volley:'kick',scissor:'stand',fouled:'stand',stumble:'run'}[mode];
   const recovery=mode==='slide'||mode==='recover'?slideWeight(player,config):1,header=mode==='header'?Math.sin((1-player.headerTime/config.aerial.seconds)*Math.PI):0,steal=mode==='steal'?Math.sin((1-player.stealTime/config.steal.animationSeconds)*Math.PI):0;
   return {mode,clip,speed:clip==='run'?clamp(speed/a.runSpeed,a.minRate,a.maxRate):mode==='steal'?a.stealRate:1,
     lean:mode==='slide'||mode==='recover'?a.slideLean*recovery:mode==='sprint'?a.sprintLean:mode==='steal'?a.stealLean*steal:mode==='header'?a.headerLean*header:0,

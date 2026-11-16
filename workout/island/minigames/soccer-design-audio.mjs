@@ -1,5 +1,11 @@
 import {whistleFor,whistleAllowedInPhase,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
-import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-14';
+import {soccerFxV1Enabled,SOCCER_FX_SOUNDS,soccerFxSound,soccerBallLanded} from './soccer-v24.mjs?v=island-v2-20261107-15';
+import {soccerWhistleV1Enabled,SOCCER_WHISTLE_V1,soccerWhistleCue} from './soccer-r241.mjs?v=island-v2-20261107-15';
+/** v24.1 referee whistles (Codex soccer-whistle-crowd-v1, assets/soccer-v241/audio, -23 LUFS like the shipped bank): played at the shipped
+ * whistle's gain, one voice each; the spacing gate and the rule table stay the ones below. `?soccerWhistleV1=0` = the single shipped whistle. */
+export function soccerV241WhistleAssets(gainDb=-4){
+  return Object.fromEntries(Object.entries(SOCCER_WHISTLE_V1).map(([key,w])=>[key,{file:'../../assets/soccer-v241/audio/'+w.file,label_he:key,loop:false,recommended_gain_db:gainDb,recommended_gain_linear:+Math.pow(10,gainDb/20).toFixed(6),filters:{},max_voices:1,cooldown_ms:0,source:{type:'codex-soccer-whistle-crowd-v1',license:'MIT'}}]));
+}
 const mixURL=new URL('../design/audio/mix.json',import.meta.url);
 /** v24 Foley (Codex soccer-fx-v1, assets/soccer-v24/fx/audio): mix entries next to the shipped bank, same voice rules. `?soccerFxV1=0` = none. */
 export function soccerV24MixAssets(){
@@ -20,13 +26,13 @@ const aliases={kick:'soccer/kick',pass:'soccer/pass',whistle:'soccer/whistle',ne
 /** Soccer's asset mixer. The shell remains the owner of island.sound. */
 /** `show` (soccerShow v1): the goal cheer is a little louder for the child's team and muffled and quiet for a rival goal (the groan the bank has no
  * sample for), and the ambience bed swells with the excitement variable (ball in the box, a goal) instead of staying flat. Same cooldowns, same whistle rules. */
-export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0,bedEnabled=bedOn(),crowdLowpass=crowdHissOn()?null:CROWD_LOWPASS_HZ,fx=soccerFxV1Enabled(),ballRadius=.11}={}){
+export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioContext||globalThis.webkitAudioContext,fetcher=globalThis.fetch,pitchLength=36,clock=wallClock,show=false,home=0,bedEnabled=bedOn(),crowdLowpass=crowdHissOn()?null:CROWD_LOWPASS_HZ,fx=soccerFxV1Enabled(),ballRadius=.11,whistleV1=soccerWhistleV1Enabled()}={}){
   let context,master,bedBus,eventBus,bed,loading,disposed=false,paused=false,muted=false,mix=null,excitement=0,lastCrowd=-20,duckUntil=0,duckGain=1,resultPlayed=false,phase=null,bedSwell=1,mood=null,lastState=null,previousBallY=null;
   // The whistle gate runs on the wall clock, not context.currentTime: the context
   // is created on the first pointer, after kickoff may already have asked.
   const controller=new AbortController(),buffers=new Map(),voices=new Set(),pending=[],lastPlayed=new Map(),failed=new Set(),inflight=new Map(),counts={},gate=createWhistleGate(WHISTLE_SPACING.soccer);
   const readMute=()=>{try{return storage?.getItem('island.sound')==='off';}catch{return false;}};
-  const manifest=Promise.resolve().then(()=>fetcher(mixURL,{signal:controller.signal})).then(response=>{if(!response.ok)throw Error('soccer mix unavailable');return response.json();}).then(value=>(mix=fx?{...value,assets:{...value.assets,...soccerV24MixAssets()}}:value)).catch(()=>null);
+  const manifest=Promise.resolve().then(()=>fetcher(mixURL,{signal:controller.signal})).then(response=>{if(!response.ok)throw Error('soccer mix unavailable');return response.json();}).then(value=>(mix=fx||whistleV1?{...value,assets:{...value.assets,...(fx?soccerV24MixAssets():null),...(whistleV1?soccerV241WhistleAssets(value.assets['soccer/whistle']?.recommended_gain_db??-4):null)}}:value)).catch(()=>null);
   function fade(param,value,time,seconds){param.cancelScheduledValues(time);param.setTargetAtTime(value,time,Math.max(.005,seconds/3));}
   function sync(force=false){
     const value=readMute(),changed=value!==muted;muted=value;
@@ -63,7 +69,7 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
           if(!mix||disposed)return;
           // Short result cues are ready before the shell disposes a completed
           // session. No other sport's bank is downloaded.
-          await Promise.all(Object.keys(mix.assets).filter(key=>key.startsWith('soccer/')||key.startsWith('scenes/')||fx&&key.startsWith('v24/')).map(load));
+          await Promise.all(Object.keys(mix.assets).filter(key=>key.startsWith('soccer/')||key.startsWith('scenes/')||fx&&key.startsWith('v24/')||whistleV1&&key.startsWith('v241/')).map(load));
           if(disposed)return;startBed();sync(true);
           const now=context.currentTime;for(const item of pending.splice(0))if(item.expires>=now)voice(item.cue,item.delay,item.priority,{gain:item.scale,lowpass:item.lowpass});
         });
@@ -116,7 +122,9 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
     const now=clock();
     if(!force){if(!whistleFor(reason,detail)||!whistleAllowedInPhase(reason,phase))return false;if(!gate.allow(now))return false;}
     else gate.mark(now);
-    duck(mix?.layers.soccer_restart);play('whistle');return true;
+    // v24.1: the whistle that fits the call (a short blast for a standing tackle foul, two and three blasts at half and full time)
+    const cue=whistleV1?soccerWhistleCue(reason,detail):null,own=cue&&mix?.assets[cue]&&!failed.has(cue)?cue:null;
+    duck(mix?.layers.soccer_restart);play(own||'whistle',0,own?4:undefined);if(own)counts['whistle']=(counts['whistle']||0)+1;return true;
   }
   function event(value){
     if(!value)return;
@@ -150,7 +158,7 @@ export function createSoccerDesignAudio({storage,AudioContext=globalThis.AudioCo
       if(state.phase==='playing')resultPlayed=false;
     },
     setPaused(value){paused=Boolean(value);pending.length=0;sync(true);if(paused){for(const item of voices)stopVoice(item,0);if(context?.state==='running')void context.suspend().catch(()=>{});}else void unlock();},
-    get snapshot(){return {bank:'design/audio/mix.json',fxV1:fx,muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),bed:bedEnabled,crowdLowpass,excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
+    get snapshot(){return {bank:'design/audio/mix.json',fxV1:fx,whistleV1,muted,paused,disposed,contextState:context?.state||'uninitialized',loaded:[...buffers.keys()],crowd:Boolean(bed),bed:bedEnabled,crowdLowpass,excitement,show,bedSwell,mood,counts:{...counts},active:voices.size,ducking:duckUntil>0,whistle:{last:gate.last,blocked:gate.blocked,phase}};},
     get ready(){return loading||manifest;},
     dispose({finish=false}={}){
       if(disposed)return;disposed=true;controller.abort();pending.length=0;

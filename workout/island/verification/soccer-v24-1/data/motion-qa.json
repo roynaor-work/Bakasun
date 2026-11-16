@@ -1,0 +1,500 @@
+{
+ "tool": {
+  "name": "motion-qa-v1 run.mjs (unchanged)",
+  "branch": "codex/motion-qa-v1",
+  "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "fps": 60,
+  "adapters": "each pack's own loader adapter (only the library list is replaced); volley-scissor-v1 through the kicks-v2 adapter re-pointed at its catalog, scissor measured with its landing as one sequence (as played)"
+ },
+ "packs": {
+  "soccer-tackle-keeper-v2": {
+   "commit": "1bd4ccb5d53a8ff21bb03930ad3b26e7c4815e17",
+   "library": "soccer-tackle-keeper-v2",
+   "count": 16,
+   "min": 88.4,
+   "average": 92.25,
+   "red": 0,
+   "clips": [
+    {
+     "id": "slide_tackle__with_recovery",
+     "score": 91.2,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "stumble_light",
+     "score": 96,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "fall_soft__with_recovery",
+     "score": 88.4,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "fall_foul__with_recovery",
+     "score": 88.8,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_left__with_recovery",
+     "score": 89.9,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_low_left__with_recovery",
+     "score": 89.6,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_high_left__with_recovery",
+     "score": 90.4,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_right__with_recovery",
+     "score": 89.9,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_low_right__with_recovery",
+     "score": 89.6,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "dive_high_right__with_recovery",
+     "score": 90.4,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "catch_chest__with_recovery",
+     "score": 93.6,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "catch_high__with_recovery",
+     "score": 91.3,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "punch__with_recovery",
+     "score": 93.3,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "save_with_foot__with_recovery",
+     "score": 93.8,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "idle_relaxed_reference_field",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "idle_relaxed_reference_keeper",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    }
+   ]
+  },
+  "soccer-kicks-v2": {
+   "commit": "d4a27a94dd63127dd9f38fc641db414bd09bac35",
+   "library": "soccer-kicks-v2",
+   "count": 16,
+   "min": 91.3,
+   "average": 96.34,
+   "red": 0,
+   "clips": [
+    {
+     "id": "power_landing",
+     "score": 95.9,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "inside_curve",
+     "score": 96.5,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "outside_kick",
+     "score": 98,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "placed_kick",
+     "score": 98.1,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "weak_foot",
+     "score": 98.3,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "volley",
+     "score": 95.1,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "scissors",
+     "score": 91.9,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "chip",
+     "score": 97.7,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "running_kick",
+     "score": 91.3,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "short_inside_pass",
+     "score": 97.8,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "long_pass",
+     "score": 96.8,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "through_pass",
+     "score": 98.1,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "lift_pass",
+     "score": 97.3,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "wing_cross",
+     "score": 96.2,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "idle_relaxed",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "idle_run_reference",
+     "score": 92.5,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    }
+   ]
+  },
+  "soccer-locomotion-v2": {
+   "commit": "ec6c73949fb5820826b4c082972f5d4f1136641f",
+   "library": "soccer-locomotion-v2",
+   "count": 19,
+   "min": 88.1,
+   "average": 92.33,
+   "red": 0,
+   "clips": [
+    {
+     "id": "idle_relaxed",
+     "score": 100,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "idle_weight_shift",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "idle_scan",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "walk",
+     "score": 91.8,
+     "yellow": [
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "jog",
+     "score": 90.4,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "run",
+     "score": 91.4,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "sprint",
+     "score": 89.3,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_left_45",
+     "score": 91.1,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_right_45",
+     "score": 91.1,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_left_90",
+     "score": 90.1,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_right_90",
+     "score": 90.1,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_left_180",
+     "score": 90,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "turn_right_180",
+     "score": 90,
+     "yellow": [
+      "posePops",
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "strafe_left",
+     "score": 92.8,
+     "yellow": [
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "strafe_right",
+     "score": 92.8,
+     "yellow": [
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "run_backward",
+     "score": 93.8,
+     "yellow": [
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "run_ball",
+     "score": 93.3,
+     "yellow": [
+      "continuity"
+     ],
+     "red": []
+    },
+    {
+     "id": "idle_to_run",
+     "score": 88.1,
+     "yellow": [
+      "posePops",
+      "continuity",
+      "bodySliding"
+     ],
+     "red": []
+    },
+    {
+     "id": "run_to_idle",
+     "score": 88.3,
+     "yellow": [
+      "posePops",
+      "continuity",
+      "bodySliding"
+     ],
+     "red": []
+    }
+   ]
+  },
+  "soccer-volley-scissor-v1": {
+   "commit": "8277a659f43315036eed250bda2f53f44f8613bb",
+   "library": "soccer-volley-scissor-v1",
+   "count": 6,
+   "min": 89.2,
+   "average": 95.82,
+   "red": 0,
+   "clips": [
+    {
+     "id": "volley_right",
+     "score": 95,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "volley_left",
+     "score": 95.1,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "header_prepare",
+     "score": 99.3,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "header_jump_neutral",
+     "score": 96.4,
+     "yellow": [],
+     "red": []
+    },
+    {
+     "id": "scissor_backward__with_landing",
+     "score": 89.2,
+     "yellow": [
+      "posePops"
+     ],
+     "red": []
+    },
+    {
+     "id": "idle_relaxed",
+     "score": 99.9,
+     "yellow": [],
+     "red": []
+    }
+   ],
+   "separate": [
+    {
+     "id": "scissor_backward",
+     "score": 80.1,
+     "yellow": [
+      "posePops"
+     ],
+     "red": [
+      "continuity"
+     ]
+    },
+    {
+     "id": "scissor_land_getup",
+     "score": 77,
+     "yellow": [
+      "posePops"
+     ],
+     "red": [
+      "continuity"
+     ]
+    }
+   ]
+  }
+ }
+}

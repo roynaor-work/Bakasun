@@ -24,6 +24,8 @@ export function alienFlightFeedbackText(feedback){
  if(feedback.kind==='player-hit')return {id:feedback.id,text:'פגיעה בחללית',pickup:null};
  // v24: a Vulcan magazine was picked up (the gauge is empty and stays cold a few seconds).
  if(feedback.kind==='refill')return {id:feedback.id,text:'מחסנית וולקן · הוולקן קר',pickup:null};
+ // v25 arsenal: an ammo token was taken (value = the weapon it filled).
+ if(feedback.kind==='ammo')return {id:feedback.id,text:['תחמושת · טילים','תחמושת · ברק שרשרת','תחמושת · גל הלם'][feedback.value]||'תחמושת',pickup:null};
  return null;
 }
 

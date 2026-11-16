@@ -1,17 +1,17 @@
-import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-14';
-import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-14';
+import {createNavalProjectiles} from './naval-projectiles.mjs?v=island-v2-20261107-15';
+import {createNavalImpacts} from './naval-impacts.mjs?v=island-v2-20261107-15';
 import * as THREE from '../vendor/three.module.js';
 import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
-import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-14';
-import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-14';
-import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-14';
-import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-14';
-import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-14';
-import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-14';
-import {createNavalSupplyView} from './naval-supply-view.mjs?v=island-v2-20261107-14';
-import {createNavalStructure,createNavalBasePlate,navalBaseLightSea} from './naval-base-view.mjs?v=island-v2-20261107-14';
-import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-14';
-import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-14';
+import {navalWorldPoint,navalProjectileHeight} from './naval-camera.mjs?v=island-v2-20261107-15';
+import {createNavalEffects} from './g6d-effects.mjs?v=island-v2-20261107-15';
+import {loadPatrolBoat,disposeBoat} from './patrol-boat.mjs?v=island-v2-20261107-15';
+import {createNavalScenery} from './naval-scenery.mjs?v=island-v2-20261107-15';
+import {createNavalEnvironment} from './naval-environment.mjs?v=island-v2-20261107-15';
+import {createNavalAirView} from './naval-air-view.mjs?v=island-v2-20261107-15';
+import {createNavalSupplyView} from './naval-supply-view.mjs?v=island-v2-20261107-15';
+import {createNavalStructure,createNavalBasePlate,navalBaseLightSea} from './naval-base-view.mjs?v=island-v2-20261107-15';
+import {createNavalAimArc} from './naval-aim-view.mjs?v=island-v2-20261107-15';
+import {createNavalDressing} from './naval-dressing.mjs?v=island-v2-20261107-15';
 import {createNavalV7,navalV7Enabled,NAVAL_V7} from './naval-v7.mjs';
 
 /** Procedural meshes are isolated here so a GLB vessel can replace this factory.
@@ -244,7 +244,8 @@ export function createNavalView(ctx,model,adapters={}) {
 
         for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];v.root.visible=e.active;if(e.active){animateVessel(v,e,e.z*r.enemySpacing/balance.combat.laneSpacing,-(e.x-balance.shipX)*r.worldScale,true);if(balance.shipTypes[e.kind].submarine){v.root.position.y-=e.depth*fx.submergedY;v.periscope.visible=e.hp>0;}}}
         const hulls=[{x:player.root.position.x,z:player.root.position.z,yaw:player.root.rotation.y,length:player.modelLength||11,speed:(model.playerShip.speed||0)*r.worldScale,visible:true}];
-        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i];hulls.push({x:v.root.position.x,z:v.root.position.z,yaw:v.root.rotation.y,length:v.modelLength||9*(e.hullScale||1),speed:Math.hypot(e.vx||0,e.vz||0)*r.worldScale,visible:e.active&&e.hp>0&&!(balance.shipTypes[e.kind].submarine&&e.depth>0)});}
+        // v24.1: a deep submarine (never up, naval-v241.mjs) leaves a short feather of foam at its periscope instead of a hull's wake.
+        for(let i=0;i<vessels.length;i++){const e=model.enemies[i],v=vessels[i],under=balance.shipTypes[e.kind].submarine&&e.depth>0;hulls.push({x:v.root.position.x,z:v.root.position.z,yaw:v.root.rotation.y,length:under&&e.subDeep?2.4:v.modelLength||9*(e.hullScale||1),speed:Math.hypot(e.vx||0,e.vz||0)*r.worldScale,visible:e.active&&e.hp>0&&(!under||Boolean(e.subDeep))});}
         const b=model.blast;dressing.update(hulls,model.time,{life:b.life,critical:b.critical,wx:b.z*r.enemySpacing/balance.combat.laneSpacing,wz:-(b.x-balance.shipX)*r.worldScale},config.visuals.blastSeconds);
         projectiles.update(camera);airView.update();supplyView.update();impacts.update(camera);arc.update(camera);
         aimLine.visible=false;

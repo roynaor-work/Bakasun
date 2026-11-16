@@ -3,7 +3,7 @@
  * tap will hit), an arrow on the edge when the locked hull is out of the picture, a one-word reason when the shot cannot land on the
  * hull now (too far, another hull in the way, a submarine under water), and, until the first lock of a stage, a small "hold to lock"
  * hint over the nearest hull. Nothing is drawn unless lock-on is on (`?navalLock=0` keeps the v22 screen). */
-import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-14';
+import {navalEdgeHint} from './naval-aim-flag.mjs?v=island-v2-20261107-15';
 const TAU=Math.PI*2;
 export const NAVAL_LOCK_COLORS=Object.freeze({ready:'#62E6AA',turning:'#FFD166',far:'#FF9A5C',near:'#FF9A5C',blocked:'#FF9A5C',miss:'#FF9A5C',dive:'#FF9A5C',press:'#FFFFFF',outline:'#103847'});
 export const NAVAL_LOCK_WORDS=Object.freeze({far:'רחוק מדי · מתקרבים',blocked:'מטרה אחרת בדרך',dive:'מתחת למים · מחכים',hint:'החזיקו אצבע על ספינה',
@@ -66,7 +66,7 @@ export function drawNavalLockHud(p,m,balance,project,width,height){
   }
  }
  // Until the first lock of the stage: a small hint over the nearest hull (open water only, never while aiming or pressing).
- if(!h&&!pressed&&!m.aiming&&(m.locksMade||0)===0&&(m.time??0)<9){
+ if(!h&&!pressed&&!m.aiming&&!m.radar&&(m.locksMade||0)===0&&(m.time??0)<9){
   const e=find(m.selectedTargetIndex)||(m.enemies||[]).find(x=>x.active&&x.hp>0),b=e&&navalLockBox(e,project,balance);
   if(b&&b.y>70&&b.y<height-40){const y=Math.max(58,b.y-b.h/2-30),pulse=.5+.5*Math.sin((m.time??0)*5);p.globalAlpha=.75+.25*pulse;
    const box=pill(p,m.aimV24?NAVAL_LOCK_WORDS.tap:NAVAL_LOCK_WORDS.hint,b.x,y,NAVAL_LOCK_COLORS.turning);padlock(p,box.x-10,y,NAVAL_LOCK_COLORS.turning,.8);p.globalAlpha=1;out.hint={x:Math.round(b.x),y:Math.round(y)};}

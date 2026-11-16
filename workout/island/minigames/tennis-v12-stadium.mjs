@@ -5,6 +5,8 @@
  * every file has loaded). Layout follows the package's scene.json; the game court is 18 m long where the package assumes 23.77 m,
  * so z positions are pulled in by the missing 2.89 m per end. */
 const FILES=['stand-10m','ad-board','umpire-chair','player-bench','scoreboard','floodlight'];
+/** v25 load: the view prefetches these at the start (they are the stadium's critical path). */
+export const STADIUM_FILES=FILES;
 export const PLACEMENTS=[
  ...[-1,1].flatMap(s=>[-10,0,10].map(z=>({model:'stand-10m',position:[s*10.4,0,z],rotationY:-s*Math.PI/2}))),
  ...[-1,1].flatMap(s=>[-5,5].map(x=>({model:'stand-10m',position:[x,0,s*19.5],rotationY:s<0?Math.PI:0}))),
@@ -19,16 +21,18 @@ export const PLACEMENTS=[
 export function fitZ(z,halfLength){const missing=11.885-halfLength;return Math.abs(z)>=5?Math.sign(z)*(Math.abs(z)-missing):z;}
 /** Seats (row, column) on a stand in its local frame, 5 rows x 12 columns = 60 fans per stand. */
 export function standSeats(){const out=[];for(let row=0;row<5;row++)for(let col=0;col<12;col++)out.push({x:col<6?-4.5+col*.7:.95+(col-6)*.7,y:.28+row*.42-.025,z:.48+row*.88-.06,row,col});return out;}
-export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,camera}){
+/** lateCrowd (v25 load, the view sets it unless ?tennisLoad=v24): return as soon as the stands are built, with the billboard fans, and build the 3D
+ * crowd in the background (its 36 files fetched in parallel), swapping it in when it is ready; a failure keeps the billboard fans. */
+export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,params,config,GLTFLoader,base,camera,lateCrowd=false}){
  const flag=params?.get?.('tennisStadium');
  if(flag==='0'||flag==='v11'||!v7?.hideVenue||typeof document==='undefined')return null;
- const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-14`,base);
+ const loader=new GLTFLoader(),url=n=>new URL(`../assets/tennis-stadium-v1/${n}?v=island-v2-20261107-15`,base);
  const use3dFlag=params?.get?.('tennisCrowd3d')!=='0';
  const crowdBase=new URL('../assets/tennis-crowd-v22/',base);
  const [models,city,crowdModule]=await Promise.all([
   Promise.all(FILES.map(async n=>[n,(await loader.loadAsync(url(n+'.glb').href)).scene])),
   new T.TextureLoader().loadAsync(url('evening-city.png').href),
-  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-14').catch(()=>null):null]);
+  use3dFlag?import('../assets/tennis-crowd-v22/crowd-lod.mjs?v=island-v2-20261107-15').catch(()=>null):null]);
  const library=new Map(models),halfLength=config.court.halfLength,group=new T.Group();group.name='tennis-v12-stadium';
  const disposables=[city],track=o=>{disposables.push(o);return o;};
  city.colorSpace=T.SRGBColorSpace;
@@ -42,9 +46,10 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
  // 600 fans: the 3D LOD crowd first (?tennisCrowd3d=0 skips it); if it fails to load, the billboard atlas crowd below is built exactly as before.
  const seats=standSeats(),count=stands.length*60;let crowd3d=null,crowd=null,atlas=null;const cheer={value:0},clock={value:0};
  group.updateMatrixWorld(true);
- if(crowdModule?.createLODCrowd){try{
-  const list=[],point3=new T.Vector3();let n=0;
-  for(const stand of stands)for(const s of seats){point3.set(s.x,s.y,s.z).applyMatrix4(stand.matrixWorld);const jr=Math.sin(n*12.9898)*43758.5453,jit=jr-Math.floor(jr);list.push({id:n,x:point3.x,y:point3.y,z:point3.z,yaw:stand.rotation.y+Math.PI+(jit-.5)*.3});n++;}
+ const seatList=()=>{const list=[],point3=new T.Vector3();let n=0;
+  for(const stand of stands)for(const s of seats){point3.set(s.x,s.y,s.z).applyMatrix4(stand.matrixWorld);const jr=Math.sin(n*12.9898)*43758.5453,jit=jr-Math.floor(jr);list.push({id:n,x:point3.x,y:point3.y,z:point3.z,yaw:stand.rotation.y+Math.PI+(jit-.5)*.3});n++;}return list;};
+ if(crowdModule?.createLODCrowd&&!lateCrowd){try{
+  const list=seatList();
   crowd3d=await crowdModule.createLODCrowd({T,GLTFLoader,seats:list,base:crowdBase});
   // Unlit vertex colours read brighter than the evening-lit atlas: pull them toward the cool dusk grade.
   for(const m of crowd3d.batches)m.material.color.set('#c2ccd8');
@@ -75,8 +80,19 @@ export async function createTennisV12Stadium({T,scene,renderer,hemi,sun,keep,v7,
  scene.background=new T.Color('#53647c');scene.fog?.color.set('#718095');
  hemi.color.set('#b4c8e6');hemi.groundColor.set('#343b35');hemi.intensity=1.35;sun.color.set('#ffd1a0');sun.intensity=2.1;sun.position.set(-24,19,10);renderer.toneMappingExposure=1.05;
  const clap={last:-1,left:0},aim=new T.Vector3(),camLocal=[0,0,0];let camSeen=false,triangles=0;group.traverse(o=>{if(o.isMesh&&!(crowd3d&&crowd3d.batches.includes(o)))triangles+=(o.geometry.index?.count??o.geometry.attributes.position.count)/3*(o.isInstancedMesh?o.count:1);});
- return {group,metrics:{fans:count,stands:stands.length,triangles,crowd:crowd3d?'3d-lod':'billboard',crowd3d:crowd3d?crowd3d.metrics:null},
+ const metrics={fans:count,stands:stands.length,triangles,crowd:crowd3d?'3d-lod':'billboard',crowd3d:crowd3d?crowd3d.metrics:null};let disposed=false;
+ // v25 late crowd: the 3D fans replace the billboard fans once all their files are in (prefetched in parallel; the package loads them one by one).
+ if(lateCrowd&&crowdModule?.createLODCrowd){metrics.crowdLate='loading';void (async()=>{let late=null;try{
+   if(typeof lateCrowd?.then==='function')await lateCrowd;if(disposed)return;
+   const manifest=await (await fetch(new URL('assets.json',crowdBase))).json(),cache=new Map();
+   for(const asset of manifest.assets||[]){const href=new URL(asset.file,crowdBase).href;cache.set(href,fetch(href).then(r=>{if(!r.ok)throw Error(asset.file+' '+r.status);return r.arrayBuffer();}));}
+   class Prefetched extends GLTFLoader{loadAsync(url,onProgress){const hit=cache.get(new URL(url,crowdBase).href);return hit?hit.then(buffer=>this.parseAsync(buffer,new URL('./',url).href)):super.loadAsync(url,onProgress);}}
+   late=await crowdModule.createLODCrowd({T,GLTFLoader:Prefetched,seats:seatList(),base:crowdBase});if(disposed){late.dispose?.();return;}
+   for(const m of late.batches)m.material.color.set('#c2ccd8');crowd3d=late;group.add(crowd3d.root);if(crowd){crowd.visible=false;}
+   metrics.crowd='3d-lod';metrics.crowd3d=crowd3d.metrics;metrics.crowdLate='ready';
+  }catch(error){late?.dispose?.();metrics.crowdLate='failed';}})();}
+ return {group,metrics,
   update(state,dt){clock.value+=dt;const e=state?.event;if(e&&['point','game','complete'].includes(e.type)&&e.id!==clap.last){clap.last=e.id;clap.left=2.4;}clap.left=Math.max(0,clap.left-dt);cheer.value=clap.left>0?Math.min(1,clap.left):0;
    if(crowd3d){const ball=v7.ball?.position;if(ball)aim.copy(ball);const c=camera?.position;if(c&&(!camSeen||Math.hypot(c.x-camLocal[0],c.y-camLocal[1],c.z-camLocal[2])>.4)){camLocal[0]=c.x;camLocal[1]=c.y;camLocal[2]=c.z;camSeen=true;}crowd3d.update({seconds:clock.value,celebration:cheer.value,ballPosition:[aim.x,Math.max(aim.y,.3),aim.z],cameraPosition:camera?.position?camLocal:[0,12.8,25]});}},
-  dispose(){crowd3d?.dispose?.();scene.remove(group);v7.showVenue?.();for(const d of disposables)d.dispose?.();group.traverse(o=>{if(o.isMesh&&o!==crowd&&!(crowd3d&&crowd3d.batches.includes(o))&&o.geometry&&!o.geometry.userData?.shared)o.geometry.dispose?.();});}};
+  dispose(){disposed=true;crowd3d?.dispose?.();scene.remove(group);v7.showVenue?.();for(const d of disposables)d.dispose?.();group.traverse(o=>{if(o.isMesh&&o!==crowd&&!(crowd3d&&crowd3d.batches.includes(o))&&o.geometry&&!o.geometry.userData?.shared)o.geometry.dispose?.();});}};
 }

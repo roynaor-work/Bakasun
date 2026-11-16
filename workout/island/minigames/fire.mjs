@@ -1,13 +1,15 @@
-import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-14';
-import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-14';
-import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-14';
-import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-14';
-import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-14';
-import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-14';
+import {fireScenario} from './fire-campaign.mjs?v=island-v2-20261107-15';
+import {createFireNavigation,fireGuidance} from './fire-assistance.mjs?v=island-v2-20261107-15';
+import {followFireCamera} from './fire-navigation.mjs?v=island-v2-20261107-15';
+import {createFireLadder} from './fire-ladder.mjs?v=island-v2-20261107-15';
+import {fireCertificate} from '../activity/fire-certificates.mjs?v=island-v2-20261107-15';
+import {runFireSession} from './fire-session.mjs?v=island-v2-20261107-15';
 import {polishLegacy,polishValue} from './polish-flag.mjs';
-import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-14';
-import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-14';
-import {createFireView} from './fire-view.mjs?v=island-v2-20261107-14';
+import {createFireDriver} from './fire-roads.mjs?v=island-v2-20261107-15';
+import {drawFireCity} from './fire-canvas.mjs?v=island-v2-20261107-15';
+import {createFireView} from './fire-view.mjs?v=island-v2-20261107-15';
+import {fireFlowV24,isEntryStage} from './fire-v24.mjs?v=island-v2-20261107-15';
+import {startFireEntry} from './fire-v24-flow.mjs?v=island-v2-20261107-15';
 export function fireHydrantDistance(truck,balance){return Math.min(...(balance.city?.hydrants||[balance.hydrant.position]).map(p=>Math.hypot(truck.x-p[0],truck.z-p[2])));}
 const EMPTY=Object.freeze({});
 export function createFireEntity(site,type,active,heat,index){return {x:site.x,y:site.y,kind:site.kind,type,active,heat,phase:index*1.7,spreadAge:0,warning:0,coolingAge:0,damaged:false,reignitions:0};}
@@ -113,10 +115,14 @@ export function createFireModel({config,balance,level,bonuses=EMPTY,random,power
   };return model;
 }
 export function drawFire(p,m,ctx) {if(!ctx.view?.draw(p))drawFireCity(p,m,ctx);}
-export function startFire(ctx){if(ctx.fireMode)return startFireBonus(ctx);return runFireSession({...ctx,balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}},createFireModel,drawFire,createFireView);}
+export function startFire(ctx){if(ctx.fireMode)return startFireBonus(ctx);
+  const session={...ctx,balance:fireScenario(ctx.balance,ctx.level),finish:raw=>{ctx.onFireSummary?.(raw.summary);return ctx.finish(raw);}};
+  // 14/11/2026 fire v24: every third stage from 3 drives to a burning building and the firefighter goes in (`?fireFlow=v23` = the v23 stage).
+  if(fireFlowV24()&&isEntryStage(ctx.level,ctx.balance.levels.length))return startFireEntry(session,createFireModel,drawFire,createFireView);
+  return runFireSession(session,createFireModel,drawFire,createFireView);}
 /** 13/11/2026 fire v23: the bonus missions (water targets, inside a building) load their own module on first use. Until it runs,
  * the session says it is loading through the shared `ready` contract, so "stuck? restart" works the same as for every game. */
-export function startFireBonus(ctx,load=()=>import('./fire-bonus-session.mjs?v=island-v2-20261107-14')){
+export function startFireBonus(ctx,load=()=>import('./fire-bonus-session.mjs?v=island-v2-20261107-15')){
   let session=null,disposed=false,paused=false,failed=false;
   const proxy={get ready(){return Boolean(session?.ready);},get loadFailed(){return failed||Boolean(session?.loadFailed);},
     get snapshot(){return session?session.snapshot:{mode:ctx.fireMode,level:ctx.fireBonusLevel,loading:true};},

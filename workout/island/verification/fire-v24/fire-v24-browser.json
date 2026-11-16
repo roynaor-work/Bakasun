@@ -1,0 +1,1454 @@
+{
+ "startedAt": "2026-11-14T18:22:37.441Z",
+ "viewport": "844x390 hasTouch isMobile, SwiftShader",
+ "runs": {
+  "stage3": {
+   "shots": [
+    "shots/stage3-street-start.jpg",
+    "shots/stage3-street-arrived.jpg",
+    "shots/stage3-inside-lesson.jpg",
+    "shots/stage3-inside-room-card.jpg",
+    "shots/stage3-inside-spray-sofa.jpg",
+    "shots/stage3-inside-spray-rug.jpg",
+    "shots/stage3-inside-friend.jpg",
+    "shots/stage3-inside-rescue.jpg",
+    "shots/stage3-inside-back-on-street.jpg",
+    "shots/stage3-street-spray.jpg",
+    "shots/stage3-result.jpg",
+    "shots/stage3-stage-map.jpg"
+   ],
+   "renderMode": "three",
+   "v24AtStart": {
+    "state": "drive",
+    "inside": false,
+    "done": false,
+    "level": 3,
+    "building": {
+     "index": 4,
+     "door": [
+      0,
+      0.1,
+      2.85
+     ]
+    },
+    "doorScreen": {
+     "x": 328.8,
+     "y": 64.4
+    },
+    "markerKind": "arrow",
+    "doorDistance": 16.29,
+    "plan": {
+     "rooms": [
+      "living"
+     ],
+     "tools": [
+      "water"
+     ],
+     "tutorial": true
+    },
+    "result": null,
+    "interior": null,
+    "enterButton": false
+   },
+   "entryFlame": 2,
+   "navigationAfterTap": {
+    "active": false,
+    "kind": null
+   },
+   "driveTrace": [
+    {
+     "time": 0.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 1.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 2.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    }
+   ],
+   "arrived": true,
+   "arriveTime": 4.7,
+   "insideReady": true,
+   "insideMetricsAtStart": {
+    "triangles": 11160,
+    "drawCalls": 24,
+    "sceneTriangles": 10996,
+    "sceneObjects": 20,
+    "crew": true,
+    "friend": true,
+    "roomBuilt": false,
+    "burnables": 9,
+    "puffs": 0,
+    "lite": false,
+    "width": 844,
+    "height": 390,
+    "ready": true,
+    "loadFailed": false,
+    "fps": [],
+    "dpr": 1
+   },
+   "lessonShown": true,
+   "roomCard": "סלוןסלון. מכבים את האש ומחלצים את הכלב50 שניות על השעוןנוגעים כדי להתחיל",
+   "playStarted": true,
+   "clockAtStart": 49.79200000000002,
+   "sprayingSeen": true,
+   "hitSeen": true,
+   "spots": {
+    "sofa": true,
+    "rug": true
+   },
+   "friendAfterTap": "rescued",
+   "renderMetrics": [
+    {
+     "triangles": 11388,
+     "drawCalls": 50,
+     "sceneTriangles": 11240,
+     "sceneObjects": 46,
+     "crew": true,
+     "friend": true,
+     "roomBuilt": false,
+     "burnables": 9,
+     "puffs": 17,
+     "lite": false,
+     "width": 844,
+     "height": 390,
+     "ready": true,
+     "loadFailed": false,
+     "fps": [
+      63,
+      63,
+      63,
+      63,
+      63,
+      63
+     ],
+     "dpr": 1
+    },
+    {
+     "triangles": 11228,
+     "drawCalls": 48,
+     "sceneTriangles": 11160,
+     "sceneObjects": 45,
+     "crew": true,
+     "friend": true,
+     "roomBuilt": false,
+     "burnables": 9,
+     "puffs": 13,
+     "lite": false,
+     "width": 844,
+     "height": 390,
+     "ready": true,
+     "loadFailed": false,
+     "fps": [
+      63,
+      63,
+      63,
+      63,
+      63,
+      63,
+      63,
+      63,
+      63,
+      63
+     ],
+     "dpr": 1
+    }
+   ],
+   "done": true,
+   "insideResult": {
+    "outcome": "win",
+    "score": 390,
+    "performance": 1,
+    "rescued": 1,
+    "rooms": 1,
+    "seconds": 6.608000000000005,
+    "limit": 50,
+    "handovers": 0,
+    "mistakes": 0
+   },
+   "streetTrace": [
+    {
+     "time": 4.8,
+     "remaining": 55,
+     "water": 104,
+     "active": 4,
+     "near": 3,
+     "driving": false,
+     "nav": false,
+     "hydrant": 4.4,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 13.4,
+     "remaining": 46,
+     "water": 0,
+     "active": 3,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 4.4,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 28.5,
+     "remaining": 31,
+     "water": 0,
+     "active": 8,
+     "near": 3,
+     "driving": true,
+     "nav": true,
+     "hydrant": 3.3,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 30,
+     "remaining": 30,
+     "water": 0,
+     "active": 8,
+     "near": 3,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 31.3,
+     "remaining": 28,
+     "water": 21,
+     "active": 8,
+     "near": 3,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 32.9,
+     "remaining": 27,
+     "water": 2,
+     "active": 8,
+     "near": 3,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 33.2,
+     "remaining": 26,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 33.5,
+     "remaining": 26,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 33.8,
+     "remaining": 26,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 34.2,
+     "remaining": 25,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 34.5,
+     "remaining": 25,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 34.8,
+     "remaining": 25,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 35.1,
+     "remaining": 24,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 35.4,
+     "remaining": 24,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 35.8,
+     "remaining": 24,
+     "water": 2,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 36.1,
+     "remaining": 23,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 36.4,
+     "remaining": 23,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 36.7,
+     "remaining": 23,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 37,
+     "remaining": 22,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 37.4,
+     "remaining": 22,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 37.7,
+     "remaining": 22,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 38,
+     "remaining": 22,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 38.3,
+     "remaining": 21,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 38.6,
+     "remaining": 21,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 39,
+     "remaining": 21,
+     "water": 2,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 39.2,
+     "remaining": 20,
+     "water": 3,
+     "active": 5,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 43.8,
+     "remaining": 16,
+     "water": 95,
+     "active": 5,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 46.6,
+     "remaining": 13,
+     "water": 104,
+     "active": 5,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 5.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 48.8,
+     "remaining": 11,
+     "water": 75,
+     "active": 4,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 5.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    }
+   ],
+   "resultCard": true,
+   "resultRows": [
+    "ניקוד155",
+    "מטבעות שהרווחת31",
+    "חלקים שהרווחת0",
+    "כוכבים בשלב0",
+    "מוקדים שכובו5",
+    "אזרחים שחולצו0",
+    "מים שנשארו74"
+   ],
+   "resultTitle": "אפשר לנסות שוב",
+   "resultWin": false,
+   "resultStarsRow": 0,
+   "saveAfter": {
+    "progress": {
+     "stage": 6,
+     "stars": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "money": 4931,
+    "certificates": 1
+   },
+   "badges": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27,
+    30
+   ]
+  },
+  "idle": {
+   "shots": [
+    "shots/idle-ten-seconds.jpg",
+    "shots/idle-handover.jpg"
+   ],
+   "entryFlame": 2,
+   "navigationAfterTap": {
+    "active": false,
+    "kind": null
+   },
+   "driveTrace": [
+    {
+     "time": 0.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 1.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 2.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    }
+   ],
+   "arrived": true,
+   "arriveTime": 4.7,
+   "result": {
+    "outcome": "win",
+    "score": 0,
+    "performance": 0,
+    "rescued": 0,
+    "rooms": 1,
+    "seconds": 50.01599999999627,
+    "limit": 50,
+    "handovers": 1,
+    "mistakes": 0
+   },
+   "bands": [
+    "ok",
+    "warn",
+    "critical"
+   ]
+  },
+  "controlV23": {
+   "shots": [
+    "shots/control-v23-street-spray.jpg",
+    "shots/control-v23-result.jpg"
+   ],
+   "streetTrace": [
+    {
+     "time": 0,
+     "remaining": 59,
+     "water": 104,
+     "active": 4,
+     "near": 3,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 8.6,
+     "remaining": 51,
+     "water": 0,
+     "active": 2,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 10.4,
+     "remaining": 49,
+     "water": 0,
+     "active": 2,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 12.2,
+     "remaining": 47,
+     "water": 0,
+     "active": 2,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 14.1,
+     "remaining": 45,
+     "water": 0,
+     "active": 2,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 15.9,
+     "remaining": 44,
+     "water": 0,
+     "active": 3,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 17.7,
+     "remaining": 42,
+     "water": 0,
+     "active": 4,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 19.5,
+     "remaining": 40,
+     "water": 0,
+     "active": 5,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 21.4,
+     "remaining": 38,
+     "water": 0,
+     "active": 5,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 23.2,
+     "remaining": 36,
+     "water": 0,
+     "active": 5,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 25,
+     "remaining": 34,
+     "water": 0,
+     "active": 6,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 26.8,
+     "remaining": 33,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 28.7,
+     "remaining": 31,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 30.5,
+     "remaining": 29,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 32.3,
+     "remaining": 27,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 34.1,
+     "remaining": 25,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 36,
+     "remaining": 24,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 37.8,
+     "remaining": 22,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 39.6,
+     "remaining": 20,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 41.5,
+     "remaining": 18,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 43.3,
+     "remaining": 16,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 45.1,
+     "remaining": 14,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 46.9,
+     "remaining": 13,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 48.8,
+     "remaining": 11,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 50.6,
+     "remaining": 9,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 52.4,
+     "remaining": 7,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 54.3,
+     "remaining": 5,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 56.1,
+     "remaining": 3,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 57.9,
+     "remaining": 2,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    }
+   ],
+   "resultCard": true,
+   "resultRows": [
+    "ניקוד62",
+    "מטבעות שהרווחת12",
+    "חלקים שהרווחת0",
+    "כוכבים בשלב0",
+    "מוקדים שכובו2",
+    "אזרחים שחולצו0",
+    "מים שנשארו0"
+   ],
+   "resultTitle": "אפשר לנסות שוב",
+   "resultWin": false,
+   "resultStarsRow": 0
+  }
+ },
+ "checks": {
+  "entryStageStartsOnTheStreetWithADoorMarker": {
+   "pass": true,
+   "v24": {
+    "state": "drive",
+    "inside": false,
+    "done": false,
+    "level": 3,
+    "building": {
+     "index": 4,
+     "door": [
+      0,
+      0.1,
+      2.85
+     ]
+    },
+    "doorScreen": {
+     "x": 328.8,
+     "y": 64.4
+    },
+    "markerKind": "arrow",
+    "doorDistance": 16.29,
+    "plan": {
+     "rooms": [
+      "living"
+     ],
+     "tools": [
+      "water"
+     ],
+     "tutorial": true
+    },
+    "result": null,
+    "interior": null,
+    "enterButton": false
+   },
+   "mode": "three"
+  },
+  "drivingToTheBuildingOpensTheDoorAndTheEnterButton": {
+   "pass": true,
+   "arrived": true,
+   "doorDistance": 5.88,
+   "enterShown": true,
+   "arriveTime": 4.7,
+   "trace": [
+    {
+     "time": 0.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 1.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    },
+    {
+     "time": 2.4,
+     "door": 16.29,
+     "state": "drive",
+     "marker": "arrow"
+    }
+   ]
+  },
+  "enterLoadsTheRoomIn3DOverTheFrozenStreet": {
+   "pass": true,
+   "metrics": {
+    "triangles": 11160,
+    "drawCalls": 24,
+    "sceneTriangles": 10996,
+    "sceneObjects": 20,
+    "crew": true,
+    "friend": true,
+    "roomBuilt": false,
+    "burnables": 9,
+    "puffs": 0,
+    "lite": false,
+    "width": 844,
+    "height": 390,
+    "ready": true,
+    "loadFailed": false,
+    "fps": [],
+    "dpr": 1
+   }
+  },
+  "lessonThenRoomCardThenPlay": {
+   "pass": true,
+   "lesson": true,
+   "card": "סלוןסלון. מכבים את האש ומחלצים את הכלב50 שניות על השעוןנוגעים כדי להתחיל",
+   "clock": 49.79200000000002
+  },
+  "fingerOnTheFirePutsItOutWithWaterAndSteam": {
+   "pass": true,
+   "spots": {
+    "sofa": true,
+    "rug": true
+   },
+   "spraying": true,
+   "hit": true
+  },
+  "tapOnTheFriendCarriesThemOut": {
+   "pass": true,
+   "friend": "rescued"
+  },
+  "roomDoneReturnsToTheStreetWithAnInsideResult": {
+   "pass": true,
+   "result": {
+    "outcome": "win",
+    "score": 390,
+    "performance": 1,
+    "rescued": 1,
+    "rooms": 1,
+    "seconds": 6.608000000000005,
+    "limit": 50,
+    "handovers": 0,
+    "mistakes": 0
+   }
+  },
+  "streetClockFrozenWhileInside": {
+   "pass": true,
+   "atEnter": 54.331000000000515,
+   "after": 54.20300000000053,
+   "insideSeconds": 6.608000000000005
+  },
+  "insideRenderBudget": {
+   "pass": true,
+   "triangles": 11388,
+   "drawCalls": 50,
+   "sceneObjects": 46,
+   "fps": [
+    63,
+    63,
+    63,
+    63,
+    63,
+    63
+   ]
+  },
+  "stageEndsWithAWinCardAndStars": {
+   "pass": false,
+   "title": "אפשר לנסות שוב",
+   "rows": [
+    "ניקוד155",
+    "מטבעות שהרווחת31",
+    "חלקים שהרווחת0",
+    "כוכבים בשלב0",
+    "מוקדים שכובו5",
+    "אזרחים שחולצו0",
+    "מים שנשארו74"
+   ],
+   "stars": 0,
+   "certificates": 1,
+   "trace": [
+    {
+     "time": 39.2,
+     "remaining": 20,
+     "water": 3,
+     "active": 5,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 43.8,
+     "remaining": 16,
+     "water": 95,
+     "active": 5,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 1.4,
+     "at": true,
+     "refilling": true,
+     "canFinish": false
+    },
+    {
+     "time": 46.6,
+     "remaining": 13,
+     "water": 104,
+     "active": 5,
+     "near": 1,
+     "driving": false,
+     "nav": false,
+     "hydrant": 5.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 48.8,
+     "remaining": 11,
+     "water": 75,
+     "active": 4,
+     "near": 0,
+     "driving": false,
+     "nav": false,
+     "hydrant": 5.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    }
+   ]
+  },
+  "saveShapeUnchangedBeyondTheUsualStageWin": {
+   "pass": true,
+   "changed": [
+    ".fireCertificates[2].careful",
+    ".fireCertificates[2].fast",
+    ".fireCertificates[2].rescue",
+    ".fireCertificates[2].stars",
+    ".highScores.fireRescue",
+    ".instructionsSeen[]1",
+    ".instructionsSeen[]0"
+   ],
+   "foreign": [],
+   "version": 19
+  },
+  "stageMapMarksTheEntryStages": {
+   "pass": true,
+   "badges": [
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27,
+    30
+   ]
+  },
+  "cspClean": {
+   "pass": true
+  },
+  "noPageErrors": {
+   "pass": true,
+   "errors": []
+  },
+  "noRequestsOutsideIsland": {
+   "pass": true,
+   "outside": []
+  },
+  "idleInsideWarnsAtTenSecondsAndHandsOverGently": {
+   "pass": true,
+   "warned": true,
+   "critical": true,
+   "handover": true,
+   "bands": [
+    "ok",
+    "warn",
+    "critical"
+   ],
+   "result": {
+    "outcome": "win",
+    "score": 0,
+    "performance": 0,
+    "rescued": 0,
+    "rooms": 1,
+    "seconds": 50.01599999999627,
+    "limit": 50,
+    "handovers": 1,
+    "mistakes": 0
+   }
+  },
+  "idleNoPageErrors": {
+   "pass": true,
+   "errors": []
+  },
+  "fireFlowV23RestoresThePreviousStage": {
+   "pass": true,
+   "keys": [],
+   "enter": 0
+  },
+  "controlV23StreetOutcomeRecorded": {
+   "pass": true,
+   "win": false,
+   "rows": [
+    "ניקוד62",
+    "מטבעות שהרווחת12",
+    "חלקים שהרווחת0",
+    "כוכבים בשלב0",
+    "מוקדים שכובו2",
+    "אזרחים שחולצו0",
+    "מים שנשארו0"
+   ],
+   "trace": [
+    {
+     "time": 48.8,
+     "remaining": 11,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 50.6,
+     "remaining": 9,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 52.4,
+     "remaining": 7,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 54.3,
+     "remaining": 5,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 56.1,
+     "remaining": 3,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    },
+    {
+     "time": 57.9,
+     "remaining": 2,
+     "water": 0,
+     "active": 7,
+     "near": 2,
+     "driving": false,
+     "nav": false,
+     "hydrant": 8.1,
+     "at": false,
+     "refilling": false,
+     "canFinish": false
+    }
+   ]
+  },
+  "v23NoPageErrors": {
+   "pass": true,
+   "errors": []
+  }
+ },
+ "download": {
+  "stage3AssetsKB": 1894,
+  "allAssetsKB": 3137,
+  "codeKB": 86,
+  "note": "firefighter GLB and fx sheets are already part of the fire pack; rooms and friends are new"
+ },
+ "failures": 1,
+ "finishedAt": "2026-11-14T18:55:38.282Z"
+}

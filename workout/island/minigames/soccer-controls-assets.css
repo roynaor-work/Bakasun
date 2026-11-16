@@ -25,5 +25,8 @@
 /* Air v23 (soccer-v23.mjs): "נגיחה" pulses while a high ball is on its way; "הגבהה" takes the switch slot while the child has the ball. */
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header]{animation:soccer-air-pulse .55s ease-in-out infinite alternate;box-shadow:0 0 0 3px #ffe37a,0 0 18px 4px #ffe37acc}
 .game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=lob]{background:linear-gradient(180deg,#2f7fbf,#1d5a8c);color:#fff}
+/* v24.1: the kick button pulses for a volley too; the fourth button offers the second way (נגיחה / עף / מספרת) in the same gold */
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=volley]{animation:soccer-air-pulse .55s ease-in-out infinite alternate;box-shadow:0 0 0 3px #ffe37a,0 0 18px 4px #ffe37acc}
+.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air^="alt-"]{background:linear-gradient(180deg,#f3c14b,#c98a17);color:#142a35;box-shadow:0 0 0 2px #fff4c4,0 0 14px 2px #ffe37a99}
 @keyframes soccer-air-pulse{from{transform:scale(1)}to{transform:scale(1.08)}}
-@media (prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header]{animation:none}}
+@media (prefers-reduced-motion:reduce){.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=header],.game-screen[data-game=soccer] .soccer-controls[data-design-controls] button[data-air=volley]{animation:none}}

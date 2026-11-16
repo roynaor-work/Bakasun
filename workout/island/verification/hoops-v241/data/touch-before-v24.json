@@ -1,0 +1,1195 @@
+{
+ "tag": "before",
+ "query": "hoopsV241=0",
+ "frames": 1202,
+ "gameSeconds": 19.2,
+ "wallSeconds": 1486,
+ "last": {
+  "phase": "live",
+  "score": [
+   2,
+   0
+  ],
+  "quarter": 1,
+  "clock": 77.25
+ },
+ "events": {
+  "tip": 1,
+  "possession": 5,
+  "control": 3,
+  "passStart": 2,
+  "pass": 2,
+  "catch": 1,
+  "shotStart": 2,
+  "timing": 1,
+  "release": 2,
+  "contact": 3,
+  "miss": 1,
+  "rebound": 1,
+  "stealTry": 3,
+  "stealMiss": 2,
+  "steal": 1,
+  "score": 1,
+  "inbound": 1,
+  "interception": 1
+ },
+ "steals": [
+  {
+   "frame": 517,
+   "type": "steal",
+   "playerId": "waves-4",
+   "fromId": "stars-4",
+   "clock": 81.85,
+   "audio": []
+  },
+  {
+   "frame": 1161,
+   "type": "interception",
+   "playerId": "waves-4",
+   "fromId": "stars-2",
+   "clock": 77.88,
+   "audio": []
+  }
+ ],
+ "audioByUrl": {
+  "osc:sine": 10,
+  "design/audio/scenes/opening.ogg": 1,
+  "assets/audio/g3h/whistle.ogg": 1,
+  "design/audio/basketball/bounce.ogg": 20,
+  "assets/audio/g3h/pass.ogg": 4,
+  "design/audio/basketball/rim.ogg": 2,
+  "design/audio/basketball/shoes.ogg": 2,
+  "design/audio/basketball/swish.ogg": 1,
+  "design/audio/basketball/crowd-excited.ogg": 2
+ },
+ "audio": [
+  {
+   "frame": 0,
+   "t": 18844,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 19145,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 19274,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 19369,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 0,
+   "t": 22421,
+   "kind": "buffer",
+   "url": "design/audio/scenes/opening.ogg",
+   "loop": false,
+   "ctx": 0.572,
+   "when": 0.572
+  },
+  {
+   "frame": 0,
+   "t": 33232,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/whistle.ogg",
+   "loop": false,
+   "ctx": 14.341,
+   "when": 14.341
+  },
+  {
+   "frame": 39,
+   "t": 36304,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 29.501,
+   "when": 29.501
+  },
+  {
+   "frame": 72,
+   "t": 36832,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 29.962,
+   "when": 29.962
+  },
+  {
+   "frame": 105,
+   "t": 37360,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 38.06,
+   "when": 38.06
+  },
+  {
+   "frame": 125,
+   "t": 37673,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 138,
+   "t": 37888,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 70.51,
+   "when": 70.51
+  },
+  {
+   "frame": 140,
+   "t": 37920,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 70.583,
+   "when": 70.583
+  },
+  {
+   "frame": 206,
+   "t": 38976,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 104.812,
+   "when": 104.812
+  },
+  {
+   "frame": 213,
+   "t": 39081,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 239,
+   "t": 39504,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 107.131,
+   "when": 107.131
+  },
+  {
+   "frame": 248,
+   "t": 39648,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 125.202,
+   "when": 125.202
+  },
+  {
+   "frame": 283,
+   "t": 40208,
+   "kind": "buffer",
+   "url": "design/audio/basketball/rim.ogg",
+   "loop": false,
+   "ctx": 191.141,
+   "when": 191.141
+  },
+  {
+   "frame": 338,
+   "t": 41088,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 342.201,
+   "when": 342.201
+  },
+  {
+   "frame": 384,
+   "t": 41824,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 385.971,
+   "when": 385.971
+  },
+  {
+   "frame": 417,
+   "t": 42352,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 403.22,
+   "when": 403.22
+  },
+  {
+   "frame": 419,
+   "t": 42377,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 450,
+   "t": 42880,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 412.111,
+   "when": 412.111
+  },
+  {
+   "frame": 483,
+   "t": 43408,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 520.022,
+   "when": 520.022
+  },
+  {
+   "frame": 510,
+   "t": 43833,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 516,
+   "t": 43936,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 554.881,
+   "when": 554.881
+  },
+  {
+   "frame": 517,
+   "t": 43952,
+   "kind": "buffer",
+   "url": "design/audio/basketball/shoes.ogg",
+   "loop": false,
+   "ctx": 554.922,
+   "when": 554.922
+  },
+  {
+   "frame": 549,
+   "t": 44464,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 675.042,
+   "when": 675.042
+  },
+  {
+   "frame": 582,
+   "t": 44992,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 686.022,
+   "when": 686.022
+  },
+  {
+   "frame": 615,
+   "t": 45520,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 738.723,
+   "when": 738.723
+  },
+  {
+   "frame": 648,
+   "t": 46048,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 739.872,
+   "when": 739.872
+  },
+  {
+   "frame": 681,
+   "t": 46576,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 746.582,
+   "when": 746.582
+  },
+  {
+   "frame": 690,
+   "t": 46713,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 714,
+   "t": 47104,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 753.032,
+   "when": 753.032
+  },
+  {
+   "frame": 728,
+   "t": 47321,
+   "kind": "osc",
+   "type": "sine",
+   "hz": 440
+  },
+  {
+   "frame": 747,
+   "t": 47632,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 814.042,
+   "when": 814.042
+  },
+  {
+   "frame": 748,
+   "t": 47648,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 814.042,
+   "when": 814.042
+  },
+  {
+   "frame": 751,
+   "t": 47696,
+   "kind": "buffer",
+   "url": "design/audio/basketball/rim.ogg",
+   "loop": false,
+   "ctx": 814.092,
+   "when": 814.092
+  },
+  {
+   "frame": 753,
+   "t": 47728,
+   "kind": "buffer",
+   "url": "design/audio/basketball/swish.ogg",
+   "loop": false,
+   "ctx": 814.1,
+   "when": 814.1
+  },
+  {
+   "frame": 753,
+   "t": 47728,
+   "kind": "buffer",
+   "url": "design/audio/basketball/crowd-excited.ogg",
+   "loop": false,
+   "ctx": 814.1,
+   "when": 814.2
+  },
+  {
+   "frame": 759,
+   "t": 47824,
+   "kind": "buffer",
+   "url": "design/audio/basketball/crowd-excited.ogg",
+   "loop": false,
+   "ctx": 853.702,
+   "when": 853.702
+  },
+  {
+   "frame": 1149,
+   "t": 54064,
+   "kind": "buffer",
+   "url": "assets/audio/g3h/pass.ogg",
+   "loop": false,
+   "ctx": 1154.711,
+   "when": 1154.711
+  },
+  {
+   "frame": 1161,
+   "t": 54256,
+   "kind": "buffer",
+   "url": "design/audio/basketball/shoes.ogg",
+   "loop": false,
+   "ctx": 1200.202,
+   "when": 1200.202
+  },
+  {
+   "frame": 1194,
+   "t": 54784,
+   "kind": "buffer",
+   "url": "design/audio/basketball/bounce.ogg",
+   "loop": false,
+   "ctx": 1252.032,
+   "when": 1252.032
+  }
+ ],
+ "clips": {
+  "idle_ready": 2497,
+  "dribble_right": 12,
+  "defensive_stance": 288,
+  "dribble_walk_right": 18,
+  "walk": 772,
+  "jog_ball": 57,
+  "defensive_slide_right": 589,
+  "defensive_slide_left": 541,
+  "run_ball": 243,
+  "jog": 920,
+  "run": 4746,
+  "sprint_ball": 218,
+  "v8:pass_chest": 25,
+  "v8:receive_moving": 37,
+  "v8:receive_two_hands": 10,
+  "sprint": 152,
+  "dribble_left": 17,
+  "jump_shot": 86,
+  "steal_poke": 75,
+  "get_up_front": 15,
+  "dunk_two_hands": 422,
+  "celebrate_fist": 137,
+  "disappointed": 143
+ },
+ "pops": {
+  "samples": 11990,
+  "over30": 98,
+  "over45": 7,
+  "worst": [
+   {
+    "frame": 1162,
+    "id": "waves-4",
+    "pop": 134.2,
+    "bone": "RightArm",
+    "clip": "dunk_two_hands",
+    "act": "shoot",
+    "speed": 0
+   },
+   {
+    "frame": 1168,
+    "id": "stars-1",
+    "pop": 129.1,
+    "bone": "LeftHand",
+    "clip": "defensive_stance",
+    "act": null,
+    "speed": 0
+   },
+   {
+    "frame": 135,
+    "id": "waves-3",
+    "pop": 108.1,
+    "bone": "RightArm",
+    "clip": "v8:pass_chest",
+    "act": "pass",
+    "speed": 4.11
+   },
+   {
+    "frame": 1182,
+    "id": "waves-4",
+    "pop": 82.4,
+    "bone": "LeftArm",
+    "clip": "dribble:run_ball",
+    "act": null,
+    "speed": 4.56
+   },
+   {
+    "frame": 140,
+    "id": "waves-3",
+    "pop": 58,
+    "bone": "RightForeArm",
+    "clip": "v8:pass_chest",
+    "act": "pass",
+    "speed": 3.45
+   },
+   {
+    "frame": 1158,
+    "id": "stars-1",
+    "pop": 54.2,
+    "bone": "RightForeArm",
+    "clip": "v8:receive_moving",
+    "act": null,
+    "speed": 1.65
+   },
+   {
+    "frame": 1159,
+    "id": "stars-1",
+    "pop": 50.5,
+    "bone": "LeftForeArm",
+    "clip": "v8:receive_moving",
+    "act": null,
+    "speed": 1.6
+   },
+   {
+    "frame": 1177,
+    "id": "stars-1",
+    "pop": 44.7,
+    "bone": "LeftHand",
+    "clip": "walk",
+    "act": null,
+    "speed": 0.88
+   },
+   {
+    "frame": 898,
+    "id": "waves-4",
+    "pop": 44,
+    "bone": "LeftArm",
+    "clip": "dunk_two_hands",
+    "act": "shoot",
+    "speed": 0
+   },
+   {
+    "frame": 130,
+    "id": "waves-3",
+    "pop": 37.1,
+    "bone": "RightForeArm",
+    "clip": "v8:pass_chest",
+    "act": "pass",
+    "speed": 6.1
+   },
+   {
+    "frame": 368,
+    "id": "waves-4",
+    "pop": 36.5,
+    "bone": "RightLeg",
+    "clip": "run",
+    "act": null,
+    "speed": 3.66
+   },
+   {
+    "frame": 329,
+    "id": "waves-3",
+    "pop": 35.3,
+    "bone": "RightLeg",
+    "clip": "jog",
+    "act": null,
+    "speed": 3.31
+   }
+  ],
+  "byClip": {
+   "run": {
+    "samples": 4746,
+    "over30": 81,
+    "over45": 0
+   },
+   "idle_ready": {
+    "samples": 2467,
+    "over30": 0,
+    "over45": 0
+   },
+   "jog": {
+    "samples": 920,
+    "over30": 2,
+    "over45": 0
+   },
+   "walk": {
+    "samples": 772,
+    "over30": 1,
+    "over45": 0
+   },
+   "defensive_slide_right": {
+    "samples": 589,
+    "over30": 0,
+    "over45": 0
+   },
+   "defensive_slide_left": {
+    "samples": 541,
+    "over30": 0,
+    "over45": 0
+   },
+   "dunk_two_hands": {
+    "samples": 422,
+    "over30": 2,
+    "over45": 1
+   },
+   "defensive_stance": {
+    "samples": 288,
+    "over30": 1,
+    "over45": 1
+   },
+   "run_ball": {
+    "samples": 243,
+    "over30": 3,
+    "over45": 1
+   },
+   "sprint_ball": {
+    "samples": 218,
+    "over30": 0,
+    "over45": 0
+   },
+   "sprint": {
+    "samples": 152,
+    "over30": 0,
+    "over45": 0
+   },
+   "disappointed": {
+    "samples": 143,
+    "over30": 0,
+    "over45": 0
+   },
+   "celebrate_fist": {
+    "samples": 137,
+    "over30": 0,
+    "over45": 0
+   },
+   "jump_shot": {
+    "samples": 86,
+    "over30": 0,
+    "over45": 0
+   },
+   "steal_poke": {
+    "samples": 75,
+    "over30": 0,
+    "over45": 0
+   },
+   "jog_ball": {
+    "samples": 57,
+    "over30": 0,
+    "over45": 0
+   },
+   "v8:receive_moving": {
+    "samples": 37,
+    "over30": 4,
+    "over45": 2
+   }
+  }
+ },
+ "soles": {
+  "samples": 11216,
+  "min": -0.27,
+  "p05": -0.054,
+  "p50": -0.002,
+  "p95": 0.023,
+  "max": 1.299,
+  "below0": 4180,
+  "above8cm": 38
+ },
+ "solesByClip": {
+  "run": {
+   "samples": 4746,
+   "min": -0.14,
+   "p05": -0.06,
+   "p50": -0.007,
+   "p95": 0.025,
+   "max": 0.074,
+   "below0": 2151,
+   "above8cm": 0
+  },
+  "idle_ready": {
+   "samples": 2497,
+   "min": -0.05,
+   "p05": -0.014,
+   "p50": 0,
+   "p95": 0.007,
+   "max": 0.025,
+   "below0": 157,
+   "above8cm": 0
+  },
+  "jog": {
+   "samples": 920,
+   "min": -0.157,
+   "p05": -0.077,
+   "p50": -0.015,
+   "p95": 0.019,
+   "max": 0.064,
+   "below0": 527,
+   "above8cm": 0
+  },
+  "walk": {
+   "samples": 772,
+   "min": -0.174,
+   "p05": -0.057,
+   "p50": -0.012,
+   "p95": 0.012,
+   "max": 0.152,
+   "below0": 419,
+   "above8cm": 1
+  },
+  "defensive_slide_right": {
+   "samples": 589,
+   "min": -0.123,
+   "p05": -0.053,
+   "p50": -0.012,
+   "p95": 0.03,
+   "max": 0.084,
+   "below0": 309,
+   "above8cm": 2
+  },
+  "defensive_slide_left": {
+   "samples": 541,
+   "min": -0.209,
+   "p05": -0.058,
+   "p50": -0.01,
+   "p95": 0.022,
+   "max": 0.036,
+   "below0": 265,
+   "above8cm": 0
+  },
+  "defensive_stance": {
+   "samples": 288,
+   "min": -0.204,
+   "p05": -0.033,
+   "p50": -0.002,
+   "p95": 0.023,
+   "max": 0.031,
+   "below0": 66,
+   "above8cm": 0
+  },
+  "run_ball": {
+   "samples": 218,
+   "min": -0.097,
+   "p05": -0.065,
+   "p50": 0.004,
+   "p95": 0.072,
+   "max": 0.319,
+   "below0": 66,
+   "above8cm": 8
+  },
+  "sprint_ball": {
+   "samples": 200,
+   "min": -0.096,
+   "p05": -0.079,
+   "p50": -0.008,
+   "p95": 0.075,
+   "max": 0.104,
+   "below0": 98,
+   "above8cm": 7
+  },
+  "sprint": {
+   "samples": 152,
+   "min": -0.1,
+   "p05": -0.059,
+   "p50": -0.003,
+   "p95": 0.068,
+   "max": 0.09,
+   "below0": 55,
+   "above8cm": 3
+  },
+  "disappointed": {
+   "samples": 143,
+   "min": 0.007,
+   "p05": 0.01,
+   "p50": 0.015,
+   "p95": 0.015,
+   "max": 0.015,
+   "below0": 0,
+   "above8cm": 0
+  },
+  "jog_ball": {
+   "samples": 47,
+   "min": -0.077,
+   "p05": -0.064,
+   "p50": 0.011,
+   "p95": 0.026,
+   "max": 0.442,
+   "below0": 12,
+   "above8cm": 2
+  },
+  "v8:receive_moving": {
+   "samples": 37,
+   "min": -0.083,
+   "p05": -0.08,
+   "p50": -0.013,
+   "p95": 0.011,
+   "max": 0.012,
+   "below0": 22,
+   "above8cm": 0
+  }
+ },
+ "render": [
+  {
+   "frame": 0,
+   "phase": "jumpball",
+   "calls": 46,
+   "triangles": 71687,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 120,
+   "phase": "live",
+   "calls": 45,
+   "triangles": 71665,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 240,
+   "phase": "live",
+   "calls": 45,
+   "triangles": 71665,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 360,
+   "phase": "live",
+   "calls": 45,
+   "triangles": 71665,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 480,
+   "phase": "live",
+   "calls": 45,
+   "triangles": 71317,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 600,
+   "phase": "live",
+   "calls": 45,
+   "triangles": 71665,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 720,
+   "phase": "live",
+   "calls": 47,
+   "triangles": 71669,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 840,
+   "phase": "dead",
+   "calls": 41,
+   "triangles": 71528,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 960,
+   "phase": "dead",
+   "calls": 40,
+   "triangles": 71516,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 1080,
+   "phase": "inbound",
+   "calls": 46,
+   "triangles": 71667,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  },
+  {
+   "frame": 1200,
+   "phase": "live",
+   "calls": 46,
+   "triangles": 71667,
+   "frameMs": 0,
+   "quality": 2,
+   "crowd": 2084,
+   "crowd3d": true,
+   "crowdLevel": 0,
+   "v241": {
+    "flags": {
+     "whistle": false,
+     "crowd3d": "off",
+     "bodyV2": false,
+     "motionV13": false,
+     "referee": false
+    },
+    "crowd3d": {
+     "mode": "off",
+     "status": "off",
+     "error": null,
+     "visible": false,
+     "cardsHidden": 0
+    },
+    "bodyV2": false,
+    "motionV13": null,
+    "referee": {
+     "status": "off",
+     "error": null
+    }
+   },
+   "bodyV2": null,
+   "motionSource": "v12"
+  }
+ ],
+ "shots": {
+  "steal": 524,
+  "basket": 784
+ },
+ "errors": []
+}

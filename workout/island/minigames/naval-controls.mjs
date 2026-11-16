@@ -1,9 +1,9 @@
-import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-14';
-import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-14';
-import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-14';
-import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-14';
-import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-14';
-import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-14';
+import {navalWaterAt} from './naval-camera.mjs?v=island-v2-20261107-15';
+import {navalAimLegacy,navalAimWide,navalWideYaw,navalReleaseSample,navalAimSpin,navalSpinFine,navalSpinStep} from './naval-aim-flag.mjs?v=island-v2-20261107-15';
+import {navalWeaponIcons} from './naval-icons.mjs?v=island-v2-20261107-15';
+import {navalAirManual,NAVAL_AIR_DEFAULTS} from './naval-air.mjs?v=island-v2-20261107-15';
+import {navalLockOn,navalLockConfig,navalLockPick} from './naval-lockon.mjs?v=island-v2-20261107-15';
+import {navalAimV24,navalSubV24,navalV24Config} from './naval-v24.mjs?v=island-v2-20261107-15';
 /** Screen-relative analogue sailing: every direction travels, including a
  * sideways stick. Hull rotation and acceleration are handled by the model. */
 export function navalSteeringInput(moveX=0,moveZ=0,cameraHeading=0,deadzone=.12){
@@ -187,7 +187,9 @@ export function createNavalInput(ctx,getModel,getView){
    const out={...input,firing:false,fireRelease:event?.type==='fire',quickShot:event?.type==='quick',aimCancel:event?.type==='cancel',releaseTarget:Number.isInteger(event?.target)?{target:event.target}:undefined,releaseCurrent:true,aimHeld:Boolean(g),angularAim:false,autoAim:false,assistAim:false,yaw:undefined,targetX:undefined,targetZ:undefined,selectTargetIndex:pendingSelection};
    const s=event?.type==='fire'?event:live;if(s&&!locked){out.aimYaw=s.yaw;out.aimElevation=s.elevation;out.aimPower=s.power;}
    if(lockOn){out.lockTarget=lockEvent;out.lockPress=lockPressOut;lockEvent=null;controls.dataset.lock=m?.homing?.status||'none';}
-   if(aimV24){out.lockTap=lockTapEvent;out.lockSmart=lockSmartEvent;out.lockCycle=lockCycleEvent;lockTapEvent=null;lockSmartEvent=false;lockCycleEvent=0;lockBtn.dataset.locked=String(Boolean(m?.homing));lockBtn.dataset.status=m?.homing?.status||'none';}
+   if(aimV24){out.lockTap=lockTapEvent;out.lockSmart=lockSmartEvent;out.lockCycle=lockCycleEvent;lockTapEvent=null;lockSmartEvent=false;lockCycleEvent=0;lockBtn.dataset.locked=String(Boolean(m?.homing));lockBtn.dataset.status=m?.homing?.status||'none';
+    // v24.1 radar: the Lock button's ring fills with the acquisition (naval-v241.css), so the wait reads on the button too.
+    const rp=m?.radar?.progress;lockBtn.dataset.radar=Number.isFinite(rp)?'acquiring':'none';lockBtn.style?.setProperty?.('--naval-radar',String(Number.isFinite(rp)?Math.round(rp*100)/100:0));}
    if(subV24){const subs=m?.subV24?(m.enemies||[]).filter(e=>e.subMode==='v24'&&e.active&&e.hp>0):[];torpBtn.hidden=!subs.length;controls.dataset.torpedo=String(subs.length>0);torpBtn.dataset.dive=String(subs.some(e=>e.depth>0));torpBtn.dataset.empty=String(!(m?.torpedoes>0));const count=torpBtn.querySelector?.('.naval-torpedo-count');if(count&&count.textContent!==String(m?.torpedoes??0))count.textContent=String(m?.torpedoes??0);out.torpedoShot=torpedoEvent;torpedoEvent=false;}
    if(manualAir){out.skyMode='manual';out.skyHeld=Boolean(sky);if(sky){out.skyYaw=sky.aim.yaw;out.skyPitch=sky.aim.pitch;}}
    if(m?.ammoState)controls.dataset.ammoLevel=m.ammoState.level;

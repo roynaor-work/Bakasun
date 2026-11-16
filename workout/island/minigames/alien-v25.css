@@ -1,0 +1,24 @@
+/* Aliens v25 HUD (Roy, 14/11/2026, after v24: "the buttons are a good size, but better more reachable, lower down; no need for text on the
+ * left, it just gets in the way"). The same thin rings and sizes as v24 (64, 58, 56 px), stacked from the bottom corner up so the thumb
+ * reaches all three, the weapon switch (46 px) on the inner side of the special button, and no text block next to the stick: the short
+ * notices (a pick-up, a wave) show at the top centre. Only with data-alien-low=on (set with the v24 rings, not with ?alienHud=v24). */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24][data-alien-low=on] #shoot{bottom:max(14px,env(safe-area-inset-bottom))}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24][data-alien-low=on] #vulcan{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 76px)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24][data-alien-low=on] #pass{bottom:calc(max(14px,env(safe-area-inset-bottom)) + 146px)}
+/* The switch: beside the special button, toward the middle of the screen, a little smaller and fainter (it is pressed rarely). */
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch{position:absolute;display:grid;place-items:center;width:46px;height:46px;min-height:46px;padding:0;border-radius:50%;right:calc(max(14px,env(safe-area-inset-right)) + 72px);bottom:calc(max(14px,env(safe-area-inset-bottom)) + 151px);background:radial-gradient(circle,#05101d47 0 58%,#05101d00 71%);border:1.5px solid #cfe9f680;color:#d9eef8;opacity:.82;touch-action:none;pointer-events:auto;-webkit-tap-highlight-color:transparent;z-index:3}
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch svg{width:20px;height:20px}
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch[data-next=lightning]{color:#a9cfff;border-color:#7fb8ffaa}
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch[data-next=shockwave]{color:#a6f2ff;border-color:#6fe3ffaa}
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch[data-next=missile]{color:#efd5ae;border-color:#d4b589aa}
+.game-screen[data-game=alienDefense] .alien-controls .alien-special-switch .alien-switch-count{position:absolute;left:-5px;bottom:-4px;min-width:16px;height:16px;border-radius:5px;font-weight:700;font-family:system-ui,sans-serif;font-size:10px!important;line-height:16px!important;text-align:center;color:#f2f7fb!important;background:#0c1a29d9;border:1px solid #d2ba9466}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-special=lightning] #pass{--alien-ring:#7fb8ffb0;color:#b9d8ff}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls.alien-controls[data-alien-fire=v23][data-alien-special=shockwave] #pass{--alien-ring:#6fe3ffb0;color:#b8f4ff}
+.game-screen[data-game=alienDefense] .alien-controls[data-alien-special=lightning] #pass svg,.game-screen[data-game=alienDefense] .alien-controls[data-alien-special=shockwave] #pass svg{width:24px;height:24px}
+/* No text next to the stick: the always-on lines go, the short notices move to the top centre under the hearts. */
+.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on] .alien-flight-control,.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on] .alien-flight-weapon{display:none!important}
+.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on],.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on][data-side=right]{left:50%;right:auto;bottom:auto;top:calc(max(8px,env(safe-area-inset-top)) + 26px);width:auto;max-width:60vw;transform:translateX(-50%)}
+.game-screen[data-game=alienDefense] .alien-flight-hud[data-low=on] .alien-flight-feedback{justify-content:center;white-space:nowrap}
+/* The switch with the older layouts (the arsenal can run with ?alienHud=v24 or v23): next to the v24 column, above the v23 missile button. */
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls[data-alien-fire=v23][data-alien-hud=v24]:not([data-alien-low=on]) .alien-special-switch{bottom:calc(16.4% + 173px)}
+.game-screen[data-game=alienDefense] .alien-controls.alien-controls[data-alien-fire=v23]:not([data-alien-hud]) .alien-special-switch{right:261px;bottom:calc(max(96px,19vh,env(safe-area-inset-bottom)) + 100px)}

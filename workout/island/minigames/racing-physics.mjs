@@ -1,8 +1,8 @@
-import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-14';
-import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-14';
-import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-14';
-import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-14';
-import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-14';
+import { createTrack, getRacingStage, racingAngle, wrapRacingDistance, RACING_LOOK } from './racing-tracks.mjs?v=island-v2-20261107-15';
+import { OFF_TRACK } from './racing-offtrack.mjs?v=island-v2-20261107-15';
+import { OFF_SLOW } from './racing-v24.mjs?v=island-v2-20261107-15';
+import { createRecovery } from './racing-recover.mjs?v=island-v2-20261107-15';
+import { createPitCrew } from './racing-pit.mjs?v=island-v2-20261107-15';
 
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const moveToward = (v,target,amount) => v < target ? Math.min(target,v+amount) : Math.max(target,v-amount);
@@ -104,7 +104,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   const restartLane=car=>clamp(car.isPlayer?0:car.lane*.5,-track.width*.2,track.width*.2);
   // racing-v24: the recovery after leaving the track (racing-recover.mjs) and the pit crew (racing-pit.mjs: tyre wear and stops in races of 3+ laps)
   const recovery=createRecovery({track,sector,event,restartLane,crashFx,minStrength:OFF?.minStrength??.5,fx:{min:CRASH_FX_MIN,max:CRASH_FX_MAX,peak:CRASH_FX_PEAK,time:CRASH_TIME}});
-  const pitCrew=createPitCrew({track,stage,cars,random,event,passGates,sector,enabled:!!config.pit});
+  const pitAutoOn=!!config.pitAuto;let stepSerial=0;
+  const pitCrew=createPitCrew({track,stage,cars,random,event,passGates,sector,enabled:!!config.pit,auto:pitAutoOn});   // racing-v24.1: config.pitAuto (the session's default)
   function startCrash(car,reason) {
     if(!crashOn||car.crashT>0||car.finished)return;
     car.crashT=CRASH_TIME;car.crashes++;car.drifting=false;car.driftCharge=0;car.boosting=false;car.boostTime=0;car.stuckT=0;car.grindT=0;car.passing=null;car.laneHold=0;
@@ -446,7 +447,7 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
       }else if(car.crashT<=0)car.farT=0;
     }
     if((!offTrackOn||car.crashT<=0)&&(lost||car.routeS>car.nextCheckpoint*sector+sector*.8))recoverCar(car);
-    pitCrew.watch(car);   // racing-v24: into the pit lane at the entry when this car stops on this lap
+    pitCrew.watch(car,state.time);   // racing-v24: into the pit lane at the entry when this car stops on this lap (v24.1: the race time arms the player's automatic stop)
     if(car.padCooldown<=0&&!car.offroad&&car.recoveryTime<=0)for(const pad of track.boostPads) {
       const distance=Math.abs(racingAngle((after.s-pad.s)/track.length*Math.PI*2))*track.length/(Math.PI*2);
       if(distance<pad.length*.5&&Math.abs(car.lateral)<track.width*.36){car.boostTime=Math.max(car.boostTime,1.1);car.padCooldown=2;event('boostPad',car);break;}
@@ -529,11 +530,13 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
   updateRanks();
   return {state,track,stage,
     step(dt,input={}) {
-      state.events=[];
-      if(state.disposed||state.phase==='paused'||state.phase==='finished')return state;
+      // racing-v24.1: a pit event pushed between two steps (the pit button's request or cancel, called from a tap) is kept for the frame that follows, once, so
+      // the session can answer it ("הפיטס בוטל"); before, the next step cleared it unseen. Everything else is cleared as before (and all of it without pitAuto).
+      state.events=pitAutoOn?state.events.filter(e=>e.id>stepSerial&&/^pit/.test(e.type)):[];
+      if(state.disposed||state.phase==='paused'||state.phase==='finished'){stepSerial=serial;return state;}
       accumulator+=clamp(finite(dt),0,.25);
       while(accumulator+1e-10>=FIXED_STEP&&state.phase!=='finished'){accumulator-=FIXED_STEP;tick(input);}
-      return state;
+      stepSerial=serial;return state;
     },
     pause(){if(state.phase==='racing'||state.phase==='countdown'){pausedPhase=state.phase;state.phase='paused';}return state;},
     resume(){if(state.phase==='paused')state.phase=pausedPhase;return state;},
@@ -546,6 +549,8 @@ export function createRacing({stage: stageValue=1,seed=1,difficulty='easy',confi
     get pit(){return pitCrew.info();},
     requestPit(){return state.phase==='racing'&&pitCrew.request(player);},
     pitTap(){return pitCrew.tap(player);},
+    /** racing-v24.1: the pit button while a stop is asked for (automatic or tapped) cancels it, until the car is committed to its pit entry */
+    cancelPit(){return state.phase==='racing'&&pitCrew.cancel(player);},
     dispose(){state.disposed=true;state.events=[];accumulator=0;}
   };
 }

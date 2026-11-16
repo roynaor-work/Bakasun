@@ -1,0 +1,268 @@
+{
+ "label": "v24.1",
+ "root": "/home/user/Bakasun/.claude/worktrees/agent-ab498058deeb2ae74/workout/island",
+ "v241": true,
+ "control": {
+  "responseLeanMs": 33.3,
+  "responseMoveMs": 66.7,
+  "laneChange": {
+   "overshootM": 0.37,
+   "settleMs": 150,
+   "turnDistanceM": 8.7,
+   "settleDistanceM": null
+  },
+  "laneChangeBoost": {
+   "overshootM": 0.37,
+   "settleMs": 150,
+   "turnDistanceM": 8.7,
+   "settleDistanceM": null
+  },
+  "brakingTurnDistanceM": 4.8,
+  "dodgeDistanceM": 5.7,
+  "pilotOvershootM": 0,
+  "pilotSettleMs": 733.3,
+  "turnDrift15M": 0.08,
+  "turnDrift15BoostM": 0.2,
+  "turnWallMs": null,
+  "turnWallBoostMs": null,
+  "turnLipLaunch": false,
+  "turnLipLaunchBoost": false,
+  "yawGapMeanDeg": 0.3,
+  "yawGapMaxDeg": 0.6,
+  "brakeKmhStart": 72,
+  "brakeKmhAfter1s": 39.6,
+  "brakeMinus25Ms": 333.3,
+  "brakeHeadingDeg": 37.7,
+  "cruiseHeadingDeg": 23,
+  "brakeRecoverMs": 1300
+ },
+ "races": {
+  "races": 88,
+  "stages": [
+   1,
+   4,
+   7,
+   10,
+   13,
+   16,
+   19,
+   22,
+   25,
+   28,
+   30
+  ],
+  "crashesPerRace": 2.69,
+  "lipLaunchesPerRace": 0,
+  "wallTimePct": 0.3,
+  "passPct": 59.1,
+  "meanSeconds": 69.9,
+  "coinsPerRace": 32.8,
+  "pickupsPerRace": 29.69,
+  "hazardHitsPerRace": 0.15,
+  "eventsPerMinute": 101.5,
+  "eventKinds": 24,
+  "eventKindList": [
+   "boost-start",
+   "coin",
+   "collision:gate",
+   "collision:mover",
+   "collision:ramp",
+   "collision:rider",
+   "collision:rock",
+   "crash",
+   "finish",
+   "gate",
+   "pickup:magnet",
+   "pickup:ring",
+   "pickup:shield",
+   "pickup:star",
+   "section:ice",
+   "section:jumps",
+   "section:movers",
+   "section:powder",
+   "section:speed",
+   "section:stars",
+   "shield",
+   "takeoff",
+   "trick",
+   "trick-start"
+  ],
+  "perStage": {
+   "1": {
+    "pass": 100,
+    "crashes": 1,
+    "lip": 0,
+    "seconds": 56.4
+   },
+   "4": {
+    "pass": 100,
+    "crashes": 1,
+    "lip": 0,
+    "seconds": 59.5
+   },
+   "7": {
+    "pass": 75,
+    "crashes": 1.25,
+    "lip": 0,
+    "seconds": 60.5
+   },
+   "10": {
+    "pass": 75,
+    "crashes": 2.75,
+    "lip": 0,
+    "seconds": 85.6
+   },
+   "13": {
+    "pass": 75,
+    "crashes": 1.13,
+    "lip": 0,
+    "seconds": 62.9
+   },
+   "16": {
+    "pass": 75,
+    "crashes": 1.63,
+    "lip": 0,
+    "seconds": 63.2
+   },
+   "19": {
+    "pass": 63,
+    "crashes": 1.5,
+    "lip": 0,
+    "seconds": 61.6
+   },
+   "22": {
+    "pass": 50,
+    "crashes": 2.25,
+    "lip": 0,
+    "seconds": 62.9
+   },
+   "25": {
+    "pass": 38,
+    "crashes": 5,
+    "lip": 0,
+    "seconds": 92.9
+   },
+   "28": {
+    "pass": 0,
+    "crashes": 3.38,
+    "lip": 0,
+    "seconds": 68.6
+   },
+   "30": {
+    "pass": 0,
+    "crashes": 8.75,
+    "lip": 0,
+    "seconds": 95.3
+   }
+  }
+ },
+ "content": {
+  "objectKinds": [
+   "boost",
+   "coin",
+   "gate",
+   "ice",
+   "magnet",
+   "mover",
+   "powder",
+   "ramp",
+   "ring",
+   "rock",
+   "shield",
+   "snowman",
+   "star"
+  ],
+  "objectKindCount": 13,
+  "kindsPerTheme": {
+   "pine": [
+    "boost",
+    "coin",
+    "gate",
+    "magnet",
+    "mover",
+    "powder",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "snowman",
+    "star"
+   ],
+   "ice": [
+    "boost",
+    "coin",
+    "gate",
+    "ice",
+    "magnet",
+    "mover",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "star"
+   ],
+   "lava": [
+    "boost",
+    "coin",
+    "gate",
+    "magnet",
+    "mover",
+    "powder",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "star"
+   ],
+   "aurora": [
+    "boost",
+    "coin",
+    "gate",
+    "ice",
+    "magnet",
+    "mover",
+    "powder",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "star"
+   ],
+   "village": [
+    "boost",
+    "coin",
+    "gate",
+    "ice",
+    "magnet",
+    "mover",
+    "powder",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "snowman",
+    "star"
+   ],
+   "peak": [
+    "boost",
+    "coin",
+    "gate",
+    "ice",
+    "magnet",
+    "mover",
+    "powder",
+    "ramp",
+    "ring",
+    "rock",
+    "shield",
+    "star"
+   ]
+  },
+  "meanTypesPerCourse": 9.8,
+  "meanSectionsPerCourse": 2.9,
+  "meanSectionKindsPerCourse": 2.9,
+  "meanPlainStretchM": 114.4,
+  "maxPlainStretchM": 241,
+  "signatureDistinctThemes": 5
+ }
+}

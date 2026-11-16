@@ -2,11 +2,15 @@
  * v15 (final fix, 11/11/2026): the same bar, wider and framed so a child notices it: green while the Vulcan
  * burst runs, red and blinking during the forced cool-down, a steady amber mark while the cannon fires at
  * its normal pace. Hidden when the guns are cold (a burst is ready). */
-import {drawV23Heat} from './alien-v23-draw.mjs?v=island-v2-20261107-14';
-import {drawV24Refills,drawV24Cold} from './alien-v24-draw.mjs?v=island-v2-20261107-14';
+import {drawV23Heat} from './alien-v23-draw.mjs?v=island-v2-20261107-15';
+import {drawV24Refills,drawV24Cold} from './alien-v24-draw.mjs?v=island-v2-20261107-15';
+import {drawV25Fx,drawV25Arsenal} from './alien-v25-draw.mjs?v=island-v2-20261107-15';
 export function drawV14Heat(p,m,aspect=1,scale=1){
  // v23 (13/11/2026): the bar shows the Vulcan's own heat (the steady cannon has none); ?alienFire=v15 keeps the v15 bar below.
  // v24 (14/11/2026): the falling Vulcan magazines, and while one keeps the barrels cold a cyan bar in place of the heat bar (?alienRefill=0: v23 as is).
+ // v25: the Vulcan's muzzle flashes, impacts and lock steam (both render paths call this right after the cannons).
+ if(m.v25)drawV25Fx(p,m,aspect,scale);
+ if(m.arsenalOn)drawV25Arsenal(p,m,aspect,scale);/* v25 arsenal: the bolt, the rings, the ammo tokens */
  if(m.v23){if(m.refillOn){drawV24Refills(p,m,aspect,scale);if(drawV24Cold(p,m,aspect,scale))return;}drawV23Heat(p,m,aspect,scale);return;}
  if(!m.v14||!(m.heat>.03))return;
  const v15=Boolean(m.v15),w=(v15?8:4)*scale,h=(v15?42:34)*scale,heat=Math.min(1,m.heat),hot=heat>.85,cool=m.overheated,blink=cool&&Math.floor(m.time*8)%2===0;

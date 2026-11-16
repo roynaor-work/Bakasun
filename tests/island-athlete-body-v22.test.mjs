@@ -125,7 +125,7 @@ test('flag wiring: soccer and basketball ask the flag before the Codex body, and
   // no pre-existing branch lost its code: the MakeHuman bodyFactory and the sleeve geometry are still built when v22 is off
   assert.match(hoops, /const sleeves=v22\?null:athleteKitGeometry\(THREE,source,'basketball'\)/);
   // both games import the module with the current release tag
-  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-14/);
+  for (const s of [soccer, hoops]) assert.match(s, /athlete-body-v22\.mjs\?v=island-v2-20261107-15/);
 });
 
 test('roles: soccer is one body, basketball guard / wing / center are their own', () => {
@@ -163,7 +163,9 @@ test('offline list: the Codex files are cached for soccer and basketball, and th
   const pre = 'assets/athlete-body-v22/';
   for (const list of [soccer, hoops]) { assert.ok(list.includes(pre + 'textures/athlete-atlas.png')); for (const h of V22_HAIR) assert.ok(list.includes(pre + 'hair/' + h + '.glb'), h); assert.ok(list.includes('assets/athlete/athlete.glb'), 'the previous athlete stays cached for the flag'); }
   assert.ok(soccer.includes(pre + 'models/soccer.glb'));
-  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(pre + `models/${b}.glb`));
+  // basketball v24.1 (14/11): the default bodies are the athlete-body-v2 guard / wing / centre (assets/hoops-v241/body), cached in their place;
+  // the v22 basketball bodies stay the online fallback (?hoopsBodyV2=0), so the island's offline download stays under its 80 MB cap
+  for (const b of ['guard', 'wing', 'center']) assert.ok(hoops.includes(`assets/hoops-v241/body/models/${b}.glb`) && !hoops.includes(pre + `models/${b}.glb`), b);
   assert.ok(!hoops.includes(pre + 'models/soccer.glb') && !soccer.includes(pre + 'models/guard.glb'), 'each game downloads only its bodies');
   for (const list of [soccer, hoops]) for (const p of list.filter(p => p.startsWith(pre))) assert.ok((await stat(path.join(island, p))).size > 0, p);
   assert.ok(manifest.shell.includes('minigames/athlete-body-v22.mjs'));

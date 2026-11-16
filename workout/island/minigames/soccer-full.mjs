@@ -6,6 +6,7 @@
  * `?soccerFull=0` (or an explicit `?soccerTeams=`) gives back the v24 small match exactly: nothing below is read then.
  * Pure: no three.js and no DOM; the URL is read only when a browser location exists. */
 import {applySoccerTeams} from './soccer-teams.mjs';
+import {soccerSlideRecoverV241Enabled,SOCCER_SLIDE_V241} from './soccer-r241.mjs?v=island-v2-20261107-15';
 
 const read=(name,search=globalThis.location?.search)=>{try{return typeof search==='string'?new URLSearchParams(search).get(name):null;}catch{return null;}};
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -104,10 +105,12 @@ export const SOCCER_FULL=Object.freeze({
 
 /** The full match's config from the island's soccer config (the same source the small match uses). Order as in the session: this, then
  * expandSoccerConfig, the v23 pitch markings (real 105 x 68 m numbers here) and the v23 control. */
-export function applySoccerFull(config,{formation=soccerFullFormation(),tune=config.fullTune||null}={}){
+export function applySoccerFull(config,{formation=soccerFullFormation(),tune=config.fullTune||null,v241=soccerSlideRecoverV241Enabled()}={}){
   if(config.full?.version)return config;
   // `tune` (tools only: the simulation's --set 'fullTune={...}') overrides speed, ai, passing, assistPassing, shape and camera entries.
-  const F=tune?{...SOCCER_FULL,...tune,speed:{...SOCCER_FULL.speed,...tune.speed},ai:{...SOCCER_FULL.ai,...tune.ai},passing:{...SOCCER_FULL.passing,...tune.passing},assistPassing:{...SOCCER_FULL.assistPassing,...tune.assistPassing},shape:{...SOCCER_FULL.shape,...tune.shape},camera:{...SOCCER_FULL.camera,...tune.camera}}:SOCCER_FULL;
+  const T=tune?{...SOCCER_FULL,...tune,speed:{...SOCCER_FULL.speed,...tune.speed},ai:{...SOCCER_FULL.ai,...tune.ai},passing:{...SOCCER_FULL.passing,...tune.passing},assistPassing:{...SOCCER_FULL.assistPassing,...tune.assistPassing},shape:{...SOCCER_FULL.shape,...tune.shape},camera:{...SOCCER_FULL.camera,...tune.camera}}:SOCCER_FULL;
+  // v24.1 (soccer-r241.mjs, `?soccerTackleV2=0` / `?soccerV241=0` = v24): the Codex quick get-up needs 0.2 s more, not v24's 0.5 s.
+  const F=v241&&!tune?.slideRecoverExtra?{...T,slideRecoverExtra:SOCCER_SLIDE_V241.extra}:T;
   const squad=SOCCER_FULL_SQUADS[formation]||SOCCER_FULL_SQUADS['4-4-2'];
   const scaled=applySoccerTeams(config,F.teams,{speedExp:F.speed.speedExp,shootExp:F.speed.shootExp});
   const base=config.pitch,kd=((105/base.length)+(68/base.width))/2,kb=Math.pow(kd,F.speed.ballExp)/Math.pow(kd,F.speed.speedExp);
