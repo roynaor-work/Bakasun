@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="חמישה נשקים, חמישה סוגי קליעים וצלילים מקוריים — תצוגת נכסים לאי החזירים">
+<link rel="icon" href="data:,">
+<title>אי החזירים · כל ירייה, אופי אחר</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e8e3d8;color:#302c38;font-family:Arial,sans-serif;min-height:100svh;display:grid;place-items:center}
+button,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #e88840;outline-offset:3px}
+#app{width:min(844px,100vw);min-width:0;max-width:100%;height:390px;display:grid;grid-template-rows:50px 218px 100px 22px;background:#fbf7ee;overflow:hidden;box-shadow:0 12px 60px #28382b17}
+header{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #dedbd2}
+h1{font-size:17px;margin:0;letter-spacing:-.4px}.brand{display:flex;align-items:center;gap:10px}.mark{width:25px;height:25px;border:2px solid #458c77;border-radius:50%;display:grid;place-items:center}.mark:before{content:"";width:9px;height:9px;border-top:2px solid #458c77;border-right:2px solid #458c77;transform:translate(-1px,1px)}
+.eyebrow{font-size:10px;letter-spacing:2px;color:#638574;direction:ltr}.edition{font-size:11px;color:#817b78}.edition strong{font-size:14px;color:#508571;margin-inline-start:9px}
+#scene{position:relative;min-width:0;overflow:hidden;background:#24483f}canvas{display:block;width:100%;height:100%;direction:ltr}
+.caption{position:absolute;top:16px;right:22px;color:#fff6dd;pointer-events:none;text-shadow:0 1px 2px #102e31}
+.caption .tag{font-size:9px;letter-spacing:1.8px;color:#acc9b9;direction:ltr;text-align:right}.caption h2{font-size:25px;letter-spacing:-.9px;margin:3px 0 4px}.caption p{font-size:11px;margin:0;color:#d3dfd0}
+.tools{position:absolute;bottom:13px;left:19px;display:flex;direction:rtl;align-items:center;gap:7px}
+.tools button,.tools select{height:33px;border:1px solid #ffffff48;border-radius:8px;background:#163d35d9;color:#fff8e5;padding:0 12px;font-size:11px}
+.tools button.primary{background:#f9ca76;border-color:#ffdf9a;color:#3f3426;font-weight:bold;min-width:77px}
+.tools button[aria-pressed=true]{background:#e8f2d4;color:#264c3d}.tools select{padding:0 5px;max-width:102px}
+.scene-links{position:absolute;bottom:18px;right:22px;display:flex;gap:12px;align-items:center}.scene-links button{border:0;background:none;color:#dfedda;font-size:11px;padding:4px;text-decoration:underline;text-underline-offset:4px}
+#gallery{position:absolute;inset:0;background:#eae8df;display:none;overflow:auto;padding:12px 18px;direction:ltr;scrollbar-width:thin}#gallery.open{display:block}
+.gallery-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#514b53;margin-bottom:8px;direction:rtl}.gallery-head button{border:1px solid #bfb9ac;border-radius:6px;background:#fbf7ee;padding:5px 12px}
+.tiles{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}.tile{background:repeating-conic-gradient(#f7f3e9 0% 25%,#e6e3da 0% 50%) 50%/12px 12px;border-radius:8px;overflow:hidden;text-align:center}.tile canvas{width:64px;height:64px;margin:auto}.tile small{display:block;background:#fff9eddf;font:9px monospace;padding:4px 0;color:#4b4551}
+nav{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;padding:10px 17px 7px;direction:ltr}
+.weapon{display:flex;align-items:center;justify-content:center;gap:5px;direction:rtl;border:1px solid #dfd8cc;border-radius:11px;background:#f5efe3;color:#5c565c;padding:4px;min-width:0;transition:background .15s,border-color .15s}
+.weapon[aria-pressed=true]{border:2px solid #548d74;background:#e9efdc;padding:3px;color:#2e5142}.weapon canvas{width:60px;height:60px;flex:none}.weapon .name{font-size:12px;font-weight:bold;white-space:nowrap}.weapon small{font-size:9px;color:#8b847d;display:block;margin-top:6px;direction:ltr;text-align:right}
+footer{display:flex;align-items:center;justify-content:space-between;padding:0 22px 4px;font-size:9px;color:#928a7d}#status{color:#627d68}#error{display:none;position:absolute;inset:0;padding:30px;background:#fff4df;color:#6b352f;z-index:5;font-size:15px;line-height:1.6}
+@media(max-width:650px){#app{height:auto;min-height:390px;grid-template-rows:50px 218px 104px 26px}#stage{object-fit:contain}header{padding-inline:14px}.edition{display:none}nav{gap:5px;padding-inline:8px}.weapon{flex-direction:column;gap:0}.weapon canvas{width:48px;height:48px}.weapon .name{font-size:10px}.weapon small{display:none}.caption{right:14px}.caption h2{font-size:21px}.caption p{max-width:220px;font-size:10px}.tools{left:9px;gap:4px}.tools button,.tools select{padding-inline:8px;font-size:10px}.scene-links{right:10px;bottom:53px}.tiles{grid-template-columns:repeat(4,1fr)}footer{padding-inline:10px}.hint{display:none}}
+</style>
+</head>
+<body>
+<main id="app" aria-label="תצוגת נשקים לאי החזירים">
+  <header>
+    <div class="brand"><span class="mark" aria-hidden="true"></span><div><div class="eyebrow">ISLAND ARMORY</div><h1>כל ירייה, אופי אחר.</h1></div></div>
+    <div class="edition">אי החזירים · חמישה נשקים<strong>01 / V1</strong></div>
+  </header>
+  <section id="scene" aria-label="הדגמת ירי על מטרה">
+    <canvas id="stage" width="844" height="218" aria-label="נשק, קליע, שובל ואפקט פגיעה מונפשים"></canvas>
+    <div class="caption"><div class="tag" id="number">01 / THE SLINGSHOT</div><h2 id="weaponName">קלע צבעוני</h2><p id="description">טוען נכסים…</p></div>
+    <div class="tools">
+      <button class="primary" id="fire" type="button" disabled>לירות</button>
+      <button id="sound" type="button" aria-pressed="false">הפעל צליל</button>
+      <button id="loop" type="button" aria-pressed="false">רצף</button>
+      <select id="variation" aria-label="בחירת וריאציית פגיעה"><option value="0">פגיעה 1</option><option value="1">פגיעה 2</option><option value="2">פגיעה 3</option><option value="3">פגיעה 4</option></select>
+    </div>
+    <div class="scene-links"><button id="showAssets" type="button">כל הנכסים</button><span class="hint" style="font-size:10px;color:#b7c8b5">רווח לירי · 1–5 להחלפה</span></div>
+    <div id="gallery" role="region" aria-label="גלריית פריימים על רקע שקיפות"></div>
+    <div id="error" role="alert"></div>
+  </section>
+  <nav id="weapons" aria-label="בחירת נשק"></nav>
+  <footer><span>אי החזירים · סטודיו לנשקים שובבים</span><span id="status" role="status" aria-live="polite">טוען…</span><span dir="ltr">ORIGINAL ART + SYNTHESIZED SOUND</span></footer>
+</main>
+<script type="module">
+const $=id=>document.getElementById(id), ctx=$('stage').getContext('2d');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const state=window.previewState={ready:false,weapon:'slingshot',shots:0,releases:0,impacts:0,impactVariant:0,projectileVariant:0,sound:false,loop:false,activeAudio:0,frame:0};
+let manifest,selected,atlases=new Map(),shot=null,lastNow=0,nextShot=0,raf=0;
+let audioContext=null,audioBuffers=new Map(),activeSources=new Set(),selectionToken=0,soundToken=0;
+const audioLoads=new Map();
+const names=['THE SLINGSHOT','THE CANNON','THE BOW','THE WATER PISTOL','THE COIN PURSE'];
+const clipPaths=clip=>[clip.ogg,clip.mp3];
+
+function sprite(context,key,x,y,size,rotation=0,opacity=1){
+  const f=manifest.frames[key],r=f.rect,im=atlases.get(f.atlas);
+  context.save();context.translate(x,y);context.rotate(rotation);context.globalAlpha=opacity;
+  context.drawImage(im,r.x,r.y,r.w,r.h,-size/2,-size/2,size,size);context.restore();
+}
+function stopAudio(){for(const source of activeSources){try{source.stop()}catch{}}activeSources.clear();state.activeAudio=0;}
+async function decode(clip){
+  if(!audioContext)return null;
+  const key=clip.ogg;if(audioBuffers.has(key))return audioBuffers.get(key);
+  if(audioLoads.has(key))return audioLoads.get(key);
+  const pending=(async()=>{let failure;for(const path of clipPaths(clip)){try{
+    const response=await fetch(path);if(!response.ok)throw new Error(`Audio ${response.status}: ${path}`);
+    const buffer=await audioContext.decodeAudioData(await response.arrayBuffer());audioBuffers.set(key,buffer);return buffer;
+  }catch(error){failure=error}}
+  throw failure;})();
+  audioLoads.set(key,pending);
+  try{return await pending}finally{audioLoads.delete(key)}
+}
+async function preloadSounds(weapon=selected){
+  await Promise.all([weapon.audio.fire,...weapon.impacts.map(v=>v.audio)].map(decode));
+}
+function play(clip){
+  if(!state.sound||!audioContext||document.hidden)return;
+  const buffer=audioBuffers.get(clip.ogg);if(!buffer)return; // decode before firing: no delayed shots after a weapon switch
+  if(activeSources.size>=6){const oldest=activeSources.values().next().value;oldest.stop();activeSources.delete(oldest)}
+  const source=audioContext.createBufferSource(),gain=audioContext.createGain();
+  source.buffer=buffer;gain.gain.value=.62;source.connect(gain).connect(audioContext.destination);
+  activeSources.add(source);state.activeAudio=activeSources.size;
+  source.onended=()=>{activeSources.delete(source);state.activeAudio=activeSources.size;source.disconnect();gain.disconnect()};source.start();
+}
+
+function choose(index){
+  const token=++selectionToken;
+  shot=null;stopAudio();selected=manifest.weapons[index];state.weapon=selected.id;state.frame=0;
+  $('weaponName').textContent=selected.nameHe;$('description').textContent=selected.descriptionHe;
+  $('number').textContent=`0${index+1} / ${names[index]}`;
+  document.querySelectorAll('.weapon').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
+  $('gallery').classList.remove('open');$('showAssets').setAttribute('aria-expanded','false');
+  $('status').textContent=`${selected.fire.frames.length} פריימי ירי · 4 פגיעות · OGG + MP3`;
+  nextShot=performance.now()+600;
+  if(state.sound){$('fire').disabled=true;preloadSounds().then(()=>{if(token===selectionToken)$('fire').disabled=false}).catch(error=>{if(token===selectionToken)audioError(error)})}
+  render(performance.now());
+}
+function fire(){
+  if(!state.ready||shot||$('fire').disabled||document.hidden)return;
+  shot={start:performance.now(),released:false,hit:false,weapon:selected,variant:Number($('variation').value),projectile:state.shots%selected.projectiles.length};
+  state.shots++;state.impactVariant=shot.variant;state.projectileVariant=shot.projectile;
+}
+function audioError(error){
+  console.error(error);state.sound=false;stopAudio();$('sound').setAttribute('aria-pressed','false');$('sound').textContent='נסה צליל שוב';$('fire').disabled=false;
+  $('status').textContent='הצליל לא נטען; אפשר לנסות שוב';
+}
+async function toggleSound(){
+  const token=++soundToken,weapon=selected,selection=selectionToken;
+  state.sound=!state.sound;$('sound').setAttribute('aria-pressed',String(state.sound));
+  $('sound').textContent=state.sound?'השתק צליל':'הפעל צליל';
+  if(!state.sound){stopAudio();$('fire').disabled=false;return}
+  try{
+    audioContext??=new (window.AudioContext||window.webkitAudioContext)();await audioContext.resume();
+    $('fire').disabled=true;await preloadSounds(weapon);
+    if(token===soundToken&&selection===selectionToken&&state.sound){$('fire').disabled=false;fire()}
+  }catch(error){if(token===soundToken&&selection===selectionToken)audioError(error)}
+}
+function rounded(x,y,w,h,r,color){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=color;ctx.fill()}
+function background(now){
+  const sky=ctx.createLinearGradient(0,0,0,218);sky.addColorStop(0,'#173b35');sky.addColorStop(.7,'#3e6954');sky.addColorStop(1,'#a4a870');ctx.fillStyle=sky;ctx.fillRect(0,0,844,218);
+  ctx.fillStyle='#739d7760';ctx.beginPath();ctx.moveTo(0,154);ctx.bezierCurveTo(110,115,140,159,267,132);ctx.bezierCurveTo(400,98,410,143,560,127);ctx.bezierCurveTo(690,107,700,145,844,127);ctx.lineTo(844,218);ctx.lineTo(0,218);ctx.fill();
+  ctx.fillStyle='#263c2a';ctx.beginPath();ctx.moveTo(0,184);ctx.bezierCurveTo(230,157,420,191,844,164);ctx.lineTo(844,218);ctx.lineTo(0,218);ctx.fill();
+  ctx.fillStyle='#a7a16c';ctx.beginPath();ctx.ellipse(432,201,350,30,-.03,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#2a392520';ctx.beginPath();ctx.ellipse(174,177,62,9,0,0,Math.PI*2);ctx.ellipse(630,184,46,7,0,0,Math.PI*2);ctx.fill();
+  for(let i=0;i<15;i++){const x=22+i*59, y=180+Math.sin(i*4)*13;ctx.strokeStyle=i%2?'#879c60':'#6e8f58';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y+9);ctx.lineTo(x-4,y);ctx.moveTo(x,y+9);ctx.lineTo(x+5,y-4);ctx.stroke()}
+  // A neutral practice target keeps this review independent from game actors.
+  rounded(621,139,12,48,3,'#5b4939');
+  for(const [r,c] of [[34,'#342f30'],[31,'#e2c59a'],[25,'#ba7852'],[18,'#f4dec0'],[10,'#c98754'],[4,'#f7e5bf']]){ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(628,128,r*.77,r,0,0,Math.PI*2);ctx.fill()}
+  ctx.fillStyle='#a4c59b';for(let i=0;i<6;i++){let x=45+i*147,y=43+i%3*21;ctx.globalAlpha=.3+.15*Math.sin(now/1200+i);ctx.fillRect(x,y,2,2)}ctx.globalAlpha=1;
+}
+function render(now){
+  if(!state.ready)return;background(now);
+  const w=selected;const age=shot?now-shot.start:0;let frame=0;
+  if(shot){let cumulative=0;for(let i=0;i<w.fire.frames.length;i++){cumulative+=w.fire.durationsMs[i];if(age<cumulative){frame=i;break}}}
+  state.frame=frame;
+  const weaponSize=w.preview.weaponSize,weaponY=103;
+  sprite(ctx,w.fire.frames[frame],174,weaponY,weaponSize);
+  if(shot){
+    const release=w.fire.releaseAtMs,flight=w.preview.flightMs;
+    const mx=174+(w.muzzle.position[0]-128)*weaponSize/256,my=weaponY+(w.muzzle.position[1]-128)*weaponSize/256;
+    if(age>=release&&!shot.released){shot.released=true;state.releases++;play(w.audio.fire)}
+    if(age>=release&&age<release+w.muzzle.durationMs){const p=(age-release)/w.muzzle.durationMs;sprite(ctx,w.muzzle.frame,mx+14,my,75+35*p,0,1-p)}
+    if(age>=release&&age<release+flight){
+      const p=(age-release)/flight,dx=628-mx,dy=128-my;
+      const x=mx+dx*p,y=my+dy*p-Math.sin(p*Math.PI)*w.preview.arcPx;
+      const angle=Math.atan2(dy-w.preview.arcPx*Math.PI*Math.cos(p*Math.PI),dx);
+      sprite(ctx,w.trail,x-29,y,108,angle,.78);
+      sprite(ctx,w.projectiles[shot.projectile],x,y,w.preview.projectileSize,angle+(w.id==='purse'?p*12:0));
+    }
+    const hitAge=age-release-flight;
+    if(hitAge>=0&&!shot.hit){shot.hit=true;state.impacts++;play(w.impacts[shot.variant].audio)}
+    if(hitAge>=0&&hitAge<w.impacts[shot.variant].durationMs){const p=hitAge/w.impacts[shot.variant].durationMs;sprite(ctx,w.impacts[shot.variant].frame,628,128,96+54*p,shot.variant*.04,Math.min(1,(1-p)*2))}
+    if(hitAge>w.impacts[shot.variant].durationMs+90){shot=null;nextShot=now+350;if(state.loop){$('variation').value=String((state.impactVariant+1)%4)}}
+  }
+}
+function tick(now){
+  raf=0;if(document.hidden)return;
+  if(state.loop&&now>=nextShot&&!shot)fire();
+  if(now-lastNow>=1000/60-1){render(now);lastNow=now}
+  raf=requestAnimationFrame(tick);
+}
+function showGallery(){
+  const gallery=$('gallery');gallery.replaceChildren();gallery.classList.add('open');$('showAssets').setAttribute('aria-expanded','true');
+  const head=document.createElement('div');head.className='gallery-head';const label=document.createElement('span');label.textContent=`${selected.nameHe} · כל פריים 256×256 · רקע שקיפות`;
+  const close=document.createElement('button');close.textContent='חזרה להדגמה';close.type='button';close.onclick=()=>{gallery.classList.remove('open');$('showAssets').setAttribute('aria-expanded','false');$('showAssets').focus()};head.append(label,close);gallery.append(head);
+  const tiles=document.createElement('div');tiles.className='tiles';gallery.append(tiles);
+  for(const [key,f] of Object.entries(manifest.frames).filter(([key])=>key.startsWith(selected.id+'/'))){
+    const tile=document.createElement('div');tile.className='tile';const canvas=document.createElement('canvas');canvas.width=128;canvas.height=128;const label=document.createElement('small');label.textContent=key.split('/')[1];canvas.setAttribute('aria-label',key);tile.append(canvas,label);tiles.append(tile);sprite(canvas.getContext('2d'),key,64,64,128);
+  }
+  close.focus();
+}
+$('fire').onclick=fire;$('sound').onclick=toggleSound;
+$('loop').onclick=()=>{state.loop=!state.loop;$('loop').setAttribute('aria-pressed',String(state.loop));if(state.loop)fire()};
+$('variation').onchange=()=>{state.impactVariant=Number($('variation').value)};
+$('showAssets').onclick=showGallery;$('showAssets').setAttribute('aria-expanded','false');
+document.addEventListener('keydown',event=>{
+  if(['SELECT','INPUT','TEXTAREA','BUTTON'].includes(event.target.tagName))return;
+  if(event.code==='Space'){event.preventDefault();fire()}
+  if(/^[1-5]$/.test(event.key))choose(Number(event.key)-1);
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){cancelAnimationFrame(raf);raf=0;shot=null;stopAudio()}
+  else{nextShot=performance.now()+500;if(!raf)raf=requestAnimationFrame(tick)}
+});
+window.addEventListener('pagehide',()=>{cancelAnimationFrame(raf);stopAudio();audioContext?.suspend()});
+try{
+  const response=await fetch('./manifest.json');if(!response.ok)throw new Error('Manifest failed');manifest=await response.json();
+  await Promise.all(manifest.atlases.map(async item=>{const im=new Image();im.src=item.file;await im.decode();atlases.set(item.file,im)}));
+  manifest.weapons.forEach((weapon,i)=>{
+    const button=document.createElement('button');button.type='button';button.className='weapon';button.setAttribute('aria-label',weapon.nameHe);button.setAttribute('aria-pressed','false');
+    const canvas=document.createElement('canvas');canvas.width=120;canvas.height=120;canvas.setAttribute('aria-hidden','true');
+    const label=document.createElement('span');label.className='name';label.textContent=weapon.nameHe;const sub=document.createElement('small');sub.textContent=`0${i+1} / ${weapon.fire.frames.length} FRAMES`;label.append(sub);button.append(canvas,label);button.onclick=()=>choose(i);$('weapons').append(button);sprite(canvas.getContext('2d'),weapon.weapon,60,60,120);
+  });
+  state.ready=true;$('fire').disabled=false;choose(0);raf=requestAnimationFrame(tick);if(!reduced)fire();
+}catch(error){console.error(error);$('error').style.display='block';$('error').textContent='לא ניתן לטעון את הנכסים. יש לפתוח את התיקייה דרך שרת HTTP מקומי לפי הדוח.';$('status').textContent='הטעינה נכשלה'}
+</script>
+</body>
+</html>

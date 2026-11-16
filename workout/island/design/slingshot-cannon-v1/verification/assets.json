@@ -1,0 +1,512 @@
+{
+  "passed": true,
+  "spriteCount": 69,
+  "atlasCount": 5,
+  "audioCount": 50,
+  "mediaBytes": 4553490,
+  "largestPngBytes": 583377,
+  "largestAudioBytes": 10839,
+  "errors": [],
+  "audio": [
+    {
+      "file": "audio/bow/fire.mp3",
+      "bytes": 2239,
+      "durationMs": 310,
+      "decodedPeakDbfs": -5.24,
+      "rmsDbfs": -22.25,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/fire.ogg",
+      "bytes": 5825,
+      "durationMs": 307,
+      "decodedPeakDbfs": -4.28,
+      "rmsDbfs": -21.78,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-01.mp3",
+      "bytes": 1926,
+      "durationMs": 242,
+      "decodedPeakDbfs": -3.49,
+      "rmsDbfs": -19.87,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-01.ogg",
+      "bytes": 5116,
+      "durationMs": 239,
+      "decodedPeakDbfs": -3.13,
+      "rmsDbfs": -19.4,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-02.mp3",
+      "bytes": 1926,
+      "durationMs": 259,
+      "decodedPeakDbfs": -3.44,
+      "rmsDbfs": -20.92,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-02.ogg",
+      "bytes": 5240,
+      "durationMs": 256,
+      "decodedPeakDbfs": -2.9,
+      "rmsDbfs": -20.43,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-03.mp3",
+      "bytes": 2083,
+      "durationMs": 276,
+      "decodedPeakDbfs": -4.22,
+      "rmsDbfs": -18.85,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-03.ogg",
+      "bytes": 5374,
+      "durationMs": 298,
+      "decodedPeakDbfs": -3.57,
+      "rmsDbfs": -18.69,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-04.mp3",
+      "bytes": 2239,
+      "durationMs": 293,
+      "decodedPeakDbfs": -3.45,
+      "rmsDbfs": -20.22,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/bow/impact-04.ogg",
+      "bytes": 5568,
+      "durationMs": 290,
+      "decodedPeakDbfs": -3.3,
+      "rmsDbfs": -19.65,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/fire.mp3",
+      "bytes": 6158,
+      "durationMs": 950,
+      "decodedPeakDbfs": -2.91,
+      "rmsDbfs": -21.04,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/fire.ogg",
+      "bytes": 10839,
+      "durationMs": 971,
+      "decodedPeakDbfs": -1.87,
+      "rmsDbfs": -20.69,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-01.mp3",
+      "bytes": 4904,
+      "durationMs": 741,
+      "decodedPeakDbfs": -4.52,
+      "rmsDbfs": -22.43,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-01.ogg",
+      "bytes": 9277,
+      "durationMs": 762,
+      "decodedPeakDbfs": -4.18,
+      "rmsDbfs": -22.1,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-02.mp3",
+      "bytes": 5217,
+      "durationMs": 793,
+      "decodedPeakDbfs": -4.6,
+      "rmsDbfs": -21.48,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-02.ogg",
+      "bytes": 9610,
+      "durationMs": 790,
+      "decodedPeakDbfs": -3.0,
+      "rmsDbfs": -21.15,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-03.mp3",
+      "bytes": 5531,
+      "durationMs": 846,
+      "decodedPeakDbfs": -4.32,
+      "rmsDbfs": -22.56,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-03.ogg",
+      "bytes": 10051,
+      "durationMs": 843,
+      "decodedPeakDbfs": -3.56,
+      "rmsDbfs": -22.23,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-04.mp3",
+      "bytes": 5844,
+      "durationMs": 898,
+      "decodedPeakDbfs": -3.95,
+      "rmsDbfs": -22.35,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/cannon/impact-04.ogg",
+      "bytes": 10499,
+      "durationMs": 895,
+      "decodedPeakDbfs": -2.98,
+      "rmsDbfs": -21.91,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/fire.mp3",
+      "bytes": 3963,
+      "durationMs": 580,
+      "decodedPeakDbfs": -4.07,
+      "rmsDbfs": -18.27,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/fire.ogg",
+      "bytes": 6261,
+      "durationMs": 577,
+      "decodedPeakDbfs": -2.96,
+      "rmsDbfs": -17.83,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-01.mp3",
+      "bytes": 3180,
+      "durationMs": 452,
+      "decodedPeakDbfs": -4.18,
+      "rmsDbfs": -18.73,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-01.ogg",
+      "bytes": 5284,
+      "durationMs": 450,
+      "decodedPeakDbfs": -3.49,
+      "rmsDbfs": -18.27,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-02.mp3",
+      "bytes": 3336,
+      "durationMs": 484,
+      "decodedPeakDbfs": -3.4,
+      "rmsDbfs": -18.78,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-02.ogg",
+      "bytes": 5163,
+      "durationMs": 481,
+      "decodedPeakDbfs": -3.69,
+      "rmsDbfs": -18.32,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-03.mp3",
+      "bytes": 3493,
+      "durationMs": 516,
+      "decodedPeakDbfs": -3.3,
+      "rmsDbfs": -19.21,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-03.ogg",
+      "bytes": 5463,
+      "durationMs": 513,
+      "decodedPeakDbfs": -3.32,
+      "rmsDbfs": -18.74,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-04.mp3",
+      "bytes": 3650,
+      "durationMs": 548,
+      "decodedPeakDbfs": -3.36,
+      "rmsDbfs": -19.27,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/purse/impact-04.ogg",
+      "bytes": 5595,
+      "durationMs": 545,
+      "decodedPeakDbfs": -3.1,
+      "rmsDbfs": -18.77,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/fire.mp3",
+      "bytes": 2553,
+      "durationMs": 341,
+      "decodedPeakDbfs": -2.92,
+      "rmsDbfs": -18.07,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/fire.ogg",
+      "bytes": 5223,
+      "durationMs": 337,
+      "decodedPeakDbfs": -3.05,
+      "rmsDbfs": -17.57,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-01.mp3",
+      "bytes": 2083,
+      "durationMs": 265,
+      "decodedPeakDbfs": -3.17,
+      "rmsDbfs": -18.14,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-01.ogg",
+      "bytes": 4823,
+      "durationMs": 262,
+      "decodedPeakDbfs": -3.37,
+      "rmsDbfs": -17.65,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-02.mp3",
+      "bytes": 2083,
+      "durationMs": 284,
+      "decodedPeakDbfs": -4.04,
+      "rmsDbfs": -18.69,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-02.ogg",
+      "bytes": 4817,
+      "durationMs": 281,
+      "decodedPeakDbfs": -3.12,
+      "rmsDbfs": -18.29,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-03.mp3",
+      "bytes": 2239,
+      "durationMs": 303,
+      "decodedPeakDbfs": -3.07,
+      "rmsDbfs": -18.4,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-03.ogg",
+      "bytes": 4911,
+      "durationMs": 300,
+      "decodedPeakDbfs": -2.84,
+      "rmsDbfs": -17.96,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-04.mp3",
+      "bytes": 2396,
+      "durationMs": 321,
+      "decodedPeakDbfs": -3.78,
+      "rmsDbfs": -19.5,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/slingshot/impact-04.ogg",
+      "bytes": 5085,
+      "durationMs": 344,
+      "decodedPeakDbfs": -3.37,
+      "rmsDbfs": -19.28,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/fire.mp3",
+      "bytes": 3023,
+      "durationMs": 440,
+      "decodedPeakDbfs": -4.63,
+      "rmsDbfs": -23.47,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/fire.ogg",
+      "bytes": 7021,
+      "durationMs": 437,
+      "decodedPeakDbfs": -4.19,
+      "rmsDbfs": -22.79,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-01.mp3",
+      "bytes": 2553,
+      "durationMs": 343,
+      "decodedPeakDbfs": -3.01,
+      "rmsDbfs": -21.9,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-01.ogg",
+      "bytes": 6353,
+      "durationMs": 340,
+      "decodedPeakDbfs": -2.25,
+      "rmsDbfs": -21.34,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-02.mp3",
+      "bytes": 2710,
+      "durationMs": 367,
+      "decodedPeakDbfs": -3.48,
+      "rmsDbfs": -22.08,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-02.ogg",
+      "bytes": 6480,
+      "durationMs": 364,
+      "decodedPeakDbfs": -2.82,
+      "rmsDbfs": -21.33,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-03.mp3",
+      "bytes": 2710,
+      "durationMs": 392,
+      "decodedPeakDbfs": -4.4,
+      "rmsDbfs": -22.47,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-03.ogg",
+      "bytes": 6631,
+      "durationMs": 389,
+      "decodedPeakDbfs": -3.74,
+      "rmsDbfs": -21.84,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-04.mp3",
+      "bytes": 2866,
+      "durationMs": 416,
+      "decodedPeakDbfs": -4.54,
+      "rmsDbfs": -23.42,
+      "codec": "mp3",
+      "sampleRate": 44100,
+      "channels": 1
+    },
+    {
+      "file": "audio/water/impact-04.ogg",
+      "bytes": 6840,
+      "durationMs": 413,
+      "decodedPeakDbfs": -4.49,
+      "rmsDbfs": -22.74,
+      "codec": "vorbis",
+      "sampleRate": 44100,
+      "channels": 1
+    }
+  ]
+}

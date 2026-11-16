@@ -1,0 +1,30 @@
+{
+  "created": "2026-11-16",
+  "original": true,
+  "visualSource": {
+    "tool": "OpenAI image_gen",
+    "generationCount": 2,
+    "componentOrder": ["slingshot fork", "cannon", "bow body", "water pistol", "coin purse", "feathered arrow"],
+    "layout": "Two columns, three rows; each source cell is 384 by 384 pixels",
+    "brief": "Original premium hand-painted cartoon mobile game weapon components, crisp dark plum outline, honey-brown wood, teal wrap, navy and brass cannon, turquoise and coral toy water pistol, purple velvet open coin purse, teal feathered arrow. Rightward fire direction. Bare slingshot fork and bow body without rubber or string, so their elastic elements can be animated independently. Transparent background, no text, no stock assets.",
+    "cleanup": "A second image_gen pass preserved the six components and removed grid lines, glows and background, with transparent_background=true.",
+    "conversion": "Generated 1024x1536 RGBA artwork was downsampled to 768x1152 with Lanczos and saved as lossless WebP. RGB under zero alpha may contain source colors; transparency is carried by the alpha channel.",
+    "file": "source/components.webp",
+    "notProcedurallyRecreated": "The six hand-painted components are committed source inputs. Running synthesize.py rebuilds the delivery from them; it does not call image generation."
+  },
+  "animationAndParticles": "Original deterministic compositing, mechanical poses, elastic rubber and bowstring, gradients, geometric shells, balls, coins, droplets, trails, smoke and impact silhouettes in synthesize.py.",
+  "audio": {
+    "source": "Original code-only synthesis at 44100 Hz mono; no samples or recordings",
+    "models": {
+      "slingshot": "Damped rubber twang, short filtered release, bouncy impact",
+      "cannon": "Low-pass seeded noise, falling bass resonances, short high-frequency transient",
+      "bow": "Bright damped string pluck and filtered air; woody resonant impact",
+      "water": "Band-limited spray noise and delayed descending bubble chirps",
+      "purse": "Inharmonic metal partials, staggered coin clinks and comic pitch sweep"
+    },
+    "variations": "One firing sound and four separately seeded/pitched impacts per weapon",
+    "normalization": "PCM peak 0.70 (-3.10 dBFS); 6ms onset fade; 25ms tail fade, including 12ms exact PCM silence",
+    "formats": "libvorbis quality 2 OGG; libmp3lame 48 kbit/s MP3 with gapless length metadata"
+  },
+  "licenses": "CC0-1.0 for assets; MIT for code and documentation; see LICENSE.txt"
+}

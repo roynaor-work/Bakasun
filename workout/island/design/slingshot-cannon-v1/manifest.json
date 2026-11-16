@@ -1,0 +1,2930 @@
+{
+  "schemaVersion": 1,
+  "id": "slingshot-cannon-v1",
+  "created": "2026-11-16",
+  "repository": "roynaor-work/Bakasun",
+  "branch": "codex/slingshot-cannon-v1",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "runtimeIntegration": "not-connected",
+  "license": "CC0-1.0 assets; MIT source code",
+  "limits": {
+    "spritePixels": 256,
+    "atlasPixels": 1024,
+    "pngBytes": 600000,
+    "audioFileBytes": 60000
+  },
+  "coordinates": {
+    "origin": "top-left",
+    "forward": "+X",
+    "pixelsPerFrame": 256,
+    "alpha": "straight/unassociated",
+    "colorSpace": "sRGB",
+    "trimmed": false,
+    "paddingPx": 8,
+    "sampling": "linear, clamp-to-edge, no mipmaps; sample texel centers",
+    "projectileRotation": "0 radians points right; rotate projectile and trail to trajectory tangent"
+  },
+  "preview": {
+    "file": "preview.html",
+    "viewport": {
+      "width": 844,
+      "height": 390
+    }
+  },
+  "weapons": [
+    {
+      "id": "slingshot",
+      "nameHe": "קלע צבעוני",
+      "descriptionHe": "גומי נמתח · 6 פריימים · שלושה צבעים",
+      "accent": "#f7b54b",
+      "atlas": "atlases/slingshot.png",
+      "weapon": "slingshot/fire-00",
+      "fire": {
+        "frames": [
+          "slingshot/fire-00",
+          "slingshot/fire-01",
+          "slingshot/fire-02",
+          "slingshot/fire-03",
+          "slingshot/fire-04",
+          "slingshot/fire-05"
+        ],
+        "durationsMs": [
+          90,
+          100,
+          140,
+          55,
+          70,
+          95
+        ],
+        "releaseFrame": 3,
+        "releaseAtMs": 330,
+        "loop": false
+      },
+      "projectiles": [
+        "slingshot/projectile-01",
+        "slingshot/projectile-02",
+        "slingshot/projectile-03"
+      ],
+      "trail": "slingshot/trail",
+      "impacts": [
+        {
+          "frame": "slingshot/impact-01",
+          "audio": {
+            "ogg": "audio/slingshot/impact-01.ogg",
+            "mp3": "audio/slingshot/impact-01.mp3",
+            "durationMs": 265,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7353
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "slingshot/impact-02",
+          "audio": {
+            "ogg": "audio/slingshot/impact-02.ogg",
+            "mp3": "audio/slingshot/impact-02.mp3",
+            "durationMs": 284,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7360
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "slingshot/impact-03",
+          "audio": {
+            "ogg": "audio/slingshot/impact-03.ogg",
+            "mp3": "audio/slingshot/impact-03.mp3",
+            "durationMs": 303,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7367
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "slingshot/impact-04",
+          "audio": {
+            "ogg": "audio/slingshot/impact-04.ogg",
+            "mp3": "audio/slingshot/impact-04.mp3",
+            "durationMs": 321,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7374
+          },
+          "durationMs": 290
+        }
+      ],
+      "muzzle": {
+        "frame": "slingshot/muzzle",
+        "position": [
+          191,
+          70
+        ],
+        "durationMs": 120
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/slingshot/fire.ogg",
+          "mp3": "audio/slingshot/fire.mp3",
+          "durationMs": 340,
+          "sampleRate": 44100,
+          "channels": 1,
+          "sourcePeakDbfs": -3.1,
+          "seed": 7300
+        }
+      },
+      "preview": {
+        "flightMs": 630,
+        "arcPx": 25,
+        "weaponSize": 164,
+        "projectileSize": 48
+      }
+    },
+    {
+      "id": "cannon",
+      "nameHe": "תותח כבד",
+      "descriptionHe": "פגז כבד · עשן ירי · 8 פריימים",
+      "accent": "#ff9255",
+      "atlas": "atlases/cannon.png",
+      "weapon": "cannon/fire-00",
+      "fire": {
+        "frames": [
+          "cannon/fire-00",
+          "cannon/fire-01",
+          "cannon/fire-02",
+          "cannon/fire-03",
+          "cannon/fire-04",
+          "cannon/fire-05",
+          "cannon/fire-06",
+          "cannon/fire-07"
+        ],
+        "durationsMs": [
+          90,
+          70,
+          80,
+          55,
+          65,
+          85,
+          100,
+          115
+        ],
+        "releaseFrame": 3,
+        "releaseAtMs": 240,
+        "loop": false
+      },
+      "projectiles": [
+        "cannon/projectile-01"
+      ],
+      "trail": "cannon/trail",
+      "impacts": [
+        {
+          "frame": "cannon/impact-01",
+          "audio": {
+            "ogg": "audio/cannon/impact-01.ogg",
+            "mp3": "audio/cannon/impact-01.mp3",
+            "durationMs": 741,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7453
+          },
+          "durationMs": 380
+        },
+        {
+          "frame": "cannon/impact-02",
+          "audio": {
+            "ogg": "audio/cannon/impact-02.ogg",
+            "mp3": "audio/cannon/impact-02.mp3",
+            "durationMs": 793,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7460
+          },
+          "durationMs": 380
+        },
+        {
+          "frame": "cannon/impact-03",
+          "audio": {
+            "ogg": "audio/cannon/impact-03.ogg",
+            "mp3": "audio/cannon/impact-03.mp3",
+            "durationMs": 846,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7467
+          },
+          "durationMs": 380
+        },
+        {
+          "frame": "cannon/impact-04",
+          "audio": {
+            "ogg": "audio/cannon/impact-04.ogg",
+            "mp3": "audio/cannon/impact-04.mp3",
+            "durationMs": 898,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7474
+          },
+          "durationMs": 380
+        }
+      ],
+      "muzzle": {
+        "frame": "cannon/muzzle",
+        "position": [
+          230,
+          100
+        ],
+        "durationMs": 210
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/cannon/fire.ogg",
+          "mp3": "audio/cannon/fire.mp3",
+          "durationMs": 950,
+          "sampleRate": 44100,
+          "channels": 1,
+          "sourcePeakDbfs": -3.1,
+          "seed": 7400
+        }
+      },
+      "preview": {
+        "flightMs": 760,
+        "arcPx": 48,
+        "weaponSize": 164,
+        "projectileSize": 60
+      }
+    },
+    {
+      "id": "bow",
+      "nameHe": "קשת נוצות",
+      "descriptionHe": "מיתר נמתח · חץ עץ עם נוצות טורקיז",
+      "accent": "#69c9ad",
+      "atlas": "atlases/bow.png",
+      "weapon": "bow/fire-00",
+      "fire": {
+        "frames": [
+          "bow/fire-00",
+          "bow/fire-01",
+          "bow/fire-02",
+          "bow/fire-03",
+          "bow/fire-04",
+          "bow/fire-05"
+        ],
+        "durationsMs": [
+          90,
+          100,
+          140,
+          50,
+          70,
+          100
+        ],
+        "releaseFrame": 3,
+        "releaseAtMs": 330,
+        "loop": false
+      },
+      "projectiles": [
+        "bow/projectile-01"
+      ],
+      "trail": "bow/trail",
+      "impacts": [
+        {
+          "frame": "bow/impact-01",
+          "audio": {
+            "ogg": "audio/bow/impact-01.ogg",
+            "mp3": "audio/bow/impact-01.mp3",
+            "durationMs": 242,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7553
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "bow/impact-02",
+          "audio": {
+            "ogg": "audio/bow/impact-02.ogg",
+            "mp3": "audio/bow/impact-02.mp3",
+            "durationMs": 259,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7560
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "bow/impact-03",
+          "audio": {
+            "ogg": "audio/bow/impact-03.ogg",
+            "mp3": "audio/bow/impact-03.mp3",
+            "durationMs": 276,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7567
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "bow/impact-04",
+          "audio": {
+            "ogg": "audio/bow/impact-04.ogg",
+            "mp3": "audio/bow/impact-04.mp3",
+            "durationMs": 293,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7574
+          },
+          "durationMs": 290
+        }
+      ],
+      "muzzle": {
+        "frame": "bow/muzzle",
+        "position": [
+          190,
+          126
+        ],
+        "durationMs": 120
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/bow/fire.ogg",
+          "mp3": "audio/bow/fire.mp3",
+          "durationMs": 310,
+          "sampleRate": 44100,
+          "channels": 1,
+          "sourcePeakDbfs": -3.1,
+          "seed": 7500
+        }
+      },
+      "preview": {
+        "flightMs": 630,
+        "arcPx": 25,
+        "weaponSize": 164,
+        "projectileSize": 48
+      }
+    },
+    {
+      "id": "water",
+      "nameHe": "רובה מים",
+      "descriptionHe": "לחיצת הדק · טיפות ושובל בועות",
+      "accent": "#51cfe6",
+      "atlas": "atlases/water.png",
+      "weapon": "water/fire-00",
+      "fire": {
+        "frames": [
+          "water/fire-00",
+          "water/fire-01",
+          "water/fire-02",
+          "water/fire-03",
+          "water/fire-04",
+          "water/fire-05"
+        ],
+        "durationsMs": [
+          80,
+          70,
+          80,
+          55,
+          65,
+          90
+        ],
+        "releaseFrame": 3,
+        "releaseAtMs": 230,
+        "loop": false
+      },
+      "projectiles": [
+        "water/projectile-01"
+      ],
+      "trail": "water/trail",
+      "impacts": [
+        {
+          "frame": "water/impact-01",
+          "audio": {
+            "ogg": "audio/water/impact-01.ogg",
+            "mp3": "audio/water/impact-01.mp3",
+            "durationMs": 343,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7653
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "water/impact-02",
+          "audio": {
+            "ogg": "audio/water/impact-02.ogg",
+            "mp3": "audio/water/impact-02.mp3",
+            "durationMs": 367,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7660
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "water/impact-03",
+          "audio": {
+            "ogg": "audio/water/impact-03.ogg",
+            "mp3": "audio/water/impact-03.mp3",
+            "durationMs": 392,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7667
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "water/impact-04",
+          "audio": {
+            "ogg": "audio/water/impact-04.ogg",
+            "mp3": "audio/water/impact-04.mp3",
+            "durationMs": 416,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7674
+          },
+          "durationMs": 290
+        }
+      ],
+      "muzzle": {
+        "frame": "water/muzzle",
+        "position": [
+          235,
+          103
+        ],
+        "durationMs": 120
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/water/fire.ogg",
+          "mp3": "audio/water/fire.mp3",
+          "durationMs": 440,
+          "sampleRate": 44100,
+          "channels": 1,
+          "sourcePeakDbfs": -3.1,
+          "seed": 7600
+        }
+      },
+      "preview": {
+        "flightMs": 630,
+        "arcPx": 25,
+        "weaponSize": 164,
+        "projectileSize": 48
+      }
+    },
+    {
+      "id": "purse",
+      "nameHe": "ארנק מטבעות",
+      "descriptionHe": "ארנק קופץ · מטבעות זהב · צלצול משעשע",
+      "accent": "#e6a2f4",
+      "atlas": "atlases/purse.png",
+      "weapon": "purse/fire-00",
+      "fire": {
+        "frames": [
+          "purse/fire-00",
+          "purse/fire-01",
+          "purse/fire-02",
+          "purse/fire-03",
+          "purse/fire-04",
+          "purse/fire-05"
+        ],
+        "durationsMs": [
+          90,
+          90,
+          120,
+          60,
+          90,
+          100
+        ],
+        "releaseFrame": 3,
+        "releaseAtMs": 300,
+        "loop": false
+      },
+      "projectiles": [
+        "purse/projectile-01"
+      ],
+      "trail": "purse/trail",
+      "impacts": [
+        {
+          "frame": "purse/impact-01",
+          "audio": {
+            "ogg": "audio/purse/impact-01.ogg",
+            "mp3": "audio/purse/impact-01.mp3",
+            "durationMs": 452,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7753
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "purse/impact-02",
+          "audio": {
+            "ogg": "audio/purse/impact-02.ogg",
+            "mp3": "audio/purse/impact-02.mp3",
+            "durationMs": 484,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7760
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "purse/impact-03",
+          "audio": {
+            "ogg": "audio/purse/impact-03.ogg",
+            "mp3": "audio/purse/impact-03.mp3",
+            "durationMs": 516,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7767
+          },
+          "durationMs": 290
+        },
+        {
+          "frame": "purse/impact-04",
+          "audio": {
+            "ogg": "audio/purse/impact-04.ogg",
+            "mp3": "audio/purse/impact-04.mp3",
+            "durationMs": 548,
+            "sampleRate": 44100,
+            "channels": 1,
+            "sourcePeakDbfs": -3.1,
+            "seed": 7774
+          },
+          "durationMs": 290
+        }
+      ],
+      "muzzle": {
+        "frame": "purse/muzzle",
+        "position": [
+          205,
+          62
+        ],
+        "durationMs": 120
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/purse/fire.ogg",
+          "mp3": "audio/purse/fire.mp3",
+          "durationMs": 580,
+          "sampleRate": 44100,
+          "channels": 1,
+          "sourcePeakDbfs": -3.1,
+          "seed": 7700
+        }
+      },
+      "preview": {
+        "flightMs": 630,
+        "arcPx": 25,
+        "weaponSize": 164,
+        "projectileSize": 48
+      }
+    }
+  ],
+  "atlases": [
+    {
+      "file": "atlases/slingshot.png",
+      "width": 1024,
+      "height": 1024,
+      "cells": 15,
+      "bytes": 208835
+    },
+    {
+      "file": "atlases/cannon.png",
+      "width": 1024,
+      "height": 1024,
+      "cells": 15,
+      "bytes": 583377
+    },
+    {
+      "file": "atlases/bow.png",
+      "width": 1024,
+      "height": 1024,
+      "cells": 13,
+      "bytes": 189964
+    },
+    {
+      "file": "atlases/water.png",
+      "width": 1024,
+      "height": 1024,
+      "cells": 13,
+      "bytes": 391010
+    },
+    {
+      "file": "atlases/purse.png",
+      "width": 1024,
+      "height": 1024,
+      "cells": 13,
+      "bytes": 470040
+    }
+  ],
+  "frames": {
+    "slingshot/fire-00": {
+      "file": "sprites/slingshot/fire-00.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 78,
+        "y": 21,
+        "w": 142,
+        "h": 212
+      }
+    },
+    "slingshot/fire-01": {
+      "file": "sprites/slingshot/fire-01.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 51,
+        "y": 21,
+        "w": 169,
+        "h": 212
+      }
+    },
+    "slingshot/fire-02": {
+      "file": "sprites/slingshot/fire-02.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 24,
+        "y": 21,
+        "w": 196,
+        "h": 212
+      }
+    },
+    "slingshot/fire-03": {
+      "file": "sprites/slingshot/fire-03.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 89,
+        "y": 21,
+        "w": 131,
+        "h": 212
+      }
+    },
+    "slingshot/fire-04": {
+      "file": "sprites/slingshot/fire-04.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 89,
+        "y": 21,
+        "w": 131,
+        "h": 212
+      }
+    },
+    "slingshot/fire-05": {
+      "file": "sprites/slingshot/fire-05.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 79,
+        "y": 21,
+        "w": 141,
+        "h": 212
+      }
+    },
+    "slingshot/projectile-01": {
+      "file": "sprites/slingshot/projectile-01.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 82,
+        "y": 82,
+        "w": 92,
+        "h": 92
+      }
+    },
+    "slingshot/projectile-02": {
+      "file": "sprites/slingshot/projectile-02.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 82,
+        "y": 82,
+        "w": 92,
+        "h": 92
+      }
+    },
+    "slingshot/projectile-03": {
+      "file": "sprites/slingshot/projectile-03.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 82,
+        "y": 82,
+        "w": 92,
+        "h": 92
+      }
+    },
+    "slingshot/trail": {
+      "file": "sprites/slingshot/trail.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 41,
+        "y": 113,
+        "w": 149,
+        "h": 44
+      }
+    },
+    "slingshot/impact-01": {
+      "file": "sprites/slingshot/impact-01.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 48,
+        "y": 49,
+        "w": 170,
+        "h": 163
+      }
+    },
+    "slingshot/impact-02": {
+      "file": "sprites/slingshot/impact-02.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 43,
+        "y": 35,
+        "w": 177,
+        "h": 189
+      }
+    },
+    "slingshot/impact-03": {
+      "file": "sprites/slingshot/impact-03.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 45,
+        "y": 42,
+        "w": 164,
+        "h": 177
+      }
+    },
+    "slingshot/impact-04": {
+      "file": "sprites/slingshot/impact-04.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 256,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 75,
+        "y": 56,
+        "w": 139,
+        "h": 133
+      }
+    },
+    "slingshot/muzzle": {
+      "file": "sprites/slingshot/muzzle.png",
+      "atlas": "atlases/slingshot.png",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 73,
+        "y": 78,
+        "w": 126,
+        "h": 74
+      }
+    },
+    "cannon/fire-00": {
+      "file": "sprites/cannon/fire-00.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 29,
+        "y": 70,
+        "w": 202,
+        "h": 151
+      }
+    },
+    "cannon/fire-01": {
+      "file": "sprites/cannon/fire-01.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 28,
+        "y": 69,
+        "w": 202,
+        "h": 153
+      }
+    },
+    "cannon/fire-02": {
+      "file": "sprites/cannon/fire-02.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 26,
+        "y": 69,
+        "w": 202,
+        "h": 153
+      }
+    },
+    "cannon/fire-03": {
+      "file": "sprites/cannon/fire-03.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 15,
+        "y": 64,
+        "w": 232,
+        "h": 157
+      }
+    },
+    "cannon/fire-04": {
+      "file": "sprites/cannon/fire-04.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 19,
+        "y": 67,
+        "w": 222,
+        "h": 155
+      }
+    },
+    "cannon/fire-05": {
+      "file": "sprites/cannon/fire-05.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 24,
+        "y": 71,
+        "w": 222,
+        "h": 152
+      }
+    },
+    "cannon/fire-06": {
+      "file": "sprites/cannon/fire-06.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 27,
+        "y": 70,
+        "w": 202,
+        "h": 152
+      }
+    },
+    "cannon/fire-07": {
+      "file": "sprites/cannon/fire-07.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 28,
+        "y": 70,
+        "w": 202,
+        "h": 151
+      }
+    },
+    "cannon/projectile-01": {
+      "file": "sprites/cannon/projectile-01.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 43,
+        "y": 80,
+        "w": 179,
+        "h": 96
+      }
+    },
+    "cannon/trail": {
+      "file": "sprites/cannon/trail.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 29,
+        "y": 98,
+        "w": 190,
+        "h": 62
+      }
+    },
+    "cannon/impact-01": {
+      "file": "sprites/cannon/impact-01.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 34,
+        "y": 42,
+        "w": 181,
+        "h": 168
+      }
+    },
+    "cannon/impact-02": {
+      "file": "sprites/cannon/impact-02.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 31,
+        "y": 38,
+        "w": 188,
+        "h": 182
+      }
+    },
+    "cannon/impact-03": {
+      "file": "sprites/cannon/impact-03.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 31,
+        "y": 24,
+        "w": 194,
+        "h": 198
+      }
+    },
+    "cannon/impact-04": {
+      "file": "sprites/cannon/impact-04.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 256,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 52,
+        "y": 60,
+        "w": 167,
+        "h": 141
+      }
+    },
+    "cannon/muzzle": {
+      "file": "sprites/cannon/muzzle.png",
+      "atlas": "atlases/cannon.png",
+      "rect": {
+        "x": 512,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 43,
+        "y": 67,
+        "w": 150,
+        "h": 128
+      }
+    },
+    "bow/fire-00": {
+      "file": "sprites/bow/fire-00.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 17,
+        "w": 160,
+        "h": 220
+      }
+    },
+    "bow/fire-01": {
+      "file": "sprites/bow/fire-01.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 17,
+        "w": 126,
+        "h": 220
+      }
+    },
+    "bow/fire-02": {
+      "file": "sprites/bow/fire-02.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 60,
+        "y": 17,
+        "w": 104,
+        "h": 220
+      }
+    },
+    "bow/fire-03": {
+      "file": "sprites/bow/fire-03.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 17,
+        "w": 112,
+        "h": 220
+      }
+    },
+    "bow/fire-04": {
+      "file": "sprites/bow/fire-04.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 17,
+        "w": 80,
+        "h": 220
+      }
+    },
+    "bow/fire-05": {
+      "file": "sprites/bow/fire-05.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 17,
+        "w": 82,
+        "h": 220
+      }
+    },
+    "bow/projectile-01": {
+      "file": "sprites/bow/projectile-01.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 17,
+        "y": 96,
+        "w": 222,
+        "h": 68
+      }
+    },
+    "bow/trail": {
+      "file": "sprites/bow/trail.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 26,
+        "y": 102,
+        "w": 195,
+        "h": 46
+      }
+    },
+    "bow/impact-01": {
+      "file": "sprites/bow/impact-01.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 36,
+        "y": 46,
+        "w": 171,
+        "h": 173
+      }
+    },
+    "bow/impact-02": {
+      "file": "sprites/bow/impact-02.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 42,
+        "y": 44,
+        "w": 185,
+        "h": 180
+      }
+    },
+    "bow/impact-03": {
+      "file": "sprites/bow/impact-03.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 46,
+        "y": 49,
+        "w": 166,
+        "h": 161
+      }
+    },
+    "bow/impact-04": {
+      "file": "sprites/bow/impact-04.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 72,
+        "y": 66,
+        "w": 145,
+        "h": 128
+      }
+    },
+    "bow/muzzle": {
+      "file": "sprites/bow/muzzle.png",
+      "atlas": "atlases/bow.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 73,
+        "y": 78,
+        "w": 126,
+        "h": 74
+      }
+    },
+    "water/fire-00": {
+      "file": "sprites/water/fire-00.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 22,
+        "y": 52,
+        "w": 213,
+        "h": 166
+      }
+    },
+    "water/fire-01": {
+      "file": "sprites/water/fire-01.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 22,
+        "y": 53,
+        "w": 211,
+        "h": 166
+      }
+    },
+    "water/fire-02": {
+      "file": "sprites/water/fire-02.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 21,
+        "y": 55,
+        "w": 209,
+        "h": 164
+      }
+    },
+    "water/fire-03": {
+      "file": "sprites/water/fire-03.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 17,
+        "y": 58,
+        "w": 229,
+        "h": 162
+      }
+    },
+    "water/fire-04": {
+      "file": "sprites/water/fire-04.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 19,
+        "y": 55,
+        "w": 230,
+        "h": 164
+      }
+    },
+    "water/fire-05": {
+      "file": "sprites/water/fire-05.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 20,
+        "y": 51,
+        "w": 214,
+        "h": 167
+      }
+    },
+    "water/projectile-01": {
+      "file": "sprites/water/projectile-01.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 47,
+        "y": 85,
+        "w": 142,
+        "h": 76
+      }
+    },
+    "water/trail": {
+      "file": "sprites/water/trail.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 28,
+        "y": 84,
+        "w": 189,
+        "h": 84
+      }
+    },
+    "water/impact-01": {
+      "file": "sprites/water/impact-01.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 29,
+        "y": 40,
+        "w": 185,
+        "h": 169
+      }
+    },
+    "water/impact-02": {
+      "file": "sprites/water/impact-02.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 25,
+        "y": 34,
+        "w": 190,
+        "h": 188
+      }
+    },
+    "water/impact-03": {
+      "file": "sprites/water/impact-03.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 39,
+        "y": 42,
+        "w": 166,
+        "h": 180
+      }
+    },
+    "water/impact-04": {
+      "file": "sprites/water/impact-04.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 77,
+        "y": 66,
+        "w": 152,
+        "h": 126
+      }
+    },
+    "water/muzzle": {
+      "file": "sprites/water/muzzle.png",
+      "atlas": "atlases/water.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 52,
+        "y": 103,
+        "w": 155,
+        "h": 50
+      }
+    },
+    "purse/fire-00": {
+      "file": "sprites/purse/fire-00.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 33,
+        "y": 52,
+        "w": 191,
+        "h": 183
+      }
+    },
+    "purse/fire-01": {
+      "file": "sprites/purse/fire-01.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 27,
+        "y": 65,
+        "w": 200,
+        "h": 170
+      }
+    },
+    "purse/fire-02": {
+      "file": "sprites/purse/fire-02.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 21,
+        "y": 51,
+        "w": 209,
+        "h": 185
+      }
+    },
+    "purse/fire-03": {
+      "file": "sprites/purse/fire-03.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 46,
+        "y": 42,
+        "w": 175,
+        "h": 194
+      }
+    },
+    "purse/fire-04": {
+      "file": "sprites/purse/fire-04.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 0,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 38,
+        "y": 35,
+        "w": 186,
+        "h": 200
+      }
+    },
+    "purse/fire-05": {
+      "file": "sprites/purse/fire-05.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 256,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 31,
+        "y": 54,
+        "w": 193,
+        "h": 181
+      }
+    },
+    "purse/projectile-01": {
+      "file": "sprites/purse/projectile-01.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 512,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 82,
+        "y": 82,
+        "w": 92,
+        "h": 92
+      }
+    },
+    "purse/trail": {
+      "file": "sprites/purse/trail.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 768,
+        "y": 256,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 34,
+        "y": 89,
+        "w": 178,
+        "h": 63
+      }
+    },
+    "purse/impact-01": {
+      "file": "sprites/purse/impact-01.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 0,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 40,
+        "y": 43,
+        "w": 160,
+        "h": 179
+      }
+    },
+    "purse/impact-02": {
+      "file": "sprites/purse/impact-02.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 256,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 43,
+        "y": 39,
+        "w": 184,
+        "h": 178
+      }
+    },
+    "purse/impact-03": {
+      "file": "sprites/purse/impact-03.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 512,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 41,
+        "y": 38,
+        "w": 162,
+        "h": 167
+      }
+    },
+    "purse/impact-04": {
+      "file": "sprites/purse/impact-04.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 768,
+        "y": 512,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 63,
+        "y": 62,
+        "w": 152,
+        "h": 132
+      }
+    },
+    "purse/muzzle": {
+      "file": "sprites/purse/muzzle.png",
+      "atlas": "atlases/purse.png",
+      "rect": {
+        "x": 0,
+        "y": 768,
+        "w": 256,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 256,
+        "h": 256
+      },
+      "pivot": {
+        "x": 128,
+        "y": 128
+      },
+      "contentBounds": {
+        "x": 56,
+        "y": 72,
+        "w": 135,
+        "h": 78
+      }
+    }
+  },
+  "provenance": {
+    "visualComponents": "source/components.webp; original image_gen generation and transparent cleanup",
+    "effects": "Original deterministic geometry and compositing in synthesize.py",
+    "audio": "Original seeded additive/subtractive synthesis in synthesize.py; no sampled audio",
+    "details": "source/PROVENANCE.json"
+  },
+  "files": [
+    {
+      "file": "atlases/bow.png",
+      "bytes": 189964,
+      "sha256": "88855da6a6c78dc7feec1452d79cd00e06a9caf3d51dc76e7f446334a7dabb5f"
+    },
+    {
+      "file": "atlases/cannon.png",
+      "bytes": 583377,
+      "sha256": "64ec8bb5eeb40af603be35b7bd4b4e3ddeaf5d178a3b15b8ba916da923fca561"
+    },
+    {
+      "file": "atlases/purse.png",
+      "bytes": 470040,
+      "sha256": "cb18ff92722a3694ea3f1cdb205facc273e650760553d3f59373e2d66dbcf6c1"
+    },
+    {
+      "file": "atlases/slingshot.png",
+      "bytes": 208835,
+      "sha256": "01220374df2b7eb11ac3acd5bcb84e4a52a47e99ce1f90960627ff5b01ef8baa"
+    },
+    {
+      "file": "atlases/water.png",
+      "bytes": 391010,
+      "sha256": "57468299d9e2de0214d5adc3ddb0e01cadd7ddd110ef570e786459bda93088b5"
+    },
+    {
+      "file": "audio/bow/fire.mp3",
+      "bytes": 2239,
+      "sha256": "08c15e82b2f17205a434d83a8e0bca82d4ad9db6061b55f000c93ba52ade602b"
+    },
+    {
+      "file": "audio/bow/fire.ogg",
+      "bytes": 5825,
+      "sha256": "2d3bbfb152f61a10c51c168e180a025530f73324f489202d6b8adc2518b8d38f"
+    },
+    {
+      "file": "audio/bow/impact-01.mp3",
+      "bytes": 1926,
+      "sha256": "a635277434ddd140ca844f59b0f4c9efc269211ef6c35a6ddbdaabb492114bfb"
+    },
+    {
+      "file": "audio/bow/impact-01.ogg",
+      "bytes": 5116,
+      "sha256": "ee026eb2e9efd6814394f6870d0c10f5c4f02501832de7f184fad46a4d854013"
+    },
+    {
+      "file": "audio/bow/impact-02.mp3",
+      "bytes": 1926,
+      "sha256": "a18b8d32577cc0ac7db66a3eed0e6e1e39930df89b8d02cf5b72639651607188"
+    },
+    {
+      "file": "audio/bow/impact-02.ogg",
+      "bytes": 5240,
+      "sha256": "c8f59df1a8f788eaaa77bf400d17beac0d22e31af37e48907548492fc7d1e225"
+    },
+    {
+      "file": "audio/bow/impact-03.mp3",
+      "bytes": 2083,
+      "sha256": "f345390bc1535b5a570f8317e2e6ad3ad4e3e7d053a409febfcf83a0b4923000"
+    },
+    {
+      "file": "audio/bow/impact-03.ogg",
+      "bytes": 5374,
+      "sha256": "48fbd9245fd228e93072be66b6a5fc17a8e2daffac87ab7a3e78f92af86ba619"
+    },
+    {
+      "file": "audio/bow/impact-04.mp3",
+      "bytes": 2239,
+      "sha256": "6011ab434b67d9de38cdef5eb860efca4ab3db52700e9d16a8dcdf991e912cb1"
+    },
+    {
+      "file": "audio/bow/impact-04.ogg",
+      "bytes": 5568,
+      "sha256": "6e5bd374580db224da430bb7c98077e4eecaedf1d77e2fc7581859e02a230c79"
+    },
+    {
+      "file": "audio/cannon/fire.mp3",
+      "bytes": 6158,
+      "sha256": "f9e81f0ea07ece390d38563ba5cbf7754b98918fcc70476f0185beb508f7c590"
+    },
+    {
+      "file": "audio/cannon/fire.ogg",
+      "bytes": 10839,
+      "sha256": "ffb685df47f31254bd20ca2a76de7d072128add0aee4705ab1114aa0d479d3ae"
+    },
+    {
+      "file": "audio/cannon/impact-01.mp3",
+      "bytes": 4904,
+      "sha256": "2cc8a5c9bf89fa52a95ac32231d35bb44a0eb0dbea3be0ad48b0d1da37c8289a"
+    },
+    {
+      "file": "audio/cannon/impact-01.ogg",
+      "bytes": 9277,
+      "sha256": "98e9d837b2cab162618acacf4a7702ae839e30ccf4609306b7a6cf6be9b34724"
+    },
+    {
+      "file": "audio/cannon/impact-02.mp3",
+      "bytes": 5217,
+      "sha256": "67ba5eb668a9e82fade201d3695976a4dffc121bc91f93a45fbb6deeafaa96a5"
+    },
+    {
+      "file": "audio/cannon/impact-02.ogg",
+      "bytes": 9610,
+      "sha256": "94ae1178499abb652ec57073412d813e0165eed46d3fdd5a9c2196174854d627"
+    },
+    {
+      "file": "audio/cannon/impact-03.mp3",
+      "bytes": 5531,
+      "sha256": "fb66fc518ca40d396e8d80bc3b49e07e54bd4ca51271937e4339e12c38d338bb"
+    },
+    {
+      "file": "audio/cannon/impact-03.ogg",
+      "bytes": 10051,
+      "sha256": "d8f6f1689c47f0e3ce21667bc73b25238531fe8024fff79404790d58ca4ff62a"
+    },
+    {
+      "file": "audio/cannon/impact-04.mp3",
+      "bytes": 5844,
+      "sha256": "97abe15d450a7188ffeb54c245912469e8b44cda2f211e8ef1db2a0e4a082fb8"
+    },
+    {
+      "file": "audio/cannon/impact-04.ogg",
+      "bytes": 10499,
+      "sha256": "bb54766b4bd5c72fee20b51e20ff31befb8004ac76cdf2a81af19719c3a1a7eb"
+    },
+    {
+      "file": "audio/purse/fire.mp3",
+      "bytes": 3963,
+      "sha256": "8fc84ab07ab5d36a8b9b800d53d6129e4f304317aa3f0fe291b04b8a46ce1f97"
+    },
+    {
+      "file": "audio/purse/fire.ogg",
+      "bytes": 6261,
+      "sha256": "51ba77b2e0ccf536fbc09246cd6df7f242602f347c14296d2a68ee10e85dc7ac"
+    },
+    {
+      "file": "audio/purse/impact-01.mp3",
+      "bytes": 3180,
+      "sha256": "5ccc927d5cb0466925a9dab8e55a57462eb9d0b6ab44d604de182c2da5576b67"
+    },
+    {
+      "file": "audio/purse/impact-01.ogg",
+      "bytes": 5284,
+      "sha256": "674d9ab9363ea9028bb42a1baa2df69cb157e8cdbe9d4f95880f8cb42c28223d"
+    },
+    {
+      "file": "audio/purse/impact-02.mp3",
+      "bytes": 3336,
+      "sha256": "bd145184f1d257b7431407ff98872ad626d54e6d3590ee05f31d812575a86efc"
+    },
+    {
+      "file": "audio/purse/impact-02.ogg",
+      "bytes": 5163,
+      "sha256": "d077f1763f8987513ab8ea4d3c773ebfb68402d5fa96971bde4c7f8092cbca25"
+    },
+    {
+      "file": "audio/purse/impact-03.mp3",
+      "bytes": 3493,
+      "sha256": "9bb42cd7765c92f6e85df41cbc85fc5ac92594228eba3d806da8ebef43244d52"
+    },
+    {
+      "file": "audio/purse/impact-03.ogg",
+      "bytes": 5463,
+      "sha256": "a4335cc9e869352af4a0980e2cf6a917e3dd94570dc4e4c7e3f78ce9e102272c"
+    },
+    {
+      "file": "audio/purse/impact-04.mp3",
+      "bytes": 3650,
+      "sha256": "4d394ed93d6c2580be2c912968deed6e0cc122f94ad5f393ec178f675b1f748f"
+    },
+    {
+      "file": "audio/purse/impact-04.ogg",
+      "bytes": 5595,
+      "sha256": "aeb419f27b4c01e2074e47cfa260050380094537bc835efdeab840d0febfaac5"
+    },
+    {
+      "file": "audio/slingshot/fire.mp3",
+      "bytes": 2553,
+      "sha256": "24173f2759963c9a469b9513b6e13333932fa9ac0c8f3d3aaef5c7c7bdb58327"
+    },
+    {
+      "file": "audio/slingshot/fire.ogg",
+      "bytes": 5223,
+      "sha256": "0cfa3e66486a09f80209ce5e13a2153e88d4de93c59b3907815e6a303e681e34"
+    },
+    {
+      "file": "audio/slingshot/impact-01.mp3",
+      "bytes": 2083,
+      "sha256": "bcd560523a5a0c4cb361022779dd938e2a6e569779181aaa17743b733454ef3c"
+    },
+    {
+      "file": "audio/slingshot/impact-01.ogg",
+      "bytes": 4823,
+      "sha256": "8592d6360b769294b14d70f53c1c6c110189a1fbfddf477090b40e34d5b9d7e2"
+    },
+    {
+      "file": "audio/slingshot/impact-02.mp3",
+      "bytes": 2083,
+      "sha256": "7c98a3df8202eb10d5e19d8eb94db8e74abe7c3d489071e8c4bf098c5a9d0a25"
+    },
+    {
+      "file": "audio/slingshot/impact-02.ogg",
+      "bytes": 4817,
+      "sha256": "c3e0e91edb7b8b1d4f7bfdc2cba3193eafe23c9a8ebc5364da57ac845b01a297"
+    },
+    {
+      "file": "audio/slingshot/impact-03.mp3",
+      "bytes": 2239,
+      "sha256": "67618506c5b7a3c0e1538ce4aa112a7042d2e8ad313607ff679c3d3d99937fd4"
+    },
+    {
+      "file": "audio/slingshot/impact-03.ogg",
+      "bytes": 4911,
+      "sha256": "3d6fdc73744cd98268b2275af43c6e88348a44a966390208bf63ac897af86a07"
+    },
+    {
+      "file": "audio/slingshot/impact-04.mp3",
+      "bytes": 2396,
+      "sha256": "eaab3b2e83c92d8bdca733a89f90faf83ffc8b589e2eeda44a9af5b333280104"
+    },
+    {
+      "file": "audio/slingshot/impact-04.ogg",
+      "bytes": 5085,
+      "sha256": "88a06518c9c2b37d5433a902f436ad9741bacb0a94b026b3845820a4cfee0d11"
+    },
+    {
+      "file": "audio/water/fire.mp3",
+      "bytes": 3023,
+      "sha256": "4b6c73986c330c527000d6e52b2f1ff5007c60cb92d679c0f8ee593ef28bd911"
+    },
+    {
+      "file": "audio/water/fire.ogg",
+      "bytes": 7021,
+      "sha256": "18c4c192eb262c81586781b83ed93a6691063d8dda94abec8caab876729d5771"
+    },
+    {
+      "file": "audio/water/impact-01.mp3",
+      "bytes": 2553,
+      "sha256": "ce15c500e7b3977eee886d79c3b2e027a17b8e286d977b153a70e82f4c457498"
+    },
+    {
+      "file": "audio/water/impact-01.ogg",
+      "bytes": 6353,
+      "sha256": "ad9adc9f9156f63dc011b38fa0642848abb810e406ad9a53ae281077c28623da"
+    },
+    {
+      "file": "audio/water/impact-02.mp3",
+      "bytes": 2710,
+      "sha256": "debdd05b2c9a16755c6da3bc037a13adc49591681ef5acbd97081a3346a72d82"
+    },
+    {
+      "file": "audio/water/impact-02.ogg",
+      "bytes": 6480,
+      "sha256": "b4928fba6bd540eb7480115e2d5dfac813c1aa7ab99eaf27846910ced5541554"
+    },
+    {
+      "file": "audio/water/impact-03.mp3",
+      "bytes": 2710,
+      "sha256": "21bed4e9af29a53726af31ff1d748a1f070fbe7d398296c44250fc4d893ecfae"
+    },
+    {
+      "file": "audio/water/impact-03.ogg",
+      "bytes": 6631,
+      "sha256": "989716c0af153e0b19100095930f3185890189a0b911c5368dbfc2c8ef3e81e4"
+    },
+    {
+      "file": "audio/water/impact-04.mp3",
+      "bytes": 2866,
+      "sha256": "30e57a4a9d7208c1250e392e34fbe300ba1f4a7445eb0dbe320f772c56d37a2d"
+    },
+    {
+      "file": "audio/water/impact-04.ogg",
+      "bytes": 6840,
+      "sha256": "c4e3a8b21c9d17504916c23fe95218c4efeff169c3b28a881b099671d2d34d84"
+    },
+    {
+      "file": "source/components.webp",
+      "bytes": 421888,
+      "sha256": "822336202fe2da54181a3f116ded5f1facdfef402c83792fa59bdbfaacb4872d"
+    },
+    {
+      "file": "sprites/bow/fire-00.png",
+      "bytes": 28330,
+      "sha256": "ade84331da7cce69544cf750f7102fbccd6a5b5b3edda92e619318198d411823"
+    },
+    {
+      "file": "sprites/bow/fire-01.png",
+      "bytes": 28973,
+      "sha256": "9df8d63ec02ec2144d849c7379396adbfd71ec848fd559a10ab70507b88958b2"
+    },
+    {
+      "file": "sprites/bow/fire-02.png",
+      "bytes": 27036,
+      "sha256": "e03abe553bf7096c02d88b192eec440a9f7a6fa3c67447d7e8b48a8fd850cf0b"
+    },
+    {
+      "file": "sprites/bow/fire-03.png",
+      "bytes": 26102,
+      "sha256": "f3da1f40cafccbf4557c8dcff4f2a2c9d63d3f2db6ba4baf1f2a55cff58fee86"
+    },
+    {
+      "file": "sprites/bow/fire-04.png",
+      "bytes": 22782,
+      "sha256": "ddb0fcbcf7f0d9dafc62832947a96fbb23730efca35491ea80a9ca61741e8895"
+    },
+    {
+      "file": "sprites/bow/fire-05.png",
+      "bytes": 23425,
+      "sha256": "53b9362a69e3f6eb1b43a119eb7e04602c062ca729d80981d07b6347b6d7aea7"
+    },
+    {
+      "file": "sprites/bow/impact-01.png",
+      "bytes": 15974,
+      "sha256": "db24d1ebf5ae7877b8f5be281920f54209c9a0f90b9c22db8c86ff3e1b092c7b"
+    },
+    {
+      "file": "sprites/bow/impact-02.png",
+      "bytes": 32263,
+      "sha256": "e30dc0b10de821bd3347f5e3b829083f6d1c16b6e93364ca286607e0a9884472"
+    },
+    {
+      "file": "sprites/bow/impact-03.png",
+      "bytes": 14792,
+      "sha256": "38b7ca01c1161bf3444313f96ebe7d4c961d4f30bdd1bc1cb66c8a333f344399"
+    },
+    {
+      "file": "sprites/bow/impact-04.png",
+      "bytes": 14845,
+      "sha256": "562ccfaa91c19d1056275b8184d2bd58e98d12d07c4d13ddd75a76a626956425"
+    },
+    {
+      "file": "sprites/bow/muzzle.png",
+      "bytes": 4758,
+      "sha256": "25fb38a220ecd89ed61314009accba9b054481e73ff5b448cce6f33a60f05808"
+    },
+    {
+      "file": "sprites/bow/projectile-01.png",
+      "bytes": 18975,
+      "sha256": "b4c6454bb5d66404edb4aadbd4fef27b025707a41236fa717ee6488839cfa297"
+    },
+    {
+      "file": "sprites/bow/trail.png",
+      "bytes": 2837,
+      "sha256": "6fb2f5453cb2038ee395d0a46949f4067d83ee6f12105971ac4b9610a0704684"
+    },
+    {
+      "file": "sprites/cannon/fire-00.png",
+      "bytes": 55843,
+      "sha256": "d3620c4677841a3c67264e9aa13d5d2896d5eb24ad0df6564ae5d4b09ea2369d"
+    },
+    {
+      "file": "sprites/cannon/fire-01.png",
+      "bytes": 55955,
+      "sha256": "8d45f8d8bebf9b09af336b310d9ea0ed32b273447517c6f36fb93f3381ee64b5"
+    },
+    {
+      "file": "sprites/cannon/fire-02.png",
+      "bytes": 56041,
+      "sha256": "73addcd13ae068d49c1a1b642c3b11a3b2bb660d70eac1b11d62bc9b936e8c64"
+    },
+    {
+      "file": "sprites/cannon/fire-03.png",
+      "bytes": 58346,
+      "sha256": "bd50709ddc2eec7f49f8c83fb1475e918e9a35b19d40fe4a33c9eca2d8162447"
+    },
+    {
+      "file": "sprites/cannon/fire-04.png",
+      "bytes": 57036,
+      "sha256": "515d17d70a7402a9572a1335b351d3d8acecf3438e43dcf1df0551084ba4a5dc"
+    },
+    {
+      "file": "sprites/cannon/fire-05.png",
+      "bytes": 56890,
+      "sha256": "d90b10c8b0d5e14623a4f587772f91fb45ba313b17edb7242afaba0af7b1300f"
+    },
+    {
+      "file": "sprites/cannon/fire-06.png",
+      "bytes": 55954,
+      "sha256": "e630f61d6f65a159745e45fd23f4ec9ef7e29d846217fa22bdf14396fd3788b0"
+    },
+    {
+      "file": "sprites/cannon/fire-07.png",
+      "bytes": 55854,
+      "sha256": "571491a894cda947a8cb3bfbe19b844681af498b8b5eaa05a1b2234a92fad221"
+    },
+    {
+      "file": "sprites/cannon/impact-01.png",
+      "bytes": 22517,
+      "sha256": "d187eaa63fcfc49f80fc54ddac9c36bf4afc955c9dbffe8a2d7d1c12932a8dd5"
+    },
+    {
+      "file": "sprites/cannon/impact-02.png",
+      "bytes": 34614,
+      "sha256": "616b9245802b07a5cbdcd2d28d6b2e0b1f699a7eef04e85ba180f7ca629475d6"
+    },
+    {
+      "file": "sprites/cannon/impact-03.png",
+      "bytes": 23222,
+      "sha256": "b8ccbdfec8c13e5f44ed4906a170808b88c8248fc22f621899e3af17ec48a195"
+    },
+    {
+      "file": "sprites/cannon/impact-04.png",
+      "bytes": 22753,
+      "sha256": "b3c27d8a554e5da4b35eb2f3afbffbac587351f1c0a16cd5e90a7355ba7f99f7"
+    },
+    {
+      "file": "sprites/cannon/muzzle.png",
+      "bytes": 14621,
+      "sha256": "ade3217de2ffdf17a866578871a2d55b4e3f9e8a106b39f1c3609013d1cb2c05"
+    },
+    {
+      "file": "sprites/cannon/projectile-01.png",
+      "bytes": 9079,
+      "sha256": "19e3fc2707ec17a223a113c15ed6cc54ae71f25fd99cac9ab3381655852fced5"
+    },
+    {
+      "file": "sprites/cannon/trail.png",
+      "bytes": 9948,
+      "sha256": "790b7697f441babcc3fdb776112f30f6887ef26bbb26655b7aa2692ed127bd30"
+    },
+    {
+      "file": "sprites/purse/fire-00.png",
+      "bytes": 57446,
+      "sha256": "4755c2319953607de484e7a84afc7dce6add07262bded5d97a98cd87f23e8b0f"
+    },
+    {
+      "file": "sprites/purse/fire-01.png",
+      "bytes": 56215,
+      "sha256": "b5c720499738ecd5940c09dc211ef1e06958c00c90d42a7170d4911cbe2b3221"
+    },
+    {
+      "file": "sprites/purse/fire-02.png",
+      "bytes": 54614,
+      "sha256": "ffd351ae4041e327db13fe774cd45e4e9fc5c2a544ac3143d50a8a6c9cb57be6"
+    },
+    {
+      "file": "sprites/purse/fire-03.png",
+      "bytes": 57623,
+      "sha256": "c923f54dd2eed05f13e053c2d9b873eb015827232fcb72167ea992ba94267110"
+    },
+    {
+      "file": "sprites/purse/fire-04.png",
+      "bytes": 57873,
+      "sha256": "d73648cc2c188af6fdccf26b2a7a448e04ccc281c72f78d52eaa925c50f35c22"
+    },
+    {
+      "file": "sprites/purse/fire-05.png",
+      "bytes": 57517,
+      "sha256": "ae625cfd77e3bee48237b0b177e05f23a8bc167674b9e4a8b951f2bee8d62b60"
+    },
+    {
+      "file": "sprites/purse/impact-01.png",
+      "bytes": 21686,
+      "sha256": "8aca352df2040429515e70e67122429c4db4917478aac68ac1659ebc8bc8bd0d"
+    },
+    {
+      "file": "sprites/purse/impact-02.png",
+      "bytes": 37843,
+      "sha256": "68aa34306d796d8bc6dd3ebd65e0698ea86f928bad4aa7a0d4d89ce1abc7cdd6"
+    },
+    {
+      "file": "sprites/purse/impact-03.png",
+      "bytes": 21978,
+      "sha256": "2568078c63e0a42a0220334ce810e6fa8bcd29c74bf502331e34bb6cc06cf90e"
+    },
+    {
+      "file": "sprites/purse/impact-04.png",
+      "bytes": 20356,
+      "sha256": "42fddc8ccafaff0bd04c8e85a7033307c7c9b73868241a0a3667429289e862d9"
+    },
+    {
+      "file": "sprites/purse/muzzle.png",
+      "bytes": 6478,
+      "sha256": "f4b329fe96b21c68c228abca844cd6c4a3c7be3c2bad773219854a625b04510d"
+    },
+    {
+      "file": "sprites/purse/projectile-01.png",
+      "bytes": 12141,
+      "sha256": "94ef1facff34420097111f8d5d27161508354b45b3e57c2faada417ad972d379"
+    },
+    {
+      "file": "sprites/purse/trail.png",
+      "bytes": 6490,
+      "sha256": "34b261b2a2afb3114e5d2a61c0b29664d77c6ae89d70a7ba86f6fe881d3b5847"
+    },
+    {
+      "file": "sprites/slingshot/fire-00.png",
+      "bytes": 36257,
+      "sha256": "dfe55a86ff89ba75ac7d57e056b549978123ccba2d4105182adf1f118be8cfb0"
+    },
+    {
+      "file": "sprites/slingshot/fire-01.png",
+      "bytes": 37150,
+      "sha256": "a5e8687767b3ce760f95e85b274bce8da0bd9c44521f6fd82024a09d508b3b3a"
+    },
+    {
+      "file": "sprites/slingshot/fire-02.png",
+      "bytes": 36998,
+      "sha256": "d2565369edc4ed0d5905816dd3bda34f34d3ee53bfe7b0bd78b051e1e0d86dac"
+    },
+    {
+      "file": "sprites/slingshot/fire-03.png",
+      "bytes": 35502,
+      "sha256": "c54dc51c3029d2cb7aa78174481657ebad2b6183be6c90bc0372de6313d0658c"
+    },
+    {
+      "file": "sprites/slingshot/fire-04.png",
+      "bytes": 34752,
+      "sha256": "e9caebfd607b2dc3c10c537290ebdc91927d6ed63b2b8b42ccb420687f4776b4"
+    },
+    {
+      "file": "sprites/slingshot/fire-05.png",
+      "bytes": 35483,
+      "sha256": "1cf04e29c67c973e923461403802702dead2e74605cd1e2233aa7b8ae487b01e"
+    },
+    {
+      "file": "sprites/slingshot/impact-01.png",
+      "bytes": 16610,
+      "sha256": "3ba18ff46cd30690aef313f4eb452d1933f1f4d17757d8351f60351acf97bf30"
+    },
+    {
+      "file": "sprites/slingshot/impact-02.png",
+      "bytes": 31486,
+      "sha256": "54db7efdac843323b3872dfa6cf58f5390bc87350d2c786bfc2703b7409ed7e2"
+    },
+    {
+      "file": "sprites/slingshot/impact-03.png",
+      "bytes": 15011,
+      "sha256": "84d02dc25e4fefb3f2e88fdd4f3eed663b46851e61a7edc974d11efccfc717f2"
+    },
+    {
+      "file": "sprites/slingshot/impact-04.png",
+      "bytes": 14904,
+      "sha256": "0c0701c50ed35ac0688e0bfaca003f22c03c85c5607e2dd7c038fc7e8a7871f4"
+    },
+    {
+      "file": "sprites/slingshot/muzzle.png",
+      "bytes": 4758,
+      "sha256": "25fb38a220ecd89ed61314009accba9b054481e73ff5b448cce6f33a60f05808"
+    },
+    {
+      "file": "sprites/slingshot/projectile-01.png",
+      "bytes": 7311,
+      "sha256": "4cd49ec28c9c4bf9f39a035d5a80831639d0acddd5a02c4664f01a782cbee87b"
+    },
+    {
+      "file": "sprites/slingshot/projectile-02.png",
+      "bytes": 7409,
+      "sha256": "915e6ff6439d22258a0a8d91f08b7564c6d6fcb841d93c629a9e89db3322ba35"
+    },
+    {
+      "file": "sprites/slingshot/projectile-03.png",
+      "bytes": 7467,
+      "sha256": "d1c1f0c4fb9c7efb123c7a9772cf201d716eab3e8a56158379aca413a707f6c1"
+    },
+    {
+      "file": "sprites/slingshot/trail.png",
+      "bytes": 4653,
+      "sha256": "86878ba46111658611ff675636b1bf24aba79b9e5b7ea1ad017cf74f30bbc4c3"
+    },
+    {
+      "file": "sprites/water/fire-00.png",
+      "bytes": 49759,
+      "sha256": "2f2d11e157d8b5616168835d2dfcf218a78095c3f84efd27bbd8ff38952a2615"
+    },
+    {
+      "file": "sprites/water/fire-01.png",
+      "bytes": 48879,
+      "sha256": "a5af7f097ce1e6fdfe3d8243c61c48c21980efb2456dd3f554262fa452876d68"
+    },
+    {
+      "file": "sprites/water/fire-02.png",
+      "bytes": 47951,
+      "sha256": "eed950caef15ffb3125136c65f55f51f7b882f84f9a1f55c2b5412ff4b14397d"
+    },
+    {
+      "file": "sprites/water/fire-03.png",
+      "bytes": 47305,
+      "sha256": "5ed54a085069dd53240ebe9e8c426b02a30ce82a4abc99f6541da6d119679cff"
+    },
+    {
+      "file": "sprites/water/fire-04.png",
+      "bytes": 49294,
+      "sha256": "4827b3d743d28a609a8159c7f2fbf69a1272db3ddf251e6813d73815620eef3f"
+    },
+    {
+      "file": "sprites/water/fire-05.png",
+      "bytes": 49721,
+      "sha256": "a6a77c18f67e051f0a64e3d07381dd3bfb903dc1ccbb8bf791d220a547f9b7ab"
+    },
+    {
+      "file": "sprites/water/impact-01.png",
+      "bytes": 18676,
+      "sha256": "d48d4c580ada8775d851c9612d580386c63026ce09bb5cf3224b178defc55e24"
+    },
+    {
+      "file": "sprites/water/impact-02.png",
+      "bytes": 34901,
+      "sha256": "21e0b11d72322e450e6e369aa49297dcbc2073f83afeb416c54599bcbd0d3373"
+    },
+    {
+      "file": "sprites/water/impact-03.png",
+      "bytes": 17819,
+      "sha256": "ba26f79ec3ad980c046e4c487df5d21ab30048da558873865b5d1a5ef5770d02"
+    },
+    {
+      "file": "sprites/water/impact-04.png",
+      "bytes": 18279,
+      "sha256": "82e075ef5a0099bbae3fc966513f9b99e84651d8da5819b4ba0fb54548d4596a"
+    },
+    {
+      "file": "sprites/water/muzzle.png",
+      "bytes": 5119,
+      "sha256": "8f2afe766ab8fda32acd3a47dafa622a6d75800543f491782d67f36a301da508"
+    },
+    {
+      "file": "sprites/water/projectile-01.png",
+      "bytes": 6884,
+      "sha256": "2c42b297894965ebdd7a1f187adf9252f553f37e0b0b01d0f948c55ae37cf524"
+    },
+    {
+      "file": "sprites/water/trail.png",
+      "bytes": 5759,
+      "sha256": "bc0d4d670c63ad3c15f07c1b82cc6e7e4cae085f52c772c53e9c03892b18b668"
+    }
+  ]
+}

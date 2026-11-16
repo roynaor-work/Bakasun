@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "command": "npm test",
+  "node": "v24.19.0",
+  "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "durationMs": 364393.53476,
+  "tests": 4326,
+  "pass": 4262,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 64,
+  "todo": 0,
+  "environment": {
+    "NODE_OPTIONS": "--import=/tmp/bakasun-system-chromium.mjs",
+    "preloadSource": "import path from 'node:path';\nimport { pathToFileURL } from 'node:url';\nconst modulePath=path.resolve(path.dirname(process.execPath),'../node_modules/playwright/index.mjs');\nconst {chromium}=await import(pathToFileURL(modulePath).href);\nconst launch=chromium.launch.bind(chromium);\nchromium.launch=options=>launch({...options,executablePath:'/usr/bin/chromium',args:[...(options?.args||[]),'--no-sandbox','--disable-dev-shm-usage']});\n"
+  },
+  "initialAttempt": {
+    "tests": 4326,
+    "pass": 4261,
+    "fail": 1,
+    "skipped": 64,
+    "reason": "Cached Playwright Chromium missing; existing workout-royiki browser launch failed before server cleanup"
+  },
+  "existingRepositoryFilesModified": false
+}
