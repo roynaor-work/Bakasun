@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "description": "C1 verification on decoded native LINEAR/slerp GLBs and generic interrupted Hermite helper",
+  "thresholds": {
+    "poseMeters": 1e-8,
+    "poseRadians": 0.000001,
+    "hipsVelocityMps": 0.0001,
+    "angularVelocityRadps": 0.003,
+    "maximum240HzRotationStepRadians": 0.17453292519943295
+  },
+  "baked": [
+    {
+      "id": "idle_to_jog",
+      "source": "idle_relaxed",
+      "target": "jog",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0.375,
+      "sha256": "85411229ec0ca242d42a37d672581680d184ff2e270223159f6b0f85b76cde77",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.1272351126745757e-9,
+          "angularRadiansPerSecond": 0.000004732497716772276
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.971403629043075e-7,
+          "angularRadiansPerSecond": 0.0000053211935466746305
+        }
+      },
+      "maxRotationStepRadians": 0.043738375669127284,
+      "maxHipsStepMeters": 0.0010343519386898125,
+      "passed": true
+    },
+    {
+      "id": "jog_to_idle",
+      "source": "jog",
+      "target": "idle_relaxed",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0,
+      "sha256": "d86933172fd0b1af7412135160ca9c6a318beef671b9f207ddbd401870dfa3ca",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 2.2433301532147023e-8,
+          "angularRadiansPerSecond": 0.0000046253537680618
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.1237279525187873e-9,
+          "angularRadiansPerSecond": 0.000004749681707433259
+        }
+      },
+      "maxRotationStepRadians": 0.05398280152796641,
+      "maxHipsStepMeters": 0.0017293178221131189,
+      "passed": true
+    },
+    {
+      "id": "idle_to_run",
+      "source": "idle_relaxed",
+      "target": "run",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0.3333333432674408,
+      "sha256": "b6fa36066077e3f7032be7e04f95ee9ca5afecb7e08531fcf652388cce49031a",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.1272351126745757e-9,
+          "angularRadiansPerSecond": 0.000004732497716772276
+        },
+        "end": {
+          "hipsMetersPerSecond": 0,
+          "angularRadiansPerSecond": 0.000007341815735254186
+        }
+      },
+      "maxRotationStepRadians": 0.059799967769202975,
+      "maxHipsStepMeters": 0.001469618084742588,
+      "passed": true
+    },
+    {
+      "id": "run_to_idle",
+      "source": "run",
+      "target": "idle_relaxed",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0,
+      "sha256": "557b21d4f937901139a5a6b638ad579f47186c8c1fe813b259a59ed0f03e871b",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.5993487125271328e-7,
+          "angularRadiansPerSecond": 0.000004619887667568077
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.289497651330468e-11,
+          "angularRadiansPerSecond": 0.000004740565968588742
+        }
+      },
+      "maxRotationStepRadians": 0.07047397138866535,
+      "maxHipsStepMeters": 0.0029781544174908702,
+      "passed": true
+    },
+    {
+      "id": "idle_to_sprint",
+      "source": "idle_relaxed",
+      "target": "sprint",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0.2666666805744171,
+      "sha256": "cbe470e8b987e15d435884a9b72addda37722cf9ef3bf3678dccf0af52c89326",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.1272351126745757e-9,
+          "angularRadiansPerSecond": 0.000004732497716772276
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.421010862427522e-13,
+          "angularRadiansPerSecond": 0.000005372887888004526
+        }
+      },
+      "maxRotationStepRadians": 0.10238822176737661,
+      "maxHipsStepMeters": 0.001909980936678413,
+      "passed": true
+    },
+    {
+      "id": "sprint_to_idle",
+      "source": "sprint",
+      "target": "idle_relaxed",
+      "sourcePhaseSeconds": 0.5416666865348816,
+      "targetPhaseSeconds": 0,
+      "sha256": "a24d992f59dc33b2669a36cd7c72be0555f169ff481146b8e33aa39b9ff0175c",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 3.464032448847426e-7,
+          "angularRadiansPerSecond": 0.000008825157599372225
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.289497651330468e-11,
+          "angularRadiansPerSecond": 0.000004740565968588742
+        }
+      },
+      "maxRotationStepRadians": 0.07859789910807463,
+      "maxHipsStepMeters": 0.0031752759005889575,
+      "passed": true
+    },
+    {
+      "id": "idle_to_referee_run",
+      "source": "idle_relaxed",
+      "target": "referee_run",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0.3333333432674408,
+      "sha256": "9d9a4a74004ef8eeb303e41476c3c0b2e2626898fc20806091fbc9c1f9232b40",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.1272351126745757e-9,
+          "angularRadiansPerSecond": 0.000004732497716772276
+        },
+        "end": {
+          "hipsMetersPerSecond": 0,
+          "angularRadiansPerSecond": 0.0000065795846084511955
+        }
+      },
+      "maxRotationStepRadians": 0.06515897885734014,
+      "maxHipsStepMeters": 0.0014579860553462173,
+      "passed": true
+    },
+    {
+      "id": "referee_run_to_idle",
+      "source": "referee_run",
+      "target": "idle_relaxed",
+      "sourcePhaseSeconds": 0,
+      "targetPhaseSeconds": 0,
+      "sha256": "168e7c93f5b258afbe3174ed2955b6cd0aed746d77bd638a957668057ad53717",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 3.018725026318835e-8,
+          "angularRadiansPerSecond": 0.000004805271939717711
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.289497651330468e-11,
+          "angularRadiansPerSecond": 0.000004740565968588742
+        }
+      },
+      "maxRotationStepRadians": 0.06401503150289631,
+      "maxHipsStepMeters": 0.0029946701884398493,
+      "passed": true
+    }
+  ],
+  "helper": [
+    {
+      "id": "generic_idle_relaxed_to_jog",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.6991978050576484e-8,
+          "angularRadiansPerSecond": 0.0000020147858776176993
+        },
+        "end": {
+          "hipsMetersPerSecond": 6.600328133077861e-8,
+          "angularRadiansPerSecond": 0.000004047788899918354
+        }
+      },
+      "maxRotationStepRadians": 0.06719529514723276,
+      "maxHipsStepMeters": 0.0006606226011051748,
+      "passed": true
+    },
+    {
+      "id": "generic_jog_to_idle_relaxed",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.0137874937118561e-7,
+          "angularRadiansPerSecond": 0.0000016765637581419778
+        },
+        "end": {
+          "hipsMetersPerSecond": 6.89426875070649e-8,
+          "angularRadiansPerSecond": 8.858890948732531e-7
+        }
+      },
+      "maxRotationStepRadians": 0.027565451933461358,
+      "maxHipsStepMeters": 0.0011001427133854392,
+      "passed": true
+    },
+    {
+      "id": "generic_idle_relaxed_to_run",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 4.257596552933047e-8,
+          "angularRadiansPerSecond": 9.00133545961338e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 5.49538495390009e-8,
+          "angularRadiansPerSecond": 0.0000015095641299363876
+        }
+      },
+      "maxRotationStepRadians": 0.02014051484805216,
+      "maxHipsStepMeters": 0.0006180733240113823,
+      "passed": true
+    },
+    {
+      "id": "generic_run_to_idle_relaxed",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.4132076170634515e-7,
+          "angularRadiansPerSecond": 0.0000032803305186757287
+        },
+        "end": {
+          "hipsMetersPerSecond": 9.113723803789425e-8,
+          "angularRadiansPerSecond": 0.000001667826693112652
+        }
+      },
+      "maxRotationStepRadians": 0.05197603506531094,
+      "maxHipsStepMeters": 0.0015781142482486517,
+      "passed": true
+    },
+    {
+      "id": "generic_idle_relaxed_to_sprint",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 8.88471591952493e-8,
+          "angularRadiansPerSecond": 0.0000017075431938339226
+        },
+        "end": {
+          "hipsMetersPerSecond": 1.4544041215390927e-7,
+          "angularRadiansPerSecond": 0.000003551889484151997
+        }
+      },
+      "maxRotationStepRadians": 0.05972840716669536,
+      "maxHipsStepMeters": 0.0018229546751010281,
+      "passed": true
+    },
+    {
+      "id": "generic_sprint_to_idle_relaxed",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.223932209956375e-7,
+          "angularRadiansPerSecond": 0.000002785044920687843
+        },
+        "end": {
+          "hipsMetersPerSecond": 7.555047936411763e-8,
+          "angularRadiansPerSecond": 0.0000013212889238574746
+        }
+      },
+      "maxRotationStepRadians": 0.0477666008531814,
+      "maxHipsStepMeters": 0.0015351150702546962,
+      "passed": true
+    },
+    {
+      "id": "generic_idle_relaxed_to_referee_run",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 6.455859811492178e-8,
+          "angularRadiansPerSecond": 9.666831351918516e-7
+        },
+        "end": {
+          "hipsMetersPerSecond": 9.451862134202067e-8,
+          "angularRadiansPerSecond": 0.000002305652753518043
+        }
+      },
+      "maxRotationStepRadians": 0.04213130191998693,
+      "maxHipsStepMeters": 0.001003637376411319,
+      "passed": true
+    },
+    {
+      "id": "generic_referee_run_to_idle_relaxed",
+      "c0": {
+        "start": {
+          "hipsMeters": 0,
+          "rotationRadians": 4.2146848510894035e-8
+        },
+        "end": {
+          "hipsMeters": 0,
+          "rotationRadians": 5.16191365590357e-8
+        }
+      },
+      "c1": {
+        "start": {
+          "hipsMetersPerSecond": 1.3351975996844005e-7,
+          "angularRadiansPerSecond": 0.000001782337346345166
+        },
+        "end": {
+          "hipsMetersPerSecond": 8.556319519933362e-8,
+          "angularRadiansPerSecond": 0.000001027040311083501
+        }
+      },
+      "maxRotationStepRadians": 0.02602026738771686,
+      "maxHipsStepMeters": 0.001548804041219121,
+      "passed": true
+    }
+  ],
+  "interrupted": {
+    "pose": {
+      "hipsMeters": 0,
+      "rotationRadians": 5.16191365590357e-8
+    },
+    "velocity": {
+      "hipsMetersPerSecond": 0.0000012197029256036474,
+      "angularRadiansPerSecond": 0.00003073489395431483
+    },
+    "passed": true
+  },
+  "passed": true
+}

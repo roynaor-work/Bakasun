@@ -1,0 +1,22 @@
+{
+  "command": "node --test <pinned motion-qa-v1>/test/metrics.test.mjs <pinned motion-qa-v1>/test/glb.test.mjs",
+  "pinnedCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "nodeVersion": "v24.19.0",
+  "tests": 30,
+  "passed": 30,
+  "failed": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "sources": [
+    {
+      "path": "workout/island/design/motion-qa-v1/test/metrics.test.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "ec6c14eb552ae1a5901a94f2440b74e1b8f48a0c2ad2200f6d52f4118621363a"
+    },
+    {
+      "path": "workout/island/design/motion-qa-v1/test/glb.test.mjs",
+      "commit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+      "sha256": "a077432920069babd25515ad5be1d1c31be4c459177db5c67968965dceae7be8"
+    }
+  ]
+}

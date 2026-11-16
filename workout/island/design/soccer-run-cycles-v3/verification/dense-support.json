@@ -1,0 +1,2006 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Supplementary dense support audit of actual exported GLB interpolation between 120 Hz keys; original QA scores remain unchanged.",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "reader": {
+    "path": "workout/island/design/motion-qa-v1/glb.mjs",
+    "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc"
+  },
+  "adapterSha256": "f09cae5ec8a22c29a9a8a8d27825bfd666815787d0d85452eec0533ac37fd441",
+  "measurementRateHz": 480,
+  "nativeRateHz": 120,
+  "intervalSubdivisions": 4,
+  "coordinateSpace": "World sole point after native GLB interpolation plus declared simulation-owned trajectory, applied once.",
+  "soleProbeMeters": [
+    0,
+    -0.08,
+    0
+  ],
+  "limitMeters": 0.02,
+  "inputRecords": [
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/catalog.json",
+      "bytes": 650934,
+      "sha256": "81ec1153a70c21e4998a5de28ff2bf4341c26f52f23a317bb5e3281465be6145",
+      "gitBlob": "6649b30a197d2ef2aec3418e3261a49ee12d43b2"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/idle_relaxed.glb",
+      "bytes": 914984,
+      "sha256": "1e4151595e43f38762eddcc17c9630441ba8aad10f4b7b2a7159b5ab74e5be86",
+      "gitBlob": "5d665c4e212fd4aebfe8d0e92e417e903ad11150"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/referee_idle.glb",
+      "bytes": 914984,
+      "sha256": "75271cd100f519eab8cf955056f31cbd4f2b0d2401373857562ab01f1ab154d8",
+      "gitBlob": "bebf29191470d58388ff02a5ef6bc58832791ed7"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/jog.glb",
+      "bytes": 796388,
+      "sha256": "75864543305109937f40710536b02e8ae277d6086abcb7b35c85c2d4f75aa6c7",
+      "gitBlob": "81c6fd8440900a2275f794bafa5318d6c0f3d49e"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/run.glb",
+      "bytes": 793360,
+      "sha256": "78d81e40ca2b52e4c6183aafc7a79ff08a6655f114db1d52a344221dd2df72f1",
+      "gitBlob": "5a83cc8995eb9dc88c33606fcca33c944ba4d921"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/sprint.glb",
+      "bytes": 789096,
+      "sha256": "21f6e6bc0af28a87bac03ff147234665144c1b3de8af5a3081f7a7db70cfa1dc",
+      "gitBlob": "0f7c861be5bdaf06b7c8266d33e6249adc3da5c8"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/referee_run.glb",
+      "bytes": 793376,
+      "sha256": "3e46685a9695be8d261a55c9c884bbbf4da32f181ad8406fc237006a2ac4311b",
+      "gitBlob": "0cbad3e428694f045f3c1c6b47f46c975339ae90"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/keeper_ready_side_steps.glb",
+      "bytes": 885824,
+      "sha256": "5820475849c73e132c78d1c07f7398dc551bb3654cd9179305e74003a1e3b419",
+      "gitBlob": "69bde55445e7c6b645fa20c322c0d2d8365ad1b7"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/keeper_catch_chest.glb",
+      "bytes": 856632,
+      "sha256": "6b4c28931134412bede0a08c0088921dad3fbcf52cdd889acdf6e8c4d22d5925",
+      "gitBlob": "009d90c8dfc0471a66058ac3eaade641386264b6"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/keeper_catch_head.glb",
+      "bytes": 856628,
+      "sha256": "78259eb7eeace590d0ecbb622e6678b070651207234641f75b337aae90f530c2",
+      "gitBlob": "3ce796e338ad6acd818e686ba988746b69e55a68"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/idle_to_jog.glb",
+      "bytes": 851144,
+      "sha256": "85411229ec0ca242d42a37d672581680d184ff2e270223159f6b0f85b76cde77",
+      "gitBlob": "f7b3b248459fb8520ebccaceca0386e6e7e2e974"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/jog_to_idle.glb",
+      "bytes": 851144,
+      "sha256": "d86933172fd0b1af7412135160ca9c6a318beef671b9f207ddbd401870dfa3ca",
+      "gitBlob": "6da074bc96207430a3eaf06a806c91a438080da3"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/idle_to_run.glb",
+      "bytes": 842020,
+      "sha256": "b6fa36066077e3f7032be7e04f95ee9ca5afecb7e08531fcf652388cce49031a",
+      "gitBlob": "519b8082e48297130e6ba4bb9ff7e156789b1884"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/run_to_idle.glb",
+      "bytes": 842020,
+      "sha256": "557b21d4f937901139a5a6b638ad579f47186c8c1fe813b259a59ed0f03e871b",
+      "gitBlob": "5fb8c527e887b0f5618528be10eafdd27f8722ba"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/idle_to_sprint.glb",
+      "bytes": 829264,
+      "sha256": "cbe470e8b987e15d435884a9b72addda37722cf9ef3bf3678dccf0af52c89326",
+      "gitBlob": "b9f7868b6c849e3aa9abb4753c9c5a0f28fa1cc5"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/sprint_to_idle.glb",
+      "bytes": 829264,
+      "sha256": "a24d992f59dc33b2669a36cd7c72be0555f169ff481146b8e33aa39b9ff0175c",
+      "gitBlob": "4c467ec145bf04a802d504f789b5c0f2b75b76c9"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/idle_to_referee_run.glb",
+      "bytes": 842036,
+      "sha256": "9d9a4a74004ef8eeb303e41476c3c0b2e2626898fc20806091fbc9c1f9232b40",
+      "gitBlob": "090d6bf9e9d7b12b5a2095a41d221bba4ebf6785"
+    },
+    {
+      "path": "workout/island/design/soccer-run-cycles-v3/clips/referee_run_to_idle.glb",
+      "bytes": 842036,
+      "sha256": "168e7c93f5b258afbe3174ed2955b6cd0aed746d77bd638a957668057ad53717",
+      "gitBlob": "2883575047232e5ea7eae9eabe4bb4c357b4752f"
+    }
+  ],
+  "clips": 17,
+  "totalSampledPoses": 16579,
+  "maxSpatialDriftMeters": 0.009940894904221063,
+  "maxHorizontalDriftMeters": 0.001392850915530086,
+  "results": [
+    {
+      "id": "idle_relaxed",
+      "samples": 1921,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 4,
+          "samples": 1921,
+          "maxSpatialDriftMeters": 4.1728730120111445e-8,
+          "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+          "worst": {
+            "time": 0.7166666388511658,
+            "sole": [
+              0.10800000020966266,
+              0.003999970098642502,
+              2.6234475726250725e-8
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 4,
+          "samples": 1921,
+          "maxSpatialDriftMeters": 4.1728730120111445e-8,
+          "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+          "worst": {
+            "time": 3.2833333015441895,
+            "sole": [
+              -0.10800000020966266,
+              0.003999970098642502,
+              2.6234475726250725e-8
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 4.1728730120111445e-8,
+      "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+      "passed": true
+    },
+    {
+      "id": "referee_idle",
+      "samples": 1921,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 4,
+          "samples": 1921,
+          "maxSpatialDriftMeters": 4.1728730120111445e-8,
+          "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+          "worst": {
+            "time": 0.7166666388511658,
+            "sole": [
+              0.10800000020966266,
+              0.003999970098642502,
+              2.6234475726250725e-8
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 4,
+          "samples": 1921,
+          "maxSpatialDriftMeters": 4.1728730120111445e-8,
+          "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+          "worst": {
+            "time": 3.2833333015441895,
+            "sole": [
+              -0.10800000020966266,
+              0.003999970098642502,
+              2.6234475726250725e-8
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 4.1728730120111445e-8,
+      "maxHorizontalDriftMeters": 3.6000658530544827e-8,
+      "passed": true
+    },
+    {
+      "id": "jog",
+      "samples": 361,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.11666666666666667,
+          "samples": 57,
+          "maxSpatialDriftMeters": 0.0002388738384072882,
+          "maxHorizontalDriftMeters": 0.000039678986030666915,
+          "worst": {
+            "time": 0.1125,
+            "sole": [
+              0.10799052674707933,
+              0.003764440213928591,
+              -0.02170518901358361
+            ],
+            "anchor": [
+              0.10799999978990352,
+              0.003999995491396555,
+              -0.021666657424048878
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.6166666666666667,
+          "end": 0.75,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.00024304882211630358,
+          "maxHorizontalDriftMeters": 0.00003079791145210043,
+          "worst": {
+            "time": 0.6208333333333333,
+            "sole": [
+              0.10799757831591371,
+              0.00375894323020895,
+              1.928364090468904
+            ],
+            "anchor": [
+              0.10799999994276122,
+              0.0040000328786435335,
+              1.9283333879108147
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.24166666666666664,
+          "end": 0.49166666666666664,
+          "samples": 121,
+          "maxSpatialDriftMeters": 0.00024304884659893356,
+          "maxHorizontalDriftMeters": 0.00003969669636945085,
+          "worst": {
+            "time": 0.24583333333333332,
+            "sole": [
+              -0.10799757831582726,
+              0.003758943229794226,
+              0.9533640710925325
+            ],
+            "anchor": [
+              -0.10799999994480163,
+              0.004000030680388164,
+              0.9533333510874495
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.00024304884659893356,
+      "maxHorizontalDriftMeters": 0.00003969669636945085,
+      "passed": true
+    },
+    {
+      "id": "run",
+      "samples": 321,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.05,
+          "samples": 25,
+          "maxSpatialDriftMeters": 0.00058090462016212,
+          "maxHorizontalDriftMeters": 0.00007211838628953369,
+          "worst": {
+            "time": 0.04583333333333333,
+            "sole": [
+              0.10801202152437438,
+              0.003422303616897479,
+              -0.11255993282197665
+            ],
+            "anchor": [
+              0.10800000028065278,
+              0.003999983050666303,
+              -0.1124999983642281
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.5666666666666667,
+          "end": 0.6666666666666666,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.0006057068412999778,
+          "maxHorizontalDriftMeters": 0.00008157325024101281,
+          "worst": {
+            "time": 0.5708333333333333,
+            "sole": [
+              0.10800101606611315,
+              0.003395485369890802,
+              2.8875379025994103
+            ],
+            "anchor": [
+              0.10799999981521828,
+              0.004000003654727385,
+              2.8874999896975173
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.2333333333333333,
+          "end": 0.3833333333333333,
+          "samples": 73,
+          "maxSpatialDriftMeters": 0.0006057070715227463,
+          "maxHorizontalDriftMeters": 0.00008163909442540685,
+          "worst": {
+            "time": 0.2375,
+            "sole": [
+              -0.10800101606626188,
+              0.0033954853704501325,
+              1.3875379249645388
+            ],
+            "anchor": [
+              -0.10799999981523341,
+              0.004000003859373408,
+              1.3875000116386964
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0006057070715227463,
+      "maxHorizontalDriftMeters": 0.00008163909442540685,
+      "passed": true
+    },
+    {
+      "id": "sprint",
+      "samples": 265,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.06666666666666665,
+          "samples": 33,
+          "maxSpatialDriftMeters": 0.0011055695919142568,
+          "maxHorizontalDriftMeters": 0.00016825803564018323,
+          "worst": {
+            "time": 0.0625,
+            "sole": [
+              0.10805189181331676,
+              0.002896511240003341,
+              0.18004360055009774
+            ],
+            "anchor": [
+              0.10800000010266385,
+              0.004000001500394104,
+              0.18000000447052977
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.5333333333333334,
+          "end": 0.55,
+          "samples": 9,
+          "maxSpatialDriftMeters": 0.0011434084114634398,
+          "maxHorizontalDriftMeters": 0.00016953208384591273,
+          "worst": {
+            "time": 0.5375,
+            "sole": [
+              0.10801612080280333,
+              0.0028601556412205242,
+              4.139911412079504
+            ],
+            "anchor": [
+              0.10800000035839709,
+              0.003999998544935254,
+              4.14000018753517
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.25833333333333336,
+          "end": 0.3416666666666667,
+          "samples": 41,
+          "maxSpatialDriftMeters": 0.0011434074183323986,
+          "maxHorizontalDriftMeters": 0.0001693515239818774,
+          "worst": {
+            "time": 0.2625,
+            "sole": [
+              -0.10801612080127858,
+              0.002860155652980395,
+              2.159911261726139
+            ],
+            "anchor": [
+              -0.10800000028234746,
+              0.004000003402240743,
+              2.1599999621301578
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0011434084114634398,
+      "maxHorizontalDriftMeters": 0.00016953208384591273,
+      "passed": true
+    },
+    {
+      "id": "referee_run",
+      "samples": 321,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.06666666666666667,
+          "samples": 33,
+          "maxSpatialDriftMeters": 0.0006550105711375114,
+          "maxHorizontalDriftMeters": 0.00008206101980956652,
+          "worst": {
+            "time": 0.0625,
+            "sole": [
+              0.10801985602863276,
+              0.0033468878592363693,
+              -0.000046145491832918095
+            ],
+            "anchor": [
+              0.108000000372332,
+              0.003999968776174825,
+              5.533568261398573e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.6,
+          "end": 0.6666666666666666,
+          "samples": 33,
+          "maxSpatialDriftMeters": 0.0006824541839180864,
+          "maxHorizontalDriftMeters": 0.00009425723612027333,
+          "worst": {
+            "time": 0.6041666666666666,
+            "sole": [
+              0.10800372092856816,
+              0.0033178586592888804,
+              3.3333538102068756
+            ],
+            "anchor": [
+              0.10799999993036966,
+              0.003999997886683912,
+              3.3333334155563854
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.26666666666666666,
+          "end": 0.4,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.0006824528650090076,
+          "maxHorizontalDriftMeters": 0.00009418813286156618,
+          "worst": {
+            "time": 0.2708333333333333,
+            "sole": [
+              -0.10800372092822656,
+              0.0033178586586435632,
+              1.6666870938371776
+            ],
+            "anchor": [
+              -0.10799999992322003,
+              0.003999996705687278,
+              1.6666667038431577
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0006824541839180864,
+      "maxHorizontalDriftMeters": 0.00009425723612027333,
+      "passed": true
+    },
+    {
+      "id": "keeper_ready_side_steps",
+      "samples": 1537,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.2,
+          "samples": 97,
+          "maxSpatialDriftMeters": 2.0431868654457118e-7,
+          "maxHorizontalDriftMeters": 6.221422444410171e-8,
+          "worst": {
+            "time": 0.19583333333333333,
+            "sole": [
+              0.15999998998802892,
+              0.003999797430972382,
+              1.3953862956927286e-8
+            ],
+            "anchor": [
+              0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.55,
+          "end": 2.25,
+          "samples": 817,
+          "maxSpatialDriftMeters": 0.000004066034666253165,
+          "maxHorizontalDriftMeters": 4.436204650413703e-7,
+          "worst": {
+            "time": 0.5541666666666667,
+            "sole": [
+              0.4799999024106775,
+              0.003995942913230147,
+              6.157870383813302e-8
+            ],
+            "anchor": [
+              0.4800000015519533,
+              0.004000006758768701,
+              -2.7686929954841847e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 2.6,
+          "end": 3.2,
+          "samples": 289,
+          "maxSpatialDriftMeters": 6.905518307157092e-7,
+          "maxHorizontalDriftMeters": 5.725748146422937e-8,
+          "worst": {
+            "time": 2.6041666666666665,
+            "sole": [
+              0.1599999955903167,
+              0.003999318286602591,
+              6.598158167332563e-9
+            ],
+            "anchor": [
+              0.16000002215015094,
+              0.004000008260109031,
+              -3.0437565801191933e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.65,
+          "samples": 313,
+          "maxSpatialDriftMeters": 0.00000384864136819792,
+          "maxHorizontalDriftMeters": 4.793619554068479e-7,
+          "worst": {
+            "time": 0.6458333333333334,
+            "sole": [
+              -0.15999958889502275,
+              0.003996174976234529,
+              3.9375718857034955e-8
+            ],
+            "anchor": [
+              -0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1,
+          "end": 1.8,
+          "samples": 385,
+          "maxSpatialDriftMeters": 6.688877083677196e-7,
+          "maxHorizontalDriftMeters": 7.486609803621688e-8,
+          "worst": {
+            "time": 1.0041666666666667,
+            "sole": [
+              0.16000005351401583,
+              0.0039993112340824255,
+              1.3111454009519462e-8
+            ],
+            "anchor": [
+              0.15999999873804535,
+              0.0039999776588044295,
+              3.0095251145730883e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 2.15,
+          "end": 3.2,
+          "samples": 505,
+          "maxSpatialDriftMeters": 0.000004212401680679641,
+          "maxHorizontalDriftMeters": 5.271316988985722e-7,
+          "worst": {
+            "time": 2.154166666666667,
+            "sole": [
+              -0.15999991530679977,
+              0.003995801000234528,
+              5.594035956832318e-8
+            ],
+            "anchor": [
+              -0.16000003793126147,
+              0.0040000110735406436,
+              -1.1690387276160614e-8
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.000004212401680679641,
+      "maxHorizontalDriftMeters": 5.271316988985722e-7,
+      "passed": true
+    },
+    {
+      "id": "keeper_catch_chest",
+      "samples": 1154,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "samples": 1154,
+          "maxSpatialDriftMeters": 2.591461267404926e-16,
+          "maxHorizontalDriftMeters": 2.591461267404926e-16,
+          "worst": {
+            "time": 0.0375,
+            "sole": [
+              0.16000000046021487,
+              0.0040000014745029955,
+              1.5595998620279126e-8
+            ],
+            "anchor": [
+              0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "samples": 1154,
+          "maxSpatialDriftMeters": 2.591461267404926e-16,
+          "maxHorizontalDriftMeters": 2.591461267404926e-16,
+          "worst": {
+            "time": 0.0375,
+            "sole": [
+              -0.16000000046021487,
+              0.0040000014745029955,
+              1.5595998620279126e-8
+            ],
+            "anchor": [
+              -0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 2.591461267404926e-16,
+      "maxHorizontalDriftMeters": 2.591461267404926e-16,
+      "passed": true
+    },
+    {
+      "id": "keeper_catch_head",
+      "samples": 1154,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 2.4,
+          "samples": 1154,
+          "maxSpatialDriftMeters": 2.591461267404926e-16,
+          "maxHorizontalDriftMeters": 2.591461267404926e-16,
+          "worst": {
+            "time": 0.0375,
+            "sole": [
+              0.16000000046021487,
+              0.0040000014745029955,
+              1.5595998620279126e-8
+            ],
+            "anchor": [
+              0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 2.4,
+          "samples": 1154,
+          "maxSpatialDriftMeters": 2.591461267404926e-16,
+          "maxHorizontalDriftMeters": 2.591461267404926e-16,
+          "worst": {
+            "time": 0.0375,
+            "sole": [
+              -0.16000000046021487,
+              0.0040000014745029955,
+              1.5595998620279126e-8
+            ],
+            "anchor": [
+              -0.16000000046021481,
+              0.0040000014745029955,
+              1.5595998367148276e-8
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 2.591461267404926e-16,
+      "maxHorizontalDriftMeters": 2.591461267404926e-16,
+      "passed": true
+    },
+    {
+      "id": "idle_to_jog",
+      "samples": 1084,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.4020833333333331,
+          "end": 1.6687499999999997,
+          "samples": 129,
+          "maxSpatialDriftMeters": 0.000051142470405912424,
+          "maxHorizontalDriftMeters": 0.000023743515498215657,
+          "worst": {
+            "time": 1.4125,
+            "sole": [
+              0.1079994503207054,
+              0.003941392010682068,
+              1.9283400817492622
+            ],
+            "anchor": [
+              0.10799944756111088,
+              0.003986688784860873,
+              1.9283163382339243
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.6520833333333333,
+          "end": 1.1520833333333331,
+          "samples": 241,
+          "maxSpatialDriftMeters": 0.0001694629615886462,
+          "maxHorizontalDriftMeters": 0.00008353820595203062,
+          "worst": {
+            "time": 1.1520833333333331,
+            "sole": [
+              -0.10799811291000566,
+              0.004134130826752971,
+              0.9533998850534928
+            ],
+            "anchor": [
+              -0.10799944756376305,
+              0.003986689097596294,
+              0.9533163575098139
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.6687499999999997,
+          "end": 1.9020833333333336,
+          "samples": 113,
+          "maxSpatialDriftMeters": 0.00016466893990761704,
+          "maxHorizontalDriftMeters": 0.00006560523633033351,
+          "worst": {
+            "time": 1.9020833333333333,
+            "sole": [
+              0.10799811291000566,
+              0.004134130826752971,
+              1.928399885053493
+            ],
+            "anchor": [
+              0.10800107610793636,
+              0.003983095027233985,
+              1.9283343467708485
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 2.1064417781674383,
+          "end": 2.25,
+          "samples": 70,
+          "maxSpatialDriftMeters": 0.0005727546149734089,
+          "maxHorizontalDriftMeters": 0.00018573182660278908,
+          "worst": {
+            "time": 2.241666555404663,
+            "sole": [
+              -0.10795545981401404,
+              0.004721709621363895,
+              2.9032672837380398
+            ],
+            "anchor": [
+              -0.10799907383124466,
+              0.004159614934734351,
+              2.903166312307738
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1403666655757036,
+          "samples": 69,
+          "maxSpatialDriftMeters": 0.000006514925947507034,
+          "maxHorizontalDriftMeters": 0.000006514906416882155,
+          "worst": {
+            "time": 0.008333333333333333,
+            "sole": [
+              0.10800000076922482,
+              0.004000009960843348,
+              0.000006506942399183477
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2828152671921852,
+          "samples": 138,
+          "maxSpatialDriftMeters": 0.000017874562744034618,
+          "maxHorizontalDriftMeters": 0.000006498417512983774,
+          "worst": {
+            "time": 0.2708333333333333,
+            "sole": [
+              -0.10799826537289764,
+              0.003982515721326074,
+              -0.0000033244183988339657
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0005727546149734089,
+      "maxHorizontalDriftMeters": 0.00018573182660278908,
+      "passed": true
+    },
+    {
+      "id": "jog_to_idle",
+      "samples": 1084,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.5612511283791264e-17,
+          "end": 0.123408380162204,
+          "samples": 61,
+          "maxSpatialDriftMeters": 0.0007509058555387819,
+          "maxHorizontalDriftMeters": 0.000053014579999874284,
+          "worst": {
+            "time": 0.016666666666666666,
+            "sole": [
+              0.10794939002242378,
+              0.004749027572278186,
+              -0.02168244340289752
+            ],
+            "anchor": [
+              0.10799999978990352,
+              0.003999995491396555,
+              -0.021666657424048878
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.0645833333333332,
+          "end": 1.3312499999999998,
+          "samples": 129,
+          "maxSpatialDriftMeters": 0.0001431763826546961,
+          "maxHorizontalDriftMeters": 0.00007548010237352013,
+          "worst": {
+            "time": 1.0708333333333333,
+            "sole": [
+              0.10799934599246405,
+              0.003938286203430771,
+              1.9283419407650952
+            ],
+            "anchor": [
+              0.1079995136334303,
+              0.004059950621794428,
+              1.9282664608488869
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.31468408048922025,
+          "end": 0.8145833333333332,
+          "samples": 241,
+          "maxSpatialDriftMeters": 0.00014643807861212225,
+          "maxHorizontalDriftMeters": 0.00008381882261506542,
+          "worst": {
+            "time": 0.32083333333333336,
+            "sole": [
+              -0.10799933470225154,
+              0.003937325396325686,
+              0.9533419759575691
+            ],
+            "anchor": [
+              -0.1079995204202629,
+              0.004061997559162561,
+              0.9532651584583257
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.3312499999999998,
+          "end": 1.5645833333333332,
+          "samples": 113,
+          "maxSpatialDriftMeters": 0.00004174151311006826,
+          "maxHorizontalDriftMeters": 0.000015154694804989707,
+          "worst": {
+            "time": 1.5541666666666667,
+            "sole": [
+              0.10799769828254588,
+              0.003942660486911567,
+              1.9283245709237227
+            ],
+            "anchor": [
+              0.10800109598994727,
+              0.003983145401620272,
+              1.9283341511733103
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.8145833333333332,
+          "end": 1.850480769230769,
+          "samples": 19,
+          "maxSpatialDriftMeters": 0.0001431763826546961,
+          "maxHorizontalDriftMeters": 0.00007548010237352013,
+          "worst": {
+            "time": 1.8208333333333333,
+            "sole": [
+              -0.10799934599246405,
+              0.003938286203430771,
+              2.903341940765095
+            ],
+            "anchor": [
+              -0.1079995136334303,
+              0.004059950621794428,
+              2.9032664608488865
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 2.15,
+          "end": 2.25,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.0000065790422455814405,
+          "maxHorizontalDriftMeters": 0.000006579042018929094,
+          "worst": {
+            "time": 2.241666555404663,
+            "sole": [
+              0.10800000062570912,
+              0.0040000181446857574,
+              2.9249934435629
+            ],
+            "anchor": [
+              0.10799999956250171,
+              0.004000016417748969,
+              2.925000022604833
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 2.225,
+          "end": 2.25,
+          "samples": 13,
+          "maxSpatialDriftMeters": 0.000006519172644132904,
+          "maxHorizontalDriftMeters": 0.000006519119574683008,
+          "worst": {
+            "time": 2.241666555404663,
+            "sole": [
+              -0.10800000118576013,
+              0.0040000099532234434,
+              2.9249934600512906
+            ],
+            "anchor": [
+              -0.1079999995244515,
+              0.003999983648566144,
+              2.9249999791706536
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0007509058555387819,
+      "maxHorizontalDriftMeters": 0.00008381882261506542,
+      "passed": true
+    },
+    {
+      "id": "idle_to_run",
+      "samples": 964,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.2833333333333332,
+          "end": 1.4833333333333334,
+          "samples": 97,
+          "maxSpatialDriftMeters": 0.00016221228312660675,
+          "maxHorizontalDriftMeters": 0.000020444234394917043,
+          "worst": {
+            "time": 1.2875,
+            "sole": [
+              0.10800001373273986,
+              0.003838561441773039,
+              2.8875157232785473
+            ],
+            "anchor": [
+              0.10799999981521828,
+              0.004000003654727385,
+              2.8874999360533367
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.6166666666666667,
+          "end": 0.9166666666666665,
+          "samples": 145,
+          "maxSpatialDriftMeters": 0.00016221268670798386,
+          "maxHorizontalDriftMeters": 0.000021491642987630917,
+          "worst": {
+            "time": 0.6208333333333333,
+            "sole": [
+              -0.10800001373290105,
+              0.003838561442838964,
+              1.3875158127000813
+            ],
+            "anchor": [
+              -0.10799999981456547,
+              0.00400000398041464,
+              1.3875000246477496
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.4833333333333334,
+          "end": 1.5833333333333335,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.00015523829937975426,
+          "maxHorizontalDriftMeters": 0.000021460014144368268,
+          "worst": {
+            "time": 1.5791666666666666,
+            "sole": [
+              0.10800291592569372,
+              0.003846234651065414,
+              2.8874787764711174
+            ],
+            "anchor": [
+              0.10800000031627048,
+              0.00399998248808188,
+              2.8875000375018725
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.8946439103041364,
+          "end": 2,
+          "samples": 52,
+          "maxSpatialDriftMeters": 0.0026733600784854894,
+          "maxHorizontalDriftMeters": 0.00044004050299886955,
+          "worst": {
+            "time": 1.9916666666666667,
+            "sole": [
+              -0.10785592317758277,
+              0.006428598202198807,
+              4.386909586994266
+            ],
+            "anchor": [
+              -0.10799989952761531,
+              0.0037917025908860563,
+              4.387325407213725
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.10674827856221052,
+          "samples": 53,
+          "maxSpatialDriftMeters": 0.00001425842421029637,
+          "maxHorizontalDriftMeters": 0.00001425841528641937,
+          "worst": {
+            "time": 0.008333333333333333,
+            "sole": [
+              0.10800000076922482,
+              0.004000009960843348,
+              0.000014250451272150249
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.20972130543646267,
+          "samples": 103,
+          "maxSpatialDriftMeters": 0.000054795196385941946,
+          "maxHorizontalDriftMeters": 0.000014241926376047463,
+          "worst": {
+            "time": 0.20972130543646267,
+            "sole": [
+              -0.10799820912687863,
+              0.004054435987504962,
+              0.000005939766858891663
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0026733600784854894,
+      "maxHorizontalDriftMeters": 0.00044004050299886955,
+      "passed": true
+    },
+    {
+      "id": "run_to_idle",
+      "samples": 963,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.3877787807814457e-17,
+          "end": 0.0506613742472984,
+          "samples": 26,
+          "maxSpatialDriftMeters": 0.0024834829564915365,
+          "maxHorizontalDriftMeters": 0.00039272775865551883,
+          "worst": {
+            "time": 0.016666666666666666,
+            "sole": [
+              0.10783985577083807,
+              0.006452217236621094,
+              -0.11285859120910205
+            ],
+            "anchor": [
+              0.10800000028065278,
+              0.003999983050666303,
+              -0.1124999983642281
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.9833333333333332,
+          "end": 1.1833333333333331,
+          "samples": 97,
+          "maxSpatialDriftMeters": 0.00016221309000522677,
+          "maxHorizontalDriftMeters": 0.000020707921551430015,
+          "worst": {
+            "time": 0.9875,
+            "sole": [
+              0.10800001373293332,
+              0.0038385614430555687,
+              2.8875158305843875
+            ],
+            "anchor": [
+              0.10799999981391264,
+              0.0040000043061028945,
+              2.887500041716588
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.31666666666666665,
+          "end": 0.6166666666666665,
+          "samples": 145,
+          "maxSpatialDriftMeters": 0.00016221228337970627,
+          "maxHorizontalDriftMeters": 0.000021492451716242557,
+          "worst": {
+            "time": 0.32083333333333336,
+            "sole": [
+              -0.1080000137328527,
+              0.0038385614425158893,
+              1.3875157858736213
+            ],
+            "anchor": [
+              -0.1079999998152183,
+              0.004000003654727385,
+              1.3874999986382137
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.1833333333333331,
+          "end": 1.2833333333333332,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.00015523884398753842,
+          "maxHorizontalDriftMeters": 0.00002145993928605681,
+          "worst": {
+            "time": 1.2791666666666666,
+            "sole": [
+              0.10800291592578003,
+              0.0038462346533139208,
+              2.8874786155157186
+            ],
+            "anchor": [
+              0.10800000028065278,
+              0.003999983050666303,
+              2.8874998764660185
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.6499999999999995,
+          "end": 1.7167171293771015,
+          "samples": 34,
+          "maxSpatialDriftMeters": 0.00016221228320033838,
+          "maxHorizontalDriftMeters": 0.000019974541546198993,
+          "worst": {
+            "time": 1.6541666666666666,
+            "sole": [
+              -0.10800001373277211,
+              0.003838561441983926,
+              4.387515741162855
+            ],
+            "anchor": [
+              -0.10799999981521828,
+              0.004000003654727385,
+              4.38749995393473
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.9,
+          "end": 2,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.00002328998538110681,
+          "maxHorizontalDriftMeters": 0.000014278917843286688,
+          "worst": {
+            "time": 1.9041666666666666,
+            "sole": [
+              0.10800416943907762,
+              0.003978058702046622,
+              4.500006602961841
+            ],
+            "anchor": [
+              0.10800000029998993,
+              0.003999994377097207,
+              4.4999999796802985
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.975,
+          "end": 2,
+          "samples": 13,
+          "maxSpatialDriftMeters": 0.000014310709356369251,
+          "maxHorizontalDriftMeters": 0.000014310707626957856,
+          "worst": {
+            "time": 1.9916666666666667,
+            "sole": [
+              -0.10800000131193217,
+              0.004000009960469647,
+              4.499985717250578
+            ],
+            "anchor": [
+              -0.10800000020679879,
+              0.0040000029249736,
+              4.500000027958162
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0024834829564915365,
+      "maxHorizontalDriftMeters": 0.00039272775865551883,
+      "passed": true
+    },
+    {
+      "id": "idle_to_sprint",
+      "samples": 801,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.2070833333333333,
+          "end": 1.2404166666666665,
+          "samples": 18,
+          "maxSpatialDriftMeters": 0.0003265829177529341,
+          "maxHorizontalDriftMeters": 0.0002630794683858117,
+          "worst": {
+            "time": 1.2125,
+            "sole": [
+              0.10800366076427016,
+              0.0037020161095064896,
+              4.199984325024638
+            ],
+            "anchor": [
+              0.10800117410489946,
+              0.003915355616003258,
+              4.19973706711544
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.6570833333333335,
+          "end": 0.82375,
+          "samples": 82,
+          "maxSpatialDriftMeters": 0.0003514065990411427,
+          "maxHorizontalDriftMeters": 0.0003069480947234376,
+          "worst": {
+            "time": 0.8208333333333333,
+            "sole": [
+              -0.10801311219819483,
+              0.0037131736085186245,
+              2.2200241655649506
+            ],
+            "anchor": [
+              -0.1080011740886652,
+              0.003915356576019713,
+              2.219736996403927
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.2404166666666665,
+          "end": 1.3737499999999998,
+          "samples": 66,
+          "maxSpatialDriftMeters": 0.0001823349574576817,
+          "maxHorizontalDriftMeters": 0.00006700076917239355,
+          "worst": {
+            "time": 1.3708333333333333,
+            "sole": [
+              0.10801311219806813,
+              0.0037131735741329636,
+              4.200024208411954
+            ],
+            "anchor": [
+              0.10800339898725804,
+              0.0038890279981403514,
+              4.199977018245565
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.641662014821994,
+          "end": 1.65,
+          "samples": 6,
+          "maxSpatialDriftMeters": 0.007486266271172443,
+          "maxHorizontalDriftMeters": 0.0008873819705892392,
+          "worst": {
+            "time": 1.649999976158142,
+            "sole": [
+              -0.1079999999982558,
+              0.004000005618157401,
+              6.179999839558367
+            ],
+            "anchor": [
+              -0.107800388050385,
+              0.011433493085098292,
+              6.180864479270614
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.07974289804178376,
+          "samples": 40,
+          "maxSpatialDriftMeters": 0.000033429339109038526,
+          "maxHorizontalDriftMeters": 0.00003342933530278944,
+          "worst": {
+            "time": 0.008333333333333333,
+            "sole": [
+              0.10800000076922482,
+              0.004000009960843348,
+              0.00003342137129017504
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.15486965381184759,
+          "samples": 77,
+          "maxSpatialDriftMeters": 0.00006420476066676854,
+          "maxHorizontalDriftMeters": 0.00003341284638930388,
+          "worst": {
+            "time": 0.14583333333333334,
+            "sole": [
+              -0.10799849276734032,
+              0.00393619930391681,
+              -0.000007094131440355313
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.007486266271172443,
+      "maxHorizontalDriftMeters": 0.0008873819705892392,
+      "passed": true
+    },
+    {
+      "id": "sprint_to_idle",
+      "samples": 800,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.1449174941446928e-17,
+          "end": 0.008337985178005741,
+          "samples": 6,
+          "maxSpatialDriftMeters": 0.009127215226976872,
+          "maxHorizontalDriftMeters": 0.001392850915530086,
+          "worst": {
+            "time": 0.008333333333333333,
+            "sole": [
+              0.10787905395862342,
+              0.01302031753170052,
+              0.2413875999815757
+            ],
+            "anchor": [
+              0.1079999999982558,
+              0.004000005618157401,
+              0.24000001112407943
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.008337985178005741,
+          "end": 0.07829835612669643,
+          "samples": 35,
+          "maxSpatialDriftMeters": 0.009940894904221063,
+          "maxHorizontalDriftMeters": 0.0013928503130372903,
+          "worst": {
+            "time": 0.07083333333333333,
+            "sole": [
+              0.10804155112635538,
+              0.0031670123306819925,
+              0.24006803884916447
+            ],
+            "anchor": [
+              0.10787912453943146,
+              0.013018598423188033,
+              0.24138760717349259
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.9595833333333335,
+          "end": 0.9929166666666667,
+          "samples": 18,
+          "maxSpatialDriftMeters": 0.00015764790731421754,
+          "maxHorizontalDriftMeters": 0.000050195257353950274,
+          "worst": {
+            "time": 0.9625,
+            "sole": [
+              0.10800331016942386,
+              0.0036968251912368605,
+              4.1999635220316405
+            ],
+            "anchor": [
+              0.10800170250305718,
+              0.0038538777242632383,
+              4.199949928652392
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.4095833333333334,
+          "end": 0.5762499999999999,
+          "samples": 82,
+          "maxSpatialDriftMeters": 0.0003294940561114745,
+          "maxHorizontalDriftMeters": 0.00030788055189548435,
+          "worst": {
+            "time": 0.5762499999999999,
+            "sole": [
+              -0.10800618110448137,
+              0.003971250394725109,
+              2.220257840926221
+            ],
+            "anchor": [
+              -0.10800170248308846,
+              0.0038538796199243802,
+              2.2199499929504505
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0.9929166666666667,
+          "end": 1.1262499999999998,
+          "samples": 66,
+          "maxSpatialDriftMeters": 0.000289621646857328,
+          "maxHorizontalDriftMeters": 0.00027910659115795716,
+          "worst": {
+            "time": 1.1262499999999998,
+            "sole": [
+              0.10800618105587677,
+              0.00397125042590174,
+              4.200257881372526
+            ],
+            "anchor": [
+              0.10800373337232586,
+              0.003893918614203476,
+              4.19997878551431
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.55,
+          "end": 1.6500000000000001,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.00004778299918046876,
+          "maxHorizontalDriftMeters": 0.000033418188671113235,
+          "worst": {
+            "time": 1.5541666666666667,
+            "sole": [
+              0.10800019635745137,
+              0.003957791655447851,
+              5.9400223377815
+            ],
+            "anchor": [
+              0.10800000030224051,
+              0.004000003635297525,
+              5.9399999474860525
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.6250000000000002,
+          "end": 1.6500000000000001,
+          "samples": 13,
+          "maxSpatialDriftMeters": 0.000033465163580098705,
+          "maxHorizontalDriftMeters": 0.000033465146970423176,
+          "worst": {
+            "time": 1.6416666507720947,
+            "sole": [
+              -0.10800000131194819,
+              0.00400000996068714,
+              5.939966545785509
+            ],
+            "anchor": [
+              -0.10799999978009195,
+              0.003999976618660486,
+              5.940000010932445
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.009940894904221063,
+      "maxHorizontalDriftMeters": 0.001392850915530086,
+      "passed": true
+    },
+    {
+      "id": "idle_to_referee_run",
+      "samples": 964,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.35,
+          "end": 1.4833333333333334,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.0001821949384465862,
+          "maxHorizontalDriftMeters": 0.000023680326181421466,
+          "worst": {
+            "time": 1.3541666666666667,
+            "sole": [
+              0.10800066878471042,
+              0.003818193132247863,
+              3.333345299125013
+            ],
+            "anchor": [
+              0.1079999999170423,
+              0.003999995518650379,
+              3.333333364280651
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.6833333333333333,
+          "end": 0.95,
+          "samples": 129,
+          "maxSpatialDriftMeters": 0.00018219439931753666,
+          "maxHorizontalDriftMeters": 0.000023535421534917267,
+          "worst": {
+            "time": 0.6875,
+            "sole": [
+              -0.10800066878462014,
+              0.0038181931319232337,
+              1.6666785827790154
+            ],
+            "anchor": [
+              -0.10799999991384908,
+              0.003999995130015588,
+              1.6666666502501888
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.4833333333333334,
+          "end": 1.6166666666666667,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.00017450524155947507,
+          "maxHorizontalDriftMeters": 0.000020563294520434824,
+          "worst": {
+            "time": 1.6125,
+            "sole": [
+              0.10800492829415301,
+              0.0038265160264734505,
+              3.333314880936983
+            ],
+            "anchor": [
+              0.10800000041464247,
+              0.003999968130719747,
+              3.3333333785819086
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.93176932705655,
+          "end": 2,
+          "samples": 34,
+          "maxSpatialDriftMeters": 0.0027075496288998494,
+          "maxHorizontalDriftMeters": 0.00041384511370926865,
+          "worst": {
+            "time": 1.9916666666666667,
+            "sole": [
+              -0.10781770846689945,
+              0.00670341086060762,
+              4.9998212111029625
+            ],
+            "anchor": [
+              -0.10800077984225435,
+              0.004011632048209382,
+              4.99959397402499
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 0,
+          "end": 0.1027901107429869,
+          "samples": 51,
+          "maxSpatialDriftMeters": 0.00004234581632509333,
+          "maxHorizontalDriftMeters": 0.00001584359904241783,
+          "worst": {
+            "time": 0.1027901107429869,
+            "sole": [
+              0.10800020092916114,
+              0.0040422300111373766,
+              -0.000003049025215491857
+            ],
+            "anchor": [
+              0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0,
+          "end": 0.2009970228166877,
+          "samples": 99,
+          "maxSpatialDriftMeters": 0.00004224725020514079,
+          "maxHorizontalDriftMeters": 0.00001582711013150224,
+          "worst": {
+            "time": 0.2009970228166877,
+            "sole": [
+              -0.10799872264253325,
+              0.004042168421524994,
+              0.000002117159973960272
+            ],
+            "anchor": [
+              -0.1080000004823748,
+              0.00399999400838999,
+              -7.964011383703787e-9
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0027075496288998494,
+      "maxHorizontalDriftMeters": 0.00041384511370926865,
+      "passed": true
+    },
+    {
+      "id": "referee_run_to_idle",
+      "samples": 964,
+      "supports": [
+        {
+          "bone": "LeftFoot",
+          "start": 1.3877787807814457e-17,
+          "end": 0.06823067294344988,
+          "samples": 34,
+          "maxSpatialDriftMeters": 0.0028143840610924315,
+          "maxHorizontalDriftMeters": 0.0004035492751490309,
+          "worst": {
+            "time": 0.016666666666666666,
+            "sole": [
+              0.10781619247741371,
+              0.0067975860679425765,
+              0.00024558604969058704
+            ],
+            "anchor": [
+              0.108000000372332,
+              0.003999968776174825,
+              5.533568261398573e-9
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.0499999999999998,
+          "end": 1.1833333333333331,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.0001821942908518093,
+          "maxHorizontalDriftMeters": 0.000023388722532707774,
+          "worst": {
+            "time": 1.0541666666666667,
+            "sole": [
+              0.10800066878438529,
+              0.0038181931311177114,
+              3.333345120279417
+            ],
+            "anchor": [
+              0.10799999991321046,
+              0.0039999950522895955,
+              3.333333188234808
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 0.3833333333333333,
+          "end": 0.6499999999999999,
+          "samples": 129,
+          "maxSpatialDriftMeters": 0.00018219673510163186,
+          "maxHorizontalDriftMeters": 0.000023535879422312893,
+          "worst": {
+            "time": 0.3875,
+            "sole": [
+              -0.10800066878463369,
+              0.0038181931319714174,
+              1.6666785902308887
+            ],
+            "anchor": [
+              -0.10799999991321044,
+              0.0039999950522895955,
+              1.6666666209092147
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.1833333333333331,
+          "end": 1.3166666666666664,
+          "samples": 65,
+          "maxSpatialDriftMeters": 0.00017449015441071538,
+          "maxHorizontalDriftMeters": 0.00002085019994594063,
+          "worst": {
+            "time": 1.3125,
+            "sole": [
+              0.10800492829419038,
+              0.003826516026785229,
+              3.3333148511300017
+            ],
+            "anchor": [
+              0.108000000372332,
+              0.00399996877617477,
+              3.333333199789398
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.7167171293771015,
+          "end": 1.730293289754226,
+          "samples": 8,
+          "maxSpatialDriftMeters": 0.0001732357643441385,
+          "maxHorizontalDriftMeters": 0.000011464578100589947,
+          "worst": {
+            "time": 1.7208333333333334,
+            "sole": [
+              -0.10800064324377717,
+              0.0038229071201497655,
+              5.00001182963169
+            ],
+            "anchor": [
+              -0.10800001604170882,
+              0.003995763110780329,
+              5.000000382222875
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "LeftFoot",
+          "start": 1.9,
+          "end": 2,
+          "samples": 49,
+          "maxSpatialDriftMeters": 0.00002676336678315136,
+          "maxHorizontalDriftMeters": 0.00001586378004215228,
+          "worst": {
+            "time": 1.9041666666666666,
+            "sole": [
+              0.10800350731699146,
+              0.0039747916108903575,
+              5.000008232770572
+            ],
+            "anchor": [
+              0.10800000028514686,
+              0.00400000787389046,
+              4.9999999793706955
+            ]
+          },
+          "passed": true
+        },
+        {
+          "bone": "RightFoot",
+          "start": 1.975,
+          "end": 2,
+          "samples": 13,
+          "maxSpatialDriftMeters": 0.000015877070356328237,
+          "maxHorizontalDriftMeters": 0.000015877064262817046,
+          "worst": {
+            "time": 1.9916666666666667,
+            "sole": [
+              -0.10800000131193621,
+              0.0040000099604048656,
+              4.999984132078757
+            ],
+            "anchor": [
+              -0.1079999999327935,
+              0.004000023870623218,
+              5.00000000914296
+            ]
+          },
+          "passed": true
+        }
+      ],
+      "maxSpatialDriftMeters": 0.0028143840610924315,
+      "maxHorizontalDriftMeters": 0.0004035492751490309,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

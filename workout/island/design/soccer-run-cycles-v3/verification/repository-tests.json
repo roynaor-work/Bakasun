@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "runs": [
+    {
+      "command": "npm test",
+      "counts": {
+        "tests": 4326,
+        "pass": 4261,
+        "fail": 1,
+        "skipped": 64,
+        "cancelled": 0
+      },
+      "logSha256": "fe1c7d51904ca3cf38bd5ccffd7547544af294630e88dcdeb7952d4b08aa5d87"
+    },
+    {
+      "command": "ISLAND_PLAYWRIGHT=/tmp/soccer-v3-playwright.mjs node --test tests/workout-royiki.test.mjs",
+      "counts": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "logSha256": "757f1c28ccb478fb57b5d5eb1447d9402a128053fd7fe03c77c83a274e7395f7"
+    }
+  ],
+  "environmentIssue": "Full suite reached 4261 passes,64 skips and one failure: Playwright default browser path absent. Its test worker left a local HTTP server open after browser launch failed; only that worker was terminated after diagnosis. No existing file was changed.",
+  "resolution": "Reran the complete affected five-test file with existing /usr/bin/chromium via external /tmp Playwright adapter; all five passed, including the previously failing browser flow.",
+  "finalPassed": true,
+  "description": "בסבב המאגר עברו 4,261 בדיקות ו־64 דולגו. בדיקת דפדפן אחת נכשלה בגלל נתיב Chromium חסר בסביבה; כל חמש בדיקות הקובץ שלה, כולל אותה בדיקה, עברו בהרצה חוזרת עם Chromium המותקן. לא נותר כשל לא פתור."
+}

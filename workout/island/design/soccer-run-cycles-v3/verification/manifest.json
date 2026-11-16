@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "sha256",
+  "scope": "All delivered files except this manifest itself",
+  "files": [
+    {
+      "path": "catalog.json",
+      "bytes": 650934,
+      "sha256": "81ec1153a70c21e4998a5de28ff2bf4341c26f52f23a317bb5e3281465be6145"
+    },
+    {
+      "path": "clips/idle_relaxed.glb",
+      "bytes": 914984,
+      "sha256": "1e4151595e43f38762eddcc17c9630441ba8aad10f4b7b2a7159b5ab74e5be86"
+    },
+    {
+      "path": "clips/idle_to_jog.glb",
+      "bytes": 851144,
+      "sha256": "85411229ec0ca242d42a37d672581680d184ff2e270223159f6b0f85b76cde77"
+    },
+    {
+      "path": "clips/idle_to_referee_run.glb",
+      "bytes": 842036,
+      "sha256": "9d9a4a74004ef8eeb303e41476c3c0b2e2626898fc20806091fbc9c1f9232b40"
+    },
+    {
+      "path": "clips/idle_to_run.glb",
+      "bytes": 842020,
+      "sha256": "b6fa36066077e3f7032be7e04f95ee9ca5afecb7e08531fcf652388cce49031a"
+    },
+    {
+      "path": "clips/idle_to_sprint.glb",
+      "bytes": 829264,
+      "sha256": "cbe470e8b987e15d435884a9b72addda37722cf9ef3bf3678dccf0af52c89326"
+    },
+    {
+      "path": "clips/jog_to_idle.glb",
+      "bytes": 851144,
+      "sha256": "d86933172fd0b1af7412135160ca9c6a318beef671b9f207ddbd401870dfa3ca"
+    },
+    {
+      "path": "clips/jog.glb",
+      "bytes": 796388,
+      "sha256": "75864543305109937f40710536b02e8ae277d6086abcb7b35c85c2d4f75aa6c7"
+    },
+    {
+      "path": "clips/keeper_catch_chest.glb",
+      "bytes": 856632,
+      "sha256": "6b4c28931134412bede0a08c0088921dad3fbcf52cdd889acdf6e8c4d22d5925"
+    },
+    {
+      "path": "clips/keeper_catch_head.glb",
+      "bytes": 856628,
+      "sha256": "78259eb7eeace590d0ecbb622e6678b070651207234641f75b337aae90f530c2"
+    },
+    {
+      "path": "clips/keeper_ready_side_steps.glb",
+      "bytes": 885824,
+      "sha256": "5820475849c73e132c78d1c07f7398dc551bb3654cd9179305e74003a1e3b419"
+    },
+    {
+      "path": "clips/referee_idle.glb",
+      "bytes": 914984,
+      "sha256": "75271cd100f519eab8cf955056f31cbd4f2b0d2401373857562ab01f1ab154d8"
+    },
+    {
+      "path": "clips/referee_run_to_idle.glb",
+      "bytes": 842036,
+      "sha256": "168e7c93f5b258afbe3174ed2955b6cd0aed746d77bd638a957668057ad53717"
+    },
+    {
+      "path": "clips/referee_run.glb",
+      "bytes": 793376,
+      "sha256": "3e46685a9695be8d261a55c9c884bbbf4da32f181ad8406fc237006a2ac4311b"
+    },
+    {
+      "path": "clips/run_to_idle.glb",
+      "bytes": 842020,
+      "sha256": "557b21d4f937901139a5a6b638ad579f47186c8c1fe813b259a59ed0f03e871b"
+    },
+    {
+      "path": "clips/run.glb",
+      "bytes": 793360,
+      "sha256": "78d81e40ca2b52e4c6183aafc7a79ff08a6655f114db1d52a344221dd2df72f1"
+    },
+    {
+      "path": "clips/sprint_to_idle.glb",
+      "bytes": 829264,
+      "sha256": "a24d992f59dc33b2669a36cd7c72be0555f169ff481146b8e33aa39b9ff0175c"
+    },
+    {
+      "path": "clips/sprint.glb",
+      "bytes": 789096,
+      "sha256": "21f6e6bc0af28a87bac03ff147234665144c1b3de8af5a3081f7a7db70cfa1dc"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 3116,
+      "sha256": "98ffea2dee772dc2cae170395529c98dda324da949aaeee9c3bef3f2c06d38c0"
+    },
+    {
+      "path": "measure.mjs",
+      "bytes": 15364,
+      "sha256": "b5cc0ffabe56c41a9358a4676e7ded56128ea8269a61c4e41a6f1735e439ba0b"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 7603,
+      "sha256": "09c9a66b8b8b615f3dcf6b541076c5c0fb50197cd9559a0845ad6492e7c0ee65"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3336,
+      "sha256": "fb454af3714f95f22485123a926d9b74a29f9667f3f9b550d83ee740d32cde07"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 15924,
+      "sha256": "c37ef9def01a221561d4998277024247ba4703ad8160e9596f7de6f2c108df87"
+    },
+    {
+      "path": "qa-register.mjs",
+      "bytes": 734,
+      "sha256": "2661119052806915f05f800140a4fde2ede7fa187b055df6e8001e2d9a43bf94"
+    },
+    {
+      "path": "qa-sources.mjs",
+      "bytes": 5988,
+      "sha256": "f09cae5ec8a22c29a9a8a8d27825bfd666815787d0d85452eec0533ac37fd441"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3282,
+      "sha256": "80ed7261ef0110d23897a0294b856056db35af35ea19fc127b71ba178d91042e"
+    },
+    {
+      "path": "reference/mesh-template.glb",
+      "bytes": 791120,
+      "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 7772,
+      "sha256": "ff6a04a311ad8ce2c12e954a55d13c572ddb8f9ae6abe3166aae371590fc65ac"
+    },
+    {
+      "path": "runtime/motions.json",
+      "bytes": 6100251,
+      "sha256": "f010d7a0a8e1cba711f587c5d5e989af6140624b015db2eec19d2fbe89e5885e"
+    },
+    {
+      "path": "runtime/player.mjs",
+      "bytes": 8257,
+      "sha256": "46574043c9db9b55b0ac1a337246fb86b1ac0d0ada342441a97e2063c937836e"
+    },
+    {
+      "path": "sheets/idle_relaxed.png",
+      "bytes": 371761,
+      "sha256": "3d0159c48123a6abfecc01894a2db9df7b1abaf7e5337263a33e710094c4fbbb"
+    },
+    {
+      "path": "sheets/idle_to_jog.png",
+      "bytes": 400828,
+      "sha256": "f234b959e1aed4b0ef0b356e37850d32ab2cb7386c87f569b3db3b5b2260553a"
+    },
+    {
+      "path": "sheets/idle_to_referee_run.png",
+      "bytes": 402111,
+      "sha256": "c4f09a6f9ba6fa5f8d5acf5d1f57ec59d7d24bcdd9b5e7a11119dddc11ba6b14"
+    },
+    {
+      "path": "sheets/idle_to_run.png",
+      "bytes": 398189,
+      "sha256": "82ae2498baeb77aa8be6623e6fd08c4fb9632ae99c57e71aad8c0ea841ec195c"
+    },
+    {
+      "path": "sheets/idle_to_sprint.png",
+      "bytes": 403351,
+      "sha256": "e899491021ca3866e250f30deceb8a4192b7bf5e68b381e094b476d6d9db7e3b"
+    },
+    {
+      "path": "sheets/jog_to_idle.png",
+      "bytes": 403212,
+      "sha256": "8a71fabec3448113852e501a7fd71520e589bb8ba3fd1894dc9af4cc1ecb4ce3"
+    },
+    {
+      "path": "sheets/jog.png",
+      "bytes": 398810,
+      "sha256": "ad710539e665331576fd310287329c425c57e1f44b19cea43979c3f77d25016e"
+    },
+    {
+      "path": "sheets/keeper_catch_chest.png",
+      "bytes": 269733,
+      "sha256": "7c15bd5937477872351ac5f8bbf61366610f5bb5ee9a7f1db9b7cc9107b9c0ab"
+    },
+    {
+      "path": "sheets/keeper_catch_head.png",
+      "bytes": 279798,
+      "sha256": "a92b49cb6cb86f99711c0664df1b39807c451a8ef8f485946ca39dea75eebb89"
+    },
+    {
+      "path": "sheets/keeper_ready_side_steps.png",
+      "bytes": 391587,
+      "sha256": "4a847553c162a5564abea5a48b6c319396d0e0fd20997853c590a3b9c94d1576"
+    },
+    {
+      "path": "sheets/referee_idle.png",
+      "bytes": 371614,
+      "sha256": "981a00c687700ab100a79ce9d1749a9e91049ab21ef199963b3cf6fab77fe527"
+    },
+    {
+      "path": "sheets/referee_run_to_idle.png",
+      "bytes": 405027,
+      "sha256": "66a56f17c2dcc27c10369f16bee1bd425192056fb55a5bd2d870f7a23aa54a32"
+    },
+    {
+      "path": "sheets/referee_run.png",
+      "bytes": 400635,
+      "sha256": "27984fc3c7b61e04c0a5dd18be9bed8fe9848668fa6f7e36714e009b6d62135c"
+    },
+    {
+      "path": "sheets/run_to_idle.png",
+      "bytes": 402874,
+      "sha256": "eb87c0bf07c033c1096d495f9c5f213c21a5f2b9740e1c84405518d785cf2f36"
+    },
+    {
+      "path": "sheets/run.png",
+      "bytes": 394452,
+      "sha256": "5d407e16cb876cfe569178d2524891aa0e031ced9b3ac5c0546736cb3c011c20"
+    },
+    {
+      "path": "sheets/sprint_to_idle.png",
+      "bytes": 404491,
+      "sha256": "fd0cf2d67e3ba6eda0bf72edb23b8284a26b9f9d05976cd4e287b0f4ce307930"
+    },
+    {
+      "path": "sheets/sprint.png",
+      "bytes": 397617,
+      "sha256": "10ba13730e7058491bc75f0bfe5a1f49d9c8adc2aa0e6c3f0c225bdaab935411"
+    },
+    {
+      "path": "source/audit-glb.mjs",
+      "bytes": 10696,
+      "sha256": "b57aa6be14945429fc7caa674b1cd1beb39ff83c066c576a52ca473181a21446"
+    },
+    {
+      "path": "source/bridges.mjs",
+      "bytes": 7828,
+      "sha256": "feecf78368a8f65127de2cebcdfefb423fb20694e16fd420b412f70cfb106ad7"
+    },
+    {
+      "path": "source/build.mjs",
+      "bytes": 4818,
+      "sha256": "93649f0f708c86ef19e7eca94f06a2c680de6298b07306021c009bffa6315365"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 10472,
+      "sha256": "8b60cd76b296438b125f5e0170552c2bbe2cb01e19ef9d131dce8cf122489574"
+    },
+    {
+      "path": "source/check-transitions.mjs",
+      "bytes": 6455,
+      "sha256": "f280797a24147e8f9c76c869f7b715d7e3ca7dfbeb0860ab4536ebe014099315"
+    },
+    {
+      "path": "source/dense-support.mjs",
+      "bytes": 4097,
+      "sha256": "f5c7c901619fa8fd6ad735047aa10c030cb43e557d08c86980ece3b5d64cd43f"
+    },
+    {
+      "path": "source/finalize.mjs",
+      "bytes": 11991,
+      "sha256": "4ef0092d26b70a561c4e9b3d42ac3a0518ffad9a3f47ce04d69adaaeae71e619"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "source/keeper.mjs",
+      "bytes": 7062,
+      "sha256": "4db5dd418f5640cad655d96892ae7f1692f5a5d1c17ebeba8bc26304c5d381ed"
+    },
+    {
+      "path": "source/locomotion.mjs",
+      "bytes": 7154,
+      "sha256": "bb2c8182de06ab499e0deee392e13fe6c5ac19a87035d2e07cce8df07a1c2596"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 13062,
+      "sha256": "0ba9b91893e4abb0b6295a9af8aa40f91f8c9b8035f5dbdb3fc4ec60f6d13d39"
+    },
+    {
+      "path": "verification/dense-support.json",
+      "bytes": 59619,
+      "sha256": "984459bf929ac1ba420bf10b3786749259ce096234facf023b439fbefc5365cc"
+    },
+    {
+      "path": "verification/gltf.json",
+      "bytes": 37082,
+      "sha256": "9237a62e714e99da7235006c9fd7ec7cee4022a8f88b2bb0a3d1995c9dc751fe"
+    },
+    {
+      "path": "verification/input-manifest.json",
+      "bytes": 3063,
+      "sha256": "cc3eb34d1d909aed5f978be5595e52b43cc0b2d292c029b630323e4e34ed6578"
+    },
+    {
+      "path": "verification/mesh-floor.json",
+      "bytes": 45001,
+      "sha256": "c3c182bbc32e7f53c1772c36f1aa919c74cedbd5592ad1fe110e4313f89fdecb"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 66167,
+      "sha256": "686280b5f2d78da20ca61973c4997bf700c0c46fbcca919be9b8afc19b4ecaef"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 45451,
+      "sha256": "dcdf171644dfcd1c813aca636a6a6b80d8ec91c74787b044bfb8b357ff3f3eb1"
+    },
+    {
+      "path": "verification/preview.html",
+      "bytes": 2918,
+      "sha256": "fbed5fbb1350f7cff84c8f4431c24db888f9938d8836d17fac4b746092411d55"
+    },
+    {
+      "path": "verification/preview.mjs",
+      "bytes": 11510,
+      "sha256": "f1df8674c610b0f45f01c332f6d763902ea44d3681f71c2a873ca545851c1bca"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_relaxed.html",
+      "bytes": 12379,
+      "sha256": "0f19d76900967504724799f6574952933d416078158765b529e2cd5ac479a8d8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_relaxed.json",
+      "bytes": 10164,
+      "sha256": "f269d799b50f036172a1e3589568b564bbc727cfe14916c3fd89526c9185e81f"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_jog.html",
+      "bytes": 14151,
+      "sha256": "f420b9ea65a1e1e5a2b3a506df63a34f5320874020a271b39877ff454513d21a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_jog.json",
+      "bytes": 33406,
+      "sha256": "71a4a6b396289467a74c8bcdfe0a091349edf11ae7770b06b03d56c40e07a0e0"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_referee_run.html",
+      "bytes": 13639,
+      "sha256": "aabe0783283649abfff5dcf98c0815052d58f13254ef03407cf5263e93263bcd"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_referee_run.json",
+      "bytes": 30669,
+      "sha256": "9beadb2b58fe7af3727af1ed1b927ca277ab2a334cc6216b653a9d5bbb7b8f65"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_run.html",
+      "bytes": 13847,
+      "sha256": "64d9c0066544650deabf3f80aa7766e72d78af7757107b1a864b03e1bac5eb36"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_run.json",
+      "bytes": 30310,
+      "sha256": "b412bfc4d8a9b81721c12b92b7611fe415a236c217aaa67ae9d299a141fd5b28"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_sprint.html",
+      "bytes": 13902,
+      "sha256": "56c3c23e8bd15b57ef8f1f10ecafad11780a162bf786d6ec97e17f1bb67cc52a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--idle_to_sprint.json",
+      "bytes": 27335,
+      "sha256": "495390915ada04ba11511b8c7913a1c9385de65ba9337fb31e8431643bbb6733"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--jog_to_idle.html",
+      "bytes": 13745,
+      "sha256": "5902d8c475f7cf5bb77299d372a00fb5749f512ac8d040a54d2d87a57be9888a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--jog_to_idle.json",
+      "bytes": 32679,
+      "sha256": "67457d642376cd2a128fbb14f1bab133e3bb3bc274619c042b52a8a13f98ca12"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--jog.html",
+      "bytes": 13663,
+      "sha256": "f28fd8c0fbd35fd12377215192483d4cc08eb0280a1e0bac636e07529c45d708"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--jog.json",
+      "bytes": 18952,
+      "sha256": "e4ab15683636459e32b0ecfa9341d0968609cd59417a868d184a3b283259f516"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_catch_chest.html",
+      "bytes": 21966,
+      "sha256": "e162a1e76e6c92f23ebd0f5fcb167f185faf2a1e65af1f3e16a50ef81f496a76"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_catch_chest.json",
+      "bytes": 15343,
+      "sha256": "21b5b982b83be8393a19e9d6f2394f211079e58194871c4428f924e0c788aa40"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_catch_head.html",
+      "bytes": 21960,
+      "sha256": "65ab69a7136df713d0a1fc4fb9baa8fd6dac76c9989aba582b6db1114a5e4d8f"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_catch_head.json",
+      "bytes": 15323,
+      "sha256": "93b5b50c15a96626addb705502cb167008ab148896a1d057f333560362052ea3"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_ready_side_steps.html",
+      "bytes": 12434,
+      "sha256": "5fe2954cc16125a1e48c13be39b2a41785bb0dce3dc8132655e341db9a8d35f9"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--keeper_ready_side_steps.json",
+      "bytes": 39157,
+      "sha256": "fa286e42bf1f2e6114744e1cd02eba9f425ca93c2fc3c73da2a539c98309dce8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_idle.html",
+      "bytes": 12365,
+      "sha256": "a5104f0a4f9d13f142115757b742ae15e0580daf99192a90d13c4de12763159c"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_idle.json",
+      "bytes": 10145,
+      "sha256": "801bd3b9bfda660944febcd4d106d76028676c19823b2114a2c9d0f7f81f5aac"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_run_to_idle.html",
+      "bytes": 13357,
+      "sha256": "0d83cc309b01e559d8efc057568b839e21ba56a315e157d0daae0825ba59a926"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_run_to_idle.json",
+      "bytes": 30404,
+      "sha256": "10cc1a08dc224593fcc5d6b2c8c8d5c6774e29d3bcc4ea3099019cdab5e4b425"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_run.html",
+      "bytes": 13844,
+      "sha256": "545b5fa8d0f6d692ada469fc45d4663a7b0072ceeb71a39d31ec64132cb72a48"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--referee_run.json",
+      "bytes": 18806,
+      "sha256": "7d8743d302c604e961b848312a5609e9b3500ecf862cc70bc76c157baafaccf8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--run_to_idle.html",
+      "bytes": 13577,
+      "sha256": "45feff2aa1b390b513de8d275430fd1890df37258d930bb0928b5607d33e40eb"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--run_to_idle.json",
+      "bytes": 30095,
+      "sha256": "fcc9d4836b58a9a2a1f3f297c27ef2f27c7ee5fbb72a710525d97e4a1f00369a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--run.html",
+      "bytes": 13546,
+      "sha256": "688b283d0c932b4d31578fa0137cf56edb4740bba69b7c388e5bf25adba5521c"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--run.json",
+      "bytes": 17988,
+      "sha256": "f3dc0e55d8b90ce616b8b1ffbb63ca2a87b81cee89e63c3dd3dcf2c4552c90fb"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--sprint_to_idle.html",
+      "bytes": 13639,
+      "sha256": "c0ca40ecdcdddb964240c01bc264aa92142bc254c4e9dd65118b3935c931f7dd"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--sprint_to_idle.json",
+      "bytes": 27186,
+      "sha256": "d4f843f0c2f08f4ef0aa04bfa66b8e647cd880632946e7605731780728e4e7a2"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--sprint.html",
+      "bytes": 13575,
+      "sha256": "2ef826e4ab736da2aba86cdf6775dea760547bb02dfe105a9fcfdf2779e69c63"
+    },
+    {
+      "path": "verification/qa/clips/soccer-run-cycles-v3--sprint.json",
+      "bytes": 17105,
+      "sha256": "38dc61d853ab0a335f6bbfbecd98edd868d5b64f9b8a27eb8e97bdbdcb75030a"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "bytes": 41322,
+      "sha256": "ab25a2f6333282acdb171e3a95cafb5d7521dbf176bc477fd53cd8caa95557e3"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "bytes": 886573,
+      "sha256": "c3a373bce0acc42695da020519e2bd749ce14232c8d19a7fd4f6fcf6824aa263"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--idle_relaxed.svg",
+      "bytes": 26225,
+      "sha256": "b2be76ccd1f0b06f39849af29b9b5ccf009edb32bed2047f382d7dbcbe73c73c"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--idle_to_jog.svg",
+      "bytes": 26235,
+      "sha256": "036b0de09e858b93cdf96656101e2ff5f78dd0f69b266675eb6814fd9c8a360b"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--idle_to_referee_run.svg",
+      "bytes": 26253,
+      "sha256": "3cb323710bc24e529fee25230b3524d79c66bbadd48161cf8b0fba798341531d"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--idle_to_run.svg",
+      "bytes": 26235,
+      "sha256": "d42215ed6da0bae06659b2907ac62ea24e5ac4405270ce26180b84c8b8092f56"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--idle_to_sprint.svg",
+      "bytes": 26241,
+      "sha256": "f204d93d132df2536ae8f01a77dcebd6342f41e9b316f4700e4bfc393446eb42"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--jog_to_idle.svg",
+      "bytes": 26237,
+      "sha256": "b617e78d04f2745a08e38c44e0edbd22dba47ebf11f97c609f19fdd0d57ef0c9"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--jog.svg",
+      "bytes": 26223,
+      "sha256": "b2f86b0efa64e67da14038f4993806dc5ee798151217c4fd150c98ddf04e1b7b"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--keeper_catch_chest.svg",
+      "bytes": 26989,
+      "sha256": "c85e8e5a21590d4866d5146d136503b891244f669efcec08bc032be46264fbc5"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--keeper_catch_head.svg",
+      "bytes": 26977,
+      "sha256": "40842caccc95411f38c80ea99ddaee99a0f69d1fef2047cfcb5beb03426f7f56"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--keeper_ready_side_steps.svg",
+      "bytes": 26263,
+      "sha256": "b219a6c0dc1af918a13919094c9ba1a8b8e1972905a040b6605d26639fa5b128"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--referee_idle.svg",
+      "bytes": 26225,
+      "sha256": "23ce5fa1fc5e536d321ee621ea056fd44534547ce38cc6aa88d5283e6e506c6a"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--referee_run_to_idle.svg",
+      "bytes": 26253,
+      "sha256": "1c2835b6d5d3f5a034bbea7c298334130353fbe4b46181c447f9104b03fe0b8e"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--referee_run.svg",
+      "bytes": 26239,
+      "sha256": "067239a808690c21c6bc8e0c08268c357be0ed7b23de50ee70a50195a86832b6"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--run_to_idle.svg",
+      "bytes": 26237,
+      "sha256": "edf25d92336b5689cd7c1943a73360ad93fc5d32e9ffbba27c1f7abafdf2c26b"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--run.svg",
+      "bytes": 26223,
+      "sha256": "afbc69917b379092237ef72c748b1482fc6cf003597a9b920a1cf635a7164d2b"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--sprint_to_idle.svg",
+      "bytes": 26243,
+      "sha256": "ef67adbf8a7e88f73929d46982951bb9c54ee7dceaca1178498ecd7c50b6f421"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-run-cycles-v3--sprint.svg",
+      "bytes": 26229,
+      "sha256": "0a7e9e59a1ca277d508a24f467dbefa8fa8dcfa45a1616f54b461356be378f12"
+    },
+    {
+      "path": "verification/qa-presentation.json",
+      "bytes": 666,
+      "sha256": "ab010ecdcd64a722689513fe4182ade16c449990d85b2210c0d9dfa26e045a8b"
+    },
+    {
+      "path": "verification/qa-provenance.json",
+      "bytes": 3431,
+      "sha256": "028ab9d5cfef483de772e05cab5f982d19e18eb4d0da48843b027ec5bee1a2e0"
+    },
+    {
+      "path": "verification/qa-unit-tests.json",
+      "bytes": 760,
+      "sha256": "a913034e022b09c371468e1089b4d504dbd93f92f6bcdc199a4b33aa19b39968"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1544,
+      "sha256": "dd3c53c3c7781bff4591473003e3bcc4a9ee87689c1a4fde57e28c32bf29d13f"
+    },
+    {
+      "path": "verification/requirements.json",
+      "bytes": 185933,
+      "sha256": "a010cdc213a9ab55b74f5242135daa15c8a3212279e3fa6bb2561099e45a439b"
+    },
+    {
+      "path": "verification/scope.json",
+      "bytes": 381,
+      "sha256": "06ebfab1b7466935904dbdded75cf3bb789a4857f6958dc132b58ff6c77071c1"
+    },
+    {
+      "path": "verification/sheets.mjs",
+      "bytes": 5947,
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7"
+    },
+    {
+      "path": "verification/style.css",
+      "bytes": 5999,
+      "sha256": "1bdb33ee599ca2bee64457b0f684760f51eb353b5702806d2ce612a328187243"
+    },
+    {
+      "path": "verification/transitions.json",
+      "bytes": 13855,
+      "sha256": "056a045a1852bcac14afd37ede19d062c15eaab7369ac5f9b53e868fd7326625"
+    }
+  ]
+}

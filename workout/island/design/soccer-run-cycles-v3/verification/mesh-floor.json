@@ -1,0 +1,1479 @@
+{
+  "generatedAt": "2026-11-16T19:58:58.822Z",
+  "method": "All POSITION vertices, native animation accessor sampling, quaternion slerp, joint world matrices times inverse bind matrices, normalized linear-blend weights. No viewer floor correction or IK. Each unique primitive vertex included; native times plus dense uniform sampling.",
+  "samplingRateHz": 120,
+  "floorY": 0,
+  "meshFloorThresholdMeters": -0.001,
+  "soleProbeLocalMeters": [
+    0,
+    -0.08,
+    0
+  ],
+  "pass": true,
+  "maximumMeshPenetrationMeters": 0,
+  "note": "Canonical sole-point grounding and rendered mesh grounding are separate tests. The bind-pose baseline reveals inherited geometry below the canonical sole. Per-clip worst records identify any actual deformed-mesh penetration; no correction is applied by this audit.",
+  "clips": [
+    {
+      "id": "idle_relaxed",
+      "asset": "clips/idle_relaxed.glb",
+      "sha256": "1e4151595e43f38762eddcc17c9630441ba8aad10f4b7b2a7159b5ab74e5be86",
+      "durationSeconds": 4,
+      "samplingRateHz": 120,
+      "samples": 929,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009072848979796839,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003960730994710365,
+      "minimumFootDominantVertexY": 0.009072848979796839,
+      "minimumOtherVertexY": 0.16413701649734688,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 2.8583333333333334,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 304,
+        "positionY": 0.009072848979796839,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.33731174630369737,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 2.8583333333333334,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009072848979796839,
+          "worstVertex": 304
+        },
+        {
+          "timeSeconds": 3.966666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.5524954107954054,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.06666666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.4738692998034506,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 3.966666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.5588109127817655,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "referee_idle",
+      "asset": "clips/referee_idle.glb",
+      "sha256": "75271cd100f519eab8cf955056f31cbd4f2b0d2401373857562ab01f1ab154d8",
+      "durationSeconds": 4,
+      "samplingRateHz": 120,
+      "samples": 929,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009072848979796839,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003960730994710365,
+      "minimumFootDominantVertexY": 0.009072848979796839,
+      "minimumOtherVertexY": 0.16413701649734688,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 2.8583333333333334,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 304,
+        "positionY": 0.009072848979796839,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.33731174630369737,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 2.8583333333333334,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009072848979796839,
+          "worstVertex": 304
+        },
+        {
+          "timeSeconds": 3.966666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.5524954107954054,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.06666666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.4738692998034506,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 3.966666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.5588109127817655,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "jog",
+      "asset": "clips/jog.glb",
+      "sha256": "75864543305109937f40710536b02e8ae277d6086abcb7b35c85c2d4f75aa6c7",
+      "durationSeconds": 0.75,
+      "samplingRateHz": 120,
+      "samples": 175,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.00912797131116662,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999959904993244,
+      "minimumFootDominantVertexY": 0.00912797131116662,
+      "minimumOtherVertexY": 0.1258997101200945,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.03333333333333333,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 320,
+        "positionY": 0.00912797131116662,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.08333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.25565037578221916,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.03333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.00912797131116662,
+          "worstVertex": 320
+        },
+        {
+          "timeSeconds": 0.36666667461395264,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4519958880402293,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.7416666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3853840792705174,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.36666667461395264,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4574079838342766,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "run",
+      "asset": "clips/run.glb",
+      "sha256": "78d81e40ca2b52e4c6183aafc7a79ff08a6655f114db1d52a344221dd2df72f1",
+      "durationSeconds": 0.6666666865348816,
+      "samplingRateHz": 120,
+      "samples": 156,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009127988736847309,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999975398466332,
+      "minimumFootDominantVertexY": 0.009127988736847309,
+      "minimumOtherVertexY": 0.11896833285384062,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.36666666666666664,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 54,
+        "positionY": 0.009127988736847309,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.03333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.2392867961709018,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.36666666666666664,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009127988736847309,
+          "worstVertex": 54
+        },
+        {
+          "timeSeconds": 0.3083333373069763,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4292859873587604,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.6416666507720947,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.36746857459193,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.3083333373069763,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4343340454067126,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "sprint",
+      "asset": "clips/sprint.glb",
+      "sha256": "21f6e6bc0af28a87bac03ff147234665144c1b3de8af5a3081f7a7db70cfa1dc",
+      "durationSeconds": 0.550000011920929,
+      "samplingRateHz": 120,
+      "samples": 129,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.00912798623941007,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999973080960617,
+      "minimumFootDominantVertexY": 0.00912798623941007,
+      "minimumOtherVertexY": 0.12134766443321582,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.30833333333333335,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 70,
+        "positionY": 0.00912798623941007,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.05833333358168602,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.24499098675264142,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.30833333333333335,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.00912798623941007,
+          "worstVertex": 70
+        },
+        {
+          "timeSeconds": 0.30000001192092896,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4327126714539582,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.02500000037252903,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3756800054553258,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.30000001192092896,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4373871113321524,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "referee_run",
+      "asset": "clips/referee_run.glb",
+      "sha256": "3e46685a9695be8d261a55c9c884bbbf4da32f181ad8406fc237006a2ac4311b",
+      "durationSeconds": 0.6666666865348816,
+      "samplingRateHz": 120,
+      "samples": 156,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009127975159872502,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999965544953868,
+      "minimumFootDominantVertexY": 0.009127975159872502,
+      "minimumOtherVertexY": 0.11875172146879327,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 304,
+        "positionY": 0.009127975159872502,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.05000000074505806,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.23878341357051236,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009127975159872502,
+          "worstVertex": 304
+        },
+        {
+          "timeSeconds": 0.3333333432674408,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4349292777384681,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3706733864480765,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.3333333432674408,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4401556465051173,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "keeper_ready_side_steps",
+      "asset": "clips/keeper_ready_side_steps.glb",
+      "sha256": "5820475849c73e132c78d1c07f7398dc551bb3654cd9179305e74003a1e3b419",
+      "durationSeconds": 3.200000047683716,
+      "samplingRateHz": 120,
+      "samples": 744,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009071359588664375,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003949992618797762,
+      "minimumFootDominantVertexY": 0.009071359588664375,
+      "minimumOtherVertexY": 0.14634694487613997,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.16666666666666666,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 320,
+        "positionY": 0.009071359588664375,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.20000000298023224,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.30442161964482906,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.16666666666666666,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009071359588664375,
+          "worstVertex": 320
+        },
+        {
+          "timeSeconds": 3.2,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4759901392953483,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.4059535469723674,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 3.2,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.481638799584194,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "keeper_catch_chest",
+      "asset": "clips/keeper_catch_chest.glb",
+      "sha256": "6b4c28931134412bede0a08c0088921dad3fbcf52cdd889acdf6e8c4d22d5925",
+      "durationSeconds": 2.4000000953674316,
+      "samplingRateHz": 120,
+      "samples": 558,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009128014258163258,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.004000001474502982,
+      "minimumFootDominantVertexY": 0.009128014258163258,
+      "minimumOtherVertexY": 0.14653570154243467,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.13333333333333333,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 70,
+        "positionY": 0.009128014258163258,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.30448751964872717,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.13333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009128014258163258,
+          "worstVertex": 70
+        },
+        {
+          "timeSeconds": 0.008333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.475990139293984,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.4059535469723674,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.008333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4816387995828297,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "keeper_catch_head",
+      "asset": "clips/keeper_catch_head.glb",
+      "sha256": "78259eb7eeace590d0ecbb622e6678b070651207234641f75b337aae90f530c2",
+      "durationSeconds": 2.4000000953674316,
+      "samplingRateHz": 120,
+      "samples": 558,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009128014258163258,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.004000001474502982,
+      "minimumFootDominantVertexY": 0.009128014258163258,
+      "minimumOtherVertexY": 0.14653570154243467,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.13333333333333333,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 70,
+        "positionY": 0.009128014258163258,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.30448751964872717,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.13333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009128014258163258,
+          "worstVertex": 70
+        },
+        {
+          "timeSeconds": 0.008333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.475990139293984,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.4059535469723674,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.008333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4816387995828297,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "idle_to_jog",
+      "asset": "clips/idle_to_jog.glb",
+      "sha256": "85411229ec0ca242d42a37d672581680d184ff2e270223159f6b0f85b76cde77",
+      "durationSeconds": 2.25,
+      "samplingRateHz": 120,
+      "samples": 523,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009073070376159582,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003977679218279628,
+      "minimumFootDominantVertexY": 0.009073070376159582,
+      "minimumOtherVertexY": 0.12589332304359466,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.1,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 54,
+        "positionY": 0.009073070376159582,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.8333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.25563516350432836,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.1,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009073070376159582,
+          "worstVertex": 54
+        },
+        {
+          "timeSeconds": 2.241666555404663,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4516866960106523,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 2.241666555404663,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3850754827842922,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 2.241666555404663,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4570989049899763,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "jog_to_idle",
+      "asset": "clips/jog_to_idle.glb",
+      "sha256": "d86933172fd0b1af7412135160ca9c6a318beef671b9f207ddbd401870dfa3ca",
+      "durationSeconds": 2.25,
+      "samplingRateHz": 120,
+      "samples": 523,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009085097368443523,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003964325362444274,
+      "minimumFootDominantVertexY": 0.009085097368443523,
+      "minimumOtherVertexY": 0.12589340981324765,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 1.975,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 70,
+        "positionY": 0.009085097368443523,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.08333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.2556349697572063,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 1.975,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009085097368443523,
+          "worstVertex": 70
+        },
+        {
+          "timeSeconds": 0.5666666626930237,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4519974844630907,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 1.3166667222976685,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3853862210971122,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.5666666626930237,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4574096922272302,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "idle_to_run",
+      "asset": "clips/idle_to_run.glb",
+      "sha256": "b6fa36066077e3f7032be7e04f95ee9ca5afecb7e08531fcf652388cce49031a",
+      "durationSeconds": 2,
+      "samplingRateHz": 120,
+      "samples": 465,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.00907142701410611,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003971537711691772,
+      "minimumFootDominantVertexY": 0.00907142701410611,
+      "minimumOtherVertexY": 0.11896833167438954,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.016666666666666666,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 304,
+        "positionY": 0.00907142701410611,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.5499999523162842,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.23928679627119281,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.016666666666666666,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.00907142701410611,
+          "worstVertex": 304
+        },
+        {
+          "timeSeconds": 1.975000023841858,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4292857344714667,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 1.4333332777023315,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.36746857459193,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 1.975000023841858,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4343338155646685,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "run_to_idle",
+      "asset": "clips/run_to_idle.glb",
+      "sha256": "557b21d4f937901139a5a6b638ad579f47186c8c1fe813b259a59ed0f03e871b",
+      "durationSeconds": 2,
+      "samplingRateHz": 120,
+      "samples": 465,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009095542965889821,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999613938854091,
+      "minimumFootDominantVertexY": 0.009095542965889821,
+      "minimumOtherVertexY": 0.11896649874063374,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 1.9916666666666667,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 54,
+        "positionY": 0.009095542965889821,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 0.03333333333333333,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.23928252781536533,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 1.9916666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009095542965889821,
+          "worstVertex": 54
+        },
+        {
+          "timeSeconds": 0.46666666865348816,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4292859873587604,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 1.1333333253860474,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.36746857459193,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.46666666865348816,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4343340454067126,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "idle_to_sprint",
+      "asset": "clips/idle_to_sprint.glb",
+      "sha256": "cbe470e8b987e15d435884a9b72addda37722cf9ef3bf3678dccf0af52c89326",
+      "durationSeconds": 1.649999976158142,
+      "samplingRateHz": 120,
+      "samples": 383,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009069497070239085,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.0039527359627874875,
+      "minimumFootDominantVertexY": 0.009069497070239085,
+      "minimumOtherVertexY": 0.12106536817522336,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.016666666666666666,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 320,
+        "positionY": 0.009069497070239085,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.3666666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.24431285429832858,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.016666666666666666,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009069497070239085,
+          "worstVertex": 320
+        },
+        {
+          "timeSeconds": 0.7416666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.432710236047266,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 1.2916666269302368,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3756814122578442,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.7416666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4373849648750203,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "sprint_to_idle",
+      "asset": "clips/sprint_to_idle.glb",
+      "sha256": "a24d992f59dc33b2669a36cd7c72be0555f169ff481146b8e33aa39b9ff0175c",
+      "durationSeconds": 1.649999976158142,
+      "samplingRateHz": 120,
+      "samples": 383,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009127971493683074,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999959050481755,
+      "minimumFootDominantVertexY": 0.009127971493683074,
+      "minimumOtherVertexY": 0.12104566406408464,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 1.1166666666666667,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 320,
+        "positionY": 0.009127971493683074,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.1166666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.24426835144833375,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 1.1166666666666667,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009127971493683074,
+          "worstVertex": 320
+        },
+        {
+          "timeSeconds": 0.49166667461395264,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4327191944286546,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 0.03333333507180214,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3756807005438592,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.49166667461395264,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.437393346277982,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "idle_to_referee_run",
+      "asset": "clips/idle_to_referee_run.glb",
+      "sha256": "9d9a4a74004ef8eeb303e41476c3c0b2e2626898fc20806091fbc9c1f9232b40",
+      "durationSeconds": 2,
+      "samplingRateHz": 120,
+      "samples": 465,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009079400461381825,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003958827771460671,
+      "minimumFootDominantVertexY": 0.009079400461381825,
+      "minimumOtherVertexY": 0.11863475572786246,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 0.016666666666666666,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 320,
+        "positionY": 0.009079400461381825,
+        "bindPosition": [
+          0.07141853868961334,
+          0.0051280115731060505,
+          -0.02665894478559494
+        ],
+        "dominantBone": "LeftFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.5916666666666666,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.23849939883587767,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 0.016666666666666666,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009079400461381825,
+          "worstVertex": 320
+        },
+        {
+          "timeSeconds": 1.9916666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.434704817487363,
+          "worstVertex": 18
+        },
+        {
+          "timeSeconds": 1.9916666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3704310229831917,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 1.9916666746139526,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.439929490079624,
+          "worstVertex": 7
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    },
+    {
+      "id": "referee_run_to_idle",
+      "asset": "clips/referee_run_to_idle.glb",
+      "sha256": "168e7c93f5b258afbe3174ed2955b6cd0aed746d77bd638a957668057ad53717",
+      "durationSeconds": 2,
+      "samplingRateHz": 120,
+      "samples": 465,
+      "verticesPerSample": 5899,
+      "minimumMeshY": 0.009059801475471859,
+      "maximumMeshPenetrationMeters": 0,
+      "minimumSoleProbeY": 0.003999392502441759,
+      "minimumFootDominantVertexY": 0.009059801475471859,
+      "minimumOtherVertexY": 0.11863475579128022,
+      "framesBelowMinus1mm": 0,
+      "worst": {
+        "timeSeconds": 1.9833333333333334,
+        "mesh": "player-01-kit-a-lod1",
+        "primitive": 1,
+        "vertex": 54,
+        "positionY": 0.009059801475471859,
+        "bindPosition": [
+          -0.12858423590660095,
+          0.0051280115731060505,
+          0.17834824323654175
+        ],
+        "dominantBone": "RightFoot",
+        "dominantWeight": 1,
+        "footWeight": 1
+      },
+      "meshes": [
+        {
+          "timeSeconds": 1.2916666269302368,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 0,
+          "minimumY": 0.23849939970815665,
+          "worstVertex": 179
+        },
+        {
+          "timeSeconds": 1.9833333333333334,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "minimumY": 0.009059801475471859,
+          "worstVertex": 54
+        },
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 2,
+          "minimumY": 1.4346924890717312,
+          "worstVertex": 57
+        },
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 3,
+          "minimumY": 1.3704225190309252,
+          "worstVertex": 1548
+        },
+        {
+          "timeSeconds": 0.008333333767950535,
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 4,
+          "minimumY": 1.4399050612393454,
+          "worstVertex": 40
+        }
+      ],
+      "unanimatedBind": {
+        "minimumMeshY": 0.005128013361245409,
+        "minimumSoleProbeY": 1.3877787807814457e-17,
+        "worst": {
+          "mesh": "player-01-kit-a-lod1",
+          "primitive": 1,
+          "vertex": 54,
+          "positionY": 0.005128013361245409,
+          "bindPosition": [
+            -0.12858423590660095,
+            0.0051280115731060505,
+            0.17834824323654175
+          ],
+          "dominantBone": "RightFoot",
+          "dominantWeight": 1,
+          "footWeight": 1
+        }
+      },
+      "meetsMinus1mmMeshFloor": true
+    }
+  ]
+}

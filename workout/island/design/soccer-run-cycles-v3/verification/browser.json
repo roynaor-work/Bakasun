@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "catalogSha256": "81ec1153a70c21e4998a5de28ff2bf4341c26f52f23a317bb5e3281465be6145",
+  "sources": [
+    {
+      "file": "preview.html",
+      "bytes": 3336,
+      "sha256": "fb454af3714f95f22485123a926d9b74a29f9667f3f9b550d83ee740d32cde07"
+    },
+    {
+      "file": "preview.css",
+      "bytes": 7603,
+      "sha256": "09c9a66b8b8b615f3dcf6b541076c5c0fb50197cd9559a0845ad6492e7c0ee65"
+    },
+    {
+      "file": "preview.mjs",
+      "bytes": 15924,
+      "sha256": "c37ef9def01a221561d4998277024247ba4703ad8160e9596f7de6f2c108df87"
+    },
+    {
+      "file": "source/capture.mjs",
+      "bytes": 10472,
+      "sha256": "8b60cd76b296438b125f5e0170552c2bbe2cb01e19ef9d131dce8cf122489574"
+    }
+  ],
+  "clipCount": 17,
+  "renderedClipCount": 17,
+  "smoke": false,
+  "only": null,
+  "framesPerSheet": 8,
+  "clips": [
+    {
+      "id": "idle_relaxed",
+      "timesSeconds": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3,
+        3.5
+      ],
+      "frames": [
+        0,
+        60,
+        120,
+        180,
+        240,
+        300,
+        360,
+        420
+      ],
+      "sheet": "sheets/idle_relaxed.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "3d0159c48123a6abfecc01894a2db9df7b1abaf7e5337263a33e710094c4fbbb",
+      "glbSha256": "1e4151595e43f38762eddcc17c9630441ba8aad10f4b7b2a7159b5ab74e5be86",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "referee_idle",
+      "timesSeconds": [
+        0,
+        0.5,
+        1,
+        1.5,
+        2,
+        2.5,
+        3,
+        3.5
+      ],
+      "frames": [
+        0,
+        60,
+        120,
+        180,
+        240,
+        300,
+        360,
+        420
+      ],
+      "sheet": "sheets/referee_idle.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "981a00c687700ab100a79ce9d1749a9e91049ab21ef199963b3cf6fab77fe527",
+      "glbSha256": "75271cd100f519eab8cf955056f31cbd4f2b0d2401373857562ab01f1ab154d8",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "jog",
+      "timesSeconds": [
+        0,
+        0.09166666666666666,
+        0.19166666666666668,
+        0.2833333333333333,
+        0.375,
+        0.4666666666666667,
+        0.5666666666666667,
+        0.6583333333333333
+      ],
+      "frames": [
+        0,
+        11,
+        23,
+        34,
+        45,
+        56,
+        68,
+        79
+      ],
+      "sheet": "sheets/jog.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "ad710539e665331576fd310287329c425c57e1f44b19cea43979c3f77d25016e",
+      "glbSha256": "75864543305109937f40710536b02e8ae277d6086abcb7b35c85c2d4f75aa6c7",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "run",
+      "timesSeconds": [
+        0,
+        0.08333333333333333,
+        0.16666666666666666,
+        0.25,
+        0.3333333333333333,
+        0.4166666666666667,
+        0.5,
+        0.5833333333333334
+      ],
+      "frames": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "sheet": "sheets/run.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "5d407e16cb876cfe569178d2524891aa0e031ced9b3ac5c0546736cb3c011c20",
+      "glbSha256": "78d81e40ca2b52e4c6183aafc7a79ff08a6655f114db1d52a344221dd2df72f1",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "sprint",
+      "timesSeconds": [
+        0,
+        0.06666666666666667,
+        0.14166666666666666,
+        0.20833333333333334,
+        0.275,
+        0.3416666666666667,
+        0.4166666666666667,
+        0.48333333333333334
+      ],
+      "frames": [
+        0,
+        8,
+        17,
+        25,
+        33,
+        41,
+        50,
+        58
+      ],
+      "sheet": "sheets/sprint.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "10ba13730e7058491bc75f0bfe5a1f49d9c8adc2aa0e6c3f0c225bdaab935411",
+      "glbSha256": "21f6e6bc0af28a87bac03ff147234665144c1b3de8af5a3081f7a7db70cfa1dc",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "referee_run",
+      "timesSeconds": [
+        0,
+        0.08333333333333333,
+        0.16666666666666666,
+        0.25,
+        0.3333333333333333,
+        0.4166666666666667,
+        0.5,
+        0.5833333333333334
+      ],
+      "frames": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "sheet": "sheets/referee_run.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "27984fc3c7b61e04c0a5dd18be9bed8fe9848668fa6f7e36714e009b6d62135c",
+      "glbSha256": "3e46685a9695be8d261a55c9c884bbbf4da32f181ad8406fc237006a2ac4311b",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "keeper_ready_side_steps",
+      "timesSeconds": [
+        0,
+        0.4,
+        0.8,
+        1.2,
+        1.6,
+        2,
+        2.4,
+        2.8
+      ],
+      "frames": [
+        0,
+        48,
+        96,
+        144,
+        192,
+        240,
+        288,
+        336
+      ],
+      "sheet": "sheets/keeper_ready_side_steps.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "4a847553c162a5564abea5a48b6c319396d0e0fd20997853c590a3b9c94d1576",
+      "glbSha256": "5820475849c73e132c78d1c07f7398dc551bb3654cd9179305e74003a1e3b419",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "keeper_catch_chest",
+      "timesSeconds": [
+        0,
+        0.3416666666666667,
+        0.6833333333333333,
+        1.025,
+        1.375,
+        1.7166666666666666,
+        2.058333333333333,
+        2.4
+      ],
+      "frames": [
+        0,
+        41,
+        82,
+        123,
+        165,
+        206,
+        247,
+        288
+      ],
+      "sheet": "sheets/keeper_catch_chest.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "7c15bd5937477872351ac5f8bbf61366610f5bb5ee9a7f1db9b7cc9107b9c0ab",
+      "glbSha256": "6b4c28931134412bede0a08c0088921dad3fbcf52cdd889acdf6e8c4d22d5925",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "keeper_catch_head",
+      "timesSeconds": [
+        0,
+        0.3416666666666667,
+        0.6833333333333333,
+        1.025,
+        1.375,
+        1.7166666666666666,
+        2.058333333333333,
+        2.4
+      ],
+      "frames": [
+        0,
+        41,
+        82,
+        123,
+        165,
+        206,
+        247,
+        288
+      ],
+      "sheet": "sheets/keeper_catch_head.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "a92b49cb6cb86f99711c0664df1b39807c451a8ef8f485946ca39dea75eebb89",
+      "glbSha256": "78259eb7eeace590d0ecbb622e6678b070651207234641f75b337aae90f530c2",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "idle_to_jog",
+      "timesSeconds": [
+        0,
+        0.325,
+        0.6416666666666667,
+        0.9666666666666667,
+        1.2833333333333334,
+        1.6083333333333334,
+        1.925,
+        2.25
+      ],
+      "frames": [
+        0,
+        39,
+        77,
+        116,
+        154,
+        193,
+        231,
+        270
+      ],
+      "sheet": "sheets/idle_to_jog.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "f234b959e1aed4b0ef0b356e37850d32ab2cb7386c87f569b3db3b5b2260553a",
+      "glbSha256": "85411229ec0ca242d42a37d672581680d184ff2e270223159f6b0f85b76cde77",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "jog_to_idle",
+      "timesSeconds": [
+        0,
+        0.325,
+        0.6416666666666667,
+        0.9666666666666667,
+        1.2833333333333334,
+        1.6083333333333334,
+        1.925,
+        2.25
+      ],
+      "frames": [
+        0,
+        39,
+        77,
+        116,
+        154,
+        193,
+        231,
+        270
+      ],
+      "sheet": "sheets/jog_to_idle.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "8a71fabec3448113852e501a7fd71520e589bb8ba3fd1894dc9af4cc1ecb4ce3",
+      "glbSha256": "d86933172fd0b1af7412135160ca9c6a318beef671b9f207ddbd401870dfa3ca",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "idle_to_run",
+      "timesSeconds": [
+        0,
+        0.2833333333333333,
+        0.575,
+        0.8583333333333333,
+        1.1416666666666666,
+        1.425,
+        1.7166666666666666,
+        2
+      ],
+      "frames": [
+        0,
+        34,
+        69,
+        103,
+        137,
+        171,
+        206,
+        240
+      ],
+      "sheet": "sheets/idle_to_run.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "82ae2498baeb77aa8be6623e6fd08c4fb9632ae99c57e71aad8c0ea841ec195c",
+      "glbSha256": "b6fa36066077e3f7032be7e04f95ee9ca5afecb7e08531fcf652388cce49031a",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "run_to_idle",
+      "timesSeconds": [
+        0,
+        0.2833333333333333,
+        0.575,
+        0.8583333333333333,
+        1.1416666666666666,
+        1.425,
+        1.7166666666666666,
+        2
+      ],
+      "frames": [
+        0,
+        34,
+        69,
+        103,
+        137,
+        171,
+        206,
+        240
+      ],
+      "sheet": "sheets/run_to_idle.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "eb87c0bf07c033c1096d495f9c5f213c21a5f2b9740e1c84405518d785cf2f36",
+      "glbSha256": "557b21d4f937901139a5a6b638ad579f47186c8c1fe813b259a59ed0f03e871b",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "idle_to_sprint",
+      "timesSeconds": [
+        0,
+        0.23333333333333334,
+        0.475,
+        0.7083333333333334,
+        0.9416666666666667,
+        1.175,
+        1.4166666666666667,
+        1.65
+      ],
+      "frames": [
+        0,
+        28,
+        57,
+        85,
+        113,
+        141,
+        170,
+        198
+      ],
+      "sheet": "sheets/idle_to_sprint.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "e899491021ca3866e250f30deceb8a4192b7bf5e68b381e094b476d6d9db7e3b",
+      "glbSha256": "cbe470e8b987e15d435884a9b72addda37722cf9ef3bf3678dccf0af52c89326",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "sprint_to_idle",
+      "timesSeconds": [
+        0,
+        0.23333333333333334,
+        0.475,
+        0.7083333333333334,
+        0.9416666666666667,
+        1.175,
+        1.4166666666666667,
+        1.65
+      ],
+      "frames": [
+        0,
+        28,
+        57,
+        85,
+        113,
+        141,
+        170,
+        198
+      ],
+      "sheet": "sheets/sprint_to_idle.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "fd0cf2d67e3ba6eda0bf72edb23b8284a26b9f9d05976cd4e287b0f4ce307930",
+      "glbSha256": "a24d992f59dc33b2669a36cd7c72be0555f169ff481146b8e33aa39b9ff0175c",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "idle_to_referee_run",
+      "timesSeconds": [
+        0,
+        0.2833333333333333,
+        0.575,
+        0.8583333333333333,
+        1.1416666666666666,
+        1.425,
+        1.7166666666666666,
+        2
+      ],
+      "frames": [
+        0,
+        34,
+        69,
+        103,
+        137,
+        171,
+        206,
+        240
+      ],
+      "sheet": "sheets/idle_to_referee_run.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "c4f09a6f9ba6fa5f8d5acf5d1f57ec59d7d24bcdd9b5e7a11119dddc11ba6b14",
+      "glbSha256": "9d9a4a74004ef8eeb303e41476c3c0b2e2626898fc20806091fbc9c1f9232b40",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    },
+    {
+      "id": "referee_run_to_idle",
+      "timesSeconds": [
+        0,
+        0.2833333333333333,
+        0.575,
+        0.8583333333333333,
+        1.1416666666666666,
+        1.425,
+        1.7166666666666666,
+        2
+      ],
+      "frames": [
+        0,
+        34,
+        69,
+        103,
+        137,
+        171,
+        206,
+        240
+      ],
+      "sheet": "sheets/referee_run_to_idle.png",
+      "framesPerSheet": 8,
+      "sheetSha256": "66a56f17c2dcc27c10369f16bee1bd425192056fb55a5bd2d870f7a23aa54a32",
+      "glbSha256": "168e7c93f5b258afbe3174ed2955b6cd0aed746d77bd638a957668057ad53717",
+      "nativeRate": 120,
+      "worldTravelAppliedOnce": true
+    }
+  ],
+  "viewports": [
+    {
+      "width": 844,
+      "height": 390,
+      "horizontal": false,
+      "vertical": false,
+      "stageRect": {
+        "x": 13,
+        "y": 53,
+        "width": 637,
+        "height": 250
+      },
+      "screenshot": "verification/preview-844x390.png"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "horizontal": false,
+      "vertical": false,
+      "stageRect": {
+        "x": 11,
+        "y": 158.6875,
+        "width": 368,
+        "height": 573.3125
+      },
+      "screenshot": "verification/preview-390x844.png"
+    }
+  ],
+  "controls": {
+    "sideView": true,
+    "rate": true,
+    "inPlace": true,
+    "world": true,
+    "restart": true,
+    "play": true,
+    "pause": true,
+    "scrub": true,
+    "selection": true
+  },
+  "errors": [],
+  "webAssemblyBlocked": true,
+  "wasmRequests": [],
+  "networkOrigins": [
+    "http://127.0.0.1:35355"
+  ],
+  "passed": true
+}

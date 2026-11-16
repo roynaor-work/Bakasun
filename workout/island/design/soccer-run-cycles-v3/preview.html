@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <title>מחזורי ריצה · כדורגל 03</title>
+  <link rel="stylesheet" href="./preview.css">
+  <script type="importmap">{"imports":{"three":"../soccer-motion-v8/runtime/vendor/three.module.js"}}</script>
+</head>
+<body>
+  <header class="page-head">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">03</span><div><p class="eyebrow">מעבדת התנועה · כדורגל</p><h1>כל צעד, בקצב המשחק.</h1></div></div>
+    <div class="head-links"><a href="./REPORT.md">דוח המדידות</a><a href="./LICENSES.md">מקורות</a></div>
+  </header>
+  <main class="layout">
+    <aside class="library" aria-label="בחירת תנועה">
+      <p class="section-label">ספריית התנועות <span id="clip-count">…</span></p>
+      <div id="clips" class="clip-list"></div>
+      <div class="library-foot"><span class="status-dot"></span><span id="library-status">טוען את הספרייה</span></div>
+    </aside>
+    <section class="workspace" aria-label="תצוגה תלת ממדית">
+      <div class="stage-wrap">
+        <canvas id="stage" aria-label="דמות תלת ממדית מבצעת תנועת כדורגל"></canvas>
+        <div class="stage-top"><div><h2 id="title">טוען…</h2><p id="description">תנועות ריצה ושוער</p></div><output id="native-speed" class="speed-badge">—</output></div>
+        <div class="view-controls" aria-label="זווית צפייה"><button type="button" data-view="three" aria-pressed="true">¾</button><button type="button" data-view="front" aria-pressed="false">מלפנים</button><button type="button" data-view="side" aria-pressed="false">מהצד</button></div>
+        <div class="stage-bottom"><span id="phase">טוען…</span><span id="support-state">נקודות תמיכה בעולם</span></div>
+        <p id="error" class="error" hidden role="alert"></p>
+      </div>
+      <div class="transport">
+        <button id="play" class="play" type="button" aria-label="השהיה">Ⅱ</button>
+        <button id="restart" class="restart" type="button" aria-label="מהתחלה" title="מהתחלה">↺</button>
+        <div class="timeline"><input id="scrub" type="range" min="0" max="1" step="1" value="0" aria-label="פריים בתנועה"><div class="timeline-caption"><span id="loop-label">מחזור ריצה</span><output id="time">0.000 / 0.000</output></div></div>
+        <label class="speed-label" for="speed"><span>קצב</span><select id="speed" aria-label="קצב הצפייה"><option value="0.25">×0.25</option><option value="0.5">×0.5</option><option value="0.8">×0.8</option><option value="1" selected>×1</option><option value="1.2">×1.2</option></select></label>
+      </div>
+      <div class="display-options"><label><input id="travel" type="checkbox" checked> תנועה בעולם</label><label><input id="soles" type="checkbox" checked> תמיכות</label><label><input id="skeleton" type="checkbox"> שלד</label><span id="frame">18 עצמות</span></div>
+    </section>
+  </main>
+  <script type="module" src="./preview.mjs"></script>
+</body>
+</html>
