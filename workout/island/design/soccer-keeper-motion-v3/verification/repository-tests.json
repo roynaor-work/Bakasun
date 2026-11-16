@@ -1,0 +1,33 @@
+{
+  "command": "npm test",
+  "exitCode": 1,
+  "status": "failed-environment",
+  "counts": {
+    "tests": 4326,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 960250.792302
+  },
+  "logSha256": "846ca6462a1b7a358e0fd9c4ef8a3a19c9a04fcdb566c46eaf55af547bf496b3",
+  "failure": {
+    "testFile": "tests/workout-royiki.test.mjs",
+    "line": 93,
+    "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+    "cause": "Playwright bundled Chromium executable is absent; launch fails before the existing test try/finally, leaving its HTTP server open.",
+    "missingExecutable": "/home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "unchangedFromBase": true,
+    "testFileSha256": "1f42bf3b84fd00a030f71a78798f6e8bd18e8f8089385ce0edd4386f07263f9f",
+    "reproducedInBoundedIsolatedRun": true,
+    "isolatedRun": {
+      "passed": 4,
+      "failed": 1,
+      "boundedSeconds": 8
+    },
+    "teardown": "Sent SIGTERM only to verified stuck workout-royiki worker after diagnosing its leaked HTTP server; parent test runner then reported original launch failure.",
+    "evidence": "repository-browser-failure.txt"
+  },
+  "description": "4,261 עברו, 1 נכשל ו־64 דולגו. הכשל הקיים במסך האימון שוחזר בנפרד: דפדפן Playwright המובנה חסר בסביבה ושרת הבדיקה נשאר פתוח. קובץ הבדיקה והקוד הקיים לא שונו; בדיקות הנכסים השתמשו בדפדפן המקומי ועברו"
+}

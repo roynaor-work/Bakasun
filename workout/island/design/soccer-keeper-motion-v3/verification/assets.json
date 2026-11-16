@@ -1,0 +1,4343 @@
+{
+  "schemaVersion": 1,
+  "validatorVersion": "2.0.0-dev.3.10",
+  "canonicalBoneCount": 18,
+  "nativeRate": 30,
+  "scope": "Fourteen delivered GLBs; native data validation is not a full skinned-mesh collision audit.",
+  "summary": {
+    "clips": 14,
+    "passed": 14,
+    "errors": 0,
+    "warnings": 70,
+    "maximumSkinnedDepthMeters": 0,
+    "allPassed": true
+  },
+  "clips": [
+    {
+      "id": "keeper_ready",
+      "asset": "clips/keeper_ready.glb",
+      "bytes": 761468,
+      "sha256": "adbbecc3d8e19514c34229522fd1e123ef2010562a0a3798de383d66508a5ba0",
+      "frameCount": 73,
+      "duration": 2.4000000953674316,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.6872276565347306e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_ready.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 748340
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 145,
+        "vertices": 5868,
+        "minimumYMeters": 0.009127964606864061,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.5166666666666667,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 70,
+          "influences": [
+            {
+              "bone": "RightFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_shuffle",
+      "asset": "clips/keeper_shuffle.glb",
+      "bytes": 769164,
+      "sha256": "d9521d7e5f679977cce520207ff25bf89b61baa422bfd47edc9eaddab3d211fc",
+      "frameCount": 97,
+      "duration": 3.200000047683716,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.911031254411057e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_shuffle.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 755636
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 193,
+        "vertices": 5868,
+        "minimumYMeters": 0.008926148183694665,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.8166666666666667,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 320,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_low",
+      "asset": "clips/keeper_dive_low.glb",
+      "bytes": 787324,
+      "sha256": "d37c93fdaab253b3e1ede0e9e9f509b04849aba54f408698ab55804e267f7152",
+      "frameCount": 157,
+      "duration": 5.199999809265137,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 2.2252400722067023e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.2083250217928025e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_dive_low.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 773876
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 313,
+        "vertices": 5868,
+        "minimumYMeters": 0.008900216985977275,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.45,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 304,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "asset": "clips/keeper_dive_high.glb",
+      "bytes": 787324,
+      "sha256": "1ffd57d5d695750653dfe2757108c5c02b3b5975fcc76bfed9b8c51f73c04285",
+      "frameCount": 157,
+      "duration": 5.199999809265137,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 2.2252400722067023e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.0071883811165776e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_dive_high.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 773876
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 313,
+        "vertices": 5868,
+        "minimumYMeters": 0.008900216985977275,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.45,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 304,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_catch_two_hands",
+      "asset": "clips/keeper_catch_two_hands.glb",
+      "bytes": 772552,
+      "sha256": "e2bb0a3eabf11d2b956a586de9891a2ddcdf94cbfa86b9841bab4e1c69bef823",
+      "frameCount": 109,
+      "duration": 3.5999999046325684,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.1425107788484183e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_catch_two_hands.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 759284
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 217,
+        "vertices": 5868,
+        "minimumYMeters": 0.009128037422839921,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 70,
+          "influences": [
+            {
+              "bone": "RightFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_punch",
+      "asset": "clips/keeper_punch.glb",
+      "bytes": 768892,
+      "sha256": "da2dff9698396ee59d6ec665d32021764c20be9371478b3e0a383315ae34da8a",
+      "frameCount": 97,
+      "duration": 3.200000047683716,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.160119893015235e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_punch.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 755636
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 193,
+        "vertices": 5868,
+        "minimumYMeters": 0.009091122017796646,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.21666666666666667,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 304,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "asset": "clips/keeper_throw.glb",
+      "bytes": 774400,
+      "sha256": "c6406df8816708ae6415d0b76a119a784f6db0c32775226c83c4c7026420e139",
+      "frameCount": 115,
+      "duration": 3.799999952316284,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.93136873055866e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_throw.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 761108
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 229,
+        "vertices": 5868,
+        "minimumYMeters": 0.00909968219814175,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 1.3166666666666667,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 320,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "asset": "clips/keeper_punt.glb",
+      "bytes": 778016,
+      "sha256": "6e687217e47756d9920925e69ee43a4c0eaba2486ca29fc16d4e3326a0cc537c",
+      "frameCount": 127,
+      "duration": 4.199999809265137,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.9073486345888568e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.0351459840159976e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_punt.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 764756
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 253,
+        "vertices": 5868,
+        "minimumYMeters": 0.009113145120239557,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 1.95,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 304,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_celebrate",
+      "asset": "clips/keeper_celebrate.glb",
+      "bytes": 774328,
+      "sha256": "fcfb4062aba2fc1a7d050f1fa76e991abdd1e389ed8d44a858ce16f8a753765b",
+      "frameCount": 115,
+      "duration": 3.799999952316284,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.970869655312015e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_celebrate.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 761108
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 229,
+        "vertices": 5868,
+        "minimumYMeters": 0.009128037422839921,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 70,
+          "influences": [
+            {
+              "bone": "RightFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "keeper_disappointed",
+      "asset": "clips/keeper_disappointed.glb",
+      "bytes": 772480,
+      "sha256": "cfb6a82c3bb75c956b7ca19372b4677cd3cfbd8e53a00effd31eb3730f7d8e45",
+      "frameCount": 109,
+      "duration": 3.5999999046325684,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.8402334867626564e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/keeper_disappointed.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 759284
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5868,
+          "totalTriangleCount": 5997,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 217,
+        "vertices": 5868,
+        "minimumYMeters": 0.00912673727567398,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 2.716666666666667,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 304,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "field_miss",
+      "asset": "clips/field_miss.glb",
+      "bytes": 803772,
+      "sha256": "ead477e6cd7ee9536abf9e770a90ccb63ddabca1f2711b8dd18f2b833ae3c418",
+      "frameCount": 115,
+      "duration": 3.799999952316284,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 4.2597629867913156e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/field_miss.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 789580
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5899,
+          "totalTriangleCount": 5781,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 229,
+        "vertices": 5899,
+        "minimumYMeters": 0.005114456551813945,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.35,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 320,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "field_group_celebrate",
+      "asset": "clips/field_group_celebrate.glb",
+      "bytes": 809328,
+      "sha256": "f6bff555623447d3752ea7a0e950b91f12ee8efe84c372d967f2fea75af02f72",
+      "frameCount": 133,
+      "duration": 4.400000095367432,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 2.2252400722067023e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.240036816620773e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/field_group_celebrate.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 795052
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5899,
+          "totalTriangleCount": 5781,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 265,
+        "vertices": 5899,
+        "minimumYMeters": 0.005114456551813945,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.35,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 320,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "field_enter",
+      "asset": "clips/field_enter.glb",
+      "bytes": 805712,
+      "sha256": "6df0a3c20966ce1a202dd7ab7cff2e60bf1b5634f0d24e11148df3f665f23dcc",
+      "frameCount": 121,
+      "duration": 4,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.630607570137556e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/field_enter.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 791404
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5899,
+          "totalTriangleCount": 5781,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 241,
+        "vertices": 5899,
+        "minimumYMeters": 0.004444863407384869,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 2.283333333333333,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 54,
+          "influences": [
+            {
+              "bone": "RightFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    },
+    {
+      "id": "field_clap",
+      "asset": "clips/field_clap.glb",
+      "bytes": 805640,
+      "sha256": "e12ff5261d3496d74b7614706e54ec5bf98f7c84a7858eed4092a9c472f9b137",
+      "frameCount": 121,
+      "duration": 4,
+      "checks": [
+        {
+          "id": "catalog-sha256",
+          "pass": true
+        },
+        {
+          "id": "catalog-byte-count",
+          "pass": true
+        },
+        {
+          "id": "self-contained",
+          "pass": true
+        },
+        {
+          "id": "no-geometry-compression",
+          "pass": true
+        },
+        {
+          "id": "one-canonical-skin",
+          "pass": true
+        },
+        {
+          "id": "canonical-names-order-parents-rest",
+          "pass": true
+        },
+        {
+          "id": "single-named-animation",
+          "pass": true
+        },
+        {
+          "id": "nineteen-native-channels",
+          "pass": true
+        },
+        {
+          "id": "all-eighteen-rotations",
+          "pass": true
+        },
+        {
+          "id": "only-hips-translation",
+          "pass": true
+        },
+        {
+          "id": "linear:Root:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Spine:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Chest:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Neck:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Head:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightForeArm:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightHand:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:LeftFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightUpLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightLeg:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:RightFoot:rotation",
+          "pass": true
+        },
+        {
+          "id": "linear:Hips:translation",
+          "pass": true
+        },
+        {
+          "id": "uniform-30Hz-time",
+          "pass": true,
+          "details": {
+            "maximumFloat32TimeErrorSeconds": 1.1126200361033511e-7
+          }
+        },
+        {
+          "id": "catalog-frame-count",
+          "pass": true
+        },
+        {
+          "id": "catalog-duration",
+          "pass": true
+        },
+        {
+          "id": "finite-native-values",
+          "pass": true
+        },
+        {
+          "id": "normalized-quaternions",
+          "pass": true,
+          "details": {
+            "maximumNormError": 3.7610041081492795e-8
+          }
+        },
+        {
+          "id": "root-fixed",
+          "pass": true
+        },
+        {
+          "id": "khronos-no-errors",
+          "pass": true,
+          "details": {
+            "errors": 0,
+            "warnings": 5,
+            "infos": 0
+          }
+        },
+        {
+          "id": "sampled-skinned-mesh-above-floor",
+          "pass": true,
+          "details": {
+            "maximumDepthMeters": 0
+          }
+        }
+      ],
+      "validator": {
+        "uri": "clips/field_clap.glb",
+        "mimeType": "model/gltf-binary",
+        "validatorVersion": "2.0.0-dev.3.10",
+        "issues": {
+          "numErrors": 0,
+          "numWarnings": 5,
+          "numInfos": 0,
+          "numHints": 0,
+          "messages": [
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/0/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/1/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/2/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/3/material"
+            },
+            {
+              "code": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+              "message": "Material requires a tangent space but the mesh primitive does not provide it. Runtime-generated tangent space may be non-portable across implementations.",
+              "severity": 1,
+              "pointer": "/meshes/0/primitives/4/material"
+            }
+          ],
+          "truncated": false
+        },
+        "info": {
+          "version": "2.0",
+          "generator": "CC0 soccer-keeper-motion-v3 canonical18 30Hz",
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_materials_clearcoat",
+            "KHR_materials_ior",
+            "KHR_materials_specular"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp"
+          ],
+          "resources": [
+            {
+              "pointer": "/buffers/0",
+              "mimeType": "application/gltf-buffer",
+              "storage": "glb",
+              "byteLength": 791404
+            },
+            {
+              "pointer": "/images/0",
+              "mimeType": "image/webp",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgba",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/1",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            },
+            {
+              "pointer": "/images/2",
+              "mimeType": "image/png",
+              "storage": "buffer-view",
+              "image": {
+                "width": 1024,
+                "height": 1024,
+                "format": "rgb",
+                "primaries": "srgb",
+                "transfer": "srgb",
+                "bits": 8
+              }
+            }
+          ],
+          "animationCount": 1,
+          "materialCount": 5,
+          "hasMorphTargets": false,
+          "hasSkins": true,
+          "hasTextures": true,
+          "hasDefaultScene": true,
+          "drawCallCount": 5,
+          "totalVertexCount": 5899,
+          "totalTriangleCount": 5781,
+          "maxUVs": 1,
+          "maxInfluences": 4,
+          "maxAttributes": 5
+        }
+      },
+      "skinnedFloor": {
+        "sampleRate": 60,
+        "sampleCount": 241,
+        "vertices": 5899,
+        "minimumYMeters": 0.005114456551813945,
+        "maximumDepthMeters": 0,
+        "worst": {
+          "time": 0.35,
+          "mesh": 0,
+          "primitive": 1,
+          "vertex": 320,
+          "influences": [
+            {
+              "bone": "LeftFoot",
+              "weight": 1
+            }
+          ]
+        },
+        "method": "Every skinned vertex, actual FLOAT tracks interpolated LINEAR/slerp at 60Hz; inverse binds and weights from final GLB. Supplemental diagnostic independent of motion-qa-v1 skeletal/probe score; excludes unsampled instants and inter-body collisions."
+      },
+      "pass": true
+    }
+  ]
+}

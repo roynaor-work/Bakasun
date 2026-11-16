@@ -1,0 +1,1465 @@
+{
+  "schemaVersion": 1,
+  "method": "Decode actual delivered GLB accessors; native LINEAR translation and quaternion slerp; independent FK at120Hz. Infer all sole-near-floor runs regardless declared support metadata. Inspect catalog ball trajectories in world space using one-sided second-order velocity and central acceleration differences.",
+  "limits": {
+    "groundSoleHeightMeters": 0.008,
+    "groundDriftMeters": 0.02,
+    "ballisticAccelerationErrorMps2": 0.05,
+    "releaseVelocityMismatchMps": 0.12,
+    "minimumImpactVelocityChangeMps": 1,
+    "minimumOutgoingBallSpeedMps": 2,
+    "ballContactSurfaceGapMeters": 0.015
+  },
+  "catalogSha256": "077e063cfba3b3b4ba5a4538c9cb6571b2e44f23e2ceba776fb5b0825fbb93b9",
+  "sourceReview": {
+    "path": "source/author.mjs",
+    "sha256": "caf9641734280d1c4ff1a38d88d30377fe99d4034284846b8b4af1fb93163d17",
+    "conclusion": "Manual code review confirmed keeper_throw uses an explicit center guide, scalar Hermite release tangent and wrist IK toward the guide. No pre-release FK-derived ball trajectory remains. Artifact measurements below independently check actual hand contact, release separation and ball physics; outputs alone cannot prove authoring provenance."
+  },
+  "scope": "Skeletal sole and effector probes, declared actor travel and catalog ball paths; this is not a full skinned-mesh or rigid-body collision simulation. Ball physics is checked in the airborne windows before floor clamping.",
+  "summary": {
+    "clips": 14,
+    "groundChecksPassed": 14,
+    "ballActions": 6,
+    "ballChecksPassed": 6,
+    "maxGroundInferredDriftMeters": 0.012543827,
+    "maxUndeclaredGroundDriftMeters": 0.012105422,
+    "allPassed": true
+  },
+  "groundChecks": [
+    {
+      "id": "keeper_ready",
+      "asset": "clips/keeper_ready.glb",
+      "sha256": "adbbecc3d8e19514c34229522fd1e123ef2010562a0a3798de383d66508a5ba0",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 2.4,
+              "samples": 289,
+              "maxHorizontalDriftMeters": 5.5e-8,
+              "minSoleHeightMeters": 0.003999952,
+              "maxSoleHeightMeters": 0.004000042
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.5e-8,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 2.4,
+              "samples": 289,
+              "maxHorizontalDriftMeters": 5.5e-8,
+              "minSoleHeightMeters": 0.003999952,
+              "maxSoleHeightMeters": 0.004000042
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.5e-8,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_shuffle",
+      "asset": "clips/keeper_shuffle.glb",
+      "sha256": "d9521d7e5f679977cce520207ff25bf89b61baa422bfd47edc9eaddab3d211fc",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.416666667,
+              "samples": 51,
+              "maxHorizontalDriftMeters": 0.000814898,
+              "minSoleHeightMeters": 0.003999222,
+              "maxSoleHeightMeters": 0.006997792
+            },
+            {
+              "start": 0.783333333,
+              "end": 1.616666667,
+              "samples": 101,
+              "maxHorizontalDriftMeters": 0.001895366,
+              "minSoleHeightMeters": 0.003801297,
+              "maxSoleHeightMeters": 0.007000393
+            },
+            {
+              "start": 1.983333333,
+              "end": 3.2,
+              "samples": 147,
+              "maxHorizontalDriftMeters": 0.001342563,
+              "minSoleHeightMeters": 0.003815297,
+              "maxSoleHeightMeters": 0.006915953
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.408333333,
+              "end": 0.416666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000455818,
+              "minSoleHeightMeters": 0.005494731,
+              "maxSoleHeightMeters": 0.006997792
+            },
+            {
+              "start": 0.783333333,
+              "end": 0.791666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000526804,
+              "minSoleHeightMeters": 0.005429213,
+              "maxSoleHeightMeters": 0.006910524
+            },
+            {
+              "start": 1.608333333,
+              "end": 1.616666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000455685,
+              "minSoleHeightMeters": 0.005496685,
+              "maxSoleHeightMeters": 0.007000393
+            },
+            {
+              "start": 1.983333333,
+              "end": 1.991666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000526725,
+              "minSoleHeightMeters": 0.005433306,
+              "maxSoleHeightMeters": 0.006915953
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.001895366,
+          "maxUndeclaredGroundDriftMeters": 0.000526804,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.916666667,
+              "samples": 111,
+              "maxHorizontalDriftMeters": 0.001079888,
+              "minSoleHeightMeters": 0.003813773,
+              "maxSoleHeightMeters": 0.006916507
+            },
+            {
+              "start": 1.283333333,
+              "end": 2.116666667,
+              "samples": 101,
+              "maxHorizontalDriftMeters": 0.001895618,
+              "minSoleHeightMeters": 0.003806079,
+              "maxSoleHeightMeters": 0.007001231
+            },
+            {
+              "start": 2.483333333,
+              "end": 3.2,
+              "samples": 87,
+              "maxHorizontalDriftMeters": 0.000978706,
+              "minSoleHeightMeters": 0.003999185,
+              "maxSoleHeightMeters": 0.006997701
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.908333333,
+              "end": 0.916666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000526581,
+              "minSoleHeightMeters": 0.00543372,
+              "maxSoleHeightMeters": 0.006916507
+            },
+            {
+              "start": 1.283333333,
+              "end": 1.291666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.00045562,
+              "minSoleHeightMeters": 0.005497308,
+              "maxSoleHeightMeters": 0.007001231
+            },
+            {
+              "start": 2.108333333,
+              "end": 2.116666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000526964,
+              "minSoleHeightMeters": 0.005429987,
+              "maxSoleHeightMeters": 0.006911528
+            },
+            {
+              "start": 2.483333333,
+              "end": 2.491666667,
+              "samples": 2,
+              "maxHorizontalDriftMeters": 0.000455837,
+              "minSoleHeightMeters": 0.005494672,
+              "maxSoleHeightMeters": 0.006997701
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.001895618,
+          "maxUndeclaredGroundDriftMeters": 0.000526964,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_low",
+      "asset": "clips/keeper_dive_low.glb",
+      "sha256": "d37c93fdaab253b3e1ede0e9e9f509b04849aba54f408698ab55804e267f7152",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.666666667,
+              "samples": 81,
+              "maxHorizontalDriftMeters": 0.012543827,
+              "minSoleHeightMeters": 0.003774997,
+              "maxSoleHeightMeters": 0.006997696
+            },
+            {
+              "start": 3.058333333,
+              "end": 3.233333333,
+              "samples": 22,
+              "maxHorizontalDriftMeters": 0.009728534,
+              "minSoleHeightMeters": 0.003999996,
+              "maxSoleHeightMeters": 0.007172802
+            },
+            {
+              "start": 3.666666667,
+              "end": 5.2,
+              "samples": 185,
+              "maxHorizontalDriftMeters": 0.004177916,
+              "minSoleHeightMeters": 0.003966535,
+              "maxSoleHeightMeters": 0.006613398
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.608333333,
+              "end": 0.666666667,
+              "samples": 8,
+              "maxHorizontalDriftMeters": 0.012105422,
+              "minSoleHeightMeters": 0.004103497,
+              "maxSoleHeightMeters": 0.006997696
+            },
+            {
+              "start": 3.058333333,
+              "end": 3.091666667,
+              "samples": 5,
+              "maxHorizontalDriftMeters": 0.005065668,
+              "minSoleHeightMeters": 0.004333006,
+              "maxSoleHeightMeters": 0.007172802
+            },
+            {
+              "start": 3.208333333,
+              "end": 3.233333333,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.003559158,
+              "minSoleHeightMeters": 0.004647155,
+              "maxSoleHeightMeters": 0.006613336
+            },
+            {
+              "start": 3.666666667,
+              "end": 3.691666667,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.003126379,
+              "minSoleHeightMeters": 0.004607562,
+              "maxSoleHeightMeters": 0.006613398
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.012543827,
+          "maxUndeclaredGroundDriftMeters": 0.012105422,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.641666667,
+              "samples": 78,
+              "maxHorizontalDriftMeters": 0.002765041,
+              "minSoleHeightMeters": 0.00378626,
+              "maxSoleHeightMeters": 0.006753673
+            },
+            {
+              "start": 3.033333333,
+              "end": 3.675,
+              "samples": 78,
+              "maxHorizontalDriftMeters": 0.005572151,
+              "minSoleHeightMeters": 0.003995908,
+              "maxSoleHeightMeters": 0.007644348
+            },
+            {
+              "start": 4.025,
+              "end": 5.2,
+              "samples": 142,
+              "maxHorizontalDriftMeters": 0.003235354,
+              "minSoleHeightMeters": 0.00398848,
+              "maxSoleHeightMeters": 0.006820467
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.608333333,
+              "end": 0.641666667,
+              "samples": 5,
+              "maxHorizontalDriftMeters": 0.002494964,
+              "minSoleHeightMeters": 0.004271202,
+              "maxSoleHeightMeters": 0.006753673
+            },
+            {
+              "start": 3.033333333,
+              "end": 3.091666667,
+              "samples": 8,
+              "maxHorizontalDriftMeters": 0.003702605,
+              "minSoleHeightMeters": 0.004124387,
+              "maxSoleHeightMeters": 0.007644348
+            },
+            {
+              "start": 3.658333333,
+              "end": 3.675,
+              "samples": 3,
+              "maxHorizontalDriftMeters": 0.002809964,
+              "minSoleHeightMeters": 0.004363066,
+              "maxSoleHeightMeters": 0.006829121
+            },
+            {
+              "start": 4.025,
+              "end": 4.041666667,
+              "samples": 3,
+              "maxHorizontalDriftMeters": 0.002824185,
+              "minSoleHeightMeters": 0.004366136,
+              "maxSoleHeightMeters": 0.006820467
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.005572151,
+          "maxUndeclaredGroundDriftMeters": 0.003702605,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "asset": "clips/keeper_dive_high.glb",
+      "sha256": "1ffd57d5d695750653dfe2757108c5c02b3b5975fcc76bfed9b8c51f73c04285",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.633333333,
+              "samples": 77,
+              "maxHorizontalDriftMeters": 0.001512981,
+              "minSoleHeightMeters": 0.003774997,
+              "maxSoleHeightMeters": 0.006021968
+            },
+            {
+              "start": 3.058333333,
+              "end": 3.233333333,
+              "samples": 22,
+              "maxHorizontalDriftMeters": 0.009728534,
+              "minSoleHeightMeters": 0.003999996,
+              "maxSoleHeightMeters": 0.007172802
+            },
+            {
+              "start": 3.666666667,
+              "end": 5.2,
+              "samples": 185,
+              "maxHorizontalDriftMeters": 0.004177916,
+              "minSoleHeightMeters": 0.003966535,
+              "maxSoleHeightMeters": 0.006613398
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.608333333,
+              "end": 0.633333333,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.001134454,
+              "minSoleHeightMeters": 0.004504984,
+              "maxSoleHeightMeters": 0.006021968
+            },
+            {
+              "start": 3.058333333,
+              "end": 3.091666667,
+              "samples": 5,
+              "maxHorizontalDriftMeters": 0.005065668,
+              "minSoleHeightMeters": 0.004333006,
+              "maxSoleHeightMeters": 0.007172802
+            },
+            {
+              "start": 3.208333333,
+              "end": 3.233333333,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.003559158,
+              "minSoleHeightMeters": 0.004647155,
+              "maxSoleHeightMeters": 0.006613336
+            },
+            {
+              "start": 3.666666667,
+              "end": 3.691666667,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.003126379,
+              "minSoleHeightMeters": 0.004607562,
+              "maxSoleHeightMeters": 0.006613398
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.009728534,
+          "maxUndeclaredGroundDriftMeters": 0.005065668,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.633333333,
+              "samples": 77,
+              "maxHorizontalDriftMeters": 0.000986701,
+              "minSoleHeightMeters": 0.00378626,
+              "maxSoleHeightMeters": 0.00674409
+            },
+            {
+              "start": 3.033333333,
+              "end": 3.675,
+              "samples": 78,
+              "maxHorizontalDriftMeters": 0.005572151,
+              "minSoleHeightMeters": 0.003995908,
+              "maxSoleHeightMeters": 0.007644348
+            },
+            {
+              "start": 4.025,
+              "end": 5.2,
+              "samples": 142,
+              "maxHorizontalDriftMeters": 0.003235354,
+              "minSoleHeightMeters": 0.00398848,
+              "maxSoleHeightMeters": 0.006820467
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.608333333,
+              "end": 0.633333333,
+              "samples": 4,
+              "maxHorizontalDriftMeters": 0.000739671,
+              "minSoleHeightMeters": 0.004685819,
+              "maxSoleHeightMeters": 0.00674409
+            },
+            {
+              "start": 3.033333333,
+              "end": 3.091666667,
+              "samples": 8,
+              "maxHorizontalDriftMeters": 0.003702605,
+              "minSoleHeightMeters": 0.004124387,
+              "maxSoleHeightMeters": 0.007644348
+            },
+            {
+              "start": 3.658333333,
+              "end": 3.675,
+              "samples": 3,
+              "maxHorizontalDriftMeters": 0.002809964,
+              "minSoleHeightMeters": 0.004363066,
+              "maxSoleHeightMeters": 0.006829121
+            },
+            {
+              "start": 4.025,
+              "end": 4.041666667,
+              "samples": 3,
+              "maxHorizontalDriftMeters": 0.002824185,
+              "minSoleHeightMeters": 0.004366136,
+              "maxSoleHeightMeters": 0.006820467
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.005572151,
+          "maxUndeclaredGroundDriftMeters": 0.003702605,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_catch_two_hands",
+      "asset": "clips/keeper_catch_two_hands.glb",
+      "sha256": "e2bb0a3eabf11d2b956a586de9891a2ddcdf94cbfa86b9841bab4e1c69bef823",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.6,
+              "samples": 433,
+              "maxHorizontalDriftMeters": 0,
+              "minSoleHeightMeters": 0.004000026,
+              "maxSoleHeightMeters": 0.004000026
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.6,
+              "samples": 433,
+              "maxHorizontalDriftMeters": 0,
+              "minSoleHeightMeters": 0.004000026,
+              "maxSoleHeightMeters": 0.004000026
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_punch",
+      "asset": "clips/keeper_punch.glb",
+      "sha256": "da2dff9698396ee59d6ec665d32021764c20be9371478b3e0a383315ae34da8a",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.6,
+              "samples": 73,
+              "maxHorizontalDriftMeters": 0.000461308,
+              "minSoleHeightMeters": 0.003963804,
+              "maxSoleHeightMeters": 0.007644323
+            },
+            {
+              "start": 1.716666667,
+              "end": 3.2,
+              "samples": 179,
+              "maxHorizontalDriftMeters": 0.000409446,
+              "minSoleHeightMeters": 0.003996692,
+              "maxSoleHeightMeters": 0.00731104
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.558333333,
+              "end": 0.6,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.000473686,
+              "minSoleHeightMeters": 0.00406553,
+              "maxSoleHeightMeters": 0.007644323
+            },
+            {
+              "start": 1.716666667,
+              "end": 1.791666667,
+              "samples": 10,
+              "maxHorizontalDriftMeters": 0.000401348,
+              "minSoleHeightMeters": 0.004053538,
+              "maxSoleHeightMeters": 0.00731104
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.000461308,
+          "maxUndeclaredGroundDriftMeters": 0.000473686,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.6,
+              "samples": 73,
+              "maxHorizontalDriftMeters": 0.000461308,
+              "minSoleHeightMeters": 0.003963804,
+              "maxSoleHeightMeters": 0.007644323
+            },
+            {
+              "start": 1.716666667,
+              "end": 3.2,
+              "samples": 179,
+              "maxHorizontalDriftMeters": 0.000409446,
+              "minSoleHeightMeters": 0.003996692,
+              "maxSoleHeightMeters": 0.00731104
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.558333333,
+              "end": 0.6,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.000473686,
+              "minSoleHeightMeters": 0.00406553,
+              "maxSoleHeightMeters": 0.007644323
+            },
+            {
+              "start": 1.716666667,
+              "end": 1.791666667,
+              "samples": 10,
+              "maxHorizontalDriftMeters": 0.000401348,
+              "minSoleHeightMeters": 0.004053538,
+              "maxSoleHeightMeters": 0.00731104
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.000461308,
+          "maxUndeclaredGroundDriftMeters": 0.000473686,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "asset": "clips/keeper_throw.glb",
+      "sha256": "c6406df8816708ae6415d0b76a119a784f6db0c32775226c83c4c7026420e139",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 0.000045959,
+              "minSoleHeightMeters": 0.003967253,
+              "maxSoleHeightMeters": 0.004000039
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0.000045959,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 0.000039994,
+              "minSoleHeightMeters": 0.003980494,
+              "maxSoleHeightMeters": 0.004000037
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0.000039994,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "asset": "clips/keeper_punt.glb",
+      "sha256": "6e687217e47756d9920925e69ee43a4c0eaba2486ca29fc16d4e3326a0cc537c",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 4.2,
+              "samples": 505,
+              "maxHorizontalDriftMeters": 0.000004241,
+              "minSoleHeightMeters": 0.003985267,
+              "maxSoleHeightMeters": 0.004000031
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0.000004241,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.858333333,
+              "samples": 104,
+              "maxHorizontalDriftMeters": 0.006315598,
+              "minSoleHeightMeters": 0.003995677,
+              "maxSoleHeightMeters": 0.007546691
+            },
+            {
+              "start": 2.525,
+              "end": 4.2,
+              "samples": 202,
+              "maxHorizontalDriftMeters": 0.006862411,
+              "minSoleHeightMeters": 0.003999645,
+              "maxSoleHeightMeters": 0.007432111
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.808333333,
+              "end": 0.858333333,
+              "samples": 7,
+              "maxHorizontalDriftMeters": 0.006032594,
+              "minSoleHeightMeters": 0.004158761,
+              "maxSoleHeightMeters": 0.007546691
+            },
+            {
+              "start": 2.525,
+              "end": 2.591666667,
+              "samples": 9,
+              "maxHorizontalDriftMeters": 0.006710114,
+              "minSoleHeightMeters": 0.004076615,
+              "maxSoleHeightMeters": 0.007432111
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.006862411,
+          "maxUndeclaredGroundDriftMeters": 0.006710114,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_celebrate",
+      "asset": "clips/keeper_celebrate.glb",
+      "sha256": "fcfb4062aba2fc1a7d050f1fa76e991abdd1e389ed8d44a858ce16f8a753765b",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 0,
+              "minSoleHeightMeters": 0.004000026,
+              "maxSoleHeightMeters": 0.004000026
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 0,
+              "minSoleHeightMeters": 0.004000026,
+              "maxSoleHeightMeters": 0.004000026
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 0,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_disappointed",
+      "asset": "clips/keeper_disappointed.glb",
+      "sha256": "cfb6a82c3bb75c956b7ca19372b4677cd3cfbd8e53a00effd31eb3730f7d8e45",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.6,
+              "samples": 433,
+              "maxHorizontalDriftMeters": 5.32e-7,
+              "minSoleHeightMeters": 0.00399874,
+              "maxSoleHeightMeters": 0.004000034
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.32e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.6,
+              "samples": 433,
+              "maxHorizontalDriftMeters": 5.32e-7,
+              "minSoleHeightMeters": 0.00399874,
+              "maxSoleHeightMeters": 0.004000034
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.32e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "field_miss",
+      "asset": "clips/field_miss.glb",
+      "sha256": "ead477e6cd7ee9536abf9e770a90ccb63ddabca1f2711b8dd18f2b833ae3c418",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 3.8,
+              "samples": 457,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "field_group_celebrate",
+      "asset": "clips/field_group_celebrate.glb",
+      "sha256": "f6bff555623447d3752ea7a0e950b91f12ee8efe84c372d967f2fea75af02f72",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 4.4,
+              "samples": 529,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 4.4,
+              "samples": 529,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "field_enter",
+      "asset": "clips/field_enter.glb",
+      "sha256": "6df0a3c20966ce1a202dd7ab7cff2e60bf1b5634f0d24e11148df3f665f23dcc",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 0.5,
+              "samples": 61,
+              "maxHorizontalDriftMeters": 0.002425573,
+              "minSoleHeightMeters": -0.000101744,
+              "maxSoleHeightMeters": 0.006872613
+            },
+            {
+              "start": 1.05,
+              "end": 2.25,
+              "samples": 145,
+              "maxHorizontalDriftMeters": 0.004378174,
+              "minSoleHeightMeters": -0.000233311,
+              "maxSoleHeightMeters": 0.007029525
+            },
+            {
+              "start": 2.85,
+              "end": 4,
+              "samples": 139,
+              "maxHorizontalDriftMeters": 0.002060924,
+              "minSoleHeightMeters": -0.000054211,
+              "maxSoleHeightMeters": 0.006501102
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 0.458333333,
+              "end": 0.5,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.002558096,
+              "minSoleHeightMeters": 0.000577453,
+              "maxSoleHeightMeters": 0.006872613
+            },
+            {
+              "start": 1.05,
+              "end": 1.091666667,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.002601638,
+              "minSoleHeightMeters": 0.000688337,
+              "maxSoleHeightMeters": 0.007029525
+            },
+            {
+              "start": 2.208333333,
+              "end": 2.25,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.00187965,
+              "minSoleHeightMeters": 0.000659038,
+              "maxSoleHeightMeters": 0.00650878
+            },
+            {
+              "start": 2.85,
+              "end": 2.891666667,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.001890622,
+              "minSoleHeightMeters": 0.000656791,
+              "maxSoleHeightMeters": 0.006501102
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.004378174,
+          "maxUndeclaredGroundDriftMeters": 0.002601638,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 1.4,
+              "samples": 169,
+              "maxHorizontalDriftMeters": 0.004446892,
+              "minSoleHeightMeters": -0.000101744,
+              "maxSoleHeightMeters": 0.006872623
+            },
+            {
+              "start": 2.183333333,
+              "end": 4,
+              "samples": 219,
+              "maxHorizontalDriftMeters": 0.004612485,
+              "minSoleHeightMeters": -0.000683145,
+              "maxSoleHeightMeters": 0.007532907
+            }
+          ],
+          "undeclaredGroundRuns": [
+            {
+              "start": 1.358333333,
+              "end": 1.4,
+              "samples": 6,
+              "maxHorizontalDriftMeters": 0.004671001,
+              "minSoleHeightMeters": 0.000512096,
+              "maxSoleHeightMeters": 0.006872623
+            }
+          ],
+          "maxInferredGroundDriftMeters": 0.004612485,
+          "maxUndeclaredGroundDriftMeters": 0.004671001,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "field_clap",
+      "asset": "clips/field_clap.glb",
+      "sha256": "e12ff5261d3496d74b7614706e54ec5bf98f7c84a7858eed4092a9c472f9b137",
+      "sampleRate": 120,
+      "feet": [
+        {
+          "bone": "LeftFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 4,
+              "samples": 481,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        },
+        {
+          "bone": "RightFoot",
+          "inferredGroundRuns": [
+            {
+              "start": 0,
+              "end": 4,
+              "samples": 481,
+              "maxHorizontalDriftMeters": 5.76e-7,
+              "minSoleHeightMeters": -0.00001355,
+              "maxSoleHeightMeters": 3e-8
+            }
+          ],
+          "undeclaredGroundRuns": [],
+          "maxInferredGroundDriftMeters": 5.76e-7,
+          "maxUndeclaredGroundDriftMeters": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "ballChecks": [
+    {
+      "id": "keeper_dive_low",
+      "ballSampleCount": 625,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "LeftHand",
+          "start": 1.1,
+          "end": 1.1,
+          "samples": 1,
+          "maxGapMeters": 3e-9,
+          "pass": true
+        },
+        {
+          "kind": "impact-changes-ball-velocity",
+          "time": 1.1,
+          "incomingVelocityMps": [
+            0,
+            -0.3,
+            -2.6
+          ],
+          "outgoingVelocityMps": [
+            1.7,
+            0.5,
+            2.5
+          ],
+          "velocityChangeMps": 5.435071297,
+          "outgoingSpeedMps": 3.064310689,
+          "pass": true
+        },
+        {
+          "kind": "deflected-ball-obeys-world-gravity",
+          "start": 1.1,
+          "end": 1.5,
+          "samples": 39,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        },
+        {
+          "kind": "incoming-ball-is-independent-world-line",
+          "start": 0,
+          "end": 1.1,
+          "samples": 129,
+          "expectedAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_dive_high",
+      "ballSampleCount": 625,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "LeftHand",
+          "start": 1.1,
+          "end": 1.1,
+          "samples": 1,
+          "maxGapMeters": 5e-9,
+          "pass": true
+        },
+        {
+          "kind": "impact-changes-ball-velocity",
+          "time": 1.1,
+          "incomingVelocityMps": [
+            0,
+            -0.3,
+            -2.6
+          ],
+          "outgoingVelocityMps": [
+            1.7,
+            0.5,
+            2.5
+          ],
+          "velocityChangeMps": 5.435071297,
+          "outgoingSpeedMps": 3.064310689,
+          "pass": true
+        },
+        {
+          "kind": "deflected-ball-obeys-world-gravity",
+          "start": 1.1,
+          "end": 1.5,
+          "samples": 45,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        },
+        {
+          "kind": "incoming-ball-is-independent-world-line",
+          "start": 0,
+          "end": 1.1,
+          "samples": 129,
+          "expectedAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_catch_two_hands",
+      "ballSampleCount": 433,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "LeftHand",
+          "start": 0.8,
+          "end": 2.6,
+          "samples": 217,
+          "maxGapMeters": 0.000471053,
+          "pass": true
+        },
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "RightHand",
+          "start": 0.8,
+          "end": 2.6,
+          "samples": 217,
+          "maxGapMeters": 0.000471053,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_punch",
+      "ballSampleCount": 385,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "LeftHand",
+          "start": 1,
+          "end": 1,
+          "samples": 1,
+          "maxGapMeters": 4e-9,
+          "pass": true
+        },
+        {
+          "kind": "impact-changes-ball-velocity",
+          "time": 1,
+          "incomingVelocityMps": [
+            0,
+            -0.55,
+            -2.6
+          ],
+          "outgoingVelocityMps": [
+            0,
+            2.7,
+            5
+          ],
+          "velocityChangeMps": 8.265742556,
+          "outgoingSpeedMps": 5.682429058,
+          "pass": true
+        },
+        {
+          "kind": "deflected-ball-obeys-world-gravity",
+          "start": 1,
+          "end": 1.4,
+          "samples": 45,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        },
+        {
+          "kind": "incoming-ball-is-independent-world-line",
+          "start": 0,
+          "end": 1,
+          "samples": 117,
+          "expectedAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            0,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_throw",
+      "ballSampleCount": 457,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "RightHand",
+          "start": 0.45,
+          "end": 1.4,
+          "samples": 115,
+          "maxGapMeters": 0.003896095,
+          "pass": true
+        },
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "RightHand",
+          "start": 1.4,
+          "end": 1.4,
+          "samples": 1,
+          "maxGapMeters": 0,
+          "pass": true
+        },
+        {
+          "kind": "release-has-continuous-ball-velocity",
+          "time": 1.4,
+          "incomingVelocityMps": [
+            0.000217014,
+            1.798828125,
+            3.998697917
+          ],
+          "outgoingVelocityMps": [
+            0,
+            1.8,
+            4
+          ],
+          "mismatchMps": 0.001765165,
+          "pass": true
+        },
+        {
+          "kind": "released-ball-obeys-gravity",
+          "start": 1.4,
+          "end": 1.7999999999999998,
+          "samples": 45,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        },
+        {
+          "kind": "released-ball-separates-from-hand",
+          "time": 1.52,
+          "surfaceSeparationMeters": 0.46429832,
+          "pass": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "keeper_punt",
+      "ballSampleCount": 505,
+      "checks": [
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "LeftHand",
+          "start": 0.5,
+          "end": 1.2666666666666666,
+          "samples": 93,
+          "maxGapMeters": 0.000007149,
+          "pass": true
+        },
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "RightHand",
+          "start": 0.5,
+          "end": 1.2666666666666666,
+          "samples": 93,
+          "maxGapMeters": 0.000007149,
+          "pass": true
+        },
+        {
+          "kind": "native-effector-to-independent-ball-surface",
+          "bone": "RightFoot",
+          "start": 1.6,
+          "end": 1.6,
+          "samples": 1,
+          "maxGapMeters": 3e-9,
+          "pass": true
+        },
+        {
+          "kind": "unsupported-drop-obeys-gravity",
+          "start": 1.2666666666666666,
+          "end": 1.6,
+          "samples": 37,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        },
+        {
+          "kind": "drop-starts-from-rest",
+          "dropTime": 1.2666666666666666,
+          "observedVelocityMps": [
+            0,
+            0,
+            0
+          ],
+          "pass": true
+        },
+        {
+          "kind": "impact-changes-ball-velocity",
+          "time": 1.6,
+          "incomingVelocityMps": [
+            0,
+            -3.27,
+            0
+          ],
+          "outgoingVelocityMps": [
+            0,
+            3.5,
+            7
+          ],
+          "velocityChangeMps": 9.738218523,
+          "outgoingSpeedMps": 7.826237921,
+          "pass": true
+        },
+        {
+          "kind": "deflected-ball-obeys-world-gravity",
+          "start": 1.6,
+          "end": 2,
+          "samples": 45,
+          "expectedAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "observedMeanAccelerationMps2": [
+            0,
+            -9.81,
+            0
+          ],
+          "maxAccelerationErrorMps2": 0,
+          "pass": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "failures": []
+}

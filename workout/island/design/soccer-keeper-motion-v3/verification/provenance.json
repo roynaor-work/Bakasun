@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "locomotionCommit": "ec6c73949fb5820826b4c082972f5d4f1136641f",
+  "qaCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "dependencyFiles": [
+    {
+      "path": "workout/island/design/soccer-header-v1/source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "workout/island/design/soccer-header-v1/source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/keeper.glb",
+      "bytes": 948984,
+      "sha256": "4d786e2f7998f3114c71e9cd91cad0ce4d2989d30168a5343bb328727a574f42"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/three.module.js",
+      "bytes": 670681,
+      "sha256": "3e690ac7d180b0aadf0891bea39eec643e29e2d3e75c99b18689518665f69ba6"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/GLTFLoader.js",
+      "bytes": 108527,
+      "sha256": "1f9b02acfbf219a6ebb77f09e355500449a3ba9e6a77d87e0de72c0b9315ea4e"
+    },
+    {
+      "path": "workout/island/design/soccer-motion-v8/runtime/vendor/SkeletonUtils.js",
+      "bytes": 8019,
+      "sha256": "0732d130a9366dd7803e5f9b38f60cc8b54e488e1c991d99711fb1d01be3124d"
+    }
+  ],
+  "files": [
+    {
+      "path": "catalog.json",
+      "bytes": 989519,
+      "sha256": "077e063cfba3b3b4ba5a4538c9cb6571b2e44f23e2ceba776fb5b0825fbb93b9"
+    },
+    {
+      "path": "clips/field_clap.glb",
+      "bytes": 805640,
+      "sha256": "e12ff5261d3496d74b7614706e54ec5bf98f7c84a7858eed4092a9c472f9b137"
+    },
+    {
+      "path": "clips/field_enter.glb",
+      "bytes": 805712,
+      "sha256": "6df0a3c20966ce1a202dd7ab7cff2e60bf1b5634f0d24e11148df3f665f23dcc"
+    },
+    {
+      "path": "clips/field_group_celebrate.glb",
+      "bytes": 809328,
+      "sha256": "f6bff555623447d3752ea7a0e950b91f12ee8efe84c372d967f2fea75af02f72"
+    },
+    {
+      "path": "clips/field_miss.glb",
+      "bytes": 803772,
+      "sha256": "ead477e6cd7ee9536abf9e770a90ccb63ddabca1f2711b8dd18f2b833ae3c418"
+    },
+    {
+      "path": "clips/keeper_catch_two_hands.glb",
+      "bytes": 772552,
+      "sha256": "e2bb0a3eabf11d2b956a586de9891a2ddcdf94cbfa86b9841bab4e1c69bef823"
+    },
+    {
+      "path": "clips/keeper_celebrate.glb",
+      "bytes": 774328,
+      "sha256": "fcfb4062aba2fc1a7d050f1fa76e991abdd1e389ed8d44a858ce16f8a753765b"
+    },
+    {
+      "path": "clips/keeper_disappointed.glb",
+      "bytes": 772480,
+      "sha256": "cfb6a82c3bb75c956b7ca19372b4677cd3cfbd8e53a00effd31eb3730f7d8e45"
+    },
+    {
+      "path": "clips/keeper_dive_high.glb",
+      "bytes": 787324,
+      "sha256": "1ffd57d5d695750653dfe2757108c5c02b3b5975fcc76bfed9b8c51f73c04285"
+    },
+    {
+      "path": "clips/keeper_dive_low.glb",
+      "bytes": 787324,
+      "sha256": "d37c93fdaab253b3e1ede0e9e9f509b04849aba54f408698ab55804e267f7152"
+    },
+    {
+      "path": "clips/keeper_punch.glb",
+      "bytes": 768892,
+      "sha256": "da2dff9698396ee59d6ec665d32021764c20be9371478b3e0a383315ae34da8a"
+    },
+    {
+      "path": "clips/keeper_punt.glb",
+      "bytes": 778016,
+      "sha256": "6e687217e47756d9920925e69ee43a4c0eaba2486ca29fc16d4e3326a0cc537c"
+    },
+    {
+      "path": "clips/keeper_ready.glb",
+      "bytes": 761468,
+      "sha256": "adbbecc3d8e19514c34229522fd1e123ef2010562a0a3798de383d66508a5ba0"
+    },
+    {
+      "path": "clips/keeper_shuffle.glb",
+      "bytes": 769164,
+      "sha256": "d9521d7e5f679977cce520207ff25bf89b61baa422bfd47edc9eaddab3d211fc"
+    },
+    {
+      "path": "clips/keeper_throw.glb",
+      "bytes": 774400,
+      "sha256": "c6406df8816708ae6415d0b76a119a784f6db0c32775226c83c4c7026420e139"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 4569,
+      "sha256": "3556800eba115fa7981ccc539d70a19b5d9e13e21e6a4f13c009109bf5df2b78"
+    },
+    {
+      "path": "motions.json",
+      "bytes": 2500664,
+      "sha256": "852d1c5b51f5ba2f9be402ecca2badc6ccf90af16477ba5953eaaba325cfc508"
+    },
+    {
+      "path": "preview.css",
+      "bytes": 8535,
+      "sha256": "f64206dddd3d3ea338428f39fab4e2ffaf279f8878c3936ca0ebbdbeafc2f540"
+    },
+    {
+      "path": "preview.html",
+      "bytes": 3047,
+      "sha256": "88e6e32b0b4618318b9398afb862db9fa9e6c1787dc2b813ab0feb0f37da86ee"
+    },
+    {
+      "path": "preview.mjs",
+      "bytes": 17700,
+      "sha256": "aa6a2df1cdeb5a3ac5d1aae8bced918c66bef3697555f617fab82a6605210fda"
+    },
+    {
+      "path": "qa-sources.mjs",
+      "bytes": 7488,
+      "sha256": "e7ba82400ca5b3b68dc629879af52fa45ac387f549c29d14646a9fe7bf4d1fe8"
+    },
+    {
+      "path": "reference/idle_relaxed.glb",
+      "bytes": 805528,
+      "sha256": "81c4324076b0a6b1fde1abb3ab184280dd8e2d243e7cbc92ea23fc9b9ce3322c"
+    },
+    {
+      "path": "reference/keeper-template.glb",
+      "bytes": 734924,
+      "sha256": "a8ac0d9eb864c2eb3c40c25a2480262790391a2defff172bb9d1ebff6976ad05"
+    },
+    {
+      "path": "reference/run.glb",
+      "bytes": 775696,
+      "sha256": "5c3cc67e5627fbd92281388821579625059847d3b2e0f311d7f8a48e41a18bc7"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 10607,
+      "sha256": "6b7270533423978f08e0a7ec91788574351980625aaad40a5dc0e2e5e34f9be1"
+    },
+    {
+      "path": "runtime/player.mjs",
+      "bytes": 8055,
+      "sha256": "991cc1bb91520918471f3e7fc7948e4ae582a1e37cb61c73bb0e3261a21ad19c"
+    },
+    {
+      "path": "sheets/field_clap.png",
+      "bytes": 399151,
+      "sha256": "b0764f7254554b00f1e658be95490f7118cb5c417e60aec1c23418fdb104e13a"
+    },
+    {
+      "path": "sheets/field_enter.png",
+      "bytes": 454028,
+      "sha256": "5fad651d5698c8bd6f81ed2f9ead6ccfd462f65a633b5eb8d6b266a5113235a3"
+    },
+    {
+      "path": "sheets/field_group_celebrate.png",
+      "bytes": 546907,
+      "sha256": "325c5da591a516f07e668dd7283b8fbcd755c0407c2e5a9418ab883a4567bf97"
+    },
+    {
+      "path": "sheets/field_miss.png",
+      "bytes": 415683,
+      "sha256": "f0d7e841b16c75863bee9c0345e7b19edfb441f7bb27bae2d1e47e371472773f"
+    },
+    {
+      "path": "sheets/keeper_catch_two_hands.png",
+      "bytes": 383794,
+      "sha256": "d2f84fe34ef25922677f6bdbc2b308b8bd982b1088fa60f9addc081413b690b6"
+    },
+    {
+      "path": "sheets/keeper_celebrate.png",
+      "bytes": 396405,
+      "sha256": "22893a4977a7262b6675a0a72c645281ac622b8f6703c99ff9617cbd57f3d80a"
+    },
+    {
+      "path": "sheets/keeper_disappointed.png",
+      "bytes": 481489,
+      "sha256": "a038905acaa928ead2e69b1184a4440103b9dde18f3352aa8e1ceb4b3afc2c33"
+    },
+    {
+      "path": "sheets/keeper_dive_high.png",
+      "bytes": 441008,
+      "sha256": "574d7e2582ba56bb234e7e6a238a2b52145531385425b7bea787f752853febfa"
+    },
+    {
+      "path": "sheets/keeper_dive_low.png",
+      "bytes": 461662,
+      "sha256": "5a9ac222245804064abef9f2780542f560a7965c3ff5cfb59b37cdc40ba0b946"
+    },
+    {
+      "path": "sheets/keeper_punch.png",
+      "bytes": 454907,
+      "sha256": "b0af136161ecddb6374f4c085f11c288a3598995932741f2e03d684eda630a31"
+    },
+    {
+      "path": "sheets/keeper_punt.png",
+      "bytes": 453221,
+      "sha256": "0cd88e0b2fdc9f4ee4f0e68b74faad6216ac1d95a685650ac8080215b57a8bf5"
+    },
+    {
+      "path": "sheets/keeper_ready.png",
+      "bytes": 454121,
+      "sha256": "0e0a83c024b9fabcf9af2c2ebf5fe9f4ae9aa3856a70201c756b227c49a235b4"
+    },
+    {
+      "path": "sheets/keeper_shuffle.png",
+      "bytes": 437435,
+      "sha256": "9cfb735f4b997930a746aceb89cafff3fe1b963825b846795dcde9e6c746537b"
+    },
+    {
+      "path": "sheets/keeper_throw.png",
+      "bytes": 444269,
+      "sha256": "9bc3e155a3d207ef03fcd6a50fc8494443080b47d7b3782d3e2e1ef12d2ac70b"
+    },
+    {
+      "path": "source/author.mjs",
+      "bytes": 20555,
+      "sha256": "caf9641734280d1c4ff1a38d88d30377fe99d4034284846b8b4af1fb93163d17"
+    },
+    {
+      "path": "source/bake.mjs",
+      "bytes": 3214,
+      "sha256": "0efc40008a833e8258cf99bacb9b08b29e7c97528e96cd592f348ca35b97d1ff"
+    },
+    {
+      "path": "source/capture.mjs",
+      "bytes": 11610,
+      "sha256": "76e16fc600dc2219016d49046f7c782fa01bd60d5f5707f43a64b2d1bff26cfd"
+    },
+    {
+      "path": "source/glb.mjs",
+      "bytes": 5643,
+      "sha256": "7ab86f62c4942df3ce7d704e721ec2e7de3e318c9dd415eec2944ab24b8f50a0"
+    },
+    {
+      "path": "source/measure-transitions.mjs",
+      "bytes": 10746,
+      "sha256": "bd5e3938ce726c083cbdaccbd6bd78dc87551470b27e389bbdbf6a094d74c2e5"
+    },
+    {
+      "path": "source/prepare-keeper.mjs",
+      "bytes": 3287,
+      "sha256": "2e09394b981260f4cd068ec4d1e7d5a2ef2c9e62929ca505bee3513f8169bbcd"
+    },
+    {
+      "path": "source/report.mjs",
+      "bytes": 11415,
+      "sha256": "0f3dd50476347cdaa73c7dc9519b3e866d8ca1ba00b529aa145388068e17b8d8"
+    },
+    {
+      "path": "source/rig.mjs",
+      "bytes": 5223,
+      "sha256": "fdfccf8692d71753853522b8b831ea1e143a1eb03e7f969458a09b852665d87d"
+    },
+    {
+      "path": "source/run-qa.mjs",
+      "bytes": 10440,
+      "sha256": "7de0061f6cfec467119ff4cccef4b9b06aafda29e9060296e8882ae8cce9c025"
+    },
+    {
+      "path": "source/validate-assets.mjs",
+      "bytes": 8647,
+      "sha256": "58f66f561779c8e27bbc0040f1e315069f8ea89537ff9ebb0487acdc6f72efde"
+    },
+    {
+      "path": "source/verify-actions.mjs",
+      "bytes": 12989,
+      "sha256": "1a13ab8995c172f8a92af7319bf811eb8d6d8814002e8ff8cfaa41dde8801eb1"
+    },
+    {
+      "path": "verification/actions.json",
+      "bytes": 43879,
+      "sha256": "b81b025169327b8d68bedd13058f6dd5c20c829f3a42fb9f8d0824060029510b"
+    },
+    {
+      "path": "verification/assets.json",
+      "bytes": 124743,
+      "sha256": "dcf9527d99c9cf3b95585086a136f0455ca7c71e64610b9b504b0b0e9331f7ee"
+    },
+    {
+      "path": "verification/browser.json",
+      "bytes": 594925,
+      "sha256": "f54db1292cfefe9ae1bd3f7085056cecab365890b605783d1df668c5d31d54b6"
+    },
+    {
+      "path": "verification/keeper-template.json",
+      "bytes": 362,
+      "sha256": "fa095ae09b82fd03fd8d330cdcba01dd27116252dd7e1b2726c870288aa58db5"
+    },
+    {
+      "path": "verification/preview-390x844.png",
+      "bytes": 81516,
+      "sha256": "0cf7400c499f4d02b67979c8cad5244b6f7bb2aa7de0ab9b5fa20bd7be25a233"
+    },
+    {
+      "path": "verification/preview-844x390.png",
+      "bytes": 73804,
+      "sha256": "d1d24c0bac0eabaa6145207c9afd56e63058ef5092fcc9221255b3b0663e99ed"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_clap.html",
+      "bytes": 5940,
+      "sha256": "c045eba090dfd40a76b0d2d936182f3c12a7884c28c31d3f81262322beacc2e8"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_clap.json",
+      "bytes": 10380,
+      "sha256": "e61df924d08a980a32eb4a2a507f801f876d3d723d47932d52fb522f14763d98"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_enter.html",
+      "bytes": 7659,
+      "sha256": "e15b0ed2da449ef29b0c08505feede35347d6fbbf10762e7d08f9c67ce4ddacf"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_enter.json",
+      "bytes": 45614,
+      "sha256": "88a2d2d1a7afd7148c2cc20364d3e5d90bbb3e874cd87e86276ea01e02884bbe"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_group_celebrate.html",
+      "bytes": 6003,
+      "sha256": "260ff55d70a5ccd141e51b6deab3122a64d323d0fb8ab57be8e6584057352fcc"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_group_celebrate.json",
+      "bytes": 10705,
+      "sha256": "535dc83aa69aed4529a3a00c79da917794cee9c27b228d8efadc6828b796a654"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_miss.html",
+      "bytes": 5945,
+      "sha256": "14f84e31f71a67ff2fb2144d3d591a3e7bdd07c3d6118c0ae43c1226229a4338"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--field_miss.json",
+      "bytes": 10375,
+      "sha256": "37c1636a09b454e00bd35a0cb8632c5b08352396f14935303b1d8bcfefa8b34d"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--idle_relaxed.html",
+      "bytes": 5965,
+      "sha256": "e7e6c582e9f1e9451b231b2ee8aefbbbad2962dd782efaaae1588892f7a5dc10"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--idle_relaxed.json",
+      "bytes": 9684,
+      "sha256": "263d872f45d71036313bce8015a0ca2809600c7c810f02700c4e5a936e90caea"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_catch_two_hands.html",
+      "bytes": 15210,
+      "sha256": "6be6ce210cb7335cc8e14a86c72c709e59cb303bbb1c2cb8607b3d9cf4f63f27"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_catch_two_hands.json",
+      "bytes": 15181,
+      "sha256": "c8fce9dba8f2d211f8c38d193eaab80791d32c0a6334e197c3a216309e3b9f90"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_celebrate.html",
+      "bytes": 5914,
+      "sha256": "531cdba36a28f3c0fa197b14bfbee6fdde44202543ab913c83b3d866a9138785"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_celebrate.json",
+      "bytes": 10359,
+      "sha256": "ad1a3825b05746d32b7424d862938420d2ca5976af9cd760dce82b631476feba"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_disappointed.html",
+      "bytes": 5941,
+      "sha256": "1e1abe7aeed8f9c372a349033e7cc35cff788f9dfba1f325a4e949162a1d07c5"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_disappointed.json",
+      "bytes": 10353,
+      "sha256": "aa48839d8d165ff924d6f7a00397734956d43dc76813b868519c35f93644fa20"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_dive_high.html",
+      "bytes": 6641,
+      "sha256": "9afc6d27da78d4b4c51e227396af2b4f51e11677567d79d8c8503fdb99531072"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_dive_high.json",
+      "bytes": 52422,
+      "sha256": "79b0fd9b7c5df638e12173c0d8f55b0ee12ca82f8b9b4d2e55ba3f8a76ae153a"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_dive_low.html",
+      "bytes": 6638,
+      "sha256": "9a6d92ad398ca45fa45ba3d02ab1fce11801d0040e0bd4dde0c49a4278a8040b"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_dive_low.json",
+      "bytes": 51380,
+      "sha256": "e02ce361eba1e1c4803e549114964ef884a79743685506a37bbab8b83b17382f"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_punch.html",
+      "bytes": 6600,
+      "sha256": "d7c8008d1d2470e729372dfc00d52b274d0256ffcb48229d02d53ebc2a90dc9b"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_punch.json",
+      "bytes": 11427,
+      "sha256": "5ef9e00d1424f0027873163a2b1f2a036fd144f240eaabd3a16b8db28d43d60e"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_punt.html",
+      "bytes": 15058,
+      "sha256": "e32f5951109447d51df5aaf6a40a351184db491e563fdb6bfd43ee6449c0b5fe"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_punt.json",
+      "bytes": 15375,
+      "sha256": "c9326077e78a1103f3b9c9433a2dd98a170c3d700057e593c58c1beab1ae6966"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_ready.html",
+      "bytes": 5858,
+      "sha256": "bf1ded37122be003638251d21272cc4124db8a55e56bf59f9c7095920804667d"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_ready.json",
+      "bytes": 10039,
+      "sha256": "7c688a3cdf680e28871b6c28e5f117630828d3c94441c878051f073300f2b791"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_shuffle.html",
+      "bytes": 7857,
+      "sha256": "2e99bc27f3147744913884e00d621e682ce71648d6e7ae99722d56919fad7db0"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_shuffle.json",
+      "bytes": 38966,
+      "sha256": "86d54f6eeda472a272e9527f4a712ce59d8ac0a469ab57a35efbbd1b34583d96"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_throw.html",
+      "bytes": 15401,
+      "sha256": "3e99e29af7f8cffef82a52a03e1fb7c519325e8fc5a8cf6f175bf0166c476269"
+    },
+    {
+      "path": "verification/qa/clips/soccer-keeper-motion-v3--keeper_throw.json",
+      "bytes": 16325,
+      "sha256": "eede823dc4da4dd89b97ef6e5c5a6af4528d8a0b05b62033ad76d9218e8b2526"
+    },
+    {
+      "path": "verification/qa/report.html",
+      "bytes": 14074,
+      "sha256": "7c3056881ed1bb081fc1ef370c7223b6c64d003066d9ee1482ee43a3abb83a1d"
+    },
+    {
+      "path": "verification/qa/report.json",
+      "bytes": 726255,
+      "sha256": "acd49e68a797380265348c1e8d473bc727ed0ba93f0a61884b28bc5f3a28e570"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--field_clap.svg",
+      "bytes": 26221,
+      "sha256": "daf65fb90718ef370ccb435d377a14b00879b23234e1c2bd7ee71d26301b1057"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--field_enter.svg",
+      "bytes": 26233,
+      "sha256": "112fca605d6ee178799a09d4d2532bbaa6809f1b085d9e2ba418da95d009df16"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--field_group_celebrate.svg",
+      "bytes": 26215,
+      "sha256": "1946d23261a27aaa0b19eaba946072692a4868e7413abca6b6c6d95f3a6d9e16"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--field_miss.svg",
+      "bytes": 26186,
+      "sha256": "a60a94b2c985e85a957eafadcce8f8e00b21a02eefc4baf99f10482016ddc53d"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--idle_relaxed.svg",
+      "bytes": 26225,
+      "sha256": "8747b9fe4f2862072ff2c5ebf670a6fb61d220012eba214f90d0a4bc6156cfbc"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_catch_two_hands.svg",
+      "bytes": 26997,
+      "sha256": "1a3ae36d1bb6fb6a8ae46b0c01032c42c2323c0f7af629ab3976cc8af007babb"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_celebrate.svg",
+      "bytes": 26219,
+      "sha256": "23d49b541e930d024660ba9878f87f26536ef215cd893c46ccaa2eeec93a2024"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_disappointed.svg",
+      "bytes": 26255,
+      "sha256": "3db3285a9f2e8f0154c2bccfc42aa2a33d9ad8e77f9de225f08d7471f377afb1"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_dive_high.svg",
+      "bytes": 26977,
+      "sha256": "bcfaa60749d94f652530ae7b898141d100b364b83c4c131e951a543c1b6add04"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_dive_low.svg",
+      "bytes": 26975,
+      "sha256": "b1ea33ce96359365a200304f946542e59499433ed2a8efb613ba7a6cc78e369d"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_punch.svg",
+      "bytes": 26969,
+      "sha256": "6c842c26f80877983bd1780be171ea5ceb979671b1d4c187da8c73b279688b37"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_punt.svg",
+      "bytes": 26967,
+      "sha256": "b61159de47cf571a7ee73146f8dcbeb7953f1755ccce33c955f9532ea7c5a6b5"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_ready.svg",
+      "bytes": 26241,
+      "sha256": "e3a9f6dddccf764b6b0b5c3c1853dbc53ada6c0601a0ca856bd9d0deae300ac3"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_shuffle.svg",
+      "bytes": 26245,
+      "sha256": "d62cd3287321802fc3082d77140863dcf3ac3a53c87149b9b410b8ccc719c612"
+    },
+    {
+      "path": "verification/qa/sheets/soccer-keeper-motion-v3--keeper_throw.svg",
+      "bytes": 26969,
+      "sha256": "4f0ee9d33407fbacee6bfad66a49dd10fbb16fa93bd433c8b640d81df3c1b276"
+    },
+    {
+      "path": "verification/repository-browser-failure.txt",
+      "bytes": 1242,
+      "sha256": "c32a5d7d23b808ec3af8c73e56138eb48e4dcc423036487882a746992785c511"
+    },
+    {
+      "path": "verification/repository-tests.json",
+      "bytes": 1651,
+      "sha256": "0e36aff6e5171028b4e5118631dd9a21eba46222ab0c4edba4754acd11c11a50"
+    },
+    {
+      "path": "verification/requirements.json",
+      "bytes": 115241,
+      "sha256": "132440697f80d8c8a2e3e8d9db8d70cf60f1a45855c0939e31ad6382ea77bebd"
+    },
+    {
+      "path": "verification/transitions.json",
+      "bytes": 235417,
+      "sha256": "471d4dff3370702ea234ccc80923a7bcdbf475afe72c4585f62f9f9b092941e6"
+    }
+  ],
+  "totalBytes": 26016799
+}

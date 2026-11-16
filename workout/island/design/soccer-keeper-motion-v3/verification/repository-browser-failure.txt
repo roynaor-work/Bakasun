@@ -1,0 +1,15 @@
+test at tests/workout-royiki.test.mjs:91:1
+✖ exercise screen shows the royiki animation, counts reps, falls back and the style choice persists (22.751802ms)
+  browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell
+  ╔════════════════════════════════════════════════════════════╗
+  ║ Looks like Playwright was just installed or updated.       ║
+  ║ Please run the following command to download new browsers: ║
+  ║                                                            ║
+  ║     npx playwright install                                 ║
+  ║                                                            ║
+  ║ <3 Playwright Team                                         ║
+  ╚════════════════════════════════════════════════════════════╝
+      at TestContext.<anonymous> (/workspace/Bakasun/tests/workout-royiki.test.mjs:93:34) {
+    name: 'Error',
+    log: []
+  }
