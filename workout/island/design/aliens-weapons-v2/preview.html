@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ארסנל החלל · שישה נשקים</title>
+  <link rel="icon" href="icons/piercing-laser-ready.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="preview.css">
+  <script defer src="preview.js"></script>
+</head>
+<body>
+<div class="viewport">
+<main class="armory" aria-label="תצוגת נשקי חלל">
+  <header>
+    <div><span class="eyebrow" dir="ltr">ORBIT / EQUIPMENT LAB</span><h1>ארסנל החלל<span class="edition">02</span></h1></div>
+    <div class="header-meta"><span class="live-dot"></span> שישה נשקים · זירת ניסוי <a href="REPORT.md" aria-label="פתיחת דוח החבילה">דוח ↗</a></div>
+  </header>
+  <section class="workspace">
+    <div class="range" dir="ltr">
+      <div class="range-heading"><span>LIVE FIRE / <b id="callsign">LANCE</b></span><span id="phase">מוכן לירי</span></div>
+      <canvas id="range" width="516" height="215" role="img" aria-label="הדגמת קליע, ירי ופגיעה"></canvas>
+      <div class="strip"><span dir="rtl">רצף פגיעה</span><div id="frames"></div><a id="atlas-link" href="atlases/piercing-laser.png" target="_blank" rel="noopener">ATLAS ↗</a></div>
+    </div>
+    <aside>
+      <div class="weapon-heading"><span id="weapon-number" dir="ltr">01 / 06</span><h2 id="weapon-name">לייזר חודר</h2></div>
+      <p id="description">קרן ארוכה החודרת דרך כמה מטרות</p>
+      <div class="states" aria-label="מצבי כפתור">
+        <figure><img id="state-ready" alt="זמין" width="44" height="44"><figcaption>זמין</figcaption></figure>
+        <figure><img id="state-pressed" alt="לחוץ" width="44" height="44"><figcaption>לחוץ</figcaption></figure>
+        <figure><img id="state-disabled" alt="מושבת" width="44" height="44"><figcaption>מושבת</figcaption></figure>
+        <button id="refill" class="refill" aria-label="מילוי מחסנית"><img id="refill-icon" alt="" width="38" height="38"><span>מילוי <b id="ammo">3</b></span></button>
+      </div>
+      <div class="controls"><button id="fire" class="fire">ירי ניסיון <span>↟</span></button><button id="sound" aria-pressed="false">קול כבוי</button><button id="pause" aria-pressed="false">השהיה</button></div>
+      <div class="audition"><span>צלילים</span><button data-audition="fire">ירי ▷</button><button data-audition="impact">פגיעה ▷</button><label><input id="auto" type="checkbox" checked> הדגמה חוזרת</label></div>
+    </aside>
+  </section>
+  <nav id="weapons" aria-label="בחירת נשק"></nav>
+  <footer><span id="status" role="status">טוען נכסים…</span><span>בחירה 1–6 · ירי רווח · קול M</span><a href="manifest.json">MANIFEST ↗</a></footer>
+</main>
+</div>
+</body>
+</html>

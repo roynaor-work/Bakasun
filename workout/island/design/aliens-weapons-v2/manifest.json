@@ -1,0 +1,2216 @@
+{
+  "schemaVersion": 2,
+  "pack": "aliens-weapons-v2",
+  "createdDate": "2026-11-16",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "license": "CC0-1.0 assets; MIT tools and preview",
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390
+  },
+  "limits": {
+    "atlasMaxBytes": 600000,
+    "audioMaxBytes": 60000,
+    "buttonSizePx": 128
+  },
+  "rendering": {
+    "origin": "top-left",
+    "forward": "-Y",
+    "alpha": "straight/unpremultiplied RGBA",
+    "blend": "source-over",
+    "filter": "linear",
+    "paddingPx": 2,
+    "rotation": "radians clockwise from -Y around pivotPx",
+    "hitFrames": 4,
+    "notes": "Rects are untrimmed, unrotated pixel rectangles. Transparent pixels have zero RGB. Use pivotPx with displaySizePx scaling. Set clamp-to-edge and disable mipmaps; add extrusion before enabling mipmaps. Shield projectile is a local bubble, pulse projectile is a one-shot expansion."
+  },
+  "weapons": [
+    {
+      "id": "piercing-laser",
+      "nameHe": "לייזר חודר",
+      "callsign": "LANCE",
+      "color": "#69e8ff",
+      "descriptionHe": "קרן ארוכה החודרת דרך כמה מטרות",
+      "atlas": "atlases/piercing-laser.png",
+      "atlasSize": [
+        1024,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            512,
+            0,
+            128,
+            512
+          ],
+          "pivotPx": [
+            64,
+            488
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            640,
+            0,
+            128,
+            512
+          ],
+          "pivotPx": [
+            64,
+            488
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            768,
+            0,
+            128,
+            512
+          ],
+          "pivotPx": [
+            64,
+            488
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            896,
+            0,
+            128,
+            512
+          ],
+          "pivotPx": [
+            64,
+            488
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": true,
+          "displaySizePx": [
+            128,
+            512
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/piercing-laser-ready.svg",
+          "png": "icons/piercing-laser-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/piercing-laser-pressed.svg",
+          "png": "icons/piercing-laser-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/piercing-laser-disabled.svg",
+          "png": "icons/piercing-laser-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/piercing-laser-refill.svg",
+        "png": "icons/piercing-laser-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/piercing-laser-fire.ogg",
+          "mp3": "audio/piercing-laser-fire.mp3",
+          "durationSeconds": 0.34
+        },
+        "impact": {
+          "ogg": "audio/piercing-laser-impact.ogg",
+          "mp3": "audio/piercing-laser-impact.mp3",
+          "durationSeconds": 0.3
+        }
+      }
+    },
+    {
+      "id": "guided-missile",
+      "nameHe": "טיל מונחה",
+      "callsign": "SEEKER",
+      "color": "#ff946e",
+      "descriptionHe": "טיל עוקב עם שובל פליטה",
+      "atlas": "atlases/guided-missile.png",
+      "atlasSize": [
+        512,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/guided-missile-ready.svg",
+          "png": "icons/guided-missile-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/guided-missile-pressed.svg",
+          "png": "icons/guided-missile-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/guided-missile-disabled.svg",
+          "png": "icons/guided-missile-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/guided-missile-refill.svg",
+        "png": "icons/guided-missile-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/guided-missile-fire.ogg",
+          "mp3": "audio/guided-missile-fire.mp3",
+          "durationSeconds": 0.55
+        },
+        "impact": {
+          "ogg": "audio/guided-missile-impact.ogg",
+          "mp3": "audio/guided-missile-impact.mp3",
+          "durationSeconds": 0.62
+        }
+      }
+    },
+    {
+      "id": "charge-bomb",
+      "nameHe": "פצצת מטען",
+      "callsign": "CORE",
+      "color": "#ffd477",
+      "descriptionHe": "מטען כבד ופיצוץ רחב",
+      "atlas": "atlases/charge-bomb.png",
+      "atlasSize": [
+        512,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            224,
+            224
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/charge-bomb-ready.svg",
+          "png": "icons/charge-bomb-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/charge-bomb-pressed.svg",
+          "png": "icons/charge-bomb-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/charge-bomb-disabled.svg",
+          "png": "icons/charge-bomb-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/charge-bomb-refill.svg",
+        "png": "icons/charge-bomb-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/charge-bomb-fire.ogg",
+          "mp3": "audio/charge-bomb-fire.mp3",
+          "durationSeconds": 0.68
+        },
+        "impact": {
+          "ogg": "audio/charge-bomb-impact.ogg",
+          "mp3": "audio/charge-bomb-impact.mp3",
+          "durationSeconds": 1.0
+        }
+      }
+    },
+    {
+      "id": "shield",
+      "nameHe": "מגן",
+      "callsign": "AEGIS",
+      "color": "#72f2bf",
+      "descriptionHe": "בועת הגנה ופגיעת ספיגה",
+      "atlas": "atlases/shield.png",
+      "atlasSize": [
+        512,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": true,
+          "displaySizePx": [
+            152,
+            152
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/shield-ready.svg",
+          "png": "icons/shield-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/shield-pressed.svg",
+          "png": "icons/shield-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/shield-disabled.svg",
+          "png": "icons/shield-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/shield-refill.svg",
+        "png": "icons/shield-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/shield-fire.ogg",
+          "mp3": "audio/shield-fire.mp3",
+          "durationSeconds": 0.6
+        },
+        "impact": {
+          "ogg": "audio/shield-impact.ogg",
+          "mp3": "audio/shield-impact.mp3",
+          "durationSeconds": 0.42
+        }
+      }
+    },
+    {
+      "id": "electric-pulse",
+      "nameHe": "פולס חשמלי",
+      "callsign": "ION",
+      "color": "#beabff",
+      "descriptionHe": "טבעת חשמל מתרחבת",
+      "atlas": "atlases/electric-pulse.png",
+      "atlasSize": [
+        512,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": false,
+          "displaySizePx": [
+            176,
+            176
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/electric-pulse-ready.svg",
+          "png": "icons/electric-pulse-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/electric-pulse-pressed.svg",
+          "png": "icons/electric-pulse-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/electric-pulse-disabled.svg",
+          "png": "icons/electric-pulse-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/electric-pulse-refill.svg",
+        "png": "icons/electric-pulse-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/electric-pulse-fire.ogg",
+          "mp3": "audio/electric-pulse-fire.mp3",
+          "durationSeconds": 0.46
+        },
+        "impact": {
+          "ogg": "audio/electric-pulse-impact.ogg",
+          "mp3": "audio/electric-pulse-impact.mp3",
+          "durationSeconds": 0.54
+        }
+      }
+    },
+    {
+      "id": "double-missile",
+      "nameHe": "טיל כפול",
+      "callsign": "GEMINI",
+      "color": "#ff8ec9",
+      "descriptionHe": "שני טילים ושתי פגיעות",
+      "atlas": "atlases/double-missile.png",
+      "atlasSize": [
+        512,
+        512
+      ],
+      "frames": {
+        "projectile-0": {
+          "rect": [
+            0,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-1": {
+          "rect": [
+            128,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-2": {
+          "rect": [
+            256,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "projectile-3": {
+          "rect": [
+            384,
+            0,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "fire-0": {
+          "rect": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-1": {
+          "rect": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-2": {
+          "rect": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "fire-3": {
+          "rect": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            96
+          ]
+        },
+        "impact-0": {
+          "rect": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-1": {
+          "rect": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-2": {
+          "rect": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "impact-3": {
+          "rect": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            64
+          ]
+        },
+        "trail-0": {
+          "rect": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-1": {
+          "rect": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-2": {
+          "rect": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        },
+        "trail-3": {
+          "rect": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "pivotPx": [
+            64,
+            16
+          ]
+        }
+      },
+      "animations": {
+        "projectile": {
+          "frames": [
+            "projectile-0",
+            "projectile-1",
+            "projectile-2",
+            "projectile-3"
+          ],
+          "frameMs": 90,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "fire": {
+          "frames": [
+            "fire-0",
+            "fire-1",
+            "fire-2",
+            "fire-3"
+          ],
+          "frameMs": 40,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "impact": {
+          "frames": [
+            "impact-0",
+            "impact-1",
+            "impact-2",
+            "impact-3"
+          ],
+          "frameMs": 80,
+          "loop": false,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        },
+        "trail": {
+          "frames": [
+            "trail-0",
+            "trail-1",
+            "trail-2",
+            "trail-3"
+          ],
+          "frameMs": 70,
+          "loop": true,
+          "displaySizePx": [
+            96,
+            96
+          ]
+        }
+      },
+      "button": {
+        "ready": {
+          "svg": "icons/double-missile-ready.svg",
+          "png": "icons/double-missile-ready.png"
+        },
+        "pressed": {
+          "svg": "icons/double-missile-pressed.svg",
+          "png": "icons/double-missile-pressed.png"
+        },
+        "disabled": {
+          "svg": "icons/double-missile-disabled.svg",
+          "png": "icons/double-missile-disabled.png"
+        }
+      },
+      "refill": {
+        "svg": "icons/double-missile-refill.svg",
+        "png": "icons/double-missile-refill.png"
+      },
+      "audio": {
+        "fire": {
+          "ogg": "audio/double-missile-fire.ogg",
+          "mp3": "audio/double-missile-fire.mp3",
+          "durationSeconds": 0.6
+        },
+        "impact": {
+          "ogg": "audio/double-missile-impact.ogg",
+          "mp3": "audio/double-missile-impact.mp3",
+          "durationSeconds": 0.72
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "path": "atlases/charge-bomb.png",
+      "bytes": 86304,
+      "sha256": "5b743e7fb59763c1afbce7ab4c29d9bef28b6862d8c733daa22da6cc691da3f2"
+    },
+    {
+      "path": "atlases/double-missile.png",
+      "bytes": 64217,
+      "sha256": "74d57c45c66cf4fb14e17d495c910a555b2a6a5020206140816a8eb0afe863fe"
+    },
+    {
+      "path": "atlases/electric-pulse.png",
+      "bytes": 99270,
+      "sha256": "dcdda61955e8e4f82db52545cdce36d9ead827b99788d476746319fde580b021"
+    },
+    {
+      "path": "atlases/guided-missile.png",
+      "bytes": 63267,
+      "sha256": "2dea4e7500a1d58525d7f6e6e3461bd30a7c27bebe78320ffb1a4dc69a85a2e1"
+    },
+    {
+      "path": "atlases/piercing-laser.png",
+      "bytes": 149491,
+      "sha256": "6949bfb976fac60bea121e47615ab850ca08bb5ac55cbd708646a09c797fc15b"
+    },
+    {
+      "path": "atlases/shield.png",
+      "bytes": 122385,
+      "sha256": "56c9b5e4a7479db9822f966e11cb8459c8e40426a6df047661a5bb33c166235b"
+    },
+    {
+      "path": "icons/charge-bomb-disabled.png",
+      "bytes": 3680,
+      "sha256": "2e975f95496cc799c37d10e67dc3005b21ef079c17bfb14e783e327c5cee8073"
+    },
+    {
+      "path": "icons/charge-bomb-disabled.svg",
+      "bytes": 2238,
+      "sha256": "e8b3ae6c504141c567d55387c2643d5e41a4767b5b1e2d5ff615e5e217404c4c"
+    },
+    {
+      "path": "icons/charge-bomb-pressed.png",
+      "bytes": 5987,
+      "sha256": "cef5c8992da42a774f590492fc39619ff501bfcfce564fa1dcb7033b2490f572"
+    },
+    {
+      "path": "icons/charge-bomb-pressed.svg",
+      "bytes": 2219,
+      "sha256": "9e08cedf385ed27c52139968abaed9379b74646de3a195aeecbb71922da06d20"
+    },
+    {
+      "path": "icons/charge-bomb-ready.png",
+      "bytes": 3741,
+      "sha256": "e097ba73db40a7e1c984c928367c7526cfb6435b7ad0a85f89a01d6c8adcd466"
+    },
+    {
+      "path": "icons/charge-bomb-ready.svg",
+      "bytes": 2089,
+      "sha256": "424a8356d2eaba1027a1a74af11919265f6beb5dc9bc57ab2ee86a95de2fafa1"
+    },
+    {
+      "path": "icons/charge-bomb-refill.png",
+      "bytes": 4308,
+      "sha256": "1fd9ae56623b86f69c08bb300fd49bcf2cc7c65afa416c334feca6e5328ffd30"
+    },
+    {
+      "path": "icons/charge-bomb-refill.svg",
+      "bytes": 2063,
+      "sha256": "4d54f44222c94a82349d7907b3718491fdc1e267d28cb1cec5bf5ec305630ebc"
+    },
+    {
+      "path": "icons/double-missile-disabled.png",
+      "bytes": 4058,
+      "sha256": "f09bcd139f1e7ef9875bebd0a3db904bfa81a1d64faf5b0472831ca069009da7"
+    },
+    {
+      "path": "icons/double-missile-disabled.svg",
+      "bytes": 2995,
+      "sha256": "02bb5ab878fcb9da05915201b1d498b2ad4e0457b097879b02ffc058156b8c3d"
+    },
+    {
+      "path": "icons/double-missile-pressed.png",
+      "bytes": 7535,
+      "sha256": "7769982fb7d2e7974877aa4ccca54a2d05e882fbab43c96ae2052a025e30dde6"
+    },
+    {
+      "path": "icons/double-missile-pressed.svg",
+      "bytes": 2979,
+      "sha256": "4f6ec6aabf6f44666a54cd2a0041d20104ff6588ebb5517cb12d656ea57fa73b"
+    },
+    {
+      "path": "icons/double-missile-ready.png",
+      "bytes": 3889,
+      "sha256": "66b422d3f83bdce5a38f5aa5de50f7bf9a8d06abc5bddb8caf41ab5bf08c1367"
+    },
+    {
+      "path": "icons/double-missile-ready.svg",
+      "bytes": 2846,
+      "sha256": "234caaaafe25b63acf894393b89baa5fc9bb5eced64579a7a0012c4aa70c964b"
+    },
+    {
+      "path": "icons/double-missile-refill.png",
+      "bytes": 4555,
+      "sha256": "2590bac242f0fa1fc3bcebf7cb0c7febcdfcd90e53d3d2b4c636f38051ab594e"
+    },
+    {
+      "path": "icons/double-missile-refill.svg",
+      "bytes": 2820,
+      "sha256": "28eff48874f0e92a1bfcce3d8c030c48dd0a63f09caf2480eef3ce9d4790e7e3"
+    },
+    {
+      "path": "icons/electric-pulse-disabled.png",
+      "bytes": 4658,
+      "sha256": "ddb73a068a0938926be9db117a579236c8d5b4abcc5d79bfbacc5d32f85e778a"
+    },
+    {
+      "path": "icons/electric-pulse-disabled.svg",
+      "bytes": 2192,
+      "sha256": "6d9e7cb258c2b08525d95ad797a5d4264871d28dacd48f51695a62b88433ffd7"
+    },
+    {
+      "path": "icons/electric-pulse-pressed.png",
+      "bytes": 7199,
+      "sha256": "d8d59f1c71c8645b35719dbd54d1e82e5cc1e2c52be33dac309375e1fa56a6cb"
+    },
+    {
+      "path": "icons/electric-pulse-pressed.svg",
+      "bytes": 2176,
+      "sha256": "effae6e9da19b3f3a64c5952e990ccba455bb55193beb16da80be0b865a015b0"
+    },
+    {
+      "path": "icons/electric-pulse-ready.png",
+      "bytes": 4957,
+      "sha256": "10c8c0b3ac2ba588b5a387473b85140869ba57470c3666214410b8afbcaeb506"
+    },
+    {
+      "path": "icons/electric-pulse-ready.svg",
+      "bytes": 2043,
+      "sha256": "a7df42bd8d7838bf2124b0d239e3d6a495128d46c24b71609919500f2a7fba3a"
+    },
+    {
+      "path": "icons/electric-pulse-refill.png",
+      "bytes": 4812,
+      "sha256": "4a5895bb69c56375befc4b552a2fad2b85cb79be69ec0eb9b194bd57ea04e33a"
+    },
+    {
+      "path": "icons/electric-pulse-refill.svg",
+      "bytes": 2017,
+      "sha256": "d0de784a605b6779442e4cedd3a281de0ff746ebd6dcf838be49cb38ff9ae5c3"
+    },
+    {
+      "path": "icons/guided-missile-disabled.png",
+      "bytes": 3636,
+      "sha256": "b6e189265d426d7e753fa4da7d23c42ed3c45e5e16b35efcabf08ff1b31b4e04"
+    },
+    {
+      "path": "icons/guided-missile-disabled.svg",
+      "bytes": 2592,
+      "sha256": "c3c098fe3370ebcfd3ab4a7998689529581d08e46f3548967e2e6350c0be3545"
+    },
+    {
+      "path": "icons/guided-missile-pressed.png",
+      "bytes": 6770,
+      "sha256": "2a2144cb0070701ef3389a7a92db6723dfa24e51a89a9733910220c69928904c"
+    },
+    {
+      "path": "icons/guided-missile-pressed.svg",
+      "bytes": 2576,
+      "sha256": "bb22c75eab8cb6a239ec1ed6cdb7a7ade6d23128077d0df114737f62ac9e535c"
+    },
+    {
+      "path": "icons/guided-missile-ready.png",
+      "bytes": 3546,
+      "sha256": "fd3320a782c7c5f0a42bf76fc5fdcc4ab1fc239211e722c9ac28daee63cb31f1"
+    },
+    {
+      "path": "icons/guided-missile-ready.svg",
+      "bytes": 2443,
+      "sha256": "266da87b1e1dc60981f074bdef3e7ed6a4e4e8a929698cc00de972cbcf4f7c2d"
+    },
+    {
+      "path": "icons/guided-missile-refill.png",
+      "bytes": 4140,
+      "sha256": "2e89d8194b5f234ed6655aff38e3d8a4313965d0c58312a97fcc1b82edc81ab7"
+    },
+    {
+      "path": "icons/guided-missile-refill.svg",
+      "bytes": 2417,
+      "sha256": "77bfc8f5f07d1158aac9e7ff1ec86f279d80d0977cb791c838d5b95887c593fc"
+    },
+    {
+      "path": "icons/piercing-laser-disabled.png",
+      "bytes": 3199,
+      "sha256": "8268cc5e56fc0f6cb58e2402dd9e4596ae9479809f3b0f02264d287520e9d980"
+    },
+    {
+      "path": "icons/piercing-laser-disabled.svg",
+      "bytes": 2274,
+      "sha256": "d64fb00b6ac67a446478d2bd3cf43a813804521c8722e770c7ced819f95f6698"
+    },
+    {
+      "path": "icons/piercing-laser-pressed.png",
+      "bytes": 6632,
+      "sha256": "12ce365715870a3c831392e6ac05f15450cad320d2a3cfa2137e42c667c3c028"
+    },
+    {
+      "path": "icons/piercing-laser-pressed.svg",
+      "bytes": 2258,
+      "sha256": "7b2f4176bc2fd6808e0fd1ee9103c97132e9750e673dab0104c0e2b1604a8365"
+    },
+    {
+      "path": "icons/piercing-laser-ready.png",
+      "bytes": 3004,
+      "sha256": "dd3aa09b608914fda4a65df9b3b591f3628b3c3980074ee867d8cb8940809aa9"
+    },
+    {
+      "path": "icons/piercing-laser-ready.svg",
+      "bytes": 2125,
+      "sha256": "2327a0146c8e6ad090ba1b89c7eb5266a41bdceb46ca04c841fa8c32712f7a2e"
+    },
+    {
+      "path": "icons/piercing-laser-refill.png",
+      "bytes": 3537,
+      "sha256": "f23a3dc46e42efe8d7e575a0b29494563fbd9b18fe896ced3e1a37e2156c8759"
+    },
+    {
+      "path": "icons/piercing-laser-refill.svg",
+      "bytes": 2099,
+      "sha256": "8959ebaa5f3bd79f167f2b4851312c76c1a7cf38d237a086adcbfe7085ff381a"
+    },
+    {
+      "path": "icons/shield-disabled.png",
+      "bytes": 3595,
+      "sha256": "586cb9e411b0e0580fc5887db53ef79cca862363f73966c3e8463791cd3717eb"
+    },
+    {
+      "path": "icons/shield-disabled.svg",
+      "bytes": 2132,
+      "sha256": "77ff1a1c0d110747084ed173d96f47891be5ec1f793df403c608dcb13224bc12"
+    },
+    {
+      "path": "icons/shield-pressed.png",
+      "bytes": 5838,
+      "sha256": "b1669d14874f69ef519051e35bc517211f3ac8ca1073557ab8b2ad7182c5f970"
+    },
+    {
+      "path": "icons/shield-pressed.svg",
+      "bytes": 2108,
+      "sha256": "5091e27be605bb1b19f2bb21776a40b451a41590678394f76ad09918778f2bad"
+    },
+    {
+      "path": "icons/shield-ready.png",
+      "bytes": 3603,
+      "sha256": "448c09d426804431179545ddd60e308c02f17dd2735be3c9ea2af1ebe1ed14d1"
+    },
+    {
+      "path": "icons/shield-ready.svg",
+      "bytes": 1983,
+      "sha256": "9ecf026ea949d6d9306c7911bc55acb14c5e6628e3d383694f3a9c04dd2b2edf"
+    },
+    {
+      "path": "icons/shield-refill.png",
+      "bytes": 4161,
+      "sha256": "d47bf5c28a638f259ba58c15df2fa97d113f9aafff794d9f3f255f011951613e"
+    },
+    {
+      "path": "icons/shield-refill.svg",
+      "bytes": 1957,
+      "sha256": "0960ed61c3e0563758808cd98360e07f25fffd07534d422e618feeee9914872e"
+    },
+    {
+      "path": "audio/charge-bomb-fire.mp3",
+      "bytes": 6079,
+      "sha256": "689d70472e1b2266d1670bce885aef49963c2e98c3bd7de091eb3ca0f12040bc"
+    },
+    {
+      "path": "audio/charge-bomb-fire.ogg",
+      "bytes": 7121,
+      "sha256": "c4c9ae7d1a53c425bbbcf48f8f03c35821a730eeec9a43c3a8109280758f3a59"
+    },
+    {
+      "path": "audio/charge-bomb-impact.mp3",
+      "bytes": 8587,
+      "sha256": "6ec7706ce8db7db3ce966b15218512dd2e94d02e70e0acac80e054e4e3b9697d"
+    },
+    {
+      "path": "audio/charge-bomb-impact.ogg",
+      "bytes": 9538,
+      "sha256": "9ff9df7fa5b6a83c0134352761e3583e026e516ebaf24e9a250412e463b578e3"
+    },
+    {
+      "path": "audio/double-missile-fire.mp3",
+      "bytes": 5243,
+      "sha256": "86b2a42e6e1ad1cae0728a51a7b3495cc77c40f89d75949488cadbe4a26e1a04"
+    },
+    {
+      "path": "audio/double-missile-fire.ogg",
+      "bytes": 7216,
+      "sha256": "0002c34dda9c0773757d66f871ece3f2f4688e0e130265fe78372006b0fe5710"
+    },
+    {
+      "path": "audio/double-missile-impact.mp3",
+      "bytes": 6288,
+      "sha256": "0d6ec6c0acda3e979eba573ef50f8e7b90c760d00d355a228ac6aba0508aab9d"
+    },
+    {
+      "path": "audio/double-missile-impact.ogg",
+      "bytes": 8061,
+      "sha256": "1138b67633358028bf7642314ac9c892fa5307f83907b1f36c23ac8eedf66fbd"
+    },
+    {
+      "path": "audio/electric-pulse-fire.mp3",
+      "bytes": 4198,
+      "sha256": "7c6df632239d57151ea30c0746f0fdfcb1087dd0d1ff9844ab8b4a783fbfa8b8"
+    },
+    {
+      "path": "audio/electric-pulse-fire.ogg",
+      "bytes": 7024,
+      "sha256": "8e272258907c4381731f0e3e02bc31b90c42ac86d8cbb1d07ee383f590edd6f0"
+    },
+    {
+      "path": "audio/electric-pulse-impact.mp3",
+      "bytes": 4825,
+      "sha256": "f8236214aab0c9dad60a8cacf8e8376e3f1d62598eb42b55b97c7cd57f24eb24"
+    },
+    {
+      "path": "audio/electric-pulse-impact.ogg",
+      "bytes": 7041,
+      "sha256": "c24b8d5a16013615714db4dc531b7768c6b01ef089031d4782e46132e74e2c35"
+    },
+    {
+      "path": "audio/guided-missile-fire.mp3",
+      "bytes": 5034,
+      "sha256": "7ff62d5410346b86ac80d25a3ee01c7390ed4767d1f3c2b3f5e5074021f9df58"
+    },
+    {
+      "path": "audio/guided-missile-fire.ogg",
+      "bytes": 6913,
+      "sha256": "4e008088b7383ebaef098e1507a786cf779b82006471e08492af6fa751e0e8f9"
+    },
+    {
+      "path": "audio/guided-missile-impact.mp3",
+      "bytes": 5452,
+      "sha256": "193220d474abb68c1a65523fae7d8b45f0834361186d0bfbb6f2b659d748d474"
+    },
+    {
+      "path": "audio/guided-missile-impact.ogg",
+      "bytes": 7340,
+      "sha256": "4775775ad733a65a7cb9aa3d3f3666fa8f7d78c2dd46b7b49adacfac8e1c3246"
+    },
+    {
+      "path": "audio/piercing-laser-fire.mp3",
+      "bytes": 3362,
+      "sha256": "5f14883b6782f2b9e681eff650ca9ee28ea9056f616828086f582ab985b8595b"
+    },
+    {
+      "path": "audio/piercing-laser-fire.ogg",
+      "bytes": 5426,
+      "sha256": "2e2678a729f9df1a76104e31d7d7e2c4650e4851eaddbe18455c292bb7e74e52"
+    },
+    {
+      "path": "audio/piercing-laser-impact.mp3",
+      "bytes": 2944,
+      "sha256": "917add78b71b4952d0026c4aeeae7066c61f4d0e64f97cc381e54f0df2ee81a1"
+    },
+    {
+      "path": "audio/piercing-laser-impact.ogg",
+      "bytes": 5536,
+      "sha256": "d3748f2d3d526759dc56dbb6e22002c1422421bc8f80dfbb5d8c3fd650f7757b"
+    },
+    {
+      "path": "audio/shield-fire.mp3",
+      "bytes": 5243,
+      "sha256": "00980ebd643e1e5d8632fc740495535125903b73ca369fe083162569fc9739c0"
+    },
+    {
+      "path": "audio/shield-fire.ogg",
+      "bytes": 5030,
+      "sha256": "c2df445765d7f61cd355abb27e1719b472d2f615ac9a8985245fb200205281d0"
+    },
+    {
+      "path": "audio/shield-impact.mp3",
+      "bytes": 3989,
+      "sha256": "6d4591167a411337d33cb6989a94ba035637d1f96b3669b38a3e9654e4b34783"
+    },
+    {
+      "path": "audio/shield-impact.ogg",
+      "bytes": 5973,
+      "sha256": "beeeb718e5548598882a8a01bd231d6e3e4569919866518af9cc54f77e2726d9"
+    },
+    {
+      "path": "src/charge-bomb-atlas.svg",
+      "bytes": 36263,
+      "sha256": "f12e5c23413afdda44bbfb7bebdbe71dd5e1f8a9bfdcb65c0e9e2d5ec75634f8"
+    },
+    {
+      "path": "src/double-missile-atlas.svg",
+      "bytes": 46257,
+      "sha256": "a460813d7e9fb234390709c3093ed813fb4eb47ab05b0905a7a31acb5b3b1561"
+    },
+    {
+      "path": "src/electric-pulse-atlas.svg",
+      "bytes": 45339,
+      "sha256": "b15a663bb591893520d2dc99574af1e1ccaf190d332a896fd33fa9a4d167155e"
+    },
+    {
+      "path": "src/guided-missile-atlas.svg",
+      "bytes": 34060,
+      "sha256": "6ddc324e017f3eb5611929d8abdb0b39bd692dbf51221c839d900220dcdd41e8"
+    },
+    {
+      "path": "src/piercing-laser-atlas.svg",
+      "bytes": 32849,
+      "sha256": "8cda33be83d87041327e98d48fda76156292bfbc7dde8cad7157b51bf5371faa"
+    },
+    {
+      "path": "src/shield-atlas.svg",
+      "bytes": 37229,
+      "sha256": "7366154b5702ea5c0afde45cf5fbe3ba621308e2bf1e5973fa69c6b749dc5601"
+    }
+  ]
+}

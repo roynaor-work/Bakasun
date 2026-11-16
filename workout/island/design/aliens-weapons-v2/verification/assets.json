@@ -1,0 +1,751 @@
+{
+  "passed": true,
+  "weapons": 6,
+  "atlases": [
+    {
+      "id": "piercing-laser",
+      "bytes": 149491,
+      "size": [
+        1024,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 26026,
+          "sha256": "37e0700ebce66e22ae38c2705f755286486f076ef3af0a9eab2bfd82c5c5cf87"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 31876,
+          "sha256": "c32f0575cfc78bd730caa465e20e10867927136e20c602b8bb5fc39a9f38c4ec"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 27958,
+          "sha256": "f0678cbef0a6fc335a8492d95411a4482d1632d748f500b92957925f36b7f14b"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 22029,
+          "sha256": "9125ebe675e558c7f1aa1e0bb69daf9805efe57bda0e5968e72d51a4fe23e700"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 2610,
+          "sha256": "193594327a8683d693530da3d2214b3d497ed911e11f389c7e11e513c72dc2be"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 2860,
+          "sha256": "d41891561ac0da77d2fbe39a6800c43343375b4c9e2d23878da6f13fd9e58c0e"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 3176,
+          "sha256": "c5a64d910a733fbe320b37a82db12935050ecc4086f7d9539b4bec4339c61b89"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 3584,
+          "sha256": "b0ce4d7ae0d2188cbde47c7d4c6d13bee9fd2a874c8f49480029be5429b461b4"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1968,
+          "sha256": "87541e6c11d6d24406dab640f579f7108aa043cb97193d5c93a69e3c887b396c"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 4984,
+          "sha256": "deb18c43310bd98582dffc881c934c186acaa938c86ec5727d7d36f42e1f2a87"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 8748,
+          "sha256": "6948ee62876c737899dcccdb470aa0e287305d9e559d37f236873991d6b09786"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 11192,
+          "sha256": "0deb44a2a1c57e7966e80101b96126c555660cdffcdbef8b6754c353347ae7f4"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 6944,
+          "sha256": "9738ac970da62f689aae9ffd44ad5ef4d0e4589b2e3bb257107fea0fa1c87c54"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 6944,
+          "sha256": "e8bffe7c27f018799bbe258efa80f7cb59c7521c44cd461d0eaf5c701d7b28ad"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 6944,
+          "sha256": "c5586ecd65c4ee499a206bab5515be6d3ed6a455f8f0afad3e707b8e3a639328"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 6944,
+          "sha256": "b5549dcf4cb5eb17c1f9d782b039028fef07bba018cf6b2cfd1851689acf95b2"
+        }
+      ]
+    },
+    {
+      "id": "guided-missile",
+      "bytes": 63267,
+      "size": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 1702,
+          "sha256": "6296c1fd6a76d33aea61c45860c532780f817b7bc3edab635b2c0894fceab306"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 1723,
+          "sha256": "660c74f9543f88fadbd0034e7330549b99755e5caaea825ca0d05750dd499de1"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 1742,
+          "sha256": "20413bfb83b855ddbdebce90e16f0aae27dbcba81d55508c3c6c8bc591760fe8"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 1764,
+          "sha256": "67977f1a3bafc74853e1000959a26e7cd3ce72ab407526e999f68e0c196e3691"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 2610,
+          "sha256": "16bf0ee094a9c039259e83b17fca62de810904bec7842f555f6e4647fc764b78"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 2860,
+          "sha256": "225c2fe1122e5ef08246dd2f86642ea74a6a102f33960e1b4c325b6e0e59a397"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 3176,
+          "sha256": "3a25fcc5a4fa88416a687a83441dbaf5dba8fd7828d10d6f4b4dded27153632a"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 3584,
+          "sha256": "6d3f7057c86fbf3614bdf958646aa07897b4c1e45cd6e7b9523560f1ae52dd73"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1968,
+          "sha256": "286c838e2b8a6d936601214c74d7c94bc32eca9e2f7e67a7cbbab0aa0fe6f019"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 4984,
+          "sha256": "f887259ff9a890e5db967120eb0c690c14e2a750d890552862bf1357934031fd"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 8748,
+          "sha256": "80141a6279408bf3a16724f277a94431bf018ba623b3ac66e28a716a037ccb31"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 11572,
+          "sha256": "920012956c3bbd7c30c8ed6c49108b0b6a91e5dce1a312506c2692ff9426f06e"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 3013,
+          "sha256": "31924c6191a41a99bd86e9737dc60971768b25ec5d4ffdac378434158b2c0a91"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 3014,
+          "sha256": "936518a748eedbfb19ae7b0cf45f1f040d73283a3175e5aefd590ef49dbe6d38"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 3014,
+          "sha256": "d787eecbeb434f126739c6b31e17bda191cb82de1523e57002ee990fcadbf3cc"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 3014,
+          "sha256": "4a713e76b2e6538b70bfb250d3408f682748d5541d3057022bf62994435fa947"
+        }
+      ]
+    },
+    {
+      "id": "charge-bomb",
+      "bytes": 86304,
+      "size": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 8748,
+          "sha256": "b840b232b3ea43f1458dce83656acb37e62da4bd0a6af3ba2aa6517f3b78c1e3"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 8748,
+          "sha256": "eb6802536aae6371f420a381c775a9b0a8bf19db5ed217ace8eb837e8eb6f983"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 8748,
+          "sha256": "f8b4873ad6795a651448ab56e7657f790959ef97e9e5ec0cb88ea6f5fb1088de"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 8748,
+          "sha256": "411672a76760569bd2e4ae1f7928ac2313f8155b935ea3461d72842820f28f93"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 4075,
+          "sha256": "557f07a1f06a36431be104897055665de40f640df764bfd69aa53d8fa32fe249"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 4556,
+          "sha256": "0738b37f451005aca62524c28a5eaea726df9d3a6d4b7f83bd659baf02139d3f"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 5042,
+          "sha256": "644ffb1a2dee39bd02399977f00da34a76f94e19a2c95fd3c927640cffc450d5"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 5760,
+          "sha256": "84bd9d920f76cf64e2cbf409b0315092b2f4c36f3c1b9e709380da4c92636f8e"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1992,
+          "sha256": "ce857f429f652e13510c22049852e3b6ab7ce04c6c20deb405b84f6ab778436c"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 4988,
+          "sha256": "6087691a57c60424a05b9afdbf51ec01fcc5f479b0ba80fe62997fc42b14d03f"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 8748,
+          "sha256": "43b2c57fd634f43ae1a36adfb88b1792be23dd2551677a117b86d7be2f371ed5"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 11572,
+          "sha256": "b399eff7ba8010ed8da51e26900916b2d94f82c1f5fbc8b2e6a17953f7c0dcb9"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 3192,
+          "sha256": "229fa5a95692352cd9aa654bea70877c6364792a0ad907f1fd4b956492e3a232"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 3195,
+          "sha256": "ae6f40c69dd626542a57882f039bacdaca14d57b0734596a9c5bbbeec556f632"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 3206,
+          "sha256": "610f23d90b976c0bd6610bac6e0a3eb56decc7b91b98ce6aef1fa4f5668fa524"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 3197,
+          "sha256": "4196a00d59faf434c96e560d33be465073e674da9ed4890786c47337f04664ad"
+        }
+      ]
+    },
+    {
+      "id": "shield",
+      "bytes": 122385,
+      "size": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 9388,
+          "sha256": "b552e5e11e8076755d5e2a9946af9fed6f90b76f28aebf10762972d9da3b2f11"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 9388,
+          "sha256": "6ec72c0218d98c895d9498a11ea4a5b5194c781f1aa31efffbc35a9fab87a0fc"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 9388,
+          "sha256": "423dccf96ffe9f29354d7fc120bdb49b771af6c0bb7a139833c0f44949b93706"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 9388,
+          "sha256": "a12758cdbe507970dd14f0b84646944af42c14ab60902c183569ad1dc2956a7b"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 1404,
+          "sha256": "23ea0976475a4a27bb88ab49af8c59a289a5af8cf8be1b0b1cf5c3c03c8769e5"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 3316,
+          "sha256": "f6dab528a957a11228dc448cca07fed7bc64888ced03992523bc9fb0446c99be"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 6596,
+          "sha256": "6e571077843a1994b6f339f5d957552d72c36fdde17fe92159aec1e4a51e1aa0"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 10468,
+          "sha256": "ac35ea0c1db0e645a6a959117b8a77053288084584bab462da15f7eba5251e02"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1944,
+          "sha256": "3a279bd192fb67d7509ed1734e95413b48cfc673732a836f3bbcfe8be6c99bf9"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 4984,
+          "sha256": "9e2618353dbf204299012eac356259712277be5af70bb84e4b427674174915b5"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 8748,
+          "sha256": "aaea6be3f9e62689eb2165bdf1bcd3cba30cd9a7e83534567ce81637d75371b3"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 11192,
+          "sha256": "35e0dff0b64d02fda648450173efaa1c2cae715ed46fec6145089347d4444f3d"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 1875,
+          "sha256": "ffc8de6d406ea8bb689e375e7f46e624856e103a6caff1d41dba0626cb4464bf"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 1767,
+          "sha256": "0f9b45b42bc5b2b8fddc09264177a43f2f8cdbc589e68bb87e84b93332696a26"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 1659,
+          "sha256": "e113aefbe22a8084f35f5f0e94f7626619123afcd2b23309e63035bda957369e"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 1500,
+          "sha256": "1cb650dce58f0a798dfcb0f3499dd6adb997178268a6078e1dd39d4871640f02"
+        }
+      ]
+    },
+    {
+      "id": "electric-pulse",
+      "bytes": 99270,
+      "size": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 1648,
+          "sha256": "c0cbb651d376e542663d283a55c2d010dc61ca651694360add7d2a731b06100a"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 4044,
+          "sha256": "c3b6c7b900d1e80f10c1c63727d916eb2f21fc563889d9e275c034db45d99563"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 7440,
+          "sha256": "cb74b2d63ccf009d2251a00244a44a4841134d702d0e8c5326804bad0f739924"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 11572,
+          "sha256": "2bdb4adf4485ba8baa5ea5737b6e75cc75c3192b89399a95d864344568302d82"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 1404,
+          "sha256": "dc3aa64d6710b0c0c2046757054edef60170574f0d186c50f9f89d72dded7cc4"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 3316,
+          "sha256": "693196dffd82068536fe67457aa3ad34dac123de79911b96dcb8003325e66af7"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 6596,
+          "sha256": "3244d3dd5dabd05fc41d673d342e0bc1ff037cc50591bdba38765da982b39bd9"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 10468,
+          "sha256": "0539adc9f88e87d4b9d69c223b70baff6685c7bdde0d73188c95fd560e0691f2"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1720,
+          "sha256": "36c0655e7855d08b7756580021957f7910b7c9419f66c1d550691035a82a4361"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 4132,
+          "sha256": "49a027cac7b9534997bcadc742bc7ab3248c74c34cb49af84241268cf2489e43"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 7496,
+          "sha256": "93e76b2c8519ada66987042b96b715c3f90d84b99957234083258daf378a4c17"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 11572,
+          "sha256": "d99acb1012b0588380b9ff10e6c4abd4e3f48c5f53d9e398f52f01767d92285c"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 1875,
+          "sha256": "c66e72943cc813907a2b818bb5c81f6c26cd1d67fe0c50d00bfd53b502207965"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 1767,
+          "sha256": "7dd91aa480befcfc172bc7ccfb59339647287961c57c7a7275a8d31158da90aa"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 1659,
+          "sha256": "dbabaabd00ec5f8134cfc194f4a3cb08b46051155f72e8434cfd105fa599b825"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 1500,
+          "sha256": "294b1c58a0a7f8b5753dff02b86538fa7d8c6864367d2477842a96c6e660b98d"
+        }
+      ]
+    },
+    {
+      "id": "double-missile",
+      "bytes": 64217,
+      "size": [
+        512,
+        512
+      ],
+      "frames": [
+        {
+          "id": "projectile-0",
+          "alphaPixels": 2002,
+          "sha256": "d2532791762795cfac457592bb708dd176d209ff261382a52ed8a2fee8e01efd"
+        },
+        {
+          "id": "projectile-1",
+          "alphaPixels": 2025,
+          "sha256": "c43c291c76061c5b7fcf0e9a478c2f148cd6568c5c55c17c2cab3c26a41cdf80"
+        },
+        {
+          "id": "projectile-2",
+          "alphaPixels": 2002,
+          "sha256": "0b723d63c6f70499f668f69f9703d99111de0e0c435078924d74cb5b4b8f15ff"
+        },
+        {
+          "id": "projectile-3",
+          "alphaPixels": 2025,
+          "sha256": "290bda5063a91cff7cb90e7144a17988d8ea08872fe7e8490fd5d507ee753703"
+        },
+        {
+          "id": "fire-0",
+          "alphaPixels": 4876,
+          "sha256": "f9f2670ffd7705c9f508321183141e1c1ff336b14608ac12e2fcf65e5a73d18d"
+        },
+        {
+          "id": "fire-1",
+          "alphaPixels": 5200,
+          "sha256": "bbc8e613de505e003b9a9ede1ab9f1a22bdf336255a1012803729102bb3d3420"
+        },
+        {
+          "id": "fire-2",
+          "alphaPixels": 5640,
+          "sha256": "7cb8e7e738bfd59d007ce4f7fe37270e5762566d8a5513c4acf53adf7cdbea4c"
+        },
+        {
+          "id": "fire-3",
+          "alphaPixels": 6228,
+          "sha256": "577821acf243cc029c703b9c49339eb3fe62983b9550776f56a048d2874f32cf"
+        },
+        {
+          "id": "impact-0",
+          "alphaPixels": 1848,
+          "sha256": "03d93acb7e3cb341e53bfc91a06aaf2a97136d6cb56648bdad58ccc2e1a08794"
+        },
+        {
+          "id": "impact-1",
+          "alphaPixels": 3872,
+          "sha256": "0695051de6235c040eaa8553d9171d132f729d9f854fd39c370d423d31aff441"
+        },
+        {
+          "id": "impact-2",
+          "alphaPixels": 6021,
+          "sha256": "e37a7c0569107f56ffa8f40bcacf624b731ad53ce18ee6130a734f3dd9085aef"
+        },
+        {
+          "id": "impact-3",
+          "alphaPixels": 7391,
+          "sha256": "22aec1b52f409a60ff41b44d888a04bd1b80dc180ccf72ce61f33fab2c946440"
+        },
+        {
+          "id": "trail-0",
+          "alphaPixels": 6026,
+          "sha256": "30629e9e6e26b34c26288ee1b10c2a31675c268fe88381df9775caa2e5d7adb2"
+        },
+        {
+          "id": "trail-1",
+          "alphaPixels": 6028,
+          "sha256": "7560be26bd8820e321761486e5d12def6d7056932de4e17ee11f7d4bba422742"
+        },
+        {
+          "id": "trail-2",
+          "alphaPixels": 6028,
+          "sha256": "461236ac43b997f3d958b1d86c38af10f20f47f43a20dbcaf69067729225bcbb"
+        },
+        {
+          "id": "trail-3",
+          "alphaPixels": 6028,
+          "sha256": "0bc3743dd085d1c99940f08cdca38c2ca15b9afbb52201661e43ffd69f6a7c14"
+        }
+      ]
+    }
+  ],
+  "frameCount": 96,
+  "buttonStates": 18,
+  "refillIcons": 6,
+  "audio": [
+    {
+      "file": "audio/piercing-laser-fire.ogg",
+      "bytes": 5426,
+      "durationSeconds": 0.34,
+      "codec": "vorbis",
+      "peak": 0.81443,
+      "rms": 0.14446
+    },
+    {
+      "file": "audio/piercing-laser-fire.mp3",
+      "bytes": 3362,
+      "durationSeconds": 0.3918,
+      "codec": "mp3",
+      "peak": 0.7439,
+      "rms": 0.14433
+    },
+    {
+      "file": "audio/piercing-laser-impact.ogg",
+      "bytes": 5536,
+      "durationSeconds": 0.3,
+      "codec": "vorbis",
+      "peak": 0.81654,
+      "rms": 0.10773
+    },
+    {
+      "file": "audio/piercing-laser-impact.mp3",
+      "bytes": 2944,
+      "durationSeconds": 0.3396,
+      "codec": "mp3",
+      "peak": 0.80996,
+      "rms": 0.11026
+    },
+    {
+      "file": "audio/guided-missile-fire.ogg",
+      "bytes": 6913,
+      "durationSeconds": 0.55,
+      "codec": "vorbis",
+      "peak": 0.69504,
+      "rms": 0.09623
+    },
+    {
+      "file": "audio/guided-missile-fire.mp3",
+      "bytes": 5034,
+      "durationSeconds": 0.6008,
+      "codec": "mp3",
+      "peak": 0.75362,
+      "rms": 0.09063
+    },
+    {
+      "file": "audio/guided-missile-impact.ogg",
+      "bytes": 7340,
+      "durationSeconds": 0.62,
+      "codec": "vorbis",
+      "peak": 0.77853,
+      "rms": 0.09766
+    },
+    {
+      "file": "audio/guided-missile-impact.mp3",
+      "bytes": 5452,
+      "durationSeconds": 0.6531,
+      "codec": "mp3",
+      "peak": 0.81091,
+      "rms": 0.0953
+    },
+    {
+      "file": "audio/charge-bomb-fire.ogg",
+      "bytes": 7121,
+      "durationSeconds": 0.68,
+      "codec": "vorbis",
+      "peak": 0.78336,
+      "rms": 0.19281
+    },
+    {
+      "file": "audio/charge-bomb-fire.mp3",
+      "bytes": 6079,
+      "durationSeconds": 0.7314,
+      "codec": "mp3",
+      "peak": 0.74406,
+      "rms": 0.18368
+    },
+    {
+      "file": "audio/charge-bomb-impact.ogg",
+      "bytes": 9538,
+      "durationSeconds": 1.0,
+      "codec": "vorbis",
+      "peak": 0.79332,
+      "rms": 0.08255
+    },
+    {
+      "file": "audio/charge-bomb-impact.mp3",
+      "bytes": 8587,
+      "durationSeconds": 1.0449,
+      "codec": "mp3",
+      "peak": 0.76553,
+      "rms": 0.07862
+    },
+    {
+      "file": "audio/shield-fire.ogg",
+      "bytes": 5030,
+      "durationSeconds": 0.6,
+      "codec": "vorbis",
+      "peak": 0.78244,
+      "rms": 0.13263
+    },
+    {
+      "file": "audio/shield-fire.mp3",
+      "bytes": 5243,
+      "durationSeconds": 0.6269,
+      "codec": "mp3",
+      "peak": 0.74127,
+      "rms": 0.12541
+    },
+    {
+      "file": "audio/shield-impact.ogg",
+      "bytes": 5973,
+      "durationSeconds": 0.42,
+      "codec": "vorbis",
+      "peak": 0.75603,
+      "rms": 0.12512
+    },
+    {
+      "file": "audio/shield-impact.mp3",
+      "bytes": 3989,
+      "durationSeconds": 0.4702,
+      "codec": "mp3",
+      "peak": 0.74746,
+      "rms": 0.11992
+    },
+    {
+      "file": "audio/electric-pulse-fire.ogg",
+      "bytes": 7024,
+      "durationSeconds": 0.46,
+      "codec": "vorbis",
+      "peak": 0.83182,
+      "rms": 0.13885
+    },
+    {
+      "file": "audio/electric-pulse-fire.mp3",
+      "bytes": 4198,
+      "durationSeconds": 0.4963,
+      "codec": "mp3",
+      "peak": 0.79181,
+      "rms": 0.13411
+    },
+    {
+      "file": "audio/electric-pulse-impact.ogg",
+      "bytes": 7041,
+      "durationSeconds": 0.54,
+      "codec": "vorbis",
+      "peak": 0.79838,
+      "rms": 0.10583
+    },
+    {
+      "file": "audio/electric-pulse-impact.mp3",
+      "bytes": 4825,
+      "durationSeconds": 0.5747,
+      "codec": "mp3",
+      "peak": 0.78938,
+      "rms": 0.10229
+    },
+    {
+      "file": "audio/double-missile-fire.ogg",
+      "bytes": 7216,
+      "durationSeconds": 0.6,
+      "codec": "vorbis",
+      "peak": 0.77215,
+      "rms": 0.135
+    },
+    {
+      "file": "audio/double-missile-fire.mp3",
+      "bytes": 5243,
+      "durationSeconds": 0.6269,
+      "codec": "mp3",
+      "peak": 0.73386,
+      "rms": 0.12821
+    },
+    {
+      "file": "audio/double-missile-impact.ogg",
+      "bytes": 8061,
+      "durationSeconds": 0.72,
+      "codec": "vorbis",
+      "peak": 0.7381,
+      "rms": 0.09868
+    },
+    {
+      "file": "audio/double-missile-impact.mp3",
+      "bytes": 6288,
+      "durationSeconds": 0.7576,
+      "codec": "mp3",
+      "peak": 0.7787,
+      "rms": 0.09326
+    }
+  ],
+  "inventoryFiles": 84,
+  "assetBytes": 1127075,
+  "notes": [
+    "All 96 frames have two transparent edge pixels.",
+    "Every animation contains four distinct frames.",
+    "Decoded audio checked for codec, duration, mono, peak, RMS, DC offset and fades.",
+    "SHA-256 inventory verified."
+  ]
+}

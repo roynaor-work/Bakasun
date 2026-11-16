@@ -1,0 +1,39 @@
+{
+  "command": "npm test",
+  "fullRun": {
+    "exitCode": 1,
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 640996.870816
+  },
+  "environmentFailure": {
+    "file": "tests/workout-royiki.test.mjs",
+    "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+    "reason": "Playwright default chromium_headless_shell-1234 executable is absent. The existing test left its loopback HTTP server open after the launch failure; the idle test worker was stopped after the result was recorded."
+  },
+  "retry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/aliens-weapons-v2-playwright node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 39494.686215,
+    "setup": "Temporary browser cache links under /tmp point to the installed /usr/bin/chromium. No repository files modified."
+  },
+  "reconciled": {
+    "uniquePassed": 4262,
+    "skipped": 64,
+    "unresolvedFailures": 0
+  },
+  "assetValidation": "verification/assets.json",
+  "packBrowserValidation": "verification/browser.json"
+}
