@@ -1,0 +1,1904 @@
+{
+  "adapt": {
+    "default": "פעיל מחוץ למצב QA; ב־QA כבוי אם הפרמטר חסר",
+    "behavior": "התאמת איכות אוטומטית בחזירים. הדף החיצוני מעביר רק adapt=1.",
+    "values": "במסגרת די בעצם הנוכחות, גם adapt=0; בדף האי נדרש 1 להעברה.",
+    "sourceFingerprint": "0c67473f0b5a18e963c2aae0d725545246f45e51143505ad17409df1168fdcaa"
+  },
+  "athleteBody": {
+    "default": "פעיל",
+    "behavior": "גוף ספורטאי משותף לכדורגל ולכדורסל; 0 מחזיר גופים קודמים וגם מכבה v22.",
+    "values": "0 מכבה; בחירת soccerChars מפורשת יכולה לבחור גוף אחר.",
+    "sourceFingerprint": "0e089996a32e039f1e44109af36276660374d5a695599a56bf37e8fdd0a9e809"
+  },
+  "athleteBodyV2": {
+    "default": "פעיל כשנבחר גוף הספורטאי",
+    "behavior": "גוף ספורטאי v2 בכדורגל, עם אפשרות חזרה לגוף הקודם.",
+    "values": "0 מכבה; יש שערי בחירת גוף וטעינת נכסים.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "athleteBodyV22": {
+    "default": "פעיל כאשר athleteBody פעיל",
+    "behavior": "גופי v22, חלוקת צבעים ושיער משותפת.",
+    "values": "0 מכבה; גם athleteBody=0 מכבה.",
+    "sourceFingerprint": "f437d067c7df64511a720bfb0bc295c64fe38bc0feb8ab873bf5ea87c79c02cf"
+  },
+  "athletes": {
+    "default": "לפי config.athletes.enabled; פעיל אם חסר",
+    "behavior": "שכבת הליכה וריצה משותפת: זרועות, גו וכיוון גוף.",
+    "values": "0 מכבה; 1 מפעיל גם מול תצורה כבויה; ערך אחר לפי התצורה.",
+    "sourceFingerprint": "b8219be08aaca4b0dd9b46ec87279d3891fe2e743e2940a922f79636ff4c0909"
+  },
+  "autoIdleMs": {
+    "default": "60000 מילישניות",
+    "behavior": "משך המתנה ללא פעילות לפני הורדת חבילת האופליין האוטומטית.",
+    "values": "מספר גדול או שווה 0; ערך ריק נהפך ל־0; שלילי או לא מספר חוזר ל־60000.",
+    "sourceFingerprint": "de97298bb89e9bf64642f3ba3f097e65348b367624d0cd42f072be8119387d96"
+  },
+  "autodownload": {
+    "default": "פעיל בכפוף למכשיר, רשת ופניות",
+    "behavior": "מתג ההורדה האוטומטית לאופליין.",
+    "values": "0 משבית את המתזמן; הורדה יזומה דרך הממשק עדיין אפשרית.",
+    "sourceFingerprint": "40e0fc041f6f46a205ebe3503ef99a9c78c019b3ca5ddedbd0ec39bea719dd7b"
+  },
+  "bootVideo": {
+    "default": "כבוי",
+    "behavior": "סרטון במסך הטעינה.",
+    "values": "0 חוסם; 1 כופה ומקדים גם ל־loadClip ולשערי רשת/הפחתת תנועה; אחרת loadClip מחליט.",
+    "sourceFingerprint": "8a292197683b2c34499324062387800e5cb2982cf27a677f0c75d45b8538a16a"
+  },
+  "cityPreview": {
+    "default": "כבוי",
+    "behavior": "תצוגת עיר עם שכבת אחסון לקריאה בלבד וללא רישום עובד אופליין או הורדה אוטומטית.",
+    "values": "full, half או empty; ערך ריק או 1 בוחרים full; כל ערך אחר מבטל.",
+    "sourceFingerprint": "d0bbf5931af5aa04473d48d717d9f09c9d6f8be049c25ec2d0630cd638b867cb"
+  },
+  "dev": {
+    "default": "כבוי",
+    "behavior": "חושף window.__island ואובייקטי debug של סשנים, כלי פיתוח ודיווח שגיאות; בחזירים מעביר qa=1.",
+    "values": "רק 1 מפעיל; ctx.debug יכול להפעיל בדיקות סשן בנפרד.",
+    "sourceFingerprint": "47f52609c45737e68234e6fedab4f877fb22806f407a82624ae491dd2f467e9f"
+  },
+  "fingerCurl": {
+    "default": "0.55 רדיאן",
+    "behavior": "עוצמת כיפוף האצבעות בגוף הספורטאי.",
+    "values": "ערך חסר משתמש בקבוע; Number(value), ערך לא מספר או ריק נהפך ל־0; שלילי מוגבל ל־0.",
+    "sourceFingerprint": "096302e9da17dc17064f19cc53618119e365b455a87812982b54c5113c4c0a40"
+  },
+  "games": {
+    "default": "כבוי",
+    "behavior": "פתיחת תפריט המשחקים אחרי יצירת דמות, כשהתוכן פתוח ואין חלונית אחרת.",
+    "values": "רק 1 מבקש פתיחה; אינו עוקף דגלי תוכן.",
+    "sourceFingerprint": "de97298bb89e9bf64642f3ba3f097e65348b367624d0cd42f072be8119387d96"
+  },
+  "island": {
+    "default": "ללא נוכחות: מצב חזירים עצמאי",
+    "behavior": "בחזירים מזהה הפעלה במסגרת האי ומאפשר חוזה תקשורת עם ההורה.",
+    "values": "עצם הנוכחות מספיקה, גם island=0; מתאם האי כותב island=1.",
+    "sourceFingerprint": "d3e958ea9640e0f97b0cc07d94a171e25736d55254a603e08910c9738608f92f"
+  },
+  "loadClip": {
+    "default": "כבוי",
+    "behavior": "בקשה להחזיר סרטון טעינה תוך כיבוד חיסכון בנתונים, רשת איטית והפחתת תנועה.",
+    "values": "רק 1 מפעיל; bootVideo=0 חוסם ו־bootVideo=1 כופה.",
+    "sourceFingerprint": "8a292197683b2c34499324062387800e5cb2982cf27a677f0c75d45b8538a16a"
+  },
+  "loadStuckMs": {
+    "default": "12000 מילישניות, או fallback מפורש",
+    "behavior": "זמן ללא מוכנות עד הצגת מסלול חילוץ של משחק תקוע.",
+    "values": "מספר סופי של לפחות 50 מילישניות; ערך אחר משתמש ב־fallback.",
+    "sourceFingerprint": "a6d7c0d51bed8e6cbe1be78728021d4e63f582cb65e59b9826431220c8814fac"
+  },
+  "qa": {
+    "default": "כבוי",
+    "behavior": "מצב מדידה במסגרת החזירים: חשיפת כלי בדיקה ושינוי ברירת מחדל של התאמת האיכות.",
+    "values": "עצם הנוכחות מספיקה; dev=1 בדף האי מוסיף qa=1 למסגרת; kit.js בודק גם תבנית מחרוזת.",
+    "sourceFingerprint": "c589431ed86e1cb6583e1c7adf49247a52090e111d9a1158559eef71cbe52afb"
+  },
+  "quality": {
+    "default": "אוטומטי: הערכת מכשיר ומדידה שמורה",
+    "behavior": "איכות דף האי; low מוריד גם סקי ותפיסת הפושע. auto מוחק הערכת FPS שמורה בתחילת הדף.",
+    "values": "high או low כופים; auto מאפס מדידה; כל ערך אחר משאיר זיהוי אוטומטי. בהדגמות המשמעות מקומית.",
+    "sourceFingerprint": "e7ca839a9e7f079d5780d5d91297567d52c3f5dfe299f3998e5d31fb50dbf681"
+  },
+  "touch": {
+    "default": "לפי יכולת המגע במכשיר",
+    "behavior": "במסגרת החזירים כופה מסלול ג׳ויסטיק במחשב.",
+    "values": "רק 1 כופה מגע, ורק כשהמצב הישן boar=v1 אינו פעיל; אינו מועבר מדף האי.",
+    "sourceFingerprint": "d3e958ea9640e0f97b0cc07d94a171e25736d55254a603e08910c9738608f92f"
+  },
+  "upgradeOffer": {
+    "default": "פעיל",
+    "behavior": "הצעת שדרוג לאחר שלב כשמתקיימים תנאי התקדמות ותקציב.",
+    "values": "0 מכבה את ההצעה; אינו משנה את השדרוגים או השמירה.",
+    "sourceFingerprint": "65cda6b1b790d3b482bd15901bc088033e8c13da28d74301eb3f1e3c6282a358"
+  },
+  "v": {
+    "default": "גרסת הכתובת או dev בעובד האופליין",
+    "behavior": "פרמטר פנימי של משאב: מעביר גרסה ל־CSS/נכסים, מציג גרסה בדוח ובוחר מטמון של Service Worker.",
+    "values": "אינו מתג משחק בדף האי; מקורו בכתובת המודול או העובד, לא בהכרח location.search של הדף.",
+    "sourceFingerprint": "a8a551e21aff201dbcf6f1129a47faf0d9679d9f9eacf2ecc2967f5271e7836b"
+  },
+  "soccerAI": {
+    "default": "v2",
+    "behavior": "בינת היריב: בניית התקפה ומשמעת בעיטות.",
+    "values": "v1 מחזיר התנהגות קודמת; v2 מפעיל; אפשרות מפורשת קודמת ל־URL.",
+    "sourceFingerprint": "6ea9b45942ecad4602f7da4009de843d92c25922045678f82f7500b28e3cccf7"
+  },
+  "soccerAir": {
+    "default": "v23",
+    "behavior": "הגבהה, רמז נגיחה ושמירת לחיצה עד המגע בכדור.",
+    "values": "v22, 0 או off מחזירים v22; v23 או 1 בוחרים v23; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "2d15314b9c47a621b38351fff2831dc88c7f28935c5f75c8ebd18a8f959b1647"
+  },
+  "soccerAirChoice": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "בחירה בין עף, נגיחה ומספרת לפי גובה הכדור.",
+    "values": "0, off או v24 מכבים; soccerV241=0 מכבה; אפשרות מפורשת קודמת לדגלים.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerAutoSprint": {
+    "default": "כבוי; ספרינט בהקשה למשך 450 מילישניות",
+    "behavior": "ספרינט אוטומטי דרך הפקדים.",
+    "values": "רק 1 מפעיל autoSprint ומאפס sprintTapMs.",
+    "sourceFingerprint": "119c402fc0fe9c4e36b09c9cfc93562591cd8f53119070a4a25ca95b50328f7a"
+  },
+  "soccerBed": {
+    "default": "כבוי",
+    "behavior": "לולאת רקע של אווירת הכדורגל.",
+    "values": "רק 1 מפעיל, בכפוף לאודיו פעיל.",
+    "sourceFingerprint": "1f7d8f5771b2edd61fcb5522dcd9ac1bf6b2467de2a0c5d871c758629de3210f"
+  },
+  "soccerChars": {
+    "default": "athlete; הגוף החדש שנבחר לפי שערי הגוף",
+    "behavior": "בחירת חבילת דמויות.",
+    "values": "v4, v5, v7 או athlete; v6 הוא כינוי ל־v5; בהיעדר בחירה תקפה athleteBody=0 מחזיר v7.",
+    "sourceFingerprint": "03d688cba742b9a236a33cff0ca9df11f4b933f7500acec2257005291b35026d"
+  },
+  "soccerCrowd3d": {
+    "default": "budget",
+    "behavior": "קהל תלת־ממד של כדורגל.",
+    "values": "0 או off מכבים; full מבקש מלא; כל ערך אחר budget; טעינה ואיכות עשויות להגביל.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "soccerCrowdHiss": {
+    "default": "כבוי",
+    "behavior": "שכבת רעש רקע של קהל.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "1f7d8f5771b2edd61fcb5522dcd9ac1bf6b2467de2a0c5d871c758629de3210f"
+  },
+  "soccerCuts": {
+    "default": "קליפים מורשים לפי כללי ברירת המחדל",
+    "behavior": "הרחבת השימוש בקליפי פניות של חבילת התנועה.",
+    "values": "רק all מבקש את כל הפניות; כפוף לשערי חבילת התנועה והתחושה.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerFeel": {
+    "default": "v2",
+    "behavior": "תגובה לשינוי החזקה, הגנה, מסירה ותיקוני תחושת תנועה.",
+    "values": "v1, 0 או off מחזירים v1; v2 בוחר v2; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "29393965c072193a6cca11123e5f8b488a07354e1b77bfab1735592b790a953f"
+  },
+  "soccerFormation": {
+    "default": "4-4-2",
+    "behavior": "מערך המשחק המלא.",
+    "values": "433 או 4-3-3 בוחרים 4-3-3; כל ערך אחר 4-4-2; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "241265996022ee90b8620c8ed41fcbc0b687d425d09d26b0d41f1eff41039eaf"
+  },
+  "soccerFouls": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "עבירות בחטיפה בעמידה, שריקה ונפילה/מעידה של מחזיק הכדור.",
+    "values": "0, off או v24 מכבים; soccerV241=0 מכבה; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerFull": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "משחק מלא של 11 מול 11 על מגרש 105×68.",
+    "values": "0, off או v24 מכבים; 1 או v1 מפעילים; אפשרות מפורשת קודמת; soccerTeams בעל ערך לא ריק מכבה כברירת מחדל.",
+    "sourceFingerprint": "241265996022ee90b8620c8ed41fcbc0b687d425d09d26b0d41f1eff41039eaf"
+  },
+  "soccerGlitch": {
+    "default": "v23",
+    "behavior": "השהיה מינימלית בין קליפי תנועה וספי כניסה/יציאה כדי לצמצם הבהוב.",
+    "values": "v22, 0 או off מחזירים v22; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "2d15314b9c47a621b38351fff2831dc88c7f28935c5f75c8ebd18a8f959b1647"
+  },
+  "soccerKitLines": {
+    "default": "פעיל לפי בדיקת צבעים",
+    "behavior": "מתג בדיקת קווי המדים בחבילת הכדורגל.",
+    "values": "0 מבטל את שימוש קווי המדים; יתר תנאי בדיקת הצבע נשארים.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "soccerLevel": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "רמת יריב v24.1: יציאה מלחץ, בניית מסירות ובחירת בעיטות.",
+    "values": "0, off או v24 מכבים; soccerV241=0 מכבה; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerPitch": {
+    "default": "v23",
+    "behavior": "פרופורציות קווי המגרש ונקודות חידוש המשחק.",
+    "values": "v22, 0 או off מחזירים v22; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "2d15314b9c47a621b38351fff2831dc88c7f28935c5f75c8ebd18a8f959b1647"
+  },
+  "soccerRadar": {
+    "default": "כבוי ב־v24.1",
+    "behavior": "מפת רדאר בפינת המשחק.",
+    "values": "רק 1 מחזיר; גם soccerV241=0 מחזיר את רדאר v24.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerRules": {
+    "default": "v1",
+    "behavior": "עבירות גליץ, בעיטה חופשית/פנדל, מסירת עומק וגליצ׳ים של היריב.",
+    "values": "0 או off מכבים; v1 מפעיל; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "3eb6f63aed08742aaabc51ab5ae605e87d3f44243c8944e16311c80387796391"
+  },
+  "soccerShow": {
+    "default": "v1",
+    "behavior": "חגיגות, שידור חוזר ומצלמת שידור.",
+    "values": "0 או off מכבים; v1 מפעיל; כאן URL קודם לאפשרות התצורה.",
+    "sourceFingerprint": "c306db20084cc2340f41654ec992c55d90b5a628cf1e3307a906f3b2b702a9ff"
+  },
+  "soccerSwitch": {
+    "default": "v23",
+    "behavior": "החלפת שחקן בלחיצה ושמירת הג׳ויסטיק במעבר בין התקפה להגנה.",
+    "values": "v22, 0 או off מחזירים v22; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "2d15314b9c47a621b38351fff2831dc88c7f28935c5f75c8ebd18a8f959b1647"
+  },
+  "soccerTapSound": {
+    "default": "v23: ללא צפצוף מעטפת לכל פעולה",
+    "behavior": "מבטל את צפצוף כפתורי הפעולה של המעטפת.",
+    "values": "v22, 0 או off מחזירים את הצפצוף; אפשרות מפורשת קודמת.",
+    "sourceFingerprint": "2d15314b9c47a621b38351fff2831dc88c7f28935c5f75c8ebd18a8f959b1647"
+  },
+  "soccerTeams": {
+    "default": "11 במשחק מלא; 8 במוצר הישן; 6 בברירת המחדל של המודל",
+    "behavior": "בחירת סגל ומגרש להשוואה בלי מנגנון המשחק המלא.",
+    "values": "6, 7, 8 או 11; ערך מפורש לא ריק מכבה soccerFull אם לא כפו אותו במפורש; 11 כאן אינו שקול למשחק המלא.",
+    "sourceFingerprint": "dd3705875581808f04b48023717a91f581f2b5a251df90aecdd4beb45f533b0c"
+  },
+  "soccerTier": {
+    "default": "איכות אוטומטית",
+    "behavior": "קיבוע רמת איכות כדורגל והפסקת ירידה אוטומטית לצורך השוואה.",
+    "values": "ערך מספרי סופי ולא ריק; הרמה מוגבלת בהמשך למדרגות המנוע.",
+    "sourceFingerprint": "368fc4ea327ad96719a4fe40d92fa9f9ea7b3b90eba6a730854fb222d9d2b699"
+  },
+  "soccerV241": {
+    "default": "פעיל בדף, לפי השערים של כל רכיב",
+    "behavior": "מתג משותף לשינויי כדורגל v24.1; כולל חזרת הרדאר בכיבוי.",
+    "values": "רק 0 מכבה; אינו מכבה דגלי v24 או את soccerFull.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerWhistleV1": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "דגימות שריקה לפי סוג קריאה של השופט.",
+    "values": "0 מכבה; soccerV241=0 מכבה.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerTackleV2": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "קליפי גליץ, קימה מהירה, מעידה/עבירה וזינוק שוער; גם זמן התאוששות במודל.",
+    "values": "0 מכבה את התצוגה; בכללי ההתאוששות גם off או v24 מכבים; soccerV241=0 מכבה; אפשרות מודל מפורשת קודמת.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerKicksV2": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "בחירת קליפי בעיטות ומסירות לפי מצב.",
+    "values": "0 מכבה; soccerV241=0 מכבה.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerLocoV2": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "קליפי עמידה והליכה חדשים.",
+    "values": "0 מכבה; soccerV241=0 מכבה.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerReferee": {
+    "default": "פעיל בדף; כבוי בלי דף ב־Node",
+    "behavior": "שופט על המגרש ותגובות לקריאות.",
+    "values": "0 מכבה; soccerV241=0 מכבה.",
+    "sourceFingerprint": "4bd2d497ddef59672b14fb48a38a1d8f5cee92d39b5647c3f049df084f22b781"
+  },
+  "soccerKeeperV11": {
+    "default": "כבוי",
+    "behavior": "הפעלה ניסיונית של קליפי שוער v11.",
+    "values": "רק 1 מפעיל; שכבות חדשות יכולות להחליף את הקליפים בפועל.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerClipsV13": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפי תנועה v13 של כדורגל.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "soccerFxV1": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "אפקטים: רשת שער, טבעת שחקן ושובל כדור.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "soccerPitchAssets": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "נכסי משטח וקווי מגרש.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "c9b9d7ccb7ef8b692bac4a0c1d9d1db986e868cde2f5b53e24501422f110aeae"
+  },
+  "soccerHeaders": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפי נגיחה לפי התצורה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "2b71640a5bc597445090acacbf769ee22c364c61418f41840972efa14410090c"
+  },
+  "soccerKeeperCrowd": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "שוער וקהל לפי התצורה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "2b71640a5bc597445090acacbf769ee22c364c61418f41840972efa14410090c"
+  },
+  "soccerMotion": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "התאמת תנועת כדורגל v9.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ac18ca96789ab7893ed432f9a0150e231a8ff3488b277a92af280f52c8aeaf97"
+  },
+  "soccerMotionV9": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "חבילת תנועה של Codex v9.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerRunV9": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפי ריצה של Codex v9.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerMotionV10": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפי תנועה v10; דורשים גם soccerMotionV9 ותצורה פעילה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerMotionV12": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפי תנועה v12.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "e6d9741964b6649c168adc0100564322b0c026c871630b35488836a3150c4038"
+  },
+  "soccerSlideSlow": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "תיקון קצב גליץ.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "44e03e5a8f06f122e2e6273dac7ebd74142623ab864baf8fbecda0260a58c362"
+  },
+  "keeperKick": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "קליפ בעיטת שוער.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "44e03e5a8f06f122e2e6273dac7ebd74142623ab864baf8fbecda0260a58c362"
+  },
+  "soccerV6": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "נכסי שערים v6; כפוף ל־config.v6.goals.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "0a537293aa7042b458d3aa36c9f8f6bf550284113fac927a9dc61563d3ee902c"
+  },
+  "soccerV8": {
+    "default": "פעיל בכפוף לתצורה ולבחירת חבילת הנכסים",
+    "behavior": "נכסי v8 לפי חלק בחבילת המגרש/דמויות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "780d66c8502d51f07e379e9846dd25113a81470db8966b45a4ebb3134ea78b31"
+  },
+  "hoopsAI": {
+    "default": "v2",
+    "behavior": "בינת משחק הכדורסל.",
+    "values": "רק v1 מחזיר את המנוע הקודם; כל ערך אחר בוחר v2.",
+    "sourceFingerprint": "e1c8cab4ab3e230f1d5a9bf792c486e060c5abb56ade9a8bf50448364d63adfb"
+  },
+  "hoopsAuto": {
+    "default": "כבוי",
+    "behavior": "הפעלה אוטומטית של השחקן למדידה.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "748c1d673be673d6bf4b2952592b9cb63c80c7cba22c388287aca57e314aa162"
+  },
+  "hoopsCharacters": {
+    "default": "setup/תצורת assets.characterVersion; בקובץ הנתונים 1",
+    "behavior": "גרסת דמויות שנמסרת לתצוגת הכדורסל.",
+    "values": "המרה ב־Number; ערך ריק חוזר לברירת המחדל; תצוגות חדשות יכולות לבחור גופים דרך דגליהן.",
+    "sourceFingerprint": "e1c8cab4ab3e230f1d5a9bf792c486e060c5abb56ade9a8bf50448364d63adfb"
+  },
+  "hoopsCrowd3d": {
+    "default": "budget",
+    "behavior": "קהל תלת־ממד v24.1 בכדורסל.",
+    "values": "0 או off מכבים; full מבקש מלא; אחרת budget; hoopsV241=0 מכבה.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsFail": {
+    "default": "כבוי",
+    "behavior": "הדמיית כשל טעינת תצוגת כדורסל.",
+    "values": "רק 1 ובנוסף dev=1 מפעילים את הכשל.",
+    "sourceFingerprint": "e1c8cab4ab3e230f1d5a9bf792c486e060c5abb56ade9a8bf50448364d63adfb"
+  },
+  "hoopsLabels": {
+    "default": "team",
+    "behavior": "תוויות תפקידים מעל שחקנים.",
+    "values": "רק all מציג לכל השחקנים; אחרת לקבוצה.",
+    "sourceFingerprint": "e1c8cab4ab3e230f1d5a9bf792c486e060c5abb56ade9a8bf50448364d63adfb"
+  },
+  "hoopsMotion": {
+    "default": "v12",
+    "behavior": "חבילת תנועה של הספורטאי בכדורסל.",
+    "values": "v9 מחזיר תנועה קודמת; כל ערך אחר מנסה v12.",
+    "sourceFingerprint": "5313b35e88e9786b2b1a13f90459542e7754d38e23d1c24d0e95d672be39ed12"
+  },
+  "hoopsPlay": {
+    "default": "פעיל לפי ברירת המחדל של המנוע",
+    "behavior": "מערכת מהלכי התקפה והודעות סוגי מסירה.",
+    "values": "0 מעביר play=false ומסתיר הודעות מסירה; ערכים אחרים משאירים ברירת מחדל.",
+    "sourceFingerprint": "e1c8cab4ab3e230f1d5a9bf792c486e060c5abb56ade9a8bf50448364d63adfb"
+  },
+  "hoopsProfile": {
+    "default": "setup.profile או standard",
+    "behavior": "אורך פרקים וחוקי פרופיל המשחק.",
+    "values": "quick, standard, pro לפי טבלת rules.profiles; מחרוזת URL לא ריקה קודמת ל־setup.",
+    "sourceFingerprint": "748c1d673be673d6bf4b2952592b9cb63c80c7cba22c388287aca57e314aa162"
+  },
+  "hoopsQuality": {
+    "default": "setup.quality או 2; lite כופה 0",
+    "behavior": "רמת איכות ראשונית של תצוגת הכדורסל.",
+    "values": "Number של ערך URL לא ריק; מצב חילוץ קל מקדים לכל ערך.",
+    "sourceFingerprint": "748c1d673be673d6bf4b2952592b9cb63c80c7cba22c388287aca57e314aa162"
+  },
+  "hoopsSqueak": {
+    "default": "כבוי",
+    "behavior": "צלילי חריקת נעליים.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "7ca27c306a3603cf2a5a69631ff58185bdbda106c41aed937c21c2caf101e154"
+  },
+  "hoopsV241": {
+    "default": "פעיל",
+    "behavior": "מתג קבוצתי לשריקות, קהל, גוף, תנועה ושופט v24.1.",
+    "values": "רק 0 מכבה את הקבוצה.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsV5Level": {
+    "default": "2 באיכות 2 ומעלה; אחרת 1",
+    "behavior": "רמת קהל של חבילת האולם v5 והקפאת בקר האיכות.",
+    "values": "מספר סופי ולא ריק מעוגל ומוגבל ל־0..2; אחרת אוטומטי.",
+    "sourceFingerprint": "23e33a768a1a6c534cdef689836a7e61d364b5ed6d56c83d27b457cdf93a3acb"
+  },
+  "hoopsV8Lod": {
+    "default": "auto",
+    "behavior": "רמת הפירוט של אולם v8.",
+    "values": "רק 0, 1 או 2 מקבעים; אחרת auto.",
+    "sourceFingerprint": "4234b6546dc61a447c0c98687d4c2f75c7653cce437f438a12965340e71db17d"
+  },
+  "hoopsBodyV2": {
+    "default": "פעיל כאשר קבוצת v24.1 פעילה",
+    "behavior": "גוף ספורטאי v2 בכדורסל.",
+    "values": "0 או hoopsV241=0 מכבים.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsMotionV13": {
+    "default": "פעיל כאשר קבוצת v24.1 פעילה",
+    "behavior": "חבילת תנועה v13 בכדורסל.",
+    "values": "0 או hoopsV241=0 מכבים.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsReferee": {
+    "default": "פעיל כאשר קבוצת v24.1 פעילה",
+    "behavior": "שופט בכדורסל.",
+    "values": "0 או hoopsV241=0 מכבים.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsWhistleV241": {
+    "default": "פעיל כאשר קבוצת v24.1 פעילה",
+    "behavior": "שריקות v24.1 לפי אירוע.",
+    "values": "0 או hoopsV241=0 מכבים.",
+    "sourceFingerprint": "b2e672b980ec0af4b3c8a35f515c9a5945fa27bc6187642f49a5b0eadc407fb3"
+  },
+  "hoopsShow": {
+    "default": "פעיל",
+    "behavior": "שידור חוזר אוטומטי, קהל וחגיגות של כדורסל.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "97b031269fb16cc30a649d45ee001028bd6475659007acd67eebd304d372cc63"
+  },
+  "hoopsV4": {
+    "default": "לפי קיום התצורה, enabled וסף האיכות של הרכיב",
+    "behavior": "דמויות ואולם v4.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת (באולם v8 נדרש גם arena); אחרת לפי התצורה והאיכות. קיימת נפילה שקטה לחבילה קודמת.",
+    "sourceFingerprint": "8381339b3a0513b8a0d0f6f180d451bb3baa5df90328bac9e58a4f145b40a958"
+  },
+  "hoopsV5": {
+    "default": "לפי קיום התצורה, enabled וסף האיכות של הרכיב",
+    "behavior": "אולם, פרקט, סלים וקהל v5.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת (באולם v8 נדרש גם arena); אחרת לפי התצורה והאיכות. קיימת נפילה שקטה לחבילה קודמת.",
+    "sourceFingerprint": "23e33a768a1a6c534cdef689836a7e61d364b5ed6d56c83d27b457cdf93a3acb"
+  },
+  "hoopsV7": {
+    "default": "לפי קיום התצורה, enabled וסף האיכות של הרכיב",
+    "behavior": "דמויות לפי תפקיד מחבילת v7.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת (באולם v8 נדרש גם arena); אחרת לפי התצורה והאיכות. קיימת נפילה שקטה לחבילה קודמת.",
+    "sourceFingerprint": "1834b1d1caca700c078f1647ee519b10b7bf2390611528097cf50db57f13d0ef"
+  },
+  "hoopsV8": {
+    "default": "לפי קיום התצורה, enabled וסף האיכות של הרכיב",
+    "behavior": "חבילת תנועה ואולם v8.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת (באולם v8 נדרש גם arena); אחרת לפי התצורה והאיכות. קיימת נפילה שקטה לחבילה קודמת.",
+    "sourceFingerprint": "702bfffa3a2e166c47010e540cf91ff5a3a704a4761749ad12c523a80a263bf4"
+  },
+  "hoopsTall": {
+    "default": "לפי קיום התצורה, enabled וסף האיכות של הרכיב",
+    "behavior": "גופים גבוהים וחבילת תנועה לפי תפקיד.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת (באולם v8 נדרש גם arena); אחרת לפי התצורה והאיכות. קיימת נפילה שקטה לחבילה קודמת.",
+    "sourceFingerprint": "b95b5716e2f7985d35aa5ba8eee60ab379a78306ebcd1e11f9d68d63ee0882e3"
+  },
+  "alpineAir": {
+    "default": "פעיל",
+    "behavior": "כללי קפיצה ואוויר בסקי.",
+    "values": "0 מכבה לפני יצירת המנוע.",
+    "sourceFingerprint": "ec261c5677705b72e912f7be5e61ab25fd371588933118da48bc55aad9b26e36"
+  },
+  "alpineFall": {
+    "default": "פעיל",
+    "behavior": "כללי נפילה והתאוששות בסקי.",
+    "values": "0 מכבה לפני יצירת המנוע.",
+    "sourceFingerprint": "ec261c5677705b72e912f7be5e61ab25fd371588933118da48bc55aad9b26e36"
+  },
+  "alpineObs": {
+    "default": "פעיל",
+    "behavior": "מכשולים במסלול הסקי.",
+    "values": "0 מכבה לפני יצירת המנוע.",
+    "sourceFingerprint": "ec261c5677705b72e912f7be5e61ab25fd371588933118da48bc55aad9b26e36"
+  },
+  "alpineLeague": {
+    "default": "פעיל בכפוף לתנאי פתיחת הליגה",
+    "behavior": "ליגת הסקי בעלת שמירה נפרדת.",
+    "values": "0 מכבה; אינו משנה שלבי קמפיין קיימים.",
+    "sourceFingerprint": "0ef35494610cee9c51f5b5f38962d27d96b9946cfaba0fd24e0b5b962c4885a6"
+  },
+  "alpineModel": {
+    "default": "מודל הגולש הרגיל",
+    "behavior": "הזרקת נכס גולש חסר לבדיקת נפילה לגרפיקה קודמת.",
+    "values": "רק missing מחליף את כתובת המודל בנתיב חסר.",
+    "sourceFingerprint": "ec261c5677705b72e912f7be5e61ab25fd371588933118da48bc55aad9b26e36"
+  },
+  "alpineStartLights": {
+    "default": "פעיל",
+    "behavior": "רמזור הזינוק.",
+    "values": "0 מכבה.",
+    "sourceFingerprint": "a7365032ad568886a52404de9bc605766860a01c76a4dff096bebc3b6e51b28c"
+  },
+  "alpineV241": {
+    "default": "פעיל",
+    "behavior": "אחיזה, סיוע בפנייה, בלימה ותוכן המסלול v24.1; משותף לסשן, לליגה ולבדיקת תוצאה.",
+    "values": "0 מסיר physics.v241 ואת תוכן המסלולים דרך balanceForPage.",
+    "sourceFingerprint": "c80f8c1dcd0a76326b4f2d5bf1e14791606f4a0a8cf4cd8344e49f4d430a1ddf"
+  },
+  "alpineV7": {
+    "default": "לפי cfg.v7.enabled; פעיל אם החבילה מוגדרת",
+    "behavior": "גולש v7 עם מדרגות פירוט.",
+    "values": "0 מכבה; 1 כופה אם מוגדר; אחרת לפי התצורה; כשל חוזר לגולש הקודם.",
+    "sourceFingerprint": "41d12fc6e483d15ceff05aa21a47d4fdde1f3d0e741e28c118adb708a8948aaa"
+  },
+  "env": {
+    "default": "visual.environment של המסלול",
+    "behavior": "חבילת סביבת הסקי.",
+    "values": "sunset, fog או night-floodlit כופים; off או מזהה לא מוכר מבטלים את החבילה.",
+    "sourceFingerprint": "8e300f5657a6146c81d3e73f0a1fb05fab21145dbbdb5d206e8cc4664bac592f"
+  },
+  "boar": {
+    "default": "התנהגות חדשה",
+    "behavior": "מסלול חזירים קודם.",
+    "values": "רק v1 מפעיל LEGACY ומשבית את שרשרת הפקדים החדשה; מועבר למסגרת.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "boarAim": {
+    "default": "כוונון v24.1 אם STICK_V21 ו־AIM_TRUE פעילים",
+    "behavior": "מדרגות הכוונון: axes ישן, v23 לפני מגנט v24, v24 לפני v24.1.",
+    "values": "axes, v23 או v24 מועברים למסגרת; כל אחד מכבה מדרגות המשך; 0 אינו דגל כיבוי.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "boarFire": {
+    "default": "v21 כשג׳ויסטיק פעיל",
+    "behavior": "ירי בכפתור לצד ג׳ויסטיק.",
+    "values": "v20 מחזיר מסלול קודם; מותנה במגע או touch=1 ובכך שאין boar=v1; מועבר למסגרת.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "boarHud": {
+    "default": "v21 אם אין LEGACY",
+    "behavior": "ממשק חזירים מעודכן.",
+    "values": "v20 מחזיר ממשק קודם; boar=v1 מכבה; מועבר למסגרת.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "boarStick": {
+    "default": "v21 כשג׳ויסטיק פעיל",
+    "behavior": "ג׳ויסטיק כוונון מעודכן.",
+    "values": "v20 מחזיר ג׳ויסטיק קודם; boar=v1 מכבה; מועבר למסגרת.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "boarFx": {
+    "default": "v24.1 אם אין LEGACY",
+    "behavior": "קליעים ופגיעות ומופעי נשק v24.1.",
+    "values": "v24 מחזיר אפקטים קודמים; boar=v1 מכבה; מועבר למסגרת.",
+    "sourceFingerprint": "52c3cbebea0476757fc0c2a56797b3feb08831464760cf993165ebae46ee8f6b"
+  },
+  "catch": {
+    "default": "פעיל אם יש תצורה ורשומת הרחבה",
+    "behavior": "רישום משחק תפיסת הפושע.",
+    "values": "רק off מונע רישום במאגר; דגל התוכן catchCriminal נשאר שער נפרד.",
+    "sourceFingerprint": "3b05f989dcbed46b5d76c5b9fe3b17006edfd478dae961837ec22c8c0d7b7dac"
+  },
+  "catchV6": {
+    "default": "פעיל כשיש canvas",
+    "behavior": "מסלול מרדף/זריקה v6, בטעינה לפי דרישה.",
+    "values": "0 בוחר סשן v5; כשל בייבוא v6 חוזר ל־v5.",
+    "sourceFingerprint": "3b05f989dcbed46b5d76c5b9fe3b17006edfd478dae961837ec22c8c0d7b7dac"
+  },
+  "catchV2": {
+    "default": "פעיל אם ctx.v2 אינו false ויש שלב מרדף בתצורה",
+    "behavior": "שלב מרדף בסשן הישן.",
+    "values": "0 מכבה; נדרשת balance.version לפחות 2 והגדרת chase לשלב.",
+    "sourceFingerprint": "ab1f18e9ab383f885043fabe8edf6d1a4c3d6101b4bdc25d45da19f7f613c10f"
+  },
+  "catchV4": {
+    "default": "פעיל בסשן הישן",
+    "behavior": "טבעת עזרה, החלקת גרירה ואיזון זריקה v4.",
+    "values": "0 מחזיר את תחושת v3.",
+    "sourceFingerprint": "ab1f18e9ab383f885043fabe8edf6d1a4c3d6101b4bdc25d45da19f7f613c10f"
+  },
+  "catchV5": {
+    "default": "פעיל אם v2 פעיל ולשלב יש zmove",
+    "behavior": "זריקה תלת־ממדית לעומת מבט צד.",
+    "values": "0 מחזיר זריקה קודמת; נקרא בסשן הישן בלבד.",
+    "sourceFingerprint": "ab1f18e9ab383f885043fabe8edf6d1a4c3d6101b4bdc25d45da19f7f613c10f"
+  },
+  "catchSiren": {
+    "default": "גרסת v8",
+    "behavior": "סירנה; משמש גם שער קול v8 וגם מקדם סירנת v7.",
+    "values": "v7 או v6 מבטלים את סירנת v8; v6 מחזיר גם את קנה המידה הישן; ctx.v7/ctx.v8 קודמים.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchIntro": {
+    "default": "פעיל",
+    "behavior": "פתיחת מרדף v8.",
+    "values": "v7 מחזיר פתיחה קודמת; ctx.v8.intro קודם.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchEngine": {
+    "default": "פעיל",
+    "behavior": "צליל מנוע v8.",
+    "values": "v7 מחזיר מנוע קודם; ctx.v8.engine קודם.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchSound8": {
+    "default": "חבילת קולות v8",
+    "behavior": "דגימות קול של מרדף.",
+    "values": "synth מחזיר סינתזה; ctx.v8.pack קודם.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchAssets": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "נכסי אביזרים וקולות v7; נדרש לפחות נשק או אלמנט פעיל.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchAssist": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "עזרת כוונון במרדף.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchBurst": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "מקבץ ירי v8.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchElements": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "אלמנטים ואפקטים במרדף v7.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchWeapons": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "נשקי מרדף v7.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "catchWeaponsFix": {
+    "default": "פעיל בסשן v6 בכפוף ל־ctx ולתוכן השלב",
+    "behavior": "תיקוני נשקים v8.",
+    "values": "0 מכבה; אפשרות ctx.v7 או ctx.v8 מפורשת קודמת.",
+    "sourceFingerprint": "9a033ad2c6daf26712c53e5a74b56298f8fddba792d758d25e0e02b7c6a4c9a2"
+  },
+  "navalAim": {
+    "default": "המדרגה החדשה v24",
+    "behavior": "תחושת כוונון, סיבוב צריח וטווח בספינות.",
+    "values": "v1 מחזיר legacy; v19 מחזיר טווח ישן; v20 מחזיר סיבוב קודם; v23 מכבה את כוונון v24.",
+    "sourceFingerprint": "2f6c3b14bd99db81a19eaa0da7a52c80a87aa10444a52ebf53b84162fb3592e9"
+  },
+  "navalAir": {
+    "default": "פעיל",
+    "behavior": "אויבי אוויר בספינות.",
+    "values": "רק off מכבה.",
+    "sourceFingerprint": "72029e3b0c51315323d1c3f0ca8a411f3968945dc41ac11909c5844e89261734"
+  },
+  "navalAirAim": {
+    "default": "ידני",
+    "behavior": "כוונון וולקן נגד אוויר.",
+    "values": "רק auto בוחר כוונון אוטומטי.",
+    "sourceFingerprint": "72029e3b0c51315323d1c3f0ca8a411f3968945dc41ac11909c5844e89261734"
+  },
+  "navalAirEnd": {
+    "default": "v24.1",
+    "behavior": "המתנה לפינוי האוויר אחרי הטבעת הצי.",
+    "values": "v24 מחזיר סיום גם כשהאוויר עדיין מאויש.",
+    "sourceFingerprint": "b60b18b5da3b0ebb69e7964984748e152615d099728e574687806a124b079d54"
+  },
+  "navalAmmo": {
+    "default": "פעיל",
+    "behavior": "מלאי תחמושת מוגבל ומילוי.",
+    "values": "רק 0 מחזיר מסלול קודם.",
+    "sourceFingerprint": "3a7571c6282d892f36f568d1d81b4cc6b685e40d654dcee67b8e4f98bd68223d"
+  },
+  "navalAssets": {
+    "default": "פעיל",
+    "behavior": "מודלי ספינות מקומיים של חבילת הנכסים.",
+    "values": "0 מכבה; כשל טעינה משאיר גיבוי קודם.",
+    "sourceFingerprint": "e158c2cb4b65177e325a813ef3da99446ddf72220483372e28cfab7475a0a8be"
+  },
+  "navalBase": {
+    "default": "פעיל",
+    "behavior": "משימת בסיס של קמפיין הספינות.",
+    "values": "0 מכבה.",
+    "sourceFingerprint": "08ddb8c38fd35b4af2a39b2f8665ba2beab8bcc7d88f1bfcbcff4a32800b6338"
+  },
+  "navalBaseSea": {
+    "default": "ים בהיר",
+    "behavior": "מראה הים במשימת הבסיס.",
+    "values": "mirror מחזיר ים משתקף.",
+    "sourceFingerprint": "11a9c2c09af5c0e9b22276c87beb95d0daf6c1f70ad89715300d7f371bd231b3"
+  },
+  "navalEnemyFire": {
+    "default": "v24",
+    "behavior": "ירי היריב בספינות.",
+    "values": "v23 מחזיר ירי קודם.",
+    "sourceFingerprint": "25cc6fb4c140e85b193bb1abc28e868a37b60750f768bb6f8545126d6a83e729"
+  },
+  "navalHint": {
+    "default": "v24.1: טבעת ללא מילת פגיעה",
+    "behavior": "רמזי הכוונון של הספינות.",
+    "values": "v24 מחזיר מילים וצבעי סיכוי פגיעה.",
+    "sourceFingerprint": "b60b18b5da3b0ebb69e7964984748e152615d099728e574687806a124b079d54"
+  },
+  "navalLock": {
+    "default": "פעיל",
+    "behavior": "נעילת מטרה.",
+    "values": "0 מכבה.",
+    "sourceFingerprint": "2880daa850dae448dd9068345f563114f9d61366b275c3ebe8d5daca65a2b53d"
+  },
+  "navalRadar": {
+    "default": "v24.1",
+    "behavior": "נעילה שלוקחת זמן ומוגבלת לטווח הרדאר; השהיית ירי בזמן רכישה.",
+    "values": "v24 מחזיר נעילה קודמת.",
+    "sourceFingerprint": "b60b18b5da3b0ebb69e7964984748e152615d099728e574687806a124b079d54"
+  },
+  "navalSub": {
+    "default": "v24.1",
+    "behavior": "צוללת עמוקה שמחייבת טורפדו; כולל מלאי טורפדו נדרש.",
+    "values": "v24 מחזיר צלילה קודמת; v23 מחזיר גם את מנגנון הצוללת הקודם.",
+    "sourceFingerprint": "1ced4d2940b21434d8d0c03fa87754370edb81e24936d33f3bda0fc2aef5cf26"
+  },
+  "navalV7": {
+    "default": "פעיל אם אין globalThis.__navalV7=false",
+    "behavior": "נכסי ספינות v7.",
+    "values": "0 מכבה; כשל טעינה משאיר מודל קודם.",
+    "sourceFingerprint": "48af6f1bb62981bc82dc974df4ae223f588bb0175aaae450b22caab43d7fa0eb"
+  },
+  "fireControls": {
+    "default": "v9",
+    "behavior": "ג׳ויסטיק צף בחצי השמאלי וכפתורים בצד הימני.",
+    "values": "v8 מחזיר פריסה קודמת; גם fireTruck=v1 מכבה.",
+    "sourceFingerprint": "7579c1309daf2adc03f5649cef8b896c18ff7aa3056ea7c6b9e017b5ff510a28"
+  },
+  "fireCrew": {
+    "default": "v9 אם מוגדר ו־legacy כבוי",
+    "behavior": "גודל, יציאה ומיקום הכבאי ליד המשאית.",
+    "values": "v8 מחזיר קודם; גם fireTruck=v1 מכבה.",
+    "sourceFingerprint": "737d752f452cdb21160587986371c89e8f67e00318aea9bbcca4e7dc3d7709ed"
+  },
+  "fireDraw": {
+    "default": "v20",
+    "behavior": "ציור המשאית לאורך התנועה בפועל.",
+    "values": "v19 או fireTruck=v1 מחזירים ציור לפי yaw.",
+    "sourceFingerprint": "21b9e62456573f86f780ef379173706aac28dbc18ab53e363f848d9066bf0088"
+  },
+  "fireFlow": {
+    "default": "v24",
+    "behavior": "בכל שלב שלישי משלב 3: נסיעה לבניין וכניסת הכבאי.",
+    "values": "v23 מחזיר זרימת שלב קודמת.",
+    "sourceFingerprint": "ec5a6d106073d08120a311ba01ed290ebd8548ad6f1cb30964089d15e01770a8"
+  },
+  "fireLevel": {
+    "default": "2; בקר איכות יכול להוריד",
+    "behavior": "קיבוע רמת גרפיקה לכיבוי אש.",
+    "values": "רק הספרות 0, 1 או 2 מקבעות ומכבות ירידה אוטומטית.",
+    "sourceFingerprint": "589b04f24ad4cf9af3e697aa4e6749bca544aa3469c101157d2cd19725df5a86"
+  },
+  "fireInterior": {
+    "default": "פעיל בכפוף להתקדמות",
+    "behavior": "משימות בונוס בתוך בניין.",
+    "values": "0 מונע את המשימה; התקדמות הקמפיין היא שער נפרד.",
+    "sourceFingerprint": "b3327fcbfe3d12150a7f9f504a88bbf817e6e0123cfe7c69950f30cc0e7758c5"
+  },
+  "fireTargets": {
+    "default": "פעיל בכפוף להתקדמות",
+    "behavior": "משימות בונוס של מטרות מים.",
+    "values": "0 מונע את המשימה; התקדמות הקמפיין היא שער נפרד.",
+    "sourceFingerprint": "b3327fcbfe3d12150a7f9f504a88bbf817e6e0123cfe7c69950f30cc0e7758c5"
+  },
+  "fireTruck": {
+    "default": "המסלול החדש",
+    "behavior": "מתג legacy כללי לתנועה, פקדים, כבאי, ציור וקול.",
+    "values": "v1 מכבה שרשרת שיפורים; v8 משמש גם להחזרת פנייה ישנה ב־fire-roads; 0 אינו כיבוי כללי.",
+    "sourceFingerprint": "c0220b20cdc47295daefe653c4fb6bd2ca357e866c44b3b53e3a8539e29439da"
+  },
+  "fireV7": {
+    "default": "פעיל אם אין globalThis.__fireV7=false",
+    "behavior": "נכסי גרפיקה v7 לכיבוי אש.",
+    "values": "0 מכבה; כשלי נכסים משאירים מודלים קודמים.",
+    "sourceFingerprint": "5e39b00593cb4a38392ae1758c7ec0e8723f427ad5aa743bff1a380ec08aa6c5"
+  },
+  "fireSound": {
+    "default": "v20",
+    "behavior": "קול מים ואש מעודכן.",
+    "values": "v19 או fireTruck=v1 מחזירים קודם.",
+    "sourceFingerprint": "fddf107cbad518afc4b470289a203f4abc32f5eaaacf60dead96b60d55d6c22a"
+  },
+  "fireArrows": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "מיקום חיצי קצה מחוץ למד המים ולברז.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "254147d9f80e0bc6619bc8e81fada4e59b9dbfe8595020be7837109e52595d6e"
+  },
+  "fireHeading": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "תיקון כיוון דגם המשאית.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "a220a8d4e325f9eae7c555af102efcf22b46f2cb2ef42aa716b59bd0b5aa3186"
+  },
+  "fireHud": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "ממשק מדדים והנחיות מעודכן.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "746f6a9f461e402c5f3bec2bcb8942bdfb432b5d5db1172341b2979624af241d"
+  },
+  "fireLadder": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "הסולם מוצג ומכוון לפי חילוץ במקום סיבוב חופשי עם הכוונת.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "589b04f24ad4cf9af3e697aa4e6749bca544aa3469c101157d2cd19725df5a86"
+  },
+  "fireMapTap": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "נקישה על המפה באזור הג׳ויסטיק.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "254147d9f80e0bc6619bc8e81fada4e59b9dbfe8595020be7837109e52595d6e"
+  },
+  "fireRescue": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "נעילת חילוץ והפעלה מתמשכת ללא החזקה ידנית.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "0b3b4d481326622d871f2655df08114735fabb4e7978ed48417b696ce9306794"
+  },
+  "fireTruckModel": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "העדפת משאית Meshy על pumper v7.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "589b04f24ad4cf9af3e697aa4e6749bca544aa3469c101157d2cd19725df5a86"
+  },
+  "fireTurn": {
+    "default": "פעיל לפי שערי v21",
+    "behavior": "פנייה בצומת לפי כיוון הג׳ויסטיק.",
+    "values": "v20 או v19 מחזירים מסלול קודם; גם fireTruck=v1 מכבה. fireLadder נקרא גם דרך שער v20, לכן v19 מכבה מדרגה נוספת.",
+    "sourceFingerprint": "f1fe679164ed02d3b97159b2f5e55489c2b12b5d458924dcad14820323160c6f"
+  },
+  "alienFire": {
+    "default": "v23",
+    "behavior": "תותח יחיד עם מלאי וטעינה במקום התפרצות v15.",
+    "values": "v15 מחזיר את מנגנון האש הקודם; אפשרות globalThis.__alienFire קודמת.",
+    "sourceFingerprint": "4182cb5f929d83e8f854722e3f2e5626be469b01fb547bd49a937acb97edcb33"
+  },
+  "alienHud": {
+    "default": "v25",
+    "behavior": "ממשק מד חום, תחמושת וארסנל.",
+    "values": "v24 מחזיר ממשק v24; v23 מחזיר גם לפני חבילת v24; אפשרות גלובלית קודמת.",
+    "sourceFingerprint": "0cf9165fc6ff66294aa5fa319706c110ea273c0d7c6c5f24fcd54e723f8c190c"
+  },
+  "alienMove": {
+    "default": "חדש",
+    "behavior": "תנועת הספינה.",
+    "values": "v20 מחזיר תנועה קודמת; אפשרות גלובלית קודמת.",
+    "sourceFingerprint": "c04d222d26dc851049a2e69bc7075d63ed4b16d2aacff4ed18902170ff3ab518"
+  },
+  "alienTaps": {
+    "default": "תיקון פעיל",
+    "behavior": "שער חום בין נקישות מהירות כדי שלא לעקוף את מגבלת הוולקן.",
+    "values": "v15 מחזיר את שער v15 הראשון.",
+    "sourceFingerprint": "e2c99f7114b26cd908b4c307884d812bfd47dac86d5858193d2124e43aed907b"
+  },
+  "alienVulcan": {
+    "default": "v25",
+    "behavior": "קול, תזמון וחום וולקן v25.",
+    "values": "v24 מחזיר קודם; globalThis.__alienVulcan=false או v24 מכבה.",
+    "sourceFingerprint": "fdb82f56af5c85aaad80a6c550f0ccd7558f3f34f908b260e9faf021b4107928"
+  },
+  "alienEnemyFire": {
+    "default": "v25",
+    "behavior": "ירי אויבים v25.",
+    "values": "v24 מחזיר קודם; אפשרות גלובלית קודמת.",
+    "sourceFingerprint": "b13eb97e7616e061c3ba622dd1e0b73bddf568ac9e0f288488dad4513fd386ea"
+  },
+  "alienArsenal": {
+    "default": "פעיל",
+    "behavior": "ארסנל הנשקים v25.",
+    "values": "0 מכבה; globalThis.__alienArsenal=false או 0 מכבה.",
+    "sourceFingerprint": "b13eb97e7616e061c3ba622dd1e0b73bddf568ac9e0f288488dad4513fd386ea"
+  },
+  "alienRefill": {
+    "default": "פעיל",
+    "behavior": "איסוף מילוי תחמושת v24.",
+    "values": "0 מכבה; globalThis.__alienRefill=false או 0 מכבה.",
+    "sourceFingerprint": "c53dbcb6899edf8d86ce04bcf78ef32b6b74f16462989b251d5bd839d1ae16a4"
+  },
+  "defenseV7": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "נכסי מטוסי הגנה וחלליות v7.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "5df1f7bad44d1749df9138cbcc5d7968230ae71153955a6ff4a6a48cad774d24"
+  },
+  "alienV9": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "ירי רק בהחזקה, יותר חיים לאויב, בונוסים נדירים ושלבים ארוכים.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "92f9b634e414934aa64ea87a7f6f4d65198a423669a0a1673070dba5addb34c8"
+  },
+  "alienV10": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "מלווה זמני, טיל עוקב והבחנה ברורה בין אויב לבונוס.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "f16fdec407ec94878a6fed3890284be6ba6a8ba854a615d7bbb10d83b592ae7f"
+  },
+  "alienV11": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "קול מקלע, התפרצות לייזר, כללי פיצוץ וטיימר בונוס.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "299721bc01971133fda47bc7c7a81fd10b99e4af5851a3658b55da1878d3c059"
+  },
+  "alienV12": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "זוג תותחי וולקן, זרם קליעים וקול רציף מסונתז.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "5dfe718c63592d4b105111cadc2354974c91fce59823467afe53adb270b86509"
+  },
+  "alienV13": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "מודל ספינה ודגימות וולקן של חבילת v13.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "a06e36eacb18380d4c50fb54be9ac73e0c898cf1929ab49cd4b7d8eaafdfaee9"
+  },
+  "alienV14": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "קליעים כבדים, חום וטעינת מגן מוגבלת.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "2b420fc3158aeb6bd9b7492fe96074469d664313a642bf2d75c650459890a17a"
+  },
+  "alienV15": {
+    "default": "פעיל; כפוף לתצורה, לשרשרת הגרסאות ולבחירת נכסים",
+    "behavior": "וולקן קצר, קירור ותותח רגיל עם מגבלת קצב.",
+    "values": "0 מכבה את השכבה; משתנה גלובלי מתאים שערכו false מכבה גם הוא. כיבוי שכבה אינו מבטל בהכרח את כל השכבות החדשות.",
+    "sourceFingerprint": "e2c99f7114b26cd908b4c307884d812bfd47dac86d5858193d2124e43aed907b"
+  },
+  "racingAiCorner": {
+    "default": "ב־v2: 23,27,31.8,32.4,33",
+    "behavior": "ערכי מהירות פנייה לחמש מדרגות הליגה.",
+    "values": "0 מחזיר חוק קודם; חמישה מספרים מופרדים בפסיקים מחליפים טבלה; אינו פעיל בערכות מסלול שאינן v2.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingAuto": {
+    "default": "אפשרות מפורשת; אחרת העדפה שמורה או false",
+    "behavior": "האצה אוטומטית במרוצים.",
+    "values": "1 מפעיל; 0 אינו דורס העדפה שמורה; automaticOption מפורש קודם לכולם.",
+    "sourceFingerprint": "268eaacb0ba4355026ef3158853209754b0f39de64f047ae2940a459ca02a27d"
+  },
+  "racingBrakeAuto": {
+    "default": "v24",
+    "behavior": "מהירות אובדת רק בבלם במקום אוטומטית בפנייה.",
+    "values": "v23 מחזיר האטה אוטומטית בפנייה.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingBump": {
+    "default": "v24",
+    "behavior": "התנגשות שמקפיצה מכוניות ומורידה מהירות.",
+    "values": "v23 מחזיר מגע רך קודם.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingEngineLoops": {
+    "default": "כבוי",
+    "behavior": "לולאות מנוע מוקלטות בחבילת הקול.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "3ddd2485512034725f62784eb298ccacc7cb3871f458ff3459af000ae7e019eb"
+  },
+  "racingEnv": {
+    "default": "v2",
+    "behavior": "סביבת מסלול v2.",
+    "values": "v1 מחזיר סביבה קודמת.",
+    "sourceFingerprint": "68c24dc532c71612d0003c5667fa1091a99d870100e1bbe4922087f3532f594f"
+  },
+  "racingField": {
+    "default": "10 מכוניות; lite משתמש ב־8",
+    "behavior": "גודל השדה הרגיל; מתורגם ל־0..7 יריבים נוספים מעבר לחמישה.",
+    "values": "ערך מספרי לא ריק מעוגל ואז מוגבל; ליגה יכולה לספק extraRivals מפורש ולעקוף.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingFormulaCar": {
+    "default": "פעיל כאשר lite כבוי",
+    "behavior": "בחירת מודל מכונית Formula.",
+    "values": "1 כופה גם במצב lite; 0 מכבה; אחרת פעיל כשאין lite. טעינת הנכס ושערי האיכות עדיין נדרשים.",
+    "sourceFingerprint": "ad1a681fab2c1424a864349da01b9800a37409410bcae1bf9f8f3de34a2f068b"
+  },
+  "racingHiss": {
+    "default": "v24",
+    "behavior": "הפחתת לולאת רוח ורעש המנוע בעמידה.",
+    "values": "v23 מחזיר את שכבת הרעש הקודמת.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingKink": {
+    "default": "פעיל",
+    "behavior": "שיקאנים במסלולי Codex v2.",
+    "values": "0 מבקש גאומטריה גולמית ללא שיקאנים.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingKinkAll": {
+    "default": "כבוי",
+    "behavior": "שיקאן גם בישורת הראשית של מסלולי v2.",
+    "values": "רק 1 מפעיל; שימוש למדידה והשוואה.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingKinkAmp": {
+    "default": "13 מטר לפני קנה מידה",
+    "behavior": "משרעת שיקאן ארוך במסלולי v2.",
+    "values": "Number(value) או 13; גם 0 וערך ריק חוזרים ל־13.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingKinkFade": {
+    "default": "35 מטר לפני קנה מידה",
+    "behavior": "אורך מעבר השיקאן במסלולי v2.",
+    "values": "Number(value) או 35; גם 0 וערך ריק חוזרים ל־35.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingLevels": {
+    "default": "תפריט ליגה בלבד כשפעילה",
+    "behavior": "גישה לרשימת השלבים הרגילה לצד ליגת המרוצים.",
+    "values": "רק 1 מבטל racingLeagueOnly; אינו מכבה את הליגה.",
+    "sourceFingerprint": "e2721baec31066def89fc238f5914ad9560dc917cd502466d6dd4a855fc4f475"
+  },
+  "racingRecover": {
+    "default": "v24",
+    "behavior": "התאוששות מהיפוך במקום ואז החזרה רכה למסלול.",
+    "values": "v23 מחזיר גלגול מעופף בחזרה למרכז.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingShift": {
+    "default": "a",
+    "behavior": "סגנון קול החלפת הילוך.",
+    "values": "a, b, c או v22; ערך אחר חוזר ל־a.",
+    "sourceFingerprint": "a6eee1a00745a31717f7faed2e39457df0ac33581b84d520d8a7cac0f0bd7e42"
+  },
+  "racingShiftBeep": {
+    "default": "כבוי",
+    "behavior": "צפצוף החלפת הילוך.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "3ddd2485512034725f62784eb298ccacc7cb3871f458ff3459af000ae7e019eb"
+  },
+  "racingShortR": {
+    "default": "9 מטר לפני קנה מידה",
+    "behavior": "רדיוס שיקאן קצר במסלול v2.",
+    "values": "Number(value) או 9; גם 0 וערך ריק חוזרים ל־9.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingTracks": {
+    "default": "v2",
+    "behavior": "ערכת מסלולים המשמשת סימולציה, תצוגה וליגה.",
+    "values": "f1 מחזיר פוליגוני v10; v1 מחזיר קלאסי; ערך אחר בוחר v2. נקרא גם בזמן ייבוא מודול.",
+    "sourceFingerprint": "7586289ee1c815446933ed578fec960c85d04e894f68f6ade6fea4324e07a93e"
+  },
+  "racingTurbo": {
+    "default": "v24",
+    "behavior": "הכפתור בולם בלבד; ללא דחיפת drift boost בסוף פנייה.",
+    "values": "v23 מחזיר בלם/דריפט, התאמת נקודות העברה להיגוי וקול שחרור בסוף boost.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingV7": {
+    "default": "לפי cfg.enabled ואיכות",
+    "behavior": "חבילת מכוניות, קהל ואביזרים v7.",
+    "values": "0 מכבה; 1 כופה אם החבילה מוגדרת; אחרת לפי תצורה ומדרגת איכות.",
+    "sourceFingerprint": "b87e327ea171607384f24b9443442134a18ff0b3618b3a99ad324aa2d44c1db4"
+  },
+  "racingWalls": {
+    "default": "כבוי",
+    "behavior": "קירות קשיחים לצד מסלול.",
+    "values": "רק 1 מפעיל.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  },
+  "racingWheel": {
+    "default": "פעיל",
+    "behavior": "הגה צף בחצי השמאלי במקום סליידר.",
+    "values": "0 מחזיר סליידר; wheelMode מפורש קודם ל־URL.",
+    "sourceFingerprint": "268eaacb0ba4355026ef3158853209754b0f39de64f047ae2940a459ca02a27d"
+  },
+  "v2samples": {
+    "default": "4",
+    "behavior": "צפיפות דגימת גאומטריית מסלול v2.",
+    "values": "Number(value) או 4; גם 0 וערך ריק חוזרים ל־4.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "v2scale": {
+    "default": "0.87",
+    "behavior": "קנה מידה למסלולי Codex v2 לפני הרחבת התצוגה.",
+    "values": "Number(value) או 0.87; גם 0 וערך ריק חוזרים לברירת המחדל.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "v2width": {
+    "default": "16",
+    "behavior": "רוחב מסלול Codex v2 במטרים לפני הגדלה.",
+    "values": "Number(value) או 16; גם 0 וערך ריק חוזרים ל־16.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingAi": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "בינת מרוץ מעודכנת.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingAudioHold": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "החזקת/מעבר קול סביב שינוי מצב מרוץ.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "fe97c49d687529d0feb22f9720f1e2bb59bc05f5e3d9ac72f9256fea6ccc7488"
+  },
+  "racingAudioV3": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "חבילת קול v3.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "3ddd2485512034725f62784eb298ccacc7cb3871f458ff3459af000ae7e019eb"
+  },
+  "racingAudioV4": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "דגימות בלימה, חבטה ושפשוף v4.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingBroadcast": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "ממשק שידור מרוץ; גם שער לאמנות השידור.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6df9d5f3326a196264024896014be16e7a27fe9c461d86b63b556838be6dfa30"
+  },
+  "racingBroadcastArt": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "אמנות/אייקונים בממשק השידור; דורש גם racingBroadcast.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "0140df130b72691848ad166123ef5e311f41f7d6f5e87d7bca1a9a0d28e7a84e"
+  },
+  "racingCam": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מצלמת נהיגה נמוכה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ad1a681fab2c1424a864349da01b9800a37409410bcae1bf9f8f3de34a2f068b"
+  },
+  "racingCrash": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מנגנון התרסקות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingCrashAssets": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "נכסי התרסקות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "c64c920e646a5a04089b92a9caa576a47f61540e27fc14547ae88999c5ac9b8f"
+  },
+  "racingCrashFx": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "אפקטי ומצלמת התרסקות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "25cd7a5def7520648d8c2db625d8875228a360deab4744d3af348fb59f0dcd84"
+  },
+  "racingEngine": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מנגנון מנוע והילוכים.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingErs": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מערכת ERS.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingF1Field": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "דמויות מכוניות קלות לשדה Formula.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ad1a681fab2c1424a864349da01b9800a37409410bcae1bf9f8f3de34a2f068b"
+  },
+  "racingFeel": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "תחושת נהיגה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingFormulaAll": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "כל היריבים משתמשים בדגם Formula בכפוף לאיכות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "909869325ecf695284700142c5b4dd9257981051898982547058cd1519ff4db0"
+  },
+  "racingGrid": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "סידור זינוק.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "25cd7a5def7520648d8c2db625d8875228a360deab4744d3af348fb59f0dcd84"
+  },
+  "racingGrind": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "שפשוף/חיכוך.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingLeague": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "ליגת המרוצים.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ce069e11ae17ed98b8b08088151a283e98c2f74f8873088ddfb36b14638a3f4d"
+  },
+  "racingLeagueArt": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "גרפיקת תפריטי הליגה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "5c26348ce7439362bb3be583f440de5a0a3786105b8188516cf6a3954c706606"
+  },
+  "racingLongLeague": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "ליגה ארוכה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ce069e11ae17ed98b8b08088151a283e98c2f74f8873088ddfb36b14638a3f4d"
+  },
+  "racingLook": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מראה Formula המשפיע גם על בחירת מסלולים/ליגה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "e5b180d4d8d141960831d8d307eafbd17db435d9910852e338fa7c9be4543ecd"
+  },
+  "racingOffSlow": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "הקלה ביציאה איטית מן הדשא.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingOffTrack": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "פיזיקת יציאה מהמסלול.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  },
+  "racingPit": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "שחיקת צמיגים ועצירות בור.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingPitAuto": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "עצירת צמיגים אוטומטית ב־v24.1; נדרש racingPit.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "a6e0a840540dd17b32dba0648242815550935825479adf03607fe2626b9710ad"
+  },
+  "racingPitCrew": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "צוות בבור; עצירת הבור עצמה נשארת.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "7cadb399dd9f89de4f2d4aa9e17fcb4364d989a06dc376c0b21bf98ca498aff9"
+  },
+  "racingPodium": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מסך/סצנת פודיום.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingRevShift": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "העברת הילוך לפי סלד.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingSamples": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "קולות מוקלטים.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "07f68882cb9dadd6a5dea1b55ea70af97f1d5c21ea06f38babe3b8a9cc66f4fc"
+  },
+  "racingShiftMap": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מפת נקודות העברת הילוכים.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingShortKink": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "שיקאן קצר בישורות בינוניות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "d6f93673df4933a958bbef1ffe36150c07fe830df76f5a63e6ca2f7701274251"
+  },
+  "racingSoundStart": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "קול תחילת מרוץ.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingTopCap": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "תקרת מהירות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingTopSound": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "קול בשיא מהירות.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "496edcc85ee8f347ed183c8111e096933666962230be614318d67af2939243d2"
+  },
+  "racingTower": {
+    "default": "פעיל בכפוף לשערי מצב, נכסים ותצורה",
+    "behavior": "מגדל דירוג.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "ea0446f0094666a32cd83a0d5b38b79ed982e675b65405b23ec24f90ed026233"
+  },
+  "tennisCrowdAudio": {
+    "default": "פעיל",
+    "behavior": "קולות קהל בטניס.",
+    "values": "0 מכבה.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisCrowdLevel": {
+    "default": "טבלת v7.crowdLevels לפי מדרגת איכות",
+    "behavior": "צפיפות ואנימציית קהל v7.",
+    "values": "מספר סופי ולא ריק מעוגל ומוגבל ל־0..2 ומקבע רמה; אחרת לפי איכות.",
+    "sourceFingerprint": "ce9acfa5738d0fea9c0f626ee08610843139dcd5849e260de58591b3a98ab6e2"
+  },
+  "tennisFansTurn": {
+    "default": "0.6",
+    "behavior": "כמה קהל האטלס מסובב מן המגרש אל המצלמה.",
+    "values": "המרה ב־Number עם ??0.6; ערך ריק ו־0 נותנים 0; חל רק במסלול קהל האטלס.",
+    "sourceFingerprint": "a5aa39b256fb14655a68ec375c28a91216b5d973827dcb10a7ddad2cca6c15ac"
+  },
+  "tennisLoad": {
+    "default": "טעינה מקבילית v25",
+    "behavior": "סדר טעינת נכסי טניס: בקשות מקבילות ודחיית קהל במקום שרשרת טעינה.",
+    "values": "v24 מחזיר את סדר הטעינה הישן; כל ערך אחר מפעיל lazyLoad.",
+    "sourceFingerprint": "72a2dae993775000532fd7757a63b9e41729d5baf5e8ba655b7bd292dc2589c0"
+  },
+  "tennisMeter": {
+    "default": "פעיל בצד לפי תצורה",
+    "behavior": "מד תזמון חבטה ומיקומו.",
+    "values": "0 מכבה את המד במודל; v15 מחזיר מיקום קודם במקום צד; אפשרויות ctx ותצורה עשויות להשפיע.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisOut": {
+    "default": "תיקון פעיל בדף; המודל לבדו מקבל stopDead=false כברירת מחדל",
+    "behavior": "עצירה סופית אחרי כדור בחוץ.",
+    "values": "v24 מחזיר התנהגות קודמת.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisReturn": {
+    "default": "פעיל לפי balance.v9.returnMeter.enabled",
+    "behavior": "מחט מד החזרה נעה מעצמה עבור כל כדור נכנס; נקישה נבחנת לפי מיקומה.",
+    "values": "v14 מחזיר מד קודם; 0 אינו הכיבוי שקוד זה בודק.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisStadium": {
+    "default": "אצטדיון v12 כש־v7.hideVenue פעיל",
+    "behavior": "אצטדיון וקהל חלופיים.",
+    "values": "0 מדלג על v11 ו־v12; v11 מדלג על v12 בלבד; כשל שומר גיבוי.",
+    "sourceFingerprint": "aec756dc66053c247c55979b2e2213903ea8d5f52c8370e7a6760edfa67780d3"
+  },
+  "tennisSurface": {
+    "default": "מחזור v7.surfaces לפי שלב",
+    "behavior": "משטח מגרש v7.",
+    "values": "מזהה מתוך V7_FILES.courts כופה; אחרת מחזור תצורה, וחסר תקף חוזר ל־clay.",
+    "sourceFingerprint": "ce9acfa5738d0fea9c0f626ee08610843139dcd5849e260de58591b3a98ab6e2"
+  },
+  "tennisV7": {
+    "default": "לפי environment.v7.enabled וסף איכות",
+    "behavior": "מגרש, קהל ודמויות v7.",
+    "values": "0 מכבה; 1 כופה אם environment.v7 קיים; אחרת תצורה ואיכות.",
+    "sourceFingerprint": "ce9acfa5738d0fea9c0f626ee08610843139dcd5849e260de58591b3a98ab6e2"
+  },
+  "tennisBar": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "הצגת מד לפני כל כדור נכנס, במקום להופיע רק אחרי החזקה של כ־0.45 שנייה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisDeep": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "פחות החטאות מוקדמות של היריב, עזרת תנועה למחבט, שגיאות/תזמון ומשוב לפי רמת קושי.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisDrop": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "הקלה בדרופ בשלבים מוקדמים: טיסה, תגובת ריצה וסיכוי החטאה של היריב; ההקלה דועכת לפי השלב.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisHold": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "מצב הקשה לעומת החזקת חבטה וטעינת עוצמה, עם אזור תזמון רחב.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisReceive": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "בחירת מקום עמידה על קו הבסיס לפני הגשת היריב, בכפוף לתצורת receive.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisSoftDrop": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "דרופ רך שמאפשר ליריב להגיע ולהחזיר ומציע הזדמנות לחבטת סיום, לפי תצורה.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisV9": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "כללי v9 בטניס.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "6b7e616ce2b03ef4e1d6f1982984c7f5a8d1b54884f721e42e7027c432c2ab2f"
+  },
+  "tennisGrip": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "מחבט נכס ואחיזת אצבעות v25.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "3616823f2ec0dc60f3608f7e676ef50d6fee8d2d7ad05df8e0d10c7621188faa"
+  },
+  "tennisMotionV1": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "קליפי רגליים וגו מחבילת תנועה; זרוע ומחבט נשארים ב־IK.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "353d4e535a62f16c56e6d054488f550bf12758ef7efe2a91cd077ddffdd5a8f4"
+  },
+  "tennisCrowd3d": {
+    "default": "פעיל בכפוף לתצורה ולבחירת מסלול",
+    "behavior": "קהל תלת־ממד עם LOD; בכשל נשאר קהל אטלס.",
+    "values": "רק 0 מכבה; ערכים אחרים אינם כיבוי.",
+    "sourceFingerprint": "a5aa39b256fb14655a68ec375c28a91216b5d973827dcb10a7ddad2cca6c15ac"
+  },
+  "actor": {
+    "default": "0",
+    "behavior": "בחירת דמות בתצוגת נכס. אינו דגל של דף האי הראשי.",
+    "values": "מספר דמות בתצוגת טניס; Number(value) עם fallback ל־0.",
+    "sourceFingerprint": "5fc1466b3fb7c63e9c90f319607b8356b70c0337a9604fc6c80a124ca1ffeb20"
+  },
+  "angle": {
+    "default": "0",
+    "behavior": "זווית צילום. אינו דגל של דף האי הראשי.",
+    "values": "זווית במספר; ערך ריק חוזר ל־0.",
+    "sourceFingerprint": "99764ce490b8405eb96a467a48ee6a5de7717e0cc1a6fa681d4f863813b7bb22"
+  },
+  "asset": {
+    "default": "basketball-arena",
+    "behavior": "בחירת נכס. אינו דגל של דף האי הראשי.",
+    "values": "מזהה שקיים במילון assets; לא מוכר חוזר לברירת המחדל.",
+    "sourceFingerprint": "b9bf4cf4a8d4f7f37a776896bd254831911e56c17ed75ca74c466f9cbb4f7eb1"
+  },
+  "at": {
+    "default": "0",
+    "behavior": "זמן/נקודת צילום. אינו דגל של דף האי הראשי.",
+    "values": "זמן מדידה מספרי; ערך ריק חוזר ל־0.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "auto": {
+    "default": "כבוי ברוב הכלים; פעיל ב־catch-view6-harness",
+    "behavior": "הפעלה אוטומטית בכלי. אינו דגל של דף האי הראשי.",
+    "values": "audio/perf/show: רק 1 מפעיל; catch-view6: רק 0 מכבה.",
+    "sourceFingerprint": "60e5f1ceb8b2ac65835e071303266f1b1f400a5747e68458fbe77d974b6cfd46"
+  },
+  "autostart": {
+    "default": "כבוי",
+    "behavior": "התחלה אוטומטית. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 לוחץ על כפתור ההפעלה בכלי הסקי.",
+    "sourceFingerprint": "c5d010fdec8651cec9526c374718dd3d3e0147b131302e32e602693d76633ea0"
+  },
+  "behind": {
+    "default": "כבוי",
+    "behavior": "מצב קודם לצילום השוואה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל את זווית ההשוואה שמאחור.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "bench": {
+    "default": "כבוי",
+    "behavior": "מצב מדידת ביצועים. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל את מסלול המדידה בכדורסל.",
+    "sourceFingerprint": "c73bab8aa7458afbe81c007fcf03848955fe3a476aaeb5e1525acd8f513067d0"
+  },
+  "cam": {
+    "default": "מצלמה רגילה של הכלי",
+    "behavior": "בחירת מצלמה. אינו דגל של דף האי הראשי.",
+    "values": "wheel מעביר לצילום תקריב של הגלגל האחורי־שמאלי.",
+    "sourceFingerprint": "618dc03f56fb93ed8ff64133c064d14feb65260053c41c6b3b605f5d30884f3d"
+  },
+  "camera": {
+    "default": "landscape",
+    "behavior": "בחירת מצלמה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה מצלמה; בתצוגת LOD נעשה שימוש ב־?? ובתצוגה האחרת ב־fallback לערך לא ריק.",
+    "sourceFingerprint": "247b3d2520b5256d374ad5de9de11e7127e1880ddec0c37446fea99b7ae28efb"
+  },
+  "capture": {
+    "default": "כבוי",
+    "behavior": "מצב צילום ללא ממשק. אינו דגל של דף האי הראשי.",
+    "values": "עצם הנוכחות מספיקה, גם capture=0; מצב צילום/הקפאה/הסתרת ממשק תלוי בתצוגה.",
+    "sourceFingerprint": "93f51a3000199afa395f0a170fff4e38c451dd36d5f55a54f108214c6abe2a40"
+  },
+  "car": {
+    "default": "apex",
+    "behavior": "בחירת מכונית. אינו דגל של דף האי הראשי.",
+    "values": "מזהה מתוך carSpecs; לא מוכר חוזר ל־apex.",
+    "sourceFingerprint": "9ddfb260fea245af79cf20c41d49b5efa360eea4b5b09fa816c3cc7a820ace5e"
+  },
+  "clip": {
+    "default": "הקליפ הראשון בקטלוג; ב־character-check הערך run",
+    "behavior": "בחירת קליפ תנועה. אינו דגל של דף האי הראשי.",
+    "values": "כל תצוגה בוחרת/מאמתת מול קטלוגה; כלי hoops-v8 מאפשר גם ללא בחירה מפורשת.",
+    "sourceFingerprint": "7bc7cea8fa5fa7f82c4a7311e28edbc16006c1253cef4706cf333daee1f8e61f"
+  },
+  "difficulty": {
+    "default": "easy",
+    "behavior": "רמת קושי בכלי המדידה. אינו דגל של דף האי הראשי.",
+    "values": "רמת קושי לסשן הטניס של כלי הבדיקה.",
+    "sourceFingerprint": "75ddfc42de0e337e5b6060a7acb8b0c04edb1061f213e6f2c3a56916d946accd"
+  },
+  "dpr": {
+    "default": "devicePixelRatio של הדפדפן",
+    "behavior": "יחס פיקסלים למדידה. אינו דגל של דף האי הראשי.",
+    "values": "ערך לא ריק כופה Number(value) לצורך המדידה.",
+    "sourceFingerprint": "7c234fa76e822a69647dabd12a35c1c200c79ae04dc89524cd364995b57e7a80"
+  },
+  "driver": {
+    "default": "good",
+    "behavior": "סוג נהג סימולציה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה נהג מתוך DRIVING6.",
+    "sourceFingerprint": "bcb9bbcf5ef7a1d372c2a0431beb6e5d2aa435dd4fa4087d9cc6b245bed27f70"
+  },
+  "dur": {
+    "default": "30 שניות בכדורסל; 20 בטניס",
+    "behavior": "משך ריצה. אינו דגל של דף האי הראשי.",
+    "values": "מספר עם רצפה של 3 שניות.",
+    "sourceFingerprint": "d6746a8e97a489eedada32d4bf1569f2a1d8165d76953e764f7a0d3e2ec87c40"
+  },
+  "far": {
+    "default": "כבוי",
+    "behavior": "צילום מרוחק. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 בוחר מרחק גדול בתצוגת המרוצים.",
+    "sourceFingerprint": "9ddfb260fea245af79cf20c41d49b5efa360eea4b5b09fa816c3cc7a820ace5e"
+  },
+  "fixed": {
+    "default": "פעיל",
+    "behavior": "מצב זמן קבוע. אינו דגל של דף האי הראשי.",
+    "values": "רק 0 מבטל את מצב הפריימים הקבוע בכלי המרוצים.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "focus": {
+    "default": "body",
+    "behavior": "מוקד תצוגה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה מוקד בתצוגת הטניס.",
+    "sourceFingerprint": "5fc1466b3fb7c63e9c90f319607b8356b70c0337a9604fc6c80a124ca1ffeb20"
+  },
+  "frames": {
+    "default": "60",
+    "behavior": "מספר פריימים למדידה. אינו דגל של דף האי הראשי.",
+    "values": "מספר פריימים עם רצפה של 10.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "freeze": {
+    "default": "כבוי",
+    "behavior": "הקפאת אנימציה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מקפיא את תצוגת ה־HUD ושידור חוזר בנקודה נתונה.",
+    "sourceFingerprint": "eeaa9ec6be39602f3c63c172bec7034bbd8ddbad4403810b4d2f3b2ab5ce98c0"
+  },
+  "game": {
+    "default": "soccer",
+    "behavior": "בחירת משחק בכלי. אינו דגל של דף האי הראשי.",
+    "values": "מזהה משחק לכלי בדיקת דמות.",
+    "sourceFingerprint": "967c2227b2556a4a9619f31af0f5dfe50bfe603f2599544fe9e19df319fcf305"
+  },
+  "gap": {
+    "default": "12",
+    "behavior": "מרווח יעד במרדף. אינו דגל של דף האי הראשי.",
+    "values": "מרווח יעד מספרי בכלי צמיגי המרדף.",
+    "sourceFingerprint": "618dc03f56fb93ed8ff64133c064d14feb65260053c41c6b3b605f5d30884f3d"
+  },
+  "gear": {
+    "default": "0",
+    "behavior": "דרגת ציוד למדידה. אינו דגל של דף האי הראשי.",
+    "values": "דרגת ציוד מספרית מוגבלת ל־0..5.",
+    "sourceFingerprint": "6605daa584955493ee4b72d2947bb5cd270d2beb7297a67bab765c802d158c12"
+  },
+  "help": {
+    "default": "דגל העזרה השמור בכלי נכתב ל־1",
+    "behavior": "הצגת עזרה בכלי. אינו דגל של דף האי הראשי.",
+    "values": "help=1 כותב 0 למפתח island.catch.help2, כדי להציג את העזרה מחדש; אחרת כותב 1.",
+    "sourceFingerprint": "30bfe8cd5407e735bbc6119912282d30c7010962db4d1d6fab55f17e3163dd26"
+  },
+  "hit": {
+    "default": "אקראיות לפי seed",
+    "behavior": "רגע פגיעה לצילום. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 כופה מחולל שמחזיר 0 לצורך פגיעה בטוחה.",
+    "sourceFingerprint": "618dc03f56fb93ed8ff64133c064d14feb65260053c41c6b3b605f5d30884f3d"
+  },
+  "hold": {
+    "default": "כבוי",
+    "behavior": "משך החזקה למדידה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל החזקה קבועה בכלי המרוצים.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "league": {
+    "default": "0: מסלול סקי רגיל",
+    "behavior": "מצב ליגה בכלי. אינו דגל של דף האי הראשי.",
+    "values": "מספר מוגבל ל־0..STAGE_COUNT; ערך חיובי בוחר שלב ליגה.",
+    "sourceFingerprint": "c5d010fdec8651cec9526c374718dd3d3e0147b131302e32e602693d76633ea0"
+  },
+  "level": {
+    "default": "5 בהגנה; 6 באש; 1 בכדורגל ובטניס",
+    "behavior": "שלב/רמה בכלי. אינו דגל של דף האי הראשי.",
+    "values": "המרה למספר לפי הכלי; בכדורגל רצפה 1.",
+    "sourceFingerprint": "110e32ecc044b3567baacf4e62476688482188f920e8467132679500483a694e"
+  },
+  "light": {
+    "default": "יום; בטניס day",
+    "behavior": "תאורה בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "בהגנה רק night בוחר לילה; בטניס מחרוזת לא ריקה קודמת ל־day.",
+    "sourceFingerprint": "4c45af68e98c74466b2ab8ef89855fe4ceeeb1d1bc60f4bded89fd7442918db0"
+  },
+  "lod": {
+    "default": "auto באולם הכדורסל; null באצטדיון הכדורגל",
+    "behavior": "מדרגת פירוט בנכס. אינו דגל של דף האי הראשי.",
+    "values": "נוכחות מבקשת Number(value); היעדר נותן בחירה אוטומטית.",
+    "sourceFingerprint": "d4ab24a21e84f08d061cefc8a85e882d122789591f1f57a18c6c14ec5adaf004"
+  },
+  "manual": {
+    "default": "כבוי",
+    "behavior": "בקרה ידנית בכלי. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל מצב ידני; ב־catch-view6 הוא מדלג גם על לולאת ההרצה האוטומטית.",
+    "sourceFingerprint": "d5c2254af789c548831cd96d376307ba3118b5d0b09f236e06f60a97abeda81c"
+  },
+  "map": {
+    "default": "כבוי",
+    "behavior": "בחירת מפה בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "עצם הנוכחות מפעילה מפה בתצוגת ערכת הממשק.",
+    "sourceFingerprint": "f2792e18a47021f8c9c4761d2fb411a81a0c1aa5e64e8a5940cb71bc9cff0730"
+  },
+  "matches": {
+    "default": "2",
+    "behavior": "מספר משחקים למדידה. אינו דגל של דף האי הראשי.",
+    "values": "מספר משחקי מדידה עם רצפה 1.",
+    "sourceFingerprint": "bde6e7afc88da182e6231f5cd9197b1715f8976d3d2359163b08c5bba80a6938"
+  },
+  "mode": {
+    "default": "מצב רגיל; evening באצטדיון v6; static בתרחיש CSP",
+    "behavior": "מצב תצוגה או תרחיש בדיקה. אינו דגל של דף האי הראשי.",
+    "values": "replay באולם, garage במרוצים, library בצופה גולש, day באצטדיון; כל מזהה שייך לקובץ שלו.",
+    "sourceFingerprint": "6258cee530163c25a29eca9e5b1742287228383d93b805e48179960ff1f2d425"
+  },
+  "motion": {
+    "default": "serve",
+    "behavior": "בחירת מצב תנועה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה אנימציה בתצוגת טניס.",
+    "sourceFingerprint": "5fc1466b3fb7c63e9c90f319607b8356b70c0337a9604fc6c80a124ca1ffeb20"
+  },
+  "pack": {
+    "default": "קול מסונתז/בסיסי",
+    "behavior": "חבילת קול בכלי. אינו דגל של דף האי הראשי.",
+    "values": "רק v7 מבקש חבילת v7 בכלי בדיקת קול המרדף.",
+    "sourceFingerprint": "0cb319f4ec6de570f8cef6edd209a6d54b87b767314579e8281b997fb961655d"
+  },
+  "pause": {
+    "default": "כבוי",
+    "behavior": "השהיית תצוגה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 משהה את תצוגת המרוצים.",
+    "sourceFingerprint": "9ddfb260fea245af79cf20c41d49b5efa360eea4b5b09fa816c3cc7a820ace5e"
+  },
+  "profile": {
+    "default": "hoopsProfile שנמסר או quick",
+    "behavior": "פרופיל משחק בכלי. אינו דגל של דף האי הראשי.",
+    "values": "מחרוזת profile לא ריקה קודמת ל־hoopsProfile בכלי הכדורסל בלבד.",
+    "sourceFingerprint": "c73bab8aa7458afbe81c007fcf03848955fe3a476aaeb5e1525acd8f513067d0"
+  },
+  "replay": {
+    "default": "כבוי",
+    "behavior": "הפעלת שידור חוזר לבדיקה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל שידור חוזר בכלי ביצועי הכדורסל.",
+    "sourceFingerprint": "c73bab8aa7458afbe81c007fcf03848955fe3a476aaeb5e1525acd8f513067d0"
+  },
+  "role": {
+    "default": "PG",
+    "behavior": "תפקיד שחקן בכלי. אינו דגל של דף האי הראשי.",
+    "values": "תפקיד בקטלוג קליפי הכדורסל.",
+    "sourceFingerprint": "4d7fccc9c2b9a53979fcf7baf51c58101d79974e3812bdc1003529c088cc1692"
+  },
+  "scene": {
+    "default": "space",
+    "behavior": "בחירת סצנה. אינו דגל של דף האי הראשי.",
+    "values": "בחירת סצנה בתצוגת ההגנה.",
+    "sourceFingerprint": "17b4f9abffee65a6d836978928e6ccffbc5050c0155c44ecc9ba1cd36c558770"
+  },
+  "screen": {
+    "default": "ללא מסך נוסף",
+    "behavior": "גודל מסך/פריסה. אינו דגל של דף האי הראשי.",
+    "values": "מחרוזת לא ריקה פותחת מסך בערכת הממשק.",
+    "sourceFingerprint": "f2792e18a47021f8c9c4761d2fb411a81a0c1aa5e64e8a5940cb71bc9cff0730"
+  },
+  "seconds": {
+    "default": "ערך input בסקי; 12 באש; 30 בכדורגל; 900 בכלי show",
+    "behavior": "משך מדידה. אינו דגל של דף האי הראשי.",
+    "values": "כדורגל מוגבל לפחות 5 שניות; show לפחות 30; הערכים מקומיים לכלי.",
+    "sourceFingerprint": "84eb58f75823e3c719a0afd3620298a78b7c49caae01d23a0bfc123cbb3175d1"
+  },
+  "seed": {
+    "default": "3 בכלי מרדף; 7 ברוב הכלים; 4242 בכדורסל; 4107 בטניס",
+    "behavior": "זרע אקראיות למדידה. אינו דגל של דף האי הראשי.",
+    "values": "מספר/uint32 לפי הכלי; 0 בחלק מהכלים חוזר לברירת המחדל בגלל ||.",
+    "sourceFingerprint": "02849e3767c2c5497fe449200ba1a38a7ac0553bfbee5142cd585f1755e4ec58"
+  },
+  "shot": {
+    "default": "כבוי",
+    "behavior": "צילום/תרחיש בעיטה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מוסיף מצב צילום לכלי המרוצים.",
+    "sourceFingerprint": "bec61b3f6ebafbe446f119e409d9a50e854f1643e5f927b61c8429effd7b4691"
+  },
+  "siren": {
+    "default": "ברירת מחדל של createCatchAudio",
+    "behavior": "גרסת סירנה בכלי. אינו דגל של דף האי הראשי.",
+    "values": "v7 בוחר sirenScale=0.55; pack=v7 מפעיל גם הוא קנה מידה זה.",
+    "sourceFingerprint": "0cb319f4ec6de570f8cef6edd209a6d54b87b767314579e8281b997fb961655d"
+  },
+  "slowMs": {
+    "default": "סף התצוגה המקורי",
+    "behavior": "הדמיית משך פריים איטי. אינו דגל של דף האי הראשי.",
+    "values": "ערך לא ריק מחליף render.slowFrameMs באמצעות Number.",
+    "sourceFingerprint": "ba1544de4cca982e104c920c44c4c556867b365d749744331c478c8e7758cad2"
+  },
+  "small": {
+    "default": "כבוי",
+    "behavior": "מצב תצוגה קטן. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מסמן מצב קטן בכלי הסקי.",
+    "sourceFingerprint": "c5d010fdec8651cec9526c374718dd3d3e0147b131302e32e602693d76633ea0"
+  },
+  "sport": {
+    "default": "soccer",
+    "behavior": "סוג ספורט בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "רק basketball בוחר כדורסל בתצוגת השידור.",
+    "sourceFingerprint": "526bf78ca093347d50578bc51182f7ecf456f6a3f3cf20425bcb3429e16b2ada"
+  },
+  "stage": {
+    "default": "1",
+    "behavior": "שלב לכלי משחק. אינו דגל של דף האי הראשי.",
+    "values": "שלב מספרי; בכלי ליגת הסקי מוגבל ל־1..STAGE_COUNT, ובסקי הרגיל לטווח השלבים.",
+    "sourceFingerprint": "a50d7470e744d73a3ac025d02cef84395e63271dbf5169cfb67a6a5a5ae054a2"
+  },
+  "state": {
+    "default": "live",
+    "behavior": "מצב אנימציה/תצוגה. אינו דגל של דף האי הראשי.",
+    "values": "live, substitution, goal או replay; לא מוכר חוזר ל־live.",
+    "sourceFingerprint": "eeaa9ec6be39602f3c63c172bec7034bbd8ddbad4403810b4d2f3b2ab5ce98c0"
+  },
+  "static": {
+    "default": "כבוי",
+    "behavior": "תצוגה סטטית. אינו דגל של דף האי הראשי.",
+    "values": "עצם הנוכחות מקפיאה את הדגמת ה־HUD.",
+    "sourceFingerprint": "3895dfb5be5db569909ae2601e2a5938bd3893dab4a5c7f8688832d2315aba19"
+  },
+  "still": {
+    "default": "תנועה פעילה אלא אם המכשיר ביקש הפחתת תנועה",
+    "behavior": "עצירת תנועה לצילום. אינו דגל של דף האי הראשי.",
+    "values": "עצם הנוכחות עוצרת את האנימציה.",
+    "sourceFingerprint": "fee59382d1912dc4e41c0da4de27087fdce51524ba490ce0fcc52b53418c51f6"
+  },
+  "surface": {
+    "default": "hard",
+    "behavior": "סוג משטח בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה משטח בתצוגת נכסי טניס בלבד; אינו tennisSurface של המשחק.",
+    "sourceFingerprint": "5fc1466b3fb7c63e9c90f319607b8356b70c0337a9604fc6c80a124ca1ffeb20"
+  },
+  "switch": {
+    "default": "כבוי",
+    "behavior": "רגע/סוג החלפת שחקן למדידה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מסמן את אפשרות ההחלפה בכלי הסקי.",
+    "sourceFingerprint": "c5d010fdec8651cec9526c374718dd3d3e0147b131302e32e602693d76633ea0"
+  },
+  "t": {
+    "default": "אין זמן כפוי",
+    "behavior": "זמן קבוע לצילום. אינו דגל של דף האי הראשי.",
+    "values": "מחרוזת לא ריקה קובעת זמן צילום בכלי סגנונות האש; ראו המרה בהמשך הכלי.",
+    "sourceFingerprint": "8e2e2dc185d9ba0ba11b130836ae46460937009902cf00ed4eefef5c62b02ca1"
+  },
+  "theme": {
+    "default": "coast בתצוגת HUD; day בכלי צמיגים",
+    "behavior": "נושא חזותי. אינו דגל של דף האי הראשי.",
+    "values": "ב־HUD נדרש מפתח תקף במילון; בכלי הצמיגים נעשה שימוש ישיר ב־THEMES.",
+    "sourceFingerprint": "12b2d6e8bcae6f82fe5f2007b61a9cac0f6af92b9d0ac7f156c0cbd0e573c799"
+  },
+  "time": {
+    "default": "1.64 שניות",
+    "behavior": "זמן אנימציה. אינו דגל של דף האי הראשי.",
+    "values": "עצם הנוכחות משתמשת ב־Number(value) ועוצרת אנימציה בתצוגת הטניס.",
+    "sourceFingerprint": "5fc1466b3fb7c63e9c90f319607b8356b70c0337a9604fc6c80a124ca1ffeb20"
+  },
+  "track": {
+    "default": "coast",
+    "behavior": "מסלול בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "מזהה קיים במילון themes של תצוגת מרוצים; לא מוכר חוזר ל־coast.",
+    "sourceFingerprint": "9ddfb260fea245af79cf20c41d49b5efa360eea4b5b09fa816c3cc7a820ace5e"
+  },
+  "view": {
+    "default": "תלוי צופה: רחב/רחוק, arena, main, broadcast או side",
+    "behavior": "זווית/מצב תצוגה. אינו דגל של דף האי הראשי.",
+    "values": "הגנה: close; אולם: near או far; hoops-v5: מזהה מתוך labels; אצטדיון: main; טניס: wide; כלי פריימי כדורגל: side.",
+    "sourceFingerprint": "69b4b903233dad66073dc6ba0d6b24b9125cda6d579f64479a639c15275c3b7d"
+  },
+  "warmup": {
+    "default": "3 שניות",
+    "behavior": "משך חימום לפני מדידה. אינו דגל של דף האי הראשי.",
+    "values": "מספר עם רצפה 0; ערך ריק נהפך ל־0 בגלל ?? לפני Number.",
+    "sourceFingerprint": "b1b8c82018f789525f637ab25200d7ef7f27697acdf270bb00c84dd19d823632"
+  },
+  "wet": {
+    "default": "כבוי",
+    "behavior": "משטח רטוב בתצוגה. אינו דגל של דף האי הראשי.",
+    "values": "רק 1 מפעיל משטח רטוב בתצוגת האצטדיון.",
+    "sourceFingerprint": "6c763e73b240e1ad91fe76462333f8d280669630f50e62854191dbc2c9e37e82"
+  },
+  "who": {
+    "default": "soccer-player",
+    "behavior": "בחירת דמות בכלי. אינו דגל של דף האי הראשי.",
+    "values": "מזהה דמות לכלי בדיקת דמויות.",
+    "sourceFingerprint": "967c2227b2556a4a9619f31af0f5dfe50bfe603f2599544fe9e19df319fcf305"
+  },
+  "racingOffTrackSoft": {
+    "default": "7 מטר",
+    "behavior": "מרחק מחוץ לשפת האספלט שמתחיל טיימר היפוך.",
+    "values": "מספר סופי ולא ריק מוגבל לטווח 1..20; ערך חסר, ריק או לא מספר חוזר לברירת המחדל.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  },
+  "racingOffTrackDwell": {
+    "default": "0.6 שניות",
+    "behavior": "זמן מעבר לסף הרך לפני היפוך.",
+    "values": "מספר סופי ולא ריק מוגבל לטווח 0..3; ערך חסר, ריק או לא מספר חוזר לברירת המחדל.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  },
+  "racingOffTrackHard": {
+    "default": "9 מטר",
+    "behavior": "מרחק שגורם להיפוך מיידי.",
+    "values": "מספר סופי ולא ריק מוגבל לטווח 2..30; ערך חסר, ריק או לא מספר חוזר לברירת המחדל.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  },
+  "racingOffTrackLong": {
+    "default": "4 שניות",
+    "behavior": "משך יציאה מהאספלט שגורם להיפוך ללא תלות במרחק.",
+    "values": "מספר סופי ולא ריק מוגבל לטווח 0.5..10; ערך חסר, ריק או לא מספר חוזר לברירת המחדל.",
+    "sourceFingerprint": "da7eebcdd3e72f0bb340a8c273c2ea730cd2cf04905b6931b2f4c8508e2cb3f0"
+  }
+}
