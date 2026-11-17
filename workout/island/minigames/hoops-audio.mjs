@@ -2,7 +2,7 @@
  * recipes and voice limits. Sound never changes the match or saved club state. */
 import {hoopsWhistleGain,createWhistleGate,WHISTLE_SPACING} from './sports-audio-rules.mjs';
 import {scoreCrowdSample} from './hoops-show.mjs';
-import {hoopsWhistleV241Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from './hoops-v241.mjs?v=island-v2-20261107-15';
+import {hoopsWhistleV241Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from './hoops-v241.mjs?v=island-v2-20261107-16';
 const wallClock=()=>(globalThis.performance?.now()??Date.now())/1000;
 // Sneaker squeak on every fast dribble: basketball/shoes.ogg is a 1.7 kHz lead-in that drops
 // to a pure 1.08 kHz tone (audio-forensics 11/11/2026: 34 squeaks in 3 minutes of live play,

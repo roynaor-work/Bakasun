@@ -1,9 +1,9 @@
 /** 13/11/2026 fire v23: the shell side of the two bonus missions (water targets, inside the building): a section after the
  * 30 campaign stages, two shortcuts on the fire game's home screen and the result card. Bonus missions have no save field,
  * so the cards show no stars; they open with campaign progress. `?fireTargets=0` / `?fireInterior=0` hide each mode. */
-import {fireBonusCards,fireBonusOn,TARGET_STAGES,INTERIOR_STAGES,fireBonusUnlocked,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-15';
-import {kitStageLabel,kitResultPanel,kitPrimary} from './ui-kit.mjs?v=island-v2-20261107-15';
-import {fireFlowV24,isEntryStage} from '../minigames/fire-v24.mjs?v=island-v2-20261107-15';
+import {fireBonusCards,fireBonusOn,TARGET_STAGES,INTERIOR_STAGES,fireBonusUnlocked,fireBonusNumber} from '../minigames/fire-bonus.mjs?v=island-v2-20261107-16';
+import {kitStageLabel,kitResultPanel,kitPrimary} from './ui-kit.mjs?v=island-v2-20261107-16';
+import {fireFlowV24,isEntryStage} from '../minigames/fire-v24.mjs?v=island-v2-20261107-16';
 
 const el=(tag,cls='',text='')=>{const n=document.createElement(tag);n.className=cls;n.textContent=text;return n;};
 const button=(text,action,fn,cls='secondary-button')=>{const n=el('button',cls,text);n.type='button';n.dataset.action=action;n.onclick=fn;return n;};

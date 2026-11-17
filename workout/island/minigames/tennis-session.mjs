@@ -1,11 +1,11 @@
-import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-15';
-import {gameContext} from './context.mjs?v=island-v2-20261107-15';
-import {createTennis} from './tennis.mjs?v=island-v2-20261107-15';
-import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-15';
-import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-15';
+import {createTennisAudio} from './g4e-audio.mjs?v=island-v2-20261107-16';
+import {gameContext} from './context.mjs?v=island-v2-20261107-16';
+import {createTennis} from './tennis.mjs?v=island-v2-20261107-16';
+import {createTennisView,createTennisFallback} from './tennis-view.mjs?v=island-v2-20261107-16';
+import {createTennisControls,applyTennisSample as applySampleBase} from './tennis-controls.mjs?v=island-v2-20261107-16';
 // v15: with the sweeping return meter the stroke is judged the moment the finger lands (like the serve); the model still receives the real dt.
 const applyTennisSample=(model,sample,dt)=>applySampleBase(model,sample,dt,{pressFires:Boolean(model.getState().hitMeter?.sweep)});
-import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-15';
+import {tennisIcon,tennisScoreCells,ratingIcon} from './tennis-ui.mjs?v=island-v2-20261107-16';
 export function tennisOpponent(balance,stage,shirt=balance.render.shirtColor){const opponent=balance.opponents[(stage-1)%balance.opponents.length];return {...opponent,shirtColor:opponent.shirtColor===shirt?balance.opponents.find(o=>o.shirtColor!==shirt).shirtColor:opponent.shirtColor};}
 export function startTennis(ctx){
  ctx={...gameContext(ctx.engine,ctx.engine.data.config.minigames,ctx.seed>>>0,'tennis',ctx.level),...ctx};
@@ -18,7 +18,7 @@ export function startTennis(ctx){
  const session={get ready(){return Boolean(view);},get loadFailed(){return null;},dispose,setPaused(value){paused=Boolean(value);audio.setPaused(paused);last=0;input?.setEnabled(!paused);cancel();},get snapshot(){return {...model.snapshot(),opponent,paused,renderMetrics:view?.metrics(),audioMetrics:audio.metrics()};}};
  if(!canvas)return session;
  const screen=canvas.closest('.game-screen'),style=document.createElement('link'),css=new URL('./tennis.css',import.meta.url),version=new URL(import.meta.url).searchParams.get('v');if(version)css.searchParams.set('v',version);style.rel='stylesheet';style.href=css;screen.append(style);
- const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-15',import.meta.url);screen.append(powerStyle);
+ const powerStyle=document.createElement('link');powerStyle.rel='stylesheet';powerStyle.href=new URL('./g4f-tennis.css?v=island-v2-20261107-16',import.meta.url);screen.append(powerStyle);
  screen.addEventListener('pointerdown',()=>audio.unlock(),{capture:true,signal:abort.signal});
  const node=(tag,cls)=>{const n=document.createElement(tag);n.className=cls||'';return n;};
  const zone=node('div','soccer-stick-zone'),stick=node('div','soccer-joystick'),knob=node('span','soccer-knob'),home=node('div','tennis-stick-home');
@@ -40,7 +40,7 @@ export function startTennis(ctx){
   const padLeft=actionsBox.left+actionsBox.width/2<stageBox.left+stageBox.width/2/* buttons on the left (left-handed layout, if it comes back): the bar goes on their inner side */,left=Math.max(6,Math.min(stageBox.width-mw-6,padLeft?actionsBox.right-stageBox.left+16:actionsBox.left-stageBox.left-mw-16)),top=Math.max(6,Math.min(stageBox.height-mh-6,actionsBox.top-stageBox.top+(actionsBox.height-mh)/2));meter.style.right='auto';meter.style.bottom='auto';meter.style.left=`${left}px`;meter.style.top=`${top}px`;}
  const rating=node('div','tennis-rating');rating.setAttribute('aria-hidden','true');rating.hidden=true;screen.append(rating);
  // v25: the out sign (Codex sign-out.png background, live text) for 1.5 s on an out, and a one-line hint while the child picks where to stand.
- const outSign=node('div','tennis-out-sign'),outText=node('bdi','');outSign.setAttribute('role','status');outSign.setAttribute('aria-live','polite');outSign.style.backgroundImage=`url(${new URL('../assets/tennis-ui-fx-v1/sign-out.png?v=island-v2-20261107-15',import.meta.url).href})`;outSign.append(outText);outSign.hidden=true;screen.append(outSign);let outLeft=0,outMarkId=null;
+ const outSign=node('div','tennis-out-sign'),outText=node('bdi','');outSign.setAttribute('role','status');outSign.setAttribute('aria-live','polite');outSign.style.backgroundImage=`url(${new URL('../assets/tennis-ui-fx-v1/sign-out.png?v=island-v2-20261107-16',import.meta.url).href})`;outSign.append(outText);outSign.hidden=true;screen.append(outSign);let outLeft=0,outMarkId=null;
  const receiveHint=node('div','tennis-receive-hint');receiveHint.textContent=t('tennis.receiveHint');receiveHint.hidden=true;screen.append(receiveHint);
  const powerMeter=node('div','tennis-power-meter'),powerFill=node('span','tennis-power-fill');powerMeter.setAttribute('role','meter');powerMeter.setAttribute('aria-label',t('tennis.power'));powerMeter.setAttribute('aria-valuemin','0');powerMeter.setAttribute('aria-valuemax','100');powerMeter.style.setProperty('--safe',`${balance.shotPower.safeMax[ctx.difficulty]*100}%`);powerMeter.append(powerFill);canvas.after(powerMeter);
  input=createTennisControls({root:controls,config:balance.controls,onCancel:cancel,onGesture:()=>audio.unlock()});input.setHanded(true);/* stick always on the left; saved hand value ignored */input.setEnabled(!paused);
