@@ -39,7 +39,7 @@ export function predictLanding(ball, config) {
   const t = Math.max(0, (ball.vy + Math.sqrt(Math.max(0, ball.vy ** 2 + 2 * g * (ball.y - c.radius)))) / g);
   return { x: ball.x + ball.vx * t, z: ball.z + ball.vz * t, seconds: t };
 }
-export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false,bar=config.v9?.meter?.bar!==false,returnMeter=false,softDrop=false,receiveChoice=false,stopDead=false } = {}) {
+export function createTennis({ config, stage = 1, seed = config.seed, ranks = config.player.defaults,difficulty='easy',v9=config.v9?.enabled!==false,meter=config.v9?.meter?.enabled!==false,hold=config.v9?.hold?.enabled!==false,deep=config.v9?.deep?.enabled!==false,carry=config.v9?.hold?.carry?.enabled!==false,dropFix=config.v9?.dropFix?.enabled!==false,bar=config.v9?.meter?.bar!==false,returnMeter=false,softDrop=false,receiveChoice=false,stopDead=false,phoneFixE=false } = {}) {
   // `returnMeter` (v15) stays off at the model level so the v9-v14 measurements and tests keep their meaning; the session turns it on from config.v9.returnMeter.enabled (?tennisReturn=v14 turns it off).
   stage = clamp(Math.trunc(Number(stage) || 1), 1, config.levels.length);
   seed = Number(seed) >>> 0;
@@ -211,14 +211,16 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
     // v13: a held shot is judged by the needle (how close to the centre the button was released) and fired at the ball's arrival, so its timing is perfect by construction.
     if(K&&!R&&side===0&&!serving&&!tapped){const g=powerGuide(aim);needleAcc=1-clamp(Math.abs(charge-g.need)/(g.tol+(config.v9.meter.yellow??.2)),0,1);held=true;timing=0;}
     const serveZone=side===0?state.serveZone:'green';
+    // Phone E: quality follows distance from the visible centre; only the session opts in.
+    const serveDistance=Math.abs(state.serveMeter-.5),serveQuality=phoneFixE&&serving&&side===0?clamp(1-serveDistance*2,0,1):1;
     const perfect=serving&&side===0&&serveZone==='green'&&Math.abs(state.serveMeter-.5)<=config.serve.perfectWidth/2+1e-9;
     const aiDrop=!serving&&side===1&&rng()<(level.dropChance||0),aiLob=!serving&&side===1&&!aiDrop&&rng()<(level.lobChance||0);
     // v23: a soft drop played right after another drop was read: the opponent was waiting for it and puts it away short and wide, away from the child
     // (so pressing the drop button again and again does not pay, and cannot make an endless rally of drops).
     const putAway=SD&&side===1&&!serving&&Boolean(state.shot?.soft&&state.shot?.softRepeat);
-    const isDrop=!serving&&(side===0?drop:aiDrop&&!putAway),isLob=!serving&&(side===0?lob:aiLob&&!putAway),quality=serving?1:(side===0?contactQuality():1);
+    const isDrop=!serving&&(side===0?drop:aiDrop&&!putAway),isLob=!serving&&(side===0?lob:aiLob&&!putAway),quality=serving?serveQuality:(side===0?contactQuality():1);
     const overpowered=!V9&&!serving&&side===0&&charge>config.shotPower.safeMax[difficulty];
-    const power = (side === 0 ? (serving ? attributes.servePower + (perfect?config.serve.centerPowerBonus:0) : (attributes.hitPower + (tapped?0:charge)*p.chargeBonus - Math.abs(timing) * p.timingPowerPenalty)*(held?1+(needleAcc-.5)*config.v9.hold.carry.needlePower:1)*(judged?1+(rmc.power?.[judged.zone]??0):1)) : level.power+(putAway?(sdc.putAwayPower??.35):0))*(1-(1-quality)*contactConfig.edgePowerPenalty);
+    const power = (side === 0 ? (serving ? (attributes.servePower + (perfect?config.serve.centerPowerBonus:0))*(phoneFixE?(.55+.45*serveQuality):1) : (attributes.hitPower + (tapped?0:charge)*p.chargeBonus - Math.abs(timing) * p.timingPowerPenalty)*(held?1+(needleAcc-.5)*config.v9.hold.carry.needlePower:1)*(judged?1+(rmc.power?.[judged.zone]??0):1)) : level.power+(putAway?(sdc.putAwayPower??.35):0))*(1-(1-quality)*contactConfig.edgePowerPenalty);
     let targetX = 0;
     if (side === 0) {
       targetX=aim?.manual?clamp(aim.x,-1,1)*c.spread:(state.players[1].x>=0?-1:1)*c.spread;targetX+=timing*c.spread*p.timingPowerPenalty+(rng()-.5)*(1-quality)*contactConfig.edgeSpread;
@@ -247,6 +249,15 @@ export function createTennis({ config, stage = 1, seed = config.seed, ranks = co
             else targetX=-serviceSign*(court.halfWidth+.16+rng()*.18);
           }
         }else{targetX=-serviceSign*(.7+rng()*(court.halfWidth-1.4));targetZ=direction*(1.9+rng()*1.8);}
+      }else if(phoneFixE){
+        const greenHalf=(config.serve.green[difficulty]+(safeRanks.serve-1)*config.serve.rankGreenBonus)/2;
+        // Green stays safe. Beyond it the risk rises through yellow to a certain red fault.
+        // Early hits sink into the net; late hits go long. The ordinary flight/line checks award the fault.
+        const risk=clamp((serveDistance-greenHalf)/Math.max(.001,config.serve.yellowWidth/2),0,1);
+        if(serveZone==='red'||risk>0&&rng()<risk){
+          serveFault=state.serveMeter<.5?'net':'out';
+          if(serveFault==='out')targetZ=direction*(court.serviceLength+config.serve.missDepth);
+        }
       }else if(serveZone==='red')targetZ=direction*(court.serviceLength+config.serve.missDepth);
     }
     if(V9&&!serving&&side===0&&!isDrop&&!isLob){
