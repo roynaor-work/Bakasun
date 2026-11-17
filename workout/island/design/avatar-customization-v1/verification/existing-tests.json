@@ -1,0 +1,34 @@
+{
+  "fullCommand": "npm test",
+  "full": {
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 732736.171324,
+    "logSha256": "548fbd249c60a297b46e7f5f4912bbcbf02c7cd6759e2503ef67339bf11e898d"
+  },
+  "environmentFailure": {
+    "file": "tests/workout-royiki.test.mjs",
+    "test": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+    "reason": "Playwright default chromium_headless_shell executable is not installed in this execution environment.",
+    "cleanup": "The test had already failed at launch and left its HTTP server open; its idle child process was terminated to let npm emit the complete results."
+  },
+  "rerunCommand": "ISLAND_PLAYWRIGHT=/tmp/avatar-playwright.mjs node --test tests/workout-royiki.test.mjs",
+  "rerun": {
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 24665.098583,
+    "logSha256": "9a71573650bdfefaf2ad28f3245e4dad0a003cbb34bfe66a5766689b3f2c23fa"
+  },
+  "rerunEnvironment": "A temporary loader outside the repository supplies the installed Chromium executable to the existing ISLAND_PLAYWRIGHT hook. No test, assertion, repository dependency or production file was changed.",
+  "interpretation": "All executable checks pass after the environment-only browser-path correction; 64 tests remain skipped by the default command."
+}

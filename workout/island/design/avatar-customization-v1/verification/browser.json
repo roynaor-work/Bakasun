@@ -1,0 +1,2320 @@
+{
+  "browser": "Chromium / ANGLE SwiftShader",
+  "checks": [
+    {
+      "label": "WebAssembly unavailable throughout browser tests",
+      "pass": true
+    },
+    {
+      "label": "hair thumbnails have distinct rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "faces thumbnails have distinct rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "outfits thumbnails have distinct rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "shoes thumbnails have distinct rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "accessories thumbnails have distinct rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "Every one of 46 choices attached and rendered on all four bodies",
+      "pass": true
+    },
+    {
+      "label": "All 12 hair choices fit in 844x390 without scrolling",
+      "pass": true,
+      "details": {
+        "overflow": false,
+        "itemsOverflow": false,
+        "buttons": 12
+      }
+    },
+    {
+      "label": "Face picker DOM action",
+      "pass": true
+    },
+    {
+      "label": "Color picker changes rendered pixels",
+      "pass": true
+    },
+    {
+      "label": "Vertex recolor uses exact region and linear sRGB",
+      "pass": true,
+      "details": {
+        "matched": 146,
+        "maxError": 1.5896157279371437e-8,
+        "others": 0
+      }
+    },
+    {
+      "label": "Look persists after reload",
+      "pass": true
+    },
+    {
+      "label": "Hat hides hair without forgetting selection",
+      "pass": true
+    },
+    {
+      "label": "Removing hat restores hair",
+      "pass": true
+    },
+    {
+      "label": "All eight accessories can be equipped together",
+      "pass": true
+    },
+    {
+      "label": "Recolor all available regions independently, including face and accessories",
+      "pass": true,
+      "details": {
+        "regions": [
+          0,
+          6,
+          9,
+          10,
+          11,
+          1,
+          2,
+          3,
+          5,
+          4,
+          12,
+          13
+        ],
+        "maxError": 1.1662432908288167e-8
+      }
+    },
+    {
+      "label": "Six skin presets produce distinct face pixels",
+      "pass": true
+    },
+    {
+      "label": "Canonical run pose moves body and attached clothing",
+      "pass": true
+    },
+    {
+      "label": "390x844 has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "label": "Download look JSON contains selected state",
+      "pass": true
+    },
+    {
+      "label": "Generated single-file offline HTML <= 6 MB",
+      "pass": true,
+      "details": {
+        "bytes": 4889467
+      }
+    },
+    {
+      "label": "Cold opaque-origin offline preview loads all assets and switches body/items",
+      "pass": true
+    },
+    {
+      "label": "Two cold offline loads make no network requests",
+      "pass": true,
+      "details": {
+        "requests": 0,
+        "remoteRequests": [],
+        "errors": []
+      }
+    },
+    {
+      "label": "No page errors, HTTP errors or external requests",
+      "pass": true,
+      "details": {
+        "errors": [],
+        "externalRequests": []
+      }
+    }
+  ],
+  "bodyItemFits": [
+    {
+      "body": "soccer",
+      "item": "crop",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "side-part",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "quiff",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "long",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "bob",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "ponytail",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 699
+    },
+    {
+      "body": "soccer",
+      "item": "braid",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 755
+    },
+    {
+      "body": "soccer",
+      "item": "curly",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 815
+    },
+    {
+      "body": "soccer",
+      "item": "afro",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "bun",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 695
+    },
+    {
+      "body": "soccer",
+      "item": "bald",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 575
+    },
+    {
+      "body": "soccer",
+      "item": "sport-cap",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 651
+    },
+    {
+      "body": "soccer",
+      "item": "face-gentle",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-round",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-bright",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "soccer",
+      "item": "face-almond",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-bold",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-curious",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-calm",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "face-cheerful",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "soccer",
+      "item": "sport",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "tracksuit",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "soccer",
+      "item": "holiday",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 717
+    },
+    {
+      "body": "soccer",
+      "item": "summer",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 615
+    },
+    {
+      "body": "soccer",
+      "item": "winter",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "soccer",
+      "item": "swim",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 551
+    },
+    {
+      "body": "soccer",
+      "item": "denim",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "hoodie",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 709
+    },
+    {
+      "body": "soccer",
+      "item": "polo",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 649
+    },
+    {
+      "body": "soccer",
+      "item": "tunic",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 713
+    },
+    {
+      "body": "soccer",
+      "item": "runners",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "high-tops",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "sandals",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 611
+    },
+    {
+      "body": "soccer",
+      "item": "boots",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "loafers",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "water-shoes",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "soccer",
+      "item": "snow-boots",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "soccer",
+      "item": "cleats",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "soccer",
+      "item": "glasses",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 835
+    },
+    {
+      "body": "soccer",
+      "item": "bucket-hat",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 671
+    },
+    {
+      "body": "soccer",
+      "item": "watch",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 685
+    },
+    {
+      "body": "soccer",
+      "item": "backpack",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "soccer",
+      "item": "hair-ties",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 703
+    },
+    {
+      "body": "soccer",
+      "item": "gloves",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 823
+    },
+    {
+      "body": "soccer",
+      "item": "bracelet",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 667
+    },
+    {
+      "body": "soccer",
+      "item": "scarf",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 681
+    },
+    {
+      "body": "guard",
+      "item": "crop",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "side-part",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "quiff",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "long",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "bob",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "ponytail",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 699
+    },
+    {
+      "body": "guard",
+      "item": "braid",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 755
+    },
+    {
+      "body": "guard",
+      "item": "curly",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 815
+    },
+    {
+      "body": "guard",
+      "item": "afro",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "bun",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 695
+    },
+    {
+      "body": "guard",
+      "item": "bald",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 575
+    },
+    {
+      "body": "guard",
+      "item": "sport-cap",
+      "present": true,
+      "maxFitError": 5.364418020903372e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 651
+    },
+    {
+      "body": "guard",
+      "item": "face-gentle",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-round",
+      "present": true,
+      "maxFitError": 3.5762786898541066e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-bright",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "guard",
+      "item": "face-almond",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-bold",
+      "present": true,
+      "maxFitError": 3.5762786898541066e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-curious",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-calm",
+      "present": true,
+      "maxFitError": 3.5762786898541066e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "face-cheerful",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "guard",
+      "item": "sport",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "tracksuit",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "guard",
+      "item": "holiday",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 717
+    },
+    {
+      "body": "guard",
+      "item": "summer",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 615
+    },
+    {
+      "body": "guard",
+      "item": "winter",
+      "present": true,
+      "maxFitError": 6.854534162492598e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "guard",
+      "item": "swim",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 551
+    },
+    {
+      "body": "guard",
+      "item": "denim",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "hoodie",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 709
+    },
+    {
+      "body": "guard",
+      "item": "polo",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 649
+    },
+    {
+      "body": "guard",
+      "item": "tunic",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 713
+    },
+    {
+      "body": "guard",
+      "item": "runners",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "high-tops",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "sandals",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 611
+    },
+    {
+      "body": "guard",
+      "item": "boots",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "loafers",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "water-shoes",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "guard",
+      "item": "snow-boots",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "guard",
+      "item": "cleats",
+      "present": true,
+      "maxFitError": 7.301568988316021e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "guard",
+      "item": "glasses",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 835
+    },
+    {
+      "body": "guard",
+      "item": "bucket-hat",
+      "present": true,
+      "maxFitError": 6.705522526129215e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 671
+    },
+    {
+      "body": "guard",
+      "item": "watch",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 685
+    },
+    {
+      "body": "guard",
+      "item": "backpack",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "guard",
+      "item": "hair-ties",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 703
+    },
+    {
+      "body": "guard",
+      "item": "gloves",
+      "present": true,
+      "maxFitError": 6.705522526129215e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 823
+    },
+    {
+      "body": "guard",
+      "item": "bracelet",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 667
+    },
+    {
+      "body": "guard",
+      "item": "scarf",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 681
+    },
+    {
+      "body": "wing",
+      "item": "crop",
+      "present": true,
+      "maxFitError": 3.6135315989449523e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "side-part",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "quiff",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "long",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "bob",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "ponytail",
+      "present": true,
+      "maxFitError": 6.705522526129215e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 699
+    },
+    {
+      "body": "wing",
+      "item": "braid",
+      "present": true,
+      "maxFitError": 7.003545771100406e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 755
+    },
+    {
+      "body": "wing",
+      "item": "curly",
+      "present": true,
+      "maxFitError": 7.189810274921271e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 815
+    },
+    {
+      "body": "wing",
+      "item": "afro",
+      "present": true,
+      "maxFitError": 7.227063170134329e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "bun",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 695
+    },
+    {
+      "body": "wing",
+      "item": "bald",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 575
+    },
+    {
+      "body": "wing",
+      "item": "sport-cap",
+      "present": true,
+      "maxFitError": 6.482005099339716e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 651
+    },
+    {
+      "body": "wing",
+      "item": "face-gentle",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-round",
+      "present": true,
+      "maxFitError": 4.91738319507995e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-bright",
+      "present": true,
+      "maxFitError": 6.109476091697985e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "wing",
+      "item": "face-almond",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-bold",
+      "present": true,
+      "maxFitError": 4.91738319507995e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-curious",
+      "present": true,
+      "maxFitError": 6.109476091697985e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-calm",
+      "present": true,
+      "maxFitError": 3.6507844941580103e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "face-cheerful",
+      "present": true,
+      "maxFitError": 4.91738319507995e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "wing",
+      "item": "sport",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "tracksuit",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "wing",
+      "item": "holiday",
+      "present": true,
+      "maxFitError": 7.376074806497712e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 717
+    },
+    {
+      "body": "wing",
+      "item": "summer",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 615
+    },
+    {
+      "body": "wing",
+      "item": "winter",
+      "present": true,
+      "maxFitError": 7.227063170134329e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "wing",
+      "item": "swim",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 551
+    },
+    {
+      "body": "wing",
+      "item": "denim",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "hoodie",
+      "present": true,
+      "maxFitError": 7.078051561526522e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 709
+    },
+    {
+      "body": "wing",
+      "item": "polo",
+      "present": true,
+      "maxFitError": 7.376074806497712e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 649
+    },
+    {
+      "body": "wing",
+      "item": "tunic",
+      "present": true,
+      "maxFitError": 7.376074806497712e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 713
+    },
+    {
+      "body": "wing",
+      "item": "runners",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "high-tops",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "sandals",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 611
+    },
+    {
+      "body": "wing",
+      "item": "boots",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "loafers",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "water-shoes",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "wing",
+      "item": "snow-boots",
+      "present": true,
+      "maxFitError": 7.152557379708213e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "wing",
+      "item": "cleats",
+      "present": true,
+      "maxFitError": 6.929039952918714e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "wing",
+      "item": "glasses",
+      "present": true,
+      "maxFitError": 7.376074806497712e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 835
+    },
+    {
+      "body": "wing",
+      "item": "bucket-hat",
+      "present": true,
+      "maxFitError": 7.003545771100406e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 671
+    },
+    {
+      "body": "wing",
+      "item": "watch",
+      "present": true,
+      "maxFitError": 6.556510945276983e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 685
+    },
+    {
+      "body": "wing",
+      "item": "backpack",
+      "present": true,
+      "maxFitError": 7.376074806497712e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "wing",
+      "item": "hair-ties",
+      "present": true,
+      "maxFitError": 3.3155083539737618e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 703
+    },
+    {
+      "body": "wing",
+      "item": "gloves",
+      "present": true,
+      "maxFitError": 5.8114528467267945e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 823
+    },
+    {
+      "body": "wing",
+      "item": "bracelet",
+      "present": true,
+      "maxFitError": 5.513429657266755e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 667
+    },
+    {
+      "body": "wing",
+      "item": "scarf",
+      "present": true,
+      "maxFitError": 5.587935447692871e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 681
+    },
+    {
+      "body": "center",
+      "item": "crop",
+      "present": true,
+      "maxFitError": 5.81145287448237e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "side-part",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "quiff",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "long",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "bob",
+      "present": true,
+      "maxFitError": 4.7683715587165665e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "ponytail",
+      "present": true,
+      "maxFitError": 6.407499336669176e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 699
+    },
+    {
+      "body": "center",
+      "item": "braid",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 755
+    },
+    {
+      "body": "center",
+      "item": "curly",
+      "present": true,
+      "maxFitError": 6.780028344310907e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 815
+    },
+    {
+      "body": "center",
+      "item": "afro",
+      "present": true,
+      "maxFitError": 5.81145287448237e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "bun",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 695
+    },
+    {
+      "body": "center",
+      "item": "bald",
+      "present": true,
+      "maxFitError": 0,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 575
+    },
+    {
+      "body": "center",
+      "item": "sport-cap",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 651
+    },
+    {
+      "body": "center",
+      "item": "face-gentle",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-round",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-bright",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "center",
+      "item": "face-almond",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-bold",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-curious",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-calm",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "face-cheerful",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 655
+    },
+    {
+      "body": "center",
+      "item": "sport",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "tracksuit",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "center",
+      "item": "holiday",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 717
+    },
+    {
+      "body": "center",
+      "item": "summer",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 615
+    },
+    {
+      "body": "center",
+      "item": "winter",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "center",
+      "item": "swim",
+      "present": true,
+      "maxFitError": 7.450580596923828e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 551
+    },
+    {
+      "body": "center",
+      "item": "denim",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "hoodie",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 709
+    },
+    {
+      "body": "center",
+      "item": "polo",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 649
+    },
+    {
+      "body": "center",
+      "item": "tunic",
+      "present": true,
+      "maxFitError": 9.536743117433133e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 713
+    },
+    {
+      "body": "center",
+      "item": "runners",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "high-tops",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "sandals",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 611
+    },
+    {
+      "body": "center",
+      "item": "boots",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "loafers",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "water-shoes",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 647
+    },
+    {
+      "body": "center",
+      "item": "snow-boots",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 679
+    },
+    {
+      "body": "center",
+      "item": "cleats",
+      "present": true,
+      "maxFitError": 1.4305114703905275e-8,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 711
+    },
+    {
+      "body": "center",
+      "item": "glasses",
+      "present": true,
+      "maxFitError": 7.00354574334483e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 835
+    },
+    {
+      "body": "center",
+      "item": "bucket-hat",
+      "present": true,
+      "maxFitError": 6.258487700305793e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 671
+    },
+    {
+      "body": "center",
+      "item": "watch",
+      "present": true,
+      "maxFitError": 5.960464483090178e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 685
+    },
+    {
+      "body": "center",
+      "item": "backpack",
+      "present": true,
+      "maxFitError": 6.854534162492598e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 735
+    },
+    {
+      "body": "center",
+      "item": "hair-ties",
+      "present": true,
+      "maxFitError": 3.5762786759763188e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 703
+    },
+    {
+      "body": "center",
+      "item": "gloves",
+      "present": true,
+      "maxFitError": 7.1525573519526375e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 823
+    },
+    {
+      "body": "center",
+      "item": "bracelet",
+      "present": true,
+      "maxFitError": 5.960464483090178e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 667
+    },
+    {
+      "body": "center",
+      "item": "scarf",
+      "present": true,
+      "maxFitError": 3.725290298461914e-9,
+      "finite": true,
+      "sharedSkeleton": true,
+      "canonicalOrder": true,
+      "visibleItemTriangles": 681
+    }
+  ],
+  "network": [],
+  "errors": [],
+  "screenshots": [
+    "verification/preview-844x390.png",
+    "verification/all-accessories.png",
+    "verification/reach-pose.png",
+    "verification/wardrobe-full.png",
+    "verification/preview-390x844.png",
+    "verification/offline-844x390.png",
+    "verification/contact-sheet.webp"
+  ],
+  "pass": true,
+  "thumbnails": [
+    {
+      "id": "crop",
+      "path": "thumbs/crop.webp",
+      "label": "קצר טבעי",
+      "category": "hair",
+      "sha256": "9c3d88a68bd8858c00a20015ecf567f8513b2ba163fbf0fb4fa0dd951a693013"
+    },
+    {
+      "id": "side-part",
+      "path": "thumbs/side-part.webp",
+      "label": "שביל בצד",
+      "category": "hair",
+      "sha256": "548eb6d15d904476c6399d08f8bb8b1dbbd57424f348a71050553c27c9d06183"
+    },
+    {
+      "id": "quiff",
+      "path": "thumbs/quiff.webp",
+      "label": "בלורית",
+      "category": "hair",
+      "sha256": "e8e5afe899efacc9b447bfeeaf7ddf793908ec46482e356349c4880d5a7f4033"
+    },
+    {
+      "id": "long",
+      "path": "thumbs/long.webp",
+      "label": "ארוך",
+      "category": "hair",
+      "sha256": "5a61aac80ef0a18cce201d4023d21c9319b1122fc7b5e7b7440a413f1b105401"
+    },
+    {
+      "id": "bob",
+      "path": "thumbs/bob.webp",
+      "label": "קארה",
+      "category": "hair",
+      "sha256": "620716c58657efd695c413f8bb65be1ecdfaf3b96a48467fdf6d41e62d6de8e8"
+    },
+    {
+      "id": "ponytail",
+      "path": "thumbs/ponytail.webp",
+      "label": "קוקו",
+      "category": "hair",
+      "sha256": "68cb11be8456149a6b63c11b43ce9ee9c869c80babc4fe8464fb7033b6e3e7c3"
+    },
+    {
+      "id": "braid",
+      "path": "thumbs/braid.webp",
+      "label": "צמה",
+      "category": "hair",
+      "sha256": "dc0a823c0c8e936602956a6dbaa336f589fb3e9bae26ab2d0f6fc49877f80e92"
+    },
+    {
+      "id": "curly",
+      "path": "thumbs/curly.webp",
+      "label": "מתולתל",
+      "category": "hair",
+      "sha256": "2414b44af6884fd54c7210a01ef21e011ca82f3a6f53359359b206d78d586085"
+    },
+    {
+      "id": "afro",
+      "path": "thumbs/afro.webp",
+      "label": "תלתלים נפוחים",
+      "category": "hair",
+      "sha256": "85f0ebc0480dbe555c6981ed75fec4dfcb172afabfc2459ced13a34e0a5473fa"
+    },
+    {
+      "id": "bun",
+      "path": "thumbs/bun.webp",
+      "label": "אסוף",
+      "category": "hair",
+      "sha256": "81fa2289581faabf9df132986ab9673dd78179ff9813b1b8adcc9989e4e93b88"
+    },
+    {
+      "id": "bald",
+      "path": "thumbs/bald.webp",
+      "label": "קרח",
+      "category": "hair",
+      "sha256": "ee48c77c1406b626761a11691c17b2a58bcf774bc1f18c49c419e577af2f29f7"
+    },
+    {
+      "id": "sport-cap",
+      "path": "thumbs/sport-cap.webp",
+      "label": "כובע מצחייה",
+      "category": "hair",
+      "sha256": "c2bfadabd5946dc6b68bfc066ffbcfbc06a652fd392d5a572ed68ff81442eacb"
+    },
+    {
+      "id": "face-gentle",
+      "path": "thumbs/face-gentle.webp",
+      "label": "עדין",
+      "category": "faces",
+      "sha256": "efe2cc038bddd6bc2c7e6813a15fc19032538a26143a2b54691122d45c1a5e2d"
+    },
+    {
+      "id": "face-round",
+      "path": "thumbs/face-round.webp",
+      "label": "עגול",
+      "category": "faces",
+      "sha256": "012f0cac8d04d821f9f3565eeadcfb1c347e61fb88034d639bc86bd6cebff90a"
+    },
+    {
+      "id": "face-bright",
+      "path": "thumbs/face-bright.webp",
+      "label": "חיוך רחב",
+      "category": "faces",
+      "sha256": "614f67bf4033e4877f74cd20e01f1f752ead89c27f9b32abda6c68817eedc52a"
+    },
+    {
+      "id": "face-almond",
+      "path": "thumbs/face-almond.webp",
+      "label": "עיני שקד",
+      "category": "faces",
+      "sha256": "da6d5bcb932d1b50464b3f01719ff09af2e5f30f208e9a85c36799f72d94a1f9"
+    },
+    {
+      "id": "face-bold",
+      "path": "thumbs/face-bold.webp",
+      "label": "גבות מודגשות",
+      "category": "faces",
+      "sha256": "af47167b43c03f797c0a02c0accf9fa58038b48538bee0301c639e46a0c683f9"
+    },
+    {
+      "id": "face-curious",
+      "path": "thumbs/face-curious.webp",
+      "label": "סקרן",
+      "category": "faces",
+      "sha256": "37b5bd6122dd046085913f27394604af44c4dcc87981cbbf89dab7efdd528f11"
+    },
+    {
+      "id": "face-calm",
+      "path": "thumbs/face-calm.webp",
+      "label": "רגוע",
+      "category": "faces",
+      "sha256": "bfd9d430f7c44c0dd3de9135aac9b7bcb744c0088b520a5711793ba34bcf0fa1"
+    },
+    {
+      "id": "face-cheerful",
+      "path": "thumbs/face-cheerful.webp",
+      "label": "שמח",
+      "category": "faces",
+      "sha256": "04428e32a8d504d433336dcab9e90e6ec0a46c83f7470855441081312eb6fcfd"
+    },
+    {
+      "id": "sport",
+      "path": "thumbs/sport.webp",
+      "label": "ערכת ספורט",
+      "category": "outfits",
+      "sha256": "1a914c13ae7c77c8e627ad7c72bda898f600beccfd2441b02c557a9a7d41bfe6"
+    },
+    {
+      "id": "tracksuit",
+      "path": "thumbs/tracksuit.webp",
+      "label": "חליפת אימון",
+      "category": "outfits",
+      "sha256": "afbcb3b4b5258d39bd6687571188c87274b20c1ccc77f9c0b0646bcad04eb3b4"
+    },
+    {
+      "id": "holiday",
+      "path": "thumbs/holiday.webp",
+      "label": "חגיגי",
+      "category": "outfits",
+      "sha256": "dd7199d70529ff856a6522a816bc3b147ffc028b09270b78836014c6cccf724b"
+    },
+    {
+      "id": "summer",
+      "path": "thumbs/summer.webp",
+      "label": "קיץ",
+      "category": "outfits",
+      "sha256": "286019588cfdc3cc2363a051b1c5863fc486f8c4bf00ee52c40bcdf9e6ed2574"
+    },
+    {
+      "id": "winter",
+      "path": "thumbs/winter.webp",
+      "label": "חורף",
+      "category": "outfits",
+      "sha256": "ab1f70090134451ae1ef49a8fa1a1d1b551c78d8190c8f11fa9a0b4512261aa8"
+    },
+    {
+      "id": "swim",
+      "path": "thumbs/swim.webp",
+      "label": "שחייה",
+      "category": "outfits",
+      "sha256": "65d7db9bfe7cbadf8172180cd821b8fb40ca61feddb9b53a211791ea74236324"
+    },
+    {
+      "id": "denim",
+      "path": "thumbs/denim.webp",
+      "label": "ג׳ינס",
+      "category": "outfits",
+      "sha256": "6b78d6b7ca3d0e52c4e567c00707aa9fa976970b15cdace7782bde76ae00c321"
+    },
+    {
+      "id": "hoodie",
+      "path": "thumbs/hoodie.webp",
+      "label": "קפוצ׳ון",
+      "category": "outfits",
+      "sha256": "33c2a5edcefd717a5290684cc7dd663f2336833224e2e252dbc654caeee908c8"
+    },
+    {
+      "id": "polo",
+      "path": "thumbs/polo.webp",
+      "label": "פולו",
+      "category": "outfits",
+      "sha256": "971cc9fe57d25f62cf7109613c71b36d7c6427cabbb1a1456fee7b8bba7d31f7"
+    },
+    {
+      "id": "tunic",
+      "path": "thumbs/tunic.webp",
+      "label": "טוניקה לחג",
+      "category": "outfits",
+      "sha256": "54e9b57fb66ca960d54c8d9245a8469a0d21df62a76132b237b8f95d25a1a7d8"
+    },
+    {
+      "id": "runners",
+      "path": "thumbs/runners.webp",
+      "label": "נעלי ריצה",
+      "category": "shoes",
+      "sha256": "23e3bcc8ca02258112ddc528adf2f5aec053733930fdae22c7dcdc6a5768478a"
+    },
+    {
+      "id": "high-tops",
+      "path": "thumbs/high-tops.webp",
+      "label": "סניקרס גבוהות",
+      "category": "shoes",
+      "sha256": "a9874a1d818700e8fedfddd2bb1b2aa6949faf20a9d426e5cee6a29ddcd3cfff"
+    },
+    {
+      "id": "sandals",
+      "path": "thumbs/sandals.webp",
+      "label": "סנדלים",
+      "category": "shoes",
+      "sha256": "9bab7f0842f4547731b1135a4d2c6cb3dbfa1d85f26634f539ea54e55de009af"
+    },
+    {
+      "id": "boots",
+      "path": "thumbs/boots.webp",
+      "label": "מגפיים",
+      "category": "shoes",
+      "sha256": "2c6dbf948096defe000f4c124fd987aa043ede885072b074c39028ab8fa59cb7"
+    },
+    {
+      "id": "loafers",
+      "path": "thumbs/loafers.webp",
+      "label": "מוקסינים",
+      "category": "shoes",
+      "sha256": "aafe954bde8dfdf33fa219d206e7a17ebdc99821fc012dabc28bd8a49d59ebb5"
+    },
+    {
+      "id": "water-shoes",
+      "path": "thumbs/water-shoes.webp",
+      "label": "נעלי מים",
+      "category": "shoes",
+      "sha256": "b71f3d004d0dd054cd15736fd7fa32c4ae2723ca025ec47ae912fb60a80cbbb9"
+    },
+    {
+      "id": "snow-boots",
+      "path": "thumbs/snow-boots.webp",
+      "label": "מגפי חורף",
+      "category": "shoes",
+      "sha256": "b0c47de6493469ddac71c7757db62595ef17e24aa1ff55dda0b98698344b1bff"
+    },
+    {
+      "id": "cleats",
+      "path": "thumbs/cleats.webp",
+      "label": "נעלי כדורגל",
+      "category": "shoes",
+      "sha256": "ef8631287c56cc4b7a666e33a66f3f1a711df13b715d5334ab537d54ccb46a64"
+    },
+    {
+      "id": "glasses",
+      "path": "thumbs/glasses.webp",
+      "label": "משקפיים",
+      "category": "accessories",
+      "sha256": "b0c815f84bdb2263332bc56a412712868aba069bd459d95a8a914e087a2e2857"
+    },
+    {
+      "id": "bucket-hat",
+      "path": "thumbs/bucket-hat.webp",
+      "label": "כובע טמבל",
+      "category": "accessories",
+      "sha256": "5940cc8542846860fe560342f44722c3b5382d131a0b2d4c67791df3227f287b"
+    },
+    {
+      "id": "watch",
+      "path": "thumbs/watch.webp",
+      "label": "שעון",
+      "category": "accessories",
+      "sha256": "bfe607fb869758eac1118d4b3a0b4fa1fde179929839d0810fdfa658fb31a0b2"
+    },
+    {
+      "id": "backpack",
+      "path": "thumbs/backpack.webp",
+      "label": "תיק גב",
+      "category": "accessories",
+      "sha256": "264dc46514a2e39540dfbe4d9eedb3e18c38c01bbc7c6c14aa69038c18892021"
+    },
+    {
+      "id": "hair-ties",
+      "path": "thumbs/hair-ties.webp",
+      "label": "גומיות",
+      "category": "accessories",
+      "sha256": "ccbccb58ad1ed99f58b2241cea1aea18832ed0890be88da9dea4299c455c4f7d"
+    },
+    {
+      "id": "gloves",
+      "path": "thumbs/gloves.webp",
+      "label": "כפפות",
+      "category": "accessories",
+      "sha256": "d729500dfbe955177e0c98da03bda7299ee91ae49e50180e2d483a2b78800dd2"
+    },
+    {
+      "id": "bracelet",
+      "path": "thumbs/bracelet.webp",
+      "label": "צמיד",
+      "category": "accessories",
+      "sha256": "57749a63cc0d8ce8a8150ef357893cbdf3f4d35e317027243af1088044842d35"
+    },
+    {
+      "id": "scarf",
+      "path": "thumbs/scarf.webp",
+      "label": "מטפחת",
+      "category": "accessories",
+      "sha256": "767a453409cff285419c7cb11a6062cd828b265006a4bda76eec887bf9e52400"
+    }
+  ],
+  "offlineBytes": 4889467,
+  "offlineLoadMode": "Downloaded HTML bytes in an opaque about:blank document; fresh offline context; managed Chromium blocks file:// navigation."
+}

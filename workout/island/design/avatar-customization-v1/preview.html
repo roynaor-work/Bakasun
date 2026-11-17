@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>הדמות שלי · סטודיו האי</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+  <script defer src="preview.bundle.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="identity"><span class="eyebrow">סטודיו האי / 01</span><h1>הדמות שלי<span class="title-dot">.</span></h1></div>
+    <p class="intro">מראה חדש. הרפתקה משלך.</p>
+    <div class="actions"><button id="save-look" type="button">שמירת מראה</button><button class="download" id="download" type="button" disabled>הורדה לאופליין</button></div>
+  </header>
+  <main>
+    <section class="stage-panel" aria-label="תצוגת הדמות">
+      <div class="stage-head"><span class="live-badge"><i></i> הדמות שלך</span><label class="body-label">מבנה <select id="body" aria-label="מבנה גוף"></select></label></div>
+      <canvas id="stage" aria-label="דמות תלת־ממדית. אפשר לסובב בגרירה או בכפתורי הסיבוב." tabindex="0"></canvas>
+      <span class="stage-word" aria-hidden="true">YOUR<br>WAY.</span>
+      <div class="camera-tools"><button type="button" id="turn-right" aria-label="סיבוב ימינה">סיבוב ימינה</button><button type="button" id="frame">דמות מלאה</button><button type="button" id="turn-left" aria-label="סיבוב שמאלה">סיבוב שמאלה</button></div>
+      <div class="stage-foot"><select id="pose" aria-label="תנוחה"><option value="idle">עמידה</option><option value="run">ריצה</option><option value="reach">ידיים למעלה</option></select><button type="button" id="reset">איפוס מראה</button><span id="view-label">קצר טבעי</span></div>
+    </section>
+    <section class="wardrobe" aria-label="התאמה אישית">
+      <nav id="categories" aria-label="קטגוריות התאמה"></nav>
+      <div class="section-label"><h2 id="category-title">מה הסגנון שלך?</h2><span id="category-count">12 אפשרויות</span></div>
+      <div id="items" class="items" role="group" aria-labelledby="category-title"></div>
+      <div class="color-bar" id="color-bar"><label class="region-label">צבע <select id="region" aria-label="אזור צבע"></select></label><div id="swatches" aria-label="צבעים מוצעים"></div><label class="custom-color" title="בחירת צבע חופשי"><input id="color" type="color" value="#362920" aria-label="צבע חופשי"><span>אישי</span></label></div>
+      <p class="selection-note" id="selection-note">בחרו פריט, וסובבו כדי לראות מכל כיוון.</p>
+    </section>
+  </main>
+  <footer><span id="status" role="status" aria-live="polite">טוען את הסטודיו…</span><a id="report-link" href="REPORT.md">דוח החבילה</a><span class="footer-note">נשמר במכשיר שלך</span></footer>
+  <dialog id="message"><p id="message-text"></p><form method="dialog"><button>סגירה</button></form></dialog>
+</body>
+</html>
