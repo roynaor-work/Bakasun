@@ -1,0 +1,1301 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "checks": 8803,
+  "vehicles": 14,
+  "errors": 0,
+  "warnings": 0,
+  "infos": 0,
+  "hints": 0,
+  "packageBytesAtValidation": 5354634,
+  "budgetBytes": 6000000,
+  "triangleRange": [
+    658,
+    1198
+  ],
+  "assets": [
+    {
+      "id": "police-sedan",
+      "bytes": 296372,
+      "sha256": "209856c848281f7f16dd453c90db7fee6da83d8c7669d17e5b5e982a61ceef95",
+      "storedMeshTriangles": 1114,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1114,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.125,
+              3.699598793982517e-9,
+              -2.1749999972869603
+            ],
+            "max": [
+              1.125,
+              2.0080000143215573,
+              2.175000024622884
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1114,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.1547445263713598,
+              3.699598793982517e-9,
+              -2.1749999972869603
+            ],
+            "max": [
+              1.1410021781921387,
+              1.919977574797026,
+              1.897211155055685
+            ]
+          },
+          "meanDeformation": 0.06140833246191792
+        },
+        {
+          "state": "crushed",
+          "triangles": 1114,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.1843820922076702,
+              -0.06011194870167902,
+              -2.0444999935914723
+            ],
+            "max": [
+              1.1819566181487986,
+              1.9195860148236668,
+              1.792975353495827
+            ]
+          },
+          "meanDeformation": 0.20753599453324648
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": 3.699598793982517e-9
+        },
+        {
+          "wheel": "FR",
+          "minY": 3.699598793982517e-9
+        },
+        {
+          "wheel": "RL",
+          "minY": 3.699598793982517e-9
+        },
+        {
+          "wheel": "RR",
+          "minY": 3.699598793982517e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "police-suv",
+      "bytes": 321508,
+      "sha256": "27f0d0830a4f092c4c38794ae2d163e12731f59023c360226601726ae8b987fa",
+      "storedMeshTriangles": 1198,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1198,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.1911765984701157,
+              1.1384701514849382e-8,
+              -2.352588275790629
+            ],
+            "max": [
+              1.1911765984701157,
+              2.2727061513963758,
+              2.024999995858602
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1198,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.2604037205193301,
+              1.1384701514849382e-8,
+              -2.352588275790629
+            ],
+            "max": [
+              1.270110009324334,
+              2.184669153035027,
+              1.7617500025343222
+            ]
+          },
+          "meanDeformation": 0.07109210116769739
+        },
+        {
+          "state": "crushed",
+          "triangles": 1198,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.3279833936039975,
+              1.1384701514849382e-8,
+              -2.352588275790629
+            ],
+            "max": [
+              1.3359313948052087,
+              2.1842259753051816,
+              1.5644116675647353
+            ]
+          },
+          "meanDeformation": 0.23164682483542734
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": 1.1384701514849382e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": 1.1384701514849382e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": 1.1384701514849382e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": 1.1384701514849382e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "police-dirt-bike",
+      "bytes": 211780,
+      "sha256": "299c77a66e3947f79832d6368fdb0f7d6e7a28723cc8f862c5be6608c92891af",
+      "storedMeshTriangles": 852,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 852,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 12,
+          "bounds": {
+            "min": [
+              -0.5449999996513509,
+              -4.768371586472142e-9,
+              -1.204099998474121
+            ],
+            "max": [
+              0.5449999996513509,
+              1.5000000013897137,
+              1.2540999984741212
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 852,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 12,
+          "bounds": {
+            "min": [
+              -0.535110502229669,
+              -4.768371586472142e-9,
+              -1.204099998474121
+            ],
+            "max": [
+              0.5604012130812192,
+              1.4065346657225803,
+              1.2540999984741212
+            ]
+          },
+          "meanDeformation": 0.02491459598333979
+        },
+        {
+          "state": "crushed",
+          "triangles": 852,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 12,
+          "bounds": {
+            "min": [
+              -0.49983607763949867,
+              -4.768371586472142e-9,
+              -1.204099998474121
+            ],
+            "max": [
+              0.6086293735593938,
+              1.139789528660476,
+              1.2540999984741212
+            ]
+          },
+          "meanDeformation": 0.09324724013761349
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "F",
+          "minY": -4.768371586472142e-9
+        },
+        {
+          "wheel": "R",
+          "minY": -4.768371586472142e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "police-touring-bike",
+      "bytes": 221516,
+      "sha256": "8df52821b26cb250751632caaabec09c9aa5393013407c6cde979d56b4e27fcc",
+      "storedMeshTriangles": 796,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 796,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 16,
+          "bounds": {
+            "min": [
+              -0.5449999996513509,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.5449999996513509,
+              1.4200000029802322,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 796,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 16,
+          "bounds": {
+            "min": [
+              -0.5449428861889613,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.562301857122817,
+              1.3276534613966942,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0.025760847099545153
+        },
+        {
+          "state": "crushed",
+          "triangles": 796,
+          "spins": 2,
+          "beacons": 2,
+          "partCount": 16,
+          "bounds": {
+            "min": [
+              -0.5371050542593002,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.6039136403292799,
+              1.0644266607136954,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0.09873693802150584
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "F",
+          "minY": -3.576278662098531e-9
+        },
+        {
+          "wheel": "R",
+          "minY": -3.576278662098531e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "police-van",
+      "bytes": 308392,
+      "sha256": "2541fdb9cc63b1417ee16fc9ef4ba838900877f42f88e4edbbf7236a24df898f",
+      "storedMeshTriangles": 1140,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1140,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.2545453353952838,
+              -2.183204639294445e-8,
+              -2.3000000109762118
+            ],
+            "max": [
+              1.2545453353952838,
+              2.4661815820449844,
+              2.2999999810880905
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1140,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.3617181024387774,
+              -2.183204639294445e-8,
+              -2.3000000109762118
+            ],
+            "max": [
+              1.3571094792741867,
+              2.3781339425409094,
+              2.0009999860948806
+            ]
+          },
+          "meanDeformation": 0.07317429745624598
+        },
+        {
+          "state": "crushed",
+          "triangles": 1140,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.4508367531742958,
+              -0.09501549630429673,
+              -2.162000014433281
+            ],
+            "max": [
+              1.4419445559634836,
+              2.3776530371421827,
+              1.79034820985007
+            ]
+          },
+          "meanDeformation": 0.24377544746709423
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": -2.183204639294445e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": -2.183204639294445e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": -2.183204639294445e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": -2.183204639294445e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "police-luxury",
+      "bytes": 298348,
+      "sha256": "e9317b72d6708a5af72556cf476eba958a6e36df40659896ceeaf612095696ed",
+      "storedMeshTriangles": 1091,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1091,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.159803902387894,
+              -2.40302222564992e-9,
+              -2.2749999936572944
+            ],
+            "max": [
+              1.159803902387894,
+              1.994097956000084,
+              2.275000013564288
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1091,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.242210837562462,
+              -2.40302222564992e-9,
+              -2.2749999936572944
+            ],
+            "max": [
+              1.255984029496465,
+              1.9060762810913865,
+              1.979250021432101
+            ]
+          },
+          "meanDeformation": 0.05775424343744285
+        },
+        {
+          "state": "crushed",
+          "triangles": 1091,
+          "spins": 4,
+          "beacons": 2,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.309554107592617,
+              -0.0622233745861297,
+              -2.13849999270362
+            ],
+            "max": [
+              1.3323473819399099,
+              1.9056874319894257,
+              1.6855313111240697
+            ]
+          },
+          "meanDeformation": 0.19480109936299791
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": -2.40302222564992e-9
+        },
+        {
+          "wheel": "FR",
+          "minY": -2.40302222564992e-9
+        },
+        {
+          "wheel": "RL",
+          "minY": -2.40302222564992e-9
+        },
+        {
+          "wheel": "RR",
+          "minY": -2.40302222564992e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-sport",
+      "bytes": 287992,
+      "sha256": "76593efcb20c132f57b2f4a63ff7c52c93323a43d603ab2d7747f152c9cd9f8e",
+      "storedMeshTriangles": 1079,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.159166693687439,
+              1.2914340152825332e-8,
+              -2.1249999940754947
+            ],
+            "max": [
+              1.159166693687439,
+              1.5583332671059495,
+              2.1250000139799314
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.2465677360933067,
+              1.2914340152825332e-8,
+              -2.1249999940754947
+            ],
+            "max": [
+              1.2550005272543983,
+              1.4726249395145303,
+              1.8487500092115599
+            ]
+          },
+          "meanDeformation": 0.0506763434144643
+        },
+        {
+          "state": "crushed",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -1.316892116813761,
+              -0.05439427406064545,
+              -1.9974999964596805
+            ],
+            "max": [
+              1.3377803182766805,
+              1.1687499476803667,
+              1.5458656663598571
+            ]
+          },
+          "meanDeformation": 0.16871068834496544
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": 1.2914340152825332e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": 1.2914340152825332e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": 1.2914340152825332e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": 1.2914340152825332e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-van",
+      "bytes": 282248,
+      "sha256": "cec4b4f62089bb6cc4ff92a8b46becbb07b09112a01c2806b4a654ebd3d9b471",
+      "storedMeshTriangles": 1080,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1080,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.1999999284744263,
+              -1.1812554878698478e-8,
+              -2.2000000117947383
+            ],
+            "max": [
+              1.1999999284744263,
+              2.159999771444075,
+              2.200000025965955
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1080,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.301561899763474,
+              -1.1812554878698478e-8,
+              -2.2000000117947383
+            ],
+            "max": [
+              1.30404830910613,
+              2.041199786988966,
+              1.9140000126145142
+            ]
+          },
+          "meanDeformation": 0.06769897976773834
+        },
+        {
+          "state": "crushed",
+          "triangles": 1080,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.3900411534427717,
+              -0.0540940454276998,
+              -2.068000012509994
+            ],
+            "max": [
+              1.3927367563222677,
+              1.6199998095910475,
+              1.712506992405122
+            ]
+          },
+          "meanDeformation": 0.2184699419393951
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": -1.1812554878698478e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": -1.1812554878698478e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": -1.1812554878698478e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": -1.1812554878698478e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-truck",
+      "bytes": 282248,
+      "sha256": "fcbd06ffb91569c328b398e04d5cfa60620dd277f084788b59e28c33c51ebb28",
+      "storedMeshTriangles": 1079,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.233051014026175,
+              1.1641839714471303e-8,
+              -2.4250000131816862
+            ],
+            "max": [
+              1.233051014026175,
+              2.1372883990488627,
+              2.4250000021701577
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.3613241845334032,
+              1.1641839714471303e-8,
+              -2.4250000131816862
+            ],
+            "max": [
+              1.345437906131779,
+              2.0197375342331507,
+              2.109749992871833
+            ]
+          },
+          "meanDeformation": 0.0656867129785316
+        },
+        {
+          "state": "crushed",
+          "triangles": 1079,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.4570866688818116,
+              -0.08318356190190102,
+              -2.279500008890152
+            ],
+            "max": [
+              1.4418387108351378,
+              1.6029663160524943,
+              1.9240807429410982
+            ]
+          },
+          "meanDeformation": 0.21343790046081973
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": 1.1641839714471303e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": 1.1641839714471303e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": 1.1641839714471303e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": 1.1641839714471303e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-taxi",
+      "bytes": 295380,
+      "sha256": "1ac39590e8951c6e226427267dc73fb44754670f606ab59c1bada0a49c7562db",
+      "storedMeshTriangles": 1094,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1094,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.1727273625972914,
+              2.9561131320576806e-11,
+              -2.150000011018491
+            ],
+            "max": [
+              1.1727273625972914,
+              2.3454545949201053,
+              2.195363639324903
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1094,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.2258180441675655,
+              2.9561131320576806e-11,
+              -2.150000011018491
+            ],
+            "max": [
+              1.2555744743202997,
+              2.2164545868138736,
+              1.91291498991847
+            ]
+          },
+          "meanDeformation": 0.06132418211543297
+        },
+        {
+          "state": "crushed",
+          "triangles": 1094,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.256831886629043,
+              -0.06357999238231593,
+              -2.0196390947615863
+            ],
+            "max": [
+              1.3242077159973091,
+              1.7590909217099613,
+              1.6735866710233371
+            ]
+          },
+          "meanDeformation": 0.1981324152369585
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": 2.9561131320576806e-11
+        },
+        {
+          "wheel": "FR",
+          "minY": 2.9561131320576806e-11
+        },
+        {
+          "wheel": "RL",
+          "minY": 2.9561131320576806e-11
+        },
+        {
+          "wheel": "RR",
+          "minY": 2.9561131320576806e-11
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-motorcycle",
+      "bytes": 177172,
+      "sha256": "d8df5822a0595aa75c5de15a4a4fd2d1546710c248a97740727e1cf1fcd77643",
+      "storedMeshTriangles": 658,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 658,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 14,
+          "bounds": {
+            "min": [
+              -0.5449999996513509,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.5449999996513509,
+              1.3900000013897136,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 658,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 14,
+          "bounds": {
+            "min": [
+              -0.5449535694156805,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.5598501066729807,
+              1.3033887900898173,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0.024272132223052936
+        },
+        {
+          "state": "crushed",
+          "triangles": 658,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 14,
+          "bounds": {
+            "min": [
+              -0.5238027104229116,
+              -3.576278662098531e-9,
+              -1.2000000035762786
+            ],
+            "max": [
+              0.6006243542820596,
+              1.070422189378268,
+              1.2500000035762788
+            ]
+          },
+          "meanDeformation": 0.093597378959654
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "F",
+          "minY": -3.576278662098531e-9
+        },
+        {
+          "wheel": "R",
+          "minY": -3.576278662098531e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-scooter",
+      "bytes": 167028,
+      "sha256": "959eb9d3ba2849999990e69d3219b225d15570f6771ab65dafbdca5bfbe2a654",
+      "storedMeshTriangles": 660,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 660,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -0.5449999996513509,
+              0,
+              -0.92
+            ],
+            "max": [
+              0.5449999996513509,
+              1.5000000013897137,
+              0.92
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 660,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -0.5265398302168035,
+              0,
+              -0.92
+            ],
+            "max": [
+              0.5713406202435874,
+              1.3970316215345577,
+              0.92
+            ]
+          },
+          "meanDeformation": 0.03102890022493547
+        },
+        {
+          "state": "crushed",
+          "triangles": 660,
+          "spins": 2,
+          "beacons": 0,
+          "partCount": 11,
+          "bounds": {
+            "min": [
+              -0.4838565234094858,
+              0,
+              -0.92
+            ],
+            "max": [
+              0.6338096761197233,
+              1.0687119676658825,
+              0.92
+            ]
+          },
+          "meanDeformation": 0.11077579764000654
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "F",
+          "minY": 0
+        },
+        {
+          "wheel": "R",
+          "minY": 0
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-suv",
+      "bytes": 297636,
+      "sha256": "dd95d4e1e3f454d9e08804ecc36c081b4500cc4896aa4d9de7b7f338d7ebe7ed",
+      "storedMeshTriangles": 1138,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1138,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.2352942414349877,
+              -1.4684596094660662e-8,
+              -2.4396471039811654
+            ],
+            "max": [
+              1.2352942414349877,
+              2.141176753638136,
+              2.0999999979127963
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1138,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.316525767880791,
+              -1.4684596094660662e-8,
+              -2.4396471039811654
+            ],
+            "max": [
+              1.3223233517551258,
+              2.0234120348075506,
+              1.8269999960054477
+            ]
+          },
+          "meanDeformation": 0.0716944263520729
+        },
+        {
+          "state": "crushed",
+          "triangles": 1138,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.40552814551766,
+              -1.4684596094660662e-8,
+              -2.4396471039811654
+            ],
+            "max": [
+              1.3960228922698592,
+              1.6058825784901258,
+              1.6223528669284566
+            ]
+          },
+          "meanDeformation": 0.22754735326242542
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": -1.4684596094660662e-8
+        },
+        {
+          "wheel": "FR",
+          "minY": -1.4684596094660662e-8
+        },
+        {
+          "wheel": "RL",
+          "minY": -1.4684596094660662e-8
+        },
+        {
+          "wheel": "RR",
+          "minY": -1.4684596094660662e-8
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    },
+    {
+      "id": "fugitive-classic",
+      "bytes": 275260,
+      "sha256": "2a03df40433e0215408d2f62583cb500984287f94adad6be4415a3dd00d7f223",
+      "storedMeshTriangles": 1038,
+      "scenes": [
+        {
+          "state": "intact",
+          "triangles": 1038,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.2352941528873602,
+              -1.2787150227566713e-9,
+              -2.099999994145195
+            ],
+            "max": [
+              1.2352941528873602,
+              2.141176480276568,
+              2.0999999914711047
+            ]
+          },
+          "meanDeformation": 0
+        },
+        {
+          "state": "damaged",
+          "triangles": 1038,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.2787323872193812,
+              -1.2787150227566713e-9,
+              -2.099999994145195
+            ],
+            "max": [
+              1.3050432452494265,
+              2.0234117763471438,
+              1.826999989563756
+            ]
+          },
+          "meanDeformation": 0.05336287466466246
+        },
+        {
+          "state": "crushed",
+          "triangles": 1038,
+          "spins": 4,
+          "beacons": 0,
+          "partCount": 10,
+          "bounds": {
+            "min": [
+              -1.3133441272349342,
+              -0.03898246715165765,
+              -1.9739999921186369
+            ],
+            "max": [
+              1.3615473992766027,
+              1.6058823647332026,
+              1.5981690978907652
+            ]
+          },
+          "meanDeformation": 0.1735931725158625
+        }
+      ],
+      "wheelContacts": [
+        {
+          "wheel": "FL",
+          "minY": -1.2787150227566713e-9
+        },
+        {
+          "wheel": "FR",
+          "minY": -1.2787150227566713e-9
+        },
+        {
+          "wheel": "RL",
+          "minY": -1.2787150227566713e-9
+        },
+        {
+          "wheel": "RR",
+          "minY": -1.2787150227566713e-9
+        }
+      ],
+      "khronos": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [],
+        "truncated": false
+      }
+    }
+  ]
+}

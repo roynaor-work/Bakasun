@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101a24">
+  <title>תפוס את הפושע · צי הרכבים</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <div id="app">
+    <aside class="catalog">
+      <header class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><div><p>תפוס את הפושע</p><h1>צי הרכבים</h1></div><span class="edition">02</span></header>
+      <div class="tabs" role="tablist" aria-label="קבוצת רכבים">
+        <button id="police-tab" role="tab" aria-selected="true" aria-controls="vehicles" data-team="police">משטרה <b>6</b></button>
+        <button id="fugitive-tab" role="tab" aria-selected="false" aria-controls="vehicles" data-team="fugitive">נמלטים <b>8</b></button>
+      </div>
+      <div id="vehicles" role="tabpanel" aria-labelledby="police-tab" tabindex="0"></div>
+      <footer class="catalog-foot"><span class="status-dot"></span>14 דגמים · 3 מצבי נזק</footer>
+    </aside>
+    <main class="workshop">
+      <header class="model-head"><div><span id="team-label" class="eyebrow">יחידת המרדף</span><h2 id="model-name">טוען רכבים…</h2></div><button id="reset" class="text-button" title="איפוס רכב וזווית">איפוס <span aria-hidden="true">↺</span></button></header>
+      <div id="stage" aria-label="תצוגת רכב תלת־ממדית; גרירה לסיבוב" tabindex="0">
+        <div id="loading" role="status">מכינים את הרכב…</div>
+        <div class="stage-corner"><span id="asset-number">01 / 14</span><span id="view-hint">גרירה לסיבוב</span></div>
+        <div id="statistics"><span id="triangles"></span><span class="separator">/</span><span id="bytes"></span></div>
+        <div class="stage-stamp" aria-hidden="true"><i></i><span>מוכן למרדף</span></div>
+      </div>
+      <section class="controls" aria-label="בדיקת הרכב">
+        <div class="control-row"><div class="damage-control" role="group" aria-label="מצב נזק"><button data-damage="intact" aria-pressed="true">שלם</button><button data-damage="damaged" aria-pressed="false">פגוע</button><button data-damage="crushed" aria-pressed="false">מעוך</button></div><div id="colors" role="group" aria-label="צבע הרכב"></div><button id="wireframe" class="icon-button" aria-label="הצגת משולשים" aria-pressed="false">△</button></div>
+        <div class="control-row actions"><button id="rolling" aria-pressed="true"><span aria-hidden="true">◉</span> גלגלים</button><button id="lights" aria-pressed="true"><span aria-hidden="true">✦</span> אורות</button><button id="smoke" aria-pressed="false"><span aria-hidden="true">≋</span> עשן</button><div class="burst-control"><select id="wheel" aria-label="בחירת גלגל לפיצוץ"></select><button id="burst">פיצוץ צמיג <span aria-hidden="true">↗</span></button></div></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

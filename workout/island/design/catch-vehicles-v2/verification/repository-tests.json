@@ -1,0 +1,26 @@
+{
+  "command": "ISLAND_PLAYWRIGHT=\"$PWD/workout/island/design/catch-vehicles-v2/source/playwright-system.mjs\" npm test",
+  "exitCode": 0,
+  "summary": {
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4262,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "durationMs": 476587.994084
+  },
+  "browserExecutable": "/usr/bin/chromium",
+  "adapter": "source/playwright-system.mjs",
+  "logSHA256": "953cc6f4c30b3673500ad9c3600522457086914a740136dc68480de6b8c12bba",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "initialAttempt": {
+    "exitCode": 1,
+    "passed": 4261,
+    "failed": 1,
+    "skipped": 64,
+    "reason": "Default Playwright browser executable was absent; the workout-royiki browser test left its local server running after launch failed. The test worker was stopped, then the full suite was rerun through the repository existing ISLAND_PLAYWRIGHT hook with system Chromium."
+  },
+  "existingRepositoryFilesEdited": false
+}

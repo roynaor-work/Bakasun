@@ -1,0 +1,1373 @@
+{
+  "schemaVersion": 2,
+  "name": "catch-vehicles-v2",
+  "license": "CC0-1.0",
+  "coordinates": {
+    "forward": "+Z",
+    "up": "+Y",
+    "right": "+X",
+    "units": "metres",
+    "origin": "ground centre"
+  },
+  "format": "glTF 2.0 binary",
+  "extensionsRequired": [],
+  "textures": 0,
+  "triangleLimit": [
+    500,
+    1200
+  ],
+  "budgetBytes": 6000000,
+  "preview": {
+    "path": "preview.html",
+    "viewport": [
+      844,
+      390
+    ]
+  },
+  "damage": {
+    "states": [
+      "intact",
+      "damaged",
+      "crushed"
+    ],
+    "method": "Three native scenes; shared part meshes; two damage morph targets per part",
+    "default": "intact",
+    "nodeConvention": "{state}__{partId}",
+    "semanticKey": "extras.partId"
+  },
+  "effects": {
+    "controller": "vehicle-controller.mjs",
+    "wheelRollAxis": "+X",
+    "steeringAxis": "+Y",
+    "smoke": "Pooled engine particles at fx_engine_smoke",
+    "tireBurst": "Per-wheel morph target and pooled rubber shards",
+    "policeBeacons": "Native beacons_flash clip and independent emissive red/blue nodes, alternating double flash"
+  },
+  "assets": [
+    {
+      "id": "police-sedan",
+      "label": "ניידת סדאן",
+      "team": "police",
+      "kind": "sedan",
+      "path": "models/police-sedan.glb",
+      "bytes": 296372,
+      "sha256": "209856c848281f7f16dd453c90db7fee6da83d8c7669d17e5b5e982a61ceef95",
+      "triangles": {
+        "intact": 1114,
+        "damaged": 1114,
+        "crushed": 1114
+      },
+      "storedMeshTriangles": 1114,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "tail_left",
+        "tail_right",
+        "glass",
+        "head_left",
+        "head_right",
+        "engine",
+        "beacon_mount",
+        "beacon_red",
+        "beacon_blue",
+        "beacon_red_glow",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.6750000323714883,
+            0.4500000215809922,
+            1.364999907510033
+          ],
+          "radius": 0.4500000215809922,
+          "width": 0.3690000176964136
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.6750000323714883,
+            0.4500000215809922,
+            1.364999907510033
+          ],
+          "radius": 0.4500000215809922,
+          "width": 0.3690000176964136
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.6750000323714883,
+            0.4500000215809922,
+            -1.0649999408064212
+          ],
+          "radius": 0.4500000215809922,
+          "width": 0.3690000176964136
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.6750000323714883,
+            0.4500000215809922,
+            -1.0649999408064212
+          ],
+          "radius": 0.4500000215809922,
+          "width": 0.3690000176964136
+        }
+      ],
+      "colors": [
+        "#e5eef2",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#17324d",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR",
+        "beacons_flash"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-suv",
+      "label": "ניידת שטח",
+      "team": "police",
+      "kind": "suv",
+      "path": "models/police-suv.glb",
+      "bytes": 321508,
+      "sha256": "27f0d0830a4f092c4c38794ae2d163e12731f59023c360226601726ae8b987fa",
+      "triangles": {
+        "intact": 1198,
+        "damaged": 1198,
+        "crushed": 1198
+      },
+      "storedMeshTriangles": 1198,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "head_right",
+        "head_left",
+        "glass",
+        "tail_right",
+        "tail_left",
+        "engine",
+        "beacon_mount",
+        "beacon_red",
+        "beacon_blue",
+        "beacon_red_glow",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.6750001419993167,
+            0.47647066062710264,
+            1.0879410183223341
+          ],
+          "radius": 0.47647066062710264,
+          "width": 0.45582368923060346
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.6750001419993167,
+            0.47647066062710264,
+            1.0879410183223341
+          ],
+          "radius": 0.47647066062710264,
+          "width": 0.45582368923060346
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.6750001419993167,
+            0.47647066062710264,
+            -1.0085297937707063
+          ],
+          "radius": 0.47647066062710264,
+          "width": 0.45582368923060346
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.6750001419993167,
+            0.47647066062710264,
+            -1.0085297937707063
+          ],
+          "radius": 0.47647066062710264,
+          "width": 0.45582368923060346
+        },
+        {
+          "id": "spare",
+          "position": [
+            0,
+            0.8258824456026914,
+            -2.167941192508158
+          ],
+          "radius": 0.4605882869707317,
+          "width": 0.36529415863195963,
+          "spare": true
+        }
+      ],
+      "colors": [
+        "#d6e7dc",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#17495a",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR",
+        "beacons_flash"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-dirt-bike",
+      "label": "אופנוע שטח משטרתי",
+      "team": "police",
+      "kind": "dirt",
+      "path": "models/police-dirt-bike.glb",
+      "bytes": 211780,
+      "sha256": "299c77a66e3947f79832d6368fdb0f7d6e7a28723cc8f862c5be6608c92891af",
+      "triangles": {
+        "intact": 852,
+        "damaged": 852,
+        "crushed": 852
+      },
+      "storedMeshTriangles": 852,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "frame",
+        "fork",
+        "tank",
+        "seat",
+        "engine",
+        "head",
+        "tail",
+        "fender_front",
+        "fender_rear",
+        "fairing",
+        "exhaust",
+        "handlebar",
+        "mirror_left",
+        "mirror_right",
+        "beacon_red",
+        "beacon_red_glow",
+        "beacon_blue",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "F",
+          "position": [
+            0,
+            0.37,
+            0.91
+          ],
+          "radius": 0.37,
+          "width": 0.23
+        },
+        {
+          "id": "R",
+          "position": [
+            0,
+            0.37,
+            -0.86
+          ],
+          "radius": 0.37,
+          "width": 0.23
+        }
+      ],
+      "colors": [
+        "#e3edff",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#2855ac",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_F",
+        "tire_burst_R",
+        "beacons_flash"
+      ],
+      "source": "catch-props-v1 CC0 motorcycle adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-touring-bike",
+      "label": "אופנוע סיור משטרתי",
+      "team": "police",
+      "kind": "touring",
+      "path": "models/police-touring-bike.glb",
+      "bytes": 221516,
+      "sha256": "8df52821b26cb250751632caaabec09c9aa5393013407c6cde979d56b4e27fcc",
+      "triangles": {
+        "intact": 796,
+        "damaged": 796,
+        "crushed": 796
+      },
+      "storedMeshTriangles": 796,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "frame",
+        "fork",
+        "tank",
+        "seat",
+        "engine",
+        "head",
+        "tail",
+        "fender_front",
+        "fender_rear",
+        "pannier_left",
+        "fairing",
+        "pannier_right",
+        "topbox",
+        "windscreen",
+        "exhaust",
+        "handlebar",
+        "mirror_left",
+        "mirror_right",
+        "beacon_red",
+        "beacon_red_glow",
+        "beacon_blue",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "F",
+          "position": [
+            0,
+            0.34,
+            0.91
+          ],
+          "radius": 0.34,
+          "width": 0.23
+        },
+        {
+          "id": "R",
+          "position": [
+            0,
+            0.34,
+            -0.86
+          ],
+          "radius": 0.34,
+          "width": 0.23
+        }
+      ],
+      "colors": [
+        "#eae8db",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#264e6d",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_F",
+        "tire_burst_R",
+        "beacons_flash"
+      ],
+      "source": "catch-props-v1 CC0 motorcycle adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-van",
+      "label": "ואן משטרתי",
+      "team": "police",
+      "kind": "van",
+      "path": "models/police-van.glb",
+      "bytes": 308392,
+      "sha256": "2541fdb9cc63b1417ee16fc9ef4ba838900877f42f88e4edbbf7236a24df898f",
+      "triangles": {
+        "intact": 1140,
+        "damaged": 1140,
+        "crushed": 1140
+      },
+      "storedMeshTriangles": 1140,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "glass",
+        "head_left",
+        "head_right",
+        "tail_right",
+        "tail_left",
+        "engine",
+        "beacon_mount",
+        "beacon_red",
+        "beacon_blue",
+        "beacon_red_glow",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7109091987688585,
+            0.5018181582521821,
+            1.3130907792966338
+          ],
+          "radius": 0.5018181582521821,
+          "width": 0.48007296362157614
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7109091987688585,
+            0.5018181582521821,
+            1.3130907792966338
+          ],
+          "radius": 0.5018181582521821,
+          "width": 0.48007296362157614
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7109091987688585,
+            0.5018181582521821,
+            -1.2294544229113473
+          ],
+          "radius": 0.5018181582521821,
+          "width": 0.48007296362157614
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7109091987688585,
+            0.5018181582521821,
+            -1.2294544229113473
+          ],
+          "radius": 0.5018181582521821,
+          "width": 0.48007296362157614
+        }
+      ],
+      "colors": [
+        "#a9c8df",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#193b63",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR",
+        "beacons_flash"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "police-luxury",
+      "label": "ניידת יוקרה",
+      "team": "police",
+      "kind": "luxury",
+      "path": "models/police-luxury.glb",
+      "bytes": 298348,
+      "sha256": "e9317b72d6708a5af72556cf476eba958a6e36df40659896ceeaf612095696ed",
+      "triangles": {
+        "intact": 1091,
+        "damaged": 1091,
+        "crushed": 1091
+      },
+      "storedMeshTriangles": 1091,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "tail_left",
+        "cabin",
+        "tail_right",
+        "glass",
+        "head_left",
+        "head_right",
+        "engine",
+        "beacon_mount",
+        "beacon_red",
+        "beacon_blue",
+        "beacon_red_glow",
+        "beacon_blue_glow"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7583335283145443,
+            0.487117675523995,
+            1.2222548652584386
+          ],
+          "radius": 0.487117675523995,
+          "width": 0.5120983453049069
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7583335283145443,
+            0.487117675523995,
+            1.2222548652584386
+          ],
+          "radius": 0.487117675523995,
+          "width": 0.5120983453049069
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7583335283145443,
+            0.487117675523995,
+            -1.1330391773156407
+          ],
+          "radius": 0.487117675523995,
+          "width": 0.5120983453049069
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7583335283145443,
+            0.487117675523995,
+            -1.1330391773156407
+          ],
+          "radius": 0.487117675523995,
+          "width": 0.5120983453049069
+        }
+      ],
+      "colors": [
+        "#323d57",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#d8e8f4",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR",
+        "beacons_flash"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-sport",
+      "label": "מכונית ספורט",
+      "team": "fugitive",
+      "kind": "sport",
+      "path": "models/fugitive-sport.glb",
+      "bytes": 287992,
+      "sha256": "76593efcb20c132f57b2f4a63ff7c52c93323a43d603ab2d7747f152c9cd9f8e",
+      "triangles": {
+        "intact": 1079,
+        "damaged": 1079,
+        "crushed": 1079
+      },
+      "storedMeshTriangles": 1079,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "body",
+        "trunk",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "tail_left",
+        "cabin",
+        "tail_right",
+        "glass",
+        "head_left",
+        "head_right",
+        "spoiler",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7579168615407451,
+            0.4250000248352691,
+            1.141666632384256
+          ],
+          "radius": 0.4250000248352691,
+          "width": 0.47833361924084716
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7579168615407451,
+            0.4250000248352691,
+            1.141666632384256
+          ],
+          "radius": 0.4250000248352691,
+          "width": 0.47833361924084716
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7579168615407451,
+            0.4250000248352691,
+            -1.0583332974926314
+          ],
+          "radius": 0.4250000248352691,
+          "width": 0.47833361924084716
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7579168615407451,
+            0.4250000248352691,
+            -1.0583332974926314
+          ],
+          "radius": 0.4250000248352691,
+          "width": 0.47833361924084716
+        }
+      ],
+      "colors": [
+        "#f05839",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#202c3c",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-van",
+      "label": "ואן נמלט",
+      "team": "fugitive",
+      "kind": "van",
+      "path": "models/fugitive-van.glb",
+      "bytes": 282248,
+      "sha256": "cec4b4f62089bb6cc4ff92a8b46becbb07b09112a01c2806b4a654ebd3d9b471",
+      "triangles": {
+        "intact": 1080,
+        "damaged": 1080,
+        "crushed": 1080
+      },
+      "storedMeshTriangles": 1080,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "glass",
+        "head_left",
+        "head_right",
+        "tail_right",
+        "tail_left",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.6800001031702126,
+            0.47999997745860906,
+            1.2559998758489543
+          ],
+          "radius": 0.47999997745860906,
+          "width": 0.459200226072812
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.6800001031702126,
+            0.47999997745860906,
+            1.2559998758489543
+          ],
+          "radius": 0.47999997745860906,
+          "width": 0.459200226072812
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.6800001031702126,
+            0.47999997745860906,
+            -1.1759998827847673
+          ],
+          "radius": 0.47999997745860906,
+          "width": 0.459200226072812
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.6800001031702126,
+            0.47999997745860906,
+            -1.1759998827847673
+          ],
+          "radius": 0.47999997745860906,
+          "width": 0.459200226072812
+        }
+      ],
+      "colors": [
+        "#41aa9b",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#eee2c6",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-truck",
+      "label": "משאית קטנה",
+      "team": "fugitive",
+      "kind": "truck",
+      "path": "models/fugitive-truck.glb",
+      "bytes": 282248,
+      "sha256": "fcbd06ffb91569c328b398e04d5cfa60620dd277f084788b59e28c33c51ebb28",
+      "triangles": {
+        "intact": 1079,
+        "damaged": 1079,
+        "crushed": 1079
+      },
+      "storedMeshTriangles": 1079,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "glass",
+        "head_right",
+        "head_left",
+        "tail_left",
+        "tail_right",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.6987290817973854,
+            0.49322043033347485,
+            1.4550002351858187
+          ],
+          "radius": 0.49322043033347485,
+          "width": 0.4718477994770145
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.6987290817973854,
+            0.49322043033347485,
+            1.4550002351858187
+          ],
+          "radius": 0.49322043033347485,
+          "width": 0.4718477994770145
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.6987290817973854,
+            0.49322043033347485,
+            -1.2083899906208542
+          ],
+          "radius": 0.49322043033347485,
+          "width": 0.4718477994770145
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.6987290817973854,
+            0.49322043033347485,
+            -1.2083899906208542
+          ],
+          "radius": 0.49322043033347485,
+          "width": 0.4718477994770145
+        }
+      ],
+      "colors": [
+        "#eb9a35",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#fff0d4",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-taxi",
+      "label": "מונית",
+      "team": "fugitive",
+      "kind": "taxi",
+      "path": "models/fugitive-taxi.glb",
+      "bytes": 295380,
+      "sha256": "1ac39590e8951c6e226427267dc73fb44754670f606ab59c1bada0a49c7562db",
+      "triangles": {
+        "intact": 1094,
+        "damaged": 1094,
+        "crushed": 1094
+      },
+      "storedMeshTriangles": 1094,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "tail_right",
+        "tail_left",
+        "cabin",
+        "glass",
+        "head_left",
+        "head_right",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7036365923999953,
+            0.46909096839999875,
+            1.227454636959998
+          ],
+          "radius": 0.46909096839999875,
+          "width": 0.38465482335999424
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7036365923999953,
+            0.46909096839999875,
+            1.227454636959998
+          ],
+          "radius": 0.46909096839999875,
+          "width": 0.38465482335999424
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7036365923999953,
+            0.46909096839999875,
+            -1.1492728119999984
+          ],
+          "radius": 0.46909096839999875,
+          "width": 0.38465482335999424
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7036365923999953,
+            0.46909096839999875,
+            -1.1492728119999984
+          ],
+          "radius": 0.46909096839999875,
+          "width": 0.38465482335999424
+        }
+      ],
+      "colors": [
+        "#f3c53f",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#263745",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-motorcycle",
+      "label": "אופנוע ספורט",
+      "team": "fugitive",
+      "kind": "sport-bike",
+      "path": "models/fugitive-motorcycle.glb",
+      "bytes": 177172,
+      "sha256": "d8df5822a0595aa75c5de15a4a4fd2d1546710c248a97740727e1cf1fcd77643",
+      "triangles": {
+        "intact": 658,
+        "damaged": 658,
+        "crushed": 658
+      },
+      "storedMeshTriangles": 658,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "frame",
+        "fork",
+        "tank",
+        "seat",
+        "engine",
+        "head",
+        "tail",
+        "fender_front",
+        "fender_rear",
+        "fairing_left",
+        "fairing_right",
+        "windscreen",
+        "exhaust",
+        "handlebar",
+        "mirror_left",
+        "mirror_right"
+      ],
+      "wheels": [
+        {
+          "id": "F",
+          "position": [
+            0,
+            0.34,
+            0.91
+          ],
+          "radius": 0.34,
+          "width": 0.23
+        },
+        {
+          "id": "R",
+          "position": [
+            0,
+            0.34,
+            -0.86
+          ],
+          "radius": 0.34,
+          "width": 0.23
+        }
+      ],
+      "colors": [
+        "#8f7ade",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#263041",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_F",
+        "tire_burst_R"
+      ],
+      "source": "catch-props-v1 CC0 motorcycle adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-scooter",
+      "label": "קטנוע",
+      "team": "fugitive",
+      "kind": "scooter",
+      "path": "models/fugitive-scooter.glb",
+      "bytes": 167028,
+      "sha256": "959eb9d3ba2849999990e69d3219b225d15570f6771ab65dafbdca5bfbe2a654",
+      "triangles": {
+        "intact": 660,
+        "damaged": 660,
+        "crushed": 660
+      },
+      "storedMeshTriangles": 660,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "frame",
+        "fork",
+        "rear_cowl",
+        "floorboard",
+        "leg_shield",
+        "seat",
+        "handlebar",
+        "head",
+        "fender_front",
+        "tail",
+        "mirror_left",
+        "mirror_right",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "F",
+          "position": [
+            0,
+            0.25,
+            0.67
+          ],
+          "radius": 0.25,
+          "width": 0.19
+        },
+        {
+          "id": "R",
+          "position": [
+            0,
+            0.25,
+            -0.67
+          ],
+          "radius": 0.25,
+          "width": 0.19
+        }
+      ],
+      "colors": [
+        "#e68baf",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#f4e8d5",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_F",
+        "tire_burst_R"
+      ],
+      "source": "catch-props-v1 CC0 motorcycle adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-suv",
+      "label": "ג׳יפ נמלט",
+      "team": "fugitive",
+      "kind": "suv",
+      "path": "models/fugitive-suv.glb",
+      "bytes": 297636,
+      "sha256": "dd95d4e1e3f454d9e08804ecc36c081b4500cc4896aa4d9de7b7f338d7ebe7ed",
+      "triangles": {
+        "intact": 1138,
+        "damaged": 1138,
+        "crushed": 1138
+      },
+      "storedMeshTriangles": 1138,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "cabin",
+        "head_right",
+        "head_left",
+        "glass",
+        "tail_right",
+        "tail_left",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7000001472585508,
+            0.49411772213181016,
+            1.1282351301120503
+          ],
+          "radius": 0.49411772213181016,
+          "width": 0.4727060480909962
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7000001472585508,
+            0.49411772213181016,
+            1.1282351301120503
+          ],
+          "radius": 0.49411772213181016,
+          "width": 0.4727060480909962
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7000001472585508,
+            0.49411772213181016,
+            -1.0458827490955473
+          ],
+          "radius": 0.49411772213181016,
+          "width": 0.4727060480909962
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7000001472585508,
+            0.49411772213181016,
+            -1.0458827490955473
+          ],
+          "radius": 0.49411772213181016,
+          "width": 0.4727060480909962
+        },
+        {
+          "id": "spare",
+          "position": [
+            0,
+            0.8564706843287171,
+            -2.2482353107492012
+          ],
+          "radius": 0.47764711241409213,
+          "width": 0.37882357191462485,
+          "spare": true
+        }
+      ],
+      "colors": [
+        "#83a34e",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#e3d5b1",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "fugitive-classic",
+      "label": "מכונית ישנה",
+      "team": "fugitive",
+      "kind": "classic",
+      "path": "models/fugitive-classic.glb",
+      "bytes": 275260,
+      "sha256": "2a03df40433e0215408d2f62583cb500984287f94adad6be4415a3dd00d7f223",
+      "triangles": {
+        "intact": 1038,
+        "damaged": 1038,
+        "crushed": 1038
+      },
+      "storedMeshTriangles": 1038,
+      "scenes": {
+        "intact": 0,
+        "damaged": 1,
+        "crushed": 2
+      },
+      "parts": [
+        "bumper_rear",
+        "trunk",
+        "body",
+        "door_left",
+        "hood",
+        "bumper_front",
+        "door_right",
+        "tail_left",
+        "tail_right",
+        "cabin",
+        "head_left",
+        "head_right",
+        "glass",
+        "engine"
+      ],
+      "wheels": [
+        {
+          "id": "FL",
+          "position": [
+            -0.7000000818102983,
+            0.49411767593304645,
+            1.1282352602385588
+          ],
+          "radius": 0.49411767593304645,
+          "width": 0.47270600389417017
+        },
+        {
+          "id": "FR",
+          "position": [
+            0.7000000818102983,
+            0.49411767593304645,
+            1.1282352602385588
+          ],
+          "radius": 0.49411767593304645,
+          "width": 0.47270600389417017
+        },
+        {
+          "id": "RL",
+          "position": [
+            -0.7000000818102983,
+            0.49411767593304645,
+            -1.04588231752213
+          ],
+          "radius": 0.49411767593304645,
+          "width": 0.47270600389417017
+        },
+        {
+          "id": "RR",
+          "position": [
+            0.7000000818102983,
+            0.49411767593304645,
+            -1.04588231752213
+          ],
+          "radius": 0.49411767593304645,
+          "width": 0.47270600389417017
+        }
+      ],
+      "colors": [
+        "#65a4c4",
+        "#e65b42",
+        "#57b9a4",
+        "#ecbd49",
+        "#8d83cf"
+      ],
+      "accent": "#e9d8bb",
+      "engineSmokeAnchor": "fx_engine_smoke",
+      "animations": [
+        "wheels_roll",
+        "tire_burst_FL",
+        "tire_burst_FR",
+        "tire_burst_RL",
+        "tire_burst_RR"
+      ],
+      "source": "Kenney Car Kit 3.1 adapted",
+      "license": "CC0-1.0"
+    }
+  ],
+  "totals": {
+    "vehicles": 14,
+    "police": 6,
+    "fugitive": 8,
+    "glbBytes": 3722880,
+    "textures": 0
+  }
+}
