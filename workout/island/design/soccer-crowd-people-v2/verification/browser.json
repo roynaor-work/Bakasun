@@ -1,0 +1,474 @@
+{
+  "passAll": true,
+  "checks": [
+    {
+      "name": "offline-startup",
+      "passed": true,
+      "details": {
+        "seconds": 3.445
+      }
+    },
+    {
+      "name": "reduced-motion-starts-paused",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-preserves-phase",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-sit-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": 2.8192424228468127e-09,
+        "maximumSoleY": 4.684312146507885e-08
+      }
+    },
+    {
+      "name": "lod0-sit-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-stand-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod0-stand-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod0-clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-clap-contact",
+      "passed": true,
+      "details": {
+        "maximumPalmCenterSeparationM": 0.02835000409332178
+      }
+    },
+    {
+      "name": "lod0-jump_cheer-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -2.8434901544471813e-08,
+        "maximumSoleY": 0.28350000344425097
+      }
+    },
+    {
+      "name": "lod0-airborne-jump",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-disappointed-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod0-disappointed-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-shout-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod0-shout-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod0-wave_clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod0-wave_clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-preserves-phase",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-sit-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": 2.8192424228468127e-09,
+        "maximumSoleY": 4.684312146507885e-08
+      }
+    },
+    {
+      "name": "lod1-sit-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-stand-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod1-stand-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod1-clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-clap-contact",
+      "passed": true,
+      "details": {
+        "maximumPalmCenterSeparationM": 0.02835000409332178
+      }
+    },
+    {
+      "name": "lod1-jump_cheer-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -2.83602087369772e-08,
+        "maximumSoleY": 0.28350000344425097
+      }
+    },
+    {
+      "name": "lod1-airborne-jump",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-disappointed-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod1-disappointed-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-shout-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod1-shout-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod1-wave_clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod1-wave_clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-preserves-phase",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-sit-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": 2.8192424228468127e-09,
+        "maximumSoleY": 4.684312146507885e-08
+      }
+    },
+    {
+      "name": "lod2-sit-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-stand-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod2-stand-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod2-clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-clap-contact",
+      "passed": true,
+      "details": {
+        "maximumPalmCenterSeparationM": 0.02835000409332178
+      }
+    },
+    {
+      "name": "lod2-jump_cheer-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -2.806417309653142e-08,
+        "maximumSoleY": 0.28350000344425097
+      }
+    },
+    {
+      "name": "lod2-airborne-jump",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-disappointed-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod2-disappointed-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-shout-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod2-shout-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "lod2-wave_clap-finite-and-grounded",
+      "passed": true,
+      "details": {
+        "minimumSoleY": -3.4832954298735785e-09,
+        "maximumSoleY": 3.7217139925438403e-09
+      }
+    },
+    {
+      "name": "lod2-wave_clap-feet-planted",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "all-48-assets-loaded",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-01-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-02-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-03-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-04-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-05-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-06-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-07-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-08-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-09-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-10-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-11-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-12-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-13-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-14-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-15-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "fan-16-selection",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "body-face-control",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "pointer-turn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "keyboard-reset",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "timeline",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "play-advances",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "pause-stops-render-loop",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "layout-844x390",
+      "passed": true,
+      "details": {
+        "overflow": false,
+        "small": []
+      }
+    },
+    {
+      "name": "layout-390x844",
+      "passed": true,
+      "details": {
+        "overflow": false,
+        "small": []
+      }
+    },
+    {
+      "name": "webgl-context-recovery",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no-external-requests",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "no-browser-errors",
+      "passed": true,
+      "details": []
+    }
+  ],
+  "errors": [],
+  "externalRequests": []
+}

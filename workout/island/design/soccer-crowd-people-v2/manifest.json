@@ -1,0 +1,5135 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-crowd-people-v2",
+  "title": "קהל כדורגל אנושי",
+  "license": "CC0-1.0",
+  "generated": "2026-11-17",
+  "units": "metres",
+  "up": "+Y",
+  "forward": "+Z",
+  "modelCount": 16,
+  "glbCount": 48,
+  "triangleBudgets": [
+    210,
+    90,
+    24
+  ],
+  "maxPackageBytes": 6000000,
+  "glbBytes": 2447312,
+  "clipCount": 7,
+  "clipCountNote": "The brief says six but enumerates seven motions; all seven are delivered.",
+  "clips": [
+    {
+      "id": "sit",
+      "label": "ישיבה",
+      "duration": 4.0,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "stand",
+      "label": "עמידה",
+      "duration": 4.0,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "clap",
+      "label": "מחיאות כפיים",
+      "duration": 1.2,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "jump_cheer",
+      "label": "קפיצה בשמחה",
+      "duration": 1.8,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "disappointed",
+      "label": "אכזבה",
+      "duration": 3.2,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "shout",
+      "label": "צעקה",
+      "duration": 2.4,
+      "loop": true,
+      "rootMotion": false
+    },
+    {
+      "id": "wave_clap",
+      "label": "מחיאה בגל",
+      "duration": 3.2,
+      "loop": true,
+      "rootMotion": false
+    }
+  ],
+  "rig": {
+    "name": "CrowdCanonical18",
+    "joints": 18,
+    "bindPose": "T-pose",
+    "rotations": "parent-local XYZW",
+    "note": "Per-person translations and inverse binds are embedded; do not replace with athlete bind matrices."
+  },
+  "lodPolicy": {
+    "mode": "Separate GLBs; load one LOD per person",
+    "screenHeightPx": [
+      48,
+      16,
+      0
+    ],
+    "note": "LOD0 >=48px, LOD1 16–47px, LOD2 below 16px. LOD2 uses two-sided limb silhouettes; no facial detail."
+  },
+  "wave": {
+    "clip": "wave_clap",
+    "phaseDelaySeconds": 0.12,
+    "note": "Offset each adjacent seat by 0.12s; keep the same phase when switching LOD."
+  },
+  "preview": {
+    "entry": "preview.html",
+    "viewport": [
+      844,
+      390
+    ],
+    "network": "Self-contained local modules; serve over HTTP."
+  },
+  "provenance": [
+    {
+      "path": "../characters2/source/body.py",
+      "sha256": "694b2f409e511e8a2fa21530b20e626049828b8acc266ed93379602f42837e71"
+    },
+    {
+      "path": "../characters2/source/head_hands.py",
+      "sha256": "5820c055808bbe1b84fad72835ba4d02512e890146a5049af6e77e02deb07ea2"
+    },
+    {
+      "path": "../tennis-v7/rig.json",
+      "sha256": "9612a8d7cbdf812b1ed24ab6f94439375e2f62f392c395d235e6185d42e70560"
+    },
+    {
+      "path": "../characters2/LICENSES.md",
+      "sha256": "a7edc21136766bc6f9edf8e7eea46931a3c4b38197a245a8b49f76f1e45c1edc"
+    }
+  ],
+  "fans": [
+    {
+      "age": 8,
+      "heightM": 1.24,
+      "presentation": "boy",
+      "skin": "#C88E68",
+      "hair": "#2B211D",
+      "shirt": "#225D75",
+      "trouserColor": "#343C49",
+      "accent": "#F2CB69",
+      "build": 0.86,
+      "shoulder": 0.92,
+      "faceWidth": 0.97,
+      "hairStyle": "crop",
+      "cap": true,
+      "scarf": false,
+      "glasses": false,
+      "sleeve": "short",
+      "pants": "shorts",
+      "id": "fan-01",
+      "label": "אוהד/ת 01",
+      "designHeritage": "mixed European / West Asian",
+      "nose": 0.84,
+      "shirtPattern": "plain",
+      "headToHeightRatio": 6.049,
+      "wardrobe": [
+        "plain team shirt",
+        "shorts",
+        "cap"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-01-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 195,
+          "bytes": 55888,
+          "sha256": "7fb0514c7e1eb7801e5f9d912f6570a0f300d4c6cc4e8a524a3a0df1751557c6",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-01-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49736,
+          "sha256": "fb6a1f431b2e39948ce8216b99715b86e5cbd0646a557960a5256974811b6b7e",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-01-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46252,
+          "sha256": "e44ab2fda175aabc29cb7232dc2e7f3234fd01079c26d4e677ca4aa455752173",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.6386000000000001,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.6386000000000001,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            0.7626,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12399999999999989,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            0.8865999999999999,
+            -0.00496
+          ],
+          "translation": [
+            0.0,
+            0.124,
+            -0.00496
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.004,
+            -0.01116
+          ],
+          "translation": [
+            0.0,
+            0.11740000000000006,
+            -0.0062
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.1047,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.10070000000000001,
+            0.01116
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.1277696,
+            0.9858,
+            0
+          ],
+          "translation": [
+            0.1277696,
+            0.09920000000000007,
+            0.00496
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.3261696,
+            0.97712,
+            0
+          ],
+          "translation": [
+            0.1984,
+            -0.008680000000000021,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.5096896,
+            0.96844,
+            0.0062
+          ],
+          "translation": [
+            0.18351999999999996,
+            -0.008680000000000021,
+            0.0062
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.1277696,
+            0.9858,
+            0
+          ],
+          "translation": [
+            -0.1277696,
+            0.09920000000000007,
+            0.00496
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.3261696,
+            0.97712,
+            0
+          ],
+          "translation": [
+            -0.1984,
+            -0.008680000000000021,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.5096896,
+            0.96844,
+            0.0062
+          ],
+          "translation": [
+            -0.18351999999999996,
+            -0.008680000000000021,
+            0.0062
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.06448,
+            0.6386000000000001,
+            0
+          ],
+          "translation": [
+            0.06448,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.06944,
+            0.3534,
+            0.00992
+          ],
+          "translation": [
+            0.004960000000000006,
+            -0.28520000000000006,
+            0.00992
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.06944,
+            0.06448,
+            -0.00992
+          ],
+          "translation": [
+            0.0,
+            -0.28892,
+            -0.01984
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.06448,
+            0.6386000000000001,
+            0
+          ],
+          "translation": [
+            -0.06448,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.06944,
+            0.3534,
+            0.00992
+          ],
+          "translation": [
+            -0.004960000000000006,
+            -0.28520000000000006,
+            0.00992
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.06944,
+            0.06448,
+            -0.00992
+          ],
+          "translation": [
+            0.0,
+            -0.28892,
+            -0.01984
+          ]
+        }
+      ]
+    },
+    {
+      "age": 11,
+      "heightM": 1.43,
+      "presentation": "girl",
+      "skin": "#79513D",
+      "hair": "#211D20",
+      "shirt": "#BB674F",
+      "trouserColor": "#344B56",
+      "accent": "#EED9A8",
+      "build": 0.9,
+      "shoulder": 0.9,
+      "faceWidth": 1.04,
+      "hairStyle": "bun",
+      "cap": false,
+      "scarf": true,
+      "glasses": false,
+      "sleeve": "short",
+      "pants": "trousers",
+      "id": "fan-02",
+      "label": "אוהד/ת 02",
+      "designHeritage": "African diaspora",
+      "nose": 0.9149999999999999,
+      "shirtPattern": "stripes",
+      "headToHeightRatio": 6.976,
+      "wardrobe": [
+        "stripes team shirt",
+        "trousers",
+        "scarf"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-02-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 201,
+          "bytes": 56372,
+          "sha256": "7555e0ed77c19a6df4f4abb8a0b839fb98df0884d5b15be42f77920276a5ddf8",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-02-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49908,
+          "sha256": "fad54bdfdd5cec51e6010e518269b946b89e962ac97a8db8217561aee3e321e5",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-02-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46428,
+          "sha256": "12c28a2a0cf1511b671a83335fef7836606c6983352d30cfbeb1d19777b1bdfe",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.7364499999999999,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.7364499999999999,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            0.87945,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.14300000000000002,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.0224499999999999,
+            -0.00572
+          ],
+          "translation": [
+            0.0,
+            0.1429999999999999,
+            -0.00572
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.18925,
+            -0.012869999999999998
+          ],
+          "translation": [
+            0.0,
+            0.16680000000000006,
+            -0.0071499999999999975
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.2947,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.10545000000000004,
+            0.012869999999999998
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.144144,
+            1.13685,
+            0
+          ],
+          "translation": [
+            0.144144,
+            0.11440000000000006,
+            0.00572
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.372944,
+            1.1268399999999998,
+            0
+          ],
+          "translation": [
+            0.2288,
+            -0.010010000000000074,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.584584,
+            1.11683,
+            0.00715
+          ],
+          "translation": [
+            0.21164,
+            -0.010009999999999852,
+            0.00715
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.144144,
+            1.13685,
+            0
+          ],
+          "translation": [
+            -0.144144,
+            0.11440000000000006,
+            0.00572
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.372944,
+            1.1268399999999998,
+            0
+          ],
+          "translation": [
+            -0.2288,
+            -0.010010000000000074,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.584584,
+            1.11683,
+            0.00715
+          ],
+          "translation": [
+            -0.21164,
+            -0.010009999999999852,
+            0.00715
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.07436,
+            0.7364499999999999,
+            0
+          ],
+          "translation": [
+            0.07436,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.08008,
+            0.40754999999999997,
+            0.01144
+          ],
+          "translation": [
+            0.005720000000000003,
+            -0.32889999999999997,
+            0.01144
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.08008,
+            0.07436,
+            -0.01144
+          ],
+          "translation": [
+            0.0,
+            -0.33319,
+            -0.02288
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.07436,
+            0.7364499999999999,
+            0
+          ],
+          "translation": [
+            -0.07436,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.08008,
+            0.40754999999999997,
+            0.01144
+          ],
+          "translation": [
+            -0.005720000000000003,
+            -0.32889999999999997,
+            0.01144
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.08008,
+            0.07436,
+            -0.01144
+          ],
+          "translation": [
+            0.0,
+            -0.33319,
+            -0.02288
+          ]
+        }
+      ]
+    },
+    {
+      "age": 15,
+      "heightM": 1.67,
+      "presentation": "boy",
+      "skin": "#E3B994",
+      "hair": "#5E3B29",
+      "shirt": "#C7A658",
+      "trouserColor": "#334A48",
+      "accent": "#F5E7CC",
+      "build": 0.9,
+      "shoulder": 0.96,
+      "faceWidth": 0.96,
+      "hairStyle": "crop",
+      "cap": false,
+      "scarf": true,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-03",
+      "label": "אוהד/ת 03",
+      "designHeritage": "European",
+      "nose": 0.99,
+      "shirtPattern": "chest_band",
+      "headToHeightRatio": 7.389,
+      "wardrobe": [
+        "chest_band team shirt",
+        "trousers",
+        "scarf",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-03-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 197,
+          "bytes": 56308,
+          "sha256": "8c565c8f3b0eb78d67c56a2b9c883940921e65da2cef7fb7c0bc60c6199a51d6",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-03-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50052,
+          "sha256": "729243d2674e834ef7da174fd35d180eafc2845b87da4c6fff7d7714ffc8a332",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-03-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46572,
+          "sha256": "ed10782722b56ae7ad0d51db09a0eac758edfe5d0f3bc699ae2bb80b0dc91ada",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.86005,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.86005,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.02705,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16700000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1940499999999998,
+            -0.00668
+          ],
+          "translation": [
+            0.0,
+            0.16699999999999982,
+            -0.00668
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.40225,
+            -0.015029999999999998
+          ],
+          "translation": [
+            0.0,
+            0.20820000000000016,
+            -0.008349999999999998
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.52084,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.11858999999999997,
+            0.015029999999999998
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.17955839999999998,
+            1.32765,
+            0
+          ],
+          "translation": [
+            0.17955839999999998,
+            0.13360000000000016,
+            0.00668
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.4467584,
+            1.31596,
+            0
+          ],
+          "translation": [
+            0.2672,
+            -0.011689999999999978,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6939184,
+            1.30427,
+            0.00835
+          ],
+          "translation": [
+            0.24716000000000005,
+            -0.011689999999999978,
+            0.00835
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.17955839999999998,
+            1.32765,
+            0
+          ],
+          "translation": [
+            -0.17955839999999998,
+            0.13360000000000016,
+            0.00668
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.4467584,
+            1.31596,
+            0
+          ],
+          "translation": [
+            -0.2672,
+            -0.011689999999999978,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6939184,
+            1.30427,
+            0.00835
+          ],
+          "translation": [
+            -0.24716000000000005,
+            -0.011689999999999978,
+            0.00835
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08683999999999999,
+            0.86005,
+            0
+          ],
+          "translation": [
+            0.08683999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09351999999999999,
+            0.47594999999999993,
+            0.01336
+          ],
+          "translation": [
+            0.006680000000000005,
+            -0.38410000000000005,
+            0.01336
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09351999999999999,
+            0.08683999999999999,
+            -0.01336
+          ],
+          "translation": [
+            0.0,
+            -0.38910999999999996,
+            -0.02672
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08683999999999999,
+            0.86005,
+            0
+          ],
+          "translation": [
+            -0.08683999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09351999999999999,
+            0.47594999999999993,
+            0.01336
+          ],
+          "translation": [
+            -0.006680000000000005,
+            -0.38410000000000005,
+            0.01336
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09351999999999999,
+            0.08683999999999999,
+            -0.01336
+          ],
+          "translation": [
+            0.0,
+            -0.38910999999999996,
+            -0.02672
+          ]
+        }
+      ]
+    },
+    {
+      "age": 17,
+      "heightM": 1.64,
+      "presentation": "girl",
+      "skin": "#A87751",
+      "hair": "#262223",
+      "shirt": "#316F66",
+      "trouserColor": "#283B45",
+      "accent": "#E8D6AC",
+      "build": 0.92,
+      "shoulder": 0.92,
+      "faceWidth": 0.99,
+      "hairStyle": "bun",
+      "cap": false,
+      "scarf": false,
+      "glasses": false,
+      "sleeve": "short",
+      "pants": "trousers",
+      "id": "fan-04",
+      "label": "אוהד/ת 04",
+      "designHeritage": "East Asian",
+      "nose": 1.065,
+      "shirtPattern": "raglan",
+      "headToHeightRatio": 7.257,
+      "wardrobe": [
+        "raglan team shirt",
+        "trousers"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-04-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 193,
+          "bytes": 56188,
+          "sha256": "842f88d4d2bcce3ed5bb2e16071ce16d33e81b98e4b5d52082b90138b95a5749",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-04-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50140,
+          "sha256": "de1acebf0d10dac483c6e6d038d429a3f0c826ae32d273a1287b7965adaff5e2",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-04-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46660,
+          "sha256": "1f938f6964b2ccce3542290055e0c55a87d40d97bfc7ea89f26d5e1278902da8",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8446,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8446,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0086,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16399999999999992,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1725999999999999,
+            -0.00656
+          ],
+          "translation": [
+            0.0,
+            0.16399999999999992,
+            -0.00656
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.373,
+            -0.014759999999999999
+          ],
+          "translation": [
+            0.0,
+            0.20040000000000013,
+            -0.008199999999999999
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.49084,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.11783999999999994,
+            0.014759999999999999
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.16898559999999999,
+            1.3038,
+            0
+          ],
+          "translation": [
+            0.16898559999999999,
+            0.1312000000000002,
+            0.00656
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.4313855999999999,
+            1.2923200000000001,
+            0
+          ],
+          "translation": [
+            0.26239999999999997,
+            -0.011479999999999935,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6741055999999999,
+            1.28084,
+            0.008199999999999999
+          ],
+          "translation": [
+            0.24271999999999994,
+            -0.011480000000000157,
+            0.008199999999999999
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.16898559999999999,
+            1.3038,
+            0
+          ],
+          "translation": [
+            -0.16898559999999999,
+            0.1312000000000002,
+            0.00656
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.4313855999999999,
+            1.2923200000000001,
+            0
+          ],
+          "translation": [
+            -0.26239999999999997,
+            -0.011479999999999935,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6741055999999999,
+            1.28084,
+            0.008199999999999999
+          ],
+          "translation": [
+            -0.24271999999999994,
+            -0.011480000000000157,
+            0.008199999999999999
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08528,
+            0.8446,
+            0
+          ],
+          "translation": [
+            0.08528,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09183999999999999,
+            0.4673999999999999,
+            0.01312
+          ],
+          "translation": [
+            0.006559999999999996,
+            -0.3772000000000001,
+            0.01312
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09183999999999999,
+            0.08528,
+            -0.01312
+          ],
+          "translation": [
+            0.0,
+            -0.3821199999999999,
+            -0.02624
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08528,
+            0.8446,
+            0
+          ],
+          "translation": [
+            -0.08528,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09183999999999999,
+            0.4673999999999999,
+            0.01312
+          ],
+          "translation": [
+            -0.006559999999999996,
+            -0.3772000000000001,
+            0.01312
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09183999999999999,
+            0.08528,
+            -0.01312
+          ],
+          "translation": [
+            0.0,
+            -0.3821199999999999,
+            -0.02624
+          ]
+        }
+      ]
+    },
+    {
+      "age": 23,
+      "heightM": 1.83,
+      "presentation": "man",
+      "skin": "#573A30",
+      "hair": "#211C1B",
+      "shirt": "#34617C",
+      "trouserColor": "#323746",
+      "accent": "#E9C774",
+      "build": 1.04,
+      "shoulder": 1.05,
+      "faceWidth": 1.05,
+      "hairStyle": "curls",
+      "cap": false,
+      "scarf": true,
+      "glasses": false,
+      "sleeve": "short",
+      "pants": "shorts",
+      "id": "fan-05",
+      "label": "אוהד/ת 05",
+      "designHeritage": "African diaspora",
+      "nose": 1.14,
+      "shirtPattern": "plain",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "plain team shirt",
+        "shorts",
+        "scarf"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-05-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 197,
+          "bytes": 56296,
+          "sha256": "57e3ec12dec00bdacdf1f06e84d50cdddadf4d5a6a0362e81163d406673b4466",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-05-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50040,
+          "sha256": "8b4ade70976ea7243709963178d5a9b73f3f2bc495478fda901266cadfde88cd",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-05-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46560,
+          "sha256": "7111b5ddfa670cbb5e0ae81d52149f80f809170d9d2323769fd6ebc1f99bc977",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.94245,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.94245,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.12545,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.18300000000000005,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.30845,
+            -0.00732
+          ],
+          "translation": [
+            0.0,
+            0.18299999999999983,
+            -0.00732
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.5386124161073826,
+            -0.01647
+          ],
+          "translation": [
+            0.0,
+            0.23016241610738275,
+            -0.009149999999999998
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.6678791946308724,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12926677852348978,
+            0.01647
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.215208,
+            1.4548500000000002,
+            0
+          ],
+          "translation": [
+            0.215208,
+            0.1464000000000003,
+            0.00732
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.508008,
+            1.4420400000000002,
+            0
+          ],
+          "translation": [
+            0.2928,
+            -0.012809999999999988,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.778848,
+            1.4292300000000002,
+            0.00915
+          ],
+          "translation": [
+            0.27083999999999997,
+            -0.012809999999999988,
+            0.00915
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.215208,
+            1.4548500000000002,
+            0
+          ],
+          "translation": [
+            -0.215208,
+            0.1464000000000003,
+            0.00732
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.508008,
+            1.4420400000000002,
+            0
+          ],
+          "translation": [
+            -0.2928,
+            -0.012809999999999988,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.778848,
+            1.4292300000000002,
+            0.00915
+          ],
+          "translation": [
+            -0.27083999999999997,
+            -0.012809999999999988,
+            0.00915
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.09516,
+            0.94245,
+            0
+          ],
+          "translation": [
+            0.09516,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.10248,
+            0.52155,
+            0.01464
+          ],
+          "translation": [
+            0.007320000000000007,
+            -0.42090000000000005,
+            0.01464
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.10248,
+            0.09516,
+            -0.01464
+          ],
+          "translation": [
+            0.0,
+            -0.42638999999999994,
+            -0.02928
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.09516,
+            0.94245,
+            0
+          ],
+          "translation": [
+            -0.09516,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.10248,
+            0.52155,
+            0.01464
+          ],
+          "translation": [
+            -0.007320000000000007,
+            -0.42090000000000005,
+            0.01464
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.10248,
+            0.09516,
+            -0.01464
+          ],
+          "translation": [
+            0.0,
+            -0.42638999999999994,
+            -0.02928
+          ]
+        }
+      ]
+    },
+    {
+      "age": 27,
+      "heightM": 1.72,
+      "presentation": "woman",
+      "skin": "#DDA882",
+      "hair": "#42302A",
+      "shirt": "#E0C785",
+      "trouserColor": "#3B4854",
+      "accent": "#315B70",
+      "build": 0.97,
+      "shoulder": 0.96,
+      "faceWidth": 0.96,
+      "hairStyle": "bun",
+      "cap": false,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "short",
+      "pants": "trousers",
+      "id": "fan-06",
+      "label": "אוהד/ת 06",
+      "designHeritage": "West Asian",
+      "nose": 0.84,
+      "shirtPattern": "stripes",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "stripes team shirt",
+        "trousers",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-06-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 193,
+          "bytes": 56016,
+          "sha256": "d4008140406b4b2128ae0e989d8f8e6c707ec96758cccf19f7e7e17ab7488c9d",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-06-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49972,
+          "sha256": "fbe00cef68ab1fee9d65d43065acd4a933cb356149ce8d9873019de356afaee9",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-06-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46492,
+          "sha256": "db7352a27579e86d1f8a493e4a08c32bd672e29d807b0c011de185153e851c33",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8858,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8858,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0578,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.17200000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.2298,
+            -0.00688
+          ],
+          "translation": [
+            0.0,
+            0.17199999999999993,
+            -0.00688
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.4461275167785235,
+            -0.015479999999999999
+          ],
+          "translation": [
+            0.0,
+            0.21632751677852347,
+            -0.0086
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.5676241610738253,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12149664429530183,
+            0.015479999999999999
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.1849344,
+            1.3674,
+            0
+          ],
+          "translation": [
+            0.1849344,
+            0.13759999999999994,
+            0.00688
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.4601344,
+            1.35536,
+            0
+          ],
+          "translation": [
+            0.2752,
+            -0.01204000000000005,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.7146944,
+            1.3433199999999998,
+            0.0086
+          ],
+          "translation": [
+            0.25455999999999995,
+            -0.01204000000000005,
+            0.0086
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.1849344,
+            1.3674,
+            0
+          ],
+          "translation": [
+            -0.1849344,
+            0.13759999999999994,
+            0.00688
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.4601344,
+            1.35536,
+            0
+          ],
+          "translation": [
+            -0.2752,
+            -0.01204000000000005,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.7146944,
+            1.3433199999999998,
+            0.0086
+          ],
+          "translation": [
+            -0.25455999999999995,
+            -0.01204000000000005,
+            0.0086
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08943999999999999,
+            0.8858,
+            0
+          ],
+          "translation": [
+            0.08943999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09632,
+            0.49019999999999997,
+            0.01376
+          ],
+          "translation": [
+            0.006880000000000011,
+            -0.39560000000000006,
+            0.01376
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09632,
+            0.08943999999999999,
+            -0.01376
+          ],
+          "translation": [
+            0.0,
+            -0.40076,
+            -0.02752
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08943999999999999,
+            0.8858,
+            0
+          ],
+          "translation": [
+            -0.08943999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09632,
+            0.49019999999999997,
+            0.01376
+          ],
+          "translation": [
+            -0.006880000000000011,
+            -0.39560000000000006,
+            0.01376
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09632,
+            0.08943999999999999,
+            -0.01376
+          ],
+          "translation": [
+            0.0,
+            -0.40076,
+            -0.02752
+          ]
+        }
+      ]
+    },
+    {
+      "age": 31,
+      "heightM": 1.76,
+      "presentation": "man",
+      "skin": "#B47B51",
+      "hair": "#231F20",
+      "shirt": "#B05C4B",
+      "trouserColor": "#354647",
+      "accent": "#E9D8AC",
+      "build": 1.12,
+      "shoulder": 1.03,
+      "faceWidth": 1.03,
+      "hairStyle": "crop",
+      "cap": true,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "short",
+      "pants": "trousers",
+      "id": "fan-07",
+      "label": "אוהד/ת 07",
+      "designHeritage": "South Asian",
+      "nose": 0.9149999999999999,
+      "shirtPattern": "chest_band",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "chest_band team shirt",
+        "trousers",
+        "cap",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-07-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 195,
+          "bytes": 55992,
+          "sha256": "2057fe090bcf7536d68f178702411395bc7d6cf88bc6f0be8724528c4f61f63a",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-07-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49840,
+          "sha256": "7cfbb0f2e8b8ce865447c551011f2528a3c3e1cd64bfef70650cd122a9af73a5",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-07-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46360,
+          "sha256": "ac89dfe7df3596a579036c8f1000d3202a7825982d37b2cd791b493f7b6e7271",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.9064,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.9064,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0824,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.17600000000000005,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.2584,
+            -0.00704
+          ],
+          "translation": [
+            0.0,
+            0.17599999999999993,
+            -0.00704
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.479758389261745,
+            -0.01584
+          ],
+          "translation": [
+            0.0,
+            0.221358389261745,
+            -0.008799999999999999
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.6040805369127518,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.1243221476510068,
+            0.01584
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.20303360000000004,
+            1.3992,
+            0
+          ],
+          "translation": [
+            0.20303360000000004,
+            0.14080000000000004,
+            0.00704
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.48463360000000005,
+            1.38688,
+            0
+          ],
+          "translation": [
+            0.2816,
+            -0.012320000000000109,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.7451136,
+            1.37456,
+            0.0088
+          ],
+          "translation": [
+            0.26048,
+            -0.012319999999999887,
+            0.0088
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.20303360000000004,
+            1.3992,
+            0
+          ],
+          "translation": [
+            -0.20303360000000004,
+            0.14080000000000004,
+            0.00704
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.48463360000000005,
+            1.38688,
+            0
+          ],
+          "translation": [
+            -0.2816,
+            -0.012320000000000109,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.7451136,
+            1.37456,
+            0.0088
+          ],
+          "translation": [
+            -0.26048,
+            -0.012319999999999887,
+            0.0088
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.09151999999999999,
+            0.9064,
+            0
+          ],
+          "translation": [
+            0.09151999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09856000000000001,
+            0.5015999999999999,
+            0.01408
+          ],
+          "translation": [
+            0.0070400000000000185,
+            -0.40480000000000005,
+            0.01408
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09856000000000001,
+            0.09151999999999999,
+            -0.01408
+          ],
+          "translation": [
+            0.0,
+            -0.41007999999999994,
+            -0.02816
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.09151999999999999,
+            0.9064,
+            0
+          ],
+          "translation": [
+            -0.09151999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09856000000000001,
+            0.5015999999999999,
+            0.01408
+          ],
+          "translation": [
+            -0.0070400000000000185,
+            -0.40480000000000005,
+            0.01408
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09856000000000001,
+            0.09151999999999999,
+            -0.01408
+          ],
+          "translation": [
+            0.0,
+            -0.41007999999999994,
+            -0.02816
+          ]
+        }
+      ]
+    },
+    {
+      "age": 34,
+      "heightM": 1.68,
+      "presentation": "woman",
+      "skin": "#8B5D43",
+      "hair": "#272023",
+      "shirt": "#315D75",
+      "trouserColor": "#D0B695",
+      "accent": "#EBD594",
+      "build": 1.07,
+      "shoulder": 0.96,
+      "faceWidth": 1.06,
+      "hairStyle": "curls",
+      "cap": false,
+      "scarf": true,
+      "glasses": false,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-08",
+      "label": "אוהד/ת 08",
+      "designHeritage": "mixed Latin American",
+      "nose": 0.99,
+      "shirtPattern": "raglan",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "raglan team shirt",
+        "trousers",
+        "scarf"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-08-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 197,
+          "bytes": 56476,
+          "sha256": "6a19cee60cc8eb06d6336268f7db7d775b908873bc5947fee3989adf5d96a195",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-08-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50224,
+          "sha256": "9d08fb2b21cf3a703a9f32dab68401f7afca9bc19bbaaed2dd6416fad57ff419",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-08-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46740,
+          "sha256": "8972a777a30931448dd368da282853e93e0df31a02cd61f98c2b00a52e2cf3b7",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8652,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8652,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0332,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16799999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.2011999999999998,
+            -0.00672
+          ],
+          "translation": [
+            0.0,
+            0.16799999999999993,
+            -0.00672
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.412496644295302,
+            -0.015119999999999998
+          ],
+          "translation": [
+            0.0,
+            0.21129664429530215,
+            -0.008399999999999998
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.5311677852348993,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.1186711409395973,
+            0.015119999999999998
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.18063359999999998,
+            1.3356000000000001,
+            0
+          ],
+          "translation": [
+            0.18063359999999998,
+            0.1344000000000003,
+            0.00672
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.4494336,
+            1.3238400000000001,
+            0
+          ],
+          "translation": [
+            0.26880000000000004,
+            -0.011759999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6980736,
+            1.3120800000000001,
+            0.0084
+          ],
+          "translation": [
+            0.24863999999999997,
+            -0.011759999999999993,
+            0.0084
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.18063359999999998,
+            1.3356000000000001,
+            0
+          ],
+          "translation": [
+            -0.18063359999999998,
+            0.1344000000000003,
+            0.00672
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.4494336,
+            1.3238400000000001,
+            0
+          ],
+          "translation": [
+            -0.26880000000000004,
+            -0.011759999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6980736,
+            1.3120800000000001,
+            0.0084
+          ],
+          "translation": [
+            -0.24863999999999997,
+            -0.011759999999999993,
+            0.0084
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08736,
+            0.8652,
+            0
+          ],
+          "translation": [
+            0.08736,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09408,
+            0.47879999999999995,
+            0.01344
+          ],
+          "translation": [
+            0.006720000000000004,
+            -0.3864,
+            0.01344
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09408,
+            0.08736,
+            -0.01344
+          ],
+          "translation": [
+            0.0,
+            -0.39143999999999995,
+            -0.02688
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08736,
+            0.8652,
+            0
+          ],
+          "translation": [
+            -0.08736,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09408,
+            0.47879999999999995,
+            0.01344
+          ],
+          "translation": [
+            -0.006720000000000004,
+            -0.3864,
+            0.01344
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09408,
+            0.08736,
+            -0.01344
+          ],
+          "translation": [
+            0.0,
+            -0.39143999999999995,
+            -0.02688
+          ]
+        }
+      ]
+    },
+    {
+      "age": 39,
+      "heightM": 1.89,
+      "presentation": "man",
+      "skin": "#EAC5A4",
+      "hair": "#735441",
+      "shirt": "#3C7268",
+      "trouserColor": "#33404B",
+      "accent": "#E8CC86",
+      "build": 0.98,
+      "shoulder": 1.04,
+      "faceWidth": 0.98,
+      "hairStyle": "crop",
+      "cap": false,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-09",
+      "label": "אוהד/ת 09",
+      "designHeritage": "European",
+      "nose": 1.065,
+      "shirtPattern": "plain",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "plain team shirt",
+        "trousers",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-09-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 189,
+          "bytes": 55836,
+          "sha256": "eb4c8021520fd3263e49b0ee79e6e3e6ce95b0c3f8eba3e798571840176ce994",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-09-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49996,
+          "sha256": "55d192302f7fdc4a3d68bb21b9500b956697d42d40788d17482e30c216d3b93b",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-09-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46516,
+          "sha256": "69d24dedcde4d686f379db12e2fc865bab02f691d54b524f79ebe6791a882d67",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.9733499999999999,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.9733499999999999,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.16235,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.18900000000000006,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.3513499999999998,
+            -0.00756
+          ],
+          "translation": [
+            0.0,
+            0.18899999999999983,
+            -0.00756
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.5890587248322148,
+            -0.017009999999999997
+          ],
+          "translation": [
+            0.0,
+            0.23770872483221495,
+            -0.009449999999999997
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.7225637583892617,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.1335050335570469,
+            0.017009999999999997
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.22014720000000002,
+            1.50255,
+            0
+          ],
+          "translation": [
+            0.22014720000000002,
+            0.15120000000000022,
+            0.00756
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.5225472,
+            1.48932,
+            0
+          ],
+          "translation": [
+            0.3024,
+            -0.013230000000000075,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.8022672,
+            1.4760900000000001,
+            0.00945
+          ],
+          "translation": [
+            0.27971999999999997,
+            -0.013229999999999853,
+            0.00945
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.22014720000000002,
+            1.50255,
+            0
+          ],
+          "translation": [
+            -0.22014720000000002,
+            0.15120000000000022,
+            0.00756
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.5225472,
+            1.48932,
+            0
+          ],
+          "translation": [
+            -0.3024,
+            -0.013230000000000075,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.8022672,
+            1.4760900000000001,
+            0.00945
+          ],
+          "translation": [
+            -0.27971999999999997,
+            -0.013229999999999853,
+            0.00945
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.09827999999999999,
+            0.9733499999999999,
+            0
+          ],
+          "translation": [
+            0.09827999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.10584,
+            0.53865,
+            0.01512
+          ],
+          "translation": [
+            0.007560000000000011,
+            -0.4347,
+            0.01512
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.10584,
+            0.09827999999999999,
+            -0.01512
+          ],
+          "translation": [
+            0.0,
+            -0.44037,
+            -0.03024
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.09827999999999999,
+            0.9733499999999999,
+            0
+          ],
+          "translation": [
+            -0.09827999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.10584,
+            0.53865,
+            0.01512
+          ],
+          "translation": [
+            -0.007560000000000011,
+            -0.4347,
+            0.01512
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.10584,
+            0.09827999999999999,
+            -0.01512
+          ],
+          "translation": [
+            0.0,
+            -0.44037,
+            -0.03024
+          ]
+        }
+      ]
+    },
+    {
+      "age": 43,
+      "heightM": 1.61,
+      "presentation": "woman",
+      "skin": "#684735",
+      "hair": "#282021",
+      "shirt": "#B99A53",
+      "trouserColor": "#3E4951",
+      "accent": "#F0E3BC",
+      "build": 1.15,
+      "shoulder": 0.98,
+      "faceWidth": 1.07,
+      "hairStyle": "bun",
+      "cap": false,
+      "scarf": true,
+      "glasses": false,
+      "sleeve": "short",
+      "pants": "trousers",
+      "id": "fan-10",
+      "label": "אוהד/ת 10",
+      "designHeritage": "African diaspora",
+      "nose": 1.14,
+      "shirtPattern": "stripes",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "stripes team shirt",
+        "trousers",
+        "scarf"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-10-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 201,
+          "bytes": 56412,
+          "sha256": "b40e956d7b2cfdae616c4e689e0141c4824623b35b3ce5b00a5a1548bcbe7681",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-10-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49948,
+          "sha256": "297bce5ef0bcba288f23bc2daa5ddf6a5336298c1ddfcf9ff22efa52654a831f",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-10-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46468,
+          "sha256": "37a0df758b69bd2ea36866059279d413eb0f3ec1e7c507a2c761a1930eb6da62",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.82915,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.82915,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            0.9901500000000001,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16100000000000003,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1511500000000001,
+            -0.00644
+          ],
+          "translation": [
+            0.0,
+            0.16100000000000003,
+            -0.00644
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.3536426174496645,
+            -0.01449
+          ],
+          "translation": [
+            0.0,
+            0.2024926174496644,
+            -0.008049999999999998
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.4673691275167786,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.1137265100671141,
+            0.01449
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.1767136,
+            1.2799500000000001,
+            0
+          ],
+          "translation": [
+            0.1767136,
+            0.12880000000000003,
+            0.00644
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.43431359999999997,
+            1.2686800000000003,
+            0
+          ],
+          "translation": [
+            0.25759999999999994,
+            -0.011269999999999891,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6725935999999999,
+            1.2574100000000001,
+            0.00805
+          ],
+          "translation": [
+            0.23827999999999994,
+            -0.011270000000000113,
+            0.00805
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.1767136,
+            1.2799500000000001,
+            0
+          ],
+          "translation": [
+            -0.1767136,
+            0.12880000000000003,
+            0.00644
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.43431359999999997,
+            1.2686800000000003,
+            0
+          ],
+          "translation": [
+            -0.25759999999999994,
+            -0.011269999999999891,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6725935999999999,
+            1.2574100000000001,
+            0.00805
+          ],
+          "translation": [
+            -0.23827999999999994,
+            -0.011270000000000113,
+            0.00805
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08372,
+            0.82915,
+            0
+          ],
+          "translation": [
+            0.08372,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09016,
+            0.45885,
+            0.01288
+          ],
+          "translation": [
+            0.006440000000000001,
+            -0.3703000000000001,
+            0.01288
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09016,
+            0.08372,
+            -0.01288
+          ],
+          "translation": [
+            0.0,
+            -0.37512999999999996,
+            -0.02576
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08372,
+            0.82915,
+            0
+          ],
+          "translation": [
+            -0.08372,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09016,
+            0.45885,
+            0.01288
+          ],
+          "translation": [
+            -0.006440000000000001,
+            -0.3703000000000001,
+            0.01288
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09016,
+            0.08372,
+            -0.01288
+          ],
+          "translation": [
+            0.0,
+            -0.37512999999999996,
+            -0.02576
+          ]
+        }
+      ]
+    },
+    {
+      "age": 48,
+      "heightM": 1.79,
+      "presentation": "man",
+      "skin": "#BE8A64",
+      "hair": "#54473F",
+      "shirt": "#D2C5AC",
+      "trouserColor": "#3E5361",
+      "accent": "#A75449",
+      "build": 1.18,
+      "shoulder": 1.07,
+      "faceWidth": 1.04,
+      "hairStyle": "crop",
+      "cap": true,
+      "scarf": true,
+      "glasses": false,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-11",
+      "label": "אוהד/ת 11",
+      "designHeritage": "West Asian",
+      "nose": 0.84,
+      "shirtPattern": "chest_band",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "chest_band team shirt",
+        "trousers",
+        "scarf",
+        "cap"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-11-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 203,
+          "bytes": 56496,
+          "sha256": "c630bd6039e494830eedfe33849fc7ffb21c159dcc24466fe203e6a019237044",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-11-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 49924,
+          "sha256": "5c07c3b61b0c6f4ec6649ace78964ae4a7ac9fbae8852f945de26aa55d4531b8",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-11-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46444,
+          "sha256": "524b145edd9a833116ca416882838d60297a506d9b67c11dac0a05e23db5acb3",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.9218500000000001,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.9218500000000001,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.10085,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.17900000000000005,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.27985,
+            -0.0071600000000000006
+          ],
+          "translation": [
+            0.0,
+            0.17899999999999983,
+            -0.0071600000000000006
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.5049815436241611,
+            -0.01611
+          ],
+          "translation": [
+            0.0,
+            0.2251315436241612,
+            -0.00895
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.6314228187919464,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12644127516778525,
+            0.01611
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.21451360000000003,
+            1.4230500000000001,
+            0
+          ],
+          "translation": [
+            0.21451360000000003,
+            0.14320000000000022,
+            0.0071600000000000006
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.5009136000000001,
+            1.4105200000000002,
+            0
+          ],
+          "translation": [
+            0.28640000000000004,
+            -0.01252999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.7658336000000001,
+            1.39799,
+            0.00895
+          ],
+          "translation": [
+            0.26492000000000004,
+            -0.012530000000000152,
+            0.00895
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.21451360000000003,
+            1.4230500000000001,
+            0
+          ],
+          "translation": [
+            -0.21451360000000003,
+            0.14320000000000022,
+            0.0071600000000000006
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.5009136000000001,
+            1.4105200000000002,
+            0
+          ],
+          "translation": [
+            -0.28640000000000004,
+            -0.01252999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.7658336000000001,
+            1.39799,
+            0.00895
+          ],
+          "translation": [
+            -0.26492000000000004,
+            -0.012530000000000152,
+            0.00895
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.09308,
+            0.9218500000000001,
+            0
+          ],
+          "translation": [
+            0.09308,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.10024000000000001,
+            0.51015,
+            0.014320000000000001
+          ],
+          "translation": [
+            0.007160000000000014,
+            -0.41170000000000007,
+            0.014320000000000001
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.10024000000000001,
+            0.09308,
+            -0.014320000000000001
+          ],
+          "translation": [
+            0.0,
+            -0.41707,
+            -0.028640000000000002
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.09308,
+            0.9218500000000001,
+            0
+          ],
+          "translation": [
+            -0.09308,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.10024000000000001,
+            0.51015,
+            0.014320000000000001
+          ],
+          "translation": [
+            -0.007160000000000014,
+            -0.41170000000000007,
+            0.014320000000000001
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.10024000000000001,
+            0.09308,
+            -0.014320000000000001
+          ],
+          "translation": [
+            0.0,
+            -0.41707,
+            -0.028640000000000002
+          ]
+        }
+      ]
+    },
+    {
+      "age": 54,
+      "heightM": 1.65,
+      "presentation": "woman",
+      "skin": "#D3AB83",
+      "hair": "#6E5B4E",
+      "shirt": "#A65D4E",
+      "trouserColor": "#43464C",
+      "accent": "#E9D5A0",
+      "build": 1.08,
+      "shoulder": 0.97,
+      "faceWidth": 1.0,
+      "hairStyle": "crop",
+      "cap": false,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-12",
+      "label": "אוהד/ת 12",
+      "designHeritage": "East Asian",
+      "nose": 0.9149999999999999,
+      "shirtPattern": "raglan",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "raglan team shirt",
+        "trousers",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-12-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 189,
+          "bytes": 55984,
+          "sha256": "7edd274c78eed0b358cf6fd5bf3965144430ad83121455ae353048d42f7e4337",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-12-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50144,
+          "sha256": "6404de2d040260bcf2ee16dcccff09e83ba76b3d2ce705344e941a8fee8fe13f",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-12-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46660,
+          "sha256": "8159c18b47581732a25dd45038c6a539c77d33785928e8b01357ebf3b7b80241",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.84975,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.84975,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.01475,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16500000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1797499999999999,
+            -0.0066
+          ],
+          "translation": [
+            0.0,
+            0.1649999999999998,
+            -0.0066
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.3872734899328858,
+            -0.014849999999999999
+          ],
+          "translation": [
+            0.0,
+            0.20752348993288594,
+            -0.008249999999999999
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.5038255033557046,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.11655201342281885,
+            0.014849999999999999
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.179256,
+            1.31175,
+            0
+          ],
+          "translation": [
+            0.179256,
+            0.13200000000000012,
+            0.0066
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.443256,
+            1.3002,
+            0
+          ],
+          "translation": [
+            0.264,
+            -0.01154999999999995,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.687456,
+            1.28865,
+            0.00825
+          ],
+          "translation": [
+            0.24419999999999997,
+            -0.01154999999999995,
+            0.00825
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.179256,
+            1.31175,
+            0
+          ],
+          "translation": [
+            -0.179256,
+            0.13200000000000012,
+            0.0066
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.443256,
+            1.3002,
+            0
+          ],
+          "translation": [
+            -0.264,
+            -0.01154999999999995,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.687456,
+            1.28865,
+            0.00825
+          ],
+          "translation": [
+            -0.24419999999999997,
+            -0.01154999999999995,
+            0.00825
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08579999999999999,
+            0.84975,
+            0
+          ],
+          "translation": [
+            0.08579999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.0924,
+            0.47024999999999995,
+            0.0132
+          ],
+          "translation": [
+            0.006600000000000009,
+            -0.37950000000000006,
+            0.0132
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.0924,
+            0.08579999999999999,
+            -0.0132
+          ],
+          "translation": [
+            0.0,
+            -0.38444999999999996,
+            -0.0264
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08579999999999999,
+            0.84975,
+            0
+          ],
+          "translation": [
+            -0.08579999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.0924,
+            0.47024999999999995,
+            0.0132
+          ],
+          "translation": [
+            -0.006600000000000009,
+            -0.37950000000000006,
+            0.0132
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.0924,
+            0.08579999999999999,
+            -0.0132
+          ],
+          "translation": [
+            0.0,
+            -0.38444999999999996,
+            -0.0264
+          ]
+        }
+      ]
+    },
+    {
+      "age": 61,
+      "heightM": 1.74,
+      "presentation": "man",
+      "skin": "#8F654B",
+      "hair": "#8A8177",
+      "shirt": "#2F6370",
+      "trouserColor": "#544D46",
+      "accent": "#E1C275",
+      "build": 1.06,
+      "shoulder": 1.03,
+      "faceWidth": 1.05,
+      "hairStyle": "crop",
+      "cap": false,
+      "scarf": true,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-13",
+      "label": "אוהד/ת 13",
+      "designHeritage": "South Asian",
+      "nose": 0.99,
+      "shirtPattern": "plain",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "plain team shirt",
+        "trousers",
+        "scarf",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-13-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 197,
+          "bytes": 56608,
+          "sha256": "efc64a091f7bb22e4795120f8be7d6390daaadd553a18d479fe2c5ea66c6a4a1",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-13-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50352,
+          "sha256": "baf10e504f01b22c7d6e23c272467eb06a62eb9b3681534ba71d0ab12934b8eb",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-13-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46872,
+          "sha256": "6c4ff408ad8dad66913c5415d47a98215976f75efcbc818038a15dad913408a6",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8961,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8961,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0701,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.17400000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.2441,
+            -0.00696
+          ],
+          "translation": [
+            0.0,
+            0.17399999999999993,
+            -0.00696
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.462942953020134,
+            -0.01566
+          ],
+          "translation": [
+            0.0,
+            0.21884295302013412,
+            -0.0087
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.5858523489932885,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12290939597315442,
+            0.01566
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.2007264,
+            1.3833,
+            0
+          ],
+          "translation": [
+            0.2007264,
+            0.1392,
+            0.00696
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.47912639999999995,
+            1.37112,
+            0
+          ],
+          "translation": [
+            0.2784,
+            -0.01218000000000008,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.7366463999999999,
+            1.35894,
+            0.0087
+          ],
+          "translation": [
+            0.25751999999999997,
+            -0.012179999999999858,
+            0.0087
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.2007264,
+            1.3833,
+            0
+          ],
+          "translation": [
+            -0.2007264,
+            0.1392,
+            0.00696
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.47912639999999995,
+            1.37112,
+            0
+          ],
+          "translation": [
+            -0.2784,
+            -0.01218000000000008,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.7366463999999999,
+            1.35894,
+            0.0087
+          ],
+          "translation": [
+            -0.25751999999999997,
+            -0.012179999999999858,
+            0.0087
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.09047999999999999,
+            0.8961,
+            0
+          ],
+          "translation": [
+            0.09047999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09744,
+            0.49589999999999995,
+            0.01392
+          ],
+          "translation": [
+            0.006960000000000008,
+            -0.40020000000000006,
+            0.01392
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09744,
+            0.09047999999999999,
+            -0.01392
+          ],
+          "translation": [
+            0.0,
+            -0.40541999999999995,
+            -0.02784
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.09047999999999999,
+            0.8961,
+            0
+          ],
+          "translation": [
+            -0.09047999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09744,
+            0.49589999999999995,
+            0.01392
+          ],
+          "translation": [
+            -0.006960000000000008,
+            -0.40020000000000006,
+            0.01392
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09744,
+            0.09047999999999999,
+            -0.01392
+          ],
+          "translation": [
+            0.0,
+            -0.40541999999999995,
+            -0.02784
+          ]
+        }
+      ]
+    },
+    {
+      "age": 67,
+      "heightM": 1.58,
+      "presentation": "woman",
+      "skin": "#E2BA9B",
+      "hair": "#B7ADA0",
+      "shirt": "#C4A761",
+      "trouserColor": "#3B4D56",
+      "accent": "#376B68",
+      "build": 1.13,
+      "shoulder": 0.97,
+      "faceWidth": 0.98,
+      "hairStyle": "bun",
+      "cap": false,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-14",
+      "label": "אוהד/ת 14",
+      "designHeritage": "European",
+      "nose": 1.065,
+      "shirtPattern": "stripes",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "stripes team shirt",
+        "trousers",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-14-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 193,
+          "bytes": 56416,
+          "sha256": "531fe4a11cad78a824e1347d38264f8811f703f20039e7abf1bf936c3436c034",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-14-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50368,
+          "sha256": "5da22da13612c88a68aa3485139d497e6bd3eca9d8b13ece04b8d1bbdafd4798",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-14-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46888,
+          "sha256": "34aae394b9fc0462ebc6212b850a0fc11abdf966471d835ca7f18cefc36880cd",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8137000000000001,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8137000000000001,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            0.9717,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.15799999999999992,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1297,
+            -0.00632
+          ],
+          "translation": [
+            0.0,
+            0.15799999999999992,
+            -0.00632
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.3284194630872483,
+            -0.01422
+          ],
+          "translation": [
+            0.0,
+            0.19871946308724842,
+            -0.0079
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.440026845637584,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.11160738255033564,
+            0.01422
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.1716512,
+            1.2561000000000002,
+            0
+          ],
+          "translation": [
+            0.1716512,
+            0.1264000000000003,
+            0.00632
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.42445120000000003,
+            1.2450400000000001,
+            0
+          ],
+          "translation": [
+            0.2528,
+            -0.01106000000000007,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6582912000000001,
+            1.2339800000000003,
+            0.0079
+          ],
+          "translation": [
+            0.23384000000000005,
+            -0.011059999999999848,
+            0.0079
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.1716512,
+            1.2561000000000002,
+            0
+          ],
+          "translation": [
+            -0.1716512,
+            0.1264000000000003,
+            0.00632
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.42445120000000003,
+            1.2450400000000001,
+            0
+          ],
+          "translation": [
+            -0.2528,
+            -0.01106000000000007,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6582912000000001,
+            1.2339800000000003,
+            0.0079
+          ],
+          "translation": [
+            -0.23384000000000005,
+            -0.011059999999999848,
+            0.0079
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08216,
+            0.8137000000000001,
+            0
+          ],
+          "translation": [
+            0.08216,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.08848,
+            0.4503,
+            0.01264
+          ],
+          "translation": [
+            0.006320000000000006,
+            -0.3634000000000001,
+            0.01264
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.08848,
+            0.08216,
+            -0.01264
+          ],
+          "translation": [
+            0.0,
+            -0.36813999999999997,
+            -0.02528
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08216,
+            0.8137000000000001,
+            0
+          ],
+          "translation": [
+            -0.08216,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.08848,
+            0.4503,
+            0.01264
+          ],
+          "translation": [
+            -0.006320000000000006,
+            -0.3634000000000001,
+            0.01264
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.08848,
+            0.08216,
+            -0.01264
+          ],
+          "translation": [
+            0.0,
+            -0.36813999999999997,
+            -0.02528
+          ]
+        }
+      ]
+    },
+    {
+      "age": 73,
+      "heightM": 1.7,
+      "presentation": "man",
+      "skin": "#65493A",
+      "hair": "#AAA59A",
+      "shirt": "#3C7063",
+      "trouserColor": "#4C4B49",
+      "accent": "#EBDAB2",
+      "build": 0.99,
+      "shoulder": 0.98,
+      "faceWidth": 1.06,
+      "hairStyle": "crop",
+      "cap": true,
+      "scarf": false,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-15",
+      "label": "אוהד/ת 15",
+      "designHeritage": "African diaspora",
+      "nose": 1.14,
+      "shirtPattern": "chest_band",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "chest_band team shirt",
+        "trousers",
+        "cap",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-15-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 195,
+          "bytes": 56328,
+          "sha256": "f65944175ab791e4db19aac6de6760b23785eebd0a0c25f80749c6d97707de97",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-15-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50180,
+          "sha256": "b8e476611d0e7ad0922b484e6f3101b332513f4434b1bb1bb8f6d7c9d9b3c6db",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-15-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 46696,
+          "sha256": "901153fb93b383f8ea798b8c5094f0ef5d8e6de509146eaff79306bc569dbe7b",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8755,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8755,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            1.0454999999999999,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.16999999999999993,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.2155,
+            -0.0068
+          ],
+          "translation": [
+            0.0,
+            0.17000000000000015,
+            -0.0068
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.4293120805369128,
+            -0.015299999999999998
+          ],
+          "translation": [
+            0.0,
+            0.2138120805369128,
+            -0.008499999999999997
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.5493959731543625,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.12008389261744967,
+            0.015299999999999998
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.18659199999999998,
+            1.3515,
+            0
+          ],
+          "translation": [
+            0.18659199999999998,
+            0.1359999999999999,
+            0.0068
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.458592,
+            1.3396,
+            0
+          ],
+          "translation": [
+            0.272,
+            -0.011900000000000022,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.7101919999999999,
+            1.3276999999999999,
+            0.0085
+          ],
+          "translation": [
+            0.25159999999999993,
+            -0.011900000000000022,
+            0.0085
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.18659199999999998,
+            1.3515,
+            0
+          ],
+          "translation": [
+            -0.18659199999999998,
+            0.1359999999999999,
+            0.0068
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.458592,
+            1.3396,
+            0
+          ],
+          "translation": [
+            -0.272,
+            -0.011900000000000022,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.7101919999999999,
+            1.3276999999999999,
+            0.0085
+          ],
+          "translation": [
+            -0.25159999999999993,
+            -0.011900000000000022,
+            0.0085
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08839999999999999,
+            0.8755,
+            0
+          ],
+          "translation": [
+            0.08839999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.09519999999999999,
+            0.48449999999999993,
+            0.0136
+          ],
+          "translation": [
+            0.0068000000000000005,
+            -0.391,
+            0.0136
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.09519999999999999,
+            0.08839999999999999,
+            -0.0136
+          ],
+          "translation": [
+            0.0,
+            -0.39609999999999995,
+            -0.0272
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08839999999999999,
+            0.8755,
+            0
+          ],
+          "translation": [
+            -0.08839999999999999,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.09519999999999999,
+            0.48449999999999993,
+            0.0136
+          ],
+          "translation": [
+            -0.0068000000000000005,
+            -0.391,
+            0.0136
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.09519999999999999,
+            0.08839999999999999,
+            -0.0136
+          ],
+          "translation": [
+            0.0,
+            -0.39609999999999995,
+            -0.0272
+          ]
+        }
+      ]
+    },
+    {
+      "age": 79,
+      "heightM": 1.56,
+      "presentation": "woman",
+      "skin": "#BA8E6B",
+      "hair": "#D5CEC0",
+      "shirt": "#AF6554",
+      "trouserColor": "#3B4853",
+      "accent": "#E8C96F",
+      "build": 1.04,
+      "shoulder": 0.94,
+      "faceWidth": 1.01,
+      "hairStyle": "crop",
+      "cap": false,
+      "scarf": true,
+      "glasses": true,
+      "sleeve": "long",
+      "pants": "trousers",
+      "id": "fan-16",
+      "label": "אוהד/ת 16",
+      "designHeritage": "mixed Latin American",
+      "nose": 0.84,
+      "shirtPattern": "raglan",
+      "headToHeightRatio": 7.45,
+      "wardrobe": [
+        "raglan team shirt",
+        "trousers",
+        "scarf",
+        "glasses"
+      ],
+      "lods": [
+        {
+          "file": "models/fan-16-lod0.glb",
+          "lod": 0,
+          "triangles": 210,
+          "vertices": 197,
+          "bytes": 56752,
+          "sha256": "8194fd447f2c2e611a0853d9bd75d9bd57912d5058d6662d6a1ad9cadc9bbc3f",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-16-lod1.glb",
+          "lod": 1,
+          "triangles": 90,
+          "vertices": 91,
+          "bytes": 50496,
+          "sha256": "b80f22a069f7ad5f4d1b632f07fcff4b0d06c4a1c8b0b289266b80a69840dbc8",
+          "drawCalls": 1
+        },
+        {
+          "file": "models/fan-16-lod2.glb",
+          "lod": 2,
+          "triangles": 24,
+          "vertices": 32,
+          "bytes": 47016,
+          "sha256": "c7700d801558f5cb3b4185c6d6f58829a56699c3dc7bdd40cbaaf46310e37b1f",
+          "drawCalls": 1
+        }
+      ],
+      "rig": [
+        {
+          "name": "Root",
+          "parent": null,
+          "world": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "Hips",
+          "parent": "Root",
+          "world": [
+            0,
+            0.8034,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.8034,
+            0.0
+          ]
+        },
+        {
+          "name": "Spine",
+          "parent": "Hips",
+          "world": [
+            0,
+            0.9594,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.15600000000000003,
+            0.0
+          ]
+        },
+        {
+          "name": "Chest",
+          "parent": "Spine",
+          "world": [
+            0,
+            1.1154,
+            -0.006240000000000001
+          ],
+          "translation": [
+            0.0,
+            0.15599999999999992,
+            -0.006240000000000001
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "Chest",
+          "world": [
+            0,
+            1.3116040268456377,
+            -0.014039999999999999
+          ],
+          "translation": [
+            0.0,
+            0.19620402684563776,
+            -0.007799999999999998
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "world": [
+            0,
+            1.4217986577181208,
+            0
+          ],
+          "translation": [
+            0.0,
+            0.11019463087248305,
+            0.014039999999999999
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "parent": "Chest",
+          "world": [
+            0.16423680000000002,
+            1.2402000000000002,
+            0
+          ],
+          "translation": [
+            0.16423680000000002,
+            0.12480000000000024,
+            0.006240000000000001
+          ]
+        },
+        {
+          "name": "LeftForeArm",
+          "parent": "LeftArm",
+          "world": [
+            0.4138368,
+            1.2292800000000002,
+            0
+          ],
+          "translation": [
+            0.2496,
+            -0.01092000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftHand",
+          "parent": "LeftForeArm",
+          "world": [
+            0.6447168,
+            1.21836,
+            0.0078000000000000005
+          ],
+          "translation": [
+            0.23087999999999997,
+            -0.01092000000000004,
+            0.0078000000000000005
+          ]
+        },
+        {
+          "name": "RightArm",
+          "parent": "Chest",
+          "world": [
+            -0.16423680000000002,
+            1.2402000000000002,
+            0
+          ],
+          "translation": [
+            -0.16423680000000002,
+            0.12480000000000024,
+            0.006240000000000001
+          ]
+        },
+        {
+          "name": "RightForeArm",
+          "parent": "RightArm",
+          "world": [
+            -0.4138368,
+            1.2292800000000002,
+            0
+          ],
+          "translation": [
+            -0.2496,
+            -0.01092000000000004,
+            0.0
+          ]
+        },
+        {
+          "name": "RightHand",
+          "parent": "RightForeArm",
+          "world": [
+            -0.6447168,
+            1.21836,
+            0.0078000000000000005
+          ],
+          "translation": [
+            -0.23087999999999997,
+            -0.01092000000000004,
+            0.0078000000000000005
+          ]
+        },
+        {
+          "name": "LeftUpLeg",
+          "parent": "Hips",
+          "world": [
+            0.08112,
+            0.8034,
+            0
+          ],
+          "translation": [
+            0.08112,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "parent": "LeftUpLeg",
+          "world": [
+            0.08736000000000001,
+            0.4446,
+            0.012480000000000002
+          ],
+          "translation": [
+            0.006240000000000009,
+            -0.3588,
+            0.012480000000000002
+          ]
+        },
+        {
+          "name": "LeftFoot",
+          "parent": "LeftLeg",
+          "world": [
+            0.08736000000000001,
+            0.08112,
+            -0.012480000000000002
+          ],
+          "translation": [
+            0.0,
+            -0.36348,
+            -0.024960000000000003
+          ]
+        },
+        {
+          "name": "RightUpLeg",
+          "parent": "Hips",
+          "world": [
+            -0.08112,
+            0.8034,
+            0
+          ],
+          "translation": [
+            -0.08112,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "parent": "RightUpLeg",
+          "world": [
+            -0.08736000000000001,
+            0.4446,
+            0.012480000000000002
+          ],
+          "translation": [
+            -0.006240000000000009,
+            -0.3588,
+            0.012480000000000002
+          ]
+        },
+        {
+          "name": "RightFoot",
+          "parent": "RightLeg",
+          "world": [
+            -0.08736000000000001,
+            0.08112,
+            -0.012480000000000002
+          ],
+          "translation": [
+            0.0,
+            -0.36348,
+            -0.024960000000000003
+          ]
+        }
+      ]
+    }
+  ],
+  "packageBytes": 5230890
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>קהל אנושי · כדורגל v2</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="preview.css">
+<script type="module" src="preview.js"></script>
+<body>
+  <header><strong>האנשים ביציע <span>02</span></strong><p>16 מראות · שבע תנועות · בלי סמלים</p><output id="budget">טוען…</output></header>
+  <main id="stage">
+    <canvas id="view" aria-label="תצוגת תלת־ממד של האוהדים. גרירה או החצים מסובבים את הדמות." tabindex="0"></canvas>
+    <div class="caption detail"><span>מבט קרוב</span><b id="identity"></b><small id="details"></small></div>
+    <div class="caption roster"><span>ביציע</span><small id="motion-note">קנה מידה אנושי · מופעים עצמאיים</small></div>
+    <p id="error" role="alert" hidden></p>
+    <p id="loading" role="status">מכינים את היציע…</p>
+  </main>
+  <footer>
+    <div class="controls">
+      <label>תנועה<select id="motion" aria-label="בחירת תנועה"></select></label>
+      <label>רמת פירוט<select id="lod" aria-label="רמת פירוט"><option value="0">210 · קרוב</option><option value="1">90 · ביניים</option><option value="2">24 · רחוק</option></select></label>
+      <button id="play" aria-label="עצירת האנימציה" aria-pressed="true">עצירה</button>
+      <button id="focus" aria-pressed="false">פנים</button>
+      <label class="timeline">זמן<input id="time" type="range" min="0" max="1" step="0.001" value="0" aria-label="מיקום בלולאה"></label>
+    </div>
+    <nav id="fans" aria-label="בחירת אוהד למבט קרוב"></nav>
+  </footer>
+</body>
+</html>

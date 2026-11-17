@@ -1,0 +1,1983 @@
+{
+  "validatorVersion": "2.0.0-dev.3.10",
+  "pass": true,
+  "models": 16,
+  "glbs": 48,
+  "clipsPerGLB": 7,
+  "triangleBudgets": [
+    210,
+    90,
+    24
+  ],
+  "glbBytes": 2447312,
+  "assets": [
+    {
+      "file": "models/fan-01-lod0.glb",
+      "triangles": 210,
+      "bytes": 55888,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 7.539142532486665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-01-lod1.glb",
+      "triangles": 90,
+      "bytes": 49736,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 7.539142532486665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-01-lod2.glb",
+      "triangles": 24,
+      "bytes": 46252,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 7.539142532486665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-02-lod0.glb",
+      "triangles": 210,
+      "bytes": 56372,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.019358084723535e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 3.241247592544738e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.1693825109389024e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 8.818448971048554e-9
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 3.724567576579574e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.0601120687711045e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-02-lod1.glb",
+      "triangles": 90,
+      "bytes": 49908,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.019358084723535e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 3.241247592544738e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.1693825109389024e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 8.818448971048554e-9
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 3.724567576579574e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.0601120687711045e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-02-lod2.glb",
+      "triangles": 24,
+      "bytes": 46428,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.019358084723535e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 3.241247592544738e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.1693825109389024e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 8.818448971048554e-9
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 3.724567576579574e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.0601120687711045e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-03-lod0.glb",
+      "triangles": 210,
+      "bytes": 56308,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.9366394911108955e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-03-lod1.glb",
+      "triangles": 90,
+      "bytes": 50052,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.9366394911108955e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-03-lod2.glb",
+      "triangles": 24,
+      "bytes": 46572,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.9366394911108955e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-04-lod0.glb",
+      "triangles": 210,
+      "bytes": 56188,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 5.4183294961873685e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.267997399942658e-9
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-04-lod1.glb",
+      "triangles": 90,
+      "bytes": 50140,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 5.4183294961873685e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.267997399942658e-9
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-04-lod2.glb",
+      "triangles": 24,
+      "bytes": 46660,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 5.4183294961873685e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.267997399942658e-9
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.387455592753554e-9
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 2.649144548172444e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.0988643651141956e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 2.168816748415736e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.271726832845047e-9
+        }
+      ]
+    },
+    {
+      "file": "models/fan-05-lod0.glb",
+      "triangles": 210,
+      "bytes": 56296,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.2861537480630716e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 1.2763113899083578e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.7627555415344887e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.664464354180552e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-05-lod1.glb",
+      "triangles": 90,
+      "bytes": 50040,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.2861537480630716e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 1.2763113899083578e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.7627555415344887e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.664464354180552e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-05-lod2.glb",
+      "triangles": 24,
+      "bytes": 46560,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.2861537480630716e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 1.2763113899083578e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.7627555415344887e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.664464354180552e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-06-lod0.glb",
+      "triangles": 210,
+      "bytes": 56016,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.308735140374665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-06-lod1.glb",
+      "triangles": 90,
+      "bytes": 49972,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.308735140374665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-06-lod2.glb",
+      "triangles": 24,
+      "bytes": 46492,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.308735140374665e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-07-lod0.glb",
+      "triangles": 210,
+      "bytes": 55992,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.708025331228271e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.694220017726792e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-07-lod1.glb",
+      "triangles": 90,
+      "bytes": 49840,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.708025331228271e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.694220017726792e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-07-lod2.glb",
+      "triangles": 24,
+      "bytes": 46360,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.708025331228271e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 5.694220017726792e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-08-lod0.glb",
+      "triangles": 210,
+      "bytes": 56476,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.547781939923112e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-08-lod1.glb",
+      "triangles": 90,
+      "bytes": 50224,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.547781939923112e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-08-lod2.glb",
+      "triangles": 24,
+      "bytes": 46740,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.547781939923112e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.113546160309454e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.0653934057767174e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 4.0772954568168984e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 6.222761039786917e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.183057395439448e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-09-lod0.glb",
+      "triangles": 210,
+      "bytes": 55836,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.581897183886241e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.9232480436292008e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.847724672212394e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.222290939104312e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.020097182395489e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-09-lod1.glb",
+      "triangles": 90,
+      "bytes": 49996,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.581897183886241e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.9232480436292008e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.847724672212394e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.222290939104312e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.020097182395489e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-09-lod2.glb",
+      "triangles": 24,
+      "bytes": 46516,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 4.581897183886241e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 2.9232480436292008e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 3.847724672212394e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.222290939104312e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 5.020097182395489e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-10-lod0.glb",
+      "triangles": 210,
+      "bytes": 56412,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.619892080004462e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.324093666989825e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-10-lod1.glb",
+      "triangles": 90,
+      "bytes": 49948,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.619892080004462e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.324093666989825e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-10-lod2.glb",
+      "triangles": 24,
+      "bytes": 46468,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.619892080004462e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.324093666989825e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-11-lod0.glb",
+      "triangles": 210,
+      "bytes": 56496,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.5009585674927735e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 2.6240544848121772e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.098890971082625e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.8823980929560946e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 2.4034453316446047e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.256612839981244e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 1.415090111756001e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-11-lod1.glb",
+      "triangles": 90,
+      "bytes": 49924,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.5009585674927735e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 2.6240544848121772e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.098890971082625e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.8823980929560946e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 2.4034453316446047e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.256612839981244e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 1.415090111756001e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-11-lod2.glb",
+      "triangles": 24,
+      "bytes": 46444,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.5009585674927735e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 2.6240544848121772e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.098890971082625e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.8823980929560946e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 2.4034453316446047e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.256612839981244e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 1.415090111756001e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-12-lod0.glb",
+      "triangles": 210,
+      "bytes": 55984,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.5262416219741226e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-12-lod1.glb",
+      "triangles": 90,
+      "bytes": 50144,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.5262416219741226e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-12-lod2.glb",
+      "triangles": 24,
+      "bytes": 46660,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.5262416219741226e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-13-lod0.glb",
+      "triangles": 210,
+      "bytes": 56608,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.7599200359016436e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.400013914856004e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-13-lod1.glb",
+      "triangles": 90,
+      "bytes": 50352,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.7599200359016436e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.400013914856004e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-13-lod2.glb",
+      "triangles": 24,
+      "bytes": 46872,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.7599200359016436e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.400013914856004e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.248138729678885e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 1.4873635323375822e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.216095123548257e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 7.273028734822162e-9
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 2.61484962571501e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-14-lod0.glb",
+      "triangles": 210,
+      "bytes": 56416,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.9678080276364085e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-14-lod1.glb",
+      "triangles": 90,
+      "bytes": 50368,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.9678080276364085e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-14-lod2.glb",
+      "triangles": 24,
+      "bytes": 46888,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 1.9678080276364085e-8
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 6.418680698061507e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 4.174294954140123e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 4.746532855648411e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-15-lod0.glb",
+      "triangles": 210,
+      "bytes": 56328,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.7185687862262284e-10
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-15-lod1.glb",
+      "triangles": 90,
+      "bytes": 50180,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.7185687862262284e-10
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-15-lod2.glb",
+      "triangles": 24,
+      "bytes": 46696,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 3.422854177870249e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 3.7185687862262284e-10
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 4.2065716243655515e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 5.5137740262445334e-8
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 1.1081228157294731e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 0
+        }
+      ]
+    },
+    {
+      "file": "models/fan-16-lod0.glb",
+      "triangles": 210,
+      "bytes": 56752,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.0522633693029775e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.052317320064503e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.3828512435718494e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 5.087906851386492e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.0934375727653673e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-16-lod1.glb",
+      "triangles": 90,
+      "bytes": 50496,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.0522633693029775e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.052317320064503e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.3828512435718494e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 5.087906851386492e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.0934375727653673e-8
+        }
+      ]
+    },
+    {
+      "file": "models/fan-16-lod2.glb",
+      "triangles": 24,
+      "bytes": 47016,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "infos": 0,
+        "messages": []
+      },
+      "seams": [
+        {
+          "clip": "sit",
+          "maximumEndpointError": 4.0522633693029775e-8
+        },
+        {
+          "clip": "stand",
+          "maximumEndpointError": 0
+        },
+        {
+          "clip": "clap",
+          "maximumEndpointError": 5.052317320064503e-8
+        },
+        {
+          "clip": "jump_cheer",
+          "maximumEndpointError": 8.495907533045965e-9
+        },
+        {
+          "clip": "disappointed",
+          "maximumEndpointError": 3.3828512435718494e-8
+        },
+        {
+          "clip": "shout",
+          "maximumEndpointError": 5.087906851386492e-8
+        },
+        {
+          "clip": "wave_clap",
+          "maximumEndpointError": 3.0934375727653673e-8
+        }
+      ]
+    }
+  ]
+}
