@@ -1,0 +1,129 @@
+/* Reusable HUD styles. Physical positions are deliberate, including in RTL. */
+.tennis-v2 {
+  --ink:#173f36; --deep:#102e29; --cream:#f5efdc; --brass:#d4bf82;
+  --safe-left:env(safe-area-inset-left,0px); --safe-right:env(safe-area-inset-right,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px); --safe-top:env(safe-area-inset-top,0px);
+  position:relative; isolation:isolate; width:100%; height:390px; overflow:hidden;
+  color:var(--cream); font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--deep); direction:ltr;
+}
+.tennis-v2 *, .tennis-v2 *::before, .tennis-v2 *::after { box-sizing:border-box; }
+.tennis-v2 [hidden] { display:none!important; }
+.tennis-v2 .court { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.tennis-v2 .game-heading {
+  position:absolute; left:calc(24px + var(--safe-left)); top:calc(21px + var(--safe-top));
+  direction:rtl; text-align:left; border-left:2px solid var(--brass); padding-left:12px;
+  pointer-events:none;
+}
+.tennis-v2 .eyebrow { font-size:10px; letter-spacing:.08em; color:var(--brass); }
+.tennis-v2 .game-heading strong { display:block; font-weight:600; font-size:17px; margin-top:4px; }
+.tennis-v2 .score {
+  position:absolute; top:calc(20px + var(--safe-top)); left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:17px; direction:ltr; pointer-events:none;
+}
+.tennis-v2 .score b { font-size:27px; font-weight:500; line-height:1; font-variant-numeric:tabular-nums; }
+.tennis-v2 .score i { width:1px; height:20px; background:#f5efdc50; }
+.tennis-v2 .score small { display:block; font-size:9px; text-align:center; margin-top:7px; opacity:.7; }
+.tennis-v2 .phase-pill {
+  position:absolute; right:calc(22px + var(--safe-right)); top:calc(24px + var(--safe-top));
+  border:1px solid #d4bf825c; border-radius:20px; padding:8px 13px;
+  display:flex; align-items:center; gap:8px; background:#102e2980; direction:rtl;
+  font-size:11px; pointer-events:none;
+}
+.tennis-v2 .phase-pill::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--brass); }
+.tennis-v2 .control { position:absolute; width:56px; direction:rtl; text-align:center; z-index:4; }
+.tennis-v2 .control button {
+  display:block; width:56px; height:56px; padding:0; margin:0; border:0; border-radius:16px;
+  background:transparent; cursor:pointer; touch-action:manipulation;
+  -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent;
+}
+.tennis-v2 .control img { display:block; width:56px; height:56px; pointer-events:none; }
+.tennis-v2 .control span {
+  display:block; margin-top:5px; font-size:11px; line-height:16px; white-space:nowrap;
+  color:var(--cream); text-shadow:0 1px 4px var(--deep); pointer-events:none;
+}
+.tennis-v2 .control button:focus-visible {
+  outline:3px solid var(--cream); outline-offset:3px; box-shadow:0 0 0 6px var(--deep);
+}
+.tennis-v2 .control button:disabled { cursor:default; }
+.tennis-v2 .control:has(button:disabled) span { opacity:.6; }
+.tennis-v2 .control-slice { right:calc(248px + var(--safe-right)); bottom:calc(7px + var(--safe-bottom)); }
+.tennis-v2 .control-drop { right:calc(180px + var(--safe-right)); bottom:calc(7px + var(--safe-bottom)); }
+.tennis-v2 .control-smash { right:calc(112px + var(--safe-right)); bottom:calc(7px + var(--safe-bottom)); }
+.tennis-v2 .control-serve { right:calc(44px + var(--safe-right)); bottom:calc(7px + var(--safe-bottom)); }
+.tennis-v2 .control-placement { right:calc(76px + var(--safe-right)); top:calc(166px + var(--safe-top)); }
+.tennis-v2 .control-placement span { position:relative; left:-6px; width:68px; font-size:10px; }
+.tennis-v2 .control-brake { left:calc(24px + var(--safe-left)); bottom:calc(7px + var(--safe-bottom)); }
+.tennis-v2 .control-brake button { touch-action:none; }
+.tennis-v2 .serve-meter {
+  position:absolute; right:calc(16px + var(--safe-right)); top:calc(97px + var(--safe-top));
+  width:32px; height:176px; z-index:3; pointer-events:none;
+  transition:opacity 180ms ease, visibility 180ms; opacity:1; visibility:visible;
+}
+.tennis-v2 .meter-track { display:block; width:32px; height:176px; }
+.tennis-v2 .meter-needle { position:absolute; left:0; top:0; width:32px; height:12px; will-change:transform; }
+.tennis-v2 .lock-halo {
+  position:absolute; left:10px; top:0; width:20px; height:24px; border:2px solid var(--brass);
+  border-radius:8px; opacity:0; transform-origin:center;
+}
+.tennis-v2 .serve-meter[data-state=locked] .lock-halo { opacity:1; animation:tennis-v2-settle 220ms ease-out both; }
+.tennis-v2 .serve-meter[data-state=hidden] { opacity:0; visibility:hidden; }
+@keyframes tennis-v2-settle {
+  0% { scale:1.24 1.14; opacity:.35; }
+  55% { scale:.93 .96; opacity:1; }
+  100% { scale:1; opacity:1; }
+}
+.tennis-v2 .effect-layer { position:absolute; inset:0; z-index:2; pointer-events:none; }
+.tennis-v2 .contact-fx { position:absolute; object-fit:contain; pointer-events:none; }
+.tennis-v2 .event-copy {
+  position:absolute; top:calc(67px + var(--safe-top)); left:50%; transform:translateX(-50%);
+  font-size:13px; font-weight:650; direction:rtl; color:var(--cream);
+  padding:5px 14px; border-radius:18px; background:#102e29d9; pointer-events:none;
+  z-index:3; border:1px solid #d4bf8240;
+}
+.tennis-v2 .event-copy:empty { display:none; }
+.tennis-v2 .placement-marker {
+  position:absolute; left:50%; top:59%; width:28px; height:16px;
+  border:2px solid var(--brass); border-radius:50%; transform:translate(-50%,-50%);
+  pointer-events:none; transition:left 160ms ease; box-shadow:0 0 0 3px #102e2930;
+}
+.tennis-v2 .placement-marker::after {
+  content:""; position:absolute; left:11px; top:-6px; height:24px; width:2px; background:var(--cream); opacity:.6;
+}
+.tennis-v2 .sample-ball {
+  position:absolute; left:50%; top:63%; width:10px; height:10px; margin:-5px;
+  background:#d8df91; border:1px solid var(--cream); border-radius:50%;
+  box-shadow:2px 7px 3px #102e2945; z-index:2; pointer-events:none;
+}
+.tennis-v2 .placement-choices {
+  position:absolute; right:calc(144px + var(--safe-right)); top:calc(92px + var(--safe-top));
+  display:flex; flex-direction:column; gap:8px; z-index:5; direction:ltr;
+}
+.tennis-v2 .placement-choices button {
+  width:56px; height:56px; padding:0; border:1px solid #d4bf82aa; border-radius:16px;
+  color:var(--cream); background:#102e29ed; font:inherit; font-size:13px;
+  touch-action:manipulation; cursor:pointer;
+}
+.tennis-v2 .placement-choices button[aria-pressed=true] { background:var(--brass); color:var(--deep); }
+.tennis-v2 .placement-choices button:focus-visible { outline:3px solid var(--cream); outline-offset:3px; }
+.tennis-v2[data-paused=true] .lock-halo { animation-play-state:paused; }
+.tennis-v2[data-reduced-motion=true] .lock-halo { animation:none!important; }
+.tennis-v2[data-reduced-motion=true] .serve-meter,
+.tennis-v2[data-reduced-motion=true] .placement-marker { transition:none; }
+@media (max-width:620px) {
+  .tennis-v2 { height:520px; }
+  .tennis-v2 .score { top:84px; }
+  .tennis-v2 .serve-meter { top:148px; }
+  .tennis-v2 .control-placement { top:210px; right:calc(62px + var(--safe-right)); }
+  .tennis-v2 .control-slice { right:calc(226px + var(--safe-right)); }
+  .tennis-v2 .control-drop { right:calc(158px + var(--safe-right)); }
+  .tennis-v2 .control-smash { right:calc(90px + var(--safe-right)); }
+  .tennis-v2 .control-serve { right:calc(22px + var(--safe-right)); }
+  .tennis-v2 .control-brake { bottom:calc(100px + var(--safe-bottom)); }
+  .tennis-v2 .event-copy { top:132px; }
+  .tennis-v2 .placement-choices { right:calc(22px + var(--safe-right)); top:304px; flex-direction:row; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .tennis-v2 .lock-halo { animation:none!important; }
+  .tennis-v2 .serve-meter,.tennis-v2 .placement-marker { transition:none; }
+}

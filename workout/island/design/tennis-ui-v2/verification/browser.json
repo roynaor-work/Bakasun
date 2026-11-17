@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "chromium": "151.0.7922.173",
+  "groups": 16,
+  "checks": [
+    "Local HTTP preview opens with every asset decoded and no external network dependency",
+    "Moving pointer changes before serve",
+    "844×390: all 6 targets are 56px, unoccluded, within screen; 32×176 meter is at right edge",
+    "Disabled native buttons reject actions",
+    "Touch serve locks displayed value; settling/FX pause; meter, serve and aim cue leave after serve; hit FX expire",
+    "Placement: click, native Space, arrows, clamping, Escape/focus; RTL preserves physical left/right",
+    "Brake: hold, pointer capture and release outside, key hold/release and blur cleanup",
+    "Body Space and native Enter serve; hidden serve transfers focus to smash; rally shortcuts work",
+    "Held pointer/keyboard keep pressed artwork; release outside cancels the action and restores idle",
+    "All 5 FX expire, no looping or residual text; live text mutates once per event; out is opaque until 1500ms; active-time FX pause",
+    "Document visibility lifecycle freezes clock and resumes without catch-up",
+    "740×360, 390×844 and 320×568: no horizontal overflow, targets retain 56px",
+    "All PNG and SVG exports load in live HUD and all galleries without anchor/geometry changes",
+    "OS reduced motion: static center pointer, no settling/FX animation, finite effects, no idle animation loop",
+    "Explicit serve-end cancels lock, meter and hit cues immediately",
+    "Destroy removes listeners, timing, FX and disables inputs"
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "referenceTargets": [
+    {
+      "id": "brake",
+      "x": 24,
+      "y": 306,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    },
+    {
+      "id": "placement",
+      "x": 712,
+      "y": 166,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    },
+    {
+      "id": "slice",
+      "x": 540,
+      "y": 306,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    },
+    {
+      "id": "drop",
+      "x": 608,
+      "y": 306,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    },
+    {
+      "id": "smash",
+      "x": 676,
+      "y": 306,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    },
+    {
+      "id": "serve",
+      "x": 744,
+      "y": 306,
+      "width": 56,
+      "height": 56,
+      "hit": true
+    }
+  ],
+  "caveat": "Browser simulation only. Visibility test dispatches the documented lifecycle. No physical-phone or game integration test."
+}

@@ -1,0 +1,39 @@
+{
+  "verifiedAtUTC": "2026-11-17T11:14:57.832611+00:00",
+  "node": "v24.19.0",
+  "initialFullRun": {
+    "command": "npm test",
+    "exitCode": 1,
+    "tests": 4326,
+    "suites": 0,
+    "pass": 4261,
+    "fail": 1,
+    "cancelled": 0,
+    "skipped": 64,
+    "todo": 0,
+    "duration_ms": 792498.381893,
+    "logSHA256": "7cf7c5ddd3543bf08034387412096c75d600a5ce29d1ab24fcfce7cd1638fb8e",
+    "onlyFailure": "Existing workout-royiki browser test: bundled Playwright executable absent. Its server remained open after launch failed; the process was terminated after diagnosis."
+  },
+  "focusedRetry": {
+    "command": "ISLAND_PLAYWRIGHT=$PWD/workout/island/design/tennis-ui-v2/tools/repository-playwright.mjs CHROMIUM_PATH=/usr/bin/chromium node --test tests/workout-royiki.test.mjs",
+    "exitCode": 0,
+    "tests": 5,
+    "suites": 0,
+    "pass": 5,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "duration_ms": 28462.643297,
+    "logSHA256": "8ece2eadc5e9f185d9b01dbb5dbef615acb379efde7d8a61ab21f415fcc26d9a"
+  },
+  "effectiveCoverage": {
+    "tests": 4326,
+    "passed": 4262,
+    "skipped": 64,
+    "unresolvedFailures": 0,
+    "duplicateSuccessesExcluded": 4
+  },
+  "note": "Full baseline run plus focused retry of the only environment failure; not a second full run. No existing test or application file changed."
+}

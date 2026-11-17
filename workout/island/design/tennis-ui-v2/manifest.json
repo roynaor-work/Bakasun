@@ -1,0 +1,1121 @@
+{
+  "schemaVersion": 2,
+  "id": "tennis-ui-v2",
+  "version": "2.0.0",
+  "created": "2026-11-17",
+  "locale": "he-IL",
+  "branch": "codex/tennis-ui-v2",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "license": "CC0-1.0",
+  "styleReference": {
+    "repository": "roynaor-work/Bakasun",
+    "branch": "codex/tennis-ui-fx-v1",
+    "commit": "1861d9f488003e50bc1e7810d1e4506651c05851",
+    "path": "workout/island/design/tennis-ui-fx-v1",
+    "description": "Forest green, cream, brass, clay; warm highlights and rounded clean strokes."
+  },
+  "palette": {
+    "ink": "#173f36",
+    "deep": "#102e29",
+    "cream": "#f5efdc",
+    "brass": "#d4bf82",
+    "clay": "#b76c4c",
+    "red": "#e15c4f",
+    "redDark": "#7c322d",
+    "dust": "#e8b68b",
+    "dustLight": "#f3d4ac",
+    "lime": "#d8df91",
+    "yellow": "#e4c66b",
+    "green": "#80bf89",
+    "purple": "#b397cf"
+  },
+  "controls": [
+    {
+      "id": "serve",
+      "labelHe": "הגשה",
+      "keyboard": "Space",
+      "group": "bottom-right",
+      "states": {
+        "idle": "button-serve-idle",
+        "pressed": "button-serve-pressed",
+        "disabled": "button-serve-disabled"
+      }
+    },
+    {
+      "id": "slice",
+      "labelHe": "חיתוך",
+      "keyboard": "S",
+      "group": "bottom-right",
+      "states": {
+        "idle": "button-slice-idle",
+        "pressed": "button-slice-pressed",
+        "disabled": "button-slice-disabled"
+      }
+    },
+    {
+      "id": "drop",
+      "labelHe": "דרופ",
+      "keyboard": "D",
+      "group": "bottom-right",
+      "states": {
+        "idle": "button-drop-idle",
+        "pressed": "button-drop-pressed",
+        "disabled": "button-drop-disabled"
+      }
+    },
+    {
+      "id": "smash",
+      "labelHe": "סמאש",
+      "keyboard": "X",
+      "group": "bottom-right",
+      "states": {
+        "idle": "button-smash-idle",
+        "pressed": "button-smash-pressed",
+        "disabled": "button-smash-disabled"
+      }
+    },
+    {
+      "id": "placement",
+      "labelHe": "בחירת מיקום",
+      "keyboard": "A",
+      "group": "center-right",
+      "states": {
+        "idle": "button-placement-idle",
+        "pressed": "button-placement-pressed",
+        "disabled": "button-placement-disabled"
+      }
+    },
+    {
+      "id": "brake",
+      "labelHe": "בלימה",
+      "keyboard": "B",
+      "group": "bottom-left",
+      "states": {
+        "idle": "button-brake-idle",
+        "pressed": "button-brake-pressed",
+        "disabled": "button-brake-disabled"
+      }
+    }
+  ],
+  "meter": {
+    "states": [
+      "moving",
+      "locked",
+      "hidden"
+    ],
+    "sizePx": [
+      32,
+      176
+    ],
+    "railWidthPx": 12,
+    "trackY": [
+      14,
+      162
+    ],
+    "positionConvention": "0 = top; 1 = bottom; y = 14 + 148*p",
+    "cycleMs": 1400,
+    "travelRange": [
+      0.06,
+      0.94
+    ],
+    "settleMs": 220,
+    "lockHoldMs": 420,
+    "hideFadeMs": 180,
+    "hiddenAtMsAfterLock": 600,
+    "bands": [
+      {
+        "id": "red",
+        "ranges": [
+          [
+            0,
+            0.18
+          ],
+          [
+            0.82,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "yellow",
+        "ranges": [
+          [
+            0.18,
+            0.34
+          ],
+          [
+            0.66,
+            0.82
+          ]
+        ]
+      },
+      {
+        "id": "green",
+        "ranges": [
+          [
+            0.34,
+            0.46
+          ],
+          [
+            0.54,
+            0.66
+          ]
+        ]
+      },
+      {
+        "id": "purple",
+        "ranges": [
+          [
+            0.46,
+            0.54
+          ]
+        ]
+      }
+    ],
+    "note": "Purple is the narrow center peak; green flanks it. Bands are visual examples, not scoring rules."
+  },
+  "effects": [
+    {
+      "id": "power-serve",
+      "labelHe": "הגשה חזקה",
+      "durationMs": 460,
+      "fadeOutMs": 240,
+      "sizePx": 104,
+      "scale": [
+        0.75,
+        1.16
+      ],
+      "rotateDeg": 0,
+      "anchorSpace": "ball-contact",
+      "asset": "fx-power-serve"
+    },
+    {
+      "id": "spin",
+      "labelHe": "ספין",
+      "durationMs": 640,
+      "fadeOutMs": 280,
+      "sizePx": 88,
+      "scale": [
+        0.86,
+        1.12
+      ],
+      "rotateDeg": 32,
+      "anchorSpace": "ball-contact",
+      "asset": "fx-spin"
+    },
+    {
+      "id": "perfect-green",
+      "labelHe": "ירוק מושלם",
+      "durationMs": 700,
+      "fadeOutMs": 300,
+      "sizePx": 96,
+      "scale": [
+        0.72,
+        1.18
+      ],
+      "rotateDeg": 0,
+      "anchorSpace": "ball-contact",
+      "asset": "fx-perfect-green"
+    },
+    {
+      "id": "out",
+      "labelHe": "יצא",
+      "durationMs": 1500,
+      "fadeOutMs": 0,
+      "sizePx": 52,
+      "scale": [
+        1,
+        1
+      ],
+      "rotateDeg": 0,
+      "anchorSpace": "court-contact",
+      "asset": "fx-out"
+    },
+    {
+      "id": "net",
+      "labelHe": "רשת",
+      "durationMs": 900,
+      "fadeOutMs": 220,
+      "sizePx": 78,
+      "scale": [
+        0.92,
+        1.02
+      ],
+      "rotateDeg": 0,
+      "anchorSpace": "net-contact",
+      "asset": "fx-net"
+    }
+  ],
+  "assets": [
+    {
+      "id": "button-serve-idle",
+      "svg": {
+        "path": "svg/buttons/button-serve-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 971,
+        "sha256": "e86c6f6ad523ebf3512c037eb87fa55f989e5b9cab01e082551cd4c755fbb3f6"
+      },
+      "png": {
+        "path": "png/buttons/button-serve-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8854,
+        "sha256": "3f40d9b061a5443a65a904c596c14dd23c1156d2e1592f5a098006e3f1b23190"
+      },
+      "role": "button",
+      "control": "serve",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-serve-pressed",
+      "svg": {
+        "path": "svg/buttons/button-serve-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 1018,
+        "sha256": "846e8589345a39e60e5ab28ac4dbea455e9e9d81c542eb7fe2fd6fa90b7d9051"
+      },
+      "png": {
+        "path": "png/buttons/button-serve-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8650,
+        "sha256": "7a74c2a0ad7700ddac94ab33b6571c5639d04c604c970e5723588b5343714b6a"
+      },
+      "role": "button",
+      "control": "serve",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-serve-disabled",
+      "svg": {
+        "path": "svg/buttons/button-serve-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 921,
+        "sha256": "0ed38bd9f1643accb295001e8b4c68b35a4155b0a62431254a93ab6ee6635cdb"
+      },
+      "png": {
+        "path": "png/buttons/button-serve-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8337,
+        "sha256": "d965e22dce6b8677255bf4f41995cd132d04a365630eb87d70ca74b9e98ee28e"
+      },
+      "role": "button",
+      "control": "serve",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-slice-idle",
+      "svg": {
+        "path": "svg/buttons/button-slice-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 840,
+        "sha256": "500d0e6ef342218db251585a682ad0d61edb4b317092770a32d71a77b829de9a"
+      },
+      "png": {
+        "path": "png/buttons/button-slice-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8052,
+        "sha256": "d26fd8e75eb4f5545ac816b039794d155340afb0fd26f7bce2d3c8ed647b7eac"
+      },
+      "role": "button",
+      "control": "slice",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-slice-pressed",
+      "svg": {
+        "path": "svg/buttons/button-slice-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 887,
+        "sha256": "c12724089f9fdb361bdd32677b5731d9c478a46313aa5980c1ec864a2ac40bec"
+      },
+      "png": {
+        "path": "png/buttons/button-slice-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8056,
+        "sha256": "cde95ac093847e0b136cd18904335935d2053a988f140059d8199adc44a37fbb"
+      },
+      "role": "button",
+      "control": "slice",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-slice-disabled",
+      "svg": {
+        "path": "svg/buttons/button-slice-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 863,
+        "sha256": "9c1e7cef1a23794684423d319b82f224a589d9709a82782750fbdb051b8a7e71"
+      },
+      "png": {
+        "path": "png/buttons/button-slice-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 8200,
+        "sha256": "82d0d4400f8e96cf9b8549ec928c2b4b25c72f12d0f6afe02fe8541b4f47929f"
+      },
+      "role": "button",
+      "control": "slice",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-drop-idle",
+      "svg": {
+        "path": "svg/buttons/button-drop-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 847,
+        "sha256": "4a13049d23b28ece9d71d2902c8c2ec8c17a95fc112a519ffaa84b66d9842c86"
+      },
+      "png": {
+        "path": "png/buttons/button-drop-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 6890,
+        "sha256": "a3359179e9321932949a7507e5f929b66a5f7a08303259b6b8dc5746619cc084"
+      },
+      "role": "button",
+      "control": "drop",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-drop-pressed",
+      "svg": {
+        "path": "svg/buttons/button-drop-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 894,
+        "sha256": "7531498f1b49326bab08cffa542ee9cfbd0f0ec15c555a92aff2f62a08a10194"
+      },
+      "png": {
+        "path": "png/buttons/button-drop-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 6839,
+        "sha256": "8582b77a5fb1ff5f56d375c00d47202ec0c101d73badb3acc2035c84ee1ccd34"
+      },
+      "role": "button",
+      "control": "drop",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-drop-disabled",
+      "svg": {
+        "path": "svg/buttons/button-drop-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 870,
+        "sha256": "9708ae5fe5613d6c5e19c5bf78796c9a8b1ce5e3574eed2219b1d687ca289cee"
+      },
+      "png": {
+        "path": "png/buttons/button-drop-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 6883,
+        "sha256": "b98e57f803f92cb0e4a9e72fe1d3e624c9752044d54e620a5736a9dd6824b68e"
+      },
+      "role": "button",
+      "control": "drop",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-smash-idle",
+      "svg": {
+        "path": "svg/buttons/button-smash-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 643,
+        "sha256": "ddba6c2275fb7b4c268975c23a18aa15161da8da873f865d59d90d38e9aad481"
+      },
+      "png": {
+        "path": "png/buttons/button-smash-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 6855,
+        "sha256": "fd5635464135a18d34072a3d8fb1d01b466ff0419d716683e601f0f912e247ff"
+      },
+      "role": "button",
+      "control": "smash",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-smash-pressed",
+      "svg": {
+        "path": "svg/buttons/button-smash-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 690,
+        "sha256": "92e9fee010f8dbd26c22aef4c8d24f4c4fed4ef44f87a088e25a1638160d14a6"
+      },
+      "png": {
+        "path": "png/buttons/button-smash-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7100,
+        "sha256": "359e5c39a727cafe22b904c01531ad147b930f507f9df5691d2670a004b3a7ef"
+      },
+      "role": "button",
+      "control": "smash",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-smash-disabled",
+      "svg": {
+        "path": "svg/buttons/button-smash-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 666,
+        "sha256": "d6bc6934bd896126ef514333cc8f6490adabce718564f05b45d1b4c7c0cafbcf"
+      },
+      "png": {
+        "path": "png/buttons/button-smash-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7177,
+        "sha256": "efa926c11d5cb0bbacff736b18671f025bf3a28d8dd310b469ea19f1e35cff62"
+      },
+      "role": "button",
+      "control": "smash",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-placement-idle",
+      "svg": {
+        "path": "svg/buttons/button-placement-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 666,
+        "sha256": "2cdba7d511112c9b5de581fcb208eb1e9cc6eb0b9f6930e5596abfa5177eafb6"
+      },
+      "png": {
+        "path": "png/buttons/button-placement-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7107,
+        "sha256": "56db18c6781b32a1c120e9a77370aba60cd8a8609873ec273be530aec52a1c33"
+      },
+      "role": "button",
+      "control": "placement",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-placement-pressed",
+      "svg": {
+        "path": "svg/buttons/button-placement-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 713,
+        "sha256": "25998e647507dc5a1df537ca4c1bd82395b6733bb223246aed451a763df42fca"
+      },
+      "png": {
+        "path": "png/buttons/button-placement-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7148,
+        "sha256": "f5161dde2b0f208fd180365b21116afc34964ac077f4de00ef9e762d3178f5b4"
+      },
+      "role": "button",
+      "control": "placement",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-placement-disabled",
+      "svg": {
+        "path": "svg/buttons/button-placement-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 689,
+        "sha256": "6006c3c69f8a50af2cfd6e01f3528d3e2833b0ca8488bc0a7f481a042fec21c8"
+      },
+      "png": {
+        "path": "png/buttons/button-placement-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7182,
+        "sha256": "fb5ba525b6346b680248e51b21c469b31579cc15e62bb604451249453b274da6"
+      },
+      "role": "button",
+      "control": "placement",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-brake-idle",
+      "svg": {
+        "path": "svg/buttons/button-brake-idle.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 830,
+        "sha256": "a7422219ccd308bd815943c41ea4d5f54997dbf4eb96cfd5cf0e460a14275859"
+      },
+      "png": {
+        "path": "png/buttons/button-brake-idle.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7101,
+        "sha256": "407c7e47e347be4742596d81cd70af25182c1a25e66b823f1cff1da8324eee80"
+      },
+      "role": "button",
+      "control": "brake",
+      "state": "idle",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-brake-pressed",
+      "svg": {
+        "path": "svg/buttons/button-brake-pressed.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 877,
+        "sha256": "2436d728298382508bc93ce3c668e05407937e0623c0905b92616bcb3cc4cfff"
+      },
+      "png": {
+        "path": "png/buttons/button-brake-pressed.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7157,
+        "sha256": "ed465b4e8f4f2d93bd616599e360fcf5715ed92eaca3ed42c68c79afda9a7ba0"
+      },
+      "role": "button",
+      "control": "brake",
+      "state": "pressed",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "button-brake-disabled",
+      "svg": {
+        "path": "svg/buttons/button-brake-disabled.svg",
+        "width": 128,
+        "height": 128,
+        "bytes": 853,
+        "sha256": "3418c8edbdea3c9c6fdbd295b83f81bf405d563945c82acf2bc19fafb0c00c51"
+      },
+      "png": {
+        "path": "png/buttons/button-brake-disabled.png",
+        "width": 128,
+        "height": 128,
+        "bytes": 7240,
+        "sha256": "e9295249ad79f5a11a1c263e1a175bf088f7c0fd0013fcfaeb23291894af0266"
+      },
+      "role": "button",
+      "control": "brake",
+      "state": "disabled",
+      "displaySizePx": [
+        56,
+        56
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "meter-track",
+      "svg": {
+        "path": "svg/meter/meter-track.svg",
+        "width": 32,
+        "height": 176,
+        "bytes": 1179,
+        "sha256": "cd154a0d289fc28f1fccaebb4098df28164cc999e72fa8d6d71327c5047293c0"
+      },
+      "png": {
+        "path": "png/meter/meter-track.png",
+        "width": 32,
+        "height": 176,
+        "bytes": 3514,
+        "sha256": "a7851979b73450c09dfce04d7e6d86ab9ceff7cc226ab5519ddbe29cf21d9d92"
+      },
+      "role": "meter-track",
+      "displaySizePx": [
+        32,
+        176
+      ],
+      "anchor": [
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "meter-needle",
+      "svg": {
+        "path": "svg/meter/meter-needle.svg",
+        "width": 32,
+        "height": 12,
+        "bytes": 331,
+        "sha256": "b7b313892c38cdfc112047d0b84833f6890b28aa39030f385da7125c9b371f33"
+      },
+      "png": {
+        "path": "png/meter/meter-needle.png",
+        "width": 32,
+        "height": 12,
+        "bytes": 448,
+        "sha256": "4ec257fb028702e980bf255ebc6ceac6799b97380af5ad1036ff2c1f4d9cbb1f"
+      },
+      "role": "meter-needle",
+      "displaySizePx": [
+        32,
+        12
+      ],
+      "anchor": [
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "meter-moving",
+      "svg": {
+        "path": "svg/meter/meter-moving.svg",
+        "width": 32,
+        "height": 176,
+        "bytes": 1399,
+        "sha256": "37c6986229dc802035d31849bafab0c5a253a76712a78411171a182a633ffaa4"
+      },
+      "png": {
+        "path": "png/meter/meter-moving.png",
+        "width": 32,
+        "height": 176,
+        "bytes": 3920,
+        "sha256": "0849707eb54998a2d29cc8c7c92f2806afee28f6d73312243be06d792d5edcfd"
+      },
+      "role": "meter-moving",
+      "displaySizePx": [
+        32,
+        176
+      ],
+      "anchor": [
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "meter-locked",
+      "svg": {
+        "path": "svg/meter/meter-locked.svg",
+        "width": 32,
+        "height": 176,
+        "bytes": 1481,
+        "sha256": "23e3f3d9eeceb820915b77e06c8ce41d49b353848121b8a25689a2c2990723a9"
+      },
+      "png": {
+        "path": "png/meter/meter-locked.png",
+        "width": 32,
+        "height": 176,
+        "bytes": 4424,
+        "sha256": "9523fc5dde6c7580f1c413cf525503474744c6f7e7acc7bcf3577af52c0092f7"
+      },
+      "role": "meter-locked",
+      "displaySizePx": [
+        32,
+        176
+      ],
+      "anchor": [
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "meter-hidden",
+      "svg": {
+        "path": "svg/meter/meter-hidden.svg",
+        "width": 32,
+        "height": 176,
+        "bytes": 151,
+        "sha256": "5e92645fa87cc021505b738c1f90ab65960a449c9c425dae4d3ab375d035e85d"
+      },
+      "png": {
+        "path": "png/meter/meter-hidden.png",
+        "width": 32,
+        "height": 176,
+        "bytes": 231,
+        "sha256": "de73bb9d8a6a20b61b6d4550bb11ffbea8afacd5c7edfc672e1bc406b4c34e3a"
+      },
+      "role": "meter-hidden",
+      "displaySizePx": [
+        32,
+        176
+      ],
+      "anchor": [
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "fx-power-serve",
+      "svg": {
+        "path": "svg/fx/fx-power-serve.svg",
+        "width": 256,
+        "height": 256,
+        "bytes": 747,
+        "sha256": "87ca94c0717bd0c87a08df1582a5df7740fe089a255320bfc57e4e34d1bc278b"
+      },
+      "png": {
+        "path": "png/fx/fx-power-serve.png",
+        "width": 256,
+        "height": 256,
+        "bytes": 14320,
+        "sha256": "7acd896eba5a8b78cb09892a80288b34359bc0e6b7bf7935bfaec87b4ec19959"
+      },
+      "role": "effect",
+      "displaySizePx": [
+        104,
+        104
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "fx-spin",
+      "svg": {
+        "path": "svg/fx/fx-spin.svg",
+        "width": 256,
+        "height": 256,
+        "bytes": 710,
+        "sha256": "f156ae7a668efaf24447a889185b8445dcd69b3e54452d6a1d0618950962de18"
+      },
+      "png": {
+        "path": "png/fx/fx-spin.png",
+        "width": 256,
+        "height": 256,
+        "bytes": 16369,
+        "sha256": "436bc0382f9a240a5b65c1e7b663e5943db613c4f23ac5a1c99219ab74250a36"
+      },
+      "role": "effect",
+      "displaySizePx": [
+        88,
+        88
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "fx-perfect-green",
+      "svg": {
+        "path": "svg/fx/fx-perfect-green.svg",
+        "width": 256,
+        "height": 256,
+        "bytes": 556,
+        "sha256": "33545602c337009992ecc691fc72804d61e5e1860a1deae0a14e2b1d39bcfe1a"
+      },
+      "png": {
+        "path": "png/fx/fx-perfect-green.png",
+        "width": 256,
+        "height": 256,
+        "bytes": 18483,
+        "sha256": "e8e383d86f2851841810a2e888a9d9a2644df83fac1ba7a7aa8afd783f3321ba"
+      },
+      "role": "effect",
+      "displaySizePx": [
+        96,
+        96
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "fx-out",
+      "svg": {
+        "path": "svg/fx/fx-out.svg",
+        "width": 256,
+        "height": 256,
+        "bytes": 437,
+        "sha256": "e5b9ba4345515b0f2c2a056cbc245f2bb2e7dda91217b36ef4d390f753955fbc"
+      },
+      "png": {
+        "path": "png/fx/fx-out.png",
+        "width": 256,
+        "height": 256,
+        "bytes": 8148,
+        "sha256": "65b40cae22a04eb37ccb88a109c420ef89d3831f7047b280a4368e23c9953b90"
+      },
+      "role": "effect",
+      "displaySizePx": [
+        52,
+        52
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "fx-net",
+      "svg": {
+        "path": "svg/fx/fx-net.svg",
+        "width": 256,
+        "height": 256,
+        "bytes": 789,
+        "sha256": "b775711acb5d83784a6fb374dbd281121def2f3eba08d8d3790e6ad89d424678"
+      },
+      "png": {
+        "path": "png/fx/fx-net.png",
+        "width": 256,
+        "height": 256,
+        "bytes": 7415,
+        "sha256": "c72b9fb4db9702063ae64de1b940ef554d3effb98aaa8c9b601fc6fceba3d9ea"
+      },
+      "role": "effect",
+      "displaySizePx": [
+        78,
+        78
+      ],
+      "anchor": [
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "layout": {
+    "referenceViewport": [
+      844,
+      390
+    ],
+    "minHitTargetPx": 56,
+    "gapPx": 12,
+    "meterRect": [
+      796,
+      97,
+      32,
+      176
+    ],
+    "centerClearRect": [
+      198,
+      92,
+      440,
+      198
+    ],
+    "bottomRightOrderLeftToRight": [
+      "slice",
+      "drop",
+      "smash",
+      "serve"
+    ],
+    "bottomRightButtonRects": [
+      [
+        540,
+        306,
+        56,
+        56
+      ],
+      [
+        608,
+        306,
+        56,
+        56
+      ],
+      [
+        676,
+        306,
+        56,
+        56
+      ],
+      [
+        744,
+        306,
+        56,
+        56
+      ]
+    ],
+    "placementButtonRect": [
+      712,
+      166,
+      56,
+      56
+    ],
+    "brakeButtonRect": [
+      24,
+      306,
+      56,
+      56
+    ],
+    "safeArea": "CSS env(safe-area-inset-*); physical right is stable in RTL; controls reflow below 620px."
+  },
+  "integration": {
+    "scope": "New assets and isolated preview only; game integration is a separate task.",
+    "entrypoints": [
+      "tennis-config.js",
+      "tennis-ui.css",
+      "tennis-ui.js"
+    ],
+    "globalAPI": "TennisUIV2.create(root, {config, assetBase, onServe, onAction})",
+    "start": "startServe(); click/Space locks the visible position; setPosition(p) supports authoritative samples.",
+    "stop": "endServe() hides meter and serve control immediately, including when called during a lock.",
+    "serveLifecycle": "moving → locked (220ms settle, 420ms hold total) → hidden (180ms fade). Serve button and aim marker leave at 420ms. Meter is fully removed at 600ms. Hit FX have finite lifetimes.",
+    "controls": "idle / pressed / disabled. Disabled is a native disabled button. Placement is an aria-pressed toggle; brake is held using pointer capture or keydown/keyup.",
+    "eventPolicy": "Consume authoritative game outcomes; color bands, court and effects in preview do not calculate scores or legal serves.",
+    "noTextBaked": true,
+    "text": "Live Hebrew DOM labels and aria-live status; no SVG text, glyph outlines, fonts or external images.",
+    "texture": {
+      "transparent": true,
+      "colorSpace": "sRGB",
+      "alpha": "straight; renderer owns premultiplication",
+      "depthWrite": false
+    },
+    "anchor": "Normalized [x,y], top-left origin. Top-left = eventPoint − anchor * displaySize. Reproject court/net world contacts every frame.",
+    "layering": [
+      "court",
+      "placement marker",
+      "contact FX",
+      "ball",
+      "HUD"
+    ],
+    "clock": "Active time only. setPaused(true) and document.hidden freeze meter, lock and all FX without consuming lifetime.",
+    "reducedMotion": "Static pointer at 0.5 unless caller sets position; lock/hide still work. Static FX at full opacity for their duration; no rotation, scaling or settling.",
+    "input": "Touch, mouse and keyboard. No document-wide preventDefault except matched shortcuts outside editable elements.",
+    "limits": "No gameplay logic changes, no real-device performance claim, no runtime court or character assets."
+  },
+  "provenance": {
+    "art": "Original hand-authored SVG geometry for this package; all PNGs rasterized from those exact sources.",
+    "fonts": "system-ui only; no font files",
+    "generator": "tools/build.py",
+    "rasterizer": "Chromium 151.0.7922.173"
+  },
+  "maxFileBytes": 400000
+}

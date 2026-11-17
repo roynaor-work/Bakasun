@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>טניס באי · ממשק הגשה v2</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="tennis-ui.css">
+  <link rel="stylesheet" href="preview.css">
+  <script src="tennis-config.js" defer></script>
+  <script src="tennis-ui.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body>
+<main>
+  <section class="tennis-v2" id="court-preview" aria-label="הדגמת ממשק טניס">
+    <svg class="court" viewBox="0 0 844 390" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="surround" x2="0" y2="1"><stop stop-color="#173f36"/><stop offset="1" stop-color="#587463"/></linearGradient>
+        <linearGradient id="clay" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#ae674b"/><stop offset="1" stop-color="#c98a64"/></linearGradient>
+        <linearGradient id="edge" x2="0" y2="1"><stop stop-color="#102e29" stop-opacity="0"/><stop offset="1" stop-color="#102e29" stop-opacity=".58"/></linearGradient>
+        <pattern id="mesh" width="8" height="6" patternUnits="userSpaceOnUse"><path d="M0 0h8v6" stroke="#f5efdc" stroke-width=".55" opacity=".4"/></pattern>
+      </defs>
+      <path fill="url(#surround)" d="M0 0h844v390H0z"/>
+      <path d="M0 74h844M0 79h844" stroke="#d4bf82" stroke-opacity=".09"/>
+      <path d="m75 81-93 309h172L280 81ZM573 81l121 309h174L774 81Z" fill="#d4bf82" opacity=".045"/>
+      <path d="M292 78h260l116 303H176Z" fill="#102e29" opacity=".18" transform="translate(6 9)"/>
+      <path d="M289 70h266l105 309H184Z" fill="#8f573e"/>
+      <path d="M303 82h238l93 281H210Z" fill="url(#clay)"/>
+      <path d="m316 95-80 247h371L528 95Z" stroke="#f5efdc" stroke-width="1.6" opacity=".9"/>
+      <path d="m328 95-66 247m254-247 64 247M287 184h270m-291 67h312M422 95v89m0 17v141" stroke="#f5efdc" stroke-width="1.3" opacity=".83"/>
+      <path d="m284 204 276 0 3 16H280Z" fill="#102e29" opacity=".16"/>
+      <path d="m282 178 280 0 2 26H280Z" fill="#102e29" fill-opacity=".88"/>
+      <path d="m282 178 280 0 2 26H280Z" fill="url(#mesh)"/>
+      <path d="M280 178q142 13 284 0" stroke="#f5efdc" stroke-width="3"/>
+      <path d="M281 175v33m282-33v33" stroke="#173f36" stroke-width="4"/>
+      <path d="M418 341h8" stroke="#f5efdc" stroke-width="2"/>
+      <path d="m310 266 34-8m137 48 26-10m-121-83 18-2" stroke="#e8b68b" opacity=".25"/>
+      <path fill="url(#edge)" d="M0 275h844v115H0Z"/>
+      <g fill="#d4bf82" opacity=".22"><circle cx="26" cy="109" r="1"/><circle cx="818" cy="318" r="1"/><path d="M24 94v-8h8m780 0h8v8M24 285v8h8m780 0h8v-8" fill="none" stroke="#d4bf82"/></g>
+    </svg>
+    <div class="game-heading"><span class="eyebrow">טורניר האי / חימר</span><strong>כל הגשה מתחילה ברגע.</strong></div>
+    <div class="score" aria-label="ניקוד להמחשה: אתם 30, יריב 15"><div><b>30</b><small>אתם</small></div><i></i><div><b>15</b><small>יריב</small></div></div>
+    <div class="phase-pill" data-phase-label>ההגשה שלך</div>
+    <div class="placement-marker" data-placement-marker aria-hidden="true"></div>
+    <div class="sample-ball" aria-hidden="true"></div>
+    <div class="effect-layer" data-effects aria-hidden="true"></div>
+    <div class="event-copy" data-event-copy role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="serve-meter" data-meter data-state="moving" role="meter" aria-label="איכות הגשה" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <img class="meter-track" data-meter-track src="svg/meter/meter-track.svg" width="32" height="176" alt="">
+      <div class="lock-halo" data-lock-halo></div>
+      <img class="meter-needle" data-meter-needle src="svg/meter/meter-needle.svg" width="32" height="12" alt="">
+    </div>
+    <div class="control control-brake"><button type="button" data-action="brake" aria-label="בלימה" aria-pressed="false" aria-keyshortcuts="B"><img src="svg/buttons/button-brake-idle.svg" alt="" width="128" height="128"></button><span>בלימה</span></div>
+    <div class="control control-placement"><button type="button" data-action="placement" aria-label="בחירת מיקום" aria-pressed="false" aria-expanded="false" aria-controls="placement-choices" aria-keyshortcuts="A"><img src="svg/buttons/button-placement-idle.svg" alt="" width="128" height="128"></button><span>בחירת מיקום</span></div>
+    <div class="placement-choices" id="placement-choices" data-placement-choices role="group" aria-label="כיוון פיזי במגרש" hidden>
+      <button type="button" data-placement="0" aria-pressed="false">שמאל</button>
+      <button type="button" data-placement="1" aria-pressed="true">מרכז</button>
+      <button type="button" data-placement="2" aria-pressed="false">ימין</button>
+    </div>
+    <div class="control control-slice"><button type="button" data-action="slice" aria-label="חיתוך" aria-keyshortcuts="S" disabled><img src="svg/buttons/button-slice-disabled.svg" alt="" width="128" height="128"></button><span>חיתוך</span></div>
+    <div class="control control-drop"><button type="button" data-action="drop" aria-label="דרופ" aria-keyshortcuts="D" disabled><img src="svg/buttons/button-drop-disabled.svg" alt="" width="128" height="128"></button><span>דרופ</span></div>
+    <div class="control control-smash"><button type="button" data-action="smash" aria-label="סמאש" aria-keyshortcuts="X" disabled><img src="svg/buttons/button-smash-disabled.svg" alt="" width="128" height="128"></button><span>סמאש</span></div>
+    <div class="control control-serve"><button type="button" data-action="serve" aria-label="הגשה: לחיצה לנעילת המד" aria-keyshortcuts="Space"><img src="svg/buttons/button-serve-idle.svg" alt="" width="128" height="128"></button><span>הגשה</span></div>
+  </section>
+  <section class="lab" aria-labelledby="page-title">
+    <header class="intro"><div><p class="kicker">TENNIS / UI STUDY 02</p><h1 id="page-title">דיוק בקצה. משחק במרכז.</h1><p>מד הגשה דק, שליטה ברורה ואפקטים שחולפים עם המכה.</p></div><span class="edition">ממשק טניס<br><b>v2.0</b></span></header>
+    <div class="demo-toolbar" aria-label="כלי הדגמה">
+      <button type="button" id="new-serve">הגשה חדשה</button>
+      <button type="button" id="pause" aria-pressed="false">השהיה</button>
+      <label class="format-label">פורמט <select id="format"><option value="svg">SVG</option><option value="png">PNG</option></select></label>
+      <label class="motion-label"><input type="checkbox" id="reduce-motion"> תנועה מופחתת</label>
+    </div>
+    <div class="meter-inspector">
+      <div><p class="kicker">01 / איכות ההגשה</p><h2>זז. ננעל. נעלם.</h2><p>לחיצה על הגשה או רווח נועלת את המצביע. ההתיישבות קצרה, ואז המד וכפתור ההגשה מפנים את המגרש לראלי.</p><label class="position-label" for="position">מיקום ידני <output id="position-value">50%</output></label><input id="position" type="range" min="0" max="100" value="50" step="1"><p class="micro">הסגול מסמן את שיא הדיוק במרכז; ירוק משני צדדיו. המחוון הידני עוצר את התנועה לצורך בדיקה.</p><output id="state-readout" class="state-readout" aria-live="polite">המד זז</output></div>
+      <div class="meter-states" id="meter-states" aria-label="שלושת מצבי המד"></div>
+    </div>
+    <section class="gallery-section" aria-labelledby="buttons-heading">
+      <div class="section-heading"><div><p class="kicker">02 / כפתורי משחק</p><h2 id="buttons-heading">אותה שפה. שש פעולות.</h2></div><p>רגיל / לחוץ / מושבת<br>SVG + PNG 128 · יעד מגע 56px</p></div>
+      <div class="button-gallery" id="button-gallery"></div>
+    </section>
+    <section class="gallery-section" aria-labelledby="fx-heading">
+      <div class="section-heading"><div><p class="kicker">03 / רגעי מגע</p><h2 id="fx-heading">המכה משאירה סימן קצר.</h2></div><p>חמישה אפקטים שקופים<br>הכיתוב תמיד נשאר חי ונפרד</p></div>
+      <div class="fx-gallery" id="fx-gallery"></div>
+    </section>
+    <div class="integration-note"><b>חבילת עיצוב למסירה.</b> המגרש והניקוד הם המחשה. התצוגה עצמאית; החיבור למשחק יבוצע בנפרד.</div>
+    <footer><span>מקוריים · CC0 · ללא תלות ברשת</span><nav aria-label="קובצי מסירה"><a href="manifest.json">מפרט נכסים</a><a href="REPORT.md">דוח מסירה</a><a href="LICENSE.txt">רישיון</a></nav></footer>
+  </section>
+</main>
+<noscript><p>יש להפעיל JavaScript כדי לבדוק את התנועה והכפתורים. כל נכסי SVG ו־PNG זמינים גם ישירות בתיקייה.</p></noscript>
+</body>
+</html>
