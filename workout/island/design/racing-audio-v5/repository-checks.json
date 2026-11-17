@@ -1,0 +1,56 @@
+{
+  "command": "npm test",
+  "exit_code": 1,
+  "base_commit": "8ad88bada735ba9f50da6319ab708a4905bdc09c",
+  "summary": {
+    "tests": 4339,
+    "pass": 4270,
+    "fail": 3,
+    "cancelled": 0,
+    "skipped": 66,
+    "todo": 0
+  },
+  "failures": [
+    {
+      "test": "tests/island-racing-assets-v22.test.mjs:201",
+      "kind": "pre-existing assertion",
+      "cause": "Existing racing offline list has ten racing-environment-v2 design paths appended out of sorted order. Reproduced independently with name-filtered test."
+    },
+    {
+      "test": "workout/island/tests/racing-v7.test.mjs:120",
+      "kind": "pre-existing assertion",
+      "cause": "Same ten existing environment paths are outside the expected v7/current asset list. Reproduced independently with name-filtered test."
+    },
+    {
+      "test": "tests/workout-royiki.test.mjs:91",
+      "kind": "environment setup and existing cleanup leak",
+      "cause": "Configured Playwright chromium_headless_shell executable is missing. Test starts an HTTP server before launch, then launch rejects before try/finally; server keeps worker open. Only the stuck worker was terminated after confirming no child browser. Runner emitted actual launch exception and exited1."
+    }
+  ],
+  "baseline_proof": {
+    "workout/island/offline-manifest.json": {
+      "sha256": "e5a6ac484709513ae0bd9db520d99b81561865a881effbdaf7c950265590c2fa",
+      "identical_to_base_commit": true
+    },
+    "tests/island-racing-assets-v22.test.mjs": {
+      "sha256": "27288ab1d281a404e5afdae2ef10e46fd636338c3b3b950a32d4aea112d3ffbc",
+      "identical_to_base_commit": true
+    },
+    "workout/island/tests/racing-v7.test.mjs": {
+      "sha256": "5d1f6c168e2981c582a61bac3ae5dcada1e20a9f87c413b2e49ecd35e693089c",
+      "identical_to_base_commit": true
+    },
+    "tests/workout-royiki.test.mjs": {
+      "sha256": "1f42bf3b84fd00a030f71a78798f6e8bd18e8f8089385ce0edd4386f07263f9f",
+      "identical_to_base_commit": true
+    }
+  },
+  "package_validation": {
+    "decoded_audio_files": 46,
+    "per_file_audio_checks": 452,
+    "browser_audio_files": 46,
+    "browser_offline_loop_renders": 104,
+    "passed": true
+  },
+  "existing_files_modified": false
+}

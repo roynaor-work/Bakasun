@@ -1,0 +1,1180 @@
+{
+  "schema_version": 1,
+  "version": "racing-audio-v5",
+  "title_he": "ערכת צלילי מירוצים · גרסה 5",
+  "created_date": "2026-11-17",
+  "source_commit": "8ad88bada735ba9f50da6319ab708a4905bdc09c",
+  "status": "design-review; not connected to game",
+  "license": "CC0-1.0 (audio); MIT (code). See LICENSE.txt.",
+  "audio": {
+    "sample_rate_hz": 32000,
+    "channels": 1,
+    "codecs": {
+      "ogg": "Vorbis quality 3",
+      "mp3": "LAME 64 kbit/s CBR with gapless Xing header"
+    }
+  },
+  "constraints": {
+    "target_lufs_i": -18,
+    "lufs_tolerance": 0.25,
+    "max_bytes_per_file": 50000,
+    "max_true_peak_dbtp": -1,
+    "source_stopband_hz": 1750,
+    "max_playback_rate": 1.08,
+    "decoded_high_band_energy_db_max": -45,
+    "significant_line_gate_db": -55,
+    "local_only": true,
+    "wasm": false,
+    "original_synthesis": true
+  },
+  "mixing": {
+    "master_gain_db": -6,
+    "surface_transition_ms": 450,
+    "brake_transition_ms": 180,
+    "pit_transition_ms": 650,
+    "layer_attack_ms": 80,
+    "layer_release_ms": 160,
+    "speed_thresholds_mps": [
+      6,
+      18,
+      30
+    ],
+    "max_speed_mps": 90,
+    "speed_note_he": "מתחת ל־6 מ׳/ש׳ חיכוך ושוליים דועכים לשקט; 18 ו־30 הם מרכזי המעבר בין העוצמות.",
+    "variant_policy": "Round-robin or seeded no-immediate-repeat; never layer two variants of the same event.",
+    "pit": {
+      "speed_limit_mps": 20,
+      "bay_proximity_range": [
+        0,
+        1
+      ],
+      "crew_gain_db": -28,
+      "limiter_gain_db": -18,
+      "engine_gain_db": -10,
+      "bay_gain_db": -24
+    },
+    "instructions_he": [
+      "כל קובץ מנורמל לפני עוצמת הערבוב; עוצמת העוצמה נשמרת ב־nominal_gain_db.",
+      "לנגן רק בין נקודות הלולאה; guards אינם חלק מהמחזור.",
+      "לעבור בין עוצמות באמצעות דעיכה משולבת; לא להפעיל את כל שלוש העוצמות יחד בעוצמה מלאה.",
+      "הגבלת מהירות היא אירוע המשחק; שכבת המגביל היא תגובה קולית, ללא צפצוף.",
+      "לצורך חיבור למשחק יש להעביר phase של הפיט ולהנמיך את המנוע הישן בתרחישים אלה."
+    ]
+  },
+  "baseline": {
+    "path": "../../assets/racing-audio-v4",
+    "access": "read-only",
+    "source_commit": "8ad88bada735ba9f50da6319ab708a4905bdc09c",
+    "matched_pairs": {
+      "brake-low": "brake-loop-light",
+      "brake-medium": "brake-loop-medium",
+      "brake-high": "brake-loop-hard"
+    },
+    "note_he": "רק שלושת לופי הבלימה תואמים ישירות; side-scrape הוא הקשר לחיכוך בלבד. לפיט/שוליים/הילוכים אין דגימות v4 תואמות."
+  },
+  "assets": [
+    {
+      "id": "pit-engine-slow",
+      "label_he": "מנוע שקט בנסיעה לפיט",
+      "category": "pit",
+      "synthesis": "pit_engine",
+      "nominal_gain_db": -10,
+      "intensity": null,
+      "variant": 1,
+      "speed_mps": {
+        "min": 0,
+        "max": 20
+      },
+      "description_he": "פעימות בעירה נמוכות עם חספוס עדין, ללא צליל סינוס מבודד.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 10703300107582131127,
+      "files": {
+        "ogg": {
+          "path": "audio/pit-engine-slow.ogg",
+          "bytes": 10311,
+          "sha256": "7de5c24da54c186132f3be62d3a92fa19679a04d9041c0a5f6b326f97d771e9d",
+          "lufs_i": -18.08,
+          "true_peak_dbtp": -5.34,
+          "normalization_gain_db": -6.32
+        },
+        "mp3": {
+          "path": "audio/pit-engine-slow.mp3",
+          "bytes": 23616,
+          "sha256": "34febae2a668e7a9432e8f64d1ab40bf4b5e4b9fc071f95c5fd1f7079d8aa627",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -5.55,
+          "normalization_gain_db": -5.88
+        }
+      }
+    },
+    {
+      "id": "pit-limiter",
+      "label_he": "מגביל מהירות רך",
+      "category": "pit",
+      "synthesis": "pit_limiter",
+      "nominal_gain_db": -18,
+      "intensity": null,
+      "variant": 1,
+      "speed_mps": {
+        "min": 0,
+        "max": 20
+      },
+      "description_he": "קיטוע מומנט מעוגל, ללא צפצוף או התראה טונאלית.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 3309463709246984878,
+      "files": {
+        "ogg": {
+          "path": "audio/pit-limiter.ogg",
+          "bytes": 10326,
+          "sha256": "9f12e18e01b28c56868a5bf079a6d90241d249b8dd187eb9fa612b6d0fbc0a99",
+          "lufs_i": -18.05,
+          "true_peak_dbtp": -4.91,
+          "normalization_gain_db": -6.41
+        },
+        "mp3": {
+          "path": "audio/pit-limiter.mp3",
+          "bytes": 23616,
+          "sha256": "57d285530554887652abe452f96a1861521962ce3769f6acdd037acf02fa3107",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -5.1,
+          "normalization_gain_db": -5.97
+        }
+      }
+    },
+    {
+      "id": "pit-bay-proximity",
+      "label_he": "קרבת תא הטיפול",
+      "category": "pit",
+      "synthesis": "pit_bay",
+      "nominal_gain_db": -24,
+      "intensity": null,
+      "variant": 1,
+      "speed_mps": {
+        "min": 0,
+        "max": 20
+      },
+      "description_he": "אוורור עמום ורחש גומי; העוצמה עולה בהדרגה ככל שמתקרבים לתא.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 4698999958432455591,
+      "files": {
+        "ogg": {
+          "path": "audio/pit-bay-proximity.ogg",
+          "bytes": 10097,
+          "sha256": "e38fc5d69cd2684997f7a62fd881bd1594201bbc152032328f1ace1746d709a1",
+          "lufs_i": -18.07,
+          "true_peak_dbtp": -8.74,
+          "normalization_gain_db": -8.77
+        },
+        "mp3": {
+          "path": "audio/pit-bay-proximity.mp3",
+          "bytes": 23616,
+          "sha256": "60d75171589f7bc4a8cbbe7b41722e98c6cb2c0facb1f8df1df43264490a3014",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -8.6,
+          "normalization_gain_db": -8.32
+        }
+      }
+    },
+    {
+      "id": "pit-crew-background",
+      "label_he": "צוות ברקע",
+      "category": "pit",
+      "synthesis": "pit_crew",
+      "nominal_gain_db": -28,
+      "intensity": null,
+      "variant": 1,
+      "speed_mps": {
+        "min": 0,
+        "max": 20
+      },
+      "description_he": "מלמול סינתטי לא מילולי, בד וכלים מרופדים בעוצמה נמוכה.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 8380279074652978240,
+      "files": {
+        "ogg": {
+          "path": "audio/pit-crew-background.ogg",
+          "bytes": 10404,
+          "sha256": "19ccfde9f433d5896eed97ac8708cfb384cd5d000dd8d5f35e512837b13d74cb",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -6.17,
+          "normalization_gain_db": -8.12
+        },
+        "mp3": {
+          "path": "audio/pit-crew-background.mp3",
+          "bytes": 23616,
+          "sha256": "9d987dcab9e13aa5dc31d9e58ea9012c3f1576c53d50e0e0a083992365ea2343",
+          "lufs_i": -17.98,
+          "true_peak_dbtp": -6.99,
+          "normalization_gain_db": -7.8
+        }
+      }
+    },
+    {
+      "id": "offtrack-gravel-low",
+      "label_he": "חצץ · חלשה",
+      "category": "gravel",
+      "synthesis": "gravel",
+      "intensity": "low",
+      "variant": 1,
+      "nominal_gain_db": -18,
+      "speed_mps": {
+        "min": 0,
+        "max": 18
+      },
+      "description_he": "גרגרים מעוגלים וגלגול נמוך, ללא רעש לבן חשוף.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 4096,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 10033217643606723375,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-gravel-low.ogg",
+          "bytes": 10580,
+          "sha256": "c2e7a04a59538002222341c37cd67cfc5490d3ec6f46fa4f6eb138c503b8509a",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -4.76,
+          "normalization_gain_db": -6.57
+        },
+        "mp3": {
+          "path": "audio/offtrack-gravel-low.mp3",
+          "bytes": 23616,
+          "sha256": "dbcf0349ebd7272c01ccb58c82dcbb4eb4c15fa1a9a3d961a6c188832feb231a",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -4.81,
+          "normalization_gain_db": -6.25
+        }
+      }
+    },
+    {
+      "id": "offtrack-gravel-medium",
+      "label_he": "חצץ · בינונית",
+      "category": "gravel",
+      "synthesis": "gravel",
+      "intensity": "medium",
+      "variant": 2,
+      "nominal_gain_db": -14,
+      "speed_mps": {
+        "min": 18,
+        "max": 30
+      },
+      "description_he": "גרגרים מעוגלים וגלגול נמוך, ללא רעש לבן חשוף.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 16548673951682359250,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-gravel-medium.ogg",
+          "bytes": 10607,
+          "sha256": "816ea0cabc9ae11908a8c7099e07e6b965fa158ca4ff9e6188384dffaad0d640",
+          "lufs_i": -18.01,
+          "true_peak_dbtp": -5.03,
+          "normalization_gain_db": -6.89
+        },
+        "mp3": {
+          "path": "audio/offtrack-gravel-medium.mp3",
+          "bytes": 23616,
+          "sha256": "b7bf4db0a0e5042e8ba485ca47e799e7c04bab96a1fe9d3922b312aa41143bc3",
+          "lufs_i": -17.98,
+          "true_peak_dbtp": -5.03,
+          "normalization_gain_db": -6.54
+        }
+      }
+    },
+    {
+      "id": "offtrack-gravel-high",
+      "label_he": "חצץ · חזקה",
+      "category": "gravel",
+      "synthesis": "gravel",
+      "intensity": "high",
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 30,
+        "max": 90
+      },
+      "description_he": "גרגרים מעוגלים וגלגול נמוך, ללא רעש לבן חשוף.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 8306233315781822233,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-gravel-high.ogg",
+          "bytes": 10396,
+          "sha256": "66c595aec2984eeab3ee69d9e1d1791b328b9bb060b6cf46d7c7b58f144fa25b",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -5.43,
+          "normalization_gain_db": -7.11
+        },
+        "mp3": {
+          "path": "audio/offtrack-gravel-high.mp3",
+          "bytes": 23616,
+          "sha256": "f085fb19b385b71b2abb7d8223ec87623bb826cb6ffd7740cb1add9b1b8b5794",
+          "lufs_i": -18.01,
+          "true_peak_dbtp": -5.36,
+          "normalization_gain_db": -6.81
+        }
+      }
+    },
+    {
+      "id": "offtrack-grass-low",
+      "label_he": "עשב · חלשה",
+      "category": "grass",
+      "synthesis": "grass",
+      "intensity": "low",
+      "variant": 1,
+      "nominal_gain_db": -18,
+      "speed_mps": {
+        "min": 0,
+        "max": 18
+      },
+      "description_he": "סיבים רכים ורחש צמיג עמום.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 9483204373605264628,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-grass-low.ogg",
+          "bytes": 10273,
+          "sha256": "6328b9881393eccd0247b1163659030a71ad01effaabecdbd2b4a6f62bd51fe5",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -9.2,
+          "normalization_gain_db": -8.83
+        },
+        "mp3": {
+          "path": "audio/offtrack-grass-low.mp3",
+          "bytes": 23616,
+          "sha256": "b202707171b32910897c594f742d662a912b9e8c5e7a3d842e7514f6eb925024",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -9.26,
+          "normalization_gain_db": -8.51
+        }
+      }
+    },
+    {
+      "id": "offtrack-grass-medium",
+      "label_he": "עשב · בינונית",
+      "category": "grass",
+      "synthesis": "grass",
+      "intensity": "medium",
+      "variant": 2,
+      "nominal_gain_db": -14,
+      "speed_mps": {
+        "min": 18,
+        "max": 30
+      },
+      "description_he": "סיבים רכים ורחש צמיג עמום.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 6156809752934579912,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-grass-medium.ogg",
+          "bytes": 10123,
+          "sha256": "291b616b0e93774faf2f85f9ed14755b5601487624e1a2c7d75e3a15eb806c79",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -8.5,
+          "normalization_gain_db": -8.83
+        },
+        "mp3": {
+          "path": "audio/offtrack-grass-medium.mp3",
+          "bytes": 23616,
+          "sha256": "997e02f99d3a7f5fbbd86426d28813e9dc891b65004a9e6b6778eed1124e45c6",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -8.94,
+          "normalization_gain_db": -8.5
+        }
+      }
+    },
+    {
+      "id": "offtrack-grass-high",
+      "label_he": "עשב · חזקה",
+      "category": "grass",
+      "synthesis": "grass",
+      "intensity": "high",
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 30,
+        "max": 90
+      },
+      "description_he": "סיבים רכים ורחש צמיג עמום.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 3574601530821258572,
+      "files": {
+        "ogg": {
+          "path": "audio/offtrack-grass-high.ogg",
+          "bytes": 10397,
+          "sha256": "06aa8ccfd60186f95611f672794be01e1c3ac5d4c14837ded5efcdc3703c0d61",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -9.0,
+          "normalization_gain_db": -8.85
+        },
+        "mp3": {
+          "path": "audio/offtrack-grass-high.mp3",
+          "bytes": 23616,
+          "sha256": "3775ccd7d4ba2f40ace1b663f93c31b7c3dec78b766a0873d58204876f4932e6",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -9.08,
+          "normalization_gain_db": -8.54
+        }
+      }
+    },
+    {
+      "id": "brake-low",
+      "label_he": "בלימה · חלשה",
+      "category": "brake",
+      "synthesis": "brake",
+      "intensity": "low",
+      "variant": 1,
+      "nominal_gain_db": -18,
+      "speed_mps": {
+        "min": 0,
+        "max": 18
+      },
+      "description_he": "חיכוך צמיגים רחב ונמוך ללא חריקה מתכתית.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 11384155676780212280,
+      "files": {
+        "ogg": {
+          "path": "audio/brake-low.ogg",
+          "bytes": 10190,
+          "sha256": "46a67c26c3889c51453249a7ec2eaba3d2a0718a5beed77831237d4c52fe6684",
+          "lufs_i": -17.98,
+          "true_peak_dbtp": -8.49,
+          "normalization_gain_db": -8.97
+        },
+        "mp3": {
+          "path": "audio/brake-low.mp3",
+          "bytes": 23616,
+          "sha256": "30281633ae53f69e715d07de0eb85bf1085363b0eb3b8bc1a0a0777b9ffc9d3e",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -8.69,
+          "normalization_gain_db": -8.67
+        }
+      }
+    },
+    {
+      "id": "brake-medium",
+      "label_he": "בלימה · בינונית",
+      "category": "brake",
+      "synthesis": "brake",
+      "intensity": "medium",
+      "variant": 2,
+      "nominal_gain_db": -14,
+      "speed_mps": {
+        "min": 18,
+        "max": 30
+      },
+      "description_he": "חיכוך צמיגים רחב ונמוך ללא חריקה מתכתית.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 17199231357954340049,
+      "files": {
+        "ogg": {
+          "path": "audio/brake-medium.ogg",
+          "bytes": 10354,
+          "sha256": "d600e8dde11ebd4f099df1b10b85afe13221b2df26e0029e20a15ec90f098c67",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -8.82,
+          "normalization_gain_db": -9.0
+        },
+        "mp3": {
+          "path": "audio/brake-medium.mp3",
+          "bytes": 23616,
+          "sha256": "f6dd08fa64708c451d7c6c2000971e17367dd35dbdf03b16c7d5c1435845f156",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -9.04,
+          "normalization_gain_db": -8.7
+        }
+      }
+    },
+    {
+      "id": "brake-high",
+      "label_he": "בלימה · חזקה",
+      "category": "brake",
+      "synthesis": "brake",
+      "intensity": "high",
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 30,
+        "max": 90
+      },
+      "description_he": "חיכוך צמיגים רחב ונמוך ללא חריקה מתכתית.",
+      "loop": {
+        "enabled": true,
+        "sample_rate": 32000,
+        "start_sample": 9216,
+        "end_sample": 82944,
+        "start_seconds": 0.288,
+        "end_seconds": 2.592,
+        "period_seconds": 2.304,
+        "guard_seconds": 0.288,
+        "phase_rotation_samples": 0,
+        "crossfade_ms": 0,
+        "method": "periodic PCM, cyclic codec guards, interior loop"
+      },
+      "duration_seconds": 2.88,
+      "playback_rate": {
+        "min": 0.82,
+        "max": 1.08
+      },
+      "seed": 17659660111351130473,
+      "files": {
+        "ogg": {
+          "path": "audio/brake-high.ogg",
+          "bytes": 10237,
+          "sha256": "f8ff0aaab08c449ed35ddc0c8c796b5de4a57815ffb805487318158a59eed2d3",
+          "lufs_i": -18.02,
+          "true_peak_dbtp": -8.47,
+          "normalization_gain_db": -9.12
+        },
+        "mp3": {
+          "path": "audio/brake-high.mp3",
+          "bytes": 23616,
+          "sha256": "798392ce7085791dff745c9557fe98d502d9d8dc14d7ab693be91d064602474f",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -8.73,
+          "normalization_gain_db": -8.82
+        }
+      }
+    },
+    {
+      "id": "decel-downshift-01",
+      "label_he": "האטה והורדת הילוך · 1",
+      "category": "deceleration",
+      "synthesis": "deceleration",
+      "intensity": null,
+      "variant": 1,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.972,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.972,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 13416441545748788030,
+      "files": {
+        "ogg": {
+          "path": "audio/decel-downshift-01.ogg",
+          "bytes": 5754,
+          "sha256": "d5298ceacd094f7423e7c326a3a895162107a8655b1334d578798adac4432b1f",
+          "lufs_i": -18.06,
+          "true_peak_dbtp": -5.95,
+          "normalization_gain_db": -7.51
+        },
+        "mp3": {
+          "path": "audio/decel-downshift-01.mp3",
+          "bytes": 8352,
+          "sha256": "e4404f3f55b79f6a5333d0e2fb638b7d3dfb71dc8cbfbac7e6a4f4de8176b982",
+          "lufs_i": -18.02,
+          "true_peak_dbtp": -6.02,
+          "normalization_gain_db": -7.08
+        }
+      }
+    },
+    {
+      "id": "decel-downshift-02",
+      "label_he": "האטה והורדת הילוך · 2",
+      "category": "deceleration",
+      "synthesis": "deceleration",
+      "intensity": null,
+      "variant": 2,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 1.08,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 1.08,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 8420614461089110866,
+      "files": {
+        "ogg": {
+          "path": "audio/decel-downshift-02.ogg",
+          "bytes": 6037,
+          "sha256": "35daa93b27d36e5666a8538ec20a44aaf343a4ec5cc403c3d65396d95ee7898e",
+          "lufs_i": -18.01,
+          "true_peak_dbtp": -5.8,
+          "normalization_gain_db": -7.62
+        },
+        "mp3": {
+          "path": "audio/decel-downshift-02.mp3",
+          "bytes": 9216,
+          "sha256": "13836220447987ee4b0544ebb8a4675f92db2430053d261488d46591c8a9b532",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -6.05,
+          "normalization_gain_db": -7.18
+        }
+      }
+    },
+    {
+      "id": "decel-downshift-03",
+      "label_he": "האטה והורדת הילוך · 3",
+      "category": "deceleration",
+      "synthesis": "deceleration",
+      "intensity": null,
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 1.152,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 1.152,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 8831806962503969188,
+      "files": {
+        "ogg": {
+          "path": "audio/decel-downshift-03.ogg",
+          "bytes": 6227,
+          "sha256": "27c18ec42a93e98a20dbb9808772f0d5f9a3f78796b17f14830bebefecb30012",
+          "lufs_i": -18.01,
+          "true_peak_dbtp": -5.97,
+          "normalization_gain_db": -7.61
+        },
+        "mp3": {
+          "path": "audio/decel-downshift-03.mp3",
+          "bytes": 9792,
+          "sha256": "c6ecf18c8c3c4b8be6af95facbeeb8b5ecf398a20898c90c6affd0db4b455cd2",
+          "lufs_i": -17.99,
+          "true_peak_dbtp": -6.22,
+          "normalization_gain_db": -7.17
+        }
+      }
+    },
+    {
+      "id": "decel-downshift-04",
+      "label_he": "האטה והורדת הילוך · 4",
+      "category": "deceleration",
+      "synthesis": "deceleration",
+      "intensity": null,
+      "variant": 4,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 1.008,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 1.008,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 16949466180287876039,
+      "files": {
+        "ogg": {
+          "path": "audio/decel-downshift-04.ogg",
+          "bytes": 5835,
+          "sha256": "c31cff077b182bfe250bd1f24af98d86a51b216ac33bf9902ec5185cd6a088af",
+          "lufs_i": -18.03,
+          "true_peak_dbtp": -6.07,
+          "normalization_gain_db": -7.61
+        },
+        "mp3": {
+          "path": "audio/decel-downshift-04.mp3",
+          "bytes": 8640,
+          "sha256": "8cc771de95224d14734bab85ceac809d590ec8e9f82cd6c58df4877fe3b13263",
+          "lufs_i": -18.03,
+          "true_peak_dbtp": -6.19,
+          "normalization_gain_db": -7.18
+        }
+      }
+    },
+    {
+      "id": "shift-up-01",
+      "label_he": "העלאת הילוך · 1",
+      "category": "shift_up",
+      "synthesis": "shift_up",
+      "intensity": null,
+      "variant": 1,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.72,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.72,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 2658270736192577441,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-up-01.ogg",
+          "bytes": 5217,
+          "sha256": "7e3f2d7a26a2e49b4e0bf7f2154264adc32a7b74c8451495b89eebe0ed1ea356",
+          "lufs_i": -18.07,
+          "true_peak_dbtp": -6.53,
+          "normalization_gain_db": -7.8
+        },
+        "mp3": {
+          "path": "audio/shift-up-01.mp3",
+          "bytes": 6336,
+          "sha256": "c7127a905e5491d6aebcf5c3b9492b71df1dfc7b175ae09e5109d907ddc40ced",
+          "lufs_i": -18.02,
+          "true_peak_dbtp": -6.71,
+          "normalization_gain_db": -7.38
+        }
+      }
+    },
+    {
+      "id": "shift-up-02",
+      "label_he": "העלאת הילוך · 2",
+      "category": "shift_up",
+      "synthesis": "shift_up",
+      "intensity": null,
+      "variant": 2,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.792,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.792,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 18374816099025924785,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-up-02.ogg",
+          "bytes": 5346,
+          "sha256": "88ef3a2775d0dcd1ba060fa76df6a8e81ebcd1837dbdec4f90be7d696d0f1976",
+          "lufs_i": -18.02,
+          "true_peak_dbtp": -6.6,
+          "normalization_gain_db": -7.85
+        },
+        "mp3": {
+          "path": "audio/shift-up-02.mp3",
+          "bytes": 6912,
+          "sha256": "d67af76c2f068481fc75323b38ba583b6d4f599dd85b492fece88123138257d5",
+          "lufs_i": -17.97,
+          "true_peak_dbtp": -6.73,
+          "normalization_gain_db": -7.4
+        }
+      }
+    },
+    {
+      "id": "shift-up-03",
+      "label_he": "העלאת הילוך · 3",
+      "category": "shift_up",
+      "synthesis": "shift_up",
+      "intensity": null,
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.864,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.864,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 70630228483206869,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-up-03.ogg",
+          "bytes": 5548,
+          "sha256": "8d5a4734e576ee414c08b781c755170fc6de3a2a238acc53123842fbb4c92090",
+          "lufs_i": -18.03,
+          "true_peak_dbtp": -6.63,
+          "normalization_gain_db": -8.07
+        },
+        "mp3": {
+          "path": "audio/shift-up-03.mp3",
+          "bytes": 7488,
+          "sha256": "2b6c1bf96eade8595325509ab8f02952c0eb5021f259992ca04597e2911222c3",
+          "lufs_i": -18.03,
+          "true_peak_dbtp": -6.9,
+          "normalization_gain_db": -7.64
+        }
+      }
+    },
+    {
+      "id": "shift-down-01",
+      "label_he": "הורדת הילוך · 1",
+      "category": "shift_down",
+      "synthesis": "shift_down",
+      "intensity": null,
+      "variant": 1,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.792,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.792,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 11201416062796751300,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-down-01.ogg",
+          "bytes": 5473,
+          "sha256": "cddedd223a314046734103c8bfb2c7748dc0062829ccf9ed508572276f0b6e4f",
+          "lufs_i": -18.05,
+          "true_peak_dbtp": -7.0,
+          "normalization_gain_db": -8.05
+        },
+        "mp3": {
+          "path": "audio/shift-down-01.mp3",
+          "bytes": 6912,
+          "sha256": "08da3d007f13022993c8c5e1c39bb88e7e5d3bb525cff1fb9d88498bf7555955",
+          "lufs_i": -17.97,
+          "true_peak_dbtp": -7.06,
+          "normalization_gain_db": -7.6
+        }
+      }
+    },
+    {
+      "id": "shift-down-02",
+      "label_he": "הורדת הילוך · 2",
+      "category": "shift_down",
+      "synthesis": "shift_down",
+      "intensity": null,
+      "variant": 2,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.864,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.864,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 7079839944592304268,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-down-02.ogg",
+          "bytes": 5561,
+          "sha256": "d9973fd667f226bba2e123f4b050959b29bf189b50625b8065223d5e60a9f4db",
+          "lufs_i": -18.08,
+          "true_peak_dbtp": -7.02,
+          "normalization_gain_db": -8.24
+        },
+        "mp3": {
+          "path": "audio/shift-down-02.mp3",
+          "bytes": 7488,
+          "sha256": "8fe5316c0afb030c90158a7b4347d72bdef465c5d8a30bfecb8578105e98610f",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -7.22,
+          "normalization_gain_db": -7.78
+        }
+      }
+    },
+    {
+      "id": "shift-down-03",
+      "label_he": "הורדת הילוך · 3",
+      "category": "shift_down",
+      "synthesis": "shift_down",
+      "intensity": null,
+      "variant": 3,
+      "nominal_gain_db": -10,
+      "speed_mps": {
+        "min": 0,
+        "max": 90
+      },
+      "duration_seconds": 0.936,
+      "description_he": "מנוע משתנה עם הפסקת מומנט ופופ מפלט קטן ורך.",
+      "loop": {
+        "enabled": false,
+        "start_seconds": 0,
+        "end_seconds": 0.936,
+        "crossfade_ms": 0
+      },
+      "playback_rate": {
+        "min": 1.0,
+        "max": 1.0
+      },
+      "seed": 16492961862470889656,
+      "files": {
+        "ogg": {
+          "path": "audio/shift-down-03.ogg",
+          "bytes": 5730,
+          "sha256": "805756ff5bfd34b40193bbac0edc42abc85edda6e5ce67a865d040fc49979fe1",
+          "lufs_i": -18.05,
+          "true_peak_dbtp": -7.09,
+          "normalization_gain_db": -8.08
+        },
+        "mp3": {
+          "path": "audio/shift-down-03.mp3",
+          "bytes": 8064,
+          "sha256": "fb47ec4e8a8b61f48526107e685228afe9a654732e775e2436abc4691f6569a2",
+          "lufs_i": -18.0,
+          "true_peak_dbtp": -7.09,
+          "normalization_gain_db": -7.64
+        }
+      }
+    }
+  ]
+}

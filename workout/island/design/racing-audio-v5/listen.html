@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="no-referrer">
+  <title>מירוצים — חדר האזנה 5</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{--bg:#10161d;--panel:#19232d;--border:#34414e;--text:#f0f3f4;--muted:#b3c0cb;--accent:#f1c77b;--accent-dark:#322b21;--green:#a7d3bf;--red:#ffb2a7;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+    *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button,select{min-height:44px}button{border:1px solid var(--border);border-radius:10px;padding:.5rem .95rem;color:var(--text);background:#263441;cursor:pointer}button:hover{border-color:var(--accent)}button[aria-pressed="true"],button.primary{background:var(--accent);border-color:var(--accent);color:#1c2025}button:disabled{opacity:.5;cursor:wait}a{color:var(--accent);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:4px}select{border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);padding:.35rem .6rem;max-width:100%}input[type="range"]{width:100%;accent-color:var(--accent);min-height:36px;direction:ltr}input[type="checkbox"]{width:20px;height:20px;accent-color:var(--accent);vertical-align:middle;margin-inline:0 .5rem}h1,h2,h3,p{margin:0}h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.15;letter-spacing:-.045em}h2{font-size:1.3rem}h3{font-size:1.1rem}p{color:var(--muted)}main{max-width:1180px;margin:auto;padding:34px 24px 70px}.eyebrow{color:var(--accent);font-size:.86rem;font-weight:650;margin-bottom:12px}.hero{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:28px}.hero p{max-width:650px;margin-top:14px}.tag{display:inline-block;border:1px solid var(--border);border-radius:99px;padding:3px 12px;font-size:.8rem;white-space:nowrap;color:var(--green)}.links{display:flex;gap:18px;flex-wrap:wrap;margin:16px 0 0}.toolbar{display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:center;gap:20px;background:var(--panel);padding:18px 22px;border:1px solid var(--border);border-radius:14px;position:sticky;top:10px;z-index:3;box-shadow:0 10px 40px #0003}.toolbar label{display:block}.toolbar .check{display:flex;align-items:center;font-size:.9rem}label .small{display:block}.small{font-size:.83rem;color:var(--muted)}.value{float:left;font-variant-numeric:tabular-nums;color:var(--accent)}.status{min-height:32px;margin:12px 2px 24px;color:var(--green);font-size:.9rem}.status.error{color:var(--red)}.section-title{display:flex;gap:16px;justify-content:space-between;align-items:baseline;margin-bottom:16px}.scenario-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;min-width:0}.panel h3{margin-bottom:8px}.panel p{font-size:.9rem;margin-bottom:18px}.controls{display:grid;gap:12px}.checks{display:grid;gap:8px;font-size:.94rem}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:0}.row a{flex:none}.scene-label{font-size:.83rem;color:var(--green);min-height:1.4em;margin-top:12px}section+section{margin-top:34px}.speed-strip{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:16px;background:#141d26;border:1px solid var(--border);border-radius:12px;padding:16px 22px}.speed-strip p{font-size:.88rem;align-self:center}.catalog-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.catalog-toolbar label{font-size:.9rem}.asset-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.asset{display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;min-width:0}.asset.playing{border-color:var(--accent);box-shadow:inset 0 3px var(--accent)}.asset .description{font-size:.85rem;flex:1}.asset .id{direction:ltr;text-align:right;overflow-wrap:anywhere;font:12px ui-monospace,monospace;color:#9caebc}.asset h3{font-size:1rem}.asset dl{display:grid;grid-template-columns:1fr 1fr;margin:0;font-size:.8rem;gap:3px 10px}.asset dt{color:var(--muted)}.asset dd{margin:0;text-align:left;font-variant-numeric:tabular-nums;direction:ltr}.asset .downloads{font-size:.8rem;display:flex;gap:14px;flex-wrap:wrap}.asset button{width:100%;margin-top:3px}.asset .active-format{color:var(--green);font-size:.78rem;min-height:1.5em}.guide{padding:20px 22px;border:1px solid var(--border);border-radius:14px;background:#141d26}.guide summary{cursor:pointer;color:var(--accent);min-height:32px}.guide p{margin:12px 0}.guide ol{padding-inline-start:24px;color:var(--muted)}.command{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.command code{direction:ltr;unicode-bidi:isolate;background:var(--bg);padding:8px 12px;border-radius:8px;overflow-wrap:anywhere;flex:1;font-size:.85rem}.command button{flex:none}.empty{grid-column:1/-1;padding:30px;color:var(--muted);border:1px dashed var(--border);border-radius:12px}.divider{border:0;border-top:1px solid var(--border);margin:18px 0}.note{margin-top:18px;font-size:.84rem}footer{margin-top:35px;border-top:1px solid var(--border);padding-top:20px;color:var(--muted);font-size:.83rem}[hidden]{display:none!important}
+    @media(max-width:900px){.toolbar{grid-template-columns:1fr 1fr;position:static}.scenario-grid{grid-template-columns:1fr}.asset-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{align-items:flex-start}.panel{padding:20px}}
+    @media(max-width:520px){main{padding:24px 16px 45px}.hero{display:block}.hero .tag{margin-top:20px}.toolbar{gap:16px;padding:16px;grid-template-columns:1fr 1fr}.toolbar .check{grid-column:1/-1}.toolbar #stopAll{grid-column:1/-1}.asset-grid{grid-template-columns:1fr}.speed-strip{grid-template-columns:1fr;gap:8px;padding:16px}.section-title{display:block}.section-title p{margin-top:4px}.catalog-toolbar{align-items:flex-start}.asset{padding:18px}.links{gap:16px}.row button{font-size:.9rem;padding-inline:.45rem}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">האי · מירוצים · ערכת צליל 5</div>
+      <h1>להרגיש את הכביש.<br>לשמוע בנחת.</h1>
+      <p>מנוע נמוך בפיט, שוליים רכים, בלימה והילוכים. האזינו לכל צליל בנפרד או בדקו את המעברים בתרחיש נסיעה.</p>
+      <nav class="links" aria-label="קבצי הערכה"><a href="REPORT.md">דוח ומדידות</a><a href="spectrum.png">ספקטרום לפני ואחרי</a><a href="manifest.json">מניפסט</a><a href="LICENSE.txt">רישיון</a></nav>
+    </div>
+    <span class="tag">השמעה מקומית · ללא הפעלה אוטומטית</span>
+  </header>
+
+  <div class="toolbar" role="group" aria-label="הגדרות האזנה">
+    <label for="volume">עוצמת האזנה <output id="volumeValue" class="value">65%</output><input id="volume" type="range" min="0" max="100" value="65"></label>
+    <label for="format">פורמט<br><select id="format"><option value="auto">אוטומטי</option><option value="ogg">OGG בלבד</option><option value="mp3">MP3 בלבד</option></select></label>
+    <label class="check" for="raw"><input type="checkbox" id="raw">קול מקורי מנורמל<span class="small">&nbsp;להאזנה יחידנית</span></label>
+    <button id="stopAll" type="button">עצור הכול</button>
+  </div>
+  <div id="status" class="status" role="status" aria-live="polite">טוען את רשימת הצלילים…</div>
+
+  <section aria-labelledby="scenarioTitle">
+    <div class="section-title"><h2 id="scenarioTitle">בדיקת נסיעה</h2><p class="small">תרחיש אחד בכל פעם; המעברים מתבצעים בהדרגה.</p></div>
+    <div class="speed-strip">
+      <label for="speed">מהירות <output id="speedValue" class="value">70 קמ״ש</output><input id="speed" type="range" min="0" max="180" step="1" value="70"></label>
+      <p>המהירות בוחרת את שכבת השוליים והבלימה ואת קצב הנגינה בטווח שנקבע לערכה. בפיט נשמע מנוע איטי.</p>
+    </div>
+    <div class="scenario-grid">
+      <article class="panel">
+        <h3>מסלול הפיט</h3><p>מנוע שקט, פעימות מגביל רכות, פעילות צוות וקרבה לתא.</p>
+        <div class="controls">
+          <button id="pitPlay" class="primary" type="button" aria-pressed="false" disabled>השמע נסיעה בפיט</button>
+          <div class="checks"><label><input type="checkbox" id="limiter" checked>מגביל מהירות</label><label><input type="checkbox" id="crew" checked>צוות ברקע</label></div>
+          <label for="bay">קרבה לתא <output id="bayValue" class="value">35%</output><input id="bay" type="range" min="0" max="100" value="35"></label>
+        </div><div id="pitState" class="scene-label" aria-live="polite"></div>
+      </article>
+      <article class="panel">
+        <h3>יציאה לשוליים וחזרה</h3><p>בחרו משטח בזמן ההשמעה כדי לשמוע כניסה ויציאה רכות. אספלט מסיר את שכבת השוליים.</p>
+        <div class="controls"><div class="row" role="group" aria-label="משטח"><button type="button" data-surface="asphalt" disabled>אספלט</button><button type="button" data-surface="gravel" disabled>חצץ</button><button type="button" data-surface="grass" disabled>עשב</button></div><button id="surfaceStop" type="button" disabled>עצור משטח</button></div>
+        <div id="surfaceState" class="scene-label" aria-live="polite"></div>
+      </article>
+      <article class="panel">
+        <h3>בלימה והילוכים</h3><p>חיכוך הצמיגים משתנה לפי מהירות. כל לחיצה על הילוך משמיעה וריאציה נוספת.</p>
+        <div class="controls"><button id="brakePlay" type="button" aria-pressed="false" disabled>השמע בלימה רציפה</button><div class="row"><button id="shiftUp" type="button" disabled>העלאת הילוך</button><button id="shiftDown" type="button" disabled>הורדת הילוך</button></div><button id="decelerate" type="button" disabled>האטה ופופ קטן במפלט</button></div>
+        <div id="brakeState" class="scene-label" aria-live="polite"></div>
+      </article>
+    </div>
+    <p class="note">ברירת המחדל משתמשת בעוצמות התמהיל המומלצות. מתג הקול המקורי מאפשר להשוות קבצים מנורמלים בכרטיסים יחידניים; התרחישים משתמשים תמיד בתמהיל. עוצמת המאסטר מהמניפסט חלה בכל המצבים.</p>
+  </section>
+
+  <section aria-labelledby="catalogTitle">
+    <div class="section-title"><h2 id="catalogTitle">כל הצלילים</h2><p id="count" class="small"></p></div>
+    <div class="catalog-toolbar"><label for="category">קבוצה</label><select id="category"><option value="all">כל הערכה</option><option value="pit">פיט</option><option value="gravel">חצץ</option><option value="grass">עשב</option><option value="brake">בלימה</option><option value="deceleration">האטה ופופ</option><option value="shift_up">העלאת הילוך</option><option value="shift_down">הורדת הילוך</option></select></div>
+    <div id="catalog" class="asset-grid"><p class="empty">הצלילים יופיעו אחרי טעינת המניפסט.</p></div>
+  </section>
+
+  <section class="guide" aria-label="הפעלה מקומית">
+    <details id="localGuide"><summary>איך לפתוח את חדר ההאזנה במחשב</summary><ol><li>פתחו מסוף בתיקייה הראשית של הריפו והריצו את הפקודה שלמטה.</li><li>פתחו את <a href="http://localhost:8765/workout/island/design/racing-audio-v5/listen.html">חדר ההאזנה בשרת המקומי</a>.</li><li>לחצו על צליל או תרחיש. נגן הלולאות משתמש בנקודות ההתחלה והסיום מהמניפסט.</li></ol><div class="command"><code id="serverCommand">python3 -m http.server 8765 --bind 127.0.0.1</code><button id="copyCommand" type="button">העתק פקודה</button></div><p class="small">כל הקבצים נקראים מאותה תיקייה מקומית. אין צורך בחיבור לאינטרנט. פתיחה ישירה של קובץ הדף עלולה להיחסם על ידי הדפדפן.</p></details>
+  </section>
+  <footer>ערכת סקירה עצמאית. פרטי העוצמות, נקודות הלולאה והמדידות נמצאים במניפסט ובדוח. עצירה אוטומטית כשעוברים ללשונית אחרת.</footer>
+</main>
+<script>
+'use strict';
+(() => {
+  const $ = id => document.getElementById(id);
+  const state = {manifest:null, context:null, master:null, cache:new Map(), voices:new Map(), epoch:0, sceneToken:0, cardTokens:new Map(), scene:null, surface:'gravel', variants:new Map()};
+  const intensityNames = {low:'עדינה',medium:'בינונית',high:'חזקה'};
+  const categories = {pit:'פיט',gravel:'חצץ',grass:'עשב',brake:'בלימה',deceleration:'האטה ופופ',shift_up:'העלאת הילוך',shift_down:'הורדת הילוך'};
+  const db = value => 10 ** (Number(value || 0) / 20);
+  const clamp = (value,min,max) => Math.max(min,Math.min(max,value));
+  const announce = (message,error=false) => { $('status').textContent=message; $('status').classList.toggle('error',error); };
+  const run = action => { Promise.resolve().then(action).catch(error => announce(error.message || String(error),true)); };
+  function ramp(parameter,value,milliseconds) {
+    const time=state.context.currentTime;
+    if (parameter.cancelAndHoldAtTime) parameter.cancelAndHoldAtTime(time);
+    else { const previous=parameter.value; parameter.cancelScheduledValues(time); parameter.setValueAtTime(previous,time); }
+    parameter.linearRampToValueAtTime(value,time + Math.max(.012,milliseconds/1000));
+  }
+  async function audio() {
+    if (!state.context) {
+      const AudioContext=window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) throw new Error('הדפדפן אינו תומך בנגן האודיו. נסו דפדפן עדכני.');
+      state.context=new AudioContext();
+      state.master=state.context.createGain();
+      state.master.gain.value=db(state.manifest?.mixing?.master_gain_db) * Number($('volume').value)/100;
+      state.master.connect(state.context.destination);
+    }
+    if (state.context.state!=='running') await state.context.resume();
+    if (state.context.state!=='running') throw new Error('הפעלת האודיו נחסמה. לחצו שוב על כפתור ההשמעה.');
+  }
+  async function buffer(asset) {
+    const selected=$('format').value;
+    const formats=selected==='auto'?['ogg','mp3']:[selected];
+    let lastError;
+    for (const format of formats) {
+      const file=asset.files[format];
+      if (!file) continue;
+      const key=file.path;
+      if (!state.cache.has(key)) state.cache.set(key,(async () => {
+        const response=await fetch(new URL(file.path,location.href));
+        if (!response.ok) throw new Error('קובץ האודיו לא נמצא: '+file.path);
+        const decoded=await state.context.decodeAudioData(await response.arrayBuffer());
+        if (asset.loop?.enabled && decoded.duration+0.0001<asset.loop.end_seconds) throw new Error('משך הקובץ קצר מנקודת סיום הלולאה: '+asset.id);
+        return {buffer:decoded,format};
+      })());
+      try { return await state.cache.get(key); }
+      catch (error) { state.cache.delete(key); lastError=error; }
+    }
+    throw new Error(selected==='auto' ? 'לא ניתן לפענח את צליל '+asset.label_he+'. '+(lastError?.message || '') : 'הדפדפן לא הצליח לפענח את הפורמט '+selected.toUpperCase()+'. ניתן לבחור אוטומטי.');
+  }
+  function gainFor(voice) { return ($('raw').checked && voice.key.startsWith('card:') ? 1 : db(voice.asset.nominal_gain_db)) * voice.weight; }
+  function updateCard(id) {
+    const card=document.querySelector('[data-asset-id="'+CSS.escape(id)+'"]');
+    if (!card) return;
+    const voice=state.voices.get('card:'+id);
+    const active=Boolean(voice);
+    card.classList.toggle('playing',active);
+    const button=card.querySelector('button');
+    button.textContent=active?'עצור צליל':'השמע צליל';
+    button.setAttribute('aria-pressed',String(active));
+    card.querySelector('.active-format').textContent=voice?'מנגן '+voice.format.toUpperCase()+(voice.asset.loop?.enabled?' · לולאה':''):'';
+  }
+  function stopVoice(key,milliseconds=80) {
+    const voice=state.voices.get(key);
+    if (!voice) return;
+    state.voices.delete(key);
+    ramp(voice.gain.gain,0,milliseconds);
+    try { voice.source.stop(state.context.currentTime+milliseconds/1000+.02); } catch (_) {}
+    if (key.startsWith('card:')) updateCard(voice.asset.id);
+  }
+  function begin(key,asset,decoded,weight=1,rate=1,fade=45) {
+    stopVoice(key);
+    const source=state.context.createBufferSource();
+    source.buffer=decoded.buffer;
+    source.playbackRate.value=clamp(rate,asset.playback_rate?.min || 1,asset.playback_rate?.max || 1);
+    const loop=asset.loop;
+    if (loop?.enabled) { source.loop=true; source.loopStart=loop.start_seconds; source.loopEnd=loop.end_seconds; }
+    const gain=state.context.createGain();
+    gain.gain.value=0;
+    source.connect(gain); gain.connect(state.master);
+    const voice={key,asset,source,gain,weight,format:decoded.format};
+    state.voices.set(key,voice);
+    source.onended=() => {
+      source.disconnect(); gain.disconnect();
+      if (state.voices.get(key)===voice) state.voices.delete(key);
+      if (key.startsWith('card:')) updateCard(asset.id);
+    };
+    source.start(state.context.currentTime+.008,loop?.enabled?loop.start_seconds:0);
+    ramp(gain.gain,gainFor(voice),fade);
+    if (key.startsWith('card:')) updateCard(asset.id);
+    return voice;
+  }
+  function stopAll(message=true) {
+    ++state.epoch; ++state.sceneToken;
+    state.cardTokens.clear();
+    for (const key of [...state.voices.keys()]) stopVoice(key);
+    state.scene=null;
+    updateSceneUI();
+    if (message) announce('כל הצלילים נעצרו.');
+  }
+  async function playCard(asset) {
+    const key='card:'+asset.id;
+    if (state.voices.has(key)) { stopVoice(key); return; }
+    stopAll(false);
+    const token=Symbol(asset.id);
+    state.cardTokens.set(asset.id,token);
+    const epoch=state.epoch;
+    await audio();
+    announce('טוען: '+asset.label_he);
+    const decoded=await buffer(asset);
+    if (epoch!==state.epoch || state.cardTokens.get(asset.id)!==token) return;
+    begin(key,asset,decoded);
+    announce('מנגן: '+asset.label_he+' · '+decoded.format.toUpperCase());
+  }
+  function intensityAtSpeed() {
+    const speed=Number($('speed').value)/3.6;
+    const thresholds=state.manifest?.mixing?.speed_thresholds_mps || [6,18,30];
+    return speed<thresholds[1]?'low':speed<thresholds[2]?'medium':'high';
+  }
+  function sceneSpecifications() {
+    const assets=state.manifest.assets;
+    const find=id => assets.find(a => a.id===id);
+    const spec=[];
+    const add=(id,weight=1,rate=1) => {const asset=find(id); if(asset && weight>0)spec.push({key:'scene:'+id,asset,weight,rate});};
+    const floor=state.manifest.mixing?.speed_thresholds_mps?.[0] || 6;
+    const maxSpeed=state.manifest.mixing?.max_speed_mps || 90;
+    if(state.scene==='pit') {
+      add('pit-engine-slow');
+      if($('limiter').checked) add('pit-limiter');
+      if($('crew').checked) add('pit-crew-background');
+      add('pit-bay-proximity',Number($('bay').value)/100);
+    } else if(state.scene==='surface' && state.surface!=='asphalt') {
+      const intensity=intensityAtSpeed(), speed=Number($('speed').value)/3.6;
+      if (speed>floor) add('offtrack-'+state.surface+'-'+intensity,clamp((speed-floor)/6,0,1),.82+.26*clamp(speed/maxSpeed,0,1));
+    } else if(state.scene==='brake') {
+      const speed=Number($('speed').value)/3.6;
+      if (speed>floor) add('brake-'+intensityAtSpeed(),clamp((speed-floor)/6,0,1),.82+.26*clamp(speed/maxSpeed,0,1));
+    }
+    return spec;
+  }
+  function updateSceneUI() {
+    const active=state.scene;
+    $('pitPlay').setAttribute('aria-pressed',String(active==='pit'));
+    $('pitPlay').textContent=active==='pit'?'עצור נסיעה בפיט':'השמע נסיעה בפיט';
+    $('brakePlay').setAttribute('aria-pressed',String(active==='brake'));
+    $('brakePlay').textContent=active==='brake'?'עצור בלימה רציפה':'השמע בלימה רציפה';
+    document.querySelectorAll('[data-surface]').forEach(button => button.setAttribute('aria-pressed',String(active==='surface'&&state.surface===button.dataset.surface)));
+    $('pitState').textContent=active==='pit'?'נסיעה איטית בפיט · תמהיל פעיל':'';
+    $('surfaceState').textContent=active==='surface'?(state.surface==='asphalt'?'אספלט · שכבת השוליים דועכת':(state.surface==='gravel'?'חצץ':'עשב')+' · שכבה '+intensityNames[intensityAtSpeed()]):'';
+    $('brakeState').textContent=active==='brake'?'חיכוך '+intensityNames[intensityAtSpeed()]:'';
+    if (Number($('speed').value)/3.6 <= (state.manifest?.mixing?.speed_thresholds_mps?.[0] || 6)) {
+      if(active==='surface') $('surfaceState').textContent='מהירות נמוכה · שכבת השוליים שקטה';
+      if(active==='brake') $('brakeState').textContent='מהירות נמוכה · חיכוך הצמיגים שקט';
+    }
+  }
+  async function updateScene() {
+    if(!state.manifest) return;
+    updateSceneUI();
+    const token=++state.sceneToken,epoch=state.epoch;
+    const spec=sceneSpecifications();
+    const fade=state.scene==='brake'?(state.manifest.mixing?.brake_transition_ms || 180):state.scene==='pit'?(state.manifest.mixing?.pit_transition_ms || 650):(state.manifest.mixing?.surface_transition_ms || 450);
+    await audio();
+    const prepared=await Promise.all(spec.map(async item => ({...item,decoded:await buffer(item.asset)})));
+    if(token!==state.sceneToken || epoch!==state.epoch) return;
+    const wanted=new Set(prepared.map(item=>item.key));
+    for(const key of [...state.voices.keys()]) if(key.startsWith('scene:')&&!wanted.has(key)) stopVoice(key,fade);
+    for(const item of prepared) {
+      let voice=state.voices.get(item.key);
+      if(voice && voice.format===item.decoded.format) {
+        voice.weight=item.weight;
+        ramp(voice.gain.gain,gainFor(voice),fade);
+        ramp(voice.source.playbackRate,clamp(item.rate,item.asset.playback_rate?.min || 1,item.asset.playback_rate?.max || 1),fade);
+      } else begin(item.key,item.asset,item.decoded,item.weight,item.rate,fade);
+    }
+    announce(prepared.length?'תרחיש פעיל · '+prepared.map(item=>item.decoded.format.toUpperCase()).filter((value,index,array)=>array.indexOf(value)===index).join(' / '):'השכבות דועכות לשקט.');
+  }
+  async function setScene(scene) {
+    state.cardTokens.clear();
+    if(state.scene===scene) {
+      state.scene=null;
+      for(const key of [...state.voices.keys()]) if(key.startsWith('scene:'))stopVoice(key,180);
+      ++state.sceneToken;
+      updateSceneUI();
+      announce('התרחיש נעצר.');
+      return;
+    }
+    for(const key of [...state.voices.keys()]) if(key.startsWith('card:'))stopVoice(key);
+    $('raw').checked=false;
+    state.scene=scene;
+    await updateScene();
+  }
+  async function playVariant(category) {
+    state.cardTokens.clear();
+    for(const key of [...state.voices.keys()]) if(key.startsWith('card:'))stopVoice(key);
+    $('raw').checked=false;
+    const assets=state.manifest.assets.filter(a=>a.category===category);
+    if(!assets.length) throw new Error('לא נמצאה וריאציה בקבוצה.');
+    const index=state.variants.get(category)||0;
+    state.variants.set(category,(index+1)%assets.length);
+    const asset=assets[index%assets.length],epoch=state.epoch;
+    await audio();
+    const decoded=await buffer(asset);
+    if(epoch!==state.epoch) return;
+    begin('event:'+category,asset,decoded,1,1,18);
+    announce(asset.label_he+' · '+decoded.format.toUpperCase());
+  }
+  function renderCatalog() {
+    const filter=$('category').value;
+    const assets=state.manifest.assets.filter(a=>filter==='all'||a.category===filter);
+    $('count').textContent=assets.length+' צלילים מוצגים · '+state.manifest.assets.length+' בערכה';
+    const fragment=document.createDocumentFragment();
+    for(const asset of assets) {
+      const card=document.createElement('article'); card.className='asset'; card.dataset.assetId=asset.id;
+      const heading=document.createElement('h3'); heading.textContent=asset.label_he; card.append(heading);
+      const id=document.createElement('div'); id.className='id'; id.textContent=asset.id; card.append(id);
+      const description=document.createElement('p'); description.className='description'; description.textContent=asset.description_he || categories[asset.category] || ''; card.append(description);
+      const dl=document.createElement('dl');
+      const metric=(label,value)=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;dl.append(dt,dd);};
+      metric('אופן השמעה',asset.loop?.enabled?'לולאה':'פעם אחת');
+      metric('עוצמת תמהיל',Number(asset.nominal_gain_db).toFixed(1)+' dB');
+      if(asset.loop?.enabled) metric('אזור לולאה',Number(asset.loop.start_seconds).toFixed(3)+'–'+Number(asset.loop.end_seconds).toFixed(3)+' s');
+      for(const format of ['ogg','mp3']) if(asset.files[format]) {
+        const file=asset.files[format];
+        const loudness=Number.isFinite(file.lufs_i)?Number(file.lufs_i).toFixed(2)+' LUFS':'—';
+        metric(format.toUpperCase(),(Number(file.bytes)/1000).toFixed(1)+' KB · '+loudness);
+      }
+      card.append(dl);
+      const button=document.createElement('button'); button.type='button'; button.textContent='השמע צליל'; button.setAttribute('aria-label','השמע או עצור: '+asset.label_he); button.setAttribute('aria-pressed','false'); button.addEventListener('click',()=>run(()=>playCard(asset))); card.append(button);
+      const active=document.createElement('div'); active.className='active-format'; card.append(active);
+      const downloads=document.createElement('div'); downloads.className='downloads';
+      for(const format of ['ogg','mp3']) if(asset.files[format]) {const link=document.createElement('a');link.href=asset.files[format].path;link.download='';link.textContent='הורדת '+format.toUpperCase();downloads.append(link);}
+      card.append(downloads); fragment.append(card);
+    }
+    $('catalog').replaceChildren(fragment);
+    for(const asset of assets) updateCard(asset.id);
+  }
+  $('volume').addEventListener('input',()=>{ $('volumeValue').textContent=$('volume').value+'%';if(state.master)ramp(state.master.gain,db(state.manifest?.mixing?.master_gain_db)*Number($('volume').value)/100,35); });
+  $('stopAll').addEventListener('click',()=>stopAll());
+  $('raw').addEventListener('change',()=>{stopAll(false);announce($('raw').checked?'האזנה יחידנית בקול המקורי המנורמל. בחרו כרטיס צליל.':'עוצמות התמהיל המומלצות פעילות.');});
+  $('format').addEventListener('change',()=>{stopAll(false);announce('הפורמט הוחלף. לחצו על השמעה כדי לבדוק אותו.');});
+  $('pitPlay').addEventListener('click',()=>run(()=>setScene('pit')));
+  $('brakePlay').addEventListener('click',()=>run(()=>setScene('brake')));
+  document.querySelectorAll('[data-surface]').forEach(button=>button.addEventListener('click',()=>run(async()=>{state.cardTokens.clear();for(const key of [...state.voices.keys()])if(key.startsWith('card:'))stopVoice(key);$('raw').checked=false;state.surface=button.dataset.surface;state.scene='surface';await updateScene();})));
+  $('surfaceStop').addEventListener('click',()=>{if(state.scene==='surface')run(()=>setScene('surface'));});
+  for(const control of ['limiter','crew','bay']) $(control).addEventListener(control==='bay'?'input':'change',()=>{ $('bayValue').textContent=$('bay').value+'%';if(state.scene==='pit')run(updateScene); });
+  $('speed').addEventListener('input',()=>{ $('speedValue').textContent=$('speed').value+' קמ״ש';if(state.scene)run(updateScene); });
+  $('shiftUp').addEventListener('click',()=>run(()=>playVariant('shift_up')));
+  $('shiftDown').addEventListener('click',()=>run(()=>playVariant('shift_down')));
+  $('decelerate').addEventListener('click',()=>run(()=>playVariant('deceleration')));
+  $('category').addEventListener('change',()=>{if(state.manifest)renderCatalog();});
+  $('copyCommand').addEventListener('click',()=>run(async()=>{const text=$('serverCommand').textContent;try{await navigator.clipboard.writeText(text);$('copyCommand').textContent='הועתק';}catch(_){const range=document.createRange();range.selectNodeContents($('serverCommand'));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);announce('הפקודה נבחרה; ניתן להעתיק אותה.');}}));
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll(false);});
+  window.addEventListener('pagehide',()=>stopAll(false));
+  window.addEventListener('keydown',event=>{if(event.key==='Escape')stopAll();});
+  async function load() {
+    if(location.protocol==='file:') { $('localGuide').open=true;throw new Error('לניגון הלולאות פתחו את חדר ההאזנה דרך השרת המקומי. ההוראות נמצאות בתחתית הדף.'); }
+    const response=await fetch('./manifest.json');
+    if(!response.ok)throw new Error('המניפסט לא נמצא. ודאו שהדף נפתח מתוך תיקיית הערכה המלאה.');
+    state.manifest=await response.json();
+    if(!Array.isArray(state.manifest.assets)||!state.manifest.assets.length)throw new Error('רשימת הצלילים במניפסט ריקה.');
+    renderCatalog();
+    document.querySelectorAll('.scenario-grid button').forEach(button=>button.disabled=false);
+    announce(state.manifest.assets.length+' צלילים מוכנים להאזנה. לחצו כדי להתחיל.');
+  }
+  run(load);
+})();
+</script>
+</body>
+</html>
