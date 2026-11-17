@@ -1,0 +1,450 @@
+{
+  "mode": "after",
+  "root": "/tmp/phone-f-source",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "deviceScaleFactor": 1,
+  "cases": [
+    {
+      "name": "default",
+      "query": "",
+      "errors": [],
+      "wasm": [],
+      "failed": [],
+      "frameURL": "http://127.0.0.1:34027/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1",
+      "touch": {
+        "width": 844,
+        "height": 390,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined"
+      },
+      "initialPrice": 80,
+      "walletBefore": 250,
+      "afterFirstPurchase": {
+        "level": 2,
+        "coins": 170,
+        "next": 120,
+        "button": "שדרוג לדרגה 3 · 120 ◆",
+        "disabled": false
+      },
+      "afterSecondPurchase": {
+        "level": 3,
+        "coins": 50,
+        "next": 180,
+        "description": "שני קנים מסתובבים. מהיר, מדויק, מתחמם. כל דרגת נשק מפחיתה התחממות ב־4%."
+      },
+      "stock": {
+        "seconds": 4.78,
+        "heat": 100,
+        "shots": 40,
+        "source": "button",
+        "shotsBy": {
+          "button": 40,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 0
+      },
+      "level3": {
+        "seconds": 5.19,
+        "heat": 100,
+        "shots": 52,
+        "source": "button",
+        "shotsBy": {
+          "button": 92,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 3,
+        "cooling": 0
+      },
+      "cooling1": {
+        "seconds": 5.04,
+        "heat": 100,
+        "shots": 42,
+        "source": "button",
+        "shotsBy": {
+          "button": 134,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 1
+      },
+      "coolingDescription": "קירור מהיר יותר, טעינה קצרה יותר ו־5% פחות התחממות למקלע בכל דרגה.",
+      "coolingPurchase": {
+        "coins": 170,
+        "level": 1
+      },
+      "trusted": [
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "garage"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג לדרגה 2 · 80 ◆"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג לדרגה 3 · 120 ◆"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "tab-upgrades"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג · 80 ◆"
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 2,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    },
+    {
+      "name": "individual",
+      "query": "&phoneFixF=0",
+      "errors": [],
+      "wasm": [],
+      "failed": [],
+      "frameURL": "http://127.0.0.1:34027/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&phoneFixF=0&qa=1",
+      "touch": {
+        "width": 844,
+        "height": 390,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined"
+      },
+      "initialPrice": 110,
+      "walletBefore": 250,
+      "afterFirstPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "button": "שדרוג לדרגה 3 · 176 ◆",
+        "disabled": true
+      },
+      "afterSecondPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "description": "שני קנים מסתובבים. מהיר, מדויק, מתחמם."
+      },
+      "stock": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 30,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 0
+      },
+      "level3": {
+        "seconds": 3.21,
+        "heat": 100,
+        "shots": 32,
+        "source": "button",
+        "shotsBy": {
+          "button": 62,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 3,
+        "cooling": 0
+      },
+      "cooling1": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 92,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 1
+      },
+      "coolingDescription": "קירור מהיר יותר וטעינה מחדש קצרה יותר לכל הנשקים.",
+      "coolingPurchase": {
+        "coins": 170,
+        "level": 1
+      },
+      "trusted": [
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "garage"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג לדרגה 2 · 110 ◆"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "tab-upgrades"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג · 80 ◆"
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 2,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    },
+    {
+      "name": "global",
+      "query": "&phoneFixes=0",
+      "errors": [],
+      "wasm": [],
+      "failed": [],
+      "frameURL": "http://127.0.0.1:34027/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&phoneFixes=0&qa=1",
+      "touch": {
+        "width": 844,
+        "height": 390,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined"
+      },
+      "initialPrice": 110,
+      "walletBefore": 250,
+      "afterFirstPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "button": "שדרוג לדרגה 3 · 176 ◆",
+        "disabled": true
+      },
+      "afterSecondPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "description": "שני קנים מסתובבים. מהיר, מדויק, מתחמם."
+      },
+      "stock": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 30,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 0
+      },
+      "level3": {
+        "seconds": 3.21,
+        "heat": 100,
+        "shots": 32,
+        "source": "button",
+        "shotsBy": {
+          "button": 62,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 3,
+        "cooling": 0
+      },
+      "cooling1": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 92,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 1
+      },
+      "coolingDescription": "קירור מהיר יותר וטעינה מחדש קצרה יותר לכל הנשקים.",
+      "coolingPurchase": {
+        "coins": 170,
+        "level": 1
+      },
+      "trusted": [
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "garage"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג לדרגה 2 · 110 ◆"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "tab-upgrades"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג · 80 ◆"
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 2,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "name": "stock firing >=4.7 seconds",
+      "pass": true
+    },
+    {
+      "name": "starter wallet buys two Vulcan upgrades",
+      "pass": true
+    },
+    {
+      "name": "weapon upgrade reduces active heat",
+      "pass": true
+    },
+    {
+      "name": "cooling upgrade reduces active heat",
+      "pass": true
+    },
+    {
+      "name": "trusted touch fires and buys upgrades",
+      "pass": true
+    },
+    {
+      "name": "cooling purchase is honest and accessible",
+      "pass": true
+    },
+    {
+      "name": "individual URL reaches iframe and restores legacy economy/heat",
+      "pass": true
+    },
+    {
+      "name": "global URL reaches iframe and restores legacy economy/heat",
+      "pass": true
+    },
+    {
+      "name": "default clean browser/JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "individual clean browser/JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "global clean browser/JavaScript only",
+      "pass": true
+    }
+  ]
+}

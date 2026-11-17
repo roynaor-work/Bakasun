@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: C upgraded cannon stops on the front hull; the aligned rear hull is unharmed
+ok 1 - C upgraded cannon stops on the front hull; the aligned rear hull is unharmed
+  ---
+  duration_ms: 100.46053
+  type: 'test'
+  ...
+# Subtest: C a fast segment that crosses two hulls hits only the earliest contact, independent of array order
+ok 2 - C a fast segment that crosses two hulls hits only the earliest contact, independent of array order
+  ---
+  duration_ms: 12.329217
+  type: 'test'
+  ...
+# Subtest: C an impact on the regular/upgraded cannon is drawn briefly and cleaned up
+ok 3 - C an impact on the regular/upgraded cannon is drawn briefly and cleaned up
+  ---
+  duration_ms: 18.273305
+  type: 'test'
+  ...
+# Subtest: C shield contact absorbs the shot and protects both hulls
+ok 4 - C shield contact absorbs the shot and protects both hulls
+  ---
+  duration_ms: 4.504065
+  type: 'test'
+  ...
+# Subtest: C destroying the first hull still consumes the projectile
+ok 5 - C destroying the first hull still consumes the projectile
+  ---
+  duration_ms: 2.501182
+  type: 'test'
+  ...
+# Subtest: C impact list is bounded at 24 even under a dense burst
+ok 6 - C impact list is bounded at 24 even under a dense burst
+  ---
+  duration_ms: 6.853342
+  type: 'test'
+  ...
+# Subtest: C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects
+ok 7 - C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects
+  ---
+  duration_ms: 7.152997
+  type: 'test'
+  ...
+# Subtest: C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects
+ok 8 - C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects
+  ---
+  duration_ms: 2.046942
+  type: 'test'
+  ...
+# Subtest: C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling
+ok 9 - C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling
+  ---
+  duration_ms: 34.574913
+  type: 'test'
+  ...
+# Subtest: C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged
+ok 10 - C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged
+  ---
+  duration_ms: 53.011258
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 629.406201

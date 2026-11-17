@@ -1,0 +1,154 @@
+{
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "rollback": "phoneFixes=0",
+  "patches": [
+    {
+      "id": "A",
+      "flag": "phoneFixA",
+      "file": "patches/A-basketball.patch",
+      "sha256": "d0d74c99c9f080c17dffdfe98c043d3d443f1dea0afbc5824df165b6ccd8578f",
+      "targets": [
+        {
+          "file": "workout/island/minigames/hoops-audio.mjs",
+          "sha256": "55290b1108d6d874a7d2e94d2951b0aadb741be435f442c6073cbca47813ad69"
+        },
+        {
+          "file": "workout/island/minigames/hoops-referee.mjs",
+          "sha256": "46851ea228c5344a88265c3ff58b08776e7f08d47cc47e65b928c54dca51660e"
+        },
+        {
+          "file": "tests/island-hoops-v241.test.mjs",
+          "sha256": "7030d6ceb5521986e8afc1d0a746fc973f1b734e7b849a15aa8f706c4d16f7a8"
+        },
+        {
+          "file": "tests/island-hoops-rules-v10.test.mjs",
+          "sha256": "d874ed53a64f87736f1083de0fdd6882f342fa88e4321db89f909512df31ad81"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "flag": "phoneFixB",
+      "file": "patches/B-naval.patch",
+      "sha256": "b7d3527e8d254dfca9dbfae85269e3b019137db94239830ac4d7a5defc48f105",
+      "targets": [
+        {
+          "file": "workout/island/minigames/naval.mjs",
+          "sha256": "03581f1ca47ffe515681d5d692654c0406178d0d7357c8d07586df3e633d40dc"
+        },
+        {
+          "file": "workout/island/minigames/naval-v241.mjs",
+          "sha256": "dfaf0b670468f4b1a202a18a93d5bbb130476ce8d31f95b6e4da0f44bb1d3a6d"
+        },
+        {
+          "file": "workout/island/minigames/naval-v241-hud.mjs",
+          "sha256": "3703d6267fc2093460c75d0de74d481b5c974000202afbfbe1172bf8e64880ee"
+        },
+        {
+          "file": "tests/island-naval-boars-v241.test.mjs",
+          "sha256": "6fc3da359723256f54951fd5a5b6e5ea79e466653ae63efd74c31a2a99924b5e"
+        },
+        {
+          "file": "tests/island-naval-lock-v23.test.mjs",
+          "sha256": "b92dd27b85a6526b4f7178102aa8a25a0fbb87d0fdc8e1e8076266574b6cb3f9"
+        },
+        {
+          "file": "tests/island-aliens-naval-v24.test.mjs",
+          "sha256": "8cf6c1b6294893d3882e24d07aa46111f30f4548162932ad910b761ac9a44eb2"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "flag": "phoneFixC",
+      "file": "patches/C-space.patch",
+      "sha256": "5570c26bbc37581af1f85ab2bd2d6ce30a2d71be332eb67a820ac015ee71d5a9",
+      "targets": [
+        {
+          "file": "workout/island/minigames/alien-flight-model.mjs",
+          "sha256": "7c6778c5dc489b36e49e48b58c0e8a1b5baf3d9fbfd4b41e09473a3300c0fb50"
+        },
+        {
+          "file": "tests/island-alien-flight-piercing.test.mjs",
+          "sha256": "e341598e2dc8259920dd203a5f0c31adfe6c6fefb131e7259afe84c7f60c93ee"
+        },
+        {
+          "file": "tests/island-aliens-naval-v24.test.mjs",
+          "sha256": "8cf6c1b6294893d3882e24d07aa46111f30f4548162932ad910b761ac9a44eb2"
+        },
+        {
+          "file": "tests/final-aliens.test.mjs",
+          "sha256": "d6a1bb030fada70a55813f7533463d69acbb7f0ee4665f4690fc228021787999"
+        },
+        {
+          "file": "tests/island-alien-v14.test.mjs",
+          "sha256": "34f03245e4bcdaa7f031b32509428d192f5a9d8f31e5f166bc2c414569d0fc73"
+        },
+        {
+          "file": "tests/island-g2c.test.mjs",
+          "sha256": "13d284ffefe9084149fe3685923b9411b8048dc0d220ffe80d6cf557f64e05cc"
+        },
+        {
+          "file": "tests/island-g2f.test.mjs",
+          "sha256": "690d0bf25783f77cc85642f6a16d65f5d2d178d8af1ef40229b40f9900aea995"
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "flag": "phoneFixD",
+      "file": "patches/D-racing.patch",
+      "sha256": "2cb080f127960d0fb0695e33405db17ca5a1db4db129c85828b61147b27d4988",
+      "targets": [
+        {
+          "file": "workout/island/minigames/racing-pit-ui.mjs",
+          "sha256": "bba80b7260876b6dd9ae87cabe602f5e26f428f0aa04ccc5e0bd68751915b6b9"
+        },
+        {
+          "file": "workout/island/minigames/racing-pit.mjs",
+          "sha256": "0a821b9856211ac5e12fb3b04c5c3f6677a8e96b9e306b4d09d4b461d590bbaa"
+        },
+        {
+          "file": "tests/island-racing-v24-1.test.mjs",
+          "sha256": "62c6545ba61f03b9ff1a1e92b07d7dee9fdecb96792b27e4e3f4da9ff6d59d0b"
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "flag": "phoneFixE",
+      "file": "patches/E-tennis.patch",
+      "sha256": "00da26ac79f428b4b81140a09de6802af977bcefea1ee7235def75308b822a38",
+      "targets": [
+        {
+          "file": "workout/island/minigames/tennis.mjs",
+          "sha256": "3bb1a1c9eab739b035cbae719d396a01e410ca195fa8ae018ce6be619e65c24e"
+        },
+        {
+          "file": "workout/island/minigames/tennis-session.mjs",
+          "sha256": "4455cc91acd2b958124e84b90a75768dd92dc09ec48492b2c24afdcd4dedbe96"
+        }
+      ]
+    },
+    {
+      "id": "F",
+      "flag": "phoneFixF",
+      "file": "patches/F-boars.patch",
+      "sha256": "55393c2cb7783af3462327acf1e65a1567a25591c02197077e2fb6d17d952e7c",
+      "targets": [
+        {
+          "file": "workout/island/minigames/boar-session.mjs",
+          "sha256": "eb4ed3ddd77c6d64699c9ab3ae78b02372151b9ecf27c6fee78f970be8ab2b53"
+        },
+        {
+          "file": "workout/island/minigames/boar-island/chain.mjs",
+          "sha256": "d1f591a48a12a72e44d65d1ddb00e22f3eeafb8c6b636106039cf8b4578d0caa"
+        },
+        {
+          "file": "workout/island/minigames/boar-island/game.js",
+          "sha256": "2b945f13c975e9cc6d1ad5fde2a3d61227529d107bbe852d2ea609b3bfc3385e"
+        }
+      ]
+    }
+  ]
+}

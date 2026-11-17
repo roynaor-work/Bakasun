@@ -1,0 +1,97 @@
+--- a/workout/island/minigames/alien-flight-model.mjs
++++ b/workout/island/minigames/alien-flight-model.mjs
+@@ -17,6 +17,9 @@
+ const EMPTY=Object.freeze({}),TAU=Math.PI*2,clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+ 
+ export function createAlienModel({config,balance,level,bonuses=EMPTY,random,power=1,equipment=EMPTY,permanentUpgrades=EMPTY,hangar=EMPTY,careerWins=Math.max(0,level-1),roundChoices=true,completion='survival',onUpgrade=()=>{},sound=()=>{}}){
++ // Phone review C: every cannon/Vulcan/laser projectile stops on its first ship. AoE specials keep their own rules.
++ // Either URL switch restores the previous piercing and Vulcan-only impact presentation exactly.
++ const phoneParams=new URLSearchParams(globalThis.location?.search||''),phoneFixC=phoneParams.get('phoneFixes')!=='0'&&phoneParams.get('phoneFixC')!=='0';
+  level=clamp(Math.floor(level)||1,1,balance.levels.length);
+  const settings={...balance.levels[level-1]},campaign=balance.campaign,v9=balance.v9&&alienV9Enabled()?balance.v9:null,v10=balance.v10&&alienV10Enabled()?balance.v10:null,v11=balance.v11&&alienV11Enabled()?balance.v11:null,v12=balance.v12&&alienV12Enabled()?balance.v12:null,v13=balance.v13&&alienV13Enabled()?balance.v13:null,v14=balance.v14&&alienV14Enabled()?balance.v14:null,v15=v14&&alienV15Enabled()?v15Config(balance):null,move=v15&&alienMoveEnabled()?moveConfig(balance):null,hpAdd=v9?alienV9Hp(v9,level):0,hpGear=v9?1+(v9.upgradeHp||0)*(((equipment.damage||1)*(equipment.rate||1)*(1+(hangar.rapid||0)*balance.hangar.rankRate)*(v10?1:1+.5*((permanentUpgrades.wing||0)+(equipment.weapon||0))))-1):1;if(v9){settings.seconds=Math.round(settings.seconds*v9.secondsMult);settings.waves+=v9.extraWaves||0;settings.lives+=v9.livesAdd||0;}
+  if(v11)settings.shotSeconds*=v11.shotSecondsMult;
+@@ -157,7 +160,12 @@
+   const s=sp.take(fromX,fromY-balance.playerRadius,vx,-balance.shotSpeed*(kind===2?1.5:1),0,kind);if(!s)return;
+   s.hitIds??=new Set();s.hitIds.clear();
+   if(v23){s.vulcan=kind!==2&&shotMode==='burst';if(kind!==2){if(s.vulcan)vulcanFired++;else regularFired++;}}
+-  Object.assign(s,{wing,damage:(v23&&kind!==2?(shotMode==='burst'?vc.vulcanDamage:v23.regularDamage):v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});shots.push(s);fired++;
++  Object.assign(s,{wing,damage:(v23&&kind!==2?(shotMode==='burst'?vc.vulcanDamage:v23.regularDamage):v15&&kind!==2?shotDamage(fireMode,v15):v12&&kind!==2?dmgK:1)*(wing?campaign.wingDamage*Math.max(1,alienStack(campaign,'wing',wingRank()))/Math.max(1,wings.filter(w=>w.active).length):kind===2?v11.laserDamage:kind===1?1.25:1),hp:kind===2?v11.laserPierce:kind===1?balance.pickups.laserPierce+alienStack(campaign,'laser',upgrades.laser):1,lastHit:-1,hitLo:0,hitHi:0});
++  // Stopping the laser removes the penetration output already charged by enemy HP scaling.
++  // Put that same laser coefficient, with the same HP exponent, into its first hull hit.
++  // Higher purchased ranks keep their value; cannon rounds, volley lasers and AoE retain their damage.
++  if(phoneFixC&&kind===1){const factor=gearFactor({equipment:{weapon:equipment.weapon||0},permanentUpgrades:{laser:upgrades.laser},stacks:{laser:alienStack(campaign,'laser',upgrades.laser)}});s.damage*=Math.pow(factor,v14?(v15?v15.gearExp:v14.gearExp):1);}
++  shots.push(s);fired++;
+  }
+  /** v23: one trigger pull. kind 'regular' = the steady cannon on its own clock (single-shot sound), 'vulcan' = a Vulcan
+   * bullet, 'ride' = the steady cannon's shot carried by a Vulcan tick while both buttons are held (regular damage, but it
+@@ -276,8 +284,10 @@
+     for(const a of aliens){if(s.hitIds.has(a.id))continue;const t=segmentContact(x0,y0,s.x,s.y,a.x,a.y,a.radius+balance.shotRadius,aspect());if(t!==null)contacts.push({id:a.id,t});}
+     contacts.sort((a,b)=>a.t-b.t||a.id-b.id);let active=true;
+     for(const contact of contacts){const selected=aliens.findIndex(a=>a.id===contact.id);if(selected<0)continue;const a=aliens[selected];s.lastHit=a.id;s.hitIds.add(a.id);if(a.slot<32)s.hitLo|=1<<a.slot;else s.hitHi|=1<<(a.slot-32);hits++;
+-     // v25: where a Vulcan bullet struck (presentation: an impact burst for 0.18 s).
+-     if(v25&&s.vulcan){impacts.push({id:++impactSerial,x:x0+(s.x-x0)*contact.t,y:y0+(s.y-y0)*contact.t,at:time,variant:impactSerial%4});if(impacts.length>24)impacts.shift();}
++     // A short, bounded impact at the hull contact for every shot (legacy: Vulcan only).
++     if(v25&&(s.vulcan||phoneFixC)){impacts.push({id:++impactSerial,x:x0+(s.x-x0)*contact.t,y:y0+(s.y-y0)*contact.t,at:time,variant:impactSerial%4});if(impacts.length>24)impacts.shift();}
++     // Clamp to the earliest swept contact before releasing the pooled shot, including upgraded/piercing shots.
++     if(phoneFixC){s.x=x0+(s.x-x0)*contact.t;s.y=y0+(s.y-y0)*contact.t;s.hp=1;}
+     if(!v12||hitSoundCool<=0){sound('hit');hitSoundCool=v12?v12.hitSoundGap:0;}a.hitTime=balance.hitFlashSeconds;
+      if(a.shield>0){if(!v14||(a.shieldCool||0)<=0){a.shield--;a.shieldCool=v14?v14.shieldGap:0;signal('shield-hit',a.x,a.y,a.shield,.4);}releaseAt(shots,i,sp);active=false;break;}
+      const damage=(equipment.damage||1)*power*(1+alienStack(campaign,'damage',upgrades.damage))*(s.damage||1),dealt=damageAlien(a,damage);if(dealt>0)signal('enemy-hit',a.x,a.y,dealt,.25);if(!v12||(a.sparkCool||0)<=0||a.hp<=0){burst(a.x,a.y);a.sparkCool=v12?v12.sparkCool:0;}if(a.hp<=0)destroy(selected);if(--s.hp<=0){releaseAt(shots,i,sp);active=false;break;}
+diff --git a/tests/island-alien-flight-piercing.test.mjs b/tests/island-alien-flight-piercing.test.mjs
+--- a/tests/island-alien-flight-piercing.test.mjs
++++ b/tests/island-alien-flight-piercing.test.mjs
+@@ -1,3 +1,5 @@
++// Historical piercing is retained only under the rollback switch; phone-fixes-v1/tests/C.test.mjs covers the default.
++globalThis.location={search:'?phoneFixC=0'};
+ globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+diff --git a/tests/island-aliens-naval-v24.test.mjs b/tests/island-aliens-naval-v24.test.mjs
+--- a/tests/island-aliens-naval-v24.test.mjs
++++ b/tests/island-aliens-naval-v24.test.mjs
+@@ -81,7 +81,8 @@ test('?alienRefill=0: no magazines and the same game as v23; with the regular bu
+  const both=alien({refill:false,level:2});both.effectAspect=PHONE;run(both,60*60,{firing:true,vulcan:true});assert.equal(both.refills.length,0);assert.equal(both.refillCold,0);
+ });
+ 
+-test('balance: stage 1 at the phone aspect is still won in 85-135 s with both buttons (taking the magazines as they come) and the Vulcan alone gets stronger',()=>{
++test('legacy v24 balance with phoneFixC=0: stage 1 is won in 85-135 s and refill improves Vulcan-only fire',t=>{
++ const priorLocation=globalThis.location;t.after(()=>{if(priorLocation===undefined)delete globalThis.location;else globalThis.location=priorLocation;});globalThis.location={search:'?phoneFixC=0'};
+  const play=(seed,hold,refill,chase)=>{const m=alien({refill,seed});m.effectAspect=PHONE;const r0=seededRandom(seed*7+1);let on=false;
+   for(let f=0;f<30*400&&!m.result;f++){if(f%30===0)on=r0()<chase;const r=on?m.refills?.[0]:null,t=m.aliens.filter(a=>a.entry<=0).sort((a,b)=>b.y-a.y)[0]||m.aliens[0],py=m.player.y,cross=[];for(const b of m.bolts){const vy=b.vy||1,tt=(py-b.y)/vy;if(tt>0&&tt<1.4)cross.push(b.x+(b.vx||0)*tt);}let want=r?r.x:t?t.x:m.player.x;const safe=x=>cross.every(c=>Math.abs(c-x)>14);if(!safe(want)){out:for(let d=0;d<=360;d+=3)for(const sg of[1,-1]){const x=m.player.x+sg*d;if(x>18&&x<342&&safe(x)){want=x;break out;}}}
+    m.update(1/30,{moveX:Math.max(-1,Math.min(1,(want-m.player.x)/12)),...hold});}
+diff --git a/tests/final-aliens.test.mjs b/tests/final-aliens.test.mjs
+--- a/tests/final-aliens.test.mjs
++++ b/tests/final-aliens.test.mjs
+@@ -1,3 +1,5 @@
++// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by phone-fixes-v1/tests/C-progression.test.mjs.
++globalThis.location={search:'?phoneFixC=0'};
+ // Final fix (Fable, 11/11/2026), aliens v15: steady cannon at about 5.6/s, Vulcan only in short bursts (taps too, 12/11), a hard cap at
+ // the spawn point that no gear, bonus or input path can exceed, stage 1 about 90-130 s. Pure model tests.
+ // 13/11/2026 (v23): two fire buttons are the default now (steady cannon on the fire button, Vulcan with its own heat on a second
+diff --git a/tests/island-alien-v14.test.mjs b/tests/island-alien-v14.test.mjs
+--- a/tests/island-alien-v14.test.mjs
++++ b/tests/island-alien-v14.test.mjs
+@@ -1,3 +1,5 @@
++// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by phone-fixes-v1/tests/C-progression.test.mjs.
++globalThis.location={search:'?phoneFixC=0'};
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+ import {readFile} from 'node:fs/promises';
+diff --git a/tests/island-g2c.test.mjs b/tests/island-g2c.test.mjs
+--- a/tests/island-g2c.test.mjs
++++ b/tests/island-g2c.test.mjs
+@@ -1,3 +1,5 @@
++// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by phone-fixes-v1/tests/C-progression.test.mjs.
++globalThis.location={search:'?phoneFixC=0'};
+ globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+ import test from 'node:test';
+ import assert from 'node:assert/strict';
+diff --git a/tests/island-g2f.test.mjs b/tests/island-g2f.test.mjs
+--- a/tests/island-g2f.test.mjs
++++ b/tests/island-g2f.test.mjs
+@@ -1,3 +1,5 @@
++// Historical pre-phone-fixes balance/piercing contract. Current default progression is covered by phone-fixes-v1/tests/C-progression.test.mjs.
++globalThis.location={search:'?phoneFixC=0'};
+ import {createLeague} from '../workout/island/minigames/racing-league-core.mjs';
+ globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV14=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs
+ globalThis.__alienV9=false;globalThis.__alienV10=false;globalThis.__alienV11=false;globalThis.__alienV12=false;globalThis.__alienV10=false; // legacy (pre-v9) behaviour; v9 is covered in island-alien-v9.test.mjs

@@ -1,0 +1,176 @@
+{
+  "mode": "before",
+  "root": "/workspace/Bakasun-phone",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "deviceScaleFactor": 1,
+  "cases": [
+    {
+      "name": "default",
+      "query": "",
+      "errors": [],
+      "wasm": [],
+      "failed": [],
+      "frameURL": "http://127.0.0.1:37761/workout/island/minigames/boar-island/index.html?v=island-v2-20261107-15&island=1&qa=1",
+      "touch": {
+        "width": 844,
+        "height": 390,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined"
+      },
+      "initialPrice": 110,
+      "walletBefore": 250,
+      "afterFirstPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "button": "שדרוג לדרגה 3 · 176 ◆",
+        "disabled": true
+      },
+      "afterSecondPurchase": {
+        "level": 2,
+        "coins": 140,
+        "next": 176,
+        "description": "שני קנים מסתובבים. מהיר, מדויק, מתחמם."
+      },
+      "stock": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 30,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 0
+      },
+      "level3": {
+        "seconds": 3.21,
+        "heat": 100,
+        "shots": 32,
+        "source": "button",
+        "shotsBy": {
+          "button": 62,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 3,
+        "cooling": 0
+      },
+      "cooling1": {
+        "seconds": 3.59,
+        "heat": 100,
+        "shots": 30,
+        "source": "button",
+        "shotsBy": {
+          "button": 92,
+          "scene": 0,
+          "keyboard": 0,
+          "mouse": 0,
+          "auto": 0,
+          "qa": 0,
+          "unknown": 0
+        },
+        "level": 1,
+        "cooling": 1
+      },
+      "coolingDescription": "קירור מהיר יותר וטעינה מחדש קצרה יותר לכל הנשקים.",
+      "coolingPurchase": {
+        "coins": 170,
+        "level": 1
+      },
+      "trusted": [
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "garage"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג לדרגה 2 · 110 ◆"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "◎ירי"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "tab-upgrades"
+        },
+        {
+          "trusted": true,
+          "type": "touch",
+          "target": "שדרוג · 80 ◆"
+        }
+      ],
+      "csp": {
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "htmlResponsesSeen": 2,
+        "violations": [],
+        "policyErrors": [],
+        "workers": []
+      }
+    }
+  ],
+  "assertions": [
+    {
+      "name": "stock firing >=4.7 seconds",
+      "pass": false,
+      "message": "{\"seconds\":3.59,\"heat\":100,\"shots\":30,\"source\":\"button\",\"shotsBy\":{\"button\":30,\"scene\":0,\"keyboard\":0,\"mouse\":0,\"auto\":0,\"qa\":0,\"unknown\":0},\"level\":1,\"cooling\":0}"
+    },
+    {
+      "name": "starter wallet buys two Vulcan upgrades",
+      "pass": false,
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   coins: 140,\n+   level: 2,\n+   price: 110\n-   coins: 50,\n-   level: 3,\n-   price: 80\n  }\n"
+    },
+    {
+      "name": "weapon upgrade reduces active heat",
+      "pass": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(r.level3.seconds>r.stock.seconds*1.07)\n"
+    },
+    {
+      "name": "cooling upgrade reduces active heat",
+      "pass": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(r.cooling1.seconds>r.stock.seconds*1.04)\n"
+    },
+    {
+      "name": "trusted touch fires and buys upgrades",
+      "pass": true
+    },
+    {
+      "name": "cooling purchase is honest and accessible",
+      "pass": false,
+      "message": "The input did not match the regular expression /5%/. Input:\n\n'קירור מהיר יותר וטעינה מחדש קצרה יותר לכל הנשקים.'\n"
+    },
+    {
+      "name": "default clean browser/JavaScript only",
+      "pass": true
+    }
+  ]
+}

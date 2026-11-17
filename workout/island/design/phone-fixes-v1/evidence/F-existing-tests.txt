@@ -1,0 +1,27 @@
+✔ purchases charge once and insufficient funds cannot alter progression (10.041104ms)
+✔ invalid saves recover and levels are capped (1.111674ms)
+✔ v0.1 saves migrate: progress kept, removed upgrades refunded (0.272689ms)
+✔ weapons: unlock then upgrade, cost grows, stats grow, max level stops buying (0.710504ms)
+✔ each weapon has a distinct role (sustained single-target dps within a sane band) (3.735335ms)
+✔ armor: plain hits are reduced, eye hits and explosions pierce more (0.191928ms)
+✔ boss every fifth wave, ordered times, growing size (27.340487ms)
+✔ heat caps, cooling recovers, fury prevents overheating (0.267449ms)
+✔ later waves increase resistance, early waves hit softer, all enemies reward (0.361007ms)
+✔ v0.3 invaders: sharks from wave 6, crabs from 7, mantas from 8, all three in 9 and later (9.306003ms)
+✔ v0.4 chapter 2: hand-made waves 11-20, new bosses at 15 and 20, weather with rules (0.721465ms)
+✔ Boar Island is a separately enabled campaign with the usual play-time and daily-learning gates (80.0511ms)
+✔ enter, pause and cancel preserve the island, awards and active-game guard (28.366632ms)
+✔ existing schema-18 city saves remain byte-for-byte valid without adding fake campaign rewards (20.49703ms)
+✔ the imported weapons, wave logic, artwork generators and Three runtime preserve the shipped source bytes (184.927795ms)
+✔ Boar: no weapon stops upgrading before the last level; every step has a finite, rising price and stronger stats (23.248104ms)
+✔ Boar: every base weapon has at least two successors, each locked until the one before is fully upgraded (0.47218ms)
+✔ Boar: an old save loads without loss (levels, coins, upgrades) and the old cap of 6 no longer stops it (24.281417ms)
+✔ Boar: the legacy switch (?boar=v1) restores four weapons-worth of cap (0.321262ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2382.608578

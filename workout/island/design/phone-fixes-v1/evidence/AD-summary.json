@@ -1,0 +1,137 @@
+{
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "isMobile": true,
+  "runs": {
+    "before": [
+      {
+        "game": "A",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "refereeSteals": 2,
+        "immediateFoul": 0,
+        "rimSeconds": 0.75,
+        "webAssemblyAvailable": false,
+        "quality": 1,
+        "existingDecoderRequests": 1
+      },
+      {
+        "game": "D",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "pitButtons": 1,
+        "cancel": true,
+        "pits": 0,
+        "tyre": null,
+        "graphicsFlag": "racingV7=0"
+      }
+    ],
+    "after": [
+      {
+        "game": "A",
+        "desiredPass": true,
+        "legacyPass": false,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "refereeSteals": 0,
+        "immediateFoul": 1,
+        "rimSeconds": 0.18,
+        "webAssemblyAvailable": false,
+        "quality": 1,
+        "existingDecoderRequests": 1
+      },
+      {
+        "game": "D",
+        "desiredPass": true,
+        "legacyPass": false,
+        "touches": 2,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "pitButtons": 0,
+        "cancel": false,
+        "pits": 1,
+        "tyre": 1,
+        "graphicsFlag": "racingV7=0"
+      }
+    ],
+    "rollback": [
+      {
+        "game": "A",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "refereeSteals": 2,
+        "immediateFoul": 0,
+        "rimSeconds": 0.75,
+        "webAssemblyAvailable": false,
+        "quality": 1,
+        "existingDecoderRequests": 1
+      },
+      {
+        "game": "D",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "pitButtons": 1,
+        "cancel": true,
+        "pits": 0,
+        "tyre": null,
+        "graphicsFlag": "racingV7=0"
+      }
+    ],
+    "individual": [
+      {
+        "game": "A",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "refereeSteals": 2,
+        "immediateFoul": 0,
+        "rimSeconds": 0.75,
+        "webAssemblyAvailable": false,
+        "quality": 1,
+        "existingDecoderRequests": 1
+      },
+      {
+        "game": "D",
+        "desiredPass": false,
+        "legacyPass": true,
+        "touches": 1,
+        "wasmRequests": 0,
+        "wasmCalls": 0,
+        "errors": [],
+        "pitButtons": 1,
+        "cancel": true,
+        "pits": 0,
+        "tyre": null,
+        "graphicsFlag": "racingV7=0"
+      }
+    ]
+  },
+  "fullBasketballExistingDecoder": "existing v24.1 Draco WASM; no new decoder/runtime dependency in patch",
+  "racingGraphicsFlag": "racingV7=0",
+  "focusedBasketballWasmDisabled": true
+}

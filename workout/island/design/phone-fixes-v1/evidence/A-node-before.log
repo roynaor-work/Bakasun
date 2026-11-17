@@ -1,0 +1,65 @@
+✖ A possession changes are silent, leave the gate free, and do not make the referee whistle (111.399294ms)
+✖ A rim impact is a finite damped 180 ms PCM clang, and public play(rim) uses it too (98.94025ms)
+✖ A whistles only for infringements/out/expired clock; normal play, timeout and tip stay quiet (258.713593ms)
+✔ A URL rollback restores both the v24.1 steal whistle and original rim sample (298.091412ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1255.014995
+
+✖ failing tests:
+
+test at workout/island/design/phone-fixes-v1/tests/A.test.mjs:25:1
+✖ A possession changes are silent, leave the gate free, and do not make the referee whistle (111.399294ms)
+  AssertionError [ERR_ASSERTION]: a clean steal must not start the short referee whistle
+  
+  3 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:27:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/A.test.mjs:31:1
+✖ A rim impact is a finite damped 180 ms PCM clang, and public play(rim) uses it too (98.94025ms)
+  AssertionError [ERR_ASSERTION]: collision, alias and authored feel cue all use PCM
+  
+  0 !== 3
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:32:165)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/A.test.mjs:39:1
+✖ A whistles only for infringements/out/expired clock; normal play, timeout and tip stay quiet (258.713593ms)
+  AssertionError [ERR_ASSERTION]: foul, out, shot clock only
+  
+  7 !== 3
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:41:66)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 7,
+    expected: 3,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,125 @@
+✖ F: the stock Vulcan fires at least 4.7 seconds before overheating (92.470026ms)
+✖ F: the starter wallet buys two useful Vulcan levels with rising prices (1.085695ms)
+✖ F: every Vulcan level increases damage/rate and reduces active heating (0.388489ms)
+✖ F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest (15.956262ms)
+✔ F: tuning preserves saved balances and secondary weapon economy/stats (9.398105ms)
+✖ F: the MG shop DPS estimate includes cooling pauses even with purchased cooling (2.673316ms)
+✖ F: both URL rollback flags reach the real embedded campaign adapter (13.247333ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 1
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 624.832637
+
+✖ failing tests:
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:13:1
+✖ F: the stock Vulcan fires at least 4.7 seconds before overheating (92.470026ms)
+  AssertionError [ERR_ASSERTION]: {"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002}
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:15:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:18:1
+✖ F: the starter wallet buys two useful Vulcan levels with rising prices (1.085695ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  110 !== 80
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:20:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 110,
+    expected: 80,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:25:1
+✖ F: every Vulcan level increases damage/rate and reduces active heating (0.388489ms)
+  AssertionError [ERR_ASSERTION]: level 2 heats faster
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:30:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:35:1
+✖ F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest (15.956262ms)
+  AssertionError [ERR_ASSERTION]: {"stock":{"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002},"improved":{"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002}}
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:37:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:54:1
+✖ F: the MG shop DPS estimate includes cooling pauses even with purchased cooling (2.673316ms)
+  AssertionError [ERR_ASSERTION]: {"displayed":135,"measuredDps":85.3676470588259,"on":3.5833333333335173,"off":2.083333333333283}
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:58:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/F.test.mjs:60:1
+✖ F: both URL rollback flags reach the real embedded campaign adapter (13.247333ms)
+  AssertionError [ERR_ASSERTION]: phoneFixF missing from iframe
+  
+  null !== '0'
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:69:14)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: '0',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

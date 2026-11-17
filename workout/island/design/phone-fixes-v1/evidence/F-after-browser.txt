@@ -1,0 +1,59 @@
+F scenario default start
+F island ready default
+F scenario default done
+F scenario individual start
+F island ready individual
+F scenario individual done
+F scenario global start
+F island ready global
+F scenario global done
+{
+  "mode": "after",
+  "cases": 3,
+  "assertions": [
+    {
+      "name": "stock firing >=4.7 seconds",
+      "pass": true
+    },
+    {
+      "name": "starter wallet buys two Vulcan upgrades",
+      "pass": true
+    },
+    {
+      "name": "weapon upgrade reduces active heat",
+      "pass": true
+    },
+    {
+      "name": "cooling upgrade reduces active heat",
+      "pass": true
+    },
+    {
+      "name": "trusted touch fires and buys upgrades",
+      "pass": true
+    },
+    {
+      "name": "cooling purchase is honest and accessible",
+      "pass": true
+    },
+    {
+      "name": "individual URL reaches iframe and restores legacy economy/heat",
+      "pass": true
+    },
+    {
+      "name": "global URL reaches iframe and restores legacy economy/heat",
+      "pass": true
+    },
+    {
+      "name": "default clean browser/JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "individual clean browser/JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "global clean browser/JavaScript only",
+      "pass": true
+    }
+  ]
+}

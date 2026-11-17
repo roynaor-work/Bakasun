@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+const root=resolve(process.env.PHONE_FIX_ROOT||fileURLToPath(new URL('../../../../../',import.meta.url))),baseRoot=resolve(process.env.PHONE_FIX_BASE_ROOT||root);
+const config=JSON.parse(readFileSync(resolve(root,'workout/island/data/config.json'),'utf8')).minigames.tennis;
+const current=await import(pathToFileURL(resolve(root,'workout/island/minigames/tennis.mjs'))),base=await import(pathToFileURL(resolve(baseRoot,'workout/island/minigames/tennis.mjs')));
+function sample(createTennis,value,seed,enabled){const m=createTennis({config,seed,phoneFixE:enabled}),s=m.getState();m.update(0,{serve:true});m.update(0,{});while(s.serveMeter+1e-9<value)m.update(config.simulation.step);m.update(0,{serve:true});m.update(0,{});return {m,s,shot:structuredClone(s.shot)};}
+const result={samples:[],yellowFaults:[],rollbackSnapshotsEqual:true,rollbackFrames:0};
+for(const value of [.08,.5,.56,.64,.72,.75,.81,.94]){const before=sample(base.createTennis,value,4107,false),after=sample(current.createTennis,value,4107,true);result.samples.push({value,before:{quality:before.shot.quality,power:before.shot.power,zone:before.shot.serveZone,fault:before.shot.serveFault},after:{quality:after.shot.quality,power:after.shot.power,zone:after.shot.serveZone,fault:after.shot.serveFault}});}
+for(const offset of [.02,.08]){let before=0,after=0;for(let seed=1;seed<=128;seed++){before+=Boolean(sample(base.createTennis,.5+config.serve.green.easy/2+offset,seed,false).shot.serveFault);after+=Boolean(sample(current.createTennis,.5+config.serve.green.easy/2+offset,seed,true).shot.serveFault);}result.yellowFaults.push({offset,seeds:128,before,after});}
+for(const value of [.08,.5,.75,.81,.94])for(const seed of [1,42,4107]){const before=sample(base.createTennis,value,seed,false),off=sample(current.createTennis,value,seed,false);for(let i=0;i<300;i++){before.m.update(config.simulation.step);off.m.update(config.simulation.step);result.rollbackFrames++;result.rollbackSnapshotsEqual&&=JSON.stringify(before.m.snapshot())===JSON.stringify(off.m.snapshot());}}
+const out=process.env.PHONE_FIX_METRICS||fileURLToPath(new URL('../evidence/E-model-metrics.json',import.meta.url));writeFileSync(out,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));if(!result.rollbackSnapshotsEqual)process.exitCode=1;

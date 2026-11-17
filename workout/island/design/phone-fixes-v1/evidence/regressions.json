@@ -1,0 +1,116 @@
+{
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "scratch": "/workspace/phone-fixes-complete-validation",
+  "node": "v24.19.0",
+  "regressions": [
+    {
+      "patch": "A",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 1,
+      "fail": 3
+    },
+    {
+      "patch": "B",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 0,
+      "fail": 6
+    },
+    {
+      "patch": "C",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 3,
+      "fail": 7
+    },
+    {
+      "patch": "D",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 1,
+      "fail": 2
+    },
+    {
+      "patch": "E",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 1,
+      "fail": 3
+    },
+    {
+      "patch": "F",
+      "mode": "before",
+      "exit": 1,
+      "expected": true,
+      "signal": null,
+      "pass": 1,
+      "fail": 6
+    },
+    {
+      "patch": "A",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 4,
+      "fail": 0
+    },
+    {
+      "patch": "B",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 7,
+      "fail": 0
+    },
+    {
+      "patch": "C",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 10,
+      "fail": 0
+    },
+    {
+      "patch": "D",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 3,
+      "fail": 0
+    },
+    {
+      "patch": "E",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "patch": "F",
+      "mode": "after",
+      "exit": 0,
+      "expected": true,
+      "signal": null,
+      "pass": 10,
+      "fail": 0
+    }
+  ],
+  "passed": true
+}

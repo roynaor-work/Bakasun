@@ -1,0 +1,140 @@
+{
+  "samples": [
+    {
+      "value": 0.08,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "red",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.1651651651651651,
+        "power": 0.17838052106160215,
+        "zone": "red",
+        "fault": "net"
+      }
+    },
+    {
+      "value": 0.5,
+      "before": {
+        "quality": 1,
+        "power": 0.6499999999999999,
+        "zone": "green",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.9939939939939935,
+        "power": 0.6473867056245431,
+        "zone": "green",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.56,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "green",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.8738738738738734,
+        "power": 0.3209746286827367,
+        "zone": "green",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.64,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "green",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.7087087087087092,
+        "power": 0.2846322660498337,
+        "zone": "green",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.72,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "green",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.5585585585585591,
+        "power": 0.25323424640857084,
+        "zone": "green",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.75,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "yellow",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.49849849849849903,
+        "power": 0.24111250304358423,
+        "zone": "yellow",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.81,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "yellow",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.37837837837837984,
+        "power": 0.2176189554419287,
+        "zone": "yellow",
+        "fault": null
+      }
+    },
+    {
+      "value": 0.94,
+      "before": {
+        "quality": 1,
+        "power": 0.35,
+        "zone": "red",
+        "fault": null
+      },
+      "after": {
+        "quality": 0.10810810810811056,
+        "power": 0.16841442658875133,
+        "zone": "red",
+        "fault": "out"
+      }
+    }
+  ],
+  "yellowFaults": [
+    {
+      "offset": 0.02,
+      "seeds": 128,
+      "before": 0,
+      "after": 32
+    },
+    {
+      "offset": 0.08,
+      "seeds": 128,
+      "before": 0,
+      "after": 101
+    }
+  ],
+  "rollbackSnapshotsEqual": true,
+  "rollbackFrames": 4500
+}

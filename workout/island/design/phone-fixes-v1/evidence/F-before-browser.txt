@@ -1,0 +1,42 @@
+F scenario default start
+F island ready default
+F scenario default done
+{
+  "mode": "before",
+  "cases": 1,
+  "assertions": [
+    {
+      "name": "stock firing >=4.7 seconds",
+      "pass": false,
+      "message": "{\"seconds\":3.59,\"heat\":100,\"shots\":30,\"source\":\"button\",\"shotsBy\":{\"button\":30,\"scene\":0,\"keyboard\":0,\"mouse\":0,\"auto\":0,\"qa\":0,\"unknown\":0},\"level\":1,\"cooling\":0}"
+    },
+    {
+      "name": "starter wallet buys two Vulcan upgrades",
+      "pass": false,
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   coins: 140,\n+   level: 2,\n+   price: 110\n-   coins: 50,\n-   level: 3,\n-   price: 80\n  }\n"
+    },
+    {
+      "name": "weapon upgrade reduces active heat",
+      "pass": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(r.level3.seconds>r.stock.seconds*1.07)\n"
+    },
+    {
+      "name": "cooling upgrade reduces active heat",
+      "pass": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(r.cooling1.seconds>r.stock.seconds*1.04)\n"
+    },
+    {
+      "name": "trusted touch fires and buys upgrades",
+      "pass": true
+    },
+    {
+      "name": "cooling purchase is honest and accessible",
+      "pass": false,
+      "message": "The input did not match the regular expression /5%/. Input:\n\n'קירור מהיר יותר וטעינה מחדש קצרה יותר לכל הנשקים.'\n"
+    },
+    {
+      "name": "default clean browser/JavaScript only",
+      "pass": true
+    }
+  ]
+}

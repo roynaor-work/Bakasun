@@ -1,0 +1,682 @@
+{
+  "label": "after",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "wasmDisabled": true,
+  "cases": [
+    {
+      "flag": "default",
+      "toss": {
+        "phase": "toss",
+        "shot": null,
+        "meter": {
+          "x": 816,
+          "y": 230,
+          "width": 14,
+          "height": 132,
+          "right": 830,
+          "bottom": 362,
+          "hidden": false,
+          "visible": true,
+          "mode": "serve"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 720,
+            "y": 296,
+            "width": 76,
+            "height": 76,
+            "right": 796,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 644,
+            "y": 220,
+            "width": 64,
+            "height": 64,
+            "right": 708,
+            "bottom": 284,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 732,
+            "y": 220,
+            "width": 64,
+            "height": 64,
+            "right": 796,
+            "bottom": 284,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 644,
+            "y": 308,
+            "width": 64,
+            "height": 64,
+            "right": 708,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 1,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "served": {
+        "phase": "rally",
+        "shot": {
+          "quality": 0.9549549549549416,
+          "power": 0.6305134526418253,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0,
+          "right": 0,
+          "bottom": 0,
+          "hidden": true,
+          "visible": false,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 720,
+            "y": 296,
+            "width": 76,
+            "height": 76,
+            "right": 796,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "right": 0,
+            "bottom": 0,
+            "hidden": true,
+            "visible": false
+          },
+          {
+            "id": "sprint",
+            "x": 732,
+            "y": 220,
+            "width": 64,
+            "height": 64,
+            "right": 796,
+            "bottom": 284,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 644,
+            "y": 308,
+            "width": 64,
+            "height": 64,
+            "right": 708,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "incoming": {
+        "phase": "rally",
+        "shot": {
+          "quality": 1,
+          "power": 0.12,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 816,
+          "y": 230,
+          "width": 14,
+          "height": 132,
+          "right": 830,
+          "bottom": 362,
+          "hidden": false,
+          "visible": true,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 720,
+            "y": 296,
+            "width": 76,
+            "height": 76,
+            "right": 796,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0,
+            "right": 0,
+            "bottom": 0,
+            "hidden": true,
+            "visible": false
+          },
+          {
+            "id": "sprint",
+            "x": 732,
+            "y": 220,
+            "width": 64,
+            "height": 64,
+            "right": 796,
+            "bottom": 284,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 644,
+            "y": 308,
+            "width": 64,
+            "height": 64,
+            "right": 708,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "errors": [
+        "Tennis Draco requires WebAssembly"
+      ],
+      "wasmRequests": []
+    },
+    {
+      "flag": "phoneFixE=0",
+      "toss": {
+        "phase": "toss",
+        "shot": null,
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "serve"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 1,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "served": {
+        "phase": "rally",
+        "shot": {
+          "quality": 1,
+          "power": 0.6499999999999999,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "incoming": {
+        "phase": "rally",
+        "shot": {
+          "quality": 1,
+          "power": 0.12,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "errors": [
+        "Tennis Draco requires WebAssembly"
+      ],
+      "wasmRequests": []
+    },
+    {
+      "flag": "phoneFixes=0",
+      "toss": {
+        "phase": "toss",
+        "shot": null,
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "serve"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 1,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "served": {
+        "phase": "rally",
+        "shot": {
+          "quality": 1,
+          "power": 0.6499999999999999,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "incoming": {
+        "phase": "rally",
+        "shot": {
+          "quality": 1,
+          "power": 0.12,
+          "serveFault": null
+        },
+        "meter": {
+          "x": 596,
+          "y": 202,
+          "width": 24,
+          "height": 156,
+          "right": 620,
+          "bottom": 358,
+          "hidden": false,
+          "visible": true,
+          "mode": "hit"
+        },
+        "buttons": [
+          {
+            "id": "shoot",
+            "x": 736,
+            "y": 288,
+            "width": 84,
+            "height": 84,
+            "right": 820,
+            "bottom": 372,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "pass",
+            "x": 656,
+            "y": 304,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 368,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "sprint",
+            "x": 752,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 816,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          },
+          {
+            "id": "drop",
+            "x": 656,
+            "y": 208,
+            "width": 64,
+            "height": 64,
+            "right": 720,
+            "bottom": 272,
+            "hidden": false,
+            "visible": true
+          }
+        ],
+        "touches": 2,
+        "maxTouchPoints": 1,
+        "wasmType": "undefined",
+        "csp": []
+      },
+      "errors": [
+        "Tennis Draco requires WebAssembly"
+      ],
+      "wasmRequests": []
+    }
+  ],
+  "assertions": [
+    {
+      "name": "default native touch/no WASM/no page errors",
+      "passed": false,
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Tennis Draco requires WebAssembly'\n+ ]\n- []\n"
+    },
+    {
+      "name": "E serve meter disappears immediately after contact",
+      "passed": true
+    },
+    {
+      "name": "E serve control disappears after contact",
+      "passed": true
+    },
+    {
+      "name": "E incoming quality bar is on outer right rail",
+      "passed": true
+    },
+    {
+      "name": "E touch controls >=64px, separated and clear of meter",
+      "passed": true
+    },
+    {
+      "name": "phoneFixE=0 native touch/no WASM/no page errors",
+      "passed": false,
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Tennis Draco requires WebAssembly'\n+ ]\n- []\n"
+    },
+    {
+      "name": "phoneFixE=0 restores legacy idle bar and serve control",
+      "passed": true
+    },
+    {
+      "name": "phoneFixes=0 native touch/no WASM/no page errors",
+      "passed": false,
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   'Tennis Draco requires WebAssembly'\n+ ]\n- []\n"
+    },
+    {
+      "name": "phoneFixes=0 restores legacy idle bar and serve control",
+      "passed": true
+    }
+  ]
+}

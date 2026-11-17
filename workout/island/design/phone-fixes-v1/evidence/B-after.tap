@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: B: each stage and difficulty requires a full 3.5 second acquisition
+ok 1 - B: each stage and difficulty requires a full 3.5 second acquisition
+  ---
+  duration_ms: 873.441161
+  type: 'test'
+  ...
+# Subtest: B: the radar continuously sweeps and tracks the live hull while acquiring
+ok 2 - B: the radar continuously sweeps and tracks the live hull while acquiring
+  ---
+  duration_ms: 22.973651
+  type: 'test'
+  ...
+# Subtest: B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock
+ok 3 - B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock
+  ---
+  duration_ms: 92.910798
+  type: 'test'
+  ...
+# Subtest: B: a queued Fire tap fires once at the end of acquisition then clears the lock
+ok 4 - B: a queued Fire tap fires once at the end of acquisition then clears the lock
+  ---
+  duration_ms: 74.921375
+  type: 'test'
+  ...
+# Subtest: B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock
+ok 5 - B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock
+  ---
+  duration_ms: 38.532921
+  type: 'test'
+  ...
+# Subtest: B: a successful dedicated torpedo clears the surface lock too
+ok 6 - B: a successful dedicated torpedo clears the surface lock too
+  ---
+  duration_ms: 56.909581
+  type: 'test'
+  ...
+# Subtest: B rollback: both URL switches retain v24.1 short acquisition and persistent lock
+ok 7 - B rollback: both URL switches retain v24.1 short acquisition and persistent lock
+  ---
+  duration_ms: 75.041063
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2017.904636

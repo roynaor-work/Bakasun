@@ -1,0 +1,160 @@
+C laser-rank-value [{"rank":1,"firstHullDamage":1,"enemyHp":11.688740781978453,"damagePerHp":0.08555241481116485},{"rank":2,"firstHullDamage":1,"enemyHp":12.589276138562836,"damagePerHp":0.07943268453194464},{"rank":3,"firstHullDamage":1,"enemyHp":13.042754370415244,"damagePerHp":0.07667092177004349}]
+✖ C upgraded cannon stops on the front hull; the aligned rear hull is unharmed (29.517235ms)
+✖ C a fast segment that crosses two hulls hits only the earliest contact, independent of array order (3.86254ms)
+✖ C an impact on the regular/upgraded cannon is drawn briefly and cleaned up (3.366208ms)
+✔ C shield contact absorbs the shot and protects both hulls (10.384938ms)
+✖ C destroying the first hull still consumes the projectile (7.707739ms)
+✖ C impact list is bounded at 24 even under a dense burst (1.875992ms)
+✔ C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects (2.523277ms)
+✔ C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects (3.02478ms)
+✖ C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling (20.465196ms)
+✖ C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged (4.536366ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 3
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 375.884092
+
+✖ failing tests:
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:33:1
+✖ C upgraded cannon stops on the front hull; the aligned rear hull is unharmed (29.517235ms)
+  AssertionError [ERR_ASSERTION]: a single upgraded shot must not hit the ship behind
+  
+  99 !== 100
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:35:35)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 99,
+    expected: 100,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:38:1
+✖ C a fast segment that crosses two hulls hits only the earliest contact, independent of array order (3.86254ms)
+  AssertionError [ERR_ASSERTION]: kind 0: rear damage
+  
+  99 !== 100
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:40:65)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 99,
+    expected: 100,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:44:1
+✖ C an impact on the regular/upgraded cannon is drawn briefly and cleaned up (3.366208ms)
+  AssertionError [ERR_ASSERTION]: regular fire receives the existing modest impact burst
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:46:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:56:1
+✖ C destroying the first hull still consumes the projectile (7.707739ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  99 !== 100
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:58:50)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 99,
+    expected: 100,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:60:1
+✖ C impact list is bounded at 24 even under a dense burst (1.875992ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 24
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:63:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 24,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:86:1
+✖ C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling (20.465196ms)
+  AssertionError [ERR_ASSERTION]: another earned laser rank must increase actual first-hull damage
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:90:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/C.test.mjs:95:1
+✖ C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged (4.536366ms)
+  AssertionError [ERR_ASSERTION]: purchased weapon-2 laser retains its lost penetration output
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:97:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

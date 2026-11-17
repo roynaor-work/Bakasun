@@ -1,0 +1,322 @@
+TAP version 13
+# Subtest: B: each stage and difficulty requires a full 3.5 second acquisition
+not ok 1 - B: each stage and difficulty requires a full 3.5 second acquisition
+  ---
+  duration_ms: 77.649371
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 1.0239288307238787
+    - 3.5
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 3.5
+  actual: 1.0239288307238787
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:20:152)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: B: the radar continuously sweeps and tracks the live hull while acquiring
+not ok 2 - B: the radar continuously sweeps and tracks the live hull while acquiring
+  ---
+  duration_ms: 195.225008
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'radar must still be searching after 1.8 seconds'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:23:66)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock
+not ok 3 - B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock
+  ---
+  duration_ms: 103.401862
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    successful shot must clear homing
+    + actual - expected
+    
+    + {
+    +   aligned: true,
+    +   at: 1.4999999999999996,
+    +   index: 0,
+    +   queued: false,
+    +   shots: 1,
+    +   solution: {
+    +     contact: {
+    +       core: 0.027372314495576335,
+    +       critical: true,
+    +       distance: 0.912927852859637,
+    +       h: 10.557195000469008,
+    +       index: 0,
+    +       step: 87,
+    +       t: 0.7333333333333333,
+    +       x: 312.0638933267781,
+    +       z: 7.312954814779416
+    +     },
+    +     elevation: 18.041622749631188,
+    +     power: 1,
+    +     reachable: true,
+    +     status: 'ready',
+    +     yaw: 0.0195360489040746
+    +   },
+    +   status: 'ready'
+    + }
+    - null
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ~
+  actual:
+    index: 0
+    at: 1.4999999999999996
+    status: 'ready'
+    aligned: true
+    queued: false
+    shots: 1
+    solution:
+      yaw: 0.0195360489040746
+      elevation: 18.041622749631188
+      power: 1
+      reachable: true
+      status: 'ready'
+      contact:
+        index: 0
+        x: 312.0638933267781
+        z: 7.312954814779416
+        h: 10.557195000469008
+        t: 0.7333333333333333
+        step: 87
+        distance: 0.912927852859637
+        core: 0.027372314495576335
+        critical: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:26:186)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: B: a queued Fire tap fires once at the end of acquisition then clears the lock
+not ok 4 - B: a queued Fire tap fires once at the end of acquisition then clears the lock
+  ---
+  duration_ms: 45.933627
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:28:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + {
+    +   aligned: true,
+    +   at: 1.4999999999999996,
+    +   index: 0,
+    +   queued: false,
+    +   shots: 1,
+    +   solution: {
+    +     contact: {
+    +       core: 2.748365380303458e-9,
+    +       critical: true,
+    +       distance: 0.9312180286448876,
+    +       h: 14.379799063503185,
+    +       index: 0,
+    +       step: 84,
+    +       t: 0.7083333333333334,
+    +       x: 304.6579046236392,
+    +       z: 7.19182427492991
+    +     },
+    +     elevation: 18.27680414242377,
+    +     power: 1,
+    +     reachable: true,
+    +     status: 'ready',
+    +     yaw: 0.020444561637012977
+    +   },
+    +   status: 'ready'
+    + }
+    - null
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ~
+  actual:
+    index: 0
+    at: 1.4999999999999996
+    status: 'ready'
+    aligned: true
+    queued: false
+    shots: 1
+    solution:
+      yaw: 0.020444561637012977
+      elevation: 18.27680414242377
+      power: 1
+      reachable: true
+      status: 'ready'
+      contact:
+        index: 0
+        x: 304.6579046236392
+        z: 7.19182427492991
+        h: 14.379799063503185
+        t: 0.7083333333333334
+        step: 84
+        distance: 0.9312180286448876
+        core: 2.748365380303458e-9
+        critical: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:29:213)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock
+not ok 5 - B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock
+  ---
+  duration_ms: 8.753068
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    manual shot clears pending acquisition
+    + actual - expected
+    
+    + {
+    +   at: 0.35,
+    +   index: 0,
+    +   need: 1.1376987008043096,
+    +   progress: 0.01464945565542438,
+    +   queued: false
+    + }
+    - null
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ~
+  actual:
+    index: 0
+    at: 0.35
+    need: 1.1376987008043096
+    progress: 0.01464945565542438
+    queued: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:32:89)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: B: a successful dedicated torpedo clears the surface lock too
+not ok 6 - B: a successful dedicated torpedo clears the surface lock too
+  ---
+  duration_ms: 80.729833
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:35:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + {
+    +   aligned: false,
+    +   at: 1.5166666666666662,
+    +   index: 0,
+    +   queued: false,
+    +   shots: 0,
+    +   solution: {
+    +     contact: {
+    +       core: 0.006814544424200141,
+    +       critical: true,
+    +       distance: 0.9896807726471617,
+    +       h: 7.632387998168738,
+    +       index: 0,
+    +       step: 81,
+    +       t: 0.6833333333333333,
+    +       x: 297.4071504968469,
+    +       z: 3.5729805132639147
+    +     },
+    +     elevation: 15.665103347761487,
+    +     power: 1,
+    +     reachable: true,
+    +     status: 'ready',
+    +     yaw: 0.00019891118365924232
+    +   },
+    +   status: 'turning'
+    + }
+    - null
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: ~
+  actual:
+    index: 0
+    at: 1.5166666666666662
+    status: 'turning'
+    aligned: false
+    queued: false
+    shots: 0
+    solution:
+      yaw: 0.00019891118365924232
+      elevation: 15.665103347761487
+      power: 1
+      reachable: true
+      status: 'ready'
+      contact:
+        index: 0
+        x: 297.4071504968469
+        z: 3.5729805132639147
+        h: 7.632387998168738
+        t: 0.6833333333333333
+        step: 81
+        distance: 0.9896807726471617
+        core: 0.006814544424200141
+        critical: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:36:215)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1605.900653

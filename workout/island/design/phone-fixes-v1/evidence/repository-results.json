@@ -1,0 +1,21 @@
+{
+  "command": "ISLAND_PLAYWRIGHT=/__phone_unit_suite_no_optional_browser__ npm test",
+  "base": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "optionalBrowsers": "separate A–F proof scripts with system Chromium",
+  "runs": [
+    {
+      "mode": "baseline",
+      "tests": 4326,
+      "pass": 4261,
+      "fail": 0,
+      "skipped": 65
+    },
+    {
+      "mode": "after",
+      "tests": 4326,
+      "pass": 4261,
+      "fail": 0,
+      "skipped": 65
+    }
+  ]
+}

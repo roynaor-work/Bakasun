@@ -1,0 +1,151 @@
+diff --git a/workout/island/minigames/naval.mjs b/workout/island/minigames/naval.mjs
+--- a/workout/island/minigames/naval.mjs
++++ b/workout/island/minigames/naval.mjs
+@@ -21,7 +21,7 @@
+ import {navalSkyAngles,navalSkyError} from './naval-air.mjs?v=island-v2-20261107-15';
+ import {drawNavalV24} from './naval-v24-hud.mjs?v=island-v2-20261107-15';
+ import {createNavalV24Audio} from './naval-v24-audio.mjs?v=island-v2-20261107-15';
+-import {navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-15';
++import {navalPhoneFixB,navalRadarV241,navalAirEndV241,navalHintV241,navalSubDeepV241,navalV241Config,navalRadarSeconds,navalRadarBeep,navalRadarInRange,navalDeepTorpedoes,navalSkyBusy} from './naval-v241.mjs?v=island-v2-20261107-15';
+ import {drawNavalV241} from './naval-v241-hud.mjs?v=island-v2-20261107-15';
+ export function healthPercent(hp,maxHp){return Math.round(Math.max(0,Math.min(1,hp/maxHp))*100);}
+ export function navalSway(seed,time,balance){const a=balance.aim.sway,phase=(seed>>>0)%997;return {yaw:Math.sin(time*a.frequency+phase)*a.yaw,elevation:Math.cos(time*a.frequency*.73+phase)*a.elevation};}
+@@ -97,7 +97,7 @@
+  let stickyAt=null,lastLockIndex=null,skyLock=null,underwaterHits=0,torpedoesFired=0,aimHint=null,enemySalvos=0,lockShotNext=false;
+  // 14/11/2026 v24.1 (naval-v241.mjs): the radar lock takes time and holds fire after the kill (`?navalRadar=v24` locks at once), the stage
+  // waits for a clear sky (`?navalAirEnd=v24`), no hit-or-not words (`?navalHint=v24`).
+- const radarOn=aimV24&&navalRadarV241(),airEnd=navalAirEndV241(),hint241=navalHintV241();
++ const phoneFixB=navalPhoneFixB(),radarOn=aimV24&&navalRadarV241(),airEnd=navalAirEndV241(),hint241=navalHintV241();
+  let radar=null,radarLost=null,radarBeepAt=0,radarLocks=0,radarBreaks=0,radarRefused=0,killHolds=0,airFinale=false,airFinaleAt=null;
+  // v24: the lock also tries the two lowest powers, so a hull close by (down to about 60 units) can still be reached by a steep shot.
+  const lockCfgV24=aimV24?{...lockCfg,powers:[...lockCfg.powers,.41,.35]}:lockCfg;
+@@ -239,17 +239,20 @@
+  const rangeTo=e=>Math.hypot(e.x-playerShip.x,e.z-playerShip.z);
+  /** v24.1 radar: starts an acquisition on a live hull inside the radar's reach (a hull out of reach is refused, with the reason on the
+   * screen); a lock held on another hull ends at once. `queued`: a tap on Fire is waiting for this lock. Without the radar it locks at once. */
++ function clearShotLock(){if(!phoneFixB)return;unlock('shot');radar=null;lockPress=null;stickyAt=null;lockedTargetIndex=null;aiming=false;}
+  function acquire(index,queued=false){
+   if(!radarOn){lockOnto(index);return;}
+   const e=enemies.find(x=>x.index===index&&x.active&&x.hp>0);if(!e)return;
+   if(!navalRadarInRange(rangeTo(e),ammoIndex,false,v241.radar)){radarLost={index,reason:'range',time};radarRefused++;sound('radarLost');return;}
+   if(homing)unlock('switch');
+-  radar={index,at:time,need:navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0};radarBeepAt=time+v241.radar.beepFirst;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
++  radar={index,at:time,need:phoneFixB?3.5:navalRadarSeconds(rangeTo(e),level,mode,v241.radar,ammoIndex),progress:0,queued,out:0,...(phoneFixB?{sweep:0,scans:0,bearing:Math.atan2(e.z-playerShip.z,e.x-playerShip.x)}:{})};radarBeepAt=time+v241.radar.beepFirst;selectedTargetIndex=index;stickyAt=null;sound('radarStart');
+  }
+  /** One frame of the radar: the gauge fills; out of reach (past the margin, longer than the grace) the acquisition breaks; full = locked. */
+  function radarStep(dt){
+   if(!radar)return;const e=enemies.find(x=>x.index===radar.index&&x.active&&x.hp>0);if(!e){radar=null;return;}
+   if(!navalRadarInRange(rangeTo(e),ammoIndex,true,v241.radar)){radar.out+=dt;if(radar.out>=v241.radar.graceSeconds){radarLost={index:radar.index,reason:'lost',time};radarBreaks++;radar=null;sound('radarLost');return;}}else radar.out=0;
++  // Keep searching the live hull throughout acquisition, including while the turret turns.
++  if(phoneFixB){const elapsed=Math.max(0,time-radar.at);radar.sweep=elapsed*TAU/.9;radar.scans=Math.floor(elapsed/.9);radar.bearing=Math.atan2(e.z-playerShip.z,e.x-playerShip.x);}
+   radar.progress=Math.min(1,(time-radar.at)/radar.need);
+   if(time>=radarBeepAt&&radar.progress<1){sound('radarBeep');radarBeepAt=time+navalRadarBeep(radar.progress,v241.radar);}
+   if(radar.progress>=1){const {index,queued}=radar;radar=null;lockOnto(index);radarLocks++;if(queued&&ammoIndex!==5)homing.queued=time;}
+@@ -275,7 +278,7 @@
+   if(aligned&&fresh&&kind!==1&&kind!==5){turret.yaw=fresh.yaw;if(kind!==2)turret.elevation=Math.max(ballistic.minElevation,Math.min(ballistic.maxElevation,fresh.elevation));turret.power=Math.max(ballistic.minPower,Math.min(1,fresh.power));}
+   // v24: a locked shell always meets the hull but never counts as the weak centre (the gold star x1.75 stays a hand-aimed shot), so a lock
+   // does not end a stage in seconds; the challenge moves to sailing out of the enemy fire.
+-  homing.queued=null;lockShotNext=aimV24;const ok=shoot();lockShotNext=false;if(ok)homing.shots++;return ok;
++  const firingLock=homing;homing.queued=null;lockShotNext=aimV24;const ok=shoot();lockShotNext=false;if(ok)firingLock.shots++;return ok;
+  }
+  function damage(victim,p){
+   if(p.owner==='player'){
+@@ -335,7 +338,7 @@
+    if(kind===4){const spread=ballistic.salvoYawDegrees*Math.PI/180;for(const side of [-1,1]){const l=launchFor(kind,turret.yaw+side*spread),pr=forecastFor(l,kind);extraShots.push({...ball,launch:l,fromX:l.origin.x,fromZ:l.origin.z,targetX:pr.end.x,targetZ:pr.end.z,duration:l.duration,active:true,salvo:true,predicted:{...ball.predicted,launch:l,end:{x:pr.end.x,z:pr.end.z,t:pr.end.t}}});}ball.salvo=true;}
+   }
+   holdView=time+ball.duration+(balance.aimControls?.returnSeconds??.25);
+-  playerShip.recoil=config.visuals.recoilSeconds;if(phase!=='sink')phase='shot';sound(kind===2?'torpedo':'cannon');if(kind!==2)sound('whistle');return true;
++  playerShip.recoil=config.visuals.recoilSeconds;if(phase!=='sink')phase='shot';sound(kind===2?'torpedo':'cannon');if(kind!==2)sound('whistle');clearShotLock();return true;
+  }
+  function advanceProjectile(p,dt){
+   if(!p.active)return;
+@@ -431,7 +434,7 @@
+   get rangeState(){return navalLockRadius(playerShip,model.lockedTarget||enemies.find(e=>e.index===selectedTargetIndex&&e.active&&e.hp>0)||enemies.find(e=>e.active&&e.hp>0)||enemyShip,balance,level,mode,equipment);},
+   get aiming(){return aiming;},get lockEnabled(){return lockEnabled;},get aimV24(){return aimV24;},
+   // v24.1 (naval-v241.mjs): the radar acquisition and the last refused or lost lock, the clear-sky wait, the switches the HUD reads.
+-  get radarOn(){return radarOn;},get radarConfig(){return v241.radar;},get radar(){return radar&&{index:radar.index,at:radar.at,need:radar.need,progress:radar.progress,queued:radar.queued};},get radarLost(){return radarLost&&{...radarLost};},
++  get radarOn(){return radarOn;},get radarConfig(){return v241.radar;},get radar(){return radar&&{index:radar.index,at:radar.at,need:radar.need,progress:radar.progress,queued:radar.queued,...(phoneFixB?{sweep:radar.sweep,scans:radar.scans,bearing:radar.bearing}:{})};},get radarLost(){return radarLost&&{...radarLost};},
+   get airFinale(){return airFinale;},get airFinaleAt(){return airFinaleAt;},get hintV241(){return hint241;},get subDeep(){return deepStage;},get torpedoReload(){return deepStage&&ammo[2]<=0?Math.min(1,torpedoReload/v241.sub.reloadSeconds):0;},get enemyFireV24(){return fireV24;},get subV24(){return subStage;},get aimHint(){return aimHint;},get skyLock(){return skyLock&&{...skyLock};},get torpedoes(){return ammo[2];},get torpedoesFired(){return torpedoesFired;},get underwaterHits(){return underwaterHits;},get enemySalvos(){return enemySalvos;},get stickyAt(){return stickyAt;},get homing(){return homing&&{index:homing.index,at:homing.at,status:homing.status,aligned:homing.aligned,queued:homing.queued!=null,shots:homing.shots,solution:homing.solution&&{yaw:homing.solution.yaw,elevation:homing.solution.elevation,power:homing.solution.power,reachable:homing.solution.reachable,status:homing.solution.status,contact:homing.solution.contact&&{...homing.solution.contact}}};},get lockPress(){return lockPress;},get locksMade(){return locksMade;},get unlocked(){return unlocked;},get wind(){return wind;},get moving(){return moving;},get returning(){return false;},get fired(){return fired;},get camera(){return camera;},get triggerDown(){return wasFiring;},get heat(){return 0;},get overheated(){return false;},get enemyFired(){return enemyFired;},get repairLife(){return repairLife;},get lastAction(){return lastAction;},
+   get enemyShip(){return enemyShip;},get remaining(){return remaining;},get score(){return score;},get lives(){return playerShip.hp;},get maxLives(){return playerShip.maxHp;},get wave(){return wave;},get enemyX(){return enemyShip.x;},get shipScale(){return balance.shipTypes[enemyShip.kind].scale;},get boss(){return enemyShip.boss;},get result(){return result;},get phase(){return phase;},get enemyLives(){return enemyShip.hp;},get time(){return time;},get ammoIndex(){return ammoIndex;},get enemyFleetHp(){return fleetHealth();},get sinkProgress(){return sinkingShip?Math.min(1,(time-sinkingShip.sunkAt)/balance.sinkSeconds):0;},
+   get yaw(){return turret.yaw;},get elevation(){return turret.elevation;},get power(){return turret.power;},get turret(){return {...turret};},get prediction(){return prediction;},get lastShot(){return lastShot;},get quickShots(){return quickShots;},get viewHeld(){return time<holdView;},get sway(){return navalSway(seed,time,balance);},get warningId(){return resupplyTime>0?'naval.campaign.resupplying':null;},
+diff --git a/workout/island/minigames/naval-v241.mjs b/workout/island/minigames/naval-v241.mjs
+--- a/workout/island/minigames/naval-v241.mjs
++++ b/workout/island/minigames/naval-v241.mjs
+@@ -17,6 +17,8 @@
+  *    hits it". A v24.1 submarine stays under water for the whole stage (only its tower top and periscope break the surface), so only the
+  *    torpedo reaches it; the stage carries enough torpedoes for every submarine, and an empty tube reloads one while a submarine is out. */
+ import {polishValue} from './polish-flag.mjs?v=island-v2-20261107-15';
++/** Phone fixes B: one full radar acquisition per shot; either URL switch restores v24.1. */
++export const navalPhoneFixB=search=>polishValue('phoneFixes',search)!=='0'&&polishValue('phoneFixB',search)!=='0';
+ export const navalRadarV241=search=>polishValue('navalRadar',search)!=='v24';
+ export const navalAirEndV241=search=>polishValue('navalAirEnd',search)!=='v24';
+ export const navalHintV241=search=>polishValue('navalHint',search)!=='v24';
+diff --git a/workout/island/minigames/naval-v241-hud.mjs b/workout/island/minigames/naval-v241-hud.mjs
+--- a/workout/island/minigames/naval-v241-hud.mjs
++++ b/workout/island/minigames/naval-v241-hud.mjs
+@@ -43,9 +43,9 @@
+    // The gauge: a dark track, the filled part in amber, a tick at the top; the sweep: a short wedge that turns once every 0.6 s.
+    p.lineCap='round';p.strokeStyle=OUTLINE;p.lineWidth=7;p.globalAlpha=.6;p.beginPath();p.arc(b.x,b.y,R,0,TAU);p.stroke();p.globalAlpha=1;
+    p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=4;p.beginPath();p.arc(b.x,b.y,R,-Math.PI/2,-Math.PI/2+TAU*k);p.stroke();
+-   const a=time*TAU/.6;p.save();p.globalAlpha=.32;p.fillStyle=NAVAL_V241_COLORS.radar;p.beginPath();p.moveTo(b.x,b.y);p.arc(b.x,b.y,R-4,a-.55,a);p.closePath();p.fill();p.globalAlpha=.9;p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=1.6;p.beginPath();p.moveTo(b.x,b.y);p.lineTo(b.x+Math.cos(a)*(R-4),b.y+Math.sin(a)*(R-4));p.stroke();p.restore();
++   const a=Number.isFinite(r.sweep)?r.sweep:time*TAU/.6;p.save();p.globalAlpha=.32;p.fillStyle=NAVAL_V241_COLORS.radar;p.beginPath();p.moveTo(b.x,b.y);p.arc(b.x,b.y,R-4,a-.55,a);p.closePath();p.fill();p.globalAlpha=.9;p.strokeStyle=NAVAL_V241_COLORS.radar;p.lineWidth=1.6;p.beginPath();p.moveTo(b.x,b.y);p.lineTo(b.x+Math.cos(a)*(R-4),b.y+Math.sin(a)*(R-4));p.stroke();p.restore();
+    navalPadlock(p,b.x+box.w/2+11,b.y-box.h/2-4,NAVAL_V241_COLORS.radar,1,true);
+-   out.radar={index:r.index,progress:+k.toFixed(2),need:+(r.need||0).toFixed(2),queued:Boolean(r.queued),x:Math.round(b.x),y:Math.round(b.y),r:Math.round(R),box:{w:Math.round(box.w),h:Math.round(box.h)},offscreen:false};
++   out.radar={index:r.index,progress:+k.toFixed(2),need:+(r.need||0).toFixed(2),queued:Boolean(r.queued),...(Number.isFinite(r.sweep)?{sweep:r.sweep,scans:r.scans,bearing:r.bearing}:{}),x:Math.round(b.x),y:Math.round(b.y),r:Math.round(R),box:{w:Math.round(box.w),h:Math.round(box.h)},offscreen:false};
+   }else{const q=project(e.x,e.z,1.5),hint=navalEdgeHint(q,width,height,30);if(hint)edgeArrow(p,hint,NAVAL_V241_COLORS.radar);out.radar={index:r.index,progress:+k.toFixed(2),offscreen:true,arrow:hint?{x:Math.round(hint.x),y:Math.round(hint.y)}:null};}
+  }
+  // 2. A lock refused (out of the radar's range) or lost (the hull left it): red brackets that fade and one short reason.
+diff --git a/tests/island-naval-boars-v241.test.mjs b/tests/island-naval-boars-v241.test.mjs
+--- a/tests/island-naval-boars-v241.test.mjs
++++ b/tests/island-naval-boars-v241.test.mjs
+@@ -27,7 +27,7 @@ import {WEAPON_ORDER,fam} from '../workout/island/minigames/boar-island/chain.mj
+ const read=path=>readFile(new URL(path,import.meta.url),'utf8');
+ const config=JSON.parse(await read('../workout/island/data/config.json')).minigames,nb=config.navalDuel,strings=JSON.parse(await read('../workout/island/data/strings.he.json'));
+ const FRAME=1/60,phone={...config,width:844,height:390},DEG=Math.PI/180;
+-function naval(stage,seed,search='',balance=nb){globalThis.location={search};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
++function naval(stage,seed,search='',balance=nb){globalThis.location={search:search+(search?'&':'?')+'phoneFixB=0'};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+ const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
+ const dist=(m,e)=>Math.hypot(e.x-m.playerShip.x,e.z-m.playerShip.z);
+ const steer=(m,heading)=>{const d=Math.atan2(Math.sin(heading-(m.camera?.heading||0)),Math.cos(heading-(m.camera?.heading||0)));return {moveX:Math.sin(d),moveZ:-Math.cos(d)};};
+@@ -159,7 +159,7 @@ test('input layer: the Lock button rim fills with the acquisition (data-radar, -
+  const m=naval(10,2);run(m,30);const made=[],away={left:-1e4,right:-1e4,top:-1e4,bottom:-1e4,width:0,height:0};
+  const el=(name,rect)=>{const props=new Map();const e={name,dataset:{},style:{setProperty(k,v){props.set(k,v);},removeProperty(){},props},listeners:new Map(),innerHTML:'',hidden:false,setAttribute(){},getAttribute:()=>null,remove(){},querySelector:()=>null,addEventListener(t,fn){e.listeners.set(t,[...(e.listeners.get(t)||[]),fn]);},closest:()=>null,getBoundingClientRect:()=>rect||{left:0,top:0,right:844,bottom:390,width:844,height:390},setPointerCapture(){}};return e;};
+  const fire=el('fire',{left:734,right:822,top:280,bottom:368,width:88,height:88}),canvas=el('canvas'),controls={addEventListener(){},style:{setProperty(){},removeProperty(){}},dataset:{},classList:{toggle(){},remove(){},add(){}},querySelector:s=>s==='#shoot'?fire:null,prepend(){},append(){}};
+- globalThis.window={addEventListener(){}};globalThis.document={addEventListener(){},createElement:tag=>{const e=el('made'+made.length,away);e.tag=tag;made.push(e);return e;}};globalThis.location={search:''};
++ globalThis.window={addEventListener(){}};globalThis.document={addEventListener(){},createElement:tag=>{const e=el('made'+made.length,away);e.tag=tag;made.push(e);return e;}};globalThis.location={search:'?phoneFixB=0'};
+  try{const input=createNavalInput({controls,canvas,balance:nb,t:k=>k},()=>m,()=>null),lockBtn=made.find(e=>e.className==='naval-lock-btn');
+   lockBtn.listeners.get('pointerdown')[0]({pointerId:5,clientX:700,clientY:200,button:0,preventDefault(){}});lockBtn.listeners.get('pointerup')[0]({pointerId:5,clientX:701,clientY:200});
+   m.update(FRAME,input.sample({}));assert.ok(m.radar,'the Lock button starts an acquisition');m.update(FRAME,input.sample({}));assert.equal(lockBtn.dataset.radar,'acquiring');const p1=+lockBtn.style.props.get('--naval-radar');assert.ok(p1>=0&&p1<1);
+diff --git a/tests/island-naval-lock-v23.test.mjs b/tests/island-naval-lock-v23.test.mjs
+--- a/tests/island-naval-lock-v23.test.mjs
++++ b/tests/island-naval-lock-v23.test.mjs
+@@ -19,7 +19,7 @@ const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
+ /** v24.1 (14/11/2026): the lock now waits for a radar acquisition of 0.8-1.5 s (naval-v241.mjs). These tests check the lock itself
+  * (solve, turn, fire, end), so they run with its return switch `?navalRadar=v24` (the lock is made at once); the acquisition has its own
+  * tests in tests/island-naval-boars-v241.test.mjs. */
+-const lockNow=search=>{const q=new URLSearchParams(search);if(!q.has('navalRadar'))q.set('navalRadar','v24');return '?'+q;};
++const lockNow=search=>{const q=new URLSearchParams(search);q.set('phoneFixB','0');if(!q.has('navalRadar'))q.set('navalRadar','v24');return '?'+q;};
+ /** The model under a search string (the flags read location.search). */
+ function make(stage,seed,search=''){globalThis.location={search:lockNow(search)};try{return createNavalModel({config:phone,balance:nb,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+ const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(1/60,typeof input==='function'?input(m,i):input);};
+diff --git a/tests/island-aliens-naval-v24.test.mjs b/tests/island-aliens-naval-v24.test.mjs
+--- a/tests/island-aliens-naval-v24.test.mjs
++++ b/tests/island-aliens-naval-v24.test.mjs
+@@ -33,7 +33,7 @@ const FRAME=1/60,PHONE=(844/390)/(360/480),phone={...config,width:844,height:390
+ // v25 (14/11/2026): the Vulcan's numbers changed on purpose (tests/island-aliens-v25.test.mjs); these v24 refill and balance checks run on ?alienVulcan=v24.
+ function alien({refill=true,level=1,seed=3,vulcan='v24',...rest}={}){globalThis.__alienRefill=refill?undefined:'0';globalThis.__alienVulcan=vulcan==='v25'?undefined:'v24';globalThis.__alienEnemyFire='v24';globalThis.__alienArsenal='0';try{return createAlienModel({config,balance:ab,level,random:seededRandom(seed),completion:'waves',roundChoices:false,...rest});}finally{globalThis.__alienRefill=undefined;globalThis.__alienVulcan=undefined;globalThis.__alienEnemyFire=undefined;globalThis.__alienArsenal=undefined;}}
+ /** Naval model under a search string (the flag readers use location.search). */
+-function naval(stage,seed,search='',balance=nb){globalThis.location={search};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
++function naval(stage,seed,search='',balance=nb){globalThis.location={search:search+(search?'&':'?')+'phoneFixB=0'};try{return createNavalModel({config:phone,balance,level:stage,seed,random:seededRandom(seed),difficulty:stage});}finally{delete globalThis.location;}}
+ const run=(m,frames,input={})=>{for(let i=0;i<frames&&!m.result;i++)m.update(FRAME,typeof input==='function'?input(m,i):input);};
+ /** A canvas that records what was drawn. */
+ function recorder(){const calls=[];const p=new Proxy({canvas:{clientWidth:844,width:844},calls},{get(t,k){if(k in t)return t[k];if(k==='measureText')return s=>({width:String(s).length*6});if(k==='createRadialGradient'||k==='createLinearGradient')return()=>({addColorStop(){}});return(...a)=>{calls.push([k,...a]);};},set(t,k,v){t[k]=v;calls.push(['set:'+String(k),v]);return true;}});return p;}
+@@ -246,7 +246,7 @@ test('submarine v24 in the model: shells pass over a diver ("under water"), a to
+ test('ships v24 sounds: the torpedo-sub and enemy-fire samples by event; the model sends them (launch, under-water hit, sonar ping on a dive)',async()=>{
+  const {NAVAL_V24_AUDIO}=await import('../workout/island/minigames/naval-v24-audio.mjs');
+  assert.deepEqual(NAVAL_V24_AUDIO,{incoming:'incoming-shell',incomingTorpedo:'bubbles',enemyCannon:'enemy-cannon',torpedoLaunch:'torpedo-launch',underwaterExplosion:'underwater-explosion',sonarPing:'sonar-ping'});
+- const heard=[];globalThis.location={search:''};let m;try{m=createNavalModel({config:phone,balance:nb,level:11,seed:3,random:seededRandom(3),difficulty:11,sound:n=>heard.push(n)});}finally{delete globalThis.location;}
++ const heard=[];globalThis.location={search:'?phoneFixB=0'};let m;try{m=createNavalModel({config:phone,balance:nb,level:11,seed:3,random:seededRandom(3),difficulty:11,sound:n=>heard.push(n)});}finally{delete globalThis.location;}
+  const sub=m.enemies.find(e=>e.subMode==='v24');run(m,60*4);assert.ok(heard.includes('sonarPing'),'a ping when the submarine dives');let k=0;while(k<60*8&&!heard.includes('torpedoLaunch')){if(sub.depth>0)m.update(FRAME,{torpedoShot:true});else m.update(FRAME,{});k++;}
+  assert.ok(heard.includes('torpedoLaunch'),'our torpedo leaves the tube');k=0;while(k<60*8&&!heard.includes('underwaterExplosion')){m.update(FRAME,{});k++;}assert.ok(heard.includes('underwaterExplosion'),'it meets the submarine under water');
+ });

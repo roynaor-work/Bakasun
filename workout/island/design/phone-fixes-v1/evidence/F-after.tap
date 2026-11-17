@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: F: the stock Vulcan fires at least 4.7 seconds before overheating
+ok 1 - F: the stock Vulcan fires at least 4.7 seconds before overheating
+  ---
+  duration_ms: 13.857375
+  type: 'test'
+  ...
+# Subtest: F: the starter wallet buys two useful Vulcan levels with rising prices
+ok 2 - F: the starter wallet buys two useful Vulcan levels with rising prices
+  ---
+  duration_ms: 0.46784
+  type: 'test'
+  ...
+# Subtest: F: every Vulcan level increases damage/rate and reduces active heating
+ok 3 - F: every Vulcan level increases damage/rate and reduces active heating
+  ---
+  duration_ms: 6.644639
+  type: 'test'
+  ...
+# Subtest: F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest
+ok 4 - F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest
+  ---
+  duration_ms: 6.705967
+  type: 'test'
+  ...
+# Subtest: F: tuning preserves saved balances and secondary weapon economy/stats
+ok 5 - F: tuning preserves saved balances and secondary weapon economy/stats
+  ---
+  duration_ms: 8.992255
+  type: 'test'
+  ...
+# Subtest: F rollback ?phoneFixF=0
+ok 6 - F rollback ?phoneFixF=0
+  ---
+  duration_ms: 10.621937
+  type: 'test'
+  ...
+# Subtest: F rollback ?phoneFixes=0
+ok 7 - F rollback ?phoneFixes=0
+  ---
+  duration_ms: 2.589621
+  type: 'test'
+  ...
+# Subtest: F rollback ?boar=v1
+ok 8 - F rollback ?boar=v1
+  ---
+  duration_ms: 32.221873
+  type: 'test'
+  ...
+# Subtest: F: the MG shop DPS estimate includes cooling pauses even with purchased cooling
+ok 9 - F: the MG shop DPS estimate includes cooling pauses even with purchased cooling
+  ---
+  duration_ms: 8.059127
+  type: 'test'
+  ...
+# Subtest: F: both URL rollback flags reach the real embedded campaign adapter
+ok 10 - F: both URL rollback flags reach the real embedded campaign adapter
+  ---
+  duration_ms: 9.702702
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 431.570451

@@ -1,0 +1,661 @@
+{
+  "mode": "after",
+  "root": "/tmp/phone-B",
+  "browser": "151.0.7922.173",
+  "physicalPhone": false,
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "isMobile": true,
+  "clock": "Production session.debug.drive in 1/60-second steps between native touch inputs; page.clock renders each250ms sample. Reported seconds are model seconds",
+  "wasmDisabled": true,
+  "graphicsFlag": "navalV7=0 (existing JavaScript fallback; gameplay unchanged)",
+  "wasmRequests": [],
+  "pageerrors": [],
+  "cspViolations": [],
+  "checks": [
+    {
+      "name": "lock requires 3.5 seconds",
+      "pass": true
+    },
+    {
+      "name": "radar sweeps throughout acquisition",
+      "pass": true
+    },
+    {
+      "name": "live HUD uses model sweep",
+      "pass": true
+    },
+    {
+      "name": "shot clears lock",
+      "pass": true
+    },
+    {
+      "name": "trusted touch reached lock/fire",
+      "pass": true
+    },
+    {
+      "name": "844x390 touch runtime",
+      "pass": true
+    },
+    {
+      "name": "JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true
+    },
+    {
+      "name": "no CSP violations",
+      "pass": true
+    }
+  ],
+  "renderMetrics": {
+    "triangles": 49627,
+    "drawCalls": 21,
+    "peak": {
+      "triangles": 67838,
+      "drawCalls": 37
+    },
+    "playerModel": {
+      "requested": true,
+      "loaded": true,
+      "failed": false
+    },
+    "disposed": false,
+    "environment": {
+      "revision": "ultra-naval-3",
+      "detailedNormals": true,
+      "water": "reflective",
+      "reflectionSize": 256,
+      "reflectionCaptures": 3,
+      "mirror": {
+        "calls": 16,
+        "triangles": 18211,
+        "peakCalls": 16,
+        "peakTriangles": 18211
+      },
+      "waterTime": 0.10980000000000005,
+      "shallowBanks": 3,
+      "fallbackRipples": true,
+      "disposed": false
+    },
+    "models": {
+      "requested": 2,
+      "loaded": 2,
+      "failed": 0
+    },
+    "playerMarkers": {
+      "flag": false,
+      "flame": false,
+      "flameY": 0.85
+    },
+    "effects": {
+      "foamInstances": 0,
+      "smokeInstances": 0,
+      "damagedShips": 0,
+      "cloudPuffs": 0,
+      "trees": 0,
+      "waterTime": 0.2440000000000001,
+      "disposed": false
+    },
+    "playerBox": {
+      "height": 0.24211732607927847,
+      "top": 0.5805987403794085,
+      "bottom": 0.822716066458687,
+      "left": 0.45637636425091693,
+      "right": 0.5427591385775828
+    },
+    "playerPaint": {
+      "meanLum": 0.4482503299326372,
+      "accentShare": 0.13353676398106198
+    },
+    "aimArc": {
+      "points": 0,
+      "visible": false,
+      "movers": 0,
+      "disposed": false,
+      "kind": "water",
+      "color": "#B8F6FF"
+    },
+    "air": {
+      "aircraft": 0,
+      "tracers": 0,
+      "sparks": 0,
+      "smoke": 0,
+      "flash": false,
+      "models": {
+        "glb": 0,
+        "procedural": 0
+      },
+      "assets": {
+        "enabled": true,
+        "ready": [],
+        "failed": [],
+        "triangles": {},
+        "meshes": {}
+      }
+    },
+    "supply": {
+      "buoys": 0,
+      "model": "glb",
+      "assets": {
+        "enabled": true,
+        "ready": [
+          "buoy"
+        ],
+        "failed": [],
+        "triangles": {
+          "buoy": 440
+        },
+        "meshes": {
+          "buoy": 2
+        }
+      }
+    },
+    "base": null,
+    "structures": 0,
+    "dressing": {
+      "foam": 2,
+      "waves": 2,
+      "trails": 1,
+      "critical": false,
+      "horizonIslands": 6,
+      "disposed": false
+    },
+    "projectiles": {
+      "shells": 0,
+      "guided": 0,
+      "torpedoes": 0,
+      "trailParticles": 0,
+      "capacity": 33,
+      "disposed": false
+    },
+    "impacts": {
+      "particles": 0,
+      "capacity": 32,
+      "smoke": 0,
+      "disposed": false
+    },
+    "scenery": {
+      "palmsLoaded": true,
+      "palmInstances": 6,
+      "islands": 3,
+      "clouds": 7,
+      "shoreline": true,
+      "wake": 0,
+      "disposed": false
+    },
+    "camera": {
+      "heading": -0.0021760374570036715,
+      "zoom": 0,
+      "fov": 51,
+      "position": {
+        "x": 0.0574255831706153,
+        "y": 12.18,
+        "z": 26.38993751986536
+      },
+      "focus": {
+        "x": -0.04787278627334357,
+        "y": 1.5,
+        "z": -21.999947913491397
+      },
+      "frameDistance": 26.389999999999997,
+      "frameHeight": 12.18,
+      "progress": 0,
+      "base": {
+        "heading": -0.0021760374570036715,
+        "zoom": 0,
+        "fov": 51,
+        "position": {
+          "x": 0.0574255831706153,
+          "y": 12.18,
+          "z": 26.38993751986536
+        },
+        "focus": {
+          "x": -0.04787278627334357,
+          "y": 1.5,
+          "z": -21.999947913491397
+        },
+        "frameDistance": 26.389999999999997,
+        "frameHeight": 12.18
+      }
+    },
+    "gpu": {
+      "geometries": 31,
+      "textures": 12,
+      "programs": 31
+    },
+    "quality": "full",
+    "playerLoaded": true,
+    "v7": {
+      "enabled": false,
+      "player": false,
+      "enemies": 0,
+      "failed": 0
+    },
+    "enemiesLoaded": 1,
+    "playerLength": 11.02,
+    "enemyLengths": [
+      11.02
+    ],
+    "headings": [
+      1.6487969429191942
+    ],
+    "periscopes": [
+      false
+    ]
+  },
+  "acquisitionStart": {
+    "modelTime": 0.6280000000000004,
+    "radar": {
+      "index": 0,
+      "at": 0.5800000000000004,
+      "need": 3.5,
+      "progress": 0.013714285714285726,
+      "queued": false,
+      "sweep": 0.3351032163829116,
+      "scans": 0,
+      "bearing": -0.011096318722077517
+    }
+  },
+  "samples": [
+    {
+      "time": 0.894,
+      "progress": 0.08971428571428595,
+      "sweep": 2.1921335405048836,
+      "scans": 0,
+      "bearing": -0.01577611852309331,
+      "hud": {
+        "index": 0,
+        "progress": 0.09,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 2.1921335405048836,
+        "scans": 0,
+        "bearing": -0.01577611852309331,
+        "x": 421,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 112,
+          "h": 64
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.16,
+      "progress": 0.1657142857142859,
+      "sweep": 4.049163864626848,
+      "scans": 0,
+      "bearing": -0.02052321445998431,
+      "hud": {
+        "index": 0,
+        "progress": 0.17,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 4.049163864626848,
+        "scans": 0,
+        "bearing": -0.02052321445998431,
+        "x": 421,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 105,
+          "h": 60
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.426,
+      "progress": 0.24171428571428563,
+      "sweep": 5.906194188748809,
+      "scans": 0,
+      "bearing": -0.025056288498008294,
+      "hud": {
+        "index": 0,
+        "progress": 0.24,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 5.906194188748809,
+        "scans": 0,
+        "bearing": -0.025056288498008294,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 95,
+          "h": 56
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.692,
+      "progress": 0.31771428571428534,
+      "sweep": 7.763224512870769,
+      "scans": 1,
+      "bearing": -0.02896181341518369,
+      "hud": {
+        "index": 0,
+        "progress": 0.32,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 7.763224512870769,
+        "scans": 1,
+        "bearing": -0.02896181341518369,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 88,
+          "h": 53
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.958,
+      "progress": 0.39371428571428513,
+      "sweep": 9.62025483699273,
+      "scans": 1,
+      "bearing": -0.03184506173115734,
+      "hud": {
+        "index": 0,
+        "progress": 0.39,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 9.62025483699273,
+        "scans": 1,
+        "bearing": -0.03184506173115734,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 83,
+          "h": 49
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 2.224,
+      "progress": 0.46971428571428486,
+      "sweep": 11.47728516111469,
+      "scans": 1,
+      "bearing": -0.03341456026025036,
+      "hud": {
+        "index": 0,
+        "progress": 0.47,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 11.47728516111469,
+        "scans": 1,
+        "bearing": -0.03341456026025036,
+        "x": 422,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 79,
+          "h": 47
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 2.49,
+      "progress": 0.5457142857142846,
+      "sweep": 13.334315485236651,
+      "scans": 2,
+      "bearing": -0.03352184189183174,
+      "hud": {
+        "index": 0,
+        "progress": 0.55,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 13.334315485236651,
+        "scans": 2,
+        "bearing": -0.03352184189183174,
+        "x": 422,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 75,
+          "h": 44
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 2.756,
+      "progress": 0.6217142857142843,
+      "sweep": 15.19134580935861,
+      "scans": 2,
+      "bearing": -0.03217222426635234,
+      "hud": {
+        "index": 0,
+        "progress": 0.62,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 15.19134580935861,
+        "scans": 2,
+        "bearing": -0.03217222426635234,
+        "x": 421,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 71,
+          "h": 42
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 3.022,
+      "progress": 0.6977142857142841,
+      "sweep": 17.04837613348057,
+      "scans": 2,
+      "bearing": -0.02951595708761624,
+      "hud": {
+        "index": 0,
+        "progress": 0.7,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 17.04837613348057,
+        "scans": 2,
+        "bearing": -0.02951595708761624,
+        "x": 421,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 69,
+          "h": 41
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 3.288,
+      "progress": 0.7737142857142839,
+      "sweep": 18.90540645760253,
+      "scans": 3,
+      "bearing": -0.025826174501173454,
+      "hud": {
+        "index": 0,
+        "progress": 0.77,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 18.90540645760253,
+        "scans": 3,
+        "bearing": -0.025826174501173454,
+        "x": 422,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 67,
+          "h": 40
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 3.554,
+      "progress": 0.8497142857142836,
+      "sweep": 20.762436781724492,
+      "scans": 3,
+      "bearing": -0.021468604602147466,
+      "hud": {
+        "index": 0,
+        "progress": 0.85,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 20.762436781724492,
+        "scans": 3,
+        "bearing": -0.021468604602147466,
+        "x": 422,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 69,
+          "h": 39
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 3.82,
+      "progress": 0.9257142857142834,
+      "sweep": 22.619467105846454,
+      "scans": 3,
+      "bearing": -0.016864232747487672,
+      "hud": {
+        "index": 0,
+        "progress": 0.93,
+        "need": 3.5,
+        "queued": false,
+        "sweep": 22.619467105846454,
+        "scans": 3,
+        "bearing": -0.016864232747487672,
+        "x": 423,
+        "y": 170,
+        "r": 24,
+        "box": {
+          "w": 69,
+          "h": 38
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 4.086,
+      "progress": null,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": null,
+      "locked": true
+    }
+  ],
+  "lockSeconds": 3.506,
+  "locked": {
+    "index": 0,
+    "at": 4.085999999999991,
+    "status": "turning",
+    "aligned": false,
+    "queued": false,
+    "shots": 0,
+    "solution": {
+      "yaw": 0.019645610136321753,
+      "elevation": 18.285219498008246,
+      "power": 1,
+      "reachable": true,
+      "status": "ready",
+      "contact": {
+        "index": 0,
+        "x": 330.0465886597992,
+        "z": 0.48934111212040854,
+        "h": 7.324979618073243,
+        "t": 0.7666666666666666,
+        "step": 91,
+        "distance": 0.9831689860029343,
+        "core": 0.0024510607006966744,
+        "critical": true
+      }
+    }
+  },
+  "afterShot": {
+    "delta": 1,
+    "homing": null,
+    "radar": null,
+    "lockedTargetIndex": null,
+    "stickyAt": null
+  },
+  "touch": [
+    {
+      "type": "pointerdown",
+      "target": "primary-button",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "primary-button",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerdown",
+      "target": {},
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "naval-lock-btn",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerdown",
+      "target": {},
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "secondary-button held",
+      "id": "shoot",
+      "trusted": true,
+      "pointerType": "touch"
+    }
+  ],
+  "runtime": {
+    "width": 844,
+    "height": 390,
+    "maxTouchPoints": 1,
+    "webAssemblyType": "undefined"
+  },
+  "pass": true
+}

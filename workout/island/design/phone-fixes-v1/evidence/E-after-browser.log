@@ -1,0 +1,49 @@
+E browser context after default
+E browser context after phoneFixE=0
+E browser context after phoneFixes=0
+{
+  "label": "after",
+  "cases": 3,
+  "assertions": [
+    {
+      "name": "E poor native-touch serves lose quality and physically net/out",
+      "passed": true
+    },
+    {
+      "name": "default native touch/no WASM/no page errors",
+      "passed": true
+    },
+    {
+      "name": "E serve meter disappears immediately after contact",
+      "passed": true
+    },
+    {
+      "name": "E serve control disappears after contact",
+      "passed": true
+    },
+    {
+      "name": "E incoming quality bar is on outer right rail",
+      "passed": true
+    },
+    {
+      "name": "E touch controls >=64px, separated and clear of meter",
+      "passed": true
+    },
+    {
+      "name": "phoneFixE=0 native touch/no WASM/no page errors",
+      "passed": true
+    },
+    {
+      "name": "phoneFixE=0 restores legacy idle bar and serve control",
+      "passed": true
+    },
+    {
+      "name": "phoneFixes=0 native touch/no WASM/no page errors",
+      "passed": true
+    },
+    {
+      "name": "phoneFixes=0 restores legacy idle bar and serve control",
+      "passed": true
+    }
+  ]
+}

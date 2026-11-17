@@ -1,0 +1,200 @@
+TAP version 13
+# Subtest: C upgraded cannon stops on the front hull; the aligned rear hull is unharmed
+not ok 1 - C upgraded cannon stops on the front hull; the aligned rear hull is unharmed
+  ---
+  duration_ms: 25.341155
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:33:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    a single upgraded shot must not hit the ship behind
+    
+    99 !== 100
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 100
+  actual: 99
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:35:35)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: C a fast segment that crosses two hulls hits only the earliest contact, independent of array order
+not ok 2 - C a fast segment that crosses two hulls hits only the earliest contact, independent of array order
+  ---
+  duration_ms: 32.445397
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    kind 0: rear damage
+    
+    99 !== 100
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 100
+  actual: 99
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:40:65)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: C an impact on the regular/upgraded cannon is drawn briefly and cleaned up
+not ok 3 - C an impact on the regular/upgraded cannon is drawn briefly and cleaned up
+  ---
+  duration_ms: 2.975783
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:44:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    regular fire receives the existing modest impact burst
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:46:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: C shield contact absorbs the shot and protects both hulls
+ok 4 - C shield contact absorbs the shot and protects both hulls
+  ---
+  duration_ms: 7.48497
+  type: 'test'
+  ...
+# Subtest: C destroying the first hull still consumes the projectile
+not ok 5 - C destroying the first hull still consumes the projectile
+  ---
+  duration_ms: 7.469782
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:56:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    99 !== 100
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 100
+  actual: 99
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:58:50)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: C impact list is bounded at 24 even under a dense burst
+not ok 6 - C impact list is bounded at 24 even under a dense burst
+  ---
+  duration_ms: 5.221021
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:60:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 24
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 24
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:63:30)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects
+ok 7 - C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects
+  ---
+  duration_ms: 6.368754
+  type: 'test'
+  ...
+# Subtest: C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects
+ok 8 - C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects
+  ---
+  duration_ms: 6.302939
+  type: 'test'
+  ...
+# Subtest: C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling
+not ok 9 - C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling
+  ---
+  duration_ms: 7.678556
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:82:1'
+  failureType: 'testCodeFailure'
+  error: 'another earned laser rank must increase actual first-hull damage'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:85:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged
+not ok 10 - C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged
+  ---
+  duration_ms: 7.91939
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:90:1'
+  failureType: 'testCodeFailure'
+  error: 'purchased weapon-2 laser retains its lost penetration output'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/C.test.mjs:92:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 3
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 643.726084

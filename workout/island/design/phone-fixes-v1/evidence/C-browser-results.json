@@ -1,0 +1,134 @@
+{
+  "browser": "151.0.7922.173",
+  "clock": "Playwright deterministic RAF clock",
+  "reports": [
+    {
+      "mode": "before",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "physicalPhone": false,
+      "artMode": "shipped ?defenseV7=0 disables pre-existing WASM Draco art; current v25 gameplay and v13 player stay active",
+      "fixture": "production game/session, two aligned static existing ships; equipment rank 2 fixture (state set before start, no purchase UI); real CDP touch fires production projectile",
+      "projectile": {
+        "kind": 1,
+        "hp": 4,
+        "vx": -17.326666666666668,
+        "vy": -460
+      },
+      "frontDamage": 1,
+      "rearDamage": 1,
+      "hits": 2,
+      "shotsRemaining": 1,
+      "impactCountAtContact": 0,
+      "desiredAssertions": {
+        "stopsAtFirstHull": false,
+        "regularImpactDrawn": false
+      },
+      "modelElapsed": 0.8800000000000007,
+      "WebAssemblyAvailable": "undefined",
+      "wasmRequests": [],
+      "pageErrors": [],
+      "cspViolations": []
+    },
+    {
+      "mode": "after",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "physicalPhone": false,
+      "artMode": "shipped ?defenseV7=0 disables pre-existing WASM Draco art; current v25 gameplay and v13 player stay active",
+      "fixture": "production game/session, two aligned static existing ships; equipment rank 2 fixture (state set before start, no purchase UI); real CDP touch fires production projectile",
+      "projectile": {
+        "kind": 1,
+        "hp": 4,
+        "vx": -17.326666666666668,
+        "vy": -460
+      },
+      "frontDamage": 2.2191389441356932,
+      "rearDamage": 0,
+      "hits": 1,
+      "shotsRemaining": 0,
+      "impactCountAtContact": 1,
+      "desiredAssertions": {
+        "stopsAtFirstHull": true,
+        "regularImpactDrawn": true
+      },
+      "modelElapsed": 0.8640000000000007,
+      "WebAssemblyAvailable": "undefined",
+      "wasmRequests": [],
+      "pageErrors": [],
+      "cspViolations": []
+    },
+    {
+      "mode": "rollback",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "physicalPhone": false,
+      "artMode": "shipped ?defenseV7=0 disables pre-existing WASM Draco art; current v25 gameplay and v13 player stay active",
+      "fixture": "production game/session, two aligned static existing ships; equipment rank 2 fixture (state set before start, no purchase UI); real CDP touch fires production projectile",
+      "projectile": {
+        "kind": 1,
+        "hp": 4,
+        "vx": -17.326666666666668,
+        "vy": -460
+      },
+      "frontDamage": 1,
+      "rearDamage": 1,
+      "hits": 2,
+      "shotsRemaining": 1,
+      "impactCountAtContact": 0,
+      "desiredAssertions": {
+        "stopsAtFirstHull": false,
+        "regularImpactDrawn": false
+      },
+      "modelElapsed": 0.8640000000000007,
+      "WebAssemblyAvailable": "undefined",
+      "wasmRequests": [],
+      "pageErrors": [],
+      "cspViolations": []
+    },
+    {
+      "mode": "global-rollback",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "hasTouch": true,
+      "isMobile": true,
+      "physicalPhone": false,
+      "artMode": "shipped ?defenseV7=0 disables pre-existing WASM Draco art; current v25 gameplay and v13 player stay active",
+      "fixture": "production game/session, two aligned static existing ships; equipment rank 2 fixture (state set before start, no purchase UI); real CDP touch fires production projectile",
+      "projectile": {
+        "kind": 1,
+        "hp": 4,
+        "vx": -17.326666666666668,
+        "vy": -460
+      },
+      "frontDamage": 1,
+      "rearDamage": 1,
+      "hits": 2,
+      "shotsRemaining": 1,
+      "impactCountAtContact": 0,
+      "desiredAssertions": {
+        "stopsAtFirstHull": false,
+        "regularImpactDrawn": false
+      },
+      "modelElapsed": 0.8800000000000007,
+      "WebAssemblyAvailable": "undefined",
+      "wasmRequests": [],
+      "pageErrors": [],
+      "cspViolations": []
+    }
+  ]
+}

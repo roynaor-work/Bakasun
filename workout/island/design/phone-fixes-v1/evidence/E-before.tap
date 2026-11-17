@@ -1,0 +1,84 @@
+TAP version 13
+# Subtest: E: serve power and quality decrease away from purple, including inside green
+not ok 1 - E: serve power and quality decrease away from purple, including inside green
+  ---
+  duration_ms: 50.062847
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: 'quality 1 -> 1'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:20:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: E: early red hits the physical net and late red lands beyond the service line
+not ok 2 - E: early red hits the physical net and late red lands beyond the service line
+  ---
+  duration_ms: 1.209789
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:24:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== 'net'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'net'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:26:46)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: E: yellow fault rate rises with distance; green remains playable at every difficulty/rank
+not ok 3 - E: yellow fault rate rises with distance; green remains playable at every difficulty/rank
+  ---
+  duration_ms: 110.585629
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: '[0,0]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/E.test.mjs:38:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: E: a poor second serve awards one double-fault point
+ok 4 - E: a poor second serve awards one double-fault point
+  ---
+  duration_ms: 9.1604
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 1
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 465.637743

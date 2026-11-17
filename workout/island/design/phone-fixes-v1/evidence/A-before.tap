@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: A possession changes are silent, leave the gate free, and do not make the referee whistle
+not ok 1 - A possession changes are silent, leave the gate free, and do not make the referee whistle
+  ---
+  duration_ms: 110.267897
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    a clean steal must not start the short referee whistle
+    
+    3 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 3
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:27:9)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: A rim impact is a finite damped 180 ms PCM clang, and public play(rim) uses it too
+not ok 2 - A rim impact is a finite damped 180 ms PCM clang, and public play(rim) uses it too
+  ---
+  duration_ms: 115.716814
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:31:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    collision, alias and authored feel cue all use PCM
+    
+    0 !== 3
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 3
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:32:165)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: A whistles only for infringements/out/expired clock; normal play, timeout and tip stay quiet
+not ok 3 - A whistles only for infringements/out/expired clock; normal play, timeout and tip stay quiet
+  ---
+  duration_ms: 277.186347
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:39:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    foul, out, shot clock only
+    
+    7 !== 3
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 3
+  actual: 7
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/A.test.mjs:41:66)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: A URL rollback restores both the v24.1 steal whistle and original rim sample
+ok 4 - A URL rollback restores both the v24.1 steal whistle and original rim sample
+  ---
+  duration_ms: 297.848582
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 1
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1187.794821

@@ -1,0 +1,467 @@
+{
+  "mode": "global-rollback",
+  "root": "/tmp/phone-B",
+  "browser": "151.0.7922.173",
+  "physicalPhone": false,
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "isMobile": true,
+  "clock": "Production session.debug.drive in 1/60-second steps between native touch inputs; page.clock renders each250ms sample. Reported seconds are model seconds",
+  "wasmDisabled": true,
+  "graphicsFlag": "navalV7=0 (existing JavaScript fallback; gameplay unchanged)",
+  "wasmRequests": [],
+  "pageerrors": [],
+  "cspViolations": [],
+  "checks": [
+    {
+      "name": "old acquisition 0.8-1.5s",
+      "pass": true
+    },
+    {
+      "name": "old persistent lock",
+      "pass": true
+    },
+    {
+      "name": "old sweep state absent",
+      "pass": true
+    },
+    {
+      "name": "trusted touch reached lock/fire",
+      "pass": true
+    },
+    {
+      "name": "844x390 touch runtime",
+      "pass": true
+    },
+    {
+      "name": "JavaScript only",
+      "pass": true
+    },
+    {
+      "name": "no browser errors",
+      "pass": true
+    },
+    {
+      "name": "no CSP violations",
+      "pass": true
+    }
+  ],
+  "renderMetrics": {
+    "triangles": 49627,
+    "drawCalls": 21,
+    "peak": {
+      "triangles": 67838,
+      "drawCalls": 41
+    },
+    "playerModel": {
+      "requested": true,
+      "loaded": true,
+      "failed": false
+    },
+    "disposed": false,
+    "environment": {
+      "revision": "ultra-naval-3",
+      "detailedNormals": true,
+      "water": "reflective",
+      "reflectionSize": 256,
+      "reflectionCaptures": 3,
+      "mirror": {
+        "calls": 16,
+        "triangles": 18211,
+        "peakCalls": 16,
+        "peakTriangles": 18211
+      },
+      "waterTime": 0.10620000000000004,
+      "shallowBanks": 3,
+      "fallbackRipples": true,
+      "disposed": false
+    },
+    "models": {
+      "requested": 2,
+      "loaded": 2,
+      "failed": 0
+    },
+    "playerMarkers": {
+      "flag": false,
+      "flame": false,
+      "flameY": 0.85
+    },
+    "effects": {
+      "foamInstances": 0,
+      "smokeInstances": 0,
+      "damagedShips": 0,
+      "cloudPuffs": 0,
+      "trees": 0,
+      "waterTime": 0.2360000000000001,
+      "disposed": false
+    },
+    "playerBox": {
+      "height": 0.24205483536499062,
+      "top": 0.5806406285481079,
+      "bottom": 0.8226954639130986,
+      "left": 0.45674088328820556,
+      "right": 0.5431205494985705
+    },
+    "playerPaint": {
+      "meanLum": 0.4482503299326372,
+      "accentShare": 0.13353676398106198
+    },
+    "aimArc": {
+      "points": 0,
+      "visible": false,
+      "movers": 0,
+      "disposed": false,
+      "kind": "water",
+      "color": "#B8F6FF"
+    },
+    "air": {
+      "aircraft": 0,
+      "tracers": 0,
+      "sparks": 0,
+      "smoke": 0,
+      "flash": false,
+      "models": {
+        "glb": 0,
+        "procedural": 0
+      },
+      "assets": {
+        "enabled": true,
+        "ready": [],
+        "failed": [],
+        "triangles": {},
+        "meshes": {}
+      }
+    },
+    "supply": {
+      "buoys": 0,
+      "model": "glb",
+      "assets": {
+        "enabled": true,
+        "ready": [
+          "buoy"
+        ],
+        "failed": [],
+        "triangles": {
+          "buoy": 440
+        },
+        "meshes": {
+          "buoy": 2
+        }
+      }
+    },
+    "base": null,
+    "structures": 0,
+    "dressing": {
+      "foam": 2,
+      "waves": 2,
+      "trails": 1,
+      "critical": false,
+      "horizonIslands": 6,
+      "disposed": false
+    },
+    "projectiles": {
+      "shells": 0,
+      "guided": 0,
+      "torpedoes": 0,
+      "trailParticles": 0,
+      "capacity": 33,
+      "disposed": false
+    },
+    "impacts": {
+      "particles": 0,
+      "capacity": 32,
+      "smoke": 0,
+      "disposed": false
+    },
+    "scenery": {
+      "palmsLoaded": true,
+      "palmInstances": 6,
+      "islands": 3,
+      "clouds": 7,
+      "shoreline": true,
+      "wake": 0,
+      "disposed": false
+    },
+    "camera": {
+      "heading": 0.0020655155586607244,
+      "zoom": 0,
+      "fov": 51,
+      "position": {
+        "x": -0.05450891683397657,
+        "y": 12.18,
+        "z": 26.38994370547208
+      },
+      "focus": {
+        "x": 0.04544130997906346,
+        "y": 1.5,
+        "z": -21.99995307011693
+      },
+      "frameDistance": 26.389999999999997,
+      "frameHeight": 12.18,
+      "progress": 0,
+      "base": {
+        "heading": 0.0020655155586607244,
+        "zoom": 0,
+        "fov": 51,
+        "position": {
+          "x": -0.05450891683397657,
+          "y": 12.18,
+          "z": 26.38994370547208
+        },
+        "focus": {
+          "x": 0.04544130997906346,
+          "y": 1.5,
+          "z": -21.99995307011693
+        },
+        "frameDistance": 26.389999999999997,
+        "frameHeight": 12.18
+      }
+    },
+    "gpu": {
+      "geometries": 41,
+      "textures": 12,
+      "programs": 31
+    },
+    "quality": "full",
+    "playerLoaded": true,
+    "v7": {
+      "enabled": false,
+      "player": false,
+      "enemies": 0,
+      "failed": 0
+    },
+    "enemiesLoaded": 1,
+    "playerLength": 11.02,
+    "enemyLengths": [
+      11.02
+    ],
+    "headings": [
+      -1.6446666617346686
+    ],
+    "periscopes": [
+      false
+    ]
+  },
+  "acquisitionStart": {
+    "modelTime": 0.6200000000000004,
+    "radar": {
+      "index": 0,
+      "at": 0.6040000000000004,
+      "need": 1.1371871052578015,
+      "progress": 0.014069804279369486,
+      "queued": false
+    }
+  },
+  "samples": [
+    {
+      "time": 0.886,
+      "progress": 0.2479803004238877,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": {
+        "index": 0,
+        "progress": 0.25,
+        "need": 1.14,
+        "queued": false,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 97,
+          "h": 56
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.152,
+      "progress": 0.481890796568405,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": {
+        "index": 0,
+        "progress": 0.48,
+        "need": 1.14,
+        "queued": false,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 78,
+          "h": 46
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.418,
+      "progress": 0.7158012927129217,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": {
+        "index": 0,
+        "progress": 0.72,
+        "need": 1.14,
+        "queued": false,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 68,
+          "h": 41
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.684,
+      "progress": 0.9497117888574383,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": {
+        "index": 0,
+        "progress": 0.95,
+        "need": 1.14,
+        "queued": false,
+        "x": 422,
+        "y": 171,
+        "r": 24,
+        "box": {
+          "w": 64,
+          "h": 38
+        },
+        "offscreen": false
+      },
+      "locked": false
+    },
+    {
+      "time": 1.95,
+      "progress": null,
+      "sweep": null,
+      "scans": null,
+      "bearing": null,
+      "hud": null,
+      "locked": true
+    }
+  ],
+  "lockSeconds": 1.146667,
+  "locked": {
+    "index": 0,
+    "at": 1.7506666666666657,
+    "status": "ready",
+    "aligned": true,
+    "queued": false,
+    "shots": 0,
+    "solution": {
+      "yaw": -0.0035568096760934943,
+      "elevation": 18.332018244157098,
+      "power": 1,
+      "reachable": true,
+      "status": "ready",
+      "contact": {
+        "index": 0,
+        "x": 327.156894482433,
+        "z": 6.066439917030349,
+        "h": 8.586797174522403,
+        "t": 0.7583333333333333,
+        "step": 90,
+        "distance": 0.9282748189486225,
+        "core": 0.019754305221376865,
+        "critical": true
+      }
+    }
+  },
+  "afterShot": {
+    "delta": 1,
+    "homing": {
+      "index": 0,
+      "at": 1.7506666666666657,
+      "status": "ready",
+      "aligned": true,
+      "queued": false,
+      "shots": 1,
+      "solution": {
+        "yaw": -0.015093522070460903,
+        "elevation": 18.59523579077222,
+        "power": 1,
+        "reachable": true,
+        "status": "ready",
+        "contact": {
+          "index": 0,
+          "x": 334.3972980556413,
+          "z": 3.586336735791747,
+          "h": 6.391465926759324,
+          "t": 0.7833333333333333,
+          "step": 93,
+          "distance": 0.8692614779456745,
+          "core": 0.011785702829820886,
+          "critical": true
+        }
+      }
+    },
+    "radar": null,
+    "lockedTargetIndex": 0,
+    "stickyAt": null
+  },
+  "touch": [
+    {
+      "type": "pointerdown",
+      "target": "primary-button",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "primary-button",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerdown",
+      "target": {},
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "naval-lock-btn",
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerdown",
+      "target": {},
+      "id": "",
+      "trusted": true,
+      "pointerType": "touch"
+    },
+    {
+      "type": "pointerup",
+      "target": "secondary-button held",
+      "id": "shoot",
+      "trusted": true,
+      "pointerType": "touch"
+    }
+  ],
+  "runtime": {
+    "width": 844,
+    "height": 390,
+    "maxTouchPoints": 1,
+    "webAssemblyType": "undefined"
+  },
+  "pass": true
+}

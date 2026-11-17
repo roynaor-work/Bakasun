@@ -1,0 +1,36 @@
+E browser context before default
+{
+  "label": "before",
+  "cases": 1,
+  "assertions": [
+    {
+      "name": "E poor native-touch serves lose quality and physically net/out",
+      "passed": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(early.shot.quality<served.shot.quality-.4)\n"
+    },
+    {
+      "name": "default native touch/no WASM/no page errors",
+      "passed": true
+    },
+    {
+      "name": "E serve meter disappears immediately after contact",
+      "passed": false,
+      "message": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "E serve control disappears after contact",
+      "passed": false,
+      "message": "Expected values to be strictly equal:\n\ntrue !== false\n"
+    },
+    {
+      "name": "E incoming quality bar is on outer right rail",
+      "passed": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(incoming.meter.x>=844*.94)\n"
+    },
+    {
+      "name": "E touch controls >=64px, separated and clear of meter",
+      "passed": false,
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(b.right+8<=toss.meter.x)\n"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+C laser-rank-value [{"rank":1,"firstHullDamage":2.5410306047779248,"enemyHp":11.688740781978453,"damagePerHp":0.2173913043478261},{"rank":2,"firstHullDamage":2.7367991605571387,"enemyHp":12.589276138562836,"damagePerHp":0.21739130434782614},{"rank":3,"firstHullDamage":2.83538138487288,"enemyHp":13.042754370415244,"damagePerHp":0.21739130434782616}]
+✔ C upgraded cannon stops on the front hull; the aligned rear hull is unharmed (15.232789ms)
+✔ C a fast segment that crosses two hulls hits only the earliest contact, independent of array order (8.233002ms)
+✔ C an impact on the regular/upgraded cannon is drawn briefly and cleaned up (10.370494ms)
+✔ C shield contact absorbs the shot and protects both hulls (2.809805ms)
+✔ C destroying the first hull still consumes the projectile (3.627031ms)
+✔ C impact list is bounded at 24 even under a dense burst (2.34779ms)
+✔ C rollback ?phoneFixC=0 restores piercing and Vulcan-only effects (20.121687ms)
+✔ C rollback ?phoneFixes=0 restores piercing and Vulcan-only effects (2.261153ms)
+✔ C purchased laser ranks 1..max increase first-hull damage and never lose value against their own HP scaling (13.027625ms)
+✔ C compensation uses only the existing laser output/HP coefficient; cannon, temporary laser and volley damage stay unchanged (25.322549ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 325.472797

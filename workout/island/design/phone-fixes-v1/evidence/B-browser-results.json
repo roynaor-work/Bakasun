@@ -1,0 +1,249 @@
+{
+  "allExpectedResults": true,
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "physicalPhone": false,
+  "webAssemblyDisabled": true,
+  "graphicsFlag": "navalV7=0 (existing JS fallback)",
+  "clock": "Native Lock/Fire touch input; production session.debug.drive in 1/60-second steps between inputs; native draw every250ms sample",
+  "rows": [
+    {
+      "mode": "before",
+      "file": "B-before-browser.json",
+      "pass": false,
+      "expectedPass": false,
+      "lockSeconds": 1.146,
+      "shotDelta": 1,
+      "lockedAfterShot": true,
+      "acquiringAfterShot": false,
+      "samples": 0,
+      "maxScans": 0,
+      "bearingRange": null,
+      "hudSweepMatches": true,
+      "checks": [
+        {
+          "name": "lock requires 3.5 seconds",
+          "pass": false
+        },
+        {
+          "name": "radar sweeps throughout acquisition",
+          "pass": false
+        },
+        {
+          "name": "live HUD uses model sweep",
+          "pass": false
+        },
+        {
+          "name": "shot clears lock",
+          "pass": false
+        },
+        {
+          "name": "trusted touch reached lock/fire",
+          "pass": true
+        },
+        {
+          "name": "844x390 touch runtime",
+          "pass": true
+        },
+        {
+          "name": "JavaScript only",
+          "pass": true
+        },
+        {
+          "name": "no browser errors",
+          "pass": true
+        },
+        {
+          "name": "no CSP violations",
+          "pass": true
+        }
+      ],
+      "wasmRequests": [],
+      "pageerrors": [],
+      "cspViolations": [],
+      "screenshots": [
+        "B-before-844x390-acquiring.png",
+        "B-before-844x390-locked.png",
+        "B-before-844x390-shot.png"
+      ]
+    },
+    {
+      "mode": "after",
+      "file": "B-after-browser.json",
+      "pass": true,
+      "expectedPass": true,
+      "lockSeconds": 3.506,
+      "shotDelta": 1,
+      "lockedAfterShot": false,
+      "acquiringAfterShot": false,
+      "samples": 12,
+      "maxScans": 3,
+      "bearingRange": [
+        -0.03352184189183174,
+        -0.01577611852309331
+      ],
+      "hudSweepMatches": true,
+      "checks": [
+        {
+          "name": "lock requires 3.5 seconds",
+          "pass": true
+        },
+        {
+          "name": "radar sweeps throughout acquisition",
+          "pass": true
+        },
+        {
+          "name": "live HUD uses model sweep",
+          "pass": true
+        },
+        {
+          "name": "shot clears lock",
+          "pass": true
+        },
+        {
+          "name": "trusted touch reached lock/fire",
+          "pass": true
+        },
+        {
+          "name": "844x390 touch runtime",
+          "pass": true
+        },
+        {
+          "name": "JavaScript only",
+          "pass": true
+        },
+        {
+          "name": "no browser errors",
+          "pass": true
+        },
+        {
+          "name": "no CSP violations",
+          "pass": true
+        }
+      ],
+      "wasmRequests": [],
+      "pageerrors": [],
+      "cspViolations": [],
+      "screenshots": [
+        "B-after-844x390-acquiring.png",
+        "B-after-844x390-locked.png",
+        "B-after-844x390-shot.png"
+      ]
+    },
+    {
+      "mode": "rollback",
+      "file": "B-rollback-browser.json",
+      "pass": true,
+      "expectedPass": true,
+      "lockSeconds": 1.146667,
+      "shotDelta": 1,
+      "lockedAfterShot": true,
+      "acquiringAfterShot": false,
+      "samples": 0,
+      "maxScans": 0,
+      "bearingRange": null,
+      "hudSweepMatches": true,
+      "checks": [
+        {
+          "name": "old acquisition 0.8-1.5s",
+          "pass": true
+        },
+        {
+          "name": "old persistent lock",
+          "pass": true
+        },
+        {
+          "name": "old sweep state absent",
+          "pass": true
+        },
+        {
+          "name": "trusted touch reached lock/fire",
+          "pass": true
+        },
+        {
+          "name": "844x390 touch runtime",
+          "pass": true
+        },
+        {
+          "name": "JavaScript only",
+          "pass": true
+        },
+        {
+          "name": "no browser errors",
+          "pass": true
+        },
+        {
+          "name": "no CSP violations",
+          "pass": true
+        }
+      ],
+      "wasmRequests": [],
+      "pageerrors": [],
+      "cspViolations": [],
+      "screenshots": [
+        "B-rollback-844x390-acquiring.png",
+        "B-rollback-844x390-locked.png",
+        "B-rollback-844x390-shot.png"
+      ]
+    },
+    {
+      "mode": "global-rollback",
+      "file": "B-global-rollback-browser.json",
+      "pass": true,
+      "expectedPass": true,
+      "lockSeconds": 1.146667,
+      "shotDelta": 1,
+      "lockedAfterShot": true,
+      "acquiringAfterShot": false,
+      "samples": 0,
+      "maxScans": 0,
+      "bearingRange": null,
+      "hudSweepMatches": true,
+      "checks": [
+        {
+          "name": "old acquisition 0.8-1.5s",
+          "pass": true
+        },
+        {
+          "name": "old persistent lock",
+          "pass": true
+        },
+        {
+          "name": "old sweep state absent",
+          "pass": true
+        },
+        {
+          "name": "trusted touch reached lock/fire",
+          "pass": true
+        },
+        {
+          "name": "844x390 touch runtime",
+          "pass": true
+        },
+        {
+          "name": "JavaScript only",
+          "pass": true
+        },
+        {
+          "name": "no browser errors",
+          "pass": true
+        },
+        {
+          "name": "no CSP violations",
+          "pass": true
+        }
+      ],
+      "wasmRequests": [],
+      "pageerrors": [],
+      "cspViolations": [],
+      "screenshots": [
+        "B-global-rollback-844x390-acquiring.png",
+        "B-global-rollback-844x390-locked.png",
+        "B-global-rollback-844x390-shot.png"
+      ]
+    }
+  ]
+}

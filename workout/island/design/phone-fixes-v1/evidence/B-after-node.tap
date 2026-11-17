@@ -1,0 +1,15 @@
+✔ B: each stage and difficulty requires a full 3.5 second acquisition (583.453621ms)
+✔ B: the radar continuously sweeps and tracks the live hull while acquiring (21.89428ms)
+✔ B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock (67.263854ms)
+✔ B: a queued Fire tap fires once at the end of acquisition then clears the lock (40.578958ms)
+✔ B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock (54.078521ms)
+✔ B: a successful dedicated torpedo clears the surface lock too (32.018597ms)
+✔ B rollback: both URL switches retain v24.1 short acquisition and persistent lock (74.033377ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1357.145604

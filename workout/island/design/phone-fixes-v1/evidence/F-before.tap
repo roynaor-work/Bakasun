@@ -1,0 +1,150 @@
+TAP version 13
+# Subtest: F: the stock Vulcan fires at least 4.7 seconds before overheating
+not ok 1 - F: the stock Vulcan fires at least 4.7 seconds before overheating
+  ---
+  duration_ms: 7.845592
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:13:1'
+  failureType: 'testCodeFailure'
+  error: '{"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002}'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:15:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: F: the starter wallet buys two useful Vulcan levels with rising prices
+not ok 2 - F: the starter wallet buys two useful Vulcan levels with rising prices
+  ---
+  duration_ms: 0.937875
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:18:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    110 !== 80
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 80
+  actual: 110
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:20:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: F: every Vulcan level increases damage/rate and reduces active heating
+not ok 3 - F: every Vulcan level increases damage/rate and reduces active heating
+  ---
+  duration_ms: 0.384088
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:25:1'
+  failureType: 'testCodeFailure'
+  error: 'level 2 heats faster'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:30:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest
+not ok 4 - F: cooling upgrades reduce active Vulcan heat, as well as cooling it at rest
+  ---
+  duration_ms: 3.039254
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:35:1'
+  failureType: 'testCodeFailure'
+  error: '{"stock":{"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002},"improved":{"seconds":3.5833333333335173,"shots":32.250000000001656,"heatPerSecond":27.900000000000002}}'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:37:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: F: tuning preserves saved balances and secondary weapon economy/stats
+ok 5 - F: tuning preserves saved balances and secondary weapon economy/stats
+  ---
+  duration_ms: 13.022338
+  type: 'test'
+  ...
+# Subtest: F: the MG shop DPS estimate includes cooling pauses even with purchased cooling
+not ok 6 - F: the MG shop DPS estimate includes cooling pauses even with purchased cooling
+  ---
+  duration_ms: 2.867162
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:54:1'
+  failureType: 'testCodeFailure'
+  error: '{"displayed":135,"measuredDps":85.3676470588259,"on":3.5833333333335173,"off":2.083333333333283}'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:58:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: F: both URL rollback flags reach the real embedded campaign adapter
+not ok 7 - F: both URL rollback flags reach the real embedded campaign adapter
+  ---
+  duration_ms: 4.930159
+  type: 'test'
+  location: '/workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:60:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    phoneFixF missing from iframe
+    
+    null !== '0'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '0'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/F.test.mjs:69:14)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 1
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 236.556036

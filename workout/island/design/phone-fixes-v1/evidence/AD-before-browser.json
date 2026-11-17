@@ -1,0 +1,422 @@
+{
+  "label": "before",
+  "root": "/workspace/Bakasun-phone",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "isMobile": true,
+  "browser": "151.0.7922.173",
+  "cases": [
+    {
+      "game": "A",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "ready": true,
+      "touchControl": "sprint",
+      "renderCalls": 55,
+      "render": {
+        "calls": 55,
+        "triangles": 83064,
+        "frameMs": 1527.5,
+        "players": 10,
+        "avatars": 10,
+        "pending": 14,
+        "crowd": 2084,
+        "crowdLevel": 0,
+        "v5": false,
+        "v8": true,
+        "v8Motion": true,
+        "tall": true,
+        "quality": 1,
+        "textures": 34,
+        "geometries": 66,
+        "landscape": true,
+        "dpr": 1,
+        "bufferWidth": 844,
+        "bufferHeight": 390,
+        "style": "v2-broadcast",
+        "characterVersion": 10,
+        "athleteBody": true,
+        "motionSource": "v12",
+        "dunks": {
+          "guard": {
+            "dunk_one_hand": {
+              "palmMax": 2.801,
+              "lift": 0.779,
+              "scale": 1.641
+            },
+            "dunk_two_hands": {
+              "palmMax": 2.863,
+              "lift": 0.841,
+              "scale": 1.519
+            }
+          },
+          "wing": {
+            "dunk_one_hand": {
+              "palmMax": 2.907,
+              "lift": 0.715,
+              "scale": 1.55
+            },
+            "dunk_two_hands": {
+              "palmMax": 2.97,
+              "lift": 0.772,
+              "scale": 1.428
+            }
+          },
+          "center": {
+            "dunk_one_hand": {
+              "palmMax": 3.013,
+              "lift": 0.667,
+              "scale": 1.43
+            },
+            "dunk_two_hands": {
+              "palmMax": 3.076,
+              "lift": 0.72,
+              "scale": 1.311
+            }
+          }
+        },
+        "retargetMs": 1117.2999999998137,
+        "lods": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "arenaSource": "assets/hoops-v8/arena/",
+        "crowd3d": true,
+        "v4Fallbacks": [],
+        "clipCount": 0,
+        "loadTimes": {
+          "arena": 2012,
+          "models": 343,
+          "environment": 589,
+          "crowd": 0,
+          "playerAssets": 1956,
+          "avatars": 32,
+          "vfx": 60,
+          "feel": 15,
+          "total": 5008,
+          "firstFrame": 1573
+        },
+        "arenaVersion": 4,
+        "baked": [],
+        "reflection": null,
+        "feel": {
+          "authored": true,
+          "queued": 0,
+          "fov": 0,
+          "seen": 0
+        },
+        "vfx": {
+          "missingAtlases": [],
+          "sprites": 0,
+          "residentAtlases": 0,
+          "loadedAtlases": 5,
+          "reducedMotion": false
+        },
+        "show": null,
+        "motion": [
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready",
+          "idle_ready"
+        ],
+        "v241": {
+          "flags": {
+            "whistle": true,
+            "crowd3d": "budget",
+            "bodyV2": true,
+            "motionV13": true,
+            "referee": true
+          },
+          "crowd3d": {
+            "mode": "budget",
+            "status": "ready",
+            "error": null,
+            "fans": 796,
+            "submitted": [
+              0,
+              0,
+              377
+            ],
+            "instances": 377,
+            "triangles": 9048,
+            "draws": 6,
+            "inView": 377,
+            "scale": 1,
+            "tier": "low",
+            "limit": 10000,
+            "plans": 2,
+            "files": 12,
+            "planMs": 3.4,
+            "visible": true,
+            "cardsHidden": 1876
+          },
+          "bodyV2": true,
+          "motionV13": {
+            "clips": [
+              "idle_ready",
+              "idle_ready_ball",
+              "jog",
+              "run",
+              "sprint",
+              "jog_ball",
+              "run_ball",
+              "dribble_stand",
+              "jump_shot",
+              "three_point"
+            ],
+            "aligned": {
+              "jog": {
+                "before": 0.231,
+                "after": 0.346
+              },
+              "run": {
+                "before": 0.909,
+                "after": 0.318
+              },
+              "sprint": {
+                "before": 0,
+                "after": 0.35
+              },
+              "dribble_run": {
+                "before": 0.909,
+                "after": 0.318
+              }
+            },
+            "shared": {
+              "walk": {
+                "before": 0.529,
+                "after": 0.324
+              },
+              "sprint_ball": {
+                "before": 0.091,
+                "after": 0.333
+              }
+            },
+            "refScale": {
+              "guard": 1.0864,
+              "wing": 1.1442,
+              "center": 1.202
+            }
+          },
+          "referee": {
+            "status": "ready",
+            "error": null,
+            "gestures": {},
+            "triangles": 1225,
+            "draws": 2,
+            "x": 0,
+            "gesture": null
+          }
+        }
+      },
+      "touches": 1,
+      "fullPageWasmCalls": 0,
+      "audioTouches": 1,
+      "wasmCalls": 0,
+      "wasmAvailable": false,
+      "before": {
+        "opening": 1
+      },
+      "possession": {
+        "opening": 1,
+        "ref:steal": 2
+      },
+      "refereeAfterPossession": {
+        "steal": 2,
+        "foul": 0,
+        "fallback": 0,
+        "gated": 0,
+        "ready": [
+          "steal",
+          "foul"
+        ],
+        "mp3": []
+      },
+      "refereeAfterImmediateFoul": {
+        "steal": 3,
+        "foul": 0,
+        "fallback": 0,
+        "gated": 1,
+        "ready": [
+          "steal",
+          "foul"
+        ],
+        "mp3": []
+      },
+      "rim": [
+        {
+          "seconds": 0.75,
+          "sampleRate": 44100,
+          "channels": 1
+        }
+      ],
+      "rimMetrics": null,
+      "legacyPass": true,
+      "desiredPass": false,
+      "errors": [],
+      "existingFullSessionWasmRequests": [
+        "http://127.0.0.1:37291/workout/island/vendor/draco/draco_decoder.wasm"
+      ],
+      "wasmRequests": []
+    },
+    {
+      "game": "D",
+      "graphicsFlag": "racingV7=0",
+      "time": 5.016666666666654,
+      "pitRequest": true,
+      "lap": 1,
+      "pitButtons": 1,
+      "cancel": true,
+      "change": null,
+      "touches": 1,
+      "wasmCalls": 0,
+      "ready": true,
+      "render": {
+        "mode": "webgl",
+        "quality": 0,
+        "frames": 10,
+        "frameMilliseconds": 33.33333333333326,
+        "cameraBad": 0,
+        "cameraFinite": true,
+        "drawCalls": 148,
+        "triangles": 341550,
+        "countsIncludeShadowPasses": true,
+        "shadowsEnabled": true,
+        "visibleTrees": 19,
+        "treeLimit": 28,
+        "scenery": {
+          "quality": 0,
+          "draws": 13,
+          "instances": 715,
+          "triangles": 13428,
+          "triangleBudget": 30000,
+          "mounds": 16,
+          "cornerSigns": 5,
+          "roadside": {
+            "quality": 0,
+            "triangles": 4492,
+            "draws": 6,
+            "instances": 295,
+            "buildings": 4,
+            "galleries": 0,
+            "lamps": 32,
+            "guardrailSections": 0,
+            "barrierSections": 0,
+            "cornerSigns": 5,
+            "disposed": false
+          },
+          "disposed": false
+        },
+        "effects": {
+          "smoke": 0,
+          "skidMarks": 0,
+          "sparks": 0,
+          "debris": 0,
+          "tyres": 0,
+          "capacity": {
+            "smoke": 32,
+            "skidMarks": 128,
+            "sparks": 20,
+            "debris": 24,
+            "tyres": 4
+          },
+          "crashAssets": true,
+          "disposed": false
+        },
+        "crashAssets": true,
+        "gantry": {
+          "parts": 6,
+          "lit": 0
+        },
+        "f1": {
+          "triangles": 7006,
+          "draws": 6,
+          "boxes": 28,
+          "tyreStacks": 116
+        },
+        "envV2": {
+          "triangles": 24518,
+          "draws": 8,
+          "perModel": {
+            "grandstand": 2,
+            "pit-building": 1,
+            "start-gantry": 3,
+            "control-tower": 1,
+            "tire-barrier": 1,
+            "chainlink-fence": 1,
+            "sponsor-board": 2
+          }
+        },
+        "v7": {
+          "enabled": false,
+          "active": false,
+          "reason": "off",
+          "lods": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1
+          ],
+          "spectators": null
+        },
+        "modelLoaded": true,
+        "carAsset": "sport-coupe",
+        "vegetationLoaded": true,
+        "failures": [],
+        "formulaAll": {
+          "cars": 9,
+          "lods": [
+            1,
+            0,
+            0
+          ],
+          "triangles": 4608,
+          "minLod": 0,
+          "levels": [
+            4608,
+            1604,
+            472
+          ]
+        },
+        "pitCrew": {
+          "actors": 6,
+          "visible": false,
+          "phase": "",
+          "lamp": "red"
+        },
+        "disposed": false,
+        "geometries": 165,
+        "textures": 21
+      },
+      "errors": [],
+      "wasmRequests": [],
+      "legacyPass": true,
+      "desiredPass": false
+    }
+  ]
+}

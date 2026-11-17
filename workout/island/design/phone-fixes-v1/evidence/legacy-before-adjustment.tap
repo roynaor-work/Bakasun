@@ -1,0 +1,896 @@
+TAP version 13
+# Subtest: review: production-speed laser pierces both legal side-by-side grazing contacts in one frame
+not ok 1 - review: production-speed laser pierces both legal side-by-side grazing contacts in one frame
+  ---
+  duration_ms: 17.75248
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-alien-flight-piercing.test.mjs:16:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The same 18.4px swept segment touches both enemies; one must not be skipped
+    
+    1 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-alien-flight-piercing.test.mjs:19:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: review: ordinary shot still stops after its first contact when a segment touches two enemies
+ok 2 - review: ordinary shot still stops after its first contact when a segment touches two enemies
+  ---
+  duration_ms: 2.314642
+  type: 'test'
+  ...
+# Subtest: review: laser hit memory follows entity IDs when a splitter child reuses its parent pool slot
+not ok 3 - review: laser hit memory follows entity IDs when a splitter child reuses its parent pool slot
+  ---
+  duration_ms: 7.536221
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-alien-flight-piercing.test.mjs:29:1'
+  failureType: 'testCodeFailure'
+  error: 'The left child is a new target and the surviving laser crosses it'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-alien-flight-piercing.test.mjs:34:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: review: repeated frames do not damage the same surviving target twice with one laser
+ok 4 - review: repeated frames do not damage the same surviving target twice with one laser
+  ---
+  duration_ms: 5.210213
+  type: 'test'
+  ...
+# Subtest: aliens v24 flags: HUD and refill on by default; ?alienHud=v23 and ?alienRefill=0 (or the globals) restore v23; config carries the numbers
+ok 5 - aliens v24 flags: HUD and refill on by default; ?alienHud=v23 and ?alienRefill=0 (or the globals) restore v23; config carries the numbers
+  ---
+  duration_ms: 9.806986
+  type: 'test'
+  ...
+# Subtest: refill drop rule: boss phases always; while the Vulcan is in use big ships always, others by chance, pity after locks (gap and one on screen allowing); never for a Vulcan not in use
+ok 6 - refill drop rule: boss phases always; while the Vulcan is in use big ships always, others by chance, pity after locks (gap and one on screen allowing); never for a Vulcan not in use
+  ---
+  duration_ms: 1.575843
+  type: 'test'
+  ...
+# Subtest: refill in the model: a magazine falls after a Vulcan run, the pick-up ends a lock at once, empties the gauge and keeps the barrels cold (no heat) for coldSeconds
+ok 7 - refill in the model: a magazine falls after a Vulcan run, the pick-up ends a lock at once, empties the gauge and keeps the barrels cold (no heat) for coldSeconds
+  ---
+  duration_ms: 138.819251
+  type: 'test'
+  ...
+# Subtest: ?alienRefill=0: no magazines and the same game as v23; with the regular button only (no Vulcan, no big ships at stage 1) v24 plays exactly like v23
+ok 8 - ?alienRefill=0: no magazines and the same game as v23; with the regular button only (no Vulcan, no big ships at stage 1) v24 plays exactly like v23
+  ---
+  duration_ms: 723.627307
+  type: 'test'
+  ...
+# Subtest: balance: stage 1 at the phone aspect is still won in 85-135 s with both buttons (taking the magazines as they come) and the Vulcan alone gets stronger
+not ok 9 - balance: stage 1 at the phone aspect is still won in 85-135 s with both buttons (taking the magazines as they come) and the Vulcan alone gets stronger
+  ---
+  duration_ms: 1504.839586
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:84:1'
+  failureType: 'testCodeFailure'
+  error: 'Vulcan alone: v23 3 wins 176 s, v24 2 wins 171 s'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:93:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: aliens drawing and HUD text: the falling magazine and the pick-up burst, the cyan cold bar instead of the heat bar, the weapon line says the Vulcan is cold
+ok 10 - aliens drawing and HUD text: the falling magazine and the pick-up burst, the cyan cold bar instead of the heat bar, the weapon line says the Vulcan is cold
+  ---
+  duration_ms: 1.95426
+  type: 'test'
+  ...
+# Subtest: Vulcan ring with a magazine: cyan "cold" level that drains with the cold time, back to the heat bands after it
+ok 11 - Vulcan ring with a magazine: cyan "cold" level that drains with the cold time, back to the heat bands after it
+  ---
+  duration_ms: 1.801093
+  type: 'test'
+  ...
+# Subtest: aliens v24 sounds: the magazine and the lock play the Codex samples on their own context, nothing else, and the island mute holds
+ok 12 - aliens v24 sounds: the magazine and the lock play the Codex samples on their own context, nothing else, and the island mute holds
+  ---
+  duration_ms: 61.999874
+  type: 'test'
+  ...
+# Subtest: HUD v24 stylesheet: three thin rings of 56-64 px in one column at the right edge, above the ship lane (bottom 16.4%), thin heat arc, captions that fade; only with data-alien-hud=v24
+ok 13 - HUD v24 stylesheet: three thin rings of 56-64 px in one column at the right edge, above the ship lane (bottom 16.4%), thin heat arc, captions that fade; only with data-alien-hud=v24
+  ---
+  duration_ms: 7.666898
+  type: 'test'
+  ...
+# Subtest: ships v24 flags: aim, enemy fire and submarine are on by default and each one alone returns to v23
+ok 14 - ships v24 flags: aim, enemy fire and submarine are on by default and each one alone returns to v23
+  ---
+  duration_ms: 13.494955
+  type: 'test'
+  ...
+# Subtest: enemy-fire rules: 1.45x at stage 1, with salvos about 2.5x the shells late, salvos laid along the course (across it when still), the aim leads a sailing ship
+ok 15 - enemy-fire rules: 1.45x at stage 1, with salvos about 2.5x the shells late, salvos laid along the course (across it when still), the aim leads a sailing ship
+  ---
+  duration_ms: 0.415724
+  type: 'test'
+  ...
+# Subtest: submarine rules: v24 dives after a moment and surfaces briefly every cycle; while diving only the torpedo reaches it; 3-5 torpedoes
+ok 16 - submarine rules: v24 dives after a moment and surfaces briefly every cycle; while diving only the torpedo reaches it; 3-5 torpedoes
+  ---
+  duration_ms: 0.626402
+  type: 'test'
+  ...
+# Subtest: smart lock order and hit chance: a hull about to fire first, then the nearest, reachable hulls first; next wraps; colours by chance
+ok 17 - smart lock order and hit chance: a hull about to fire first, then the nearest, reachable hulls first; next wraps; colours by chance
+  ---
+  duration_ms: 0.587059
+  type: 'test'
+  ...
+# Subtest: aim v24 in the model: a tap locks, a tap on the locked hull fires; the Lock button picks the order and the next; a swipe goes back
+not ok 18 - aim v24 in the model: a tap locks, a tap on the locked hull fires; the Lock button picks the order and the next; a swipe goes back
+  ---
+  duration_ms: 126.657755
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:185:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'index')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:188:158)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: aim v24: the lock moves on by itself after a sinking; locked shells never count as the weak centre (the gold star is a hand-aimed shot); a ready lock fires at once
+not ok 19 - aim v24: the lock moves on by itself after a sinking; locked shells never count as the weak centre (the gold star is a hand-aimed shot); a ready lock fires at once
+  ---
+  duration_ms: 896.009612
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:196:1'
+  failureType: 'testCodeFailure'
+  error: 'the lock moved on to another hull'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:199:65)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: Vulcan v24: a child's crosshair 15 degrees off the helicopter locks on and brings it down; v23 with the same thumb misses
+ok 20 - Vulcan v24: a child's crosshair 15 degrees off the helicopter locks on and brings it down; v23 with the same thumb misses
+  ---
+  duration_ms: 533.283856
+  type: 'test'
+  ...
+# Subtest: enemy fire v24: more shots per minute (1.3-1.6x at stage 1, 2x and more at stage 10 with salvos), each shown before it is fired, lighter hits; v23 with the flag
+ok 21 - enemy fire v24: more shots per minute (1.3-1.6x at stage 1, 2x and more at stage 10 with salvos), each shown before it is fired, lighter hits; v23 with the flag
+  ---
+  duration_ms: 2547.53899
+  type: 'test'
+  ...
+# Subtest: submarine v24 in the model: shells pass over a diver ("under water"), a torpedo from its button hits it under water; it fires torpedoes only while diving; v23 with the flag
+not ok 22 - submarine v24 in the model: shells pass over a diver ("under water"), a torpedo from its button hits it under water; it fires torpedoes only while diving; v23 with the flag
+  ---
+  duration_ms: 114.234896
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:227:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    missile on a diver: dive
+    + actual - expected
+    
+    + undefined
+    - 'dive'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'dive'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-aliens-naval-v24.test.mjs:235:138)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: ships v24 sounds: the torpedo-sub and enemy-fire samples by event; the model sends them (launch, under-water hit, sonar ping on a dive)
+ok 23 - ships v24 sounds: the torpedo-sub and enemy-fire samples by event; the model sends them (launch, under-water hit, sonar ping on a dive)
+  ---
+  duration_ms: 140.44729
+  type: 'test'
+  ...
+# Subtest: ships v24 HUD: red decals for every threat, sonar rings over divers, the hit ring coloured by chance; nothing when the switches are off
+ok 24 - ships v24 HUD: red decals for every threat, sonar rings over divers, the hit ring coloured by chance; nothing when the switches are off
+  ---
+  duration_ms: 20.395343
+  type: 'test'
+  ...
+# Subtest: input layer v24: a short tap on a hull locks it on the canvas and on the aim pad (no quick shot); the Lock button taps and swipes; the Torpedo button while a submarine is out; ?navalAim=v23 keeps v23
+ok 25 - input layer v24: a short tap on a hull locks it on the canvas and on the aim pad (no quick shot); the Lock button taps and swipes; the Torpedo button while a submarine is out; ?navalAim=v23 keeps v23
+  ---
+  duration_ms: 177.856165
+  type: 'test'
+  ...
+# Subtest: the child bot (human noise: reaction, missed warnings, taps at its own rhythm): with the v24 Lock button it hits 80-100% at stages 1, 5 and 10 and wins stage 1; enemy fire per minute rises
+ok 26 - the child bot (human noise: reaction, missed warnings, taps at its own rhythm): with the v24 Lock button it hits 80-100% at stages 1, 5 and 10 and wins stage 1; enemy fire per minute rises
+  ---
+  duration_ms: 27752.42265
+  type: 'test'
+  ...
+# Subtest: words, styles and the offline list: help texts describe the magazine, the tap lock, the red decal and the torpedo; the new modules and Codex copies are cached offline with their licences
+ok 27 - words, styles and the offline list: help texts describe the magazine, the tap lock, the red decal and the torpedo; the new modules and Codex copies are cached offline with their licences
+  ---
+  duration_ms: 290.611447
+  type: 'test'
+  ...
+# Subtest: a fake ends the dribble: the ball is held, no dribble button, no cross move
+ok 28 - a fake ends the dribble: the ball is held, no dribble button, no cross move
+  ---
+  duration_ms: 63.403901
+  type: 'test'
+  ...
+# Subtest: dribbling again after the dribble ended is a double dribble: turnover and a call
+ok 29 - dribbling again after the dribble ended is a double dribble: turnover and a call
+  ---
+  duration_ms: 27.650498
+  type: 'test'
+  ...
+# Subtest: without a dribble: two steps are legal, the third is travelling
+ok 30 - without a dribble: two steps are legal, the third is travelling
+  ---
+  duration_ms: 50.792641
+  type: 'test'
+  ...
+# Subtest: standing still or pivoting without a dribble is free; two steps then a shot is legal
+ok 31 - standing still or pivoting without a dribble is free; two steps then a shot is legal
+  ---
+  duration_ms: 56.465822
+  type: 'test'
+  ...
+# Subtest: the dribble returns after the ball is released (pass) and caught
+ok 32 - the dribble returns after the ball is released (pass) and caught
+  ---
+  duration_ms: 70.809873
+  type: 'test'
+  ...
+# Subtest: AI handler with a dead dribble shoots or passes instead of walking
+ok 33 - AI handler with a dead dribble shoots or passes instead of walking
+  ---
+  duration_ms: 48.095045
+  type: 'test'
+  ...
+# Subtest: AI offence: few purposeful passes, mostly forward, no collapse in shooting
+ok 34 - AI offence: few purposeful passes, mostly forward, no collapse in shooting
+  ---
+  duration_ms: 21745.800421
+  type: 'test'
+  ...
+# Subtest: audio: no continuous loop or tone is active during normal play; whistle only on a call
+not ok 35 - audio: no continuous loop or tone is active during normal play; whistle only on a call
+  ---
+  duration_ms: 181.102384
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-rules-v10.test.mjs:87:1'
+  failureType: 'testCodeFailure'
+  error: 'whistle plays on a call {"phoneFixA":true,"rim":{"source":"javascript","seconds":0.18},"context":"running","buffers":0,"active":0,"events":0,"loops":0,"bed":null,"played":{},"muted":false,"paused":false,"disposed":false,"mix":true,"duckGain":1,"whistle":{"last":22.527947176999998,"blocked":0,"jumpBalls":0,"v241":true,"referee":{"steal":0,"foul":0,"fallback":0,"gated":0,"ready":[],"mp3":[]}},"dribbleSqueak":false,"scheduled":[]}'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-rules-v10.test.mjs:110:9)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: v24.1 switches: everything on by default, each one off on its own, ?hoopsV241=0 turns all of them off
+ok 36 - v24.1 switches: everything on by default, each one off on its own, ?hoopsV241=0 turns all of them off
+  ---
+  duration_ms: 11.952663
+  type: 'test'
+  ...
+# Subtest: referee: the gesture of each call, and he trails the ball on the far line without shuffling or leaving the court length
+not ok 37 - referee: the gesture of each call, and he trails the ball on the far line without shuffling or leaving the court length
+  ---
+  duration_ms: 432.999602
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== 'whistle'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'whistle'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:28:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: referee model: the pack file byte for byte, six clips, twenty primitives merged into two skinned meshes on one skeleton
+not ok 38 - referee model: the pack file byte for byte, six clips, twenty primitives merged into two skinned meshes on one skeleton
+  ---
+  duration_ms: 294.793722
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:38:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    null !== 'whistle'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'whistle'
+  actual: ~
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:53:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: referee whistle rules: a steal or an intercepted pass takes the short whistle, a foul the long one, nothing else changes
+ok 39 - referee whistle rules: a steal or an intercepted pass takes the short whistle, a foul the long one, nothing else changes
+  ---
+  duration_ms: 0.77174
+  type: 'test'
+  ...
+# Subtest: the runtime whistles are the pack files byte for byte (hashes of design/hoops-referee-audio-v1/manifest.json), with the CC0 licence
+ok 40 - the runtime whistles are the pack files byte for byte (hashes of design/hoops-referee-audio-v1/manifest.json), with the CC0 licence
+  ---
+  duration_ms: 26.225644
+  type: 'test'
+  ...
+# Subtest: audio v24.1: a steal and an interception blow the short whistle (not the squeak), a foul the long one, a violation keeps the v24 sample
+not ok 41 - audio v24.1: a steal and an interception blow the short whistle (not the squeak), a foul the long one, a violation keeps the v24 sample
+  ---
+  duration_ms: 89.741781
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:97:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + []
+    - [
+    -   'assets/hoops-v241/referee-audio/whistle-steal-short.ogg',
+    -   'assets/hoops-v241/referee-audio/whistle-steal-short.ogg',
+    -   'assets/hoops-v241/referee-audio/whistle-foul-long.ogg',
+    -   'assets/audio/g3h/whistle.ogg'
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'assets/hoops-v241/referee-audio/whistle-steal-short.ogg'
+    1: 'assets/hoops-v241/referee-audio/whistle-steal-short.ogg'
+    2: 'assets/hoops-v241/referee-audio/whistle-foul-long.ogg'
+    3: 'assets/audio/g3h/whistle.ogg'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:107:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: audio v24.1: the 2.5 s gate spaces a steal and a foul right after it into one whistle
+not ok 42 - audio v24.1: the 2.5 s gate spaces a steal and a foul right after it into one whistle
+  ---
+  duration_ms: 90.274871
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:114:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:120:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: audio v24.1: an OGG the browser cannot decode falls back to the MP3 of the same pack
+not ok 43 - audio v24.1: an OGG the browser cannot decode falls back to the MP3 of the same pack
+  ---
+  duration_ms: 87.839262
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:126:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + []
+    - [
+    -   'assets/hoops-v241/referee-audio/whistle-steal-short.mp3'
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'assets/hoops-v241/referee-audio/whistle-steal-short.mp3'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:132:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: ?hoopsWhistleV241=0 is v24: the steal plays the shoe squeak, the foul the old whistle, no pack file is fetched
+not ok 44 - ?hoopsWhistleV241=0 is v24: the steal plays the shoe squeak, the foul the old whistle, no pack file is fetched
+  ---
+  duration_ms: 83.868583
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:138:1'
+  failureType: 'testCodeFailure'
+  error: 'squeak on the steal: '
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-hoops-v241.test.mjs:145:12)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# boars v24.1 model {"v24":{"hit":0.652,"med":0.721,"mean":0.961,"strokes":4.285,"first":1.223},"v241":{"hit":0.69,"med":0.662,"mean":0.878,"strokes":3.987,"first":1.072}}
+# Subtest: ships v24.1 flags: radar, clear sky, no hit words and the deep submarine are on by default; each one alone returns to v24
+ok 45 - ships v24.1 flags: radar, clear sky, no hit words and the deep submarine are on by default; each one alone returns to v24
+  ---
+  duration_ms: 82.30988
+  type: 'test'
+  ...
+# Subtest: radar lock time: 0.8 s for a near hull at stage 1 up to 1.5 s for a far hull late, longer with distance and stage, never outside 0.8-1.5
+ok 46 - radar lock time: 0.8 s for a near hull at stage 1 up to 1.5 s for a far hull late, longer with distance and stage, never outside 0.8-1.5
+  ---
+  duration_ms: 1.056999
+  type: 'test'
+  ...
+# Subtest: radar in the model: a tap starts an acquisition (no lock, the turret already swings), the lock comes after the measured time, a second tap fires right after it
+not ok 47 - radar in the model: a tap starts an acquisition (no lock, the turret already swings), the lock comes after the measured time, a second tap fires right after it
+  ---
+  duration_ms: 52.292646
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:61:1'
+  failureType: 'testCodeFailure'
+  error: 'need 3.5 vs 1.1370785731632587'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:63:129)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: radar in the model: a quick Fire tap during the acquisition waits for the lock; the Lock button acquires the top of the order and a second tap moves the acquisition on
+not ok 48 - radar in the model: a quick Fire tap during the acquisition waits for the lock; the Lock button acquires the top of the order and a second tap moves the acquisition on
+  ---
+  duration_ms: 171.200747
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:73:1'
+  failureType: 'testCodeFailure'
+  error: 'the queued tap is fired once locked'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:77:89)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: radar range: a hull out of range is refused with its reason, and a lock breaks when its hull leaves the range (sailing away)
+not ok 49 - radar range: a hull out of range is refused with its reason, and a lock breaks when its hull leaves the range (sailing away)
+  ---
+  duration_ms: 75.478552
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:80:1'
+  failureType: 'testCodeFailure'
+  error: 'locked'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:81:103)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: aim precision: tapping Fire every 0.4 s at a locked hull, the radar gun holds fire after the kill, so no locked shell flies into the empty sea after its hull sank (v24 sent some there)
+ok 50 - aim precision: tapping Fire every 0.4 s at a locked hull, the radar gun holds fire after the kill, so no locked shell flies into the empty sea after its hull sank (v24 sent some there)
+  ---
+  duration_ms: 17421.033066
+  type: 'test'
+  ...
+# Subtest: the child bot with the radar (it waits for the gauge, sails in on "out of range"): 80-100% hits at stages 1, 5 and 10, stage 1 won, every lock 0.8-1.5 s
+not ok 51 - the child bot with the radar (it waits for the gauge, sails in on "out of range"): 80-100% hits at stages 1, 5 and 10, stage 1 won, every lock 0.8-1.5 s
+  ---
+  duration_ms: 7733.376622
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:98:1'
+  failureType: 'testCodeFailure'
+  error: '[]'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:103:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: clear sky at the end: the fleet sinks with the helicopter up, the stage waits (clock still, no new aircraft) and ends once the Vulcan brings it down; ?navalAirEnd=v24 ends at once
+ok 52 - clear sky at the end: the fleet sinks with the helicopter up, the stage waits (clock still, no new aircraft) and ends once the Vulcan brings it down; ?navalAirEnd=v24 ends at once
+  ---
+  duration_ms: 1137.975427
+  type: 'test'
+  ...
+# Subtest: deep submarine: under water from the first frame to the last (only the torpedo reaches it), enough torpedoes for every hit, an empty tube reloads; ?navalSub=v24 surfaces
+ok 53 - deep submarine: under water from the first frame to the last (only the torpedo reaches it), enough torpedoes for every hit, an empty tube reloads; ?navalSub=v24 surfaces
+  ---
+  duration_ms: 2525.652845
+  type: 'test'
+  ...
+# Subtest: deep submarine: the child bot sinks it with torpedoes from its button (no surfacing needed) and wins the hunt
+ok 54 - deep submarine: the child bot sinks it with torpedoes from its button (no surfacing needed) and wins the hunt
+  ---
+  duration_ms: 381.334842
+  type: 'test'
+  ...
+# Subtest: v24.1 HUD: the radar gauge fills on the hull, a refused or lost lock says why and shows the radar ring, the clear-sky banner; v24 HUD: no hit words, a neutral ring
+ok 55 - v24.1 HUD: the radar gauge fills on the hull, a refused or lost lock says why and shows the radar ring, the clear-sky banner; v24 HUD: no hit words, a neutral ring
+  ---
+  duration_ms: 12.77354
+  type: 'test'
+  ...
+# Subtest: input layer: the Lock button rim fills with the acquisition (data-radar, --naval-radar) and is plain again once locked
+not ok 56 - input layer: the Lock button rim fills with the acquisition (data-radar, --naval-radar) and is plain again once locked
+  ---
+  duration_ms: 73.983265
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:158:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'acquiring'
+    - 'none'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'none'
+  actual: 'acquiring'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-boars-v241.test.mjs:167:93)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: boars v24.1 stick: only the curve start and the slowdown over a boar change; a small push is a third faster, full tilt unchanged
+ok 57 - boars v24.1 stick: only the curve start and the slowdown over a boar change; a small push is a third faster, full tilt unchanged
+  ---
+  duration_ms: 0.411606
+  type: 'test'
+  ...
+# Subtest: boars v24.1 in the child model (8-12 deg aim noise, 2400 boars a version): hits up, time onto a new boar down, fewer corrections, first hit sooner than v24
+ok 58 - boars v24.1 in the child model (8-12 deg aim noise, 2400 boars a version): hits up, time onto a new boar down, fewer corrections, first hit sooner than v24
+  ---
+  duration_ms: 5742.760039
+  type: 'test'
+  ...
+# Subtest: boars v24.1: a push away still leaves the boar, never slower than v24 below 60% tilt, a firm push within 0.65 s
+ok 59 - boars v24.1: a push away still leaves the boar, never slower than v24 below 60% tilt, a firm push within 0.65 s
+  ---
+  duration_ms: 15.526691
+  type: 'test'
+  ...
+# Subtest: boars v24.1 weapons: every one of the 12 has its own round (bullets, pellets, shells, bolts by family), its own colours and its own sound
+ok 60 - boars v24.1 weapons: every one of the 12 has its own round (bullets, pellets, shells, bolts by family), its own colours and its own sound
+  ---
+  duration_ms: 2.891132
+  type: 'test'
+  ...
+# Subtest: boars v24.1 shells: the arc lands on the aim point in v24's flight time at any frame rate, rises visibly, the mortar higher
+ok 61 - boars v24.1 shells: the arc lands on the aim point in v24's flight time at any frame rate, rises visibly, the mortar higher
+  ---
+  duration_ms: 5.692171
+  type: 'test'
+  ...
+# Subtest: boars v24.1 wiring: game.js draws the rounds and plays the sounds behind ?boarFx=v24, the stick behind ?boarAim=v24; the island forwards both; versioned imports; offline
+ok 62 - boars v24.1 wiring: game.js draws the rounds and plays the sounds behind ?boarFx=v24, the stick behind ?boarAim=v24; the island forwards both; versioned imports; offline
+  ---
+  duration_ms: 136.211619
+  type: 'test'
+  ...
+# Subtest: lock-on flag: on by default, off with ?navalLock=0 only; the defaults are read and can be tuned from the balance
+ok 63 - lock-on flag: on by default, off with ?navalLock=0 only; the defaults are read and can be tuned from the balance
+  ---
+  duration_ms: 5.035922
+  type: 'test'
+  ...
+# Subtest: pick: a finger on the hull line or on its bar picks the hull, open water picks nothing, the nearest hull wins, hulls behind the camera or sunk are skipped
+ok 64 - pick: a finger on the hull line or on its bar picks the hull, open water picks nothing, the nearest hull wins, hulls behind the camera or sunk are skipped
+  ---
+  duration_ms: 216.05013
+  type: 'test'
+  ...
+# Subtest: solver: a ready solution meets the locked hull in the forecast, on moving fleets of every stage; far, blocked and diving hulls say so honestly
+ok 65 - solver: a ready solution meets the locked hull in the forecast, on moving fleets of every stage; far, blocked and diving hulls say so honestly
+  ---
+  duration_ms: 492.305991
+  type: 'test'
+  ...
+# Subtest: solver on a shore base: when the flat arc meets a structure in front, a steeper arc (lower power) drops onto the locked one
+ok 66 - solver on a shore base: when the flat arc meets a structure in front, a steeper arc (lower power) drops onto the locked one
+  ---
+  duration_ms: 320.582377
+  type: 'test'
+  ...
+# Subtest: torpedo and mine: the torpedo runs on the water to the hull, the mine is laid where the hull will be
+ok 67 - torpedo and mine: the torpedo runs on the water to the hull, the mine is laid where the hull will be
+  ---
+  duration_ms: 90.655745
+  type: 'test'
+  ...
+# Subtest: slew: exponential with a speed cap, the short way round, converges; aligned and status words
+ok 68 - slew: exponential with a speed cap, the short way round, converges; aligned and status words
+  ---
+  duration_ms: 0.848445
+  type: 'test'
+  ...
+# Subtest: model: a lock turns the turret by itself onto a moving hull, a tap fires once with the solution and hits; aim input is ignored while locked
+not ok 69 - model: a lock turns the turret by itself onto a moving hull, a tap fires once with the solution and hits; aim input is ignored while locked
+  ---
+  duration_ms: 77.398422
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-lock-v23.test.mjs:97:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-lock-v23.test.mjs:107:121)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: model: behind the bow, the turret swings round and the shell hits; a tap during the swing waits for the turret and then fires
+ok 70 - model: behind the bow, the turret swings round and the shell hits; a tap during the swing waits for the turret and then fires
+  ---
+  duration_ms: 272.472602
+  type: 'test'
+  ...
+# Subtest: model: a locked submarine that will be under water when the shell arrives reads dive, and the guided missile still homes on it
+ok 71 - model: a locked submarine that will be under water when the shell arrives reads dive, and the guided missile still homes on it
+  ---
+  duration_ms: 1547.991503
+  type: 'test'
+  ...
+# Subtest: model: the lock ends with another long press, a clear, or the sinking; a tap during the reload is fired when the gun is ready; an empty magazine never queues
+not ok 72 - model: the lock ends with another long press, a clear, or the sinking; a tap during the reload is fired when the gun is ready; an empty magazine never queues
+  ---
+  duration_ms: 45.797726
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-naval-lock-v23.test.mjs:139:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'queued')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-naval-lock-v23.test.mjs:144:103)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: ?navalLock=0: lock input is ignored and a scripted v22 run gives the same game as with lock-on when nobody locks
+ok 73 - ?navalLock=0: lock input is ignored and a scripted v22 run gives the same game as with lock-on when nobody locks
+  ---
+  duration_ms: 297.81375
+  type: 'test'
+  ...
+# Subtest: input layer: a finger resting on a hull locks it after the hold (the ring fills on the way), a moving finger or a button never locks, a second hold unlocks
+ok 74 - input layer: a finger resting on a hull locks it after the hold (the ring fills on the way), a moving finger or a button never locks, a second hold unlocks
+  ---
+  duration_ms: 60.891023
+  type: 'test'
+  ...
+# Subtest: input layer while locked: a tap on Fire fires the lock (no aim values sent), a drag from Fire does not move the turret, release on nothing else; flag off emits nothing
+ok 75 - input layer while locked: a tap on Fire fires the lock (no aim values sent), a drag from Fire does not move the turret, release on nothing else; flag off emits nothing
+  ---
+  duration_ms: 133.701344
+  type: 'test'
+  ...
+# Subtest: input layer on the aim pad (the right side of the screen): a press over a hull waits; a hold locks without aiming or firing, a quick tap is v22's quick shot, a drag is v22's aim
+ok 76 - input layer on the aim pad (the right side of the screen): a press over a hull waits; a hold locks without aiming or firing, a quick tap is v22's quick shot, a drag is v22's aim
+  ---
+  duration_ms: 15.052585
+  type: 'test'
+  ...
+# Subtest: HUD: the filling ring, the brackets and padlock in the status colour, the reason word, the off-screen arrow and the first-lock hint; nothing when lock-on is off
+ok 77 - HUD: the filling ring, the brackets and padlock in the status colour, the reason word, the off-screen arrow and the first-lock hint; nothing when lock-on is off
+  ---
+  duration_ms: 2.510109
+  type: 'test'
+  ...
+# Subtest: wiring: the arc, the marks and the landing arrow show while locked; the Fire button styles; the offline shell lists the new modules
+ok 78 - wiring: the arc, the marks and the landing arrow show while locked; the Fire button styles; the offline shell lists the new modules
+  ---
+  duration_ms: 97.470837
+  type: 'test'
+  ...
+# Subtest: flag and rule: v24.1 by default, ?racingPitAuto=0 is v24; the automatic stop is at the end of lap 2, or lap 1 in a two-lap race
+ok 79 - flag and rule: v24.1 by default, ?racingPitAuto=0 is v24; the automatic stop is at the end of lap 2, or lap 1 in a two-lap race
+  ---
+  duration_ms: 2.40145
+  type: 'test'
+  ...
+# Subtest: why v24 showed the stop on one track only: it needed 3 laps, and the quick races of tiers 0-1, the league sprints and half the short-races calendar have 2; v24.1 stops in every race
+ok 80 - why v24 showed the stop on one track only: it needed 3 laps, and the quick races of tiers 0-1, the league sprints and half the short-races calendar have 2; v24.1 stops in every race
+  ---
+  duration_ms: 410.006067
+  type: 'test'
+  ...
+# Subtest: 3 laps, no tap at all: the stop is announced at the start of lap 2 (not 80 m before the entry as in v24), the car goes in at the end of lap 2, the change starts by itself, new tyres
+ok 81 - 3 laps, no tap at all: the stop is announced at the start of lap 2 (not 80 m before the entry as in v24), the car goes in at the end of lap 2, the change starts by itself, new tyres
+  ---
+  duration_ms: 8122.527977
+  type: 'test'
+  ...
+# Subtest: 2 laps, no tap: the stop is announced after the start and taken at the end of lap 1; every computer driver stops on lap 1 too and the race finishes
+ok 82 - 2 laps, no tap: the stop is announced after the start and taken at the end of lap 1; every computer driver stops on lap 1 too and the race finishes
+  ---
+  duration_ms: 5674.883989
+  type: 'test'
+  ...
+# Subtest: a tap cancels the automatic stop until the car is committed 80 m before the entry; it is not asked again, and the button can still ask for one
+not ok 83 - a tap cancels the automatic stop until the car is committed 80 m before the entry; it is not asked again, and the button can still ask for one
+  ---
+  duration_ms: 3475.27054
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-racing-v24-1.test.mjs:68:1'
+  failureType: 'testCodeFailure'
+  error: 'cancelled'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-racing-v24-1.test.mjs:71:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: v24 without pitAuto (?racingPitAuto=0): 2-lap races have no stop, cancel does nothing, and in 3 laps the player is asked silently 80 m before the entry
+ok 84 - v24 without pitAuto (?racingPitAuto=0): 2-lap races have no stop, cancel does nothing, and in 3 laps the player is asked silently 80 m before the entry
+  ---
+  duration_ms: 4706.9904
+  type: 'test'
+  ...
+# Subtest: pit HUD: the button pulses "automatic" from the start of the stop lap and a tap cancels; a hand request can be cancelled too; v24 keeps its button
+not ok 85 - pit HUD: the button pulses "automatic" from the start of the stop lap and a tap cancels; a hand request can be cancelled too; v24 keeps its button
+  ---
+  duration_ms: 2.43346
+  type: 'test'
+  location: '/workspace/phone-fixes-validation/after/tests/island-racing-v24-1.test.mjs:103:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'dataset')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///workspace/phone-fixes-validation/after/tests/island-racing-v24-1.test.mjs:109:32)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: session, view and style carry v24.1
+ok 86 - session, view and style carry v24.1
+  ---
+  duration_ms: 57.769721
+  type: 'test'
+  ...
+1..86
+# tests 86
+# suites 0
+# pass 64
+# fail 22
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 49495.551263

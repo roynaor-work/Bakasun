@@ -1,0 +1,228 @@
+✖ B: each stage and difficulty requires a full 3.5 second acquisition (30.174218ms)
+✖ B: the radar continuously sweeps and tracks the live hull while acquiring (63.803326ms)
+✖ B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock (52.965929ms)
+✖ B: a queued Fire tap fires once at the end of acquisition then clears the lock (21.27692ms)
+✖ B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock (22.973572ms)
+✖ B: a successful dedicated torpedo clears the surface lock too (25.611343ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 577.354013
+
+✖ failing tests:
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:19:1
+✖ B: each stage and difficulty requires a full 3.5 second acquisition (30.174218ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 1.0239288307238787
+  - 3.5
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:20:152)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1.0239288307238787,
+    expected: 3.5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:22:1
+✖ B: the radar continuously sweeps and tracks the live hull while acquiring (63.803326ms)
+  AssertionError [ERR_ASSERTION]: radar must still be searching after 1.8 seconds
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:23:66)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:25:1
+✖ B: one successful locked Fire tap consumes its lock; the next tap starts no automatic lock (52.965929ms)
+  AssertionError [ERR_ASSERTION]: successful shot must clear homing
+  + actual - expected
+  
+  + {
+  +   aligned: true,
+  +   at: 1.4999999999999996,
+  +   index: 0,
+  +   queued: false,
+  +   shots: 1,
+  +   solution: {
+  +     contact: {
+  +       core: 0.027372314495576335,
+  +       critical: true,
+  +       distance: 0.912927852859637,
+  +       h: 10.557195000469008,
+  +       index: 0,
+  +       step: 87,
+  +       t: 0.7333333333333333,
+  +       x: 312.0638933267781,
+  +       z: 7.312954814779416
+  +     },
+  +     elevation: 18.041622749631188,
+  +     power: 1,
+  +     reachable: true,
+  +     status: 'ready',
+  +     yaw: 0.0195360489040746
+  +   },
+  +   status: 'ready'
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:26:186)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { index: 0, at: 1.4999999999999996, status: 'ready', aligned: true, queued: false, shots: 1, solution: { yaw: 0.0195360489040746, elevation: 18.041622749631188, power: 1, reachable: true, status: 'ready', contact: [Object] } },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:28:1
+✖ B: a queued Fire tap fires once at the end of acquisition then clears the lock (21.27692ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   aligned: true,
+  +   at: 1.4999999999999996,
+  +   index: 0,
+  +   queued: false,
+  +   shots: 1,
+  +   solution: {
+  +     contact: {
+  +       core: 2.748365380303458e-9,
+  +       critical: true,
+  +       distance: 0.9312180286448876,
+  +       h: 14.379799063503185,
+  +       index: 0,
+  +       step: 84,
+  +       t: 0.7083333333333334,
+  +       x: 304.6579046236392,
+  +       z: 7.19182427492991
+  +     },
+  +     elevation: 18.27680414242377,
+  +     power: 1,
+  +     reachable: true,
+  +     status: 'ready',
+  +     yaw: 0.020444561637012977
+  +   },
+  +   status: 'ready'
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:29:213)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { index: 0, at: 1.4999999999999996, status: 'ready', aligned: true, queued: false, shots: 1, solution: { yaw: 0.020444561637012977, elevation: 18.27680414242377, power: 1, reachable: true, status: 'ready', contact: [Object] } },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:31:1
+✖ B: a manual shot cancels an acquisition; a refused empty shot preserves an acquired lock (22.973572ms)
+  AssertionError [ERR_ASSERTION]: manual shot clears pending acquisition
+  + actual - expected
+  
+  + {
+  +   at: 0.35,
+  +   index: 0,
+  +   need: 1.1376987008043096,
+  +   progress: 0.01464945565542438,
+  +   queued: false
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:32:89)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: { index: 0, at: 0.35, need: 1.1376987008043096, progress: 0.01464945565542438, queued: false },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at workout/island/design/phone-fixes-v1/tests/B.test.mjs:35:1
+✖ B: a successful dedicated torpedo clears the surface lock too (25.611343ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + {
+  +   aligned: false,
+  +   at: 1.5166666666666662,
+  +   index: 0,
+  +   queued: false,
+  +   shots: 0,
+  +   solution: {
+  +     contact: {
+  +       core: 0.006814544424200141,
+  +       critical: true,
+  +       distance: 0.9896807726471617,
+  +       h: 7.632387998168738,
+  +       index: 0,
+  +       step: 81,
+  +       t: 0.6833333333333333,
+  +       x: 297.4071504968469,
+  +       z: 3.5729805132639147
+  +     },
+  +     elevation: 15.665103347761487,
+  +     power: 1,
+  +     reachable: true,
+  +     status: 'ready',
+  +     yaw: 0.00019891118365924232
+  +   },
+  +   status: 'turning'
+  + }
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/Bakasun-phone/workout/island/design/phone-fixes-v1/tests/B.test.mjs:36:215)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { index: 0, at: 1.5166666666666662, status: 'turning', aligned: false, queued: false, shots: 0, solution: { yaw: 0.00019891118365924232, elevation: 15.665103347761487, power: 1, reachable: true, status: 'ready', contact: [Object] } },
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,104 @@
+{
+  "before": {
+    "startCoins": 250,
+    "affordableUpgrades": 1,
+    "coinsRemaining": 140,
+    "prices": [
+      110,
+      176,
+      282,
+      451,
+      721,
+      1153,
+      1615,
+      2261,
+      3165,
+      null
+    ],
+    "samples": [
+      {
+        "level": 1,
+        "cooling": 0,
+        "heatPerSecond": 27.900000000000002,
+        "overheatSeconds": 3.5844,
+        "damage": 15,
+        "rate": 9
+      },
+      {
+        "level": 3,
+        "cooling": 0,
+        "heatPerSecond": 31.248000000000008,
+        "overheatSeconds": 3.2011,
+        "damage": 21.599999999999998,
+        "rate": 10.080000000000002
+      },
+      {
+        "level": 1,
+        "cooling": 1,
+        "heatPerSecond": 27.900000000000002,
+        "overheatSeconds": 3.5844,
+        "damage": 15,
+        "rate": 9
+      },
+      {
+        "level": 10,
+        "cooling": 6,
+        "heatPerSecond": 42.966,
+        "overheatSeconds": 2.3278,
+        "damage": 44.7,
+        "rate": 13.86
+      }
+    ]
+  },
+  "after": {
+    "startCoins": 250,
+    "affordableUpgrades": 2,
+    "coinsRemaining": 50,
+    "prices": [
+      80,
+      120,
+      180,
+      270,
+      405,
+      608,
+      851,
+      1191,
+      1667,
+      null
+    ],
+    "samples": [
+      {
+        "level": 1,
+        "cooling": 0,
+        "heatPerSecond": 20.925,
+        "overheatSeconds": 4.78,
+        "damage": 15,
+        "rate": 9
+      },
+      {
+        "level": 3,
+        "cooling": 0,
+        "heatPerSecond": 19.284480000000002,
+        "overheatSeconds": 5.1856,
+        "damage": 21.599999999999998,
+        "rate": 10.080000000000002
+      },
+      {
+        "level": 1,
+        "cooling": 1,
+        "heatPerSecond": 19.878750000000004,
+        "overheatSeconds": 5.0311,
+        "damage": 15,
+        "rate": 9
+      },
+      {
+        "level": 10,
+        "cooling": 6,
+        "heatPerSecond": 10.14389170383907,
+        "overheatSeconds": 9.8589,
+        "damage": 44.7,
+        "rate": 13.86
+      }
+    ]
+  }
+}

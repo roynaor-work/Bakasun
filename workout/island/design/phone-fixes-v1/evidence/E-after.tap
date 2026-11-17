@@ -1,0 +1,40 @@
+TAP version 13
+# Subtest: E: serve power and quality decrease away from purple, including inside green
+ok 1 - E: serve power and quality decrease away from purple, including inside green
+  ---
+  duration_ms: 31.649529
+  type: 'test'
+  ...
+# Subtest: E: early red hits the physical net and late red lands beyond the service line
+ok 2 - E: early red hits the physical net and late red lands beyond the service line
+  ---
+  duration_ms: 12.027241
+  type: 'test'
+  ...
+# Subtest: E: yellow fault rate rises with distance; green remains playable at every difficulty/rank
+ok 3 - E: yellow fault rate rises with distance; green remains playable at every difficulty/rank
+  ---
+  duration_ms: 198.962452
+  type: 'test'
+  ...
+# Subtest: E: a poor second serve awards one double-fault point
+ok 4 - E: a poor second serve awards one double-fault point
+  ---
+  duration_ms: 8.91343
+  type: 'test'
+  ...
+# Subtest: E rollback: disabled model retains v24.1 quality/power, yellow safety and red long serve
+ok 5 - E rollback: disabled model retains v24.1 quality/power, yellow safety and red long serve
+  ---
+  duration_ms: 1.13253
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 787.838309
