@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "operation": "Two consecutive build-assets.mjs runs against the same rendered layers with --reuse-props; SHA-256 checks of both manifests passed. Per-asset SHA-256 values in the manifests cover all 40 PNGs.",
+  "manifestHashes": {
+    "manifest.json": "60fb17ada7d67a0e78e330d68849972f5de41aae61dfb46c24fa20f446919c86",
+    "manifest.js": "1a6772524b70f78a28a2cd8a38b7839eee329506762c0d26b1ed444007bd6834"
+  },
+  "totalRuntimeBytes": 716456
+}

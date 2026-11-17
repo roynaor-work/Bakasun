@@ -1,0 +1,11 @@
+{
+  "generator": "OpenAI image generation tool",
+  "date": "2026-11-17",
+  "sourceImageSha256": "894c6b1dd92010ebd4a66733e7bffe7bfc9569789a4ce2bc51e2ad660bd20461",
+  "sourceDimensions": [
+    1536,
+    1024
+  ],
+  "packing": "Crops listed in build-assets.mjs; 6 frames per theme, 128x160 per frame. ImageMagick resize/palette reduction; no external artwork.",
+  "output": "Only compressed per-theme PNG atlases are delivered; full-resolution authoring output is excluded from runtime."
+}

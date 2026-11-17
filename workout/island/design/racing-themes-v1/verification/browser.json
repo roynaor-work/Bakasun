@@ -1,0 +1,103 @@
+{
+  "passed": true,
+  "checkedAt": "2026-11-17T12:09:05.562Z",
+  "browser": "151.0.7922.173",
+  "viewport": [
+    844,
+    390
+  ],
+  "checks": [
+    "Canvas native dimensions 844x390",
+    "Stage occupies 844x390",
+    "city-night: ten local PNGs loaded",
+    "city-night: active button follows selection",
+    "city-night: six accessible prop labels",
+    "city-night: far layer contributes visible pixels",
+    "city-night: middle layer contributes visible pixels",
+    "city-night: near layer contributes visible pixels",
+    "city-night: three increasing parallax rates",
+    "city-night: continuous movement changes rendered pixels",
+    "city-night: asset mode pauses motion",
+    "desert: ten local PNGs loaded",
+    "desert: active button follows selection",
+    "desert: six accessible prop labels",
+    "desert: far layer contributes visible pixels",
+    "desert: middle layer contributes visible pixels",
+    "desert: near layer contributes visible pixels",
+    "desert: three increasing parallax rates",
+    "desert: continuous movement changes rendered pixels",
+    "desert: asset mode pauses motion",
+    "snow: ten local PNGs loaded",
+    "snow: active button follows selection",
+    "snow: six accessible prop labels",
+    "snow: far layer contributes visible pixels",
+    "snow: middle layer contributes visible pixels",
+    "snow: near layer contributes visible pixels",
+    "snow: three increasing parallax rates",
+    "snow: continuous movement changes rendered pixels",
+    "snow: asset mode pauses motion",
+    "coast: ten local PNGs loaded",
+    "coast: active button follows selection",
+    "coast: six accessible prop labels",
+    "coast: far layer contributes visible pixels",
+    "coast: middle layer contributes visible pixels",
+    "coast: near layer contributes visible pixels",
+    "coast: three increasing parallax rates",
+    "coast: continuous movement changes rendered pixels",
+    "coast: asset mode pauses motion",
+    "Play starts animation",
+    "Pause freezes time",
+    "Reset returns to beginning",
+    "Play from the asset view returns to a moving scene",
+    "Rapid selection keeps the final theme",
+    "Reduced motion starts paused",
+    "No horizontal overflow at 390px",
+    "city-night: offline package load",
+    "desert: offline package load",
+    "snow: offline package load",
+    "coast: offline package load",
+    "No offline JavaScript errors",
+    "No JavaScript errors",
+    "No failed asset requests",
+    "No external requests"
+  ],
+  "themes": [
+    {
+      "id": "city-night",
+      "bytes": 188443,
+      "propCount": 6
+    },
+    {
+      "id": "desert",
+      "bytes": 182310,
+      "propCount": 6
+    },
+    {
+      "id": "snow",
+      "bytes": 177922,
+      "propCount": 6
+    },
+    {
+      "id": "coast",
+      "bytes": 167781,
+      "propCount": 6
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "external": [],
+  "hashes": {
+    "preview.html": "07123ce0829b32d098ec5e638031a7d9c0d1aad465386a68d7605c29da106fa3",
+    "preview.js": "ae49a145ce955398d33a9cc5eee975c16ba2bded1073ee0fd0e575080e6b8369",
+    "manifest.json": "60fb17ada7d67a0e78e330d68849972f5de41aae61dfb46c24fa20f446919c86",
+    "manifest.js": "1a6772524b70f78a28a2cd8a38b7839eee329506762c0d26b1ed444007bd6834"
+  },
+  "offline": {
+    "directFile": "blocked-by-managed-browser-policy",
+    "networkDisabled": true,
+    "fallback": "Same local files fulfilled from disk if managed file:// navigation is blocked."
+  },
+  "limitations": [
+    "Canvas2D asset preview; not a gameplay integration or a physical-phone FPS measurement."
+  ]
+}

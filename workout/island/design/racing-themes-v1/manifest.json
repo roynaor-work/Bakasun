@@ -1,0 +1,1253 @@
+{
+  "schemaVersion": 1,
+  "id": "racing-themes-v1",
+  "version": "1.0.0",
+  "date": "2026-11-17",
+  "baseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "branch": "codex/racing-themes-v1",
+  "preview": {
+    "file": "preview.html",
+    "width": 844,
+    "height": 390,
+    "offline": true,
+    "entry": "Open preview.html directly; no server/build/CDN required."
+  },
+  "budget": {
+    "unit": "decimal bytes",
+    "maxBytesPerTheme": 600000,
+    "scope": "All PNGs required by one theme, including sky, 3 layers, asphalt, shoulder, both lines, barrier and all 6 props. No shared asset discount."
+  },
+  "rendering": {
+    "colorSpace": "sRGB",
+    "alpha": "straight / unassociated",
+    "filter": "linear",
+    "premultiplyAlpha": false,
+    "layerOrder": [
+      "sky",
+      "far",
+      "middle",
+      "near",
+      "shoulder",
+      "asphalt",
+      "edge-line",
+      "lane-line",
+      "barrier",
+      "props"
+    ],
+    "backgroundPeriodMetres": 40,
+    "propAtlas": {
+      "cellWidth": 128,
+      "cellHeight": 160,
+      "gutter": 8,
+      "columns": 6,
+      "rows": 1,
+      "anchor": [
+        0.5,
+        0.9375
+      ]
+    },
+    "notes": [
+      "Apply lighting colors in linear space in a 3D engine; PNGs are sRGB.",
+      "The preview is an asset composition study. Connect textures/billboards to the v7 renderer separately.",
+      "Props contain authored lighting. Avoid a second directional lighting pass on sprite billboards.",
+      "Signs use geometry only; localize labels in live HTML/renderer if needed.",
+      "Extrude or isolate atlas frames before mipmapping; do not repeat the whole atlas."
+    ]
+  },
+  "reference": {
+    "folder": "../racing-v7/",
+    "files": [
+      "REFERENCE.md",
+      "world.mjs",
+      "iterations/17/neon-drive-apex-near-844x390.jpg",
+      "iterations/17/coast-garage-velour-near-844x390.jpg"
+    ],
+    "style": "Polished three-dimensional arcade, soft materials, readable asphalt, warm/cool light, no outlines; city and coast inherit the v7 sky and lighting values."
+  },
+  "themes": [
+    {
+      "id": "city-night",
+      "name": "עיר בלילה",
+      "subtitle": "חלונות חמים · אספלט קריר",
+      "v7Reference": "neon",
+      "palette": {
+        "skyTop": "#081428",
+        "skyHorizon": "#29364e",
+        "fog": "#172b42",
+        "ground": "#283340",
+        "asphalt": "#384353",
+        "lane": "#ece9d6",
+        "accent": "#71d9ed"
+      },
+      "lighting": {
+        "hemisphere": {
+          "skyColor": "#8bb6e7",
+          "groundColor": "#283340",
+          "intensity": 1.45
+        },
+        "sun": {
+          "color": "#8bb7fa",
+          "intensity": 1.3,
+          "position": [
+            60,
+            85,
+            -50
+          ]
+        },
+        "rim": {
+          "color": "#bb83e5",
+          "intensity": 1.15,
+          "position": [
+            -30,
+            16,
+            40
+          ]
+        },
+        "exposure": 1.22,
+        "fog": {
+          "color": "#172b42",
+          "near": 140,
+          "far": 700
+        }
+      },
+      "sky": {
+        "file": "city-night/sky.png",
+        "role": "sky-gradient",
+        "width": 4,
+        "height": 256,
+        "bytes": 580,
+        "sha256": "77cc0af3424af91250e373896ed4eba7368cfb2da4a7de1ce87f9e740d7629eb",
+        "repeat": "x"
+      },
+      "layers": [
+        {
+          "file": "city-night/far.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 67064,
+          "sha256": "d8d29c9c7a6f57b93a644dc158f24423eafd081e9ddd9e48d50c7242225be3a6",
+          "id": "far",
+          "label": "קו רקיע מרוחק",
+          "repeat": "x",
+          "parallax": 0.12,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "city-night/middle.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 49206,
+          "sha256": "7cee5b89c5046452c9d91d70230e7e3f384e4b31385ee84151a99fed6e7be355",
+          "id": "middle",
+          "label": "רובע חלונות מואר",
+          "repeat": "x",
+          "parallax": 0.34,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "city-night/near.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 29429,
+          "sha256": "f0a589c47e0d4d51003e17accd0d5b934365cf0fbe86a57ebff5f07dfbf287e3",
+          "id": "near",
+          "label": "גינות ומבנים נמוכים",
+          "repeat": "x",
+          "parallax": 0.66,
+          "anchor": [
+            0,
+            1
+          ]
+        }
+      ],
+      "road": {
+        "asphalt": {
+          "file": "city-night/asphalt.png",
+          "role": "asphalt-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 8569,
+          "sha256": "a86e64fa0d0c6a5678045dbad2b9485093cb97cde28e62ba853d0b6eaefc102b",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ],
+          "roughness": 0.48,
+          "metalness": 0.15
+        },
+        "shoulder": {
+          "file": "city-night/shoulder.png",
+          "role": "shoulder-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 9471,
+          "sha256": "16afa6338318821feacb356dffc5fc1028d48a2e20a85e2fd1fa9e266e1180a5",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ]
+        },
+        "laneLine": {
+          "file": "city-night/lane-line.png",
+          "role": "lane-line-tile",
+          "width": 32,
+          "height": 128,
+          "bytes": 108,
+          "sha256": "279c53eb5d6efc8411e0809e5ea0bc66dacad3ff0a2a17255d02370c62bc9483",
+          "repeat": "y",
+          "metres": [
+            0.8,
+            6
+          ],
+          "paintedWidthMetres": 0.2
+        },
+        "edgeLine": {
+          "file": "city-night/edge-line.png",
+          "role": "edge-line-tile",
+          "width": 16,
+          "height": 128,
+          "bytes": 104,
+          "sha256": "e68badee8eee75dbb6d03406f0dce0818cd2f4b0f41b948ed91f33ade4960d5f",
+          "repeat": "y",
+          "metres": [
+            0.32,
+            4
+          ],
+          "paintedWidthMetres": 0.12
+        }
+      },
+      "barrier": {
+        "file": "city-night/barrier.png",
+        "role": "barrier-tile",
+        "width": 256,
+        "height": 64,
+        "bytes": 723,
+        "sha256": "47fe9283bdc79a655e644bd3cfd5d015211eddbad1e3564e5a0da8d27562f769",
+        "repeat": "x",
+        "metres": [
+          8,
+          2
+        ],
+        "anchor": [
+          0,
+          1
+        ],
+        "kind": "steel-guardrail"
+      },
+      "propAtlas": {
+        "file": "city-night/props.png",
+        "role": "six-prop-atlas",
+        "width": 768,
+        "height": 160,
+        "bytes": 23189,
+        "sha256": "6483a467b5f10b97146ee1dd93c9a35f0db21d287c467f6476cc4863cd0a8285",
+        "repeat": "none",
+        "alpha": true
+      },
+      "props": [
+        {
+          "id": "streetlight",
+          "label": "פנס רחוב",
+          "frame": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 4.2,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "planter-tree",
+          "label": "עץ באדנית",
+          "frame": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 3.2,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "chevron-sign",
+          "label": "שלט פנייה",
+          "frame": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.6,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": false
+        },
+        {
+          "id": "traffic-cone",
+          "label": "חרוט תנועה",
+          "frame": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.65,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "light-bollard",
+          "label": "עמוד אור",
+          "frame": [
+            512,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.9,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "planter-bush",
+          "label": "שיח באדנית",
+          "frame": [
+            640,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.8,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        }
+      ],
+      "totalBytes": 188443
+    },
+    {
+      "id": "desert",
+      "name": "מדבר",
+      "subtitle": "אבן חול · אור אחר הצהריים",
+      "v7Reference": "coast/ridge palette extension",
+      "palette": {
+        "skyTop": "#729fb6",
+        "skyHorizon": "#f0cf9b",
+        "fog": "#d8b88e",
+        "ground": "#d0aa72",
+        "asphalt": "#625d56",
+        "lane": "#f4e4c3",
+        "accent": "#f0b56a"
+      },
+      "lighting": {
+        "hemisphere": {
+          "skyColor": "#c7d5db",
+          "groundColor": "#d0aa72",
+          "intensity": 2.05
+        },
+        "sun": {
+          "color": "#ffe0ad",
+          "intensity": 3,
+          "position": [
+            60,
+            85,
+            -50
+          ]
+        },
+        "rim": {
+          "color": "#e9f7ff",
+          "intensity": 0.6,
+          "position": [
+            -30,
+            16,
+            40
+          ]
+        },
+        "exposure": 1.06,
+        "fog": {
+          "color": "#d8b88e",
+          "near": 140,
+          "far": 700
+        }
+      },
+      "sky": {
+        "file": "desert/sky.png",
+        "role": "sky-gradient",
+        "width": 4,
+        "height": 256,
+        "bytes": 456,
+        "sha256": "9283604cdc70ee3bbf222c96c7f96d8c7cc5303451a6b011db97bcce0bc4af6b",
+        "repeat": "x"
+      },
+      "layers": [
+        {
+          "file": "desert/far.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 55852,
+          "sha256": "3063f4a0aedd158450dc0d4706e2126248f03e87b448d7def47b08336693a7ee",
+          "id": "far",
+          "label": "מצוקי אבן באובך",
+          "repeat": "x",
+          "parallax": 0.12,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "desert/middle.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 37377,
+          "sha256": "d12c08c5bc290187f3dd90dda5c2c0c3d535fd6ba0a53c98ef81c312d5a23274",
+          "id": "middle",
+          "label": "דיונות רכות",
+          "repeat": "x",
+          "parallax": 0.34,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "desert/near.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 42629,
+          "sha256": "099b1b6977ed570da9afb05afba34e8c49de808751c72be016edf89bd5c8fcff",
+          "id": "near",
+          "label": "אבנים וצמחייה נמוכה",
+          "repeat": "x",
+          "parallax": 0.66,
+          "anchor": [
+            0,
+            1
+          ]
+        }
+      ],
+      "road": {
+        "asphalt": {
+          "file": "desert/asphalt.png",
+          "role": "asphalt-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 8559,
+          "sha256": "f1cb0068354d692db707bc8d61c2f99343c981b372f4b18733fa25498d76c318",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ],
+          "roughness": 0.94,
+          "metalness": 0
+        },
+        "shoulder": {
+          "file": "desert/shoulder.png",
+          "role": "shoulder-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 9453,
+          "sha256": "d762537097d001c12f62dd84636aed7f4949c0bed3e613198870aa57db0e5812",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ]
+        },
+        "laneLine": {
+          "file": "desert/lane-line.png",
+          "role": "lane-line-tile",
+          "width": 32,
+          "height": 128,
+          "bytes": 108,
+          "sha256": "2bd00f351474397c0089592a2abfc5fbeaaa47b064f1be698ab4c7d70d78be81",
+          "repeat": "y",
+          "metres": [
+            0.8,
+            6
+          ],
+          "paintedWidthMetres": 0.2
+        },
+        "edgeLine": {
+          "file": "desert/edge-line.png",
+          "role": "edge-line-tile",
+          "width": 16,
+          "height": 128,
+          "bytes": 104,
+          "sha256": "0a1110a215844561317a56b090f69370edabecb3366d3098085f25d625f8c606",
+          "repeat": "y",
+          "metres": [
+            0.32,
+            4
+          ],
+          "paintedWidthMetres": 0.12
+        }
+      },
+      "barrier": {
+        "file": "desert/barrier.png",
+        "role": "barrier-tile",
+        "width": 256,
+        "height": 64,
+        "bytes": 1932,
+        "sha256": "842b5721b9321bbef3d0a1411f2c6a8553bcc84d2ae7a615b050db55134b51c8",
+        "repeat": "x",
+        "metres": [
+          8,
+          2
+        ],
+        "anchor": [
+          0,
+          1
+        ],
+        "kind": "sandstone-wall"
+      },
+      "propAtlas": {
+        "file": "desert/props.png",
+        "role": "six-prop-atlas",
+        "width": 768,
+        "height": 160,
+        "bytes": 25840,
+        "sha256": "3fc70924c5720ca21b8214a165b3ae0825687e195d1bbc3eeee47972dd28cda4",
+        "repeat": "none",
+        "alpha": true
+      },
+      "props": [
+        {
+          "id": "saguaro",
+          "label": "קקטוס גבוה",
+          "frame": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 3,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "barrel-cactus",
+          "label": "קקטוס כדורי",
+          "frame": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.2,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "sandstone-rock",
+          "label": "סלע חול",
+          "frame": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.1,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "dry-scrub",
+          "label": "שיח יבש",
+          "frame": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.9,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "chevron-sign",
+          "label": "שלט פנייה",
+          "frame": [
+            512,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.6,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": false
+        },
+        {
+          "id": "reflector-post",
+          "label": "עמוד מחזיר אור",
+          "frame": [
+            640,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.85,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        }
+      ],
+      "totalBytes": 182310
+    },
+    {
+      "id": "snow",
+      "name": "שלג",
+      "subtitle": "פסגות בהירות · צל כחול",
+      "v7Reference": "ridge",
+      "palette": {
+        "skyTop": "#7096af",
+        "skyHorizon": "#dce1da",
+        "fog": "#b2c5cd",
+        "ground": "#dbe7eb",
+        "asphalt": "#536574",
+        "lane": "#f0cb7c",
+        "accent": "#87c7ff"
+      },
+      "lighting": {
+        "hemisphere": {
+          "skyColor": "#c0d4df",
+          "groundColor": "#dbe7eb",
+          "intensity": 2.05
+        },
+        "sun": {
+          "color": "#ffe7c0",
+          "intensity": 2.45,
+          "position": [
+            60,
+            85,
+            -50
+          ]
+        },
+        "rim": {
+          "color": "#e9f7ff",
+          "intensity": 0.6,
+          "position": [
+            -30,
+            16,
+            40
+          ]
+        },
+        "exposure": 1.04,
+        "fog": {
+          "color": "#b2c5cd",
+          "near": 140,
+          "far": 700
+        }
+      },
+      "sky": {
+        "file": "snow/sky.png",
+        "role": "sky-gradient",
+        "width": 4,
+        "height": 256,
+        "bytes": 437,
+        "sha256": "f3090553d1aecabbff4e929791def42e5190fd02b72f064cbf96b94d1511f11a",
+        "repeat": "x"
+      },
+      "layers": [
+        {
+          "file": "snow/far.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 56675,
+          "sha256": "c7073d16bba76144408619481bf1e208f037dda629ceb179bc60285988508512",
+          "id": "far",
+          "label": "פסגות עם כיפות שלג",
+          "repeat": "x",
+          "parallax": 0.12,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "snow/middle.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 46441,
+          "sha256": "05aa97f084ce1043bc8763bdcf87334473df74187f634484ac41cb04fde5dc34",
+          "id": "middle",
+          "label": "יער מחטים",
+          "repeat": "x",
+          "parallax": 0.34,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "snow/near.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 30823,
+          "sha256": "3e9c5595064b1f7f318efe59c45843d31b2ce0e05cb572f7d6afecaf8920a7b3",
+          "id": "near",
+          "label": "גדות שלג ועצים",
+          "repeat": "x",
+          "parallax": 0.66,
+          "anchor": [
+            0,
+            1
+          ]
+        }
+      ],
+      "road": {
+        "asphalt": {
+          "file": "snow/asphalt.png",
+          "role": "asphalt-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 8561,
+          "sha256": "a818f8d3e5bb1805d8d6b5c2974ffdfdceb41ffd85bd8fbcd49c98c449beac1d",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ],
+          "roughness": 0.84,
+          "metalness": 0
+        },
+        "shoulder": {
+          "file": "snow/shoulder.png",
+          "role": "shoulder-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 9451,
+          "sha256": "dd65a722bc9d4c0b9ff42cd62928602ab223e062436077dd9496b64ec7ef0fd4",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ]
+        },
+        "laneLine": {
+          "file": "snow/lane-line.png",
+          "role": "lane-line-tile",
+          "width": 32,
+          "height": 128,
+          "bytes": 108,
+          "sha256": "ea68e1a47951fd8df01cebaadf92de5331484ac6256b256391bc0ce24da9dfab",
+          "repeat": "y",
+          "metres": [
+            0.8,
+            6
+          ],
+          "paintedWidthMetres": 0.2
+        },
+        "edgeLine": {
+          "file": "snow/edge-line.png",
+          "role": "edge-line-tile",
+          "width": 16,
+          "height": 128,
+          "bytes": 104,
+          "sha256": "4d2e6714d0c4afd3877df31cda36229e9e94d1fc8ebe31fe0f23df930b990e0b",
+          "repeat": "y",
+          "metres": [
+            0.32,
+            4
+          ],
+          "paintedWidthMetres": 0.12
+        }
+      },
+      "barrier": {
+        "file": "snow/barrier.png",
+        "role": "barrier-tile",
+        "width": 256,
+        "height": 64,
+        "bytes": 1147,
+        "sha256": "43157f859d19688e3935cf15a312dce53be086c68d6380ee22604d320a568588",
+        "repeat": "x",
+        "metres": [
+          8,
+          2
+        ],
+        "anchor": [
+          0,
+          1
+        ],
+        "kind": "steel-guardrail"
+      },
+      "propAtlas": {
+        "file": "snow/props.png",
+        "role": "six-prop-atlas",
+        "width": 768,
+        "height": 160,
+        "bytes": 24175,
+        "sha256": "562ee479f74e1dc0771a54893b33d39d0df6e4bc67be14bf21f59ed43745cde7",
+        "repeat": "none",
+        "alpha": true
+      },
+      "props": [
+        {
+          "id": "snow-spruce",
+          "label": "אשוח מושלג",
+          "frame": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 4.2,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "snow-pine",
+          "label": "אורן מושלג",
+          "frame": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 2.5,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "snow-rock",
+          "label": "סלע מושלג",
+          "frame": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.3,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "chevron-sign",
+          "label": "שלט פנייה",
+          "frame": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.6,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": false
+        },
+        {
+          "id": "snow-pole",
+          "label": "סמן שלג",
+          "frame": [
+            512,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.8,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "frosted-lamp",
+          "label": "פנס חורפי",
+          "frame": [
+            640,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 2,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        }
+      ],
+      "totalBytes": 177922
+    },
+    {
+      "id": "coast",
+      "name": "חוף",
+      "subtitle": "ים טורקיז · שמש חמימה",
+      "v7Reference": "coast",
+      "palette": {
+        "skyTop": "#4b7896",
+        "skyHorizon": "#f5ce9c",
+        "fog": "#d9c3a4",
+        "ground": "#d9c08f",
+        "asphalt": "#5c6463",
+        "lane": "#f3e9cf",
+        "accent": "#79d0c1"
+      },
+      "lighting": {
+        "hemisphere": {
+          "skyColor": "#c0d4df",
+          "groundColor": "#d9c08f",
+          "intensity": 2.05
+        },
+        "sun": {
+          "color": "#ffe0ad",
+          "intensity": 3,
+          "position": [
+            60,
+            85,
+            -50
+          ]
+        },
+        "rim": {
+          "color": "#e9f7ff",
+          "intensity": 0.6,
+          "position": [
+            -30,
+            16,
+            40
+          ]
+        },
+        "exposure": 1.06,
+        "fog": {
+          "color": "#d9c3a4",
+          "near": 140,
+          "far": 700
+        }
+      },
+      "sky": {
+        "file": "coast/sky.png",
+        "role": "sky-gradient",
+        "width": 4,
+        "height": 256,
+        "bytes": 462,
+        "sha256": "240c5d2cd9090245c65d96d891bc26f849c649720ad7ff1fdd4f6abcbc90b274",
+        "repeat": "x"
+      },
+      "layers": [
+        {
+          "file": "coast/far.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 38158,
+          "sha256": "bbcdd466e5f405258693b3ca351747e20ec7dda2c8ac0e247c67b21994734fbb",
+          "id": "far",
+          "label": "איים מרוחקים",
+          "repeat": "x",
+          "parallax": 0.12,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "coast/middle.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 47830,
+          "sha256": "5e17080b814b8dccdf6ea0b65fb92795aee0b6c765d9c5b3261c55c408d3776a",
+          "id": "middle",
+          "label": "ים וגלים",
+          "repeat": "x",
+          "parallax": 0.34,
+          "anchor": [
+            0,
+            1
+          ]
+        },
+        {
+          "file": "coast/near.png",
+          "role": "parallax-layer",
+          "width": 1024,
+          "height": 256,
+          "bytes": 37991,
+          "sha256": "dfeaff6c3ff8812cdc3fcc6d51344cfc0abf314121e9cddc81220e72959ee083",
+          "id": "near",
+          "label": "דיונות ודקלים",
+          "repeat": "x",
+          "parallax": 0.66,
+          "anchor": [
+            0,
+            1
+          ]
+        }
+      ],
+      "road": {
+        "asphalt": {
+          "file": "coast/asphalt.png",
+          "role": "asphalt-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 8516,
+          "sha256": "01deee96a4daf7ea44485a5db009ea51920d3361d11025b6159e1b3656951d31",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ],
+          "roughness": 0.88,
+          "metalness": 0
+        },
+        "shoulder": {
+          "file": "coast/shoulder.png",
+          "role": "shoulder-tile",
+          "width": 128,
+          "height": 128,
+          "bytes": 9440,
+          "sha256": "f096f05ad9ff10212b458e411a6bf9dd4c0f13d8192ecce1a83b679946eb184c",
+          "repeat": "xy",
+          "metres": [
+            4,
+            4
+          ]
+        },
+        "laneLine": {
+          "file": "coast/lane-line.png",
+          "role": "lane-line-tile",
+          "width": 32,
+          "height": 128,
+          "bytes": 108,
+          "sha256": "301a56ca02227ce7076730cd1a5a7df61bcf90251a8ac21f5d494718fd3ad2ac",
+          "repeat": "y",
+          "metres": [
+            0.8,
+            6
+          ],
+          "paintedWidthMetres": 0.2
+        },
+        "edgeLine": {
+          "file": "coast/edge-line.png",
+          "role": "edge-line-tile",
+          "width": 16,
+          "height": 128,
+          "bytes": 104,
+          "sha256": "0d3ee86bc0d8dce469878aae1cd023888f25158a703201e78c438c0cfdd3d68e",
+          "repeat": "y",
+          "metres": [
+            0.32,
+            4
+          ],
+          "paintedWidthMetres": 0.12
+        }
+      },
+      "barrier": {
+        "file": "coast/barrier.png",
+        "role": "barrier-tile",
+        "width": 256,
+        "height": 64,
+        "bytes": 935,
+        "sha256": "254ba687df955689149520cf38020d7de074cf997ac282bd322e1e7c0879c25e",
+        "repeat": "x",
+        "metres": [
+          8,
+          2
+        ],
+        "anchor": [
+          0,
+          1
+        ],
+        "kind": "timber-and-steel-guardrail"
+      },
+      "propAtlas": {
+        "file": "coast/props.png",
+        "role": "six-prop-atlas",
+        "width": 768,
+        "height": 160,
+        "bytes": 24237,
+        "sha256": "4ea9ed6cb64df7db0ae655ee9f92e6f1684466a545d87a4b60a0f8078b0e017d",
+        "repeat": "none",
+        "alpha": true
+      },
+      "props": [
+        {
+          "id": "coconut-palm",
+          "label": "דקל קוקוס",
+          "frame": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 4.6,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "young-palm",
+          "label": "דקל צעיר",
+          "frame": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 2.4,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "dune-grass",
+          "label": "עשב חולות",
+          "frame": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.8,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "coastal-rock",
+          "label": "סלע חוף",
+          "frame": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.9,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        },
+        {
+          "id": "chevron-sign",
+          "label": "שלט פנייה",
+          "frame": [
+            512,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 1.6,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": false
+        },
+        {
+          "id": "timber-bollard",
+          "label": "עמוד עץ",
+          "frame": [
+            640,
+            0,
+            128,
+            160
+          ],
+          "anchor": [
+            0.5,
+            0.9375
+          ],
+          "heightMetres": 0.7,
+          "roadClearanceMetres": 2.5,
+          "flipAllowed": true
+        }
+      ],
+      "totalBytes": 167781
+    }
+  ]
+}

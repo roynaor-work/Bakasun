@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>מרוצים · ארבע סביבות</title>
+<style>
+  :root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;background:#080f18;color:#f3f1e8;--lime:#d6f34a;--line:#ffffff24}
+  *{box-sizing:border-box}body{margin:0}button,a,input{font:inherit}button{cursor:pointer;color:inherit}
+  button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+  .stage{position:relative;width:min(100%,844px);aspect-ratio:844/390;margin:32px auto 0;overflow:hidden;background:#14243b;isolation:isolate;border:1px solid var(--line);border-radius:12px}
+  canvas{display:block;width:100%;height:100%}.vignette{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#040c185c,transparent 29%,transparent 64%,#050c18dd)}
+  .top{position:absolute;top:16px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{font-size:18px;font-weight:900;line-height:1.2;white-space:nowrap;letter-spacing:-.5px}.brand small{display:block;font-size:9px;color:#d3dce0;letter-spacing:2px;direction:ltr;font-weight:400;margin-top:4px}
+  nav{display:flex;gap:5px;padding:5px;border:1px solid var(--line);background:#0b1724d9;border-radius:8px}
+  nav button{border:0;border-radius:4px;background:transparent;padding:9px 13px;font-size:13px;min-height:36px;white-space:nowrap}
+  nav button[aria-pressed=true]{background:var(--lime);color:#182219;font-weight:700}nav button:hover{box-shadow:inset 0 0 0 1px #ffffff55}
+  .caption{position:absolute;bottom:24px;right:23px;pointer-events:none;text-align:right}.caption .eyebrow{font-size:9px;letter-spacing:2px;color:var(--lime);direction:ltr}
+  h1{font-size:34px;margin:7px 0 5px;font-weight:800;line-height:1.05;letter-spacing:-1px}.subtitle{font-size:12px;color:#d3dce0}
+  .controls{position:absolute;bottom:24px;left:18px;display:flex;gap:6px;align-items:center}.controls button{background:#0b1724da;border:1px solid #ffffff35;min-height:38px;border-radius:5px;padding:8px 11px;font-size:12px}
+  .controls button[aria-pressed=true]{border-color:var(--lime);color:var(--lime)}.controls .play{background:var(--lime);color:#182219;font-weight:700;border-color:var(--lime)}
+  .stage[data-mode=atlas] .controls{bottom:8px}
+  .loading{position:absolute;inset:0;background:#081428e8;display:grid;place-content:center;text-align:center;z-index:5;font-size:15px;padding:20px}.loading[hidden]{display:none}.loading button{margin-top:16px;padding:12px;background:var(--lime);color:#182219;border:0;border-radius:4px}
+  .details{width:min(calc(100% - 36px),844px);margin:18px auto 40px;font-size:13px;color:#b7c6cf;line-height:1.7}
+  .summary{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line)}.summary strong{color:#f3f1e8;font-weight:400}.summary a,.links a{color:#d6f34a;text-underline-offset:4px}
+  .layers{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:17px 0}.layers label{display:flex;gap:6px;align-items:center;cursor:pointer}.layers input{accent-color:var(--lime);width:16px;height:16px}
+  .layers span{font-size:11px;color:#889ca9}.swatches{display:flex;gap:14px;flex-wrap:wrap;margin:15px 0}.swatch{display:flex;align-items:center;gap:7px}.swatch i{width:15px;height:15px;border-radius:50%;display:inline-block;border:1px solid #ffffff44}
+  .props{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:12px}.prop{border:1px solid var(--line);border-radius:6px;text-align:center;padding:9px 3px;font-size:11px}.links{display:flex;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;margin-top:20px}
+  .notice{font-size:12px;color:#8da1ad;margin-top:14px}.status{font-variant-numeric:tabular-nums}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  @media(max-width:880px){.stage{margin-top:0;border:0;border-radius:0}.details{margin-top:16px}}
+  @media(max-width:650px){.top{top:9px;left:9px;right:9px}.brand{display:none}nav{gap:1px;padding:3px;margin-right:auto}nav button{padding:6px 10px;min-height:32px;font-size:11px}.caption{bottom:13px;right:12px}h1{font-size:24px;margin:4px 0}.subtitle{display:none}.caption .eyebrow{font-size:7px}.controls{left:10px;bottom:12px;gap:4px}.controls button{font-size:10px;padding:6px 8px;min-height:30px}.props{grid-template-columns:repeat(3,1fr)}.summary{align-items:flex-start;flex-direction:column;gap:4px}}
+</style>
+<main>
+  <section class="stage" aria-label="תצוגת מסלול בגודל 844 על 390">
+    <canvas width="844" height="390" id="scene" role="img" aria-label="טוען ערכת מסלול"></canvas>
+    <div class="vignette" id="vignette"></div>
+    <div class="top">
+      <nav aria-label="בחירת סביבה">
+        <button data-theme="city-night" aria-pressed="true">עיר בלילה</button>
+        <button data-theme="desert" aria-pressed="false">מדבר</button>
+        <button data-theme="snow" aria-pressed="false">שלג</button>
+        <button data-theme="coast" aria-pressed="false">חוף</button>
+      </nav>
+      <div class="brand">מרוצים<small>VOLUME 07 / THEMES 01</small></div>
+    </div>
+    <div class="caption">
+      <div class="eyebrow" id="eyebrow">01 / NIGHT CITY</div>
+      <h1 id="theme-name">עיר בלילה</h1>
+      <div class="subtitle" id="subtitle">חלונות חמים · אספלט קריר</div>
+    </div>
+    <div class="controls" aria-label="כלי תצוגה">
+      <button class="play" id="motion" aria-pressed="false">ניגון</button>
+      <button id="atlas" aria-pressed="false">נכסים</button>
+      <button id="restart" aria-label="חזרה לתחילת ההדגמה">איפוס מבט</button>
+    </div>
+    <div class="loading" id="loading" role="status">טוען את הסביבה…</div>
+  </section>
+  <section class="details" aria-label="פרטי הערכה">
+    <div class="summary"><strong>ארבע סביבות. אותו קצב.</strong><span class="status" id="weight"></span></div>
+    <div class="layers" aria-label="הצגת שכבות">
+      <label><input type="checkbox" data-layer="far" checked>רקע רחוק <span>×0.12</span></label>
+      <label><input type="checkbox" data-layer="middle" checked>רקע אמצעי <span>×0.34</span></label>
+      <label><input type="checkbox" data-layer="near" checked>רקע קרוב <span>×0.66</span></label>
+      <span>אפשר לכבות שכבות ולבדוק כל אחת בנפרד.</span>
+    </div>
+    <div class="swatches" id="swatches" aria-label="צבעי תאורה"></div>
+    <div class="props" id="prop-list" aria-label="ששת אביזרי הערכה"></div>
+    <div class="links"><a href="manifest.json" download>מניפסט</a><a href="REPORT.md">דוח המסירה</a><a href="LICENSES.md">מקורות ורישוי</a></div>
+    <p class="notice">תצוגת נכסים עצמאית; החיבור למשחק ייעשה בנפרד. קיצורים: 1–4 להחלפת סביבה, רווח לניגון ולהשהיה. אפשר לפתוח את הקובץ ישירות, גם ללא חיבור לרשת.</p>
+    <p id="live-status" class="sr-only" aria-live="polite"></p>
+  </section>
+</main>
+<script src="manifest.js"></script>
+<script src="preview.js"></script>
+</html>

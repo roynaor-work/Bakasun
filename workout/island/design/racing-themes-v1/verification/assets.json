@@ -1,0 +1,860 @@
+{
+  "passed": true,
+  "checks": [
+    "Exactly four requested themes",
+    "Decimal 600KB budget",
+    "Preview contract 844x390",
+    "Offline manifest mirror equals JSON",
+    "city-night: three independent parallax layers",
+    "city-night: increasing parallax speeds",
+    "city-night: six distinct props",
+    "city-night: ten separate runtime PNGs",
+    "city-night/sky.png: PNG",
+    "city-night/sky.png: dimensions",
+    "city-night/sky.png: byte count",
+    "city-night/sky.png: SHA-256",
+    "city-night/sky.png: at most 1024px",
+    "city-night/sky.png: opaque color tile",
+    "city-night/sky.png: equal horizontal tile borders",
+    "city-night/far.png: PNG",
+    "city-night/far.png: dimensions",
+    "city-night/far.png: byte count",
+    "city-night/far.png: SHA-256",
+    "city-night/far.png: at most 1024px",
+    "city-night/far.png: transparent and opaque pixels",
+    "city-night/far.png: transparent sky above scenery",
+    "city-night/far.png: equal horizontal tile borders",
+    "city-night/middle.png: PNG",
+    "city-night/middle.png: dimensions",
+    "city-night/middle.png: byte count",
+    "city-night/middle.png: SHA-256",
+    "city-night/middle.png: at most 1024px",
+    "city-night/middle.png: transparent and opaque pixels",
+    "city-night/middle.png: transparent sky above scenery",
+    "city-night/middle.png: equal horizontal tile borders",
+    "city-night/near.png: PNG",
+    "city-night/near.png: dimensions",
+    "city-night/near.png: byte count",
+    "city-night/near.png: SHA-256",
+    "city-night/near.png: at most 1024px",
+    "city-night/near.png: transparent and opaque pixels",
+    "city-night/near.png: transparent sky above scenery",
+    "city-night/near.png: equal horizontal tile borders",
+    "city-night/asphalt.png: PNG",
+    "city-night/asphalt.png: dimensions",
+    "city-night/asphalt.png: byte count",
+    "city-night/asphalt.png: SHA-256",
+    "city-night/asphalt.png: at most 1024px",
+    "city-night/asphalt.png: opaque color tile",
+    "city-night/asphalt.png: equal horizontal tile borders",
+    "city-night/asphalt.png: equal vertical tile borders",
+    "city-night/shoulder.png: PNG",
+    "city-night/shoulder.png: dimensions",
+    "city-night/shoulder.png: byte count",
+    "city-night/shoulder.png: SHA-256",
+    "city-night/shoulder.png: at most 1024px",
+    "city-night/shoulder.png: opaque color tile",
+    "city-night/shoulder.png: equal horizontal tile borders",
+    "city-night/shoulder.png: equal vertical tile borders",
+    "city-night/lane-line.png: PNG",
+    "city-night/lane-line.png: dimensions",
+    "city-night/lane-line.png: byte count",
+    "city-night/lane-line.png: SHA-256",
+    "city-night/lane-line.png: at most 1024px",
+    "city-night/lane-line.png: transparent and opaque pixels",
+    "city-night/lane-line.png: equal vertical tile borders",
+    "city-night/edge-line.png: PNG",
+    "city-night/edge-line.png: dimensions",
+    "city-night/edge-line.png: byte count",
+    "city-night/edge-line.png: SHA-256",
+    "city-night/edge-line.png: at most 1024px",
+    "city-night/edge-line.png: transparent and opaque pixels",
+    "city-night/edge-line.png: equal vertical tile borders",
+    "city-night/barrier.png: PNG",
+    "city-night/barrier.png: dimensions",
+    "city-night/barrier.png: byte count",
+    "city-night/barrier.png: SHA-256",
+    "city-night/barrier.png: at most 1024px",
+    "city-night/barrier.png: transparent and opaque pixels",
+    "city-night/barrier.png: equal horizontal tile borders",
+    "city-night/props.png: PNG",
+    "city-night/props.png: dimensions",
+    "city-night/props.png: byte count",
+    "city-night/props.png: SHA-256",
+    "city-night/props.png: at most 1024px",
+    "city-night/props.png: transparent and opaque pixels",
+    "city-night: total matches actual files",
+    "city-night: within full theme budget",
+    "city-night/streetlight: valid nonoverlapping frame",
+    "city-night/streetlight: visible isolated sprite",
+    "city-night/streetlight: clear gutters",
+    "city-night/streetlight: ground anchor and clearance",
+    "city-night/planter-tree: valid nonoverlapping frame",
+    "city-night/planter-tree: visible isolated sprite",
+    "city-night/planter-tree: clear gutters",
+    "city-night/planter-tree: ground anchor and clearance",
+    "city-night/chevron-sign: valid nonoverlapping frame",
+    "city-night/chevron-sign: visible isolated sprite",
+    "city-night/chevron-sign: clear gutters",
+    "city-night/chevron-sign: ground anchor and clearance",
+    "city-night/traffic-cone: valid nonoverlapping frame",
+    "city-night/traffic-cone: visible isolated sprite",
+    "city-night/traffic-cone: clear gutters",
+    "city-night/traffic-cone: ground anchor and clearance",
+    "city-night/light-bollard: valid nonoverlapping frame",
+    "city-night/light-bollard: visible isolated sprite",
+    "city-night/light-bollard: clear gutters",
+    "city-night/light-bollard: ground anchor and clearance",
+    "city-night/planter-bush: valid nonoverlapping frame",
+    "city-night/planter-bush: visible isolated sprite",
+    "city-night/planter-bush: clear gutters",
+    "city-night/planter-bush: ground anchor and clearance",
+    "city-night: six different sprite images",
+    "city-night: no unlisted files or hidden budget",
+    "desert: three independent parallax layers",
+    "desert: increasing parallax speeds",
+    "desert: six distinct props",
+    "desert: ten separate runtime PNGs",
+    "desert/sky.png: PNG",
+    "desert/sky.png: dimensions",
+    "desert/sky.png: byte count",
+    "desert/sky.png: SHA-256",
+    "desert/sky.png: at most 1024px",
+    "desert/sky.png: opaque color tile",
+    "desert/sky.png: equal horizontal tile borders",
+    "desert/far.png: PNG",
+    "desert/far.png: dimensions",
+    "desert/far.png: byte count",
+    "desert/far.png: SHA-256",
+    "desert/far.png: at most 1024px",
+    "desert/far.png: transparent and opaque pixels",
+    "desert/far.png: transparent sky above scenery",
+    "desert/far.png: equal horizontal tile borders",
+    "desert/middle.png: PNG",
+    "desert/middle.png: dimensions",
+    "desert/middle.png: byte count",
+    "desert/middle.png: SHA-256",
+    "desert/middle.png: at most 1024px",
+    "desert/middle.png: transparent and opaque pixels",
+    "desert/middle.png: transparent sky above scenery",
+    "desert/middle.png: equal horizontal tile borders",
+    "desert/near.png: PNG",
+    "desert/near.png: dimensions",
+    "desert/near.png: byte count",
+    "desert/near.png: SHA-256",
+    "desert/near.png: at most 1024px",
+    "desert/near.png: transparent and opaque pixels",
+    "desert/near.png: transparent sky above scenery",
+    "desert/near.png: equal horizontal tile borders",
+    "desert/asphalt.png: PNG",
+    "desert/asphalt.png: dimensions",
+    "desert/asphalt.png: byte count",
+    "desert/asphalt.png: SHA-256",
+    "desert/asphalt.png: at most 1024px",
+    "desert/asphalt.png: opaque color tile",
+    "desert/asphalt.png: equal horizontal tile borders",
+    "desert/asphalt.png: equal vertical tile borders",
+    "desert/shoulder.png: PNG",
+    "desert/shoulder.png: dimensions",
+    "desert/shoulder.png: byte count",
+    "desert/shoulder.png: SHA-256",
+    "desert/shoulder.png: at most 1024px",
+    "desert/shoulder.png: opaque color tile",
+    "desert/shoulder.png: equal horizontal tile borders",
+    "desert/shoulder.png: equal vertical tile borders",
+    "desert/lane-line.png: PNG",
+    "desert/lane-line.png: dimensions",
+    "desert/lane-line.png: byte count",
+    "desert/lane-line.png: SHA-256",
+    "desert/lane-line.png: at most 1024px",
+    "desert/lane-line.png: transparent and opaque pixels",
+    "desert/lane-line.png: equal vertical tile borders",
+    "desert/edge-line.png: PNG",
+    "desert/edge-line.png: dimensions",
+    "desert/edge-line.png: byte count",
+    "desert/edge-line.png: SHA-256",
+    "desert/edge-line.png: at most 1024px",
+    "desert/edge-line.png: transparent and opaque pixels",
+    "desert/edge-line.png: equal vertical tile borders",
+    "desert/barrier.png: PNG",
+    "desert/barrier.png: dimensions",
+    "desert/barrier.png: byte count",
+    "desert/barrier.png: SHA-256",
+    "desert/barrier.png: at most 1024px",
+    "desert/barrier.png: transparent and opaque pixels",
+    "desert/barrier.png: equal horizontal tile borders",
+    "desert/props.png: PNG",
+    "desert/props.png: dimensions",
+    "desert/props.png: byte count",
+    "desert/props.png: SHA-256",
+    "desert/props.png: at most 1024px",
+    "desert/props.png: transparent and opaque pixels",
+    "desert: total matches actual files",
+    "desert: within full theme budget",
+    "desert/saguaro: valid nonoverlapping frame",
+    "desert/saguaro: visible isolated sprite",
+    "desert/saguaro: clear gutters",
+    "desert/saguaro: ground anchor and clearance",
+    "desert/barrel-cactus: valid nonoverlapping frame",
+    "desert/barrel-cactus: visible isolated sprite",
+    "desert/barrel-cactus: clear gutters",
+    "desert/barrel-cactus: ground anchor and clearance",
+    "desert/sandstone-rock: valid nonoverlapping frame",
+    "desert/sandstone-rock: visible isolated sprite",
+    "desert/sandstone-rock: clear gutters",
+    "desert/sandstone-rock: ground anchor and clearance",
+    "desert/dry-scrub: valid nonoverlapping frame",
+    "desert/dry-scrub: visible isolated sprite",
+    "desert/dry-scrub: clear gutters",
+    "desert/dry-scrub: ground anchor and clearance",
+    "desert/chevron-sign: valid nonoverlapping frame",
+    "desert/chevron-sign: visible isolated sprite",
+    "desert/chevron-sign: clear gutters",
+    "desert/chevron-sign: ground anchor and clearance",
+    "desert/reflector-post: valid nonoverlapping frame",
+    "desert/reflector-post: visible isolated sprite",
+    "desert/reflector-post: clear gutters",
+    "desert/reflector-post: ground anchor and clearance",
+    "desert: six different sprite images",
+    "desert: no unlisted files or hidden budget",
+    "snow: three independent parallax layers",
+    "snow: increasing parallax speeds",
+    "snow: six distinct props",
+    "snow: ten separate runtime PNGs",
+    "snow/sky.png: PNG",
+    "snow/sky.png: dimensions",
+    "snow/sky.png: byte count",
+    "snow/sky.png: SHA-256",
+    "snow/sky.png: at most 1024px",
+    "snow/sky.png: opaque color tile",
+    "snow/sky.png: equal horizontal tile borders",
+    "snow/far.png: PNG",
+    "snow/far.png: dimensions",
+    "snow/far.png: byte count",
+    "snow/far.png: SHA-256",
+    "snow/far.png: at most 1024px",
+    "snow/far.png: transparent and opaque pixels",
+    "snow/far.png: transparent sky above scenery",
+    "snow/far.png: equal horizontal tile borders",
+    "snow/middle.png: PNG",
+    "snow/middle.png: dimensions",
+    "snow/middle.png: byte count",
+    "snow/middle.png: SHA-256",
+    "snow/middle.png: at most 1024px",
+    "snow/middle.png: transparent and opaque pixels",
+    "snow/middle.png: transparent sky above scenery",
+    "snow/middle.png: equal horizontal tile borders",
+    "snow/near.png: PNG",
+    "snow/near.png: dimensions",
+    "snow/near.png: byte count",
+    "snow/near.png: SHA-256",
+    "snow/near.png: at most 1024px",
+    "snow/near.png: transparent and opaque pixels",
+    "snow/near.png: transparent sky above scenery",
+    "snow/near.png: equal horizontal tile borders",
+    "snow/asphalt.png: PNG",
+    "snow/asphalt.png: dimensions",
+    "snow/asphalt.png: byte count",
+    "snow/asphalt.png: SHA-256",
+    "snow/asphalt.png: at most 1024px",
+    "snow/asphalt.png: opaque color tile",
+    "snow/asphalt.png: equal horizontal tile borders",
+    "snow/asphalt.png: equal vertical tile borders",
+    "snow/shoulder.png: PNG",
+    "snow/shoulder.png: dimensions",
+    "snow/shoulder.png: byte count",
+    "snow/shoulder.png: SHA-256",
+    "snow/shoulder.png: at most 1024px",
+    "snow/shoulder.png: opaque color tile",
+    "snow/shoulder.png: equal horizontal tile borders",
+    "snow/shoulder.png: equal vertical tile borders",
+    "snow/lane-line.png: PNG",
+    "snow/lane-line.png: dimensions",
+    "snow/lane-line.png: byte count",
+    "snow/lane-line.png: SHA-256",
+    "snow/lane-line.png: at most 1024px",
+    "snow/lane-line.png: transparent and opaque pixels",
+    "snow/lane-line.png: equal vertical tile borders",
+    "snow/edge-line.png: PNG",
+    "snow/edge-line.png: dimensions",
+    "snow/edge-line.png: byte count",
+    "snow/edge-line.png: SHA-256",
+    "snow/edge-line.png: at most 1024px",
+    "snow/edge-line.png: transparent and opaque pixels",
+    "snow/edge-line.png: equal vertical tile borders",
+    "snow/barrier.png: PNG",
+    "snow/barrier.png: dimensions",
+    "snow/barrier.png: byte count",
+    "snow/barrier.png: SHA-256",
+    "snow/barrier.png: at most 1024px",
+    "snow/barrier.png: transparent and opaque pixels",
+    "snow/barrier.png: equal horizontal tile borders",
+    "snow/props.png: PNG",
+    "snow/props.png: dimensions",
+    "snow/props.png: byte count",
+    "snow/props.png: SHA-256",
+    "snow/props.png: at most 1024px",
+    "snow/props.png: transparent and opaque pixels",
+    "snow: total matches actual files",
+    "snow: within full theme budget",
+    "snow/snow-spruce: valid nonoverlapping frame",
+    "snow/snow-spruce: visible isolated sprite",
+    "snow/snow-spruce: clear gutters",
+    "snow/snow-spruce: ground anchor and clearance",
+    "snow/snow-pine: valid nonoverlapping frame",
+    "snow/snow-pine: visible isolated sprite",
+    "snow/snow-pine: clear gutters",
+    "snow/snow-pine: ground anchor and clearance",
+    "snow/snow-rock: valid nonoverlapping frame",
+    "snow/snow-rock: visible isolated sprite",
+    "snow/snow-rock: clear gutters",
+    "snow/snow-rock: ground anchor and clearance",
+    "snow/chevron-sign: valid nonoverlapping frame",
+    "snow/chevron-sign: visible isolated sprite",
+    "snow/chevron-sign: clear gutters",
+    "snow/chevron-sign: ground anchor and clearance",
+    "snow/snow-pole: valid nonoverlapping frame",
+    "snow/snow-pole: visible isolated sprite",
+    "snow/snow-pole: clear gutters",
+    "snow/snow-pole: ground anchor and clearance",
+    "snow/frosted-lamp: valid nonoverlapping frame",
+    "snow/frosted-lamp: visible isolated sprite",
+    "snow/frosted-lamp: clear gutters",
+    "snow/frosted-lamp: ground anchor and clearance",
+    "snow: six different sprite images",
+    "snow: no unlisted files or hidden budget",
+    "coast: three independent parallax layers",
+    "coast: increasing parallax speeds",
+    "coast: six distinct props",
+    "coast: ten separate runtime PNGs",
+    "coast/sky.png: PNG",
+    "coast/sky.png: dimensions",
+    "coast/sky.png: byte count",
+    "coast/sky.png: SHA-256",
+    "coast/sky.png: at most 1024px",
+    "coast/sky.png: opaque color tile",
+    "coast/sky.png: equal horizontal tile borders",
+    "coast/far.png: PNG",
+    "coast/far.png: dimensions",
+    "coast/far.png: byte count",
+    "coast/far.png: SHA-256",
+    "coast/far.png: at most 1024px",
+    "coast/far.png: transparent and opaque pixels",
+    "coast/far.png: transparent sky above scenery",
+    "coast/far.png: equal horizontal tile borders",
+    "coast/middle.png: PNG",
+    "coast/middle.png: dimensions",
+    "coast/middle.png: byte count",
+    "coast/middle.png: SHA-256",
+    "coast/middle.png: at most 1024px",
+    "coast/middle.png: transparent and opaque pixels",
+    "coast/middle.png: transparent sky above scenery",
+    "coast/middle.png: equal horizontal tile borders",
+    "coast/near.png: PNG",
+    "coast/near.png: dimensions",
+    "coast/near.png: byte count",
+    "coast/near.png: SHA-256",
+    "coast/near.png: at most 1024px",
+    "coast/near.png: transparent and opaque pixels",
+    "coast/near.png: transparent sky above scenery",
+    "coast/near.png: equal horizontal tile borders",
+    "coast/asphalt.png: PNG",
+    "coast/asphalt.png: dimensions",
+    "coast/asphalt.png: byte count",
+    "coast/asphalt.png: SHA-256",
+    "coast/asphalt.png: at most 1024px",
+    "coast/asphalt.png: opaque color tile",
+    "coast/asphalt.png: equal horizontal tile borders",
+    "coast/asphalt.png: equal vertical tile borders",
+    "coast/shoulder.png: PNG",
+    "coast/shoulder.png: dimensions",
+    "coast/shoulder.png: byte count",
+    "coast/shoulder.png: SHA-256",
+    "coast/shoulder.png: at most 1024px",
+    "coast/shoulder.png: opaque color tile",
+    "coast/shoulder.png: equal horizontal tile borders",
+    "coast/shoulder.png: equal vertical tile borders",
+    "coast/lane-line.png: PNG",
+    "coast/lane-line.png: dimensions",
+    "coast/lane-line.png: byte count",
+    "coast/lane-line.png: SHA-256",
+    "coast/lane-line.png: at most 1024px",
+    "coast/lane-line.png: transparent and opaque pixels",
+    "coast/lane-line.png: equal vertical tile borders",
+    "coast/edge-line.png: PNG",
+    "coast/edge-line.png: dimensions",
+    "coast/edge-line.png: byte count",
+    "coast/edge-line.png: SHA-256",
+    "coast/edge-line.png: at most 1024px",
+    "coast/edge-line.png: transparent and opaque pixels",
+    "coast/edge-line.png: equal vertical tile borders",
+    "coast/barrier.png: PNG",
+    "coast/barrier.png: dimensions",
+    "coast/barrier.png: byte count",
+    "coast/barrier.png: SHA-256",
+    "coast/barrier.png: at most 1024px",
+    "coast/barrier.png: transparent and opaque pixels",
+    "coast/barrier.png: equal horizontal tile borders",
+    "coast/props.png: PNG",
+    "coast/props.png: dimensions",
+    "coast/props.png: byte count",
+    "coast/props.png: SHA-256",
+    "coast/props.png: at most 1024px",
+    "coast/props.png: transparent and opaque pixels",
+    "coast: total matches actual files",
+    "coast: within full theme budget",
+    "coast/coconut-palm: valid nonoverlapping frame",
+    "coast/coconut-palm: visible isolated sprite",
+    "coast/coconut-palm: clear gutters",
+    "coast/coconut-palm: ground anchor and clearance",
+    "coast/young-palm: valid nonoverlapping frame",
+    "coast/young-palm: visible isolated sprite",
+    "coast/young-palm: clear gutters",
+    "coast/young-palm: ground anchor and clearance",
+    "coast/dune-grass: valid nonoverlapping frame",
+    "coast/dune-grass: visible isolated sprite",
+    "coast/dune-grass: clear gutters",
+    "coast/dune-grass: ground anchor and clearance",
+    "coast/coastal-rock: valid nonoverlapping frame",
+    "coast/coastal-rock: visible isolated sprite",
+    "coast/coastal-rock: clear gutters",
+    "coast/coastal-rock: ground anchor and clearance",
+    "coast/chevron-sign: valid nonoverlapping frame",
+    "coast/chevron-sign: visible isolated sprite",
+    "coast/chevron-sign: clear gutters",
+    "coast/chevron-sign: ground anchor and clearance",
+    "coast/timber-bollard: valid nonoverlapping frame",
+    "coast/timber-bollard: visible isolated sprite",
+    "coast/timber-bollard: clear gutters",
+    "coast/timber-bollard: ground anchor and clearance",
+    "coast: six different sprite images",
+    "coast: no unlisted files or hidden budget",
+    "Every tracked change is a new file in the requested folder",
+    "Every untracked file is in the requested folder"
+  ],
+  "assetCount": 40,
+  "themes": [
+    {
+      "id": "city-night",
+      "bytes": 188443,
+      "budget": 600000
+    },
+    {
+      "id": "desert",
+      "bytes": 182310,
+      "budget": 600000
+    },
+    {
+      "id": "snow",
+      "bytes": 177922,
+      "budget": 600000
+    },
+    {
+      "id": "coast",
+      "bytes": 167781,
+      "budget": 600000
+    }
+  ],
+  "assets": [
+    {
+      "file": "city-night/sky.png",
+      "bytes": 580,
+      "mode": "P",
+      "dimensions": [
+        4,
+        256
+      ],
+      "sha256": "77cc0af3424af91250e373896ed4eba7368cfb2da4a7de1ce87f9e740d7629eb"
+    },
+    {
+      "file": "city-night/far.png",
+      "bytes": 67064,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "d8d29c9c7a6f57b93a644dc158f24423eafd081e9ddd9e48d50c7242225be3a6"
+    },
+    {
+      "file": "city-night/middle.png",
+      "bytes": 49206,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "7cee5b89c5046452c9d91d70230e7e3f384e4b31385ee84151a99fed6e7be355"
+    },
+    {
+      "file": "city-night/near.png",
+      "bytes": 29429,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "f0a589c47e0d4d51003e17accd0d5b934365cf0fbe86a57ebff5f07dfbf287e3"
+    },
+    {
+      "file": "city-night/asphalt.png",
+      "bytes": 8569,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a86e64fa0d0c6a5678045dbad2b9485093cb97cde28e62ba853d0b6eaefc102b"
+    },
+    {
+      "file": "city-night/shoulder.png",
+      "bytes": 9471,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "16afa6338318821feacb356dffc5fc1028d48a2e20a85e2fd1fa9e266e1180a5"
+    },
+    {
+      "file": "city-night/lane-line.png",
+      "bytes": 108,
+      "mode": "P",
+      "dimensions": [
+        32,
+        128
+      ],
+      "sha256": "279c53eb5d6efc8411e0809e5ea0bc66dacad3ff0a2a17255d02370c62bc9483"
+    },
+    {
+      "file": "city-night/edge-line.png",
+      "bytes": 104,
+      "mode": "P",
+      "dimensions": [
+        16,
+        128
+      ],
+      "sha256": "e68badee8eee75dbb6d03406f0dce0818cd2f4b0f41b948ed91f33ade4960d5f"
+    },
+    {
+      "file": "city-night/barrier.png",
+      "bytes": 723,
+      "mode": "P",
+      "dimensions": [
+        256,
+        64
+      ],
+      "sha256": "47fe9283bdc79a655e644bd3cfd5d015211eddbad1e3564e5a0da8d27562f769"
+    },
+    {
+      "file": "city-night/props.png",
+      "bytes": 23189,
+      "mode": "P",
+      "dimensions": [
+        768,
+        160
+      ],
+      "sha256": "6483a467b5f10b97146ee1dd93c9a35f0db21d287c467f6476cc4863cd0a8285"
+    },
+    {
+      "file": "desert/sky.png",
+      "bytes": 456,
+      "mode": "P",
+      "dimensions": [
+        4,
+        256
+      ],
+      "sha256": "9283604cdc70ee3bbf222c96c7f96d8c7cc5303451a6b011db97bcce0bc4af6b"
+    },
+    {
+      "file": "desert/far.png",
+      "bytes": 55852,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "3063f4a0aedd158450dc0d4706e2126248f03e87b448d7def47b08336693a7ee"
+    },
+    {
+      "file": "desert/middle.png",
+      "bytes": 37377,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "d12c08c5bc290187f3dd90dda5c2c0c3d535fd6ba0a53c98ef81c312d5a23274"
+    },
+    {
+      "file": "desert/near.png",
+      "bytes": 42629,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "099b1b6977ed570da9afb05afba34e8c49de808751c72be016edf89bd5c8fcff"
+    },
+    {
+      "file": "desert/asphalt.png",
+      "bytes": 8559,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "f1cb0068354d692db707bc8d61c2f99343c981b372f4b18733fa25498d76c318"
+    },
+    {
+      "file": "desert/shoulder.png",
+      "bytes": 9453,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "d762537097d001c12f62dd84636aed7f4949c0bed3e613198870aa57db0e5812"
+    },
+    {
+      "file": "desert/lane-line.png",
+      "bytes": 108,
+      "mode": "P",
+      "dimensions": [
+        32,
+        128
+      ],
+      "sha256": "2bd00f351474397c0089592a2abfc5fbeaaa47b064f1be698ab4c7d70d78be81"
+    },
+    {
+      "file": "desert/edge-line.png",
+      "bytes": 104,
+      "mode": "P",
+      "dimensions": [
+        16,
+        128
+      ],
+      "sha256": "0a1110a215844561317a56b090f69370edabecb3366d3098085f25d625f8c606"
+    },
+    {
+      "file": "desert/barrier.png",
+      "bytes": 1932,
+      "mode": "P",
+      "dimensions": [
+        256,
+        64
+      ],
+      "sha256": "842b5721b9321bbef3d0a1411f2c6a8553bcc84d2ae7a615b050db55134b51c8"
+    },
+    {
+      "file": "desert/props.png",
+      "bytes": 25840,
+      "mode": "P",
+      "dimensions": [
+        768,
+        160
+      ],
+      "sha256": "3fc70924c5720ca21b8214a165b3ae0825687e195d1bbc3eeee47972dd28cda4"
+    },
+    {
+      "file": "snow/sky.png",
+      "bytes": 437,
+      "mode": "P",
+      "dimensions": [
+        4,
+        256
+      ],
+      "sha256": "f3090553d1aecabbff4e929791def42e5190fd02b72f064cbf96b94d1511f11a"
+    },
+    {
+      "file": "snow/far.png",
+      "bytes": 56675,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "c7073d16bba76144408619481bf1e208f037dda629ceb179bc60285988508512"
+    },
+    {
+      "file": "snow/middle.png",
+      "bytes": 46441,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "05aa97f084ce1043bc8763bdcf87334473df74187f634484ac41cb04fde5dc34"
+    },
+    {
+      "file": "snow/near.png",
+      "bytes": 30823,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "3e9c5595064b1f7f318efe59c45843d31b2ce0e05cb572f7d6afecaf8920a7b3"
+    },
+    {
+      "file": "snow/asphalt.png",
+      "bytes": 8561,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "a818f8d3e5bb1805d8d6b5c2974ffdfdceb41ffd85bd8fbcd49c98c449beac1d"
+    },
+    {
+      "file": "snow/shoulder.png",
+      "bytes": 9451,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "dd65a722bc9d4c0b9ff42cd62928602ab223e062436077dd9496b64ec7ef0fd4"
+    },
+    {
+      "file": "snow/lane-line.png",
+      "bytes": 108,
+      "mode": "P",
+      "dimensions": [
+        32,
+        128
+      ],
+      "sha256": "ea68e1a47951fd8df01cebaadf92de5331484ac6256b256391bc0ce24da9dfab"
+    },
+    {
+      "file": "snow/edge-line.png",
+      "bytes": 104,
+      "mode": "P",
+      "dimensions": [
+        16,
+        128
+      ],
+      "sha256": "4d2e6714d0c4afd3877df31cda36229e9e94d1fc8ebe31fe0f23df930b990e0b"
+    },
+    {
+      "file": "snow/barrier.png",
+      "bytes": 1147,
+      "mode": "P",
+      "dimensions": [
+        256,
+        64
+      ],
+      "sha256": "43157f859d19688e3935cf15a312dce53be086c68d6380ee22604d320a568588"
+    },
+    {
+      "file": "snow/props.png",
+      "bytes": 24175,
+      "mode": "P",
+      "dimensions": [
+        768,
+        160
+      ],
+      "sha256": "562ee479f74e1dc0771a54893b33d39d0df6e4bc67be14bf21f59ed43745cde7"
+    },
+    {
+      "file": "coast/sky.png",
+      "bytes": 462,
+      "mode": "P",
+      "dimensions": [
+        4,
+        256
+      ],
+      "sha256": "240c5d2cd9090245c65d96d891bc26f849c649720ad7ff1fdd4f6abcbc90b274"
+    },
+    {
+      "file": "coast/far.png",
+      "bytes": 38158,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "bbcdd466e5f405258693b3ca351747e20ec7dda2c8ac0e247c67b21994734fbb"
+    },
+    {
+      "file": "coast/middle.png",
+      "bytes": 47830,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "5e17080b814b8dccdf6ea0b65fb92795aee0b6c765d9c5b3261c55c408d3776a"
+    },
+    {
+      "file": "coast/near.png",
+      "bytes": 37991,
+      "mode": "P",
+      "dimensions": [
+        1024,
+        256
+      ],
+      "sha256": "dfeaff6c3ff8812cdc3fcc6d51344cfc0abf314121e9cddc81220e72959ee083"
+    },
+    {
+      "file": "coast/asphalt.png",
+      "bytes": 8516,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "01deee96a4daf7ea44485a5db009ea51920d3361d11025b6159e1b3656951d31"
+    },
+    {
+      "file": "coast/shoulder.png",
+      "bytes": 9440,
+      "mode": "P",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "f096f05ad9ff10212b458e411a6bf9dd4c0f13d8192ecce1a83b679946eb184c"
+    },
+    {
+      "file": "coast/lane-line.png",
+      "bytes": 108,
+      "mode": "P",
+      "dimensions": [
+        32,
+        128
+      ],
+      "sha256": "301a56ca02227ce7076730cd1a5a7df61bcf90251a8ac21f5d494718fd3ad2ac"
+    },
+    {
+      "file": "coast/edge-line.png",
+      "bytes": 104,
+      "mode": "P",
+      "dimensions": [
+        16,
+        128
+      ],
+      "sha256": "0d3ee86bc0d8dce469878aae1cd023888f25158a703201e78c438c0cfdd3d68e"
+    },
+    {
+      "file": "coast/barrier.png",
+      "bytes": 935,
+      "mode": "P",
+      "dimensions": [
+        256,
+        64
+      ],
+      "sha256": "254ba687df955689149520cf38020d7de074cf997ac282bd322e1e7c0879c25e"
+    },
+    {
+      "file": "coast/props.png",
+      "bytes": 24237,
+      "mode": "P",
+      "dimensions": [
+        768,
+        160
+      ],
+      "sha256": "4ea9ed6cb64df7db0ae655ee9f92e6f1684466a545d87a4b60a0f8078b0e017d"
+    }
+  ]
+}
