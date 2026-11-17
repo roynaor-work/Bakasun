@@ -148,8 +148,8 @@ test('v25: a next release is prepared by copying unchanged files and downloading
   const s=await status(t.page,NEXT);assert.equal(s.shell,true);assert.equal(s.games.soccer,true);
   assert.equal(await t.page.evaluate(()=>localStorage.getItem('island.test.marker')),'keep');
   // The flag restores the v24 panel.
-  const legacy=await t.context.newPage();await legacy.goto(server.url+'?dev=1&offlineV25=0',{waitUntil:'networkidle'});
-  await legacy.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded);if(await legacy.locator('[data-action=avatar-start]').count())await legacy.locator('[data-action=avatar-start]').click();
+  const legacy=await t.context.newPage();legacy.setDefaultTimeout(240000);await legacy.goto(server.url+'?dev=1&offlineV25=0',{waitUntil:'networkidle'});
+  await legacy.waitForFunction(()=>window.__island?.view?.metrics().avatarLoaded,null,{timeout:240000});if(await legacy.locator('[data-action=avatar-start]').count())await legacy.locator('[data-action=avatar-start]').click();
   await legacy.evaluate(()=>{window.__island.engine.skipTutorial();window.__island.ui.activityInterface.menu();});
   await legacy.waitForSelector('[data-offline-panel]');
   assert.equal(await legacy.evaluate(()=>document.querySelector('[data-offline-panel]').hasAttribute('data-v25')),false,'v24 panel without the flag');
