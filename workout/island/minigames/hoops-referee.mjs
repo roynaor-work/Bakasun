@@ -11,6 +11,7 @@ import {mergeGeometries} from '../vendor/BufferGeometryUtils.js';
 import {hoopsRefereeEnabled} from './hoops-v241.mjs?v=island-v2-20261107-16';
 export {hoopsRefereeEnabled};
 
+const phoneFixAEnabled=()=>{try{const p=new URLSearchParams(globalThis.location?.search||'');return p.get('phoneFixes')!=='0'&&p.get('phoneFixA')!=='0';}catch{return true;}};
 export const refereeUrl=()=>new URL('../assets/hoops-v241/referee/referee.glb',import.meta.url).href;
 export const REFEREE=Object.freeze({height:1.85,modelHeight:1.655,runSpeed:1.6,maxSpeed:6.2,accel:9,line:.9,lead:.85,deadZone:.7,
   clips:Object.freeze(['idle','run','whistle','foul','three_points','direction'])});
@@ -18,7 +19,7 @@ export const REFEREE=Object.freeze({height:1.85,modelHeight:1.655,runSpeed:1.6,m
 /** The gesture an engine event earns, null for none. Pure. */
 export function refereeGesture(e){
   switch(e?.type){
-    case 'steal':case 'interception':return 'whistle';
+    case 'steal':case 'interception':return phoneFixAEnabled()?null:'whistle';
     case 'foul':return 'foul';
     case 'violation':return 'direction';
     case 'score':return e.points===3?'three_points':null;

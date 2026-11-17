@@ -7,6 +7,8 @@ import {createHash} from 'node:crypto';
 import {hoopsV241Flags,hoopsWhistleV241Enabled,hoopsCrowd3dMode,hoopsBodyV2Enabled,hoopsMotionV13Enabled,hoopsRefereeWhistle,HOOPS_REFEREE_WHISTLES} from '../workout/island/minigames/hoops-v241.mjs';
 import {createHoopsAudio} from '../workout/island/minigames/hoops-audio.mjs';
 
+// Historical v24.1 whistle/gesture contract; the phone-fixes-v1 suite checks the new default.
+globalThis.location={search:'?phoneFixA=0'};
 const island=new URL('../workout/island/',import.meta.url);
 const full=JSON.parse(await readFile(new URL('data/config.json',island),'utf8'));
 const mixText=await readFile(new URL('design/audio/mix.json',island),'utf8');
