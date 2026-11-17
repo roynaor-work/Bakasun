@@ -144,7 +144,7 @@ export async function loadAthleteHoops(cfg,base,onProgress,{params,onFallback}={
  }
  const retargetMs=(globalThis.performance?.now?.()??0)-t0;tick();
  const sleeves=v22?null:athleteKitGeometry(THREE,source,'basketball');
- return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,
+ return {tall:true,athlete:true,v22:!!v22,bodyV2:!!v22?.v2,bodyVersion:v22?.v2?'v2':v22?'v22':'v10',pack,v8,unified,bodies:{},clips:new Map(),clipSets,baseHeights:heights,posProfile:t.posProfile,retargetMs,source,motionSource,dunks,motionV13,gaits13,fakeV13:params?.get?.('hoopsFakeV13')!=='0',
   /** createAvatarTall calls this instead of cloning a tall body. `look` is the team look ({primary, trim/secondary, shortsBase}). */
   bodyFactory(profile,card,look,{numbers=null,cell=0,track=x=>x}={}){
    if(v22){

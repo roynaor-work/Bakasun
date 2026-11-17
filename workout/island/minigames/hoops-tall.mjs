@@ -123,7 +123,14 @@ export function chooseTallMotion(pack,p,ctx,st){
   let t=warp(anchors,p.actT||0);if(p.hasBall&&type!=='ft')t=Math.min(t,ev(clip,'release')-.012);
   return {kind:'full',clip:clip.id,t,ownsJump:type!=='ft'};
  }
- if(act==='fake')return {kind:'full',clip:'jump_shot',t:.38*Math.sin(Math.PI*clamp((p.actT||0)/.52,0,1))+.2,ownsJump:false};
+ if(act==='fake'){
+  const clip=pack.clips.jump_shot,takeoff=ev(clip,'takeoff'),release=ev(clip,'release');
+  // V241-014: v13's gather lasts until 1.4 s; the v12 window only samples its low-ball crouch.
+  // Raise to the authored takeoff pose and back, staying grounded and strictly before release.
+  const corrected=clip.v13&&ctx.fakeV13!==false&&Number.isFinite(takeoff)&&Number.isFinite(release)&&takeoff>0&&release>takeoff;
+  const phase=Math.sin(Math.PI*clamp((p.actT||0)/.52,0,1)),start=takeoff*.15,end=Math.min(takeoff,release-.05);
+  return {kind:'full',clip:'jump_shot',t:corrected?start+(end-start)*phase:.38*phase+.2,ownsJump:false};
+ }
  if(act==='cross')return {kind:'full',clip:'dribble_crossover_'+(st.cross?'left':'right'),t:.2+(p.actT||0)*1.64,ownsJump:false};
  if(act==='spin')return {kind:'full',clip:'pivot_reverse_'+(st.spin?'left':'right'),t:.1+(p.actT||0)*1.6,ownsJump:false};
  if(act==='block'){const c=pack.clips.block_two_hands;return {kind:'full',clip:'block_two_hands',t:Math.min(c.duration-.01,ev(c,'takeoff')-.1+(p.actT||0)*1.1),ownsJump:true};}
@@ -305,7 +312,7 @@ export function createAvatarTall(assets,card,teamLook,opts={}){
   if(p.act==='spin'&&lastAct!=='spin')st.spin=!st.spin;
   lastAct=p.act;
   const catching=ctx.catching||performance.now()<(st.catchUntil||0);
-  const plan=chooseTallMotion(pack,p,{...ctx,catching,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null},st);
+  const plan=chooseTallMotion(pack,p,{...ctx,catching,v8pack:assets.v8,v8s,dt,gaits13:assets.gaits13?.[profile]||null,fakeV13:assets.fakeV13!==false},st);
   // weights and times: a layered plan is the upper and lower halves of two clips; everything else is one clip (full-body)
   const layered=plan.kind==='layer';
   cur.mix+=((layered?0:1)-cur.mix)*(1-Math.exp(-dt/(plan.kind==='loop'?.12:.07)));
