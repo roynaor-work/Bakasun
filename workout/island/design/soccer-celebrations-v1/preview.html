@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="ספריית חגיגות שער: תנועה מקומית, תיאום ומגע, עם תצוגת תלת־ממד.">
+<link rel="icon" href="data:,">
+<title>חגיגות שער · ספריית תנועה</title>
+<link rel="stylesheet" href="preview.css">
+<body>
+<main id="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><div><p class="eyebrow">האי שלי · ספריית תנועה</p><h1>הרגע שאחרי הגול</h1></div></div>
+    <div class="top-actions"><span class="local-tag"><i></i> הכול מקומי</span><a class="download" href="soccer-celebrations-v1.zip" download>הורדה לאופליין <span aria-hidden="true">↓</span></a></div>
+  </header>
+  <section class="workspace" aria-label="תצוגת החגיגות">
+    <aside class="library"><div class="library-title"><h2>חגיגות</h2><span id="clip-count">14</span></div><nav id="clips" aria-label="בחירת חגיגה"></nav><div class="library-footer"><span>שלד קנוני</span><b>18 עצמות · 30 פריימים/ש׳</b></div></aside>
+    <section class="player">
+      <div id="stage" aria-label="תצוגת תלת־ממד"><div class="stage-heading"><span id="clip-index">01 / 14</span><h2 id="clip-title">טוען חגיגות…</h2><p id="clip-meta"></p></div><div class="views" role="group" aria-label="זווית צפייה"><button data-view="three" aria-pressed="true">אלכסון</button><button data-view="front" aria-pressed="false">חזית</button><button data-view="side" aria-pressed="false">צד</button><button data-view="back" aria-pressed="false">גב</button></div><div id="status" role="status">טוען את הספרייה המקומית…</div><div class="stage-bottom"><span id="contact-state">ציר זמן משותף</span><a id="sheet-link" href="#" target="_blank" rel="noopener">גיליון 8 פריימים ↗</a></div></div>
+      <div class="transport"><button id="play" aria-label="ניגון" title="ניגון או עצירה">▶</button><div class="timeline-wrap"><div class="timeline-top"><span id="phase">הכנה</span><output id="time" dir="ltr">0.00 / 0.00 s</output></div><input id="timeline" type="range" min="0" max="1" value="0" step="0.001" aria-label="זמן החגיגה"><div id="markers" aria-hidden="true"></div></div><select id="speed" aria-label="מהירות ניגון"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="1.5">×1.5</option></select><button id="restart" title="מהתחלה" aria-label="חזרה להתחלה">↺</button></div>
+      <div class="detail-bar"><div id="events" aria-label="אירועי החגיגה"></div><a id="asset-link" href="#" download>קובץ תלת־ממד ↓</a></div>
+    </section>
+  </section>
+</main>
+<script type="module" src="preview.mjs"></script>
+</body>
+</html>

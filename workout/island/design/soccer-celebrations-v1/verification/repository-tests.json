@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "command": "npm test",
+  "initial": {
+    "exitCode": 1,
+    "tests": 4326,
+    "pass": 4261,
+    "fail": 1,
+    "skipped": 64,
+    "cancelled": 0,
+    "durationMs": 750271.750145,
+    "failure": {
+      "file": "tests/workout-royiki.test.mjs",
+      "name": "exercise screen shows the royiki animation, counts reps, falls back and the style choice persists",
+      "reason": "Playwright default chromium_headless_shell executable absent from environment. Test left its local HTTP server open after browser launch failed."
+    }
+  },
+  "retry": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/celebration-browser node --test tests/workout-royiki.test.mjs",
+    "environmentFix": "Temporary Playwright browser path points to installed /usr/lib/chromium/chromium. No repository file changes.",
+    "exitCode": 0,
+    "tests": 5,
+    "pass": 5,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 23653.686064
+  },
+  "remainingFailures": 0,
+  "scope": "Every original npm test case was attempted; the sole environment failure passed on targeted rerun. The initial npm test command itself exited 1 and is not represented as a clean single-run pass."
+}

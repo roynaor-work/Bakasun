@@ -1,0 +1,3257 @@
+{
+  "schemaVersion": 1,
+  "fps": 120,
+  "nativeHz": 30,
+  "upstreamCommit": "5eb4f093bc22523ee417a7f2345c3b813bffba24",
+  "upstreamUnmodified": true,
+  "upstreamFiles": [
+    {
+      "file": "workout/island/design/motion-qa-v1/run.mjs",
+      "sha256": "c8d88c91cf19b07bbe896c0587e1668f2c7b87dfe695f3ce5639f04afaa75056",
+      "bytes": 12713
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sources.mjs",
+      "sha256": "3ac6509fee2767da7778bd5f7806b726fb6de9bc23cdb4717c90aab7d8789fb0",
+      "bytes": 15655
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sources.json",
+      "sha256": "3149b7707af749ae08654881b9c02854aab164f952b059481acce1d3f9dd3684",
+      "bytes": 1709
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/glb.mjs",
+      "sha256": "0e5763ad87754a94522e631036fa8c20c881bb9ff00e676087905f82c07400cc",
+      "bytes": 9363
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/metrics.mjs",
+      "sha256": "bff64c9ff97798b466b4193962594d1554f684f3f19fa931d310d7432260fed7",
+      "bytes": 36189
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/report.mjs",
+      "sha256": "14e0b4d2bf3f5493c7a736d60e735c517b27afcc4b3a57e533ed7ea27fb34def",
+      "bytes": 15342
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/sheets.mjs",
+      "sha256": "968a4d80c386ba55e7930c1ff9e921c09bb9b4584dbf7821e1c3d354d7652ca7",
+      "bytes": 5947
+    },
+    {
+      "file": "workout/island/design/motion-qa-v1/licenses.mjs",
+      "sha256": "2e6e998b72f663b140da248f2a53bbff3ea040b8e7b88eabac2fcc0f99249411",
+      "bytes": 3539
+    }
+  ],
+  "invocation": "Original motion-qa-v1/run.mjs --library soccer-celebrations-v1 --fps 120; only sources.mjs redirected",
+  "reference": {
+    "file": "source/qa-reference-idle.glb",
+    "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+    "original": "soccer-header-v1/runtime/reference/idle_relaxed.glb",
+    "adaptation": "A static parent applies each actor initial world Root quaternion to the genuine idle reference. Action samples are untouched."
+  },
+  "inputAdapter": {
+    "file": "source/qa-sources.mjs",
+    "sha256": "d796fcaa1457a530611fa6444b5f74aeebeb73dfc233fbc70b4a68d63faf26bb"
+  },
+  "runner": {
+    "file": "source/run-qa.mjs",
+    "sha256": "968e292ec11b08a4c51d18ba6bbacdc3c0fad5a9881be8de77f27a9d247017e8"
+  },
+  "loader": {
+    "file": "source/qa-loader.mjs",
+    "sha256": "fb031021bba4307d18a665fe3d194476307d49394d0523e5653863cc5ec96b95"
+  },
+  "assetsBaseCommit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "clipCount": 14,
+  "actorCount": 24,
+  "minimumScore": 89.2,
+  "minimumRequiredExclusive": 88,
+  "meanActorScore": 95.92916666666663,
+  "redMetrics": [
+    {
+      "actor": "run_to_stands/actor0",
+      "metric": "continuity",
+      "value": 3.253526
+    },
+    {
+      "actor": "honor_lap/actor0",
+      "metric": "continuity",
+      "value": 4.551033
+    }
+  ],
+  "minimumCoverage": 1,
+  "maxPlantedFootDriftMeters": 0.0040355485051324184,
+  "maxPairContactGapMeters": 0.006294813445454862,
+  "limitations": [
+    "Stock score is a weighted diagnostic proxy, not a human perceptual rating.",
+    "Stock floor metric checks joint centers and declared sole points; no surface mesh collision certification.",
+    "Intentional slide windows are measured separately and excluded from stationary foot plant metadata.",
+    "The genuine idle reference uses each actor initial facing; no action pose or endpoint is substituted as a reference.",
+    "Paired contact checks compare declared bone-local surface points in delivered world-space FK."
+  ],
+  "checks": [
+    {
+      "id": "pair_hug",
+      "asset": "models/pair_hug.glb",
+      "sha256": "1507bb7f67875789eb76af32014f4107c9e6b19272db786cf5e38b107b6b7f90",
+      "bytes": 860976,
+      "duration": 4.4,
+      "frameCount": 133,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.7,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010712888034009214,
+              "maxHorizontalDriftMeters": 6.059163944887131e-8,
+              "maxAnchorErrorMeters": 0.0000010712888034009214,
+              "horizontalTravelMeters": 0.000007768001512670137,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010707822217579278,
+              "maxHorizontalDriftMeters": 1.066076003781172e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217579278,
+              "horizontalTravelMeters": 0.000017721553820732755,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "teammate",
+          "score": 96.7,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010712888034021149,
+              "maxHorizontalDriftMeters": 6.059163945942112e-8,
+              "maxAnchorErrorMeters": 0.0000010712888034021149,
+              "horizontalTravelMeters": 0.0000077680015126962,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010707822217579278,
+              "maxHorizontalDriftMeters": 1.066076003781172e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217579278,
+              "horizontalTravelMeters": 0.00001772155382122286,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 0,
+          "samples": 205,
+          "maxGapMeters": 0.00629481344545486,
+          "meanGapMeters": 0.0062948134454548325,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              0.15012191248154386,
+              1.1842808838583851,
+              0.27872085660243606
+            ],
+            "b": [
+              0.15,
+              1.183854129297216,
+              0.2850000041723252
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 1,
+          "samples": 205,
+          "maxGapMeters": 0.0062948134454548065,
+          "meanGapMeters": 0.006294813445454768,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              -0.15012191248154386,
+              1.1842808838583851,
+              0.27872085660243606
+            ],
+            "b": [
+              -0.15,
+              1.183854129297216,
+              0.2850000041723251
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 2,
+          "samples": 205,
+          "maxGapMeters": 0.006294813445454805,
+          "meanGapMeters": 0.006294813445454768,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              -0.1501219124815438,
+              1.1842808838583851,
+              -0.27872085660243606
+            ],
+            "b": [
+              -0.15,
+              1.183854129297216,
+              -0.2850000041723251
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 3,
+          "samples": 205,
+          "maxGapMeters": 0.006294813445454862,
+          "meanGapMeters": 0.0062948134454548325,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              0.1501219124815439,
+              1.1842808838583851,
+              -0.278720856602436
+            ],
+            "b": [
+              0.15,
+              1.183854129297216,
+              -0.2850000041723251
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "coach_hug",
+      "asset": "models/coach_hug.glb",
+      "sha256": "779edd51da04ede774a743e54962a58c91aa5f8fc354ed4876a0678dcc12a3ad",
+      "bytes": 860976,
+      "duration": 4.4,
+      "frameCount": 133,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.7,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010712888034009214,
+              "maxHorizontalDriftMeters": 6.059163944887131e-8,
+              "maxAnchorErrorMeters": 0.0000010712888034009214,
+              "horizontalTravelMeters": 0.000007768001512670137,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010707822217579278,
+              "maxHorizontalDriftMeters": 1.066076003781172e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217579278,
+              "horizontalTravelMeters": 0.000017721553820732755,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "coach",
+          "score": 96.7,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010712888034021149,
+              "maxHorizontalDriftMeters": 6.059163945942112e-8,
+              "maxAnchorErrorMeters": 0.0000010712888034021149,
+              "horizontalTravelMeters": 0.0000077680015126962,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 0.0000010707822217579278,
+              "maxHorizontalDriftMeters": 1.066076003781172e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217579278,
+              "horizontalTravelMeters": 0.00001772155382122286,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 0,
+          "samples": 205,
+          "maxGapMeters": 0.00629481344545486,
+          "meanGapMeters": 0.0062948134454548325,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              0.15012191248154386,
+              1.1842808838583851,
+              0.27872085660243606
+            ],
+            "b": [
+              0.15,
+              1.183854129297216,
+              0.2850000041723252
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 1,
+          "samples": 205,
+          "maxGapMeters": 0.0062948134454548065,
+          "meanGapMeters": 0.006294813445454768,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              -0.15012191248154386,
+              1.1842808838583851,
+              0.27872085660243606
+            ],
+            "b": [
+              -0.15,
+              1.183854129297216,
+              0.2850000041723251
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 2,
+          "samples": 205,
+          "maxGapMeters": 0.006294813445454805,
+          "meanGapMeters": 0.006294813445454768,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              -0.1501219124815438,
+              1.1842808838583851,
+              -0.27872085660243606
+            ],
+            "b": [
+              -0.15,
+              1.183854129297216,
+              -0.2850000041723251
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace",
+          "index": 3,
+          "samples": 205,
+          "maxGapMeters": 0.006294813445454862,
+          "meanGapMeters": 0.0062948134454548325,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 2.9,
+            "a": [
+              0.1501219124815439,
+              1.1842808838583851,
+              -0.278720856602436
+            ],
+            "b": [
+              0.15,
+              1.183854129297216,
+              -0.2850000041723251
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "chest_bump",
+      "asset": "models/chest_bump.glb",
+      "sha256": "cbd099e552d46be6b7a0b16f967065a5dcabb00f8553ffdd7bd3da53ae34ea64",
+      "bytes": 857172,
+      "duration": 4.2,
+      "frameCount": 127,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.8,
+              "mode": "plant",
+              "samples": 97,
+              "maxDrift3DMeters": 0.000014139657414606514,
+              "maxHorizontalDriftMeters": 8.884450195308514e-7,
+              "maxAnchorErrorMeters": 0.000014139657414606514,
+              "horizontalTravelMeters": 0.000014772109564520097,
+              "maxGroundErrorMeters": 0.000014139672704999162,
+              "minY": -0.000014139672704999162,
+              "maxY": 2.9935191395158434e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.8,
+              "mode": "plant",
+              "samples": 97,
+              "maxDrift3DMeters": 0.000014192155990968678,
+              "maxHorizontalDriftMeters": 0.000002092774126252227,
+              "maxAnchorErrorMeters": 0.000014192155990968678,
+              "horizontalTravelMeters": 0.00003544026559020787,
+              "maxGroundErrorMeters": 0.00001406695712978523,
+              "minY": -0.00001406695712978523,
+              "maxY": 2.995055692345261e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.1,
+              "end": 4.2,
+              "mode": "plant",
+              "samples": 253,
+              "maxDrift3DMeters": 0.000004056763055024839,
+              "maxHorizontalDriftMeters": 2.5594566957633384e-7,
+              "maxAnchorErrorMeters": 0.000004056763055024839,
+              "horizontalTravelMeters": 0.00001157382289278361,
+              "maxGroundErrorMeters": 0.000004060459740384825,
+              "minY": -0.000004060459740384825,
+              "maxY": 4.071611540978903e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.1,
+              "end": 4.2,
+              "mode": "plant",
+              "samples": 253,
+              "maxDrift3DMeters": 0.000004070550079102645,
+              "maxHorizontalDriftMeters": 5.993950952365681e-7,
+              "maxAnchorErrorMeters": 0.000004070550079102645,
+              "horizontalTravelMeters": 0.000027366204146934175,
+              "maxGroundErrorMeters": 0.000004039526838792162,
+              "minY": -0.000004039526838792162,
+              "maxY": 4.219514558589932e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "teammate",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.8,
+              "mode": "plant",
+              "samples": 97,
+              "maxDrift3DMeters": 0.000014139657414607229,
+              "maxHorizontalDriftMeters": 8.884450195422866e-7,
+              "maxAnchorErrorMeters": 0.000014139657414607229,
+              "horizontalTravelMeters": 0.000014772109564570605,
+              "maxGroundErrorMeters": 0.000014139672704999162,
+              "minY": -0.000014139672704999162,
+              "maxY": 2.9935191395158434e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.8,
+              "mode": "plant",
+              "samples": 97,
+              "maxDrift3DMeters": 0.000014192155990967233,
+              "maxHorizontalDriftMeters": 0.000002092774126252227,
+              "maxAnchorErrorMeters": 0.000014192155990967233,
+              "horizontalTravelMeters": 0.000035440265590174825,
+              "maxGroundErrorMeters": 0.00001406695712978523,
+              "minY": -0.00001406695712978523,
+              "maxY": 2.995055692345261e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.1,
+              "end": 4.2,
+              "mode": "plant",
+              "samples": 253,
+              "maxDrift3DMeters": 0.000004056763055023702,
+              "maxHorizontalDriftMeters": 2.5594566955706755e-7,
+              "maxAnchorErrorMeters": 0.000004056763055023702,
+              "horizontalTravelMeters": 0.000011573822892546883,
+              "maxGroundErrorMeters": 0.000004060459740384825,
+              "minY": -0.000004060459740384825,
+              "maxY": 4.071611540978903e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.1,
+              "end": 4.2,
+              "mode": "plant",
+              "samples": 253,
+              "maxDrift3DMeters": 0.000004070550079101196,
+              "maxHorizontalDriftMeters": 5.993950952365681e-7,
+              "maxAnchorErrorMeters": 0.000004070550079101196,
+              "horizontalTravelMeters": 0.000027366204147060342,
+              "maxGroundErrorMeters": 0.000004039526838792162,
+              "minY": -0.000004039526838792162,
+              "maxY": 4.219514558589932e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.0154,
+              -0.00167,
+              0.14367
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.0154,
+              -0.00167,
+              0.14367
+            ]
+          },
+          "start": 1.25,
+          "end": 1.65,
+          "maxDistanceMeters": 0.02,
+          "type": "chest",
+          "index": 0,
+          "samples": 49,
+          "maxGapMeters": 1.4630315931495434e-8,
+          "meanGapMeters": 1.4630315931495442e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 1.65,
+            "a": [
+              8.344650317959612e-11,
+              1.4575673854933773,
+              7.314681998993322e-9
+            ],
+            "b": [
+              -8.344648583236136e-11,
+              1.4575673854933773,
+              -7.314681998993322e-9
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "circle_five",
+      "asset": "models/circle_five.glb",
+      "sha256": "0419809faf6880f33efa895e19df951f9862c2b0f17b0c1b3f9289710a0f55e5",
+      "bytes": 1044884,
+      "duration": 5.2,
+      "frameCount": 157,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "teammate",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.00001391343628514634,
+              "maxHorizontalDriftMeters": 8.222032417809288e-7,
+              "maxAnchorErrorMeters": 0.00001391343628514634,
+              "horizontalTravelMeters": 0.00013315909142553516,
+              "maxGroundErrorMeters": 0.000013904506936168737,
+              "minY": -0.000013904506936168737,
+              "maxY": 3.708062121243749e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013964639028683575,
+              "maxHorizontalDriftMeters": 0.0000020023780217643226,
+              "maxAnchorErrorMeters": 0.000013964639028683575,
+              "horizontalTravelMeters": 0.0003188155847398112,
+              "maxGroundErrorMeters": 0.000013835940947198866,
+              "minY": -0.000013835940947198866,
+              "maxY": 3.780834217925744e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "teammate",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013913436285149132,
+              "maxHorizontalDriftMeters": 8.222032418599242e-7,
+              "maxAnchorErrorMeters": 0.000013913436285149132,
+              "horizontalTravelMeters": 0.0001331590914276034,
+              "maxGroundErrorMeters": 0.000013904506936168737,
+              "minY": -0.000013904506936168737,
+              "maxY": 3.708062121243749e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013964639028669895,
+              "maxHorizontalDriftMeters": 0.000002002378021785927,
+              "maxAnchorErrorMeters": 0.000013964639028669895,
+              "horizontalTravelMeters": 0.0003188155847401431,
+              "maxGroundErrorMeters": 0.000013835940947184988,
+              "minY": -0.000013835940947184988,
+              "maxY": 3.780834217925744e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor2",
+          "role": "teammate",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor2",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013913436285139779,
+              "maxHorizontalDriftMeters": 8.222032418968518e-7,
+              "maxAnchorErrorMeters": 0.000013913436285139779,
+              "horizontalTravelMeters": 0.00013315909142932108,
+              "maxGroundErrorMeters": 0.000013904506936154859,
+              "minY": -0.000013904506936154859,
+              "maxY": 3.708062121243749e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor2",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013964639028630998,
+              "maxHorizontalDriftMeters": 0.0000020023780217219125,
+              "maxAnchorErrorMeters": 0.000013964639028630998,
+              "horizontalTravelMeters": 0.0003188155847321939,
+              "maxGroundErrorMeters": 0.000013835940947184988,
+              "minY": -0.000013835940947184988,
+              "maxY": 3.780834217925744e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor3",
+          "role": "teammate",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor3",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013913436285132281,
+              "maxHorizontalDriftMeters": 8.222032417112404e-7,
+              "maxAnchorErrorMeters": 0.000013913436285132281,
+              "horizontalTravelMeters": 0.00013315909142666517,
+              "maxGroundErrorMeters": 0.000013904506936154859,
+              "minY": -0.000013904506936154859,
+              "maxY": 3.708062121243749e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor3",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013964639028653375,
+              "maxHorizontalDriftMeters": 0.000002002378021843572,
+              "maxAnchorErrorMeters": 0.000013964639028653375,
+              "horizontalTravelMeters": 0.0003188155847346582,
+              "maxGroundErrorMeters": 0.000013835940947184988,
+              "minY": -0.000013835940947184988,
+              "maxY": 3.780834217925744e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor4",
+          "role": "teammate",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor4",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013913436285148132,
+              "maxHorizontalDriftMeters": 8.22203241860261e-7,
+              "maxAnchorErrorMeters": 0.000013913436285148132,
+              "horizontalTravelMeters": 0.00013315909142043943,
+              "maxGroundErrorMeters": 0.000013904506936168737,
+              "minY": -0.000013904506936168737,
+              "maxY": 3.708062122631528e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor4",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.000013964639028642148,
+              "maxHorizontalDriftMeters": 0.000002002378021778558,
+              "maxAnchorErrorMeters": 0.000013964639028642148,
+              "horizontalTravelMeters": 0.00031881558472670907,
+              "maxGroundErrorMeters": 0.000013835940947184988,
+              "minY": -0.000013835940947184988,
+              "maxY": 3.780834217925744e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link",
+          "index": 0,
+          "samples": 385,
+          "maxGapMeters": 3.4462233597140294e-8,
+          "meanGapMeters": 3.4462233597140386e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.199999809265137,
+            "a": [
+              0.47037459150298183,
+              1.1196233836335372,
+              0.31164925302133817
+            ],
+            "b": [
+              0.4703745601139217,
+              1.1196233743376587,
+              0.31164924225290785
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link",
+          "index": 1,
+          "samples": 385,
+          "maxGapMeters": 1.3180293315923052e-8,
+          "meanGapMeters": 1.3180293315922977e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.199999809265137,
+            "a": [
+              0.4417497763331877,
+              1.1196233836335372,
+              -0.3510479059278901
+            ],
+            "b": [
+              0.44174977475706373,
+              1.1196233743376587,
+              -0.3510478967179711
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor2",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor3",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link",
+          "index": 2,
+          "samples": 385,
+          "maxGapMeters": 1.860154424048887e-8,
+          "meanGapMeters": 1.8601544240488758e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.199999809265137,
+            "a": [
+              -0.1973582149287835,
+              1.1196233836335372,
+              -0.5286087763428798
+            ],
+            "b": [
+              -0.19735820043466745,
+              1.1196233743376587,
+              -0.5286087693055017
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor3",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor4",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link",
+          "index": 3,
+          "samples": 385,
+          "maxGapMeters": 2.1646635580864164e-8,
+          "meanGapMeters": 2.1646635580864313e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.199999809265137,
+            "a": [
+              -0.5637238610400053,
+              1.1196233836335372,
+              0.024349720260099128
+            ],
+            "b": [
+              -0.5637238416381125,
+              1.1196233743376587,
+              0.024349717866350595
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor4",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link",
+          "index": 4,
+          "samples": 385,
+          "maxGapMeters": 3.125194622127203e-8,
+          "meanGapMeters": 3.125194622127178e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.199999809265137,
+            "a": [
+              -0.1510422706852925,
+              1.1196233836335372,
+              0.5436577280581527
+            ],
+            "b": [
+              -0.1510422996,
+              1.1196233743376587,
+              0.543657735420929
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "run_to_stands",
+      "asset": "models/run_to_stands.glb",
+      "sha256": "320e54bd8a633cc661c1948aca586711e28999d6c969f6ea90cba3275ddd3d0c",
+      "bytes": 804968,
+      "duration": 3.6,
+      "frameCount": 109,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 90.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [
+            "continuity"
+          ],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.31679999999999997,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0023291849744614093,
+              "maxHorizontalDriftMeters": 0.001923422553400151,
+              "maxAnchorErrorMeters": 0.0023291849744614093,
+              "horizontalTravelMeters": 0.003161981074031452,
+              "maxGroundErrorMeters": 0.0013135785883020001,
+              "minY": -0.0003010989250677304,
+              "maxY": 0.0013135785883020001,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0.72,
+              "end": 1.0368,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0033252018698605255,
+              "maxHorizontalDriftMeters": 0.0032660257617197425,
+              "maxAnchorErrorMeters": 0.0033252018698605255,
+              "horizontalTravelMeters": 0.004513640796794532,
+              "maxGroundErrorMeters": 0.0016342517410707913,
+              "minY": -0.00030893044520088897,
+              "maxY": 0.0016342517410707913,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.44,
+              "end": 1.7568,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0014564116826838156,
+              "maxHorizontalDriftMeters": 0.0014342891620221848,
+              "maxAnchorErrorMeters": 0.0014564116826838156,
+              "horizontalTravelMeters": 0.0025249435738769685,
+              "maxGroundErrorMeters": 0.0005248950514613604,
+              "minY": -0.0002975966059609453,
+              "maxY": 0.0005248950514613604,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.16,
+              "end": 2.4768,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.004018168200454354,
+              "maxHorizontalDriftMeters": 0.004011187589288925,
+              "maxAnchorErrorMeters": 0.004018168200454354,
+              "horizontalTravelMeters": 0.005243575113652705,
+              "maxGroundErrorMeters": 0.0017054129045115246,
+              "minY": -0.0003024779197436933,
+              "maxY": 0.0017054129045115246,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.88,
+              "end": 3.1967999999999996,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0019870293675981992,
+              "maxHorizontalDriftMeters": 0.001519230807550801,
+              "maxAnchorErrorMeters": 0.0019870293675981992,
+              "horizontalTravelMeters": 0.0026304246055011355,
+              "maxGroundErrorMeters": 0.0010284575290565867,
+              "minY": -0.0002987816421785583,
+              "maxY": 0.0010284575290565867,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0.36,
+              "end": 0.6768,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.00401829346732114,
+              "maxHorizontalDriftMeters": 0.004011311917501878,
+              "maxAnchorErrorMeters": 0.00401829346732114,
+              "horizontalTravelMeters": 0.005243528823634606,
+              "maxGroundErrorMeters": 0.0017054149935498003,
+              "minY": -0.00030247792800779105,
+              "maxY": 0.0017054149935498003,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.08,
+              "end": 1.3968,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0019870726822903656,
+              "maxHorizontalDriftMeters": 0.0015193434441426498,
+              "maxAnchorErrorMeters": 0.0019870726822903656,
+              "horizontalTravelMeters": 0.0026305061047634157,
+              "maxGroundErrorMeters": 0.0010284622710616254,
+              "minY": -0.0002987816476598404,
+              "maxY": 0.0010284622710616254,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.7999999999999998,
+              "end": 2.1167999999999996,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0023291732754830694,
+              "maxHorizontalDriftMeters": 0.0019234082482306083,
+              "maxAnchorErrorMeters": 0.0023291732754830694,
+              "horizontalTravelMeters": 0.0031620254639256233,
+              "maxGroundErrorMeters": 0.001313578790621578,
+              "minY": -0.00030109892324751975,
+              "maxY": 0.001313578790621578,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.52,
+              "end": 2.8368,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0033250400862326547,
+              "maxHorizontalDriftMeters": 0.003265865012866505,
+              "maxAnchorErrorMeters": 0.0033250400862326547,
+              "horizontalTravelMeters": 0.0045137118147654,
+              "maxGroundErrorMeters": 0.0016342485825838748,
+              "minY": -0.0003089304479840793,
+              "maxY": 0.0016342485825838748,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 3.2399999999999998,
+              "end": 3.5568,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0014563085628277294,
+              "maxHorizontalDriftMeters": 0.0014341842985922618,
+              "maxAnchorErrorMeters": 0.0014563085628277294,
+              "horizontalTravelMeters": 0.0025249381230680063,
+              "maxGroundErrorMeters": 0.0005248973921194722,
+              "minY": -0.0002975966014714254,
+              "maxY": 0.0005248973921194722,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "honor_lap",
+      "asset": "models/honor_lap.glb",
+      "sha256": "47748a9d8b586dd28cf33b7a1cadbf1294c16ebea53ff4e4a3342e455011d08c",
+      "bytes": 804968,
+      "duration": 3.6,
+      "frameCount": 109,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 89.2,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [
+            "continuity"
+          ],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.31679999999999997,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0023475934621477955,
+              "maxHorizontalDriftMeters": 0.0019519773628159454,
+              "maxAnchorErrorMeters": 0.0023475934621477955,
+              "horizontalTravelMeters": 0.003985201244280826,
+              "maxGroundErrorMeters": 0.0013041933314697357,
+              "minY": -0.00030527616976659677,
+              "maxY": 0.0013041933314697357,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0.72,
+              "end": 1.0368,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.003341371946573242,
+              "maxHorizontalDriftMeters": 0.003282925026208615,
+              "maxAnchorErrorMeters": 0.003341371946573242,
+              "horizontalTravelMeters": 0.005343173878388056,
+              "maxGroundErrorMeters": 0.0016301972068463177,
+              "minY": -0.0003190863951855749,
+              "maxY": 0.0016301972068463177,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.44,
+              "end": 1.7568,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.001459684970268556,
+              "maxHorizontalDriftMeters": 0.0014385683224310952,
+              "maxAnchorErrorMeters": 0.001459684970268556,
+              "horizontalTravelMeters": 0.003295746317347302,
+              "maxGroundErrorMeters": 0.0005159484926165192,
+              "minY": -0.00030186083479218084,
+              "maxY": 0.0005159484926165192,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.16,
+              "end": 2.4768,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0040355485051324184,
+              "maxHorizontalDriftMeters": 0.004028818465238416,
+              "maxAnchorErrorMeters": 0.0040355485051324184,
+              "horizontalTravelMeters": 0.006098789571231435,
+              "maxGroundErrorMeters": 0.0016993333553381867,
+              "minY": -0.000306578818438874,
+              "maxY": 0.0016993333553381867,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.88,
+              "end": 3.1967999999999996,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0019994794247158464,
+              "maxHorizontalDriftMeters": 0.0015323003371235247,
+              "maxAnchorErrorMeters": 0.0019994794247158464,
+              "horizontalTravelMeters": 0.0034154374152913242,
+              "maxGroundErrorMeters": 0.001023754436630761,
+              "minY": -0.00030279798710489136,
+              "maxY": 0.001023754436630761,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0.36,
+              "end": 0.6768,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.003743581786080547,
+              "maxHorizontalDriftMeters": 0.003734688990031177,
+              "maxAnchorErrorMeters": 0.003743581786080547,
+              "horizontalTravelMeters": 0.005923839239464561,
+              "maxGroundErrorMeters": 0.0017301129646170449,
+              "minY": -0.00028490117551403793,
+              "maxY": 0.0017301129646170449,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.08,
+              "end": 1.3968,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0018902266804637015,
+              "maxHorizontalDriftMeters": 0.001419251295352044,
+              "maxAnchorErrorMeters": 0.0018902266804637015,
+              "horizontalTravelMeters": 0.003429914651269844,
+              "maxGroundErrorMeters": 0.0010457514202724116,
+              "minY": -0.0002818357616725803,
+              "maxY": 0.0010457514202724116,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 1.7999999999999998,
+              "end": 2.1167999999999996,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.002265987626375031,
+              "maxHorizontalDriftMeters": 0.0018166481178364677,
+              "maxAnchorErrorMeters": 0.002265987626375031,
+              "horizontalTravelMeters": 0.003967011077737064,
+              "maxGroundErrorMeters": 0.0013544105976249082,
+              "minY": -0.0002830327742408406,
+              "maxY": 0.0013544105976249082,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 2.52,
+              "end": 2.8368,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.003105939394830196,
+              "maxHorizontalDriftMeters": 0.003041293815405551,
+              "maxAnchorErrorMeters": 0.003105939394830196,
+              "horizontalTravelMeters": 0.005222939160439253,
+              "maxGroundErrorMeters": 0.001645895838319908,
+              "minY": -0.0002844810624527544,
+              "maxY": 0.001645895838319908,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 3.2399999999999998,
+              "end": 3.5568,
+              "mode": "plant",
+              "samples": 40,
+              "maxDrift3DMeters": 0.0013646444242563472,
+              "maxHorizontalDriftMeters": 0.0013358770194098176,
+              "maxAnchorErrorMeters": 0.0013646444242563472,
+              "horizontalTravelMeters": 0.003308115779972453,
+              "maxGroundErrorMeters": 0.0005648203169525273,
+              "minY": -0.00027892892864712915,
+              "maxY": 0.0005648203169525273,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "knee_slide",
+      "asset": "models/knee_slide.glb",
+      "sha256": "37ec56bb87830b44d89be78b17a080897d90aee7dbad132db0e93e712ff5d34d",
+      "bytes": 817724,
+      "duration": 5,
+      "frameCount": 151,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.5,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 1.734723475976807e-17,
+              "maxHorizontalDriftMeters": 1.0408340855860843e-17,
+              "maxAnchorErrorMeters": 1.734723475976807e-17,
+              "horizontalTravelMeters": 1.734723475976807e-16,
+              "maxGroundErrorMeters": 2.684865489654964e-8,
+              "minY": -2.684865489654964e-8,
+              "maxY": -2.6848654882671852e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.5,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 2.182169055663983e-16,
+              "maxHorizontalDriftMeters": 1.8786342440958564e-16,
+              "maxAnchorErrorMeters": 2.182169055663983e-16,
+              "horizontalTravelMeters": 2.1856845659493125e-15,
+              "maxGroundErrorMeters": 2.679070643107906e-8,
+              "minY": -2.679070643107906e-8,
+              "maxY": -2.679070630617897e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 4.6,
+              "end": 5,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 1.3877787807814457e-17,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 1.3877787807814457e-17,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.684865489654964e-8,
+              "minY": -2.684865489654964e-8,
+              "maxY": -2.6848654882671852e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 4.6,
+              "end": 5,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 6.938893903907228e-17,
+              "maxHorizontalDriftMeters": 1.3877787807814457e-17,
+              "maxAnchorErrorMeters": 6.938893903907228e-17,
+              "horizontalTravelMeters": 9.71445146547012e-17,
+              "maxGroundErrorMeters": 2.679070643107906e-8,
+              "minY": -2.679070643107906e-8,
+              "maxY": -2.679070630617897e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": {
+        "actor": "actor0",
+        "bones": [
+          {
+            "bone": "LeftLeg",
+            "samples": 241,
+            "pointKind": "skeletal knee center; no invented surface offset",
+            "start": [
+              0.1221086801866217,
+              0.060989411212109046,
+              0.017931689684623504
+            ],
+            "end": [
+              0.1221086801866217,
+              0.060989411212109046,
+              1.8179316420009077
+            ],
+            "horizontalTravelMeters": 1.7999999523162842,
+            "displacementMeters": 1.7999999523162842,
+            "minY": 0.060989411212109046,
+            "maxY": 0.060989411212109046,
+            "expectedTravelMeters": 1.8,
+            "travelErrorMeters": 4.768371586472142e-8
+          },
+          {
+            "bone": "RightLeg",
+            "samples": 241,
+            "pointKind": "skeletal knee center; no invented surface offset",
+            "start": [
+              -0.1221086801866217,
+              0.060989411212109046,
+              0.017931689684623504
+            ],
+            "end": [
+              -0.1221086801866217,
+              0.060989411212109046,
+              1.8179316420009077
+            ],
+            "horizontalTravelMeters": 1.7999999523162842,
+            "displacementMeters": 1.7999999523162842,
+            "minY": 0.060989411212109046,
+            "maxY": 0.060989411212109046,
+            "expectedTravelMeters": 1.8,
+            "travelErrorMeters": 4.768371586472142e-8
+          }
+        ],
+        "start": 1.3,
+        "end": 3.3,
+        "expectedTravelMeters": 1.8,
+        "pass": true
+      },
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "backflip",
+      "asset": "models/backflip.glb",
+      "sha256": "00da33df2a0b5d45fdbf46aff0293d19f043e96cf740a16d7781e7f8865098f7",
+      "bytes": 823284,
+      "duration": 5.6,
+      "frameCount": 169,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 93.2,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 1.2,
+              "mode": "plant",
+              "samples": 145,
+              "maxDrift3DMeters": 0.0006310253414261411,
+              "maxHorizontalDriftMeters": 0.0000459916508821055,
+              "maxAnchorErrorMeters": 0.0006310253414261411,
+              "horizontalTravelMeters": 0.0002847882268639973,
+              "maxGroundErrorMeters": 0.0006298908224924848,
+              "minY": -0.0006298908224924848,
+              "maxY": 3.243685052500833e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 1.2,
+              "mode": "plant",
+              "samples": 145,
+              "maxDrift3DMeters": 0.0006333319128222385,
+              "maxHorizontalDriftMeters": 0.00010824329849060752,
+              "maxAnchorErrorMeters": 0.0006333319128222385,
+              "horizontalTravelMeters": 0.0006739402959390368,
+              "maxGroundErrorMeters": 0.0006266948989308574,
+              "minY": -0.0006266948989308574,
+              "maxY": 3.428824035811573e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 3.6,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 241,
+              "maxDrift3DMeters": 0.00038246763981393246,
+              "maxHorizontalDriftMeters": 0.000025733610957835307,
+              "maxAnchorErrorMeters": 0.00038246763981393246,
+              "horizontalTravelMeters": 0.00021048310207881824,
+              "maxGroundErrorMeters": 0.00038162778782027673,
+              "minY": -0.00038162778782027673,
+              "maxY": 3.8790292436474694e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 3.6,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 241,
+              "maxDrift3DMeters": 0.0003843023080202269,
+              "maxHorizontalDriftMeters": 0.00006121836672470697,
+              "maxAnchorErrorMeters": 0.0003843023080202269,
+              "horizontalTravelMeters": 0.0004981577364396408,
+              "maxGroundErrorMeters": 0.000379421803226615,
+              "minY": -0.000379421803226615,
+              "maxY": 3.899181122424267e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "dance",
+      "asset": "models/dance.glb",
+      "sha256": "7a787450c4ee9e7479e1c79aed4879775004e4fa0016e4659f38870a29f23df2",
+      "bytes": 819292,
+      "duration": 5.2,
+      "frameCount": 157,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.00041167081949949544,
+              "maxHorizontalDriftMeters": 0.00014928781958588888,
+              "maxAnchorErrorMeters": 0.00041167081949949544,
+              "horizontalTravelMeters": 0.002124160377192634,
+              "maxGroundErrorMeters": 0.0003879597775986454,
+              "minY": -0.0003879597775986454,
+              "maxY": 3.036175091897242e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.0003182734864350745,
+              "maxHorizontalDriftMeters": 0.0000989490258883467,
+              "maxAnchorErrorMeters": 0.0003182734864350745,
+              "horizontalTravelMeters": 0.0022936312444190605,
+              "maxGroundErrorMeters": 0.00030360054374732603,
+              "minY": -0.00030360054374732603,
+              "maxY": 3.0533801126386706e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "dance_shuffle",
+      "asset": "models/dance_shuffle.glb",
+      "sha256": "16da9f80f9a8cfaa3aabe3e570bd5689984b1c23dc9d1976c451e85e53500570",
+      "bytes": 819324,
+      "duration": 5.2,
+      "frameCount": 157,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.00041167081949949544,
+              "maxHorizontalDriftMeters": 0.00014928781958588888,
+              "maxAnchorErrorMeters": 0.00041167081949949544,
+              "horizontalTravelMeters": 0.002124160377192634,
+              "maxGroundErrorMeters": 0.0003879597775986454,
+              "minY": -0.0003879597775986454,
+              "maxY": 3.036175091897242e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.0003182734864350745,
+              "maxHorizontalDriftMeters": 0.0000989490258883467,
+              "maxAnchorErrorMeters": 0.0003182734864350745,
+              "horizontalTravelMeters": 0.0022936312444190605,
+              "maxGroundErrorMeters": 0.00030360054374732603,
+              "minY": -0.00030360054374732603,
+              "maxY": 3.0533801126386706e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "crowd_salute",
+      "asset": "models/crowd_salute.glb",
+      "sha256": "28701b24810b39a20cb4f28cda18f9a6dda514f62aee64aa2fdcc49a3f71a87c",
+      "bytes": 811672,
+      "duration": 4.4,
+      "frameCount": 133,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "scorer",
+          "score": 95.9,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 1.734723475976807e-17,
+              "maxHorizontalDriftMeters": 1.0408340855860843e-17,
+              "maxAnchorErrorMeters": 1.734723475976807e-17,
+              "horizontalTravelMeters": 8.187894806610529e-16,
+              "maxGroundErrorMeters": 2.684865489654964e-8,
+              "minY": -2.684865489654964e-8,
+              "maxY": -2.6848654882671852e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 4.4,
+              "mode": "plant",
+              "samples": 529,
+              "maxDrift3DMeters": 2.182169055663983e-16,
+              "maxHorizontalDriftMeters": 1.8786342440958564e-16,
+              "maxAnchorErrorMeters": 2.182169055663983e-16,
+              "horizontalTravelMeters": 2.0352358655131467e-14,
+              "maxGroundErrorMeters": 2.679070643107906e-8,
+              "minY": -2.679070643107906e-8,
+              "maxY": -2.679070630617897e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "trophy_lift",
+      "asset": "models/trophy_lift.glb",
+      "sha256": "fc256a927e19740ec96328e1873989ba1e19b9a8c1804a5bdf66e2a944e52f81",
+      "bytes": 855952,
+      "duration": 6.4,
+      "frameCount": 193,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "captain",
+          "score": 95.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 6.4,
+              "mode": "plant",
+              "samples": 769,
+              "maxDrift3DMeters": 1.734723475976807e-17,
+              "maxHorizontalDriftMeters": 1.0408340855860843e-17,
+              "maxAnchorErrorMeters": 1.734723475976807e-17,
+              "horizontalTravelMeters": 1.3461454173580023e-15,
+              "maxGroundErrorMeters": 2.684865489654964e-8,
+              "minY": -2.684865489654964e-8,
+              "maxY": -2.6848654882671852e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 6.4,
+              "mode": "plant",
+              "samples": 769,
+              "maxDrift3DMeters": 2.182169055663983e-16,
+              "maxHorizontalDriftMeters": 1.8786342440958564e-16,
+              "maxAnchorErrorMeters": 2.182169055663983e-16,
+              "horizontalTravelMeters": 2.5070806509788382e-14,
+              "maxGroundErrorMeters": 2.679070643107906e-8,
+              "minY": -2.679070643107906e-8,
+              "maxY": -2.679070630617897e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "node": "Trophy",
+            "local": [
+              0.167,
+              0.05,
+              0
+            ]
+          },
+          "start": 0,
+          "end": 6.4,
+          "maxDistanceMeters": 0.02,
+          "type": "trophy_handle",
+          "index": 0,
+          "samples": 769,
+          "maxGapMeters": 0.004353293776818501,
+          "meanGapMeters": 0.001284693319321546,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.8,
+            "a": [
+              0.16694076630064622,
+              1.6761066492079868,
+              0.2280533365539729
+            ],
+            "b": [
+              0.167,
+              1.6799999952316285,
+              0.23000000417232513
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "node": "Trophy",
+            "local": [
+              -0.167,
+              0.05,
+              0
+            ]
+          },
+          "start": 0,
+          "end": 6.4,
+          "maxDistanceMeters": 0.02,
+          "type": "trophy_handle",
+          "index": 1,
+          "samples": 769,
+          "maxGapMeters": 0.004353293776818501,
+          "meanGapMeters": 0.001284693319321546,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 4.8,
+            "a": [
+              -0.16694076630064622,
+              1.6761066492079868,
+              0.2280533365539729
+            ],
+            "b": [
+              -0.167,
+              1.6799999952316285,
+              0.23000000417232513
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "goalkeeper_hang",
+      "asset": "models/goalkeeper_hang.glb",
+      "sha256": "3833d89682eb06efa9405bd56fab6cfb7ed90914fee76f469a3c0ee1f610ff87",
+      "bytes": 875928,
+      "duration": 5.2,
+      "frameCount": 157,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "goalkeeper",
+          "score": 96.8,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.0000023508024060952807,
+              "maxHorizontalDriftMeters": 1.3529085684990079e-7,
+              "maxAnchorErrorMeters": 0.0000023508024060952807,
+              "horizontalTravelMeters": 0.000007895522423174756,
+              "maxGroundErrorMeters": 0.000002374011715405855,
+              "minY": -0.000002374011715405855,
+              "maxY": 3.3321288339660526e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 625,
+              "maxDrift3DMeters": 0.0000023546437277218904,
+              "maxHorizontalDriftMeters": 2.8757425793751757e-7,
+              "maxAnchorErrorMeters": 0.0000023546437277218904,
+              "horizontalTravelMeters": 0.000018427042538325443,
+              "maxGroundErrorMeters": 0.000002363807636227011,
+              "minY": -0.000002363807636227011,
+              "maxY": 3.415995904199054e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "scorer",
+          "score": 97.1,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.4,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.4,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 4.7,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 4.7,
+              "end": 5.2,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "LeftArm",
+            "local": [
+              -0.009902024,
+              -0.017278628,
+              -0.0035747
+            ]
+          },
+          "start": 1.4,
+          "end": 3.5,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_hold",
+          "index": 0,
+          "samples": 253,
+          "maxGapMeters": 3.238602293521361e-8,
+          "meanGapMeters": 3.2386022933208316e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.3916666666666666,
+            "a": [
+              0.1769749485578943,
+              1.1754272936757082,
+              -0.010016056827406944
+            ],
+            "b": [
+              0.1769749446347214,
+              1.175427325784828,
+              -0.01001605525654057
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "RightArm",
+            "local": [
+              0.007630407,
+              -0.017758509,
+              -0.009096339
+            ]
+          },
+          "start": 1.4,
+          "end": 3.5,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_hold",
+          "index": 1,
+          "samples": 253,
+          "maxGapMeters": 2.5338347193742316e-8,
+          "meanGapMeters": 2.5338347190544597e-8,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.4916666666666667,
+            "a": [
+              -0.17975308223087919,
+              1.1736092802401372,
+              -0.005030486155336578
+            ],
+            "b": [
+              -0.17975307838430127,
+              1.1736093028751369,
+              -0.0050304968741269745
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    },
+    {
+      "id": "player_lift",
+      "asset": "models/player_lift.glb",
+      "sha256": "d8c9bb517c0a418cc905f2a861595eb944fc614e7f0c335670051a398d9e4c91",
+      "bytes": 943680,
+      "duration": 5.6,
+      "frameCount": 169,
+      "actors": [
+        {
+          "actor": "actor0",
+          "role": "carrier_left",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor0",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 673,
+              "maxDrift3DMeters": 0.000001071288803400794,
+              "maxHorizontalDriftMeters": 6.059163939990986e-8,
+              "maxAnchorErrorMeters": 0.000001071288803400794,
+              "horizontalTravelMeters": 0.000009659618844380705,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor0",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 673,
+              "maxDrift3DMeters": 0.0000010707822217585152,
+              "maxHorizontalDriftMeters": 1.0660760039842306e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217585152,
+              "horizontalTravelMeters": 0.00002196858715837131,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor1",
+          "role": "carrier_right",
+          "score": 96.7,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor1",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 673,
+              "maxDrift3DMeters": 0.0000010712888033984072,
+              "maxHorizontalDriftMeters": 6.059163935771067e-8,
+              "maxAnchorErrorMeters": 0.0000010712888033984072,
+              "horizontalTravelMeters": 0.000009659618846269251,
+              "maxGroundErrorMeters": 0.0000010964225671122874,
+              "minY": -0.0000010964225671122874,
+              "maxY": 3.045387744760042e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor1",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 673,
+              "maxDrift3DMeters": 0.0000010707822217585152,
+              "maxHorizontalDriftMeters": 1.066076004225348e-7,
+              "maxAnchorErrorMeters": 0.0000010707822217585152,
+              "horizontalTravelMeters": 0.000021968587156538773,
+              "maxGroundErrorMeters": 0.0000010923141349622467,
+              "minY": -0.0000010923141349622467,
+              "maxY": 3.0415530857808015e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        },
+        {
+          "actor": "actor2",
+          "role": "scorer",
+          "score": 96.6,
+          "coverage": 1,
+          "sourceSampleHashMatches": true,
+          "redMetrics": [],
+          "exactCanonical": true,
+          "native30Hz": true,
+          "supports": [
+            {
+              "actor": "actor2",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.4,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor2",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 0,
+              "end": 0.4,
+              "mode": "plant",
+              "samples": 49,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor2",
+              "bone": "LeftFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 5.1,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            },
+            {
+              "actor": "actor2",
+              "bone": "RightFoot",
+              "local": [
+                0,
+                -0.08,
+                0
+              ],
+              "start": 5.1,
+              "end": 5.6,
+              "mode": "plant",
+              "samples": 61,
+              "maxDrift3DMeters": 0,
+              "maxHorizontalDriftMeters": 0,
+              "maxAnchorErrorMeters": 0,
+              "horizontalTravelMeters": 0,
+              "maxGroundErrorMeters": 2.2499393584340943e-8,
+              "minY": -2.2499393584340943e-8,
+              "maxY": -2.2499393584340943e-8,
+              "pass": true
+            }
+          ],
+          "pass": true
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "RightUpLeg",
+            "local": [
+              -0.0577461587,
+              -0.0463299092,
+              0.0691030524
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support",
+          "index": 0,
+          "samples": 277,
+          "maxGapMeters": 0.0000019143278962538723,
+          "meanGapMeters": 6.211368771873813e-7,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.75,
+            "a": [
+              -0.15328273755149213,
+              1.2143730084517042,
+              0.07896719187328984
+            ],
+            "b": [
+              -0.15328412177603212,
+              1.2143730045082246,
+              0.07896586954270854
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "RightUpLeg",
+            "local": [
+              -0.013028539,
+              -0.0100752159,
+              -0.0798511576
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support",
+          "index": 1,
+          "samples": 277,
+          "maxGapMeters": 5.531494652167513e-7,
+          "meanGapMeters": 1.9480084085166336e-7,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.75,
+            "a": [
+              -0.1230377827356336,
+              1.1133939915474842,
+              -0.0409918845381789
+            ],
+            "b": [
+              -0.12303830787848366,
+              1.1133938767265497,
+              -0.040991754094816146
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "LeftUpLeg",
+            "local": [
+              0.0577754908,
+              -0.0459334892,
+              0.0695839882
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support",
+          "index": 2,
+          "samples": 277,
+          "maxGapMeters": 5.385156758348204e-7,
+          "meanGapMeters": 1.857075360319398e-7,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.75,
+            "a": [
+              0.1532213082601812,
+              1.214993575308149,
+              0.07894742048150699
+            ],
+            "b": [
+              0.15322183950177942,
+              1.214993562479192,
+              0.0789475077564479
+            ]
+          },
+          "pass": true
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "LeftUpLeg",
+            "local": [
+              0.0123384438,
+              -0.0077254937,
+              -0.0801253998
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support",
+          "index": 3,
+          "samples": 277,
+          "maxGapMeters": 0.0000026693437553560503,
+          "meanGapMeters": 8.638415372963281e-7,
+          "toleranceMeters": 0.02,
+          "worst": {
+            "time": 3.75,
+            "a": [
+              0.12217413568477639,
+              1.114503740786,
+              -0.043014799130003195
+            ],
+            "b": [
+              0.1221763169639099,
+              1.114503332025497,
+              -0.04301628248170699
+            ]
+          },
+          "pass": true
+        }
+      ],
+      "slide": null,
+      "noCompression": true,
+      "embedded": true,
+      "synchronized": true,
+      "catalogHashMatches": true,
+      "pass": true
+    }
+  ],
+  "negativeControls": {
+    "supportInjectionDetected": true,
+    "contactInjectionDetected": true,
+    "injectionMeters": 0.1,
+    "pass": true
+  },
+  "failures": [],
+  "passed": true
+}

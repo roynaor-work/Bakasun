@@ -1,0 +1,2212 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-17T13:41:38.777Z",
+  "sampleRate": 60,
+  "source": "Final delivered GLB buffers, canonical skinning using each vertex actual normalized weights and inverse bind matrices",
+  "method": "60Hz plus exact events/support boundaries. Every skinned vertex is floor-scanned. At each contact midpoint the nearest real mesh triangle is recorded with vertex IDs and barycentric coordinates; those actual skinned triangle points are followed throughout the declared interval.",
+  "limitations": "The hand endpoint is the wrist-joint center; it lies about 1cm within the real hand surface. Surface gaps are diagnostic Euclidean distances between calibrated real triangle points. This is not a full continuous interpenetration, palm orientation, garment collision, or biomechanical certification. A contact marker may be close to a triangle while the contacted hand uses another surface.",
+  "results": [
+    {
+      "id": "pair_hug",
+      "asset": "models/pair_hug.glb",
+      "sha256": "1507bb7f67875789eb76af32014f4107c9e6b19272db786cf5e38b107b6b7f90",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 265
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 265
+        }
+      ],
+      "contacts": [
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.013623214,
+              "surfaceBoneLocal": [
+                -0.009821293,
+                -0.000229875,
+                -0.009438291
+              ],
+              "surface": {
+                "distance": 0.013623214,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153758,
+                  0.075689085,
+                  0.479157157
+                ],
+                "world": [
+                  0.146725457,
+                  1.171925748,
+                  0.278052733
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  -0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.003234854,
+              "surfaceBoneLocal": [
+                -0.151511472,
+                0.023554218,
+                -0.05746768
+              ],
+              "surface": {
+                "distance": 0.003234854,
+                "primitive": 1,
+                "material": "actor1_kit",
+                "triangle": 1780,
+                "vertexIndices": [
+                  2031,
+                  2032,
+                  2086
+                ],
+                "barycentric": [
+                  0,
+                  0.516311604,
+                  0.483688396
+                ],
+                "world": [
+                  0.151511472,
+                  1.183229313,
+                  0.287467684
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623214,
+          "maxCalibratedSurfaceGapMeters": 0.015469902
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.011414794,
+              "surfaceBoneLocal": [
+                0.010578691,
+                0.001816365,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414794,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852123,
+                  0,
+                  0.58147877
+                ],
+                "world": [
+                  -0.143208973,
+                  1.176375627,
+                  0.276198591
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.004217839,
+              "surfaceBoneLocal": [
+                0.147299786,
+                0.024174954,
+                -0.051866581
+              ],
+              "surface": {
+                "distance": 0.004217839,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 75,
+                "vertexIndices": [
+                  50,
+                  58,
+                  79
+                ],
+                "barycentric": [
+                  0.615585625,
+                  0.36116546,
+                  0.023248915
+                ],
+                "world": [
+                  -0.147299786,
+                  1.18385005,
+                  0.281866586
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414794,
+          "maxCalibratedSurfaceGapMeters": 0.010233667
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.013623214,
+              "surfaceBoneLocal": [
+                -0.009821293,
+                -0.000229875,
+                -0.009438291
+              ],
+              "surface": {
+                "distance": 0.013623214,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153758,
+                  0.075689085,
+                  0.479157157
+                ],
+                "world": [
+                  -0.146725457,
+                  1.171925748,
+                  -0.278052733
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  -0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.003234854,
+              "surfaceBoneLocal": [
+                -0.151511472,
+                0.023554218,
+                -0.05746768
+              ],
+              "surface": {
+                "distance": 0.003234854,
+                "primitive": 1,
+                "material": "Cloth",
+                "triangle": 1780,
+                "vertexIndices": [
+                  2031,
+                  2032,
+                  2086
+                ],
+                "barycentric": [
+                  0,
+                  0.516311604,
+                  0.483688396
+                ],
+                "world": [
+                  -0.151511472,
+                  1.183229313,
+                  -0.287467684
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623214,
+          "maxCalibratedSurfaceGapMeters": 0.015469902
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.011414794,
+              "surfaceBoneLocal": [
+                0.010578691,
+                0.001816365,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414794,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852123,
+                  0,
+                  0.58147877
+                ],
+                "world": [
+                  0.143208973,
+                  1.176375627,
+                  -0.276198591
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.004217839,
+              "surfaceBoneLocal": [
+                0.147299786,
+                0.024174954,
+                -0.051866581
+              ],
+              "surface": {
+                "distance": 0.004217839,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 75,
+                "vertexIndices": [
+                  50,
+                  58,
+                  79
+                ],
+                "barycentric": [
+                  0.615585625,
+                  0.36116546,
+                  0.023248915
+                ],
+                "world": [
+                  0.147299786,
+                  1.18385005,
+                  -0.281866586
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414794,
+          "maxCalibratedSurfaceGapMeters": 0.010233667
+        }
+      ]
+    },
+    {
+      "id": "coach_hug",
+      "asset": "models/coach_hug.glb",
+      "sha256": "779edd51da04ede774a743e54962a58c91aa5f8fc354ed4876a0678dcc12a3ad",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 265
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 265
+        }
+      ],
+      "contacts": [
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.013623214,
+              "surfaceBoneLocal": [
+                -0.009821293,
+                -0.000229875,
+                -0.009438291
+              ],
+              "surface": {
+                "distance": 0.013623214,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153758,
+                  0.075689085,
+                  0.479157157
+                ],
+                "world": [
+                  0.146725457,
+                  1.171925748,
+                  0.278052733
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  -0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.003234854,
+              "surfaceBoneLocal": [
+                -0.151511472,
+                0.023554218,
+                -0.05746768
+              ],
+              "surface": {
+                "distance": 0.003234854,
+                "primitive": 1,
+                "material": "actor1_kit",
+                "triangle": 1780,
+                "vertexIndices": [
+                  2031,
+                  2032,
+                  2086
+                ],
+                "barycentric": [
+                  0,
+                  0.516311604,
+                  0.483688396
+                ],
+                "world": [
+                  0.151511472,
+                  1.183229313,
+                  0.287467684
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623214,
+          "maxCalibratedSurfaceGapMeters": 0.015469902
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.011414794,
+              "surfaceBoneLocal": [
+                0.010578691,
+                0.001816365,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414794,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852123,
+                  0,
+                  0.58147877
+                ],
+                "world": [
+                  -0.143208973,
+                  1.176375627,
+                  0.276198591
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.004217839,
+              "surfaceBoneLocal": [
+                0.147299786,
+                0.024174954,
+                -0.051866581
+              ],
+              "surface": {
+                "distance": 0.004217839,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 75,
+                "vertexIndices": [
+                  50,
+                  58,
+                  79
+                ],
+                "barycentric": [
+                  0.615585625,
+                  0.36116546,
+                  0.023248915
+                ],
+                "world": [
+                  -0.147299786,
+                  1.18385005,
+                  0.281866586
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414794,
+          "maxCalibratedSurfaceGapMeters": 0.010233667
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.013623214,
+              "surfaceBoneLocal": [
+                -0.009821293,
+                -0.000229875,
+                -0.009438291
+              ],
+              "surface": {
+                "distance": 0.013623214,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153758,
+                  0.075689085,
+                  0.479157157
+                ],
+                "world": [
+                  -0.146725457,
+                  1.171925748,
+                  -0.278052733
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  -0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.003234854,
+              "surfaceBoneLocal": [
+                -0.151511472,
+                0.023554218,
+                -0.05746768
+              ],
+              "surface": {
+                "distance": 0.003234854,
+                "primitive": 1,
+                "material": "Cloth",
+                "triangle": 1780,
+                "vertexIndices": [
+                  2031,
+                  2032,
+                  2086
+                ],
+                "barycentric": [
+                  0,
+                  0.516311604,
+                  0.483688396
+                ],
+                "world": [
+                  -0.151511472,
+                  1.183229313,
+                  -0.287467684
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623214,
+          "maxCalibratedSurfaceGapMeters": 0.015469902
+        },
+        {
+          "type": "embrace",
+          "start": 1.2,
+          "end": 2.9,
+          "samples": 103,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.011414794,
+              "surfaceBoneLocal": [
+                0.010578691,
+                0.001816365,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414794,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852123,
+                  0,
+                  0.58147877
+                ],
+                "world": [
+                  0.143208973,
+                  1.176375627,
+                  -0.276198591
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  0.15,
+                  0.025,
+                  -0.055
+                ]
+              },
+              "calibrationTime": 2.05,
+              "markerToSurfaceMeters": 0.004217839,
+              "surfaceBoneLocal": [
+                0.147299786,
+                0.024174954,
+                -0.051866581
+              ],
+              "surface": {
+                "distance": 0.004217839,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 75,
+                "vertexIndices": [
+                  50,
+                  58,
+                  79
+                ],
+                "barycentric": [
+                  0.615585625,
+                  0.36116546,
+                  0.023248915
+                ],
+                "world": [
+                  0.147299786,
+                  1.18385005,
+                  -0.281866586
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414794,
+          "maxCalibratedSurfaceGapMeters": 0.010233667
+        }
+      ]
+    },
+    {
+      "id": "chest_bump",
+      "asset": "models/chest_bump.glb",
+      "sha256": "cbd099e552d46be6b7a0b16f967065a5dcabb00f8553ffdd7bd3da53ae34ea64",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005113866,
+          "time": 0.683333333,
+          "samples": 253
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005113866,
+          "time": 0.683333333,
+          "samples": 253
+        }
+      ],
+      "contacts": [
+        {
+          "type": "chest",
+          "start": 1.25,
+          "end": 1.65,
+          "samples": 25,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  0.0154,
+                  -0.00167,
+                  0.14367
+                ]
+              },
+              "calibrationTime": 1.45,
+              "markerToSurfaceMeters": 0.000003193,
+              "surfaceBoneLocal": [
+                0.015400584,
+                -0.001670403,
+                0.143666887
+              ],
+              "surface": {
+                "distance": 0.000003193,
+                "primitive": 1,
+                "material": "Cloth",
+                "triangle": 1493,
+                "vertexIndices": [
+                  1896,
+                  1895,
+                  1897
+                ],
+                "barycentric": [
+                  0.000046089,
+                  0.696684041,
+                  0.30326987
+                ],
+                "world": [
+                  5.84e-7,
+                  1.45832958,
+                  -0.000003106
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  0.0154,
+                  -0.00167,
+                  0.14367
+                ]
+              },
+              "calibrationTime": 1.45,
+              "markerToSurfaceMeters": 0.000003193,
+              "surfaceBoneLocal": [
+                0.015400584,
+                -0.001670403,
+                0.143666887
+              ],
+              "surface": {
+                "distance": 0.000003193,
+                "primitive": 1,
+                "material": "actor1_kit",
+                "triangle": 1493,
+                "vertexIndices": [
+                  1896,
+                  1895,
+                  1897
+                ],
+                "barycentric": [
+                  0.000046089,
+                  0.696684041,
+                  0.30326987
+                ],
+                "world": [
+                  -5.84e-7,
+                  1.45832958,
+                  0.000003106
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.000003193,
+          "maxCalibratedSurfaceGapMeters": 0.000006321
+        }
+      ]
+    },
+    {
+      "id": "circle_five",
+      "asset": "models/circle_five.glb",
+      "sha256": "0419809faf6880f33efa895e19df951f9862c2b0f17b0c1b3f9289710a0f55e5",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005114108,
+          "time": 2.116666667,
+          "samples": 313
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005114108,
+          "time": 2.116666667,
+          "samples": 313
+        },
+        {
+          "actor": "actor2",
+          "minimumSkinY": 0.005114108,
+          "time": 2.116666667,
+          "samples": 313
+        },
+        {
+          "actor": "actor3",
+          "minimumSkinY": 0.005114108,
+          "time": 2.116666667,
+          "samples": 313
+        },
+        {
+          "actor": "actor4",
+          "minimumSkinY": 0.005114108,
+          "time": 2.116666667,
+          "samples": 313
+        }
+      ],
+      "contacts": [
+        {
+          "type": "shoulder_link",
+          "start": 1,
+          "end": 4.2,
+          "samples": 193,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0.011414792,
+              "surfaceBoneLocal": [
+                0.01057869,
+                0.00181636,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414792,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852149,
+                  0,
+                  0.58147851
+                ],
+                "world": [
+                  0.467592575,
+                  1.122976377,
+                  0.308531279
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "Chest",
+                "local": [
+                  0.1510423,
+                  0.002236075,
+                  0.006342276
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.1510423,
+                0.002236075,
+                0.006342277
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 60,
+                "vertexIndices": [
+                  73,
+                  65,
+                  72
+                ],
+                "barycentric": [
+                  1e-9,
+                  0.628279003,
+                  0.371720996
+                ],
+                "world": [
+                  0.47037456,
+                  1.133598801,
+                  0.311649242
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414792,
+          "maxCalibratedSurfaceGapMeters": 0.011604143
+        },
+        {
+          "type": "shoulder_link",
+          "start": 1,
+          "end": 4.2,
+          "samples": 193,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0.011414792,
+              "surfaceBoneLocal": [
+                0.01057869,
+                0.00181636,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414792,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852149,
+                  0,
+                  0.58147851
+                ],
+                "world": [
+                  0.437924716,
+                  1.122976377,
+                  -0.349365558
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "Chest",
+                "local": [
+                  0.1510423,
+                  0.002236075,
+                  0.006342276
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.1510423,
+                0.002236075,
+                0.006342277
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 60,
+                "vertexIndices": [
+                  73,
+                  65,
+                  72
+                ],
+                "barycentric": [
+                  1e-9,
+                  0.628279003,
+                  0.371720996
+                ],
+                "world": [
+                  0.441749775,
+                  1.133598801,
+                  -0.351047897
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414792,
+          "maxCalibratedSurfaceGapMeters": 0.011604152
+        },
+        {
+          "type": "shoulder_link",
+          "start": 1,
+          "end": 4.2,
+          "samples": 193,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0.011414792,
+              "surfaceBoneLocal": [
+                0.01057869,
+                0.00181636,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414792,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852149,
+                  0,
+                  0.58147851
+                ],
+                "world": [
+                  -0.196940215,
+                  1.122976377,
+                  -0.524451054
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor3",
+                "bone": "Chest",
+                "local": [
+                  0.1510423,
+                  0.002236075,
+                  0.006342276
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.1510423,
+                0.002236075,
+                0.006342277
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 60,
+                "vertexIndices": [
+                  73,
+                  65,
+                  72
+                ],
+                "barycentric": [
+                  1e-9,
+                  0.628279003,
+                  0.371720996
+                ],
+                "world": [
+                  -0.1973582,
+                  1.133598801,
+                  -0.528608769
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414792,
+          "maxCalibratedSurfaceGapMeters": 0.011604151
+        },
+        {
+          "type": "shoulder_link",
+          "start": 1,
+          "end": 4.2,
+          "samples": 193,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor3",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0.011414792,
+              "surfaceBoneLocal": [
+                0.01057869,
+                0.00181636,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414792,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852149,
+                  0,
+                  0.58147851
+                ],
+                "world": [
+                  -0.559640463,
+                  1.122976377,
+                  0.025236986
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor4",
+                "bone": "Chest",
+                "local": [
+                  0.1510423,
+                  0.002236075,
+                  0.006342276
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.1510423,
+                0.002236075,
+                0.006342277
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 60,
+                "vertexIndices": [
+                  73,
+                  65,
+                  72
+                ],
+                "barycentric": [
+                  1e-9,
+                  0.628279003,
+                  0.371720996
+                ],
+                "world": [
+                  -0.563723842,
+                  1.133598801,
+                  0.024349718
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414792,
+          "maxCalibratedSurfaceGapMeters": 0.011604147
+        },
+        {
+          "type": "shoulder_link",
+          "start": 1,
+          "end": 4.2,
+          "samples": 193,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor4",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0.011414792,
+              "surfaceBoneLocal": [
+                0.01057869,
+                0.00181636,
+                -0.003884537
+              ],
+              "surface": {
+                "distance": 0.011414792,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.41852149,
+                  0,
+                  0.58147851
+                ],
+                "world": [
+                  -0.148936592,
+                  1.122976377,
+                  0.540048366
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "Chest",
+                "local": [
+                  0.1510423,
+                  0.002236075,
+                  0.006342276
+                ]
+              },
+              "calibrationTime": 2.6,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.1510423,
+                0.002236075,
+                0.006342277
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 60,
+                "vertexIndices": [
+                  73,
+                  65,
+                  72
+                ],
+                "barycentric": [
+                  1e-9,
+                  0.628279003,
+                  0.371720996
+                ],
+                "world": [
+                  -0.1510423,
+                  1.133598801,
+                  0.543657735
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414792,
+          "maxCalibratedSurfaceGapMeters": 0.011604162
+        }
+      ]
+    },
+    {
+      "id": "run_to_stands",
+      "asset": "models/run_to_stands.glb",
+      "sha256": "320e54bd8a633cc661c1948aca586711e28999d6c969f6ea90cba3275ddd3d0c",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004819075,
+          "time": 2.816666667,
+          "samples": 236
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "honor_lap",
+      "asset": "models/honor_lap.glb",
+      "sha256": "47748a9d8b586dd28cf33b7a1cadbf1294c16ebea53ff4e4a3342e455011d08c",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004808814,
+          "time": 1.016666667,
+          "samples": 236
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "knee_slide",
+      "asset": "models/knee_slide.glb",
+      "sha256": "37ec56bb87830b44d89be78b17a080897d90aee7dbad132db0e93e712ff5d34d",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004917153,
+          "time": 0.816666667,
+          "samples": 301
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "backflip",
+      "asset": "models/backflip.glb",
+      "sha256": "00da33df2a0b5d45fdbf46aff0293d19f043e96cf740a16d7781e7f8865098f7",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004497933,
+          "time": 1.15,
+          "samples": 337
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "dance",
+      "asset": "models/dance.glb",
+      "sha256": "7a787450c4ee9e7479e1c79aed4879775004e4fa0016e4659f38870a29f23df2",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004736496,
+          "time": 4.5,
+          "samples": 313
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "dance_shuffle",
+      "asset": "models/dance_shuffle.glb",
+      "sha256": "16da9f80f9a8cfaa3aabe3e570bd5689984b1c23dc9d1976c451e85e53500570",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.004736496,
+          "time": 4.5,
+          "samples": 313
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "crowd_salute",
+      "asset": "models/crowd_salute.glb",
+      "sha256": "28701b24810b39a20cb4f28cda18f9a6dda514f62aee64aa2fdcc49a3f71a87c",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005127978,
+          "time": 0.016666667,
+          "samples": 265
+        }
+      ],
+      "contacts": []
+    },
+    {
+      "id": "trophy_lift",
+      "asset": "models/trophy_lift.glb",
+      "sha256": "fc256a927e19740ec96328e1873989ba1e19b9a8c1804a5bdf66e2a944e52f81",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005127978,
+          "time": 0.016666667,
+          "samples": 385
+        }
+      ],
+      "contacts": [
+        {
+          "type": "trophy_handle",
+          "start": 0,
+          "end": 6.4,
+          "samples": 385,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 3.2,
+              "markerToSurfaceMeters": 0.013623199,
+              "surfaceBoneLocal": [
+                -0.009821291,
+                -0.00022988,
+                -0.009438271
+              ],
+              "surface": {
+                "distance": 0.013623199,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445154125,
+                  0.075688884,
+                  0.479156991
+                ],
+                "world": [
+                  0.17951881,
+                  1.673875585,
+                  0.23278691
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "node": "Trophy",
+                "local": [
+                  0.167,
+                  0.05,
+                  0
+                ]
+              },
+              "calibrationTime": 3.2,
+              "markerToSurfaceMeters": 4e-9,
+              "surfaceBoneLocal": [
+                0.166999996,
+                0.05,
+                0
+              ],
+              "surface": {
+                "distance": 4e-9,
+                "primitive": 0,
+                "material": "Trophy_gold",
+                "triangle": 993,
+                "vertexIndices": [
+                  528,
+                  537,
+                  536
+                ],
+                "barycentric": [
+                  2.2e-8,
+                  0,
+                  0.999999978
+                ],
+                "world": [
+                  0.166999996,
+                  1.679999996,
+                  0.230000004
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623211,
+          "maxCalibratedSurfaceGapMeters": 0.014212529
+        },
+        {
+          "type": "trophy_handle",
+          "start": 0,
+          "end": 6.4,
+          "samples": 385,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 3.2,
+              "markerToSurfaceMeters": 0.011414801,
+              "surfaceBoneLocal": [
+                0.010578696,
+                0.001816346,
+                -0.003884552
+              ],
+              "surface": {
+                "distance": 0.011414801,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.418521268,
+                  0,
+                  0.581478732
+                ],
+                "world": [
+                  -0.174715244,
+                  1.67077009,
+                  0.234485778
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "node": "Trophy",
+                "local": [
+                  -0.167,
+                  0.05,
+                  0
+                ]
+              },
+              "calibrationTime": 3.2,
+              "markerToSurfaceMeters": 4e-9,
+              "surfaceBoneLocal": [
+                -0.166999996,
+                0.050000001,
+                0
+              ],
+              "surface": {
+                "distance": 4e-9,
+                "primitive": 0,
+                "material": "Trophy_gold",
+                "triangle": 742,
+                "vertexIndices": [
+                  395,
+                  396,
+                  404
+                ],
+                "barycentric": [
+                  0,
+                  1.8e-8,
+                  0.999999982
+                ],
+                "world": [
+                  -0.166999996,
+                  1.679999996,
+                  0.230000004
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414803,
+          "maxCalibratedSurfaceGapMeters": 0.01283894
+        }
+      ]
+    },
+    {
+      "id": "goalkeeper_hang",
+      "asset": "models/goalkeeper_hang.glb",
+      "sha256": "3833d89682eb06efa9405bd56fab6cfb7ed90914fee76f469a3c0ee1f610ff87",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005125638,
+          "time": 0.85,
+          "samples": 313
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005127983,
+          "time": 0,
+          "samples": 313
+        }
+      ],
+      "contacts": [
+        {
+          "type": "shoulder_hold",
+          "start": 1.4,
+          "end": 3.5,
+          "samples": 127,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.45,
+              "markerToSurfaceMeters": 0.01362321,
+              "surfaceBoneLocal": [
+                -0.009821292,
+                -0.000229877,
+                -0.009438286
+              ],
+              "surface": {
+                "distance": 0.01362321,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153738,
+                  0.075689238,
+                  0.479157024
+                ],
+                "world": [
+                  0.172532358,
+                  1.165840145,
+                  -0.018615001
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "LeftArm",
+                "local": [
+                  -0.009902024,
+                  -0.017278628,
+                  -0.0035747
+                ]
+              },
+              "calibrationTime": 2.45,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                -0.009902024,
+                -0.017278628,
+                -0.0035747
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 74,
+                "vertexIndices": [
+                  49,
+                  50,
+                  79
+                ],
+                "barycentric": [
+                  0.51556407,
+                  0.405744307,
+                  0.078691623
+                ],
+                "world": [
+                  0.176974945,
+                  1.175427326,
+                  -0.010016055
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.01362321,
+          "maxCalibratedSurfaceGapMeters": 0.013623233
+        },
+        {
+          "type": "shoulder_hold",
+          "start": 1.4,
+          "end": 3.5,
+          "samples": 127,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.45,
+              "markerToSurfaceMeters": 0.0114148,
+              "surfaceBoneLocal": [
+                0.010578695,
+                0.001816376,
+                -0.003884539
+              ],
+              "surface": {
+                "distance": 0.0114148,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.418521274,
+                  0,
+                  0.581478726
+                ],
+                "world": [
+                  -0.172277372,
+                  1.169102563,
+                  -0.012385818
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightArm",
+                "local": [
+                  0.007630407,
+                  -0.017758509,
+                  -0.009096339
+                ]
+              },
+              "calibrationTime": 2.45,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.007630407,
+                -0.017758509,
+                -0.009096339
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 88,
+                "vertexIndices": [
+                  7,
+                  4,
+                  89
+                ],
+                "barycentric": [
+                  0.307507323,
+                  0.2964589,
+                  0.396033777
+                ],
+                "world": [
+                  -0.179753078,
+                  1.173609303,
+                  -0.005030497
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.0114148,
+          "maxCalibratedSurfaceGapMeters": 0.011414799
+        }
+      ]
+    },
+    {
+      "id": "player_lift",
+      "asset": "models/player_lift.glb",
+      "sha256": "d8c9bb517c0a418cc905f2a861595eb944fc614e7f0c335670051a398d9e4c91",
+      "floor": [
+        {
+          "actor": "actor0",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 337
+        },
+        {
+          "actor": "actor1",
+          "minimumSkinY": 0.005126916,
+          "time": 0.25,
+          "samples": 337
+        },
+        {
+          "actor": "actor2",
+          "minimumSkinY": 0.005127983,
+          "time": 0,
+          "samples": 337
+        }
+      ],
+      "contacts": [
+        {
+          "type": "thigh_support",
+          "start": 1.5,
+          "end": 3.8,
+          "samples": 139,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0.013623205,
+              "surfaceBoneLocal": [
+                -0.009821291,
+                -0.000229878,
+                -0.009438279
+              ],
+              "surface": {
+                "distance": 0.013623205,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.445153859,
+                  0.075688941,
+                  0.4791572
+                ],
+                "world": [
+                  -0.152852067,
+                  1.208356341,
+                  0.091181705
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "RightUpLeg",
+                "local": [
+                  -0.057746159,
+                  -0.046329909,
+                  0.069103052
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                -0.057746159,
+                -0.046329909,
+                0.069103052
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 1,
+                "material": "actor2_kit",
+                "triangle": 2725,
+                "vertexIndices": [
+                  2659,
+                  2602,
+                  2660
+                ],
+                "barycentric": [
+                  0.560069625,
+                  0.22628023,
+                  0.213650145
+                ],
+                "world": [
+                  -0.153284122,
+                  1.214373005,
+                  0.07896587
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623206,
+          "maxCalibratedSurfaceGapMeters": 0.013624403
+        },
+        {
+          "type": "thigh_support",
+          "start": 1.5,
+          "end": 3.8,
+          "samples": 139,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor0",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0.000867135,
+              "surfaceBoneLocal": [
+                0.000732564,
+                0.000136834,
+                -0.000443339
+              ],
+              "surface": {
+                "distance": 0.000867135,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 19,
+                "vertexIndices": [
+                  35,
+                  36,
+                  37
+                ],
+                "barycentric": [
+                  0.061063848,
+                  0.482186012,
+                  0.45675014
+                ],
+                "world": [
+                  -0.122958806,
+                  1.113476248,
+                  -0.041851418
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "RightUpLeg",
+                "local": [
+                  -0.013028539,
+                  -0.010075216,
+                  -0.079851158
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                -0.013028539,
+                -0.010075216,
+                -0.079851158
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 1,
+                "material": "actor2_kit",
+                "triangle": 2618,
+                "vertexIndices": [
+                  2519,
+                  2520,
+                  2587
+                ],
+                "barycentric": [
+                  0.460493873,
+                  0.135617289,
+                  0.403888838
+                ],
+                "world": [
+                  -0.123038308,
+                  1.113393877,
+                  -0.040991754
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.010899399,
+          "maxCalibratedSurfaceGapMeters": 0.010899394
+        },
+        {
+          "type": "thigh_support",
+          "start": 1.5,
+          "end": 3.8,
+          "samples": 139,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "LeftHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0.013623201,
+              "surfaceBoneLocal": [
+                -0.009821291,
+                -0.00022988,
+                -0.009438273
+              ],
+              "surface": {
+                "distance": 0.013623201,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 371,
+                "vertexIndices": [
+                  275,
+                  277,
+                  284
+                ],
+                "barycentric": [
+                  0.44515453,
+                  0.07568919,
+                  0.47915628
+                ],
+                "world": [
+                  0.144457389,
+                  1.215007658,
+                  0.068517588
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "LeftUpLeg",
+                "local": [
+                  0.057775491,
+                  -0.045933489,
+                  0.069583988
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.057775491,
+                -0.045933489,
+                0.069583988
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 1,
+                "material": "actor2_kit",
+                "triangle": 2749,
+                "vertexIndices": [
+                  2671,
+                  2615,
+                  2672
+                ],
+                "barycentric": [
+                  0.238826196,
+                  0.202056157,
+                  0.559117647
+                ],
+                "world": [
+                  0.15322184,
+                  1.214993562,
+                  0.078947508
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.013623201,
+          "maxCalibratedSurfaceGapMeters": 0.013623609
+        },
+        {
+          "type": "thigh_support",
+          "start": 1.5,
+          "end": 3.8,
+          "samples": 139,
+          "endpoints": [
+            {
+              "endpoint": {
+                "actor": "actor1",
+                "bone": "RightHand",
+                "local": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0.011414795,
+              "surfaceBoneLocal": [
+                0.010578692,
+                0.001816366,
+                -0.003884538
+              ],
+              "surface": {
+                "distance": 0.011414795,
+                "primitive": 0,
+                "material": "Skin",
+                "triangle": 550,
+                "vertexIndices": [
+                  432,
+                  416,
+                  435
+                ],
+                "barycentric": [
+                  0.418521269,
+                  0,
+                  0.581478731
+                ],
+                "world": [
+                  0.126117935,
+                  1.103986944,
+                  -0.040978469
+                ]
+              }
+            },
+            {
+              "endpoint": {
+                "actor": "actor2",
+                "bone": "LeftUpLeg",
+                "local": [
+                  0.012338444,
+                  -0.007725494,
+                  -0.0801254
+                ]
+              },
+              "calibrationTime": 2.65,
+              "markerToSurfaceMeters": 0,
+              "surfaceBoneLocal": [
+                0.012338444,
+                -0.007725494,
+                -0.0801254
+              ],
+              "surface": {
+                "distance": 0,
+                "primitive": 1,
+                "material": "actor2_kit",
+                "triangle": 2402,
+                "vertexIndices": [
+                  2454,
+                  2408,
+                  2455
+                ],
+                "barycentric": [
+                  0.159879402,
+                  0.517314994,
+                  0.322805604
+                ],
+                "world": [
+                  0.122176317,
+                  1.114503332,
+                  -0.043016283
+                ]
+              }
+            }
+          ],
+          "maxMarkerSurfaceDistanceMeters": 0.011414796,
+          "maxCalibratedSurfaceGapMeters": 0.011414801
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "minimumSkinY": 0.004497933,
+    "maxMarkerSurfaceDistanceMeters": 0.013623214,
+    "maxCalibratedSurfaceGapMeters": 0.015469902
+  }
+}

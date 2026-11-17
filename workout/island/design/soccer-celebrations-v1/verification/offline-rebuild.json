@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "scope": "Extracted standalone ZIP into /tmp outside the repository; rebuilt without sibling assets or npm dependencies.",
+  "commands": [
+    "node source/author.mjs",
+    "node source/run-qa.mjs",
+    "node source/verify-package.mjs"
+  ],
+  "clips": 14,
+  "actorTracks": 24,
+  "rebuiltGLBsByteIdentical": true,
+  "minimumMotionScore": 89.2,
+  "evidenceHashesMatch": true,
+  "networkRequired": false,
+  "dependencies": "Node.js for build/QA; Python 3 standard library for localhost preview and archive packaging.",
+  "testedVersions": {"node": "24.19.0", "python": "3.12.14"},
+  "passed": true
+}

@@ -1,0 +1,2197 @@
+{
+  "schemaVersion": 1,
+  "id": "soccer-celebrations-v1",
+  "license": "CC0-1.0",
+  "nativeRate": 30,
+  "clipCount": 14,
+  "axes": {
+    "up": "+Y",
+    "forward": "+Z",
+    "anatomicalLeft": "+X"
+  },
+  "units": "meters",
+  "skeleton": [
+    {
+      "name": "Root",
+      "parent": null,
+      "restTranslationMeters": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Hips",
+      "parent": "Root",
+      "restTranslationMeters": [
+        0,
+        0.86,
+        0
+      ]
+    },
+    {
+      "name": "Spine",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0,
+        0.2,
+        0
+      ]
+    },
+    {
+      "name": "Chest",
+      "parent": "Spine",
+      "restTranslationMeters": [
+        0,
+        0.18,
+        0
+      ]
+    },
+    {
+      "name": "Neck",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0,
+        0.1,
+        0
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Neck",
+      "restTranslationMeters": [
+        0,
+        0.13,
+        0
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "LeftForeArm",
+      "parent": "LeftArm",
+      "restTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "LeftHand",
+      "parent": "LeftForeArm",
+      "restTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "RightArm",
+      "parent": "Chest",
+      "restTranslationMeters": [
+        -0.16,
+        0.06,
+        0
+      ]
+    },
+    {
+      "name": "RightForeArm",
+      "parent": "RightArm",
+      "restTranslationMeters": [
+        0,
+        -0.27,
+        0
+      ]
+    },
+    {
+      "name": "RightHand",
+      "parent": "RightForeArm",
+      "restTranslationMeters": [
+        0,
+        -0.24,
+        0
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "parent": "LeftUpLeg",
+      "restTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "parent": "LeftLeg",
+      "restTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ]
+    },
+    {
+      "name": "RightUpLeg",
+      "parent": "Hips",
+      "restTranslationMeters": [
+        -0.1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "parent": "RightUpLeg",
+      "restTranslationMeters": [
+        0,
+        -0.41,
+        0
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "parent": "RightLeg",
+      "restTranslationMeters": [
+        0,
+        -0.37,
+        0
+      ]
+    }
+  ],
+  "rootMotionPolicy": "World trajectory is baked in each actor Root. Apply the choreography group origin once; do not add simulation travel a second time.",
+  "synchronization": {
+    "clock": "single animation time in seconds",
+    "actorStartOffsetsSeconds": 0,
+    "pause": "freeze shared mixer",
+    "interrupt": "blend all participants together after releasing declared contacts"
+  },
+  "countDecision": "13 requested actions; trophy contains three phases in one clip; 14th is a second dance, confirmed by user.",
+  "template": {
+    "path": "workout/island/design/soccer-header-v1/runtime/reference/idle_relaxed.glb",
+    "sha256": "7a8421e3d81cb472435f523a2e99f6d75daa16afe14a423bd25d80d5df6f6b41",
+    "license": "CC0-1.0"
+  },
+  "clips": [
+    {
+      "id": "pair_hug",
+      "label": "חיבוק זוגי",
+      "duration": 4.4,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "teammate",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        }
+      ],
+      "events": [
+        {
+          "type": "embrace",
+          "time": 1.2
+        },
+        {
+          "type": "release",
+          "time": 2.9
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        }
+      ],
+      "asset": "models/pair_hug.glb",
+      "frameCount": 133,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/pair_hug.webp",
+      "bytes": 860976,
+      "sha256": "1507bb7f67875789eb76af32014f4107c9e6b19272db786cf5e38b107b6b7f90"
+    },
+    {
+      "id": "coach_hug",
+      "label": "חיבוק מאמן",
+      "duration": 4.4,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "coach",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        }
+      ],
+      "events": [
+        {
+          "type": "embrace",
+          "time": 1.2
+        },
+        {
+          "type": "release",
+          "time": 2.9
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              -0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.15,
+              0.025,
+              -0.055
+            ]
+          },
+          "start": 1.2,
+          "end": 2.9,
+          "maxDistanceMeters": 0.02,
+          "type": "embrace"
+        }
+      ],
+      "asset": "models/coach_hug.glb",
+      "frameCount": 133,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/coach_hug.webp",
+      "bytes": 860976,
+      "sha256": "779edd51da04ede774a743e54962a58c91aa5f8fc354ed4876a0678dcc12a3ad"
+    },
+    {
+      "id": "chest_bump",
+      "label": "קפיצת חזה",
+      "duration": 4.2,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "teammate",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        }
+      ],
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 0.8
+        },
+        {
+          "type": "chest_contact",
+          "time": 1.25
+        },
+        {
+          "type": "land",
+          "time": 2.1
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.8,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.8,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.1,
+          "end": 4.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.1,
+          "end": 4.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.8,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.8,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.1,
+          "end": 4.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.1,
+          "end": 4.2,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.0154,
+              -0.00167,
+              0.14367
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.0154,
+              -0.00167,
+              0.14367
+            ]
+          },
+          "start": 1.25,
+          "end": 1.65,
+          "maxDistanceMeters": 0.02,
+          "type": "chest"
+        }
+      ],
+      "asset": "models/chest_bump.glb",
+      "frameCount": 127,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/chest_bump.webp",
+      "bytes": 857172,
+      "sha256": "cbd099e552d46be6b7a0b16f967065a5dcabb00f8553ffdd7bd3da53ae34ea64"
+    },
+    {
+      "id": "circle_five",
+      "label": "מעגל חגיגה · חמישה",
+      "duration": 5.2,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "teammate",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "teammate",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        },
+        {
+          "id": "actor2",
+          "role": "teammate",
+          "rootNode": "actor2_Root",
+          "prefix": "actor2_"
+        },
+        {
+          "id": "actor3",
+          "role": "teammate",
+          "rootNode": "actor3_Root",
+          "prefix": "actor3_"
+        },
+        {
+          "id": "actor4",
+          "role": "teammate",
+          "rootNode": "actor4_Root",
+          "prefix": "actor4_"
+        }
+      ],
+      "events": [
+        {
+          "type": "circle_lock",
+          "time": 1
+        },
+        {
+          "type": "release",
+          "time": 4.2
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor3",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor3",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor4",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor4",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor1",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link"
+        },
+        {
+          "a": {
+            "actor": "actor2",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor3",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link"
+        },
+        {
+          "a": {
+            "actor": "actor3",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor4",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link"
+        },
+        {
+          "a": {
+            "actor": "actor4",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "Chest",
+            "local": [
+              0.1510422996,
+              0.0022360748,
+              0.0063422765
+            ]
+          },
+          "start": 1,
+          "end": 4.2,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_link"
+        }
+      ],
+      "asset": "models/circle_five.glb",
+      "frameCount": 157,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/circle_five.webp",
+      "bytes": 1044884,
+      "sha256": "0419809faf6880f33efa895e19df951f9862c2b0f17b0c1b3f9289710a0f55e5"
+    },
+    {
+      "id": "run_to_stands",
+      "label": "ריצה לצד היציע",
+      "duration": 3.6,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "crowd_wave",
+          "time": 1.2
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.31679999999999997,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0.72,
+          "end": 1.0368,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.44,
+          "end": 1.7568,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.16,
+          "end": 2.4768,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.88,
+          "end": 3.1967999999999996,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0.36,
+          "end": 0.6768,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.08,
+          "end": 1.3968,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.7999999999999998,
+          "end": 2.1167999999999996,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.52,
+          "end": 2.8368,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 3.2399999999999998,
+          "end": 3.5568,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "locomotion": true,
+      "asset": "models/run_to_stands.glb",
+      "frameCount": 109,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/run_to_stands.webp",
+      "bytes": 804968,
+      "sha256": "320e54bd8a633cc661c1948aca586711e28999d6c969f6ea90cba3275ddd3d0c"
+    },
+    {
+      "id": "honor_lap",
+      "label": "ריצת כבוד",
+      "duration": 3.6,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "lap_salute",
+          "time": 2.4
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.31679999999999997,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0.72,
+          "end": 1.0368,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.44,
+          "end": 1.7568,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.16,
+          "end": 2.4768,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.88,
+          "end": 3.1967999999999996,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0.36,
+          "end": 0.6768,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.08,
+          "end": 1.3968,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 1.7999999999999998,
+          "end": 2.1167999999999996,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 2.52,
+          "end": 2.8368,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 3.2399999999999998,
+          "end": 3.5568,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "locomotion": true,
+      "asset": "models/honor_lap.glb",
+      "frameCount": 109,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/honor_lap.webp",
+      "bytes": 804968,
+      "sha256": "47748a9d8b586dd28cf33b7a1cadbf1294c16ebea53ff4e4a3342e455011d08c"
+    },
+    {
+      "id": "knee_slide",
+      "label": "החלקה על הברכיים",
+      "duration": 5,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "knees_down",
+          "time": 1.3
+        },
+        {
+          "type": "slide_stop",
+          "time": 3.3
+        },
+        {
+          "type": "stand",
+          "time": 4.6
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.5,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.5,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 4.6,
+          "end": 5,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 4.6,
+          "end": 5,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "slide": {
+        "actor": "actor0",
+        "bones": [
+          "LeftLeg",
+          "RightLeg"
+        ],
+        "start": 1.3,
+        "end": 3.3,
+        "expectedTravelMeters": 1.8
+      },
+      "asset": "models/knee_slide.glb",
+      "frameCount": 151,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/knee_slide.webp",
+      "bytes": 817724,
+      "sha256": "37ec56bb87830b44d89be78b17a080897d90aee7dbad132db0e93e712ff5d34d"
+    },
+    {
+      "id": "backflip",
+      "label": "סלטה לאחור",
+      "duration": 5.6,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "takeoff",
+          "time": 1.2
+        },
+        {
+          "type": "inverted",
+          "time": 2.4
+        },
+        {
+          "type": "land",
+          "time": 3.6
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 1.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 1.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 3.6,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 3.6,
+          "end": 5.6,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "asset": "models/backflip.glb",
+      "frameCount": 169,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/backflip.webp",
+      "bytes": 823284,
+      "sha256": "00da33df2a0b5d45fdbf46aff0293d19f043e96cf740a16d7781e7f8865098f7"
+    },
+    {
+      "id": "dance",
+      "label": "ריקוד",
+      "duration": 5.2,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "dance_start",
+          "time": 0.9
+        },
+        {
+          "type": "dance_finish",
+          "time": 4.2
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "asset": "models/dance.glb",
+      "frameCount": 157,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/dance.webp",
+      "bytes": 819292,
+      "sha256": "7a787450c4ee9e7479e1c79aed4879775004e4fa0016e4659f38870a29f23df2"
+    },
+    {
+      "id": "dance_shuffle",
+      "label": "ריקוד · כתפיים",
+      "duration": 5.2,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "dance_start",
+          "time": 0.9
+        },
+        {
+          "type": "dance_finish",
+          "time": 4.2
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "asset": "models/dance_shuffle.glb",
+      "frameCount": 157,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/dance_shuffle.webp",
+      "bytes": 819324,
+      "sha256": "16da9f80f9a8cfaa3aabe3e570bd5689984b1c23dc9d1976c451e85e53500570"
+    },
+    {
+      "id": "crowd_salute",
+      "label": "הצדעה לקהל",
+      "duration": 4.4,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "scorer",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "salute",
+          "time": 1.2
+        },
+        {
+          "type": "release",
+          "time": 2.9
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 4.4,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [],
+      "asset": "models/crowd_salute.glb",
+      "frameCount": 133,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/crowd_salute.webp",
+      "bytes": 811672,
+      "sha256": "28701b24810b39a20cb4f28cda18f9a6dda514f62aee64aa2fdcc49a3f71a87c"
+    },
+    {
+      "id": "trophy_lift",
+      "label": "הרמת גביע · קבלה / הרמה / הצגה",
+      "duration": 6.4,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "captain",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        }
+      ],
+      "events": [
+        {
+          "type": "receive",
+          "time": 1.2
+        },
+        {
+          "type": "raise",
+          "time": 3.1
+        },
+        {
+          "type": "present",
+          "time": 4.8
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 6.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 6.4,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "node": "Trophy",
+            "local": [
+              0.167,
+              0.05,
+              0
+            ]
+          },
+          "start": 0,
+          "end": 6.4,
+          "maxDistanceMeters": 0.02,
+          "type": "trophy_handle"
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "node": "Trophy",
+            "local": [
+              -0.167,
+              0.05,
+              0
+            ]
+          },
+          "start": 0,
+          "end": 6.4,
+          "maxDistanceMeters": 0.02,
+          "type": "trophy_handle"
+        }
+      ],
+      "phases": [
+        {
+          "id": "receive",
+          "start": 0,
+          "end": 1.2
+        },
+        {
+          "id": "raise",
+          "start": 1.2,
+          "end": 3.1
+        },
+        {
+          "id": "present",
+          "start": 3.1,
+          "end": 6.4
+        }
+      ],
+      "prop": "trophy",
+      "asset": "models/trophy_lift.glb",
+      "frameCount": 193,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/trophy_lift.webp",
+      "bytes": 855952,
+      "sha256": "fc256a927e19740ec96328e1873989ba1e19b9a8c1804a5bdf66e2a944e52f81"
+    },
+    {
+      "id": "goalkeeper_hang",
+      "label": "תלייה על השוער",
+      "duration": 5.2,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "goalkeeper",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "scorer",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        }
+      ],
+      "events": [
+        {
+          "type": "mount",
+          "time": 1.4
+        },
+        {
+          "type": "release",
+          "time": 3.5
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 4.7,
+          "end": 5.2,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 4.7,
+          "end": 5.2,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "LeftArm",
+            "local": [
+              -0.009902024,
+              -0.017278628,
+              -0.0035747
+            ]
+          },
+          "start": 1.4,
+          "end": 3.5,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_hold"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor0",
+            "bone": "RightArm",
+            "local": [
+              0.007630407,
+              -0.017758509,
+              -0.009096339
+            ]
+          },
+          "start": 1.4,
+          "end": 3.5,
+          "maxDistanceMeters": 0.02,
+          "type": "shoulder_hold"
+        }
+      ],
+      "asset": "models/goalkeeper_hang.glb",
+      "frameCount": 157,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/goalkeeper_hang.webp",
+      "bytes": 875928,
+      "sha256": "3833d89682eb06efa9405bd56fab6cfb7ed90914fee76f469a3c0ee1f610ff87"
+    },
+    {
+      "id": "player_lift",
+      "label": "הרמת שחקן",
+      "duration": 5.6,
+      "actors": [
+        {
+          "id": "actor0",
+          "role": "carrier_left",
+          "rootNode": "actor0_Root",
+          "prefix": "actor0_"
+        },
+        {
+          "id": "actor1",
+          "role": "carrier_right",
+          "rootNode": "actor1_Root",
+          "prefix": "actor1_"
+        },
+        {
+          "id": "actor2",
+          "role": "scorer",
+          "rootNode": "actor2_Root",
+          "prefix": "actor2_"
+        }
+      ],
+      "events": [
+        {
+          "type": "lift",
+          "time": 1.5
+        },
+        {
+          "type": "lower",
+          "time": 3.8
+        }
+      ],
+      "supports": [
+        {
+          "actor": "actor0",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor0",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor1",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 0,
+          "end": 0.4,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "LeftFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 5.1,
+          "end": 5.6,
+          "mode": "plant"
+        },
+        {
+          "actor": "actor2",
+          "bone": "RightFoot",
+          "local": [
+            0,
+            -0.08,
+            0
+          ],
+          "start": 5.1,
+          "end": 5.6,
+          "mode": "plant"
+        }
+      ],
+      "contacts": [
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "RightUpLeg",
+            "local": [
+              -0.0577461587,
+              -0.0463299092,
+              0.0691030524
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support"
+        },
+        {
+          "a": {
+            "actor": "actor0",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "RightUpLeg",
+            "local": [
+              -0.013028539,
+              -0.0100752159,
+              -0.0798511576
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "LeftHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "LeftUpLeg",
+            "local": [
+              0.0577754908,
+              -0.0459334892,
+              0.0695839882
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support"
+        },
+        {
+          "a": {
+            "actor": "actor1",
+            "bone": "RightHand",
+            "local": [
+              0,
+              0,
+              0
+            ]
+          },
+          "b": {
+            "actor": "actor2",
+            "bone": "LeftUpLeg",
+            "local": [
+              0.0123384438,
+              -0.0077254937,
+              -0.0801253998
+            ]
+          },
+          "start": 1.5,
+          "end": 3.8,
+          "maxDistanceMeters": 0.02,
+          "type": "thigh_support"
+        }
+      ],
+      "asset": "models/player_lift.glb",
+      "frameCount": 169,
+      "nativeRate": 30,
+      "rootMotion": true,
+      "sheet": "sheets/player_lift.webp",
+      "bytes": 943680,
+      "sha256": "d8c9bb517c0a418cc905f2a861595eb944fc614e7f0c335670051a398d9e4c91"
+    }
+  ]
+}

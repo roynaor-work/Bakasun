@@ -1,0 +1,11 @@
+{
+  "name": "soccer-celebrations-v1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node source/author.mjs",
+    "qa": "node source/run-qa.mjs",
+    "surfaces": "node source/measure-surfaces.mjs",
+    "capture": "node source/capture.mjs"
+  }
+}
