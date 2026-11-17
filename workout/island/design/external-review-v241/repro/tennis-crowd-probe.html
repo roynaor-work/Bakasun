@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Tennis v25 optional crowd failure probe</title><body><p>External review: optional crowd failure</p><script type="module">
+import * as T from '/workout/island/vendor/three.module.js';
+import {GLTFLoader} from '/workout/island/vendor/GLTFLoader.js';
+import {createTennisV12Stadium} from '/workout/island/minigames/tennis-v12-stadium.mjs?v=island-v2-20261107-15';
+window.__unhandled=[];window.addEventListener('unhandledrejection',e=>{window.__unhandled.push(String(e.reason));e.preventDefault();});
+const config=(await (await fetch('/workout/island/data/config.json')).json()).minigames.tennis;
+const args={T,scene:new T.Scene(),renderer:{},hemi:new T.HemisphereLight(),sun:new T.DirectionalLight(),keep:x=>x,v7:{hideVenue(){},showVenue(){}},params:new URLSearchParams(),config,GLTFLoader,base:new URL('/workout/island/minigames/tennis-view.mjs',location.origin).href,camera:new T.PerspectiveCamera(),lateCrowd:true};
+window.__stadium=await createTennisV12Stadium(args);
+</script></body></html>

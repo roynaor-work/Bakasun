@@ -1,0 +1,1040 @@
+[
+  {
+    "name": "blank-unprotected-harness-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 0,
+    "violations": [],
+    "policyErrors": [],
+    "workers": []
+  },
+  {
+    "name": "blocked-inline",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [
+      {
+        "kind": "console",
+        "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-cVAaWWYW1oVQC3RctIjMK4G6R4J/M91Araj5YZ1BUZE='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+        "location": {
+          "url": "",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "observedAt": 1794927419734
+      },
+      {
+        "kind": "chromium-log",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-cVAaWWYW1oVQC3RctIjMK4G6R4J/M91Araj5YZ1BUZE='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+        "source": "security",
+        "lineNumber": 0,
+        "observedAt": 1794927419734
+      },
+      {
+        "kind": "chromium-audit",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "violatedDirective": "script-src-elem",
+        "isReportOnly": false,
+        "contentSecurityPolicyViolationType": "kInlineViolation",
+        "sourceCodeLocation": {
+          "scriptId": "15",
+          "url": "",
+          "lineNumber": 0,
+          "columnNumber": 117
+        },
+        "violatingNodeId": 1,
+        "observedAt": 1794927419734
+      },
+      {
+        "kind": "event",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "frameUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "blockedURI": "inline",
+        "effectiveDirective": "script-src-elem",
+        "violatedDirective": "script-src-elem",
+        "disposition": "enforce",
+        "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "documentURI": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "sourceFile": "",
+        "lineNumber": 1,
+        "columnNumber": 117,
+        "statusCode": 200,
+        "sample": "",
+        "observedAt": 1794927419746
+      }
+    ],
+    "policyErrors": [],
+    "workers": []
+  },
+  {
+    "name": "blocked-blob-worker",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [
+      {
+        "kind": "console",
+        "text": "Creating a worker from 'blob:http://127.0.0.1:39195/6c783d27-1203-429e-bc0a-02c33ef6693a' violates the following Content Security Policy directive: \"script-src 'self'\". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+        "location": {
+          "url": "",
+          "line": 2,
+          "column": 0,
+          "lineNumber": 2,
+          "columnNumber": 0
+        },
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "observedAt": 1794927420316
+      },
+      {
+        "kind": "chromium-log",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "text": "Creating a worker from 'blob:http://127.0.0.1:39195/6c783d27-1203-429e-bc0a-02c33ef6693a' violates the following Content Security Policy directive: \"script-src 'self'\". Note that 'worker-src' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+        "source": "security",
+        "lineNumber": 2,
+        "observedAt": 1794927420316
+      },
+      {
+        "kind": "chromium-audit",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "blockedURL": "blob",
+        "violatedDirective": "worker-src",
+        "isReportOnly": false,
+        "contentSecurityPolicyViolationType": "kURLViolation",
+        "sourceCodeLocation": {
+          "scriptId": "15",
+          "url": "",
+          "lineNumber": 2,
+          "columnNumber": 59
+        },
+        "observedAt": 1794927420316
+      },
+      {
+        "kind": "event",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "frameUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "blockedURI": "blob",
+        "effectiveDirective": "worker-src",
+        "violatedDirective": "worker-src",
+        "disposition": "enforce",
+        "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "documentURI": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "sourceFile": "",
+        "lineNumber": 3,
+        "columnNumber": 59,
+        "statusCode": 200,
+        "sample": "",
+        "observedAt": 1794927420322
+      }
+    ],
+    "policyErrors": [],
+    "workers": []
+  },
+  {
+    "name": "blocked-worker-startup-eval",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [
+      {
+        "kind": "worker-audit",
+        "workerUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-startup-worker.js",
+        "violatedDirective": "script-src",
+        "isReportOnly": false,
+        "contentSecurityPolicyViolationType": "kEvalViolation",
+        "sourceCodeLocation": {
+          "scriptId": "3",
+          "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-startup-worker.js",
+          "lineNumber": 0,
+          "columnNumber": 23
+        },
+        "observedAt": 1794927420765
+      }
+    ],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-startup-worker.js",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "blocked-child-frame-inline",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [
+      {
+        "kind": "console",
+        "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-qNOzl1u5z5CPLjyGFIg6ApYHQkJT6fQ6MYlEAychDtA='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+        "location": {
+          "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "observedAt": 1794927421227
+      },
+      {
+        "kind": "chromium-log",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'self''. Either the 'unsafe-inline' keyword, a hash ('sha256-qNOzl1u5z5CPLjyGFIg6ApYHQkJT6fQ6MYlEAychDtA='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked.",
+        "source": "security",
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+        "lineNumber": 0,
+        "observedAt": 1794927421227
+      },
+      {
+        "kind": "chromium-audit",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "violatedDirective": "script-src-elem",
+        "isReportOnly": false,
+        "contentSecurityPolicyViolationType": "kInlineViolation",
+        "sourceCodeLocation": {
+          "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "violatingNodeId": 2,
+        "observedAt": 1794927421235
+      },
+      {
+        "kind": "event",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "frameUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+        "blockedURI": "inline",
+        "effectiveDirective": "script-src-elem",
+        "violatedDirective": "script-src-elem",
+        "disposition": "enforce",
+        "originalPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "documentURI": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+        "sourceFile": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-child.html",
+        "lineNumber": 1,
+        "columnNumber": 0,
+        "statusCode": 200,
+        "sample": "",
+        "observedAt": 1794927421235
+      }
+    ],
+    "policyErrors": [],
+    "workers": []
+  },
+  {
+    "name": "report-only-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [
+      {
+        "kind": "console",
+        "text": "Loading the script 'http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-probe.js' violates the following Content Security Policy directive: \"script-src 'none'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.",
+        "location": {
+          "url": "",
+          "line": 0,
+          "column": 0,
+          "lineNumber": 0,
+          "columnNumber": 0
+        },
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "observedAt": 1794927421722
+      },
+      {
+        "kind": "chromium-log",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "text": "Loading the script 'http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-probe.js' violates the following Content Security Policy directive: \"script-src 'none'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The policy is report-only, so the violation has been logged but no further action has been taken.",
+        "source": "security",
+        "lineNumber": 0,
+        "observedAt": 1794927421722
+      },
+      {
+        "kind": "chromium-audit",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "blockedURL": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-probe.js",
+        "violatedDirective": "script-src-elem",
+        "isReportOnly": true,
+        "contentSecurityPolicyViolationType": "kURLViolation",
+        "sourceCodeLocation": {
+          "scriptId": "15",
+          "url": "",
+          "lineNumber": 0,
+          "columnNumber": 156
+        },
+        "observedAt": 1794927421722
+      },
+      {
+        "kind": "event",
+        "pageUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "frameUrl": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "blockedURI": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-probe.js",
+        "effectiveDirective": "script-src-elem",
+        "violatedDirective": "script-src-elem",
+        "disposition": "report",
+        "originalPolicy": "script-src 'none'",
+        "documentURI": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "sourceFile": "",
+        "lineNumber": 1,
+        "columnNumber": 156,
+        "statusCode": 200,
+        "sample": "",
+        "observedAt": 1794927421731
+      }
+    ],
+    "policyErrors": [],
+    "workers": []
+  },
+  {
+    "name": "different-harness-policy-is-failure",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [],
+    "policyErrors": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/tools/csp-fixture.html",
+        "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+        "actualPolicy": null,
+        "reason": "HTML response omitted the shipped CSP header"
+      }
+    ],
+    "workers": []
+  },
+  {
+    "name": "static-alpine-draco",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 1,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/alpine-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "alpine-session-start-result",
+    "phase": "countdown",
+    "loaded": true,
+    "error": null,
+    "metrics": {
+      "calls": 95,
+      "triangles": 405745,
+      "geometries": 105,
+      "textures": 27,
+      "props": 15,
+      "chunks": 51,
+      "visibleChunks": 9,
+      "coins": 5,
+      "trees": 210,
+      "nearTrees": 63,
+      "farTrees": 46,
+      "distantTrees": 101,
+      "shadowTrees": 19,
+      "treeVariants": 3,
+      "treeDeckClearance": 0.7,
+      "rocks": 11,
+      "fences": 56,
+      "designWorld": true,
+      "pack": {
+        "signs": 2,
+        "moguls": 10,
+        "iceWalls": 50,
+        "rockVariants": 2
+      },
+      "designModels": 7,
+      "designSurface": "ski-slope",
+      "background": "landscape",
+      "environment": {
+        "id": "sunset",
+        "backgrounds": [
+          "landscape"
+        ],
+        "atlases": [
+          "snow-flecks",
+          "powder-spray",
+          "landing-cloud"
+        ],
+        "decals": true,
+        "tower": false,
+        "snowNormal": true,
+        "markers": 23,
+        "towers": 0,
+        "decalQuads": 11,
+        "ribbons": 0,
+        "flecks": 48,
+        "spotLights": 0,
+        "landingActive": 0,
+        "powderActive": 0
+      },
+      "designAssets": {
+        "loaded": true,
+        "models": 7,
+        "textures": 4,
+        "pack": [
+          "finish-gate",
+          "ice-wall",
+          "mogul",
+          "rock-large",
+          "rock-small",
+          "snow-sign",
+          "start-gate"
+        ],
+        "powder": true,
+        "themeGates": 0,
+        "landmarks": 0,
+        "powderActive": 0
+      },
+      "quality": "high",
+      "disposed": false,
+      "mode": "model",
+      "grooves": "paired-skis",
+      "grooveCapacity": 4200,
+      "feel": {
+        "source": "design/feel/alpine.json",
+        "speedFraction": 0,
+        "fovAdd": 0,
+        "lineOpacity": 0,
+        "lineVisible": false,
+        "lineTrigger": false,
+        "lineDuration": 0.6,
+        "lineFraction": 0.12,
+        "carve": 0,
+        "lookAhead": 10,
+        "bank": 0,
+        "landingPulse": 0,
+        "landingShakeFraction": 0,
+        "landings": 0
+      },
+      "vfx": {
+        "active": 0,
+        "capacity": 3,
+        "textures": 3,
+        "textureBytes": 3145728,
+        "spawned": 0,
+        "cameraActive": false,
+        "cameraRuns": 0,
+        "cameraDuration": 1.5,
+        "sourceCameraDuration": 5.6,
+        "warmed": true,
+        "disposed": false
+      },
+      "character": {
+        "mode": "v7",
+        "fallbackReason": null,
+        "clips": 10,
+        "bones": 18,
+        "trianglesPerRider": 19916,
+        "lods": {
+          "player": 0,
+          "rival-1": 1,
+          "rival-2": 1,
+          "rival-3": 1,
+          "rival-4": 1,
+          "rival-5": 1
+        },
+        "loaded": [
+          0,
+          1
+        ],
+        "pending": [],
+        "deferredFailure": null,
+        "plan": {
+          "player": 0,
+          "rival": 1,
+          "now": [
+            0,
+            1
+          ]
+        },
+        "quality": "high",
+        "motionScale": 1,
+        "loadMs": 389.5,
+        "actors": 6
+      },
+      "motion": {
+        "state": "idle",
+        "clipTime": 0,
+        "sampledFrames": 5,
+        "bakedClips": 10,
+        "carveHeld": false,
+        "carveStrength": 0,
+        "lod": 0
+      },
+      "rockTexture": "loaded",
+      "mobileProfile": true,
+      "pixelRatio": 1,
+      "fov": 60,
+      "interpolation": true,
+      "lastSwitch": {
+        "quality": "high",
+        "pixelRatioMs": 0.2,
+        "shadowMs": 0.1,
+        "resizeMs": 0,
+        "totalMs": 0.3
+      }
+    }
+  },
+  {
+    "name": "alpine-session-start",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/alpine-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/alpine-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/alpine-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "hoops-v4-session-start-result",
+    "calls": 54,
+    "triangles": 145934,
+    "frameMs": 59.7,
+    "players": 10,
+    "avatars": 10,
+    "pending": 14,
+    "crowd": 0,
+    "crowdLevel": null,
+    "v5": false,
+    "v8": false,
+    "v8Motion": false,
+    "tall": false,
+    "quality": 2,
+    "textures": 39,
+    "geometries": 65,
+    "landscape": true,
+    "dpr": 1,
+    "bufferWidth": 844,
+    "bufferHeight": 390,
+    "style": "v2-broadcast",
+    "characterVersion": 4,
+    "athleteBody": false,
+    "motionSource": null,
+    "dunks": null,
+    "retargetMs": null,
+    "lods": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "arenaSource": "design/hoops/lod-v4/hoops-v4-arena-lod.glb",
+    "crowd3d": true,
+    "v4Fallbacks": [],
+    "clipCount": 25,
+    "arenaVersion": 2,
+    "baked": [
+      {
+        "name": "beams",
+        "matched": 792,
+        "total": 792,
+        "applied": true
+      },
+      {
+        "name": "roof",
+        "matched": 384,
+        "total": 384,
+        "applied": true
+      },
+      {
+        "name": "scoreboard",
+        "matched": 720,
+        "total": 720,
+        "applied": true
+      }
+    ],
+    "reflection": {
+      "width": 304,
+      "height": 140,
+      "calls": 23,
+      "triangles": 57079
+    },
+    "feel": {
+      "authored": true,
+      "queued": 0,
+      "fov": 0,
+      "seen": 0
+    },
+    "vfx": {
+      "missingAtlases": [],
+      "sprites": 0,
+      "residentAtlases": 0,
+      "loadedAtlases": 5,
+      "reducedMotion": false
+    },
+    "show": {
+      "autoReplays": 0,
+      "autoReplaysDone": 0,
+      "skipped": 0,
+      "liveCuts": 0,
+      "casts": 0,
+      "stand": 0,
+      "groan": 0,
+      "wave": false,
+      "cut": false
+    },
+    "motion": [
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ],
+    "v241": {
+      "flags": {
+        "whistle": true,
+        "crowd3d": "budget",
+        "bodyV2": true,
+        "motionV13": true,
+        "referee": true
+      },
+      "crowd3d": {
+        "mode": "budget",
+        "status": "no-v8-hall",
+        "error": null,
+        "visible": false,
+        "cardsHidden": 0
+      },
+      "bodyV2": false,
+      "motionV13": null,
+      "referee": {
+        "status": "ready",
+        "error": null,
+        "gestures": {},
+        "triangles": 1225,
+        "draws": 2,
+        "x": 0,
+        "gesture": null
+      }
+    }
+  },
+  {
+    "name": "hoops-v4-session-start",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "hoops-v4-fallback-result",
+    "calls": 41,
+    "triangles": 59377,
+    "frameMs": 84.9,
+    "players": 10,
+    "avatars": 10,
+    "pending": 14,
+    "crowd": 986,
+    "crowdLevel": null,
+    "v5": false,
+    "v8": false,
+    "v8Motion": false,
+    "tall": false,
+    "quality": 2,
+    "textures": 38,
+    "geometries": 54,
+    "landscape": false,
+    "dpr": 1,
+    "bufferWidth": 390,
+    "bufferHeight": 844,
+    "style": "v2-broadcast",
+    "characterVersion": 1,
+    "athleteBody": false,
+    "motionSource": null,
+    "dunks": null,
+    "retargetMs": null,
+    "lods": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "arenaSource": "design/models2/basketball-arena.glb",
+    "crowd3d": false,
+    "v4Fallbacks": [
+      "arena",
+      "players"
+    ],
+    "clipCount": 25,
+    "arenaVersion": 2,
+    "baked": [
+      {
+        "name": "beams",
+        "matched": 792,
+        "total": 792,
+        "applied": true
+      },
+      {
+        "name": "roof",
+        "matched": 384,
+        "total": 384,
+        "applied": true
+      },
+      {
+        "name": "scoreboard",
+        "matched": 720,
+        "total": 720,
+        "applied": true
+      }
+    ],
+    "reflection": {
+      "width": 140,
+      "height": 303,
+      "calls": 22,
+      "triangles": 34561
+    },
+    "feel": {
+      "authored": true,
+      "queued": 0,
+      "fov": 0,
+      "seen": 0
+    },
+    "vfx": {
+      "missingAtlases": [],
+      "sprites": 0,
+      "residentAtlases": 0,
+      "loadedAtlases": 5,
+      "reducedMotion": false
+    },
+    "show": {
+      "autoReplays": 0,
+      "autoReplaysDone": 0,
+      "skipped": 0,
+      "liveCuts": 0,
+      "casts": 0,
+      "stand": 0,
+      "groan": 0,
+      "wave": false,
+      "cut": false
+    },
+    "motion": [
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ],
+    "v241": {
+      "flags": {
+        "whistle": true,
+        "crowd3d": "budget",
+        "bodyV2": true,
+        "motionV13": true,
+        "referee": true
+      },
+      "crowd3d": {
+        "mode": "budget",
+        "status": "no-v8-hall",
+        "error": null,
+        "visible": false,
+        "cardsHidden": 0
+      },
+      "bodyV2": false,
+      "motionV13": null,
+      "referee": {
+        "status": "ready",
+        "error": null,
+        "gestures": {},
+        "triangles": 1225,
+        "draws": 2,
+        "x": 0,
+        "gesture": null
+      }
+    }
+  },
+  {
+    "name": "hoops-v4-fallback",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "hoops-v7-session-start-result",
+    "calls": 60,
+    "triangles": 119512,
+    "frameMs": 27.3,
+    "players": 10,
+    "avatars": 10,
+    "pending": 14,
+    "crowd": 2762,
+    "crowdLevel": 2,
+    "v5": true,
+    "v8": false,
+    "v8Motion": false,
+    "tall": false,
+    "quality": 2,
+    "textures": 67,
+    "geometries": 66,
+    "landscape": true,
+    "dpr": 1,
+    "bufferWidth": 844,
+    "bufferHeight": 390,
+    "style": "v2-broadcast",
+    "characterVersion": 7,
+    "athleteBody": false,
+    "motionSource": null,
+    "dunks": null,
+    "retargetMs": null,
+    "lods": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "arenaSource": "design/hoops-v5/models/",
+    "crowd3d": true,
+    "v4Fallbacks": [],
+    "clipCount": 35,
+    "arenaVersion": 3,
+    "baked": [],
+    "reflection": {
+      "width": 304,
+      "height": 140,
+      "calls": 36,
+      "triangles": 78923
+    },
+    "feel": {
+      "authored": true,
+      "queued": 0,
+      "fov": 0,
+      "seen": 0
+    },
+    "vfx": {
+      "missingAtlases": [],
+      "sprites": 0,
+      "residentAtlases": 0,
+      "loadedAtlases": 5,
+      "reducedMotion": false
+    },
+    "show": {
+      "autoReplays": 0,
+      "autoReplaysDone": 0,
+      "skipped": 0,
+      "liveCuts": 0,
+      "casts": 0,
+      "stand": 0,
+      "groan": 0,
+      "wave": false,
+      "cut": false
+    },
+    "motion": [
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle",
+      "idle"
+    ],
+    "v241": {
+      "flags": {
+        "whistle": true,
+        "crowd3d": "budget",
+        "bodyV2": true,
+        "motionV13": true,
+        "referee": true
+      },
+      "crowd3d": {
+        "mode": "budget",
+        "status": "no-v8-hall",
+        "error": null,
+        "visible": false,
+        "cardsHidden": 0
+      },
+      "bodyV2": false,
+      "motionV13": null,
+      "referee": {
+        "status": "ready",
+        "error": null,
+        "gestures": {},
+        "triangles": 1225,
+        "draws": 2,
+        "x": 0,
+        "gesture": null
+      }
+    }
+  },
+  {
+    "name": "hoops-v7-session-start",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-meshopt-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  },
+  {
+    "name": "hoops-v7-fallback-v4",
+    "expectedPolicy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+    "htmlResponsesSeen": 2,
+    "violations": [],
+    "policyErrors": [],
+    "workers": [
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      },
+      {
+        "url": "http://127.0.0.1:39195/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+        "hooked": true,
+        "closed": true,
+        "waitingForDebugger": true,
+        "domains": {
+          "Log.enable": true,
+          "Audits.enable": true
+        }
+      }
+    ]
+  }
+]

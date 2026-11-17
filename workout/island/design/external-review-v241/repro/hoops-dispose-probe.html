@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>Hoops GPU disposal probe</title><canvas width="64" height="64"></canvas><script type="module">
+import * as T from '../../../vendor/three.module.js';
+import {GLTFLoader} from '../../../vendor/GLTFLoader.js';
+import {loadHoopsGLTF} from '../../../minigames/hoops-gltf.mjs';
+import {seatingLayout} from '../../../minigames/hoops-v8-venue.mjs';
+import {createHoopsCrowd3d,hoopsCrowdSeats,hoopsCrowdBudget} from '../../../minigames/hoops-crowd3d.mjs';
+import {createHoopsReferee} from '../../../minigames/hoops-referee.mjs';
+const renderer=new T.WebGLRenderer({canvas:document.querySelector('canvas')});renderer.setSize(64,64,false);
+const camera=new T.PerspectiveCamera(50,1,.1,200);camera.position.set(0,5,-20);camera.lookAt(0,1,0);camera.updateMatrixWorld();
+const scene=new T.Scene();scene.add(new T.HemisphereLight(0xffffff,0x777777,3));const loader=new GLTFLoader(),load=url=>loadHoopsGLTF(loader,url),trace=[];
+for(let i=0;i<3;i++){
+ const [crowd,ref]=await Promise.all([createHoopsCrowd3d({T,GLTFLoader,load,seats:hoopsCrowdSeats(seatingLayout(0)),mode:'budget'}),createHoopsReferee({T,load,court:{hx:14.325,hz:7.62}})]);
+ scene.add(crowd.root,ref.group);crowd.update({seconds:1,camera,budget:hoopsCrowdBudget(),ballPosition:new T.Vector3()});ref.update(1/60,{ball:new T.Vector3()});renderer.render(scene,camera);renderer.getContext().finish();
+ const loaded={...renderer.info.memory};crowd.dispose();crowd.dispose();ref.dispose();ref.dispose();renderer.render(scene,camera);renderer.getContext().finish();trace.push({cycle:i+1,loaded,afterDispose:{...renderer.info.memory},remainingObjects:scene.children.length});
+}
+window.results=trace;renderer.dispose();window.ready=true;
+</script>

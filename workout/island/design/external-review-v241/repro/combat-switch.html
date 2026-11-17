@@ -1,0 +1,5 @@
+<!doctype html><html lang="he"><meta charset="utf-8"><title>Combat switch review</title><body><div id="controls"><button id="pass"><svg></svg></button></div><script type="module">
+import {createAlienSpecialSwitch} from '../../../minigames/alien-v25-ui.mjs';
+const controls=document.querySelector('#controls'),special=document.querySelector('#pass');
+window.sw=createAlienSpecialSwitch({controls,special,missileIcon:special.querySelector('svg')});window.sw.setEnabled(true);window.sw.update({special:0,specialAmmo:[2,3,1]});
+</script></body></html>

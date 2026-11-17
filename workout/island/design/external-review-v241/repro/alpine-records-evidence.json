@@ -1,0 +1,60 @@
+{
+  "old": {
+    "runId": "alpine-pine-a-7-1",
+    "ms": 59931,
+    "objects": 127
+  },
+  "newer": {
+    "runId": "alpine-pine-a-8-1",
+    "ms": 56171,
+    "objects": 175
+  },
+  "loadedRecordFromOtherRules": {
+    "ms": 59931,
+    "rank": 2
+  },
+  "loadedGhostMs": 59931,
+  "recording": {
+    "recorded": true,
+    "newBest": true,
+    "previous": {
+      "ms": 59931,
+      "rank": 2
+    },
+    "best": {
+      "ms": 56171,
+      "rank": 1
+    }
+  },
+  "ghostIntersectsNewHazards": [
+    {
+      "object": {
+        "type": "rock",
+        "x": -2.39,
+        "s": 835.73,
+        "radius": 0.78,
+        "id": "pine-a-93"
+      },
+      "ghost": {
+        "s": 835.7999877929688,
+        "x": -3.4800000190734863,
+        "height": 0
+      }
+    },
+    {
+      "object": {
+        "type": "rock",
+        "x": -4.23,
+        "s": 884.75,
+        "radius": 0.76,
+        "id": "pine-a-97"
+      },
+      "ghost": {
+        "s": 885.2999877929688,
+        "x": -4.739999771118164,
+        "height": 0
+      }
+    }
+  ],
+  "note": "Different session seeds: no duplicate-run rejection is attributed to v24.1."
+}

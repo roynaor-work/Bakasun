@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8"><title>Soccer v24.1 read-only motion reproduction</title>
+<script type="module">
+import * as T from '../../../vendor/three.module.js';
+import {loadDesignCharacters} from '../../../minigames/soccer-design-character.mjs';
+import {expandSoccerConfig} from '../../../minigames/soccer-squad.mjs';
+import {applySoccerFull} from '../../../minigames/soccer-full.mjs';
+import {createSoccer} from '../../../minigames/soccer.mjs';
+window.probe=async()=>{
+ const base=(await(await fetch('../../../data/config.json')).json()).minigames.soccer;
+ const config=expandSoccerConfig(applySoccerFull(base));config.opponent=base.opponents.teams[0];
+ const game=createSoccer({config,seed:19,stage:3});const s=game.getState();s.phase='playing';
+ const result=await loadDesignCharacters({config,roster:config.players.roster,scene:new T.Scene()});
+ const field=s.players.find(p=>p.role!=='keeper'),keeper=s.players.find(p=>p.role==='keeper');
+ const collect=(p,mode,timer,value)=>{
+  const c=result.characters[p.id],rows=[];
+  Object.assign(p,{vx:0,vz:0,fx:1,fz:0,slideKind:'straight',diveZ:-1,recover:0});
+  for(let tick=0;tick<5;tick++){
+   p[timer]=value-tick/60;c.update(p,s,{mode,height:0},1/60);c.root.updateMatrixWorld(true);
+   let nonfinite=0;c.root.traverse(o=>{if(o.isBone&&(!o.quaternion.toArray().every(Number.isFinite)||!o.position.toArray().every(Number.isFinite)))nonfinite++;});
+   rows.push({tick,state:c.motion.state,time:c.motion.actions[c.motion.state]?.time,finiteTime:Number.isFinite(c.motion.actions[c.motion.state]?.time),nonfiniteBones:nonfinite,slide:c.motion.slide,dive:c.motion.dive});
+  }
+  return rows;
+ };
+ const out={query:location.search,loaded:result.metrics.kind,body:result.metrics.characterSet,slide:collect(field,'slide','slideTime',.35),dive:collect(keeper,'dive','diveTime',.65)};
+ result.dispose();return out;
+};
+</script>

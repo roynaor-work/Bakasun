@@ -1,0 +1,133 @@
+{
+  "commit": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "assetLoader": {
+    "online-default": {
+      "bodyVersion": "v2",
+      "v22": true,
+      "bodyV2": true,
+      "motionV13": true,
+      "fallbacks": []
+    },
+    "online-rollback": {
+      "bodyVersion": "v22",
+      "v22": true,
+      "bodyV2": false,
+      "motionV13": false,
+      "fallbacks": []
+    },
+    "cached-manifest-rollback": {
+      "bodyVersion": "v10",
+      "v22": false,
+      "bodyV2": false,
+      "motionV13": false,
+      "fallbacks": [
+        {
+          "what": "athlete-body-v22",
+          "error": "TypeError: Failed to fetch"
+        }
+      ]
+    }
+  },
+  "fakeAnimation": [
+    {
+      "query": "hoopsMotionV13=0",
+      "bodyVersion": "v2",
+      "motion": "jump_shot",
+      "hand": [
+        -1.0423536353222533,
+        1.3710351921024864,
+        0.2859212535632812
+      ],
+      "head": [
+        -0.9020510172200408,
+        1.4200315236568783,
+        0.037823983063981034
+      ],
+      "chest": [
+        -0.9008869288757441,
+        1.1712626462744384,
+        0.015717469732215952
+      ],
+      "handBelowChest": -0.19977254582804793
+    },
+    {
+      "query": "",
+      "bodyVersion": "v2",
+      "motion": "jump_shot",
+      "hand": [
+        0.8298265346664195,
+        1.066568941291561,
+        0.3085388405925193
+      ],
+      "head": [
+        0.901025962053033,
+        1.4506311096440117,
+        0.025786804906595046
+      ],
+      "chest": [
+        0.9005021017797036,
+        1.2010750964446186,
+        0.013277287727572628
+      ],
+      "handBelowChest": 0.13450615515305753
+    }
+  ],
+  "dispose": [
+    {
+      "cycle": 1,
+      "loaded": {
+        "geometries": 15,
+        "textures": 2
+      },
+      "afterDispose": {
+        "geometries": 0,
+        "textures": 0
+      },
+      "remainingObjects": 1
+    },
+    {
+      "cycle": 2,
+      "loaded": {
+        "geometries": 15,
+        "textures": 2
+      },
+      "afterDispose": {
+        "geometries": 0,
+        "textures": 0
+      },
+      "remainingObjects": 1
+    },
+    {
+      "cycle": 3,
+      "loaded": {
+        "geometries": 15,
+        "textures": 2
+      },
+      "afterDispose": {
+        "geometries": 0,
+        "textures": 0
+      },
+      "remainingObjects": 1
+    }
+  ],
+  "integration": {
+    "viewport": "844x390",
+    "quality": 2,
+    "pageErrors": [],
+    "bodyV2": true,
+    "motionV13": true,
+    "calls": 61,
+    "triangles": 94212,
+    "crowd": {
+      "visibleFans": 377,
+      "triangles": 20196,
+      "draws": 12,
+      "budget": 24000
+    },
+    "referee": {
+      "triangles": 1225,
+      "draws": 2
+    },
+    "performanceLimitation": "Chromium SwiftShader on shared host; timing does not establish phone FPS"
+  }
+}

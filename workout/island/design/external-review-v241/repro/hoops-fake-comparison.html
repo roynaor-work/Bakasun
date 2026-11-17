@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><title>Hoops fake comparison</title><style>body{margin:0;background:#151923;color:white;font:18px Arial}header{display:flex;text-align:center}header span{width:50%}canvas{display:block;width:844px;height:650px}</style><header><span>v24.1 + hoopsMotionV13=0 — fake peak</span><span>v24.1 default — fake peak</span></header><canvas width="844" height="650"></canvas><script type="module">
+import * as T from '../../../vendor/three.module.js';
+import {loadAthleteHoops} from '../../../minigames/hoops-athlete.mjs';
+import {createAvatarTall} from '../../../minigames/hoops-tall.mjs';
+const cfg=(await(await fetch('../../../data/config.json')).json()).minigames.streetSlam;
+const scene=new T.Scene();scene.background=new T.Color('#151923');scene.add(new T.HemisphereLight(0xffffff,0x555555,2));const dl=new T.DirectionalLight(0xffffff,3);dl.position.set(3,5,4);scene.add(dl);
+const camera=new T.PerspectiveCamera(38,844/650,.1,20);camera.position.set(0,1.15,4.6);camera.lookAt(0,1.05,0);
+const renderer=new T.WebGLRenderer({canvas:document.querySelector('canvas'),antialias:true});renderer.setSize(844,650,false);renderer.outputColorSpace=T.SRGBColorSpace;
+const observations=[];
+for(const [i,query]of ['hoopsMotionV13=0',''].entries()){
+ const assets=await loadAthleteHoops(cfg.assets,new URL('../../../',location.href),null,{params:new URLSearchParams(query)});
+ const av=createAvatarTall(assets,{id:'review-'+i,pos:'PG',number:4,ratings:{height:188}},{primary:'#2b7bc7',trim:'#ffffff'});av.root.position.x=i===0?-.9:.9;scene.add(av.root);
+ const p={vx:0,vz:0,face:0,hasBall:true,dribbling:false,act:'fake',actT:.26,y:0};
+ for(let k=0;k<16;k++)av.pose({...p,actT:k/60},{},1/60);av.pose(p,{},1/60);scene.updateMatrixWorld(true);
+ const hand=new T.Vector3(),head=new T.Vector3(),chest=new T.Vector3();av.hands.r.getWorldPosition(hand);av.root.getObjectByName('Head').getWorldPosition(head);av.root.getObjectByName('Chest').getWorldPosition(chest);
+ const ball=new T.Mesh(new T.SphereGeometry(.12,16,12),new T.MeshStandardMaterial({color:'#da7930'}));const other=new T.Vector3();av.hands.l.getWorldPosition(other);ball.position.copy(hand).add(other).multiplyScalar(.5);ball.position.y+=.02;ball.position.z+=.1;scene.add(ball);
+ observations.push({query,bodyVersion:assets.bodyVersion,motion:av.motionState,hand:hand.toArray(),head:head.toArray(),chest:chest.toArray(),handBelowChest:chest.y-hand.y});
+}
+renderer.render(scene,camera);window.observations=observations;window.ready=true;
+</script>

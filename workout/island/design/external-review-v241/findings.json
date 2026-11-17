@@ -1,0 +1,683 @@
+{
+  "schema_version": 1,
+  "review": {
+    "repository": "roynaor-work/Bakasun",
+    "branch": "codex/external-review-v241",
+    "reviewed_merge": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+    "first_parent": "11fef2fb98eec4173381346caee94f2930f9cffa",
+    "source_head": "63d8937eb893f5ba977f52fb39ac7668b1762ecf",
+    "pull_request": 461,
+    "release": "island-v2-20261107-15",
+    "date": "2026-11-17",
+    "timezone": "Asia/Jerusalem",
+    "source_changes_applied": false,
+    "allowed_output_directory": "workout/island/design/external-review-v241",
+    "changed_files_in_reviewed_pr": 696,
+    "method": "parallel static review, first-parent comparisons, deterministic real-model probes, actual Chromium integration, failure injection, fresh-cache offline and bounded GPU disposal cycles"
+  },
+  "summary": {
+    "total": 16,
+    "high": 0,
+    "medium": 12,
+    "low": 4
+  },
+  "findings": [
+    {
+      "id": "V241-001",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "fireRescue",
+      "classification": "introduced",
+      "title": "כשל בטעינת החדר הראשון מקפיא את שלב הכניסה",
+      "location": {
+        "path": "workout/island/minigames/fire-v24-session.mjs",
+        "line_start": 95,
+        "line_end": 98
+      },
+      "observed": "חסימת living-room.glb בכניסה לשלב 3 משאירה insideReady=false ו-insideFailed=true; הרחוב מושהה והטקסט „נכנסים לבניין” נשאר. במעטפת המלאה outerLoadState הוא ready ואין ממשק התאוששות, ולכן ההמתנה אינה נפתרת.",
+      "expected": "להציג ניסיון חוזר או גרסה קלה, או לחזור לרחוב תוך שחרור ההשהיה.",
+      "suggested_fix": "לטפל מפורשות ב-loadFailed ובבקשה שנתקעה; לסגור את ה-interior ולקרוא onDone עם שגיאה או להציע ניסיון חוזר. העברת ready החוצה בלבד אינה מפעילה מחדש את ה-watcher שכבר הסתיים.",
+      "test_gap": "הבדיקות בודקות זרימה ומודל תקינים ואינן מפילות GLB חובה לאחר שהרחוב כבר הודיע ready.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/fire-first-room-shell.py",
+          "python3 workout/island/design/external-review-v241/repro/fire-interior-failures.py"
+        ],
+        "steps": [
+          "להיכנס לשלב כיבוי 3 עם מטמון קר.",
+          "להגיע לבניין ולהיכנס; להכשיל את assets/fire-v24/rooms/living-room.glb.",
+          "להמתין: ההנחיה והרחוב נשארים קפואים."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/fire-first-room-shell.py": 0,
+          "python3 workout/island/design/external-review-v241/repro/fire-interior-failures.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/fire-first-room-shell.json",
+        "workout/island/design/external-review-v241/repro/fire-first-room-failed-shell.png",
+        "workout/island/design/external-review-v241/repro/fire-interior-failures.jsonl"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-002",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "fireRescue",
+      "classification": "introduced",
+      "title": "אובדן WebGL בחדר משאיר מסך שחור והשעון ממשיך",
+      "location": {
+        "path": "workout/island/minigames/fire-v24-session.mjs",
+        "line_start": 96,
+        "line_end": 98
+      },
+      "observed": "לאחר WEBGL_lose_context הקנבס שחור, אבל ready=true ו-loadFailed=false. בחמש שניות בדיקה השלב נכנס ל-play ונותרו כ-48 מתוך 50 שניות, ללא fallback. אין חריגת render שעליה ה-catch יכול להסתמך.",
+      "expected": "לעצור את שעון החדר ולטפל בשחזור ההקשר, ניסיון חוזר או מעבר לגרסה קלה.",
+      "suggested_fix": "לחבר webglcontextlost/webglcontextrestored ל-lifecycle של החדר, להשהות את המודל בזמן אובדן ההקשר ולנקות את המאזינים ב-dispose. להחיל חוזה התאוששות דומה לרחוב הקיים.",
+      "test_gap": "אין בדיקה של אובדן הקשר בזמן משחק בחדר החדש.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/fire-context-loss.py"
+        ],
+        "steps": [
+          "להיכנס לחדר תלת-ממדי טעון.",
+          "להפעיל את הרחבת WEBGL_lose_context על .fire-v24-canvas.",
+          "להמתין חמש שניות ולבדוק שהשעון יורד מול קנבס שחור."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/fire-context-loss.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/fire-context-loss.json",
+        "workout/island/design/external-review-v241/repro/fire-context-lost.png"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-003",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "fireRescue",
+      "classification": "introduced",
+      "title": "אי אפשר לסגור את שיעור הכניסה הראשון במקלדת",
+      "location": {
+        "path": "workout/island/minigames/fire-v24-session.mjs",
+        "line_start": 55,
+        "line_end": 55
+      },
+      "observed": "כרטיס ההדרכה הוא div עם role=dialog ומאזין pointerdown בלבד. אין בו כפתור או tabindex; חמישה מחזורי Tab/Enter/Space משאירים tutorialOpen=true וזמן מודל 0. מסלול הכניסה הראשון אינו מתקדם.",
+      "expected": "כפתור המשך נגיש למיקוד, הפעלה ב-Enter/Space והעברת מיקוד מסודרת למשחק.",
+      "suggested_fix": "להוסיף כפתור המשך אמיתי עם click וניהול מיקוד. לספק גם קלט מקלדת לכיוון ולחילוץ בחדר.",
+      "test_gap": "השיעור נבדק בקלט מצביע בלבד; לא נבדקת הפעלה סמנטית או מקלדת.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/fire-keyboard.py"
+        ],
+        "steps": [
+          "להיכנס לבניין בשלב 3 עד פתיחת שלושת שלבי ההדרכה.",
+          "להשתמש רק ב-Tab, Enter ו-Space.",
+          "לבדוק שהכרטיס נשאר ושאין פקד המשך בר מיקוד."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/fire-keyboard.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/fire-keyboard.json",
+        "workout/island/design/external-review-v241/repro/fire-keyboard-tutorial.png"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-004",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "fireRescue",
+      "classification": "introduced",
+      "title": "חדר המשך מתחיל מול הגאומטריה והחבר של החדר הקודם",
+      "location": {
+        "path": "workout/island/minigames/fire-v24-scene.mjs",
+        "line_start": 150,
+        "line_end": 150
+      },
+      "observed": "בשלב 9, לאחר חדר המסדרון, כשל ב-living-room.glb משאיר ready=true ו-loadFailed=false. המודל כבר living/girl והשעון יורד, בעוד הגאומטריה, ה-picking והחתול הם מהמסדרון הקודם.",
+      "expected": "להשהות את המעבר ואת השעון עד שהחדר והחבר הבאים נטענו, ולהציג התאוששות בכשל.",
+      "suggested_fix": "להפוך את טעינת החדר למחסום מפורש ב-session; להציב ready=false בזמן מעבר, להמתין ל-room ול-friend, להעביר שגיאה ולאפשר ניסיון חוזר גם אחרי Promise שנדחה.",
+      "test_gap": "הבדיקות אינן מעכבות או מכשילות נכס בחדר השני, ואינן משוות בין המודל לבין root המוצג.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/fire-interior-failures.py"
+        ],
+        "steps": [
+          "להתחיל שלב 9 ולאפשר למסדרון ולחתול להיטען.",
+          "להכשיל או לעכב את living-room.glb לחדר הבא.",
+          "לסיים את שתי השריפות וחילוץ החתול; לראות שהמודל מתקדם לסלון/ילדה בזמן שמוצגים מסדרון/חתול."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/fire-interior-failures.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/fire-interior-failures.jsonl",
+        "workout/island/design/external-review-v241/repro/fire-later-room-failed.png"
+      ],
+      "notes": [
+        "השחזור מסיים את החדר הראשון ומאיץ זמן דרך API המודל האמיתי. זהו שחזור integration ממוקד; אינו ניצחון קמפיין מלא במגע."
+      ]
+    },
+    {
+      "id": "V241-005",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "soccer",
+      "classification": "introduced",
+      "title": "בחירת עף או מספרת להגבהה ברחבה מוחלפת בנגיחה",
+      "location": {
+        "path": "workout/island/minigames/soccer.mjs",
+        "line_start": 818,
+        "line_end": 819
+      },
+      "observed": "הגבהה פיזית לחבר ברחבה מציעה header+volley או header+scissor. הבחירה מתחמשת נכון, אך passTarget.kind=loft מפעיל auto-header קודם. באותו מצב ללא passTarget מתקבלת הבעיטה שנבחרה.",
+      "expected": "לבחירה מפורשת של המשתמש תהיה עדיפות על assistance ועל ריצת המקבל האוטומטית.",
+      "suggested_fix": "להחריג בחירה חמושה של volley/scissor מן ה-auto-header, ולהקדים armed-air tracking לריצת passTarget. guard של הנגיחה לבדו אינו מספיק למספרת.",
+      "test_gap": "incoming() בטסט החדש מציב את המקבל מחוץ לרחבה ואינו יוצר passTarget של הגבהה, כך שמסלול ההתנגשות אינו נבחן.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs"
+        ],
+        "steps": [
+          "השחזור משתמש ב-stage 4, seed 5 ובמקבל ב-(42,0).",
+          "להגביה מ-(30,3) ל-(42.5,0.2) במשך 1.15 או 1.4 שניות.",
+          "לבחור volley/scissor ולהשוות את האירוע שנפלט למצב ללא passTarget."
+        ],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs": 1
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/soccer-air-choice-override.mjs",
+        "workout/island/design/external-review-v241/repro/soccer-air-choice-override.output.json",
+        "workout/island/design/external-review-v241/repro/soccer-air-choice-override.failure.txt",
+        "workout/island/design/external-review-v241/repro/soccer-air-choice-override.candidate.output.json"
+      ],
+      "notes": [
+        "אפשר לבדוק תיקון מוצע בזיכרון בלבד עם --simulate-fix; שום קובץ מקור אינו נכתב."
+      ]
+    },
+    {
+      "id": "V241-006",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "soccer",
+      "classification": "introduced",
+      "title": "שעון אנימציית ההחלקה נהיה NaN מהפריים השני",
+      "location": {
+        "path": "workout/island/minigames/soccer-design-character.mjs",
+        "line_start": 376,
+        "line_end": 379
+      },
+      "observed": "הכניסה מגדירה slide.v241, אך dispatch ההמשך בודק רק slide.v24 ונופל לטיימליין הישן, שמכפיל ב-slideSeconds חסר. time נהיה NaN בעדכון השני. בצינור הגוף האמיתי Hips נשאר באותו מיקום וסיבוב בטיקים 10,15,20.",
+      "expected": "אנימציית ההחלקה תתקדם בזמנים סופיים דרך מגע, נחיתה וקימה.",
+      "suggested_fix": "להקדים slide.v241?slideTimelineV241 ב-dispatch המתמשך, ולבדוק בקר אמיתי לאורך שני פריימים לפחות והמשך לקימה.",
+      "test_gap": "הטסטים מאמתים metadata וטיימליין טהור; tools/soccer-v241-pops מחשב זמני דגימה בעצמו ואינו מפעיל את ה-dispatch השבור.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs",
+          "python3 workout/island/design/external-review-v241/repro/soccer-view-slide-pose.py"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs": 1,
+          "python3 workout/island/design/external-review-v241/repro/soccer-view-slide-pose.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/soccer-view-slide-timeline.mjs",
+        "workout/island/design/external-review-v241/repro/soccer-view-browser.log",
+        "workout/island/design/external-review-v241/repro/soccer-view-slide-pose.log"
+      ],
+      "notes": [
+        "הוכחה קפיאה בפוזה, לא היעלמות דמות ולא עצמות עם ערכים לא סופיים. ?soccerTackleV2=0 או ?soccerV241=0 מחזירים את המסלול הישן."
+      ]
+    },
+    {
+      "id": "V241-007",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "soccer",
+      "classification": "introduced",
+      "title": "זינוק השוער החדש נקטע אחרי פריים אחד",
+      "location": {
+        "path": "workout/island/minigames/soccer-design-character.mjs",
+        "line_start": 419,
+        "line_end": 421
+      },
+      "observed": "v241_keeper_dive_* אינו מוגן מפני ענף locomotion; בעדכון השני, כש-diveTime עדיין כ-0.633 שניות, המצב מוחלף ל-v9_goalkeeper_ready ו-dive נמחק. אותו probe עם rollback ממשיך את הזינוק הישן בכל חמשת הפריימים.",
+      "expected": "הזינוק יישאר פעיל עד מגע, נחיתה וקימה לפי תוכנית הזינוק.",
+      "suggested_fix": "להגן על active dive עד stand לפי מצב מפורש או dive.name, ולא לפי רשימת prefixes שאינה כוללת v241. לבדוק כמה פריימי dive ולא רק בחירת קליפ ראשונית.",
+      "test_gap": "נבדקים שם הקליפ והנתונים שלו, אך לא החזקת המצב דרך עדכון שני של בקר התנועה.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs",
+          "python3 workout/island/design/external-review-v241/repro/soccer-view-browser.py"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs": 1,
+          "python3 workout/island/design/external-review-v241/repro/soccer-view-browser.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/soccer-view-keeper-dive.mjs",
+        "workout/island/design/external-review-v241/repro/soccer-view-browser.log"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-008",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "navalDuel",
+      "classification": "introduced",
+      "title": "אספקה ותיקון מפסיקים לעבוד בסיום האווירי בספינות",
+      "location": {
+        "path": "workout/island/minigames/naval.mjs",
+        "line_start": 507,
+        "line_end": 509
+      },
+      "observed": "return מוקדם ב-airFinale מדלג על יצירה ואיסוף מצופים ועל פעולות תיקון. בשלב 3, seed 5, הוולקן ריק והצי הוטבע; הספינה מגיעה למרחק 0.02249 ממצוף שרדיוס איסופו 16, אבל החגורה נשארת 0. גם שלושה מטעני תיקון אינם נצרכים. המסוק ממשיך לפגוע.",
+      "expected": "כל עוד הקרב פעיל וההנחיה דורשת להפיל את המסוק, אספקה ותיקון יישארו פעילים.",
+      "suggested_fix": "להשתמש ב-airFinale כשער לסיום השלב ולהמשיך פעולות קרב, תחזוקה ואספקה; להפסיק רק יצירת צי/גלים חדשים ולהקפיא את השעון המתאים.",
+      "test_gap": "הטסט החדש נכנס ל-finale עם חגורה שאינה ריקה ואינו מנסה לאסוף מצוף או לתקן.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs"
+        ],
+        "steps": [
+          "בשלב 3, seed 5, להחזיק וולקן הרחק מהמטרות עד 18.1 שניות ולרוקן 160 כדורים.",
+          "להטביע את הצי באמצעות lockSmart/quickShot; בסביבות 22.533 שניות נשאר מסוק.",
+          "להפליג למצוף ולהפעיל תיקון: האספקה והתיקון אינם פועלים."
+        ],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/combat-naval-finale-supply.mjs",
+        "workout/island/design/external-review-v241/repro/combat-naval-finale-supply.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-009",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "alienDefense",
+      "classification": "introduced",
+      "title": "מתג הנשק החדש בחלליות מתעלם מהפעלה סמנטית",
+      "location": {
+        "path": "workout/island/minigames/alien-v25-ui.mjs",
+        "line_start": 27,
+        "line_end": 28
+      },
+      "observed": "הכפתור מקשיב ל-pointerdown ול-C בלבד. Enter, Space ו-element.click() אינם מחליפים נשק; לחיצת מצביע כן. במעטפת האמיתית ב-844×390 נשאר missile אחרי Enter/Space ועבר ל-lightning אחרי pointer.",
+      "expected": "כפתור native יגיב ל-click של מקלדת ושל טכנולוגיה מסייעת, בנוסף למגע ולקיצור C.",
+      "suggested_fix": "לתמוך ב-click סמנטי, עם מניעת החלפה כפולה כאשר pointerdown ואחריו click מגיעים מאותו מגע.",
+      "test_gap": "בדיקת ה-DOM החדשה שולחת pointerdown ו-C בלבד ולכן מחקה את המימוש במקום לבדוק את חוזה הכפתור.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/combat-switch.py"
+        ],
+        "steps": [
+          "לפתוח חלליות במצב ברירת המחדל.",
+          "למקד את מתג הנשק ליד כפתור הטיל ולהפעיל Enter או Space.",
+          "להשוות ללחיצת מצביע ול-element.click()."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/combat-switch.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/combat-switch.html",
+        "workout/island/design/external-review-v241/repro/combat-switch.json",
+        "workout/island/design/external-review-v241/repro/combat-switch.py",
+        "workout/island/design/external-review-v241/repro/combat-browser.py",
+        "workout/island/design/external-review-v241/repro/combat-browser.json",
+        "workout/island/design/external-review-v241/repro/combat-aliens-mobile.png"
+      ],
+      "notes": [
+        "נבדקו אירועי מקלדת ו-click אמיתיים בכרומיום; לא בוצע סשן TalkBack/VoiceOver פיזי."
+      ]
+    },
+    {
+      "id": "V241-010",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "streetSlam",
+      "classification": "introduced",
+      "title": "דגל החזרה בכדורסל אינו מחזיר את הגוף הישן באופליין קר",
+      "location": {
+        "path": "workout/island/tools/hoops-v241-offline.mjs",
+        "line_start": 14,
+        "line_end": 24
+      },
+      "observed": "שלושת גופי v22 הוסרו במפורש מ-offline-manifest. בהקשר דפדפן חדש הורדו כל 1,539 הקבצים ללא כשל, האי נפתח ללא רשת, וה-loader החזיר v2 כברירת מחדל אך v10 עם hoopsV241=0. ברשת הדגל מחזיר v22. ה-loader משלים בהצלחה עם גוף v10, אך המראה הישן אינו משוחזר.",
+      "expected": "הורדת אופליין מלאה תכלול גם תלויות של דגל חזרה מתועד, או שתוגדר חלופה מקומית שקולה.",
+      "suggested_fix": "להחזיר למניפסט את guard/wing/center תחת assets/athlete-body-v22/models, ולבדוק cold-cache rollback עם Service Worker אמיתי.",
+      "test_gap": "הבדיקות מאמתות רשימת manifest וכניסת v241, אך אין בדיקת fresh profile → download → offline → master rollback.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/offline-roundtrip.py --games '' --output /tmp/v241-offline.json",
+          "python3 workout/island/design/external-review-v241/repro/hoops-assets-probe.py"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/offline-roundtrip.py --games '' --output /tmp/v241-offline.json": 0,
+          "python3 workout/island/design/external-review-v241/repro/hoops-assets-probe.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/offline-cache-evidence.json",
+        "workout/island/design/external-review-v241/repro/hoops-runtime-evidence.json"
+      ],
+      "notes": [
+        "אומת גם עם cache אמיתי ובלי חסימת route סינתטית; הבדיקה הממוקדת הנוספת משווה לרשת."
+      ]
+    },
+    {
+      "id": "V241-011",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "alpineRush",
+      "classification": "worsened",
+      "title": "כיוון המגלשיים החדש מחמיר את הסיבוב נגד כיוון התנועה",
+      "location": {
+        "path": "workout/island/minigames/alpine-steer.mjs",
+        "line_start": 37,
+        "line_end": 38
+      },
+      "observed": "בבסיס העולם downhill הוא −Z. vx חיובי נותן yaw חיובי, שמסובב את הדמות אל −X במקום +X. ב-20m/s שגיאת root heading גדלה מ-36.78° ל-46.05°, ובמהירות בלימה 11m/s מ-51.45° ל-75.39°. המספרים המצורפים מתייחסים לכיוון ה-root לאחר סיבוב הבסיס האמיתי של מודל v7.",
+      "expected": "המגלשיים יפנו אל וקטור התנועה בעולם לאחר סיבוב הבסיס של המודל.",
+      "suggested_fix": "להפוך את סימן heading וה-lead בבסיס −Z, ולבדוק וקטור קדימה בעולם ולא שוויון ל-atan2 חיובי בלבד.",
+      "test_gap": "הטסט החדש משווה yaw לסקלר בעל אותו סימן שגוי, ולכן מאשר את המימוש בלי לבדוק את כיוון המודל בעולם.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/alpine-yaw-sign.mjs",
+        "workout/island/design/external-review-v241/repro/alpine-yaw-evidence.json"
+      ],
+      "notes": [
+        "גם ב-v24 היה רכיב כיוון שגוי; הממצא הוא החמרה מדידה והפרת מטרת התיקון החדש. המספרים המובאים הם זווית root, לא זווית המגלשיים המונפשים."
+      ]
+    },
+    {
+      "id": "V241-012",
+      "severity": "medium",
+      "priority": "P2",
+      "game": "alpineRush",
+      "classification": "migration",
+      "title": "שיא ו-ghost ישנים מוצגים מול קורס וכללי תנועה חדשים",
+      "location": {
+        "path": "workout/island/minigames/alpine-session.mjs",
+        "line_start": 56,
+        "line_end": 69
+      },
+      "observed": "ליגת שלב 1 נשארת באותו track/storage ID אף שהקורס משתנה מ-127 ל-175 אובייקטים והפיזיקה משתנה. ה-ghost הישן נטען וחוצה סלעים חדשים ב-s=835.73 וב-s=884.75; זמן 59,931ms מהכללים הישנים מוצג להשוואה מול ריצה חדשה של 56,171ms.",
+      "expected": "להשוות שיאים ו-ghost של אותה גאומטריית מסלול ואותו ruleset, ולשמור בנפרד את נתוני rollback.",
+      "suggested_fix": "להוסיף זהות ruleset/course למרחב אחסון השיאים וה-ghost; להשאיר נתוני v24 במרחב הישן וליצור מרחב v24.1 חדש, בלי למחוק היסטוריה.",
+      "test_gap": "הבדיקות מייצרות מסלולים חדשים ומשוות כללים, אך אינן טוענות שמירה ישנה מול הקורס החדש.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/alpine-records-evidence.json",
+        "workout/island/design/external-review-v241/repro/alpine-records-ruleset.mjs"
+      ],
+      "notes": [
+        "השחזור הסופי משתמש ב-seeds שונים 7/8 ומוכיח ששיא חדש דווקא נשמר. דחיית duplicate באותו seed קיימת לפני ה-PR ואינה נספרת כאן כרגרסיה."
+      ]
+    },
+    {
+      "id": "V241-013",
+      "severity": "low",
+      "priority": "P3",
+      "game": "alpineRush",
+      "classification": "introduced",
+      "title": "שלג עמוק נעלם לפני שההאטה שלו מסתיימת",
+      "location": {
+        "path": "workout/island/minigames/alpine-view.mjs",
+        "line_start": 566,
+        "line_end": 568
+      },
+      "observed": "במסלול ליגה 26 הכתם peak-a-25 נמצא ב-s=306.78 ואורכו 42.5, כך שהוא מסתיים ב-328.03. ב-player.s=326.896 המשטח עדיין powder, אך הכתם הוסר מה-snapshot כי מרכזו כבר מעבר ל-viewBehind=20. ההאטה נשארת על שלג שנראה רגיל למשך כ-0.05–0.2 שניות.",
+      "expected": "כתם בעל אורך יישאר בתצוגה עד שהקצה האחרון יצא מחלון הראייה.",
+      "suggested_fix": "לבצע culling של patches לפי הטווח [s−len/2,s+len/2], ולא לפי המרכז. סינון מאוחר ב-view אינו יכול להחזיר אובייקט שכבר נזרק מה-snapshot.",
+      "test_gap": "לא נבדק שאובייקט התצוגה עדיין נוכח בזמן שהפיזיקה מסווגת את פני השטח כ-powder.",
+      "reproduction": {
+        "commands": [
+          "node workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "node workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/alpine-powder-visibility.mjs",
+        "workout/island/design/external-review-v241/repro/alpine-powder-evidence.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-014",
+      "severity": "low",
+      "priority": "P3",
+      "game": "streetSlam",
+      "classification": "introduced",
+      "title": "פייק בקליפ v13 משאיר את הכדור נמוך",
+      "location": {
+        "path": "workout/island/minigames/hoops-athlete.mjs",
+        "line_start": 131,
+        "line_end": 133
+      },
+      "observed": "עם אותו גוף v2 וב-actT=.26, החלפת hoopsMotionV13 בלבד מורידה את כף היד מ-1.371m ל-1.067m: כ-30.4 ס״מ. חלון הפייק הקבוע .2–.58 שניות דוגם את שלב האיסוף של קליפ הזריקה החדש, ולכן הכדור אינו עולה לעמדת הטעיית זריקה. לוגיקת הפייק עדיין פועלת.",
+      "expected": "הטעיית זריקה תרים את הכדור באופן ברור לעמדת זריקה ותוריד אותו.",
+      "suggested_fix": "לגזור את חלון הפייק מאירועי הקליפ החדש או לשמור קליפ פייק ייעודי; לבדוק מסלול כפות ידיים בפייק כאשר מחליפים jump_shot.",
+      "test_gap": "הטסטים בודקים טעינת v13 והקצאת קליפים, ואינם בודקים את הפוזה שמדוגמת לחלון ההטעיה.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/hoops-fake-comparison.py"
+        ],
+        "steps": [],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/hoops-fake-comparison.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/hoops-fake-comparison.png",
+        "workout/island/design/external-review-v241/repro/hoops-runtime-evidence.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-015",
+      "severity": "low",
+      "priority": "P3",
+      "game": "tennis",
+      "classification": "introduced",
+      "title": "כשל בקהל אופציונלי בטניס יוצר Promise rejection לא מטופל",
+      "location": {
+        "path": "workout/island/minigames/tennis-v12-stadium.mjs",
+        "line_start": 88,
+        "line_end": 89
+      },
+      "observed": "ה-prefetch החדש יוצר 36 promises אך צורך אותם סדרתית. כשל fan-12 במקביל להשהיית fan-01 פולט unhandledrejection של Failed to fetch לפני שה-catch החיצוני מעדכן crowdLate=failed. קהל ה-billboards נשאר והמשחק שמיש.",
+      "expected": "כשל בנכס אופציונלי ייתפס מיד, וה-fallback ימשיך ללא rejection לא מטופל.",
+      "suggested_fix": "לצרף rejection handler לכל Promise בעת יצירתו, או לבצע settle של כל האצווה לפני הצריכה הסדרתית, בדומה לעזר ה-prefetch הקיים ב-tennis-view.",
+      "test_gap": "לא נבדק כשל של Promise מאוחר בזמן שה-loader עדיין ממתין ל-Promise מוקדם.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/tennis-crowd-failure.py"
+        ],
+        "steps": [
+          "לטעון טניס עם טעינת v25 בברירת המחדל.",
+          "לעכב lod0/fan-01.glb ולהכשיל lod2/fan-12.glb.",
+          "להאזין ל-unhandledrejection ולבדוק שבהמשך crowdLate הופך failed."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/tennis-crowd-failure.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/tennis-crowd-failure.json"
+      ],
+      "notes": []
+    },
+    {
+      "id": "V241-016",
+      "severity": "low",
+      "priority": "P3",
+      "game": "cross_game",
+      "classification": "introduced",
+      "title": "הוראות העזרה אינן חוזרות עם דגלי החזרה",
+      "location": {
+        "path": "workout/island/data/strings.he.json",
+        "line_start": 1169,
+        "line_end": 1169
+      },
+      "observed": "עם ?racingPitAuto=0&navalRadar=v24&navalAirEnd=v24, helpLines האמיתי עדיין מבטיח פיטס אוטומטי בכל מרוץ, המתנה לרכישת מכ״ם וסיום שממתין לאויב אווירי. באותו query המודלים האמיתיים מחזירים בשלב מרוצים 1 pit.on=false/auto=false, ובספינות radarOn=false/airEnd=false.",
+      "expected": "ההוראות המוצגות והמוקראות יתאימו לכללים שהדגלים מפעילים בפועל.",
+      "suggested_fix": "לבחור גם טקסטי עזרה לפי הדגלים, ולשמור מפתחות v24 להוראות הישנות, בדומה לטיפול שכבר קיים ב-alien-ui עבור alienArsenal=0.",
+      "test_gap": "בדיקות parity מאמתות מצב מנוע אך אינן מצרפות את helpLines/narrateHelp; בדיקות הטקסט בודקות רק את ברירת המחדל.",
+      "reproduction": {
+        "commands": [
+          "python3 workout/island/design/external-review-v241/repro/racing-help-rollback.py"
+        ],
+        "steps": [
+          "לפתוח עם racingPitAuto=0, navalRadar=v24 ו-navalAirEnd=v24.",
+          "לפתוח הוראות מרוצים וספינות ולהשוות לכללים במנוע.",
+          "בשלב מרוצים 1 העזרה מבטיחה עצירה אף שפיטס כבוי לחלוטין."
+        ],
+        "expected_exit_codes": {
+          "python3 workout/island/design/external-review-v241/repro/racing-help-rollback.py": 0
+        }
+      },
+      "evidence": [
+        "workout/island/design/external-review-v241/repro/racing-help-rollback-evidence.json",
+        "workout/island/design/external-review-v241/repro/racing-help-rollback.py"
+      ],
+      "notes": [],
+      "affected_games": [
+        "islandRacing",
+        "navalDuel"
+      ]
+    }
+  ],
+  "validation": {
+    "full_suite": {
+      "command": "npm test",
+      "status": "failed_environment",
+      "summary": {
+        "tests": 4326,
+        "suites": 0,
+        "pass": 4261,
+        "fail": 1,
+        "cancelled": 0,
+        "skipped": 64,
+        "todo": 0,
+        "duration_ms": 1902072.271505
+      },
+      "evidence": "repro/npm-test.log.gz"
+    },
+    "legacy_csp_suite": {
+      "command": "ISLAND_CSP_BROWSER=1 ISLAND_PLAYWRIGHT=<Playwright module> CHROMIUM_PATH=/usr/bin/chromium ISLAND_CSP_AUDIT_DIR=/tmp/v241-csp node --test tests/island-browser-csp.test.mjs",
+      "status": "timed_out",
+      "timeout_ms": 420000,
+      "completed_steps": "negative controls, static Draco, Alpine and older Hoops variants; did not reach the new v241 scene",
+      "evidence": [
+        "repro/csp-legacy-partial-evidence.json",
+        "repro/csp-legacy-suite.log.gz"
+      ]
+    },
+    "focused_csp": {
+      "command": "node workout/island/design/external-review-v241/repro/csp-v241-smoke.mjs",
+      "status": "passed",
+      "evidence": "repro/csp-v241-evidence.json"
+    },
+    "offline": {
+      "command": "python3 workout/island/design/external-review-v241/repro/offline-roundtrip.py --games ''",
+      "status": "passed_and_rollback_defect_reproduced",
+      "evidence": "repro/offline-cache-evidence.json"
+    },
+    "gpu_disposal": {
+      "cycles": 3,
+      "after_render": {
+        "geometries": 15,
+        "textures": 2
+      },
+      "after_dispose": {
+        "geometries": 0,
+        "textures": 0
+      },
+      "evidence": "repro/hoops-runtime-evidence.json"
+    },
+    "soccer_rollback": {
+      "ticks": 5400,
+      "cases": 3,
+      "status": "exact_match_first_parent",
+      "evidence": "repro/soccer-rollback-parity.output.json"
+    },
+    "racing_rollback": {
+      "complete_races": 12,
+      "status": "exact_match_first_parent_each_tick",
+      "evidence": "repro/racing-rollback-evidence.json"
+    },
+    "unrelated_browser_rerun": {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/v241-pw-browsers ISLAND_PLAYWRIGHT=<Python-bundled Playwright index.mjs> node --test tests/workout-royiki.test.mjs",
+      "status": "passed",
+      "pass": 5,
+      "fail": 0,
+      "evidence": "repro/royiki-rerun.log.gz",
+      "environment_setup": "Temporary browser-cache symlinks point both chromium-1234/chrome-linux64/chrome and chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell to /usr/bin/chromium. No source files changed."
+    }
+  },
+  "preexisting_observations": [
+    {
+      "severity": "medium",
+      "classification": "preexisting_input_defect_expanded_by_new_cancel_action",
+      "title": "כפתור פיטס אינו מופעל ב-Enter/Space, לרבות ביטול העצירה האוטומטית",
+      "location": {
+        "path": "workout/island/minigames/racing-pit-ui.mjs",
+        "line_start": 22,
+        "line_end": 23
+      },
+      "observed": "הפקד החדש מצהיר „לחיצה מבטלת”, אבל רק pointerdown מפעיל onCancel. Enter/Space אינם מבטלים ואין קיצור pit במיפוי המקלדת. מאזין pointerdown בלבד קדם ל-PR; הפעולה האוטומטית והביטול חדשים.",
+      "reproduction_command": "python3 workout/island/design/external-review-v241/repro/racing-pit-keyboard.py",
+      "suggested_fix": "לתמוך ב-click סמנטי עם מניעת הפעלה כפולה במגע."
+    }
+  ],
+  "limitations": [
+    "לא נמדדו FPS או צריכת GPU/זיכרון בטלפון פיזי; כל התזמונים של SwiftShader אינם מדידת טלפון.",
+    "שלושה מחזורי ניקוי לקהל ולשופט אינם soak ארוך של כל מעטפת האי; לא אומתה דליפת heap/WebGL חדשה.",
+    "נבדקה הפעלה סמנטית בכרומיום, ללא סשן VoiceOver/TalkBack במכשיר.",
+    "לא הושלמו כל השלבים או כל שילובי הדגלים במגע; parity בכדורגל ובמרוצים מוגבל לתרחישים המפורטים.",
+    "בדיקת CSP הרחבה הגיעה ל-timeout; הבדיקה הממוקדת של v241 עברה, ואין להסיק מכך שהסוויטה הרחבה עברה.",
+    "שמירת ה-duplicate-run בסקי קיימת לפני ה-PR ואינה נספרת כממצא חדש.",
+    "מקצת fixtures הממוקדים מבודדים scene/session ואינם כוללים את מדיניות CSP של מעטפת המוצר; CSP מאומת בנפרד בסצנות המקוריות ובאתחול אופליין."
+  ]
+}

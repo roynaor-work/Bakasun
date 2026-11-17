@@ -1,0 +1,451 @@
+{
+  "merge": "43b27dc235387e3cb737aee9558cdf9d5fd5a262",
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "hasTouch": true,
+  "isMobile": true,
+  "policy": "default-src 'self' blob:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'",
+  "policySha256": "77a2ef8c7db11f25a3957cab9598b435b9162adae80c468516fe174df7d29ce4",
+  "scenes": [
+    {
+      "kind": "hoops",
+      "query": "dev=1&dur=3600&hoopsAuto=1&hoopsQuality=2&hoopsProfile=quick&seed=4242",
+      "status": "passed",
+      "sessionError": null,
+      "steps": 24,
+      "render": {
+        "calls": 61,
+        "triangles": 94212,
+        "quality": 2,
+        "v241": {
+          "bodyV2": true,
+          "motionV13": {
+            "clips": [
+              "idle_ready",
+              "idle_ready_ball",
+              "jog",
+              "run",
+              "sprint",
+              "jog_ball",
+              "run_ball",
+              "dribble_stand",
+              "jump_shot",
+              "three_point"
+            ],
+            "aligned": {
+              "jog": {
+                "before": 0.231,
+                "after": 0.346
+              },
+              "run": {
+                "before": 0.909,
+                "after": 0.318
+              },
+              "sprint": {
+                "before": 0,
+                "after": 0.35
+              },
+              "dribble_run": {
+                "before": 0.909,
+                "after": 0.318
+              }
+            },
+            "shared": {
+              "walk": {
+                "before": 0.529,
+                "after": 0.324
+              },
+              "sprint_ball": {
+                "before": 0.091,
+                "after": 0.333
+              }
+            },
+            "refScale": {
+              "guard": 1.0864,
+              "wing": 1.1442,
+              "center": 1.202
+            }
+          },
+          "crowd3d": {
+            "mode": "budget",
+            "status": "ready",
+            "error": null,
+            "fans": 796,
+            "submitted": [
+              0,
+              166,
+              219
+            ],
+            "instances": 377,
+            "triangles": 20196,
+            "draws": 12,
+            "inView": 377,
+            "scale": 0.968,
+            "tier": "high",
+            "limit": 24000,
+            "plans": 4,
+            "files": 12,
+            "planMs": 21.8,
+            "visible": true,
+            "cardsHidden": 1876
+          },
+          "referee": {
+            "status": "ready",
+            "error": null,
+            "gestures": {},
+            "triangles": 1225,
+            "draws": 2,
+            "x": 0,
+            "gesture": null
+          }
+        }
+      },
+      "newResources": [
+        {
+          "path": "assets/hoops-v241/referee-audio/whistle-steal-short.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/referee-audio/whistle-foul-long.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod-policy.mjs?v=island-v2-20261107-15",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/body/models/guard.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/body/models/wing.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/body/models/center.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/referee/referee.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/assets.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/lod-config.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-01.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-02.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-03.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-04.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-05.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod1/fan-06.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-01.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-02.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-03.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-04.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-05.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/crowd/runtime/lod2/fan-06.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/hoops-v241/motion/motion-v13.json",
+          "status": 200,
+          "finished": true
+        }
+      ],
+      "wallSeconds": 30.69,
+      "requests": 176,
+      "outsideOriginRequests": [],
+      "requestFailures": [],
+      "httpErrors": [],
+      "pageErrors": [],
+      "consoleErrors": [
+        {
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://127.0.0.1:35423/favicon.ico",
+            "line": 0,
+            "column": 0,
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        }
+      ],
+      "csp": {
+        "htmlResponsesSeen": 1,
+        "violations": [],
+        "policyErrors": [],
+        "workers": [
+          {
+            "url": "http://127.0.0.1:35423/Bakasun/workout/island/minigames/hoops-draco-worker.mjs",
+            "hooked": true,
+            "closed": true,
+            "waitingForDebugger": true,
+            "domains": {
+              "Log.enable": true,
+              "Audits.enable": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "soccer",
+      "query": "dev=1&auto=1&seconds=5&warmup=0&seed=7&level=4",
+      "status": "passed",
+      "sessionError": null,
+      "render": {
+        "calls": 63,
+        "triangles": 24226,
+        "quality": 3,
+        "assetStatus": "ready",
+        "referee": {
+          "clip": "jog",
+          "calls": 0,
+          "triangles": 1227,
+          "x": -1.31,
+          "z": -12,
+          "speed": 1.77
+        },
+        "v24": {
+          "flags": {
+            "pitchAssets": true,
+            "clipsV13": true,
+            "fxV1": true,
+            "crowd3d": "budget",
+            "bodyV2": true
+          },
+          "pitch": {
+            "status": "ready",
+            "failure": null,
+            "lines": "kit",
+            "linesReason": "match",
+            "worstLineMetres": 0,
+            "triangles": 2222,
+            "drawCalls": 4,
+            "source": "assets/soccer-v24/pitch",
+            "v8PartsHidden": 15,
+            "gameLinesHidden": true
+          },
+          "fx": {
+            "status": "ready",
+            "failure": null,
+            "active": 1,
+            "counts": {},
+            "ring": true,
+            "trail": false
+          },
+          "crowd": {
+            "mode": "budget",
+            "status": "measuring",
+            "error": null,
+            "fans": 0,
+            "seats": 327,
+            "hiddenCards": 0,
+            "side": 1,
+            "limit": null,
+            "measured": null,
+            "frames": 3,
+            "shed": 0,
+            "room": null,
+            "on": false,
+            "triangles": 0,
+            "draws": 0,
+            "submitted": [
+              0,
+              0,
+              0
+            ],
+            "files": 12
+          }
+        },
+        "full": {
+          "full": 1,
+          "middle": 5,
+          "far": 8,
+          "hidden": 8,
+          "camera": {
+            "x": 18.18,
+            "z": 0,
+            "distance": 28.54,
+            "zoom": 28.54
+          }
+        },
+        "modelCount": 14
+      },
+      "match": {
+        "score": [
+          0,
+          0
+        ],
+        "elapsed": 2,
+        "phase": "playing",
+        "events": {
+          "goal": 0,
+          "shot": 0,
+          "pass": 0,
+          "loft": 0,
+          "header": 0,
+          "steal": 0,
+          "save": 0
+        }
+      },
+      "soccerInspection": "Read-only CDP view.metrics() on the unmodified shipped tool before its own session.dispose().",
+      "newResources": [
+        {
+          "path": "assets/soccer-v241/referee/referee.glb",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/clips/tackle.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/clips/aerial.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/clips/kicks.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/clips/loco.json",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/audio/whistle-kickoff.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/audio/whistle-foul.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/audio/whistle-short.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/audio/whistle-halftime.ogg",
+          "status": 200,
+          "finished": true
+        },
+        {
+          "path": "assets/soccer-v241/audio/whistle-fulltime.ogg",
+          "status": 200,
+          "finished": true
+        }
+      ],
+      "wallSeconds": 30.16,
+      "requests": 242,
+      "outsideOriginRequests": [],
+      "requestFailures": [
+        {
+          "url": "design/athlete-lod-v1/models/soccer-lod1.glb",
+          "failure": "net::ERR_ABORTED",
+          "duringTeardown": false
+        }
+      ],
+      "httpErrors": [],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "csp": {
+        "htmlResponsesSeen": 1,
+        "violations": [],
+        "policyErrors": [],
+        "workers": [
+          {
+            "url": "http://127.0.0.1:35423/Bakasun/workout/island/minigames/soccer-draco-worker.mjs",
+            "hooked": true,
+            "closed": true,
+            "waitingForDebugger": true,
+            "domains": {
+              "Log.enable": true,
+              "Audits.enable": true
+            }
+          },
+          {
+            "url": "http://127.0.0.1:35423/Bakasun/workout/island/minigames/soccer-draco-worker.mjs",
+            "hooked": true,
+            "closed": true,
+            "waitingForDebugger": true,
+            "domains": {
+              "Log.enable": true,
+              "Audits.enable": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "limits": "Chromium SwiftShader CSP/resource/render smoke only; no phone FPS or repeated GPU/heap soak inference.",
+  "passed": true
+}

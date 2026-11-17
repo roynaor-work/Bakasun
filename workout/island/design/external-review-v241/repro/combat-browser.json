@@ -1,0 +1,81 @@
+{
+  "errors": [],
+  "viewport": {
+    "width": 844,
+    "height": 390
+  },
+  "start": {
+    "selected": "missile",
+    "ammo": [
+      2,
+      3,
+      1
+    ],
+    "switch": true
+  },
+  "controls": [
+    {
+      "id": "shoot",
+      "disabled": false,
+      "label": "אש",
+      "x": 766,
+      "y": 312,
+      "w": 64,
+      "h": 64
+    },
+    {
+      "id": "pass",
+      "disabled": true,
+      "label": "נובה ✨ 2",
+      "x": 770,
+      "y": 174,
+      "w": 56,
+      "h": 56
+    },
+    {
+      "id": "vulcan",
+      "disabled": false,
+      "label": "וולקן",
+      "x": 769,
+      "y": 242,
+      "w": 58,
+      "h": 58
+    },
+    {
+      "id": "special-switch",
+      "disabled": false,
+      "label": "החלפת נשק: ברק שרשרת",
+      "x": 702,
+      "y": 179,
+      "w": 56,
+      "h": 46
+    }
+  ],
+  "afterEnter": {
+    "selected": "missile",
+    "ammo": [
+      2,
+      3,
+      1
+    ],
+    "switch": true
+  },
+  "afterSpace": {
+    "selected": "missile",
+    "ammo": [
+      2,
+      3,
+      1
+    ],
+    "switch": true
+  },
+  "afterPointerClick": {
+    "selected": "lightning",
+    "ammo": [
+      2,
+      3,
+      1
+    ],
+    "switch": true
+  }
+}

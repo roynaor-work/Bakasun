@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><title>Read-only hoops asset loader probe</title><script type="module">
+window.runAssetsProbe=async()=>{
+ const {loadAthleteHoops}=await import('../../../minigames/hoops-athlete.mjs');
+ const config=await(await fetch('../../../data/config.json')).json();const fallbacks=[];
+ const assets=await loadAthleteHoops(config.minigames.streetSlam.assets,new URL('../../../',location.href),null,{params:new URLSearchParams(location.search),onFallback:(what,error)=>fallbacks.push({what,error:String(error)})});
+ const result={bodyVersion:assets.bodyVersion,v22:assets.v22,bodyV2:assets.bodyV2,motionV13:!!assets.motionV13,fallbacks};assets.dispose();return result;
+};
+window.probeReady=true;
+</script>
